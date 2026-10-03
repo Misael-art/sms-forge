@@ -23,7 +23,7 @@
       "local": "analysis/fidelity.py",
       "origin": "local_original",
       "motivo": "camada analysis SMS criada no fork (orcamento VDP + fidelidade por recurso); nao doada",
-      "local_sha256_after_deviation": "43f87e3720b5975ec5d1802fb76f9e2c3494f71b9cf6cf36346f8b098ac499d7"
+      "local_sha256_after_deviation": "bc3a3fb48d276c20ef715ea0ba21b4fd79e147ee80ade4847f69fa0b3848bad9"
     },
     {
       "local": "analysis/scale_pilot.py",
@@ -49,7 +49,9 @@
     {
       "local": "character.py",
       "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/character.py",
-      "donor_sha256": "8cef36324cef33a67648a531bb506de49a1bad224eebb6b55ae707cc5fcb64c0"
+      "donor_sha256": "8cef36324cef33a67648a531bb506de49a1bad224eebb6b55ae707cc5fcb64c0",
+      "local_sha256_after_deviation": "8fdce255eb545d0894412eb219eae13dc308f7879a11b1a70cd4c895242d2adf",
+      "motivo": "campo raw_states (CNS bruto) exposto para analysis/move_checklist e anim_time_contract; doc/21 itens 1-2"
     },
     {
       "local": "converters/__init__.py",
@@ -66,7 +68,7 @@
       "local": "converters/sms_cmd.py",
       "origin": "local_original",
       "motivo": "camada conversao SMS criada no fork (doador MD tinha so __init__ vazio); nao doada",
-      "local_sha256_after_deviation": "00d6f4c800199d9e2104001c645af62b13b4ea5b3534f096b07a930045460081"
+      "local_sha256_after_deviation": "308bdd9803b5405a2ed64b6c871dc386bbd324a7d13663b116ff15c7b208342d"
     },
     {
       "local": "converters/sms_scale.py",
@@ -234,6 +236,36 @@
       "local": "validate/__init__.py",
       "donor": null,
       "donor_sha256": null
+    },
+    {
+      "local": "analysis/move_checklist.py",
+      "origin": "local_original",
+      "motivo": "matriz de golpes assimilada por tecnica de move_checklist do forge MD + eixo pad SMS; doc/21 item 1",
+      "local_sha256_after_deviation": "5998451e780b9f38d05b77be58e5382d4d01a15c6218df156b92235942e03d4f"
+    },
+    {
+      "local": "analysis/anim_time_contract.py",
+      "origin": "local_original",
+      "motivo": "contrato temporal AIR->runtime SMS; tecnica de test_anim_time_contract do forge MD; doc/21 item 2",
+      "local_sha256_after_deviation": "3ab0d6dbdb1665f833493802bb7d88a1a0ec4ef88f99df1d110750cde8cc3b00"
+    },
+    {
+      "local": "converters/sms_controls.py",
+      "origin": "local_original",
+      "motivo": "mapa de controle por tempo de pressao (2 botoes SMS, tiers fraco/forte); doc/22",
+      "local_sha256_after_deviation": "68d898e89a77263ba70c7905d742f4bb3eae4676ebfd41c0e6a7a46c60e3a6f3"
+    },
+    {
+      "local": "analysis/trace_compare.py",
+      "origin": "local_original",
+      "motivo": "comparador de trilhas com igualdade de comprimento; tecnica de runtime_trace do forge MD sem o defeito do zip; doc/21 item 3",
+      "local_sha256_after_deviation": "e350d7c31338b87df4c9cd24d6c682b139d23be380bf6da596d59926d27f67c4"
+    },
+    {
+      "local": "analysis/trace_vs_air.py",
+      "origin": "local_original",
+      "motivo": "trilha por tick x duracoes do AIR (atraso por quadro); doc/21 itens 2+3",
+      "local_sha256_after_deviation": "2df90ef9586a882f6a6a7b7ba824715072605b74e4fcafd6a71cc7f236a21797"
     }
   ]
 }

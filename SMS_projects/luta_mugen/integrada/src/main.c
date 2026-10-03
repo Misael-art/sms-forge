@@ -19,6 +19,7 @@
 #include "stage.h"
 #include "hud.h"
 #include "audio.h"
+#include "trace_hooks.h"
 
 SMS_EMBED_SEGA_ROM_HEADER(0, 0);
 
@@ -316,8 +317,8 @@ void main(void) {
         track_after_sat(1);
         tl_ph_track = SMS_VCounterPort;
 
-        k[0] = read_pad(0);
-        k[1] = read_pad(1);
+        k[0] = TRACE_PAD(0, read_pad(0));
+        k[1] = TRACE_PAD(1, read_pad(1));
         if (rm_state == RM_ACTIVE) {
             for (i = 0; i < 2; i++) {
                 before[i] = fighters[i].state;
@@ -327,6 +328,7 @@ void main(void) {
             tl_ph_step0 = SMS_VCounterPort;
             ev[1] = fight_step(&fighters[1], k[1], k[0]);
             tl_ph_step1 = SMS_VCounterPort;
+            TRACE_RECORD();
             track_input(0, k[0], ev[0], before[0]);
             track_input(1, k[1], ev[1], before[1]);
             if (ev[0] == FIGHT_EVENT_PUNCH) audio_punch();

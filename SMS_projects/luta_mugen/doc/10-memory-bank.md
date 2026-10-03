@@ -4,6 +4,156 @@
 > Registre o que FOI OBSERVADO, nunca o que se pretende. Estado de sessão
 > não substitui este arquivo.
 
+## Opção B medida (variante `decoupled`, soco do P1) — 2026-10-01
+
+Cópia isolada `out/local_study/trace_b/` (gitignored), variante `decoupled` do
+`luta_mugen_trace_dap.py`; fonte canônica intocada. ROM estado `ff021901…`,
+ROM profile `8406a4ee…`; 1 execução cada, só `soco` do P1, janela de 170 ticks.
+
+- **Lógica (estado):** soco aceito no tick 10; quadros de 1, 1, 2, 12 (4 de AIR
+  + 8 de hitstop), 2, 1, 2 ticks — segue o AIR; **dano ao P2 no tick 14**
+  (1000→950), contra o tick 134 do baseline (124 ticks após o toque).
+- **Arte (pose visível do P1 por tick, modo profile):** o idle continua em tela
+  até o tick 54; só então aparece **uma** pose de soco (id 32, a última das 7),
+  do tick 55 ao 85 (31 ticks). Ou seja, **1 de 7 poses de soco é exibida, 45
+  ticks depois do toque e 41 depois do dano; a ação lógica terminou no tick 30**.
+- Leitura: B resolve o tempo da lógica e **quebra a causalidade visual** — o
+  golpe machuca sem ser visto e a única pose mostrada aparece muito depois. A
+  banda de upload (~3 pares/quadro, poses de 27–37 pares) não mudou; B só
+  tira a espera da lógica. Não é aceitável como entrega sozinha; B precisa de
+  garantia de arte (poses-chave do golpe em tela na janela de hit) = A ou C.
+- Não medido: P2, demais ações, FPS/latência humana, custo de flicker.
+
+**Segunda rodada (escolha do usuário: B + residência seletiva)**, mesma cópia
+isolada, executor `out/local_study/trace_b/run_key.py` (registra variantes em
+runtime; `tools/sms_wrapper` não foi alterado). Poses do soco do Ken: startup
+26 (34 pares), **hit 29 (29 pares, única com Clsn1)**, recuperação 32 (34);
+união das 3 = 63 pares únicos (startup/recuperação quase iguais por conteúdo);
+a união dos 7 quadros = 125 de 225. Pool no idle: pico 100 de 128 → 28 livres.
+- Residência das 3 poses-chave (63) **não cabe**; a de hit sozinha (29) excede
+  a folga por 1 par; tirar o prefetch do Ryu libera no máximo 20 e dobra o
+  período do idle dele. Limite de 128 pares é de hardware (tile de 8 bits).
+- `decoupled_key` (ordem de streaming: hit → recuperação, preemptando o
+  prefetch do idle; ROM `9bfb7bc7…`): pose de hit só no **tick 33** (23 após o
+  toque, depois do fim da ação lógica, tick 30), 1 de 7 poses. Banda do Ken
+  ~1,3 pares/tick (29 pares ≈ 22 ticks) — ordenar não basta.
+- `decoupled_pin` (pose de hit fixada na VRAM no boot, só facing 0; ROM
+  `bab8f023…`): **pose de hit em tela do tick 13 ao 39** (toque 10, dano 14);
+  recuperação (32) do tick 40 ao 60; 2 de 7 poses. **Custo: pool no teto
+  (pico 128) e o idle do Ken cai de 4 para 8–24 ticks por pose** (prefetch do
+  idle sem folga). Variante só diagnóstica: pino só do Ken e só virado à
+  direita; esquerda cai no streaming normal.
+- Leitura: a residência resolve a causalidade do golpe mas consome a folga que
+  o idle precisa. Para fechar é preciso liberar ~13+ pares (estimativa, não
+  medida) no idle de um dos lutadores (menos pares por pose de idle) ou
+  reduzir a pose de hit; escolha de arte/escopo. Nada adotado na fonte
+  canônica. Uma execução por variante, só `soco` do P1.
+
+## Estudo SMS×SGDK — itens 1 e 2 do roadmap — 2026-09-30
+
+Estudo e roadmap: `doc/21-estudo-comparativo-sgdk-roadmap-2026-09-30.md`. Estado
+**implementado** (análise de host) e **testado em pytest**; **não** testado em
+emulador e não altera a ROM `c958278f…`.
+
+- `tools/sms_wrapper/mugen2sms/analysis/move_checklist.py` (matriz de golpes,
+  com coluna de suporte ao pad SMS via `converters/sms_cmd.py`) e
+  `analysis/anim_time_contract.py` (linha do tempo AIR de referência vs modelo
+  do runtime; janela de hit vs `time=N` do HitDef). Ambos têm `--self-check`;
+  o do contrato de tempo falha sob mutação da fórmula de duração.
+  `character.py` expõe `raw_states`; testes em `mugen2sms/tests/test_analysis_move_anim.py`
+  (7 passam). Desvio de `character.py` e os dois módulos novos pinados em
+  `doc/doacao_md_mugen2sms.json`.
+- Suíte `mugen2sms/tests`: 102 passam, 7 falham — todas em `test_donation_parity`
+  (deriva do doador MD em `generators/runtime_format.py`, `generators/scene_cut.py`,
+  `ir/controllers.py`, `ir/expr.py`, `ir/opcodes.py`, `palette_contract.py`,
+  `source.py`). Falhavam antes (8 sem as mudanças deste lote); não foram tocadas.
+- Leitura real em `ken_masters_adv.zip` (saída em `out/local_study/study_2026-09-30/`,
+  gitignored): 70 entradas de comando → 4 OK, 2 DEGRADED, 64 BLOCKED. **Todos
+  os 86 bloqueios citados são de pad** (44 "botão>pad", 42 "diagonal-impossível").
+  O pad tem 1 botão; a arquitetura atual usa um mapa de controle escrito à mão
+  em `fight.c` (K_LP/K_HP/K_SPECIAL), não derivado do `.cmd`. Consequência: o
+  número 64 BLOCKED mede a ausência de uma camada de remapeamento
+  declarada, não a qualidade do conversor. **A QCF+B1 do GDD aparece como
+  diagonal impossível no conversor** — o especial só existe porque o runtime
+  o liga a uma tecla dedicada; isso contradiz o GDD até haver decisão.
+- Contrato de tempo no Ken: 161 ações; 17 com a janela de hit do runtime
+  (1º quadro visível com Clsn1) fora do `time=N` do HitDef; 1 com `time>254`
+  truncado; 0 com `time=0`. O modelo **usa o LoopStart do AIR**; como o gerador
+  preenche `loop_start` do runtime não foi verificado. `stall` (espera de pose
+  visível) é parâmetro, não medição; o atraso de 26/125 quadros do Lote C
+  **não** é explicado por esta análise.
+
+**Follow-up (mesmo dia): mapa de controle por tempo de pressão** — decisão do
+usuário: sem golpes médios, 2 tiers (`a/c` soco, `x/z` chute), T=6 ticks
+(estimativa, sem dado de jogador). Detalhes em
+`doc/22-mapa-de-controle-sms-2026-09-30.md`. Implementado
+`converters/sms_controls.py` (`ControlMap`, `classify_trace`, `--self-check`),
+ligado à matriz, e `integrada/src/input_tier.c` (classificador O(1), 4 B de RAM;
+teste diferencial gcc contra a referência Python, mutação detectada; **não
+ligado à ROM**, sem build SDCC nem custo Z80). **Correção do achado anterior:** o
+pad SMS tem `KEY_1` e `KEY_2` e diagonais são duas direções (`SMSlib.h:296-302`);
+`converters/sms_cmd.py` e `analysis/fidelity.py` herdavam "1 botão" e "diagonal
+impossível"; **corrigido em L093** (diagonal = união de bits; golden atualizado;
+`audit_hardware_constants.py` agora reprova a premissa). Ken, 70 entradas,
+mapa adotado: 19 OK, 19 DEGRADED, 27 DROPPED (só usam `b`/`y`), 5 BLOCKED (4
+acordes de super fora do escopo do GDD, 1 golpe sem hitdef). QCF é digitável.
+Pior caso de espera: T−1 = 5 ticks (83 ms a 60 Hz), somado ao atraso de
+entrada já não aprovado. Ligar ao runtime exige estados/poses de golpe forte
+(o corte do Ken tem só soco e chute; pool 125/128) e o `main.c` ainda lê B2
+como guarda.
+
+Rastreio e aprendizado: `doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json`
+(L093–L095, `SMS_GLOBAL` §78–80, ledger). Bateria integral PASS: selftest 64/64,
+validate_measurement_tools 47/47, audit_doc_sync, audit_learning_capture,
+audit_hardware_constants; mugen2sms 109 passam / 7 falham (deriva do doador, anterior).
+
+Item 3 (juiz): `analysis/trace_compare.py`, L096 (`SMS_GLOBAL` §81) — reprova cauda
+perdida que o `zip` do doador aceitaria; **sem produtor de trilha SMS ainda**.
+
+**Item 3 (produtor, L097, `SMS_GLOBAL` §82):** `tools/sms_wrapper/luta_mugen_trace_dap.py`.
+A ROM clone (`integrada/trace/trace_rec.c`, ganchos `inc/trace_hooks.h`) grava 12 B/tick
+em 0xC800.. a partir de um roteiro de entrada embutido (pad real ignorado) e o DAP
+despeja o buffer após `done=1`. Ganchos de custo zero: ROM idêntica com e sem eles
+(`--check-canonical`, SHA `c1ecaba5…`; difere do `c958278f…` do Lote C por outras
+mudanças da árvore local, ex. `fight.c`, não pelos ganchos). Cenário `soco`, 2
+execuções independentes: ROM clone `4a049f76…`, despejo idêntico, `trace_compare`
+equivalente. Conteúdo: P1 aceita o soco no tick 10; quadros trocam nos ticks 36, 73,
+102; dano ao P2 no tick 134 (1000→950, hitstop) = 124 ticks depois do toque,
+coerente com os 26/~125 do Lote C, agora por tick e reprodutível. Limites: só
+estado da luta (não render/SAT/FPS/latência humana); janela de 170 ticks; ~2,5 min
+por execução; só `soco` executado (idle, soco_p2, agachar, andar_frente, pulo
+definidos). Os intervalos entre quadros do soco (26, 37, 29, 32 ticks) não foram
+comparados com o AIR nesta passagem.
+
+**Atraso de animação, medido por tick (L098, `SMS_GLOBAL` §83):** `analysis/trace_vs_air.py`.
+Soco (estado 6, AIR 260), ROM clone `4a049f76…`: AIR 2,1,2,4,2,1 ticks; medido 26, 37,
+29, 35 (8 de hitstop), 13, 12; lentidão 12,73x sobre 5 quadros completos; `hit_done` no
+tick 134 (124 após o toque), contra a janela do AIR no tick 5. Em todos os quadros o
+contador de animação ficou parado em 0 pelo menos o atraso: é a guarda "pose desejada
+visível" de `tick_anim`, ou seja, **throughput de streaming de poses**, não FSM, entrada
+nem tabela (a tabela destilada preserva 2,1,2,4,2,1,2). Caminhada (estado 1, AIR 20):
+1 quadro completo, AIR 3, medido 15 (5x). Limites: atribuição por trilha + código, não
+medida direta da pose visível; golpe com poses ainda não residentes; 170 ticks.
+**Achado lateral:** em `andar_frente` P1 atravessa P2 (x 96→155 com P2 em 152) e o
+auto-facing vira o estado para andar-para-trás: sem colisão de corpo (playerpush).
+
+**Banda de upload (L099, `SMS_GLOBAL` §84):** perfil de fase (`--profile`, ROM instrumentada).
+`stream_step` começa em VCounter ~0xD4 e termina ~0xE5–0xEB; o upload avança 3 pares em ticks
+alternados e o Ryu (idle) usa a outra paridade: ~3 pares/quadro no total. Poses do soco do
+Ken (acao 260): 34, 37, 27, 29, 27, 37, 34 pares (225; pool de 128), 0–2 pares compartilhados
+entre poses consecutivas: upload por delta não ajuda. AIR pediria ~17 pares/tick numa pose
+de 34 pares em 2 ticks. Variantes em clone isolado: `urgent_first` (ROM `c38f02f6…`) 140→132
+ticks, hit 134→123; `action_first` (ROM `415df368…`) hit 134→88 (-34%), 12,73x→9,79x, custo:
+idle do Ryu parado 40 ticks contra 20. Ainda 88 ticks (~1,5 s) até o golpe: injogável. Uma
+execução por variante; só soco do P1. Nenhuma variante foi adotada na fonte canônica.
+**Decisões de escopo pendentes (não são otimização local):** (A) reduzir pares por pose de
+ataque (arte/key poses, ~12 pares para cadência de 3 ticks); (B) desacoplar a lógica de hit do
+tempo de arte (muda a regra "pose antes da hitbox"); (C) residência seletiva de poses de ataque
+(pool 125/128 não comporta 225 pares).
+
+Próximo: decidir A/B/C; usar a trilha para provar que otimizações não mudam o estado;
+item 4 (estados por `.def`); ligar `input_tier` à ROM depende de assets de golpe forte.
+
 ## Lote C — palco, HUD, PSG e ciclo de rounds — 2026-09-30
 
 O estado vigente de flicker continua sendo a decisão humana opção 3:

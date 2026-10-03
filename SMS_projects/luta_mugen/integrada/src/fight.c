@@ -381,10 +381,10 @@ static unsigned char fight_step_full(Fighter *p, unsigned int keys, unsigned int
  * checked by gen_pose_table.py). A scanline therefore sees one row of each
  * fighter, and the VDP limit becomes: for every pair of rows that overlap
  * vertically, kept(Ken row) + kept(Ryu row) <= 8, and any single row <= 8.
- * Excess is taken from one fighter on even frames and the other on odd
- * frames, and the dropped pieces rotate inside the row every frame, so every
- * piece shows within a few frames (audit_render_glitch --mode flicker). The
- * SAT total stays <= 64 (worst idle/guard/punch pose pair 63). */
+ * Overlapping rows share the eight slots in proportion to their original
+ * widths. Two parities round the Ken share down/up; neither can increase a
+ * quota already reduced by another overlap. Omitted pieces rotate inside
+ * each row; the framebuffer gate checks coverage over eight frames. */
 #define ROWS_MAX 10u
 #define LINE_LIMIT 8u
 
@@ -772,12 +772,33 @@ unsigned char fight_skip_stream(void) {
     return sched_due;
 }
 
-/* Scheduler in assembly (the C version cost ~165 lines per pose change for
- * the two parities). Same rule as schedule_rows(): keep = min(n, 8); for
- * every Ken row a and Ryu row b whose tops are closer than 16 lines, reduce
- * the pair to 8, Ryu first when sc_par != 0, Ken first otherwise. */
-static unsigned char sc_par, sc_cnt0;
-
+/* Proportional shares for min(n, 8), indexed by Ken * 9 + Ryu.
+ * floor/ceil alternate the fractional slot without a division in the Z80
+ * loop. A row keeps its quota when it does not overlap another actor. */
+static const unsigned char sc_floor[81] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0,
+    8, 4, 2, 2, 1, 1, 1, 1, 0,
+    8, 5, 4, 3, 2, 2, 2, 1, 1,
+    8, 6, 4, 4, 3, 3, 2, 2, 2,
+    8, 6, 5, 4, 4, 3, 3, 2, 2,
+    8, 6, 5, 5, 4, 4, 3, 3, 3,
+    8, 6, 6, 5, 4, 4, 4, 3, 3,
+    8, 7, 6, 5, 5, 4, 4, 4, 3,
+    8, 7, 6, 5, 5, 4, 4, 4, 4,
+};
+static const unsigned char sc_ceil[81] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0,
+    8, 4, 3, 2, 2, 2, 2, 1, 1,
+    8, 6, 4, 4, 3, 3, 2, 2, 2,
+    8, 6, 5, 4, 4, 3, 3, 3, 3,
+    8, 7, 6, 5, 4, 4, 4, 3, 3,
+    8, 7, 6, 5, 5, 4, 4, 4, 4,
+    8, 7, 6, 6, 5, 5, 4, 4, 4,
+    8, 7, 7, 6, 6, 5, 5, 4, 4,
+    8, 8, 7, 6, 6, 5, 5, 5, 4,
+};
+static const unsigned char *sc_table;
+static unsigned char sc_cnt0;
 static void schedule_asm(void) __naked {
     __asm
         ld hl, #_rowdat+20
@@ -814,38 +835,41 @@ static void schedule_asm(void) __naked {
         jr nc, sc_skip
         ld a, 40 (ix)
         add a, 40 (iy)
-        sub a, #8
+        cp #9
         jr c, sc_skip
-        jr z, sc_skip
+        ld a, 20 (ix)
+        cp #9
+        jr c, sc_n0
+        ld a, #8
+    sc_n0:
         ld c, a
-        ld a, (_sc_par)
-        or a
-        jr z, sc_ken_first
-        ld a, 40 (iy)
-        sub a, c
-        jr c, sc_r_short
-        ld 40 (iy), a
-        jr sc_skip
-    sc_r_short:
-        neg
+        add a, a
+        add a, a
+        add a, a
+        add a, c
         ld c, a
-        ld 40 (iy), #0
-        ld a, 40 (ix)
-        sub a, c
+        ld a, 20 (iy)
+        cp #9
+        jr c, sc_n1
+        ld a, #8
+    sc_n1:
+        add a, c
+        ld hl, (_sc_table)
+        add a, l
+        ld l, a
+        adc a, h
+        sub a, l
+        ld h, a
+        ld a, (hl)
+        ld c, a
+        cp 40 (ix)
+        jr nc, sc_keep_k
         ld 40 (ix), a
-        jr sc_skip
-    sc_ken_first:
-        ld a, 40 (ix)
+    sc_keep_k:
+        ld a, #8
         sub a, c
-        jr c, sc_k_short
-        ld 40 (ix), a
-        jr sc_skip
-    sc_k_short:
-        neg
-        ld c, a
-        ld 40 (ix), #0
-        ld a, 40 (iy)
-        sub a, c
+        cp 40 (iy)
+        jr nc, sc_skip
         ld 40 (iy), a
     sc_skip:
         inc iy
@@ -863,10 +887,10 @@ static void schedule_asm(void) __naked {
 }
 
 static void compute_schedules(void) {
-    sc_par = 0;
+    sc_table = sc_floor;
     schedule_asm();
     memcpy(keep_par[0], row_keep, 2 * ROWS_MAX);
-    sc_par = 1;
+    sc_table = sc_ceil;
     schedule_asm();
     memcpy(keep_par[1], row_keep, 2 * ROWS_MAX);
 }
