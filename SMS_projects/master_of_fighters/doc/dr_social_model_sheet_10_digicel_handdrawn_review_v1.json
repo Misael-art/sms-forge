@@ -1,0 +1,135 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_10_digicel_handdrawn_v1",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1.png",
+    "sha256": "e7db65f283a7df8e206ec71b57d65acb1635d3d798bbc32476ad57d3a773b06b",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
+    "sha256": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+          "role": "approved sheet layout and scale"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "approved identity and approved costume/equipment authority"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "fixed material palette authority"
+        },
+        {
+          "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "role": "initial style record; not independently validated"
+        }
+      ],
+      "observed_defects": [
+        "V1–V2 repeated glossy fighter treatment; V2 also emitted violet around boomerang.",
+        "V3 still needs outfit and weapon-grip review."
+      ],
+      "revision_notes": [
+        "V1 and V2 preserved but not selected.",
+        "V3 selected for softer organic hand-drawn contour and broad cel shapes.",
+        "Image is uniformly scaled by compositor to keep view tags/footer separate.",
+        "Owner and independent review pending."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Five views present and composed with uniform 0.78 scale; exact spacing/review pending."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "V3 has softer, finer contours, muted color and broad simpler shadow planes than sharp fighter art; independent reviewer to confirm hand-drawn style fidelity."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Fine organic lines visible at displayed size; detailed review pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Owner and independent reviewer pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Muted broad cel planes; truecolor concept not quantized."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Front/profile/back appear similar scale and share a baseline; ruler is guide only."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Owner and independent reviewer pending."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Owner and independent reviewer pending."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Blue/cyan long coat, white shirt, burgundy cravat, dark trousers and brown shoes visible; check vest/waistcoat shape against the approved outfit."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Cane and rapier/boomerang visible; check grip and guards."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Owner and independent reviewer pending."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Owner and independent reviewer pending."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "Owner and independent reviewer pending."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM or emulator approval"
+}

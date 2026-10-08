@@ -1,0 +1,124 @@
+{
+  "schema": "asset_lineage_record_model_sheet_v1",
+  "asset_id": "dr_social_model_sheet_08_32bit_mecha_chibi_v1",
+  "created_date": "2026-10-08",
+  "status": "source_candidate",
+  "owner_review": "pending",
+  "style_id": "32Bit-Mecha-Chibi",
+  "style_reference": {
+    "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "catalog_sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "game": "Mega Man 8",
+    "platform_era": "PS1 / Saturn / 32-Bit",
+    "base_art_style": "Sci-Fi Mascot Action Platformer",
+    "lineart": "Lineart limpa estilo cel-animation de TV",
+    "body_morphology": "Chibi/SD estilizado e robótico com articulações redondas",
+    "palette_and_lighting": "Cores vivas e luminosas, 2-3 tons de cel-shading sem dithering",
+    "descriptor_validation_status": "initial catalog descriptor; not independently validated"
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "selected_prompt": {
+      "attempt": 4,
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt",
+      "sha256": "2fb10bf0fc0f18610e3f33a2690e4be73ca8926e5335cd8b1e2d1219b46514af"
+    },
+    "attempt_prompts": [
+      {
+        "attempt": 1,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1_prompt.txt",
+        "sha256": "7608992b9b08766fef9dd7d75cb2053165c329de38c5750cc669a40b7c3e08b7"
+      },
+      {
+        "attempt": 2,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_prompt.txt",
+        "sha256": "3a5de3473cfd9c40ecf0723e0b01ecd3c28189741a48438e606d0c765221c533"
+      },
+      {
+        "attempt": 3,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v3_prompt.txt",
+        "sha256": "545dd97cabcea07be007fb4f246e4b86ed3b493e3dbc089e8726469e12d2a6a9"
+      },
+      {
+        "attempt": 4,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt",
+        "sha256": "2fb10bf0fc0f18610e3f33a2690e4be73ca8926e5335cd8b1e2d1219b46514af"
+      }
+    ],
+    "input_images": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+        "role": "identity reference"
+      }
+    ],
+    "attempts": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1_art.png",
+        "sha256": "844a1d7f20eadad01339a8124fc0c48ed32cde92be47b5477875ddffb87b82e9",
+        "status": "discarded",
+        "reason": "v1 repeated glossy fighter style; v2/v3 included loose blade"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_art.png",
+        "sha256": "ab9f625e5606282ba899f638282c8ec9ee35a9628c1be67aff2e297cc4b3e85e",
+        "status": "discarded",
+        "reason": "v1 repeated glossy fighter style; v2/v3 included loose blade"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v3_art.png",
+        "sha256": "8f72fb518616b6d242b0a51ff285f552b92f5144f9c0e8f27ce97e56be48272e",
+        "status": "discarded",
+        "reason": "v1 repeated glossy fighter style; v2/v3 included loose blade"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png",
+        "sha256": "2e5f3b6371e56be1384ec44e6c4b9d64915ca22e10dfb4d2c535584f9e5b3c1d",
+        "status": "selected_for_candidate_review",
+        "reason": "corrected weapon placement; cleaner TV cel style"
+      }
+    ],
+    "metadata_file": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_metadata.json",
+      "sha256": "d453b9b6f352306c2095044c5f545cf5b11c7d92d3029f2dbdc81317ce037645"
+    },
+    "layout_tool": {
+      "path": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+      "sha256": "33649ee2836c804a7a482e161ff9daf7eb425afc50972b002fac995aad36ee4d"
+    },
+    "final_sheet": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png",
+      "sha256": "7b1340ab917b8571635882f08fc4ebef9052afced1766b62ab7d307c22a9f665",
+      "dimensions_px": [
+        2400,
+        1440
+      ]
+    },
+    "layout_composition": "Uniform art scale 0.78; title, view labels, relative 7.5H guide, baseline, metadata cards and palette chips are added by the local compositor."
+  },
+  "required_views": [
+    "front full-body",
+    "strict side profile",
+    "back full-body",
+    "face close-up",
+    "signature pose"
+  ],
+  "review_notes": {
+    "visual_inspection": "Five views present; gray hair, glasses, coat, cravat, cane, rapier and boomerang. Attempt 4 corrected the loose-blade issue visually; vest/button detail remains a costume variance.",
+    "pending": "All review axes, owner and independent review.",
+    "not_approved_by_this_record": "SMS quantization, sprites, animation, ROM or emulator."
+  },
+  "review_checklist": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_review_v1.json",
+    "sha256": "83716d008f05aec4d305a6c3457958cb9959b9a618aa2d6e7466e8d4f9d59ee7",
+    "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_review_report_v1.json"
+  },
+  "independent_quality_review": {
+    "status": "plan_created; reviewer_assignment_and_report_pending",
+    "request_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_quality_review_request_v1.json",
+    "request_sha256": "82c2ea6b0cd6ccdbc191ad1eef4bc40d618453fb6dee09f3fbec21e31713cb74",
+    "plan_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_quality_review_plan_v1.json",
+    "plan_sha256": "519762812233601e2e7958a44e3dbed9a45cea22e0cbe06c82d07a7a503b845b"
+  },
+  "claim_ceiling": "concept model sheet candidate only"
+}

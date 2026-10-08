@@ -1,0 +1,107 @@
+{
+  "schema": "asset_lineage_record_model_sheet_v1",
+  "asset_id": "dr_social_model_sheet_09_extreme_sd_parody_v1",
+  "created_date": "2026-10-08",
+  "status": "source_candidate",
+  "owner_review": "pending",
+  "style_id": "Extreme-SD-Parody",
+  "style_reference": {
+    "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "catalog_sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "game": "Pocket Fighter (Gem Fighter)",
+    "platform_era": "Arcade (CPS-2) / 1997",
+    "base_art_style": "Super Deformed (SD) Parody",
+    "lineart": "Lineart arredondada de 1-2px, animação cômica elástica",
+    "body_morphology": "Chibi extremo (2 a 2.5 cabeças de altura) com expressões faciais exageradas",
+    "palette_and_lighting": "Paleta pastel e néon festiva, efeitos de impacto com objetos e itens cômicos",
+    "descriptor_validation_status": "initial catalog descriptor; not independently validated"
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "selected_prompt": {
+      "attempt": 2,
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt",
+      "sha256": "b1f9047acb2fef8e698318e7f8cf7fd17205d004be3d85f15ea3e193f2f275a4"
+    },
+    "attempt_prompts": [
+      {
+        "attempt": 1,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1_prompt.txt",
+        "sha256": "bddfff55d0dfe2f5f0d25cbe6c4f2fcf3e33e367222d6d6a5825b288046dd434"
+      },
+      {
+        "attempt": 2,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt",
+        "sha256": "b1f9047acb2fef8e698318e7f8cf7fd17205d004be3d85f15ea3e193f2f275a4"
+      }
+    ],
+    "input_images": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+        "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+        "role": "layout reference"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+        "role": "identity reference"
+      }
+    ],
+    "attempts": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1_art.png",
+        "sha256": "0291be287c0675d0ab2aa4505186c68487e9a90fa9e9a266f72f21deb8a844da",
+        "status": "discarded",
+        "reason": "repeated serious treatment and oversized violet boomerang effect"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
+        "sha256": "c98e7de775a1fc4e9b6329bf16f259998eb28d36633ac1bf62627740906e09a2",
+        "status": "selected_for_candidate_review",
+        "reason": "rounded comic expression and playful motion render while preserving adult proportions"
+      }
+    ],
+    "metadata_file": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_metadata.json",
+      "sha256": "aa95f2a1a667690d99cedccd370a0d193a7aa7780f1a5b8abb1aeac81e24f921"
+    },
+    "layout_tool": {
+      "path": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+      "sha256": "33649ee2836c804a7a482e161ff9daf7eb425afc50972b002fac995aad36ee4d"
+    },
+    "final_sheet": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
+      "sha256": "e8d531701712f6b1479837b7caacf0b9e7798d81d21574d31883adc22b7a7e68",
+      "dimensions_px": [
+        2400,
+        1440
+      ]
+    },
+    "layout_composition": "Uniform 0.78 illustration scale; compositor adds typography, views, relative ruler, baseline, palette and cards."
+  },
+  "required_views": [
+    "front full-body",
+    "strict side full-body",
+    "back full-body",
+    "face close-up",
+    "signature pose"
+  ],
+  "review_notes": {
+    "visual_inspection": "Five views; silver-gray hair, brass spectacles, lean adult human, blue/cyan coat and weapons visible. V2 removes the previous large violet effect, while adding comic face and flowing gesture. Costume gold details remain a variance.",
+    "pending": "All art axes, owner and independent review.",
+    "not_approved_by_this_record": "Pixel art, SMS palette conversion, sprites, ROM or emulator."
+  },
+  "review_checklist": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_v1.json",
+    "sha256": "d5235b9504c3e689cc1c4412337467654b72b39a2bdb804e4bad194b309236d4",
+    "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_report_v1.json"
+  },
+  "independent_quality_review": {
+    "status": "plan_created; assignment/report pending",
+    "request_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_quality_review_request_v1.json",
+    "request_sha256": "68af4ea7cb07de1bf2380b4f41e3d2f99f509431e96ffa822ae9d887de634ccd",
+    "plan_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_quality_review_plan_v1.json",
+    "plan_sha256": "519762812233601e2e7958a44e3dbed9a45cea22e0cbe06c82d07a7a503b845b"
+  },
+  "claim_ceiling": "concept model sheet candidate only"
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "asset_lineage_record_model_sheet_v1",
+  "asset_id": "dr_social_model_sheet_10_digicel_handdrawn_v1",
+  "created_date": "2026-10-08",
+  "status": "source_candidate",
+  "owner_review": "pending",
+  "style_id": "Digicel-Handdrawn",
+  "style_reference": {
+    "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "catalog_sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "game": "Disney's Aladdin",
+    "platform_era": "Mega Drive / 16-Bit",
+    "base_art_style": "Digicel Traditional Animation",
+    "lineart": "Lineart orgânica feita a mão convertida para pixel art",
+    "body_morphology": "Proporções diretas das animações da Disney (Aladdin, Gênio, Jafar)",
+    "palette_and_lighting": "Paleta rica do Mega Drive, sombreamento suave de cel-animation",
+    "descriptor_validation_status": "initial catalog descriptor; not independently validated"
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "selected_prompt": {
+      "attempt": 3,
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt",
+      "sha256": "e01f9f4b797937cee02b5e7fa80be1fce0447d81933ba7a8ac35da2f785dbd0f"
+    },
+    "attempt_prompts": [
+      {
+        "attempt": 1,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1_prompt.txt",
+        "sha256": "6c8937f86fffe463dd680022eca7a0a01b79fba48e0a79761980582199ce5b3a"
+      },
+      {
+        "attempt": 2,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_prompt.txt",
+        "sha256": "6797f4fd22441b49c1ff2b9d5cecbe1bfb4b87826add00b11cf70ff89db2c1b4"
+      },
+      {
+        "attempt": 3,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt",
+        "sha256": "e01f9f4b797937cee02b5e7fa80be1fce0447d81933ba7a8ac35da2f785dbd0f"
+      }
+    ],
+    "input_images": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+        "role": "approved character identity/material reference"
+      }
+    ],
+    "attempts": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1_art.png",
+        "sha256": "99677242ba790b20ea24965a974a5d6dae3535f819068ae5824aef505257dcfc",
+        "status": "discarded",
+        "reason": "v1–v2 retained sharp glossy fighting-game rendering and unwanted purple effect"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_art.png",
+        "sha256": "50f5ab1803d2cb94c63af24ff83bc0eef5af020bc93c7c2cff57f7149de8a060",
+        "status": "discarded",
+        "reason": "v1–v2 retained sharp glossy fighting-game rendering and unwanted purple effect"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
+        "sha256": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81",
+        "status": "selected_for_candidate_review",
+        "reason": "softer organic animation contour and reduced broad cel color planes"
+      }
+    ],
+    "metadata_file": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_metadata.json",
+      "sha256": "31d3709f93ab71b09a5187d4cf9d6ef8eb0d4b998e09a9f59888a093302f2a43"
+    },
+    "layout_tool": {
+      "path": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+      "sha256": "33649ee2836c804a7a482e161ff9daf7eb425afc50972b002fac995aad36ee4d"
+    },
+    "final_sheet": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1.png",
+      "sha256": "e7db65f283a7df8e206ec71b57d65acb1635d3d798bbc32476ad57d3a773b06b",
+      "dimensions_px": [
+        2400,
+        1440
+      ]
+    },
+    "layout_composition": "Uniform scale 0.78; compositor adds title, view labels, ruler, baseline, metadata cards and palette chips."
+  },
+  "required_views": [
+    "front full-body",
+    "strict side profile",
+    "back full-body",
+    "face close-up",
+    "signature pose"
+  ],
+  "review_notes": {
+    "visual_inspection": "Five views visible. V3 shows softer linework and muted broad cel shapes; hair/glasses, coat, cravat, cane, rapier and crescent boomerang are present. Outfit details and grips need review.",
+    "pending": "All art axes, owner and independent review.",
+    "not_approved_by_this_record": "pixel art, palette quantization, sprite use, ROM or emulator behavior"
+  },
+  "review_checklist": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_review_v1.json",
+    "sha256": "576097e59e63ec8287372bdc23b3676086d770242774dfb0014fbf66767da821",
+    "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_review_report_v1.json"
+  },
+  "independent_quality_review": {
+    "status": "plan_created; assignment/report pending",
+    "request_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_quality_review_request_v1.json",
+    "request_sha256": "05a4c358caac035d0eff8196f99f0fd22599efe1c607216bc7e30c6823b61da0",
+    "plan_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_quality_review_plan_v1.json",
+    "plan_sha256": "519762812233601e2e7958a44e3dbed9a45cea22e0cbe06c82d07a7a503b845b"
+  },
+  "claim_ceiling": "concept model sheet candidate only"
+}

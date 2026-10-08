@@ -1,0 +1,135 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_07_hidrive_anime_vector_v1",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1.png",
+    "sha256": "822be99e0a61ebf72029e662c61f23aec509e4028ea75c7e58487810eb9e1b30",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
+    "sha256": "2cd090e9a614cb4a8fe4c15ac38e05713425b28c2cf7459ae9d2749c288407a6"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+          "role": "approved model sheet identity and five-view form"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "approved identity, face, outfit, palette and equipment authority"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "project palette-role authority"
+        },
+        {
+          "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "role": "initial style descriptor, not independently validated"
+        }
+      ],
+      "observed_defects": [
+        "Garment detailing differs from the approved character costume and needs owner review.",
+        "Initial composition overlapped artwork and captions; corrected using uniform scale 0.78, pending human confirmation."
+      ],
+      "revision_notes": [
+        "Three preceding attempts are retained as v1–v3 and were not selected because they repeated the polished manga treatment and/or added costume ornaments.",
+        "Attempt 4 was selected for cleaner vector-like contour and geometric shadow treatment.",
+        "Final sheet uses 0.78 uniform art scaling; no redraw or recolor.",
+        "Owner and independent review pending."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Five views are visible, but raw illustration initially extended into labels/footer; final composition uses uniform scale 0.78 and still needs human layout review."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "Fourth attempt has cleaner geometric shadow planes and smoother contours than prior outputs; determine if vector-like style is distinct enough from series peers."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Clean angular contour visible at display size; detailed edge review pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Front/profile/back are tall and slim with long limbs; anatomy review pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Hard-edged graphic shadow polygons are visible. Concept RGB is not SMS-quantized."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Front/profile/back are aligned to a common approximate scale and baseline; 7.5H is a visual guide only."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Clean pale cream with no scene."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Silver-gray swept hair, round brass spectacles, adult face, slim build visible."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Long blue/cyan coat, white shirt and burgundy cravat visible; details differ from approved costume and require owner review."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Cane, rapier and crescent steel boomerang visible; inspect attachment and grips."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Five views present; confirm details remain coherent across them."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Artwork is reduced and labels remain outside image area; final check required around pose foot and ruler."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "No monster traits observed; costume variance remains pending."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval"
+}

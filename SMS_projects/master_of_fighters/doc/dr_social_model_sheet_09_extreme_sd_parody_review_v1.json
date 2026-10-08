@@ -1,0 +1,136 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_09_extreme_sd_parody_v1",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
+    "sha256": "e8d531701712f6b1479837b7caacf0b9e7798d81d21574d31883adc22b7a7e68",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
+    "sha256": "c98e7de775a1fc4e9b6329bf16f259998eb28d36633ac1bf62627740906e09a2"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+          "role": "approved layout reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "approved identity, outfit, palette and equipment authority"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "palette authority"
+        },
+        {
+          "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "role": "initial style descriptor, unvalidated"
+        }
+      ],
+      "observed_defects": [
+        "V1 repeated serious fighting manga presentation and added a large violet boomerang effect.",
+        "V2 includes additional gold clothing details which differ from approved costume."
+      ],
+      "revision_notes": [
+        "Initial art preserved; not selected.",
+        "V2 selected for rounded parody contours, comic but human face, jaunty pose and simple graphic cel planes.",
+        "No body shortening or chibi anatomy is present.",
+        "Final artwork scaled uniformly by compositor; no redraw or recolor.",
+        "Owner and independent review remain pending."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Five distinct views fit in the composed sheet; artwork uniformly reduced to 0.78 to separate image from type."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "V2 has playful brow/expression and jaunty pose with rounded graphic lines, making a visible variation from serious candidates. Confirm catalog fidelity independently."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Owner and independent visual review pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Owner and independent visual review pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Owner and independent visual review pending."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Front/profile/back are similar scale and share approximate baseline; H ruler illustrative only."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Clean pale cream; no scene."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Adult face, swept gray hair and round brass spectacles visible; playful expression preserves human face."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Blue/cyan coat, white shirt, burgundy cravat and brown footwear visible; generated gold coat details differ from fixed costume and need owner review."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Cane, rapier and steel crescent boomerang visible; inspect hands, grips and motion marks."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Owner and independent visual review pending."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Owner and independent visual review pending."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "Owner and independent visual review pending."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval"
+}

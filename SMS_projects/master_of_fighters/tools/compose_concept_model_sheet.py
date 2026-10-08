@@ -50,6 +50,8 @@ def main() -> int:
     parser.add_argument("--art", required=True, type=Path)
     parser.add_argument("--metadata", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--art-scale", type=float, default=1.0,
+                        help="Optional uniform scale for the generated illustration")
     args = parser.parse_args()
 
     metadata = json.loads(args.metadata.read_text(encoding="utf-8"))
@@ -81,8 +83,10 @@ def main() -> int:
     layout = metadata.get("layout", {})
     art_x = int(layout.get("art_x", 124))
     art_y = int(layout.get("art_y", 128))
-    if source.width > 2000 or source.height > 800:
-        scale = min(2000 / source.width, 800 / source.height)
+    if not 0 < args.art_scale <= 1:
+        raise ValueError("--art-scale must be greater than 0 and at most 1")
+    if source.width > 2000 or source.height > 800 or args.art_scale < 1:
+        scale = min(2000 / source.width, 800 / source.height, args.art_scale)
         source = source.resize((round(source.width * scale), round(source.height * scale)),
                                Image.Resampling.LANCZOS)
     canvas.paste(source, (art_x, art_y))

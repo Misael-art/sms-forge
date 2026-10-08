@@ -1,0 +1,41 @@
+{
+  "schema": "dr_social_style_generation_block_v1",
+  "sequence": 6,
+  "style_id": "Classic-Arcade-Heroic",
+  "status": "blocked_style_not_distinct_after_three_directed_revisions",
+  "catalog_reference": "SMS_projects/master_of_fighters/doc/dr_social_style_series_manifest_v1.json#styles[5]",
+  "attempts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v1_art.png",
+      "sha256": "8dbb4112dd2715bbf8cc643bf4a3d16456c445635cce98d82cd411e5075b2be9",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v1_prompt.txt",
+      "prompt_sha256": "05e4ffab8fe4347a854c1a165c4c80ca29eb0d1a2e1d84f2cd4df01c4d3583e4",
+      "visual_review": "repeats the same highly polished manga rendering; does not achieve the flatter classic arcade distinction required"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v2_art.png",
+      "sha256": "175d6b7552b312a3bf679e0c9136a2adf04570bfb29965fc7c9df03d4c5e0afc",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v2_prompt.txt",
+      "prompt_sha256": "2a70a7fb6acc7ce47dc7c16ad2cebbb598d43e7c5e026c6b6d425946e9dce1e8",
+      "visual_review": "repeats the same highly polished manga rendering; does not achieve the flatter classic arcade distinction required"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v3_art.png",
+      "sha256": "c29f4922e6199a7b5e0714d6450010c87b3bf7f51b78d2f94e7f4ac0a5fd7e86",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v3_prompt.txt",
+      "prompt_sha256": "b1bc6d3f8c3dc264fbe5939beea5d47538dcd76833b6f7cee109a50fa84e809d",
+      "visual_review": "repeats the same highly polished manga rendering; does not achieve the flatter classic arcade distinction required"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v4_art.png",
+      "sha256": "babc74aeb3dab7e145018ba4c426930c36a0569ee9b3d9194839a780f35bbbcc",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v4_prompt.txt",
+      "prompt_sha256": "465fbcb75612dad06d3a64b9afb1125edd90aac55499dfbf13a5b441b405c764",
+      "visual_review": "repeats the same highly polished manga rendering; does not achieve the flatter classic arcade distinction required"
+    }
+  ],
+  "blocker": "Four preserved generations (initial plus three revisions) retain substantially the same polished modern manga rendering as adjacent styles, despite increasingly specific requests for simpler flat classic arcade cel design. No candidate sheet is registered.",
+  "next_action": "Return after independent styles proceed; reconsider a different generation method or art direction with owner input. Do not promote any of the four attempts as the style-specific sheet.",
+  "reviewer": "codex_art_production",
+  "claim_ceiling": "blocked_candidate_generation_only"
+}
