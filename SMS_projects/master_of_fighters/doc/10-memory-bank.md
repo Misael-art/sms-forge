@@ -5,6 +5,19 @@
 > não substitui este arquivo.
 
 ## Última atualização
+2026-10-07 — primeira folha de model sheet do Dr. Social gerada como
+candidata para revisão do dono, usando o estilo inicial `CPS2-Alpha-Cel`. A
+folha contém frente, perfil, costas, close do rosto e pose de identidade, com
+régua relativa, linha de base, fundo creme e campos de estilo diagramados. O
+desenho segue a concept v3 aprovada e o contrato de paleta; a metodologia do
+formulário segue experimental, ainda sem promoção ao skill/workflow e sem teste
+de uma imagem derivada. Especificação, prompt, arte gerada e lineage ficam em
+`data/source_art/concept_art/dr_social/` e
+`doc/curation/2026-10-07_model_sheet_formulario_dr_social_cps2.json`. A revisão
+hash-bound em `doc/dr_social_model_sheet_review_v1.json` foi auditada: esquema e
+hashes consistentes, 13 eixos pendentes, revisão independente não atribuída e
+aprovação do dono pendente; portanto, promoção continua bloqueada.
+
 2026-10-05 — o dono avaliou que as falhas estruturais mais graves do roster
 foram corrigidas e listou polimento restante: clusters e cel shading suaves no
 Shinobi/Alis, olhos/rosto, contornos de pés/capas/casaco, volume de escudos,

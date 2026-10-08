@@ -1,0 +1,2477 @@
+{
+  "schema": "mof_palettes_v1",
+  "date": "2026-10-03",
+  "authority": "doc/11-gdd.md §Direção de arte; sms_palette.py (codigo 6-bit)",
+  "rules": {
+    "codes": "canais 0..3; RGB de contrato = canal*85",
+    "transparent_index": 0,
+    "max_usable": 15,
+    "luma_floor_delta_y": 17,
+    "same_luma_policy": "pares com ΔY < piso so validos se separados por contorno 1px (traço SFZ2)"
+  },
+  "characters": {
+    "ga_warrior": {
+      "classe": "pesado",
+      "origem": "Golden Axe Warrior (SMS)",
+      "usable_colors": 12,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            1,
+            0,
+            0
+          ],
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "y": 26
+        },
+        {
+          "index": 2,
+          "role": "skin_light",
+          "code": [
+            3,
+            2,
+            1
+          ],
+          "rgb": [
+            255,
+            170,
+            85
+          ],
+          "y": 186
+        },
+        {
+          "index": 3,
+          "role": "skin_mid",
+          "code": [
+            2,
+            1,
+            1
+          ],
+          "rgb": [
+            170,
+            85,
+            85
+          ],
+          "y": 110
+        },
+        {
+          "index": 4,
+          "role": "leather_brown",
+          "code": [
+            2,
+            1,
+            0
+          ],
+          "rgb": [
+            170,
+            85,
+            0
+          ],
+          "y": 101
+        },
+        {
+          "index": 5,
+          "role": "armor_blue_shadow",
+          "code": [
+            0,
+            0,
+            3
+          ],
+          "rgb": [
+            0,
+            0,
+            255
+          ],
+          "y": 28
+        },
+        {
+          "index": 6,
+          "role": "armor_blue_mid",
+          "code": [
+            0,
+            2,
+            3
+          ],
+          "rgb": [
+            0,
+            170,
+            255
+          ],
+          "y": 128
+        },
+        {
+          "index": 7,
+          "role": "armor_blue_light",
+          "code": [
+            1,
+            2,
+            3
+          ],
+          "rgb": [
+            85,
+            170,
+            255
+          ],
+          "y": 154
+        },
+        {
+          "index": 8,
+          "role": "steel_cyan",
+          "code": [
+            1,
+            3,
+            3
+          ],
+          "rgb": [
+            85,
+            255,
+            255
+          ],
+          "y": 204
+        },
+        {
+          "index": 9,
+          "role": "cape_red",
+          "code": [
+            3,
+            0,
+            1
+          ],
+          "rgb": [
+            255,
+            0,
+            85
+          ],
+          "y": 86
+        },
+        {
+          "index": 10,
+          "role": "skin_highlight",
+          "code": [
+            3,
+            2,
+            2
+          ],
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "y": 196
+        },
+        {
+          "index": 11,
+          "role": "gold_light",
+          "code": [
+            3,
+            3,
+            1
+          ],
+          "rgb": [
+            255,
+            255,
+            85
+          ],
+          "y": 236
+        },
+        {
+          "index": 12,
+          "role": "steel_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        }
+      ],
+      "nota": "12 tons derivados do sheet de personagem SMS (Spriters Resource, asset 29261), aproximados para RGB canal×85; fundo teal excluído. O preto foi reservado ao índice transparente 0; contorno opaco usa o tom bordô escuro presente no sheet. Paleta corrigida: azul/ciano, ouro, vermelho, pele, branco e contorno."
+    },
+    "lord_of_the_sword": {
+      "classe": "pesado",
+      "origem": "Lord of the Sword (Landau; sprite SMS)",
+      "usable_colors": 15,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            1,
+            1,
+            1
+          ],
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "y": 85
+        },
+        {
+          "index": 2,
+          "role": "skin_light",
+          "code": [
+            3,
+            2,
+            2
+          ],
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "y": 196
+        },
+        {
+          "index": 3,
+          "role": "skin_mid",
+          "code": [
+            3,
+            1,
+            1
+          ],
+          "rgb": [
+            255,
+            85,
+            85
+          ],
+          "y": 136
+        },
+        {
+          "index": 4,
+          "role": "warm_mid",
+          "code": [
+            2,
+            1,
+            0
+          ],
+          "rgb": [
+            170,
+            85,
+            0
+          ],
+          "y": 101
+        },
+        {
+          "index": 5,
+          "role": "hair_olive",
+          "code": [
+            1,
+            1,
+            0
+          ],
+          "rgb": [
+            85,
+            85,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 6,
+          "role": "hair_deep",
+          "code": [
+            1,
+            0,
+            0
+          ],
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "y": 26
+        },
+        {
+          "index": 7,
+          "role": "red_accent",
+          "code": [
+            2,
+            0,
+            0
+          ],
+          "rgb": [
+            170,
+            0,
+            0
+          ],
+          "y": 51
+        },
+        {
+          "index": 8,
+          "role": "tunic_light",
+          "code": [
+            2,
+            3,
+            0
+          ],
+          "rgb": [
+            170,
+            255,
+            0
+          ],
+          "y": 201
+        },
+        {
+          "index": 9,
+          "role": "tunic_mid",
+          "code": [
+            1,
+            2,
+            0
+          ],
+          "rgb": [
+            85,
+            170,
+            0
+          ],
+          "y": 126
+        },
+        {
+          "index": 10,
+          "role": "tunic_shadow",
+          "code": [
+            0,
+            1,
+            0
+          ],
+          "rgb": [
+            0,
+            85,
+            0
+          ],
+          "y": 50
+        },
+        {
+          "index": 11,
+          "role": "leather_light",
+          "code": [
+            3,
+            2,
+            0
+          ],
+          "rgb": [
+            255,
+            170,
+            0
+          ],
+          "y": 177
+        },
+        {
+          "index": 12,
+          "role": "steel_light",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        },
+        {
+          "index": 13,
+          "role": "steel_mid",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 14,
+          "role": "blue_cloth_light",
+          "code": [
+            2,
+            2,
+            3
+          ],
+          "rgb": [
+            170,
+            170,
+            255
+          ],
+          "y": 179
+        },
+        {
+          "index": 15,
+          "role": "blue_cloth_mid",
+          "code": [
+            1,
+            1,
+            2
+          ],
+          "rgb": [
+            85,
+            85,
+            170
+          ],
+          "y": 94
+        }
+      ]
+    },
+    "hayato": {
+      "classe": "medio",
+      "origem": "Kenseiden",
+      "usable_colors": 15,
+      "colors": [
+        {
+          "index": 1,
+          "role": "hakama_orange_light",
+          "code": [
+            3,
+            1,
+            0
+          ],
+          "rgb": [
+            255,
+            85,
+            0
+          ],
+          "y": 127
+        },
+        {
+          "index": 2,
+          "role": "outline_wine_dark",
+          "code": [
+            1,
+            0,
+            0
+          ],
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "y": 26
+        },
+        {
+          "index": 3,
+          "role": "hakama_red_shadow",
+          "code": [
+            2,
+            0,
+            0
+          ],
+          "rgb": [
+            170,
+            0,
+            0
+          ],
+          "y": 51
+        },
+        {
+          "index": 4,
+          "role": "kimono_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        },
+        {
+          "index": 5,
+          "role": "sash_vermilion",
+          "code": [
+            3,
+            0,
+            0
+          ],
+          "rgb": [
+            255,
+            0,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 6,
+          "role": "hair_scabbard_dark",
+          "code": [
+            1,
+            1,
+            1
+          ],
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "y": 85
+        },
+        {
+          "index": 7,
+          "role": "kimono_shadow",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 8,
+          "role": "skin_shadow",
+          "code": [
+            1,
+            1,
+            0
+          ],
+          "rgb": [
+            85,
+            85,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 9,
+          "role": "hakama_orange_shadow",
+          "code": [
+            2,
+            1,
+            0
+          ],
+          "rgb": [
+            170,
+            85,
+            0
+          ],
+          "y": 101
+        },
+        {
+          "index": 10,
+          "role": "skin_light",
+          "code": [
+            3,
+            2,
+            2
+          ],
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "y": 196
+        },
+        {
+          "index": 11,
+          "role": "skin_mid",
+          "code": [
+            2,
+            1,
+            1
+          ],
+          "rgb": [
+            170,
+            85,
+            85
+          ],
+          "y": 110
+        },
+        {
+          "index": 12,
+          "role": "deep_wine_shadow",
+          "code": [
+            1,
+            0,
+            1
+          ],
+          "rgb": [
+            85,
+            0,
+            85
+          ],
+          "y": 35
+        },
+        {
+          "index": 13,
+          "role": "warm_highlight",
+          "code": [
+            3,
+            2,
+            1
+          ],
+          "rgb": [
+            255,
+            170,
+            85
+          ],
+          "y": 186
+        },
+        {
+          "index": 14,
+          "role": "sash_red_highlight",
+          "code": [
+            3,
+            1,
+            1
+          ],
+          "rgb": [
+            255,
+            85,
+            85
+          ],
+          "y": 136
+        },
+        {
+          "index": 15,
+          "role": "sandal_shadow",
+          "code": [
+            0,
+            1,
+            0
+          ],
+          "rgb": [
+            0,
+            85,
+            0
+          ],
+          "y": 50
+        }
+      ]
+    },
+    "joe_musashi": {
+      "classe": "medio",
+      "origem": "Shinobi",
+      "usable_colors": 9,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            0,
+            0,
+            0
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "y": 0
+        },
+        {
+          "index": 2,
+          "role": "skin_light",
+          "code": [
+            3,
+            2,
+            2
+          ],
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "y": 196
+        },
+        {
+          "index": 3,
+          "role": "skin_mid",
+          "code": [
+            2,
+            1,
+            1
+          ],
+          "rgb": [
+            170,
+            85,
+            85
+          ],
+          "y": 110
+        },
+        {
+          "index": 4,
+          "role": "garb_light",
+          "code": [
+            1,
+            1,
+            3
+          ],
+          "rgb": [
+            85,
+            85,
+            255
+          ],
+          "y": 104
+        },
+        {
+          "index": 5,
+          "role": "garb_mid",
+          "code": [
+            0,
+            0,
+            2
+          ],
+          "rgb": [
+            0,
+            0,
+            170
+          ],
+          "y": 19
+        },
+        {
+          "index": 6,
+          "role": "trim_cyan",
+          "code": [
+            2,
+            2,
+            3
+          ],
+          "rgb": [
+            170,
+            170,
+            255
+          ],
+          "y": 179
+        },
+        {
+          "index": 7,
+          "role": "scarf_red",
+          "code": [
+            3,
+            0,
+            0
+          ],
+          "rgb": [
+            255,
+            0,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 8,
+          "role": "steel_katana",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 9,
+          "role": "highlight_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        }
+      ],
+      "alternos": {
+        "classic_shinobi1": "swap de roles no mesmo pool: garb_* vira branco/acinzentado (wraps 3,3,3 / 2,2,2 / 1,1,1) — traje classico do 1o Shinobi."
+      }
+    },
+    "joe_musashi_shadow_dancer_sms": {
+      "classe": "medio",
+      "origem": "Shadow Dancer (Takashi; Master System)",
+      "usable_colors": 7,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline_wine",
+          "code": [
+            1,
+            0,
+            0
+          ],
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "y": 26
+        },
+        {
+          "index": 2,
+          "role": "skin_light",
+          "code": [
+            3,
+            2,
+            1
+          ],
+          "rgb": [
+            255,
+            170,
+            85
+          ],
+          "y": 186
+        },
+        {
+          "index": 3,
+          "role": "gi_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        },
+        {
+          "index": 4,
+          "role": "gi_gray_light",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 5,
+          "role": "gi_gray_deep",
+          "code": [
+            1,
+            1,
+            1
+          ],
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "y": 85
+        },
+        {
+          "index": 6,
+          "role": "sash_red",
+          "code": [
+            2,
+            0,
+            0
+          ],
+          "rgb": [
+            170,
+            0,
+            0
+          ],
+          "y": 51
+        },
+        {
+          "index": 7,
+          "role": "accent_yellow",
+          "code": [
+            3,
+            3,
+            0
+          ],
+          "rgb": [
+            255,
+            255,
+            0
+          ],
+          "y": 227
+        }
+      ],
+      "nota": "Estudo de traje inspirado no sprite Takashi - Standing Right de Shadow Dancer SMS Power (https://www.smspower.org/Sprites/ShadowDancer-SMS). Aproxima as cores extraídas à grade RGB canal×85; o contorno preto foi substituído por vinho profundo para respeitar índice 0 transparente. Não é asset final nem altera o traje base de Joe Musashi."
+    },
+    "jj_zillion_ii": {
+      "classe": "leve",
+      "origem": "Zillion II: The Tri Formation (Master System)",
+      "usable_colors": 13,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline_navy",
+          "code": [
+            0,
+            0,
+            1
+          ],
+          "rgb": [
+            0,
+            0,
+            85
+          ],
+          "y": 9
+        },
+        {
+          "index": 2,
+          "role": "hair_blue_deep",
+          "code": [
+            0,
+            0,
+            2
+          ],
+          "rgb": [
+            0,
+            0,
+            170
+          ],
+          "y": 19
+        },
+        {
+          "index": 3,
+          "role": "hair_blue_mid",
+          "code": [
+            1,
+            1,
+            3
+          ],
+          "rgb": [
+            85,
+            85,
+            255
+          ],
+          "y": 104
+        },
+        {
+          "index": 4,
+          "role": "hair_blue_light",
+          "code": [
+            2,
+            2,
+            3
+          ],
+          "rgb": [
+            170,
+            170,
+            255
+          ],
+          "y": 179
+        },
+        {
+          "index": 5,
+          "role": "uniform_magenta_deep",
+          "code": [
+            2,
+            0,
+            1
+          ],
+          "rgb": [
+            170,
+            0,
+            85
+          ],
+          "y": 60
+        },
+        {
+          "index": 6,
+          "role": "uniform_magenta_mid",
+          "code": [
+            3,
+            0,
+            1
+          ],
+          "rgb": [
+            255,
+            0,
+            85
+          ],
+          "y": 86
+        },
+        {
+          "index": 7,
+          "role": "uniform_magenta_light",
+          "code": [
+            3,
+            1,
+            2
+          ],
+          "rgb": [
+            255,
+            85,
+            170
+          ],
+          "y": 145
+        },
+        {
+          "index": 8,
+          "role": "orange_deep",
+          "code": [
+            2,
+            1,
+            0
+          ],
+          "rgb": [
+            170,
+            85,
+            0
+          ],
+          "y": 101
+        },
+        {
+          "index": 9,
+          "role": "orange_mid",
+          "code": [
+            3,
+            1,
+            0
+          ],
+          "rgb": [
+            255,
+            85,
+            0
+          ],
+          "y": 127
+        },
+        {
+          "index": 10,
+          "role": "orange_light",
+          "code": [
+            3,
+            2,
+            1
+          ],
+          "rgb": [
+            255,
+            170,
+            85
+          ],
+          "y": 186
+        },
+        {
+          "index": 11,
+          "role": "skin_deep",
+          "code": [
+            2,
+            1,
+            1
+          ],
+          "rgb": [
+            170,
+            85,
+            85
+          ],
+          "y": 110
+        },
+        {
+          "index": 12,
+          "role": "skin_mid",
+          "code": [
+            3,
+            2,
+            2
+          ],
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "y": 196
+        },
+        {
+          "index": 13,
+          "role": "skin_light",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        }
+      ],
+      "nota": "Paleta de estudo para J.J. baseada nas cores do sprite J.J - Standing de Zillion II: The Tri Formation para Master System (SMS Power, https://www.smspower.org/Sprites/ZillionII-SMS). A pedido do dono, referências do anime consultadas apenas para o corte do uniforme; não definem a paleta, moveset ou lore do fan game. Cores mapeadas à grade 6-bit SMS; tons adjacentes extras só ampliam a sombra cel. Sem pixels copiados. Contorno preto usa navy #000055 para reservar o índice 0 transparente. Classe leve e escala ainda são propostas."
+    },
+    "dr_ferdinand_social": {
+      "classe": "medio",
+      "origem": "Master of Darkness",
+      "usable_colors": 14,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            0,
+            0,
+            1
+          ],
+          "rgb": [
+            0,
+            0,
+            85
+          ],
+          "y": 9
+        },
+        {
+          "index": 2,
+          "role": "skin_light",
+          "code": [
+            3,
+            2,
+            2
+          ],
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "y": 196
+        },
+        {
+          "index": 3,
+          "role": "skin_mid",
+          "code": [
+            2,
+            1,
+            1
+          ],
+          "rgb": [
+            170,
+            85,
+            85
+          ],
+          "y": 110
+        },
+        {
+          "index": 4,
+          "role": "suit_light",
+          "code": [
+            1,
+            2,
+            3
+          ],
+          "rgb": [
+            85,
+            170,
+            255
+          ],
+          "y": 154
+        },
+        {
+          "index": 5,
+          "role": "suit_mid",
+          "code": [
+            0,
+            2,
+            2
+          ],
+          "rgb": [
+            0,
+            170,
+            170
+          ],
+          "y": 119
+        },
+        {
+          "index": 6,
+          "role": "suit_deep",
+          "code": [
+            0,
+            1,
+            1
+          ],
+          "rgb": [
+            0,
+            85,
+            85
+          ],
+          "y": 60
+        },
+        {
+          "index": 7,
+          "role": "shirt_light",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        },
+        {
+          "index": 8,
+          "role": "shirt_shadow",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 9,
+          "role": "hair_gray",
+          "code": [
+            1,
+            1,
+            1
+          ],
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "y": 85
+        },
+        {
+          "index": 10,
+          "role": "boot_brown",
+          "code": [
+            1,
+            0,
+            0
+          ],
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "y": 26
+        },
+        {
+          "index": 11,
+          "role": "tie_burgundy",
+          "code": [
+            2,
+            0,
+            1
+          ],
+          "rgb": [
+            170,
+            0,
+            85
+          ],
+          "y": 60
+        },
+        {
+          "index": 12,
+          "role": "accent_red",
+          "code": [
+            3,
+            0,
+            0
+          ],
+          "rgb": [
+            255,
+            0,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 13,
+          "role": "arcane_violet",
+          "code": [
+            2,
+            0,
+            3
+          ],
+          "rgb": [
+            170,
+            0,
+            255
+          ],
+          "y": 79
+        },
+        {
+          "index": 14,
+          "role": "brass_glasses",
+          "code": [
+            3,
+            3,
+            0
+          ],
+          "rgb": [
+            255,
+            255,
+            0
+          ],
+          "y": 227
+        }
+      ],
+      "nota": "traje azul/ciano, sombra teal, cabelo grisalho e botas castanhas mapeados do sprite SMS de Dr. Social (SMS Power, Dr.FerdinandSocial-StandingRight; RGB aproximado ao canal x85). Camisa branca, cravat burgundy e óculos de latão mantêm a direção autoral; contorno opaco usa navy #000055 porque índice 0 é transparente. accent_red/arcane_violet são FX do arsenal, sem forma vampira (dono, 2026-10-03)."
+    },
+    "black_belt_karateka": {
+      "classe": "medio",
+      "origem": "Black Belt",
+      "usable_colors": 8,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            0,
+            0,
+            0
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "y": 0
+        },
+        {
+          "index": 2,
+          "role": "skin_tan",
+          "code": [
+            3,
+            2,
+            1
+          ],
+          "rgb": [
+            255,
+            170,
+            85
+          ],
+          "y": 186
+        },
+        {
+          "index": 3,
+          "role": "skin_mid",
+          "code": [
+            2,
+            1,
+            0
+          ],
+          "rgb": [
+            170,
+            85,
+            0
+          ],
+          "y": 101
+        },
+        {
+          "index": 4,
+          "role": "skin_shadow",
+          "code": [
+            1,
+            0,
+            0
+          ],
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "y": 26
+        },
+        {
+          "index": 5,
+          "role": "gi_light",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        },
+        {
+          "index": 6,
+          "role": "gi_shadow",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 7,
+          "role": "gi_deep",
+          "code": [
+            1,
+            1,
+            1
+          ],
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "y": 85
+        },
+        {
+          "index": 8,
+          "role": "belt_red",
+          "code": [
+            3,
+            0,
+            0
+          ],
+          "rgb": [
+            255,
+            0,
+            0
+          ],
+          "y": 76
+        }
+      ],
+      "nota": "cabelo e cinto usam o outline (0,0,0) — mesmo codigo, sem custo de slot."
+    },
+    "witch_psychic_world": {
+      "classe": "leve",
+      "origem": "Psychic World",
+      "usable_colors": 11,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            0,
+            0,
+            0
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "y": 0
+        },
+        {
+          "index": 2,
+          "role": "skin_light",
+          "code": [
+            3,
+            2,
+            2
+          ],
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "y": 196
+        },
+        {
+          "index": 3,
+          "role": "skin_mid",
+          "code": [
+            2,
+            1,
+            1
+          ],
+          "rgb": [
+            170,
+            85,
+            85
+          ],
+          "y": 110
+        },
+        {
+          "index": 4,
+          "role": "hair_purple",
+          "code": [
+            2,
+            0,
+            3
+          ],
+          "rgb": [
+            170,
+            0,
+            255
+          ],
+          "y": 79
+        },
+        {
+          "index": 5,
+          "role": "hair_shadow",
+          "code": [
+            1,
+            0,
+            2
+          ],
+          "rgb": [
+            85,
+            0,
+            170
+          ],
+          "y": 44
+        },
+        {
+          "index": 6,
+          "role": "dress_pink",
+          "code": [
+            3,
+            1,
+            2
+          ],
+          "rgb": [
+            255,
+            85,
+            170
+          ],
+          "y": 145
+        },
+        {
+          "index": 7,
+          "role": "dress_shadow",
+          "code": [
+            2,
+            0,
+            1
+          ],
+          "rgb": [
+            170,
+            0,
+            85
+          ],
+          "y": 60
+        },
+        {
+          "index": 8,
+          "role": "psychic_cyan",
+          "code": [
+            0,
+            3,
+            3
+          ],
+          "rgb": [
+            0,
+            255,
+            255
+          ],
+          "y": 178
+        },
+        {
+          "index": 9,
+          "role": "psychic_deep",
+          "code": [
+            0,
+            2,
+            2
+          ],
+          "rgb": [
+            0,
+            170,
+            170
+          ],
+          "y": 119
+        },
+        {
+          "index": 10,
+          "role": "gold_buckle",
+          "code": [
+            3,
+            3,
+            0
+          ],
+          "rgb": [
+            255,
+            255,
+            0
+          ],
+          "y": 227
+        },
+        {
+          "index": 11,
+          "role": "highlight_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        }
+      ]
+    },
+    "alis_landale": {
+      "classe": "leve",
+      "origem": "Phantasy Star",
+      "usable_colors": 13,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            1,
+            0,
+            0
+          ],
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "y": 26
+        },
+        {
+          "index": 2,
+          "role": "skin_light",
+          "code": [
+            3,
+            2,
+            2
+          ],
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "y": 196
+        },
+        {
+          "index": 3,
+          "role": "cream_light",
+          "code": [
+            3,
+            3,
+            2
+          ],
+          "rgb": [
+            255,
+            255,
+            170
+          ],
+          "y": 246
+        },
+        {
+          "index": 4,
+          "role": "hair_brown",
+          "code": [
+            2,
+            1,
+            0
+          ],
+          "rgb": [
+            170,
+            85,
+            0
+          ],
+          "y": 101
+        },
+        {
+          "index": 5,
+          "role": "warm_gold",
+          "code": [
+            3,
+            2,
+            0
+          ],
+          "rgb": [
+            255,
+            170,
+            0
+          ],
+          "y": 177
+        },
+        {
+          "index": 6,
+          "role": "pink_main",
+          "code": [
+            3,
+            1,
+            2
+          ],
+          "rgb": [
+            255,
+            85,
+            170
+          ],
+          "y": 145
+        },
+        {
+          "index": 7,
+          "role": "pink_light",
+          "code": [
+            3,
+            2,
+            3
+          ],
+          "rgb": [
+            255,
+            170,
+            255
+          ],
+          "y": 205
+        },
+        {
+          "index": 8,
+          "role": "suit_indigo",
+          "code": [
+            1,
+            1,
+            2
+          ],
+          "rgb": [
+            85,
+            85,
+            170
+          ],
+          "y": 94
+        },
+        {
+          "index": 9,
+          "role": "suit_silver",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 10,
+          "role": "weapon_blue",
+          "code": [
+            0,
+            1,
+            3
+          ],
+          "rgb": [
+            0,
+            85,
+            255
+          ],
+          "y": 78
+        },
+        {
+          "index": 11,
+          "role": "weapon_cyan",
+          "code": [
+            0,
+            3,
+            3
+          ],
+          "rgb": [
+            0,
+            255,
+            255
+          ],
+          "y": 178
+        },
+        {
+          "index": 12,
+          "role": "gold_yellow",
+          "code": [
+            3,
+            3,
+            0
+          ],
+          "rgb": [
+            255,
+            255,
+            0
+          ],
+          "y": 227
+        },
+        {
+          "index": 13,
+          "role": "highlight_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        }
+      ],
+      "nota": "cores alinhadas ao retrato Alisa - Title screen de Phantasy Star SMS (SMS Power, referencia apenas de cor). O contorno usa marrom profundo #550000 porque preto puro e o indice transparente 0 na traducao."
+    },
+    "boss_ninja_master": {
+      "classe": "chefe",
+      "origem": "Shinobi",
+      "usable_colors": 10,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            0,
+            0,
+            0
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "y": 0
+        },
+        {
+          "index": 2,
+          "role": "skin_mid",
+          "code": [
+            2,
+            1,
+            1
+          ],
+          "rgb": [
+            170,
+            85,
+            85
+          ],
+          "y": 110
+        },
+        {
+          "index": 3,
+          "role": "garb_purple",
+          "code": [
+            1,
+            0,
+            2
+          ],
+          "rgb": [
+            85,
+            0,
+            170
+          ],
+          "y": 44
+        },
+        {
+          "index": 4,
+          "role": "garb_deep",
+          "code": [
+            0,
+            0,
+            1
+          ],
+          "rgb": [
+            0,
+            0,
+            85
+          ],
+          "y": 9
+        },
+        {
+          "index": 5,
+          "role": "mask_silver",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 6,
+          "role": "mask_shadow",
+          "code": [
+            1,
+            1,
+            1
+          ],
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "y": 85
+        },
+        {
+          "index": 7,
+          "role": "eye_red",
+          "code": [
+            3,
+            0,
+            0
+          ],
+          "rgb": [
+            255,
+            0,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 8,
+          "role": "blade_cyan",
+          "code": [
+            0,
+            3,
+            3
+          ],
+          "rgb": [
+            0,
+            255,
+            255
+          ],
+          "y": 178
+        },
+        {
+          "index": 9,
+          "role": "smoke_gray",
+          "code": [
+            1,
+            1,
+            2
+          ],
+          "rgb": [
+            85,
+            85,
+            170
+          ],
+          "y": 94
+        },
+        {
+          "index": 10,
+          "role": "highlight_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        }
+      ]
+    },
+    "boss_count_dracula": {
+      "classe": "chefe",
+      "origem": "Master of Darkness",
+      "usable_colors": 10,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            0,
+            0,
+            0
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "y": 0
+        },
+        {
+          "index": 2,
+          "role": "face_pale",
+          "code": [
+            3,
+            3,
+            2
+          ],
+          "rgb": [
+            255,
+            255,
+            170
+          ],
+          "y": 246
+        },
+        {
+          "index": 3,
+          "role": "face_shadow",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 4,
+          "role": "face_deep",
+          "code": [
+            1,
+            1,
+            1
+          ],
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "y": 85
+        },
+        {
+          "index": 5,
+          "role": "hair_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        },
+        {
+          "index": 6,
+          "role": "cape_inner",
+          "code": [
+            3,
+            0,
+            0
+          ],
+          "rgb": [
+            255,
+            0,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 7,
+          "role": "cape_deep",
+          "code": [
+            1,
+            0,
+            0
+          ],
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "y": 26
+        },
+        {
+          "index": 8,
+          "role": "suit_night",
+          "code": [
+            0,
+            0,
+            1
+          ],
+          "rgb": [
+            0,
+            0,
+            85
+          ],
+          "y": 9
+        },
+        {
+          "index": 9,
+          "role": "gold_clasp",
+          "code": [
+            3,
+            3,
+            0
+          ],
+          "rgb": [
+            255,
+            255,
+            0
+          ],
+          "y": 227
+        },
+        {
+          "index": 10,
+          "role": "eye_red",
+          "code": [
+            2,
+            0,
+            1
+          ],
+          "rgb": [
+            170,
+            0,
+            85
+          ],
+          "y": 60
+        }
+      ],
+      "nota": "capa externa usa outline (0,0,0) — preto absoluto sem gastar slot."
+    },
+    "boss_luter": {
+      "classe": "chefe",
+      "origem": "Phantasy Star",
+      "usable_colors": 10,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            0,
+            0,
+            0
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "y": 0
+        },
+        {
+          "index": 2,
+          "role": "skin_mid",
+          "code": [
+            2,
+            1,
+            1
+          ],
+          "rgb": [
+            170,
+            85,
+            85
+          ],
+          "y": 110
+        },
+        {
+          "index": 3,
+          "role": "robe_green",
+          "code": [
+            0,
+            2,
+            0
+          ],
+          "rgb": [
+            0,
+            170,
+            0
+          ],
+          "y": 100
+        },
+        {
+          "index": 4,
+          "role": "robe_deep",
+          "code": [
+            0,
+            1,
+            0
+          ],
+          "rgb": [
+            0,
+            85,
+            0
+          ],
+          "y": 50
+        },
+        {
+          "index": 5,
+          "role": "robe_purple",
+          "code": [
+            1,
+            0,
+            2
+          ],
+          "rgb": [
+            85,
+            0,
+            170
+          ],
+          "y": 44
+        },
+        {
+          "index": 6,
+          "role": "glow_green",
+          "code": [
+            0,
+            3,
+            0
+          ],
+          "rgb": [
+            0,
+            255,
+            0
+          ],
+          "y": 150
+        },
+        {
+          "index": 7,
+          "role": "glow_cyan",
+          "code": [
+            0,
+            3,
+            3
+          ],
+          "rgb": [
+            0,
+            255,
+            255
+          ],
+          "y": 178
+        },
+        {
+          "index": 8,
+          "role": "steel_dark",
+          "code": [
+            1,
+            1,
+            1
+          ],
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "y": 85
+        },
+        {
+          "index": 9,
+          "role": "eye_red",
+          "code": [
+            3,
+            0,
+            0
+          ],
+          "rgb": [
+            255,
+            0,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 10,
+          "role": "highlight_white",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        }
+      ]
+    },
+    "boss_dark_force": {
+      "classe": "chefe",
+      "origem": "Phantasy Star II (a confirmar)",
+      "usable_colors": 10,
+      "colors": [
+        {
+          "index": 1,
+          "role": "outline",
+          "code": [
+            0,
+            0,
+            0
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ],
+          "y": 0
+        },
+        {
+          "index": 2,
+          "role": "body_purple",
+          "code": [
+            2,
+            0,
+            3
+          ],
+          "rgb": [
+            170,
+            0,
+            255
+          ],
+          "y": 79
+        },
+        {
+          "index": 3,
+          "role": "body_mid",
+          "code": [
+            1,
+            0,
+            2
+          ],
+          "rgb": [
+            85,
+            0,
+            170
+          ],
+          "y": 44
+        },
+        {
+          "index": 4,
+          "role": "body_deep",
+          "code": [
+            0,
+            0,
+            1
+          ],
+          "rgb": [
+            0,
+            0,
+            85
+          ],
+          "y": 9
+        },
+        {
+          "index": 5,
+          "role": "energy_cyan",
+          "code": [
+            0,
+            3,
+            3
+          ],
+          "rgb": [
+            0,
+            255,
+            255
+          ],
+          "y": 178
+        },
+        {
+          "index": 6,
+          "role": "energy_deep",
+          "code": [
+            0,
+            2,
+            2
+          ],
+          "rgb": [
+            0,
+            170,
+            170
+          ],
+          "y": 119
+        },
+        {
+          "index": 7,
+          "role": "eye_red",
+          "code": [
+            3,
+            0,
+            0
+          ],
+          "rgb": [
+            255,
+            0,
+            0
+          ],
+          "y": 76
+        },
+        {
+          "index": 8,
+          "role": "bone_light",
+          "code": [
+            3,
+            3,
+            3
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "y": 255
+        },
+        {
+          "index": 9,
+          "role": "bone_shadow",
+          "code": [
+            2,
+            2,
+            2
+          ],
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "y": 170
+        },
+        {
+          "index": 10,
+          "role": "core_yellow",
+          "code": [
+            3,
+            3,
+            0
+          ],
+          "rgb": [
+            255,
+            255,
+            0
+          ],
+          "y": 227
+        }
+      ]
+    }
+  }
+}

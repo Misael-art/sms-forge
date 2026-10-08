@@ -1,0 +1,94 @@
+{
+  "schema": "sms_model_sheet_form_v1",
+  "record_id": "dr_social_cps2_alpha_cel_model_sheet_pilot_2026_10_07",
+  "status": "pilot_candidate_pending_owner_review",
+  "canonical_promotion": "not_promoted",
+  "document_type": {
+    "required_terms": [
+      "character lineup model sheet",
+      "concept art sheet",
+      "character lineup concept sheet"
+    ],
+    "instance": "Character concept/model sheet with five views; not a game scene or finished sprite sheet."
+  },
+  "style": {
+    "catalog_id": "CPS2-Alpha-Cel",
+    "reference_game": "Street Fighter Zero (Alpha)",
+    "platform_era": "Arcade (CPS-2) / 1990s",
+    "base_style": "Anime Fighting 2D Cel-Shaded",
+    "lineart": "Bold, clean 1–2 px black-like outlines; use Dr. Social's approved deep navy #000055 as the outline color for this SMS project.",
+    "morphology": "1990s shonen anime proportions and a distinct silhouette, adapted to Dr. Social's established tall, lean, long-limbed build; no chibi or broad/muscular redesign.",
+    "shading": "Crisp, hard-edged three-tone cel shading per material; saturated color roles; no dithering, grain, blur, gradient, or painterly texture.",
+    "biotype_form_options": [
+      "ectomorph",
+      "mesomorph",
+      "endomorph",
+      "muscular",
+      "petite",
+      "slim",
+      "athletic",
+      "curvy",
+      "heavy muscular",
+      "short"
+    ],
+    "selected_biotype": "Tall, slim ectomorph; lean adult with long limbs and narrow-to-average shoulders."
+  },
+  "layout": {
+    "orientation": "wide landscape",
+    "background": "Clean light gray, cream, or white; no scenery, texture, vignette, or distracting effects.",
+    "alignment": "Horizontal lineup; front, side, and back views share one scale and baseline. Keep all five views at a consistent character scale, with a relative ruler beside the orthographic views.",
+    "relative_ruler": {
+      "unit": "H",
+      "definition": "One H equals the character's head height from crown to chin.",
+      "working_target": "Approximately 7.5H tall for this sheet; visual guide only, not a canonical absolute height.",
+      "baseline": "Common ground baseline for front, side, and back views."
+    },
+    "views": [
+      "Front full-body view",
+      "Side-profile full-body view",
+      "Back full-body view",
+      "Large face close-up",
+      "Full-body signature pose with rapier and occult boomerang"
+    ]
+  },
+  "character_invariants": [
+    "Dr. Ferdinand Social from Master of Darkness; human Victorian psychologist and vampire hunter, early thirties.",
+    "Lean, upright, composed, courageous, and justice-driven; remains fully human with no fangs, wings, claws, or transformation.",
+    "Gray swept-back hair; clearly visible round brass-rimmed spectacles; consistent face across all views.",
+    "Blue/cyan long coat or suit with teal shadows, white shirt, burgundy cravat, dark brown boots, brass details.",
+    "Keep the established cane, rapier, and occult steel boomerang. Violet is restricted to a restrained boomerang effect.",
+    "Do not add logos, crests, unexplained symbols, extra weapons, or costume details absent from the approved design."
+  ],
+  "palette_roles": {
+    "outline": "#000055",
+    "skin_light": "#FFAAAA",
+    "skin_mid": "#AA5555",
+    "suit_light": "#55AAFF",
+    "suit_mid": "#00AAAA",
+    "suit_deep": "#005555",
+    "shirt_light": "#FFFFFF",
+    "shirt_shadow": "#AAAAAA",
+    "hair_gray": "#555555",
+    "boot_brown": "#550000",
+    "tie_burgundy": "#AA0055",
+    "arcane_violet_fx_only": "#AA00FF",
+    "brass_glasses": "#FFFF00"
+  },
+  "references": {
+    "approved_identity_and_costume": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+    "palette_contract": "SMS_projects/master_of_fighters/doc/palettes_manifest.json#/characters/dr_ferdinand_social",
+    "style_catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json#/styles/CPS2-Alpha-Cel"
+  },
+  "review_status": {
+    "concept_sheet": "pending owner review",
+    "cross-generation_continuity": "not yet tested; requires at least one image derived from the approved sheet",
+    "sprite_or_rom_approval": "not implied"
+  },
+  "art_review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_review_v1.json",
+    "report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_review_report_v1.json",
+    "audit_status": "pending",
+    "audit_result": "13 review axes pending; independent review and owner approval pending; no schema or hash problems",
+    "promotion": "blocked_until_review_and_owner_approval"
+  }
+}
