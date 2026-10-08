@@ -1,0 +1,100 @@
+{
+  "schema": "asset_lineage_record_model_sheet_v1",
+  "asset_id": "dr_social_model_sheet_02_dark_gothic_pop_v1",
+  "created_date": "2026-10-07",
+  "status": "source_candidate",
+  "owner_review": "pending",
+  "style_id": "Dark-Gothic-Pop",
+  "style_reference": {
+    "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "catalog_sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "game": "Darkstalkers",
+    "platform_era": "Arcade (CPS-2) / 90s",
+    "base_art_style": "Dark Fantasy Anime Pop",
+    "lineart": "Lineart fluida e precisa de 1px",
+    "body_morphology": "Anatomicamente exagerada, silhuetas de monstros do folclore",
+    "palette_and_lighting": "Paleta vibrante e gótica, iluminação de contraste, auras de magia",
+    "entry_status": "initial_reference_unvalidated"
+  },
+  "identity_and_palette_authorities": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "role": "owner-approved Dr. Social identity, face, costume, proportions, and equipment"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "project palette-role authority"
+    }
+  ],
+  "generation": {
+    "tool": "built-in image_gen",
+    "prompt_file": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_prompt.txt",
+    "prompt_sha256": "fad7d97ef4d1b0530cf6ae00ed0f32f2abba802c81e0ac16ce6d8f51b6572a1e",
+    "input_images": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+        "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+        "role": "approved model-sheet layout, view arrangement, and reference scale"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+        "role": "identity, face, palette, costume, and equipment authority"
+      }
+    ],
+    "generated_art": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png",
+      "sha256": "b697a47dbdc387ad2a4f98c2d406256565f74fadc8d1507ba7c1809863b502a3",
+      "dimensions_px": [
+        1983,
+        793
+      ]
+    },
+    "metadata_file": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_metadata.json",
+      "sha256": "60211f874eea9512edf474c24df0bce266a5497374537af5a290fa2df8244186"
+    },
+    "layout_tool": {
+      "path": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+      "sha256": "acd78acfcf78631202fdc06e49d5d104bbda99010287c35855cf1cd51b836bc9"
+    },
+    "final_sheet": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1.png",
+      "sha256": "aa18b4946e0c49db2afb8343b3a3ef9b69423ca16d8e1227f8b1f7d4e4725b95",
+      "dimensions_px": [
+        2400,
+        1440
+      ]
+    },
+    "layout_composition": "The generated illustration is uniformly placed intact. A reusable local compositor adds the title, five view labels, relative ruler, baseline, style fields, palette chips, and candidate badge; it does not redraw or recolor the character."
+  },
+  "required_views": [
+    "front full body",
+    "side-profile full body",
+    "back full body",
+    "face close-up",
+    "signature duelist pose"
+  ],
+  "design_invariants": [
+    "lean, tall, early-thirties, fully human Dr. Ferdinand Social",
+    "gray swept-back hair and round brass-rimmed glasses",
+    "blue/cyan coat or suit, teal shadows, white shirt, burgundy cravat, brown boots",
+    "cane, rapier, and occult steel boomerang; violet effect only on boomerang",
+    "style reference changes drawing treatment only; character identity and project palette remain fixed"
+  ],
+  "review_notes": {
+    "visual_inspection": "Five requested views are present on a clean pale background. Front, side, and back views align at a shared relative scale and baseline. The sheet includes the metadata fields and a 0–7.5H ruler.",
+    "pending": "Owner review of the style adaptation and independent review of all art axes.",
+    "not_approved_by_this_record": "sprite sheet, animation, SMS resource conversion, ROM integration, or in-emulator behavior"
+  },
+  "review_checklist": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_v1.json",
+    "sha256": "9c2895f437ffab9f4821772041b49947954e2bd4446e03cb7469e126d596eada",
+    "status": "pending owner and independent review",
+    "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_report_v1.json",
+    "report_sha256": "090acdea7514d62a8f96d1c35eecce75cd92095b8f03b38d163211f586855110"
+  },
+  "claim_ceiling": "Concept/model sheet candidate only; user approval and pixel/runtime approval not recorded."
+}

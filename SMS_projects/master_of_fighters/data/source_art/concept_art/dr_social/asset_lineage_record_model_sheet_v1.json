@@ -2,8 +2,8 @@
   "schema": "asset_lineage_record_model_sheet_v1",
   "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v1",
   "created_date": "2026-10-07",
-  "status": "source_candidate",
-  "owner_review": "pending",
+  "status": "owner_approved_reference_for_style_series",
+  "owner_review": "approved by project owner on 2026-10-07 as the style-series baseline; independent review remains pending",
   "style_id": "CPS2-Alpha-Cel",
   "style_reference": {
     "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
@@ -66,18 +66,18 @@
   ],
   "review_notes": {
     "visual_inspection": "Five requested views are present on a clean pale-cream background. The first three are nearly aligned on a common baseline and use a relative 0–7.5H ruler. The sheet includes the selected style and all requested form fields.",
-    "pending": "Owner approval; confirmation of exact morphology and baseline; a separate derived-image continuity test.",
+    "pending": "Independent review of detailed axes and a separate derived-image continuity test.",
     "not_approved_by_this_record": "sprite sheet, animation, SMS resource conversion, ROM integration, or in-emulator behavior"
   },
   "review_checklist": {
     "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_review_v1.json",
-    "sha256": "30009ef72e31b2b32f0c5361c8bb94202664d44ad82c50ef27669756c89558f7",
+    "sha256": "f67c3ff4aad09b75048ef7f1dc3f1fba0693ccddb2187d43183736804fba05e9",
     "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_review_report_v1.json",
-    "report_sha256": "45ab6d7767eb0d825fccce214e66702f886ed634503f7ad693612445e4510eff",
-    "status": "pending",
+    "report_sha256": "9d73cea3c046ab0fceaf3b432102a5bcc20077f070d7a3c0dba181bd7f16d49e",
+    "status": "owner_approved_reference; independent review pending",
     "pending_axes": 13,
-    "owner_approval": false,
+    "owner_approval": true,
     "independent_review": "pending_assignment"
   },
-  "claim_ceiling": "Concept/model sheet candidate only; not owner-approved and not evidence that derived generations will preserve all design details."
+  "claim_ceiling": "Owner-approved concept/model sheet reference; independent review and derived-generation continuity are not yet demonstrated."
 }
