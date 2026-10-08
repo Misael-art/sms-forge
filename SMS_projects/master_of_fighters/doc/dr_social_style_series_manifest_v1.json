@@ -65,10 +65,10 @@
   "review_policy": "Each generated sheet is a candidate until owner review; no sprite, animation, resource, ROM, or emulator approval is implied. Record exact style reference and SHA-256 for every output.",
   "progress": {
     "owner_approved_references": 1,
-    "candidate_pending_owner_review": 8,
+    "candidate_pending_owner_review": 10,
     "in_progress": 0,
-    "blocked": 1,
-    "not_started": 39,
+    "blocked": 3,
+    "not_started": 35,
     "total": 49
   },
   "styles": [
@@ -371,9 +371,22 @@
         "body_morphology": "Proporções refinadas e esguias no traço de Ayami Kojima",
         "palette_and_lighting": "Paleta gótica e soturna (vinhos, azuis, cinzas) com transparências de hardware"
       },
-      "status": "not_started",
+      "status": "blocked_generation_style_not_distinct",
       "model_sheet": null,
-      "owner_review": "not_requested"
+      "owner_review": "not_requested",
+      "generation_attempts": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v1.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v2.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v3.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v4.png"
+      ],
+      "attempt_prompts": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v4_prompt.txt"
+      ],
+      "block_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_blocked_record_v1.json"
     },
     {
       "sequence": 12,
@@ -386,9 +399,22 @@
         "body_morphology": "Caricaturesca com física exagerada (squash & stretch) e robôs detalhados",
         "palette_and_lighting": "Paleta militar saturada (verdes, ferrugem, chamas) com explosões volumosas"
       },
-      "status": "not_started",
+      "status": "blocked_generation_style_not_distinct",
       "model_sheet": null,
-      "owner_review": "not_requested"
+      "owner_review": "not_requested",
+      "generation_attempts": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v4_art.png"
+      ],
+      "attempt_prompts": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v4_prompt.txt"
+      ],
+      "block_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_blocked_record_v1.json"
     },
     {
       "sequence": 13,
@@ -416,9 +442,30 @@
         "body_morphology": "Proporções de conto de fadas estilizado e sonhador",
         "palette_and_lighting": "Fundos pintados em guache/aquarela, sprites coloridos e luminosos"
       },
-      "status": "not_started",
-      "model_sheet": null,
-      "owner_review": "not_requested"
+      "status": "candidate_pending_owner_review",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1.png",
+      "owner_review": "pending; coat construction/lapel variation noted",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_art.png",
+      "generation_attempts": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_art.png"
+      ],
+      "attempt_prompts": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_prompt.txt"
+      ],
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v1.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v1.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_report_v1.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_quality_review_request_v1.json",
+      "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_quality_review_plan_v1.json",
+      "palette_policy": "fixed identity material colors; gouache pigment and lighting treatment only"
     },
     {
       "sequence": 15,
@@ -431,9 +478,30 @@
         "body_morphology": "Proporções clássicas de anime dos anos 90 estilo Estúdio Ghibli",
         "palette_and_lighting": "Cores vivas, cel-shading de 2 tons super limpo, clima acolhedor"
       },
-      "status": "not_started",
-      "model_sheet": null,
-      "owner_review": "not_requested"
+      "status": "candidate_pending_owner_review",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png",
+      "owner_review": "pending; mild coat-cut variance and missing violet boomerang effect noted",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
+      "generation_attempts": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png"
+      ],
+      "attempt_prompts": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt"
+      ],
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v1.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_review_v1.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_review_report_v1.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_quality_review_request_v1.json",
+      "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_quality_review_plan_v1.json",
+      "palette_policy": "fixed identity material colors; two-tone cel treatment only"
     },
     {
       "sequence": 16,
