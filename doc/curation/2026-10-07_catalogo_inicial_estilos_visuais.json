@@ -1,0 +1,526 @@
+{
+  "schema": "visual_style_reference_catalog_v1",
+  "catalog_id": "initial_visual_style_references_2026_10_07",
+  "recorded_date": "2026-10-07",
+  "scope": "Inventário inicial de estilos de referência para orientar curadoria futura do conhecimento artístico e dos workflows visuais do SMSForge.",
+  "status": "registered_for_future_curation",
+  "promotion_status": "not_promoted_to_canonical_skill_or_workflow",
+  "source": {
+    "attachment": "/home/misael/.codex/attachments/05827bf1-dda7-4df0-833c-876d0ce76dde/pasted-text.txt",
+    "sha256": "4baa09c2c803d5675217e07ca1166d9a2a4cf44ce8558686dc3bce6a7d56ea0d",
+    "entry_count": 49,
+    "columns_preserved": [
+      "Identificador do Estilo",
+      "Jogo / Franquia",
+      "Plataforma / Era",
+      "Estilo Artístico Base",
+      "Traço & Lineart",
+      "Morfologia Corporal",
+      "Paleta de Cores & Iluminação"
+    ],
+    "transcription_note": "Descritores transcritos da tabela fornecida pelo usuário. Identidade, precisão histórica, viabilidade técnica e adequação ao hardware de destino ainda não foram verificadas."
+  },
+  "future_curation": {
+    "principle": "Tratar cada linha como direção de referência, não como preset validado nem como ordem para copiar uma obra existente.",
+    "review_dimensions": [
+      "confirmar jogo, edição, plataforma, era e referências visuais autorizadas",
+      "separar silhueta e morfologia, lineart/contorno, paleta/iluminação, sombreamento e animação",
+      "experimentar a direção em arte de teste e revisar no tamanho de saída pretendido",
+      "adaptar cada direção às restrições do projeto e do hardware alvo sem alegar fidelidade não demonstrada",
+      "promover ao skill/workflow somente após resolver o desafio visual, registrar avaliação e evidências, e concluir a curadoria correspondente"
+    ],
+    "implementation_state": "Nenhuma regra, ferramenta ou comportamento canônico foi alterado por este registro."
+  },
+  "styles": [
+    {
+      "style_id": "CPS2-Alpha-Cel",
+      "game_or_franchise": "Street Fighter Zero (Alpha)",
+      "platform_and_era": "Arcade (CPS-2) / 90s",
+      "base_art_style": "Anime Fighting 2D Cel-Shaded",
+      "lineart": "Contornos pretos limpos (1-2px), animação expressiva",
+      "body_morphology": "Proporções de anime Shonen dos anos 90, silhuetas marcantes",
+      "palette_and_lighting": "Cores saturadas (3 tons cel-shading), efeitos de energia reluzentes",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Dark-Gothic-Pop",
+      "game_or_franchise": "Darkstalkers",
+      "platform_and_era": "Arcade (CPS-2) / 90s",
+      "base_art_style": "Dark Fantasy Anime Pop",
+      "lineart": "Lineart fluida e precisa de 1px",
+      "body_morphology": "Anatomicamente exagerada, silhuetas de monstros do folclore",
+      "palette_and_lighting": "Paleta vibrante e gótica, iluminação de contraste, auras de magia",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Late-SNK-Realism",
+      "game_or_franchise": "Garou: Mark of the Wolves",
+      "platform_and_era": "Neo Geo (MVS) / 1999",
+      "base_art_style": "Ápice da Pixel Art SNK Late-Era",
+      "lineart": "Lineart fina de 1px ultra-precisa, alta contagem de frames",
+      "body_morphology": "Proporções reais e atléticas com centro de gravidade baixo",
+      "palette_and_lighting": "Tons sóbrios com destaques, sombreamento técnico em 3-4 tons",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "CPS3-Fluid-Mastery",
+      "game_or_franchise": "Street Fighter III: 3rd Strike",
+      "platform_and_era": "Arcade (CPS-3) / 1999",
+      "base_art_style": "Ápice da Animação 2D CPS-3",
+      "lineart": "Lineart cirúrgica de 1px, extrema fluidez quadro a quadro",
+      "body_morphology": "Anatomia realista de lutador de artes marciais com peso real",
+      "palette_and_lighting": "Paleta madura, cel-shading refinado, efeitos de iluminação em tempo real",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Urban-Seinen-KOF",
+      "game_or_franchise": "The King of Fighters '98",
+      "platform_and_era": "Neo Geo (MVS) / 1998",
+      "base_art_style": "Fighting Manga Neogeo Classic",
+      "lineart": "Lineart firme de 1px com anti-aliasing manual",
+      "body_morphology": "Proporções atléticas de mangá Seinen urbano dos anos 90",
+      "palette_and_lighting": "Cores equilibradas de rua/urbanas, sombreamento cel em 3 tons",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Classic-Arcade-Heroic",
+      "game_or_franchise": "Super Street Fighter II Turbo",
+      "platform_and_era": "Arcade (CPS-2) / 1994",
+      "base_art_style": "Classic Arcade Fighting Sprite Art",
+      "lineart": "Lineart tradicional em pixel art de 1-2px",
+      "body_morphology": "Proporções musculosas e heroicas dos jogos de arcade clássicos",
+      "palette_and_lighting": "Cores primárias de alto contraste, sombreamento flat direto",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "HiDrive-Anime-Vector",
+      "game_or_franchise": "Guilty Gear (2D) / BlazBlue",
+      "platform_and_era": "PS2 / Arcade / Arc System Works",
+      "base_art_style": "High-Speed Anime Fighter Pixel Art",
+      "lineart": "Lineart fina tipo vetor, animação rápida e técnica",
+      "body_morphology": "Anatomia de anime moderno estilizado com trajes complexos e esguio",
+      "palette_and_lighting": "Paleta ultra-saturada, cel-shading limpo, efeitos de partículas intensos",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "32Bit-Mecha-Chibi",
+      "game_or_franchise": "Mega Man 8",
+      "platform_and_era": "PS1 / Saturn / 32-Bit",
+      "base_art_style": "Sci-Fi Mascot Action Platformer",
+      "lineart": "Lineart limpa estilo cel-animation de TV",
+      "body_morphology": "Chibi/SD estilizado e robótico com articulações redondas",
+      "palette_and_lighting": "Cores vivas e luminosas, 2-3 tons de cel-shading sem dithering",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Extreme-SD-Parody",
+      "game_or_franchise": "Pocket Fighter (Gem Fighter)",
+      "platform_and_era": "Arcade (CPS-2) / 1997",
+      "base_art_style": "Super Deformed (SD) Parody",
+      "lineart": "Lineart arredondada de 1-2px, animação cômica elástica",
+      "body_morphology": "Chibi extremo (2 a 2.5 cabeças de altura) com expressões faciais exageradas",
+      "palette_and_lighting": "Paleta pastel e néon festiva, efeitos de impacto com objetos e itens cômicos",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Digicel-Handdrawn",
+      "game_or_franchise": "Disney's Aladdin",
+      "platform_and_era": "Mega Drive / 16-Bit",
+      "base_art_style": "Digicel Traditional Animation",
+      "lineart": "Lineart orgânica feita a mão convertida para pixel art",
+      "body_morphology": "Proporções diretas das animações da Disney (Aladdin, Gênio, Jafar)",
+      "palette_and_lighting": "Paleta rica do Mega Drive, sombreamento suave de cel-animation",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Gothic-Ayami-Art",
+      "game_or_franchise": "Castlevania: SotN",
+      "platform_and_era": "PS1 / 32-Bit",
+      "base_art_style": "Gothic Dark Fantasy Masterpiece",
+      "lineart": "Lineart fina de 1px, animação elegante com capas e iluminação",
+      "body_morphology": "Proporções refinadas e esguias no traço de Ayami Kojima",
+      "palette_and_lighting": "Paleta gótica e soturna (vinhos, azuis, cinzas) com transparências de hardware",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Detailed-Military-Caricature",
+      "game_or_franchise": "Metal Slug X / 3",
+      "platform_and_era": "Neo Geo (MVS) / Late 90s",
+      "base_art_style": "Military Parody Pixel Art Masterpiece",
+      "lineart": "Lineart rica em detalhes de 1px, altíssima densidade de frames",
+      "body_morphology": "Caricaturesca com física exagerada (squash & stretch) e robôs detalhados",
+      "palette_and_lighting": "Paleta militar saturada (verdes, ferrugem, chamas) com explosões volumosas",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Fairytale-Storybook-2D",
+      "game_or_franchise": "Princess Crown",
+      "platform_and_era": "Sega Saturn / 16/32-Bit",
+      "base_art_style": "Medieval Storybook Action JRPG",
+      "lineart": "Lineart fina e limpa de 1px",
+      "body_morphology": "Proporções graciosas de livro de fadas (morfologia precursora da Vanillaware)",
+      "palette_and_lighting": "Paleta aveludada e aquarelada, cel-shading suave, cenários em camadas",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Gouache-Fantasy-Art",
+      "game_or_franchise": "Legend of Mana",
+      "platform_and_era": "PS1 / 32-Bit",
+      "base_art_style": "Hand-Painted Gouache Fantasy",
+      "lineart": "Lineart de pincelada fina em tom de sépia/carvão",
+      "body_morphology": "Proporções de conto de fadas estilizado e sonhador",
+      "palette_and_lighting": "Fundos pintados em guache/aquarela, sprites coloridos e luminosos",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Ghibli-Cel-Simulation",
+      "game_or_franchise": "Wonder Project J2",
+      "platform_and_era": "Nintendo 64 (2D) / 1996",
+      "base_art_style": "Ghibli-Style Anime Simulation",
+      "lineart": "Lineart de animação de estúdio (1px ultra-limpo)",
+      "body_morphology": "Proporções clássicas de anime dos anos 90 estilo Estúdio Ghibli",
+      "palette_and_lighting": "Cores vivas, cel-shading de 2 tons super limpo, clima acolhedor",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Feudal-Poetic-Cinematic",
+      "game_or_franchise": "The Last Blade 2",
+      "platform_and_era": "Neo Geo (MVS) / 1998",
+      "base_art_style": "Cinematic Feudal Swordplay",
+      "lineart": "Lineart cirúrgica de 1px com transparências sutis",
+      "body_morphology": "Anatomia madura, elegante e realista de esgrimistas e samurais",
+      "palette_and_lighting": "Paleta cinematográfica terrosa e melancólica, iluminação poética de época",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Topdown-Dark-Anime",
+      "game_or_franchise": "Alundra",
+      "platform_and_era": "PS1 / 32-Bit",
+      "base_art_style": "Dark Action RPG Sprite Art",
+      "lineart": "Lineart fina de 1px otimizada para visão top-down",
+      "body_morphology": "Proporções de herói de anime 90s (traço de Yoshitaka Tamaki)",
+      "palette_and_lighting": "Paleta vibrante no mapa com masmorras escuras e sombras marcadas",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Organic-Pencil-Illustration",
+      "game_or_franchise": "Nanatsu Kaze no Shima",
+      "platform_and_era": "Sega Saturn / 1997",
+      "base_art_style": "Artistic Storybook Illustration",
+      "lineart": "Lineart de lápis/nanquim orgânica sobre sprites",
+      "body_morphology": "Criaturas e ecossistemas surreais, poéticos e ilustrativos",
+      "palette_and_lighting": "Cores pastéis e terrosas, efeito de pintura de livro de ilustrações infantil",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Classic-War-Sprite",
+      "game_or_franchise": "Suikoden I & II",
+      "platform_and_era": "PS1 / 32-Bit",
+      "base_art_style": "Classic JRPG War Sprite Art",
+      "lineart": "Lineart fina de 1px com legibilidade em mapa e batalha",
+      "body_morphology": "Proporções anatômicas limpas (retratos por Junko Kawano/Fumi Ishikawa)",
+      "palette_and_lighting": "Paleta militar/fantasia equilibrada, cel-shading tradicional de 2 tons",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Folklore-Yokai-Manga",
+      "game_or_franchise": "GeGeGe no Kitarou",
+      "platform_and_era": "PS1 / 1997",
+      "base_art_style": "Traditional Japanese Yokai Horror",
+      "lineart": "Lineart fina de mangá clássico (Shigeru Mizuki)",
+      "body_morphology": "Anatomicamente fiel ao folclore de monstros e fantasmas (Yokai)",
+      "palette_and_lighting": "Paleta soturna com tons de cinza, roxo e marrom, clima de terror clássico",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Slapstick-TV-Anime",
+      "game_or_franchise": "Keio Yugekitai 2",
+      "platform_and_era": "Sega Saturn / 1996",
+      "base_art_style": "Wacky Comedy Anime Platformer",
+      "lineart": "Lineart limpa de cel-animation de TV",
+      "body_morphology": "Chibi/SD cômico e expressivo (Bunny-girl, robôs e monstros)",
+      "palette_and_lighting": "Paleta festiva e vibrante (tons pastéis e neon), animações de pastelão",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "High-Fantasy-Saturn",
+      "game_or_franchise": "Albert Odyssey",
+      "platform_and_era": "Sega Saturn / 1996",
+      "base_art_style": "High-Fantasy 32-Bit JRPG",
+      "lineart": "Lineart de 1px fina com anti-aliasing de Saturn",
+      "body_morphology": "Proporções heroicas clássicas de JRPG noventista",
+      "palette_and_lighting": "Cores saturadas de alta fantasia, magias reluzentes por hardware",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "LucasArts-Cartoon-Brawler",
+      "game_or_franchise": "Herc's Adventures",
+      "platform_and_era": "PS1 / Saturn / 1997",
+      "base_art_style": "Cartoon Mythology Action Brawler",
+      "lineart": "Lineart grossa e estilizada estilo HQ/Cartoon americano",
+      "body_morphology": "Proporções caricatas, musculosas e assimétricas (LucasArts Style)",
+      "palette_and_lighting": "Paleta mediterrânea e vibrante, sombreamento flat cel-shading limpo",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Modern-Handheld-Vector",
+      "game_or_franchise": "Magical Starsign",
+      "platform_and_era": "Nintendo DS / 2006",
+      "base_art_style": "Modern Handheld RPG Sprite Art",
+      "lineart": "Lineart limpa e vetorializada de 1px",
+      "body_morphology": "Proporções Chibi/SD modernas e carismáticas com roupas espaciais",
+      "palette_and_lighting": "Paleta cintilante e mágica (tons de joias), efeitos luminosos no DS",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Portable-Street-Manga",
+      "game_or_franchise": "Gekido Advance",
+      "platform_and_era": "GBA / 2002",
+      "base_art_style": "Portable Urban Street Brawler",
+      "lineart": "Lineart de 1px bem marcada para tela pequena",
+      "body_morphology": "Anatomia musculosa e agressiva estilo mangá de ação dos anos 90",
+      "palette_and_lighting": "Paleta urbana e sombria com acentos luminosos no protagonista",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Isometric-Organic-Pixel",
+      "game_or_franchise": "Breath of Fire IV",
+      "platform_and_era": "PS1 / 2000",
+      "base_art_style": "Ápice da Pixel Art Isométrica 3D/2D",
+      "lineart": "Lineart de 1px cirúrgica em sprites articulados",
+      "body_morphology": "Anatomia fluida de Tatsuya Yoshikawa com movimentação orgânica",
+      "palette_and_lighting": "Paleta pastel e mística, iluminação dinâmica que afeta os sprites",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "HD-Vector-Painted",
+      "game_or_franchise": "Echoes of Mana",
+      "platform_and_era": "Mobile (2D HD) / 2022",
+      "base_art_style": "Modern HD Vector/Painted Sprite Art",
+      "lineart": "Lineart limpa e invisível/vetorial em HD",
+      "body_morphology": "Proporções de anime moderno mantendo a essência clássica de Mana",
+      "palette_and_lighting": "Cores digitais vivas, gradientes suaves de pintura digital e efeitos HD",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Psychedelic-Mascot-Pop",
+      "game_or_franchise": "Super Tempo",
+      "platform_and_era": "Sega Saturn / 1998",
+      "base_art_style": "Crazy Musical Mascot Platformer",
+      "lineart": "Lineart ultra-limpa estilo desenho animado",
+      "body_morphology": "Mascot Chibi absurdo e elástico com expressões cômicas instantâneas",
+      "palette_and_lighting": "Paleta psicodélica e festiva, cores neon saturadas ao máximo",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Pastel-Neon-Flyer",
+      "game_or_franchise": "Astra Superstars",
+      "platform_and_era": "Sega Saturn / 1998",
+      "base_art_style": "High-Flying Pastel Pop Fighter",
+      "lineart": "Lineart fina e vetorial estilo cel de animação",
+      "body_morphology": "Proporções de garotos e garotas de anime com asas e montarias",
+      "palette_and_lighting": "Paleta pastel neon brilhante (rosa, ciano, amarelo), magias cintilantes",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Multiplane-Anime-Brawler",
+      "game_or_franchise": "Guardian Heroes",
+      "platform_and_era": "Sega Saturn / 1996",
+      "base_art_style": "Multi-Plane Beat 'em Up JRPG",
+      "lineart": "Lineart precisa de 1px otimizada para combates caóticos",
+      "body_morphology": "Proporções de anime Shonen de ação dos anos 90 (Han Kikuchi Style)",
+      "palette_and_lighting": "Paleta pop-fantasy vibrante, explosões e raios cobrindo a tela inteira",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Yankii-Raw-Manga",
+      "game_or_franchise": "Crows: First Discount",
+      "platform_and_era": "Sega Saturn / 1997",
+      "base_art_style": "Yankii Delinquent Street Brawler",
+      "lineart": "Lineart de 1px crua e expressiva de mangá Seinen",
+      "body_morphology": "Proporções de delinquentes juvenis (jaquetas Sukajan, topetes)",
+      "palette_and_lighting": "Paleta urbana e soturna (asfalto, tijolo, jeans) with acentos no herói",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Classic-DnD-Illustrative",
+      "game_or_franchise": "D&D: Shadow over Mystara",
+      "platform_and_era": "Arcade (CPS-2) / 1996",
+      "base_art_style": "High-Fantasy CPS-2 Brawler",
+      "lineart": "Lineart firme de 1-2px, animação rica de combate",
+      "body_morphology": "Proporções de heróis e criaturas do livro clássico de D&D (Kinu Nishimura)",
+      "palette_and_lighting": "Paleta rica em contraste para masmorras, magias de tela inteira reluzentes",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Tales-Fujishima-32Bit",
+      "game_or_franchise": "Tales of Phantasia (Remake)",
+      "platform_and_era": "PS1 / 1998",
+      "base_art_style": "Peak 32-Bit JRPG Side-Scroller",
+      "lineart": "Lineart ultra-precisa de 1px com anti-aliasing",
+      "body_morphology": "Anatomia de anime noventista por Kousuke Fujishima (Cress, Mint)",
+      "palette_and_lighting": "Paleta limpa e saturada, cel-shading de 2-3 tons, invocações reluzentes",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Parody-Neon-Pop",
+      "game_or_franchise": "Waku Waku 7",
+      "platform_and_era": "Neo Geo (MVS) / 1996",
+      "base_art_style": "Neon-Pop Parody Anime Fighter",
+      "lineart": "Lineart limpa de 1px, zoom dinâmico e animação elástica",
+      "body_morphology": "Proporções paródicas de tropos de anime (garota mágica, robô, Totoro)",
+      "palette_and_lighting": "Paleta neon-pop pastéis ultra-saturada, efeitos de energia e corações",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Kabuki-Edo-Pop",
+      "game_or_franchise": "Ganbare Goemon: Akogingu",
+      "platform_and_era": "PS1 / 1996",
+      "base_art_style": "Kabuki-Pop Edo-Period Platformer",
+      "lineart": "Lineart fina de 1px estilo cel-animation de TV",
+      "body_morphology": "Chibi/Kodomo expressivo (Goemon, Ebisumaru) e robôs Super Robot",
+      "palette_and_lighting": "Paleta pop-folclórica japonesa (vermelhão, índigo, amarelo), efeitos Kabuki",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Feudal-Ninja-Dark",
+      "game_or_franchise": "Ninja Master's",
+      "platform_and_era": "Neo Geo (MVS) / 1996",
+      "base_art_style": "Dark Feudal Ninja Fantasy",
+      "lineart": "Lineart de 1px bem definida para armas e lâminas",
+      "body_morphology": "Proporções atléticas de ninjas e samurais em bases de combate baixas",
+      "palette_and_lighting": "Paleta sóbria e terrosa com iluminação mágica demoníaca e faíscas",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Multiplane-Urban-Seinen",
+      "game_or_franchise": "Fatal Fury 3",
+      "platform_and_era": "Neo Geo (MVS) / 1995",
+      "base_art_style": "Multi-Plane Martial Arts Seinen",
+      "lineart": "Lineart precisa de 1px com caimento fluído de tecidos",
+      "body_morphology": "Proporções atléticas e longas de lutadores urbanos dos anos 90",
+      "palette_and_lighting": "Paleta urbana noturna e industrial com sombreamento em 3 tons e dithering",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Rotoscoped-Real-Martial",
+      "game_or_franchise": "Art of Fighting 3",
+      "platform_and_era": "Neo Geo (MVS) / 1996",
+      "base_art_style": "Rotoscoped Realistic Martial Arts",
+      "lineart": "Lineart cirúrgica de 1px gerada por captura de movimento",
+      "body_morphology": "Anatomia e física estritamente real de artes marciais humanas",
+      "palette_and_lighting": "Paleta fotográfica e cinematográfica, sombreamento suave de 3-4 tons",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Painterly-Baroque-Oil",
+      "game_or_franchise": "Dragon's Crown",
+      "platform_and_era": "PS3 / PS4 / Vanillaware",
+      "base_art_style": "HD Painterly Baroque Dark Fantasy",
+      "lineart": "Lineart de pincelada macia em tom de marrom/carvão (sem pixels)",
+      "body_morphology": "Anatomia barroca hiper-exagerada e escultórica estilo Frank Frazetta",
+      "palette_and_lighting": "Iluminação Chiaroscuro dramática, tons aveludados e textura de óleo",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Bishoujo-80s-Fantasy",
+      "game_or_franchise": "Valis III",
+      "platform_and_era": "Mega Drive / PC Engine",
+      "base_art_style": "80s/90s Bishoujo Dark Fantasy",
+      "lineart": "Lineart fina de 1px para ação em plataforma 16-bits",
+      "body_morphology": "Proporções de garotas mágicas em armaduras de bikini (Yuko, Cham)",
+      "palette_and_lighting": "Paleta pop-fantasy primária (azul, magenta, ouro) contra mundos sombrios",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Isometric-Storybook-Kawaii",
+      "game_or_franchise": "Märchen Maze",
+      "platform_and_era": "Arcade / PC Engine",
+      "base_art_style": "Isometric Kawaii Storybook",
+      "lineart": "Lineart limpa e minimalista de 1px sem hachuras",
+      "body_morphology": "Chibi/SD em perspectiva isométrica de 45° (Alice, coelhos, cartas)",
+      "palette_and_lighting": "Paleta pastel dreamlike (rosa, azul-piscina, amarelo-manteiga), bolhas",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "PCE-Neon-Mascot",
+      "game_or_franchise": "Bomberman '93 / '94",
+      "platform_and_era": "PC Engine / 16-Bit",
+      "base_art_style": "Top-Down Arcade Mascot Action",
+      "lineart": "Lineart limpa de 1px otimizada para o chip de cor do PC Engine",
+      "body_morphology": "Minimalista Chibi esférico (2 cabeças de altura), montarias fofas (Rui)",
+      "palette_and_lighting": "Paleta ultra-saturada e reluzente, explosões em cruz amarela e vermelha",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "SNES-Grid-SciFi",
+      "game_or_franchise": "Super Bomberman 4 & 5",
+      "platform_and_era": "SNES / 16-Bit",
+      "base_art_style": "Grid-Based Sci-Fi Fantasy Action",
+      "lineart": "Lineart de 1px com anti-aliasing manual nos cantos",
+      "body_morphology": "Chibi mais detalhado (2.5 cabeças) com armaduras temáticas e rivais",
+      "palette_and_lighting": "Paleta com gradientes sutis no SNES, texturas ricas nos blocos da grade",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Cyber-Chibi-Pop",
+      "game_or_franchise": "Air Zonk",
+      "platform_and_era": "PC Engine / 1992",
+      "base_art_style": "Cyberpunk Chibi Parody Shmup",
+      "lineart": "Lineart de 1px bem marcada para ação rápida em voo",
+      "body_morphology": "Cyber-Chibi (Zonk de óculos de sol) e fusões mecânicas bizzarras",
+      "palette_and_lighting": "Paleta neon-pop sintética (rosa, ciano, verde-limão), rajadas e tiros neon",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Early-Toriyama-Shonen",
+      "game_or_franchise": "DB: Advanced Adventure",
+      "platform_and_era": "GBA / 2004",
+      "base_art_style": "Early Toriyama Manga Martial Arts",
+      "lineart": "Lineart fina de 1px com máxima fluidez de artes marciais",
+      "body_morphology": "Proporções infantis e expressivas do Goku criança (2.5-3 cabeças)",
+      "palette_and_lighting": "Paleta vibrante inspirada nas páginas coloridas da Shōnen Jump",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Toriyama-SNES-JRPG",
+      "game_or_franchise": "Chrono Trigger",
+      "platform_and_era": "SNES / 1995",
+      "base_art_style": "Akira Toriyama Signature JRPG",
+      "lineart": "Lineart de 1px com anti-aliasing cirúrgico",
+      "body_morphology": "Proporções de mangá Shonen dos anos 90 por Akira Toriyama",
+      "palette_and_lighting": "Paletas temáticas adaptadas para cada era temporal (Pré-História, Futuro)",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "HD2D-TiltShift-Diorama",
+      "game_or_franchise": "DQ III HD-2D Remake",
+      "platform_and_era": "Multi (Unreal Engine)",
+      "base_art_style": "HD-2D Sprite Art on 3D Diorama",
+      "lineart": "Lineart ultra-limpa de 1px HD sobre iluminação 3D",
+      "body_morphology": "Proporções originais de Toriyama integradas em ambiente diorama",
+      "palette_and_lighting": "Sprites saturados sobre cenários PBR com profundidade de campo (tilt-shift)",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Crayon-Pastel-Storybook",
+      "game_or_franchise": "Yoshi's Island",
+      "platform_and_era": "SNES / 1995",
+      "base_art_style": "Crayon & Pastel Storybook Art",
+      "lineart": "Lineart grossa (2-3px) rabiscada estilo nanquim/lápis",
+      "body_morphology": "Chibi/Kawaii redondo estilo brinquedo de pano (Yoshi, Baby Mario)",
+      "palette_and_lighting": "Paleta de giz de cera e pastel com textura de papel aquarela áspero",
+      "status": "initial_reference_unvalidated"
+    },
+    {
+      "style_id": "Canonical-Clean-Mascot",
+      "game_or_franchise": "Super Mario World",
+      "platform_and_era": "SNES / 1990",
+      "base_art_style": "Clean-Pop Mascot Platformer",
+      "lineart": "Lineart limpa e icônica de 1-2px ao redor de todos os objetos",
+      "body_morphology": "Mascot Chibi canônico e geométrico (2.5-3 cabeças)",
+      "palette_and_lighting": "Paleta de cores primárias puras e saturadas, sombreamento flat cel-shading",
+      "status": "initial_reference_unvalidated"
+    }
+  ]
+}
