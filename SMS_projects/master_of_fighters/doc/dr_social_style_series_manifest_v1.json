@@ -65,9 +65,9 @@
   "review_policy": "Each generated sheet is a candidate until owner review; no sprite, animation, resource, ROM, or emulator approval is implied. Record exact style reference and SHA-256 for every output.",
   "progress": {
     "owner_approved_references": 1,
-    "candidate_pending_owner_review": 1,
+    "candidate_pending_owner_review": 2,
     "in_progress": 0,
-    "not_started": 47,
+    "not_started": 46,
     "total": 49
   },
   "styles": [
@@ -119,9 +119,19 @@
         "body_morphology": "Proporções reais e atléticas com centro de gravidade baixo",
         "palette_and_lighting": "Tons sóbrios com destaques, sombreamento técnico em 3-4 tons"
       },
-      "status": "not_started",
-      "model_sheet": null,
-      "owner_review": "not_requested"
+      "status": "candidate_pending_owner_review",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1.png",
+      "owner_review": "pending",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_art.png",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_metadata.json",
+      "prepared_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_art_prepared.png",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_03_late_snk_realism_v1.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_v1.json",
+      "palette_policy": "fixed Master of Darkness game palette; Late-SNK rendering treatment only",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_report_v1.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_quality_review_request_v1.json",
+      "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_quality_review_plan_v1.json"
     },
     {
       "sequence": 4,

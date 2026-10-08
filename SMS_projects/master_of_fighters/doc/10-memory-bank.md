@@ -8,12 +8,20 @@
 2026-10-07 — primeira folha de model sheet do Dr. Social foi aprovada pelo dono
 como documento-base da série de estilos, usando o estilo inicial `CPS2-Alpha-Cel`. A
 folha contém frente, perfil, costas, close do rosto e pose de identidade, com
-régua relativa, linha de base, fundo creme e campos de estilo diagramados. O
-desenho segue a concept v3 aprovada e o contrato de paleta; a metodologia do
-formulário segue experimental, ainda sem promoção ao skill/workflow e sem teste
-de uma imagem derivada. O catálogo inicial contém 49 estilos; a primeira referência está aprovada pelo dono.
-A segunda folha, `Dark-Gothic-Pop`, foi gerada como candidata; faltam a revisão
-do dono e a revisão independente. Restam 47 estilos sem geração.
+régua relativa, linha de base, fundo creme e campos de estilo diagramados.
+O desenho segue a concept v3 aprovada e o contrato de paleta. O formulário
+permanece experimental, sem promoção a skill/workflow ou validação de sprites
+derivados. O catálogo inicial tem 49 estilos; a primeira referência está
+aprovada pelo dono.
+A segunda folha, `Dark-Gothic-Pop`, foi gerada como candidata. A terceira,
+`Late-SNK-Realism` (`Garou: Mark of the Wolves`), também foi gerada como
+candidata; ambas aguardam revisão do dono e revisão independente. A checklist
+da terceira passou a verificação de cobertura e hashes, com 13 eixos artísticos
+ainda pendentes. O plano independente de revisão artística foi registrado em
+`dr_social_model_sheet_03_late_snk_realism_quality_review_plan_v1.json`; o parecer
+continua pendente. Restam 46 estilos sem geração. A ilustração é concept art,
+não sprite sheet nem recurso SMS. Lineage, checklist e relatório ficam em
+`data/source_art/concept_art/dr_social/` e `doc/` do projeto.
 Especificação, prompt, arte gerada e lineage ficam em
 `data/source_art/concept_art/dr_social/` e
 `doc/curation/2026-10-07_model_sheet_formulario_dr_social_cps2.json`. A revisão

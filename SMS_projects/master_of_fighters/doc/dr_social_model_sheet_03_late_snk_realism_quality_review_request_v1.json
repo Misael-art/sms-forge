@@ -1,0 +1,27 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_03_late_snk_realism_art_review_v1",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Read-only independent visual review of the Late-SNK-Realism Dr. Social concept/model sheet candidate. Assess its style adaptation, identity and palette continuity, five-view consistency, scale/baseline, face, equipment, crop integrity, and full-human design.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1.png",
+      "sha256": "eeebc1537c456c4df3e80450a625a3a36cd3d0d56c3f2ba06a7fd797941e6cbf",
+      "role": "candidate concept/model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_v1.json",
+      "sha256": "2960edc30231390b04f203acfdd1cf2a870af1c199bb4f1255be55ccb5a33ffe",
+      "role": "required per-character art review axes and authority references"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only; reviewer must be independent of producer.",
+    "Assess the image and checklist; do not claim sprite, SMS resource, ROM, emulator, or AAA approval.",
+    "Return concrete defects, risks, or non-blocking opportunities with evidence."
+  ]
+}

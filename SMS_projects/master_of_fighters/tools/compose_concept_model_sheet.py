@@ -78,7 +78,9 @@ def main() -> int:
     draw.text((2187 - badge_w // 2, 52), badge, fill=INK, font=panel_font)
 
     # Preserve the generated art intact; the standard title/footer are overlays.
-    art_x, art_y = 124, 128
+    layout = metadata.get("layout", {})
+    art_x = int(layout.get("art_x", 124))
+    art_y = int(layout.get("art_y", 128))
     if source.width > 2000 or source.height > 800:
         scale = min(2000 / source.width, 800 / source.height)
         source = source.resize((round(source.width * scale), round(source.height * scale)),
@@ -86,17 +88,21 @@ def main() -> int:
     canvas.paste(source, (art_x, art_y))
 
     # Relative ruler: 0–7.5 H, aligned to the orthographic character baseline.
-    ruler_top, ruler_bottom, ruler_x = 194, 844, 99
+    ruler_top = int(layout.get("ruler_top", 194))
+    ruler_bottom = int(layout.get("ruler_bottom", 844))
+    ruler_x = int(layout.get("ruler_x", 99))
     draw.line((ruler_x, ruler_top, ruler_x, ruler_bottom), fill=(95, 111, 123), width=3)
     for unit in range(8):
         y = round(ruler_bottom - (ruler_bottom - ruler_top) * unit / 7.5)
         tick = 15 if unit in (0, 7) else 11
         draw.line((ruler_x - tick, y, ruler_x + tick, y), fill=(95, 111, 123), width=2)
-        draw.text((33, y - 13), str(unit), fill=INK, font=panel_font)
+        draw.text((ruler_x - 66, y - 13), str(unit), fill=INK, font=panel_font)
     draw.line((ruler_x - 19, ruler_top, ruler_x + 19, ruler_top), fill=INK, width=3)
-    draw.text((24, ruler_top - 30), "7.5H", fill=INK, font=panel_font)
-    draw.line((136, ruler_bottom, 1090, ruler_bottom), fill=(192, 194, 191), width=2)
-    draw.text((137, ruler_bottom + 4), "COMMON BASELINE GUIDE",
+    draw.text((ruler_x - 75, ruler_top - 30), "7.5H", fill=INK, font=panel_font)
+    baseline_start = int(layout.get("baseline_start_x", 136))
+    baseline_end = int(layout.get("baseline_end_x", 1090))
+    draw.line((baseline_start, ruler_bottom, baseline_end, ruler_bottom), fill=(192, 194, 191), width=2)
+    draw.text((baseline_start + 1, ruler_bottom + 4), "COMMON BASELINE GUIDE",
               fill=MUTED, font=font("LiberationSans-Bold.ttf", 15))
 
     grid_x = [50, 822, 1594]
