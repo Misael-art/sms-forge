@@ -13,15 +13,16 @@ O desenho segue a concept v3 aprovada e o contrato de paleta. O formulário
 permanece experimental, sem promoção a skill/workflow ou validação de sprites
 derivados. O catálogo inicial tem 49 estilos; a primeira referência está
 aprovada pelo dono.
-A segunda folha, `Dark-Gothic-Pop`, foi gerada como candidata. A terceira,
-`Late-SNK-Realism` (`Garou: Mark of the Wolves`), também foi gerada como
-candidata; ambas aguardam revisão do dono e revisão independente. A checklist
-da terceira passou a verificação de cobertura e hashes, com 13 eixos artísticos
-ainda pendentes. O plano independente de revisão artística foi registrado em
-`dr_social_model_sheet_03_late_snk_realism_quality_review_plan_v1.json`; o parecer
-continua pendente. Restam 46 estilos sem geração. A ilustração é concept art,
-não sprite sheet nem recurso SMS. Lineage, checklist e relatório ficam em
-`data/source_art/concept_art/dr_social/` e `doc/` do projeto.
+A segunda folha, `Dark-Gothic-Pop`, a terceira, `Late-SNK-Realism`, e a quarta,
+`CPS3-Fluid-Mastery` (`Street Fighter III: 3rd Strike`), estão registradas como
+candidatas; aguardam revisão do dono e revisão independente. As folhas 02–04
+agora exibem os cinco títulos de vista pelo compositor e usam amostras da paleta
+oficial. As checklists 02–04 passaram a verificação de cobertura e hashes; os 13
+eixos artísticos de cada uma continuam pendentes. Os planos de revisão independente
+foram registrados, sem parecer atribuído. Restam 45 estilos sem geração. Estas
+ilustrações são concept sheets, não sprite sheets nem recursos SMS. Lineages,
+checklists, pedidos e planos estão nos diretórios `data/source_art/concept_art/dr_social/`
+e `doc/` do projeto.
 Especificação, prompt, arte gerada e lineage ficam em
 `data/source_art/concept_art/dr_social/` e
 `doc/curation/2026-10-07_model_sheet_formulario_dr_social_cps2.json`. A revisão

@@ -1,0 +1,27 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_02_dark_gothic_pop_art_review_v1",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Read-only independent visual review of the candidate model sheet. Review style application, identity/palette continuity, five-view consistency, scale/baseline, face, equipment, and crop integrity.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1.png",
+      "sha256": "4302834bbd99511201ce5e0ab4baece8876584c333162c681caae539f551b276",
+      "role": "candidate concept/model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_v1.json",
+      "sha256": "168188616783cc77a4f023f30ae34f292c46290b44c0cbf5f9ba25c1bbcfcad3",
+      "role": "per-character art review checklist and authority references"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only; reviewer must be independent of producer.",
+    "Do not claim sprite, SMS resource, ROM, emulator, or AAA approval.",
+    "Return concrete defects, risks, or non-blocking opportunities with evidence."
+  ]
+}

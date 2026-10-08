@@ -32,8 +32,23 @@
     },
     {
       "title": "Palette / Effects",
-      "body": "Blue/cyan · teal · white · burgundy · gray · brown\nViolet effect only on occult steel boomerang",
-      "chips": ["#000055", "#FFAAAA", "#AA5555", "#55AAFF", "#00AAAA", "#005555", "#FFFFFF", "#AAAAAA", "#555555", "#550000", "#AA0055", "#AA00FF", "#FFFF00"]
+      "body": "Fixed game palette: blue/cyan, teal, white, gray, burgundy, brown\nRed/brass accents; violet only on occult steel boomerang\nConcept illustration; colors not quantized",
+      "chips": [
+        "#000055",
+        "#FFAAAA",
+        "#AA5555",
+        "#55AAFF",
+        "#00AAAA",
+        "#005555",
+        "#FFFFFF",
+        "#AAAAAA",
+        "#555555",
+        "#550000",
+        "#AA0055",
+        "#FF0000",
+        "#AA00FF",
+        "#FFFF00"
+      ]
     },
     {
       "title": "Background / Alignment",
@@ -43,5 +58,30 @@
       "title": "Fixed Character Details",
       "body": "Gray hair · round brass glasses · cane · rapier\nSteel boomerang · fully human; no monster traits"
     }
-  ]
+  ],
+  "layout": {
+    "view_labels": [
+      {
+        "text": "FRONT",
+        "center_x": 360
+      },
+      {
+        "text": "PROFILE",
+        "center_x": 660
+      },
+      {
+        "text": "BACK",
+        "center_x": 968
+      },
+      {
+        "text": "FACE DETAIL",
+        "center_x": 1260
+      },
+      {
+        "text": "SIGNATURE POSE",
+        "center_x": 1745
+      }
+    ],
+    "view_label_y": 873
+  }
 }

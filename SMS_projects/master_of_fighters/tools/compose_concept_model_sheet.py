@@ -87,6 +87,20 @@ def main() -> int:
                                Image.Resampling.LANCZOS)
     canvas.paste(source, (art_x, art_y))
 
+    # Typeset the five view labels consistently instead of relying on generated
+    # lettering. Centers are measured on the composed page for each illustration.
+    view_labels = layout.get("view_labels", [])
+    view_label_y = int(layout.get("view_label_y", 0))
+    if view_labels:
+        view_label_font = font("LiberationSans-Bold.ttf", 16)
+        for label in view_labels:
+            text = str(label["text"])
+            center_x = int(label["center_x"])
+            text_box = draw.textbbox((0, 0), text, font=view_label_font)
+            text_width = text_box[2] - text_box[0]
+            draw.text((center_x - text_width // 2, view_label_y), text,
+                      fill=INK, font=view_label_font)
+
     # Relative ruler: 0–7.5 H, aligned to the orthographic character baseline.
     ruler_top = int(layout.get("ruler_top", 194))
     ruler_bottom = int(layout.get("ruler_bottom", 844))

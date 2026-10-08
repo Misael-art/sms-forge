@@ -1,0 +1,107 @@
+{
+  "schema": "asset_lineage_record_model_sheet_v1",
+  "asset_id": "dr_social_model_sheet_04_cps3_fluid_mastery_v1",
+  "created_date": "2026-10-07",
+  "status": "source_candidate",
+  "owner_review": "pending",
+  "style_id": "CPS3-Fluid-Mastery",
+  "style_reference": {
+    "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "catalog_sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "game": "Street Fighter III: 3rd Strike",
+    "platform_era": "Arcade (CPS-3) / 1999",
+    "base_art_style": "Ápice da Animação 2D CPS-3",
+    "lineart": "Lineart cirúrgica de 1px, extrema fluidez quadro a quadro",
+    "body_morphology": "Anatomia realista de lutador de artes marciais com peso real",
+    "palette_and_lighting": "Paleta madura, cel-shading refinado, efeitos de iluminação em tempo real",
+    "descriptor_validation_status": "initial catalog descriptor; not independently validated"
+  },
+  "identity_and_palette_authorities": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "role": "owner-approved Dr. Social identity, face, costume, proportions, and equipment"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "project palette-role authority"
+    }
+  ],
+  "generation": {
+    "tool": "built-in image_gen",
+    "prompt_file": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_prompt.txt",
+    "prompt_sha256": "73070983464dc29f9878ca9f8327b2e829cead934f5e141adb3fe4ee375c09bd",
+    "input_images": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+        "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+        "role": "owner-approved model-sheet form, five-view arrangement, and relative scale"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+        "role": "identity, face, palette, costume, and equipment authority"
+      }
+    ],
+    "generated_art": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png",
+      "sha256": "f96e0fd84ba84b45f5e658f4874f598923b04fe57f6ea04f363da061ce49b202",
+      "dimensions_px": [
+        2066,
+        761
+      ]
+    },
+    "metadata_file": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_metadata.json",
+      "sha256": "2f726573ec3e1c90474518c73f696d91647856c6465647eb857ead3f364ddbd0"
+    },
+    "layout_tool": {
+      "path": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+      "sha256": "007b4d3d96fc2b153311e5c42a13a04c6a5ea61edbcd1618f13f4420773fad4d"
+    },
+    "final_sheet": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1.png",
+      "sha256": "d3271701674692024fe923706df1c3f90856ba2a5bedd25edefe900a7e650316",
+      "dimensions_px": [
+        2400,
+        1440
+      ]
+    },
+    "layout_composition": "The generated illustration is uniformly resized to fit the art area. The shared compositor adds five view headings, title, relative ruler, common baseline, style metadata cards, exact project palette swatches, and candidate badge; it does not redraw or recolor the character."
+  },
+  "required_views": [
+    "front full body",
+    "side-profile full body",
+    "back full body",
+    "face close-up",
+    "signature action pose"
+  ],
+  "design_invariants": [
+    "Tall, slim, long-limbed adult ectomorph; preserve approved age and face.",
+    "Gray swept-back hair and round brass-rimmed spectacles.",
+    "Keep blue/cyan suit, teal shadows, white shirt, burgundy cravat, brown boots, and brass details in their established palette roles.",
+    "Preserve cane, rapier, and occult steel boomerang; violet effect only on the boomerang.",
+    "Remain fully human; no monster traits or unapproved costume changes."
+  ],
+  "review_notes": {
+    "visual_inspection": "Five requested views and five composed view headings are present on a clean cream sheet. The three orthographic views share approximate scale and baseline; the 0–7.5H ruler and metadata cards are present. The style treatment and anatomy remain review candidates, not producer-approved art.",
+    "pending": "Owner review of CPS3-Fluid-Mastery adaptation and independent review of all required art axes.",
+    "not_approved_by_this_record": "sprite sheet, animation, SMS palette quantization, resource conversion, ROM integration, or in-emulator behavior"
+  },
+  "review_checklist": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_review_v1.json",
+    "sha256": "3d2c3bf973c418c49761e5d07f1b421d88d303f6a1ae587382dfee1948714b10",
+    "status": "pending owner and independent review",
+    "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_review_report_v1.json",
+    "report_sha256": "846f535ad73bab7291abd03a9152db96409d8a263ed990cdff4870d2049e246c"
+  },
+  "independent_quality_review": {
+    "status": "plan_created; reviewer_assignment_and_report_pending",
+    "request_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_quality_review_request_v1.json",
+    "request_sha256": "d97d7809e62e6bb4e24ccef52a0badb53e022a2121a64d94782d538856d2d823",
+    "plan_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_quality_review_plan_v1.json",
+    "plan_sha256": "519762812233601e2e7958a44e3dbed9a45cea22e0cbe06c82d07a7a503b845b"
+  },
+  "claim_ceiling": "Concept/model sheet candidate only; user approval and pixel/runtime approval are not recorded."
+}
