@@ -1,0 +1,180 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "mof_roster_post_treatment_sprite_polish_v1",
+  "producer": "Codex",
+  "asset": {
+    "path": "data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v2.png",
+    "sha256": "3a444c91dcba39b72eec0a8c9affb68c0239285cc3b06f1b0669b791c112b236",
+    "kind": "pixel_sprite_roster_board"
+  },
+  "source_evidence": {
+    "path": "data/source_art/roster_harmony_review/harmony_sprites_owner_feedback_20261005.json",
+    "sha256": "a7aed98a65c81a3a559bdea37593ef47c2ab7ca09424445b8a77c38607177e55"
+  },
+  "required_characters": [
+    "golden_axe_warrior",
+    "hayato",
+    "joe_musashi",
+    "dr_social",
+    "alis_landale",
+    "landau",
+    "jj"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "roster_harmony"
+  ],
+  "characters": [
+    {
+      "id": "golden_axe_warrior",
+      "references": [
+        {"path": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_preview.png", "sha256": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91"},
+        {"path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_sms_96px_harmony_candidate_v2.png", "sha256": "f9dab0a54c0821d7e7c5c810013d822854ed9cb1626b1b617347c65fc6fceeb7"}
+      ],
+      "observed_defects": ["capa azul no ombro com contorno descontínuo", "pixels soltos na base dos pés", "capa achatada", "brilho do escudo plano"],
+      "revision_notes": ["O dono relata correção dos defeitos anatômicos críticos anteriores; esta revisão registra apenas refinamento e não promove a folha."],
+      "review_axes": {
+        "pixel_clusters": {"status": "pass", "note": "O relatório atual não aponta dispersão geral de clusters no guerreiro."},
+        "face_detail_readability": {"status": "pass", "note": "O dono não relata problema facial remanescente nesta revisão."},
+        "outline_and_cutout": {"status": "fail", "note": "Corrigir a descontinuidade na borda superior da capa e os pixels escuros soltos nos pés."},
+        "material_shading": {"status": "fail", "note": "Dar volume à capa azul e ao metal do escudo com blocos de base, sombra e luz, sem dithering."},
+        "hand_weapon_attachment": {"status": "pass", "note": "O dono não aponta falha remanescente de mão ou empunhadura nesta revisão."},
+        "equipment_geometry": {"status": "pass", "note": "O comentário atual trata do volume do material do escudo, não de sua fixação."},
+        "frame_pose_integrity": {"status": "pending", "note": "A prancha de comparação contém frame 00; confirmar as doze poses e sua semântica na folha completa."},
+        "native_size_readability": {"status": "pending", "note": "Confirmar a versão exata pós-tratamento e revisar a folha em 1× e nearest-neighbor 4×."},
+        "roster_harmony": {"status": "pending", "note": "Reavaliar o acabamento após os retoques locais e comparar novamente os sete personagens."}
+      }
+    },
+    {
+      "id": "hayato",
+      "references": [
+        {"path": "data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png", "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"},
+        {"path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png", "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce"}
+      ],
+      "observed_defects": ["olho/rosto ainda pouco claro", "dedo faltando ou pouco legível na mão", "contorno dos pés"],
+      "revision_notes": ["Hayato segue a referência de clusters; a correção de mão e rosto deve preservar o figurino e a paleta aprovada."],
+      "review_axes": {
+        "pixel_clusters": {"status": "pass", "note": "O acabamento geral foi descrito como muito bom; não introduzir textura ou dithering."},
+        "face_detail_readability": {"status": "fail", "note": "Refinar o olho em poucos pixels limpos, sem brilho branco desproporcional."},
+        "outline_and_cutout": {"status": "fail", "note": "Revisar o contorno dos pés na folha inteira, mantendo borda dura e sem pixels órfãos."},
+        "material_shading": {"status": "pass", "note": "Não foi apontada falha de material; manter os blocos atuais da roupa."},
+        "hand_weapon_attachment": {"status": "fail", "note": "A mão precisa mostrar os dedos de forma legível e manter o polegar conectado ao cabo."},
+        "equipment_geometry": {"status": "pass", "note": "Nenhuma falha geométrica de equipamento foi citada nesta revisão."},
+        "frame_pose_integrity": {"status": "pending", "note": "Confirmar as doze poses após qualquer ajuste local."},
+        "native_size_readability": {"status": "pending", "note": "Revisar a folha pós-tratamento em 1× e nearest-neighbor 4×."},
+        "roster_harmony": {"status": "pass", "note": "Continua a régua aprovada de acabamento e economia de clusters."}
+      }
+    },
+    {
+      "id": "joe_musashi",
+      "references": [
+        {"path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png", "sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1"},
+        {"path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png", "sha256": "f04da4b2c4930340315b19f5061cf7dc2dc4b6f86567cebfe6bc366a0019bd8d"}
+      ],
+      "observed_defects": ["sombra do gi branco suavizada/pintada", "tons cinza pouco definidos em blocos", "ruído visual no contorno observado pelo dono na prancha comparativa"],
+      "revision_notes": ["A morfologia esguia permanece régua do roster; ajustar o acabamento sem engrossar membros nem mudar o desenho.", "A prancha v2 corrigiu apenas a escala de apresentação; o contorno da arte-fonte continua pendente."],
+      "review_axes": {
+        "pixel_clusters": {"status": "fail", "note": "Substituir transições suaves por clusters cinza definidos e coerentes com a grade de pixels."},
+        "face_detail_readability": {"status": "pass", "note": "Nenhuma falha facial foi destacada no relatório atual."},
+        "outline_and_cutout": {"status": "fail", "note": "O dono aponta ruído visível no contorno na prancha; a v2 corrige apenas a escala de exibição. Refinar a arte-fonte e reavaliar em 1×/4×."},
+        "material_shading": {"status": "fail", "note": "O tecido branco precisa de base, sombra e luz em blocos de cel shading; sem blur ou dithering."},
+        "hand_weapon_attachment": {"status": "pass", "note": "Nenhum encaixe de mão ou arma foi indicado como pendência atual."},
+        "equipment_geometry": {"status": "pass", "note": "Nenhuma pendência atual de equipamento foi indicada."},
+        "frame_pose_integrity": {"status": "pending", "note": "Verificar os doze quadros e suas diferenças de pose após o refinamento de estilo."},
+        "native_size_readability": {"status": "pending", "note": "Confirmar a versão exata pós-tratamento e revisar cada quadro em 1×/4×."},
+        "roster_harmony": {"status": "fail", "note": "O acabamento suavizado destoa do padrão em clusters rígidos do elenco."}
+      }
+    },
+    {
+      "id": "dr_social",
+      "references": [
+        {"path": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png", "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4"},
+        {"path": "data/source_art/sprite_studies/dr_social/dr_social_idle_12f_sms_96px_harmony_candidate_v2.png", "sha256": "7271cc3bf922089fb217ee3ff1bc76438c4d07592973f0266af0b48fd4aeec05"}
+      ],
+      "observed_defects": ["olho visível borrado", "barra do casaco irregular", "mão colada ao cabo da espada-cana"],
+      "revision_notes": ["Manter a aparência inteiramente humana, paleta aprovada, roupa verde/teal e biotipo esguio."],
+      "review_axes": {
+        "pixel_clusters": {"status": "pass", "note": "O relatório não cita ruído cromático geral; preservar os grupos de cor aprovados."},
+        "face_detail_readability": {"status": "fail", "note": "O olho visível ainda precisa de um cluster curto, nítido e legível."},
+        "outline_and_cutout": {"status": "fail", "note": "Regularizar a linha inferior do casaco sem antialiasing ou pixels órfãos."},
+        "material_shading": {"status": "pass", "note": "Sem falha geral de sombra/material apontada nesta revisão."},
+        "hand_weapon_attachment": {"status": "fail", "note": "A mão deve envolver o cabo; alinhar cabo, guarda e lâmina sem cruzar pé ou baseline."},
+        "equipment_geometry": {"status": "fail", "note": "Confirmar continuidade física da espada-cana a partir da empunhadura."},
+        "frame_pose_integrity": {"status": "pending", "note": "Revisar todos os estados idle; o quadro de comparação isolado não prova a animação."},
+        "native_size_readability": {"status": "pending", "note": "Conferir olho, empunhadura e barra na folha exata em escala nativa."},
+        "roster_harmony": {"status": "pending", "note": "Reavaliar após corrigir contorno e encaixe na prancha completa."}
+      }
+    },
+    {
+      "id": "alis_landale",
+      "references": [
+        {"path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png", "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95"},
+        {"path": "data/source_art/sprite_studies/alis/alis_idle_12f_sms_96px_harmony_candidate_v6_scale75_index8_v1.png", "sha256": "999d0e5de468a5663977854ef1c70bb90e305da37568b89bfcc812849399582b"}
+      ],
+      "observed_defects": ["pernas e roupa rosa suavizadas", "brilho do escudo plano", "dedos não definem claramente a empunhadura", "pixels soltos próximos a pés"],
+      "revision_notes": ["Preservar a escala e o biotipo já corrigidos; refazer somente clusters de material e pontos de contato indicados."],
+      "review_axes": {
+        "pixel_clusters": {"status": "fail", "note": "Recuperar blocos definidos nas pernas e sombras rosas; não aplicar blur nem dithering."},
+        "face_detail_readability": {"status": "pending", "note": "Nenhum defeito facial foi descrito nesta revisão; conferir em 1× antes de fechar."},
+        "outline_and_cutout": {"status": "fail", "note": "Revisar pixels soltos e contorno dos pés no quadro e na folha completa."},
+        "material_shading": {"status": "fail", "note": "Dar volume ao escudo metálico com blocos de cor da paleta, sem brilho plano ou dithering."},
+        "hand_weapon_attachment": {"status": "fail", "note": "Definir os dedos envolvendo o cabo da espada sem alterar a mão de apoio."},
+        "equipment_geometry": {"status": "pass", "note": "A pendência do escudo citada nesta mensagem é de volume/material, não de fixação."},
+        "frame_pose_integrity": {"status": "pending", "note": "Confirmar doze quadros distintos e seus estados semânticos."},
+        "native_size_readability": {"status": "pending", "note": "A imagem pós-tratamento não foi anexada; confirmar arquivo e revisar a 1×/4×."},
+        "roster_harmony": {"status": "fail", "note": "O sombreamento suavizado destoa da economia de clusters do padrão do elenco."}
+      }
+    },
+    {
+      "id": "landau",
+      "references": [
+        {"path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png", "sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8"},
+        {"path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_harmony_candidate_v3_scale75_index8_v1.png", "sha256": "d54b4b17686201650900150515e87dc785abe5c9603920b0317f0039c165a96f"}
+      ],
+      "observed_defects": ["olhos e rosto pouco legíveis", "pixels/contorno irregulares nos pés", "corda do arco pouco visível", "arco pequeno atrás da cabeça"],
+      "revision_notes": ["Preservar o design jovem aprovado, a espada, o arco e a escala do personagem."],
+      "review_axes": {
+        "pixel_clusters": {"status": "pass", "note": "O acabamento geral foi descrito como muito bom; manter clusters atuais fora das correções apontadas."},
+        "face_detail_readability": {"status": "fail", "note": "Clarificar olho/pupila com poucos pixels limpos, sem borrão."},
+        "outline_and_cutout": {"status": "fail", "note": "Limpar pixels escuros e regularizar contornos ao redor dos pés."},
+        "material_shading": {"status": "pass", "note": "Nenhuma falha de material foi descrita nesta revisão."},
+        "hand_weapon_attachment": {"status": "pass", "note": "O encaixe da espada não foi apontado como pendência no pós-tratamento."},
+        "equipment_geometry": {"status": "fail", "note": "Aumentar/definir o arco e explicitar a corda atrás da cabeça, mantendo separada a aljava."},
+        "frame_pose_integrity": {"status": "pending", "note": "Validar todos os quadros da folha depois de ajustar arco, corda e rosto."},
+        "native_size_readability": {"status": "pending", "note": "Conferir o rosto, a corda e os pés na escala 1×/4× da folha exata."},
+        "roster_harmony": {"status": "pending", "note": "Recomparar linha, clusters e proporção na prancha após o retoque."}
+      }
+    },
+    {
+      "id": "jj",
+      "references": [
+        {"path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png", "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a"},
+        {"path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_harmony_candidate_v6_scale75_index8_v1.png", "sha256": "8287607b30265ffab0a40e2a4546ccd3ccd0747f9cd1b0cc9e37717d8dd34fe4"},
+        {"path": "data/source_art/concept_art/jj_zillion_ii/jj_reference_notes_v2.md", "sha256": "87ce123fd7977679d4e1c27ee013cfd0e055d795a5d7d4d700c1c3f251946657"}
+      ],
+      "observed_defects": ["pequenos ajustes de outline nos pés", "pistola não corresponde à arma Zillion do jogo", "fisionomia se afastou do J.J. original"],
+      "revision_notes": ["O jogo Zillion II SMS é a autoridade para identidade, paleta e arma; o conceito aprovado guia apenas a construção visual previamente aceita."],
+      "review_axes": {
+        "pixel_clusters": {"status": "pass", "note": "O dono classifica o resultado geral como excelente; manter a paleta e os clusters aprovados."},
+        "face_detail_readability": {"status": "fail", "note": "Recentrar a fisionomia no sprite original J.J - Standing de Zillion II SMS."},
+        "outline_and_cutout": {"status": "fail", "note": "Remover irregularidades de contorno nos pés sem perder detalhes da bota."},
+        "material_shading": {"status": "pass", "note": "Nenhuma falha de material foi apontada nesta revisão."},
+        "hand_weapon_attachment": {"status": "pass", "note": "A falha atual é a identidade/silhueta da arma, não o contato da mão."},
+        "equipment_geometry": {"status": "fail", "note": "Redesenhar a leitura da pistola com base na referência canônica do jogo, mantendo a empunhadura."},
+        "frame_pose_integrity": {"status": "pending", "note": "Conferir os doze quadros e preservar o gesto idle da folha."},
+        "native_size_readability": {"status": "pending", "note": "Validar rosto e arma em 1× e nearest-neighbor 4× contra a fonte SMS."},
+        "roster_harmony": {"status": "pass", "note": "O acabamento geral do personagem foi descrito como excelente; permanecem identidade facial e arma."}
+      }
+    }
+  ],
+  "independent_review": {"status": "pending_assignment"},
+  "owner_approval": {"approved": false},
+  "decision": "revision_required; source sheets remain candidates and cannot be promoted"
+}
