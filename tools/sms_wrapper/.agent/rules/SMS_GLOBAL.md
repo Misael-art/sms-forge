@@ -47,6 +47,10 @@ bloqueios). Handoff nunca substitui memory bank nem evidência.
   O contador de linha dispara na linha N **depois** de recarregar no VBlank:
   armar 47 querendo a linha 64 desloca todas as bandas 16 linhas. Banda
   vazia não prova a quebra — ponha forma reconhecível nela (L046).
+- Base da name table é o registrador 2; a SMSlib inicializa com `0xFF`.
+  No SMS1, reg2 com bit0=0 espelha a tilemap (bit10 do endereço forçado a 0)
+  — invisível no emulador SMS2/PC. Lei, medição e exceção: §121 (L130).
+  Gate: `audit_tilemap_mirror.py`.
 
 ## 7. Lei de sprites
 - SAT: máx **64 sprites**; terminador Y=0xD0 corta o processamento
@@ -2182,6 +2186,12 @@ Consequências:
   reprova;
 - manifesto em 224/240 com `sat_terminated: true` reprova.
 
+Adenda aplicada 2026-10-13 (aprovada junto ao item A1; fonte vendorizada, não
+esteira): `SMS_copySpritestoSAT` **escreve 0xD0 sozinho** — quando há menos de
+64 sprites ativos, o primeiro slot livre recebe Y=`0xD0` (`cp #64 / jr z / ld
+a,#0xD0 / out (c),a`), e quando não há sprite nenhum o slot 0 recebe o mesmo
+`0xD0` (ramo `_no_sprites`). Lastro: `sdk/devkitSMS-upstream/SMSlib/src/SMSlib_sprite.c:184,191-195,209-211`; o X dessa entrada não é reescrito — é resíduo do quadro anterior. Em 192 linhas isso é o terminador inofensivo; em **224/240 a entrada de padding é um sprite comum com Y=0xD0**, contável no buffer de parsing (§119) e desenhado na scanline ~209 — um fantasma sem autor. Consequência operacional: em 224/240 o truncamento/`sat_terminated` não é apenas inútil, é **automático contra você** — o padding vem da própria biblioteca, e o manifesto precisa declarar o que a ROM faz com essa entrada (ou justificar a linha 209 vazia), não assumir SAT "cortada".
+
 Gate: `audit_sprite_line_sim.py` (`--self-check` cobre 0xD0 reprovado em 192,
 aprovado em 224, truncamento declarado em 224 e `screen_h` inválido).
 
@@ -2259,3 +2269,48 @@ não vazios. O gate lexical não autentica aprovação nem julga a semântica do
 escopo; `reconcile_claims.py` histórico também não é checklist dequalidade
 comercial. Nenhum PASS desses gates substitui evidência fresca, review nativo
 e todos os eixos da entrega.
+
+## 121. Espelhamento de tilemap no SMS1: reg2 com bit0=0 força bit10 do endereço VRAM a 0 (L130)
+
+No VDP do SMS1, se o bit 0 do registrador 2 (base da name table) for 0, o bit
+10 do endereço VRAM usado na consulta da name table é forçado a 0. As 12 linhas
+inferiores da tela virtual passam a referenciar as mesmas entradas das 12
+primeiras; com Y-scroll zero em modo 192, as 8 primeiras linhas preenchem o
+terço de cima **e** o de baixo. Fonte: corpus hasheado
+`out/smspower_corpus_2026-10-12/TilemapMirroring.txt`
+("If bit 0 of VDP register 2 is 0, then bit 10 of the VRAM address for name
+table lookups will be forced to 0"), e o veredito do próprio corpus:
+"a common bug in homebrew software, however, which may assume the presence of
+an SMS2 VDP. This behavior also does not function as intended on the
+Genesis/Mega Drive VDP."
+
+Consequências:
+
+- o defeito é **invisível no emulador-alvo SMS2/PC**: o tilemap espelhado só
+  aparece em SMS1; em Genesis não funciona como pretendido. "Rodou no
+  emulador" não absolve a escrita;
+- a inicialização padrão da SMSlib escreve reg2 = `0xFF` (bit0=1;
+  `VDPReg_init[]` em `sdk/devkitSMS-upstream/SMSlib/src/SMSlib.c`, com o
+  comentário "reg2: PNT is at address 0x3800"). O caminho padrão é seguro; a
+  classe de defeito são escritas custom ao registrador 2 com valor par;
+- `SMS_VDPturnOnFeature/turnOffFeature` não tocam o reg2 (os defines do header
+  mapeiam registradores 0 e 1) — a escrita custom exige motivo explícito no
+  código do projeto;
+- exceção deliberada existe e é única no corpus: "Only one game relies on this
+  behaviour: the Japanese version of Ys." Imitar *Ys* JP exige
+  `--allow-sms1-mirror "<motivo>"` com o motivo registrado no memory bank/GDD;
+  o gate então emite `excecao_declarada`, nunca `aprovado` silencioso.
+
+Gate: `audit_tilemap_mirror.py` em três modos — `--source` (escritas literais
+ao reg2: `outp(0xBF, vv); outp(0xBF, 0x82)`; `VDPControlPort`;
+`SMS_write_to_VDPRegister(2, vv)`; valor não-literal reportado como não
+provado, nunca aprovado), `--rom` (assinatura Z80 `3E vv D3 BF 3E 82 D3 BF`;
+ausência é `nao_provado_estatico` porque o init da SMSlib usa tabela) e
+`--snapshots` (modo autoritativo: `vdp_regs.bin` de 11 bytes produzido por
+`blastem_sms.py`, byte[2] com bit0=1). `--self-check` cobre os três modos, a
+exceção declarada, dump truncado e a recusa de variável como literal.
+
+Limites: a lei é Tier 1 do corpus, não medida em console — o efeito em
+silício SMS1 fica `hardware_pass` pendente e pertence à matriz de
+compatibilidade (item A5 do dossiê, não aplicado). A varredura estática só
+decide literais; runtime real exige a sessão `blastem_sms.py` com dumps.

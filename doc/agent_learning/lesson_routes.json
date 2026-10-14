@@ -1,10 +1,10 @@
 {
   "schema": "sms_lesson_routes_v1",
   "status": "canonical_application_routes",
-  "lesson_count": 113,
+  "lesson_count": 114,
   "source_coverage_sha256": "f086039f2d42542470ad5747b1693767e8dcd0ffedfab0e737f8b66d0b528755",
   "registry_source": "doc/curation/id_registry.json",
-  "registry_issued_through": "L129",
+  "registry_issued_through": "L130",
   "excluded_holes": [
     "L012",
     "L020",
@@ -4545,6 +4545,22 @@
           ],
           "exists": true,
           "ambiguous": false
+        }
+      ]
+    },
+    {
+      "lesson_id": "L130",
+      "sources": [
+        "doc/curation/2026-10-13_l130_tilemap_mirroring_reg2_bit0.json"
+      ],
+      "rule_section": "SMS_GLOBAL §6 (bullet), §121",
+      "current_rule_status": "fechada_com_ferramenta",
+      "application_entrypoints": [
+        {
+          "path": "tools/sms_wrapper/.agent/skills/sms-tile-occupancy.md",
+          "sha256": "a59ce116d1d247f7c3aec8ba327601fbcc461d81c63a535e7b2b8690f4390e3c",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "domain_review; tilemap/name-table skill is where reg2 base and mirroring doctrine must be teachable"
         }
       ]
     }

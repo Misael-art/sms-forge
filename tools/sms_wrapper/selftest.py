@@ -137,6 +137,7 @@ def main():
               "audit_hardware_constants.py",
               "audit_debug_markers.py",
               "audit_tilemap_bounds.py",
+              "audit_tilemap_mirror.py",
               "measure_frame_advance.py",
               "measure_runtime_probe.py",
               "audit_causal_persistence.py",

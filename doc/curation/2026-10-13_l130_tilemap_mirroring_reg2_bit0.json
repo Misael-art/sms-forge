@@ -1,0 +1,34 @@
+{
+  "curation_id": "2026-10-13_l130_tilemap_mirroring_reg2_bit0",
+  "date": "2026-10-13",
+  "title": "Espelhamento de tilemap no SMS1: reg2 com bit0=0 força bit10 do endereço VRAM a 0",
+  "kind": "curation",
+  "scope": "Hardware SMS (VDP modo 4): lei do VDP/tilemap BG §6 e skill sms-tile-occupancy. Item A4 do dossiê out/curation_proposals_smspower_2026-10-12.md.",
+  "authorization": "O proprietário aprovou o item A4 em 2026-10-13 com três emendas registradas (relayer de 2026-10-13; reforçado por 'aplicar a proposta A4 agora' na mesma data): (a) corrigir 'reg5 (NT base)' do dossiê para registrador 2; (b) medir via varredura estática de escritas ao reg2 mais dumps vdp_regs de blastem_sms.py, não 'reg5 em runtime probe'; (c) usar como autoridade citável a fonte vendorizada sdk/devkitSMS-upstream/SMSlib/src/. Entrada como §121/L130 porque §120 foi consumida pela trilha de coesão.",
+  "lessons": [
+    {
+      "id": "L130",
+      "status": "documentado_com_gate_novo; sem medição em console SMS1; hardware_pass pendente para a matriz A5",
+      "lesson": "No VDP do SMS1, bit 0 do registrador 2 em 0 força o bit 10 do endereço VRAM da name table a 0: as 12 linhas inferiores da tela virtual referenciam as mesmas entradas das 12 primeiras, e com Y-scroll zero em modo 192 as 8 primeiras linhas preenchem o terço de cima e o de baixo. O defeito é invisível no emulador-alvo SMS2/PC e não funciona como pretendido no Genesis. A SMSlib inicializa reg2 = 0xFF (bit0=1), então só escritas custom paramétricas criam a classe de defeito. Exceção deliberada única no corpus: imitar o Ys japonês, declarada com motivo.",
+      "root_cause": "A doutrina (§6) tratava a base da name table como valor fixo da SMSlib sem registrar o comportamento divergente do SMS1, e nenhum gate lia o registrador 2. Projetos herdariam 'roda no emulador' como absolução mesmo com reg2 par, que só quebra em hardware SMS1.",
+      "evidence": {
+        "corpus_page": {
+          "path": "out/smspower_corpus_2026-10-12/TilemapMirroring.txt",
+          "sha256": "a092578b239e55761eacfbc554294672c8e7519791b89dd94ea27d9933949c8e",
+          "url": "https://www.smspower.org/Development/TilemapMirroring",
+          "quote": "If bit 0 of VDP register 2 is 0 , then bit 10 of the VRAM address for name table lookups will be forced to 0 . This will cause the lower 12 rows of the virtual screen to reference the same name table entries as the first 12 rows; if the Y scroll is zero, in a normal 192-line mode, this will cause the first 8 rows to fill both the upper and lower third of the screen.",
+          "quote_2": "Only one game relies on this behaviour: the Japanese version of Ys . It is a common bug in homebrew software, however, which may assume the presence of an SMS2 VDP. This behavior also does not function as intended on the Genesis/Mega Drive VDP."
+        },
+        "corpus_manifest": "out/smspower_corpus_2026-10-12/MANIFEST.sha256 (linha 57 conferida em 2026-10-13)",
+        "vendored_source": "sdk/devkitSMS-upstream/SMSlib/src/SMSlib.c:31 — 0xFF, /* reg2: PNT is at address 0x3800 */ na tabela VDPReg_init[], escrita por SMS_init via SMS_write_to_VDPRegister (linhas 130-131); VDPControlPort=0xBF em SMSlib.asm:61-62",
+        "header": "sdk/devkitSMS/SMSlib/SMSlib.h:110 (SMS_PNTAddress 0x7800) e defines VDPFEATURE_* (linhas 22-44) que mapeiam apenas registradores 0 e 1 — turnOn/turnOffFeature não tocam reg2",
+        "gate_cases": "audit_tilemap_mirror.py --self-check: 12 casos verdes (source literal reprovado/aprovado, variável não provada, rom assinatura 3E vv D3 BF 3E 82 D3 BF reprovada/aprovada/ausente, snapshot 0xFE reprovado, 0xFF aprovado, excecao_declarada com motivo, dump truncado, diretório sem dumps)"
+      },
+      "rule_section": "SMS_GLOBAL §121 (bullet em §6)",
+      "tool_that_measures": "audit_tilemap_mirror.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-tile-occupancy.md",
+      "measurement_limits": "Lei Tier 1 do corpus, não medida em console; o efeito em silício SMS1 fica hardware_pass pendente e pertence à matriz de compatibilidade (item A5, não aplicado). A varredura --source só decide literais; --rom só decide a assinatura imediata (o init SMSlib usa tabela, portanto ausência é nao_provado_estatico, nunca aprovado). O modo autoritativo é --snapshots (vdp_regs.bin de blastem_sms.py), ainda não executado contra ROM de projeto real neste repo."
+    }
+  ],
+  "dedup_key": "l130_tilemap_mirroring_sms1_reg2_bit0_forced_bit10_20261013"
+}
