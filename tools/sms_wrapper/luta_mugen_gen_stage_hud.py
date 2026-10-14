@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Arena técnica e HUD do Lote C.
+"""Gera o atlas de HUD e a paleta usados pelo piloto integrado.
 
-A fonte visual é o PNG indexado escrito por --write-png. O build lê esse
-PNG e emite os padrões SMS; não redesenha o glifo em silêncio. A planta
-256×192 é a mesma name table que a ROM recebe no boot (banner ROUND,
-barras cheias, timer 99, placar 0) e o build recusa divergência.
+A folha indexada continua sendo a fonte dos padrões e o build não redesenha
+glifos. A planta 256×192 permanece como fixture histórica para
+``--check-planta``; ela não é enviada à ROM. O runtime preenche a name table
+com um único tile de cor sólida e grava o HUD sobre ele.
 
-Contrato (GDD 2026-09-30):
+Contrato (GDD 2026-10-04):
   tiles 0–255  pool dos lutadores (primeira metade da VRAM)
-  tiles 256+   padrões de BG: céu, piso, horizonte, barras, dígitos, letras
-  name table   linhas 0–14 céu, 15 horizonte, 16–23 piso; HUD nas linhas 0–1
-  piso         pixel y=128; âncoras x=96 e x=152; câmera fixa
+  tiles 256+   tile sólido de fundo e glifos/barras do HUD
+  name table   tile sólido em toda a PNT; HUD nas linhas 0–1
   HUD          25 células, no máximo 2 escritas por VBlank
 """
 from __future__ import annotations
@@ -230,7 +229,9 @@ def _c_bytes(name: str, data: bytes, per: int = 16) -> str:
 def _emit(out_dir: Path, tiles: list[list[list[int]]]) -> None:
     boot = boot_offsets()
     encoded = b"".join(_encode_tile(t) for t in tiles)
-    nt = _nametable(len(tiles), boot)
+    # Validate the old layout fixture, but do not put its static name table
+    # in the ROM. The runtime fills the PNT with one solid background tile.
+    _nametable(len(tiles), boot)
     pal = bytes([
         0x00, 0x24, 0x09, 0x00, 0x0C, 0x15, 0x3F, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -251,7 +252,6 @@ def _emit(out_dir: Path, tiles: list[list[list[int]]]) -> None:
         "#define HUD_CELLS 25u\n"
         "extern const unsigned char stage_palette[16];\n"
         f"extern const unsigned char stage_tiles[{len(encoded)}];\n"
-        "extern const unsigned char stage_nametable[1536];\n"
         "extern const unsigned char hud_boot[25];\n"
         "extern const unsigned char hud_banner[5][5];\n"
         "#endif\n",
@@ -262,7 +262,6 @@ def _emit(out_dir: Path, tiles: list[list[list[int]]]) -> None:
         "/* gerado por luta_mugen_gen_stage_hud.py; incluído só por stage.c */\n"
         + _c_bytes("stage_palette", pal) + "\n"
         + _c_bytes("stage_tiles", encoded) + "\n"
-        + _c_bytes("stage_nametable", bytes(nt)) + "\n"
         + _c_bytes("hud_boot", bytes(boot)) + "\n"
         + "const unsigned char hud_banner[5][5] = {\n" + banner_body + "\n};\n",
         encoding="utf-8")

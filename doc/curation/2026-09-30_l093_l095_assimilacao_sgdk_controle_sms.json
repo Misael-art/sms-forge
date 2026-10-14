@@ -1,0 +1,56 @@
+{
+  "curation_id": "2026-09-30_l093_l095_assimilacao_sgdk_controle_sms",
+  "date": "2026-09-30",
+  "scope": "Assimilação de técnicas do mugen2sgdk_forge (itens 1 e 2 do doc/21) e mapa de controle por tempo de pressão do luta_mugen",
+  "authorization": "O usuário pediu: 'registre o que foi feito para ser rastreado e quando funcionar para servir de aprendizado ao agente canônico e prossiga'. Escopo: lições, regra e gate; sem alterar a ROM c958278f.",
+  "lessons": [
+    {
+      "id": "L093",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "Premissa de hardware herdada num conversor nunca foi conferida contra o header. converters/sms_cmd.py dizia 'diagonal mecanicamente impossível' e '1 botão'; o header (SMSlib.h:296-302) tem KEY_1 e KEY_2 e diagonal é a união de duas direções, e o fight.c já usava Down+Back. A premissa errada gerou 64 de 70 comandos do Ken como BLOCKED e fez a QCF do GDD parecer inviável. O mesmo erro estava em analysis/fidelity.py.",
+      "evidence": {
+        "reproducao": "git show HEAD:tools/sms_wrapper/mugen2sms/converters/sms_cmd.py passado a audit_hardware_constants.check_text devolve 4 achados (linhas 3, 4, 47, 73).",
+        "antes": "move_checklist no ken_masters_adv.zip sem mapa: 4 OK, 2 DEGRADED, 64 BLOCKED; 44 'botão além do pad' e 42 'diagonal impossível'.",
+        "correcao": "sms_cmd.py: diagonal = união de bits (DF=D|F etc.), '$F' reprova como four-way-sem-mascara; golden test_cmd_patterns_only_sms_pad_survives atualizado de propósito. fidelity.py: comentário corrigido, comportamento do conjunto legado inalterado.",
+        "gate": "audit_hardware_constants.py ganhou a regra de pad (1 botão / diagonal impossível) e passou a ler mugen2sms/**/*.py só para essa regra; contagens medidas em docstrings (ex.: 32 sprites/scanline em sms_scale.py) continuam legítimas. --self-check cobre premissa errada, nota de correção e a frase correta.",
+        "procedimento_que_funcionou": "Ao assimilar técnica de um doador, copiar o MÉTODO e re-derivar cada premissa de hardware do header do alvo (autoridade #8) antes de herdar o texto; depois medir o efeito com uma ferramenta que mostre quantos itens a premissa bloqueava."
+      },
+      "rule_section": "SMS_GLOBAL §78",
+      "tool_that_measures": "audit_hardware_constants.py"
+    },
+    {
+      "id": "L094",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "Uma métrica que mistura decisão de projeto com falha de conversão engana. Sem um mapa de controle declarado, 'BLOCKED' media a ausência de decisão, não a qualidade do conversor; depois que o usuário descartou os golpes médios, 27 entradas deixaram de ser falha. O status precisa separar DROPPED (descartado por decisão registrada) de BLOCKED (falha real).",
+      "evidence": {
+        "medicao": "ken_masters_adv.zip, 70 entradas, mapa adotado a/c x/z com T=6: 19 OK, 19 DEGRADED, 27 DROPPED, 5 BLOCKED (4 acordes de super fora do GDD, 1 golpe do estado 12000 sem hitdef).",
+        "self_check": "move_checklist.py --self-check PASS: golpe OK, QCF OK com latência, alvo inexistente BLOCKED, mapa sem o botão BLOCKED (não DROPPED, porque 'a' não está em dropped).",
+        "limite": "Leitura estática de digitabilidade e fidelidade de conversão; não é jogabilidade nem emulador."
+      },
+      "rule_section": "SMS_GLOBAL §79",
+      "tool_that_measures": "mugen2sms/analysis/move_checklist.py"
+    },
+    {
+      "id": "L095",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "Semântica de temporização derivada só de prosa erra por um tick. O modelo Python de latência dizia 8 ticks para o golpe forte com T=8; ao escrever o classificador C com a definição precisa (T conta ticks de pressão a partir do toque, inclusive), o pior caso é T-1 nos dois tiers. A divergência só apareceu porque o C e a referência foram comparados de forma diferencial.",
+      "evidence": {
+        "diferencial": "mugen2sms/tests/test_input_tier_c.py compila integrada/src/input_tier.c com gcc e compara com sms_controls.classify_trace em 900 traces aleatórios (T=2, 6, 10): 4 testes PASS.",
+        "mutacao": "trocar 'cnt[k] == INPUT_TIER_T' por '== INPUT_TIER_T + 1' faz 4 testes falharem; revertido. Mutar a fórmula de duração de anim_time_contract derruba o self-check dele.",
+        "limite": "Classificador NÃO ligado à ROM: sem build SDCC, sem custo em ciclos Z80, sem medição de latência em emulador. T=6 é estimativa sem dado de jogador."
+      },
+      "rule_section": "SMS_GLOBAL §80",
+      "tool_that_measures": "mugen2sms/converters/sms_controls.py"
+    }
+  ],
+  "traceability": {
+    "docs": ["SMS_projects/luta_mugen/doc/21-estudo-comparativo-sgdk-roadmap-2026-09-30.md", "SMS_projects/luta_mugen/doc/22-mapa-de-controle-sms-2026-09-30.md", "SMS_projects/luta_mugen/doc/10-memory-bank.md"],
+    "code": ["tools/sms_wrapper/mugen2sms/analysis/move_checklist.py", "tools/sms_wrapper/mugen2sms/analysis/anim_time_contract.py", "tools/sms_wrapper/mugen2sms/converters/sms_controls.py", "tools/sms_wrapper/mugen2sms/converters/sms_cmd.py", "tools/sms_wrapper/audit_hardware_constants.py", "SMS_projects/luta_mugen/integrada/src/input_tier.c"],
+    "tests": ["tools/sms_wrapper/mugen2sms/tests/test_analysis_move_anim.py", "tools/sms_wrapper/mugen2sms/tests/test_input_tier_c.py", "tools/sms_wrapper/mugen2sms/tests/test_converters_golden.py"],
+    "donor_manifest": "SMS_projects/luta_mugen/doc/doacao_md_mugen2sms.json"
+  },
+  "note_ids": {
+    "next_id": "L096",
+    "mastery": "Itens 1 e 2 do roadmap são análise de host. A ROM c958278f não mudou. Pendentes: item 3 (trilha de execução), item 4 (estados por .def) e ligar input_tier à ROM."
+  }
+}

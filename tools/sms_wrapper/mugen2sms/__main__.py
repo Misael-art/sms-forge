@@ -7,6 +7,7 @@ import sys
 COMMANDS = {
     "inventory": "mugen2sms.inventory",
     "parse-char": "mugen2sms.ken_full_parse",
+    "air-source-identity": "mugen2sms.analysis.air_source_identity",
     "generate": "mugen2sms.generators.smsdev",
     "scene-cut": "mugen2sms.generators.scene_cut",
     "versus-cut": "mugen2sms.generators.versus_scene_cut",

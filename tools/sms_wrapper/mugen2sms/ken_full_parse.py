@@ -24,6 +24,7 @@ def summarize(ch: CH.Character) -> dict:
     parse_erros = [w for w in ch.warnings if any(m in w for m in _ERROR_MARKERS)]
     return {
         "personagem": ch.name,
+        "author": ch.author,
         "def": ch.def_path,
         "source_sha256": ch.source_sha256,
         "n_sprites": len(ch.sprites),

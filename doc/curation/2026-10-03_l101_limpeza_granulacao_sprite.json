@@ -1,0 +1,67 @@
+{
+  "curation_id": "2026-10-03_l101_limpeza_granulacao_sprite",
+  "date": "2026-10-03",
+  "scope": "sms_sprite_sheet_cleanup",
+  "authorization": "O dono observou poluição granulada ao redor dos sprites e pediu que o agente a observasse e tratasse.",
+  "lessons": [
+    {
+      "id": "L101",
+      "status": "fechada_com_ferramenta_e_regra",
+      "lesson": "Inspecione folhas de sprite no tamanho de destino antes de aceitar a conversão. Variações RGB quase pretas no fundo podem virar pixels coloridos opacos ao quantizar para a paleta do personagem; Floyd–Steinberg pode ampliar o ruído por difusão. Para esse defeito em folha de sprite, use quantização sem dithering e limpeza por componentes em cada célula, preservando e revisando os detalhes pequenos antes de promover.",
+      "root_cause": "O PNG anterior tinha 201 componentes opacos menores que 12 pixels nos 12 quadros. O fundo do novo edit visual continha pixels quase pretos; a quantização exata os converteu em cores de personagem, espalhando grão pelo fundo. A limpeza por célula remove os componentes pequenos, expande o contorno um pixel e a quantização sem dithering não difunde erro entre vizinhos.",
+      "evidence": {
+        "owner_reference": "/run/user/1000/codex-desktop/tmp/codex-clipboard-19cf06d1-4746-4039-8da6-51c9133c19a8.png",
+        "previous_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v1.png",
+        "previous_sheet_sha256": "697916f18d5a746ec2ec010db6001c6f2aeec3934fcda734190da7f450b9a92b",
+        "cleanup_source": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/hayato_idle_12f_grain_cleanup_v2_source.png",
+        "cleanup_source_sha256": "18335798998934e4575f4fc5961e3f864f20b13c816a4113166e46fee5eb71bd",
+        "cleaned_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+        "cleaned_sheet_sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+        "layout_and_palette": "320x240; 4x3 quadros de 80x80; índice 0 transparente; 15 cores úteis da paleta Hayato declarada e grade SMS 6-bit.",
+        "small_components_before": 201,
+        "small_components_after": 0,
+        "cleanup_configuration": "limiar RGB máximo 32; componentes 8-conectados com menos de 12 pixels removidos em cada célula; margem do contorno de 1 pixel.",
+        "resource_gate": "PASS: audit_validate_resources.py --kind sheet --character hayato; self-check cobre limpeza, sem dithering e paleta alvo."
+      },
+      "rule_section": "SMS_GLOBAL §86",
+      "tool_that_measures": "prepare_sms_pixel_art.py; audit_validate_resources.py",
+      "skill_that_teaches": "skills/sms-pixel-translate.md"
+    }
+  ],
+  "attribution": "Correção visual solicitada pelo dono; conversão usa a paleta SMS e o manifesto de Hayato. Sem pixels externos.",
+  "applications": [
+    {
+      "project": "SMS_projects/master_of_fighters",
+      "authorization": "Pedido explícito do dono: aplicar os mesmos aprendizados ao Dr. Social.",
+      "approved_visual_source": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_v3.png",
+      "approved_visual_source_sha256": "daa5b6fbfab6adf9cf6c7d78d5fc7a32c1b71bbead0117c61e448a81a52be082",
+      "cleaned_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_80px_v5_clean.png",
+      "cleaned_sheet_sha256": "df0e04894a417e257490405a29958ffcb7fca7f3b40117df7f8cfd3bede0b8eb",
+      "layout_and_palette": "320x240; 4x3 células 80x80; índice 0 transparente; 9 cores úteis exatas do manifesto dr_ferdinand_social; conversão sem dithering.",
+      "small_components_without_cleanup": 8,
+      "small_components_after_per_cell_cleanup_before_contour_restore": 3,
+      "small_components_after_final": 0,
+      "transparent_outline_handling": "O preto RGB puro é o índice transparente; pixels de contorno dentro da máscara foram remapeados ao suit_deep #000055 declarado, preservando o fundo transparente e os contornos opacos.",
+      "resource_gate": "PASS: audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character dr_ferdinand_social.",
+      "status": "owner_approved_visual_reference_provisional; design revisit later; integration/ROM gates pending.",
+      "owner_approval": {
+        "date": "2026-10-03",
+        "scope": "provisional visual approval of the cleaned palette translation; design revisit deferred; not runtime approval",
+        "source": "explicit user approval in conversation"
+      },
+      "unclean_reference": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_80px_v0_unclean_palette_reference.png",
+      "unclean_reference_sha256": "51e987868bad159b1b2fce81051c0ee95c7b30b9b3959a87b2e545db2dcda8c0"
+    }
+  ],
+  "future_curation_candidates": [
+    {
+      "status": "candidate_for_future_curation",
+      "observation": "Quando o preto puro coincide com o RGB do índice 0 transparente, ele não pode ser usado como contorno opaco. Em sprites SMS, preservar o contorno com o tom profundo não preto já declarado na paleta e conferir sobre fundo não preto.",
+      "evidence": [
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/asset_lineage_record_sms_v5.json",
+        "SMS_projects/master_of_fighters/doc/palettes_manifest.json"
+      ],
+      "promotion": "avaliar generalização em uma curadoria futura; ainda não cria nova regra, seção ou ferramenta"
+    }
+  ]
+}

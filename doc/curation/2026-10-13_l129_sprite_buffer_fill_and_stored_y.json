@@ -1,0 +1,41 @@
+{
+  "curation_id": "2026-10-13_l129_sprite_buffer_fill_and_stored_y",
+  "date": "2026-10-13",
+  "title": "Overflow de sprites é do buffer de parsing; Y armazenado é y − 1",
+  "kind": "curation",
+  "scope": "Hardware SMS (VDP modo 4) e SMSlib: lei de sprites §7 e simulador de scanline. Item A2 do dossiê out/curation_proposals_smspower_2026-10-12.md, mais a metade y+1 adiada do A1.",
+  "authorization": "O proprietário aprovou o item A2 em 2026-10-13 ('faça conforme o recomendado'): buffer-fill como comportamento único, sem flag, e leitura da fonte upstream da SMSlib como apoio para fechar o offset de Y.",
+  "lessons": [
+    {
+      "id": "L129",
+      "status": "documentado_com_gate_estendido; sem medição em emulador ou console",
+      "lesson": "O limite de 8 sprites por scanline é do buffer de parsing do VDP: as 8 primeiras entradas da SAT que caem na linha entram, da 9ª em diante são descartadas e o bit 6 do status é setado. A contagem ignora X e padrão, então entrada transparente ou fora da tela ocupa buffer e pode derrubar o único sprite visível. A ordem da SAT decide o que some. SMS_addSprite grava y − 1 e o VDP desenha em stored + 1; o y que colide com o terminador é 0xD1.",
+      "root_cause": "O simulador contava entradas por linha sem ordem de SAT, sem dizer quais eram descartadas e sem representar entradas ocultas que a ROM mantém na SAT. A convenção stored_y = y + 1 estava invertida: reprovava y = 207 e aprovava y = 209. A §7 também afirmava que o excesso corrompe a linha no SMS1, sem lastro.",
+      "evidence": {
+        "corpus_page": {
+          "path": "out/smspower_corpus_2026-10-12/Sprites.txt",
+          "sha256": "293829045828db0c4cfcb0567bbf7b5e9dc588c58525a0add24db9a22a5826c7",
+          "url": "https://www.smspower.org/Development/Sprites",
+          "quote": "Note that this is regardless of the sprite X coordinate or pattern data, so eight transparent sprites that were off-screen would count towards a sprite overflow."
+        },
+        "local_library": {
+          "path": "sdk/devkitSMS/SMSlib/SMSlib.lib",
+          "sha256": "5a82820d0d4f56ae375d1184cd12bec95791ed3644a20b5e99c492db786057ed",
+          "finding": "Módulo SMSlib_sprite (158 bytes de código): contém cp a,#0xD1 (FE D1), dec a seguido de ld (hl),a (3D 77) e ld a,#0xD0 duas vezes."
+        },
+        "upstream_reading_aid": {
+          "url": "https://raw.githubusercontent.com/sverx/devkitSMS/master/SMSlib/src/SMSlib_sprite.c",
+          "sha256": "ee9aa31447cd8e9a4d5c99a739a18444639c16618cca10f7700a45b6774f412f",
+          "last_commit_touching_file": "c2fbabe4d70d19d436772e31ed458f11e527c539 (2022-04-06)",
+          "role": "Leitura de apoio para interpretar os bytes da biblioteca local; não foi copiada para o repo. A autoridade é o binário local."
+        },
+        "gate_cases": "audit_sprite_line_sim.py --self-check; selftest.py: scene_bad_hidden_overflow, scene_ok_y207, scene_bad_d0 (y=209)"
+      },
+      "rule_section": "SMS_GLOBAL §119",
+      "tool_that_measures": "audit_sprite_line_sim.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md; tools/sms_wrapper/.agent/skills/sms-vdp-budget-analyst.md",
+      "measurement_limits": "O gate mede o manifesto declarado, não a SAT que a ROM escreve; entrada emitida pela ROM e omitida do manifesto fica invisível. O flag de overflow não foi lido em emulador nem em console. Valores de Y armazenado próximos de 0xFF não estão modelados. A afirmação 'SMS1 corrompe a linha' foi rebaixada a não provada, não refutada."
+    }
+  ],
+  "dedup_key": "l129_sprite_overflow_buffer_fill_sat_order_stored_y_minus_1_20261013"
+}

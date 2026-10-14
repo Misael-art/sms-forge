@@ -1,7 +1,7 @@
-"""E1 - Inventario somente-leitura de um acervo MUGEN compactado em .zip.
+"""E1 - Inventário somente-leitura de acervos MUGEN ZIP/RAR.
 
-Nunca extrai nem altera os arquivos de origem: le os zips em memoria.
-Saida deterministica (ordenada, sem timestamps) para permitir comparacao por hash.
+Nunca altera os arquivos de origem. ZIP é lido em memória; RAR usa Source/7z
+em uma pasta temporária isolada. Saída determinística e sem timestamps.
 
 Uso:
     python -m mugen2sms.inventory <acervo_dir> --out <inventario.json>
@@ -16,6 +16,8 @@ import sys
 import zipfile
 from collections import Counter
 from pathlib import Path, PurePosixPath
+
+from .source import Source
 
 SCHEMA = "mugen2sms.inventory/v1"
 
@@ -71,11 +73,17 @@ def parse_def_info(text: str) -> dict:
         if line.startswith("[") and "]" in line:
             section = line[1 : line.index("]")].strip().lower()
             continue
-        if section == "info" and "=" in line:
-            k, v = line.split("=", 1)
-            k = k.strip().lower()
-            if k in {"name", "displayname", "author", "versiondate", "mugenversion"}:
-                info[k] = v.strip().strip('"')
+        if section == "info":
+            if "=" in line:
+                k, v = line.split("=", 1)
+                k = k.strip().lower()
+                if k in {"name", "displayname", "author", "versiondate", "mugenversion"}:
+                    info[k] = v.strip().strip('"')
+            else:
+                # Legacy DEFs may record attribution as `Author: name`.
+                match = re.match(r"^author\s*:\s*(.*?)\s*$", line, re.I)
+                if match and match.group(1) and "author" not in info:
+                    info["author"] = match.group(1).strip().strip('"')
     return info
 
 
@@ -90,7 +98,7 @@ def classify_def(text: str) -> str:
     return "unknown"
 
 
-def inspect_zip(path: Path, root: Path) -> dict:
+def inspect_archive(path: Path, root: Path) -> dict:
     entry = {
         "path": path.relative_to(root).as_posix(),
         "category": path.relative_to(root).parts[0],
@@ -104,30 +112,31 @@ def inspect_zip(path: Path, root: Path) -> dict:
         "errors": [],
     }
     try:
-        with zipfile.ZipFile(path) as z:
+        with Source(path) as src:
             exts = Counter()
-            for zi in sorted(z.infolist(), key=lambda i: i.filename):
-                if zi.is_dir():
-                    continue
-                name = PurePosixPath(zi.filename)
+            for filename in src.files:
+                name = PurePosixPath(filename)
                 ext = name.suffix.lower()
                 exts[ext or "<none>"] += 1
                 if LICENSE_HINT.search(name.name):
-                    entry["license_candidates"].append(zi.filename)
+                    entry["license_candidates"].append(filename)
                 if ext == ".sff":
-                    with z.open(zi) as f:
-                        entry["sff_versions"].append(
-                            {"file": zi.filename, "version": sff_version(f.read(16))}
-                        )
-                elif ext == ".def" and zi.file_size < 256 * 1024:
-                    text = z.read(zi).decode("latin-1")
+                    entry["sff_versions"].append(
+                        {"file": filename, "version": sff_version(src.read_prefix(filename, 16))}
+                    )
+                elif ext == ".def" and src.size(filename) < 256 * 1024:
+                    text = src.read(filename).decode("latin-1")
                     entry["defs"].append(
-                        {"file": zi.filename, "kind": classify_def(text), "info": parse_def_info(text)}
+                        {"file": filename, "kind": classify_def(text), "info": parse_def_info(text)}
                     )
             entry["ext_counts"] = dict(sorted(exts.items()))
-    except (zipfile.BadZipFile, OSError, NotImplementedError) as e:
+    except (zipfile.BadZipFile, OSError, NotImplementedError, ValueError) as e:
         entry["errors"].append(f"{type(e).__name__}: {e}")
     return entry
+
+
+# Compatibilidade para consumidores do nome anterior.
+inspect_zip = inspect_archive
 
 
 def summarize(entries: list[dict]) -> dict:
@@ -167,10 +176,10 @@ def self_check() -> int:
     fails: list[str] = []
     try:
         root = _build_self_check_root(tmp)
-        zips = sorted(root.rglob("*.zip"))
-        if len(zips) != 1:
-            fails.append(f"esperava 1 zip sintetico, veio {len(zips)}")
-        entries = [inspect_zip(z, root) for z in zips]
+        archives = sorted(p for p in root.rglob("*") if p.suffix.lower() in {".zip", ".rar"})
+        if len(archives) != 1:
+            fails.append(f"esperava 1 arquivo sintetico, veio {len(archives)}")
+        entries = [inspect_archive(p, root) for p in archives]
         s = summarize(entries)
         e = entries[0]
         if s.get("archives") != 1:
@@ -187,7 +196,7 @@ def self_check() -> int:
         if s.get("ext_counts") != {".def": 1, ".sff": 1, ".txt": 1}:
             fails.append(f"ext_counts divergem: {s.get("ext_counts")}")
         # determinismo: mesma entrada, mesma saida serializada
-        again = summarize([inspect_zip(z, root) for z in zips])
+        again = summarize([inspect_archive(p, root) for p in archives])
         if json.dumps(s, sort_keys=True) != json.dumps(again, sort_keys=True):
             fails.append("saida nao deterministica entre leituras")
         # o self-check nao pode passar com summarize corrompido:
@@ -218,11 +227,13 @@ def main(argv: list[str] | None = None) -> int:
         print("[FAIL] uso: inventory <acervo_dir> --out <json> (ou --self-check)", file=sys.stderr)
         return 3
     root = a.root.resolve()
-    zips = sorted(p for p in root.rglob("*.zip") if p.relative_to(root).parts[0] not in a.skip)
+    archives = sorted(p for p in root.rglob("*")
+                      if p.suffix.lower() in {".zip", ".rar"}
+                      and p.relative_to(root).parts[0] not in a.skip)
     entries = []
-    for i, p in enumerate(zips, 1):
-        print(f"[{i}/{len(zips)}] {p.relative_to(root)}", file=sys.stderr)
-        entries.append(inspect_zip(p, root))
+    for i, p in enumerate(archives, 1):
+        print(f"[{i}/{len(archives)}] {p.relative_to(root)}", file=sys.stderr)
+        entries.append(inspect_archive(p, root))
     doc = {"schema": SCHEMA, "root_label": root.name, "skipped": sorted(a.skip),
            "summary": summarize(entries), "archives": entries}
     a.out.parent.mkdir(parents=True, exist_ok=True)

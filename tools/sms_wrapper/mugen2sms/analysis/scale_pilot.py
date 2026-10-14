@@ -57,11 +57,37 @@ def _arrays(header: str) -> dict[str, bytes]:
                 raise ValueError(f"generated array alias cycle: {alias}")
             seen.add(resolved)
             resolved = aliases[resolved]
-        if alias.endswith(("_META", "_METAL")):
+        if alias.endswith(("_META", "_METAL", "_AXIS", "_CLSN")):
             if resolved not in output:
-                raise ValueError(f"generated metadata alias target is missing: {alias}")
+                raise ValueError(f"generated pose-data alias target is missing: {alias}")
             output[alias] = output[resolved]
     return output
+
+
+def _resolve_runtime_symbol_prefix(combined: dict, side: str, manifest: dict,
+                                   arrays: dict[str, bytes], fallback: str) -> str:
+    idle = next((row for row in manifest["roles"] if row["role"] == "idle"), None)
+    if idle is None or int(idle["frame_count"]) < 1:
+        raise ValueError(f"scene cut for {side} has no idle frame to identify its symbols")
+    action = int(idle["action"])
+    suffix = f"_A{action}F0_AXIS"
+    candidates = {name[:-len(suffix)] for name in arrays if name.endswith(suffix)}
+    prefixes = combined.get("runtime_symbol_prefix", {})
+    # Older versus-cut manifests keyed this map by p1_ken/p2_ryu; the current
+    # generator records the slot names p1/p2 so the profile stays character
+    # independent. Preserve the explicit legacy key when both are present.
+    slot = {"p1_ken": "p1", "p2_ryu": "p2"}.get(side, side)
+    recorded = prefixes.get(side, prefixes.get(slot))
+    if recorded is not None:
+        if recorded not in candidates:
+            raise ValueError(f"manifest runtime symbol prefix {recorded} has no generated idle pivot")
+        return str(recorded)
+    if fallback in candidates:
+        return fallback
+    if len(candidates) == 1:
+        return next(iter(candidates))
+    raise ValueError(f"could not identify one generated runtime symbol prefix for {side}: "
+                     f"{sorted(candidates)}")
 
 
 def _signed8(value: int) -> int:
@@ -132,6 +158,8 @@ def _fighter_poses(prefix: str, manifest: dict, arrays: dict[str, bytes],
                 "render_origin": [screen_x, screen_y],
                 "raster_origin": [raster_x, screen_y],
                 "size_runtime": [width, frame["size_runtime"][1]],
+                # One packed artifact stores equal-sized right and left halves;
+                # each facing's metadata selects only its own half.
                 "pose_bytes": pattern_sizes.get(
                     stem + ("_P2_TILES" if palette == "p2" else "_TILES"), 0),
                 "sprites": sprites,
@@ -204,19 +232,23 @@ def _p2_metadata_reconstruction_probe(prefix: str, manifest: dict,
     macros = {name: int(value) for name, value in re.findall(
         r"^#define\s+(\w+)\s+(\d+)\s*$", header_text, re.M)}
 
-    def pose_patterns(stem: str, variant: str) -> list[bytes]:
+    def pose_patterns(stem: str, variant: str, left: bool) -> list[bytes]:
         symbol = stem + variant
+        face_size_symbol = stem + ("_P2_FACE_SIZE" if variant == "_P2_TILES"
+                                   else "_FACE_SIZE")
         try:
-            size = macros[symbol + "_SIZE"]
+            packed_size = macros[symbol + "_SIZE"]
+            size = macros[face_size_symbol]
             bank = macros[symbol + "_BANK"]
             offset = macros[symbol + "_OFF"]
         except KeyError as exc:
             raise ValueError(f"missing pose pool macro: {exc.args[0]}") from exc
         if not bank_start <= bank < bank_start + bank_count:
             raise ValueError(f"pose bank outside mapper image: {symbol}")
-        if offset + size > 16384 or size % 64:
+        if packed_size != size * 2 or offset + packed_size > 16384 or size % 64:
             raise ValueError(f"malformed pose pool: {symbol}")
-        begin = (bank - bank_start) * 16384 + offset
+        begin = ((bank - bank_start) * 16384 + offset +
+                 (size if left else 0))
         payload = image_data[begin:begin + size]
         if len(payload) != size:
             raise ValueError(f"truncated pose pool: {symbol}")
@@ -233,10 +265,13 @@ def _p2_metadata_reconstruction_probe(prefix: str, manifest: dict,
         action = int(role["action"])
         for frame_index in range(int(role["frame_count"])):
             stem = f"{prefix}_A{action}F{frame_index}"
-            p1_patterns = pose_patterns(stem, "_TILES")
-            p2_patterns = pose_patterns(stem, "_P2_TILES")
             frame_exact = True
             for suffix in ("_META", "_METAL"):
+                left = suffix == "_METAL"
+                p1_patterns = pose_patterns(
+                    stem, "_TILES", left)
+                p2_patterns = pose_patterns(
+                    stem, "_P2_TILES", left)
                 meta = arrays.get(stem + suffix)
                 if meta is None or not meta or meta[-1] != 0x80 or (len(meta) - 1) % 3:
                     raise ValueError(f"missing or malformed P1 metadata: {stem + suffix}")
@@ -342,12 +377,26 @@ def _remap_compact_metadata(metadata: bytes | list[int],
     return bytes(remapped)
 
 
+def _pair_content_identity(load: dict) -> tuple:
+    """Identify the bytes resident in a sprite pair, independent of ROM address.
+
+    Exact duplicate tiles can live at different mapper banks/offsets. Their
+    source address is a transfer location, not the pattern's identity.
+    """
+    digest = load.get("pattern_sha256")
+    if digest:
+        return ("sha256", digest)
+    # Keep compatibility with hand-authored negative fixtures that model an
+    # opaque load by address only.
+    return ("source", load.get("source_bank"), load.get("source_off"))
+
+
 def _assert_idle_plan_periodic(initial_pose: dict, transitions: list[dict],
                                frame_count: int) -> None:
     """Simulate two loops as the ROM runs them (frame 0 keeps the initial
     metadata): each frame must show the same (bank, off) pairs every loop and
     no upload may target a slot the current frame displays (L090)."""
-    slots = {load["target_pair_slot"]: (load["source_bank"], load["source_off"])
+    slots = {load["target_pair_slot"]: _pair_content_identity(load)
              for load in initial_pose["pattern_loads"]}
     meta = {0: initial_pose["metadata"]}
     for row in transitions:
@@ -366,7 +415,7 @@ def _assert_idle_plan_periodic(initial_pose: dict, transitions: list[dict],
                 raise AssertionError(
                     f"idle plan uploads into displayed slot {load['target_pair_slot']} "
                     f"during frame {frame}")
-            slots[load["target_pair_slot"]] = (load["source_bank"], load["source_off"])
+            slots[load["target_pair_slot"]] = _pair_content_identity(load)
         frame = rows[frame]["to_frame"]
 
 
@@ -400,6 +449,7 @@ def _idle_cache_plan(poses: dict[tuple[int, int, str], dict], role: dict,
                 "source_off": source_off,
                 "source_pair_index": int(source_pair),
                 "target_pair_slot": pattern_slots[pattern],
+                "pattern_sha256": hashlib.sha256(pattern).hexdigest(),
                 "bytes": 64,
             })
         return loads
@@ -550,7 +600,8 @@ def _idle_cache_plan(poses: dict[tuple[int, int, str], dict], role: dict,
 
 
 def _idle_family_tile_pool(root: Path, combined: dict,
-                           manifests: dict[str, dict], header_text: str) -> dict:
+                           manifests: dict[str, dict], header_text: str,
+                           p1_prefix: str, p2_prefix: str) -> dict:
     images = combined.get("mapper_images") or []
     if len(images) != 1:
         raise ValueError("scale pilot expects one consolidated mapper image")
@@ -566,9 +617,9 @@ def _idle_family_tile_pool(root: Path, combined: dict,
     bank_count = int(image["bank_count"])
     results = {}
     union_patterns: set[bytes] = set()
-    for fighter, prefix, variant in (
-            ("ken", "KENMASTERSADV", "_TILES"),
-            ("ryu", "RYU_KANG", "_P2_TILES")):
+    for fighter, prefix, variant, left in (
+            ("ken", p1_prefix, "_TILES", False),
+            ("ryu", p2_prefix, "_P2_TILES", True)):
         manifest = manifests[fighter]
         role = next(row for row in manifest["roles"] if row["role"] == "idle")
         action = int(role["action"])
@@ -583,10 +634,21 @@ def _idle_family_tile_pool(root: Path, combined: dict,
                 if not match:
                     raise ValueError(f"missing idle pose bank macro: {name}")
                 macros[suffix] = int(match.group(1))
-            size, bank, offset = macros["_SIZE"], macros["_BANK"], macros["_OFF"]
+            packed_size = macros["_SIZE"]
+            face_suffix = "_P2_FACE_SIZE" if variant == "_P2_TILES" else "_FACE_SIZE"
+            face_match = re.search(
+                rf"^#define\s+{re.escape(stem.removesuffix(variant))}{face_suffix}\s+(\d+)\s*$",
+                header_text, re.M)
+            if not face_match:
+                raise ValueError(f"missing idle facing-size macro: {stem}")
+            size = int(face_match.group(1))
+            bank, offset = macros["_BANK"], macros["_OFF"]
+            if packed_size != size * 2:
+                raise ValueError(f"idle pose facing payload sizes disagree: {stem}")
             if not bank_start <= bank < bank_start + bank_count:
                 raise ValueError(f"idle pose bank outside consolidated image: {stem}")
-            start = (bank - bank_start) * 16384 + offset
+            start = ((bank - bank_start) * 16384 + offset +
+                     (size if left else 0))
             payload = data[start:start + size]
             if len(payload) != size:
                 raise ValueError(f"idle pose payload exceeds mapper image: {stem}")
@@ -605,7 +667,7 @@ def _idle_family_tile_pool(root: Path, combined: dict,
         "available_sprite_pattern_vram_bytes": SPRITE_PATTERN_BYTES_CURRENT,
         "all_idle_frames_fit_as_exact_tile_pool":
             combined_bytes <= SPRITE_PATTERN_BYTES_CURRENT,
-        "scope": "exact 4bpp pattern-byte identity for Ken P1 and Ryu P2 idle frames; excludes metasprite metadata, runtime buffers, FX and other actions",
+        "scope": "exact 4bpp pattern-byte identity for startup-facing Ken P1 right and Ryu P2 left idle frames; excludes metasprite metadata, runtime buffers, FX and other actions",
     }
 
 
@@ -636,7 +698,8 @@ def _selected_facing_pose_metrics(prefix: str, fighter: str, palette: str,
                 if meta is None or not meta or meta[-1] != 0x80 or (len(meta) - 1) % 3:
                     raise ValueError(f"malformed facing metasprite: {meta_name}")
 
-                tile_symbol = stem + variant
+                tile_variant = "_P2_TILES" if palette == "p2" else "_TILES"
+                tile_symbol = stem + tile_variant
                 macros = {}
                 for suffix in ("_SIZE", "_BANK", "_OFF"):
                     name = tile_symbol + suffix
@@ -645,12 +708,24 @@ def _selected_facing_pose_metrics(prefix: str, fighter: str, palette: str,
                     if not match:
                         raise ValueError(f"missing facing pose bank macro: {name}")
                     macros[suffix] = int(match.group(1))
-                size, bank, offset = macros["_SIZE"], macros["_BANK"], macros["_OFF"]
+                packed_size = macros["_SIZE"]
+                face_size_symbol = stem + (
+                    "_P2_FACE_SIZE" if palette == "p2" else "_FACE_SIZE")
+                face_match = re.search(
+                    rf"^#define\s+{re.escape(face_size_symbol)}\s+(\d+)\s*$",
+                    header_text, re.M)
+                if not face_match:
+                    raise ValueError(f"missing facing size macro: {face_size_symbol}")
+                size = int(face_match.group(1))
+                bank, offset = macros["_BANK"], macros["_OFF"]
+                if packed_size != size * 2:
+                    raise ValueError(f"combined facing payload sizes disagree: {tile_symbol}")
                 if not bank_start <= bank < bank_start + bank_count:
                     raise ValueError(f"facing pose bank outside mapper image: {tile_symbol}")
                 if offset < 0 or offset + size > 16384:
                     raise ValueError(f"facing pose crosses mapper page: {tile_symbol}")
-                start = (bank - bank_start) * 16384 + offset
+                start = ((bank - bank_start) * 16384 + offset +
+                         (size if facing == "left" else 0))
                 payload = image_data[start:start + size]
                 if len(payload) != size or size % 64:
                     raise ValueError(f"malformed facing pose payload: {tile_symbol}")
@@ -710,7 +785,7 @@ def _selected_facing_pose_metrics(prefix: str, fighter: str, palette: str,
                     "selected_bytes": len(compact_patterns) * 64,
                     "metadata_bytes": len(meta),
                     "compact_metadata": list(rewritten),
-                    "pattern_bank": bank,
+                "pattern_bank": bank,
                     "pattern_off": offset,
                     "pattern_size": size,
                     "palette_metadata_verified": palette_metadata_verified,
@@ -723,7 +798,8 @@ def _selected_facing_pose_metrics(prefix: str, fighter: str, palette: str,
 
 def _facing_pool_audit(root: Path, combined: dict,
                        manifests: dict[str, dict], arrays: dict[str, bytes],
-                       header_text: str) -> dict:
+                       header_text: str,
+                       artifact_prefixes: dict[str, str]) -> dict:
     """Measure compact active-facing pools and conservative two-pose residency."""
     image = (combined.get("mapper_images") or [])[0]
     image_path = Path(image["path"])
@@ -737,8 +813,8 @@ def _facing_pool_audit(root: Path, combined: dict,
     bank_count = int(image["bank_count"])
 
     all_poses = {}
-    fighter_specs = {"ken": ("KENMASTERSADV", "ken"),
-                     "ryu": ("RYU_KANG", "ryu")}
+    fighter_specs = {"ken": (artifact_prefixes["ken"], "ken"),
+                     "ryu": (artifact_prefixes["ryu"], "ryu")}
     pilot_profiles = {"p1": "ken", "p2": "ryu"}
     rejected_variants = []
     for palette, fighter in pilot_profiles.items():
@@ -1005,6 +1081,22 @@ def _facing_pool_audit(root: Path, combined: dict,
     for palette in ("p1", "p2"):
         slot_peaks[palette] = per_actor_buffer[f"{pilot_profiles[palette]}_{palette}"]
     two_actor_bytes = slot_peaks["p1"]["resident_bytes"] + slot_peaks["p2"]["resident_bytes"]
+    max_pose_pairs = max(
+        (row["pattern_size"] // 64
+         for poses in all_poses.values() for row in poses.values()), default=0)
+    serial_stage_pairs = max_pose_pairs * 3
+    serial_stage_budget = {
+        "policy": "two current poses plus at most one staged pose; a second request waits for the first commit",
+        "maximum_pose_pairs": max_pose_pairs,
+        "conservative_required_pairs": serial_stage_pairs,
+        "conservative_required_bytes": serial_stage_pairs * 64,
+        "available_pairs": SPRITE_PATTERN_BYTES_CURRENT // 64,
+        "available_bytes": SPRITE_PATTERN_BYTES_CURRENT,
+        "fits_candidate_budget": serial_stage_pairs * 64 <= SPRITE_PATTERN_BYTES_CURRENT,
+        "contiguous_fragmentation_applies": False,
+        "runtime_layout_implemented": True,
+        "runtime_emulator_proved": False,
+    }
     scenario_totals = {}
     for scenario in ("startup_idle_current_next",
                      "same_facing_any_action_current_next",
@@ -1042,6 +1134,7 @@ def _facing_pool_audit(root: Path, combined: dict,
         },
         "global_pattern_dedup_scenarios": globally_deduplicated_scenarios,
         "two_actor_candidate": {
+            "policy": "both actors' current+next poses resident simultaneously; conservative comparison, not required by serialized staging",
             "p1_palette_worst_actor": next(key for key, row in per_actor_buffer.items()
                                              if row is slot_peaks["p1"]),
             "p2_palette_worst_actor": next(key for key, row in per_actor_buffer.items()
@@ -1056,7 +1149,8 @@ def _facing_pool_audit(root: Path, combined: dict,
             "budget_fit_proven": False,
             "runtime_implemented_or_emulator_proved": False,
         },
-        "scope": "pilot matchup Ken P1 plus Ryu P2; maximum uses any-to-any frame/facing transition, 64 B/frame upload assumption, excludes stage/HUD/effects and VRAM reservations; pattern bytes, dx/dy remapping, and palette-specific P2 metadata are checked against exported data, but remapping and upload are not implemented or emulator-proved",
+        "serial_stage_candidate": serial_stage_budget,
+        "scope": "pilot matchup Ken P1 plus Ryu P2; per-pair allocation avoids contiguous fragmentation and permits one pending upload at a time; a second actor request waits until commit when space is insufficient; byte count is a conservative bound and emulator timing is unproved",
     }
 
 
@@ -1071,24 +1165,58 @@ def _macro_int(header: str, symbol: str) -> int:
 def _load_pose_patterns(header: str, bank_dir: Path,
                         bank_files: dict[int, str], prefix: str,
                         action: int, frame: int, palette: str,
-                        bank_cache: dict[Path, bytes]) -> bytes:
+                        bank_cache: dict[Path, bytes],
+                        facing: str = "right") -> bytes:
     if palette not in ("p1", "p2"):
         raise ValueError(f"unsupported fighter palette: {palette}")
+    if facing not in ("right", "left"):
+        raise ValueError(f"unsupported fighter facing: {facing}")
     suffix = "_P2_TILES" if palette == "p2" else "_TILES"
     symbol = f"{prefix}_A{action}F{frame}{suffix}"
     bank = _macro_int(header, symbol + "_BANK")
     offset = _macro_int(header, symbol + "_OFF")
-    size = _macro_int(header, symbol + "_SIZE")
+    packed_size = _macro_int(header, symbol + "_SIZE")
+    face_size_symbol = f"{prefix}_A{action}F{frame}" + (
+        "_P2_FACE_SIZE" if palette == "p2" else "_FACE_SIZE")
+    size = _macro_int(header, face_size_symbol)
+    if packed_size != size * 2:
+        raise ValueError(f"combined facing payload sizes disagree: {symbol}")
     bank_file = bank_files.get(bank)
     if bank_file is None:
         raise ValueError(f"pattern bank {bank} is absent from its manifest")
-    path = bank_dir / bank_file
+    candidate = Path(bank_file)
+    path = candidate if candidate.is_absolute() else bank_dir / candidate
     if path not in bank_cache:
         bank_cache[path] = path.read_bytes()
     blob = bank_cache[path]
-    if offset < 0 or size < 0 or offset + size > len(blob) or size % 64:
+    facing_offset = size if facing == "left" else 0
+    if (offset < 0 or size < 0 or offset + packed_size > len(blob) or
+            size % 64):
         raise ValueError(f"invalid 8x16 pattern range for {symbol}")
-    return blob[offset:offset + size]
+    return blob[offset + facing_offset:offset + facing_offset + size]
+
+
+def _canonical_bank_files(combined: dict, root: Path) -> dict[int, str]:
+    """Resolve bank macros against the merged mapper image's canonical IDs.
+
+    A versus cut can deduplicate a P2 source page into an earlier P1 page and
+    rewrite the generated macro to that canonical bank. The per-fighter source
+    manifest still names the original bank, so it cannot resolve those macros.
+    """
+    result = {}
+    for row in combined.get("banks", []):
+        bank = int(row["bank"])
+        if bank in result:
+            raise ValueError(f"duplicate canonical pattern bank in merged manifest: {bank}")
+        raw_path = row.get("path") or row.get("file")
+        if not raw_path:
+            raise ValueError(f"merged pattern bank {bank} has no path or file")
+        path = Path(raw_path)
+        if not path.is_absolute():
+            workspace_path = Path.cwd() / path
+            path = workspace_path if workspace_path.is_file() else root / str(row["file"])
+        result[bank] = str(path)
+    return result
 
 
 def _rasterize_pose_opacity(patterns: bytes, sprites: list[dict],
@@ -1123,20 +1251,23 @@ def _rasterize_pose_opacity(patterns: bytes, sprites: list[dict],
 
 def _idle_animation_envelope(header: str, bank_dir: Path,
                              manifest: dict, poses: dict[tuple[int, int], dict],
-                             prefix: str, palette: str) -> bytes:
+                             prefix: str, palette: str,
+                             bank_files: dict[int, str] | None = None,
+                             facing: str = "right") -> bytes:
     idle = next((role for role in manifest["roles"]
                  if role.get("role") == "idle"), None)
     if idle is None:
         raise ValueError("fighter manifest has no idle role")
-    bank_files = {int(row["bank"]): str(row["file"])
-                  for row in manifest["banks"]}
+    if bank_files is None:
+        bank_files = {int(row["bank"]): str(row["file"])
+                      for row in manifest["banks"]}
     bank_cache: dict[Path, bytes] = {}
     envelope = bytearray(256 * 192)
     for frame in range(int(idle["frame_count"])):
         pose = poses[(int(idle["action"]), frame)]
         patterns = _load_pose_patterns(
             header, bank_dir, bank_files, prefix, int(idle["action"]),
-            frame, palette, bank_cache)
+            frame, palette, bank_cache, facing)
         raster = _rasterize_pose_opacity(patterns, pose["sprites"])
         for index, opaque in enumerate(raster):
             if opaque:
@@ -1231,22 +1362,23 @@ def audit(versus_manifest: Path, floor_y: int = 160,
     header_text = header_path.read_text(encoding="ascii")
     arrays = _arrays(header_text)
     pattern_sizes = {}
-    size_def = re.compile(r"#define\s+(\w+_TILES(?:_P2)?)_SIZE\s+(\d+)")
-    for symbol, size in size_def.findall(header_text):
-        pattern_sizes[symbol.removesuffix("_P2") if symbol.endswith("_P2") else symbol] = int(size)
-    # The generator spells the palette variant as _P2_TILES, so normalize the
-    # alternate-size macro to the same lookup key used below.
     for symbol, size in re.findall(
-            r"#define\s+(\w+_P2_TILES)_SIZE\s+(\d+)",
-            header_text):
-        pattern_sizes[symbol] = int(size)
+            r"^#define\s+(\w+(?:_P2)?_FACE_SIZE)\s+(\d+)\s*$",
+            header_text, re.M):
+        if symbol.endswith("_P2_FACE_SIZE"):
+            tile_symbol = symbol.removesuffix("_P2_FACE_SIZE") + "_P2_TILES"
+        else:
+            tile_symbol = symbol.removesuffix("_FACE_SIZE") + "_TILES"
+        pattern_sizes[tile_symbol] = int(size)
 
     p1_path = root / "p1_ken" / "ken_scene_manifest.json"
     p2_path = root / "p2_ryu" / "ken_scene_manifest.json"
     p1_manifest = json.loads(p1_path.read_text(encoding="utf-8"))
     p2_manifest = json.loads(p2_path.read_text(encoding="utf-8"))
-    p1_prefix = "KENMASTERSADV"
-    p2_prefix = "RYU_KANG"
+    p1_prefix = _resolve_runtime_symbol_prefix(
+        combined, "p1_ken", p1_manifest, arrays, "KENMASTERSADV")
+    p2_prefix = _resolve_runtime_symbol_prefix(
+        combined, "p2_ryu", p2_manifest, arrays, "RYU_KANG")
     p1_poses = _fighter_poses(p1_prefix, p1_manifest, arrays,
                               96, floor_y, 0, "p1", pattern_sizes)
     p2_poses = _fighter_poses(p2_prefix, p2_manifest, arrays,
@@ -1293,17 +1425,19 @@ def audit(versus_manifest: Path, floor_y: int = 160,
               _stream_mismatches("ryu", p2_manifest))
     facing_pool = _facing_pool_audit(
         root, combined, {"ken": p1_manifest, "ryu": p2_manifest},
-        arrays, header_text)
+        arrays, header_text, {"ken": p1_prefix, "ryu": p2_prefix})
     max_pose_bytes = max(pattern_sizes.values(), default=0)
     stride_tiles = ((max_pose_bytes + 31) // 32 + 1) & ~1
-    stream_vram_bytes = stride_tiles * 32 * 4  # two buffers for each of two fighters
+    legacy_four_slot_bytes = stride_tiles * 32 * 4
+    max_pose_pairs = max_pose_bytes // 64
+    serial_stage_pairs = max_pose_pairs * 3
+    serial_stage_bytes = serial_stage_pairs * 64
     bank_bytes = len(combined["banks"]) * 16384
     result = {
         "schema": "sms_scale_pilot_audit_v1",
         "status": "blocked" if (pair_worst_line["metrics"]["violations"] or
                                   pair_worst_sat["metrics"]["violations"] or
-                                  stream_vram_bytes > SPRITE_PATTERN_BYTES_CURRENT or
-                                  not facing_pool["two_actor_candidate"]["fits_candidate_budget"] or
+                                  not facing_pool["serial_stage_candidate"]["fits_candidate_budget"] or
                                   not facing_pool["two_actor_candidate"]["palette_specific_metadata_verified"] or
                                   bool(facing_pool["rejected_variants"]) or
                                   max(len(a["sprites"]) for a in
@@ -1325,8 +1459,10 @@ def audit(versus_manifest: Path, floor_y: int = 160,
                                     "metrics": pair_worst_line["metrics"]},
         "streaming": {"max_pose_bytes": max_pose_bytes,
                       "max_pose_tiles": (max_pose_bytes + 31) // 32,
-                      "buffer_stride_tiles_even": stride_tiles,
-                      "double_buffers_2_fighters_bytes": stream_vram_bytes,
+                      "legacy_contiguous_stride_tiles_even": stride_tiles,
+                      "legacy_four_slot_bytes": legacy_four_slot_bytes,
+                      "serial_stage_required_pairs": serial_stage_pairs,
+                      "serial_stage_required_bytes": serial_stage_bytes,
                       "available_sprite_pattern_vram_bytes": SPRITE_PATTERN_BYTES_CURRENT,
                       "chunk_bytes_per_frame_per_fighter": STREAM_CHUNK_BYTES,
                       "frames_whose_stream_exceeds_air_duration": len(timing),
@@ -1334,7 +1470,8 @@ def audit(versus_manifest: Path, floor_y: int = 160,
                       if timing else None,
                       "exact_air_timing_proved_in_runtime": not bool(timing)},
         "idle_tile_pool": _idle_family_tile_pool(
-            root, combined, {"ken": p1_manifest, "ryu": p2_manifest}, header_text),
+            root, combined, {"ken": p1_manifest, "ryu": p2_manifest},
+            header_text, p1_prefix, p2_prefix),
         "selected_facing_pool": facing_pool,
         "meta_ram": {"current_bytes_per_fighter": SPRITE_META_BYTES_CURRENT,
                      "candidate_required_max_bytes": max(
@@ -1343,7 +1480,7 @@ def audit(versus_manifest: Path, floor_y: int = 160,
                          default=1)},
         "expected_blockers": [
             "Flicker/sprite scheduling must keep <=8 sprites on every active scanline.",
-            "Current VRAM streamer must fit both double buffers in the 8 KiB sprite pattern region.",
+            "Serialized staging must fit two visible poses and one pending pose in the 8 KiB sprite pattern region.",
             "Selected-facing remapping is a source-derived candidate only; prove its transfer budget and runtime behavior before adopting it.",
             "Cross-actor pattern reuse is only byte-count potential; allocate a shared VDP index, prove remapped metadata, and preserve VRAM headroom before adoption.",
             "P1/P2 metasprite indexes must be validated against the exact palette-specific tile pool; generated P2 pools cannot inherit P1 indices by resemblance.",
@@ -1361,13 +1498,14 @@ def audit(versus_manifest: Path, floor_y: int = 160,
     }
     result["frames_scanned"] = len(p1_manifest["frames"]) + len(p2_manifest["frames"])
     if video_path is not None:
+        canonical_bank_files = _canonical_bank_files(combined, root)
         expected_masks = {
             "ken": _idle_animation_envelope(
                 header_text, p1_path.parent, p1_manifest, p1_poses,
-                p1_prefix, "p1"),
+                p1_prefix, "p1", canonical_bank_files),
             "ryu": _idle_animation_envelope(
                 header_text, p2_path.parent, p2_manifest, p2_visual_poses,
-                p2_prefix, "p2"),
+                p2_prefix, "p2", canonical_bank_files, "left"),
         }
         result["idle_animation_envelope_video_fidelity"] = _video_pose_fidelity(
             video_path, expected_masks)
@@ -1375,6 +1513,43 @@ def audit(versus_manifest: Path, floor_y: int = 160,
 
 
 def _self_check() -> None:
+    bank_fixture = _canonical_bank_files({"banks": [
+        {"bank": 2, "source_bank": 2, "file": "merged-bank2.bin",
+         "path": "/cut/merged-bank2.bin"},
+        {"bank": 3, "source_bank": 12, "file": "merged-bank3.bin",
+         "path": "/cut/merged-bank3.bin"},
+    ]}, Path("/cut"))
+    assert bank_fixture == {2: "/cut/merged-bank2.bin",
+                            3: "/cut/merged-bank3.bin"}
+
+    fixture_manifest = {"roles": [{"role": "idle", "action": 0,
+                                   "frame_count": 1}]}
+    aliased_arrays = _arrays(
+        "const unsigned char P1_SOURCE_A0F0_AXIS[4] = {0, 0, 0, 0};\n"
+        "#define P2_SOURCE_A0F0_AXIS P1_SOURCE_A0F0_AXIS\n"
+        "const unsigned char P1_SOURCE_A0F0_CLSN[4] = {1, 2, 3, 4};\n"
+        "#define P2_SOURCE_A0F0_CLSN P1_SOURCE_A0F0_CLSN\n")
+    assert aliased_arrays["P2_SOURCE_A0F0_AXIS"] == bytes(4)
+    assert aliased_arrays["P2_SOURCE_A0F0_CLSN"] == bytes((1, 2, 3, 4))
+    fixture_arrays = {"P1_SOURCE_A0F0_AXIS": bytes(4),
+                      "P2_SOURCE_A0F0_AXIS": bytes(4)}
+    fixture_combined = {"runtime_symbol_prefix": {
+        "p1_ken": "P1_SOURCE", "p2_ryu": "P2_SOURCE"}}
+    assert _resolve_runtime_symbol_prefix(
+        fixture_combined, "p1_ken", fixture_manifest, fixture_arrays,
+        "KENMASTERSADV") == "P1_SOURCE"
+    current_fixture = {"runtime_symbol_prefix": {
+        "p1": "P1_SOURCE", "p2": "P2_SOURCE"}}
+    assert _resolve_runtime_symbol_prefix(
+        current_fixture, "p1_ken", fixture_manifest, fixture_arrays,
+        "KENMASTERSADV") == "P1_SOURCE"
+    assert _resolve_runtime_symbol_prefix(
+        current_fixture, "p2_ryu", fixture_manifest, fixture_arrays,
+        "RYU_KANG") == "P2_SOURCE"
+    assert _resolve_runtime_symbol_prefix(
+        {}, "p2_ryu", fixture_manifest, {"RYU_KANG_A0F0_AXIS": bytes(4)},
+        "RYU_KANG") == "RYU_KANG"
+
     assert mirrored_origin_x(152, -27, 31) == 147
     assert mirrored_origin_x(152, -27, 32) == 147
     assert mirrored_origin_x(152, -27, 51) == 123
@@ -1434,6 +1609,15 @@ def _self_check() -> None:
         raise AssertionError("metadata remap must reject missing compact pattern IDs")
 
     cache_a, cache_b, cache_c = (bytes([value]) * 64 for value in (10, 11, 12))
+    cache_a_sha = hashlib.sha256(cache_a).hexdigest()
+    assert _pair_content_identity({"source_bank": 2, "source_off": 0,
+                                   "pattern_sha256": cache_a_sha}) == \
+        _pair_content_identity({"source_bank": 3, "source_off": 4416,
+                                "pattern_sha256": cache_a_sha})
+    assert _pair_content_identity({"source_bank": 2, "source_off": 0,
+                                   "pattern_sha256": cache_a_sha}) != \
+        _pair_content_identity({"source_bank": 2, "source_off": 0,
+                                "pattern_sha256": hashlib.sha256(cache_b).hexdigest()})
     cache_pose = lambda frame, patterns, source_ids: {
         "selected_patterns": patterns,
         "selected_pattern_source_pair_indices": source_ids,
@@ -1451,14 +1635,17 @@ def _self_check() -> None:
                       "loop_start": 0}, "right", 0, 3)
     assert idle_plan["initial_pose"]["pattern_loads"] == [
         {"source_bank": 2, "source_off": 1024, "source_pair_index": 0,
-         "target_pair_slot": 0, "bytes": 64},
+         "target_pair_slot": 0, "pattern_sha256": hashlib.sha256(cache_a).hexdigest(),
+         "bytes": 64},
         {"source_bank": 2, "source_off": 1088, "source_pair_index": 1,
-         "target_pair_slot": 1, "bytes": 64},
+         "target_pair_slot": 1, "pattern_sha256": hashlib.sha256(cache_b).hexdigest(),
+         "bytes": 64},
     ]
     assert idle_plan["transitions"][0]["reused_pair_count"] == 1
     assert idle_plan["transitions"][0]["uploads"] == [
         {"source_bank": 2, "source_off": 1152, "source_pair_index": 2,
-         "target_pair_slot": 2, "bytes": 64},
+         "target_pair_slot": 2, "pattern_sha256": hashlib.sha256(cache_c).hexdigest(),
+         "bytes": 64},
     ]
     assert idle_plan["transitions"][0]["next_metadata"] == [
         0, 0, 2, 8, 0, 4, 0x80]
@@ -1507,12 +1694,14 @@ def _self_check() -> None:
     mini_meta = bytes((0, 0, 4, 8, 0, 0, 16, 0, 6, 0x80))
     mini_metal = bytes((0, 0, 2, 8, 0, 6, 0x80))
     mini_header = "\n".join((
-        "#define TEST_A1F0_TILES_SIZE 256",
+        "#define TEST_A1F0_TILES_SIZE 512",
         "#define TEST_A1F0_TILES_BANK 2",
         "#define TEST_A1F0_TILES_OFF 0",
+        "#define TEST_A1F0_FACE_SIZE 256",
     ))
-    mini_payload = (bytes([0]) * 64 + bytes([1]) * 64 +
-                    bytes([2]) * 64 + bytes([2]) * 64)
+    mini_face = (bytes([0]) * 64 + bytes([1]) * 64 +
+                 bytes([2]) * 64 + bytes([2]) * 64)
+    mini_payload = mini_face + mini_face
     mini_poses = _selected_facing_pose_metrics(
         "TEST", "fixture", "p1",
         {"roles": [{"action": 1, "frame_count": 1, "role": "idle"}],
@@ -1527,9 +1716,10 @@ def _self_check() -> None:
     assert mini_poses[(1, 0, "left")]["metadata_remap_exact"]
     p2_meta = bytes((0, 0, 2, 8, 0, 6, 0x80))
     mini_header_p2 = mini_header + "\n" + "\n".join((
-        "#define TEST_A1F0_P2_TILES_SIZE 256",
+        "#define TEST_A1F0_P2_TILES_SIZE 512",
         "#define TEST_A1F0_P2_TILES_BANK 2",
         "#define TEST_A1F0_P2_TILES_OFF 0",
+        "#define TEST_A1F0_P2_FACE_SIZE 256",
     ))
     mini_p2 = _selected_facing_pose_metrics(
         "TEST", "fixture", "p2",
@@ -1643,7 +1833,7 @@ def main(argv=None) -> int:
     print(f"[MEASURED] scale-pilot status={result['status']} "
           f"idle_peak={result['idle_pair']['metrics']['peak_sprites_per_scanline']}/line "
           f"SAT={result['idle_pair']['metrics']['sat_entries']} "
-          f"buffers={result['streaming']['double_buffers_2_fighters_bytes']}/"
+          f"serial_stage={result['streaming']['serial_stage_required_bytes']}/"
           f"{result['streaming']['available_sprite_pattern_vram_bytes']} B "
           f"report={args.out}")
     if args.video:

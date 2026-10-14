@@ -20,7 +20,7 @@ Uso:
   capture_audio.py --self-check
 Exit: 0 gravado | 1 falha/silencio | 2 ambiente ausente | 3 uso
 """
-import sys, os, time, wave, shutil, argparse, subprocess
+import sys, os, json, threading, time, wave, shutil, argparse, subprocess, select, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -48,6 +48,82 @@ def _emulator_sink_inputs():
         out.append(idx)
     return out
 
+def sink_inputs_by_pid(pid):
+    """Sink-inputs cujo application.process.id e EXATAMENTE pid (L057: nunca outra JVM)."""
+    out, idx, owner = [], None, None
+    for line in _run(["pactl", "list", "sink-inputs"]).stdout.splitlines() + ["Sink Input #END"]:
+        line = line.strip()
+        if line.startswith("Sink Input #"):
+            if idx is not None and owner == str(pid): out.append(idx)
+            idx, owner = line.split("#")[1].strip(), None
+        elif line.startswith("application.process.id"):
+            owner = line.split("=", 1)[1].strip().strip('"')
+    return out
+
+def record_private_pcm(sink, seconds):
+    """Bounded read of only the named private monitor; never the default monitor."""
+    if seconds <= 0 or seconds > 300: raise ValueError("audio duration must be 0..300 seconds")
+    want = int(seconds * RATE * 2)
+    rec = subprocess.Popen(["parec", "-d", f"{sink}.monitor", "--format=s16le", f"--rate={RATE}", "--channels=1"],
+                           stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    parts, size, deadline = [], 0, time.monotonic() + seconds + 15
+    try:
+        while size < want and time.monotonic() < deadline:
+            if not select.select([rec.stdout], [], [], min(0.5, max(0, deadline-time.monotonic())))[0]: continue
+            chunk = os.read(rec.stdout.fileno(), 65536)
+            if not chunk: break
+            parts.append(chunk); size += len(chunk)
+    finally:
+        if rec.poll() is None:
+            rec.terminate()
+            try: rec.wait(timeout=3)
+            except subprocess.TimeoutExpired: rec.kill(); rec.wait(timeout=3)
+        rec.stdout.close()
+    return b"".join(parts)
+
+def duration_sufficient(pcm, requested):
+    return requested > 0 and len(pcm) / 2 / RATE >= requested * 0.95
+
+def capture_session(session, seconds=6, out_name="audio"):
+    """Audio real da sessao privada: sink nulo da sessao + fluxo do PID exato."""
+    from session_bridge import isolated
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", out_name):
+        raise ValueError("audio output must be a simple session-local name")
+    root, meta = isolated.load(session)
+    sink, pid = meta.get("audio_sink"), meta["emulator_process"]["pid"]
+    if not sink or not isolated.alive(meta["emulator_process"]):
+        print("[FAIL_AMBIENTE] sessao sem sink privado ou emulador morto"); return 2
+    if _run(["pactl", "list", "short", "sinks"]).stdout.find(sink) < 0:
+        print("[FAIL_AMBIENTE] sink privado ausente"); return 2
+    if not meta.get("audio_route") or not isolated.verify_audio_route(meta):
+        print("[FAIL_AMBIENTE] sessao nao roteou o fluxo do PID exato na partida (audio_error="
+              f"{meta.get('audio_error')}); captura recusada"); return 2
+    if not isolated.request(root, "status")["audio_enabled"]:
+        print("[FAIL_AMBIENTE] sessao ainda em mute; captura recusada"); return 2
+    isolated.request(root, "run")
+    moved = list(meta["audio_route"]["sink_inputs"])
+    try:
+        time.sleep(1.5)  # L048: warmup before measuring
+        pcm = record_private_pcm(sink, seconds)
+    finally:
+        isolated.request(root, "pause")
+    if not isolated.verify_audio_route(meta):
+        print("[FAIL_AMBIENTE] rota de audio mudou durante a captura"); return 2
+    effective = len(pcm) / 2 / RATE
+    if not duration_sufficient(pcm, seconds):
+        print(f"[FAIL] duracao efetiva {effective:.2f}s < pedida {seconds}s"); return 1
+    wav = str(root / f"{out_name}.wav"); write_wav(wav, pcm)
+    peak = _peak(pcm)
+    import hashlib
+    rec = {"session_id": meta["session_id"], "pid": pid, "rom_sha256": meta["rom_sha256"], "sink": sink,
+           "moved_sink_inputs": moved, "requested_seconds": seconds, "effective_seconds": round(effective, 3),
+           "audio_route": meta["audio_route"], "samples": len(pcm)//2, "peak": peak,
+           "wav_sha256": hashlib.sha256(open(wav, "rb").read()).hexdigest(),
+           "claim": "signal_from_session_pid; not music correctness"}
+    (root / f"{out_name}.audio.json").write_text(json.dumps(rec, indent=1))
+    print(f"[{'OK' if peak else 'FAIL'}] {wav} peak={peak} samples={len(pcm)//2}")
+    return 0 if peak else 1
+
 def _peak(pcm_bytes):
     import array
     a = array.array("h")
@@ -74,16 +150,8 @@ def _emulicious_pids():
 
 
 def _kill_emulicious_zombies(except_pid=None):
-    """L048: Java zumbi do emulador silencia a captura da ROM certa."""
-    killed = []
-    for pid in _emulicious_pids():
-        if except_pid is not None and str(pid) == str(except_pid):
-            continue
-        _run(["kill", "-TERM", pid])
-        killed.append(pid)
-    if killed:
-        time.sleep(0.8)
-    return killed
+    """L057/§93: discovery is not ownership; never terminate other agents."""
+    return []
 
 def write_wav(path, pcm_bytes, rate=RATE):
     with wave.open(path, "wb") as w:
@@ -230,8 +298,14 @@ def _self_check():
         write_wav(ps, b"\x00\x00" * RATE)
         n2, peak2, active2 = audit_audio.read_wav_stats(ps)
         assert peak2 == 0 and active2 == 0, "silencio deveria dar peak/active 0"
+        assert duration_sufficient(b"\0" * (RATE * 2), 1)
+        assert duration_sufficient(b"\0" * (RATE * 19 // 10), 1)
+        assert not duration_sufficient(b"\0" * (RATE * 19 // 10 - 2), 1)
+        assert not duration_sufficient(b"", 1)
+        assert not duration_sufficient(b"", 0)
         # deteccao de fluxo do emulador nao inventa resultado sem emulador
         assert isinstance(_emulator_sink_inputs(), list)
+        assert sink_inputs_by_pid(2**22 + 12345) == [], 'PID inexistente nao pode casar fluxo'
         # L048: classificar silencio exige controle historico
         assert classify_silence(500, None) == "signal"
         assert classify_silence(0, None) == "silence_unconfirmed"
@@ -247,6 +321,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--project")
     ap.add_argument("--rom")
+    ap.add_argument("--session",help="private session ID; sink privado por sessao, fluxo do PID exato")
     ap.add_argument("--seconds", type=int, default=6)
     ap.add_argument("--out", default="audio")
     ap.add_argument("--reference-rom",
@@ -255,6 +330,8 @@ def main():
     a = ap.parse_args()
     if a.self_check:
         return _self_check()
+    if a.session:
+        return capture_session(a.session, a.seconds, a.out)
     if not (a.project and a.rom):
         print("[FAIL] --project e --rom obrigatorios", file=sys.stderr)
         return 3

@@ -19,6 +19,11 @@ contrato de mecânica, público esperado.
 Métrica sem sensação observável não prova game feel.
 Sensação sem ROM/trace fica `needs_evidence`.
 FPS estável não prova controle bom.
+Para revisar gráficos/áudio/IA/HUD juntos e decidir crescimento, aplicar
+`workflows/product-quality-checkpoint.md`. Alvo NTSC60/PAL50 é regional;
+registre atraso entrada→reação→impacto/resultado separadamente de taxa média.
+Um contador de ISR não prova que a lógica/render terminou a cada deadline.
+Parecer de agente não é playtest com público nem valida aceitação de mercado.
 
 ## Saída
 

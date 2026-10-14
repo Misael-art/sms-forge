@@ -1,0 +1,32 @@
+{
+  "curation_id": "2026-10-09_l110_asset_bounds_gg_sms_scale",
+  "date": "2026-10-09",
+  "title": "Canvas íntegro e escala de luta derivada de Fatal Fury Special Game Gear",
+  "kind": "lesson",
+  "scope": "Prova técnica de poses convertidas para Master System e direção visual de escala do projeto Master of Fighters.",
+  "authorization": "O proprietário rejeitou a prova v2 por arma cortada e canvas 96x96 excessivo, pediu comparação de escala com Fatal Fury Special Game Gear, documentação no GDD/TDD e validação que impeça bordas incompletas.",
+  "lessons": [
+    {
+      "id": "L110",
+      "status": "promovida_com_medicao_de_bordas_e_alvo_visual_documentado",
+      "lesson": "Um proof pose não pode truncar arma/equipamento no limite do canvas. Canvas de saída precisa ser múltiplo de 8 e deixar pelo menos um pixel transparente nas quatro bordas; o auditor reproduz o transform de saída declarado desde o frame-fonte e reprova contato com borda ou divergência. Para Master of Fighters, a escala de corpo usa Fatal Fury Special Game Gear como referência de composição: cerca de 53 pixels em pé num viewport 160x144, projetados para SMS 256x192 em aproximadamente 71 pixels; faixa visual de trabalho 66-72, centro 70. A escala é direção de projeto, não limite de hardware; separar altura corporal de arma/capa/efeito e registrar canvas, bbox e tiles após conversão.",
+      "root_cause": "A prova anterior passava porque o auditor verificava fidelidade do preview em relação ao PNG-fonte, mas não examinava o espaço opaco no limite da célula. O compositor selecionou frame 07, cuja arma alcançava a borda direita, e tratou uma célula 96x96 como escala do personagem. A cobertura mecânica de pixels não detectava conteúdo truncado nem demonstrava adequação da escala ao jogo de luta pretendido.",
+      "evidence": {
+        "owner_feedback": "2026-10-09: a prova não está aprovada; a arma está cortada, a imagem está incompleta, 96x96 parece grande para o padrão de Fatal Fury Special Game Gear e GDD/TDD devem registrar um alvo transferível ao Master System.",
+        "superseded_proof": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v2.png",
+        "candidate_proof": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v3.png",
+        "candidate_report": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v3.json",
+        "reference_screenshot": "https://www.gamestar.de/galerien/fatal_fury_special_game_gear,46053.html",
+        "reference_resolution": "https://www.mobygames.com/game/10591/fatal-fury-special/screenshots/game-gear/66969/ (original screenshot labeled 160x144)",
+        "scale_calculation": "53 * 192 / 144 = 70.67, rounded to 71px; project range 66-72px",
+        "measured_v3": "80x80 canvas (10x10 tiles); nearest-neighbor 5/6 from 96x96 source cells; idle bbox 37x67, action bbox 68x70; margins L/T/R/B 20/7/23/6 and 7/4/5/6; 42+52 unique patterns, pair union 94 (3008 raw 4bpp bytes).",
+        "focused_validation": "audit_asset_proof_sheet.py --self-check passed deterministic transform, overlay, singleton-pixel, and edge-clearance cases; production audit of proof v3 passed. Human anatomy/equipment review and runtime budgets remain pending."
+      },
+      "rule_section": "SMS_GLOBAL §106",
+      "tool_that_measures": "audit_asset_proof_sheet.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md; tools/sms_wrapper/.agent/workflows/new-visual-asset.md; SMS_projects/master_of_fighters/doc/asset_conversion_proof_standard_v3.md",
+      "measurement_limits": "The tool measures tile alignment, declared nearest-neighbor derivation, preview identity, indexed palette, opaque bbox, and transparent border clearance. It cannot determine from pixels alone that a weapon was intended to exist or that it is anatomically attached; reviewer must confirm completeness against the concept. The 53px Game Gear figure height is a manual estimate from a gameplay screenshot, not a game-data extraction. Runtime SAT, scanline, residency, ROM and VBlank budgets are separate and remain pending."
+    }
+  ],
+  "dedup_key": "l110_keypose_frame_bounds_and_fatal_fury_game_gear_scale_20261009"
+}

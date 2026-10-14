@@ -1,48 +1,27 @@
 #!/usr/bin/env python3
-"""audit_psg_quality.py — piso de qualidade musical do PSG, medido no stream.
+"""Heuristicas de composicao para streams PSGlib simples, nao qualidade auditiva.
 
-`audit_audio.py` mede PRESENCA (peak, % ativo). Nada neste acervo media se o
-que toca e MUSICA ou metralhadora — e o resultado apareceu em 2026-09-25 na
-curadoria: tres projetos carregavam "musicas" de ~1 s em que os tres canais
-de tone tocam a MESMA nota no MESMO frame a volume maximo, com ruido
-PERIODICO (register R3 bit 2 = 1 -> assobio tonal, nao percussao) colado por
-baixo. Structuralmente e o que se ouve como "ruido pessimo": sem ritmo, sem
-dinamica, sem registro, sem loop.
+Formato latches/dados, WAIT 0x38..0x3F, END 0x00 e loop point 0x01.
+SN76489: atenuacao 0=alto/15=mudo; R3 bit2=1 ruido branco,
+bit2=0 ruido periodico. Bits 1..0 selecionam a taxa; 3 usa tone ch2.
+PSGlib.c confirma o transporte, BlastEm psg.c confirma o feedback.
 
-Este gate le os .psg (formato PSGlib, confirmado em
-sdk/devkitSMS-upstream/PSGlib/src/PSGlib.c: latch>=0x80, bit4=volume,
-dados 0x40..0x7F, 0x38=fim de frame, 0x39..=hold extra, 0x00=PSGEnd,
-0x01=loop point; nibble de volume = ATENUACAO, 0 mais alto / 15 mudo;
-ruido: latch 0xE0|fb|per, fb=1 -> periodico) e cobra seis clausulas:
+Politica M1..M7: gap medio entre escritas de periodo >=2 frames, variedade
+ de atenuacoes, estados de eventos sem unissono excessivo, maioria de comandos
+ de ruido branco com variedade de volume, >=250 frames, >=2 canais com oito
+ escritas de periodo e algum gap medio >=8 frames. Limiares sao escolhas do
+ projeto; nao leis musicais. Comando de periodo repetido nao e nota nova,
+ cardinalidade de volumes nao prova envelope e PASS nao prova musica/AAA.
+ SFX: politica de atenuacao inicial/final e duracao <=45 frames.
 
-  M1 ritmo      - nota nova a cada >= 2 frames por canal ativo
-                  (troca a cada frame = 16 Hz = chiado, nao melodia;
-                  arpeggio ultrarrapido legitimo roda em ~2 frames/nota)
-  M2 dinamica   - cada canal com >= 8 notas usa >= 2 atenuacoes != 15
-                  (volume constante = buzina de orgao; envelope e o que
-                  da ataque e eco ao SN76489)
-  M3 registro   - quadros com >= 2 canais na MESMA periodo <= 50%
-                  (unison total e o defeito do gerador compartilhado)
-  M4 ruido      - se ch3 tem >= 8 eventos, maioria branca (mode & 4 == 0)
-                  e com envelope (>= 2 atenuacoes); percussao branca e
-                  caixa/prato; periodico e metalico de SFX, nao bateria
-  M5 loop       - duracao >= 250 frames (5 s a 50 Hz)
-  M6 canais     - >= 2 canais de tone soando (PSG ao minimo = 1 canal e
-                  desperdicio; arpejo multiplexado ajuda, nao substitui)
-  M7 andamento- pelo menos um canal de tone ativo segura notas por
-                  >= 8 frames (160 ms a 50 Hz). Arpejo em 2 frames e
-                  legitimo como CAMADA, mas se NENHUMA camada respira o
-                  ouvinte so ouve granulado — foi a queixa humana de
-                  2026-09-25 ('soa acelerada') em streams que passavam
-                  no M1: compasso de 16 frames = semineas a 80 ms.
-
-SFX:
-  S1 decaimento - termina mais baixo do que comeca (ou vai a mudo)
-  S2 duracao    - <= 45 frames (0,9 s); SFX longo pisa no proximo evento
+Um frame e uma chamada PSGFrame, nao Hz fixos. Se o driver chama uma vez por
+VBlank, taxas sao 50/60 Hz conforme PAL/NTSC. Medir a cadencia real e ouvir a
+captura isolada continuam necessarios. O decodificador nao expande substrings
+comprimidas; elas sao recusadas, sem resultado de qualidade sobre bytes crus.
 
 Uso: audit_psg_quality.py --project <p> [--json out]
-     audit_psg_quality.py --psg <a.psg> [...] [--music|--sfx forcar classe]
-Exit: 0 tudo passa | 1 ha violacao | 3 uso/arquivo ausente
+     audit_psg_quality.py --psg <a.psg> [...]
+Exit: 0 passa politica | 1 violacao ou formato nao suportado | 3 uso/arquivo
 """
 import argparse
 import glob
@@ -53,14 +32,14 @@ import sys
 
 WAIT, END, LOOPPT = 0x38, 0x00, 0x01
 
-GAP_MIN = 2.0          # frames por nota (M1)
+GAP_MIN = 2.0          # gap medio entre escritas de periodo (M1)
 VOL_VARIETY = 2        # atenuacoes distintas != 15 (M2)
-UNISON_MAX = 0.50      # fracao de frames multi-canal em mesma periodo (M3)
+UNISON_MAX = 0.50      # instantes de eventos multi-canal, nao duracao (M3)
 WHITE_MIN = 0.50       # fracao de eventos de ruido brancos (M4)
 LOOP_MIN = 250         # frames de duracao minima de musica (M5)
 CH_MIN = 2             # canais de tone soando (M6)
-BREATH_MIN = 8.0       # frames por nota na camada que respira (M7)
-ACTIVE_NOTES = 8       # abaixo disso o canal e jingle: aviso, nao blocker
+BREATH_MIN = 8.0       # gap medio entre escritas de periodo (M7)
+ACTIVE_NOTES = 8       # elegibilidade da politica, nao identificacao de jingle
 SFX_MAX_FRAMES = 45    # S2
 
 
@@ -68,40 +47,48 @@ def decode(blob):
     """Decodifica um fluxo PSGlib.
 
     Retorna (events, duration): events e lista de (t, kind, ch, valor),
-    kind em {f, v, nctl}; t e o tempo em frames VBlanks acumulados.
+    kind em {f, v, nctl}; t conta chamadas PSGFrame. Tone exige low+high
+    contiguos; high-only e data apos volume/noise sao recusados.
     """
-    ev, t, last_latch = [], 0, None
+    ev, t = [], 0
     i = 0
     while i < len(blob):
         b = blob[i]
         if b >= 0x80:
-            last_latch = b
             ch = (b >> 5) & 3
             if b & 0x10:
                 ev.append((t, 'v', ch, b & 0x0F))
+                i += 1
             elif ch == 3:
                 ev.append((t, 'nctl', 3, b & 0x07))
-            i += 1
-        elif 0x40 <= b <= 0x7F and last_latch is not None:
-            ch = (last_latch >> 5) & 3
-            if ch < 3:
-                ev.append((t, 'f', ch,
-                           ((b & 0x3F) << 4) | (last_latch & 0x0F)))
-            i += 1
+                i += 1
+            else:
+                # Subconjunto suportado: low latch + high data contiguos.
+                # Low-only e data apos volume podem ser escritas PSG reais,
+                # mas nao pertencem a esta gramatica/driver preview simplificado.
+                if i + 1 >= len(blob) or not 0x40 <= blob[i + 1] <= 0x7F:
+                    raise ValueError('tone latch no offset %d exige high-data '
+                                     '0x40..0x7F imediatamente; low-only nao suportado' % i)
+                ev.append((t, 'f', ch, ((blob[i + 1] & 0x3F) << 4) | (b & 0x0F)))
+                i += 2
+        elif 0x40 <= b <= 0x7F:
+            raise ValueError('PSG data no offset %d sem tone-pair contiguo; '
+                             'data apos volume/noise ou high-only nao suportado' % i)
         elif WAIT <= b <= 0x3F:
-            # 0x38 = fim de frame; 0x39..0x3F = fim + (b&7) frames extras
-            # (PSGlib.c: cp PSGWait / and #0x07 -> PSGMusicSkipFrames)
             t += 1 + (b & 0x07 if b > WAIT else 0)
             i += 1
         elif b == END:
             break
+        elif b == LOOPPT:
+            i += 1  # Politica avalia a primeira passagem, nao o loop ouvido.
         else:
-            i += 1
+            raise ValueError('PSGlib comando 0x%02X no offset %d nao suportado; '
+                             'substring comprimida exige expansao antes da analise' % (b, i))
     return ev, t
 
 
 def analyze(events, duration):
-    """Aplica as seis clausulas. Retorna (violacoes, avisos, metricas)."""
+    """Aplica politicas M1..M7 sobre eventos; nao avalia som nem qualidade."""
     notes = {ch: [] for ch in range(3)}
     vols = {ch: set() for ch in range(4)}
     noise_ctl = []
@@ -118,7 +105,10 @@ def analyze(events, duration):
     m['canais_tone'] = sorted(
         ch for ch in range(3) if notes[ch])
     m['duracao_frames'] = duration
-    m['notas'] = {ch: len(notes[ch]) for ch in range(3)}
+    m['notas'] = {ch: len(notes[ch]) for ch in range(3)}  # chave legada: escritas
+    m['escopo'] = 'heuristica_eventos_psglib_simples_primeira_passagem'
+    m['contagem_notas_significa'] = 'escritas_periodo; nao notas distintas/ataques'
+    m['unison_denominador'] = 'instantes_com_eventos_multicanal; nao frames sustentados'
 
     # M1 ritmo — usa eventos na ordem real de tempo
     gaps_by_ch = {}
@@ -129,21 +119,19 @@ def analyze(events, duration):
         gaps_by_ch[ch] = mean_gap
         if mean_gap < GAP_MIN:
             viol.append('M1 ritmo: ch%d troca de nota a cada %.2f frames '
-                        '(< %.1f) — metralhadora de 16 Hz, nao melodia'
+                        '(< %.1f) — abaixo da politica de espacamento; nao mede Hz'
                         % (ch, mean_gap, GAP_MIN))
     m['gap_medio'] = {ch: round(g, 2) for ch, g in gaps_by_ch.items()}
 
-    # M7 andamento — a camada que respira: algum canal de tone ativo
-    # segura a nota por >= BREATH_MIN frames. Sem ela, ate um arranjo
-    # "correto" ao ouvido e granulado ininterrompido.
+    # M7 espacamento medio — proxy de densidade, nao nota sustentada/escuta.
     if gaps_by_ch:
         best_ch = max(gaps_by_ch, key=gaps_by_ch.get)
         best = gaps_by_ch[best_ch]
         m['camada_respira'] = {'ch': best_ch, 'gap': round(best, 2)}
         if best < BREATH_MIN:
-            viol.append('M7 andamento: nenhuma camada segura nota por >= '
-                        '%.0f frames (melhor gap %.2f em ch%d) — tudo em '
-                        'movimento continuo soa como granulado, nao musica'
+            viol.append('M7 andamento: nenhum canal tem gap medio >= '
+                        '%.0f frames (melhor gap %.2f em ch%d) — '
+                        'escritas abaixo da politica de espacamento medio'
                         % (BREATH_MIN, best, best_ch))
 
     # M2 dinamica
@@ -151,11 +139,11 @@ def analyze(events, duration):
         dy = len(vols[ch] - {15})
         if dy < VOL_VARIETY:
             viol.append('M2 dinamica: ch%d usa %d atenuacao(oes) != mudo '
-                        '(min %d) — sem envelope nao ha ataque nem eco'
+                        '(min %d) — abaixo da politica de variedade; nao prova envelope'
                         % (ch, dy, VOL_VARIETY))
     m['atenuacoes'] = {ch: sorted(v - {15}) for ch, v in vols.items() if v}
 
-    # M3 registro — varre a linha do tempo com a nota sustentada por canal
+    # M3 registro — amostra estados nos instantes de eventos, sem ponderar duracao
     cur = {}
     vol_cur = {ch: 15 for ch in range(4)}
     multi = uni = 0
@@ -178,66 +166,66 @@ def analyze(events, duration):
     frac = uni / multi if multi else 0.0
     m['unison'] = round(frac, 3)
     if frac > UNISON_MAX:
-        viol.append('M3 registro: %.0f%% dos frames com todos os canais '
-                    'tocando tem a MESMA nota em todos — unison total e '
-                    'buzzer, nao acorde' % (100 * frac))
+        viol.append('M3 registro: %.0f%% dos instantes de eventos multicanal '
+                    'tem o mesmo periodo — acima da politica de unissono' % (100 * frac))
     elif frac > 0.25:
-        warn.append('M3: unison em %.0f%% dos frames (>25%%)' % (100 * frac))
+        warn.append('M3: unison em %.0f%% dos instantes de eventos (>25%%)' % (100 * frac))
 
     # M4 ruido
     if len(noise_ctl) >= ACTIVE_NOTES:
-        white = sum(1 for _, mode in noise_ctl if not (mode & 0x04))
+        white = sum(1 for _, mode in noise_ctl if mode & 0x04)
         wfrac = white / len(noise_ctl)
         if wfrac < WHITE_MIN:
             viol.append('M4 ruido: %.0f%% dos eventos de ch3 sao ruido '
-                        'PERIODICO (R3 bit2=1 = assobio tonal); percussao '
-                        'branca exige mode & 4 == 0' % (100 * (1 - wfrac)))
+                        'PERIODICO (R3 bit2=0); politica de maioria branca '
+                        'exige mode & 4 != 0; nao e lei de percussao' % (100 * (1 - wfrac)))
         m['ruido_branco'] = round(wfrac, 3)
     elif noise_ctl:
-        warn.append('M4: ch3 com apenas %d eventos (jingle?)' % len(noise_ctl))
+        warn.append('M4: ch3 com apenas %d eventos (abaixo da elegibilidade)' % len(noise_ctl))
     if noise_ctl and len(vols[3] - {15}) < VOL_VARIETY:
         viol.append('M4 ruido: ch3 sem envelope de volume (%d atenuacao(oes)) '
-                    '— percussao colada em volume unico e chiado'
+                    '— abaixo da politica de variedade; nao prova envelope'
                     % len(vols[3] - {15}))
     if not noise_ctl:
-        warn.append('M4: sem canal de ruido — percussao ausente (permitido, '
-                    'claim de mix completo nao)')
+        warn.append('M4: sem comandos de ruido; permitido, nao permite inferir '
+                    'presenca/ausencia de percussao ou qualidade do mix')
 
     # M5 loop
     if duration < LOOP_MIN:
-        viol.append('M5 loop: duracao %d frames < %d (5 s a 50 Hz) — '
-                    'loop de %0.1f s e tortura em batalha'
-                    % (duration, LOOP_MIN, duration / 50.0))
+        viol.append('M5 loop: primeira passagem %d frames < %d — '
+                    'politica de comprimento; nao mede loop audivel/segundos'
+                    % (duration, LOOP_MIN))
 
     # M6 canais
     if len(sounding) < CH_MIN:
         if any(notes[ch] for ch in range(3)):
             viol.append('M6 canais: %d canal(is) de tone com >= %d notas — '
-                        'PSG tem 3; 1 e deriva' % (len(sounding), ACTIVE_NOTES))
+                        'abaixo da politica de densidade; nao mede canais audiveis' % (len(sounding), ACTIVE_NOTES))
         else:
             viol.append('M6 canais: nenhum canal de tone ativo — jingle sem '
-                        'conteudo melodico')
+                        'escritas de periodo suficientes para esta politica')
     return viol, warn, m
 
 
 def analyze_sfx(events, duration):
     viol, warn = [], []
-    volseq = {ch: [v for (t, k, c, v) in events if k == 'v' and c == ch]
-              for ch in range(4)}
-    first = next((v for ch in range(4) for v in volseq[ch] if v < 15), None)
-    last = None
-    for ch in range(4):
-        s = [v for v in volseq[ch] if v < 15]
-        if s:
-            last = s[-1]
+    # Timeline estavel: primeiro tempo, depois ordem de escrita dentro do frame.
+    volumes = [e for e in sorted(events, key=lambda e: e[0]) if e[1] == 'v']
+    audible_start = next((i for i, e in enumerate(volumes) if e[3] < 15), None)
     if duration > SFX_MAX_FRAMES:
-        viol.append('S2 duracao: SFX de %d frames > %d — pisa o proximo '
-                    'evento' % (duration, SFX_MAX_FRAMES))
-    if first is not None and last is not None and last <= first:
-        viol.append('S1 decaimento: comeca na atenuacao %d e termina em %d '
-                    '— sem fade o SFX corta seco e vira clique' % (first, last))
-    if not any(v < 15 for ch in range(4) for v in volseq[ch]):
-        viol.append('S1: SFX nunca tira canal do mudo — silencioso')
+        viol.append('S2 duracao: SFX de %d frames > %d — acima da politica '
+                    'de duracao' % (duration, SFX_MAX_FRAMES))
+    if audible_start is None:
+        viol.append('S1: nenhuma atenuacao !=15 declarada — nao prova som')
+    else:
+        first, last = volumes[audible_start][3], volumes[-1][3]
+        if last <= first:
+            viol.append('S1 decaimento: primeira atenuacao nao muda %d e '
+                        'ultima escrita %d — sem crescimento liquido na '
+                        'politica temporal; nao mede waveform/clique' % (first, last))
+        if len({e[2] for e in volumes[audible_start:]}) > 1:
+            warn.append('S1 multicanal: compara escritas inicial/final globalmente; '
+                        'nao prova fade de cada canal nem mix silencioso')
     return viol, warn
 
 
@@ -254,8 +242,15 @@ def classify(path, force=None):
 
 def audit_one(path, force=None):
     blob = open(path, 'rb').read()
-    ev, dur = decode(blob)
     kind = classify(path, force)
+    try:
+        ev, dur = decode(blob)
+    except ValueError as error:
+        return {'arquivo': os.path.basename(path), 'classe': kind,
+                'bytes': len(blob), 'sha256': hashlib.sha256(blob).hexdigest(),
+                'metricas': {'escopo': 'formato_nao_suportado'},
+                'violacoes': ['FORMAT: ' + str(error)], 'avisos': [],
+                'veredito': 'reprova'}
     if kind == 'music':
         viol, warn, m = analyze(ev, dur)
     else:
@@ -278,6 +273,8 @@ def report_json(root, results):
         'schema': 'psg_quality_v1',
         'tool': os.path.basename(__file__),
         'project': os.path.abspath(root) if root else None,
+        'claim_ceiling': 'heuristicas_de_eventos; nao som, musica_aprovada ou AAA',
+        'noise_feedback': 'R3 bit2: 1=white, 0=periodic',
         'reprova': sorted(r['arquivo'] for r in results
                           if r['veredito'] == 'reprova'),
         'results': results,
@@ -316,7 +313,7 @@ def _arena_style():
         fr.append((_tone(0, p) + _vol(0, 1)
                    + _tone(1, p) + _vol(1, 1)
                    + _tone(2, p) + _vol(2, 1)
-                   + _noise(0x04, 1), 0))
+                   + _noise(0x00, 1), 0))
     return _enc(fr)
 
 
@@ -330,10 +327,10 @@ def _arranjo():
         p_mel, p_bass = mel[bar % 4], bass[bar % 4]
         fr.append((_tone(0, p_mel) + _vol(0, 2)
                    + _tone(2, p_bass) + _vol(2, 4)
-                   + _noise(0x02, 3), 3))
+                   + _noise(0x06, 3), 3))
         fr.append((_vol(0, 5) + _vol(2, 6) + _vol(3, 15), 3))
         fr.append((_tone(2, p_bass >> 1) + _vol(2, 3)
-                   + _vol(0, 7) + _noise(0x03, 4), 2))
+                   + _vol(0, 7) + _noise(0x07, 4), 2))
         fr.append((_vol(0, 9) + _vol(2, 15) + _vol(3, 15), 2))
     return _enc(fr)
 
@@ -356,7 +353,7 @@ def _granulado():
     for i in range(70):                       # 4 frames/passo -> 280 frames
         fr.append((_tone(0, mel[i % 4]) + _vol(0, 2 if i % 2 else 4)
                    + _tone(2, bass[i % 4]) + _vol(2, 3 if i % 2 else 5)
-                   + _noise(0x02 if i % 2 else 0x00, 3 if i % 2 else 6), 1))
+                   + _noise(0x06 if i % 2 else 0x04, 3 if i % 2 else 6), 1))
         fr.append((_tone(1, arp[i % 3]) + _vol(1, 6 if i % 2 else 8), 1))
     return _enc(fr)
 
@@ -417,10 +414,51 @@ def self_check():
     ts = [t for (t, k, c, v) in ev if k == 'f']
     ok.append(('hold de 3 frames conta no tempo', ts[1] - ts[0] == 4
                and dur == 5))
-    # canal 3 com periodicos viram fracao correta
+    # Feedback de todos os modos: bit2=1 branco; bits1..0 nao alteram classe.
     ev, dur = decode(_arena_style())
     w = [v for (t, k, c, v) in ev if k == 'nctl']
-    ok.append(('nctl capturado com modo', all(v == 0x04 for v in w)))
+    ok.append(('nctl capturado com modo', all(v == 0x00 for v in w)))
+    for mode in range(8):
+        noise_events, noise_dur = decode(_enc([
+            (_noise(mode, 2 if i % 2 else 5), 7) for i in range(8)]))
+        nv, _nw, nm = analyze(noise_events, max(noise_dur, LOOP_MIN))
+        expected_white = 1.0 if mode & 4 else 0.0
+        noise_policy_failure = any('M4 ruido:' in x for x in nv)
+        ok.append(('modo %d branco=%s (bit2)' % (mode, bool(mode & 4)),
+                   nm['ruido_branco'] == expected_white and
+                   noise_policy_failure == (expected_white == 0.0)))
+    for modes, expected in (((0, 1, 2, 3, 4, 5, 6, 7), 0.5),
+                            ((0, 1, 2, 3, 0, 1, 4, 5), 0.25)):
+        ne, nd = decode(_enc([(_noise(mode, 2 if i % 2 else 5), 7)
+                             for i, mode in enumerate(modes)]))
+        nv, _nw, nm = analyze(ne, LOOP_MIN)
+        ok.append(('mistura branco %.2f e limiar M4' % expected,
+                   nm['ruido_branco'] == expected and
+                   any('M4 ruido:' in x for x in nv) == (expected < WHITE_MIN)))
+    # Compressed bytes cannot be silently treated as literal PSG commands.
+    try:
+        decode(bytes([0x08, 0x80, 0x00, 0x38, 0x00]))
+        ok.append(('substring PSGlib recusada sem expansao', False))
+    except ValueError:
+        ok.append(('substring PSGlib recusada sem expansao', True))
+    for name, blob in (('tone low seguido WAIT', bytes([0x80, WAIT, END])),
+                       ('volume latch seguido data', bytes([0x90, 0x42, WAIT, END])),
+                       ('tone low truncado', bytes([0x80])),
+                       ('data sem latch', bytes([0x42, WAIT, END]))):
+        original = bytes(blob)
+        try:
+            decode(blob)
+            ok.append((name + ' recusado', False))
+        except ValueError:
+            ok.append((name + ' recusado sem alterar bytes', blob == original))
+    temporal = [(0, 'v', 3, 1), (1, 'v', 0, 14)]
+    ok.append(('SFX canais nao invertem ordem temporal',
+               analyze_sfx(temporal, 2)[0] == []))
+    ok.append(('SFX ordem temporal contraria reprova',
+               any('S1' in x for x in analyze_sfx([(0, 'v', 0, 14),
+                                                  (1, 'v', 3, 1)], 2)[0])))
+    ok.append(('SFX ultima escrita mudo permite decay',
+               analyze_sfx([(0, 'v', 2, 1), (1, 'v', 2, 15)], 2)[0] == []))
     # audit_one de ponta a ponta — foi aqui que o unpack de SFX quebrou uma
     # vez: o self-check chamava analyze_sfx direto, nunca a entrada publica.
     import tempfile
@@ -482,7 +520,7 @@ def main():
             print('    VIOLACAO %s' % v)
         for w in r['avisos']:
             print('    aviso    %s' % w)
-    print('[psg-quality] %d/%d streams reprovados no piso de qualidade'
+    print('[psg-quality] %d/%d streams reprovados na politica de eventos'
           % (len(fails), len(results)))
     return 1 if fails else 0
 

@@ -577,6 +577,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--project", default=".")
     ap.add_argument("--rom")
+    ap.add_argument("--session",help="private emulator session ID/path; never focus the host desktop")
+    ap.add_argument("--input-script",help="JSON sequence with durations in VDP frames")
     ap.add_argument("--frames", type=int, default=300,
                     help="frames de jogo antes da captura (default 300)")
     ap.add_argument("--out", default="evidence")
@@ -662,6 +664,23 @@ def main():
         ok, why = image_informative(args.check_image)
         print(("[PASS] " if ok else "[FAIL] ") + why)
         return 0 if ok else 1
+    if args.session:
+        from session_bridge.isolated import load,sha,request,sequence,capture as private_capture,publish
+        from pathlib import Path
+        try:
+            root,meta=load(args.session)
+            if args.rom and sha(args.rom)!=meta["rom_sha256"]:raise ValueError("--rom differs from session ROM")
+            if args.press:raise ValueError("private input uses --input-script in frames, not --press in milliseconds")
+            if args.input_script:
+                with open(args.input_script) as src:sequence(root,json.load(src))
+            else:request(root,"step",args.frames)
+            record=private_capture(root,args.out+".png")
+            bundle=publish(root,args.out+".png",Path(args.project)/"out/evidence/sessions")
+            print("[PASS] framebuffer da sessao: "+str(bundle))
+            print("Input recebido/aplicado exige observacao da ROM para claim de gameplay.")
+            return 0
+        except (OSError,RuntimeError,ValueError) as e:
+            print("[FAIL] "+str(e),file=sys.stderr);return 2
     if not args.rom:
         print("[FAIL] --rom obrigatorio (ou use --check-image / --self-check)",
               file=sys.stderr)

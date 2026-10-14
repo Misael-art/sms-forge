@@ -20,8 +20,19 @@ def test_synthetic_character_loads_and_serializes(character):
     d = dataclasses.asdict(character)
     json.dumps(d, default=str)
     assert character.name == "Mini Fixture"
+    assert character.author == "fixture"
     assert character.anims, "sem animacoes"
     assert character.sprites, "sem sprites"
+
+
+def test_legacy_author_colon_is_preserved(tmp_path):
+    root = build(tmp_path / "author_colon")
+    def_path = root / "mini.def"
+    text = def_path.read_text(encoding="ascii")
+    def_path.write_text(text.replace('author = "fixture"', "Author: Falchion22"), encoding="ascii")
+    parsed = load(Source(root))
+    assert parsed.author == "Falchion22"
+    assert parsed.info["author"] == "Falchion22"
 
 
 def test_sprites_include_link_and_pcx_sizes(character):

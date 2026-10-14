@@ -44,6 +44,15 @@ CANON = [
 SPRITE_MODE_MD = re.compile(
     r"8\s*[x×]\s*8\s+ou\s+16\s*[x×]\s*16", re.I)
 X_OFFSET_MD = re.compile(r"X\s*\+\s*32")
+SLOT0_FIXED = re.compile(r"slot\s*(?:0x0000|0)\s+(?:inteiro\s+)?fixo\s+na\s+p[aá]gina\s*0", re.I)
+SAT_FOUR_BYTES = re.compile(r"SAT\s*[:(=]?\s*64\s*(?:sprites?\s*)?[×x*]\s*4\s*B", re.I)
+
+# L093: o pad do SMS tem KEY_1 e KEY_2 e diagonal = duas direcoes (SMSlib.h:296-302). Um conversor herdou
+# "1 botao" e "diagonal mecanicamente impossivel" e bloqueou 64 de 70 comandos do Ken por premissa errada.
+PAD_DIAG_IMPOSSIBLE = re.compile(r"diagonal[^.\n]{0,60}imposs|imposs[^.\n]{0,60}diagonal", re.I)
+PAD_ONE_BUTTON = re.compile(r"\b1\s*bot[aã]o\b[^.\n]{0,30}(?:pad|start)|pad[^.\n]{0,40}\b1\s*bot[aã]o\b", re.I)
+PAD_CORRECTION = ("corrigido", "dizia", "refutad", "errado", "mega drive", "megadrive", "supersed",
+                  "afirmava", "contradiz", "oposta", "opostas")
 
 # "DMA" so pode aparecer negado: o SMS nao tem DMA. Frases de negacao aceitas.
 NEG_DMA = ("sem dma", "nao existe dma", "não existe dma", "nao ha dma",
@@ -52,11 +61,15 @@ NEG_DMA = ("sem dma", "nao existe dma", "não existe dma", "nao ha dma",
 def _docs(root):
     pats = [os.path.join(root, "doc", "**", "*.md"),
             os.path.join(root, "tools", "sms_wrapper", ".agent", "**", "*.md"),
-            os.path.join(root, "AGENTS.md")]
+            os.path.join(root, "AGENTS.md"),
+            os.path.join(root, "tools", "sms_wrapper", "mugen2sms", "**", "*.py")]
     out = []
     for p in pats:
         out += glob.glob(p, recursive=True)
-    return sorted(set(out))
+    # Evidence snapshots preserve old/failed documents; they are not current
+    # doctrine. Auditing them as live instructions yields false regressions.
+    evidence = os.path.abspath(os.path.join(root, "doc", "curation", "evidence"))
+    return sorted(f for f in set(out) if not os.path.abspath(f).startswith(evidence + os.sep))
 
 def check_text(texto, origem="<texto>"):
     problems = []
@@ -107,6 +120,16 @@ def check_text(texto, origem="<texto>"):
             problems.append(
                 f"{os.path.basename(origem)}:{linha_n}: X+32 afirmado como "
                 "offset de sprite — no Master System X=0 e a borda (L003)")
+        if (SLOT0_FIXED.search(linha) or SAT_FOUR_BYTES.search(linha)) and not any(
+                w in low for w in ("corrigido", "dizia", "refutad", "supersed", "errado", "não", "nao")):
+            problems.append(
+                f"{os.path.basename(origem)}:{linha_n}: mapper/SAT contradiz SMS Mode4: "
+                "somente primeiro 1KiB fixo; SAT possui 64Y e 128X/tile (L001/L069/L117)")
+        if (PAD_DIAG_IMPOSSIBLE.search(linha) or PAD_ONE_BUTTON.search(linha)) and not any(
+                w in low or w in ctx for w in PAD_CORRECTION):
+            problems.append(
+                f"{os.path.basename(origem)}:{linha_n}: pad SMS com 1 botao ou diagonal impossivel — "
+                "o pad tem KEY_1+KEY_2 e diagonal = duas direcoes (SMSlib.h:296-302, L093)")
         # "dma" como SUBSTRING casava dentro de "Roadmap" — 3 falsos positivos.
         # E citar DMA para negar/comparar e legitimo. So reprova quando o texto
         # MANDA USAR DMA, que e a falha real (instrucao de outro console).
@@ -122,12 +145,35 @@ def audit(root):
     problems = []
     for f in _docs(root):
         try:
-            problems += check_text(open(f, encoding="utf-8", errors="replace").read(), f)
+            found = check_text(open(f, encoding="utf-8", errors="replace").read(), f)
+            if f.endswith(".py"):     # codigo: so a premissa de pad (contagens medidas em docstrings sao legitimas)
+                found = [x for x in found if "pad SMS" in x]
+            problems += found
         except OSError as e:
             problems.append(f"{f}: ilegivel ({e})")
     return problems
 
 def _self_check():
+    import tempfile
+    from pathlib import Path
+    with tempfile.TemporaryDirectory(prefix="sms-hardware-doctrine-") as tmp:
+        old = Path(tmp) / "doc/curation/evidence/before/README.md"
+        old.parent.mkdir(parents=True)
+        old.write_text("SAT (64 sprites ×4B=256B)")
+        assert not audit(tmp), "historical snapshot is not active doctrine"
+        current = Path(tmp) / "doc/current.md"
+        current.write_text("SAT (64 sprites ×4B=256B)")
+        assert audit(tmp), "current doctrine still requires checking"
+        current.unlink()
+        alias = Path(tmp) / "tools/sms_wrapper/.agent/skills/current.md"
+        alias.parent.mkdir(parents=True)
+        alias.symlink_to(old)
+        assert audit(tmp), "active alias to historical prose is still active doctrine"
+    assert check_text("slot 0x0000 fixo na página 0. Troca por macro.")
+    assert check_text("SAT (64 sprites ×4B=256B)")
+    assert not check_text("Somente 0x0000–0x03FF é fixo; slot 0 via 0xFFFD.")
+    assert not check_text("SAT: 64 bytes Y + 128 bytes X/tile; reserva 256B.")
+    assert not check_text("Corrigido: dizia slot 0x0000 fixo na página 0.")
     # REPROVA numeros do Mega Drive afirmados como lei do SMS
     p = check_text("Maximo de 20 sprites por scanline no modo H40.")
     assert any("Mega Drive" in x for x in p), f"faltou pegar 20 sprites/scanline: {p}"
@@ -175,6 +221,12 @@ def _self_check():
         "Corrigido 2026-09-01 (L003): dizia X+32 (Mega Drive).")
     assert not check_text(
         "Arte 16×16 exige metasprite. TALL e 8×16.")
+    # L093: premissa de pad errada reprova; nota de correcao e frase correta passam
+    assert check_text("Diagonal e mecanicamente impossivel no cross-pad."), "faltou pegar diagonal impossivel"
+    assert check_text("Pad SMS: 1 botao + start."), "faltou pegar pad de 1 botao"
+    assert not check_text("O pad tem KEY_1 e KEY_2; diagonal = duas direcoes juntas.")
+    assert not check_text("Corrigido (L093): dizia 'diagonal impossivel' e '1 botao no pad'.")
+    assert not check_text("Direcoes opostas sao impossiveis no pad.")
     print("[SELF-CHECK OK] hardware_constants (reprova numero de outro console "
           "afirmado como lei; aceita os do SMS e as notas de correcao)")
     return 0

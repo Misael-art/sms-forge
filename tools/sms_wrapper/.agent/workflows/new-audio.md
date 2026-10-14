@@ -8,3 +8,8 @@
 4. Áudio entra no orçamento worst-frame da cena.
 5. Evidência final inclui áudio audível. Silêncio → zumbis + controle
    histórico na mesma rodada (L048); não editar a ROM.
+6. Revisão usa música isolada e mix com SFX da ação real, canais restaurados
+   depois de pausa/round/tela e trechos alinhados quando comparar referência.
+   `audit_psg_quality.py` aplica heurísticas declaradas; composição, balanço,
+   clipping e adequação ao público precisam de audição/review independente.
+   Preview sintetizado é controle offline, não captura do chip/emulador.

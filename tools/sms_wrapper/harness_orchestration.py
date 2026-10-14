@@ -16,8 +16,9 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 MAX_PARALLEL = 3
 
 LOCAL_ONLY = {
@@ -40,32 +41,92 @@ class ContractError(ValueError):
 
 
 def _writes_overlap(a, b):
-    wa = set(a.get("write_paths") or [])
-    wb = set(b.get("write_paths") or [])
-    return bool(wa & wb)
+    wa = [Path(p).resolve() for p in a.get("write_paths") or []]
+    wb = [Path(p).resolve() for p in b.get("write_paths") or []]
+    return any(x == y or x in y.parents or y in x.parents for x in wa for y in wb)
 
 
 def plan(taskset):
     if not isinstance(taskset, dict):
         raise ContractError("taskset_not_object")
-    tasks = taskset.get("tasks") or []
+    tasks = taskset.get("tasks", [])
     if not isinstance(tasks, list):
         raise ContractError("tasks_not_array")
+    if any(not isinstance(t, dict) for t in tasks):
+        raise ContractError("task_not_object")
+    identifiers = [t.get("id", f"t{i}") for i, t in enumerate(tasks)]
+    if any(not isinstance(tid, str) or not tid.strip() for tid in identifiers) or len(set(identifiers)) != len(identifiers):
+        raise ContractError("task_ids_must_be_unique_strings")
+    for t in tasks:
+        paths = t.get("write_paths", [])
+        if not isinstance(paths, list) or any(not isinstance(p, str) or not p for p in paths):
+            raise ContractError("write_paths_must_be_strings")
+
+    # The coordinator reserves paths in one registry before workers produce.
+    # A plan is a preflight, not a filesystem lock or a spawned worker.
+    registry, registry_problem = None, None
+    ref = taskset.get("artifact_registry")
+    if ref is not None:
+        try:
+            from artifact_registry import audit, resolve_registry
+            if not isinstance(ref, dict):
+                raise ValueError("registry reference must be object")
+            project, source = Path(ref["project"]), Path(ref["path"])
+            if not project.is_absolute() or not source.is_absolute():
+                raise ValueError("registry/project paths must be absolute")
+            source = resolve_registry(project, source)
+            raw = source.read_bytes()
+            import hashlib
+            if hashlib.sha256(raw).hexdigest() != ref.get("sha256"):
+                raise ValueError("stale registry snapshot")
+            registry = json.loads(raw)
+            report = audit(project, registry, scan=True)
+            if not report["ok"]:
+                raise ValueError("; ".join(report["problems"][:3]))
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            registry = None
+            registry_problem = str(error)
 
     local, parallel, rejected = [], [], []
+    reserved = [t for t in tasks if t.get("kind") in LOCAL_ONLY or t.get("owns_claim") or t.get("owns_promotion")]
     for i, raw in enumerate(tasks):
         task = dict(raw)
-        tid = task.get("id") or f"t{i}"
+        tid = task.get("id", f"t{i}")
         kind = task.get("kind")
         task["id"] = tid
         if kind not in VALID_KINDS:
             rejected.append({"id": tid, "reason": f"unknown_kind:{kind}"})
             continue
+        visual_suffixes = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".aseprite", ".psd", ".xlsx", ".ods"}
+        needs_registry = kind == "visual_production" or any(
+            Path(p).suffix.lower() in visual_suffixes
+            or "data/source_art" in Path(p).as_posix()
+            for p in task.get("write_paths", []))
+        if registry is not None:
+            needs_registry |= any(
+                Path(p).resolve().is_relative_to((project / loc["path"]).resolve())
+                for p in task.get("write_paths", []) for loc in registry["locations"].values()
+                if loc["mode"] == "managed")
+        if needs_registry and task.get("write_paths"):
+            if registry is None or registry_problem:
+                rejected.append({"id": tid, "reason": "visual_outputs_need_valid_registry:" + str(registry_problem or "missing")})
+                continue
+            ids = task.get("artifact_ids")
+            rows = {a["id"]: a for a in registry["artifacts"]}
+            if (not isinstance(ids, list) or not ids or any(not isinstance(x, str) for x in ids)
+                    or len(set(ids)) != len(ids) or any(x not in rows or rows[x]["status"] != "reserved" for x in ids)):
+                rejected.append({"id": tid, "reason": "visual_outputs_need_reserved_artifact_ids"})
+                continue
+            expected = {(project / f["path"]).resolve() for aid in ids for f in rows[aid]["files"]}
+            actual = {Path(p).resolve() for p in task["write_paths"]}
+            if actual != expected:
+                rejected.append({"id": tid, "reason": "write_paths_differ_from_reserved_files"})
+                continue
         if kind in LOCAL_ONLY or task.get("owns_claim") or task.get("owns_promotion"):
             task["assignment"] = "coordinator"
             local.append(task)
             continue
-        overlap = any(_writes_overlap(task, other) for other in parallel + local)
+        overlap = any(_writes_overlap(task, other) for other in parallel + local + reserved if other.get("id") != task.get("id"))
         if overlap or kind not in PARALLEL_OK:
             task["assignment"] = "coordinator"
             task["serialized_reason"] = (
@@ -112,11 +173,22 @@ def plan(taskset):
         "rejected": rejected,
         "tasks": local + parallel,
         "claim_ceiling": "orchestration_diagnostic_only",
-        "ok": not rejected,
+        "artifact_registry_checked": ref is not None and not registry_problem,
+        "artifact_registry_problem": registry_problem,
+        "preflight_only_not_filesystem_lock": True,
+        "ok": not rejected and registry_problem is None,
     }
 
 
 def validate_result(envelope):
+    if envelope.get("schema") in {"sms_subagent_session_v1", "sms_subagent_session_v2"}:
+        from audit_subagent_session import check_ref, validate_report
+        try:
+            request = json.loads(check_ref(envelope.get("request")).read_text())
+            return validate_report(envelope, request)["problems"]
+        except (OSError, ValueError, TypeError) as e: return [str(e)]
+    if envelope.get("execution_mode") == "isolated_native_subagents" or envelope.get("claim_ceiling") == "assigned_checks_only":
+        return ["native session QA requires sms_subagent_session_v1/v2; legacy envelope cannot bypass coverage"]
     problems = []
     if envelope.get("artifact_kind") != "harness_worker_result":
         problems.append("artifact_kind deve ser harness_worker_result")
@@ -130,10 +202,32 @@ def validate_result(envelope):
 
 
 def _self_check() -> int:
+    import tempfile
+    from artifact_registry import fixture, digest
+    with tempfile.TemporaryDirectory(prefix="harness-registry-") as tmp:
+        project = Path(tmp) / "game"
+        registry = fixture(project)
+        row = registry["artifacts"][0]
+        (project / row["files"][0]["path"]).unlink()
+        row["status"] = "reserved"
+        row["files"][0].pop("sha256")
+        source = Path(tmp) / "registry.json"
+        source.write_text(json.dumps(registry))
+        ref = {"project": str(project), "path": str(source), "sha256": digest(source)}
+        output = str(project / row["files"][0]["path"])
+        task = {"id": "v", "kind": "visual_production", "write_paths": [output], "artifact_ids": [row["id"]]}
+        valid = plan({"artifact_registry": ref, "tasks": [task]})
+        assert valid["ok"] and valid["worker_tasks"] == ["v"], valid
+        assert not plan({"tasks": [task]})["ok"]
+        assert not plan({"artifact_registry": ref, "tasks": [{**task, "write_paths": [str(project / 'other.png')]}]})["ok"]
+        assert not plan({"artifact_registry": {**ref, "sha256": "0" * 64}, "tasks": [task]})["ok"]
+        for misclassified in ("inventory", "visual_review", "documentation_update", "test_execution"):
+            assert not plan({"tasks": [{"id": "wrong", "kind": misclassified,
+                "write_paths": [str(project / "unregistered.xlsx")]}]})["ok"]
     plan_ok = plan({
         "tasks": [
-            {"id": "v", "kind": "visual_production", "lane": "visual",
-             "write_paths": ["res/sprites/a.png"]},
+            {"id": "v", "kind": "inventory", "lane": "visual",
+             "write_paths": ["out/visual_inventory.json"]},
             {"id": "r", "kind": "runtime_production", "lane": "runtime",
              "write_paths": ["src/fight.c"]},
             {"id": "a", "kind": "audio_qa", "lane": "audio_qa",
@@ -150,11 +244,15 @@ def _self_check() -> int:
     assert "c" in claim["coordinator_tasks"] and "v" in claim["worker_tasks"], claim
 
     overlap = plan({"tasks": [
-        {"id": "v1", "kind": "visual_production", "write_paths": ["res/a.png"]},
-        {"id": "v2", "kind": "visual_production", "write_paths": ["res/a.png"]},
+        {"id": "v1", "kind": "inventory", "write_paths": ["out/a.json"]},
+        {"id": "v2", "kind": "inventory", "write_paths": ["out/a.json"]},
     ]})
     assert overlap["worker_tasks"] == ["v1"], overlap
     assert "v2" in overlap["coordinator_tasks"], overlap
+    nested = plan({"tasks": [
+        {"id":"child","kind":"test_execution","write_paths":["out/qa/worker/result.json"]},
+        {"id":"parent","kind":"integration","write_paths":["out/qa"]}]})
+    assert not nested["worker_tasks"], nested
 
     too_many = plan({"tasks": [
         {"id": f"t{i}", "kind": "inventory", "write_paths": [f"out/i{i}.json"]}
@@ -185,10 +283,18 @@ def _self_check() -> int:
         raise AssertionError("kind desconhecido deve ir para rejected, não explode")
     unknown = plan({"tasks": [{"id": "x", "kind": "telepathy"}]})
     assert unknown["rejected"] and not unknown["ok"], unknown
+    for malformed in ({"tasks": [None]}, {"tasks": [{"id": "x"}, {"id": "x"}]},
+                      {"tasks": [{"write_paths": "out/a"}]}, {"tasks": {}},
+                      {"tasks": [{"id": 0}]}):
+        try:
+            plan(malformed)
+            raise AssertionError("malformed taskset accepted")
+        except ContractError:
+            pass
 
     print("[SELF-CHECK OK] harness_orchestration "
           "(3 ramos; claim no coordenador; overlap serializa; teto 3; "
-          "worker não promove)")
+          "worker não promove; visual outputs registry-bound)")
     return 0
 
 
@@ -205,8 +311,12 @@ def main():
         if not args.taskset:
             print("uso: harness_orchestration.py plan --taskset <json>", file=sys.stderr)
             return 3
-        data = json.load(open(args.taskset, encoding="utf-8"))
-        out = plan(data)
+        try:
+            data = json.load(open(args.taskset, encoding="utf-8"))
+            out = plan(data)
+        except (OSError, ValueError, TypeError) as error:
+            print(json.dumps({"ok": False, "problems": [str(error)]}))
+            return 1
         print(json.dumps(out, indent=2, ensure_ascii=False))
         return 0 if out["ok"] else 1
     if args.command == "validate-result":

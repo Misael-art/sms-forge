@@ -1,354 +1,354 @@
 {
- "ledger_id": "smsforge_learning_ledger_v1",
- "entries": [
-  {
-   "ts": "2026-08-25",
-   "kind": "foundation",
-   "summary": "Workspace fundado porteando SGDKForge para Master System: toolchain SDCC+devkitSMS, 7 gates executáveis com selftest, framework .agent, modelo de projeto.",
-   "sources": [
-    "README devkitSMS (fetch 2026-08-25)",
-    "SGDKForge/AGENTS.md",
-    "SGDK_GLOBAL.md (38 seções, amostradas)"
-   ],
-   "dedup_key": "foundation_2026_08_25"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "curation",
-   "summary": "L036: porte do método SGDKForge de autonomia e época visual — persistência causal, visual delivery, vínculo asset→ROM, harness (máx. 3 ramos), review independente. Números de Mega Drive recusados (§32).",
-   "sources": [
-    "doc/curation/2026-09-06_l036_autonomia_visual_epoch.json",
-    "SGDKForge causal_persistence_guard / visual_delivery_gate / harness_orchestration / quality_review_router"
-   ],
-   "dedup_key": "l036_autonomia_visual_epoch_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "curation",
-   "summary": "L037: gate de semântica de animação — hash de frame reprova permutação, clone de ação, ciclo idêntico e pivot oscilante.",
-   "sources": [
-    "doc/curation/2026-09-06_l036_autonomia_visual_epoch.json"
-   ],
-   "dedup_key": "l037_animation_semantics_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L038: eixo `gameplay` fechava sem input. interaction_verdict() so testa abs(dx)>=8 — nao confere DIRECAO nem IDENTIDADE do objeto. Em MSSF2T os dois lutadores dao blobs identicos (309 px) e a coreografia do modo de atracao/CPU fecha o eixo sozinha: com 'Right' o blob rastreado andou 32 px para a ESQUERDA e o gate deu PASS.",
-   "sources": [
-    "SMS_projects/MSSF2T/out/evidence/input_memory.json",
-    "tools/sms_wrapper/capture_evidence.py:interaction_verdict"
-   ],
-   "dedup_key": "l038_gameplay_axis_direction_identity_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L039: o canal de teclado para o Emulicious esta MORTO neste ambiente. probe_keys=0x00 com a tecla fisicamente pressionada, em XSendEvent e em XTEST; `xdotool getwindowfocus` devolve vazio; o proprio atalho de reset do emulador (ctrl+BackSpace) nao reseta. Vale para a ROM nova E para a build_v024 — ou seja, nenhum claim historico de 'gameplay provado por input' desta linha tem lastro.",
-   "sources": [
-    "SMS_projects/MSSF2T/tools/prove_input_memory.py",
-    "SMS_projects/MSSF2T/out/evidence/input_memory.json",
-    "SMS_projects/MSSF2T/out/evidence/input_memory_old.json"
-   ],
-   "dedup_key": "l039_keyboard_channel_dead_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L040: detector de sprite do harness usa limiares ABSOLUTOS (bw<=48, bh<=80) e so vale com a captura em 1x. Emulicious guardou Scale=2.25 no ini no meio da sessao: o lutador 32x64 virou 72x144, foi reprovado pelo filtro de forma e o eixo passou a travar na barra de vida. Mesmo comando, mesma ROM, veredito oposto — a escala da janela e entrada silenciosa do gate.",
-   "sources": [
-    "tools/emuladores/emulicious/Emulicious.ini",
-    "tools/sms_wrapper/capture_evidence.py:largest_sprite_block"
-   ],
-   "dedup_key": "l040_detector_absolute_thresholds_scale_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L041: SFX tocado em canal diferente do que foi AUTORADO derruba o mix. make_psg_assets gera sfx_shot para SFX_CHANNEL2 e sfx_hit para CHANNELS2AND3, mas fight.c tocava os dois em CHANNEL3: audio caiu de 92% para 86% ativo (piso 90). Cooldown nao resolvia — 14, 30 e 60 davam os mesmos 86%, prova de que a causa era o canal, nao a frequencia. Usando sfx_hurt/sfx_down (ja autorados para o canal 3, e sem uso na ROM): 94%.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/fight.c",
-    "tools/sms_wrapper/make_psg_assets.py"
-   ],
-   "dedup_key": "l041_sfx_authored_channel_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L042: cenario nao pode competir com o lutador — e isso e mensuravel, nao gosto. Barris em laranja saturado e barra de vida chapada viraram o maior blob saturado da tela e sequestraram o detector de gameplay. Barril em madeira e barra com moldura escura devolveram a leitura ao personagem. Regra: nenhum elemento de BG ou HUD deve ser o objeto mais saturado com forma de sprite.",
-   "sources": [
-    "SMS_projects/MSSF2T/tools/author_stage_ken.py",
-    "SMS_projects/MSSF2T/tools/make_font.py"
-   ],
-   "dedup_key": "l042_bg_hud_nao_compete_com_sprite_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L043: H-scroll no SMS exige LEFTCOLBLANK. Ligado o parallax, os 8 px da esquerda passaram a mostrar lixo (pedaco da barra de vida e bloco cinza cortando ceu, mar e deck) porque o tile que entra ainda nao foi buscado. So apareceu numa captura com a janela grande — em 1x passava despercebido.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/main.c"
-   ],
-   "dedup_key": "l043_hscroll_leftcolblank_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L044: antes de teorizar sobre o VDP, olhe o conteudo que ja esta la. 'KKEN'/'GGUILE' na tela levaram a duas hipoteses erradas (estouro de VBlank, corrida de latch de endereco) ate descobrir que stage_ken_tiles JA trazia um alfabeto embutido (tiles 1..7) e o mapa ja escrevia os nomes: a fonte nova encostava uma segunda copia ao lado. Custo: dois ciclos de build e uma captura de depuracao.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/hud.c"
-   ],
-   "dedup_key": "l044_ler_o_asset_antes_de_teorizar_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L045: espelhar tile em runtime troca ROM por CPU, e o preco e medido. Trocar as 10 folhas *_l (9,7 KB, ROM estava 100% cheia) por bitrev+dx-mirror liberou espaco mas derrubou o jogo de 59,6 para 36 fps. Ponteiros static no lugar de locais (o SDCC-Z80 recarrega locais via IX) e STREAM_BYTES de 256 para 96 devolveram ~57,5 fps. Curva medida: 32B->59.5 64B->58.3 96B->57.5 128B->55.5 256B->40.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/fight.c",
-    "SMS_projects/MSSF2T/doc/15-tdd.md"
-   ],
-   "dedup_key": "l045_runtime_flip_troca_rom_por_cpu_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L046: contador de linha do SMS dispara na linha N depois de recarregar no VBlank — armar com 47 querendo a linha 64 poe TODAS as bandas de raster 16 linhas acima. O mar perto comecava na 96 em vez da 112 e ninguem via, porque nao havia nada nessa faixa. So apareceu quando a tela de titulo pos texto na linha 12 (96..103) e ele saiu rolando e enrolando junto com a agua. Banda de parallax vazia nao prova que a quebra esta no lugar: ponha algo com forma reconhecivel dentro dela.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/fight.c"
-   ],
-   "dedup_key": "l046_line_counter_offset_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L047: troca de tela escreve ~160 tiles de name table e roda dentro do fight_update, que e FORA do VBlank — parte das escritas se perde no display ativo e sobra lixo (um 'UPER' do titulo por cima da luta). Limpar linha a linha nao resolveu; o que resolveu foi desligar o display e redesenhar o MAPA INTEIRO. Numa transicao o frame preto e o que se espera mesmo, e some a classe toda de resto-na-tela.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/fight.c"
-   ],
-   "dedup_key": "l047_troca_de_tela_display_off_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L048: captura de audio silenciosa e corrida de ambiente, nao ROM muda — e o proprio capture_audio ja manda conferir com ROM historica antes de mexer no codigo. Aconteceu duas vezes: a segunda ficou obvia porque uma build CONGELADA (v056, medida em 94% horas antes) tambem saiu muda enquanto a v024 saia com som. Binario congelado nao muda de comportamento; matar os java zumbis devolveu 92%. Regra: peak=0 => limpar zumbis e repetir, com um controle historico na mesma rodada.",
-   "sources": [
-    "SMS_projects/MSSF2T/out/evidence/audio_ref.wav",
-    "SMS_projects/MSSF2T/out/evidence/audio_pre.wav"
-   ],
-   "dedup_key": "l048_audio_silencioso_e_corrida_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L049: tela de abertura sem asset novo. Com 1553 B livres nao cabia logo desenhado nem music_title (577 B). A abertura saiu de COMPOSICAO: o proprio palco com a paleta escurecida (16 bytes, preservando o indice 1 branco para o texto), a fonte que ja existia e os dois lutadores em pose. Custo total ~518 B, incluindo o laco de arcade titulo->luta->resultado->titulo.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/fight.c",
-    "SMS_projects/MSSF2T/src/hud.c"
-   ],
-   "dedup_key": "l049_abertura_por_composicao_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "curation",
-   "summary": "Curadoria A–F: L038–L049 saíram do ledger (prosa) para JSON+lei+ferramenta/skill. §7 corrigido (8×8/8×16, X sem offset). IDs L012 e L020–L034 declarados. Gates novos: audit_learning_capture, audit_psg_channel_binding, audit_hscroll_blank. interaction_verdict mede direção, identidade, eco e escala nativa.",
-   "sources": [
-    "doc/curation/2026-09-06_l038_l049_absorcao.json",
-    "doc/curation/id_registry.json",
-    "tools/sms_wrapper/audit_learning_capture.py"
-   ],
-   "dedup_key": "l038_l049_absorcao_curadoria_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L050: gravidade amarrada a um ESTADO e armadilha. y so era integrado dentro do ramo ST_JUMP do control(); levar golpe no ar tirava o lutador desse estado, a queda parava e ele ficava pendurado — andando, agachando e socando no ar. Nao apareceu em nenhum screenshot; quem flagrou foi o probe, mostrando IDLE/WALK/CROUCH a y=93 com o chao em 112. Fisica deve valer por CONDICAO (altura), nao por estado.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/fight.c",
-    "SMS_projects/MSSF2T/out/evidence/poses.json"
-   ],
-   "dedup_key": "l050_gravidade_por_condicao_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L051: musica ocupava 2881 B para tocar 240 copias byte a byte do MESMO frame de 12 B. O PSGlib ja volta ao inicio no PSGEnd, entao as 239 copias nao tocavam nada. Cortar para 49 B (e music_title de 577 para 145) recuperou 3264 B numa ROM que tinha ~1 KB livre, com audio medido identico antes e depois. Antes de sacrificar feature por espaco, medir a REDUNDANCIA dos assets.",
-   "sources": [
-    "SMS_projects/MSSF2T/tools/shrink_music_loop.py"
-   ],
-   "dedup_key": "l051_musica_redundante_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L052: tamanho de asset escrito em dois lugares diverge — e o consumidor le o lugar errado. fight_gfx.h declarava 1024 para folhas que o repack deixou em 832; fight.c so enxerga esse header, entao pose_size() mandava o streamer ler ate 192 B alem do fim do array. Nao dava sintoma visivel (o metasprite nao referencia os tiles extras). Correcao estrutural: gerar o header a partir das folhas, com --check para o gate.",
-   "sources": [
-    "SMS_projects/MSSF2T/tools/gen_fight_gfx.py"
-   ],
-   "dedup_key": "l052_tamanho_duplicado_diverge_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L053: parei de ajustar o roteiro da atracao para o meu teste passar. O conserto do espelhamento na troca de lado so e exercido por pulo por cima; gastei tres iteracoes afinando a demo (aproximar antes de pular, segurar frente ate o pouso) e Ken parou a 6-14 px de ultrapassar. Continuar seria fabricar evidencia. Relatado como: conserto correto por leitura, caminho fisicamente alcancavel, troca de lado NAO observada.",
-   "sources": [
-    "SMS_projects/MSSF2T/src/fight.c"
-   ],
-   "dedup_key": "l053_parar_de_torcer_a_demo_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "lesson",
-   "summary": "L054: quando o estado dura ~20 frames, screenshot e sorteio — a mesma chamada de capture_evidence caiu na luta numa execucao e no titulo em outra. Expor a pose no probe (0xC7F9, com o facing no bit 7, custo zero de RAM) transformou 'fotografar a pose certa' em 'ler a variavel'. prove_poses.py provou agachar/pular E achou o bug da gravidade na mesma passagem.",
-   "sources": [
-    "SMS_projects/MSSF2T/tools/prove_poses.py"
-   ],
-   "dedup_key": "l054_probe_em_vez_de_sorteio_2026_09_06"
-  },
-  {
-   "ts": "2026-09-06",
-   "kind": "curation",
-   "summary": "Curadoria L050–L054: saíram do ledger (prosa) para JSON+lei+ferramenta/skill. Física por condição, redundância PSG, tamanho de símbolo, não torcer a demo, pose no probe. audit_learning_capture tinha 5 FAILs; fechado.",
-   "sources": [
-    "doc/curation/2026-09-06_l050_l054_absorcao.json",
-    "tools/sms_wrapper/audit_psg_redundancy.py",
-    "tools/sms_wrapper/audit_symbol_size_sync.py"
-   ],
-   "dedup_key": "l050_l054_absorcao_curadoria_2026_09_06"
-  },
-  {
-   "ts": "2026-09-07",
-   "kind": "curation",
-   "summary": "L039 causa raiz: XTEST nao atravessa KWin em Wayland; canal = kdotool+ydotool (emulator_input.py). L053 observada (sideswap 0x81→0x01, min_py=57). reconcile_claims aceita input_memory.json com SHA da ROM. Memory bank alinhado ao JSON selado (dx=+74/−90, 9 artefatos, SHA 2990757f).",
-   "sources": [
-    "tools/sms_wrapper/emulator_input.py",
-    "SMS_projects/MSSF2T/out/evidence/input_memory.json",
-    "doc/curation/2026-09-06_l038_l049_absorcao.json",
-    "doc/curation/2026-09-06_l050_l054_absorcao.json"
-   ],
-   "dedup_key": "l039_wayland_uinput_l053_observada_2026_09_07"
-  },
-  {
-   "ts": "2026-09-07",
-   "kind": "curation",
-   "summary": "L055: porta MÉTODO da skill pixel-art v2 (downscale NEAREST + Floyd-Steinberg no grid) para a paleta mestra SMS. Recusa NES/SNES/PICO-8/Game Boy e MP4/GIF como evidência. Ferramenta prepare_sms_pixel_art.py; skill sms-pixel-translate.md.",
-   "sources": [
-    "doc/curation/2026-09-07_l055_pixel_translate.json",
-    "tools/sms_wrapper/prepare_sms_pixel_art.py"
-   ],
-   "dedup_key": "l055_pixel_translate_sms_master_palette_2026_09_07"
-  },
-  {
-   "ts": "2026-09-07",
-   "kind": "curation",
-   "summary": "L056: estado transitorio se GRAVA, nao se fotografa. Canal novo: video do framebuffer do Emulicious (256x192, sem compositor), atalho no .ini com prefixo 'Keys' (F7/F8), encode por FFMPEG. Fecha o buraco do §36. Tres falhas MUDAS viraram gate: instancia zumbi reescreve o .ini, F10 e o atalho do menu Swing (nao para a gravacao), e mover o mp4 antes do atom moov corrompe. Achado aberto: mp4 sem trilha de audio — hipotese principal e o host mutado (Mute: yes, 0%), nao testada com som restaurado. Ferramenta capture_video.py; skill sms-video-evidence.md; regra §45.",
-   "sources": [
-    "doc/curation/2026-09-07_l056_video_evidencia.json",
-    "tools/sms_wrapper/capture_video.py",
-    "tools/sms_wrapper/.agent/skills/sms-video-evidence.md"
-   ],
-   "dedup_key": "l056_video_framebuffer_evidencia_2026_09_07"
-  },
-  {
-   "ts": "2026-09-07",
-   "kind": "curation",
-   "summary": "L057: busca de janela por NOME exige campo livre. DEMONSTRADO: com um Emulicious de MSSF2T vivo, audit_deterministic_boot reprovou o laboratorio_01 fotografando Ken x Guile — falso FAIL sobre ROM nunca observada (zumbi parado daria falso PASS). O perigo tinha lei desde L017/§34 mas tres politicas: 4 gates abortavam com mensagens diferentes, 1 matava, 2 nao faziam nada. Politica unica em emulator_session.py (ABORT default, KILL so na retentativa de audio/L048). Deteccao por JVM: pgrep -f casava tambem o shell chamador (3 PIDs para 1 emulador). Regra §46.",
-   "sources": [
-    "doc/curation/2026-09-07_l057_sessao_emulador.json",
-    "tools/sms_wrapper/emulator_session.py"
-   ],
-   "dedup_key": "l057_sessao_emulador_politica_unica_2026_09_07"
-  },
-  {
-   "ts": "2026-09-07",
-   "kind": "curation",
-   "summary": "L058/L059: proveniência de áudio tem gate próprio (§47). music_ken_stage.psg entrou na ROM do MSSF2T sem entrada no manifest — audit_provenance cobre só PNG e audit_psg_channel_binding só amarra canal: cobertura de gate por tipo de asset deixou o .psg órfão. E trilha 'autoral genérica' no lugar do porte declarado é troca silenciosa de obra. audit_audio_provenance.py reprova .psg órfão, sha256/bytes divergentes e origin com transcri/port/arranjo sem reference hasheada; aditivo ao manifest que o gate de canal já lê. O gate reprova o MSSF2T hoje, de propósito, até o manifest ser corrigido.",
-   "sources": [
-    "doc/curation/2026-09-07_l058_l059_audio_provenancia.json",
-    "tools/sms_wrapper/audit_audio_provenance.py",
-    "SMS_projects/MSSF2T/res/audio/music_ken_stage.psg"
-   ],
-   "dedup_key": "l058_l059_audio_provenancia_2026_09_07"
-  },
-  {
-   "ts": "2026-09-08",
-   "kind": "curation",
-   "summary": "L060-L064: ciclo MSSF2T v085 — soco conectou por input com estado do oponente na prova (L060); worst-frame contou 247 leituras >=0xC0, mas a interpretacao como derramamento foi invalidada por L082 (L061); banner K.O. capturado por roteiro de pressao continua (L062); dialogo modal do Emulicious bloqueava carregamento da ROM e NPE-ava o evaluate DAP (L063); cadeia captura+selo em comando unico e binding de ROM atualizado no ciclo (L064).",
-   "sources": [
-    "SMS_projects/MSSF2T/out/evidence/input_memory.json",
-    "SMS_projects/MSSF2T/out/evidence/worst_frame.json",
-    "SMS_projects/MSSF2T/out/evidence/video_ko.mp4",
-    "doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json"
-   ],
-   "dedup_key": "l060_l064_ciclo_mssf2t_2026_09_08"
-  },
-  {
-   "ts": "2026-09-19",
-   "kind": "curation",
-   "summary": "L065-L068: QCF no HAMOOPIG SMS. press_spec com refoco ~300 ms entre teclas estoura hist de 8 ticks (L065); amostra 0,9 s depois so ve neutro (L066); qcf=1 com especial idle era B1 so na borda — hold na janela, nao hist maior (L067); build_record e snapshot de compile, memory bank e autoridade #1, nao editar axes a mao (L068).",
-   "sources": [
-    "doc/curation/2026-09-19_l065_l068_qcf_harness.json",
-    "tools/sms_wrapper/emulator_input.py",
-    "SMS_projects/hamoopig/out/evidence/special_probe.json",
-    "SMS_projects/hamoopig/src/fighter.c"
-   ],
-   "dedup_key": "l065_l068_qcf_harness_2026_09_19"
-  },
-  {
-   "ts": "2026-09-26",
-   "kind": "curation",
-   "summary": "L082: VCounter 0xC0 marca o início do VBlank. O critério antigo vline>=0xC0 contava janela segura; derrame só ocorre após a volta do contador, quando vline<0xC0. measure_worst_frame foi corrigido, passou 23/23 self-checks e revalidou luta_mugen: 2968/3000 frames cruzaram para display ativo (vline_min=62). Perfil ROM localizou 63 scanlines em busca de comandos e 52 em desenho. Resultados anteriores de pior-frame ficam inválidos até re-medição correta.",
-   "sources": [
-    "doc/curation/2026-09-26_l082_vcounter_vblank_deadline.json",
-    "tools/sms_wrapper/measure_worst_frame.py",
-    "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md"
-   ],
-   "dedup_key": "l082_vcounter_deadline_and_overflow_2026_09_26"
-  },
-  {
-   "ts": "2026-09-26",
-   "kind": "curation",
-   "summary": "L083: piso MUGEN→SMS por contrato de cena e provas; preset 1:4 histórico não autoriza delivery; CLI com imports MD ausentes corrigida. Nenhuma promoção de ROM/AAA.",
-   "sources": [
-    "doc/curation/2026-09-26_l083_mugen_engine_contract.json"
-   ],
-   "dedup_key": "l083_mugen_engine_contract_2026_09_26"
-  },
-  {
-   "ts": "2026-09-26",
-   "kind": "curation",
-   "summary": "L084: makesms aceita oito mapas bancários; além disso addMerge falha e o parser continua, deixando ROM parcial com build success. Consolida páginas contíguas e o auditor mede o limite.",
-   "sources": [
-    "doc/curation/2026-09-26_l084_makesms_merge_limit.json",
-    "sdk/devkitSMS-upstream/makesms/src/makesms.c",
-    "tools/sms_wrapper/mugen2sms/generators/versus_scene_cut.py",
-    "tools/sms_wrapper/audit_mugen_engine_contract.py"
-   ],
-   "dedup_key": "l084_makesms_merge_limit_2026_09_26"
-  },
-  {
-   "ts": "2026-09-26",
-   "kind": "curation",
-   "summary": "L085: o validador de ferramentas de medição descobria apenas a raiz e ignorava um auditor no subdiretório de análise MUGEN. A busca agora cobre subdiretórios e o autocheck inclui fixture nested.",
-   "sources": [
-    "doc/curation/2026-09-26_l085_nested_measurement_discovery.json",
-    "tools/sms_wrapper/validate_measurement_tools.py",
-    "tools/sms_wrapper/mugen2sms/analysis/scale_pilot.py"
-   ],
-   "dedup_key": "l085_nested_measurement_discovery_2026_09_26"
-  },
-  {
-   "ts": "2026-09-26",
-   "kind": "curation",
-   "summary": "L086: o pivô de facing esquerdo precisa da largura da grade arredondada a 8 px; a coluna de padding transparente também deve ser distinguida da origem raster na comparação de máscara.",
-   "sources": [
-    "doc/curation/2026-09-26_l086_metasprite_mirror_pivot.json",
-    "tools/sms_wrapper/mugen2sms/analysis/scale_pilot.py",
-    "SMS_projects/luta_mugen/inc/luta.h",
-    "SMS_projects/luta_mugen/src/fight.c"
-   ],
-   "dedup_key": "l086_metasprite_mirror_pivot_2026_09_26"
-  },
+  "ledger_id": "smsforge_learning_ledger_v1",
+  "entries": [
+    {
+      "ts": "2026-08-25",
+      "kind": "foundation",
+      "summary": "Workspace fundado porteando SGDKForge para Master System: toolchain SDCC+devkitSMS, 7 gates executáveis com selftest, framework .agent, modelo de projeto.",
+      "sources": [
+        "README devkitSMS (fetch 2026-08-25)",
+        "SGDKForge/AGENTS.md",
+        "SGDK_GLOBAL.md (38 seções, amostradas)"
+      ],
+      "dedup_key": "foundation_2026_08_25"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "curation",
+      "summary": "L036: porte do método SGDKForge de autonomia e época visual — persistência causal, visual delivery, vínculo asset→ROM, harness (máx. 3 ramos), review independente. Números de Mega Drive recusados (§32).",
+      "sources": [
+        "doc/curation/2026-09-06_l036_autonomia_visual_epoch.json",
+        "SGDKForge causal_persistence_guard / visual_delivery_gate / harness_orchestration / quality_review_router"
+      ],
+      "dedup_key": "l036_autonomia_visual_epoch_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "curation",
+      "summary": "L037: gate de semântica de animação — hash de frame reprova permutação, clone de ação, ciclo idêntico e pivot oscilante.",
+      "sources": [
+        "doc/curation/2026-09-06_l036_autonomia_visual_epoch.json"
+      ],
+      "dedup_key": "l037_animation_semantics_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L038: eixo `gameplay` fechava sem input. interaction_verdict() so testa abs(dx)>=8 — nao confere DIRECAO nem IDENTIDADE do objeto. Em MSSF2T os dois lutadores dao blobs identicos (309 px) e a coreografia do modo de atracao/CPU fecha o eixo sozinha: com 'Right' o blob rastreado andou 32 px para a ESQUERDA e o gate deu PASS.",
+      "sources": [
+        "SMS_projects/MSSF2T/out/evidence/input_memory.json",
+        "tools/sms_wrapper/capture_evidence.py:interaction_verdict"
+      ],
+      "dedup_key": "l038_gameplay_axis_direction_identity_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L039: o canal de teclado para o Emulicious esta MORTO neste ambiente. probe_keys=0x00 com a tecla fisicamente pressionada, em XSendEvent e em XTEST; `xdotool getwindowfocus` devolve vazio; o proprio atalho de reset do emulador (ctrl+BackSpace) nao reseta. Vale para a ROM nova E para a build_v024 — ou seja, nenhum claim historico de 'gameplay provado por input' desta linha tem lastro.",
+      "sources": [
+        "SMS_projects/MSSF2T/tools/prove_input_memory.py",
+        "SMS_projects/MSSF2T/out/evidence/input_memory.json",
+        "SMS_projects/MSSF2T/out/evidence/input_memory_old.json"
+      ],
+      "dedup_key": "l039_keyboard_channel_dead_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L040: detector de sprite do harness usa limiares ABSOLUTOS (bw<=48, bh<=80) e so vale com a captura em 1x. Emulicious guardou Scale=2.25 no ini no meio da sessao: o lutador 32x64 virou 72x144, foi reprovado pelo filtro de forma e o eixo passou a travar na barra de vida. Mesmo comando, mesma ROM, veredito oposto — a escala da janela e entrada silenciosa do gate.",
+      "sources": [
+        "tools/emuladores/emulicious/Emulicious.ini",
+        "tools/sms_wrapper/capture_evidence.py:largest_sprite_block"
+      ],
+      "dedup_key": "l040_detector_absolute_thresholds_scale_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L041: SFX tocado em canal diferente do que foi AUTORADO derruba o mix. make_psg_assets gera sfx_shot para SFX_CHANNEL2 e sfx_hit para CHANNELS2AND3, mas fight.c tocava os dois em CHANNEL3: audio caiu de 92% para 86% ativo (piso 90). Cooldown nao resolvia — 14, 30 e 60 davam os mesmos 86%, prova de que a causa era o canal, nao a frequencia. Usando sfx_hurt/sfx_down (ja autorados para o canal 3, e sem uso na ROM): 94%.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/fight.c",
+        "tools/sms_wrapper/make_psg_assets.py"
+      ],
+      "dedup_key": "l041_sfx_authored_channel_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L042: cenario nao pode competir com o lutador — e isso e mensuravel, nao gosto. Barris em laranja saturado e barra de vida chapada viraram o maior blob saturado da tela e sequestraram o detector de gameplay. Barril em madeira e barra com moldura escura devolveram a leitura ao personagem. Regra: nenhum elemento de BG ou HUD deve ser o objeto mais saturado com forma de sprite.",
+      "sources": [
+        "SMS_projects/MSSF2T/tools/author_stage_ken.py",
+        "SMS_projects/MSSF2T/tools/make_font.py"
+      ],
+      "dedup_key": "l042_bg_hud_nao_compete_com_sprite_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L043: H-scroll no SMS exige LEFTCOLBLANK. Ligado o parallax, os 8 px da esquerda passaram a mostrar lixo (pedaco da barra de vida e bloco cinza cortando ceu, mar e deck) porque o tile que entra ainda nao foi buscado. So apareceu numa captura com a janela grande — em 1x passava despercebido.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/main.c"
+      ],
+      "dedup_key": "l043_hscroll_leftcolblank_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L044: antes de teorizar sobre o VDP, olhe o conteudo que ja esta la. 'KKEN'/'GGUILE' na tela levaram a duas hipoteses erradas (estouro de VBlank, corrida de latch de endereco) ate descobrir que stage_ken_tiles JA trazia um alfabeto embutido (tiles 1..7) e o mapa ja escrevia os nomes: a fonte nova encostava uma segunda copia ao lado. Custo: dois ciclos de build e uma captura de depuracao.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/hud.c"
+      ],
+      "dedup_key": "l044_ler_o_asset_antes_de_teorizar_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L045: espelhar tile em runtime troca ROM por CPU, e o preco e medido. Trocar as 10 folhas *_l (9,7 KB, ROM estava 100% cheia) por bitrev+dx-mirror liberou espaco mas derrubou o jogo de 59,6 para 36 fps. Ponteiros static no lugar de locais (o SDCC-Z80 recarrega locais via IX) e STREAM_BYTES de 256 para 96 devolveram ~57,5 fps. Curva medida: 32B->59.5 64B->58.3 96B->57.5 128B->55.5 256B->40.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/fight.c",
+        "SMS_projects/MSSF2T/doc/15-tdd.md"
+      ],
+      "dedup_key": "l045_runtime_flip_troca_rom_por_cpu_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L046: contador de linha do SMS dispara na linha N depois de recarregar no VBlank — armar com 47 querendo a linha 64 poe TODAS as bandas de raster 16 linhas acima. O mar perto comecava na 96 em vez da 112 e ninguem via, porque nao havia nada nessa faixa. So apareceu quando a tela de titulo pos texto na linha 12 (96..103) e ele saiu rolando e enrolando junto com a agua. Banda de parallax vazia nao prova que a quebra esta no lugar: ponha algo com forma reconhecivel dentro dela.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/fight.c"
+      ],
+      "dedup_key": "l046_line_counter_offset_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L047: troca de tela escreve ~160 tiles de name table e roda dentro do fight_update, que e FORA do VBlank — parte das escritas se perde no display ativo e sobra lixo (um 'UPER' do titulo por cima da luta). Limpar linha a linha nao resolveu; o que resolveu foi desligar o display e redesenhar o MAPA INTEIRO. Numa transicao o frame preto e o que se espera mesmo, e some a classe toda de resto-na-tela.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/fight.c"
+      ],
+      "dedup_key": "l047_troca_de_tela_display_off_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L048: captura de audio silenciosa e corrida de ambiente, nao ROM muda — e o proprio capture_audio ja manda conferir com ROM historica antes de mexer no codigo. Aconteceu duas vezes: a segunda ficou obvia porque uma build CONGELADA (v056, medida em 94% horas antes) tambem saiu muda enquanto a v024 saia com som. Binario congelado nao muda de comportamento; matar os java zumbis devolveu 92%. Regra: peak=0 => limpar zumbis e repetir, com um controle historico na mesma rodada.",
+      "sources": [
+        "SMS_projects/MSSF2T/out/evidence/audio_ref.wav",
+        "SMS_projects/MSSF2T/out/evidence/audio_pre.wav"
+      ],
+      "dedup_key": "l048_audio_silencioso_e_corrida_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L049: tela de abertura sem asset novo. Com 1553 B livres nao cabia logo desenhado nem music_title (577 B). A abertura saiu de COMPOSICAO: o proprio palco com a paleta escurecida (16 bytes, preservando o indice 1 branco para o texto), a fonte que ja existia e os dois lutadores em pose. Custo total ~518 B, incluindo o laco de arcade titulo->luta->resultado->titulo.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/fight.c",
+        "SMS_projects/MSSF2T/src/hud.c"
+      ],
+      "dedup_key": "l049_abertura_por_composicao_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "curation",
+      "summary": "Curadoria A–F: L038–L049 saíram do ledger (prosa) para JSON+lei+ferramenta/skill. §7 corrigido (8×8/8×16, X sem offset). IDs L012 e L020–L034 declarados. Gates novos: audit_learning_capture, audit_psg_channel_binding, audit_hscroll_blank. interaction_verdict mede direção, identidade, eco e escala nativa.",
+      "sources": [
+        "doc/curation/2026-09-06_l038_l049_absorcao.json",
+        "doc/curation/id_registry.json",
+        "tools/sms_wrapper/audit_learning_capture.py"
+      ],
+      "dedup_key": "l038_l049_absorcao_curadoria_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L050: gravidade amarrada a um ESTADO e armadilha. y so era integrado dentro do ramo ST_JUMP do control(); levar golpe no ar tirava o lutador desse estado, a queda parava e ele ficava pendurado — andando, agachando e socando no ar. Nao apareceu em nenhum screenshot; quem flagrou foi o probe, mostrando IDLE/WALK/CROUCH a y=93 com o chao em 112. Fisica deve valer por CONDICAO (altura), nao por estado.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/fight.c",
+        "SMS_projects/MSSF2T/out/evidence/poses.json"
+      ],
+      "dedup_key": "l050_gravidade_por_condicao_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L051: musica ocupava 2881 B para tocar 240 copias byte a byte do MESMO frame de 12 B. O PSGlib ja volta ao inicio no PSGEnd, entao as 239 copias nao tocavam nada. Cortar para 49 B (e music_title de 577 para 145) recuperou 3264 B numa ROM que tinha ~1 KB livre, com audio medido identico antes e depois. Antes de sacrificar feature por espaco, medir a REDUNDANCIA dos assets.",
+      "sources": [
+        "SMS_projects/MSSF2T/tools/shrink_music_loop.py"
+      ],
+      "dedup_key": "l051_musica_redundante_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L052: tamanho de asset escrito em dois lugares diverge — e o consumidor le o lugar errado. fight_gfx.h declarava 1024 para folhas que o repack deixou em 832; fight.c so enxerga esse header, entao pose_size() mandava o streamer ler ate 192 B alem do fim do array. Nao dava sintoma visivel (o metasprite nao referencia os tiles extras). Correcao estrutural: gerar o header a partir das folhas, com --check para o gate.",
+      "sources": [
+        "SMS_projects/MSSF2T/tools/gen_fight_gfx.py"
+      ],
+      "dedup_key": "l052_tamanho_duplicado_diverge_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L053: parei de ajustar o roteiro da atracao para o meu teste passar. O conserto do espelhamento na troca de lado so e exercido por pulo por cima; gastei tres iteracoes afinando a demo (aproximar antes de pular, segurar frente ate o pouso) e Ken parou a 6-14 px de ultrapassar. Continuar seria fabricar evidencia. Relatado como: conserto correto por leitura, caminho fisicamente alcancavel, troca de lado NAO observada.",
+      "sources": [
+        "SMS_projects/MSSF2T/src/fight.c"
+      ],
+      "dedup_key": "l053_parar_de_torcer_a_demo_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "lesson",
+      "summary": "L054: quando o estado dura ~20 frames, screenshot e sorteio — a mesma chamada de capture_evidence caiu na luta numa execucao e no titulo em outra. Expor a pose no probe (0xC7F9, com o facing no bit 7, custo zero de RAM) transformou 'fotografar a pose certa' em 'ler a variavel'. prove_poses.py provou agachar/pular E achou o bug da gravidade na mesma passagem.",
+      "sources": [
+        "SMS_projects/MSSF2T/tools/prove_poses.py"
+      ],
+      "dedup_key": "l054_probe_em_vez_de_sorteio_2026_09_06"
+    },
+    {
+      "ts": "2026-09-06",
+      "kind": "curation",
+      "summary": "Curadoria L050–L054: saíram do ledger (prosa) para JSON+lei+ferramenta/skill. Física por condição, redundância PSG, tamanho de símbolo, não torcer a demo, pose no probe. audit_learning_capture tinha 5 FAILs; fechado.",
+      "sources": [
+        "doc/curation/2026-09-06_l050_l054_absorcao.json",
+        "tools/sms_wrapper/audit_psg_redundancy.py",
+        "tools/sms_wrapper/audit_symbol_size_sync.py"
+      ],
+      "dedup_key": "l050_l054_absorcao_curadoria_2026_09_06"
+    },
+    {
+      "ts": "2026-09-07",
+      "kind": "curation",
+      "summary": "L039 causa raiz: XTEST nao atravessa KWin em Wayland; canal = kdotool+ydotool (emulator_input.py). L053 observada (sideswap 0x81→0x01, min_py=57). reconcile_claims aceita input_memory.json com SHA da ROM. Memory bank alinhado ao JSON selado (dx=+74/−90, 9 artefatos, SHA 2990757f).",
+      "sources": [
+        "tools/sms_wrapper/emulator_input.py",
+        "SMS_projects/MSSF2T/out/evidence/input_memory.json",
+        "doc/curation/2026-09-06_l038_l049_absorcao.json",
+        "doc/curation/2026-09-06_l050_l054_absorcao.json"
+      ],
+      "dedup_key": "l039_wayland_uinput_l053_observada_2026_09_07"
+    },
+    {
+      "ts": "2026-09-07",
+      "kind": "curation",
+      "summary": "L055: porta MÉTODO da skill pixel-art v2 (downscale NEAREST + Floyd-Steinberg no grid) para a paleta mestra SMS. Recusa NES/SNES/PICO-8/Game Boy e MP4/GIF como evidência. Ferramenta prepare_sms_pixel_art.py; skill sms-pixel-translate.md.",
+      "sources": [
+        "doc/curation/2026-09-07_l055_pixel_translate.json",
+        "tools/sms_wrapper/prepare_sms_pixel_art.py"
+      ],
+      "dedup_key": "l055_pixel_translate_sms_master_palette_2026_09_07"
+    },
+    {
+      "ts": "2026-09-07",
+      "kind": "curation",
+      "summary": "L056: estado transitorio se GRAVA, nao se fotografa. Canal novo: video do framebuffer do Emulicious (256x192, sem compositor), atalho no .ini com prefixo 'Keys' (F7/F8), encode por FFMPEG. Fecha o buraco do §36. Tres falhas MUDAS viraram gate: instancia zumbi reescreve o .ini, F10 e o atalho do menu Swing (nao para a gravacao), e mover o mp4 antes do atom moov corrompe. Achado aberto: mp4 sem trilha de audio — hipotese principal e o host mutado (Mute: yes, 0%), nao testada com som restaurado. Ferramenta capture_video.py; skill sms-video-evidence.md; regra §45.",
+      "sources": [
+        "doc/curation/2026-09-07_l056_video_evidencia.json",
+        "tools/sms_wrapper/capture_video.py",
+        "tools/sms_wrapper/.agent/skills/sms-video-evidence.md"
+      ],
+      "dedup_key": "l056_video_framebuffer_evidencia_2026_09_07"
+    },
+    {
+      "ts": "2026-09-07",
+      "kind": "curation",
+      "summary": "L057: busca de janela por NOME exige campo livre. DEMONSTRADO: com um Emulicious de MSSF2T vivo, audit_deterministic_boot reprovou o laboratorio_01 fotografando Ken x Guile — falso FAIL sobre ROM nunca observada (zumbi parado daria falso PASS). O perigo tinha lei desde L017/§34 mas tres politicas: 4 gates abortavam com mensagens diferentes, 1 matava, 2 nao faziam nada. Politica unica em emulator_session.py (ABORT default, KILL so na retentativa de audio/L048). Deteccao por JVM: pgrep -f casava tambem o shell chamador (3 PIDs para 1 emulador). Regra §46.",
+      "sources": [
+        "doc/curation/2026-09-07_l057_sessao_emulador.json",
+        "tools/sms_wrapper/emulator_session.py"
+      ],
+      "dedup_key": "l057_sessao_emulador_politica_unica_2026_09_07"
+    },
+    {
+      "ts": "2026-09-07",
+      "kind": "curation",
+      "summary": "L058/L059: proveniência de áudio tem gate próprio (§47). music_ken_stage.psg entrou na ROM do MSSF2T sem entrada no manifest — audit_provenance cobre só PNG e audit_psg_channel_binding só amarra canal: cobertura de gate por tipo de asset deixou o .psg órfão. E trilha 'autoral genérica' no lugar do porte declarado é troca silenciosa de obra. audit_audio_provenance.py reprova .psg órfão, sha256/bytes divergentes e origin com transcri/port/arranjo sem reference hasheada; aditivo ao manifest que o gate de canal já lê. O gate reprova o MSSF2T hoje, de propósito, até o manifest ser corrigido.",
+      "sources": [
+        "doc/curation/2026-09-07_l058_l059_audio_provenancia.json",
+        "tools/sms_wrapper/audit_audio_provenance.py",
+        "SMS_projects/MSSF2T/res/audio/music_ken_stage.psg"
+      ],
+      "dedup_key": "l058_l059_audio_provenancia_2026_09_07"
+    },
+    {
+      "ts": "2026-09-08",
+      "kind": "curation",
+      "summary": "L060-L064: ciclo MSSF2T v085 — soco conectou por input com estado do oponente na prova (L060); worst-frame contou 247 leituras >=0xC0, mas a interpretacao como derramamento foi invalidada por L082 (L061); banner K.O. capturado por roteiro de pressao continua (L062); dialogo modal do Emulicious bloqueava carregamento da ROM e NPE-ava o evaluate DAP (L063); cadeia captura+selo em comando unico e binding de ROM atualizado no ciclo (L064).",
+      "sources": [
+        "SMS_projects/MSSF2T/out/evidence/input_memory.json",
+        "SMS_projects/MSSF2T/out/evidence/worst_frame.json",
+        "SMS_projects/MSSF2T/out/evidence/video_ko.mp4",
+        "doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json"
+      ],
+      "dedup_key": "l060_l064_ciclo_mssf2t_2026_09_08"
+    },
+    {
+      "ts": "2026-09-19",
+      "kind": "curation",
+      "summary": "L065-L068: QCF no HAMOOPIG SMS. press_spec com refoco ~300 ms entre teclas estoura hist de 8 ticks (L065); amostra 0,9 s depois so ve neutro (L066); qcf=1 com especial idle era B1 so na borda — hold na janela, nao hist maior (L067); build_record e snapshot de compile, memory bank e autoridade #1, nao editar axes a mao (L068).",
+      "sources": [
+        "doc/curation/2026-09-19_l065_l068_qcf_harness.json",
+        "tools/sms_wrapper/emulator_input.py",
+        "SMS_projects/hamoopig/out/evidence/special_probe.json",
+        "SMS_projects/hamoopig/src/fighter.c"
+      ],
+      "dedup_key": "l065_l068_qcf_harness_2026_09_19"
+    },
+    {
+      "ts": "2026-09-26",
+      "kind": "curation",
+      "summary": "L082: VCounter 0xC0 marca o início do VBlank. O critério antigo vline>=0xC0 contava janela segura; derrame só ocorre após a volta do contador, quando vline<0xC0. measure_worst_frame foi corrigido, passou 23/23 self-checks e revalidou luta_mugen: 2968/3000 frames cruzaram para display ativo (vline_min=62). Perfil ROM localizou 63 scanlines em busca de comandos e 52 em desenho. Resultados anteriores de pior-frame ficam inválidos até re-medição correta.",
+      "sources": [
+        "doc/curation/2026-09-26_l082_vcounter_vblank_deadline.json",
+        "tools/sms_wrapper/measure_worst_frame.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md"
+      ],
+      "dedup_key": "l082_vcounter_deadline_and_overflow_2026_09_26"
+    },
+    {
+      "ts": "2026-09-26",
+      "kind": "curation",
+      "summary": "L083: piso MUGEN→SMS por contrato de cena e provas; preset 1:4 histórico não autoriza delivery; CLI com imports MD ausentes corrigida. Nenhuma promoção de ROM/AAA.",
+      "sources": [
+        "doc/curation/2026-09-26_l083_mugen_engine_contract.json"
+      ],
+      "dedup_key": "l083_mugen_engine_contract_2026_09_26"
+    },
+    {
+      "ts": "2026-09-26",
+      "kind": "curation",
+      "summary": "L084: makesms aceita oito mapas bancários; além disso addMerge falha e o parser continua, deixando ROM parcial com build success. Consolida páginas contíguas e o auditor mede o limite.",
+      "sources": [
+        "doc/curation/2026-09-26_l084_makesms_merge_limit.json",
+        "sdk/devkitSMS-upstream/makesms/src/makesms.c",
+        "tools/sms_wrapper/mugen2sms/generators/versus_scene_cut.py",
+        "tools/sms_wrapper/audit_mugen_engine_contract.py"
+      ],
+      "dedup_key": "l084_makesms_merge_limit_2026_09_26"
+    },
+    {
+      "ts": "2026-09-26",
+      "kind": "curation",
+      "summary": "L085: o validador de ferramentas de medição descobria apenas a raiz e ignorava um auditor no subdiretório de análise MUGEN. A busca agora cobre subdiretórios e o autocheck inclui fixture nested.",
+      "sources": [
+        "doc/curation/2026-09-26_l085_nested_measurement_discovery.json",
+        "tools/sms_wrapper/validate_measurement_tools.py",
+        "tools/sms_wrapper/mugen2sms/analysis/scale_pilot.py"
+      ],
+      "dedup_key": "l085_nested_measurement_discovery_2026_09_26"
+    },
+    {
+      "ts": "2026-09-26",
+      "kind": "curation",
+      "summary": "L086: o pivô de facing esquerdo precisa da largura da grade arredondada a 8 px; a coluna de padding transparente também deve ser distinguida da origem raster na comparação de máscara.",
+      "sources": [
+        "doc/curation/2026-09-26_l086_metasprite_mirror_pivot.json",
+        "tools/sms_wrapper/mugen2sms/analysis/scale_pilot.py",
+        "SMS_projects/luta_mugen/inc/luta.h",
+        "SMS_projects/luta_mugen/src/fight.c"
+      ],
+      "dedup_key": "l086_metasprite_mirror_pivot_2026_09_26"
+    },
     {
       "ts": "2026-09-26",
       "kind": "curation",
@@ -391,6 +391,620 @@
         "SMS_projects/luta_mugen/out/local_study/luta_integrada/out/evidence/lote_c_idle_rgb_mask_fresh_glitch_regions.json"
       ],
       "dedup_key": "l092_render_glitch_background_mask_2026_09_30"
+    },
+    {
+      "ts": "2026-09-30",
+      "kind": "curation",
+      "summary": "L093: premissa de pad herdada ('1 botão', 'diagonal impossível') contradizia SMSlib.h e bloqueava 64 de 70 comandos do Ken; sms_cmd corrigido e audit_hardware_constants passa a reprová-la.",
+      "sources": [
+        "doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json",
+        "tools/sms_wrapper/audit_hardware_constants.py"
+      ],
+      "dedup_key": "l093_pad_premissa_herdada_2026_09_30"
+    },
+    {
+      "ts": "2026-09-30",
+      "kind": "curation",
+      "summary": "L094: status separa DROPPED (decisão registrada) de BLOCKED (falha) na matriz de golpes; mapa adotado dá 19 OK, 19 DEGRADED, 27 DROPPED, 5 BLOCKED no Ken.",
+      "sources": [
+        "doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json",
+        "tools/sms_wrapper/mugen2sms/analysis/move_checklist.py"
+      ],
+      "dedup_key": "l094_dropped_vs_blocked_2026_09_30"
+    },
+    {
+      "ts": "2026-09-30",
+      "kind": "curation",
+      "summary": "L095: classificador de tier por tempo de pressão validado por teste diferencial C×Python com mutação; corrigido off-by-one do modelo (pior caso T-1). Não ligado à ROM.",
+      "sources": [
+        "doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json",
+        "tools/sms_wrapper/mugen2sms/tests/test_input_tier_c.py"
+      ],
+      "dedup_key": "l095_tier_diferencial_2026_09_30"
+    },
+    {
+      "ts": "2026-09-30",
+      "kind": "curation",
+      "summary": "L096: comparador de trilhas do doador usava zip e ignorava cauda perdida; trace_compare.py reprova comprimento, chaves, vazio e cenário ausente.",
+      "sources": [
+        "doc/curation/2026-09-30_l096_trace_compare_zip.json",
+        "tools/sms_wrapper/mugen2sms/analysis/trace_compare.py"
+      ],
+      "dedup_key": "l096_trace_compare_zip_2026_09_30"
+    },
+    {
+      "ts": "2026-09-30",
+      "kind": "curation",
+      "summary": "L097: DAP não amostra por tick; produtor de trilha usa ROM clone com roteiro embutido e gravador em RAM, despejo pós-done. Determinismo provado (2 builds, despejo idêntico); ganchos de custo zero provados por SHA.",
+      "sources": [
+        "doc/curation/2026-09-30_l097_produtor_trilha_dap.json",
+        "tools/sms_wrapper/luta_mugen_trace_dap.py",
+        "SMS_projects/luta_mugen/integrada/trace/trace_rec.c"
+      ],
+      "dedup_key": "l097_produtor_trilha_dap_2026_09_30"
+    },
+    {
+      "ts": "2026-10-01",
+      "kind": "curation",
+      "summary": "L098: atraso do soco (12,7x o AIR) e da caminhada (5x) explicado pelo contador de animação parado na espera de pose visível; não é dado AIR nem entrada. Achado lateral: sem colisão de corpo entre lutadores.",
+      "sources": [
+        "doc/curation/2026-10-01_l098_atraso_de_pose_visivel.json",
+        "tools/sms_wrapper/mugen2sms/analysis/trace_vs_air.py"
+      ],
+      "dedup_key": "l098_atraso_pose_visivel_2026_10_01"
+    },
+    {
+      "ts": "2026-10-01",
+      "kind": "curation",
+      "summary": "L099: banda de upload ~3 pares/quadro dividida entre os lutadores; poses de ataque do Ken têm 27-37 pares quase sem compartilhamento; prioridade 'ação primeiro' corta o hit de 134 para 88 ticks (-34%) mas segue injogável.",
+      "sources": [
+        "doc/curation/2026-10-01_l099_banda_de_upload_de_poses.json",
+        "tools/sms_wrapper/luta_mugen_trace_dap.py"
+      ],
+      "dedup_key": "l099_banda_upload_poses_2026_10_01"
+    },
+    {
+      "ts": "2026-10-03",
+      "kind": "curation",
+      "summary": "L100: arte começa na grade SMS 6-bit e na paleta do personagem; Hayato aprovou 15 cores. Aplicado a Alis v4, Golden Axe Warrior v1, Dr. Social v9 e ao estudo Joe/Takashi Shadow Dancer SMS: referência original corrigiu os papéis cromáticos, o dono aprovou o conceito v1 com amarelo e o derivado técnico de 7 cores passou no gate. Idle v2 tem paleta e semântica aprovadas tecnicamente, mas aguarda revisão visual do dono. Nenhum pixel externo foi copiado.",
+      "sources": [
+        "doc/curation/2026-10-03_l100_paleta_sms_no_conceito.json",
+        "tools/sms_wrapper/audit_validate_resources.py",
+        "tools/sms_wrapper/prepare_sms_pixel_art.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+        "SMS_projects/master_of_fighters/doc/build_palettes_manifest.py",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/alis_landale/approved_records/asset_lineage_record_v4.json",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/ga_warrior/review_drafts/records/asset_lineage_record_v1.json",
+        "https://www.spriters-resource.com/master_system/goldenaxewarrior/asset/29261/",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/asset_lineage_record_v9.json",
+        "https://www.smspower.org/uploads/Sprites/MasterOfDarkness-SMS-Dr.FerdinandSocial-StandingRight.png",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/asset_lineage_record_concept_v1.json",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/asset_lineage_record_idle_v2.json",
+        "https://www.smspower.org/Sprites/ShadowDancer-SMS"
+      ],
+      "dedup_key": "l100_paleta_sms_no_conceito_2026_10_03"
+    },
+    {
+      "ts": "2026-10-03",
+      "kind": "curation",
+      "summary": "L101: quantização sem dithering e limpeza por célula reduziram componentes opacos <12 px de 201 para 0 em Hayato e de 8 para 0 na aplicação Dr. Social; contorno preto foi mantido opaco via tom profundo declarado, preservando idx0 transparente.",
+      "sources": [
+        "doc/curation/2026-10-03_l101_limpeza_granulacao_sprite.json",
+        "tools/sms_wrapper/prepare_sms_pixel_art.py",
+        "tools/sms_wrapper/audit_validate_resources.py",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/asset_lineage_record_sms_v2.json",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/asset_lineage_record_sms_v5.json"
+      ],
+      "dedup_key": "l101_limpeza_granulacao_sprite_2026_10_03"
+    },
+    {
+      "ts": "2026-10-03",
+      "kind": "curation",
+      "summary": "L102: aprovação da folha Landau apoiada por medição por quadro: 12 poses únicas, bbox visível 63–70×83–87 px e baseline comum y=95; a geometria agora é contrato auditável.",
+      "sources": [
+        "doc/curation/2026-10-03_l102_geometria_folha_sprite.json",
+        "tools/sms_wrapper/audit_animation_semantics.py",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/lord_of_the_sword/landau_idle_semantics_v3.json",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/lord_of_the_sword/asset_lineage_record_v1.json"
+      ],
+      "dedup_key": "l102_bbox_baseline_por_quadro_2026_10_03"
+    },
+    {
+      "ts": "2026-10-03",
+      "kind": "curation",
+      "summary": "Consolidada a rota cross-genre de primeira fatia jogável e conectadas as lições L097–L102 aos workflows de projeto, runtime, cena e arte. Nenhum lesson ID novo: audit_learning_capture confirmou as lições existentes e a curadoria corrigiu sua aplicação operacional.",
+      "sources": [
+        "doc/curation/2026-10-03_workflow_first_playable_slice.json",
+        "tools/sms_wrapper/.agent/ARCHITECTURE.md",
+        "tools/sms_wrapper/.agent/workflows/first-playable-slice.md",
+        "tools/sms_wrapper/.agent/workflows/new-project.md",
+        "tools/sms_wrapper/.agent/workflows/new-scene.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+        "tools/sms_wrapper/.agent/workflows/production-loop.md",
+        "tools/sms_wrapper/.agent/workflows/curation-learning.md",
+        "tools/sms_wrapper/.agent/workflows/curation-mode.md"
+      ],
+      "dedup_key": "workflow_first_playable_slice_cross_genre_2026_10_03"
+    },
+    {
+      "ts": "2026-10-04",
+      "kind": "curation",
+      "summary": "Adaptado ao SMSForge o método de ownership, teardown, persistência/reset e retorno repetido entre estados. Criada skill geral SMS e roteada para TDD, cena e produção; nenhum limite/API SGDK foi importado e nenhuma ROM foi validada nesta curadoria.",
+      "sources": [
+        "doc/curation/2026-10-04_sgdk_state_transition_skill_sms.json",
+        "tools/sms_wrapper/.agent/skills/sms-state-transitions.md",
+        "tools/sms_wrapper/.agent/workflows/new-project.md",
+        "tools/sms_wrapper/.agent/workflows/new-scene.md",
+        "tools/sms_wrapper/.agent/workflows/production-loop.md"
+      ],
+      "dedup_key": "sgdk_state_transition_practice_sms_2026_10_04"
+    },
+    {
+      "ts": "2026-10-04",
+      "kind": "curation",
+      "summary": "L103: ao adaptar J.J. para arte SMS, o sprite de Zillion II mantém autoridade sobre identidade, paleta e comportamento; referências do anime só esclarecem construção/mapeamento do figurino, conforme pedido do dono. Contrato, lineage, SHA e limite de uso são auditados; concept v4 aprovada e sprite study revisada em L104.",
+      "sources": [
+        "doc/curation/2026-10-04_l103_fronteira_referencias_multimidia.json",
+        "tools/sms_wrapper/audit_reference_boundary.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_asset_contract_v4.json",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_lineage_v4.json"
+      ],
+      "dedup_key": "l103_source_boundary_cross_media_2026_10_04"
+    },
+    {
+      "ts": "2026-10-04",
+      "kind": "curation",
+      "summary": "L104 follow-up: Joe Musashi shows the same recurrence risk. The owner flagged a dirty/haloed cutout; the old asset contract cannot run the material-region gate, and a broad component-only PASS is not proof of cleanliness. Require a valid profile and native/4x visual inspection. A separate ImageGen cutout study also retained colored fringe and was rejected.",
+      "sources": [
+        "doc/curation/2026-10-04_l104_pixels_de_recorte_e_alvo_visual.json",
+        "tools/sms_wrapper/audit_sprite_cutout.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_asset_contract_v5.json",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_lineage_v5.json",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+        "doc/curation/2026-10-04_l105_harmonia_escala_roster.json",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v1_cutout_rejected.png"
+      ],
+      "dedup_key": "l104_jj_attached_cutout_specks_aaa_target_2026_10_04"
+    },
+    {
+      "ts": "2026-10-04",
+      "kind": "curation",
+      "summary": "L105 follow-up: scale bands still pass, but the owner rejected the roster aesthetics. Joe is morphology anchor only and his dirty cutout fails; other sprites need leaner human anatomy, less stocky limbs and clearer color clusters. Audit now records visual fail separately from pending; new shared-board review is required. A new body-proportion art study is recorded separately; a transparent cutout edit retained color fringe and was rejected.",
+      "sources": [
+        "doc/curation/2026-10-04_l105_harmonia_escala_roster.json",
+        "tools/sms_wrapper/audit_roster_harmony.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+        "SMS_projects/master_of_fighters/doc/roster_harmony_contract_v1.json",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_audit_v1.json",
+        "SMS_projects/master_of_fighters/doc/roster_harmony_candidate_review_v1.json",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v1.json",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_candidate_v1.png",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_frame00_candidates_lineage_v1.json",
+        "doc/curation/2026-10-04_l104_pixels_de_recorte_e_alvo_visual.json",
+        "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v2.json",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_review_v2.png",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v1_finish.png",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v1_lineage.json",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v1_prompt.txt"
+      ],
+      "dedup_key": "l105_roster_harmony_scale_morphology_2026_10_04"
+    },
+    {
+      "ts": "2026-10-04",
+      "kind": "curation",
+      "summary": "Aplicação operacional de L090 e L093–L095 ao workflow MUGEN: exigir limite inferior por scanline antes de investir em scheduler sprite-only e perfil de controle derivado por personagem. Resultados Ryo/Ryo atuais continuam diagnósticos bloqueados; nenhuma rota gráfica ou capacidade de gameplay foi promovida e nenhum ID novo foi emitido.",
+      "sources": [
+        "doc/curation/2026-09-29_l090_l091_idle_slot_period_render_glitch.json",
+        "doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json",
+        "SMS_projects/luta_mugen/integrada/tools/line_lower_bound.py",
+        "SMS_projects/luta_mugen/doc/10-memory-bank.md",
+        "SMS_projects/master_of_fighters/doc/10-memory-bank.md",
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+        "tools/sms_wrapper/.agent/ARCHITECTURE.md"
+      ],
+      "dedup_key": "mugen_workflow_lower_bound_per_fighter_controls_2026_10_04"
+    },
+    {
+      "ts": "2026-10-04",
+      "kind": "curation",
+      "summary": "L106: revisão artística não pode ficar em ‘olhar geral’. Exigir por personagem olhos/rosto, anatomia e handedness das duas mãos, mão→grip→guarda→arma, articulações, fixação/perspectiva de acessórios, pé/baseline, contorno/recorte, materiais/luz e harmonia do roster. O checklist automatizado valida cobertura e hashes, não verdade visual; `fail` ou `pending` e ausência de revisão independente/aprovação do dono bloqueiam promoção.",
+      "sources": [
+        "doc/curation/2026-10-04_l106_revisao_artistica_anatomia_e_equipamento.json",
+        "tools/sms_wrapper/audit_art_review_checklist.py",
+        "tools/sms_wrapper/selftest.py",
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/workflows/independent-quality-review.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_review_checklist.json"
+      ],
+      "dedup_key": "l106_roster_art_review_anatomy_grips_equipment_2026_10_04"
+    },
+    {
+      "ts": "2026-10-05",
+      "kind": "curation",
+      "summary": "L107: após correções estruturais, exigir micro-eixos explícitos para clusters de pixel, rosto, outline/recorte, sombra por material, mão/arma, equipamento, integridade dos quadros e leitura nativa. Edição generativa de folha pode trocar poses/ações; auditar cada quadro e rejeitar violações. Pranchas comparativas precisam evitar exibição em escala fracionária, que pode acentuar ruído de contorno; a proporção v2 foi exportada em 2048 px com ampliação inteira 3×. A arte-fonte do Shinobi segue em revisão e não foi alterada.",
+      "sources": [
+        "doc/curation/2026-10-05_l107_refino_pixelart_quadro_e_microeixos.json",
+        "tools/sms_wrapper/audit_art_review_checklist.py",
+        "tools/sms_wrapper/selftest.py",
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "SMS_projects/master_of_fighters/doc/roster_harmony_refinement_review_v1.json",
+        "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_owner_feedback_20261005.json"
+      ],
+      "dedup_key": "l107_pixel_art_polish_frame_integrity_2026_10_05"
+    },
+    {
+      "ts": "2026-10-05",
+      "kind": "curation",
+      "summary": "Aplicacao de L057/L039/L065/L035: duas sessoes privadas Emulicious com SMSJoypad P1/P2 locais a JVM, display autenticado e evidencia por ROM/session SHA. KILL global removido. 17/29 frames observados exatamente na ROM; video por VDP, SRAM e shutdown isolados. L071: produtor Mugen atual sobrepoe trace_buf/telemetria/caches; gate RAM agora bloqueia antes do emulador. Audio e hotplug real permanecem abertos.",
+      "sources": [
+        "doc/curation/2026-10-05_l057_sessoes_privadas_emulicious.json",
+        "doc/plano-sessoes-emulicious-isoladas.md",
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "tools/sms_wrapper/emulator_session.py",
+        "tools/sms_wrapper/session_bridge/acceptance.py",
+        "tools/sms_wrapper/selftest.py",
+        "doc/agent_learning/emulator_session_memory.md"
+      ],
+      "dedup_key": "l057_private_emulicious_session_smsjoypad_2026_10_05"
+    },
+    {
+      "ts": "2026-10-05",
+      "kind": "curation",
+      "summary": "L057 followup: boot muted desde Emulicious.main, priming com zeros, readback da rota exata do PID antes de unmute e descarte de buffer antigo. Neste host stop/start/flush recriam stream ALSA/PipeWire: ponte preserva linha aberta, envia zeros em mute/pausa e gateia PCM; linha aberta sozinha reprovou em repeticao. Startup espera linha completa de displayfd antes de fechar pipe. Negativos preservados. Contrato de sink adulterado e recusado sem mover fluxos do host. 8 testes de audio e 17 de controles em emulador passaram; MSSF2T e controle silencioso 8.173s/8s, mute pico zero. Captura tem prazo e pausa ao terminar; shutdown verifica remocao do sink. Comparacao musical alinhada, hotplug e migracao de scripts continuam abertos. Sem novo lesson ID.",
+      "sources": [
+        "doc/curation/2026-10-05_l057_sessoes_privadas_emulicious.json",
+        "doc/curation/evidence/2026-10-05_emulicious_isolated/boot_audio_followup/inventory.json",
+        "tools/sms_wrapper/session_bridge/audio_acceptance.py",
+        "tools/sms_wrapper/session_bridge/ForgeSMS.java",
+        "tools/sms_wrapper/capture_audio.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md"
+      ],
+      "dedup_key": "l057_private_audio_muted_boot_stable_line_2026_10_05"
+    },
+    {
+      "ts": "2026-10-05",
+      "kind": "curation",
+      "summary": "Aplicacao de L057/L039/L065/L035 aos consumidores: luta_mugen prove_input/prove_round_lifecycle e hamoopig prove_walk/prove_punch migrados para session_consumer (sessao privada, frames, RAM; sem teclado/DAP/foco). Trilha Mugen: causa = trace_buf 0xC800 sobrepunha tl_snap/frame_cache/pose_cache; solucao = trilha (clone) em 0xD200-0xDA00 com 170 registros inalterados + canario 0xA5 em 0xDA00 antes da pilha, gate check_ram_layout preservado antes do emulador. Medido: punch exige esperar o fim da animacao (dano chega >60 frames depois); QCF exige tokens D,F,B1 contiguos + 12 frames para o latch. consumer_acceptance: 14 checks com Mugen+hamoopig simultaneos. Pendentes: hamoopig prove_basic/guard/throw/special/capture_*, MSSF2T e kage_matsuri prove_input_memory. Nenhum claim de gameplay/60fps/fidelidade.",
+      "sources": [
+        "doc/matriz-consumidores-sessoes-privadas.md",
+        "tools/sms_wrapper/session_consumer.py",
+        "tools/sms_wrapper/session_bridge/consumer_acceptance.py",
+        "tools/sms_wrapper/luta_mugen_trace_dap.py",
+        "SMS_projects/luta_mugen/integrada/trace/trace_rec.c",
+        "SMS_projects/luta_mugen/tools/prove_input.py",
+        "SMS_projects/luta_mugen/tools/prove_round_lifecycle.py",
+        "doc/curation/2026-10-05_l057_sessoes_privadas_emulicious.json"
+      ],
+      "dedup_key": "l057_consumer_migration_mugen_trace_ram_2026_10_05"
+    },
+    {
+      "ts": "2026-10-05",
+      "kind": "curation",
+      "summary": "Aplicacao de L036/L057/L065 em QA nativa universal: fonte central §94, pedidos/ROM congelada, sessoes privadas exclusivas por worker, feedback nativo runtime/visual/audio e gate de cobertura/hash/cleanup. 3 subagentes reais exercitaram casos de controles, titulo e audio; coleta registra video durante input e preserva sessao parcial blocked; consolidacao prende ROM/projeto/produtor/tasks. Reviewer visual corrigiu falso defeito com evidencia preservada. Nao aprova AAA/gameplay/FPS nem migra automaticamente consumidores antigos.",
+      "sources": [
+        "doc/curation/2026-10-05_native_subagent_session_qa.json",
+        "doc/curation/evidence/2026-10-05_native_subagent_qa/native_dispatch.json",
+        "tools/sms_wrapper/.agent/workflows/subagent-emulator-qa.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "tools/sms_wrapper/audit_subagent_session.py",
+        "tools/sms_wrapper/session_qa.py",
+        "tools/sms_wrapper/harness_orchestration.py",
+        "tools/sms_wrapper/quality_review_router.py"
+      ],
+      "dedup_key": "l036_l057_native_subagent_session_qa_2026_10_05"
+    },
+    {
+      "ts": "2026-10-06",
+      "kind": "curation",
+      "summary": "Aplicacao de licoes existentes §§95–98: QA V2 com snapshots e elegibilidade atual separada; independent um caso em sessao nova, chained timeline cumulativa e precondicao ROM. Gates para baseline/fronteiras seladas e registros de coordenadas/AIR/cache. Video mede timeline completa e preserva endpoints. Provas nativas positivas e baseline negativa; perfis de VBlank continuam budget FAIL. Sem IDs novos nem promocao de gameplay/AAA.",
+      "sources": [
+        "doc/curation/2026-10-06_expertise_promotion.json",
+        "doc/curation/evidence/2026-10-06_expertise_promotion/native_dispatch.json",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "tools/sms_wrapper/.agent/workflows/subagent-emulator-qa.md",
+        "tools/sms_wrapper/audit_subagent_session.py",
+        "tools/sms_wrapper/session_qa.py",
+        "tools/sms_wrapper/audit_stage_attribution.py",
+        "tools/sms_wrapper/audit_import_semantics.py",
+        "tools/sms_wrapper/capture_video.py"
+      ],
+      "dedup_key": "existing_lessons_expertise_snapshots_case_relation_stage_semantics_20261006"
+    },
+    {
+      "ts": "2026-10-07",
+      "kind": "curation",
+      "summary": "Aplicação das lições existentes: contexto legível antes de QA, modo diagnóstico explícito e identidade AIR vinculada a N+1 fronteiras. EIO real registrado, produção MUGEN não promovida.",
+      "sources": [
+        "doc/curation/2026-10-07_context_air_identity.json"
+      ],
+      "dedup_key": "existing_lessons_readable_context_air_identity_20261007"
+    },
+    {
+      "ts": "2026-10-07",
+      "kind": "curation",
+      "summary": "Propagação de lições às skills: QA privado, sem encerramento global, timeline/AIR e semântica de importação parse/generated/consumed/runtime. Gate textual detectou sete contradições; sem promoção de jogo.",
+      "sources": [
+        "doc/curation/2026-10-07_skills_propagation.json"
+      ],
+      "dedup_key": "existing_lessons_skills_private_qa_mugen_source_scope_20261007"
+    },
+    {
+      "ts": "2026-10-08",
+      "kind": "curation",
+      "summary": "L108 (ampliada): arte autoral incremental; fichas exibem índice/obra/artista e assinatura distinta; revisão humana traça anatomia e coesão, e o gate exige quatro eixos explícitos. Compositor adiciona régua/rótulos uma vez; sobreposições são verificadas antes de promover.",
+      "sources": [
+        "doc/curation/2026-10-08_l108_fluxo_arte_autoral_incremental.json",
+        "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+        "tools/sms_wrapper/.agent/workflows/original-artwork.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/2026-10-08_bad_metadata_recomposition/draft_manifest.json",
+        "tools/sms_wrapper/audit_art_review_checklist.py"
+      ],
+      "dedup_key": "l108_original_artwork_catalog_incremental_model_sheet_source_art_20261008"
+    },
+    {
+      "ts": "2026-10-08",
+      "kind": "curation",
+      "summary": "Evidência complementar L106/L108: após revisão do concept #14, o dono ainda identificou no v2 o braço do boomerang visualmente unido/distorcido junto ao da rapieira, embora a inspeção do produtor tivesse considerado o ajuste suficiente. v3 foi gerada e segue pendente. Para curadoria futura, exigir fechamento explícito de cada defeito contra a nova imagem e uma segunda passagem integral do checklist; gate de cobertura/hash não prova correção visual. Sem novo lesson ID e sem promoção da regra/skill.",
+      "sources": [
+        "doc/curation/2026-10-04_l106_revisao_artistica_anatomia_e_equipamento.json",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3.png",
+        "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v3.json",
+        "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_report_v3.json",
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/workflows/original-artwork.md",
+        "tools/sms_wrapper/audit_art_review_checklist.py"
+      ],
+      "dedup_key": "l106_l108_visual_defect_closure_double_check_2026_10_08"
+    },
+    {
+      "ts": "2026-10-08",
+      "kind": "curation",
+      "summary": "Contadoresmodulares exigem limite/janela para contagemexata; trials cache rejeitados preservados sem causalidade inventada. Concept model sheet exige revisão final document_and_layout não dispensável. Reaplica L013/L061/L097/L106/L108.",
+      "sources": [
+        "doc/curation/2026-10-08_runtime_counter_layout.json"
+      ],
+      "dedup_key": "existing_lessons_runtime_modular_counters_final_concept_layout_20261008"
+    },
+    {
+      "ts": "2026-10-09",
+      "kind": "curation",
+      "summary": "L109: prova de conversão exibe duas poses-chave; mapa de tiles separado; auditor compara preview com PNG indexado pixel a pixel e reprova overlay. audit_sprite_cutout pode medir ilhas em modo components_only, mas fica pending sem regiões por material. Teto de quadros vem do orçamento medido do projeto; animação exige cobertura dos 12 princípios.",
+      "sources": [
+        "doc/curation/2026-10-09_l109_prova_pose_pixels_hardware_animacao.json",
+        "SMS_projects/master_of_fighters/doc/asset_conversion_proof_standard_v2.md",
+        "tools/sms_wrapper/audit_asset_proof_sheet.py",
+        "tools/sms_wrapper/audit_sprite_cutout.py"
+      ],
+      "dedup_key": "l109_two_keypose_exact_preview_sms_hardware_animation_20261009"
+    },
+    {
+      "ts": "2026-10-09",
+      "kind": "lesson",
+      "summary": "L110: proof asset precisa manter arma/equipamento inteiro dentro de canvas tile-alinhado com borda transparente; auditor refaz nearest-neighbor declarado e bloqueia borda cortada/diferença. Escala Master of Fighters derivada de Fatal Fury Special GG: aprox. 53/144 da tela, projetada para SMS em ~71px, faixa 66–72. V2 rejeitada; v3 80x80 mede 42+52 padrões, arma completa; revisão visual e runtime pendentes.",
+      "sources": [
+        "doc/curation/2026-10-09_l110_asset_bounds_gg_sms_scale.json",
+        "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v2.png",
+        "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v3.png",
+        "SMS_projects/master_of_fighters/doc/11-gdd.md",
+        "SMS_projects/master_of_fighters/doc/15-tdd.md",
+        "tools/sms_wrapper/audit_asset_proof_sheet.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md"
+      ],
+      "dedup_key": "l110_keypose_frame_bounds_and_fatal_fury_game_gear_scale_20261009"
+    },
+    {
+      "ts": "2026-10-09",
+      "kind": "lesson",
+      "summary": "L111: revisar semântica de terminais além de pixels/recorte; altura anatômica deve excluir arma/equipamento. Sprite index0 transparente; BG index0 sempre visível. SMS compartilha P1 entre sprites; P0 atende BG/HUD. Mapeamento do roster para 15 cores P1 permanece pending.",
+      "sources": [
+        "doc/curation/2026-10-09_l111_equipment_terminal_and_shared_sms_palette.json",
+        "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.png",
+        "SMS_projects/master_of_fighters/doc/palette_runtime_contract_v1.json",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "tools/sms_wrapper/audit_asset_proof_sheet.py",
+        "tools/sms_wrapper/.agent/skills/sms-pixel-strict-rules.md",
+        "tools/sms_wrapper/.agent/skills/sms-palette-codes.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "dedup_key": "l111_semantic_equipment_terminal_and_shared_sms_palette_20261009"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "lesson",
+      "summary": "L112: BlastEm SMS é diagnóstico complementar com ROM/tool SHA, baseline, precondições, snapshots e cleanup; ciclo interno rebased não prova CPU/fps, e sessão sem áudio/hardware não promove claims de produção.",
+      "sources": [
+        "doc/curation/2026-10-10_l112_blastem_sms_diagnostic_boundary.json",
+        "doc/curation/evidence/2026-10-10_blastem_sms/sequence.json",
+        "doc/curation/evidence/2026-10-10_blastem_sms/final_root/blastem-sms-de8da8ccf81c4d21be1ee712789caad9/session.json",
+        "tools/sms_wrapper/blastem_sms.py",
+        "tools/sms_wrapper/audit_blastem_sms.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md"
+      ],
+      "dedup_key": "l112_blastem_sms_diagnostic_boundary_20261010"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "lesson",
+      "summary": "L113: sprite sheet exige contrato por sequência com endpoints, poses/durações, tracks de personagem/objeto e revisão dos 12 princípios; no mínimo 7 aplicações contextualizadas. Poses-fonte não são objetos VDP. O auditor valida estrutura, não pixels/física/balanceamento. O exercício Dr. Social registra 24 sequências e 191 poses propostas, ainda sem PNG ou moveset aprovado.",
+      "sources": [
+        "doc/curation/2026-10-10_l113_animation_contract_minimum_principles.json",
+        "SMS_projects/master_of_fighters/doc/dr_social_animation_contract_v1.json",
+        "SMS_projects/master_of_fighters/doc/dr_social_animation_contract_v1.md",
+        "tools/sms_wrapper/audit_animation_contract.py",
+        "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md"
+      ],
+      "dedup_key": "l113_animation_sequence_contract_seven_principles_object_tracks_20261010"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "curation",
+      "summary": "L114–L120: releases/candidato paralelo com hash, GDB Z2 por CPU, watchpoints Z80 e OUT com opcode vivo, APNG bruto/derivado, PCM/VGM íntegros e visores SMS. Evidência native/negative/source discriminada; Emulicious segue produção/FPS/áudio final.",
+      "sources": [
+        "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "dedup_key": "blastem_advanced_seven_20261010"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "lesson",
+      "summary": "L121: converte PNG indexado sem alterar pixels, empacota 8x8 4bpp/metasprites, inicializa o name table, mede SAT/scanline e compara o framebuffer pixel a pixel com binding da ROM SHA. Dr. Social: 89 padrões + tile vazio, 43/49 objetos, duas poses exatas em ROM de 16 KiB; P1 do roster, animação e runtime permanecem pendentes.",
+      "sources": [
+        "doc/curation/2026-10-10_l121_sms_asset_to_rom_conversion.json",
+        "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_conversion_verification_v3.json",
+        "tools/sms_wrapper/pack_sms_metasprite.py",
+        "tools/sms_wrapper/audit_render_fidelity.py",
+        "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md"
+      ],
+      "dedup_key": "l121_sms_indexed_asset_metasprite_rom_framebuffer_exact_20261010"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "lesson",
+      "summary": "L122: selecione a folha de animação aprovada por papel+caminho+SHA, não a prova técnica de duas poses; confronte os 61 quadros no framebuffer. Os 256 índices lógicos não substituem o budget físico de patterns residentes até a name table: Dr. Social usa teto 191, idle/defesa compartilhados, sete sequências em passo manual.",
+      "sources": [
+        "doc/curation/2026-10-10_l122_aprovacao_fonte_61_poses_janela_patterns.json",
+        "SMS_projects/master_of_fighters/doc/dr_social_61_pose_source_lineage_v1.json",
+        "SMS_projects/master_of_fighters/tools/prepare_dr_social_61_pose_probe.py",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/project/doc/rom_asset_binding.json",
+        "tools/sms_wrapper/pack_sms_metasprite.py",
+        "tools/sms_wrapper/audit_render_fidelity.py",
+        "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md"
+      ],
+      "dedup_key": "l122_approved_animation_source_role_sha_and_sms_resident_pattern_window_20261010"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "curation",
+      "summary": "L123: runbook transversal para promover arte do pedido à ROM de produção, com estados separados por papel/hash, harmonia de elenco, contrato de animação, prova de conversão, ROM diagnóstica, revisão humana e budgets medidos; cada transição aponta aos gates existentes.",
+      "sources": [
+        "doc/curation/2026-10-10_l123_ciclo_arte_autoral_ate_rom.json",
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "SMS_projects/master_of_fighters/doc/fluxo-criacao-curadoria-personagens.md"
+      ],
+      "dedup_key": "l123_artwork_to_rom_independent_promotion_states_hash_bound_sms_20261010"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "lesson",
+      "summary": "L124: o caminho v6–v10 saiu de média de área na máscara do tecido (6.145 px), passou por rampa luminosa v7 (15.690 px; rejeitada; framebuffer só ID01–03), clusters interiores v8 (927 px; 61/61 exatos, mas falso negativo na borda), âncoras amarelas v9 (249 px) e dupla checagem geométrica de branco v10 (70 px; 0 alfa/cor/pose nova; 61/61 exatos). Fonte+SHA imutáveis, uma família de defeitos por versão, delta por quadro e revisão 1x/NN4x evitam correções largas e regressões. V10 segue candidata: clusters maiores e arte aguardam revisão independente e aprovação do dono.",
+      "sources": [
+        "doc/curation/2026-10-10_l124_fluxo_sombra_material_sprite.json",
+        "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v7.json",
+        "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v8.json",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/dr_social_61_pose_ramp_delta_v5_v7.json",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v8/dr_social_61_pose_cel_cluster_delta_v7_v8.json",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v8/project/out/evidence/dr_social_61_framebuffer_v8/framebuffer_capture_index_v8.json",
+        "SMS_projects/master_of_fighters/tools/refine_dr_social_61_pose_cel_v8.py",
+        "tools/sms_wrapper/capture_dr_social_61_pose_review.py",
+        "tools/sms_wrapper/audit_art_review_checklist.py",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v9.json",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/dr_social_61_pose_semantic_delta_v8_v9.json",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/project/out/evidence/dr_social_61_framebuffer_v9/framebuffer_capture_index_v9.json",
+        "SMS_projects/master_of_fighters/tools/refine_dr_social_61_pose_semantic_v9.py",
+        "SMS_projects/master_of_fighters/tools/capture_dr_social_61_pose_review.py",
+        "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v10.json",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/dr_social_61_pose_white_semantic_delta_v9_v10.json",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/project/out/evidence/dr_social_61_framebuffer_v10/framebuffer_capture_index_v10.json",
+        "SMS_projects/master_of_fighters/tools/refine_dr_social_61_pose_semantic_v10.py"
+      ],
+      "dedup_key": "l124_material_shadow_flow_coherence_sms_sprite_20261010"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "curation",
+      "summary": "Aplicação de L057: qualidade/build continuam invisíveis em sessões isoladas por padrão. Uma janela desktop só é aberta quando o dono pede explicitamente para ver a ROM; verificar a janela confirma a inspeção manual solicitada, não substitui evidência privada nem aprova arte/gameplay.",
+      "sources": [
+        "doc/curation/2026-09-07_l057_sessao_emulador.json",
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+        "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/project/out/rom/dr_social_61_pose_review_v10.sms"
+      ],
+      "dedup_key": "l057_explicit_user_visible_review_exception_20261010"
+    },
+    {
+      "ts": "2026-10-10",
+      "kind": "curation",
+      "summary": "L125/L126: registro único por projeto/papel, heads candidata/aprovada separados, reservas Harness, extensão criativa, legacy indexado sem aprovação; preflight raster salvo e rotas atuais para todas as lições. Aplicados L004/L009/L096 e corrigidos banking/SAT sob L001/L069/L117. Nenhuma arte/jogo promovido.",
+      "sources": [
+        "doc/curation/2026-10-10_l125_l126_harness_artifact_and_raster.json",
+        "tools/sms_wrapper/.agent/workflows/artifact-organization.md",
+        "doc/agent_learning/lesson_routes.json",
+        "doc/artifact_registries/master_of_fighters.json"
+      ],
+      "dedup_key": "harness_artifact_curation_l125_l126_20261010"
+    },
+    {
+      "ts": "2026-10-11",
+      "kind": "curation",
+      "summary": "L127: model sheet por delta explícito e invariantes congelados; segunda passagem anatômica/equipamento; checklist e revisão independente hash-bound; decisão do dono com escopo; head único e arquivo reversível sem apagar snapshots.",
+      "sources": [
+        "doc/curation/2026-10-11_l127_model_sheet_revision_promotion.json",
+        "tools/sms_wrapper/.agent/workflows/original-artwork.md",
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/workflows/artifact-organization.md",
+        "SMS_projects/master_of_fighters/doc/curation/dr_social_model_sheet_v4_promotion_organization_2026-10-11.json"
+      ],
+      "dedup_key": "l127_model_sheet_delta_doublecheck_promotion_archive_20261011"
+    },
+    {
+      "ts": "2026-10-13",
+      "kind": "curation",
+      "summary": "L128: terminador 0xD0 da SAT só no modo 192 linhas; em 224/240 é Y comum e a SAT não trunca. audit_sprite_line_sim.py valida screen_h e reprova truncamento declarado fora de 192. Sem medição em emulador/console; offset y+1 aberto para A2.",
+      "sources": [
+        "doc/curation/2026-10-13_l128_sat_terminator_192_only.json",
+        "tools/sms_wrapper/audit_sprite_line_sim.py",
+        "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md",
+        "out/smspower_corpus_2026-10-12/Sprites.txt"
+      ],
+      "dedup_key": "l128_sat_terminator_d0_192_line_mode_only_20261013"
+    },
+    {
+      "ts": "2026-10-13",
+      "kind": "curation",
+      "summary": "L129: limite de 8/scanline é do buffer de parsing em ordem de SAT; entrada oculta/transparente conta e pode derrubar o sprite visível. SMS_addSprite grava y−1 (Y proibido = 0xD1); simulador corrigido de y+1. Frase 'SMS1 corrompe a linha' rebaixada a não provada. Sem medição em emulador/console.",
+      "sources": [
+        "doc/curation/2026-10-13_l129_sprite_buffer_fill_and_stored_y.json",
+        "tools/sms_wrapper/audit_sprite_line_sim.py",
+        "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md",
+        "tools/sms_wrapper/.agent/skills/sms-vdp-budget-analyst.md",
+        "out/smspower_corpus_2026-10-12/Sprites.txt",
+        "sdk/devkitSMS/SMSlib/SMSlib.lib"
+      ],
+      "dedup_key": "l129_sprite_overflow_buffer_fill_sat_order_stored_y_minus_1_20261013"
+    },
+    {
+      "ts": "2026-10-13",
+      "kind": "curation",
+      "summary": "Aplicação sem IDs novos: L003/L006/L128/L129 schema/scanline/packer, L013/L035 alvo regional FPS/missingwindows, L078–L081 bitnoise/pitch/políticas/preview; L124/L127 emendas/máscara/ownership; L002 teto não vazio; L123 checkpoint conjunto público/input/arte/áudio/budget sem claim comercial. Assets de jogos preservados.",
+      "sources": [
+        "doc/curation/2026-10-13_quality_cohesion_application.json",
+        "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
+        "doc/curation/evidence/2026-10-13_quality_cohesion"
+      ],
+      "dedup_key": "quality_cohesion_application_20261013"
     }
- ]
+  ]
 }

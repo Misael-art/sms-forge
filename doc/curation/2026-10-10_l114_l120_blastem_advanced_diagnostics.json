@@ -1,0 +1,168 @@
+{
+  "curation_id": "2026-10-10_l114_l120_blastem_advanced_diagnostics",
+  "date": "2026-10-10",
+  "kind": "lesson",
+  "title": "Sete lições de diagnóstico e manutenção BlastEm com escopo SMS",
+  "scope": "Fábrica SMSForge; complementa L112, sem reutilizar aceitação Mega Drive ou sobrescrever projetos.",
+  "lessons": [
+    {
+      "id": "L114",
+      "title": "Manutenção qualifica candidato sem substituir o pin",
+      "status": "canonical_with_explicit_evidence_scope",
+      "lesson": "Releases são descobertas pela página oficial; instalação paralela usa hashes explícitos de arquivo/binário e verifica todos os arquivos/links. Falha de hash bloqueia, candidato não se promove.",
+      "evidence": {
+        "root": "doc/curation/evidence/2026-10-10_blastem_advanced",
+        "artifacts": "releases.json; parallel_install.json; maintenance_tamper.json",
+        "validation_level": "runtime_installation_and_negative_tamper",
+        "source_archive": "https://www.retrodev.com/repos/blastem/archive/2b2a182f4522.tar.gz",
+        "source_archive_sha256": "1be96cecf7dc6ae09632b4dbfb89508d2045347cdcc5e831e16da7058d3c083a"
+      },
+      "rule_section": "SMS_GLOBAL §110",
+      "tool_that_measures": "tools/sms_wrapper/blastem_maintenance.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md; tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "Consistência de registros/formatos e os casos atribuídos; não prova hardware, FPS, fidelidade musical, arte, semântica universal ou autenticidade de chat. L115 é confirmação de source e contrato, não teste GDB SMS.",
+      "dedup_key": "l114_blastem_advanced_20261010"
+    },
+    {
+      "id": "L115",
+      "title": "Capacidade GDB é específica de CPU e pacote",
+      "status": "canonical_with_explicit_evidence_scope",
+      "lesson": "gdb_remote.c implementa Z2/z2 para M68K apesar do README desatualizado. Z3/Z4 não implementados; SMS usa Z80 nativo. Teste MD relatado pelo usuário não é homologação SMS.",
+      "evidence": {
+        "root": "doc/curation/evidence/2026-10-10_blastem_advanced",
+        "artifacts": "native_review/features.json",
+        "validation_level": "primary_source_inspection_and_SMS_contract_negative_tests_not_GDB_runtime",
+        "source_archive": "https://www.retrodev.com/repos/blastem/archive/2b2a182f4522.tar.gz",
+        "source_archive_sha256": "1be96cecf7dc6ae09632b4dbfb89508d2045347cdcc5e831e16da7058d3c083a"
+      },
+      "rule_section": "SMS_GLOBAL §110",
+      "tool_that_measures": "tools/sms_wrapper/blastem_sms.py; tools/sms_wrapper/audit_blastem_sms.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md; tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "Consistência de registros/formatos e os casos atribuídos; não prova hardware, FPS, fidelidade musical, arte, semântica universal ou autenticidade de chat. L115 é confirmação de source e contrato, não teste GDB SMS.",
+      "dedup_key": "l115_blastem_advanced_20261010"
+    },
+    {
+      "id": "L116",
+      "title": "Watchpoint de mudança RAM não cobre todo bus",
+      "status": "canonical_with_explicit_evidence_scope",
+      "lesson": "Watchpoint Z80 instrumenta WRITE_8 e ignora valor idêntico em mapa legível; testar o caminho real. Counters programados/logs conferem. observed_pc pode estar stale, valor no trap não prova commit.",
+      "evidence": {
+        "root": "doc/curation/evidence/2026-10-10_blastem_advanced",
+        "artifacts": "runtime_audit.json; native_media/final3-feedback.json",
+        "validation_level": "native_ROM_events_and_programmed_counters",
+        "source_archive": "https://www.retrodev.com/repos/blastem/archive/2b2a182f4522.tar.gz",
+        "source_archive_sha256": "1be96cecf7dc6ae09632b4dbfb89508d2045347cdcc5e831e16da7058d3c083a"
+      },
+      "rule_section": "SMS_GLOBAL §110",
+      "tool_that_measures": "tools/sms_wrapper/blastem_diagnostics.py; tools/sms_wrapper/audit_blastem_sms.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md; tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "Consistência de registros/formatos e os casos atribuídos; não prova hardware, FPS, fidelidade musical, arte, semântica universal ou autenticidade de chat. L115 é confirmação de source e contrato, não teste GDB SMS.",
+      "dedup_key": "l116_blastem_advanced_20261010"
+    },
+    {
+      "id": "L117",
+      "title": "OUT exige opcode vivo, porta e escopo de mapeamento",
+      "status": "canonical_with_explicit_evidence_scope",
+      "lesson": "Sites CPU de OUT não são watchpoint VDP. Primeiro KiB com guard de opcode vivo; 0400–3FFF Sega pode ser paginado. Campos VDP internos não provam sincronia de bus/VBlank; opcode coincidente não identifica rotina.",
+      "evidence": {
+        "root": "doc/curation/evidence/2026-10-10_blastem_advanced",
+        "artifacts": "native_review/expanded_review.json; runtime_audit.json",
+        "validation_level": "native_OUT_events_and_mapper_guard_negative_tests",
+        "source_archive": "https://www.retrodev.com/repos/blastem/archive/2b2a182f4522.tar.gz",
+        "source_archive_sha256": "1be96cecf7dc6ae09632b4dbfb89508d2045347cdcc5e831e16da7058d3c083a"
+      },
+      "rule_section": "SMS_GLOBAL §110",
+      "tool_that_measures": "tools/sms_wrapper/blastem_diagnostics.py; tools/sms_wrapper/audit_blastem_sms.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md; tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "Consistência de registros/formatos e os casos atribuídos; não prova hardware, FPS, fidelidade musical, arte, semântica universal ou autenticidade de chat. L115 é confirmação de source e contrato, não teste GDB SMS.",
+      "dedup_key": "l117_blastem_advanced_20261010"
+    },
+    {
+      "id": "L118",
+      "title": "APNG bruto preservado e correção exata do derivado",
+      "status": "canonical_with_explicit_evidence_scope",
+      "lesson": "end_apng altera contagem acTL sem refazer CRC no pin observado. Validar chunks/contagem/CRCs; corrigir apenas checksum correspondente ao payload inicial zero, preservar bruto e bloquear corrupção diversa.",
+      "evidence": {
+        "root": "doc/curation/evidence/2026-10-10_blastem_advanced",
+        "artifacts": "native_media/final3-feedback.json",
+        "validation_level": "native_APNG_and_independent_byte_level_derivation_check",
+        "source_archive": "https://www.retrodev.com/repos/blastem/archive/2b2a182f4522.tar.gz",
+        "source_archive_sha256": "1be96cecf7dc6ae09632b4dbfb89508d2045347cdcc5e831e16da7058d3c083a"
+      },
+      "rule_section": "SMS_GLOBAL §110",
+      "tool_that_measures": "tools/sms_wrapper/blastem_diagnostics.py; tools/sms_wrapper/audit_blastem_sms.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md; tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "Consistência de registros/formatos e os casos atribuídos; não prova hardware, FPS, fidelidade musical, arte, semântica universal ou autenticidade de chat. L115 é confirmação de source e contrato, não teste GDB SMS.",
+      "dedup_key": "l118_blastem_advanced_20261010"
+    },
+    {
+      "id": "L119",
+      "title": "PCM efetivo, VGM e relógio de contêiner são separados",
+      "status": "canonical_with_explicit_evidence_scope",
+      "lesson": "Validar bytes WAVE/RIFF/data e comandos/EOF/waits VGM. Mixer assíncrono não se alinha exatamente ao APNG; VGM pode omitir silêncio final. Sinal e duração nominal não aprovam música/FPS.",
+      "evidence": {
+        "root": "doc/curation/evidence/2026-10-10_blastem_advanced",
+        "artifacts": "native_media/final3-feedback.json; native_review/expanded_review.json",
+        "validation_level": "native_silent_sound_control_and_truncated_invalid_media_negatives",
+        "source_archive": "https://www.retrodev.com/repos/blastem/archive/2b2a182f4522.tar.gz",
+        "source_archive_sha256": "1be96cecf7dc6ae09632b4dbfb89508d2045347cdcc5e831e16da7058d3c083a"
+      },
+      "rule_section": "SMS_GLOBAL §110",
+      "tool_that_measures": "tools/sms_wrapper/blastem_diagnostics.py; tools/sms_wrapper/audit_blastem_sms.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md; tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "Consistência de registros/formatos e os casos atribuídos; não prova hardware, FPS, fidelidade musical, arte, semântica universal ou autenticidade de chat. L115 é confirmação de source e contrato, não teste GDB SMS.",
+      "dedup_key": "l119_blastem_advanced_20261010"
+    },
+    {
+      "id": "L120",
+      "title": "Visores SMS derivados não são capturas do jogo",
+      "status": "canonical_with_explicit_evidence_scope",
+      "lesson": "VRAM debugger já usa endereçamento SMS; inverter encoding CRAM interno do pin com teste dos64códigos. Paleta/atlas/name table são diagnóstico sem scroll/sprites/raster, RGBdigital nãoDAC.",
+      "evidence": {
+        "root": "doc/curation/evidence/2026-10-10_blastem_advanced",
+        "artifacts": "runtime_audit.json",
+        "validation_level": "exhaustive_64color_roundtrip_and_fixture_plane_framebuffer_comparison",
+        "source_archive": "https://www.retrodev.com/repos/blastem/archive/2b2a182f4522.tar.gz",
+        "source_archive_sha256": "1be96cecf7dc6ae09632b4dbfb89508d2045347cdcc5e831e16da7058d3c083a",
+        "snapshot_diff": {
+          "files": [
+            "diff_active_input.json",
+            "diff_complete_input.json"
+          ],
+          "observed": "P1 ativo muda14RAMbytes; apósneutraldeltafinal5RAMbytes, keys/snapshotvoltam0 masheldpersiste. Netdelta não é contagem de writes.",
+          "independent_review": "native_review/dump_diff/review_final2.json",
+          "negative_cases": "Hardlink/symlink/output dentro da sessão/overwrite labels-currentROM/importSHAguard/race; inputs preservados. Inicial e final arquivados."
+        }
+      },
+      "rule_section": "SMS_GLOBAL §110",
+      "tool_that_measures": "tools/sms_wrapper/blastem_diagnostics.py; tools/sms_wrapper/audit_blastem_sms.py; tools/sms_wrapper/blastem_dump_diff.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md; tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "Consistência de registros/formatos e os casos atribuídos; não prova hardware, FPS, fidelidade musical, arte, semântica universal ou autenticidade de chat. L115 é confirmação de source e contrato, não teste GDB SMS.",
+      "dedup_key": "l120_blastem_advanced_20261010"
+    }
+  ],
+  "dedup_key": "blastem_advanced_seven_20261010",
+  "closure": {
+    "report": "doc/curation/evidence/2026-10-10_blastem_advanced/closure/summary.json",
+    "selftest_passed": 101,
+    "measurement_tools_passed": 61,
+    "learning_capture_clean": true,
+    "doc_sync_passed": false,
+    "open_gate": "luta_mugen truth-document EIO/unresolved authority paths",
+    "native_review": "native_review/expanded_review_final.json",
+    "native_current_acceptance": "native_media/final3-feedback.json",
+    "whole_workspace_promotion": "not_closed"
+  },
+  "closure_diff": {
+    "selftest_passed": 102,
+    "measurement_tools_passed": 62,
+    "optional_project_build_probe": "not_run",
+    "learning_capture_clean": true,
+    "doc_sync_passed": false,
+    "doc_sync_problem_count": 10,
+    "open_gate": "luta_mugen: six truth-document EIO failures and four unresolved authority paths",
+    "whole_workspace_promotion": "not_closed",
+    "independent_diff_review": "doc/curation/evidence/2026-10-10_blastem_advanced/native_review/dump_diff/review_final2.json",
+    "report": "doc/curation/evidence/2026-10-10_blastem_advanced/closure_diff/summary.json"
+  }
+}

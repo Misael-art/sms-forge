@@ -1,82 +1,76 @@
-# skill: sms-psg-composition — padrão mínimo de áudio do agente
+# skill: sms-psg-composition — composição e auditoria de eventos PSG
 
-## O que o chip É
+## Hardware e fontes
 
-SN76489: 3 canais de tone (square puro, atenuação 0–15 onde 0 é o MAIS ALTO
-e 15 é mudo) + 1 canal de ruído (branco ou periódico; R3 latch `0xE0|fb|per`,
-**fb=bit2 → modo ≥ 4 é PERIÓDICO = assobio tonal, não percussão**).
- Não existe filtro, não existe sample nativo, não existe dinâmica de timbre
-além do volume por passo de 2 dB. YM2413 (9 canais FM) é extensão OPCIONAL e
-regional (JP/Tectoy): o jogo funciona sem FM, sempre, e o claim FM exige
-declaração explícita.
+SN76489/SMS: três canais de tone e um de ruído; atenuação 0 é máxima,
+15 é mudo. O controle do ruído usa `0xE0 | mode`:
 
-O som "cheio" dos jogos que marcaram a plataforma NÃO vem do chip — vem de
-três truques que exploram o multiplex temporal do Z80:
+- **Bit 2 = 1: branco**, modos 4–7.
+- **Bit 2 = 0: periódico**, modos 0–3.
+- Bits 1–0 escolhem a taxa; valor 3 usa o período do tone ch2.
 
-1. **Arpejo ultrarrápido multiplexado** (Streets of Rage): 3–4 notas do
-   acorde tocadas em rotação a ~30 Hz num só canal = acorde sustentado
-   percebido. A nota de cada passo vive 2–3 frames, nunca 1.
-2. **Envelope de volume** (Koshiro/Sonic 1; Master of Darkness): a vida do
-   canal 3 como baixo pizzicato — ataque no volume alto, queda em 3–5
-   frames. Eco de mão esquerda: canal 2 repete a nota do 1 atrasada 2–4
-   frames a atenuação +4–6. Sem mudança de volume NÃO EXISTE ataque, e sem
-   ataque square wave é buzina de órgão.
-3. **Ruído como percussão** (Sonic 1): branco (mode 0–3) — curto com decay
-   rápido = caixa, longo = prato, gateado em semínimas = bumbo. Metálico
-   LEGÍTIMO é periódico (Kenseiden: espada) — em música, percussão
-   periódica é assobio, não bateria.
+`PSGlib.c` envia os latches ao PSG sem inverter esse bit. A implementação
+local fixada de BlastEm, `psg.c`, guarda `value & 0x4` e aplica o feedback
+LFSR de ruído branco quando esse valor está ativo. Conferir fontes e hashes
+no registro da curadoria; não deduzir o modo pelo nome do efeito.
 
-Estratégias de preenchimento: contraponto (Wonder Boy III — a melodia
-transita entre ch0/ch1 enquanto ch3 faz baixo melódico que completa o
-espectro do acorde); motor rítmico de baixo em colcheias com contratempo em
-oitava; SFX com driver de prioridade que NÃO mata a música (Asterix — SFX
-entra no canal menos ativo ou escondido no ruído; PSGlib faz isso via
-máscara de `PSGSFXPlay` + `PSGSetMusicVolumeAttenuation`).
-Pitch-bend de ataque em SFX (Kenseiden: nota nasce aguda e cai na afinação
-em 3–5 frames) — o gerador de `sfx_shot` já faz; SFX estacionário é clique.
-PWM/voice sampling (RoboCop vs Terminator) é TETO declarado, não piso:
-captura o Z80 inteiro, exige medição de frame budget antes de qualquer
-tentativa.
+Tone: frequência nominal NTSC = `3579545 / (32 * período)` para períodos
+não nulos. A unidade de tempo do stream é uma chamada ao driver. Se houver
+uma chamada por VBlank, um frame por escrita corresponde a 50/60 escritas/s;
+não existe equivalência universal com 16 Hz ou com um timbre específico.
+YM2413 é extensão opcional; declarar suporte e assegurar funcionamento PSG.
 
-## O piso — medido, não opinião
+## Estratégias de composição
 
-`audit_psg_quality.py` decoda o .psg (formato PSGlib confirmado em
-`sdk/devkitSMS-upstream/PSGlib/src/PSGlib.c`) e reprova:
+Declare papel por canal: melodia, harmonia/arpejo, baixo e ruído, considerando
+que há só quatro canais e que música/SFX podem disputá-los. Use durações,
+contraponto, mudanças de registro, envelopes de atenuação e gates deliberados.
+Arpejos rápidos, uníssono, volume sustentado e ruído periódico podem ser escolhas
+válidas; escuta e intenção musical determinam se funcionam naquele arranjo.
+Ruído branco curto é uma opção para caixa/prato; não é requisito universal de
+percussão. Mode 3/7 acopla ruído a ch2; mudanças e SFX nesse canal afetam a taxa.
 
-| Cláusula | O que mede | Por que existe |
+A autoria vem de partitura e decisões registradas, não de um gerador passar
+num predicado. Não atribuir técnicas a jogos/compositores sem fonte específica.
+PCM/PWM por escritas de volume exige medir custo Z80 e budget de frame; o chip
+não possui canal PCM dedicado. Não supor que essa técnica ocupa todo o Z80.
+
+## Política medida e seus limites
+
+`audit_psg_quality.py` avalia a primeira passagem de streams PSGlib simples.
+Tone exige latch baixo + dado alto `0x40`–`0x7F` contíguos. Low-only, high-only
+e dados após latch de volume/ruído são recusados: são escritas possíveis no PSG,
+mas estão fora deste modelo. Substrings comprimidas também são recusadas.
+Nenhum WAIT é consumido como frequência para fabricar preview ou PASS.
+
+| Política | Métrica atual | Limite |
 |---|---|---|
-| M1 ritmo | ≥ 2 frames entre notas por canal ativo | troca a cada frame = 16 Hz = chiado; arpejo legitimo roda em 2–3 |
-| M2 dinâmica | ≥ 2 atenuações ≠ mudo por canal com ≥ 8 notas | volume constante = sem ataque, sem eco |
-| M3 registro | uníssono total ≤ 50% dos frames multi-canal | 3 canais na mesma nota é buzzer, não acorde |
-| M4 ruído | ≥ 50% dos eventos ch3 brancos + envelope | periódico em música = assobio |
-| M5 loop | ≥ 125 frames (2,5 s @ 50 Hz) | loop de 1 s em batalha é tortura |
-| M6 canais | ≥ 2 canais de tone soando | 1 canal = chip subusado |
-| S1 decay | SFX termina mais baixo que começa | sem fade = clique |
-| S2 duração | SFX ≤ 45 frames | SFX longo pisa o próximo evento |
+| M1 | Gap **médio** ≥ 2 frames entre escritas de período em canais com ≥ 8 escritas | Reescrita do mesmo período não é nota nova; não verifica gap mínimo |
+| M2 | ≥ 2 atenuações não mudas por canal elegível | Cardinalidade não prova envelope/ataque |
+| M3 | Uníssono ≤ 50% dos instantes com eventos e ≥ 2 tones não mudos | Não pondera duração entre instantes nem mede frames sustentados |
+| M4 | ≥ 50% dos comandos de ruído em modos 4–7; variedade de volume | Conta comandos, inclusive quando ruído está mudo; não julga percussão |
+| M5 | Primeira passagem ≥ 250 frames | 5 s a 50 chamadas/s ou ~4,17 s a 60; não mede loop audível |
+| M6 | ≥ 2 tones com ≥ 8 escritas de período | Não prova simultaneidade ou audibilidade |
+| M7 | Algum gap médio ≥ 8 frames em canal elegível | Não prova nota sustentada ou andamento percebido |
+| S1 | Primeira escrita não muda versus última escrita de volume na ordem temporal | Última pode ser mudo; multicanal usa ordem global, sem provar fade de cada canal, mix ou clique |
+| S2 | ≤ 45 frames | Tempo em segundos depende da cadência e intenção do efeito |
 
-Consequência operacional: **um frame por nota em três canais simultâneos não
-é "arranjo denso", é o defeito M1+M3 composto** — foi exatamente o que os
-geradores do acervo produziram (medido 2026-09-25: os 7 streams de música do
-corpus reprovam; ver `doc/psg_quality_ledger.json`).
+Esses limiares são política do projeto, não leis do hardware nem critérios
+universais de música. Exceções exigem decisão registrada e evidência auditiva,
+sem alterar números para obter um verde. **PASS de eventos não aprova música,
+fidelidade, mix, gameplay ou qualidade AAA.**
 
-## Como compor dentro do piso
+## Produção e prova
 
-- Partitura antes de bytes: grade de compassos (ex.: 1 compasso = 16 frames
-  @ 50 Hz), notas com duração ≥ 2 frames, cada canal com papel declarado:
-  lead (envelope de ataque), arpejo/contraponto, baixo (pizzicato ou
-  motor em colcheias), percussão (branca, gateada).
-- O frame do PSGlib só carrega o que MUDA; sustenção é `WAIT`/hold
-  (`0x38`–`0x3F`), não repetição da nota.
-- Loop: `0x01` marca o loop point; `0x00` volta. Duração ≥ 2,5 s exige
-  ≥ ~8 compassos de material — se não há material, escreva mais, não
-  repita frames byte a byte (L051).
-- SFX: 1 canal declarado no manifesto de proveniência (L041), pitch-bend de
-  ataque no tom, decay de ≥ 6 passos de atenuação, ≤ 45 frames.
-- Ao tocar música com SFX constante, reserve o canal: `PSGSFXPlay` com
-  máscara rouba o canal MAS a música continua avançando — preveja o
-  sumiço (atenuação via `PSGSetMusicVolumeAttenuation` se a lib expuser).
-
-## Reproduzir
+- Partitura antes de bytes: notas, durações, canal, ritmo, loop e efeito desejado.
+- Sustentação usa WAIT/hold `0x38`–`0x3F`; não duplicar bytes para preencher ROM.
+- `0x01` registra loop point; comportamento no `0x00` depende do modo do driver
+  (`PSGPlay` contínuo versus reprodução uma vez). Medir loop real e transição.
+- `PSGSFXPlay` usa a máscara do canal autorado no manifesto (L041). Conferir
+  header local antes de aplicar APIs de atenuação e medir a disputa com música.
+- `make_psg_assets.py` é autoramento offline. Não regenerar automaticamente
+  assets existentes ao corrigir o gerador; os hashes antigos ficam históricos.
+  Preview WAV é modelo aproximado, não execução da ROM nem certificação PSG.
 
 ```bash
 python3 tools/sms_wrapper/audit_psg_quality.py --project SMS_projects/<p> \
@@ -84,6 +78,7 @@ python3 tools/sms_wrapper/audit_psg_quality.py --project SMS_projects/<p> \
 python3 tools/sms_wrapper/audit_psg_quality.py --self-check
 ```
 
-Evidência auditiva continua: `capture_audio.py` + `audit_audio.py` (presença)
-— agora E `audit_psg_quality.py` (qualidade). Presença sem qualidade não
-sustenta o eixo `audio` do claim de entrega.
+Capturar em sessão privada com `capture_audio.py`; `audit_audio.py` verifica
+sinal, não música certa. Escutar trechos alinhados, comparar referência,
+checar duração, notas, loop, mix e interferência de SFX. Só a combinação de
+proveniência, política, escuta e runtime sustenta o eixo áudio da entrega.

@@ -5,8 +5,12 @@ asset→símbolo) e **kage_matsuri** (12 vínculos) — os dois com binding
 re-hasheado e `--require` PASS em 2026-09-25. É o caminho que separa
 "tenho um PNG" de "este pixel está nesta ROM, com SHA que o prova".
 
-Detalha o fluxo das skills `sms-pixel-translate.md`, `sms-vdp-tiles.md` e
-`sms-asset-pipeline.md`; os gates são os canônicos do AGENTS.md.
+Detalha o fluxo das skills `sms-pixel-translate.md`, `sms-vdp-tiles.md`,
+`sms-asset-pipeline.md` e `sms-asset-to-rom.md` (L121); os gates são os
+canônicos do AGENTS.md. Para poses compostas de vários objetos 8×8, a receita
+específica é `sms-asset-to-rom.md`; esta receita geral de PNG→tiles não
+substitui metasprite, contagem SAT/scanline, render em emulador ou comparação
+exata do framebuffer.
 
 ## 1. Contrato
 

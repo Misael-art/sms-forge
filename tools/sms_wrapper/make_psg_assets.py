@@ -46,14 +46,12 @@ def vol_only(ch, att):
 
 
 def _hz_to_period(hz):
-    p = int(223721.0 / hz + 0.5)
-    # O SN76489 divide 3.579545 MHz por 16*periodo: nota mais grave real
-    # ~219 Hz (periodo 0x3FF). Um 110 Hz pedido aliasava mudo em mudo do
-    # byte alto para 1010 -> 221 Hz: o "baixo" dos streams antigos soava uma
-    # oitava acima do escrito. O gerador nao reescreve a fisica: exige
-    # registro legitimo e composes ja nascem em A3+.
+    p = int(PSG_CLOCK / (32.0 * hz) + 0.5)
+    # Tone toggles a cada periodo de ticks clock/16: ciclo completo = 32.
+    # BlastEm sms.c: psg_init(master_clock, 15*16); psg.c alterna output_state.
+    # Faixa desta composicao exclui periodos <16; nao e limite fisico do chip.
     assert 0x10 <= p <= 0x3FF, \
-        "hz=%.1f -> period %d fora do SN76489 (16..1023; grave real ~219 Hz)" \
+        "hz=%.1f -> period %d fora do SN76489 (16..1023; piso desta composicao ~109 Hz NTSC)" \
         % (hz, p)
     return p
 
@@ -133,7 +131,7 @@ def arrange(bars, row, lead_att=1, harm_att=6, bass_att=2, swing=0):
             put(f + 3, vol_only(2, min(15, bass_att + 5)))
         for (pos, mode, att, hold) in bar.get('perc', ()):
             f = fr(bi, pos)
-            put(f, [0xE0 | (mode & 0x03)] + vol_only(3, att))
+            put(f, [0xE0 | 0x04 | (mode & 0x03)] + vol_only(3, att))
             put(f + hold, vol_only(3, 15))
 
     return stream_of(ev, total)
@@ -147,7 +145,7 @@ def arrange(bars, row, lead_att=1, harm_att=6, bass_att=2, swing=0):
 # isso as faixas 'soavam aceleradas': a medicao M7 agora exige camada que
 # respire, e aqui ela e a melodia sustentada, nao o recheio.
 
-C, S, H = 0, 3, 2          # bumbo, caixa, chimbal (todos brancos)
+C, S, H = 0, 3, 2          # taxas; arrange acrescenta bit2 branco, sem mudar bits1..0
 
 
 def _backbeat(k=2, s=2, h=8):
@@ -182,8 +180,9 @@ def _ch(*names):
 
 
 # arena_nocturna — 'Cidade Noturna': Am andaluz (Andalusian Am-G-F-E na
-# abertura; batalha em Am com dominante E maior). Labio inferior do
-# SN76489 e A3=220 Hz: todo 'baixo' abaixo disso aliasava oitava.
+# abertura; batalha em Am com dominante E maior).
+# A3=220 Hz e escolha de registro desta partitura, nao limite do SN76489.
+# Piso nominal de tone periodo1023: ~109 Hz NTSC; A2 cabe no divisor32.
 ARENA_BATTLE = [
     _bar(_ch('A4', 'C5', 'E5'),
          ((0, 'E5', 4), (6, 'D5', 2), (8, 'C5', 4), (12, 'A4', 4)),
@@ -361,15 +360,38 @@ def assets(project=''):
 PSG_CLOCK = 3579545.0
 
 
+def _noise_step_hz(mode, tone2_period):
+    """Taxa nominal de deslocamento; mode3/7 ch2 aproximado por periodo."""
+    period = (0x10 << (mode & 3)) if mode & 3 != 3 else max(1, tone2_period)
+    return PSG_CLOCK / (32.0 * period)
+
+
+def _noise_lfsr_step(lsfr, white):
+    """Modelo Sega16-bit: rotate e XOR bit2, como fonte fixada BlastEm psg.c."""
+    bit = lsfr & 1
+    lsfr = ((lsfr >> 1) | (lsfr << 15)) & 0xFFFF
+    if white and lsfr & 4:
+        lsfr ^= 0x8000
+    return bit, lsfr
+
+
 def render_wav(path, data, rate=44100, fps=50):
-    """Render local SN76489 (numpy) para audicao sem hardware/emulador."""
+    """Preview aproximado: tone nominal e feedback LFSR Sega de BlastEm.
+
+    Nao emula ciclos de bus, filtros analogicos, volume DC, fases exatas de
+    escrita ou contadores transitivos ch2/noise; nao prova fidelidade da ROM.
+    Mode3/7 usa periodo ch2 nominal, sem a fase/counter hardware compartilhada.
+    """
     import numpy as np
     import wave
+    if rate <= 0 or fps <= 0:
+        raise ValueError("preview rate/fps must be positive")
+    aq.decode(data)  # Gramática estrita: pares tone; não consumir WAIT/data de volume como pitch.
     tone_div = [1, 1, 1]
     vol = [15, 15, 15, 15]
     noise_mode = 0
     chunks, phase = [], [0.0, 0.0, 0.0]
-    rng = np.random.default_rng(7)
+    noise_phase, noise_lsfr = 0.0, 0x8000
 
     def amp(v):
         return 0.0 if v >= 15 else 0.25 * (10 ** (-2.0 * v / 20.0))
@@ -390,12 +412,22 @@ def render_wav(path, data, rate=44100, fps=50):
                 buf += amp(vol[ch]) * np.sign(np.sin(2 * np.pi * ph))
                 if n:
                     phase[ch] = (ph[-1] + f / rate) % 1.0
-            if vol[3] < 15:
-                shift = (0x10, 0x20, 0x40, 0x80)[noise_mode & 3]
-                nf = PSG_CLOCK / (32.0 * shift)
-                step = max(1, int(rate / nf))
-                src = rng.choice((-1.0, 1.0), size=n // step + 1)
-                buf += amp(vol[3]) * np.repeat(src, step)[:n]
+            # Oscilador/LFSR avanca tambem no mudo; volume nao para o chip.
+            if n:
+                nf = _noise_step_hz(noise_mode, tone_div[2])
+                positions = noise_phase + t * nf / rate
+                indices = np.floor(positions).astype(int)
+                count = int(indices[-1]) + 1 if n else 0
+                src, state = [], noise_lsfr
+                for _ in range(count):
+                    bit, state = _noise_lfsr_step(state, bool(noise_mode & 4))
+                    src.append(1.0 if bit else -1.0)
+                if n:
+                    buf += amp(vol[3]) * np.asarray(src)[indices]
+                    advances = int(noise_phase + n * nf / rate)
+                    for _ in range(advances):
+                        _, noise_lsfr = _noise_lfsr_step(noise_lsfr, bool(noise_mode & 4))
+                    noise_phase = (noise_phase + n * nf / rate) % 1.0
             chunks.append(buf)
             i += 1
             continue
@@ -405,7 +437,8 @@ def render_wav(path, data, rate=44100, fps=50):
                 vol[ch] = b & 0x0F
                 i += 1
             elif ch == 3:
-                noise_mode = b & 3
+                noise_mode = b & 7
+                noise_phase, noise_lsfr = 0.0, 0x8000
                 i += 1
             else:
                 low = b & 0x0F
@@ -450,6 +483,36 @@ def main():
     assert all(b < 0x80 or b >= 0xC0 for name, blob in data.items()
                if name.startswith("sfx_") for b in blob)
     if args.self_check:
+        for bad in (bytes([0x80, WAIT, END]), bytes([0x90, 0x42, WAIT, END]),
+                    bytes([0x80])):
+            try:
+                aq.decode(bad)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("preview grammar accepts incomplete/volume-data tone")
+        assert _hz_to_period(440.0) == 254
+        assert abs(PSG_CLOCK / (32.0 * 254) - 440.0) < 1.0
+        for mode in range(8):
+            ev, _ = aq.decode(stream([noise(mode, 2)]))
+            assert [v for _, k, _, v in ev if k == 'nctl'] == [mode]
+            _, _, m = aq.analyze(ev * aq.ACTIVE_NOTES, aq.LOOP_MIN)
+            assert m['ruido_branco'] == (1.0 if mode & 4 else 0.0)
+            expected = PSG_CLOCK / (32.0 * ((16 << (mode & 3)) if mode & 3 != 3 else 254))
+            assert _noise_step_hz(mode, 254) == expected
+        def sequence(white):
+            state, bits = 0x8000, []
+            for _ in range(128):
+                bit, state = _noise_lfsr_step(state, white)
+                bits.append(bit)
+            return bits
+        periodic, white = sequence(False), sequence(True)
+        assert periodic == ([0] * 15 + [1]) * 8
+        assert white != periodic and white == sequence(True)
+        # Feedback classification survives arrange's percussion-rate encoding.
+        for mode in range(8):
+            ev, _ = aq.decode(arrange([{'perc': ((0, mode, 2, 1),)}], 8))
+            assert [v for _, k, _, v in ev if k == 'nctl'] == [4 | (mode & 3)]
         assert len(data["sfx_shot"]) == 25       # 6 frames + wait + end
         assert len(data["sfx_hit"]) == 37        # 6 frames + wait + end
         assert len(data["sfx_hurt"]) == 49      # 16 frames + wait + end
@@ -474,8 +537,8 @@ def main():
             ev, dur = aq.decode(data[nome])
             viol, _w = aq.analyze_sfx(ev, dur)
             assert not viol, "%s reprova no piso: %s" % (nome, viol)
-        print("[SELF-CHECK OK] make_psg_assets (SFX inalterados + musicas "
-              "conformes ao piso audit_psg_quality em todos os temas)")
+        print("[SELF-CHECK OK] make_psg_assets (feedback8modos/divisor32/LFSR "
+              "aproximado + politica de eventos nos temas; nao valida hardware)")
         return 0
 
     if not args.project:

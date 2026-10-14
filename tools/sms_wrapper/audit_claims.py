@@ -32,9 +32,12 @@ def load_ceilings(project):
             if fn.endswith(".json"):
                 try:
                     d = json.load(open(os.path.join(cdir, fn)))
-                    if all(k in d for k in ("token", "scope", "approved_by", "date")):
+                    if (isinstance(d, dict) and all(isinstance(d.get(k), str) and d[k].strip()
+                            for k in ("token", "scope", "approved_by", "date")) and
+                            isinstance(d.get("ceiling_texto", d.get("ceiling")), str) and
+                            d.get("ceiling_texto", d.get("ceiling")).strip()):
                         approved.add(d["token"].lower())
-                except json.JSONDecodeError:
+                except (OSError, UnicodeError, json.JSONDecodeError, AttributeError, TypeError):
                     pass
     return approved
 
@@ -84,6 +87,13 @@ def main():
                    "date": "2026-08-25", "ceiling": "apenas demo"},
                   open(os.path.join(cd, "aaa.json"), "w"))
         assert not scan(d), scan(d)
+        for invalid in ({"token": "aaa", "scope": "", "approved_by": "", "date": None, "ceiling": ""},
+                        {"token": "aaa", "scope": "demo", "approved_by": "owner", "date": "2026-08-25"}):
+            json.dump(invalid, open(os.path.join(cd, "aaa.json"), "w"))
+            assert scan(d), "empty/missing approval ceiling cannot waive claims"
+        with open(os.path.join(cd, "aaa.json"), "wb") as stream:
+            stream.write(b"\xff\xfe")
+        assert scan(d), "unreadable approval cannot waive claims"
         shutil.rmtree(d)
         print("[SELF-CHECK OK] claims")
         return 0

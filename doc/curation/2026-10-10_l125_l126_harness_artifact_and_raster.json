@@ -1,0 +1,88 @@
+{
+  "curation_id": "harness_artifact_and_raster_20261010",
+  "date": "2026-10-10",
+  "scope": "Canonical factory: artifact navigation, application coverage, raster export preflight; no game art or gameplay promotion",
+  "lessons": [
+    {
+      "id": "L125",
+      "title": "Registro único por papel, reserva de saída e retomada sem árvore paralela",
+      "status": "fechada_com_ferramenta_e_revisao_independente",
+      "rule_section": "SMS_GLOBAL §115",
+      "tool_that_measures": "artifact_registry.py; harness_orchestration.py; audit_learning_capture.py",
+      "skill_that_teaches": "tools/sms_wrapper/.agent/skills/sms-harness-orchestration.md; tools/sms_wrapper/.agent/workflows/artifact-organization.md",
+      "evidence": [
+        "doc/curation/evidence/2026-10-10_harness_artifact_curation/inventory/inventory.json",
+        "doc/curation/evidence/2026-10-10_harness_artifact_curation/coverage/coverage.json",
+        "doc/curation/evidence/2026-10-10_harness_artifact_curation/real_registry_audit.json",
+        "doc/curation/evidence/2026-10-10_harness_artifact_curation/review_final",
+        "doc/curation/evidence/2026-10-10_harness_artifact_curation/forward_test"
+      ],
+      "observed": "4,679 files inventoried; operational v10 vs v5 in two older entrypoints; duplicated project prefix with differing JJ prompt. Harness formerly only coordinated workers, not artifact identity.",
+      "application": "One authority, role-specific candidate/approved heads, reserved exact outputs, unique path/inode ownership, lineage/supersedes, extendable kinds and baseline adoption. Existing lessons are routed to concrete current application entrypoints.",
+      "measurement_limits": "Preflight is not lock/sandbox; legacy locations partial; declared approval/legacy history not authenticated; semantic role selection, GDD, content in future directories and art quality require coordinator/review. Baseline inventory does not approve files.",
+      "reuses_existing_lessons": [
+        "L036",
+        "L052",
+        "L108",
+        "L122",
+        "L123"
+      ],
+      "dedup_key": "l125_single_artifact_authority_harness_reservation_resume_20261010"
+    },
+    {
+      "id": "L126",
+      "title": "Verificar alpha, chave e slots no raster salvo antes de converter",
+      "status": "fechada_com_ferramenta_e_casos_reais",
+      "rule_section": "SMS_GLOBAL §116",
+      "tool_that_measures": "audit_source_raster.py",
+      "skill_that_teaches": "tools/sms_wrapper/.agent/skills/sms-asset-pipeline.md; tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
+      "evidence": [
+        "doc/curation/evidence/2026-10-10_harness_artifact_curation/inventory/raster_preflight/summary.json"
+      ],
+      "observed": "Jab v5: 600866 partially transparent pixels and zero opaque pixels. Jab v4: 83402 RGB; opaque key present alone passes without proving clean background.",
+      "application": "Explicit hash-bound source export contract validates saved dimensions, frame slots/IDs, optional grid, binary alpha or opaque key and optional source color ceiling before conversion. Preserve raw experiments without promoting them.",
+      "measurement_limits": "No pose semantic count, halo/background uniformity, anatomy/light/cutout quality or runtime approval; source color limit optional, no automatic SMS 15-color rule on concepts.",
+      "reuses_existing_lessons": [
+        "L102",
+        "L109",
+        "L124"
+      ],
+      "dedup_key": "l126_saved_sprite_source_export_alpha_key_slots_preflight_20261010"
+    }
+  ],
+  "existing_lessons_applied": {
+    "L004": "ABI mismatch/rebuild taught in sms-z80-sdcc-gotchas.md",
+    "L009": "volatile/map/DAP hex taught in sms-z80-sdcc-gotchas.md",
+    "L096": "trace tails/keys/length taught in sms-mugen-source-semantics.md",
+    "L001/L069/L117": "Banking/SAT doctrine corrected; hardware source excerpts preserved; current doctrine audit passed. Historical snapshots excluded logically, active aliases still audited.",
+    "L036/L108/L123": "Doc-sync recognizes always-active SMS_GLOBAL in addition to root AGENTS, retaining ghost/invisible-tool checks."
+  },
+  "global_promotion": "open_Mugen_truth_document_EIO",
+  "closure": {
+    "scope": "canonical harness/artifact/raster/lesson-application factory closure; no new emulator/game validation",
+    "global_promotion": "not_closed_Mugen_document_EIO",
+    "selftest_passed": 108,
+    "measurement_tools_passed": 65,
+    "optional_project_build_probe": "not_run",
+    "new_emulator_run": "not_run_no_game_or_rom_changed",
+    "learning_capture_clean": true,
+    "hardware_doctrine_clean": true,
+    "artifact_registry_passed": true,
+    "classified_artifacts": 9,
+    "indexed_files": 748,
+    "unclassified_legacy_files": 737,
+    "doc_sync_passed": false,
+    "doc_sync_initial_problem_count": 11,
+    "doc_sync_final_problem_count": 10,
+    "doc_sync_focused_followup": "doc/curation/evidence/2026-10-10_harness_artifact_curation/closure/doc_sync_final.json",
+    "doc_sync_correction": "accept current central SMS_GLOBAL citations as doctrine; positive and ghost negative selfchecks passed",
+    "native_forward_retest": "doc/curation/evidence/2026-10-10_harness_artifact_curation/forward_retest_final/review_final.json",
+    "native_code_review": "doc/curation/evidence/2026-10-10_harness_artifact_curation/review_final2/final2_report.json",
+    "doc_sync_independent_followup": {
+      "report": "doc/curation/evidence/2026-10-10_harness_artifact_curation/doc_sync_review_final/doc_sync_delta.json",
+      "cases_passed": 13,
+      "selfcheck_passed": true,
+      "scope": "citation/readability only; no teaching or runtime approval"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "curation_id": "2026-10-03_l102_geometria_folha_sprite",
+  "date": "2026-10-03",
+  "scope": "folhas de animação de personagens do Master of Fighters",
+  "authorization": "O dono aprovou a folha idle Landau v3 e pediu registrar aprendizados e oportunidades de perícia do agente.",
+  "lessons": [
+    {
+      "id": "L102",
+      "status": "fechada_com_ferramenta_e_regra",
+      "lesson": "Uma célula de tamanho uniforme e pivô comum não provam que o personagem mantém a escala nem que os pés ficam alinhados. Meça o bbox visível, altura, largura e baseline em cada quadro e declare faixas no contrato; combine a medição com hashes semânticos para rejeitar quadros repetidos.",
+      "evidence": {
+        "approval": "Landau idle v3 aprovada visualmente pelo dono em 2026-10-03 como referência de arte; sem integração em res ou ROM.",
+        "iterations": "v1 tinha silhuetas encostando nas bordas e acima da altura contratada; v2 repetia quase a mesma guarda; v3 foi escolhida após alinhamento de linha de base e diversidade das 12 poses.",
+        "measurements": "12/12 quadros de 96x96 têm hashes únicos; bbox visível tem largura de 63–70 px e altura de 83–87 px; baseline y=95 em todos; pivô [48,95] comum.",
+        "gate": "audit_animation_semantics.py agora mede geometry_contract por quadro (canvas, largura, altura e baseline) e conserva as verificações de hashes, ciclo e pivô; o contrato v3 passa.",
+        "limits": "O gate mede geometria raster e repetição exata, não qualidade perceptual da atuação, identidade do personagem, orçamento de scanline, metasprite ou fidelidade em ROM."
+      },
+      "rule_section": "SMS_GLOBAL §87",
+      "tool_that_measures": "audit_animation_semantics.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L103",
+    "mastery": "O próximo ganho é usar o contrato por quadro também nas folhas de movimento e medir escala contra o model sheet aprovado; não integrar apenas pela aprovação visual."
+  }
+}

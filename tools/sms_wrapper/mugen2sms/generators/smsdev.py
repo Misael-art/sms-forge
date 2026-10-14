@@ -33,7 +33,7 @@ from pathlib import Path
 
 from ..converters.sms_tiles import to_sms_pose
 from ..converters.sms_clsn import to_clsn_tables
-from ..converters.sms_cmd import to_patterns
+from ..converters.sms_cmd import serialize_pattern, to_patterns
 from ..converters import sms_scale as SC
 from .runtime_format import build_frames, pack_tiles_tall
 
@@ -83,7 +83,8 @@ BANK_PAGE = 16384   # slot 2 do Sega mapper (makesms -mbank ...:0:1:2)
 
 def generate(ch, fidelity, out_dir: Path, banked: bool = False,
              pre_scaled: bool = False,
-             omit_blank_sprites: bool = False) -> GenerationManifest:
+             omit_blank_sprites: bool = False,
+             controls=None) -> GenerationManifest:
     out_dir.mkdir(parents=True, exist_ok=True)
     s = slug(Path(ch.def_path).stem)
     artifacts: list[Artifact] = []
@@ -130,13 +131,10 @@ def generate(ch, fidelity, out_dir: Path, banked: bool = False,
                     + struct.pack("<h", -32767)
                 artifacts.append(Artifact(f"{stem}_CLSN", data, "air"))
 
-    patterns, skipped = to_patterns(ch.commands)
+    patterns, skipped = to_patterns(ch.commands, controls)
     for p in patterns:
-        data = bytearray([len(p.steps), p.window & 0xFF, p.buffer & 0xFF])
-        for st in p.steps:
-            data += bytes([st.dir | st.keys << 4, (1 if st.hold else 0) | (2 if st.release else 0)])
         artifacts.append(Artifact(f"{s}_CMD_{re.sub(r'[^0-9a-zA-Z]+', '_', p.name).upper()}",
-                                  bytes(data), "cmd"))
+                                  serialize_pattern(p), "cmd"))
     for name, why in skipped.items():
         man.excluded.append({"id": f"cmd:{name}", "classe": "manual", "motivo": why})
 

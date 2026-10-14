@@ -19,9 +19,62 @@ import sys, os, json, glob, shutil, subprocess, argparse
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
+SMS_SINGLE_SPRITE_GEOMETRIES = {(8, 8), (8, 16), (16, 16)}
+
 def fail(msg, code):
     print(f"[BUILD {('FAIL_AMBIENTE' if code == 2 else 'FAIL')}] {msg}")
     return code
+
+def resource_kind_for_path(project, path):
+    """Classify SMS resources before the indexed-PNG contract is audited.
+
+    `res/sprites/` may hold either one hardware-sized graphic or a larger
+    8x8-aligned metasprite/animation sheet. Large images are sheets; the
+    independent sprite-mode gate checks their actual SMS metasprite use.
+    """
+    rel = os.path.relpath(path, project).replace(os.sep, "/")
+    if not rel.startswith("res/sprites/"):
+        return "bg"
+    from png_io import png_size
+    try:
+        size = png_size(path)
+    except (OSError, Exception):
+        # Let check_png report corrupt/unsupported bytes; do not treat them as
+        # a valid physical sprite based on an unreadable header.
+        return "sheet"
+    return "sprite" if size in SMS_SINGLE_SPRITE_GEOMETRIES else "sheet"
+
+def self_check_resource_routing():
+    """Valid single sprites/sheets route correctly; an off-grid sheet fails."""
+    import tempfile, shutil
+    from png_io import write_indexed_png
+    from audit_validate_resources import check_png
+    root = tempfile.mkdtemp(prefix="smsbuild_resource_route_")
+    try:
+        cases = (
+            ("single_8x8.png", 8, 8, "sprite", True),
+            ("single_8x16.png", 8, 16, "sprite", True),
+            ("single_16x16.png", 16, 16, "sprite", True),
+            ("pose_sheet_80x80.png", 80, 80, "sheet", True),
+            ("bad_sheet_18x80.png", 18, 80, "sheet", False),
+        )
+        palette = [(0, 0, 0), (85, 85, 85)]
+        for name, w, h, expected_kind, should_pass in cases:
+            path = os.path.join(root, "res", "sprites", name)
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            write_indexed_png(path, w, h, palette, [bytes([1] * w) for _ in range(h)])
+            kind = resource_kind_for_path(root, path)
+            assert kind == expected_kind, (name, kind, expected_kind)
+            errors = check_png(path, kind)
+            if should_pass:
+                assert not errors, f"{name} deveria passar em {kind}: {errors}"
+            else:
+                assert any("grid 8x8 violado" in e for e in errors), \
+                    f"{name} off-grid deveria reprovar: {errors}"
+        print("[SELF-CHECK OK] build resource routing: 8x8/8x16/16x16 sprites, 80x80 sheet and off-grid rejection")
+        return 0
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
 
 def find_toolchain():
     """Retorna dict com caminhos ou None com motivo."""
@@ -72,7 +125,7 @@ def pre_gates(project):
     errors = []
     pngs = sorted(glob.glob(os.path.join(project, "res", "**", "*.png"), recursive=True))
     for p in pngs:
-        kind = "sprite" if os.sep + "sprites" + os.sep in p else "bg"
+        kind = resource_kind_for_path(project, p)
         errors += [f"recursos/{os.path.relpath(p, project)}: {e}"
                    for e in check_png(p, kind)]
     errors += ["procedencia: " + e for e in provenance_audit(project)]
@@ -138,6 +191,20 @@ def rom_birth_mtime(project, rom):
              if _sha256(c) == sha]
     return min(times) if times else None
 
+def uses_code_size_optimization(toolchain, source_relative):
+    """Allow selected modules to use SDCC size opts without slowing every hot path.
+
+    `optimization=code_size` remains the project-wide switch. Projects may
+    instead name a small set of source paths in `code_size_sources`; paths are
+    relative to the project root and normalized to `/` on every host.
+    """
+    if toolchain.get("optimization") == "code_size":
+        return True
+    wanted = {str(p).replace("\\", "/") for p in
+              (toolchain.get("code_size_sources") or [])}
+    source = str(source_relative).replace("\\", "/")
+    return source in wanted
+
 
 def demote_stale_axes(project, rom, axes, prev_sha=None):
     """Eixo de runtime so sobrevive a um build novo se a evidencia for POSTERIOR
@@ -186,7 +253,11 @@ def main():
     ap.add_argument("--project", default=os.getcwd())
     ap.add_argument("--skip-pre-gates", action="store_true",
                     help="apenas para depurar o compilador; NUNCA em entrega")
+    ap.add_argument("--self-check", action="store_true",
+                    help="prova o roteamento sprite/sheet com casos válidos e inválidos")
     args = ap.parse_args()
+    if args.self_check:
+        return self_check_resource_routing()
     project = os.path.abspath(args.project)
 
     if not os.path.exists(os.path.join(project, ".mddev", "project.json")):
@@ -239,7 +310,9 @@ def main():
         # Projetos com ROM linear no teto podem declarar a troca de objetivo
         # do compilador no manifesto. O custo de fps continua sendo medido no
         # emulador; esta flag nunca substitui o gate de worst-frame.
-        if manifest.get("toolchain", {}).get("optimization") == "code_size":
+        toolchain_config = manifest.get("toolchain", {})
+        if uses_code_size_optimization(toolchain_config,
+                                       os.path.relpath(src_abs, project)):
             cmd.append("--opt-code-size")
         if os.path.exists(tc.get("peep", "")):
             cmd += ["--peep-file", tc["peep"]]

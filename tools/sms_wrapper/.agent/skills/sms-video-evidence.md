@@ -1,84 +1,70 @@
 # skill: sms-video-evidence
 
-**Quando usar:** o claim é sobre algo que ACONTECE — transição de estado,
-animação, game feel, "o golpe conecta", "a vitória aparece". Screenshot não
-serve: um PNG não tem eixo do tempo (§36, L054). Para tela estática e fidelidade
-de arte, continue no `capture_evidence.py`.
+Use para transição, animação, latência visual, KO ou golpe. Screenshot mede
+estado estático, não duração ou consequência (§36/L054). Leia os workflows
+centrais `emulator-isolated-session.md` e `subagent-emulator-qa.md` antes do QA.
 
-## O canal
+## Sessão, input e captura (§§93–100)
 
-O Emulicious grava do **framebuffer**, não da tela:
-
-- **256×192 exatos** — a canvas do VDP, sem moldura, sem barra de menu, sem
-  desktop. Não existe recorte a fazer, e por construção não há como vazar
-  conteúdo pessoal do usuário (§30/L017).
-- Encode por **FFMPEG externo** (`FFMPEGPath` no `Emulicious.ini`).
-- Atalho: propriedades do `.ini` com prefixo **`Keys`** —
-  `KeysStartVideoRecording=F7`, `KeysStopVideoRecording=F8`. **Sem essas linhas
-  não há atalho nenhum**, a ação só existe no menu. `capture_video.py` as
-  instala (com o emulador parado) e `--probe-shortcut` as confere.
+- Inicie sessão própria com `emulator_session.py isolated start ROM.sms`;
+  mantenha ID/SHA explícitos. Display/config/SRAM/controles são privados.
+- `emulator_input.py --session ID --script roteiro.json` usa frames VDP e
+  masks P1/P2/console. Nunca buscar janela/foco nem usar teclado do host.
+- Para vídeo durante os comandos, use caso `proof: video` com `sequence` em
+  `session_qa.py`: ele captura cada quadro enquanto o input atribuído está
+  ativo. Declare cauda neutra para recuperação. `input` seguido de gravação
+  após liberar o gesto perde a ação e não sustenta sua hipótese.
+- Para animação sem gesto simultâneo:
 
 ```sh
-python3 tools/sms_wrapper/capture_video.py \
-    --project SMS_projects/<proj> --rom out/rom/<nome>.sms \
-    --seconds 8 --out video_<eixo> --press 'Right=500,Left=500'
+rtk proxy python3 tools/sms_wrapper/capture_video.py \
+  --session ID --ticks 120 --out video_idle
 ```
 
-Saída: `out/evidence/<out>.mp4`, N frames-chave PNG e um bundle
-`emulator_evidence_v2` (superset do v1: `screenshot` continua presente). O
-`.mp4` e os frames entram no `seal_fresh_evidence_bundle.py` como qualquer
-outro artefato — o selo não precisou mudar.
+A saída pertence à sessão; consulte o path/metadata retornados. É framebuffer
+256×192, sem compositor, um quadro por frame VDP. `--press` em milissegundos
+não é compatível com a rota privada. Stepping prova ordem/quadros, não FPS
+real nem áudio. FPS exige execução contínua/probe; áudio tem captura separada.
 
-## O que o gate mede
+## O que medir
 
-| Gate | Reprova |
+| Dado | Alcance |
 |---|---|
-| `ffprobe` dimensão | ≠ 256×192 → é captura de tela, não framebuffer |
-| frames / duração | < 60 frames ou < 1s → gravação não chegou a rodar |
-| luma dos frames | último frame vazio, ou maioria vazia |
-| `motion_fraction` | < 1% entre o primeiro e o último → tela congelada |
+| Dimensão, hashes, SHA/sessão | Canvas e vínculo desta captura; não qualidade |
+| Cobertura da timeline | Quadros previstos, inclusive transição e recuperação |
+| `motion_timeline.motion_fraction` | Pico de variação luma ao longo de toda a sequência |
+| `endpoint_fraction` | Diferença dos extremos; extremos iguais podem formar ciclo válido |
+| Probe/trilha de estado | Identidade do ator, ação, facing, contato/dano com schema revisado |
 
-O **primeiro frame costuma ser preto** e isso é correto: a gravação começa antes
-do VDP desenhar. A amostra fica no bundle em vez de ser escondida; o critério é
-o último frame ter conteúdo e a maioria ter.
+O gate da rota histórica `capture_video.py` exige ≥60 frames, ≥1s, conteúdo
+informativo e movimento ≥1% na timeline. Esses limiares não são um contrato
+universal de combate nem o mínimo de cada caso privado. Caso privado mede
+cobertura/identidade; o worker revê a hipótese atribuída. Variação de contador
+ou HUD não comprova que o lutador executou a ação. Os caminhos de coleta têm
+regras distintas: sucesso da gravação privada não é aprovação perceptiva.
 
-## Falhas MUDAS deste canal (§45)
+Para AIR, IDs fonte/ROM por N+1 fronteiras (terminal incluso) e duração finita
+seguem §100. RGB idêntico não funde elementos. Amostra DAP isolada pode perder
+frames curtos; não fabricar índice/stamp ausente. Vídeo e trace se complementam.
 
-Todas já aconteceram aqui, e as três produzem sintoma que parece sucesso:
+## Selar, revisar, encerrar
 
-1. **Instância zumbi.** Um Emulicious de outra sessão rouba o foco **e reescreve
-   o `Emulicious.ini` ao morrer**, apagando o atalho recém-instalado. O gate
-   aborta se achar outro Emulicious vivo — `pkill -f Emulicious.jar` antes.
-2. **F10 não para a gravação.** No Swing/AWT, F10 é o atalho nativo da barra de
-   menus. A gravação seguia aberta e era finalizada só quando o processo morria,
-   entregando um `.mp4` válido que *parecia* prova de que o atalho funcionou.
-3. **Mover o arquivo cedo o corrompe.** O FFMPEG reabre o `.mp4` depois de parar
-   de escrever, para gravar o atom `moov`. Critério de término = o ffprobe
-   conseguir ler. O nome de saída é `<rom>.mp4`, não `temp.mp4` (esses são
-   intermediários).
+`session_qa.py` captura baseline, executa precondição ROM quando declarada,
+sela bundle e encerra a sessão própria em finally. Draft começa needs_review.
+Worker nativo inspeciona quadros/dados e registra cobertura; coordenador
+valida `audit_subagent_session.py`, IDs nativos, frescor e teto do claim.
+Na coleta direta, publique/check-bundle e feche com `isolated close ID`, também
+na falha. Nunca encerrar processos por nome ou manipular sessões alheias.
 
-## Limite honesto
+## Legado e áudio
 
-O vídeo prova que **a ROM desta build renderizou e que a imagem mudou**. Não
-prova mecânica correta nem que a mudança é a pretendida — isso continua exigindo
-olho humano (`sms-gameplay-experience-review`) ou um medidor específico
-(deslocamento do objeto controlado, §29).
+A rota histórica de atalhos F7/F8 e `.ini` compartilhado é supersedida para QA
+automatizada. Suas falhas documentadas continuam históricas: atalho ausente,
+F10 ativando menu Swing e MP4 movido antes de finalizar o atom moov. Não mexer
+no ini compartilhado nem limpar instâncias para tornar esse caminho viável.
 
-**A trilha de áudio agora vem junto, e prova menos do que parece.** O `.mp4`
-saía mudo porque o `temp.wav` do emulador declara no chunk `data` **o dobro dos
-bytes que existem**; o FFMPEG batia em EOF na metade e descartava a trilha. O
-`attach_audio()` percorre os chunks RIFF, usa os bytes que existem e lê
-taxa/canais/bits do próprio `fmt ` — nada é constante, então mono/estéreo e
-44,1k/22k funcionam igual. Não era o host mudo: com o host **desmutado a 15%** o
-mp4 continuava sem trilha.
-
-O que a trilha sustenta: **havia som saindo da ROM**. Não que é a música certa
-nas notas certas (§28) — isso continua sendo `capture_audio.py` (§31), cujo sink
-nulo é imune ao volume do host. Payload mudo (`peak=0`) **não é anexado**:
-trilha silenciosa deixaria alguém alegar som (L048). E o remux nunca encurta o
-vídeo — a primeira versão usava `-shortest`, cortou 455 → 452 frames, e o guard
-de contagem de frames recusou o resultado.
-
-**Não confunda com a L055.** O que ela recusa é MP4/GIF de *mood* gerado por
-ferramenta de arte apresentado como prova de ROM. Vídeo do framebuffer do
-emulador rodando a ROM selada é o oposto: tem cadeia de custódia.
+Vídeo privado não anexa áudio; `capture_audio.py --session ID` prova sinal
+isolado do PID. No legado, `attach_audio()` corrige o tamanho RIFF declarado
+maior que o payload real e mantém contagem de frames; silêncio não vira sinal.
+Nenhum desses caminhos prova música certa: ouvir/comparar trechos alinhados.
+Vídeo de arte/concept não é framebuffer de ROM, mesmo que tenha movimento.

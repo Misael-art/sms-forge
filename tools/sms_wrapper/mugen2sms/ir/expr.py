@@ -51,6 +51,30 @@ class N:
     kids: list = field(default_factory=list)
 
 
+def field_key(n: N):
+    """Nome estavel do campo alvo de um redirect; None quando nao e um campo nomeado."""
+    if n.kind == "id":
+        return n.val
+    if n.kind == "call":
+        a = n.kids[0].val if n.kids and n.kids[0].kind in ("name", "num", "id") else "?"
+        return f"{n.val}({a})"
+    return None
+
+
+def term_text(n: N) -> str:
+    """Renderizacao estavel de um termo de uma lista de valores, para o gap declarado."""
+    if n.kind == "id":
+        return n.val
+    if n.kind == "num":
+        v = n.val
+        return str(int(v)) if float(v).is_integer() else str(v)
+    if n.kind == "str":
+        return f'"{n.val}"'
+    if n.kind == "call":
+        return f"{n.val}({', '.join(term_text(a) for a in n.kids)})"
+    return f"<{n.kind}>"
+
+
 def tokenize(s: str) -> list[tuple[str, str]]:
     out, pos = [], 0
     s = s.strip()
@@ -74,10 +98,21 @@ BINARY = {
 }
 TWO_WORD = {"vel", "pos", "p2bodydist", "p2dist", "screenpos", "p2pos", "rootdist", "parentdist"}
 
+# Escopos MUGEN escritos com virgula (`enemynear, life`). Re-derivado do VM deste
+# runtime (opcodes.TRIGGER), nao herdado do texto do doador MD (L093): so ha
+# equivalente onde existe campo TRG real, e o runtime nao tem helpers nem time,
+# entao `root,X` e o proprio lutador. O que nao tem gemeo vira id sintetico e cai
+# no UNSUPPORTED declarado do Emitter — nunca silencio e nunca abort.
+SCOPE = {"root", "enemy", "enemynear", "enemyleader", "target", "helper", "parent", "child",
+         "playerid", "friend", "allies", "summon", "nothitby", "partner", "assistant", "triggerno"}
+ENEMY_FIELDS = {"life": "p2life", "stateno": "p2stateno", "statetype": "p2statetype",
+                "movetype": "p2movetype", "ctrl": "p2ctrl"}
+
 
 class Parser:
     def __init__(self, toks):
         self.t, self.i = toks, 0
+        self.in_args = 0    # virgula dentro de parenteses de funcao separa argumentos, nao valores
 
     def peek(self, k=0):
         j = self.i + k
@@ -93,7 +128,6 @@ class Parser:
     def parse(self):
         n = self.expr(0)
         if self.peek()[0] != "eof":
-            # listas "a, b" em parametros sao tratadas pelo chamador (split antes)
             raise ExprError(f"token sobrando '{self.peek()[1]}'")
         return n
 
@@ -111,7 +145,17 @@ class Parser:
                     left = N("range", (v == "=", rng[0]), [left, rng[1], rng[2]])
                     continue
             right = self.expr(p + (0 if v == "**" else 1))
-            left = self.special_compare(v, left, right)
+            node = self.special_compare(v, left, right)
+            # `X = v1, v2, ...`: lista de valores MUGEN na comparacao. So aqui, nunca
+            # dentro de argumentos de funcao (la a virgula separa parametros).
+            if v in ("=", "!=") and node.kind == "bin" and node.val == v \
+                    and not self.in_args and self.peek()[1] == ",":
+                vals = [node.kids[1]]
+                while self.peek()[1] == ",":
+                    self.take(",")
+                    vals.append(self.expr(p + 1))
+                node = N("attrlist", v, [node.kids[0]] + vals)
+            left = node
 
     def try_interval(self):
         save = self.i
@@ -136,14 +180,27 @@ class Parser:
         if left.kind == "id" and left.val in ("animelem", "timemod") and op in ("=", "!="):
             if left.val == "animelem":
                 cmp_op, rhs = "=", N("num", 0)
+                n = None
                 if self.peek()[1] == ",":
                     self.take(",")
                     k, v = self.peek()
                     if k == "op" and v in ("=", "!=", "<", "<=", ">", ">="):
                         self.take()
                         cmp_op = v
-                    rhs = self.expr(9)
-                n = N("bin", cmp_op, [N("animelemtime", None, [right]), rhs])
+                        rhs = self.expr(9)
+                        n = N("bin", cmp_op, [N("animelemtime", None, [right]), rhs])
+                    elif v in ("[", "("):
+                        interval = self.try_interval()
+                        if interval is not None:
+                            n = N("range", (True, interval[0]),
+                                   [N("animelemtime", None, [right]), interval[1], interval[2]])
+                        else:
+                            raise ExprError("intervalo invalido na clausula animelem")
+                    else:
+                        rhs = self.expr(9)
+                        n = N("bin", cmp_op, [N("animelemtime", None, [right]), rhs])
+                if n is None:
+                    n = N("bin", cmp_op, [N("animelemtime", None, [right]), rhs])
                 return n if op == "=" else N("un", "!", [n])
             self.take(",")
             r = self.expr(9)
@@ -171,6 +228,10 @@ class Parser:
             return n
         if k == "id":
             name = v.lower()
+            if name in SCOPE:
+                r = self.try_redirect(name)
+                if r is not None:
+                    return r
             nk, nv = self.peek()
             if name in TWO_WORD and nk == "id" and nv.lower() in ("x", "y"):
                 self.take()
@@ -179,14 +240,54 @@ class Parser:
                 self.take("(")
                 args = []
                 if self.peek()[1] != ")":
-                    args.append(self.raw_or_expr(name))
-                    while self.peek()[1] == ",":
-                        self.take(",")
+                    self.in_args += 1
+                    try:
                         args.append(self.raw_or_expr(name))
+                        while self.peek()[1] == ",":
+                            self.take(",")
+                            args.append(self.raw_or_expr(name))
+                    finally:
+                        self.in_args -= 1
                 self.take(")")
                 return N("call", name, args)
             return N("id", name)
         raise ExprError(f"token inesperado '{v}'")
+
+    def try_redirect(self, who):
+        """`escopo[, (idx)], campo`: devolve o no do campo no escopo, ou None se nao e redirect."""
+        save = self.i                      # o id do escopo ja foi consumido
+        idx = ""
+        if self.peek()[1] == "(":
+            depth = 0
+            while True:
+                k, tok = self.take()
+                if k == "eof":
+                    self.i = save
+                    return None
+                if tok == "(":
+                    depth += 1
+                elif tok == ")":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                elif depth == 1:
+                    idx += tok
+        if self.peek()[1] != ",":
+            self.i = save
+            return None
+        self.take(",")
+        inner = self.postfix()
+        key = field_key(inner)
+        if key is None:
+            self.i = save
+            return None
+        if who == "root" and not idx:
+            return inner
+        if who in ("enemy", "enemynear") and idx in ("", "0"):
+            if key in ENEMY_FIELDS:
+                return N("id", ENEMY_FIELDS[key])
+        label = f"{who}({idx}),{key}" if idx and who in ("enemy", "enemynear") else f"{who},{key}"
+        return N("id", label)
 
     def raw_or_expr(self, fn):
         # const(velocity.walk.fwd.x) e gethitvar(fall.yvel) recebem um nome, nao expressao
@@ -269,10 +370,19 @@ class Emitter:
         elif k == "animelemtime":
             self.emit(n.kids[0])
             self.op("ANIMELEMTIME")
+        elif k == "attrlist":
+            self.emit_attrlist(n)
         elif k == "call":
             self.emit_call(n)
         else:
             self.unsupported_(f"no {k}")
+
+    def emit_attrlist(self, n):
+        """Lista de valores MUGEN (`X = v1, v2, ...`): sem campo na VM, vira UM gap
+        declarado que avalia 0. Expandir para OR/AND inventaria semantica que o
+        runtime nao tem; descartar valores em silencio e proibido pelo contrato."""
+        campo, valores = term_text(n.kids[0]), ", ".join(term_text(v) for v in n.kids[1:])
+        self.unsupported_(f"{campo} {n.val} {valores} (lista de valores sem campo na VM)")
 
     def emit_bin(self, n):
         a, b = n.kids

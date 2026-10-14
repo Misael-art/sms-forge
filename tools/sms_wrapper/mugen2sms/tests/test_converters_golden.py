@@ -65,24 +65,27 @@ def test_clsn_tables_are_flat_int16():
     struct.pack("<4h", *hit)                    # coube em int16
 
 
-def test_cmd_patterns_only_sms_pad_survives():
+def test_cmd_patterns_map_four_way_direction_modifier():
     def command(name, keys, hold=False):
         return cmdmod.Command(name, [cmdmod.Step([cmdmod.Key(k, hold=hold) for k in keys])], 1, 0, 1, name)
     patterns, skipped = to_patterns([
         command("punch", ["a"]),
         command("holdF", ["F"], hold=True),
         command("diag", ["DF"]),
+        cmdmod.Command("loose", [cmdmod.Step([cmdmod.Key("F", four_way=True)])], 1, 0, 1, "loose"),
         command("kick", ["b"]),
         command("charge", ["B"]),
     ])
-    assert {p.name for p in patterns} == {"punch", "holdF", "charge"}
-    assert skipped["diag"] == "diagonal-impossivel-pad"
-    assert skipped["kick"] == "botao>pad"
+    assert {p.name for p in patterns} == {"punch", "holdF", "charge", "diag", "loose"}
+    # Diagonal e uniao de duas direcoes; `$F` conserva a direcao flexivel no blob.
+    assert next(p for p in patterns if p.name == "diag").steps[0].dir == 0x0A      # D|F
+    assert skipped == {"kick": "botao>pad"}
     punch = next(p for p in patterns if p.name == "punch")
     assert punch.steps[0].keys == 0x01                    # A
     holdf = next(p for p in patterns if p.name == "holdF")
     assert holdf.steps[0].dir == 0x08                     # R (F mapeia p/ direita-para-frente no runtime)
     assert holdf.steps[0].hold is True
+    assert next(p for p in patterns if p.name == "loose").steps[0].four_way is True
 
 
 def test_define_size_matches_array_len():

@@ -35,6 +35,7 @@ REQUIRED=(
   "doc/12-roteiro.md"
   "doc/13-spec-cenas.md"
   "doc/15-tdd.md"
+  "doc/artifact_registry.json"
   "src/main.c"
   "build.sh"
 )

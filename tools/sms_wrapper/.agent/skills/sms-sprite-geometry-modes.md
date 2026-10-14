@@ -42,7 +42,7 @@ entidade com arte MAIS LARGA que 8px  →  metasprite, sempre
 ## Diagnóstico antes de chutar
 
 Ler a VRAM em vez de adivinhar: variável em endereço fixo
-(`unsigned char rb[4] __at(0xC700);`) + `SMS_readVRAM`, e inspecionar pelo
+(`volatile __at(0xC700) unsigned char rb[4];`, endereço conferido no mapa) + `SMS_readVRAM`, e inspecionar pelo
 depurador do Emulicious (DAP `evaluate`, contexto **repl**). Foi assim que o
 L006 fechou — comparando o que estava na VRAM com o que a arte deveria ter posto lá.
 
@@ -50,7 +50,12 @@ L006 fechou — comparando o que estava na VRAM com o que a arte deveria ter pos
 
 Metasprite 16×16 = **4 tiles** de VRAM e 4 entradas na SAT por entidade.
 A SAT tem 64 entradas e a scanline aceita 8 sprites: 16 entidades 16×16 já
-esgotam a SAT, e duas lado a lado numa linha já consomem 8 de largura.
+esgotam a SAT; duas entidades lado a lado usam 8 entradas totais, mas apenas
+4 objetos por scanline comum (2 colunas por ator), em modo 8×8 sem zoom.
+Tile 16×16 artístico não é `sprite_size:16x16` no manifesto: declare modo
+físico 8×8/8×16, objetos emitidos em ordem de SAT e entradas hidden. Y do
+manifesto é o passado à SMSlib; armazenado `(y-1)&255`. O perfil atual não
+qualifica wrap/posicionamento negativo nem diferenças do zoom SMS1.
 Rodar `audit_sprite_line_sim.py` ANTES de fechar o design.
 
 Ver também: [`sms-sprites-metasprite.md`](sms-sprites-metasprite.md).

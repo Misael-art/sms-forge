@@ -35,7 +35,8 @@ class FidelityReport:
         self.by_id[el.id] = el
 
 
-# teclado SMS real: direcionais + 1 botao + start. Convencao MUGEN: maiusculas sao direcoes
+# conjunto LEGADO de botoes sem mapa por tempo de pressao (a=KEY_1, s=KEY_2 no input.c); o pad tem
+# KEY_1+KEY_2 (SMSlib.h:296-302) e o mapa vigente esta em converters/sms_controls.py (L093). Convencao MUGEN: maiusculas sao direcoes
 # (F/B/U/D/DF..), minusculas de 1 caractere sao botoes (a,b,c,x,y,z; 's'=start, 'n'=nenhum).
 _PAD_BUTTONS = {"a", "s", "n"}
 

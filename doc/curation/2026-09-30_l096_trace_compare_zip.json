@@ -1,0 +1,25 @@
+{
+  "curation_id": "2026-09-30_l096_trace_compare_zip",
+  "date": "2026-09-30",
+  "scope": "Comparador de trilhas por tick (item 3 do doc/21)",
+  "authorization": "O usuário pediu 'prossiga' após registrar L093-L095; escopo: ferramenta de host e gate, sem alterar a ROM.",
+  "lessons": [
+    {
+      "id": "L096",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "O comparador de trilhas do doador usa zip e descarta a cauda mais longa: uma trilha que perde ou ganha ticks no fim, ou que perde uma chave de estado, aparece como equivalente. Defeito achado por leitura de código no doc 19 e agora medido.",
+      "evidence": {
+        "reproducao": "trace_compare.py --self-check: com 3 ticks perdidos no fim, zip dá 0 divergências (reproduzido na própria fixture) e o comparador novo reprova por comprimento.",
+        "mutacao": "desligar o teste de comprimento faz test_trace_compare_catches_tail_loss_that_zip_hides falhar; revertido.",
+        "cobertura": "Aprova trilha igual; reprova tick diferente, cauda perdida, cauda ganha, chave perdida, trilha vazia e cenário ausente.",
+        "limite": "Julga duas trilhas dadas; nenhum produtor de trilha SMS existe ainda (host ou DAP). Equivalência prova só o estado gravado, não render nem tempo de Z80."
+      },
+      "rule_section": "SMS_GLOBAL §81",
+      "tool_that_measures": "mugen2sms/analysis/trace_compare.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L097",
+    "mastery": "Item 3 do roadmap tem o juiz; falta o produtor de trilhas."
+  }
+}

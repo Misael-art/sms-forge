@@ -1,0 +1,49 @@
+{
+  "curation_id": "2026-10-04_sgdk_state_transition_skill_sms",
+  "date": "2026-10-04",
+  "scope": "adaptação de prática de arquitetura de estados para jogos Master System",
+  "authorization": "Pedido explícito do dono para inspecionar práticas e skills do SGDKForge e incorporar as transferíveis, adaptadas ao SMSForge.",
+  "sources": [
+    "SGDKForge: tools/sgdk_wrapper/.agent/skills/architecture/game-state-transition-architect/SKILL.md",
+    "SGDKForge: tools/sgdk_wrapper/.agent/skills/architecture/scene-state-architect/SKILL.md",
+    "SMSForge: tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md (passo 9), SMS_GLOBAL §6 e skills SMS de input/evidência/orçamento"
+  ],
+  "assessment": {
+    "transferable": [
+      "Declarar um owner por estado mutável e registrar entrada, saída, teardown e recuperação.",
+      "Separar estado persistente de round/modo do estado temporário de animação, input e efeitos.",
+      "Exercitar retorno/reentrada em ciclos repetidos e medir o pior quadro da transição."
+    ],
+    "already_present": [
+      "Orçamento SMS por tela, VBlank, SAT/scanline e prova de transição em vídeo já existem.",
+      "A especialização MUGEN já pede prova de rounds, revanche e interrupções de efeitos.",
+      "A cadeia de arte SMS já cobre proveniência, tradução, paleta, geometria por quadro e vínculo asset→ROM (L100–L102).",
+      "A receita de combate 1v1 já define startup/active/recovery, hit único, atribuição de dano e resolução de trade."
+    ],
+    "adapted_only": [
+      "A prática passa a valer para FSMs e telas de qualquer gênero SMS, não só engine MUGEN.",
+      "Ownership foi traduzido para input, SAT, padrões, name table, paletas, scroll e PSG."
+    ],
+    "excluded": [
+      "Não importar DMA SGDK, CRAM, WINDOW, VSRAM, H-Int, limites de sprites Mega Drive ou APIs SGDK.",
+      "Não criar nova lição técnica nem alegar que a nova skill comprova gameplay ou capacidade de hardware."
+    ]
+  },
+  "changes": [
+    "tools/sms_wrapper/.agent/skills/sms-state-transitions.md",
+    "tools/sms_wrapper/.agent/ARCHITECTURE.md",
+    "tools/sms_wrapper/.agent/workflows/new-project.md",
+    "tools/sms_wrapper/.agent/workflows/new-scene.md",
+    "tools/sms_wrapper/.agent/workflows/production-loop.md"
+  ],
+  "validation": {
+    "json": "PASS",
+    "selftest": "PASS 64/64; probe de ROM do projeto opcional não configurado",
+    "validate_measurement_tools": "PASS 47 ferramentas com --self-check",
+    "audit_doc_sync": "PASS",
+    "audit_learning_capture": "PASS; ledger, curadorias, lições e registry sincronizados",
+    "git_diff_check": "PASS",
+    "rom_emulator": "não executado: a alteração foi apenas metodológica"
+  },
+  "limits": "Mudança de metodologia e roteamento; não modifica engine, projeto de jogo, assets ou ROM. Nenhuma transição foi executada no emulador nesta curadoria."
+}

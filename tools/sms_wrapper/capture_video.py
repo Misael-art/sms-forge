@@ -54,6 +54,7 @@ Exit: 0 video gravado e verificado | 1 gravacao invalida | 2 ambiente ausente
       | 3 uso
 """
 import sys, os, json, time, shutil, argparse, subprocess
+from pathlib import Path
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -424,6 +425,60 @@ def frame_motion(path_a, path_b):
     return sum(1 for x, y in zip(va, vb) if abs(x - y) > 16) / len(va)
 
 
+def image_timeline_motion(images):
+    """Pixel changes across the whole timeline; not actor/action recognition."""
+    from PIL import ImageChops
+    first = previous = None
+    maximum = adjacent = endpoint = 0.0; frames = changed = 0
+    def difference(a,b):
+        if a.size!=b.size: raise ValueError("timeline canvas changed")
+        hist=ImageChops.difference(a,b).histogram()
+        return sum(hist[17:])/float(a.width*a.height)
+    for img in images:
+        current=img.convert("L")
+        if first is None: first=current.copy()
+        else:
+            delta=difference(previous,current);adjacent=max(adjacent,delta)
+            if delta>0: changed+=1
+        endpoint=difference(first,current);maximum=max(maximum,endpoint)
+        previous=current.copy();frames+=1
+    return {"decoded_frames":frames,"max_from_initial_fraction":maximum,
+            "max_adjacent_fraction":adjacent,"endpoint_fraction":endpoint,
+            "changed_transitions":changed,"motion_fraction":max(maximum,adjacent),
+            "scope":"whole-frame pixel variation only; HUD changes do not prove fighter motion or AIR state"}
+
+
+def timeline_motion(video):
+    """Decode every native frame instead of mistaking equal endpoints for freeze."""
+    from PIL import Image
+    ok,info=probe_video(str(video))
+    if not ok or info.get("width")!=SMS_W or info.get("height")!=SMS_H:
+        raise ValueError("timeline requires native 256x192 video")
+    process=subprocess.Popen(["ffmpeg","-nostdin","-v","error","-i",str(video),
+                              "-map","0:v:0","-f","rawvideo","-pix_fmt","gray","-"],
+                             stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
+    size=SMS_W*SMS_H
+    def images():
+        for _ in range(90000):
+            payload=b""
+            while len(payload)<size:
+                part=process.stdout.read(size-len(payload))
+                if not part:break
+                payload+=part
+            if not payload:return
+            if len(payload)!=size:raise ValueError("incomplete decoded frame")
+            yield Image.frombytes("L",(SMS_W,SMS_H),payload)
+        raise ValueError("timeline exceeds 90000 frames")
+    try:
+        result=image_timeline_motion(images())
+        if process.wait(timeout=10)!=0 or result["decoded_frames"]<2:
+            raise ValueError("video decode failed or too short")
+        return result
+    finally:
+        if process.poll() is None:process.kill();process.wait()
+        process.stdout.close()
+
+
 # --------------------------------------------------------------- record -----
 def _tap(key, wid, iid, tries=6):
     """Atalho do emulador pelo canal provado (L039), fail-closed no foco.
@@ -629,7 +684,8 @@ def capture(project, rom, seconds=8, out_name="video", press=None, frames=4,
     for p in shots:
         good, detail = image_informative(p)
         checks.append({"frame": p, "informative": good, "detail": detail})
-    motion = frame_motion(shots[0], shots[-1]) if len(shots) >= 2 else 0.0
+    motion_timeline = timeline_motion(video_out)
+    motion = motion_timeline["motion_fraction"]
     frames_ok, why_frames = evaluate_frames(checks)
     # `screenshot` alimenta quem so entende o bundle v1: tem que ser um frame
     # COM conteudo, nao o preto da largada.
@@ -643,6 +699,7 @@ def capture(project, rom, seconds=8, out_name="video", press=None, frames=4,
         "screenshot": still,
         "frames": checks,
         "motion_fraction": round(motion, 4),
+        "motion_timeline": motion_timeline,
         "informative": frames_ok and motion >= MIN_MOTION,
         "detail": "%s | %s" % (why, why_frames),
         "has_audio": info["has_audio"],
@@ -674,8 +731,8 @@ def capture(project, rom, seconds=8, out_name="video", press=None, frames=4,
         print("[FAIL] %s" % why_frames)
         return 1
     if motion < MIN_MOTION:
-        print("[FAIL] imagem parada: apenas %.2f%% do frame mudou entre o "
-              "primeiro e o ultimo (min %.0f%%). Video de tela congelada nao "
+        print("[FAIL] pouca variacao visual: pico %.2f%% ao longo da "
+              "timeline (min %.0f%%). Este video nao "
               "prova estado transitorio." % (motion * 100, MIN_MOTION * 100))
         return 1
 
@@ -711,6 +768,11 @@ def _probe_shortcut():
 
 
 def _self_check():
+    from PIL import Image
+    a=Image.new("L",(256,192),0);b=Image.new("L",(256,192),255)
+    cycle=image_timeline_motion([a,b,a]);freeze=image_timeline_motion([a,a,a])
+    assert cycle["motion_fraction"]==1 and cycle["endpoint_fraction"]==0
+    assert freeze["motion_fraction"]==0 and freeze["changed_transitions"]==0
     # gate de dimensao: captura de janela (com moldura) tem que reprovar
     ok, why = evaluate_video({"width": 283, "height": 282, "frames": 400,
                               "duration_s": 6.0, "codec": "h264"})
@@ -819,6 +881,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--project")
     ap.add_argument("--rom")
+    ap.add_argument("--session",help="private session: record framebuffers by VDP frame, without audio")
+    ap.add_argument("--ticks",type=int,default=120,help="VDP frames for private session recording")
     ap.add_argument("--seconds", type=float, default=8.0)
     ap.add_argument("--out", default="video")
     ap.add_argument("--press", help="roteiro de input: 'Right=400,Left=400'")
@@ -830,6 +894,18 @@ def main(argv=None):
     a = ap.parse_args(argv)
     if a.self_check:
         return _self_check()
+    if a.session:
+        from session_bridge.isolated import video,load,sha
+        try:
+            if a.rom and sha(a.rom)!=load(a.session)[1]["rom_sha256"]:raise ValueError("ROM/session mismatch")
+            if a.press:raise ValueError("--press milliseconds incompatible with private frame-paced input")
+            record=video(a.session,a.ticks,a.out)
+            record["motion_timeline"]=timeline_motion(record["path"])
+            from session_bridge.isolated import atomic
+            atomic(Path(record["path"]).with_suffix('.json'),record)
+            print(json.dumps(record,indent=2));return 0
+        except (OSError,RuntimeError,ValueError) as e:
+            print("[FAIL] "+str(e));return 2
     if a.probe_shortcut:
         return _probe_shortcut()
     if not (a.project and a.rom):

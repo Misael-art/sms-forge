@@ -1,0 +1,34 @@
+{
+  "curation_id": "2026-10-03_workflow_first_playable_slice",
+  "date": "2026-10-03",
+  "scope": "workflows canônicos de produção cross-genre para Master System",
+  "authorization": "Pedido explícito do dono: curar os workflows para o agente canônico aprender da produção do MUGEN e aplicar lições reutilizáveis a jogos SMS em geral.",
+  "decision": "L001–L102 permanecem as lições canônicas já emitidas. Esta curadoria não emite novo lesson ID: ela conecta lições existentes a workflows de início de projeto, primeira fatia jogável, cena, arte e ciclo de produção, mantendo mugen-engine-quality.md como especialização.",
+  "linked_lessons": [
+    "L097: trilha temporal deve ser registrada no loop da ROM; DAP pausado não amostra ticks.",
+    "L098: localizar atraso comparando duração visível da pose, lógica e AIR.",
+    "L099: medir demanda e banda de upload antes de reordenar prioridades.",
+    "L100: validar papéis cromáticos pela paleta SMS e referência aprovada.",
+    "L101: limpar granulação de folhas no tamanho de destino sem aplicar dithering indiscriminadamente.",
+    "L102: contratar escala, bbox, baseline e poses únicas por quadro."
+  ],
+  "changes": [
+    "tools/sms_wrapper/.agent/ARCHITECTURE.md",
+    "tools/sms_wrapper/.agent/workflows/first-playable-slice.md",
+    "tools/sms_wrapper/.agent/workflows/new-project.md",
+    "tools/sms_wrapper/.agent/workflows/new-scene.md",
+    "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+    "tools/sms_wrapper/.agent/workflows/production-loop.md",
+    "tools/sms_wrapper/.agent/workflows/curation-learning.md",
+    "tools/sms_wrapper/.agent/workflows/curation-mode.md"
+  ],
+  "validation": {
+    "selftest": "PASS 64/64",
+    "validate_measurement_tools": "PASS 47/47 ferramentas com --self-check",
+    "audit_doc_sync": "PASS",
+    "audit_learning_capture": "PASS; ID registry e ledger seguem sincronizados",
+    "self_checks": "PASS audit_doc_sync.py --self-check e audit_learning_capture.py --self-check",
+    "git_diff_check": "PASS"
+  },
+  "limits": "Curadoria de workflow e roteamento. Não modifica ROM, assets, motor ou contrato de jogo; nenhuma capacidade de gameplay foi promovida por documentação."
+}

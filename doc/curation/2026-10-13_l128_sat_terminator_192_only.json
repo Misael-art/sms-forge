@@ -1,0 +1,32 @@
+{
+  "curation_id": "2026-10-13_l128_sat_terminator_192_only",
+  "date": "2026-10-13",
+  "title": "Terminador 0xD0 da SAT existe só no modo 192 linhas",
+  "kind": "curation",
+  "scope": "Hardware SMS (VDP modo 4): lei de sprites §7 e simulador de scanline. Item A1 do dossiê out/curation_proposals_smspower_2026-10-12.md.",
+  "authorization": "O proprietário aprovou o item A1 individualmente em 2026-10-13 ('prossiga' após a apresentação de evidência, lacuna, destino e medição), com a convenção de offset y+1 adiada para o item A2.",
+  "lessons": [
+    {
+      "id": "L128",
+      "status": "documentado_com_gate_estendido; sem medição em emulador ou console",
+      "lesson": "O Y armazenado 0xD0 encerra o parsing da SAT somente no modo de 192 linhas. Em 224 e 240 linhas 0xD0 é um Y comum: o VDP percorre as 64 entradas e o sprite conta nas scanlines. Truncar a SAT com 0xD0 nesses modos não esconde sprites nem serve de otimização. O manifesto de cena declara screen_h em {192, 224, 240}.",
+      "root_cause": "A §7 e audit_sprite_line_sim.py tratavam o terminador como lei universal do VDP, sem qualificar o modo de tela. O simulador aplicava a regra para qualquer screen_h e aceitava alturas inexistentes.",
+      "evidence": {
+        "corpus_page": {
+          "path": "out/smspower_corpus_2026-10-12/Sprites.txt",
+          "sha256": "293829045828db0c4cfcb0567bbf7b5e9dc588c58525a0add24db9a22a5826c7",
+          "url": "https://www.smspower.org/Development/Sprites",
+          "quote": "This only works in the 192-line display mode, in the 224 and 240-line modes a Y coordinate of $D0 has no special meaning."
+        },
+        "corpus_manifest": "out/smspower_corpus_2026-10-12/MANIFEST.sha256 (68/68 conferidos em 2026-10-13)",
+        "header": "sdk/devkitSMS/SMSlib/SMSlib.h: VDPFEATURE_240LINES e VDPFEATURE_224LINES (SMS II only)",
+        "gate_cases": "audit_sprite_line_sim.py --self-check; selftest.py: scene_ok_d0_224, scene_bad_trunc_224, scene_bad_screen_h"
+      },
+      "rule_section": "SMS_GLOBAL §118",
+      "tool_that_measures": "audit_sprite_line_sim.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md",
+      "measurement_limits": "Regra derivada do corpus hasheado, não medida em emulador nem em console; o comportamento em silício dos modos 224/240 fica hardware_pass pendente. O gate mede o manifesto declarado, não o registro de modo que a ROM realmente programa. A convenção stored_y = y + 1 do simulador diverge da leitura do corpus (desenho em stored + 1) e segue aberta para o item A2."
+    }
+  ],
+  "dedup_key": "l128_sat_terminator_d0_192_line_mode_only_20261013"
+}

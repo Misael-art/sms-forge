@@ -1,7 +1,7 @@
 # Piloto: model sheet para continuidade visual
 
-**Status:** proposta experimental para teste; ainda não promovida ao skill ou
-workflow canônico.
+**Status:** promovida em 2026-10-08 ao workflow canônico `original-artwork.md`;
+o registro do piloto abaixo permanece como evidência histórica do padrão.
 
 **Objetivo:** verificar se uma folha de referência fixa a identidade visual do
 personagem com detalhe suficiente para orientar imagens derivadas sem deriva de
@@ -34,6 +34,35 @@ O inventário deve separar fatos definidos pelo usuário ou pelas referências
 autorizadas de decisões ainda abertas. Uma imagem derivada não deve preencher
 lacunas com detalhes apresentados como fatos.
 
+## Formulário padrão candidato
+
+Cada folha deve trazer, dentro da própria imagem, os campos abaixo em texto
+legível:
+
+- **Tipo de documento:** `character lineup model sheet`, `concept art sheet`;
+  explicitar que é uma prancha de personagem com vistas, não uma cena.
+- **Estilo:** identificador do catálogo, franquia de referência, plataforma e
+  era, seguidos da descrição aplicada ao desenho.
+- **Traço / lineart:** espessura, cor, acabamento e comportamento das linhas.
+- **Morfologia:** proporção corporal e silhueta do estilo, separadas do biotipo
+  específico do personagem.
+- **Sombreamento:** número de tons por material, contraste, luz e uso ou não de
+  dithering.
+- **Biotipo:** registrar as opções do formulário — ectomorfo, mesomorfo,
+  endomorfo, musculoso, petite; slim, atlético, curvilíneo, muito musculoso,
+  baixo — e marcar qual combinação foi selecionada para este personagem.
+- **Régua relativa:** declarar uma unidade visual (por exemplo, `H` = altura da
+  cabeça), altura de referência e linha de base comum para as vistas ortográficas.
+- **Fundo e alinhamento:** fundo branco, creme ou cinza claro, sem cenário; vistas
+  organizadas horizontalmente, na mesma escala e com baseline comum.
+- **Paleta e iluminação:** descrever a direção do estilo e preservar os papéis de
+  cor já estabelecidos para o personagem.
+
+Para personagem único, o campo de biotipo documenta o conjunto de opções e
+destaca apenas o biotipo escolhido; não pede uma versão de cada corpo na mesma
+folha. O layout pode reservar uma pose de identidade além das vistas ortográficas
+e do close facial. O primeiro teste registrado usa `CPS2-Alpha-Cel` e Dr. Social.
+
 ## Teste de continuidade
 
 1. Congelar a folha-base e o inventário de invariantes depois da aprovação do
@@ -54,9 +83,12 @@ folha e o inventário. A prancha, por si só, não prova consistência entre
 gerações; essa conclusão depende da comparação com pelo menos uma imagem
 derivada.
 
-## Limite de promoção
+## Limite da promoção
 
-Este registro descreve o método candidato para um teste. Não altera regras,
-ferramentas, skills ou workflows compartilhados do SMSForge. A promoção futura
-depende de um piloto com personagem e estilo definidos, revisão do resultado e
-curadoria posterior.
+O formulário e o processo incremental foram promovidos ao workflow compartilhado
+em 2026-10-08. Isso oficializa o procedimento de trabalho, não as descrições das
+49 referências do catálogo nem qualquer folha candidata individual. Cada estilo
+e cada concept continuam sujeitos a curadoria e aprovação próprias. O fluxo
+canônico está em `tools/sms_wrapper/.agent/workflows/original-artwork.md`; a
+regra correspondente é SMS_GLOBAL §102 / L108.
+

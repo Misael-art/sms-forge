@@ -25,4 +25,15 @@ print(p or shutil.which("openmsx") or shutil.which("emulicious") or "")
 EOF
 )
 [ -n "$EMU" ] || { echo "[FAIL_AMBIENTE] nenhum emulador configurado (tools/emuladores/)"; exit 2; }
-exec "$EMU" "$ROM"
+# default_emulator e relativo a ROOT (ex.: tools/emuladores/emulicious/Emulicious.jar).
+# Executa-lo do CWD do projeto resolvia para <projeto>/tools/... e sempre falhava.
+case "$EMU" in
+  /*) ;;
+  *) EMU="$ROOT/$EMU" ;;
+esac
+[ -f "$EMU" ] || { echo "[FAIL_AMBIENTE] emulador nao encontrado: $EMU"; exit 2; }
+# Convencao canônica dos gates: jar vive em java; Update=0 suprime o auto-update.
+case "$EMU" in
+  *.jar) exec java -jar "$EMU" -set Update=0 "$ROM" ;;
+  *)     exec "$EMU" "$ROM" ;;
+esac

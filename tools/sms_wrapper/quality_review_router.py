@@ -77,7 +77,7 @@ def plan(request):
         "independent_of_producer": True,
     } for d in domains]
 
-    return {
+    out = {
         "schema": "quality_review_plan_v1",
         "artifact_kind": "quality_review_plan",
         "tool": {"name": "quality_review_router", "version": VERSION},
@@ -88,10 +88,21 @@ def plan(request):
         "claim_ceiling": "quality_review_plan_only",
         "ok": not findings and bool(reviews),
     }
+    if request.get("execution_mode") == "isolated_native_subagents":
+        out["execution_mode"] = "isolated_native_subagents"
+        for key in ("project", "rom", "requested_tasks"):
+            out[key] = request.get(key)
+            if not out[key]: findings.append("native review request missing:"+key)
+        out["workflow"] = "workflows/subagent-emulator-qa.md"
+        for review in reviews: review["private_session_per_worker"] = True
+        out["ok"] = not findings and bool(reviews)
+    return out
 
 
 def validate_report(report, plan_doc=None):
     problems = []
+    if plan_doc and plan_doc.get("execution_mode") == "isolated_native_subagents" and report.get("execution_mode") != "isolated_native_subagents":
+        problems.append("native plan cannot downgrade to legacy review")
     if report.get("artifact_kind") != "independent_quality_review":
         problems.append("artifact_kind deve ser independent_quality_review")
     if report.get("claim_ceiling") != "independent_quality_review_only":
@@ -102,6 +113,7 @@ def validate_report(report, plan_doc=None):
     reviewer = report.get("reviewer")
     if not reviewer:
         problems.append("reviewer ausente")
+    if not producer: problems.append("producer ausente")
     if producer and reviewer and producer == reviewer:
         problems.append("self_approval_forbidden")
     if report.get("status") not in {"passed", "revise_before_growth", "blocked",
@@ -109,10 +121,12 @@ def validate_report(report, plan_doc=None):
         problems.append("status fora do vocabulário")
 
     artifacts = report.get("artifacts") or []
+    if not artifacts: problems.append("sem artefatos hash-bound")
     for art in artifacts:
         expected = art.get("sha256")
         observed = art.get("observed_sha256")
-        if expected and observed and expected != observed:
+        if not expected or not observed: problems.append("artifact expected/observed hash absent")
+        elif expected != observed:
             problems.append(f"stale_artifact:{art.get('path')}")
 
     domains = report.get("domains") or []
@@ -134,6 +148,32 @@ def validate_report(report, plan_doc=None):
         problems.append("defect/risk não pode passar como passed")
     if taste_only and report.get("status") == "blocked":
         problems.append("opportunity/taste não bloqueia")
+    if report.get("execution_mode") == "isolated_native_subagents":
+        from audit_subagent_session import check_ref, validate_report as validate_worker
+        workers = report.get("session_reports") or []
+        if not workers: problems.append("native session reports absent")
+        try: checkpoint_rom = check_ref(report["rom"])
+        except (ValueError,OSError,KeyError) as e: problems.append("checkpoint ROM absent/stale:"+str(e));checkpoint_rom=None
+        if not report.get("project"): problems.append("checkpoint project absent")
+        task_ids, session_ids = [], []
+        for worker in workers:
+            try:
+                req = json.loads(check_ref(worker["request"]).read_text())
+                result = json.loads(check_ref(worker["report"]).read_text())
+                if req.get("producer_id") != report.get("producer") or req.get("project") != report.get("project") or req.get("rom",{}).get("sha256") != report.get("rom",{}).get("sha256"):
+                    problems.append("native result belongs to another producer/project/ROM")
+                task_ids.append(req.get("task_id"))
+                if result.get("session"): session_ids.append(result["session"]["id"])
+                checked = validate_worker(result, req)
+                if not checked["ok"] or (report.get("status") == "passed" and not checked["tests_passed"]):
+                    problems.append("invalid/incomplete native session review:"+str(worker.get("report")))
+            except (ValueError, OSError, KeyError, TypeError) as e: problems.append(str(e))
+        if len(task_ids) != len(set(task_ids)) or set(task_ids) != set(report.get("requested_tasks",[])):
+            problems.append("native reports differ from checkpoint assigned tasks")
+        if len(session_ids) != len(set(session_ids)): problems.append("native workers shared a mutable session")
+        if plan_doc and plan_doc.get("execution_mode") == "isolated_native_subagents":
+            for key in ("producer","project","rom","requested_tasks"):
+                if plan_doc.get(key) != report.get(key): problems.append("native checkpoint differs from plan:"+key)
 
     return {
         "schema": "independent_quality_review_validation",
@@ -190,6 +230,9 @@ def _self_check() -> int:
                            "observed_sha256": "fff"}]
     v = validate_report(stale, p)
     assert any("stale_artifact" in x for x in v["problems"]), v
+    assert not validate_report(dict(report, artifacts=[]))["ok"]
+    assert not validate_report(dict(report, producer=None))["ok"]
+    assert not validate_report(dict(report, execution_mode="isolated_native_subagents", session_reports=[]))["ok"]
 
     print("[SELF-CHECK OK] quality_review_router "
           "(máx 3; sem autoaprovação; sem AAA; hash stale cai)")

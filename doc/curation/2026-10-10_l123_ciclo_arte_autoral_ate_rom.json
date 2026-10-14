@@ -1,0 +1,42 @@
+{
+  "curation_id": "2026-10-10_l123_ciclo_arte_autoral_ate_rom",
+  "date": "2026-10-10",
+  "title": "Ciclo de promoção de arte autoral do pedido à ROM de produção",
+  "kind": "curation",
+  "scope": "Framework canônico SMSForge para criação e modificação artística de personagens/itens: intake, concept, harmonia, animação, prova SMS, conversão, ROM diagnóstica e produção.",
+  "authorization": "O proprietário pediu o fluxograma completo, os estados aprovados e pendentes, e depois autorizou registrar todos os pontos para curadoria futura do agente canônico.",
+  "lessons": [
+    {
+      "id": "L123",
+      "status": "promovida_com_workflow_transversal_e_gates_por_etapa",
+      "lesson": "Arte autoral passa por estados independentes e hash-bound: pedido/identidade/referências/estilo; concept model sheet revisado e aprovado pelo dono; harmonia visual do elenco quando aplicável; contrato de animação por sequência com endpoints, tracks e princípios; prova técnica de duas poses; fonte completa de animação aprovada por papel/caminho/SHA; conversão indexada e gates de recursos/hardware; ROM diagnóstica com binding e comparação de framebuffer; revisão artística da conversão; integração e budgets reais de cena; evidência atual de gameplay/entrega. Nenhum status ou PASS é herdado entre artefatos, hashes ou etapas. Prova técnica não substitui sprites de produção, e ROM diagnóstica não é ROM de gameplay/produção.",
+      "root_cause": "O fluxo havia sido explicado em documentos especializados e experiências de projeto, mas faltava um runbook transversal que mostrasse a ordem, as fronteiras de aprovação e os gates que sustentam cada promoção. Os ciclos anteriores também demonstraram riscos concretos de deriva de estilo/morfologia, ruído de recorte, defeitos de anatomia/equipamento, escala incoerente, uso da prova técnica como fonte de animação e contagem lógica de patterns tratada como capacidade VRAM residente.",
+      "evidence": {
+        "owner_request": "O dono pediu fluxo desde a entrada do pedido até a etapa atual, o que está aprovado e o que falta implementar; depois solicitou registro de todos os pontos para curadoria futura do agente canônico.",
+        "canonical_workflow": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
+        "project_flow_and_status": "SMS_projects/master_of_fighters/doc/fluxo-criacao-curadoria-personagens.md",
+        "related_existing_lessons": [
+          "doc/curation/2026-10-08_l108_fluxo_arte_autoral_incremental.json",
+          "doc/curation/2026-10-04_l106_revisao_artistica_anatomia_e_equipamento.json",
+          "doc/curation/2026-10-09_l111_equipment_terminal_and_shared_sms_palette.json",
+          "doc/curation/2026-10-10_l113_animation_contract_minimum_principles.json",
+          "doc/curation/2026-10-10_l121_sms_asset_to_rom_conversion.json",
+          "doc/curation/2026-10-10_l122_aprovacao_fonte_61_poses_janela_patterns.json"
+        ],
+        "current_exercise": {
+          "project": "SMS_projects/master_of_fighters",
+          "memory_bank": "SMS_projects/master_of_fighters/doc/10-memory-bank.md",
+          "approved_source": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+          "diagnostic_rom": "out/diagnostics/dr_social_61_pose_review_v5/project/out/rom/dr_social_61_pose_review_v5.sms",
+          "current_state": "A fonte de 61 poses foi aprovada para conversão e a exibição comparada passou 61/61 no framebuffer; a aprovação visual da conversão, animação contínua, roster harmonizado e gates de produção permanecem pendentes."
+        }
+      },
+      "rule_section": "SMS_GLOBAL §113",
+      "tool_that_measures": "audit_learning_capture.py; audit_art_review_checklist.py; audit_roster_harmony.py; audit_animation_contract.py; audit_animation_semantics.py; audit_asset_proof_sheet.py; audit_validate_resources.py; audit_reference_boundary.py; audit_provenance.py; audit_sprite_cutout.py; audit_sprite_mode.py; audit_sprite_line_sim.py; pack_sms_metasprite.py --self-check; audit_rom_asset_binding.py --require; audit_render_fidelity.py --exact-indexed; audit_visual_delivery.py; audit_claims.py",
+      "skill_that_teaches": "workflows/artwork-to-rom-lifecycle.md",
+      "validation": "O workflow lista cada transição e os gates especializados existentes; audit_learning_capture.py --self-check e a auditoria integral devem confirmar a ligação de ID, regra, ledger, arquivos e ferramentas. audit_doc_sync.py --self-check verifica sincronização estrutural da doutrina. Nenhum gate isolado decide a verdade artística ou substitui aceite do dono.",
+      "measurement_limits": "Não foi criado um veredito automático universal de qualidade artística. Cada gate mede apenas cobertura, hashes, pixels, semântica declarada, geometria, orçamento ou evidência dentro do seu escopo. O agente ainda precisa de revisor independente, inspeção visual e aprovação do dono nos checkpoints; facts de runtime exigem ROM/sessão atuais e orçamento medido.",
+      "dedup_key": "l123_artwork_to_rom_independent_promotion_states_hash_bound_sms_20261010"
+    }
+  ]
+}

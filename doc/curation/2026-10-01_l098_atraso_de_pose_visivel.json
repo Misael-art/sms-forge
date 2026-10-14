@@ -1,0 +1,27 @@
+{
+  "curation_id": "2026-09-30_l098_atraso_de_pose_visivel",
+  "date": "2026-10-01",
+  "scope": "Trilha por tick x AIR: de onde vem o atraso do soco e da caminhada no runtime integrado",
+  "authorization": "O usuário pediu 'prossiga' após o produtor de trilha; escopo: análise de host sobre trilhas já produzidas, sem alterar a ROM.",
+  "lessons": [
+    {
+      "id": "L098",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "O atraso de animação do combate vem da espera de pose visível (streaming), não do dado do AIR nem da entrada. Todos os quadros do soco ficaram entre 12 e 37 ticks em tela contra 1 a 4 do AIR, e em todos o contador de animação ficou parado em 0 por pelo menos o atraso: a guarda `visible_pose != wanted_pose` de tick_anim segura o relógio. O mesmo vale para a caminhada.",
+      "evidence": {
+        "ferramenta": "mugen2sms/analysis/trace_vs_air.py (self-check PASS, 12 testes do arquivo passam): mede por quadro ticks em tela menos hitstop, compara com `time` do AIR e testa se o contador parado em 0 explica o atraso; recusa a explicação quando o contador anda e há atraso.",
+        "soco_estado_6_acao_260": "trilha trace_soco_a.json (ROM clone 4a049f76895b, 2 execuções idênticas): AIR 2,1,2,4,2,1 ticks; medido 26, 37, 29, 35 (8 de hitstop), 13, 12; stall 24, 36, 27, 31, 11, 11; contador parado em 0 por 25, 37, 28, 32, 12, 12. Total completo: AIR 11 ticks, medido 140, lentidão 12,73x. Janela de hit do AIR no tick 5 após o início; hit_done no tick 134 (124 após o toque).",
+        "andar_estado_1_acao_20": "trilha trace_andar.json (ROM clone 04677f2fc04b): 1 quadro completo, AIR 3, medido 15, lentidão 5,0x, explicado pelo contador parado (15 ticks).",
+        "tabela_de_duracao_correta": "scene_trimmed.h tem as durações 2,1,2,4,2,1,2 para a acao 260: o dado destilado preserva o AIR; o atraso nao esta na tabela.",
+        "achado_lateral": "No cenário andar_frente, P1 atravessa P2: x passa de 96 para 155 com P2 em 152, o estado vira andar-para-trás por auto-facing e P1 chega a 240. Não há colisão de corpo (playerpush) entre os lutadores neste runtime.",
+        "limites": "Atribuição causal por trilha + leitura de fight.c, não medida direta da pose visível. Janela de 170 ticks: só o soco completa 5 quadros; a caminhada completa 1. O soco mede a primeira execução de um golpe com poses ainda não residentes; não generaliza para golpes com poses em cache. Mesmo ROM clone, não a canônica."
+      },
+      "rule_section": "SMS_GLOBAL §83",
+      "tool_that_measures": "mugen2sms/analysis/trace_vs_air.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L099",
+    "mastery": "Gargalo de cadência identificado como throughput de upload/streaming de poses, não FSM nem input. Próximo: medir a banda de upload por pose e testar prefetch da próxima pose em estados de ataque, clone isolado."
+  }
+}

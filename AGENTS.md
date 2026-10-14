@@ -98,7 +98,7 @@ Regras:
 ❌ >8 sprites numa scanline         — só depois do simulador aprovar
 ❌ >64 sprites na SAT               — limite físico do VDP
 ❌ Cor fora dos códigos 6-bit       — paleta mestra fixa; sem "gradiente suave"
-❌ >15 cores úteis por subpaleta    — índice 0 é transparente nas duas
+❌ >15 cores úteis numa paleta sprite indexada — P1 índice 0 é transparente; BG índice 0 é visível
 ❌ VRAM em massa fora do VBlank     — sem DMA: orçamento worst-frame medido é contrato
 ❌ Lógica de build no projeto       — apenas em tools/sms_wrapper/
 ❌ Declarar "pronto" sem ROM rodando no emulador
@@ -130,9 +130,17 @@ roteiro → storyboard (planta baixa em pixel) → coreografia → MEDIÇÃO →
 | Geometria de sprite | `audit_sprite_mode.py` | arte mais larga que o modo sem metasprite (L006, §25) |
 | Contraste | `audit_luma_floor.py` | contraste < 1 degrau efetivo da paleta mestra |
 | Procedência | `audit_provenance.py` | pixel nascido de código como personagem/cenário |
+| Fronteira de referências | `audit_reference_boundary.py` | fonte de jogo sem papéis explícitos, referência suplementar sem escopo/hash ou mídia externa promovida a identidade, paleta, mecânicas/lore (L103, §88); o gate mede os registros, revisão humana mede fidelidade |
+| Recorte e cor por material | `audit_sprite_cutout.py` | componente opaco solto ou RGB incompatível com a região material declarada no contrato (L104, §89); revisar cada quadro também no tamanho nativo e em nearest-neighbor |
+| Harmonia do elenco | `audit_roster_harmony.py` | mede altura/largura e relações (L105, §90), registra separadamente revisão visual pass/fail/pending e reprova candidatos com eixo visual `fail`; não classifica anatomia, recorte, clusters ou estilo automaticamente |
+| Checklist de revisão artística | `audit_art_review_checklist.py` | exige eixos completos/hash-bound e bloqueia `fail`/`pending` ou falta de aprovação; para sprite sheets também exige micro-eixos de clusters, rosto, contorno, materiais, encaixes, equipamentos e integridade de quadros (L106–L107, §91–§92); valida cobertura, não verdade artística |
+| Prova técnica de poses-chave | `audit_asset_proof_sheet.py` | exige poses idle+ação, refaz transform nearest-neighbor declarado, confere previews pixel a pixel contra PNG convertido, exige canvas em tiles de 8×8 e borda transparente mínima, bloqueia arma/conteúdo tocando a borda, grade/overlay, paleta runtime inconsistente ou eixos ausentes para terminal e altura anatômica separada de equipamento (L109–L111, §§105–107); não julga anatomia, identidade visual, orçamento de runtime ou AAA |
 | Proveniência de áudio | `audit_audio_provenance.py` | .psg sem entrada no manifest de áudio, sha256/bytes divergentes, faixa portada sem referência hasheada (L058, §47) |
 | Evidência | `capture_evidence.py` | captura branca/sem informação, emulador ausente |
 | Sessão do emulador | `emulator_session.py` | instância zumbi viva quando um gate vai buscar a janela por nome — sem isso o gate mede a ROM **errada** e emite veredito confiante sobre a sua (§46/L057) |
+| Diagnóstico SMS complementar | `blastem_sms.py` + `audit_blastem_sms.py` | BlastEm privado para estados Z80/VDP/mapper; pin/SHA/dumps/relógio/cleanup; não promove stepping, CRAM interna ou aceitação MD a FPS/áudio/hardware SMS (L112, §108) |
+| Diagnóstico BlastEm avançado e manutenção | `blastem_diagnostics.py` + `blastem_maintenance.py` | mudança RAM/OUT com opcode vivo; APNG bruto/derivado, PCM/VGM íntegros e visores SMS; candidato paralelo/hash divergente bloqueado; GDB Z2 M68K não vira suporte Z80 (L114–L120, §110) |
+| Diferença entre estados SMS | `blastem_dump_diff.py` | snapshots auditados e labels da mesma ROM; delta líquido não vira escrita/transferência, blocos VRAM não viram tiles únicos de arte (L112/L120, §§108/110) |
 | Evidência de estado transitório | `capture_video.py` | grava o **framebuffer** do emulador (256×192, sem compositor) para transição/animação/game feel, que screenshot não sustenta (§45/§36); reprova vídeo fora da canvas do VDP, curto demais ou de tela congelada |
 | Fidelidade de render | `audit_render_fidelity.py` | tela que NÃO mostra a arte autoral (ruído, sprite errado, arte corrompida) — compara a estrutura da fonte com a captura |
 | Semântica da captura | `screenshot_semantic_gate.py` | cor fora da paleta mestra (mockup/render), desktop não recortado, reuso da mesma imagem em dois claims, claim que screenshot não prova |
@@ -160,13 +168,18 @@ roteiro → storyboard (planta baixa em pixel) → coreografia → MEDIÇÃO →
 | Vínculo asset→ROM | `audit_rom_asset_binding.py` | source/res/símbolo/SHA da ROM ausentes ou divergentes (L036, §40) |
 | Review independente | `quality_review_router.py` | autoaprovação, parecer stale, review declarando AAA (L036, §41) |
 | Orquestração | `harness_orchestration.py` | claim/promoção delegados; mais de 3 ramos; worker que promove (L036, §41) |
+| QA de subagentes em sessão | `audit_subagent_session.py` | worker sem pedido/ROM/sessão/cleanup, mídia stale, testes omitidos ou contexto novo incompleto/ilegível; `session_qa.py` prepara contexto production/diagnostic explícito (§99); contrato e cobertura, sem julgar qualidade artística (§94) |
+| Atribuição de etapa | `audit_stage_attribution.py` | perfil sem baseline, janela declarada, contagens coerentes ou identidade ROM/sessão; consistência de registros, sem autenticar congelamento do probe, duração CPU ou causa exclusiva (§97) |
+| Contador na janela | `audit_counter_window.py` | contagem exata sem limite que exclua múltiplas voltas; `--require-exact` bloqueia ambiguidade; mede aritmética declarada, sem autenticar janela/limite/reset (§103) |
+| Semântica importada | `audit_import_semantics.py` | coordenadas fora do perfil, AIR finito divergente ou cache stale; `--require-air-identity` exige IDs fonte/ROM em N+1 fronteiras, terminal incluso (§100); consistência de registros, sem provar runtime dinâmico (§98) |
 | Animação semântica | `audit_animation_semantics.py` | frames reordenados, ação clonada com outro nome, ciclo idêntico, pivot oscilando, estado do GDD ausente (L037, §42) |
+| Contrato de animação | `audit_animation_contract.py` | sequência sem pose inicial/final, track de personagem/objeto incompleto, contagem-fonte inconsistente, menos de 7 princípios aplicados ou custo de hardware tratado como medido (L113, §109); valida cobertura declarada, não pixels ou física |
 | Captura de lição | `audit_learning_capture.py` | ledger sem JSON, furo de ID não declarado, ferramenta fantasma, persona ensinando doutrina supersedida (L038–L049, §43) |
 | Canal de SFX | `audit_psg_channel_binding.py` | `PSGSFXPlay` em canal diferente do manifesto autorado (L041, §12) |
 | H-scroll / 1ª coluna | `audit_hscroll_blank.py` | `SMS_setBGScrollX` ≠ 0 sem `VDPFEATURE_LEFTCOLBLANK` (L043, §6) |
 | Tamanho de símbolo | `audit_symbol_size_sync.py` | `#define FOO_SIZE` diverge do array ou entre headers (L052, §44) |
 | Redundância PSG | `audit_psg_redundancy.py` | stream com N cópias do mesmo frame; PSGlib já faz loop (L051, §12) |
-| Canal de input | `emulator_input.py` | XTEST/xdotool em Wayland/KWin (L039); canal = kdotool+ydotool (uinput) |
+| Canal de input | `emulator_input.py` | QA automatizada usa `--session ID --script` em frames VDP e controles privados (§93); ACK não prova consumo/ação da ROM; kdotool+ydotool é rota histórica, sem fallback automático ao desktop |
 | Tradução pixel | `prepare_sms_pixel_art.py` | foto/conceito fora da paleta mestra; preset NES/SNES/PICO-8 (L055, §8) |
 | Worst-frame | `measure_worst_frame.py` | orçamento de VBlank declarado e não medido; derrame sem número (L061, §49) |
 | Header↔doutrina | `audit_header_claims.py` | doutrina afirmando lei do SG-1000 como lei do SMS (PNT de 1 byte, "sem flip", 256 tiles) ou §6 sem os valores dos defines do header (L069, §54) |
@@ -201,6 +214,19 @@ boot no emulador, gameplay, 60/50 fps, áudio, memory bank atualizado — **e**
 produção, não entregas finais (`causal-persistence-loop.md`).
 
 ---
+
+## QA EM QUALQUER PROJETO
+
+Antes de testes automatizados, leia os workflows centrais atuais
+`tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md` e
+`subagent-emulator-qa.md`, SMS_GLOBAL §§93–94. QA por subagentes usa a ferramenta
+nativa, uma sessão privada por worker e feedback com cobertura/evidências;
+`session_qa.py` prepara/coleta e `audit_subagent_session.py` valida o resultado.
+Novos pedidos V2 seguem §§95–98: snapshots de contexto, relação independent
+(um caso em sessão nova) ou chained (timeline cumulativa), baseline/precondição
+da ROM. Integridade histórica não equivale à elegibilidade para a build atual.
+O coordenador coteja IDs nativos e consolida; não simular subagentes em JSON.
+Aplica-se aos projetos existentes sem sobrescrever suas `.agent` locais.
 
 ## APRENDIZADO INSTITUCIONAL
 

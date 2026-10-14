@@ -34,7 +34,7 @@ def _solid(idx: int) -> bytes:
     return bytes([idx]) * (SPRITE_W * SPRITE_H)
 
 
-def build(root: Path) -> Path:
+def build(root: Path, with_command_states: bool = False) -> Path:
     root.mkdir(parents=True, exist_ok=True)
     pal = bytes(((e * 37 + 11 * c) % 256) for e in range(256) for c in range(3))
     # PCX sem trailer de paleta faz o parser herdar prev_pal (preto) — o trailer
@@ -115,4 +115,14 @@ def build(root: Path) -> Path:
         "[Statedef 201]\ntype = S\nmovetype = A\nphysics = S\nanim = 201\n"
         "[State 201, 1]\ntype = HitDef\ntrigger1 = time = 3\nattr = S, MA\ndamage = 8, 0\n",
         encoding="ascii")
+    if with_command_states:
+        # [Statedef -1] do .cmd: comando -> ChangeState (insumo da matriz de golpes)
+        with open(root / "mini.cmd", "a", encoding="ascii") as f:
+            f.write("[Statedef -1]\n"
+                    "[State -1, punch]\ntype = ChangeState\nvalue = 200\n"
+                    'triggerall = command = "punch"\ntrigger1 = statetype = S\ntrigger1 = ctrl\n'
+                    "[State -1, special]\ntype = ChangeState\nvalue = 201\n"
+                    'triggerall = command = "special"\ntrigger1 = statetype = S\ntrigger1 = ctrl\n'
+                    "[State -1, ghost]\ntype = ChangeState\nvalue = 9999\n"
+                    'triggerall = command = "holdF"\ntrigger1 = ctrl\n')
     return root

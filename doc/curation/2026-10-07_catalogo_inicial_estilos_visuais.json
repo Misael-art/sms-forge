@@ -2,9 +2,9 @@
   "schema": "visual_style_reference_catalog_v1",
   "catalog_id": "initial_visual_style_references_2026_10_07",
   "recorded_date": "2026-10-07",
-  "scope": "Inventário inicial de estilos de referência para orientar curadoria futura do conhecimento artístico e dos workflows visuais do SMSForge.",
-  "status": "registered_for_future_curation",
-  "promotion_status": "not_promoted_to_canonical_skill_or_workflow",
+  "scope": "Registro ativo e expansível de referências visuais para orientar pedidos de arte autoral no SMSForge. Entradas são direções de referência, não presets validados.",
+  "status": "active_reference_catalog",
+  "promotion_status": "catalog_registry_and_authoring_workflow_promoted; individual style references remain unvalidated until curated",
   "source": {
     "attachment": "/home/misael/.codex/attachments/05827bf1-dda7-4df0-833c-876d0ce76dde/pasted-text.txt",
     "sha256": "4baa09c2c803d5675217e07ca1166d9a2a4cf44ce8558686dc3bce6a7d56ea0d",
@@ -21,7 +21,7 @@
     "transcription_note": "Descritores transcritos da tabela fornecida pelo usuário. Identidade, precisão histórica, viabilidade técnica e adequação ao hardware de destino ainda não foram verificadas."
   },
   "future_curation": {
-    "principle": "Tratar cada linha como direção de referência, não como preset validado nem como ordem para copiar uma obra existente.",
+    "principle": "Tratar cada linha como direção de referência, não como preset validado nem como ordem para copiar uma obra existente. Novas entradas exigem os campos e evidências declarados em catalog_policy.",
     "review_dimensions": [
       "confirmar jogo, edição, plataforma, era e referências visuais autorizadas",
       "separar silhueta e morfologia, lineart/contorno, paleta/iluminação, sombreamento e animação",
@@ -29,7 +29,7 @@
       "adaptar cada direção às restrições do projeto e do hardware alvo sem alegar fidelidade não demonstrada",
       "promover ao skill/workflow somente após resolver o desafio visual, registrar avaliação e evidências, e concluir a curadoria correspondente"
     ],
-    "implementation_state": "Nenhuma regra, ferramenta ou comportamento canônico foi alterado por este registro."
+    "implementation_state": "O catálogo e o fluxo de arte autoral foram promovidos para uso canônico; cada estilo permanece individualmente não validado até curadoria própria."
   },
   "styles": [
     {
@@ -40,7 +40,20 @@
       "lineart": "Contornos pretos limpos (1-2px), animação expressiva",
       "body_morphology": "Proporções de anime Shonen dos anos 90, silhuetas marcantes",
       "palette_and_lighting": "Cores saturadas (3 tons cel-shading), efeitos de energia reluzentes",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 1,
+      "artistic_style_reference": {
+        "named_artist": "Bengus",
+        "reference_role_and_scope": "Capcom concept-art reference associated with Street Fighter Alpha development; not a blanket sprite authorship claim.",
+        "source_url": "https://game.capcom.com/cfn/sfv/column/112448?lang=en",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "expressive 1990s fighting-anime faces",
+          "strong graphic contour and readable silhouettes",
+          "high-energy pose staging"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors; Capcom interview supplies development context, not sole-art credit."
+      }
     },
     {
       "style_id": "Dark-Gothic-Pop",
@@ -50,7 +63,20 @@
       "lineart": "Lineart fluida e precisa de 1px",
       "body_morphology": "Anatomicamente exagerada, silhuetas de monstros do folclore",
       "palette_and_lighting": "Paleta vibrante e gótica, iluminação de contraste, auras de magia",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 2,
+      "artistic_style_reference": {
+        "named_artist": "Akiman (Akira Yasuda)",
+        "reference_role_and_scope": "Capcom artist with documented Darkstalkers involvement; reference for character illustration, not sole title authorship.",
+        "source_url": "https://game.capcom.com/cfn/sfv/column/132581?lang=en",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "organic and elastic contour",
+          "strong silhouette design",
+          "playful dark-fantasy character shapes"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors; Capcom profile confirms series involvement."
+      }
     },
     {
       "style_id": "Late-SNK-Realism",
@@ -60,7 +86,20 @@
       "lineart": "Lineart fina de 1px ultra-precisa, alta contagem de frames",
       "body_morphology": "Proporções reais e atléticas com centro de gravidade baixo",
       "palette_and_lighting": "Tons sóbrios com destaques, sombreamento técnico em 3-4 tons",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 3,
+      "artistic_style_reference": {
+        "named_artist": "Eisuke Ogura",
+        "reference_role_and_scope": "SNK illustrator/character designer; official SNK profile documents his Garou-team connection and broader Fatal Fury work. Reference for a forceful SNK illustration direction, not a claim of sole authorship of Garou: Mark of the Wolves pixels.",
+        "source_url": "https://www.snk-corp.co.jp/snk40th/spillust/illust/eisukeogura.php",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "forceful hand-rendered contours",
+          "graphic facial planes and strong gesture",
+          "broad shape contrast with direct action staging"
+        ],
+        "basis_and_limits": "The phrasing of visual traits is an editorial reading of representative artwork; keep distinct from Shinkiro’s more realistic promotional rendering."
+      }
     },
     {
       "style_id": "CPS3-Fluid-Mastery",
@@ -70,7 +109,20 @@
       "lineart": "Lineart cirúrgica de 1px, extrema fluidez quadro a quadro",
       "body_morphology": "Anatomia realista de lutador de artes marciais com peso real",
       "palette_and_lighting": "Paleta madura, cel-shading refinado, efeitos de iluminação em tempo real",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 4,
+      "artistic_style_reference": {
+        "named_artist": "Daigo Ikeno",
+        "reference_role_and_scope": "Secondary-source attribution for Street Fighter III character/promotional artwork; use as a named visual reference, not sole authorship of in-game animation.",
+        "source_url": "https://www.fightersgeneration.com/games/sf3-thirdstrike.html",
+        "attribution_status": "secondary_source_reference",
+        "style_signature": [
+          "long athletic anatomy",
+          "rhythmic, flowing pose lines",
+          "controlled painted shadows and crisp contour"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors; title-specific attribution remains secondary-source pending."
+      }
     },
     {
       "style_id": "Urban-Seinen-KOF",
@@ -80,7 +132,20 @@
       "lineart": "Lineart firme de 1px com anti-aliasing manual",
       "body_morphology": "Proporções atléticas de mangá Seinen urbano dos anos 90",
       "palette_and_lighting": "Cores equilibradas de rua/urbanas, sombreamento cel em 3 tons",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 5,
+      "artistic_style_reference": {
+        "named_artist": "Toshiaki Mori (Shinkiro)",
+        "reference_role_and_scope": "Official artist of the KOF 98 promotional poster/main visual.",
+        "source_url": "https://www.snk-corp.co.jp/snkmasterpiece/gallery07/",
+        "attribution_status": "verified_primary_source",
+        "style_signature": [
+          "hand-rendered promotional realism",
+          "mature facial and material modeling",
+          "cinematic lighting and refined anatomy"
+        ],
+        "basis_and_limits": "SNK explicitly describes the artwork as hand-drawn and strikingly realistic; this is promotional art, not sprite technique."
+      }
     },
     {
       "style_id": "Classic-Arcade-Heroic",
@@ -90,7 +155,20 @@
       "lineart": "Lineart tradicional em pixel art de 1-2px",
       "body_morphology": "Proporções musculosas e heroicas dos jogos de arcade clássicos",
       "palette_and_lighting": "Cores primárias de alto contraste, sombreamento flat direto",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 6,
+      "artistic_style_reference": {
+        "named_artist": "Akiman (Akira Yasuda)",
+        "reference_role_and_scope": "Capcom character/art reference for Super Street Fighter II era; the official interview discusses his character and animation work.",
+        "source_url": "https://game.capcom.com/cfn/sfv/column/100957?lang=en",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "bold arcade silhouette",
+          "direct anatomy and forceful pose",
+          "flat, high-contrast color grouping"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors; not a claim of sole authorship."
+      }
     },
     {
       "style_id": "HiDrive-Anime-Vector",
@@ -100,7 +178,20 @@
       "lineart": "Lineart fina tipo vetor, animação rápida e técnica",
       "body_morphology": "Anatomia de anime moderno estilizado com trajes complexos e esguio",
       "palette_and_lighting": "Paleta ultra-saturada, cel-shading limpo, efeitos de partículas intensos",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 7,
+      "artistic_style_reference": {
+        "named_artist": "Daisuke Ishiwatari",
+        "reference_role_and_scope": "Creator and authorial visual-direction reference for the original Guilty Gear; not sole character-art or sprite credit.",
+        "source_url": "https://www.arcsystemworks.com/game/guilty-gear/",
+        "attribution_status": "verified_primary_source",
+        "style_signature": [
+          "angular, high-contrast silhouettes",
+          "dense costume/accessory accents",
+          "graphic shapes with strong motion"
+        ],
+        "basis_and_limits": "Traits are an editorial reading of the selected Guilty Gear visual reference."
+      }
     },
     {
       "style_id": "32Bit-Mecha-Chibi",
@@ -110,7 +201,20 @@
       "lineart": "Lineart limpa estilo cel-animation de TV",
       "body_morphology": "Chibi/SD estilizado e robótico com articulações redondas",
       "palette_and_lighting": "Cores vivas e luminosas, 2-3 tons de cel-shading sem dithering",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 8,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "reference_role_and_scope": "No individual artist attribution assigned for Mega Man 8 in this curation. Keep the game’s animated sci-fi mascot direction as the reference until a title-specific credit is verified.",
+        "source_url": null,
+        "attribution_status": "individual_credit_unverified",
+        "style_signature": [
+          "clean cel-animation contour",
+          "rounded mechanical joints and simplified shapes",
+          "bright 2–3 tone color blocks"
+        ],
+        "basis_and_limits": "Style descriptors come from the selected game reference, not a named artist."
+      }
     },
     {
       "style_id": "Extreme-SD-Parody",
@@ -120,7 +224,20 @@
       "lineart": "Lineart arredondada de 1-2px, animação cômica elástica",
       "body_morphology": "Chibi extremo (2 a 2.5 cabeças de altura) com expressões faciais exageradas",
       "palette_and_lighting": "Paleta pastel e néon festiva, efeitos de impacto com objetos e itens cômicos",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 9,
+      "artistic_style_reference": {
+        "named_artist": "Kinu Nishimura",
+        "reference_role_and_scope": "Capcom fighting-game illustration reference; no claim that she alone authored Pocket Fighter.",
+        "source_url": "https://www.capcom.co.jp/amusement/brands/capcomstore/2021/01/828/",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "expressive character acting",
+          "clear gesture and silhouette",
+          "playful facial exaggeration"
+        ],
+        "basis_and_limits": "Traits are an editorial visual analysis; use Pocket Fighter itself for SD proportions and animation."
+      }
     },
     {
       "style_id": "Digicel-Handdrawn",
@@ -130,7 +247,20 @@
       "lineart": "Lineart orgânica feita a mão convertida para pixel art",
       "body_morphology": "Proporções diretas das animações da Disney (Aladdin, Gênio, Jafar)",
       "palette_and_lighting": "Paleta rica do Mega Drive, sombreamento suave de cel-animation",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 10,
+      "artistic_style_reference": {
+        "named_artist": "Glen Keane",
+        "reference_role_and_scope": "Directing animator for Aladdin, the titular character, in Disney’s 1992 animated film; reference is film animation, not Mega Drive game-art credit.",
+        "source_url": "https://d23.com/a-to-z/keane-glen/",
+        "attribution_status": "verified_primary_source",
+        "style_signature": [
+          "fluid character gesture",
+          "elastic but readable silhouette",
+          "organic hand-drawn animation contour"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors of the film-animation reference."
+      }
     },
     {
       "style_id": "Gothic-Ayami-Art",
@@ -140,7 +270,20 @@
       "lineart": "Lineart fina de 1px, animação elegante com capas e iluminação",
       "body_morphology": "Proporções refinadas e esguias no traço de Ayami Kojima",
       "palette_and_lighting": "Paleta gótica e soturna (vinhos, azuis, cinzas) com transparências de hardware",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 11,
+      "artistic_style_reference": {
+        "named_artist": "Ayami Kojima",
+        "reference_role_and_scope": "Named artistic reference associated with Castlevania: Symphony of the Night character art; the cited Konami page is contextual, not a staff-credit record.",
+        "source_url": "https://www.konami.com/games/eu/es/topics/4668/",
+        "attribution_status": "contextual_reference_credit_not_primary",
+        "style_signature": [
+          "elegant elongated figures",
+          "fine ornamental contour",
+          "restrained jewel-tone Gothic palette"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors; check the exact source artwork and avoid implying all game sprites use this rendering."
+      }
     },
     {
       "style_id": "Detailed-Military-Caricature",
@@ -150,7 +293,20 @@
       "lineart": "Lineart rica em detalhes de 1px, altíssima densidade de frames",
       "body_morphology": "Caricaturesca com física exagerada (squash & stretch) e robôs detalhados",
       "palette_and_lighting": "Paleta militar saturada (verdes, ferrugem, chamas) com explosões volumosas",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 12,
+      "artistic_style_reference": {
+        "named_artist": "TONKO",
+        "reference_role_and_scope": "SNK illustrator with documented Metal Slug series illustration work, especially later-series/promo art; not pixel-sprite authorship for Metal Slug X/3.",
+        "source_url": "https://www.snk-corp.co.jp/snk40th/spillust/illust/tonko.php",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "rounded military caricature",
+          "dense readable props",
+          "contrast between sturdy machinery and elastic character acting"
+        ],
+        "basis_and_limits": "Use as an illustration reference only; the game’s sprite art is a team achievement."
+      }
     },
     {
       "style_id": "Fairytale-Storybook-2D",
@@ -160,7 +316,20 @@
       "lineart": "Lineart fina e limpa de 1px",
       "body_morphology": "Proporções graciosas de livro de fadas (morfologia precursora da Vanillaware)",
       "palette_and_lighting": "Paleta aveludada e aquarelada, cel-shading suave, cenários em camadas",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 13,
+      "artistic_style_reference": {
+        "named_artist": "George Kamitani",
+        "reference_role_and_scope": "Creator-associated visual reference for Princess Crown; the cited interview is secondary and does not establish sole authorship of the game’s art.",
+        "source_url": "https://www.gamedeveloper.com/business/king-of-2d-vanillaware-s-george-kamitani",
+        "attribution_status": "secondary_source_reference",
+        "style_signature": [
+          "storybook fantasy silhouettes",
+          "fine decorative costume detail",
+          "layered painted color and theatrical staging"
+        ],
+        "basis_and_limits": "Editorial visual analysis of the selected title/reference."
+      }
     },
     {
       "style_id": "Gouache-Fantasy-Art",
@@ -170,7 +339,20 @@
       "lineart": "Lineart de pincelada fina em tom de sépia/carvão",
       "body_morphology": "Proporções de conto de fadas estilizado e sonhador",
       "palette_and_lighting": "Fundos pintados em guache/aquarela, sprites coloridos e luminosos",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 14,
+      "artistic_style_reference": {
+        "named_artist": "Shinichi Kameoka",
+        "reference_role_and_scope": "Main character designer for Legend of Mana, per Square Enix creator comment.",
+        "source_url": "https://www.jp.square-enix.com/mana30th/",
+        "attribution_status": "verified_primary_source",
+        "style_signature": [
+          "hand-painted gouache color planes with warm fine contours",
+          "luminous storybook fantasy color with controlled texture",
+          "distinctive character silhouettes and readable costume shapes"
+        ],
+        "basis_and_limits": "Editorial visual-analysis descriptors; the source confirms character-design role, not sole authorship of every asset."
+      }
     },
     {
       "style_id": "Ghibli-Cel-Simulation",
@@ -180,7 +362,20 @@
       "lineart": "Lineart de animação de estúdio (1px ultra-limpo)",
       "body_morphology": "Proporções clássicas de anime dos anos 90 estilo Estúdio Ghibli",
       "palette_and_lighting": "Cores vivas, cel-shading de 2 tons super limpo, clima acolhedor",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 15,
+      "artistic_style_reference": {
+        "named_artist": "Akihiko Yamashita",
+        "reference_role_and_scope": "Secondary credits listing for Wonder Project J2 anime character design; not a Ghibli artist credit and not sole game-art authorship.",
+        "source_url": "https://www.mobygames.com/game/97845/wonder-project-j2/credits/n64/?autoplatform=true",
+        "attribution_status": "secondary_source_reference",
+        "style_signature": [
+          "1990s cel-anime line and shape language",
+          "expressive face and clear pose silhouette",
+          "warm, clean cel-color blocks"
+        ],
+        "basis_and_limits": "Do not equate the game with Studio Ghibli or attribute its art to Miyazaki; Ghibli-Simulation remains a style label, not a production credit."
+      }
     },
     {
       "style_id": "Feudal-Poetic-Cinematic",
@@ -190,7 +385,15 @@
       "lineart": "Lineart cirúrgica de 1px com transparências sutis",
       "body_morphology": "Anatomia madura, elegante e realista de esgrimistas e samurais",
       "palette_and_lighting": "Paleta cinematográfica terrosa e melancólica, iluminação poética de época",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 16,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Topdown-Dark-Anime",
@@ -200,7 +403,15 @@
       "lineart": "Lineart fina de 1px otimizada para visão top-down",
       "body_morphology": "Proporções de herói de anime 90s (traço de Yoshitaka Tamaki)",
       "palette_and_lighting": "Paleta vibrante no mapa com masmorras escuras e sombras marcadas",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 17,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Organic-Pencil-Illustration",
@@ -210,7 +421,15 @@
       "lineart": "Lineart de lápis/nanquim orgânica sobre sprites",
       "body_morphology": "Criaturas e ecossistemas surreais, poéticos e ilustrativos",
       "palette_and_lighting": "Cores pastéis e terrosas, efeito de pintura de livro de ilustrações infantil",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 18,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Classic-War-Sprite",
@@ -220,7 +439,15 @@
       "lineart": "Lineart fina de 1px com legibilidade em mapa e batalha",
       "body_morphology": "Proporções anatômicas limpas (retratos por Junko Kawano/Fumi Ishikawa)",
       "palette_and_lighting": "Paleta militar/fantasia equilibrada, cel-shading tradicional de 2 tons",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 19,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Folklore-Yokai-Manga",
@@ -230,7 +457,15 @@
       "lineart": "Lineart fina de mangá clássico (Shigeru Mizuki)",
       "body_morphology": "Anatomicamente fiel ao folclore de monstros e fantasmas (Yokai)",
       "palette_and_lighting": "Paleta soturna com tons de cinza, roxo e marrom, clima de terror clássico",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 20,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Slapstick-TV-Anime",
@@ -240,7 +475,15 @@
       "lineart": "Lineart limpa de cel-animation de TV",
       "body_morphology": "Chibi/SD cômico e expressivo (Bunny-girl, robôs e monstros)",
       "palette_and_lighting": "Paleta festiva e vibrante (tons pastéis e neon), animações de pastelão",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 21,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "High-Fantasy-Saturn",
@@ -250,7 +493,15 @@
       "lineart": "Lineart de 1px fina com anti-aliasing de Saturn",
       "body_morphology": "Proporções heroicas clássicas de JRPG noventista",
       "palette_and_lighting": "Cores saturadas de alta fantasia, magias reluzentes por hardware",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 22,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "LucasArts-Cartoon-Brawler",
@@ -260,7 +511,15 @@
       "lineart": "Lineart grossa e estilizada estilo HQ/Cartoon americano",
       "body_morphology": "Proporções caricatas, musculosas e assimétricas (LucasArts Style)",
       "palette_and_lighting": "Paleta mediterrânea e vibrante, sombreamento flat cel-shading limpo",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 23,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Modern-Handheld-Vector",
@@ -270,7 +529,15 @@
       "lineart": "Lineart limpa e vetorializada de 1px",
       "body_morphology": "Proporções Chibi/SD modernas e carismáticas com roupas espaciais",
       "palette_and_lighting": "Paleta cintilante e mágica (tons de joias), efeitos luminosos no DS",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 24,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Portable-Street-Manga",
@@ -280,7 +547,15 @@
       "lineart": "Lineart de 1px bem marcada para tela pequena",
       "body_morphology": "Anatomia musculosa e agressiva estilo mangá de ação dos anos 90",
       "palette_and_lighting": "Paleta urbana e sombria com acentos luminosos no protagonista",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 25,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Isometric-Organic-Pixel",
@@ -290,7 +565,15 @@
       "lineart": "Lineart de 1px cirúrgica em sprites articulados",
       "body_morphology": "Anatomia fluida de Tatsuya Yoshikawa com movimentação orgânica",
       "palette_and_lighting": "Paleta pastel e mística, iluminação dinâmica que afeta os sprites",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 26,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "HD-Vector-Painted",
@@ -300,7 +583,15 @@
       "lineart": "Lineart limpa e invisível/vetorial em HD",
       "body_morphology": "Proporções de anime moderno mantendo a essência clássica de Mana",
       "palette_and_lighting": "Cores digitais vivas, gradientes suaves de pintura digital e efeitos HD",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 27,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Psychedelic-Mascot-Pop",
@@ -310,7 +601,15 @@
       "lineart": "Lineart ultra-limpa estilo desenho animado",
       "body_morphology": "Mascot Chibi absurdo e elástico com expressões cômicas instantâneas",
       "palette_and_lighting": "Paleta psicodélica e festiva, cores neon saturadas ao máximo",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 28,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Pastel-Neon-Flyer",
@@ -320,7 +619,15 @@
       "lineart": "Lineart fina e vetorial estilo cel de animação",
       "body_morphology": "Proporções de garotos e garotas de anime com asas e montarias",
       "palette_and_lighting": "Paleta pastel neon brilhante (rosa, ciano, amarelo), magias cintilantes",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 29,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Multiplane-Anime-Brawler",
@@ -330,7 +637,15 @@
       "lineart": "Lineart precisa de 1px otimizada para combates caóticos",
       "body_morphology": "Proporções de anime Shonen de ação dos anos 90 (Han Kikuchi Style)",
       "palette_and_lighting": "Paleta pop-fantasy vibrante, explosões e raios cobrindo a tela inteira",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 30,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Yankii-Raw-Manga",
@@ -340,7 +655,15 @@
       "lineart": "Lineart de 1px crua e expressiva de mangá Seinen",
       "body_morphology": "Proporções de delinquentes juvenis (jaquetas Sukajan, topetes)",
       "palette_and_lighting": "Paleta urbana e soturna (asfalto, tijolo, jeans) with acentos no herói",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 31,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Classic-DnD-Illustrative",
@@ -350,7 +673,15 @@
       "lineart": "Lineart firme de 1-2px, animação rica de combate",
       "body_morphology": "Proporções de heróis e criaturas do livro clássico de D&D (Kinu Nishimura)",
       "palette_and_lighting": "Paleta rica em contraste para masmorras, magias de tela inteira reluzentes",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 32,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Tales-Fujishima-32Bit",
@@ -360,7 +691,15 @@
       "lineart": "Lineart ultra-precisa de 1px com anti-aliasing",
       "body_morphology": "Anatomia de anime noventista por Kousuke Fujishima (Cress, Mint)",
       "palette_and_lighting": "Paleta limpa e saturada, cel-shading de 2-3 tons, invocações reluzentes",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 33,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Parody-Neon-Pop",
@@ -370,7 +709,15 @@
       "lineart": "Lineart limpa de 1px, zoom dinâmico e animação elástica",
       "body_morphology": "Proporções paródicas de tropos de anime (garota mágica, robô, Totoro)",
       "palette_and_lighting": "Paleta neon-pop pastéis ultra-saturada, efeitos de energia e corações",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 34,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Kabuki-Edo-Pop",
@@ -380,7 +727,15 @@
       "lineart": "Lineart fina de 1px estilo cel-animation de TV",
       "body_morphology": "Chibi/Kodomo expressivo (Goemon, Ebisumaru) e robôs Super Robot",
       "palette_and_lighting": "Paleta pop-folclórica japonesa (vermelhão, índigo, amarelo), efeitos Kabuki",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 35,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Feudal-Ninja-Dark",
@@ -390,7 +745,15 @@
       "lineart": "Lineart de 1px bem definida para armas e lâminas",
       "body_morphology": "Proporções atléticas de ninjas e samurais em bases de combate baixas",
       "palette_and_lighting": "Paleta sóbria e terrosa com iluminação mágica demoníaca e faíscas",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 36,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Multiplane-Urban-Seinen",
@@ -400,7 +763,15 @@
       "lineart": "Lineart precisa de 1px com caimento fluído de tecidos",
       "body_morphology": "Proporções atléticas e longas de lutadores urbanos dos anos 90",
       "palette_and_lighting": "Paleta urbana noturna e industrial com sombreamento em 3 tons e dithering",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 37,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Rotoscoped-Real-Martial",
@@ -410,7 +781,15 @@
       "lineart": "Lineart cirúrgica de 1px gerada por captura de movimento",
       "body_morphology": "Anatomia e física estritamente real de artes marciais humanas",
       "palette_and_lighting": "Paleta fotográfica e cinematográfica, sombreamento suave de 3-4 tons",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 38,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Painterly-Baroque-Oil",
@@ -420,7 +799,15 @@
       "lineart": "Lineart de pincelada macia em tom de marrom/carvão (sem pixels)",
       "body_morphology": "Anatomia barroca hiper-exagerada e escultórica estilo Frank Frazetta",
       "palette_and_lighting": "Iluminação Chiaroscuro dramática, tons aveludados e textura de óleo",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 39,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Bishoujo-80s-Fantasy",
@@ -430,7 +817,15 @@
       "lineart": "Lineart fina de 1px para ação em plataforma 16-bits",
       "body_morphology": "Proporções de garotas mágicas em armaduras de bikini (Yuko, Cham)",
       "palette_and_lighting": "Paleta pop-fantasy primária (azul, magenta, ouro) contra mundos sombrios",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 40,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Isometric-Storybook-Kawaii",
@@ -440,7 +835,15 @@
       "lineart": "Lineart limpa e minimalista de 1px sem hachuras",
       "body_morphology": "Chibi/SD em perspectiva isométrica de 45° (Alice, coelhos, cartas)",
       "palette_and_lighting": "Paleta pastel dreamlike (rosa, azul-piscina, amarelo-manteiga), bolhas",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 41,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "PCE-Neon-Mascot",
@@ -450,7 +853,15 @@
       "lineart": "Lineart limpa de 1px otimizada para o chip de cor do PC Engine",
       "body_morphology": "Minimalista Chibi esférico (2 cabeças de altura), montarias fofas (Rui)",
       "palette_and_lighting": "Paleta ultra-saturada e reluzente, explosões em cruz amarela e vermelha",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 42,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "SNES-Grid-SciFi",
@@ -460,7 +871,15 @@
       "lineart": "Lineart de 1px com anti-aliasing manual nos cantos",
       "body_morphology": "Chibi mais detalhado (2.5 cabeças) com armaduras temáticas e rivais",
       "palette_and_lighting": "Paleta com gradientes sutis no SNES, texturas ricas nos blocos da grade",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 43,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Cyber-Chibi-Pop",
@@ -470,7 +889,15 @@
       "lineart": "Lineart de 1px bem marcada para ação rápida em voo",
       "body_morphology": "Cyber-Chibi (Zonk de óculos de sol) e fusões mecânicas bizzarras",
       "palette_and_lighting": "Paleta neon-pop sintética (rosa, ciano, verde-limão), rajadas e tiros neon",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 44,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Early-Toriyama-Shonen",
@@ -480,7 +907,15 @@
       "lineart": "Lineart fina de 1px com máxima fluidez de artes marciais",
       "body_morphology": "Proporções infantis e expressivas do Goku criança (2.5-3 cabeças)",
       "palette_and_lighting": "Paleta vibrante inspirada nas páginas coloridas da Shōnen Jump",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 45,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Toriyama-SNES-JRPG",
@@ -490,7 +925,15 @@
       "lineart": "Lineart de 1px com anti-aliasing cirúrgico",
       "body_morphology": "Proporções de mangá Shonen dos anos 90 por Akira Toriyama",
       "palette_and_lighting": "Paletas temáticas adaptadas para cada era temporal (Pré-História, Futuro)",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 46,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "HD2D-TiltShift-Diorama",
@@ -500,7 +943,15 @@
       "lineart": "Lineart ultra-limpa de 1px HD sobre iluminação 3D",
       "body_morphology": "Proporções originais de Toriyama integradas em ambiente diorama",
       "palette_and_lighting": "Sprites saturados sobre cenários PBR com profundidade de campo (tilt-shift)",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 47,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Crayon-Pastel-Storybook",
@@ -510,7 +961,15 @@
       "lineart": "Lineart grossa (2-3px) rabiscada estilo nanquim/lápis",
       "body_morphology": "Chibi/Kawaii redondo estilo brinquedo de pano (Yoshi, Baby Mario)",
       "palette_and_lighting": "Paleta de giz de cera e pastel com textura de papel aquarela áspero",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 48,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     },
     {
       "style_id": "Canonical-Clean-Mascot",
@@ -520,7 +979,35 @@
       "lineart": "Lineart limpa e icônica de 1-2px ao redor de todos os objetos",
       "body_morphology": "Mascot Chibi canônico e geométrico (2.5-3 cabeças)",
       "palette_and_lighting": "Paleta de cores primárias puras e saturadas, sombreamento flat cel-shading",
-      "status": "initial_reference_unvalidated"
+      "status": "initial_reference_unvalidated",
+      "catalog_index": 49,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "attribution_status": "pending_research_before_first_sheet",
+        "reference_role_and_scope": "Select a recognizable individual or credited team reference before generating this style. If no reliable individual credit exists, record that explicitly and use the primary work as the visual authority.",
+        "style_signature": [],
+        "basis_and_limits": "Do not infer a game credit from the style title; verify role and source before using an artist name."
+      }
     }
-  ]
+  ],
+  "catalog_policy": {
+    "expansion_requires": [
+      "unique stable style_id",
+      "identifiable primary reference with edition/platform/era where known",
+      "source URL or attachment plus SHA-256",
+      "explicit descriptors for base style, lineart, morphology, shading, palette/light and medium",
+      "declared role and limits for each reference",
+      "candidate status until a test sheet is reviewed",
+      "owner approval before promoting an entry as validated",
+      "stable numeric catalog_index matching the original order; future additions receive the next number and historical indices never change",
+      "explicit artistic_style_reference: named artist and role/source, or a recorded no-individual-credit status",
+      "distinctive style_signature with observable traits and limits, separated from game identity and sprite technique"
+    ],
+    "validation_rule": "The catalog is authoritative as an index, not as proof that each textual style description is historically accurate, suitable for a project, or validated by generated art.",
+    "preservation": "Append new entries without renumbering or rewriting historical IDs; record corrections with evidence and changelog.",
+    "generation_budget": "Default to one selected style and one concept-sheet cycle per user request. Large style batches require explicit user scope and should be generated incrementally.",
+    "artistic_reference_rule": "Artist names document attribution and a traceable visual reference; they are not a prompt to copy a living artist exact style. Describe transferable visual traits and keep game-specific authorship claims within the source scope.",
+    "intake_rule": "If the user has not specified a style, inform them that the catalog currently has 49 references and that they may choose another direction; present the minimum needed choices: medium/type of line, work/franchise/era reference, and optional named artist or studio reference.",
+    "review_rule": "Every concept sheet must be checked for pose anatomy and joint continuity, style-reference scope, distinctive style signature, visual cohesion, identity continuity, costume/equipment, scale/alignment, clean background, and crop/edge quality. Human visual review remains required."
+  }
 }

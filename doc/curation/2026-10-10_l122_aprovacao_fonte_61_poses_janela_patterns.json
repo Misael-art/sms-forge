@@ -1,0 +1,79 @@
+{
+  "curation_id": "2026-10-10_l122_aprovacao_fonte_61_poses_janela_patterns",
+  "date": "2026-10-10",
+  "title": "Selecionar a fonte de animação aprovada por papel e SHA e respeitar a janela física de patterns",
+  "kind": "lesson",
+  "scope": "Fluxo de conversão de animação indexada e metasprites para Sega Master System; caso Dr. Social com 61 poses em nove sequências.",
+  "authorization": "O usuário pediu que a fonte de produção aprovada, e não a prova técnica de duas poses, direcione a conversão; autorizou canonizar a rotina de conversão nos skills do agente curador.",
+  "lessons": [
+    {
+      "id": "L122",
+      "status": "regra_canonica_registrada_com_guard_de_papel_sha_e_prova_rom_61_frames",
+      "lesson": "A entrada deve ser resolvida por papel, caminho e SHA antes de converter: concept sheet fixa identidade, proof sheet idle+ação valida o método, fonte aprovada de animação fornece todas as poses de produção. Fixar IDs e contagens das sequências ao contrato e comparar todos os quadros convertidos contra o framebuffer da ROM. A janela lógica de índices do VDP não é orçamento de padrões residentes: calcular o espaço até a name table para o layout real; pools excedentes devem ser reprovados ou carregados pose a pose sob budget explícito.",
+      "root_cause": "A prova obrigatória de duas poses e a folha aprovada de 61 poses eram dois artefatos com papéis diferentes, mas o handoff anterior não impunha esse papel e a ROM ficou incompleta. No primeiro viewer de 61 poses, pools de 200/246 padrões ultrapassaram a janela física entre a base de patterns e a name table; contar somente os 256 índices lógicos permitiu corromper rótulos do tilemap.",
+      "evidence": {
+        "owner_feedback": "O dono identificou que a ROM anterior havia usado a prova técnica de duas poses em vez do arquivo de produção aprovado e delimitou as nove sequências, totalizando 61 poses.",
+        "approved_animation_source": {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+          "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+          "lineage": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.json"
+        },
+        "technical_proof_only": {
+          "path": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.png",
+          "role": "prova técnica idle+ação; explicitamente não fornece os 61 quadros de animação"
+        },
+        "sequence_counts": {
+          "idle": 4,
+          "walk_forward": 8,
+          "walk_backward": 8,
+          "jump": 8,
+          "crouch": 5,
+          "dash_run": 8,
+          "knockdown_fall": 8,
+          "tech_roll_getup": 8,
+          "guard": 4,
+          "total": 61
+        },
+        "conversion_record": "SMS_projects/master_of_fighters/doc/dr_social_61_pose_source_lineage_v1.json",
+        "rom": {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/project/out/rom/dr_social_61_pose_review_v5.sms",
+          "sha256": "501161271e6cc51a7666520128375af04f6b8dde04cfa96071a410f09a78e6db",
+          "bytes": 114688,
+          "binding": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/project/doc/rom_asset_binding.json"
+        },
+        "framebuffer_validation": {
+          "session_id": "c9709fd01c0742eb8c0eaebaa01f79d6",
+          "summary": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/project/out/evidence/framebuffer_render_fidelity_61_v5.json",
+          "frames_captured_and_compared": 61,
+          "exact_passes": 61,
+          "exact_failures": 0,
+          "opaque_pixels": 100333,
+          "opaque_mismatches": 0,
+          "transparent_pixels": 290067,
+          "transparent_mismatches": 0,
+          "sealed_sample_session": "de41dbaeaff044f4a07fb4fef89994e9",
+          "sealed_sample_check": "PASS"
+        },
+        "pattern_window": {
+          "sprite_pattern_base": "0x2000",
+          "name_table_base": "0x3800",
+          "loaded_tile_base": 257,
+          "resident_pattern_limit": 191,
+          "shared_pools": {
+            "idle": 169,
+            "guard": 182
+          },
+          "pose_step_sequences": 7,
+          "first_failure": "200/246-pattern pools were treated as resident and overwrote name-table labels"
+        },
+        "contact_sheet": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/dr_social_61_pose_emulicious_9_sequence_review_v5.png"
+      },
+      "rule_section": "SMS_GLOBAL §112",
+      "tool_that_measures": "SMS_projects/master_of_fighters/tools/prepare_dr_social_61_pose_probe.py --self-check; tools/sms_wrapper/pack_sms_metasprite.py --self-check; tools/sms_wrapper/audit_rom_asset_binding.py --require; tools/sms_wrapper/audit_render_fidelity.py --exact-indexed",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md; tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+      "validation": "O self-check do conversor rejeita a prova de duas poses e confere o caminho/SHA aprovados. Packager self-check, auditoria de 61 recursos/proveniência/geometria/SAT/scanline e audit_rom_asset_binding.py --require passaram. Uma única sessão privada Emulicious navegou os 61 IDs e audit_render_fidelity.py comparou 61/61 quadros pixel a pixel e os pixels transparentes contra fundo preto, sem divergências. O bundle de uma captura endpoint GU04 passou check-bundle.",
+      "measurement_limits": "A comparação prova pixels e cores indexadas no framebuffer da ROM SHA observada, não qualidade artística ou fidelidade humana. O viewer não demonstra timing contínuo de sete sequências em passo manual, throughput de VBlank, gameplay, FPS, áudio, PAL, P1 compartilhada do roster, coexistência com cenário/HUD, budget completo de RAM/VRAM ou hardware físico. A conversão permanece diagnóstica fora de res/.",
+      "dedup_key": "l122_approved_animation_source_role_sha_and_sms_resident_pattern_window_20261010"
+    }
+  ]
+}

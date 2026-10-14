@@ -7,6 +7,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from importlib import resources
 from pathlib import PurePosixPath
+import re
 
 from .ir import controllers as C
 from .ir import expr as E
@@ -46,6 +47,7 @@ class Character:
     states: dict[int, CState]
     report: dict
     warnings: list[str]
+    raw_states: dict[int, cns.StateDef] = field(default_factory=dict)   # CNS bruto, para analysis/
 
 
 def _sym(text: str | None, table: dict, default: int) -> int:
@@ -106,7 +108,21 @@ def load(src: Source, def_name: str | None = None) -> Character:
             warnings.append(f"varios .def de personagem; usado {def_name} (outros: {chars[1:]})")
     base = str(PurePosixPath(def_name).parent)
     secs = {s.name.lower(): s for s in ini.parse(ini.decode(src.read(def_name)))}
-    info = {k: ini.unquote(v) for k, v, _ in secs["info"].items} if "info" in secs else {}
+    info = {}
+    if "info" in secs:
+        for key, value, _ in secs["info"].items:
+            if key:
+                info[key] = ini.unquote(value)
+        # Some older MUGEN character DEFs use the common `Author: name`
+        # spelling instead of an INI `author = name` key. Preserve attribution
+        # without treating arbitrary free-form INFO lines as fields.
+        if not info.get("author"):
+            for key, value, _ in secs["info"].items:
+                if not key:
+                    match = re.match(r"^\s*author\s*:\s*(.*?)\s*$", value, re.I)
+                    if match and match.group(1):
+                        info["author"] = ini.unquote(match.group(1))
+                        break
     files = secs.get("files")
     if files is None:
         raise ValueError(f"{def_name}: sem [Files]")
@@ -223,4 +239,4 @@ def load(src: Source, def_name: str | None = None) -> Character:
 
     return Character(info.get("displayname") or info.get("name") or def_name, info.get("author", ""),
                      def_name, src.sha256(), info, parsed.constants, commands, anims, sprites,
-                     palettes, sounds, states, report, warnings)
+                     palettes, sounds, states, report, warnings, parsed.states)

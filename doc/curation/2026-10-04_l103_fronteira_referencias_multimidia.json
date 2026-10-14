@@ -1,0 +1,36 @@
+{
+  "curation_id": "2026-10-04_l103_fronteira_referencias_multimidia",
+  "date": "2026-10-04",
+  "scope": "concept art de personagens SMS com referências de mídia complementar",
+  "authorization": "O dono aprovou a concept art J.J. v4, pediu o registro de como a arte respeitou a fonte original e autorizou a curadoria dos aprendizados.",
+  "lessons": [
+    {
+      "id": "L103",
+      "status": "fechada_com_ferramenta_e_regra",
+      "lesson": "Quando a fonte de jogo é pequena demais para mostrar uma peça do figurino, mantenha o jogo Master System como autoridade de identidade, paleta e comportamento. Use outra mídia apenas para a lacuna visual que o dono autorizou — neste caso, construção e mapeamento do traje — e registre os papéis, limites, URLs e hashes antes de gerar. Não deixe a adaptação substituir cores SMS, mecânicas, lore, poses ou pixels do jogo.",
+      "root_cause": "O sprite J.J - Standing mede 13×40 px e não deixa claras a gola, as pequenas ombreiras, o arnês e as proteções. A primeira revisão do figurino levou o dono a pedir imagens do anime; sem uma fronteira declarada, uma referência complementar poderia ter passado a decidir também identidade, paleta ou mecânicas.",
+      "evidence": {
+        "owner_approved_concept": "SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+        "concept_sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+        "owner_approval_date": "2026-10-04",
+        "game_reference": "J.J - Standing, Zillion II: The Tri Formation (Master System), 13×40 px; identity and game color family anchor",
+        "anime_scope": "Production I.G. model sheet clarifies costume construction; color art only maps costume colors to garment parts. Anime is not palette, identity, gameplay or lore authority.",
+        "reference_contract": "SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_asset_contract_v4.json",
+        "reference_lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_lineage_v4.json",
+        "pixels_poses_or_composition_copied": false,
+        "boundary_gate": "PASS: audit_reference_boundary.py --project SMS_projects/master_of_fighters",
+        "sprite_application": "The approved design fed jj_idle_12f_sms_96px_v4, a 12-frame J.J. idle study. The anime did not replace the 13-color jj_zillion_ii palette; the sheet uses index 0 transparency, no dithering, and has a distinct per-frame geometry contract.",
+        "resource_gate": "PASS: audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character jj_zillion_ii",
+        "animation_gate": "PASS: audit_animation_semantics.py; 12 unique frame hashes, visible height 72–76 px, width 61–66 px, baseline y=95.",
+        "limits": "The boundary gate checks declared roles, limits and hash format; it does not compare source images or prove visual fidelity. The sprite sheet awaits separate owner review and is not integrated or emulator-validated."
+      },
+      "rule_section": "SMS_GLOBAL §88",
+      "tool_that_measures": "audit_reference_boundary.py; audit_validate_resources.py --kind sheet --character",
+      "skill_that_teaches": "workflows/new-visual-asset.md"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L104",
+    "mastery": "O gate confere a declaração da fronteira e os hashes registrados, não a semelhança visual. O próximo ganho seria um processo de revisão independente que compare cada atributo aprovado do jogo com a arte SMS em tamanho de destino, sem transformar paleta ou pose de uma adaptação em autoridade."
+  }
+}

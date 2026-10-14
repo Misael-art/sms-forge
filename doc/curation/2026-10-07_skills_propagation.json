@@ -1,0 +1,136 @@
+{
+  "curation_id": "2026-10-07_skills_propagation",
+  "date": "2026-10-07",
+  "kind": "curation_followup",
+  "authorization": "Pedido explícito: atue como curador e avalie o que mais tem para ser curado e aplicado aos skills",
+  "scope": "skills/workflows/lei centrais, gate learning capture, selftest e doc; sem .agent locais/fontes/assets de jogos",
+  "lessons": [],
+  "applied_lessons": [
+    "L036",
+    "L037",
+    "L038",
+    "L039",
+    "L056",
+    "L057",
+    "L060",
+    "L065",
+    "L066",
+    "L067",
+    "L071",
+    "L083",
+    "L093",
+    "L094",
+    "L095",
+    "L097"
+  ],
+  "dedup_key": "existing_lessons_skills_private_qa_mugen_source_scope_20261007",
+  "rule_section": "SMS_GLOBAL §101; aplicação §§93–100 e78–80",
+  "tool_that_measures": "audit_learning_capture.py; capture_video.py; audit_import_semantics.py; mugen2sms/analysis/air_source_identity.py; mugen2sms/generators/scene_cut.py; mugen2sms/generators/fight_runtime_data.py; selftest.py",
+  "decision": {
+    "status": "applied to canonical skills; offline regressions and native independent review passed; global documentation gate remains blocked by luta_mugen read errors",
+    "new_lesson_ids": false,
+    "registry_unchanged": true,
+    "promotion": "Canonical skill guidance and measured syntactic regression checks; no game capability"
+  },
+  "promoted_points": [
+    "Sessão privada/ID/SHA e inputframes propagados para skills de evidência,input,luta,vídeo,áudio e release.",
+    "Timeline completa vs endpoints; IDs AIR distintos mesmo RGB; fonteAIR finita não é traceROM.",
+    "MUGEN parse/generated/consumed/runtime separados; origemDEF/SHA e papelcontabilizado por slot.",
+    "Perfis close/far conservam ordem, geometriafronteiras e limitações; animaçãohold/fases e HitDef/physics/velset explicitados.",
+    "Gate detecta7 contradições antes e passa apóscorreções; comandos globais copiáveis bloqueados mesmo com marcador histórico."
+  ],
+  "evidence": {
+    "source_inventory": "doc/curation/evidence/2026-10-07_skills_propagation/source_inventory.json",
+    "before_gate": "doc/curation/evidence/2026-10-07_skills_propagation/before_gate.json",
+    "importer_focused": {
+      "passed": 45,
+      "total": 45,
+      "log": "doc/curation/evidence/2026-10-07_skills_propagation/importer_focused.log"
+    },
+    "independent_review": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/independent_review.json",
+      "sha256": "4c193ed604136be868e9093835a76fd71fc99420c3601ad02a75000a5a8db14e"
+    },
+    "skill_changes": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/skill_changes.json",
+      "sha256": "f590037b7b87f88983d16ce6981ac11e5b5a7abd7ef0c820f50b51b09b83a373"
+    },
+    "source_only_air_export": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/ryo221_source_only.json",
+      "sha256": "fdf107e150b8e95a98723f17c48e10587b513697cfe5841100e1c4819f42967b"
+    },
+    "source_only_selfcheck": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/air_source_selfcheck.log",
+      "sha256": "d05ca0b3dd8bc7624ed61fa8375f5d9609c2c32912f79dae1e270c94979ad810"
+    },
+    "far_record_validation": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/far_record_validation.json",
+      "sha256": "aa42889322a1a7b6050c0133e53b3229250a9924b0ccd1d2ef8ea67c25fee2e4"
+    },
+    "report": "doc/curation/evidence/2026-10-07_skills_propagation/report.md",
+    "before_contradictions": 7,
+    "after_contradictions": 0,
+    "new_emulator_sessions": 0
+  },
+  "limits": [
+    "EIO persiste em luta_mugen/doc; estado operacional atual não pode ser curado integralmente e doc_sync global permanece gate obrigatório.",
+    "Registros intake/geração são estáticos de cortes específicos; objeto C e simulador não provam ROM, gameplay, FPS, zero flicker, áudio ou budgetdinâmico.",
+    "Gate textual reconhece frases/commands explícitos; não é interpretação semântica completa e pode exigir ampliação para outras redações.",
+    "Não houve execução nova de ROM nesta rodada de skills; evidências nativas da rodada anterior têm alcance histórico diagnóstico.",
+    "Tests archives sintéticos validam casos delimitados; sem certificação universal.",
+    "IdentidadeAIR fonte é export source-only; ROM precisa instrumentação e tracefresco porfronteira."
+  ],
+  "factory_checks": {
+    "status": "partial; workspace global documentation gate remains failed",
+    "selftest": {
+      "passed": 90,
+      "total": 90,
+      "optional_build_probe": "not_run",
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/selftest_final.log",
+        "sha256": "6f6adfd0ea3cc542639ba8134e35b4a6c2a0848b9aefa406064f5f0b86f44689"
+      }
+    },
+    "measurement_tools": {
+      "passed": 54,
+      "total": 54,
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/measurement_tools_final.log",
+        "sha256": "8e8a454cb19e0f01e78b495ace3597d7c9741d6aaf2872073fd64f5871f7cbf6"
+      }
+    },
+    "importer_focused": {
+      "passed": 45,
+      "total": 45,
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/importer_focused.log",
+        "sha256": "8a21c81dbe43ac7bcd0159a8337c1624a73e4114369c4cbda2f923c9e476b7ee"
+      }
+    },
+    "learning_capture": {
+      "status": "passed",
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/learning_capture_final.log",
+        "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3"
+      },
+      "result": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/learning_capture_final.json",
+        "sha256": "89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39"
+      }
+    },
+    "doc_sync": {
+      "status": "failed",
+      "exit_code": 1,
+      "problems": 10,
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/doc_sync_final.log",
+        "sha256": "f06e323fc4168e72fe6fa4af0b1576cc71a323c4a43b5781e2ffc5433a5f1e55"
+      },
+      "result": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_skills_propagation/doc_sync_final.json",
+        "sha256": "15284ab7be8d379fa7b50fccc64697eeee610e576ee3d886b025daae0f00ed38"
+      }
+    }
+  },
+  "claim_ceiling": "canonical guidance and measured tool/record scopes only"
+}

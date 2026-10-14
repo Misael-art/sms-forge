@@ -2,6 +2,11 @@
 
 Aplicar em criação, revisão e promoção de consumidores do motor. Norma:
 `doc/05_technical/mugen_engine_standard.md`; regra SMS_GLOBAL §68.
+Intake e seleção de states/actions seguem `skills/sms-mugen-source-semantics.md`:
+parse, geração, consumo no código e execução em ROM têm provas distintas.
+Otimizações/caches/slots SAT seguem `skills/sms-runtime-optimization.md` (§103):
+incidência na janela ativa, wrap de contadores, invalidação, fallback e
+comparação do trabalho completo. Modelos estáticos não aprovam render dinâmico.
 Pedido humano de 2026-09-26 autoriza esta curadoria. Escala pequena T10 é controle
 histórico. O piso de entrega exige contrato do jogo e não reduz a ambição para
 acomodar o primeiro backend.
@@ -12,14 +17,36 @@ acomodar o primeiro backend.
    `--project <projeto>`. PASS de planning só confirma contrato completo.
 3. Intake de arquivos MUGEN somente leitura → IR → classes de fidelidade.
    Preservar fonte, máscara, frame vazio, duração, pivot, CLSN e licença.
+   Antes da matriz de golpes, derive um perfil de controle por personagem a
+   partir do `.cmd` e das definições de comando daquele pacote. Registre SHA da
+   fonte, botões físicos, tiers/limiares e golpes deliberadamente descartados;
+   rode `move_checklist.py --controls <perfil-do-personagem>`. Não reutilize o
+   mapa do personagem anterior por conveniência. Só marque `DROPPED` quando a
+   decisão estiver explícita; ausência de suporte sem decisão continua
+   `BLOCKED` (L093–L094). Semântica de tier precisa de teste diferencial e
+   mutação, mas isso ainda não prova custo Z80 nem latência da ROM (L095).
 4. Declarar canvas, área útil, escala opaca idle, poses excepcionais, input,
    roteiro, storyboard e coreografia. Antes da arte completa, gerar um corte
-   piloto com razão uniforme por lutador; executar
-   `mugen2sms/analysis/scale_pilot.py --self-check`, emitir o relatório de
-   poses/stream e mostrar uma ROM diagnóstica no Emulicious. Reexecutar o mesmo
-   relatório com `--video <captura.mp4>` para medir máscara, facing e pivô do
-   frame inspecionado. Isso não aceita cadência AIR, zero-flicker ou ação
-   completa. A entrega vigente exige zero omissões visíveis além do orçamento
+    piloto com razão uniforme por lutador; executar
+    `mugen2sms/analysis/scale_pilot.py --self-check`, emitir o relatório de
+    poses/stream e mostrar uma ROM diagnóstica no Emulicious. Reexecutar o mesmo
+    relatório com `--video <captura.mp4>` para medir máscara, facing e pivô do
+    frame inspecionado. Isso não aceita cadência AIR, zero-flicker ou ação
+    completa. Antes de investir num scheduler sprite-only para zero omissões,
+    calcule o limite inferior de sprites de 8 px por scanline sobre os pixels
+    opacos exatos do corte, já na escala e espaçamento pretendidos. No
+    `luta_mugen`, `integrada/tools/line_lower_bound.py --self-check` valida o
+    medidor atual; sua evidência do par Ken/Ryu encontrou linhas que exigem 9–10
+    sprites quando o VDP só exibe 8. Se qualquer pose exceder 8, sprite-only
+    sem omissões é impossível para aquela composição: pare a otimização do
+    scheduler para esse objetivo e compare reautoria/escala/espaçamento com BG
+    ou híbrido. Um limite ≤8 é apenas condição necessária, nunca aprovação. Rode
+    então a simulação real de scanline/SAT, confira a imagem quadro a quadro com
+    `audit_render_glitch.py` e meça VRAM, VBlank/worst-frame e FPS na ROM. Essa
+    prova é específica ao corte medido; não transfira o resultado para outro
+    personagem, escala ou distância. A etapa aplica evidência já registrada com
+    L090; não cria uma nova lição nem promove capacidade. A entrega vigente
+    exige zero omissões visíveis além do orçamento
    físico; multiplexação permanece diagnóstico e bloqueia promoção. Conservar
    ordem, duração, pivôs/eixos, offsets e CLSN nos dados;
    medir o pool literal de patterns da família idle e mudanças entre frames;
@@ -77,5 +104,27 @@ acomodar o primeiro backend.
     com omissão visível reprova a entrega.
 
 A CLI `python -m mugen2sms --help` lista apenas rotas SMS existentes.
+
+Adendo §§99–100: não começar QA de produção sem memory/GDD/spec/TDD legíveis.
+Erro de leitura bloqueia a preparação afetada; não omitir nem reconstruir
+documentos. Diagnóstico de fixture exige modo/motivo explícitos e não promove
+o jogo. Para ordem AIR, emitir export fonte e trace ROM com IDs por N+1
+fronteiras (terminal incluso), no perfil `air_identity_timing`; executar
+`audit_import_semantics.py --record ... --require-air-identity` e revisar
+independentemente fonte/export/probe. `air_timing` histórico continua duração
+apenas; índice visto em amostra DAP não prova identidade em cada fronteira.
+
+Adendo de expertise (SMS_GLOBAL §§95–98): QA usa snapshots V2 e relação
+independent/chained explícita. Antes de aceitar dispatcher, registre unidade,
+escala/frentes/facing e casos na fronteira fonte; valide o perfil suportado
+com `audit_import_semantics.py --record ...` e a prova ROM correspondente.
+Para timing AIR, compare fronteiras ROM e durações fonte; imagens iguais não
+eliminam elementos. Reúso CMD byte-exato preserva símbolos/SIZE e precisa de
+mapa pós-link, não de claim de folga futura. Cache de colisão precisa de
+revisões válidas no contato e testes de defensor móvel/guarda/facing;
+prova com P2 parado não paga isso. Selos de etapa devem passar
+`audit_stage_attribution.py --report ...` antes de atribuição agregada; PASS do
+perfil não converte overflow em budget aprovado. Conserve fonte e observações
+hasheadas nos registros; o gate mede consistência, não compatibilidade CNS geral.
 Para qualidade: `PYTHONPATH=tools/sms_wrapper python3 -m mugen2sms quality-check
 --project SMS_projects/luta_mugen [--delivery]` (em uma linha).

@@ -21,6 +21,8 @@ que foi desenhada — nao ruido, nao outro sprite.
 Uso:
   audit_render_fidelity.py --shot <captura.png> --art <arte.png>
       [--at X,Y] [--min-match 0.90] [--json <saida>]
+  audit_render_fidelity.py --shot <captura.png> --art <arte-indexada.png>
+      --at X,Y --exact-indexed [--transparent-rgb RRGGBB] [--json <saida>]
   audit_render_fidelity.py --self-check
 Exit: 0 arte confirmada na tela | 1 nao encontrada | 3 uso
 """
@@ -190,6 +192,67 @@ def find_art(shot_path, art_path, at=None, min_match=DEFAULT_MIN_MATCH):
                  f"ruido, outro sprite, ou a arte corrompida"], report)
     return [], report
 
+def exact_indexed_render(shot_path, art_path, at, transparent_rgb=None):
+    """Compare exact SMS palette RGB at an explicitly aligned native origin.
+
+    This mode is for static conversion probes at 1:1 VDP resolution. It checks
+    every nontransparent source pixel against its indexed RGB value. When a
+    uniform diagnostic background is known, transparent pixels can also be
+    checked so stale name-table/VRAM content cannot hide behind the sprite.
+    """
+    report = {"shot": shot_path, "art": art_path, "mode": "exact_indexed",
+              "at": list(at) if at else None, "transparent_rgb": transparent_rgb}
+    if at is None:
+        return ["--exact-indexed exige --at X,Y na escala nativa"], report
+    try:
+        art = read_indexed_png(art_path)
+        sw, sh, screen = read_png_rgb(shot_path)
+    except (PngError, OSError) as exc:
+        return [f"arte/captura ilegível: {exc}"], report
+    x0, y0 = at
+    w, h = art["w"], art["h"]
+    report["art_size"] = [w, h]
+    if x0 < 0 or y0 < 0 or x0 + w > sw or y0 + h > sh:
+        return ["recorte de arte fora da captura"], report
+    if transparent_rgb is not None and (len(transparent_rgb) != 3 or
+            any(not isinstance(v, int) or not 0 <= v <= 255 for v in transparent_rgb)):
+        return ["transparent_rgb precisa ser uma tripla RGB 0..255"], report
+
+    opaque_total = transparent_total = opaque_bad = transparent_bad = 0
+    first = []
+    for y, row in enumerate(art["pixels"]):
+        for x, index in enumerate(row):
+            actual = tuple(screen[y0 + y][x0 + x])
+            if index == 0:
+                if transparent_rgb is not None:
+                    transparent_total += 1
+                    if actual != tuple(transparent_rgb):
+                        transparent_bad += 1
+                        if len(first) < 8:
+                            first.append({"x": x, "y": y, "source_index": 0,
+                                          "expected": list(transparent_rgb),
+                                          "actual": list(actual)})
+                continue
+            opaque_total += 1
+            if index >= len(art["palette"]):
+                return [f"índice {index} sem cor PLTE na fonte"], report
+            expected = tuple(art["palette"][index])
+            if actual != expected:
+                opaque_bad += 1
+                if len(first) < 8:
+                    first.append({"x": x, "y": y, "source_index": index,
+                                  "expected": list(expected), "actual": list(actual)})
+    report.update({"opaque_pixels": opaque_total, "opaque_mismatches": opaque_bad,
+                   "transparent_pixels_checked": transparent_total,
+                   "transparent_mismatches": transparent_bad,
+                   "first_mismatches": first})
+    problems = []
+    if opaque_bad:
+        problems.append(f"{opaque_bad}/{opaque_total} pixels opacos divergem da paleta indexada")
+    if transparent_bad:
+        problems.append(f"{transparent_bad}/{transparent_total} pixels transparentes não mostram o fundo declarado")
+    return problems, report
+
 def _self_check():
     import tempfile, shutil, random
     from png_io import write_indexed_png, write_png_rgb
@@ -237,10 +300,39 @@ def _self_check():
         write_png_rgb(other, W, H, rows2)
         p, _ = find_art(other, art, at=(10, 12))
         assert p, "sprite errado nao pode passar por arte autoral"
+
+        # Conversão indexada SMS: todos os pixels opacos devem preservar RGB;
+        # quando o fundo é uniforme, índice 0 também precisa mostrar esse fundo.
+        exact_rows = [[(0, 0, 0)] * W for _ in range(H)]
+        for y in range(8):
+            for x in range(8):
+                if px[y][x]:
+                    exact_rows[12 + y][10 + x] = pal[px[y][x]]
+        exact_shot = os.path.join(d, "exact.png")
+        write_png_rgb(exact_shot, W, H, exact_rows)
+        p, exact_report = exact_indexed_render(exact_shot, art, (10, 12), (0, 0, 0))
+        assert not p and exact_report["opaque_mismatches"] == 0 and \
+            exact_report["transparent_mismatches"] == 0, (p, exact_report)
+
+        changed_rows = [list(row) for row in exact_rows]
+        changed_rows[12][10] = (170, 0, 0)
+        changed_shot = os.path.join(d, "exact_changed.png")
+        write_png_rgb(changed_shot, W, H, changed_rows)
+        p, changed_report = exact_indexed_render(changed_shot, art, (10, 12), (0, 0, 0))
+        assert p and changed_report["opaque_mismatches"] > 0, \
+            "pixel de conversão alterado deveria reprovar"
+
+        dirty_rows = [list(row) for row in exact_rows]
+        dirty_rows[13][11] = (255, 0, 255)  # índice 0 na fonte, sujeira no BG
+        dirty_shot = os.path.join(d, "dirty_bg.png")
+        write_png_rgb(dirty_shot, W, H, dirty_rows)
+        p, dirty_report = exact_indexed_render(dirty_shot, art, (10, 12), (0, 0, 0))
+        assert p and dirty_report["transparent_mismatches"] > 0, \
+            "tilemap transparente sujo deveria reprovar"
     finally:
         shutil.rmtree(d, ignore_errors=True)
-    print("[SELF-CHECK OK] render_fidelity (acha a arte autoral independente da "
-          "paleta; reprova ruido e sprite errado no mesmo lugar)")
+    print("[SELF-CHECK OK] render_fidelity (comparação estrutural e pixel-a-pixel; "
+          "reprova pixel divergente e lixo sob transparência)")
     return 0
 
 def main():
@@ -249,6 +341,9 @@ def main():
     ap.add_argument("--art")
     ap.add_argument("--at", help="X,Y para checar uma posicao especifica")
     ap.add_argument("--min-match", type=float, default=DEFAULT_MIN_MATCH)
+    ap.add_argument("--exact-indexed", action="store_true",
+                    help="pixel-a-pixel em PNG 8-bit indexado e captura 1:1")
+    ap.add_argument("--transparent-rgb", help="verifica pixels de índice 0 contra RRGGBB")
     ap.add_argument("--json")
     ap.add_argument("--self-check", action="store_true")
     a = ap.parse_args()
@@ -261,6 +356,32 @@ def main():
     if a.at:
         x, _, y = a.at.partition(",")
         at = (int(x), int(y))
+    if a.exact_indexed:
+        transparent_rgb = None
+        if a.transparent_rgb:
+            raw = a.transparent_rgb.lstrip("#")
+            if len(raw) != 6:
+                print("[FAIL] --transparent-rgb exige RRGGBB", file=sys.stderr)
+                return 3
+            try:
+                transparent_rgb = tuple(int(raw[i:i + 2], 16) for i in (0, 2, 4))
+            except ValueError:
+                print("[FAIL] --transparent-rgb exige hexadecimal RRGGBB", file=sys.stderr)
+                return 3
+        problems, report = exact_indexed_render(a.shot, a.art, at, transparent_rgb)
+        if a.json:
+            json.dump({"problems": problems, **report}, open(a.json, "w"), indent=2)
+        if problems:
+            for problem in problems:
+                print(f"[FAIL] {problem}")
+            return 1
+        print(f"[PASS] conversão indexada exata: {report['opaque_pixels']} pixels opacos" +
+              (f", {report['transparent_pixels_checked']} transparentes/fundo"
+               if transparent_rgb else "") + f" em {at}")
+        return 0
+    if a.transparent_rgb:
+        print("[FAIL] --transparent-rgb requer --exact-indexed", file=sys.stderr)
+        return 3
     problems, report = find_art(a.shot, a.art, at, a.min_match)
     if a.json:
         json.dump({"problems": problems, **report}, open(a.json, "w"), indent=2)

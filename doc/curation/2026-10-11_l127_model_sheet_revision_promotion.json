@@ -1,0 +1,33 @@
+{
+  "curation_id": "2026-10-11_l127_model_sheet_revision_promotion",
+  "date": "2026-10-11",
+  "title": "Revisão disciplinada, promoção e arquivamento de concept/model sheets",
+  "kind": "curation",
+  "scope": "Workflow de arte autoral para matrizes conceituais e model sheets; revisão por delta, dupla checagem, aprovação com escopo e organização do acervo.",
+  "authorization": "O proprietário validou explicitamente a model sheet CPS2-Alpha-Cel v4 do Dr. Social, pediu registrar a metodologia e manter somente a matriz ativa com sidecars canonizados na raiz, arquivando as versões anteriores e exercícios.",
+  "lessons": [
+    {
+      "id": "L127",
+      "status": "promovida_com_workflows_e_gates_existentes",
+      "lesson": "Congele o SHA da matriz de identidade aceita e converta cada comentário de revisão em um delta visual verificável, preservando invariantes explícitos. Gere uma nova versão sem sobrescrever a anterior. Após a correção, repita o checklist completo e faça uma segunda passagem focada nos riscos adjacentes: cadeia ombro-cotovelo-punho-mão, pegada/arma/terminal, separação de membros e objetos, silhueta, vistas, composição e legibilidade. Fontes divergentes ficam marcadas como referência aberta, sem converter a prancha em decisão de moveset. A promoção ocorre somente após checklist completo e hash-bound, revisão independente sem blockers e aprovação explícita do proprietário. Registre a decisão real no escopo exato do papel, atualize o head único, arquive o antigo head e exercícios em suas pastas históricas sem apagar evidências, e mantenha na raiz apenas a última matriz ativa aprovada e seus sidecars canonizados. Registre cada relocação por caminho e SHA; atualizar caminhos não altera pixels nem renova review.",
+      "root_cause": "Iterações anteriores repetiram ambiguidades de anatomia e identidade de equipamento porque os apontamentos não eram traduzidos em invariantes, delta e evidência de fechamento antes da geração. A v3 do model sheet manteve dúvida na inserção do braço da bengala e competição visual com o boomerang; a v4 tratou esses pontos, distinguiu os objetos e manteve questões de inventário do jogo como referência aberta. A revisão independente confirmou os eixos e não reportou blockers; o proprietário aprovou explicitamente a mesma imagem v4. O primeiro pedido de review também exigiu corrigir um SHA stale da imagem v3 antes da confirmação final, reforçando a conferência dos artefatos exatos antes do parecer.",
+      "evidence": {
+        "approved_image": {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+        },
+        "independent_review": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_cps2_alpha_cel_v4_independent_review_v1.json",
+        "owner_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_cps2_alpha_cel_v4_review_v1.json",
+        "owner_decision": "SMS_projects/master_of_fighters/doc/decisions/dr_social_model_sheet_cps2_alpha_cel_v04_owner_approval.json",
+        "artifact_registry": "doc/artifact_registries/master_of_fighters.json",
+        "organization_map": "SMS_projects/master_of_fighters/doc/curation/dr_social_model_sheet_v4_promotion_organization_2026-10-11.json",
+        "previous_review_snapshot": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/"
+      },
+      "rule_section": "SMS_GLOBAL §117",
+      "tool_that_measures": "audit_art_review_checklist.py; quality_review_router.py; artifact_registry.py --scan; audit_learning_capture.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/workflows/original-artwork.md; tools/sms_wrapper/.agent/workflows/art-review.md; tools/sms_wrapper/.agent/workflows/artifact-organization.md",
+      "measurement_limits": "Os gates conferem cobertura dos eixos, estados, hashes, decisão declarada e organização do registro. Não julgam sozinhos anatomia, fidelidade artística, autenticidade do proprietário ou qualidade AAA. O relatório independente permanece evidência da imagem e dos caminhos revisados originalmente; o mapa de organização registra continuidade por SHA quando arquivos são movidos. A aprovação da v4 é somente model sheet; nomenclatura de alguns itens de origem continua aberta e não aprova sprites, moveset, animação, SMS, ROM ou entrega."
+    }
+  ],
+  "dedup_key": "l127_model_sheet_delta_doublecheck_promotion_archive_20261011"
+}

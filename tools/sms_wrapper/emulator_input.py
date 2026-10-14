@@ -30,6 +30,13 @@ EVDEV = {
     "F7": 65, "F8": 66, "F9": 67, "F10": 68, "F12": 88,
 }
 
+def run_session_sequence(session, steps):
+    """Private P1/P2 masks for exact VDP frames; no desktop keyboard/focus.
+    steps = [{"p1":16,"p2":0,"frames":3}, ...]. ROM observation is separate.
+    """
+    from session_bridge.isolated import sequence
+    return sequence(session, steps)
+
 
 def _run(cmd, timeout=20, env=None):
     try:
@@ -279,6 +286,17 @@ def _self_check():
 def main():
     if "--self-check" in sys.argv:
         return _self_check()
+    if "--session" in sys.argv:
+        import argparse,json
+        parser=argparse.ArgumentParser()
+        parser.add_argument("--session",required=True)
+        parser.add_argument("--script",required=True,help="JSON list of masks and VDP frame durations")
+        a=parser.parse_args()
+        try:
+            with open(a.script) as source:steps=json.load(source)
+            print(json.dumps(run_session_sequence(a.session,steps),indent=2));return 0
+        except (OSError,RuntimeError,ValueError) as e:
+            print("[FAIL] "+str(e),file=sys.stderr);return 2
     print("uso: emulator_input.py --self-check", file=sys.stderr)
     return 3
 

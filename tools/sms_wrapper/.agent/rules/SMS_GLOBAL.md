@@ -49,9 +49,14 @@ bloqueios). Handoff nunca substitui memory bank nem evidência.
   vazia não prova a quebra — ponha forma reconhecível nela (L046).
 
 ## 7. Lei de sprites
-- SAT: máx **64 sprites**; terminador Y=0xD0 corta o processamento.
-- Máx **8 sprites por scanline**. Excesso é descartado; no VDP SMS1 corrompe a
-  linha. O simulador (`audit_sprite_line_sim.py`) aprova antes do runtime.
+- SAT: máx **64 sprites**; terminador Y=0xD0 corta o processamento
+  **somente no modo 192 linhas** (§118, L128).
+- Máx **8 sprites por scanline**. O limite é do buffer de parsing: as 8
+  primeiras entradas da SAT que caem na linha entram, da 9ª em diante são
+  descartadas, e entrada transparente ou fora da tela conta igual (§119, L129).
+  "No SMS1 corrompe a linha" constava aqui sem lastro no corpus nem em
+  medição: não é lei até ser provado (§23). O simulador
+  (`audit_sprite_line_sim.py`) aprova antes do runtime.
 - Tamanho global **8×8 ou 8×16**. Zoom ×2 dobra o PIXEL (16×16 / 16×32 na
   tela), não a arte. Nenhum modo é mais largo que 8 px; arte 16×16 exige
   metasprite (§25, L006). "8×8 ou 16×16" como modo VDP é número do Mega Drive.
@@ -62,7 +67,16 @@ bloqueios). Handoff nunca substitui memory bank nem evidência.
   evidência de emulador/console (§23).
 
 ## 8. Lei de paleta
-- CRAM 2 subpaletas ×16; índice 0 transparente nas duas → máx 30 úteis simultâneas.
+- CRAM tem duas tabelas de 16 entradas: P0 pode ser selecionada por tiles de
+  BG; sprites usam P1. Índice 0 é transparente para pixels de sprite em P1,
+  mas índice 0 de BG é cor visível (incluindo o backdrop), não alpha — mesmo
+  quando um tile BG seleciona P1. Não
+  afirmar que os dois índices 0 são transparentes.
+- Assets de personagem em PNG indexado usam índice 0 como transparência e até
+  15 cores úteis. Isso não significa uma tabela CRAM própria por personagem:
+  todos os sprites ativos compartilham P1. Tiles BG podem selecionar P1 para
+  reutilizar cores, sem criar entradas CRAM adicionais. A política de runtime
+  por jogo deve declarar slots compartilhados e cores ainda não mapeadas.
 - Cor = código 6-bit. Contrato de assets: canal×85. Sem gradiente suave;
   fade = recarga de paleta sincronizada ao VBlank.
 - Contraste medido em degraus de luma derivada (`audit_luma_floor.py`).
@@ -536,10 +550,10 @@ falha: ele mede o binário errado e emite **veredito confiante sobre o seu**.
 O perigo já tinha lei (§34/L017) e mesmo assim tinha **três tratamentos**: dois
 gates abortavam, um matava, e dois não faziam nada. Lei sem enforcement uniforme
 é lei só onde alguém lembrou.
-Política única em `emulator_session.py`: **ABORT** por padrão (matar processo do
-usuário sem pedir é pior que falhar — ele pode estar depurando); **KILL** só
-onde a lição exige (L048, dentro da retentativa de áudio). A mensagem nomeia o
-defeito, não só o estado.
+Política histórica: ABORT por padrão e KILL na retentativa de áudio (L048).
+**Supersedida pelo §93:** descobrir um PID não prova propriedade; KILL global
+foi removido. A rota antiga aborta em presença de outra instância; a privada
+permite concorrência e encerra apenas seus filhos identificados.
 **Detecção é por JVM, não por linha de comando:** `pgrep -f` casa também o SHELL
 que invocou a ferramenta — medido, 3 PIDs onde havia 1 emulador. Confirme
 `argv[0]` ser `java`, senão o gate aborta por causa de quem o chamou.
@@ -805,39 +819,35 @@ instrumentação não tem orçamento — nem "pass", nem "derramou" — e não e
 no ledger. Generaliza §56: um endereço só vale onde uma ferramenta provou que
 a ROM o escreve.
 
-## 63. Presença de áudio não é áudio: o piso musical é medido no stream (L078)
-Feedback humano de 2026-09-25: "todos os sons foram ruídos nos testes e
-péssimos de se ouvir". Medido: o gate de presença (`audit_audio.py`: peak,
-% ativo) nunca reprova um buzzer, e os "arranjos" do acervo são literal
-um buzzer — `make_psg_assets.py` escreve a mesma nota nos 3 canais a cada
-frame com atenuação 1 e ruído periódico colado, com loop de 0,2–1,9 s
-(documentado em `doc/psg_quality_ledger.json`: 7/7 músicas reprovam).
-O SN76489 não tem acorde, não tem ataque, não tem timbre — as técnicas que
-os jogos clássicos arrancam do chip (arpejo multiplexado ~30 Hz simulando
-acorde, envelope de volume simulando ataque/eco, ruído branco gateado como
-percussão, contraponto para preencher espectro, SFX que roubam o canal menos
-ativo sem matar a música) são o próprio piso, não enfeite.
-
-Regra: o eixo `audio` de uma entrega exige `audit_psg_quality.py` passando
-no stream (M1 ritmo ≥ 2 frames/nota, M2 ≥ 2 atenuações por canal ativo,
-M3 uníssono ≤ 50%, M4 percussão branca ≥ 50% com envelope, M5 loop ≥ 125
-frames, M6 ≥ 2 canais; SFX com decaimento e ≤ 45 frames). "Soa estranho" é
-entrada de medição, não opinião: cada cláusula aponta o byte do stream
-responsável.
+## 63. Presença e política de eventos não aprovam composição sozinhas (L078)
+O feedback auditivo de 2026-09-25 motivou análise do stream além de presença.
+Seu ledger é histórico: a interpretação do bit de ruído foi corrigida em
+2026-10-13 (§64). `audit_psg_quality.py` mede políticas de eventos PSGlib
+simples na primeira passagem, não timbre percebido ou qualidade musical.
+Gap médio entre escritas não é gap mínimo entre notas nem andamento audível;
+reescrever o mesmo período não necessariamente produz nota nova.
+O piso atual e limites de M1–M7/S1–S2 estão em `skills/sms-psg-composition.md`.
+Stream comprimido sem decoder qualificado reprova, não é ignorado como silêncio.
+Captura privada, mix de música/SFX, restauração dos canais, audição/review e
+comparação alinhada de referência continuam necessários ao eixo de áudio.
+Nenhum PASS de heurística mede adequação comercial ou garante composição boa.
 
 ## 64. Registrador mal lido vira defeito audível; arranjo declarado é o do STREAM (L079)
-Dois achados da mesma FAMILY (L069: afirmação sobre hardware sem verificar
-a codificação). (a) No latch de ruído `0xE0|fb|per`, bit 2 = modo
-PERIÓDICO: o gerador mais rico do acervo chama "bumbo" a 0x06 e "caixa" a
-0x04 — 99% da "percussão" do tema do Ken é assobio tonal; branco legítimo
-é 0x00–0x03. (b) O bank declarava o tema em 4 papéis; o `.psg` em disco não
-tem UM evento de nota em ch1 (o arpejo nunca chegou ao binário) e a faixa
-é byte-idêntica à `music_battle`.
+Correção 2026-10-13: a codificação anterior desta seção estava invertida.
+No latch `0xE0|fb|per`, bit2=1 é branco (4–7), bit2=0 é periódico (0–3);
+bits1..0=3 usam tone ch2. Fonte primária local BlastEm `psg.c`/`sms.c` e
+PSGlib foram hasheadas na evidência de curadoria. A afirmação antiga sobre
+"99% periódico" não é prova válida e fica supersedida, preservada no histórico.
+Arranjo declarado é o stream medido, não comentário ou número de papéis.
+O achado histórico de ch1 ausente/cópia idêntica não autoriza inferir o estado
+de uma versão posterior sem medir seu SHA.
 
 Regra: claim de arranjo é claim sobre o stream medido (canais ativos, modos
 de ruído, envelopes), nunca sobre o fonte do gerador ou o comentário do
-manifesto. `audit_psg_quality.py` decodifica o binário `.psg`; periodicidade
-de ruído em música e canal declarado-silencioso caem ali.
+manifesto. `audit_psg_quality.py` decodifica o `.psg` simples; o gerador root
+usa clock/(32*Hz) para período de tone, e arrange seleciona branco sem apagar
+os bits de taxa. Preview offline modela LFSR nominal: não é captura do chip,
+não prova clock/counter compartilhado, analógico ou fidelidade de mix.
 
 ## 65. Andamento percebido e identidade são medidos; com referência, o arranjo é transcrição (L080)
 O piso L078 deixa passar faixa que "soa acelerada": todas as camadas escrevendo
@@ -1061,3 +1071,1191 @@ a pose em até oito quadros; não significa flicker zero nem substitui a leitura
 da visibilidade por região. O self-check reproduz fundo azul/verde com ambos
 os atores ausentes, testa uma captura válida, rejeita palco claro sem placa e
 exercita HUD dinâmico e regiões nomeadas.
+
+## 78. Premissa de hardware herdada se re-deriva do header, não do texto do doador (L093)
+
+Ao assimilar técnica de outro workspace (ex.: `mugen2sgdk_forge`), copie o
+método e re-derive cada premissa de hardware do header do alvo (autoridade #8)
+antes de herdar o texto. `converters/sms_cmd.py` dizia "1 botão" e "diagonal
+mecanicamente impossível"; `SMSlib.h:296-302` tem `KEY_1` e `KEY_2` e a
+diagonal é a união de duas direções (só direções opostas são impossíveis). A
+premissa errada bloqueou 64 de 70 comandos do Ken. `audit_hardware_constants.py`
+reprova essas duas frases em doutrina e em `mugen2sms/**/*.py` (só essa regra
+lê código; contagens medidas em docstrings continuam legítimas). Nota de
+correção que cita a frase antiga ("corrigido", "dizia") passa.
+
+## 79. Decisão registrada não é falha: DROPPED ≠ BLOCKED (L094)
+
+Uma matriz de capacidade deve separar o que foi descartado por decisão
+declarada (`ControlMap.dropped`, ex.: golpes médios) do que falhou
+(`BLOCKED`). Sem essa separação o número mede a falta de decisão, não a
+qualidade do conversor. `mugen2sms/analysis/move_checklist.py` emite OK,
+DEGRADED, DROPPED e BLOCKED; o relatório imprime o mapa e os botões
+inalcançáveis. É leitura estática de digitabilidade e fidelidade, não
+emulador.
+
+## 80. Temporização se prova por teste diferencial e mutação (L095)
+
+Latência derivada de prosa erra por um tick. Defina o relógio com precisão (T
+conta ticks de pressão a partir do toque, inclusive; forte no tick T−1, fraco
+no 1º tick solto; pior caso T−1 nos dois tiers) e compare a implementação C
+com uma referência independente em traces aleatórios
+(`mugen2sms/tests/test_input_tier_c.py`). Exija que uma mutação de um tick
+quebre o teste. `input_tier.c` não está ligado à ROM: sem build SDCC, sem custo
+Z80 e sem medição em emulador, o resultado vale só para a semântica.
+
+## 81. Comparar trilhas exige comprimento, chaves e cenários (L096)
+
+Comparar duas trilhas por tick com `zip` descarta a cauda mais longa: uma
+otimização que perde ticks no fim, ou que deixa de gravar um campo, parece
+equivalente. `mugen2sms/analysis/trace_compare.py` reprova diferença de
+comprimento, chaves divergentes, trilha vazia, cenário ausente e tick
+diferente. Equivalência prova só o estado gravado; não prova render, tempo de
+Z80 nem campos não gravados. Ainda não existe produtor de trilha SMS (host ou
+DAP): o comparador é o juiz, não a medição.
+
+## 82. Trilha por tick vem de gravador na ROM, não de laço de leitura do DAP (L097)
+
+O DAP só lê com a emulação pausada e pausa em tempo de parede: um laço de
+leitura não amostra tick a tick e não se reproduz. Para uma trilha
+determinística, use uma ROM clone que grava o próprio estado por tick em RAM a
+partir de um roteiro de entrada embutido (o pad real é ignorado) e despeje o
+buffer pelo DAP só depois de `done=1` (`luta_mugen_trace_dap.py`). Os ganchos
+na fonte canônica devem custar zero: prove por ROM idêntica byte a byte com e
+sem eles (`--check-canonical`), nunca por leitura de código. Determinismo se
+prova com duas construções independentes e despejo idêntico. A trilha grava
+estado, não render, SAT, FPS nem latência de input humano.
+
+## 83. Atraso de animação se atribui por trilha: tempo em tela × AIR, contador parado (L098)
+
+Para saber de onde vem a lentidão de uma ação, meça por tick quanto cada quadro
+ficou em tela (descontando hitstop) e compare com o `time` do AIR
+(`mugen2sms/analysis/trace_vs_air.py`). Se em todo quadro atrasado o contador
+`tick` ficou parado em 0 pelo menos o atraso, a causa é a espera de pose
+visível (streaming), não o dado do AIR, a tabela destilada nem a entrada; se o
+contador anda e há atraso, a ferramenta recusa essa explicação. É inferência
+de trilha + código, não medida direta da pose visível. Não generalize de um
+golpe com poses não residentes para golpes com poses em cache.
+
+## 84. Banda de upload manda na cadência: meça pares por pose e por tick antes de otimizar a ordem (L099)
+
+Antes de mexer em prioridade ou prefetch de streaming, meça (1) pares de 64 B
+por pose e quantos são novos em relação à pose anterior, (2) pares realmente
+copiados por tick e como se dividem entre os lutadores (perfil de fase +
+progresso do upload: `luta_mugen_trace_dap.py --profile`) e (3) a banda
+necessária para o `time` do AIR (pares ÷ ticks). Se a necessária for várias
+vezes a medida, prioridade só redistribui a escassez: testou-se "ação primeiro"
+(-34% no hit) e a pose ainda levou ~1,5 s. A saída é de escopo (menos pares por
+pose, desacoplar hit de arte, residência seletiva), não de ordem de upload.
+Experimentos de variante rodam só na cópia isolada, com trechos auditáveis por
+hash e sem tocar a fonte canônica; repita a execução antes de adotar.
+
+## 85. Cor de personagem SMS é contrato de paleta, não sugestão de prompt (L100)
+
+Conceito destinado ao Master System deve partir da paleta mestra 6-bit e da
+paleta declarada para o personagem no `doc/palettes_manifest.json`. Texto de
+prompt ou aprovação visual não prova cor de hardware. Para pixel art de sprite,
+se a origem vier em truecolor, converta para PNG indexado com índice 0
+transparente, grid 8×8, ≤15 cores úteis e RGB canal×85; as cores usadas também
+devem estar contidas na paleta de autoria do personagem. Essa paleta de autoria
+não representa uma tabela CRAM por lutador: todos os sprites compartilham P1 e
+precisam ser mapeados para a tabela comum antes da promoção. Para folhas de animação use
+`audit_validate_resources.py --kind sheet --character <id> --project <projeto>`.
+Se a paleta visual aprovada precisar de papéis diferentes, atualize a fonte
+geradora do manifesto e regenere-o antes de integrar; editar apenas JSON gerado
+não é reproduzível. Aprovação visual não fecha animação, escala, proveniência,
+vínculo asset→ROM nem validação em emulador (L100).
+
+## 86. Granulação em volta do sprite é defeito a limpar antes da promoção (L101)
+
+Inspecione cada folha no tamanho de destino: ruído RGB quase preto pode virar
+pixels opacos quando quantizado para uma paleta de personagem; Floyd–Steinberg
+também difunde erro para pixels vizinhos. Para uma folha de sprite com esse
+defeito, use:
+```
+prepare_sms_pixel_art.py IN.png OUT.png --size 320x240 --dither none \
+  --project <projeto> --character <id> --speckle-cleanup --cell-size 80x80
+```
+Depois rode
+`audit_validate_resources.py --kind sheet --character <id> --project <projeto>`.
+A limpeza conserva componentes conectados com pelo menos 12 pixels (RGB máx.
+acima de 32) e expande o contorno um pixel. Inspecione o resultado: detalhe
+pequeno significativo pode precisar de edição manual. Não altere o padrão de
+Floyd–Steinberg para conversões gerais de foto/conceito (L055).
+
+## 87. Escala visível e linha dos pés são contratos por quadro (L102)
+
+Uma folha com células do mesmo tamanho e pivô comum ainda pode variar de escala
+ou saltar na linha de base. Para cada ação, declare em `geometry_contract` o
+canvas, a faixa de largura/altura visível e `baseline_y_px`; rode
+`audit_animation_semantics.py --manifest <json> --project <projeto>`. O gate
+mede cada quadro pelo índice opaco, reprova bbox fora da faixa, baseline fora
+da tolerância ou canvas divergente e mantém as verificações de hash e pivô.
+Quando cada chave precisa de pose própria, marque `unique_frames_required: true`
+na ação para reprovar hash repetido dentro dela. Use junto com revisão das
+poses: hash diferente não prova movimento legível; o
+gate também não prova identidade, orçamento de scanline, metasprite, fidelidade
+em ROM ou aprovação humana (L102).
+
+## 88. Fonte suplementar só resolve lacuna autorizada; o jogo mantém autoridade (L103)
+
+Em personagem com versões em mais de uma mídia, registre no contrato quais
+papéis pertencem ao jogo Master System — identidade, paleta e comportamento —
+e quais detalhes uma fonte suplementar pode esclarecer. Material do anime só
+preenche a lacuna explicitamente autorizada pelo dono, como construção do
+figurino; não redefine identidade, paleta SMS, gameplay ou lore e não fornece
+pixels, poses ou composição copiados. Prenda cada referência a papel, URL e
+SHA-256 no lineage. `audit_reference_boundary.py` mede a presença e consistência
+desses campos e limites; `audit_validate_resources.py` mede a paleta SMS do
+asset. Nenhum desses gates prova fidelidade visual: a revisão humana continua
+obrigatória (L103).
+
+## 89. Pixel conectado ainda pode estar errado; AAA é alvo de trabalho, não claim (L104)
+
+Um componente único não prova um recorte limpo: um pixel de pele pode tocar por
+diagonal o cabelo e sobreviver ao filtro de componentes. Revise cada quadro no
+tamanho nativo e em ampliação nearest-neighbor; declare no contrato cores por
+material nas regiões críticas e rode `audit_sprite_cutout.py`. O gate reprova
+componentes opacos menores que o limite e RGB fora da região declarada; não
+julga o restante da fidelidade, por isso a revisão humana continua obrigatória.
+Ao remover fundo quadriculado, identifique amostras conectadas ao exterior e
+preserve tons iguais que pertençam à roupa; chave global por cor pode apagar
+detalhes legítimos. Busque qualidade AAA em cada função do agente, mas só use
+claim AAA com claim token e evidência dos gates de entrega (§17/L036); objetivo
+aspiracional não é certificação (L104).
+
+## 90. Harmonia visual do elenco é um gate de escala e proporção, não um pós-ajuste (L105)
+
+Em jogo com vários personagens, avalie a escalação como uma imagem única antes
+de promover folhas. Use as concepts/model sheets aceitas para identidade e
+biotipo; compare uma pose-fonte de cada sprite na escala nativa, com baseline
+comum e nearest-neighbor inteiro, sem normalizar cada figura para a mesma
+altura e esconder diferenças. A altura vem do contrato visual do projeto, não
+da classe de peso do gameplay. Registre por personagem as faixas-alvo de altura
+e largura e relações explícitas entre personagens; rode
+`audit_roster_harmony.py --manifest <perfil>` para medir bbox e relações de
+altura/largura. A largura inclui cabelo, capa e equipamentos; defina faixas de
+ocupação e relações específicas quando isso afetar a escala percebida, como
+Dr. Social ≈ Joe Musashi em largura (L105).
+
+O gate não detecta chibi, anatomia, leitura de silhueta, fidelidade ao conceito,
+densidade de clusters ou equivalência de acabamento. A revisão humana deve
+comparar cabeça/torso/pernas, volume aparente, contorno, agrupamentos de sombra,
+papéis de paleta e leitura em 1× e nearest-neighbor 4× ou maior. Se qualquer eixo
+destoar, ajuste o model sheet no grid de pixels e revise a prancha completa;
+não corrija a discrepância só ampliando ou encolhendo a figura final. Registre
+na prancha fontes, hashes, medidas e estado de revisão. Aprovação do conceito
+não aprova sprite, animação, integração ou ROM (L105).
+
+Em uma mesma prancha, declare o papel de cada referência sem misturar
+autoridades: para Master of Fighters, Hayato/Kenseiden ancora acabamento e
+economia de clusters; Joe Musashi ancora proporção humana esguia, massa corporal
+e espessura relativa dos membros. Não copie a roupa/paleta do outro jogo nem
+transfira defeitos de recorte do sprite usado como referência. Reprove silhuetas
+atarracadas/chibi quando não previstas no conceito, membros engrossados e
+rosto/cabeça sem leitura humana. Use Joe para a anatomia, mas exija dele também
+um recorte limpo.
+
+Valores de cor corretos não garantem pintura limpa: mantenha a paleta exata do
+personagem e agrupe tons por material em blocos coerentes, sem dithering,
+halos, pontilhado decorativo ou dispersão cromática que diminua a leitura da
+primeira proposta de conceito. Inspecione exportação transparente no tamanho
+nativo e em nearest-neighbor 4×, sobre fundos claro e escuro; rode
+`audit_sprite_cutout.py` com perfil de materiais válido e o gate de recursos.
+Uma aprovação de escala não aprova anatomia, recorte, agrupamento cromático ou
+acabamento. Registre cada eixo como pass/fail/pending; qualquer `fail` bloqueia
+a prancha até a revisão da arte-fonte (L101/L104/L105).
+
+## 91. Integridade anatômica e encaixe de equipamento precisam de revisão própria (L106)
+
+O fluxo genérico de revisão independente já existia, mas faltava uma lista
+obrigatória por personagem para rosto, mãos, articulações, empunhadura,
+equipamento e contato com o chão. Em cada conceito/model sheet e prancha inicial
+de roster, congele candidato e referências por SHA-256; confira cada personagem
+separadamente e depois o elenco inteiro. Use `art-review.md` e registre todos os
+eixos em `audit_art_review_checklist.py`. O gate verifica cobertura, notas,
+estados e hashes, não infere correção anatômica nem qualidade a partir de pixels.
+
+Revise olhos/rosto; orientação e anatomia das duas mãos; continuidade
+mão→empunhadura→guarda→lâmina/cano; articulação de punho, cotovelo, joelho e
+tornozelo; tiras e pontos de fixação de escudo, bainha, arco, aljava, coldre e
+armadura; perspectiva dos acessórios; alinhamento da linha de base; recorte,
+contorno e partículas soltas; agrupamento de cor por material e luz coerente.
+Para pixel art, veja todos os quadros no tamanho nativo e em nearest-neighbor
+4×, sem antialiasing, e rode os gates de cor, recurso, recorte e animação. Uma
+concept illustration não prova paleta SMS nem limpeza em grade de pixels.
+
+Cada eixo recebe `pass`, `fail`, `pending` ou `not_applicable` com nota concreta;
+`not_applicable` exige justificativa. `fail` reprova e `pending` impede promoção.
+Após qualquer correção, atualize hash e repita os eixos afetados e a prancha
+completa. O produtor não aprova a própria arte: no checkpoint aplicável, use
+`quality_review_router.py` para revisão read-only independente e exija aprovação
+explícita do dono. Conceito, frame isolado, folha, integração e ROM continuam
+sendo aprovações separadas (L106).
+
+## 92. Refinamento de pixel art precisa de micro-eixos e conferência quadro a quadro (L107)
+
+Uma folha pode estar anatomicamente corrigida e ainda destoar por clusters
+suaves, sombra sem blocos, rosto ilegível, outline quebrado, pixels órfãos ou
+encaixe de equipamento. Em sprite sheets e pranchas de sprites, registre por
+personagem os eixos `pixel_clusters`, `face_detail_readability`,
+`outline_and_cutout`, `material_shading`, `hand_weapon_attachment`,
+`equipment_geometry`, `frame_pose_integrity` e `native_size_readability`.
+`audit_art_review_checklist.py` reprova manifestos desses tipos sem os oito
+micro-eixos, notas e hashes atuais; tipo não reconhecido na família
+`pixel_sprite_*` também reprova, para que erro de nome não desative o requisito.
+`fail` reprova e `pending` bloqueia promoção. O gate mede cobertura e frescor
+do registro, não a verdade visual.
+
+Revise na escala nativa e em nearest-neighbor 4×: clusters duros e intencionais,
+olhos/rosto, contorno em botas e pontas de capa/casaco, mão envolvendo cabo,
+materiais metálicos com blocos de luz/sombra e coerência entre frames. Use a
+paleta exata, sem blur, antialiasing, dithering decorativo, glow ou pontilhado.
+Pontos específicos do elenco — textura cinza do Shinobi, pernas/roupa rosa e
+escudo de Alis, cabo e barra do Dr. Social, arco/corda/olhos de Landau, capa,
+escudo e pés do Golden Axe Warrior, mão/olho de Hayato e identidade da arma e
+rosto de J.J. — devem virar notas explícitas do checklist daquela revisão.
+
+Uma edição generativa de folha inteira é uma proposta nova, não prova de edição
+pixel a pixel: pode mudar gesto, pose ou estado de animação mesmo quando o
+prompt pede preservação. Compare cada quadro com a semântica autorada e descarte
+qualquer mudança de ação, duplicação, quebra de grid, contorno/halo ou cor fora
+do contrato. Meça paleta/recursos com `audit_validate_resources.py`, recorte e
+cores por material com `audit_sprite_cutout.py`, poses/grade com
+`audit_animation_semantics.py` e escala/relacionamento com
+`audit_roster_harmony.py`; confira visualmente o que esses gates não inferem.
+Só reabra promoção após revisão independente e aprovação explícita do dono
+(L106/L107).
+
+## 93. Sessão privada isola controle e evidência; descoberta de PID não autoriza encerramento
+Aplicação operacional de L057/L039/L065, sem novo ID. No host com vários
+agentes, os testes automatizados usam `emulator_session.py isolated` e
+`workflows/emulator-isolated-session.md`. Cada sessão tem ROM SHA, display
+Xvfb autenticado, configuração/SRAM/cache privados e socket Unix com
+ID/token/sequência. A JVM enxerga dispositivos SMSJoypad locais ao processo;
+JInput físico é desativado e `/dev/input`/`/dev/uinput` ficam ocultos.
+
+Não procurar primeira janela por nome, disputar foco, injetar teclado do host
+ou encerrar processos por pgrep/pkill. Supervisor e processo são identificados
+por PID e start ticks. Falha de isolamento reprova sem fallback ao desktop.
+Mudança do SHA do JAR original exige nova prova da ponte; não atualizar
+silenciosamente o emulador usado pela medição.
+
+Comandos têm três evidências distintas: recebimento pela ponte, estado aplicado
+às portas do emulador e botão/consequência observado pela ROM. Somente o terceiro
+paga gameplay. `emulator_input.py --session --script` executa sequências
+atômicas em frames do VDP, soltando tudo ao concluir/falhar. Sleep/poll de input
+não mede duração de golpe. Pause/Reset são controles do console; não importar
+masks de seis botões do Mega Drive para o SMS.
+
+`capture_evidence.py --session` captura o framebuffer da própria instância.
+`capture_video.py --session --ticks` grava um framebuffer por frame do VDP:
+ordem/quadros reais, sem claim de throughput ou áudio. A publicação é exclusiva
+por sessão, com lock e rename atômico. `emulator_session.py isolated
+check-bundle` confere ROM, ponte/fonte, configurações e imagem; captura preta ou
+ROM trocada reprova. `session_bridge/acceptance.py` executa duas ROMs
+diagnósticas e testa controles, duração, SRAM, mensagens inválidas, captura e
+shutdown. Selftest offline de vínculo não substitui essa integração real.
+
+`measure_runtime_probe.py --session` lê SMRT da ROM com runner original em tempo
+real; reserva global serializa medições cooperativas e registra carga do host.
+Janelas de FPS do fixture não provam 60fps no jogo alvo. A sessão cria um sink nulo
+privado e move SÓ o fluxo do PID exato antes de `start` retornar (a política de
+áudio do host reroteia fluxos no nascimento; `PULSE_SINK` é ignorado). Sem rota
+a captura é recusada; `capture_audio.py --session` exige duração efetiva ≥95%
+da pedida e prova apenas SINAL do PID, não música correta. Boot exige `-muted`
+desde `Emulicious.main`; a ponte prima a linha com zeros, confirma o sink real
+e descarta buffers de boot antes de liberar PCM. Na versão fixada deste host,
+stop/start/flush da linha Java recriam o stream e perdem a rota: a ponte mantém
+a linha aberta durante pausas e bloqueia amostras enquanto está em mute.
+Manter a linha aberta sozinho reprovou em repetição: um keepalive de zeros
+durante mute/pausa preserva o fluxo no cenário testado. Verificar a rota real
+antes de run/step/sequence/video e recusar avanço se ela mudar; testes incluem
+divergência deliberada entre contrato e sink real, sem mover fluxos alheios.
+`session_bridge/audio_acceptance.py` mede ROM sonora em mute, ativação recusada
+sem rota, identidade do stream após pausas, controles sonoro/silencioso em
+paralelo e limpeza. Nunca gravar o monitor padrão para provar isolamento.
+O sink só é removido após o emulador sair. Hotplug de controle físico e comparação
+com a referência permanecem testes explícitos conforme o plano em `doc/`.
+
+No startup do Xvfb, aguardar a linha completa de `-displayfd` antes de fechar
+o pipe: a leitura só dos dígitos seguida de close pode matar a escrita final
+do servidor e deixar a sessão sem seu socket. Falhar sem fallback ao desktop.
+
+Builds e revisões automatizadas permanecem ocultos em sessão isolada por
+padrão. Só abrir uma janela visível quando o dono pedir explicitamente para ver
+a ROM; identificar caminho e SHA exatos e deixar claro se é candidata. A
+visualização manual não substitui a sessão isolada, captura hash-bound nem
+aprovação artística. Validar a abertura da janela ou observar o título/FPS não
+promove a arte nem prova gameplay.
+
+## 94. QA nativa por subagentes: cada resultado pertence a um pedido, ROM e sessão
+
+Aplicação de L036/L057/L065; vale para qualquer projeto/gênero trabalhado.
+Ler a fonte central atual antes de testar; materialização `.agent` antiga não
+substitui esta lei e não é sobrescrita para adotá-la.
+
+O coordenador congela ROM/SHA e casos do delta/contrato. Dispara até três
+workers independentes por ferramenta nativa (`spawn_agent` quando disponível),
+sem subdelegação, com outputs separados. Não chamar um JSON de subagente:
+registrar ID retornado e receber feedback real. Sem ferramenta, registrar
+delegação não executada. Não autoaprovar nem delegar promoção/claim/git/memória.
+
+`session_qa.py prepare` gera pedido/prompt; `collect` inicia/encerra sessão
+própria e coleta evidências, mas não julga qualidade. Revisor inspeciona PNG,
+frames, ROM probe e/ou áudio conforme capacidade e caso atribuído. Cada worker
+tem uma sessão exclusiva; pares de leitores que pausam o mesmo emulador não
+são independentes. Fontes/arte read-only, writes somente nos outputs próprios.
+Funcional em paralelo; performance em tempo real com reserva serializada.
+
+`audit_subagent_session.py` exige identidade distinta do produtor, pedido
+confiável, bytes/hashes/ROM/sessão, bundle, limpeza e cobertura exata. Resultado
+válido não significa testes aprovados; `--require-passed` recusa falhas e
+`not_run`. N/A somente quando o coordenador justificou no pedido. Metadata de
+áudio/vídeo/probe é validada separadamente do bundle de screenshot. Gate mede
+vínculos/cobertura, não verdade artística nem autenticidade de um chat: IDs
+devem ser cotejados com os recibos e retornos nativos pelo coordenador.
+Achado perceptivo exige conferência nos artefatos antes de virar blocker;
+leitura errada do revisor é corrigida com parecer inicial e retificação
+preservados, sem editar ROM/arte para satisfazer falso defeito.
+
+Retorno nativo: Resultado / Bloqueio / Próxima ação, relatório, casos,
+artefatos, ROM SHA/session ID, observação concreta e teto `assigned_checks_only`.
+ACK não prova golpe, vídeo stepped não prova FPS, áudio de sinal não prova
+música certa. Revisor sem percepção necessária declara `not_run`; fixture e
+boot nunca viram gameplay/AAA. Novo binário/pedido invalida aprovação anterior.
+
+`harness_orchestration.py validate-result` aceita envelope vinculado; review
+consolidado usa `execution_mode: isolated_native_subagents` e `session_reports`
+no `quality_review_router.py`. Detalhes e contrato no workflow
+`subagent-emulator-qa.md`. Consumers antigos migram no lote de seu projeto;
+esta regra central não afirma que todos os scripts já foram migrados.
+Checkpoint nativo também prende projeto, produtor, ROM SHA e task_ids dos
+pedidos; nunca anexar aprovação diagnóstica de outra ROM/projeto. Vídeo de
+gesto é capturado durante a timeline de input, não só depois da liberação.
+Input/RAM/imagem podem ter latência; incluir cauda neutra explícita para
+consequência/recuperação exigidas pelo roteiro. Coleta interrompida preserva
+sessão parcial encerrada e evidências com feedback `blocked` válido; falta de
+bundle completo impede `passed`.
+
+## 95. Integridade histórica usa snapshots; elegibilidade atual é outra decisão
+
+Aplicação de L036/L057/L065 e §94. Novos pedidos QA usam
+`sms_subagent_session_v2`: `session_qa.py prepare` copia ROM e contexto para
+inputs próprios, registra papel único, origem e SHA, e confere alterações
+durante a preparação. `origin` é proveniência; o auditor confere os snapshots,
+não os arquivos ativos que continuarão evoluindo. Snapshot adulterado, alias
+por symlink/hardlink ao input ativo ou papel ausente reprova.
+
+Copiar arquivos sequencialmente e comparar hashes não cria uma transação do
+filesystem inteiro. Coordenador prepara com build/contexto estáveis; revisão
+dos inputs detecta mistura de épocas que hashes individuais não explicam.
+Nunca relaxar hash, restaurar ROM antiga sobre a ativa ou reescrever pedido
+histórico para fazer a auditoria passar. V1 continua auditável conforme seu
+contrato antigo, mas `collect` exige novo V2. Derivar novo pedido, mantendo o
+anterior e sua limitação intactos.
+
+`audit_subagent_session.py --current-rom ROM` compara separadamente a
+elegibilidade por SHA da ROM atual. Integridade histórica não aprova outra
+build nem design que mudou: GDD/contexto atual exigem reconciliação do
+coordenador, e checkpoints continuam vinculados ao projeto/ROM/tasks.
+
+## 96. Sessão nova e baseline observada definem independência do caso
+
+Aplicação de L035/L036/L057/L065; gate `audit_subagent_session.py`.
+V2 declara `case_relation`. `independent` permite exatamente um caso aplicável
+em sessão nova; prepare um pedido por caso independente. `chained` executa
+uma timeline cumulativa: o endpoint de um gesto pode conter efeitos dos
+gestos anteriores. Não chamar ACK de reset ou contador da ponte de prova de
+reset da ROM. N/A só com booleano e justificativa do coordenador.
+
+O coletor registra framebuffer anterior ao gesto. Quando a hipótese exige
+estado interno específico, forneça `precondition` com endereço, tamanho e
+`equals_hex` de probe real; ele lê e compara antes dos comandos. Divergência
+preserva sessão parcial/evidências e produz feedback bloqueado, sem gesto.
+O auditor não aceita caso aprovado sem a precondição vinculada e satisfeita.
+Sessão nova não garante que boot chegou ao idle/tela desejada; baseline visual
+e ROM precisam sustentar a expectativa. Endereços de fixture não são lei SMS.
+
+## 97. Fronteira observada, duração e identidade temporal são provas distintas
+
+Aplicação de L037/L056/L061/L071/L082/L091, gates
+`audit_stage_attribution.py`, `capture_video.py` e `audit_import_semantics.py`.
+Máscara OR e histograma de fase em interrupção localizam exposição, não ciclos
+gastos nem primeiro estágio causador em cada quadro. Para atribuição agregada,
+use baseline antes do trabalho e contagens monotônicas da mesma janela selada,
+uma observação booleana por frame/fronteira, SHA/sessão iguais e contador final
+coerente com vovf. Contagens invertidas ou sem baseline reprovam consistência.
+Contadores que continuam mudando após o selo não sustentam atribuição: o gate
+confere a janela declarada e os números, não a implementação do congelamento.
+O coordenador revisa fonte/probe e vínculo da observação com a janela selada.
+O gate aprova consistência do perfil mesmo quando budget reprova: delta maior
+que zero não vira PASS de VBlank. Não inferir taxa segura universal de upload.
+
+Duração requer timestamps coerentes e tratamento da sequência/voltas do
+VCounter ou contador ROM; localizar a primeira fronteira não prova duração
+exclusiva ou causa única. Perfil de outro renderer/ROM/região não é transferido.
+
+Movimento usa toda a timeline decodificada, mantendo endpoints como métrica
+separada. Voltar ao idle não é freeze. Variação de HUD/contador também muda
+pixels: o gate de vídeo não identifica ação do ator. Quadros RGB idênticos
+podem ser elementos AIR distintos. Para timing AIR, use índices/fronteiras
+gravadas pela ROM e compare com a fonte; amostra DAP pode perder elementos
+curtos. Vídeo e telemetria se complementam; nenhum substitui throughput real.
+O perfil AIR de `audit_import_semantics.py` confere durações finitas entre
+fronteiras, não IDs/ordem dos elementos. Para identidade/ordem, associe índices
+fonte e ROM a cada fronteira; intervalos iguais podem ocultar permutação.
+
+## 98. Importação preserva unidades; cache lógico exige validade no contato
+
+Aplicação de L036/L037/L052/L061/L083/L088; receita MUGEN e disciplina de
+dados, sem transformar um piloto em lei geral do hardware. Gates
+`audit_import_semantics.py`, `mugen2sms/analysis/bg_normal_phase_probe.py`,
+`audit_symbol_size_sync.py` e QA nativa do §94.
+
+Declare domínio das coordenadas, razão de escala, pivôs/facing e caixas da
+fonte antes de converter uma condição. P2BodyDist de um par em pé/frente a
+frente não é distância entre eixos. O perfil limitado do auditor calcula a
+comparação racional com frentes fonte e verifica casos de fronteira; outras
+poses/Width/escalas exigem outro contrato e medição, não copiar 45/46 ou 72/107.
+
+Prefetch de imagem é separado de precomputar colisão. Overlap preparado com
+P2 parado só é válido enquanto posição, facing, hurtbox e estado permanecem
+válidos no contato. Registre revisões e prazo, invalide/recompute se mudarem;
+o gate reprova registros stale. Ele não prova que o runtime realmente mantém
+essas revisões: exija casos nativos com defensor móvel, guarda/troca de estado
+e facing antes de promover cache como solução dinâmica. Essa implementação
+no jogo permanece pendente enquanto só houver prova estacionária.
+
+Dados de comando/metadata compartilham armazenamento apenas por igualdade
+exata no namespace compatível, preservando símbolos e SIZE. Confirme payload
+emitido, alias/size e mapa pós-link. Economia observada em um mirror não
+autoriza fundir streams diferentes nem anunciar capacidade para features
+futuras. Reúso e comparação de payloads em
+`mugen2sms/generators/versus_scene_cut.py` ampliam a disciplina do §73.
+
+## 99. Contexto legível precede QA; diagnóstico não substitui produção
+
+Aplicação de L036/L057/L065/L071: `session_qa.py prepare` e
+`audit_subagent_session.py` exigem `readable_project_context_v1` nos novos
+pedidos. Produção lê e congela memory bank, GDD, spec de cenas e TDD, todos
+UTF-8 não vazios. Falta de documento aborta antes de abrir o emulador.
+Diagnóstico usa `--context-mode diagnostic --diagnostic-reason ...`, registra
+cada ausência real (ENOENT) e limita o claim ao teste atribuído. EIO, EACCES,
+diretório, link quebrado, texto vazio ou inválido nunca viram ausência
+aceitável, documento substituto nem downgrade automático. O coordenador
+registra o bloqueio de leitura, preserva arquivos e avança somente em ramos
+independentes seguros; recuperação de armazenamento exige outra intervenção.
+
+`audit_doc_sync.py` lê diretamente os documentos da hierarquia: distingue
+ENOENT de EIO/EACCES e texto vazio/inválido; erro continua reprovando o gate.
+Não interpretar erro de acesso como autorização para criar um substituto.
+
+Snapshots históricos íntegros continuam auditáveis quando a origem ativa
+muda ou fica ilegível; isso não aprova a saúde/elegibilidade do projeto atual.
+O auditor recusa snapshots symlink/hardlink; origem é proveniência, não input.
+Pedidos V2 anteriores sem contrato permanecem históricos e são recusados
+pela coleta atual. Prepare outro pedido; não reescreva o histórico.
+O gate verifica cobertura/bytes, não qualidade ou completude semântica dos
+documentos. Hashes por arquivo não constituem snapshot transacional do projeto.
+
+## 100. Identidade AIR exige elementos vinculados a todas as fronteiras
+
+Aplicação de L037/L056/L071/L083/L091: `audit_import_semantics.py` oferece
+`air_identity_timing`; use `--require-air-identity` para claims de ordem e
+identidade. `air_timing` mantém apenas prova de duração (§97). O modo completo
+exige export fonte hasheado (`source_air`: `durations`, `boundary_element_ids`)
+e trace ROM hasheado (`air_boundary_stamps`, `air_boundary_element_ids`).
+Para N intervalos finitos, ambos os vetores de IDs têm N+1 entradas, inclusive
+o destino terminal, associado à mesma fronteira. IDs são elementos da ação,
+nunca identidade de pixels RGB; declare namespace e significado terminal.
+Valores/tipos e ordem devem coincidir. Permutar elementos com duração igual,
+omitir terminal ou usar booleano como índice reprova. Timestamps ROM de 16 bits
+admitem rollover; intervalos devem estar entre 1 e 32767 frames. Loops e
+elementos infinitos exigem outro contrato.
+
+O PASS mede consistência dos registros declarados. Revisão independente da
+fonte/export e da instrumentação ROM deve confirmar de onde vieram IDs e
+stamps. Listar índices vistos em amostras DAP não os associa a cada fronteira;
+não converter essa lista em trace completo. Fixtures offline validam o gate,
+não importação rodando, throughput, combate, FPS, ausência de flicker ou AAA.
+Conserve registros antigos como duração apenas até existir prova ROM nova.
+
+## 101. Lições de QA precisam chegar às skills e ao workflow de entrega
+
+Aplicação de L036/L038/L056/L057/L065/L071/L083/L097, sem novos IDs.
+`audit_learning_capture.py` verifica instruções explícitas supersedidas nas
+skills/workflows: desktop como canal padrão, encerramento global por nome,
+sleep como regra de gesto, endpoints como freeze e delta RGB universal.
+Self-check tem exemplos válidos/inválidos; a varredura de frases não é análise
+semântica completa e não autentica uso correto da ferramenta. Menções ao
+legado têm alcance histórico explícito; comandos globais de encerramento
+copiáveis são removidos dos runbooks, mesmo rotulados como corrigidos.
+
+Skills de input/evidência/luta/vídeo/áudio ensinam sessão privada, ID/SHA,
+sequência em frames, baseline e consequências observadas pela ROM. Throughput
+usa execução contínua; vídeo stepped não inclui prova de FPS/áudio. Workers
+nativos mantêm cobertura/cleanup; ACK não aprova gameplay. Review independente
+confere semântica e artefatos, além do gate de texto (§§93–100).
+
+Receita MUGEN em `skills/sms-mugen-source-semantics.md` aplica §§68/98/100:
+papel declarado/emitido difere de consumidor e execução. Extração próxima/
+distante mantém ordem, predicados do perfil e grupos não compilados; estados,
+ações, loop local, velset/physics e HitDef aproximados ficam explícitos.
+Testes do importador e `audit_import_semantics.py` medem registros/perfis,
+nunca compatibilidade CNS geral, orçamento dinâmico ou combate em ROM.
+Falha de leitura bloqueia QA production; não reconstruir contexto para passar.
+
+
+## 102. Arte autoral começa por catálogo e produção incremental (L108)
+
+Quando o usuário pedir arte autoral para um projeto, consulte o catálogo
+`doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json`, identifique o
+estilo e os invariantes do asset e siga `workflows/original-artwork.md`. O padrão
+é um concept/model sheet individual por ciclo, com o formulário aprovado e
+revisão antes da próxima variação; gerar dezenas de estilos de uma vez não é o
+padrão, pois o custo aumenta e a revisão perde viabilidade. O catálogo pode
+crescer por entradas com ID estável, índice estável, fonte identificável/hash,
+artista/estúdio de referência com papel e fonte, assinatura visual distinta,
+descritores completos e estado de validação; crédito individual não confirmado
+deve permanecer declarado como tal, sem suposição. Se o usuário não definiu a
+direção, informe que há 49 referências atuais e que pode escolher fora do
+catálogo; explicite mídia/traço, obra/era e artista/estúdio como critérios
+mínimos. O model sheet deve exibir índice, referência artística e assinatura de
+estilo. Faça revisão anatômica traçando ombro→braço→cotovelo→antebraço→punho→mão
+e revisão de coesão/distinção da assinatura visual. Compare artistas específicos
+separadamente (por exemplo, Eisuke Ogura e Toshiaki Mori/Shinkiro); não os
+reduza a uma etiqueta genérica. Texto de estilo não prova fidelidade nem
+validação visual. Guarde prompts, originais, composições, metadados, lineage e
+validações versionados em `data/source_art/` do jogo. Concept candidato não
+entra em `res/` nem prova conversão SMS, integração, ROM ou aprovação. Use
+`art-review.md` e `audit_art_review_checklist.py`; o gate mede cobertura,
+status e hashes desses eixos, não a verdade artística. O dono aprova promoção.
+O prompt da arte-fonte não deve incluir título, rótulos, régua, baseline ou
+fichas; o compositor os adiciona uma vez. Na revisão final, confira duplicatas,
+alinhamento, sobreposição com silhuetas/equipamentos e texto cortado nos cartões.
+
+## 103. Delta modular não é incidência exata de otimização
+
+Aplicação de L013/L037/L061/L082/L089/L097, gate `audit_counter_window.py`.
+Em contadores monotônicos com wrap, diferença entre extremos é módulo 2^bits.
+Declare largura, limite máximo de eventos, units/owners, início/fim da janela e
+ausência de reset. Use `--require-exact` antes de publicar contagem/hit rate.
+Sem limite ou quando outra volta cabe nele, não há contagem única. Byte155→184
+admite29 e285 numa janela de até358 eventos; zero delta também pode esconder
+uma volta inteira. Limite incompatível com o delta reprova consistência.
+O gate mede aritmética declarada e hashes; não prova o limite/reset/janela ou
+instrumentação ROM. VCounter não é contador linear de duração CPU (§97).
+
+Cache/preflight/dirty-bit não vira ganho sem comparar trabalho equivalente,
+FPS contínuo e custo de fallback na ROM. Counter de boot não paga incidência
+na fase ativa. Regressão observada bloqueia aquele candidato; motivo interno
+permanece hipótese enquanto faltam amostras/instrumentação. Os trials Ryo/Terry
+de2026-10-08 estão rejeitados; não generalizar que cache é ruim no SMS nem que
+slots fixos estão aprovados. `skills/sms-runtime-optimization.md` conserva
+baseline, incidência, invalidadores, comportamento/render e próxima rota medida.
+
+## 104. Revisão de concept cobre a composição final
+
+Aplicação de L106/L108 e §102: `audit_art_review_checklist.py` exige
+`document_and_layout` em `character_concept_model_sheet`, junto de atribuição,
+assinatura, cadeia anatômica e coesão. Arte-fonte correta não aprova cartão
+composto: revisar título/índice/ficha, clipping, sobreposição, régua/baseline e
+alinhamento após composição. Workflow `art-review.md` e skill visual ensinam
+essa etapa; metadata copiada de canvas diferente não prova encaixe.
+O gate confere cobertura/status/hash, nunca geometria artística ou verdade do
+parecer. Reports históricos permanecem arquivados; revisão atual com eixo
+ausente precisa novo checklist/parecer, sem reescrever PASS antigo. Aprovação
+do dono e conversão/integracão/ROM permanecem gates separados.
+O eixo de layout da model sheet não aceita `not_applicable`: mesmo sem ficha,
+vistas e recortes têm composição que precisa de parecer concreto.
+
+## 105. Prova de asset separa pixels-fonte, mapa de tiles e animação (L109)
+
+Após concept aprovado, a prova de conversão contém uma pose idle e uma pose de
+ação, separadas; não é folha de animação e não fixa quantidade de frames.
+Nenhuma grade, régua, baseline, label ou caixa pode cruzar o preview do sprite.
+Mapa 8×8 fica em painel próprio. `audit_asset_proof_sheet.py` reconstrói cada
+preview desde a fonte indexed e compara pixels exatos; diferença, reamostragem,
+alpha antialias ou overlay reprova. Também confere duas poses distintas,
+índice transparente, alpha binário, paleta de até 15 cores úteis na grade SMS,
+contagem 8×8 e cobertura declarada dos 12 princípios. O gate mede reprodução e
+estrutura; não julga anatomia, appeal, fidelidade de concept ou qualidade AAA.
+`audit_sprite_cutout.py` também precisa fechar pixels órfãos e regiões de cor por
+material. Um perfil `components_only` pode detectar ilhas, mas fica pending e
+bloqueia promoção até as regiões materiais e o review visual estarem completos.
+
+Toda animação precisa de análise com critério/evidência para os 12 princípios:
+squash/stretch, anticipation, staging, straight ahead/pose to pose, follow
+through/overlap, slow in/out, arcs, secondary action, timing, exaggeration,
+solid drawing e appeal. Dois stills não validam movimento ou timing e não
+substituem a folha animada. A folha completa espera orçamento coerente no GDD,
+TDD e spec de cena.
+
+Master System tem VRAM 16 KB (512 padrões 8×8 de 32 B), janela de 256 padrões
+por seleção da base de sprite, SAT de 64 objetos, teto de 8 sprites por linha,
+objetos de 8 px de largura por 8/16 px de altura, duas subpaletas de 16 com
+índice 0 transparente, RAM 8 KB, ROM linear 48 KB e sem DMA. O hardware não
+estabelece máximo universal de quadros por folha: `max_frames_per_sprite_sheet`
+fica indefinido até medir compartilhamento, pools VRAM/RAM, ROM/banking,
+residência e upload por VBlank no TDD/scene budget. Inventário de padrões não
+prova SAT/scanline, nem residência. Review independente e aprovação humana
+continuam gates distintos.
+
+## 106. Prova de pose exige arma inteira e escala de tela fundamentada (L110)
+
+Aplicação de L101/L102/L104/L105/L109. Não considere um proof sheet válido só
+porque seu preview reproduz um recorte: conteúdo opaco encostado na borda pode
+ser arma/equipamento truncado. O canvas de prova tem dimensões múltiplas de 8
+e ao menos 1 px transparente nos quatro lados; a exceção exige decisão de
+contrato explícita e não se aplica a poses apresentadas como completas.
+
+Se a resolução do personagem for convertida, declarar origem, dimensão de
+entrada, saída e razão uniforme nearest-neighbor. `audit_asset_proof_sheet.py`
+reconstitui o frame convertido a partir da folha indexada, verifica tile
+alignment, mede clearance do bbox opaco e compara o preview 1×/ampliado com o
+PNG convertido. Transform diferente, canvas que não é múltiplo de 8, borda
+opaca ou diferença de pixels falha. A arte-fonte externa ou o concept ainda
+precisam de revisão humana para confirmar que arma, cabo, ponta e acessórios
+estão completos e ligados corretamente; clearance não prova semântica visual.
+
+Escala vem do GDD/TDD e é medida de composição, não limite de hardware. Para
+Master of Fighters, Fatal Fury Special Game Gear fornece régua visual em
+viewport 160×144; projetar aproximadamente 53 px em pé para SMS 256×192 dá
+71 px. O alvo atual 66–72 px tem centro 70 e pode variar por papel, pose ou
+profundidade com justificativa. Não confundir altura corporal com extensão de
+arma/capa, nem canvas com tamanho visível. A referência é estimativa visual,
+não frame-data extraído. Nenhum desses checks prova anatomia, identidade da
+arma, aprovação humana, orçamento VRAM/SAT/VBlank, ROM ou qualidade AAA.
+
+## 107. Terminais de equipamento e paleta compartilhada exigem dupla verificação (L111)
+
+Uma silhueta de arma pode estar totalmente dentro do canvas, sem pixels soltos,
+e ainda assim estar semanticamente errada: uma ponta ou terminal achatado pode
+ser lido como martelo, pomo ou outra peça. Na revisão, compare a forma esperada
+com o concept/referência, em pixel nativo e nearest-neighbor ampliado; registre
+um eixo explícito `equipment_terminal_shape` no contrato. Se a forma falhar,
+selecione/repare uma fonte adequada e repita a inspeção visual integral depois
+da alteração. `audit_asset_proof_sheet.py` pode exigir eixo, identidade
+esperada, evidência e hash, mas não pode decidir sozinho que a imagem parece
+uma bengala. Pixels limpos não substituem revisão semântica.
+
+Altura da pose não é altura anatômica quando o bbox inclui bengala, arma, capa
+ou cabelo solto. Compare a faixa do GDD à medida coroa–sola do corpo sem
+equipamento e registre o eixo separadamente; postura de ação pode mudar o bbox
+vertical e não substitui a pose em pé. Contratos de proof sheet usam o eixo
+`standing_body_height_vs_gdd` para impedir que altura total com equipamento seja
+declarada como altura anatômica aprovada.
+
+Não confunda a paleta indexada de cada personagem com alocação de runtime. SMS
+tem P0 e P1, ambas com 16 entradas; sprites compartilham P1, cujo índice 0 é
+transparente, e P0 índice 0 é visível no BG. HUD e cenário dividem P0 conforme
+papéis do jogo; tiles BG podem selecionar P1 para reutilizar cores. O GDD/TDD
+e o contrato machine-readable devem dizer quais slots são fixos, como as
+paletas individuais mapeiam para o conjunto comum e o que permanece pendente.
+Nunca promover o roster com a suposição de uma CRAM independente por lutador.
+Em Master of Fighters, 14 perfis de autoria somam 43 RGBs; o mapeamento para
+uma única P1 de até 15 cores úteis está pendente. O proof v4 escolhe o frame
+06-fonte para preservar a ponta arredondada da bengala; sua avaliação humana
+ainda bloqueia promoção.
+
+
+## 108. Emuladores complementares: identidade, relógios e representações SMS (L112)
+
+Emulicious privado permanece a rota principal de produção e dos sete eixos de
+QA. BlastEm SMS entra para uma hipótese concreta Z80/VDP/mapper e comparação
+independente da mesma SHA e precondição; não é gate obrigatório por build nem
+substituto automático. A aceitação MD do SGDK não qualifica SMS.
+
+- `blastem_sms.py` fixa arquivo/binário oficial 1.0.0, força máquina SMS e modelo
+  sms1/sms2, conserva `.sms`, gera config/SRAM/Xvfb/PTY/sandbox privados e fecha
+  somente processos próprios. Sem foco, teclado host ou joystick físico. Input
+  lógico SMS1/2 usa bindings B/C; A/B era port incorreto de nomes MD.
+- Baseline/dumps completos precedem input. Predicados são contados; ausência
+  declara diagnóstico genérico, não aplicabilidade de caso. Fonte da ferramenta
+  é congelada por sessão; módulo importado anterior à edição não pode registrar
+  o hash da fonte nova como código executado. Revisão exige ROM/tool atuais
+  quando o claim for sobre a versão atual, sem apagar a integridade histórica.
+- Frames VDP, SDL presentations, contador da ROM e atualização de estado não
+  são iguais. Snapshot pode interromper a iteração; consumo/ação vêm do probe
+  ou gravador da ROM. Compare estado lógico equivalente; cauda neutra documenta
+  conclusão da iteração, não autoriza alterar comando para ocultar defeito.
+- CRAM interna em words e contador de ciclos rebaseado são representações do
+  emulador. Não ler CRAM interna como SMS6bit, ciclos internos como duração CPU
+  ou texto genérico do debugger VDP como suporte SMS a DMA/planos MD.
+- Screenshot GL por software foi calibrado 256×192; SDL perdeu linhas no host
+  e fallback é rejeitado. Imagem é um frame após último snapshot com input
+  solto: não prova estado transitório anterior. Imagem uniforme é registrada
+  sem claim de boot visual. Áudio nasce dummy; não paga música/FPS.
+- Backend limitado a NTSC Mode4 192 linhas. PAL, áudio e FPS BlastEm não estão
+  qualificados como eixos de entrega; §110 acrescenta capturas APNG/WAVE/VGM
+  diagnósticas, sem promover esses eixos. Consistência/concordância não prova compatibilidade universal
+  ou hardware real. `session_qa.py` continua qualificado para Emulicious;
+  review BlastEm usa worker nativo real e auditor de bundle próprio.
+
+Gate: `audit_blastem_sms.py` verifica SHA/arquivos, dimensões e tamanhos, fonte,
+limites de perfil/claim, snapshots/log e baseline/cleanup registrados.
+`--current-rom` e `--require-current-tool` impedem reutilizar histórico para a
+versão atual. O auditor mede consistência; não autentica semântica, isolamento
+contra agente malicioso, eficiência, som, arte ou verdade física.
+Workflow: `blastem-sms-diagnostics.md`; skill: `sms-emulator-diagnostics.md`.
+
+## 109. Contrato de animação separa desenho, estado e custo VDP (L113)
+
+Antes de produzir uma sprite sheet, cada ação/estado registra trigger,
+loop/transição, pose inicial/final, IDs e contagem de poses-fonte, duração por
+pose, e track próprio do personagem e de todo objeto/efeito animado. Objetos
+com lifetime próprio (projétil/efeito) declaram evento de entrada/saída e
+timeline/duração independente, mesmo que a animação do ator já termine. Avaliar
+os
+12 princípios Disney por sequência; pelo menos sete precisam de aplicação
+contextual planejada ligada a IDs de quadro. Cada princípio restante recebe
+razão explícita. Pista planejada não é evidência visual: após desenhar os PNGs,
+revisão temporal comprova o efeito real.
+
+`source_pose_count` não é número de objetos de hardware. Cada entidade declara
+separadamente objetos SMS 8×8/8×16 por quadro; tiles únicos/compartilhados,
+residência VRAM, RAM/ROM/banking, SAT/scanline e pior VBlank exigem medição. O
+Master System não fixa teto universal de quadros por folha. Contagens não
+medidas ficam pending/null, e aprovação do contrato não valida pixels,
+anatomia, física, balanceamento, integração ou ROM.
+
+Para locomoção/golpes, declarar apoio, trajetória, velocidade/aceleração,
+startup/active/recovery, hitbox, hitstop, consequência e contrajogo conforme o
+GDD. Alcance de hitbox segue a arma e o corpo visíveis; objetos não teleportam
+nem atravessam mão/corpo/cenário. Runtime Z80 usa inteiros/Q8.8, sem float.
+Números de balanceamento são hipóteses até medir a ROM e testar hit/block/whiff.
+
+`audit_animation_contract.py` verifica cobertura, endpoints, tracks, poses,
+revisão dos 12 princípios e mínimo de sete aplicados; `--self-check` testa o
+gate. Ele não lê pixels nem autentica física/arte. `audit_animation_semantics.py`
+permanece necessário depois que houver PNGs reais. Para o primeiro exercício,
+`doc/dr_social_animation_contract_v1.json` registra 20 estados comuns e quatro
+golpes autorais candidatos, todos ainda pendentes; pesquisa do jogo original e
+propostas de luta têm campos/fonte separados. O guide pesquisado tem divergência
+de nomes de armas primárias, portanto manual/ROM devem confirmar esses detalhes
+antes de convertê-los em cânone.
+
+## 110. BlastEm avançado: qualificar recurso por CPU, captura e versão (L114–L120)
+
+Aplicar `sms-emulator-diagnostics.md` e a matriz de decisão de
+`blastem-sms-diagnostics.md` para escolher o recurso pelo sintoma. Emulicious
+permanece a rota de produção, FPS real, PAL, áudio final e QA `session_qa.py`.
+BlastEm é complementar, sem transformar uma aquisição diagnóstica em entrega.
+
+1. **L114 — Manutenção sem promoção implícita.** `blastem_maintenance.py`
+   consulta a página oficial, registra fonte/hash/data e instala candidato em
+   paralelo a partir de manifesto com versão/URL/SHA do arquivo e executável.
+   Confere também arquivos e links internos. Divergência bloqueia; descoberta
+   não altera o pin qualificado, e hash declarado não equivale a assinatura.
+2. **L115 — GDB exige domínio de CPU/protocolo.** No source 1.0.0, Z2/z2
+   implementam watchpoint de escrita M68K apesar do README; Z3/Z4 não estão
+   implementados. Nem esse stub nem `vdpregbreak` Genesis são suporte Z80.
+   O wrapper SMS não aceita comandos GDB/MD brutos; matriz/source inspection
+   delimitam a capacidade. O teste GDB MD informado pelo usuário não é teste SMS.
+3. **L116 — Watchpoint nativo não é rastreamento completo de bus.** Z80
+   WRITE_8 pode ignorar valor inalterado. Endereço/tamanho RAM são limitados;
+   listas nativas contam/logam/continuam e o auditor coteja contagens. O valor
+   no trap e `observed_pc` (stale em casos observados) não identificam sozinhos
+   o writer nem o commit. Exigir o caminho real e estado/probe posterior.
+4. **L117 — VDP por OUT precisa de opcode e contexto vivos.** Breakpoint CPU
+   é distinto de watchpoint VDP. Sites cabem em 0000–03FE, com bytes na ROM
+   congelada e conferência viva em cada hit; mudança reprova a sessão. No mapper
+   Sega 0400–3FFF é bankável. OUT(C),r exige BE/BF e registrador correto; não
+   cobre aliases/OUTI/OTIR/outros sites/bancos. Mesmo opcode em outro mapeamento
+   não prova identidade de rotina. VCounter/hslot/address/CD são campos internos
+   tipados, sem prova de sincronia com bus ou cumprimento de VBlank.
+5. **L118 — Corrigir um derivado, preservar o bruto.** APNG 1.0.0 observado
+   atualiza a contagem acTL sem seu CRC. `blastem_diagnostics.py` preserva o
+   original e corrige somente o checksum que corresponde ao payload antigo
+   de zero frames; valida todos os chunks, CRCs, terminador e contagens. Outra
+   corrupção reprova. Auditor compara a derivação e cobertura VDP ativa.
+6. **L119 — Mix e log têm relógios/limites próprios.** WAVE nativo precisa de
+   RIFF/data/bytes PCM efetivos coerentes, formato, duração e pico; VGM precisa
+   de header/offset/EOF, comandos PSG e soma de waits válidos. WAVE assíncrono
+   não é sample-accurate com o APNG; VGM pode omitir silêncio final. Cadência
+   APNG nominal e sinal de áudio não provam FPS real nem fidelidade musical.
+7. **L120 — Visor derivado não é framebuffer.** Getter VRAM já retorna os
+   endereços SMS lógicos; CRAM interna usa encoding do pin, invertido com
+   teste dos 64 códigos. Visores de paleta/tiles/name table têm vínculo aos
+   dumps, papéis e dimensões próprios; name table não aplica scroll/sprites/
+   raster. RGB digital não modela DAC. Não promover esses PNGs a arte final,
+   screenshot do jogo ou comparação física de cor. Janelas nativas Mode4
+   existem na fonte, mas sua captura automatizada ainda não foi qualificada.
+   `blastem_dump_diff.py` compara duas fronteiras auditadas e labels da mesma
+   ROM; delta líquido não mede escrituras/restaurações intermediárias, tempo
+   ou causalidade. Blocos VRAM de32bytes incluem dados não gráficos, não são
+   tiles únicos nem volume transferido. Diff fica fora da sessão imutável.
+
+Gates: `blastem_sms.py`, `blastem_diagnostics.py`, `blastem_maintenance.py`,
+`blastem_dump_diff.py` e
+`audit_blastem_sms.py`, com `--self-check`/selftest e casos nativos independentes.
+O auditor mede consistência de registros e formatos; não autentica origem de
+chat, isolamento contra atacante, semântica da ROM, precisão temporal ou arte.
+Atualização do helper também invalida elegibilidade da ferramenta atual;
+histórico permanece íntegro. Nenhum reviewer é simulado em JSON.
+
+## 111. Conversão de asset termina em framebuffer comparado à fonte (L121)
+
+Concept/model sheet aprovado define identidade, mas cada PNG convertido é um
+estágio próprio. Preserve os índices, a paleta e a transparência ao normalizar
+um PNG indexado de 4 bits para o contrato de recurso 8-bit; não redimensione
+nem reamostre para corrigir apenas o formato. Use `audit_validate_resources.py`
+com `--kind sheet` para uma folha alinhada em múltiplos de 8, e declare
+explicitamente o personagem. O build roteia 8×8, 8×16 e 16×16 como sprites
+físicos e canvas de pose maior, como 80×80, como folha; `build_inner.py
+--self-check` cobre sprites, folha válida e dimensão fora do grid.
+
+`pack_sms_metasprite.py` recebe PNGs indexados 8-bit que já passaram por esses
+gates. Exige índice 0 transparente, cores SMS 6-bit, paleta idêntica entre
+poses, dimensões múltiplas de 8 e offsets representáveis. Empacota os padrões
+8×8 em quatro planos/32 bytes, deduplica padrões e emite mapas/metasprites
+terminados por `METASPRITE_END`. Declara tile base e reserva de tile vazio;
+confere 256 índices lógicos, 64 objetos SAT, até 8 por scanline e terminador Y.
+A capacidade segura de padrões residentes depende também do layout físico da
+VRAM e da posição da name table (§112). `--self-check` cobre deduplicação,
+tile vazio, divergência de paleta e excesso por scanline. Esta ferramenta não
+escolhe nem reindexa a P1 comum do jogo: cada asset deve mapear sua paleta de
+autoria para a tabela compartilhada de runtime.
+
+Antes de ligar o display, inicialize todas as entradas visíveis da name table
+com o mapa de fundo válido daquela cena. Em uma prova com fundo uniforme,
+reserve um padrão vazio para tile 0 e limpe a name table 32×24 enquanto o
+display está desligado. Pixels transparentes do sprite revelam o BG; tile 0 do
+BG é cor visível, não alpha. VRAM de reset nunca é conteúdo visual definido.
+
+Depois de gerar metasprites, rode `audit_sprite_mode.py`,
+`audit_sprite_line_sim.py` com a geometria real e `audit_provenance.py`; compile
+com `build_inner.py`, gere `doc/rom_asset_binding.json` com SHA de fonte,
+recurso, símbolo/header e ROM, e exija `audit_rom_asset_binding.py --require`.
+O modo `audit_render_fidelity.py --exact-indexed --at X,Y` compara cada pixel
+opaco do PNG indexado com o RGB da captura 1:1. Para uma prova de fundo
+uniforme, `--transparent-rgb RRGGBB` também confere pixels de índice 0 e
+detecta sujeira sob transparência. Use a comparação estrutural padrão para
+cenas com BG variável; ela não prova cor pixel-exata.
+
+Capture pelo Emulicious privado com ROM e sessão identificadas. Para poses
+distintas, aplique input por sequência de frames e observe a pose resultante;
+ACK de input não prova transição visível. O publicador de captura por sessão
+aceita uma imagem selada, então use uma sessão isolada por captura de pose e
+feche cada sessão; para movimento contínuo, use captura de framebuffer por
+frame. Binding e captura devem apontar para o mesmo SHA. Uma captura exata de
+duas poses prova somente esses pixels/cores no framebuffer daquela ROM: não
+prova animação, gameplay, FPS estável, áudio, PAL, hardware físico, P1 global,
+coexistência do roster ou budget VBlank.
+
+Na prova Dr. Social v3, 89 padrões de personagem + 1 padrão vazio ocuparam
+2.880 B de tile 4bpp; idle usou 43 objetos/pico 6 por scanline e ação 49/pico
+7. A ROM diagnóstica de 16 KiB passou pela comparação indexada exata nas duas
+poses (0 divergências opacas e 0 no fundo transparente) e binding por SHA.
+Ela fica fora de `res/`; a P1 do roster, revisão humana de pixels e orçamento
+de runtime continuam pendentes. Evidência: `SMS_projects/master_of_fighters/
+data/source_art/asset_conversion_proofs/dr_social/
+dr_social_sms_conversion_verification_v3.json`.
+
+## 112. Fonte aprovada e janela física de patterns são contratos distintos (L122)
+
+Antes de converter uma sequência, selecione a origem pelo papel e SHA: concept
+sheet define identidade; prova técnica idle+ação valida o procedimento de
+conversão; a fonte de animação aprovada pelo dono fornece os quadros de
+produção. Não substitua uma folha aprovada de sequência pela prova de duas
+poses. Prenda IDs e contagem da origem ao contrato de animação. Aprovação da
+imagem-fonte não aprova automaticamente quantização, timing ou integração.
+
+O limite de 256 descrito pelo registrador/base do sprite é uma janela de
+índices lógicos, não um orçamento residente independente do cenário. Calcule
+antes do pack: `min(256 - tile_base,
+(name_table_base - (sprite_pattern_base + tile_base*32)) // 32)`. Use a base de
+sprite selecionada e o endereço real da name table da cena. Com base de sprite
+0x2000, name table em 0x3800 e tile base 257, cabem 191 padrões de 32 bytes;
+escrever o padrão seguinte invade a PNT. Pool compartilhado acima do limite
+reprova ou precisa ser dividido em carregamento por pose/streaming com orçamento
+explícito. Nunca conte o tilemap ou SAT como espaço de arte. O `--self-check`
+de `pack_sms_metasprite.py` prova o limite 191/192; a ferramenta calcula a
+capacidade quando recebe `--sprite-pattern-base` e `--name-table-base`.
+
+L122 nasceu no viewer Dr. Social: a fonte aprovada contém 61 poses em nove
+sequências; a prova técnica anterior tinha somente duas. Um pool compartilhado
+de 200/246 padrões foi tratado como se coubesse no índice lógico e corrompeu
+rótulos da name table. Com o limite físico declarado, idle (169) e defesa (182)
+permanecem compartilhados; sete sequências excedentes carregam uma pose por
+vez. A regra mede a consistência do inventário/layout, não pixels, timing,
+throughput VBlank, gameplay, FPS, áudio, paleta P1 do roster ou qualidade AAA.
+
+## 113. Estados de arte até ROM são promoções independentes (L123)
+
+Use `workflows/artwork-to-rom-lifecycle.md` para criar ou modificar arte
+autoral. O intake define escopo, plataforma e direção visual; referências
+registram papel/hash e não substituem identidade do jogo. Model sheet e revisão
+independente/hash-bound precedem aceite explícito do dono. Se houver elenco,
+comparar frontalmente com baseline comum, máximo de cinco por prancha e escala
+declarada no GDD; métricas de bbox não aprovam morfologia ou estilo.
+
+Antes da folha animada, contrato por ação declara estados inicial/final, IDs,
+quantidade/duração de poses, trilhas separadas de personagem/objetos e os 12
+princípios com ao menos sete aplicações contextuais (L113). A prova técnica de
+duas poses valida conversão, não é a fonte de animação. A fonte completa deve
+ser aprovada para seu papel e ligada por caminho/SHA ao contrato (L122).
+Concept aprovado, fonte aprovada, pixels convertidos, ROM diagnóstica e ROM de
+produção são decisões distintas.
+
+Para SMS, medir recursos, procedência, recorte, geometria, SAT/scanline e
+patterns residentes pelo layout real até a name table. P1 de sprites é
+compartilhada; P0/uso de BG, RAM/ROM, banking e pior VBlank são decisões por
+cena que precisam de medição. Uma ROM diagnóstica com binding SHA e framebuffer
+comparado à fonte prova apenas o render daquela ROM; não prova estilo, timing,
+gameplay, FPS, áudio ou entrega. Revisão independente/humana da conversão,
+paleta e budgets precede promoção a `res/`; entrega exige evidência fresca do
+binário atual.
+
+Estados mínimos: documentado, candidato, fonte aprovada, recurso aprovado,
+ROM diagnóstica comparada, review humano aprovado, produção integrada,
+testado em emulador, budget validado e delivery. Não transportar PASS entre
+eixos, versões ou hashes. Os gates existentes medem transições específicas:
+`audit_art_review_checklist.py`, `audit_roster_harmony.py`,
+`audit_animation_contract.py`, `audit_animation_semantics.py`,
+`audit_asset_proof_sheet.py`, `audit_validate_resources.py`,
+`audit_reference_boundary.py`, `audit_provenance.py`,
+`audit_sprite_cutout.py`, `audit_sprite_mode.py`, `audit_sprite_line_sim.py`,
+`pack_sms_metasprite.py --self-check`, `audit_rom_asset_binding.py`,
+`audit_render_fidelity.py`, `audit_visual_delivery.py` e `audit_claims.py`.
+Cobertura de gate não substitui parecer artístico independente nem aprovação
+do dono.
+
+## 114. Revisar fluxo espacial de sombra por material, além da paleta (L124)
+
+Pertencer à paleta do personagem prova somente que os valores RGB são
+permitidos; não prova que roupa, pele ou metal tenham volume e luz coerentes.
+Para todo pixel sprite, declare e revise sombra/base/luz por material, direção
+da luz e continuidade espacial dos clusters em cada pose. Em tecido, a sombra
+deve acompanhar a mesma face e as dobras; manchas azuis claras isoladas dentro
+de uma região sombreada reprovam `material_shadow_flow_coherence` até serem
+visualmente justificadas. Sombras, bases e luzes devem formar blocos contíguos
+com bordas nítidas, sem dithering decorativo ou confete de cor.
+
+Declare o papel semântico de branco, amarelo e demais acentos. Eles ficam
+restritos às regiões autorizadas do design (por exemplo, olho, luva, gola,
+insígnia, pomo ou peça metálica); vazamento para roupa, cabelo e contorno é
+reprovação. Verifique `semantic_palette_role_confinement` junto com o eixo de
+fluxo de sombra no checklist `audit_art_review_checklist.py`. Esses eixos medem
+presença/cobertura, não verdade visual: automação não substitui inspeção
+artística independente nem aprovação do dono.
+
+Um detector que só procura acentos totalmente cercados pelo material não prova
+ausência de vazamento: ele perde pixels que tocam a borda de outra região. Use
+máscaras e âncoras semânticas estáveis quando possível; por exemplo, cabelo/face
+para localizar óculos e a junção entre luva e haste para localizar o pomo da
+bengala. Remapeie pontos fora dos papéis autorizados com cores vizinhas já
+existentes, preservando a silhueta; depois faça dupla inspeção de cada pose em
+1× e nearest-neighbor 4×. Confirme visualmente cada acento mantido, alterado ou
+removido, pois uma máscara também pode classificar pixels de modo errado.
+
+Na redução de arte colorizada, quando houver máscara explícita de material, a
+conversão pode medir a cobertura do footprint dentro daquela região e escolher
+entre os tons existentes pela luminância. Preserve contorno/silhueta por
+nearest-neighbor; não amostre através de alpha, contorno ou outro material; não
+crie cores, blur ou dithering. Verifique o framebuffer da ROM separadamente:
+fidelidade exata prova que os pixels candidatos foram exibidos, não que luz,
+anatomia ou papel semântico estejam artisticamente corretos.
+
+No caso Dr. Social (L124), v7 foi rejeitada pelo dono. V8 reagrupou 927 pixels
+em 61 poses (438 ilhas de tecido e 489 marcas navy internas), mas sua regra de
+contenção não identificou acentos amarelos na borda. V9 reclassificou 249 pixels
+amarelos, mas a dupla inspeção encontrou depois 70 brancos isolados/pares fora
+de luvas e bengala. A candidata v10 removeu esses 70 pontos usando cores
+vizinhas, preservou clusters maiores para análise humana e passou build/render
+exato 61/61. Todos os eixos artísticos, a revisão independente e a aprovação
+do dono continuam pendentes.
+
+No mesmo ciclo, v6 reclassificou 6.145 pixels por média de área dentro da
+máscara do tecido; v7 reordenou a rampa por luminância e mudou 15.690 pixels,
+mas a ROM só foi comparada exatamente em três poses. Esse delta não bastou para
+aprovar o visual nem para declarar cobertura completa. V8 foi o primeiro ciclo
+com comparação exata dos 61 quadros. Em futuras correções, congele a fonte
+aprovada e seu SHA, trate uma classe de defeito por versão, mantenha cada
+transformação isolada e mensure o delta por pose. Uma mudança posterior invalida
+preview, ROM e captura anteriores: reconstrua em diretório versionado novo e
+repita a comparação exata de todos os quadros antes da revisão humana. Os limites
+geométricos usados para encontrar a bengala em v10 são heurísticas específicas
+daquela arte, não presets universais.
+
+## 115. Registro único de artefatos e aplicação das lições (L125)
+
+Harness de produção visual usa `workflows/artifact-organization.md` e
+`artifact_registry.py`: um registro por projeto, local ou apontado pelo catálogo
+central, com IDs por asset/papel/variante, uma candidata e uma aprovada distintas.
+Paths são relativos ao projeto; raízes de projeto/pedido são explícitas. A
+ferramenta bloqueia prefixo do workspace repetido dentro do projeto, destinos
+concorrentes, aliases de symlink/hardlink, ownership duplicado, SHA stale,
+ciclos e revisão sem vínculo de continuidade. Fonte animada, concept, model
+sheet, planilha de planejamento, prova, conversão e ROM têm papéis separados.
+
+O coordenador reserva arquivos antes da escrita e sela hashes após cada
+tentativa. `harness_orchestration.py` recusa arquivos visuais/planilhas explícitos
+sem reserva, mesmo quando o task foi classificado como review/inventário.
+QA nativa mantém pedido, diretório privado e manifests próprios; não transformar
+esse destino em uma raiz alternativa de produção. Preflight não é sandbox nem
+lock de filesystem. Tipos novos registram finalidade, necessidade, procedimento
+e destino no mesmo índice. Experimentos criativos são versões/variantes explícitas;
+histórico fica preservado, sem duplicar autoridade ou escolher por maior vNN.
+
+Adoção pode selar `legacy_inventory` sem classificação/aprovação. `--scan`
+cobre áreas managed; áreas legacy são declaradamente parciais. PASS do registro
+mede consistência de organização e declarações, não validade artística, conteúdo
+futuro de diretórios, autenticidade humana, contexto/GDD ou entrega. Aprovação
+nova precisa de decisão real ligada ao papel/ID/paths/SHA. O adaptador existente
+de fonte animada conserva personagem/hash/escopo literal, sem aprovar conversão.
+
+Toda lição emitida possui rota atual em `doc/agent_learning/lesson_routes.json`:
+curadoria única e skill/workflow concreto por SHA. Refutações apontam para o
+procedimento corrigido, mantendo seus limites históricos. `audit_learning_capture.py`
+reprova rota ausente, duplicada, stale ou alias da lei como se fosse skill.
+O mapa mede cobertura/frescor, não compreensão; revisão independente testa a
+decisão do agente. Não criar outro ID para uma lição já aplicada.
+
+## 116. Preflight do raster salvo antes da conversão de sprite sheet (L126)
+
+Prompt, preview e extensão PNG não garantem grid, slots, IDs, alpha ou keycolor.
+Antes de converter uma folha preparada para exportação, confronte o arquivo
+salvo com contrato hash-bound usando `audit_source_raster.py`. Declare dimensão,
+slots/retângulos/IDs/contagem e grade quando aplicável. Alpha binário aceita
+somente 0/255 e exige transparência; opaque_key exige imagem opaca e presença
+da chave RGB declarada. Limite cromático da fonte é opcional e explícito;
+não impor automaticamente 15 cores ou paleta SMS ao concept/arte bruta.
+
+Uma folha livre pode permanecer como referência preservada, mas não herda o
+status de fonte pronta para conversão. Conserto é outra revisão, com delta,
+review e novo hash. O gate não verifica quantas poses diferentes foram desenhadas,
+halo, uniformidade do fundo, anatomia, identidade, luz ou recorte semântico.
+Presença de preto não prova fundo limpo. Gates de pixels SMS, revisão artística
+e framebuffer continuam separados (L102/L109–L124).
+
+No exercício de jab, v4 tinha 83.402 RGB e passou apenas o contrato mínimo de
+chave presente; isso não removeu os blockers visuais. V5 tinha 600.866 pixels
+com alpha parcial e nenhum totalmente opaco, reprovando o contrato de alpha.
+Os arquivos foram medidos sem alteração; nenhuma candidata foi promovida.
+
+## 117. Revisão disciplinada e promoção de concept/model sheet (L127)
+
+Antes de revisar uma matriz, congele o SHA da identidade aprovada e registre
+cada apontamento como defeito, delta visual e evidência de fechamento. Liste
+os invariantes que não podem regredir: rosto, idade, biotipo, escala, paleta,
+estilo, roupa, equipamento e vistas preservadas. Gere nova revisão sem
+sobrescrever a fonte; após a correção, faça uma segunda passagem completa pelos
+encaixes anatômicos, mãos/pegadas, terminais de objetos, silhueta, composição,
+legibilidade e continuidade entre vistas. Fonte de jogo divergente fica marcada
+como questão aberta, sem virar canon de equipamento ou moveset.
+
+A promoção exige checklist completo/hash-bound, revisão independente sem
+blockers e aprovação explícita do proprietário. Registre decisão
+`sms_artifact_decision_v1` para o papel `model_sheet`, incluindo todos os
+arquivos e SHA, atualize o head aprovado e marque a matriz ativa anterior como
+`superseded`. O escopo de aprovação permanece conceitual; não se estende a
+sprites, animação, conversão SMS, integração ou ROM.
+
+Depois da promoção, mantenha a matriz aprovada ativa e seus sidecars canonizados
+na raiz do diretório do personagem. Arquive folhas aprovadas substituídas em
+`historical_approved/`, exercícios/candidatas em `review_drafts/` e aprovações
+de papel distinto em `approved_records/`. Preserve a entrada e saída com SHA em
+mapa reversível, atualize registros e referências path-bound e não altere os
+pixels durante a organização. Preserve relatórios independentes como evidência
+da revisão original; igualdade de hash demonstra continuidade dos bytes, não
+renova julgamento artístico. `audit_art_review_checklist.py`,
+`quality_review_router.py`, `artifact_registry.py --scan` e
+`audit_learning_capture.py` cobrem estados, escopos, hashes e organização, mas
+não substituem a leitura visual independente nem autenticam a aprovação humana.
+
+## 118. Terminador 0xD0 da SAT existe só no modo 192 linhas (L128)
+
+O Y armazenado 0xD0 encerra o parsing da SAT apenas no modo de 192 linhas. Nos
+modos de 224 e 240 linhas (`VDPFEATURE_224LINES` / `VDPFEATURE_240LINES`, que o
+header marca como SMS II only) 0xD0 é um Y comum: o VDP percorre as 64 entradas
+e o sprite conta nas scanlines que cobre. Fonte: corpus hasheado
+`out/smspower_corpus_2026-10-12/Sprites.txt` ("This only works in the 192-line
+display mode").
+
+Consequências:
+
+- em 224/240, truncar a SAT com 0xD0 não esconde os sprites seguintes nem vale
+  como otimização; entrada não usada precisa de outro Y fora da área visível;
+- manifesto de cena declara `screen_h` ∈ {192, 224, 240}; qualquer outro valor
+  reprova;
+- manifesto em 224/240 com `sat_terminated: true` reprova.
+
+Gate: `audit_sprite_line_sim.py` (`--self-check` cobre 0xD0 reprovado em 192,
+aprovado em 224, truncamento declarado em 224 e `screen_h` inválido).
+
+Limites: a regra vem do corpus e não foi medida em emulador nem em console. O
+comportamento em silício dos modos 224/240 fica `hardware_pass` pendente e não
+é gate de emulador. A convenção de offset do Y armazenado foi fechada na §119.
+
+## 119. Overflow de sprites é do buffer de parsing; Y armazenado é y − 1 (L129)
+
+A cada scanline o VDP percorre a SAT em ordem e põe num buffer de 8 entradas
+os sprites cujo Y e altura caem na linha seguinte. O parsing para quando as 64
+entradas foram vistas, quando o buffer enche ou, em 192 linhas, no terminador
+(§118). Se o buffer encheu e ainda há sprite na linha, o bit 6 do status é
+setado e fica assim até a leitura da porta de controle. A contagem ignora X e
+padrão: oito sprites transparentes ou fora da tela enchem o buffer e derrubam
+o nono, mesmo sendo o único visível. Fonte: corpus hasheado
+`out/smspower_corpus_2026-10-12/Sprites.txt`, seção "Table parsing".
+
+Consequências:
+
+- quem decide o que some é a **ordem da SAT**, não a posição na tela; sprite
+  que não pode sumir entra antes na SAT;
+- "esconder" sprite deixando-o na SAT com tile vazio não libera orçamento de
+  scanline; para liberar, a entrada sai da linha (outro Y) ou da SAT;
+- o manifesto de cena lista `sprites` em ordem de SAT e declara com
+  `hidden: true` toda entrada sem pixel visível que a ROM mantém na SAT.
+  Entrada que a ROM emite e o manifesto omite deixa o gate cego.
+
+Offset de Y: o VDP desenha o sprite em `stored + 1`. `SMS_addSprite` grava
+`y − 1`, então o `y` passado à SMSlib é a primeira linha desenhada, e o valor
+que colide com o terminador é `y = 0xD1` (a variante com checagem devolve −2).
+Lastro: os bytes de `SMSlib_sprite` em `sdk/devkitSMS/SMSlib/SMSlib.lib`
+(`cp #0xD1`, `dec a` antes da escrita em `SpriteTableY`), lidos com apoio da
+fonte upstream, mais o corpus. O simulador usava `y + 1` e reprovava y = 207
+(que grava 0xCE) enquanto aprovava y = 209.
+
+Gate: `audit_sprite_line_sim.py` reporta por linha o buffer, os descartados e
+os descartados visíveis, e reprova qualquer linha com overflow. `--self-check`
+tem o caso de 8 `hidden` + 1 visível, que reprova, e o de y = 207, que aprova.
+
+Limites: o gate mede o manifesto, não a SAT que a ROM escreve; o flag de
+overflow em runtime não foi lido em emulador nem em console. Bordas de Y
+(valores armazenados perto de 0xFF) não estão modeladas.
+
+## 120. Qualidade conjunta e taxa regional: aplicar os gates ao jogo real (L013/L035/L078–L081/L123)
+
+Antes de ampliar slice/RC, usar `workflows/product-quality-checkpoint.md`: público
+e critérios no GDD, input→ação→feedback→consequência, imagem no tamanho nativo,
+música+SFX+restauração de canais, IA/HUD/FX simultâneos e pior frame da cena.
+Parecer de agente não é playtest com público nem valida aceitação comercial.
+Mais efeitos/tamanho ou nomes AAA não provam qualidade; técnica avançada precisa
+de ganho observável, budget medido e fallback dentro do escopo.
+
+`measure_runtime_probe.py --session` exige NTSC60/PAL50 em pelo menos duas
+janelas completas, tolerância explícita até1FPS e dispersão até1FPS. Janelas
+NTSC55 ouNTSC50 reprovam alvo60. `emulicious_dap.fps_constant` não descarta
+amostra ausente nem aceita janela única. Taxa média regional não prova deadline
+por frame, reação da lógica ou pose apresentada: contador ISR pode avançar sem
+gameplay completo. Medir worst-frame/pacing e latência separadamente, em ROM
+completa/SHA atual. Metas de controle pertencem ao GDD; não inventar limiar
+universal de diversão. Resultado histórico50..60 não é aprovação target60.
+
+L003/L006/L128/L129 aplicam também ao schema e packer: modo físico8x8/8x16,
+Ystored=(y−1)&255, ordemSAT incluihidden. `audit_sprite_line_sim.py` rejeita
+coerçãofloat/string/bool e perfil negativo/wrap não modelado. Manifesto não
+observaSATreal; quirkszoomSMS1 continuam sem qualificação.
+
+L124/L127: emendas de edição por revisão, máscara/franja, deltas deownership e
+contorno separados dealpha; sólido2x2 não é área/bbox. Convergência não aprova
+sombra/anatomia. Decisão de fonte emres/approved_art não comprova ROMbuildada
+ourodando; conflito com memória/registry precisa reconciliação explícita.
+
+`audit_claims.py` requer identificadores/escopo/autor/data e teto textual
+não vazios. O gate lexical não autentica aprovação nem julga a semântica do
+escopo; `reconcile_claims.py` histórico também não é checklist dequalidade
+comercial. Nenhum PASS desses gates substitui evidência fresca, review nativo
+e todos os eixos da entrega.

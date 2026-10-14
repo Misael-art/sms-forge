@@ -1,0 +1,202 @@
+{
+  "curation_id": "2026-10-04_l106_revisao_artistica_anatomia_e_equipamento",
+  "date": "2026-10-04",
+  "title": "Revisão artística por personagem: anatomia, empunhadura e equipamento",
+  "kind": "curation",
+  "scope": "Master of Fighters roster concepts and sprite sheets; reusable SMSForge visual-review practice",
+  "authorization": "O dono forneceu uma lista detalhada de defeitos nos sete personagens, pediu correção da imagem e solicitou investigar e ajustar o fluxo revisor de arte.",
+  "lessons": [
+    {
+      "id": "L106",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Revisão artística precisa de eixos obrigatórios por personagem: identidade/face; anatomia e handedness das duas mãos; cadeia mão→empunhadura→guarda→arma; articulações; fixação e perspectiva dos acessórios; silhueta/proporção; pé/baseline; outline/recorte; paleta/material/luz; harmonia do roster. O gate confirma cobertura, estados, notas e hashes; verdade visual depende de revisor read-only independente e aprovação humana.",
+      "root_cause": "O fluxo genérico de revisão independente existia, mas não exigia uma inspeção anatômica e de equipamento por personagem. Os gates disponíveis cobriam dimensões, conectividade e regiões de material, mas não indicavam se dedos abraçavam uma empunhadura, se a guarda continuava até a lâmina, se o polegar/handedness era coerente, ou se equipamentos tocavam e acompanhavam a anatomia. A lista ampla de revisão permitia que essas omissões passassem.",
+      "evidence": {
+        "owner_reference": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/review_evidence/harmony_morphology_study_v1_user_input_20261004.png",
+        "owner_reference_sha256": "84596e58edbc062ed065cc2c1709f8e6150db9834fe0c83af7c2e65b3ab1b7d0",
+        "reported_character_defects": "See reported_defects and global_reported_defects in this curation record.",
+        "corrected_board_candidate": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_review_candidate.png",
+        "corrected_board_sha256": "ad1b657bddd4da27f1d9033f436d8987130da6b8d408dca9f6610a94110e471a",
+        "review_checklist": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_review_checklist.json",
+        "owner_feedback_after_v2_2026_10_08": {
+          "observation": "O dono apontou que a candidata v2 ainda mostrava o braço do boomerang distorcido/visualmente junto ao braço da rapieira, após a inspeção do produtor ter tratado a correção anterior como suficiente. Foi gerada a v3 com o braço do boomerang dobrado junto ao quadril e separação visual; v3 continua candidata, sem aprovação do dono.",
+          "candidate_v2": {
+            "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2.png",
+            "sha256": "fda6ac29b32f0b40ddbd80d5795b889aabd55854c6d3d712edffa7064be3cef6"
+          },
+          "revised_candidate_v3": {
+            "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3.png",
+            "sha256": "b584fd87ec2fe1560e5a5d77373198ba87d0fd63a714302982c8f35ab34177aa"
+          },
+          "review_checklist_v3": {
+            "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v3.json",
+            "sha256": "b0386c5c018c703ea050ab30228987595ff9f917fbd030ef268e01cc5083bf67"
+          },
+          "review_report_v3": {
+            "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_report_v3.json",
+            "sha256": "3798c4af45d8b58713bb94ee4262ea00d892f5a4a326a83ba9ae2edccf80dbfd"
+          },
+          "finding": "A lista de eixos e o gate de cobertura/hash não demonstram por si que o defeito específico foi eliminado. A revisão precisa comparar explicitamente o achado do dono com o artefato novo e reexaminar todos os eixos após cada revisão; a conclusão continua dependendo de revisão read-only independente e aprovação do dono.",
+          "future_curation_input": "Avaliar atualização de workflows/skill revisor para tornar obrigatória uma segunda passagem de fechamento de defeitos: vínculo achado→região no artefato→estado pass/fail/pending, comparação antes/depois e nova conferência integral do checklist. Não promovido neste registro.",
+          "status": "evidence_added_to_existing_L106_no_new_lesson_id"
+        }
+      },
+      "limits": "The v2 board is a high-resolution RGB art-direction illustration, not a Master System sprite sheet. It is pending independent review and owner approval. It provides no palette, pixel-grid, cutout, animation, integration, ROM, emulator or AAA evidence.",
+      "rule_section": "SMS_GLOBAL §91",
+      "tool_that_measures": "audit_art_review_checklist.py",
+      "skill_that_teaches": "workflows/art-review.md; skills/sms-visual-excellence.md; workflows/new-visual-asset.md"
+    }
+  ],
+  "owner_report": {
+    "evidence": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/review_evidence/harmony_morphology_study_v1_user_input_20261004.png",
+      "sha256": "84596e58edbc062ed065cc2c1709f8e6150db9834fe0c83af7c2e65b3ab1b7d0"
+    },
+    "summary": "O dono apontou falhas construtivas nos sete personagens e inconsistências globais de contorno, recorte, paleta/material e iluminação."
+  },
+  "assessment_of_existing_flow": {
+    "workflow_existed": true,
+    "existing_workflows": [
+      "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+      "tools/sms_wrapper/.agent/workflows/independent-quality-review.md",
+      "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+    ],
+    "existing_measurements": [
+      "tools/sms_wrapper/audit_roster_harmony.py mede bbox/escala e relações, não anatomia, expressão, encaixe de arma, perspectiva ou estilo.",
+      "tools/sms_wrapper/audit_sprite_cutout.py mede componente opaco e regiões de material, não avalia mão, arma, articulação ou identidade.",
+      "tools/sms_wrapper/quality_review_router.py cria um plano read-only de domínio art em checkpoints, mas não exigia checklist anatômico por personagem."
+    ],
+    "gap": "O fluxo pedia revisão visual de forma geral, mas não exigia uma verificação registrada de ambas as mãos, handedness, cadeia mão→empunhadura→guarda→arma, articulações, fixação/perspectiva de acessórios, contato com o chão e consistência de acabamento entre todo o elenco. A prancha podia seguir mesmo com defeitos visíveis nesses pontos."
+  },
+  "reported_defects": [
+    {
+      "character": "Golden Axe Warrior",
+      "issues": [
+        "olhos borrados ou assimétricos",
+        "mão direita com dedos/polegar e empunhadura duvidosos",
+        "escudo preso ao antebraço sem grip/tiras legíveis",
+        "artefatos de contorno na capa e junto à bainha"
+      ]
+    },
+    {
+      "character": "Hayato / Kenseiden",
+      "issues": [
+        "dedos da mão esquerda estendida achatados",
+        "polegar da mão direita no bastão pouco legível",
+        "destaque do olho grande e cromaticamente estranho",
+        "bastão termina abruptamente e perde alinhamento reto"
+      ]
+    },
+    {
+      "character": "Joe Musashi / Shinobi",
+      "issues": [
+        "punho direito lê como bloco sem plano de nós dos dedos",
+        "cotovelo esquerdo reto demais para a guarda",
+        "pixel vermelho/castanho incoerente na abertura da máscara"
+      ]
+    },
+    {
+      "character": "Dr. Ferdinand Social",
+      "issues": [
+        "espada-cana baixa cruza pé/chão",
+        "mão direita, cabo, guarda e lâmina não se conectam visualmente",
+        "palma levantada parece mão direita no braço esquerdo",
+        "mancha escura/roxa no olho parece borrão ou tapa-olho"
+      ]
+    },
+    {
+      "character": "Alis Landale",
+      "issues": [
+        "dedos não envolvem o cabo da espada",
+        "olho sob a franja borrado/vermelho",
+        "escudo oval plano, sem acompanhar rotação do braço"
+      ]
+    },
+    {
+      "character": "Landau / Lord of the Sword",
+      "issues": [
+        "espada desalinhada com punho e sem guarda legível",
+        "mão esquerda pequena com dedos fundidos",
+        "arco/aljava/setas misturados, pontas assimétricas e corda ausente"
+      ]
+    },
+    {
+      "character": "J.J. / Zillion II",
+      "issues": [
+        "pistola laser Zillion e sua silhueta perderam identidade e legibilidade",
+        "cabelo/capacete conflitam e há pixel branco solto junto ao olho",
+        "joelheira da perna traseira desalinhada do joelho"
+      ]
+    }
+  ],
+  "global_reported_defects": [
+    "espessura/continuidade de outline varia entre personagens e equipamentos",
+    "marcas soltas e recortes ásperos perto dos pés",
+    "realces de armas não seguem de forma consistente os materiais e a luz dos corpos",
+    "a imagem enviada é uma ilustração RGB de direção de arte em 2172×724, não sprite SMS em grade; portanto não comprova pixels soltos, antialiasing, paleta mestra nem recorte de sprite"
+  ],
+  "root_cause": "As auditorias disponíveis cobriam dimensões e componentes de pixels, mas não obrigavam o revisor a rastrear relações anatômicas e pontos de contato de cada personagem. O checklist de escala e a revisão geral não eram suficientes para impedir que mão, arma, face, equipamento e baseline defeituosos passassem despercebidos.",
+  "corrective_actions": [
+    "Criado workflow tools/sms_wrapper/.agent/workflows/art-review.md com sequência fixa de inspeção de face, mãos/handedness, articulações, arma/empunhadura, fixação e perspectiva, baseline, outline/recorte, paleta/luz e harmonia do roster.",
+    "Adicionada seção 91/L106 em tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md; produtor não se autoaprova, falha bloqueia e pendência impede promoção.",
+    "Atualizados new-visual-asset.md, independent-quality-review.md e sms-visual-excellence.md para exigir o workflow e registrar cada eixo por personagem.",
+    "Criado audit_art_review_checklist.py: mede cobertura de eixos, status/notas, referências hash-bound, revisão independente, aprovação do dono e frescor dos arquivos; não finge classificar anatomia por visão computacional.",
+    "Adicionado o gate à tabela de ferramentas em AGENTS.md, ao selftest principal e à validação automática de ferramentas com --self-check.",
+    "Arquivada a imagem submetida e gerado um novo quadro v2 corrigindo os defeitos reportados; Dr. Social recebeu uma segunda edição localizada para tornar contínuos mão, cabo, guarda e lâmina da espada-cana."
+  ],
+  "revised_candidate": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_review_candidate.png",
+    "sha256": "ad1b657bddd4da27f1d9033f436d8987130da6b8d408dca9f6610a94110e471a",
+    "lineage": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_lineage.json",
+    "checklist": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_review_checklist.json",
+    "review_report": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_review_report.json",
+    "review_report_sha256": "03f0021b1e9b7ae027cebcd98b72cc29c796698b1c77ad151640a6d5d4fd4c59",
+    "status": "awaiting independent art review and owner decision",
+    "limits": [
+      "É ilustração RGB de direção de arte, não arte final em pixel SMS.",
+      "Paleta exata, contorno em grade, alpha/cutout, animação, integração em res e ROM continuam sem validação.",
+      "Os defeitos do quadro inicial foram reportados pelo dono; a imagem corrigida permanece candidata até revisão independente e aprovação explícita do dono."
+    ]
+  },
+  "measurement": {
+    "tool": "tools/sms_wrapper/audit_art_review_checklist.py",
+    "self_check_required": true,
+    "candidate_review_result": "pending until independent axes and owner approval are supplied",
+    "candidate_report": {
+      "status": "pending",
+      "exit_code": 2,
+      "characters": 7,
+      "axes_pending": 77,
+      "problems": 0,
+      "reason": "reviewer/owner statuses intentionally remain open"
+    },
+    "checks": {
+      "audit_art_review_checklist_self_check": "pass",
+      "selftest_root": "pass; 68/68, incluindo checklist hash-bound válida e rejeição de fixtures inválidas",
+      "candidate_verify_hashes": "pending como esperado; 77 eixos pendentes, zero problemas de esquema/hash; exit 2",
+      "audit_learning_capture_root": "pass",
+      "audit_doc_sync_root": "pass",
+      "validate_measurement_tools": "pass; 51 tools self-checked",
+      "audit_sprite_cutout_self_check": "pass",
+      "audit_roster_harmony_self_check": "pass"
+    },
+    "claim_ceiling": "checklist coverage/hash validity only; not a computer-vision verdict"
+  },
+  "sources": [
+    "tools/sms_wrapper/.agent/workflows/art-review.md",
+    "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+    "tools/sms_wrapper/.agent/workflows/independent-quality-review.md",
+    "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
+    "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+    "tools/sms_wrapper/audit_art_review_checklist.py",
+    "tools/sms_wrapper/selftest.py",
+    "AGENTS.md",
+    "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_lineage.json",
+    "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_review_checklist.json",
+    "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2.png",
+    "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3.png",
+    "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v3.json",
+    "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_report_v3.json"
+  ],
+  "dedup_key": "l106_roster_art_review_anatomy_grips_equipment_2026_10_04"
+}

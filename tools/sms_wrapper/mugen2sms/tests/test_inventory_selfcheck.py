@@ -3,6 +3,8 @@
 import subprocess, sys
 from pathlib import Path
 PKG_ROOT = Path(__file__).resolve().parents[1]          # .../mugen2sms
+sys.path.insert(0, str(PKG_ROOT.parent))
+from mugen2sms.inventory import parse_def_info  # noqa: E402
 
 
 def test_selfcheck_passes():
@@ -23,3 +25,8 @@ def test_selfcheck_fails_when_summarize_is_corrupted():
     r = subprocess.run([sys.executable, "-c", code], cwd=PKG_ROOT.parent,
                        capture_output=True, text=True)
     assert r.returncode == 0, "self-check passou com summarize corrompido"
+
+
+def test_def_inventory_preserves_legacy_author_colon():
+    info = parse_def_info("[Info]\nname = Terry\nAuthor: Falchion22\n[Files]\n")
+    assert info == {"name": "Terry", "author": "Falchion22"}

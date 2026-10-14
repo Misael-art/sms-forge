@@ -19,6 +19,10 @@ SUFFIX_GATES = ("_gate.py",)
 # Oráculos de autonomia (L036): decisão/plano com --self-check obrigatório.
 DOCTRINE_ALWAYS = {"harness_orchestration.py", "quality_review_router.py",
                    "emulator_input.py", "prepare_sms_pixel_art.py",
+                   "blastem_sms.py",
+                   "blastem_diagnostics.py", "blastem_maintenance.py",
+                   "blastem_dump_diff.py",
+                   "artifact_registry.py", "mugen2sms/analysis/trace_compare.py",
                    "mugen2sms/analysis/scale_pilot.py"}
 
 # Nao sao ferramentas de medicao: constroem, geram ou orquestram.

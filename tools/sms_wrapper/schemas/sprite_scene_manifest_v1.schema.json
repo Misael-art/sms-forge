@@ -4,7 +4,7 @@
   "type": "object",
   "required": ["sprite_size", "sprites"],
   "properties": {
-    "sprite_size": {"enum": ["8x8", "16x16"]},
+    "sprite_size": {"enum": ["8x8", "8x16"], "description": "Physical global VDP mode; 16x16 art requires multiple objects"},
     "zoomed": {"type": "boolean", "default": false},
     "screen_h": {"type": "integer", "enum": [192, 224, 240], "default": 192},
     "sprites": {
@@ -13,10 +13,11 @@
         "type": "object",
         "required": ["y", "x", "tile"],
         "properties": {
-          "y": {"type": "integer", "minimum": -64, "maximum": 255},
+          "y": {"type": "integer", "minimum": 0, "maximum": 255, "description": "SMS_addSprite coordinate; stored Y=(y-1)&255. Negative/wrap positioning not qualified by this model."},
           "x": {"type": "integer", "minimum": 0, "maximum": 255,
-                 "description": "X logico; armazenado = X+32 pelo driver"},
-          "tile": {"type": "integer", "minimum": 0, "maximum": 255}
+                 "description": "Logical sprite X, no universal +32 offset"},
+          "tile": {"type": "integer", "minimum": 0, "maximum": 255},
+          "hidden": {"type": "boolean", "description": "SAT entry retained but not visibly rendered; still fills parsing buffer"}
         }
       }
     }

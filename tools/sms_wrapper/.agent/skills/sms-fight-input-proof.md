@@ -11,11 +11,14 @@ leitura de código da caixa de colisão NÃO é resposta.
    `P[1].state` em 0xC027, `P[1].guard` em 0xC02F — derivados de `_P` no
    `.map` do linker + `sizeof(Fighter)`). Whiff sem estado do defensor não
    tem causa atribuível.
-2. **Cronometragem é por tempo de relógio, com o emulador RODANDO contínuo.**
-   Polling DAP pausado tem granularidade de 2-4 frames por ciclo; janela de
-   frames fixa erra por ±8 px (medido no MSSF2T, 2026-09-08). O polling só
-   acha o GATILHO (ex.: `P[1].state == ST_PUNCH`); as respostas (recuar X ms,
-   entrar Y ms, apertar) são `sleep` de relógio sobre teclas seguradas.
+2. **QA atual usa frames VDP em sessão privada (§93).** `emulator_input.py
+   --session ID --script` recebe P1/P2/console e duração inteira. Não usar
+   sleep/foco de host entre passos, nem ampliar hist da ROM para compensar
+   o instrumento. Baseline/precondição precedem o gesto; cauda neutra explícita
+   permite reação/recovery. Um caso independente usa sessão nova; chained
+   declara uma timeline cumulativa (§96). ACK da ponte não paga eco/ação/dano.
+   DAP pausado serve diagnóstico/dump posterior, não amostra tick a tick
+   (L097). Gravador ROM e vídeo durante o gesto preservam estados curtos.
 3. **Atribuição de dano exige dano compatível com o golpe.** Tabela do
    projeto (molde MSSF2T: soco 7, chute 10, projétil 12, chip de guarda 2).
    Queda de 10 com "pose de soco por perto" é CHUTE — janela de associação
@@ -37,23 +40,23 @@ leitura de código da caixa de colisão NÃO é resposta.
 - **Round acaba no meio da prova**: a prova de input precisa de
   `_wait_fight` entre tentativas (KO/RESULT/TÍTULO matam input de jogo) e
   re-aproximação depois de reset de round.
-- **Foco por teclado custa 1-2 s**: `ensure_focus` entre o gatilho e a tecla
-  arruína a janela — garantir foco ANTES da espera, nunca entre gatilho e
-  aperto.
-- **CLI do usuário**: o canal é kdotool (foco KWin/DBus) + ydotool (uinput)
-  — L039. xdotool/XTEST não atravessa Wayland/KWin.
-- **Refoco entre teclas de um QCF** (L065): `press_spec` default reativa a
-  janela a cada passo (~300 ms no Wayland = ~18 frames). Hist de 8 ticks
-  (~133 ms) perde o Down. Usar `refocus=False` no gesto. Não alargar o
-  buffer do jogo (L067).
-- **Amostra do hist depois da janela** (L066): 0,9 s depois só há neutro.
-  Ler hist/qcf no máximo alguns frames após o A.
+- **Atraso do harness não é defeito do comando** (L065–L067): o legado
+  kdotool+ydotool/refocus é supersedido para QA automatizada. Janela CMD e anel
+  vêm do personagem; sessão privada elimina disputa de foco. Registre hist/qcf
+  durante a janela do gesto; leitura tardia pode mostrar apenas neutro.
 - **B1 só na borda** (L067): `qcf==1` com especial ainda idle — o botão
   chegou em HOLD. Aceitar hold na janela de 8; não crescer o hist.
 
-## Molde vivo
+## Molde histórico e prova nova
 
 `SMS_projects/MSSF2T/tools/prove_input_memory.py` — `punch_window`,
 `linha_tempo_b1`, `P1_STATES`, `_wait_fight`, whiff-punish por tempo de
 relógio. O self-check dele (26 fixtures) é a regressão da lógica de
 veredito.
+
+O molde conserva o alcance da ROM/SHA e do instrumento histórico. Para nova
+build, preparar pedido V2 com contexto legível (§99), identificação dos atores,
+casos de whiff/hit/guard e oponente móvel/IA conforme GDD. Endereços do exemplo
+não são API do SMS; derivar mapa/schema da ROM atual. Dano atribuível exige
+contact state e identidade do ataque/defensor, não só pose próxima. Fonte
+estática ou defensor imóvel não aprova invalidação dinâmica (§98).

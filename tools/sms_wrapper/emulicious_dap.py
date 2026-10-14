@@ -92,8 +92,10 @@ def fps_constant(fps_list, min_fps=50.0, max_fps=60.0, spread=2.0):
     Duas janelas na faixa 50..60 e concordantes: eixo fps_CONSTANTE, nao
     fps medio (§36). Um único valor repetido em todas as janelas vale.
     """
-    vals = [f for f in (fps_list or []) if f is not None]
-    if not vals:
+    import math
+    vals = fps_list
+    if (not isinstance(vals, list) or len(vals) < 2 or
+        any(type(f) not in (int, float) or not math.isfinite(f) for f in vals)):
         return False, None
     sp = round(max(vals) - min(vals), 2)
     ok = all(min_fps <= f <= max_fps for f in vals) and sp <= spread

@@ -69,12 +69,18 @@ PROBE_FRAME = 0xC7F0
 PROBE_STATE = 0xC7F6
 PROFILE_ADDRS = {
     "wait": 0xC7D0,
-    "stream": 0xC7D1,
-    "palette": 0xC7D2,
     "hud": 0xC7D3,
     "sat": 0xC7D4,
+    "stream": 0xC7D1,
 }
 PROFILE_SPILL_MAX = 0xC7D6
+LOOP_PROFILE_SEQ = 0xC7D2
+LOOP_PROFILE_NAMES = (
+    "wait", "hud", "sat", "stream", "track", "cpu_input", "step_p1",
+    "step_p2", "logic_end", "draw_start", "draw_scan", "draw_schedule",
+    "draw_emit", "draw_add", "render_end", "audio_end",
+)
+LOOP_PROFILE_FRAME_LINES = 262
 PROBE_WINDOW_FRAMES = 3000
 PROBE_DEFAULT_WAIT_SECONDS = int(PROBE_WINDOW_FRAMES / 50.0 + 30.0)
 PROBE_MAX_WAIT_SECONDS = 1800
@@ -100,6 +106,19 @@ PROFILE_RX = {
 }
 PROFILE_SPILL_RX = re.compile(
     r"__at\(0xC7D6\)\s+probe_vline_spill_max\b")
+LOOP_PROFILE_RX = (
+    re.compile(r"__at\(0x[0-9A-Fa-f]{4}\)\s+tl_snap\[16\]"),
+    re.compile(r"__at\(0xC7D2\)\s+tl_snap_seq\b"),
+    re.compile(r"probe_frame\s*<=\s*WORST_FRAME_WINDOW"),
+)
+LOOP_PROFILE_ADDR_RX = re.compile(
+    r"__at\(0x([0-9A-Fa-f]{4})\)\s+tl_snap\[16\]")
+LOOP_PROFILE_NAMES_RX = re.compile(
+    r"/\*\s*LOOP_PROFILE_NAMES:\s*([A-Za-z_][A-Za-z0-9_]*(?:\s*,\s*"
+    r"[A-Za-z_][A-Za-z0-9_]*)*)\s*\*/")
+LOOP_PROFILE_METRICS_RX = re.compile(r"/\*\s*LOOP_PROFILE_METRICS:\s*([^*]+)\*/")
+LOOP_PROFILE_METRIC_RX = re.compile(
+    r"([A-Za-z_][A-Za-z0-9_]*)\s*@\s*(0x[0-9A-Fa-f]{4})\s*:\s*u(8|16)")
 
 
 def probe_contract(project):
@@ -134,6 +153,142 @@ def profile_contract(project):
             and PROFILE_SPILL_RX.search(text) is not None)
 
 
+def loop_profile_contract(project):
+    """A loop profile must be a complete, seqlock-protected snapshot."""
+    src = os.path.join(project, "src")
+    text = ""
+    if os.path.isdir(src):
+        for f in sorted(os.listdir(src)):
+            if f.endswith((".c", ".h")):
+                with open(os.path.join(src, f), errors="replace") as fh:
+                    text += fh.read()
+    return (all(rx.search(text) for rx in LOOP_PROFILE_RX)
+            and loop_profile_address_text(text) is not None
+            and text.count("tl_snap_seq++") >= 2
+            and loop_profile_names(project) is not None
+            and loop_profile_metrics(project) is not None)
+
+
+def loop_profile_address_text(text):
+    """Resolve the snapshot address from the source instead of assuming one map."""
+    matches = list(LOOP_PROFILE_ADDR_RX.finditer(text))
+    if len(matches) != 1:
+        return None
+    address = int(matches[0].group(1), 16)
+    if not 0xC000 <= address <= 0xDFF0:
+        return None
+    return address
+
+
+def loop_profile_address(project):
+    """Read the declared address of tl_snap[16] from project source files."""
+    src = os.path.join(project, "src")
+    text = ""
+    if os.path.isdir(src):
+        for f in sorted(os.listdir(src)):
+            if f.endswith((".c", ".h")):
+                with open(os.path.join(src, f), errors="replace") as fh:
+                    text += fh.read()
+    return loop_profile_address_text(text)
+
+
+def loop_profile_names(project):
+    """Read optional source labels for the active prefix of tl_snap[16]."""
+    src = os.path.join(project, "src")
+    text = ""
+    if os.path.isdir(src):
+        for f in sorted(os.listdir(src)):
+            if f.endswith((".c", ".h")):
+                with open(os.path.join(src, f), errors="replace") as fh:
+                    text += fh.read()
+    matches = list(LOOP_PROFILE_NAMES_RX.finditer(text))
+    if not matches:
+        return LOOP_PROFILE_NAMES
+    if len(matches) != 1:
+        return None
+    names = tuple(name.strip() for name in matches[0].group(1).split(","))
+    if not (2 <= len(names) <= 16) or len(set(names)) != len(names):
+        return None
+    return names
+
+
+def loop_profile_metrics(project):
+    """Read optional fixed-RAM counters emitted with the loop snapshot."""
+    src = os.path.join(project, "src")
+    text = ""
+    if os.path.isdir(src):
+        for f in sorted(os.listdir(src)):
+            if f.endswith((".c", ".h")):
+                with open(os.path.join(src, f), errors="replace") as fh:
+                    text += fh.read()
+    matches = list(LOOP_PROFILE_METRICS_RX.finditer(text))
+    if not matches:
+        return ()
+    if len(matches) != 1:
+        return None
+    specs = []
+    used_addresses = set()
+    used_names = set()
+    for item in matches[0].group(1).split(","):
+        match = LOOP_PROFILE_METRIC_RX.fullmatch(item.strip())
+        if not match:
+            return None
+        name, address, bits = match.groups()
+        address = int(address, 16)
+        size = int(bits) // 8
+        if (name in used_names or address < 0xC000 or address + size > 0xE000
+                or any(address + offset in used_addresses for offset in range(size))):
+            return None
+        used_names.add(name)
+        used_addresses.update(address + offset for offset in range(size))
+        specs.append({"name": name, "address": address, "width": size})
+    return tuple(specs) if specs else None
+
+
+def profile_source_project(project, rom):
+    """Prefer the declared source project over inferring from a ROM copy.
+
+    Private emulator sessions run a copied ROM from a temporary session
+    directory. Inferring the project from that copy loses the source tree,
+    which made the measurement silently omit its optional loop profile.
+    """
+    explicit = os.path.abspath(project) if project else ""
+    if explicit and os.path.isdir(os.path.join(explicit, "src")):
+        return explicit
+    return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(rom))))
+
+
+def loop_profile_report(raw, seq, names=None, vblank_serials=None):
+    """Decode the ROM's committed checkpoint snapshot, or reject it."""
+    names = tuple(names or LOOP_PROFILE_NAMES)
+    complete = isinstance(raw, (list, tuple)) and len(raw) == len(names) \
+        and all(v is not None for v in raw)
+    stable = seq is not None and (seq & 1) == 0
+    wraps_known = (isinstance(vblank_serials, (list, tuple))
+                   and len(vblank_serials) == len(names)
+                   and all(v is not None for v in vblank_serials))
+    cumulative = (profile_lines_with_vblank(raw, vblank_serials)
+                  if complete and stable and wraps_known else
+                  profile_lines(raw) if complete and stable else None)
+    valid = cumulative is not None
+    absolute = dict(zip(names, cumulative)) if valid else None
+    stage_lines = ([cumulative[0]] + [cumulative[i] - cumulative[i - 1]
+                                      for i in range(1, len(cumulative))]
+                   if valid else None)
+    return {
+        "seq": seq,
+        "coherent_snapshot": stable,
+        "profile_valido": valid,
+        "frame_wraps_known": wraps_known,
+        "vblank_serials": list(vblank_serials) if wraps_known else None,
+        "checkpoints": list(names),
+        "raw": dict(zip(names, raw or [])),
+        "linhas_desde_inicio": absolute,
+        "linhas_desde_wait": absolute,  # compatibilidade do mapa padrão antigo
+        "linhas_por_etapa": dict(zip(names, stage_lines)) if stage_lines else None,
+    }
+
+
 def state_label(project, state):
     """Use enum ST_* when the project declares one; otherwise retain GS map."""
     if state is None:
@@ -159,7 +314,8 @@ def profile_lines(raw):
 
     NTSC tem a descontinuidade documentada DA→D5 e volta FF→00. D5–DA pode
     ocorrer dos dois lados da primeira descontinuidade, então a ordem temporal
-    dos checkpoints resolve a ocorrência mais cedo compatível.
+    resolve a ocorrência mais cedo compatível. O acumulador aceita várias
+    voltas completas da tela; um frame caro pode passar de 262 linhas.
     """
     def candidates(v):
         if v is None:
@@ -178,11 +334,59 @@ def profile_lines(raw):
     elapsed = [0]
     prev = first
     for v in raw[1:]:
-        choices = [n for n in candidates(v) if n >= prev]
+        choices = []
+        for base in candidates(v):
+            wraps = max(0, (prev - base + 261) // 262)
+            choices.append(base + wraps * 262)
         if not choices:
             return None
         prev = min(choices)
         elapsed.append(prev - first)
+    return elapsed
+
+
+def profile_vcounter_candidates(v):
+    """Map SMS VCounter readings to possible lines relative to VBlank."""
+    if v is None:
+        return []
+    if v < 0xC0:
+        return [70 + v]
+    if v <= 0xD4:
+        return [v - 0xC0]
+    if v <= 0xDA:
+        return [v - 0xC0, 27 + v - 0xD5]
+    return [27 + v - 0xD5]
+
+
+def profile_lines_with_vblank(raw, vblank_serials):
+    """Resolve full VCounter wraps with a serial sampled at each checkpoint.
+
+    The VCounter-only path chooses the smallest compatible elapsed interval.
+    That aliases one or more complete SMS frames when a phase takes multiple
+    frames. The VBlank interrupt serial adds those wraps back in.
+    """
+    if (not isinstance(raw, (list, tuple)) or
+            not isinstance(vblank_serials, (list, tuple)) or
+            not raw or len(raw) != len(vblank_serials) or
+            any(v is None for v in raw) or
+            any(v is None for v in vblank_serials)):
+        return None
+    minimum = profile_lines(raw)
+    first_candidates = profile_vcounter_candidates(raw[0])
+    if minimum is None or not first_candidates:
+        return None
+    first_line = min(first_candidates)
+    elapsed = [0]
+    for i in range(1, len(raw)):
+        serial_delta = (int(vblank_serials[i]) -
+                        int(vblank_serials[i - 1])) & 0xFF
+        min_prev, min_cur = minimum[i - 1], minimum[i]
+        min_crossings = ((first_line + min_cur) // LOOP_PROFILE_FRAME_LINES -
+                         (first_line + min_prev) // LOOP_PROFILE_FRAME_LINES)
+        if serial_delta < min_crossings:
+            return None
+        elapsed.append(elapsed[-1] + (min_cur - min_prev) +
+                       (serial_delta - min_crossings) * LOOP_PROFILE_FRAME_LINES)
     return elapsed
 
 
@@ -319,6 +523,35 @@ def measure(rom, project, seconds=45.0, out_name="worst_frame",
         logf.close()
 
 
+def measure_private(session, project, seconds=45.0, out_name="worst_frame", wait_seconds=None):
+    """Sessao privada (§93): ROM roda em tempo real SEM nenhuma leitura durante a janela; uma unica
+    leitura depois do selo (done=1). Sem porta DAP, sem janela do usuario. Carga do host registrada."""
+    import json as _j
+    from session_bridge.isolated import load, sha, request, MemoryReader, performance_reservation, project_reservation
+    root, meta = load(session)
+    rom = str(root / "emulator/rom.sms")
+    wait_s = effective_wait_seconds(wait_seconds)
+    out_dir = os.path.join(os.path.abspath(project), "out", "evidence", "sessions", meta["session_id"], "worst_frame")
+    os.makedirs(out_dir, exist_ok=True)
+    reader = MemoryReader(root)
+    with performance_reservation(), project_reservation(project):
+        load_before = os.getloadavg()
+        f0 = reader.read_word(PROBE_FRAME)
+        print("[worst-frame] sessao %s: tempo real por %.0f s sem leituras" % (meta["session_id"][:8], wait_s))
+        request(root, "run")
+        time.sleep(wait_s)
+        code, res = _session(reader, out_dir, out_name, seconds, rom, project, wait_s)
+        reader.pause()
+    if res is not None:
+        res.update(session_id=meta["session_id"], session_rom_sha256=meta["rom_sha256"], frame_inicio_leitura=f0,
+                   host_load_before=load_before, host_load_after=os.getloadavg(),
+                   chain_of_custody=["sessao privada Emulicious; run em tempo real; nenhuma leitura na janela",
+                                     "uma leitura apos selo done=1; FPS/host nao atribuidos sem controle"])
+        with open(os.path.join(out_dir, out_name + ".json"), "w") as f:
+            _j.dump(res, f, indent=1)
+    return code, res
+
+
 def _session(dap, out_dir, out_name, seconds, rom, project, wait_seconds):
     # _connect_live retorna pausado, mas só DEPOIS dos 3000 frames autônomos.
     # A ROM congela vovf/vline_min em done=1, logo o attach não altera a amostra.
@@ -359,15 +592,19 @@ def _session(dap, out_dir, out_name, seconds, rom, project, wait_seconds):
                                "phase": ph,
                                "estado_snapshot": snapshot_state,
                                "frame": frame, "done": done}]
-    project = os.path.dirname(os.path.dirname(os.path.dirname(rom)))
-    if profile_contract(project):
+    profile_project = profile_source_project(project, rom)
+    if profile_contract(profile_project) and not loop_profile_contract(profile_project):
         raw_profile = {name: dap.read_byte(addr)
                        for name, addr in PROFILE_ADDRS.items()}
         raw_profile["spill_max"] = dap.read_byte(PROFILE_SPILL_MAX)
-        order = ["wait", "stream", "palette", "hud", "sat", "spill_max"]
-        profile_valid = (vf > 0 and raw_profile["spill_max"] < VLIMIAR)
-        cumulative = (profile_lines([raw_profile[name] for name in order])
-                      if profile_valid else None)
+        order = list(PROFILE_ADDRS)
+        cumulative = profile_lines([raw_profile[name] for name in order])
+        overflow_snapshot_valid = (vf == 0 or
+                                   raw_profile["spill_max"] < VLIMIAR)
+        profile_valid = (done == 1 and frame is not None and
+                         frame >= PROBE_WINDOW_FRAMES and
+                         raw_profile["spill_max"] is not None and
+                         overflow_snapshot_valid and cumulative is not None)
         res["perfil_vcounter"] = {
             "raw": raw_profile,
             "profile_valido": profile_valid,
@@ -377,6 +614,27 @@ def _session(dap, out_dir, out_name, seconds, rom, project, wait_seconds):
                                           for i in range(1, len(cumulative))]))
                 if cumulative else None),
         }
+    if loop_profile_contract(profile_project):
+        names = loop_profile_names(profile_project)
+        seq_before = dap.read_byte(LOOP_PROFILE_SEQ)
+        raw = dap.read_block(loop_profile_address(profile_project), len(names))
+        seq_after = dap.read_byte(LOOP_PROFILE_SEQ)
+        seq = (seq_before if seq_before == seq_after else None)
+        metrics = loop_profile_metrics(profile_project)
+        metric_values = {}
+        if metrics:
+            for metric in metrics:
+                metric_values[metric["name"]] = (
+                    dap.read_byte(metric["address"])
+                    if metric["width"] == 1
+                    else dap.read_word(metric["address"]))
+            res["perfil_loop_metricas"] = metric_values
+        serial_names = tuple(name + "_vblank" for name in names)
+        serials = ([metric_values[name] for name in serial_names]
+                   if all(name in metric_values for name in serial_names)
+                   else None)
+        res["perfil_loop_vcounter"] = loop_profile_report(
+            raw, seq, names, vblank_serials=serials)
     with open(os.path.join(out_dir, out_name + ".json"), "w") as f:
         json.dump(res, f, indent=1)
     print("[worst-frame] veredito=%s vovf_delta=%s vline_min=%s "
@@ -441,6 +699,47 @@ def self_check():
     prof = profile_lines([0xC3, 0xD9, 0x20, 0x40])
     ok.append(("checkpoints VCounter atravessam retorno FF->00",
                prof == [0, 22, 99, 131]))
+    prof = profile_lines([0xAF, 0xEE, 0x20])
+    ok.append(("checkpoints VCounter aceitam mais de uma volta",
+               prof == [0, 69, 119]))
+    loop_prof = loop_profile_report(
+        [194, 195, 211, 211, 218, 5, 52, 66, 67, 123, 175, 238, 238, 238,
+         238, 241],
+        2)
+    ok.append(("perfil do loop aceita snapshot completo par",
+               loop_prof["profile_valido"]
+               and loop_prof["linhas_por_etapa"]["cpu_input"] == 49
+               and loop_prof["linhas_por_etapa"]["step_p1"] == 47
+               and loop_prof["linhas_por_etapa"]["step_p2"] == 14))
+    loop_prof = loop_profile_report(
+        [194, 195, 211, 211, 218, 5, 52, 66, 67, 123, 175, 238, 238, 238,
+         238, 241],
+        3)
+    ok.append(("perfil do loop rejeita snapshot em escrita",
+               not loop_prof["coherent_snapshot"]
+               and not loop_prof["profile_valido"]))
+    loop_prof = loop_profile_report([194, None], 2)
+    ok.append(("perfil do loop rejeita snapshot truncado",
+               not loop_prof["profile_valido"]))
+    raw = [194, 244, 93, 133, 187, 191]
+    serials = [10, 10, 12, 12, 12, 12]
+    loop_prof = loop_profile_report(
+        raw, 2,
+        ("loop_start", "uploads_end", "input_cmd_end", "combat_end",
+         "hud_render_end", "loop_end"),
+        vblank_serials=serials)
+    ok.append(("serial VBlank recupera voltas completas ocultas",
+               loop_prof["profile_valido"]
+               and loop_prof["frame_wraps_known"]
+               and loop_prof["linhas_por_etapa"]["input_cmd_end"] == 629
+               and loop_prof["linhas_desde_inicio"]["loop_end"] == 783))
+    ok.append(("serial VBlank inconsistente reprova perfil",
+               profile_lines_with_vblank([191, 194], [10, 10]) is None))
+    loop_prof = loop_profile_report([0xC1, 0xCD], 2,
+                                   ("loop_start", "map_build_end"))
+    ok.append(("perfil do loop aceita nomes definidos pela fonte",
+               loop_prof["profile_valido"]
+               and loop_prof["linhas_por_etapa"]["map_build_end"] == 12))
     ok.append(("checkpoints VCounter sem dados rejeitam",
                profile_lines([0xC0, None]) is None))
     # contrato do probe: sem header SMRT+schema, nenhuma leitura e evidencia
@@ -457,6 +756,18 @@ def self_check():
         sd = os.path.join(td, "src")
         os.makedirs(sd)
         mc = os.path.join(sd, "m.c")
+
+        session_rom = os.path.join(td, "private", "session-1", "emulator", "rom.sms")
+        os.makedirs(os.path.dirname(session_rom))
+        with open(session_rom, "wb") as f:
+            f.write(b"test")
+        ok.append(("sessao privada preserva projeto explicito do perfil",
+                   profile_source_project(td, session_rom) == os.path.abspath(td)))
+        inferred_project = os.path.dirname(os.path.dirname(
+            os.path.dirname(os.path.abspath(session_rom))))
+        ok.append(("ROM copiada sem projeto-fonte usa fallback local",
+                   profile_source_project(os.path.join(td, "missing"), session_rom)
+                   == inferred_project))
 
         def _src(body):
             with open(mc, "w") as f:
@@ -497,12 +808,64 @@ def self_check():
         with open(mc, "a") as f:
             f.write("volatile unsigned char __at(0xC7D0) probe_profile_wait;\n"
                     "volatile unsigned char __at(0xC7D1) probe_profile_stream;\n"
-                    "volatile unsigned char __at(0xC7D2) probe_profile_palette;\n"
                     "volatile unsigned char __at(0xC7D3) probe_profile_hud;\n"
                     "volatile unsigned char __at(0xC7D4) probe_profile_sat;\n"
                     "volatile unsigned char __at(0xC7D6) probe_vline_spill_max;\n")
         ok.append(("perfil opcional exige snapshot do maior derrame",
                    profile_contract(td)))
+        with open(mc, "a") as f:
+            f.write("volatile unsigned char __at(0xC790) tl_snap[16];\n"
+                    "volatile unsigned char __at(0xC7D2) tl_snap_seq;\n")
+        ok.append(("perfil do loop resolve o endereço do snapshot declarado",
+                   loop_profile_address(td) == 0xC790))
+        with open(mc, "a") as f:
+            f.write("volatile unsigned char __at(0xC7F8) tl_snap[16];\n")
+        ok.append(("perfil do loop rejeita snapshot absoluto duplicado",
+                   loop_profile_address(td) is None
+                   and not loop_profile_contract(td)))
+        # Keep the remaining mutation checks on a single, unambiguous snapshot.
+        text = open(mc, errors="replace").read()
+        text = text.replace("volatile unsigned char __at(0xC790) tl_snap[16];\n", "")
+        with open(mc, "w") as f:
+            f.write(text)
+        bad_addr = text.replace("__at(0xC7F8) tl_snap[16]",
+                                "__at(0xBFF0) tl_snap[16]")
+        with open(mc, "w") as f:
+            f.write(bad_addr)
+        ok.append(("perfil do loop rejeita snapshot fora da RAM do SMS",
+                   loop_profile_address(td) is None
+                   and not loop_profile_contract(td)))
+        with open(mc, "w") as f:
+            f.write(text)
+        ok.append(("perfil do loop rejeita snapshot sem selo da janela",
+                   not loop_profile_contract(td)))
+        with open(mc, "a") as f:
+            f.write("if (probe_frame <= WORST_FRAME_WINDOW) {\n"
+                    "  tl_snap_seq++;\n  tl_snap_seq++;\n}\n")
+        ok.append(("perfil do loop exige mapa e seqlock completos",
+                   loop_profile_contract(td)))
+        with open(mc, "a") as f:
+            f.write("/* LOOP_PROFILE_NAMES: loop_start, map_build_end */\n")
+        ok.append(("perfil do loop lê nomes de checkpoint da fonte",
+                   loop_profile_names(td) == ("loop_start", "map_build_end")
+                   and loop_profile_contract(td)))
+        with open(mc, "a") as f:
+            f.write("/* LOOP_PROFILE_METRICS: cells@0xC7D8:u16, runs@0xC7DA:u8 */\n")
+        metrics = loop_profile_metrics(td)
+        ok.append(("perfil do loop lê métricas fixas opcionais",
+                   metrics == ({"name": "cells", "address": 0xC7D8, "width": 2},
+                               {"name": "runs", "address": 0xC7DA, "width": 1})
+                   and loop_profile_contract(td)))
+        with open(mc, "a") as f:
+            f.write("/* LOOP_PROFILE_METRICS: extra@0xC7DC:u8 */\n")
+        ok.append(("perfil do loop rejeita diretiva de métricas duplicada",
+                   loop_profile_metrics(td) is None
+                   and not loop_profile_contract(td)))
+        with open(mc, "a") as f:
+            f.write("/* LOOP_PROFILE_NAMES: duplicate, duplicate */\n")
+        ok.append(("perfil do loop rejeita nomes duplicados",
+                   loop_profile_names(td) is None
+                   and not loop_profile_contract(td)))
         with open(mc, "w") as f:
             f.write("enum { ST_IDLE, ST_WALK_F, ST_N_STATES };\n")
         ok.append(("enum de estado do projeto rotula snapshot corretamente",
@@ -526,10 +889,14 @@ def main():
     ap.add_argument("--wait-seconds", type=float,
                     help="espera DAP, 90..1800 s (default 90; diagnostico de ROM lenta)")
     ap.add_argument("--out", default="worst_frame")
+    ap.add_argument("--session", help="ID de sessao privada (sem DAP global)")
     ap.add_argument("--self-check", action="store_true")
     args = ap.parse_args()
     if args.self_check:
         return self_check()
+    if args.session:
+        code, _ = measure_private(args.session, args.project, args.seconds, args.out, args.wait_seconds)
+        return code
     if not args.rom or not os.path.isfile(args.rom):
         print("[FAIL_AMBIENTE] ROM obrigatoria e inexistente: %s" % args.rom)
         return 3

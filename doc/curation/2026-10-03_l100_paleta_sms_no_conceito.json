@@ -1,0 +1,78 @@
+{
+  "curation_id": "2026-10-03_l100_paleta_sms_no_conceito",
+  "date": "2026-10-03",
+  "scope": "sms_character_palette_contract",
+  "authorization": "O dono aprovou a folha pixelada de Hayato, determinou que a paleta Master System seja regra e pediu o registro como aprendizado de curadoria.",
+  "lessons": [
+    {
+      "id": "L100",
+      "status": "fechada_com_ferramenta_e_regra",
+    "lesson": "Cor de arte destinada ao Master System é contrato desde o conceito: use apenas cores RGB da grade 6-bit (canal×85), índice 0 transparente e até 15 cores úteis; em assets de personagem, cada cor usada também deve pertencer à paleta daquele personagem no manifesto do projeto. Mantenha a fonte geradora da paleta sincronizada e regenere o manifesto quando os papéis mudarem. Prompt e aprovação visual não provam conformidade técnica. Folha aprovada segue como referência visual até passar pelos gates restantes.",
+      "root_cause": "A folha-fonte de alta resolução do idle Hayato tinha 130.557 RGBs opacos distintos e 256 valores de alfa, apesar do pedido visual de cores do jogo. A paleta só ficou verificável depois da tradução indexada e da conferência contra a paleta do personagem. O gerador canônico também precisava ser atualizado: apenas editar o JSON gerado permitiria que uma regeneração restaurasse a paleta anterior.",
+      "evidence": {
+        "approved_indexed_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v1.png",
+        "approved_sheet_sha256": "697916f18d5a746ec2ec010db6001c6f2aeec3934fcda734190da7f450b9a92b",
+        "source_truecolor_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/hayato_idle_12f_v2.png",
+        "source_truecolor_sha256": "de82374eb8016efcc744854b67ba66f3a0c7954d339b4cd73f45a6891bc3414b",
+        "observed_indexed_contract": "320x240, grade 4x3 de células 80x80, PNG indexado, índice 0 transparente, 15 cores úteis; as cores RGB usadas são exatamente as 15 declaradas para Hayato em doc/palettes_manifest.json.",
+        "palette_manifest": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+        "lineage_record": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/asset_lineage_record_sms_v1.json",
+        "owner_approval_date": "2026-10-03",
+        "resource_gate_result": "PASS: indexed sheet accepted against 6-bit grid, index-0 transparency, 15 useful colors and Hayato manifest palette; resource gate self-check also rejects off-grid and off-character colors.",
+        "canonical_palette_generator": "SMS_projects/master_of_fighters/doc/build_palettes_manifest.py",
+        "palette_generation_validation": "PASS: 12 palettes validated; Hayato has 15 SMS 6-bit colors and its declared contrast ramps meet ΔY>=17.",
+        "resource_gate_command": "python3 tools/sms_wrapper/audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character hayato SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v1.png",
+        "ga_warrior_source": "https://www.spriters-resource.com/media/assets/27/29261.png?updated=1755472635",
+        "ga_warrior_source_sha256": "4db6d15d61e0fd08cb85bccedcaf8bd228e20295b3079814b956688bca20fbe0",
+        "ga_warrior_palette_correction": "A paleta antiga do projeto não continha azul/ciano vistos no sprite SMS. build_palettes_manifest.py foi corrigido e regenerado com 12 tons 6-bit extraídos por aproximação canal×85; fundo teal excluído, preto preservado para idx0 e contorno bordô opaco. A concept art v1 usa a paleta e passou audit_validate_resources.py --kind sheet --character ga_warrior.",
+        "ga_warrior_lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/ga_warrior/review_drafts/records/asset_lineage_record_v1.json",
+        "ga_warrior_pixels_copied": false,
+        "dr_social_source": "https://www.smspower.org/uploads/Sprites/MasterOfDarkness-SMS-Dr.FerdinandSocial-StandingRight.png",
+        "dr_social_source_sha256": "f6a50cb5e18717d1a71f3b69e358832a82feeb863b982956a0708f992e5431fd",
+        "dr_social_palette_correction": "A conferência do sprite original SMS detectou traje azul/ciano, sombra teal, cabelo grisalho e botas castanhas; o manifesto anterior aplicava sobretudo cinza ao traje. build_palettes_manifest.py e palettes_manifest.json foram corrigidos; contorno navy #000055 preserva pixels opacos diante do índice 0 transparente.",
+        "dr_social_lineage": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/asset_lineage_record_v9.json",
+        "dr_social_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+        "dr_social_sheet_sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+        "dr_social_palette_pixels_copied": false,
+        "dr_social_resource_gate": "PASS: audit_validate_resources.py --kind sheet --character dr_ferdinand_social.",
+        "dr_social_animation_gate": "PASS: 12 unique frames; geometry 44–84x72–84 px; baseline 84–88 px.",
+        "shadow_dancer_sms_source": "https://www.smspower.org/Sprites/ShadowDancer-SMS",
+        "shadow_dancer_sms_sprite_sha256": "ae6bb1dcb97dee95e917d2cde204da70d161f3c1bab3f3933a96f53fa9fc7639",
+        "shadow_dancer_sms_palette_correction": "A conferência do sprite Takashi - Standing Right confirmou traje branco/cinza, vermelhos, pele quente e acento amarelo. O novo estudo usa 7 cores SMS 6-bit; o contorno preto foi mapeado a vinho profundo por causa do índice 0 transparente.",
+        "shadow_dancer_sms_approved_concept_artifact": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+        "shadow_dancer_sms_approved_concept_sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+        "shadow_dancer_sms_lineage": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/asset_lineage_record_concept_v1.json",
+        "shadow_dancer_sms_palette_derivative": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_v1_sms_palette.png",
+        "shadow_dancer_sms_palette_derivative_sha256": "1845b3de8890ebecf8b597939bcb5d9fe0d2a83ec39dad0f4a9595221517adf0",
+        "shadow_dancer_sms_palette_derivative_review": "technical 7-color derivative passed the resource gate; owner approval applies to the attached RGBA concept image, not separate review of this indexed derivative",
+        "shadow_dancer_sms_pixels_copied": false,
+        "shadow_dancer_sms_resource_gate": "PASS: indexed palette derivative accepted against the declared character palette; original concept image is owner-approved, while the derivative is a technical source candidate."
+      },
+      "rule_section": "SMS_GLOBAL §85",
+      "tool_that_measures": "audit_validate_resources.py --kind sheet --character; prepare_sms_pixel_art.py",
+      "skill_that_teaches": "skills/sms-pixel-translate.md"
+    }
+  ],
+  "attribution": "Paleta e códigos 6-bit: sms_palette.py / contrato Master System. Método de tradução pixel: L055. A aprovação da referência visual foi dada pelo dono em 2026-10-03.",
+  "future_curation_candidates": [
+    {
+      "status": "candidate_for_future_curation",
+      "observation": "Passar no contrato técnico da grade SMS e na paleta individual do manifesto não garante fidelidade cromática ao personagem-fonte. Antes de aceitar ou fechar a paleta do personagem, conferir os papéis cromáticos contra uma referência original autorizada e registrar o mapeamento.",
+      "owner_confirmation": "O dono rejeitou as cores da Alis v2 apesar da conformidade técnica e aprovou a recoloração v4 baseada no retrato original. Golden Axe Warrior e Dr. Social também revelaram famílias de cor originais ausentes ou incorretas nos manifestos antigos, levando à correção da fonte antes de concluir cada folha. Dr. Social reforçou que uma paleta tecnicamente válida ainda pode representar o traje errado.",
+      "evidence": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/alis_landale/review_drafts/records/asset_lineage_record.json",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/alis_landale/approved_records/asset_lineage_record_v4.json",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/ga_warrior/review_drafts/records/asset_lineage_record_v1.json",
+        "SMS_projects/master_of_fighters/doc/build_palettes_manifest.py",
+        "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+        "https://www.smspower.org/Sprites/PhantasyStar-SMS",
+        "https://www.spriters-resource.com/master_system/goldenaxewarrior/asset/29261/",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/asset_lineage_record_v9.json",
+        "https://www.smspower.org/uploads/Sprites/MasterOfDarkness-SMS-Dr.FerdinandSocial-StandingRight.png",
+        "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/asset_lineage_record_v2.json",
+        "https://www.smspower.org/Sprites/ShadowDancer-SMS"
+      ],
+      "promotion": "Aplicado como verificação de fonte antes da arte Alis v4 e Golden Axe Warrior v1. A oportunidade restante é medir automaticamente a correspondência semântica fonte↔papéis da paleta; sem métrica genérica ainda, não cria nova seção numerada nem ferramenta própria."
+    }
+  ]
+}

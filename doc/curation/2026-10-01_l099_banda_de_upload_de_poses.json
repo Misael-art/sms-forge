@@ -1,0 +1,27 @@
+{
+  "curation_id": "2026-10-01_l099_banda_de_upload_de_poses",
+  "date": "2026-10-01",
+  "scope": "Banda de upload de poses do runtime integrado: perfil de fase, divisão entre lutadores e duas variantes de prioridade (clone isolado)",
+  "authorization": "O usuário pediu 'prossiga' após L098; escopo: medir a causa e testar prefetch/prioridade num clone isolado, sem alterar a ROM canônica.",
+  "lessons": [
+    {
+      "id": "L099",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "O gargalo do combate é a banda de upload de poses, e prioridade de upload sozinha não a resolve. Cada pose do soco do Ken tem 27 a 37 pares de 64 B e quase nenhum par é compartilhado entre poses consecutivas; a banda medida é ~3 pares por quadro, dividida entre os dois lutadores, e o idle do Ryu consome metade dela. A cadência do AIR (1 a 4 ticks por quadro) exigiria ~17 pares por tick para uma pose de 34 pares em 2 ticks.",
+      "evidence": {
+        "perfil_de_fase": "ROM de perfil (TRC2, instrumentada: load_done global só na cópia) no cenário soco: stream_step começa em VCounter ~0xD4 (depois de hud_flush e sat_upload) e termina em ~0xE5 a 0xEB a cada tick; o progresso de upload de cada lutador sobe 3 pares em ticks alternados (3,3,6,6,9,9...) e o outro lutador ocupa a paridade restante. O Ryu, parado, recarrega uma pose nova a cada ~11 a 13 ticks durante todo o soco.",
+        "tamanho_das_poses": "poses 26 a 32 do Ken (acao 260): 34, 37, 27, 29, 27, 37, 34 pares (225 no total, pool de 128 slots); pares novos em relação à pose anterior: 34, 37, 25, 29, 27, 35, 34. O compartilhamento por conteúdo é de 0 a 2 pares, então uploads por delta não ajudam.",
+        "variante_urgent_first": "ROM clone c38f02f65a25: lutador com pose desejada ausente servido primeiro. Total dos 5 quadros completos 132 ticks contra 140 (-6%); hit_done no tick 123 contra 134. Refutada em grande parte: o idle do Ryu também fica 'urgente'.",
+        "variante_action_first": "ROM clone 415df368a6a3: prioridade só para quem está em ação (estado != idle). Quadro 0: 17 ticks contra 26; hit_done no tick 88 contra 134 (-46 ticks, -34%); 7 quadros completos em 137 ticks (lentidão 9,79x contra 12,73x). Custo: o quadro 3 do idle do Ryu ficou parado de 78 a 118 (40 ticks) contra 20 na linha de base. Mesmo assim o golpe leva 88 ticks (~1,5 s) para acontecer: injogável.",
+        "ferramenta": "luta_mugen_trace_dap.py ganhou --profile (modo TRC2), VARIANTS aplicadas só na cópia isolada (cada trecho antigo precisa existir exatamente 1 vez; auditável por hash) e --variant; self-check cobre decode do perfil, recusas e aplicação/reaplicação de variante.",
+        "limites": "Uma execução por variante (sem repetição de determinismo das variantes); só o soco do P1 contra P2 idle; as variantes são experimentos em clone, não a ROM canônica; a banda efetiva (~1,5 a 2 pares/tick com prioridade) ficou abaixo dos ~3 do perfil e a causa do resto não foi isolada (candidatos: defer_emit/sched_due, commit no SAT)."
+      },
+      "rule_section": "SMS_GLOBAL §84",
+      "tool_that_measures": "luta_mugen_trace_dap.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L100",
+    "mastery": "Resolver exige reduzir pares por pose de ataque, ou desacoplar a lógica de hit do tempo de arte, ou residência seletiva: decisões de escopo/GDD, não otimização local."
+  }
+}
