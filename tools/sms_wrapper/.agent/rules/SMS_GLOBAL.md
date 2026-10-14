@@ -43,6 +43,9 @@ bloqueios). Handoff nunca substitui memory bank nem evidência.
   H-scroll está ao vivo: `SMS_setBGScrollX` ≠ 0 exige
   `VDPFEATURE_LEFTCOLBLANK`. Sem isso os 8 px da esquerda mostram lixo do
   tile que ainda não foi buscado (L043). Gate: `audit_hscroll_blank.py`.
+- O split de scroll por line interrupt é **horizontal**: o reg9 vertical é
+  lido uma vez por frame e o wrap em modo 192 é 224 — lei, gate e técnica
+  Sylvan Tale na §122 (L131).
 - Split de scroll exige line interrupt e é técnica medida, não gratuita.
   O contador de linha dispara na linha N **depois** de recarregar no VBlank:
   armar 47 querendo a linha 64 desloca todas as bandas 16 linhas. Banda
@@ -2269,6 +2272,57 @@ não vazios. O gate lexical não autentica aprovação nem julga a semântica do
 escopo; `reconcile_claims.py` histórico também não é checklist dequalidade
 comercial. Nenhum PASS desses gates substitui evidência fresca, review nativo
 e todos os eixos da entrega.
+
+## 122. Assimetria dos registros de scroll: Y lido uma vez por frame e wrapa ≥224 no modo 192; X ao vivo em HBlank (L131)
+
+O registrador de scroll vertical (reg9) **é lido uma única vez por frame,
+antes da tilemap ser desenhada**: "so it cannot be updated as the screen is
+drawn for special effects". O horizontal (reg8) pode: "the horizontal scroll
+register is updated during the HBlank interrupt". Logo, raster de scroll só
+existe em X; split **vertical** por reg9 é impossível — o efeito de banda
+vertical fixa (status bar sobre mundo rolando) é técnica de troca de name
+table via reg2 em HBlank, não de scroll: é assim que *Sylvan Tale* faz
+(`VRAMMemoryMap.txt`). O header materializa a assimetria: `SMSlib.h:386-387`
+oferece `INLINE_SMS_setBGScrollX` "to be used in the line interrupt handler
+for raster effects" e não existe contraparte para Y. Atenção cruzada com
+§121: trocar reg2 em HBlank só é seguro com bit0=1; no SMS1 com bit0=0 a
+própria tabela trocada espelha.
+
+Wrap do scroll Y — a constante é o **tamanho da tilemap**, não a tela: em modo
+192 linhas a tilemap tem 28×8 = **224 px** (32×28), e valores >223 escritos no
+reg9 "wrap around, treated as if between 0 and 31 — setting the vertical
+scroll register to 240 is equivalent to setting it to 16"; a variável do jogo
+precisa dar wrap em 224, senão cada volta produz descontinuidade silenciosa
+("to avoid discontinuities in the scrolling"). Em 224/240 linhas a tilemap tem
+32×32 = 256 px e "there is no such wrapping — values from 0 to 255 are all
+valid", e o truncamento natural da API (`unsigned char`) já é o módulo 256.
+Geometria relacionada (mesma página): base da tilemap `$3800` em 192 e `$3700`
+em 224/240, para não colidir com a SAT em `$3F00`.
+
+Consequências:
+
+- split horizontal com line interrupt continua válido (§6); promessa de
+  "parallax vertical por reg9" no GDD é defeito de design, não de código —
+  ou se troca a name table, ou se paga em tiles;
+- cena com scroll Y em modo 192 declara no spec de cenas a constante de wrap
+  224; o acumulador da ROM deve implementá-la;
+- reescrita de reg2 em HBlank (técnica Sylvan Tale) entra no contrato do
+  `audit_tilemap_mirror.py` — bit0=1 obrigatório.
+
+Gate: `audit_vscroll_wrap.py --screen-h {192|224|240} --source <src>` —
+literal de `SMS_setBGScrollY` decidido contra o modo declarado; acumulador com
+mutação no arquivo sem token de wrap em 224 (modo 192) reprova; função,
+expressão ou variável sem mutação reportam **não provado, nunca aprovado**.
+`--self-check` cobre os 8 casos (reprovação 192 sem wrap, aprovação com wrap,
+240≡16 em 192, 240 válido em 224, >255, chamada, extern, arquivo sem call).
+
+Limites: o gate detecta **presença de token de wrap no arquivo**, não fluxo de
+dados — presença não prova correção quadro a quadro, e o caminho entre a
+mutação e a chamada pode ter ramos. Lei Tier 1 do corpus; o wrap ≥224 e a
+leitura única não foram medidos em emulador nem console: telemetria de reg9 em
+`measure_runtime_probe.py` fica como verificação futura, e a fidelidade desses
+dois comportamentos nos emuladores-alvo é questão aberta (LOTE F). A técnica
+Sylvan Tale está registrada como `documentado`, não como receita implementada.
 
 ## 121. Espelhamento de tilemap no SMS1: reg2 com bit0=0 força bit10 do endereço VRAM a 0 (L130)
 

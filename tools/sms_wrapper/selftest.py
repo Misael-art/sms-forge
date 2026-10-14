@@ -138,6 +138,7 @@ def main():
               "audit_debug_markers.py",
               "audit_tilemap_bounds.py",
               "audit_tilemap_mirror.py",
+              "audit_vscroll_wrap.py",
               "measure_frame_advance.py",
               "measure_runtime_probe.py",
               "audit_causal_persistence.py",

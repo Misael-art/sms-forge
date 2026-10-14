@@ -1,8 +1,19 @@
 # skill: sms-runtime-optimization
 
 Use ao otimizar Z80, renderer, SAT, cache, streaming ou lógica de combate.
-Aplica L013/L037/L061/L082/L089/L097 e SMS_GLOBAL §§97–100/103. Qualquer
+Aplica L013/L037/L061/L082/L089/L097/L131 e SMS_GLOBAL §§97–100/103/122. Qualquer
 técnica permanece candidata até custo e comportamento pagos na ROM alvo.
+
+## Scroll: assimetria dos eixos (SMS_GLOBAL §122, L131)
+
+- Reg9 (scroll Y) é lido **uma vez por frame**: não existe raster vertical por
+  scroll. Banda vertical fixa sobre mundo rolando = troca de name table via
+  reg2 em HBlank (Sylvan Tale), com bit0=1 (§121).
+- Modo 192: tilemap de 224 px; acumulador de Y precisa de wrap explícito em
+  224 — sem wrap cada volta produz descontinuidade silenciosa. Modo 224/240:
+  tilemap de 256 px; o truncamento de `unsigned char` já basta.
+- Gate: `audit_vscroll_wrap.py --screen-h <192|224|240> --source src/` antes
+  de prometer parallax ou status bar vertical no GDD.
 
 ## Medir antes de escolher o atalho
 
