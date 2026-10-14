@@ -22,7 +22,19 @@ So julga coordenada LITERAL (ou #define que resolve para literal). Coordenada
 vinda de variavel nao e decidivel estaticamente e e reportada como nao provada,
 nunca como aprovada.
 
+Segundo eixo (L132): a ENTRADA de tilemap e uma palavra de 16 bits — bits 0-8
+indice, 9-12 flip X/Y, subpaleta de sprite e prioridade. Bits 13-15 sao
+"Unused" para o VDP: "Some games use these bits as flags for collision and
+damage zones" (smspower.org/Development/Tilemap, hasheado no corpus). O gate
+reprova literal de entrada com bits 13-15 ($2000/$4000/$8000) armados, porque
+o padrao do canon e vedado; uso intencional exige --allow-tilemap-flags com
+motivo, declarado no TDD/spec-cenas do projeto. Tile vinda de variavel ou
+expressao e nao provada, nunca aprovada. So checa as chamadas diretas
+(SMS_setTileatXY / SMS_setNextTileatXY); wrapper de projeto e arrays do
+conversor de mapa ficam fora deste eixo.
+
 Uso: audit_tilemap_bounds.py <arquivo.c|dir> [...] [--self-check]
+     [--allow-tilemap-flags "motivo"]
 Exit: 0 aprovado | 1 reprovado | 2 erro de uso
 """
 import sys, os, re, argparse
@@ -134,6 +146,46 @@ def visible_rows(src):
         return VISIBLE_ROWS_224
     return VISIBLE_ROWS_192
 
+# --- segundo eixo (L132/§123): VALOR da entrada de tilemap, não coordenada ---
+# smspower.org/Development/Tilemap: bits 13-15 "Unused" — "Some games use these
+# bits as flags for collision and damage zones". O VDP os ignora; o canon veda
+# por padrão para não colidir com metasprites/pools/conversores.
+TILE_WORD_ARGS = {"SMS_setTileatXY": 2}   # macro -> arg com a palavra de 16 bits
+FLAG_MASK_13_15 = 0xE000
+FLAG_BIT_NAMES = (0x2000, 0x4000, 0x8000)
+
+def check_tile_values(src, path="<mem>", allow_flags=False):
+    """Funcao PURA. Entrada de tilemap literal com bits 13-15 armados.
+
+    Mesma disciplina do eixo de coordenadas: so literal decide; expressao ou
+    variavel e indecidivel estatico, reportada como nao provada. Com
+    allow_flags o achado vira excecao declarada — aprovacao com lastro.
+    """
+    defs = defines(src)
+    body = re.sub(r"^[ \t]*#[ \t]*define[ \t]+\w+(?:\([^)\n]*\))?",
+                  lambda m: " " * len(m.group(0)), src, flags=re.M)
+    fails, unknown, declared = [], [], []
+    for macro, tix in TILE_WORD_ARGS.items():
+        for off, args in _calls(body, macro):
+            if len(args) <= tix:
+                continue
+            ln = body.count("\n", 0, off) + 1
+            tv = literal(args[tix], defs)
+            if tv is None:
+                unknown.append((path, ln, macro,
+                                f"tile='{args[tix]}' nao literal: entrada de "
+                                f"16 bits nao decidivel estaticamente"))
+                continue
+            if tv & FLAG_MASK_13_15:
+                bits = "/".join(f"${b:04X}" for b in FLAG_BIT_NAMES if tv & b)
+                fails_or_decl = ((path, ln, macro,
+                                  f"entrada 0x{tv:04X} arma bits 13-15 ({bits}): "
+                                  f"o VDP ignora esses bits e o canon os veda por "
+                                  f"padrao — uso intencional exige declaracao no "
+                                  f"TDD + --allow-tilemap-flags (L132/§123)"))
+                (declared if allow_flags else fails).append(fails_or_decl)
+    return fails, unknown, declared
+
 def line_of(src, off):
     return src.count("\n", 0, off) + 1
 
@@ -235,6 +287,19 @@ SC_WRAPPER_FIXED = """
 void f(void){ status("x"); }
 """
 
+# --- eixo de VALOR da entrada (L132) ---
+SC_FLAG_ON = """
+void f(void){ SMS_setTileatXY(2, 3, 0x2041); }
+"""
+# 0x1E41 = flip X|Y + subpaleta sprite + prioridade + indice 0x41: todos os
+# flags CANONICOS (bits 9-12) ligados — nao e flag custom, nao pode reprovar
+SC_FLAG_CANON = """
+void f(void){ SMS_setTileatXY(2, 3, 0x1E41); SMS_setTileatXY(1, 1, 42); }
+"""
+SC_FLAG_EXPR = """
+void f(unsigned int t){ SMS_setTileatXY(2, 3, t | 0x8000); }
+"""
+
 def self_check():
     f, u = check_source(SC_OK)
     assert not f, f"codigo dentro dos limites nao pode reprovar: {f}"
@@ -272,9 +337,29 @@ def self_check():
     f, _ = check_source(SC_WRAPPER_FIXED)
     assert len(f) == 1 and "INVISIVEL" in f[0][3], f"literal dentro do #define escapou: {f}"
 
+    # --- eixo de VALOR da entrada de tilemap (bits 13-15, L132) ---
+    vf, vu, vd = check_tile_values(SC_FLAG_ON)
+    assert len(vf) == 1 and "bits 13-15" in vf[0][3], f"bit 13 armado deve reprovar: {vf}"
+    assert not vu and not vd, f"literal sem excecao nao deixa residuo: {vu} {vd}"
+
+    # excecao declarada: mesmo achado vira approved-com-lastro, nunca silencio
+    vf, _, vd = check_tile_values(SC_FLAG_ON, allow_flags=True)
+    assert not vf and len(vd) == 1, f"com --allow-tilemap-flags o achado vira excecao: {vf} {vd}"
+
+    # flags CANONICOS (bits 9-12) nao sao flags custom: nao podem reprovar
+    vf, vu, vd = check_tile_values(SC_FLAG_CANON)
+    assert not vf and not vu and not vd, f"0x1E41 so usa bits 0-12, deve passar limpo: {vf}{vu}{vd}"
+
+    # tile vinda de expressao/variavel: nao provada, nunca aprovada em silencio
+    vf, vu, vd = check_tile_values(SC_FLAG_EXPR)
+    assert not vf and len(vu) == 1, f"tile='t|0x8000' nao literal deve ser indecidivel: {vf} {vu}"
+
     print("[SELF-CHECK OK] audit_tilemap_bounds (reprova linha invisivel, "
           "escrita na SAT, coluna >=32 e altura que estoura; aprova 224 linhas; "
-          "segue macro-wrapper do projeto; coordenada variavel vira indecidivel)")
+          "segue macro-wrapper do projeto; coordenada variavel vira indecidivel; "
+          "bits 13-15 da entrada reprovam sem declaracao, viram excecao com "
+          "--allow-tilemap-flags, flags canonicos 9-12 passam, tile nao literal "
+          "e indecidivel)")
     return 0
 
 def collect(paths):
@@ -291,14 +376,21 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("paths", nargs="*")
     ap.add_argument("--self-check", action="store_true")
+    ap.add_argument("--allow-tilemap-flags", metavar="MOTIVO",
+                    help=("projeto declara uso intencional dos bits 13-15 da "
+                          "tilemap como flags proprios (deve constar no TDD)"))
     a = ap.parse_args()
     if a.self_check:
         return self_check()
+    if a.allow_tilemap_flags is not None and not a.allow_tilemap_flags.strip():
+        print("[ERRO] --allow-tilemap-flags exige MOTIVO nao vazio", file=sys.stderr)
+        return 2
+    allow = a.allow_tilemap_flags is not None
     files = collect(a.paths)
     if not files:
         print("[ERRO] nenhum .c/.h informado", file=sys.stderr)
         return 2
-    fails, unknown = [], []
+    fails, unknown, declared = [], [], []
     for f in files:
         try:
             src = open(f, encoding="utf-8", errors="replace").read()
@@ -306,17 +398,21 @@ def main():
             print(f"[ERRO] {f}: {e}", file=sys.stderr)
             return 2
         a_, b_ = check_source(src, f)
-        fails += a_; unknown += b_
+        c_, d_, e_ = check_tile_values(src, f, allow)
+        fails += a_ + c_; unknown += b_ + d_; declared += e_
     for path, ln, macro, why in unknown:
         print(f"  [nao provado] {path}:{ln} {macro} — {why}")
+    for path, ln, macro, why in declared:
+        print(f"  [excecao declarada] {path}:{ln} {macro} — {why}")
     for path, ln, macro, why in fails:
         print(f"  [REPROVA] {path}:{ln} {macro} — {why}")
     if fails:
-        print(f"[FAIL] {len(fails)} escrita(s) na name table fora da area util (L011)")
+        print(f"[FAIL] {len(fails)} escrita(s) ilegal na name table "
+              f"(coordenada fora da area util L011 ou bits 13-15 L132)")
         return 1
-    print(f"[OK] audit_tilemap_bounds: {len(files)} arquivo(s), "
-          f"nenhuma escrita fora da area renderizada "
-          f"({len(unknown)} coordenada(s) dinamica(s) nao provada(s))")
+    print(f"[OK] audit_tilemap_bounds: {len(files)} arquivo(s), nenhuma escrita "
+          f"ilegal na name table ({len(unknown)} coordenada(s)/entrada(s) "
+          f"nao provada(s), {len(declared)} entrada(s) sob excecao declarada)")
     return 0
 
 if __name__ == "__main__":

@@ -1,10 +1,10 @@
 {
   "schema": "sms_lesson_routes_v1",
   "status": "canonical_application_routes",
-  "lesson_count": 115,
+  "lesson_count": 116,
   "source_coverage_sha256": "f086039f2d42542470ad5747b1693767e8dcd0ffedfab0e737f8b66d0b528755",
   "registry_source": "doc/curation/id_registry.json",
-  "registry_issued_through": "L131",
+  "registry_issued_through": "L132",
   "excluded_holes": [
     "L012",
     "L020",
@@ -2648,7 +2648,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
-          "sha256": "81f5a392d07512570212d3f56247937234b48aa089f2d932d0e34e1601cffc1f",
+          "sha256": "4b9d60e701abd6bd36ce8799466f4afddb69a89e16ef71f76ef40668766af0b4",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -2683,7 +2683,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
-          "sha256": "81f5a392d07512570212d3f56247937234b48aa089f2d932d0e34e1601cffc1f",
+          "sha256": "4b9d60e701abd6bd36ce8799466f4afddb69a89e16ef71f76ef40668766af0b4",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -2726,7 +2726,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
-          "sha256": "81f5a392d07512570212d3f56247937234b48aa089f2d932d0e34e1601cffc1f",
+          "sha256": "4b9d60e701abd6bd36ce8799466f4afddb69a89e16ef71f76ef40668766af0b4",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -2771,7 +2771,7 @@
           "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
           "coverage": "gap_resolved_this_curation",
           "selection_basis": "compare trace lengths, tails, scenarios and keys; recorded-state limits",
-          "sha256": "81f5a392d07512570212d3f56247937234b48aa089f2d932d0e34e1601cffc1f"
+          "sha256": "4b9d60e701abd6bd36ce8799466f4afddb69a89e16ef71f76ef40668766af0b4"
         }
       ],
       "application_gap": null,
@@ -4577,6 +4577,28 @@
           "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "domain_review; scroll/raster promises are made in runtime-optimization context and must teach the axis asymmetry and wrap constant there"
+        }
+      ]
+    },
+    {
+      "lesson_id": "L132",
+      "sources": [
+        "doc/curation/2026-10-14_l132_tilemap_entry_bits13_15_flags.json"
+      ],
+      "rule_section": "SMS_GLOBAL §6 (bullet), §123",
+      "current_rule_status": "fechada_com_ferramenta",
+      "application_entrypoints": [
+        {
+          "path": "tools/sms_wrapper/.agent/skills/sms-tile-occupancy.md",
+          "sha256": "a59ce116d1d247f7c3aec8ba327601fbcc461d81c63a535e7b2b8690f4390e3c",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "domain_review; name-table/tilemap skill teaches the entry bit layout and must carry the bits 13-15 default-veil doctrine"
+        },
+        {
+          "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
+          "sha256": "4b9d60e701abd6bd36ce8799466f4afddb69a89e16ef71f76ef40668766af0b4",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "domain_review; the collision/damage-by-tile hook targets the MUGEN engine stage layer and its ground/hitzone semantics"
         }
       ]
     }

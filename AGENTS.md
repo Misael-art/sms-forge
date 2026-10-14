@@ -157,7 +157,7 @@ roteiro → storyboard (planta baixa em pixel) → coreografia → MEDIÇÃO →
 | FPS (emulador) | `measure_fps.py` | <5 amostras ou fps fora de 50–60 — mede a velocidade de **emulação** relatada no título |
 | FPS (loop da ROM) | `measure_frame_advance.py` | contador de frames da própria ROM parado ou em ritmo irregular; o título diria 60fps numa ROM travada (L013) |
 | Runtime da ROM (memória) | `measure_runtime_probe.py` | probe sem magic/schema, frame parado, fps fora de 50–60 ou janelas divergentes — lê o estado na RAM via DAP, sem pixels nem foco de janela (L035, §37) |
-| Limites da name table | `audit_tilemap_bounds.py` | escrita em linha fora das 24 renderizadas (invisível) ou além da PNT, na SAT (L011) |
+| Limites e valor da name table | `audit_tilemap_bounds.py` | escrita em linha fora das 24 renderizadas (invisível) ou além da PNT, na SAT (L011); entrada de tilemap com bits 13–15 armados sem `--allow-tilemap-flags "<motivo>"` declarado no TDD (L132, §123) |
 | Espelhamento de tilemap SMS1 | `audit_tilemap_mirror.py` | escrita ao reg2 com bit0=0 (mirror invisível no alvo SMS2/PC), sem exceção `--allow-sms1-mirror` motivada; valor não-literal nunca aprovado (L130, §121) |
 | Wrap do scroll Y | `audit_vscroll_wrap.py --screen-h` | acumulador/literal de `SMS_setBGScrollY` sem wrap em 224 no modo 192 (tilemap de 224 px; >223 trata como 0..31); modo 224/240 validado contra 256; função/expressão = não provado, nunca aprovado (L131, §122) |
 | Matriz de maestria | `audit_mastery_registry.py` | técnica acima de `mapped` sem evidência |

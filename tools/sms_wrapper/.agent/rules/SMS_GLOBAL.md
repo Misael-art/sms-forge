@@ -39,6 +39,12 @@ bloqueios). Handoff nunca substitui memory bank nem evidência.
   tile funciona, índice 300 (>255) renderiza. "1 byte por tile, sem flip" é
   lei do **SG-1000**, não do SMS — a doutrina teve isso invertido até 2026-09-24.
   `TILE_PRIORITY` só tem efeito com sprite sobreposto: permanece `mapped`.
+  **Selo Tier-1 (L132):** a tabela do SMSPower confirma a geometria bit a bit —
+  bits 0–8 índice (0–511), 9 flip H ($200), 10 flip V ($400), 11 subpaleta
+  sprite ($800), 12 prioridade ($1000) e "13 - 15 Unused — Some games use these
+  bits as flags for collision and damage zones" (`Tilemap.txt`, sha256
+  `2168bc88…`); tile = 32 bytes de bitplanes por linha, "lowest bit to highest
+  bit" (`Tiles.txt`, sha256 `ae995fd6…`). Política dos bits 13–15 na §123.
 - Scroll global X/Y. A trava da 1ª coluna **deixa de ser opcional** quando o
   H-scroll está ao vivo: `SMS_setBGScrollX` ≠ 0 exige
   `VDPFEATURE_LEFTCOLBLANK`. Sem isso os 8 px da esquerda mostram lixo do
@@ -2273,6 +2279,51 @@ escopo; `reconcile_claims.py` histórico também não é checklist dequalidade
 comercial. Nenhum PASS desses gates substitui evidência fresca, review nativo
 e todos os eixos da entrega.
 
+## 121. Espelhamento de tilemap no SMS1: reg2 com bit0=0 força bit10 do endereço VRAM a 0 (L130)
+
+No VDP do SMS1, se o bit 0 do registrador 2 (base da name table) for 0, o bit
+10 do endereço VRAM usado na consulta da name table é forçado a 0. As 12 linhas
+inferiores da tela virtual passam a referenciar as mesmas entradas das 12
+primeiras; com Y-scroll zero em modo 192, as 8 primeiras linhas preenchem o
+terço de cima **e** o de baixo. Fonte: corpus hasheado
+`out/smspower_corpus_2026-10-12/TilemapMirroring.txt`
+("If bit 0 of VDP register 2 is 0, then bit 10 of the VRAM address for name
+table lookups will be forced to 0"), e o veredito do próprio corpus:
+"a common bug in homebrew software, however, which may assume the presence of
+an SMS2 VDP. This behavior also does not function as intended on the
+Genesis/Mega Drive VDP."
+
+Consequências:
+
+- o defeito é **invisível no emulador-alvo SMS2/PC**: o tilemap espelhado só
+  aparece em SMS1; em Genesis não funciona como pretendido. "Rodou no
+  emulador" não absolve a escrita;
+- a inicialização padrão da SMSlib escreve reg2 = `0xFF` (bit0=1;
+  `VDPReg_init[]` em `sdk/devkitSMS-upstream/SMSlib/src/SMSlib.c`, com o
+  comentário "reg2: PNT is at address 0x3800"). O caminho padrão é seguro; a
+  classe de defeito são escritas custom ao registrador 2 com valor par;
+- `SMS_VDPturnOnFeature/turnOffFeature` não tocam o reg2 (os defines do header
+  mapeiam registradores 0 e 1) — a escrita custom exige motivo explícito no
+  código do projeto;
+- exceção deliberada existe e é única no corpus: "Only one game relies on this
+  behaviour: the Japanese version of Ys." Imitar *Ys* JP exige
+  `--allow-sms1-mirror "<motivo>"` com o motivo registrado no memory bank/GDD;
+  o gate então emite `excecao_declarada`, nunca `aprovado` silencioso.
+
+Gate: `audit_tilemap_mirror.py` em três modos — `--source` (escritas literais
+ao reg2: `outp(0xBF, vv); outp(0xBF, 0x82)`; `VDPControlPort`;
+`SMS_write_to_VDPRegister(2, vv)`; valor não-literal reportado como não
+provado, nunca aprovado), `--rom` (assinatura Z80 `3E vv D3 BF 3E 82 D3 BF`;
+ausência é `nao_provado_estatico` porque o init da SMSlib usa tabela) e
+`--snapshots` (modo autoritativo: `vdp_regs.bin` de 11 bytes produzido por
+`blastem_sms.py`, byte[2] com bit0=1). `--self-check` cobre os três modos, a
+exceção declarada, dump truncado e a recusa de variável como literal.
+
+Limites: a lei é Tier 1 do corpus, não medida em console — o efeito em
+silício SMS1 fica `hardware_pass` pendente e pertence à matriz de
+compatibilidade (item A5 do dossiê, não aplicado). A varredura estática só
+decide literais; runtime real exige a sessão `blastem_sms.py` com dumps.
+
 ## 122. Assimetria dos registros de scroll: Y lido uma vez por frame e wrapa ≥224 no modo 192; X ao vivo em HBlank (L131)
 
 O registrador de scroll vertical (reg9) **é lido uma única vez por frame,
@@ -2324,47 +2375,45 @@ leitura única não foram medidos em emulador nem console: telemetria de reg9 em
 dois comportamentos nos emuladores-alvo é questão aberta (LOTE F). A técnica
 Sylvan Tale está registrada como `documentado`, não como receita implementada.
 
-## 121. Espelhamento de tilemap no SMS1: reg2 com bit0=0 força bit10 do endereço VRAM a 0 (L130)
+## 123. Bits 13–15 da entrada de tilemap: o VDP ignora, o canon veda por padrão, engine declara para usar (L132)
 
-No VDP do SMS1, se o bit 0 do registrador 2 (base da name table) for 0, o bit
-10 do endereço VRAM usado na consulta da name table é forçado a 0. As 12 linhas
-inferiores da tela virtual passam a referenciar as mesmas entradas das 12
-primeiras; com Y-scroll zero em modo 192, as 8 primeiras linhas preenchem o
-terço de cima **e** o de baixo. Fonte: corpus hasheado
-`out/smspower_corpus_2026-10-12/TilemapMirroring.txt`
-("If bit 0 of VDP register 2 is 0, then bit 10 of the VRAM address for name
-table lookups will be forced to 0"), e o veredito do próprio corpus:
-"a common bug in homebrew software, however, which may assume the presence of
-an SMS2 VDP. This behavior also does not function as intended on the
-Genesis/Mega Drive VDP."
+A entrada de name table é uma palavra de 16 bits. O VDP só consome os bits
+0–12: índice (0–8), flip H (9, `$200`), flip V (10, `$400`), subpaleta de
+sprite (11, `$800`) e prioridade (12, `$1000`). Os **bits 13–15 são "Unused"**
+para o hardware — a tabela do SMSPower anota que *"Some games use these bits as
+flags for collision and damage zones"* (`Tilemap.txt`, sha256 `2168bc88…`;
+geometria da tile em `Tiles.txt`, sha256 `ae995fd6…`). Isso confirma §6 por
+autoridade externa citável (o selo Tier-1) e abre um gancho de engine: três bits
+por tile, grátis, que um motor de luta pode usar como máscara de solo/dano/zona.
 
-Consequências:
+**Política (vedado por padrão).** Como o hardware descarta os bits e nenhuma
+ferramenta do framework os lê hoje, um valor com bit 13–15 armado é ou um bug
+(tile index estourado, flag canônica somada errado) ou um uso próprio do projeto
+não declarado. O canon trata ambos como suspeitos: a entrada escrita via
+`SMS_setTileatXY` deve manter `0x1FFF` como teto dos bits usados. **Flags
+canônicos dos bits 9–12 não são "flags custom"** — flip/subpaleta/prioridade
+continuam lícitos e o gate não os toca.
 
-- o defeito é **invisível no emulador-alvo SMS2/PC**: o tilemap espelhado só
-  aparece em SMS1; em Genesis não funciona como pretendido. "Rodou no
-  emulador" não absolve a escrita;
-- a inicialização padrão da SMSlib escreve reg2 = `0xFF` (bit0=1;
-  `VDPReg_init[]` em `sdk/devkitSMS-upstream/SMSlib/src/SMSlib.c`, com o
-  comentário "reg2: PNT is at address 0x3800"). O caminho padrão é seguro; a
-  classe de defeito são escritas custom ao registrador 2 com valor par;
-- `SMS_VDPturnOnFeature/turnOffFeature` não tocam o reg2 (os defines do header
-  mapeiam registradores 0 e 1) — a escrita custom exige motivo explícito no
-  código do projeto;
-- exceção deliberada existe e é única no corpus: "Only one game relies on this
-  behaviour: the Japanese version of Ys." Imitar *Ys* JP exige
-  `--allow-sms1-mirror "<motivo>"` com o motivo registrado no memory bank/GDD;
-  o gate então emite `excecao_declarada`, nunca `aprovado` silencioso.
+**Gancho de engine (declarado, não implantado).** O motor MUGEN
+(`mugen_fighting_v1`) pode promover os bits 13–15 a camadas de colisão/dano do
+stage, mas isso é decisão de design com consequence em runtime (o mesmo bit vira
+semântica que a SMSlib e o VDP ignoram; só o interpretador do jogo a lê). Antes
+de qualquer projeto fazer isso, a convenção bit-a-bit precisa estar no TDD/spec
+de cenas e o gate precisa rodar com `--allow-tilemap-flags "<motivo>"`. Sem
+declaracao, a escrita reprova. Registrar em `mugen-source-semantics` §"Camada de
+chão por tile".
 
-Gate: `audit_tilemap_mirror.py` em três modos — `--source` (escritas literais
-ao reg2: `outp(0xBF, vv); outp(0xBF, 0x82)`; `VDPControlPort`;
-`SMS_write_to_VDPRegister(2, vv)`; valor não-literal reportado como não
-provado, nunca aprovado), `--rom` (assinatura Z80 `3E vv D3 BF 3E 82 D3 BF`;
-ausência é `nao_provado_estatico` porque o init da SMSlib usa tabela) e
-`--snapshots` (modo autoritativo: `vdp_regs.bin` de 11 bytes produzido por
-`blastem_sms.py`, byte[2] com bit0=1). `--self-check` cobre os três modos, a
-exceção declarada, dump truncado e a recusa de variável como literal.
+Gate: `audit_tilemap_bounds.py` ganhou o segundo eixo — **valor** da entrada,
+não só coordenada. Literal com bits 13–15 armados reprova; o mesmo achado sob
+`--allow-tilemap-flags` com motivo não-vazio vira `excecao declarada`
+(aprovação com lastro, nunca silencio); expressão/variável é `nao provado`.
+Flags canonicos 9–12 passam limpos. `--self-check` cobre os quatro casos novos
+(reprova `$2000`, excecao declarada, `0x1E41` canonico passa, tile nao literal
+indecidivel).
 
-Limites: a lei é Tier 1 do corpus, não medida em console — o efeito em
-silício SMS1 fica `hardware_pass` pendente e pertence à matriz de
-compatibilidade (item A5 do dossiê, não aplicado). A varredura estática só
-decide literais; runtime real exige a sessão `blastem_sms.py` com dumps.
+Limites: lei Tier 1 do corpus (o "unused" e o uso em jogos), não medida em
+console — se o hardware realmente preserva os bits em VRAM (para um driver lê-los
+depois) é `hardware_pass` pendente, questão aberta de LOTE F. O gate só decide
+literal em `SMS_setTileatXY`; `SMS_setTile` posicional e arrays de
+`SMS_loadTileMap*` ficam fora — a tile index vindo de memória não é decidível
+estaticamente e o projeto declara seu próprio contrato de mapa.

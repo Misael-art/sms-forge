@@ -1,0 +1,41 @@
+{
+  "curation_id": "2026-10-14_l132_tilemap_entry_bits13_15_flags",
+  "date": "2026-10-14",
+  "title": "Entrada de tilemap: bits 0–12 canônicos selados Tier-1; bits 13–15 ignorados pelo VDP, vedados por padrão, uso de engine exige declaração",
+  "kind": "curation",
+  "scope": "Hardware SMS (VDP modo 4): geometria da tile e da name table já ensinadas em §6 ganham autoridade externa citável (selo); política nova para os bits 13–15 da entrada de 16 bits (§123) e gancho de engine do stage MUGEN. Item A8 do dossiê out/curation_proposals_smspower_2026-10-12.md, escopo cheio a+b+c.",
+  "authorization": "O proprietário aprovou o item A8 em 2026-10-14 apresentando as três partes e seus riscos; escolha registrada na pergunta de escopo: 'Tudo (a + b + c)' — (a) selo Tier-1 em §6, (b) política de engine em sms-mugen-source-semantics.md (bits 13–15 vedados por padrão; uso só com declaração no TDD), (c) extensão do gate audit_tilemap_bounds.py com --allow-tilemap-flags.",
+  "lessons": [
+    {
+      "id": "L132",
+      "status": "documentado_com_gate; sem medição em emulador ou console; se o hardware preserva os bits 13–15 em VRAM (para um driver do jogo relê-los) fica hardware_pass pendente (LOTE F); nenhuma ROM do repo declara flags custom hoje",
+      "lesson": "A entrada de name table é uma palavra de 16 bits cujo layout a tabela do SMSPower confirma bit a bit: bits 0–8 = índice do tile (0–511), 9 = flip horizontal ($200), 10 = flip vertical ($400), 11 = subpaleta de sprite ($800), 12 = prioridade sobre sprites ($1000) — exatamente os defines da SMSlib já provados em L069. Os bits 13–15 são 'Unused': o VDP os ignora na renderização, e 'Some games use these bits as flags for collision and damage zones' — os três bits livres são o padrão histórico para hitzone/dano por tile, gancho direto para a camada de stage do motor MUGEN. A geometria bruta também fecha selo: tile = 32 bytes, bitplanes por linha, 'from lowest bit to highest bit' (LSB-first). Consequência de canon: por padrão os bits 13–15 devem ser 0 em toda entrada escrita; valor armado é bug ou uso próprio não declarado, e uso intencional só existe com bitmask e semântica no TDD/spec-cenas mais a exceção explícita do gate.",
+      "root_cause": "A doutrina ensinava o layout correto (header + L069) sem autoridade externa citável e nunca decidia o que fazer dos 3 bits livres: sem política, um agente poderia arma-los como flag sem consumidor nem declaração (flag fantasma), ou um bug de índice estourado passaria como intencional. O furo apareceu como oportunidade no corpus (linha da tabela Tilemap) e como risco para o stage do Mugen engine.",
+      "evidence": {
+        "corpus_page": {
+          "path": "out/smspower_corpus_2026-10-12/Tilemap.txt",
+          "sha256": "2168bc88f6d7b7fb1a684cd192f812e1edae1e76e421753437c2798026cf854e",
+          "url": "https://www.smspower.org/Development/Tilemap",
+          "quote": "13 - 15 Unused Some games use these bits as flags for collision and damage zones. $2000, $4000, $8000",
+          "quote_2": "0 - 8 Tile index This can range from 0 to 511 $0 - $1FF | 9 Horizontal flip ... $200 | 10 Vertical flip ... $400 | 11 Palette When set, the tile will use the Sprite palette (CRAM $10-$1F) $800 | 12 Priority When set, the tile will be drawn on top of sprites $1000 (linhas 12-16 da tabela)",
+          "quote_3": "It is an array of tiles stored in VRAM where each tile definition is 2 bytes in size and uses the following format"
+        },
+        "corpus_page_2": {
+          "path": "out/smspower_corpus_2026-10-12/Tiles.txt",
+          "sha256": "ae995fd63039cfcb0da872b0626a85cc09a0ddf9abed6de0aa73231498673154",
+          "url": "https://www.smspower.org/Development/Tiles",
+          "quote": "Each tile is 32 bytes in size - which you can calculate by saying (8 pixels * 8 pixels * 4 bits per pixel) / 8 bits per byte = 32 bytes.",
+          "quote_2": "With bitplanes each bit of each pixel is taken separately, from lowest bit to highest bit, and stored with the bits from the same position from all of the other pixels in that row."
+        },
+        "corpus_manifest": "out/smspower_corpus_2026-10-12/MANIFEST.sha256 (linhas 58 e 59; re-hash conferido em 2026-10-14 antes da aplicação)",
+        "header": "sdk/devkitSMS/SMSlib/SMSlib.h:112 (XYtoADDR, stride 2) e 124-127 (TILE_FLIPPED_X 0x0200 / TILE_FLIPPED_Y 0x0400 / TILE_USE_SPRITE_PALETTE 0x0800 / TILE_PRIORITY 0x1000) — os defines internos já provados por L069 são exatamente a tabela Tier-1; nenhum define da SMSlib arma bits 13–15",
+        "gate_cases": "audit_tilemap_bounds.py --self-check: battery anterior (coordenadas L011) preservada + 4 casos novos do eixo de valor (0x2041 reprovado sem declaração; mesmo achado vira excecao declarada com --allow-tilemap-flags; 0x1E41 com todos os flags canônicos 9–12 passa limpo; tile='t|0x8000' não literal é indecidível)"
+      },
+      "rule_section": "SMS_GLOBAL §6 (selo Tier-1 no bullet da name table), §123",
+      "tool_that_measures": "audit_tilemap_bounds.py (segundo eixo: valor literal da entrada de tilemap, bits 13–15)",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
+      "measurement_limits": "O gate decide só literal de chamada direta (SMS_setTileatXY): wrapper de projeto, SMS_setTile sequencial e arrays de SMS_loadTileMap* ficam fora do eixo de valor — nesses caminhos a entrada vem de memória e não é decidível estaticamente. A checagem mede presença dos bits armados, não a semântica da hitzone: consumidor do motor para os bits ainda não existe (a camada de chão por tile entra como documentado). A lei 'unused' é Tier 1 do corpus; se o VDP preserva ou zero os bits em VRAM na escrita não foi medido em emulador nem console — pertence às verificações de silício do LOTE F."
+    }
+  ],
+  "dedup_key": "l132_tilemap_entry_bits13_15_collision_flags_tier1_seal_20261014"
+}

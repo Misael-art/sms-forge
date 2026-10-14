@@ -26,6 +26,37 @@ Objeto C compilado não é link/ROM; SAT estático com âncoras fixas não prova
 scanlines dinâmicas, upload ou ausência de flicker. Aponte o manifest exato:
 um README pode registrar várias gerações históricas com escopos diferentes.
 
+## Camada de chão/colisão por tile (tilemap bits 13–15)
+
+A entrada de name table tem bits 13–15 que o VDP ignora e o SMSPower documenta
+como "flags for collision and damage zones" (`Tilemap.txt`). O motor pode usá-los
+como máscara por tile (solo/parede/zona de dano do stage), mas isso é SEMPRE
+decisão declarada, nunca padrão: o gate `audit_tilemap_bounds.py` veda bits
+13–15 por padrão e reprova qualquer `SMS_setTileatXY` que os arme sem
+`--allow-tilemap-flags "<motivo>"`.
+
+Regras para a camada de chão por tile:
+
+- **Nenhuma bit 13–15 tem semântica até o TDD/spec de cenas do projeto
+  `mugen_fighting_v1` a declarar.** Bit 13 ≠ "chão" por direito; o motor atual
+  não lê esses bits, então promovê-los a colisão sem consumidor é o estágio
+  `generated` sem `consumed` da tabela acima — nome/flag emitido não implementa
+  hitzone.
+- **Não colidir com metasprites/pools.** O mesmo bit não pode ser bandeira de
+  tilemap e flag de pattern table de sprite: são memórias distintas; declare o
+  domínio (só entrada de name table do stage) e o bitmask exato.
+- **Fonte real da hitzone é o CNS/stage do MUGEN, não o bit.** O bit pode
+  *carregar* uma classificação derivada do `ground.front`/`mugen_fighting_v1`
+  intake, mas a verdade de colisão vem do AIR/HitDef já resolvido (ver
+  "Entrada de golpe próximo/distante"). Bit sem lastro no intake é dedução, não
+  evidência.
+- **Meça antes de afirmar.** Uma hitzone por tile só vira claim quando o corte
+  roda no emulador e a sobreposição é vista no framebuffer (`regra final de
+  ferro`); até lá é `documentado`, não `testado_em_emulador`.
+
+Gate no fechamento: `audit_tilemap_bounds.py` (coordenada L011 + bits 13–15
+L132); rode `--self-check` antes de interpretar. Ver SMS_GLOBAL §123.
+
 ## States, actions e comportamento
 
 Resolva a ação realmente chamada pelo estado; não inferir KO/crouch/guard por
