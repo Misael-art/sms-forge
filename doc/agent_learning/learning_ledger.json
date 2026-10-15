@@ -1005,6 +1005,123 @@
         "doc/curation/evidence/2026-10-13_quality_cohesion"
       ],
       "dedup_key": "quality_cohesion_application_20261013"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "curation",
+      "summary": "Candidatos da sessão M3 (pulso_de_cristal) registrados sem ID novo: aplicação de L082/§67+§103 na reconciliação 58 bruto vs 64 corrigido (máximos por estado = 251 são wrap do VCounter e não são publicáveis); L061/§49 na cadeia de degraus r6→r12 (2 linhas/frame fecha, 3 derramam) com dívida de re-selo na ROM entregue; L079/§64 no latch 0xE0|(shift&3) que apagava o bit2 e virava assobio (correção + self-check por construção); L128/L129 na cena 03 medida (24 sprites, pico 6/linha); L089+L057 no corredor de sondas 0xC900 com gate. CANDIDATOS sem ID: semântica de SET da atenuação PSGlib (header 51-54) com sentinela que deixa -12 dB em vigor, e as máscaras de porta/pausas da ponte. Nada aplicado: SMS_GLOBAL, wrapper e registry intocados; aprovação humana pendente item a item.",
+      "sources": [
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json",
+        "SMS_projects/pulso_de_cristal/out/evidence/worst_frame_r12.json",
+        "SMS_projects/pulso_de_cristal/out/logs/peek_r11.txt",
+        "SMS_projects/pulso_de_cristal/out/logs/sprite_line_sim_storm.txt",
+        "SMS_projects/pulso_de_cristal/out/logs/probe_corridor_report.json"
+      ],
+      "dedup_key": "pulso_m3_candidatos_curadoria_aberto_audio_ponte_vcounter_degraus_l079_atenuacao_20261014"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "lesson",
+      "summary": "[SUPERSEDIDA em 2026-10-14 fim de tarde — ver entrada 'refutada_captura_audio_host_20261014b'] BLOQUEIO ABERTO (risco, não técnica): captura de áudio da sessão isolada chegou a 0-16% de amostras ativas em 8 janelas, com rota privada verified=True, sink a 100%, ROM a ~60fps e probe_playing=1; o próprio monitor do sink privado reproduziu o afamamento, e M2 (2026-10-12) gravou 94-100% com as mesmas ferramentas. audit_audio terminou '[OK] peak=1995' + '[FAIL] mix fraco: 2% ativo < 90%' — piso RMS absoluto lê mix quieto/intermitente como mix fraco e §93 não cobre 'rota verificada mas faminta'. Consequência: o eixo de áudio do M3 permanece NÃO PROVENIDO (os contadores da ROM provam aceitação e arbitração do SFX, não o som). Nenhuma ação no serviço de áudio do host foi tentada: exige decisão do dono.",
+      "sources": [
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json",
+        "SMS_projects/pulso_de_cristal/out/logs/capture_m3_run2.log"
+      ],
+      "dedup_key": "host_audio_route_starvation_open_blocker_m3_pulso_20261014"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "lesson",
+      "summary": "Três armadilhas da ponte que produziram evidência falsa-verde na tomada 1 do M3: --p1/--p2 são JOGADORES e não botões (usar p2 achando ser SELECT deixou a FSM cair em atração e 'andar o arco sozinha'); input/read/capture PAUSAM a instância, então sem run de volta o PCM é silêncio (peak=0); 'emulator_session.py isolated' não tem subcomando list, e a primeira checagem de sessão zumbi foi lida como 'nenhuma' — verificação negativa vacua. A checagem real usa pgrep no binário + diretório de runtime. Registro local: nada de doutrina foi editado; proposta de emenda a §93 e ao workflow de sessão isolada está pendente.",
+      "sources": [
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json",
+        "SMS_projects/pulso_de_cristal/tools/capture_m3_arc.sh"
+      ],
+      "dedup_key": "bridge_port_masks_pause_and_vacuous_negative_check_20261014"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "lesson",
+      "summary": "RISCO DE HOST fora do escopo do projeto: SMS_projects/luta_mugen/doc/ está ilegível com Erro de entrada/saída (ls e head reproduziram duas vezes em 2026-10-14), enquanto o resto do repo lê normalmente — provável degradação do meio onde o repo vive. Nenhum reparo foi tentado (fsck/remount/cópia podem custar trabalho em andamento). Ação humana: verificar o meio e restaurar a pasta do git/backup antes de qualquer trabalho naquele projeto. Armadilhas menores registradas junto: set -euo pipefail propaga o exit 1 de 'gate.py | tail' e aborta diagnóstico na primeira camada; pkill -f casou a própria linha de comando e matou o shell (exit 143), deixando sink nulo órfão; PSGlib e SMSlib aqui são binário fechado, então fonte do SDK não é autoridade consultável.",
+      "sources": [
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json"
+      ],
+      "dedup_key": "storage_io_error_luta_mugen_doc_and_harness_pipefail_pkill_traps_20261014"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "lesson",
+      "summary": "REFUTADA a hipótese de afamamento de rota de áudio no host. Mesma rota, mesmo sink privado, mesma métrica audit_audio: pré-correção peak=0 (tomada 1) e peak=1995 / ativo 2% (tomada 2) com route verified=True e probe_playing=1; pós-correção na ROM f4f8ee3f w1 2937/71%, w2 2872/89%, w4 5646/93% [PASS], w4b controle 5647/89%, w6 5673/89% — de volta à banda selada no M2 (dawn 5504, storm 6030). Causa real dupla: (1) PSGSetMusicVolumeChannelsAttenuation é SET dos quatro nibbles do mixer, não estado por faixa — a rampa de saída deixava atenuação 15 armada e a cena seguinte começava muda; (2) ganho do host elevado pelo DONO a pedido. Lição de método: a hipótese errada forçou medir estado da ROM junto com o áudio (probe_state/track/playing/frame), o que virou W5 (silêncio autoral com probe_frame 476->920) e W6 (reprise) e a matriz de Pause nos quatro atos. Áudio sem estado prova apenas 'tocou alguma coisa'.",
+      "sources": [
+        "out/logs/capture_m3_run2.log sha256=c9c6553e84252526f32e16e17b08d20065fb03668079e5d0ee4445697770ede3",
+        "out/escuta/w4_dawn_mix.audio.json sha256=8a9f645c72ab03b37fcfc90c399c1c7a95537b814e9a40d9788439b4b24a4eb6",
+        "out/logs/m3_audio_W56_r13.log sha256=af3dc552a401c5c23ed2ce9f3ee9fc1199704fe9c81a81992c383b7bf741171b",
+        "out/rom/pulso_de_cristal.sms sha256=f4f8ee3f4c2a720a1da696fe7a84235a787cc1edeba5d0eb25d9592f5b2eb331",
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json (open_blockers[0].refutada)"
+      ],
+      "dedup_key": "refutada_captura_audio_host_20261014b"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "curation",
+      "summary": "Quatro candidatos novos, SEM ID (registry segue L132; SMS_GLOBAL e tools/sms_wrapper intocados; todas as propostas not_applied, aprovacao humana pending): (a) medida de energia e cega a arbitracao de substituicao de canal da PSGlib — W4 vs W4B deu 0 transientes e delta +0,080 com cnt_sfx_crystal 0->2; (b) diferenca de VCounter em modulo 256 vira custo plausivel — ph_state_max_sat[3] e [5] leram 251 (= -5) e ph_stream_max 255 (= -1) porque o checkpoint do fim do trecho nao e alcancado nesses estados; (c) silencio autoral aborta o gate — capture_audio sai com nao-zero em peak=0 e set -euo pipefail mata o script antes da sonda de frame, que e justamente a testemunha que separa 'rota morreu' de 'silencio querido'; (d) sonda pausa o nucleo — orcamento de espera em cena de vida curta conta em sondas (40 nao alcancou DAWN; 160 com sleep 0,4 alcancou) e todo read exige run antes do proximo video, senao distintos=1.",
+      "sources": [
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json (candidate_lessons_no_id_emitted[2..5])",
+        "out/logs/m3_caso4_diff_w4.txt sha256=c03ca67faca6cacb58f37681b7a5fbd3da293a0dda83dd077d1e9994d826a601",
+        "out/logs/peek_r14.txt sha256=5c085b34cbf6e2ea28b9aa1f1087ec646d3149fc8cd7b684c58754928b6bb572",
+        "out/logs/m3_pause_F_r13.log sha256=6dfdaf79237e429a489d36a5588a621b236cfb581e26c2c4127d9a5c9aeba9c8",
+        "SMS_projects/pulso_de_cristal/tools/m3_audio_windows.sh (W5/W6)"
+      ],
+      "dedup_key": "m3_quatro_candidatos_sem_id_20261014b"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "curation",
+      "summary": "Dossie de curadoria da sessao M3 foi sobrescrito por um GATE: `audit_learning_capture.py --json <caminho>` trata o valor da flag como DESTINO do relatorio (open(path,'w')) e gravou {problems:[],clean:true} de 37 bytes sobre os 19.179 chars do dossier, que nao estava no git. Restauracao auditavel: base extraido do transcript da sessao + replay do MESMO script de emenda; diferenca declarada = os hashes de evidencia recomputados (doc/10 mudou depois). Cadeia de sha gravada em lesson_routes.application_records[dossier].restore_chain: 3f809a8a (manha) -> a3a4b215 (emenda, nunca registrado) -> clobber -> cc7c3e25 (replay) -> d8085959 (restaurado). Dois registros novos no dossier: armadilha do `--json` e candidato 'eixos_de_entrega_leem_top_level_e_a_rota_de_sessao_publica_em_bundle' (boot/fps/gameplay seguem false por DESTINO do artefato, nao por falta de medida: informative=true e fps_constante=true existem nos bundles 4246092d e 5f325212, casados com rom_sha256=f4f8ee3f). O eixo de audio fechou por cp -p das 8 janelas em out/evidence/ + manifest hasheado, e o build derivou axes.audio=true sem editar build_record a mao. Nada do wrapper foi tocado; aprovacao humana pending.",
+      "sources": [
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json sha256=d80859598d24838c6208ed19a70278b4635192669f7351ff2592754154627823",
+        "doc/agent_learning/lesson_routes.json (restore_chain)",
+        "SMS_projects/pulso_de_cristal/out/evidence/audio_m3_manifest.json sha256=4a02d9292d11c0406731258075d637b974672f193e457b5e3a43765a0f06bfa9",
+        "SMS_projects/pulso_de_cristal/out/build_record.json sha256=09b0f21ab5a9e0471a6bd18963c7dcfbd1a63757f81ccc6fdc5070567988b2c3"
+      ],
+      "dedup_key": "clobber_do_dossie_pelo_flag_json_do_gate_e_eixos_por_destino_20261014c"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "curation",
+      "summary": "Aplicado A9 (L133/§124): mapa de VRAM Tier-1 (tiles/PNT/SAT), janela de sprites por reg6 ($FB 256/$FF 192; default SMSlib 0xFF confirmado vivo em vdp_regs.bin das sessoes BlastEm 2026-10-14), sobras legais com guarda do proprio corpus ($3F40 2 tiles; $3E00-$3EFF 8 tiles so sem scroll em 192; cauda da SAT 3 tiles so <=31 sprites + $D0 valido so em 192 — L128) e name table extra via reg2 com motivo (duplo buffer/menu/split Sylvan Tale; SMS1 exige bit0=1 — L130). Ferramenta nova measure_vram_map.py (15 casos --self-check; dogfood: plano do probe bits1315 aprovado com cross-check conforme). Skill sms-vram-vblank-budget.md ampliada e 8 rotas re-bindadas por SHA (L035,L043,L047,L061,L071,L077,L082,L089). Corigido no registro: a troca $FB ja e usada em codigo real (arena_nocturna, hamoopig, kage_matsuri) — limite medido e a ausencia de cross-check, nao a ausencia de uso. Mesma sessao: patch do bypass SMS_VDPControlPort em audit_tilemap_mirror.py (2 casos novos) e vereditos da campanha andar-3: A7/L131 wrap 224 CONFIRMADO BlastEm, A8/L132 bits 13-15 CONFIRMADO BlastEm (preservados+ignorados na render), A4/L130 espelho SMS1 INCONCLUSIVO cenario C (BlastEm nao modela; lei permanece sem reproducao em simulador deste host).",
+      "sources": [
+        "doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json",
+        "doc/curation/evidence/2026-10-14_l133_vram_map/report_probe_bits1315.json sha256=7fd775c369a2ba4bb177c2183f3a3d970daf957bba2416a3aef928bc786511bd",
+        "out/campaign_tier1_2026-10-14/vscroll_wrap224/verdict.json",
+        "out/campaign_tier1_2026-10-14/tilemap_bits1315/verdict.json",
+        "out/campaign_tier1_2026-10-14/reg2_bit0_mirror/verdict.json"
+      ],
+      "dedup_key": "l133_aplicacao_a9_vram_map_20261014"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "curation",
+      "summary": "Instrumento do gate humano provado por medida, e a armadilha do `--json` reconhecida como familia. (1) A cabine M3 exportava veredito por download do navegador enquanto o memory bank prometia `out/logs/m3_escuta_verdict.json`, caminho que nenhum codigo escrevia: claim de artefato sem modo que o produza. Ganhou `--verify` (8 janelas byte-identicas entre o blob base64, out/escuta e out/evidence; rom_sha256=f4f8ee3f; gate audit_audio por janela; 0 defeitos), `--collect` (ingestao que recusa ROM divergente, cabine velha por gerado_em, wav com sha trocado, janela nao julgada e veredito fora do vocabulario) e `--self-check` (6 casos, 4 de rejeicao, saida em tmpdir nunca em out/). (2) O clobber do dossie nao e defeito isolado: `--json` e DESTINO de relatorio em 13 ferramentas do wrapper, todas com open(...,\"w\") e zero guardas (medição por intersecao de grep, lista no dossie); so measure_vram_map rotula metavar e so audit_doc_sync explica na ajuda. Candidato: convencao --report-out + recusa de caminho preexistente + check no validate_measurement_tools. (3) Foto corrigida: registry esta em L133/§124 (medido em doc/curation/id_registry.json), nao L132; outra sessao aplicou o item SMSPower A9 no mesmo dia. Lição de metodo: dossier que fixa maximo de registry em prosa apodrece no mesmo dia em repo multi-sessao. Nada do canon ou do wrapper foi tocado; 9 candidatos sem ID, aprovacao humana pending.",
+      "sources": [
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json sha256=cace000551323ebbd17f283d75a41692072807e25bd3ba3f731310da67c1ea47",
+        "SMS_projects/pulso_de_cristal/tools/m3_escuta.py sha256=bb5838f75bdc2ad8e2de43e9a5fb735a9fb20b53f38e7d7c9e2f2b8a5bac4485",
+        "SMS_projects/pulso_de_cristal/out/escuta/m3_escuta.html sha256=dfacba8ab7f14ec0ffb43f975ea7fa51947c3b3ef57fade27c6da837da7505c9",
+        "SMS_projects/pulso_de_cristal/out/logs/generation_channel_decision.json sha256=bc234b099caeb46458cc0a67a710b3fa48061f32e9a695be67d10d66cb822200",
+        "SMS_projects/pulso_de_cristal/doc/10-memory-bank.md (§ Blocker dominante, § Bloqueio paralelo)"
+      ],
+      "dedup_key": "cabine_verify_ingestao_e_familia_json_destino_13_ferramentas_20261014d"
+    },
+    {
+      "ts": "2026-10-14",
+      "kind": "lesson",
+      "summary": "Perda de evidencia canonica de OUTRA sessao, causada pela familia de flags `--json` que sao DESTINO de relatorio: `doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json` tem hoje 37 bytes e conteudo `{ \"problems\": [], \"clean\": true` (sha256 89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39), mtime 23:33. Os quatro formatos que escrevem esse objeto sao audit_learning_capture/audit_hardware_constants/audit_header_claims/audit_debug_markers, todos `open(<args.json>,\"w\")` sem guarda. Consequencia: `audit_learning_capture.py --root .` (rodado sem --json) devolve deriva vermelha no repo inteiro porque a linha correspondente em `lesson_routes.json` aponta para o caminho que agora contem um veredito, e as citacoes em ledger perdem o JSON de lastro. Diagnostico reutilizavel: `wc -c` dos JSONs de doc/curation; lição de 37 bytes com chave `problems` e veredito morando no lugar da lição. Esta sessao NAO restaurou o arquivo alheio (nao possui o texto original; inventar licao de outra sessao seria destruir a evidencia uma segunda vez) e NAO editou o gate para ficar verde: o FAIL esta declarado com atribuicao. Acao humana: replay da sessao que emitiu a licao, mais a emenda de curadoria ja candidatada (--report-out / recusar destino existente / check no validate_measurement_tools).",
+      "sources": [
+        "doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json sha256=89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39",
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json sha256=b3bcd00602d5fe414d726c1ec2da896f971e04d008eab5df5c7a9f8e07ec87fe",
+        "SMS_projects/pulso_de_cristal/doc/10-memory-bank.md (§ Licoes abertas)"
+      ],
+      "dedup_key": "loss_json_destino_segunda_instancia_a9_vram_map_20261014e"
     }
   ]
 }

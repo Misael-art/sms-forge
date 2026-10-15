@@ -37,3 +37,26 @@ renderer-off e P2 passivo são controles diagnósticos, não budget de entrega.
 - Transição de tela: **display off**, reescrever o mapa inteiro, display on.
   Escritas fora do VBlank deixam resto na tela; limpar linha a linha não
   fecha a classe (L047).
+
+## Mapa de VRAM e a janela do reg6 (SMS_GLOBAL §124, L133)
+
+VRAM = 16 KB com layout de tabela: tiles 0-255 em `$0000-$1FFF`, tiles
+256-447 em `$2000-$37FF`, tilemap em `$3800-$3EFF`, SAT em `$3F00-$3FFF`.
+O índice de sprite é 1 byte na SAT: o sprite só alcança a janela de 256
+tiles apontada pelo **reg6** — `$FB` base `$0000` (256 únicos), `$FF` base
+`$2000` (192 únicos; default da SMSlib, troca por
+`SMS_useFirstHalfTilesforSprites`, `SMSlib.h:53`). BG indexa 0-511 e não
+sofre a janela.
+
+Sobras têm **guarda**, não são espaço livre: `$3F40-$3F7F` (2 tiles, gap da
+SAT), `$3E00-$3EFF` (8 tiles, só sem scroll vertical em modo 192),
+`$3F20-$3F3F`+`$3FC0-$3FFF` (3 tiles, só com ≤31 sprites + `$D0` na 32ª
+entrada, e o terminador `$D0` só vale em 192 — §118). Tilemap extra trocada
+via reg2 (duplo buffer / menu / split HBlank estilo Sylvan Tale) consome
+`linhas×64` bytes da zona de tiles e no SMS1 exige bit0=1 do reg2 (§121).
+
+Ferramenta: `measure_vram_map.py --plan plano.json [--snapshots DIR]` —
+julga colisões, janela do reg6, motivos de tilemap extra, sobras reclamadas
+e confere reg5/reg6 vivos dos dumps `blastem_sms.py` contra o plano.
+Na spec-cenas, o contrato declara endereços, janela de sprite e sobras
+usadas; sem plano declarado, "cou porque sobrou" não é argumento.

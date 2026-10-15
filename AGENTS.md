@@ -138,6 +138,7 @@ roteiro → storyboard (planta baixa em pixel) → coreografia → MEDIÇÃO →
 | Proveniência de áudio | `audit_audio_provenance.py` | .psg sem entrada no manifest de áudio, sha256/bytes divergentes, faixa portada sem referência hasheada (L058, §47) |
 | Evidência | `capture_evidence.py` | captura branca/sem informação, emulador ausente |
 | Sessão do emulador | `emulator_session.py` | instância zumbi viva quando um gate vai buscar a janela por nome — sem isso o gate mede a ROM **errada** e emite veredito confiante sobre a sua (§46/L057) |
+| Corredor de sondas | `audit_probe_corridor.py` | símbolo não-ABS do `.map` caindo dentro do corredor `__at` (a biblioteca escreve onde a sonda mora e o detector mente bonito) — exige folga medida entre topo do DATA/fim das variáveis e a base do corredor (L089) |
 | Diagnóstico SMS complementar | `blastem_sms.py` + `audit_blastem_sms.py` | BlastEm privado para estados Z80/VDP/mapper; pin/SHA/dumps/relógio/cleanup; não promove stepping, CRAM interna ou aceitação MD a FPS/áudio/hardware SMS (L112, §108) |
 | Diagnóstico BlastEm avançado e manutenção | `blastem_diagnostics.py` + `blastem_maintenance.py` | mudança RAM/OUT com opcode vivo; APNG bruto/derivado, PCM/VGM íntegros e visores SMS; candidato paralelo/hash divergente bloqueado; GDB Z2 M68K não vira suporte Z80 (L114–L120, §110) |
 | Diferença entre estados SMS | `blastem_dump_diff.py` | snapshots auditados e labels da mesma ROM; delta líquido não vira escrita/transferência, blocos VRAM não viram tiles únicos de arte (L112/L120, §§108/110) |
@@ -160,6 +161,7 @@ roteiro → storyboard (planta baixa em pixel) → coreografia → MEDIÇÃO →
 | Limites e valor da name table | `audit_tilemap_bounds.py` | escrita em linha fora das 24 renderizadas (invisível) ou além da PNT, na SAT (L011); entrada de tilemap com bits 13–15 armados sem `--allow-tilemap-flags "<motivo>"` declarado no TDD (L132, §123) |
 | Espelhamento de tilemap SMS1 | `audit_tilemap_mirror.py` | escrita ao reg2 com bit0=0 (mirror invisível no alvo SMS2/PC), sem exceção `--allow-sms1-mirror` motivada; valor não-literal nunca aprovado (L130, §121) |
 | Wrap do scroll Y | `audit_vscroll_wrap.py --screen-h` | acumulador/literal de `SMS_setBGScrollY` sem wrap em 224 no modo 192 (tilemap de 224 px; >223 trata como 0..31); modo 224/240 validado contra 256; função/expressão = não provado, nunca aprovado (L131, §122) |
+| Mapa de VRAM por plano | `measure_vram_map.py` | região de tiles invadindo PNT/SAT, tile de sprite fora da janela do reg6 (`$FB` 256 / `$FF` 192), name table extra sem motivo, sobra reclamada com guarda violada (`$D0` só em 192; linhas inferiores sem scroll); cross-check `vdp_regs.bin` de sessão contra o plano (L133, §124) |
 | Matriz de maestria | `audit_mastery_registry.py` | técnica acima de `mapped` sem evidência |
 | Especialização | `audit_specialization.py` | gênero declarado sem lastro no GDD |
 | **Ferramentas de medição** | `validate_measurement_tools.py` | ferramenta de medição sem `--self-check` passando (§19) |

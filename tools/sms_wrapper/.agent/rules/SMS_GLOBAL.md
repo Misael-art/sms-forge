@@ -2311,18 +2311,29 @@ Consequências:
   o gate então emite `excecao_declarada`, nunca `aprovado` silencioso.
 
 Gate: `audit_tilemap_mirror.py` em três modos — `--source` (escritas literais
-ao reg2: `outp(0xBF, vv); outp(0xBF, 0x82)`; `VDPControlPort`;
-`SMS_write_to_VDPRegister(2, vv)`; valor não-literal reportado como não
+ao reg2: `outp(0xBF, vv); outp(0xBF, 0x82)`; `VDPControlPort` e a forma
+prefixada `SMS_VDPControlPort` — o único sfr que a SMSlib vendorada expõe;
+uma correção de 2026-10-14 fecha o bypass em que o padrão de adjacência exigia
+o identificador nu e a forma `SMS_` escapava; `SMS_write_to_VDPRegister(2, vv)`;
+valor não-literal reportado como não
 provado, nunca aprovado), `--rom` (assinatura Z80 `3E vv D3 BF 3E 82 D3 BF`;
 ausência é `nao_provado_estatico` porque o init da SMSlib usa tabela) e
 `--snapshots` (modo autoritativo: `vdp_regs.bin` de 11 bytes produzido por
 `blastem_sms.py`, byte[2] com bit0=1). `--self-check` cobre os três modos, a
-exceção declarada, dump truncado e a recusa de variável como literal.
+exceção declarada, dump truncado, a recusa de variável como literal e as duas
+formas do porta-objeto (nu e `SMS_`).
 
 Limites: a lei é Tier 1 do corpus, não medida em console — o efeito em
 silício SMS1 fica `hardware_pass` pendente e pertence à matriz de
 compatibilidade (item A5 do dossiê, não aplicado). A varredura estática só
 decide literais; runtime real exige a sessão `blastem_sms.py` com dumps.
+**Campanha 2026-10-14 (probe `reg2_bit0_mirror`, ROM sha `364b7edc…`):**
+com reg2=`0xFE` vivo em `vdp_regs.bin` (modo `--rom` também pega, offset
+728), o BlastEm 1.0.0 **não espelha em nenhum dos modelos** (`sms1` e
+`sms2` renderizam as linhas 16..23 próprias) — cenário C pré-registrado:
+o emulador não modela o quirk; a lei permanece sem reprodução em simulador
+deste host e o status de L130 continua `documentado`. Veredito:
+`out/campaign_tier1_2026-10-14/reg2_bit0_mirror/verdict.json`.
 
 ## 122. Assimetria dos registros de scroll: Y lido uma vez por frame e wrapa ≥224 no modo 192; X ao vivo em HBlank (L131)
 
@@ -2370,9 +2381,15 @@ expressão ou variável sem mutação reportam **não provado, nunca aprovado**.
 Limites: o gate detecta **presença de token de wrap no arquivo**, não fluxo de
 dados — presença não prova correção quadro a quadro, e o caminho entre a
 mutação e a chamada pode ter ramos. Lei Tier 1 do corpus; o wrap ≥224 e a
-leitura única não foram medidos em emulador nem console: telemetria de reg9 em
-`measure_runtime_probe.py` fica como verificação futura, e a fidelidade desses
-dois comportamentos nos emuladores-alvo é questão aberta (LOTE F). A técnica
+leitura única não foram medidos em console: telemetria de reg9 em
+`measure_runtime_probe.py` fica como verificação futura.
+**Campanha 2026-10-14 (probe `vscroll_wrap224`, ROM sha `866f5cc8…`):** o
+wrap ≥224 em modo 192 está **confirmado no BlastEm** — renders pixel-idênticos
+240≡16, 224≡0, 255≡31, controle 240≠192, com o valor cru provivo por
+`vdp_regs.bin[9]` e marcador RAM em cada fronteira. A **leitura única por
+frame** (ausência de raster vertical) segue não medida — exige sonda por
+linha. Engine única; console é LOTE F. Veredito:
+`out/campaign_tier1_2026-10-14/vscroll_wrap224/verdict.json`. A técnica
 Sylvan Tale está registrada como `documentado`, não como receita implementada.
 
 ## 123. Bits 13–15 da entrada de tilemap: o VDP ignora, o canon veda por padrão, engine declara para usar (L132)
@@ -2412,8 +2429,80 @@ Flags canonicos 9–12 passam limpos. `--self-check` cobre os quatro casos novos
 indecidivel).
 
 Limites: lei Tier 1 do corpus (o "unused" e o uso em jogos), não medida em
-console — se o hardware realmente preserva os bits em VRAM (para um driver lê-los
-depois) é `hardware_pass` pendente, questão aberta de LOTE F. O gate só decide
+console. **Campanha 2026-10-14 (probe `tilemap_bits1315`, ROM sha
+`1b167890…`):** no BlastEm a VRAM **preserva** os bits escritos (palavras
+`$203C/$403C/$803C/$E03C` exatas no dump `vram.bin`) e a renderização os
+**ignora** (seis células pixel-idênticas à control sem flags) — veredito
+confirmado em nível de emulador, engine única; a preservação no silício
+SMS1/SMS2 real continua `hardware_pass` pendente, questão de LOTE F. O gate só decide
 literal em `SMS_setTileatXY`; `SMS_setTile` posicional e arrays de
 `SMS_loadTileMap*` ficam fora — a tile index vindo de memória não é decidível
 estaticamente e o projeto declara seu próprio contrato de mapa.
+
+## 124. Mapa de VRAM: janela de sprites pelo reg6 ($FB 256 tiles / $FF 192), sobras legais com guarda e tilemap extra por reg2 (L133)
+
+O layout corrente de VRAM (16 KB) é tabela do corpus: `$0000-$1FFF` graphics
+dos tiles 0-255, `$2000-$37FF` dos tiles 256-447, `$3800-$3EFF` tilemap,
+`$3F00-$3FFF` SAT, com reg2 e reg5 em `$FF` (`VRAMMemoryMap.txt`, sha
+`ab4c480d…`). Dado novo para o orçamento (§9, §27): a SAT alocar **1 byte**
+ao índice do sprite significa que o sprite só alcança a janela de 256 tiles
+escolhida pelo **reg6** — `$FB` = base `$0000` (256 tiles únicos), `$FF` =
+base `$2000` (192 únicos). A SMSlib liga em `$FF` (`VDPReg_init` reg6 =
+`0xFF`, "Sprite tiles begins at address 0x2000", `SMSlib.c:29-31`; confirmado
+como valor vivo nos dumps `vdp_regs.bin` das sessões BlastEm de 2026-10-14) e
+expõe a troca por API: `SMS_useFirstHalfTilesforSprites`
+(`SMSlib.h:53` → `SMS_write_to_VDPRegister(0x06, usefirsthalf?0xFB:0xFF)`).
+O BG não sofre a janela: a entrada de tilemap guarda 9 bits de índice e
+"the background can use any tile" (0-511).
+
+Sobras legais de VRAM existem — cada uma com **condição de guarda do próprio
+corpus**, não como espaço gratuito genérico:
+
+- `$3F40-$3F7F` — stretch de 64 bytes não usados pela SAT quando o software
+  ocupa 32 entradas = 2 tiles (índice de sprite 250/`$FA`, de tilemap
+  506/`$1FA` quando reg6=`$FF`);
+- `$3E00-$3EFF` — as 4 linhas inferiores do tilemap em modo 192 = 8 tiles
+  (índices 240/`$F0` e 496/`$1F0`), **só se o jogo não rola verticalmente** —
+  rolou, as linhas são dados do mapa (§122: a tilemap de 192 linhas tem 224 px);
+- `$3F20-$3F3F` + `$3FC0-$3FFF` — 3 tiles quando o software se limita a ≤31
+  sprites e grava `$D0` no Y da 32ª entrada (`$3F1F`): o terminador `$D0` **só
+  vale em modo 192** (§118/L128) — em 224/240 a entrada seria lida como sprite
+  na linha 208 e o "espaço livre" passa a desenhar lixo;
+- **name table extra** trocada instantaneamente via reg2: duplo buffer de
+  animação (atualizar uma enquanto a outra é exibida), menu, e split em
+  mid-HBlank estilo Sylvan Tale (§122: o status bar fixo é troca de reg2, não
+  scroll vertical; §121: no SMS1 a troca segura exige bit0=1, senão o mapa
+  trocado espelha).
+
+Consequências:
+
+- o contrato de cena (`13-spec-cenas.md`) declara o mapa de VRAM por escrita:
+  regiões de tiles BG/sprite, janela do reg6 pretendida e sobras reclamadas
+  com a guarda satisfeita — "cou porque sobrou byte" sem guarda declarada é
+  a classe de bug que este registro documenta (o `$D0` em 224 linhas é
+  refutável pela própria lei de L128);
+- trocar reg6 é decisão de pool, não de economia: `$FB` libera os 256 tiles
+  inferiores para sprites, mas o BG perde o acesso exclusivo a `$0000-$1FFF`
+  como zona segura — e o caminho §27 (`SMS_addSprite` citando tile <256 sem
+  declarar base) continua gateado por `audit_sprite_mode.py`;
+- tilemap extra consome região de tiles: o orçamento de tiles únicos da cena
+  encolhe exatamente `linhas×64` bytes por mapa adicional.
+
+Gate: `measure_vram_map.py` — `--plan` (schema `sms_vram_plan_v1`) julga
+colisões entre regiões/blocos (tiles×PNT×SAT×extras), exige motivo para toda
+name table extra, bloqueia tile de sprite fora da janela do reg6 e recusa
+sobra reclamada com guarda violada (`sobria_sem_guarda`); `--snapshots` lê os
+`vdp_regs.bin` de `blastem_sms.py` e confere reg5/reg6 vivos contra o plano
+(divergência reprova; reg2 com bit0=0 gera alerta de mirror §121).
+`--self-check` cobre janelas `$FB`/`$FF`, as três guardas de sobra, colisão
+BG×PNT, tilemap extra sem motivo, modo 240 com base `$3800` (invasão de SAT),
+cross-check de snapshot (conforme/divergente/alerta) e dump truncado.
+
+Limites: as geometrias são Tier 1 do corpus; a janela de 256×1 byte do índice
+de sprite é física da SAT, mas o que o VDP faz com reg6 fora de `$FB`/`$FF`
+não é decidido aqui (a ferramenta aceita só os dois valores). O cross-check
+mede o registrador no **emulador** — engine única BlastEm, console fica
+LOTE F. A ferramenta julga o **plano declarado**: quem escreve VRAM fora do
+plano (DMA inexistente, stagers à mão) escapa — o par estático do código é
+`audit_tilemap_bounds.py`/`audit_sprite_mode.py`, o dinâmico é a sessão com
+dumps.

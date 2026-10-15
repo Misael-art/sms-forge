@@ -25,6 +25,13 @@
 | patterns sprite | — | — | — |
 | name table | — | — | — |
 | SAT | — | — | — |
+| janela de sprite (reg6) | `$FB`→$0000..$1FFF (256) / `$FF`→$2000..$37FF (192) | — | — |
+| sobras reclamadas | `$3F40-$3F7F` / `$3E00-$3EFF` / `$3F20-$3F3F`+`$3FC0-$3FFF` | 2 / 8 / 3 | guardar a condição do corpus (§124/L133) |
+| name table extra (reg2) | — | linhas×64 B | motivo obrigatório: duplo buffer / menu / split HBlank |
+
+Escrever a tabela como plano JSON (`sms_vram_plan_v1`) e rodar
+`measure_vram_map.py --plan <plano.json> --snapshots <sessão>` — veredito e
+cross-check de reg5/reg6 citados aqui (L133, §124).
 
 ### Orçamento worst-frame (MEDIDO)
 | Item | Bytes/frame | Método da medição |

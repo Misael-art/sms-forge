@@ -1,10 +1,10 @@
 {
   "schema": "sms_lesson_routes_v1",
   "status": "canonical_application_routes",
-  "lesson_count": 116,
+  "lesson_count": 117,
   "source_coverage_sha256": "f086039f2d42542470ad5747b1693767e8dcd0ffedfab0e737f8b66d0b528755",
   "registry_source": "doc/curation/id_registry.json",
-  "registry_issued_through": "L132",
+  "registry_issued_through": "L133",
   "excluded_holes": [
     "L012",
     "L020",
@@ -699,7 +699,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
-          "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -1020,7 +1020,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
-          "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -1121,7 +1121,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
-          "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -1560,7 +1560,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
-          "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -1886,7 +1886,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
-          "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2036,7 +2036,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
-          "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2239,7 +2239,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
-          "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -2500,7 +2500,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
-          "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
@@ -4601,6 +4601,22 @@
           "selection_basis": "domain_review; the collision/damage-by-tile hook targets the MUGEN engine stage layer and its ground/hitzone semantics"
         }
       ]
+    },
+    {
+      "lesson_id": "L133",
+      "sources": [
+        "doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json"
+      ],
+      "rule_section": "SMS_GLOBAL §124",
+      "current_rule_status": "fechada_com_ferramenta",
+      "application_entrypoints": [
+        {
+          "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+          "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "domain_review; the VRAM map, reg6 sprite window and guarded free pockets belong to the VRAM/VBlank budget skill"
+        }
+      ]
     }
   ],
   "limits": [
@@ -5059,6 +5075,90 @@
         "tools/sms_wrapper/.agent/workflows/art-review.md"
       ],
       "record_interpretation": "application_or_validation_of_existing_lessons_without_new_ID"
+    },
+    {
+      "path": "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json",
+      "sha256": "b3bcd00602d5fe414d726c1ec2da896f971e04d008eab5df5c7a9f8e07ec87fe",
+      "type": "curation_followup",
+      "defined_lesson_ids": [],
+      "referenced_lesson_ids": [
+        "L057",
+        "L061",
+        "L078",
+        "L079",
+        "L082",
+        "L089",
+        "L097",
+        "L128",
+        "L129"
+      ],
+      "applied_lesson_ids": [
+        "L057",
+        "L061",
+        "L078",
+        "L079",
+        "L082",
+        "L089",
+        "L128",
+        "L129"
+      ],
+      "lessons_empty": true,
+      "has_validation_or_evidence": true,
+      "promotion_status": {
+        "status": "not_applied; registro de candidatos da sessao M3. O bloqueio de captura de audio no host foi REFUTADO por medida (causa: SET de atenuacao da PSGlib + ganho do host elevado pelo dono). O eixo de audio agora e DERIVADO pelo build a partir das 8 janelas publicadas em out/evidence/. Restam candidatos sem ID, com aprovacao humana pending. Emenda da noite: familia do `--json` DESTINO medida em 13 ferramentas do wrapper (zero guardas), e o gate humano da cabine ganhou --verify/--self-check/--collect com binding de ROM+SHA.",
+        "new_lesson_ids": false,
+        "registry_unchanged": true,
+        "registry_current": "L133 medido em 2026-10-14 (noite) em doc/curation/id_registry.json; L132 era a foto da manha e seguiu valendo ate outra sessao aplicar o item SMSPower A9 (L133/§124, measure_vram_map.py). Esta registracao nao emitiu ID.",
+        "promotion": "evidencia nova para L061/L079/L082/L089/L128/L129; propostas de emenda a §93, §12, §67/§103 e §19/§45 continuam com aprovacao humana pendente; 9 candidatos sem ID"
+      },
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/curation-learning.md"
+      ],
+      "record_interpretation": "application_or_validation_of_existing_lessons_without_new_ID",
+      "restore_chain": {
+        "2f": "3f809a8aef727889d745833636247c3e53030fc618e8ec6d87ea7d011a6c53d5 (dossie original da manha)",
+        "3f->a3": "a3a4b215ca4135e306f7d314c13e7888cb8e6ae62db4792dadfae4cc32fcec1e (apos a emenda 'refutada + 4 candidatos'); o record nunca foi atualizado para este valor",
+        "clobber": "2026-10-14 20:34, audit_learning_capture.py --json <caminho> sobrescreveu o dossie pelo veredito de 37 bytes",
+        "replay": "cc7c3e25099d0c242e87a235844bd037728ab0e128c7a836d55157719a61c7fe (base do transcript + mesmo script de emenda; hashes de evidencia recomputados)",
+        "restaurado": "a4f05d35fca690f5417c6030ccc1d90be0f3f6b04a46a6f34ae1a3a56453e14a",
+        "emenda_noite": "cace000551323ebbd17f283d75a41692072807e25bd3ba3f731310da67c1ea47 (2 emendas/9 candidatos/6 traps; nada apagado)",
+        "o_que_mudou_a_cadeia": "A partir daqui a cadeia nao e mais de restauracao e sim de emenda normal; mantida no mesmo objeto porque o gate confere o sha do record contra o arquivo.",
+        "incidente_ao_vivo_2333": "o lesson JSON da sessao A9 (SMSPower) foi sobrescrito por um veredito de 37 bytes as 23:33 de 2026-10-14; esta sessao registrou e NAO tocou no arquivo alheio. dossier -> b3bcd00602d5fe414d726c1ec2da896f971e04d008eab5df5c7a9f8e07ec87fe"
+      }
+    },
+    {
+      "path": "doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json",
+      "sha256": "7e725673c543b0328d5280efada085c12d2067221e8d4dc2c9df1cda7eaef108",
+      "type": "curation",
+      "defined_lesson_ids": [
+        "L133"
+      ],
+      "referenced_lesson_ids": [
+        "L128",
+        "L130",
+        "L131",
+        "L132"
+      ],
+      "applied_lesson_ids": [
+        "L128",
+        "L130",
+        "L131"
+      ],
+      "lessons_empty": false,
+      "has_validation_or_evidence": true,
+      "promotion_status": {
+        "status": "applied; A9 do dosserie SMSPower (L133/§124 + measure_vram_map.py). Aprovacao humana: instrucao de 2026-10-14 'FACA TODOS OS 3 PONTOS EM ORDEM'.",
+        "new_lesson_ids": true,
+        "registry_unchanged": false,
+        "registry_current": "L133",
+        "promotion": "L133 entra como documentado_com_ferramenta; dogfood: plano do probe bits1315 aprovado com cross-check reg2/reg5/reg6 conforme"
+      },
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md"
+      ],
+      "record_interpretation": "new_lesson_application_with_tool_and_dogfood_evidence"
     }
   ]
 }
