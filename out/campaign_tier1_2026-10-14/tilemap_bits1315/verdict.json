@@ -1,0 +1,37 @@
+{
+  "probe": "tilemap_bits1315",
+  "licao": "L132/\u00a7123",
+  "engine": "BlastEm 1.0.0 sms2",
+  "session": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/tilemap_bits1315/blastem-sms-e320ae6bf50349e590273eb2bb20c6a1",
+  "rom_sha256": "1b1678902eeb5becd588ea333349f894dc53a6b885dd279b3d3b43109a0f9c98",
+  "verdict": "confirmado",
+  "failures": [],
+  "pnt_words": {
+    "A_plain": "0x003C",
+    "B_FL13": "0x203C",
+    "C_FL14": "0x403C",
+    "D_FL15": "0x803C",
+    "E_FL13_15": "0xE03C",
+    "F_ctrl": "0x003C"
+  },
+  "checks": {
+    "magic": true,
+    "session_completed": true,
+    "screenshot_informative": true,
+    "cells_identical": true,
+    "words_preserved": true
+  },
+  "vdp_regs_final": "04 60 FF FF FF FF FF 00 00 00 FF",
+  "gate_dogfood": {
+    "bounds_exit": 0,
+    "bounds_out": [
+      "[nao provado] /mnt/sdcard/Projects/SMSForge/SMS_projects/_laboratorio/tilemap_bits1315/src/main.c:50 SMS_setNextTileatXY \u2014 y='r' nao literal",
+      "  [nao provado] /mnt/sdcard/Projects/SMSForge/SMS_projects/_laboratorio/tilemap_bits1315/src/main.c:55 SMS_setTileatXY \u2014 tile='60 | FL_13' nao literal: entrada de 16 bits nao decidivel estaticamente",
+      "  [nao provado] /mnt/sdcard/Projects/SMSForge/SMS_projects/_laboratorio/tilemap_bits1315/src/main.c:56 SMS_setTileatXY \u2014 tile='60 | FL_14' nao literal: entrada de 16 bits nao decidivel estaticamente",
+      "  [nao provado] /mnt/sdcard/Projects/SMSForge/SMS_projects/_laboratorio/tilemap_bits1315/src/main.c:57 SMS_setTileatXY \u2014 tile='60 | FL_15' nao literal: entrada de 16 bits nao decidivel estaticamente",
+      "  [nao provado] /mnt/sdcard/Projects/SMSForge/SMS_projects/_laboratorio/tilemap_bits1315/src/main.c:58 SMS_setTileatXY \u2014 tile='60 | FL_13 | FL_14 | FL_15' nao literal: entrada de 16 bits nao decidivel estaticamente",
+      "[OK] audit_tilemap_bounds: 1 arquivo(s), nenhuma escrita ilegal na name table (5 coordenada(s)/entrada(s) nao provada(s), 0 entrada(s) sob excecao declarada)"
+    ]
+  },
+  "limits": "Um unico engine (BlastEm); console real continua LOTE F. Preservado != interpretado: o VDP ignora na render \u2014 a semantica de flag e dos jogos, n\u00e3o do hardware."
+}

@@ -1,0 +1,36 @@
+help
+frames 120
+printf "SMSFORGE_BOUNDARY 0 %d\n" frame
+printf "SMSFORGE_CPU 0 %d %d %d %d %d %d %d %d %d %d\n" pc sp af bc de hl ix iy cycle iff1
+save/b "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/000/ram.bin" [0xc000] 8192
+save/b "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/000/vram.bin" vdp:vram 16384
+save/w "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/000/cram_internal.bin" vdp:cram 32
+save/b "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/000/vdp_regs.bin" vdp:reg 11
+save/w "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/000/psg_frequency.bin" psg:frequency 4
+save/b "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/000/psg_volume.bin" psg:volume 4
+frames 60
+printf "SMSFORGE_BOUNDARY 1 %d\n" frame
+printf "SMSFORGE_CPU 1 %d %d %d %d %d %d %d %d %d %d\n" pc sp af bc de hl ix iy cycle iff1
+save/b "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/001/ram.bin" [0xc000] 8192
+save/b "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/001/vram.bin" vdp:vram 16384
+save/w "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/001/cram_internal.bin" vdp:cram 32
+save/b "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/001/vdp_regs.bin" vdp:reg 11
+save/w "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/001/psg_frequency.bin" psg:frequency 4
+save/b "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/snapshots/001/psg_volume.bin" psg:volume 4
+bindup "gamepads.1.up"
+bindup "gamepads.1.down"
+bindup "gamepads.1.left"
+bindup "gamepads.1.right"
+bindup "gamepads.1.b"
+bindup "gamepads.1.c"
+bindup "gamepads.2.up"
+bindup "gamepads.2.down"
+bindup "gamepads.2.left"
+bindup "gamepads.2.right"
+bindup "gamepads.2.b"
+bindup "gamepads.2.c"
+vdpsprites
+vr
+bindup "ui.screenshot"
+frames 1
+quit

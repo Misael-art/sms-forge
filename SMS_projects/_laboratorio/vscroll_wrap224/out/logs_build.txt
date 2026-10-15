@@ -1,0 +1,9 @@
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/main.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib src/main.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -o out/obj/vscroll_wrap224.ihx -mz80 --no-std-crt0 --data-loc 0xC000 /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/crt0/crt0_sms.rel out/obj/main.rel /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib/SMSlib.lib /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib/PSGlib.lib
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/tools/makesms out/obj/vscroll_wrap224.ihx out/rom/vscroll_wrap224.sms
+*** sverx's makesms converter ***
+Info: 1704 bytes used/16384 total [10.40%] - size of output ROM is 16 KB
+Info: release date in SDSC header updated
+Info: SEGA header found, checksum updated
