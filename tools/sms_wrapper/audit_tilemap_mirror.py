@@ -15,7 +15,12 @@ sdk/devkitSMS-upstream/SMSlib/src/SMSlib.c). O gate julga escritas custom.
 
 Tres modos de medicao:
   --source P ...               escritas literais ao registrador 2 no codigo
-                               (outp / VDPControlPort / SMS_write_to_VDPRegister).
+                               (outp / VDPControlPort / SMS_VDPControlPort /
+                               SMS_write_to_VDPRegister). A forma prefixada e a
+                               unica sfr exposto pela SMSlib vendorada; o padrao
+                               de adjacencia original exigia o identificador nu
+                               e deixava SMS_VDPControlPort escapar (achado do
+                               probe reg2_bit0_mirror, campanha 2026-10-14).
                                Valor vindo de variavel nao e decidivel
                                estaticamente: nunca reportado como aprovado.
   --rom BIN ...                assinatura binaria Z80 `ld a,#vv / out (0xBF),a
@@ -44,8 +49,8 @@ IDENT = r"([A-Za-z_]\w*)"
 _SOURCE_SHAPE = [
     (r"outp\s*\(\s*0[xX][bB][fF]\s*,\s*%s\s*\)\s*;\s*"
      r"outp\s*\(\s*0[xX][bB][fF]\s*,\s*0[xX]82\s*\)"),
-    (r"VDPControlPort\s*=\s*%s\s*;\s*"
-     r"VDPControlPort\s*=\s*0[xX]82\s*;"),
+    (r"(?:SMS_)?VDPControlPort\s*=\s*%s\s*;\s*"
+     r"(?:SMS_)?VDPControlPort\s*=\s*0[xX]82\s*;"),
     (r"SMS_write_to_VDPRegister\s*\(\s*(?:2|0[xX]0*2)\s*,\s*%s\s*\)"),
 ]
 # literal decidido; valor vindo de variavel e nao provado, nunca aprovado
@@ -208,6 +213,21 @@ def self_check():
             "void setup(void){ SMS_write_to_VDPRegister(2, 0xFF); }\n")
         check("source apenas 0xFF aprovado",
               audit(source=[only_good])["verdict"] == "aprovado")
+        lib_c = os.path.join(tmp, "libport.c")
+        open(lib_c, "w").write(
+            "void setup(void){ SMS_VDPControlPort = 0xFE; "
+            "SMS_VDPControlPort = 0x82; }\n")
+        check("source SMS_VDPControlPort 0xFE/0x82 reprovado "
+              "(bypass da forma prefixada, campanha 2026-10-14)",
+              audit(source=[lib_c])["verdict"] == "reprovado_espelhamento_sms1")
+        lib_var = os.path.join(tmp, "libport_var.c")
+        open(lib_var, "w").write(
+            "void setup(unsigned char v){ SMS_VDPControlPort = v; "
+            "SMS_VDPControlPort = 0x82; }\n")
+        r = audit(source=[lib_var])
+        check("source SMS_VDPControlPort com variavel: nao_provado_estatico",
+              r["verdict"] == "nao_provado_estatico" and r["unproven"]
+              and not r["findings"])
         var_c = os.path.join(tmp, "var.c")
         open(var_c, "w").write(
             "void setup(unsigned char v){ outp(0xBF, v); outp(0xBF, 0x82); }\n")
