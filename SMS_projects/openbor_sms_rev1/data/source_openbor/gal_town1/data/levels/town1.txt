@@ -1,0 +1,254 @@
+music			data/music/STAGE1.BOR
+bossmusic		data/music/BOSS.BOR
+
+background		data/bgs/TOWN1/back.gif
+
+#bglayer		data/bgs/TOWN1/n03.gif 0.3 0 0 0 0 0 999999 1 1 0 0 0 0 0 1
+#bglayer		data/bgs/TOWN1/n02.gif 0.2 0 0 0 0 0 999999 1 1 0 0 0 0 0 1
+#bglayer		data/bgs/TOWN1/n01.gif 0.1 0 0 0 0 0 999999 1 1 0 0 0 0 0 1   
+
+panel			data/bgs/TOWN1/panel.gif
+
+frontpanel		data/bgs/TOWN1/f01.gif 
+
+order			a
+
+#bgspeed		0 	
+
+#blocked 1
+
+#loadingbg DATA\BGS\TRAINING\LOADING.GIF 1 113 205 91 2000 2000 0
+
+type			0
+settime		99
+notime		0
+#noslow		1
+stagenumber		1
+
+spawn1  50 20 200
+spawn2  40 30 200
+spawn3  60 40 200
+spawn4  50 50 200
+
+#direction		both
+
+#wall {xpos} {zpos} {upperleft} {lowerleft} {upperright} {lowerright} {depth}{alt}
+wall    627 266 -35 38 -6 64 95 15
+wall    653 256 -35 28 240 227 85 60
+
+wall    954 256 -35 28 96 117 85 40
+
+wall    562 175 -35 28 436 497 95 510
+
+hole    895 256 -40 -26 34 97 105
+
+#wall    674 315 -35 28 416 477 95 210
+
+#-------intro
+
+spawn   intro
+map	  0
+coords  240 332
+at      0
+
+#-------intro
+
+#-------bizzar
+
+spawn   bizzar1
+flip 1
+coords  560 210
+at      0
+
+#-------bizzar
+
+
+spawn   civ02
+map	  0
+health  1
+item book
+coords  500 160
+at      0
+
+spawn   civ03
+map	  0
+health  1
+item ingot
+coords  550 170
+at      0
+
+
+#-------1
+
+Group 3 3
+at 0
+
+spawn   long
+map	  0
+health  50
+coords  500 180
+at      0
+
+spawn   henin
+map	  0
+health  50
+coords  550 190
+at      0
+
+wait
+at      300
+
+spawn   amaz
+map	  1
+health  75
+coords  -20 190
+at      300
+
+spawn   henin
+map	  1
+health  75
+coords  570 180
+at      300
+
+spawn   long
+map	  0
+health  50
+coords  570 180
+at      300
+
+
+#-------1
+
+#-------2
+
+Group 2 2
+at 600
+
+wait
+at      600
+
+spawn   long
+map	  2
+health  100
+coords  500 180
+at      600
+
+spawn   henin
+map	  0
+health  50
+flip 1
+coords  -20 190
+at      600
+
+
+#-------2
+
+
+#-------3
+
+Group 4 4
+at 900
+
+wait
+at      900
+
+spawn   thief1
+map	  0
+health  5
+coords  500 180
+at      900
+
+spawn   thief2
+map	  1
+health  5
+flip 1
+coords  -20 190
+at      900
+
+spawn   thief1
+map	  0
+health  5
+coords  550 200
+at      900
+
+spawn   thief1
+map	  0
+health  5
+flip 1
+coords  -40 210
+at      900
+
+#-------3
+
+Group 3 3
+at 901
+
+spawn   badbro2
+map	  1
+health  200
+boss	  1
+coords  640 190
+at      901
+
+
+spawn   civ02
+map	  1
+health  1
+item book
+coords  500 170
+at      901
+
+spawn   civ03
+map	  1
+health  1
+item ingot
+coords  550 160
+at      901
+
+
+#-------4
+
+Group 3 3
+at 1100
+
+wait
+at      1100
+
+spawn   long
+map	  0
+health  50
+coords  550 180
+at      1100
+
+spawn   henin
+map	  0
+health  50
+flip 1
+coords  -20 190
+at      1100
+
+spawn   long
+map	  1
+health  75
+coords  550 180
+at      1100
+
+spawn   henin
+map	  1
+health  75
+flip 1
+coords  -20 190
+at      1100
+
+spawn   amaz
+map	  0
+health  50
+coords  550 190
+at      1100
+
+
+#-------4
+
+
+
+

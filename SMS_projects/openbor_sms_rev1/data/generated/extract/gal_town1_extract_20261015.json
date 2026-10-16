@@ -1,0 +1,38 @@
+{
+  "schema": "openbor_sms_extraction_record_v1",
+  "generated_at": "2026-10-16T00:21:10+00:00",
+  "tool": "openbor2sms frontend extract",
+  "pak": {
+    "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_bruta/golden_axe_legend/GAL.pak",
+    "bytes": 39500889,
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+    "format_id": 0,
+    "format_name": "PACK v0 PAK32 (32-bit)",
+    "file_count": 3502
+  },
+  "expected": {
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+    "bytes": 39500889,
+    "verified": true
+  },
+  "destination": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/data/source_openbor/gal_town1",
+  "members": [
+    {
+      "member": "data/levels/town1.txt",
+      "pak_name": "DATA\\LEVELS\\TOWN1.txt",
+      "path": "data/levels/town1.txt",
+      "bytes": 2999,
+      "sha256": "1d167c8cc703b815a32dbb4953c53af7f42532a6a647507a7e009e61377cc54d",
+      "reused_existing": false
+    },
+    {
+      "member": "data/models.txt",
+      "pak_name": "DATA\\MODELS.TXT",
+      "path": "data/models.txt",
+      "bytes": 7280,
+      "sha256": "fbd18005ffbdb6346315896abd774fdf4c716ce148f7b07c9e1a9d047ff37581",
+      "reused_existing": false
+    }
+  ],
+  "claim_ceiling": "hash-bound extraction of named members only; containment does not prove parsing, conversion or runtime suitability"
+}

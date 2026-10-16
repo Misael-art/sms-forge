@@ -1,0 +1,647 @@
+{
+  "schema": "openbor_sms_art_conversion_v1",
+  "generated_at": "2026-10-15T18:00:00-03:00",
+  "tool": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_art.py",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1",
+  "scope": "O2 — VDP pilot (palco por dicionario + poses 1:1 + HUD piloto)",
+  "extract_record": {
+    "path": "data/generated/extract/gal_town1_art_extract_20261015.json",
+    "sha256": "a07ad09508be1dcc5fb9967b44dea13fce0b6ef5e86764651d9a133f2797f4c0"
+  },
+  "sources": [
+    {
+      "path": "data/source_openbor/gal_town1/data/bgs/town1/panel.gif",
+      "sha256": "14d8191b9080bbac22cdb4783e23544025420126935568d23b885c8c5d08ee6f",
+      "bytes": 139491
+    },
+    {
+      "path": "data/source_openbor/gal_town1/data/chars/ax/idle01.gif",
+      "sha256": "d9d342f6137f63691f5dbac5fcbeedee54c06b9f92d885e60a0d1a5042e67796",
+      "bytes": 2102
+    },
+    {
+      "path": "data/source_openbor/gal_town1/data/chars/ax/walk01.gif",
+      "sha256": "f2d540123287037899fa87b71ceb425283e0a8b92009a2ddc1a6de2c795618ee",
+      "bytes": 2048
+    },
+    {
+      "path": "data/source_openbor/gal_town1/data/chars/ax/walk03.gif",
+      "sha256": "ca498f9e297c988d531dc4bdde761c8c066b1a5ea405610ee370101d26a1f668",
+      "bytes": 2085
+    },
+    {
+      "path": "data/source_openbor/gal_town1/data/chars/long/idle01.gif",
+      "sha256": "a42955b8ac40937e37894850b5b9122e23f1436a854b354c39b4e7f5c66e0f0a",
+      "bytes": 2090
+    }
+  ],
+  "facing": {
+    "native": "left",
+    "basis": "inspecao 1:1 dos GIFs extraidos: perfil/rosto a esquerda, cabelo e arma atras a direita, em ax e long",
+    "mirror_role": "orientacao 'right' = espelho horizontal explicito; o VDP do SMS nao tem flip de sprite (precedente kage)",
+    "preview": "rascunho/o2/poses_ax.png"
+  },
+  "stage": {
+    "source": "data/source_openbor/gal_town1/data/bgs/town1/panel.gif",
+    "crop": {
+      "x0": 0,
+      "x1": 632,
+      "y0": 48,
+      "y1": 224,
+      "note": "faixa visivel: view crop 32..224 menos 16 px de HUD"
+    },
+    "png": "res/o2/stage/stage_corridor.png",
+    "cols": 79,
+    "rows": 22,
+    "palette": "p0_bg",
+    "mapping": "dither ordenado Bayer 4x4 entre os 2 codigos de cena mais proximos (deterministico; sprites NAO usam dither)",
+    "dictionary": {
+      "distinct_cells": 698,
+      "k": 192,
+      "requested_k": 192,
+      "err_rms_channel": 22.39,
+      "err_mean_abs_channel": 5.79
+    },
+    "notes": [
+      "HUD fixo cobre as linhas 0..1; PNT so recebe linhas 2..23",
+      "dicionario por k-medoides de tiles-fonte (medoides rastreaveis)",
+      "dither reduz o serrilhado do grid de cor 4x4x4 sem dither"
+    ]
+  },
+  "poses": {
+    "ax": {
+      "canvas": {
+        "dx0": -24,
+        "dy0": -72,
+        "w": 48,
+        "h": 80
+      },
+      "poses": [
+        {
+          "frame": "idle01",
+          "pngs": {
+            "left": "res/o2/poses/ax_idle01_left.png",
+            "right": "res/o2/poses/ax_idle01_right.png"
+          },
+          "sha256": {
+            "left": "1ff8b4d514b4ee521f2b0e01eff79806ebed3056b7d39ca96260dd7154da4a49",
+            "right": "47c1514e8e2755c6771707fb209642c9d6ad69e3b290b12495857a87880948c2"
+          }
+        },
+        {
+          "frame": "walk01",
+          "pngs": {
+            "left": "res/o2/poses/ax_walk01_left.png",
+            "right": "res/o2/poses/ax_walk01_right.png"
+          },
+          "sha256": {
+            "left": "6210fdeda73394b5dd870b59384613abc8c53c4a38eef0c3f7c0124577b487cb",
+            "right": "e8ce0069130e611e34c00ec8a2eebaf779801aec437ecca889c337255f3c4aad"
+          }
+        },
+        {
+          "frame": "walk03",
+          "pngs": {
+            "left": "res/o2/poses/ax_walk03_left.png",
+            "right": "res/o2/poses/ax_walk03_right.png"
+          },
+          "sha256": {
+            "left": "45060be4996569948ff9e0a480a2c13fe6e19548ecef65c421b30ba0ecbb0c76",
+            "right": "2f87e07855f6ae1b42841b9fdb071bf43ed6ebd75efb8fb73bc53f8e7d076f43"
+          }
+        }
+      ]
+    },
+    "long": {
+      "canvas": {
+        "dx0": -16,
+        "dy0": -56,
+        "w": 40,
+        "h": 64
+      },
+      "poses": [
+        {
+          "frame": "idle01",
+          "pngs": {
+            "left": "res/o2/poses/long_idle01_left.png"
+          },
+          "sha256": {
+            "left": "6c38df2d27063dad50b452b73dfb1ed79550d2342aa4c7f35b961c598e65c526"
+          }
+        }
+      ]
+    }
+  },
+  "palettes": {
+    "p0_bg": {
+      "index0": "opaque (BG; preto)",
+      "codes": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "stats": {
+        "usable_colors": 12,
+        "scene_colors": 10,
+        "reserved_colors": 2,
+        "source_colors": 33,
+        "err_mean_abs_channel": 26.18,
+        "err_rms_channel": 28.12
+      },
+      "mapping_note": {
+        "(15, 32, 57)": [
+          0,
+          0,
+          1
+        ],
+        "(18, 18, 15)": [
+          0,
+          0,
+          0
+        ],
+        "(18, 36, 60)": [
+          0,
+          0,
+          1
+        ],
+        "(21, 41, 69)": [
+          0,
+          0,
+          1
+        ],
+        "(23, 43, 73)": [
+          0,
+          1,
+          1
+        ],
+        "(25, 25, 19)": [
+          0,
+          0,
+          0
+        ],
+        "(27, 50, 86)": [
+          0,
+          1,
+          1
+        ],
+        "(29, 52, 87)": [
+          0,
+          1,
+          1
+        ],
+        "(30, 24, 16)": [
+          0,
+          0,
+          0
+        ],
+        "(35, 62, 106)": [
+          0,
+          1,
+          1
+        ],
+        "(41, 26, 19)": [
+          0,
+          0,
+          0
+        ],
+        "(41, 74, 125)": [
+          0,
+          1,
+          1
+        ],
+        "(43, 75, 125)": [
+          1,
+          1,
+          1
+        ],
+        "(45, 37, 27)": [
+          1,
+          0,
+          0
+        ],
+        "(50, 46, 38)": [
+          1,
+          1,
+          0
+        ],
+        "(52, 31, 21)": [
+          1,
+          0,
+          0
+        ],
+        "(55, 53, 49)": [
+          1,
+          1,
+          1
+        ],
+        "(61, 32, 32)": [
+          1,
+          0,
+          0
+        ],
+        "(61, 48, 42)": [
+          1,
+          1,
+          0
+        ],
+        "(62, 40, 27)": [
+          1,
+          0,
+          0
+        ],
+        "(64, 105, 165)": [
+          1,
+          1,
+          2
+        ],
+        "(66, 67, 61)": [
+          1,
+          1,
+          1
+        ],
+        "(67, 50, 33)": [
+          1,
+          1,
+          0
+        ],
+        "(74, 74, 70)": [
+          1,
+          1,
+          1
+        ],
+        "(89, 49, 35)": [
+          1,
+          1,
+          0
+        ],
+        "(95, 102, 98)": [
+          1,
+          1,
+          1
+        ],
+        "(96, 75, 60)": [
+          1,
+          1,
+          1
+        ],
+        "(101, 71, 53)": [
+          1,
+          1,
+          1
+        ],
+        "(113, 102, 96)": [
+          1,
+          1,
+          1
+        ],
+        "(115, 72, 55)": [
+          1,
+          1,
+          1
+        ],
+        "(120, 135, 136)": [
+          1,
+          2,
+          2
+        ],
+        "(133, 100, 83)": [
+          2,
+          1,
+          1
+        ],
+        "(146, 132, 115)": [
+          2,
+          2,
+          1
+        ]
+      },
+      "reserved_codes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "reserved_note": "verde/vermelho do HUD ficam fora do clustering e da atribuicao da cena"
+    },
+    "p1_sprites": {
+      "index0": "transparente (magenta de contrato)",
+      "codes": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          3,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          3,
+          3,
+          3
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          2
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "stats": {
+        "usable_colors": 14,
+        "scene_colors": 14,
+        "reserved_colors": 0,
+        "source_colors": 20,
+        "err_mean_abs_channel": 18.81,
+        "err_rms_channel": 23.59
+      },
+      "mapping_note": {
+        "(0, 0, 0)": [
+          0,
+          0,
+          0
+        ],
+        "(0, 16, 115)": [
+          0,
+          0,
+          1
+        ],
+        "(0, 32, 32)": [
+          0,
+          0,
+          0
+        ],
+        "(0, 48, 181)": [
+          0,
+          1,
+          2
+        ],
+        "(0, 64, 64)": [
+          0,
+          1,
+          1
+        ],
+        "(32, 0, 0)": [
+          0,
+          0,
+          0
+        ],
+        "(32, 128, 128)": [
+          0,
+          2,
+          2
+        ],
+        "(96, 32, 0)": [
+          1,
+          0,
+          0
+        ],
+        "(96, 128, 128)": [
+          1,
+          2,
+          2
+        ],
+        "(96, 192, 192)": [
+          1,
+          2,
+          2
+        ],
+        "(123, 73, 41)": [
+          1,
+          1,
+          0
+        ],
+        "(128, 64, 32)": [
+          2,
+          1,
+          0
+        ],
+        "(156, 105, 74)": [
+          2,
+          1,
+          1
+        ],
+        "(160, 96, 64)": [
+          2,
+          1,
+          1
+        ],
+        "(160, 192, 192)": [
+          2,
+          2,
+          2
+        ],
+        "(192, 128, 96)": [
+          2,
+          2,
+          1
+        ],
+        "(198, 146, 115)": [
+          2,
+          2,
+          1
+        ],
+        "(224, 192, 160)": [
+          3,
+          2,
+          2
+        ],
+        "(224, 224, 224)": [
+          3,
+          3,
+          3
+        ],
+        "(231, 178, 148)": [
+          3,
+          2,
+          2
+        ]
+      }
+    }
+  },
+  "hud": {
+    "png": "res/o2/hud/hud_tiles.png",
+    "palette": "p0_bg",
+    "role": "hud_piloto_nao_e_arte_final",
+    "note": "tiles solidos (verde/vermelho/preto) + trilho preto"
+  },
+  "outputs": [
+    {
+      "path": "res/o2/stage/stage_corridor.png",
+      "sha256": "bcee28cae2d9370f9edfe0f391540120ba1d7d3798ff84e8133c0198b4327124",
+      "bytes": 14436
+    },
+    {
+      "path": "res/o2/hud/hud_tiles.png",
+      "sha256": "1686810e555dbf68fc3fb0a8e59f238a82b875eeaa77387815ce6a1556bab8c1",
+      "bytes": 138
+    },
+    {
+      "path": "res/o2/poses/ax_idle01_left.png",
+      "sha256": "1ff8b4d514b4ee521f2b0e01eff79806ebed3056b7d39ca96260dd7154da4a49",
+      "bytes": 686
+    },
+    {
+      "path": "res/o2/poses/ax_idle01_right.png",
+      "sha256": "47c1514e8e2755c6771707fb209642c9d6ad69e3b290b12495857a87880948c2",
+      "bytes": 683
+    },
+    {
+      "path": "res/o2/poses/ax_walk01_left.png",
+      "sha256": "6210fdeda73394b5dd870b59384613abc8c53c4a38eef0c3f7c0124577b487cb",
+      "bytes": 656
+    },
+    {
+      "path": "res/o2/poses/ax_walk01_right.png",
+      "sha256": "e8ce0069130e611e34c00ec8a2eebaf779801aec437ecca889c337255f3c4aad",
+      "bytes": 645
+    },
+    {
+      "path": "res/o2/poses/ax_walk03_left.png",
+      "sha256": "45060be4996569948ff9e0a480a2c13fe6e19548ecef65c421b30ba0ecbb0c76",
+      "bytes": 681
+    },
+    {
+      "path": "res/o2/poses/ax_walk03_right.png",
+      "sha256": "2f87e07855f6ae1b42841b9fdb071bf43ed6ebd75efb8fb73bc53f8e7d076f43",
+      "bytes": 685
+    },
+    {
+      "path": "res/o2/poses/long_idle01_left.png",
+      "sha256": "6c38df2d27063dad50b452b73dfb1ed79550d2342aa4c7f35b961c598e65c526",
+      "bytes": 642
+    },
+    {
+      "path": "rascunho/o2/poses_ax.png",
+      "sha256": "6f247077b4f6ecfd55ccd160339c646273dcf684594453cdb39a6c4c5115aab9",
+      "bytes": 4431
+    },
+    {
+      "path": "rascunho/o2/poses_long.png",
+      "sha256": "1307628b694792d0ae1eb7b93ffa368fe63f9fec2e9c2b864d0da1ff5847a22a",
+      "bytes": 755
+    }
+  ],
+  "notes": [
+    "conversao 1:1: nenhum pixel desenhado; apenas recorte, quantizacao e espelho",
+    "determinismo: mesmas fontes + --generated-at => bytes identicos"
+  ]
+}

@@ -1,0 +1,182 @@
+nolost 1
+nodropen	1
+versusdamage 0
+
+# Required objects. These must always be loaded.
+load	Flash		data/chars/misc/flash.txt
+load    blood           data/chars/misc/blood.txt
+load    boom            data/chars/misc/boom.txt
+load    smack           data/chars/misc/smack.txt
+load    smash           data/chars/misc/smash.txt
+load    smashh          data/chars/misc/smashh.txt
+load    pow             data/chars/misc/pow.txt
+load    poww            data/chars/misc/poww.txt
+load    wack            data/chars/misc/wack.txt
+load    ha              data/chars/misc/ha.txt
+load    bwam            data/chars/misc/bwam.txt
+load    bomb1           data/chars/misc/bomb1.txt
+load    wham            data/chars/misc/wham.txt
+load    ray             data/chars/misc/ray.txt
+load    shot            data/chars/misc/shot.txt
+load    dshot           data/chars/misc/dshot.txt
+load    gshot           data/chars/misc/gshot.txt
+load    lshot           data/chars/misc/lshot.txt
+load    sball           data/chars/misc/sball.txt
+load    vok             data/chars/misc/vok.txt
+load    dust            data/chars/misc/dust.txt
+
+
+# Players must also be loaded.
+load    Rash        data/chars/rash/rash.txt
+load    Rashs       data/chars/rash/rashs.txt
+load    Rashg       data/chars/rash/rashg.txt
+load    Zitz        data/chars/zitz/zitz.txt
+load    Zitzs       data/chars/zitz/zitzs.txt
+load    Zitzg       data/chars/zitz/zitzg.txt
+load    Pimple      data/chars/pimple/pimple.txt
+load    Pimples     data/chars/pimple/pimples.txt
+load    Pimpleg     data/chars/pimple/pimpleg.txt
+load    Sketch      data/chars/sketch/sketch.txt
+load    Sketchs     data/chars/sketch/sketchs.txt
+load    Sketchg     data/chars/sketch/sketchg.txt
+load    bub         data/chars/bub/bub.txt
+load    sbub        data/chars/bub/sbub.txt
+load    gbub        data/chars/bub/gbub.txt
+
+
+
+
+
+
+
+# Items and other objects can be loaded when needed.
+know    Money      data/chars/misc/money.txt
+know    lifeup     data/chars/misc/lifeup.txt
+know    1up        data/chars/misc/1up.txt
+
+
+
+# Obstacles (item containers)
+know    box      data/chars/misc/BOX.txt
+
+
+# Enemies
+know    BLAG       data/chars/blag/blag.txt
+know    RATMAN     data/chars/ratman/ratman.txt
+know    SMAN       data/chars/sman/smann.txt
+know    RMAN       data/chars/rman/rman.txt
+know    MAN        data/chars/man/man.txt
+know    man2       data/chars/man2/man2.txt
+know    BIRD       data/chars/bird/bird.txt
+know    RAT_       data/chars/rat_/rat_.txt
+know    ROBO       data/chars/robo/robo.txt
+know    DRAGO      data/chars/drago/dragoo.txt
+know    ROBOT      data/chars/robot/robot.txt
+know    RAT        data/chars/rat/rat.txt
+know    SRAT       data/chars/srat/srat.txt
+know    MOTOM      data/chars/misc/motom.txt
+know    MOTOZ      data/chars/misc/motoz.txt
+know    MOT        data/chars/misc/mot.txt
+know    TOR        data/chars/misc/tor.txt
+know    FAT        data/chars/fat/fat.txt
+know    BAT        data/chars/bat/bat.txt
+know    CYBER      data/chars/cyber/cyber.txt
+know    KONG       data/chars/kong/kong.txt
+know    SPIDER     data/chars/spider/spider.txt
+know    BEE        data/chars/bee/bee.txt
+know    LANG       data/chars/lang/lang.txt
+know    STOMPER    data/chars/stomper/stomper.txt
+know    PIG        data/chars/pig/pig.txt
+know    PIGMAN     data/chars/pigman/pigman.txt
+know    PIG_       data/chars/pig_/pig_.txt
+know    DOG        data/chars/dog/dog.txt
+know    zom        data/chars/zom/zom.txt
+know    zom2       data/chars/zom2/zom2.txt
+know    zom3       data/chars/zom3/zom3.txt
+know    DARK       data/chars/dark/dark.txt
+know    WALK       data/chars/walk/walk.txt
+know    NINJA      data/chars/ninja/ninja.txt
+know    GROGG      data/chars/grogg/grogg.txt
+know    WRENCHIE   data/chars/wrenchie/wrenchie.txt
+know    CROW       data/chars/crow/crow.txt
+know    SLA        data/chars/sla/sla.txt
+
+# Other stuff
+know    ring      data/chars/misc/ring.txt
+know    stick     data/chars/misc/stick.txt
+know    lines     data/chars/misc/lines.txt
+know    dru       data/chars/misc/dru.txt
+know    gun       data/chars/misc/gun.txt
+know    bla       data/chars/misc/bla.txt
+know    fir       data/chars/misc/fir.txt
+know    tlas      data/chars/misc/tlas.txt
+know    crowd     data/chars/misc/crowd.txt
+know    bh        data/chars/misc/bh.txt
+know    water1    data/chars/misc/water1.txt
+know    water2    data/chars/misc/water2.txt
+know    zoom      data/chars/misc/zoom.txt
+know    autob     data/chars/misc/autob.txt
+know    rain      data/chars/misc/rain.txt
+know    snow      data/chars/misc/snow.txt
+know    snowl     data/chars/misc/snowl.txt
+know    celo      data/chars/misc/celo.txt
+know    end       data/chars/misc/end.txt
+know    pas       data/chars/misc/pas.txt
+know    pro       data/chars/misc/pro.txt
+know    pwag      data/chars/misc/pwag.txt
+know    ball      data/chars/misc/ball.txt
+know    ballj     data/chars/misc/ballj.txt
+know    wall      data/chars/misc/wall.txt
+know    gus       data/chars/misc/gus.txt
+know    hand      data/chars/misc/hand.txt
+know    ratship   data/chars/misc/ratship.txt
+know    bl        data/chars/misc/bl.txt
+know    bom       data/chars/misc/bom.txt
+know    woz       data/chars/misc/woz.txt
+know    ices      data/chars/misc/ices.txt
+know    gla       data/chars/misc/gla.txt
+know    caut      data/chars/misc/caut.txt
+know    cola      data/chars/misc/cola.txt
+know    works     data/chars/misc/works.txt
+know    very      data/chars/misc/very.txt
+
+know    ship      data/chars/misc/ship.txt
+know    car       data/chars/misc/car.txt
+know    punch     data/chars/misc/punch.txt
+know    SNAKE     data/chars/misc/SNAKE.txt
+know    moto      data/chars/misc/moto.txt
+know    bonus     data/chars/misc/bonus.txt
+know    drum      data/chars/misc/drum.txt
+know    barrel    data/chars/misc/barrel.txt
+know    tbird1    data/chars/misc/tbird1.txt
+know    tbird2    data/chars/misc/tbird2.txt
+know    tbird3    data/chars/misc/tbird3.txt
+know    1up       data/chars/misc/1up.txt
+know    wood      data/chars/misc/wood.txt
+know    bridge    data/chars/misc/bridge.txt
+know    axe       data/chars/misc/axe.txt
+know    rip       data/chars/misc/rip.txt
+know    cel       data/chars/misc/cel.txt
+know    rship     data/chars/misc/rship.txt
+know    dis1      data/chars/misc/dis1.txt
+know    dis2      data/chars/misc/dis2.txt
+know    dis3      data/chars/misc/dis3.txt
+know    dis4      data/chars/misc/dis4.txt
+know    wy        data/chars/misc/wy.txt
+know    rwy       data/chars/misc/rwy.txt
+know    bigr      data/chars/misc/bigr.txt
+know    getem     data/chars/misc/getem.txt
+know    suckers   data/chars/misc/suckers.txt
+know    rock      data/chars/misc/rock.txt
+know    spike     data/chars/misc/spike.txt
+know    coin      data/chars/misc/coin.txt
+know    wind      data/chars/misc/wind.txt
+know    bus       data/chars/misc/bus.txt
+know    buss      data/chars/misc/buss.txt
+know    zombie    data/chars/misc/zombie.txt
+know    btext     data/chars/misc/btext.txt
+know    trat      data/chars/misc/trat.txt
+know    light     data/chars/misc/light.txt
+know    hammer    data/chars/misc/hammer.txt
+know    bar       data/chars/misc/bar.txt
+

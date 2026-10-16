@@ -1,0 +1,519 @@
+{
+  "schema": "openbor_sms_dependency_inventory_v1",
+  "generated_at": "2026-10-16T00:07:19+00:00",
+  "tool": "openbor2sms intake deps",
+  "origin": {
+    "contract": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/doc/openbor/engine_compatibility_contract_v0_1.json",
+      "sha256": "8b6a98ed93fce264d682a83f8973ab832d2afe82ded2fb8e1bc4174f122f0017"
+    },
+    "matrix": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/doc/openbor/source_to_consumer_matrix_20261012.json",
+      "sha256": "9949b2f99a8f7e362afc3cc11deccdda1fef833db862e57941314c3c47f16f1a"
+    },
+    "source_manifest": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/doc/openbor/source_manifest.json",
+      "sha256": "d74955a213fcb92bedb54cdd83a8c4e3c20feff856a468e26eeb417fcd5cea8e"
+    }
+  },
+  "contract": {
+    "schema_version": "openbor-sgdk-compatibility-contract/0.1.0",
+    "contract_status": "draft",
+    "reference": {
+      "repository": "DCurrent/openbor",
+      "commit": "787b6770409935137579715febf80cf7a529b748",
+      "pin_scope": "semantic source files declared by tools/openbor2sgdk_forge/openbor2sgdk_forge/reference_semantics.py",
+      "original_gal_module_runtime_version": "unknown",
+      "original_battle_toads_module_runtime_version": "unknown"
+    },
+    "module_acceptance_rule": "Fix the broad versioned compatibility contract for each pilot before implementation; do not narrow it to obtain a green result. A module is complete only when all reachable essential features required by that contract are implemented or explicitly adapted, all resource/script dependencies are resolved, no essential reachable feature is unknown or silently omitted, the generated build is reproducible, and the declared gameplay/audio/hardware evidence passes for that ROM hash.",
+    "status_vocabulary": [
+      "implemented",
+      "partial",
+      "not_implemented",
+      "unknown",
+      "unproven"
+    ]
+  },
+  "pilots": [
+    {
+      "id": "golden_axe_legend",
+      "role": "pilot",
+      "pak": {
+        "path": "rascunho/entrada_bruta/golden_axe_legend/GAL.pak",
+        "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+        "bytes": 39500889
+      },
+      "pak_format": "PACK v0 PAK32 (32-bit)",
+      "observed_index_entries": 3502,
+      "discovery_zip": "golden_axe_legend.zip",
+      "discovery_zip_sha256": "5ad5fa78b688aae87bae5d63ad2e0d3835371dea76fd03f742467b57b61144f0",
+      "zip_member": "golden axe legend/Paks/GAL.pak",
+      "note": "Binary stays under rascunho/entrada_bruta and is not a publishable asset. Operational reads use the local pak."
+    },
+    {
+      "id": "battle_toads",
+      "role": "second_module",
+      "pak": {
+        "path": "rascunho/entrada_bruta/battle_toads/battle_toads.PAK",
+        "sha256": "f2c5319deb68da97c3a469d3cc27b0be6b05e6b840847237369e78a01146e7a6",
+        "bytes": 36324119
+      },
+      "pak_format": "PACK v0 PAK32",
+      "observed_index_entries": null,
+      "discovery_zip": "battle_toads.zip",
+      "discovery_zip_sha256": "4209a511b8d41fa34835e73974d2e46ad3dc3e4ab0f3e1d9400610fecdb8d98f",
+      "zip_member": "battle_toads/Paks/battle_toads.PAK",
+      "note": "Not a duplicate of GAL. Binary is not publishable. Profile bt_rescue reads this local pak."
+    }
+  ],
+  "profiles": [
+    "bt_rescue",
+    "gal_town",
+    "gal_town_amaz",
+    "gal_town_long_henin",
+    "gal_town_long_henin_amaz",
+    "gal_town_mixed",
+    "gal_town_slots8"
+  ],
+  "capabilities": [
+    {
+      "id": "pak_container_and_inventory",
+      "domain": "import",
+      "status": "partial",
+      "fidelity": "partial",
+      "claim_limit": "Selective import/emission exists; this is not a generic, complete dependency-closed module conversion."
+    },
+    {
+      "id": "models_animation_combat_data",
+      "domain": "actors_and_combat",
+      "status": "partial",
+      "fidelity": "adapted",
+      "claim_limit": "Archetype registry and selected animation/combat mappings are proven only for tested profile slices; full roster, AI and interruption semantics remain open."
+    },
+    {
+      "id": "level_event_queue_analysis",
+      "domain": "levels_events_progression",
+      "status": "partial",
+      "fidelity": "unknown_until_reference_playback",
+      "claim_limit": "32 static GAL queue records are preserved/analyzed; group/wait/spawn timing is not executed by the SGDK runtime and source playback/version is unverified."
+    },
+    {
+      "id": "level_event_scheduler",
+      "domain": "levels_events_progression",
+      "status": "partial",
+      "fidelity": "unknown",
+      "claim_limit": "R5 conditionally connected the kernel to a synthetic enemy-only fixture in an isolated SGDK 2.11 clone. A sealed BlastEm screenshot shows event 4/7, wait active, fault clear, and two spawns. It does not prove wait release, the next spawn, scheduler restart, GAL table playback, non-enemy entities, full module conversion, source equivalence, audio, VDP/DMA budget, or cadence; default gameplay remains on fixed wave/replay. The original module version remains unverified."
+    },
+    {
+      "id": "archetype_roster_and_actor_handles",
+      "domain": "actors_and_combat",
+      "status": "partial",
+      "fidelity": "adapted",
+      "claim_limit": "Mixed Long+Amaz roster has bounded evidence; death/reuse, all waves, restart, larger pools and integral module flow remain open."
+    },
+    {
+      "id": "terrain_camera_and_streaming",
+      "domain": "world_and_presentation",
+      "status": "partial",
+      "fidelity": "adapted",
+      "claim_limit": "Selected world geometry/camera paths have host and diagnostic ROM evidence; no full level traversal, universal streaming acceptance or 60 Hz claim."
+    },
+    {
+      "id": "skills_scripts_and_callbacks",
+      "domain": "gameplay_semantics",
+      "status": "unknown",
+      "fidelity": "unknown",
+      "claim_limit": "Lexical references and script blocks do not demonstrate execution; reachable dependencies must be resolved and lowered to typed/static code or a restricted VM."
+    },
+    {
+      "id": "visual_assets_and_vdp_resources",
+      "domain": "presentation",
+      "status": "partial",
+      "fidelity": "adapted",
+      "claim_limit": "Selected assets/profile conversions exist; full scenario layers, every actor/effect, scene-wide budget, visual review and continuous seam evidence remain open."
+    },
+    {
+      "id": "ui_menus_options_and_persistence",
+      "domain": "interface_and_state",
+      "status": "partial",
+      "fidelity": "unknown_until_runtime_review",
+      "claim_limit": "Inventory/profile outputs are lexical/static; menus, options, source fonts, effective option behavior, save and front-end transitions are not accepted."
+    },
+    {
+      "id": "sound_effects_and_music",
+      "domain": "audio",
+      "status": "partial",
+      "fidelity": "unknown_for_bgm",
+      "claim_limit": "SFX integration is partial; `.BOR` is not proven decoded/arranged/played, BGM+SFX has not been auditioned under gameplay load."
+    },
+    {
+      "id": "player_modes_1p_2p",
+      "domain": "input_and_modes",
+      "status": "partial",
+      "fidelity": "adapted",
+      "claim_limit": "1P is partial. Independent 2P input, collision, camera, death, re-entry and transitions are not implemented or tested."
+    },
+    {
+      "id": "performance_and_hardware_budget",
+      "domain": "hardware_and_quality",
+      "status": "unproven",
+      "fidelity": "not_applicable",
+      "claim_limit": "Existing cadence measurements are below 60 Hz for tested instrumented workloads; title FPS is not update cadence and DMA software queue is not completed transfer."
+    },
+    {
+      "id": "integral_modules_and_generalization",
+      "domain": "product_acceptance",
+      "status": "not_implemented",
+      "fidelity": "unknown",
+      "claim_limit": "No pilot is complete under the broad product contract. A third independent module and same-core consumption remain future acceptance gates."
+    }
+  ],
+  "matrix_only_capabilities": [
+    {
+      "id": "gal_town1_player_start",
+      "domain": "spawn_and_entry",
+      "status": "partial",
+      "fidelity": "adapted",
+      "claim_limit": "Candidate only: all four starts are emitted, but only source slot 0 is consumed by the 1P runtime and observed through landing; trace later overflowed. No active integration, source-runtime equivalence, physical VRAM, audio, or sustained-performance claim."
+    }
+  ],
+  "directive_summary": {
+    "gal_directives": 26,
+    "status_counts": {
+      "adapted": 8,
+      "rejected": 18,
+      "unknown": 0
+    },
+    "origin_note": "ported summary; gal_town1_directive_matrix itself is ported in O1 with the neutral IR"
+  },
+  "file_dependencies": [
+    {
+      "member": "DATA\\LEVELS\\TOWN1.txt",
+      "sha256": "1d167c8cc703b815a32dbb4953c53af7f42532a6a647507a7e009e61377cc54d",
+      "status": "adapted",
+      "parsed_directives": 160,
+      "distinct_commands": 26,
+      "static_event_queue_rows": 32,
+      "model_symbols": 12,
+      "parser_ir": "openbor-level-event-ir/1; static/analysis-only before runtime",
+      "generated_table": {
+        "status": "supported",
+        "c_sha256": "cbba29d3acf743684deb67aba6473ab3c29ec52f37c31f7845646cfce6110a9f",
+        "header_sha256": "ffe0634b2f8e02522455f1bfa88fa9e06e54eb1f08b976f687f6c44c8dcc7f6e",
+        "exact_match_to_text_candidate_generated_files": true,
+        "scope": "deterministic static C/header generation; runtime playback is a separate stage"
+      },
+      "runtime": "adapted only for TEXT line 49 in isolated candidate; explicit ITEM fault at line 58",
+      "player_start_reconciliation": {
+        "status": "adapted_in_isolated_candidate; active consumer remains fixed",
+        "source_lines": [
+          28,
+          29,
+          30,
+          31
+        ],
+        "source_records": [
+          "spawn1 50 20 200",
+          "spawn2 40 30 200",
+          "spawn3 60 40 200",
+          "spawn4 50 50 200"
+        ],
+        "pak_sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+        "member_sha256": "1d167c8cc703b815a32dbb4953c53af7f42532a6a647507a7e009e61377cc54d",
+        "reference_commit": "787b6770409935137579715febf80cf7a529b748",
+        "reference_semantics": "spawn1..spawn4 map slots 0..3; arguments x,z,y; x/z placement depends on scroll direction and zero defaults; y is vertical delayed-drop input in the pinned reference.",
+        "original_pak_runtime": "unverified",
+        "current_consumer": "Active runtime still uses fixed (96,180); attempt_10 candidate consumes source slot 1 only, preserving four records in generated data.",
+        "open_mapping": "Original module runtime/version and x/z/y motion equivalence remain unknown; runtime slots 2–4 are unproven; entry-drop damage rejection is host-tested only for this candidate and remains unobserved in BlastEm.",
+        "candidate_rom_sha256": "8b533d29bb971d6ca1cad93fce714c488aebc21ae2ad9ec4d539c20842809ae9",
+        "candidate_runtime_consumed_slots_zero_based": [
+          0
+        ],
+        "candidate_build_input_snapshot_sha256": "e39d9362a897af6d049bfc029a94708bdd3d4c2cef974fc3b5ccecd01c94c501",
+        "candidate_build_snapshot_matches": "107/107",
+        "candidate_active_drift_count": 4,
+        "current_converter_replay_path": "out/reviews/openbor_town1_spawn_review_r1_20261012/source_generation_replay.json",
+        "current_converter_replay_sha256": "92111ad0cfac97cc56f596a8d359518e3f3ef7fe941fb5455a604a133476d6d0",
+        "current_converter_replay_outputs_match": true,
+        "formal_review": {
+          "decision": "review_passed_with_risk",
+          "report_path": "out/reviews/openbor_town1_spawn_review_r1_20261012/code_review_report.json",
+          "report_sha256": "ef260a6605d2bf033059f0bbea25c664cfa9dd052b7c846e768efd41aa2764ab"
+        }
+      }
+    },
+    {
+      "member": "DATA\\MODELS.TXT",
+      "sha256": "fbd18005ffbdb6346315896abd774fdf4c716ce148f7b07c9e1a9d047ff37581",
+      "status": "adapted",
+      "parsed_model_symbols": 12,
+      "claim_limit": "referenced/model table subset; does not establish full roster, scripts, animation or combat equivalence"
+    },
+    {
+      "member": "DATA\\LEVELS\\TOWN1.txt directives",
+      "status": "adapted",
+      "details": "See gal_town1_directive_matrix: 26 command kinds (8 adapted, 18 rejected within the selected GAL profile after source player-start lowering); this is not a claim that the generic PAK reader rejects those commands.",
+      "scope": "selected fixed-profile directives lowered; other reachable commands remain rejected as shown row-by-row"
+    },
+    {
+      "member": "Battle Toads data/bgs/01/n.gif",
+      "status": "adapted",
+      "profile": "bt_rescue/legacy_wide_composition",
+      "static_source_width": 2390,
+      "world_coverage_width": 512,
+      "source_width_not_imported": 1878,
+      "stage_unique_tiles": 880,
+      "enemy_slots": 3,
+      "actor_pool_end_tile": 1392,
+      "accepted_tile": 1408,
+      "claim_limit": "static preflight only; no ROM runtime evidence"
+    },
+    {
+      "member": "Battle Toads md_native_scroll stage",
+      "status": "rejected",
+      "profile": "bt_rescue/md_native_scroll",
+      "unique_tiles": 1158,
+      "accepted_tiles_for_minimum_enemy_pool": 896,
+      "required_end_tile": 1670,
+      "accepted_tile": 1408,
+      "reason": "preflight blocks current native profile at the three-enemy minimum pool"
+    }
+  ],
+  "donor_file_matrix": [
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/__init__.py",
+      "role": "Package entry marker; no separate behavior claim",
+      "status": "unknown",
+      "sha256": "bf88178e7b71984aa38f0ff33796a6ace88f10972e4fb084b5dddc9d46b5cd49"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/__main__.py",
+      "role": "CLI orchestration for declared import/preflight/emission routes",
+      "status": "adapted",
+      "sha256": "410c2ebc05f840b9c7bdf353f5858d7c6ff4928816c7c6c4db70b4e0b43c935c"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/analyze.py",
+      "role": "Static capability/asset analysis; unlowered directives remain explicit in matrix",
+      "status": "adapted",
+      "sha256": "1b158959550a99ab81d2b78b0f7244f4a21737f9fab96976f6326fff378599dc"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/emit_slice.py",
+      "role": "Selective profile conversion/emission",
+      "status": "adapted",
+      "sha256": "6cef20a24c93a702e4d5a71aca2675cd5f2e15017a03828095182de337024aa9"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/images.py",
+      "role": "Selected profile image conversion; not complete module asset coverage",
+      "status": "adapted",
+      "sha256": "7252fddc2d2761a7cab3c637abc04bb17d3a866cdcc93bf44170ca8fd5200c8c"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/level_event_table.py",
+      "role": "Deterministic static C event table emitter; no playback claim",
+      "status": "supported",
+      "sha256": "d084609eac1c124ba99ad01a59b93db617579640b436b3e5ef3442d34d59a4a5"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/level_inventory.py",
+      "role": "Lexical level inventory; not semantic playback",
+      "status": "adapted",
+      "sha256": "3cba7a44d22798c6cb3e37787f351b71215eccac41b57355df0a7672453dff09"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/model_text.py",
+      "role": "Models and level source text parser; supported grammar is bounded by profile matrix",
+      "status": "adapted",
+      "sha256": "3703e71ba6ade16474f0d3a3bb81f70730ebe1beeb1923710b3f3dec0e6d2466"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/pak.py",
+      "role": "PAK v0 index/member reader",
+      "status": "supported",
+      "sha256": "13de21eecbf8321434827bdc465bb7dee11dcb35b6631a9d3dd7ed5fca54cfcc"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/profiles.py",
+      "role": "Seven declared profile cuts; not a universal profile resolver",
+      "status": "adapted",
+      "sha256": "c946547317db474acc7512e0f3f0474c69a6ebabe9090752e66c821bc0e81928"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/reference_semantics.py",
+      "role": "Conditional semantic reference profile; not proof of original module runtime",
+      "status": "adapted",
+      "sha256": "c20af0543a8f35c9dd7d077f7730cb207bef2d7fc98a395f9f547209a2b1be4d"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/scene_import.py",
+      "role": "No end-to-end scope established in the cited matrix",
+      "status": "unknown",
+      "sha256": "c5b14a59fb60dea3a1f133104dbb2ca500db9b40fa43090753f2dfc0c0265634"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/scene_text.py",
+      "role": "No end-to-end scope established in the cited matrix",
+      "status": "unknown",
+      "sha256": "56033b035c54c520a70c6c9bae9b432a8471a10d7dd067cfae34e939d5f3b023"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/semantics.py",
+      "role": "No complete source-to-runtime coverage row in the cited contract",
+      "status": "unknown",
+      "sha256": "789dbd3368def8693dd56aed7353246c17cfd514d1eac1a567a3e11c75736014"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/streaming.py",
+      "role": "Profile-scoped streaming contract/generation; hardware/runtime acceptance remains per ROM",
+      "status": "adapted",
+      "sha256": "53624c4b00a6097e36527bdddd87055946a5c46eebc02193bbb99d1685117b93"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/text_import.py",
+      "role": "Selected source text import; candidate owner evidence is isolated",
+      "status": "adapted",
+      "sha256": "d38a82a7d9cd20f96659f066a1d08c567bc5887eb8f69413a4ed790b2d2cd2dd"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/ui_inventory.py",
+      "role": "Lexical inventory only; UI runtime behavior not accepted",
+      "status": "unknown",
+      "sha256": "c7389a7fbab4ddfc5ecb3cd68a7b8c36451a1e6965c2ab428cc4a557042518af"
+    },
+    {
+      "path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/ui_profile.py",
+      "role": "Profile output is static/lexical; menu/options runtime not accepted",
+      "status": "unknown",
+      "sha256": "7772e1fc020b38dde29d9f206ddb2571793eb2cc29dd72f871ab2a21f0c12e10"
+    }
+  ],
+  "blockers": [
+    {
+      "id": "external_source_identity",
+      "status": "unknown",
+      "detail": "R2 snapshots match their local candidate copies but do not identify an upstream archive/commit; original module versions remain unverified."
+    },
+    {
+      "id": "active_tree_drift",
+      "status": "partial",
+      "detail": "The route snapshot matches the attempt_10 candidate 107/107. The active project differs in four identified paths: res/resources.res, src/openbor/generated/ob_slice_data.c, src/openbor/generated/ob_slice_data.h, and src/openbor/ob_belt.c. Preserve the active baseline; do not copy the candidate wholesale."
+    },
+    {
+      "id": "text_owner_vdp",
+      "status": "partial",
+      "detail": "R2 captured 61 owner-resource tiles/cursor progression, completed-VBlank empty-queue drain, ROM-side A edges and same-frame queue/scanline snapshots. Physical VRAM readback, formal TDD application plan, next-step budget measurement and delivery-gate route remain open."
+    },
+    {
+      "id": "bt_runtime",
+      "status": "partial",
+      "detail": "BT legacy now has a sealed exact-hash scene-4 smoke capture with HUD N3, but full gameplay semantics, transition lifecycle, and a complete performance window are not established."
+    },
+    {
+      "id": "profile_generalization",
+      "status": "unknown",
+      "detail": "No complete accepted module or same-core second-profile runtime proof exists."
+    },
+    {
+      "id": "audio_performance",
+      "status": "unknown",
+      "detail": "No current hash supports audibility/mix acceptance or sustained 60 Hz claim."
+    },
+    {
+      "id": "gal_player_start_lowering",
+      "status": "partial",
+      "detail": "The current importer replay lowers all four TOWN1 player-start records; attempt_10 runtime evidence covers only source slot 1. The candidate has a source-bound host-tested entry-drop damage policy and a validation_report, but validation remains technical_incomplete. Active consumer stays fixed; original runtime and slots 2–4 remain unverified."
+    },
+    {
+      "id": "candidate_generation_provenance",
+      "status": "partial",
+      "detail": "Current importer tree 7580366d... re-emits all nine asset/C outputs byte-identically to attempt_10 and the resources.res slice matches. Historical attempt_10 build snapshot omitted the shared converter tree, so its exact historical emitter checkout remains unknown."
+    },
+    {
+      "id": "entry_drop_damage_policy",
+      "status": "partial",
+      "detail": "Pinned-reference makeinv semantics and the GAL ax makeinv 5 0 source value yield a candidate policy that rejects ob_hurt while spawn_inv_remaining > 0. Isolated host test passed at remaining=267 during entry-drop; no BlastEm contact during entry-drop or original-runtime differential is observed."
+    },
+    {
+      "id": "candidate_validation_report",
+      "status": "partial",
+      "detail": "Candidate validation_report is present at out/profiling/openbor_town1_entrydrop_policy_r1_20261012/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/out/logs/validation_report.json (SHA d6f430aa761d42661105aada336b839d5f0659ddc47e10bb1e7d6df8663aade3): 1 error, 19 warnings, closeout_gate=false. Methodology and hygiene reports pass; do not promote."
+    },
+    {
+      "id": "gal_town1_group_wait_runtime_reachability",
+      "status": "blocked",
+      "detail": "Historical isolated candidates prove TEXT line49 to ITEM fault at line58, bizzar1 visual, obstacle visibility/collision, and one older integrated prefix through line101. Current attempt10 still lacks the GAL table/owners; old integrated ROM uses scheduler/header d9e80a63.../b9715285..., not current 56c6659e.../9a68a091.... Current-hash runtime reachability, wait release, item pickup/equip contract, obstacle attack/death, and broader Henin behavior remain open."
+    }
+  ],
+  "reusable_measurements": [
+    {
+      "topic": "M3r16 N4 route",
+      "artifact": "doc/openbor/m3r16_n4_route_evidence_reconciliation_20261011.md",
+      "result": "Attempt_07 sealed route in ROM 38555bf...; no route recapture needed for the same hash/route predicate."
+    },
+    {
+      "topic": "GAL directive profile cut",
+      "artifact": "doc/openbor/gal_town_capability_fidelity_matrix_2026_09_30.json",
+      "result": "26 directive kinds classified: 8 adapted and 18 rejected; no unknown lexical command in this file; four player-start directives are adapted in the isolated candidate, but only slot 1 has runtime observation; still not general compatibility."
+    },
+    {
+      "topic": "GAL static event queue",
+      "artifact": "out/logs/ob_gal_town1_event_table_report.json",
+      "result": "32 event rows / 12 model symbols; generated C and header exact-match current candidate files."
+    },
+    {
+      "topic": "BT VRAM alternatives",
+      "artifact": "doc/openbor/bt_rescue_native_preflight.json + doc/openbor/bt_rescue_legacy_preflight.json",
+      "result": "Native overflow already measured; legacy static fit already measured. Do not repeat either preflight without a changed asset/profile/budget."
+    },
+    {
+      "topic": "TEXT owner candidate",
+      "artifact": "out/work_runs/openbor_text_intro_owner_r1_20261011/execution_record.json",
+      "result": "Reuse owner ROM 3f2b2d17...: TEXT line49 accepted, next cursor line58 faults closed; host 90 mask assertions and 1182 event-table/owner assertions. Scheduler/header hashes match current; ob_belt/resources do not. Do not reuse its ROM claim on attempt10."
+    },
+    {
+      "topic": "M3r16 candidate performance window",
+      "artifact": "out/evidence/openbor_m3r16_trace_footprint_20261011_r2/attempt_07/sessions/sess-20261011T130752-dc0af85c/canonical/runtime_metrics.json",
+      "result": "3600/3600 measured; 516 frames over budget (14.33%), max CPU 259/jitter 155, max scanline sprites 10. Keep performance unproven; do not rerun the same workload without a source/flag/measurement delta."
+    },
+    {
+      "topic": "BT legacy static fit, historical runtime baseline, and current candidate smoke capture",
+      "artifact": "out/profiling/openbor_bt_legacy_runtime_r1_20261011/evidence_reuse_assessment.json",
+      "result": "Reuse 880-tile/3-slot preflight and historical robust 1200/1200 baseline under its original hash. Current ROM 27a3ac92... separately confirms scene4/N3 and sampled VLAB ranges/queue peaks at 61/1200; do not repeat preflights or transfer performance claims."
+    },
+    {
+      "topic": "GAL TEXT mask owner dynamic diagnostic R2",
+      "artifact": "doc/openbor/gal_text_mask_r2_evidence_20261011.md",
+      "result": "Exact candidate ROM 83c07d12f4790b87b3a8c8c476c3321b42bd5eef60f7640520092a94fdf19650, source tree 9aa0f3964b9132becacfd994c07f1b92bc44ea31be0d3ea498d93d9b4eee80d3, build flag OB_PROFILE_LEVEL_EVENTS=1. GMSK CRC valid; owner resource/cursor 61 tiles at [1088,1149), cursor drained after VBlank/empty queue by frame236; frame233 scene queue/scanline peaks and ROM-side A frames255/258. Bundle sealed/fresh, but route isolated_session_experimental; physical VRAM readback and sustained performance/audio remain unproven."
+    },
+    {
+      "topic": "GAL TOWN1 player-start source identity and reference syntax",
+      "artifact": "doc/openbor/gal_player_start_source_reconciliation_20261011.md",
+      "result": "GAL.pak and TOWN1 member hashes are bound; pinned reference commit maps spawn1..4 to slots 0..3 and args x/z/y. Original PAK runtime is unverified. Do not re-extract/re-hash or infer source-to-stage coordinates; finish x/z projection and y support contract.",
+      "source_to_consumer_matrix_refresh": "doc/openbor/source_to_consumer_matrix_20261012.json"
+    },
+    {
+      "topic": "GAL TOWN1 player-start attempt_10 runtime prefix",
+      "artifact": "doc/openbor/gal_player_start_runtime_evidence_20261011.md; out/evidence/openbor_town1_spawn_r1_20261011/attempt_10/",
+      "result": "Reuse exact source/build/session identities. Slot 0 x50/z180/height200 reached ground at frame10914 before later OTRC overflow; do not repeat PAK extraction or this initial drop measurement. Do not infer later lifecycle, slots 1..3, hardware port mapping, VRAM readback, audio, performance or module equivalence."
+    },
+    {
+      "topic": "TOWN1 bizzar1 visual owner",
+      "artifact": "doc/openbor/town1_prior_owner_evidence_reconciliation_20261012.md",
+      "result": "Existing ROM 0bb5d5dd... and host report demonstrate only a static world visual with flip/camera projection. No pickup/equip/inventory semantics. Reuse source/asset/owner work; do not repeat the same visual capture."
+    },
+    {
+      "topic": "TOWN1 obstacle collision owners",
+      "artifact": "doc/openbor/town1_prior_owner_evidence_reconciliation_20261012.md",
+      "result": "ROM bed059e45... observed civ02/civ03 rendering and collision in an isolated profile. No attack/damage/death; performance unproven. Reuse asset/collision results within that exact scope."
+    },
+    {
+      "topic": "TOWN1 integrated prefix through line101",
+      "artifact": "doc/openbor/town1_prior_owner_evidence_reconciliation_20261012.md",
+      "result": "ROM 74d6077f... observed EV9/32, W1, N3/E175 and Amaz map1 at line101; wait release and continuation were not demonstrated. Older scheduler/header hashes differ from the current kernel, so use as historical evidence only."
+    }
+  ],
+  "claim_ceiling": "ported donor records with hash origin only; not SMS evidence, not module acceptance"
+}

@@ -1,0 +1,549 @@
+{
+  "schema": "openbor_sms_emission_v1",
+  "generated_at": "2026-10-16T00:00:00-03:00",
+  "tool": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py",
+  "scope": "O2 — pacote da ROM do piloto (tiles/metasprites/paletas/plano)",
+  "sources": [
+    {
+      "path": "data/generated/art/o2_art_conversion_20261015.json",
+      "sha256": "9b1f7ce533fae0a10185db1df2f308c81c557e799d2be822cdcf021af4d317a9",
+      "bytes": 13175
+    },
+    {
+      "path": "data/generated/extract/gal_town1_art_extract_20261015.json",
+      "sha256": "a07ad09508be1dcc5fb9967b44dea13fce0b6ef5e86764651d9a133f2797f4c0",
+      "bytes": 3486
+    },
+    {
+      "path": "data/generated/ir/gal_town1_level_ir_20261015.json",
+      "sha256": "a9c6be9132e14fcd8bcad87f62ab90fcc8ab81b8d7cb256e15da5b5a0d57b4a1",
+      "bytes": 177156
+    },
+    {
+      "path": "data/source_openbor/gal_town1/data/chars/ax/ax.txt",
+      "sha256": "b6c33ffc145b34aecad0a29fbd7077dde75df912a474eafb6fdb53884a367f41",
+      "bytes": 51916
+    },
+    {
+      "path": "data/source_openbor/gal_town1/data/chars/long/long.txt",
+      "sha256": "b4303437f798ddcea1e4db33e742bfb1a4fa59128104dd5e619b4820014373ce",
+      "bytes": 38006
+    }
+  ],
+  "spawns": {
+    "player": {
+      "slot": 1,
+      "x": 50,
+      "z": 180,
+      "z_raw": 20,
+      "hp": 100,
+      "origin": "player_starts[slot=1]; z = PLAYER_MIN_Z + z_fonte (escopo O2 decisions[0]); hp de ax.txt"
+    },
+    "enemy": {
+      "name": "long",
+      "x": 500,
+      "z": 180,
+      "hp": 50,
+      "origin": "spawns[name=long]; z direto do fonte"
+    }
+  },
+  "anim": {
+    "idle_source_delay_10ms": 8,
+    "idle_ntsc_frames": 5,
+    "idle_pal_frames_declared": 4,
+    "walk_source_delay_10ms": 12,
+    "walk_ntsc_frames": 7,
+    "walk_pal_frames_declared": 6,
+    "walk_cycle_frames": [
+      "walk01",
+      "walk03"
+    ],
+    "long_idle_source_delay_10ms": 8,
+    "note": "1 delay = 10ms; NTSC = max(1, round(d*60/100)); PAL so declarado"
+  },
+  "sprites": {
+    "pair_count": 122,
+    "slots_used": 244,
+    "poses": [
+      {
+        "pose": "ax_idle01_left",
+        "cells": 21
+      },
+      {
+        "pose": "ax_idle01_right",
+        "cells": 21
+      },
+      {
+        "pose": "ax_walk01_left",
+        "cells": 16
+      },
+      {
+        "pose": "ax_walk01_right",
+        "cells": 16
+      },
+      {
+        "pose": "ax_walk03_left",
+        "cells": 16
+      },
+      {
+        "pose": "ax_walk03_right",
+        "cells": 16
+      },
+      {
+        "pose": "long_idle01_left",
+        "cells": 20
+      }
+    ],
+    "budget_line_policy": "jogador (ordem banda/coluna) sempre inteiro; inimigo em ordem (banda, densidade desc, coluna) com corte em 8 entradas/linha; decisao pre-computada no emit (inc/o2/enemy_mask.h) por (pose do jogador, pz) com politica conservadora: todas as celulas do inimigo contam no orcamento, mesmo fora da tela (o runtime so pula o desenho quando x > 255)",
+    "worst_case": {
+      "peak_per_line": 8,
+      "sat_entries": 36,
+      "drops": [
+        {
+          "dx": 16,
+          "dy": -56,
+          "tile": 212,
+          "x": 156,
+          "y": 92
+        },
+        {
+          "dx": -16,
+          "dy": -56,
+          "tile": 204,
+          "x": 124,
+          "y": 92
+        },
+        {
+          "dx": 8,
+          "dy": -40,
+          "tile": 220,
+          "x": 148,
+          "y": 108
+        },
+        {
+          "dx": 16,
+          "dy": -40,
+          "tile": 222,
+          "x": 156,
+          "y": 108
+        },
+        {
+          "dx": 16,
+          "dy": -24,
+          "tile": 232,
+          "x": 156,
+          "y": 124
+        }
+      ],
+      "scene": {
+        "player": "ax_idle01_left",
+        "enemy": "long_idle01_left"
+      }
+    }
+  },
+  "enemy_mask": {
+    "path": "inc/o2/enemy_mask.h",
+    "sha256": "fcf2d3d2babcf63ce15db5ca038b359dcf4759f1235f1685b09b37bb846aa0c3",
+    "bytes": 6899,
+    "pz_min": 160,
+    "pz_max": 232,
+    "pose_count": 6,
+    "cells": 20,
+    "policy": "conservadora: contagem inclui todas as celulas do inimigo; bit i = celula i da tabela ordenada; 3 bytes por entrada, runtime consulta o bit e so desenha se x <= 255",
+    "stats": [
+      {
+        "pose_index": 0,
+        "entries_with_drops": 73,
+        "worst_cells_dropped": 7,
+        "worst_pz": [
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211
+        ],
+        "total_cells_dropped": 406
+      },
+      {
+        "pose_index": 1,
+        "entries_with_drops": 73,
+        "worst_cells_dropped": 7,
+        "worst_pz": [
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211
+        ],
+        "total_cells_dropped": 406
+      },
+      {
+        "pose_index": 2,
+        "entries_with_drops": 73,
+        "worst_cells_dropped": 3,
+        "worst_pz": [
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211
+        ],
+        "total_cells_dropped": 166
+      },
+      {
+        "pose_index": 3,
+        "entries_with_drops": 73,
+        "worst_cells_dropped": 3,
+        "worst_pz": [
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211
+        ],
+        "total_cells_dropped": 166
+      },
+      {
+        "pose_index": 4,
+        "entries_with_drops": 73,
+        "worst_cells_dropped": 4,
+        "worst_pz": [
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195
+        ],
+        "total_cells_dropped": 203
+      },
+      {
+        "pose_index": 5,
+        "entries_with_drops": 73,
+        "worst_cells_dropped": 4,
+        "worst_pz": [
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195
+        ],
+        "total_cells_dropped": 203
+      }
+    ]
+  },
+  "tiles": {
+    "sprite_base": 0,
+    "sprite_slots": 244,
+    "bg_base": 244,
+    "bg_slots": 192,
+    "hud_base": 436,
+    "hud_slots": 3,
+    "total": 439,
+    "vram_tile_budget": 448,
+    "margin": 9
+  },
+  "simulations": [
+    {
+      "player": "ax_idle01_left",
+      "peak": 8,
+      "sat_entries": 36,
+      "drops": 5
+    },
+    {
+      "player": "ax_idle01_right",
+      "peak": 8,
+      "sat_entries": 36,
+      "drops": 5
+    },
+    {
+      "player": "ax_walk01_left",
+      "peak": 8,
+      "sat_entries": 34,
+      "drops": 2
+    },
+    {
+      "player": "ax_walk01_right",
+      "peak": 8,
+      "sat_entries": 34,
+      "drops": 2
+    },
+    {
+      "player": "ax_walk03_left",
+      "peak": 8,
+      "sat_entries": 33,
+      "drops": 3
+    },
+    {
+      "player": "ax_walk03_right",
+      "peak": 8,
+      "sat_entries": 33,
+      "drops": 3
+    }
+  ],
+  "manifests": [
+    {
+      "pose": "ax_idle01_left",
+      "path": "data/generated/emit/o2_sprite_scene_idle01_left_20261016.json",
+      "sha256": "bb8be4a936e4d97d60ee2250390930c90b9c91888270c8c86c28167bbe3cbff8",
+      "bytes": 3368,
+      "sprites": 36,
+      "peak": 8,
+      "drops": 5
+    },
+    {
+      "pose": "ax_idle01_right",
+      "path": "data/generated/emit/o2_sprite_scene_idle01_right_20261016.json",
+      "sha256": "c4e93b75592e7e868632b91b492dbe5842cbbf7d7fe1387ae63d50a2b05bd1de",
+      "bytes": 3374,
+      "sprites": 36,
+      "peak": 8,
+      "drops": 5
+    },
+    {
+      "pose": "ax_walk01_left",
+      "path": "data/generated/emit/o2_sprite_scene_walk01_left_20261016.json",
+      "sha256": "3fc189de732c05cbd64811eeb94b484944939adf58eaea277ecf849cb04cf7bb",
+      "bytes": 2934,
+      "sprites": 34,
+      "peak": 8,
+      "drops": 2
+    },
+    {
+      "pose": "ax_walk01_right",
+      "path": "data/generated/emit/o2_sprite_scene_walk01_right_20261016.json",
+      "sha256": "62d6b200af7a4e4663edefa908f2625ece9cfaa9c724033e9cf8d6b48c2d2e1f",
+      "bytes": 2943,
+      "sprites": 34,
+      "peak": 8,
+      "drops": 2
+    },
+    {
+      "pose": "ax_walk03_left",
+      "path": "data/generated/emit/o2_sprite_scene_walk03_left_20261016.json",
+      "sha256": "7a57d0d2ec9f8178dbb8af6e143cc999a098924ac772aae1573f0ef7129ea3ec",
+      "bytes": 2987,
+      "sprites": 33,
+      "peak": 8,
+      "drops": 3
+    },
+    {
+      "pose": "ax_walk03_right",
+      "path": "data/generated/emit/o2_sprite_scene_walk03_right_20261016.json",
+      "sha256": "12e47e8dc2878bce9411b1ed35eb02e8a054af23a12b5ea07be57f0174d3f0de",
+      "bytes": 2990,
+      "sprites": 33,
+      "peak": 8,
+      "drops": 3
+    }
+  ],
+  "outputs": [
+    {
+      "path": "inc/o2/pal_bg.h",
+      "sha256": "d093469b89836e9a347c309079e507cb3ef5310b110cf6638eda48c20a3e54c1",
+      "bytes": 216
+    },
+    {
+      "path": "inc/o2/pal_spr.h",
+      "sha256": "b9053706f365264818672f020bbee06088d954629190feac9054c555eef5e4db",
+      "bytes": 218
+    },
+    {
+      "path": "inc/o2/spr_tiles.h",
+      "sha256": "a3fd492127d6f3dd01fe624264ea9dbd0132f4d1c15262b10b2f114c20911f5c",
+      "bytes": 39704
+    },
+    {
+      "path": "inc/o2/bg_tiles.h",
+      "sha256": "3e61f35e84763659ed6740eda5966b88495b8260d505b91ace275a51b3d7f977",
+      "bytes": 31277
+    },
+    {
+      "path": "inc/o2/bg_cols.h",
+      "sha256": "3c9041fdf31d3a00d4e144f3a9f1628d9cb0faea19f0cd2f029353f8bf9b693c",
+      "bytes": 8991
+    },
+    {
+      "path": "inc/o2/hud_tiles.h",
+      "sha256": "07c6e29caa879abb43cc7e20b4b30b70a148d2d8aff6a8676514dba873f30247",
+      "bytes": 628
+    },
+    {
+      "path": "inc/o2/spr_meta.h",
+      "sha256": "21e6843baabe8eb38d7983e999d2f54e470a50eee09e16b87313408515cea293",
+      "bytes": 2250
+    },
+    {
+      "path": "inc/o2/enemy_mask.h",
+      "sha256": "fcf2d3d2babcf63ce15db5ca038b359dcf4759f1235f1685b09b37bb846aa0c3",
+      "bytes": 6899
+    },
+    {
+      "path": "inc/o2/level.h",
+      "sha256": "4e8b1b4ae3f041dea3744cb096577679835f64c1ce6cd31de66149622df0495d",
+      "bytes": 779
+    },
+    {
+      "path": "data/generated/plans/o2_vram_plan_20261016.json",
+      "sha256": "fa4c9a2a7e06ec63657ab4a46acfac3b0c0c4162d89a42f6fb8de06a935b2172",
+      "bytes": 531
+    },
+    {
+      "path": "data/generated/emit/o2_sprite_scene_idle01_left_20261016.json",
+      "sha256": "bb8be4a936e4d97d60ee2250390930c90b9c91888270c8c86c28167bbe3cbff8",
+      "bytes": 3368
+    },
+    {
+      "path": "data/generated/emit/o2_sprite_scene_idle01_right_20261016.json",
+      "sha256": "c4e93b75592e7e868632b91b492dbe5842cbbf7d7fe1387ae63d50a2b05bd1de",
+      "bytes": 3374
+    },
+    {
+      "path": "data/generated/emit/o2_sprite_scene_walk01_left_20261016.json",
+      "sha256": "3fc189de732c05cbd64811eeb94b484944939adf58eaea277ecf849cb04cf7bb",
+      "bytes": 2934
+    },
+    {
+      "path": "data/generated/emit/o2_sprite_scene_walk01_right_20261016.json",
+      "sha256": "62d6b200af7a4e4663edefa908f2625ece9cfaa9c724033e9cf8d6b48c2d2e1f",
+      "bytes": 2943
+    },
+    {
+      "path": "data/generated/emit/o2_sprite_scene_walk03_left_20261016.json",
+      "sha256": "7a57d0d2ec9f8178dbb8af6e143cc999a098924ac772aae1573f0ef7129ea3ec",
+      "bytes": 2987
+    },
+    {
+      "path": "data/generated/emit/o2_sprite_scene_walk03_right_20261016.json",
+      "sha256": "12e47e8dc2878bce9411b1ed35eb02e8a054af23a12b5ea07be57f0174d3f0de",
+      "bytes": 2990
+    }
+  ],
+  "notes": [
+    "tiles de sprite em pares 8x16 (SPRITEMODE_TALL) na primeira metade (reg6 0xFB)",
+    "espelho = padroes proprios; VDP do SMS nao tem flip de sprite",
+    "PNT so recebe linhas 2..23; HUD fixo nas linhas 0..1",
+    "dither Bayer 4x4 apenas no palco; sprites com mapeamento duro",
+    "camera quantizada em 8 px (cam &= ~7); BGScrollX = (-cam) & 0xFF desloca a imagem para a esquerda em cam pixels e o anel mod-32 de colunas fecha o wrap de 256 px; LOCKHSCROLL mantem as linhas 0..1 (HUD) fixas e LEFTCOLBLANK cobre a coluna 0",
+    "corte do inimigo = mascara pre-computada (inc/o2/enemy_mask.h); o runtime nao conta linhas de sprite"
+  ]
+}

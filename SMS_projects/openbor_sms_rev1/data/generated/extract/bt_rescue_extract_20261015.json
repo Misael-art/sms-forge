@@ -1,0 +1,38 @@
+{
+  "schema": "openbor_sms_extraction_record_v1",
+  "generated_at": "2026-10-16T00:21:11+00:00",
+  "tool": "openbor2sms frontend extract",
+  "pak": {
+    "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_bruta/battle_toads/battle_toads.PAK",
+    "bytes": 36324119,
+    "sha256": "f2c5319deb68da97c3a469d3cc27b0be6b05e6b840847237369e78a01146e7a6",
+    "format_id": 0,
+    "format_name": "PACK v0 PAK32 (32-bit)",
+    "file_count": 2151
+  },
+  "expected": {
+    "sha256": "f2c5319deb68da97c3a469d3cc27b0be6b05e6b840847237369e78a01146e7a6",
+    "bytes": 36324119,
+    "verified": true
+  },
+  "destination": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/data/source_openbor/bt_rescue",
+  "members": [
+    {
+      "member": "data/levels/01.txt",
+      "pak_name": "data\\LEVELS\\01.TXT",
+      "path": "data/levels/01.txt",
+      "bytes": 2572,
+      "sha256": "bbc691d1bb81a000c7c0ccd9c7187b6fdf59c0ad0eab4896861116925b972a9d",
+      "reused_existing": false
+    },
+    {
+      "member": "data/models.txt",
+      "pak_name": "data\\MODELS.TXT",
+      "path": "data/models.txt",
+      "bytes": 7341,
+      "sha256": "c15cc13b5a07a77aba64ca2854693ae808721953e9b1f3040ef41dd606e9d71a",
+      "reused_existing": false
+    }
+  ],
+  "claim_ceiling": "hash-bound extraction of named members only; containment does not prove parsing, conversion or runtime suitability"
+}

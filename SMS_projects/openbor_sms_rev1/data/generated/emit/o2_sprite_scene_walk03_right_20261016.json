@@ -1,0 +1,210 @@
+{
+  "schema": "sprite_scene_manifest_v1",
+  "sprite_size": "8x16",
+  "zoomed": false,
+  "screen_h": 192,
+  "sat_terminated": true,
+  "sprites": [
+    {
+      "x": 116,
+      "y": 76,
+      "tile": 116
+    },
+    {
+      "x": 124,
+      "y": 76,
+      "tile": 118
+    },
+    {
+      "x": 108,
+      "y": 92,
+      "tile": 176
+    },
+    {
+      "x": 116,
+      "y": 92,
+      "tile": 178
+    },
+    {
+      "x": 124,
+      "y": 92,
+      "tile": 180
+    },
+    {
+      "x": 132,
+      "y": 92,
+      "tile": 182
+    },
+    {
+      "x": 108,
+      "y": 108,
+      "tile": 184
+    },
+    {
+      "x": 116,
+      "y": 108,
+      "tile": 186
+    },
+    {
+      "x": 124,
+      "y": 108,
+      "tile": 188
+    },
+    {
+      "x": 132,
+      "y": 108,
+      "tile": 190
+    },
+    {
+      "x": 108,
+      "y": 124,
+      "tile": 192
+    },
+    {
+      "x": 116,
+      "y": 124,
+      "tile": 194
+    },
+    {
+      "x": 124,
+      "y": 124,
+      "tile": 196
+    },
+    {
+      "x": 132,
+      "y": 124,
+      "tile": 198
+    },
+    {
+      "x": 116,
+      "y": 140,
+      "tile": 200
+    },
+    {
+      "x": 124,
+      "y": 140,
+      "tile": 202
+    },
+    {
+      "x": 140,
+      "y": 92,
+      "tile": 208
+    },
+    {
+      "x": 148,
+      "y": 92,
+      "tile": 210
+    },
+    {
+      "x": 132,
+      "y": 92,
+      "tile": 206
+    },
+    {
+      "x": 156,
+      "y": 92,
+      "tile": 212
+    },
+    {
+      "x": 132,
+      "y": 108,
+      "tile": 216
+    },
+    {
+      "x": 140,
+      "y": 108,
+      "tile": 218
+    },
+    {
+      "x": 124,
+      "y": 108,
+      "tile": 214
+    },
+    {
+      "x": 148,
+      "y": 108,
+      "tile": 220
+    },
+    {
+      "x": 132,
+      "y": 124,
+      "tile": 226
+    },
+    {
+      "x": 140,
+      "y": 124,
+      "tile": 228
+    },
+    {
+      "x": 124,
+      "y": 124,
+      "tile": 224
+    },
+    {
+      "x": 148,
+      "y": 124,
+      "tile": 230
+    },
+    {
+      "x": 124,
+      "y": 140,
+      "tile": 234
+    },
+    {
+      "x": 148,
+      "y": 140,
+      "tile": 240
+    },
+    {
+      "x": 140,
+      "y": 140,
+      "tile": 238
+    },
+    {
+      "x": 132,
+      "y": 140,
+      "tile": 236
+    },
+    {
+      "x": 156,
+      "y": 140,
+      "tile": 242
+    }
+  ],
+  "scene": {
+    "player_pose": "ax_walk03_right",
+    "enemy_pose": "long_idle01_left",
+    "player_x": 484,
+    "player_z": 180,
+    "enemy_x": 500,
+    "enemy_z": 180,
+    "camera": 360
+  },
+  "simulation": {
+    "peak_per_line": 8,
+    "budget_drops": [
+      {
+        "dx": -16,
+        "dy": -56,
+        "tile": 204,
+        "x": 124,
+        "y": 92
+      },
+      {
+        "dx": 16,
+        "dy": -40,
+        "tile": 222,
+        "x": 156,
+        "y": 108
+      },
+      {
+        "dx": 16,
+        "dy": -24,
+        "tile": 232,
+        "x": 156,
+        "y": 124
+      }
+    ],
+    "note": "ordem SAT = jogador (tabela) + inimigo (banda, densidade desc); corte por mascara pre-computada no emit (bit por celula de inimigo), consultada pelo runtime"
+  }
+}

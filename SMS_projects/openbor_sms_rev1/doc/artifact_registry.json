@@ -1,0 +1,910 @@
+{
+ "schema": "sms_artifact_registry_v1",
+ "project_id": "openbor_sms_rev1",
+ "locations": {
+  "source": {
+   "path": "data/source_art",
+   "purpose": "concepts, model sheets, sprite sources and proofs",
+   "mode": "managed"
+  },
+  "planning": {
+   "path": "doc/artifacts",
+   "purpose": "planning sheets, contracts and reviews",
+   "mode": "managed"
+  },
+  "source_openbor": {
+   "path": "data/source_openbor",
+   "purpose": "OpenBOR module sources under explicit control (extracted dependency subsets used by the importer/IR); the full PAK is never copied here and never becomes a res/ resource",
+   "mode": "managed"
+  },
+  "generated": {
+   "path": "data/generated",
+   "purpose": "host-generated intermediates (intake records, dependency closure, typed IR, transcripts); never res/",
+   "mode": "managed"
+  },
+  "production": {
+   "path": "res",
+   "purpose": "integrated resources only after production gates",
+   "mode": "managed"
+  },
+  "diagnostic": {
+   "path": "out/diagnostics",
+   "purpose": "session manifests and diagnostic derivatives; audited by their own gates",
+   "mode": "legacy"
+  }
+ },
+ "kinds": {
+  "concept": {
+   "location": "source",
+   "purpose": "identity exploration",
+   "introduced_for": "canonical project bootstrap",
+   "procedure": "original-artwork.md",
+   "required_file_roles": [
+    "image"
+   ]
+  },
+  "model_sheet": {
+   "location": "source",
+   "purpose": "character identity reference",
+   "introduced_for": "canonical project bootstrap",
+   "procedure": "original-artwork.md",
+   "required_file_roles": [
+    "image"
+   ]
+  },
+  "animation_source": {
+   "location": "source",
+   "purpose": "complete animation drawing source",
+   "introduced_for": "canonical project bootstrap",
+   "procedure": "artwork-to-rom-lifecycle.md",
+   "required_file_roles": [
+    "image"
+   ]
+  },
+  "conversion_proof": {
+   "location": "source",
+   "purpose": "two keyposes proving conversion procedure",
+   "introduced_for": "canonical project bootstrap",
+   "procedure": "new-visual-asset.md",
+   "required_file_roles": [
+    "image"
+   ]
+  },
+  "openbor_source": {
+   "location": "source_openbor",
+   "purpose": "OpenBOR module source file under explicit controller (PAK member subset or hash-bound reference extract)",
+   "introduced_for": "openbor intake O0 (front-end O1 extraction writes here)",
+   "procedure": "artifact-organization.md",
+   "required_file_roles": [
+    "source"
+   ]
+  },
+  "generated_record": {
+   "location": "generated",
+   "purpose": "host tool produced record (intake, dependency port, typed IR); not a ROM resource",
+   "introduced_for": "openbor intake O0",
+   "procedure": "artifact-organization.md",
+   "required_file_roles": [
+    "record"
+   ]
+  },
+  "planning_sheet": {
+   "location": "planning",
+   "purpose": "spreadsheet or structured production plan",
+   "introduced_for": "canonical project bootstrap",
+   "procedure": "artifact-organization.md",
+   "required_file_roles": [
+    "document"
+   ]
+  },
+  "art_review": {
+   "location": "planning",
+   "purpose": "review tied to a particular hash",
+   "introduced_for": "canonical project bootstrap",
+   "procedure": "art-review.md",
+   "required_file_roles": [
+    "report"
+   ]
+  },
+  "diagnostic_conversion": {
+   "location": "diagnostic",
+   "purpose": "conversion report and private ROM evidence",
+   "introduced_for": "canonical project bootstrap",
+   "procedure": "artwork-to-rom-lifecycle.md",
+   "required_file_roles": [
+    "report"
+   ]
+  },
+  "runtime_resource": {
+   "location": "production",
+   "purpose": "integrated game asset",
+   "introduced_for": "canonical project bootstrap",
+   "procedure": "new-visual-asset.md",
+   "required_file_roles": [
+    "resource"
+   ]
+  }
+ },
+ "artifacts": [
+  {
+   "id": "o0-gal-pak-intake",
+   "asset_id": "gal_pak_intake",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "O0 intake: fresh SHA-256/bytes verification and PAK32 index record for pilot GAL (reproduces donor entry count 3502)",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/intake/gal_pak_intake_20261015.json",
+     "sha256": "8ec356a6fc10cc6fd9cd4df64aa716eb2058970ad46925e533e3f153202a31c1"
+    }
+   ]
+  },
+  {
+   "id": "o0-bt-pak-intake",
+   "asset_id": "bt_pak_intake",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "O0 intake: fresh SHA-256/bytes verification and PAK32 index record for pilot Battletoads (2151 entries)",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/intake/bt_pak_intake_20261015.json",
+     "sha256": "72cbff963486e6f77c5196a1b8d924cf27f0001ea839e0f422e1b624af90ae6e"
+    }
+   ]
+  },
+  {
+   "id": "o0-donor-source-manifest",
+   "asset_id": "donor_source_manifest",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "O0 intake: hash manifest of donor docs/licenses/pilot PAKs/runtime C plus re-hashed importer .py tree (0701fdb5...)",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/intake/donor_source_manifest_20261015.json",
+     "sha256": "37ee39dfa349ebb32a684dc544f6b32bca7ac19f8c621d014e349034c4f78e82"
+    }
+   ]
+  },
+  {
+   "id": "o0-dependency-inventory",
+   "asset_id": "dependency_inventory",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "O0 intake: donor dependency matrix/contract ported with hash origin (13+1 capabilities, 7 profiles, 11 blockers)",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/intake/dependency_inventory_20261015.json",
+     "sha256": "69be8331841d842a6749494b0eeaf47e174da1bf4582348e53db13327bf081ab"
+    }
+   ]
+  },
+  {
+   "id": "o0-compatibility-boundary",
+   "asset_id": "compatibility_boundary",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "O0 gate decision: pilots GAL (initial) + Battletoads (generalization) and capability boundary v0, hash-bound to intake records",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o0_pilot_compatibility_boundary_20261015.json",
+     "sha256": "3fc3c2c11d34768a5553353e0bec5f7eae5a65165f7caa4567e4a47232e48a3d"
+    }
+   ]
+  },
+  {
+   "id": "o1-port-manifest",
+   "asset_id": "port_manifest",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o0-donor-source-manifest"
+   ],
+   "reason": "O1 port: five neutral modules byte-identical with banner plus three import-adapted tests, donor tree hash revalidated",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/port/openbor2sms_port_manifest_20261015.json",
+     "sha256": "5f3b17132363a336ade7df61e999756f013d1c3ec71dc6367d7f3b011b82d8a4"
+    }
+   ]
+  },
+  {
+   "id": "o1-source-subset-gal-town1",
+   "asset_id": "source_subset_gal_town1",
+   "kind": "openbor_source",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o0-gal-pak-intake"
+   ],
+   "reason": "O1 extracted subset from GAL.pak (town1 level + models index), hash-bound to the verified PAK",
+   "files": [
+    {
+     "role": "source",
+     "path": "data/source_openbor/gal_town1/data/levels/town1.txt",
+     "sha256": "1d167c8cc703b815a32dbb4953c53af7f42532a6a647507a7e009e61377cc54d"
+    },
+    {
+     "role": "models_index",
+     "path": "data/source_openbor/gal_town1/data/models.txt",
+     "sha256": "fbd18005ffbdb6346315896abd774fdf4c716ce148f7b07c9e1a9d047ff37581"
+    }
+   ]
+  },
+  {
+   "id": "o1-source-subset-bt-rescue",
+   "asset_id": "source_subset_bt_rescue",
+   "kind": "openbor_source",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o0-bt-pak-intake"
+   ],
+   "reason": "O1 extracted subset from battle_toads.PAK (level 01 + models index), hash-bound to the verified PAK",
+   "files": [
+    {
+     "role": "source",
+     "path": "data/source_openbor/bt_rescue/data/levels/01.txt",
+     "sha256": "bbc691d1bb81a000c7c0ccd9c7187b6fdf59c0ad0eab4896861116925b972a9d"
+    },
+    {
+     "role": "models_index",
+     "path": "data/source_openbor/bt_rescue/data/models.txt",
+     "sha256": "c15cc13b5a07a77aba64ca2854693ae808721953e9b1f3040ef41dd606e9d71a"
+    }
+   ]
+  },
+  {
+   "id": "o1-extract-gal-town1",
+   "asset_id": "extraction_record_gal_town1",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o0-gal-pak-intake",
+    "o1-source-subset-gal-town1"
+   ],
+   "reason": "O1 extraction record: PAK identity verified, member hashes recorded",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/extract/gal_town1_extract_20261015.json",
+     "sha256": "eee60d5e70215f23f6eb258faa1aea23fcb3ed414cc091b2f950a467190a0998"
+    }
+   ]
+  },
+  {
+   "id": "o1-extract-bt-rescue",
+   "asset_id": "extraction_record_bt_rescue",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o0-bt-pak-intake",
+    "o1-source-subset-bt-rescue"
+   ],
+   "reason": "O1 extraction record: PAK identity verified, member hashes recorded",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/extract/bt_rescue_extract_20261015.json",
+     "sha256": "03c1ec32000396bc334f8e53e97a9d93fd4592bb3769c531f77e9944cbb40f34"
+    }
+   ]
+  },
+  {
+   "id": "o1-level-ir-gal-town1",
+   "asset_id": "level_ir_gal_town1",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o1-extract-gal-town1"
+   ],
+   "reason": "O1 typed level IR with origin (line/byte span/raw hash), directives, spawns, player starts, event-IR projection, inventory and diagnostics",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/ir/gal_town1_level_ir_20261015.json",
+     "sha256": "a9c6be9132e14fcd8bcad87f62ab90fcc8ab81b8d7cb256e15da5b5a0d57b4a1"
+    }
+   ]
+  },
+  {
+   "id": "o1-models-ir-gal-town1",
+   "asset_id": "models_ir_gal_town1",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o1-extract-gal-town1"
+   ],
+   "reason": "O1 typed models-index IR with origin and duplicate-alias diagnostics",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/ir/gal_town1_models_ir_20261015.json",
+     "sha256": "b44ad9e86a402f4b1e120d5f16ed970bd3d579757d6579cd11698ae607a3903a"
+    }
+   ]
+  },
+  {
+   "id": "o1-level-ir-bt-rescue",
+   "asset_id": "level_ir_bt_rescue",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o1-extract-bt-rescue"
+   ],
+   "reason": "O1 typed level IR with origin for the generalization pilot; preserves the two-argument spawn1/spawn2 diagnostics without lowering",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/ir/bt_rescue_level_ir_20261015.json",
+     "sha256": "bef0f287d6b2d48a0930b1b0ad70cd80f063c4ea9861eec1ac00f2eca2d3b619"
+    }
+   ]
+  },
+  {
+   "id": "o1-models-ir-bt-rescue",
+   "asset_id": "models_ir_bt_rescue",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o1-extract-bt-rescue"
+   ],
+   "reason": "O1 typed models-index IR with origin; flags the benign same-path 1up duplicate",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/ir/bt_rescue_models_ir_20261015.json",
+     "sha256": "8e1d8fbe4fcd987bc016287d5f0487e6bf22e2470c99e65402fb1d9b5fe8ad6b"
+    }
+   ]
+  },
+  {
+   "id": "o1-determinism-diff",
+   "asset_id": "determinism_diff",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o1-level-ir-gal-town1",
+    "o1-models-ir-gal-town1",
+    "o1-level-ir-bt-rescue",
+    "o1-models-ir-bt-rescue",
+    "o1-extract-gal-town1",
+    "o1-extract-bt-rescue"
+   ],
+   "reason": "O1 determinism evidence: byte-identical IR replays and normalized extraction-record replays, all pass",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/ir/determinism_diff_20261015.json",
+     "sha256": "3a3e8b07577c41e6301ed59119be115a0c04a8db73c3ecfc71a8e083b4dcb4b7"
+    }
+   ]
+  },
+  {
+   "id": "o1-neutral-frontend-scope",
+   "asset_id": "neutral_frontend_scope",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o1-port-manifest",
+    "o1-determinism-diff"
+   ],
+   "reason": "O1 batch boundary: neutral port list with hashes, semantics.py moved to the MD emission boundary, extraction/IR/determinism evidence and O2 entry",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o1_neutral_frontend_scope_20261015.json",
+     "sha256": "7ce34bb8c0478f6d017a0f0f1d8d7df29244f5b0a709c67a905d1a24e56fb34f"
+    }
+   ]
+  },
+  {
+   "id": "o2-vdp-pilot-scope",
+   "asset_id": "o2_vdp_pilot_scope",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "superseded",
+   "parents": [
+    "o1-neutral-frontend-scope",
+    "o1-level-ir-gal-town1",
+    "o1-models-ir-gal-town1"
+   ],
+   "reason": "O2 batch boundary: piloto VDP com decisoes medidas (unidades, cast, atores TALL, cenario por dicionario de tiles, camera minima, HUD de piloto) e plano de evidencia",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o2_vdp_pilot_scope_20261015.json",
+     "sha256": "8ba6f841deb341c9edad6faa2db5cbdc844a8a53790722299076e8ae7b60ad71"
+    }
+   ]
+  },
+  {
+   "id": "o2-vdp-pilot-scope-r2",
+   "asset_id": "o2_vdp_pilot_scope",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 2,
+   "status": "candidate",
+   "supersedes": "o2-vdp-pilot-scope",
+   "parents": [
+    "o2-vdp-pilot-scope",
+    "o1-neutral-frontend-scope",
+    "o1-level-ir-gal-town1",
+    "o1-models-ir-gal-town1"
+   ],
+   "reason": "O2 fechamento medido: K=192/S=244/439-448, camera/scroll medidos (N=(-cam)&0xFF, anel mod-32, LOCKHSCROLL+LEFTCOLBLANK), decisao D10 (mascara de corte pre-computada), evidencia executada com substituicoes declaradas e limitacao de ordem de corte registrada",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o2_vdp_pilot_scope_20261016.json",
+     "sha256": "98faf180052d0d0e63c35aae1d323100548b72bf256a4156b2dcf0aa3048b3e5"
+    }
+   ]
+  },
+  {
+   "id": "o2-extract-gal-town1-art",
+   "asset_id": "extract_gal_town1_art",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o0-gal-pak-intake"
+   ],
+   "reason": "O2: extracao hash-bound dos membros de arte do GAL.pak (panel.gif, ax/long txt + frames idle/walk01..04) para data/source_openbor/gal_town1; PAK completo nunca copiado",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/extract/gal_town1_art_extract_20261015.json",
+     "sha256": "a07ad09508be1dcc5fb9967b44dea13fce0b6ef5e86764651d9a133f2797f4c0"
+    }
+   ]
+  },
+  {
+   "id": "o2-source-subset-gal-town1-art",
+   "asset_id": "source_subset_gal_town1_art",
+   "kind": "openbor_source",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o2-extract-gal-town1-art"
+   ],
+   "reason": "Subconjunto de membros de arte do GAL town1 sob controle (9 arquivos hash-bound pelo extract record O2)",
+   "files": [
+    {
+     "role": "source",
+     "path": "data/source_openbor/gal_town1/data/bgs/town1/panel.gif",
+     "sha256": "14d8191b9080bbac22cdb4783e23544025420126935568d23b885c8c5d08ee6f"
+    },
+    {
+     "role": "model_text_ax",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/ax.txt",
+     "sha256": "b6c33ffc145b34aecad0a29fbd7077dde75df912a474eafb6fdb53884a367f41"
+    },
+    {
+     "role": "model_text_long",
+     "path": "data/source_openbor/gal_town1/data/chars/long/long.txt",
+     "sha256": "b4303437f798ddcea1e4db33e742bfb1a4fa59128104dd5e619b4820014373ce"
+    },
+    {
+     "role": "sprite_frame_ax_idle01",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/idle01.gif",
+     "sha256": "d9d342f6137f63691f5dbac5fcbeedee54c06b9f92d885e60a0d1a5042e67796"
+    },
+    {
+     "role": "sprite_frame_ax_walk01",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/walk01.gif",
+     "sha256": "f2d540123287037899fa87b71ceb425283e0a8b92009a2ddc1a6de2c795618ee"
+    },
+    {
+     "role": "sprite_frame_ax_walk02",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/walk02.gif",
+     "sha256": "4f489d9ab6ea342857c669c64cb1f8c2921d8a16364a517c992298da0db817d4"
+    },
+    {
+     "role": "sprite_frame_ax_walk03",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/walk03.gif",
+     "sha256": "ca498f9e297c988d531dc4bdde761c8c066b1a5ea405610ee370101d26a1f668"
+    },
+    {
+     "role": "sprite_frame_ax_walk04",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/walk04.gif",
+     "sha256": "1ebade06b3e956d5505056cfb3d98b6dd1c20f7a8380dfac5212d376c9e08e7d"
+    },
+    {
+     "role": "sprite_frame_long_idle01",
+     "path": "data/source_openbor/gal_town1/data/chars/long/idle01.gif",
+     "sha256": "a42955b8ac40937e37894850b5b9122e23f1436a854b354c39b4e7f5c66e0f0a"
+    }
+   ]
+  },
+  {
+   "id": "o2-art-conversion",
+   "asset_id": "art_conversion_gal_town1_o2",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o2-source-subset-gal-town1-art",
+    "o1-level-ir-gal-town1",
+    "o1-models-ir-gal-town1"
+   ],
+   "reason": "Record da conversao SMS O2: palco por dicionario (crop y32..224, K=192), paletas P0/P1 6-bit, poses TALL keyed, previews",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/art/o2_art_conversion_20261015.json",
+     "sha256": "9b1f7ce533fae0a10185db1df2f308c81c557e799d2be822cdcf021af4d317a9"
+    }
+   ]
+  },
+  {
+   "id": "o2-emission-r1",
+   "asset_id": "emission_gal_town1_o2",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "superseded",
+   "parents": [
+    "o2-art-conversion"
+   ],
+   "reason": "Emissao O2 rev1 (20261015): dados C + manifests de sprite + plano VRAM; preservada apos a re-emissao pinada",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/emit/o2_emission_20261015.json",
+     "sha256": "feb5c49a16cd814829ad82254bd9d6de9e977d3a0073265d332a9a38fe774a5f"
+    },
+    {
+     "role": "manifest_idle01_left",
+     "path": "data/generated/emit/o2_sprite_scene_idle01_left_20261015.json",
+     "sha256": "b16d4ef8b48e68210cbcd81b97bfe5fac71ba6a4295cb05bdd6c26f4660f5906"
+    },
+    {
+     "role": "manifest_idle01_right",
+     "path": "data/generated/emit/o2_sprite_scene_idle01_right_20261015.json",
+     "sha256": "34f5ea12406197db7a200dbf72409628aaf75d7e654588588a8672aa08870876"
+    },
+    {
+     "role": "manifest_walk01_left",
+     "path": "data/generated/emit/o2_sprite_scene_walk01_left_20261015.json",
+     "sha256": "058ccf6136791489cc633b361342dbb90f9fba6c0e5fde1f9963eb50f367b1f3"
+    },
+    {
+     "role": "manifest_walk01_right",
+     "path": "data/generated/emit/o2_sprite_scene_walk01_right_20261015.json",
+     "sha256": "767f0717b09e368e61b54ca3e3bcb569755d5d55eec0e622b4374510a4de918a"
+    },
+    {
+     "role": "manifest_walk03_left",
+     "path": "data/generated/emit/o2_sprite_scene_walk03_left_20261015.json",
+     "sha256": "984b3f007970b739392fa45ba2792156f9a5e0de4d45b25ea70cf6d231ded7ae"
+    },
+    {
+     "role": "manifest_walk03_right",
+     "path": "data/generated/emit/o2_sprite_scene_walk03_right_20261015.json",
+     "sha256": "22f562825c133d1d11a232003b233e6b930a0c081e4e47b5318acfcffaf0034d"
+    },
+    {
+     "role": "vram_plan",
+     "path": "data/generated/plans/o2_vram_plan_20261015.json",
+     "sha256": "fa4c9a2a7e06ec63657ab4a46acfac3b0c0c4162d89a42f6fb8de06a935b2172"
+    }
+   ]
+  },
+  {
+   "id": "o2-emission-r2",
+   "asset_id": "emission_gal_town1_o2",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 2,
+   "status": "candidate",
+   "supersedes": "o2-emission-r1",
+   "parents": [
+    "o2-art-conversion"
+   ],
+   "reason": "Emissao O2 rev2 (20261016): mascara de corte pre-computada (D10) + level.h sem O2_BUDGET_CAM_MIN; headers byte-identicos fora level.h/enemy_mask.h",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/emit/o2_emission_20261016.json",
+     "sha256": "e3655919c4eb0c313e2bd3acd53aa8f6ed1cc66a2c7b1a0ef99dd8cd54b088e8"
+    },
+    {
+     "role": "manifest_idle01_left",
+     "path": "data/generated/emit/o2_sprite_scene_idle01_left_20261016.json",
+     "sha256": "bb8be4a936e4d97d60ee2250390930c90b9c91888270c8c86c28167bbe3cbff8"
+    },
+    {
+     "role": "manifest_idle01_right",
+     "path": "data/generated/emit/o2_sprite_scene_idle01_right_20261016.json",
+     "sha256": "c4e93b75592e7e868632b91b492dbe5842cbbf7d7fe1387ae63d50a2b05bd1de"
+    },
+    {
+     "role": "manifest_walk01_left",
+     "path": "data/generated/emit/o2_sprite_scene_walk01_left_20261016.json",
+     "sha256": "3fc189de732c05cbd64811eeb94b484944939adf58eaea277ecf849cb04cf7bb"
+    },
+    {
+     "role": "manifest_walk01_right",
+     "path": "data/generated/emit/o2_sprite_scene_walk01_right_20261016.json",
+     "sha256": "62d6b200af7a4e4663edefa908f2625ece9cfaa9c724033e9cf8d6b48c2d2e1f"
+    },
+    {
+     "role": "manifest_walk03_left",
+     "path": "data/generated/emit/o2_sprite_scene_walk03_left_20261016.json",
+     "sha256": "7a57d0d2ec9f8178dbb8af6e143cc999a098924ac772aae1573f0ef7129ea3ec"
+    },
+    {
+     "role": "manifest_walk03_right",
+     "path": "data/generated/emit/o2_sprite_scene_walk03_right_20261016.json",
+     "sha256": "12e47e8dc2878bce9411b1ed35eb02e8a054af23a12b5ea07be57f0174d3f0de"
+    },
+    {
+     "role": "vram_plan",
+     "path": "data/generated/plans/o2_vram_plan_20261016.json",
+     "sha256": "fa4c9a2a7e06ec63657ab4a46acfac3b0c0c4162d89a42f6fb8de06a935b2172"
+    }
+   ]
+  },
+  {
+   "id": "o2-runtime-assets",
+   "asset_id": "runtime_assets_gal_town1_o2",
+   "kind": "runtime_resource",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o2-art-conversion"
+   ],
+   "reason": "Recursos de runtime do piloto O2 (poses TALL keyed, dicionario do palco, HUD de barras) pos-gates de producao",
+   "files": [
+    {
+     "role": "resource",
+     "path": "res/o2/stage/stage_corridor.png",
+     "sha256": "bcee28cae2d9370f9edfe0f391540120ba1d7d3798ff84e8133c0198b4327124"
+    },
+    {
+     "role": "hud",
+     "path": "res/o2/hud/hud_tiles.png",
+     "sha256": "1686810e555dbf68fc3fb0a8e59f238a82b875eeaa77387815ce6a1556bab8c1"
+    },
+    {
+     "role": "pose_ax_idle01_left",
+     "path": "res/o2/poses/ax_idle01_left.png",
+     "sha256": "1ff8b4d514b4ee521f2b0e01eff79806ebed3056b7d39ca96260dd7154da4a49"
+    },
+    {
+     "role": "pose_ax_idle01_right",
+     "path": "res/o2/poses/ax_idle01_right.png",
+     "sha256": "47c1514e8e2755c6771707fb209642c9d6ad69e3b290b12495857a87880948c2"
+    },
+    {
+     "role": "pose_ax_walk01_left",
+     "path": "res/o2/poses/ax_walk01_left.png",
+     "sha256": "6210fdeda73394b5dd870b59384613abc8c53c4a38eef0c3f7c0124577b487cb"
+    },
+    {
+     "role": "pose_ax_walk01_right",
+     "path": "res/o2/poses/ax_walk01_right.png",
+     "sha256": "e8ce0069130e611e34c00ec8a2eebaf779801aec437ecca889c337255f3c4aad"
+    },
+    {
+     "role": "pose_ax_walk03_left",
+     "path": "res/o2/poses/ax_walk03_left.png",
+     "sha256": "45060be4996569948ff9e0a480a2c13fe6e19548ecef65c421b30ba0ecbb0c76"
+    },
+    {
+     "role": "pose_ax_walk03_right",
+     "path": "res/o2/poses/ax_walk03_right.png",
+     "sha256": "2f87e07855f6ae1b42841b9fdb071bf43ed6ebd75efb8fb73bc53f8e7d076f43"
+    },
+    {
+     "role": "pose_long_idle01_left",
+     "path": "res/o2/poses/long_idle01_left.png",
+     "sha256": "6c38df2d27063dad50b452b73dfb1ed79550d2342aa4c7f35b961c598e65c526"
+    }
+   ]
+  }
+ ],
+ "heads": [
+  {
+   "asset_id": "gal_pak_intake",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o0-gal-pak-intake",
+   "approved": null
+  },
+  {
+   "asset_id": "bt_pak_intake",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o0-bt-pak-intake",
+   "approved": null
+  },
+  {
+   "asset_id": "donor_source_manifest",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o0-donor-source-manifest",
+   "approved": null
+  },
+  {
+   "asset_id": "dependency_inventory",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o0-dependency-inventory",
+   "approved": null
+  },
+  {
+   "asset_id": "compatibility_boundary",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o0-compatibility-boundary",
+   "approved": null
+  },
+  {
+   "asset_id": "port_manifest",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o1-port-manifest",
+   "approved": null
+  },
+  {
+   "asset_id": "source_subset_gal_town1",
+   "kind": "openbor_source",
+   "variant": "main",
+   "candidate": "o1-source-subset-gal-town1",
+   "approved": null
+  },
+  {
+   "asset_id": "source_subset_bt_rescue",
+   "kind": "openbor_source",
+   "variant": "main",
+   "candidate": "o1-source-subset-bt-rescue",
+   "approved": null
+  },
+  {
+   "asset_id": "extraction_record_gal_town1",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o1-extract-gal-town1",
+   "approved": null
+  },
+  {
+   "asset_id": "extraction_record_bt_rescue",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o1-extract-bt-rescue",
+   "approved": null
+  },
+  {
+   "asset_id": "level_ir_gal_town1",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o1-level-ir-gal-town1",
+   "approved": null
+  },
+  {
+   "asset_id": "models_ir_gal_town1",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o1-models-ir-gal-town1",
+   "approved": null
+  },
+  {
+   "asset_id": "level_ir_bt_rescue",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o1-level-ir-bt-rescue",
+   "approved": null
+  },
+  {
+   "asset_id": "models_ir_bt_rescue",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o1-models-ir-bt-rescue",
+   "approved": null
+  },
+  {
+   "asset_id": "determinism_diff",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o1-determinism-diff",
+   "approved": null
+  },
+  {
+   "asset_id": "neutral_frontend_scope",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o1-neutral-frontend-scope",
+   "approved": null
+  },
+  {
+   "asset_id": "o2_vdp_pilot_scope",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o2-vdp-pilot-scope-r2",
+   "approved": null
+  },
+  {
+   "asset_id": "extract_gal_town1_art",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o2-extract-gal-town1-art",
+   "approved": null
+  },
+  {
+   "asset_id": "source_subset_gal_town1_art",
+   "kind": "openbor_source",
+   "variant": "main",
+   "candidate": "o2-source-subset-gal-town1-art",
+   "approved": null
+  },
+  {
+   "asset_id": "art_conversion_gal_town1_o2",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o2-art-conversion",
+   "approved": null
+  },
+  {
+   "asset_id": "emission_gal_town1_o2",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o2-emission-r2",
+   "approved": null
+  },
+  {
+   "asset_id": "runtime_assets_gal_town1_o2",
+   "kind": "runtime_resource",
+   "variant": "main",
+   "candidate": "o2-runtime-assets",
+   "approved": null
+  }
+ ],
+ "legacy_inventory": []
+}

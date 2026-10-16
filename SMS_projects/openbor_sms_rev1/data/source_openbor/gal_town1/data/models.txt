@@ -1,0 +1,232 @@
+
+# Options
+nolost				0
+versusdamage 		0
+spdirection  		1 1 1 1
+autoland  			2
+colourselect 		1
+ajspecial 			1
+maxattacks			50
+maxattacktypes		50
+maxfreespecials		50
+nocheats			0
+credscore			0
+combodelay			200
+
+# Players
+load	ax				data/chars/ax/ax.txt
+load	tyris			data/chars/tyris/tyris.txt
+load	gilius			data/chars/gilius/gilius.txt
+load	chronos			data/chars/chronos/chronos.txt
+load	cragg			data/chars/cragg/cragg.txt
+load	kain			data/chars/kain/kain.txt
+load	sarah			data/chars/sarah/sarah.txt
+
+
+# Projectiles
+know	tornado			data/chars/misc/tornado/tornado.txt
+know	wave			data/chars/misc/wave/wave.txt
+know	iceberg			data/chars/misc/iceberg/iceberg.txt
+know	bird			data/chars/misc/bird/bird.txt
+know	sword			data/chars/misc/sword/sword.txt
+
+
+# Magic
+know	magic			data/chars/magic/magic.txt
+know	hurr			data/chars/magic/hurr/hurr.txt
+know	light			data/chars/magic/light/light.txt
+know	poison			data/chars/magic/poison/poison.txt
+know	dragon			data/chars/magic/dragon/dragon.txt
+know	ice				data/chars/magic/ice/ice.txt
+know	rock			data/chars/magic/rock/rock.txt
+know	water			data/chars/magic/water/water.txt
+
+
+# weapons (Bizzarrians)
+know	bizzar1			data/chars/misc/bizzar/bizzar1.txt
+know	bizzar2			data/chars/misc/bizzar/bizzar2.txt
+know	bizzar3			data/chars/misc/bizzar/bizzar3.txt
+know	bizzar4			data/chars/misc/bizzar/bizzar4.txt
+
+# weapons (Players)
+load	ax1				data/chars/ax/ax1/ax1.txt
+load	ax2				data/chars/ax/ax2/ax2.txt
+load	ax3				data/chars/ax/ax3/ax3.txt
+load	ax4				data/chars/ax/ax4/ax4.txt
+load	tyris1			data/chars/tyris/tyris1/tyris1.txt
+load	tyris2			data/chars/tyris/tyris2/tyris2.txt
+load	tyris3			data/chars/tyris/tyris3/tyris3.txt
+load	tyris4			data/chars/tyris/tyris4/tyris4.txt
+load	gilius1			data/chars/gilius/gilius1/gilius1.txt
+load	gilius2			data/chars/gilius/gilius2/gilius2.txt
+load	gilius3			data/chars/gilius/gilius3/gilius3.txt
+load	gilius4			data/chars/gilius/gilius4/gilius4.txt
+load	chronos1		data/chars/chronos/chronos1/chronos1.txt
+load	chronos2		data/chars/chronos/chronos2/chronos2.txt
+load	chronos3		data/chars/chronos/chronos3/chronos3.txt
+load	chronos4		data/chars/chronos/chronos4/chronos4.txt
+load	cragg1			data/chars/cragg/cragg1/cragg1.txt
+load	cragg2			data/chars/cragg/cragg2/cragg2.txt
+load	cragg3			data/chars/cragg/cragg3/cragg3.txt
+load	cragg4			data/chars/cragg/cragg4/cragg4.txt
+load	kain1			data/chars/kain/kain1/kain1.txt
+load	kain2			data/chars/kain/kain2/kain2.txt
+load	kain3			data/chars/kain/kain3/kain3.txt
+load	kain4			data/chars/kain/kain4/kain4.txt
+load	sarah1			data/chars/sarah/sarah1/sarah1.txt
+load	sarah2			data/chars/sarah/sarah2/sarah2.txt
+load	sarah3			data/chars/sarah/sarah3/sarah3.txt
+load	sarah4			data/chars/sarah/sarah4/sarah4.txt
+
+# Bizzarrians Projectiles
+know	fball			data/chars/misc/fball/fball.txt
+load	fball1			data/chars/misc/fball/fball1.txt
+know	pball			data/chars/misc/pball/pball.txt
+know	lball			data/chars/misc/lball/lball.txt
+know	iball			data/chars/misc/iball/iball.txt
+
+# Enemies
+know	long			data/chars/long/long.txt
+know	henin			data/chars/henin/henin.txt
+know	amaz			data/chars/amaz/amaz.txt
+know	skel			data/chars/skel/skel.txt
+know	orc				data/chars/orc/orc.txt
+know	claw			data/chars/claw/claw.txt
+know	lizard			data/chars/lizard/lizard.txt
+know	spear			data/chars/spear/spear.txt
+know	pancho			data/chars/pancho/pancho.txt
+know	badbro1			data/chars/badbro/badbro1.txt
+know	bitt1			data/chars/bitt/bitt1.txt
+know	adder1			data/chars/adder/adder1.txt
+know	minot1			data/chars/minot/minot1.txt
+know	headl1			data/chars/headl/headl1.txt
+know	guild1			data/chars/guild/guild1.txt
+know	mustang1		data/chars/mustang/mustang1.txt
+know	fiend1			data/chars/fiend/fiend1.txt
+know	prince1			data/chars/prince/prince1.txt
+know	mantle			data/chars/prince/mantle.txt
+know	wiz				data/chars/wiz/wiz.txt
+know    Thief1       	data/chars/thief/thief1.txt
+know    Thief2       	data/chars/thief/thief2.txt
+
+
+# Bosses
+know	badbro2			data/chars/badbro/badbro2.txt
+know	bitt2			data/chars/bitt/bitt2.txt
+know	adder2			data/chars/adder/adder2.txt
+know	minot2			data/chars/minot/minot2.txt
+know	headl2			data/chars/headl/headl2.txt
+know	guild2			data/chars/guild/guild2.txt
+know	mustang2		data/chars/mustang/mustang2.txt
+know	fiend2			data/chars/fiend/fiend2.txt
+know	prince2			data/chars/prince/prince2.txt
+know	abyss1			data/chars/abyss1/abyss1.txt
+know	left1			data/chars/abyss1/left1.txt
+know	right1			data/chars/abyss1/right1.txt
+
+
+# Enemy Projectiles
+know	etornado		data/chars/misc/tornado/etornado.txt
+know	ewave			data/chars/misc/wave/ewave.txt
+know	ebird			data/chars/misc/bird/ebird.txt
+know	evoid			data/chars/misc/void/evoid.txt
+know	pillar			data/chars/misc/pillar/pillar.txt
+know	lpillar			data/chars/magic/light/lpillar.txt
+know	ipillar			data/chars/magic/ice/ipillar.txt
+know	ppillar			data/chars/magic/poison/ppillar.txt
+
+
+# Enemy Magic
+know	ehurr			data/chars/magic/hurr/ehurr.txt
+know	elight			data/chars/magic/light/elight.txt
+know	epoison			data/chars/magic/poison/epoison.txt
+know	edragon			data/chars/magic/dragon/edragon.txt
+know	eice			data/chars/magic/ice/eice.txt
+know	erock			data/chars/magic/rock/erock.txt
+know	ewater			data/chars/magic/water/ewater.txt
+
+# Traps
+know	frock			data/chars/misc/frock/frock.txt
+know	sfire			data/chars/misc/sfire/sfire.txt
+
+# Flash
+load	Flash			data/chars/misc/flash/flash.txt
+load	Flash2			data/chars/misc/flash/flash2.txt
+load	Guard			data/chars/misc/guard/guard.txt
+load	Noflash			data/chars/misc/flash/noflash.txt
+
+
+# Dust
+load	Dust			data/chars/misc/dust/dust.txt
+load	Dust2			data/chars/misc/dust/dust2.txt
+load	Dust3			data/chars/misc/dust/dust3.txt
+load	Dust4			data/chars/misc/dust/dust4.txt
+
+#civilians
+know	civ01			data/chars/misc/civilian/civ01.txt
+know	civ02			data/chars/misc/civilian/civ02.txt
+know	civ03			data/chars/misc/civilian/civ03.txt
+
+#chests
+know	chest01			data/chars/misc/chests/chest01.txt
+know	chest02			data/chars/misc/chests/chest02.txt
+know	chest03			data/chars/misc/chests/chest03.txt
+know	barrell			data/chars/misc/barrell/barrell.txt
+
+#items
+know	potion			data/chars/misc/items/potion.txt
+know	book			data/chars/misc/items/book.txt
+
+
+#Money
+know	ingot			data/chars/misc/money/ingot.txt
+know	diam			data/chars/misc/money/diam.txt
+
+
+#Food
+know	bread			data/chars/misc/food/bread.txt
+know	meat			data/chars/misc/food/meat.txt
+
+#Misc
+know	counter			data/chars/misc/counter/counter.txt
+know	wagon			data/chars/misc/wagon/wagon.txt
+know	intro			data/chars/misc/intro/intro.txt
+know	hellin			data/chars/misc/hellin/hellin.txt
+know	hellout			data/chars/misc/hellout/hellout.txt
+know	falo			data/chars/misc/falo/falo.txt
+know	end				data/scenes/end/end.txt
+know	credits			data/scenes/credits/credits.txt
+
+#branches
+know	Sel01	Data/chars/misc/select/Sel01.txt
+know	Sel02	Data/chars/misc/select/Sel02.txt
+know	go1		Data/chars/misc/go/go1.txt
+know	go2		Data/chars/misc/go/go2.txt
+know	go3		Data/chars/misc/go/go3.txt
+know	go4		Data/chars/misc/go/go4.txt
+know	go5		Data/chars/misc/go/go5.txt
+know	go6		Data/chars/misc/go/go6.txt
+
+#1UP
+
+
+#text
+
+
+#dialogue
+
+
+#branches
+
+
+#bonus
+
+
+
+
+
+
+
+
+
+

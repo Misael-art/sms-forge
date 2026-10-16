@@ -1,0 +1,120 @@
+{
+  "schema": "openbor_sms_compatibility_boundary_v0",
+  "artifact_kind": "openbor_sms_pilot_and_compatibility_boundary",
+  "generated_at": "2026-10-15",
+  "owner_project": "openbor_sms_rev1",
+  "authority": {
+    "input_records": [
+      {"path": "data/generated/intake/gal_pak_intake_20261015.json", "sha256": "8ec356a6fc10cc6fd9cd4df64aa716eb2058970ad46925e533e3f153202a31c1"},
+      {"path": "data/generated/intake/bt_pak_intake_20261015.json", "sha256": "72cbff963486e6f77c5196a1b8d924cf27f0001ea839e0f422e1b624af90ae6e"},
+      {"path": "data/generated/intake/donor_source_manifest_20261015.json", "sha256": "37ee39dfa349ebb32a684dc544f6b32bca7ac19f8c621d014e349034c4f78e82"},
+      {"path": "data/generated/intake/dependency_inventory_20261015.json", "sha256": "69be8331841d842a6749494b0eeaf47e174da1bf4582348e53db13327bf081ab"}
+    ],
+    "claim_ceiling": "scope decision + source identity records only; not runtime, performance or module-acceptance evidence"
+  },
+  "pilot_decision": {
+    "pilots": [
+      {
+        "id": "golden_axe_legend",
+        "role": "initial_pilot",
+        "pak": {
+          "path": "rascunho/entrada_bruta/golden_axe_legend/GAL.pak",
+          "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+          "bytes": 39500889,
+          "format": "PACK v0 PAK32 (32-bit)",
+          "entries": 3502
+        },
+        "why": "recorte TOWN1 já inventariado pelo doador (perfis gal_town*), texto/modelos com hash, fila de eventos analisada; melhor custo de primeiro slice real"
+      },
+      {
+        "id": "battle_toads",
+        "role": "generalization_pilot",
+        "pak": {
+          "path": "rascunho/entrada_bruta/battle_toads/battle_toads.PAK",
+          "sha256": "f2c5319deb68da97c3a469d3cc27b0be6b05e6b840847237369e78a01146e7a6",
+          "bytes": 36324119,
+          "format": "PACK v0 PAK32 (32-bit)",
+          "entries": 2151
+        },
+        "why": "mede generalização real (perfil bt_rescue; pré-flight de tiles próprio, nativo rejeitado vs legado 880 tiles/512 px): não é o mesmo código com outro nome"
+      }
+    ],
+    "rule": "Mudança de pacote/modelo deve gerar dados sem editar C do núcleo por identidade do módulo; ampliar o contrato quando novas features forem implementadas; não alegar universalidade com dois casos."
+  },
+  "source_identity_boundary": {
+    "pak_external_origin": "unknown",
+    "openbor_pin": {
+      "repository": "DCurrent/openbor",
+      "commit": "787b6770409935137579715febf80cf7a529b748",
+      "scope": "conditional semantic reference (partial hash-verified extract); NOT evidence of the original module runtime and NOT the demonstrated origin of the PAKs",
+      "original_module_runtime_version": {"golden_axe_legend": "unknown", "battle_toads": "unknown"}
+    }
+  },
+  "license_boundary": [
+    {
+      "component": "sgdk_forge_tooling",
+      "license": "MIT",
+      "evidence": {"path": "/mnt/sdcard/Projects/Sgdk Forge/LICENSE", "sha256": "0b685fab1e0d2e0a9f85a4356a91c7bb16126be7b06e899f6cfed155cad2cf24"},
+      "scope": "porting provenance and reuse of tooling patterns; does not license module assets or character IP"
+    },
+    {
+      "component": "openbor_engine_reference_extract",
+      "license": "BSD-3-Clause",
+      "evidence": {"path": "rascunho/entrada_referencia/openbor_engine_787b6770/LICENSE", "sha256": "b8f3916944f0b5aee216ef7a494820d17ae658336a4680992dc244ebedecf3ea"},
+      "scope": "conditional semantic reference for queue/font/image semantics; partial extract, not full checkout"
+    },
+    {
+      "component": "module_paks",
+      "license": "not_publishable",
+      "evidence": {"gal_sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4", "bt_sha256": "f2c5319deb68da97c3a469d3cc27b0be6b05e6b840847237369e78a01146e7a6"},
+      "scope": "external origin/version unknown; exists the importer license does not license redistributing the game or its characters; assets stay in donor scratch; nothing here is publishable"
+    }
+  ],
+  "capability_boundary": [
+    {"id": "pak_container_and_inventory", "donor_status": "partial", "target_state": "adapted", "note": "host-side reader; full PAK never resident on SMS; fresh hash/index verified by intake"},
+    {"id": "models_animation_combat_data", "donor_status": "partial", "target_state": "adapted", "note": "types/cost rewritten for Z80; animation windows preserved with source origin"},
+    {"id": "level_event_queue_analysis", "donor_status": "partial", "target_state": "exact", "note": "host analysis preserved; IR carries path/line/bytes/hash"},
+    {"id": "level_event_scheduler", "donor_status": "partial", "target_state": "adapted", "note": "typed queue with owners (O4); cursor never advances without consuming the event"},
+    {"id": "archetype_roster_and_actor_handles", "donor_status": "partial", "target_state": "adapted", "note": "static pools with generation/cleanup/target invalidation"},
+    {"id": "terrain_camera_and_streaming", "donor_status": "partial", "target_state": "adapted", "note": "module scenarios/scroll adapted; not a stage-free adaptation"},
+    {"id": "skills_scripts_and_callbacks", "donor_status": "unknown", "target_state": "blocked", "note": "@script text is not implemented; reach analysis in O1; unknown reachable code blocks acceptance, no silent noop"},
+    {"id": "visual_assets_and_vdp_resources", "donor_status": "partial", "target_state": "adapted", "note": "6-bit palette, cutout, metasprites; identity-changing edits need decision and review"},
+    {"id": "ui_menus_options_and_persistence", "donor_status": "partial", "target_state": "adapted", "note": "O6 scope: menu/options/select/pause/continue/results"},
+    {"id": "sound_effects_and_music", "donor_status": "partial", "target_state": "adapted", "note": "tracked re-authoring/transcription; channel arbitration; no auto-conversion of WAV/BOR/OGG to PSG"},
+    {"id": "player_modes_1p_2p", "donor_status": "partial", "target_state": "adapted", "note": "1P first; 2P is a separate capability with its own test/budget if contracted (never promoted with 1P-only proof)"},
+    {"id": "performance_and_hardware_budget", "donor_status": "unproven", "target_state": "blocked", "note": "measure per SMS ROM; donor MD measurements are NOT SMS evidence"},
+    {"id": "integral_modules_and_generalization", "donor_status": "not_implemented", "target_state": "blocked", "note": "O8; no module is accepted while an essential owner is missing/unknown; an accepted phase requires all reachable owners"},
+    {"id": "gal_town1_player_start", "donor_status": "partial", "target_state": "adapted", "note": "matrix-only capability; own lowering policy declared in the TDD; source slot 1 first, spillover documented"}
+  ],
+  "profile_boundary": {
+    "declared_profiles": ["bt_rescue", "gal_town", "gal_town_amaz", "gal_town_long_henin", "gal_town_long_henin_amaz", "gal_town_mixed", "gal_town_slots8"],
+    "roles": {
+      "gal_town": "initial_cut",
+      "gal_town_amaz": "supporting_cut",
+      "gal_town_mixed": "supporting_cut",
+      "gal_town_long_henin": "supporting_cut",
+      "gal_town_long_henin_amaz": "supporting_cut",
+      "gal_town_slots8": "supporting_cut",
+      "bt_rescue": "second_pilot_cut"
+    },
+    "scope": "profiles are cuts, not compatibility claims; they anchor tests and diffs, not acceptance"
+  },
+  "intake_hygiene": {
+    "explicit_paths_only": "intake tooling requires explicit --path/--file/--dir/--tree arguments; no implicit donor path, no MUGEN project path is required, and no third-party EIO media is touched",
+    "fresh_measurements_20261015": {
+      "gal_pak_sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+      "bt_pak_sha256": "f2c5319deb68da97c3a469d3cc27b0be6b05e6b840847237369e78a01146e7a6",
+      "donor_importer_py_tree_sha256": "0701fdb59bd333a5d022e5810f6159c0903f33774011545da1c8da58bbec842b",
+      "donor_importer_py_file_count": 32
+    },
+    "registration": "locations data/source_openbor/ and data/generated/ were declared in doc/artifact_registry.json before any write into them; every managed file is registered with SHA-256"
+  },
+  "acceptance_rule": "Fix the broad versioned compatibility contract for each pilot before implementation; do not narrow it to obtain a green result. A module is complete only when all reachable essential features required by that contract are implemented or explicitly adapted, all resource/script dependencies are resolved, no essential reachable feature is unknown or silently omitted, the generated build is reproducible, and the declared gameplay/audio/hardware evidence passes for that ROM hash.",
+  "next_batch": {
+    "id": "O1",
+    "goal": "neutral front-end: PAK/model/level IR with origin, diffs and invalid cases; MD emission kept separate",
+    "ports": ["model_text.py", "level_inventory.py", "semantics.py", "reference_semantics.py", "level_event_table.py", "analyze.py"],
+    "ports_with_hashes_required": true,
+    "not_ported": ["emit_slice.py", "images.py", "streaming.py", "profiles.py"]
+  }
+}
