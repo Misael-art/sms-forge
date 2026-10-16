@@ -229,15 +229,18 @@ MD ficam fora do front-end neutro.
   O2.
 
 ## Handoff
-O2 está fechado medido (build #5; evidência selada; claims reconciliados).
-Próximo passo exato — **autorização de commit** (o lote está pronto para
-revisão humana) e, após, O3:
-1. **Commit**: aguardar autorização explícita do dono; nada foi commitado
-   (árvore `?? SMS_projects/openbor_sms_rev1/` e `?? tools/sms_wrapper/openbor2sms/`).
+O2 está fechado medido (build #5; evidência selada; claims reconciliados) e
+**commitado**.
+Próximo passo exato — **O3 (combate/IA)** ou **curadoria do lote**, a critério
+do dono:
+1. **Commit**: ✅ feito em 2026-10-16 — `555bb64` na branch
+   `feat/luta-mugen-motor` (107 arquivos, +39962 linhas; ROM e evidência
+   permanecem **locais** em `out/` por convenção do `.gitignore`; sem push —
+   a branch está 23 commits à frente do `origin`).
 2. **O3 (combate e IA)**: jump/attack/damage/IA por fonte com startup/active/
    recovery; hitboxes com profundidade; FSM; o corte do inimigo ganha seleção
    x-aware se necessário; herdar orçamento medido (8/linha, 439/448).
-3. **Curadoria do lote** (depois do commit): fechar as lições candidatas do O2
+3. **Curadoria do lote**: fechar as lições candidatas do O2
    em `doc/curation/` com ferramenta que mede (loop IX-relative → tabela na
    emissão; sinal do h-scroll/anel; pacing por contador na ROM).
 4. Pendências declaradas que não bloqueiam O3: PAL não medido; áudio não
