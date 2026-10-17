@@ -38,6 +38,13 @@ O que entrou no M5:
   `vline_min=207`); MRP 8 s×3 PASS (fps 59,5/59,47/59,58; spread 0,11; boot
   provado); `capture_evidence` PASS (luta na tela; HUD verde ~95/vermelha 50;
   luma 4031/1696); sessões isoladas fechadas (nenhum Emulicious vivo).
+- **Comparação O2→M5** (captura `586141…/evidence.png` vs M5): mesmo palco e
+  linhagem de HUD; o O2 mostrava só o jogador, o M5 mostra os dois atores em
+  combate na mesma cena.
+- **Fluxo do uploader (honesto)**: 1–2 sub-commits de 64 B por quadro
+  (64–128 B/f), com prioridade do jogador por design — a animação do inimigo
+  avança mais devagar quando o jogador está ativo (aceito e registrado; o
+  budget de 320 B/ator nunca engata na prática).
 - **Probe v2 (ferramentas — commit à parte)**: `emulicious_dap.py` +
   `measure_runtime_probe.py` + `measure_worst_frame.py` — leitura por DAP sem
   foco de janela; min-capture permanente do pior quadro (frame/cam/p2state em
