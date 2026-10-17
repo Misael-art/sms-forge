@@ -1372,7 +1372,7 @@
    "kind": "generated_record",
    "variant": "main",
    "revision": 1,
-   "status": "candidate",
+   "status": "superseded",
    "parents": [
     "o3-combat-scope",
     "o3-art-conversion",
@@ -1475,6 +1475,27 @@
      "role": "resource",
      "path": "res/o3/banks/o3_pose_blocks_20261017.bin",
      "sha256": "564ea87b32627ba8b21f3e3941345aadded50172693e95d923abb0516af9f19b"
+    }
+   ]
+  },
+  {
+   "id": "o3-emission-r2",
+   "asset_id": "emission_gal_town1_o3",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 2,
+   "status": "candidate",
+   "supersedes": "o3-emission-r1",
+   "parents": [
+    "o3-emission-r1"
+   ],
+   "reason": "M5: re-emissao como revisao nova apos correcao do inicializador de o3_*_anims no emissor (elemento sem \"{\" a partir do 2o; o header emitido nao compilava). Record re-gerado com o mesmo --generated-at do M4 e --record-suffix _r2 para nao sobrescrever a ref do r1 (dono unico por path no registry). Bancos 2..6, 12 manifestos, vram_plan e gates byte-identicos ao r1; o unico delta de conteudo e o hash/bytes de inc/o3/o3_anim.h (2657->2642 B); determinismo confirmado em execucoes repetidas.",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/emit/o3_emission_20261017_r2.json",
+     "sha256": "34d5b4fa73dbd9700827aba6564a275ff481f85284867826bbffc224b9810495",
+     "bytes": 21323
     }
    ]
   }
@@ -1694,7 +1715,7 @@
    "asset_id": "emission_gal_town1_o3",
    "kind": "generated_record",
    "variant": "main",
-   "candidate": "o3-emission-r1",
+   "candidate": "o3-emission-r2",
    "approved": null
   },
   {

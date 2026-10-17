@@ -11,6 +11,11 @@
     "libs": [
       "SMSlib",
       "PSGlib"
+    ],
+    "makesms_extra": [
+      "-pm",
+      "-mbank",
+      "res/o3/banks/o3_pose_blocks_20261017.bin:0:5:2"
     ]
   },
   "skeleton_version": 1,

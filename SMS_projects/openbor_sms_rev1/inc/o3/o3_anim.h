@@ -21,7 +21,7 @@ const o3_aframe o3_ax_anim_death[] = {{14,1}};
 #define O3_AX_ANIM_RISE 6
 #define O3_AX_ANIM_DEATH 7
 #define O3_AX_ANIM_COUNT 8
-const o3_anim o3_ax_anims[8] = {{o3_ax_anim_idle},1,1,255},{o3_ax_anim_walk},2,1,255},{o3_ax_anim_attack1},5,0,255},{o3_ax_anim_jump},2,0,255},{o3_ax_anim_pain2},2,0,255},{o3_ax_anim_fall2},5,0,1},{o3_ax_anim_rise},2,0,255},{o3_ax_anim_death},1,0,255}};
+const o3_anim o3_ax_anims[8] = {{o3_ax_anim_idle,1,1,255},{o3_ax_anim_walk,2,1,255},{o3_ax_anim_attack1,5,0,255},{o3_ax_anim_jump,2,0,255},{o3_ax_anim_pain2,2,0,255},{o3_ax_anim_fall2,5,0,1},{o3_ax_anim_rise,2,0,255},{o3_ax_anim_death,1,0,255}};
 const o3_attack o3_ax_attack = {0,-62,44,62,7,15,15,1,3};
 const o3_aframe o3_long_anim_idle[] = {{0,5}};
 const o3_aframe o3_long_anim_walk[] = {{1,7},{2,7}};
@@ -38,5 +38,5 @@ const o3_aframe o3_long_anim_death[] = {{11,5},{13,1},{11,5},{13,1},{11,5},{13,1
 #define O3_LONG_ANIM_RISE 5
 #define O3_LONG_ANIM_DEATH 6
 #define O3_LONG_ANIM_COUNT 7
-const o3_anim o3_long_anims[7] = {{o3_long_anim_idle},1,1,255},{o3_long_anim_walk},2,1,255},{o3_long_anim_attack1},4,0,255},{o3_long_anim_pain2},2,0,255},{o3_long_anim_fall2},5,0,1},{o3_long_anim_rise},2,0,255},{o3_long_anim_death},31,0,255}};
+const o3_anim o3_long_anims[7] = {{o3_long_anim_idle,1,1,255},{o3_long_anim_walk,2,1,255},{o3_long_anim_attack1,4,0,255},{o3_long_anim_pain2,2,0,255},{o3_long_anim_fall2,5,0,1},{o3_long_anim_rise,2,0,255},{o3_long_anim_death,31,0,255}};
 const o3_attack o3_long_attack = {0,-46,40,46,5,10,15,1,2};

@@ -5,12 +5,52 @@
 > não substitui este arquivo.
 
 ## Última atualização
-**2026-10-16 — lote O2 (piloto VDP) fechado medido: ROM build #5
-(`b0eb624f…`, 32768 B) roda a ritmo cheio (1.0 loop/frame) com movimento x/z,
-facing, animação, 1 inimigo, cenário rastreado por dicionário e HUD de piloto;
-evidência selada (18 artefatos) e claims reconciliados.**
+**2026-10-17 — M5 (runtime O3: FSM/IA/hit/uploader) fechado medido: ROM
+`b0eed40a…` (131072 B, bancária — 60 blocos de pose nos bancos 2–6) roda o
+combate O3 a 60 fps constante; `measure_worst_frame` PASS (`vovf_delta=0` em
+3000 quadros, `vline_min=207`) e `measure_runtime_probe` PASS (fps
+59,5/59,47/59,58; spread 0,11; boot provado) — ambos no mesmo SHA.**
 
-O que mudou no O2:
+O que entrou no M5:
+- **Runtime O3** (`src/main.c`): FSM (idle/chase/attack/hit/drop/rise) + IA do
+  inimigo + `resolve_hits` (dano/knockback/arcos) + dois streams de pose
+  bancados com troca de slot + HUD de barras; câmera/dicionário herdados do O2.
+  Núcleo de desenho de sprites em **asm `__naked`** nos dois loops (C
+  equivalente atrás de `O3_DRAW_ASM`) — **A/B asm↔C PASSOU byte a byte**.
+- **Uploader (D8)**: `stream_commit` com chunk de **320 B** por ator e
+  sub-commit de **64 B**; a cópia adapta relendo `SMS_VCounterPort` a cada
+  iteração; `SMS_VRAMmemcpy` (sem OTIR — GG-safe). Margem do gate de commit =
+  **30 linhas** (`(64*30)/228 + 22`); com 26 a MWF mostrava 12 derrames rasos
+  (~1 linha) por jitter da posição do custo.
+- **Custos medidos (Emulicious + `main.lst`)**: 1 iteração real do loop ≈ **16
+  linhas** de VBlank / 64 B (~57 c/B); prólogo do ator ~7,3 linhas; cópia da
+  SAT ~14 linhas; **coluna de BG = 44 linhas** (medida, quadro 300); **redraw
+  da LINHA INTEIRA do HUD = 52 linhas** (quadro 411; 32 tiles ≈ 1,6
+  linha/tile) — era o derrame de ~+22 do quadro de dano (estimativa antiga de
+  ~35 linhas para 2 linhas era otimista e foi refutada por medição).
+- **Correção medida no fechamento (HUD)**: `draw_hud` redesenha só a **faixa
+  cujo fill muda** (hit de 5 hp = 1 tile; morte 100→0 = 20 tiles) + **gate por
+  tile** (margem 26 = rabo fixo dos commits: 2 prólogos ~14,6 + saída ~2 +
+  folga) com **faixa pendente persistente** entre quadros; `draw_hud_boot`
+  desenha as duas linhas inteiras no boot (display desligado). Antes: MWF
+  `vovf_delta=1`; depois: **0**.
+- **Evidência executada no mesmo sha `b0eed40a…`**: MWF PASS (3000 quadros,
+  `vline_min=207`); MRP 8 s×3 PASS (fps 59,5/59,47/59,58; spread 0,11; boot
+  provado); `capture_evidence` PASS (luta na tela; HUD verde ~95/vermelha 50;
+  luma 4031/1696); sessões isoladas fechadas (nenhum Emulicious vivo).
+- **Probe v2 (ferramentas — commit à parte)**: `emulicious_dap.py` +
+  `measure_runtime_probe.py` + `measure_worst_frame.py` — leitura por DAP sem
+  foco de janela; min-capture permanente do pior quadro (frame/cam/p2state em
+  0xC7E5–E9; `__at` absoluto, custo ~0 — só escreve em novo mínimo).
+- **Limitações registradas**: **coluna de BG = 44 linhas** — com scrolling
+  (M6) o stream de colunas precisa de escrita fatiada (2 meias-colunas por
+  quadro) ou gate próprio; a janela do M5 tem `cam=0` (sem input). Queda
+  grande de vida no HUD é limitada pelo gate (resto sai nos quadros
+  seguintes). PAL não medido; sem áudio (M7). `measure_fps`/
+  `measure_frame_advance` N/A (sessão isolada) — pacing coberto pelo MRP.
+  Build de validação com `O3_SPILL_TRACE 0` (instrumentação TEMP fora).
+
+Histórico O2 (2026-10-16) — o que mudou no O2:
 - **Emissão SMS implementada** (`sms_art.py` + `sms_emit.py`, backend separado do
   front-end neutro — nunca importa `semantics.py`): palco por dicionário de
   k-medoides (**K=192**), paletas 6-bit (P0 12 códigos úteis = 10 cena + 2
@@ -135,19 +175,19 @@ Medições próprias do intake (ferramenta `openbor2sms`, não herdadas):
 ## Eixos de entrega (7) — gate final exige os 7 simultâneos
 | Eixo | Status | Prova |
 |------|--------|-------|
-| build | `buildado` | ROM build #5 `b0eb624f…` (32768 B) = `out/rom` = `out/build_record.json` |
-| validation_report | `buildado` | pre-gates verdes no build; `reconcile_claims` PASS (eixos declarados batem com artefatos) |
-| boot no emulador | `testado_em_emulador` | bundle publicado `out/evidence/sessions/586141…/` (capture.json, canvas 256×192, sha da ROM); registradores BlastEm (`out/evidence/blastem/regs_20261016/`) |
-| gameplay | `testado_em_emulador` (recorte O2) | vídeos walk6/depth6/up6/back6 + probe RAM (px/pz/facing/cam) + pixel 1:1 do framebuffer; **sem combate (O3)** |
-| fps regional (NTSC/PAL) | `testado_em_emulador` (NTSC) | janelas do probe 59.58/59.73/59.57 (nominal 59.9227…); **PAL declarado, não medido** |
-| áudio | `não iniciado` | fora do escopo O2 (declarado) |
-| memory bank atualizado | `documentado` | este arquivo + registros O0/O1/O2 |
+| build | `buildado` | ROM `b0eed40a…` (131072 B) = `out/rom`; pré-gates verdes no build |
+| validation_report | `buildado` | MWF PASS (`vovf_delta=0`, 3000 quadros, `vline_min=207`) + MRP PASS (fps 59,5/59,47/59,58) — mesmo SHA |
+| boot no emulador | `testado_em_emulador` | `capture_evidence` PASS (canvas 256×192, luma 4031/1696) + MRP boot provado; sessões isoladas publicadas em `out/evidence/sessions/` |
+| gameplay | `testado_em_emulador` (recorte M5) | FSM/IA/hit/uploader rodando com luta na tela (captura); **QA por input causal = M6** (ainda não medida) |
+| fps regional (NTSC/PAL) | `testado_em_emulador` (NTSC) | MRP 8 s×3: 59,5/59,47/59,58 (spread 0,11; nominal 59.9227); **PAL declarado, não medido** |
+| áudio | `não iniciado` | M7 (declarado fora do M5) |
+| memory bank atualizado | `documentado` | este arquivo + registros O0/O1/O2/M5 |
 
 > Status válidos: `não iniciado`, `documentado`, `implementado`, `buildado`,
 > `testado_em_emulador`, `validado_budget`. Toda linha diferente de
 > "não iniciado" EXIGE prova citada (caminho de arquivo/captura), não prosa.
-> **A entrega O2 não é o gate final de entrega**: áudio/PAL pendentes e o corte do
-> inimigo tem limitação declarada — O2 é marco medido, não delivery.
+> **O M5 não é o gate final de entrega**: gameplay por input causal (M6),
+> áudio (M7) e PAL pendentes — marco medido, não delivery.
 
 ## Decisões registradas
 - **Pilotos:** GAL = piloto inicial (recorte TOWN1 já inventariado pelo doador,
@@ -196,6 +236,25 @@ Medições próprias do intake (ferramenta `openbor2sms`, não herdadas):
 - **O2 — `palettes_manifest.json` adiado:** paletas canônicas no record de
   conversão; nenhum gate do O2 consome `--character`; criar quando O3+ exigir
   paleta por personagem (evita arquivo-morto).
+- **O3/M5 — uploader bancado (D8):** cópia banco→VRAM em chunks de **320 B**
+  por ator com sub-commit de **64 B**; o loop relê `SMS_VCounterPort` e para o
+  chunk quando a margem acaba (retoma no quadro seguinte); margem do gate de
+  commit = **30 linhas** (`(64*30)/228 + 22`; iteração ~16 + jitter ~2–3 +
+  rabo do 2º ator ~9,3 + folga) — calibrada por MWF (26 deixava 12 derrames
+  rasos ~1 linha).
+- **O3/M5 — HUD por delta + gate por tile:** o redesenho da linha inteira no
+  quadro de dano custava 52 linhas e derramava; agora só a faixa cuja cor muda
+  é redesenhada, com **faixa pendente persistente** e gate por tile (margem
+  26) — o restante sai nos quadros seguintes, sem mudança visual.
+- **O3/M5 — coluna de BG (herança O2) = 44 linhas medidas:** com scrolling
+  (M6) não cabe ao lado do resto do bloco (SAT ~14 + coluna 44 + rabo ~17);
+  decisão adiada para o M6 (escrita fatiada por sub-coluna ou gate próprio).
+  Registrado como limitação, não contornado.
+- **O3/M5 — método de localização de estáticas:** símbolos `__at` são
+  absolutos e o `.map` não lista estáticas locais do módulo; a base do módulo
+  foi achada por **varredura de assinatura na RAM** (base 0xC000;
+  cam=0xC045, written_col=0xC047, hp_drawn=0xC048, spill_v=0xC04A–C) — offsets
+  de objeto do `.lst` + base = endereço linkado.
 
 ## Blocker dominante atual
 **O3 (combate e IA) em andamento desde 2026-10-16** (escopo
@@ -227,8 +286,15 @@ declarada: 48.384 casos, pico 8 = limiar, 0 violações; cross-check brute force
 540/0; solo declarado = exatamente 1 drop (a 9ª célula da linha). Gates: 12/12
 manifests `audit_sprite_line_sim` + `measure_vram_map` aprovado + registry
 `check --scan` ok (35 artefatos); 84 testes. Records `o3-emission-r1` +
-`o3-bank-blocks` no registry. Próximo: M5 (runtime FSM/IA/hit/uploader;
-pinar maxfallspeed; cross-check `vdp_regs.bin` de sessão + tilemap bounds).
+`o3-bank-blocks` no registry.
+**M5 fechado (2026-10-17)**: runtime O3 no emulador — FSM/IA/hit/uploader +
+A/B asm↔C byte a byte + MWF `vovf_delta=0` (3000 quadros) + MRP 59,5 fps,
+tudo no SHA `b0eed40a…` (detalhe na "Última atualização"). Próximo: **M6** —
+input causal (`emulator_input.py --session ID --script`), alvos móveis e
+profundidades diferentes, pulo/tombo/recuperação, reteste FPS/pacing/MWF;
+**decisão aberta do M6**: escrita fatiada da coluna de BG (44 linhas medidas —
+sem ela, scrolling derrama); cross-checks pendentes: `vdp_regs.bin` de sessão,
+`audit_tilemap_bounds`, `audit_render_glitch`; pinar maxfallspeed.
 Blockers persistentes registrados (não bloqueiam O3): origem externa dos PAKs
 desconhecida; `skills_scripts_and_callbacks` = unknown; medições MD não
 transferíveis; **player-start de 2 argumentos do BT sem decisão de semântica**
@@ -272,37 +338,28 @@ MD ficam fora do front-end neutro.
   O2.
 
 ## Handoff
-O2 está fechado medido (build #5; evidência selada; claims reconciliados),
-**commitado** e com a **curadoria do lote fechada** (L134/L135; gate PASS).
-Próximo passo exato — **O3 (combate/IA)**, a critério do dono:
-1. **Commit**: ✅ feito em 2026-10-16 — `555bb64` na branch
-   `feat/luta-mugen-motor` (107 arquivos, +39962 linhas; ROM e evidência
-   permanecem **locais** em `out/` por convenção do `.gitignore`; sem push —
-   a branch está 23 commits à frente do `origin`).
-2. **O3 (combate e IA)**: em andamento desde 2026-10-16 — escopo D1–D12
-   (`doc/artifacts/o3_combat_scope_20261016.json`); **M1** fechado (lab
-   `mapper_vblank_copy`, veredito no README; L136 candidata aguarda decisão);
-   **M2** fechado (IR de animação `--kind model`; records
-   `gal_town1_{ax,long}_model_ir_20261016.json` no registry; D4 reconciliado:
-   `attack2` = diretiva/slot 2 em `anim attack1`). **M3** fechado (conversão das
-   60 pose-sides; gates recursos/luma/proveniência PASS; record
-   `o3_art_conversion_20261016.json` + 60 PNGs em `res/o3/poses` no registry).
-   **M4** fechado (emissão determinística: headers + bancos 2–6 + plano VRAM +
-   12 manifests; **bandas D9-a refutadas por medição → D9-a2 linhas exatas**;
-   gates 12/12 `audit_sprite_line_sim` + `measure_vram_map` aprovado + registry
-   `check --scan`; bundle `o3_emission_gates_20261017.json`). Próximo: M5
-   runtime (FSM/IA/hit/uploader/probe v2; pinar maxfallspeed); herdar orçamento
-   medido (8/linha, 439/448).
-3. **Curadoria do lote**: ✅ feita em 2026-10-16 —
-   `doc/curation/2026-10-16_l134_l135_openbor_o2_runtime_e_hscroll.json`
-   (L134 §125; L135 §126; aplicações L013/L035/L082/L089 e L006/L069;
-   `audit_learning_capture --root .` PASS). Mudanças fora do projeto
-   (doc/curation, doc/agent_learning, SMS_GLOBAL, skills) ainda **sem commit**
-   — aguardando decisão do dono.
-4. Pendências declaradas que não bloqueiam O3: PAL não medido; áudio não
-   iniciado; semântica de `spawn1 x z` (BT, diagnóstico preservado em
-   `bef0f287…`); `audit_doc_sync` global FAIL por luta_mugen (EIO pré-existente,
-   não tocar).
+O2 fechado medido e commitado (`555bb64`). **O3 em curso: M1–M4 commitados
+(`2d728da`) e curadoria L134/L135 (`2b2f4b3`) + L136 (`b6a2046`)** — branch
+`feat-luta-mugen-motor`, sem push (autorização do dono pendente).
+**M5 fechado medido nesta sessão** (ROM `b0eed40a…`; MWF `vovf_delta=0`; MRP
+59,5 fps; captura PASS). Próximo passo exato — **M6 (input causal)**:
+1. **Commit do lote M5**: pendente — `src/main.c` (runtime + HUD delta/gate +
+   margem 30), `inc/o3/o3_anim.h`, `.mddev/project.json`, `artifact_registry`,
+   este memory bank; ferramentas do probe v2 em commit **à parte** (curadoria).
+   Sem push.
+2. **M6 — input causal**: `emulator_input.py --session ID --script` com alvos
+   móveis, profundidades diferentes, pulo/tombo/recuperação e reteste
+   FPS/pacing/MWF. **Decisão aberta**: escrita fatiada da **coluna de BG (44
+   linhas medidas)** — sem ela, scrolling derrama; medir a taxa real de scroll
+   antes de escolher (2 meias-colunas/quadro vs sub-coluna vs gate). Cross-checks:
+   `vdp_regs.bin` de sessão, `audit_tilemap_bounds`, `audit_render_glitch`;
+   pinar maxfallspeed.
+3. **Curadoria do lote**: L134/L135/L136 fechadas e commitadas; probe v2
+   (`emulicious_dap.py`, `measure_runtime_probe.py`, `measure_worst_frame.py`)
+   falta commitar — mesmo lote do M5, à parte.
+4. Pendências declaradas que não bloqueiam: PAL não medido; áudio (M7);
+   semântica de `spawn1 x z` (BT, diagnóstico preservado em `bef0f287…`);
+   `audit_doc_sync` global FAIL por luta_mugen (EIO pré-existente, não tocar).
 
 Nota herdada do O0: `data/source_art/concept_art/` materializado **vazio** é o
 local designado do registry; sem contratos de arte em O0/O1, o
