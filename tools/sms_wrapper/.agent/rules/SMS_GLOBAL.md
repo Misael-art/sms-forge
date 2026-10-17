@@ -49,6 +49,9 @@ bloqueios). Handoff nunca substitui memory bank nem evidência.
   H-scroll está ao vivo: `SMS_setBGScrollX` ≠ 0 exige
   `VDPFEATURE_LEFTCOLBLANK`. Sem isso os 8 px da esquerda mostram lixo do
   tile que ainda não foi buscado (L043). Gate: `audit_hscroll_blank.py`.
+- Sinal e janela do h-scroll de PNT parcial: `N = (-cam) & 0xFF` e anel
+  mod-32 de colunas reescrito a cada passo de 8 px, inclusive voltando —
+  evidência e limites na §126 (L135).
 - O split de scroll por line interrupt é **horizontal**: o reg9 vertical é
   lido uma vez por frame e o wrap em modo 192 é 224 — lei, gate e técnica
   Sylvan Tale na §122 (L131).
@@ -2506,3 +2509,46 @@ LOTE F. A ferramenta julga o **plano declarado**: quem escreve VRAM fora do
 plano (DMA inexistente, stagers à mão) escapa — o par estático do código é
 `audit_tilemap_bounds.py`/`audit_sprite_mode.py`, o dinâmico é a sessão com
 dumps.
+
+## 125. Decisão por varredura não se conta em runtime: pré-computar na emissão (L134)
+
+O laço do SDCC que recarrega locais via IX custa ~115–150 ciclos por iteração
+(medido no piloto openbor_sms_rev1). Consequência de orçamento: contar ou
+decidir centenas de células por quadro derruba o ritmo — no O2, o corte de
+inimigos contado a cada quadro consumia ~2.07 quadros na pior pose e derrubava
+o loop abaixo de 1.0; a decisão pré-computada na **emissão** (bit a bit; no O2,
+máscara por pose+profundidade, 3 B/entrada, política conservadora) devolveu
+**1.0 loop/frame** em idle e caminhada, com o runtime só consultando o bit.
+Medição: `measure_runtime_probe.py` (ritmo do loop da ROM) e
+`audit_sprite_line_sim.py` (orçamento de sprites/linha do lado da emissão).
+
+Limites: os ciclos/iteração são ordem de grandeza **deste** projeto (SDCC sem
+otimização; loops IX-relative) — não constante universal do Z80 nem promessa
+para código otimizado. A máscara de 3 B/entrada é do elenco do piloto (poses e
+profundidades do GAL); outro elenco recalcula. A ferramenta de ritmo mede o
+efeito no loop, não atribui causalidade sozinha; a evidência do defeito
+original é o registro `decided+measured` do escopo rev2 do O2
+(`doc/artifacts/o2_vdp_pilot_scope_20261016.json`). Console segue LOTE F.
+
+## 126. Sinal e anel do h-scroll de PNT parcial (L135)
+
+Com a janela PNT declarada da câmera, o registrador de scroll X recebe
+`N = (-cam) & 0xFF` — o valor anda ao contrário da câmera; a tela x≥8 mostra a
+coluna PNT `cam_col + (x>>3)`. O anel mod-32 de colunas
+(`[cam_col..cam_col+31]`) precisa ser reescrito a cada passo de 8 px,
+**inclusive andando para trás** — anel reescrito só no avanço deixa colunas
+velhas na janela (tearing na volta). Fecha junto com L043/§6: `LEFTCOLBLANK`
+para x0..7, `LOCKHSCROLL` para HUD fixo e backdrop explícito (preto no O2).
+Evidência do O2: `cam = clamp(px-120,0,376) & ~7`;
+`SMS_setBGScrollX((unsigned char)(0u - cam))`; comparação framebuffer↔dados
+emitidos com 0 divergências fora dos retângulos de sprite em cam_col
+45/41/3/8/0 (inclui caminhada de volta); vídeos walk6/back6 gravados sem
+compositor (bundle selado, ROM `b0eb624f…`).
+
+Limites: **não há gate estático** para sinal/anel — a verificação da campanha é
+comparação framebuffer↔dados emitidos (procedimento, não ferramenta canônica) e
+os vídeos são evidência de comportamento, não oráculo. Candidatos ainda não
+aplicados: expected-dir para `audit_render_glitch.py` (declarado N/A no O2 por
+falta dele) ou comparador framebuffer↔colunas emitidas (natural no O4/terreno).
+A técnica do anel é do engine deste piloto; o sinal é convenção da janela
+declarada. Console segue LOTE F.

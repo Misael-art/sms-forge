@@ -1,10 +1,10 @@
 {
   "schema": "sms_lesson_routes_v1",
   "status": "canonical_application_routes",
-  "lesson_count": 117,
+  "lesson_count": 119,
   "source_coverage_sha256": "f086039f2d42542470ad5747b1693767e8dcd0ffedfab0e737f8b66d0b528755",
   "registry_source": "doc/curation/id_registry.json",
-  "registry_issued_through": "L133",
+  "registry_issued_through": "L135",
   "excluded_holes": [
     "L012",
     "L020",
@@ -143,7 +143,7 @@
           "path": "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md",
           "coverage": "gap_resolved_this_curation",
           "selection_basis": "ABI mismatch, canonical source-library reconstruction and smoke boundary",
-          "sha256": "65632b02db5ede0ff62b9a27efe275e4505e2c4c363d3304624cc3fc90cfb4cf"
+          "sha256": "b6f7d8eacf7cad0de569af9cb17347fa52d67bedbe5ee51c3902980cf1a72f8d"
         }
       ],
       "application_gap": null,
@@ -320,7 +320,7 @@
           "path": "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md",
           "coverage": "gap_resolved_this_curation",
           "selection_basis": "volatile markers, post-link RAM map and hexadecimal DAP reads",
-          "sha256": "65632b02db5ede0ff62b9a27efe275e4505e2c4c363d3304624cc3fc90cfb4cf"
+          "sha256": "b6f7d8eacf7cad0de569af9cb17347fa52d67bedbe5ee51c3902980cf1a72f8d"
         }
       ],
       "application_gap": null,
@@ -1026,7 +1026,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -1075,13 +1075,13 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md",
-          "sha256": "65632b02db5ede0ff62b9a27efe275e4505e2c4c363d3304624cc3fc90cfb4cf",
+          "sha256": "b6f7d8eacf7cad0de569af9cb17347fa52d67bedbe5ee51c3902980cf1a72f8d",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -1127,7 +1127,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -1566,7 +1566,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2245,7 +2245,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2280,7 +2280,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2315,7 +2315,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2385,7 +2385,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2463,7 +2463,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2506,7 +2506,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2541,7 +2541,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2584,7 +2584,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2619,7 +2619,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2812,7 +2812,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2847,7 +2847,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -2890,7 +2890,7 @@
         },
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
         }
@@ -4574,7 +4574,7 @@
       "application_entrypoints": [
         {
           "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-          "sha256": "80a70a67e311d17dc721776080b771ff5a5da64f80047d3da5070b4d8910f515",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "domain_review; scroll/raster promises are made in runtime-optimization context and must teach the axis asymmetry and wrap constant there"
         }
@@ -4615,6 +4615,44 @@
           "sha256": "9481d29829654217b9ab1b0012113ddf3532ae11647032d0e6b123d92778cedf",
           "coverage": "existing_application_entrypoint",
           "selection_basis": "domain_review; the VRAM map, reg6 sprite window and guarded free pockets belong to the VRAM/VBlank budget skill"
+        }
+      ]
+    },
+    {
+      "lesson_id": "L134",
+      "sources": [
+        "doc/curation/2026-10-16_l134_l135_openbor_o2_runtime_e_hscroll.json"
+      ],
+      "rule_section": "SMS_GLOBAL §125",
+      "current_rule_status": "fechada_com_ferramenta",
+      "application_entrypoints": [
+        {
+          "path": "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md",
+          "sha256": "b6f7d8eacf7cad0de569af9cb17347fa52d67bedbe5ee51c3902980cf1a72f8d",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "domain_review; o custo por iteração de loops com locais em IX é família de gotchas do compilador e precisa carregar o número medido no O2"
+        },
+        {
+          "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "domain_review; a decisão de morar a computação na emissão pertence à skill de otimização que já mede antes de escolher o atalho"
+        }
+      ]
+    },
+    {
+      "lesson_id": "L135",
+      "sources": [
+        "doc/curation/2026-10-16_l134_l135_openbor_o2_runtime_e_hscroll.json"
+      ],
+      "rule_section": "SMS_GLOBAL §126 (bullet em §6)",
+      "current_rule_status": "fechada_com_evidencia",
+      "application_entrypoints": [
+        {
+          "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
+          "sha256": "966dc40c71db0ea91c72203f4ca53ec4a4a8b02bb0b215d404ed77d508281aee",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "domain_review; o sinal/anel do h-scroll é promessa de scroll feita no contexto de runtime e precisa ser ensinado na seção de scroll da skill"
         }
       ]
     }
@@ -5159,6 +5197,24 @@
         "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md"
       ],
       "record_interpretation": "new_lesson_application_with_tool_and_dogfood_evidence"
+    },
+    {
+      "path": "doc/curation/2026-10-16_l134_l135_openbor_o2_runtime_e_hscroll.json",
+      "sha256": "1957a0a48d71d171cad52dd479214a9797ad1dd6efca825f3ed205335dd19a7e",
+      "type": "curation",
+      "defined_lesson_ids": ["L134", "L135"],
+      "referenced_lesson_ids": ["L006", "L013", "L035", "L043", "L069", "L082", "L089"],
+      "applied_lesson_ids": ["L006", "L013", "L035", "L069", "L082", "L089"],
+      "lessons_empty": false,
+      "has_validation_or_evidence": true,
+      "promotion_status": {
+        "status": "applied; curadoria do lote O2. Aprovacao humana: instrucao de 2026-10-16 ('PROSSIGA' ao handoff do lote O2).",
+        "new_lesson_ids": true,
+        "registry_unchanged": false,
+        "registry_current": "L135",
+        "promotion": "L134/L135 entram como fechada_com_ferramenta / fechada_com_evidencia; dogfood: audit_learning_capture --root . PASS"
+      },
+      "record_interpretation": "curation_batch_with_new_lessons_and_applications"
     }
   ]
 }

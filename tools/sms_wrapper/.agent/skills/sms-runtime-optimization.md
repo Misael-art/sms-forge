@@ -1,8 +1,9 @@
 # skill: sms-runtime-optimization
 
 Use ao otimizar Z80, renderer, SAT, cache, streaming ou lógica de combate.
-Aplica L013/L037/L061/L082/L089/L097/L131 e SMS_GLOBAL §§97–100/103/122. Qualquer
-técnica permanece candidata até custo e comportamento pagos na ROM alvo.
+Aplica L013/L037/L061/L082/L089/L097/L131/L134/L135 e SMS_GLOBAL
+§§97–100/103/122/125–126. Qualquer técnica permanece candidata até custo e
+comportamento pagos na ROM alvo.
 
 ## Scroll: assimetria dos eixos (SMS_GLOBAL §122, L131)
 
@@ -14,6 +15,22 @@ técnica permanece candidata até custo e comportamento pagos na ROM alvo.
   tilemap de 256 px; o truncamento de `unsigned char` já basta.
 - Gate: `audit_vscroll_wrap.py --screen-h <192|224|240> --source src/` antes
   de prometer parallax ou status bar vertical no GDD.
+- H-scroll (PNT parcial): `N = (-cam) & 0xFF` — o registrador anda ao
+  contrário da câmera; a tela x≥8 mostra a coluna PNT `cam_col+(x>>3)` e o
+  anel mod-32 de colunas é reescrito a cada 8 px, **inclusive voltando**
+  (§126/L135). Fecha com `LEFTCOLBLANK` (L043/§6) e `LOCKHSCROLL` para HUD
+  fixo. Sem gate estático para sinal/anel: a verificação é a comparação
+  framebuffer↔dados emitidos.
+
+## Varredura em runtime vs tabela na emissão (§125, L134)
+
+Laço do SDCC com locais via IX custa ~115–150 ciclos/iteração (ordem de
+grandeza medida no piloto O2): decidir centenas de células por quadro derruba o
+ritmo (~2.07 quadros na pior pose no O2). Decisão que depende de
+pose/profundidade/célula vai **pré-computada na emissão**, bit a bit
+(3 B/entrada no O2), e o runtime só consulta. Meça o efeito com
+`measure_runtime_probe.py` (ritmo de loop) e o lado da emissão com
+`audit_sprite_line_sim.py`; ciclos/iteração não são lei universal.
 
 ## Medir antes de escolher o atalho
 

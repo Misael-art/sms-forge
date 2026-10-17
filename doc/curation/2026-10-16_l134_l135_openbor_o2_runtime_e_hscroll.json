@@ -1,0 +1,134 @@
+{
+  "curation_id": "2026-10-16_l134_l135_openbor_o2_runtime_e_hscroll",
+  "date": "2026-10-16",
+  "title": "Curadoria do lote O2 (openbor_sms_rev1): decisão por varredura pré-computada na emissão (L134) e sinal/anel do h-scroll de PNT parcial (L135); pacing por contador na ROM e vigilância de ids de tile ficam como aplicações",
+  "kind": "curation",
+  "project": "SMS_projects/openbor_sms_rev1",
+  "scope": "Consumidor openbor_sms_rev1 (SMS 192 linhas, NTSC, SDCC+devkitSMS sem otimização, sessão privada Emulicious) e o motor tools/sms_wrapper/openbor2sms que o alimenta. L134: a ordem de grandeza (~115–150 ciclos/iteração) foi medida neste projeto — não é constante universal do Z80/SDCC. L135: o sinal N=(-cam)&0xFF é convenção da janela PNT declarada; o anel mod-32 é técnica do engine deste piloto. Nenhuma das duas foi medida em silício (console segue LOTE F).",
+  "authorization": "Dono autorizou em 2026-10-16 (resposta 'PROSSIGA' ao handoff do lote O2, que oferecia a curadoria das lições candidatas do memory bank como próximo passo). Emitidos L134/L135, apendadas as seções §125/§126 da SMS_GLOBAL, atualizadas rotas/registry/ledger e editadas as skills de aplicação. Triagem das 4 candidatas do memory bank: itens 1 e 2 viraram lições; item 3 (pacing) foi reconhecido como aplicação de L013/L035/L082/L089 e não recebeu ID; item 4 (id de tile) não tem incidente documentado — fica como aplicação vigiada de L006/L069.",
+  "lessons": [
+    {
+      "id": "L134",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Decisão que depende de varredura por célula (quem desenhar, o que cortar) não se conta em runtime quente no Z80: laço do SDCC que recarrega locais via IX custa ~115–150 ciclos por iteração — contar/decidir centenas de células por quadro derruba o ritmo. A decisão vai pré-computada na emissão, bit a bit; o runtime só consulta (no O2: máscara por pose+profundidade, 3 B/entrada, bit = célula incluída, política conservadora).",
+      "root_cause": "O primeiro runtime do O2 contava a inclusão de sprites por célula a cada quadro; o custo (loops IX-relative do SDCC) consumia ~2.07 quadros na pior pose e derrubava o loop abaixo de 1.0. A correção (decisão D10) moveu a decisão para o emissor e devolveu 1.0 loop/frame em idle e caminhada.",
+      "evidence": {
+        "scope_rev2": {
+          "path": "SMS_projects/openbor_sms_rev1/doc/artifacts/o2_vdp_pilot_scope_20261016.json",
+          "sha256": "98faf180052d0d0e63c35aae1d323100548b72bf256a4156b2dcf0aa3048b3e5",
+          "quote": "defeito medido: contagem em runtime (IX-relative ~115-150 ciclos/iteracao em SDCC) consumia ~2.07 frames na pior pose e derrubava o loop abaixo de 1.0; a decisao pre-computada devolve 1.0 em idle e caminhada",
+          "status": "decided+measured"
+        },
+        "mask": {
+          "path": "SMS_projects/openbor_sms_rev1/inc/o2/enemy_mask.h",
+          "sha256": "fcf2d3d2babcf63ce15db5ca038b359dcf4759f1235f1685b09b37bb846aa0c3",
+          "note": "6899 B; indice (pose*73+(pz-160))*3; consumo em src/main.c:185"
+        },
+        "runtime_probe": {
+          "path": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/586141485ce34b87aef6ece6ab4936b5/runtime/runtime_probe.json",
+          "sha256": "fedde8bd5d5f124ef57fa2ec9af96fbaceef68827fd9467d1603541d7bd6085e",
+          "note": "janelas 59.58/59.73/59.57; ritmo de loop 1.0; mesma ROM do bundle"
+        },
+        "bundle": {
+          "path": "SMS_projects/openbor_sms_rev1/out/evidence/o2_evidence_bundle_20261016.json",
+          "sha256": "f1ad7623033dfb0183fa7de771a5a715d8def677c7eb9475d804571c23de44d4",
+          "rom_sha256": "b0eb624f4978d542c08513bf2aa2676da0a15c37d8879abdb9f58339be261385"
+        }
+      },
+      "rule_section": "SMS_GLOBAL §125",
+      "tool_that_measures": "measure_runtime_probe.py (ritmo de loop da ROM) + audit_sprite_line_sim.py (orçamento de sprites/linha na emissão)",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md + tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md",
+      "measurement_limits": "Ciclos/iteração é ordem de grandeza medida neste projeto (SDCC sem otimização, locais recarregados via IX) — não é constante universal do Z80 nem promessa para SDCC otimizado. A máscara de 3 B/entrada é do piloto (poses e profundidades do GAL); outro elenco recalcula. A ferramenta de ritmo mede o efeito no loop, não atribui causalidade sozinha; a prova do defeito original é o registro decided+measured do escopo rev2."
+    },
+    {
+      "id": "L135",
+      "status": "fechada_com_evidencia",
+      "lesson": "H-scroll com PNT parcial: o registrador recebe N = (-cam) & 0xFF (o valor anda ao contrário da câmera); a tela x>=8 mostra a coluna PNT cam_col+(x>>3); o anel mod-32 de colunas precisa ser reescrito a cada passo de 8 px — inclusive andando para trás — senão colunas velhas ficam na janela. Fecha junto com L043/§6 (LEFTCOLBLANK em x0..7) e LOCKHSCROLL para HUD fixo; backdrop explícito.",
+      "root_cause": "Sem a convenção declarada, o scroll vira espelhado (usar cam em vez de -cam) ou ganha tearing na volta (anel reescrito só no avanço) — os dois passam por testes posicionais parados e só aparecem em movimento com framebuffer comparado. No O2 os dois foram corrigidos e a campanha de evidência os mediu.",
+      "evidence": {
+        "scope_rev2": {
+          "path": "SMS_projects/openbor_sms_rev1/doc/artifacts/o2_vdp_pilot_scope_20261016.json",
+          "sha256": "98faf180052d0d0e63c35aae1d323100548b72bf256a4156b2dcf0aa3048b3e5",
+          "quote": "implementado e verificado: cam = (px-120)&~7; N = (-cam) & 0xFF no registrador de h-scroll (SMS_setBGScrollX); tela x>=8 mostra a coluna PNT (cam_col + (x>>3)); anel mod-32 de colunas ([cam_col..cam_col+31]) reescrito a cada 8 px, inclusive andando para tras; VDPFEATURE_LOCKHSCROLL mantem HUD (linhas 0..1) fixo; VDPFEATURE_LEFTCOLBLANK cobre x0..7; backdrop = preto (SMS_setBackdropColor(1))"
+        },
+        "runtime": {
+          "path": "SMS_projects/openbor_sms_rev1/src/main.c",
+          "sha256": "b8fbc6e556a80beb26ee062e1ac33a874fddd47d532f2a2954897edeb59ecda7",
+          "note": "linha 294: SMS_setBGScrollX((unsigned char)(0u - cam)); linha 118: cam_col = (int)(cam >> 3); janela [cam_col..cam_col+31] contigua"
+        },
+        "campaign": {
+          "bundle": {
+            "path": "SMS_projects/openbor_sms_rev1/out/evidence/o2_evidence_bundle_20261016.json",
+            "sha256": "f1ad7623033dfb0183fa7de771a5a715d8def677c7eb9475d804571c23de44d4"
+          },
+          "pixel_check": "0 divergencias fora dos retangulos de sprite em cam_col 45/41/3/8/0 (inclui caminhada de volta); HUD exato; faixa x0..7 preta (LEFTCOLBLANK) — registro no doc/10-memory-bank do projeto",
+          "walk6": {
+            "path": "/tmp/smsforge-1000/586141485ce34b87aef6ece6ab4936b5/evidence/walk6.mp4",
+            "sha256": "6f14f2c50a5c4c6cd63dd25cfa99036fcaf3493be8f0504cd9a9a34ca186110e"
+          },
+          "back6": {
+            "path": "/tmp/smsforge-1000/586141485ce34b87aef6ece6ab4936b5/evidence/back6.mp4",
+            "sha256": "33d0b9e0687fb6da4971a21fd7154daaa7c307bd5ba84f8e8cde96556ba7c180"
+          },
+          "frames": [
+            "000380.png 9afe7e802c4524df4e040f9e9e65d6a049efea251c1678cfae1ad5163cae29e4",
+            "000519.png f4d0d6c0642190d96e9438ce6007cb4d6e1e8c001ccd12dad9a2496390f9853a",
+            "000599.png 6b3b5bda451ca4cc1f92070e62e48c9a4f8f9cc9b6f7bdf39007f5d04b2484c9"
+          ]
+        }
+      },
+      "rule_section": "SMS_GLOBAL §126 (bullet em §6)",
+      "tool_that_measures": "",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
+      "measurement_limits": "Sem gate estático conhecido para sinal/anel: a verificação do O2 foi comparação framebuffer↔dados emitidos (decodificação 1:1, procedimento de campanha, não ferramenta canônica) + vídeos gravados sem compositor. Candidatos de ferramenta ainda não aplicados: expected-dir para audit_render_glitch.py (declarado N/A no O2 por falta dele) ou comparador framebuffer↔colunas emitidas (natural no O4/terreno). Até lá, a lição fecha por evidência declarada — não por medição automática."
+    }
+  ],
+  "applications_of_existing_lessons": [
+    {
+      "lesson_ids": ["L013", "L035", "L082", "L089"],
+      "section": "SMS_GLOBAL §36/§37/§67/§74 — o título da janela não é prova; o contador da ROM é",
+      "what_was_applied": "Sessão isolada sem janela: measure_fps.py (lê o título do host) e measure_frame_advance.py (exige dígito-contador em tela) foram declarados N/A no escopo rev2 e substituídos pelas janelas do measure_runtime_probe (59.58/59.73/59.57, nominal 59.9227) + ritmo de loop 1.0 loop/frame. É a família L013 (o título diria 60fps numa ROM travada) aplicada ao caso windowless — nenhuma lei nova.",
+      "new_evidence": {
+        "runtime_probe": {
+          "path": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/586141485ce34b87aef6ece6ab4936b5/runtime/runtime_probe.json",
+          "sha256": "fedde8bd5d5f124ef57fa2ec9af96fbaceef68827fd9467d1603541d7bd6085e"
+        },
+        "windows": "59.41/59.72/59.42 (calibração) + 59.58/59.73/59.57 (publicada), ROM b0eb624f…"
+      },
+      "human_approval": "n/a (substituição declarada no próprio escopo rev2 do lote; sem mudança canônica)"
+    },
+    {
+      "lesson_ids": ["L006", "L069"],
+      "section": "SMS_GLOBAL §25 (TALL/geometria) + §6 (PNT de 9 bits: índice 0–511; 'índice 300 (>255) renderiza' provado no framebuffer)",
+      "what_was_applied": "Vigilância do item 4 do memory bank (id de tile truncado/TALL). Não houve incidente documentado no O2: as tabelas emitidas guardam deslocamentos de dicionário em u8 (0..191) com base K=192 somada no runtime; ids de par TALL são pid*2 <= 242; a entrada de PNT é de 16 bits (id+flags), nada de id absoluto 0..511 dentro de u8. Fica registrado como vigilância, não como lição nova: sem medição de defeito real, não há o que fechar por ferramenta.",
+      "new_evidence": {
+        "headers": [
+          "inc/o2/bg_cols.h sha 3c9041fdf31d3a00d4e144f3a9f1628d9cb0faea19f0cd2f029353f8bf9b693c (offsets de dicionário)",
+          "inc/o2/level.h sha 4e8b1b4ae3f041dea3744cb096577679835f64c1ce6cd31de66149622df0495d"
+        ]
+      },
+      "human_approval": "n/a (vigilância local; nenhuma mudança canônica)"
+    }
+  ],
+  "harness_traps_local_only": [
+    "Janela de sessão (O2): ferramentas que escrevem no diretório de sessão do projeto (measure_runtime_probe -> runtime/) exigem que a publicação do bundle venha ANTES — a trava de publish é target.exists(); ordem registrada no O2 e mantida no memory bank do projeto.",
+    "Curadoria desta sessão: source_coverage_sha256 de lesson_routes.json é fotografia do harness de coverage de 2026-10-10 (doc/curation/evidence/2026-10-10_harness_artifact_curation/coverage/) — não é recomputado a cada lição nova; L131–L133 também não o moveram. Não fabricar valor novo sem rodar o harness."
+  ],
+  "registry_and_process_notes": [
+    {
+      "topic": "papéis únicos por arquivo no artefato",
+      "note": "Registro multi-arquivo: um artefato com mais de um arquivo exige papéis únicos por arquivo (subconjuntos usam source + models_index); artifact_registry.py rejeita papel duplicado dentro do artefato. Convenção do harness de artefatos (2026-10-10); nenhuma lição nova do O2 — mantida como nota de processo."
+    }
+  ],
+  "closure": {
+    "new_lesson_ids_emitted": true,
+    "ids": ["L134", "L135"],
+    "registry_updated": "issued_through L133 -> L135",
+    "sms_global_updated": "§125 e §126 apendadas (nunca renumerar); bullet novo em §6",
+    "skills_updated": ["sms-runtime-optimization.md", "sms-z80-sdcc-gotchas.md"],
+    "lesson_routes": "rotas L134/L135 adicionadas; SHAs das skills atualizados em todas as rotas que as citam",
+    "next_gate_to_run": "audit_learning_capture.py --root . (esperado PASS) e --self-check",
+    "open_gap": "L135 sem ferramenta automática (framebuffer↔dados emitidos); candidato declarado para O4/terreno. LOTE F (silício) segue aberto para todas as lições do lote."
+  },
+  "dedup_key": "openbor_o2_l134_runtime_scan_precompute_l135_hscroll_sign_ring_20261016"
+}
