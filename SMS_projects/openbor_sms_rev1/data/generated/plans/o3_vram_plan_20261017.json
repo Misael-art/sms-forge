@@ -1,0 +1,30 @@
+{
+ "schema": "sms_vram_plan_v1",
+ "screen_height": 192,
+ "vertical_scroll": false,
+ "max_sprites": 58,
+ "reg6": "0xFB",
+ "name_base": 14336,
+ "regions": [
+  {
+   "label": "spr_tiles",
+   "addr": 0,
+   "bytes": 7424,
+   "role": "sprite_tiles"
+  },
+  {
+   "label": "bg_tiles",
+   "addr": 7424,
+   "bytes": 6144,
+   "role": "bg_tiles"
+  },
+  {
+   "label": "hud_tiles",
+   "addr": 13568,
+   "bytes": 96,
+   "role": "bg_tiles"
+  }
+ ],
+ "extra_name_tables": [],
+ "pockets": []
+}

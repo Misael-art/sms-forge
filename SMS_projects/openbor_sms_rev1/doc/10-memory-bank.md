@@ -198,9 +198,37 @@ Medições próprias do intake (ferramenta `openbor2sms`, não herdadas):
   paleta por personagem (evita arquivo-morto).
 
 ## Blocker dominante atual
-**O3 (combate e IA) não iniciado.** O backend SMS existe e o piloto VDP O2 está
-medido; falta jump/attack/damage/IA e revisão humana dos artefatos de piloto —
-sem isso não há eixo de gameplay completo nem delivery.
+**O3 (combate e IA) em andamento desde 2026-10-16** (escopo
+`doc/artifacts/o3_combat_scope_20261016.json`, D1–D12). Fechados: **M1** — smoke
+de mapper+uploader no laboratório (`SMS_projects/_laboratorio/mapper_vblank_copy`;
+veredito medido em dois emuladores: a cópia bancada→VRAM **fora do VBlank chega
+íntegra**, 1856/1856 B; a regra §9 permanece por efeito visual; L136 candidata
+aguarda autorização do dono) e **M2** — IR de animação no frontend (`--kind
+model`; records por personagem hasheados, no registry). Reconciliação D4
+confirmada no IR: as caixas do recorte vivem na **diretiva** `attack2` (slot 2)
+*dentro de* `anim attack1` (ax a102–a104: 240,142,44,62,7,…,15,15; long
+a102–a103: 240,158,40,46,5,…,10,15) e a `anim attack2` usa `attack` (slot 1) —
+diretiva ≠ animação; atribuição estado-até-limpar confere com a fonte.
+**M3 fechado (2026-10-16)**: 60 pose-sides convertidas no canvas medido (80×96;
+células 8×16 conferidas contra o escopo), P1 herdada do O2 sem mudança
+(rms/canal 23,76); 30 GIFs sha-bound pelo extract r2; determinismo byte-idêntico;
+gates `audit_validate_resources` (60 PNGs), `audit_luma_floor` (pares declarados
++ near pairs dY=9 documentados), `audit_provenance`, registry `check --scan`
+todos PASS; 68 testes.
+**M4 fechado (2026-10-17)**: emissão O3 determinística byte a byte — 6 headers
+(`inc/o3/o3_poses.h`, `o3_blocks.h`, `o3_rows.h`, `o3_anim.h`, `o3_arcs.h`,
+`level.h`), bancos do mapper 2–6 (79744/81920 B, 60 blocos), plano de VRAM
+427/448 (reg6 `0xFB`), 12 manifests. **D9-a (bandas de 8 linhas) refutado por
+medição** durante a emissão (solo declarado fall03/death01 caía 10 células por
+cascata entre linhas adjacentes): política revisada **D9-a2 — contagem exata
+por scanline** (tabela estática `o3_ax_rows[32][6]` no ROM + `ec[6]` de u8 na
+RAM; passo 16 px ⇒ linha visível coberta por ≤1 linha de cada ator). Varredura
+declarada: 48.384 casos, pico 8 = limiar, 0 violações; cross-check brute force
+540/0; solo declarado = exatamente 1 drop (a 9ª célula da linha). Gates: 12/12
+manifests `audit_sprite_line_sim` + `measure_vram_map` aprovado + registry
+`check --scan` ok (35 artefatos); 84 testes. Records `o3-emission-r1` +
+`o3-bank-blocks` no registry. Próximo: M5 (runtime FSM/IA/hit/uploader;
+pinar maxfallspeed; cross-check `vdp_regs.bin` de sessão + tilemap bounds).
 Blockers persistentes registrados (não bloqueiam O3): origem externa dos PAKs
 desconhecida; `skills_scripts_and_callbacks` = unknown; medições MD não
 transferíveis; **player-start de 2 argumentos do BT sem decisão de semântica**
@@ -211,14 +239,29 @@ probe); PAL não medido; sem áudio. Restrição de lote: `semantics.py` e decis
 MD ficam fora do front-end neutro.
 
 ## Lições abertas
-- Candidatas a curation do O2 (fechar na curadoria do lote, com ferramenta):
-  1. loops IX-relative do SDCC custam ~115–150 ciclos/iteração em Z80 — orçamento
-     de linha não se conta no runtime; pré-computar na emissão (D10);
-  2. sinal do h-scroll: `N = (-cam) & 0xFF` (não `cam`) e anel mod-32 de colunas
-     fechando o wrap de 256 px, inclusive andando para trás;
-  3. `SMS_waitForVBlank` quantiza o ritmo; medir o loop com contador na ROM
-     (`measure_runtime_probe`) em vez de inferir de título de janela;
-  4. id de tile truncado (se reincidir) e validade do id de pares TALL.
+- **Curadoria do lote O2 feita em 2026-10-16**
+  (`doc/curation/2026-10-16_l134_l135_openbor_o2_runtime_e_hscroll.json`;
+  `audit_learning_capture --root .` PASS, self-check OK):
+  1. **L134 (§125)** — loops IX-relative do SDCC custam ~115–150
+     ciclos/iteração; decisão por varredura vai pré-computada na emissão
+     (D10; máscara 3 B/entrada). Ferramentas: `measure_runtime_probe`,
+     `audit_sprite_line_sim`;
+  2. **L135 (§126)** — sinal do h-scroll `N = (-cam) & 0xFF` e anel mod-32 de
+     colunas reescrito inclusive ao voltar; **fechada por evidência** — sem
+     gate estático; candidato de ferramenta declarado para O4/terreno;
+  3. pacing por contador na ROM — **aplicação** de L013/L035/L082/L089 (sem ID
+     novo; `measure_fps`/`measure_frame_advance` continuam N/A na sessão
+     isolada);
+  4. vigilância de ids de tile/par TALL — **aplicação** de L006/L069; nenhum
+     incidente documentado no O2 (offsets u8 + base K=192; pid*2 ≤ 242).
+- **L136 candidata medida, aguardando autorização do dono** — o caso controlado
+  do laboratório (`mapper_vblank_copy`, evidência de dois emuladores) refuta
+  L047/§9 **como mecanismo de perda de dado**: a cópia bancada→VRAM fora do
+  VBlank chega íntegra (1856/1856 B; ~230 linhas de cópia, ~8,07 B/linha). A
+  regra §9 permanece por **efeito visual** (resíduo de redesenho a meio quadro).
+  Fechamento previsto: `doc/curation/2026-10-16_l136_vram_fora_do_vblank.json`
+  + §127 + emenda do bullet §9 + ledger/rotas (evitar co-mingling); **nada
+  escrito sem autorização**.
 - Reincidência vigiada: medição de outro console não é prova (L001);
   representação errada não vira gate humano (L036).
 - Registro: artefato com mais de um arquivo exige papéis únicos por arquivo (o
@@ -229,20 +272,33 @@ MD ficam fora do front-end neutro.
   O2.
 
 ## Handoff
-O2 está fechado medido (build #5; evidência selada; claims reconciliados) e
-**commitado**.
-Próximo passo exato — **O3 (combate/IA)** ou **curadoria do lote**, a critério
-do dono:
+O2 está fechado medido (build #5; evidência selada; claims reconciliados),
+**commitado** e com a **curadoria do lote fechada** (L134/L135; gate PASS).
+Próximo passo exato — **O3 (combate/IA)**, a critério do dono:
 1. **Commit**: ✅ feito em 2026-10-16 — `555bb64` na branch
    `feat/luta-mugen-motor` (107 arquivos, +39962 linhas; ROM e evidência
    permanecem **locais** em `out/` por convenção do `.gitignore`; sem push —
    a branch está 23 commits à frente do `origin`).
-2. **O3 (combate e IA)**: jump/attack/damage/IA por fonte com startup/active/
-   recovery; hitboxes com profundidade; FSM; o corte do inimigo ganha seleção
-   x-aware se necessário; herdar orçamento medido (8/linha, 439/448).
-3. **Curadoria do lote**: fechar as lições candidatas do O2
-   em `doc/curation/` com ferramenta que mede (loop IX-relative → tabela na
-   emissão; sinal do h-scroll/anel; pacing por contador na ROM).
+2. **O3 (combate e IA)**: em andamento desde 2026-10-16 — escopo D1–D12
+   (`doc/artifacts/o3_combat_scope_20261016.json`); **M1** fechado (lab
+   `mapper_vblank_copy`, veredito no README; L136 candidata aguarda decisão);
+   **M2** fechado (IR de animação `--kind model`; records
+   `gal_town1_{ax,long}_model_ir_20261016.json` no registry; D4 reconciliado:
+   `attack2` = diretiva/slot 2 em `anim attack1`). **M3** fechado (conversão das
+   60 pose-sides; gates recursos/luma/proveniência PASS; record
+   `o3_art_conversion_20261016.json` + 60 PNGs em `res/o3/poses` no registry).
+   **M4** fechado (emissão determinística: headers + bancos 2–6 + plano VRAM +
+   12 manifests; **bandas D9-a refutadas por medição → D9-a2 linhas exatas**;
+   gates 12/12 `audit_sprite_line_sim` + `measure_vram_map` aprovado + registry
+   `check --scan`; bundle `o3_emission_gates_20261017.json`). Próximo: M5
+   runtime (FSM/IA/hit/uploader/probe v2; pinar maxfallspeed); herdar orçamento
+   medido (8/linha, 439/448).
+3. **Curadoria do lote**: ✅ feita em 2026-10-16 —
+   `doc/curation/2026-10-16_l134_l135_openbor_o2_runtime_e_hscroll.json`
+   (L134 §125; L135 §126; aplicações L013/L035/L082/L089 e L006/L069;
+   `audit_learning_capture --root .` PASS). Mudanças fora do projeto
+   (doc/curation, doc/agent_learning, SMS_GLOBAL, skills) ainda **sem commit**
+   — aguardando decisão do dono.
 4. Pendências declaradas que não bloqueiam O3: PAL não medido; áudio não
    iniciado; semântica de `spawn1 x z` (BT, diagnóstico preservado em
    `bef0f287…`); `audit_doc_sync` global FAIL por luta_mugen (EIO pré-existente,

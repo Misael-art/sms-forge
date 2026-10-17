@@ -14,6 +14,7 @@ from openbor2sms.frontend import (
     extract_pak_members,
     level_ir,
     line_spans,
+    model_ir,
     models_ir,
 )
 from openbor2sms.pak import PakError, build_pak32, sha256_file
@@ -33,6 +34,31 @@ MODELS_TEXT = (
     "load long data/chars/alt/long_alt.txt\n"
     "know Item data/items/item.txt\n"
 )
+MODEL_TEXT = (
+    "name Ax\r\n"
+    "type player\r\n"
+    "\r\n"
+    "anim idle\r\n"
+    "loop 1\r\n"
+    "delay 8\r\n"
+    "offset 14 60\r\n"
+    "bbox 10 20 30 40\r\n"
+    "frame data/chars/ax/IDLE01.gif\r\n"
+    "delay 10\r\n"
+    "frame data/chars/ax/IDLE02.gif\r\n"
+    "\r\n"
+    "anim attack1\r\n"
+    "range 20 40\r\n"
+    "landframe 1\r\n"
+    "attack 240 142 44 62 7 0 15\r\n"
+    "frame data/chars/ax/A101.gif\r\n"
+    "attack1 0 0 0 0 0\r\n"
+    "frame data/chars/ax/A102.gif\r\n"
+    "@script\r\n"
+    "void main(){}\r\n"
+    "@end_script\r\n"
+    "frame data/chars/ax/A103.gif\r\n"
+)
 
 
 class FrontendTests(unittest.TestCase):
@@ -46,6 +72,12 @@ class FrontendTests(unittest.TestCase):
         pak = tmp / "fixture.pak"
         pak.write_bytes(blob)
         return pak, blob
+
+    def _model_source(self, tmp: Path):
+        source = tmp / "data/chars/ax/ax.txt"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_bytes(MODEL_TEXT.encode("utf-8"))
+        return source
 
     def test_extract_records_identity_and_is_idempotent(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -179,6 +211,88 @@ class FrontendTests(unittest.TestCase):
             self.assertEqual(span.decode("utf-8"), "load Long data/chars/long/long.txt")
             self.assertEqual(first["line"], 1)
             self.assertEqual(first["byte_offset"], 0)
+
+    def test_model_ir_origin_spans_reconstruct_source_bytes_across_block_kinds(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = self._model_source(Path(tmp))
+            ir = model_ir(source, "data/chars/ax/ax.txt", sha256_file(source), generated_at="t")
+            self.assertEqual(ir["schema"], "openbor_sms_frontend_model_ir_v1")
+            raw = source.read_bytes()
+            for row in ir["header"]:
+                span = raw[row["byte_offset"] : row["byte_offset"] + row["byte_length"]]
+                self.assertEqual(span.decode("utf-8"), row["raw"])
+            for anim in ir["anims"]:
+                span = raw[anim["byte_offset"] : anim["byte_offset"] + anim["byte_length"]]
+                self.assertTrue(span.decode("utf-8").startswith("anim "))
+                for frame in anim["frames"]:
+                    span = raw[frame["byte_offset"] : frame["byte_offset"] + frame["byte_length"]]
+                    self.assertTrue(span.decode("utf-8").startswith("frame "))
+                    for attack in frame["attacks"]:
+                        span = raw[attack["byte_offset"] : attack["byte_offset"] + attack["byte_length"]]
+                        self.assertTrue(span.decode("utf-8").startswith(("attack", "shock")))
+                for script in anim["scripts"]:
+                    span = raw[script["byte_offset"] : script["byte_offset"] + script["byte_length"]]
+                    text = span.decode("utf-8")
+                    self.assertTrue(text.startswith("@script"))
+                    self.assertTrue(text.endswith("@end_script"))
+                    self.assertEqual(script["end_line"], script["line"] + 2)
+
+    def test_model_ir_types_loop_landframe_range_and_complete_attack_boxes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = self._model_source(Path(tmp))
+            ir = model_ir(source, "data/chars/ax/ax.txt", sha256_file(source), generated_at="t")
+            self.assertEqual(ir["counts"], {"anims": 2, "frames": 5, "attacks": 1, "scripts": 1})
+            idle = ir["anims"][0]
+            self.assertEqual(
+                (idle["name"], idle["loop"], idle["landframe"], idle["range"]),
+                ("idle", 1, None, None),
+            )
+            self.assertEqual(idle["frames"][0]["delay"], 8)
+            self.assertEqual(idle["frames"][1]["delay"], 10)
+            self.assertEqual(idle["frames"][0]["offset"], [14, 60])
+            self.assertEqual(idle["frames"][0]["bbox"], [10, 20, 30, 40])
+            attack1 = ir["anims"][1]
+            self.assertEqual(
+                (attack1["name"], attack1["loop"], attack1["landframe"], attack1["range"]),
+                ("attack1", 0, 1, [20, 40]),
+            )
+            box = attack1["frames"][0]["attacks"][0]
+            self.assertEqual(
+                (
+                    box["slot"], box["x"], box["y"], box["right"], box["down"], box["damage"],
+                    box["power"], box["block"], box["noflash"], box["pausetime"], box["depth"],
+                ),
+                (1, 240, 142, 44, 62, 7, 0, 15, None, None, None),
+            )
+            self.assertEqual(attack1["frames"][1]["attacks"], [])
+            self.assertTrue(attack1["frames"][2]["script_bound"])
+
+    def test_model_ir_is_deterministic_and_marks_units_only_where_pinned(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = self._model_source(Path(tmp))
+            digest = sha256_file(source)
+            first = model_ir(source, "data/chars/ax/ax.txt", digest, generated_at="t")
+            second = model_ir(source, "data/chars/ax/ax.txt", digest, generated_at="t")
+            self.assertEqual(json.dumps(first, sort_keys=True), json.dumps(second, sort_keys=True))
+            declared = {row["command"]: row for row in first["units"]["declared"]}
+            self.assertIn("delay", declared)
+            self.assertEqual(declared["delay"]["status"], "hypothesis")
+            for command in ("landframe", "range", "loop", "attack"):
+                self.assertIn(command, first["units"]["undeclared_commands"])
+            with self.assertRaises(FrontendError):
+                model_ir(source, "data/chars/ax/ax.txt", "0" * 64, generated_at="t")
+
+    def test_model_ir_reports_malformed_anim_directives_with_line(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            source = tmp / "data/chars/ax/ax.txt"
+            source.parent.mkdir(parents=True, exist_ok=True)
+            source.write_text("anim idle\nrange 5\nlandframe x\nloop nope\n", encoding="utf-8")
+            ir = model_ir(source, "data/chars/ax/ax.txt", sha256_file(source), generated_at="t")
+            anim_issues = " | ".join(ir["anims"][0]["issues"])
+            self.assertIn("2: range needs two integers", anim_issues)
+            self.assertIn("3: landframe needs an integer", anim_issues)
+            self.assertTrue(any("loop needs an integer" in issue for issue in ir["issues"]))
 
     def test_ir_fails_closed_on_mismatch_non_utf8_and_odd_line_breaks(self):
         with tempfile.TemporaryDirectory() as tmp:

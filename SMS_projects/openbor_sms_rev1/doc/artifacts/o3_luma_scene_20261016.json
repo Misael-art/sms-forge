@@ -1,0 +1,22 @@
+{
+  "scope": "O3 — pares criticos de contraste do recorte (HUD herdado + atores x palco + atores entre si)",
+  "generated_at": "2026-10-16",
+  "pairs": [
+    {"fg": [0, 170, 0], "bg": [0, 0, 0], "note": "HUD verde solido sobre trilho preto (herdado do O2)"},
+    {"fg": [170, 0, 0], "bg": [0, 0, 0], "note": "HUD vermelho solido sobre trilho preto (herdado do O2)"},
+    {"fg": [255, 170, 170], "bg": [0, 85, 85], "note": "ax: areas claras (rosto/pele) sobre o piso teal dominante"},
+    {"fg": [0, 0, 85], "bg": [85, 85, 85], "note": "ax: roupa navy sobre a parede cinza dominante"},
+    {"fg": [85, 0, 0], "bg": [85, 85, 85], "note": "long: roupa vermelho-escura sobre a parede cinza dominante"},
+    {"fg": [0, 170, 170], "bg": [0, 0, 85], "note": "long: ciano sobre as areas navy do palco"},
+    {"fg": [0, 85, 170], "bg": [85, 0, 0], "note": "atores entre si: azul do ax x vermelho do long (legibilidade do player)"}
+  ],
+  "measured_near_pairs": [
+    {"fg": [0, 85, 170], "bg": [0, 85, 85], "dY": 9, "note": "ax azul-medio sobre piso teal: abaixo do piso; herdado do doador (sem re-autoria); leitura por croma + contorno; revisar nos previews"},
+    {"fg": [0, 0, 0], "bg": [0, 0, 85], "dY": 9, "note": "contorno preto x areas navy do palco: herdado do doador; risco declarado"}
+  ],
+  "notes": [
+    "pares declarados = elementos que PRECISAM ler (HUD, atores x tom dominante do palco, atores entre si); auditoria: audit_luma_floor --scene",
+    "near pairs medidos e documentados; nenhum pixel reautorado (arte do doador hash-bound)",
+    "paleta de referencia: data/generated/art/o2_art_conversion_20261015.json#palettes (P0/P1)"
+  ]
+}

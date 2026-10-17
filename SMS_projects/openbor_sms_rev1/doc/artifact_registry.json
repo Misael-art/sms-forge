@@ -748,6 +748,735 @@
      "sha256": "6c38df2d27063dad50b452b73dfb1ed79550d2342aa4c7f35b961c598e65c526"
     }
    ]
+  },
+  {
+   "id": "o3-extract-gal-town1-combat",
+   "asset_id": "extract_gal_town1_combat",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "superseded",
+   "parents": [
+    "o0-gal-pak-intake"
+   ],
+   "reason": "O3: extracao hash-bound inicial dos membros de combate do GAL.pak (34 membros: txts + quadros de idle/walk/pulo/ataque/pain/fall/rise) para data/source_openbor/gal_town1; PAK completo nunca copiado",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/extract/gal_town1_combat_extract_20261016.json",
+     "sha256": "c4509dfce1560df5e7f285a161d7d261952896ddffd997f74c2a6158b3ff6372"
+    }
+   ]
+  },
+  {
+   "id": "o3-extract-gal-town1-combat-r2",
+   "asset_id": "extract_gal_town1_combat",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 2,
+   "status": "candidate",
+   "supersedes": "o3-extract-gal-town1-combat",
+   "parents": [
+    "o3-extract-gal-town1-combat"
+   ],
+   "reason": "Correcao da reacao de hit pinada (attack2 -> ATK_NORMAL2 -> pain2/fall2): +pain01/pain02 (ax e long) e +death01 (long); 39 membros hash-bound contra o PAK revalidado (64da17e8, 39500889 B)",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/extract/gal_town1_combat_extract_20261016_r2.json",
+     "sha256": "fb5e49b13c64f8abc4684ad82755474f8fc92f3e5e383019dde522dd9826fcb6"
+    }
+   ]
+  },
+  {
+   "id": "o3-source-subset-gal-town1-combat",
+   "asset_id": "source_subset_gal_town1_combat",
+   "kind": "openbor_source",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-extract-gal-town1-combat-r2"
+   ],
+   "reason": "Subconjunto de combate do GAL town1 sob controle: 30 membros ainda nao possuidos por artefatos anteriores (quadros ax/long de ataque, pulo, pain2/fall2, rise, morte e walks do long), hash-bound pelo extract r2; papel source ancorado no primeiro quadro de ataque do conjunto",
+   "files": [
+    {
+     "role": "source",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/a101.gif",
+     "sha256": "3b454dbd0aaf55c44d8021554a5860df963460491c87d6dbd685c029277fc4af"
+    },
+    {
+     "role": "sprite_frame_ax_a102",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/a102.gif",
+     "sha256": "9dc2b9b25d6884a252d2d7794641d4d5833622b2219cbaa15ae6c6708d585cc4"
+    },
+    {
+     "role": "sprite_frame_ax_a103",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/a103.gif",
+     "sha256": "32486921ae277c202216d011c2dd8888a47410a4fe58c160544c32affb40568a"
+    },
+    {
+     "role": "sprite_frame_ax_a104",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/a104.gif",
+     "sha256": "27b09254e9c6fc37b5201706d479c78ae47785a015d7642af772255753dae2a8"
+    },
+    {
+     "role": "sprite_frame_ax_a105",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/a105.gif",
+     "sha256": "340cda14bec71ebb98e14efd2db312b371f7e735f12df26558ec9aa806a9a8af"
+    },
+    {
+     "role": "sprite_frame_ax_fall01",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/fall01.gif",
+     "sha256": "a56ea05ea942905136d990531eb5dae4ae6342b1382d81daf548a25e80231ed0"
+    },
+    {
+     "role": "sprite_frame_ax_fall02",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/fall02.gif",
+     "sha256": "a1d9849ce4db0f8c494046ae3f20fb36b5064c3a1cbedab97e600135148c0fd3"
+    },
+    {
+     "role": "sprite_frame_ax_fall03",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/fall03.gif",
+     "sha256": "a02dd07b415e07426dc95db87800993fa0d01ee4116a195e737848b5706ce517"
+    },
+    {
+     "role": "sprite_frame_ax_jump01",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/jump01.gif",
+     "sha256": "43fb5a76ace8dc5b1a3fbe3f117e81e0464693cb537e44760565177faa438093"
+    },
+    {
+     "role": "sprite_frame_ax_jump02",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/jump02.gif",
+     "sha256": "d86a8924ceef5f6daea13ddcba1ab40d4c23596943d0412cfadbd886c825b73d"
+    },
+    {
+     "role": "sprite_frame_ax_pain01",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/pain01.gif",
+     "sha256": "8bde236f43761a30aec998654bd7fa56918bdcba36bb8ff597f1c099e1c3a222"
+    },
+    {
+     "role": "sprite_frame_ax_pain02",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/pain02.gif",
+     "sha256": "a4cd5229634d380fc732b28cffcf7b870e011c1e2c0c0ddc06f640790afe6064"
+    },
+    {
+     "role": "sprite_frame_ax_pain03",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/pain03.gif",
+     "sha256": "3411d76e44f50d5ffb294ff259cb41c9bd55de7e2aa7647bc0622e1a60ee461c"
+    },
+    {
+     "role": "sprite_frame_ax_rise01",
+     "path": "data/source_openbor/gal_town1/data/chars/ax/rise01.gif",
+     "sha256": "3f8644f66becb3fa86dd59967ad6c6aa9bcdc152a2918efa09aecaeeb4ab247e"
+    },
+    {
+     "role": "sprite_frame_long_a101",
+     "path": "data/source_openbor/gal_town1/data/chars/long/a101.gif",
+     "sha256": "c2029a4d83622dde484d52747ab24a20f1f387a08e0a0364f7f3292699312aec"
+    },
+    {
+     "role": "sprite_frame_long_a102",
+     "path": "data/source_openbor/gal_town1/data/chars/long/a102.gif",
+     "sha256": "b8fdeda700fcc402fef6b0c7b80561fc7815b5b0419feb3bc8e7497b023cc520"
+    },
+    {
+     "role": "sprite_frame_long_a103",
+     "path": "data/source_openbor/gal_town1/data/chars/long/a103.gif",
+     "sha256": "c92c5ffdbfea7c376ac3db7a80912398aeff5adf45c15b0a3d64023de4944af0"
+    },
+    {
+     "role": "sprite_frame_long_a104",
+     "path": "data/source_openbor/gal_town1/data/chars/long/a104.gif",
+     "sha256": "70a74c6c343b14f1452d56101faef8bf0a6f731978ab06e2592e2bd86e93d063"
+    },
+    {
+     "role": "sprite_frame_long_death01",
+     "path": "data/source_openbor/gal_town1/data/chars/long/death01.gif",
+     "sha256": "0c3e5d62b7467bc90570c91030f85c0757fc7dfe10f3943cf35e08f25a99c9e6"
+    },
+    {
+     "role": "sprite_frame_long_fall01",
+     "path": "data/source_openbor/gal_town1/data/chars/long/fall01.gif",
+     "sha256": "b4fce07ac3b930ce216081c884e123cbb8f1d2523565f262610009483f24852e"
+    },
+    {
+     "role": "sprite_frame_long_fall02",
+     "path": "data/source_openbor/gal_town1/data/chars/long/fall02.gif",
+     "sha256": "99ee431f422ef7a049ecfc6d70b9896eab55632af76c6906c0991f9f1a3de88e"
+    },
+    {
+     "role": "sprite_frame_long_fall03",
+     "path": "data/source_openbor/gal_town1/data/chars/long/fall03.gif",
+     "sha256": "8c933b2fb28515885fa1e7a8f9c90b8f869fec46cf16340d2f4902a1020ad0f6"
+    },
+    {
+     "role": "sprite_frame_long_pain01",
+     "path": "data/source_openbor/gal_town1/data/chars/long/pain01.gif",
+     "sha256": "6db2808389c20f763c78daf9d1a947d3356525f434fc46a4d66b824daf5e64eb"
+    },
+    {
+     "role": "sprite_frame_long_pain02",
+     "path": "data/source_openbor/gal_town1/data/chars/long/pain02.gif",
+     "sha256": "680e7f28a264bef3cccb9a98c00516d75e5b74a3d0c9be7d6bdcd9eb3d085934"
+    },
+    {
+     "role": "sprite_frame_long_pain03",
+     "path": "data/source_openbor/gal_town1/data/chars/long/pain03.gif",
+     "sha256": "29e2f8004995abee77c07ddfdbf98ebec4da0e9574d06966313927513c5a7a99"
+    },
+    {
+     "role": "sprite_frame_long_rise01",
+     "path": "data/source_openbor/gal_town1/data/chars/long/rise01.gif",
+     "sha256": "2ad8f3d5a0fba92a62317fe52411d50e1a193baff4e0d98dd3f23b07d2445809"
+    },
+    {
+     "role": "sprite_frame_long_walk01",
+     "path": "data/source_openbor/gal_town1/data/chars/long/walk01.gif",
+     "sha256": "f9d30c333de53c21b3b28478a8f1ba3fbfb480dad96b00dd8aa7844040744b64"
+    },
+    {
+     "role": "sprite_frame_long_walk02",
+     "path": "data/source_openbor/gal_town1/data/chars/long/walk02.gif",
+     "sha256": "2dd3913247e61aae30d9371ca55b7b7468cb41812bff6a42176624ad8d98be77"
+    },
+    {
+     "role": "sprite_frame_long_walk03",
+     "path": "data/source_openbor/gal_town1/data/chars/long/walk03.gif",
+     "sha256": "cb8d0b26c90d6127e12e6a290795f2e8abdcaf7f31c800222f260d4e76efcaaa"
+    },
+    {
+     "role": "sprite_frame_long_walk04",
+     "path": "data/source_openbor/gal_town1/data/chars/long/walk04.gif",
+     "sha256": "a42955b8ac40937e37894850b5b9122e23f1436a854b354c39b4e7f5c66e0f0a"
+    }
+   ]
+  },
+  {
+   "id": "o3-model-ir-gal-town1-ax",
+   "asset_id": "model_ir_gal_town1_ax",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-extract-gal-town1-combat-r2"
+   ],
+   "reason": "IR de animacao O3 (ax): 71 anims / 637 frames com delay/offset/bbox, caixas de ataque completas, landframe/loop/range e spans de origem (linha + byte + sha da linha raw); confirma as caixas D4 em anim attack1 (diretiva attack2 = slot 2, frames a102-a104)",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/ir/gal_town1_ax_model_ir_20261016.json",
+     "sha256": "e884b1a080c685394f877fc96b5df699d8ce701541131845707621be3b021929"
+    }
+   ]
+  },
+  {
+   "id": "o3-model-ir-gal-town1-long",
+   "asset_id": "model_ir_gal_town1_long",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-extract-gal-town1-combat-r2"
+   ],
+   "reason": "IR de animacao O3 (long): 48 anims / 512 frames com delay/offset/bbox, caixas de ataque completas, landframe/loop/range e spans de origem (linha + byte + sha da linha raw); confirma as caixas D4 em anim attack1 (diretiva attack2 = slot 2, frames a102-a103)",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/ir/gal_town1_long_model_ir_20261016.json",
+     "sha256": "0a3eebd7cb07e25d5c011594bce00793e64d3179c8d347da7c19d9b19d9f0588"
+    }
+   ]
+  },
+  {
+   "id": "o3-combat-scope",
+   "asset_id": "o3_combat_scope",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o2-vdp-pilot-scope-r2",
+    "o1-neutral-frontend-scope",
+    "o1-level-ir-gal-town1",
+    "o1-models-ir-gal-town1"
+   ],
+   "reason": "Escopo O3 aberto por medicao: 60 pose-sides, blocos 79744 B, mapper Sega habilitado pela clausula do TDD, reacao pain2/fall2 corrigida, fisica/IA pinadas no openbor.c 787b6770",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_combat_scope_20261016.json",
+     "sha256": "3e54c4071f54705ab427c1a12af365a5eea934a3f8624062ca482313928ea7fd"
+    }
+   ]
+  },
+  {
+   "id": "o3-art-conversion",
+   "asset_id": "art_conversion_gal_town1_o3",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-combat-scope",
+    "o3-extract-gal-town1-combat-r2",
+    "o2-art-conversion"
+   ],
+   "reason": "Conversao O3 das 60 pose-sides no canvas medido (80x96; celulas 8x16 conferidas contra o escopo) com P1 herdada do O2 sem mudanca; 30 GIFs do doador sha-bound pelo extract r2; determinismo byte-identico",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/art/o3_art_conversion_20261016.json",
+     "sha256": "939e973461a6b69c2ed9f6a5e84e948c6fe4ff4305316be7bd1ba93d65dd74b4"
+    }
+   ]
+  },
+  {
+   "id": "o3-luma-scene",
+   "asset_id": "luma_scene_gal_town1_o3",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-art-conversion"
+   ],
+   "reason": "Pares criticos de contraste do O3 declarados (HUD herdado + atores x palco + atores entre si); near pairs medidos dY=9 documentados; gate audit_luma_floor PASS",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_luma_scene_20261016.json",
+     "sha256": "0d3731325280359f986be18b7b55e1a5774b59a11c8be8402c6457c5cb3383b8"
+    }
+   ]
+  },
+  {
+   "id": "o3-runtime-assets",
+   "asset_id": "runtime_assets_gal_town1_o3",
+   "kind": "runtime_resource",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-art-conversion"
+   ],
+   "reason": "60 pose-sides de combate convertidas (canvas 80x96) candidatas a runtime do O3; previews em rascunho/o3; sha-bound pelo record de conversao",
+   "files": [
+    {
+     "role": "resource",
+     "path": "res/o3/poses/ax_a101_left.png",
+     "sha256": "bb8eabde46698b13efc23a660631a60757e8bee0716e631846d8257281307856"
+    },
+    {
+     "role": "pose_ax_a101_right",
+     "path": "res/o3/poses/ax_a101_right.png",
+     "sha256": "f6a987ae080f2c43ed1b9e6aa65cf7b2fc3fd8ee3f0e8c2dbfd8bdd3a689d6c6"
+    },
+    {
+     "role": "pose_ax_a102_left",
+     "path": "res/o3/poses/ax_a102_left.png",
+     "sha256": "73bfc11b1c853c449f9aca1460c03f9f2dac8a74fdf291e29b2d7609f3c9b9b6"
+    },
+    {
+     "role": "pose_ax_a102_right",
+     "path": "res/o3/poses/ax_a102_right.png",
+     "sha256": "6d8fe614ea9a0e5aa812f321b3891ec94d5afa78a98735479b527ebfbd70f59e"
+    },
+    {
+     "role": "pose_ax_a103_left",
+     "path": "res/o3/poses/ax_a103_left.png",
+     "sha256": "a73066866f853fb8eaff06d916bbe64e49edd5bacdfabcaaef98ece5a6700255"
+    },
+    {
+     "role": "pose_ax_a103_right",
+     "path": "res/o3/poses/ax_a103_right.png",
+     "sha256": "20f392e0e25b179e898dfea4b0a11b0b517ebbe01132fd1309ee43115502483f"
+    },
+    {
+     "role": "pose_ax_a104_left",
+     "path": "res/o3/poses/ax_a104_left.png",
+     "sha256": "1410e42e0637fd6b7d6f0310a993fb745e57c9f79f94cbabecae4d19b5dd9f82"
+    },
+    {
+     "role": "pose_ax_a104_right",
+     "path": "res/o3/poses/ax_a104_right.png",
+     "sha256": "8deea2719c4f5ba052cf1c75094f876529f1c3ed5cccc22444881f3de4babba9"
+    },
+    {
+     "role": "pose_ax_a105_left",
+     "path": "res/o3/poses/ax_a105_left.png",
+     "sha256": "8183b437cb7ea89908d62336bb48bb9bf49f71c6f1d5cfee157cec850edcae22"
+    },
+    {
+     "role": "pose_ax_a105_right",
+     "path": "res/o3/poses/ax_a105_right.png",
+     "sha256": "1236071bf451fa3e9ccb5210f102a1e1738214f6a056076bdc184a0eaca8b595"
+    },
+    {
+     "role": "pose_ax_fall01_left",
+     "path": "res/o3/poses/ax_fall01_left.png",
+     "sha256": "ec1c72f6f1d29fcd86a3087cde92b548e0dc8b98c59db446c33097953368812b"
+    },
+    {
+     "role": "pose_ax_fall01_right",
+     "path": "res/o3/poses/ax_fall01_right.png",
+     "sha256": "3a052069e4e05789c0849ab4063a2837c854d71e8ce82fd5c67f6ca6c4a17bff"
+    },
+    {
+     "role": "pose_ax_fall02_left",
+     "path": "res/o3/poses/ax_fall02_left.png",
+     "sha256": "8b6813679d571fe7aeb497a4f4d6e9a6a6b801b8362dd441221a37c885183ad3"
+    },
+    {
+     "role": "pose_ax_fall02_right",
+     "path": "res/o3/poses/ax_fall02_right.png",
+     "sha256": "b0bdafebcda2c357906ad1f42c6ea8c5274a5468a7bb3766aa1a8e5d1f0dcf94"
+    },
+    {
+     "role": "pose_ax_fall03_left",
+     "path": "res/o3/poses/ax_fall03_left.png",
+     "sha256": "1f916f7d7dda41f422f0cd81a712d3dbbc49c340b65655fda2b6afa3eab61f25"
+    },
+    {
+     "role": "pose_ax_fall03_right",
+     "path": "res/o3/poses/ax_fall03_right.png",
+     "sha256": "3d6ab48a4adf9f39dd1d7d270d0961e62a2f2df1882016bc7fa052c164c35fa5"
+    },
+    {
+     "role": "pose_ax_idle01_left",
+     "path": "res/o3/poses/ax_idle01_left.png",
+     "sha256": "b8e7ce049a356fe908afbf126f52f70c5ab00a43f9a2d3a955d5207af03c30b2"
+    },
+    {
+     "role": "pose_ax_idle01_right",
+     "path": "res/o3/poses/ax_idle01_right.png",
+     "sha256": "bd393e8bdd8a4e0fba532971f3cadc0b37811959c864a3da69f679de92831f69"
+    },
+    {
+     "role": "pose_ax_jump01_left",
+     "path": "res/o3/poses/ax_jump01_left.png",
+     "sha256": "389d31eba512c35fe79aa7478315daee8b88a9b405ba283703e7882156c2eed3"
+    },
+    {
+     "role": "pose_ax_jump01_right",
+     "path": "res/o3/poses/ax_jump01_right.png",
+     "sha256": "9631fa763f466a2bb3837200021f4622aa909b860277d948e77dc3fad9dea924"
+    },
+    {
+     "role": "pose_ax_jump02_left",
+     "path": "res/o3/poses/ax_jump02_left.png",
+     "sha256": "3053d26f588d0d5548a71823ffa4dd651f34059fe9eee1363f7f54cafec915f0"
+    },
+    {
+     "role": "pose_ax_jump02_right",
+     "path": "res/o3/poses/ax_jump02_right.png",
+     "sha256": "378b3f5681d2a11fced579250067233a3f7ef37ac87b6c1df8624872a5332c2e"
+    },
+    {
+     "role": "pose_ax_pain01_left",
+     "path": "res/o3/poses/ax_pain01_left.png",
+     "sha256": "171f4be4dcbdcee430fdb6ab0af8a169bff328c52f934b0602c594cd55ab40f1"
+    },
+    {
+     "role": "pose_ax_pain01_right",
+     "path": "res/o3/poses/ax_pain01_right.png",
+     "sha256": "77e54ea5c21a5c1d13c0ae2e440add853596c43aa5ce4354e02750ae7821b650"
+    },
+    {
+     "role": "pose_ax_pain02_left",
+     "path": "res/o3/poses/ax_pain02_left.png",
+     "sha256": "213dd3cc6a6545770789b99e3b7df27ce585955f6a977d12b4b4be509db2f285"
+    },
+    {
+     "role": "pose_ax_pain02_right",
+     "path": "res/o3/poses/ax_pain02_right.png",
+     "sha256": "cb512aac6f42f5719c42283889487105d3f3aafe4a95facd6c17123aae459151"
+    },
+    {
+     "role": "pose_ax_rise01_left",
+     "path": "res/o3/poses/ax_rise01_left.png",
+     "sha256": "52c276d3691b3839cd415f535da5c4135e94945a15f628200de7faa8424a4be4"
+    },
+    {
+     "role": "pose_ax_rise01_right",
+     "path": "res/o3/poses/ax_rise01_right.png",
+     "sha256": "846e9d86e9795fa88034664121c6f3d4288f676a3905ab42dd7501b3d84edbc2"
+    },
+    {
+     "role": "pose_ax_walk01_left",
+     "path": "res/o3/poses/ax_walk01_left.png",
+     "sha256": "0f59edbdc16d32fd9f04bc8fdb41069c90c3a124bd771c9ec35fe208dd12664d"
+    },
+    {
+     "role": "pose_ax_walk01_right",
+     "path": "res/o3/poses/ax_walk01_right.png",
+     "sha256": "87dea12431a95ee6cbb147feda9a2f301fa289684e0956bc7be6230a88a15e19"
+    },
+    {
+     "role": "pose_ax_walk03_left",
+     "path": "res/o3/poses/ax_walk03_left.png",
+     "sha256": "be3851de7148469db2f711ae52274ac3facdf449c78b98f9961ee3c0d3fda1b6"
+    },
+    {
+     "role": "pose_ax_walk03_right",
+     "path": "res/o3/poses/ax_walk03_right.png",
+     "sha256": "87dc00ea7a6dea9d64a2c0660fb73b9e83541a39dbda4c766931a4aa3e8c9bf2"
+    },
+    {
+     "role": "pose_long_a101_left",
+     "path": "res/o3/poses/long_a101_left.png",
+     "sha256": "af75fbf64af36d45ac33ec82fc8f811e41f4600f9fe4cb4371ac1e4c7821342f"
+    },
+    {
+     "role": "pose_long_a101_right",
+     "path": "res/o3/poses/long_a101_right.png",
+     "sha256": "342522c2df3e693873c58412ad9b6abecf88f0d8c13ac405053d7062793b306f"
+    },
+    {
+     "role": "pose_long_a102_left",
+     "path": "res/o3/poses/long_a102_left.png",
+     "sha256": "778cb09ec4544d12895fdbfb09543ddecee71ba48644c57e8d2d8725caed6ecb"
+    },
+    {
+     "role": "pose_long_a102_right",
+     "path": "res/o3/poses/long_a102_right.png",
+     "sha256": "08a71d037280dcc21e43094dcddae49e88ac6de0a57fd075ff8a094c4e03107a"
+    },
+    {
+     "role": "pose_long_a103_left",
+     "path": "res/o3/poses/long_a103_left.png",
+     "sha256": "fcdde661f157e010f507303761f988cc04991768be870eed30b2a833d1c69443"
+    },
+    {
+     "role": "pose_long_a103_right",
+     "path": "res/o3/poses/long_a103_right.png",
+     "sha256": "371221a1e7245c4377e13a7ad72eb323d9dc16e8f233988f7a100c89b0842cfb"
+    },
+    {
+     "role": "pose_long_a104_left",
+     "path": "res/o3/poses/long_a104_left.png",
+     "sha256": "14f396920cea675943a13a808331affe37d320070b320d1c6909be8ca7aba541"
+    },
+    {
+     "role": "pose_long_a104_right",
+     "path": "res/o3/poses/long_a104_right.png",
+     "sha256": "c70f786771948b27e3d3d48ef4cde1e39330b755b67829f54501be2d267a41bb"
+    },
+    {
+     "role": "pose_long_death01_left",
+     "path": "res/o3/poses/long_death01_left.png",
+     "sha256": "9634d71e923814e5494d37cf94cc1383b88aedf8fa4bac195cafa201e15ac5e9"
+    },
+    {
+     "role": "pose_long_death01_right",
+     "path": "res/o3/poses/long_death01_right.png",
+     "sha256": "f60cf56d808a5940b8e393ceb78633ec388557b097a169595c7367f6c1c7561c"
+    },
+    {
+     "role": "pose_long_fall01_left",
+     "path": "res/o3/poses/long_fall01_left.png",
+     "sha256": "e8a93365592dd6b7fb0723ae6d7067812df70e8ab687a250f624666ed0375fc7"
+    },
+    {
+     "role": "pose_long_fall01_right",
+     "path": "res/o3/poses/long_fall01_right.png",
+     "sha256": "7acfcbfcbc001d6dc12c5037144d5bedaa5947d4233af98c6fe0760f2172e5e1"
+    },
+    {
+     "role": "pose_long_fall02_left",
+     "path": "res/o3/poses/long_fall02_left.png",
+     "sha256": "3399bcde2cf26af03309b456368c857be7d308887518d7ce7bbda82f0aa5b47b"
+    },
+    {
+     "role": "pose_long_fall02_right",
+     "path": "res/o3/poses/long_fall02_right.png",
+     "sha256": "39eaa087b4b52b21d9128248f1fe65675cb0061e4d2e707e6f7487e358cabf39"
+    },
+    {
+     "role": "pose_long_fall03_left",
+     "path": "res/o3/poses/long_fall03_left.png",
+     "sha256": "4bb4abf0e9863e3327ead0fe464b9c09e970a29fc8c63aa432778e891926b0ab"
+    },
+    {
+     "role": "pose_long_fall03_right",
+     "path": "res/o3/poses/long_fall03_right.png",
+     "sha256": "78e460a131fc1dc57b96c04aa5946cbb43b4d602b1f9bb35e750fc43969d1e14"
+    },
+    {
+     "role": "pose_long_idle01_left",
+     "path": "res/o3/poses/long_idle01_left.png",
+     "sha256": "a6d17229bef70ec57f931ad51a24730da08d9cbd84a79bb6634d7f3687539980"
+    },
+    {
+     "role": "pose_long_idle01_right",
+     "path": "res/o3/poses/long_idle01_right.png",
+     "sha256": "9ebfb024661adeb2c1f207eb44dfc70469163cb5027e5935b5d31491537a0fe7"
+    },
+    {
+     "role": "pose_long_pain01_left",
+     "path": "res/o3/poses/long_pain01_left.png",
+     "sha256": "4990080d80a4dd4c6cb8efb53f3f45c624ed374342ffbc1fb8b92d1d02c2a79d"
+    },
+    {
+     "role": "pose_long_pain01_right",
+     "path": "res/o3/poses/long_pain01_right.png",
+     "sha256": "d59697ec870a5c2de54eb3f712599cd864aced4443f8201f65ed222c1992950b"
+    },
+    {
+     "role": "pose_long_pain02_left",
+     "path": "res/o3/poses/long_pain02_left.png",
+     "sha256": "5c0ef9fcf8aeaaa52b25294b5770a4b811b7798ea57d8b54a2b8b7a362a9b4c8"
+    },
+    {
+     "role": "pose_long_pain02_right",
+     "path": "res/o3/poses/long_pain02_right.png",
+     "sha256": "bfb22736c6c26032c3a28608a95d69d2f95c673ece543067250b8778d14e5d3d"
+    },
+    {
+     "role": "pose_long_rise01_left",
+     "path": "res/o3/poses/long_rise01_left.png",
+     "sha256": "a76cad4fc36526eeae4a1a4061bd2dc3653620fa70c5ee054d1d2eb64f5f21f1"
+    },
+    {
+     "role": "pose_long_rise01_right",
+     "path": "res/o3/poses/long_rise01_right.png",
+     "sha256": "f9de4ac8fc60e4e0735528df10acac46c413a7b1812d4d663fd5554726cb4c2b"
+    },
+    {
+     "role": "pose_long_walk01_left",
+     "path": "res/o3/poses/long_walk01_left.png",
+     "sha256": "1c9460898a15681fdb377efe933d3ca7c4bfce1b0897df441ec135d6e1e97a7c"
+    },
+    {
+     "role": "pose_long_walk01_right",
+     "path": "res/o3/poses/long_walk01_right.png",
+     "sha256": "3a03d62d6873dc05fea4d7370f6032f5b9429e6fb7938d649799a74339b4312e"
+    },
+    {
+     "role": "pose_long_walk03_left",
+     "path": "res/o3/poses/long_walk03_left.png",
+     "sha256": "6ad7ed01481b488d0569b645508bda4fc468e5e4e0fdbe3813b200a2044f9d70"
+    },
+    {
+     "role": "pose_long_walk03_right",
+     "path": "res/o3/poses/long_walk03_right.png",
+     "sha256": "5e78f93fd28f831eff4b703406292afac1d797ca97a1d9e9632815bd7ba3440e"
+    }
+   ]
+  },
+  {
+   "id": "o3-emission-r1",
+   "asset_id": "emission_gal_town1_o3",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-combat-scope",
+    "o3-art-conversion",
+    "o3-model-ir-gal-town1-ax",
+    "o3-model-ir-gal-town1-long",
+    "o2-emission-r2"
+   ],
+   "reason": "Emissao O3 M4 (20261017): headers de bloco/pose/rows/anim/arcs + bancos do mapper (5x16 KB) + plano de VRAM + politica de corte D9-a2 (linhas exatas; bandas refutadas por medicao) + 12 manifests aprovados no audit_sprite_line_sim; determinismo byte-identico",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/emit/o3_emission_20261017.json",
+     "sha256": "a8108c2dd9ba1fb443b08602c32cc38bf6a6745a502dc1d200f11cd32f9384f3"
+    },
+    {
+     "role": "manifest_pair_a102_left_fall03_left_dz24",
+     "path": "data/generated/emit/o3_sprite_scene_pair_a102_left_fall03_left_dz24_20261017.json",
+     "sha256": "df776d5f3b2f5d584594a6d12535f7f42484a2301142a6ac4d962599237fb586"
+    },
+    {
+     "role": "manifest_pair_a102_right_fall03_right_dz24",
+     "path": "data/generated/emit/o3_sprite_scene_pair_a102_right_fall03_right_dz24_20261017.json",
+     "sha256": "a13d2d2ffff2d44b3990dfeaaf68df72792ba9bc38d9e10769466aa20e172c35"
+    },
+    {
+     "role": "manifest_scan0_ax_a102_left_long_a103_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan0_ax_a102_left_long_a103_left_dz0_20261017.json",
+     "sha256": "6ccdcf390691896212746283217e6e338d14a7f70a2969b56e3ac2099353c259"
+    },
+    {
+     "role": "manifest_scan1_ax_a102_left_long_a103_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan1_ax_a102_left_long_a103_left_dz0_20261017.json",
+     "sha256": "20501411f8019dec046baa2408039f3a5c2d6a3b4c9da5ea49753348df33333c"
+    },
+    {
+     "role": "manifest_scan2_ax_a102_left_long_a103_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan2_ax_a102_left_long_a103_left_dz0_20261017.json",
+     "sha256": "a949533092ba03e6bc1f585820b7c5da63c350b3d3d0c82818e2898d82ac77a2"
+    },
+    {
+     "role": "manifest_scan3_ax_a102_left_long_a103_right_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan3_ax_a102_left_long_a103_right_dz0_20261017.json",
+     "sha256": "b1cc60fc2328e7d4844d4cf0b4821ee61352be02d6eafd3aa7fd73c2734d68ff"
+    },
+    {
+     "role": "manifest_scan4_ax_a102_left_long_a103_right_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan4_ax_a102_left_long_a103_right_dz0_20261017.json",
+     "sha256": "c39b4bd213a84b2d5f91fe85ce47ca6d3a05b291ddada9ab50235af5bdeb83de"
+    },
+    {
+     "role": "manifest_scan5_ax_a102_left_long_a103_right_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan5_ax_a102_left_long_a103_right_dz0_20261017.json",
+     "sha256": "709a1320c5630c5da85cf1ce93efef6cbd2a14211078f90d49b4b4dadb6bdcec"
+    },
+    {
+     "role": "manifest_solo_long_death01_left",
+     "path": "data/generated/emit/o3_sprite_scene_solo_long_death01_left_20261017.json",
+     "sha256": "f540c9d2d23adc6c09ea4689dde889ff0e1b2f3099aa4949eaa30880d835f7e6"
+    },
+    {
+     "role": "manifest_solo_long_death01_right",
+     "path": "data/generated/emit/o3_sprite_scene_solo_long_death01_right_20261017.json",
+     "sha256": "2be9ba92ba4e868d68a772a28178c8e2af08a7b11d4744886625985f273d2407"
+    },
+    {
+     "role": "manifest_solo_long_fall03_left",
+     "path": "data/generated/emit/o3_sprite_scene_solo_long_fall03_left_20261017.json",
+     "sha256": "15de2dd2ca6d9f5f869ec6ce82cd77a0b6193f3a0d8733b5dbddf4abe40d2a9d"
+    },
+    {
+     "role": "manifest_solo_long_fall03_right",
+     "path": "data/generated/emit/o3_sprite_scene_solo_long_fall03_right_20261017.json",
+     "sha256": "ee945dbefe7c026a5623b4465540e0d00933a2b9539e1fc5f546ef32a215b662"
+    },
+    {
+     "role": "vram_plan",
+     "path": "data/generated/plans/o3_vram_plan_20261017.json",
+     "sha256": "9c8831757812186f24555c09e589e30bfc59e8675a73fd3bfbac2565519a1099"
+    },
+    {
+     "role": "gates",
+     "path": "data/generated/emit/o3_emission_gates_20261017.json",
+     "sha256": "f0262b58f8ff21cf1074b7f94f97acb060e20427d0bd77032fc3d3a76af08a17"
+    }
+   ]
+  },
+  {
+   "id": "o3-bank-blocks",
+   "asset_id": "bank_blocks_gal_town1_o3",
+   "kind": "runtime_resource",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-emission-r1"
+   ],
+   "reason": "Bancos 2..6 do mapper Sega com os 60 blocos de pose (79744/81920 B, endereco/banco na tabela o3_*_blocks); reserva no banco 7 (D1)",
+   "files": [
+    {
+     "role": "resource",
+     "path": "res/o3/banks/o3_pose_blocks_20261017.bin",
+     "sha256": "564ea87b32627ba8b21f3e3941345aadded50172693e95d923abb0516af9f19b"
+    }
+   ]
   }
  ],
  "heads": [
@@ -903,6 +1632,76 @@
    "kind": "runtime_resource",
    "variant": "main",
    "candidate": "o2-runtime-assets",
+   "approved": null
+  },
+  {
+   "asset_id": "extract_gal_town1_combat",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o3-extract-gal-town1-combat-r2",
+   "approved": null
+  },
+  {
+   "asset_id": "source_subset_gal_town1_combat",
+   "kind": "openbor_source",
+   "variant": "main",
+   "candidate": "o3-source-subset-gal-town1-combat",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_combat_scope",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-combat-scope",
+   "approved": null
+  },
+  {
+   "asset_id": "model_ir_gal_town1_ax",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o3-model-ir-gal-town1-ax",
+   "approved": null
+  },
+  {
+   "asset_id": "model_ir_gal_town1_long",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o3-model-ir-gal-town1-long",
+   "approved": null
+  },
+  {
+   "asset_id": "art_conversion_gal_town1_o3",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o3-art-conversion",
+   "approved": null
+  },
+  {
+   "asset_id": "luma_scene_gal_town1_o3",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-luma-scene",
+   "approved": null
+  },
+  {
+   "asset_id": "runtime_assets_gal_town1_o3",
+   "kind": "runtime_resource",
+   "variant": "main",
+   "candidate": "o3-runtime-assets",
+   "approved": null
+  },
+  {
+   "asset_id": "emission_gal_town1_o3",
+   "kind": "generated_record",
+   "variant": "main",
+   "candidate": "o3-emission-r1",
+   "approved": null
+  },
+  {
+   "asset_id": "bank_blocks_gal_town1_o3",
+   "kind": "runtime_resource",
+   "variant": "main",
+   "candidate": "o3-bank-blocks",
    "approved": null
   }
  ],

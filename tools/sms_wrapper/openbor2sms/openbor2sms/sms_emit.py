@@ -90,6 +90,33 @@ HUD_COL0 = 1
 HUD_PLAYER_COLS = 20
 HUD_ENEMY_COLS = 10
 
+# ---------------------------------------------------------------- O3 ---------
+# Lote O3 (combate): slots duplos por ator, blocos bancados (mapper), politica
+# de corte por contadores de banda (D9-a), arc tables (D5) e tabelas de
+# anim/IA. Referencia: doc/artifacts/o3_combat_scope_20261016.json.
+O3_SCOPE = "doc/artifacts/o3_combat_scope_20261016.json"
+O3_PER_LINE = 8
+O3_ROWS = 6                      # linhas de canvas (96 px / 16)
+O3_ROW_PITCH = 16                # passo vertical das linhas de celula
+O3_DY0P = -80                    # canvas ax (conferido contra o escopo)
+O3_DY0E = -72                    # canvas long (conferido contra o escopo)
+O3_CELL_TILES = 2                # celula 8x16 = 2 tiles
+O3_SLOT_CELLS = 29               # maior pose medida (ax/a102)
+O3_SLOT_TILES = 58               # 29 * 2
+O3_AX_SLOT_A = 0
+O3_AX_SLOT_B = 58
+O3_LONG_SLOT_A = 116
+O3_LONG_SLOT_B = 174
+O3_SPR_TILES = 232               # 2 atores x 2 slots x 58
+O3_BG_BASE = 232
+O3_BG_TILES = 192
+O3_HUD_BASE = 424
+O3_HUD_TILES = 3
+O3_BANK_FIRST = 2                # blocos nos bancos 2..6 (D1)
+O3_BANK_COUNT = 5
+O3_BANK_BYTES = 16384
+O3_DELAY_CAP = 255               # delay 999 (hold da fonte) satura em 255
+
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -325,6 +352,305 @@ def mask_stats(masks, pose_count, cell_count):
                       "worst_cells_dropped": worst, "worst_pz": worst_pz,
                       "total_cells_dropped": total})
     return stats
+
+
+# ------------------------------------------------------------ O3 helpers ----
+
+def o3_row_counts(cells):
+    """Contagem de celulas por linha de canvas (passo de 16 px)."""
+    per = {}
+    for c in cells:
+        per[c["row"]] = per.get(c["row"], 0) + 1
+    return per
+
+
+def o3_overlap_rows(row, dy0p, dy0e, base_p, base_e, player_rows):
+    """Linhas do jogador que dividem scanlines visiveis com a linha `row`
+    do inimigo.
+
+    Linhas de um mesmo ator nao se sobrepoem (passo 16 = altura da celula),
+    entao uma scanline visivel e coberta por no maximo uma linha de cada
+    ator; a contagem e exata: ax_row[rp] + ec[row]."""
+    out = []
+    e0 = base_e + dy0e + O3_ROW_PITCH * row
+    if e0 < 1 or e0 > SCREEN_H - 1:
+        return out
+    for rp in player_rows:
+        p0 = base_p + dy0p + O3_ROW_PITCH * rp
+        if p0 < 1:
+            continue
+        lo = max(1, e0, p0)
+        hi = min(SCREEN_H - 1, e0 + 15, p0 + 15)
+        if hi >= lo:
+            out.append(rp)
+    return out
+
+
+def o3_cells_of_png(png_path: Path, key_rgb, p1_scaled):
+    """Celulas 8x16 ocupadas do canvas; ordem de varredura (banda, coluna)."""
+    got = read_indexed_png(str(png_path))
+    w, h, px = got["w"], got["h"], got["pixels"]
+    if not got["palette"] or tuple(got["palette"][0]) != key_rgb:
+        raise SystemExit(f"pose sem transparencia magenta no indice 0: {png_path}")
+    if [tuple(c) for c in got["palette"][1:]] != [tuple(c) for c in p1_scaled]:
+        raise SystemExit(f"paleta da pose difere do registro de arte: {png_path}")
+    cells = []
+    for row in range(h // 16):
+        for col in range(w // 8):
+            rows16 = [px[row * 16 + yy][col * 8:col * 8 + 8] for yy in range(16)]
+            dens = cell_density(rows16)
+            if dens:
+                cells.append({"row": row, "col": col, "dens": dens,
+                              "rows16": rows16})
+    return cells
+
+
+def o3_priority_order(cells):
+    """Ordem de inclusao/sacrificio do inimigo: densidade desc, banda asc,
+    coluna asc (celula esparsa cai primeiro; revisao artistica pendente)."""
+    return sorted(cells, key=lambda c: (-c["dens"], c["row"], c["col"]))
+
+
+def o3_line_peak_rows(ax_row, enemy_row, dy0p, dy0e, base_p, base_e):
+    """Pico exato de celulas por scanline visivel (x ignorado: so reduz).
+
+    - linha com topo < 1 nao desenha (politica O3) e nao conta;
+    - linha com topo >= 192 desenha mas nao afeta linha visivel;
+    - linha visivel e coberta por no maximo uma linha de cada ator, entao a
+      contagem na scanline e ax_row[rp] + ec[r] nas regioes de sobreposicao."""
+    peak = 0
+    p_rows = ax_row or {}
+    for r, ec in (enemy_row or {}).items():
+        e0 = base_e + dy0e + O3_ROW_PITCH * r
+        if e0 < 1:
+            continue
+        hi = min(SCREEN_H - 1, e0 + 15)
+        if hi < e0:
+            continue
+        peak = max(peak, ec)
+        for rp, pc in p_rows.items():
+            p0 = base_p + dy0p + O3_ROW_PITCH * rp
+            if p0 < 1:
+                continue
+            plo = max(e0, p0)
+            phi = min(hi, p0 + 15)
+            if phi >= plo:
+                peak = max(peak, pc + ec)
+    for rp, pc in p_rows.items():
+        p0 = base_p + dy0p + O3_ROW_PITCH * rp
+        if p0 < 1:
+            continue
+        if min(SCREEN_H - 1, p0 + 15) >= p0:
+            peak = max(peak, pc)
+    return peak
+
+
+def o3_blocks_for_cells(cells):
+    """Bloco de upload: par 8x16 (topo/baixo) por celula, na ordem empacotada."""
+    out = bytearray()
+    for c in cells:
+        out += pair_blob(c["rows16"])
+    return bytes(out)
+
+
+def o3_pack_banks(blob_sizes):
+    """Primeiro-encaixe nos bancos 2..6, com backfill; nunca parte um bloco.
+
+    Blocos visitados na ordem da tabela e alocados no primeiro banco com
+    folga (o runtime le banco/endereco da tabela, entao a ordem fisica e
+    livre). Reprova se um bloco nao couber num banco ou os bancos acabarem
+    (D1: blocos nos bancos 2-6; banco 7 de reserva)."""
+    out = []
+    free = [O3_BANK_BYTES] * O3_BANK_COUNT
+    for i, size in enumerate(blob_sizes):
+        if size > O3_BANK_BYTES:
+            raise SystemExit(f"bloco {i} maior que um banco: {size}")
+        for j in range(O3_BANK_COUNT):
+            if free[j] >= size:
+                out.append((O3_BANK_FIRST + j, O3_BANK_BYTES - free[j]))
+                free[j] -= size
+                break
+        else:
+            raise SystemExit("blocos de pose nao cabem nos bancos 2..6")
+    return out
+
+
+def o3_sim_arc(v0, vx, k=0.5, g=0.1):
+    """D5: por tick pos += v*100/game_speed (k=0.5) e v -= g*k; tabela por
+    frame NTSC (200 ticks/s -> 60 fps). Retorna (y[], x[], ticks_de_pouso).
+
+    y[]/x[] por frame: indice 0 = origem; comprimento = frames + 1.
+    x[] guarda o modulo do deslocamento (o runtime aplica o sinal do facing)."""
+    yticks = [0.0]
+    xticks = [0.0]
+    alt = 0.0
+    v = float(v0)
+    x = 0.0
+    t = 0
+    while True:
+        t += 1
+        alt += v * k
+        x += vx * k
+        v -= g * k
+        yticks.append(alt)
+        xticks.append(x)
+        if alt <= 0.0:
+            break
+    y = [0]
+    xx = [0]
+    n = 1
+    while True:
+        tick = int(n * 200 / 60 + 0.5)
+        if tick >= len(yticks):
+            break
+        y.append(int(yticks[tick] + 0.5))
+        xx.append(int(xticks[tick] + 0.5))
+        n += 1
+    return y, xx, t
+
+
+def o3_sim_fall(alt0, k=0.5, g=0.1):
+    """Queda de entrada (spawn em altitude alt0) com a mesma integracao de D5.
+
+    Retorna (y[], ticks_de_pouso); y[0] = alt0 e y[-1] = 0."""
+    yticks = [float(alt0)]
+    alt = float(alt0)
+    v = 0.0
+    t = 0
+    while True:
+        t += 1
+        alt += v * k
+        v -= g * k
+        yticks.append(alt)
+        if alt <= 0.0:
+            break
+    y = [alt0]
+    n = 1
+    while True:
+        tick = int(n * 200 / 60 + 0.5)
+        if tick >= len(yticks):
+            break
+        y.append(max(0, int(yticks[tick] + 0.5)))
+        n += 1
+    return y, t
+
+
+def o3_compose_rows(ax_row, enemy_cells, dy0p, dy0e, base_p, base_e,
+                    limit=O3_PER_LINE):
+    """Politica D9-a revisada (medicao M4): contagem exata por scanline.
+
+    - o jogador nunca cai; sua contagem e estatica por linha de canvas
+      (ax_row: {row: n}); x fora da tela nao entra (conservador);
+    - o inimigo e visitado na ordem pre-computada (sacrificio: dens desc);
+    - celula com topo < 1 nao desenha nem conta; topo >= 192 desenha e nao
+      conta (nao afeta scanline visivel);
+    - a contagem da linha candidata e ec[row] + 1 + max(ax_row[rp]) sobre as
+      linhas do jogador que dividem scanlines visiveis com a linha do inimigo
+      (o3_overlap_rows): e exata, sem cascata entre linhas vizinhas.
+
+    Retorna (ec, drops, pico_exato)."""
+    ec = {}
+    drops = []
+    p_rows = ax_row or {}
+    for order, c in enumerate(enemy_cells):
+        y0 = base_e + dy0e + O3_ROW_PITCH * c["row"]
+        if y0 < 1:
+            continue
+        if y0 < SCREEN_H:
+            m = 0
+            for rp in o3_overlap_rows(c["row"], dy0p, dy0e, base_p, base_e,
+                                      p_rows.keys()):
+                m = max(m, p_rows[rp])
+            if ec.get(c["row"], 0) + 1 + m > limit:
+                drops.append({"order": order, "row": c["row"],
+                              "col": c["col"], "dens": c["dens"]})
+                continue
+        ec[c["row"]] = ec.get(c["row"], 0) + 1
+    return ec, drops, o3_line_peak_rows(ax_row, ec, dy0p, dy0e, base_p, base_e)
+
+
+def o3_compose_sprites(ax_row, player_cells, dy0p, base_p, px,
+                       enemy_cells, dy0e, base_e, ex, cam):
+    """Composicao completa (SAT + drops + pico exato) espelhando o runtime.
+
+    Ordem SAT: jogador (ordem da tabela de pose) e depois inimigo (ordem de
+    prioridade). x fora de [0,255] nao desenha (o corte ignora x: conservador).
+    y < 1 nao desenha nem conta (mesma regra do runtime). Player/None = so
+    inimigo (caso solo)."""
+    sat = []
+    for c in (player_cells or []):
+        y = base_p + dy0p + O3_ROW_PITCH * c["row"]
+        if y < 1:
+            continue
+        x = px - cam + c["dx"]
+        if x < 0 or x > 255:
+            continue
+        sat.append({"x": x, "y": y, "tile": O3_AX_SLOT_A + 2 * c["slot"]})
+    ec, drops, peak = o3_compose_rows(ax_row, enemy_cells, dy0p, dy0e,
+                                      base_p, base_e)
+    dropped = {d["order"] for d in drops}
+    for oi, c in enumerate(enemy_cells):
+        if oi in dropped:
+            continue
+        y = base_e + dy0e + O3_ROW_PITCH * c["row"]
+        if y < 1:
+            continue
+        x = ex - cam + c["dx"]
+        if x < 0 or x > 255:
+            continue
+        sat.append({"x": x, "y": y, "tile": O3_LONG_SLOT_A + 2 * c["slot"]})
+    return sat, ec, drops, peak
+
+
+def o3_line_peak(sprites):
+    """Pico exato de entradas por scanline para uma lista de sprites 8x16."""
+    lines = [0] * SCREEN_H
+    for s in sprites:
+        for ly in range(max(0, s["y"]), min(s["y"] + 16, SCREEN_H)):
+            lines[ly] += 1
+    return max(lines) if lines else 0
+
+
+def o3_shadow_lines(ax_row, enemy_cells, dy0p, dy0e, base_p, base_e,
+                    include=None):
+    """Simulacao linha-a-linha independente (brute force) do pico de celulas
+    desenhadas por scanline visivel.
+
+    `include` = indices do inimigo que desenham (None = todos). Confere a
+    politica exata (o3_compose_rows) sem compartilhar a sua aritmetica."""
+    lines = [0] * SCREEN_H
+
+    def add(y0, n):
+        if y0 < 1:
+            return
+        for ly in range(y0, min(y0 + 16, SCREEN_H)):
+            lines[ly] += n
+
+    for rp, pc in (ax_row or {}).items():
+        add(base_p + dy0p + O3_ROW_PITCH * rp, pc)
+    for oi, c in enumerate(enemy_cells):
+        if include is not None and oi not in include:
+            continue
+        add(base_e + dy0e + O3_ROW_PITCH * c["row"], 1)
+    return max(lines) if lines else 0
+
+
+def o3_policy_crosscheck(cases):
+    """Confere a politica exata contra o brute force linha-a-linha.
+
+    `cases` = [(ax_row, enemy_cells, dy0p, dy0e, base_p, base_e)].
+    Falha se o pico da politica diferir do brute force do mesmo conjunto
+    incluido ou se o brute force passar de 8/linha. Retorna (casos, falhas)."""
+    bad = 0
+    for ax_row, cells, dy0p, dy0e, base_p, base_e in cases:
+        ec, drops, peak = o3_compose_rows(ax_row, cells, dy0p, dy0e,
+                                          base_p, base_e)
+        keep = {i for i in range(len(cells))} - {d["order"] for d in drops}
+        brute = o3_shadow_lines(ax_row, cells, dy0p, dy0e, base_p, base_e,
+                                include=keep)
+        if peak != brute or brute > O3_PER_LINE:
+            bad += 1
+    return len(cases), bad
 
 
 # ------------------------------------------------------------- escrita -------
@@ -749,6 +1075,819 @@ def emit(project: Path, generated_at: str):
     return rec_path, record
 
 
+# ------------------------------------------------------------- O3 emit ------
+
+def _o3_load_env(project: Path):
+    """Carrega e verifica escopo/M3/IR/O2 do lote O3 (fail-closed)."""
+    scope_path = project / O3_SCOPE
+    scope = load_json(scope_path)
+    if (scope.get("schema") != "openbor_sms_batch_boundary_v1"
+            or scope.get("artifact_kind") != "openbor_sms_o3_combat_scope"):
+        raise SystemExit("escopo O3 ausente ou inesperado")
+
+    art_path = latest(project, "data/generated/art/o3_art_conversion_*.json")
+    art = load_json(art_path)
+    for out in art["outputs"]:
+        p = project / out["path"]
+        if sha256_file(p) != out["sha256"]:
+            raise SystemExit(f"artefato de arte divergente: {out['path']}")
+
+    ir_paths, ir = {}, {}
+    for actor in ("ax", "long"):
+        ir_paths[actor] = latest(
+            project, f"data/generated/ir/gal_town1_{actor}_model_ir_*.json")
+        ir[actor] = load_json(ir_paths[actor])
+        src = ir[actor]["source"]
+        if sha256_file(project / src["path"]) != src["sha256"]:
+            raise SystemExit(f"IR {actor}: fonte divergente ({src['path']})")
+
+    o2_path = latest(project, "data/generated/emit/o2_emission_*.json")
+    o2 = load_json(o2_path)
+    return {"scope": scope, "scope_path": scope_path, "art": art,
+            "art_path": art_path, "ir": ir, "ir_paths": ir_paths,
+            "o2": o2, "o2_path": o2_path}
+
+
+def _o3_pose_cells(data, canvas, actor, order):
+    """Celulas de uma pose (lista empacotada) com dx/dy/slot."""
+    dx0, dy0 = canvas[actor]["dx0"], canvas[actor]["dy0"]
+    packed = []
+    for slot, c in enumerate(order(data)):
+        packed.append({"row": c["row"], "col": c["col"], "dens": c["dens"],
+                       "slot": slot, "dx": dx0 + c["col"] * 8,
+                       "dy": dy0 + c["row"] * 16, "rows16": c["rows16"]})
+    return packed
+
+
+def _o3_anim_plan(env):
+    """Tabelas de anim do recorte: frames filtrados ao pose set + delays pinados."""
+    scope = env["scope"]
+    sc = scope["slice_contract"]
+    anchor = scope["measured_budgets"]["canvas"]["anchor"]
+    frame_sets = {"ax": scope["measured_budgets"]["pose_set_final"]["ax_frames"],
+                  "long": scope["measured_budgets"]["pose_set_final"]["long_frames"]}
+    anim_ids = {"ax": ["idle", "walk", "attack1", "jump", "pain2", "fall2",
+                       "rise", "death"],
+                "long": ["idle", "walk", "attack1", "pain2", "fall2", "rise",
+                         "death"]}
+    expected = {
+        "ax": {"idle": [5], "walk": [7, 7], "attack1": [3, 3, 3, 3, 9],
+               "jump": [21, O3_DELAY_CAP], "pain2": [5, 30],
+               "fall2": [O3_DELAY_CAP, 5, 5, 5, 1], "rise": [33, 12],
+               "death": [1]},
+        "long": {"idle": [5], "walk": [7, 7], "attack1": [3, 3, 3, 9],
+                 "pain2": [5, 30], "fall2": [O3_DELAY_CAP, 5, 5, 5, 1],
+                 "rise": [33, 12]}}
+    # ciclo de morte do long pinado em NTSC ("5/1,4/2,3/3,2/4,1/5 + 30" com a
+    # repeticao x3 da fonte; delay 50 -> 30)
+    long_death = ([5, 1] * 3 + [4, 2] * 3 + [3, 3] * 3 + [2, 4] * 3
+                  + [1, 5] * 3 + [30])
+    plan = {"ax": [], "long": []}
+    attacks = {}
+    for actor in ("ax", "long"):
+        frame_idx = {f: i for i, f in enumerate(frame_sets[actor])}
+        by_name = {a["name"]: a for a in env["ir"][actor]["anims"]}
+        for aid, name in enumerate(anim_ids[actor]):
+            src = by_name.get(name)
+            if src is None:
+                raise SystemExit(f"IR {actor}: anim {name} ausente")
+            seq, dropped = [], 0
+            for f in src["frames"]:
+                frame = Path(f["path"]).name[:-4]
+                if frame not in frame_idx:
+                    dropped += 1
+                    continue
+                seq.append((frame, frame_idx[frame], f))
+            if not seq:
+                raise SystemExit(f"IR {actor}/{name}: nenhum frame no pose set")
+            if name == "death" and actor == "long":
+                delays = list(long_death)
+                if len(delays) != len(seq):
+                    raise SystemExit("ciclo de morte do long diverge da fonte")
+            else:
+                delays = [min(O3_DELAY_CAP, ntsc_delay(f["delay"]))
+                          for _fr, _i, f in seq]
+                if delays != expected[actor][name]:
+                    raise SystemExit(
+                        f"delays {actor}/{name} = {delays} != pin "
+                        f"{expected[actor][name]}")
+            entry = {"id": aid, "name": name,
+                     "frames": [[i, d] for (_fr, i, _f), d in zip(seq, delays)],
+                     "frame_names": [fr for fr, _i, _f in seq],
+                     "loop": 1 if name in ("idle", "walk") else 0,
+                     "land": 0xFF, "dropped_source_frames": dropped}
+            if name == "fall2" and src["landframe"] is not None:
+                entry["land"] = int(src["landframe"])
+            plan[actor].append(entry)
+        # caixa de ataque: IR x pin do escopo (relativa ao anchor 240,204)
+        src = by_name["attack1"]
+        pin = sc["attack_boxes"][f"{actor}_attack1"]
+        seq = [f for f in src["frames"]
+               if Path(f["path"]).name[:-4] in frame_idx]
+        box = slot = None
+        active = []
+        for pos, f in enumerate(seq):
+            if not f["attacks"]:
+                continue
+            at = f["attacks"][0]
+            vals = [at["x"], at["y"], at["right"], at["down"], at["damage"],
+                    at["pausetime"], at["depth"]]
+            if box is None:
+                box, slot = vals, at["slot"]
+            elif vals != box or at["slot"] != slot:
+                raise SystemExit(f"{actor}/attack1: caixas/slots divergentes")
+            active.append(pos)
+        pin_box = [pin["box"][0], pin["box"][1], pin["box"][2], pin["box"][3],
+                   pin["box"][4], pin["box"][8], pin["box"][9]]
+        if box != pin_box:
+            raise SystemExit(f"{actor}/attack1: caixa IR {box} != escopo {pin_box}")
+        pin_active = [pos for pos, f in enumerate(seq)
+                      if Path(f["path"]).name[:-4] in pin["ativo"]]
+        if active != pin_active:
+            raise SystemExit(f"{actor}/attack1: frames ativos {active} != pin {pin_active}")
+        attacks[actor] = {
+            "slot": slot, "box_abs": box,
+            "rel": [box[0] - anchor[0], box[1] - anchor[1], box[2], box[3]],
+            "damage": box[4], "pause": box[5], "depth": box[6],
+            "first": active[0], "last": active[-1], "active": active}
+    return plan, attacks
+
+
+def _o3_header_poses(poses):
+    out = ["/* gerado por tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py */\n"
+           "/* pose = frame*2 + lado (0=left, 1=right); cell = indice no slot;\n"
+           "   tile do sprite = slot_base + 2*cell; dx/dy relativos ao anchor */\n"
+           "typedef struct { signed char dx; signed char dy; "
+           "unsigned char cell; } o3_cell;\n"
+           "typedef struct { const o3_cell *cells; unsigned char count; } o3_pose;\n"]
+    for actor in ("ax", "long"):
+        for i, p in enumerate(poses[actor]):
+            body = ",".join(f"{{{c['dx']},{c['dy']},{c['slot']}}}"
+                            for c in p["cells"])
+            out.append(f"const o3_cell o3_{actor}_pose{i:02d}[] = {{{body}}};\n")
+        out.append(f"#define O3_{actor.upper()}_POSE_COUNT {len(poses[actor])}\n")
+        entries = ",".join(f"{{o3_{actor}_pose{i:02d},{len(p['cells'])}}}"
+                           for i, p in enumerate(poses[actor]))
+        out.append(f"const o3_pose o3_{actor}_poses[{len(poses[actor])}] = "
+                   f"{{{entries}}};\n")
+    return "".join(out)
+
+
+def _o3_header_blocks(blocks, bank_map):
+    out = ["/* gerado por tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py */\n"
+           "/* bloco da pose = count*64 bytes, lido em 0x8000+addr apos\n"
+           "   SMS_mapROMBank(bank); banco 7 = reserva (D1) */\n"
+           "typedef struct { unsigned char bank; unsigned int addr; } o3_block;\n"]
+    idx = 0
+    for actor in ("ax", "long"):
+        n = len(blocks[actor])
+        entries = ",".join(f"{{{bank_map[idx + i][0]},{bank_map[idx + i][1]}}}"
+                           for i in range(n))
+        out.append(f"const o3_block o3_{actor}_blocks[{n}] = {{{entries}}};\n")
+        out.append(f"#define O3_{actor.upper()}_BLOCK_COUNT {n}\n")
+        idx += n
+    out.append(f"#define O3_BLOCK_BYTES_PER_CELL 64\n"
+               f"#define O3_BANK_FIRST {O3_BANK_FIRST}\n"
+               f"#define O3_BANK_COUNT {O3_BANK_COUNT}\n")
+    return "".join(out)
+
+
+def _o3_header_rows(poses, canvas):
+    out = ["/* gerado por tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py */\n"
+           "/* politica de corte D9-a revisada (contagem exata por scanline):\n"
+           "   o runtime mantem ec[O3_ROWS] (celulas incluidas por linha do\n"
+           "   inimigo) e consulta a tabela estatica do jogador por indice de\n"
+           "   pose (frame*2 + lado); linhas do mesmo ator nao se sobrepoem\n"
+           "   (passo 16 px), entao line_count = o3_ax_rows[pose][rp] + ec[r]\n"
+           "   nas regioes sobrepostas. Sobreposicao: linhas cujos topos\n"
+           "   dividem scanlines visiveis (1..191). */\n"
+           f"#define O3_ROWS {O3_ROWS}\n"
+           f"#define O3_ROW_PITCH {O3_ROW_PITCH}\n"
+           f"#define O3_DY0P ({canvas['ax']['dy0']})\n"
+           f"#define O3_DY0E ({canvas['long']['dy0']})\n"]
+    rows = ["{" + ",".join(str(v) for v in (p["rows"].get(r, 0)
+                                            for r in range(O3_ROWS))) + "}"
+            for p in poses["ax"]]
+    out.append(f"const unsigned char o3_ax_rows[{len(poses['ax'])}][{O3_ROWS}]"
+               " = {" + ",".join(rows) + "};\n")
+    return "".join(out)
+
+
+def _o3_header_anim(plan, attacks):
+    out = ["/* gerado por tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py */\n"
+           "/* frame = indice no pose set; pose = frame*2 + facing (0=left,1=right);\n"
+           "   land = 0xFF quando nao ha landframe; delays em frames NTSC */\n"
+           "typedef struct { unsigned char frame; unsigned char delay; } o3_aframe;\n"
+           "typedef struct { const o3_aframe *frames; unsigned char count; "
+           "unsigned char loop; unsigned char land; } o3_anim;\n"
+           "typedef struct { signed char x, y; unsigned char w, h, dmg, pause, "
+           "depth, first, last; } o3_attack;\n"]
+    for actor in ("ax", "long"):
+        for e in plan[actor]:
+            rows = ",".join(f"{{{i},{d}}}" for i, d in e["frames"])
+            out.append(f"const o3_aframe o3_{actor}_anim_{e['name']}[] = {{{rows}}};\n")
+        for e in plan[actor]:
+            out.append(f"#define O3_{actor.upper()}_ANIM_{e['name'].upper()} {e['id']}\n")
+        out.append(f"#define O3_{actor.upper()}_ANIM_COUNT {len(plan[actor])}\n")
+        entries = ",".join(
+            f"{{o3_{actor}_anim_{e['name']}}},{len(e['frames'])},{e['loop']},"
+            f"{e['land']}}}" for e in plan[actor])
+        out.append(f"const o3_anim o3_{actor}_anims[{len(plan[actor])}] = "
+                   f"{{{entries}}};\n")
+        a = attacks[actor]
+        out.append(f"const o3_attack o3_{actor}_attack = "
+                   f"{{{a['rel'][0]},{a['rel'][1]},{a['rel'][2]},{a['rel'][3]},"
+                   f"{a['damage']},{a['pause']},{a['depth']},{a['first']},"
+                   f"{a['last']}}};\n")
+    return "".join(out)
+
+
+def _o3_header_arcs(arcs):
+    out = ["/* gerado por tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py */\n"
+           "/* D5 simulado por tick (pos += v*100/gs, v -= g*100/gs) e amostrado por\n"
+           "   frame NTSC; x = modulo do deslocamento (sinal do facing no runtime) */\n"]
+    for label, d in (("jump", arcs["jump"]), ("toss", arcs["toss"])):
+        out.append(f"#define O3_{label.upper()}_FRAMES {d['frames']}\n")
+        out.append(c_array(f"o3_{label}_y", bytes(d["y"]), per_line=16))
+        out.append(c_array(f"o3_{label}_x", bytes(d["x"]), per_line=16))
+    out.append(f"#define O3_ENTRY_FRAMES {arcs['entry']['frames']}\n")
+    out.append(c_array("o3_entry_y", bytes(arcs["entry"]["y"]), per_line=16))
+    return "".join(out)
+
+
+def _o3_header_level(env):
+    sc = env["scope"]["slice_contract"]
+    q88 = sc["physics_tables"]["q88"]
+    return (
+        "/* gerado por tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py */\n"
+        f"#define O3_SCREEN_H {SCREEN_H}\n"
+        f"#define O3_PLAYER_START_X {sc['spawn']['player']['x']}\n"
+        f"#define O3_PLAYER_START_Z {sc['spawn']['player']['z']}\n"
+        f"#define O3_PLAYER_START_ALT {sc['spawn']['player']['altitude']}\n"
+        f"#define O3_PLAYER_MIN_X {PLAYER_MIN_X}\n"
+        f"#define O3_PLAYER_MAX_X {PLAYER_MAX_X}\n"
+        f"#define O3_ENEMY_X {sc['spawn']['enemy']['x']}\n"
+        f"#define O3_ENEMY_Z {sc['spawn']['enemy']['z']}\n"
+        f"#define O3_Z_MIN {Z_MIN}\n"
+        f"#define O3_Z_MAX {Z_MAX}\n"
+        f"#define O3_CAM_DX {CAM_DX}\n"
+        f"#define O3_CAM_MAX {CAM_MAX}\n"
+        f"#define O3_HP_PLAYER {sc['cast']['hp_player']}\n"
+        f"#define O3_HP_ENEMY {sc['cast']['hp_enemy']}\n"
+        f"#define O3_WALK_Q8 {q88['player_walk']}u\n"
+        f"#define O3_CHASE_Q8 {q88['enemy_chase']}u\n"
+        f"#define O3_ATTACK_RANGE_X {sc['ia']['attack_range_x']}\n"
+        f"#define O3_ATTACK_RANGE_Z {sc['ia']['attack_range_z']}\n"
+        f"#define O3_HIT_Z_TOLERANCE {sc['hit_rules']['z_tolerance']}\n"
+        f"#define O3_NEXT_HIT_FRAMES {sc['hit_rules']['next_hit_frames']}\n"
+        f"#define O3_HITSTOP_AX {sc['hit_rules']['hitstop_frames']['ax']}\n"
+        f"#define O3_HITSTOP_LONG {sc['hit_rules']['hitstop_frames']['long']}\n"
+        f"#define O3_TILE_SPR_BASE {O3_AX_SLOT_A}\n"
+        f"#define O3_TILE_BG_BASE {O3_BG_BASE}\n"
+        f"#define O3_TILE_HUD_GREEN {O3_HUD_BASE}\n"
+        f"#define O3_TILE_HUD_RED {O3_HUD_BASE + 1}\n"
+        f"#define O3_TILE_HUD_BLACK {O3_HUD_BASE + 2}\n"
+        f"#define O3_SLOT_CELLS {O3_SLOT_CELLS}\n"
+        f"#define O3_CELL_TILES {O3_CELL_TILES}\n"
+        f"#define O3_AX_SLOT_A {O3_AX_SLOT_A}\n"
+        f"#define O3_AX_SLOT_B {O3_AX_SLOT_B}\n"
+        f"#define O3_LONG_SLOT_A {O3_LONG_SLOT_A}\n"
+        f"#define O3_LONG_SLOT_B {O3_LONG_SLOT_B}\n"
+        f"#define O3_PER_ROW_MAX {O3_PER_LINE}\n")
+
+
+def emit_o3(project: Path, generated_at: str):
+    env = _o3_load_env(project)
+    scope, art = env["scope"], env["art"]
+    mb = scope["measured_budgets"]
+    stamp = generated_at[:10].replace("-", "")
+    canvas = mb["canvas"]
+    if canvas["ax"]["dy0"] != O3_DY0P or canvas["long"]["dy0"] != O3_DY0E:
+        raise SystemExit(
+            "canvas dy0 do escopo difere das constantes O3_DY0P/O3_DY0E")
+    frame_sets = {"ax": mb["pose_set_final"]["ax_frames"],
+                  "long": mb["pose_set_final"]["long_frames"]}
+    for actor in ("ax", "long"):
+        if [p["frame"] for p in art["poses"][actor]["poses"]] != frame_sets[actor]:
+            raise SystemExit(f"poses {actor} do M3 divergem do escopo (ordem/nomes)")
+        if art["poses"][actor]["frames"] != frame_sets[actor]:
+            raise SystemExit(f"frames {actor} do M3 divergem do escopo")
+    p1_codes = art["palettes"]["p1_sprites"]["codes"]
+    p1_scaled = [(85 * c[0], 85 * c[1], 85 * c[2]) for c in p1_codes]
+
+    # ---- poses: celulas, perfis, blocos, bancos -----------------------------
+    poses = {"ax": [], "long": []}
+    blocks = {"ax": [], "long": []}
+    cells_both = {"ax": 0, "long": 0}
+    max_cells = 0
+    max_row = {"ax": 0, "long": 0}
+    long_over = []
+    for actor in ("ax", "long"):
+        order = o3_priority_order if actor == "long" else \
+            (lambda cs: sorted(cs, key=lambda c: (c["row"], c["col"])))
+        for pose in art["poses"][actor]["poses"]:
+            frame, declared = pose["frame"], pose["cells_8x16"]
+            side_cells = {}
+            for side in ("left", "right"):
+                png = project / pose["pngs"][side]
+                if sha256_file(png) != pose["sha256"][side]:
+                    raise SystemExit(f"PNG de pose divergente: {pose['pngs'][side]}")
+                got = o3_cells_of_png(png, KEY_RGB, p1_scaled)
+                if len(got) != declared:
+                    raise SystemExit(
+                        f"{actor}/{frame}/{side}: {len(got)} celulas != {declared} (M3)")
+                side_cells[side] = got
+            if declared != mb["cells_per_frame"][actor][frame]:
+                raise SystemExit(f"{actor}/{frame}: contagem diverge do escopo")
+            for side in ("left", "right"):
+                per_row = o3_row_counts(side_cells[side])
+                row_peak = max(per_row.values())
+                if actor == "ax" and row_peak > O3_PER_LINE:
+                    raise SystemExit(
+                        f"ax/{frame}/{side}: {row_peak} celulas na mesma linha"
+                        " (jogador desenha inteiro, sem mecanismo de corte)")
+                if actor == "long" and row_peak > O3_PER_LINE:
+                    long_over.append({"frame": frame, "side": side,
+                                      "row_peak": row_peak})
+                max_row[actor] = max(max_row[actor], row_peak)
+                packed = _o3_pose_cells(side_cells[side], canvas, actor, order)
+                poses[actor].append(
+                    {"frame": frame, "side": side, "cells": packed,
+                     "rows": per_row})
+                blocks[actor].append(o3_blocks_for_cells(packed))
+                cells_both[actor] += len(packed)
+                max_cells = max(max_cells, len(packed))
+    if max_cells > O3_SLOT_CELLS:
+        raise SystemExit(f"pose com {max_cells} celulas > slot {O3_SLOT_CELLS}")
+    flat_blocks = blocks["ax"] + blocks["long"]
+    total_bytes = sum(len(b) for b in flat_blocks)
+    if total_bytes > O3_BANK_COUNT * O3_BANK_BYTES:
+        raise SystemExit("blocos excedem os bancos 2..6")
+    bank_map = o3_pack_banks([len(b) for b in flat_blocks])
+    bank_bin = bytearray(O3_BANK_COUNT * O3_BANK_BYTES)
+    bank_used = {}
+    for blob, (bank, addr) in zip(flat_blocks, bank_map):
+        off = (bank - O3_BANK_FIRST) * O3_BANK_BYTES + addr
+        bank_bin[off:off + len(blob)] = blob
+        bank_used[bank] = max(bank_used.get(bank, 0), addr + len(blob))
+
+    # ---- anim/arcs -----------------------------------------------------------
+    anim_plan, attacks = _o3_anim_plan(env)
+    jump_y, jump_x, jump_ticks = o3_sim_arc(3.3, 1.0)
+    toss_y, toss_x, toss_ticks = o3_sim_arc(3.0, 1.2)
+    entry_y, entry_ticks = o3_sim_fall(200)
+    arcs = {"jump": {"frames": len(jump_y) - 1, "apex": max(jump_y),
+                     "drift": jump_x[-1], "ticks": jump_ticks,
+                     "y": jump_y, "x": jump_x},
+            "toss": {"frames": len(toss_y) - 1, "apex": max(toss_y),
+                     "drift": toss_x[-1], "ticks": toss_ticks,
+                     "y": toss_y, "x": toss_x},
+            "entry": {"frames": len(entry_y) - 1, "ticks": entry_ticks,
+                      "y": entry_y}}
+    if not (39 <= arcs["jump"]["frames"] <= 41
+            and 53 <= arcs["jump"]["apex"] <= 56
+            and 64 <= arcs["jump"]["drift"] <= 68):
+        raise SystemExit(f"pulo fora do contrato D5: {arcs['jump']}")
+    if not (35 <= arcs["toss"]["frames"] <= 37
+            and 44 <= arcs["toss"]["apex"] <= 47
+            and 70 <= arcs["toss"]["drift"] <= 74):
+        raise SystemExit(f"arremesso fora do contrato D5: {arcs['toss']}")
+
+    # ---- varredura declarada da politica (D9-a revisada) ---------------------
+    dy0p = canvas["ax"]["dy0"]
+    dy0e = canvas["long"]["dy0"]
+    dz_values = (-128, -64, -24, -8, 0, 8, 24, 64, 128)
+
+    ax_rows = [p["rows"] for p in poses["ax"]]
+
+    scan = {"cases": 0, "violations": [], "max_line_peak": 0,
+            "scenes_with_drops": 0, "top": []}
+    for ai, pa in enumerate(poses["ax"]):
+        for li, pl in enumerate(poses["long"]):
+            for dz in dz_values:
+                for s_p in (9, 19, 25):
+                    for rho in (0, 7):
+                        base_p = 8 * s_p + rho
+                        base_e = base_p + dz
+                        _ec, drops, peak = o3_compose_rows(
+                            ax_rows[ai], pl["cells"], dy0p, dy0e,
+                            base_p, base_e)
+                        scan["cases"] += 1
+                        if peak > scan["max_line_peak"]:
+                            scan["max_line_peak"] = peak
+                        if peak > O3_PER_LINE:
+                            scan["violations"].append(
+                                {"ax": ai, "long": li, "dz": dz, "s_p": s_p,
+                                 "rho": rho, "peak": peak})
+                        if drops:
+                            scan["scenes_with_drops"] += 1
+                        scan["top"].append((len(drops), peak, ai, li, dz, s_p, rho))
+        if len(scan["top"]) > 20000:
+            scan["top"].sort(key=lambda t: (-t[0], -t[1]))
+            del scan["top"][8:]
+    scan["top"].sort(key=lambda t: (-t[0], -t[1]))
+    scan["top"] = scan["top"][:8]
+    if scan["violations"]:
+        raise SystemExit(
+            f"politica D9-a viola 8/linha em {len(scan['violations'])} casos")
+
+    # ---- cross-check brute force (linha a linha, independente) --------------
+    xcheck_cases, xcheck_bad = o3_policy_crosscheck([
+        (ax_rows[ai], poses["long"][li]["cells"], dy0p, dy0e,
+         8 * s_p + rho, 8 * s_p + rho + dz)
+        for ai in range(0, len(poses["ax"]), 7)
+        for li in range(0, len(poses["long"]), 5)
+        for dz in (-64, 0, 24)
+        for s_p in (9, 19, 25)
+        for rho in (0, 7)])
+    if xcheck_bad:
+        raise SystemExit(
+            f"politica de linhas diverge do brute force em {xcheck_bad} casos")
+
+    # ---- solo (acumulacao do proprio inimigo; caso declarado 9/linha) --------
+    solo = []
+    for li, pl in enumerate(poses["long"]):
+        _ec, drops, peak = o3_compose_rows({}, pl["cells"], dy0p, dy0e,
+                                           152, 152)
+        solo.append({"pose": li, "frame": pl["frame"], "side": pl["side"],
+                     "peak": peak, "drops": len(drops), "dropped": drops})
+    solo_declared = [s for s in solo if s["frame"] in ("fall03", "death01")]
+    if any(s["drops"] != 1 for s in solo_declared):
+        raise SystemExit("caso declarado fall03/death01 solo nao cai em 1 celula")
+    if any(s["drops"] for s in solo if s["frame"] not in ("fall03", "death01")):
+        raise SystemExit("long solo fora do declarado com celulas caindo")
+    declared_over = {"fall03", "death01"}
+    if not {d["frame"] for d in long_over} <= declared_over:
+        raise SystemExit(f"long com linha acima de 8 fora do declarado: {long_over}")
+
+    # ---- manifests -----------------------------------------------------------
+    def scene_desc(kind, pa, pl, dz, base_p, counters, note):
+        return {"kind": kind, "policy": "o3 linhas exatas D9-a revisada",
+                "player": None if pa is None else
+                {"frame": pa["frame"], "side": pa["side"],
+                 "pose_index": poses["ax"].index(pa),
+                 "rows": "contagem por linha de canvas (sem x)"},
+                "enemy": {"frame": pl["frame"], "side": pl["side"],
+                          "pose_index": poses["long"].index(pl)},
+                "dz": dz, "base_player": base_p, "base_enemy": base_p + dz,
+                "counters": counters, "note": note,
+                "sat_order": "jogador (ordem da pose) + inimigo (dens desc)"}
+
+    def write_manifest(path: Path, scene, sat, ec, drops, pre_peak):
+        peak = o3_line_peak(sat)
+        if peak > O3_PER_LINE:
+            raise SystemExit(f"{path.name}: pico {peak} > 8 pos-politica")
+        if len(sat) > SAT_MAX:
+            raise SystemExit(f"{path.name}: SAT {len(sat)} > {SAT_MAX}")
+        for s in sat:
+            if not (0 <= s["x"] <= 255 and 1 <= s["y"] <= 255
+                    and 0 <= s["tile"] <= 255):
+                raise SystemExit(f"{path.name}: sprite fora do contrato: {s}")
+        manifest = {
+            "schema": "sprite_scene_manifest_v1",
+            "sprite_size": "8x16", "zoomed": False, "screen_h": SCREEN_H,
+            "sat_terminated": True, "sprites": sat, "scene": scene,
+            "simulation": {"peak_per_line": peak, "pre_policy_peak": pre_peak,
+                           "row_counters": {str(k): v
+                                            for k, v in sorted(ec.items())},
+                           "drops": len(drops), "drops_detail": drops[:8],
+                           "sat_entries": len(sat),
+                           "note": ("politica D9-a revisada: contagem exata por "
+                                    "linha de canvas (passo 16) + tabela "
+                                    "estatica do jogador; conferido pelo gate "
+                                    "audit_sprite_line_sim")}}
+        write_text(path, json.dumps(manifest, indent=1, ensure_ascii=False) + "\n")
+        return manifest
+
+    px, ex, cam = 484, 500, cam_of(484)
+    manifests = []
+
+    def emit_pair(pa, pl, dz, base_p, kind, stem):
+        sat, ec, drops, peak = o3_compose_sprites(
+            pa["rows"], pa["cells"], dy0p, base_p, px,
+            pl["cells"], dy0e, base_p + dz, ex, cam)
+        all_sat = []
+        for c in pa["cells"]:
+            y = base_p + dy0p + O3_ROW_PITCH * c["row"]
+            if y < 1:
+                continue
+            x = px - cam + c["dx"]
+            if 0 <= x <= 255:
+                all_sat.append({"x": x, "y": y, "tile": 0})
+        for c in pl["cells"]:
+            y = base_p + dz + dy0e + O3_ROW_PITCH * c["row"]
+            if y < 1:
+                continue
+            x = ex - cam + c["dx"]
+            if 0 <= x <= 255:
+                all_sat.append({"x": x, "y": y, "tile": 0})
+        pre_peak = o3_line_peak(all_sat)
+        scene = scene_desc(kind, pa, pl, dz, base_p,
+                           "linhas do jogador (estatico) + ec do inimigo",
+                           "cena de politica (x fixo para o gate; decisao "
+                           "x-independente, licao O2)")
+        path = project / f"data/generated/emit/{stem}_{stamp}.json"
+        manifest = write_manifest(path, scene, sat, ec, drops, pre_peak)
+        manifests.append((path, manifest))
+        return manifest
+
+    for side in ("left", "right"):
+        pa = next(p for p in poses["ax"]
+                  if p["frame"] == "a102" and p["side"] == side)
+        pl = next(p for p in poses["long"]
+                  if p["frame"] == "fall03" and p["side"] == side)
+        emit_pair(pa, pl, 24, 152, "worst_pair_declared",
+                  f"o3_sprite_scene_pair_a102_{side}_fall03_{side}_dz24")
+
+    for frame in ("fall03", "death01"):
+        for side in ("left", "right"):
+            pl = next(p for p in poses["long"]
+                      if p["frame"] == frame and p["side"] == side)
+            sat, ec, drops, peak = o3_compose_sprites(
+                None, None, dy0p, 152, px, pl["cells"], dy0e, 152, ex, cam)
+            all_sat = []
+            for c in pl["cells"]:
+                y = 152 + dy0e + O3_ROW_PITCH * c["row"]
+                if y < 1:
+                    continue
+                x = ex - cam + c["dx"]
+                if 0 <= x <= 255:
+                    all_sat.append({"x": x, "y": y, "tile": 0})
+            scene = scene_desc("solo_declared", None, pl, 0, 152,
+                               "zero (acumulacao do proprio inimigo)",
+                               "propriedade de politica do caso declarado 9/linha")
+            path = project / (
+                f"data/generated/emit/o3_sprite_scene_solo_long_{frame}"
+                f"_{side}_{stamp}.json")
+            manifest = write_manifest(path, scene, sat, ec, drops,
+                                      o3_line_peak(all_sat))
+            manifests.append((path, manifest))
+
+    for i, (ndrops, peak, ai, li, dz, s_p, rho) in enumerate(scan["top"][:6]):
+        pa, pl = poses["ax"][ai], poses["long"][li]
+        emit_pair(pa, pl, dz, 8 * s_p + rho, "scan_pressure",
+                  f"o3_sprite_scene_scan{i}_ax_{pa['frame']}_{pa['side']}"
+                  f"_long_{pl['frame']}_{pl['side']}_dz{dz}")
+
+    # ---- escritas ------------------------------------------------------------
+    inc = project / "inc/o3"
+    heads = {
+        "o3_poses.h": _o3_header_poses(poses),
+        "o3_blocks.h": _o3_header_blocks(blocks, bank_map),
+        "o3_rows.h": _o3_header_rows(poses, canvas),
+        "o3_anim.h": _o3_header_anim(anim_plan, attacks),
+        "o3_arcs.h": _o3_header_arcs(arcs),
+        "level.h": _o3_header_level(env),
+    }
+    for name, text in heads.items():
+        write_text(inc / name, text)
+    bank_bin_path = project / f"res/o3/banks/o3_pose_blocks_{stamp}.bin"
+    bank_bin_path.parent.mkdir(parents=True, exist_ok=True)
+    bank_bin_path.write_bytes(bytes(bank_bin))
+
+    plan = {
+        "schema": "sms_vram_plan_v1", "screen_height": SCREEN_H,
+        "vertical_scroll": False, "max_sprites": 2 * O3_SLOT_CELLS,
+        "reg6": "0xFB", "name_base": 14336,
+        "regions": [
+            {"label": "spr_tiles", "addr": 0, "bytes": O3_SPR_TILES * 32,
+             "role": "sprite_tiles"},
+            {"label": "bg_tiles", "addr": O3_BG_BASE * 32,
+             "bytes": O3_BG_TILES * 32, "role": "bg_tiles"},
+            {"label": "hud_tiles", "addr": O3_HUD_BASE * 32,
+             "bytes": O3_HUD_TILES * 32, "role": "bg_tiles"}],
+        "extra_name_tables": [], "pockets": []}
+    plan_path = project / f"data/generated/plans/o3_vram_plan_{stamp}.json"
+    write_text(plan_path, json.dumps(plan, indent=1, ensure_ascii=False) + "\n")
+
+    # reuso D12: conferir bytes dos headers O2 citados (BG/HUD/paletas)
+    reuse_paths = ("inc/o2/pal_bg.h", "inc/o2/pal_spr.h", "inc/o2/bg_tiles.h",
+                   "inc/o2/bg_cols.h", "inc/o2/hud_tiles.h")
+    o2_by_path = {o["path"]: o for o in env["o2"]["outputs"]}
+    reuse = []
+    for rel in reuse_paths:
+        o = o2_by_path.get(rel)
+        if o is None:
+            raise SystemExit(f"O2 nao registra {rel} (reuso D12)")
+        p = project / rel
+        if sha256_file(p) != o["sha256"]:
+            raise SystemExit(f"header O2 divergente: {rel}")
+        reuse.append({"path": rel, "sha256": o["sha256"],
+                      "bytes": p.stat().st_size})
+    pal_spr_bytes = bytes([0x3C] + [cram_byte(c) for c in p1_codes]
+                          + [0x00] * (15 - len(p1_codes)))
+    if c_array("o2_pal_spr", pal_spr_bytes) not in \
+            (project / "inc/o2/pal_spr.h").read_text(encoding="utf-8"):
+        raise SystemExit("pal_spr.h O2 nao contem a P1 herdada byte a byte")
+
+    # ---- registro -------------------------------------------------------------
+    outputs = []
+    for name in heads:
+        p = inc / name
+        outputs.append({"path": str(p.relative_to(project)),
+                        "sha256": sha256_file(p), "bytes": p.stat().st_size})
+    for p in (bank_bin_path, plan_path):
+        outputs.append({"path": str(p.relative_to(project)),
+                        "sha256": sha256_file(p), "bytes": p.stat().st_size})
+    for p, _m in manifests:
+        outputs.append({"path": str(p.relative_to(project)),
+                        "sha256": sha256_file(p), "bytes": p.stat().st_size})
+
+    def src_entry(path: Path):
+        return {"path": str(path.relative_to(project)),
+                "sha256": sha256_file(path), "bytes": path.stat().st_size}
+
+    record = {
+        "schema": "openbor_sms_o3_emission_v1",
+        "generated_at": generated_at,
+        "tool": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py",
+        "scope": ("O3 — emissao de combate (slots duplos, blocos bancados, "
+                  "politica de banda, arcs, anim)"),
+        "sources": [src_entry(env["scope_path"]), src_entry(env["art_path"]),
+                    src_entry(env["ir_paths"]["ax"]),
+                    src_entry(env["ir_paths"]["long"]),
+                    src_entry(env["o2_path"])],
+        "reused_o2": reuse,
+        "poses": {"ax": {"count": len(poses["ax"]),
+                         "cells_both_sides": cells_both["ax"]},
+                  "long": {"count": len(poses["long"]),
+                           "cells_both_sides": cells_both["long"]},
+                  "total_cells_both_sides": cells_both["ax"] + cells_both["long"],
+                  "max_cells": max_cells, "slot_cells": O3_SLOT_CELLS,
+                  "blocks_bytes": total_bytes,
+                  "pose_index": "frame*2 + lado (0=left, 1=right)"},
+        "banks": {"first": O3_BANK_FIRST, "count": O3_BANK_COUNT,
+                  "bytes_each": O3_BANK_BYTES,
+                  "capacity": O3_BANK_COUNT * O3_BANK_BYTES,
+                  "used": total_bytes,
+                  "free": O3_BANK_COUNT * O3_BANK_BYTES - total_bytes,
+                  "per_bank": {str(b): bank_used.get(b, 0) for b in range(
+                      O3_BANK_FIRST, O3_BANK_FIRST + O3_BANK_COUNT)},
+                  "bin": {"path": str(bank_bin_path.relative_to(project)),
+                          "sha256": sha256_file(bank_bin_path),
+                          "bytes": bank_bin_path.stat().st_size}},
+        "policy": {
+            "id": "D9-a",
+            "decision": ("contagem exata por scanline (revisao D9-a2, medida): "
+                         "celulas 8x16 em passo de 16 px nao se sobrepoem dentro "
+                         "do mesmo ator, entao cada scanline visivel e coberta "
+                         "por <=1 linha de cada ator; line_count = "
+                         "o3_ax_rows[pose][rp] + ec[row] nas regioes "
+                         "sobrepostas; tabela estatica 32x6 (192 B ROM) + 6 "
+                         "contadores u8 RAM; inimigo anda a ordem de prioridade "
+                         "dens desc"),
+            "refuted": {
+                "model": "contadores de banda (24 bandas de 8 linhas)",
+                "when": ("M4, 2026-10-17, durante a emissao: o caso sintetico "
+                         "9-em-linha e o solo declarado fall03/death01 "
+                         "divergiram do brute force linha a linha"),
+                "measured": ("bandas de 8 linhas conflitam linhas adjacentes "
+                             "(o deslocamento relativo entre atores nao e "
+                             "multiplo de 8), logo o contador de banda nao e "
+                             "a contagem da scanline: no caso declarado "
+                             "fall03/death01 solo caem 10 celulas (nao 1) e o "
+                             "blast radius e inaceitavel"),
+                "verdict": ("bandas refutadas por medicao; politica revisada "
+                            "para linhas exatas (D9-a2) sem cascata")},
+            "rationale": ("candidato (b) mascara expandida por (pose, bucket "
+                          "de z) nao fecha: ambos atores variam z (73x73) e "
+                          "pose (32x28) — tabela inviavel; contadores de banda "
+                          "nao dao contagem exata (ver refuted); linhas exatas "
+                          "custam 192 B ROM + 6 B RAM e ~6 comparacoes/celula"),
+            "scan": {"space": ("32 poses ax x 28 poses long x 9 dz x "
+                               "3 bases x 2 residuos"),
+                     "cases": scan["cases"],
+                     "max_line_peak": scan["max_line_peak"],
+                     "scenes_with_drops": scan["scenes_with_drops"],
+                     "violations": len(scan["violations"])},
+            "crosscheck": {"cases": xcheck_cases, "violations": xcheck_bad,
+                           "method": ("o3_policy_crosscheck: pico da politica "
+                                      "exata vs brute force linha a linha "
+                                      "(o3_shadow_lines) no mesmo conjunto "
+                                      "incluido")},
+            "solo": [{"frame": s["frame"], "side": s["side"],
+                      "drops": s["drops"], "peak": s["peak"],
+                      "dropped": s["dropped"]}
+                     for s in solo if s["drops"]]},
+        "arcs": {"method": ("D5 simulado por tick em Python na emissao "
+                            "(pos += v*100/gs; v -= g*100/gs; g=0.1; gs=200) "
+                            "e amostrado por frame NTSC"),
+                 "jump": {"frames": arcs["jump"]["frames"],
+                          "apex": arcs["jump"]["apex"],
+                          "drift": arcs["jump"]["drift"],
+                          "declared": {"frames": 40, "apex": 54, "drift": 66}},
+                 "toss": {"frames": arcs["toss"]["frames"],
+                          "apex": arcs["toss"]["apex"],
+                          "drift": arcs["toss"]["drift"],
+                          "declared": {"frames": 36, "apex": 46, "drift": 72}},
+                 "entry": {"frames": arcs["entry"]["frames"], "declared": 27,
+                           "note": ("divergencia declarada: D5 diz ~27 frames; "
+                                    "com a mesma integracao do pulo simula "
+                                    f"{arcs['entry']['frames']} (cap "
+                                    "maxfallspeed a pinar no M5)")}},
+        "anim": {actor: [{"id": e["id"], "name": e["name"],
+                          "frames": e["frames"],
+                          "frame_names": e["frame_names"],
+                          "loop": e["loop"], "land": e["land"],
+                          "dropped_source_frames": e["dropped_source_frames"]}
+                         for e in anim_plan[actor]]
+                 for actor in ("ax", "long")},
+        "attacks": attacks,
+        "vram": {"sprite_slots": [0, O3_SPR_TILES - 1],
+                 "sprite_tiles": O3_SPR_TILES, "bg_base": O3_BG_BASE,
+                 "bg_slots": O3_BG_TILES, "hud_base": O3_HUD_BASE,
+                 "hud_slots": O3_HUD_TILES,
+                 "total": O3_SPR_TILES + O3_BG_TILES + O3_HUD_TILES,
+                 "budget": VRAM_TILES,
+                 "margin": VRAM_TILES - (O3_SPR_TILES + O3_BG_TILES + O3_HUD_TILES),
+                 "plan": {"path": str(plan_path.relative_to(project)),
+                          "sha256": sha256_file(plan_path)}},
+        "manifests": [{"path": str(p.relative_to(project)),
+                       "sha256": sha256_file(p),
+                       "scene_kind": m["scene"]["kind"],
+                       "peak_per_line": m["simulation"]["peak_per_line"],
+                       "pre_policy_peak": m["simulation"]["pre_policy_peak"],
+                       "drops": m["simulation"]["drops"],
+                       "sat_entries": m["simulation"]["sat_entries"]}
+                      for p, m in manifests],
+        "checks": {
+            "art_sha_bound": len(art["outputs"]),
+            "ir_source_sha_bound": 2,
+            "o2_reuse_sha_bound": len(reuse),
+            "pal_p1_byte_identical_o2": True,
+            "cells_match_m3_and_scope": True,
+            "policy_crosscheck_cases": xcheck_cases,
+            "policy_crosscheck_violations": xcheck_bad,
+            "policy_scan_cases": scan["cases"],
+            "policy_scan_violations": 0,
+            "solo_declared_drops": {f"{s['frame']}_{s['side']}": s["drops"]
+                                    for s in solo_declared},
+            "player_row_peak_cells": max_row["ax"],
+            "long_rows_over_8": long_over,
+            "banks_fit": True,
+            "vram_total_vs_budget": [O3_SPR_TILES + O3_BG_TILES + O3_HUD_TILES,
+                                     VRAM_TILES]},
+        "outputs": outputs,
+        "notes": [
+            "blocos por pose empacotados na ordem da tabela (jogador varredura; inimigo dens desc)",
+            "upload = copia linear banco->slot (bloco = count*64 bytes; maximo 29x64=1856)",
+            "slots duplos por ator: A/B (double buffer com 'pose ready' no M5)",
+            "corte do inimigo = politica D9-a revisada (linhas exatas, D9-a2); x nao entra na decisao (licao O2)",
+            "walk da fonte tem 4 quadros; pose set usa walk01/walk03 (walk02/04 omitidos por escopo)",
+            "ax anim attack2 (movimento, th101-103) fora do recorte O3; declarar na revisao de escopo (M8)",
+            "solo fall03/death01: 9 celulas na mesma linha do canvas -> a 9a cai (drop declarado; contagem por linha, nao por banda)",
+            "tabelas O3 cabem nos 32 KB com o codigo (O2 free_bytes = 12853; tabelas ~6 KB)"],
+        "open_items": [
+            "ordem de sacrificio fina (dens desc) pendente de revisao artistica",
+            "entry drop: 38 frames simulados vs ~27 declarados (maxfallspeed a pinar no M5)",
+            "gate temporal (audit_sprite_line_sim) roda sobre os manifests deste registro",
+            "measure_vram_map com vdp_regs de sessao: M5 (so plan-mode agora)"],
+    }
+    rec_path = project / f"data/generated/emit/o3_emission_{stamp}.json"
+    write_text(rec_path, json.dumps(record, indent=1, ensure_ascii=False) + "\n")
+    return rec_path, record
+
+
+def self_check_o3() -> bool:
+    ok = True
+    # politica D9-a2: solo 9-em-linha -> exatamente 1 drop e pico 8
+    line = [{"row": 4, "col": c, "dens": 9 - c} for c in range(9)]
+    ec, drops, peak = o3_compose_rows({}, line, -80, -72, 152, 152)
+    ok &= len(drops) == 1 and peak == 8 and max(ec.values()) == 8
+    # jogador 8 na linha sobreposta + inimigo 1 -> 1 drop (contagem exata)
+    ax_row = {2: 8}
+    enemy_one = [{"row": 1, "col": 0, "dens": 5}]
+    ec, drops, peak = o3_compose_rows(ax_row, enemy_one, -80, -72, 152, 152)
+    ok &= len(drops) == 1 and peak == 8
+    # linha do inimigo sem sobreposicao visivel com o jogador -> sem drop
+    ec, drops, peak = o3_compose_rows({0: 8}, enemy_one, -80, -72, 152, 152)
+    ok &= not drops and peak == 8
+    # brute force independente concorda com a politica (pico identico)
+    cases, bad = o3_policy_crosscheck([
+        ({}, line, -80, -72, 152, 152),
+        ({2: 8}, enemy_one, -80, -72, 152, 152),
+        ({0: 8}, enemy_one, -80, -72, 152, 152),
+        ({1: 5, 2: 5, 3: 5}, [{"row": i % 6, "col": i, "dens": 1}
+                              for i in range(7)], -80, -72, 176, 152)])
+    ok &= cases == 4 and bad == 0
+    jy, jx, _jt = o3_sim_arc(3.3, 1.0)
+    ty, tx, _tt = o3_sim_arc(3.0, 1.2)
+    ok &= 39 <= len(jy) - 1 <= 41 and 53 <= max(jy) <= 56
+    ok &= 64 <= jx[-1] <= 68
+    ok &= 35 <= len(ty) - 1 <= 37 and 44 <= max(ty) <= 47
+    ok &= 70 <= tx[-1] <= 74
+    ey, _et = o3_sim_fall(200)
+    ok &= ey[0] == 200 and ey[-1] == 0 and 36 <= len(ey) - 1 <= 40
+    m = o3_pack_banks([1856] * 40)
+    ok &= len(m) == 40 and all(b >= 2 for b, _ in m)
+    try:
+        o3_pack_banks([O3_BANK_BYTES + 1])
+        ok = False
+    except SystemExit:
+        pass
+    return ok
+
+
 def self_check() -> int:
     ok = True
     # tile32: valor 1 -> plano 0 = 0xFF; valor 8 -> plano 3
@@ -774,6 +1913,7 @@ def self_check() -> int:
     ok &= m[0] == 0b00011111
     # cam clamp
     ok &= cam_of(10) == 0 and cam_of(400) == 280 and cam_of(600) == 376
+    ok &= self_check_o3()
     if not ok:
         print("[SELF-CHECK FAIL] sms_emit", file=sys.stderr)
         return 1
@@ -782,9 +1922,12 @@ def self_check() -> int:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="OpenBOR -> pacote C da ROM (O2)")
+    ap = argparse.ArgumentParser(
+        description="OpenBOR -> pacote C da ROM (O2/O3)")
     ap.add_argument("--project", help="raiz do projeto SMSForge alvo")
     ap.add_argument("--generated-at", default=None)
+    ap.add_argument("--scope", choices=("o2", "o3"), default="o2",
+                    help="lote de emissao (o2 = piloto, o3 = combate)")
     ap.add_argument("--self-check", action="store_true")
     args = ap.parse_args(argv)
     if args.self_check:
@@ -794,6 +1937,21 @@ def main(argv=None) -> int:
     project = Path(args.project).resolve()
     generated_at = args.generated_at or datetime.now(timezone.utc).replace(
         microsecond=0).isoformat()
+    if args.scope == "o3":
+        rec_path, record = emit_o3(project, generated_at)
+        pos, banks, vram = record["poses"], record["banks"], record["vram"]
+        pol = record["policy"]["scan"]
+        print(f"[sms_emit] O3 poses: ax {pos['ax']['count']} / long "
+              f"{pos['long']['count']} lados | {pos['total_cells_both_sides']} "
+              f"celulas | blocos {pos['blocks_bytes']} B em "
+              f"{banks['used']}/{banks['capacity']} (bancos {banks['first']}.."
+              f"{banks['first'] + banks['count'] - 1})")
+        print(f"[sms_emit] O3 politica D9-a: {pol['cases']} casos de varredura, "
+              f"pico {pol['max_line_peak']}/limiar {O3_PER_LINE}, "
+              f"{pol['violations']} violacoes | VRAM {vram['total']}/{vram['budget']}")
+        print(f"[sms_emit] O3 manifests: {len(record['manifests'])} | registro: "
+              f"{rec_path.relative_to(project)}")
+        return 0
     rec_path, record = emit(project, generated_at)
     t = record["tiles"]
     print(f"[sms_emit] sprites: {record['sprites']['pair_count']} pares "

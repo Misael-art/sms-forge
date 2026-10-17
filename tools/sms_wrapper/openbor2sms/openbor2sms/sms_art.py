@@ -10,16 +10,20 @@ Fronteira (O2, doc/artifacts/o2_vdp_pilot_scope_20261015.json):
   nao tem flip de sprite (precedente kage: tiles espelhados sao padroes).
 - este modulo NUNCA importa semantics.py nem reautora pixels: reposiciona,
   quantiza e espelha a arte extraida da fonte, com proveniencia rastreavel.
+- O3: 60 pose-sides de combate no canvas medido pelo escopo (80x96; celulas
+  8x16 de 2 tiles) com a paleta P1 herdada do O2 sem mudanca; palco/HUD
+  continuam os do O2 (nao re-convertidos).
 
 Saidas (relativas ao projeto):
   res/o2/stage/stage_corridor.png      palco quantizado (632x176)
   res/o2/poses/*.png                   poses (esquerda/direita) 8x8-alinhadas
   res/o2/hud/hud_tiles.png             tiles de HUD do piloto (32x8)
-  rascunho/o2/*.png                    previews para revisao humana
+  res/o3/poses/*.png                   poses de combate O3 (canvas 80x96)
+  rascunho/o2/*.png, rascunho/o3/*.png previews para revisao humana
   data/generated/art/<record>.json     registro de conversao
 
 Uso:
-  python3 -m openbor2sms.sms_art --project DIR [--generated-at ISO] [--bg-k N]
+  python3 -m openbor2sms.sms_art --project DIR [--generated-at ISO] [--bg-k N] [--scope o2|o3]
   python3 -m openbor2sms.sms_art --self-check
 """
 from __future__ import annotations
@@ -632,6 +636,225 @@ def convert(project: Path, generated_at: str, bg_k: int):
     return record_path, record
 
 
+# -------------------------------------------------------------------- O3 ------
+
+O3_SCOPE = "doc/artifacts/o3_combat_scope_20261016.json"
+O3_EXTRACT = "data/generated/extract/gal_town1_combat_extract_20261016_r2.json"
+O3_P1_SOURCE = "data/generated/art/o2_art_conversion_20261015.json"
+O3_POSES_DIR = "res/o3/poses"
+O3_PREVIEW_DIR = "rascunho/o3"
+
+
+def palette_fit(hist, pal_rgb):
+    """Erro de quantizacao de um histograma contra uma paleta FIXA + mapeamento."""
+    cache = {}
+    total = 0
+    err_abs = 0.0
+    err_d2 = 0.0
+    mapping = {}
+    for rgb in sorted(hist):
+        w = hist[rgb]
+        j = nearest_index(rgb, pal_rgb, cache)
+        total += w
+        err_abs += w * _d1_abs(rgb, pal_rgb[j])
+        err_d2 += w * _d2(rgb, pal_rgb[j])
+        mapping[str(rgb)] = [list(pal_rgb[j]), j]
+    stats = {
+        "source_colors": len(hist),
+        "err_mean_abs_channel": round(err_abs / (3 * total), 2) if total else 0.0,
+        "err_rms_channel": round((err_d2 / (3 * total)) ** 0.5, 2) if total else 0.0,
+    }
+    return stats, mapping
+
+
+def occupied_cells(grid):
+    """Celulas 8x16 com ao menos um pixel opaco (indice != 0)."""
+    cells = set()
+    for y, row in enumerate(grid):
+        for x, v in enumerate(row):
+            if v:
+                cells.add((x // 8, y // 16))
+    return len(cells)
+
+
+def frame_grid(rows, key, x0, y0, cw, chh, ax, ay, pal_rgb, cache):
+    """Quadro fonte -> grade indexada no canvas (indice 0 = transparente)."""
+    h = len(rows)
+    w = len(rows[0])
+    grid = []
+    for yy in range(chh):
+        sy = ay + y0 + yy
+        row = bytearray(cw)
+        for xx in range(cw):
+            sx = ax + x0 + xx
+            px = rows[sy][sx] if (0 <= sy < h and 0 <= sx < w) else key
+            row[xx] = 0 if px == key else 1 + nearest_index(px, pal_rgb, cache)
+        grid.append(bytes(row))
+    return grid
+
+
+def convert_o3(project: Path, generated_at: str):
+    """60 pose-sides de combate no canvas medido; P1 fixa herdada do O2.
+
+    Fail-closed: escopo/extract/P1 declarados; canvas precisa conter toda a arte;
+    celulas 8x16 por pose conferidas contra measured_budgets.cells_per_frame.
+    """
+    scope_path = project / O3_SCOPE
+    scope = json.loads(scope_path.read_text(encoding="utf-8"))
+    if (scope.get("schema") != "openbor_sms_batch_boundary_v1" or
+            scope.get("artifact_kind") != "openbor_sms_o3_combat_scope"):
+        raise SystemExit("escopo O3 inesperado: schema/artifact_kind divergentes")
+    mb = scope["measured_budgets"]
+    pose_set = mb["pose_set_final"]
+    canvas = mb["canvas"]
+    declared = mb["cells_per_frame"]
+    anchor = list(canvas["anchor"])
+    if anchor != [240, 204]:
+        raise SystemExit(f"ancora do escopo O3 inesperada: {anchor}")
+
+    extract_path = project / O3_EXTRACT
+    rec = json.loads(extract_path.read_text(encoding="utf-8"))
+    members = {m["member"]: m for m in rec["members"]}
+
+    p1_path = project / O3_P1_SOURCE
+    o2 = json.loads(p1_path.read_text(encoding="utf-8"))
+    p1_codes = o2["palettes"]["p1_sprites"]["codes"]
+    if len(p1_codes) != 14:
+        raise SystemExit(f"P1 herdada do O2 com {len(p1_codes)} cores != 14")
+    p1_rgb = [pal.code_rgb(tuple(c)) for c in p1_codes]
+    png_palette = [KEY_RGB] + p1_rgb
+
+    sources = []
+    actors_rec = {}
+    pose_outputs = []
+    previews = []
+    union_hist = {}
+    ax_a, ay_a = 240, 204
+
+    for actor in ("ax", "long"):
+        cfg = canvas[actor]
+        x0a, y0a, cw, chh = cfg["dx0"], cfg["dy0"], cfg["w"], cfg["h"]
+        frames = pose_set[f"{actor}_frames"]
+        cache = {}
+        actor_poses = []
+        left_grids = []
+        for name in frames:
+            rel = f"{SOURCE_ROOT}/chars/{actor}/{name}.gif"
+            p = project / rel
+            entry = {"path": rel, "sha256": sha256_file(p), "bytes": p.stat().st_size}
+            member = "data/" + rel[len(SOURCE_ROOT) + 1:]
+            m = members.get(member)
+            if m is None:
+                raise SystemExit(f"{rel}: membro ausente no extract r2")
+            if m["sha256"] != entry["sha256"]:
+                raise SystemExit(f"{rel}: sha difere do extract r2")
+            entry["member"] = member
+            sources.append(entry)
+            w, h, rows, key = load_gif_rgb(p)
+            outside = 0
+            first = None
+            for y in range(h):
+                for x in range(w):
+                    px = rows[y][x]
+                    if px == key:
+                        continue
+                    dx, dy = x - ax_a, y - ay_a
+                    if x0a <= dx < x0a + cw and y0a <= dy < y0a + chh:
+                        union_hist[px] = union_hist.get(px, 0) + 1
+                    else:
+                        outside += 1
+                        if first is None:
+                            first = [x, y]
+            if outside:
+                raise SystemExit(f"{rel}: {outside} px fora do canvas medido "
+                                 f"(primeiro {first})")
+            grid = frame_grid(rows, key, x0a, y0a, cw, chh, ax_a, ay_a, p1_rgb, cache)
+            got_cells = occupied_cells(grid)
+            want_cells = declared[actor][name]
+            if got_cells != want_cells:
+                raise SystemExit(f"{rel}: celulas 8x16 {got_cells} != declarado "
+                                 f"{want_cells} (escopo O3)")
+            left_grids.append((name, grid))
+            pose_entry = {"frame": name, "pngs": {}, "sha256": {},
+                          "cells_8x16": got_cells, "cells_8x16_declared": want_cells}
+            for side, g in (("left", grid), ("right", mirror_grid(grid))):
+                out = project / f"{O3_POSES_DIR}/{actor}_{name}_{side}.png"
+                out.parent.mkdir(parents=True, exist_ok=True)
+                write_indexed_png(str(out), cw, chh, png_palette, g, trns=(0,))
+                pose_outputs.append(out)
+                pose_entry["pngs"][side] = str(out.relative_to(project))
+                pose_entry["sha256"][side] = sha256_file(out)
+            actor_poses.append(pose_entry)
+        actors_rec[actor] = {"canvas": dict(cfg), "frames": frames, "poses": actor_poses}
+        strip = None
+        for _name, grid in left_grids:
+            for g in (grid, mirror_grid(grid)):
+                rgb_rows = grid_to_rgb_rows(g, png_palette, key_rgb=KEY_RGB)
+                strip = rgb_rows if strip is None else hcat_rows(strip, rgb_rows, 6)
+        preview = project / f"{O3_PREVIEW_DIR}/poses_{actor}.png"
+        preview.parent.mkdir(parents=True, exist_ok=True)
+        write_png_rgb(str(preview), len(strip[0]), len(strip), strip)
+        previews.append(preview)
+
+    fit_stats, mapping = palette_fit(union_hist, p1_rgb)
+
+    today = generated_at[:10].replace("-", "")
+    record_path = project / f"data/generated/art/o3_art_conversion_{today}.json"
+    outputs = []
+    for p in pose_outputs + previews:
+        outputs.append({"path": str(p.relative_to(project)),
+                        "sha256": sha256_file(p), "bytes": p.stat().st_size})
+    record = {
+        "schema": "openbor_sms_art_conversion_v1",
+        "generated_at": generated_at,
+        "tool": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_art.py",
+        "project": str(project),
+        "scope": "O3 — 60 pose-sides de combate (canvas medido; P1 herdada do O2 sem mudanca)",
+        "inputs": {
+            "scope_record": {"path": O3_SCOPE, "sha256": sha256_file(scope_path)},
+            "extract_record": {"path": O3_EXTRACT, "sha256": sha256_file(extract_path)},
+            "p1_source_record": {"path": O3_P1_SOURCE, "sha256": sha256_file(p1_path)},
+        },
+        "facing": {
+            "native": "left",
+            "basis": ("inspecao 1:1 dos GIFs extraidos: perfil/rosto a esquerda, "
+                      "cabelo e arma atras a direita, em ax e long"),
+            "mirror_role": ("orientacao 'right' = espelho horizontal explicito; o VDP "
+                            "do SMS nao tem flip de sprite (precedente kage)"),
+            "preview": "rascunho/o3/poses_ax.png",
+        },
+        "canvas": {"anchor": anchor, "ax": dict(canvas["ax"]),
+                   "long": dict(canvas["long"])},
+        "palettes": {
+            "p1_sprites": {
+                "index0": "transparente (magenta de contrato)",
+                "codes": p1_codes,
+                "source": "o2_art_conversion_20261015.json#palettes.p1_sprites (D12: herdada sem mudanca)",
+                "fit": fit_stats,
+                "mapping": mapping,
+            }
+        },
+        "poses": actors_rec,
+        "checks": {
+            "extract_sha_bound": len(sources),
+            "canvas_contains_all_frames": True,
+            "cells_match_scope": True,
+            "palette_fixed_from_o2": True,
+        },
+        "sources": sources,
+        "outputs": outputs,
+        "notes": [
+            "conversao 1:1: nenhum pixel desenhado; apenas recorte no canvas medido, quantizacao na P1 fixa e espelho",
+            "canvas medido por orcamento de VRAM: 60 celulas 8x16 por ator (2 tiles por celula); slot de 29 celulas",
+            "celulas 8x16 por pose conferidas contra measured_budgets.cells_per_frame (fail-closed)",
+            "determinismo: mesmas fontes + --generated-at => bytes identicos",
+        ],
+    }
+    record_path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n",
+                           encoding="utf-8")
+    return record_path, record
+
+
 def self_check() -> int:
     ok = True
     # paleta: duas cores exatas -> erro zero
@@ -657,6 +880,18 @@ def self_check() -> int:
     cells = extract_cells(grid, 0, 0, 2, 1)
     rendered = render_grid(cells, {cells[0]: cells[0], cells[1]: cells[1]}, 2, 1)
     ok &= rendered == grid
+    # O3: celulas 8x16 contadas da grade indexada
+    ok &= occupied_cells([bytes([1] * 8) for _ in range(16)]) == 1
+    ok &= occupied_cells([bytes([1] * 8) for _ in range(32)]) == 2
+    # O3: fit de paleta fixa com cores exatas -> erro zero
+    fstats, _fmap = palette_fit({(0, 0, 0): 4, (255, 255, 255): 3},
+                                [(0, 0, 0), (255, 255, 255)])
+    ok &= fstats["err_rms_channel"] == 0.0 and fstats["err_mean_abs_channel"] == 0.0
+    # O3: frame_grid amostra a janela do canvas; fora do quadro = transparente
+    frows = [[(0, 253, 255)] * 8 for _ in range(8)]
+    frows[5][5] = (0, 0, 0)
+    fgrid = frame_grid(frows, KEY_CYAN, 0, 0, 8, 16, 4, 4, [(0, 0, 0)], {})
+    ok &= len(fgrid) == 16 and sum(sum(1 for v in r if v) for r in fgrid) == 1
     if not ok:
         print("[SELF-CHECK FAIL] sms_art", file=sys.stderr)
         return 1
@@ -669,6 +904,8 @@ def main(argv=None) -> int:
     ap.add_argument("--project", help="raiz do projeto SMSForge alvo")
     ap.add_argument("--generated-at", default=None)
     ap.add_argument("--bg-k", type=int, default=192)
+    ap.add_argument("--scope", choices=("o2", "o3"), default="o2",
+                    help="lote de conversao (default o2)")
     ap.add_argument("--self-check", action="store_true")
     args = ap.parse_args(argv)
     if args.self_check:
@@ -678,6 +915,18 @@ def main(argv=None) -> int:
     project = Path(args.project).resolve()
     generated_at = args.generated_at or datetime.now(timezone.utc).replace(
         microsecond=0).isoformat()
+    if args.scope == "o3":
+        record_path, record = convert_o3(project, generated_at)
+        fit = record["palettes"]["p1_sprites"]["fit"]
+        print(f"[sms_art] O3: {record['checks']['extract_sha_bound']} quadros x 2 lados; "
+              f"P1 fixa {len(record['palettes']['p1_sprites']['codes'])} cores "
+              f"(rms/canal {fit['err_rms_channel']})")
+        for actor, arec in record["poses"].items():
+            c = arec["canvas"]
+            print(f"[sms_art] {actor}: canvas {c['w']}x{c['h']} @ ({c['dx0']},{c['dy0']}) "
+                  f"poses={len(arec['poses'])}x2")
+        print(f"[sms_art] registro: {record_path.relative_to(project)}")
+        return 0
     record_path, record = convert(project, generated_at, args.bg_k)
     st = record["stage"]["dictionary"]
     print(f"[sms_art] palco: {st['distinct_cells']} tiles distintos -> K={st['k']} "

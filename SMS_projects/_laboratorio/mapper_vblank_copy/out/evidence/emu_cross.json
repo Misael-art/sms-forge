@@ -1,0 +1,14 @@
+{
+  "project": "mapper_vblank_copy",
+  "rom": "SMS_projects/_laboratorio/mapper_vblank_copy/out/rom/mapper_vblank_copy.sms",
+  "screenshot": "SMS_projects/_laboratorio/mapper_vblank_copy/out/evidence/emu_cross.png",
+  "informative": true,
+  "detail": "janela: variancia de luma=3853.1 (min 40.0) | viewport central: variancia de luma=3698.1 (min 40.0)",
+  "tool": "emulicious-2026-03-27+xdotool+spectacle",
+  "chain_of_custody": [
+    "launch: java -jar Emulicious.jar -remotedebug 4901",
+    "window: xdotool search/activate 'Emulicious'",
+    "capture: spectacle -a (janela ativa)",
+    "check: luma da janela INTEIRA e do VIEWPORT CENTRAL"
+  ]
+}

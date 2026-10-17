@@ -8,7 +8,7 @@ identity mismatch or underivable origin; never silently drop a directive.
 CLI (via python3 -m openbor2sms):
   extract  --pak <f> --expect-sha256 <hex> --expect-bytes <N> --member <m>...
            --destination <dir> --out <record.json>
-  ir       --kind level|models_index --source <f> --member <m>
+  ir       --kind level|models_index|model --source <f> --member <m>
            --source-sha256 <hex> [--pak-sha256 <hex>]
            [--models-index <f> --models-index-member <m>]
            --out <ir.json>
@@ -25,18 +25,19 @@ from pathlib import Path
 
 try:
     from .level_inventory import build_level_inventory
-    from .model_text import parse_level, parse_models_index
+    from .model_text import parse_level, parse_model, parse_models_index
     from .pak import PakError, find_entry, read_entry, read_index, sha256_file
     from .reference_semantics import compile_level_event_ir
 except ImportError:  # direct script use (python3 openbor2sms/frontend.py)
     from level_inventory import build_level_inventory
-    from model_text import parse_level, parse_models_index
+    from model_text import parse_level, parse_model, parse_models_index
     from pak import PakError, find_entry, read_entry, read_index, sha256_file
     from reference_semantics import compile_level_event_ir
 
 SCHEMA_EXTRACT = "openbor_sms_extraction_record_v1"
 SCHEMA_LEVEL_IR = "openbor_sms_frontend_level_ir_v1"
 SCHEMA_MODELS_IR = "openbor_sms_frontend_models_ir_v1"
+SCHEMA_MODEL_IR = "openbor_sms_frontend_model_ir_v1"
 
 MODES = ("extract", "ir")
 
@@ -145,6 +146,32 @@ def _line_origin(text: str, spans: list[tuple[int, int]], source_bytes: bytes, l
         "byte_length": byte_length,
         "raw_sha256": hashlib.sha256(blob).hexdigest(),
     }
+
+
+def _block_origin(text: str, spans: list[tuple[int, int]], source_bytes: bytes, start_line: int, end_line: int) -> dict:
+    """Origin for a contiguous multi-line block: start of the first line to the
+    end of the last line (intermediate terminators included, trailing one not)."""
+    if not 1 <= start_line <= end_line <= len(spans):
+        raise FrontendError(f"block lines {start_line}..{end_line} outside the {len(spans)} parsed lines")
+    byte_offset = spans[start_line - 1][0]
+    tail = spans[end_line - 1][0] + spans[end_line - 1][1]
+    blob = source_bytes[byte_offset:tail]
+    return {
+        "line": start_line,
+        "end_line": end_line,
+        "byte_offset": byte_offset,
+        "byte_length": tail - byte_offset,
+        "raw_sha256": hashlib.sha256(blob).hexdigest(),
+    }
+
+
+def _int_or_none(args: list[str], index: int) -> int | None:
+    if index >= len(args):
+        return None
+    try:
+        return int(args[index], 10)
+    except ValueError:
+        return None
 
 
 def extract_pak_members(
@@ -405,6 +432,157 @@ def models_ir(
     }
 
 
+def _typed_anim_view(anim) -> tuple[int | None, list[int] | None, list[str]]:
+    """Typed projection of the anim-level directives the runtime will consume.
+
+    Values pass through exactly as the file writes them (no unit conversion):
+    loop is typed by the parser, landframe and range are typed here. Malformed
+    values become anim-scoped issues with their source line instead of guesses.
+    """
+    landframe = None
+    attack_range = None
+    issues: list[str] = []
+    for item in anim.directives:
+        if item.command == "landframe":
+            value = _int_or_none(item.args, 0)
+            if value is None:
+                issues.append(f"{item.line}: landframe needs an integer")
+            else:
+                landframe = value
+        elif item.command == "range":
+            low = _int_or_none(item.args, 0)
+            high = _int_or_none(item.args, 1)
+            if low is None or high is None:
+                issues.append(f"{item.line}: range needs two integers")
+            else:
+                attack_range = [low, high]
+    return landframe, attack_range, issues
+
+
+def model_ir(
+    source_path,
+    member: str,
+    expect_sha256: str,
+    pak_sha256: str | None = None,
+    generated_at: str | None = None,
+) -> dict:
+    """Typed, origin-annotated animation IR for one model member. Deterministic.
+
+    Surfaces every anim with its frames (path, delay, offset, bbox, full attack
+    boxes, script binding), anim-level landframe/range/loop, script blocks as
+    text with block origin, and the parser diagnostics. Nothing is dropped:
+    directives keep their origin even when untyped.
+    """
+    data, digest, text = _load_source(Path(source_path), expect_sha256)
+    model = parse_model(text, path=member)
+    spans = line_spans(text)
+    if len(spans) != len(text.splitlines()):
+        raise FrontendError("line span count diverged from the parser line model")
+    source_lines = text.splitlines()
+
+    def directive_row(item) -> dict:
+        return {
+            "command": item.command,
+            "args": list(item.args),
+            "raw": item.raw,
+            **_line_origin(text, spans, data, item.line, item.raw),
+        }
+
+    anims = []
+    frame_count = 0
+    attack_count = 0
+    script_count = 0
+    for anim in model.anims:
+        landframe, attack_range, anim_issues = _typed_anim_view(anim)
+        frames = []
+        for frame in anim.frames:
+            frame_count += 1
+            attacks = []
+            for attack in frame.attacks:
+                attacks.append(
+                    {
+                        "slot": attack.slot,
+                        "x": attack.x,
+                        "y": attack.y,
+                        "right": attack.right,
+                        "down": attack.down,
+                        "damage": attack.damage,
+                        "power": attack.power,
+                        "block": attack.block,
+                        "noflash": attack.noflash,
+                        "pausetime": attack.pausetime,
+                        "depth": attack.depth,
+                        **_line_origin(text, spans, data, attack.line, source_lines[attack.line - 1]),
+                    }
+                )
+            attack_count += len(attacks)
+            frames.append(
+                {
+                    "path": frame.path,
+                    "delay": frame.delay,
+                    "offset": list(frame.offset) if frame.offset else None,
+                    "bbox": list(frame.bbox) if frame.bbox else None,
+                    "script_bound": frame.script_bound,
+                    "attacks": attacks,
+                    **_line_origin(text, spans, data, frame.line, source_lines[frame.line - 1]),
+                }
+            )
+        scripts = []
+        for script in anim.scripts:
+            script_count += 1
+            scripts.append(
+                {
+                    "start_line": script.start_line,
+                    "end_line": script.end_line,
+                    "body": list(script.body),
+                    **_block_origin(text, spans, data, script.start_line, script.end_line),
+                }
+            )
+        anims.append(
+            {
+                "name": anim.name,
+                "loop": anim.loop,
+                "landframe": landframe,
+                "range": attack_range,
+                "directives": [directive_row(item) for item in anim.directives],
+                "frames": frames,
+                "scripts": scripts,
+                "issues": anim_issues,
+                **_line_origin(text, spans, data, anim.line, source_lines[anim.line - 1]),
+            }
+        )
+
+    commands = [item.command for item in model.header]
+    for anim in model.anims:
+        commands.extend(item.command for item in anim.directives)
+    payload = {
+        "schema": SCHEMA_MODEL_IR,
+        "generated_at": generated_at or utc_now(),
+        "tool": "openbor2sms frontend ir",
+        "ir_kind": "model",
+        "origin_scheme": ORIGIN_SCHEME,
+        "source": {"member": member, "path": str(source_path), "bytes": len(data), "sha256": digest},
+        "pak_sha256": pak_sha256.lower() if pak_sha256 else None,
+        "header": [directive_row(item) for item in model.header],
+        "anims": anims,
+        "counts": {
+            "anims": len(anims),
+            "frames": frame_count,
+            "attacks": attack_count,
+            "scripts": script_count,
+        },
+        "issues": list(model.issues),
+        "units": _units_block(commands),
+        "limitations": [
+            "Animation IR only: frame images are not decoded here, delay keeps the source value with the declared unit status, and no console timing decision is taken.",
+            "Attack boxes are the file's declared values only; no hit, pause/hitstop, knockdown or AI claim.",
+            "Script bodies stay text; unknown commands and unbound scripts block downstream emission and are never treated as noop.",
+        ],
+        "claim_ceiling": "typed IR with origin within the O1 front-end only; no emission, runtime, hit/collision, AI or conversion claim",
+    }
+    return payload
+
+
 def self_check() -> int:
     import tempfile
 
@@ -504,6 +682,72 @@ def self_check() -> int:
         assert m_ir["duplicate_aliases"][0]["occurrences"] == 2
         assert m_ir["entries"][0]["line"] == 1 and m_ir["entries"][0]["byte_offset"] == 0
 
+        model_text = (
+            "name Ax\n"
+            "type player\n"
+            "health 100\n"
+            "\n"
+            "anim idle\n"
+            "loop 1\n"
+            "delay 8\n"
+            "offset 14 60\n"
+            "bbox 10 20 30 40\n"
+            "frame data/chars/ax/IDLE01.gif\n"
+            "delay 10\n"
+            "frame data/chars/ax/IDLE02.gif\n"
+            "\n"
+            "anim attack1\n"
+            "range 20 40\n"
+            "landframe 1\n"
+            "attack 240 142 44 62 7 0 15\n"
+            "frame data/chars/ax/A101.gif\n"
+            "attack1 0 0 0 0 0\n"
+            "frame data/chars/ax/A102.gif\n"
+            "@script\n"
+            "void main(){}\n"
+            "@end_script\n"
+            "frame data/chars/ax/A103.gif\n"
+            "\n"
+            "anim broken\n"
+            "loop x\n"
+        )
+        model_file = tmp / "data/chars/ax/ax.txt"
+        model_file.parent.mkdir(parents=True, exist_ok=True)
+        model_file.write_text(model_text, encoding="utf-8")
+        model_digest = sha256_file(model_file)
+        first_model = model_ir(model_file, "data/chars/ax/ax.txt", model_digest, pak_sha256=digest, generated_at=stamp)
+        second_model = model_ir(model_file, "data/chars/ax/ax.txt", model_digest, pak_sha256=digest, generated_at=stamp)
+        assert first_model == second_model, "model IR is not deterministic"
+        assert first_model["counts"] == {"anims": 3, "frames": 5, "attacks": 1, "scripts": 1}
+        assert first_model["anims"][0]["loop"] == 1
+        assert first_model["anims"][1]["range"] == [20, 40]
+        assert first_model["anims"][1]["landframe"] == 1
+        attack = first_model["anims"][1]["frames"][0]["attacks"][0]
+        assert attack["damage"] == 7 and attack["block"] == 15 and attack["pausetime"] is None
+        assert first_model["anims"][1]["frames"][1]["attacks"] == []
+        assert first_model["anims"][1]["frames"][2]["script_bound"] is True
+        assert first_model["anims"][1]["scripts"][0]["end_line"] == first_model["anims"][1]["scripts"][0]["line"] + 2
+        assert any("loop needs an integer" in issue for issue in first_model["issues"])
+        model_bytes = model_text.encode("utf-8")
+        for row in first_model["anims"]:
+            span = model_bytes[row["byte_offset"] : row["byte_offset"] + row["byte_length"]]
+            assert span.decode("utf-8").split()[0] == "anim", row
+        for frame in first_model["anims"][1]["frames"]:
+            span = model_bytes[frame["byte_offset"] : frame["byte_offset"] + frame["byte_length"]]
+            assert span.decode("utf-8").split()[0] == "frame", frame
+        attack_span = model_bytes[attack["byte_offset"] : attack["byte_offset"] + attack["byte_length"]]
+        assert attack_span.decode("utf-8").split()[0] == "attack", attack
+        script = first_model["anims"][1]["scripts"][0]
+        script_span = model_bytes[script["byte_offset"] : script["byte_offset"] + script["byte_length"]]
+        assert script_span.decode("utf-8").startswith("@script"), script
+        assert script_span.decode("utf-8").rstrip().endswith("@end_script"), script
+        try:
+            model_ir(model_file, "data/chars/ax/ax.txt", "0" * 64, generated_at=stamp)
+        except FrontendError:
+            pass
+        else:
+            raise AssertionError("model source sha mismatch was not rejected")
+
         mixed = tmp / "mixed.txt"
         mixed.write_bytes(b"spawn a\r\nspawn b\r")
         mixed_ir = level_ir(mixed, "data/levels/mixed.txt", sha256_file(mixed), generated_at=stamp)
@@ -534,7 +778,7 @@ def self_check() -> int:
         else:
             raise AssertionError("source sha mismatch was not rejected")
 
-    print("[SELF-CHECK OK] openbor2sms frontend (extract identity, IR origin byte spans, determinism, fail-closed)")
+    print("[SELF-CHECK OK] openbor2sms frontend (extract identity, IR origin byte spans, model anim IR, determinism, fail-closed)")
     return 0
 
 
@@ -550,6 +794,13 @@ def _summarize_ir(record: dict) -> str:
         return (
             f"level IR member={record['source']['member']} directives={len(record['directives'])} "
             f"issues={len(record['issues'])} sha256={record['source']['sha256'][:16]}..."
+        )
+    if record["ir_kind"] == "model":
+        counts = record["counts"]
+        return (
+            f"model IR member={record['source']['member']} anims={counts['anims']} frames={counts['frames']} "
+            f"attacks={counts['attacks']} scripts={counts['scripts']} issues={len(record['issues'])} "
+            f"sha256={record['source']['sha256'][:16]}..."
         )
     return (
         f"models IR member={record['source']['member']} entries={len(record['entries'])} "
@@ -569,7 +820,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--source")
     parser.add_argument("--source-sha256")
     parser.add_argument("--pak-sha256")
-    parser.add_argument("--kind", choices=["level", "models_index"])
+    parser.add_argument("--kind", choices=["level", "models_index", "model"])
     parser.add_argument("--models-index")
     parser.add_argument("--models-index-member")
     parser.add_argument("--out")
@@ -600,6 +851,12 @@ def main(argv: list[str] | None = None) -> int:
                 record = level_ir(
                     args.source, args.member[0], args.source_sha256, args.pak_sha256,
                     args.models_index, args.models_index_member, args.generated_at,
+                )
+            elif args.kind == "model":
+                if args.models_index:
+                    parser.error("--models-index only applies to --kind level")
+                record = model_ir(
+                    args.source, args.member[0], args.source_sha256, args.pak_sha256, args.generated_at
                 )
             else:
                 if args.models_index:

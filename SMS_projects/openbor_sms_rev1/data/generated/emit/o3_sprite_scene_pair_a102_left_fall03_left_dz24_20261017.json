@@ -1,0 +1,288 @@
+{
+ "schema": "sprite_scene_manifest_v1",
+ "sprite_size": "8x16",
+ "zoomed": false,
+ "screen_h": 192,
+ "sat_terminated": true,
+ "sprites": [
+  {
+   "x": 108,
+   "y": 88,
+   "tile": 0
+  },
+  {
+   "x": 116,
+   "y": 88,
+   "tile": 2
+  },
+  {
+   "x": 124,
+   "y": 88,
+   "tile": 4
+  },
+  {
+   "x": 132,
+   "y": 88,
+   "tile": 6
+  },
+  {
+   "x": 140,
+   "y": 88,
+   "tile": 8
+  },
+  {
+   "x": 148,
+   "y": 88,
+   "tile": 10
+  },
+  {
+   "x": 156,
+   "y": 88,
+   "tile": 12
+  },
+  {
+   "x": 108,
+   "y": 104,
+   "tile": 14
+  },
+  {
+   "x": 116,
+   "y": 104,
+   "tile": 16
+  },
+  {
+   "x": 124,
+   "y": 104,
+   "tile": 18
+  },
+  {
+   "x": 132,
+   "y": 104,
+   "tile": 20
+  },
+  {
+   "x": 140,
+   "y": 104,
+   "tile": 22
+  },
+  {
+   "x": 148,
+   "y": 104,
+   "tile": 24
+  },
+  {
+   "x": 156,
+   "y": 104,
+   "tile": 26
+  },
+  {
+   "x": 164,
+   "y": 104,
+   "tile": 28
+  },
+  {
+   "x": 116,
+   "y": 120,
+   "tile": 30
+  },
+  {
+   "x": 124,
+   "y": 120,
+   "tile": 32
+  },
+  {
+   "x": 132,
+   "y": 120,
+   "tile": 34
+  },
+  {
+   "x": 140,
+   "y": 120,
+   "tile": 36
+  },
+  {
+   "x": 100,
+   "y": 136,
+   "tile": 38
+  },
+  {
+   "x": 108,
+   "y": 136,
+   "tile": 40
+  },
+  {
+   "x": 116,
+   "y": 136,
+   "tile": 42
+  },
+  {
+   "x": 124,
+   "y": 136,
+   "tile": 44
+  },
+  {
+   "x": 132,
+   "y": 136,
+   "tile": 46
+  },
+  {
+   "x": 140,
+   "y": 136,
+   "tile": 48
+  },
+  {
+   "x": 108,
+   "y": 152,
+   "tile": 50
+  },
+  {
+   "x": 116,
+   "y": 152,
+   "tile": 52
+  },
+  {
+   "x": 132,
+   "y": 152,
+   "tile": 54
+  },
+  {
+   "x": 140,
+   "y": 152,
+   "tile": 56
+  },
+  {
+   "x": 132,
+   "y": 168,
+   "tile": 116
+  },
+  {
+   "x": 124,
+   "y": 168,
+   "tile": 118
+  },
+  {
+   "x": 140,
+   "y": 168,
+   "tile": 120
+  },
+  {
+   "x": 116,
+   "y": 168,
+   "tile": 122
+  },
+  {
+   "x": 148,
+   "y": 168,
+   "tile": 124
+  },
+  {
+   "x": 108,
+   "y": 168,
+   "tile": 126
+  },
+  {
+   "x": 140,
+   "y": 152,
+   "tile": 128
+  },
+  {
+   "x": 156,
+   "y": 168,
+   "tile": 130
+  },
+  {
+   "x": 132,
+   "y": 152,
+   "tile": 132
+  },
+  {
+   "x": 164,
+   "y": 168,
+   "tile": 134
+  },
+  {
+   "x": 124,
+   "y": 152,
+   "tile": 138
+  },
+  {
+   "x": 108,
+   "y": 152,
+   "tile": 140
+  },
+  {
+   "x": 156,
+   "y": 184,
+   "tile": 144
+  },
+  {
+   "x": 140,
+   "y": 184,
+   "tile": 148
+  },
+  {
+   "x": 148,
+   "y": 184,
+   "tile": 152
+  }
+ ],
+ "scene": {
+  "kind": "worst_pair_declared",
+  "policy": "o3 linhas exatas D9-a revisada",
+  "player": {
+   "frame": "a102",
+   "side": "left",
+   "pose_index": 8,
+   "rows": "contagem por linha de canvas (sem x)"
+  },
+  "enemy": {
+   "frame": "fall03",
+   "side": "left",
+   "pose_index": 22
+  },
+  "dz": 24,
+  "base_player": 152,
+  "base_enemy": 176,
+  "counters": "linhas do jogador (estatico) + ec do inimigo",
+  "note": "cena de politica (x fixo para o gate; decisao x-independente, licao O2)",
+  "sat_order": "jogador (ordem da pose) + inimigo (dens desc)"
+ },
+ "simulation": {
+  "peak_per_line": 8,
+  "pre_policy_peak": 11,
+  "row_counters": {
+   "3": 4,
+   "4": 8,
+   "5": 3
+  },
+  "drops": 4,
+  "drops_detail": [
+   {
+    "order": 10,
+    "row": 4,
+    "col": 0,
+    "dens": 26
+   },
+   {
+    "order": 13,
+    "row": 3,
+    "col": 2,
+    "dens": 10
+   },
+   {
+    "order": 15,
+    "row": 3,
+    "col": 0,
+    "dens": 4
+   },
+   {
+    "order": 17,
+    "row": 3,
+    "col": 6,
+    "dens": 1
+   }
+  ],
+  "sat_entries": 44,
+  "note": "politica D9-a revisada: contagem exata por linha de canvas (passo 16) + tabela estatica do jogador; conferido pelo gate audit_sprite_line_sim"
+ }
+}
