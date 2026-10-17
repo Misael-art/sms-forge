@@ -134,5 +134,65 @@ class PosePackingTest(unittest.TestCase):
         self.assertEqual(packed[0]["slot"], 0)
 
 
+class AnimHeaderTest(unittest.TestCase):
+    """Regressao: o inicializador de o3_*_anims ja saiu com chaves erradas
+    (2o elemento em diante sem '{'), inviabilizando o build. O teste compila
+    o header emitido com um C compiler de host."""
+
+    PLAN = {
+        "ax": [
+            {"id": 0, "name": "idle", "frames": [[0, 5]], "loop": 1, "land": 255},
+            {"id": 1, "name": "walk", "frames": [[1, 7], [2, 7]], "loop": 1, "land": 255},
+            {"id": 2, "name": "fall2", "frames": [[3, 255], [4, 5]], "loop": 0, "land": 1},
+        ],
+        "long": [
+            {"id": 0, "name": "idle", "frames": [[0, 5]], "loop": 1, "land": 255},
+            {"id": 1, "name": "death", "frames": [[1, 5], [2, 1]], "loop": 1, "land": 255},
+        ],
+    }
+    ATTACKS = {
+        "ax": {"rel": [0, -62, 44, 62], "damage": 7, "pause": 15, "depth": 15,
+               "first": 1, "last": 3},
+        "long": {"rel": [0, -46, 40, 46], "damage": 5, "pause": 10, "depth": 15,
+                 "first": 1, "last": 2},
+    }
+
+    def test_header_anim_compila_no_host(self):
+        import os
+        import shutil
+        import subprocess
+        import tempfile
+        gcc = shutil.which("gcc")
+        if not gcc:
+            self.skipTest("gcc ausente no host")
+        text = se._o3_header_anim(self.PLAN, self.ATTACKS)
+        src = (text + "\n"
+               "int main(void){return (int)(o3_ax_anims[0].count"
+               " + o3_ax_anims[2].land + o3_long_anims[1].frames[1].delay"
+               " + o3_ax_attack.dmg + o3_long_attack.last);}\n")
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "anim.c")
+            with open(path, "w") as fh:
+                fh.write(src)
+            r = subprocess.run([gcc, "-fsyntax-only", path],
+                               capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+
+    def test_header_anim_contagens(self):
+        text = se._o3_header_anim(self.PLAN, self.ATTACKS)
+        self.assertIn("o3_ax_anims[3]", text)
+        self.assertIn("o3_long_anims[2]", text)
+
+
+class RecordPathTest(unittest.TestCase):
+    def test_sufixo_de_revisao_nao_sobrescreve(self):
+        from pathlib import Path
+        base = Path("/proj")
+        self.assertEqual(se.o3_record_path(base, "20261017").name,
+                         "o3_emission_20261017.json")
+        self.assertEqual(se.o3_record_path(base, "20261017", "_r2").name,
+                         "o3_emission_20261017_r2.json")
+
+
 if __name__ == "__main__":
     unittest.main()

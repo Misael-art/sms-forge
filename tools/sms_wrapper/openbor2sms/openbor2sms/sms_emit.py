@@ -1290,7 +1290,7 @@ def _o3_header_anim(plan, attacks):
             out.append(f"#define O3_{actor.upper()}_ANIM_{e['name'].upper()} {e['id']}\n")
         out.append(f"#define O3_{actor.upper()}_ANIM_COUNT {len(plan[actor])}\n")
         entries = ",".join(
-            f"{{o3_{actor}_anim_{e['name']}}},{len(e['frames'])},{e['loop']},"
+            f"{{o3_{actor}_anim_{e['name']},{len(e['frames'])},{e['loop']},"
             f"{e['land']}}}" for e in plan[actor])
         out.append(f"const o3_anim o3_{actor}_anims[{len(plan[actor])}] = "
                    f"{{{entries}}};\n")
@@ -1356,7 +1356,14 @@ def _o3_header_level(env):
         f"#define O3_PER_ROW_MAX {O3_PER_LINE}\n")
 
 
-def emit_o3(project: Path, generated_at: str):
+def o3_record_path(project: Path, stamp: str, suffix: str = "") -> Path:
+    """Caminho do record O3. Sufixo (ex.: "_r2") quando a re-emissao precisa de
+    arquivo novo: o registry exige dono unico por path e a ref da revisao
+    anterior precisa continuar valida (padrao o3-extract r1/r2)."""
+    return project / f"data/generated/emit/o3_emission_{stamp}{suffix}.json"
+
+
+def emit_o3(project: Path, generated_at: str, record_suffix: str = ""):
     env = _o3_load_env(project)
     scope, art = env["scope"], env["art"]
     mb = scope["measured_budgets"]
@@ -1843,7 +1850,7 @@ def emit_o3(project: Path, generated_at: str):
             "gate temporal (audit_sprite_line_sim) roda sobre os manifests deste registro",
             "measure_vram_map com vdp_regs de sessao: M5 (so plan-mode agora)"],
     }
-    rec_path = project / f"data/generated/emit/o3_emission_{stamp}.json"
+    rec_path = o3_record_path(project, stamp, record_suffix)
     write_text(rec_path, json.dumps(record, indent=1, ensure_ascii=False) + "\n")
     return rec_path, record
 
@@ -1928,6 +1935,9 @@ def main(argv=None) -> int:
     ap.add_argument("--generated-at", default=None)
     ap.add_argument("--scope", choices=("o2", "o3"), default="o2",
                     help="lote de emissao (o2 = piloto, o3 = combate)")
+    ap.add_argument("--record-suffix", default="",
+                    help="sufixo do record O3 (ex.: _r2) para re-emissao como "
+                         "revisao nova sem sobrescrever a ref anterior")
     ap.add_argument("--self-check", action="store_true")
     args = ap.parse_args(argv)
     if args.self_check:
@@ -1938,7 +1948,7 @@ def main(argv=None) -> int:
     generated_at = args.generated_at or datetime.now(timezone.utc).replace(
         microsecond=0).isoformat()
     if args.scope == "o3":
-        rec_path, record = emit_o3(project, generated_at)
+        rec_path, record = emit_o3(project, generated_at, args.record_suffix)
         pos, banks, vram = record["poses"], record["banks"], record["vram"]
         pol = record["policy"]["scan"]
         print(f"[sms_emit] O3 poses: ax {pos['ax']['count']} / long "

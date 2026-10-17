@@ -102,12 +102,20 @@ def fps_constant(fps_list, min_fps=50.0, max_fps=60.0, spread=2.0):
     return ok, sp
 
 
-def magic_ok(header_bytes, magic=b"SMRT", schema=1):
-    """Cabecalho do probe autentica? PURA. header_bytes = lista de ints."""
+PROBE_SCHEMAS = (1, 2)   # v1 = O2; v2 = O3/D10 (aditivo, mesmo corredor)
+
+
+def magic_ok(header_bytes, magic=b"SMRT", schema=PROBE_SCHEMAS):
+    """Cabecalho do probe autentica? PURA. header_bytes = lista de ints.
+
+    2026-10-17 (D10): o probe v2 (O3) mantem magic/corredor/enderecos e
+    declara schema 2. Payload de outro binario continua recusado: magic
+    errado ou schema fora de PROBE_SCHEMAS = False."""
     if header_bytes is None or len(header_bytes) < len(magic) + 1:
         return False
-    return (tuple(header_bytes[:len(magic)]) == tuple(magic)
-            and header_bytes[len(magic)] == schema)
+    if tuple(header_bytes[:len(magic)]) != tuple(magic):
+        return False
+    return header_bytes[len(magic)] in schema
 
 
 class EmuliciousDap:

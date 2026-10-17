@@ -33,12 +33,47 @@ from schema_guard import (load_schema, validate as validate_instance,       # no
                           schema_path, SchemaUnsupported)
 import capture_evidence as CE                                               # noqa: E402
 
+PROBE_BLOCK = 0xC700          # base canonica do corredor de sondas (contrato)
 PROBE_BASE = 0xC7E0
 HEADER_LEN = 5
 FRAME_ADDR = 0xC7F0
+# v2 (D10, 2026-10-17): 0xC7FB = profundidade do jogador ("pz", nome do
+# proprio fonte); 0xC7FD = altitude ("py"); 0xFC/0xFE/0xFF = alvo movel.
 SNAP_ADDRS = {"hp": 0xC7F2, "score": 0xC7F3, "boss": 0xC7F4, "over": 0xC7F5,
               "state": 0xC7F6, "wave": 0xC7F7, "keys": 0xC7F8,
-              "px": 0xC7FA, "py": 0xC7FB}
+              "px": 0xC7FA, "pz": 0xC7FB, "p2x": 0xC7FC, "py": 0xC7FD,
+              "p2state": 0xC7FE, "p2z": 0xC7FF}
+OFFSETS = {"base": 0xE0, "frame": 0xF0, "hp": 0xF2, "score": 0xF3, "boss": 0xF4,
+           "over": 0xF5, "state": 0xF6, "wave": 0xF7, "keys": 0xF8,
+           "px": 0xFA, "pz": 0xFB, "p2x": 0xFC, "py": 0xFD, "p2state": 0xFE,
+           "p2z": 0xFF}
+
+
+def apply_probe_block(block):
+    """Move the whole probe contract to another corridor, keeping every offset.
+
+    Um projeto cujo _DATA encosta em 0xC790 nao pode manter as sondas la: o map
+    mostra as variaveis da SMSlib/PSGlib caindo DENTRO do corredor (a escrita de
+    probe corrompe o estado do stream e a leitura vira lixo — L089, medido
+    2026-10-14). A saida e o projeto declarar outra base (ex. 0xC900) e o tool
+    ler la. O default continua 0xC700, entao nenhuma ROM existente muda.
+    """
+    global PROBE_BLOCK, PROBE_BASE, FRAME_ADDR, SNAP_ADDRS
+    if not (0xC000 <= block <= 0xDF00):
+        raise ValueError("base do corredor fora da RAM do SMS: %s" % hex(block))
+    if (block & 0xFF) or not (0xC000 <= block + 0x100 <= 0xE000):
+        raise ValueError("base do corredor precisa ser uma pagina (0xXX00): %s"
+                         % hex(block))
+    PROBE_BLOCK = block
+    PROBE_BASE = block + OFFSETS["base"]
+    FRAME_ADDR = block + OFFSETS["frame"]
+    SNAP_ADDRS = {k: block + OFFSETS[k]
+                  for k in ("hp", "score", "boss", "over", "state", "wave",
+                            "keys", "px", "pz", "p2x", "py", "p2state",
+                            "p2z")}
+    return PROBE_BASE
+
+
 MIN_OVERSAMPLE = 3.0     # janela >> latencia de pause/continue (§36.1)
 FPS_MIN, FPS_MAX = 50.0, 60.0
 
@@ -319,12 +354,36 @@ def self_check():
     assert parse_eval_value("sem igual") is None
     assert parse_eval_value(None) is None
 
-    # cabecalho: fixture boa e as duas violacoes (§20)
+    # cabecalho: fixture boa e as violacoes (§20); v2 (D10) aditivo
     assert magic_ok([0x53, 0x4D, 0x52, 0x54, 1])
-    assert not magic_ok([0x53, 0x4D, 0x52, 0x54, 2]), "schema errado passou"
+    assert magic_ok([0x53, 0x4D, 0x52, 0x54, 2]), "probe v2 (D10) recusado"
+    assert not magic_ok([0x53, 0x4D, 0x52, 0x54, 3]), \
+        "schema fora do suportado passou"
     assert not magic_ok([0x53, 0x4D, 0x52, 0x00, 1]), "magic errado passou"
     assert not magic_ok(None)
     assert not magic_ok([0x53, 0x4D])
+
+    # corredor relocado: o contrato inteiro acompanha a base, offsets fixos
+    apply_probe_block(0xC900)
+    assert PROBE_BASE == 0xC9E0 and FRAME_ADDR == 0xC9F0, \
+        "relocação não moveu header/frame"
+    assert SNAP_ADDRS["state"] == 0xC9F6 and SNAP_ADDRS["pz"] == 0xC9FB, \
+        "relocação não moveu o snapshot"
+    assert SNAP_ADDRS["py"] == 0xC9FD and SNAP_ADDRS["p2z"] == 0xC9FF, \
+        "campos v2 não acompanharam a relocação"
+    try:
+        apply_probe_block(0xC790)
+        raise AssertionError("base fora da pagina foi aceita")
+    except ValueError:
+        pass
+    try:
+        apply_probe_block(0xDF80)
+        raise AssertionError("corredor dentro da pilha foi aceito")
+    except ValueError:
+        pass
+    apply_probe_block(0xC700)
+    assert PROBE_BASE == 0xC7E0 and FRAME_ADDR == 0xC7F0 and \
+        SNAP_ADDRS["state"] == 0xC7F6, "contrato canonico nao voltou"
 
     # fps por janela
     assert fps_from_window(480, 8.0) == 60.0
@@ -404,8 +463,13 @@ def main():
                     help="duracao de cada janela de execucao (default 8)")
     ap.add_argument("--janelas", type=int, default=2)
     ap.add_argument("--out", default="runtime_probe")
+    ap.add_argument("--probe-base", default=None,
+                    help="pagina do corredor de sondas (default 0xC700; "
+                         "ex. 0xC900 para um projeto cujo _DATA encosta la)")
     ap.add_argument("--self-check", action="store_true")
     args = ap.parse_args()
+    if args.probe_base:
+        apply_probe_block(int(args.probe_base, 16))
     if args.self_check:
         return self_check()
     if args.session:

@@ -24,8 +24,13 @@ janela fazia o Z80 perder tempo de frame e contaminava a própria grandeza.
 fps: espreme o streaming de VRAM, então "fps 60" não absolve orçamento estourado.
 
 Pré-requisito do projeto: probe SMRT com probe_vline/probe_vovf nos
-endereços acima, probe_worst_done/probe_vline_min em 0xC7EE/0xC7EF e modo
+endereços acima, probe_worst_done/probe_vline_min em 0xC7EE/0xC7D2 e modo
 atração que exercite o pior caminho.
+
+Endereços são DERIVADOS de uma base de corredor (--probe-base, default
+0xC700). Um projeto cujo _DATA encosta em 0xC790 realoca o bloco inteiro
+(ex. 0xC900) sem mudar nenhum offset interno; o contrato de fonte e as
+leituras seguem a base declarada (L089).
 
 Uso:
   measure_worst_frame.py --project SMS_projects/MSSF2T \
@@ -59,12 +64,19 @@ import capture_evidence as CE                                    # noqa: E402
 import measure_runtime_probe as MRP                              # noqa: E402
 from emulicious_dap import PORT, magic_ok                         # noqa: E402
 
+PROBE_BLOCK = 0xC700          # base canônica do corredor (--probe-base)
+OFFSETS = {
+    "header": 0xE0, "vline": 0xEA, "vovf": 0xEB, "phase": 0xED,
+    "worst_done": 0xEE, "vline_min": 0xD2, "frame": 0xF0, "state": 0xF6,
+    "profile_wait": 0xD0, "profile_stream": 0xD1, "profile_hud": 0xD3,
+    "profile_sat": 0xD4, "profile_spill_max": 0xD6,
+}
 PROBE_HEADER = 0xC7E0         # magic 'SMRT' + byte de schema (L071/§56)
 PROBE_VLINE = 0xC7EA
 PROBE_VOVF = 0xC7EB
 PROBE_PHASE = 0xC7ED
 PROBE_WORST_DONE = 0xC7EE
-PROBE_VLINE_MIN = 0xC7EF
+PROBE_VLINE_MIN = 0xC7D2
 PROBE_FRAME = 0xC7F0
 PROBE_STATE = 0xC7F6
 PROFILE_ADDRS = {
@@ -90,27 +102,112 @@ GS = {0: "ROUND", 1: "FIGHT", 2: "KO", 3: "RESULT", 4: "TITLE"}
 
 
 # ---------------------------------------------------------------- contrato
-DECL_RX = {
-    "probe_vline em 0xC7EA": re.compile(r"__at\(0xC7EA\)"),
-    "probe_vovf WORD em 0xC7EB": re.compile(r"unsigned\s+int[^;]*__at\(0xC7EB\)"),
-    "probe_phase em 0xC7ED": re.compile(r"__at\(0xC7ED\)"),
-    "probe_worst_done em 0xC7EE": re.compile(r"__at\(0xC7EE\)"),
-    "probe_vline_min em 0xC7EF": re.compile(r"__at\(0xC7EF\)"),
-    "janela de 3000 frames": re.compile(
-        r"#define\s+WORST_FRAME_WINDOW\s+3000u"),
-}
-PROFILE_RX = {
-    name: re.compile(r"__at\(0x%04X\)\s+probe_profile_%s\b"
-                     % (addr, name))
-    for name, addr in PROFILE_ADDRS.items()
-}
-PROFILE_SPILL_RX = re.compile(
-    r"__at\(0xC7D6\)\s+probe_vline_spill_max\b")
-LOOP_PROFILE_RX = (
-    re.compile(r"__at\(0x[0-9A-Fa-f]{4}\)\s+tl_snap\[16\]"),
-    re.compile(r"__at\(0xC7D2\)\s+tl_snap_seq\b"),
-    re.compile(r"probe_frame\s*<=\s*WORST_FRAME_WINDOW"),
-)
+def _build_contract(block):
+    """Regenera endereços e regex do contrato para uma base de corredor."""
+    a = {k: block + off for k, off in OFFSETS.items()}
+    decl = {
+        "probe_vline em 0x%04X" % a["vline"]:
+            re.compile(r"__at\(0x%04X\)" % a["vline"]),
+        "probe_vovf WORD em 0x%04X" % a["vovf"]:
+            re.compile(r"unsigned\s+int[^;]*__at\(0x%04X\)" % a["vovf"]),
+        "probe_phase em 0x%04X" % a["phase"]:
+            re.compile(r"__at\(0x%04X\)" % a["phase"]),
+        "probe_worst_done em 0x%04X" % a["worst_done"]:
+            re.compile(r"__at\(0x%04X\)" % a["worst_done"]),
+        # 0xC7EF NÃO pode: topo da pilha do laço main (tecla stack=0xDFF0 no map;
+        # calls/ISR espelham C7F0–FF na MESMA RAM) aliasa o bloco F0+ com leitura
+        # plausível-falsa (medido no BlastEm: SP 0xDFFD, IX 0xDFFC). D2 é o único
+        # byte do banco de sondas abaixo do fundo máximo do ISR e livre no
+        # contrato (LOOP_PROFILE_SEQ só vale para ROMs com tl_snap).
+        "probe_vline_min em 0x%04X" % a["vline_min"]:
+            re.compile(r"__at\(0x%04X\)" % a["vline_min"]),
+        "janela de 3000 frames": re.compile(
+            r"#define\s+WORST_FRAME_WINDOW\s+3000u"),
+    }
+    prof = {name: re.compile(r"__at\(0x%04X\)\s+probe_profile_%s\b"
+                             % (a["profile_" + name], name))
+            for name in ("wait", "hud", "sat", "stream")}
+    spill = re.compile(r"__at\(0x%04X\)\s+probe_vline_spill_max\b"
+                       % a["profile_spill_max"])
+    loop = (
+        re.compile(r"__at\(0x[0-9A-Fa-f]{4}\)\s+tl_snap\[16\]"),
+        re.compile(r"__at\(0x%04X\)\s+tl_snap_seq\b" % a["vline_min"]),
+        re.compile(r"probe_frame\s*<=\s*WORST_FRAME_WINDOW"),
+    )
+    return a, decl, prof, spill, loop
+
+
+def apply_probe_block(block):
+    """Move o contrato inteiro para outra base de corredor (default 0xC700).
+
+    A fonte da ROM precisa declarar as sondas na MESMA base: um relocated
+    source não autentica sob a base canônica, e vice-versa — o contrato é
+    não-vacuo por construção.
+    """
+    global PROBE_BLOCK, PROBE_HEADER, PROBE_VLINE, PROBE_VOVF, PROBE_PHASE
+    global PROBE_WORST_DONE, PROBE_VLINE_MIN, PROBE_FRAME, PROBE_STATE
+    global PROFILE_ADDRS, PROFILE_SPILL_MAX, LOOP_PROFILE_SEQ
+    global DECL_RX, PROFILE_RX, PROFILE_SPILL_RX, LOOP_PROFILE_RX
+    if block & 0xFF or not (0xC000 <= block <= 0xDF00):
+        raise ValueError("base do corredor precisa ser uma página em "
+                         "0xC000..0xDF00: %s" % hex(block))
+    MRP.apply_probe_block(block)
+    a, DECL_RX, PROFILE_RX, PROFILE_SPILL_RX, LOOP_PROFILE_RX = \
+        _build_contract(block)
+    PROBE_BLOCK = block
+    PROBE_HEADER, PROBE_VLINE, PROBE_VOVF = (a["header"], a["vline"],
+                                             a["vovf"])
+    PROBE_PHASE, PROBE_WORST_DONE = a["phase"], a["worst_done"]
+    PROBE_VLINE_MIN, PROBE_FRAME, PROBE_STATE = (a["vline_min"], a["frame"],
+                                                 a["state"])
+    PROFILE_ADDRS = {n: a["profile_" + n] for n in ("wait", "hud", "sat",
+                                                    "stream")}
+    PROFILE_SPILL_MAX = a["profile_spill_max"]
+    LOOP_PROFILE_SEQ = a["vline_min"]
+    return PROBE_HEADER
+
+
+(PROBE_ADDR_MAP, DECL_RX, PROFILE_RX, PROFILE_SPILL_RX, LOOP_PROFILE_RX) = \
+    _build_contract(PROBE_BLOCK)
+
+
+PROBE_DECL_RX = re.compile(
+    r"unsigned\s+(char|int)\s+__at\(0x([0-9A-Fa-f]{4})\)\s+"
+    r"([A-Za-z_][A-Za-z0-9_]*)(?:\[(\d+)\])?\s*;")
+
+
+def declared_probes(path):
+    """[(nome, endereco, largura)] para todo __at() do fonte — sem tabela copiada.
+
+    Quem lê RAM do corredor precisa derivar o mapa do fonte declarado: a
+    tabela hardcoded sobreviveu a três realocações de base e virou a causa
+    das recidivas de L089 (fonte mudou de endereço, leitor seguiu no endereço
+    velho e devolveu lixo plausível). `path` é o fonte OU um diretório
+    contendo .c/.h.
+    """
+    files = []
+    if os.path.isdir(path):
+        files = [os.path.join(path, f) for f in sorted(os.listdir(path))
+                 if f.endswith((".c", ".h"))]
+    elif os.path.isfile(path):
+        files = [path]
+    out, seen = [], {}
+    for f in files:
+        with open(f, errors="replace") as fh:
+            for m in PROBE_DECL_RX.finditer(fh.read()):
+                kind, addr, name, count = (m.group(1), int(m.group(2), 16),
+                                           m.group(3), m.group(4))
+                width = 1 if kind == "char" else 2
+                for i in range(int(count) if count else 1):
+                    a = addr + i * width
+                    for b in range(a, a + width):
+                        if b in seen:
+                            raise ValueError("sondas sobrepostas: %s@%04X e %s"
+                                             % (seen[b], b, name))
+                        seen[b] = name
+                    out.append((name if not count else "%s[%d]" % (name, i),
+                                a, width))
+    return out
 LOOP_PROFILE_ADDR_RX = re.compile(
     r"__at\(0x([0-9A-Fa-f]{4})\)\s+tl_snap\[16\]")
 LOOP_PROFILE_NAMES_RX = re.compile(
@@ -561,8 +658,9 @@ def _session(dap, out_dir, out_name, seconds, rom, project, wait_seconds):
         res = {"verdicto": "sem_contrato", "vline_min": None,
                "vovf_delta": None, "amostras": 0, "janela_s": seconds,
                "runner_wait_s": wait_seconds,
-               "motivo": "probe SMRT/schema 1 ausente em 0xC7E0 "
-                         "(lido=%s) — ROM sem instrumento válido" % header,
+               "motivo": "probe SMRT/schema 1 ausente em 0x%04X "
+                         "(lido=%s) — ROM sem instrumento válido"
+                         % (PROBE_HEADER, header),
                "rom": os.path.abspath(rom), "rom_sha256": sha,
                "estados_vistos": [], "amostras_brutas": []}
         with open(os.path.join(out_dir, out_name + ".json"), "w") as f:
@@ -747,8 +845,10 @@ def self_check():
                magic_ok([0, 0, 0, 0, 0]) is False))
     ok.append(("SMRT+schema1 autentica",
                magic_ok(list(b"SMRT") + [1]) is True))
+    ok.append(("SMRT+schema2 (D10) autentica",
+               magic_ok(list(b"SMRT") + [2]) is True))
     ok.append(("magic certo com schema errado rejeita",
-               magic_ok(list(b"SMRT") + [2]) is False))
+               magic_ok(list(b"SMRT") + [3]) is False))
     ok.append(("header ausente (None) rejeita", magic_ok(None) is False))
     # contrato de fonte: a triade precisa estar DECLARADA no fonte da ROM
     import tempfile
@@ -779,7 +879,7 @@ def self_check():
             "volatile unsigned int  __at(0xC7EB) probe_vovf;\n"
             "volatile unsigned char __at(0xC7ED) probe_phase;\n"
             "volatile unsigned char __at(0xC7EE) probe_worst_done;\n"
-            "volatile unsigned char __at(0xC7EF) probe_vline_min;\n"
+            "volatile unsigned char __at(0xC7D2) probe_vline_min;\n"
             "#define WORST_FRAME_WINDOW 3000u\n")
         ok.append(("triade completa autentica", okc and not miss))
         okc, miss = _src(
@@ -787,7 +887,7 @@ def self_check():
             "volatile unsigned char __at(0xC7EB) probe_vovf;\n"
             "volatile unsigned char __at(0xC7ED) probe_phase;\n"
             "volatile unsigned char __at(0xC7EE) probe_worst_done;\n"
-            "volatile unsigned char __at(0xC7EF) probe_vline_min;\n"
+            "volatile unsigned char __at(0xC7D2) probe_vline_min;\n"
             "#define WORST_FRAME_WINDOW 3000u\n")
         ok.append(("vovf como BYTE rejeita (saturacao)", not okc))
         okc, miss = _src(
@@ -795,7 +895,7 @@ def self_check():
             "volatile unsigned int  __at(0xC7EB) probe_vovf;\n"
             "volatile unsigned char __at(0xC7ED) probe_phase;\n"
             "volatile unsigned char __at(0xC7EE) probe_worst_done;\n"
-            "volatile unsigned char __at(0xC7EF) probe_vline_min;\n"
+            "volatile unsigned char __at(0xC7D2) probe_vline_min;\n"
             "#define WORST_FRAME_WINDOW 2999u\n")
         ok.append(("janela diferente de 3000 rejeita", not okc))
         okc, miss = _src(
@@ -866,6 +966,96 @@ def self_check():
         ok.append(("perfil do loop rejeita nomes duplicados",
                    loop_profile_names(td) is None
                    and not loop_profile_contract(td)))
+        # --- corredor realocado (L089): o contrato é base-dependente
+        def _triade(block):
+            return (
+                "volatile unsigned char __at(0x%04X) probe_vline;\n"
+                "volatile unsigned int  __at(0x%04X) probe_vovf;\n"
+                "volatile unsigned char __at(0x%04X) probe_phase;\n"
+                "volatile unsigned char __at(0x%04X) probe_worst_done;\n"
+                "volatile unsigned char __at(0x%04X) probe_vline_min;\n"
+                "volatile unsigned char __at(0x%04X) probe_profile_wait;\n"
+                "volatile unsigned char __at(0x%04X) probe_profile_stream;\n"
+                "volatile unsigned char __at(0x%04X) probe_profile_hud;\n"
+                "volatile unsigned char __at(0x%04X) probe_profile_sat;\n"
+                "volatile unsigned char __at(0x%04X) probe_vline_spill_max;\n"
+                "#define WORST_FRAME_WINDOW 3000u\n"
+                % (block + OFFSETS["vline"], block + OFFSETS["vovf"],
+                   block + OFFSETS["phase"], block + OFFSETS["worst_done"],
+                   block + OFFSETS["vline_min"],
+                   block + OFFSETS["profile_wait"],
+                   block + OFFSETS["profile_stream"],
+                   block + OFFSETS["profile_hud"],
+                   block + OFFSETS["profile_sat"],
+                   block + OFFSETS["profile_spill_max"]))
+
+        _src(_triade(0xC900))
+        ok.append(("fonte realocada em 0xC900 reprova sob a base canonica",
+                   not probe_contract(td)[0] and not profile_contract(td)))
+        apply_probe_block(0xC900)
+        ok.append(("fonte realocada autentica sob a base declarada",
+                   probe_contract(td)[0] and profile_contract(td)))
+        ok.append(("realocar move cabecalho, frame, estado e perfil",
+                   PROBE_HEADER == 0xC9E0 and PROBE_FRAME == 0xC9F0
+                   and PROBE_STATE == 0xC9F6 and PROBE_VLINE_MIN == 0xC9D2
+                   and PROFILE_ADDRS["wait"] == 0xC9D0
+                   and PROFILE_SPILL_MAX == 0xC9D6
+                   and LOOP_PROFILE_SEQ == 0xC9D2
+                   and MRP.PROBE_BASE == 0xC9E0
+                   and MRP.FRAME_ADDR == 0xC9F0
+                   and MRP.SNAP_ADDRS["pz"] == 0xC9FB
+                   and MRP.SNAP_ADDRS["py"] == 0xC9FD
+                   and MRP.SNAP_ADDRS["p2state"] == 0xC9FE))
+        _src(_triade(0xC700))
+        ok.append(("fonte canonica reprova sob a base realocada",
+                   not probe_contract(td)[0] and not profile_contract(td)))
+        for bad in (0xC950, 0xBF00, 0xE000):
+            try:
+                apply_probe_block(bad)
+                rejected = False
+            except ValueError:
+                rejected = True
+            ok.append(("base invalida %s rejeitada" % hex(bad), rejected))
+        apply_probe_block(0xC700)
+        ok.append(("base canonica restaurada",
+                   PROBE_HEADER == 0xC7E0 and MRP.PROBE_BASE == 0xC7E0
+                   and _src(_triade(0xC700))[0] and profile_contract(td)))
+
+        # leitura do corredor derivada do fonte (dono de declared_probes)
+        dp = os.path.join(td, "dp")
+        os.makedirs(dp)
+        with open(os.path.join(dp, "p.c"), "w") as f:
+            f.write("volatile unsigned char __at(0xC900) a;\n"
+                    "volatile unsigned int  __at(0xC901) b;\n"
+                    "volatile unsigned char __at(0xC903) v[3];\n")
+        probes = declared_probes(dp)
+        ok.append(("declared_probes expande word e array",
+                   probes == [("a", 0xC900, 1), ("b", 0xC901, 2),
+                              ("v[0]", 0xC903, 1), ("v[1]", 0xC904, 1),
+                              ("v[2]", 0xC905, 1)]))
+        with open(os.path.join(dp, "q.c"), "w") as f:
+            f.write("volatile unsigned char __at(0xC900) a;\n"
+                    "volatile unsigned char __at(0xC902) b;\n")
+        try:
+            declared_probes(dp)
+            overlap_caught = False
+        except ValueError:
+            overlap_caught = True
+        ok.append(("sonda no byte alto de um word vira sobreposicao",
+                   overlap_caught))
+        os.remove(os.path.join(dp, "q.c"))
+        with open(os.path.join(dp, "q.c"), "w") as f:
+            f.write("volatile unsigned char __at(0xC901) c;\n")
+        try:
+            declared_probes(dp)
+            word_overlap_caught = False
+        except ValueError:
+            word_overlap_caught = True
+        ok.append(("byte baixo dentro de um word reprovado",
+                   word_overlap_caught))
+        ok.append(("fonte sem __at devolve corredor vazio",
+                   declared_probes(os.path.join(td, "dp2")) == []))
+
         with open(mc, "w") as f:
             f.write("enum { ST_IDLE, ST_WALK_F, ST_N_STATES };\n")
         ok.append(("enum de estado do projeto rotula snapshot corretamente",
@@ -889,11 +1079,19 @@ def main():
     ap.add_argument("--wait-seconds", type=float,
                     help="espera DAP, 90..1800 s (default 90; diagnostico de ROM lenta)")
     ap.add_argument("--out", default="worst_frame")
+    ap.add_argument("--probe-base", default="0xC700",
+                    help="base do corredor de sondas (default 0xC700; "
+                         "ex. 0xC900 para ROMs cujo _DATA encosta em 0xC790)")
     ap.add_argument("--session", help="ID de sessao privada (sem DAP global)")
     ap.add_argument("--self-check", action="store_true")
     args = ap.parse_args()
     if args.self_check:
         return self_check()
+    try:
+        apply_probe_block(int(args.probe_base, 16))
+    except ValueError as e:
+        print("[FAIL_USO] %s" % e)
+        return 3
     if args.session:
         code, _ = measure_private(args.session, args.project, args.seconds, args.out, args.wait_seconds)
         return code
