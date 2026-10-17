@@ -122,7 +122,7 @@
     {
       "ts": "2026-09-06",
       "kind": "lesson",
-      "summary": "L047: troca de tela escreve ~160 tiles de name table e roda dentro do fight_update, que e FORA do VBlank — parte das escritas se perde no display ativo e sobra lixo (um 'UPER' do titulo por cima da luta). Limpar linha a linha nao resolveu; o que resolveu foi desligar o display e redesenhar o MAPA INTEIRO. Numa transicao o frame preto e o que se espera mesmo, e some a classe toda de resto-na-tela.",
+      "summary": "L047: troca de tela escreve ~160 tiles de name table e roda dentro do fight_update, que e FORA do VBlank — parte das escritas se perde no display ativo e sobra lixo (um 'UPER' do titulo por cima da luta). Limpar linha a linha nao resolveu; o que resolveu foi desligar o display e redesenhar o MAPA INTEIRO. Numa transicao o frame preto e o que se espera mesmo, e some a classe toda de resto-na-tela. NOTA L136/127 (2026-10-17): o mecanismo de PERDA DE DADO foi refutado por medicao em dois emuladores — escrita fora do VBlank chega integra; o residuo visual e a receita display-off deste item seguem validos.",
       "sources": [
         "SMS_projects/MSSF2T/src/fight.c"
       ],
@@ -1133,6 +1133,16 @@
         "SMS_projects/openbor_sms_rev1/doc/10-memory-bank.md"
       ],
       "dedup_key": "openbor_o2_l134_l135_curadoria_20261016"
+    },
+    {
+      "ts": "2026-10-17",
+      "kind": "curation",
+      "summary": "Fechada a candidata L136 (§127): escrita na VRAM fora da janela do VBlank nao se perde — bloco bancado de 1856 B atravessou ~230 linhas de varredura e chegou integro (dump==fonte, 0 mismatches) em BlastEm e Emulicious, loop a 60 Hz no BlastEm; corrige o mecanismo de perda de dado invocado em L047 (o residuo visual permanece). Prova: laboratorio mapper_vblank_copy (ROM 8d874029..., duas campanhas deterministicas) + capture_evidence.py + blastem_diagnostics.py; emenda no bullet de 9; rota L136 para workflows de diagnostico BlastEm e curadoria. Hardware segue LOTE F.",
+      "sources": [
+        "doc/curation/2026-10-16_l136_vram_fora_do_vblank.json",
+        "SMS_projects/_laboratorio/mapper_vblank_copy/l136_candidate.json"
+      ],
+      "dedup_key": "l136_vram_fora_do_vblank_fechamento_20261017"
     }
   ]
 }

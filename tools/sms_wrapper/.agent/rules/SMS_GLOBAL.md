@@ -107,8 +107,10 @@ bloqueios). Handoff nunca substitui memory bank nem evidência.
 - Orçamento worst-frame POR CENA é contrato em `13-spec-cenas.md`, medido
   ("estimado" é proibido no schema). Folga não medida é timidez (§18).
 - Transição de tela que reescreve name table em massa: **desligar o display,
-  redesenhar o mapa inteiro, religar**. Escritas no display ativo perdem-se
-  e deixam resto na tela; limpar linha a linha não fecha a classe (L047).
+  redesenhar o mapa inteiro, religar**. O resíduo visual de redesenho a meio
+  quadro é real e não se limpa linha a linha (L047); não confundir com perda de
+  dado — escrita na VRAM fora da janela do VBlank chega íntegra, medido em dois
+  emuladores (L136, §127).
 
 ## 10. Armadilhas Z80/SDCC (assumir como suspeita até provado)
 - `int` = 16-bit signed; multiplicação/divisão caras; float proibido em runtime quente.
@@ -2552,3 +2554,24 @@ aplicados: expected-dir para `audit_render_glitch.py` (declarado N/A no O2 por
 falta dele) ou comparador framebuffer↔colunas emitidas (natural no O4/terreno).
 A técnica do anel é do engine deste piloto; o sinal é convenção da janela
 declarada. Console segue LOTE F.
+
+## 127. Escrita fora da janela do VBlank: integridade medida (L136)
+
+Bytes escritos na VRAM fora da janela do VBlank **chegam**: um bloco bancado de
+1856 B copiado para a VRAM 0x0000 logo após `SMS_waitForVBlank` atravessa ~230
+linhas de varredura (janela declarada ~70 linhas / ~4,5 ms NTSC; ~8,1 B/linha
+medidos) e chega íntegro em dois emuladores (dump de VRAM == fonte, zero
+mismatches; fronteira visível exata em 1856 B), com o loop a 60 Hz no BlastEm.
+A janela do VBlank governa **quando** transferir — qualidade visual de quadro e
+orçamento de bytes/frame medidos —, não a integridade do dado. Não invocar
+"escrita se perde" como motivo de desenho sem medir o caso; não simplificar
+cronograma de upload sem medida cruzada e revisão de escopo.
+
+Limites: medido em emulador (BlastEm sms2/NTSC + Emulicious); acesso do CPU à
+VRAM durante display ativo no silício segue LOTE F. O custo por instrução
+(OUTI vs laço) não é universal. Corrige o mecanismo invocado em L047: o resíduo
+visual de redesenho a meio quadro permanece e a receita display-off de §9 segue
+válida — o que se refuta é a perda de dado. Ferramentas: `capture_evidence.py`
+(Emulicious com self-check) e `blastem_diagnostics.py` (views de decode
+planar); o caso é reproduzido pelo harness do probe de laboratório
+`mapper_vblank_copy` (campanha própria), não por ferramenta do wrapper.

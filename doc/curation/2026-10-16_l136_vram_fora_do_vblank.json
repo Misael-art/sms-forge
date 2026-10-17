@@ -1,0 +1,53 @@
+{
+  "curation_id": "2026-10-16_l136_vram_fora_do_vblank",
+  "date": "2026-10-16",
+  "title": "L136: escrita na VRAM fora da janela do VBlank não se perde (medida em dois emuladores) — corrige o mecanismo invocado em L047",
+  "kind": "curation",
+  "project": "SMS_projects/_laboratorio/mapper_vblank_copy",
+  "scope": "Emuladores BlastEm (sms2/NTSC) e Emulicious (2026-03-27). Hardware real NÃO medido (acesso do CPU à VRAM durante display ativo no silício segue LOTE F). A classe medida é 'escrita do CPU na porta de dados da VRAM durante o display ativo' via SMS_VRAMmemcpy; custo por instrução (OUTI vs laço) não é universal.",
+  "authorization": "Dono autorizou em 2026-10-17 (resposta 'AUTORIZADO PROSSIGA' ao relatório de fechamento do M4 do lote O3, que pedia o fechamento desta candidata). Nada havia sido escrito em doc/curation, SMS_GLOBAL, ledger ou rotas antes desta data; a candidata medida vive em SMS_projects/_laboratorio/mapper_vblank_copy/l136_candidate.json.",
+  "relation": {
+    "corrects_mechanism_of": "L047",
+    "note": "O fato observado de L047 (resíduo visual 'UPER' em troca de tela, 2026-09) permanece: o sintoma é de renderização a meio quadro. A inferência 'parte das escritas se perde no display ativo' (mecanismo de PERDA DE DADO) não se reproduz em dois emuladores com medição direta; o bullet de §9 foi emendado para separar o resíduo visual da integridade do dado."
+  },
+  "lessons": [
+    {
+      "id": "L136",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Bytes escritos na VRAM fora da janela do VBlank CHEGAM: um bloco bancado de 1856 B copiado para a VRAM 0x0000 logo após SMS_waitForVBlank atravessa ~230 linhas de varredura (janela declarada ~70 linhas / 4,5 ms NTSC; ~8,1 B/linha) e chega íntegro em dois emuladores (dump de VRAM == fonte, zero mismatches; fronteira visível exata em 1856 B na tela), mantendo o loop a 60 Hz no BlastEm. A janela do VBlank governa QUANDO transferir por qualidade visual de quadro e por orçamento (bytes/frame medidos), não a integridade do dado. Não invocar 'escrita se perde' como motivo sem medir o caso; não simplificar cronograma de upload sem medida cruzada e revisão de escopo.",
+      "evidence": {
+        "probe": "SMS_projects/_laboratorio/mapper_vblank_copy (README com pergunta/previsão registradas antes do código; repetição com python3 campaign.py na raiz do probe)",
+        "rom": "out/rom/mapper_vblank_copy.sms sha256 8d87402967a0adadda9feb1bf99e92684ea645394ec147a7fcb0c86ac8954c4b, 131072 B, build determinística (mesmo sha em duas campanhas)",
+        "blastem": "out/evidence/mapper_vblank_copy_m1/blastem-sms-2a717d8399b94c0389252aed046ecc3a/analysis.json: mapper_ok=true ('M'=77 com bank2, 'P'=80 com bank3, bank_after=2); frames_rom_delta=2 == frames_vdp_delta=2 (60 Hz); vram.prefix_ok=1856 mismatches=0; visible_tiles_ok {8:32, 9:26}; visible_bytes_total=1856; vc 194->162 (~230 linhas)",
+        "emulicious": "out/evidence/emu_cross.png + emu_cross.json (capture_evidence.py self-check OK, chain of custody java -remotedebug + spectacle); viewport decodificado 256x192: linha BG 8 = 32/32 tiles, linha BG 9 = 26/26 tiles, fronteira exata em 1856 B; fato de instrumento: VRAM inicial do Emulicious não-zero (BlastEm inicializa zerado; hardware indefinido) — a fronteira de 58 tiles casa o comprimento da cópia nos dois",
+        "janela_vs_copia": "declarada ~4,5 ms (~70 linhas); medida ~230 linhas; a cópia excede a janela ~3,3x e ainda assim chega — a perda prevista (prefixo ~650–950 B) foi refutada",
+        "decode_planar": "formato de tile Mode 4 é planar (4 bytes/linha = 4 bitplanes; byte p fornece o bit p do índice; MSB = pixel esquerdo) — conferido contra tile32 do emissor (tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py) e pixel de tools/sms_wrapper/blastem_diagnostics.py; os três concordam"
+      },
+      "tool_that_measures": "capture_evidence.py (captura Emulicious com self-check) + blastem_diagnostics.py (views de decode planar); o caso é reproduzido pelo harness do probe de laboratório mapper_vblank_copy (campanha própria), não por ferramenta do wrapper",
+      "rule_section": "SMS_GLOBAL §127 (nova, apendada) + emenda no bullet de §9 (L047)",
+      "applications": [
+        "L044 (aplicação paga no M1): eu teorizei anomalia de emulador antes de usar as views nativas do BlastEm/decode canônico — o tile viewer, a tela e o dump eram consistentes; o erro era minha suposição de formato",
+        "processo: decodificar VRAM à mão fora dos decoders canônicos (blastem_diagnostics.py render_views / sms_emit.py tile32) reproduz o erro 'nibble empacotado' — usar os canônicos"
+      ]
+    }
+  ],
+  "registry_and_process_notes": [
+    {
+      "topic": "candidata medida vive fora do repo canônico até autorização",
+      "note": "A candidata (l136_candidate.json no probe de laboratório) só entra em doc/curation com autorização do dono; o fechamento move o conteúdo sem o campo draft/status de pendência e mantém o probe como evidência. Fecha na mesma instrução em que o dono autorizou o fechamento do M4 do lote O3."
+    }
+  ],
+  "closure": {
+    "new_lesson_ids_emitted": true,
+    "ids": [
+      "L136"
+    ],
+    "registry_updated": "issued_through L135 -> L136",
+    "sms_global_updated": "§127 apendada (nunca renumerar); bullet de §9 emendado para separar resíduo visual de perda de dado (L047)",
+    "skills_updated": [],
+    "lesson_routes": "rota L136 -> workflows/blastem-sms-diagnostics.md + workflows/curation-learning.md; ledger com entrada L136 e nota de mecanismo na entrada L047",
+    "next_gate_to_run": "audit_learning_capture.py --root . (esperado PASS) e --self-check",
+    "open_gap": "hardware real segue LOTE F (acesso do CPU à VRAM durante display ativo no silício); custo por instrução (OUTI vs laço) não universal; não existe gate estático para a classe — o caso é reproduzido pelo harness do probe de laboratório"
+  },
+  "dedup_key": "l136_escrita_vram_fora_do_vblank_nao_se_perde_2026_10_16"
+}

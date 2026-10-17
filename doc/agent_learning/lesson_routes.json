@@ -1,10 +1,10 @@
 {
   "schema": "sms_lesson_routes_v1",
   "status": "canonical_application_routes",
-  "lesson_count": 119,
+  "lesson_count": 120,
   "source_coverage_sha256": "f086039f2d42542470ad5747b1693767e8dcd0ffedfab0e737f8b66d0b528755",
   "registry_source": "doc/curation/id_registry.json",
-  "registry_issued_through": "L135",
+  "registry_issued_through": "L136",
   "excluded_holes": [
     "L012",
     "L020",
@@ -4655,6 +4655,26 @@
           "selection_basis": "domain_review; o sinal/anel do h-scroll é promessa de scroll feita no contexto de runtime e precisa ser ensinado na seção de scroll da skill"
         }
       ]
+    },
+    {
+      "lesson_id": "L136",
+      "sources": ["doc/curation/2026-10-16_l136_vram_fora_do_vblank.json"],
+      "rule_section": "SMS_GLOBAL §127 (emenda no bullet de §9)",
+      "current_rule_status": "fechada_com_ferramenta",
+      "application_entrypoints": [
+        {
+          "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+          "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "domain_review; a integridade da escrita fora do VBlank é hipótese de VDP/mapper resolvida em segunda implementação — o workflow que decide quando usar BlastEm carrega o caso"
+        },
+        {
+          "path": "tools/sms_wrapper/.agent/workflows/curation-learning.md",
+          "sha256": "7a90474c791e7e465ae11f0f3d1363b495e49b9608089d9f90ece080d7133eb5",
+          "coverage": "existing_application_entrypoint",
+          "selection_basis": "process_gate; correção de mecanismo de lição histórica (L047) é o exemplo operativo de 'refutações apontam a aplicação corrigida e mantêm o limite histórico'"
+        }
+      ]
     }
   ],
   "limits": [
@@ -5215,6 +5235,24 @@
         "promotion": "L134/L135 entram como fechada_com_ferramenta / fechada_com_evidencia; dogfood: audit_learning_capture --root . PASS"
       },
       "record_interpretation": "curation_batch_with_new_lessons_and_applications"
+    },
+    {
+      "path": "doc/curation/2026-10-16_l136_vram_fora_do_vblank.json",
+      "sha256": "629759e93f8c518cbf17896324aa183f76694773c449261567b3b52f6241f799",
+      "type": "curation",
+      "defined_lesson_ids": ["L136"],
+      "referenced_lesson_ids": ["L044", "L047"],
+      "applied_lesson_ids": ["L044"],
+      "lessons_empty": false,
+      "has_validation_or_evidence": true,
+      "promotion_status": {
+        "status": "applied; fechamento da candidata L136 do laboratorio mapper_vblank_copy. Aprovacao humana: instrucao de 2026-10-17 ('AUTORIZADO PROSSIGA' ao relatorio de fechamento do M4).",
+        "new_lesson_ids": true,
+        "registry_unchanged": false,
+        "registry_current": "L136",
+        "promotion": "L136 entra como fechada_com_ferramenta; mecanismo de L047 corrigido; dogfood: audit_learning_capture --root . PASS"
+      },
+      "record_interpretation": "curation_new_lesson_with_mechanism_correction"
     }
   ]
 }
