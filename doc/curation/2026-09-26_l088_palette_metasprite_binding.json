@@ -1,0 +1,21 @@
+{
+  "curation_id": "2026-09-26_l088_palette_metasprite_binding",
+  "date": "2026-09-26",
+  "scope": "sms_mugen_fighter_scale_pilot",
+  "authorization": "pedido explícito para avançar o piloto de lutadores 72–88 px e alinhar motor, projeto e ferramentas antes da arte completa",
+  "lessons": [
+    {
+      "id": "L088",
+      "status": "fechada_com_ferramenta_e_regra",
+      "lesson": "Os índices de META/METAL são relativos a um pool concreto. A conversão P2 pode mudar deduplicação/ordem dos patterns; reutilizar metadata P1 sem equivalência exata deixa a imagem sem prova e pode apontar fora do blob.",
+      "evidence": {
+        "observed": "No corte legado, Ken P2 tinha 57 pares 8x16 e META/METAL P1 apontava para o tile 114; Ryu não tinha metadata P2 própria. Os fontes MUGEN foram localizados em acervo read-only e os dois cortes foram regenerados: 44 poses Ken e 32 Ryu, com META/METAL próprios para cada pool. O auditor confirmou a seleção de metadata P2 no corte regenerado; build clone-only e vídeo real provaram Ryu P2 idle frame 0 (IoU 1.0). P1→P2 por igualdade continua insuficiente: 88/2660 pares Ken e 50/1404 Ryu coincidem por bytes; nenhuma outra máscara coincide, sem pose integralmente coberta. Os budgets continuam: idle current+next 6464/8192 B; todas ações 8256 B sem dedup fixo, 8320 B qualquer facing; par transparente único apenas reduziria o fixo a 8192 B, sem folga. Chunk 64 B/VBlank ainda excede AIR em 44/44 Ken e 31/32 Ryu. O header completo também revelou overflow inicial de 34724 B; após deduplicar 196 META/METAL byte-idênticos, o objeto ficou em 16669 B e o banco 1 deixou 15550 B livres. Prefetch exato no idle 0→1: Ken precisa de 1920 B/4 ticks (480 B/VBlank), Ryu P2 de 1280 B/7 ticks (183 B/VBlank); demandam cache e vazão acima do chunk hipotético atual de 64 B.",
+        "correction": "scene_cut.py emite META/METAL por pool; versus_scene_cut.py pode aliasar somente arrays com bytes idênticos, mantendo símbolo e _SIZE. O header integral Ken/Ryu agora linka; isso fecha o overflow deste matchup, não prova AIR nem banking de metadata para elenco maior. O status de promoção permanece blocked.",
+        "validation": "scale_pilot.py --self-check PASS; versus-cut --self-check PASS incluindo alias exato; audit_symbol_size_sync --self-check e clone PASS. Header completo: 196 aliases, 18055 B poupados, _CODE=16669 B, 15550 B livres no banco 1. Build ROM 655360 B, SHA-256 7a7a2e3f6cb46250222f66ccbde630cf7114126a03270583d2de18511becd23e; capture_video.py PASS (179 frames, 256x192); bancos mapper 2-36 byte-idênticos; scale_pilot.py --video PASS, IoU 1.0 no frame 0. AIR/budget seguem blocked; esta evidência não promove gameplay nem arte final. O relatório também mede cada transição AIR: 36/40 transições por facing de Ken e 26/28 de Ryu excedem o chunk hipotético de 64 B/VBlank; o pior exige 2176 B/VBlank para Ken e 672 B/VBlank para Ryu. Não é medição de vazão real.",
+        "report": "SMS_projects/luta_mugen/out/local_study/generated/scale_pilot_80px_regenerated/scale_pilot_dedup_emulator_audit.json"
+      },
+      "rule_section": "SMS_GLOBAL §73",
+      "tool_that_measures": "mugen2sms/analysis/scale_pilot.py"
+    }
+  ]
+}

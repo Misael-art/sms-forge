@@ -1,0 +1,136 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_05_urban_seinen_kof_v1",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1.png",
+    "sha256": "dd79f1393380b075b81e10ee5988adbd22a282b4ebd7d8940b1500a4f35ca2fa",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png",
+    "sha256": "bf994540105b99a0a313a5ec12530f260fa54b0944e82bb7a93c26a892a0424d"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+          "role": "approved model-sheet identity and five-view form reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "identity, face, approved costume, palette and equipment authority"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "project palette-role authority"
+        },
+        {
+          "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "role": "initial style descriptor; not independently validated"
+        }
+      ],
+      "observed_defects": [
+        "Generated clothing differs from the detailed approved Victorian costume; candidate still requires owner review.",
+        "Generated composition required uniform reduction to 0.88; line labels and footer spacing need independent confirmation."
+      ],
+      "revision_notes": [
+        "Attempt 1 preserved and discarded because hair was black, clothing became a blue suit/vest and boomerang became a scythe-like weapon.",
+        "Attempt 2 preserved and discarded because clothes/shoes remained embellished and violet effect was added to the boomerang.",
+        "Attempt 3 preserved and composed as a review candidate; long cyan coat, gray hair, glasses, cane, rapier and steel crescent boomerang are visible.",
+        "Generated art was uniformly reduced to 0.88 by the compositor; illustration was not redrawn or recolored.",
+        "Owner and independent art review remain pending; no sprite/resource/ROM claim is made."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Five requested views are present, but the generated pose extends below the artwork frame into the title/footer boundary; compositor scale was reduced to 0.88 and final spacing still needs owner/independent layout review."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "Producer observation: firm angular contours and clean three-tone shading read as a distinct late-1990s fighting-manga treatment; confirm stylistic fidelity independently."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Angular ink contours look clear at displayed size; detailed edge review remains pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Front/profile/back appear tall and slim with long limbs; anatomical review remains pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Three-tone angular cel shading is present. RGB is concept illustration and is not quantized to SMS palette."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Front/profile/back are close in scale with approximate common baseline; ruler is a visual guide only."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Generated art uses clean pale cream with no scenery."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Gray swept-back hair, round brass spectacles, adult face and slim build are visible; review remains pending."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Coat remains long blue/cyan with white shirt and burgundy cravat; generated outfit still differs from detailed approved Victorian costume. Owner review required."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Cane, rapier and crescent steel boomerang are visible; inspect hands, grips, guards and perspective before approval."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Owner and independent reviewer must inspect this axis on the exact hash-bound candidate. Producer did not approve the art."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Owner and independent reviewer must inspect this axis on the exact hash-bound candidate. Producer did not approve the art."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "No monster traits observed; costume difference remains an unapproved detail for owner review."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval"
+}

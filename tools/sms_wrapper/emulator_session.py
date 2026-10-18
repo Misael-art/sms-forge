@@ -17,16 +17,16 @@ acaso estava animando. Falso FAIL sobre uma ROM que ele nunca observou. A causa
 raiz e sempre a mesma linha: `xdotool/kdotool search --name Emulicious` devolve
 a janela de QUALQUER processo, e todo mundo pega a primeira.
 
-Politicas (a escolha e do chamador, mas o texto e a deteccao sao daqui):
-  ABORT  — para gates de EVIDENCIA. Matar processo do usuario sem pedir e pior
-           que falhar: pode estar depurando algo. Default.
-  KILL   — so onde a propria licao exige (L048, captura de audio: o zumbi
-           silencia a captura da ROM certa e o eixo fecha em falso).
+Politica atual (§93): rota privada `isolated` com display e SMSJoypads proprios.
+  ABORT — guarda da rota legada por nome global. Nunca encerra outras JVMs.
+  KILL  — alias historico; agora reprova. Descoberta de PID nao prova ownership.
 
 Uso:
   from emulator_session import require_no_stale, StalePolicy
   if not require_no_stale(why="captura de evidencia"): return 2
   emulator_session.py --self-check
+  emulator_session.py isolated start ROM.sms
+  emulator_session.py isolated close ID
 Exit: 0 ok | 3 uso
 """
 import os, sys, time, subprocess
@@ -84,8 +84,9 @@ def stale_pids(exclude=None):
 def explain(pids, why=None):
     """Mensagem unica. O gate que so diz 'ja existe Emulicious' nao ensina."""
     return (
-        "[FAIL_AMBIENTE] ja existe Emulicious rodando (pid %s)%s. Encerre "
-        "antes: pkill -f Emulicious.jar\n"
+        "[FAIL_AMBIENTE] ja existe Emulicious rodando (pid %s)%s. Use uma "
+        "sessao privada: emulator_session.py isolated start ROM.sms; ou "
+        "encerre manualmente apenas a instancia identificada.\n"
         "  Motivo (L057, demonstrado): a busca de janela por NOME devolve a "
         "janela de qualquer instancia. Com um zumbi vivo o gate nao falha — "
         "ele mede a ROM ERRADA e emite veredito confiante sobre a sua. Ja "
@@ -98,15 +99,8 @@ def explain(pids, why=None):
 
 
 def kill_stale(exclude=None, wait=0.8):
-    """Encerra zumbis e devolve os PIDs encerrados (politica KILL, L048)."""
-    pids = stale_pids(exclude=exclude)
-    for p in pids:
-        _run(["kill", "-TERM", p])
-    if pids:
-        # O shutdown hook do Emulicious ainda escreve o .ini: quem sobe depois
-        # precisa achar o arquivo ja estabilizado (L056).
-        time.sleep(wait)
-    return pids
+    """Legacy broad kill removed: discovered PIDs do not establish ownership."""
+    raise RuntimeError("KILL global proibido; encerre a sessao que voce criou pelo ID")
 
 
 def require_no_stale(policy=ABORT, why=None, exclude=None, out=None):
@@ -116,10 +110,9 @@ def require_no_stale(policy=ABORT, why=None, exclude=None, out=None):
     if not pids:
         return True
     if policy == KILL:
-        killed = kill_stale(exclude=exclude)
-        print("[INFO] zumbi(s) do Emulicious encerrado(s): %s (politica KILL, "
-              "L048)" % ", ".join(killed), file=out)
-        return not stale_pids(exclude=exclude)
+        print("[FAIL_AMBIENTE] KILL global desativado: PIDs encontrados nao "
+              "provam propriedade da sessao.",file=out)
+        return False
     print(explain(pids, why), file=out)
     return False
 
@@ -129,7 +122,7 @@ def _self_check():
     assert PGREP_PATTERN == "Emulicious[.]jar", "pgrep casaria com o proprio shell"
     # a explicacao tem que NOMEAR o defeito, nao so anunciar o estado
     msg = explain(["123"], why="teste")
-    assert "ROM ERRADA" in msg and "123" in msg and "pkill" in msg, msg
+    assert "ROM ERRADA" in msg and "123" in msg and "isolated start" in msg, msg
     assert "laboratorio_01" in msg and "MSSF2T" in msg, "perdeu o caso demonstrado"
     # ABORT nao mata nada e devolve False quando ha zumbi
     buf = io.StringIO()
@@ -137,6 +130,7 @@ def _self_check():
     globals()["stale_pids"] = lambda exclude=None: ["999"]
     try:
         assert require_no_stale(out=buf) is False
+        assert require_no_stale(policy=KILL,out=buf) is False
         assert "FAIL_AMBIENTE" in buf.getvalue()
         globals()["stale_pids"] = lambda exclude=None: []
         assert require_no_stale(out=io.StringIO()) is True
@@ -147,11 +141,16 @@ def _self_check():
     # o SHELL que chamou nao e uma JVM: pgrep -f casa a linha dele, _is_java nao
     assert _is_java(os.getpid()) is False, "python nao deveria contar como java"
     assert _is_java(999999999) is False, "pid inexistente nao pode contar"
+    from session_bridge.isolated import self_check
+    self_check()
     print("[OK] emulator_session self-check")
     return 0
 
 
 if __name__ == "__main__":
+    if sys.argv[1:2] == ["isolated"]:
+        from session_bridge.isolated import main
+        sys.exit(main(sys.argv[2:]))
     if "--self-check" in sys.argv[1:]:
         sys.exit(_self_check())
     print(__doc__.splitlines()[0])

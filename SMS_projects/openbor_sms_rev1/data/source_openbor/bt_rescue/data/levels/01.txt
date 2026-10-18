@@ -1,0 +1,262 @@
+music		data/music/2.bor
+background	data/bgs/01/n.gif
+panel	        data/bgs/01/n.gif
+frontpanel	data/bgs/01/f.gif
+order           a
+spawn1  20  20
+spawn2  5  40
+nohit   1 
+
+
+spawn	tbird1
+coords	0 240
+flip    1
+at	0
+
+spawn	drum
+coords	190 150
+at	0
+
+
+spawn	drum
+coords	240 150
+at	0
+
+
+spawn	drum
+coords	290 150
+at	0
+
+
+spawn	drum
+coords	210 180
+at	0
+
+spawn	drum
+coords	260 180
+at	0
+
+
+spawn	drum
+coords	230 205
+at	0
+
+spawn	rat
+coords	120 205
+health  50
+at	0
+
+
+
+wait
+at   100
+
+spawn	dru
+coords	340 205
+at	120
+
+
+spawn	dru
+coords	380 150
+at	120
+
+group  4 4
+at      200
+
+spawn	getem
+coords	50 150
+at      200
+
+spawn	pigman
+coords	360 190
+health  50
+map     1
+at	200
+
+spawn	rat
+coords	-80 140
+health  50
+map     2
+at	200
+
+wait
+at   300
+
+group  5  5
+at      400
+
+spawn	wrenchie
+map     6
+coords	-100 200
+health  50
+at	400
+
+spawn	pig
+coords	380 150
+health  50
+map     2
+at      220
+
+
+spawn	ratman
+coords	400 205
+map     1
+health  50
+at	400
+
+
+wait
+at   550
+
+
+spawn	drum
+coords	350 210
+at	600
+
+spawn	drum
+coords	360 187
+at	600
+
+spawn	drum
+coords	380 165
+at	600
+
+spawn	drum
+coords	410 150
+item    lifeup
+at	600
+
+spawn	drum
+coords	440 150
+at	600
+
+spawn	drum
+coords	470 150
+at	600
+
+spawn	drum
+coords	500 165
+at	600
+
+spawn	drum
+coords	530 185
+at	600
+
+spawn	drum
+coords	550 210
+at	600
+
+
+
+group  6  6
+at      660
+
+spawn	pigman
+coords	-80 200
+health  50
+map     6
+at	660
+
+spawn	srat
+coords	360 200
+health  50
+item    gun
+map     2
+at      660
+
+
+
+spawn   srat
+2pspawn	1
+coords	410 205
+item    gun
+map     4
+health  50
+at	0
+
+spawn	pigman
+coords	-160 200
+health  50
+map     4
+at      660
+
+wait 
+at     880
+
+group  4  4
+at      1200
+
+spawn	robo
+coords	-80 200
+at	1200
+
+spawn	robo
+coords	360 200
+at      1200
+
+spawn	rat
+coords	-160 200
+health  50
+at      1200
+
+wait 
+at     1300
+
+spawn	getem
+coords	50 150
+at      0
+
+
+group   5  5
+at      1460
+
+spawn	wrenchie
+coords	380 180
+map     3
+at	1460
+
+spawn	rat
+coords	360 210
+map     3
+at      1460
+
+spawn	rat
+coords	-160 150
+health  50
+map     2
+at      1460
+
+spawn	wrenchie
+coords	-260 200
+health  50
+map     4
+at      1460
+
+wait 
+at     1580
+
+group   5  5
+at      1760
+
+spawn	rat_
+coords	-80 200
+at	1760
+
+spawn	pig_
+coords	360 150
+health  50
+map     2
+at      1760
+
+spawn	pig_
+coords	-160 150
+health  50
+map     2
+at      1760
+
+spawn	pig_
+coords	-260 200
+health  50
+map     2
+at      1760
+

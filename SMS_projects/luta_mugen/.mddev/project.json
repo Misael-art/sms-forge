@@ -1,0 +1,46 @@
+{
+  "name": "luta_mugen",
+  "platform": "sega_master_system",
+  "region_target": [
+    "NTSC",
+    "PAL"
+  ],
+  "toolchain": {
+    "compiler": "sdcc>=4.2",
+    "sdk": "devkitSMS",
+    "libs": [
+      "SMSlib",
+      "PSGlib"
+    ],
+    "makesms_extra": [
+      "-pm",
+      "-mbank",
+      "out/local_study/generated/versus_cut/ken_scene_bank2.bin:0:1:2",
+      "-mbank",
+      "out/local_study/generated/versus_cut/ken_scene_bank3.bin:0:1:3",
+      "-mbank",
+      "out/local_study/generated/versus_cut/ken_scene_bank4.bin:0:1:4",
+      "-mbank",
+      "out/local_study/generated/versus_cut/ryu_scene_bank5.bin:0:1:5",
+      "-mbank",
+      "out/local_study/generated/versus_cut/ryu_scene_bank6.bin:0:1:6"
+    ]
+  },
+  "skeleton_version": 1,
+  "doc_authority": [
+    "doc/10-memory-bank.md",
+    "doc/11-gdd.md",
+    "doc/13-spec-cenas.md",
+    "doc/15-tdd.md"
+  ],
+  "gates": [
+    "build",
+    "resources",
+    "sprite_scanline",
+    "luma_floor",
+    "provenance",
+    "evidence",
+    "claims"
+  ],
+  "specialization": "fighting"
+}

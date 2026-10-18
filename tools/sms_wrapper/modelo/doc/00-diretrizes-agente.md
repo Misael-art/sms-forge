@@ -6,7 +6,7 @@
 
 ## Ordem de leitura obrigatória
 1. `AGENTS.md` da raiz do workspace
-2. `.agent/rules/SMS_GLOBAL.md`
+2. `tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md` da raiz (fonte central atual)
 3. `doc/10-memory-bank.md` (este projeto — estado real)
 4. este arquivo
 
@@ -33,3 +33,12 @@ Decisão barata antes de arte cara. Gate executável entre cada transição.
 ## Ao encerrar sessão
 Atualize `doc/10-memory-bank.md` com o estado REAL (não o pretendido) e deixe
 handoff explícito do próximo passo bloqueante.
+
+## QA automatizada e feedback independente
+
+Aplicar os workflows centrais `emulator-isolated-session.md` e
+`subagent-emulator-qa.md` (§§93–94) ao delta do projeto. Cada subagente nativo
+recebe pedido/casos, usa sessão própria, inspeciona mídias/probes e retorna
+feedback hash-bound; `audit_subagent_session.py` valida cobertura e vínculo.
+Não sobrescrever `.agent` local para receber esta regra. Coleta, build ou
+boot não substituem gameplay/qualidade/FPS; casos sem prova ficam `not_run`.

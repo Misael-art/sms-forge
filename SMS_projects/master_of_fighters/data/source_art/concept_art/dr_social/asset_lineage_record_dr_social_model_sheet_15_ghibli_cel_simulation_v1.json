@@ -1,0 +1,34 @@
+{
+  "schema": "sms_art_asset_lineage_v1",
+  "asset_id": "dr_social_model_sheet_15_ghibli_cel_simulation_v1",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
+    "sha256": "f908e40c2f5cf650e0f3bd7609b5f66b6d910c318b16cacee55c07f026613b96"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt",
+    "sha256": "3e2657ab4f521a49cfa3f44697d665c2f7ddf3c806096d405ea59a372a2ad04d"
+  },
+  "composition": {
+    "tool": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+    "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_metadata.json",
+    "art_scale": 0.78
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity and sheet authority"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png",
+    "sha256": "5e97c74b596c7ffe28c6d4473f2a43e6448908ccb8ae97db2bebde6170515457",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "visual_review": "Clean two-tone cel style, mature adult face, plain coat without waistcoat, held equipment. Coat cut differs mildly and violet boomerang effect is absent; candidate pending human review.",
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

@@ -1,0 +1,30 @@
+{
+  "curation_id": "2026-10-09_l109_prova_pose_pixels_hardware_animacao",
+  "date": "2026-10-09",
+  "title": "Prova de duas poses com recorte de pixels fonte e budgets SMS",
+  "kind": "curation",
+  "scope": "Padrão canônico de prova técnica pré-sprite-sheet para assets autorais de projetos Master System.",
+  "authorization": "O proprietário solicitou refazer a prova, impedir que falhas de pixel/overlay passem pelo validador, limitar a referência a idle+ação e amarrar animação/arte aos limites de hardware.",
+  "lessons": [
+    {
+      "id": "L109",
+      "status": "promovida_com_gate_de_pixels_exatos_e_fluxo_documentado",
+      "lesson": "Uma prova técnica antes da animação mostra somente duas poses-chave independentes (idle e ação). Grid 8x8 fica em mapa separado. O preview deve ser idêntico pixel a pixel ao PNG indexado após fundo e nearest-neighbor; qualquer overlay, filtro, antialias ou reamostragem reprova. audit_sprite_cutout pode medir ilhas com components_only, mas deve devolver pending até regiões de cor por material e review estarem declarados; não transformar cobertura parcial em aprovação. Contagem 8x8 é inventário de arte, não objetos SAT, VRAM residente ou custo VBlank. O hardware SMS não define contagem máxima universal de quadros por folha: o TDD mede pools, compartilhamento, banking, residência e upload. Toda animação registra evidência dos 12 princípios; poses estáticas não aprovam timing/movimento.",
+      "root_cause": "A prancha v1 desenhou a grade de tiles sobre o sprite ampliado; a arte-fonte estava sem as linhas, mas a imagem apresentada não era pixel-exata e induzia leitura de defeito no personagem. O padrão anterior também mostrava 12 poses numa fase que só precisava formalizar idle e ação, e não explicitava como o teto de quadros se relaciona a VRAM/RAM/ROM/VBlank.",
+      "evidence": {
+        "owner_feedback": "2026-10-09: a prova deve barrar falhas de pixel; demonstrar somente idle+ação; ligar paleta, resolução, tiles, limite de quadros, GDD/TDD e os 12 princípios.",
+        "rejected_proof": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_conversion_proof_v1.png",
+        "rejected_report": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_conversion_proof_v1.json",
+        "corrected_proof": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v2.png",
+        "corrected_report": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v2.json",
+        "measured_pair": "idle 54 patterns; action 57; pair union 111 patterns / 3552 raw 4bpp bytes. Art inventory only; SAT, scanline, VRAM residency, VBlank, runtime frame cap remain pending.",
+        "auditor": "tools/sms_wrapper/audit_asset_proof_sheet.py --self-check passes clean-source fixture and rejects an overlay-mutated preview; audit_sprite_cutout.py components_only detects islands but returns pending for missing material-region map."
+      },
+      "rule_section": "SMS_GLOBAL §105",
+      "tool_that_measures": "audit_asset_proof_sheet.py; audit_sprite_cutout.py; audit_learning_capture.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/workflows/art-review.md; tools/sms_wrapper/.agent/workflows/new-visual-asset.md; tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
+      "measurement_limits": "The auditor proves source-to-preview pixel identity, indexed palette constraints, key-pose coverage and declared technical fields only. It does not detect anatomy, concept fidelity, composition appeal, human approval, runtime feasibility or AAA quality. Hardware budgets require separate measured TDD/scene gates."
+    }
+  ],
+  "dedup_key": "l109_two_keypose_exact_preview_sms_hardware_animation_20261009"
+}

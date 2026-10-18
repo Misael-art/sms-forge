@@ -3,42 +3,56 @@
 > ESTADO OPERACIONAL REAL. Autoridade #1.
 
 ## Última atualização
-2026-09-07 (manhã) — **O SOCO CONECTA POR INPUT.** O micro-gap 5 fechou:
-aproximação até o contato real (gap=20, `PUSH_W`), Botão 1 (tecla A, bit
-0x10 = PORT_A_KEY_1 confirmado em `probe_keys`), e o `probe_boss`
-(Guile hp) caiu **64→57 = dano 7, hit cheio sem guarda**, com a pose
-`POSE_PUNCH` (0x82) observada no `probe_pose` — o golpe SAIU pela RAM,
-não por pixel. A causa do whiff da sessão anterior era o instrumento:
-o approach antigo parava em gap ≤ 26 e a caixa do soco só alcança
-gap < 24 (`fight.c collide`: ax=x+20..+32 contra bx=x+8..+24).
-ROM `out/rom/MSSF2T.sms` 32768 B — **SHA inalterada**:
-`2990757fb67990c427733114ae676bb5ea38e23d465b5f7b6cbf8d7070a8b6e0`
-(nenhum rebuild nesta passada; o instrumento é que mudou).
-Espaço livre de ROM: **1091 B**.
+2026-09-08 — **GOLDEN SLICE RE-SELADO NA v086 COM O SOCO PROVADO E GUILE DE FRENTE.** Ciclo
+completo: (1) trilha do palco do Ken substituída pelo **port do tema de
+referência** (MIDI de fã em `art_src_base/audio/music/reference/`, sha256
+`44804801…`, transcrita para PSG de 4 canais em 917 B — dentro do slot de
+945 B); (2) **soco conecta por input NA v085**: `guile_hp 64→57` (o −7
+exato) a gap=20, `keys_b1=0x10`, pose 0x82, `hit_used=1` — whiff-punish por
+tempo de relógio (recuo 40 ms → entrada 40 ms → B1 na recovery da CPU); os
+whiffs anteriores foram **datados nos probes como defesa da CPU** (recuo
+guarda em `(g_frame & 8)` → ST_WALK_B, contra-ataque, chute no agachado) —
+a teoria da "janela de 4 px" estava morta (L060); (3) **worst-frame medido
+pela primeira vez**: 247/~2.700 frames derramam no VBlank (vline_max
+251/262) com fps 60 — dívida medida, não adivinhada (L061); (4) **banner
+K.O. capturado** (`ko_banner.png`, do `video_ko.mp4` com roteiro de pressão
+contínua, L062); (5) falha total de canal DAP explicada: **diálogo modal
+"Update Behaviour"** do Emulicios bloqueava o carregamento da ROM —
+`Update=0` no ini (L063).
+ROM `out/rom/MSSF2T.sms` 32768 B — SHA
+`8a83ca2da18e2690d066…` (SHA completa em `out/build_record.json`)
+(build v086; v085 + **folhas do Guile espelhadas para a convenção
+face-left** — o Guile estava renderizando de costas para o Ken, L060/bloco
+5; tamanhos de folha idênticos, só orientação). **484 B livres** (fim da `_CODE`
+em 0x7E1C; teto real do makesms: 0x7F80). Bundle:
+`out/evidence/evidence_bundle.json` **selado com 8 artefatos frescos**
+(evidence, runtime_probe, audio.wav, input_memory.json v3, worst_frame.json,
+video_ko.mp4, ko_banner.png).
 
-## Eixos — todos medidos NESTA SHA
+## Eixos — medidos NESTA SHA (8a83ca2d…), selados em 2026-09-08
 | Eixo | Status | Prova |
 |------|--------|-------|
-| build | buildado | 32768 B, 1091 B livres, rebuild idempotente |
-| validation_report | buildado | `out/build_record.json` |
-| boot_emulador | testado_em_emulador | `evidence.png` (luma 6337/5100) |
-| fps_constante | testado_em_emulador | título do emulador: 59.8 médio (59–60, 6 amostras); contador da ROM via DAP: 56.5–57.7 (overhead de pausa do probe) |
-| audio | testado_em_emulador | `audio.wav` peak=7329, **92% ativo** — PASS |
-| abertura | testado_em_emulador | `evidence.png` (boot, abertura; luma 6337/5100) |
-| laço de arcade | testado_em_emulador | `laco2.png` (**KEN WINS**, 90 s) + `laco.png` (atração viva, 70 s) — nesta SHA |
-| KO | testado_em_emulador (indireto) | não se chega a KEN WINS (melhor de três) sem round decidido; banner K.O. segue sem frame capturado |
-| **gameplay** | **testado_em_emulador** | `input_memory.json` v2: `input_provado=true`, canal VIVO, dx=+85/−67 na direção comandada, `probe_keys`=0x08/0x04 durante o hold; **soco conecta** (`soco_provado=true`, hit −7 com pose 0x82); troca de lado re-observada na mesma run |
+| build | buildado | 32768 B, 484 B livres, rebuild idempotente (mesma SHA) |
+| validation_report | buildado | `out/build_record.json` (pre_gates pass) |
+| boot_emulador | testado_em_emulador | `evidence.png`/`evidence.json` (luma 6241/4800) |
+| fps_constante | testado_em_emulador | título: 60.0 constante (8 amostras); contador da ROM: frame_advance provado no `runtime_probe.json` |
+| audio | testado_em_emulador | `audio.wav` peak=5056, **100% ativo** — trilha nova (port do tema do Ken) |
+| abertura | testado_em_emulador | `evidence.png` (boot + título) |
+| laço de arcade | testado_em_emulador | `video_ko.mp4` (round completo: FIGHT → K.O. → GUILE WINS → ROUND 2) + `ko_banner.png` |
+| KO | testado_em_emulador (**direto**) | banner "K.O." capturado com Ken caído — já não é inferência de "KEN WINS" |
+| **gameplay** | **testado_em_emulador** | `input_memory.json` v3: `input_provado=true`, dx +83/−87; **`soco_provado=true`** (−7 a gap=20, pose 0x82, hit_used=1); `sideswap_provado=true` (cruzou_no_ar); **soco na atração**: 21 hits da demo (10/12) |
 | memory_bank_atualizado | documentado | este arquivo |
 
-`reconcile_claims.py` e `seal_fresh_evidence_bundle.py` rodam DEPOIS deste
-arquivo (ordem de frescor: evidência → memory bank → conciliação → selo).
+`reconcile_claims.py` e `seal_fresh_evidence_bundle.py` rodaram DEPOIS deste
+arquivo? **Não** — ordem desta passada: capturas → selo → memory bank →
+rebuild idempotente → reconcile (a SHA não muda; eixos re-derivados com a
+evidência fresca e o memory bank atualizado por último).
 
-### Nota sobre o eixo KO
-O frame do banner "K.O." **segue sem captura exata**: dura 120 frames e cair
-no timing é loteria (nesta sessão, 70 s e 90 s caíram na luta da atração e
-no KEN WINS). O KO segue provado **indiretamente e sem ambiguidade**: não se
-chega a "KEN WINS" (melhor de três) sem round decidido — e `laco2.png`
-mostra exatamente isso, fresco, nesta SHA.
+### Nota sobre o eixo KO — FECHADO DIRETO
+O banner "K.O." está em `ko_banner.png` (frame extraído do
+`video_ko.mp4` a ~45,5 s, Ken caído, texto "K.O." central). O banner dura
+120 frames e foi capturado com roteiro de pressão contínua + extração 1 fps
+(L062) — não mais inferência indireta.
 
 ## O canal de teclado: causa raiz encontrada (L039 → resolvida)
 Fatos medidos nesta sessão:
@@ -165,51 +179,77 @@ abertura reusa `music_battle`.
 
 ## Blockers
 1. ~~Input não chega ao emulador~~ **RESOLVIDO** — era Wayland/KWin (L039).
-   Canal vivo por kdotool+ydotool; eixo gameplay fechado.
-2. ROM apertada: **1091 B livres**.
-3. Espelhar em runtime custa CPU: contador interno ~57 fps durante o probe
-   (título do emulador: 59.8). Diferença é overhead de pausa/attach do DAP —
-   remedir sem attach antes de culpar o flip.
-4. Silhueta ainda é downsample+quantize da sheet.
-5. ~~Soco não conecta~~ **RESOLVIDO (2026-09-07)** — era o instrumento
-   (approach parava em gap ≤ 26, fora do alcance < 24). A distância real,
-   hit cheio −7 observado por RAM. Ficou registrado que a CPU ora guarda
-   (chip −2) ora não; K.O. por soco seguido é o teste natural seguinte.
+2. ROM apertada: **484 B livres** (v085; o compilador realocou e deu folga
+   sobre os 211 B da tarde de 07/09). Arte/trilha novos exigem **banking** —
+   spec pronta em `doc/spec-banking.md` (aguarda aprovação).
+3. **Worst-frame derrama**: 247/~2.700 frames com trabalho dentro do VBlank
+   (pior linha 251/262) no modo atração, fps 60 — dívida MEDIDA (L061).
+   Degrau: reduzir stream de troca de pose ou DMA (fora do MVP).
+4. Silhueta ainda é downsample+quantize da sheet — spec pronta em
+   `doc/spec-arte-autoral.md` (depende do banking; aguarda aprovação).
+5. ~~Soco não conecta~~ **RESOLVIDO E EXPLICADO (2026-09-08)** — hit −7
+   provado NA v085 (whiff-punish por relógio); whiffs anteriores datados
+   como defesa da CPU (recuo-guarda, contra-ataque, chute no agachado —
+   L060, probes P[1].state/guard). Extensão natural, não blocker: sequência
+   de socos até o K.O. com a CPU devolvendo.
+6. **Animação por movimento (feedback do curador, 2026-09-08)**: cada golpe
+   hoje é UM frame estático — soco ≈ idle e o chute REUTILIZA a pose de
+   soco (`set_state`: ST_KICK → POSE_PUNCH, `fight.c`). Os movimentos não
+   leem como golpe. Caminho: 2-4 frames por movimento por lutador
+   (anticipação/ativo/recuperação + ciclo de caminhada), derivados do
+   sprite sheet de referência pelo pipeline `translate_ssf2t.py`
+   (`prepare_sms_pixel_art.py` na fábrica), com a FSM avançando frame por
+   timer. Custo: ROM (banking obrigatório) + frames novos — entra JUNTO com
+   os blockers 2 e 4, depois da aprovação das specs.
+7. ~~Guile sempre virado para a direita~~ **RESOLVIDO (2026-09-08, v086)** —
+   as 8 folhas do Guile estavam autorizadas face-RIGHT contrariando a
+   convenção do motor ("folhas olham para a esquerda"; `want_flip` =
+   facing?1:0). Espelhadas em `res/fighters/`, headers regenerados
+   (`emit_tiles_h` + `author_pose_variants.py` + `gen_fight_gfx.py`),
+   binding re-hasheado. As variantes `_l` do tradutor continuam fora do
+   build (flip é runtime).
 
 ## Quais evidências valem para esta SHA
-**Atuais (2026-09-07, manhã, binário `2990757f…`, seladas juntas):**
-`input_memory.json` (v2: input + soco −7 + sideswap), `fps.json`,
-`runtime_probe.json`, `evidence.png` (boot/abertura), `laco2.png`
-(KEN WINS), `audio.wav` (92%), `evidence_bundle.json` (**selado com 7
-artefatos frescos**). `poses.json` reprovou 3× no re-run de manhã (a
-janela de observação da atração desalinha com o ciclo do roteiro — cada
-falha perdeu uma pose diferente); o artefato da noite continua valendo
-para CROUCH (mesma SHA), e JUMP/PUNCH aparecem dentro do
-`input_memory.json` fresco (0x87 no voo, 0x82 no soco).
+**Atuais (2026-09-08, binário `8a83ca2d…`, seladas juntas — 8 artefatos):**
+`evidence.png`/`evidence.json` (boot), `runtime_probe.json` (fps da ROM +
+probe SMRT), `audio.wav` (trilha nova, 100% ativo), `input_memory.json`
+(v3: input + soco −7 + sideswap + soco na atração), `worst_frame.json`
+(derramou: 247), `video_ko.mp4` (laço completo com K.O.), `ko_banner.png`
+(banner), `evidence_bundle.json` (**selado**).
 
-**De sessões anteriores, mesma SHA (referência, não selo fresco):**
-`laco.png`, `title.png`, `rounds.png`/`resultado.png`/
-`volta_ao_titulo.png`, `poses.json`.
-
-**De binários anteriores (não usar como prova):** `gameplay*`, `ko1110*`,
-`ko1130*`, `ko1145*`, `special*`, `final.png*`, `stage_final*`,
-`runtime_probe_diag*`, `audio_ref.wav` (controle de ambiente),
-`audio_pre.wav` (controle), `input_memory_old.json` e tudo o que foi
-produzido contra o binário `e42c4887…`.
+**De binários anteriores (NÃO usar como prova):** `laco.png`, `laco2.png`,
+`poses.json`, `fps.json` de 07/09 (esta foi re-medida), `gameplay*`,
+`ko11*`, `special*`, `title*`, `rounds*`, `resultado*`, `volta_ao_titulo*`,
+`band_*`, `blink_*`, `tl_*`, `pv_*`, `pose_*`, `audio_ken_stage.wav`,
+`ken_stage_preview.wav`, `audio_ref.wav`, `boot.png`, `video_gameplay*`,
+`runtime_probe_diag*` e tudo produzido contra `2990757f…`, `1800c79c…` ou
+`e42c4887…`.
 
 ## Handoff
-O golden slice do GDD está fechado em todos os eixos exceto os que a própria
-GDD marca fora do `ready_for_aaa`. Degraus seguintes, em ordem causal:
-1. ~~Soco conectando por input~~ **FECHADO (2026-09-07)** — hit −7 por RAM,
-   `soco_provado=true` em `input_memory.json`. Extensão natural, não
-   blocker: sequência de socos até o K.O. com a CPU devolvendo (fecha o
-   laço "golpe→dano→round decidido" com input nos dois lados).
-2. **Worst-frame de VBlank medido em ROM** (`doc/13-spec-cenas.md` segue
-   "documentado", nunca medido) — ATENÇÃO: medir exige instrumentar a ROM
-   (contador de overrun/atraso no probe) e portanto **rebuild = SHA nova =
-   re-medir TODA a evidência** (input/fps/áudio/probe/boot/laço/poses/selo)
-   contra o binário novo. Planejar a janela para isso.
-3. Só então, nova arte autoral (silhueta própria, blocker 4).
+Golden slice **re-selado na v086 com soco, K.O., worst-frame e Guile de frente fechados**.
+Próximos degraus, em ordem causal:
+1. **Aprovação humana das duas specs**: `doc/spec-banking.md` (Sega mapper
+   48K, dados em BANK1+, toca no `build_inner.py` — curadoria) e
+   `doc/spec-arte-autoral.md` (silhueta nativa, depende do banking).
+2. **Dívida do worst-frame** (L061): reduzir o stream de troca de pose
+   (ou DMA fora do MVP). Número atual: 247 frames derramados com fps 60.
+3. **Extensões de gameplay** (não blockers): sequência de socos até K.O.
+   com a CPU devolvendo; especial por input (QCF) com prova por RAM;
+   2P humano (PORT_B) para prova de soco sem IA.
+4. Manutenção: `Update=0` no `Emulicious.ini` é o que evita o diálogo modal
+   que bloqueia o carregamento da ROM (L063) — não remover.
+
+Curadoria do ciclo: L058/L059 (proveniência de áudio, §47),
+L060–L064 (§48–§51) em `doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json`;
+gate novo no wrapper: `audit_audio_provenance.py` + `measure_worst_frame.py`.
+
+### Idempotência real do rebuild (2026-09-09)
+O header SDSC usava `SMS_EMBED_SDSC_HEADER_AUTO_DATE` — que embute um
+carimbo de data em 2 bytes do SDSC (0x7FE7/0x7FFB): o rebuild do dia
+seguinte mudava a SHA **sem mudar um byte de código** e derrubava o selo.
+Pinado para `SMS_EMBED_SDSC_HEADER(0,1,2026,9,8,...)` em `src/main.c`:
+dois rebuilds seguidos reproduzem `8a83ca2d…` exatamente (provado). A SHA
+é agora invariante de fonte — rebuild nunca mais derruba o selo sozinho.
 
 Curadoria L039/L053 (Wayland/uinput + troca observada) **fechada na fábrica**
 em 2026-09-07: `emulator_input.py`, `reconcile_claims` aceita
@@ -255,7 +295,7 @@ Agora mede RMS em janelas de 10 ms. Silêncio continua dando 0%.
 `build_inner.py` inicializava os 7 eixos em `false` e só **herdava** os
 `true` do registro anterior; `reconcile_claims.py` apenas conferia. Logo o
 primeiro `true` de qualquer projeto só podia ter vindo de edição à mão do
-`build_record.json` — o que `release-rom.md` proíbe. Os eixos não tinham
+`build_record.json` — o que o runbook de publicação proíbe. Os eixos não tinham
 como fechar pelo caminho legítimo.
 
 Correção: os predicados viraram `reconcile_claims.axis_support()`, fonte
@@ -326,10 +366,10 @@ defensor (`hurt_top` sobe de 12 para 34 se ele estiver agachado, o que
 mataria a sobreposição vertical) ou o frame exato em que `collide()` amostra
 dentro da janela ativa de 4 frames.
 
-Próximo degrau: instrumentar a janela ativa (registrar `timer`, `gap` e o
-resultado de cada teste de `collide()` num probe) e decidir se o remédio é
-alargar a caixa, reduzir `PUSH_W`, ou aceitar a janela e documentar.
-Instrumentar exige rebuild = SHA nova = re-medir TODA a evidência.
-
-**Não reivindicar "soco conectando" em release** enquanto isso não fechar.
+Próximo degrau: ~~instrumentar a janela ativa~~ **FECHADO no ciclo
+2026-09-08** — os probes (timer/gap/hitstop/hit_used + P[1].state/guard)
+dataram a causa (defesa da CPU, L060) e o hit −7 foi provado na v085 e na
+v086 com whiff-punish por relógio. A nota antiga "não reivindicar" fica
+aqui como registro do estado da época; o teto de claim vigente é o do GDD
+("protótipo jogável de luta 1v1"), e o soco consta como provado nos eixos.
 

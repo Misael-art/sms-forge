@@ -1,0 +1,94 @@
+{
+  "schema": "openbor_sms_extraction_record_v1",
+  "generated_at": "2026-10-16T01:11:57+00:00",
+  "tool": "openbor2sms frontend extract",
+  "pak": {
+    "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_bruta/golden_axe_legend/GAL.pak",
+    "bytes": 39500889,
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+    "format_id": 0,
+    "format_name": "PACK v0 PAK32 (32-bit)",
+    "file_count": 3502
+  },
+  "expected": {
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+    "bytes": 39500889,
+    "verified": true
+  },
+  "destination": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/data/source_openbor/gal_town1",
+  "members": [
+    {
+      "member": "data/chars/ax/ax.txt",
+      "pak_name": "DATA\\CHARS\\AX\\AX.TXT",
+      "path": "data/chars/ax/ax.txt",
+      "bytes": 51916,
+      "sha256": "b6c33ffc145b34aecad0a29fbd7077dde75df912a474eafb6fdb53884a367f41",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/long/long.txt",
+      "pak_name": "DATA\\CHARS\\LONG\\LONG.TXT",
+      "path": "data/chars/long/long.txt",
+      "bytes": 38006,
+      "sha256": "b4303437f798ddcea1e4db33e742bfb1a4fa59128104dd5e619b4820014373ce",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/ax/idle01.gif",
+      "pak_name": "DATA\\CHARS\\AX\\IDLE01.gif",
+      "path": "data/chars/ax/idle01.gif",
+      "bytes": 2102,
+      "sha256": "d9d342f6137f63691f5dbac5fcbeedee54c06b9f92d885e60a0d1a5042e67796",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/ax/walk01.gif",
+      "pak_name": "DATA\\CHARS\\AX\\WALK01.gif",
+      "path": "data/chars/ax/walk01.gif",
+      "bytes": 2048,
+      "sha256": "f2d540123287037899fa87b71ceb425283e0a8b92009a2ddc1a6de2c795618ee",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/ax/walk02.gif",
+      "pak_name": "DATA\\CHARS\\AX\\WALK02.gif",
+      "path": "data/chars/ax/walk02.gif",
+      "bytes": 2038,
+      "sha256": "4f489d9ab6ea342857c669c64cb1f8c2921d8a16364a517c992298da0db817d4",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/ax/walk03.gif",
+      "pak_name": "DATA\\CHARS\\AX\\WALK03.gif",
+      "path": "data/chars/ax/walk03.gif",
+      "bytes": 2085,
+      "sha256": "ca498f9e297c988d531dc4bdde761c8c066b1a5ea405610ee370101d26a1f668",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/ax/walk04.gif",
+      "pak_name": "DATA\\CHARS\\AX\\WALK04.gif",
+      "path": "data/chars/ax/walk04.gif",
+      "bytes": 2052,
+      "sha256": "1ebade06b3e956d5505056cfb3d98b6dd1c20f7a8380dfac5212d376c9e08e7d",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/long/idle01.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\IDLE01.gif",
+      "path": "data/chars/long/idle01.gif",
+      "bytes": 2090,
+      "sha256": "a42955b8ac40937e37894850b5b9122e23f1436a854b354c39b4e7f5c66e0f0a",
+      "reused_existing": false
+    },
+    {
+      "member": "data/bgs/town1/panel.gif",
+      "pak_name": "DATA\\BGS\\TOWN1\\PANEL.gif",
+      "path": "data/bgs/town1/panel.gif",
+      "bytes": 139491,
+      "sha256": "14d8191b9080bbac22cdb4783e23544025420126935568d23b885c8c5d08ee6f",
+      "reused_existing": false
+    }
+  ],
+  "claim_ceiling": "hash-bound extraction of named members only; containment does not prove parsing, conversion or runtime suitability"
+}

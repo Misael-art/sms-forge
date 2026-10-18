@@ -1,0 +1,87 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v1",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [2400, 1440]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1_art.png",
+    "sha256": "20d24c2d9d15a2d00e212ad7420bd5585707955a72a7a076c8f9ece505a36f42"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "owner-approved identity, face, proportions, costume, and equipment reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "project palette-role authority"
+        },
+        {
+          "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "role": "initial style descriptor for CPS2-Alpha-Cel; not independently validated"
+        }
+      ],
+      "observed_defects": [],
+      "revision_notes": [
+        "Candidate generated from the approved Dr. Social concept reference, then laid out with a readable relative ruler and style metadata.",
+        "Owner approved this model sheet on 2026-10-07 as the baseline document for the style series.",
+        "Independent review of the detailed axes remains pending; the producer does not self-approve the artwork."
+      ],
+      "review_axes": {
+        "document_and_layout": {"status": "pending", "note": "Owner approved the sheet as the series baseline; independent review of the five views and layout remains pending."},
+        "style_reference_application": {"status": "pending", "note": "Owner approved this CPS2-Alpha-Cel sheet; independent review of style application remains pending."},
+        "lineart_and_contours": {"status": "pending", "note": "Owner approved the document; independent inspection of line weight, contours, and edges remains pending."},
+        "morphology_and_biotype": {"status": "pending", "note": "Owner approved the document; independent inspection of the lean ectomorph proportions remains pending."},
+        "shading_and_palette": {"status": "pending", "note": "Owner approved the document; independent review of cel shading and palette roles remains pending."},
+        "relative_scale_and_baseline": {"status": "pending", "note": "Owner approved the document; independent review of H, 7.5H target, scale, and baseline remains pending."},
+        "neutral_background": {"status": "pending", "note": "Owner approved the document; independent review of background cleanliness remains pending."},
+        "face_and_identity_continuity": {"status": "pending", "note": "Owner approved the document; independent comparison of face, hair, glasses, age, and identity remains pending."},
+        "costume_and_materials": {"status": "pending", "note": "Owner approved the document; independent comparison of costume, materials, and colors remains pending."},
+        "equipment_and_weapon_continuity": {"status": "pending", "note": "Owner approved the document; independent trace of cane, rapier, and boomerang remains pending."},
+        "cross_view_consistency": {"status": "pending", "note": "Owner approved the document; independent comparison across all five views remains pending."},
+        "legibility_and_crop_integrity": {"status": "pending", "note": "Owner approved the document; independent inspection of labels and crop integrity remains pending."},
+        "human_traits_and_unapproved_details": {"status": "pending", "note": "Owner approved the document; independent confirmation of human traits and allowed details remains pending."}
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": true,
+    "reviewer": "project_owner",
+    "date": "2026-10-07",
+    "scope": "Dr. Social model-sheet form and CPS2-Alpha-Cel sheet approved as the baseline for the style series."
+  },
+  "promotion_status": "owner_approved_reference; independent_review_and_axis_closure_pending",
+  "claim_ceiling": "owner-approved concept/model sheet reference; no sprite, animation, resource, ROM, or emulator approval"
+}

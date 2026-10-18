@@ -1,0 +1,26 @@
+{
+  "curation_id": "2026-09-26_l089_worst_frame_wait_slow_rom",
+  "date": "2026-09-26",
+  "scope": "medicao_worst_frame_em_rom_lenta",
+  "authorization": "pedido explícito do usuário para prosseguir com o piloto do motor e alinhar as ferramentas de medição",
+  "lessons": [
+    {
+      "id": "L089",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "A janela worst-frame de 3.000 frames e o timeout do runner são grandezas diferentes. ROM lenta que não sela a janela dentro da espera produz sem_lastro, nunca PASS nem reprovação de VDP.",
+      "evidence": {
+        "snapshot_incompleto": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_idle_cache/out/evidence/idle_cache_worst_frame.json: ROM SHA 536b2d929e279e6b7d2c1489aa89c67d4d187ac995bc3924e89ee08fe2e5e97c, 218/3000 frames em 90 s, done=0, verdicto=sem_lastro.",
+        "janela_selada": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_idle_cache/out/evidence/idle_cache_worst_frame_profiled.json: ROM SHA ef45985eae2a1735e1e5b4707de011fae5ace8f36f064072e441322eb5540581, espera 150 s, 3000/3000 frames, done=1, vovf_delta=3000, vline_min=54, verdicto=derramou.",
+        "runtime_atual": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_idle_cache/out/evidence/idle_cache_profiled_safe_runtime.json: mesmo SHA ef45985eae2a1735e1e5b4707de011fae5ace8f36f064072e441322eb5540581; 25.23/25.17 FPS, abaixo do piso NTSC.",
+        "correcao": "measure_worst_frame.py aceita --wait-seconds 90..1800, conserva 90 s como default e inclui self-check de limites e janela não selada.",
+        "validacao": "measure_worst_frame.py --self-check e validate_measurement_tools.py --self-check passaram; audit_learning_capture.py --root . reconhece esta ferramenta e o caminho relativo completo."
+      },
+      "rule_section": "SMS_GLOBAL §74",
+      "tool_that_measures": "measure_worst_frame.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L090",
+    "mastery": "L089 registra validade e timeout do instrumento. O piloto 72–88 px reprova FPS e worst-frame; nenhuma capacidade ou entrega foi promovida."
+  }
+}

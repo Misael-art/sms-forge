@@ -1,0 +1,1188 @@
+{
+  "schema": "openbor_sms_frontend_models_ir_v1",
+  "generated_at": "2026-10-16T00:21:18+00:00",
+  "tool": "openbor2sms frontend ir",
+  "ir_kind": "models_index",
+  "origin_scheme": "member + line (1-based over str.splitlines) + byte_offset/byte_length (over the extracted file bytes) + raw_sha256 of the raw line bytes",
+  "source": {
+    "member": "data/models.txt",
+    "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/data/source_openbor/gal_town1/data/models.txt",
+    "bytes": 7280,
+    "sha256": "fbd18005ffbdb6346315896abd774fdf4c716ce148f7b07c9e1a9d047ff37581"
+  },
+  "pak_sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+  "entries": [
+    {
+      "alias": "ax",
+      "path": "data/chars/ax/ax.txt",
+      "line": 17,
+      "byte_offset": 236,
+      "byte_length": 31,
+      "raw_sha256": "0aabe25db5b90aa051e4cc471f24400f1f5f55a301f888e722da30407c68480a"
+    },
+    {
+      "alias": "tyris",
+      "path": "data/chars/tyris/tyris.txt",
+      "line": 18,
+      "byte_offset": 269,
+      "byte_length": 39,
+      "raw_sha256": "84df6ba33f664b31b41ee5c4715e36ebcde8f2865c827b7d5c1147bffa705c75"
+    },
+    {
+      "alias": "gilius",
+      "path": "data/chars/gilius/gilius.txt",
+      "line": 19,
+      "byte_offset": 310,
+      "byte_length": 42,
+      "raw_sha256": "6b60fec56dd012291492cbded208390865d9ec81572c574d38ee43b2160eeb7c"
+    },
+    {
+      "alias": "chronos",
+      "path": "data/chars/chronos/chronos.txt",
+      "line": 20,
+      "byte_offset": 354,
+      "byte_length": 45,
+      "raw_sha256": "06b4d56fba3c8f80ef1c83037df7e82c771747182d91f6d449d7cfed5bc5ea9a"
+    },
+    {
+      "alias": "cragg",
+      "path": "data/chars/cragg/cragg.txt",
+      "line": 21,
+      "byte_offset": 401,
+      "byte_length": 39,
+      "raw_sha256": "863fcca960e39de6070ffa6be2e2d5b267cb63f360dc9052c6f7e0c211229d57"
+    },
+    {
+      "alias": "kain",
+      "path": "data/chars/kain/kain.txt",
+      "line": 22,
+      "byte_offset": 442,
+      "byte_length": 36,
+      "raw_sha256": "0adb5b31df20a5839235754e165d187cd06a4994ec55b7bc14a32233a135243f"
+    },
+    {
+      "alias": "sarah",
+      "path": "data/chars/sarah/sarah.txt",
+      "line": 23,
+      "byte_offset": 480,
+      "byte_length": 39,
+      "raw_sha256": "45abb6ba27cd64fb0d735df8a8d4bbebb6fd3290b9b84d51e9baf0bb9376c171"
+    },
+    {
+      "alias": "tornado",
+      "path": "data/chars/misc/tornado/tornado.txt",
+      "line": 27,
+      "byte_offset": 540,
+      "byte_length": 50,
+      "raw_sha256": "f7b0b8466670f12466c653f6eae8da084a8cc00d4f9b9e8257f831dcd6991eef"
+    },
+    {
+      "alias": "wave",
+      "path": "data/chars/misc/wave/wave.txt",
+      "line": 28,
+      "byte_offset": 592,
+      "byte_length": 41,
+      "raw_sha256": "58f29b0b67b3ff8ff8189fde8c7b1191286e8c1edd0b7d34af9fe3d7bda029a8"
+    },
+    {
+      "alias": "iceberg",
+      "path": "data/chars/misc/iceberg/iceberg.txt",
+      "line": 29,
+      "byte_offset": 635,
+      "byte_length": 50,
+      "raw_sha256": "cfcc5cec6f5070ce71cc03cb0e13e68afd51c84b1ee4008889225a542d236172"
+    },
+    {
+      "alias": "bird",
+      "path": "data/chars/misc/bird/bird.txt",
+      "line": 30,
+      "byte_offset": 687,
+      "byte_length": 41,
+      "raw_sha256": "7dc7e98421441f6de1cea79437f551295ceb47a40e1dfa8bebb6510c4817d901"
+    },
+    {
+      "alias": "sword",
+      "path": "data/chars/misc/sword/sword.txt",
+      "line": 31,
+      "byte_offset": 730,
+      "byte_length": 44,
+      "raw_sha256": "5e5f7f7e7a32fad5d9ef9aed2122309c52570532a1e2586205ba1aaaeb1c509f"
+    },
+    {
+      "alias": "magic",
+      "path": "data/chars/magic/magic.txt",
+      "line": 35,
+      "byte_offset": 789,
+      "byte_length": 39,
+      "raw_sha256": "7766f7c9a48b7ad214deedb1efceb7a312b8d82c35ddc2a010687f0f78b91286"
+    },
+    {
+      "alias": "hurr",
+      "path": "data/chars/magic/hurr/hurr.txt",
+      "line": 36,
+      "byte_offset": 830,
+      "byte_length": 42,
+      "raw_sha256": "6a7a9f115d65d41ca541c04ee5bfe25e7a8d2ff441ee556eb0755fa4c2d4ffbe"
+    },
+    {
+      "alias": "light",
+      "path": "data/chars/magic/light/light.txt",
+      "line": 37,
+      "byte_offset": 874,
+      "byte_length": 45,
+      "raw_sha256": "9b9f411db76cec50e5a459e60717d8fa8eeb2b63e11d21cc9ac1b0b885f2c482"
+    },
+    {
+      "alias": "poison",
+      "path": "data/chars/magic/poison/poison.txt",
+      "line": 38,
+      "byte_offset": 921,
+      "byte_length": 48,
+      "raw_sha256": "4f6f7b81320dcaf4f92dafbdc7bcb7a9e77996317ca141506b67b7a721876de3"
+    },
+    {
+      "alias": "dragon",
+      "path": "data/chars/magic/dragon/dragon.txt",
+      "line": 39,
+      "byte_offset": 971,
+      "byte_length": 48,
+      "raw_sha256": "5d9919bdabadbca520bf42beaec9b26b5560c1d28791f9e61adf847051f49b25"
+    },
+    {
+      "alias": "ice",
+      "path": "data/chars/magic/ice/ice.txt",
+      "line": 40,
+      "byte_offset": 1021,
+      "byte_length": 40,
+      "raw_sha256": "322e5703e7fba83a17865951f19cb442cb83d6e8eb181eebc07a25d173058762"
+    },
+    {
+      "alias": "rock",
+      "path": "data/chars/magic/rock/rock.txt",
+      "line": 41,
+      "byte_offset": 1063,
+      "byte_length": 42,
+      "raw_sha256": "9b006e3fb861a4578b5820c8ffb295d983de401e55965a39643a8add1a22390b"
+    },
+    {
+      "alias": "water",
+      "path": "data/chars/magic/water/water.txt",
+      "line": 42,
+      "byte_offset": 1107,
+      "byte_length": 45,
+      "raw_sha256": "b96a35f145f05f20f7917d5ff046912089cc68c7be5b7e768cbe19cf348c432f"
+    },
+    {
+      "alias": "bizzar1",
+      "path": "data/chars/misc/bizzar/bizzar1.txt",
+      "line": 46,
+      "byte_offset": 1183,
+      "byte_length": 49,
+      "raw_sha256": "c16f2be1576922d554c395861be51fb5350c049b0afa630315b2f611ff1872b6"
+    },
+    {
+      "alias": "bizzar2",
+      "path": "data/chars/misc/bizzar/bizzar2.txt",
+      "line": 47,
+      "byte_offset": 1234,
+      "byte_length": 49,
+      "raw_sha256": "e9c50256acdccde16ba28255914a1b7f77849ad4293b11f51f33249249aa5648"
+    },
+    {
+      "alias": "bizzar3",
+      "path": "data/chars/misc/bizzar/bizzar3.txt",
+      "line": 48,
+      "byte_offset": 1285,
+      "byte_length": 49,
+      "raw_sha256": "c3a2ab3127b7037c83d0e507ab4cac4918fa7df2cdb6b19daad639b5514d4b08"
+    },
+    {
+      "alias": "bizzar4",
+      "path": "data/chars/misc/bizzar/bizzar4.txt",
+      "line": 49,
+      "byte_offset": 1336,
+      "byte_length": 49,
+      "raw_sha256": "501a3948e6878af584f96f59220e91244aa3649bf1681f15ad24ca8c5057f3b6"
+    },
+    {
+      "alias": "ax1",
+      "path": "data/chars/ax/ax1/ax1.txt",
+      "line": 52,
+      "byte_offset": 1410,
+      "byte_length": 37,
+      "raw_sha256": "317f5299fdb8335472d8bf701005bbdf69697bf211405b8b898cf576e15541eb"
+    },
+    {
+      "alias": "ax2",
+      "path": "data/chars/ax/ax2/ax2.txt",
+      "line": 53,
+      "byte_offset": 1449,
+      "byte_length": 37,
+      "raw_sha256": "03594ebab05dd878209eacfc1833c4f4e27529f7f3a4eb992cef1dc8f61e6798"
+    },
+    {
+      "alias": "ax3",
+      "path": "data/chars/ax/ax3/ax3.txt",
+      "line": 54,
+      "byte_offset": 1488,
+      "byte_length": 37,
+      "raw_sha256": "2115dcc023bd99bd412a3231c50cc9b25d24d7add13057ad0b34bcd96b005c69"
+    },
+    {
+      "alias": "ax4",
+      "path": "data/chars/ax/ax4/ax4.txt",
+      "line": 55,
+      "byte_offset": 1527,
+      "byte_length": 37,
+      "raw_sha256": "5e9b6aa423335100b2121f04f2fb087bca4b97dc3810ee5c2d46b54a82b8e037"
+    },
+    {
+      "alias": "tyris1",
+      "path": "data/chars/tyris/tyris1/tyris1.txt",
+      "line": 56,
+      "byte_offset": 1566,
+      "byte_length": 48,
+      "raw_sha256": "76a89200db5b6193fad007a23c6c37702d2dc7e474aac888538c8c572deca3a3"
+    },
+    {
+      "alias": "tyris2",
+      "path": "data/chars/tyris/tyris2/tyris2.txt",
+      "line": 57,
+      "byte_offset": 1616,
+      "byte_length": 48,
+      "raw_sha256": "55585832a8e334169bf931a0252d8f54be0977b369526c36613f4beda759937d"
+    },
+    {
+      "alias": "tyris3",
+      "path": "data/chars/tyris/tyris3/tyris3.txt",
+      "line": 58,
+      "byte_offset": 1666,
+      "byte_length": 48,
+      "raw_sha256": "cb9b67a3e5244b7752e73b60e8690adafed9ff75d937aa6b758cbf8017075364"
+    },
+    {
+      "alias": "tyris4",
+      "path": "data/chars/tyris/tyris4/tyris4.txt",
+      "line": 59,
+      "byte_offset": 1716,
+      "byte_length": 48,
+      "raw_sha256": "80d8cd68b4c813eba30e30de27e39636b2b75408ee2417a785caacc3f39fef8b"
+    },
+    {
+      "alias": "gilius1",
+      "path": "data/chars/gilius/gilius1/gilius1.txt",
+      "line": 60,
+      "byte_offset": 1766,
+      "byte_length": 52,
+      "raw_sha256": "a169a88fa164275b899882bc388f21ffbdb40649d5eb8a7d5ae3038f2b4dd9ea"
+    },
+    {
+      "alias": "gilius2",
+      "path": "data/chars/gilius/gilius2/gilius2.txt",
+      "line": 61,
+      "byte_offset": 1820,
+      "byte_length": 52,
+      "raw_sha256": "e0468545a56206a3b0925ad647d8167445e2a116766eae7db7a19ec23aece809"
+    },
+    {
+      "alias": "gilius3",
+      "path": "data/chars/gilius/gilius3/gilius3.txt",
+      "line": 62,
+      "byte_offset": 1874,
+      "byte_length": 52,
+      "raw_sha256": "4ff57390ec8c158cde3d753ba801da629a3b80e8372e8191eca9b0b91babbcc7"
+    },
+    {
+      "alias": "gilius4",
+      "path": "data/chars/gilius/gilius4/gilius4.txt",
+      "line": 63,
+      "byte_offset": 1928,
+      "byte_length": 52,
+      "raw_sha256": "75f00aaaf2aeb455f60baf6961cb0a65c9ee0a88d5d1650bf733526fae27b13c"
+    },
+    {
+      "alias": "chronos1",
+      "path": "data/chars/chronos/chronos1/chronos1.txt",
+      "line": 64,
+      "byte_offset": 1982,
+      "byte_length": 55,
+      "raw_sha256": "5fb38e4690c29d1c95d08e87e6ab1add073f8458fc91f856ead5ff3e12bd569d"
+    },
+    {
+      "alias": "chronos2",
+      "path": "data/chars/chronos/chronos2/chronos2.txt",
+      "line": 65,
+      "byte_offset": 2039,
+      "byte_length": 55,
+      "raw_sha256": "38f110712c54bd7a81a2573661a2ff709dd6dc6e1789ed5112edc71e278d72fd"
+    },
+    {
+      "alias": "chronos3",
+      "path": "data/chars/chronos/chronos3/chronos3.txt",
+      "line": 66,
+      "byte_offset": 2096,
+      "byte_length": 55,
+      "raw_sha256": "92495dd1d0d9babaf101c4c3c269fc8036a8d1a2e240470188ecec52d28fc110"
+    },
+    {
+      "alias": "chronos4",
+      "path": "data/chars/chronos/chronos4/chronos4.txt",
+      "line": 67,
+      "byte_offset": 2153,
+      "byte_length": 55,
+      "raw_sha256": "39a264781af01396c13c3b6a09bdc9c2c86bd55c44aba2cd12386dc9b9ebf734"
+    },
+    {
+      "alias": "cragg1",
+      "path": "data/chars/cragg/cragg1/cragg1.txt",
+      "line": 68,
+      "byte_offset": 2210,
+      "byte_length": 48,
+      "raw_sha256": "bc1fbf7fa01b925f203ce779d43b05af2b2439dab511e386b1dec52d7b974b91"
+    },
+    {
+      "alias": "cragg2",
+      "path": "data/chars/cragg/cragg2/cragg2.txt",
+      "line": 69,
+      "byte_offset": 2260,
+      "byte_length": 48,
+      "raw_sha256": "0e582e2067454f4ed3e6b5eca115eda038586cedcbd4a0cbc2d87961f4f6185f"
+    },
+    {
+      "alias": "cragg3",
+      "path": "data/chars/cragg/cragg3/cragg3.txt",
+      "line": 70,
+      "byte_offset": 2310,
+      "byte_length": 48,
+      "raw_sha256": "3b8a995b19af43a7aa2e755aa0988b4a171f224af0e35664e21ed6a3bd3fd524"
+    },
+    {
+      "alias": "cragg4",
+      "path": "data/chars/cragg/cragg4/cragg4.txt",
+      "line": 71,
+      "byte_offset": 2360,
+      "byte_length": 48,
+      "raw_sha256": "774b4ccd3a655a2bcf0048ef4ab1cf806420a83a5ef2e46de54bba231fc82584"
+    },
+    {
+      "alias": "kain1",
+      "path": "data/chars/kain/kain1/kain1.txt",
+      "line": 72,
+      "byte_offset": 2410,
+      "byte_length": 44,
+      "raw_sha256": "581d29666f356c8683e8eb7bd15f4846a3f7e62c83777b156cbaeef54e7215f3"
+    },
+    {
+      "alias": "kain2",
+      "path": "data/chars/kain/kain2/kain2.txt",
+      "line": 73,
+      "byte_offset": 2456,
+      "byte_length": 44,
+      "raw_sha256": "4bcc0549d55a75c729a0dd7f4b7c98513ca83504b70d6639b81804b82ec07c31"
+    },
+    {
+      "alias": "kain3",
+      "path": "data/chars/kain/kain3/kain3.txt",
+      "line": 74,
+      "byte_offset": 2502,
+      "byte_length": 44,
+      "raw_sha256": "74b9f5d11dd8e5ff5c38f0e26c6642a34a3d1274a3bc755a57b9b2f23b2bd432"
+    },
+    {
+      "alias": "kain4",
+      "path": "data/chars/kain/kain4/kain4.txt",
+      "line": 75,
+      "byte_offset": 2548,
+      "byte_length": 44,
+      "raw_sha256": "cb277dfc09f87e7fe5b823ad46cfc7319e695e4e747dbf41d012642bff2c225e"
+    },
+    {
+      "alias": "sarah1",
+      "path": "data/chars/sarah/sarah1/sarah1.txt",
+      "line": 76,
+      "byte_offset": 2594,
+      "byte_length": 48,
+      "raw_sha256": "d7c4f0606700ffd7e40860ec48391583fdb3106e75ccbaed2ada4ef1ae9a3c10"
+    },
+    {
+      "alias": "sarah2",
+      "path": "data/chars/sarah/sarah2/sarah2.txt",
+      "line": 77,
+      "byte_offset": 2644,
+      "byte_length": 48,
+      "raw_sha256": "46701ca41dedb4b248ce3250f32cf762385022cc8bde0e09e4ccb430eb1f2602"
+    },
+    {
+      "alias": "sarah3",
+      "path": "data/chars/sarah/sarah3/sarah3.txt",
+      "line": 78,
+      "byte_offset": 2694,
+      "byte_length": 48,
+      "raw_sha256": "c09cb7b366015231ce48637c1e45ef574a35b84b448861d1eea5e72024b6f455"
+    },
+    {
+      "alias": "sarah4",
+      "path": "data/chars/sarah/sarah4/sarah4.txt",
+      "line": 79,
+      "byte_offset": 2744,
+      "byte_length": 48,
+      "raw_sha256": "effe15630fc9843382dec8e98ce452d35997ffc849978c841f3031f62e6776b8"
+    },
+    {
+      "alias": "fball",
+      "path": "data/chars/misc/fball/fball.txt",
+      "line": 82,
+      "byte_offset": 2823,
+      "byte_length": 44,
+      "raw_sha256": "074787c4ce629251aa890b1d5df46afa775039e7a17911ca4a73901880a9b648"
+    },
+    {
+      "alias": "fball1",
+      "path": "data/chars/misc/fball/fball1.txt",
+      "line": 83,
+      "byte_offset": 2869,
+      "byte_length": 46,
+      "raw_sha256": "4a7bb391e844683f282e6bb115fc35bba74e2e8cd57bc37f98e56d90a05e412a"
+    },
+    {
+      "alias": "pball",
+      "path": "data/chars/misc/pball/pball.txt",
+      "line": 84,
+      "byte_offset": 2917,
+      "byte_length": 44,
+      "raw_sha256": "170bc12e696ebb1d756c7ead830985a59a813e49ec3b3b0a7a70de14b9e3a6c0"
+    },
+    {
+      "alias": "lball",
+      "path": "data/chars/misc/lball/lball.txt",
+      "line": 85,
+      "byte_offset": 2963,
+      "byte_length": 44,
+      "raw_sha256": "23225fdea938a23fba91f1f9d1fc3b5dd12b4e00f0b2e17b130206bdd9c91c55"
+    },
+    {
+      "alias": "iball",
+      "path": "data/chars/misc/iball/iball.txt",
+      "line": 86,
+      "byte_offset": 3009,
+      "byte_length": 44,
+      "raw_sha256": "e9d8e4d68cbce800ee19e8e748a8efcf063b4e8aa0bfdc50669fee1b0f6222d8"
+    },
+    {
+      "alias": "long",
+      "path": "data/chars/long/long.txt",
+      "line": 89,
+      "byte_offset": 3068,
+      "byte_length": 36,
+      "raw_sha256": "25325d86ce5a6fd8954798c3b1bbe6045258bf6c27c385347ea3e359e6a5746d"
+    },
+    {
+      "alias": "henin",
+      "path": "data/chars/henin/henin.txt",
+      "line": 90,
+      "byte_offset": 3106,
+      "byte_length": 39,
+      "raw_sha256": "632b5dae60b5774756327f589ad02da09b96d558094e53aff156c3e7260128f5"
+    },
+    {
+      "alias": "amaz",
+      "path": "data/chars/amaz/amaz.txt",
+      "line": 91,
+      "byte_offset": 3147,
+      "byte_length": 36,
+      "raw_sha256": "81bed5b8aa9007d66655b8d3a4d5066efffee8624e00b6066db4f0f0f3c56bc5"
+    },
+    {
+      "alias": "skel",
+      "path": "data/chars/skel/skel.txt",
+      "line": 92,
+      "byte_offset": 3185,
+      "byte_length": 36,
+      "raw_sha256": "0b38880832aa022bc985b7b3405161e163dd7ca83660ab88d63c415f8134ce1e"
+    },
+    {
+      "alias": "orc",
+      "path": "data/chars/orc/orc.txt",
+      "line": 93,
+      "byte_offset": 3223,
+      "byte_length": 34,
+      "raw_sha256": "60f483ca80123e69a6a8cee93f50ea479e97dadf86be6a80f4d0ab34fcfc964f"
+    },
+    {
+      "alias": "claw",
+      "path": "data/chars/claw/claw.txt",
+      "line": 94,
+      "byte_offset": 3259,
+      "byte_length": 36,
+      "raw_sha256": "eedc99fc225f7b18bff7595c15f7633dbd7df46af6e1009ff1baae8555e72964"
+    },
+    {
+      "alias": "lizard",
+      "path": "data/chars/lizard/lizard.txt",
+      "line": 95,
+      "byte_offset": 3297,
+      "byte_length": 42,
+      "raw_sha256": "efa7fb527e5debc6f599613d986cb30fc24dfc25e7517eab1659d8b4d9f1bd20"
+    },
+    {
+      "alias": "spear",
+      "path": "data/chars/spear/spear.txt",
+      "line": 96,
+      "byte_offset": 3341,
+      "byte_length": 39,
+      "raw_sha256": "6458dd36833078c759a2c4a12211903161ee4f5a4178f4ef5801c2be76b75e40"
+    },
+    {
+      "alias": "pancho",
+      "path": "data/chars/pancho/pancho.txt",
+      "line": 97,
+      "byte_offset": 3382,
+      "byte_length": 42,
+      "raw_sha256": "606b6c5e2de1442ef1dab891715f748f684be847dac54f91bd22306edc1b1c6a"
+    },
+    {
+      "alias": "badbro1",
+      "path": "data/chars/badbro/badbro1.txt",
+      "line": 98,
+      "byte_offset": 3426,
+      "byte_length": 44,
+      "raw_sha256": "7ecaae84359f0f7b5c8e24c03bc0483c2c8e175cbf298dcfa1de355811a0ed2d"
+    },
+    {
+      "alias": "bitt1",
+      "path": "data/chars/bitt/bitt1.txt",
+      "line": 99,
+      "byte_offset": 3472,
+      "byte_length": 38,
+      "raw_sha256": "f5d22c3135da62e3c055b359798c1fca28f11ddbf65277e3dbef5fd52574f0d5"
+    },
+    {
+      "alias": "adder1",
+      "path": "data/chars/adder/adder1.txt",
+      "line": 100,
+      "byte_offset": 3512,
+      "byte_length": 41,
+      "raw_sha256": "542a8fd6dec9a6ff9464fd690e28ed00c2b543bc48ca0fea3cadbf1cea8791a4"
+    },
+    {
+      "alias": "minot1",
+      "path": "data/chars/minot/minot1.txt",
+      "line": 101,
+      "byte_offset": 3555,
+      "byte_length": 41,
+      "raw_sha256": "428ac84584e25a2cad08aaaba3ff49edbef25147f9e5836ee9c34076dbef714c"
+    },
+    {
+      "alias": "headl1",
+      "path": "data/chars/headl/headl1.txt",
+      "line": 102,
+      "byte_offset": 3598,
+      "byte_length": 41,
+      "raw_sha256": "4820a67025ac1e7439757c118c23d57caa54d0efc2dadaf44fe397c306ae26be"
+    },
+    {
+      "alias": "guild1",
+      "path": "data/chars/guild/guild1.txt",
+      "line": 103,
+      "byte_offset": 3641,
+      "byte_length": 41,
+      "raw_sha256": "b2e2fdb501aa2bbeb9de8a18819c909407a8f0b5e3aafe3b4275b7608d68e290"
+    },
+    {
+      "alias": "mustang1",
+      "path": "data/chars/mustang/mustang1.txt",
+      "line": 104,
+      "byte_offset": 3684,
+      "byte_length": 46,
+      "raw_sha256": "61dfa5cde0d6cc247cc9ad45d6d85820de9528ca2bfe86d061d2cf40b8bb965a"
+    },
+    {
+      "alias": "fiend1",
+      "path": "data/chars/fiend/fiend1.txt",
+      "line": 105,
+      "byte_offset": 3732,
+      "byte_length": 41,
+      "raw_sha256": "883b3878622efc8d8fc5918bb67100b499b5307626474771ae24278ccea708aa"
+    },
+    {
+      "alias": "prince1",
+      "path": "data/chars/prince/prince1.txt",
+      "line": 106,
+      "byte_offset": 3775,
+      "byte_length": 44,
+      "raw_sha256": "4c756a2839206d45cb5036c585ad48fc49bcb289fb9c61f17e03ab04597e939e"
+    },
+    {
+      "alias": "mantle",
+      "path": "data/chars/prince/mantle.txt",
+      "line": 107,
+      "byte_offset": 3821,
+      "byte_length": 42,
+      "raw_sha256": "7354a9cf31f494f516f00b4645480681cc280adbdf3c525f31e8b3618368b7c2"
+    },
+    {
+      "alias": "wiz",
+      "path": "data/chars/wiz/wiz.txt",
+      "line": 108,
+      "byte_offset": 3865,
+      "byte_length": 34,
+      "raw_sha256": "ec9e605a3b39ef48de15a0ad6493fe8d67e54bfab0d40fdb28a77d1c6257c7db"
+    },
+    {
+      "alias": "Thief1",
+      "path": "data/chars/thief/thief1.txt",
+      "line": 109,
+      "byte_offset": 3901,
+      "byte_length": 49,
+      "raw_sha256": "02c8fcdc2568eaa64017f64e774ff004755be8d559de5d6555e064e93f1bcfb3"
+    },
+    {
+      "alias": "Thief2",
+      "path": "data/chars/thief/thief2.txt",
+      "line": 110,
+      "byte_offset": 3952,
+      "byte_length": 49,
+      "raw_sha256": "773931531b9cd3785f8289a46449e5cdb24cfaf51c580b2150d93a6d816d5418"
+    },
+    {
+      "alias": "badbro2",
+      "path": "data/chars/badbro/badbro2.txt",
+      "line": 114,
+      "byte_offset": 4017,
+      "byte_length": 44,
+      "raw_sha256": "f4812fbd8a43a7fa2edd4e0c2ddc5ffd9bce32d27bdae3e52be93514ed608bc7"
+    },
+    {
+      "alias": "bitt2",
+      "path": "data/chars/bitt/bitt2.txt",
+      "line": 115,
+      "byte_offset": 4063,
+      "byte_length": 38,
+      "raw_sha256": "9a57542c1e346cfca13ef6558bb0c159f6653d73e53b6520aa26340a3a511837"
+    },
+    {
+      "alias": "adder2",
+      "path": "data/chars/adder/adder2.txt",
+      "line": 116,
+      "byte_offset": 4103,
+      "byte_length": 41,
+      "raw_sha256": "b27af7c9d43546e7e51418f8a55168bea8aa7cab71249c8ec359515d5b9fe8e6"
+    },
+    {
+      "alias": "minot2",
+      "path": "data/chars/minot/minot2.txt",
+      "line": 117,
+      "byte_offset": 4146,
+      "byte_length": 41,
+      "raw_sha256": "174a4ed407d0fea7c1b087c2b14b10f94c9b47fe6a189e92e3254383b70a297d"
+    },
+    {
+      "alias": "headl2",
+      "path": "data/chars/headl/headl2.txt",
+      "line": 118,
+      "byte_offset": 4189,
+      "byte_length": 41,
+      "raw_sha256": "72055e3d000c0a1c5433800ed023d5961a8565d6a24cc0be7bb7a9244232bd1b"
+    },
+    {
+      "alias": "guild2",
+      "path": "data/chars/guild/guild2.txt",
+      "line": 119,
+      "byte_offset": 4232,
+      "byte_length": 41,
+      "raw_sha256": "7ab4191b2a1e02f4abf21351bae20dbe52634e909d70464a87c03f5f069ff410"
+    },
+    {
+      "alias": "mustang2",
+      "path": "data/chars/mustang/mustang2.txt",
+      "line": 120,
+      "byte_offset": 4275,
+      "byte_length": 46,
+      "raw_sha256": "3686ab55c6d25921f15dc775e54c27d93fd132fbc5a8b930d1dbee23a445e020"
+    },
+    {
+      "alias": "fiend2",
+      "path": "data/chars/fiend/fiend2.txt",
+      "line": 121,
+      "byte_offset": 4323,
+      "byte_length": 41,
+      "raw_sha256": "54344d322fbffe0293980a5287139b24682bb5841da4a0f8e4dd4cd54168d5cd"
+    },
+    {
+      "alias": "prince2",
+      "path": "data/chars/prince/prince2.txt",
+      "line": 122,
+      "byte_offset": 4366,
+      "byte_length": 44,
+      "raw_sha256": "f3b5ae4182e8bb9f271eed699292c21727b93fc294fc0e49d53235734dbfa295"
+    },
+    {
+      "alias": "abyss1",
+      "path": "data/chars/abyss1/abyss1.txt",
+      "line": 123,
+      "byte_offset": 4412,
+      "byte_length": 42,
+      "raw_sha256": "0157f7a9e5c426b51d635c8878e7e880a6517d54c150586a6381d08cfa708c5e"
+    },
+    {
+      "alias": "left1",
+      "path": "data/chars/abyss1/left1.txt",
+      "line": 124,
+      "byte_offset": 4456,
+      "byte_length": 40,
+      "raw_sha256": "88b9fb6defbb5cddd420ec751156256a0a9bd36ac4c2889303bdcaa0a334b84c"
+    },
+    {
+      "alias": "right1",
+      "path": "data/chars/abyss1/right1.txt",
+      "line": 125,
+      "byte_offset": 4498,
+      "byte_length": 42,
+      "raw_sha256": "1d6ed8ba80a90c14f55b2642d784d84624a5f6973329a2d020f9762e8cdb21e2"
+    },
+    {
+      "alias": "etornado",
+      "path": "data/chars/misc/tornado/etornado.txt",
+      "line": 129,
+      "byte_offset": 4567,
+      "byte_length": 51,
+      "raw_sha256": "165f88d4388ff010157385cfae4cc8320e2d08fdb775680c95843fbaf81c6006"
+    },
+    {
+      "alias": "ewave",
+      "path": "data/chars/misc/wave/ewave.txt",
+      "line": 130,
+      "byte_offset": 4620,
+      "byte_length": 43,
+      "raw_sha256": "74223e58e02453e320248243dfab7a9d8cc3988df23a5e29b559277fcfa3f403"
+    },
+    {
+      "alias": "ebird",
+      "path": "data/chars/misc/bird/ebird.txt",
+      "line": 131,
+      "byte_offset": 4665,
+      "byte_length": 43,
+      "raw_sha256": "224ff7c6e7cf1bf8ce0a52dcc6231eb470b5886a72266d858b110e1be74e77dd"
+    },
+    {
+      "alias": "evoid",
+      "path": "data/chars/misc/void/evoid.txt",
+      "line": 132,
+      "byte_offset": 4710,
+      "byte_length": 43,
+      "raw_sha256": "ada2576d676372dabc90e6038adf4b3d5a8867a3a16d655b98dfdb37b8dc761e"
+    },
+    {
+      "alias": "pillar",
+      "path": "data/chars/misc/pillar/pillar.txt",
+      "line": 133,
+      "byte_offset": 4755,
+      "byte_length": 47,
+      "raw_sha256": "222bb97197bfc0c6b3ae4bbf4abe06163081711fc650d9966ba7e1ceaa1164ae"
+    },
+    {
+      "alias": "lpillar",
+      "path": "data/chars/magic/light/lpillar.txt",
+      "line": 134,
+      "byte_offset": 4804,
+      "byte_length": 49,
+      "raw_sha256": "41a4044967f79a815ab2b6f5926a8d00a0669c4493c3e13c6e47688a843c5751"
+    },
+    {
+      "alias": "ipillar",
+      "path": "data/chars/magic/ice/ipillar.txt",
+      "line": 135,
+      "byte_offset": 4855,
+      "byte_length": 47,
+      "raw_sha256": "bc2f6f7553ffdccaf3147e1059ae23e0420bc91d4a0ee5db6f6b8440289116ae"
+    },
+    {
+      "alias": "ppillar",
+      "path": "data/chars/magic/poison/ppillar.txt",
+      "line": 136,
+      "byte_offset": 4904,
+      "byte_length": 50,
+      "raw_sha256": "0977f2281f81a7a4eb4f958079283f253320adeb35364bf4c9dc42df5e5734f8"
+    },
+    {
+      "alias": "ehurr",
+      "path": "data/chars/magic/hurr/ehurr.txt",
+      "line": 140,
+      "byte_offset": 4975,
+      "byte_length": 44,
+      "raw_sha256": "aa019c014193bde93d39ccedfc72660720d6bd7f4e98e48a1c891033321e003b"
+    },
+    {
+      "alias": "elight",
+      "path": "data/chars/magic/light/elight.txt",
+      "line": 141,
+      "byte_offset": 5021,
+      "byte_length": 47,
+      "raw_sha256": "64450e03e541428563d4fe839b4ac9c29fe34058d5eaf62b9f3e5e8ae9ee90b0"
+    },
+    {
+      "alias": "epoison",
+      "path": "data/chars/magic/poison/epoison.txt",
+      "line": 142,
+      "byte_offset": 5070,
+      "byte_length": 50,
+      "raw_sha256": "6822448b51cc9c178fc946eee2efd02e4cd0fa3353105de276c9eafe1c6f50b1"
+    },
+    {
+      "alias": "edragon",
+      "path": "data/chars/magic/dragon/edragon.txt",
+      "line": 143,
+      "byte_offset": 5122,
+      "byte_length": 50,
+      "raw_sha256": "89e9d6fe539cecd13e588ebbc84555a6bce87ce5dcf506e775a523d43de818ed"
+    },
+    {
+      "alias": "eice",
+      "path": "data/chars/magic/ice/eice.txt",
+      "line": 144,
+      "byte_offset": 5174,
+      "byte_length": 41,
+      "raw_sha256": "9346b16fdb676c9a53bf748b48af45ba201bbe28618694e929899230f3dd7ddd"
+    },
+    {
+      "alias": "erock",
+      "path": "data/chars/magic/rock/erock.txt",
+      "line": 145,
+      "byte_offset": 5217,
+      "byte_length": 44,
+      "raw_sha256": "4ab8780a44561452d95a72c1cf6f5ec2f3232e85541e9fef9d75f5fa4bbc3b04"
+    },
+    {
+      "alias": "ewater",
+      "path": "data/chars/magic/water/ewater.txt",
+      "line": 146,
+      "byte_offset": 5263,
+      "byte_length": 47,
+      "raw_sha256": "77dc20c8b843f6389f7a76749d7471b4b044409a7011dcda93d712925b215bc8"
+    },
+    {
+      "alias": "frock",
+      "path": "data/chars/misc/frock/frock.txt",
+      "line": 149,
+      "byte_offset": 5323,
+      "byte_length": 44,
+      "raw_sha256": "a147a317d3ea8765362e27540ddec1e7598ccff1ee47dcaef8cddf54edee0e72"
+    },
+    {
+      "alias": "sfire",
+      "path": "data/chars/misc/sfire/sfire.txt",
+      "line": 150,
+      "byte_offset": 5369,
+      "byte_length": 44,
+      "raw_sha256": "f0a38ce4776488c09cb7c759bcb66598cb67482f33e72b051c028654de5b0d18"
+    },
+    {
+      "alias": "Flash",
+      "path": "data/chars/misc/flash/flash.txt",
+      "line": 153,
+      "byte_offset": 5426,
+      "byte_length": 44,
+      "raw_sha256": "53df980b3eada6368fea7acb0744b93f3e333ab6723ee12c277ce2f1161b3c4b"
+    },
+    {
+      "alias": "Flash2",
+      "path": "data/chars/misc/flash/flash2.txt",
+      "line": 154,
+      "byte_offset": 5472,
+      "byte_length": 46,
+      "raw_sha256": "295ce23a17f1e87b3aa31860fc2fe7292acceeb76ff3278275ba041982477d10"
+    },
+    {
+      "alias": "Guard",
+      "path": "data/chars/misc/guard/guard.txt",
+      "line": 155,
+      "byte_offset": 5520,
+      "byte_length": 44,
+      "raw_sha256": "2e4e84b5e4c6b93c9822a30dc8e512251d23c9634eb63d764348031ef03fff37"
+    },
+    {
+      "alias": "Noflash",
+      "path": "data/chars/misc/flash/noflash.txt",
+      "line": 156,
+      "byte_offset": 5566,
+      "byte_length": 48,
+      "raw_sha256": "5074a68a3f8ed42736482391a34f7f451478c8c901947933ceabbcdae6958f5f"
+    },
+    {
+      "alias": "Dust",
+      "path": "data/chars/misc/dust/dust.txt",
+      "line": 160,
+      "byte_offset": 5628,
+      "byte_length": 41,
+      "raw_sha256": "9d46444c8048728c56020ee1147ecbf04ff8703367b3e11913d7f701efddff72"
+    },
+    {
+      "alias": "Dust2",
+      "path": "data/chars/misc/dust/dust2.txt",
+      "line": 161,
+      "byte_offset": 5671,
+      "byte_length": 43,
+      "raw_sha256": "3fab2cad721e94ecd686540f740966a543e0c365915a7e735178aced5356ddf0"
+    },
+    {
+      "alias": "Dust3",
+      "path": "data/chars/misc/dust/dust3.txt",
+      "line": 162,
+      "byte_offset": 5716,
+      "byte_length": 43,
+      "raw_sha256": "51cd483e6af04a1f0adf164515d66ee86fdfee766e1475aac3594a527a728d85"
+    },
+    {
+      "alias": "Dust4",
+      "path": "data/chars/misc/dust/dust4.txt",
+      "line": 163,
+      "byte_offset": 5761,
+      "byte_length": 43,
+      "raw_sha256": "3eea15c8a236f39ccd1828780bfdb1b9fabd9739d03b32bd0d48f17d04af510d"
+    },
+    {
+      "alias": "civ01",
+      "path": "data/chars/misc/civilian/civ01.txt",
+      "line": 166,
+      "byte_offset": 5820,
+      "byte_length": 47,
+      "raw_sha256": "c5dce2e01f475868cc72aa5152e04f453890ba16c2a0da56b093b12e62c14f67"
+    },
+    {
+      "alias": "civ02",
+      "path": "data/chars/misc/civilian/civ02.txt",
+      "line": 167,
+      "byte_offset": 5869,
+      "byte_length": 47,
+      "raw_sha256": "4e0388aa3e6fee0c3327e6bb489444ef8352c15e2d1a3a3987d9bc59d78b4c32"
+    },
+    {
+      "alias": "civ03",
+      "path": "data/chars/misc/civilian/civ03.txt",
+      "line": 168,
+      "byte_offset": 5918,
+      "byte_length": 47,
+      "raw_sha256": "2532748f3eee0fa3b0df28385b35901c091ad49d477f4f0bc364106393c13ab5"
+    },
+    {
+      "alias": "chest01",
+      "path": "data/chars/misc/chests/chest01.txt",
+      "line": 171,
+      "byte_offset": 5978,
+      "byte_length": 49,
+      "raw_sha256": "24b8c62d10e79d3afead9f34aa19590530cddc84905f7b1fcbb3f2e67ffecdcb"
+    },
+    {
+      "alias": "chest02",
+      "path": "data/chars/misc/chests/chest02.txt",
+      "line": 172,
+      "byte_offset": 6029,
+      "byte_length": 49,
+      "raw_sha256": "8c97b8a31f42e3e267ebf31d49f2b18c9540374813aad59e1662277238949eb8"
+    },
+    {
+      "alias": "chest03",
+      "path": "data/chars/misc/chests/chest03.txt",
+      "line": 173,
+      "byte_offset": 6080,
+      "byte_length": 49,
+      "raw_sha256": "2ddea5682e4ad85c4b72c3ed92c1f89934135c9384ba1c303516ada66ea36b6b"
+    },
+    {
+      "alias": "barrell",
+      "path": "data/chars/misc/barrell/barrell.txt",
+      "line": 174,
+      "byte_offset": 6131,
+      "byte_length": 50,
+      "raw_sha256": "ff4d6f5f23ec4135c8b476ace351aaa027a6824856463f46bf817c4b10ea2ae7"
+    },
+    {
+      "alias": "potion",
+      "path": "data/chars/misc/items/potion.txt",
+      "line": 177,
+      "byte_offset": 6193,
+      "byte_length": 46,
+      "raw_sha256": "6674792b63b19b91146d00e7015fab0e7887c8e967923ee3a38e8a5484514929"
+    },
+    {
+      "alias": "book",
+      "path": "data/chars/misc/items/book.txt",
+      "line": 178,
+      "byte_offset": 6241,
+      "byte_length": 42,
+      "raw_sha256": "c4f53631f5493f8c9c9deb768e4254a010449ec069e5eab3c6fd016079a93ec6"
+    },
+    {
+      "alias": "ingot",
+      "path": "data/chars/misc/money/ingot.txt",
+      "line": 182,
+      "byte_offset": 6297,
+      "byte_length": 44,
+      "raw_sha256": "e0c0f32e7abea02fb15aab7b9aacd0783b95a147c84222ee37ce4d041acca7a7"
+    },
+    {
+      "alias": "diam",
+      "path": "data/chars/misc/money/diam.txt",
+      "line": 183,
+      "byte_offset": 6343,
+      "byte_length": 42,
+      "raw_sha256": "c64516388ce3de1ffad6dd473e6349f905364f1e063742a90037980a7d01853b"
+    },
+    {
+      "alias": "bread",
+      "path": "data/chars/misc/food/bread.txt",
+      "line": 187,
+      "byte_offset": 6398,
+      "byte_length": 43,
+      "raw_sha256": "41eb4feb4a6ddbce8b740cb7bb5bc785fe332d7321c73c538c51c49dca734025"
+    },
+    {
+      "alias": "meat",
+      "path": "data/chars/misc/food/meat.txt",
+      "line": 188,
+      "byte_offset": 6443,
+      "byte_length": 41,
+      "raw_sha256": "3064b90bf0a807825b2061e31f3c5d86ae226d6996802f3e208dcde6e6c78146"
+    },
+    {
+      "alias": "counter",
+      "path": "data/chars/misc/counter/counter.txt",
+      "line": 191,
+      "byte_offset": 6495,
+      "byte_length": 50,
+      "raw_sha256": "2f0b81031e796d0ed29b54dee46dfb19ec97e0cafd9a5e3c478351ba612dcfbd"
+    },
+    {
+      "alias": "wagon",
+      "path": "data/chars/misc/wagon/wagon.txt",
+      "line": 192,
+      "byte_offset": 6547,
+      "byte_length": 44,
+      "raw_sha256": "a1f43dfbd45e72998f75efbd5e29089dc2183a9610e21cb528a05f96d62b2ce3"
+    },
+    {
+      "alias": "intro",
+      "path": "data/chars/misc/intro/intro.txt",
+      "line": 193,
+      "byte_offset": 6593,
+      "byte_length": 44,
+      "raw_sha256": "badce4a0d439d7a95eaed40e6ca2f1bba2b3da9fdb9ee4233b79b2aec889453e"
+    },
+    {
+      "alias": "hellin",
+      "path": "data/chars/misc/hellin/hellin.txt",
+      "line": 194,
+      "byte_offset": 6639,
+      "byte_length": 47,
+      "raw_sha256": "266cc71370bad8dad07e68a6d33fe9f5c57503d7c2356e0a61fbb46f18e7dc01"
+    },
+    {
+      "alias": "hellout",
+      "path": "data/chars/misc/hellout/hellout.txt",
+      "line": 195,
+      "byte_offset": 6688,
+      "byte_length": 50,
+      "raw_sha256": "4a33cdc464137626e714f0dc57fc5afca79b836f0c9ae64fdc1a40c370da43c3"
+    },
+    {
+      "alias": "falo",
+      "path": "data/chars/misc/falo/falo.txt",
+      "line": 196,
+      "byte_offset": 6740,
+      "byte_length": 41,
+      "raw_sha256": "499850b24c58371babad37bae97375e6fbb0a6fe037a57e82f04791e546274c0"
+    },
+    {
+      "alias": "end",
+      "path": "data/scenes/end/end.txt",
+      "line": 197,
+      "byte_offset": 6783,
+      "byte_length": 35,
+      "raw_sha256": "2b4549eac9a8f422d48f275aaeff76c7124dfe354b4dccc3292c49d47c294564"
+    },
+    {
+      "alias": "credits",
+      "path": "data/scenes/credits/credits.txt",
+      "line": 198,
+      "byte_offset": 6820,
+      "byte_length": 46,
+      "raw_sha256": "10b2053091ab7b964c507d3e989a092e0bd2be67ac96be9c66fd9f075fa9c054"
+    },
+    {
+      "alias": "Sel01",
+      "path": "Data/chars/misc/select/Sel01.txt",
+      "line": 201,
+      "byte_offset": 6881,
+      "byte_length": 43,
+      "raw_sha256": "c4b177472fec3e50b2da0c70d0081f209d6d09f27dd6eaa57bcc34ae47b6b8f6"
+    },
+    {
+      "alias": "Sel02",
+      "path": "Data/chars/misc/select/Sel02.txt",
+      "line": 202,
+      "byte_offset": 6926,
+      "byte_length": 43,
+      "raw_sha256": "4982c2359b7631b8ab9e0ed35002c6147c79251ef8190d5eab434380eabe6aa3"
+    },
+    {
+      "alias": "go1",
+      "path": "Data/chars/misc/go/go1.txt",
+      "line": 203,
+      "byte_offset": 6971,
+      "byte_length": 36,
+      "raw_sha256": "63cc57809a6a6fa190da6eed2bb85fd41315aba4d435e8d40f72f2a080be73f1"
+    },
+    {
+      "alias": "go2",
+      "path": "Data/chars/misc/go/go2.txt",
+      "line": 204,
+      "byte_offset": 7009,
+      "byte_length": 36,
+      "raw_sha256": "fd20175a0832040efa0a84606996904fc4f9d155d70c74631b50e64a345f9aa9"
+    },
+    {
+      "alias": "go3",
+      "path": "Data/chars/misc/go/go3.txt",
+      "line": 205,
+      "byte_offset": 7047,
+      "byte_length": 36,
+      "raw_sha256": "30e0655ea1a680f67140ffe939181fd0578b2b0a25bbe3e41019b13d40b9a136"
+    },
+    {
+      "alias": "go4",
+      "path": "Data/chars/misc/go/go4.txt",
+      "line": 206,
+      "byte_offset": 7085,
+      "byte_length": 36,
+      "raw_sha256": "b0964077347ca67dfc0b041918b37fe052f4afe104119f6b43251a8f377d5de5"
+    },
+    {
+      "alias": "go5",
+      "path": "Data/chars/misc/go/go5.txt",
+      "line": 207,
+      "byte_offset": 7123,
+      "byte_length": 36,
+      "raw_sha256": "b4e35964fca47508657ddda8c266dc3b3ad68ad4dc84e0818d64652ec5108780"
+    },
+    {
+      "alias": "go6",
+      "path": "Data/chars/misc/go/go6.txt",
+      "line": 208,
+      "byte_offset": 7161,
+      "byte_length": 36,
+      "raw_sha256": "3d7ad14268c1af4db87c7f6fb57fa6d6f15e0b6ca05ed46937dac07a7b9b44d4"
+    }
+  ],
+  "duplicate_aliases": [],
+  "issues": [],
+  "units": {
+    "policy": "integers pass through unchanged; O1 declares a unit only where the ported pinned reference semantics establish one, and the SMS backend pins consumption units later",
+    "declared": [],
+    "undeclared_commands": []
+  },
+  "limitations": [
+    "Index IR only: aliases and paths as written; model files, behavior and eligibility are not parsed here.",
+    "duplicate_aliases marks case-insensitive alias collisions; spawn resolution treats those records as ambiguous."
+  ],
+  "claim_ceiling": "typed IR with origin within the O1 front-end only; no model behavior, runtime or conversion claim"
+}

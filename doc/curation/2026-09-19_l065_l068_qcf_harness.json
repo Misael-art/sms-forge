@@ -1,0 +1,44 @@
+{
+  "curation_id": "2026-09-19_l065_l068_qcf_harness",
+  "date": "2026-09-19",
+  "scope": "hamoopig_qcf_harness_hist_build_record",
+  "origin": "Portabilidade HAMOOPIG SMS: QCF falhava no harness; instrumentacao do hist de 8 ticks mostrou 2→6 e qcf=1 com especial nao entrando; causa era refoco Wayland ~300 ms entre teclas e B1 so na borda. Hist nao foi alargado.",
+  "lessons": [
+    {
+      "id": "L065",
+      "status": "fechada_com_ferramenta",
+      "lesson": "press_spec() que reativa a janela ANTES de cada tecla dorme ~300 ms no Wayland (focus_wayland). Isso e ~18 frames NTSC. Um buffer de comando de 8 ticks (~133 ms) perde o Down antes do A. Gestos encadeados (QCF) exigem um unico foco e teclas sem refoco. Nao alargar o hist do gameplay para caber a lentidao do harness.",
+      "rule_section": "SMS_GLOBAL §52",
+      "tool_that_measures": "emulator_input.py",
+      "evidence": "SMS_projects/hamoopig/out/evidence/special_probe.json v005: hist so 5s apos Down=60,Right=60,a=200 com refoco; v006 com refocus=False: hist [2,2,6,6,5,5,5,5], qcf=1, fire=2, SP 32→4, HP 8→0. SHA 4d6bfa4005b27412551fa3f8a041db813c69e163ce3dd2e7c8cf422cdb707964."
+    },
+    {
+      "id": "L066",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Amostra do hist 0,9 s depois do gesto so ve neutro: 8 ticks cabem ~133 ms. Prova de QCF le hist/qcf/state/SP no maximo alguns frames apos o A, nao depois da viagem do projetil. Janela de amostragem faz parte da prova, nao e detalhe do log.",
+      "rule_section": "SMS_GLOBAL §52",
+      "tool_that_measures": "emulator_input.py",
+      "evidence": "prove_special.py at_qcf vs after_qcf: after_qcf hist todo 5; at_qcf (≤50 ms) guarda 2 e 6. Mesmo run, SHA 4d6bfa40…."
+    },
+    {
+      "id": "L067",
+      "status": "absorvida_em_skill",
+      "lesson": "qcf=1 no sample com especial ainda em idle e SP intacto: B1 so era KEY_PRESSED. O botao SMS chega 1-3 frames depois do 6. Recuo: aceitar B1 hold enquanto o QCF ainda vive nos 8 ticks. Alargar o hist e a correcao errada (acomoda o harness, nao o jogador).",
+      "rule_section": "SMS_GLOBAL §52",
+      "skill_that_teaches": "skills/sms-fight-input-proof.md",
+      "evidence": "v005 at_qcf qcf=1 hist [5,2,5,6,…] state 100 SP 32; v006 com hold: fire=2 SP 32→4 HP 8→0 state 99 (ST_WIN)."
+    },
+    {
+      "id": "L068",
+      "status": "fechada_com_ferramenta",
+      "lesson": "build_record.json e snapshot de COMPILE: eixos de runtime nascem false e so sobem por axis_support() no proximo build com artefato aceito (evidence.json informative, fps.json, input_memory.json). Editar axes a mao e proibido. Memory bank (autoridade #1) e o estado operacional; divergencia build_record false vs memory bank testado_em_emulador nao se 'conserta' no JSON de compile.",
+      "rule_section": "SMS_GLOBAL §53",
+      "tool_that_measures": "reconcile_claims.py",
+      "evidence": "hamoopig out/build_record.json axes boot/gameplay/fps false apos ROM 4d6bfa40 com runtime_probe e special_probe posteriores; reconcile so REPROVA true sem lastro, nao promove. doc/10-memory-bank.md e a autoridade."
+    }
+  ],
+  "note_ids": {
+    "next_id": "L069",
+    "hist_policy": "Nao alargar Fighter.hist[8] para caber delay de harness."
+  }
+}

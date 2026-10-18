@@ -1,0 +1,157 @@
+{
+  "schema": "luta_mugen_psg_authoring_v1",
+  "music_battle": {
+    "origin": "tools/sms_wrapper/make_psg_assets.py::ARENA_BATTLE",
+    "composition": "original SMSForge dark arena theme"
+  },
+  "sfx_special": {
+    "duration_frames": 12,
+    "channel_2_tone_noise_channel_3": [
+      {
+        "period": 448,
+        "tone_attenuation": 1,
+        "white_noise_attenuation": 1
+      },
+      {
+        "period": 400,
+        "tone_attenuation": 1,
+        "white_noise_attenuation": 2
+      },
+      {
+        "period": 352,
+        "tone_attenuation": 2,
+        "white_noise_attenuation": 2
+      },
+      {
+        "period": 304,
+        "tone_attenuation": 3,
+        "white_noise_attenuation": 3
+      },
+      {
+        "period": 256,
+        "tone_attenuation": 4,
+        "white_noise_attenuation": 4
+      },
+      {
+        "period": 208,
+        "tone_attenuation": 6,
+        "white_noise_attenuation": 5
+      },
+      {
+        "period": 160,
+        "tone_attenuation": 8,
+        "white_noise_attenuation": 7
+      },
+      {
+        "period": 120,
+        "tone_attenuation": 10,
+        "white_noise_attenuation": 9
+      },
+      {
+        "period": 88,
+        "tone_attenuation": 12,
+        "white_noise_attenuation": 11
+      },
+      {
+        "period": 64,
+        "tone_attenuation": 14,
+        "white_noise_attenuation": 13
+      },
+      {
+        "period": 64,
+        "tone_attenuation": 15,
+        "white_noise_attenuation": 15
+      },
+      {
+        "period": 64,
+        "tone_attenuation": 15,
+        "white_noise_attenuation": 15
+      }
+    ]
+  },
+  "sfx_round": {
+    "duration_frames": 16,
+    "channel_2_events": [
+      {
+        "frame": 0,
+        "bytes": [
+          192,
+          88,
+          209
+        ]
+      },
+      {
+        "frame": 2,
+        "bytes": [
+          211
+        ]
+      },
+      {
+        "frame": 3,
+        "bytes": [
+          192,
+          84,
+          209
+        ]
+      },
+      {
+        "frame": 5,
+        "bytes": [
+          211
+        ]
+      },
+      {
+        "frame": 6,
+        "bytes": [
+          192,
+          80,
+          209
+        ]
+      },
+      {
+        "frame": 8,
+        "bytes": [
+          211
+        ]
+      },
+      {
+        "frame": 9,
+        "bytes": [
+          192,
+          76,
+          209
+        ]
+      },
+      {
+        "frame": 11,
+        "bytes": [
+          212
+        ]
+      },
+      {
+        "frame": 12,
+        "bytes": [
+          215
+        ]
+      },
+      {
+        "frame": 13,
+        "bytes": [
+          218
+        ]
+      },
+      {
+        "frame": 14,
+        "bytes": [
+          221
+        ]
+      },
+      {
+        "frame": 15,
+        "bytes": [
+          223
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "curation_id": "2026-09-25_l078_l079_piso_audio_psg",
+  "date": "2026-09-25",
+  "scope": "passo_5_piso_de_qualidade_de_audio_psg_pedido_humano",
+  "origin": "2026-09-25 feedback motivated stream audit; original diagnosis preserved under historical_origin and historical_lesson. Bit interpretation corrected/source-backed 2026-10-13; old percentages/timbre claims superseded.",
+  "lessons": [
+    {
+      "id": "L078",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Audio presence is insufficient; simple PSGlib event-stream policies detect selected defects but do not certify perceived quality. Note-write gaps and ratios are heuristic; musical identity/mix/timing need aligned capture and independent listening.",
+      "evidence": {
+        "ledger": "doc/psg_quality_ledger.json — 7/7 musicas reprovam (arena/hamoopig battle+title: 10 violacoes cada; kage: 5; MSSF2T battle: 2 cirurgicas; MSSF2T title: 10), 5/5 SFX passam",
+        "conformidade_provada": "fixture 'arranjo' no --self-check passa as seis clausulas: o piso e alcancavel por construcao, nao opiniao inatingivel",
+        "self_check": "audit_psg_quality.py --self-check 15/15 (inclui o round-trip de decodificacao e o caminho publico audit_one, onde um unpack de SFX quebrou na primeira rodada)",
+        "causa_izolada": "make_psg_assets.py:67-77 escreve tone(nota,0,1)+tone(nota,1,1)+tone(nota,2,1)+noise(0x04,1) por frame — unissono a 16 Hz com assobio periodico por baixo, exatamente a assinatura do 'ruido pessimo'"
+      },
+      "rule_section": "SMS_GLOBAL §63",
+      "tool_that_measures": "audit_psg_quality.py",
+      "historical_lesson_2026_09_25": "Presenca de audio nao e audio: o eixo 'audio' do claim de entrega so fecha com qualidade medida no stream. audit_psg_quality.py decoda o .psg no formato PSGlib e cobra seis clausulas de musica (M1 ritmo >= 2 frames/nota; M2 dinamica >= 2 atenuacoes por canal ativo; M3 unissono <= 50%; M4 percussao branca >= 50% + envelope; M5 loop >= 125 frames; M6 >= 2 canais de tone) e dois de SFX (decaimento, duracao <= 45 frames). O piso e a traducao mensuravel da doutrina SN76489-maxima (arpejo ultrarrapido multiplexado ~30 Hz, envelope de volume para ataque/eco, ruido branco como percussao, contraponto, SFX que nao matam a musica): cada tecnica existe porque o chip nao tem acorde, nao tem ataque e nao tem timbre por si so. Consequencia: todo gerador de audio novo comeca do ledger (doc/psg_quality_ledger.json), e 'soa como ruído' passa a ser enderecavel por clausula e numero.",
+      "follow_up_2026_10_13": {
+        "report": "doc/curation/evidence/2026-10-13_quality_cohesion/audio/result.json",
+        "sources": "doc/curation/evidence/2026-10-13_quality_cohesion/audio/primary_source_findings.json",
+        "corpus": "36 streams unchanged;11 corrected M4 policy failures, not artistic failures",
+        "generator": "white bit preserved; tone divider32; deterministic nominal LFSR preview, not emulator capture",
+        "limit": "Event-policy selfchecks/source inspection; no game mix emulation or assets regenerated"
+      }
+    },
+    {
+      "id": "L079",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "lesson": "Corrected 2026-10-13: SN76489 bit2=1 white (4–7),0 periodic (0–3), low2=3 tone2. Previous inversion and 99%periodic assertion superseded. Audit measures decoded simple-stream policy, not musical quality; source hash and authored roles must agree.",
+      "evidence": {
+        "periodico_medido": "MSSF2T music_battle/ken_stage: ruido-ctl {6:45, 4:35, 5:3, 3:1} — 99% periodico (audit_psg_quality --psg, 2026-09-25)",
+        "ch1_fantasma": "decode do music_ken_stage.psg em disco: notas por canal {0:73, 1:0, 2:113} contra '4 roles' no bank; fonte gen_music_ken_stage.py tem tone_bytes(1,...) em dois ramos que nao chegam ao export",
+        "duplicata": "sha256 music_ken_stage.psg == music_battle.psg == aaf1cf1b8e54…",
+        "correcao_pendente": "regerar streams no piso (divida declarada no ledger por projeto)"
+      },
+      "rule_section": "SMS_GLOBAL §64",
+      "tool_that_measures": "audit_psg_quality.py",
+      "historical_lesson_2026_09_25": "Semantica de registrador que o gerador erra vira defeito de audicao: no SN76489 o latch de ruido 0xE0|fb|per tem fb=bit2 — modo >= 4 e ruido PERIODICO (assobio tonal derivado do ch2), nao percussao. O gen_music_ken_stage.py chama 'bumbo' a 0x06 e 'caixa' a 0x04 (99% dos eventos de percussao do tema mais rico do acervo sao periodicos); so o 'chimbal' 0x03 e branco. Recorrencia da familia L069: doutrina/ferramenta afirmam lei de registrador sem verificar a codificacao — agora M4 mede a fracao branca do stream. Segundo achado da mesma familia (doc↔dado): o bank do MSSF2T declara o tema do Ken em 4 papeis e o .psg em disco NAO tem um unico evento de nota em ch1 — o arpejo declarado nunca existiu no binario; e music_ken_stage.psg e music_battle.psg sao byte-identicos. Claim de arranjo e claim sobre o STREAM, medido; nao sobre o fonte do gerador nem sobre o comentario.",
+      "follow_up_2026_10_13": {
+        "report": "doc/curation/evidence/2026-10-13_quality_cohesion/audio/result.json",
+        "sources": "doc/curation/evidence/2026-10-13_quality_cohesion/audio/primary_source_findings.json",
+        "corpus": "36 streams unchanged;11 corrected M4 policy failures, not artistic failures",
+        "generator": "white bit preserved; tone divider32; deterministic nominal LFSR preview, not emulator capture",
+        "limit": "Event-policy selfchecks/source inspection; no game mix emulation or assets regenerated"
+      }
+    }
+  ],
+  "note_ids": {
+    "next_id": "L080",
+    "mastery": "Nenhuma tecnica promovida. Dividas abertas por este ciclo: os 4 projetos precisam de streams conformes (arena/hamoopig via reescrita do gerador compartilhado; kage via composicao real >= 125 frames; MSSF2T via modos brancos + envelope de baixo + restauracao do ch1) e so então o eixo audio fecha com qualidade. FM YM2413 permanece extensao opcional nao tentada no acervo."
+  },
+  "historical_origin": "Feedback humano direto apos todas as sessoes de mediacao: 'todos os sons foram ruidos nos testes que executou e pessimos de se ouvir'. O acervo media presenca de audio (audit_audio: peak>=200, % ativo) e integridade de manifesto (proveniencia), NUNCA qualidade musical. Diagnostico medido com o gate novo: 7/7 faixas de musica do corpus reprovam — arena_nocturna/hamoopig/MSSF2T-title carregam 'musicas' em que os 3 canais de tone escrevem a MESMA nota no MESMO frame a atenuacao 1 (maxima), com ruido PERIODICO (R3 bit2=1) colado em volume unico, loops de 0,2 a 1,9 s. O comentario do gerador compartilhado (make_psg_assets.py) alegava 'baixo, arpejo e ruido em niveis progressivamente menores' — o codigo faz o contrario e nada media a divergencia."
+}

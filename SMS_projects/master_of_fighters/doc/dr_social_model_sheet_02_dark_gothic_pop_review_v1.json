@@ -1,0 +1,127 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_02_dark_gothic_pop_v1",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1.png",
+    "sha256": "4302834bbd99511201ce5e0ab4baece8876584c333162c681caae539f551b276",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png",
+    "sha256": "b697a47dbdc387ad2a4f98c2d406256565f74fadc8d1507ba7c1809863b502a3"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "owner-approved identity, face, proportions, costume, and equipment reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "project palette-role authority"
+        },
+        {
+          "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "role": "initial style descriptor for Dark-Gothic-Pop; not independently validated"
+        }
+      ],
+      "observed_defects": [],
+      "revision_notes": [
+        "Generated using the owner-approved model sheet for standardized layout and the approved Dr. Social concept v3 for identity, costume, palette, and equipment.",
+        "Style distinction is expressed through fluid precise lineart, stronger gothic contrast, and dark-fantasy shape language while the original palette and human morphology remain fixed.",
+        "Owner review is pending; the producer does not self-approve the artwork.",
+        "Five view headings are now typeset by the shared compositor to match the approved model-sheet form; the character illustration is unchanged."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess document and layout on this Dark-Gothic-Pop candidate."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess style reference application on this Dark-Gothic-Pop candidate."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess lineart and contours on this Dark-Gothic-Pop candidate."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess morphology and biotype on this Dark-Gothic-Pop candidate."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess shading and palette on this Dark-Gothic-Pop candidate."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess relative scale and baseline on this Dark-Gothic-Pop candidate."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess neutral background on this Dark-Gothic-Pop candidate."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess face and identity continuity on this Dark-Gothic-Pop candidate."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess costume and materials on this Dark-Gothic-Pop candidate."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess equipment and weapon continuity on this Dark-Gothic-Pop candidate."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess cross view consistency on this Dark-Gothic-Pop candidate."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess legibility and crop integrity on this Dark-Gothic-Pop candidate."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "Owner and independent reviewer to assess human traits and unapproved details on this Dark-Gothic-Pop candidate."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, resource, ROM, or emulator approval"
+}

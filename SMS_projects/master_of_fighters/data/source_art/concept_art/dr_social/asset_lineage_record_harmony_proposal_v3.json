@@ -1,0 +1,84 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "dr_social_concept_sheet_v3_harmony_proposal",
+  "project": "master_of_fighters",
+  "asset_role": "concept_art_proposal",
+  "channel": "built_in_image_gen",
+  "status": "owner_approved_visual_reference",
+  "image": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+    "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "mode": "RGB"
+  },
+  "prompt": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_concept_prompt_v3_harmony_proposal.txt",
+    "sha256": "5ab548b028b9d15ade3dce282a346ccb3e2f76d38179b1d167c9827dde121cf3",
+    "rounds_for_selected_image": 1
+  },
+  "generation_source": {
+    "path": "/home/misael/.codex/generated_images/01a0ffb3-0f5b-70a0-8e6c-33a88a5cada7/exec-bb29aa95-4a4b-48f9-b5f2-d7b699236352.png",
+    "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+    "note": "Selected final-generation output copied byte-for-byte into the project proposal asset."
+  },
+  "reference_roles": [
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+      "sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+      "role": "identity, silhouette and Master of Darkness palette authority from SMS sprite study"
+    },
+    {
+      "path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+      "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+      "role": "style-only reference: clean line/cel-shading treatment; no identity, costume, palette or pose borrowing"
+    },
+    {
+      "path": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_preview.png",
+      "sha256": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91",
+      "role": "style-only reference: clean graphic finish; no identity, costume, palette or pose borrowing"
+    }
+  ],
+  "authority_refs": [
+    {
+      "path": "doc/11-gdd.md",
+      "role": "character identity, equipment, personality and approved concept direction"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "role": "authorized game palette roles and source-game color direction"
+    }
+  ],
+  "palette_roles_used_as_visual_target": [
+    "suit_light #55AAFF",
+    "suit_mid #00AAAA",
+    "suit_deep #005555",
+    "shirt_light #FFFFFF",
+    "hair_gray #555555",
+    "boot_brown #550000",
+    "tie_burgundy #AA0055",
+    "brass_glasses #FFFF00",
+    "arcane_violet #AA00FF (effects only)"
+  ],
+  "changes": "Regenerated cleanly from the approved SMS sprite study for identity and palette, with the approved Alis v4 and Golden Axe Warrior v2 concepts used only to guide line economy, cel shading and graphic simplicity. The older painterly concepts were not used as generation references.",
+  "preserved": "Dr. Ferdinand Social / Master of Darkness: fully human, early-thirties, lean Victorian psychologist and vampire hunter; cane, rapier, brass spectacles and occult steel boomerang; courage and pursuit of justice.",
+  "scope_note": "RGB concept-art proposal only. Palette correspondence is visual and role-based; image is not palette-quantized, resource-audited, or an SMS sprite asset. No GDD or palette manifest change.",
+  "visual_check": {
+    "two_full_body_poses": true,
+    "same_character_across_poses": true,
+    "roster_matching_line_and_cel_shading_proposed": true,
+    "source_game_palette_roles_followed_visually": true,
+    "violet_effect_only": true,
+    "approval_by_owner": true,
+    "runtime_or_sprite_ready": false
+  },
+  "revision_history": [
+    {
+      "note": "Earlier iterations explored edits of the painterly concepts; they were not selected. This proposal was regenerated from the character SMS sprite plus the two approved concepts as style-only references."
+    }
+  ],
+  "next_gate": "Revise os sprites separados conforme o contrato de harmonia do roster; concept approval does not approve animation, integration or ROM.",
+  "owner_confirmation": "2026-10-04: o dono confirmou que as artes conceituais do elenco estão harmonizadas e definiu esta direção como referência para revisão dos sprites."
+}

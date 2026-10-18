@@ -1,0 +1,49 @@
+{
+  "curation_id": "2026-09-25_l074_l076_receitas",
+  "date": "2026-09-25",
+  "scope": "passo_3_ordem_curadoria_extracao_receitas_combate_animacao_assets_rom",
+  "origin": "Passo 3 da ordem de curadoria aprovada (extrair três receitas do corpus: combate, animação/impacto, produção assets→ROM). O curador diagnosticou: 'os projetos já podem enriquecer bastante o agente canônico', mas a capacidade vivia só no relato do memory bank — sem contrato, sem comando de reprodução, sem vídeo nativo atrelado à SHA. Cada receita foi escrita na estrutura obrigatória de seis partes (contrato, exemplo mínimo, comando de reprodução, caso válido/inválido, vídeo nativo, SHA da ROM) e a evidência nativa foi re-gerada CONTRA as ROMs seladas no passo 2 (efd7162f… e f02dfd3c…), não reutilizada de binários antigos.",
+  "lessons": [
+    {
+      "id": "L074",
+      "status": "absorvida_em_skill",
+      "skill_that_teaches": "skills/sms-recipe-combate-1v1.md",
+      "lesson": "Combate 1v1 promovido a receita com o contrato explícito e datado do fonte: janela startup/active/recovery por golpe (soco 4/4/8, chute 7/5/13, especial 8/4/12), um-golpe-um-acerto via hit_used, dano atribuível por movimento (soco 7, chute 10, projétil 12, chip 2), guarda posicional (trás + de frente + no chão), snapshot de contatos antes do veredito (trade/duplo-KO independentes de ordem P0/P1) e impacto com hitstop 6/3 + shake. Caso inválido tem fixture: whiff 64→64 com pose vista NÃO é conexão; dx do lado errado aprovado por abs(dx) é a regressão L038.",
+      "evidence": {
+        "video_nativo": "SMS_projects/MSSF2T/out/evidence/recipe_combate.mp4 (256x192 h264, 46,34 s, movimento 76,4%, 6/6 frames informativos; f02 = Ken vs Guile em combate, f05 = banner KEN WINS com Guile em POSE_KO)",
+        "prova_ram": "SMS_projects/MSSF2T/out/evidence/input_memory.json (soco -7 a gap=19, sideswap, 14 hits na atração) contra a mesma SHA",
+        "rom_sha256_mssf2t": "efd7162f8c9f829b4826047d24ac2cfed5ab163e094520ee4ca1d00521892122",
+        "rom_sha256_kage": "f02dfd3c749ed546d4303e1938ebb41cbc08837e8c7bbd96fae08251772419f9 (segundo projeto: full_cycle_memory.json ciclo_provado)"
+      },
+      "rule_section": "SMS_GLOBAL §59"
+    },
+    {
+      "id": "L075",
+      "status": "absorvida_em_skill",
+      "skill_that_teaches": "skills/sms-recipe-animacao-impacto.md",
+      "lesson": "Animação/impacto promovido a receita com a dívida declarada junto. O que está pago: 8 poses com folha própria (ST_JUMP desenhando folha de andar foi defeito real), convenção única 'folhas olham para a esquerda' + flip runtime (as folhas do Guile autorizadas face-right renderizavam de costas), stream de 96 B/frame implementado; os resultados worst-frame citados para MSSF2T (181/235) e kage (67/245) foram invalidados por L082, portanto o custo temporal do upload segue sem veredito válido. Física por altura e não por estado (L050/L053). O que NÃO pode ser claimado: animação por movimento — hoje cada golpe é um frame estático e o chute reusa a pose do soco; 2-4 frames/golpe dependem de banking aprovado.",
+      "evidence": {
+        "video_nativo": "SMS_projects/kage_matsuri/out/evidence/recipe_combate.mp4 (37,91 s, movimento 3,2% — fundo estático por projeto de cena, sprites em movimento; frames f02/f05 mostram locomoção, inimigos e pips de vida mudando)",
+        "worst_frame": "SMS_projects/MSSF2T/out/evidence/worst_frame_m03.json; SMS_projects/kage_matsuri/out/evidence/worst_frame_cycle.json",
+        "gate": "audit_animation_semantics.py (frames reordenados/ação clonada/pivot oscilando reprovam)"
+      },
+      "rule_section": "SMS_GLOBAL §60"
+    },
+    {
+      "id": "L076",
+      "status": "absorvida_em_skill",
+      "skill_that_teaches": "skills/sms-recipe-asset-a-rom.md",
+      "lesson": "Produção assets→ROM promovida a receita: todo pixel visível percorre a cadeia fonte-com-proveniência → PNG no contrato (mestra 6-bit, índice 0 transparente, <=15 úteis, grid 8) → tiles 4bpp de 32 B (o caminho 2bpp é outro: SMS_load2bppTiles) → símbolo com tamanho DERIVADO da folha → build com pré-gates → binding asset→ROM por hash → SHA invariante de fonte (SDSC pinado). A cadeia foi exercida nos dois projetos na reconciliação: audit_rom_asset_binding reprovou os dois bindings pós-rebuild (SHA antiga no JSON), os bindings foram re-hasheados (15 e 12 entradas, arte inalterada) e --require passou. Cada furo inválido já existiu e tem gate: L006 (2bpp lido como 4bpp), L052 (header 1024 vs folha 832), L051 (240 cópias do mesmo frame PSG), L058 (áudio sem manifest), L065/L073 (AUTO_DATE derrubando selo).",
+      "evidence": {
+        "binding": "SMS_projects/MSSF2T/doc/rom_asset_binding.json (15 entradas) e SMS_projects/kage_matsuri/doc/rom_asset_binding.json (12 entradas), ambos --require PASS em 2026-09-25",
+        "video_nativo": "arte autoral em cena nos dois recipe_combate.mp4 (audit_render_fidelity compara estrutura fonte↔captura)",
+        "folga": "MSSF2T: conteúdo termina 0x7DF2, 501 B livres; arte nova exige doc/spec-banking.md (aguarda aprovação humana)"
+      },
+      "rule_section": "SMS_GLOBAL §61"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L077",
+    "mastery": "Nenhuma técnica promovida no registry nesta passada: as receitas EXTRAEM capacidades já seladas (passo 2) para o agente canônico; não afirmam nada acima do que os artefatos medem. Limitação honesta gravada na própria receita L075: animação por movimento não existe ainda e não pode ser claimada."
+  }
+}

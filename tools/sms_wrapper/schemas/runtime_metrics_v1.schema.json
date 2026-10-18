@@ -12,6 +12,7 @@
     "fps_janelas": {"type": "array", "items": {"type": "number"}, "description": "fps de cada janela medida"},
     "fps_spread": {"type": "number", "description": "dispersao entre janelas — o eixo e fps CONSTANTE, nao medio"},
     "fps_constante": {"type": "boolean"},
+    "regional_frame_rate_check": {"type": "object", "description": "Private-session regional target (NTSC60/PAL50), explicit 1fps measurement tolerance and spread <=1fps, >=2 realtime windows. Not per-frame pacing or input latency proof."},
     "frame_advance_proved": {"type": "boolean", "description": "probe_frame avancou dentro da janela de execucao (§36)"},
     "frames_delta_total": {"type": "integer"},
     "boot_proved": {"type": "boolean", "description": "cabecalho SMRT + schema do probe autenticado"},

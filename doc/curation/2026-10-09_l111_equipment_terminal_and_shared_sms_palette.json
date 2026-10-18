@@ -1,0 +1,40 @@
+{
+  "curation_id": "2026-10-09_l111_equipment_terminal_and_shared_sms_palette",
+  "date": "2026-10-09",
+  "title": "Dupla revisão da forma de equipamentos e alocação CRAM compartilhada",
+  "kind": "lesson",
+  "scope": "Revisão artística de proof poses e política de cores runtime em jogos Master System.",
+  "authorization": "Pedido explícito do proprietário para corrigir a ponta achatada da bengala, esclarecer no GDD/TDD a distribuição das paletas entre sprites, cenário e HUD, e registrar os aprendizados para a curadoria.",
+  "lessons": [
+    {
+      "id": "L111",
+      "status": "regra_canonica_registrada_com_gate_de_contrato_e_review_humano_pendente_no_asset",
+      "lesson": "Pixels limpos, recorte inteiro e preview idêntico à fonte não garantem que um equipamento mantenha sua identidade semântica: a ponta achatada da bengala parecia martelo. Compare cada terminal/ponta/pomo com concept e referência em tamanho nativo e nearest-neighbor ampliado, registre um eixo humano explícito, e repita o review completo depois da correção. Meça altura coroa–sola do corpo separada de bengala/arma/capa; o bbox total não prova escala anatômica. No Master System, P1 é compartilhada por todos os sprites; P1 índice 0 é transparente para sprite. P0 é usada por BG/HUD, cujo índice 0 é cor visível; índice 0 de BG continua visível inclusive quando o tile seleciona P1. Paletas individuais descrevem autoria e devem ser mapeadas para a tabela comum de sprites, não carregadas uma por lutador.",
+      "root_cause": "A inspeção anterior verificou recorte, clusters e integridade de pixels, mas não comparou a silhueta do terminal do item com sua identidade esperada. A caixa total do sprite também poderia ser lida como altura corporal, apesar de incluir equipamento e pose agachada. Em paralelo, os manifestos cromáticos por personagem poderiam ser lidos como alocações CRAM independentes, embora todo hardware sprite selecione a tabela P1 compartilhada. A simplificação de que índice 0 é transparente nas duas tabelas também não descrevia a semântica de pixels de fundo.",
+      "evidence": {
+        "owner_feedback": "O proprietário disse que o terminal da bengala na pose de ação estava achatado e poderia ser interpretado como martelo; informou que não detectou ruído/pixelização defeituosa. Pediu definir e documentar a gestão de paleta do jogo.",
+        "superseded_proof": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v3.png",
+        "candidate_proof": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.png",
+        "candidate_proof_sha256": "ea65eb1c082b03531c2c125d617f9942490e4cacdb0421e5bee0240ea04c569e",
+        "candidate_report": "SMS_projects/master_of_fighters/data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.json",
+        "candidate_report_sha256": "0b133e00ef3d063cc5fdbac8fc9eb3dccf3d838d492fb7945dbe84167e99293e",
+        "source_frame": "The action pose selects source frame 06, whose cane terminal remains rounded after the declared 5/6 nearest-neighbor conversion; the source pixels were not generatively redrawn.",
+        "runtime_palette_contract": "SMS_projects/master_of_fighters/doc/palette_runtime_contract_v1.json",
+        "runtime_palette_contract_sha256": "0cc83b7d78afb858cced1b44725241a659809db6ee3955067d97760b226aecfb",
+        "runtime_palette_state": "14 authoring palette profiles contain 43 distinct RGB colors; mapping to one shared P1 set of at most 15 useful sprite colors is pending.",
+        "scale_review": "Opaque bboxes include equipment: idle 37x67 and action 58x64. They do not prove the 66-72px anatomy-only standing target; contract now requires a separate crown-to-sole review axis.",
+        "gdd_tdd": [
+          "SMS_projects/master_of_fighters/doc/11-gdd.md",
+          "SMS_projects/master_of_fighters/doc/15-tdd.md",
+          "SMS_projects/master_of_fighters/doc/13-spec-cenas.md"
+        ],
+        "measurement": "audit_asset_proof_sheet.py validates exact pose pixels, tile and edge bounds, hash-bound P0/P1 allocation declarations, and presence/evidence/expected identity for equipment_terminal_shape plus standing_body_height_vs_gdd with equipment excluded. The human review statuses remain pending."
+      },
+      "rule_section": "SMS_GLOBAL §107; palette semantics corrected in §8 and §85",
+      "tool_that_measures": "tools/sms_wrapper/audit_asset_proof_sheet.py",
+      "skill_or_workflow": "SMS_projects/master_of_fighters/doc/asset_conversion_proof_standard_v4.md; SMS_projects/master_of_fighters/doc/asset_conversion_contract_template_v4.json; SMS_projects/master_of_fighters/doc/palette_runtime_contract_v1.json; tools/sms_wrapper/.agent/skills/sms-pixel-strict-rules.md; tools/sms_wrapper/.agent/skills/sms-palette-codes.md; tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
+      "measurement_limits": "The audit verifies declaration, hash binding, pixel fidelity, framing and review-axis coverage; it cannot infer that a rounded silhouette is the correct cane terminal, that the hand holds an object convincingly, or that the character body lies in the height band. Terminal identity, anatomy-only height, concept fidelity, palette readability, owner decision, roster-wide P1 mapping, scene budgets, ROM integration and emulator behavior still need separate human or runtime gates. A clean pixel result does not mean the owner approved the asset."
+    }
+  ],
+  "dedup_key": "l111_semantic_equipment_terminal_and_shared_sms_palette_20261009"
+}

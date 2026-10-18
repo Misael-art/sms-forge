@@ -1,0 +1,79 @@
+{
+  "schema": "worst_frame_budget_ledger_v1",
+  "date": "2026-09-26",
+  "rule": "Orçamento de VBlank de um projeto = numero medido do worst-frame na SHA da ROM, com a triade canônica autenticada (SMS_GLOBAL §49/L061, §56/L071, §62/L077 e §67/L082). Registros anteriores a L082 são INVALIDADOS: o predicado antigo vline>=0xC0 contava linhas ainda no VBlank. Registros atuais precisam corresponder à SHA vigente e à janela selada. ROM sem contrato é sem_contrato.",
+  "measured": [
+    {
+      "project": "SMS_projects/luta_mugen",
+      "rom_sha256": "b5d5db7b6295e8c6947b0125f0d4ef468fc179fb4e4d72215b5b5573227fafc5",
+      "window": "arena de fixture; bloco VDP de 3000 frames selados (runner 50 s)",
+      "verdicto": "pass",
+      "validity": "current_L082_contract",
+      "vovf_delta": 0,
+      "vline_min": 200,
+      "artifact": "SMS_projects/luta_mugen/out/evidence/t6_vblank_cpu_split_byte_addr.json",
+      "nota": "vline_min=0xC8; stream, CRAM condicional, HUD e SAT rodam depois de SMS_waitForVBlank. Input/fisica/preparo de metasprites ficam fora do bloco VDP. Perfil por etapa inválido por não haver quadro com derrame; captura visual separada passou screenshot_semantic_gate."
+    },
+    {
+      "project": "SMS_projects/MSSF2T",
+      "rom_sha256": "efd7162f8c9f829b4826047d24ac2cfed5ab163e094520ee4ca1d00521892122",
+      "window": "atracao CPU-vs-CPU, 45 s",
+      "verdicto": "derramou",
+      "validity": "invalidated_by_L082",
+      "vovf_delta": 181,
+      "vline_max": 235,
+      "artifact": "out/evidence/worst_frame_m03.json",
+      "nota": "predicado vline>=0xC0 invertido (L082); este delta conta frames que terminaram dentro do VBlank e nao mede derramamento. Recolher na ROM vigente."
+    },
+    {
+      "project": "SMS_projects/kage_matsuri",
+      "rom_sha256": "f02dfd3c749ed546d4303e1938ebb41cbc08837e8c7bbd96fae08251772419f9",
+      "window": "cena parada (idle), 45 s",
+      "verdicto": "pass",
+      "validity": "invalidated_by_L082",
+      "vovf_delta": 0,
+      "vline_max": 4,
+      "artifact": "out/evidence/worst_frame.json",
+      "nota": "predicado vline>=0xC0 não prova PASS; vline_max antigo não substitui vline_min. Recolher."
+    },
+    {
+      "project": "SMS_projects/kage_matsuri",
+      "rom_sha256": "f02dfd3c749ed546d4303e1938ebb41cbc08837e8c7bbd96fae08251772419f9",
+      "window": "ciclo causal (combo->derrotas->torii), 45 s",
+      "verdicto": "derramou",
+      "validity": "invalidated_by_L082",
+      "vovf_delta": 67,
+      "vline_max": 245,
+      "artifact": "out/evidence/worst_frame_cycle.json",
+      "nota": "predicado vline>=0xC0 invertido (L082); este delta conta frames ainda no VBlank e não confirma derramamento. Recolher."
+    },
+    {
+      "project": "SMS_projects/hamoopig",
+      "rom_sha256": "77a79e044eb8e1541054603aee73663358ca055993e2b173c464d4ce70bb5195",
+      "window": "luta em andamento, 45 s",
+      "verdicto": "pass",
+      "validity": "invalidated_by_L082",
+      "vovf_delta": 0,
+      "vline_max": 60,
+      "artifact": "out/evidence/worst_frame_hamoopig.json",
+      "nota": "predicado vline>=0xC0 invertido (L082); este delta não prova folga, e o delta=0 não prova PASS. Recolher na ROM vigente."
+    }
+  ],
+  "sem_contrato": [
+    {
+      "project": "SMS_projects/arena_nocturna",
+      "rom_sha256": "arena_nocturna.sms em disco (nao reconciliada)",
+      "motivo": "escreve header SMRT+schema mas NAO declara vline/vovf/phase — identidade sem instrumentacao nao e medicao (L077). Antes da correcao o tool dava 'sem_lastro' por sorte (lixo >= 0xC0).",
+      "degrau_para_fechar": "declarar a triade em src/main.c + acumular vovf na saida do loop (molde kage) e re-medir"
+    },
+    {
+      "project": "SMS_projects/laboratorio_01",
+      "rom_sha256": "demo.sms em disco (nao reconciliada)",
+      "motivo": "probe parcial (hp/score/over em 0xC7F0-F2, sem magic/schema/triade). Antes da correcao de L077 o tool dava **pass falso-verde**.",
+      "degrau_para_fechar": "mesmo molde; ou declarar o projeto como nao-orcavel (fixture) e sair do ledger"
+    }
+  ],
+  "regressions_blocked": [
+    "vovf como BYTE: probe_contract rejeita (e a regressao L071 — saturacao/reset/estouro indistinguiveis); fixture 'vovf como BYTE rejeita' no --self-check"
+  ]
+}

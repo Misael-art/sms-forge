@@ -1,0 +1,28 @@
+{
+  "curation_id": "2026-09-24_l069_header_claims",
+  "date": "2026-09-24",
+  "scope": "doutrina_vdp_name_table_gate_header_claims",
+  "origin": "Analise de acervo do curador 2026-09-24: SMS_GLOBAL §6 ensinava 'name table = 1 byte por tile, sem flip nem paleta por tile, max 256 tiles BG' — grandezas do SG-1000 passadas por lei do SMS em 7 pontos do canon (SMS_GLOBAL §6/§14, README, matriz V01, 3 skills). 59/59 testes de host e 42 self-checks passavam com a doutrina errada: nenhum gate lia os defines de SMSlib.h contra a prosa. Probe _laboratorio/pnt_16bit provou no framebuffer nativo do Emulicious que a entrada e 16-bit com flags e que tile 300 renderiza.",
+  "lessons": [
+    {
+      "id": "L069",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Doutrina de hardware e claim mensuravel: quando o header do SDK (autoridade #8) define o contrario da prosa, a prosa esta errada — mas so um gate que CASA os dois impede a contradicao de sobreviver ao ciclo de testes. O erro do SG-1000-via-SMS viveu em 7 arquivos porque audit_hardware_constants confere numeros entre consoles, nao claims contra defines do proprio header, e audit_doc_sync casa gate<->doc, nao doc<->API. A regra nova: todo define citado pela doutrina e conferido no valor; o §6 precisa citar TILE_FLIPPED_X 0x0200, TILE_FLIPPED_Y 0x0400, TILE_USE_SPRITE_PALETTE 0x0800, TILE_PRIORITY 0x1000 e 'entrada de 16 bits' exatamente como o header manda.",
+      "rule_section": "SMS_GLOBAL §54",
+      "tool_that_measures": "audit_header_claims.py",
+      "evidence": "Probe: SMS_projects/_laboratorio/pnt_16bit ROM eaa8e8305086b06bcae2b07b05cd756ba635fc5acea9846a4c511f019799b12b; framebuffer pnt_capture2.mp4 SHA 2542169750c4dc3b82c9ed3afb5eb88f55b58507592a79ed36d1217f6eb00127 (h264 256x192, 298 frames); leitura mecanica out/evidence/pnt_16bit_verdict.json 8/8 PASS em 4/4 frames (flipX=espelho(A), flipY=espelho(A), sprite-palette=cor distinta forma identica, tile 300 renderiza, TILE_PRIORITY inocuo no BG isolado); screenshot_semantic_gate --claim visual PASS. Header: sdk/devkitSMS/SMSlib/SMSlib.h:112,124-127."
+    },
+    {
+      "id": "L070",
+      "status": "absorvida_em_doutrina",
+      "lesson": "SMS_init NAO limpa VRAM (observado na primeira captura do probe: fundo 'tile 0' apareceu como ruído colorido — lixo de power-on no pattern de tile 0, com a name table zerada corretamente). Toda cena que confia em 'tile 0 = apagado' precisa carregar o padrao zero explicitamente. A 1a captura tambem registrou o motivo da re-gravacao: capture_video reprova tela congelada por design — probe de padrao estatico precisa de um elemento incidental animado para a evidencia ser gravada, sem que a animacao seja o objeto medido.",
+      "rule_section": "SMS_GLOBAL §55",
+      "skill_that_teaches": "skills/sms-vdp-tiles.md",
+      "evidence": "pnt_capture.mp4 (1a gravacao, fundo ruidoso) vs pnt_capture2.mp4 (tile 0 carregado zero + faixa-piscante incidental); mov=2.1%, 4/4 frames com conteudo."
+    }
+  ],
+  "note_ids": {
+    "next_id": "L071",
+    "mastery": "V08 pnt_entrada_16bit_flags = emulador_provado; V09 tile_priority_flag = mapped (falta sprite sobreposto)."
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "schema": "openbor_sms_batch_boundary_v1",
+  "artifact_kind": "openbor_sms_o3_combat_scope",
+  "revision": 1,
+  "supersedes": null,
+  "generated_at": "2026-10-16",
+  "owner_project": "openbor_sms_rev1",
+  "batch": "O3",
+  "goal": "Combate do recorte TOWN1: movimento/profundidade, pulo/pouso, ataque->hit->dano->dor/queda/recuperacao, IA chase do inimigo e SFX PSG; arte por streaming (slots duplos empacotados + mapper Sega) e evidencia de input causal.",
+  "gate": "Input causal (scripts de sessao em frames VDP), alvos moveis/em profundidades diferentes, reteste e FPS/pacing/worst-frame (plano linha 201; TDD eixos de hitbox/startup-active-recovery/hitstop/input-causal).",
+  "revision_scope": "Abertura do lote O3. Conjunto de combate medido (30 quadros x 2 lados = 60 poses), arquitetura de residencia decidida por medicao (residencia estatica impossivel -> streaming + mapper Sega, contingencia pre-autorizada pelo TDD), semantica de reacao de hit corrigida para pain2/fall2 (attack2 -> ATK_NORMAL2), fisica e IA pinadas no openbor.c 787b6770. Nenhuma mudanca visual foi reautorada: o recorte usa quadros do doador com proveniencia hash-bound (extract r2).",
+  "authority": {
+    "plan": {
+      "path": "doc/planejamento/openbor_sms/01-plano-openbor-sms.md",
+      "sha256": "3b64e9fbd9a27f5137fca1c05c98473d45060b6596ba68edb571e403969180a7",
+      "scope_lines": "201",
+      "note": "linha 201 define o lote O3 e seu gate; ROM/bancos e 'patterns e ponteiros bancados' em linhas anteriores"
+    },
+    "o2_scope": {
+      "path": "doc/artifacts/o2_vdp_pilot_scope_20261016.json",
+      "sha256": "98faf180052d0d0e63c35aae1d323100548b72bf256a4156b2dcf0aa3048b3e5",
+      "note": "contrato herdado: view crop 32..224, z banda [160,232], x 1:1, transparencia indice 0, paleta P1, camera q8, HUD 3 tiles"
+    },
+    "gdd": {
+      "path": "doc/11-gdd.md",
+      "sha256": "c4d1adee627756b7180bb53817feb9bde395fb95b4370e0c3128ca8fd2aaaf42"
+    },
+    "tdd": {
+      "path": "doc/15-tdd.md",
+      "sha256": "beed3e5e07349f0912af35c1f269b1195a7494c201380144d9e4c5a087edee9d",
+      "clause": "Alvo inicial: 48 KB linear sem mapper. Se exceder: mapper Sega (paginas 16 KB, regs 0xFFFE/0xFFFF), codigo restrito a 32 KB, dados bancados a partir do bank 2"
+    },
+    "pinned_reference": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_referencia/openbor_engine_787b6770/engine/openbor.c",
+      "sha256": "8d210999b4af34c1932e0865daf39a007aec54155b1ed909176a39af905f5b2f",
+      "commit": "787b6770",
+      "openbor_c_lines": 56749,
+      "faculdade": "referencia semantica condicional (extrato parcial BSD-3-Clause); nao e origem demonstrada dos PAKs",
+      "revalidated_this_session": true
+    },
+    "pak": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_bruta/golden_axe_legend/GAL.pak",
+      "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+      "bytes": 39500889,
+      "revalidated_this_session": true,
+      "format": "PACK v0 PAK32 (32-bit), 3502 membros"
+    },
+    "extract_r2": {
+      "path": "data/generated/extract/gal_town1_combat_extract_20261016_r2.json",
+      "sha256": "fb5e49b13c64f8abc4684ad82755474f8fc92f3e5e383019dde522dd9826fcb6",
+      "members": 39,
+      "note": "r1 (34 membros) + 5 novos: ax/pain01, ax/pain02, long/pain01, long/pain02, long/death01"
+    },
+    "baseline_build": {
+      "rom": "out/rom/openbor_sms_rev1.sms",
+      "sha256": "b0eb624f4978d542c08513bf2aa2676da0a15c37d8879abdb9f58339be261385",
+      "bytes": 32768,
+      "content_end": "0x4DCA",
+      "free_bytes": 12853
+    }
+  },
+  "measured_budgets": {
+    "method": "scripts calibrados contra o O2 (reproduzem os 122 pares da conversao O2) + simulacao discreta da fisica por tick a 200 Hz; registros hasheados em data/generated/ e este artefato",
+    "pose_set_final": {
+      "ax_frames": ["idle01", "walk01", "walk03", "a101", "a102", "a103", "a104", "a105", "jump01", "jump02", "pain01", "pain02", "fall01", "fall02", "fall03", "rise01"],
+      "long_frames": ["idle01", "walk01", "walk03", "a101", "a102", "a103", "a104", "pain01", "pain02", "fall01", "fall02", "fall03", "rise01", "death01"],
+      "frames_total": 30,
+      "pose_sides_total": 60,
+      "nota": "walk reduzido a walk01/walk03 (herdado O2); pulo do inimigo fora (IA chase nao pula); pain/fall v1 fora (attack2 -> pain2/fall2); pain03 do r1 fica extraido sem uso"
+    },
+    "canvas": {
+      "ax": {"dx0": -32, "dy0": -80, "w": 80, "h": 96, "cells": 60},
+      "long": {"dx0": -40, "dy0": -72, "w": 80, "h": 96, "cells": 60},
+      "anchor": [240, 204]
+    },
+    "cells_per_frame": {
+      "ax": {"idle01": 23, "walk01": 17, "walk03": 17, "a101": 23, "a102": 29, "a103": 25, "a104": 22, "a105": 21, "jump01": 22, "jump02": 19, "pain01": 23, "pain02": 20, "fall01": 21, "fall02": 20, "fall03": 19, "rise01": 18},
+      "long": {"idle01": 20, "walk01": 19, "walk03": 18, "a101": 20, "a102": 27, "a103": 28, "a104": 18, "pain01": 21, "pain02": 19, "fall01": 17, "fall02": 23, "fall03": 19, "rise01": 16, "death01": 19},
+      "max_cell": {"n": 29, "frame": "ax/a102"}
+    },
+    "rom_blocks": {
+      "cells_both_sides": {"ax_left": 339, "ax_right": 339, "long_left": 284, "long_right": 284, "total": 1246},
+      "blocos_por_pose_sem_dedup_bytes": 79744,
+      "pool_dedup_ambos_lados": {"pares": 1135, "raw_bytes": 72640, "packbits_bytes": 48567, "packbits_ratio": 1.5},
+      "pool_so_left": {"pares": 569, "bytes": 36416}
+    },
+    "vram_plan_o3": {
+      "sprite_slots": [0, 231],
+      "sprite_tiles": 232,
+      "bg_base": 232,
+      "bg_slots": 192,
+      "hud_base": 424,
+      "hud_slots": 3,
+      "total": 427,
+      "budget": 448,
+      "margin": 21,
+      "slots": "2 slots x 29 celulas x 2 tiles = 116 tiles por ator; 2 atores = 232",
+      "janela_reg6": "sprites em 0..231, dentro da janela de 256 do reg6"
+    },
+    "rom_plan_mapper": {
+      "tipo": "mapper Sega 128 KB (8 bancos de 16 KB)",
+      "banks_0_1": "codigo + tabelas + BG + HUD + mascaras; non-sprite atual 12106 B + tabelas ~2000 B + codigo novo estimado <= 6000 B + mascaras estimadas <= 4000 B ~= 24106 B <= 32768 B",
+      "banks_2_6": "blocos de pose 79744 B em 81920 B (margem 2176 B)",
+      "bank_7": "reserva 16384 B",
+      "gatilho": "residencia estatica impossivel: 1246 celulas both-sides = 79744 B de blocos (sem dedup) contra 32768 B sem mapper no build atual; PackBits 48567 B exigiria descompressao em runtime (rejeitada no O3)"
+    },
+    "sprite_lines": {
+      "limite": 8,
+      "ator_sozinho_max": {"ax": 8, "long": 9, "nota": "long fall03 e death01 tem 1 linha com 9 celulas; ax a102/fall01-03 = 8 (no limite)"},
+      "pior_par": {"max": 17, "caso": ["ax a102", "long fall03", "dz=24"]},
+      "licao_o2": "contagem de linhas em C no runtime custava ~1 frame por volta no SDCC (comentario do main.c O2); O3 consulta/soma perfis pre-computados, nunca conta por linha"
+    }
+  },
+  "decisions": [
+    {
+      "id": "D1-residencia-e-mapper",
+      "decision": "Residencia estatica impossivel por medicao (1246 celulas both-sides = 79744 B de blocos; 448 tiles de VRAM; build atual 32768 B) -> streaming por slots duplos empacotados por ator + mapper Sega 128 KB. Codigo nos primeiros 32 KB; blocos de pose nos bancos 2-6; bank 7 de reserva.",
+      "basis": "medicoes o3_measure2/o3_delta + TDD clausula de banking ('Se exceder: mapper Sega'); plano (patterns e ponteiros bancados); sdk/README (como bancar)",
+      "status": "decided+measured",
+      "consequence": "primeiro build O3 e mapper (128 KB); smoke de bancos no laboratorio antes de qualquer lote de arte; Emulicious com mapper a verificar empiricamente no M1"
+    },
+    {
+      "id": "D2-conjunto-de-animacoes",
+      "decision": "Conjunto O3 = 30 quadros x 2 lados (listados em measured_budgets.pose_set_final). Walk reduzido a walk01/walk03 (herdado O2). Pulo do inimigo fora (IA chase nao pula). Morte do jogador = fall03 (fonte: ax death, 1 quadro). Morte do inimigo = ciclo do fonte (fall03/death01 alternado com delays 5/1,4/2,3/3,2/4,1/5 + death01 delay 50). Grab/throw/run/specials/armas fora (declarado).",
+      "basis": "ax.txt/long.txt (blocos lidos integralmente); plano linha 201 (movimento/profundidade/pulo/pouso, ataque->hit->dano->queda/recuperacao)",
+      "status": "pinned+adapted",
+      "consequence": "extract r2 com 5 membros novos; pain03 do r1 sem uso (mantido no record); slot dimensionado por ax/a102 = 29 celulas"
+    },
+    {
+      "id": "D3-reacao-de-hit-pain2-fall2",
+      "decision": "As attack boxes do recorte usam attack2 = ATK_NORMAL2; a reacao da vitima e ANI_PAIN2/ANI_FALL2 (tabelas pains[]/falls[] do engine; fallback para pain/fall v1 so se o modelo nao registrar as variantes). O recorte extrai pain01/pain02 (ax e long) e usa fall01-03 para fall2 (quadros identicos na fonte). pain/fall v1 ficam fora do runtime.",
+      "basis": "openbor.c 787b6770: falls[ATK_NORMAL2]=ANI_FALL2 (l. 418-421), pains[ATK_NORMAL2]=ANI_PAIN2 (l. 496-498), selecao runtime l. 34870-34902 e 35153-35170; anim pain2/fall2 de ax (l. 692/701) e long (l. 292/301)",
+      "status": "pinned",
+      "consequence": "correcao do recorte de arte (r1 usava pain03/rise01 da reacao errada para dor); anim rise permanece (fall03+rise01); jump/pain do inimigo coerentes"
+    },
+    {
+      "id": "D4-regras-de-hit",
+      "decision": "Hit = caixa attack2 do quadro ativo (campos x,y,right,down,damage,drop,no_block,no_flash,pausetime,z do anim txt; ax 240,142,44,62,7,0,0,0,15,15 em a102-104; long 240,158,40,46,5,0,0,0,10,15 em a102-103) contra o bbox do alvo (229,149,22,56 rel. offset 240,204) em AABB x/altitude; profundidade |pz-ez| <= 15 (z legacy = z_background = z_foreground). Um hit por ativacao (attack_id); re-hit permitido apos 13 frames NTSC (default next_hit 40 ticks a 200 Hz). Vitoria de solo -> pain2 (attack_drop=0 nao derruba no chao - fiel); vitima no ar -> drop=1 -> fall2 sempre; hp <= 0 -> death. Hitstop do atacante = pause_add (15 ticks ax -> 5 f; 10 ticks long -> 3 f).",
+      "basis": "openbor.c: parse da caixa l. 19932-19952 (attack_drop=arg6, pause_add=arg9, z legacy), checkhit/knockdown l. 37138-37244 e 39390-39418, toss l. 34586, default next_hit 40 ticks (reference_semantics.default_next_hit_frames)",
+      "status": "pinned+adapted",
+      "consequence": "queda no chao so ocorre por morte (hp 0) ou por acerto em alvo aereo; scripts de evidencia (M6) devem exercitar ambos; hitstop entra como pausa curta declarada com medicao de pacing"
+    },
+    {
+      "id": "D5-fisica-de-pulo-e-queda",
+      "decision": "Pulo: vy0 = jumpheight 3.3 px/tick, vx = jumpspeed 1.0 px/tick na direcao do facing; gravidade = -0.1 px/tick^2 (default do nivel; town1 sem gravity); integracao pos += v*100/game_speed por tick (game_speed 200). NTSC: ar ~40 frames, apice ~54 px, deriva x 100 px/s (~66 px por pulo). Queda: toss com dropv.y 3.0, vx 1.2 oposto ao facing da vitima; ar ~36 frames, apice ~46 px, deriva x 2 px/frame (~72 px). Tabelas por-frame geradas na emissao por simulacao discreta (sem float no runtime). Queda de entrada (spawn y=200): ~27 frames ate o solo com a mesma integracao; cap maxfallspeed a pinar no M5.",
+      "basis": "openbor.c: tryjump/dojump l. 44687+/39811+, CMD_MODEL_SPEED/JUMPSPEED l. 16658-16691, check_gravity l. 32231-32320, default_model_dropv l. 261, default_level_gravity l. 271, toss l. 34586; ax/long: jumpspeed 10 (/10), jumpheight 3.3; O2 D1 (altitude y=200 adiada para O3)",
+      "status": "pinned+adapted",
+      "consequence": "nenhum float em runtime; arc tables em ROM (40 e 36 entradas); pouso usa landframe 1 do fall2; O3 paga a queda de entrada adiada do O2"
+    },
+    {
+      "id": "D6-ia-chase",
+      "decision": "Inimigo subtype chase: facing = (alvo.x > inimigo.x); velocidade maxima = speed.x * 1.5 = 75 px/s, dividida em x/z proporcional a |dx|,|dz|; ataque1 quando |dx| <= 40 (range do anim) e |dz| <= 15; cadencia de decisao (throttle) a pinar no fonte (M5). Anim up/down fora (walk em todas as direcoes, herdado do O2 para o jogador e estendido ao inimigo); sem pulo/grab/throw.",
+      "basis": "openbor.c arrow_move/SUBTYPE_CHASE l. 42490-42560; long.txt attack1 range 0 40; speed 5 -> 0.5 px/tick (min clamp 0.5)",
+      "status": "pinned+adapted",
+      "consequence": "alvos moveis do gate atendidos; scripts M6 exercitam aproximacao e ataque em profundidades diferentes"
+    },
+    {
+      "id": "D7-velocidades",
+      "decision": "O3 adota as velocidades da fonte com acumuladores Q8.8: jogador 100 px/s (speed 10 /10 = 1.0 px/tick -> 0.5 px/tick de posicao; Q8.8 0x01AB/frame), inimigo chase ate 75 px/s (0x0140/frame). O piloto O2 rodava 1 px/frame (60 px/s) por constante de implementacao; a supersessao e declarada aqui e o pacing e re-medido no O3.",
+      "basis": "openbor.c CMD_MODEL_SPEED l. 16658-16666 (divisao por 10, clamp 0.5..30); integracao pos += v*100/gs; O2_WALK_SPEED=1 em inc/o2/level.h",
+      "status": "decided",
+      "consequence": "videos O2 permanecem validos como evidencia do piloto (nao sao superseded como registro); pacing O3 medido de novo (M6)"
+    },
+    {
+      "id": "D8-streaming-e-uploads",
+      "decision": "Slots duplos por ator (2 x 29 celulas x 2 tiles = 116 tiles; 2 atores = 232). Upload de pose completa (maximo 1856 B) espalhado por VBlank na janela da pose corrente; slot escrito nunca e exibido (sem tearing); FSM segura 1 frame se a pose nao estiver pronta ('pose ready'). Patches byte-run intra-animacao (cadeias de ataque, janelas de 3 frames) ficam condicionados a medicao de throughput do M1.",
+      "basis": "medicao de celulas (max 29 em ax/a102); orcamento de VBlank do O2 (upload espalhado); janelas de delay por animacao (attack 3 f por quadro; idle 5; walk 7; pain 5->30; jump 21; fall 999; rise 33)",
+      "status": "decided",
+      "consequence": "M1 (laboratorio) mede bytes/frame reais de copia bancada->VRAM antes de decidir patches vs upload pleno; budget de VRAM 427/448"
+    },
+    {
+      "id": "D9-corte-por-banda",
+      "decision": "Corte de sprites por orcamento de 8/linha: politica consultada (nunca contada por linha no runtime, licao O2). Candidatos a escolher por medicao no M4: (a) contadores de banda de 8 linhas em RAM (24 B) somados a partir de perfis por pose + ordem de sacrificio por celula pre-computada; (b) mascara expandida por (pose do ator, bucket de z). Jogador tem prioridade total (max medido 8/linha); excedente sai do inimigo. long fall03/death01 sozinhos = 9/linha -> 1 celula cai sempre (drop estatico declarado no emit + revisao humana). Gate: audit_sprite_line_sim com manifesto da politica + audit_render_glitch + revisao; custo no worst-frame.",
+      "basis": "medicao o3_lines (max por pose; pior par 17); comentario O2 main.c (contagem em C ~1 frame/loop); O2 D10 (mascara pre-computada)",
+      "status": "measured+decided",
+      "consequence": "a 'selecao x-aware' registrada como open item O2 e endereçada: o orcamento e por linha (independente de x); a escolha fina de qual celula cai e por prioridade artistica revisada, nao por contagem em runtime"
+    },
+    {
+      "id": "D10-probe-v2",
+      "decision": "Probe schema v2 aditivo: campos mortos do O2 ganham semantica O3 em 0xC7FD py (altitude do jogador no pulo), 0xC7FE p2state (FSM do inimigo), 0xC7FF p2z (profundidade do inimigo); demais enderecos preservados. measure_runtime_probe + schema + audit_probe_corridor atualizados com --self-check.",
+      "basis": "contrato O2 (0xC7E0..0xC7FF cheio; SNAP_ADDRS atuais); gate O3 exige prova de pulo (py) e alvo movel (p2x/p2z/p2state)",
+      "status": "decided",
+      "consequence": "sem realocacao do corredor; apenas 3 enderecos mudam de nome/semantica, documentado"
+    },
+    {
+      "id": "D11-psg",
+      "decision": "SFX minimos: golpe (att1.wav), impacto (hit1.wav), queda. Reautorados como .psg declarativo por emissor deterministico (padrao luta_mugen_gen_psg_blobs: bytes de .psg hasheados em manifesto + bind por canal em manifesto proprio). Musica fora do O3. Proveniencia: wav fonte hasheado + adaptacao declarada.",
+      "basis": "plano linha 201 ('IA e PSG'); precedente luta_mugen (psg_blobs + audio_provenance_manifest); gates capture_audio/audit_audio/audit_psg_quality/audit_psg_channel_binding",
+      "status": "decided",
+      "consequence": "M7; se a autoria declarativa provar custosa, PSG parcial declarado ao dono (nao silencioso)"
+    },
+    {
+      "id": "D12-escopo-herdado",
+      "decision": "Herdados do O2 sem mudanca: view crop 32..224, z [160,232], x 1:1, camera q8 follow, transparencia indice 0, paleta P1 (14 cores) e P0 (12 uteis), BG pelo dicionario de 192 tiles (painel town1, sem re-autoria), HUD 3 tiles, ordem de trabalho de cena.",
+      "basis": "O2 scope artifact (sha) + O2 arte/emissao hasheadas",
+      "status": "pinned",
+      "consequence": "emissao O3 reusa a cadeia O2 para BG/HUD (verificar bytes identicos no M4)"
+    },
+    {
+      "id": "D13-guarda-pos-hit",
+      "decision": "Guarda pos-hit (invencibilidade curta) e decrementada em tempo real no topo de actor_advance, antes do hitstop e do gate de pose: if (a->guard) a->guard--. Contagem por quadro de jogo, nao por tempo de animacao (o gate D8 pode segurar a pose sob starvation).",
+      "basis": "Traco de morte M6 (14fee45458c74fc8bf539b19898a7db2): hp caia 50->43->...->0 mas a guarda 13 era armada e nunca decrementada; a condicao de morte exigia guard==0, logo a morte era inalcancavel. Bug encontrado no reteste causal, nao na simulacao estatica.",
+      "status": "measured+decided",
+      "consequence": "Dano consecutivo volta a exigir >=13 quadros entre hits; morte alcancavel (traco de 8 hits, dead=1, estado DEAD f114, HUD hde=0). Sem mudanca de layout/VRAM; SHA 76cdbee3 substitui 87954b7f e invalida a evidencia do SHA anterior."
+    }
+  ],
+  "slice_contract": {
+    "cast": {"player": "ax", "enemy": "long", "hp_player": 100, "hp_enemy": 50},
+    "spawn": {"player": {"x": 50, "z": 180, "altitude": 200}, "enemy": {"x": 500, "z": 180, "altitude": 200}, "entry_drop": "fall de ~27 frames com as tabelas de fisica"},
+    "delays_ntsc": {"unit_ms": 10, "regra": "max(1, round(delay*60/100))", "idle": 5, "walk": 7, "attack_frame": 3, "attack_recovery": 9, "pain_stagger": 5, "pain_hold": 30, "jump_launch": 21, "fall_seq": 5, "fall_hold_frame": 1, "rise_lying": 33, "rise_up": 12, "death_cycle": "5/1,4/2,3/3,2/4,1/5 + 30 (delay 50)"},
+    "attack_boxes": {
+      "ax_attack1": {"frames": ["a101", "a102", "a103", "a104", "a105"], "box": [240, 142, 44, 62, 7, 0, 0, 0, 15, 15], "ativo": ["a102", "a103", "a104"], "fases": {"startup": 3, "active": 9, "recovery": 9}},
+      "long_attack1": {"frames": ["a101", "a102", "a103", "a104"], "box": [240, 158, 40, 46, 5, 0, 0, 0, 10, 15], "ativo": ["a102", "a103"], "fases": {"startup": 3, "active": 6, "recovery": 9}}
+    },
+    "hit_rules": {"z_tolerance": 15, "next_hit_frames": 13, "um_hit_por_ativacao": true, "aereo_derruba": true, "solo_dor": "pain2", "morte": "hp<=0", "hitstop_frames": {"ax": 5, "long": 3}},
+    "physics_tables": {"jump_frames": 40, "jump_apex_px": 54, "jump_drift_px_s": 100, "fall_frames": 36, "fall_apex_px": 46, "fall_drift_px_frame": 2, "entry_drop_frames": 27, "q88": {"player_walk": "0x01AB", "enemy_chase": "0x0140"}},
+    "ia": {"subtype": "chase", "maxspeed_px_s": 75, "attack_range_x": 40, "attack_range_z": 15, "cadencia": "pinar M5"},
+    "vram": {"sprites": [0, 231], "bg": [232, 423], "hud": [424, 426], "total": 427, "budget": 448},
+    "rom": {"mapper": "sega128", "banks_0_1": "codigo+tabelas", "banks_2_6": "blocos", "bank_7": "reserva"},
+    "probe": {"py": "0xC7FD", "p2state": "0xC7FE", "p2z": "0xC7FF", "schema": "runtime_metrics_v2"}
+  },
+  "engine_plan": {
+    "modules": {
+      "frontend.py": "IR de animacao (frames, delays, attack boxes completas, landframe, loop, range) com spans de origem e record hasheado; testes",
+      "sms_art.py": "conversao dos 60 pose-sides com paleta P1 fixa; canvas por ator; previews PNG",
+      "sms_emit.py": "slots, tabelas de pose (mascara+origem+contagem), blocos por pose, atribuicao de bancos, perfis de banda + cortes, arc tables, tabelas de anim/IA; record de emissao",
+      "src/main.c + inc/o3/": "FSM (idle/walk/attack/jump/land/pain/fall/rise/dead), facing, hit detect (AABB+z), IA chase, uploader double-buffer com 'pose ready', probe v2",
+      "lab": "SMS_projects/_laboratorio/mapper_upload_probe: ROM 128 KB com BANK2+, SMS_mapROMBank, copia OUTI bancada->VRAM, probe de vline/vovf, medicao de bytes/frame"
+    },
+    "milestones": [
+      {"id": "M1", "nome": "smoke de mapper + uploader (laboratorio)", "gate": "ROM 128 KB roda no Emulicious; copia bancada->VRAM medida (bytes/frame); decisao patches vs upload pleno", "evidencia": "ROM + probe + registro"},
+      {"id": "M2", "nome": "IR de animacao no frontend", "gate": "parser de anims com spans/origem + testes + self-check", "evidencia": "record + testes"},
+      {"id": "M3", "nome": "conversao de arte (60 poses)", "gate": "audit_validate_resources + luma + proveniencia", "evidencia": "PNGs + record de arte"},
+      {"id": "M4", "nome": "emissao (blocos, bancos, tabelas, cortes)", "gate": "audit_sprite_line_sim (politica) + measure_vram_map + tilemap bounds", "evidencia": "inc/o3/*.h + record de emissao"},
+      {"id": "M5", "nome": "runtime (FSM/IA/hit/uploader/probe)", "gate": "build + boot + probe v2 + worst-frame", "evidencia": "ROM + build record + probe"},
+      {"id": "M6", "nome": "evidencia de input causal e pacing", "gate": "scripts emulator_input (attack->hp, jump->py, knockdown->rise, profundidades, morte, IA), capture_video, FPS/pacing, selos, claims, glitch/fidelidade", "evidencia": "sessoes + videos + relatorios"},
+      {"id": "M7", "nome": "PSG (SFX)", "gate": "capture_audio + audit_audio + psg_quality + channel binding + proveniencia", "evidencia": "wavs, manifests, captura"},
+      {"id": "M8", "nome": "docs + curadoria", "gate": "memory bank, spec-cenas (orcamento medido), TDD, revisao do escopo, learning capture", "evidencia": "docs + registry"}
+    ],
+    "tests": "unit (frontend/emissao) + gates da tabela do AGENTS.md aplicaveis ao O3 + sessoes de emulador isoladas para evidencia"
+  },
+  "assets_plan": {
+    "poses": "30 quadros x 2 lados; fonte data/source_openbor/gal_town1 (extract r2, 39 membros hasheados)",
+    "palette": "P1 14 cores herdada do O2 (indice 0 transparente); sem novas cores",
+    "bg_hud": "reuso do O2 (painel town1 + dicionario 192 + HUD 3); verificar bytes identicos na emissao",
+    "cortes": "por D9; drop estatico declarado para long fall03/death01; ordem de sacrificio por celula no emit com revisao humana",
+    "proveniencia": "nenhum pixel novo; quadros do doador com sha no extract r2; pain03/pain01 etc. referenciados nos anim txt pinados"
+  },
+  "measurements": {
+    "method": "calibracao O2 (122 pares) + medicao final + simulacao de linhas; scripts ad-hoc em /tmp/opencode (o3_measure2.py, o3_lines.py, o3_delta.py) reproduziveis a partir deste artefato e do extract r2",
+    "o3_open": {
+      "pose_sides": 60,
+      "max_cells": 29,
+      "blocks_both_bytes": 79744,
+      "pool_pairs": 1135,
+      "pool_raw_bytes": 72640,
+      "packbits_bytes": 48567,
+      "single_line_max": {"ax": 8, "long": 9},
+      "worst_pair": 17
+    },
+    "m6_runtime": {
+      "method": "sessoes isoladas frame-paced (session_bridge.isolated) com journal de cada read (bytes de RAM = traco causal); ROM unica",
+      "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+      "attack": {"session": "3536672de61245eea8a077c3acbdca04", "hit1_frames": 16, "dmg": 7, "guard_after": 12, "hit2_frames": 25, "hp": "50->43->36", "vovf": 0},
+      "jump": {"session": "7c0d84bc012244719043bf7ddd3d93a6", "maxalt": 55, "air_frames": 48, "land_frame": 62, "dx": 65, "vovf": 0},
+      "knockdown": {"session": "a64b276fc41244e2b5fe13370385adfe", "toss_frame": 32, "alt": 2, "hp": "100->95", "rise_frame": 84, "maxalt": 51, "vovf": 0},
+      "depth": {"session": "f41e8c8c089042be85fd1c9643900043", "whiff_dz": 41, "aligned_dz": 6, "hit_frames": 19, "hp": "43->36", "vovf": 0},
+      "death": {"session": "14fee45458c74fc8bf539b19898a7db2", "hits": 8, "hp_sequence": [50, 43, 36, 29, 22, 15, 8, 1, 0], "dead": 1, "death_state_frame": 114, "hud_hde": 0, "vovf": 0},
+      "target_z": {"session": "ac5b26fc6f7b418ba212adafb26dc115", "player_z": "180->221", "enemy_z": "185->206", "enemy_x": "272->231", "verdict": "pass"},
+      "attack_video": {"session": "6083d677112e4c4a9356c9034c6867d5", "hp_before": 50, "hp_after": 43, "frames": [284, 344], "distinct_frames": 37, "journal_sha256": "cb32b6abcc6cee210c93544b73f84bccf3c4e5442c40816d4bcd1350581d659f"},
+      "pacing": {"attack_hit_frames": 16, "attack_hit_seconds": 0.27, "attack_full_frames": "~60 (5 poses; o uploader D8 segura o avanco, nao e o somatorio nominal de 21 quadros)", "guard_frames": 13, "pain_frames": "~85", "walk_ratio": "1.6-1.7x mais lenta que a fonte", "toss_small": "alt 2 por windup de 15 q; TOSS exige alt>0 ou dead", "player_priority": "o jogador zera o budget do inimigo enquanto sobe pose; usado de proposito no knockdown"},
+      "fps": {"tool": "measure_runtime_probe", "windows_s": 8, "janelas": 3, "fps": [59.48, 59.66, 59.78], "verdict": "PASS"},
+      "worst_frame": {"tool": "measure_worst_frame", "frames": 3000, "vovf_delta": 0, "vline_min": 202, "verdict": "PASS"},
+      "stress_input": {"session": "d5639465181a463a926f0e01f4d7af46", "input": "RIGHT30 A2 idle20 LEFT30 B2 idle20 x30", "rom_frame": 3230, "vovf": 0, "done": 1, "verdict": "PASS"},
+      "render": {"still_session": "598625a464dc491ab18f10d55ca65588", "still_pose": "ax_a105_right", "fidelity": "100.0% em [92,68]", "fidelity_anchor": "(xh-32, base-80)", "semantic_gate": "PASS (paleta 100%, 18 cores, nao-reuso)"},
+      "render_glitch": {"status": "blocked", "reason": "exige PNGs legais 256x192 de referencia; a composicao O3 usa stream de slots + corte por linha + coluna fatiada e nao existe renderizador full-frame validado. Gerar imagens 'legais' com um segundo renderizador nao seria evidencia. Cobertura atual: audit_render_fidelity + screenshot_semantic_gate + motion timeline dos videos."}
+    }
+  },
+  "evidence_plan": [
+    "M1: ROM de laboratorio rodando no Emulicious (mapper habilitado) + probe de vline/vovf + medicao de bytes/frame da copia bancada",
+    "M3: PNGs convertidos por pose-lado + audit_validate_resources + audit_luma_floor + audit_provenance",
+    "M4: audit_sprite_line_sim com manifesto da politica de corte + measure_vram_map + audit_tilemap_bounds + audit_tilemap_mirror",
+    "M5: build record + boot + measure_runtime_probe (probe v2: py/p2state/p2z) + worst-frame por janela do probe (measure_worst_frame permanece declarado incompativel no O2; reavaliar)",
+    "M6: tracos causais por sessao (attack->hp 50->43->36; jump->py>0 e pouso; knockdown->TOSS/RISE; profundidade whiff dz41 vs hit dz6; alvo movel em z e.z 185->206; morte 8 hits->dead), videos por claim (m6_ia/attack/jump/knock/death), MWF 3000 quadros (vovf 0, vline_min 202), MRP 59.48/59.66/59.78, stress com input ate quadro ROM 3230 (vovf 0, done=1), still canonico com hit + audit_render_fidelity 100% + screenshot_semantic_gate PASS, seal_fresh_evidence_bundle + reconcile_claims + audit_claims. audit_render_glitch BLOQUEADO: sem renderizador de referencia full-frame 256x192 validado (ver measurements.m6_runtime.render_glitch).",
+    "M7: capture_audio + audit_audio + audit_psg_quality + audit_psg_channel_binding + audit_audio_provenance",
+    "M8: audit_doc_sync + audit_causal_persistence + audit_visual_delivery + audit_mastery_registry + memory bank"
+  ],
+  "open_items": [
+    "Patches intra-animacao vs upload pleno: decidido pelo throughput real medido no M1 (alvo ~600 B/frame; pior caso de upload pleno 1856 B em janelas de 3 frames)",
+    "Politica de corte (contadores de banda em RAM vs mascara expandida): escolhida por custo medido no M4; limite conhecido: contagem por linha em C custou ~1 frame/loop no O2",
+    "Cadencia de decisao da IA (throttle) a pinar no openbor.c (M5)",
+    "Caps maxfallspeed/maxtossspeed pinados (M6): entrada o3_entry_y max |delta| = 12 px/quadro; toss = 6; pulo = 6 (subida). Nao ha velocidade acumulada em runtime; o cap e o delta da propria tabela.",
+    "Semantica fina do z legacy da caixa (z_background=z_foreground) medida no M6: ataque acerta com |dz|<=15 e whiffa em dz41 (traco f41e8c8c...); a borda exata da caixa (dz 15..41) permanece nao varrida.",
+    "PSG: escopo minimo (3 SFX) declarado; musica fora; se autoria declarativa provar custosa, entregar parcial com declaracao ao dono",
+    "Emulicious com mapper: verificacao empirica no M1 (esperado suportado)",
+    "measure_fps/measure_frame_advance N/A na sessao isolada (registrado no O2); FPS/pacing por janelas do probe",
+    "Commits pendentes de autorizacao: curadoria O2 (8 arquivos) + trabalho O3 (working tree)",
+    "Origem externa dos PAKs e skills/scripts/callbacks: permanecem como registrado no O2 (unknown)"
+  ],
+  "claim_ceiling": "Escopo O3 aberto a partir de fonte pinada (openbor.c 787b6770) e medicoes calibradas (122 pares O2 reproduzidos). Contencao/extracao/medicao nao provam runtime, pacing, qualidade artistica nem aceitacao: cada claim exige o gate correspondente com evidencia fresca. Os numeros de fisica sao adaptacao frame-discreta declarada do modelo de ticks (200 Hz), nao o engine original; a escala visual permanece 1:1 herdada do O2. Mapper e a contingencia pre-autorizada do TDD com gatilho medido; PackBits fica medido e rejeitado por custo de descompressao M6: o pacing do ataque e dominado pelo uploader (D8) - o ataque completo leva ~60 quadros de jogo, nao os 21 nominais; hit causal em ~16 quadros. O still de render prova a arte autoral e o dano no HUD, nao o timing do golpe; o timing vem dos tracos de RAM."
+}

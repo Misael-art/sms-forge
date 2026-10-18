@@ -1,0 +1,156 @@
+{
+  "schema": "psg_quality_ledger_v1",
+  "date": "2026-09-25",
+  "tool": "tools/sms_wrapper/audit_psg_quality.py",
+  "motivo": "Pedido humano na curadoria de 2026-09-25: 'todos os sons foram ruidos nos testes e pessimos de se ouvir' — o acervo media PRESENCA de audio (audit_audio: peak, % ativo) e integridade de manifesto (audit_audio_provenance), nada media qualidade musical. Este ledger sela o primeiro diagnostico medido pelo piso novo (L078/L079).",
+  "eixo": "musica",
+  "medidos": [
+    {
+      "projeto": "arena_nocturna",
+      "arquivos": {
+        "music_battle.psg": {
+          "sha256_12": "ce0509261bba",
+          "veredito": "reprova",
+          "clausulas": [
+            "M1 x3",
+            "M2 x3",
+            "M3",
+            "M4 x2",
+            "M5"
+          ],
+          "numero": "3 canais em unissono total, nota nova a cada 1 frame (16 Hz), volume 1 em tudo, ruido PERIODICO modo 4 colado, loop de 96 frames (1,9 s)"
+        },
+        "music_title.psg": {
+          "sha256_12": "95ee4bc7c6f9",
+          "veredito": "reprova",
+          "clausulas": [
+            "M1 x3",
+            "M2 x3",
+            "M3",
+            "M4 x2",
+            "M5"
+          ],
+          "numero": "mesma estrutura, loop de 48 frames (1,0 s)"
+        },
+        "sfx_* (4)": {
+          "veredito": "passa",
+          "nota": "decay e duracao corretos; o gerador acerta nos SFX e erra na musica"
+        }
+      },
+      "causa": "tools/sms_wrapper/make_psg_assets.py gera as 'musicas' escrevendo a MESMA nota nos 3 canais a cada frame com atenuacao 1 e noise(0x04,1) continuo; o comentario do gerador alega 'niveis progressivamente menores' e 'arpejo' que o codigo nao implementa",
+      "divida_para_fechar": "reescrever compose() de make_psg_assets.py com grade ritmica (>= 2 frames/nota), envelopes por canal, baixo em oitava propria e percussao BRANCA gateada (mode 0-3); ou adotar rearranjo estilo gen_music_ken_stage corrigido"
+    },
+    {
+      "projeto": "hamoopig",
+      "arquivos": "identicos a arena_nocturna byte a byte (music_battle ce050926…, music_title 95ee4bc7…, SFX iguais)",
+      "veredito": "reprova (mesmas 10 violacoes por musica)",
+      "divida_para_fechar": "mesma do arena; nao copiar a saida velha do gerador de novo"
+    },
+    {
+      "projeto": "kage_matsuri",
+      "arquivos": {
+        "music_kage.psg": {
+          "sha256_12": "8a61b3e2c17b",
+          "veredito": "reprova",
+          "clausulas": [
+            "M1 x2",
+            "M2 x2",
+            "M5"
+          ],
+          "numero": "2 canais, ambos em volume estatico, nota nova a cada frame, loop de 32 frames (0,6 s); sem ch3"
+        },
+        "sfx_slash.psg": {
+          "veredito": "passa",
+          "nota": "periodico em SFX metalico e legitim (Kenseiden)"
+        }
+      },
+      "divida_para_fechar": "compor loop >= 125 frames com duracoes >= 2 frames, envelope por canal e percussao branca"
+    },
+    {
+      "projeto": "MSSF2T",
+      "arquivos": {
+        "music_battle.psg == music_ken_stage.psg": {
+          "sha256_12": "aaf1cf1b8e54",
+          "veredito": "reprova",
+          "clausulas": [
+            "M2 ch2",
+            "M4"
+          ],
+          "numero": "2 violacoes apenas, ambas cirurgicas: baixo ch2 com 1 atenuacao (2) em todo o loop de 1280 frames; percussao 99% periodica (modos 6/4/5 — o gen_music_ken_stage.py chama 'bumbo/caixa' a registros que a lib interpreta como assobio tonal; so o 'chimbal' 0x03 e branco)"
+        },
+        "music_title.psg": {
+          "sha256_12": "64acda75ca90",
+          "veredito": "reprova",
+          "clausulas": [
+            "M1 x3",
+            "M2 x3",
+            "M3",
+            "M4 x2",
+            "M5"
+          ],
+          "numero": "heranca do gerador compartilhado, loop de 12 frames (0,2 s)"
+        },
+        "sfx_* (4)": {
+          "veredito": "passa"
+        }
+      },
+      "achado_extra": "o bank declara o tema do Ken em 4 papeis, mas o .psg em disco nao tem NENHUM evento de nota em ch1 — o arpejo declarado nunca chegou ao binario; e music_ken_stage.psg e music_battle.psg sao o mesmo arquivo (SHA identico)",
+      "divida_para_fechar": "trocar modos da percussao para branco gateado (bumbo caixa prato: 0x00-0x03 com envelopes), dar 2+ atenuacoes ao baixo, restaurar o canal 1 (arpejo) no streamexportado, distinguir as duas faixas ou declara-las uma so"
+    }
+  ],
+  "leitura_final": "7 de 7 faixas de musica do corpus reprovam o piso; 5 de 5 SFX passam. O 'ruido pessimo' relatado pelo humano nao e opiniao: e a assinatura medida de unissono total a 16 Hz com assobio periodico por baixo. O piso e alcancavel — a faixa do Ken erra so 2 clausulas.",
+  "status_gerador": "2026-09-25 — make_psg_assets.py reescrito no piso: as duas musicas agora saem com 577 B (vs 1153/577 antigos), 128 frames, gap medio 4/2/8 frames, unissono 0%, ruido 100% branco gateado, envelopes em todos os canais — viol=[] e warn=[] provados por cross-check no proprio --self-check (importa audit_psg_quality). SFX byte-identicos (passavam).",
+  "pos_regeneracao": "2026-09-25 (2) — regeneracao executada nos 4 projetos; ver campo `regeneracao_2026-09-25`. Corpus em disco: 0 streams reprovados no piso. Ressalva viva: MSSF2T perdeu a prova de input por WIP do usuario em fight.c (refatoracao g_control_mode), nao por audio.",
+  "regeneracao_2026-09-25": {
+    "arena_nocturna": {
+      "estado": "fechada",
+      "rom_sha256_12": "009b40631e4b",
+      "streams": "musicas 577 B compliantes via gerador consertado; SDSC pinado (L073); 4 gates de audio + capture (peak=6207, ativo=100%) PASS"
+    },
+    "hamoopig": {
+      "estado": "fechada",
+      "rom_sha256_12": "a718fd8cab3c",
+      "streams": "idem arena (mesmas musicas novas); capture peak=5928, ativo=93%"
+    },
+    "MSSF2T": {
+      "estado": "fechada_so_audio",
+      "rom_sha256_12": "787948748779",
+      "streams": {
+        "music_battle.psg==music_ken_stage.psg": {
+          "sha256_12": "96cbafe05709",
+          "bytes": 919,
+          "frames": 672,
+          "violacao_encerrada": "M2 ch1/ch2 e M4: arpejo com acento, pizzicato no baixo, percussao 100% branca (L079); arranjo original de 8 compassos cortado para 7 por overflow medido de 33 B no makesms"
+        },
+        "music_title.psg": {
+          "sha256_12": "34a7c7617a09",
+          "bytes": 577,
+          "nota": "compliante mas continua fora da compilacao — titulo nao referencia o header"
+        }
+      },
+      "capture": "peak=6430, ativo=100% (era 89%)",
+      "ressalva": "eixo INPUT reprovado na arvore de trabalho por WIP nao-commitado em fight.c (refatoracao g_control_mode); dx=+0 sob Left, soco por teclado nao conecta; soco na atracao PASS (19 hits). Nao e causa de audio."
+    },
+    "kage_matsuri": {
+      "estado": "fechada",
+      "rom_sha256_12": "d7e94286aa1c",
+      "streams": {
+        "music_kage.psg": {
+          "sha256_12": "3f7a2d6e40b1",
+          "bytes": 577,
+          "frames": 128,
+          "violacao_encerrada": "M1/M2/M5: nova faixa via tools/gen_music_kage.py com composer consertado, escala yo em Re, envelopes e percussao branca; loop 128f no limite exato de M5"
+        }
+      },
+      "capture": "peak=6030, ativo=100%",
+      "gates": "4/4 audio + binding --require + bundle 8 artefatos + reconcile PASS; input provado dx+-98; worst-frame citado pelo ciclo foi invalidado por L082 (predicado vline>=0xC0), sem veredito válido de orçamento até re-medida"
+    }
+  },
+  "artefatos": [
+    "SMS_projects/arena_nocturna/out/logs/psg_quality.json",
+    "SMS_projects/hamoopig/out/logs/psg_quality.json",
+    "SMS_projects/kage_matsuri/out/logs/psg_quality.json",
+    "SMS_projects/MSSF2T/out/logs/psg_quality.json"
+  ],
+  "ramo_identidade_2026-09-25b": "2026-09-25 (3) — ramo 'soa acelerada / som diferente do tema original'. Piso estendido: M7 (camada que respira: maior gap medio entre notas >= 8 frames) e LOOP_MIN 125->250. Recomposicoes: arena_nocturna/hamoopig/kage conformes (#18/#19). MSSF2T: gen_music_ken_stage.py reescrito de compositor-mao para transcritor deterministico do MID de referencia hasheado (4480480137e0...): battle 750B/1280f com 0 violacoes 0 avisos (antes 919B/672f reprovando M7/LOOP), title 494B/1152f (arranjo sem bateria do mesmo tema), voz 'FIGHT' 45B/24f em formantes nos canais 1+2+3. Estado medido em disco: 0/8 MSSF2T + 0/6 arena + 0/6 hamoopig + 0/2 kage reprovados; eixo audio fechado nos 4 com captura isolada + audit_audio PASS apos re-selagem (bundles 90d5d7e7/fd458699/b1eb19bf/71af64d1). Licao institucionalizada: L080/L081, SMS_GLOBAL 65/66."
+}

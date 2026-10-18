@@ -1,0 +1,49 @@
+{
+  "curation_id": "2026-09-25_l071_l073_reconciliacao",
+  "date": "2026-09-25",
+  "scope": "reconciliacao_rom_evidencia_memoria_mssf2t_kage_probe_schema_gate_escala",
+  "origin": "Passo 2 da ordem de curadoria aprovada (conciliar ROM, evidencia, memoria e registro de maestria). MSSF2T: o fonte atual nao compilava (makesms 'Bank 1 overflow' por 16 B) porque o probe M02 cresceu sobre banco sem folga; destravado removendo probe_missed (redundante por construcao) e inits mortos. kage_matsuri: bank anunciava SHA 283e250a (09/09) e o disco tinha 1e6c4e9b (09/19) - causa raiz dupla: SDSC AUTO_DATE (recorrencia do MSSF2T/09-09) e probe em mapa proprio colidindo com o esquema canônico do measure_worst_frame. As duas ROMs foram re-buildadas e toda a cadeia de evidencia foi re-medida contra elas.",
+  "lessons": [
+    {
+      "id": "L071",
+      "status": "fechada_com_ferramenta",
+      "lesson": "RAM fixa e contrato entre a ROM e TODAS as ferramentas: dois mapas para o mesmo endereco equivalem a nenhum. O probe do kage tinha s0_x/s1_x em 0xC7EC/0xC7ED, onde a ferramenta canonica le o byte alto da word vovf e a phase; os numeros de worst-frame do kage misturavam coordenada de samurai com contador de derrame, e o byte vovf com guarda '!= 0xFF' tornava saturacao, reset e estouro indistinguiveis. Esquema canonico agora: vline 0xC7EA, vovf WORD em 0xC7EB, phase 0xC7ED, campos extras so em endereco livre; acumulador zera so no boot.",
+      "evidence": {
+        "kage_rom_sha256": "f02dfd3c749ed546d4303e1938ebb41cbc08837e8c7bbd96fae08251772419f9",
+        "kage_worst_frame_cycle": "SMS_projects/kage_matsuri/out/evidence/worst_frame_cycle.json (resultado legado invalidado por L082: o predicado vline>=0xC0 nao confirma derramamento)",
+        "kage_worst_frame_idle": "SMS_projects/kage_matsuri/out/evidence/worst_frame.json (resultado legado invalidado por L082: delta=0/vline_max=4 nao prova PASS)",
+        "mssf2t_rom_sha256": "efd7162f8c9f829b4826047d24ac2cfed5ab163e094520ee4ca1d00521892122",
+        "mssf2t_worst_frame": "SMS_projects/MSSF2T/out/evidence/worst_frame_m03.json (resultado legado invalidado por L082: vovf_delta=181/vline_max=235 usou o predicado vline>=0xC0)"
+      },
+      "rule_section": "SMS_GLOBAL §56",
+      "tool_that_measures": "measure_worst_frame.py"
+    },
+    {
+      "id": "L072",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Gate de pixel calibrado sobre capturas ESCALADAS nao vale em escala nativa: em janela 2x o bloco 8x8 da janela cobre 1/4 do tile, e o limiar de 'lixo de VRAM' (5% de blocos ricos) reprova arte densa legitima quando a captura e nativa (chao do kage: 6,7%). A unidade de forma e o TILE, nao o pixel da janela; trocar ambiente de captura (ini, scale, moldura) e mudar a unidade de medida e exige revalidar os gates geometricos.",
+      "evidence": {
+        "separacao_medida": "arte autoral nativa: kage 6,7%, MSSF2T 2,3-3,1%; ruido de VRAM sintetico em escala nativa: 100%",
+        "kage_boot_gate": "SMS_projects/kage_matsuri/out/evidence/semantic_boot_current.json (PASS apos conserto; paleta 100%)",
+        "mssf2t_boot_gate": "SMS_projects/MSSF2T/out/evidence/semantic_boot_current.json (PASS, 157 cores, dominante 19,5%)"
+      },
+      "rule_section": "SMS_GLOBAL §57",
+      "tool_that_measures": "screenshot_semantic_gate.py"
+    },
+    {
+      "id": "L073",
+      "status": "absorvida_em_doutrina",
+      "lesson": "ROM cujo SHA muda com o calendario nao sustenta selo: SMS_EMBED_SDSC_HEADER_AUTO_DATE embute data em 2 bytes e o rebuild de outro dia derruba a SHA sem mudar codigo. Recorrencia provada: MSSF2T perdeu o selo assim em 2026-09-09; o kage_matsuri carregava o mesmo macro em 2026-09-25 e foi isso que produziu a divergencia bank-vs-disco que o curador apontou (283e250a vs 1e6c4e9b). Pinado nos dois e provado por dois rebuilds byte-identicos. Ainda usam AUTO_DATE: arena_nocturna, laboratorio_01 - pinar antes de selar neles.",
+      "degrau_aberto": "gate que casa 'bank anuncia SHA X' contra 'rebuild produz X' e contra AUTO_DATE no fonte; registrado no handoff da curadoria (SMS_GLOBAL §58)",
+      "evidence": {
+        "kage_idempotencia": "build_inner rodado 3x em 2026-09-25: SHA f02dfd3c... identica em todas",
+        "mssf2t_idempotencia": "rebuild 2026-09-24/25: SHA efd7162f... identica (pin de 2026-09-09 mantido)"
+      },
+      "rule_section": "SMS_GLOBAL §58"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L074",
+    "mastery": "Nenhuma tecnica promovida nesta passada: a reconciliacao mediu o que ja estava no registry (probe SMRT, worst-frame, prova por RAM). V08/V09 permanecem como selados em 2026-09-24."
+  }
+}

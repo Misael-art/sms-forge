@@ -1,0 +1,58 @@
+{
+  "curation_id": "2026-10-08_l108_fluxo_arte_autoral_incremental",
+  "date": "2026-10-08",
+  "title": "Fluxo autoral incremental com catálogo, concept model sheet e fonte versionada",
+  "kind": "curation",
+  "scope": "Fluxo canônico de criação de arte autoral em projetos SMSForge; distinção entre registro de estilos, concept candidate e asset integrado.",
+  "authorization": "O proprietário pediu tornar oficial para pedidos futuros: catálogo expansível com rigor, model sheet no padrão validado e organização do material artístico de validação no source do jogo.",
+  "lessons": [
+    {
+      "id": "L108",
+      "status": "promovida_com_workflow_e_gate_de_cobertura",
+      "lesson": "A criação autoral avança por ciclos individuais usando model sheet aprovado, catálogo com índice estável e identidade visual separada da referência artística. Toda ficha exibe índice, obra/era, artista ou crédito individual não confirmado, papel/escopo e assinatura visual distinta. O review cobre fonte/atribuição, distinção de estilo, continuidade anatômica ombro→braço→cotovelo→antebraço→punho→mão, coesão entre vistas e layout composto; a imagem-fonte não leva títulos/régua/baseline, que entram uma vez no compositor. Grade ou lote repetido não substitui folhas individuais. Arte-fonte, prompts, composições, metadados, lineage e validações ficam versionados em data/source_art do jogo, separados de res e integração.",
+      "root_cause": "A tentativa de gerar todos os estilos em lote consumiu recursos e produziu um atlas sem folhas individuais distinguíveis. A revisão da folha 14 também revelou braço de boomerang com inserção ambígua e necessidade de explicitar artista/assinatura. Um primeiro ajuste de metadata reutilizou coordenadas de composição incompatíveis com outras fontes e foi detectado na inspeção visual antes de promoção; os drafts foram isolados e a imagem-base foi preservada fora do cartão alterado.",
+      "evidence": {
+        "owner_direction": "2026-10-08: tornar o processo oficial para futuras solicitações de arte autoral; avançar incrementalmente por custo e revisão.",
+        "model_sheet_pilot": "doc/curation/2026-10-07_piloto_model_sheet_continuidade.md",
+        "style_catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+        "reference_commits": [
+          "8052763 art(master-of-fighters): add Dr Social model sheet pilot",
+          "1afaeb0 art(master-of-fighters): add Dark-Gothic-Pop model sheet",
+          "2b858ff art(master-of-fighters): add Late-SNK model sheet"
+        ],
+        "existing_flow": "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "invalid_bulk_atlas": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_48_style_atlas_v1.png",
+        "selected_cycle_2026_10_08": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2.png",
+        "style_attribution_examples": {
+          "Ogura": "Eisuke Ogura: referência de ilustração SNK com assinatura de gesto/planos faciais; não atribui sozinho os pixels de Garou.",
+          "Shinkiro": "Toshiaki Mori (Shinkiro): visual promocional principal de KOF 98, realismo desenhado à mão/modelagem material; distinto da referência Ogura.",
+          "Gouache": "Shinichi Kameoka: designer principal de personagens de Legend of Mana, conforme fonte Square Enix."
+        },
+        "composition_qa": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/2026-10-08_bad_metadata_recomposition/draft_manifest.json",
+        "validator_self_check": "tools/sms_wrapper/audit_art_review_checklist.py --self-check; current required concept axes: document_and_layout, artist_reference_and_scope, distinctive_style_signature, pose_anatomy_and_joint_continuity, visual_cohesion_and_distinction. Layout is not exemptible; gate measures coverage/status/hash only."
+      },
+      "rule_section": "SMS_GLOBAL §102",
+      "tool_that_measures": "audit_art_review_checklist.py; audit_learning_capture.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/workflows/original-artwork.md; tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+      "measurement_limits": "Checklist and hash checks measure review coverage and artifact linkage only; they do not judge visual fidelity or prove approval, SMS conversion, runtime integration, ROM or AAA."
+    }
+  ],
+  "catalog_policy": {
+    "existing_count": 49,
+    "status": "active_reference_catalog; individual entries remain unvalidated",
+    "addition_requires": "unique ID, traceable source/hash, style dimensions, reference roles/limits, candidate status and owner approval before validation",
+    "display_requirements": "Cada ficha gerada deve exibir índice estável, referência artística e papel/escopo, além de assinatura visual distinguível. Crédito não confirmado aparece como tal; não se inventa autoria.",
+    "minimum_review_axes": [
+      "artist_reference_and_scope",
+      "distinctive_style_signature",
+      "pose_anatomy_and_joint_continuity",
+      "visual_cohesion_and_distinction",
+      "document_and_layout"
+    ],
+    "composition_rule": "Arte-fonte sem título, rótulo, régua ou baseline; o compositor adiciona cada elemento uma vez. Revisão visual final verifica alinhamento, duplicatas, sobreposição, clipping e texto nos cartões."
+  },
+  "storage_contract": "Project-local data/source_art/concept_art/<asset_id>/<style_id>/vNN stores references/roles, exact prompt, raw generation, composed model sheet, metadata, lineage and validation evidence. Preserve equivalent legacy layouts without mass migration. res/ receives only assets separately approved and contracted for integration.",
+  "default_batch": "One style/concept-sheet cycle per request; larger batches require explicit scope and are still produced incrementally.",
+  "dedup_key": "l108_original_artwork_catalog_incremental_model_sheet_source_art_20261008",
+  "measurement_limits": "Checklist gate validates required axes, statuses, notes and SHA linkage only. It does not judge anatomy, artistic distinction, visual truth, or owner approval. Inspect the composed image; independent and owner reviews remain required."
+}

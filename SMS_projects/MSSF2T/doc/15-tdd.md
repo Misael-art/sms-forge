@@ -69,8 +69,22 @@ tiles por frame, **de um lutador por vez** (`STREAM_BYTES`). Medido no gate
 `measure_runtime_probe.py`: 32B→59.5 · 64B→58.3 · 96B→57.5 · 128B→55.5 ·
 256B→40 fps. Alterar `STREAM_BYTES` sem remedir o fps não é permitido.
 
+### Worst-frame medido na ROM (2026-09-08, L061)
+Instrumento no probe SMRT (aditivo, schema 1): `probe_vline` (0xC7EA) =
+VCounter lido NO FIM do trabalho do frame, antes do wait; `probe_vovf`
+(0xC7EB) = contador saturante de frames com vline ≥ 0xC0. Leitura pelo
+gate `measure_worst_frame.py` (wrapper) no pior caso real — modo atração
+(trocas de pose de ~1 KB + HUD + projéteis):
+- **247 de ~2.700 frames derramam no VBlank** (vovf_delta; pior linha 251/262
+  NTSC) — ~9% dos frames;
+- **fps segue 60**: derrame espreme o streaming de VRAM, não o frame;
+- degrau seguinte: reduzir o stream de troca de pose (ou DMA, que o MVP
+  exclui). Número em mãos; folga zero.
+
 ## Banking
-48 KB linear (B01). Se estourar: mapper Sega — ainda não.
+48 KB linear (B01). Se estourar: mapper Sega — ainda não. (Spec de migração:
+`doc/spec-banking.md`, preparada 2026-09-08, exige cerimônia de curadoria no
+`build_inner.py`.)
 
 ## Áudio
 **Cada SFX no canal para o qual foi AUTORADO.** `make_psg_assets.py` gera
@@ -100,10 +114,12 @@ tornava o modo 2P impossível. Buffer de 8 direções para QCF; o laço varre do
 mais ANTIGO para o mais recente (a versão anterior varria ao contrário e
 reconhecia frente→baixo, disparando especial de graça na diagonal).
 
-### Troca de lado: não fabricar evidência (L053)
-O conserto (`apply_pose` quando o facing muda) está no código. O caminho só
-é exercido por pulo por cima. Não afinar a atração até Ken cruzar só para o
-teste passar. Estado: correto por leitura, não observado.
+### Troca de lado: observada (L053 fechada no ciclo 2026-09-08)
+O conserto (`apply_pose` quando o facing muda) está no código e o caminho é
+exercido e OBSERVADO por pulo por cima: `input_memory.json` registra
+`sideswap_provado=true` com `cruzou_no_ar=true` e o facing virando para o
+novo lado após aterrissar (runs de 08/09). A frase antiga "correto por
+leitura, não observado" descrevia o estado anterior à prova.
 
 ### Prova de input: memória, não pixels
 `tools/prove_input_memory.py` lê `probe_px` (P[0].x) com a emulação pausada e

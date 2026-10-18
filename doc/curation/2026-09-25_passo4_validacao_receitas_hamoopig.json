@@ -1,0 +1,35 @@
+{
+  "curation_id": "2026-09-25_passo4_validacao_receitas_hamoopig",
+  "date": "2026-09-25",
+  "scope": "passo_4_ordem_curadoria_validacao_a_frio_das_receitas_terceiro_projeto",
+  "type": "relatorio_validacao",
+  "method": "As receitas (sms-recipe-combate-1v1, sms-recipe-animacao-impacto, sms-recipe-asset-a-rom) foram executadas CONTRA o hamoopig — engine de luta 1v1 escrita independente do molde MSSF2T — sem conhecer o projeto antes, usando só o texto da receita. Nada foi construído nem rebuildado no hamoopig (trabalho do usuário não commitado no tree); só portas de leitura.",
+  "results": {
+    "receita_1_combate": {
+      "veredito": "VALIDADA — o contrato diagnosticou o projeto sem ajuda",
+      "detail": "As seis cláusulas do contrato mapeiam a código próprio do hamoopig: janela por golpe em MoveDef {startup,active,recovery,...,dano} — soco 4/4/8 dano 7, chute 6/4/10 dano 10, projétil 10/4/18 dano 12, slam dano 14, throw dano 10 (src/fighter.c:5-9); janela ativa [startup, startup+active) (fighter.c:436-437); um-golpe-um-acerto via hit_used (combat.c:51-54); guarda só com trás+sem-frente (fighter.c:288) emitindo CE_GUARD com chip 2 + stun + meter (combat.c:56-70); snapshot de contatos com fila de eventos e trade permitido (combat.c:6-35, 103-109); impacto com g_hitstop + knockback + ST_HIT/ST_KO (combat.c:94-101). O hamoopig ainda EXCEDE o molde em cláusula não-receita: medidor SP por hit/guarda — registrado como candidato a decair em cláusula quando houver segundo caso."
+    },
+    "receita_2_animacao_impacto": {
+      "veredito": "VALIDADA COMO INSTRUMENTO — o caso inválido da receita pegou violação real",
+      "detail": "audit_animation_semantics.py --manifest SMS_projects/hamoopig/doc/animation_semantics.json reprova 3× duplicate_action_under_new_name: 'musgo_punch' == 'ryo_punch', == 'musgo_idle', == 'musgo_walk' (mesma ordem de frames). É exatamente a classe de defeito da §42/L037 ('ação clonada com outro nome'). Consequência documental: o eixo validation_report do memory bank do hamoopig ('semantics OK', 2026-09-19) está vencido contra o manifest atual — o furo está no commit d64ff7a/574c206, não no trabalho sujo do usuário (diff não-tomado)."
+    },
+    "receita_3_asset_a_rom": {
+      "veredito": "VALIDADA COM DUAS CORREÇÕES DE COMANDO extraídas da execução",
+      "detail": "(a) audit_validate_resources.py --project sozinho FAIL com 'nenhum PNG informado' — o --project só contextualiza; a forma reprodutível é passar os PNGs (find res -name '*.png'): 46/46 PNGs do hamoopig dentro do contrato. (b) audit_animation_semantics.py exige --manifest explícito, não --project. Ambas corrigidas nas skills. (c) audit_provenance PASS, audit_symbol_size_sync PASS. (d) audit_rom_asset_binding --require FAIL legítimo: hamoopig nunca teve binding (doc/rom_asset_binding.json ausente) — o gate recusa exatamente como a receita descreve; sem --require ele passa com aviso, o que é o modo 'informativo' correto."
+    },
+    "achados_laterais": {
+      "rom_stale": "ROM em disco 77a79e044eb8e1541054603aee73663358ca055993e2b173c464d4ce70bb5195 (20/09 00:13) ≠ memory bank v014 4a0807ed… (19/09) — mesma patologia L073 nos projetos não reconciliados. NÃO reconstruído nem re-selado: o tree do hamoopig tem trabalho não commitado do usuário (10+ arquivos M); reconciliação pertence ao fechamento daquele projeto, não a esta validação.",
+      "sdsc": "hamoopig já usa SMS_EMBED_SDSC_HEADER com data pinada (2026,9,19) — o AUTO_DATE pendente do L073 resta só em arena_nocturna/laboratorio_01."
+    }
+  },
+  "consequencias_na_canon": [
+    "sms-recipe-asset-a-rom.md: comando de validate_resources corrigido (PNGs explícitos) com a prova dos 46 PNGs.",
+    "sms-recipe-animacao-impacto.md: comando do gate de semântica corrigido (--manifest) + o clone musgo_punch registrado como caso inválido OBSERVADO, não hipotético.",
+    "sms-recipe-combate-1v1.md: cláusulas marcadas como validadas a frio em engine independente (hamoopig), com os números de MoveDef.",
+    "Dívida nova declarada: hamoopig precisa de reconciliação ROM/bank + binding + re-medição do eixo animation-semantics ao fechar."
+  ],
+  "note_ids": {
+    "next_id": "L077",
+    "mastery": "Nenhuma lição L0xx emitida nesta passada: é relatório de validação (passo 4), sem furo novo de doutrina — os dois erros de comando eram imprecisão de texto da receita, já corrigida na própria skill."
+  }
+}

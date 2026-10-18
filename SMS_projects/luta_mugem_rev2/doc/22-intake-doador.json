@@ -1,0 +1,63 @@
+{
+  "schema": "sms_rev2_source_intake_v1",
+  "date": "2026-10-15",
+  "project": "luta_mugem_rev2",
+  "status": "raw_frozen_not_converted",
+  "packages": [
+    {
+      "fighter_id": "ken",
+      "path": "data/source_mugen/ken/Ken_Majik_.zip",
+      "sha256": "b244ec9a105fa0131b37c075dc06b032a87cf0f839f46ec7054ac60d9bd6f14c",
+      "bytes": 1152254,
+      "selected_def": "ken8/ken8.def",
+      "selected_def_sha256": "fdbe2fb2498be72078232ca68f2cc74fd8347aac2c8304c626d5f15dc68f5fc8",
+      "upstream": {
+        "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/rascunho/inputs/mugen_authorized_20260929/characters/street-fighter-zero/Ken_Majik_.zip",
+        "sha256": "b244ec9a105fa0131b37c075dc06b032a87cf0f839f46ec7054ac60d9bd6f14c",
+        "bytes": 1152254
+      },
+      "authorization": {
+        "manifest_scope": "local project analysis and implementation; redistribution unverified",
+        "license_status": "unknown",
+        "redistribution_status": "unverified"
+      },
+      "common1_in_archive": false
+    },
+    {
+      "fighter_id": "ryu",
+      "path": "data/source_mugen/ryu/ryu.zip",
+      "sha256": "6db7e29d82fff1034e8c2ddab600e500fe8377ebdeef9b626fd6b580b812300d",
+      "bytes": 1920163,
+      "selected_def": "ryu/ryu.def",
+      "selected_def_sha256": "edb3db7714b5fc47f34f702eb06c166bfec039cc96a270288a3f8050b40a01e8",
+      "upstream": {
+        "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/rascunho/inputs/mugen_authorized_20260929/characters/street-fighter-zero/ryu.zip",
+        "sha256": "6db7e29d82fff1034e8c2ddab600e500fe8377ebdeef9b626fd6b580b812300d",
+        "bytes": 1920163
+      },
+      "authorization": {
+        "manifest_scope": "local project analysis and implementation; redistribution unverified",
+        "license_status": "unknown",
+        "redistribution_status": "unverified"
+      },
+      "common1_in_archive": false
+    }
+  ],
+  "donor_audit": "data/intake/2026-10-15/donor-audit.json",
+  "sms_audit": "data/intake/2026-10-15/sms-audit.json",
+  "common_policy": "common1 missing in both; common_forge is authored adaptation, no equivalence proof; fightfx/global sounds unresolved",
+  "case_resolution": "Ryu.def requests Ryu.snd while archive has ryu.snd: case-insensitive unambiguous source resolution required, preserve actual member identity/hash",
+  "software_license": "Forge MIT code license does not grant character asset redistribution",
+  "legacy": "No mandatory dependency on luta_mugen/doc/out; same physical storage health not repaired",
+  "registry_audit": {
+    "schema": "sms_artifact_audit_v1",
+    "ok": true,
+    "problems": [],
+    "warnings": [
+      "legacy locations are not exhaustively gated; use inventory before adoption"
+    ],
+    "artifact_count": 2,
+    "indexed_file_count": 2,
+    "claim_ceiling": "organization_and_reference_consistency_only"
+  }
+}

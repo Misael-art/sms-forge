@@ -1,0 +1,38 @@
+[
+  {
+    "case": "negative_control",
+    "exit_code": 0,
+    "expected": 0,
+    "ok": true,
+    "record": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/negative_control/record.json",
+      "sha256": "e84da8a0d6976f014f699e1c5ca1f8106e7587ee124028777fa82370546f764a"
+    },
+    "report": "doc/curation/evidence/2026-10-18_observed_cases/validation/observed_negative_control.json",
+    "sha256": "09ce700f14c00411d63713c05052e2e92eed1a2d8bc126a761d55b0ee5aec402"
+  },
+  {
+    "case": "positive_control",
+    "exit_code": 0,
+    "expected": 0,
+    "ok": true,
+    "record": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/positive_control/record.json",
+      "sha256": "ac93f54aab53b1e9a227bab0d150db51157987e3e6499f266b350a14a38dee35"
+    },
+    "report": "doc/curation/evidence/2026-10-18_observed_cases/validation/observed_positive_control.json",
+    "sha256": "2e9aac6d7eb2c929895284903087fc58078da6509a92663db77fa5ba5f1c7c1e"
+  },
+  {
+    "case": "contradictory_whiff",
+    "exit_code": 1,
+    "expected": 1,
+    "ok": false,
+    "record": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/contradictory_whiff/record.json",
+      "sha256": "ac3c0e5420c28fd15722cde125d1c443e2aeef1733e2c2df055b3dbac62ab4da"
+    },
+    "report": "doc/curation/evidence/2026-10-18_observed_cases/validation/observed_contradictory_whiff.json",
+    "sha256": "415dd34d5bff0ff804af68340f7763abf276883122498df44898dd9bd3341f79"
+  }
+]

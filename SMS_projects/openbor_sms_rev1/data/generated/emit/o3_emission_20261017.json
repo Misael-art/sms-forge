@@ -1,0 +1,1058 @@
+{
+ "schema": "openbor_sms_o3_emission_v1",
+ "generated_at": "2026-10-17T00:00:00-03:00",
+ "tool": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py",
+ "scope": "O3 — emissao de combate (slots duplos, blocos bancados, politica de banda, arcs, anim)",
+ "sources": [
+  {
+   "path": "doc/artifacts/o3_combat_scope_20261016.json",
+   "sha256": "3e54c4071f54705ab427c1a12af365a5eea934a3f8624062ca482313928ea7fd",
+   "bytes": 25455
+  },
+  {
+   "path": "data/generated/art/o3_art_conversion_20261016.json",
+   "sha256": "939e973461a6b69c2ed9f6a5e84e948c6fe4ff4305316be7bd1ba93d65dd74b4",
+   "bytes": 39253
+  },
+  {
+   "path": "data/generated/ir/gal_town1_ax_model_ir_20261016.json",
+   "sha256": "e884b1a080c685394f877fc96b5df699d8ce701541131845707621be3b021929",
+   "bytes": 883602
+  },
+  {
+   "path": "data/generated/ir/gal_town1_long_model_ir_20261016.json",
+   "sha256": "0a3eebd7cb07e25d5c011594bce00793e64d3179c8d347da7c19d9b19d9f0588",
+   "bytes": 643696
+  },
+  {
+   "path": "data/generated/emit/o2_emission_20261016.json",
+   "sha256": "e3655919c4eb0c313e2bd3acd53aa8f6ed1cc66a2c7b1a0ef99dd8cd54b088e8",
+   "bytes": 13494
+  }
+ ],
+ "reused_o2": [
+  {
+   "path": "inc/o2/pal_bg.h",
+   "sha256": "d093469b89836e9a347c309079e507cb3ef5310b110cf6638eda48c20a3e54c1",
+   "bytes": 216
+  },
+  {
+   "path": "inc/o2/pal_spr.h",
+   "sha256": "b9053706f365264818672f020bbee06088d954629190feac9054c555eef5e4db",
+   "bytes": 218
+  },
+  {
+   "path": "inc/o2/bg_tiles.h",
+   "sha256": "3e61f35e84763659ed6740eda5966b88495b8260d505b91ace275a51b3d7f977",
+   "bytes": 31277
+  },
+  {
+   "path": "inc/o2/bg_cols.h",
+   "sha256": "3c9041fdf31d3a00d4e144f3a9f1628d9cb0faea19f0cd2f029353f8bf9b693c",
+   "bytes": 8991
+  },
+  {
+   "path": "inc/o2/hud_tiles.h",
+   "sha256": "07c6e29caa879abb43cc7e20b4b30b70a148d2d8aff6a8676514dba873f30247",
+   "bytes": 628
+  }
+ ],
+ "poses": {
+  "ax": {
+   "count": 32,
+   "cells_both_sides": 678
+  },
+  "long": {
+   "count": 28,
+   "cells_both_sides": 568
+  },
+  "total_cells_both_sides": 1246,
+  "max_cells": 29,
+  "slot_cells": 29,
+  "blocks_bytes": 79744,
+  "pose_index": "frame*2 + lado (0=left, 1=right)"
+ },
+ "banks": {
+  "first": 2,
+  "count": 5,
+  "bytes_each": 16384,
+  "capacity": 81920,
+  "used": 79744,
+  "free": 2176,
+  "per_bank": {
+   "2": 15552,
+   "3": 16384,
+   "4": 16320,
+   "5": 15424,
+   "6": 16064
+  },
+  "bin": {
+   "path": "res/o3/banks/o3_pose_blocks_20261017.bin",
+   "sha256": "564ea87b32627ba8b21f3e3941345aadded50172693e95d923abb0516af9f19b",
+   "bytes": 81920
+  }
+ },
+ "policy": {
+  "id": "D9-a",
+  "decision": "contagem exata por scanline (revisao D9-a2, medida): celulas 8x16 em passo de 16 px nao se sobrepoem dentro do mesmo ator, entao cada scanline visivel e coberta por <=1 linha de cada ator; line_count = o3_ax_rows[pose][rp] + ec[row] nas regioes sobrepostas; tabela estatica 32x6 (192 B ROM) + 6 contadores u8 RAM; inimigo anda a ordem de prioridade dens desc",
+  "refuted": {
+   "model": "contadores de banda (24 bandas de 8 linhas)",
+   "when": "M4, 2026-10-17, durante a emissao: o caso sintetico 9-em-linha e o solo declarado fall03/death01 divergiram do brute force linha a linha",
+   "measured": "bandas de 8 linhas conflitam linhas adjacentes (o deslocamento relativo entre atores nao e multiplo de 8), logo o contador de banda nao e a contagem da scanline: no caso declarado fall03/death01 solo caem 10 celulas (nao 1) e o blast radius e inaceitavel",
+   "verdict": "bandas refutadas por medicao; politica revisada para linhas exatas (D9-a2) sem cascata"
+  },
+  "rationale": "candidato (b) mascara expandida por (pose, bucket de z) nao fecha: ambos atores variam z (73x73) e pose (32x28) — tabela inviavel; contadores de banda nao dao contagem exata (ver refuted); linhas exatas custam 192 B ROM + 6 B RAM e ~6 comparacoes/celula",
+  "scan": {
+   "space": "32 poses ax x 28 poses long x 9 dz x 3 bases x 2 residuos",
+   "cases": 48384,
+   "max_line_peak": 8,
+   "scenes_with_drops": 30612,
+   "violations": 0
+  },
+  "crosscheck": {
+   "cases": 540,
+   "violations": 0,
+   "method": "o3_policy_crosscheck: pico da politica exata vs brute force linha a linha (o3_shadow_lines) no mesmo conjunto incluido"
+  },
+  "solo": [
+   {
+    "frame": "fall03",
+    "side": "left",
+    "drops": 1,
+    "peak": 8,
+    "dropped": [
+     {
+      "order": 10,
+      "row": 4,
+      "col": 0,
+      "dens": 26
+     }
+    ]
+   },
+   {
+    "frame": "fall03",
+    "side": "right",
+    "drops": 1,
+    "peak": 8,
+    "dropped": [
+     {
+      "order": 10,
+      "row": 4,
+      "col": 9,
+      "dens": 26
+     }
+    ]
+   },
+   {
+    "frame": "death01",
+    "side": "left",
+    "drops": 1,
+    "peak": 8,
+    "dropped": [
+     {
+      "order": 10,
+      "row": 4,
+      "col": 0,
+      "dens": 26
+     }
+    ]
+   },
+   {
+    "frame": "death01",
+    "side": "right",
+    "drops": 1,
+    "peak": 8,
+    "dropped": [
+     {
+      "order": 10,
+      "row": 4,
+      "col": 9,
+      "dens": 26
+     }
+    ]
+   }
+  ]
+ },
+ "arcs": {
+  "method": "D5 simulado por tick em Python na emissao (pos += v*100/gs; v -= g*100/gs; g=0.1; gs=200) e amostrado por frame NTSC",
+  "jump": {
+   "frames": 40,
+   "apex": 55,
+   "drift": 67,
+   "declared": {
+    "frames": 40,
+    "apex": 54,
+    "drift": 66
+   }
+  },
+  "toss": {
+   "frames": 36,
+   "apex": 46,
+   "drift": 72,
+   "declared": {
+    "frames": 36,
+    "apex": 46,
+    "drift": 72
+   }
+  },
+  "entry": {
+   "frames": 38,
+   "declared": 27,
+   "note": "divergencia declarada: D5 diz ~27 frames; com a mesma integracao do pulo simula 38 (cap maxfallspeed a pinar no M5)"
+  }
+ },
+ "anim": {
+  "ax": [
+   {
+    "id": 0,
+    "name": "idle",
+    "frames": [
+     [
+      0,
+      5
+     ]
+    ],
+    "frame_names": [
+     "idle01"
+    ],
+    "loop": 1,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 1,
+    "name": "walk",
+    "frames": [
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      7
+     ]
+    ],
+    "frame_names": [
+     "walk01",
+     "walk03"
+    ],
+    "loop": 1,
+    "land": 255,
+    "dropped_source_frames": 2
+   },
+   {
+    "id": 2,
+    "name": "attack1",
+    "frames": [
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      7,
+      9
+     ]
+    ],
+    "frame_names": [
+     "a101",
+     "a102",
+     "a103",
+     "a104",
+     "a105"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 3,
+    "name": "jump",
+    "frames": [
+     [
+      8,
+      21
+     ],
+     [
+      9,
+      255
+     ]
+    ],
+    "frame_names": [
+     "jump01",
+     "jump02"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 4,
+    "name": "pain2",
+    "frames": [
+     [
+      10,
+      5
+     ],
+     [
+      11,
+      30
+     ]
+    ],
+    "frame_names": [
+     "pain01",
+     "pain02"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 5,
+    "name": "fall2",
+    "frames": [
+     [
+      12,
+      255
+     ],
+     [
+      13,
+      5
+     ],
+     [
+      14,
+      5
+     ],
+     [
+      13,
+      5
+     ],
+     [
+      14,
+      1
+     ]
+    ],
+    "frame_names": [
+     "fall01",
+     "fall02",
+     "fall03",
+     "fall02",
+     "fall03"
+    ],
+    "loop": 0,
+    "land": 1,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 6,
+    "name": "rise",
+    "frames": [
+     [
+      14,
+      33
+     ],
+     [
+      15,
+      12
+     ]
+    ],
+    "frame_names": [
+     "fall03",
+     "rise01"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 7,
+    "name": "death",
+    "frames": [
+     [
+      14,
+      1
+     ]
+    ],
+    "frame_names": [
+     "fall03"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   }
+  ],
+  "long": [
+   {
+    "id": 0,
+    "name": "idle",
+    "frames": [
+     [
+      0,
+      5
+     ]
+    ],
+    "frame_names": [
+     "idle01"
+    ],
+    "loop": 1,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 1,
+    "name": "walk",
+    "frames": [
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      7
+     ]
+    ],
+    "frame_names": [
+     "walk01",
+     "walk03"
+    ],
+    "loop": 1,
+    "land": 255,
+    "dropped_source_frames": 2
+   },
+   {
+    "id": 2,
+    "name": "attack1",
+    "frames": [
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      9
+     ]
+    ],
+    "frame_names": [
+     "a101",
+     "a102",
+     "a103",
+     "a104"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 3,
+    "name": "pain2",
+    "frames": [
+     [
+      7,
+      5
+     ],
+     [
+      8,
+      30
+     ]
+    ],
+    "frame_names": [
+     "pain01",
+     "pain02"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 4,
+    "name": "fall2",
+    "frames": [
+     [
+      9,
+      255
+     ],
+     [
+      10,
+      5
+     ],
+     [
+      11,
+      5
+     ],
+     [
+      10,
+      5
+     ],
+     [
+      11,
+      1
+     ]
+    ],
+    "frame_names": [
+     "fall01",
+     "fall02",
+     "fall03",
+     "fall02",
+     "fall03"
+    ],
+    "loop": 0,
+    "land": 1,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 5,
+    "name": "rise",
+    "frames": [
+     [
+      11,
+      33
+     ],
+     [
+      12,
+      12
+     ]
+    ],
+    "frame_names": [
+     "fall03",
+     "rise01"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   },
+   {
+    "id": 6,
+    "name": "death",
+    "frames": [
+     [
+      11,
+      5
+     ],
+     [
+      13,
+      1
+     ],
+     [
+      11,
+      5
+     ],
+     [
+      13,
+      1
+     ],
+     [
+      11,
+      5
+     ],
+     [
+      13,
+      1
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      13,
+      2
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      13,
+      2
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      13,
+      2
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      13,
+      3
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      13,
+      3
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      13,
+      3
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      13,
+      4
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      13,
+      4
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      13,
+      4
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      13,
+      5
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      13,
+      5
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      13,
+      5
+     ],
+     [
+      13,
+      30
+     ]
+    ],
+    "frame_names": [
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "fall03",
+     "death01",
+     "death01"
+    ],
+    "loop": 0,
+    "land": 255,
+    "dropped_source_frames": 0
+   }
+  ]
+ },
+ "attacks": {
+  "ax": {
+   "slot": 2,
+   "box_abs": [
+    240,
+    142,
+    44,
+    62,
+    7,
+    15,
+    15
+   ],
+   "rel": [
+    0,
+    -62,
+    44,
+    62
+   ],
+   "damage": 7,
+   "pause": 15,
+   "depth": 15,
+   "first": 1,
+   "last": 3,
+   "active": [
+    1,
+    2,
+    3
+   ]
+  },
+  "long": {
+   "slot": 2,
+   "box_abs": [
+    240,
+    158,
+    40,
+    46,
+    5,
+    10,
+    15
+   ],
+   "rel": [
+    0,
+    -46,
+    40,
+    46
+   ],
+   "damage": 5,
+   "pause": 10,
+   "depth": 15,
+   "first": 1,
+   "last": 2,
+   "active": [
+    1,
+    2
+   ]
+  }
+ },
+ "vram": {
+  "sprite_slots": [
+   0,
+   231
+  ],
+  "sprite_tiles": 232,
+  "bg_base": 232,
+  "bg_slots": 192,
+  "hud_base": 424,
+  "hud_slots": 3,
+  "total": 427,
+  "budget": 448,
+  "margin": 21,
+  "plan": {
+   "path": "data/generated/plans/o3_vram_plan_20261017.json",
+   "sha256": "9c8831757812186f24555c09e589e30bfc59e8675a73fd3bfbac2565519a1099"
+  }
+ },
+ "manifests": [
+  {
+   "path": "data/generated/emit/o3_sprite_scene_pair_a102_left_fall03_left_dz24_20261017.json",
+   "sha256": "df776d5f3b2f5d584594a6d12535f7f42484a2301142a6ac4d962599237fb586",
+   "scene_kind": "worst_pair_declared",
+   "peak_per_line": 8,
+   "pre_policy_peak": 11,
+   "drops": 4,
+   "sat_entries": 44
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_pair_a102_right_fall03_right_dz24_20261017.json",
+   "sha256": "a13d2d2ffff2d44b3990dfeaaf68df72792ba9bc38d9e10769466aa20e172c35",
+   "scene_kind": "worst_pair_declared",
+   "peak_per_line": 8,
+   "pre_policy_peak": 11,
+   "drops": 4,
+   "sat_entries": 44
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_solo_long_fall03_left_20261017.json",
+   "sha256": "15de2dd2ca6d9f5f869ec6ce82cd77a0b6193f3a0d8733b5dbddf4abe40d2a9d",
+   "scene_kind": "solo_declared",
+   "peak_per_line": 8,
+   "pre_policy_peak": 9,
+   "drops": 1,
+   "sat_entries": 18
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_solo_long_fall03_right_20261017.json",
+   "sha256": "ee945dbefe7c026a5623b4465540e0d00933a2b9539e1fc5f546ef32a215b662",
+   "scene_kind": "solo_declared",
+   "peak_per_line": 8,
+   "pre_policy_peak": 9,
+   "drops": 1,
+   "sat_entries": 18
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_solo_long_death01_left_20261017.json",
+   "sha256": "f540c9d2d23adc6c09ea4689dde889ff0e1b2f3099aa4949eaa30880d835f7e6",
+   "scene_kind": "solo_declared",
+   "peak_per_line": 8,
+   "pre_policy_peak": 9,
+   "drops": 1,
+   "sat_entries": 18
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_solo_long_death01_right_20261017.json",
+   "sha256": "2be9ba92ba4e868d68a772a28178c8e2af08a7b11d4744886625985f273d2407",
+   "scene_kind": "solo_declared",
+   "peak_per_line": 8,
+   "pre_policy_peak": 9,
+   "drops": 1,
+   "sat_entries": 18
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan0_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "sha256": "6ccdcf390691896212746283217e6e338d14a7f70a2969b56e3ac2099353c259",
+   "scene_kind": "scan_pressure",
+   "peak_per_line": 8,
+   "pre_policy_peak": 15,
+   "drops": 23,
+   "sat_entries": 34
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan1_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "sha256": "20501411f8019dec046baa2408039f3a5c2d6a3b4c9da5ea49753348df33333c",
+   "scene_kind": "scan_pressure",
+   "peak_per_line": 8,
+   "pre_policy_peak": 15,
+   "drops": 23,
+   "sat_entries": 34
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan2_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "sha256": "a949533092ba03e6bc1f585820b7c5da63c350b3d3d0c82818e2898d82ac77a2",
+   "scene_kind": "scan_pressure",
+   "peak_per_line": 8,
+   "pre_policy_peak": 15,
+   "drops": 23,
+   "sat_entries": 34
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan3_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "sha256": "b1cc60fc2328e7d4844d4cf0b4821ee61352be02d6eafd3aa7fd73c2734d68ff",
+   "scene_kind": "scan_pressure",
+   "peak_per_line": 8,
+   "pre_policy_peak": 15,
+   "drops": 23,
+   "sat_entries": 34
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan4_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "sha256": "c39b4bd213a84b2d5f91fe85ce47ca6d3a05b291ddada9ab50235af5bdeb83de",
+   "scene_kind": "scan_pressure",
+   "peak_per_line": 8,
+   "pre_policy_peak": 15,
+   "drops": 23,
+   "sat_entries": 34
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan5_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "sha256": "709a1320c5630c5da85cf1ce93efef6cbd2a14211078f90d49b4b4dadb6bdcec",
+   "scene_kind": "scan_pressure",
+   "peak_per_line": 8,
+   "pre_policy_peak": 15,
+   "drops": 23,
+   "sat_entries": 34
+  }
+ ],
+ "checks": {
+  "art_sha_bound": 62,
+  "ir_source_sha_bound": 2,
+  "o2_reuse_sha_bound": 5,
+  "pal_p1_byte_identical_o2": true,
+  "cells_match_m3_and_scope": true,
+  "policy_crosscheck_cases": 540,
+  "policy_crosscheck_violations": 0,
+  "policy_scan_cases": 48384,
+  "policy_scan_violations": 0,
+  "solo_declared_drops": {
+   "fall03_left": 1,
+   "fall03_right": 1,
+   "death01_left": 1,
+   "death01_right": 1
+  },
+  "player_row_peak_cells": 8,
+  "long_rows_over_8": [
+   {
+    "frame": "fall03",
+    "side": "left",
+    "row_peak": 9
+   },
+   {
+    "frame": "fall03",
+    "side": "right",
+    "row_peak": 9
+   },
+   {
+    "frame": "death01",
+    "side": "left",
+    "row_peak": 9
+   },
+   {
+    "frame": "death01",
+    "side": "right",
+    "row_peak": 9
+   }
+  ],
+  "banks_fit": true,
+  "vram_total_vs_budget": [
+   427,
+   448
+  ]
+ },
+ "outputs": [
+  {
+   "path": "inc/o3/o3_poses.h",
+   "sha256": "b9bb510eafef00c1da5feaa336773bfcf5841830d45a3056abcc0ee8dcae4110",
+   "bytes": 17532
+  },
+  {
+   "path": "inc/o3/o3_blocks.h",
+   "sha256": "95d5f5a3cf165763326fc6086025c1dfc23bd70da9f4fdee27242f953c86ef8c",
+   "bytes": 1014
+  },
+  {
+   "path": "inc/o3/o3_rows.h",
+   "sha256": "94ab1cb5b58dc925bfbece1294df1137a6321dba83f822487aa1c50e76fc15c4",
+   "bytes": 1078
+  },
+  {
+   "path": "inc/o3/o3_anim.h",
+   "sha256": "1cd7c5e19af19597952c8e2108080948e47f036a28a0306083c999cb44ed5c82",
+   "bytes": 2657
+  },
+  {
+   "path": "inc/o3/o3_arcs.h",
+   "sha256": "4ee9d0ed5175967652acb234f12aa17ea2b59f8336e24cf76afd484b55a4f815",
+   "bytes": 1483
+  },
+  {
+   "path": "inc/o3/level.h",
+   "sha256": "73c358457cffc95c18533797ddb8a3bf7d95e3ac1d4539374ec01801e98a737b",
+   "bytes": 963
+  },
+  {
+   "path": "res/o3/banks/o3_pose_blocks_20261017.bin",
+   "sha256": "564ea87b32627ba8b21f3e3941345aadded50172693e95d923abb0516af9f19b",
+   "bytes": 81920
+  },
+  {
+   "path": "data/generated/plans/o3_vram_plan_20261017.json",
+   "sha256": "9c8831757812186f24555c09e589e30bfc59e8675a73fd3bfbac2565519a1099",
+   "bytes": 473
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_pair_a102_left_fall03_left_dz24_20261017.json",
+   "sha256": "df776d5f3b2f5d584594a6d12535f7f42484a2301142a6ac4d962599237fb586",
+   "bytes": 3490
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_pair_a102_right_fall03_right_dz24_20261017.json",
+   "sha256": "a13d2d2ffff2d44b3990dfeaaf68df72792ba9bc38d9e10769466aa20e172c35",
+   "bytes": 3491
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_solo_long_fall03_left_20261017.json",
+   "sha256": "15de2dd2ca6d9f5f869ec6ce82cd77a0b6193f3a0d8733b5dbddf4abe40d2a9d",
+   "bytes": 1872
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_solo_long_fall03_right_20261017.json",
+   "sha256": "ee945dbefe7c026a5623b4465540e0d00933a2b9539e1fc5f546ef32a215b662",
+   "bytes": 1873
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_solo_long_death01_left_20261017.json",
+   "sha256": "f540c9d2d23adc6c09ea4689dde889ff0e1b2f3099aa4949eaa30880d835f7e6",
+   "bytes": 1873
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_solo_long_death01_right_20261017.json",
+   "sha256": "2be9ba92ba4e868d68a772a28178c8e2af08a7b11d4744886625985f273d2407",
+   "bytes": 1874
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan0_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "sha256": "6ccdcf390691896212746283217e6e338d14a7f70a2969b56e3ac2099353c259",
+   "bytes": 3233
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan1_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "sha256": "20501411f8019dec046baa2408039f3a5c2d6a3b4c9da5ea49753348df33333c",
+   "bytes": 3262
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan2_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "sha256": "a949533092ba03e6bc1f585820b7c5da63c350b3d3d0c82818e2898d82ac77a2",
+   "bytes": 3262
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan3_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "sha256": "b1cc60fc2328e7d4844d4cf0b4821ee61352be02d6eafd3aa7fd73c2734d68ff",
+   "bytes": 3234
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan4_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "sha256": "c39b4bd213a84b2d5f91fe85ce47ca6d3a05b291ddada9ab50235af5bdeb83de",
+   "bytes": 3263
+  },
+  {
+   "path": "data/generated/emit/o3_sprite_scene_scan5_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "sha256": "709a1320c5630c5da85cf1ce93efef6cbd2a14211078f90d49b4b4dadb6bdcec",
+   "bytes": 3263
+  }
+ ],
+ "notes": [
+  "blocos por pose empacotados na ordem da tabela (jogador varredura; inimigo dens desc)",
+  "upload = copia linear banco->slot (bloco = count*64 bytes; maximo 29x64=1856)",
+  "slots duplos por ator: A/B (double buffer com 'pose ready' no M5)",
+  "corte do inimigo = politica D9-a revisada (linhas exatas, D9-a2); x nao entra na decisao (licao O2)",
+  "walk da fonte tem 4 quadros; pose set usa walk01/walk03 (walk02/04 omitidos por escopo)",
+  "ax anim attack2 (movimento, th101-103) fora do recorte O3; declarar na revisao de escopo (M8)",
+  "solo fall03/death01: 9 celulas na mesma linha do canvas -> a 9a cai (drop declarado; contagem por linha, nao por banda)",
+  "tabelas O3 cabem nos 32 KB com o codigo (O2 free_bytes = 12853; tabelas ~6 KB)"
+ ],
+ "open_items": [
+  "ordem de sacrificio fina (dens desc) pendente de revisao artistica",
+  "entry drop: 38 frames simulados vs ~27 declarados (maxfallspeed a pinar no M5)",
+  "gate temporal (audit_sprite_line_sim) roda sobre os manifests deste registro",
+  "measure_vram_map com vdp_regs de sessao: M5 (so plan-mode agora)"
+ ]
+}

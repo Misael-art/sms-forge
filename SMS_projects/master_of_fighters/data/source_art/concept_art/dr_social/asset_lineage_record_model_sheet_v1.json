@@ -1,0 +1,83 @@
+{
+  "schema": "asset_lineage_record_model_sheet_v1",
+  "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v1",
+  "created_date": "2026-10-07",
+  "status": "owner_approved_reference_for_style_series",
+  "owner_review": "approved by project owner on 2026-10-07 as the style-series baseline; independent review remains pending",
+  "style_id": "CPS2-Alpha-Cel",
+  "style_reference": {
+    "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "game": "Street Fighter Zero (Alpha)",
+    "platform_era": "Arcade (CPS-2) / 1990s",
+    "entry_status": "initial_reference_unvalidated"
+  },
+  "identity_and_palette_authorities": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "role": "owner-approved identity, face, clothing, character proportions, and equipment reference"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "project palette-role authority for Dr. Social"
+    }
+  ],
+  "style_source": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "role": "source of the CPS2-Alpha-Cel descriptors; style entry not yet independently curated"
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "prompt_file": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1_prompt.txt",
+    "prompt_sha256": "bc4aeb1f0148b566407fb34e5102b1228805abc5f5dd88b2e0d6035f7f62d346",
+    "input_image": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+    "generated_art": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1_art.png",
+      "sha256": "20d24c2d9d15a2d00e212ad7420bd5585707955a72a7a076c8f9ece505a36f42",
+      "dimensions_px": [
+        1983,
+        793
+      ]
+    },
+    "final_sheet": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+      "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+      "dimensions_px": [
+        2400,
+        1440
+      ]
+    },
+    "layout_composition": "The generated art was uniformly scaled without redraw. Exact title, five panel labels, style fields, palette chips, relative ruler, and baseline guide were typeset as layout overlays for legibility."
+  },
+  "required_views": [
+    "front full body",
+    "side-profile full body",
+    "back full body",
+    "face close-up",
+    "signature duelist pose"
+  ],
+  "design_invariants": [
+    "lean, tall, early-thirties, fully human Dr. Ferdinand Social",
+    "gray swept-back hair and round brass-rimmed glasses",
+    "blue/cyan coat or suit, teal shadows, white shirt, burgundy cravat, brown boots",
+    "cane, rapier, and occult steel boomerang; violet effect only on boomerang"
+  ],
+  "review_notes": {
+    "visual_inspection": "Five requested views are present on a clean pale-cream background. The first three are nearly aligned on a common baseline and use a relative 0–7.5H ruler. The sheet includes the selected style and all requested form fields.",
+    "pending": "Independent review of detailed axes and a separate derived-image continuity test.",
+    "not_approved_by_this_record": "sprite sheet, animation, SMS resource conversion, ROM integration, or in-emulator behavior"
+  },
+  "review_checklist": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_review_v1.json",
+    "sha256": "f67c3ff4aad09b75048ef7f1dc3f1fba0693ccddb2187d43183736804fba05e9",
+    "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_review_report_v1.json",
+    "report_sha256": "9d73cea3c046ab0fceaf3b432102a5bcc20077f070d7a3c0dba181bd7f16d49e",
+    "status": "owner_approved_reference; independent review pending",
+    "pending_axes": 13,
+    "owner_approval": true,
+    "independent_review": "pending_assignment"
+  },
+  "claim_ceiling": "Owner-approved concept/model sheet reference; independent review and derived-generation continuity are not yet demonstrated."
+}

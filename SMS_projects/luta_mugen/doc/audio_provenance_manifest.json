@@ -1,0 +1,88 @@
+{
+  "assets": [
+    {
+      "file": "res/audio/sfx_shot.psg",
+      "origin": "stream autoral sintetizado para PSGlib",
+      "author": "SMSForge",
+      "tool": "tools/sms_wrapper/make_psg_assets.py",
+      "role": "soco B1",
+      "channels": "SFX_CHANNEL2",
+      "frames": 6,
+      "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+      "bytes": 25,
+      "format": "PSGlib stream"
+    },
+    {
+      "file": "res/audio/sfx_hurt.psg",
+      "origin": "stream autoral sintetizado para PSGlib",
+      "author": "SMSForge",
+      "tool": "tools/sms_wrapper/make_psg_assets.py",
+      "role": "chute B2 / impacto pesado",
+      "channels": "SFX_CHANNEL3",
+      "frames": 16,
+      "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+      "bytes": 49,
+      "format": "PSGlib stream"
+    },
+    {
+      "file": "res/audio/sfx_hit.psg",
+      "origin": "stream autoral sintetizado para PSGlib",
+      "author": "SMSForge",
+      "tool": "tools/sms_wrapper/make_psg_assets.py",
+      "role": "contato do golpe",
+      "channels": "SFX_CHANNELS2AND3",
+      "frames": 6,
+      "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+      "bytes": 37,
+      "format": "PSGlib stream"
+    },
+    {
+      "file": "res/audio/sfx_down.psg",
+      "origin": "stream autoral sintetizado para PSGlib",
+      "author": "SMSForge",
+      "tool": "tools/sms_wrapper/make_psg_assets.py",
+      "role": "KO",
+      "channels": "SFX_CHANNEL3",
+      "frames": 30,
+      "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+      "bytes": 91,
+      "format": "PSGlib stream"
+    },
+    {
+      "file": "res/audio/music_battle.psg",
+      "origin": "stream autoral sintetizado para PSGlib",
+      "author": "SMSForge",
+      "tool": "tools/sms_wrapper/make_psg_assets.py",
+      "role": "loop original da arena",
+      "channels": "music channels 0-3",
+      "frames": 896,
+      "sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa",
+      "bytes": 1001,
+      "format": "PSGlib stream"
+    },
+    {
+      "file": "res/audio/sfx_special.psg",
+      "origin": "stream autoral sintetizado para PSGlib",
+      "author": "SMSForge",
+      "tool": "data/task7_psg_authoring.json",
+      "role": "especial QCF+B1",
+      "channels": "SFX_CHANNELS2AND3",
+      "frames": 12,
+      "sha256": "96d853814146600bf9ac43469a81c7c18785f264c0a8e86a9ee0256a36ed3b59",
+      "bytes": 73,
+      "format": "PSGlib stream"
+    },
+    {
+      "file": "res/audio/sfx_round.psg",
+      "origin": "stream autoral sintetizado para PSGlib",
+      "author": "SMSForge",
+      "tool": "data/task7_psg_authoring.json",
+      "role": "inicio da rodada",
+      "channels": "SFX_CHANNEL2",
+      "frames": 16,
+      "sha256": "17ca8275035f79c98dcf1d170c283ba0c4635021936965d6a511b4adc195d694",
+      "bytes": 33,
+      "format": "PSGlib stream"
+    }
+  ]
+}

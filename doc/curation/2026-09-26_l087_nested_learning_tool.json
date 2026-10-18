@@ -1,0 +1,20 @@
+{
+  "curation_id": "2026-09-26_l087_nested_learning_tool",
+  "date": "2026-09-26",
+  "scope": "learning_capture_nested_tools",
+  "authorization": "curadoria necessária para fechar a ferramenta mensurável L086 no fluxo SMSForge",
+  "lessons": [
+    {
+      "id": "L087",
+      "status": "fechada_com_ferramenta_e_regra",
+      "lesson": "audit_learning_capture.py truncava referências nested para o basename e buscava ferramentas somente na raiz, em desacordo com a descoberta recursiva L085.",
+      "evidence": {
+        "observed": "A auditoria de doc-sync passou; audit_learning_capture rejeitou mugen2sms/analysis/scale_pilot.py como ferramenta inexistente, embora o arquivo estivesse no wrapper.",
+        "correction": "O extrator preserva caminho relativo completo e o self-check cobre nested existente e ausência do mesmo arquivo.",
+        "validation": "PASS: audit_learning_capture.py --self-check cobriu caminho nested presente e ausente; audit_learning_capture.py --root . passou sincronismo JSON/IDs/ferramentas/doutrina."
+      },
+      "rule_section": "SMS_GLOBAL §72",
+      "tool_that_measures": "audit_learning_capture.py"
+    }
+  ]
+}

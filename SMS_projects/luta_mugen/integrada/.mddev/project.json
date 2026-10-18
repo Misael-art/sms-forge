@@ -1,0 +1,28 @@
+{
+ "name": "scale_pilot_80px",
+ "platform": "sega_master_system",
+ "region_target": [
+  "NTSC",
+  "PAL"
+ ],
+ "toolchain": {
+  "compiler": "sdcc>=4.2",
+  "sdk": "devkitSMS",
+  "libs": [
+   "SMSlib",
+   "PSGlib"
+  ],
+  "makesms_extra": [
+   "-pm",
+   "-mbank",
+   "assets/banks/banks_integrada.bin:0:36:2"
+  ]
+ },
+ "skeleton_version": 1,
+ "gates": [
+  "build",
+  "resources",
+  "sprite_scanline"
+ ],
+ "specialization": "diagnostic_scale_pilot"
+}

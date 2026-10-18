@@ -1,0 +1,143 @@
+{
+  "curation_id": "2026-10-05_l057_sessoes_privadas_emulicious",
+  "date": "2026-10-05",
+  "title": "Emulicious privado por sessao e controles SMS locais ao processo",
+  "kind": "curation_followup",
+  "authorization": "Pedido explicito do dono: avaliar plano SGDK e fazer o mesmo no SMSForge",
+  "scope": "SMSForge emulator tooling; Linux host; original pinned Emulicious JAR; SMS profile",
+  "lessons": [],
+  "applied_lessons": [
+    "L057",
+    "L039",
+    "L065",
+    "L035",
+    "L071"
+  ],
+  "rule_section": "SMS_GLOBAL §93; §46 superseded for ownership",
+  "tool_that_measures": "emulator_session.py; session_bridge/acceptance.py; measure_runtime_probe.py; capture_evidence.py; capture_video.py; session_bridge/audio_acceptance.py; capture_audio.py",
+  "dedup_key": "l057_private_emulicious_session_smsjoypad_2026_10_05",
+  "decision": {
+    "sgdk_method": "adapted: private display, in-process controls, session-bound evidence",
+    "sms_input": "Two SMSJoypad devices + console provider inside JVM; no SDL2/JInput physical/host keyboard injection",
+    "jar_modified": false,
+    "jar_sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d",
+    "status": "testado_em_emulador; diagnostic scope; not gameplay/AAA delivery"
+  },
+  "evidence": {
+    "acceptance": "doc/curation/evidence/2026-10-05_emulicious_isolated/acceptance.json",
+    "acceptance_sha256": "f216aad194df9582f137f3936faa7cf72781fce2d6acb1bcc2790f59ca2c3ee3",
+    "checks": {
+      "two_distinct_roms_displays_processes": "pass",
+      "separate_sram_rom_observed_writes": "pass",
+      "parallel_exact_17_29_frames_no_cross_input": "pass",
+      "all_six_sms_controls_both_ports_both_roms": "pass",
+      "console_pause_nmi": "pass",
+      "wrong_session_token_stale_sequence_rejected": "pass",
+      "atomic_frame_script_release_and_rom_count": "pass",
+      "private_keyboard_events_do_not_change_rom_input": "pass",
+      "physical_device_paths_hidden_in_target": "pass",
+      "video_one_framebuffer_per_vdp_frame": "pass",
+      "canonical_runtime_probe_private_realtime_route": "pass",
+      "separate_informative_framebuffers_and_seals": "pass",
+      "bundle_rejects_changed_rom": "pass",
+      "owned_shutdown_other_session_survives": "pass",
+      "closed_session_rejected": "pass",
+      "shared_config_unchanged": "pass"
+    },
+    "frame_script": [
+      17,
+      29
+    ],
+    "runtime_probe": {
+      "scope": "controls diagnostic only",
+      "fps_janelas": [
+        59.93,
+        59.62
+      ],
+      "host_load": [
+        2.7158203125,
+        4.1181640625,
+        4.740234375
+      ]
+    },
+    "bundles": [
+      "doc/curation/evidence/2026-10-05_emulicious_isolated/bundles/8fe5daef62984a83b54a4a190779f1e7",
+      "doc/curation/evidence/2026-10-05_emulicious_isolated/bundles/f53272b069a8460589ca3d71c189c8d8"
+    ],
+    "private_audio": "v4 tested: muted from Emulicious.main; zeros prime stream; exact-PID sink membership read back before unmute; boot buffer discarded; stable line plus silent keepalive during pause/mute. 8 audio checks pass. MSSF2T peak 6012; simultaneous silent control peak 0; both 8.173s/8s. Muted audible ROM peak 0 for 2.229s. Signal/routing only.",
+    "physical_hotplug": "not_exercised; /dev/input and /dev/uinput denial observed in both target namespaces",
+    "keyboard": "private-display keyboard events did not alter ROM input; no desktop input/focus commands issued",
+    "sram_persistence": "two rom.sav files saved separately; first byte observed as 1 and 2",
+    "reference_comparison": "not_exercised; original JAR hash preserved",
+    "reference_comparison_audio": "MSSF2T.sms (built 2026-10-05) via private session: peak 5947, 6.7s vs historical audio_ref.wav peak 5975; spectral bins partially overlap (100,120,400 Hz). Windows differ; consistent, NOT equivalent",
+    "concurrency_measurement": "luta_mugen.sms SMRT via private session, 6s x3 windows, with 0/4/8 own busy-loop stressors (loadavg 4.5->12.1): fps 47.7/43.6/42.9, 47.9/42.8/43.0, 47.8/42.9/42.9. No substantial extra variation observed under these added stressors. This does not rule out host/backend cost without an idle-host control. ROM exceeding its frame budget is an unconfirmed hypothesis (needs measure_worst_frame). No idle-host run exists; UPDATE: uninterrupted run shows ~57.3 fps and no VBlank overflow, so the 43-49 fps from measure_runtime_probe windows is NOT shown to be ROM budget; likely sensitive to the pause/read cycle between windows (unverified, needs control with identical windows on a ROM with known 60 fps)",
+    "private_audio_v2_historical": "v2: sink per session; host policy reroutes even explicit sinks (PULSE_SINK and ALSA pcm device both ineffective), so exact-PID stream moved post-hoc before start returns (audio_route); capture requires effective>=95% (MSSF2T 8.17s/8s peak 6005; concurrent silent control probe.sms peak 0); sink unloaded only after emulator exit and close waits for it; acceptance.py re-run passes on this version. Signal only",
+    "boot_audio_followup": {
+      "audio_acceptance": "doc/curation/evidence/2026-10-05_emulicious_isolated/boot_audio_followup/final/audio/audio_acceptance.json",
+      "audio_acceptance_sha256": "3bd0577029d13f566450a8fe30deec7d630bdc01bcb0e2514460210685ce3dc9",
+      "controls_acceptance": "doc/curation/evidence/2026-10-05_emulicious_isolated/boot_audio_followup/final/controls/acceptance.json",
+      "controls_acceptance_sha256": "948937299c74913861cb159accf47a6af422189ae751fd5280a0eb939fd55393",
+      "inventory": "doc/curation/evidence/2026-10-05_emulicious_isolated/boot_audio_followup/inventory.json",
+      "audio_checks": 8,
+      "control_checks": 17,
+      "software_sha256": {
+        "tools/sms_wrapper/session_bridge/ForgeSMS.java": "99d4d2e95ce91c05f60d54f5ccc2c877e9c7f68a0aadf52cf5be603da2daba3d",
+        "tools/sms_wrapper/session_bridge/isolated.py": "cf768a158b035e18c54ac65776b66e5c6aac7811b19d78bd5ec90c3eed0c1e6d",
+        "tools/sms_wrapper/session_bridge/audio_acceptance.py": "10b3d34258b2f8aa0a448fb9ca7014ed0782a8b43258d297fa6b8b80d58f67ac",
+        "tools/sms_wrapper/session_bridge/acceptance.py": "717d2b341d9e8db281f3a6ab83195a6d9785bc9fcdc78ee9845e2ddc5e1640d9",
+        "tools/sms_wrapper/capture_audio.py": "263e65753642b150bc1a6cf866400a3894b7f650c027db0fc4e2df2abe83b742"
+      },
+      "scope": "current Linux host, pinned Emulicious, SMS; no default-monitor recording",
+      "negative_rounds": "doc/curation/evidence/2026-10-05_emulicious_isolated/boot_audio_followup/failures/negative_rounds.json",
+      "corrections": [
+        "zero keepalive needed in addition to stable line for repeated pause/mute validation",
+        "complete Xvfb displayfd line required before closing readiness pipe",
+        "negative routing fixture uses tampered private sink contract; physical move can be restored by host before readback"
+      ]
+    },
+    "consumers": "see doc/matriz-consumidores-sessoes-privadas.md; prove_input 7/7, round lifecycle PASS, hamoopig walk/punch PASS, consumer_acceptance 14 checks PASS (out/local_study/sms_isolated_session/consumer_acceptance/consumer_acceptance.json)",
+    "worst_frame_mugen": "measure_worst_frame.py --session (new, no DAP): luta_mugen.sms SHA 84da5a20.., run real-time 100 s with zero reads in window, one read after seal: verdict pass, 3000 sealed frames, vovf_delta=0, vline_min=200; ROM frame counter 22->5750 in ~100 s = ~57.3 fps average (host loadavg 1.3->4.3, no control). Covers unattended boot/attract+IDLE only, not fight worst-case (hits/specials). Evidence: SMS_projects/luta_mugen/out/evidence/sessions/a4b1f53e.../worst_frame/wf_mugen.json (sha256 dfef75f1...)"
+  },
+  "mugen_integration": {
+    "cause": "trace_buf __at(0xC800) overlapped tl_snap 0xC800-0xC810, frame_cache_storage 0xC810-0xC86C, pose_runtime_cache 0xC900-0xC930 (map confirmed before change)",
+    "solution": "trace_buf relocated to 0xD200-0xDA00 (diagnostic clone only; canonical ROM untouched); 8-byte 0xA5 guard at 0xDA00 between trace and stack; capacity unchanged (170 records x 12 B + 8 B header); no cache removed",
+    "budget": "DATA 0xC000-0xC79A; absolutes 0xC7A0-0xC930; sat_y/sat_xt 0xD000-0xD0D8; tmpl 0xD100-0xD1F0; trace 0xD200-0xDA00; guard 0xDA00-0xDA08; stack SP 0xDFF0 => >=1.5 KB reserve (call depth not measured)",
+    "gate": "check_ram_layout runs before the emulator; runtime verifies magic/header, count==170, rec size and guard bytes before accepting the trace",
+    "demonstrated": "idle, soco, soco_p2 produced 170 ticks in concurrent private sessions; soco moves only P1 state, soco_p2 only P2; guard intact",
+    "limits": "stack depth not measured; guard detects only overruns that reach 0xDA00; trace proves fight state, not render/SAT"
+  },
+  "factory_checks": {
+    "selftest": "pass 71/71",
+    "measurement_tools": "pass 51/51",
+    "doc_sync": "pass",
+    "learning_capture": "pass",
+    "wrapper_runtime_smoke": "pass: emulator_input --session, capture_video --session, capture_evidence --session; capture_audio muted rejected as expected",
+    "mugen_trace_RAM_gate": "pass: rejected current RAM overlap before emulator launch",
+    "boot_audio_followup": {
+      "selftest": "71/71 pass",
+      "measurement_tools": "51/51 pass",
+      "audio_acceptance_self_check": "pass",
+      "doc_sync": "pass",
+      "learning_capture": "pass",
+      "scope": "factory offline gates plus separately linked final emulator batteries"
+    }
+  },
+  "plan": "doc/plano-sessoes-emulicious-isoladas.md",
+  "claim_ceiling": "isolated diagnostic controls/framebuffer/session binding and private audio routing, muted boot, signal/duration on current host; diagnostic FPS only, no target-game/musical fidelity/AAA approval",
+  "limits": [
+    "Physical joystick/hotplug run still open",
+    "Complete target-ROM reference comparison still open",
+    "OpenBOR consumer absent in this wrapper",
+    "Other project-local scripts not automatically migrated",
+    "Gate 4: project-local scripts (hamoopig, kage_matsuri, luta_mugen tools, run.sh) not migrated; projects have uncommitted changes from others",
+    "Gate 5: no idle-host control; load-independence shown only up to loadavg 12 on 8 cores, one ROM, one host",
+    "Audio: reference comparison uses different excerpts; not equivalence",
+    "Boot mute and private route are validated only for this pinned JAR/backend; host policy or backend changes require renewed acceptance.",
+    "Aligned musical-reference comparison remains open; signal is not musical correctness.",
+    "No default-monitor recording or human-audible host leakage claim; zero PCM gating and stable routing were exercised on session-private monitors.",
+    "Consumers pending: hamoopig prove_basic/guard/throw/special/capture_*, MSSF2T and kage_matsuri prove_input_memory/prove_poses/measure_worst_frame_cycle",
+    "t5_input_memory.json (shared, untracked) was overwritten by the migrated run; per-session copies are now written",
+    "hamoopig P2 is not human-consumed; P1/P2 separation on a ROM proven only by controls_probe fixture",
+    "measure_worst_frame --session covers sealed first 3000 frames only (attract/IDLE); fight worst-case needs scripted input before the seal"
+  ]
+}

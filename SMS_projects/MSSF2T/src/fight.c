@@ -18,6 +18,17 @@ unsigned char g_banner;
 unsigned char g_banner_id;
 unsigned char g_shake;
 
+/* Probe SMRT — definidos em src/main.c (mapa 0xC7E0..0xC7FC). Escritas
+ * ADITIVAS de instrumentacao: medir a janela REAL do soco na RAM (collide()
+ * exige gap in (-4,24); separate() com PUSH_W=20 para os corpos em 20/21)
+ * antes de qualquer remedio. volatile e obrigatorio (L009): sem ele o SDCC
+ * apaga a escrita e o diagnostico se inverte. */
+extern volatile unsigned char probe_timer;    /* P[0].timer            */
+extern volatile unsigned char probe_atkwin;   /* startup+active do P1  */
+extern volatile unsigned char probe_gap;      /* P[1].x - P[0].x       */
+extern volatile unsigned char probe_hitstop;  /* g_hitstop             */
+extern volatile unsigned char probe_hitused;  /* P[0].hit_used         */
+
 /* Paleta do cais — espelha PAL em tools/author_stage_ken.py.
  * Os indices 0, 1, 13 e 14 sao TRAVADOS: HUD preto, fonte branca e as duas
  * cores das barras de vida (src/hud.c) dependem deles. */
@@ -656,9 +667,15 @@ static void apply_hit(unsigned char att, unsigned char def, unsigned char dmg) {
 static void collide(void) {
     unsigned char a, b;
     signed int ax, ay0, ay1, bx, by0, by1;
+    /* Probe atkwin (aditivo): collide JA paga o teste de estado por lutador,
+     * entao a janela ativa do P1 sai daqui por ~14 bytes em vez de ~30 no
+     * fight_update. Zerado no topo: quem nao esta em PUNCH/KICK deixa 0. */
+    probe_atkwin = 0;
     for (a = 0; a < 2; a++) {
         b = (unsigned char)(1 - a);
         if (P[a].state != ST_PUNCH && P[a].state != ST_KICK) continue;
+        if (!a)
+            probe_atkwin = (unsigned char)(P[0].startup + P[0].active);
         if (P[a].hit_used) continue;
         if (P[a].timer < P[a].startup) continue;
         if (P[a].timer >= (unsigned char)(P[a].startup + P[a].active)) continue;
@@ -696,6 +713,10 @@ static void collide(void) {
 static void separate(void) {
     signed int d = P[1].x - P[0].x;
     signed int push;
+    /* Probe (aditivo): o gap COM SINAL e exatamente este d ANTES do modulo
+     * abaixo. Escrito aqui porque o subtrator 16-bit ja e pago pelo jogo —
+     * duplica-lo no fight_update custava ~10 bytes de um teto de ~44. */
+    probe_gap = (unsigned char)d;
     /* No ar nao ha empurrao: pular POR CIMA do oponente e movimento basico do
      * genero, e a caixa de corpo bloqueava isso mesmo com o lutador a meia
      * altura. Era tambem o que impedia os lados de trocarem — sem troca de
@@ -923,6 +944,20 @@ void fight_update(unsigned int keys) {
             title_enter();
         return;
     }
+    /* Instrumentacao do soco (aditiva, nenhuma logica muda): o estado da
+     * colisao tem de ficar visivel TAMBEM quando o hitstop congela o update
+     * abaixo — o early-return comeria a escrita e o probe mostraria um
+     * hitstop que nunca existiu. Por isso a escrita vem ANTES do return.
+     * Forma compacta de proposito: a ROM tem ~44 bytes de teto antes do
+     * banco estourar no makesms (reserva 0x7F80..0x7FFF do header). */
+    probe_hitstop = g_hitstop;
+    probe_timer = P[0].timer;
+    probe_hitused = P[0].hit_used;
+    /* probe_atkwin mora em collide() (ver la, ~14 B em vez de ~30 aqui) e
+     * probe_gap mora em separate() (o subtrator 16-bit ja e pago pelo jogo).
+     * O gap e a janela ficam congelados durante o hitstop — o valor verdade,
+     * nada se mexe; hitstop/timer/hitused sao reescritos todo frame aqui,
+     * ANTES do early-return, para nunca ficarem invisiveis. */
     if (g_hitstop) { g_hitstop--; return; }
 
     g_tics++;

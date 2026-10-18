@@ -1,0 +1,41 @@
+{
+  "curation_id": "2026-10-10_l113_animation_contract_minimum_principles",
+  "date": "2026-10-10",
+  "title": "Contrato de animação com estados, trilhas de objetos e princípios mínimos",
+  "kind": "lesson",
+  "scope": "Fluxo canônico de criação de sprite sheets para projetos Sega Master System; aplicado no exercício Dr. Social de Master of Fighters.",
+  "authorization": "Pedido explícito do proprietário para corrigir a estrutura de sprite sheets, registrar um fluxo canônico de curadoria, pesquisar o arsenal de Dr. Social e documentar estados, poses, contagens e princípios de animação.",
+  "lessons": [
+    {
+      "id": "L113",
+      "status": "regra_canonica_registrada_com_gate_e_exercicio_proposto_nao_renderizado",
+      "lesson": "Antes de produzir uma folha animada, cada sequência declara gatilho/finalidade, loop ou transição, estado inicial/final, IDs e contagem de poses-fonte, duração por pose e trilha própria do personagem e de cada objeto/efeito animado. Avaliar os 12 princípios Disney; no mínimo sete devem ter aplicação contextual planejada ligada a IDs de quadro, e cada princípio restante precisa de justificativa. Diferenciar poses desenhadas de objetos 8x8/8x16, tiles, SAT, VRAM, RAM/ROM e VBlank; custos não medidos permanecem pending. Uma proposta não prova os pixels, física, balanceamento ou funcionamento em ROM.",
+      "root_cause": "A skill de animação listava um subconjunto dos princípios e não impunha um contrato uniforme de endpoints, número de poses, tempo por pose ou tracks separados para armas/projéteis. Os fluxos de revisão também não verificavam um mínimo aplicado por sequência. Sem esquema mensurável, uma folha poderia chegar à produção com ação ambígua, prop sem estado ou contagem de desenhos confundida com objetos físicos do VDP.",
+      "evidence": {
+        "owner_feedback": "O proprietário pediu correção estrutural da criação de sprite sheets, declaração de poses/movimentos de personagem e objetos, estado inicial/final, número de sprites e aplicação contextual mínima de sete dos 12 princípios.",
+        "previous_skill_gap": "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md listava staging, anticipation, timing/spacing, arcs, follow-through, exaggeration, solid drawing, appeal e pose-to-pose, sem contrato obrigatório de entrada/saída, trilha de objetos ou mínimo sete.",
+        "exercise_contract": "SMS_projects/master_of_fighters/doc/dr_social_animation_contract_v1.json",
+        "exercise_readable_doc": "SMS_projects/master_of_fighters/doc/dr_social_animation_contract_v1.md",
+        "exercise_status": "24 sequências / 191 poses-fonte propostas; 20 estados comuns e quatro candidatos de combate. Nenhum PNG foi desenhado; move set e frame data aguardam decisão do dono, teste de jogo e orçamento SMS.",
+        "source_research": [
+          {
+            "url": "https://gamefaqs.gamespot.com/sms/588099-master-of-darkness/faqs/44643",
+            "role": "walkthrough secundário para controles e inventário de armas do jogo SMS",
+            "limit": "Não prova frame-data de luta; diverge de outra fonte nos nomes de armas primárias."
+          },
+          {
+            "url": "https://bdjogos.com.br/manuais/58-master-of-darkness-master-system-manual-bra.pdf",
+            "role": "manual escaneado como fonte primária a confrontar",
+            "limit": "Sem OCR utilizável nesta consulta; leitura visual/manual e confronto com a ROM ainda pendentes."
+          }
+        ],
+        "validation": "audit_animation_contract.py --self-check passou; a validação do manifesto passou com 24 sequências."
+      },
+      "rule_section": "SMS_GLOBAL §109",
+      "tool_that_measures": "tools/sms_wrapper/audit_animation_contract.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md; tools/sms_wrapper/.agent/workflows/new-visual-asset.md; tools/sms_wrapper/.agent/workflows/art-review.md; SMS_projects/master_of_fighters/doc/asset_conversion_proof_standard_v4.md",
+      "measurement_limits": "O gate mede completude estrutural, endpoints, tracks, contagem declarada, revisão dos 12 princípios e mínimo sete aplicados; não analisa pixels nem valida anatomia, fidelidade, física, hitboxes, balanceamento, paleta, desempenho, hardware real, ROM ou verdade artística. `source_pose_count` não estima objetos físicos nem tiles únicos. Medição por scanline, SAT, VRAM/residência, RAM/ROM/banking e pior VBlank depende dos PNGs e do orçamento/runtime. O moveset de Dr. Social não foi aprovado; fontes comunitárias divergem sobre nomes de armas primárias e exigem conferência no manual/ROM."
+    }
+  ],
+  "dedup_key": "l113_animation_sequence_contract_seven_principles_object_tracks_20261010"
+}

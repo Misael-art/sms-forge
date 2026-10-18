@@ -23,7 +23,7 @@ Uso: measure_runtime_probe.py --rom X.sms [--project D] [--seconds 8]
                                 [--janelas 2] [-o saida.json] [--self-check]
 Exit: 0 eixos provados | 1 probe/canal reprovado | 2 ambiente ausente | 3 uso
 """
-import sys, os, json, time, argparse, subprocess, shutil, hashlib
+import sys, os, json, time, argparse, subprocess, shutil, hashlib, math
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -33,14 +33,69 @@ from schema_guard import (load_schema, validate as validate_instance,       # no
                           schema_path, SchemaUnsupported)
 import capture_evidence as CE                                               # noqa: E402
 
+PROBE_BLOCK = 0xC700          # base canonica do corredor de sondas (contrato)
 PROBE_BASE = 0xC7E0
 HEADER_LEN = 5
 FRAME_ADDR = 0xC7F0
+# v2 (D10, 2026-10-17): 0xC7FB = profundidade do jogador ("pz", nome do
+# proprio fonte); 0xC7FD = altitude ("py"); 0xFC/0xFE/0xFF = alvo movel.
 SNAP_ADDRS = {"hp": 0xC7F2, "score": 0xC7F3, "boss": 0xC7F4, "over": 0xC7F5,
               "state": 0xC7F6, "wave": 0xC7F7, "keys": 0xC7F8,
-              "px": 0xC7FA, "py": 0xC7FB}
+              "px": 0xC7FA, "pz": 0xC7FB, "p2x": 0xC7FC, "py": 0xC7FD,
+              "p2state": 0xC7FE, "p2z": 0xC7FF}
+OFFSETS = {"base": 0xE0, "frame": 0xF0, "hp": 0xF2, "score": 0xF3, "boss": 0xF4,
+           "over": 0xF5, "state": 0xF6, "wave": 0xF7, "keys": 0xF8,
+           "px": 0xFA, "pz": 0xFB, "p2x": 0xFC, "py": 0xFD, "p2state": 0xFE,
+           "p2z": 0xFF}
+
+
+def apply_probe_block(block):
+    """Move the whole probe contract to another corridor, keeping every offset.
+
+    Um projeto cujo _DATA encosta em 0xC790 nao pode manter as sondas la: o map
+    mostra as variaveis da SMSlib/PSGlib caindo DENTRO do corredor (a escrita de
+    probe corrompe o estado do stream e a leitura vira lixo — L089, medido
+    2026-10-14). A saida e o projeto declarar outra base (ex. 0xC900) e o tool
+    ler la. O default continua 0xC700, entao nenhuma ROM existente muda.
+    """
+    global PROBE_BLOCK, PROBE_BASE, FRAME_ADDR, SNAP_ADDRS
+    if not (0xC000 <= block <= 0xDF00):
+        raise ValueError("base do corredor fora da RAM do SMS: %s" % hex(block))
+    if (block & 0xFF) or not (0xC000 <= block + 0x100 <= 0xE000):
+        raise ValueError("base do corredor precisa ser uma pagina (0xXX00): %s"
+                         % hex(block))
+    PROBE_BLOCK = block
+    PROBE_BASE = block + OFFSETS["base"]
+    FRAME_ADDR = block + OFFSETS["frame"]
+    SNAP_ADDRS = {k: block + OFFSETS[k]
+                  for k in ("hp", "score", "boss", "over", "state", "wave",
+                            "keys", "px", "pz", "p2x", "py", "p2state",
+                            "p2z")}
+    return PROBE_BASE
+
+
 MIN_OVERSAMPLE = 3.0     # janela >> latencia de pause/continue (§36.1)
 FPS_MIN, FPS_MAX = 50.0, 60.0
+
+
+def target_fps_verdict(samples, region, tolerance=1.0, max_spread=1.0):
+    """Window-rate target, not a proof of frame pacing or input latency.
+
+    Broad 50..60 legacy acceptance cannot qualify a 60fps NTSC target. Bounds
+    are explicit measurement tolerance (including pause transport), not a
+    license to call an arbitrary stable slow game full speed.
+    """
+    target = {"NTSC": 60.0, "PAL": 50.0}.get(region) if isinstance(region, str) else None
+    valid = (target is not None and isinstance(samples, list) and len(samples) >= 2 and
+             all(type(x) in (int, float) and math.isfinite(x) and x > 0 for x in samples) and
+             type(tolerance) in (int, float) and math.isfinite(tolerance) and 0 <= tolerance <= 1 and
+             type(max_spread) in (int, float) and math.isfinite(max_spread) and 0 <= max_spread <= 1)
+    spread = max(samples) - min(samples) if valid else None
+    return {"region": region, "target_fps": target, "tolerance_fps": tolerance,
+            "max_spread_fps": max_spread, "sample_count": len(samples) if isinstance(samples, list) else 0,
+            "spread_fps": spread, "passed": bool(valid and spread <= max_spread and
+                all(abs(x - target) <= tolerance for x in samples)),
+            "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"}
 
 
 def probe_verdict(m):
@@ -148,7 +203,7 @@ def _connect_live(tentativas=4):
     return None
 
 
-def _session(dap, rom, out_dir, out_name, seconds, janelas, jar_name, schema):
+def _session(dap, rom, out_dir, out_name, seconds, janelas, jar_name, schema, private_meta=None):
 
     header = dap.read_block(PROBE_BASE, HEADER_LEN)
     if header is None:
@@ -184,16 +239,29 @@ def _session(dap, rom, out_dir, out_name, seconds, janelas, jar_name, schema):
         time.sleep(seconds)
         t1 = time.time()
         dap.pause()
+        if private_meta is not None:
+            t1=time.time()  # include stop/transport overhead: conservative FPS
         frame1 = dap.read_word(FRAME_ADDR)
         running = t1 - t0
-        f = fps_from_window((frame1 or 0) - (frame0 or 0), running)
+        delta=((frame1 or 0)-(frame0 or 0))&0xFFFF if private_meta is not None else (frame1 or 0)-(frame0 or 0)
+        f = fps_from_window(delta, running)
         fps_list.append(f)
-        deltas += (frame1 or 0) - (frame0 or 0)
+        deltas += delta
         print(f"       janela {w + 1}: delta={frame1} - {frame0} frames em "
               f"{running:.2f}s -> fps={f}")
 
     snapshot = {k: dap.read_byte(a) for k, a in SNAP_ADDRS.items()}
     const, spread = fps_constant(fps_list, FPS_MIN, FPS_MAX)
+    regional = None
+    if private_meta is not None:
+        status = dap.pause()
+        nominal = status.get("nominal_hz")
+        if type(nominal) not in (int, float) or not math.isfinite(nominal) or not (49 <= nominal <= 51 or 59 <= nominal <= 61):
+            print("[FAIL] session region/nominal_hz unavailable or unsupported")
+            return 1, None
+        region = "PAL" if nominal < 55 else "NTSC"
+        regional = target_fps_verdict(fps_list, region)
+        const, spread = regional["passed"], regional["spread_fps"]
 
     sha = hashlib.sha256(open(rom, "rb").read()).hexdigest()
     metrics = {
@@ -227,6 +295,19 @@ def _session(dap, rom, out_dir, out_name, seconds, janelas, jar_name, schema):
         ],
     }
     axes = probe_verdict(metrics)
+    if private_meta is not None:
+        metrics["session_id"]=private_meta["session_id"]
+        metrics["host_load"]=list(os.getloadavg())
+        metrics["input_route"]={"canal":"process-local SMSJoypad P1/P2; VDP frame pacing",
+                               "escrita_memoria":"disabled; read-only bridge",
+                               "rom_input_observation":"not proved by FPS probe"}
+        metrics["tool"]="emulicious-original-JAR/private-process-bridge"
+        metrics["chain_of_custody"]=["session: "+private_meta["session_id"],
+                                    "display: "+private_meta["display"],
+                                    "ROM SHA: "+private_meta["rom_sha256"],
+                                    "frame delta observed in ROM RAM; original realtime runner; conservative clock"]
+        metrics["region"] = region
+        metrics["regional_frame_rate_check"] = regional
     metrics["axes"] = axes
     # A travessia que faltava (L035): o produtor abre o schema e valida a
     # propria instancia ANTES de selar. Instancia fora do contrato nao cria
@@ -253,6 +334,17 @@ def _session(dap, rom, out_dir, out_name, seconds, janelas, jar_name, schema):
 
 
 def self_check():
+    assert target_fps_verdict([59.4, 59.8], "NTSC")["passed"]
+    assert target_fps_verdict([49.5, 50.0], "PAL")["passed"]
+    assert not target_fps_verdict([55.0, 55.0], "NTSC")["passed"]
+    assert not target_fps_verdict([50.0, 50.0], "NTSC")["passed"]
+    assert not fps_constant([60.0, None])[0]
+    assert not fps_constant([60.0])[0]
+    assert not fps_constant([True, 60.0])[0]
+    assert not target_fps_verdict([59.0, 60.1], "NTSC")["passed"]
+    for samples, region in (([True, 60], "NTSC"), ([float('nan'), 60], "NTSC"),
+                            ([60], "NTSC"), ([60, 60], "UNKNOWN"), ([60, 60], [])):
+        assert not target_fps_verdict(samples, region)["passed"]
     # parse do avaliador: o trap exato da L010 era tomar "$0" universal.
     assert parse_eval_value("@0xC7F0 = $9A") == 154
     assert parse_eval_value("word.ram@@0xC7F0 = $29A") == 666
@@ -262,12 +354,36 @@ def self_check():
     assert parse_eval_value("sem igual") is None
     assert parse_eval_value(None) is None
 
-    # cabecalho: fixture boa e as duas violacoes (§20)
+    # cabecalho: fixture boa e as violacoes (§20); v2 (D10) aditivo
     assert magic_ok([0x53, 0x4D, 0x52, 0x54, 1])
-    assert not magic_ok([0x53, 0x4D, 0x52, 0x54, 2]), "schema errado passou"
+    assert magic_ok([0x53, 0x4D, 0x52, 0x54, 2]), "probe v2 (D10) recusado"
+    assert not magic_ok([0x53, 0x4D, 0x52, 0x54, 3]), \
+        "schema fora do suportado passou"
     assert not magic_ok([0x53, 0x4D, 0x52, 0x00, 1]), "magic errado passou"
     assert not magic_ok(None)
     assert not magic_ok([0x53, 0x4D])
+
+    # corredor relocado: o contrato inteiro acompanha a base, offsets fixos
+    apply_probe_block(0xC900)
+    assert PROBE_BASE == 0xC9E0 and FRAME_ADDR == 0xC9F0, \
+        "relocação não moveu header/frame"
+    assert SNAP_ADDRS["state"] == 0xC9F6 and SNAP_ADDRS["pz"] == 0xC9FB, \
+        "relocação não moveu o snapshot"
+    assert SNAP_ADDRS["py"] == 0xC9FD and SNAP_ADDRS["p2z"] == 0xC9FF, \
+        "campos v2 não acompanharam a relocação"
+    try:
+        apply_probe_block(0xC790)
+        raise AssertionError("base fora da pagina foi aceita")
+    except ValueError:
+        pass
+    try:
+        apply_probe_block(0xDF80)
+        raise AssertionError("corredor dentro da pilha foi aceito")
+    except ValueError:
+        pass
+    apply_probe_block(0xC700)
+    assert PROBE_BASE == 0xC7E0 and FRAME_ADDR == 0xC7F0 and \
+        SNAP_ADDRS["state"] == 0xC7F6, "contrato canonico nao voltou"
 
     # fps por janela
     assert fps_from_window(480, 8.0) == 60.0
@@ -342,14 +458,36 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--project", default=".")
     ap.add_argument("--rom")
+    ap.add_argument("--session",help="private session ID; reads canonical SMRT probe without global DAP port")
     ap.add_argument("--seconds", type=float, default=8.0,
                     help="duracao de cada janela de execucao (default 8)")
     ap.add_argument("--janelas", type=int, default=2)
     ap.add_argument("--out", default="runtime_probe")
+    ap.add_argument("--probe-base", default=None,
+                    help="pagina do corredor de sondas (default 0xC700; "
+                         "ex. 0xC900 para um projeto cujo _DATA encosta la)")
     ap.add_argument("--self-check", action="store_true")
     args = ap.parse_args()
+    if args.probe_base:
+        apply_probe_block(int(args.probe_base, 16))
     if args.self_check:
         return self_check()
+    if args.session:
+        from session_bridge.isolated import load,sha,MemoryReader,performance_reservation,project_reservation
+        try:
+            root,meta=load(args.session)
+            if args.rom and sha(args.rom)!=meta["rom_sha256"]:raise ValueError("ROM/session mismatch")
+            if args.seconds<MIN_OVERSAMPLE or args.janelas<2:raise ValueError("at least two windows of three seconds required")
+            out_dir=os.path.join(os.path.abspath(args.project),"out","evidence","sessions",meta["session_id"],"runtime")
+            os.makedirs(out_dir,exist_ok=True)
+            reader=MemoryReader(root)
+            if not magic_ok(reader.read_block(PROBE_BASE,HEADER_LEN)):raise ValueError("canonical SMRT probe absent")
+            with performance_reservation(),project_reservation(args.project):
+                code,_=_session(reader,str(root/"emulator/rom.sms"),out_dir,args.out,args.seconds,args.janelas,
+                                "Emulicious.jar",load_schema(schema_path()),private_meta=meta)
+            return code
+        except (OSError,RuntimeError,ValueError) as e:
+            print("[FAIL] "+str(e));return 2
     if not args.rom:
         print("[FAIL] --rom obrigatorio (ou use --self-check)", file=sys.stderr)
         return 3

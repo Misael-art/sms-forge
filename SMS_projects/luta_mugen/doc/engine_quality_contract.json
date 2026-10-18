@@ -1,0 +1,240 @@
+{
+  "schema": "sms_mugen_engine_contract_v1",
+  "decision_date": "2026-09-26",
+  "authority": "pedido explícito do usuário: Sangokushi III como piso e SGDKForge como doador de método",
+  "reference": "Samgukji III / Sangokushi III; técnicas atribuídas ao jogo ainda não verificadas por engenharia reversa",
+  "target": {
+    "console": "SMS",
+    "canvas": [
+      256,
+      192
+    ],
+    "combat_height_px": 160,
+    "fighter_height_ratio": [
+      0.45,
+      0.55
+    ],
+    "sprite_mode": "8x16",
+    "sat_entries": 64,
+    "sprites_per_line": 8,
+    "ram_bytes": 8192,
+    "vram_bytes": 16384,
+    "bank_bytes": 16384,
+    "mapper": "sega",
+    "rom_capacity_target_bytes": 1048576
+  },
+  "scale_policy": "uniform_per_character_scene_contract",
+  "legacy_profile_delivery_allowed": false,
+  "runtime_profile": "legacy_probe_quarter",
+  "rom": "out/rom/luta_mugen.sms",
+  "capabilities": [
+    {
+      "id": "data_only_character_swap",
+      "status": "planned",
+      "owner": "generators + runtime",
+      "acceptance": "Trocar dois pacotes/DEF com hashes diferentes muda arte, física, frame data e especial; hash de todo C do núcleo permanece igual."
+    },
+    {
+      "id": "fighter_scale",
+      "status": "measured",
+      "owner": "converters + direção de arte",
+      "acceptance": "Altura opaca do corpo idle em 1x ocupa 45–55% da área útil declarada; pivots, proporções e CLSN preservados; exceções por pose explícitas.",
+      "note": "Piloto Ken/Ryu de fontes originais: alturas opacas 81/80 px na faixa 72-88; razões uniformes 80/93 e 40/31; manifests preservam contagem/ordem/duração AIR, flips, eixos, offsets e contagem CLSN. META/METAL P2 são regenerados e verificados por pool; vídeo clone-only prova o frame 0 do Ryu P2 com IoU 1.0, não animação AIR. O header integral inicialmente falhou com 34724 B no banco fixo. A deduplicação byte a byte de 196 arrays META/METAL retirou 18055 B; o header completo agora linka com _CODE=16669 B e 15550 B livres no banco 1. A ROM integral de diagnóstico foi vista no emulador; scale_pilot.py passou IoU 1.0 no frame 0. O harness ainda desenha somente idles frame 0, sem reprodução AIR. Pool literal idle 20896 B/8192 B; idle current+next 6464 B; ações current+next 8256 B fixo sem dedup, ou 8192 B após oportunidade de reúso de par transparente sem folga; qualquer facing 8256 B. 75 poses excedem o AIR no cálculo do streamer de 64 B/VBlank. Prefetch por transição: Ken idle 0→1 precisa 1920 B/4 ticks=480 B/VBlank; Ryu P2 precisa 1280 B/7 ticks=183 B/VBlank. Current+next soma 6464 B, mas throughput VDP não foi medido. Par idle soma 55 SAT/pico 11 por linha; pior caso 91 SAT/pico 23; RAM metasprite máximo 148 B/40 B atuais. Streaming AIR, scheduler/flicker, colisão invariante e budget conjunto continuam pendentes; metadata segue no segmento fixo para este matchup e o crescimento de elenco pode exigir banking. Status measured, não accepted. Ver doc/17-scale-pilot-2026-09-26.md e L086/L088. O build canônico (131072 B, SHA 84da5a208e93cc7308dbe3604ba7e284cc793d2f7724b8e8b9ed71a0b00b08f7) ainda usa legacy_probe_quarter/versus_cut; fight.c tem 40 B META e stream.c 64 B/VBlank, portanto não consome diretamente este corte. Source-derived idle_cache_plan now assigns Ken pairs 0–63 and Ryu P2 64–127; maximum idle current+next is 6,464 B and exact META/axis/AIR/slot data are emitted per transition. Self-check passes; VBlank throughput, runtime upload, AIR video, dynamic flicker and combat still lack proof, so status remains measured, not accepted. Ryu NES bootleg is a technical palette pilot only, not the visual target; replace it before full art with a model coherent with Ken Masters ADV/CPS2. This source distinction does not invalidate palette/cache engineering progress."
+    },
+    {
+      "id": "sprite_schedule",
+      "status": "implemented",
+      "owner": "analysis + renderer",
+      "acceptance": "Todas poses/facings/alturas/FX e extremos de câmera; SAT emitida <=64, cada linha <=8; delivery com zero omissões visíveis/flicker; visibilidade temporal e prioridade documentadas.",
+      "note": "Há prova técnica parcial T10; não aceita como entrega pelo novo contrato."
+    },
+    {
+      "id": "rom_banking_capacity",
+      "status": "planned",
+      "owner": "generator + linker + mapper",
+      "acceptance": "ROM com capacidade alvo 1 MiB e acesso a dados distintos nos bancos-limite no emulador; patterns e metadata AIR/META/METAL têm residência/link explícitos, ponteiros válidos após troca, ownership restaurado após áudio/ISR e sem overflow do banco fixo.",
+      "note": "Piloto 72–88 px: header integral Ken/Ryu compila após 196 aliases META/METAL exatos (18.055 B poupados; _CODE=16.669 B; 15.550 B livres no banco 1). ROM de 655.360 B, header TMR SEGA e 35 bancos de patterns conferidos byte a byte; captura Emulicious e IoU 1,0 no frame 0 passaram. A metadata está no segmento fixo deste matchup; ROM de capacidade de 1 MiB, leitura dos bancos-limite, reprodução AIR, ownership sob áudio/ISR e layout para elenco maior continuam sem prova."
+    },
+    {
+      "id": "ram_vram_layout",
+      "status": "implemented",
+      "owner": "runtime + linker",
+      "acceptance": "Mapa de residência simultânea e stack, pools estáticos, sem sobreposição, sem malloc/float; sprite patterns endereçáveis e pares TALL válidos.",
+      "note": "Há prova técnica parcial T10; não aceita como entrega pelo novo contrato."
+    },
+    {
+      "id": "worst_frame",
+      "status": "implemented",
+      "owner": "probe + wrapper",
+      "acceptance": "Pior coreografia com dois lutadores/FX/HUD/áudio; janela contínua sem DAP, zero overflow; cadência nominal NTSC/PAL dos perfis suportados.",
+      "note": "Há prova técnica parcial T10; não aceita como entrega pelo novo contrato. No clone de escala SHA ef45985eae2a1735e1e5b4707de011fae5ace8f36f064072e441322eb5540581, medição selada de 3000 frames deu vovf_delta=3000, vline_min=54 e verdicto=derramou; perfil: streaming 102 linhas, cópia SAT mais 16. Piloto clone-only sem HUD/FX/áudio; não atualiza aceitação da ROM canônica. Ver doc/17-scale-pilot-2026-09-26.md e L089."
+    },
+    {
+      "id": "combat_round_match",
+      "status": "planned",
+      "owner": "fight FSM + QA",
+      "acceptance": "Input, colisão, guard, hitstop, KO, timeout, empate, melhor de três, resultado e revanche; partida prolongada com estados rastreados."
+    },
+    {
+      "id": "input_latency_animation",
+      "status": "implemented",
+      "owner": "input + stream",
+      "acceptance": "Medir ticks entre input/estado/pose visível; colisão acompanha pose apresentada; sem poses parciais, starvation nem alteração silenciosa do AIR.",
+      "note": "Há prova técnica parcial T10; não aceita como entrega pelo novo contrato."
+    },
+    {
+      "id": "stage_hud",
+      "status": "planned",
+      "owner": "stage compiler + scene",
+      "acceptance": "Um palco autoral final, HUD legível sem sprites de barra; câmera/oclusão/scroll nas bordas e restauração após FX."
+    },
+    {
+      "id": "psg_music_sfx",
+      "status": "implemented",
+      "owner": "audio + tools",
+      "acceptance": "BGM musical audível, seis eventos identificáveis, prioridade e recuperação de canais; escuta e stream auditados, sem inferir qualidade de RMS.",
+      "note": "Há prova técnica parcial T10; não aceita como entrega pelo novo contrato."
+    },
+    {
+      "id": "visual_delivery",
+      "status": "planned",
+      "owner": "direção + revisão independente",
+      "acceptance": "Época delivery, escala/identidade/silhueta/contraste/movimento e game feel aceitos em vídeo de ROM; sete eixos simultâneos e memória atualizada."
+    },
+    {
+      "id": "source_fidelity",
+      "status": "implemented",
+      "owner": "intake + IR",
+      "acceptance": "Proveniência, direitos, classes direct/approximate/manual/unsupported por recurso; nenhuma referência perdida ou decisão silenciosa.",
+      "note": "Há prova técnica parcial T10; não aceita como entrega pelo novo contrato."
+    }
+  ],
+  "techniques": [
+    {
+      "id": "bank_switching",
+      "decision": "baseline",
+      "proof": "Bancos de 16 KiB e ROM alvo medidos; validar dados e tabelas (AIR, META/METAL, PoseRef), limites, ponteiros após remapeamento e owner do slot.",
+      "fallback": "Sega mapper; Codemasters só por backend separado. Se o pacote de metadata exceder o banco fixo, manter as tabelas em bancos próprios com acesso bancado validado ou reduzir o escopo do corte; nunca omitir metadata em silêncio."
+    },
+    {
+      "id": "tall_metasprites",
+      "decision": "baseline",
+      "proof": "Ocupação esparsa por scanline, SAT, padrão par e silhueta em 1x.",
+      "fallback": "Repartir/reautorizar pose sem miniaturização automática."
+    },
+    {
+      "id": "intelligent_flicker",
+      "decision": "candidate",
+      "proof": "Somente estudo diagnóstico: scheduler antes do simulador; vídeo 50/60 Hz, duty cycle e máximo consecutivo omitido por parte, colisão invariante. Flicker visível não promove delivery.",
+      "fallback": "Delivery exige zero omissões visíveis: compactar/reautorizar poses ou reprovar a composição; não reduzir 72–88 px nem promover multiplexação sem nova decisão humana."
+    },
+    {
+      "id": "raster_palette",
+      "decision": "candidate",
+      "proof": "Faixas Y, ownership CRAM, tempo ISR e interseção vertical dos lutadores; restaurar no frame seguinte.",
+      "fallback": "Paleta de sprite compartilhada; não promete paletas independentes lado a lado."
+    },
+    {
+      "id": "hud_bg",
+      "decision": "baseline",
+      "proof": "Fila suja coalescida, bytes/ciclos por VBlank e sincronismo com dano.",
+      "fallback": "HUD simples autoral em BG."
+    },
+    {
+      "id": "psg_channel_priority",
+      "decision": "baseline",
+      "proof": "Tabela de prioridade/preempção, duração, restauração e captura com impactos concorrentes.",
+      "fallback": "PSGlib com canais declarados, sem percentual de CPU presumido."
+    },
+    {
+      "id": "hscroll_bands",
+      "decision": "candidate",
+      "proof": "Um BG, ownership de banda e sweep completo da câmera, ISR e coluna esquerda.",
+      "fallback": "Palco estático final."
+    },
+    {
+      "id": "display_window",
+      "decision": "candidate",
+      "proof": "Modo compatível e blanking explícito, scanlines/ciclos medidos; VCounter é leitura.",
+      "fallback": "Modo 192 linhas; não reduzir área útil para burlar a escala."
+    },
+    {
+      "id": "pcm_frozen",
+      "decision": "candidate",
+      "proof": "Loop assembly por clock/região, LUT de atenuação, áudio capturado, IRQ/NMI/bank/restauração.",
+      "fallback": "SFX PSG; PCM fora do combate ativo por padrão."
+    },
+    {
+      "id": "software_flip",
+      "decision": "candidate",
+      "proof": "Comparar LUT RAM/upload contra espelho offline: ROM, RAM, ciclos e latência.",
+      "fallback": "Espelhos pré-calculados; ganho não é metade da ROM inteira."
+    },
+    {
+      "id": "bg_fx",
+      "decision": "candidate",
+      "proof": "Custo de tilemap/pattern e restauração, oclusão, câmera e HUD de um único plano.",
+      "fallback": "FX de sprite compacto."
+    },
+    {
+      "id": "prefetch",
+      "decision": "candidate",
+      "proof": "Cache medido em RAM 8 KiB, acerto/miss, cancelamento de golpe e latência.",
+      "fallback": "Streaming contratado; bank switch não equivale a I/O de disco."
+    },
+    {
+      "id": "cross_actor_pattern_dedup",
+      "decision": "candidate",
+      "proof": "Deduplicar somente pares 8x16 byte-a-byte idênticos entre atores; remapear cada META/METAL para um índice VDP compartilhado e medir RAM/VRAM, upload, pivô e vídeo dinâmico. O piloto encontrou um par transparente e economia potencial de 64 B.",
+      "fallback": "Pools independentes; se a soma exceder VRAM, reduzir escala/escopo por contrato ou rejeitar a combinação. Não presumir semelhança visual como igualdade de bytes."
+    },
+    {
+      "id": "fm_fallback",
+      "decision": "candidate",
+      "proof": "Detecção, arranjo FM/PSG próprio, waits de I/O e sessão com/sem FM.",
+      "fallback": "PSG obrigatório."
+    },
+    {
+      "id": "pcm_line_irq",
+      "decision": "candidate",
+      "proof": "Ciclos por scanline, jitter, concorrência com raster/VDP e worst-frame.",
+      "fallback": "Desativado no combate até passar; não pressupor baixo custo."
+    },
+    {
+      "id": "fm_custom_patch",
+      "decision": "candidate",
+      "proof": "Um patch custom compartilhado; vozes concorrentes e instantes de troca.",
+      "fallback": "Instrumentos ROM e arranjo PSG."
+    },
+    {
+      "id": "psg_arpeggio",
+      "decision": "candidate",
+      "proof": "Sequência/notas/envelope e audição PAL/NTSC; não equivale a polifonia física.",
+      "fallback": "Arranjo PSG sem arpejo."
+    },
+    {
+      "id": "palette_cycle",
+      "decision": "candidate",
+      "proof": "Escritas CRAM e contraste/slots afetados; custo de CPU medido.",
+      "fallback": "Cores estáticas."
+    },
+    {
+      "id": "tile_animation",
+      "decision": "candidate",
+      "proof": "Até 4/8 tiles é hipótese de lote; medir bytes, ciclos e residência.",
+      "fallback": "Tiles estáticos; arte continua autoral."
+    },
+    {
+      "id": "left_mask",
+      "decision": "baseline",
+      "proof": "Reg0 bit5 quando H-scroll ativo, viewport/câmera ajustados.",
+      "fallback": "Sem scroll horizontal."
+    },
+    {
+      "id": "raster_vertical_stretch",
+      "decision": "rejected_as_described",
+      "proof": "Y-scroll latched por frame no SMS; não aprovar pseudo Mode7 por escrita linha a linha.",
+      "fallback": "Perspectiva desenhada ou variantes de tiles medidas."
+    }
+  ]
+}

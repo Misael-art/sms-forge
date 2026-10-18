@@ -1,0 +1,21 @@
+{
+  "schema": "quality_review_plan_v1",
+  "artifact_kind": "quality_review_plan",
+  "tool": {
+    "name": "quality_review_router",
+    "version": "1.0.0"
+  },
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "reviews": [
+    {
+      "domain": "art",
+      "owner_skill": "skills/sms-visual-excellence.md",
+      "read_only": true,
+      "independent_of_producer": true
+    }
+  ],
+  "findings": [],
+  "claim_ceiling": "quality_review_plan_only",
+  "ok": true
+}

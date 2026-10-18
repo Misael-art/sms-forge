@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "session_id": "0b271ce0621a4adc914ab5c4d37be07b",
+  "root": "/tmp/smsforge-1000/0b271ce0621a4adc914ab5c4d37be07b",
+  "state": "input_verified",
+  "created_at": 1792285136.9862072,
+  "source_rom": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/out/rom/openbor_sms_rev1.sms",
+  "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+  "emulator_sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d",
+  "bridge_sha256": "a283b54202112434927ed8f83bb292376a2d6f74830dde6f04f9589da377333a",
+  "bridge_source_sha256": "99d4d2e95ce91c05f60d54f5ccc2c877e9c7f68a0aadf52cf5be603da2daba3d",
+  "config_initial_sha256": "96f1d666d3385321f7ff87ea6f260305647e00ca2f702dd44d26825aac26a559",
+  "xvfb": "/usr/bin/Xvfb",
+  "host_display": ":0",
+  "xvfb_sha256": "5bfd315a8c7bc626d0b183d176e130c34f910a4a1279d9d53ea45769f62a3351",
+  "ttl_seconds": 1800,
+  "host_load": [
+    2.1650390625,
+    2.95068359375,
+    3.39404296875
+  ],
+  "audio": "private_sink_unvalidated",
+  "enable_audio_requested": true,
+  "input": "process_local_SMSJoypad",
+  "supervisor": {
+    "pid": 887042,
+    "start_ticks": "2774348"
+  },
+  "audio_sink": "smsforge_0b271ce0621a4adc",
+  "audio_sink_module": "536870920",
+  "display": ":5",
+  "xvfb_process": {
+    "pid": 887044,
+    "start_ticks": "2774357"
+  },
+  "sandbox": {
+    "pid": 887065,
+    "start_ticks": "2774365"
+  },
+  "emulator_process": {
+    "pid": 887066,
+    "start_ticks": "2774365"
+  },
+  "ready": {
+    "ok": true,
+    "pid": 887066,
+    "frame": 120,
+    "p1": 0,
+    "p2": 0,
+    "console": 0,
+    "emulator_input": 0,
+    "nominal_hz": 59.92274340431231,
+    "audio_enabled": false,
+    "running": false
+  },
+  "audio_route": {
+    "sink_inputs": [
+      "13553"
+    ],
+    "pid": 887066,
+    "sink": "smsforge_0b271ce0621a4adc",
+    "at": 1792285139.1145523,
+    "verified": true
+  },
+  "audio_boot": {
+    "muted_from_launch": true,
+    "ready_audio_enabled": false,
+    "silent_stream_priming": true,
+    "unmuted_after_verified_route": true
+  }
+}

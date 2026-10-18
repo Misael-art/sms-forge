@@ -1,0 +1,8210 @@
+{
+  "schema": "openbor_sms_frontend_level_ir_v1",
+  "generated_at": "2026-10-16T00:21:18+00:00",
+  "tool": "openbor2sms frontend ir",
+  "ir_kind": "level",
+  "origin_scheme": "member + line (1-based over str.splitlines) + byte_offset/byte_length (over the extracted file bytes) + raw_sha256 of the raw line bytes",
+  "source": {
+    "member": "data/levels/town1.txt",
+    "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/data/source_openbor/gal_town1/data/levels/town1.txt",
+    "bytes": 2999,
+    "sha256": "1d167c8cc703b815a32dbb4953c53af7f42532a6a647507a7e009e61377cc54d"
+  },
+  "pak_sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+  "directives": [
+    {
+      "command": "music",
+      "args": [
+        "data/music/STAGE1.BOR"
+      ],
+      "raw": "music\t\t\tdata/music/STAGE1.BOR",
+      "line": 1,
+      "byte_offset": 0,
+      "byte_length": 29,
+      "raw_sha256": "a09d8a50275bb298e6d0db7e8c0af2fc5c7b2b19971d03c7a60bdb5fa53ea1ab"
+    },
+    {
+      "command": "bossmusic",
+      "args": [
+        "data/music/BOSS.BOR"
+      ],
+      "raw": "bossmusic\t\tdata/music/BOSS.BOR",
+      "line": 2,
+      "byte_offset": 31,
+      "byte_length": 30,
+      "raw_sha256": "42000fd8919c9812698e2be89be47fb25be2cd0c3bc20c6b683bf9a444aa583c"
+    },
+    {
+      "command": "background",
+      "args": [
+        "data/bgs/TOWN1/back.gif"
+      ],
+      "raw": "background\t\tdata/bgs/TOWN1/back.gif",
+      "line": 4,
+      "byte_offset": 65,
+      "byte_length": 35,
+      "raw_sha256": "cc9cbd1207211fce0eec1c8b9d46f0c61c91c186bc8d8aea1663388bfa30ead2"
+    },
+    {
+      "command": "panel",
+      "args": [
+        "data/bgs/TOWN1/panel.gif"
+      ],
+      "raw": "panel\t\t\tdata/bgs/TOWN1/panel.gif",
+      "line": 10,
+      "byte_offset": 322,
+      "byte_length": 32,
+      "raw_sha256": "a23e62ca9740bc21d9381b385d308d9c3470a332f739d839250eb541e38d9622"
+    },
+    {
+      "command": "frontpanel",
+      "args": [
+        "data/bgs/TOWN1/f01.gif"
+      ],
+      "raw": "frontpanel\t\tdata/bgs/TOWN1/f01.gif ",
+      "line": 12,
+      "byte_offset": 358,
+      "byte_length": 35,
+      "raw_sha256": "45cac2adafc0ca3e8890e1455fdf081f8059c3b97bcd292c7adf6511faa8539d"
+    },
+    {
+      "command": "order",
+      "args": [
+        "a"
+      ],
+      "raw": "order\t\t\ta",
+      "line": 14,
+      "byte_offset": 397,
+      "byte_length": 9,
+      "raw_sha256": "14e89c3c20824707df266d7616deefe67cdd926b9b5fd52e4e16e583a9b223e1"
+    },
+    {
+      "command": "type",
+      "args": [
+        "0"
+      ],
+      "raw": "type\t\t\t0",
+      "line": 22,
+      "byte_offset": 510,
+      "byte_length": 8,
+      "raw_sha256": "53b0955f38e0283f50ab832ea32c19a2bba7bac1e740988b1c5c31e07443d5b9"
+    },
+    {
+      "command": "settime",
+      "args": [
+        "99"
+      ],
+      "raw": "settime\t\t99",
+      "line": 23,
+      "byte_offset": 520,
+      "byte_length": 11,
+      "raw_sha256": "07068c754c395037dfb7216a0d7bcb2de2f5812032077c583be6fba4ecc62815"
+    },
+    {
+      "command": "notime",
+      "args": [
+        "0"
+      ],
+      "raw": "notime\t\t0",
+      "line": 24,
+      "byte_offset": 533,
+      "byte_length": 9,
+      "raw_sha256": "6b3e2d089addc40b24e7e9eb69f03fbace03b8f337678f249b709df267598a77"
+    },
+    {
+      "command": "stagenumber",
+      "args": [
+        "1"
+      ],
+      "raw": "stagenumber\t\t1",
+      "line": 26,
+      "byte_offset": 556,
+      "byte_length": 14,
+      "raw_sha256": "a2951163c63524c7c2c3a83324f5b7d9c5cb850b7871d41242f92fad91fa52af"
+    },
+    {
+      "command": "spawn1",
+      "args": [
+        "50",
+        "20",
+        "200"
+      ],
+      "raw": "spawn1  50 20 200",
+      "line": 28,
+      "byte_offset": 574,
+      "byte_length": 17,
+      "raw_sha256": "ae4f68c024bca1a016123010cb6017eb63fe9b242615459bb787bd1180fac780"
+    },
+    {
+      "command": "spawn2",
+      "args": [
+        "40",
+        "30",
+        "200"
+      ],
+      "raw": "spawn2  40 30 200",
+      "line": 29,
+      "byte_offset": 593,
+      "byte_length": 17,
+      "raw_sha256": "4fbab5e8129b7ae55f0b20f4aefade7deb250ea009484316d0dcbdf6a0b8dda5"
+    },
+    {
+      "command": "spawn3",
+      "args": [
+        "60",
+        "40",
+        "200"
+      ],
+      "raw": "spawn3  60 40 200",
+      "line": 30,
+      "byte_offset": 612,
+      "byte_length": 17,
+      "raw_sha256": "290fbf461dcc15d3d473dbc1b8524b2ef404622b2399f0a5d4dc49ccf96742b4"
+    },
+    {
+      "command": "spawn4",
+      "args": [
+        "50",
+        "50",
+        "200"
+      ],
+      "raw": "spawn4  50 50 200",
+      "line": 31,
+      "byte_offset": 631,
+      "byte_length": 17,
+      "raw_sha256": "3e57b07f5076e79c9a0abcb65e7979608df59737b72d26424a7c17caa847c2dc"
+    },
+    {
+      "command": "wall",
+      "args": [
+        "627",
+        "266",
+        "-35",
+        "38",
+        "-6",
+        "64",
+        "95",
+        "15"
+      ],
+      "raw": "wall    627 266 -35 38 -6 64 95 15",
+      "line": 36,
+      "byte_offset": 756,
+      "byte_length": 34,
+      "raw_sha256": "610baf80966cb6c56a443d8176240fa6ce468673a2d1b1e5d2c403241ab49d4e"
+    },
+    {
+      "command": "wall",
+      "args": [
+        "653",
+        "256",
+        "-35",
+        "28",
+        "240",
+        "227",
+        "85",
+        "60"
+      ],
+      "raw": "wall    653 256 -35 28 240 227 85 60",
+      "line": 37,
+      "byte_offset": 792,
+      "byte_length": 36,
+      "raw_sha256": "9265551762b2bcaf0a2eedc3bf93d176cf203e648df2ad6b224814c24cb73195"
+    },
+    {
+      "command": "wall",
+      "args": [
+        "954",
+        "256",
+        "-35",
+        "28",
+        "96",
+        "117",
+        "85",
+        "40"
+      ],
+      "raw": "wall    954 256 -35 28 96 117 85 40",
+      "line": 39,
+      "byte_offset": 832,
+      "byte_length": 35,
+      "raw_sha256": "4e62a04a82b2480723df43cfbadbf5c1b7aa14ef87e86e9f95f86060000794d3"
+    },
+    {
+      "command": "wall",
+      "args": [
+        "562",
+        "175",
+        "-35",
+        "28",
+        "436",
+        "497",
+        "95",
+        "510"
+      ],
+      "raw": "wall    562 175 -35 28 436 497 95 510",
+      "line": 41,
+      "byte_offset": 871,
+      "byte_length": 37,
+      "raw_sha256": "64ca45b497425163704790f64ac9086e7b6929d527047cf0dfa791633f5c23ed"
+    },
+    {
+      "command": "hole",
+      "args": [
+        "895",
+        "256",
+        "-40",
+        "-26",
+        "34",
+        "97",
+        "105"
+      ],
+      "raw": "hole    895 256 -40 -26 34 97 105",
+      "line": 43,
+      "byte_offset": 912,
+      "byte_length": 33,
+      "raw_sha256": "279a34b23df4907ea13fdb628648228a3fc0bce4968e8f5b12e11593e6582ac4"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "intro"
+      ],
+      "raw": "spawn   intro",
+      "line": 49,
+      "byte_offset": 1008,
+      "byte_length": 13,
+      "raw_sha256": "f5b3db5e95106ec8727e30171f808e42a238b2e7f51d325b02c8009ec7c6bf0f"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 50,
+      "byte_offset": 1023,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "240",
+        "332"
+      ],
+      "raw": "coords  240 332",
+      "line": 51,
+      "byte_offset": 1032,
+      "byte_length": 15,
+      "raw_sha256": "ac715ec2eb121cccfe33db74b30606bac1f1932404e76399f142111b2a8d6d55"
+    },
+    {
+      "command": "at",
+      "args": [
+        "0"
+      ],
+      "raw": "at      0",
+      "line": 52,
+      "byte_offset": 1049,
+      "byte_length": 9,
+      "raw_sha256": "a6dbff50987ffcad428ced77e03f46ec59f3d18c08f14319824f395e120b031f"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "bizzar1"
+      ],
+      "raw": "spawn   bizzar1",
+      "line": 58,
+      "byte_offset": 1097,
+      "byte_length": 15,
+      "raw_sha256": "efb3eb62a497d9dd4d5604974198cc332ea2496272e2b0c94bd768530d7e91f8"
+    },
+    {
+      "command": "flip",
+      "args": [
+        "1"
+      ],
+      "raw": "flip 1",
+      "line": 59,
+      "byte_offset": 1114,
+      "byte_length": 6,
+      "raw_sha256": "5975dc12d5df9ef54ce6884c2671aac15cee401f47e06907c52f96c61f6da633"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "560",
+        "210"
+      ],
+      "raw": "coords  560 210",
+      "line": 60,
+      "byte_offset": 1122,
+      "byte_length": 15,
+      "raw_sha256": "3614701abfd1c1d1003a414970bca8979473e11838e67f4b0a2d3d0fefdc86d3"
+    },
+    {
+      "command": "at",
+      "args": [
+        "0"
+      ],
+      "raw": "at      0",
+      "line": 61,
+      "byte_offset": 1139,
+      "byte_length": 9,
+      "raw_sha256": "a6dbff50987ffcad428ced77e03f46ec59f3d18c08f14319824f395e120b031f"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "civ02"
+      ],
+      "raw": "spawn   civ02",
+      "line": 66,
+      "byte_offset": 1172,
+      "byte_length": 13,
+      "raw_sha256": "43f5bebbdc99d6973667a7ee8657f1c784d606c1d1773d016b42913bea35aa55"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 67,
+      "byte_offset": 1187,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "1"
+      ],
+      "raw": "health  1",
+      "line": 68,
+      "byte_offset": 1196,
+      "byte_length": 9,
+      "raw_sha256": "eebb0fe130b86cbfcdc31f1dd6d167260f07d18db73585c6b38fdf58fdf4f232"
+    },
+    {
+      "command": "item",
+      "args": [
+        "book"
+      ],
+      "raw": "item book",
+      "line": 69,
+      "byte_offset": 1207,
+      "byte_length": 9,
+      "raw_sha256": "1cb6f2f620c1d39dda431ccb92b60e90445977fb4651164f8d4d956b96133be7"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "500",
+        "160"
+      ],
+      "raw": "coords  500 160",
+      "line": 70,
+      "byte_offset": 1218,
+      "byte_length": 15,
+      "raw_sha256": "b3dcb882fea3d1ce15f3202f7a3a7faaaf2718082b72d00886407529d0e7c94d"
+    },
+    {
+      "command": "at",
+      "args": [
+        "0"
+      ],
+      "raw": "at      0",
+      "line": 71,
+      "byte_offset": 1235,
+      "byte_length": 9,
+      "raw_sha256": "a6dbff50987ffcad428ced77e03f46ec59f3d18c08f14319824f395e120b031f"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "civ03"
+      ],
+      "raw": "spawn   civ03",
+      "line": 73,
+      "byte_offset": 1248,
+      "byte_length": 13,
+      "raw_sha256": "a5e0ca7655d67d9bcbad5da57d14aa740f0cd088b0675f412f9bad7cc4e0cf36"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 74,
+      "byte_offset": 1263,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "1"
+      ],
+      "raw": "health  1",
+      "line": 75,
+      "byte_offset": 1272,
+      "byte_length": 9,
+      "raw_sha256": "eebb0fe130b86cbfcdc31f1dd6d167260f07d18db73585c6b38fdf58fdf4f232"
+    },
+    {
+      "command": "item",
+      "args": [
+        "ingot"
+      ],
+      "raw": "item ingot",
+      "line": 76,
+      "byte_offset": 1283,
+      "byte_length": 10,
+      "raw_sha256": "1bfd7725b2699120d84b6cc01ee787ad7edf14a929ecacc257f6d619a1b1ea07"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "550",
+        "170"
+      ],
+      "raw": "coords  550 170",
+      "line": 77,
+      "byte_offset": 1295,
+      "byte_length": 15,
+      "raw_sha256": "b4807120945a03328dbb4042945858d81d7ecce68b74fd371775a5dc218da7dc"
+    },
+    {
+      "command": "at",
+      "args": [
+        "0"
+      ],
+      "raw": "at      0",
+      "line": 78,
+      "byte_offset": 1312,
+      "byte_length": 9,
+      "raw_sha256": "a6dbff50987ffcad428ced77e03f46ec59f3d18c08f14319824f395e120b031f"
+    },
+    {
+      "command": "group",
+      "args": [
+        "3",
+        "3"
+      ],
+      "raw": "Group 3 3",
+      "line": 83,
+      "byte_offset": 1340,
+      "byte_length": 9,
+      "raw_sha256": "c804edee232603022033f32030e55384cd376011c87d7d53a70693263fd60797"
+    },
+    {
+      "command": "at",
+      "args": [
+        "0"
+      ],
+      "raw": "at 0",
+      "line": 84,
+      "byte_offset": 1351,
+      "byte_length": 4,
+      "raw_sha256": "1dc7ac27f99623d741b666c5a28379bda7f4015ec6bad0226bcaa9e7c153ae13"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "long"
+      ],
+      "raw": "spawn   long",
+      "line": 86,
+      "byte_offset": 1359,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 87,
+      "byte_offset": 1373,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "50"
+      ],
+      "raw": "health  50",
+      "line": 88,
+      "byte_offset": 1382,
+      "byte_length": 10,
+      "raw_sha256": "c087bc4d513bfaa08e634615cdcd7fa82e1f3cdd0dfc70e4a32e818ae27ce52f"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "500",
+        "180"
+      ],
+      "raw": "coords  500 180",
+      "line": 89,
+      "byte_offset": 1394,
+      "byte_length": 15,
+      "raw_sha256": "678b2deda41ee91704c638b28d4e58b4d83852a87087271295f2d0d434c954e9"
+    },
+    {
+      "command": "at",
+      "args": [
+        "0"
+      ],
+      "raw": "at      0",
+      "line": 90,
+      "byte_offset": 1411,
+      "byte_length": 9,
+      "raw_sha256": "a6dbff50987ffcad428ced77e03f46ec59f3d18c08f14319824f395e120b031f"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "henin"
+      ],
+      "raw": "spawn   henin",
+      "line": 92,
+      "byte_offset": 1424,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 93,
+      "byte_offset": 1439,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "50"
+      ],
+      "raw": "health  50",
+      "line": 94,
+      "byte_offset": 1448,
+      "byte_length": 10,
+      "raw_sha256": "c087bc4d513bfaa08e634615cdcd7fa82e1f3cdd0dfc70e4a32e818ae27ce52f"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "550",
+        "190"
+      ],
+      "raw": "coords  550 190",
+      "line": 95,
+      "byte_offset": 1460,
+      "byte_length": 15,
+      "raw_sha256": "be0901840462dc795bb8a847ff2e03b1b0d9b77fbfd501761cad8a66f0497308"
+    },
+    {
+      "command": "at",
+      "args": [
+        "0"
+      ],
+      "raw": "at      0",
+      "line": 96,
+      "byte_offset": 1477,
+      "byte_length": 9,
+      "raw_sha256": "a6dbff50987ffcad428ced77e03f46ec59f3d18c08f14319824f395e120b031f"
+    },
+    {
+      "command": "wait",
+      "args": [],
+      "raw": "wait",
+      "line": 98,
+      "byte_offset": 1490,
+      "byte_length": 4,
+      "raw_sha256": "716ecabb45ac6a88a049398fde2d3d5225c6dd3121ae9bbc5af457eb4baf056a"
+    },
+    {
+      "command": "at",
+      "args": [
+        "300"
+      ],
+      "raw": "at      300",
+      "line": 99,
+      "byte_offset": 1496,
+      "byte_length": 11,
+      "raw_sha256": "f448f22bd65e62a16ecc47714ea2d223cd25f0753a93216821c2e9234313980a"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "amaz"
+      ],
+      "raw": "spawn   amaz",
+      "line": 101,
+      "byte_offset": 1511,
+      "byte_length": 12,
+      "raw_sha256": "97de91df119b9f393f21dac5486dd7191127871efd5fc24c8fdcda8946f18ffa"
+    },
+    {
+      "command": "map",
+      "args": [
+        "1"
+      ],
+      "raw": "map\t  1",
+      "line": 102,
+      "byte_offset": 1525,
+      "byte_length": 7,
+      "raw_sha256": "6ee7ed49d3ca617023fb826a75f2dbd1884c333a600b5173119556071748ddb7"
+    },
+    {
+      "command": "health",
+      "args": [
+        "75"
+      ],
+      "raw": "health  75",
+      "line": 103,
+      "byte_offset": 1534,
+      "byte_length": 10,
+      "raw_sha256": "d81e11395525c996cf352b2404170bb6a9d1f9c443c9f04ae39d854522e06f09"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "-20",
+        "190"
+      ],
+      "raw": "coords  -20 190",
+      "line": 104,
+      "byte_offset": 1546,
+      "byte_length": 15,
+      "raw_sha256": "f11de2f8832d3f45552ccd50dc55e800e435dffd2a2c0b8ab9a17df51e724ea8"
+    },
+    {
+      "command": "at",
+      "args": [
+        "300"
+      ],
+      "raw": "at      300",
+      "line": 105,
+      "byte_offset": 1563,
+      "byte_length": 11,
+      "raw_sha256": "f448f22bd65e62a16ecc47714ea2d223cd25f0753a93216821c2e9234313980a"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "henin"
+      ],
+      "raw": "spawn   henin",
+      "line": 107,
+      "byte_offset": 1578,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "command": "map",
+      "args": [
+        "1"
+      ],
+      "raw": "map\t  1",
+      "line": 108,
+      "byte_offset": 1593,
+      "byte_length": 7,
+      "raw_sha256": "6ee7ed49d3ca617023fb826a75f2dbd1884c333a600b5173119556071748ddb7"
+    },
+    {
+      "command": "health",
+      "args": [
+        "75"
+      ],
+      "raw": "health  75",
+      "line": 109,
+      "byte_offset": 1602,
+      "byte_length": 10,
+      "raw_sha256": "d81e11395525c996cf352b2404170bb6a9d1f9c443c9f04ae39d854522e06f09"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "570",
+        "180"
+      ],
+      "raw": "coords  570 180",
+      "line": 110,
+      "byte_offset": 1614,
+      "byte_length": 15,
+      "raw_sha256": "cb7e62e791105426ce1a4e83aad94d6240c357222cf91c04e36b2be07e1d200a"
+    },
+    {
+      "command": "at",
+      "args": [
+        "300"
+      ],
+      "raw": "at      300",
+      "line": 111,
+      "byte_offset": 1631,
+      "byte_length": 11,
+      "raw_sha256": "f448f22bd65e62a16ecc47714ea2d223cd25f0753a93216821c2e9234313980a"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "long"
+      ],
+      "raw": "spawn   long",
+      "line": 113,
+      "byte_offset": 1646,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 114,
+      "byte_offset": 1660,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "50"
+      ],
+      "raw": "health  50",
+      "line": 115,
+      "byte_offset": 1669,
+      "byte_length": 10,
+      "raw_sha256": "c087bc4d513bfaa08e634615cdcd7fa82e1f3cdd0dfc70e4a32e818ae27ce52f"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "570",
+        "180"
+      ],
+      "raw": "coords  570 180",
+      "line": 116,
+      "byte_offset": 1681,
+      "byte_length": 15,
+      "raw_sha256": "cb7e62e791105426ce1a4e83aad94d6240c357222cf91c04e36b2be07e1d200a"
+    },
+    {
+      "command": "at",
+      "args": [
+        "300"
+      ],
+      "raw": "at      300",
+      "line": 117,
+      "byte_offset": 1698,
+      "byte_length": 11,
+      "raw_sha256": "f448f22bd65e62a16ecc47714ea2d223cd25f0753a93216821c2e9234313980a"
+    },
+    {
+      "command": "group",
+      "args": [
+        "2",
+        "2"
+      ],
+      "raw": "Group 2 2",
+      "line": 124,
+      "byte_offset": 1741,
+      "byte_length": 9,
+      "raw_sha256": "580e7797fdbac7125e749341a23e1c6b88bb4a76388c3918e3bf8aa1d943012c"
+    },
+    {
+      "command": "at",
+      "args": [
+        "600"
+      ],
+      "raw": "at 600",
+      "line": 125,
+      "byte_offset": 1752,
+      "byte_length": 6,
+      "raw_sha256": "55a5825b109a1ed081034f81829577d72f7cd52f7055e627136e54566fca5dbd"
+    },
+    {
+      "command": "wait",
+      "args": [],
+      "raw": "wait",
+      "line": 127,
+      "byte_offset": 1762,
+      "byte_length": 4,
+      "raw_sha256": "716ecabb45ac6a88a049398fde2d3d5225c6dd3121ae9bbc5af457eb4baf056a"
+    },
+    {
+      "command": "at",
+      "args": [
+        "600"
+      ],
+      "raw": "at      600",
+      "line": 128,
+      "byte_offset": 1768,
+      "byte_length": 11,
+      "raw_sha256": "06515a90bcb9d71eaa950cad8a2830b408ae1fed6d06ecaa2594de68a7a62d45"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "long"
+      ],
+      "raw": "spawn   long",
+      "line": 130,
+      "byte_offset": 1783,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "command": "map",
+      "args": [
+        "2"
+      ],
+      "raw": "map\t  2",
+      "line": 131,
+      "byte_offset": 1797,
+      "byte_length": 7,
+      "raw_sha256": "d48fd538550f62e619830516650131e7323174eacd138e1c01792e4d6bbc64f3"
+    },
+    {
+      "command": "health",
+      "args": [
+        "100"
+      ],
+      "raw": "health  100",
+      "line": 132,
+      "byte_offset": 1806,
+      "byte_length": 11,
+      "raw_sha256": "2c9351451fc98f9427b90f44146d7298208f17af0ef40a964787752a4be59103"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "500",
+        "180"
+      ],
+      "raw": "coords  500 180",
+      "line": 133,
+      "byte_offset": 1819,
+      "byte_length": 15,
+      "raw_sha256": "678b2deda41ee91704c638b28d4e58b4d83852a87087271295f2d0d434c954e9"
+    },
+    {
+      "command": "at",
+      "args": [
+        "600"
+      ],
+      "raw": "at      600",
+      "line": 134,
+      "byte_offset": 1836,
+      "byte_length": 11,
+      "raw_sha256": "06515a90bcb9d71eaa950cad8a2830b408ae1fed6d06ecaa2594de68a7a62d45"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "henin"
+      ],
+      "raw": "spawn   henin",
+      "line": 136,
+      "byte_offset": 1851,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 137,
+      "byte_offset": 1866,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "50"
+      ],
+      "raw": "health  50",
+      "line": 138,
+      "byte_offset": 1875,
+      "byte_length": 10,
+      "raw_sha256": "c087bc4d513bfaa08e634615cdcd7fa82e1f3cdd0dfc70e4a32e818ae27ce52f"
+    },
+    {
+      "command": "flip",
+      "args": [
+        "1"
+      ],
+      "raw": "flip 1",
+      "line": 139,
+      "byte_offset": 1887,
+      "byte_length": 6,
+      "raw_sha256": "5975dc12d5df9ef54ce6884c2671aac15cee401f47e06907c52f96c61f6da633"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "-20",
+        "190"
+      ],
+      "raw": "coords  -20 190",
+      "line": 140,
+      "byte_offset": 1895,
+      "byte_length": 15,
+      "raw_sha256": "f11de2f8832d3f45552ccd50dc55e800e435dffd2a2c0b8ab9a17df51e724ea8"
+    },
+    {
+      "command": "at",
+      "args": [
+        "600"
+      ],
+      "raw": "at      600",
+      "line": 141,
+      "byte_offset": 1912,
+      "byte_length": 11,
+      "raw_sha256": "06515a90bcb9d71eaa950cad8a2830b408ae1fed6d06ecaa2594de68a7a62d45"
+    },
+    {
+      "command": "group",
+      "args": [
+        "4",
+        "4"
+      ],
+      "raw": "Group 4 4",
+      "line": 149,
+      "byte_offset": 1957,
+      "byte_length": 9,
+      "raw_sha256": "afcc012ffde7b7f761f851a1775199a8594f0570a749013ca251b49fd4307b35"
+    },
+    {
+      "command": "at",
+      "args": [
+        "900"
+      ],
+      "raw": "at 900",
+      "line": 150,
+      "byte_offset": 1968,
+      "byte_length": 6,
+      "raw_sha256": "a0b59a3a5aa5f6590d9388f80520d5fd211803cbca60441965113083dd483833"
+    },
+    {
+      "command": "wait",
+      "args": [],
+      "raw": "wait",
+      "line": 152,
+      "byte_offset": 1978,
+      "byte_length": 4,
+      "raw_sha256": "716ecabb45ac6a88a049398fde2d3d5225c6dd3121ae9bbc5af457eb4baf056a"
+    },
+    {
+      "command": "at",
+      "args": [
+        "900"
+      ],
+      "raw": "at      900",
+      "line": 153,
+      "byte_offset": 1984,
+      "byte_length": 11,
+      "raw_sha256": "6084220ef926ac6af9c1b5a4ff93b1febb4acf1650c61f2f6ab57e1753fa9014"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "thief1"
+      ],
+      "raw": "spawn   thief1",
+      "line": 155,
+      "byte_offset": 1999,
+      "byte_length": 14,
+      "raw_sha256": "c31c9b08035e995f5e085535d9cb27045e5e6d6e8bcf9d1796a239b155b50059"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 156,
+      "byte_offset": 2015,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "5"
+      ],
+      "raw": "health  5",
+      "line": 157,
+      "byte_offset": 2024,
+      "byte_length": 9,
+      "raw_sha256": "b647777ec7eacb8f5b0cefe67ca7afec7de9d809bcce96cc5368e36feb04b659"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "500",
+        "180"
+      ],
+      "raw": "coords  500 180",
+      "line": 158,
+      "byte_offset": 2035,
+      "byte_length": 15,
+      "raw_sha256": "678b2deda41ee91704c638b28d4e58b4d83852a87087271295f2d0d434c954e9"
+    },
+    {
+      "command": "at",
+      "args": [
+        "900"
+      ],
+      "raw": "at      900",
+      "line": 159,
+      "byte_offset": 2052,
+      "byte_length": 11,
+      "raw_sha256": "6084220ef926ac6af9c1b5a4ff93b1febb4acf1650c61f2f6ab57e1753fa9014"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "thief2"
+      ],
+      "raw": "spawn   thief2",
+      "line": 161,
+      "byte_offset": 2067,
+      "byte_length": 14,
+      "raw_sha256": "f7c6199ccfb02fd78ff703d9adc251e942c7f8cd29e9d00b6ff90c2f43df73dc"
+    },
+    {
+      "command": "map",
+      "args": [
+        "1"
+      ],
+      "raw": "map\t  1",
+      "line": 162,
+      "byte_offset": 2083,
+      "byte_length": 7,
+      "raw_sha256": "6ee7ed49d3ca617023fb826a75f2dbd1884c333a600b5173119556071748ddb7"
+    },
+    {
+      "command": "health",
+      "args": [
+        "5"
+      ],
+      "raw": "health  5",
+      "line": 163,
+      "byte_offset": 2092,
+      "byte_length": 9,
+      "raw_sha256": "b647777ec7eacb8f5b0cefe67ca7afec7de9d809bcce96cc5368e36feb04b659"
+    },
+    {
+      "command": "flip",
+      "args": [
+        "1"
+      ],
+      "raw": "flip 1",
+      "line": 164,
+      "byte_offset": 2103,
+      "byte_length": 6,
+      "raw_sha256": "5975dc12d5df9ef54ce6884c2671aac15cee401f47e06907c52f96c61f6da633"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "-20",
+        "190"
+      ],
+      "raw": "coords  -20 190",
+      "line": 165,
+      "byte_offset": 2111,
+      "byte_length": 15,
+      "raw_sha256": "f11de2f8832d3f45552ccd50dc55e800e435dffd2a2c0b8ab9a17df51e724ea8"
+    },
+    {
+      "command": "at",
+      "args": [
+        "900"
+      ],
+      "raw": "at      900",
+      "line": 166,
+      "byte_offset": 2128,
+      "byte_length": 11,
+      "raw_sha256": "6084220ef926ac6af9c1b5a4ff93b1febb4acf1650c61f2f6ab57e1753fa9014"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "thief1"
+      ],
+      "raw": "spawn   thief1",
+      "line": 168,
+      "byte_offset": 2143,
+      "byte_length": 14,
+      "raw_sha256": "c31c9b08035e995f5e085535d9cb27045e5e6d6e8bcf9d1796a239b155b50059"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 169,
+      "byte_offset": 2159,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "5"
+      ],
+      "raw": "health  5",
+      "line": 170,
+      "byte_offset": 2168,
+      "byte_length": 9,
+      "raw_sha256": "b647777ec7eacb8f5b0cefe67ca7afec7de9d809bcce96cc5368e36feb04b659"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "550",
+        "200"
+      ],
+      "raw": "coords  550 200",
+      "line": 171,
+      "byte_offset": 2179,
+      "byte_length": 15,
+      "raw_sha256": "87d29571cf13fa7dae311c7cc2ee976897ea6ea1e0eb9f37cce8b114d28e5ac2"
+    },
+    {
+      "command": "at",
+      "args": [
+        "900"
+      ],
+      "raw": "at      900",
+      "line": 172,
+      "byte_offset": 2196,
+      "byte_length": 11,
+      "raw_sha256": "6084220ef926ac6af9c1b5a4ff93b1febb4acf1650c61f2f6ab57e1753fa9014"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "thief1"
+      ],
+      "raw": "spawn   thief1",
+      "line": 174,
+      "byte_offset": 2211,
+      "byte_length": 14,
+      "raw_sha256": "c31c9b08035e995f5e085535d9cb27045e5e6d6e8bcf9d1796a239b155b50059"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 175,
+      "byte_offset": 2227,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "5"
+      ],
+      "raw": "health  5",
+      "line": 176,
+      "byte_offset": 2236,
+      "byte_length": 9,
+      "raw_sha256": "b647777ec7eacb8f5b0cefe67ca7afec7de9d809bcce96cc5368e36feb04b659"
+    },
+    {
+      "command": "flip",
+      "args": [
+        "1"
+      ],
+      "raw": "flip 1",
+      "line": 177,
+      "byte_offset": 2247,
+      "byte_length": 6,
+      "raw_sha256": "5975dc12d5df9ef54ce6884c2671aac15cee401f47e06907c52f96c61f6da633"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "-40",
+        "210"
+      ],
+      "raw": "coords  -40 210",
+      "line": 178,
+      "byte_offset": 2255,
+      "byte_length": 15,
+      "raw_sha256": "29267e2cde402504cdca434d3ababc9fa7c3c7a1141b3037fb02b1c965e73d3a"
+    },
+    {
+      "command": "at",
+      "args": [
+        "900"
+      ],
+      "raw": "at      900",
+      "line": 179,
+      "byte_offset": 2272,
+      "byte_length": 11,
+      "raw_sha256": "6084220ef926ac6af9c1b5a4ff93b1febb4acf1650c61f2f6ab57e1753fa9014"
+    },
+    {
+      "command": "group",
+      "args": [
+        "3",
+        "3"
+      ],
+      "raw": "Group 3 3",
+      "line": 183,
+      "byte_offset": 2300,
+      "byte_length": 9,
+      "raw_sha256": "c804edee232603022033f32030e55384cd376011c87d7d53a70693263fd60797"
+    },
+    {
+      "command": "at",
+      "args": [
+        "901"
+      ],
+      "raw": "at 901",
+      "line": 184,
+      "byte_offset": 2311,
+      "byte_length": 6,
+      "raw_sha256": "4eb01b19eeb9c6426a6abb07b877a14b43d8ba1033a5e4a83717cdd392af7988"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "badbro2"
+      ],
+      "raw": "spawn   badbro2",
+      "line": 186,
+      "byte_offset": 2321,
+      "byte_length": 15,
+      "raw_sha256": "898072207fa550717c274148aab670493041351f09386fcadcba07a91404430e"
+    },
+    {
+      "command": "map",
+      "args": [
+        "1"
+      ],
+      "raw": "map\t  1",
+      "line": 187,
+      "byte_offset": 2338,
+      "byte_length": 7,
+      "raw_sha256": "6ee7ed49d3ca617023fb826a75f2dbd1884c333a600b5173119556071748ddb7"
+    },
+    {
+      "command": "health",
+      "args": [
+        "200"
+      ],
+      "raw": "health  200",
+      "line": 188,
+      "byte_offset": 2347,
+      "byte_length": 11,
+      "raw_sha256": "71d9eaeeda32d1284b32d9b61b969de394b91f074950f5db5800c260c4d783fa"
+    },
+    {
+      "command": "boss",
+      "args": [
+        "1"
+      ],
+      "raw": "boss\t  1",
+      "line": 189,
+      "byte_offset": 2360,
+      "byte_length": 8,
+      "raw_sha256": "46a4a6e68783c72824bfa1bedea106129169d7405c0cfd076877f9784507478b"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "640",
+        "190"
+      ],
+      "raw": "coords  640 190",
+      "line": 190,
+      "byte_offset": 2370,
+      "byte_length": 15,
+      "raw_sha256": "b7559f67222493949b54bb3fc30cc08362efb9d9d87e19471ec6dd41f00b30cd"
+    },
+    {
+      "command": "at",
+      "args": [
+        "901"
+      ],
+      "raw": "at      901",
+      "line": 191,
+      "byte_offset": 2387,
+      "byte_length": 11,
+      "raw_sha256": "4ef8bc77f33054553db4e0d48b47e3caa7ebd76b49b85ad54a3256471f1898c4"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "civ02"
+      ],
+      "raw": "spawn   civ02",
+      "line": 194,
+      "byte_offset": 2404,
+      "byte_length": 13,
+      "raw_sha256": "43f5bebbdc99d6973667a7ee8657f1c784d606c1d1773d016b42913bea35aa55"
+    },
+    {
+      "command": "map",
+      "args": [
+        "1"
+      ],
+      "raw": "map\t  1",
+      "line": 195,
+      "byte_offset": 2419,
+      "byte_length": 7,
+      "raw_sha256": "6ee7ed49d3ca617023fb826a75f2dbd1884c333a600b5173119556071748ddb7"
+    },
+    {
+      "command": "health",
+      "args": [
+        "1"
+      ],
+      "raw": "health  1",
+      "line": 196,
+      "byte_offset": 2428,
+      "byte_length": 9,
+      "raw_sha256": "eebb0fe130b86cbfcdc31f1dd6d167260f07d18db73585c6b38fdf58fdf4f232"
+    },
+    {
+      "command": "item",
+      "args": [
+        "book"
+      ],
+      "raw": "item book",
+      "line": 197,
+      "byte_offset": 2439,
+      "byte_length": 9,
+      "raw_sha256": "1cb6f2f620c1d39dda431ccb92b60e90445977fb4651164f8d4d956b96133be7"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "500",
+        "170"
+      ],
+      "raw": "coords  500 170",
+      "line": 198,
+      "byte_offset": 2450,
+      "byte_length": 15,
+      "raw_sha256": "121be066a6dd3ea3062f5d526cf4c0967a50be4399c56d6b6bf501790eacf885"
+    },
+    {
+      "command": "at",
+      "args": [
+        "901"
+      ],
+      "raw": "at      901",
+      "line": 199,
+      "byte_offset": 2467,
+      "byte_length": 11,
+      "raw_sha256": "4ef8bc77f33054553db4e0d48b47e3caa7ebd76b49b85ad54a3256471f1898c4"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "civ03"
+      ],
+      "raw": "spawn   civ03",
+      "line": 201,
+      "byte_offset": 2482,
+      "byte_length": 13,
+      "raw_sha256": "a5e0ca7655d67d9bcbad5da57d14aa740f0cd088b0675f412f9bad7cc4e0cf36"
+    },
+    {
+      "command": "map",
+      "args": [
+        "1"
+      ],
+      "raw": "map\t  1",
+      "line": 202,
+      "byte_offset": 2497,
+      "byte_length": 7,
+      "raw_sha256": "6ee7ed49d3ca617023fb826a75f2dbd1884c333a600b5173119556071748ddb7"
+    },
+    {
+      "command": "health",
+      "args": [
+        "1"
+      ],
+      "raw": "health  1",
+      "line": 203,
+      "byte_offset": 2506,
+      "byte_length": 9,
+      "raw_sha256": "eebb0fe130b86cbfcdc31f1dd6d167260f07d18db73585c6b38fdf58fdf4f232"
+    },
+    {
+      "command": "item",
+      "args": [
+        "ingot"
+      ],
+      "raw": "item ingot",
+      "line": 204,
+      "byte_offset": 2517,
+      "byte_length": 10,
+      "raw_sha256": "1bfd7725b2699120d84b6cc01ee787ad7edf14a929ecacc257f6d619a1b1ea07"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "550",
+        "160"
+      ],
+      "raw": "coords  550 160",
+      "line": 205,
+      "byte_offset": 2529,
+      "byte_length": 15,
+      "raw_sha256": "3ef0f5e313981c772b89574a1630b47f515bf27e2ab11ecbdb28adf2d9a87ad0"
+    },
+    {
+      "command": "at",
+      "args": [
+        "901"
+      ],
+      "raw": "at      901",
+      "line": 206,
+      "byte_offset": 2546,
+      "byte_length": 11,
+      "raw_sha256": "4ef8bc77f33054553db4e0d48b47e3caa7ebd76b49b85ad54a3256471f1898c4"
+    },
+    {
+      "command": "group",
+      "args": [
+        "3",
+        "3"
+      ],
+      "raw": "Group 3 3",
+      "line": 211,
+      "byte_offset": 2576,
+      "byte_length": 9,
+      "raw_sha256": "c804edee232603022033f32030e55384cd376011c87d7d53a70693263fd60797"
+    },
+    {
+      "command": "at",
+      "args": [
+        "1100"
+      ],
+      "raw": "at 1100",
+      "line": 212,
+      "byte_offset": 2587,
+      "byte_length": 7,
+      "raw_sha256": "4ef9ae62020e4af20be47b7b0e756ea7b6ee0a85e679552a8c5c823fa5c267b4"
+    },
+    {
+      "command": "wait",
+      "args": [],
+      "raw": "wait",
+      "line": 214,
+      "byte_offset": 2598,
+      "byte_length": 4,
+      "raw_sha256": "716ecabb45ac6a88a049398fde2d3d5225c6dd3121ae9bbc5af457eb4baf056a"
+    },
+    {
+      "command": "at",
+      "args": [
+        "1100"
+      ],
+      "raw": "at      1100",
+      "line": 215,
+      "byte_offset": 2604,
+      "byte_length": 12,
+      "raw_sha256": "ba3fe588d37b9b2b225c9d84019b54f4a0b31f13f56c1ad1a0dfaa1dd896be13"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "long"
+      ],
+      "raw": "spawn   long",
+      "line": 217,
+      "byte_offset": 2620,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 218,
+      "byte_offset": 2634,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "50"
+      ],
+      "raw": "health  50",
+      "line": 219,
+      "byte_offset": 2643,
+      "byte_length": 10,
+      "raw_sha256": "c087bc4d513bfaa08e634615cdcd7fa82e1f3cdd0dfc70e4a32e818ae27ce52f"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "550",
+        "180"
+      ],
+      "raw": "coords  550 180",
+      "line": 220,
+      "byte_offset": 2655,
+      "byte_length": 15,
+      "raw_sha256": "35e23abb15c620cb9584fa9c5b7e558143b7c67269fe1a96e5a539b0d3a9f1e5"
+    },
+    {
+      "command": "at",
+      "args": [
+        "1100"
+      ],
+      "raw": "at      1100",
+      "line": 221,
+      "byte_offset": 2672,
+      "byte_length": 12,
+      "raw_sha256": "ba3fe588d37b9b2b225c9d84019b54f4a0b31f13f56c1ad1a0dfaa1dd896be13"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "henin"
+      ],
+      "raw": "spawn   henin",
+      "line": 223,
+      "byte_offset": 2688,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 224,
+      "byte_offset": 2703,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "50"
+      ],
+      "raw": "health  50",
+      "line": 225,
+      "byte_offset": 2712,
+      "byte_length": 10,
+      "raw_sha256": "c087bc4d513bfaa08e634615cdcd7fa82e1f3cdd0dfc70e4a32e818ae27ce52f"
+    },
+    {
+      "command": "flip",
+      "args": [
+        "1"
+      ],
+      "raw": "flip 1",
+      "line": 226,
+      "byte_offset": 2724,
+      "byte_length": 6,
+      "raw_sha256": "5975dc12d5df9ef54ce6884c2671aac15cee401f47e06907c52f96c61f6da633"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "-20",
+        "190"
+      ],
+      "raw": "coords  -20 190",
+      "line": 227,
+      "byte_offset": 2732,
+      "byte_length": 15,
+      "raw_sha256": "f11de2f8832d3f45552ccd50dc55e800e435dffd2a2c0b8ab9a17df51e724ea8"
+    },
+    {
+      "command": "at",
+      "args": [
+        "1100"
+      ],
+      "raw": "at      1100",
+      "line": 228,
+      "byte_offset": 2749,
+      "byte_length": 12,
+      "raw_sha256": "ba3fe588d37b9b2b225c9d84019b54f4a0b31f13f56c1ad1a0dfaa1dd896be13"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "long"
+      ],
+      "raw": "spawn   long",
+      "line": 230,
+      "byte_offset": 2765,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "command": "map",
+      "args": [
+        "1"
+      ],
+      "raw": "map\t  1",
+      "line": 231,
+      "byte_offset": 2779,
+      "byte_length": 7,
+      "raw_sha256": "6ee7ed49d3ca617023fb826a75f2dbd1884c333a600b5173119556071748ddb7"
+    },
+    {
+      "command": "health",
+      "args": [
+        "75"
+      ],
+      "raw": "health  75",
+      "line": 232,
+      "byte_offset": 2788,
+      "byte_length": 10,
+      "raw_sha256": "d81e11395525c996cf352b2404170bb6a9d1f9c443c9f04ae39d854522e06f09"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "550",
+        "180"
+      ],
+      "raw": "coords  550 180",
+      "line": 233,
+      "byte_offset": 2800,
+      "byte_length": 15,
+      "raw_sha256": "35e23abb15c620cb9584fa9c5b7e558143b7c67269fe1a96e5a539b0d3a9f1e5"
+    },
+    {
+      "command": "at",
+      "args": [
+        "1100"
+      ],
+      "raw": "at      1100",
+      "line": 234,
+      "byte_offset": 2817,
+      "byte_length": 12,
+      "raw_sha256": "ba3fe588d37b9b2b225c9d84019b54f4a0b31f13f56c1ad1a0dfaa1dd896be13"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "henin"
+      ],
+      "raw": "spawn   henin",
+      "line": 236,
+      "byte_offset": 2833,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "command": "map",
+      "args": [
+        "1"
+      ],
+      "raw": "map\t  1",
+      "line": 237,
+      "byte_offset": 2848,
+      "byte_length": 7,
+      "raw_sha256": "6ee7ed49d3ca617023fb826a75f2dbd1884c333a600b5173119556071748ddb7"
+    },
+    {
+      "command": "health",
+      "args": [
+        "75"
+      ],
+      "raw": "health  75",
+      "line": 238,
+      "byte_offset": 2857,
+      "byte_length": 10,
+      "raw_sha256": "d81e11395525c996cf352b2404170bb6a9d1f9c443c9f04ae39d854522e06f09"
+    },
+    {
+      "command": "flip",
+      "args": [
+        "1"
+      ],
+      "raw": "flip 1",
+      "line": 239,
+      "byte_offset": 2869,
+      "byte_length": 6,
+      "raw_sha256": "5975dc12d5df9ef54ce6884c2671aac15cee401f47e06907c52f96c61f6da633"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "-20",
+        "190"
+      ],
+      "raw": "coords  -20 190",
+      "line": 240,
+      "byte_offset": 2877,
+      "byte_length": 15,
+      "raw_sha256": "f11de2f8832d3f45552ccd50dc55e800e435dffd2a2c0b8ab9a17df51e724ea8"
+    },
+    {
+      "command": "at",
+      "args": [
+        "1100"
+      ],
+      "raw": "at      1100",
+      "line": 241,
+      "byte_offset": 2894,
+      "byte_length": 12,
+      "raw_sha256": "ba3fe588d37b9b2b225c9d84019b54f4a0b31f13f56c1ad1a0dfaa1dd896be13"
+    },
+    {
+      "command": "spawn",
+      "args": [
+        "amaz"
+      ],
+      "raw": "spawn   amaz",
+      "line": 243,
+      "byte_offset": 2910,
+      "byte_length": 12,
+      "raw_sha256": "97de91df119b9f393f21dac5486dd7191127871efd5fc24c8fdcda8946f18ffa"
+    },
+    {
+      "command": "map",
+      "args": [
+        "0"
+      ],
+      "raw": "map\t  0",
+      "line": 244,
+      "byte_offset": 2924,
+      "byte_length": 7,
+      "raw_sha256": "4db3ab55fee4c17646c5c2f9a47be15ca02c0d2f118966229261cb6690a5918b"
+    },
+    {
+      "command": "health",
+      "args": [
+        "50"
+      ],
+      "raw": "health  50",
+      "line": 245,
+      "byte_offset": 2933,
+      "byte_length": 10,
+      "raw_sha256": "c087bc4d513bfaa08e634615cdcd7fa82e1f3cdd0dfc70e4a32e818ae27ce52f"
+    },
+    {
+      "command": "coords",
+      "args": [
+        "550",
+        "190"
+      ],
+      "raw": "coords  550 190",
+      "line": 246,
+      "byte_offset": 2945,
+      "byte_length": 15,
+      "raw_sha256": "be0901840462dc795bb8a847ff2e03b1b0d9b77fbfd501761cad8a66f0497308"
+    },
+    {
+      "command": "at",
+      "args": [
+        "1100"
+      ],
+      "raw": "at      1100",
+      "line": 247,
+      "byte_offset": 2962,
+      "byte_length": 12,
+      "raw_sha256": "ba3fe588d37b9b2b225c9d84019b54f4a0b31f13f56c1ad1a0dfaa1dd896be13"
+    }
+  ],
+  "directive_matrix": [
+    {
+      "command": "at",
+      "occurrences": 32,
+      "source_lines": [
+        52,
+        61,
+        71,
+        78,
+        84,
+        90,
+        96,
+        99,
+        105,
+        111,
+        117,
+        125,
+        128,
+        134,
+        141,
+        150,
+        153,
+        159,
+        166,
+        172,
+        179,
+        184,
+        191,
+        199,
+        206,
+        212,
+        215,
+        221,
+        228,
+        234,
+        241,
+        247
+      ]
+    },
+    {
+      "command": "background",
+      "occurrences": 1,
+      "source_lines": [
+        4
+      ]
+    },
+    {
+      "command": "boss",
+      "occurrences": 1,
+      "source_lines": [
+        189
+      ]
+    },
+    {
+      "command": "bossmusic",
+      "occurrences": 1,
+      "source_lines": [
+        2
+      ]
+    },
+    {
+      "command": "coords",
+      "occurrences": 23,
+      "source_lines": [
+        51,
+        60,
+        70,
+        77,
+        89,
+        95,
+        104,
+        110,
+        116,
+        133,
+        140,
+        158,
+        165,
+        171,
+        178,
+        190,
+        198,
+        205,
+        220,
+        227,
+        233,
+        240,
+        246
+      ]
+    },
+    {
+      "command": "flip",
+      "occurrences": 6,
+      "source_lines": [
+        59,
+        139,
+        164,
+        177,
+        226,
+        239
+      ]
+    },
+    {
+      "command": "frontpanel",
+      "occurrences": 1,
+      "source_lines": [
+        12
+      ]
+    },
+    {
+      "command": "group",
+      "occurrences": 5,
+      "source_lines": [
+        83,
+        124,
+        149,
+        183,
+        211
+      ]
+    },
+    {
+      "command": "health",
+      "occurrences": 21,
+      "source_lines": [
+        68,
+        75,
+        88,
+        94,
+        103,
+        109,
+        115,
+        132,
+        138,
+        157,
+        163,
+        170,
+        176,
+        188,
+        196,
+        203,
+        219,
+        225,
+        232,
+        238,
+        245
+      ]
+    },
+    {
+      "command": "hole",
+      "occurrences": 1,
+      "source_lines": [
+        43
+      ]
+    },
+    {
+      "command": "item",
+      "occurrences": 4,
+      "source_lines": [
+        69,
+        76,
+        197,
+        204
+      ]
+    },
+    {
+      "command": "map",
+      "occurrences": 22,
+      "source_lines": [
+        50,
+        67,
+        74,
+        87,
+        93,
+        102,
+        108,
+        114,
+        131,
+        137,
+        156,
+        162,
+        169,
+        175,
+        187,
+        195,
+        202,
+        218,
+        224,
+        231,
+        237,
+        244
+      ]
+    },
+    {
+      "command": "music",
+      "occurrences": 1,
+      "source_lines": [
+        1
+      ]
+    },
+    {
+      "command": "notime",
+      "occurrences": 1,
+      "source_lines": [
+        24
+      ]
+    },
+    {
+      "command": "order",
+      "occurrences": 1,
+      "source_lines": [
+        14
+      ]
+    },
+    {
+      "command": "panel",
+      "occurrences": 1,
+      "source_lines": [
+        10
+      ]
+    },
+    {
+      "command": "settime",
+      "occurrences": 1,
+      "source_lines": [
+        23
+      ]
+    },
+    {
+      "command": "spawn",
+      "occurrences": 23,
+      "source_lines": [
+        49,
+        58,
+        66,
+        73,
+        86,
+        92,
+        101,
+        107,
+        113,
+        130,
+        136,
+        155,
+        161,
+        168,
+        174,
+        186,
+        194,
+        201,
+        217,
+        223,
+        230,
+        236,
+        243
+      ]
+    },
+    {
+      "command": "spawn1",
+      "occurrences": 1,
+      "source_lines": [
+        28
+      ]
+    },
+    {
+      "command": "spawn2",
+      "occurrences": 1,
+      "source_lines": [
+        29
+      ]
+    },
+    {
+      "command": "spawn3",
+      "occurrences": 1,
+      "source_lines": [
+        30
+      ]
+    },
+    {
+      "command": "spawn4",
+      "occurrences": 1,
+      "source_lines": [
+        31
+      ]
+    },
+    {
+      "command": "stagenumber",
+      "occurrences": 1,
+      "source_lines": [
+        26
+      ]
+    },
+    {
+      "command": "type",
+      "occurrences": 1,
+      "source_lines": [
+        22
+      ]
+    },
+    {
+      "command": "wait",
+      "occurrences": 4,
+      "source_lines": [
+        98,
+        127,
+        152,
+        214
+      ]
+    },
+    {
+      "command": "wall",
+      "occurrences": 4,
+      "source_lines": [
+        36,
+        37,
+        39,
+        41
+      ]
+    }
+  ],
+  "spawns": [
+    {
+      "name": "intro",
+      "at": 0,
+      "health": null,
+      "coords": [
+        240,
+        332
+      ],
+      "flip": null,
+      "line": 49,
+      "byte_offset": 1008,
+      "byte_length": 13,
+      "raw_sha256": "f5b3db5e95106ec8727e30171f808e42a238b2e7f51d325b02c8009ec7c6bf0f"
+    },
+    {
+      "name": "bizzar1",
+      "at": 0,
+      "health": null,
+      "coords": [
+        560,
+        210
+      ],
+      "flip": 1,
+      "line": 58,
+      "byte_offset": 1097,
+      "byte_length": 15,
+      "raw_sha256": "efb3eb62a497d9dd4d5604974198cc332ea2496272e2b0c94bd768530d7e91f8"
+    },
+    {
+      "name": "civ02",
+      "at": 0,
+      "health": 1,
+      "coords": [
+        500,
+        160
+      ],
+      "flip": null,
+      "line": 66,
+      "byte_offset": 1172,
+      "byte_length": 13,
+      "raw_sha256": "43f5bebbdc99d6973667a7ee8657f1c784d606c1d1773d016b42913bea35aa55"
+    },
+    {
+      "name": "civ03",
+      "at": 0,
+      "health": 1,
+      "coords": [
+        550,
+        170
+      ],
+      "flip": null,
+      "line": 73,
+      "byte_offset": 1248,
+      "byte_length": 13,
+      "raw_sha256": "a5e0ca7655d67d9bcbad5da57d14aa740f0cd088b0675f412f9bad7cc4e0cf36"
+    },
+    {
+      "name": "long",
+      "at": 0,
+      "health": 50,
+      "coords": [
+        500,
+        180
+      ],
+      "flip": null,
+      "line": 86,
+      "byte_offset": 1359,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "name": "henin",
+      "at": 0,
+      "health": 50,
+      "coords": [
+        550,
+        190
+      ],
+      "flip": null,
+      "line": 92,
+      "byte_offset": 1424,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "name": "amaz",
+      "at": 300,
+      "health": 75,
+      "coords": [
+        -20,
+        190
+      ],
+      "flip": null,
+      "line": 101,
+      "byte_offset": 1511,
+      "byte_length": 12,
+      "raw_sha256": "97de91df119b9f393f21dac5486dd7191127871efd5fc24c8fdcda8946f18ffa"
+    },
+    {
+      "name": "henin",
+      "at": 300,
+      "health": 75,
+      "coords": [
+        570,
+        180
+      ],
+      "flip": null,
+      "line": 107,
+      "byte_offset": 1578,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "name": "long",
+      "at": 300,
+      "health": 50,
+      "coords": [
+        570,
+        180
+      ],
+      "flip": null,
+      "line": 113,
+      "byte_offset": 1646,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "name": "long",
+      "at": 600,
+      "health": 100,
+      "coords": [
+        500,
+        180
+      ],
+      "flip": null,
+      "line": 130,
+      "byte_offset": 1783,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "name": "henin",
+      "at": 600,
+      "health": 50,
+      "coords": [
+        -20,
+        190
+      ],
+      "flip": 1,
+      "line": 136,
+      "byte_offset": 1851,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "name": "thief1",
+      "at": 900,
+      "health": 5,
+      "coords": [
+        500,
+        180
+      ],
+      "flip": null,
+      "line": 155,
+      "byte_offset": 1999,
+      "byte_length": 14,
+      "raw_sha256": "c31c9b08035e995f5e085535d9cb27045e5e6d6e8bcf9d1796a239b155b50059"
+    },
+    {
+      "name": "thief2",
+      "at": 900,
+      "health": 5,
+      "coords": [
+        -20,
+        190
+      ],
+      "flip": 1,
+      "line": 161,
+      "byte_offset": 2067,
+      "byte_length": 14,
+      "raw_sha256": "f7c6199ccfb02fd78ff703d9adc251e942c7f8cd29e9d00b6ff90c2f43df73dc"
+    },
+    {
+      "name": "thief1",
+      "at": 900,
+      "health": 5,
+      "coords": [
+        550,
+        200
+      ],
+      "flip": null,
+      "line": 168,
+      "byte_offset": 2143,
+      "byte_length": 14,
+      "raw_sha256": "c31c9b08035e995f5e085535d9cb27045e5e6d6e8bcf9d1796a239b155b50059"
+    },
+    {
+      "name": "thief1",
+      "at": 900,
+      "health": 5,
+      "coords": [
+        -40,
+        210
+      ],
+      "flip": 1,
+      "line": 174,
+      "byte_offset": 2211,
+      "byte_length": 14,
+      "raw_sha256": "c31c9b08035e995f5e085535d9cb27045e5e6d6e8bcf9d1796a239b155b50059"
+    },
+    {
+      "name": "badbro2",
+      "at": 901,
+      "health": 200,
+      "coords": [
+        640,
+        190
+      ],
+      "flip": null,
+      "line": 186,
+      "byte_offset": 2321,
+      "byte_length": 15,
+      "raw_sha256": "898072207fa550717c274148aab670493041351f09386fcadcba07a91404430e"
+    },
+    {
+      "name": "civ02",
+      "at": 901,
+      "health": 1,
+      "coords": [
+        500,
+        170
+      ],
+      "flip": null,
+      "line": 194,
+      "byte_offset": 2404,
+      "byte_length": 13,
+      "raw_sha256": "43f5bebbdc99d6973667a7ee8657f1c784d606c1d1773d016b42913bea35aa55"
+    },
+    {
+      "name": "civ03",
+      "at": 901,
+      "health": 1,
+      "coords": [
+        550,
+        160
+      ],
+      "flip": null,
+      "line": 201,
+      "byte_offset": 2482,
+      "byte_length": 13,
+      "raw_sha256": "a5e0ca7655d67d9bcbad5da57d14aa740f0cd088b0675f412f9bad7cc4e0cf36"
+    },
+    {
+      "name": "long",
+      "at": 1100,
+      "health": 50,
+      "coords": [
+        550,
+        180
+      ],
+      "flip": null,
+      "line": 217,
+      "byte_offset": 2620,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "name": "henin",
+      "at": 1100,
+      "health": 50,
+      "coords": [
+        -20,
+        190
+      ],
+      "flip": 1,
+      "line": 223,
+      "byte_offset": 2688,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "name": "long",
+      "at": 1100,
+      "health": 75,
+      "coords": [
+        550,
+        180
+      ],
+      "flip": null,
+      "line": 230,
+      "byte_offset": 2765,
+      "byte_length": 12,
+      "raw_sha256": "967e22d3d49da76858a37261df8a70bd663e351210c0d98ac501ab9a520be0f3"
+    },
+    {
+      "name": "henin",
+      "at": 1100,
+      "health": 75,
+      "coords": [
+        -20,
+        190
+      ],
+      "flip": 1,
+      "line": 236,
+      "byte_offset": 2833,
+      "byte_length": 13,
+      "raw_sha256": "fe1883c4d8b62312c0de63ed5b4188d8864e9277f95e98e551a509814cba09eb"
+    },
+    {
+      "name": "amaz",
+      "at": 1100,
+      "health": 50,
+      "coords": [
+        550,
+        190
+      ],
+      "flip": null,
+      "line": 243,
+      "byte_offset": 2910,
+      "byte_length": 12,
+      "raw_sha256": "97de91df119b9f393f21dac5486dd7191127871efd5fc24c8fdcda8946f18ffa"
+    }
+  ],
+  "player_starts": [
+    {
+      "slot": 1,
+      "x": 50,
+      "z": 20,
+      "y": 200,
+      "raw": "spawn1  50 20 200",
+      "line": 28,
+      "byte_offset": 574,
+      "byte_length": 17,
+      "raw_sha256": "ae4f68c024bca1a016123010cb6017eb63fe9b242615459bb787bd1180fac780"
+    },
+    {
+      "slot": 2,
+      "x": 40,
+      "z": 30,
+      "y": 200,
+      "raw": "spawn2  40 30 200",
+      "line": 29,
+      "byte_offset": 593,
+      "byte_length": 17,
+      "raw_sha256": "4fbab5e8129b7ae55f0b20f4aefade7deb250ea009484316d0dcbdf6a0b8dda5"
+    },
+    {
+      "slot": 3,
+      "x": 60,
+      "z": 40,
+      "y": 200,
+      "raw": "spawn3  60 40 200",
+      "line": 30,
+      "byte_offset": 612,
+      "byte_length": 17,
+      "raw_sha256": "290fbf461dcc15d3d473dbc1b8524b2ef404622b2399f0a5d4dc49ccf96742b4"
+    },
+    {
+      "slot": 4,
+      "x": 50,
+      "z": 50,
+      "y": 200,
+      "raw": "spawn4  50 50 200",
+      "line": 31,
+      "byte_offset": 631,
+      "byte_length": 17,
+      "raw_sha256": "3e57b07f5076e79c9a0abcb65e7979608df59737b72d26424a7c17caa847c2dc"
+    }
+  ],
+  "issues": [],
+  "units": {
+    "policy": "integers pass through unchanged; O1 declares a unit only where the ported pinned reference semantics establish one, and the SMS backend pins consumption units later",
+    "declared": [],
+    "undeclared_commands": [
+      "at",
+      "background",
+      "boss",
+      "bossmusic",
+      "coords",
+      "flip",
+      "frontpanel",
+      "group",
+      "health",
+      "hole",
+      "item",
+      "map",
+      "music",
+      "notime",
+      "order",
+      "panel",
+      "settime",
+      "spawn",
+      "spawn1",
+      "spawn2",
+      "spawn3",
+      "spawn4",
+      "stagenumber",
+      "type",
+      "wait",
+      "wall"
+    ]
+  },
+  "event_ir": {
+    "ir_version": "openbor-level-event-ir/1",
+    "source_path": "data/levels/town1.txt",
+    "reference_profile": {
+      "id": "openbor_dcurrent_787b6770",
+      "commit": "787b6770409935137579715febf80cf7a529b748",
+      "original_module_version_verified": false
+    },
+    "status": "analysis_only",
+    "events": [
+      {
+        "kind": "spawn",
+        "line": 49,
+        "name": "intro",
+        "directives": [
+          {
+            "line": 50,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 51,
+            "command": "coords",
+            "args": [
+              "240",
+              "332"
+            ]
+          }
+        ],
+        "at": 0,
+        "at_line": 52
+      },
+      {
+        "kind": "spawn",
+        "line": 58,
+        "name": "bizzar1",
+        "directives": [
+          {
+            "line": 59,
+            "command": "flip",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 60,
+            "command": "coords",
+            "args": [
+              "560",
+              "210"
+            ]
+          }
+        ],
+        "at": 0,
+        "at_line": 61
+      },
+      {
+        "kind": "spawn",
+        "line": 66,
+        "name": "civ02",
+        "directives": [
+          {
+            "line": 67,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 68,
+            "command": "health",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 69,
+            "command": "item",
+            "args": [
+              "book"
+            ]
+          },
+          {
+            "line": 70,
+            "command": "coords",
+            "args": [
+              "500",
+              "160"
+            ]
+          }
+        ],
+        "at": 0,
+        "at_line": 71
+      },
+      {
+        "kind": "spawn",
+        "line": 73,
+        "name": "civ03",
+        "directives": [
+          {
+            "line": 74,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 75,
+            "command": "health",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 76,
+            "command": "item",
+            "args": [
+              "ingot"
+            ]
+          },
+          {
+            "line": 77,
+            "command": "coords",
+            "args": [
+              "550",
+              "170"
+            ]
+          }
+        ],
+        "at": 0,
+        "at_line": 78
+      },
+      {
+        "kind": "group",
+        "line": 83,
+        "group_min": 3,
+        "group_max": 3,
+        "directives": [],
+        "at": 0,
+        "at_line": 84
+      },
+      {
+        "kind": "spawn",
+        "line": 86,
+        "name": "long",
+        "directives": [
+          {
+            "line": 87,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 88,
+            "command": "health",
+            "args": [
+              "50"
+            ]
+          },
+          {
+            "line": 89,
+            "command": "coords",
+            "args": [
+              "500",
+              "180"
+            ]
+          }
+        ],
+        "at": 0,
+        "at_line": 90
+      },
+      {
+        "kind": "spawn",
+        "line": 92,
+        "name": "henin",
+        "directives": [
+          {
+            "line": 93,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 94,
+            "command": "health",
+            "args": [
+              "50"
+            ]
+          },
+          {
+            "line": 95,
+            "command": "coords",
+            "args": [
+              "550",
+              "190"
+            ]
+          }
+        ],
+        "at": 0,
+        "at_line": 96
+      },
+      {
+        "kind": "wait",
+        "line": 98,
+        "directives": [],
+        "at": 300,
+        "at_line": 99
+      },
+      {
+        "kind": "spawn",
+        "line": 101,
+        "name": "amaz",
+        "directives": [
+          {
+            "line": 102,
+            "command": "map",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 103,
+            "command": "health",
+            "args": [
+              "75"
+            ]
+          },
+          {
+            "line": 104,
+            "command": "coords",
+            "args": [
+              "-20",
+              "190"
+            ]
+          }
+        ],
+        "at": 300,
+        "at_line": 105
+      },
+      {
+        "kind": "spawn",
+        "line": 107,
+        "name": "henin",
+        "directives": [
+          {
+            "line": 108,
+            "command": "map",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 109,
+            "command": "health",
+            "args": [
+              "75"
+            ]
+          },
+          {
+            "line": 110,
+            "command": "coords",
+            "args": [
+              "570",
+              "180"
+            ]
+          }
+        ],
+        "at": 300,
+        "at_line": 111
+      },
+      {
+        "kind": "spawn",
+        "line": 113,
+        "name": "long",
+        "directives": [
+          {
+            "line": 114,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 115,
+            "command": "health",
+            "args": [
+              "50"
+            ]
+          },
+          {
+            "line": 116,
+            "command": "coords",
+            "args": [
+              "570",
+              "180"
+            ]
+          }
+        ],
+        "at": 300,
+        "at_line": 117
+      },
+      {
+        "kind": "group",
+        "line": 124,
+        "group_min": 2,
+        "group_max": 2,
+        "directives": [],
+        "at": 600,
+        "at_line": 125
+      },
+      {
+        "kind": "wait",
+        "line": 127,
+        "directives": [],
+        "at": 600,
+        "at_line": 128
+      },
+      {
+        "kind": "spawn",
+        "line": 130,
+        "name": "long",
+        "directives": [
+          {
+            "line": 131,
+            "command": "map",
+            "args": [
+              "2"
+            ]
+          },
+          {
+            "line": 132,
+            "command": "health",
+            "args": [
+              "100"
+            ]
+          },
+          {
+            "line": 133,
+            "command": "coords",
+            "args": [
+              "500",
+              "180"
+            ]
+          }
+        ],
+        "at": 600,
+        "at_line": 134
+      },
+      {
+        "kind": "spawn",
+        "line": 136,
+        "name": "henin",
+        "directives": [
+          {
+            "line": 137,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 138,
+            "command": "health",
+            "args": [
+              "50"
+            ]
+          },
+          {
+            "line": 139,
+            "command": "flip",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 140,
+            "command": "coords",
+            "args": [
+              "-20",
+              "190"
+            ]
+          }
+        ],
+        "at": 600,
+        "at_line": 141
+      },
+      {
+        "kind": "group",
+        "line": 149,
+        "group_min": 4,
+        "group_max": 4,
+        "directives": [],
+        "at": 900,
+        "at_line": 150
+      },
+      {
+        "kind": "wait",
+        "line": 152,
+        "directives": [],
+        "at": 900,
+        "at_line": 153
+      },
+      {
+        "kind": "spawn",
+        "line": 155,
+        "name": "thief1",
+        "directives": [
+          {
+            "line": 156,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 157,
+            "command": "health",
+            "args": [
+              "5"
+            ]
+          },
+          {
+            "line": 158,
+            "command": "coords",
+            "args": [
+              "500",
+              "180"
+            ]
+          }
+        ],
+        "at": 900,
+        "at_line": 159
+      },
+      {
+        "kind": "spawn",
+        "line": 161,
+        "name": "thief2",
+        "directives": [
+          {
+            "line": 162,
+            "command": "map",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 163,
+            "command": "health",
+            "args": [
+              "5"
+            ]
+          },
+          {
+            "line": 164,
+            "command": "flip",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 165,
+            "command": "coords",
+            "args": [
+              "-20",
+              "190"
+            ]
+          }
+        ],
+        "at": 900,
+        "at_line": 166
+      },
+      {
+        "kind": "spawn",
+        "line": 168,
+        "name": "thief1",
+        "directives": [
+          {
+            "line": 169,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 170,
+            "command": "health",
+            "args": [
+              "5"
+            ]
+          },
+          {
+            "line": 171,
+            "command": "coords",
+            "args": [
+              "550",
+              "200"
+            ]
+          }
+        ],
+        "at": 900,
+        "at_line": 172
+      },
+      {
+        "kind": "spawn",
+        "line": 174,
+        "name": "thief1",
+        "directives": [
+          {
+            "line": 175,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 176,
+            "command": "health",
+            "args": [
+              "5"
+            ]
+          },
+          {
+            "line": 177,
+            "command": "flip",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 178,
+            "command": "coords",
+            "args": [
+              "-40",
+              "210"
+            ]
+          }
+        ],
+        "at": 900,
+        "at_line": 179
+      },
+      {
+        "kind": "group",
+        "line": 183,
+        "group_min": 3,
+        "group_max": 3,
+        "directives": [],
+        "at": 901,
+        "at_line": 184
+      },
+      {
+        "kind": "spawn",
+        "line": 186,
+        "name": "badbro2",
+        "directives": [
+          {
+            "line": 187,
+            "command": "map",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 188,
+            "command": "health",
+            "args": [
+              "200"
+            ]
+          },
+          {
+            "line": 189,
+            "command": "boss",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 190,
+            "command": "coords",
+            "args": [
+              "640",
+              "190"
+            ]
+          }
+        ],
+        "at": 901,
+        "at_line": 191
+      },
+      {
+        "kind": "spawn",
+        "line": 194,
+        "name": "civ02",
+        "directives": [
+          {
+            "line": 195,
+            "command": "map",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 196,
+            "command": "health",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 197,
+            "command": "item",
+            "args": [
+              "book"
+            ]
+          },
+          {
+            "line": 198,
+            "command": "coords",
+            "args": [
+              "500",
+              "170"
+            ]
+          }
+        ],
+        "at": 901,
+        "at_line": 199
+      },
+      {
+        "kind": "spawn",
+        "line": 201,
+        "name": "civ03",
+        "directives": [
+          {
+            "line": 202,
+            "command": "map",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 203,
+            "command": "health",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 204,
+            "command": "item",
+            "args": [
+              "ingot"
+            ]
+          },
+          {
+            "line": 205,
+            "command": "coords",
+            "args": [
+              "550",
+              "160"
+            ]
+          }
+        ],
+        "at": 901,
+        "at_line": 206
+      },
+      {
+        "kind": "group",
+        "line": 211,
+        "group_min": 3,
+        "group_max": 3,
+        "directives": [],
+        "at": 1100,
+        "at_line": 212
+      },
+      {
+        "kind": "wait",
+        "line": 214,
+        "directives": [],
+        "at": 1100,
+        "at_line": 215
+      },
+      {
+        "kind": "spawn",
+        "line": 217,
+        "name": "long",
+        "directives": [
+          {
+            "line": 218,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 219,
+            "command": "health",
+            "args": [
+              "50"
+            ]
+          },
+          {
+            "line": 220,
+            "command": "coords",
+            "args": [
+              "550",
+              "180"
+            ]
+          }
+        ],
+        "at": 1100,
+        "at_line": 221
+      },
+      {
+        "kind": "spawn",
+        "line": 223,
+        "name": "henin",
+        "directives": [
+          {
+            "line": 224,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 225,
+            "command": "health",
+            "args": [
+              "50"
+            ]
+          },
+          {
+            "line": 226,
+            "command": "flip",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 227,
+            "command": "coords",
+            "args": [
+              "-20",
+              "190"
+            ]
+          }
+        ],
+        "at": 1100,
+        "at_line": 228
+      },
+      {
+        "kind": "spawn",
+        "line": 230,
+        "name": "long",
+        "directives": [
+          {
+            "line": 231,
+            "command": "map",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 232,
+            "command": "health",
+            "args": [
+              "75"
+            ]
+          },
+          {
+            "line": 233,
+            "command": "coords",
+            "args": [
+              "550",
+              "180"
+            ]
+          }
+        ],
+        "at": 1100,
+        "at_line": 234
+      },
+      {
+        "kind": "spawn",
+        "line": 236,
+        "name": "henin",
+        "directives": [
+          {
+            "line": 237,
+            "command": "map",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 238,
+            "command": "health",
+            "args": [
+              "75"
+            ]
+          },
+          {
+            "line": 239,
+            "command": "flip",
+            "args": [
+              "1"
+            ]
+          },
+          {
+            "line": 240,
+            "command": "coords",
+            "args": [
+              "-20",
+              "190"
+            ]
+          }
+        ],
+        "at": 1100,
+        "at_line": 241
+      },
+      {
+        "kind": "spawn",
+        "line": 243,
+        "name": "amaz",
+        "directives": [
+          {
+            "line": 244,
+            "command": "map",
+            "args": [
+              "0"
+            ]
+          },
+          {
+            "line": 245,
+            "command": "health",
+            "args": [
+              "50"
+            ]
+          },
+          {
+            "line": 246,
+            "command": "coords",
+            "args": [
+              "550",
+              "190"
+            ]
+          }
+        ],
+        "at": 1100,
+        "at_line": 247
+      }
+    ],
+    "source_directives": [
+      {
+        "line": 1,
+        "command": "music",
+        "args": [
+          "data/music/STAGE1.BOR"
+        ],
+        "raw": "music\t\t\tdata/music/STAGE1.BOR"
+      },
+      {
+        "line": 2,
+        "command": "bossmusic",
+        "args": [
+          "data/music/BOSS.BOR"
+        ],
+        "raw": "bossmusic\t\tdata/music/BOSS.BOR"
+      },
+      {
+        "line": 4,
+        "command": "background",
+        "args": [
+          "data/bgs/TOWN1/back.gif"
+        ],
+        "raw": "background\t\tdata/bgs/TOWN1/back.gif"
+      },
+      {
+        "line": 10,
+        "command": "panel",
+        "args": [
+          "data/bgs/TOWN1/panel.gif"
+        ],
+        "raw": "panel\t\t\tdata/bgs/TOWN1/panel.gif"
+      },
+      {
+        "line": 12,
+        "command": "frontpanel",
+        "args": [
+          "data/bgs/TOWN1/f01.gif"
+        ],
+        "raw": "frontpanel\t\tdata/bgs/TOWN1/f01.gif "
+      },
+      {
+        "line": 14,
+        "command": "order",
+        "args": [
+          "a"
+        ],
+        "raw": "order\t\t\ta"
+      },
+      {
+        "line": 22,
+        "command": "type",
+        "args": [
+          "0"
+        ],
+        "raw": "type\t\t\t0"
+      },
+      {
+        "line": 23,
+        "command": "settime",
+        "args": [
+          "99"
+        ],
+        "raw": "settime\t\t99"
+      },
+      {
+        "line": 24,
+        "command": "notime",
+        "args": [
+          "0"
+        ],
+        "raw": "notime\t\t0"
+      },
+      {
+        "line": 26,
+        "command": "stagenumber",
+        "args": [
+          "1"
+        ],
+        "raw": "stagenumber\t\t1"
+      },
+      {
+        "line": 28,
+        "command": "spawn1",
+        "args": [
+          "50",
+          "20",
+          "200"
+        ],
+        "raw": "spawn1  50 20 200"
+      },
+      {
+        "line": 29,
+        "command": "spawn2",
+        "args": [
+          "40",
+          "30",
+          "200"
+        ],
+        "raw": "spawn2  40 30 200"
+      },
+      {
+        "line": 30,
+        "command": "spawn3",
+        "args": [
+          "60",
+          "40",
+          "200"
+        ],
+        "raw": "spawn3  60 40 200"
+      },
+      {
+        "line": 31,
+        "command": "spawn4",
+        "args": [
+          "50",
+          "50",
+          "200"
+        ],
+        "raw": "spawn4  50 50 200"
+      },
+      {
+        "line": 36,
+        "command": "wall",
+        "args": [
+          "627",
+          "266",
+          "-35",
+          "38",
+          "-6",
+          "64",
+          "95",
+          "15"
+        ],
+        "raw": "wall    627 266 -35 38 -6 64 95 15"
+      },
+      {
+        "line": 37,
+        "command": "wall",
+        "args": [
+          "653",
+          "256",
+          "-35",
+          "28",
+          "240",
+          "227",
+          "85",
+          "60"
+        ],
+        "raw": "wall    653 256 -35 28 240 227 85 60"
+      },
+      {
+        "line": 39,
+        "command": "wall",
+        "args": [
+          "954",
+          "256",
+          "-35",
+          "28",
+          "96",
+          "117",
+          "85",
+          "40"
+        ],
+        "raw": "wall    954 256 -35 28 96 117 85 40"
+      },
+      {
+        "line": 41,
+        "command": "wall",
+        "args": [
+          "562",
+          "175",
+          "-35",
+          "28",
+          "436",
+          "497",
+          "95",
+          "510"
+        ],
+        "raw": "wall    562 175 -35 28 436 497 95 510"
+      },
+      {
+        "line": 43,
+        "command": "hole",
+        "args": [
+          "895",
+          "256",
+          "-40",
+          "-26",
+          "34",
+          "97",
+          "105"
+        ],
+        "raw": "hole    895 256 -40 -26 34 97 105"
+      },
+      {
+        "line": 49,
+        "command": "spawn",
+        "args": [
+          "intro"
+        ],
+        "raw": "spawn   intro"
+      },
+      {
+        "line": 50,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 51,
+        "command": "coords",
+        "args": [
+          "240",
+          "332"
+        ],
+        "raw": "coords  240 332"
+      },
+      {
+        "line": 52,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 58,
+        "command": "spawn",
+        "args": [
+          "bizzar1"
+        ],
+        "raw": "spawn   bizzar1"
+      },
+      {
+        "line": 59,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 60,
+        "command": "coords",
+        "args": [
+          "560",
+          "210"
+        ],
+        "raw": "coords  560 210"
+      },
+      {
+        "line": 61,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 66,
+        "command": "spawn",
+        "args": [
+          "civ02"
+        ],
+        "raw": "spawn   civ02"
+      },
+      {
+        "line": 67,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 68,
+        "command": "health",
+        "args": [
+          "1"
+        ],
+        "raw": "health  1"
+      },
+      {
+        "line": 69,
+        "command": "item",
+        "args": [
+          "book"
+        ],
+        "raw": "item book"
+      },
+      {
+        "line": 70,
+        "command": "coords",
+        "args": [
+          "500",
+          "160"
+        ],
+        "raw": "coords  500 160"
+      },
+      {
+        "line": 71,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 73,
+        "command": "spawn",
+        "args": [
+          "civ03"
+        ],
+        "raw": "spawn   civ03"
+      },
+      {
+        "line": 74,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 75,
+        "command": "health",
+        "args": [
+          "1"
+        ],
+        "raw": "health  1"
+      },
+      {
+        "line": 76,
+        "command": "item",
+        "args": [
+          "ingot"
+        ],
+        "raw": "item ingot"
+      },
+      {
+        "line": 77,
+        "command": "coords",
+        "args": [
+          "550",
+          "170"
+        ],
+        "raw": "coords  550 170"
+      },
+      {
+        "line": 78,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 83,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 84,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at 0"
+      },
+      {
+        "line": 86,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 87,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 88,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 89,
+        "command": "coords",
+        "args": [
+          "500",
+          "180"
+        ],
+        "raw": "coords  500 180"
+      },
+      {
+        "line": 90,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 92,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 93,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 94,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 95,
+        "command": "coords",
+        "args": [
+          "550",
+          "190"
+        ],
+        "raw": "coords  550 190"
+      },
+      {
+        "line": 96,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 98,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 99,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 101,
+        "command": "spawn",
+        "args": [
+          "amaz"
+        ],
+        "raw": "spawn   amaz"
+      },
+      {
+        "line": 102,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 103,
+        "command": "health",
+        "args": [
+          "75"
+        ],
+        "raw": "health  75"
+      },
+      {
+        "line": 104,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 105,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 107,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 108,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 109,
+        "command": "health",
+        "args": [
+          "75"
+        ],
+        "raw": "health  75"
+      },
+      {
+        "line": 110,
+        "command": "coords",
+        "args": [
+          "570",
+          "180"
+        ],
+        "raw": "coords  570 180"
+      },
+      {
+        "line": 111,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 113,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 114,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 115,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 116,
+        "command": "coords",
+        "args": [
+          "570",
+          "180"
+        ],
+        "raw": "coords  570 180"
+      },
+      {
+        "line": 117,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 124,
+        "command": "group",
+        "args": [
+          "2",
+          "2"
+        ],
+        "raw": "Group 2 2"
+      },
+      {
+        "line": 125,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at 600"
+      },
+      {
+        "line": 127,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 128,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 130,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 131,
+        "command": "map",
+        "args": [
+          "2"
+        ],
+        "raw": "map\t  2"
+      },
+      {
+        "line": 132,
+        "command": "health",
+        "args": [
+          "100"
+        ],
+        "raw": "health  100"
+      },
+      {
+        "line": 133,
+        "command": "coords",
+        "args": [
+          "500",
+          "180"
+        ],
+        "raw": "coords  500 180"
+      },
+      {
+        "line": 134,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 136,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 137,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 138,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 139,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 140,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 141,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 149,
+        "command": "group",
+        "args": [
+          "4",
+          "4"
+        ],
+        "raw": "Group 4 4"
+      },
+      {
+        "line": 150,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at 900"
+      },
+      {
+        "line": 152,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 153,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 155,
+        "command": "spawn",
+        "args": [
+          "thief1"
+        ],
+        "raw": "spawn   thief1"
+      },
+      {
+        "line": 156,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 157,
+        "command": "health",
+        "args": [
+          "5"
+        ],
+        "raw": "health  5"
+      },
+      {
+        "line": 158,
+        "command": "coords",
+        "args": [
+          "500",
+          "180"
+        ],
+        "raw": "coords  500 180"
+      },
+      {
+        "line": 159,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 161,
+        "command": "spawn",
+        "args": [
+          "thief2"
+        ],
+        "raw": "spawn   thief2"
+      },
+      {
+        "line": 162,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 163,
+        "command": "health",
+        "args": [
+          "5"
+        ],
+        "raw": "health  5"
+      },
+      {
+        "line": 164,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 165,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 166,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 168,
+        "command": "spawn",
+        "args": [
+          "thief1"
+        ],
+        "raw": "spawn   thief1"
+      },
+      {
+        "line": 169,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 170,
+        "command": "health",
+        "args": [
+          "5"
+        ],
+        "raw": "health  5"
+      },
+      {
+        "line": 171,
+        "command": "coords",
+        "args": [
+          "550",
+          "200"
+        ],
+        "raw": "coords  550 200"
+      },
+      {
+        "line": 172,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 174,
+        "command": "spawn",
+        "args": [
+          "thief1"
+        ],
+        "raw": "spawn   thief1"
+      },
+      {
+        "line": 175,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 176,
+        "command": "health",
+        "args": [
+          "5"
+        ],
+        "raw": "health  5"
+      },
+      {
+        "line": 177,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 178,
+        "command": "coords",
+        "args": [
+          "-40",
+          "210"
+        ],
+        "raw": "coords  -40 210"
+      },
+      {
+        "line": 179,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 183,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 184,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at 901"
+      },
+      {
+        "line": 186,
+        "command": "spawn",
+        "args": [
+          "badbro2"
+        ],
+        "raw": "spawn   badbro2"
+      },
+      {
+        "line": 187,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 188,
+        "command": "health",
+        "args": [
+          "200"
+        ],
+        "raw": "health  200"
+      },
+      {
+        "line": 189,
+        "command": "boss",
+        "args": [
+          "1"
+        ],
+        "raw": "boss\t  1"
+      },
+      {
+        "line": 190,
+        "command": "coords",
+        "args": [
+          "640",
+          "190"
+        ],
+        "raw": "coords  640 190"
+      },
+      {
+        "line": 191,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 194,
+        "command": "spawn",
+        "args": [
+          "civ02"
+        ],
+        "raw": "spawn   civ02"
+      },
+      {
+        "line": 195,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 196,
+        "command": "health",
+        "args": [
+          "1"
+        ],
+        "raw": "health  1"
+      },
+      {
+        "line": 197,
+        "command": "item",
+        "args": [
+          "book"
+        ],
+        "raw": "item book"
+      },
+      {
+        "line": 198,
+        "command": "coords",
+        "args": [
+          "500",
+          "170"
+        ],
+        "raw": "coords  500 170"
+      },
+      {
+        "line": 199,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 201,
+        "command": "spawn",
+        "args": [
+          "civ03"
+        ],
+        "raw": "spawn   civ03"
+      },
+      {
+        "line": 202,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 203,
+        "command": "health",
+        "args": [
+          "1"
+        ],
+        "raw": "health  1"
+      },
+      {
+        "line": 204,
+        "command": "item",
+        "args": [
+          "ingot"
+        ],
+        "raw": "item ingot"
+      },
+      {
+        "line": 205,
+        "command": "coords",
+        "args": [
+          "550",
+          "160"
+        ],
+        "raw": "coords  550 160"
+      },
+      {
+        "line": 206,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 211,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 212,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at 1100"
+      },
+      {
+        "line": 214,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 215,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 217,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 218,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 219,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 220,
+        "command": "coords",
+        "args": [
+          "550",
+          "180"
+        ],
+        "raw": "coords  550 180"
+      },
+      {
+        "line": 221,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 223,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 224,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 225,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 226,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 227,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 228,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 230,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 231,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 232,
+        "command": "health",
+        "args": [
+          "75"
+        ],
+        "raw": "health  75"
+      },
+      {
+        "line": 233,
+        "command": "coords",
+        "args": [
+          "550",
+          "180"
+        ],
+        "raw": "coords  550 180"
+      },
+      {
+        "line": 234,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 236,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 237,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 238,
+        "command": "health",
+        "args": [
+          "75"
+        ],
+        "raw": "health  75"
+      },
+      {
+        "line": 239,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 240,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 241,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 243,
+        "command": "spawn",
+        "args": [
+          "amaz"
+        ],
+        "raw": "spawn   amaz"
+      },
+      {
+        "line": 244,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 245,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 246,
+        "command": "coords",
+        "args": [
+          "550",
+          "190"
+        ],
+        "raw": "coords  550 190"
+      },
+      {
+        "line": 247,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      }
+    ],
+    "diagnostics": [],
+    "runtime_binding": {
+      "connected": false,
+      "claim_limit": "This IR preserves a statically parsed event queue; the SGDK runtime does not consume it yet."
+    }
+  },
+  "models_index": {
+    "member": "data/models.txt",
+    "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/data/source_openbor/gal_town1/data/models.txt",
+    "bytes": 7280,
+    "sha256": "fbd18005ffbdb6346315896abd774fdf4c716ce148f7b07c9e1a9d047ff37581",
+    "entry_count": 145,
+    "entries": [
+      {
+        "alias": "ax",
+        "path": "data/chars/ax/ax.txt",
+        "line": 17,
+        "byte_offset": 236,
+        "byte_length": 31,
+        "raw_sha256": "0aabe25db5b90aa051e4cc471f24400f1f5f55a301f888e722da30407c68480a"
+      },
+      {
+        "alias": "tyris",
+        "path": "data/chars/tyris/tyris.txt",
+        "line": 18,
+        "byte_offset": 269,
+        "byte_length": 39,
+        "raw_sha256": "84df6ba33f664b31b41ee5c4715e36ebcde8f2865c827b7d5c1147bffa705c75"
+      },
+      {
+        "alias": "gilius",
+        "path": "data/chars/gilius/gilius.txt",
+        "line": 19,
+        "byte_offset": 310,
+        "byte_length": 42,
+        "raw_sha256": "6b60fec56dd012291492cbded208390865d9ec81572c574d38ee43b2160eeb7c"
+      },
+      {
+        "alias": "chronos",
+        "path": "data/chars/chronos/chronos.txt",
+        "line": 20,
+        "byte_offset": 354,
+        "byte_length": 45,
+        "raw_sha256": "06b4d56fba3c8f80ef1c83037df7e82c771747182d91f6d449d7cfed5bc5ea9a"
+      },
+      {
+        "alias": "cragg",
+        "path": "data/chars/cragg/cragg.txt",
+        "line": 21,
+        "byte_offset": 401,
+        "byte_length": 39,
+        "raw_sha256": "863fcca960e39de6070ffa6be2e2d5b267cb63f360dc9052c6f7e0c211229d57"
+      },
+      {
+        "alias": "kain",
+        "path": "data/chars/kain/kain.txt",
+        "line": 22,
+        "byte_offset": 442,
+        "byte_length": 36,
+        "raw_sha256": "0adb5b31df20a5839235754e165d187cd06a4994ec55b7bc14a32233a135243f"
+      },
+      {
+        "alias": "sarah",
+        "path": "data/chars/sarah/sarah.txt",
+        "line": 23,
+        "byte_offset": 480,
+        "byte_length": 39,
+        "raw_sha256": "45abb6ba27cd64fb0d735df8a8d4bbebb6fd3290b9b84d51e9baf0bb9376c171"
+      },
+      {
+        "alias": "tornado",
+        "path": "data/chars/misc/tornado/tornado.txt",
+        "line": 27,
+        "byte_offset": 540,
+        "byte_length": 50,
+        "raw_sha256": "f7b0b8466670f12466c653f6eae8da084a8cc00d4f9b9e8257f831dcd6991eef"
+      },
+      {
+        "alias": "wave",
+        "path": "data/chars/misc/wave/wave.txt",
+        "line": 28,
+        "byte_offset": 592,
+        "byte_length": 41,
+        "raw_sha256": "58f29b0b67b3ff8ff8189fde8c7b1191286e8c1edd0b7d34af9fe3d7bda029a8"
+      },
+      {
+        "alias": "iceberg",
+        "path": "data/chars/misc/iceberg/iceberg.txt",
+        "line": 29,
+        "byte_offset": 635,
+        "byte_length": 50,
+        "raw_sha256": "cfcc5cec6f5070ce71cc03cb0e13e68afd51c84b1ee4008889225a542d236172"
+      },
+      {
+        "alias": "bird",
+        "path": "data/chars/misc/bird/bird.txt",
+        "line": 30,
+        "byte_offset": 687,
+        "byte_length": 41,
+        "raw_sha256": "7dc7e98421441f6de1cea79437f551295ceb47a40e1dfa8bebb6510c4817d901"
+      },
+      {
+        "alias": "sword",
+        "path": "data/chars/misc/sword/sword.txt",
+        "line": 31,
+        "byte_offset": 730,
+        "byte_length": 44,
+        "raw_sha256": "5e5f7f7e7a32fad5d9ef9aed2122309c52570532a1e2586205ba1aaaeb1c509f"
+      },
+      {
+        "alias": "magic",
+        "path": "data/chars/magic/magic.txt",
+        "line": 35,
+        "byte_offset": 789,
+        "byte_length": 39,
+        "raw_sha256": "7766f7c9a48b7ad214deedb1efceb7a312b8d82c35ddc2a010687f0f78b91286"
+      },
+      {
+        "alias": "hurr",
+        "path": "data/chars/magic/hurr/hurr.txt",
+        "line": 36,
+        "byte_offset": 830,
+        "byte_length": 42,
+        "raw_sha256": "6a7a9f115d65d41ca541c04ee5bfe25e7a8d2ff441ee556eb0755fa4c2d4ffbe"
+      },
+      {
+        "alias": "light",
+        "path": "data/chars/magic/light/light.txt",
+        "line": 37,
+        "byte_offset": 874,
+        "byte_length": 45,
+        "raw_sha256": "9b9f411db76cec50e5a459e60717d8fa8eeb2b63e11d21cc9ac1b0b885f2c482"
+      },
+      {
+        "alias": "poison",
+        "path": "data/chars/magic/poison/poison.txt",
+        "line": 38,
+        "byte_offset": 921,
+        "byte_length": 48,
+        "raw_sha256": "4f6f7b81320dcaf4f92dafbdc7bcb7a9e77996317ca141506b67b7a721876de3"
+      },
+      {
+        "alias": "dragon",
+        "path": "data/chars/magic/dragon/dragon.txt",
+        "line": 39,
+        "byte_offset": 971,
+        "byte_length": 48,
+        "raw_sha256": "5d9919bdabadbca520bf42beaec9b26b5560c1d28791f9e61adf847051f49b25"
+      },
+      {
+        "alias": "ice",
+        "path": "data/chars/magic/ice/ice.txt",
+        "line": 40,
+        "byte_offset": 1021,
+        "byte_length": 40,
+        "raw_sha256": "322e5703e7fba83a17865951f19cb442cb83d6e8eb181eebc07a25d173058762"
+      },
+      {
+        "alias": "rock",
+        "path": "data/chars/magic/rock/rock.txt",
+        "line": 41,
+        "byte_offset": 1063,
+        "byte_length": 42,
+        "raw_sha256": "9b006e3fb861a4578b5820c8ffb295d983de401e55965a39643a8add1a22390b"
+      },
+      {
+        "alias": "water",
+        "path": "data/chars/magic/water/water.txt",
+        "line": 42,
+        "byte_offset": 1107,
+        "byte_length": 45,
+        "raw_sha256": "b96a35f145f05f20f7917d5ff046912089cc68c7be5b7e768cbe19cf348c432f"
+      },
+      {
+        "alias": "bizzar1",
+        "path": "data/chars/misc/bizzar/bizzar1.txt",
+        "line": 46,
+        "byte_offset": 1183,
+        "byte_length": 49,
+        "raw_sha256": "c16f2be1576922d554c395861be51fb5350c049b0afa630315b2f611ff1872b6"
+      },
+      {
+        "alias": "bizzar2",
+        "path": "data/chars/misc/bizzar/bizzar2.txt",
+        "line": 47,
+        "byte_offset": 1234,
+        "byte_length": 49,
+        "raw_sha256": "e9c50256acdccde16ba28255914a1b7f77849ad4293b11f51f33249249aa5648"
+      },
+      {
+        "alias": "bizzar3",
+        "path": "data/chars/misc/bizzar/bizzar3.txt",
+        "line": 48,
+        "byte_offset": 1285,
+        "byte_length": 49,
+        "raw_sha256": "c3a2ab3127b7037c83d0e507ab4cac4918fa7df2cdb6b19daad639b5514d4b08"
+      },
+      {
+        "alias": "bizzar4",
+        "path": "data/chars/misc/bizzar/bizzar4.txt",
+        "line": 49,
+        "byte_offset": 1336,
+        "byte_length": 49,
+        "raw_sha256": "501a3948e6878af584f96f59220e91244aa3649bf1681f15ad24ca8c5057f3b6"
+      },
+      {
+        "alias": "ax1",
+        "path": "data/chars/ax/ax1/ax1.txt",
+        "line": 52,
+        "byte_offset": 1410,
+        "byte_length": 37,
+        "raw_sha256": "317f5299fdb8335472d8bf701005bbdf69697bf211405b8b898cf576e15541eb"
+      },
+      {
+        "alias": "ax2",
+        "path": "data/chars/ax/ax2/ax2.txt",
+        "line": 53,
+        "byte_offset": 1449,
+        "byte_length": 37,
+        "raw_sha256": "03594ebab05dd878209eacfc1833c4f4e27529f7f3a4eb992cef1dc8f61e6798"
+      },
+      {
+        "alias": "ax3",
+        "path": "data/chars/ax/ax3/ax3.txt",
+        "line": 54,
+        "byte_offset": 1488,
+        "byte_length": 37,
+        "raw_sha256": "2115dcc023bd99bd412a3231c50cc9b25d24d7add13057ad0b34bcd96b005c69"
+      },
+      {
+        "alias": "ax4",
+        "path": "data/chars/ax/ax4/ax4.txt",
+        "line": 55,
+        "byte_offset": 1527,
+        "byte_length": 37,
+        "raw_sha256": "5e9b6aa423335100b2121f04f2fb087bca4b97dc3810ee5c2d46b54a82b8e037"
+      },
+      {
+        "alias": "tyris1",
+        "path": "data/chars/tyris/tyris1/tyris1.txt",
+        "line": 56,
+        "byte_offset": 1566,
+        "byte_length": 48,
+        "raw_sha256": "76a89200db5b6193fad007a23c6c37702d2dc7e474aac888538c8c572deca3a3"
+      },
+      {
+        "alias": "tyris2",
+        "path": "data/chars/tyris/tyris2/tyris2.txt",
+        "line": 57,
+        "byte_offset": 1616,
+        "byte_length": 48,
+        "raw_sha256": "55585832a8e334169bf931a0252d8f54be0977b369526c36613f4beda759937d"
+      },
+      {
+        "alias": "tyris3",
+        "path": "data/chars/tyris/tyris3/tyris3.txt",
+        "line": 58,
+        "byte_offset": 1666,
+        "byte_length": 48,
+        "raw_sha256": "cb9b67a3e5244b7752e73b60e8690adafed9ff75d937aa6b758cbf8017075364"
+      },
+      {
+        "alias": "tyris4",
+        "path": "data/chars/tyris/tyris4/tyris4.txt",
+        "line": 59,
+        "byte_offset": 1716,
+        "byte_length": 48,
+        "raw_sha256": "80d8cd68b4c813eba30e30de27e39636b2b75408ee2417a785caacc3f39fef8b"
+      },
+      {
+        "alias": "gilius1",
+        "path": "data/chars/gilius/gilius1/gilius1.txt",
+        "line": 60,
+        "byte_offset": 1766,
+        "byte_length": 52,
+        "raw_sha256": "a169a88fa164275b899882bc388f21ffbdb40649d5eb8a7d5ae3038f2b4dd9ea"
+      },
+      {
+        "alias": "gilius2",
+        "path": "data/chars/gilius/gilius2/gilius2.txt",
+        "line": 61,
+        "byte_offset": 1820,
+        "byte_length": 52,
+        "raw_sha256": "e0468545a56206a3b0925ad647d8167445e2a116766eae7db7a19ec23aece809"
+      },
+      {
+        "alias": "gilius3",
+        "path": "data/chars/gilius/gilius3/gilius3.txt",
+        "line": 62,
+        "byte_offset": 1874,
+        "byte_length": 52,
+        "raw_sha256": "4ff57390ec8c158cde3d753ba801da629a3b80e8372e8191eca9b0b91babbcc7"
+      },
+      {
+        "alias": "gilius4",
+        "path": "data/chars/gilius/gilius4/gilius4.txt",
+        "line": 63,
+        "byte_offset": 1928,
+        "byte_length": 52,
+        "raw_sha256": "75f00aaaf2aeb455f60baf6961cb0a65c9ee0a88d5d1650bf733526fae27b13c"
+      },
+      {
+        "alias": "chronos1",
+        "path": "data/chars/chronos/chronos1/chronos1.txt",
+        "line": 64,
+        "byte_offset": 1982,
+        "byte_length": 55,
+        "raw_sha256": "5fb38e4690c29d1c95d08e87e6ab1add073f8458fc91f856ead5ff3e12bd569d"
+      },
+      {
+        "alias": "chronos2",
+        "path": "data/chars/chronos/chronos2/chronos2.txt",
+        "line": 65,
+        "byte_offset": 2039,
+        "byte_length": 55,
+        "raw_sha256": "38f110712c54bd7a81a2573661a2ff709dd6dc6e1789ed5112edc71e278d72fd"
+      },
+      {
+        "alias": "chronos3",
+        "path": "data/chars/chronos/chronos3/chronos3.txt",
+        "line": 66,
+        "byte_offset": 2096,
+        "byte_length": 55,
+        "raw_sha256": "92495dd1d0d9babaf101c4c3c269fc8036a8d1a2e240470188ecec52d28fc110"
+      },
+      {
+        "alias": "chronos4",
+        "path": "data/chars/chronos/chronos4/chronos4.txt",
+        "line": 67,
+        "byte_offset": 2153,
+        "byte_length": 55,
+        "raw_sha256": "39a264781af01396c13c3b6a09bdc9c2c86bd55c44aba2cd12386dc9b9ebf734"
+      },
+      {
+        "alias": "cragg1",
+        "path": "data/chars/cragg/cragg1/cragg1.txt",
+        "line": 68,
+        "byte_offset": 2210,
+        "byte_length": 48,
+        "raw_sha256": "bc1fbf7fa01b925f203ce779d43b05af2b2439dab511e386b1dec52d7b974b91"
+      },
+      {
+        "alias": "cragg2",
+        "path": "data/chars/cragg/cragg2/cragg2.txt",
+        "line": 69,
+        "byte_offset": 2260,
+        "byte_length": 48,
+        "raw_sha256": "0e582e2067454f4ed3e6b5eca115eda038586cedcbd4a0cbc2d87961f4f6185f"
+      },
+      {
+        "alias": "cragg3",
+        "path": "data/chars/cragg/cragg3/cragg3.txt",
+        "line": 70,
+        "byte_offset": 2310,
+        "byte_length": 48,
+        "raw_sha256": "3b8a995b19af43a7aa2e755aa0988b4a171f224af0e35664e21ed6a3bd3fd524"
+      },
+      {
+        "alias": "cragg4",
+        "path": "data/chars/cragg/cragg4/cragg4.txt",
+        "line": 71,
+        "byte_offset": 2360,
+        "byte_length": 48,
+        "raw_sha256": "774b4ccd3a655a2bcf0048ef4ab1cf806420a83a5ef2e46de54bba231fc82584"
+      },
+      {
+        "alias": "kain1",
+        "path": "data/chars/kain/kain1/kain1.txt",
+        "line": 72,
+        "byte_offset": 2410,
+        "byte_length": 44,
+        "raw_sha256": "581d29666f356c8683e8eb7bd15f4846a3f7e62c83777b156cbaeef54e7215f3"
+      },
+      {
+        "alias": "kain2",
+        "path": "data/chars/kain/kain2/kain2.txt",
+        "line": 73,
+        "byte_offset": 2456,
+        "byte_length": 44,
+        "raw_sha256": "4bcc0549d55a75c729a0dd7f4b7c98513ca83504b70d6639b81804b82ec07c31"
+      },
+      {
+        "alias": "kain3",
+        "path": "data/chars/kain/kain3/kain3.txt",
+        "line": 74,
+        "byte_offset": 2502,
+        "byte_length": 44,
+        "raw_sha256": "74b9f5d11dd8e5ff5c38f0e26c6642a34a3d1274a3bc755a57b9b2f23b2bd432"
+      },
+      {
+        "alias": "kain4",
+        "path": "data/chars/kain/kain4/kain4.txt",
+        "line": 75,
+        "byte_offset": 2548,
+        "byte_length": 44,
+        "raw_sha256": "cb277dfc09f87e7fe5b823ad46cfc7319e695e4e747dbf41d012642bff2c225e"
+      },
+      {
+        "alias": "sarah1",
+        "path": "data/chars/sarah/sarah1/sarah1.txt",
+        "line": 76,
+        "byte_offset": 2594,
+        "byte_length": 48,
+        "raw_sha256": "d7c4f0606700ffd7e40860ec48391583fdb3106e75ccbaed2ada4ef1ae9a3c10"
+      },
+      {
+        "alias": "sarah2",
+        "path": "data/chars/sarah/sarah2/sarah2.txt",
+        "line": 77,
+        "byte_offset": 2644,
+        "byte_length": 48,
+        "raw_sha256": "46701ca41dedb4b248ce3250f32cf762385022cc8bde0e09e4ccb430eb1f2602"
+      },
+      {
+        "alias": "sarah3",
+        "path": "data/chars/sarah/sarah3/sarah3.txt",
+        "line": 78,
+        "byte_offset": 2694,
+        "byte_length": 48,
+        "raw_sha256": "c09cb7b366015231ce48637c1e45ef574a35b84b448861d1eea5e72024b6f455"
+      },
+      {
+        "alias": "sarah4",
+        "path": "data/chars/sarah/sarah4/sarah4.txt",
+        "line": 79,
+        "byte_offset": 2744,
+        "byte_length": 48,
+        "raw_sha256": "effe15630fc9843382dec8e98ce452d35997ffc849978c841f3031f62e6776b8"
+      },
+      {
+        "alias": "fball",
+        "path": "data/chars/misc/fball/fball.txt",
+        "line": 82,
+        "byte_offset": 2823,
+        "byte_length": 44,
+        "raw_sha256": "074787c4ce629251aa890b1d5df46afa775039e7a17911ca4a73901880a9b648"
+      },
+      {
+        "alias": "fball1",
+        "path": "data/chars/misc/fball/fball1.txt",
+        "line": 83,
+        "byte_offset": 2869,
+        "byte_length": 46,
+        "raw_sha256": "4a7bb391e844683f282e6bb115fc35bba74e2e8cd57bc37f98e56d90a05e412a"
+      },
+      {
+        "alias": "pball",
+        "path": "data/chars/misc/pball/pball.txt",
+        "line": 84,
+        "byte_offset": 2917,
+        "byte_length": 44,
+        "raw_sha256": "170bc12e696ebb1d756c7ead830985a59a813e49ec3b3b0a7a70de14b9e3a6c0"
+      },
+      {
+        "alias": "lball",
+        "path": "data/chars/misc/lball/lball.txt",
+        "line": 85,
+        "byte_offset": 2963,
+        "byte_length": 44,
+        "raw_sha256": "23225fdea938a23fba91f1f9d1fc3b5dd12b4e00f0b2e17b130206bdd9c91c55"
+      },
+      {
+        "alias": "iball",
+        "path": "data/chars/misc/iball/iball.txt",
+        "line": 86,
+        "byte_offset": 3009,
+        "byte_length": 44,
+        "raw_sha256": "e9d8e4d68cbce800ee19e8e748a8efcf063b4e8aa0bfdc50669fee1b0f6222d8"
+      },
+      {
+        "alias": "long",
+        "path": "data/chars/long/long.txt",
+        "line": 89,
+        "byte_offset": 3068,
+        "byte_length": 36,
+        "raw_sha256": "25325d86ce5a6fd8954798c3b1bbe6045258bf6c27c385347ea3e359e6a5746d"
+      },
+      {
+        "alias": "henin",
+        "path": "data/chars/henin/henin.txt",
+        "line": 90,
+        "byte_offset": 3106,
+        "byte_length": 39,
+        "raw_sha256": "632b5dae60b5774756327f589ad02da09b96d558094e53aff156c3e7260128f5"
+      },
+      {
+        "alias": "amaz",
+        "path": "data/chars/amaz/amaz.txt",
+        "line": 91,
+        "byte_offset": 3147,
+        "byte_length": 36,
+        "raw_sha256": "81bed5b8aa9007d66655b8d3a4d5066efffee8624e00b6066db4f0f0f3c56bc5"
+      },
+      {
+        "alias": "skel",
+        "path": "data/chars/skel/skel.txt",
+        "line": 92,
+        "byte_offset": 3185,
+        "byte_length": 36,
+        "raw_sha256": "0b38880832aa022bc985b7b3405161e163dd7ca83660ab88d63c415f8134ce1e"
+      },
+      {
+        "alias": "orc",
+        "path": "data/chars/orc/orc.txt",
+        "line": 93,
+        "byte_offset": 3223,
+        "byte_length": 34,
+        "raw_sha256": "60f483ca80123e69a6a8cee93f50ea479e97dadf86be6a80f4d0ab34fcfc964f"
+      },
+      {
+        "alias": "claw",
+        "path": "data/chars/claw/claw.txt",
+        "line": 94,
+        "byte_offset": 3259,
+        "byte_length": 36,
+        "raw_sha256": "eedc99fc225f7b18bff7595c15f7633dbd7df46af6e1009ff1baae8555e72964"
+      },
+      {
+        "alias": "lizard",
+        "path": "data/chars/lizard/lizard.txt",
+        "line": 95,
+        "byte_offset": 3297,
+        "byte_length": 42,
+        "raw_sha256": "efa7fb527e5debc6f599613d986cb30fc24dfc25e7517eab1659d8b4d9f1bd20"
+      },
+      {
+        "alias": "spear",
+        "path": "data/chars/spear/spear.txt",
+        "line": 96,
+        "byte_offset": 3341,
+        "byte_length": 39,
+        "raw_sha256": "6458dd36833078c759a2c4a12211903161ee4f5a4178f4ef5801c2be76b75e40"
+      },
+      {
+        "alias": "pancho",
+        "path": "data/chars/pancho/pancho.txt",
+        "line": 97,
+        "byte_offset": 3382,
+        "byte_length": 42,
+        "raw_sha256": "606b6c5e2de1442ef1dab891715f748f684be847dac54f91bd22306edc1b1c6a"
+      },
+      {
+        "alias": "badbro1",
+        "path": "data/chars/badbro/badbro1.txt",
+        "line": 98,
+        "byte_offset": 3426,
+        "byte_length": 44,
+        "raw_sha256": "7ecaae84359f0f7b5c8e24c03bc0483c2c8e175cbf298dcfa1de355811a0ed2d"
+      },
+      {
+        "alias": "bitt1",
+        "path": "data/chars/bitt/bitt1.txt",
+        "line": 99,
+        "byte_offset": 3472,
+        "byte_length": 38,
+        "raw_sha256": "f5d22c3135da62e3c055b359798c1fca28f11ddbf65277e3dbef5fd52574f0d5"
+      },
+      {
+        "alias": "adder1",
+        "path": "data/chars/adder/adder1.txt",
+        "line": 100,
+        "byte_offset": 3512,
+        "byte_length": 41,
+        "raw_sha256": "542a8fd6dec9a6ff9464fd690e28ed00c2b543bc48ca0fea3cadbf1cea8791a4"
+      },
+      {
+        "alias": "minot1",
+        "path": "data/chars/minot/minot1.txt",
+        "line": 101,
+        "byte_offset": 3555,
+        "byte_length": 41,
+        "raw_sha256": "428ac84584e25a2cad08aaaba3ff49edbef25147f9e5836ee9c34076dbef714c"
+      },
+      {
+        "alias": "headl1",
+        "path": "data/chars/headl/headl1.txt",
+        "line": 102,
+        "byte_offset": 3598,
+        "byte_length": 41,
+        "raw_sha256": "4820a67025ac1e7439757c118c23d57caa54d0efc2dadaf44fe397c306ae26be"
+      },
+      {
+        "alias": "guild1",
+        "path": "data/chars/guild/guild1.txt",
+        "line": 103,
+        "byte_offset": 3641,
+        "byte_length": 41,
+        "raw_sha256": "b2e2fdb501aa2bbeb9de8a18819c909407a8f0b5e3aafe3b4275b7608d68e290"
+      },
+      {
+        "alias": "mustang1",
+        "path": "data/chars/mustang/mustang1.txt",
+        "line": 104,
+        "byte_offset": 3684,
+        "byte_length": 46,
+        "raw_sha256": "61dfa5cde0d6cc247cc9ad45d6d85820de9528ca2bfe86d061d2cf40b8bb965a"
+      },
+      {
+        "alias": "fiend1",
+        "path": "data/chars/fiend/fiend1.txt",
+        "line": 105,
+        "byte_offset": 3732,
+        "byte_length": 41,
+        "raw_sha256": "883b3878622efc8d8fc5918bb67100b499b5307626474771ae24278ccea708aa"
+      },
+      {
+        "alias": "prince1",
+        "path": "data/chars/prince/prince1.txt",
+        "line": 106,
+        "byte_offset": 3775,
+        "byte_length": 44,
+        "raw_sha256": "4c756a2839206d45cb5036c585ad48fc49bcb289fb9c61f17e03ab04597e939e"
+      },
+      {
+        "alias": "mantle",
+        "path": "data/chars/prince/mantle.txt",
+        "line": 107,
+        "byte_offset": 3821,
+        "byte_length": 42,
+        "raw_sha256": "7354a9cf31f494f516f00b4645480681cc280adbdf3c525f31e8b3618368b7c2"
+      },
+      {
+        "alias": "wiz",
+        "path": "data/chars/wiz/wiz.txt",
+        "line": 108,
+        "byte_offset": 3865,
+        "byte_length": 34,
+        "raw_sha256": "ec9e605a3b39ef48de15a0ad6493fe8d67e54bfab0d40fdb28a77d1c6257c7db"
+      },
+      {
+        "alias": "Thief1",
+        "path": "data/chars/thief/thief1.txt",
+        "line": 109,
+        "byte_offset": 3901,
+        "byte_length": 49,
+        "raw_sha256": "02c8fcdc2568eaa64017f64e774ff004755be8d559de5d6555e064e93f1bcfb3"
+      },
+      {
+        "alias": "Thief2",
+        "path": "data/chars/thief/thief2.txt",
+        "line": 110,
+        "byte_offset": 3952,
+        "byte_length": 49,
+        "raw_sha256": "773931531b9cd3785f8289a46449e5cdb24cfaf51c580b2150d93a6d816d5418"
+      },
+      {
+        "alias": "badbro2",
+        "path": "data/chars/badbro/badbro2.txt",
+        "line": 114,
+        "byte_offset": 4017,
+        "byte_length": 44,
+        "raw_sha256": "f4812fbd8a43a7fa2edd4e0c2ddc5ffd9bce32d27bdae3e52be93514ed608bc7"
+      },
+      {
+        "alias": "bitt2",
+        "path": "data/chars/bitt/bitt2.txt",
+        "line": 115,
+        "byte_offset": 4063,
+        "byte_length": 38,
+        "raw_sha256": "9a57542c1e346cfca13ef6558bb0c159f6653d73e53b6520aa26340a3a511837"
+      },
+      {
+        "alias": "adder2",
+        "path": "data/chars/adder/adder2.txt",
+        "line": 116,
+        "byte_offset": 4103,
+        "byte_length": 41,
+        "raw_sha256": "b27af7c9d43546e7e51418f8a55168bea8aa7cab71249c8ec359515d5b9fe8e6"
+      },
+      {
+        "alias": "minot2",
+        "path": "data/chars/minot/minot2.txt",
+        "line": 117,
+        "byte_offset": 4146,
+        "byte_length": 41,
+        "raw_sha256": "174a4ed407d0fea7c1b087c2b14b10f94c9b47fe6a189e92e3254383b70a297d"
+      },
+      {
+        "alias": "headl2",
+        "path": "data/chars/headl/headl2.txt",
+        "line": 118,
+        "byte_offset": 4189,
+        "byte_length": 41,
+        "raw_sha256": "72055e3d000c0a1c5433800ed023d5961a8565d6a24cc0be7bb7a9244232bd1b"
+      },
+      {
+        "alias": "guild2",
+        "path": "data/chars/guild/guild2.txt",
+        "line": 119,
+        "byte_offset": 4232,
+        "byte_length": 41,
+        "raw_sha256": "7ab4191b2a1e02f4abf21351bae20dbe52634e909d70464a87c03f5f069ff410"
+      },
+      {
+        "alias": "mustang2",
+        "path": "data/chars/mustang/mustang2.txt",
+        "line": 120,
+        "byte_offset": 4275,
+        "byte_length": 46,
+        "raw_sha256": "3686ab55c6d25921f15dc775e54c27d93fd132fbc5a8b930d1dbee23a445e020"
+      },
+      {
+        "alias": "fiend2",
+        "path": "data/chars/fiend/fiend2.txt",
+        "line": 121,
+        "byte_offset": 4323,
+        "byte_length": 41,
+        "raw_sha256": "54344d322fbffe0293980a5287139b24682bb5841da4a0f8e4dd4cd54168d5cd"
+      },
+      {
+        "alias": "prince2",
+        "path": "data/chars/prince/prince2.txt",
+        "line": 122,
+        "byte_offset": 4366,
+        "byte_length": 44,
+        "raw_sha256": "f3b5ae4182e8bb9f271eed699292c21727b93fc294fc0e49d53235734dbfa295"
+      },
+      {
+        "alias": "abyss1",
+        "path": "data/chars/abyss1/abyss1.txt",
+        "line": 123,
+        "byte_offset": 4412,
+        "byte_length": 42,
+        "raw_sha256": "0157f7a9e5c426b51d635c8878e7e880a6517d54c150586a6381d08cfa708c5e"
+      },
+      {
+        "alias": "left1",
+        "path": "data/chars/abyss1/left1.txt",
+        "line": 124,
+        "byte_offset": 4456,
+        "byte_length": 40,
+        "raw_sha256": "88b9fb6defbb5cddd420ec751156256a0a9bd36ac4c2889303bdcaa0a334b84c"
+      },
+      {
+        "alias": "right1",
+        "path": "data/chars/abyss1/right1.txt",
+        "line": 125,
+        "byte_offset": 4498,
+        "byte_length": 42,
+        "raw_sha256": "1d6ed8ba80a90c14f55b2642d784d84624a5f6973329a2d020f9762e8cdb21e2"
+      },
+      {
+        "alias": "etornado",
+        "path": "data/chars/misc/tornado/etornado.txt",
+        "line": 129,
+        "byte_offset": 4567,
+        "byte_length": 51,
+        "raw_sha256": "165f88d4388ff010157385cfae4cc8320e2d08fdb775680c95843fbaf81c6006"
+      },
+      {
+        "alias": "ewave",
+        "path": "data/chars/misc/wave/ewave.txt",
+        "line": 130,
+        "byte_offset": 4620,
+        "byte_length": 43,
+        "raw_sha256": "74223e58e02453e320248243dfab7a9d8cc3988df23a5e29b559277fcfa3f403"
+      },
+      {
+        "alias": "ebird",
+        "path": "data/chars/misc/bird/ebird.txt",
+        "line": 131,
+        "byte_offset": 4665,
+        "byte_length": 43,
+        "raw_sha256": "224ff7c6e7cf1bf8ce0a52dcc6231eb470b5886a72266d858b110e1be74e77dd"
+      },
+      {
+        "alias": "evoid",
+        "path": "data/chars/misc/void/evoid.txt",
+        "line": 132,
+        "byte_offset": 4710,
+        "byte_length": 43,
+        "raw_sha256": "ada2576d676372dabc90e6038adf4b3d5a8867a3a16d655b98dfdb37b8dc761e"
+      },
+      {
+        "alias": "pillar",
+        "path": "data/chars/misc/pillar/pillar.txt",
+        "line": 133,
+        "byte_offset": 4755,
+        "byte_length": 47,
+        "raw_sha256": "222bb97197bfc0c6b3ae4bbf4abe06163081711fc650d9966ba7e1ceaa1164ae"
+      },
+      {
+        "alias": "lpillar",
+        "path": "data/chars/magic/light/lpillar.txt",
+        "line": 134,
+        "byte_offset": 4804,
+        "byte_length": 49,
+        "raw_sha256": "41a4044967f79a815ab2b6f5926a8d00a0669c4493c3e13c6e47688a843c5751"
+      },
+      {
+        "alias": "ipillar",
+        "path": "data/chars/magic/ice/ipillar.txt",
+        "line": 135,
+        "byte_offset": 4855,
+        "byte_length": 47,
+        "raw_sha256": "bc2f6f7553ffdccaf3147e1059ae23e0420bc91d4a0ee5db6f6b8440289116ae"
+      },
+      {
+        "alias": "ppillar",
+        "path": "data/chars/magic/poison/ppillar.txt",
+        "line": 136,
+        "byte_offset": 4904,
+        "byte_length": 50,
+        "raw_sha256": "0977f2281f81a7a4eb4f958079283f253320adeb35364bf4c9dc42df5e5734f8"
+      },
+      {
+        "alias": "ehurr",
+        "path": "data/chars/magic/hurr/ehurr.txt",
+        "line": 140,
+        "byte_offset": 4975,
+        "byte_length": 44,
+        "raw_sha256": "aa019c014193bde93d39ccedfc72660720d6bd7f4e98e48a1c891033321e003b"
+      },
+      {
+        "alias": "elight",
+        "path": "data/chars/magic/light/elight.txt",
+        "line": 141,
+        "byte_offset": 5021,
+        "byte_length": 47,
+        "raw_sha256": "64450e03e541428563d4fe839b4ac9c29fe34058d5eaf62b9f3e5e8ae9ee90b0"
+      },
+      {
+        "alias": "epoison",
+        "path": "data/chars/magic/poison/epoison.txt",
+        "line": 142,
+        "byte_offset": 5070,
+        "byte_length": 50,
+        "raw_sha256": "6822448b51cc9c178fc946eee2efd02e4cd0fa3353105de276c9eafe1c6f50b1"
+      },
+      {
+        "alias": "edragon",
+        "path": "data/chars/magic/dragon/edragon.txt",
+        "line": 143,
+        "byte_offset": 5122,
+        "byte_length": 50,
+        "raw_sha256": "89e9d6fe539cecd13e588ebbc84555a6bce87ce5dcf506e775a523d43de818ed"
+      },
+      {
+        "alias": "eice",
+        "path": "data/chars/magic/ice/eice.txt",
+        "line": 144,
+        "byte_offset": 5174,
+        "byte_length": 41,
+        "raw_sha256": "9346b16fdb676c9a53bf748b48af45ba201bbe28618694e929899230f3dd7ddd"
+      },
+      {
+        "alias": "erock",
+        "path": "data/chars/magic/rock/erock.txt",
+        "line": 145,
+        "byte_offset": 5217,
+        "byte_length": 44,
+        "raw_sha256": "4ab8780a44561452d95a72c1cf6f5ec2f3232e85541e9fef9d75f5fa4bbc3b04"
+      },
+      {
+        "alias": "ewater",
+        "path": "data/chars/magic/water/ewater.txt",
+        "line": 146,
+        "byte_offset": 5263,
+        "byte_length": 47,
+        "raw_sha256": "77dc20c8b843f6389f7a76749d7471b4b044409a7011dcda93d712925b215bc8"
+      },
+      {
+        "alias": "frock",
+        "path": "data/chars/misc/frock/frock.txt",
+        "line": 149,
+        "byte_offset": 5323,
+        "byte_length": 44,
+        "raw_sha256": "a147a317d3ea8765362e27540ddec1e7598ccff1ee47dcaef8cddf54edee0e72"
+      },
+      {
+        "alias": "sfire",
+        "path": "data/chars/misc/sfire/sfire.txt",
+        "line": 150,
+        "byte_offset": 5369,
+        "byte_length": 44,
+        "raw_sha256": "f0a38ce4776488c09cb7c759bcb66598cb67482f33e72b051c028654de5b0d18"
+      },
+      {
+        "alias": "Flash",
+        "path": "data/chars/misc/flash/flash.txt",
+        "line": 153,
+        "byte_offset": 5426,
+        "byte_length": 44,
+        "raw_sha256": "53df980b3eada6368fea7acb0744b93f3e333ab6723ee12c277ce2f1161b3c4b"
+      },
+      {
+        "alias": "Flash2",
+        "path": "data/chars/misc/flash/flash2.txt",
+        "line": 154,
+        "byte_offset": 5472,
+        "byte_length": 46,
+        "raw_sha256": "295ce23a17f1e87b3aa31860fc2fe7292acceeb76ff3278275ba041982477d10"
+      },
+      {
+        "alias": "Guard",
+        "path": "data/chars/misc/guard/guard.txt",
+        "line": 155,
+        "byte_offset": 5520,
+        "byte_length": 44,
+        "raw_sha256": "2e4e84b5e4c6b93c9822a30dc8e512251d23c9634eb63d764348031ef03fff37"
+      },
+      {
+        "alias": "Noflash",
+        "path": "data/chars/misc/flash/noflash.txt",
+        "line": 156,
+        "byte_offset": 5566,
+        "byte_length": 48,
+        "raw_sha256": "5074a68a3f8ed42736482391a34f7f451478c8c901947933ceabbcdae6958f5f"
+      },
+      {
+        "alias": "Dust",
+        "path": "data/chars/misc/dust/dust.txt",
+        "line": 160,
+        "byte_offset": 5628,
+        "byte_length": 41,
+        "raw_sha256": "9d46444c8048728c56020ee1147ecbf04ff8703367b3e11913d7f701efddff72"
+      },
+      {
+        "alias": "Dust2",
+        "path": "data/chars/misc/dust/dust2.txt",
+        "line": 161,
+        "byte_offset": 5671,
+        "byte_length": 43,
+        "raw_sha256": "3fab2cad721e94ecd686540f740966a543e0c365915a7e735178aced5356ddf0"
+      },
+      {
+        "alias": "Dust3",
+        "path": "data/chars/misc/dust/dust3.txt",
+        "line": 162,
+        "byte_offset": 5716,
+        "byte_length": 43,
+        "raw_sha256": "51cd483e6af04a1f0adf164515d66ee86fdfee766e1475aac3594a527a728d85"
+      },
+      {
+        "alias": "Dust4",
+        "path": "data/chars/misc/dust/dust4.txt",
+        "line": 163,
+        "byte_offset": 5761,
+        "byte_length": 43,
+        "raw_sha256": "3eea15c8a236f39ccd1828780bfdb1b9fabd9739d03b32bd0d48f17d04af510d"
+      },
+      {
+        "alias": "civ01",
+        "path": "data/chars/misc/civilian/civ01.txt",
+        "line": 166,
+        "byte_offset": 5820,
+        "byte_length": 47,
+        "raw_sha256": "c5dce2e01f475868cc72aa5152e04f453890ba16c2a0da56b093b12e62c14f67"
+      },
+      {
+        "alias": "civ02",
+        "path": "data/chars/misc/civilian/civ02.txt",
+        "line": 167,
+        "byte_offset": 5869,
+        "byte_length": 47,
+        "raw_sha256": "4e0388aa3e6fee0c3327e6bb489444ef8352c15e2d1a3a3987d9bc59d78b4c32"
+      },
+      {
+        "alias": "civ03",
+        "path": "data/chars/misc/civilian/civ03.txt",
+        "line": 168,
+        "byte_offset": 5918,
+        "byte_length": 47,
+        "raw_sha256": "2532748f3eee0fa3b0df28385b35901c091ad49d477f4f0bc364106393c13ab5"
+      },
+      {
+        "alias": "chest01",
+        "path": "data/chars/misc/chests/chest01.txt",
+        "line": 171,
+        "byte_offset": 5978,
+        "byte_length": 49,
+        "raw_sha256": "24b8c62d10e79d3afead9f34aa19590530cddc84905f7b1fcbb3f2e67ffecdcb"
+      },
+      {
+        "alias": "chest02",
+        "path": "data/chars/misc/chests/chest02.txt",
+        "line": 172,
+        "byte_offset": 6029,
+        "byte_length": 49,
+        "raw_sha256": "8c97b8a31f42e3e267ebf31d49f2b18c9540374813aad59e1662277238949eb8"
+      },
+      {
+        "alias": "chest03",
+        "path": "data/chars/misc/chests/chest03.txt",
+        "line": 173,
+        "byte_offset": 6080,
+        "byte_length": 49,
+        "raw_sha256": "2ddea5682e4ad85c4b72c3ed92c1f89934135c9384ba1c303516ada66ea36b6b"
+      },
+      {
+        "alias": "barrell",
+        "path": "data/chars/misc/barrell/barrell.txt",
+        "line": 174,
+        "byte_offset": 6131,
+        "byte_length": 50,
+        "raw_sha256": "ff4d6f5f23ec4135c8b476ace351aaa027a6824856463f46bf817c4b10ea2ae7"
+      },
+      {
+        "alias": "potion",
+        "path": "data/chars/misc/items/potion.txt",
+        "line": 177,
+        "byte_offset": 6193,
+        "byte_length": 46,
+        "raw_sha256": "6674792b63b19b91146d00e7015fab0e7887c8e967923ee3a38e8a5484514929"
+      },
+      {
+        "alias": "book",
+        "path": "data/chars/misc/items/book.txt",
+        "line": 178,
+        "byte_offset": 6241,
+        "byte_length": 42,
+        "raw_sha256": "c4f53631f5493f8c9c9deb768e4254a010449ec069e5eab3c6fd016079a93ec6"
+      },
+      {
+        "alias": "ingot",
+        "path": "data/chars/misc/money/ingot.txt",
+        "line": 182,
+        "byte_offset": 6297,
+        "byte_length": 44,
+        "raw_sha256": "e0c0f32e7abea02fb15aab7b9aacd0783b95a147c84222ee37ce4d041acca7a7"
+      },
+      {
+        "alias": "diam",
+        "path": "data/chars/misc/money/diam.txt",
+        "line": 183,
+        "byte_offset": 6343,
+        "byte_length": 42,
+        "raw_sha256": "c64516388ce3de1ffad6dd473e6349f905364f1e063742a90037980a7d01853b"
+      },
+      {
+        "alias": "bread",
+        "path": "data/chars/misc/food/bread.txt",
+        "line": 187,
+        "byte_offset": 6398,
+        "byte_length": 43,
+        "raw_sha256": "41eb4feb4a6ddbce8b740cb7bb5bc785fe332d7321c73c538c51c49dca734025"
+      },
+      {
+        "alias": "meat",
+        "path": "data/chars/misc/food/meat.txt",
+        "line": 188,
+        "byte_offset": 6443,
+        "byte_length": 41,
+        "raw_sha256": "3064b90bf0a807825b2061e31f3c5d86ae226d6996802f3e208dcde6e6c78146"
+      },
+      {
+        "alias": "counter",
+        "path": "data/chars/misc/counter/counter.txt",
+        "line": 191,
+        "byte_offset": 6495,
+        "byte_length": 50,
+        "raw_sha256": "2f0b81031e796d0ed29b54dee46dfb19ec97e0cafd9a5e3c478351ba612dcfbd"
+      },
+      {
+        "alias": "wagon",
+        "path": "data/chars/misc/wagon/wagon.txt",
+        "line": 192,
+        "byte_offset": 6547,
+        "byte_length": 44,
+        "raw_sha256": "a1f43dfbd45e72998f75efbd5e29089dc2183a9610e21cb528a05f96d62b2ce3"
+      },
+      {
+        "alias": "intro",
+        "path": "data/chars/misc/intro/intro.txt",
+        "line": 193,
+        "byte_offset": 6593,
+        "byte_length": 44,
+        "raw_sha256": "badce4a0d439d7a95eaed40e6ca2f1bba2b3da9fdb9ee4233b79b2aec889453e"
+      },
+      {
+        "alias": "hellin",
+        "path": "data/chars/misc/hellin/hellin.txt",
+        "line": 194,
+        "byte_offset": 6639,
+        "byte_length": 47,
+        "raw_sha256": "266cc71370bad8dad07e68a6d33fe9f5c57503d7c2356e0a61fbb46f18e7dc01"
+      },
+      {
+        "alias": "hellout",
+        "path": "data/chars/misc/hellout/hellout.txt",
+        "line": 195,
+        "byte_offset": 6688,
+        "byte_length": 50,
+        "raw_sha256": "4a33cdc464137626e714f0dc57fc5afca79b836f0c9ae64fdc1a40c370da43c3"
+      },
+      {
+        "alias": "falo",
+        "path": "data/chars/misc/falo/falo.txt",
+        "line": 196,
+        "byte_offset": 6740,
+        "byte_length": 41,
+        "raw_sha256": "499850b24c58371babad37bae97375e6fbb0a6fe037a57e82f04791e546274c0"
+      },
+      {
+        "alias": "end",
+        "path": "data/scenes/end/end.txt",
+        "line": 197,
+        "byte_offset": 6783,
+        "byte_length": 35,
+        "raw_sha256": "2b4549eac9a8f422d48f275aaeff76c7124dfe354b4dccc3292c49d47c294564"
+      },
+      {
+        "alias": "credits",
+        "path": "data/scenes/credits/credits.txt",
+        "line": 198,
+        "byte_offset": 6820,
+        "byte_length": 46,
+        "raw_sha256": "10b2053091ab7b964c507d3e989a092e0bd2be67ac96be9c66fd9f075fa9c054"
+      },
+      {
+        "alias": "Sel01",
+        "path": "Data/chars/misc/select/Sel01.txt",
+        "line": 201,
+        "byte_offset": 6881,
+        "byte_length": 43,
+        "raw_sha256": "c4b177472fec3e50b2da0c70d0081f209d6d09f27dd6eaa57bcc34ae47b6b8f6"
+      },
+      {
+        "alias": "Sel02",
+        "path": "Data/chars/misc/select/Sel02.txt",
+        "line": 202,
+        "byte_offset": 6926,
+        "byte_length": 43,
+        "raw_sha256": "4982c2359b7631b8ab9e0ed35002c6147c79251ef8190d5eab434380eabe6aa3"
+      },
+      {
+        "alias": "go1",
+        "path": "Data/chars/misc/go/go1.txt",
+        "line": 203,
+        "byte_offset": 6971,
+        "byte_length": 36,
+        "raw_sha256": "63cc57809a6a6fa190da6eed2bb85fd41315aba4d435e8d40f72f2a080be73f1"
+      },
+      {
+        "alias": "go2",
+        "path": "Data/chars/misc/go/go2.txt",
+        "line": 204,
+        "byte_offset": 7009,
+        "byte_length": 36,
+        "raw_sha256": "fd20175a0832040efa0a84606996904fc4f9d155d70c74631b50e64a345f9aa9"
+      },
+      {
+        "alias": "go3",
+        "path": "Data/chars/misc/go/go3.txt",
+        "line": 205,
+        "byte_offset": 7047,
+        "byte_length": 36,
+        "raw_sha256": "30e0655ea1a680f67140ffe939181fd0578b2b0a25bbe3e41019b13d40b9a136"
+      },
+      {
+        "alias": "go4",
+        "path": "Data/chars/misc/go/go4.txt",
+        "line": 206,
+        "byte_offset": 7085,
+        "byte_length": 36,
+        "raw_sha256": "b0964077347ca67dfc0b041918b37fe052f4afe104119f6b43251a8f377d5de5"
+      },
+      {
+        "alias": "go5",
+        "path": "Data/chars/misc/go/go5.txt",
+        "line": 207,
+        "byte_offset": 7123,
+        "byte_length": 36,
+        "raw_sha256": "b4e35964fca47508657ddda8c266dc3b3ad68ad4dc84e0818d64652ec5108780"
+      },
+      {
+        "alias": "go6",
+        "path": "Data/chars/misc/go/go6.txt",
+        "line": 208,
+        "byte_offset": 7161,
+        "byte_length": 36,
+        "raw_sha256": "3d7ad14268c1af4db87c7f6fb57fa6d6f15e0b6ca05ed46937dac07a7b9b44d4"
+      }
+    ],
+    "duplicate_aliases": []
+  },
+  "inventory": {
+    "schema_version": "1.0.0",
+    "artifact_kind": "openbor_level_source_order_inventory",
+    "status": "source_order_inventory_only",
+    "semantic_execution_claim": false,
+    "concurrency_claim": false,
+    "source": {
+      "level_path": "data/levels/town1.txt"
+    },
+    "counts": {
+      "directives": 160,
+      "commands": {
+        "at": 32,
+        "background": 1,
+        "boss": 1,
+        "bossmusic": 1,
+        "coords": 23,
+        "flip": 6,
+        "frontpanel": 1,
+        "group": 5,
+        "health": 21,
+        "hole": 1,
+        "item": 4,
+        "map": 22,
+        "music": 1,
+        "notime": 1,
+        "order": 1,
+        "panel": 1,
+        "settime": 1,
+        "spawn": 23,
+        "spawn1": 1,
+        "spawn2": 1,
+        "spawn3": 1,
+        "spawn4": 1,
+        "stagenumber": 1,
+        "type": 1,
+        "wait": 4,
+        "wall": 4
+      },
+      "model_index_entries": 145,
+      "dynamic_spawn_directives": 23,
+      "group_directives": 5,
+      "wait_directives": 4,
+      "at_directives": 32,
+      "spawn_config_directives": 4,
+      "wall_directives": 4,
+      "hole_directives": 1
+    },
+    "stage_references": [
+      {
+        "line": 1,
+        "command": "music",
+        "args": [
+          "data/music/STAGE1.BOR"
+        ],
+        "raw": "music\t\t\tdata/music/STAGE1.BOR"
+      },
+      {
+        "line": 2,
+        "command": "bossmusic",
+        "args": [
+          "data/music/BOSS.BOR"
+        ],
+        "raw": "bossmusic\t\tdata/music/BOSS.BOR"
+      },
+      {
+        "line": 4,
+        "command": "background",
+        "args": [
+          "data/bgs/TOWN1/back.gif"
+        ],
+        "raw": "background\t\tdata/bgs/TOWN1/back.gif"
+      },
+      {
+        "line": 10,
+        "command": "panel",
+        "args": [
+          "data/bgs/TOWN1/panel.gif"
+        ],
+        "raw": "panel\t\t\tdata/bgs/TOWN1/panel.gif"
+      },
+      {
+        "line": 12,
+        "command": "frontpanel",
+        "args": [
+          "data/bgs/TOWN1/f01.gif"
+        ],
+        "raw": "frontpanel\t\tdata/bgs/TOWN1/f01.gif "
+      },
+      {
+        "line": 50,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 67,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 74,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 87,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 93,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 102,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 108,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 114,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 131,
+        "command": "map",
+        "args": [
+          "2"
+        ],
+        "raw": "map\t  2"
+      },
+      {
+        "line": 137,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 156,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 162,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 169,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 175,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 187,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 195,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 202,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 218,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 224,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 231,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 237,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 244,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      }
+    ],
+    "spawn_configuration": [
+      {
+        "line": 28,
+        "command": "spawn1",
+        "args": [
+          "50",
+          "20",
+          "200"
+        ],
+        "raw": "spawn1  50 20 200"
+      },
+      {
+        "line": 29,
+        "command": "spawn2",
+        "args": [
+          "40",
+          "30",
+          "200"
+        ],
+        "raw": "spawn2  40 30 200"
+      },
+      {
+        "line": 30,
+        "command": "spawn3",
+        "args": [
+          "60",
+          "40",
+          "200"
+        ],
+        "raw": "spawn3  60 40 200"
+      },
+      {
+        "line": 31,
+        "command": "spawn4",
+        "args": [
+          "50",
+          "50",
+          "200"
+        ],
+        "raw": "spawn4  50 50 200"
+      }
+    ],
+    "dynamic_spawns": [
+      {
+        "line": 49,
+        "name": "intro",
+        "alias_match": {
+          "alias": "intro",
+          "path": "data/chars/misc/intro/intro.txt",
+          "line": 193
+        }
+      },
+      {
+        "line": 58,
+        "name": "bizzar1",
+        "alias_match": {
+          "alias": "bizzar1",
+          "path": "data/chars/misc/bizzar/bizzar1.txt",
+          "line": 46
+        }
+      },
+      {
+        "line": 66,
+        "name": "civ02",
+        "alias_match": {
+          "alias": "civ02",
+          "path": "data/chars/misc/civilian/civ02.txt",
+          "line": 167
+        }
+      },
+      {
+        "line": 73,
+        "name": "civ03",
+        "alias_match": {
+          "alias": "civ03",
+          "path": "data/chars/misc/civilian/civ03.txt",
+          "line": 168
+        }
+      },
+      {
+        "line": 86,
+        "name": "long",
+        "alias_match": {
+          "alias": "long",
+          "path": "data/chars/long/long.txt",
+          "line": 89
+        }
+      },
+      {
+        "line": 92,
+        "name": "henin",
+        "alias_match": {
+          "alias": "henin",
+          "path": "data/chars/henin/henin.txt",
+          "line": 90
+        }
+      },
+      {
+        "line": 101,
+        "name": "amaz",
+        "alias_match": {
+          "alias": "amaz",
+          "path": "data/chars/amaz/amaz.txt",
+          "line": 91
+        }
+      },
+      {
+        "line": 107,
+        "name": "henin",
+        "alias_match": {
+          "alias": "henin",
+          "path": "data/chars/henin/henin.txt",
+          "line": 90
+        }
+      },
+      {
+        "line": 113,
+        "name": "long",
+        "alias_match": {
+          "alias": "long",
+          "path": "data/chars/long/long.txt",
+          "line": 89
+        }
+      },
+      {
+        "line": 130,
+        "name": "long",
+        "alias_match": {
+          "alias": "long",
+          "path": "data/chars/long/long.txt",
+          "line": 89
+        }
+      },
+      {
+        "line": 136,
+        "name": "henin",
+        "alias_match": {
+          "alias": "henin",
+          "path": "data/chars/henin/henin.txt",
+          "line": 90
+        }
+      },
+      {
+        "line": 155,
+        "name": "thief1",
+        "alias_match": {
+          "alias": "Thief1",
+          "path": "data/chars/thief/thief1.txt",
+          "line": 109
+        }
+      },
+      {
+        "line": 161,
+        "name": "thief2",
+        "alias_match": {
+          "alias": "Thief2",
+          "path": "data/chars/thief/thief2.txt",
+          "line": 110
+        }
+      },
+      {
+        "line": 168,
+        "name": "thief1",
+        "alias_match": {
+          "alias": "Thief1",
+          "path": "data/chars/thief/thief1.txt",
+          "line": 109
+        }
+      },
+      {
+        "line": 174,
+        "name": "thief1",
+        "alias_match": {
+          "alias": "Thief1",
+          "path": "data/chars/thief/thief1.txt",
+          "line": 109
+        }
+      },
+      {
+        "line": 186,
+        "name": "badbro2",
+        "alias_match": {
+          "alias": "badbro2",
+          "path": "data/chars/badbro/badbro2.txt",
+          "line": 114
+        }
+      },
+      {
+        "line": 194,
+        "name": "civ02",
+        "alias_match": {
+          "alias": "civ02",
+          "path": "data/chars/misc/civilian/civ02.txt",
+          "line": 167
+        }
+      },
+      {
+        "line": 201,
+        "name": "civ03",
+        "alias_match": {
+          "alias": "civ03",
+          "path": "data/chars/misc/civilian/civ03.txt",
+          "line": 168
+        }
+      },
+      {
+        "line": 217,
+        "name": "long",
+        "alias_match": {
+          "alias": "long",
+          "path": "data/chars/long/long.txt",
+          "line": 89
+        }
+      },
+      {
+        "line": 223,
+        "name": "henin",
+        "alias_match": {
+          "alias": "henin",
+          "path": "data/chars/henin/henin.txt",
+          "line": 90
+        }
+      },
+      {
+        "line": 230,
+        "name": "long",
+        "alias_match": {
+          "alias": "long",
+          "path": "data/chars/long/long.txt",
+          "line": 89
+        }
+      },
+      {
+        "line": 236,
+        "name": "henin",
+        "alias_match": {
+          "alias": "henin",
+          "path": "data/chars/henin/henin.txt",
+          "line": 90
+        }
+      },
+      {
+        "line": 243,
+        "name": "amaz",
+        "alias_match": {
+          "alias": "amaz",
+          "path": "data/chars/amaz/amaz.txt",
+          "line": 91
+        }
+      }
+    ],
+    "unresolved_spawn_aliases": [],
+    "ambiguous_spawn_aliases": [],
+    "event_controls": [
+      {
+        "line": 52,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 61,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 71,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 78,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 83,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 84,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at 0"
+      },
+      {
+        "line": 90,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 96,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 98,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 99,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 105,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 111,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 117,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 124,
+        "command": "group",
+        "args": [
+          "2",
+          "2"
+        ],
+        "raw": "Group 2 2"
+      },
+      {
+        "line": 125,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at 600"
+      },
+      {
+        "line": 127,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 128,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 134,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 141,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 149,
+        "command": "group",
+        "args": [
+          "4",
+          "4"
+        ],
+        "raw": "Group 4 4"
+      },
+      {
+        "line": 150,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at 900"
+      },
+      {
+        "line": 152,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 153,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 159,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 166,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 172,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 179,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 183,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 184,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at 901"
+      },
+      {
+        "line": 191,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 199,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 206,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 211,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 212,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at 1100"
+      },
+      {
+        "line": 214,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 215,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 221,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 228,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 234,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 241,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 247,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      }
+    ],
+    "geometry_directives": [
+      {
+        "line": 36,
+        "command": "wall",
+        "args": [
+          "627",
+          "266",
+          "-35",
+          "38",
+          "-6",
+          "64",
+          "95",
+          "15"
+        ],
+        "raw": "wall    627 266 -35 38 -6 64 95 15"
+      },
+      {
+        "line": 37,
+        "command": "wall",
+        "args": [
+          "653",
+          "256",
+          "-35",
+          "28",
+          "240",
+          "227",
+          "85",
+          "60"
+        ],
+        "raw": "wall    653 256 -35 28 240 227 85 60"
+      },
+      {
+        "line": 39,
+        "command": "wall",
+        "args": [
+          "954",
+          "256",
+          "-35",
+          "28",
+          "96",
+          "117",
+          "85",
+          "40"
+        ],
+        "raw": "wall    954 256 -35 28 96 117 85 40"
+      },
+      {
+        "line": 41,
+        "command": "wall",
+        "args": [
+          "562",
+          "175",
+          "-35",
+          "28",
+          "436",
+          "497",
+          "95",
+          "510"
+        ],
+        "raw": "wall    562 175 -35 28 436 497 95 510"
+      },
+      {
+        "line": 43,
+        "command": "hole",
+        "args": [
+          "895",
+          "256",
+          "-40",
+          "-26",
+          "34",
+          "97",
+          "105"
+        ],
+        "raw": "hole    895 256 -40 -26 34 97 105"
+      }
+    ],
+    "timeline": [
+      {
+        "line": 1,
+        "command": "music",
+        "args": [
+          "data/music/STAGE1.BOR"
+        ],
+        "raw": "music\t\t\tdata/music/STAGE1.BOR"
+      },
+      {
+        "line": 2,
+        "command": "bossmusic",
+        "args": [
+          "data/music/BOSS.BOR"
+        ],
+        "raw": "bossmusic\t\tdata/music/BOSS.BOR"
+      },
+      {
+        "line": 4,
+        "command": "background",
+        "args": [
+          "data/bgs/TOWN1/back.gif"
+        ],
+        "raw": "background\t\tdata/bgs/TOWN1/back.gif"
+      },
+      {
+        "line": 10,
+        "command": "panel",
+        "args": [
+          "data/bgs/TOWN1/panel.gif"
+        ],
+        "raw": "panel\t\t\tdata/bgs/TOWN1/panel.gif"
+      },
+      {
+        "line": 12,
+        "command": "frontpanel",
+        "args": [
+          "data/bgs/TOWN1/f01.gif"
+        ],
+        "raw": "frontpanel\t\tdata/bgs/TOWN1/f01.gif "
+      },
+      {
+        "line": 14,
+        "command": "order",
+        "args": [
+          "a"
+        ],
+        "raw": "order\t\t\ta"
+      },
+      {
+        "line": 22,
+        "command": "type",
+        "args": [
+          "0"
+        ],
+        "raw": "type\t\t\t0"
+      },
+      {
+        "line": 23,
+        "command": "settime",
+        "args": [
+          "99"
+        ],
+        "raw": "settime\t\t99"
+      },
+      {
+        "line": 24,
+        "command": "notime",
+        "args": [
+          "0"
+        ],
+        "raw": "notime\t\t0"
+      },
+      {
+        "line": 26,
+        "command": "stagenumber",
+        "args": [
+          "1"
+        ],
+        "raw": "stagenumber\t\t1"
+      },
+      {
+        "line": 28,
+        "command": "spawn1",
+        "args": [
+          "50",
+          "20",
+          "200"
+        ],
+        "raw": "spawn1  50 20 200"
+      },
+      {
+        "line": 29,
+        "command": "spawn2",
+        "args": [
+          "40",
+          "30",
+          "200"
+        ],
+        "raw": "spawn2  40 30 200"
+      },
+      {
+        "line": 30,
+        "command": "spawn3",
+        "args": [
+          "60",
+          "40",
+          "200"
+        ],
+        "raw": "spawn3  60 40 200"
+      },
+      {
+        "line": 31,
+        "command": "spawn4",
+        "args": [
+          "50",
+          "50",
+          "200"
+        ],
+        "raw": "spawn4  50 50 200"
+      },
+      {
+        "line": 36,
+        "command": "wall",
+        "args": [
+          "627",
+          "266",
+          "-35",
+          "38",
+          "-6",
+          "64",
+          "95",
+          "15"
+        ],
+        "raw": "wall    627 266 -35 38 -6 64 95 15"
+      },
+      {
+        "line": 37,
+        "command": "wall",
+        "args": [
+          "653",
+          "256",
+          "-35",
+          "28",
+          "240",
+          "227",
+          "85",
+          "60"
+        ],
+        "raw": "wall    653 256 -35 28 240 227 85 60"
+      },
+      {
+        "line": 39,
+        "command": "wall",
+        "args": [
+          "954",
+          "256",
+          "-35",
+          "28",
+          "96",
+          "117",
+          "85",
+          "40"
+        ],
+        "raw": "wall    954 256 -35 28 96 117 85 40"
+      },
+      {
+        "line": 41,
+        "command": "wall",
+        "args": [
+          "562",
+          "175",
+          "-35",
+          "28",
+          "436",
+          "497",
+          "95",
+          "510"
+        ],
+        "raw": "wall    562 175 -35 28 436 497 95 510"
+      },
+      {
+        "line": 43,
+        "command": "hole",
+        "args": [
+          "895",
+          "256",
+          "-40",
+          "-26",
+          "34",
+          "97",
+          "105"
+        ],
+        "raw": "hole    895 256 -40 -26 34 97 105"
+      },
+      {
+        "line": 49,
+        "command": "spawn",
+        "args": [
+          "intro"
+        ],
+        "raw": "spawn   intro"
+      },
+      {
+        "line": 50,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 51,
+        "command": "coords",
+        "args": [
+          "240",
+          "332"
+        ],
+        "raw": "coords  240 332"
+      },
+      {
+        "line": 52,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 58,
+        "command": "spawn",
+        "args": [
+          "bizzar1"
+        ],
+        "raw": "spawn   bizzar1"
+      },
+      {
+        "line": 59,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 60,
+        "command": "coords",
+        "args": [
+          "560",
+          "210"
+        ],
+        "raw": "coords  560 210"
+      },
+      {
+        "line": 61,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 66,
+        "command": "spawn",
+        "args": [
+          "civ02"
+        ],
+        "raw": "spawn   civ02"
+      },
+      {
+        "line": 67,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 68,
+        "command": "health",
+        "args": [
+          "1"
+        ],
+        "raw": "health  1"
+      },
+      {
+        "line": 69,
+        "command": "item",
+        "args": [
+          "book"
+        ],
+        "raw": "item book"
+      },
+      {
+        "line": 70,
+        "command": "coords",
+        "args": [
+          "500",
+          "160"
+        ],
+        "raw": "coords  500 160"
+      },
+      {
+        "line": 71,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 73,
+        "command": "spawn",
+        "args": [
+          "civ03"
+        ],
+        "raw": "spawn   civ03"
+      },
+      {
+        "line": 74,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 75,
+        "command": "health",
+        "args": [
+          "1"
+        ],
+        "raw": "health  1"
+      },
+      {
+        "line": 76,
+        "command": "item",
+        "args": [
+          "ingot"
+        ],
+        "raw": "item ingot"
+      },
+      {
+        "line": 77,
+        "command": "coords",
+        "args": [
+          "550",
+          "170"
+        ],
+        "raw": "coords  550 170"
+      },
+      {
+        "line": 78,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 83,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 84,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at 0"
+      },
+      {
+        "line": 86,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 87,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 88,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 89,
+        "command": "coords",
+        "args": [
+          "500",
+          "180"
+        ],
+        "raw": "coords  500 180"
+      },
+      {
+        "line": 90,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 92,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 93,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 94,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 95,
+        "command": "coords",
+        "args": [
+          "550",
+          "190"
+        ],
+        "raw": "coords  550 190"
+      },
+      {
+        "line": 96,
+        "command": "at",
+        "args": [
+          "0"
+        ],
+        "raw": "at      0"
+      },
+      {
+        "line": 98,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 99,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 101,
+        "command": "spawn",
+        "args": [
+          "amaz"
+        ],
+        "raw": "spawn   amaz"
+      },
+      {
+        "line": 102,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 103,
+        "command": "health",
+        "args": [
+          "75"
+        ],
+        "raw": "health  75"
+      },
+      {
+        "line": 104,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 105,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 107,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 108,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 109,
+        "command": "health",
+        "args": [
+          "75"
+        ],
+        "raw": "health  75"
+      },
+      {
+        "line": 110,
+        "command": "coords",
+        "args": [
+          "570",
+          "180"
+        ],
+        "raw": "coords  570 180"
+      },
+      {
+        "line": 111,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 113,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 114,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 115,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 116,
+        "command": "coords",
+        "args": [
+          "570",
+          "180"
+        ],
+        "raw": "coords  570 180"
+      },
+      {
+        "line": 117,
+        "command": "at",
+        "args": [
+          "300"
+        ],
+        "raw": "at      300"
+      },
+      {
+        "line": 124,
+        "command": "group",
+        "args": [
+          "2",
+          "2"
+        ],
+        "raw": "Group 2 2"
+      },
+      {
+        "line": 125,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at 600"
+      },
+      {
+        "line": 127,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 128,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 130,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 131,
+        "command": "map",
+        "args": [
+          "2"
+        ],
+        "raw": "map\t  2"
+      },
+      {
+        "line": 132,
+        "command": "health",
+        "args": [
+          "100"
+        ],
+        "raw": "health  100"
+      },
+      {
+        "line": 133,
+        "command": "coords",
+        "args": [
+          "500",
+          "180"
+        ],
+        "raw": "coords  500 180"
+      },
+      {
+        "line": 134,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 136,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 137,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 138,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 139,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 140,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 141,
+        "command": "at",
+        "args": [
+          "600"
+        ],
+        "raw": "at      600"
+      },
+      {
+        "line": 149,
+        "command": "group",
+        "args": [
+          "4",
+          "4"
+        ],
+        "raw": "Group 4 4"
+      },
+      {
+        "line": 150,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at 900"
+      },
+      {
+        "line": 152,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 153,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 155,
+        "command": "spawn",
+        "args": [
+          "thief1"
+        ],
+        "raw": "spawn   thief1"
+      },
+      {
+        "line": 156,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 157,
+        "command": "health",
+        "args": [
+          "5"
+        ],
+        "raw": "health  5"
+      },
+      {
+        "line": 158,
+        "command": "coords",
+        "args": [
+          "500",
+          "180"
+        ],
+        "raw": "coords  500 180"
+      },
+      {
+        "line": 159,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 161,
+        "command": "spawn",
+        "args": [
+          "thief2"
+        ],
+        "raw": "spawn   thief2"
+      },
+      {
+        "line": 162,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 163,
+        "command": "health",
+        "args": [
+          "5"
+        ],
+        "raw": "health  5"
+      },
+      {
+        "line": 164,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 165,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 166,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 168,
+        "command": "spawn",
+        "args": [
+          "thief1"
+        ],
+        "raw": "spawn   thief1"
+      },
+      {
+        "line": 169,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 170,
+        "command": "health",
+        "args": [
+          "5"
+        ],
+        "raw": "health  5"
+      },
+      {
+        "line": 171,
+        "command": "coords",
+        "args": [
+          "550",
+          "200"
+        ],
+        "raw": "coords  550 200"
+      },
+      {
+        "line": 172,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 174,
+        "command": "spawn",
+        "args": [
+          "thief1"
+        ],
+        "raw": "spawn   thief1"
+      },
+      {
+        "line": 175,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 176,
+        "command": "health",
+        "args": [
+          "5"
+        ],
+        "raw": "health  5"
+      },
+      {
+        "line": 177,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 178,
+        "command": "coords",
+        "args": [
+          "-40",
+          "210"
+        ],
+        "raw": "coords  -40 210"
+      },
+      {
+        "line": 179,
+        "command": "at",
+        "args": [
+          "900"
+        ],
+        "raw": "at      900"
+      },
+      {
+        "line": 183,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 184,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at 901"
+      },
+      {
+        "line": 186,
+        "command": "spawn",
+        "args": [
+          "badbro2"
+        ],
+        "raw": "spawn   badbro2"
+      },
+      {
+        "line": 187,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 188,
+        "command": "health",
+        "args": [
+          "200"
+        ],
+        "raw": "health  200"
+      },
+      {
+        "line": 189,
+        "command": "boss",
+        "args": [
+          "1"
+        ],
+        "raw": "boss\t  1"
+      },
+      {
+        "line": 190,
+        "command": "coords",
+        "args": [
+          "640",
+          "190"
+        ],
+        "raw": "coords  640 190"
+      },
+      {
+        "line": 191,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 194,
+        "command": "spawn",
+        "args": [
+          "civ02"
+        ],
+        "raw": "spawn   civ02"
+      },
+      {
+        "line": 195,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 196,
+        "command": "health",
+        "args": [
+          "1"
+        ],
+        "raw": "health  1"
+      },
+      {
+        "line": 197,
+        "command": "item",
+        "args": [
+          "book"
+        ],
+        "raw": "item book"
+      },
+      {
+        "line": 198,
+        "command": "coords",
+        "args": [
+          "500",
+          "170"
+        ],
+        "raw": "coords  500 170"
+      },
+      {
+        "line": 199,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 201,
+        "command": "spawn",
+        "args": [
+          "civ03"
+        ],
+        "raw": "spawn   civ03"
+      },
+      {
+        "line": 202,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 203,
+        "command": "health",
+        "args": [
+          "1"
+        ],
+        "raw": "health  1"
+      },
+      {
+        "line": 204,
+        "command": "item",
+        "args": [
+          "ingot"
+        ],
+        "raw": "item ingot"
+      },
+      {
+        "line": 205,
+        "command": "coords",
+        "args": [
+          "550",
+          "160"
+        ],
+        "raw": "coords  550 160"
+      },
+      {
+        "line": 206,
+        "command": "at",
+        "args": [
+          "901"
+        ],
+        "raw": "at      901"
+      },
+      {
+        "line": 211,
+        "command": "group",
+        "args": [
+          "3",
+          "3"
+        ],
+        "raw": "Group 3 3"
+      },
+      {
+        "line": 212,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at 1100"
+      },
+      {
+        "line": 214,
+        "command": "wait",
+        "args": [],
+        "raw": "wait"
+      },
+      {
+        "line": 215,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 217,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 218,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 219,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 220,
+        "command": "coords",
+        "args": [
+          "550",
+          "180"
+        ],
+        "raw": "coords  550 180"
+      },
+      {
+        "line": 221,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 223,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 224,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 225,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 226,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 227,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 228,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 230,
+        "command": "spawn",
+        "args": [
+          "long"
+        ],
+        "raw": "spawn   long"
+      },
+      {
+        "line": 231,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 232,
+        "command": "health",
+        "args": [
+          "75"
+        ],
+        "raw": "health  75"
+      },
+      {
+        "line": 233,
+        "command": "coords",
+        "args": [
+          "550",
+          "180"
+        ],
+        "raw": "coords  550 180"
+      },
+      {
+        "line": 234,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 236,
+        "command": "spawn",
+        "args": [
+          "henin"
+        ],
+        "raw": "spawn   henin"
+      },
+      {
+        "line": 237,
+        "command": "map",
+        "args": [
+          "1"
+        ],
+        "raw": "map\t  1"
+      },
+      {
+        "line": 238,
+        "command": "health",
+        "args": [
+          "75"
+        ],
+        "raw": "health  75"
+      },
+      {
+        "line": 239,
+        "command": "flip",
+        "args": [
+          "1"
+        ],
+        "raw": "flip 1"
+      },
+      {
+        "line": 240,
+        "command": "coords",
+        "args": [
+          "-20",
+          "190"
+        ],
+        "raw": "coords  -20 190"
+      },
+      {
+        "line": 241,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      },
+      {
+        "line": 243,
+        "command": "spawn",
+        "args": [
+          "amaz"
+        ],
+        "raw": "spawn   amaz"
+      },
+      {
+        "line": 244,
+        "command": "map",
+        "args": [
+          "0"
+        ],
+        "raw": "map\t  0"
+      },
+      {
+        "line": 245,
+        "command": "health",
+        "args": [
+          "50"
+        ],
+        "raw": "health  50"
+      },
+      {
+        "line": 246,
+        "command": "coords",
+        "args": [
+          "550",
+          "190"
+        ],
+        "raw": "coords  550 190"
+      },
+      {
+        "line": 247,
+        "command": "at",
+        "args": [
+          "1100"
+        ],
+        "raw": "at      1100"
+      }
+    ],
+    "parser_issues": [],
+    "limitations": [
+      "Group and wait directives are preserved in source order; their executable timing and concurrency are not inferred.",
+      "Spawn alias matches use the textual models index only; model behavior, script effects, and runtime eligibility are not validated.",
+      "Panel transitions, collision geometry, music playback, and gameplay fidelity remain unaudited."
+    ]
+  },
+  "limitations": [
+    "Source-ordered IR only: no concurrency, timing, collision, audio or gameplay claim.",
+    "The embedded event_ir projection is ported verbatim from the donor module; its claim text keeps referring to the donor runtime and no SMS runtime consumes this IR yet."
+  ],
+  "claim_ceiling": "typed IR with origin within the O1 front-end only; no emission, runtime, budget or conversion claim"
+}

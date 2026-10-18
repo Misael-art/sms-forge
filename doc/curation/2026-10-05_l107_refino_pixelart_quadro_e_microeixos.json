@@ -1,0 +1,75 @@
+{
+  "curation_id": "2026-10-05_l107_refino_pixelart_quadro_e_microeixos",
+  "date": "2026-10-05",
+  "title": "Polimento de pixel art: clusters, contornos e integridade de folhas animadas",
+  "kind": "curation",
+  "scope": "SMSForge visual review; Master of Fighters pixel sprite roster example",
+  "authorization": "O dono pediu correção das pendências pós-tratamento e ajuste do fluxo de revisão artística; esta atualização documenta os micro-eixos e a evidência que impede promoção prematura.",
+  "lessons": [
+    {
+      "id": "L107",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Depois de resolver defeitos anatômicos severos, a revisão de pixel art ainda precisa separar acabamento de clusters, detalhe facial, contorno/recorte, sombra por material, contato mão-arma, geometria de equipamento, semântica de quadros e leitura nativa. Um checklist amplo permite que esses defeitos de polimento se percam. O checklist agora exige oito micro-eixos para pixel sprite sheets e pranchas de roster; cada falha bloqueia promoção.",
+      "root_cause": "O checklist de arte validava apenas os eixos que o próprio manifest declarava. Assim, uma revisão podia ser completa estruturalmente e ainda omitir clareza do olho, pixel clusters suavizados, sombras metálicas planas, linha de arco/corda, contorno de pés ou mudança de pose produzida por edição generativa. A inspeção visual em 1×/4× não estava amarrada a eixos obrigatórios por meio. A primeira prancha comparativa também excedia a largura de visualização e era reduzida em escala fracionária, o que acentuava a aparência de ruído no contorno do Shinobi.",
+      "evidence": {
+        "owner_feedback_record": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_owner_feedback_20261005.json",
+        "owner_feedback_record_sha256": "a7aed98a65c81a3a559bdea37593ef47c2ab7ca09424445b8a77c38607177e55",
+        "tracked_roster_board": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_alignment_audit_v2.png",
+        "tracked_roster_board_sha256": "2a22cfa8fec9542639f1d5bbade068e5ce20426c516e1360b3f3d6b8ccd0e535",
+        "review_checklist": "SMS_projects/master_of_fighters/doc/roster_harmony_refinement_review_v1.json",
+        "review_report": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_post_treatment_review_report_v1.json",
+        "lossless_reencode_lineage": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprite_index8_reencodes_v1.json",
+        "rejected_imagegen_trials": [
+          {
+            "path": "/home/misael/.codex/generated_images/01a0ffb3-0f5b-70a0-8e6c-33a88a5cada7/exec-24e9da68-ba12-4a0e-a5cb-aaaba3ce5017.png",
+            "sha256": "8401ea96f6853b81c8772ff85627972fad7f4917cc18812058107e00eb1a2ec4",
+            "reason": "A folha regenerada mudou escala/acabamento e não preservou as diferenças de quadro; não foi copiada para o projeto."
+          },
+          {
+            "path": "/home/misael/.codex/generated_images/01a0ffb3-0f5b-70a0-8e6c-33a88a5cada7/exec-b1678006-35fc-4e75-8505-b55e223add9d.png",
+            "sha256": "c52f62230f4da80a79d772278b6c55219cc760995752b762bad2b5ba7b41d93c",
+            "reason": "A edição mudou escala e silhueta; não foi copiada para o projeto."
+          },
+          {
+            "path": "/home/misael/.codex/generated_images/01a0ffb3-0f5b-70a0-8e6c-33a88a5cada7/exec-9caea2f4-c6db-4db5-beac-8fe84fac0977.png",
+            "sha256": "886c467876d88559f4f4da255e42f9c27ecca90537cc4f33a96c8f4e357109f3",
+            "reason": "A edição alterou silhueta/pose e não foi aprovada como preservação quadro a quadro; não foi copiada para o projeto."
+          },
+          {
+            "path": "/home/misael/.codex/generated_images/01a0ffb3-0f5b-70a0-8e6c-33a88a5cada7/exec-2fb09b1f-e7b8-46dc-9d89-0c3ba1588055.png",
+            "sha256": "24065e996063114753578e12d625cee1dbfcd09441d63e5eb1046b309ba14f74",
+            "reason": "A edição mudou idle para gestos/ataque com espada; rejeitada por violar estado e poses pedidos."
+          }
+        ]
+      },
+      "corrective_actions": [
+        "audit_art_review_checklist.py agora exige pixel_clusters, face_detail_readability, outline_and_cutout, material_shading, hand_weapon_attachment, equipment_geometry, frame_pose_integrity e native_size_readability para asset kinds pixel_sprite_sheet e pixel_sprite_roster_board.",
+        "O gate falha fechado para nomes desconhecidos na família pixel_sprite_*; typo no tipo não pode contornar os micro-eixos obrigatórios.",
+        "art-review.md, sms-visual-excellence.md e SMS_GLOBAL §92 exigem inspeção em 1×/nearest-neighbor 4×, blocos de paleta por material e verificação dos doze quadros após qualquer alteração generativa.",
+        "O Master of Fighters recebeu feedback owner-authored hash-bound e checklist por personagem. A prancha de proporção v2 passou a usar 2048 px de largura com ampliação inteira 3× nearest-neighbor; ela não altera os PNGs-fonte. O ruído percebido no contorno do Shinobi continua marcado fail até revisão da arte-fonte.",
+        "Os arquivos originais permaneceram intactos; nenhuma tentativa generativa foi promovida.",
+        "Três folhas originalmente em PNG indexado de 4 bits foram reencodadas em cópias de 8 bits; a comparação pixel-render deu AE=0 e as sete folhas passaram no gate de recursos."
+      ],
+      "measurement": {
+        "tool_that_measures": "audit_art_review_checklist.py; audit_validate_resources.py; audit_sprite_cutout.py; audit_animation_semantics.py; audit_roster_harmony.py",
+        "rule_section": "SMS_GLOBAL §92",
+        "review_gate": "A checklist deve ser executada com --verify-hashes; status fail/pending bloqueia promoção.",
+        "claim_ceiling": "cobertura/hash do registro e gates estruturais; não prova verdade visual, integração, ROM, emulador nem AAA",
+        "checks": {
+          "audit_art_review_checklist_self_check": "pass",
+          "selftest_root": "pass; 68/68, incluindo fixture válida hash-bound, ausência de micro-eixos e tipo pixel_sprite desconhecido",
+          "roster_refinement_review": "fail as expected with --verify-hashes; 24 failing axes, 18 pending character axes, zero schema/hash problems; promotion blocked",
+          "audit_validate_resources": "pass; 7 of 7 current candidates with canonical character IDs",
+          "audit_learning_capture_root": "pass",
+          "audit_doc_sync_root": "pass",
+          "validate_measurement_tools": "pass; 51 measurement tools with passing --self-check"
+        }
+      },
+      "limits": "A imagem pós-tratamento não foi anexada. A prancha comparativa de proporção v2 usa os sete candidatos hash-bound atuais, frame 00, sem reescala individual; o quadro anterior era reduzido fracionariamente pelo visualizador. No frame 00 do Shinobi a máscara alfa é binária e conectada, sem ilha separada, mas o dono ainda aponta ruído visual no contorno. Nenhum PNG-fonte foi alterado ou promovido; não houve integração em res ou validação em ROM/emulador.",
+      "rule_section": "SMS_GLOBAL §92",
+      "tool_that_measures": "audit_art_review_checklist.py",
+      "skill_that_teaches": "workflows/art-review.md; skills/sms-visual-excellence.md"
+    }
+  ],
+  "dedup_key": "l107_pixel_art_polish_frame_integrity_2026_10_05"
+}

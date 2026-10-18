@@ -1,0 +1,66 @@
+{
+  "probe": "vscroll_wrap224",
+  "licao": "L131/\u00a7122",
+  "engine": "BlastEm 1.0.0 sms2",
+  "verdict": "confirmado",
+  "failures": [],
+  "diffs": {
+    "240==16": true,
+    "224==0": true,
+    "255==31": true,
+    "240!=192": false
+  },
+  "sessions": {
+    "0": {
+      "value": 0,
+      "ok": true,
+      "reg9": 0,
+      "frame_final": 512,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx0_val0/blastem-sms-519ed16e04614e42b967c9eb9e3c3c9f/screenshots/frame_20261014_230320.png"
+    },
+    "1": {
+      "value": 16,
+      "ok": true,
+      "reg9": 16,
+      "frame_final": 572,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx1_val16/blastem-sms-bbc2f9d432dc46429defcf5d09a00dd0/screenshots/frame_20261014_230331.png"
+    },
+    "2": {
+      "value": 192,
+      "ok": true,
+      "reg9": 192,
+      "frame_final": 152,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx2_val192/blastem-sms-6dd712645cac4750b668f6e07acde265/screenshots/frame_20261014_230337.png"
+    },
+    "3": {
+      "value": 224,
+      "ok": true,
+      "reg9": 224,
+      "frame_final": 212,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx3_val224/blastem-sms-2c5fb90109ec4273b79bf46f122f2875/screenshots/frame_20261014_230342.png"
+    },
+    "4": {
+      "value": 240,
+      "ok": true,
+      "reg9": 240,
+      "frame_final": 272,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx4_val240/blastem-sms-ea98885b3bbe40d5b7c655f768893447/screenshots/frame_20261014_230348.png"
+    },
+    "5": {
+      "value": 255,
+      "ok": true,
+      "reg9": 255,
+      "frame_final": 332,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx5_val255/blastem-sms-707995496a75418790eea57705f0492a/screenshots/frame_20261014_230355.png"
+    },
+    "7": {
+      "value": 31,
+      "ok": true,
+      "reg9": 31,
+      "frame_final": 452,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx7_val31/blastem-sms-8ed7b95787284945ac2d1d540ea42a58/screenshots/frame_20261014_230404.png"
+    }
+  },
+  "rom_sha256": "866f5cc85bb08e1cdb36853fbc1823b1ca91d83e3eaf35224b6dae8200c4a893",
+  "limits": "Mede o wrap do reg9 no BlastEm (janela de render); nao mede leitura-unica-por-frame (raster Y) nem console. Segunda engine (Emulicious) fica como checagem de divergencia; LOTE F conserva a pergunta de silicio."
+}

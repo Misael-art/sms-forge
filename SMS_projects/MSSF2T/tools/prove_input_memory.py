@@ -26,6 +26,9 @@ Rodar a partir da raiz do workspace (os caminhos de saida sao relativos).
 Uso: prove_input_memory.py --rom SMS_projects/MSSF2T/out/rom/MSSF2T.sms
      prove_input_memory.py --self-check
 Exit: 0 provado | 1 reprovado | 2 ambiente ausente
+Artefato: out/evidence/input_memory.json (schema input_memory_v3; o v3
+acrescenta o bloco "punch_window" — janela de conexao do soco MEDIDA na RAM
+pelos probes 0xC7E5..0xC7EB, sem remediar PUSH_W/hitbox).
 """
 import argparse
 import hashlib
@@ -52,10 +55,35 @@ PROBE_STATE = 0xC7F6
 PROBE_P2X = 0xC7FC
 PROBE_PY = 0xC7FB
 PROBE_POSE = 0xC7F9
+# Instrumentacao da janela do soco (ciclo MSSF2T): mapa SMRT aditivo em
+# src/main.c (0xC7E5..0xC7EB), escritos em fight_update ANTES do early-return
+# de hitstop (fight.c) para o estado congelado ficar sempre visivel.
+PROBE_TIMER = 0xC7E5      # P[0].timer
+PROBE_ATKWIN = 0xC7E6     # startup+active se P[0] em ST_PUNCH/ST_KICK, senao 0
+PROBE_GAP = 0xC7E7        # P[1].x - P[0].x (byte com sinal)
+PROBE_HITSTOP = 0xC7E8    # g_hitstop
+PROBE_HITUSED = 0xC7E9    # P[0].hit_used
+PROBE_VLINE = 0xC7EA      # VCounter bruto lido no FIM do trabalho do frame
+PROBE_VOVF = 0xC7EB       # saturado (max 255): frames com vline >= 0xC0
+# Estado do Guile direto do array P[] (RAM): sem ele o whiff e inexplicavel
+# — a hurtbox agachada (hurt_top 34, fight.c:614) comeca acima do fim do
+# soco (ay1 = y+32, collide), entao soco ALTO em agachado e whiff POR DESIGN.
+# Enderecos literais: _P = 0xC000 (out/obj/MSSF2T.map:325), sizeof(Fighter)=32,
+# offset de state = 7 (unsigned int, o byte baixo distingue 100..700),
+# offset de guard = 15 (fight.h). Se o layout do struct mudar, atualizar AQUI.
+PROBE_P1STATE = 0xC027    # P[1].state (byte baixo)
+PROBE_P1GUARD = 0xC02F    # P[1].guard (segurando tras neste frame)
 GS = {0: "ROUND", 1: "FIGHT", 2: "KO", 3: "RESULT", 4: "TITLE"}
 GS_FIGHT = 1
 GROUND_Y = 112            # chao da luta (airborne = py < GROUND_Y)
 FACE_BIT = 0x80           # probe_pose bit 7 = facing (0xC7F9)
+# Byte baixo de P[1].state (ST_* de inc/fight.h) — nomeia o que o Guile
+# fazia durante a janela do soco (causa do whiff, medida em 08/09/2026:
+# a IA recua andando com guarda em (g_frame & 8) e o gap vai de 20 a 28
+# antes dos frames ativos).
+P1_STATES = {100: "IDLE", 101: "PUNCH", 104: "KICK", 107: "GUARD",
+             200: "CROUCH", 300: "JUMP", 410: "WALK_B", 420: "WALK_F",
+             501: "HIT", 570: "KO", 611: "WIN", 700: "SPECIAL"}
 
 ROM_REL = "SMS_projects/MSSF2T/out/rom/MSSF2T.sms"
 YDOTOOL_SOCKET = "/tmp/.ydotool_socket_smsforge"
@@ -82,8 +110,10 @@ def evaluate_swap(before, flight, after):
 def evaluate_punch(before, punch, after):
     """Soco conecta por input: B1 com canal vivo, Ken a alcance
     (gap < PUNCH_REACH, lido antes do golpe) e guile_hp caiu. Hit (-7),
-    chip de guarda (-2) e KO (0) sao conexoes; 64->64 e whiff — a
-    regressao exata da amostra selada."""
+    chip de guarda (-2) e KO (0) sao conexoes; 64->64 com B1 confirmado
+    e whiff — e quando o estado do Guile importa: recuo (ST_WALK_B) com
+    guarda abre o gap antes dos frames ativos, e soco ALTO em agachado
+    passa por cima (hurtbox 34 > ay1 32) — ambos design do genero."""
     if not punch.get("canal_vivo"):
         return False, "canal de teclado morto: nenhuma leitura tem lastro"
     b0 = before.get("guile_hp")
@@ -115,10 +145,92 @@ def evaluate_punch(before, punch, after):
             return False, ("guile_hp %s->%s sem registro de b1_chegou: amostra "
                            "antiga, nao distingue whiff de tecla perdida"
                            % (b0, b1))
+        # Whiff com causa datada: o que o Guile estava fazendo durante a
+        # janela ativa (linha do tempo do B1) explica o 64->64.
+        est = sorted({P1_STATES.get(s.get("guile_state"))
+                      for t in punch.get("tentativas", [])
+                      for s in t.get("linha_tempo_b1", [])
+                      if s.get("guile_state") is not None}, key=str)
+        detalhe = (" estados do Guile na janela: %s" % est) if est else ""
         return False, ("B1 confirmado (0x10 em probe_keys) a gap=%s e guile_hp "
-                       "%s->%s: whiff de verdade" % (punch.get("gap"), b0, b1))
+                       "%s->%s: whiff de verdade%s"
+                       % (punch.get("gap"), b0, b1, detalhe))
     return True, "guile_hp caiu %s->%s apos B1 a alcance (delta %d)" % (
         b0, b1, b0 - b1)
+
+
+def _maxn(a, b):
+    """max() tolerante a leitura perdida (None)."""
+    if b is None:
+        return a
+    return b if a is None else max(a, b)
+
+
+def punch_window_summary(tentativas):
+    """Resumo da janela de conexao do soco MEDIDA na RAM (probes 0xC7E5..).
+
+    Honesto por construcao — NAO afrouxa o criterio do soco:
+    - so entra em gaps_com_hit a tentativa cujo guile_hp CAIU dentro dela
+      (hp_antes > hp_min);
+    - so entra em gaps_sem_hit a tentativa em que o soco de fato SAIU
+      (b1 chegou ao ROM ou janela de ataque ativa vista em probe_atkwin) e
+      o hp NAO caiu — soco sem lastro nao diz nada sobre a janela;
+    - janela_observada_max_exclusive e EXCLUSIVA: o maior gap sem hit + 1.
+    Descritivo: nada aqui aprova ou reprova o eixo (evaluate_punch continua
+    sendo o criterio).
+    """
+    com_hit, sem_hit = [], []
+    ativos_com_hit, ativos_sem_hit = [], []
+    linhas = []
+    for t in tentativas:
+        gap = t.get("gap")
+        hp_antes = t.get("guile_hp_antes")
+        hp_min = t.get("guile_hp_min")
+        conectou = (hp_antes is not None and hp_min is not None
+                    and hp_min < hp_antes)
+        soco_saiu = bool(t.get("b1_chegou")) or (t.get("atkwin_max") or 0) > 0
+        # gaps vistos DURANTE a janela ativa (timer < atkwin na linha do
+        # tempo do B1) — e o que a caixa de collide realmente enxergou.
+        aw_max = t.get("atkwin_max") or 0
+        gaps_ativos = sorted({s.get("gap") for s in t.get("linha_tempo_b1", [])
+                              if s.get("gap") is not None
+                              and (s.get("timer") or 0) < aw_max})
+        linhas.append({
+            "n": t.get("n"), "gap": gap,
+            "timer_max": t.get("timer_max"),
+            "atkwin_max": t.get("atkwin_max"),
+            "hitstop_max": t.get("hitstop_max"),
+            "hit_used_visto": bool(t.get("hit_used_visto")),
+            "guile_hp_antes": hp_antes,
+            "guile_hp_depois": t.get("guile_hp_depois"),
+            "gaps_durante_janela_ativa": gaps_ativos,
+            "conectou": conectou,
+        })
+        if conectou:
+            ativos_com_hit.extend(gaps_ativos)
+        elif soco_saiu:
+            ativos_sem_hit.extend(gaps_ativos)
+        if gap is None:
+            continue
+        if conectou:
+            com_hit.append(gap)
+        elif soco_saiu:
+            sem_hit.append(gap)
+    return {
+        "tentativas": linhas,
+        "gaps_com_hit": sorted(com_hit),
+        "gaps_sem_hit": sorted(sem_hit),
+        "gaps_ativos_com_hit": sorted(set(ativos_com_hit)),
+        "gaps_ativos_sem_hit": sorted(set(ativos_sem_hit)),
+        "janela_observada_min": min(com_hit) if com_hit else None,
+        "janela_observada_max_exclusive":
+            (max(sem_hit) + 1) if sem_hit else None,
+        "fonte": ("probes 0xC7E5..0xC7EB (timer/atkwin/gap/hitstop/hit_used) "
+                  "+ P[1].state/guard (0xC027/0xC02F), "
+                  "escritos em fight_update antes do early-return de hitstop; "
+                  "collide() teorico exige gap in (-4,24) e separate() para "
+                  "os corpos em PUSH_W=20 — este bloco e o MEDIDO"),
+    }
 
 
 # --------------------------------------------------------------- injecao
@@ -288,6 +400,12 @@ def run():
             print("[FAIL] canal de teclado morto — nada a provar (L039)")
             return 1, metrics
 
+        # ---- soco na ATRACAO (antes de qualquer input: tecla mata
+        # g_attract — fight.c:917). A demo comanda o Ken pelo mesmo caminho
+        # de input do jogador; queda de guile_hp aqui e soco conectando na
+        # ROM de release, sem o instrumento brigar com a IA.
+        atracao = _attract_punch_phase(dap)
+
         # ---- partida REAL: B1 no titulo (a atracao morre para sempre no
         # primeiro toque — o controle passa a ser do jogador)
         if backend == "wayland":
@@ -368,7 +486,9 @@ def run():
         metrics["motivo"] = motivo
         metrics["input_provado"] = ok
         metrics["soco"] = soco
+        metrics["punch_window"] = soco.get("punch_window")
         metrics["sideswap"] = sideswap
+        metrics["soco_atracao"] = atracao
         _dump(metrics)
         print("[%s] input->jogador %s (%s)"
               % ("PASS" if ok else "FAIL",
@@ -377,6 +497,11 @@ def run():
               % ("PASS" if soco.get("soco_provado") else "FAIL",
                  "provado" if soco.get("soco_provado") else "NAO provado",
                  soco.get("motivo")))
+        print("[%s] soco conectando na ATRACAO (ROM propria, sem input do "
+              "instrumento): %s — %d hits"
+              % ("PASS" if atracao.get("soco_conectado_atracao") else "INFO",
+                 atracao.get("soco_conectado_atracao"),
+                 len(atracao.get("hits", []))))
         return (0 if ok else 1), metrics
     finally:
         try:
@@ -393,12 +518,20 @@ def run():
 def _punch_phase(dap, backend, canal_vivo):
     """Handoff item 1: o soco CONECTANDO por input — guile_hp cai.
 
-    Causa do whiff selado (64->64): o approach antigo parava em gap<=26 e a
-    caixa do soco so alcancaca gap<24 (fight.c collide: ax=x+20..+32 contra
-    bx=x+8..+24). Os corpos param a PUSH_W=20 (separate), dentro do alcance.
-    CPU a dist<44 soca a cada 64 frames e guarda metade das janelas de
-    ataque: hit -7, chip de guarda -2 — qualquer queda de guile_hp e
-    conexao. Retry x3 com recuo, como na fase de pulo (L053).
+    Causa do whiff, MEDIDA na RAM (08/09/2026, probes 0xC7E5..0xC7EB +
+    P[1].state/guard 0xC027/0xC02F): NAO e a caixa de colisao. collide()
+    conecta com gap < 24 e os corpos param a PUSH_W=20 — dentro do alcance.
+    O que abre o gap e a IA do Guile: a dist<44, quando Ken ataca e
+    (g_frame & 8), ela segura tras (ST_WALK_B + guard, fight.c cpu) e recua
+    2 px/frame — a linha do tempo do B1 mostrou gap 20->28 DURANTE a janela
+    ativa e guile_state WALK_B: whiff por defesa, eixo `guarda` do GDD, do
+    mesmo genero que whiffar poke contra oponente recuando no arcade.
+    Remedios de colisao (alargar hitbox, mudar PUSH_W) curariam o sintoma
+    violando o eixo de frame data / guard do GDD. A prova então CRONOMETRA
+    o soco: le probe_frame e aperta B1 na janela em que a IA nao recua
+    ((g_frame & 0xF) < 3) — o que um jogador treinado faz (poke na janela
+    em que o oponente nao recua). Hit -7, chip de guarda -2 e KO (0) sao
+    conexoes. Retry x4 com recuo, como na fase de pulo (L053).
     """
     try:
         time.sleep(0.3)
@@ -411,7 +544,10 @@ def _punch_phase(dap, backend, canal_vivo):
             return {"antes": before, "punch": punch, "after": {},
                     "soco_provado": False, "motivo": "leitura falhou"}
 
-        for n in range(3):
+        for n in range(4):
+            # O round anterior pode ter acabado (KO/RESULT/TITULO) — sem
+            # FIGHT nenhum input de jogo vale.
+            _wait_fight(dap, backend, timeout=30.0)
             # recuo: sai de hitstun/guarda e reposiciona antes do golpe
             if backend == "wayland":
                 ensure_focus_wayland()
@@ -467,6 +603,46 @@ def _punch_phase(dap, backend, canal_vivo):
             # regressao do jogo. Medido em 07/09/2026 com o emulador rodando
             # durante a tecla: gap=20 -> guile_hp 54->47, dano 7, exatamente o
             # apply_hit(...,7) de ST_PUNCH em fight.c. O soco sempre funcionou.
+            # Cronometragem contra a defesa da CPU (causa do whiff, docstring):
+            # a IA soca em g_frame%64==0, chuta em %64==32 e so recua quando
+            # KEN esta atacando E (g_frame & 8). Janela %64 in [16,20] tem:
+            # CPU ociosa (ataque dela em 0 ja acabou, em 32 nao chegou) e
+            # &8==0 durante TODA a janela ativa do soco (frames 16..23, e o
+            # recuo so baterias em 24..31, la na recovery). Byte baixo de
+            # probe_frame basta para o modulo (Z80 little-endian).
+            # WHIFF-PUNISH POR TEMPO DE RELÓGIO (última refinamento 08/09/2026).
+            # As tentativas anteriores falharam por granularidade: o polling
+            # DAP anda 2-4 frames por ciclo (whiff-punish de frames errou por
+            # ±8 px) e o chute dela acerta o Ken agachado esperando. Agora:
+            # Ken EM PÉ a gap 20; no instante em que P[1].state == ST_PUNCH
+            # (0xC027 == 101), com o emulador RODANDO contínuo (sem pausa):
+            #   recuo 40 ms (~2 frames) -> soco dela whiffa a gap 24-25
+            #   entrada 40 ms (~2 frames) -> gap volta a 20 na recovery dela
+            #   B1 imediato -> ativo do Ken (T+4..T+7) cai no busy dela
+            # Tudo por tempo de relógio — ydotool segura o tempo, o polling
+            # só acha o gatilho.
+            fim_j = time.time() + 6.0
+            while time.time() < fim_j:
+                dap.pause()
+                s1 = dap.read_byte(PROBE_P1STATE)
+                dap.cont()
+                if s1 == 101:
+                    break
+                time.sleep(0.02)
+            if backend == "wayland":
+                press_wayland("left")
+                time.sleep(0.04)
+                release_wayland("left")
+                press_wayland("right")
+                time.sleep(0.04)
+                release_wayland("right")
+            else:
+                CE._run(["xdotool", "keydown", "Left"])
+                time.sleep(0.04)
+                CE._run(["xdotool", "keyup", "Left"])
+                CE._run(["xdotool", "keydown", "Right"])
+                time.sleep(0.04)
+                CE._run(["xdotool", "keyup", "Right"])
             dap.cont()
             if backend == "wayland":
                 ensure_focus_wayland()
@@ -475,12 +651,36 @@ def _punch_phase(dap, backend, canal_vivo):
                 CE._run(["xdotool", "keydown", "a"])
             # Amostra probe_keys COM o jogo andando: 0x10 tem de aparecer de
             # fato, senao a tecla nao chegou e nao ha soco a julgar.
+            #
+            # Ciclo de servico INVERTIDO (medicao de 08/09/2026): o laco antigo
+            # pausava o emulador e fazia 7 leituras DAP (~300 ms) por iteracao,
+            # dentro de uma janela de 0,25 s — cabia UMA amostra, colhida cedo
+            # demais, e probe_keys vinha 0x00 com pose de soco confirmada
+            # (0x82): o agendamento da medicao culpou o jogo pela propria
+            # janela estreita. Agora a tecla segura 0,5 s e cada iteracao roda
+            # ~50 ms (3 frames) entre pausas curtas — o ULTIMO frame antes de
+            # cada pausa teve a tecla baixa, logo k leva 0x10 se o canal
+            # estiver vivo. Mesma janela amostra a linha do tempo da colisao:
+            # timer/gap/hitstop/hit_used + estado e guarda do Guile (0xC027/
+            # 0xC02F) — sem o estado do defensor o whiff nao tem causa.
             k_b1, pose_b1, b1_visto = None, None, False
-            fim_b1 = time.time() + 0.25          # ~15 frames > startup+active
+            timer_max = atkwin_max = hitstop_max = vline_max = None
+            hit_used_visto = False
+            linha_tempo = []
+            fim_b1 = time.time() + 0.5
             while time.time() < fim_b1:
+                time.sleep(0.05)                 # ~3 frames RODANDO
                 dap.pause()
                 k = dap.read_byte(PROBE_KEYS)
                 p = dap.read_byte(PROBE_POSE)
+                tm = dap.read_byte(PROBE_TIMER)
+                aw = dap.read_byte(PROBE_ATKWIN)
+                hs = dap.read_byte(PROBE_HITSTOP)
+                hu = dap.read_byte(PROBE_HITUSED)
+                vl = dap.read_byte(PROBE_VLINE)
+                gp = dap.read_byte(PROBE_GAP)
+                s1 = dap.read_byte(PROBE_P1STATE)
+                g1 = dap.read_byte(PROBE_P1GUARD)
                 dap.cont()
                 if k is not None:
                     k_b1 = k if k_b1 is None else (k_b1 | k)
@@ -488,7 +688,16 @@ def _punch_phase(dap, backend, canal_vivo):
                         b1_visto = True
                 if p is not None and (p & 0x7F) == 2:
                     pose_b1 = p
-                time.sleep(0.02)
+                timer_max = _maxn(timer_max, tm)
+                atkwin_max = _maxn(atkwin_max, aw)
+                hitstop_max = _maxn(hitstop_max, hs)
+                vline_max = _maxn(vline_max, vl)
+                if hu is not None and hu:
+                    hit_used_visto = True
+                linha_tempo.append({"timer": tm, "gap": gp, "hitstop": hs,
+                                    "hit_used": hu, "atkwin": aw,
+                                    "pose": p, "guile_state": s1,
+                                    "guile_guard": g1})
             if backend == "wayland":
                 EI.ydotool_key(EI.EVDEV["a"], False)
             else:
@@ -498,23 +707,42 @@ def _punch_phase(dap, backend, canal_vivo):
             # janela de observacao: hitstop 6f + recovery 8f, polling rapido
             min_boss = b0
             pose_vista = None
+            vovf_ultimo = None
             observacao = []
             fim = time.time() + 1.4
             while time.time() < fim:
+                time.sleep(0.04)                 # ~2 frames RODANDO por ciclo
                 dap.pause()
                 bo = dap.read_byte(PROBE_BOSS)
                 hp = dap.read_byte(PROBE_HP)
                 st = dap.read_byte(PROBE_STATE)
                 pose = dap.read_byte(PROBE_POSE)
+                tm = dap.read_byte(PROBE_TIMER)
+                aw = dap.read_byte(PROBE_ATKWIN)
+                hs = dap.read_byte(PROBE_HITSTOP)
+                hu = dap.read_byte(PROBE_HITUSED)
+                vl = dap.read_byte(PROBE_VLINE)
+                vf = dap.read_byte(PROBE_VOVF)
+                gp = dap.read_byte(PROBE_GAP)
+                s1 = dap.read_byte(PROBE_P1STATE)
+                g1 = dap.read_byte(PROBE_P1GUARD)
                 observacao.append({"boss": bo, "ken_hp": hp,
                                    "estado": GS.get(st, st),
-                                   "pose": pose})
+                                   "pose": pose, "timer": tm, "gap": gp,
+                                   "hitstop": hs, "hit_used": hu,
+                                   "guile_state": s1, "guile_guard": g1})
                 if pose is not None and (pose & 0x7F) == 2:
                     pose_vista = pose
                 if bo is not None and bo < min_boss:
                     min_boss = bo
+                timer_max = _maxn(timer_max, tm)
+                atkwin_max = _maxn(atkwin_max, aw)
+                hitstop_max = _maxn(hitstop_max, hs)
+                vline_max = _maxn(vline_max, vl)
+                vovf_ultimo = _maxn(vovf_ultimo, vf)
+                if hu is not None and hu:
+                    hit_used_visto = True
                 dap.cont()
-                time.sleep(0.08)
             dap.pause()
             ba = dap.read_byte(PROBE_BOSS)
             conectou = min_boss < b0
@@ -523,11 +751,20 @@ def _punch_phase(dap, backend, canal_vivo):
                 "guile_hp_min": min_boss, "guile_hp_depois": ba,
                 "keys_durante_b1": k_b1, "pose_no_b1": pose_b1,
                 "pose_punch_vista": pose_vista,
+                "timer_max": timer_max, "atkwin_max": atkwin_max,
+                "hitstop_max": hitstop_max, "hit_used_visto": hit_used_visto,
+                "vline_max": vline_max, "vovf_ultimo": vovf_ultimo,
+                "linha_tempo_b1": linha_tempo,
                 "observacao": observacao})
+            guile_est = sorted({o.get("guile_state")
+                                for o in (linha_tempo + observacao)
+                                if o.get("guile_state") is not None})
             print("  soco tentativa %d: gap=%s keys_b1=0x%02X pose_b1=%s "
-                  "pose_punch=%s guile_hp %s->%s (min %s)%s"
-                  % (n, gap, k_b1 or 0, pose_b1, pose_vista, b0, ba,
-                     min_boss, "  CONECTOU" if conectou else ""))
+                  "pose_punch=%s atkwin=%s hitstop=%s hit_used=%s "
+                  "guile_state=%s guile_hp %s->%s (min %s)%s"
+                  % (n, gap, k_b1 or 0, pose_b1, pose_vista, atkwin_max,
+                     hitstop_max, hit_used_visto, guile_est, b0, ba, min_boss,
+                     "  CONECTOU" if conectou else ""))
             # O sinal que vale e POR TENTATIVA. Comparar o guile_hp de antes de
             # tudo com o de depois de tudo atravessa reset de round — o HP volta
             # a 64 e uma conexao real (54->47) vira "64->64, whiff". Registrado
@@ -546,12 +783,73 @@ def _punch_phase(dap, backend, canal_vivo):
                  "ken_hp": dap.read_byte(PROBE_HP),
                  "estado": GS.get(dap.read_byte(PROBE_STATE) or 0, "?")}
         ok, motivo = evaluate_punch(before, punch, after)
+        pw = punch_window_summary(punch["tentativas"])
         print("[soco] %s (%s)"
               % ("CONECTOU POR INPUT" if ok else "NAO conectou", motivo))
+        print("[janela soco] min=%s max_exclusive=%s gaps_com_hit=%s "
+              "gaps_sem_hit=%s gaps_ativos_com_hit=%s gaps_ativos_sem_hit=%s"
+              % (pw["janela_observada_min"], pw["janela_observada_max_exclusive"],
+                 pw["gaps_com_hit"], pw["gaps_sem_hit"],
+                 pw["gaps_ativos_com_hit"], pw["gaps_ativos_sem_hit"]))
         return {"antes": before, "punch": punch, "after": after,
+                "punch_window": pw,
                 "soco_provado": ok, "motivo": motivo}
     except (OSError, subprocess.SubprocessError):
         return {"soco_provado": False, "motivo": "falha de ambiente"}
+
+
+def _attract_punch_phase(dap):
+    """Soco conectando SEM input do instrumento: o modo atracao da propria
+    ROM comanda o Ken pelo mesmo caminho de input do jogador (attract_script
+    -> b1 -> ST_PUNCH -> collide -> apply_hit). Amostra a RAM e procura queda
+    de guile_hp >= 5 (chip e 2; hit de soco e 7) com a pose de soco
+    (probe_pose & 0x7F == 2) em amostra vizinha. Roda ANTES da partida real —
+    qualquer tecla mata g_attract (fight.c:917). Motivo: o bot interativo
+    perde rounds para a defesa da CPU (recuo-guarda, contra-ataque, chute no
+    agachado — tudo datado nos probes) e a prova interativa morre em
+    transicao de round; a demo da ROM nao sofre disso.
+    """
+    try:
+        print("[atracao] esperando a demo assumir (25s sem tocar em nada)...")
+        time.sleep(25.0)
+        amostras = []
+        fim = time.time() + 120.0
+        t0 = time.time()
+        while time.time() < fim:
+            dap.pause()
+            boss = dap.read_byte(PROBE_BOSS)
+            pose = dap.read_byte(PROBE_POSE)
+            gap = dap.read_byte(PROBE_GAP)
+            st = dap.read_byte(PROBE_STATE)
+            dap.cont()
+            amostras.append({"t": round(time.time() - t0, 1), "boss": boss,
+                             "pose": pose, "gap": gap,
+                             "estado": GS.get(st, st)})
+            time.sleep(0.25)
+        hits = []
+        for i in range(1, len(amostras)):
+            a, b = amostras[i - 1], amostras[i]
+            if (a["boss"] is not None and b["boss"] is not None
+                    and b["boss"] < a["boss"] and a["boss"] - b["boss"] >= 5):
+                janela = amostras[max(0, i - 2):i + 2]
+                pose_soco = any(x["pose"] is not None
+                                and (x["pose"] & 0x7F) == 2
+                                for x in janela)
+                hits.append({"t": b["t"], "queda": a["boss"] - b["boss"],
+                             "boss_antes": a["boss"],
+                             "boss_depois": b["boss"],
+                             "gap": b["gap"], "pose_soco_perto": pose_soco})
+        conectou = bool(hits) and any(h["pose_soco_perto"] for h in hits)
+        print("[soco-atracao] conectado=%s hits=%d" % (conectou, len(hits)))
+        for h in hits:
+            print("  queda %s->%s a t=%ss gap=%s pose_soco=%s"
+                  % (h["boss_antes"], h["boss_depois"], h["t"],
+                     h["gap"], h["pose_soco_perto"]))
+        return {"amostras": amostras, "hits": hits,
+                "soco_conectado_atracao": conectou}
+    except (OSError, subprocess.SubprocessError):
+        return {"soco_conectado_atracao": False,
+                "motivo": "falha de ambiente"}
 
 
 def _read_fighter(dap):
@@ -565,6 +863,32 @@ def _read_fighter(dap):
     }
 
 
+def _wait_fight(dap, backend, timeout=40.0):
+    """Garante GS_FIGHT antes de fases que exigem input de jogo.
+
+    O round pode ter acabado na fase anterior (KO/RESULT) e o laco de arcade
+    devolve ao TITULO — onde pulo e soco sao mortos. Se cair no titulo, uma
+    partida nova comeca por B1 (mesma partida real do run(), l.411). Retorna
+    o ultimo estado visto.
+    """
+    fim = time.time() + timeout
+    estado = None
+    while time.time() < fim:
+        dap.pause()
+        estado = dap.read_byte(PROBE_STATE)
+        dap.cont()
+        if estado == GS_FIGHT:
+            return estado
+        if estado == 4:                      # GS_TITLE: B1 inicia a partida
+            if backend == "wayland":
+                ensure_focus_wayland()
+                hold_wayland("botao1", 0.25)
+            else:
+                hold_x11("botao1", 0.25)
+        time.sleep(0.5)
+    return estado
+
+
 def _sideswap_phase(dap, backend):
     """L053: cruzar por cima (Cima+Direcao) e observar o facing virar.
 
@@ -575,6 +899,8 @@ def _sideswap_phase(dap, backend):
     """
     try:
         time.sleep(0.4)
+        st = _wait_fight(dap, backend)
+        print("sideswap: estado=%s" % GS.get(st, st))
         dap.pause()
         before = _read_fighter(dap)
         before["facing_bit"] = bool((before["pose"] or 0) & FACE_BIT)
@@ -608,7 +934,27 @@ def _sideswap_phase(dap, backend):
         # Passo atras para sair do alcance, espera assentar, tenta ate 3x.
         flight = {"min_py": None, "amostras": [], "cruzou_no_ar": False}
         tentativas = []
-        for n in range(3):
+        for n in range(4):
+            # O round pode ter acabado na fase do soco: volta a FIGHT (e, se
+            # o laco foi ao titulo, abre partida nova por B1).
+            _wait_fight(dap, backend, timeout=20.0)
+            # (re)aproximacao: round novo recoloca os corpos longe; o pulo
+            # so cruza com gap <= 28.
+            for _ in range(8):
+                dap.pause()
+                px0 = dap.read_byte(PROBE_PX)
+                p2x0 = dap.read_byte(PROBE_P2X)
+                if None in (px0, p2x0):
+                    continue
+                if p2x0 - px0 <= 28:
+                    break
+                dap.cont()
+                if backend == "wayland":
+                    ensure_focus_wayland()
+                    hold_wayland("right", 0.5)
+                else:
+                    hold_x11("right", 0.5)
+                dap.pause()
             if backend == "wayland":
                 ensure_focus_wayland()
                 hold_wayland("left", 0.3)
@@ -620,6 +966,19 @@ def _sideswap_phase(dap, backend):
             pre = _read_fighter(dap)
             tentativas.append({"n": n, "px": pre["px"], "p2x": pre["p2x"],
                                "pose": pre["pose"]})
+            # Ken ocupado ignora Cima: busy() (hitstun de soco da CPU, soco em
+            # andamento) retorna antes do teste de up em fight_update. A 2a
+            # rodada de 08/09/2026 as 3 tentativas morreram assim — o Cima era
+            # dado com o Ken em hitstun/pose de golpe. Espera a pose voltar a
+            # IDLE/WALK (0/1) antes de pular.
+            for _ in range(6):
+                pp = (pre.get("pose") or 0) & 0x7F
+                if pp in (0, 1):
+                    break
+                dap.cont()
+                time.sleep(0.3)
+                dap.pause()
+                pre = _read_fighter(dap)
 
             if backend == "wayland":
                 ensure_focus_wayland()
@@ -630,7 +989,7 @@ def _sideswap_phase(dap, backend):
             time.sleep(0.05)
             if backend == "wayland":
                 press_wayland("up")
-                time.sleep(0.3)
+                time.sleep(0.4)
                 release_wayland("up")
             else:
                 CE._run(["xdotool", "keydown", "Up"])
@@ -705,10 +1064,17 @@ def _metrics(backend, canal_vivo, focado, samples, luta_iniciada, estado,
     with open("SMS_projects/MSSF2T/out/rom/MSSF2T.sms", "rb") as f:
         sha = hashlib.sha256(f.read()).hexdigest()
     m = {
-        "schema": "input_memory_v2",
+        "schema": "input_memory_v3",
         "rom": ROM_REL,
         "rom_sha256": sha,
         "probe_px_addr": hex(PROBE_PX),
+        "probe_janela_addrs": {"timer": hex(PROBE_TIMER),
+                               "atkwin": hex(PROBE_ATKWIN),
+                               "gap": hex(PROBE_GAP),
+                               "hitstop": hex(PROBE_HITSTOP),
+                               "hitused": hex(PROBE_HITUSED),
+                               "vline": hex(PROBE_VLINE),
+                               "vovf": hex(PROBE_VOVF)},
         "backend": backend,
         "foco_verificado": focado,
         "frames": {"antes": f0, "depois": f1},
@@ -903,18 +1269,70 @@ def self_check():
     if ok:
         falhas.append("soco: leitura None foi aceita")
 
+    # ---- fixtures do resumo da janela do soco (punch_window, probes 0xC7E5..)
+    # 18. Hit a gap 20 e whiff COMPROVADO a gap 22: janela observada [20, 23).
+    t_hit = {"n": 0, "gap": 20, "guile_hp_antes": 64, "guile_hp_min": 57,
+             "guile_hp_depois": 57, "b1_chegou": True, "atkwin_max": 8,
+             "timer_max": 12, "hitstop_max": 6, "hit_used_visto": True}
+    t_whiff = {"n": 1, "gap": 22, "guile_hp_antes": 64, "guile_hp_min": 64,
+               "guile_hp_depois": 64, "b1_chegou": True, "atkwin_max": 8,
+               "timer_max": 12, "hitstop_max": None, "hit_used_visto": False}
+    pw = punch_window_summary([t_hit, t_whiff])
+    if (pw["janela_observada_min"] != 20
+            or pw["janela_observada_max_exclusive"] != 23):
+        falhas.append("punch_window: janela %s..%s, esperado 20..23 "
+                      "(exclusivo)" % (pw["janela_observada_min"],
+                                       pw["janela_observada_max_exclusive"]))
+    if pw["gaps_com_hit"] != [20] or pw["gaps_sem_hit"] != [22]:
+        falhas.append("punch_window: particao com/sem hit errada: %s / %s"
+                      % (pw["gaps_com_hit"], pw["gaps_sem_hit"]))
+
+    # 19. Soco SEM lastro (tecla perdida, atkwin 0) nao diz nada sobre a
+    #     janela — nao pode virar "gap sem hit" nem fechar teto.
+    t_sem_lastro = {"n": 2, "gap": 30, "guile_hp_antes": 64,
+                    "guile_hp_min": 64, "guile_hp_depois": 64,
+                    "b1_chegou": False, "atkwin_max": 0}
+    pw = punch_window_summary([t_hit, t_sem_lastro])
+    if (30 in pw["gaps_sem_hit"]
+            or pw["janela_observada_max_exclusive"] is not None):
+        falhas.append("punch_window: tentativa sem soco comprovado entrou "
+                      "na janela")
+
+    # 20. atkwin>0 com hp que NAO caiu vai para gaps_sem_hit, nunca para
+    #     com_hit — a janela e medida por DANO, nao por animacao.
+    pw = punch_window_summary([t_whiff])
+    if pw["gaps_com_hit"] or pw["gaps_sem_hit"] != [22]:
+        falhas.append("punch_window: whiff comprovado classificado errado")
+
+    # 21. gap None (leitura perdida) e ignorado.
+    t_none = {"n": 3, "gap": None, "guile_hp_antes": 64, "guile_hp_min": 50,
+              "guile_hp_depois": 50, "b1_chegou": True, "atkwin_max": 8}
+    pw = punch_window_summary([t_none, t_hit])
+    if None in pw["gaps_com_hit"] or pw["gaps_com_hit"] != [20]:
+        falhas.append("punch_window: gap None vazou para a janela")
+
+    # 22. Sem dados: Nones honestos, nao zeros que fingem medicao.
+    pw = punch_window_summary([])
+    if (pw["janela_observada_min"] is not None
+            or pw["janela_observada_max_exclusive"] is not None
+            or pw["gaps_com_hit"] or pw["gaps_sem_hit"]):
+        falhas.append("punch_window: sem dados deveria dar None/listas "
+                      "vazias")
+
     if falhas:
         print("[SELF-CHECK FAIL]")
         for f in falhas:
             print("  - " + f)
         return 1
-    print("[SELF-CHECK PASS] 21 fixtures: L039 canal morto, L038 direcao "
+    print("[SELF-CHECK PASS] 26 fixtures: L039 canal morto, L038 direcao "
           "oposta, dx curto, sentido unico, caminho bom, leitura None, "
           "L053 de costas, facing sem cruzar, sem pulo, estado invertido, "
           "sideswap caminho bom, sideswap leitura None, soco whiff com B1 "
           "confirmado, soco com tecla perdida (nao e whiff), soco de amostra "
           "antiga (inconclusivo), fora de alcance, canal morto, hit -7, "
-          "chip -2, KO, leitura None")
+          "chip -2, KO, leitura None, janela soco 20..23 (hit/whiff), "
+          "sem lastro fora da janela, whiff nunca e hit, gap None "
+          "ignorado, sem dados honesto")
     return 0
 
 

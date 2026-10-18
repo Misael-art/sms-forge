@@ -1,0 +1,31 @@
+{
+  "curation_id": "2026-09-26_l082_vcounter_vblank_deadline",
+  "date": "2026-09-26",
+  "scope": "corrigir_criterio_vcounter_e_revalidar_worst_frame_sms",
+  "origin": "Ao fechar a Task 6 do luta_mugen, o medidor reportou vovf_delta=32 e vline_max=223 sob o predicado vline >= 0xC0. A leitura da sequência do VCounter e a documentação do VDP mostraram que 0xC0 marca o INÍCIO do VBlank: esse predicado contava frames ainda dentro da janela segura e ignorava a volta ao display ativo. O critério foi invertido, vline_max substituído por vline_min e a ROM voltou a medir 3000 frames contínuos, sem DAP durante a janela e com snapshot selado.",
+  "lessons": [
+    {
+      "id": "L082",
+      "status": "fechada_com_ferramenta_e_medicao_corrigida",
+      "lesson": "VCounter abaixo de 0xC0, depois da volta de 0xFF para 0x00, indica que o trabalho do frame alcançou o display ativo seguinte. 0xC0–0xDA e D5–FF compõem a janela segura; contar vline >= 0xC0 inverte o sentido da medição. O probe conta overflow quando vline < 0xC0, guarda o menor VCounter da janela e sela ambos após 3000 frames sem conexão DAP. Resultados anteriores com a condição >= 0xC0 não demonstram PASS nem derramamento e precisam ser medidos de novo antes de fechar orçamento.",
+      "evidence": {
+        "predicado_antigo_invertido": "SMS_projects/luta_mugen/out/evidence/t6_worst_frame_continuous.json: vovf_delta=32 e vline_max=223 sob vline >= 0xC0; leitura não prova derramamento.",
+        "medicao_corrigida": "SMS_projects/luta_mugen/out/evidence/t6_phase_profile_verified.json: ROM 3d08c5fdff3c227145edcb4dbbc243c0b1252735eebc797a3232fb1fda62adcd, frame final 5664, done=1, vovf_delta=2968/3000, vline_min=62; budget reprova. Estado após o selo não é usado para atribuir o pior frame.",
+        "perfil_diagnostico": "A captura guardou checkpoints do frame que definiu vline_min, não do maior derramamento; seus tempos por etapa são amostra diagnóstica e não representam necessariamente o worst-frame. O instrumento do projeto agora também registra o maior VCounter <0xC0 e os checkpoints desse mesmo frame.",
+        "janela_runner": "Uma sessão de 70 s foi rejeitada como sem_lastro porque o contador lido ficou abaixo de 3000 apesar do selo; ampliar a espera para 90 s produziu a captura selada válida acima.",
+        "self_check": "measure_worst_frame.py --self-check: todos os 23 casos passaram, incluindo safe/spill em ambos os lados do limiar, janela/selo, checkpoints com retorno do VCounter e enum de estado do projeto.",
+        "hardware": "Charles MacDonald, Sega Master System VDP documentation: sequência NTSC 00–DA, D5–FF; SMS Power HOW-TO Detect VDP corruption with Emulicious: janela segura 192–262."
+      },
+      "rule_section": "SMS_GLOBAL §67",
+      "tool_that_measures": "measure_worst_frame.py"
+    }
+  ],
+  "sources": [
+    "https://github.com/franckverrot/EmulationResources/blob/master/consoles/sms-gg/Sega%20Master%20System%20VDP%20documentation.txt",
+    "https://www.smspower.org/forums/16612-HOWTODetectVDPCorruptionWithEmulicious"
+  ],
+  "note_ids": {
+    "next_id": "L083",
+    "mastery": "Nenhuma técnica promovida. L082 corrige o sentido do instrumento e invalida resultados anteriores para orçamento; o luta_mugen ainda reprova o budget na ROM medida."
+  }
+}

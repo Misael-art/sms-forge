@@ -1,0 +1,25 @@
+{
+  "curation_id": "2026-09-25_l077_gate_sem_contrato",
+  "date": "2026-09-25",
+  "scope": "passo_5_auditoria_corpus_worst_frame_falso_verde_gate_identidade",
+  "origin": "Auditoria de proveniência + worst-frame no corpus inteiro (passo 5). Proveniência: 7/7 imagem PASS, áudio 4/4 PASS + 1 skip legítimo. Worst-frame: ao medir os 5 projetos com ROM, laboratorio_01 — que NÃO tem probe nenhum (sem magic, sem vline/vovf/phase) — recebeu veredito 'pass' do measure_worst_frame.py. Causa: o tool lia 0xEA/0xEB/0xED sem autenticar NADA; RAM sem dono tem lixo baixo e contador parado, e lixo baixo + delta 0 é exatamente a assinatura de 'pass'. arena_nocturna reprovara por sorte (lixo em 0xEA valia 242 ≥ 0xC0 → contradição → sem_lastro), não por desenho. O magic 'SMRT' na RAM também não basta: arena tem magic+schema escritos e nenhum instrumento de worst-frame — identidade sem instrumentação não é medição.",
+  "lessons": [
+    {
+      "id": "L077",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "lesson": "Gate de medição autentica o CONTRATO DE INSTRUMENTAÇÃO antes de medir, não só a identidade do probe. Em measure_worst_frame.py: (a) checagem estática da fonte — a triade probe_vline em 0xC7EA, probe_vovf como WORD em 0xC7EB e probe_phase em 0xC7ED precisa estar DECLARADA no src da ROM (rejeita também vovf como byte, a regressão L071) — falha antes de abrir emulador; (b) checagem RAM do header SMRT+schema no início da sessão. Veredito novo `sem_contrato` (exit 1): ROM sem instrumentação não ganha 'pass' nem 'derramou' — não tem orçamento, e órfão de medição não entra em ledger. Self-check com 4 fixtures de fonte (triade completa, vovf byte, só vline, sem probe) + 4 de magic. Consequência geral: todo tool que lê endereço fixo da RAM precisa responder 'quem escreve este byte?' — se a resposta não é verificada, o verde é do lixo.",
+      "evidence": {
+        "falso_verde_antes": "laboratorio_01 demo.sms: veredito=pass vovf_delta=0 vline_max=118 (nenhum probe no fonte; 4 fixtures reprovam agora)",
+        "correcao_depois": "laboratorio_01 e arena_nocturna: veredito=sem_contrato com motivo endereçado por campo faltante; MSSF2T/kage/hamoopig: contrato autentica (True, [])",
+        "self_check": "measure_worst_frame.py --self-check 14/14; validate_measurement_tools: 43 ferramentas verdes",
+        "medicao_hamoopig": "worst_frame_hamoopig.json — primeira medição canônica do terceiro projeto de luta (ROM 77a79e04…, disco 20/09)"
+      },
+      "rule_section": "SMS_GLOBAL §62",
+      "tool_that_measures": "measure_worst_frame.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L078",
+    "mastery": "Nenhuma técnica promovida; esta lição fecha um falso verde de gate. Dívidas declaradas pelo ledger: arena_nocturna e laboratorio_01 precisam da triade canônica para ter orçamento; hamoopig tem ROM (77a79e04…) divergente do bank (4a0807ed…) — reconciliação pendente de fechamento do projeto."
+  }
+}

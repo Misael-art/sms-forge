@@ -1,0 +1,102 @@
+{
+  "curation_id": "2026-10-08_runtime_counter_layout",
+  "date": "2026-10-08",
+  "kind": "curation_followup",
+  "authorization": "Pedido explícito: temos elementos para curadoria faça ela",
+  "scope": "Fábrica central tools/doc e tabela AGENTS; sem .agent locais ou fontes/assets de jogos",
+  "lessons": [],
+  "applied_lessons": [
+    "L013",
+    "L037",
+    "L061",
+    "L082",
+    "L089",
+    "L097",
+    "L106",
+    "L108"
+  ],
+  "dedup_key": "existing_lessons_runtime_modular_counters_final_concept_layout_20261008",
+  "rule_section": "SMS_GLOBAL §§103–104",
+  "tool_that_measures": "audit_counter_window.py; audit_art_review_checklist.py; selftest.py",
+  "decision": {
+    "status": "applied to canonical agent; 95 factory tests and55 instruments passed; independent static review passed with limits; global documentation gate remains failed",
+    "new_lesson_ids": false,
+    "registry_unchanged": true,
+    "registry_current": "L108",
+    "promotion": "Counter arithmetic uniqueness and art review coverage; no engine/art delivery claim"
+  },
+  "promoted_points": [
+    "Contador byte155→184 prova delta modular29, não contagem exata sem excluir outras voltas.",
+    "Incidência precisa janela ativa/unidades/oportunidades/limite/reset e observação fresca; contadorboot não é hitrate.",
+    "Preflight/dirty-bit/caches rejeitados nas medições históricas não viram ganho causal ou lei SMS.",
+    "Modelo SATfixo conserva blocked/not_run; validaçãoestática não paga execução.",
+    "Concept model sheet exige document_and_layout não dispensável; revisão da raw não aprova composição final."
+  ],
+  "evidence": {
+    "root": "doc/curation/evidence/2026-10-08_runtime_counter_layout/",
+    "source_inventory": "doc/curation/evidence/2026-10-08_runtime_counter_layout/source_inventory.json",
+    "counter_calibration": "doc/curation/evidence/2026-10-08_runtime_counter_layout/counter_calibration.json",
+    "art_current_validation": "doc/curation/evidence/2026-10-08_runtime_counter_layout/art_v3_current_validation.json",
+    "independent_review": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/independent_review.json",
+      "sha256": "7390c8e7b7528bceccf9f6449f801d7e3a8bd99f5775ada44c1ccb0a305ba5b7"
+    },
+    "report": "doc/curation/evidence/2026-10-08_runtime_counter_layout/report.md",
+    "new_emulator_sessions": 0
+  },
+  "limits": [
+    "Gate contador mede aritmética/registros hasheados, não autentica limite/no-reset/atomicidade/janela ou ROM.",
+    "Declaração max_events358 é exemplo offline; não atesta associação das fronteiras do contador aos358frames do trial.",
+    "FPSbaseline2janelas vs candidatos3janelas, carga/sessões diferentes: observação histórica não ganho causal universal.",
+    "VCounter é fase raster, não duraçãoCPU exclusiva; causa de regressão interna permanece aberta.",
+    "Gate artístico mede cobertura/status/hash, não verdade visual; v3 continua pending sem aprovação do dono.",
+    "Não executamos ROM nova nesta rodada; resultados emulador citados têm alcance histórico diagnóstico.",
+    "DocsMUGEN continuam ilegíveis; não houve recuperação nem documentos substitutos."
+  ],
+  "factory_checks": {
+    "status": "partial; global docs blocked",
+    "selftest": {
+      "passed": 95,
+      "total": 95,
+      "optional_build_probe": "not_run",
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/selftest_final.log",
+        "sha256": "349997a47c16a19fc9a258c54b4f424c7326701e6625df5e7c287c10cff651a6"
+      }
+    },
+    "measurement_tools": {
+      "passed": 55,
+      "total": 55,
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/measurement_tools_final.log",
+        "sha256": "0c3c8c03c0dab89775be0d51f60147ea35cb8884457df9959df88568da9d294d"
+      }
+    },
+    "learning_capture": {
+      "status": "passed",
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/learning_capture_final.log",
+        "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3"
+      },
+      "result": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/learning_capture_final.json",
+        "sha256": "89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39"
+      }
+    },
+    "doc_sync": {
+      "status": "failed",
+      "exit_code": 1,
+      "problems": 10,
+      "affected_project": "luta_mugen",
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/doc_sync_final.log",
+        "sha256": "f06e323fc4168e72fe6fa4af0b1576cc71a323c4a43b5781e2ffc5433a5f1e55"
+      },
+      "result": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/doc_sync_final.json",
+        "sha256": "15284ab7be8d379fa7b50fccc64697eeee610e576ee3d886b025daae0f00ed38"
+      }
+    }
+  },
+  "claim_ceiling": "canonical engineering discipline and bounded tool/record scopes only"
+}

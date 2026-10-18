@@ -1,0 +1,480 @@
+{
+  "schema": "sms_mugen_p2_idle_transition_mask_diagnostic_v1",
+  "status": "diagnostic_failure_frames_1_to_3",
+  "project": "SMS_projects/luta_mugen",
+  "sample_identity": {
+    "fighter": "Ryu_Kang",
+    "source_class": "NES bootleg rip",
+    "role": "technical-only palette/runtime/cache sample",
+    "art_direction_target": "Ken Masters ADV CPS2 arcade rip",
+    "replacement_required_before_full_art": true
+  },
+  "method": {
+    "comparison": "captured non-black framebuffer temporal union vs source-derived exact 4bpp opacity mask for one frozen P2 idle pose",
+    "framebuffer": [
+      256,
+      192
+    ],
+    "anchor_x": 160,
+    "floor_y": 160,
+    "facing": "left",
+    "padded_width_bucket_px": 32,
+    "bank_image": "assets/banks/versus_scene_banks_02.bin",
+    "logical_bank_base": 2,
+    "bank_base_control": "frame 0 temporal mask reproduces 100% IoU in the captured Ryu region",
+    "roi_margin_px": 8,
+    "near_full_frame_threshold": {
+      "coverage": 0.95,
+      "precision": 0.95
+    },
+    "limitations": [
+      "black-background pilot only",
+      "measures opacity silhouette, not palette quality or color correctness",
+      "does not prove animation timing, constant 50/60 fps, audio, or gameplay",
+      "observed divergence does not isolate whether source is pattern prefetch, META remap, or flicker schedule"
+    ]
+  },
+  "poses": [
+    {
+      "idle_frame": 0,
+      "rom": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2/out/rom/scale_pilot_80px.sms",
+      "rom_sha256": "67bb7b9959dd60d167e59e37d26b29c2c63add1469f434929aa1f6cb22945d75",
+      "video": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2/out/evidence/freeze_p2.mp4.mp4",
+      "video_sha256": "46aa92336c46510ddde162ef4208bd21c17fe278a0a70f618e0b0e2a58b3688a",
+      "capture_metadata": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2/out/evidence/freeze_p2.mp4.json",
+      "pattern_bank": 25,
+      "expected_mask_sha256": "8be98e0ae53237180b9267cbcd8f2fd405610c725252a04cca1923b4adafee30",
+      "bbox_xyxy": [
+        147,
+        85,
+        178,
+        162
+      ],
+      "frames_captured": 601,
+      "expected_opaque_pixels": 1710,
+      "observed_union_pixels_in_roi": 1710,
+      "intersection_pixels": 1710,
+      "temporal_union_iou": 1.0,
+      "temporal_expected_coverage": 1.0,
+      "mean_frame_coverage": 0.799746,
+      "mean_frame_precision": 1.0,
+      "frames_at_least_95pct_coverage_and_precision": 360,
+      "such_frames_percent": 59.9
+    },
+    {
+      "idle_frame": 1,
+      "rom": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f1/out/rom/scale_pilot_80px.sms",
+      "rom_sha256": "de74833636b150d9d74bb130e15d5b92f898ea86bbd1102af8d641f8cc07166c",
+      "video": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f1/out/evidence/freeze_p2_f1.mp4.mp4",
+      "video_sha256": "845b7b5b6fe80c3099b8439caeda489b7ee9e44b1a453172cd42274a0c0f6a0a",
+      "capture_metadata": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f1/out/evidence/freeze_p2_f1.mp4.json",
+      "pattern_bank": 25,
+      "expected_mask_sha256": "b6136b1bd96e287c1aaf7af491be3366f4505cd46637e7f64667e8a06fc49e49",
+      "bbox_xyxy": [
+        147,
+        84,
+        177,
+        163
+      ],
+      "frames_captured": 597,
+      "expected_opaque_pixels": 1697,
+      "observed_union_pixels_in_roi": 1024,
+      "intersection_pixels": 973,
+      "temporal_union_iou": 0.556636,
+      "temporal_expected_coverage": 0.573365,
+      "mean_frame_coverage": 0.461828,
+      "mean_frame_precision": 0.948083,
+      "frames_at_least_95pct_coverage_and_precision": 0,
+      "such_frames_percent": 0.0
+    },
+    {
+      "idle_frame": 2,
+      "rom": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f2/out/rom/scale_pilot_80px.sms",
+      "rom_sha256": "c224dde358b2b4f546c7d6d34d36fee8c9aaf76f84aee27619b758ee9bf11fb0",
+      "video": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f2/out/evidence/freeze_p2_f2.mp4.mp4",
+      "video_sha256": "3a350628c6c592b0b767fc6554a4dbfe3ed8018dcdaad2c3b0abe92e1155d835",
+      "capture_metadata": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f2/out/evidence/freeze_p2_f2.mp4.json",
+      "pattern_bank": 25,
+      "expected_mask_sha256": "b8b20261c38063ac72f0cecc1de502bfa40f8b78cb2f1ecbbcb0968a5f3661cf",
+      "bbox_xyxy": [
+        147,
+        83,
+        177,
+        163
+      ],
+      "frames_captured": 597,
+      "expected_opaque_pixels": 1694,
+      "observed_union_pixels_in_roi": 1429,
+      "intersection_pixels": 1230,
+      "temporal_union_iou": 0.649762,
+      "temporal_expected_coverage": 0.726092,
+      "mean_frame_coverage": 0.583407,
+      "mean_frame_precision": 0.853139,
+      "frames_at_least_95pct_coverage_and_precision": 0,
+      "such_frames_percent": 0.0
+    },
+    {
+      "idle_frame": 3,
+      "rom": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f3/out/rom/scale_pilot_80px.sms",
+      "rom_sha256": "c70f47e528f7cd703d21f327b207b033c0bad7473f4cc817df703bbd9ec4d684",
+      "video": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f3/out/evidence/freeze_p2_f3.mp4.mp4",
+      "video_sha256": "3482fdf25625793f18d64821a7b377d012ec253e3e115e691540fa68bf939f1a",
+      "capture_metadata": "SMS_projects/luta_mugen/out/local_study/scale_pilot_rom_actor_flicker_freeze_p2_f3/out/evidence/freeze_p2_f3.mp4.json",
+      "pattern_bank": 26,
+      "expected_mask_sha256": "b6136b1bd96e287c1aaf7af491be3366f4505cd46637e7f64667e8a06fc49e49",
+      "bbox_xyxy": [
+        147,
+        84,
+        177,
+        163
+      ],
+      "frames_captured": 600,
+      "expected_opaque_pixels": 1697,
+      "observed_union_pixels_in_roi": 1057,
+      "intersection_pixels": 968,
+      "temporal_union_iou": 0.541993,
+      "temporal_expected_coverage": 0.570418,
+      "mean_frame_coverage": 0.458849,
+      "mean_frame_precision": 0.911693,
+      "frames_at_least_95pct_coverage_and_precision": 0,
+      "such_frames_percent": 0.0
+    }
+  ],
+  "flicker_schedule_table_check": {
+    "pose_pair_rows": 24,
+    "variants_per_pair": 8,
+    "rows_covering_every_source_placement": 24,
+    "all_24_rows_cover_every_placement": true,
+    "scope": "offline audit of generated index table only; does not prove runtime draw, VRAM pattern residency, or time-in-emulator coverage",
+    "rows": [
+      {
+        "ken_frame": 0,
+        "ryu_frame": 0,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 0,
+        "ryu_frame": 1,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 0,
+        "ryu_frame": 2,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 0,
+        "ryu_frame": 3,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 1,
+        "ryu_frame": 0,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 1,
+        "ryu_frame": 1,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 1,
+        "ryu_frame": 2,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 1,
+        "ryu_frame": 3,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 2,
+        "ryu_frame": 0,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 2,
+        "ryu_frame": 1,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 2,
+        "ryu_frame": 2,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 2,
+        "ryu_frame": 3,
+        "placements_expected": 50,
+        "covered_index_count": 50,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 3,
+        "ryu_frame": 0,
+        "placements_expected": 49,
+        "covered_index_count": 49,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 3,
+        "ryu_frame": 1,
+        "placements_expected": 49,
+        "covered_index_count": 49,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 3,
+        "ryu_frame": 2,
+        "placements_expected": 49,
+        "covered_index_count": 49,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 3,
+        "ryu_frame": 3,
+        "placements_expected": 49,
+        "covered_index_count": 49,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 4,
+        "ryu_frame": 0,
+        "placements_expected": 48,
+        "covered_index_count": 48,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 4,
+        "ryu_frame": 1,
+        "placements_expected": 48,
+        "covered_index_count": 48,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 4,
+        "ryu_frame": 2,
+        "placements_expected": 48,
+        "covered_index_count": 48,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 4,
+        "ryu_frame": 3,
+        "placements_expected": 48,
+        "covered_index_count": 48,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 5,
+        "ryu_frame": 0,
+        "placements_expected": 49,
+        "covered_index_count": 49,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 5,
+        "ryu_frame": 1,
+        "placements_expected": 49,
+        "covered_index_count": 49,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 5,
+        "ryu_frame": 2,
+        "placements_expected": 49,
+        "covered_index_count": 49,
+        "every_index_covered": true
+      },
+      {
+        "ken_frame": 5,
+        "ryu_frame": 3,
+        "placements_expected": 49,
+        "covered_index_count": 49,
+        "every_index_covered": true
+      }
+    ],
+    "all_indices_exact_range_covered": true
+  },
+  "palette_visibility_check": {
+    "palette_symbol": "versus_sprite_palette",
+    "black_palette_indices": [
+      8,
+      13,
+      14,
+      15
+    ],
+    "poses": [
+      {
+        "frame": 0,
+        "opaque_color_index_counts": {
+          "9": 505,
+          "10": 862,
+          "11": 252,
+          "12": 91
+        },
+        "nonzero_indices_mapped_to_black": [],
+        "opaque_pixels_render_as_black": 0
+      },
+      {
+        "frame": 1,
+        "opaque_color_index_counts": {
+          "9": 470,
+          "10": 875,
+          "11": 255,
+          "12": 97
+        },
+        "nonzero_indices_mapped_to_black": [],
+        "opaque_pixels_render_as_black": 0
+      },
+      {
+        "frame": 2,
+        "opaque_color_index_counts": {
+          "9": 473,
+          "10": 887,
+          "11": 234,
+          "12": 100
+        },
+        "nonzero_indices_mapped_to_black": [],
+        "opaque_pixels_render_as_black": 0
+      },
+      {
+        "frame": 3,
+        "opaque_color_index_counts": {
+          "9": 470,
+          "10": 875,
+          "11": 255,
+          "12": 97
+        },
+        "nonzero_indices_mapped_to_black": [],
+        "opaque_pixels_render_as_black": 0
+      }
+    ],
+    "scope": "source 4bpp indices compared against the pilot sprite palette; undercoverage is not caused by opaque source pixels mapped to RGB black"
+  },
+  "idle_cache_slot_simulation": {
+    "initial_frame_0": {
+      "frame": 0,
+      "entries": 20,
+      "exact_entries": 20,
+      "mismatches": []
+    },
+    "transitions": [
+      {
+        "from_frame": 0,
+        "to_frame": 1,
+        "uploads": 20,
+        "exact_entries": 20,
+        "entries": 20,
+        "pass": true,
+        "mismatches": []
+      },
+      {
+        "from_frame": 1,
+        "to_frame": 2,
+        "uploads": 18,
+        "exact_entries": 20,
+        "entries": 20,
+        "pass": true,
+        "mismatches": []
+      },
+      {
+        "from_frame": 2,
+        "to_frame": 3,
+        "uploads": 18,
+        "exact_entries": 20,
+        "entries": 20,
+        "pass": true,
+        "mismatches": []
+      },
+      {
+        "from_frame": 3,
+        "to_frame": 0,
+        "uploads": 20,
+        "exact_entries": 18,
+        "entries": 20,
+        "pass": false,
+        "mismatches": [
+          {
+            "entry": 18,
+            "source_tile": 76,
+            "runtime_tile": 164,
+            "expected_slot": 38,
+            "actual_slot": 82,
+            "source_bank": 25,
+            "source_off": 4992,
+            "loaded_sha256": "48b5b4ae6da93ec3c00836c708cf371842f4e3e3cc5f55b638a18ca7b3cbc763",
+            "expected_sha256": "da904877697f4afaaa16c18aaeb0988febde537d20c16f86d7292d2ae0371650"
+          },
+          {
+            "entry": 19,
+            "source_tile": 78,
+            "runtime_tile": 166,
+            "expected_slot": 39,
+            "actual_slot": 83,
+            "source_bank": 25,
+            "source_off": 5056,
+            "loaded_sha256": "8bfcb9ea619d91171538ee46b26b3aa00405a12f020c9da25aa75147fcebb466",
+            "expected_sha256": "041f558fed2c7f2374e51a23e53d868bb563019330f8b960b9de41de0218dbbf"
+          }
+        ]
+      }
+    ],
+    "concrete_wraparound_fault": {
+      "from_frame": 3,
+      "to_frame": 0,
+      "bad_entries": [
+        18,
+        19
+      ],
+      "target_meta_slots": [
+        82,
+        83
+      ],
+      "upload_rows_for_source_pairs": [
+        {
+          "bank": 25,
+          "off": 4992,
+          "destination_slot": 102
+        },
+        {
+          "bank": 25,
+          "off": 5056,
+          "destination_slot": 103
+        }
+      ],
+      "source_tile_ids": [
+        76,
+        78
+      ],
+      "source_pair_indices": [
+        38,
+        39
+      ],
+      "meaning": "pattern bytes are correct, but the wrap transition writes them to slots 102/103 while META0 references 82/83; those target slots retain stale patterns from frame 3",
+      "scope": "offline simulation of initial loads and upload lists; does not prove that the runtime executed the copies"
+    }
+  }
+}

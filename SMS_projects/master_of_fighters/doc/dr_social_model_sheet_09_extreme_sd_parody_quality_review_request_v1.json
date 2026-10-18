@@ -1,0 +1,27 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_09_extreme_sd_parody_art_review_v1",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Read-only visual review of Extreme-SD-Parody candidate adapted to adult body invariants. Review playful expression/linework as style, adult anatomy, identity, clothes, palette, equipment and grips, five-view consistency, scale and layout. Return evidence; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
+      "sha256": "e8d531701712f6b1479837b7caacf0b9e7798d81d21574d31883adc22b7a7e68",
+      "role": "candidate sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_v1.json",
+      "sha256": "d5235b9504c3e689cc1c4412337467654b72b39a2bdb804e4bad194b309236d4",
+      "role": "checklist"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only and independent of producer.",
+    "No sprite/SMS/ROM/emulator/AAA approval.",
+    "Report concrete issues and opportunities."
+  ]
+}

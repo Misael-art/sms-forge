@@ -1,0 +1,98 @@
+{
+  "curation_id": "2026-10-07_context_air_identity",
+  "date": "2026-10-07",
+  "kind": "curation_followup",
+  "authorization": "Pedido explícito: Faça uma nova rodada de curadoria e aplique as melhorias ao agente canônico.",
+  "scope": "Fábrica central, AGENTS e documentação; não altera fontes/assets nem .agent locais.",
+  "lessons": [],
+  "applied_lessons": [
+    "L036",
+    "L037",
+    "L056",
+    "L057",
+    "L065",
+    "L071",
+    "L083",
+    "L091"
+  ],
+  "dedup_key": "existing_lessons_readable_context_air_identity_20261007",
+  "rule_section": "SMS_GLOBAL §§99–100",
+  "tool_that_measures": "session_qa.py; audit_subagent_session.py; audit_import_semantics.py; selftest.py; audit_doc_sync.py",
+  "decision": {
+    "status": "applied to canonical agent; focused/factory tests and native diagnostic QA passed; global documentation promotion blocked by project filesystem/read errors",
+    "new_lesson_ids": false,
+    "registry_unchanged": true,
+    "promotion": "Disciplina de contexto e consistência de AIR; sem promoção de capacidade do jogo."
+  },
+  "promoted_points": [
+    "QA novo exige contexto production legível completo ou diagnóstico explícito com ausências ENOENT.",
+    "EIO/EACCES/texto vazio ou UTF8 inválido bloqueiam preparação antes de iniciar emulador.",
+    "Snapshots íntegros preservam auditoria histórica quando a origem fica ilegível; pedidos antigos não ganham nova elegibilidade.",
+    "AIR identity/timing exige IDs e durações fonte/ROM por N+1 fronteiras, terminal incluso; permutação de durações iguais reprova.",
+    "Duração histórica mantém alcance original; --require-air-identity rejeita duração sem identidade.",
+    "doc_sync distinguishes observed unreadable documents from ENOENT; neither passes."
+  ],
+  "evidence": {
+    "root": "doc/curation/evidence/2026-10-07_context_air_identity/",
+    "context_health": "doc/curation/evidence/2026-10-07_context_air_identity/context_health.json",
+    "air_calibration": "doc/curation/evidence/2026-10-07_context_air_identity/air_calibration.json",
+    "native_dispatch": "doc/curation/evidence/2026-10-07_context_air_identity/native_dispatch.json",
+    "independent_review": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/independent_review.json",
+      "sha256": "1d88d8bda3d8fda59cff6c7e115f54d113f5d69c604cfb1a69f6eb51f814a8f1"
+    },
+    "native_cases_passed": 2,
+    "native_sessions_closed": 2,
+    "report": "doc/curation/evidence/2026-10-07_context_air_identity/report.md"
+  },
+  "limits": [
+    "luta_mugen/doc retornou EIO nos quatro documentos essenciais; não foi possível conferir os aprendizados atuais do projeto. Nenhuma recuperação de filesystem tentada.",
+    "AIR completo foi calibrado em fixtures offline. Trace real action221 continua prova de duração apenas; sem inventar IDs ausentes.",
+    "Contratos e hashes não julgam semântica do GDD/TDD nem autenticam export ou probe. Revisão independente permanece necessária.",
+    "QA nativo usa fixture SMI1 arquivada para validar coletor atual; não prova engine MUGEN, FPS, flicker ou AAA.",
+    "Snapshot por arquivos não é transacional; origem ilegível não significa projeto atual elegível."
+  ],
+  "factory_checks": {
+    "status": "partial; global doc_sync blocked",
+    "selftest": {
+      "passed": 88,
+      "total": 88,
+      "optional_build_probe": "not_run",
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/selftest_final.log",
+        "sha256": "ba92898cc94501cd98a3d84ab906ac6dffe85eddab8dd5f844c6b20a6df65baf"
+      }
+    },
+    "measurement_tools": {
+      "passed": 54,
+      "total": 54,
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/measurement_tools_final.log",
+        "sha256": "8e8a454cb19e0f01e78b495ace3597d7c9741d6aaf2872073fd64f5871f7cbf6"
+      }
+    },
+    "learning_capture": {
+      "status": "passed",
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/learning_capture_final.log",
+        "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3"
+      }
+    },
+    "doc_sync": {
+      "status": "failed",
+      "exit_code": 1,
+      "problem_count": 10,
+      "affected_project": "luta_mugen",
+      "scope": "workspace global; no bypass or global PASS",
+      "log": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/doc_sync_final.log",
+        "sha256": "f06e323fc4168e72fe6fa4af0b1576cc71a323c4a43b5781e2ffc5433a5f1e55"
+      },
+      "diagnostic": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/doc_sync_diagnostic.json",
+        "sha256": "15284ab7be8d379fa7b50fccc64697eeee610e576ee3d886b025daae0f00ed38"
+      }
+    }
+  },
+  "claim_ceiling": "canonized engineering disciplines and measured tool/fixture scopes only"
+}

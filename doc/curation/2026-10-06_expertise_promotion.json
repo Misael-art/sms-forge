@@ -1,0 +1,96 @@
+{
+  "curation_id": "2026-10-06_expertise_promotion",
+  "date": "2026-10-06",
+  "kind": "curation_followup",
+  "authorization": "Pedido explicito: faca promocao e curadoria",
+  "scope": "SMSForge central factory; no game source/asset changes or project local .agent overwrites",
+  "lessons": [],
+  "applied_lessons": [
+    "L035",
+    "L036",
+    "L037",
+    "L052",
+    "L056",
+    "L057",
+    "L061",
+    "L065",
+    "L066",
+    "L071",
+    "L082",
+    "L083",
+    "L088",
+    "L091"
+  ],
+  "dedup_key": "existing_lessons_expertise_snapshots_case_relation_stage_semantics_20261006",
+  "rule_section": "SMS_GLOBAL §§95–98",
+  "tool_that_measures": "audit_subagent_session.py; audit_stage_attribution.py; audit_import_semantics.py; capture_video.py; mugen2sms/generators/versus_scene_cut.py; audit_symbol_size_sync.py",
+  "decision": {
+    "status": "promoted and canonized; native QA and full factory regression passed",
+    "new_lesson_ids": false,
+    "registry_unchanged": true,
+    "historical_v1_rewritten": false,
+    "new_requests_schema": "sms_subagent_session_v2",
+    "promotion": "engineering and evidence disciplines, not game capability"
+  },
+  "evidence": {
+    "native_dispatch": "doc/curation/evidence/2026-10-06_expertise_promotion/native_dispatch.json",
+    "native_cases_passed": 2,
+    "precondition_negative": "blocked/not_run valid; gesture refused, strict approval rejected",
+    "cyclic_video": "doc/curation/evidence/2026-10-06_expertise_promotion/cyclic_video_validation.json",
+    "stage_profiles": [
+      "doc/curation/evidence/2026-10-06_expertise_promotion/v081_stage_counts_validation.json",
+      "doc/curation/evidence/2026-10-06_expertise_promotion/v082_stage_counts_validation.json",
+      "doc/curation/evidence/2026-10-06_expertise_promotion/v083_stage_counts_retry1_validation.json"
+    ],
+    "semantic_records": [
+      "source_distance_record.json",
+      "air_timing_record.json"
+    ],
+    "candidate_snapshots": "doc/curation/evidence/2026-10-06_expertise_promotion/candidates",
+    "independent_code_review": "doc/curation/evidence/2026-10-06_expertise_promotion/independent_code_review.json",
+    "report": "doc/curation/evidence/2026-10-06_expertise_promotion/report.md"
+  },
+  "promoted_points": [
+    "frozen historical input snapshots distinct from current eligibility",
+    "independent fresh session vs cumulative chained cases with ROM preconditions",
+    "sealed pre-stage baseline and crossing counts distinct from CPU durations",
+    "full timeline luma variation distinct from equal endpoints and actor action",
+    "ROM AIR boundaries distinct from RGB identity and paused samples",
+    "explicit source coordinate domain and rational front distance",
+    "collision cache validity at contact, with stale record rejection; dynamic runtime proof still required",
+    "exact CMD namespace dedup with public symbol/SIZE preservation, measured scope only"
+  ],
+  "limits": [
+    "No full gameplay, 60/50 FPS, zero flicker or AAA claim.",
+    "Snapshot copies and final hash comparisons are not a transactional whole-project snapshot.",
+    "Stage gate validates sealed record consistency, not exclusive CPU duration or universal VCounter band.",
+    "Semantic gate validates explicit records; dynamic collision invalidation in the game is not implemented or proved by this curation.",
+    "Source-distance profile is limited to standing facing pair uniform scale; finite AIR timing uses 16-bit unambiguous intervals.",
+    "Historical v1 still has original mutable-reference limits; no automatic repair or rehash.",
+    "CMD dedup historical active map/binding changed; packaging numbers are scoped historical reports, not new measured spare capacity.",
+    "AIR duration record gate does not measure element identity/order; stage record gate does not authenticate ROM freeze at seal. Separate source/native review required."
+  ],
+  "factory_checks": {
+    "status": "passed",
+    "selftest": {
+      "passed": 85,
+      "total": 85,
+      "optional_build_probe": "not_run",
+      "log": "doc/curation/evidence/2026-10-06_expertise_promotion/selftest_final.log"
+    },
+    "measurement_tools": {
+      "passed": 54,
+      "total": 54,
+      "log": "doc/curation/evidence/2026-10-06_expertise_promotion/measurement_tools_final.log"
+    },
+    "doc_sync": {
+      "status": "passed",
+      "log": "doc/curation/evidence/2026-10-06_expertise_promotion/doc_sync_final.log"
+    },
+    "learning_capture": {
+      "status": "passed",
+      "log": "doc/curation/evidence/2026-10-06_expertise_promotion/learning_capture_final.log"
+    }
+  },
+  "claim_ceiling": "canonized engineering disciplines and measured tool/fixture scopes only"
+}

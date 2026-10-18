@@ -1,0 +1,100 @@
+{
+  "curation_id": "2026-10-05_native_subagent_session_qa",
+  "date": "2026-10-05",
+  "title": "QA com sessoes privadas e feedback nativo por subagentes em qualquer projeto",
+  "kind": "curation_followup",
+  "authorization": "Pedido explicito do dono: curadoria para agente usar nova ferramenta e executar testes com subagentes/feedback nativo em todo projeto trabalhado",
+  "scope": "SMSForge factory, central agent policy and project template; existing project-local .agent not overwritten",
+  "lessons": [],
+  "applied_lessons": [
+    "L036",
+    "L057",
+    "L065"
+  ],
+  "rule_section": "SMS_GLOBAL §94, complementing §§41/93",
+  "tool_that_measures": "audit_subagent_session.py; harness_orchestration.py; quality_review_router.py",
+  "dedup_key": "l036_l057_native_subagent_session_qa_2026_10_05",
+  "decision": {
+    "status": "canonized; exercised by actual native subagents; factory regression passed",
+    "always_read_central_policy": true,
+    "local_agent_overwritten": false,
+    "native_dispatch": "collaboration.spawn_agent/followup_task; coordinator matched actual IDs and returns",
+    "max_workers": 3,
+    "recursive_delegation": false,
+    "session_sharing": false,
+    "worker_source_writes": false,
+    "coordinator_owns_claim_memory_git": true
+  },
+  "evidence": {
+    "native_dispatch": "doc/curation/evidence/2026-10-05_native_subagent_qa/native_dispatch.json",
+    "reports": {
+      "runtime": "doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/run_e5eed07c9298431e97bdbdc93eea955e/report.json",
+      "visual": "doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/report.json",
+      "audio": "doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/report.json",
+      "script_video": "doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/report.json",
+      "partial_failure": "doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/run_e6e6eaf95335421dace4e3bdcda2ee55/report.json"
+    },
+    "positive_assigned_cases": 7,
+    "partial_failure": "valid blocked/not_run feedback; require-passed rejects",
+    "bound_checkpoints": [
+      "doc/curation/evidence/2026-10-05_native_subagent_qa/native_review.json",
+      "doc/curation/evidence/2026-10-05_native_subagent_qa/native_runtime_review.json"
+    ],
+    "wrong_ROM_project_negative_tests": [
+      "doc/curation/evidence/2026-10-05_native_subagent_qa/native_review_negative_binding.json",
+      "doc/curation/evidence/2026-10-05_native_subagent_qa/native_runtime_review_negative_binding.json"
+    ],
+    "visual_initial_correction": "doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/visual_correction.json",
+    "report": "doc/curation/evidence/2026-10-05_native_subagent_qa/report.md"
+  },
+  "corrections": [
+    {
+      "cause": "legacy harness could accept passed without ROM/session/coverage",
+      "solution": "new request-bound native session envelope and assigned-checks-only gate"
+    },
+    {
+      "cause": "screenshot/video sidecars used same case_N.json",
+      "solution": "distinct case_N_frame.png/json and case_N.mp4/json; negative initial run preserved"
+    },
+    {
+      "cause": "video was recorded after input script ended",
+      "solution": "native framebuffer capture for each VDP frame during controls, then release"
+    },
+    {
+      "cause": "partial collector error lost validation identity",
+      "solution": "closed partial-session snapshot accepted for blocked report, never passed without bundle"
+    },
+    {
+      "cause": "consolidator could attach another ROM/project result",
+      "solution": "project/producer/ROM/tasks binding with negative tests; separate diagnostic checkpoint"
+    },
+    {
+      "cause": "visual reviewer misread complete title prompt as partial",
+      "solution": "coordinator reopened actual images; worker retracted after native/pixel inspection; initial/corrected reports preserved"
+    }
+  ],
+  "limits": [
+    "Gate verifies binding/coverage, not artistic truth or authenticity of a chat; coordinator compares native receipts and observations.",
+    "Controls are diagnostic fixture; title review sampled frames; audio signal only. No full gameplay/music/FPS/AAA approval.",
+    "Script video captured 7/11 active input frames; diagnostic image trails ROM/input by one frame, so recovery/consequences need explicit tail.",
+    "Remaining consumer migrations follow doc/matriz-consumidores-sessoes-privadas.md; another task advanced Mugen integration during this curation. Physical joystick remains untested.",
+    "No new commit or push; no source/ROM/asset changes to game projects."
+  ],
+  "factory_checks": {
+    "status": "passed",
+    "selftest": {
+      "passed": 74,
+      "total": 74,
+      "optional_build_probe": "not_run",
+      "log": "doc/curation/evidence/2026-10-05_native_subagent_qa/selftest.log"
+    },
+    "measurement_tools": {
+      "passed": 52,
+      "total": 52,
+      "log": "doc/curation/evidence/2026-10-05_native_subagent_qa/measurement_tools.log"
+    },
+    "doc_sync": "passed",
+    "learning_capture": "passed"
+  },
+  "claim_ceiling": "native QA mechanism and assigned evidence checks on current pinned Linux/SMS setup; not product delivery"
+}

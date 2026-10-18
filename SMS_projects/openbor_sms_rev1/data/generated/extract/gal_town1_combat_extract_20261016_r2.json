@@ -1,0 +1,334 @@
+{
+  "schema": "openbor_sms_extraction_record_v1",
+  "generated_at": "2026-10-16T00:00:00-03:00",
+  "tool": "openbor2sms frontend extract",
+  "pak": {
+    "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_bruta/golden_axe_legend/GAL.pak",
+    "bytes": 39500889,
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+    "format_id": 0,
+    "format_name": "PACK v0 PAK32 (32-bit)",
+    "file_count": 3502
+  },
+  "expected": {
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+    "bytes": 39500889,
+    "verified": true
+  },
+  "destination": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/data/source_openbor/gal_town1",
+  "members": [
+    {
+      "member": "data/bgs/town1/panel.gif",
+      "pak_name": "DATA\\BGS\\TOWN1\\PANEL.gif",
+      "path": "data/bgs/town1/panel.gif",
+      "bytes": 139491,
+      "sha256": "14d8191b9080bbac22cdb4783e23544025420126935568d23b885c8c5d08ee6f",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/a101.gif",
+      "pak_name": "DATA\\CHARS\\AX\\A101.gif",
+      "path": "data/chars/ax/a101.gif",
+      "bytes": 2046,
+      "sha256": "3b454dbd0aaf55c44d8021554a5860df963460491c87d6dbd685c029277fc4af",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/a102.gif",
+      "pak_name": "DATA\\CHARS\\AX\\A102.gif",
+      "path": "data/chars/ax/a102.gif",
+      "bytes": 2108,
+      "sha256": "9dc2b9b25d6884a252d2d7794641d4d5833622b2219cbaa15ae6c6708d585cc4",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/a103.gif",
+      "pak_name": "DATA\\CHARS\\AX\\A103.gif",
+      "path": "data/chars/ax/a103.gif",
+      "bytes": 1991,
+      "sha256": "32486921ae277c202216d011c2dd8888a47410a4fe58c160544c32affb40568a",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/a104.gif",
+      "pak_name": "DATA\\CHARS\\AX\\A104.gif",
+      "path": "data/chars/ax/a104.gif",
+      "bytes": 1989,
+      "sha256": "27b09254e9c6fc37b5201706d479c78ae47785a015d7642af772255753dae2a8",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/a105.gif",
+      "pak_name": "DATA\\CHARS\\AX\\A105.gif",
+      "path": "data/chars/ax/a105.gif",
+      "bytes": 1967,
+      "sha256": "340cda14bec71ebb98e14efd2db312b371f7e735f12df26558ec9aa806a9a8af",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/ax.txt",
+      "pak_name": "DATA\\CHARS\\AX\\AX.TXT",
+      "path": "data/chars/ax/ax.txt",
+      "bytes": 51916,
+      "sha256": "b6c33ffc145b34aecad0a29fbd7077dde75df912a474eafb6fdb53884a367f41",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/fall01.gif",
+      "pak_name": "DATA\\CHARS\\AX\\FALL01.gif",
+      "path": "data/chars/ax/fall01.gif",
+      "bytes": 2027,
+      "sha256": "a56ea05ea942905136d990531eb5dae4ae6342b1382d81daf548a25e80231ed0",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/fall02.gif",
+      "pak_name": "DATA\\CHARS\\AX\\FALL02.gif",
+      "path": "data/chars/ax/fall02.gif",
+      "bytes": 2026,
+      "sha256": "a1d9849ce4db0f8c494046ae3f20fb36b5064c3a1cbedab97e600135148c0fd3",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/fall03.gif",
+      "pak_name": "DATA\\CHARS\\AX\\FALL03.gif",
+      "path": "data/chars/ax/fall03.gif",
+      "bytes": 1919,
+      "sha256": "a02dd07b415e07426dc95db87800993fa0d01ee4116a195e737848b5706ce517",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/idle01.gif",
+      "pak_name": "DATA\\CHARS\\AX\\IDLE01.gif",
+      "path": "data/chars/ax/idle01.gif",
+      "bytes": 2102,
+      "sha256": "d9d342f6137f63691f5dbac5fcbeedee54c06b9f92d885e60a0d1a5042e67796",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/jump01.gif",
+      "pak_name": "DATA\\CHARS\\AX\\JUMP01.gif",
+      "path": "data/chars/ax/jump01.gif",
+      "bytes": 2064,
+      "sha256": "43fb5a76ace8dc5b1a3fbe3f117e81e0464693cb537e44760565177faa438093",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/jump02.gif",
+      "pak_name": "DATA\\CHARS\\AX\\JUMP02.gif",
+      "path": "data/chars/ax/jump02.gif",
+      "bytes": 2034,
+      "sha256": "d86a8924ceef5f6daea13ddcba1ab40d4c23596943d0412cfadbd886c825b73d",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/pain01.gif",
+      "pak_name": "DATA\\CHARS\\AX\\PAIN01.gif",
+      "path": "data/chars/ax/pain01.gif",
+      "bytes": 2112,
+      "sha256": "8bde236f43761a30aec998654bd7fa56918bdcba36bb8ff597f1c099e1c3a222",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/ax/pain02.gif",
+      "pak_name": "DATA\\CHARS\\AX\\PAIN02.gif",
+      "path": "data/chars/ax/pain02.gif",
+      "bytes": 2033,
+      "sha256": "a4cd5229634d380fc732b28cffcf7b870e011c1e2c0c0ddc06f640790afe6064",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/ax/pain03.gif",
+      "pak_name": "DATA\\CHARS\\AX\\PAIN03.gif",
+      "path": "data/chars/ax/pain03.gif",
+      "bytes": 1910,
+      "sha256": "3411d76e44f50d5ffb294ff259cb41c9bd55de7e2aa7647bc0622e1a60ee461c",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/rise01.gif",
+      "pak_name": "DATA\\CHARS\\AX\\RISE01.gif",
+      "path": "data/chars/ax/rise01.gif",
+      "bytes": 1965,
+      "sha256": "3f8644f66becb3fa86dd59967ad6c6aa9bcdc152a2918efa09aecaeeb4ab247e",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/walk01.gif",
+      "pak_name": "DATA\\CHARS\\AX\\WALK01.gif",
+      "path": "data/chars/ax/walk01.gif",
+      "bytes": 2048,
+      "sha256": "f2d540123287037899fa87b71ceb425283e0a8b92009a2ddc1a6de2c795618ee",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/walk02.gif",
+      "pak_name": "DATA\\CHARS\\AX\\WALK02.gif",
+      "path": "data/chars/ax/walk02.gif",
+      "bytes": 2038,
+      "sha256": "4f489d9ab6ea342857c669c64cb1f8c2921d8a16364a517c992298da0db817d4",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/walk03.gif",
+      "pak_name": "DATA\\CHARS\\AX\\WALK03.gif",
+      "path": "data/chars/ax/walk03.gif",
+      "bytes": 2085,
+      "sha256": "ca498f9e297c988d531dc4bdde761c8c066b1a5ea405610ee370101d26a1f668",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/ax/walk04.gif",
+      "pak_name": "DATA\\CHARS\\AX\\WALK04.gif",
+      "path": "data/chars/ax/walk04.gif",
+      "bytes": 2052,
+      "sha256": "1ebade06b3e956d5505056cfb3d98b6dd1c20f7a8380dfac5212d376c9e08e7d",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/a101.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\A101.gif",
+      "path": "data/chars/long/a101.gif",
+      "bytes": 2055,
+      "sha256": "c2029a4d83622dde484d52747ab24a20f1f387a08e0a0364f7f3292699312aec",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/a102.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\A102.gif",
+      "path": "data/chars/long/a102.gif",
+      "bytes": 2225,
+      "sha256": "b8fdeda700fcc402fef6b0c7b80561fc7815b5b0419feb3bc8e7497b023cc520",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/a103.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\A103.gif",
+      "path": "data/chars/long/a103.gif",
+      "bytes": 2306,
+      "sha256": "c92c5ffdbfea7c376ac3db7a80912398aeff5adf45c15b0a3d64023de4944af0",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/a104.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\A104.gif",
+      "path": "data/chars/long/a104.gif",
+      "bytes": 1965,
+      "sha256": "70a74c6c343b14f1452d56101faef8bf0a6f731978ab06e2592e2bd86e93d063",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/death01.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\DEATH01.gif",
+      "path": "data/chars/long/death01.gif",
+      "bytes": 1813,
+      "sha256": "0c3e5d62b7467bc90570c91030f85c0757fc7dfe10f3943cf35e08f25a99c9e6",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/long/fall01.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\FALL01.gif",
+      "path": "data/chars/long/fall01.gif",
+      "bytes": 1914,
+      "sha256": "b4fce07ac3b930ce216081c884e123cbb8f1d2523565f262610009483f24852e",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/fall02.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\FALL02.gif",
+      "path": "data/chars/long/fall02.gif",
+      "bytes": 1936,
+      "sha256": "99ee431f422ef7a049ecfc6d70b9896eab55632af76c6906c0991f9f1a3de88e",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/fall03.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\FALL03.gif",
+      "path": "data/chars/long/fall03.gif",
+      "bytes": 1928,
+      "sha256": "8c933b2fb28515885fa1e7a8f9c90b8f869fec46cf16340d2f4902a1020ad0f6",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/idle01.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\IDLE01.gif",
+      "path": "data/chars/long/idle01.gif",
+      "bytes": 2090,
+      "sha256": "a42955b8ac40937e37894850b5b9122e23f1436a854b354c39b4e7f5c66e0f0a",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/long.txt",
+      "pak_name": "DATA\\CHARS\\LONG\\LONG.TXT",
+      "path": "data/chars/long/long.txt",
+      "bytes": 38006,
+      "sha256": "b4303437f798ddcea1e4db33e742bfb1a4fa59128104dd5e619b4820014373ce",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/pain01.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\PAIN01.gif",
+      "path": "data/chars/long/pain01.gif",
+      "bytes": 2120,
+      "sha256": "6db2808389c20f763c78daf9d1a947d3356525f434fc46a4d66b824daf5e64eb",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/long/pain02.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\PAIN02.gif",
+      "path": "data/chars/long/pain02.gif",
+      "bytes": 1976,
+      "sha256": "680e7f28a264bef3cccb9a98c00516d75e5b74a3d0c9be7d6bdcd9eb3d085934",
+      "reused_existing": false
+    },
+    {
+      "member": "data/chars/long/pain03.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\PAIN03.gif",
+      "path": "data/chars/long/pain03.gif",
+      "bytes": 1924,
+      "sha256": "29e2f8004995abee77c07ddfdbf98ebec4da0e9574d06966313927513c5a7a99",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/rise01.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\RISE01.gif",
+      "path": "data/chars/long/rise01.gif",
+      "bytes": 1939,
+      "sha256": "2ad8f3d5a0fba92a62317fe52411d50e1a193baff4e0d98dd3f23b07d2445809",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/walk01.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\WALK01.gif",
+      "path": "data/chars/long/walk01.gif",
+      "bytes": 2104,
+      "sha256": "f9d30c333de53c21b3b28478a8f1ba3fbfb480dad96b00dd8aa7844040744b64",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/walk02.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\WALK02.gif",
+      "path": "data/chars/long/walk02.gif",
+      "bytes": 2093,
+      "sha256": "2dd3913247e61aae30d9371ca55b7b7468cb41812bff6a42176624ad8d98be77",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/walk03.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\WALK03.gif",
+      "path": "data/chars/long/walk03.gif",
+      "bytes": 2091,
+      "sha256": "cb8d0b26c90d6127e12e6a290795f2e8abdcaf7f31c800222f260d4e76efcaaa",
+      "reused_existing": true
+    },
+    {
+      "member": "data/chars/long/walk04.gif",
+      "pak_name": "DATA\\CHARS\\LONG\\WALK04.gif",
+      "path": "data/chars/long/walk04.gif",
+      "bytes": 2090,
+      "sha256": "a42955b8ac40937e37894850b5b9122e23f1436a854b354c39b4e7f5c66e0f0a",
+      "reused_existing": true
+    }
+  ],
+  "claim_ceiling": "hash-bound extraction of named members only; containment does not prove parsing, conversion or runtime suitability"
+}

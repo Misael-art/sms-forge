@@ -1,0 +1,102 @@
+{
+  "curation_id": "quality_cohesion_application_20261013",
+  "date": "2026-10-13",
+  "kind": "application_of_existing_lessons",
+  "scope": "Canonical wrapper/doc only; no game art/audio/ROM regeneration",
+  "lesson_ids_applied": [
+    "L001",
+    "L002",
+    "L003",
+    "L006",
+    "L013",
+    "L035",
+    "L078",
+    "L079",
+    "L080",
+    "L081",
+    "L121",
+    "L123",
+    "L124",
+    "L125",
+    "L127",
+    "L128",
+    "L129"
+  ],
+  "new_lesson_ids": [],
+  "rule_section": "SMS_GLOBAL §120; corrected §§63–64; existing §118–119 preserved",
+  "applied": {
+    "graphics": "Physical sprite modes strict, schemaX/Y corrected, packerY−1, SAT/perline skill arithmetic corrected",
+    "audio": "Bit2 white=1; periodic=0; tone divider32; simple-stream refusal compressed; offline nominal LFSR preview scope; M4 corpus36unchanged11fail",
+    "fluidity": "Private probe regional target60NTSC/50PAL;2fullwindows;1fps tolerance/spread;missing/invalidsamplesfail; mean rate not pacing or game response",
+    "art": "L124 revision-specific authorization, exact solid2x2, maskfringe/ownership/contour delta, existingv08.2source-onlydecision vs pendingcontext conflict recorded",
+    "claims": "Nonemptyapprovalfields+ceiling; lexical semantics/authentication not proved",
+    "product": "GDD/public/control/visual/audio/IA/HUD worstscene and independentreview/marketplaytestlimits taught in product-quality-checkpoint",
+    "audio_grammar": "Supported tone low+high contiguous pairs only; unsupported low-only/data/compressed rejected before WAV, SFX temporal order independent of channel sort; focused negative review passed",
+    "organization": "371 existing unregistered files added to hash-bound legacy inventory, not retroactively approved/reserved; failed scan preserved. Current registry27records1176files1122unclassified."
+  },
+  "tools": [
+    "audit_sprite_line_sim.py",
+    "pack_sms_metasprite.py",
+    "audit_psg_quality.py",
+    "make_psg_assets.py",
+    "measure_runtime_probe.py",
+    "audit_claims.py",
+    "audit_learning_capture.py"
+  ],
+  "evidence": [
+    "doc/curation/evidence/2026-10-13_quality_cohesion/cohesion.json",
+    "doc/curation/evidence/2026-10-13_quality_cohesion/art-findings.json",
+    "doc/curation/evidence/2026-10-13_quality_cohesion/sprite_manifest_strict_validation.json",
+    "doc/curation/evidence/2026-10-13_quality_cohesion/audio/result.json",
+    "doc/curation/evidence/2026-10-13_quality_cohesion/native-fps-current",
+    "doc/curation/evidence/2026-10-13_quality_cohesion/audio-v2/result_v2.json",
+    "doc/curation/evidence/2026-10-13_quality_cohesion/audio-review-final/result.json",
+    "doc/curation/evidence/2026-10-13_quality_cohesion/native-fps-read-review.json",
+    "doc/curation/evidence/2026-10-13_quality_cohesion/adopt_existing_unregistered.json"
+  ],
+  "open_items": [
+    "Mugen truth documents EIO",
+    "v08.2 project memory/method/output paths and independent report reference reconciliation",
+    "local Pulso/MSSF2T audio generators remain old; migration in authorized project batches",
+    "PAL native regional-target run not executed this batch",
+    "SMS1 zoom/wrap/silicon unqualified; no game60fps/AAA/musicfidelity claim"
+  ],
+  "promotion": "canonical_factory_applied_tests_passed_global_game_delivery_open",
+  "closure": {
+    "scope": "Canonical quality/cohesion application; infrastructure native FPS proof not game delivery",
+    "selftest_initial": "112/113; invalid positive fixture X=256 was corrected to within byte range",
+    "selftest_final_passed": 113,
+    "selftest_final_total": 113,
+    "selftest_final_log": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/selftest_final.log",
+    "measurement_tools_passed": 65,
+    "learning_capture_clean": true,
+    "hardware_doctrine_clean": true,
+    "registry_initial": "371 unregistered existing files; original failed scan preserved",
+    "registry_final": {
+      "passed": true,
+      "artifacts": 27,
+      "indexed_files": 1176,
+      "legacy_unclassified": 1122,
+      "report": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/artifact_registry_final.json"
+    },
+    "doc_sync_passed": false,
+    "doc_sync_known_problems": 10,
+    "optional_project_build_probe": "not_run",
+    "native_current_fps": {
+      "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "session_id": "1815a215835b47a2bdbcb852979e54c2",
+      "fps_windows": [
+        59.52,
+        59.72
+      ],
+      "window_seconds": 8,
+      "region": "NTSC",
+      "executor": "coordinator",
+      "independent_review": "read audit only, not independent execution",
+      "report": "doc/curation/evidence/2026-10-13_quality_cohesion/native-fps-current/feedback.json",
+      "scope": "infrastructure fixture rate, not production game"
+    },
+    "audio_independent_cases_passed": 25,
+    "global_promotion": "open_Mugen_doc_EIO_and_game_quality_evidence_not_paid"
+  }
+}

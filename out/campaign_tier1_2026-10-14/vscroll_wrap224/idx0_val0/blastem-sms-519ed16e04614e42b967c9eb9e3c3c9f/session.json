@@ -1,0 +1,314 @@
+{
+  "schema": "sms_blastem_session_v1",
+  "session_id": "blastem-sms-519ed16e04614e42b967c9eb9e3c3c9f",
+  "root": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx0_val0/blastem-sms-519ed16e04614e42b967c9eb9e3c3c9f",
+  "emulator": "BlastEm",
+  "version": "1.0.0",
+  "machine": "sms",
+  "model": "sms2",
+  "region": "ntsc",
+  "source_rom": "/mnt/sdcard/Projects/SMSForge/SMS_projects/_laboratorio/vscroll_wrap224/out/rom/vscroll_wrap224.sms",
+  "rom_sha256": "866f5cc85bb08e1cdb36853fbc1823b1ca91d83e3eaf35224b6dae8200c4a893",
+  "emulator_sha256": "1bd0f40ddcc6d769f6cc2aea59bb2973601b6db30bdd849b68315b9d83ad06ec",
+  "archive_sha256": "9e47b68a555e24db5ef5bd77e67967124ac3e28ae04ae32e9f3af3eaecf31860",
+  "wrapper_sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+  "config_sha256": "018898e0b67eef2bba522a3371dea1dc40e15864c68987262edc869e46a8f40a",
+  "sequence_sha256": "6f8bc56fa7cf676e57d7da0b70d36c010bde187d08ec5096f8f55287cd41f60e",
+  "started_at": 1792029791.1992362,
+  "host_load": [
+    2.12646484375,
+    1.52197265625,
+    1.47412109375
+  ],
+  "state": "completed",
+  "claim_scope": "diagnostic_states_only",
+  "audio": "dummy_not_tested",
+  "input": "native_debugger_process_local_bindings",
+  "frame_clock": "VDP_debugger",
+  "fps_claim": false,
+  "hardware_validation": false,
+  "diagnostics_sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9",
+  "event_definitions": [],
+  "display": ":1",
+  "xvfb_process": {
+    "pid": 238502,
+    "start_ticks": "661838"
+  },
+  "sandbox_command": [
+    "bwrap",
+    "--die-with-parent",
+    "--unshare-net",
+    "--ro-bind",
+    "/",
+    "/",
+    "--dev",
+    "/dev",
+    "--proc",
+    "/proc",
+    "--tmpfs",
+    "/tmp",
+    "--dir",
+    "/tmp/.X11-unix",
+    "--ro-bind",
+    "/tmp/.X11-unix/X1",
+    "/tmp/.X11-unix/X1",
+    "--bind",
+    "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx0_val0/blastem-sms-519ed16e04614e42b967c9eb9e3c3c9f",
+    "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx0_val0/blastem-sms-519ed16e04614e42b967c9eb9e3c3c9f",
+    "--chdir",
+    "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/vscroll_wrap224/idx0_val0/blastem-sms-519ed16e04614e42b967c9eb9e3c3c9f",
+    "/mnt/sdcard/Projects/SMSForge/out/host_tools/blastem/1.0.0/blastem",
+    "-d",
+    "-m",
+    "sms",
+    "-r",
+    "U",
+    "rom.sms"
+  ],
+  "sandbox_process": {
+    "pid": 238510,
+    "start_ticks": "661847"
+  },
+  "baseline_checked_before_input": true,
+  "baseline_precondition_count": 1,
+  "case_applicability": "preconditions_passed",
+  "screenshot_informative": true,
+  "cpu_snapshots": [
+    {
+      "index": 0,
+      "pc": 1277,
+      "sp": 57319,
+      "af": 84,
+      "bc": 506,
+      "de": 805,
+      "hl": 49152,
+      "ix": 57324,
+      "iy": 0,
+      "internal_cycle": 190164330,
+      "iff1": 1
+    },
+    {
+      "index": 1,
+      "pc": 1277,
+      "sp": 57319,
+      "af": 84,
+      "bc": 507,
+      "de": 805,
+      "hl": 49152,
+      "ix": 57324,
+      "iy": 0,
+      "internal_cycle": 191916615,
+      "iff1": 1
+    }
+  ],
+  "cycle_scope": "upstream internal master-clock counter; rebased by emulator; not CPU duration or realtime FPS",
+  "events": [],
+  "event_counts": [],
+  "native_media": {},
+  "boundaries": [
+    {
+      "index": 0,
+      "vdp_frame": 510
+    },
+    {
+      "index": 1,
+      "vdp_frame": 512
+    }
+  ],
+  "screenshot_extra_frames": 1,
+  "closed_at": 1792029801.1393723,
+  "cleanup": {
+    "sandbox_exited": true,
+    "xvfb_exited": true
+  },
+  "files": {
+    "adapter_source.py": {
+      "sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+      "bytes": 27329
+    },
+    "debugger.log": {
+      "sha256": "b16ad80cb67c9287eb158ed02404fac458590f95e237d1a2375e075ef0efc8fe",
+      "bytes": 9064
+    },
+    "debugger_commands.txt": {
+      "sha256": "7d3b8233cefe18a939bd92558fa484dabd3b850917a92ac6ad410b99150899d3",
+      "bytes": 2796
+    },
+    "diagnostics_source.py": {
+      "sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9",
+      "bytes": 17064
+    },
+    "rom.sms": {
+      "sha256": "866f5cc85bb08e1cdb36853fbc1823b1ca91d83e3eaf35224b6dae8200c4a893",
+      "bytes": 16384
+    },
+    "sequence.json": {
+      "sha256": "6f8bc56fa7cf676e57d7da0b70d36c010bde187d08ec5096f8f55287cd41f60e",
+      "bytes": 246
+    },
+    "xvfb.log": {
+      "sha256": "cb630e502827ef8c5ba55c90eadc533f97fc52c685c79295acae4e140f1a4a49",
+      "bytes": 1022
+    },
+    "screenshots/frame_20261014_230320.png": {
+      "sha256": "6325e4baa230fcebd6e7c271a62e2b3e8d234bf99644b7303ece0a0f890e3728",
+      "bytes": 413
+    },
+    "snapshots/000/cram_internal.bin": {
+      "sha256": "9b4eb0e3deea44db5fe08b92b2a25208b608f8895f18da75b717e6d06495f80a",
+      "bytes": 64
+    },
+    "snapshots/000/decoded_views.json": {
+      "sha256": "8ced861da07376fa2211496e82755d146de3309bfb830fdc0ec2281606c21901",
+      "bytes": 544
+    },
+    "snapshots/000/name_table_unscrolled.png": {
+      "sha256": "a464f82d33deaa67a044b477c8b15f949c1047e92c13d0d9b7e0e7a8db1cf297",
+      "bytes": 822
+    },
+    "snapshots/000/palette_sms.png": {
+      "sha256": "457bdb625fa5b8ad2551d5b5f36b81f9f22900fd36a5ce7c783a62bd3724a85a",
+      "bytes": 156
+    },
+    "snapshots/000/psg_frequency.bin": {
+      "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "bytes": 8
+    },
+    "snapshots/000/psg_volume.bin": {
+      "sha256": "ba458c12003d7a23207f1b27c4ddbbe57298f7ad243f0ddb45d6bdf068761858",
+      "bytes": 4
+    },
+    "snapshots/000/ram.bin": {
+      "sha256": "75d7716dcc2e2d2375c51f2aae3d9707830ab4d3a8c947f56d605680f76ed5cf",
+      "bytes": 8192
+    },
+    "snapshots/000/tiles_palette_0.png": {
+      "sha256": "0b33493dbfc59a3b1893269322eae8b7bb8e6cce5d8c52e508c76672385afbe7",
+      "bytes": 248
+    },
+    "snapshots/000/tiles_palette_1.png": {
+      "sha256": "660d77e466bd1397a9e65d4ba78fe0425a3834279164ba01eb6a73207806c3ba",
+      "bytes": 175
+    },
+    "snapshots/000/vdp_regs.bin": {
+      "sha256": "97528e937ae9bac1a7087b0575510b5a3fbf8214a7d67fd58e5ea8ccf73fd7b4",
+      "bytes": 11
+    },
+    "snapshots/000/vram.bin": {
+      "sha256": "225989426e1ecd9ce0872cff28690ee5195dbb125559fa0816110fc518e9fd9f",
+      "bytes": 16384
+    },
+    "snapshots/001/cram_internal.bin": {
+      "sha256": "9b4eb0e3deea44db5fe08b92b2a25208b608f8895f18da75b717e6d06495f80a",
+      "bytes": 64
+    },
+    "snapshots/001/decoded_views.json": {
+      "sha256": "8ced861da07376fa2211496e82755d146de3309bfb830fdc0ec2281606c21901",
+      "bytes": 544
+    },
+    "snapshots/001/name_table_unscrolled.png": {
+      "sha256": "a464f82d33deaa67a044b477c8b15f949c1047e92c13d0d9b7e0e7a8db1cf297",
+      "bytes": 822
+    },
+    "snapshots/001/palette_sms.png": {
+      "sha256": "457bdb625fa5b8ad2551d5b5f36b81f9f22900fd36a5ce7c783a62bd3724a85a",
+      "bytes": 156
+    },
+    "snapshots/001/psg_frequency.bin": {
+      "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "bytes": 8
+    },
+    "snapshots/001/psg_volume.bin": {
+      "sha256": "ba458c12003d7a23207f1b27c4ddbbe57298f7ad243f0ddb45d6bdf068761858",
+      "bytes": 4
+    },
+    "snapshots/001/ram.bin": {
+      "sha256": "6ddb9ff718c35166cb51532f0006f39eaf8cf5633fa315514795a2330d2077e0",
+      "bytes": 8192
+    },
+    "snapshots/001/tiles_palette_0.png": {
+      "sha256": "0b33493dbfc59a3b1893269322eae8b7bb8e6cce5d8c52e508c76672385afbe7",
+      "bytes": 248
+    },
+    "snapshots/001/tiles_palette_1.png": {
+      "sha256": "660d77e466bd1397a9e65d4ba78fe0425a3834279164ba01eb6a73207806c3ba",
+      "bytes": 175
+    },
+    "snapshots/001/vdp_regs.bin": {
+      "sha256": "97528e937ae9bac1a7087b0575510b5a3fbf8214a7d67fd58e5ea8ccf73fd7b4",
+      "bytes": 11
+    },
+    "snapshots/001/vram.bin": {
+      "sha256": "225989426e1ecd9ce0872cff28690ee5195dbb125559fa0816110fc518e9fd9f",
+      "bytes": 16384
+    },
+    "cache/mesa_shader_cache/index": {
+      "sha256": "ca9938661c2d957dd7cdac69f156fb217dd5938d81c5b97140831ca19d4c247a",
+      "bytes": 2097160
+    },
+    "cache/mesa_shader_cache/marker": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "cache/mesa_shader_cache/12/9edda84090d12614621f868e3e508f975d9470f8a9cbbf3d5b5375fd5bee67": {
+      "sha256": "c4a01722085547b2ada899a1fd2a1303bc05bb9f0e211156a23f3c3c8de7a3c3",
+      "bytes": 693
+    },
+    "cache/mesa_shader_cache/1e/75b51644e0b494eebc54cb72dfaa5dc067a05eb2643e760744553cbc1c2def": {
+      "sha256": "a087481864b2d19eb68f2c4db40d50fede64bad2fa73cf68b905aebbf8891881",
+      "bytes": 694
+    },
+    "cache/mesa_shader_cache/30/bca1ec9159171aaeeb4f83727b03f207035e691562ee0ab065c4882f1590d7": {
+      "sha256": "0d71d40f764e2debcb937998fa270ee89d1cbb52695989b500711e13549580e6",
+      "bytes": 1006
+    },
+    "cache/mesa_shader_cache/40/cf50288c1b60a43991b237c24ceef81a805fd09c7139c54cf9411a3592b39a": {
+      "sha256": "5152a7bcf5a313837416d830d060e83827c32e7c406415610a5a10dbe043b6e7",
+      "bytes": 693
+    },
+    "cache/mesa_shader_cache/60/87ba49ade817fefe5a298fbd05e95906a2010d8455401fdbba1473e78e3282": {
+      "sha256": "1015b6b9dcd5a8fef94628591c7292cf367ccdae612049925d77da2e8412fb18",
+      "bytes": 461
+    },
+    "cache/mesa_shader_cache/68/bc874ac80573a8a53b2b891e4734710ce8cc293dd81365115b0a398c74e9d9": {
+      "sha256": "09393088d0ac43f39f0577d374e5da792a9e2cfd01cd567bd2c87015ea7cbf0f",
+      "bytes": 693
+    },
+    "cache/mesa_shader_cache/6f/33de361c6272380ec4dd5e2a0b015797d8ae63d567e6261cdd1c9406ab8ad7": {
+      "sha256": "12c08e3eefee0b1efaa921b0f987578ae3ceb0c93f1fc3d75dd2c10893047237",
+      "bytes": 3326
+    },
+    "cache/mesa_shader_cache/9a/e9319e0c5151b65dc334eafb717ffcb9f23e3c5b6cf6377fb57a5b10de501d": {
+      "sha256": "e79d6a308a10e64a2dbd48f2e887e95c7277401918cf734a2de656e3116fc868",
+      "bytes": 695
+    },
+    "cache/mesa_shader_cache/b0/43eb044c7a1027e558615329751de372d4c5170aeefcc1732180a5c1e0931c": {
+      "sha256": "4de775ba6e27b33dec766243426248738d9b171c41becc52c113a99c19e07e12",
+      "bytes": 697
+    },
+    "cache/mesa_shader_cache/ce/6ac748de7c1bfd507cb96930fb606efc704b39f103074c8cb3c023538a5b90": {
+      "sha256": "0a474dad422fbedc78892cb76cf33da899ddbcba7ea6c2540c364d6d89131966",
+      "bytes": 693
+    },
+    "cache/mesa_shader_cache/df/c3ee3379c53feb904ad63f5997e1bad198750ebda62ebc921c971e9ea83ae9": {
+      "sha256": "8177788ea83b52637bd6370c35b8a655e970e37c04202b1b399c33d107de6991",
+      "bytes": 696
+    },
+    "cache/mesa_shader_cache/ec/ff9086b5d5099017bbdd4d767285f7cea07daa23d3305855720eaedd02bd62": {
+      "sha256": "b9513915a73f4b62986eb936e7d425e6e8be80eeb9651750619317f98d8af302",
+      "bytes": 436
+    },
+    "cache/mesa_shader_cache/fc/fce4d572acf9feed11d9ed0bd3c69b2177f0bfc5b406a4e8e0b09fdef80474": {
+      "sha256": "60bc5183486ebc7170b0316d9a3ee7f41cbd011a32f876ef54e4fba01dccfb11",
+      "bytes": 1185
+    },
+    "cache/mesa_shader_cache/fe/66975fa5b7b0c9d3597a98499973b1fa2a4d51ce5697226542fe2b11f0924b": {
+      "sha256": "7ab3e9277412d980333cbb7dda3362439752d263bcc7b029ee87a46ef58925f7",
+      "bytes": 1594
+    },
+    ".config/blastem/blastem.cfg": {
+      "sha256": "018898e0b67eef2bba522a3371dea1dc40e15864c68987262edc869e46a8f40a",
+      "bytes": 1330
+    }
+  }
+}

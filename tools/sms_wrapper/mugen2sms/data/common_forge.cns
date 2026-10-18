@@ -1,0 +1,627 @@
+; common_forge.cns -- estados comuns ORIGINAIS do mugen2sms.
+; Autoria: projeto SGDK Forge (sem codigo de terceiros). Licenca: a mesma do repositorio.
+;
+; Substitui o common1.cns do MUGEN (arquivo do motor, ausente do acervo) com a mesma
+; numeracao de estados documentada publicamente. Personagens que definem o proprio
+; statedef tem prioridade; estes so preenchem lacunas.
+;
+; Transicoes que o motor MUGEN faz sozinho (andar/agachar/pular/defender quando ctrl=1)
+; ficam no runtime (mg_engine.c: engine_auto_transitions), nao aqui.
+; Usa apenas controladores suportados pelo runtime.
+
+;---------------------------------------------------------------- parado
+[Statedef 0]
+type = S
+physics = S
+sprpriority = 0
+
+[State 0, anim]
+type = ChangeAnim
+trigger1 = Anim != 0 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0
+value = 0
+
+[State 0, para]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+;---------------------------------------------------------------- agachar
+[Statedef 10]
+type = C
+physics = C
+anim = 10
+ctrl = 1
+
+[State 10, fim]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+
+[Statedef 11]
+type = C
+physics = C
+ctrl = 1
+
+[State 11, anim]
+type = ChangeAnim
+trigger1 = Anim != 11 && Anim != 6
+trigger2 = Anim = 6 && AnimTime = 0
+value = 11
+
+[Statedef 12]
+type = S
+physics = S
+anim = 12
+ctrl = 1
+
+[State 12, fim]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+
+;---------------------------------------------------------------- andar
+[Statedef 20]
+type = S
+physics = S
+ctrl = 1
+
+[State 20, frente]
+type = VelSet
+trigger1 = command = "holdfwd"
+x = const(velocity.walk.fwd.x)
+
+[State 20, tras]
+type = VelSet
+trigger1 = command = "holdback"
+x = const(velocity.walk.back.x)
+
+[State 20, anim frente]
+type = ChangeAnim
+trigger1 = vel x > 0 && Anim != 20
+value = 20
+
+[State 20, anim tras]
+type = ChangeAnim
+trigger1 = vel x < 0 && Anim != 21
+value = 21
+
+[State 20, solta]
+type = ChangeState
+trigger1 = command != "holdfwd" && command != "holdback"
+value = 0
+
+;---------------------------------------------------------------- pulo
+[Statedef 40]
+type = S
+physics = S
+anim = 40
+ctrl = 0
+sprpriority = 1
+
+[State 40, vx]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = ifelse(command = "holdfwd", 1, ifelse(command = "holdback", -1, 0))
+
+[State 40, sai]
+type = VelSet
+trigger1 = AnimTime = 0
+x = ifelse(sysvar(1) = 1, const(velocity.jump.fwd.x), ifelse(sysvar(1) = -1, const(velocity.jump.back.x), const(velocity.jump.neu.x)))
+y = const(velocity.jump.neu.y)
+
+[State 40, no ar]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+[Statedef 50]
+type = A
+physics = A
+
+[State 50, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = ifelse(vel x = 0, 41, ifelse(vel x > 0, 42, 43))
+
+[State 50, pouso]
+type = ChangeState
+trigger1 = Vel Y > 0 && Pos Y >= 0
+value = 52
+
+[Statedef 52]
+type = S
+physics = S
+anim = 47
+ctrl = 0
+
+[State 52, chao]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 52, para]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+y = 0
+
+[State 52, fim]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------- defesa
+[Statedef 120]
+type = U
+physics = U
+
+[State 120, pe]
+type = ChangeState
+trigger1 = StateType = S
+value = 130
+
+[State 120, agachado]
+type = ChangeState
+trigger1 = StateType = C
+value = 131
+
+[State 120, ar]
+type = ChangeState
+trigger1 = StateType = A
+value = 132
+
+[Statedef 130]
+type = S
+physics = S
+ctrl = 1
+velset = 0,0
+
+[State 130, anim]
+type = ChangeAnim
+trigger1 = Anim != 130
+value = 130
+
+[State 130, agacha]
+type = ChangeState
+trigger1 = command = "holddown"
+value = 131
+
+[State 130, fim]
+type = ChangeState
+trigger1 = command != "holdback" || !InGuardDist
+value = 140
+
+[Statedef 131]
+type = C
+physics = C
+ctrl = 1
+velset = 0,0
+
+[State 131, anim]
+type = ChangeAnim
+trigger1 = Anim != 131
+value = 131
+
+[State 131, levanta]
+type = ChangeState
+trigger1 = command != "holddown"
+value = 130
+
+[State 131, fim]
+type = ChangeState
+trigger1 = command != "holdback" || !InGuardDist
+value = 140
+
+[Statedef 132]
+type = A
+physics = A
+ctrl = 1
+
+[State 132, anim]
+type = ChangeAnim
+trigger1 = Anim != 132
+value = 132
+
+[State 132, pouso]
+type = ChangeState
+trigger1 = Vel Y > 0 && Pos Y >= 0
+value = 52
+
+[State 132, fim]
+type = ChangeState
+trigger1 = command != "holdback" || !InGuardDist
+value = 50
+
+[Statedef 140]
+type = U
+physics = U
+ctrl = 1
+
+[State 140, pe]
+type = ChangeState
+trigger1 = StateType = S
+value = 0
+
+[State 140, agachado]
+type = ChangeState
+trigger1 = StateType = C
+value = 11
+
+[State 140, ar]
+type = ChangeState
+trigger1 = StateType = A
+value = 50
+
+; defesa atingida (empurrao)
+[Statedef 150]
+type = S
+movetype = H
+physics = N
+anim = 150
+ctrl = 0
+
+[State 150, empurra]
+type = VelSet
+trigger1 = HitShakeOver && Time > 0
+x = gethitvar(xvel)
+
+[State 150, freia]
+type = VelMul
+trigger1 = HitShakeOver
+x = .85
+
+[State 150, fim]
+type = ChangeState
+trigger1 = HitOver
+value = 130
+ctrl = 1
+
+[Statedef 152]
+type = C
+movetype = H
+physics = N
+anim = 151
+ctrl = 0
+
+[State 152, empurra]
+type = VelSet
+trigger1 = HitShakeOver && Time > 0
+x = gethitvar(xvel)
+
+[State 152, freia]
+type = VelMul
+trigger1 = HitShakeOver
+x = .82
+
+[State 152, fim]
+type = ChangeState
+trigger1 = HitOver
+value = 131
+ctrl = 1
+
+[Statedef 154]
+type = A
+movetype = H
+physics = A
+anim = 152
+ctrl = 0
+
+[State 154, fim]
+type = ChangeState
+trigger1 = Vel Y > 0 && Pos Y >= 0
+value = 52
+
+;---------------------------------------------------------------- levar golpe
+; 5000 em pe / 5010 agachado / 5020 no ar. Anim = base + animtype (leve/medio/forte).
+[Statedef 5000]
+type = S
+movetype = H
+physics = N
+velset = 0,0
+
+[State 5000, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = ifelse(gethitvar(groundtype) = 2, 5010, 5000) + ifelse(gethitvar(animtype) > 2, 2, gethitvar(animtype))
+
+[State 5000, recua]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 5001
+
+[Statedef 5001]
+type = S
+movetype = H
+physics = S
+
+[State 5001, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = ifelse(gethitvar(groundtype) = 2, 5015, 5005) + ifelse(gethitvar(animtype) > 2, 2, gethitvar(animtype))
+
+[State 5001, vel]
+type = VelSet
+trigger1 = Time = 0
+x = gethitvar(xvel)
+
+[State 5001, queda]
+type = ChangeState
+trigger1 = gethitvar(fall)
+trigger1 = Time = 0
+value = 5030
+
+[State 5001, fim]
+type = ChangeState
+trigger1 = HitOver
+value = 0
+ctrl = 1
+
+[Statedef 5010]
+type = C
+movetype = H
+physics = N
+velset = 0,0
+
+[State 5010, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5020 + ifelse(gethitvar(animtype) > 2, 2, gethitvar(animtype))
+
+[State 5010, recua]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 5011
+
+[Statedef 5011]
+type = C
+movetype = H
+physics = C
+
+[State 5011, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5025 + ifelse(gethitvar(animtype) > 2, 2, gethitvar(animtype))
+
+[State 5011, vel]
+type = VelSet
+trigger1 = Time = 0
+x = gethitvar(xvel)
+
+[State 5011, fim]
+type = ChangeState
+trigger1 = HitOver
+value = 11
+ctrl = 1
+
+; no ar / arremessado: 5020 tremida -> 5030 voo -> 5050 queda
+[Statedef 5020]
+type = A
+movetype = H
+physics = N
+velset = 0,0
+
+[State 5020, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5030
+
+[State 5020, voa]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 5030
+
+[Statedef 5030]
+type = A
+movetype = H
+physics = N
+
+[State 5030, anim]
+type = ChangeAnim
+trigger1 = Time = 0 && Anim != 5030
+value = 5030
+
+[State 5030, vel]
+type = VelSet
+trigger1 = Time = 0
+x = gethitvar(xvel)
+y = gethitvar(yvel)
+
+[State 5030, gravidade]
+type = VelAdd
+trigger1 = 1
+y = gethitvar(yaccel)
+
+[State 5030, cai]
+type = ChangeState
+trigger1 = gethitvar(fall) && Vel Y > 0
+value = 5050
+
+[State 5030, pousa]
+type = ChangeState
+trigger1 = !gethitvar(fall) && Vel Y > 0 && Pos Y >= 0
+value = 52
+
+[Statedef 5050]
+type = A
+movetype = H
+physics = N
+
+[State 5050, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5050
+
+[State 5050, gravidade]
+type = VelAdd
+trigger1 = 1
+y = gethitvar(yaccel)
+
+[State 5050, chao]
+type = ChangeState
+trigger1 = Vel Y > 0 && Pos Y >= 0
+value = 5100
+
+; bate no chao e quica
+[Statedef 5100]
+type = L
+movetype = H
+physics = N
+
+[State 5100, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5100
+
+[State 5100, chao]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 5100, quica]
+type = VelSet
+trigger1 = Time = 0
+x = vel x * .5
+y = -3
+
+[State 5100, som]
+type = PlaySnd
+trigger1 = Time = 0
+value = F7, 0
+
+[State 5100, segue]
+type = ChangeState
+trigger1 = Time = 1
+value = 5101
+
+[Statedef 5101]
+type = L
+movetype = H
+physics = N
+
+[State 5101, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5101
+
+[State 5101, gravidade]
+type = VelAdd
+trigger1 = 1
+y = .4
+
+[State 5101, deita]
+type = ChangeState
+trigger1 = Vel Y > 0 && Pos Y >= 0
+value = 5110
+
+[Statedef 5110]
+type = L
+movetype = H
+physics = N
+velset = 0,0
+
+[State 5110, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5110
+
+[State 5110, chao]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 5110, morto]
+type = ChangeState
+trigger1 = !Alive
+value = 5150
+
+[State 5110, levanta]
+type = ChangeState
+trigger1 = Alive && Time >= const(data.liedown.time)
+value = 5120
+
+[Statedef 5120]
+type = L
+movetype = I
+physics = N
+
+[State 5120, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5120
+
+[State 5120, invulneravel]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 5120, fim]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+; KO
+[Statedef 5150]
+type = L
+movetype = H
+physics = N
+velset = 0,0
+
+[State 5150, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = ifelse(SelfAnimExist(5150), 5150, 5110)
+
+; derrubada rasteira
+[Statedef 5070]
+type = A
+movetype = H
+physics = N
+
+[State 5070, anim]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5070
+
+[State 5070, vel]
+type = VelSet
+trigger1 = Time = 0
+x = gethitvar(xvel)
+y = -3
+
+[State 5070, cai]
+type = ChangeState
+trigger1 = Time > 0
+value = 5050
+
+;---------------------------------------------------------------- derrota por tempo / empate
+[Statedef 170]
+type = S
+ctrl = 0
+anim = 170
+velset = 0,0
+
+[Statedef 175]
+type = S
+ctrl = 0
+anim = 0
+velset = 0,0
+
+;---------------------------------------------------------------- inicio de round
+[Statedef 5900]
+type = S
+
+[State 5900, zera]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+
+[State 5900, fim]
+type = ChangeState
+trigger1 = 1
+value = 0
+ctrl = 1

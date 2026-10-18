@@ -1,0 +1,1771 @@
+name	    		Ax_Battler
+type	    		player
+health	    	100
+#mpset			100	2	0	0	100	0
+mp          	100
+nolife		1
+speed	    		10
+running		26	4.0	2	0	0
+jumpspeed	    	10
+jumpheight   	3.3
+jumpmove 		3
+turndelay 		12
+mprate		0
+grabdistance	20
+grabfinish		1
+grabback		0
+antigravity 	10
+bounce		1
+noquake     	1
+gfxshadow		1
+shadow		2
+diesound    	data/sounds/die_ax.wav
+flash 		flash
+bflash 		guard
+dust    		dust
+toflip		1
+modelflag	3
+load			tornado
+parrow		data/chars/misc/parrow/parrow1.gif -240 -204
+parrow2		data/chars/misc/parrow/parrow2.gif -240 -204
+parrow3		data/chars/misc/parrow/parrow3.gif -240 -204
+parrow4		data/chars/misc/parrow/parrow4.gif -240 -204
+
+com  d f a  	freespecial2
+com  f d f a  	freespecial3
+com  a2		freespecial5
+
+atchain     	1 2 2 3 0 4 5 0 6
+combostyle		1
+nodieblink		1
+makeinv     	5 0 
+falldie 		2
+riseinv 		1 1
+
+icon	      data/chars/ax/icon.gif
+icondie     data/chars/ax/icond.gif
+
+palette data/chars/ax/ax.gif #1
+
+remap	data/chars/ax/alter01.gif   data/chars/ax/alter02.gif   
+remap	data/chars/ax/alter01.gif   data/chars/ax/alter03.gif   
+remap	data/chars/ax/alter01.gif   data/chars/ax/alter04.gif   
+
+weapons     ax1 ax2 ax3 ax4 ax
+
+#-------Select screen!
+
+anim waiting
+	 loop       1
+	 offset     240 204
+	 delay      6
+       frame      data/chars/ax/sel01.gif
+       frame      data/chars/ax/sel02.gif
+       frame      data/chars/ax/sel03.gif
+       frame      data/chars/ax/sel04.gif
+
+anim select
+	 loop       0
+	 offset     240 204
+
+#	 sound   	data/sounds/punch.wav
+	 delay      4
+       frame      data/chars/ax/sel05.gif
+       frame      data/chars/ax/sel06.gif
+
+       frame      data/chars/ax/sel07.gif
+       frame      data/chars/ax/sel08.gif
+       frame      data/chars/ax/sel07.gif
+       frame      data/chars/ax/sel08.gif
+       frame      data/chars/ax/sel07.gif
+       frame      data/chars/ax/sel08.gif
+       frame      data/chars/ax/sel07.gif
+	 delay      16
+       frame      data/chars/ax/sel08.gif
+
+
+#-------Moves
+
+anim spawn
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      1
+       frame      data/chars/ax/idle01.gif
+@script
+if(frame==1){
+    void self = getlocalvar("self");
+
+    changeentityproperty(self, "mp", 0); //Empty MP bar
+}
+@end_script
+	 delay      1
+       frame      data/chars/ax/idle01.gif
+
+anim respawn
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      1
+       frame      data/chars/ax/rise01.gif
+@script
+if(frame==1){
+    void self = getlocalvar("self");
+
+    changeentityproperty(self, "mp", 0); //Empty MP bar
+}
+@end_script
+	 delay      20
+       frame      data/chars/ax/rise01.gif
+
+
+anim idle
+	 loop       1
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      8
+       frame      data/chars/ax/idle01.gif
+
+anim walk
+	 loop       1
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      12
+       frame      data/chars/ax/walk01.gif
+       frame      data/chars/ax/walk02.gif
+       frame      data/chars/ax/walk03.gif
+       frame      data/chars/ax/walk04.gif
+
+anim up
+	 loop       1
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      12
+       frame      data/chars/ax/walk05.gif
+       frame      data/chars/ax/walk06.gif
+       frame      data/chars/ax/walk07.gif
+       frame      data/chars/ax/walk08.gif
+
+anim run
+	 loop       1
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      10
+	sound		data/sounds/run2.wav
+       frame      data/chars/ax/run01.gif
+       frame      data/chars/ax/run02.gif
+	sound		data/sounds/run2.wav
+       frame      data/chars/ax/run03.gif
+       frame      data/chars/ax/run04.gif
+
+anim runattack
+	followanim	1
+	followcond	1
+	jumpframe	0 1.5 3
+	landframe	1
+	jugglecost 	99
+#	fastattack	1
+	hitflash	flash2
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hitrun.wav
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      999
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	227 	159 	38 		45 		14 		1 		0 		0 		15		15
+       frame      data/chars/ax/ar101.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      8
+       frame      data/chars/ax/rise01.gif
+
+anim follow1
+	jugglecost 	99
+	followanim	1
+	followcond	1
+	landframe	1
+	jumpframe	0 1.0 -0.5
+	landframe	1
+	jugglecost 	8
+#	fastattack	1
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      999
+       frame      data/chars/ax/ar101.gif
+	 delay      16
+       frame      data/chars/ax/rise01.gif
+
+anim runjumpattack
+	jugglecost 	99
+#	 fastattack 1
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit1.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/aj101.gif
+	 frame	data/chars/ax/aj102.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	131 	53 		73		14 		1 		0 		0 		15		15
+	 delay      999
+       frame      data/chars/ax/aj201.gif
+
+anim get
+	 loop       0
+	 offset     240 204
+	 delay      30
+       frame      data/chars/ax/rise01.gif
+
+anim walkoff
+	 loop       0
+	 landframe	1
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      999
+       frame      data/chars/ax/jump02.gif
+	 delay      15
+       frame      data/chars/ax/rise01.gif
+
+anim attack1
+	jugglecost 	2
+#	cancel{#}	{start frame} 	{end frame} {didhit?} 	{sequence of inputs} 	{freespecial#}
+	cancel 		0 				99 			1 			d f a 					freespecial2
+	cancel 		0 				99 			1 			f d f a 				freespecial3
+#	 fastattack 1
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit1.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/a101.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	142 	44 		62 		7 		0 		0 		0 		15		15
+       frame      data/chars/ax/a102.gif
+       frame      data/chars/ax/a103.gif
+       frame      data/chars/ax/a104.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      15
+       frame      data/chars/ax/a105.gif
+
+anim attack2
+	 range 0 31
+	jugglecost 	2
+#	cancel{#}	{start frame} 	{end frame} {didhit?} 	{sequence of inputs} 	{freespecial#}
+	cancel 		0 				99 			1 			d f a 					freespecial2
+	cancel 		0 				99 			1 			f d f a 				freespecial3
+#	 fastattack 1
+	hitflash	flash2
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit2.wav
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      8
+       frame      data/chars/ax/th101.gif
+       frame      data/chars/ax/th102.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack  	240 	161 	31 		43 		7 		0 		0 		0 		15		0
+       frame      data/chars/ax/th103.gif
+       frame      data/chars/ax/idle01.gif
+
+anim attack3
+	 range 0 31
+	jugglecost 	2
+#	cancel{#}	{start frame} 	{end frame} {didhit?} 	{sequence of inputs} 	{freespecial#}
+	cancel 		0 				99 			1 			d f a 					freespecial2
+	cancel 		0 				99 			1 			f d f a 				freespecial3
+#	 fastattack 1
+	hitflash	flash2
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit3.wav
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      8
+       frame      data/chars/ax/th201.gif
+       frame      data/chars/ax/th202.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack  	240 	158 	53 		46 		14 		1 		0 		0 		15		0
+	 delay      25
+       frame      data/chars/ax/th203.gif
+	 delay      8
+       frame      data/chars/ax/th202.gif
+       frame      data/chars/ax/th201.gif
+       frame      data/chars/ax/idle01.gif
+
+anim attack4
+	 range 32 53
+	jugglecost 	2
+#	cancel{#}	{start frame} 	{end frame} {didhit?} 	{sequence of inputs} 	{freespecial#}
+	cancel 		0 				99 			1 			d f a 					freespecial2
+	cancel 		0 				99 			1 			f d f a 				freespecial3
+#	 fastattack 1
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit1.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/a201.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	131 	53 		73 		7 		0 		0 		0 		15		15
+       frame      data/chars/ax/a202.gif
+       frame      data/chars/ax/a203.gif
+       frame      data/chars/ax/a204.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      15
+       frame      data/chars/ax/a205.gif
+
+anim attack5
+	 range 32 60
+	jugglecost 	2
+#	cancel{#}	{start frame} 	{end frame} {didhit?} 	{sequence of inputs} 	{freespecial#}
+	cancel 		0 				99 			1 			d f a 					freespecial2
+	cancel 		0 				99 			1 			f d f a 				freespecial3
+#	 fastattack 1
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit3.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/a301.gif
+       frame      data/chars/ax/a302.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	131 	60 		73 		14 		1 		0 		0 		15		15
+       frame      data/chars/ax/a303.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      30
+       frame      data/chars/ax/a304.gif
+	 delay      5
+       frame      data/chars/ax/a204.gif
+       frame      data/chars/ax/frsp106.gif
+
+anim attack6
+	 range 61 75
+	jugglecost 	2
+#	cancel{#}	{start frame} 	{end frame} {didhit?} 	{sequence of inputs} 	{freespecial#}
+	cancel 		0 				99 			1 			d f a 					freespecial2
+	cancel 		0 				99 			1 			f d f a 				freespecial3
+#	 fastattack 1
+	hitflash	flash2
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit3.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/a401.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	165 	38 		39 		14 		1 		0 		0 		15		15
+	 delay      2
+	 move		3
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/a402.gif
+	 move		3
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/a402.gif
+	 move		3
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/a402.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      15
+	 move		0
+       frame      data/chars/ax/a402.gif
+
+anim jump
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      35
+       frame      data/chars/ax/jump01.gif
+	 delay      999
+       frame      data/chars/ax/jump02.gif
+
+anim jumpattack
+	cancel 0 99 0 a Freespecial4
+	jugglecost 	99
+#	 fastattack 1
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit1.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/aj101.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	131 	53 		73		14 		1 		0 		0 		15		15
+	 frame	data/chars/ax/aj102.gif
+	 delay      15
+	 frame	data/chars/ax/aj103.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      999
+       frame      data/chars/ax/jump01.gif
+
+anim freespecial4
+	jugglecost 	99
+#	 fastattack 1
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit1.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/jump01.gif
+	 delay      5
+       frame      data/chars/ax/aj101.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	131 	53 		73		14 		1 		0 		0 		15		15
+	 frame	data/chars/ax/aj102.gif
+	 delay      15
+	 frame	data/chars/ax/aj103.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      999
+       frame      data/chars/ax/jump01.gif
+
+
+anim grab
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      6
+       frame      data/chars/ax/idle01.gif
+
+anim grabattack
+#	 fastattack 1
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 hitfx   	data/sounds/empty.wav
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack4  	195 	135 	86 		69 		0 		0 		0 		1 		0		0
+	 delay      25
+       frame      data/chars/ax/th301.gif
+	 attack4  	0 	0 	0 		0 		0 		0 		0 		0 		0		0
+	 delay      40
+       frame      data/chars/ax/th302.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack4  	195 	135 	86 		69 		7 		1 		0 		1 		0		0
+	 damageonlanding	7	1
+	 delay      75
+	sound		data/sounds/att1.wav
+       frame      data/chars/ax/th303.gif
+
+anim grabattack2
+#	 fastattack 1
+	 flipframe	1
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 hitfx   	data/sounds/empty.wav
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack5  	195 	135 	86 		69 		0 		0 		0 		1 		0		0
+	 delay      25
+       frame      data/chars/ax/th301.gif
+	 attack5  	0 	0 	0 		0 		0 		0 		0 		0 		0		0
+	 delay      40
+       frame      data/chars/ax/th302.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack5  	195 	135 	86 		69 		7 		1 		0 		1 		0		0
+	 damageonlanding	7	1
+	 delay      75
+	sound		data/sounds/att1.wav
+       frame      data/chars/ax/th303.gif
+
+anim grabforward
+#	 fastattack 1
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 hitfx   	data/sounds/empty.wav
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack4  	195 	135 	86 		69 		0 		0 		0 		1 		0		0
+	 delay      25
+       frame      data/chars/ax/th301.gif
+	 attack4  	0 	0 	0 		0 		0 		0 		0 		0 		0		0
+	 delay      40
+       frame      data/chars/ax/th302.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack4  	195 	135 	86 		69 		7 		1 		0 		1 		0		0
+	 damageonlanding	7	1
+	 delay      75
+	sound		data/sounds/att1.wav
+       frame      data/chars/ax/th303.gif
+
+anim grabup
+#	 fastattack 1
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 hitfx   	data/sounds/empty.wav
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack4  	195 	135 	86 		69 		0 		0 		0 		1 		0		0
+	 delay      25
+       frame      data/chars/ax/th301.gif
+	 attack4  	0 	0 	0 		0 		0 		0 		0 		0 		0		0
+	 delay      40
+       frame      data/chars/ax/th302.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack4  	195 	135 	86 		69 		7 		1 		0 		1 		0		0
+	 damageonlanding	7	1
+	 delay      75
+	sound		data/sounds/att1.wav
+       frame      data/chars/ax/th303.gif
+
+anim grabbackward
+#	 fastattack 1
+	 flipframe	1
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 hitfx   	data/sounds/empty.wav
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack5  	195 	135 	86 		69 		0 		0 		0 		1 		0		0
+	 delay      25
+       frame      data/chars/ax/th301.gif
+	 attack5  	0 	0 	0 		0 		0 		0 		0 		0 		0		0
+	 delay      40
+       frame      data/chars/ax/th302.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack5  	195 	135 	86 		69 		7 		1 		0 		1 		0		0
+	 damageonlanding	7	1
+	 delay      75
+	sound		data/sounds/att1.wav
+       frame      data/chars/ax/th303.gif
+
+anim grabdown
+#	 fastattack 1
+	 flipframe	1
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 hitfx   	data/sounds/empty.wav
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack5  	195 	135 	86 		69 		0 		0 		0 		1 		0		0
+	 delay      25
+       frame      data/chars/ax/th301.gif
+	 attack5  	0 	0 	0 		0 		0 		0 		0 		0 		0		0
+	 delay      40
+       frame      data/chars/ax/th302.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack5  	195 	135 	86 		69 		7 		1 		0 		1 		0		0
+	 damageonlanding	7	1
+	 delay      75
+	sound		data/sounds/att1.wav
+       frame      data/chars/ax/th303.gif
+
+
+anim attackbackward
+	loop	0
+	delay	50
+	counterframe 0 1 0
+	followanim 3
+	 offset     240 204
+	 bbox		229 149 22 56
+	frame	data/chars/ax/block01.gif
+
+anim follow3
+#	cancel{#}	{start frame} 	{end frame} {didhit?} 	{sequence of inputs} 	{freespecial#}
+	cancel 		0 				5 			0 			a 						freespecial6
+	jugglecost 	99
+	loop	0
+	bbox	0 0 0 0
+	sound   data/sounds/block1.wav
+
+	delay	4
+	 offset     240 204
+	frame	data/chars/ax/block01.gif
+	 offset     242 204
+	frame	data/chars/ax/block01.gif
+	 offset     240 204
+	frame	data/chars/ax/block01.gif
+	 offset     242 204
+	frame	data/chars/ax/block01.gif
+	 offset     240 204
+	frame	data/chars/ax/block01.gif
+	 offset     242 204
+	frame	data/chars/ax/block01.gif
+
+	delay	2
+	move -10
+	 offset     240 204
+	frame	data/chars/ax/block01.gif
+	move -8
+	frame	data/chars/ax/block01.gif
+	move -8
+	frame	data/chars/ax/block01.gif
+	move -6
+	frame	data/chars/ax/a203.gif
+	move -6
+	frame	data/chars/ax/a203.gif
+	move -5
+	frame	data/chars/ax/a204.gif
+	move -4
+	frame	data/chars/ax/a204.gif
+	move -2
+	frame	data/chars/ax/a205.gif
+	move -2
+	frame	data/chars/ax/a205.gif
+	move 0
+	delay	22
+	frame	data/chars/ax/a101.gif
+
+anim Freespecial6 # Block Counter
+	load		counter
+	subentity	counter
+	summonframe	0 0 0 0 0
+	unsummonframe 999
+	jugglecost 	2
+	sound		data/sounds/att1.wav
+	hitfx		data/sounds/hit3.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+	 move	8
+       frame      data/chars/ax/a201.gif
+	 move	7
+       frame      data/chars/ax/a201.gif
+	 move	6
+       frame      data/chars/ax/a201.gif
+	 move	5
+       frame      data/chars/ax/a201.gif
+	 move	4
+       frame      data/chars/ax/a201.gif
+	 move	3
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	131 	53 		73 		7 		1 		1 		0 		40		15
+       frame      data/chars/ax/a202.gif
+	 move	2
+       frame      data/chars/ax/a203.gif
+	 move	1
+       frame      data/chars/ax/a204.gif
+	 move	0
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      30
+       frame      data/chars/ax/a205.gif
+
+#anim riseattack1
+
+#-----------------NORMAL GRAB 01-----------------#
+
+anim pain
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      8
+       frame      data/chars/ax/rise01.gif
+	 delay      50
+       frame      data/chars/ax/pain03.gif
+
+anim fall
+	 landframe  1
+	 loop       0
+	 offset     240 204
+	 delay      999
+	 bbox		0 0 0 0
+       frame      data/chars/ax/fall01.gif
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+
+#-----------------NORMAL GRAB 01-----------------#
+
+#-----------------NORMAL PUNCH 01-----------------#
+
+anim pain2
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      8
+       frame      data/chars/ax/pain01.gif
+	 delay      50
+       frame      data/chars/ax/pain02.gif
+
+anim fall2
+	 landframe  1
+	 loop       0
+	 offset     240 204
+	 delay      999
+	 bbox		0 0 0 0
+       frame      data/chars/ax/fall01.gif
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+
+#-----------------NORMAL PUNCH 01-----------------#
+
+#-----------------NORMAL PUNCH 02-----------------#
+
+anim pain3
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      8
+       frame      data/chars/ax/pain02.gif
+	 delay      50
+       frame      data/chars/ax/pain01.gif
+
+anim fall3
+	 landframe  1
+	 loop       0
+	 offset     240 204
+	 delay      999
+	 bbox		0 0 0 0
+       frame      data/chars/ax/fall01.gif
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------NORMAL PUNCH 02-----------------#
+
+#-----------------AX THROW 01-----------------#
+
+anim pain4
+	 flipframe	1 
+	 loop       0
+	 offset     240 204
+	 bbox		195 135 86 69
+	 delay      25
+       frame      data/chars/ax/pain03.gif
+	 delay      40
+	 bbox		0 0 0 0
+	 offset     260 204
+       frame      data/chars/ax/ax01.gif
+	 bbox		195 135 86 69
+	 offset     240 204
+       frame      data/chars/ax/ax02.gif
+
+anim fall4
+	 flipframe	0 
+	 jumpframe 	0 2.5 2
+	 landframe  2
+	 loop       0
+	 offset     260 204
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	256	122	61		55		5 		1 		1 		0 		50
+	 bbox		0 0 0 0
+	 delay      35
+       frame      data/chars/ax/ax02.gif
+	 delay      999
+       frame      data/chars/ax/ax03.gif
+	 offset     240 204
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------AX THROW 01-----------------#
+
+#-----------------AX THROW 02-----------------#
+
+anim pain5
+#	 flipframe	1 
+	 loop       0
+	 offset     240 204
+	 bbox		195 135 86 69
+	 delay      25
+       frame      data/chars/ax/pain03.gif
+	 delay      40
+	 bbox		0 0 0 0
+	 offset     220 204
+       frame      data/chars/ax/ax01.gif
+	 bbox		195 135 86 69
+	 offset     220 204
+       frame      data/chars/ax/ax02.gif
+
+anim fall5
+#	 flipframe	0 
+	 jumpframe 	0 2.5 2
+	 landframe  2
+	 loop       0
+	 offset     260 204
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	256	122	61		55		5 		1 		1 		0 		50
+	 bbox		0 0 0 0
+	 delay      35
+       frame      data/chars/ax/ax02.gif
+	 delay      999
+       frame      data/chars/ax/ax03.gif
+	 offset     240 204
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------AX THROW 02-----------------#
+
+#-----------------MAGIC HURRICANE-----------------#
+
+anim pain6
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      8
+       frame      data/chars/ax/pain01.gif
+	 delay      50
+       frame      data/chars/ax/pain02.gif
+
+anim fall6
+	 jumpframe 	0 6 0
+	 landframe  44
+	 loop       0
+	 offset     240 204
+	 delay      4
+	 bbox		0 0 0 0
+
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/hurr01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/hurr02.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/hurr01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/hurr02.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/hurr01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/hurr02.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/hurr01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/hurr02.gif
+
+       frame      data/chars/ax/hurr03.gif
+       frame      data/chars/ax/hurr04.gif
+       frame      data/chars/ax/hurr05.gif
+       frame      data/chars/ax/hurr06.gif
+       frame      data/chars/ax/hurr03.gif
+       frame      data/chars/ax/hurr04.gif
+       frame      data/chars/ax/hurr05.gif
+       frame      data/chars/ax/hurr06.gif
+       frame      data/chars/ax/hurr03.gif
+       frame      data/chars/ax/hurr04.gif
+       frame      data/chars/ax/hurr05.gif
+       frame      data/chars/ax/hurr06.gif
+       frame      data/chars/ax/hurr03.gif
+       frame      data/chars/ax/hurr04.gif
+       frame      data/chars/ax/hurr05.gif
+       frame      data/chars/ax/hurr06.gif
+       frame      data/chars/ax/hurr03.gif
+       frame      data/chars/ax/hurr04.gif
+       frame      data/chars/ax/hurr05.gif
+       frame      data/chars/ax/hurr06.gif
+       frame      data/chars/ax/hurr03.gif
+       frame      data/chars/ax/hurr04.gif
+       frame      data/chars/ax/hurr05.gif
+       frame      data/chars/ax/hurr06.gif
+       frame      data/chars/ax/hurr03.gif
+       frame      data/chars/ax/hurr04.gif
+       frame      data/chars/ax/hurr05.gif
+       frame      data/chars/ax/hurr06.gif
+
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+
+#-----------------MAGIC HURRICANE-----------------#
+
+#-----------------MAGIC LIGHTNING-----------------#
+
+anim pain7
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+       frame      data/chars/ax/pain01.gif
+	 delay      2
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock01.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock04.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock02.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock05.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock03.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock06.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock01.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock04.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock02.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock05.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock03.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock06.gif
+
+
+anim fall7
+	 landframe  25
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+       frame      data/chars/ax/pain01.gif
+	 delay      2
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock01.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock04.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock02.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock05.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock03.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock06.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock01.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock04.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock02.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock05.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock03.gif
+       frame      data/chars/ax/pain01.gif
+       frame      data/chars/ax/shock06.gif
+
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+
+#-----------------MAGIC LIGHTNING-----------------#
+
+#-----------------MAGIC POISON-----------------#
+
+anim pain8
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom02.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom03.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom04.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom05.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom06.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom07.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom08.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom09.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom02.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom03.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom04.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom05.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom06.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom07.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom08.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom09.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom02.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom03.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom04.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom05.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom06.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom07.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom08.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom09.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom02.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom03.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom04.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom05.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom06.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom07.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom08.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom09.gif
+
+
+anim fall8
+	 landframe  37
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom02.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom03.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom04.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom05.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom06.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom07.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom08.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom09.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom02.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom03.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom04.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom05.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom06.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom07.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom08.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/venom09.gif
+
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------MAGIC POISON-----------------#
+
+#-----------------MAGIC BURN-----------------#
+
+anim pain9
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+       frame      data/chars/ax/pain01.gif
+	 delay      2
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/04.gif
+
+
+anim fall9
+	 landframe  25
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+       frame      data/chars/ax/pain01.gif
+	 delay      2
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/01.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/02.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/03.gif
+       frame      data/chars/misc/burn/04.gif
+       frame      data/chars/misc/burn/04.gif
+
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+
+#-----------------MAGIC BURN-----------------#
+
+#-----------------MAGIC FREEZE-----------------#
+
+anim pain10
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      100
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+
+
+anim fall10
+	 landframe  19
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/02.gif
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/02.gif
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/02.gif
+
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/02.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/02.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/02.gif
+
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/02.gif
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/02.gif
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/02.gif
+
+	 delay      100
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+	 delay      1
+       frame      data/chars/ax/pain02.gif
+	 delay      3
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      2
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+	 delay      3
+       frame      data/chars/ax/pain02.gif
+	 delay      1
+       frame      data/chars/misc/freeze/01.gif
+
+	 delay      8
+       frame      data/chars/ax/pain02.gif
+       frame      data/chars/ax/pain03.gif
+       frame      data/chars/ax/fall03.gif
+
+#-----------------MAGIC FREEZE-----------------#
+
+#-----------------CHRONOS THROW-----------------#
+
+anim pain11
+#	 flipframe	1 
+	 loop       0
+	 offset     240 204
+	 delay      25
+       frame      data/chars/ax/pain03.gif
+	 bbox		195 135 86 69
+	 delay      40
+	 offset     220 204
+       frame      data/chars/ax/pain03.gif
+
+anim fall11
+#	 flipframe	0 
+	 jumpframe 	0 2.5 2
+	 landframe  2
+	 loop       0
+	 offset     260 204
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	256	122	61		55		5 		1 		1 		0 		50
+	 bbox		0 0 0 0
+	 delay      35
+       frame      data/chars/ax/ax02.gif
+	 delay      999
+       frame      data/chars/ax/ax03.gif
+	 offset     240 204
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------CHRONOS THROW-----------------#
+
+#-----------------CRAGG THROW 01-----------------#
+
+anim pain12
+#	 flipframe	1 
+	 loop       0
+	 offset     240 204
+	 bbox		195 135 86 69
+	 delay      25
+       frame      data/chars/ax/pain01.gif
+	 delay      40
+	 bbox		0 0 0 0
+	 offset     240 234
+       frame      data/chars/ax/pain01.gif
+	 bbox		195 135 86 69
+	 offset     220 204
+       frame      data/chars/ax/ax02.gif
+
+anim fall12
+#	 flipframe	0 
+	 jumpframe 	0 2.5 2
+	 landframe  2
+	 loop       0
+	 offset     260 204
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	256	122	61		55		5 		1 		1 		0 		50
+	 bbox		0 0 0 0
+	 delay      35
+       frame      data/chars/ax/ax02.gif
+	 delay      999
+       frame      data/chars/ax/ax03.gif
+	 offset     240 204
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------CRAGG THROW 01-----------------#
+
+#-----------------CRAGG THROW 02-----------------#
+
+anim pain13
+	 jumpframe 2 3.3 0
+#	 flipframe	1 
+	 loop       0
+	 offset     240 204
+	 bbox		195 135 86 69
+	 delay      25
+       frame      data/chars/ax/pain01.gif
+	 bbox		0 0 0 0
+	 offset     240 234
+	 delay      8
+       frame      data/chars/ax/pain01.gif
+	 delay      40
+       frame      data/chars/ax/pain01.gif
+	 delay      999
+	 bbox		195 135 86 69
+	 offset     240 214
+       frame      data/chars/ax/fall02.gif
+
+anim fall13
+	 landframe  1
+	 loop       0
+	 offset     240 204
+	 delay      999
+	 bbox		229 149 22 56
+       frame      data/chars/ax/fall01.gif
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------CRAGG THROW 02-----------------#
+
+#-----------------CRAGG THROW 03-----------------#
+
+anim pain14
+	 jumpframe 2 6.6 0
+	 landframe 4
+#	 flipframe	1 
+	 loop       0
+	 offset     240 204
+	 bbox		195 135 86 69
+	 delay      25
+       frame      data/chars/ax/pain01.gif
+	 bbox		0 0 0 0
+	 offset     240 234
+	 delay      8
+       frame      data/chars/ax/pain01.gif
+	 delay      40
+       frame      data/chars/ax/pain01.gif
+	 delay      999
+	 offset     240 214
+       frame      data/chars/ax/fall02.gif
+	 delay      999
+	 bbox		195 135 86 69
+	 offset     240 194
+       frame      data/chars/ax/fall02.gif
+
+anim fall14
+	 jumpframe 	0 4.3 -1.5
+	 landframe  1
+	 loop       0
+	 offset     240 204
+	 delay      999
+	 bbox		229 149 22 56
+       frame      data/chars/ax/fall01.gif
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------CRAGG THROW 03-----------------#
+
+#-----------------GILIUS THROW 01-----------------#
+
+anim pain15
+	 flipframe	1 
+	 loop       0
+	 offset     240 204
+	 bbox		195 135 86 69
+	 delay      25
+       frame      data/chars/ax/pain03.gif
+	 delay      40
+	 bbox		0 0 0 0
+	 offset     260 184
+       frame      data/chars/ax/ax01.gif
+	 bbox		195 135 86 69
+	 offset     240 204
+       frame      data/chars/ax/ax02.gif
+
+anim fall15
+	 flipframe	0 
+	 jumpframe 	0 2.5 2
+	 landframe  2
+	 loop       0
+	 offset     260 204
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	256	122	61		55		5 		1 		1 		0 		50
+	 bbox		0 0 0 0
+	 delay      35
+       frame      data/chars/ax/ax02.gif
+	 delay      999
+       frame      data/chars/ax/ax03.gif
+	 offset     240 204
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------GILIUS THROW 01-----------------#
+
+#-----------------GILIUS THROW 02-----------------#
+
+anim pain16
+#	 flipframe	1 
+	 loop       0
+	 offset     240 204
+	 bbox		195 135 86 69
+	 delay      25
+       frame      data/chars/ax/pain03.gif
+	 delay      40
+	 bbox		0 0 0 0
+	 offset     220 184
+       frame      data/chars/ax/ax01.gif
+	 bbox		195 135 86 69
+	 offset     220 204
+       frame      data/chars/ax/ax02.gif
+
+anim fall16
+#	 flipframe	0 
+	 jumpframe 	0 2.5 2
+	 landframe  2
+	 loop       0
+	 offset     260 204
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	256	122	61		55		5 		1 		1 		0 		50
+	 bbox		0 0 0 0
+	 delay      35
+       frame      data/chars/ax/ax02.gif
+	 delay      999
+       frame      data/chars/ax/ax03.gif
+	 offset     240 204
+	 delay      8
+       frame      data/chars/ax/fall02.gif
+       frame      data/chars/ax/fall03.gif
+       frame      data/chars/ax/fall02.gif
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+#-----------------GILIUS THROW 02-----------------#
+
+anim rise
+	 loop       0
+	 offset     240 204
+	 delay      55
+       frame      data/chars/ax/fall03.gif
+	 delay      20
+       frame      data/chars/ax/rise01.gif
+
+anim death
+	 loop       0
+	 offset     240 204
+	 delay      1
+       frame      data/chars/ax/fall03.gif
+
+anim special
+	 jumpframe 6 3.3 -0.5
+	 landframe 11
+	 jugglecost 2
+#	 fastattack 1
+	 energycost	5
+	 mponly  	2
+
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	hitfx		data/sounds/hit1.wav
+	sound		data/sounds/att1.wav
+	 delay      5
+       frame      data/chars/ax/sp101.gif
+       frame      data/chars/ax/sp102.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	131 	60 		73 		14 		1 		0 		0 		25		15
+       frame      data/chars/ax/sp103.gif
+       frame      data/chars/ax/sp104.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+       frame      data/chars/ax/sp105.gif
+       frame      data/chars/ax/sp106.gif
+
+	 delay      35
+       frame      data/chars/ax/sp107.gif
+	 delay      5
+       frame      data/chars/ax/sp108.gif
+	sound		data/sounds/att1.wav
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	187 	131 	53 		73		14 		1 		0 		0 		25		15
+	 frame	data/chars/ax/sp109.gif
+	 delay      35
+	 frame	data/chars/ax/sp110.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      999
+       frame      data/chars/ax/sp107.gif
+	 delay      8
+       frame      data/chars/ax/rise01.gif
+
+anim freespecial2
+	 custknife	tornado
+	 throwframe 3
+#	 fastattack 1
+	sound		data/sounds/att1.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/frsp101.gif
+       frame      data/chars/ax/frsp102.gif
+       frame      data/chars/ax/frsp103.gif
+       frame      data/chars/ax/frsp104.gif
+	 delay      120
+       frame      data/chars/ax/frsp105.gif
+	 delay      5
+       frame      data/chars/ax/a204.gif
+       frame      data/chars/ax/frsp106.gif
+
+anim freespecial3
+	followanim	2
+	followcond	1
+	jugglecost 	15
+#	 fastattack 1
+	hitflash	flash2
+	sound		data/sounds/att2.wav
+    hitfx		data/sounds/hit3.wav
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 delay      5
+       frame      data/chars/ax/a401.gif
+#	 attack{#} 	{x}	{y}	{right}	{down}	{damage}	{power}	{block}	{noflash}	{pausetime}	{z}
+	 attack2  	240 	165 	38 		39 		28 		1 		0 		0 		50		15
+	 delay      2
+	 move		6
+       frame      data/chars/ax/frsp201.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp202.gif
+       frame      data/chars/ax/a402.gif
+	 move		5
+       frame      data/chars/ax/frsp203.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp204.gif
+       frame      data/chars/ax/a402.gif
+	 move		4
+       frame      data/chars/ax/frsp205.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp206.gif
+       frame      data/chars/ax/a402.gif
+	 move		3
+       frame      data/chars/ax/frsp206.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp205.gif
+       frame      data/chars/ax/a402.gif
+	 move		2
+       frame      data/chars/ax/frsp204.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp203.gif
+       frame      data/chars/ax/a402.gif
+	 move		1
+       frame      data/chars/ax/frsp202.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp201.gif
+       frame      data/chars/ax/a402.gif
+	 attack2  	0 	0 	0 		0 		0 		0 		0 		0 		0
+	 delay      15
+	 move		0
+       frame      data/chars/ax/a402.gif
+
+anim follow2
+	jugglecost 	8
+#	 fastattack 1
+
+	 loop       0
+	 offset     240 204
+	 bbox		229 149 22 56
+	 move		0
+
+	 delay      2
+       frame      data/chars/ax/frsp206.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp205.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp204.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp203.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp202.gif
+       frame      data/chars/ax/a402.gif
+       frame      data/chars/ax/frsp201.gif
+       frame      data/chars/ax/a402.gif
+
+	 delay      26
+       frame      data/chars/ax/a402.gif
+	 delay      6
+       frame      data/chars/ax/idle01.gif
+
+anim freespecial5
+	 energycost	100
+	 mponly  	1
+	load		hurr
+	subentity	hurr
+	summonframe	1 380 200 0 1
+	unsummonframe 999
+	 loop       0
+	 offset     240 204
+	 bbox		0 0 0 0
+	sound		data/sounds/magic.wav
+	 delay      50
+       frame      data/chars/ax/magic01.gif
+	 delay      8
+#	 delay      380
+       frame      data/chars/ax/magic02.gif
+	 delay      8
+       frame      data/chars/ax/magic01.gif
+
+
+
+
+
+
+
+
+

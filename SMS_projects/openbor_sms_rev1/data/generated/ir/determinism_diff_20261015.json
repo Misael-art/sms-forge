@@ -1,0 +1,69 @@
+{
+  "schema": "openbor_sms_determinism_diff_v1",
+  "generated_at": "2026-10-16T00:22:08+00:00",
+  "tool": "one-shot O1 replay via python3 -m openbor2sms",
+  "method": {
+    "ir_byte_identical_replay": "same CLI args, --generated-at pinned to the primary stamp, byte comparison",
+    "extraction_record_normalized_replay": "replay to a fresh temporary destination; records compared after normalizing destination and members[].reused_existing"
+  },
+  "checks": [
+    {
+      "artifact": "data/generated/ir/gal_town1_level_ir_20261015.json",
+      "kind": "ir_byte_identical_replay",
+      "generated_at_pinned": "2026-10-16T00:21:18+00:00",
+      "primary_sha256": "a9c6be9132e14fcd8bcad87f62ab90fcc8ab81b8d7cb256e15da5b5a0d57b4a1",
+      "replay_sha256": "a9c6be9132e14fcd8bcad87f62ab90fcc8ab81b8d7cb256e15da5b5a0d57b4a1",
+      "identical": true
+    },
+    {
+      "artifact": "data/generated/ir/gal_town1_models_ir_20261015.json",
+      "kind": "ir_byte_identical_replay",
+      "generated_at_pinned": "2026-10-16T00:21:18+00:00",
+      "primary_sha256": "b44ad9e86a402f4b1e120d5f16ed970bd3d579757d6579cd11698ae607a3903a",
+      "replay_sha256": "b44ad9e86a402f4b1e120d5f16ed970bd3d579757d6579cd11698ae607a3903a",
+      "identical": true
+    },
+    {
+      "artifact": "data/generated/ir/bt_rescue_level_ir_20261015.json",
+      "kind": "ir_byte_identical_replay",
+      "generated_at_pinned": "2026-10-16T00:21:18+00:00",
+      "primary_sha256": "bef0f287d6b2d48a0930b1b0ad70cd80f063c4ea9861eec1ac00f2eca2d3b619",
+      "replay_sha256": "bef0f287d6b2d48a0930b1b0ad70cd80f063c4ea9861eec1ac00f2eca2d3b619",
+      "identical": true
+    },
+    {
+      "artifact": "data/generated/ir/bt_rescue_models_ir_20261015.json",
+      "kind": "ir_byte_identical_replay",
+      "generated_at_pinned": "2026-10-16T00:21:18+00:00",
+      "primary_sha256": "8e1d8fbe4fcd987bc016287d5f0487e6bf22e2470c99e65402fb1d9b5fe8ad6b",
+      "replay_sha256": "8e1d8fbe4fcd987bc016287d5f0487e6bf22e2470c99e65402fb1d9b5fe8ad6b",
+      "identical": true
+    },
+    {
+      "artifact": "data/generated/extract/gal_town1_extract_20261015.json",
+      "kind": "extraction_record_normalized_replay",
+      "generated_at_pinned": "2026-10-16T00:21:10+00:00",
+      "normalized_fields": [
+        "destination",
+        "members[].reused_existing"
+      ],
+      "primary_sha256": "eee60d5e70215f23f6eb258faa1aea23fcb3ed414cc091b2f950a467190a0998",
+      "replay_sha256": "300df14f0b33b9d9f8fb7f9489283e9ff5fb4b5a78451cbd2a04ff75fcd51dc7",
+      "identical_after_normalization": true
+    },
+    {
+      "artifact": "data/generated/extract/bt_rescue_extract_20261015.json",
+      "kind": "extraction_record_normalized_replay",
+      "generated_at_pinned": "2026-10-16T00:21:11+00:00",
+      "normalized_fields": [
+        "destination",
+        "members[].reused_existing"
+      ],
+      "primary_sha256": "03c1ec32000396bc334f8e53e97a9d93fd4592bb3769c531f77e9944cbb40f34",
+      "replay_sha256": "204480cec629fc47fdfb5520b8cb93b73f69fb09a7ab2700dd59cfd44db3bd16",
+      "identical_after_normalization": true
+    }
+  ],
+  "result": "pass",
+  "claim_ceiling": "determinism of the O1 emission tools for these inputs only; no conversion or runtime claim"
+}

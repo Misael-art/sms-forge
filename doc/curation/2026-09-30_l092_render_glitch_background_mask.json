@@ -1,0 +1,28 @@
+{
+  "curation_id": "2026-09-30_l092_render_glitch_background_mask",
+  "date": "2026-09-30",
+  "scope": "audit_render_glitch RGB foreground masks, HUD exclusions, and regional visibility metrics",
+  "authorization": "O usuário disse 'Prossiga' após o escopo específico de corrigir a máscara de fundo, cobrir o caso no self-check e produzir novo veredito ter sido declarado.",
+  "lessons": [
+    {
+      "id": "L092",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "A máscara de luminância do L091 tratava o palco azul/verde e o HUD como pixels dos lutadores. O fundo permanente podia satisfazer a cobertura da janela mesmo quando peças dos atores estavam ausentes.",
+      "evidence": {
+        "falso_pass_historico": "lote_c_best_of_three_verified_glitch.json SHA-256 73d5ee042a77ad54b1d18e2d71ff4057b9a23806de4bb2a13cceace00d01ff9c: render_glitch_v1 PASS 0/14960, max_extra=0, max_missing=48468 e images_seen=[ken0_ryu0]. O veredito é invalidado para cobertura/ausência de glitch; a máscara incluía o palco.",
+        "reproducao": "Executar o v1 sem placa no diretório legal do Lote C agora falha fechado: a referência ken0_ryu0.png tem 98,6% de pixels acima do limiar luma e exige --background.",
+        "correcao": "audit_render_glitch.py v2 subtrai a mesma placa RGB das imagens legais e dos frames de vídeo, ignora retângulos dinâmicos explicitamente declarados, guarda a placa por SHA e pode medir cobertura/duty cycle por regiões nomeadas. O decoder e o juiz processam quadros em fluxo com memória limitada.",
+        "calibracao_real": "lote_c_background_reference.png SHA-256 beeb5402b78fb533e9a5b2cf1a6049422047f59d347dadd1dda743f6b03d7db8, derivada pela cor modal de cada linha nas 24 referências legais; participação modal mínima 74,479%, três cores RGB no palco. A faixa HUD (0,0,256,24) foi excluída.",
+        "medicao_fresca": "ROM SHA-256 c958278fa0196e84deecab1fef01f976100072cd9851e9c233f82a694a882999; vídeo idle de framebuffer lote_c_idle_rgb_mask_fresh.mp4, SHA-256 c09a8e7857e8d1937062a206f11adf8db50e598f8a0eb833b9bac66c80726a06, 781 quadros/13,033 s. Relatório lote_c_idle_rgb_mask_fresh_glitch_regions.json SHA-256 e80182aec8a15afe048e52f038541a0f09e95d9a870796f9ef24af265734cbcb: L091 v2 PASS 0/781, extra máximo 0, ausência instantânea máxima 901 px, 12 poses idle casadas. Ken duty 87,292%, P05 67,135%, mínimo 65,262%, sem quadro abaixo de 50%; Ryu duty 78,048%, P05 48,262%, mínimo 47,000%, até 3 quadros abaixo de 50%; ambos tiveram zero quadros de ausência total. Isso mede idle e não concede aprovação humana de flicker mínimo.",
+        "validacao_focada": "audit_render_glitch.py --self-check PASS: fundo claro com atores ausentes reprova cobertura, atores válidos passam após subtração, HUD dinâmico é ignorado e duty/ausência por região passa; fundo claro sem placa falha fechado; py_compile PASS.",
+        "bateria_integral": "PASS: selftest.py 64/64; validate_measurement_tools.py 47/47 ferramentas; audit_doc_sync.py PASS; audit_learning_capture.py --self-check e --root . PASS; audit_claims, reconcile_claims e mapa rom_asset_binding_lote_c.json PASS. A primeira auditoria asset→ROM usou o manifesto legado e rejeitou corretamente a ROM; a repetição com o mapa explícito do Lote C passou. ROM c958278fa019 não foi recompilada."
+      },
+      "rule_section": "SMS_GLOBAL §77",
+      "tool_that_measures": "audit_render_glitch.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L093",
+    "mastery": "A correção restaura a validade do gate de imagem no palco colorido; a ROM e seus limites de gameplay/FPS/HUD/áudio permanecem com o alcance anteriormente medido."
+  }
+}

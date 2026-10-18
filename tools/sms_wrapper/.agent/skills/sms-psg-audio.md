@@ -1,8 +1,14 @@
 # skill: sms-psg-audio
 
 ## Verdades
-- SN76489: 3 canais de tone + 1 de noise. PSGlib = driver padrão
-  (`PSGPlay`, `PSGSetBackgroundVolume`… — CONFIRMAR no header antes de usar).
+- SN76489: 3 canais de tone + 1 de noise (branco OU periodico; bit2=1 (modos 4–7) e
+  branco; bit2=0 (modos 0–3) e periodico; bits 1..0=3 usam tone ch2). PSGlib = driver padrão
+  (`PSGPlay`, `PSGSFXPlay`, `PSGFrame`/`PSGSFXFrame`,
+  `PSGSetMusicVolumeChannelsAttenuation` — confirmados no header).
+- `audit_psg_quality.py` mede politicas de eventos PSGlib simples; o contrato
+  e os limites estão em `sms-psg-composition.md`. PASS não aprova musica/AAA,
+  e sinal positivo de `audit_audio.py` não comprova notas/mix corretos.
+  Auditar proveniência, capturar e escutar trechos alinhados em runtime.
 - Arbitração música × SFX declarada no TDD (4 canais só).
 - SFX toca no canal **autorado** no manifesto
   (`doc/audio_provenance_manifest.json`). Canal errado derruba o mix;
@@ -13,3 +19,14 @@
   Gate: `audit_psg_redundancy.py`.
 - YM2413 (FM unit/JP): opcional. Jogo precisa funcionar sem FM, sempre.
 - Atualização de áudio entra no orçamento do frame junto com VRAM.
+
+## Prova em sessão privada (§93)
+
+`capture_audio.py --session ID --seconds 8 --out audio` captura apenas o sink
+da própria sessão. Boot começa muted; rota do PID exato precisa estar
+confirmada antes do som. Mute/rota ausente ou divergente reprova, sem captura
+do monitor padrão. Duração efetiva deve alcançar 95% da pedida. A ponte
+mantém fluxo/zeros durante pausas; feche por ID e descarregue sink após a JVM.
+Vídeo por stepping não inclui áudio. Capture sinal separadamente e compare
+trechos alinhados para fidelidade; peak positivo não prova música/notas certas.
+Não liberar música só por gate de sinal ou teste silencioso de outra ROM.

@@ -1,0 +1,121 @@
+{
+  "schema": "rom_asset_binding_v1",
+  "purpose": "Lote C integrated 72-88px technical study; not final art or delivery",
+  "rom_path": "out/local_study/luta_integrada/out/rom/scale_pilot_80px.sms",
+  "rom_sha256": "c958278fa0196e84deecab1fef01f976100072cd9851e9c233f82a694a882999",
+  "rom_size_bytes": 655360,
+  "build_recipe": "tools/sms_wrapper/build_luta_integrada.py",
+  "entries": [
+    {
+      "label": "arena_tecnica",
+      "source": "res/stage/arena_tecnica.png",
+      "source_sha256": "9a9282c8d0a2d898702527bdb5da90c7dd63a2b5ad191672839e888061628375",
+      "res_path": "res/stage/arena_tecnica.png",
+      "symbol": "stage_tiles",
+      "generated": "out/local_study/luta_integrada/inc/stage_data.inc",
+      "sha256": "9a9282c8d0a2d898702527bdb5da90c7dd63a2b5ad191672839e888061628375"
+    },
+    {
+      "label": "hud_planta",
+      "source": "res/stage/planta_arena.png",
+      "source_sha256": "ecb61f0cec05b62b3fe0406d8ca3774fee7f5895b187ad4f35649fa0db1db076",
+      "res_path": "res/stage/planta_arena.png",
+      "symbol": "hud_boot",
+      "generated": "out/local_study/luta_integrada/inc/stage_data.inc",
+      "sha256": "ecb61f0cec05b62b3fe0406d8ca3774fee7f5895b187ad4f35649fa0db1db076"
+    },
+    {
+      "label": "sfx_shot",
+      "source": "res/audio/sfx_shot.psg",
+      "source_sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+      "res_path": "res/audio/sfx_shot.psg",
+      "symbol": "sfx_shot",
+      "generated": "out/local_study/luta_integrada/inc/psg_blobs.h",
+      "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce"
+    },
+    {
+      "label": "sfx_hurt",
+      "source": "res/audio/sfx_hurt.psg",
+      "source_sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+      "res_path": "res/audio/sfx_hurt.psg",
+      "symbol": "sfx_hurt",
+      "generated": "out/local_study/luta_integrada/inc/psg_blobs.h",
+      "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e"
+    },
+    {
+      "label": "sfx_hit",
+      "source": "res/audio/sfx_hit.psg",
+      "source_sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+      "res_path": "res/audio/sfx_hit.psg",
+      "symbol": "sfx_hit",
+      "generated": "out/local_study/luta_integrada/inc/psg_blobs.h",
+      "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3"
+    },
+    {
+      "label": "sfx_down",
+      "source": "res/audio/sfx_down.psg",
+      "source_sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+      "res_path": "res/audio/sfx_down.psg",
+      "symbol": "sfx_down",
+      "generated": "out/local_study/luta_integrada/inc/psg_blobs.h",
+      "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42"
+    },
+    {
+      "label": "music_battle",
+      "source": "res/audio/music_battle.psg",
+      "source_sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa",
+      "res_path": "res/audio/music_battle.psg",
+      "symbol": "music_battle",
+      "generated": "out/local_study/luta_integrada/inc/psg_blobs.h",
+      "sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa"
+    },
+    {
+      "label": "sfx_special",
+      "source": "res/audio/sfx_special.psg",
+      "source_sha256": "96d853814146600bf9ac43469a81c7c18785f264c0a8e86a9ee0256a36ed3b59",
+      "res_path": "res/audio/sfx_special.psg",
+      "symbol": "sfx_special",
+      "generated": "out/local_study/luta_integrada/inc/psg_blobs.h",
+      "sha256": "96d853814146600bf9ac43469a81c7c18785f264c0a8e86a9ee0256a36ed3b59"
+    },
+    {
+      "label": "sfx_round",
+      "source": "res/audio/sfx_round.psg",
+      "source_sha256": "17ca8275035f79c98dcf1d170c283ba0c4635021936965d6a511b4adc195d694",
+      "res_path": "res/audio/sfx_round.psg",
+      "symbol": "sfx_round",
+      "generated": "out/local_study/luta_integrada/inc/psg_blobs.h",
+      "sha256": "17ca8275035f79c98dcf1d170c283ba0c4635021936965d6a511b4adc195d694"
+    },
+    {
+      "label": "ken_tiles",
+      "source": "integrada/tools/gen_pose_table.py",
+      "source_sha256": "56f1a5f1db944b5ce7991c7d281d89769c2df5ce0162be9da244632bcec3cabf",
+      "res_path": "out/local_study/luta_integrada/assets/banks/versus_scene_banks_02.bin",
+      "symbol": "ken_pose_tiles",
+      "generated": "out/local_study/luta_integrada/inc/pose_table.h",
+      "sha256": "1bc791d24ce400f090446690d6e923c613d58fbda31f4e0beab03ee49c73a809",
+      "origin_source": "../../../Mugenesis/Base de Estudo/chars/street-fighter/ken_masters_adv.zip",
+      "origin_source_sha256": "822936f0de76a51db6174ffced7f1cbce6c54bb532fda4e68fd177bf6aaf25a3"
+    },
+    {
+      "label": "ryu_tiles",
+      "source": "integrada/tools/gen_pose_table.py",
+      "source_sha256": "56f1a5f1db944b5ce7991c7d281d89769c2df5ce0162be9da244632bcec3cabf",
+      "res_path": "out/local_study/luta_integrada/assets/banks/versus_scene_banks_02.bin",
+      "symbol": "ryu_pose_tiles",
+      "generated": "out/local_study/luta_integrada/inc/pose_table.h",
+      "sha256": "1bc791d24ce400f090446690d6e923c613d58fbda31f4e0beab03ee49c73a809",
+      "origin_source": "../../../Mugenesis/Base de Estudo/chars/street-fighter/ryu_kang.zip",
+      "origin_source_sha256": "d3430ad559e2be75a3a99986920533018a522bed1363f2d51f3175ca59f0e55f"
+    },
+    {
+      "label": "fighter_pose_metadata_bank37",
+      "source": "integrada/tools/gen_pose_table.py",
+      "res_path": "out/local_study/luta_integrada/assets/banks/pose_meta_37.bin",
+      "symbol": "pose_row_meta",
+      "generated": "out/local_study/luta_integrada/inc/pose_table.h",
+      "sha256": "edf2446c825c2e1184cf89852729581ab49359afb86c5454a223e6f1e44c37c3"
+    }
+  ]
+}

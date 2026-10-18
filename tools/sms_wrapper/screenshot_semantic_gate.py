@@ -43,7 +43,15 @@ from sms_palette import nearest_code, code_rgb               # noqa: E402
 #   0.132..0.274   -> ruido grosseiro (tela_funcional da F6, cena04_sprites)
 # Limiar 0.05 fica na folga entre as faixas.
 RICH_BLOCK_COLORS = 8          # cores distintas num bloco 8x8 que o tornam "rico"
-NOISE_BLOCK_RATIO_MAX = 0.05   # fracao de blocos ricos aceita
+NOISE_BLOCK_RATIO_MAX = 0.05   # fracao de blocos ricos aceita (captura escalada)
+# Escala nativa (256x217 / 256x192): o bloco 8x8 da janela E o tile inteiro
+# da arte, e arte densa legítima tem >=8 cores num tile. As fixtures de 2026
+# -09-01 calibraram 0.05 sobre capturas escaladas, onde cada bloco cobre
+# apenas parte do tile. Medido 2026-09-24 no acervo em escala nativa:
+#   0.023..0.067  -> kage stage, MSSF2T boot (arte autoral densa)
+#   1.000         -> lixo de VRAM sintetico (indices aleatorios da CRAM)
+# 0.30 separa com folga dos dois lados.
+NOISE_BLOCK_RATIO_MAX_NATIVE = 0.30
 
 # Tolerancia por canal entre a cor capturada e a cor de contrato mais proxima.
 # Emulador + escala de janela + compressao do screenshot deslocam a cor; um
@@ -132,6 +140,13 @@ def garbage_block_ratio(path):
             rich += (len(cols) >= RICH_BLOCK_COLORS)
     return (rich / n) if n else None
 
+def noise_ratio_max(path):
+    """Limiar conforme a escala da janela: em escala nativa bloco == tile."""
+    from capture_evidence import capture_scale
+    w, h = png_size(path)
+    return (NOISE_BLOCK_RATIO_MAX if capture_scale(w, h) > 1
+            else NOISE_BLOCK_RATIO_MAX_NATIVE)
+
 def evaluate(path, claim=None, against=()):
     """Retorna (problems, report). Funcao pura o suficiente para self-check."""
     problems = []
@@ -185,10 +200,11 @@ def evaluate(path, claim=None, against=()):
     # 3b. lixo de VRAM (L016): estrutura de tile denuncia o que a cor nao denuncia
     ratio = garbage_block_ratio(path)
     report["garbage_block_ratio"] = round(ratio, 4) if ratio is not None else None
-    if ratio is not None and ratio > NOISE_BLOCK_RATIO_MAX:
+    limiar = noise_ratio_max(path)
+    if ratio is not None and ratio > limiar:
         problems.append(
             f"{ratio:.1%} dos blocos 8x8 tem >={RICH_BLOCK_COLORS} cores "
-            f"(max {NOISE_BLOCK_RATIO_MAX:.0%}) — assinatura de LIXO DE VRAM. "
+            f"(max {limiar:.0%}) — assinatura de LIXO DE VRAM. "
             "Tela com informacao nao e tela correta: variancia de luma e "
             "conformidade de paleta nao distinguem arte de ruido.")
 
@@ -268,8 +284,37 @@ def _self_check():
         assert any("LIXO DE VRAM" in x for x in p), \
             f"ruido com cores da CRAM tem que reprovar (L016): {p} {r}"
         # e o inverso: arte com poucas cores por tile NAO pode ser acusada
-        assert (garbage_block_ratio(good) or 0) <= NOISE_BLOCK_RATIO_MAX, \
+        assert (garbage_block_ratio(good) or 0) <= noise_ratio_max(good), \
             "arte de poucas cores por bloco nao pode contar como lixo"
+
+        # REGRESSAO (curadoria 2026-09-24): em escala NATIVA o bloco 8x8 da
+        # janela E o tile inteiro da arte — arte densa nao pode contar como
+        # lixo, ruido nativo continua reprovado. O gate reprovava o chao do
+        # kage (6,7%) porque a calibracao de 0.05 veio de capturas escaladas.
+        NW, NH = 256, 217
+        def nat_rows(fn):
+            return [[fn(x, y) for x in range(NW)] for y in range(NH)]
+        def dense_px(x, y):
+            if y < 25:                      # barra de menu fora do recorte
+                return (255, 255, 255)
+            tx, ty = x // 8, (y - 25) // 8
+            if (tx * 7 + ty * 3) % 100 < 15:    # ~15% dos tiles com 10 cores
+                return pal[(tx + ty * 3 + (x % 8)) % len(pal)]
+            return pal[0] if (tx + ty) % 2 else pal[5]
+        dense = os.path.join(d, "dense_native.png")
+        write_png_rgb(dense, NW, NH, nat_rows(dense_px))
+        p, r = evaluate(dense)
+        assert not any("LIXO DE VRAM" in x for x in p), \
+            f"arte densa em escala nativa acusada como lixo: {p} {r}"
+        g = r["garbage_block_ratio"]
+        assert g is not None and \
+            NOISE_BLOCK_RATIO_MAX < g <= NOISE_BLOCK_RATIO_MAX_NATIVE, \
+            f"fixture densa deve cair ENTRE os dois limiares: {g}"
+        noise_n = os.path.join(d, "noise_native.png")
+        write_png_rgb(noise_n, NW, NH, nat_rows(lambda x, y: rnd.choice(pal)))
+        p, _ = evaluate(noise_n)
+        assert any("LIXO DE VRAM" in x for x in p), \
+            "ruido de VRAM em escala nativa tem que reprovar"
 
         # REPROVA: tela praticamente lisa
         flat = os.path.join(d, "flat.png")

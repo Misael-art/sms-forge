@@ -1,0 +1,27 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_08_32bit_mecha_chibi_art_review_v1",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Read-only visual review of 32Bit-Mecha-Chibi candidate adapted to fixed adult human identity. Inspect style distinction, exact identity/costume, anatomy, weapon attachment after correction, five views, palette roles, scale/baseline and layout. Return concrete evidence; no promotion.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png",
+      "sha256": "7b1340ab917b8571635882f08fc4ebef9052afced1766b62ab7d307c22a9f665",
+      "role": "candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_review_v1.json",
+      "sha256": "83716d008f05aec4d305a6c3457958cb9959b9a618aa2d6e7466e8d4f9d59ee7",
+      "role": "checklist and authority refs"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only and independent of producer.",
+    "Do not claim sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Return concrete defects or opportunities with evidence."
+  ]
+}

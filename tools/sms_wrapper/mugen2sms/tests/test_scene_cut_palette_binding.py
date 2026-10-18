@@ -1,0 +1,81 @@
+"""P1/P2 metasprite IDs must target the matching palette tile pool."""
+from __future__ import annotations
+
+import pytest
+
+from mugen2sms.generators.scene_cut import (
+    _compact_facing_pose, _palette_metas, _runtime_table)
+from mugen2sms.generators.smsdev import Artifact
+
+
+def test_palette_metadata_is_emitted_as_distinct_artifacts():
+    p1 = {
+        "F_A0F0_META": Artifact("F_A0F0_META", b"p1-right", "air"),
+        "F_A0F0_METAL": Artifact("F_A0F0_METAL", b"p1-left", "air"),
+    }
+    p2 = {
+        "F_A0F0_META": Artifact("F_A0F0_META", b"p2-right", "air"),
+        "F_A0F0_METAL": Artifact("F_A0F0_METAL", b"p2-left", "air"),
+    }
+
+    emitted = _palette_metas("F_A0F0", p1, p2)
+
+    assert [(item.symbol, item.data) for item in emitted] == [
+        ("F_A0F0_META", b"p1-right"),
+        ("F_A0F0_P2_META", b"p2-right"),
+        ("F_A0F0_METAL", b"p1-left"),
+        ("F_A0F0_P2_METAL", b"p2-left"),
+    ]
+
+
+def test_missing_palette_metadata_is_rejected():
+    p1 = {"F_A0F0_META": Artifact("F_A0F0_META", b"p1-right", "air"),
+          "F_A0F0_METAL": Artifact("F_A0F0_METAL", b"p1-left", "air")}
+
+    with pytest.raises(ValueError, match="palette-specific metasprite is missing"):
+        _palette_metas("F_A0F0", p1, {})
+
+
+def test_facing_compaction_preserves_bytes_positions_and_pair_references():
+    first, second = bytes([0x11]) * 64, bytes([0x22]) * 64
+    tiles = first + second + first
+    metadata = bytes((3, 4, 2, 5, 6, 0, 7, 8, 4, 0x80))
+
+    compact, rewritten = _compact_facing_pose(tiles, metadata, "F_A0F0")
+
+    assert compact == second + first
+    assert rewritten == bytes((3, 4, 0, 5, 6, 2, 7, 8, 2, 0x80))
+
+
+def test_facing_compaction_rejects_odd_tall_sprite_id():
+    with pytest.raises(ValueError, match="odd 8x16 pattern id"):
+        _compact_facing_pose(bytes(64), bytes((0, 0, 1, 0x80)), "F_A0F0")
+
+
+def test_runtime_frame_selects_both_palette_metadata_pairs():
+    stem = "F_A0F0"
+    artifacts = [
+        Artifact(stem + suffix, b"x", "air")
+        for suffix in ("_META", "_METAL", "_P2_META", "_P2_METAL", "_AXIS")
+    ]
+    role_frames = {"idle": [{"stem": stem, "duration": 4,
+                              "width": 16, "height": 16}]}
+    runtime = {key: 0 for key in (
+        "life", "walk_fwd", "walk_back", "jump_vy", "gravity",
+        "damage_punch", "damage_hp", "damage_kick", "damage_hk",
+        "damage_special", "special_vel", "input_threshold_key1",
+        "input_threshold_key2",
+        "hitstop", "hit_push", "guard_push")}
+
+    header = _runtime_table(
+        [{"role": "idle", "action": 0, "loop_start": 0}], role_frames, 1,
+        artifacts,
+        {stem + "_TILES": (2, 0), stem + "_P2_TILES": (2, 64)},
+        [0] * 16, runtime, {stem: 64, stem + "_P2": 128})
+
+    assert f"{stem}_META, {stem}_METAL, 0, {stem}_AXIS, 16, 16, " \
+           f"{stem}_P2_META, {stem}_P2_METAL" in header
+    assert "poses_all[CUT_POSE_COUNT * 2]" in header
+    assert f"{stem}_FACE_SIZE 64" in header
+    assert f"{stem}_P2_FACE_SIZE 128" in header
+    assert "CUT_INPUT_THRESHOLD_KEY1 0" in header

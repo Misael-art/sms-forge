@@ -61,16 +61,40 @@
       "format": "PSGlib stream"
     },
     {
-      "file": "res/audio/music_battle.psg",
-      "origin": "stream autoral sintetizado para PSGlib",
+      "origin": "transcrição do tema Ken Stage (SSF2T) para PSG de 4 canais — referência em art_src_base/audio/music/reference/",
       "author": "SMSForge",
-      "tool": "make_psg_assets.py + shrink_music_loop.py",
-      "role": "tema da arena",
+      "tool": "gen_music_ken_ref.py",
       "channels": "music channels 0-3",
-      "frames": 4,
-      "sha256": "9fd31af4baaa9d333b5424d2f17c71147aff5509159ef7766cdfc03f387132c0",
-      "bytes": 49,
-      "format": "PSGlib stream"
+      "frames": 1280,
+      "sha256": "aaf1cf1b8e5424ac46517820a95f87d3c7298f44473521f23e119ae4702daadf",
+      "bytes": 917,
+      "format": "PSGlib stream",
+      "reference": {
+        "file": "art_src_base/audio/music/reference/ssf2_ken_stage_vgmusic.mid",
+        "sha256": "4480480137e00ec8a29e2d6e6ae2813185fdb14ca1a4d3c1691d5563f10fd1dc",
+        "url": "https://www.vgmusic.com/music/console/nintendo/snes/street_fighter_ii_-_ken.mid",
+        "format": "midi"
+      },
+      "file": "res/audio/music_battle.psg",
+      "role": "espelho do tema do palco do Ken (mesmo conteúdo de music_ken_stage.psg; o C consome via inc/music_battle.h)"
+    },
+    {
+      "origin": "transcrição do tema Ken Stage (SSF2T) para PSG de 4 canais — referência em art_src_base/audio/music/reference/",
+      "author": "SMSForge",
+      "tool": "gen_music_ken_ref.py",
+      "channels": "music channels 0-3",
+      "frames": 1280,
+      "sha256": "aaf1cf1b8e5424ac46517820a95f87d3c7298f44473521f23e119ae4702daadf",
+      "bytes": 917,
+      "format": "PSGlib stream",
+      "reference": {
+        "file": "art_src_base/audio/music/reference/ssf2_ken_stage_vgmusic.mid",
+        "sha256": "4480480137e00ec8a29e2d6e6ae2813185fdb14ca1a4d3c1691d5563f10fd1dc",
+        "url": "https://www.vgmusic.com/music/console/nintendo/snes/street_fighter_ii_-_ken.mid",
+        "format": "midi"
+      },
+      "file": "res/audio/music_ken_stage.psg",
+      "role": "tema do palco do Ken"
     }
   ]
 }

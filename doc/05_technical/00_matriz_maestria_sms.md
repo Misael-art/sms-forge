@@ -14,7 +14,7 @@ build + evidência de emulador em algum projeto (`doc/curation/` promove).
 ## 1. VDP / tiles BG
 | # | Técnica | Nota dura |
 |---|---------|-----------|
-| V01 | Grid 8×8, pattern table 32 bytes/tile | name table = 1 byte/tile: sem flip nem paleta por tile |
+| V01 | Grid 8×8, pattern table 32 bytes/tile | name table = entrada 16-bit com flags flip/paleta/prioridade (probe `pnt_16bit`, L069) |
 | V02 | Metatile 16×16 via camada de índices | economiza name table e lógica de colisão |
 | V03 | Scroll global X/Y (regs) + trava 1ª coluna | sem scroll fino por linha nativo |
 | V04 | Line interrupt para split de scroll/raster | jitter de Z80: medir estabilidade em evidência |
@@ -32,7 +32,7 @@ build + evidência de emulador em algum projeto (`doc/curation/` promove).
 | S07 | Rotação de buffer de sprites p/ reduzir flicker | ordenar prioridades na SAT |
 
 ## 3. Paleta / cor
-| P01 | 2 subpaletas ×16, índice 0 transparente nas duas | máx 30 cores úteis simultâneas |
+| P01 | 2 subpaletas ×16; BG índice 0 visível, sprite índice 0 transparente | até 16 entradas BG + 15 entradas opacas de sprite; cores distintas dependem da paleta da cena |
 | P02 | Cor = código 6-bit (canais 0–3); paleta mestra fixa | sem gradiente suave; fade = troca de paleta |
 | P03 | Contraste medido em degraus (luma derivada dos códigos) | gate audit_luma_floor.py |
 | P04 | Half-brightness / color add/sub do SMSlib | efeitos sem alpha (não existe alpha) |

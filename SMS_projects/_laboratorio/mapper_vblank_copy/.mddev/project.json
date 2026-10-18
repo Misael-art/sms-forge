@@ -1,0 +1,26 @@
+{
+  "name": "mapper_vblank_copy",
+  "platform": "sega_master_system",
+  "region_target": [
+    "NTSC"
+  ],
+  "toolchain": {
+    "compiler": "sdcc>=4.2",
+    "sdk": "devkitSMS",
+    "libs": [
+      "SMSlib",
+      "PSGlib"
+    ],
+    "makesms_extra": [
+      "-pm",
+      "-mbank",
+      "assets/banks/banks_2_7.bin:0:6:2"
+    ]
+  },
+  "skeleton_version": 1,
+  "gates": [
+    "build",
+    "evidence"
+  ],
+  "specialization": "laboratorio_mapper_upload"
+}

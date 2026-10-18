@@ -1,0 +1,222 @@
+{
+ "schema": "gate_bundle_v1",
+ "generated_at": "2026-10-17T00:00:00-03:00",
+ "scope": "o3-m4-emission",
+ "description": "gates da emissao O3 (M4): politica de corte D9-a2 (linhas exatas) sobre 12 manifests + plano de VRAM; self-checks das ferramentas de medicao",
+ "tools": {
+  "audit_sprite_line_sim.py": {
+   "path": "tools/sms_wrapper/audit_sprite_line_sim.py",
+   "sha256": "9c35c091c30699aedb7588098b2b16e2fc3e02b41695ae1f0a19edd6ae210004",
+   "self_check": "OK"
+  },
+  "measure_vram_map.py": {
+   "path": "tools/sms_wrapper/measure_vram_map.py",
+   "sha256": "2518f35c432b8cf8832fa28efc708ccc8074a0e75568f5114dd5ecbca032d971",
+   "self_check": "OK"
+  },
+  "sms_emit.py": {
+   "path": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py",
+   "sha256": "e3ac59b69cd8ea46861a3647ab650b73ae0377c28a610098ab2c3ed9430b2477",
+   "self_check": "OK"
+  }
+ },
+ "gates": [
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_pair_a102_left_fall03_left_dz24_20261017.json",
+   "manifest_sha256": "df776d5f3b2f5d584594a6d12535f7f42484a2301142a6ac4d962599237fb586",
+   "exit": 0,
+   "result": {
+    "sprites": 44,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_pair_a102_right_fall03_right_dz24_20261017.json",
+   "manifest_sha256": "a13d2d2ffff2d44b3990dfeaaf68df72792ba9bc38d9e10769466aa20e172c35",
+   "exit": 0,
+   "result": {
+    "sprites": 44,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_scan0_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "manifest_sha256": "6ccdcf390691896212746283217e6e338d14a7f70a2969b56e3ac2099353c259",
+   "exit": 0,
+   "result": {
+    "sprites": 34,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_scan1_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "manifest_sha256": "20501411f8019dec046baa2408039f3a5c2d6a3b4c9da5ea49753348df33333c",
+   "exit": 0,
+   "result": {
+    "sprites": 34,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_scan2_ax_a102_left_long_a103_left_dz0_20261017.json",
+   "manifest_sha256": "a949533092ba03e6bc1f585820b7c5da63c350b3d3d0c82818e2898d82ac77a2",
+   "exit": 0,
+   "result": {
+    "sprites": 34,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_scan3_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "manifest_sha256": "b1cc60fc2328e7d4844d4cf0b4821ee61352be02d6eafd3aa7fd73c2734d68ff",
+   "exit": 0,
+   "result": {
+    "sprites": 34,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_scan4_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "manifest_sha256": "c39b4bd213a84b2d5f91fe85ce47ca6d3a05b291ddada9ab50235af5bdeb83de",
+   "exit": 0,
+   "result": {
+    "sprites": 34,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_scan5_ax_a102_left_long_a103_right_dz0_20261017.json",
+   "manifest_sha256": "709a1320c5630c5da85cf1ce93efef6cbd2a14211078f90d49b4b4dadb6bdcec",
+   "exit": 0,
+   "result": {
+    "sprites": 34,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_solo_long_death01_left_20261017.json",
+   "manifest_sha256": "f540c9d2d23adc6c09ea4689dde889ff0e1b2f3099aa4949eaa30880d835f7e6",
+   "exit": 0,
+   "result": {
+    "sprites": 18,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_solo_long_death01_right_20261017.json",
+   "manifest_sha256": "2be9ba92ba4e868d68a772a28178c8e2af08a7b11d4744886625985f273d2407",
+   "exit": 0,
+   "result": {
+    "sprites": 18,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_solo_long_fall03_left_20261017.json",
+   "manifest_sha256": "15de2dd2ca6d9f5f869ec6ce82cd77a0b6193f3a0d8733b5dbddf4abe40d2a9d",
+   "exit": 0,
+   "result": {
+    "sprites": 18,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "audit_sprite_line_sim",
+   "manifest": "data/generated/emit/o3_sprite_scene_solo_long_fall03_right_20261017.json",
+   "manifest_sha256": "ee945dbefe7c026a5623b4465540e0d00933a2b9539e1fc5f546ef32a215b662",
+   "exit": 0,
+   "result": {
+    "sprites": 18,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "violations": []
+   },
+   "verdict": "pass"
+  },
+  {
+   "gate": "measure_vram_map",
+   "plan": "data/generated/plans/o3_vram_plan_20261017.json",
+   "plan_sha256": "9c8831757812186f24555c09e589e30bfc59e8675a73fd3bfbac2565519a1099",
+   "exit": 0,
+   "verdict": "aprovado",
+   "blockers": [],
+   "alerts": [],
+   "metrics": {
+    "reg6": "0xfb",
+    "sprite_janela": [
+     "0x0",
+     "0x2000"
+    ],
+    "sprite_tiles_unicos": 256,
+    "pnt_bloco": [
+     "0x3800",
+     "0x3f00"
+    ],
+    "bytes_usados": 15712,
+    "bytes_livres": 672
+   },
+   "pass": true
+  }
+ ],
+ "determinism": {
+  "method": "re-emissao byte-identica (2a execucao com o mesmo stamp)",
+  "files_checked": 15,
+  "identical": true
+ },
+ "summary": {
+  "sprite_line_sim": {
+   "manifests": 12,
+   "pass": 12
+  },
+  "vram_map": "aprovado"
+ },
+ "adenda": {
+  "measure_vram_map_sessao": "cross-check com vdp_regs.bin de sessao fica para o M5 (sem ROM O3 ainda); so plan-mode aqui",
+  "audit_tilemap_bounds": "M5 (sem runtime O3)",
+  "audit_render_glitch": "exige framebuffer; M5/M6 com o runtime desenhando a politica D9-a2"
+ }
+}

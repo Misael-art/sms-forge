@@ -1,0 +1,20 @@
+{
+  "curation_id": "2026-09-26_l085_nested_measurement_discovery",
+  "date": "2026-09-26",
+  "scope": "sms_wrapper_measurement_tool_discovery",
+  "authorization": "pedido explícito para alinhar ferramentas e workflows aos padrões mínimos do motor MUGEN SMS",
+  "lessons": [
+    {
+      "id": "L085",
+      "status": "fechada_com_ferramenta_e_regra",
+      "lesson": "validate_measurement_tools.py examinava apenas a raiz do wrapper e não descobria medidores em subdiretórios. Ferramentas MUGEN em analysis podiam ficar fora do gate institucional de --self-check.",
+      "evidence": {
+        "observed": "mugen2sms/analysis/scale_pilot.py mede line/SAT/RAM/VRAM/timing, mas não aparecia na descoberta da raiz.",
+        "correction": "validate_measurement_tools.py agora descobre prefixos e gates recursivamente, ignora caches e registra ferramentas doutrinárias nested; o autocheck cria e exige uma fixture nested.",
+        "validation": "PASS: validate_measurement_tools.py passou --self-check e descobriu/executou 46 ferramentas de medição, incluindo mugen2sms/analysis/scale_pilot.py."
+      },
+      "rule_section": "SMS_GLOBAL §70",
+      "tool_that_measures": "validate_measurement_tools.py"
+    }
+  ]
+}

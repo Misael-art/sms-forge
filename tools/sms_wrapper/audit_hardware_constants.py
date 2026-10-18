@@ -19,7 +19,7 @@ grandeza conhecida, o numero tem que ser o do Master System.
 Uso: audit_hardware_constants.py [--root <workspace>] [--json <out>] [--self-check]
 Exit: 0 coerente | 1 numero de outro hardware | 3 uso
 """
-import sys, os, re, json, glob, argparse
+import sys, os, re, json, glob, argparse, unicodedata
 
 # Grandezas canonicas do Master System. Fonte: SMS_GLOBAL + headers devkitSMS;
 # cada uma ja custou (ou quase custou) um bug quando trocada pela do MegaDrive.
@@ -44,6 +44,19 @@ CANON = [
 SPRITE_MODE_MD = re.compile(
     r"8\s*[x×]\s*8\s+ou\s+16\s*[x×]\s*16", re.I)
 X_OFFSET_MD = re.compile(r"X\s*\+\s*32")
+SLOT0_FIXED = re.compile(r"slot\s*(?:0x0000|0)\s+(?:inteiro\s+)?fixo\s+na\s+p[aá]gina\s*0", re.I)
+SAT_FOUR_BYTES = re.compile(r"SAT\s*[:(=]?\s*64\s*(?:sprites?\s*)?[×x*]\s*4\s*B", re.I)
+# Narrow calibrated forms, not an inference of how many colors a scene uses.
+BOTH_ZERO_TRANSPARENT = re.compile(
+    r"indice\s*0[^.;|\n]{0,45}transparen[^.;|\n]{0,25}(?:nas\s+duas|em\s+ambas)"
+    r"|(?:duas|2)\s+subpaletas[^.;|\n]{0,70}indice\s*0\s+transparente")
+
+# L093: o pad do SMS tem KEY_1 e KEY_2 e diagonal = duas direcoes (SMSlib.h:296-302). Um conversor herdou
+# "1 botao" e "diagonal mecanicamente impossivel" e bloqueou 64 de 70 comandos do Ken por premissa errada.
+PAD_DIAG_IMPOSSIBLE = re.compile(r"diagonal[^.\n]{0,60}imposs|imposs[^.\n]{0,60}diagonal", re.I)
+PAD_ONE_BUTTON = re.compile(r"\b1\s*bot[aã]o\b[^.\n]{0,30}(?:pad|start)|pad[^.\n]{0,40}\b1\s*bot[aã]o\b", re.I)
+PAD_CORRECTION = ("corrigido", "dizia", "refutad", "errado", "mega drive", "megadrive", "supersed",
+                  "afirmava", "contradiz", "oposta", "opostas")
 
 # "DMA" so pode aparecer negado: o SMS nao tem DMA. Frases de negacao aceitas.
 NEG_DMA = ("sem dma", "nao existe dma", "não existe dma", "nao ha dma",
@@ -52,11 +65,15 @@ NEG_DMA = ("sem dma", "nao existe dma", "não existe dma", "nao ha dma",
 def _docs(root):
     pats = [os.path.join(root, "doc", "**", "*.md"),
             os.path.join(root, "tools", "sms_wrapper", ".agent", "**", "*.md"),
-            os.path.join(root, "AGENTS.md")]
+            os.path.join(root, "AGENTS.md"),
+            os.path.join(root, "tools", "sms_wrapper", "mugen2sms", "**", "*.py")]
     out = []
     for p in pats:
         out += glob.glob(p, recursive=True)
-    return sorted(set(out))
+    # Evidence snapshots preserve old/failed documents; they are not current
+    # doctrine. Auditing them as live instructions yields false regressions.
+    evidence = os.path.abspath(os.path.join(root, "doc", "curation", "evidence"))
+    return sorted(f for f in set(out) if not os.path.abspath(f).startswith(evidence + os.sep))
 
 def check_text(texto, origem="<texto>"):
     problems = []
@@ -66,6 +83,13 @@ def check_text(texto, origem="<texto>"):
         # fixtures REPROVADAS" pode estar 1-2 linhas acima do numero.
         ctx = " ".join(linhas[max(0, linha_n - 3):linha_n]).lower()
         low = linha.lower()
+        normalized = "".join(c for c in unicodedata.normalize("NFD", low) if not unicodedata.combining(c))
+        normalized_ctx = "".join(c for c in unicodedata.normalize("NFD", ctx) if not unicodedata.combining(c))
+        if BOTH_ZERO_TRANSPARENT.search(normalized) and not any(
+                w in normalized_ctx for w in ("corrigido", "dizia", "refutad", "errad", "afirmava", "incorret", "reprov", "fixture")):
+            problems.append(
+                f"{os.path.basename(origem)}:{linha_n}: indice zero transparente nas duas paletas — "
+                "em SMS Mode4 BG0 e visivel; somente sprite0 e transparente (L001)")
         for rotulo, rx, correto, md in CANON:
             for m in re.finditer(rx, linha, re.I):
                 val = int(m.group(1))
@@ -77,6 +101,10 @@ def check_text(texto, origem="<texto>"):
                 # "maximo de N" afirma que o teto E N — se N esta errado, e erro.
                 if any(t in antes for t in (">", "≥", "mais de", "acima de",
                                             "excesso")):
+                    continue
+                # Required entries before a declared cut are scene demand,
+                # not a claim that the hardware can display that many.
+                if rotulo == "sprites por scanline" and "antes dos cortes" in low:
                     continue
                 # descricao de caso de TESTE (o gate reprova 9 numa scanline)
                 if any(w in ctx for w in ("reprov", "rejeit", "fixture",
@@ -107,6 +135,16 @@ def check_text(texto, origem="<texto>"):
             problems.append(
                 f"{os.path.basename(origem)}:{linha_n}: X+32 afirmado como "
                 "offset de sprite — no Master System X=0 e a borda (L003)")
+        if (SLOT0_FIXED.search(linha) or SAT_FOUR_BYTES.search(linha)) and not any(
+                w in low for w in ("corrigido", "dizia", "refutad", "supersed", "errado", "não", "nao")):
+            problems.append(
+                f"{os.path.basename(origem)}:{linha_n}: mapper/SAT contradiz SMS Mode4: "
+                "somente primeiro 1KiB fixo; SAT possui 64Y e 128X/tile (L001/L069/L117)")
+        if (PAD_DIAG_IMPOSSIBLE.search(linha) or PAD_ONE_BUTTON.search(linha)) and not any(
+                w in low or w in ctx for w in PAD_CORRECTION):
+            problems.append(
+                f"{os.path.basename(origem)}:{linha_n}: pad SMS com 1 botao ou diagonal impossivel — "
+                "o pad tem KEY_1+KEY_2 e diagonal = duas direcoes (SMSlib.h:296-302, L093)")
         # "dma" como SUBSTRING casava dentro de "Roadmap" — 3 falsos positivos.
         # E citar DMA para negar/comparar e legitimo. So reprova quando o texto
         # MANDA USAR DMA, que e a falha real (instrucao de outro console).
@@ -122,12 +160,35 @@ def audit(root):
     problems = []
     for f in _docs(root):
         try:
-            problems += check_text(open(f, encoding="utf-8", errors="replace").read(), f)
+            found = check_text(open(f, encoding="utf-8", errors="replace").read(), f)
+            if f.endswith(".py"):     # codigo: so a premissa de pad (contagens medidas em docstrings sao legitimas)
+                found = [x for x in found if "pad SMS" in x]
+            problems += found
         except OSError as e:
             problems.append(f"{f}: ilegivel ({e})")
     return problems
 
 def _self_check():
+    import tempfile
+    from pathlib import Path
+    with tempfile.TemporaryDirectory(prefix="sms-hardware-doctrine-") as tmp:
+        old = Path(tmp) / "doc/curation/evidence/before/README.md"
+        old.parent.mkdir(parents=True)
+        old.write_text("SAT (64 sprites ×4B=256B)")
+        assert not audit(tmp), "historical snapshot is not active doctrine"
+        current = Path(tmp) / "doc/current.md"
+        current.write_text("SAT (64 sprites ×4B=256B)")
+        assert audit(tmp), "current doctrine still requires checking"
+        current.unlink()
+        alias = Path(tmp) / "tools/sms_wrapper/.agent/skills/current.md"
+        alias.parent.mkdir(parents=True)
+        alias.symlink_to(old)
+        assert audit(tmp), "active alias to historical prose is still active doctrine"
+    assert check_text("slot 0x0000 fixo na página 0. Troca por macro.")
+    assert check_text("SAT (64 sprites ×4B=256B)")
+    assert not check_text("Somente 0x0000–0x03FF é fixo; slot 0 via 0xFFFD.")
+    assert not check_text("SAT: 64 bytes Y + 128 bytes X/tile; reserva 256B.")
+    assert not check_text("Corrigido: dizia slot 0x0000 fixo na página 0.")
     # REPROVA numeros do Mega Drive afirmados como lei do SMS
     p = check_text("Maximo de 20 sprites por scanline no modo H40.")
     assert any("Mega Drive" in x for x in p), f"faltou pegar 20 sprites/scanline: {p}"
@@ -175,6 +236,19 @@ def _self_check():
         "Corrigido 2026-09-01 (L003): dizia X+32 (Mega Drive).")
     assert not check_text(
         "Arte 16×16 exige metasprite. TALL e 8×16.")
+    # L093: premissa de pad errada reprova; nota de correcao e frase correta passam
+    assert check_text("Diagonal e mecanicamente impossivel no cross-pad."), "faltou pegar diagonal impossivel"
+    assert check_text("Pad SMS: 1 botao + start."), "faltou pegar pad de 1 botao"
+    assert not check_text("O pad tem KEY_1 e KEY_2; diagonal = duas direcoes juntas.")
+    assert not check_text("Corrigido (L093): dizia 'diagonal impossivel' e '1 botao no pad'.")
+    assert not check_text("Direcoes opostas sao impossiveis no pad.")
+    assert check_text("| Subpaletas | 2 × 16 (índice 0 transparente nas duas) |")
+    assert check_text("Duas subpaletas de 16 com índice 0 transparente.")
+    assert not check_text("BG índice 0 visível; P1 sprite índice 0 transparente.")
+    assert not check_text("Corrigido: dizia índice 0 transparente nas duas paletas.")
+    assert not check_text("Cena usa 30 cores por contrato, com slots livres reservados.")
+    assert not check_text("Antes dos cortes, o pior par chega a 17 sprites/linha.")
+    assert check_text("O limite do Master System e 17 sprites/linha.")
     print("[SELF-CHECK OK] hardware_constants (reprova numero de outro console "
           "afirmado como lei; aceita os do SMS e as notas de correcao)")
     return 0
@@ -183,15 +257,19 @@ def main():
     here = os.path.dirname(os.path.abspath(__file__))
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=os.path.normpath(os.path.join(here, "..", "..")))
-    ap.add_argument("--json")
+    ap.add_argument("--json", "--report-out", dest="json", help="new report destination; existing files are refused")
     ap.add_argument("--self-check", action="store_true")
     a = ap.parse_args()
     if a.self_check:
         return _self_check()
     problems = audit(a.root)
     if a.json:
-        json.dump({"problems": problems, "clean": not problems},
-                  open(a.json, "w"), indent=2)
+        from report_output import write_new_report
+        try:
+            write_new_report(a.json, {"problems": problems, "clean": not problems})
+        except OSError as exc:
+            print(f"[FAIL] report destination refused: {exc}; choose a new --report-out path")
+            return 3
     if problems:
         for p in problems:
             print(f"[FAIL] {p}")

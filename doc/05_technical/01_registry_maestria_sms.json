@@ -29,6 +29,14 @@
       "V07 tilemap_comprimido": {
         "level": "mapped",
         "evidence": "candidata"
+      },
+      "V08 pnt_entrada_16bit_flags": {
+        "level": "emulador_provado",
+        "evidence": "probe SMS_projects/_laboratorio/pnt_16bit (L069): ROM eaa8e8305086b06b, framebuffer 256x192 pnt_capture2.mp4 2542169750c4dc3b; flipX/flipY/sprite-palette/tile-300 PASS em 4/4 frames (out/evidence/pnt_16bit_verdict.json)"
+      },
+      "V09 tile_priority_flag": {
+        "level": "mapped",
+        "evidence": "probe pnt_16bit celula H: inocuo no BG isolado; efeito com sprite sobreposto ainda sem prova"
       }
     },
     "sprites": {

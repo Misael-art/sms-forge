@@ -21,7 +21,15 @@
         "simetria_perigosa": "zumbi PARADO daria hashes identicos = falso PASS",
         "depois_da_correcao": "mesmo experimento devolve [FAIL_AMBIENTE] exit 2, nomeando a causa"
       },
-      "defeito_encontrado_na_propria_correcao": "A primeira versao do helper usava so `pgrep -f 'Emulicious[.]jar'`. O colchete impede o pgrep de achar a si proprio, mas nao o SHELL que invocou a ferramenta: o experimento devolveu 3 PIDs onde havia 1 emulador, dois sendo o wrapper do comando. Abortar por causa de quem te chamou e falso positivo com cara de gate rigoroso. Corrigido conferindo argv[0] em /proc/<pid>/cmdline."
+      "defeito_encontrado_na_propria_correcao": "A primeira versao do helper usava so `pgrep -f 'Emulicious[.]jar'`. O colchete impede o pgrep de achar a si proprio, mas nao o SHELL que invocou a ferramenta: o experimento devolveu 3 PIDs onde havia 1 emulador, dois sendo o wrapper do comando. Abortar por causa de quem te chamou e falso positivo com cara de gate rigoroso. Corrigido conferindo argv[0] em /proc/<pid>/cmdline.",
+      "user_requested_visible_review_followup": {
+        "date": "2026-10-10",
+        "policy": "Build e QA normais permanecem em sessão isolada oculta; abrir janela visível somente após pedido explícito do dono para inspeção manual.",
+        "demonstration": "O dono pediu para abrir a ROM diagnóstica v10 do Dr. Social; uma instância visível foi iniciada para esse SHA e o dono confirmou que conseguiu validar a janela. O lançamento validado não aprovou a arte.",
+        "rom_path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/project/out/rom/dr_social_61_pose_review_v10.sms",
+        "rom_sha256": "41879e38c8a83caec07bd97e9208ca08f00fe35ec1e927ff31feab4eb7a3c8cc",
+        "claim_limit": "A janela visível atende à revisão manual solicitada; não substitui sessão privada, framebuffer hash-bound, revisão artística ou aprovação do dono."
+      }
     }
   ],
   "nao_canonizado_de_proposito": [

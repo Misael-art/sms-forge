@@ -1,0 +1,499 @@
+{
+  "curation_id": "2026-10-14_pulso_m3_candidatos_curadoria",
+  "date": "2026-10-14",
+  "title": "Registro de candidatos da sessão M3 (pulso_de_cristal): bloqueio aberto de captura de áudio no host, armadilhas da ponte, limites do VCounter como régua, cadeia de degraus r6→r12, aplicação de L079 no emissor e semântica de atenuação PSGlib",
+  "kind": "curation",
+  "project": "SMS_projects/pulso_de_cristal",
+  "scope": "Projeto pulso_de_cristal (SMS 192 linhas, NTSC, SDCC+devkitSMS sem otimização, ponte Emulicious privada) e as ferramentas de medição do wrapper que produziram a evidência. NÃO é lei universal do Master System: nenhuma das lições abaixo foi medida em silício. O item de áudio é um bloqueio de host ainda aberto, registrado como risco/hipótese, não como técnica resolvida (workflow curation-learning, passo 2).",
+  "authorization": "A pedido explícito do dono em 2026-10-14: 'registre todos os itens e aprendizados para curadoria futura'. NENHUMA mudança canônica foi aplicada aqui: nenhum ID novo emitido, SMS_GLOBAL intocado, wrapper intocado, lesson_routes intocado fora do registro desta candidata. Toda proposta abaixo está 'not_applied' com aprovação humana 'pending'.",
+  "lessons": [],
+  "lessons_note": "Lista vazia de propósito: esta curadoria não emite ID. O `id_registry.json` continua issued_through=L132. Os itens são (a) aplicações/evidências novas de lições já emitidas, (b) candidatos a ID novo que exigem decisão humana, (c) bloqueio aberto registrado como risco.",
+  "open_blockers": [
+    {
+      "key": "host_audio_capture_starvation_20261014",
+      "status": "FECHADA-REFUTADA em 2026-10-14 (fim de tarde). O texto original e as 5 observações abaixo ficam preservados: eram o estado real da manhã. A hipótese de afamamento de rota do host NÃO se sustentou quando a causa de ROM foi corrigida.",
+      "claim_blocked": "O eixo de áudio da entrega M3 (SELECT disparando sfx_crystal sobre music_dawn, ouvido/capturado) permanece NÃO PROVENIDO. Os contadores da ROM provam que o SFX foi aceito e arbitrado (0→2 em C2); nada prova o que saiu do alto-falante.",
+      "observed": [
+        "8 janelas independentes de captura deram 0–16% de amostras ativas, com a rota privada da sessão `verified=True` em 20 amostras, sink/stream a 100% e não-mudo, ROM a ~60 fps e probe_playing=1.",
+        "Leitura direta do monitor do sink nulo PRIVADO da própria sessão reproduziu o quadro (12,3% não nulas) → o problema não é o segundo sink criado por `capture_audio.py`.",
+        "Janelas curtas (2 s) não melhoraram; o mesmo par de ferramentas gravou 94–100% em M2 (2026-10-12) no mesmo host.",
+        "Sinais do host no momento: sink físico `alsa_output…Speaker` com Mute: yes / 0% / -inf dB; JamesDSP ativo; PipeWire 1.6.8; load 2,67.",
+        "`audit_audio.py` terminou com '[FAIL] mix fraco: 2% ativo < 90%' depois de `[OK] … peak=1995 samples=720896` — ou seja: sinal real, presente, mas intermitente."
+      ],
+      "inference_not_proven": "A hipótese dominante é afamamento de rota no host (re-roteamento/política de áudio/efeito JamesDSP sobre o sink nulo, ou underrun do stream PCM da JVM sob carga), não a ROM. Não há medição que separe isso ainda; nenhuma das 8 janelas é prova de causa.",
+      "not_attempted": "Não mexi no serviço de áudio do host (estado compartilhado) e não reiniciei PipeWire/JamesDSP. Isso é decisão do dono.",
+      "rule_tension": "§93 já exige 'Verificar a rota real antes de run/step/sequence/video e recusar avanço se ela mudar' e a ponte faz isso — a rota estava verificada e mesmo assim o PCM chegou quase vazio. Logo §93 não cobre 'verificada mas faminta'.",
+      "evidence": {
+        "capture_log": {
+          "path": "SMS_projects/pulso_de_cristal/out/logs/capture_m3_run2.log",
+          "sha256": "c9c6553e84252526f32e16e17b08d20065fb03668079e5d0ee4445697770ede3",
+          "lines": "estágios B (counters+fps+check-bundle PASS) e C (peak=1995 / audit_audio FAIL 2% ativo)"
+        },
+        "driver_script": {
+          "path": "SMS_projects/pulso_de_cristal/tools/capture_m3_arc.sh",
+          "sha256": "45a4fbcfae462b69e2187b829b45b7db7a98f681b7c3a7638f1932e5d326a938"
+        },
+        "runtime_probe": {
+          "path": "SMS_projects/pulso_de_cristal/out/evidence/sessions/612965ddb4ad48218d127a6d173eb7b6/runtime/runtime_probe_m3.json",
+          "sha256": "227758341950761176ffda739dcfc13a67ffe7b7695862b6d69c387571366129",
+          "note": "fps_measured 59,67; janelas 59,67/59,64/59,83; spread 0,19; rom_sha256 ba933b0b…; audio_active_pct null (a própria sonda não mediu áudio)"
+        }
+      },
+      "proposal_not_applied": [
+        {
+          "id": "P1_triagem_de_rota_de_audio",
+          "change": "Workflow de triagem (novo passo em `emulator-isolated-session.md` ou `production-diagnostic-triage`): quando `audit_audio.py` reprovar por % ativo com peak válido e rota verified, medir em três camadas antes de culpar a ROM — (1) monitor do sink privado da sessão, (2) estado/mute/volume do sink físico, (3) presença do stream do PID da JVM. Declarar `audio_claim_unproven_host` em vez de 'áudio OK' ou 'áudio FAIL da ROM'.",
+          "tool_that_measures_proposed": "nova sonda `audio_route_triage.py` (não existe; hoje a triagem é manual e não deixa artefato)",
+          "human_approval": "pending"
+        },
+        {
+          "id": "P2_limite_de_audit_audio",
+          "change": "Registrar no próprio `audit_audio.py` o limite medido: o piso é RMS absoluto (`active_floor=90.0`, `tools/sms_wrapper/audit_audio.py:74`), então mix genuíno porém atenuado/intermitente lê como 'mix fraco'. Separar 'sem sinal' de 'sinal presente mas afamado' (peak>0 e % ativo baixo) e nunca promover 'peak alto' a prova de música correta.",
+          "tool_that_measures_proposed": "audit_audio.py (eixo novo de diagnóstico, ainda sem --self-check para o caso)",
+          "human_approval": "pending"
+        }
+      ],
+      "refutada": {
+        "data": "2026-10-14",
+        "causa_real": "Duas causas, nenhuma delas o PipeWire/JamesDSP: (1) na ROM, `PSGSetMusicVolumeChannelsAttenuation` é SET dos quatro nibbles do mixer e não estado por faixa — a rampa de saída deixava atenuação 15 armada e a cena seguinte começava muda; (2) no host, o ganho estava baixo e foi elevado pelo próprio dono a pedido ('para o ponto 2 eu aumentei o volume').",
+        "medida_discriminante": "Mesma rota, mesmo sink privado, mesma métrica `audit_audio`. Pré-correção: peak=0 (tomada 1) e peak=1995 / ativo 2% (tomada 2), com rota verified=True e probe_playing=1. Pós-correção na ROM f4f8ee3f: w1 peak 2937 / 71%, w2 peak 2872 / 89%, w4 peak 5646 / 93% [PASS], w4b (controle, zero presses) peak 5647 / 89%, w6 reprise peak 5673 / 89%. De volta à banda selada no M2 (dawn 5504, storm 6030). O W5 (peak=0 / rms=0 / 0%) sobrevive como caso positivo: ali o silêncio É o claim, e a sonda `probe_frame` 476→920 prova que o núcleo rodava.",
+        "o_que_a_hipotese_de_host_ensinou": "A hipótese errada custou tempo mas deixou instrumento: para excluí-la foi preciso medir estado da ROM junto com o áudio (probe_state/track/playing + frame), o que virou o W5/W6 e a matriz de Pause. Áudio sem estado é apenas 'tocou alguma coisa'.",
+        "evidencia": [
+          {
+            "path": "out/logs/capture_m3_run1.log",
+            "sha256": "77b6d7a3f355eb4134e679ee7016f1e5ab751b7197887fb70912fc4a4b19728e"
+          },
+          {
+            "path": "out/logs/capture_m3_run2.log",
+            "sha256": "c9c6553e84252526f32e16e17b08d20065fb03668079e5d0ee4445697770ede3"
+          },
+          {
+            "path": "out/escuta/w2_dawn_continuous.audio.json",
+            "sha256": "0013e51b763d2acd8624bbe7b02394e8ffe1330d3597c063391ef1c87ba8c87e"
+          },
+          {
+            "path": "out/escuta/w4_dawn_mix.audio.json",
+            "sha256": "8a9f645c72ab03b37fcfc90c399c1c7a95537b814e9a40d9788439b4b24a4eb6"
+          },
+          {
+            "path": "out/escuta/w4b_dawn_control.audio.json",
+            "sha256": "b49e582993e7f3c21a0eddddc828918f07e40acc62ff61c2a705c689962cb3be"
+          },
+          {
+            "path": "out/escuta/w5_dawn_silent.audio.json",
+            "sha256": "6e0c0c1e3bb46dffcc95d0e83f7944703087f3154d89b934e1327d09afb76433"
+          },
+          {
+            "path": "out/escuta/w6_dawn_reprise.audio.json",
+            "sha256": "726a077cfc31caa17dc26630d587690063b0cf95b340842c5dcf361ca0b91e5b"
+          },
+          {
+            "path": "out/logs/m3_audio_W56_r13.log",
+            "sha256": "af3dc552a401c5c23ed2ce9f3ee9fc1199704fe9c81a81992c383b7bf741171b"
+          },
+          {
+            "path": "out/rom/pulso_de_cristal.sms",
+            "sha256": "f4f8ee3f4c2a720a1da696fe7a84235a787cc1edeba5d0eb25d9592f5b2eb331"
+          }
+        ],
+        "claim_bloqueado_agora": "Nenhum. O eixo de áudio da M3 está capturado e casado com rom_sha256=f4f8ee3f nas 8 janelas. O que ainda não existe é veredito humano de escuta (cabine `tools/m3_escuta.py`, 8 janelas) — que é decisão do dono, não bloqueio de host."
+      }
+    }
+  ],
+  "candidate_lessons_no_id_emitted": [
+    {
+      "candidate_key": "psglib_attenuation_is_set_not_accumulate",
+      "why_no_id_yet": "O fato da API é verificável no header (autoridade #8), mas a CONSEQUÊNCIA audível que motiva a regra (música da cena seguinte continua atenuada) não foi medida em emulador porque o eixo de áudio está bloqueado. Registrar ID com status 'resolvido' seria falso verde (§19).",
+      "observed": [
+        "`sdk/devkitSMS/PSGlib/PSGlib.h:51-54`: `PSGSetMusicVolumeChannelsAttenuation(a0,a1,a2,a3)` é um macro que monta UMA palavra (nibbles por canal, `&0x0F` em cada) e chama `PSGSetMusicVolumeChannelsAttenuation_f(word)`. É um **SET** de 0–15 por canal, não um acumula/delta; `PSGSetMusicVolumeAttenuation(a)` é o caso uniforme.",
+        "`SMS_projects/pulso_de_cristal/src/main.c:313-317`: `apply_ramp()` só re-aplica enquanto `fade_att != 0xFF` (sentinela 'rampa desligada'). Depois do último frame da rampa, nada mais escreve atenuação — o valor remanescente é o último da rampa (4 ⇒ cerca de −12 dB).",
+        "PSGlib é binário fechado neste SDK (`sdk/devkitSMS/PSGlib/` contém só `PSGlib.h` + `PSGlib.lib`): a pergunta 'o driver re-aplica a atenuação gravada a cada evento do stream?' não é decidível pelo fonte local."
+      ],
+      "inference": "Se PSGlib grava a atenuação como estado do mixer, uma rampa que termina sem write final de `0` deixa a FAIXA SEGUINTE mais baixa — fade-out sem fade-back-in. Consequência direta no roteiro: a cena 04 pede silêncio final e a cena 02 pede rampa; 'desligar a rampa' não é o mesmo que 'zerar a atenuação'.",
+      "proposed_rule_section": "SMS_GLOBAL §12 (família PSGlib/áudio) — redação sugerida: atenuação PSGlib é estado SET por canal; desligar uma rampa sem escrever o valor alvo deixa o último valor em vigor; quem usa rampa deve re-aplicar ou zerar explicitamente e provar no áudio capturado.",
+      "tool_that_measures_proposed": "nenhuma hoje; candidato: sonda ROM-side do registrador de volume + `audit_psg_quality.py` lendo a política de volume declarada no manifesto (o gate atual mede eventos/política de stream, não estado de mixer). Bloqueado pelo item de host acima.",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md + workflow de integração de áudio",
+      "human_approval": "pending"
+    },
+    {
+      "candidate_key": "bridge_negative_checks_and_port_masks",
+      "why_no_id_yet": "Três armadilhas concretas da ponte, todas já cobertas em espírito por §93/L057 (evidência de recebimento ≠ aplicada ≠ consequência observada; proibição de pgrep/pkill). O que falta é a faces específicas que a doutrina não nomeia; pode ser emenda de §93 e do workflow em vez de ID novo — decisão do dono.",
+      "observed": [
+        "`session_bridge/isolated.py:528` expõe `--p1/--p2/--console` como **jogadores**, não como botões. Na tomada 1 do M3 usei `p2` achando ser SELECT: a FSM nunca recebeu o toque, caiu em atração e 'andou o arco sozinha' — a evidência parecia válida e media outra coisa. SELECT é bit 32 do PORT_A do **p1** (START = 16).",
+        "`input`, `read` e `capture` pausam a instância. Sem um `run` de volta a ROM fica parada e o PCM é silêncio: a mesma tomada 1 deu `peak=0`. Em `capture_audio.py` isso é fatal porque a ferramenta abre a sessão, pausa para medir e grava o vazio.",
+        "`emulator_session.py isolated` **não tem** subcomando `list`. Minha primeira checagem de 'sessão zumbi' foi `isolated list` lido como 'nenhuma sessão' → verificação negativa vacua. A checagem real exige `pgrep -af` no binário do emulador e inspeção do diretório de runtime.",
+        "`capture_audio.py --seconds` é `type=int`: `--seconds 1.5` aborta antes de medir."
+      ],
+      "proposed_rule_section": "emenda a §93 (nomear as máscaras de porta por jogador; declarar que input/read/capture pausam e que todo avanço precisa de `run`; proibir verificação negativa cujo comando não existe) + emenda a `workflows/emulator-isolated-session.md`",
+      "tool_that_measures_proposed": "a ponte já tem `self-check`/`check-bundle`/`audio_acceptance.py`; o candidato real é um `isolated list` (ou `status --all`) para que a checagem de zumbi deixe de ser feita na mão",
+      "human_approval": "pending"
+    },
+    {
+      "candidate_key": "medida_de_energia_cega_a_arbitracao_de_substituicao_de_canal",
+      "why_no_id_yet": "O fato é verificável no código da PSGlib (SFX escreve no canal autorado em vez de somar), mas a regra que dele decorre — 'diferencial RMS não é instrumento de audibilidade sob arbitração de substituição' — precisa decidir onde mora: §12 (família PSGlib) ou §93 (método de evidência). Não emito ID.",
+      "observed": [
+        "W4 (dois SELECT frame-atômicos, cnt_sfx_crystal 0→2, probe_state=2 verificado) vs W4B (mesmo roteiro de frames, SELECT sempre 0, cnt=0): mesma wav-route, peak 5646 vs 5647, transientes detectados pelo diferencial = 0, delta máximo +0,080.",
+        "W3 (presses de parede, 1 s/1 s) deu 8 transientes para 2 presses esperados: o timing de parede mudou a FASE da música entre as janelas, não o SFX.",
+        "`tools/m3_caso4_diff.py --self-check` passa (out/logs/m3_caso4_diff_selfcheck.txt), logo a ferramenta não está quebrada — ela mede energia, e energia não muda quando o canal é substituído."
+      ],
+      "proposed_rule_section": "§12 ou §93: declarar que prova de SFX sob arbitração usa (a) contador ROM-side + estado da FSM no mesmo frame e (b) julgamento humano; proibir promover diferencial de energia a 'ouvi o ataque'.",
+      "tool_that_measures_proposed": "nenhuma nova; o que falta é o gate atual ler a declaração de método (diferencial é cego por construção) em vez de o agente interpretar. Candidato fraco: `audit_psg_channel_binding.py` ganhar um modo 'substituição' que explica o teto esperado do diferencial.",
+      "human_approval": "pending"
+    },
+    {
+      "candidate_key": "delta_de_vcounter_em_modulo_256_vira_custo_plausivel",
+      "why_no_id_yet": "É armadilha de instrumento de medição (família L061/L089/§19), mas a cura pode ser um check no próprio corredor de sondas em vez de lição nova. Decisão do dono: emenda a `audit_probe_corridor.py`/`measure_worst_frame.py` ou ID.",
+      "observed": [
+        "`ph_state_max_sat[3]` (CUT_STORM) e `[5]` (FADE_ECO) leram **251** linhas; `ph_stream_max` leu **255**. Os dois são `(cp_sat - cp_hud) mod 256` e `(cp_stream - cp_sat) mod 256` (`src/main.c:1083-1084`) quando o checkpoint do fim do trecho não é alcançado naquele estado — 251 = -5, 255 = -1.",
+        "Um valor desses é *mais plausível que zero*: 251 linhas passaria por custo real de VBlank em qualquer revisão apressada e entraria no doc como orçamento. Só a comparação com `ph_sat_lines=13` global e o conhecimento do caminho do código denunciou.",
+        "Mesma família do L089 (corredor invadido pela biblioteca) e do wrap do VCounter que o `audit_vscroll_wrap` trata para scroll: diferença é que aqui o wrap acontece na ARITMÉTICA da sonda, não no registrador."
+      ],
+      "proposed_rule_section": "§19/§49 (ferramenta de medição): diferença de VCounter só é custo quando ambos os checkpoints foram gravados no MESMO frame; exigir sentinela de visita por checkpoint ouclamp explícito na ROM-side.",
+      "tool_that_measures_proposed": "extensão de `measure_worst_frame.py`/`audit_probe_corridor.py`: reprovar leitura de máximo que exceda o teto físico do trecho anunciado no contrato (linhas de VBlank) em vez de confiar no número do probe.",
+      "human_approval": "pending"
+    },
+    {
+      "candidate_key": "silencio_autoral_aborta_o_gate_e_set_e_mata_a_sonda",
+      "why_no_id_yet": "Cruza ferramenta do wrapper (`capture_audio.py`) com doutrina de gate: a primeira é curadoria de `tools/`, a segunda já existe em espírito (§19, P2 do mesmo dossier). Registro sem tocar em wrapper.",
+      "observed": [
+        "`capture_audio.py` retorna não-zero quando vê 'silêncio adiantado'. Na janela W5 — onde o silêncio É o claim (Pause autoral, FSM viva) — isso matou o script inteiro sob `set -euo pipefail` antes da sonda de `probe_frame` rodar, produzindo zero artefato para um caso que precisava de dois.",
+        "Correção local: `|| true` na captura + leitura de `probe_frame` antes e depois da janela, para que o peak=0 não possa ser lido como 'emulador congelado'."
+      ],
+      "proposed_rule_section": "§93/§45: separar na ferramenta 'falha de captura' (vieram zeros porque a rota morreu) de 'conteúdo silencioso' (zeros com núcleo avançando). Enquanto isso, quem mede silêncio precisa casar peak=0 com frame que avança.",
+      "tool_that_measures_proposed": "candidato: `capture_audio.py --expect-silence` (ou `--allow-silence`) exigindo a testemunha de frame; hoje o exit code é o único canal e ele não distingue os dois casos.",
+      "human_approval": "pending"
+    },
+    {
+      "candidate_key": "sonda_pausa_o_nucleo_e_o_orcamento_de_poll_pula_a_janela_da_cena",
+      "why_no_id_yet": "Deriva da armadilha já nomeada (input/read/capture pausam) mas o corolário é novo: cada `read` consome tempo de parede sem gastar frames de cena, então o orçamento de espera em estados de vida curta precisa ser contado em SONDAS, não em segundos. Pode virar emenda de §93, não ID.",
+      "observed": [
+        "Palco F do `capture_m3_arc.sh`: `wait_state 2 40` (40 sondas, sleep 1) nunca alcançou DAWN — observado 4 (STORM) — porque entre sondas o núcleo fica pausado e a cena tardia chegou depois do orçamento. Com `limit=160` e `sleep 0.4` DAWN foi medido.",
+        "O mesmo efeito faz um segmento `video` pós-`read` gravar `distintos=1` se não houver `run` de volta: congelado, não curto."
+      ],
+      "proposed_rule_section": "§93 (workflow `emulator-isolated-session.md`): orçamentos de espera em cena de vida curta contam em sondas × frames-effective, e todo `read` exige `run` antes do próximo `video`/`capture`.",
+      "tool_that_measures_proposed": "nenhum novo; a ponte já relata `frame` por operação — o candidato é uma assert de 'avanço de frame entre duas sondas' no próprio wrapper de wait.",
+      "human_approval": "pending"
+    },
+    {
+      "candidate_key": "eixos_de_entrega_leem_top_level_e_a_rota_de_sessao_publica_em_bundle",
+      "why_no_id_yet": "E divergencia entre `reconcile_claims.axis_support` (glob `out/evidence/*.wav`, `out/evidence/evidence.json`, `out/evidence/fps.json`, `out/evidence/input_memory.json`) e a rota que SMS_GLOBAL §93 manda usar: `capture_evidence.py --session` publica apenas em `out/evidence/sessions/<id>/` e `measure_runtime_probe.py` escreve `runtime_metrics_v1` no bundle. Nao e falta de medida, e caminho. Mexer em `tools/sms_wrapper/` exige aprovacao humana; por isso registre aqui, e o agente nao fabricou JSON conjectural em `out/evidence/`.",
+      "observed": [
+        "build_inner deriva `axes.audio=true` depois de publicar as 8 janelas em `out/evidence/` com `cp -p` (mesma data de origem) + manifest hasheado; o glob le `.wav` soltos, entao a copia honesta fecha o eixo sem tocar no wrapper.",
+        "`boot_emulador` continua false embora `out/evidence/sessions/4246092d.../capture.json` traga `informative=true` com `rom_sha256=f4f8ee3f` e `check-bundle` PASS.",
+        "`fps_constante` continua false embora `.../5f325212.../runtime/runtime_probe_m3_fps6.json` traga `fps_constante=true` em 6 janelas (59,62-59,81) casadas com a mesma ROM. O eixo pede chave `constante_50_60`, e o instrumento da rota privada usa `fps_constante`: nomes diferentes, mesmo fato.",
+        "`gameplay` pede `evidence.json.interaction_proven` OU `input_memory.json` (input_provado + canal_teclado_vivo + SHA). Nenhum writer do wrapper produz `input_memory.json`; o precedente do vizinho `SMS_projects/kage_matsuri/tools/prove_input_memory.py` (934 linhas) usa kdotool/ydotool + DAP desktop, rota que §93 trata como historica.",
+        "Veredito do gate apos publicar audio: `reconcile_claims.py --project` -> `[PASS] eixos declarados batem com os artefatos de evidencia`, eixo restante reportado pelo build como ['boot_emulador','gameplay','fps_constante']."
+      ],
+      "proposed_rule_section": "§93 + `build_inner.py`/`reconcile_claims.py`: ou o axis_support passa a ler o bundle da sessao privada (com SHA da ROM casado), ou existe uma rota de publish declarada (`--publish-axes`) que copie os artefatos reais para `out/evidence/` com binding, como fiz a mao para o audio. Decidir tambem se `fps_constante` (runtime_metrics_v1) e `constante_50_60` (fps.json) sao a mesma medida sob dois nomes.",
+      "tool_that_measures_proposed": "`reconcile_claims.axis_support` ja e o medidor; o candidato e ele aceitar dois destinos. Um teste de regressao no proprio `reconcile_claims` (o arquivo ja tem casos PASS/FAIL) cobre a mudanca.",
+      "human_approval": "pending"
+    },
+    {
+      "candidate_key": "flag_de_saida_de_relatorio_com_parte_nominativa_de_entrada",
+      "why_no_id_yet": "A cura provavel e uma emenda de §19/§45 (ferramenta de medicao) mais uma convencao de CLI do wrapper, e ambos sao curadoria com aprovacao humana. Registro com a medida em vez de emitir ID.",
+      "observed": [
+        "Custo real ja pago nesta data: 19.179 chars de candidatos destruidos por um veredito de 37 bytes (`audit_learning_capture.py --root . --json <dossie>`), restituidos por replay com cadeia de SHA em `lesson_routes.json...restore_chain`.",
+        "13 ferramentas com o mesmo formato, zero guardas (lista acima). Qualquer uma apontada para `build_record.json`, um manifest de proveniencia ou um dossie apaga o arquivo sem aviso e sem dirty-check.",
+        "O nome do flag e o que faz a leitura errar: em outras ferramentas do repo `--json <arquivo>` significa 'leia/produza JSON', e `--out`/`-o` e que e destino.",
+        "SEGUNDA INSTANCIA, AO VIVO E DURANTE A PRODUCAO DESTE DOSSIE: as 23:33 de 2026-10-14 o JSON de licao de OUTRA sessao (A9 SMSPower, mapa de VRAM) foi substituido pelo veredito limpo de uma auditoria. O arquivo hoje tem 37 bytes, mtime 2026-10-14T23:33:42, sha256 89924049fe579430, e conteudo literalmente \"{\\n  \\\"problems\\\": [],\\n  \\\"clean\\\": true\\n}\". Nenhum comando desta sessao passou caminho como --json; os quatro formatos que produzem exatamente esse objeto sao audit_learning_capture, audit_hardware_constants, audit_header_claims e audit_debug_markers (todos `json.dump({\"problems\": ..., \"clean\": ...}, open(<args.json>,\"w\"))`).",
+        "Consequencia imediata e mensuravel: `audit_learning_capture.py --root .` (sem --json) passou a devolver 3 derivas, sendo 1 delas `lesson_routes ID desconhecido/duplicado: <a-lição-da-outra-sessao>` porque a linha de `lesson_routes.json` aponta para o caminho que agora contem um veredito. O framework inteiro fica vermelho por causa de um --json mal enderecado, e a causa nao esta no codigo desta sessao.",
+        "RETIFICACAO MEDIDA AS 23:44 (a nota acima subestimava o dano): o veredito de 37 bytes NAO e so um acidente de arvore suja -- ele foi COMMITADO em 74543b9 ('curation(framework): aplica A9 SMSPower (L133/§124)', 23:43). Medida: `git show HEAD:<victim>` devolve os mesmos 37 bytes e o mesmo sha256 89924049 do disco, e `git status` daquele caminho esta LIMPO (nada modificado). Portanto o git nao contem nenhuma copia da licao: a unica instancia do texto existe na transcricao da sessao que o escreveu.",
+        "O que sobreviveu e o que nao sobreviveu, medido em HEAD: id_registry `issued_through = L133`; `lesson_routes` linha L133 -> sources [doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json], rule_section 'SMS_GLOBAL §124', status 'fechada_com_ferramenta'; §124 tem 67 linhas de corpo na doutrina; `tools/sms_wrapper/measure_vram_map.py` existe (15.735 B). A LEI e a FERRAMENTA estao intactas; o que virou veredito e o registro machine-readable da licao -- exatamente o que os gates `audit_learning_capture` (§21/§43) usam para provar que a licao existe. Um scan `wc -c doc/curation/*.json < 120` devolveu UMA linha: este arquivo."
+      ],
+      "proposed_rule_section": "§19/§45: ferramenta de auditoria nao pode ter um flag de saida que aceite caminho de dado preexistente sem (a) nome de saida explicito (`--report-out`/`--out-report`), (b) recusa quando o caminho existe e nao contem a chave propria do relatorio, ou (c) restricao a `out/logs/`.",
+      "tool_that_measures_proposed": "check em `validate_measurement_tools.py`: para cada ferramenta da lista, reprovar se houver `add_argument(\"--json\")` sem `metavar` de saida e sem guarda de caminho existente; hoje o validator so prova `--self-check`, entao a superficie de perda de dados e invisivel ao canon.",
+      "evidencia": [
+        "tools/m3_escuta.py sha256=bb5838f75bdc2ad8e2de43e9a5fb735a9fb20b53f38e7d7c9e2f2b8a5bac4485",
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json (harness_traps_local_only[5])"
+      ],
+      "human_approval": "pending",
+      "proposta_de_reparo_para_hoje": "Nada foi escrito no arquivo da outra sessao. Duas rotas humanas, e a escolha e do dono: (a) replay da transcricao da sessao A9 (mesmo metodo que restaurou este dossier) e `git add` por cima do commit; (b) redigir o JSON a partir de §124 + measure_vram_map.py + evidencia -- a sessao A9 pode fazer isso com autoridade; esta sessao nao, porque nao assinamos licao alheia."
+    },
+    {
+      "candidate_key": "gate_humano_precisa_de_verify_e_ingestao_casada_por_sha",
+      "why_no_id_yet": "Dono provavel e o workflow de sessao/validacao humana (§93) ou a regra de claims (§45), ambos canonicos e com aprovacao humana pendente. O instrumento ja nasceu local (tools/m3_escuta.py) e mede; o que falta e a regra dizer que 'gate humano sem ingestao casada' e claim sem lastro.",
+      "observed": [
+        "A cabine M3 exportava veredito por download do navegador; o memory bank prometia `out/logs/m3_escuta_verdict.json`, caminho que NENHUM código escrevia. Claim de artefato sem modo que o produza.",
+        "`--verify` na cabine real: 8 janelas byte-identicas entre o blob base64 do html, `out/escuta/*.wav` e `out/evidence/*.wav`, todas com `rom_sha256=f4f8ee3f` e gate `audit_audio_<janela>.txt` presente (0 defeitos).",
+        "`--self-check` exercita 6 casos e passa: aceita veredito integro; recusa ROM divergente; recusa cabine stale (gerado_em != html atual); recusa wav trocado; recusa janela nao julgada; recusa veredito fora do vocabulario (aprovado/ajustar/reprovado/pendente). Vereditos sinteticos vao para tmpdir, nunca para `out/`.",
+        "A recusa por `gerado_em` e a que importa: sem ela um veredito de uma tomada anterior passa a valer como decisao sobre a ROM nova."
+      ],
+      "proposed_rule_section": "§93/§45: todo gate humano precisa de (a) `--verify` contra o disco (o que o instrumento serve == a evidencia hasheada), (b) ingestao do veredito com binding de ROM+SHA por item, e (c) doc que cite o caminho que a ferramenta escreve, nao o que o navegador baixa.",
+      "tool_that_measures_proposed": "`tools/m3_escuta.py --verify` e `--self-check` ja existem e provam; o candidato canonicamente e um check generico que exija, para qualquer cabine listada num doc de bloqueio, os dois modos acima.",
+      "evidencia": [
+        "tools/m3_escuta.py sha256=bb5838f75bdc2ad8e2de43e9a5fb735a9fb20b53f38e7d7c9e2f2b8a5bac4485",
+        "out/escuta/m3_escuta.html sha256=dfacba8ab7f14ec0ffb43f975ea7fa51947c3b3ef57fade27c6da837da7505c9",
+        "out/evidence/audio_m3_manifest.json sha256=4a02d9292d11c0406731258075d637b974672f193e457b5e3a43765a0f06bfa9"
+      ],
+      "human_approval": "pending"
+    },
+    {
+      "candidate_key": "hash_pre_desastre_registrado_e_o_unico_prova_de_restauracao",
+      "why_no_id_yet": "Dono provavel e a regra de captura de licao (§21/§43) ou o workflow de curadoria (`curation-learning.md`), ambos canonicos com aprovacao humana pendente. A mecanica ja funciona na pratica; falta a regra exigir que todo lesson JSON tenha SHA registrado ANTES de qualquer gate poder sobrescreve-lo.",
+      "observed": [
+        "git NAO salvou: o clobber foi commitado (74543b9) com o veredito de 37 bytes dentro, entao HEAD == dano.",
+        "file-history do host NAO snapshotou: quem escreveu o dano foi o `--json` de uma ferramenta wrapper (linha 2742 da transcricao A9), invisivel as ferramentas de escrita do agente.",
+        "O que permitiu restaurar com prova foi o sha256 do arquivo BOM registrado em lesson_routes.application_records pela propria sessao A9 minutos antes do dano (comando da linha 2675).",
+        "Reconstrucao deterministica a partir da transcricao: conteudo do Write + Edit aplicado, com `assert old_string unico`, JSON valido e SHA conferido contra o binding. 7.273 B, identico.",
+        "Sem o hash pre-existente a restauracao seria 're-escrevi a licao', ou seja, esta sessao autoria de conteúdo alheio. A diferenga entre recuperacao e invencao e o binding anterior."
+      ],
+      "proposed_rule_section": "§21/§43 (ou `curation-learning.md`): cada lesson JSON novo e imediatamente hasheado e vincado num registro que a ferramenta de captura ja le (o application_records serve a dois propositos: binding de frescor E checkpoint de recuperacao). Gate que escreve veredito num caminho de licao sem checar conteudo pre-existente continua sendo o defeito pai (familia das 13 ferramentas com `--json`-destino).",
+      "tool_that_measures_proposed": "extensao de audit_learning_capture.py: para cada application_record, ler o disco e reportar `binding_divergente` ANTES de qualquer escrita; e um `--restore-check` que refaz o hash do arquivo e declara igual/diferente do binding.",
+      "evidencia": "este dossier, emenda `23:58` (sha 7e725673..., 7.273 B); cadeia completa em lesson_routes.json limits[].restore_chain.restauracao_l133_rota_a",
+      "human_approval": "not_applied; pending"
+    }
+  ],
+  "applications_of_existing_lessons": [
+    {
+      "lesson_ids": [
+        "L082",
+        "L089",
+        "L097"
+      ],
+      "section": "§67 (VCounter marca o início do VBlank), §103 (delta modular ≠ incidência exata)",
+      "what_was_applied": "A reconciliação 58 vs 64 linhas do pior-frame é exatamente §67: no NTSC 192 linhas as 70 linhas de blank aparecem como 0xC0–0xDA e 0xD5–0xFF, ou seja, 6 linhas são contadas duas vezes e 6 nunca aparecem na aritmética de um contador de 8 bits. A sonda bruta por estado (`peek_r11.txt`) deu `ph_state_max_sat[3]=251` e `[5]=251` — artefato de volta do contador, NÃO atribuição de custo: esses máximos não podem ser publicados. O número publicável é o do `measure_worst_frame.py` com correção de serial (raw 194/230/243/252 → 0/42/13/9 linhas por etapa, total 64), com `vovf_delta=0` e `vline_min=203`.",
+      "new_evidence": {
+        "worst_frame_r12": {
+          "path": "SMS_projects/pulso_de_cristal/out/evidence/worst_frame_r12.json",
+          "sha256": "110cad5ffb4b8e6988e178176fd5bd3861ebc8056eaa8e72b49fe598972afd81",
+          "rom_sha256": "9f5f8bdfac9d481d0329235ddaa12ecedb95a2b0830a9b1c4cd268754cbcf042"
+        },
+        "peek_r11": {
+          "path": "SMS_projects/pulso_de_cristal/out/logs/peek_r11.txt",
+          "sha256": "32a85c38216a2719a943050ab1fb9a7c1da664e0a46d5bfa1d9acfd5059b1405",
+          "note": "frame 6297, vovf 0, nove spill_* = 0, ph_worst_total 58 (bruto) — os máximos por estado que dão 251 ficam aqui, como artefato reconhecido"
+        }
+      },
+      "proposal_not_applied": "adicionar ao `--self-check` de `measure_worst_frame.py` (ou a um gate de attribution) o caso 'máximo por estado = 251 é wrap, não custo'; hoje a regra vive em prosa e na leitura humana do peek.",
+      "human_approval": "pending"
+    },
+    {
+      "lesson_ids": [
+        "L061"
+      ],
+      "section": "§49 (orçamento de frame se mede com instrumento na ROM) + doutrina de audácia ('fechar orçamento sem medir o degrau seguinte é timidez')",
+      "what_was_applied": "Cadeia de degraus r6→r12 medida, cada elo com JSON próprio: as transições em modo 'mapa inteiro no blank' fecharam em **2 linhas/frame** (12 frames); 3 linhas/frame derramou. Os números anteriores tinham sido obtidos via `setTileatXY` (185 linhas de blank) e via cursor (12 linhas/frame ainda estourava). Consequência: o orçamento de transição é um número medido, não um 'parece pouco'. FICA UMA DÍVIDA: o selo oficial do pior-frame está em ROM `9f5f8bdf`, e a ROM entregue do M3 é `ba933b0b` — re-sellar antes de fechar doc/13.",
+      "new_evidence": {
+        "chain": "SMS_projects/pulso_de_cristal/out/evidence/worst_frame_r{4,5,5b,5c,5d,6,7,8,9,10,11,12}.json",
+        "commented_in_source": "SMS_projects/pulso_de_cristal/src/main.c (comentários de degrau medido junto a shards_frame e às transições), sha256 ad27c8be57d15a210ca6034dabd4e29310411b28f379cb4498958adef291abfa"
+      },
+      "human_approval": "n/a (aplicação local ao projeto, sem mudança canônica)"
+    },
+    {
+      "lesson_ids": [
+        "L079",
+        "L078"
+      ],
+      "section": "§64 (bit2=1 é branco no latch 0xE0|fb|per), §63 (presença e política não aprovam composição)",
+      "what_was_applied": "O emissor da trilha gravava `0xE0 | (shift & 3)`, que **apagava o bit2** e produzia ruído periódico (assobio) onde a partitura pedia branco. Corrigido no emissor e nas partituras (modo 4–7); o `--self-check` do emissor agora exige branco por construção, e as três faixas com percussão medem `ruido_branco = 1.0`. É evidência nova para L079, não lição nova — e o registro histórico em `doc/13-spec-cenas.md:45` citava 'L128/§64', referência errada (L128 é o terminador 0xD0 da SAT, §118): **corrigido para L079/§64 nesta data**, sem tocar a doutrina.",
+      "new_evidence": {
+        "psg_quality": {
+          "path": "SMS_projects/pulso_de_cristal/out/logs/psg_quality_m3b.json",
+          "sha256": "546f0f87a24623f92eeb05864daec09b7bdb8a8765355ed54e6c3ad29d0643c3"
+        },
+        "spec": "SMS_projects/pulso_de_cristal/doc/13-spec-cenas.md (tabela MEDIDO 2026-10-14: 7079 B de 16384 = 43,2% de ROM em áudio)"
+      },
+      "human_approval": "n/a para a aplicação; a correção de citação em doc/13 é doc do projeto"
+    },
+    {
+      "lesson_ids": [
+        "L057",
+        "L089"
+      ],
+      "section": "§93 (sessão privada) + corredor de sondas aprovado pelo dono",
+      "what_was_applied": "Corredor de sondas relocado para base `0xC900` com aprovação humana explícita, gate `audit_probe_corridor.py` criado, e report selado: `sondas=87 folga=383 veredito=pass`. L089 (símbolo não-ABS dentro do corredor) deixa de ser prosa: AGENTS.md já tem a linha do gate.",
+      "new_evidence": {
+        "corridor": {
+          "path": "SMS_projects/pulso_de_cristal/out/logs/probe_corridor_report.json",
+          "sha256": "ad0302fa1cfcd87e35979cb6210f139a04f043ac89f841b73ab465a4773df7dd"
+        }
+      },
+      "human_approval": "aprovado em 2026-10 (realocação + gate); revisão pendente das edições em tools/sms_wrapper (PROBE_VLINE_MIN 0xC7EF→0xC7D2, --probe-base, declared_probes)"
+    },
+    {
+      "lesson_ids": [
+        "L128",
+        "L129"
+      ],
+      "section": "§118/§119 (terminador 0xD0 só no modo 192; limite de 8/scanline é do buffer de parsing)",
+      "what_was_applied": "Cena 03 (tempestade) fechada por medição e não por sensação: 24 estilhaços na SAT, pico de 6/scanline em varredura de 192 frames, zero linhas overflow, zero colisão com 0xD0. O manifesto é derivado por script determinístico da própria aritmética da ROM (`seed → ciclo de 192 f → pico`), com `--self-check` asserting que o frame publicado é o pico da varredura — atribuição de origem, não cópia de número.",
+      "new_evidence": {
+        "manifest": {
+          "path": "SMS_projects/pulso_de_cristal/doc/scene_manifest_storm.json",
+          "sha256": "d96fafaca76a8310144cf1973c5b26ad32780fe05570a17df9b0ce5043872b2d"
+        },
+        "sim": {
+          "path": "SMS_projects/pulso_de_cristal/out/logs/sprite_line_sim_storm.txt",
+          "sha256": "fee77d5fa42347dd9bcb98cda6ee077d9ec973a2892a222411a2411bb2c67879",
+          "result": "{\"sprites\": 24, \"peak_per_line\": 6, \"overflow_lines\": 0, \"violations\": []} [PASS]"
+        },
+        "generator": {
+          "path": "SMS_projects/pulso_de_cristal/tools/gen_storm_sprite_manifest.py",
+          "sha256": "2e72c6d8bcb8d0a5f61dcbe0463e71d9b92716019148541b226d2c632add85ea",
+          "self_check": "[SELF-CHECK PASS] seed=ciclo=192f pico=6 linha=11"
+        }
+      },
+      "human_approval": "n/a"
+    }
+  ],
+  "harness_traps_local_only": [
+    "Scripts de diagnóstico com `set -euo pipefail` + `python3 gate.py … | tail` abortam no primeiro FAIL: o pipefail propaga o exit 1 do gate e o `tail` não o engole. Diagnóstico precisa de `|| true` explícito (senão a varredura para na primeira camada, que é exatamente a que se queria medir).",
+    "`pkill -f \"parec -d jdx_control.monitor\"` casou a própria linha de comando do shell e matou o comando em execução (exit 143), deixando um módulo de sink nulo órfão (limpo depois). Classe do bug já conhecida (self-match), mas aqui provou que o alvo 'inocente' também é perigoso.",
+    "`SearchWorkspace`/Grep em `sdk/devkitSMS/SMSlib/source/` — caminho inexistente neste SDK; a biblioteca local é binário fechado. Procurar fonte do SDK aqui é tempo perdido: o header é a autoridade.",
+    "`measure_worst_frame.py --out` é BASENAME: a ferramenta acrescenta `.json` e o arquivo nasce `worst_frame_r13.json.json`. Renomeei à mão; o trap é de leitura errada da ajuda, não da ferramenta.",
+    "`audit_learning_capture.py --json <caminho>` e DESTINO do relatorio, nao seletor de leitura: main() faz `open(a.json, \"w\")` e gravou o veredito de 37 bytes por cima deste dossie de 19.179 chars (2026-10-14 20:34). O gate le o mesmo arquivo que escreve quando o operador passa o caminho como valor da flag; nao ha aviso, nao ha checagem de conteudo pre-existente, e o arquivo nao estava no git. Correcao sugerida (curadoria, nao aplicada): renomear para `--report-out`, recusar caminho que exista e nao tenha a chave `problems`, ou escrever so em out/logs/.",
+    "O clobber do dossie nao e um defeito de uma ferramenta: `--json` e DESTINO de relatorio em 13 das ferramentas do wrapper, todas abrindo o caminho em \"w\" sem nenhuma guarda (medição 2026-10-14: `grep -l 'add_argument(\"--json\"' *.py` intersecado com `grep -E 'open\\(args?\\.json, *\"w\"\\)'` => 13 arquivos, 0 guardas). Lista: audit_debug_markers, audit_doc_sync, audit_hardware_constants, audit_header_claims, audit_learning_capture, audit_render_fidelity, audit_rom_asset_binding, audit_sprite_mode, audit_visual_delivery, measure_vram_map, reconcile_claims, screenshot_semantic_gate, validate_measurement_tools. Só measure_vram_map rotula o argumento (metavar=\"OUT\") e só audit_doc_sync diz na ajuda que grava relatorio.",
+    "Um --json de saida destruiu, em 2026-10-14 23:33, o JSON de licao de outra sessao (mesma familia das 13 ferramentas). Sintoma diagnostico: arquivo de licao com 37 bytes comecando por `{ \"problems\": [], \"clean\": true` = veredito de auditoria morando no lugar da lição. Checar `wc -c` dos JSONs de doc/curation antes de acusar o gate de burrice."
+  ],
+  "host_risks": [
+    {
+      "key": "luta_mugen_doc_io_error",
+      "severity": "ALTA (integridade de dados), fora do escopo do M3",
+      "observed": "`ls SMS_projects/luta_mugen/doc/` → 'Erro de entrada/saída'; `head` em `doc/10-memory-bank.md` → 'não foi possível abrir … Erro de entrada/saída'. Reproduzido em duas ocasiões separadas nesta sessão (2026-10-14). O restante do repo (SMSForge/pulso_de_cristal) lê normalmente.",
+      "interpretation": "Provável setor defeituoso / degradação do cartão onde o repo vive (mnt/sdcard). Não tentei reparo: qualquer ação aqui (fsck, cópia, remount) é decisão do dono e pode custar trabalho em andamento.",
+      "recommended_human_action": "Rodar verificação do meio e restaurar `SMS_projects/luta_mugen/doc/` a partir do git/backup ANTES de qualquer trabalho naquele projeto."
+    },
+    {
+      "key": "host_audio_state",
+      "observed": "sink físico `alsa_output…Speaker` em Mute/0%/-inf dB com JamesDSP ativo; PipeWire 1.6.8; load 2,67 durante a medição.",
+      "note": "Não alterei serviço de áudio algum (estado compartilhado). Registro porque é o candidato nº 1 para o bloqueio de captura."
+    }
+  ],
+  "closure": {
+    "canonical_promotion_performed": false,
+    "new_lesson_ids_emitted": false,
+    "registry_unchanged": true,
+    "registry_current": "L133 (medido 2026-10-14 a noite em doc/curation/id_registry.json; a manha deste dossier registrou L132 e nao estava errada: outra sessao aplicou o item SMSPower A9 e abriu L133/§124 com measure_vram_map.py. Esta registracao NAO emitiu ID e NAO tocou no registry.)",
+    "sms_global_unchanged": true,
+    "wrapper_unchanged_in_this_registration": true,
+    "all_proposals": "not_applied; human approval pending",
+    "next_gate_to_run": "audit_learning_capture.py sobre o dossier emendado; depois decisão humana da cabine (`tools/m3_escuta.py --open`) e do item P2 (piso de 90% do audit_audio sobre passagens autorais quietas)",
+    "leitura_dos_hashes": "Os `sha256` dentro de `open_blockers[].refutada.evidencia` e `amendments[].evidencia_nova` sao FOTOGRAFIAS da hora em que foram computados (manha, emenda da tarde, replacao da restauracao), nao promessa de igualdade com o disco hoje: doc/10, doc/13 e doc/17 continuam sendo editados depois de cada emenda. A cadeia do proprio dossier esta em `lesson_routes.json...restore_chain`.",
+    "observacao_de_coerencia": "Quatro ocorrencias de 'L132' foram substituidas por uma foto datada de L133. Licao operacional: dossier que fixa o maximo do registry em prosa apodrece no mesmo dia em repo multi-sessao; o correto e declarar 'medido em <data>, fonte <caminho>' e re-medir ao citar."
+  },
+  "dedup_key": "pulso_m3_candidatos_curadoria_aberto_audio_ponte_vcounter_degraus_l079_atenuacao_20261014_refutada_escuta4candidatos_20261014b_eixos_destino_e_clobber_do_dossie_20261014c_familia_json_destino_e_cabine_verify_20261014d_segunda_instancia_json_destino_20261014e_clobber_comitado_74543b9_20261014f",
+  "amendments": [
+    {
+      "data": "2026-10-14",
+      "quando": "fim de tarde, após o pedido de escuta do dono",
+      "mudou": "1 blocker de host virou FECHADA-REFUTADA com a medida discriminante; 4 candidatos novos sem ID; 1 harness trap novo. Nada foi apagado: o texto e as observações da manhã permanecem.",
+      "nao_mudou": "`lessons` continua vazia, `id_registry.json` intacto em L132, SMS_GLOBAL e `tools/sms_wrapper/` intocados, todas as propostas `not_applied` com aprovação humana pending.",
+      "evidencia_nova": [
+        {
+          "path": "out/evidence/worst_frame_r13.json",
+          "sha256": "e3c8141350dd0cef92adee2ac348083fbb035d0b74b3a08d80435394f7eed0ac"
+        },
+        {
+          "path": "out/logs/peek_r14.txt",
+          "sha256": "5c085b34cbf6e2ea28b9aa1f1087ec646d3149fc8cd7b684c58754928b6bb572"
+        },
+        {
+          "path": "out/logs/m3_arc_E_r13.log",
+          "sha256": "301b89d97510d583b849ebf32eb09a705b4c29b6b207ab2cf3d0b3235686b672"
+        },
+        {
+          "path": "out/logs/m3_pause_F_r13.log",
+          "sha256": "6dfdaf79237e429a489d36a5588a621b236cfb581e26c2c4127d9a5c9aeba9c8"
+        },
+        {
+          "path": "out/logs/m3_caso4_diff_w4.txt",
+          "sha256": "c03ca67faca6cacb58f37681b7a5fbd3da293a0dda83dd077d1e9994d826a601"
+        },
+        {
+          "path": "out/evidence/sessions/5f3252122bfc4f558b0cdea87c984c16/runtime/runtime_probe_m3_fps6.json",
+          "sha256": "1c64e723241b77925999476b831082cdc69092c8112bca558abaeaf93717b1f3"
+        },
+        {
+          "path": "doc/13-spec-cenas.md",
+          "sha256": "0ebef32981862bbcd6ad09498a128b283ef97966002e64f5286ecc5a3ae1ef02"
+        },
+        {
+          "path": "doc/17-state-transition-contract.md",
+          "sha256": "ae84760e0c0d4fcea8c196e0cce6d5d7c52a58aa31c19f52f29673405b94e2cc"
+        },
+        {
+          "path": "doc/10-memory-bank.md",
+          "sha256": "03f33d180189a17de698e25b979bdd0734c96443504f9add7edd5be2f684ebd6"
+        }
+      ]
+    },
+    {
+      "data": "2026-10-14",
+      "quando": "noite, após descobrir o clobber",
+      "mudou": "1 harness trap novo (o gate que sobrescreve o dossiê via --json) e 1 candidato novo (eixos leem top-level, rota privada publica em bundle). Além disso: RESTAURAÇÃO declarada do próprio arquivo.",
+      "nao_mudou": "`lessons` continua vazia; `id_registry.json` segue L132; SMS_GLOBAL e `tools/sms_wrapper/` intocados; propostas todas `not_applied` com aprovação humana pending.",
+      "restauracao": {
+        "o_que_aconteceu": "2026-10-14 20:34 — `audit_learning_capture.py --root . --json doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json` interpretou o caminho como DESTINO do relatório (`open(a.json,'w')`) e substituiu o dossiê (19.179 chars) por `{\"problems\": [], \"clean\": true}` (37 bytes). O arquivo não estava no git; a causa foi erro de quem chamou, não corrupção do meio.",
+        "como_foi_restituido": "Conteúdo-base extraído do transcript da sessão (tool_use `Write`, `/home/misael/.qoder/projects/-mnt-sdcard-Projects-SMSForge/20272fdd-2bb4-4263-9bc9-878cfe0abb8b.jsonl`) e emenda reaplicada com o MESMO script do transcript (linha 9751), executado sobre a cópia do base. Texto idêntico por construção: a única nondeterminização do script são os hashes.",
+        "desvio_declarado": "Os campos `refutada.evidencia` e `amendments[0].evidencia_nova` foram RECOMPUTADOS na restauração, porque `doc/10-memory-bank.md` (e o próprio registro de eixos) mudou depois da emenda original. Portanto: sha do dossiê antes do clobber `a3a4b215ca4135e306f7d314c13e7888cb8e6ae62db4792dadfae4cc32fcec1e`; sha da versão restaurada `cc7c3e25099d0c242e87a235844bd037728ab0e128c7a836d55157719a61c7fe`; o sha final deste arquivo pós-restauração é outro (esta emenda muda o conteúdo) e fica em `doc/agent_learning/lesson_routes.json`.",
+        "consequencia": "`lesson_routes.json.application_records[path=dossier].sha256` precisaria apontar para o dossiê atual; foi atualizado junto com a nota de restauração, senão a checagem disco-vs-recorde do próprio gate mente."
+      },
+      "evidencia_nova": [
+        {
+          "path": "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json (restaurado)",
+          "sha_antes_do_clobber": "a3a4b215ca4135e306f7d314c13e7888cb8e6ae62db4792dadfae4cc32fcec1e",
+          "sha_pos_reaplicacao_do_script": "cc7c3e25099d0c242e87a235844bd037728ab0e128c7a836d55157719a61c7fe"
+        },
+        {
+          "path": "SMS_projects/pulso_de_cristal/out/evidence/audio_m3_manifest.json",
+          "sha256": "4a02d9292d11c0406731258075d637b974672f193e457b5e3a43765a0f06bfa9"
+        },
+        {
+          "path": "SMS_projects/pulso_de_cristal/out/build_record.json",
+          "sha256": "09b0f21ab5a9e0471a6bd18963c7dcfbd1a63757f81ccc6fdc5070567988b2c3"
+        }
+      ]
+    },
+    {
+      "data": "2026-10-14",
+      "quando": "noite, apos fechar a frente de audio",
+      "mudou": "2 candidatos novos sem ID (familia do `--json` destrutivo medida em 13 ferramentas; gate humano com `--verify`/`--self-check`/ingestao casada); 1 armadilha de harness nova com a medicao; foto do registry corrigida de L132 para L133 com a causa declarada; typo 'quietais' corrigido no closure.",
+      "nao_mudou": "`lessons` continua vazia; nenhum ID emitido; SMS_GLOBAL e tools/sms_wrapper/ intocados; todas as propostas seguem not_applied com aprovacao humana pending; as 2 emendas anteriores permanecem verbatim.",
+      "instrumento_novo_local": "SMS_projects/pulso_de_cristal/tools/m3_escuta.py ganhou --verify, --collect e --self-check. Rodou: --verify PASS (8 janelas), --self-check PASS (6 casos, 4 deles de rejeicao).",
+      "evidencia_nova": [
+        "tools/m3_escuta.py sha256=bb5838f75bdc2ad8e2de43e9a5fb735a9fb20b53f38e7d7c9e2f2b8a5bac4485",
+        "out/escuta/m3_escuta.html sha256=dfacba8ab7f14ec0ffb43f975ea7fa51947c3b3ef57fade27c6da837da7505c9",
+        "out/logs/generation_channel_decision.json sha256=bc234b099caeb46458cc0a67a710b3fa48061f32e9a695be67d10d66cb822200",
+        "doc/curation/id_registry.json (max L medido = 133)",
+        "SMS_GLOBAL: secao maxima medida = 124"
+      ]
+    },
+    {
+      "data": "2026-10-14",
+      "quando": "23:38, apos rodar os gates da cabine",
+      "mudou": "Instancia ao vivo da armadilha documentada minutos antes: o lesson JSON da sessao A9 virou veredito de 37 bytes. Registrado com sha, tamanho e mtime. Tambem: o gate `audit_learning_capture` está vermelho no repo e a causa e essa perda, nao o codigo desta sessao.",
+      "nao_mudou": "O arquivo da outra sessao NAO foi tocado (nao tenho o texto original; fabricar licao alheia seria a segunda forma de destruir a evidencia). `lessons` continua vazia; nenhum ID emitido; wrapper e SMS_GLOBAL intocados por mim.",
+      "evidencia_nova": [
+        "doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json sha256=89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39",
+        "doc/agent_learning/lesson_routes.json (linha com lesson_id da outra sessao apontando para o caminho destruido)",
+        "sha256sum do veredito de 37 bytes medido as 23:38"
+      ]
+    },
+    {
+      "data": "2026-10-14",
+      "quando": "23:44, re-medida apos descobrir o commit 74543b9",
+      "mudou": "A nota das 23:38 estava certa no sintoma e errada na gravidade: o veredito de 37 bytes esta COMMITADO (74543b9), entao nao ha copia de git para restaurar. Escopo medido: 1 unico arquivo de curadoria nessa condicao; lei (§124, 67 linhas) e ferramenta (measure_vram_map.py, 15.735 B) intactas; registry e routes apontam para o caminho destruido, o que deixa o gate de aprendizado vermelho no HEAD, nao so na arvore suja.",
+      "nao_mudou": "arquivo alheio intocado; nenhum ID emitido por esta sessao; SMS_GLOBAL e wrapper intocados; lessons vazia; todas as propostas not_applied.",
+      "evidencia_nova": [
+        "git show --stat 74543b9",
+        "doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json sha256=89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39",
+        "git show HEAD:doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json (37 bytes, identico ao disco)",
+        "wc -c doc/curation/*.json (um arquivo < 120 B)"
+      ]
+    },
+    {
+      "data": "2026-10-14",
+      "quando": "23:58, apos a instrucao explcita do dono 'FACA 1 E 2' (executar os dois atos pendentes)",
+      "mudou": "RESTAURACAO da L133 da sessao A9 pela rota (a): replay da transcricao da propria sessao que a escreveu. Conteudo obtido programaticamente do tool_use Write (linha 2657 do jsonl eb043711) com o Edit (linha 2670) aplicado; esta sessao NAO redigiu nenhuma linha de licao. Prova de byte-exatidao: sha256 da reconstrucao == 7e725673c543b0328d5280efada085c12d2067221e8d4dc2c9df1cda7eaef108, que e o SHA do arquivo bom registrado pela A9 em lesson_routes.application_records antes do clobber. Arquivo em disco: 7.273 B com 1 licao (L133) e JSON valido. O veredito de 37 bytes foi preservado como evidencia em SMS_projects/pulso_de_cristal/rascunho/curation_backup/2026-10-14_l133_CLOBBED_37b.json. Gate audit_learning_capture.py --root . saiu de exit 1 (3 derivas de L133) para exit 0 ([PASS] captura de licao sincronizada) por dados restaurados.",
+      "nao_mudou": "O texto restaurado e o da sessao A9, byte a byte (comparado por SHA). tools/sms_wrapper/, SMS_GLOBAL, id_registry (L133) e measure_vram_map.py intocados. Nenhum commit executado por esta sessao: HEAD segue contendo o veredito de 37 bytes naquele caminho, entao a restauracao esta no working tree e comitar e decisao do dono.",
+      "evidencia_nova": {
+        "sha_restaurado": "7e725673c543b0328d5280efada085c12d2067221e8d4dc2c9df1cda7eaef108",
+        "bytes_restaurados": 7273,
+        "fonte": "transcricao eb043711-fae6-4b1d-b59a-0395b2ae588f.jsonl linhas 2657 (Write) e 2670 (Edit)",
+        "binding_que_provou": "lesson_routes.json application_records[path=L133].sha256 == 7e725673...",
+        "clobber_preservado": "SMS_projects/pulso_de_cristal/rascunho/curation_backup/2026-10-14_l133_CLOBBED_37b.json (37 B, sha 89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39)",
+        "gate": "audit_learning_capture.py --root . exit 0 depois; exit 1 antes (3 derivas L133)"
+      }
+    }
+  ]
+}

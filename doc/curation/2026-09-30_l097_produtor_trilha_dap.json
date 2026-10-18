@@ -1,0 +1,26 @@
+{
+  "curation_id": "2026-09-30_l097_produtor_trilha_dap",
+  "date": "2026-09-30",
+  "scope": "Produtor de trilha por tick da ROM integrada do luta_mugen (item 3 do doc/21)",
+  "authorization": "O usuário pediu: 'prossiga com o produtor de trilha via DAP'. Escopo: ferramenta, ganchos de custo zero e ROM clone isolada; a ROM canônica não foi alterada.",
+  "lessons": [
+    {
+      "id": "L097",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "O DAP só lê com a emulação pausada e pausa em tempo de parede, então não amostra tick a tick e trilhas feitas por laço de leitura não são reprodutíveis. A trilha determinística vem de uma ROM clone que grava o próprio estado por tick em RAM a partir de um roteiro de entrada embutido (pad real ignorado); o DAP só despeja o buffer depois de done=1.",
+      "evidence": {
+        "ganchos_custo_zero": "luta_mugen_trace_dap.py --check-canonical: main.c do HEAD sem ganchos e main.c atual com TRACE_PAD/TRACE_RECORD vazios geram ROMs idênticas, SHA-256 c1ecaba5ef0266c3eda35680094a052c45382ebc21d8074d3756a93557723693 (o SHA difere de c958278f do Lote C por outras mudanças da árvore local, como fight.c; não pelos ganchos).",
+        "determinismo": "cenário soco executado duas vezes com builds independentes: ROM clone 4a049f76895b433a6d86e41f230dd2f1109b3a0c27d5b49177cc5ae1976e9f4d, despejo sha256 19b8fd033c0afc068329b8da03e7f03cfda6e6e18c22997efd98d3c8b37cae34 nas duas, trace_compare: trilhas equivalentes (170 ticks).",
+        "conteudo_observado": "P1 aceita o soco no tick 10 (estado 6); troca de quadro nos ticks 36, 73, 102; dano ao P2 no tick 134 (vida 1000→950, hitstop dos dois) = 124 ticks após o toque. Coerente com os 26 quadros até a pose e ~125 até a hitbox do Lote C, agora por tick e reprodutível.",
+        "self_check": "luta_mugen_trace_dap.py --self-check PASS: roteiro (sintaxe, RLE ≤255, janela exata), decodificação (campos, vida de 10 bits, flags) e recusa de magic errado, gravação incompleta, contagem diferente, despejo curto/truncado; trace_compare aceita trilhas iguais e reprova cauda perdida. Teste pytest cobre todos os cenários embutidos.",
+        "limites": "Grava só o estado da luta (state, frame, tick, x em px, vida, flags); não é render, SAT, FPS nem latência de input humano. Janela de 170 ticks por execução, a partir do 1º tick de luta ativa; a ROM clone não é a canônica. Cada execução leva ~2,5 min. Cenário pulo/agachar/andar_frente/idle/soco_p2 estão definidos mas só soco foi executado."
+      },
+      "rule_section": "SMS_GLOBAL §82",
+      "tool_that_measures": "luta_mugen_trace_dap.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L098",
+    "mastery": "Item 3 do roadmap tem juiz (L096) e produtor (L097). Próximo: executar os demais cenários e usar a trilha para provar que otimizações de render não mudam o estado; depois item 4."
+  }
+}

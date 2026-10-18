@@ -1,0 +1,105 @@
+{
+  "schema": "openbor_sms_port_manifest_v1",
+  "generated_at": "2026-10-16T00:17:45+00:00",
+  "tool": "sms_wrapper/openbor2sms one-shot port script (O1)",
+  "donor": {
+    "root": "/mnt/sdcard/Projects/Sgdk Forge/tools/openbor2sgdk_forge",
+    "tree_hash": "0701fdb59bd333a5d022e5810f6159c0903f33774011545da1c8da58bbec842b",
+    "tree_hash_algorithm": "SHA256 over sorted relative path UTF-8, NUL, raw SHA256 digest of file bytes, newline for each .py file; excludes __pycache__ and .pytest_cache",
+    "file_count": 32,
+    "license": {
+      "name": "MIT",
+      "file": "LICENSE",
+      "sha256": "0b685fab1e0d2e0a9f85a4356a91c7bb16126be7b06e899f6cfed155cad2cf24"
+    }
+  },
+  "entries": [
+    {
+      "target": "tools/sms_wrapper/openbor2sms/openbor2sms/model_text.py",
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/model_text.py",
+      "donor_sha256": "3703e71ba6ade16474f0d3a3bb81f70730ebe1beeb1923710b3f3dec0e6d2466",
+      "ported_sha256": "1c04ba3474f2e2d13a1cb7c517698648f4ef4d36a847a1d34797f19b3ea4043d",
+      "port_kind": "byte_identical_with_banner",
+      "banner_bytes": 494
+    },
+    {
+      "target": "tools/sms_wrapper/openbor2sms/openbor2sms/level_inventory.py",
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/level_inventory.py",
+      "donor_sha256": "3cba7a44d22798c6cb3e37787f351b71215eccac41b57355df0a7672453dff09",
+      "ported_sha256": "2a5765cbdec90ff0e7ca5f4f38a9d0e8d5a3b20ecb5150bae1022c18f6136d86",
+      "port_kind": "byte_identical_with_banner",
+      "banner_bytes": 499
+    },
+    {
+      "target": "tools/sms_wrapper/openbor2sms/openbor2sms/analyze.py",
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/analyze.py",
+      "donor_sha256": "1b158959550a99ab81d2b78b0f7244f4a21737f9fab96976f6326fff378599dc",
+      "ported_sha256": "a6a5829413520aba5086acca0959b1d623cfd222d54c330ecd9530f5f62caf4d",
+      "port_kind": "byte_identical_with_banner",
+      "banner_bytes": 491
+    },
+    {
+      "target": "tools/sms_wrapper/openbor2sms/openbor2sms/reference_semantics.py",
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/reference_semantics.py",
+      "donor_sha256": "1fa8bbc34e6870ffcd67e63cfc9d9c4d50909f89ea736a37cd655a576fb41be0",
+      "ported_sha256": "81fdff74576bbcc028d59add16c393e1796ff0a3dc4029b6ba06703dd8396361",
+      "port_kind": "byte_identical_with_banner",
+      "banner_bytes": 503
+    },
+    {
+      "target": "tools/sms_wrapper/openbor2sms/openbor2sms/level_event_table.py",
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/level_event_table.py",
+      "donor_sha256": "d084609eac1c124ba99ad01a59b93db617579640b436b3e5ef3442d34d59a4a5",
+      "ported_sha256": "407411177f1332d682559bc7704e07d237f1f90bbf216fd01bf5b97af27b2f1d",
+      "port_kind": "byte_identical_with_banner",
+      "banner_bytes": 501
+    },
+    {
+      "target": "tools/sms_wrapper/openbor2sms/tests/test_model_text.py",
+      "donor_path": "tools/openbor2sgdk_forge/tests/test_model_text.py",
+      "donor_sha256": "15f9d2a730d71ed582a0affe9793bc72192f33561f73a4c9aae06049baafc3d2",
+      "ported_sha256": "a55091b1a3b621c00a14768c4c899979d8cfdd7281bcdaf49ec2ad4dddca0d01",
+      "port_kind": "import_adapted",
+      "adaptation": "from openbor2sgdk_forge.* -> from openbor2sms.* only"
+    },
+    {
+      "target": "tools/sms_wrapper/openbor2sms/tests/test_reference_semantics.py",
+      "donor_path": "tools/openbor2sgdk_forge/tests/test_reference_semantics.py",
+      "donor_sha256": "ca9a7f8a283a6debd369cdb79d41c1a55fee813929823108829439755a19dd14",
+      "ported_sha256": "c9acc1dc2e86c2fff9a3f97327b4f3e5d4611625bc81c30a5f4d0a1ad1640db0",
+      "port_kind": "import_adapted",
+      "adaptation": "from openbor2sgdk_forge.* -> from openbor2sms.* only"
+    },
+    {
+      "target": "tools/sms_wrapper/openbor2sms/tests/test_level_event_table.py",
+      "donor_path": "tools/openbor2sgdk_forge/tests/test_level_event_table.py",
+      "donor_sha256": "b154d2492f033ae365e1a4cd5c2f94f18906edca7f127f8955d8d8a4f25146a6",
+      "ported_sha256": "69c53cbe5f933177a74c7d6c64cea8e41e75669ae2402aabbd5efbbc8d64290d",
+      "port_kind": "import_adapted",
+      "adaptation": "from openbor2sgdk_forge.* -> from openbor2sms.* only"
+    }
+  ],
+  "excluded_from_neutral_front_end": [
+    {
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/semantics.py",
+      "reason": "integer contracts of the donor MD emitter/runtime (VRAM pool 1424, margin 16, recorte 320/cell 80); imported only by emit_slice.py and streaming.py; SMS budgets are SMS-doctrine decisions, so this module stays in the MD emission boundary, not in the neutral front-end"
+    },
+    {
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/emit_slice.py",
+      "reason": "MD emission (planned separation)"
+    },
+    {
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/images.py",
+      "reason": "MD emission (planned separation)"
+    },
+    {
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/streaming.py",
+      "reason": "MD emission (planned separation)"
+    },
+    {
+      "donor_path": "tools/openbor2sgdk_forge/openbor2sgdk_forge/profiles.py",
+      "reason": "MD emission (planned separation)"
+    }
+  ],
+  "claim_ceiling": "port with hash origin; does not prove conversion, runtime or SMS suitability"
+}

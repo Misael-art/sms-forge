@@ -1,0 +1,245 @@
+{
+ "schema": "sms_evidence_m6_v1",
+ "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+ "rom_bytes": 131072,
+ "generated_for": "M6 \u2014 input causal, alvos moveis e pacing (O3)",
+ "claims": [
+  {
+   "id": "attack_causal",
+   "verdict": "pass",
+   "summary": "hit1 +16q hp 50->43 guard 12; hit2 +25q hp 43->36; vovf 0",
+   "artifact": {
+    "path": "m6/attack_3536672de61245eea8a077c3acbdca04.json",
+    "sha256": "6d71287730dfc690e245a2a5e2361ba9488380273f8d0a7d14cca030f5c7dd6f",
+    "bytes": 2052
+   }
+  },
+  {
+   "id": "jump_causal",
+   "verdict": "pass",
+   "summary": "maxalt 55, 48q no ar, pouso q62, dx 65; vovf 0",
+   "artifact": {
+    "path": "m6/jump_7c0d84bc012244719043bf7ddd3d93a6.json",
+    "sha256": "2bad8f3a7b445bb25168c05ee09f8bffb35662d829f21cdb5ca6a85f9d4ad309",
+    "bytes": 1621
+   }
+  },
+  {
+   "id": "knockdown_causal",
+   "verdict": "pass",
+   "summary": "TOSS f32 (alt 2, hp 100->95), RISE f84, maxalt 51; vovf 0",
+   "artifact": {
+    "path": "m6/knock_a64b276fc41244e2b5fe13370385adfe.json",
+    "sha256": "0842f7c53b25cc5f0a16edf6e7cc3df88b70a73fd7fb443a0200e227dd73cd85",
+    "bytes": 1958
+   }
+  },
+  {
+   "id": "depth_causal",
+   "verdict": "pass",
+   "summary": "whiff dz41 (hp 43->43); alinhado dz6 hit +19q (hp 43->36); vovf 0",
+   "artifact": {
+    "path": "m6/depth_f41e8c8c089042be85fd1c9643900043.json",
+    "sha256": "412e5ef3a38098dad97e5186f9975d0ef48b7dbb55d1f18fbfd347eaac7aa1fd",
+    "bytes": 1695
+   }
+  },
+  {
+   "id": "death_causal",
+   "verdict": "pass",
+   "summary": "8 hits 50->0; dead=1; estado DEAD f114; HUD hde=0; vovf 0",
+   "artifact": {
+    "path": "m6/death_14fee45458c74fc8bf539b19898a7db2.json",
+    "sha256": "1623b835f02d66426348b89f06f8e0a195720fa101eb0c383396ffd40afcb00e",
+    "bytes": 2341
+   }
+  },
+  {
+   "id": "target_z",
+   "verdict": "pass",
+   "summary": "jogador z 180->221; inimigo z 185->206 perseguindo (x 272->231) e ataca (st2); vovf 0",
+   "artifact": {
+    "path": "m6/target_z_ac5b26fc6f7b418ba212adafb26dc115.json",
+    "sha256": "fa2fbf22c8819a3a6e7f1fa9c7971314770606c145bf6695857afc80205246e3",
+    "bytes": 2489
+   }
+  },
+  {
+   "id": "video_ia",
+   "verdict": "pass",
+   "summary": "e.x 299->240; motion 0.508; 50/60 quadros distintos",
+   "artifact": {
+    "path": "m6/sessions/05030d2243d64962b6a1773278be8e29/m6_ia.json",
+    "sha256": "f12d8afd2118c3b46b599dcd247da0f6120fd739fe73df97402f4aedde182f2c",
+    "bytes": 5326
+   }
+  },
+  {
+   "id": "video_attack",
+   "verdict": "pass",
+   "summary": "hp 50->43 durante 60 quadros; 37 distintos; hp lido do journal",
+   "artifact": {
+    "path": "m6/attack_video_6083d677112e4c4a9356c9034c6867d5.json",
+    "sha256": "adb766975ad98ca4134297b41d7996a7936cee6d9c1a28adb110e12ed21f93c9",
+    "bytes": 6391
+   }
+  },
+  {
+   "id": "video_jump",
+   "verdict": "pass",
+   "summary": "90 quadros; 45 distintos; motion 0.561; pouso alt 0",
+   "artifact": {
+    "path": "m6/sessions/05030d2243d64962b6a1773278be8e29/m6_jump.json",
+    "sha256": "5d0cd9e29b9725d44087e90cb90cb959eb79151801960c1a4f1cea9235ed61f4",
+    "bytes": 7488
+   }
+  },
+  {
+   "id": "video_knock",
+   "verdict": "pass",
+   "summary": "110 quadros; 60 distintos; termina em st5 (RISE)",
+   "artifact": {
+    "path": "m6/sessions/05030d2243d64962b6a1773278be8e29/m6_knock.json",
+    "sha256": "2e4735302c28f68e66cd1d195fbf8c3e8ef6fdcc5573fca1ec00322ea686aa89",
+    "bytes": 8923
+   }
+  },
+  {
+   "id": "video_death",
+   "verdict": "pass",
+   "summary": "200 quadros; hp 1->0; dead=1; st6",
+   "artifact": {
+    "path": "m6/sessions/05030d2243d64962b6a1773278be8e29/m6_death.json",
+    "sha256": "31f9e2bc5456ef3509ff725ab7005ee031e6c597b3c5b7cdb5ab65a0daf0ae56",
+    "bytes": 15417
+   }
+  },
+  {
+   "id": "fps",
+   "verdict": "pass",
+   "summary": "MRP 3 janelas 8 s: 59.48/59.66/59.78; boot e frame_advance PASS",
+   "artifact": {
+    "path": "mrp_m6_76cdbee3_20261017.json",
+    "sha256": "abd2950cac44c6cf8a252f88c97ef78b259d503e1bd3b0e7de7f5997f1f1f786",
+    "bytes": 1978
+   }
+  },
+  {
+   "id": "worst_frame",
+   "verdict": "pass",
+   "summary": "MWF 3000 quadros vovf_delta=0 vline_min=202; SHA da sessao = ROM",
+   "artifact": {
+    "path": "mwf_m6_76cdbee3_20261017.json",
+    "sha256": "8a1b040e04142e5bb35deda8a8808a77749530b0299bd57d7928e29eb346f518",
+    "bytes": 1136
+   }
+  },
+  {
+   "id": "stress_input",
+   "verdict": "pass",
+   "summary": "30 ciclos; quadro ROM 3230; vovf 0; done 1 (janela selada); cam 160..360",
+   "artifact": {
+    "path": "m6_stress_input_d5639465181a463a926f0e01f4d7af46.json",
+    "sha256": "77905de4942fce2e3b64f33d57a801c03aed0a9e670e7e15bb6446511d5388b6",
+    "bytes": 1935
+   }
+  },
+  {
+   "id": "render_fidelity",
+   "verdict": "pass",
+   "summary": "ax_a105_right 100.0% em [92,68] (ancora xh-32/base-80)",
+   "artifact": {
+    "path": "sessions/598625a464dc491ab18f10d55ca65588/render_fidelity.json",
+    "sha256": "af6c8fd255cad2bb37ceff0dbebcab8c0088490c7a56b8201fdc2c99ebe8361d",
+    "bytes": 336
+   }
+  },
+  {
+   "id": "render_semantic",
+   "verdict": "pass",
+   "summary": "paleta 100%, 18 cores, nao-reuso, informativa",
+   "artifact": {
+    "path": "sessions/598625a464dc491ab18f10d55ca65588/semantic_gate.json",
+    "sha256": "1e09a98c0a1275d0a5d82faf042f36c7db59ca9573ffcf953fa5fed20a1df796",
+    "bytes": 1135
+   }
+  },
+  {
+   "id": "still",
+   "verdict": "pass",
+   "summary": "jogador em a105 (ataque), inimigo PAIN hp 43, HUD delta",
+   "artifact": {
+    "path": "sessions/598625a464dc491ab18f10d55ca65588/m6_evidence.png",
+    "sha256": "3e30c93d435ddd35358459ed25b7bbf4211b3be145dd624cf0946732ac9376fe",
+    "bytes": 14885
+   }
+  },
+  {
+   "id": "render_glitch",
+   "verdict": "blocked",
+   "summary": "sem renderizador legal full-frame 256x192 validado; declarado, nao silencioso",
+   "artifact": null
+  }
+ ],
+ "features": [
+  {
+   "feature": "input causal por sessao frame-paced",
+   "tag": "exact",
+   "note": "journal grava cada read com bytes de RAM"
+  },
+  {
+   "feature": "hit/dano/guarda pos-hit (D13)",
+   "tag": "adapted",
+   "note": "conversao frame-discreta de ticks 200 Hz; guarda 13q medida"
+  },
+  {
+   "feature": "pulo/queda/knockdown",
+   "tag": "adapted",
+   "note": "tabelas por-frame; maxalt 55; TOSS exige alt>0"
+  },
+  {
+   "feature": "profundidade (z) e alvo movel em z",
+   "tag": "adapted",
+   "note": "AI move_toward(dx,dz); e.z 185->206 no traco dedicado"
+  },
+  {
+   "feature": "pacing do ataque",
+   "tag": "adapted",
+   "note": "uploader D8 domina: ataque completo ~60q, hit ~16q; declarado"
+  },
+  {
+   "feature": "render fidelity da arte autoral",
+   "tag": "exact",
+   "note": "100% estrutural na pose estavel; poses em troca de slot nao casam (declarado)"
+  },
+  {
+   "feature": "audit_render_glitch",
+   "tag": "blocked",
+   "note": "exige imagens legais full-frame de um renderizador validado"
+  },
+  {
+   "feature": "PAL",
+   "tag": "blocked",
+   "note": "nao medido"
+  },
+  {
+   "feature": "audio",
+   "tag": "blocked",
+   "note": "M7"
+  }
+ ],
+ "sessions": {
+  "videos": "m6/sessions/05030d2243d64962b6a1773278be8e29",
+  "attack_video": "m6/sessions/6083d677112e4c4a9356c9034c6867d5",
+  "still": "sessions/598625a464dc491ab18f10d55ca65588",
+  "traces": [
+   "m6/sessions/3536672de61245eea8a077c3acbdca04",
+   "m6/sessions/7c0d84bc012244719043bf7ddd3d93a6",
+   "m6/sessions/a64b276fc41244e2b5fe13370385adfe",
+   "m6/sessions/f41e8c8c089042be85fd1c9643900043",
+   "m6/sessions/14fee45458c74fc8bf539b19898a7db2",
+   "m6/sessions/ac5b26fc6f7b418ba212adafb26dc115",
+   "m6/sessions/d5639465181a463a926f0e01f4d7af46"
+  ]
+ }
+}

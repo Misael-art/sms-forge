@@ -1,0 +1,90 @@
+{
+  "schema": "rom_asset_binding_v1",
+  "rom_path": "out/rom/luta_mugen.sms",
+  "rom_sha256": "af9eb127895ed07de6884592bbac420e31c660b39d371d4c9f5faaacd629dc97",
+  "rom_size_bytes": 131072,
+  "source_def": {
+    "p1_ken": "KenMastersADV/KenMastersADV.def",
+    "p2_ryu": "Ryu_Kang/Ryu_Kang.def"
+  },
+  "source_sha256": {
+    "p1_ken": "822936f0de76a51db6174ffced7f1cbce6c54bb532fda4e68fd177bf6aaf25a3",
+    "p2_ryu": "d3430ad559e2be75a3a99986920533018a522bed1363f2d51f3175ca59f0e55f"
+  },
+  "scene_cut_manifest": "out/local_study/generated/versus_cut/versus_scene_manifest.json",
+  "scene_cut_manifest_sha256": "6c00814e682a2a8a6eaa47463eb54d90845f247a5fb9455ed794ef2c6bf0f89a",
+  "generated_header": "out/local_study/generated/versus_cut/versus_scene_runtime.h",
+  "generated_header_sha256": "deef9b4532a827a2eb5a28368c6b4055d6618ee5827788e4d24fbc9c2dfd8e6b",
+  "evidence": {
+    "screenshot": "out/evidence/t10_ken_ryu_pair.png",
+    "screenshot_sha256": "381c64fc196e5f3b7f1e8028247c3ef94cc0cf180e1bbe640245b0ea66e54622",
+    "semantic_gate": "out/evidence/t10_ken_ryu_pair_semantic.json",
+    "input_proof": "out/evidence/t10_input_memory.json"
+  },
+  "entries": [
+    {
+      "label": "ken_bank_2",
+      "source": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ken_masters_adv.zip",
+      "source_sha256": "822936f0de76a51db6174ffced7f1cbce6c54bb532fda4e68fd177bf6aaf25a3",
+      "res_path": "out/local_study/generated/versus_cut/ken_scene_bank2.bin",
+      "symbol": "mapper_bank_2_ken_scene_data",
+      "generated": "out/local_study/generated/versus_cut/versus_scene_runtime.h",
+      "generated_sha256": "deef9b4532a827a2eb5a28368c6b4055d6618ee5827788e4d24fbc9c2dfd8e6b",
+      "sha256": "4bd2250c64efb706a9cfd1adf168f7326f45b281b9a0a57f12c759a3b001c6fc",
+      "bank": 2
+    },
+    {
+      "label": "ken_bank_3",
+      "source": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ken_masters_adv.zip",
+      "source_sha256": "822936f0de76a51db6174ffced7f1cbce6c54bb532fda4e68fd177bf6aaf25a3",
+      "res_path": "out/local_study/generated/versus_cut/ken_scene_bank3.bin",
+      "symbol": "mapper_bank_3_ken_scene_data",
+      "generated": "out/local_study/generated/versus_cut/versus_scene_runtime.h",
+      "generated_sha256": "deef9b4532a827a2eb5a28368c6b4055d6618ee5827788e4d24fbc9c2dfd8e6b",
+      "sha256": "3063f42418808b72b9698d8475d6561114649733478112796de433dccfa14f40",
+      "bank": 3
+    },
+    {
+      "label": "ken_bank_4",
+      "source": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ken_masters_adv.zip",
+      "source_sha256": "822936f0de76a51db6174ffced7f1cbce6c54bb532fda4e68fd177bf6aaf25a3",
+      "res_path": "out/local_study/generated/versus_cut/ken_scene_bank4.bin",
+      "symbol": "mapper_bank_4_ken_scene_data",
+      "generated": "out/local_study/generated/versus_cut/versus_scene_runtime.h",
+      "generated_sha256": "deef9b4532a827a2eb5a28368c6b4055d6618ee5827788e4d24fbc9c2dfd8e6b",
+      "sha256": "c584b3712afa8b76e7466a4524b51ede0ba203ac06903893921258f109642573",
+      "bank": 4
+    },
+    {
+      "label": "ryu_bank_5",
+      "source": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ryu_kang.zip",
+      "source_sha256": "d3430ad559e2be75a3a99986920533018a522bed1363f2d51f3175ca59f0e55f",
+      "res_path": "out/local_study/generated/versus_cut/ryu_scene_bank5.bin",
+      "symbol": "mapper_bank_5_ryu_scene_data",
+      "generated": "out/local_study/generated/versus_cut/versus_scene_runtime.h",
+      "generated_sha256": "deef9b4532a827a2eb5a28368c6b4055d6618ee5827788e4d24fbc9c2dfd8e6b",
+      "sha256": "bcd5bcf789e06bed8b4799cbb143f4d70b41c5a757ab93b4cb98531b9fa1c811",
+      "bank": 5
+    },
+    {
+      "label": "ryu_bank_6",
+      "source": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ryu_kang.zip",
+      "source_sha256": "d3430ad559e2be75a3a99986920533018a522bed1363f2d51f3175ca59f0e55f",
+      "res_path": "out/local_study/generated/versus_cut/ryu_scene_bank6.bin",
+      "symbol": "mapper_bank_6_ryu_scene_data",
+      "generated": "out/local_study/generated/versus_cut/versus_scene_runtime.h",
+      "generated_sha256": "deef9b4532a827a2eb5a28368c6b4055d6618ee5827788e4d24fbc9c2dfd8e6b",
+      "sha256": "87c57b411544966c80f773b8dc7b2657eb98a0c3e4d21dde0c8269c51e868d63",
+      "bank": 6
+    }
+  ],
+  "visual_direction": {
+    "reference_model": "Ken Masters ADV, sprites ripados da CPS2 arcade",
+    "current_p2_model": "Ryu_Kang, sprites de bootleg NES",
+    "current_p2_role": "piloto técnico para estudo de paleta P1/P2, binding e cache",
+    "current_p2_is_final_art_or_style_reference": false,
+    "replacement_required_before_full_art": true,
+    "replacement_target": "modelo coerente em origem, anatomia, proporções e acabamento com Ken Masters ADV/CPS2",
+    "engine_work_with_current_p2_remains_valid": true
+  }
+}

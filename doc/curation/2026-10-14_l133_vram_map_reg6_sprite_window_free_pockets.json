@@ -1,0 +1,37 @@
+{
+  "curation_id": "2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets",
+  "date": "2026-10-14",
+  "title": "Mapa de VRAM: reg6 escolhe a janela de sprites ($FB 256 / $FF 192), sobras têm guarda do corpus e tilemap extra troca por reg2 com motivo",
+  "kind": "curation",
+  "scope": "Hardware SMS (VDP modo 4): o orçamento de VRAM (§9) e a base de sprites (§27) ganham o eixo medido do reg6, as três sobras legais documentadas com suas condições e a técnica de name table extra. Item A9 do dossiê out/curation_proposals_smspower_2026-10-12.md, aprovado por instrução direta do proprietário em 2026-10-14 ('FACA TODOS OS 3 PONTOS EM ORDEM').",
+  "authorization": "O proprietário aprovou a execução dos três pontos pendentes em 2026-10-14: (1) patch do bypass SMS_VDPControlPort em audit_tilemap_mirror.py, (2) item A9 do dossiê, (3) destino dos artefatos de campanha. Este JSON cobre o ponto 2.",
+  "lessons": [
+    {
+      "id": "L133",
+      "status": "documentado_com_ferramenta; janela $FF default medida como valor vivo em sessao BlastEm 2026-10-14 (vdp_regs reg6=0xFF em todas as fronteiras); troca para $FB, uso das sobras e tilemap extra permanem sem probe dedicado — guardas são lei Tier-1 do corpus, silício fica em LOTE F",
+      "lesson": "A VRAM de 16 KB tem layout de tabela ($0000-$1FFF tiles 0-255, $2000-$37FF tiles 256-447, $3800-$3EFF tilemap, $3F00-$3FFF SAT, reg2 e reg5 em $FF) e a SAT dá 1 byte ao índice do sprite: o sprite só alcança a janela de 256 tiles apontada pelo reg6 — $FB base $0000 (256 únicos), $FF base $2000 (192 únicos). A SMSlib liga em $FF (VDPReg_init, 'Sprite tiles begins at address 0x2000') e expõe a troca por API (SMS_useFirstHalfTilesforSprites). O BG indexa 0-511 e não sofre a janela. As sobras de VRAM existem com guarda declarada pelo próprio corpus: $3F40-$3F7F são 64 bytes não usados pela SAT de 32 sprites (2 tiles; idx sprite 250/tilemap 506 quando reg6=$FF); $3E00-$3EFF são as 4 linhas inferiores do tilemap de modo 192 (8 tiles; idx 240/496) e só são sobra se o jogo não rola verticalmente; $3F20-$3F3F+$3FC0-$3FFF são 3 tiles quando o software se limita a ≤31 sprites com $D0 no Y da 32ª entrada — terminador que só vale em 192 linhas (L128/§118). Name table extra trocada instantaneamente via reg2 (duplo buffer, menu, split mid-HBlank tipo Sylvan Tale) consome linhas×64 bytes da zona de tiles e, no SMS1, exige bit0=1 no reg2 para não espelhar o mapa trocado (L130/§121). Consequência de canon: o contrato de cena declara endereços, janela de sprite pretendida e sobras reclamadas com a guarda satisfeita; 'cou porque sobrou byte' sem guarda declarada é defeito, não economia.",
+      "root_cause": "O §9/orçamento e a skill sms-vram-vblank-budget modelavam janela de tempo (VBlank, worst-frame) mas não o MAPA de endereços: sem o eixo do reg6, um agente tratava '256 tiles de sprite' como capacidade fixa e ignorava que a troca de janela é decisão de pool com consequência para o BG; sem as guardas, as sobras documentadas do corpus ($3F40, linhas inferiores, cauda da SAT) convidavam o uso em modo/scroll errados — inclusive o $D0 em 224 linhas, refutável pela própria lei de L128.",
+      "evidence": {
+        "corpus_page": {
+          "path": "out/smspower_corpus_2026-10-12/VRAMMemoryMap.txt",
+          "sha256": "ab4c480dd9e11373f6a8668cff5840bfeca2e788854ddc0a1334ccbd4ff3ad6f",
+          "url": "https://www.smspower.org/Development/VRAMMemoryMap",
+          "quote": "VDP Register 6 Sprite Tiles Start Unique Tile count $FB $0000 256 $FF $2000 192",
+          "quote_2": "As the Tilemap and Sprite Attribute Table occupy the upper part of VRAM, this means that you can use 256 unique tiles for sprites if VDP Register 6 is $FB or 192 unique tiles for sprites if VDP Register 6 is $FF",
+          "quote_3": "As there is a 64 byte long stretch of unused space in the Sprite Attribute Table, 2 extra tiles can be loaded in at $3F40 . These will be at sprite index 250 ( $FA ) and tilemap index 506 ( $1FA ). If the game does not scroll vertically, the tilemap data for the 4 lowest rows of the tilemap between $3E00 and $3EFF can be used to store 8 extra tiles.",
+          "quote_4": "we can put $D0 in the Y coordinate entry of the 32nd sprite at $3F1F to ensure that the following 32 sprites won't be drawn. The 32 bytes of remaining Y coordinates between $3F20 and $3F3F and the 64 bytes between $3FC0 and $3FFF ... are then free to store a total 3 extra tile graphics.",
+          "quote_5": "Using VDP Register 2 you can then switch from one Tilemap to another instantly. Potential uses for this include: Double buffering for animations ... Instantly changing the screen to a menu ... Changing the Tilemap mid-screen during HBlank for various effects (see Sylvan Tale's fixed status bar while scrolling effect)"
+        },
+        "corpus_manifest": "out/smspower_corpus_2026-10-12/MANIFEST.sha256 (linha de VRAMMemoryMap.txt; re-hash conferido em 2026-10-14 antes da aplicacao)",
+        "header": "sdk/devkitSMS/SMSlib/SMSlib.h:53 (SMS_useFirstHalfTilesforSprites) e sdk/devkitSMS-upstream/SMSlib/src/SMSlib.c:29-31 (VDPReg_init reg6=0xFF 'Sprite tiles begins at address 0x2000') + :184-186 (SMS_write_to_VDPRegister(0x06, usefirsthalf?0xFB:0xFF)) — janela $FF confirmada como valor vivo nos dumps vdp_regs.bin das sessoes BlastEm da campanha 2026-10-14 (reg6=0xFF em todas as fronteiras dos 3 probes)",
+        "tool_dogfood": "doc/curation/evidence/2026-10-14_l133_vram_map/plan_probe_bits1315.json (sha d2f1287c…) + report_probe_bits1315.json (sha 7fd775c3…): plano do probe bits1315 julgado aprovado contra a sessao blastem-sms-2e1f017b…, com cross-check reg2/reg5/reg6 conforme e sobras gap_sat+tilemap_bottom legais",
+        "gate_cases": "measure_vram_map.py --self-check: 15 casos — janela $FF (192) e $FB (256), guardas das 3 sobras (legal/ilegal por modo, scroll e nº de sprites), sobria reclamada sem guarda reprova, tile BG invade PNT reprova, sprite fora da janela reprova, tilemap extra sem motivo reprova, modo 240 com base $3800 colide com a SAT (§122), snapshot conforme/divergente/alerta de mirror (§121) e dump truncado levanta OSError"
+      },
+      "rule_section": "SMS_GLOBAL §124 (cruza §9, §27, §118/L128, §121/L130, §122/L131)",
+      "tool_that_measures": "measure_vram_map.py (--plan sms_vram_plan_v1; --snapshots vdp_regs.bin de blastem_sms.py)",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+      "measurement_limits": "A ferramenta julga o plano DECLARADO e o registrador vivo em dump de emulador — engine única BlastEm; console (LOTE F) e ROMs que escrevem VRAM fora do plano (stagers à mão) ficam fora. A janela $FF default foi medida nos dumps da campanha 2026-10-14; a troca para $FB ja e usada em codigo real deste repo (SMS_useFirstHalfTilesforSprites(1) em arena_nocturna, hamoopig e kage_matsuri) mas nunca foi conferida por measure_vram_map.py contra vdp_regs.bin de sessao — fica como proxima medicao natural. As guardas das sobras sao lei do corpus, nao medicao propria. reg6 fora de $FB/$FF nao e decidido."
+    }
+  ],
+  "dedup_key": "l133_vram_map_reg6_sprite_window_free_pockets_name_table_extra_20261014"
+}

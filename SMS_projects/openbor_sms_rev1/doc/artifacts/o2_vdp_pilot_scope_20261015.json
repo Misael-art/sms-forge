@@ -1,0 +1,208 @@
+{
+  "schema": "openbor_sms_batch_boundary_v1",
+  "artifact_kind": "openbor_sms_o2_vdp_pilot_scope",
+  "generated_at": "2026-10-15",
+  "owner_project": "openbor_sms_rev1",
+  "batch": "O2",
+  "goal": "Piloto VDP: 1 jogador + 1 inimigo, animacao/facing/profundidade, cenario minimo rastreado e HUD.",
+  "gate": "ROM SMS; video frame-paced; medicoes de SAT/VRAM/RAM/upload; paleta e escolha de representacao registradas.",
+  "authority": {
+    "plan": {
+      "path": "doc/planejamento/openbor_sms/01-plano-openbor-sms.md",
+      "sha256": "3b64e9fbd9a27f5137fca1c05c98473d45060b6596ba68edb571e403969180a7",
+      "scope_lines": "194-201",
+      "note": "linha 200 define o lote O2 e seu gate; linhas 182-188 exigem medir mascaras opacas reais e comparar recorte/cache/representacao antes de otimizar"
+    },
+    "o1_scope": {
+      "path": "doc/artifacts/o1_neutral_frontend_scope_20261015.json",
+      "sha256": "7ce34bb8c0478f6d017a0f0f1d8d7df29244f5b0a709c67a905d1a24e56fb34f"
+    },
+    "registry_sha256": "b4978189f45c938724da3d1ed2da44e64b31b2bcec79b588d1c311f7338f0efc",
+    "pak": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_bruta/golden_axe_legend/GAL.pak",
+      "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+      "bytes": 39500889,
+      "revalidated_this_session": true
+    },
+    "pinned_reference": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_referencia/openbor_engine_787b6770/engine/openbor.c",
+      "sha256": "8d210999b4af34c1932e0865daf39a007aec54155b1ed909176a39af905f5b2f",
+      "commit": "787b6770",
+      "facts": [
+        "PLAYER_MIN_Z = 160 (linha 601)",
+        "PLAYER_MAX_Z = 232 (linha 602; town1 nao declara z_coords)",
+        "binding spawn1..4 (linhas 49698+): x direto; z = PLAYER_MIN_Z + z_do_fonte fora de SCROLL_INWARD/OUTWARD; z=0 cai para PLAYER_MIN_Z+5/PLAYER_MIN_Z; y e altura de entrada (queda) e nao entra no recorte O2"
+      ]
+    },
+    "donor_references_informative": [
+      {
+        "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/doc/openbor/gal_town_slice_ir.json",
+        "sha256": "0fa87a1adaca0917679d0cc81a3989bd368c19a6048f2194edb6fa6a520b2dec",
+        "note": "contrato de emissao MD do doador; referencia informativa. Budgets MD (world_w/cell/unique_tiles) NAO transplantados para o SMS."
+      },
+      {
+        "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/doc/openbor/gal_town_capability_fidelity_matrix_2026_09_30.json",
+        "sha256": "04171f1b7243d40233ec0016df5926b979c87ae223f831823f5bcf3ef32e18d8",
+        "note": "perfil GAL do doador classificou panel.gif como cenario ('background is not composed'), spawns sem flip aplicado (olham para o jogador) e player-start adaptado para (96,180) no MD. Usamos como precedente de adaptacao, nao como evidencia SMS."
+      }
+    ],
+    "inputs_ir": [
+      {"path": "data/generated/ir/gal_town1_level_ir_20261015.json", "sha256": "a9c6be9132e14fcd8bcad87f62ab90fcc8ab81b8d7cb256e15da5b5a0d57b4a1"},
+      {"path": "data/generated/ir/gal_town1_models_ir_20261015.json", "sha256": "b44ad9e86a402f4b1e120d5f16ed970bd3d579757d6579cd11698ae607a3903a"},
+      {"path": "data/generated/extract/gal_town1_extract_20261015.json", "sha256": "eee60d5e70215f23f6eb258faa1aea23fcb3ed414cc091b2f950a467190a0998"}
+    ]
+  },
+  "measured_budgets": {
+    "method": "medicao desta sessao: leitura direta dos membros do GAL.pak revalidado (openbor2sms.pak) + PIL 12.3.0; sem herança de numeros do doador",
+    "stage_band": {
+      "source": "panel.gif faixa y32..224 (192 linhas) sobre back.gif onde keyed",
+      "key_pixels_in_band": 0,
+      "consequence": "painel cobre 100% da faixa; back.gif (ceu) nao compoe; f01 (preto y224..271) fora do recorte"
+    },
+    "stage_palette_only_tiles": {
+      "policy": "11 codigos mestres 6-bit (spread), erro medio 25.6 por canal",
+      "x0..256": 289,
+      "x0..560": 652,
+      "x0..768": 1089,
+      "sliding_window_256_max": 595,
+      "new_tiles_per_8px_column_max": 14,
+      "verdict": "uniao de janela de 256 px (595) excede o teto de padroes por construcao: (16384 - 1792 PNT - 256 SAT)/32 = 448 pads. Paleta-so inviabiliza scroll residente."
+    },
+    "sprites": {
+      "poses": "ax idle01 + walk01..04; long idle01 + walk01..04 (5 poses por ator; walk01..08 existem no PAK, subconjunto da animacao a confirmar no ax.txt)",
+      "palette": "14 codigos mestres + indice 0 transparente, erro medio 19.1 por canal",
+      "tiles_ax": 150,
+      "tiles_long": 114,
+      "tiles_union": 263,
+      "sat_8x8_objects": "ax idle 54 + long ~40 = ~94 > 64 (inviavel)",
+      "sat_8x16_tall_objects": "ax idle 30 + long ~20 = ~50 <= 64 (TALL obrigatorio)"
+    },
+    "vram_total_available_patterns": 448,
+    "claim": "numeros desta secao sao medicao, nao estimativa"
+  },
+  "decisions": [
+    {
+      "id": "D1-unidades",
+      "decision": "x fiel 1:1 com o fonte; z na banda de piso [160,232]; spawn1 do jogador z = PLAYER_MIN_Z(160) + 20 = 180; spawns de inimigo z direto do fonte; altitude de entrada (y=200) NAO entra no O2.",
+      "basis": "openbor.c pinado (sha 8d210999...), linhas 601-602 e 49698+",
+      "status": "pinned",
+      "consequence": "queda de entrada do OpenBOR registrada como adaptacao adiada para O3 (movimento/pulo/pouso); O2 nasce no chao."
+    },
+    {
+      "id": "D2-cast-e-posicoes",
+      "decision": "Jogador: ax, slot 1 do fonte, (x=50, z=180). Inimigo: long, primeiro inimigo do primeiro Group 3 3, (x=500, z=180), health 50.",
+      "basis": "town1 IR: player_starts slot 1 = (50, 20, 200); linha 86 do town1.txt: spawn long ... health 50; doador usou long como inimigo do recorte",
+      "status": "pinned+adapted",
+      "consequence": "intro/bizzar1/civ02/civ03 ficam fora do recorte O2 (NPCs/misc; nenhum mais proximo do que long). Nenhum spawn suprimido do IR."
+    },
+    {
+      "id": "D3-atores",
+      "decision": "1:1 sem reescala; SPRITEMODE_TALL (8x16); pivo por pose = offset do fonte (240,204); dedup de tiles entre poses; indice 0 transparente; paleta P1 de 14 codigos + transparente; poses O2: ax idle01 + ciclo de caminhada do fonte; long idle01 apenas.",
+      "basis": "medicao de orcamento (sessao): 8x8 estoura a SAT (~94 objetos > 64); walk do long fora do O2 por orcamento medido (uniao 263 com dois ciclos)",
+      "status": "decided",
+      "consequence": "audit_sprite_line_sim sobre mascaras reais no pior caso (player+inimigo sobrepostos em z=180) e gate obrigatorio antes do runtime."
+    },
+    {
+      "id": "D4-facing",
+      "decision": "Facing por espelho VDP; spawns olham para o oponente; diretivas flip do fonte permanecem no IR sem aplicacao por-spawn.",
+      "basis": "precedente do doador (fidelity matrix: 'selected runtime spawns face toward the player; source flip directives are not applied')",
+      "status": "adapted",
+      "consequence": "orientacao nativa da arte (esquerda/direita) confirmada no video frame-paced; constante de flip e item aberto ate a captura."
+    },
+    {
+      "id": "D5-tempos",
+      "decision": "1 delay OpenBOR = 10 ms; NTSC = max(1, round(delay*60/100)); PAL = max(1, round(delay*50/100)). Nunca 1 delay = 1 frame VDP.",
+      "basis": "GDD: regra racional declarada; comentario do doador (delay_ntsc = delay*60/100) usado apenas como referencia informativa",
+      "status": "decided",
+      "consequence": "idle delay 8 -> 5 frames NTSC; walk delay 12 -> 7 frames NTSC (valores do fonte conferidos na extracao do txt)."
+    },
+    {
+      "id": "D6-cenario",
+      "decision": "Cenario = panel.gif faixa y32..224, corredor x0..632 (79 colunas de 8 px); back.gif nao compoe; representacao por dicionario de tiles (k-medoides dos tiles-fonte, K alvo <= 208) com paleta P0 de <= 15 codigos mestres 6-bit; mapa por colunas em ROM; sem streaming no O2 (dicionario residente); PNT atualizado 1 coluna (24 entradas = 48 B) por passo de 8 px.",
+      "basis": "medicao: paleta-so da uniao de janela 595 > 448 pads; dicionario limita a uniao por construcao; corredor cobre o trajeto start->inimigo; cyan na faixa = 0",
+      "status": "decided",
+      "consequence": "K e erro por celula congelados no lote com preview lado-a-lado para revisao humana (nao e delivery). Fallback declarado: se K > 208 com qualidade minima, reduzir corredor antes de sacrificar sprites; qualquer perda adicional vira adaptacao registrada."
+    },
+    {
+      "id": "D7-camera",
+      "decision": "Follow horizontal minimo: cam = clamp(player_x - 128, 0, 376); linha vertical fixa (recorte y32); sem prefetch, terreno ou bounds de wall (O4). Scroll horizontal exige VDPFEATURE_LEFTCOLBLANK.",
+      "basis": "co-visibilidade player (50) e inimigo (500) exige camera movel; L043/§6: BGScrollX != 0 sem LEFTCOLBLANK reprova",
+      "status": "decided",
+      "consequence": "O4 herda semantica completa de camera/terreno; o O2 prova somente o corredor x0..632."
+    },
+    {
+      "id": "D8-hud",
+      "decision": "HUD na faixa 0..15 px: duas barras com largura proporcional ao HP maximo (inimigo 50 da fonte; jogador a confirmar na extracao do modelo); tiles da paleta P0; sem texto.",
+      "basis": "gate O2 exige HUD; texto/fonte por SHA e gate de lote posterior",
+      "status": "decided",
+      "consequence": "proveniencia declarada no asset_provenance_manifest; marcado como HUD de piloto, nunca promovido a delivery sem review (quarentena de placeholder respeitada)."
+    },
+    {
+      "id": "D9-runtime",
+      "decision": "ROM 48 KB sem mapper; plano VRAM dedicado sms_vram_plan_v1 (PNT 32x28 + SAT + pads: BG<=208 + sprites<=208 + HUD<=16 <= 448); probe de RAM com magic/schema (frame, player x/z/anim/facing, camera); boot deterministico; input por pad 1 (direcoes + profundidade).",
+      "basis": "spec-cenas/TDD; ferramentas do workspace (measure_vram_map, measure_runtime_probe)",
+      "status": "decided",
+      "consequence": "estimativa de ROM no fechamento <= ~32 KB; sobra de VRAM medida, nunca reclamada sem guarda."
+    }
+  ],
+  "slice_contract": {
+    "view_crop": {"source_rows": "32..224", "sms_rows": "0..191", "hud_rows": "0..15"},
+    "world": {"corridor_x": [0, 632], "columns_8px": 79, "camera_x_clamp": [0, 376], "camera_line": 32},
+    "player": {"model": "ax", "slot": 1, "x": 50, "z": 180, "x_clamp": [12, 620], "z_clamp": [160, 232], "anims": ["idle", "walk"], "walk_frames_from_source": true},
+    "enemy": {"model": "long", "x": 500, "z": 180, "health": 50, "anim": "idle", "facing": "toward_player"},
+    "depth_to_screen": "pivot_y_screen = z - 32 (recorte); pivo por pose = offset do quadro (240,204)",
+    "delays": {"unit_ms": 10, "ntsc": "max(1, round(delay*60/100))", "pal": "max(1, round(delay*50/100))"},
+    "bg_tile_dictionary": {"target_k_max": 208, "final_k": null, "final_k_pending": true},
+    "palette": {"p0_bg_max": 15, "p1_sprites_max": 15, "transparent_index": 0, "luma_floor_delta_y": 17, "final_codes_pending": true}
+  },
+  "engine_plan": {
+    "modules": [
+      {"path": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_art.py", "role": "conversao de arte SMS: composicao/recorte do palco, paleta 6-bit, dicionario de tiles, poses de sprite, previews e records de conversao; nunca importa semantics.py"},
+      {"path": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py", "role": "contrato de emissao: le IR + este artefato + saidas de sms_art e emite dados C (spawn, camera, colunas, delays) + emission record com hashes"}
+    ],
+    "tests": ["tests/test_sms_art.py", "tests/test_sms_emit.py", "self-check dos dois CLIs"],
+    "project_layout": {
+      "res/": "res/o2/poses/*.png (indexados TALL), res/o2/stage/stage_corridor.png (resultado do dicionario 632x192), res/o2/hud/hud_strip.png (256x16), res/palettes/ (se aplicavel)",
+      "doc/": "doc/palettes_manifest.json + doc/asset_provenance_manifest.json (entradas com origem hash-bound no membro extraido)",
+      "inc/": "headers gerados (tiles, sprites, mapa de colunas, paletas)",
+      "src/": "src/main.c runtime minimo (init VDP, carga de pads, entidade jogador com x/z/anim/facing, inimigo idle, camera, HUD, probe RAM)"
+    }
+  },
+  "assets_plan": {
+    "extract_members": [
+      "data/chars/ax/ax.txt",
+      "data/chars/long/long.txt",
+      "data/chars/ax/idle01.gif",
+      "data/chars/ax/walk01.gif .. walk04.gif (subconjunto confirmado no txt)",
+      "data/chars/long/idle01.gif",
+      "data/bgs/TOWN1/panel.gif"
+    ],
+    "not_extracted_justification": {
+      "back.gif": "0 px de key na faixa visivel; nao compoe",
+      "f01.gif": "faixa preta y224..271 fica fora do recorte",
+      "town1.gif": "duplicata de panel.gif (diff 0.03% em 1474 colunas)",
+      "walk05..08": "subconjunto fora do ciclo definido no modelo fonte (conferir no txt)"
+    },
+    "destination_root": "data/source_openbor/gal_town1"
+  },
+  "evidence_plan": [
+    {"gate": "build", "tool": "tools/sms_wrapper/build_inner.py via build.sh", "expect": "pre-gates de recursos/procedencia/sprite_mode verdes"},
+    {"gate": "sprites/scanline", "tool": "audit_sprite_line_sim.py", "when": "antes do runtime, mascaras reais, pior caso de sobreposicao em z=180"},
+    {"gate": "tilemap", "tool": "audit_tilemap_bounds.py + audit_tilemap_mirror.py + audit_vscroll_wrap.py", "expect": "escritas dentro das 24 linhas; reg2 conforme alvo; BGScrollY literal 0"},
+    {"gate": "VRAM", "tool": "measure_vram_map.py --plan <sms_vram_plan_v1> --snapshots <sessao>", "expect": "plano x sessao sem divergencia"},
+    {"gate": "video frame-paced", "tool": "emulator_session.py (sessao privada) + capture_video.py --press", "expect": "frames do framebuffer com caminhada e encontro"},
+    {"gate": "FPS/pacing", "tool": "measure_fps.py + measure_frame_advance.py", "expect": "contador da ROM avancando em ritmo regular"},
+    {"gate": "RAM/probe", "tool": "measure_runtime_probe.py", "expect": "magic/schema validos, frame avancando, janelas coerentes"},
+    {"gate": "paleta", "tool": "screenshot_semantic_gate.py", "expect": "frames extraidos dentro da paleta mestra"},
+    {"gate": "frescor/claims", "tool": "seal_fresh_evidence_bundle.py + reconcile_claims.py + audit_claims.py", "expect": "bundle posterior a ROM; claims dentro do teto"}
+  ],
+  "open_items": [
+    "Orientacao nativa da arte (esquerda/direita) confirmada somente no video frame-paced; constante de flip revisavel com uma linha",
+    "Subconjunto exato do ciclo de caminhada do ax no ax.txt (PAK tem walk01..08) conferido na extracao",
+    "HP maximo do jogador no modelo fonte conferido na extracao (barra do HUD)",
+    "K final do dicionario e preview lado-a-lado gerados no lote para revisao humana (nao e delivery)",
+    "BT spawn1 de 2 argumentos permanece diagnosticado e nao bloqueia O2",
+    "audit_doc_sync global segue FAIL por luta_mugen (EIO pre-existente, 10 derives); openbor_sms_rev1 tem 0 derives; nao tocar"
+  ],
+  "claim_ceiling": "piloto tecnico local; arte derivada de PAK nao publicavel; sem equivalencia visual/AAA; HUD de piloto nao e arte final; revisao humana de paleta/facing/HUD pendente; sem audio no O2"
+}

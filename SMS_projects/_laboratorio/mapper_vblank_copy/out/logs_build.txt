@@ -1,0 +1,12 @@
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/main.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib src/main.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -o out/obj/mapper_vblank_copy.ihx -mz80 --no-std-crt0 --data-loc 0xC000 /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/crt0/crt0_sms.rel out/obj/main.rel /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib/SMSlib.lib /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib/PSGlib.lib
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/tools/makesms -pm -mbank assets/banks/banks_2_7.bin:0:6:2 out/obj/mapper_vblank_copy.ihx out/rom/mapper_vblank_copy.sms
+*** sverx's makesms converter ***
+Merged 98304 bytes from assets/banks/banks_2_7.bin:0x000000 to ROM:0x008000
+Info: 1588 bytes used/131072 total [1.21%] - size of output ROM is 128 KB
+Info: [bank0 14895] [bank1 16285] [bank2 16384] [bank3 16384] [bank4 16384] [bank5 16384] [bank6 16384] [bank7 16384] bytes free
+Info: release date in SDSC header updated
+Info: SEGA header found, checksum updated
+Info: ROM size padded to 128 KB

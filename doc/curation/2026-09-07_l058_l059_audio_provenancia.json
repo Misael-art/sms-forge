@@ -1,0 +1,29 @@
+{
+  "curation_id": "2026-09-07_l058_l059_audio_provenancia",
+  "date": "2026-09-07",
+  "scope": "proveniencia_audio_psg",
+  "origin": "Ciclo MSSF2T: res/audio/music_ken_stage.psg entrou na ROM do projeto SEM entrada em doc/audio_provenance_manifest.json — e nenhum gate media proveniência de áudio (audit_provenance.py cobre só PNG). O gate novo reprova o estado atual do projeto de propósito, até o agente de áudio corrigir o manifest.",
+  "lessons": [
+    {
+      "id": "L058",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Asset de áudio (.psg) entrou na ROM sem entrada no manifest de proveniência — audit_provenance cobre só PNG, e \"está na ROM\" não é procedência. O audit_psg_channel_binding lê o MESMO manifest mas só amarra canal de SFX: arquivo coberto por um gate não fica coberto nos outros eixos. Cobertura (todo .psg em res/audio/ tem entrada), integridade (sha256 e bytes batem com o blob) e ausência de manifest com .psg em disco são medidas, não convenção.",
+      "root_cause": "O princípio da procedência (gate audit_provenance.py, tabelado como 'Procedência' visual) foi escrito para símbolos visuais; o eixo de áudio cresceu (make_psg_assets, shrink_music_loop, manifest de canais) sem que ninguém estendesse a lei. Buraco de cobertura em gate por tipo de asset.",
+      "meta_lesson": "Gate que cobre um tipo de arquivo não é doutrina — é instância. Cada extensão nova de asset precisa da sua passagem no gate equivalente, ou o asset nasce órfão e silencioso.",
+      "tool_that_measures": "audit_audio_provenance.py",
+      "rule_section": "SMS_GLOBAL §47",
+      "evidence": "SMS_projects/MSSF2T/res/audio/music_ken_stage.psg sem entrada em SMS_projects/MSSF2T/doc/audio_provenance_manifest.json (2026-09-07); audit_audio_provenance.py --project MSSF2T devolve [FAIL] '.psg orfao' sobre ele."
+    },
+    {
+      "id": "L059",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Jogo portado de referência comercial: agente compôs trilha autoral genérica em vez de portar a trilha de referência — troca silenciosa de obra, porque o binário toca música e nada no pipeline comparava COM QUE. Port declarado exige referência hasheada no manifest: origin com transcrição/port/arranjo precisa de reference {file, sha256} apontando para o material de referência que existe e bate no hash. Autoral pura não deve reference.",
+      "root_cause": "A intenção de portar morreu entre o GDD e o asset: nenhuma ferramenta media o vínculo asset→referência, então 'port' virou palavra de origin sem lastro — o mesmo movimento do §28/§31 contra mockup e narrativa como evidência.",
+      "meta_lesson": "Claim de fidelidade a referência externa só existe com a referência no repositório e hasheada; senão é gosto declarado.",
+      "tool_that_measures": "audit_audio_provenance.py",
+      "rule_section": "SMS_GLOBAL §47",
+      "evidence": "Gate reprova entrada com origin 'transcri*'/'port*'/'arranjo*' sem reference hasheada (self-check audit_audio_provenance.py, casos 4-6)."
+    }
+  ],
+  "note_ids": "L058–L059 emitidos neste arquivo, sem furos; issued_through do id_registry.json fica a dever o bump para L059 (arquivo fora do escopo deste ciclo)."
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "mugen_donor_review_v1",
+  "date": "2026-09-26",
+  "access": "read_only",
+  "policy": "Método assimilado; nenhum fonte/asset do doador copiado nesta revisão. Estado MD não promove SMS.",
+  "files": [
+    {
+      "path": "/mnt/sdcard/SGDKForge/tools/mugen2sgdk_forge/doc/ROADMAP.md",
+      "sha256": "3be1583d02530e41eb735afee81526f85d86578732995c535e28361805ec4d19"
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/tools/mugen2sgdk_forge/doc/BASELINE_E0.md",
+      "sha256": "a7279042a70a1649053d8eb2cac3a3ca52c5be04fdb6d6e16e06c9fcb9b8f2b8"
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/tools/mugen2sgdk_forge/runtime/README.md",
+      "sha256": "a2e546b4e5c3a45238c09cef901acf831a80e1a4b41d902a525babdd0368d307"
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/tools/mugen2sgdk_forge/runtime/mg_fight.c",
+      "sha256": "2fd2394fa6a5ef47bba105234233972083f792e675d249480276cfe58c262db9"
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/tools/mugen2sgdk_forge/mugen2sgdk_forge/stage_measure.py",
+      "sha256": "0d9d1e44e5b3f4d862f8a821ded97175b39bb00da553305fc052957eb4a5555e"
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/tools/mugen2sgdk_forge/mugen2sgdk_forge/stage_plane_profile.py",
+      "sha256": "6b504e0d361541968b005eb6a088bd6eee3853d3eccf9285966d5afeadc4da72"
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/tools/mugen2sgdk_forge/mugen2sgdk_forge/fx_pilot.py",
+      "sha256": "2890ed666d6d6da381bfc798bb42cd12f14d658c9cb8b42928e6ce0759f4ba4b"
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/10-memory-bank.md",
+      "sha256": "1e94808276e7d88b13bccada186c3a2cf6351f239533b6baea321a24d1641036",
+      "review_note": "Releitura do bloco gerado em 2026-09-26: validation errors=14/warnings=20, visual/gameplay/AAA gates false; nota mais recente relata reconciliação Suzaku, 133 testes do conversor, sem novo asset/build/gate final."
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/mugen/vdp_optimization_options_2026_09_26.md",
+      "sha256": "3b7570feec82a5abac9eb69558247619e3235c6a71b29d7f378014fd7c0ad8ad"
+    }
+  ],
+  "review_roots": [
+    {
+      "path": "/mnt/sdcard/SGDKForge/tools/mugen2sgdk_forge/",
+      "role": "pipeline, parsers/IR, converters, runtime and measurement tools",
+      "access": "read_only"
+    },
+    {
+      "path": "/mnt/sdcard/SGDKForge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/",
+      "role": "consumer project, production memory and SMS/MD VDP optimization study",
+      "access": "read_only"
+    }
+  ],
+  "source_archives": [
+    {
+      "fighter": "Ken",
+      "path": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ken_masters_adv.zip",
+      "bytes": 1358812,
+      "sha256": "822936f0de76a51db6174ffced7f1cbce6c54bb532fda4e68fd177bf6aaf25a3",
+      "use": "local study source for 72-88 px cut; not copied into repository",
+      "source_art_origin": "sprites ripados da CPS2 arcade; modelo visual de referência",
+      "project_role": "escala, proporção e acabamento desejados"
+    },
+    {
+      "fighter": "Ryu",
+      "path": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ryu_kang.zip",
+      "bytes": 100534,
+      "sha256": "d3430ad559e2be75a3a99986920533018a522bed1363f2d51f3175ca59f0e55f",
+      "use": "local study source for 72-88 px cut; not copied into repository",
+      "source_art_origin": "sprites retirados de um bootleg NES",
+      "project_role": "amostra temporária de paleta P1/P2 e runtime; substituir antes da arte completa",
+      "is_final_visual_reference": false
+    }
+  ],
+  "transfer_decisions": [
+    {
+      "donor_method": "offline deterministic pipeline: inventory -> parse -> IR -> analyze -> convert -> emit -> validate/report",
+      "sms_application": "SMS backend stages stay separate from SGDK output; source hashes, exact resources, diagnostics and fallback are recorded",
+      "status": "adopted"
+    },
+    {
+      "donor_method": "fidelity classes and explicit unsupported behavior",
+      "sms_application": "per-resource direct/approximate/manual/unsupported plus source-to-ROM binding; no silent approximation",
+      "status": "adopted"
+    },
+    {
+      "donor_method": "runtime order for input, state, physics, animation, contact and presentation",
+      "sms_application": "adapt as SMS tick contract; keep fighter data replaceable; do not port CNS VM or MD-specific sound/plane code",
+      "status": "planned_for_runtime"
+    },
+    {
+      "donor_method": "measure stage composition after quantization, sweep camera positions, track plane ownership",
+      "sms_application": "reuse quantized-image and integer-position sweeps; SMS has one BG plane, so reject SGDK DMA/dual-plane assumptions",
+      "status": "adopted_as_method"
+    },
+    {
+      "donor_method": "one-family FX pilot with frames, loops, pivots, CLSN, palette and resource budget",
+      "sms_application": "pilot one complete effect family against SAT/scanline/VRAM/VBlank, preserving source semantics",
+      "status": "planned_for_SMS_backend"
+    },
+    {
+      "donor_method": "optimization ladder: exact dedup -> trim -> prefetch -> remap -> cosmetic fallback, with fixed-scene A/B evidence",
+      "sms_application": "only credit the resource directly measured; current cross-actor transparent pair is opportunity only, no runtime credit",
+      "status": "adopted_in_workflow"
+    },
+    {
+      "donor_method": "milestone evidence with performance/visual blockers explicit",
+      "sms_application": "donor demo is process precedent, not AAA or SMS hardware proof; no MD constants transfer as SMS law",
+      "status": "adopted"
+    }
+  ],
+  "review_summary": "Revisit completed read-only. Donor project remains open on visual/budget gates. Its generated memory block changed during this work and was re-read/re-pinned at the final snapshot. The 72-88 px source archives were hash-confirmed and P2 metadata regenerated. Exact META/METAL dedup (196 aliases, 18055 bytes saved) makes the full Ken/Ryu header link in the fixed bank for this matchup; AIR playback, combat budgets, and larger-roster banking remain unproven. User clarification: Ken Masters ADV/CPS2 is the visual model target; Ryu from the NES bootleg remains useful for palette/runtime study but must be replaced by a coherent model before full art."
+}

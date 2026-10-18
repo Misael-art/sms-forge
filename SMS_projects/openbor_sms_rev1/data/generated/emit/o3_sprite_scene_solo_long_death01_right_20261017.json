@@ -1,0 +1,135 @@
+{
+ "schema": "sprite_scene_manifest_v1",
+ "sprite_size": "8x16",
+ "zoomed": false,
+ "screen_h": 192,
+ "sat_terminated": true,
+ "sprites": [
+  {
+   "x": 140,
+   "y": 144,
+   "tile": 116
+  },
+  {
+   "x": 148,
+   "y": 144,
+   "tile": 118
+  },
+  {
+   "x": 132,
+   "y": 144,
+   "tile": 120
+  },
+  {
+   "x": 156,
+   "y": 144,
+   "tile": 122
+  },
+  {
+   "x": 124,
+   "y": 144,
+   "tile": 124
+  },
+  {
+   "x": 164,
+   "y": 144,
+   "tile": 126
+  },
+  {
+   "x": 132,
+   "y": 128,
+   "tile": 128
+  },
+  {
+   "x": 116,
+   "y": 144,
+   "tile": 130
+  },
+  {
+   "x": 140,
+   "y": 128,
+   "tile": 132
+  },
+  {
+   "x": 108,
+   "y": 144,
+   "tile": 134
+  },
+  {
+   "x": 148,
+   "y": 128,
+   "tile": 138
+  },
+  {
+   "x": 156,
+   "y": 128,
+   "tile": 140
+  },
+  {
+   "x": 164,
+   "y": 128,
+   "tile": 142
+  },
+  {
+   "x": 116,
+   "y": 160,
+   "tile": 144
+  },
+  {
+   "x": 172,
+   "y": 128,
+   "tile": 146
+  },
+  {
+   "x": 132,
+   "y": 160,
+   "tile": 148
+  },
+  {
+   "x": 124,
+   "y": 128,
+   "tile": 150
+  },
+  {
+   "x": 124,
+   "y": 160,
+   "tile": 152
+  }
+ ],
+ "scene": {
+  "kind": "solo_declared",
+  "policy": "o3 linhas exatas D9-a revisada",
+  "player": null,
+  "enemy": {
+   "frame": "death01",
+   "side": "right",
+   "pose_index": 27
+  },
+  "dz": 0,
+  "base_player": 152,
+  "base_enemy": 152,
+  "counters": "zero (acumulacao do proprio inimigo)",
+  "note": "propriedade de politica do caso declarado 9/linha",
+  "sat_order": "jogador (ordem da pose) + inimigo (dens desc)"
+ },
+ "simulation": {
+  "peak_per_line": 8,
+  "pre_policy_peak": 9,
+  "row_counters": {
+   "3": 7,
+   "4": 8,
+   "5": 3
+  },
+  "drops": 1,
+  "drops_detail": [
+   {
+    "order": 10,
+    "row": 4,
+    "col": 9,
+    "dens": 26
+   }
+  ],
+  "sat_entries": 18,
+  "note": "politica D9-a revisada: contagem exata por linha de canvas (passo 16) + tabela estatica do jogador; conferido pelo gate audit_sprite_line_sim"
+ }
+}

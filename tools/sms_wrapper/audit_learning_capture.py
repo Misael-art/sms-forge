@@ -10,11 +10,11 @@ Uso:
   audit_learning_capture.py --self-check
 Exit: 0 coerente | 1 deriva | 3 uso
 """
-import argparse, glob, json, os, re, shutil, sys, tempfile
+import argparse, glob, hashlib, json, os, re, shutil, sys, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LID = re.compile(r"\bL(\d{3})\b")
-TOOL_PY = re.compile(r"([A-Za-z0-9_]+\.py)")
+TOOL_PY = re.compile(r"(?<![A-Za-z0-9_.-])(?:[A-Za-z0-9_.-]+/)*[A-Za-z0-9_]+\.py")
 NEED_TOOL = (
     "fechada_com_ferramenta",
     "fechada_com_ferramenta_e_correcao",
@@ -33,6 +33,14 @@ STALE = (
      "DAP condenado como lei vigente (L035 reabriu o canal)"),
     (r"Boot no emulador \(openmsx/Emulicious\)",
      "openMSX como gate SMS vigente (L005)"),
+    (r"(?:o canal [eé]|[Nn]este host:)\s*(?:`?emulator_input\.py`?\s*\()?[^\n]*kdotool\s*\+\s*ydotool",
+     "desktop como canal padrão de QA (§93)"),
+    (r"Cronometragem [eé] por tempo de rel[oó]gio",
+     "sleep de host como regra única de input; sessão privada usa frames VDP (§93)"),
+    (r"motion_fraction.*primeiro e o [uú]ltimo.*congelad",
+     "endpoints como oráculo de freeze; usar timeline completa (§97)"),
+    (r"Cada estado precisa de delta vis[ií]vel entre frames",
+     "delta RGB obrigatório confunde elemento AIR com pixels (§100)"),
 )
 HISTORICAL = (
     "refutad", "dizia", "herança", "heranca", "corrigido", "supersed",
@@ -105,12 +113,73 @@ def _stale_in(text):
     hits = []
     for i, line in enumerate(text.splitlines(), 1):
         low = line.lower()
+        # A pasted global-kill command stays unsafe even on a line calling it
+        # 'corrigido' or 'falso'. Plain prohibitions without the command pass.
+        if re.search(r"(?:pkill|killall)\s+(?:-[\w]+\s+)*[^\n]*[Ee]mulicious", line):
+            hits.append((i,"comando de encerramento global de Emulicious (§93)",line.strip()[:80]))
         if any(w in low for w in HISTORICAL):
             continue
         for rx, why in STALE:
             if re.search(rx, line, re.I):
                 hits.append((i, why, line.strip()[:80]))
     return hits
+
+
+def audit_routes(root, by_id):
+    """Every emitted lesson has a current, hash-bound application entrypoint.
+
+    This measures coverage and freshness, not whether the prose teaches well.
+    Historical/refuted lessons route to the current corrective procedure.
+    """
+    path = os.path.join(root, "doc", "agent_learning", "lesson_routes.json")
+    data, error = _load_json(path)
+    if error:
+        return [f"lesson_routes ilegivel/ausente: {error}"]
+    if not isinstance(data, dict) or data.get("schema") != "sms_lesson_routes_v1" or not isinstance(data.get("routes"), list):
+        return ["lesson_routes schema/routes invalidos"]
+    problems, seen = [], set()
+    for row in data["routes"]:
+        if not isinstance(row, dict):
+            problems.append("lesson_routes entrada nao objeto")
+            continue
+        lid = row.get("lesson_id")
+        if not isinstance(lid, str) or lid not in by_id or lid in seen:
+            problems.append(f"lesson_routes ID desconhecido/duplicado: {lid}")
+            continue
+        seen.add(lid)
+        expected = "doc/curation/" + by_id[lid][0]
+        if row.get("sources") != [expected]:
+            problems.append(f"{lid}: lesson_routes fonte canonica divergente")
+        entries = row.get("application_entrypoints")
+        if not isinstance(entries, list) or not entries or row.get("application_gap"):
+            problems.append(f"{lid}: sem rota de aplicacao resolvida")
+            continue
+        paths = set()
+        for entry in entries:
+            try:
+                from pathlib import Path, PurePosixPath
+                rel = entry["path"]
+                pure = PurePosixPath(rel)
+                if (str(pure) != rel or pure.is_absolute() or ".." in pure.parts or
+                    not any(rel.startswith("tools/sms_wrapper/.agent/" + folder + "/") for folder in ("skills", "workflows")) or rel in paths):
+                    raise ValueError("entrypoint deve ser skill/workflow canonico unico")
+                paths.add(rel)
+                target = Path(root) / rel
+                resolved = target.resolve()
+                if (target.suffix != ".md" or not any(resolved.is_relative_to(
+                        (Path(root) / "tools/sms_wrapper/.agent" / folder).resolve())
+                        for folder in ("skills", "workflows"))):
+                    raise ValueError("entrypoint resolvido fora de skills/workflows")
+                sha = hashlib.sha256(target.read_bytes()).hexdigest()
+                if entry.get("sha256") != sha:
+                    raise ValueError("entrypoint stale por SHA")
+                if not isinstance(entry.get("selection_basis"), str) or not entry["selection_basis"].strip():
+                    raise ValueError("selection_basis ausente")
+            except (OSError, ValueError, TypeError, KeyError) as error:
+                problems.append(f"{lid}: {error}")
+    for lid in sorted(set(by_id) - seen):
+        problems.append(f"{lid}: ausente do mapa lesson_routes")
+    return problems
 
 
 def audit(root, wrapper=None):
@@ -124,6 +193,7 @@ def audit(root, wrapper=None):
         return [f"id_registry ilegivel: {err}"]
     holes = expand_holes(registry)
     by_id, problems = lessons_from_curation(root)
+    problems += audit_routes(root, by_id)
 
     nums = []
     for lid in by_id:
@@ -227,8 +297,53 @@ def _self_check():
                                     "learning_ledger.json"), "w"))
         open(os.path.join(w, ".agent", "skills", "ok.md"), "w").write(
             "X armazenado sem offset.\n")
+        route_path = os.path.join(d, "doc", "agent_learning", "lesson_routes.json")
+        routes = {"schema": "sms_lesson_routes_v1", "routes": [{"lesson_id": "L001",
+            "sources": ["doc/curation/a.json"], "application_gap": None,
+            "application_entrypoints": [{"path": "tools/sms_wrapper/.agent/skills/ok.md",
+                "sha256": hashlib.sha256(b"X armazenado sem offset.\n").hexdigest(),
+                "selection_basis": "synthetic corrective procedure"}]}]}
+        json.dump(routes, open(route_path, "w"))
         p = audit(d, wrapper=w)
         assert not p, f"repo coerente nao deveria reprovar: {p}"
+        empty = {"schema": "sms_lesson_routes_v1", "routes": []}
+        json.dump(empty, open(route_path, "w"))
+        assert any("mapa lesson_routes" in x for x in audit(d, wrapper=w))
+        routes["routes"][0]["application_entrypoints"][0]["sha256"] = "0" * 64
+        json.dump(routes, open(route_path, "w"))
+        assert any("stale por SHA" in x for x in audit(d, wrapper=w))
+        routes["routes"][0]["application_entrypoints"][0]["sha256"] = hashlib.sha256(b"X armazenado sem offset.\n").hexdigest()
+        json.dump(routes, open(route_path, "w"))
+        rules = os.path.join(w, ".agent", "rules")
+        os.makedirs(rules)
+        rule = os.path.join(rules, "SMS_GLOBAL.md")
+        open(rule, "w").write("rule only")
+        alias = os.path.join(w, ".agent", "skills", "alias.md")
+        os.symlink(rule, alias)
+        alias_routes = json.loads(json.dumps(routes))
+        alias_routes["routes"][0]["application_entrypoints"][0].update(
+            path="tools/sms_wrapper/.agent/skills/alias.md", sha256=hashlib.sha256(b"rule only").hexdigest())
+        json.dump(alias_routes, open(route_path, "w"))
+        assert any("resolvido fora" in x for x in audit(d, wrapper=w))
+        os.unlink(alias)
+        json.dump(routes, open(route_path, "w"))
+
+        nested = os.path.join(w, "mugen2sms", "analysis")
+        os.makedirs(nested)
+        nested_tool = os.path.join(nested, "scale_pilot.py")
+        open(nested_tool, "w").write("# --self-check\n")
+        json.dump({"lessons": [{
+            "id": "L001",
+            "status": "fechada_com_ferramenta",
+            "tool_that_measures": "mugen2sms/analysis/scale_pilot.py",
+            "rule_section": "SMS_GLOBAL §1",
+        }]}, open(os.path.join(d, "doc", "curation", "a.json"), "w"))
+        p = audit(d, wrapper=w)
+        assert not p, f"ferramenta nested existente deveria ser aceita: {p}"
+        os.remove(nested_tool)
+        p = audit(d, wrapper=w)
+        assert any("mugen2sms/analysis/scale_pilot.py" in x for x in p), \
+            f"ferramenta nested ausente deveria reprovar: {p}"
 
         json.dump({"entries": [{"summary": "L009 so no ledger"}]},
                   open(os.path.join(d, "doc", "agent_learning",
@@ -258,6 +373,25 @@ def _self_check():
             "Tamanho global 8×8 OU 16×16 (+ zoom).\n")
         p = audit(d, wrapper=w)
         assert any("TALL=16x16" in x for x in p), f"faltou doutrina stale: {p}"
+
+        for bad_line in (
+            "pkill -f Emulicious.jar antes da captura",
+            "corrigido: `killall Emulicious` antes do teste",
+            "o canal é kdotool+ydotool",
+            "Neste host: emulator_input.py (kdotool+ydotool).",
+            "Cronometragem é por tempo de relógio, use sleep",
+            "motion_fraction: primeiro e o último => tela congelada",
+            "Cada estado precisa de delta visível entre frames",
+        ):
+            assert _stale_in(bad_line), f"faltou doutrina de QA obsoleta: {bad_line}"
+        for valid_line in (
+            "Use sessão privada e frames VDP; encerre somente por ID próprio.",
+            "Nunca usar pkill ou killall; não encerrar sessões alheias.",
+            "Rota histórica supersedida: o canal é kdotool+ydotool.",
+            "motion_fraction usa timeline completa; endpoints iguais não provam freeze.",
+            "Elementos AIR distintos podem mostrar o mesmo RGB; medir IDs e stamps.",
+        ):
+            assert not _stale_in(valid_line), f"falso positivo de doutrina: {valid_line}"
 
         os.remove(os.path.join(w, ".agent", "skills", "bad.md"))
         json.dump({"schema": "lesson_id_registry_v1", "holes": {}},
@@ -290,15 +424,19 @@ def _self_check():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=os.path.normpath(os.path.join(HERE, "..", "..")))
-    ap.add_argument("--json")
+    ap.add_argument("--json", "--report-out", dest="json", help="new report destination; existing files are refused")
     ap.add_argument("--self-check", action="store_true")
     a = ap.parse_args()
     if a.self_check:
         return _self_check()
     problems = audit(a.root)
     if a.json:
-        json.dump({"problems": problems, "clean": not problems},
-                  open(a.json, "w"), indent=2)
+        from report_output import write_new_report
+        try:
+            write_new_report(a.json, {"problems": problems, "clean": not problems})
+        except OSError as exc:
+            print(f"[FAIL] report destination refused: {exc}; choose a new --report-out path")
+            return 3
     if problems:
         for p in problems:
             print(f"[FAIL] {p}")

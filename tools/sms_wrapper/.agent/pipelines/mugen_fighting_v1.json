@@ -1,0 +1,146 @@
+{
+  "pipeline_id": "mugen_fighting_v1",
+  "description": "Contrato de entrega de engine de luta SMS; complementa aaa_scene_v1 e sete eixos. Nenhum PASS isolado promove AAA.",
+  "workflow": "workflows/mugen-engine-quality.md",
+  "steps": [
+    {
+      "id": "contract",
+      "gate": {
+        "tool": "audit_mugen_engine_contract.py",
+        "args": [
+          "--project",
+          "<project>"
+        ]
+      }
+    },
+    {
+      "id": "fighter_scale_pilot",
+      "before": "full_fighter_art",
+      "gates": [
+        {
+          "tool": "mugen2sms/analysis/scale_pilot.py",
+          "args": [
+            "--self-check"
+          ]
+        },
+        {
+          "tool": "mugen2sms/analysis/scale_pilot.py",
+          "args": [
+            "--manifest",
+            "<versus_scene_manifest.json>",
+            "--out",
+            "<scale_pilot_audit.json>"
+          ]
+        },
+        {
+          "tool": "build_inner.py",
+          "args": [
+            "--project",
+            "<diagnostic_project>"
+          ]
+        },
+        {
+          "tool": "capture_video.py",
+          "args": [
+            "--project",
+            "<diagnostic_project>",
+            "--rom",
+            "<diagnostic_rom>",
+            "--seconds",
+            "6",
+            "--out",
+            "<diagnostic_video>"
+          ]
+        },
+        {
+          "tool": "mugen2sms/analysis/scale_pilot.py",
+          "args": [
+            "--manifest",
+            "<versus_scene_manifest.json>",
+            "--out",
+            "<scale_pilot_audit.json>",
+            "--video",
+            "<diagnostic_video.mp4>"
+          ],
+          "evidence_scope": "frame-0 mask/pivot only; not AIR cadence or gameplay"
+        },
+        {
+          "tool": "mugen2sms/analysis/scale_pilot.py",
+          "args": [
+            "--manifest",
+            "<versus_scene_manifest.json>",
+            "--out",
+            "<scale_pilot_audit.json>",
+            "--require-measured"
+          ],
+          "accept_only_status": "measured"
+        }
+      ],
+      "status_rule": "Scale promotion requires frame-0 mask/pivot, fitting current+next pools, palette/facing-specific META/METAL index binding, per-transition exact new-pattern prefetch demand against AIR duration plus measured VBlank throughput, a deterministic idle_cache_plan with per-frame physical slots and remapped META preserving axis/dx/dy/terminator/AIR, all emitted tables fitting the ROM/bank layout with valid mapped references, and fitting scene budgets. A source-derived cache plan is not runtime or upload proof. AIR cadence, zero visible flicker across every legal pose/facing pair, no corrupt or residual tiles, and one full action in the emulator remain mandatory before production art. A two-frame diagnostic projection does not validate full-package metadata layout."
+    },
+    {
+      "id": "scene",
+      "pipeline": "aaa_scene_v1.json"
+    },
+    {
+      "id": "runtime",
+      "gates": [
+        {
+          "tool": "audit_sprite_line_sim.py"
+        },
+        {
+          "tool": "measure_worst_frame.py"
+        },
+        {
+          "tool": "measure_runtime_probe.py"
+        },
+        {
+          "tool": "capture_video.py"
+        },
+        {
+          "tool": "audit_audio.py"
+        },
+        {
+          "tool": "audit_psg_quality.py"
+        }
+      ]
+    },
+    {
+      "id": "closeout",
+      "gates": [
+        {
+          "tool": "audit_mugen_engine_contract.py",
+          "args": [
+            "--project",
+            "<project>",
+            "--delivery"
+          ]
+        },
+        {
+          "tool": "audit_visual_delivery.py",
+          "args": [
+            "--delivery"
+          ]
+        },
+        {
+          "tool": "audit_rom_asset_binding.py",
+          "args": [
+            "--require"
+          ]
+        },
+        {
+          "tool": "seal_fresh_evidence_bundle.py"
+        },
+        {
+          "tool": "reconcile_claims.py"
+        },
+        {
+          "tool": "audit_claims.py"
+        },
+        {
+          "tool": "quality_review_router.py"
+        }
+      ]
+    }
+  ]
+}

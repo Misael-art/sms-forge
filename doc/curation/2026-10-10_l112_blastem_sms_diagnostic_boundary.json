@@ -1,0 +1,28 @@
+{
+  "curation_id": "2026-10-10_l112_blastem_sms_diagnostic_boundary",
+  "date": "2026-10-10",
+  "title": "BlastEm SMS como diagnóstico complementar com limites explícitos",
+  "kind": "lesson",
+  "scope": "Execução diagnóstica de Master System no BlastEm; não substitui a rota principal de produção/QA em Emulicious nem valida hardware físico.",
+  "lessons": [
+    {
+      "id": "L112",
+      "status": "regra_canonica_com_evidencia_diagnostica_limitada",
+      "lesson": "Use BlastEm SMS como rota complementar quando houver hipótese Z80/VDP/mapper concreta: fixe emulador, modelo, região, ROM/tool SHA, baseline/precondições, snapshots, relógio e cleanup. Separe frames VDP, ciclos internos rebased, estado lógico e tempo de parede; não converta CRAM interna em paleta SMS6bit nem debugging/stepping em FPS, áudio, aceitação de hardware ou qualidade visual. Emulicious continua sendo a rota principal para produção e os sete eixos de QA.",
+      "root_cause": "Diagnóstico por debugger pode produzir números e estados que parecem tempos de CPU/fps ou valores hardware, apesar de usarem relógios internos rebased e representações privadas do emulador. Também pode capturar outra ROM se identidade/hash e baseline não forem presos à sessão.",
+      "evidence": {
+        "final_session": "doc/curation/evidence/2026-10-10_blastem_sms/final_root/blastem-sms-de8da8ccf81c4d21be1ee712789caad9/session.json",
+        "sequence": "doc/curation/evidence/2026-10-10_blastem_sms/sequence.json",
+        "diagnostic_profile": "BlastEm 1.0.0, máquina SMS2, modelo sms2, NTSC; ROM/tool SHA registrados; baseline conferido antes de input; precondições passaram; sessão completada com cleanup.",
+        "claim_boundary": "Sessão marcada diagnostic_states_only; audio dummy_not_tested, fps_claim=false, hardware_validation=false. O contador internal_cycle é upstream/rebased e não equivale a duração CPU nem FPS de parede.",
+        "doctrine": "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md §108"
+      },
+      "rule_section": "SMS_GLOBAL §108",
+      "tool_that_measures": "tools/sms_wrapper/blastem_sms.py; tools/sms_wrapper/audit_blastem_sms.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md; tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "O auditor mede integridade declarada de arquivos, hashes, perfil SMS, sequência, snapshots, claims e cleanup; não autentica hardware real, precisão de física/tempo, gameplay, FPS, áudio ou arte. NTSC Mode4 é o perfil diagnóstico atual; PAL não está qualificado por esta evidência.",
+      "dedup_key": "l112_blastem_sms_diagnostic_boundary_20261010"
+    }
+  ],
+  "dedup_key": "l112_blastem_sms_diagnostic_boundary_20261010"
+}

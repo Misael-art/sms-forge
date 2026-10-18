@@ -1,0 +1,45 @@
+{
+  "schema": "openbor_sms_intake_v1",
+  "generated_at": "2026-10-16T00:07:18+00:00",
+  "tool": "openbor2sms intake pak",
+  "source": {
+    "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_bruta/golden_axe_legend/GAL.pak",
+    "bytes": 39500889,
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4"
+  },
+  "expected": {
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+    "bytes": 39500889,
+    "verified": true
+  },
+  "container": {
+    "format_id": 0,
+    "format_name": "PACK v0 PAK32 (32-bit)",
+    "archive_size": 39500889,
+    "table_offset": 39359157,
+    "file_count": 3502,
+    "unsafe_entry_count": 0,
+    "case_collision_count": 0,
+    "total_data_bytes": 39359149,
+    "index_digest_sha256": "a16c7210fa26113560579a0f12b68ce292be4e594fa29d13c9d7e4e3f6d9222f"
+  },
+  "histograms": {
+    "scope": "safe entries only (unsafe/empty normalized names excluded)",
+    "by_extension": {
+      ".act": 87,
+      ".bor": 14,
+      ".db": 88,
+      ".gif": 3057,
+      ".txt": 195,
+      ".wav": 61
+    },
+    "by_top_level": {
+      "data": 3502
+    }
+  },
+  "spec": {
+    "commit": "787b6770409935137579715febf80cf7a529b748",
+    "source": "DCurrent/openbor tools/borpak/source/borpak.c"
+  },
+  "claim_ceiling": "container identity/index only; no conversion, runtime or resource acceptance"
+}

@@ -1,0 +1,44 @@
+Status real — motor MUGEN→Master System (tools/sms_wrapper/mugen2sms/)
+Fonte que venceu: código + execução de testes (hierarquia: código > docs; SMS_projects/luta_mugen/doc está ilegível por EIO no cartão, então o memory bank do projeto não pôde ser lido — toda afirmação que dependia dele está marcada). Testes re-rodigados por mim: 268 passam / 57 falham — todas as falhas são externas ao motor (exigem luta_mugen/doc/doacao_md_mugen2sms.json e doc/rom_asset_binding.json, no diretório EIO).
+Classificação do pedido: escopo real (auditoria de estado), sem deriva.
+
+1. O que o motor interpreta e converte AUTOMATICAMENTE
+Interpreta (parsers): INI/.def, AIR completo (frames, flip, Clsn1/2/3; blend só armazenado), CMD completo (modificadores ~ $ > ~N), CNS (Statedef/controller/triggerall), SFF só v1 (PCX 8bpp + ACT; v2 rejeitado com erro explícito sff.py:82), SND v1 só WAV (MP3/OGG sem decoder), stage .def abrangente mas órfão (nenhum importador; não decodifica imagem do BG — sem zlib/BMP/PNG no repo).
+Converte automaticamente para runtime SMS:
+
+Sprite → tiles 4bpp 8×8 + metasprite com dedup e flip H/V canônico (sms_tiles.py);
+Escala racional uniforme 72–88 px, aplicada a pixels+eixos+AIR+CLSN juntos (sms_scale.py:138-174, scene_cut.py:817-818); fora da janela → rejeita;
+CLSN → blobs int16 + AABB em Z80 (sms_clsn.py, fight.c:396) — implementado+validado em ROM;
+CMD → blob v4 (3 bytes/passo, tiers, release-time) (sms_cmd.py);
+Headers C por pose (_TILES/_PAL/_META/_AXIS/_CLSN) + páginas de mapper 16 KB (smsdev.py, pose_table.py);
+Corte de cena versus P1/P2 com paleta compartilhada e dedup (versus_scene_cut.py).
+
+GAP CENTRAL (verificado): o IR+VM (ir/expr.py, vm.py, opcodes.py) compila expressões MUGEN de verdade (fixo 24.8, redirects de escopo), mas não há runtime C nem emissor — mg_vm.c, mg_ops.h, c_runtime_spec.py não existem no repo (find vazio, conferido). A ROM roda FSM tabelado hardcoded de 12 papéis destilado por análise regex dos controllers; fight_runtime_data.py:859 confessa: "source controller predicates and gameplay effects are not executed by these tables". Trigger1/expressões CNS não executam na ROM. Projétil não tem hit flag; helper roda estados do dono mas é inatingível; blend/afterimage/palfx → manual.
+2. Harness para conversão assistida (existe, é o ponto forte)
+
+Skills: sms-mugen-source-semantics.md (estágios parse→IR→generated→consumed→ROM observada), sms-psg-audio.md, sms-fight-input-proof.md, sms-input-pause.md;
+Workflow mugen-engine-quality.md + pipeline mugen_fighting_v1.json;
+Gates reais em tools/sms_wrapper/: audit_mugen_engine_contract.py (contrato machine-readable — 12 capabilities todas status: planned, 21 técnicas 5 baseline/15 candidate/1 rejected), scale_pilot.py --self-check (diagnóstico, não gate), audit_animation_contract/semantics/import_semantics, move_checklist.py --controls (perfil de controle por personagem), provenance.py (decisão humana por símbolo), inventory.py;
+source.py aceita ZIP/pasta/RAR com proteção path-traversal.
+
+3–4. Gráficos e tamanhos que liga corretamente
+Qualquer bitmap MUGEN (16², 24², 32²…) → grade 8×8 com borda transparente; metasprite TALL 8×16. Limites budget real medidos (sms_budget.py): 8 sprites/linha, SAT 64, 768 tiles, VRAM 16 KB, 15 cores/subpaleta. Perfil legado 1:4 está bloqueado para delivery por contrato. Validação: ROM luta_mugen.sms (589.824 B) com ~200 evidências em out/evidence, including rom_asset_binding v074 sem problemas.
+5. Jogabilidade → controle Master
+O melhor caminho do motor: mapa 6→2 botões por família-por-pressão (fraco/forte, threshold 6 ticks), b/y descartados explicitamente e reportados, nunca escondidos (sms_controls.py:36-43); fail-closed em acordes (teste compila o C com gcc e prova que 1+2 não dispara comando de botão único); runtime com ring buffer, normalização facing, one-pulse-one-command, validado em ROM via uinput (commit 9439695). Perfil de controle é hash-bound por personagem (Ryo real, SHA 7272abcf…).
+6. Sons — 0% automático
+sms_sound.py não converte: classifica todo PCM ≤0,35 s como manual com esboço PSGlib e o resto unsupported ("33/33 sons → manual" :5). SMS não tem PCM — a rota correta é re-autoria PSG sob audit_audio_provenance.py + manifesto (não pude conferir a cobertura do manifesto: diretório EIO). IR tem PlaySnd mas nenhum gerador o emite; o áudio da ROM atual é 6 SFX autorais hardcoded.
+7. Cenários — parser pronto, consumo inexistente
+stage.py lê parallax/BGCtrl/janelas, mas nada o importa e imagens de BG não são decodificadas. Runtime desenha fundo estático autorado em PNT (main.c:551-554); probes de BG são declarados explicitamente "no delivery claim".
+8–9. Texto e menus — inexistentes como conversão
+Nada trata fontes .fnt/AIRFONT; HUD atual são glifos 8×8 autorados em C (KO, dígitos, barras). select.def, title/logo/end: nem parseados. Menus hoje são território do pipeline SMSForge (gate audit_asset_proof_sheet.py), não do motor.
+10. Cores — funcional com módulo morto no meio
+Quantização 256→15 por frequência + snap à grade 6-bit ×85, sem dithering (sms_tiles.py:45-64) — funciona. Mas palette_contract.py (PAL0–PAL3 com empréstimo, fusão lossless, dE76) está quebrado: importa converters.sprites.vdp_rgb que não existe (:21, ModuleNotFoundError conferido) e aponta para caminhos SGDK legados. O runtime usa política paralela: linha de 16 compartilhada P1=1–7 / P2=9–15; swap/flash de hit é contrato declarado, não implementado.
+
+Riscos de drift que bloqueiam qualquer "pronto"
+
+Docs vs código: docstring de cns.py:3 referencia conversor inexistente; contrato declara capacidade como medida onde a ROM usa tabela hardcoded — o próprio gate marca tudo planned;
+luta_mugen/doc EIO → 57 testes sem veredito real, manifestos de áudio/doação inconferíveis; recuperação da mídia é pré-requisito de auditoria completa;
+Dois módulos mortos (palette_contract.py, stage.py) dão aparência de capacidade que não existe — candidatos a quarentena ou religação;
+A lacuna estrutural do seu objetivo ("motor prover tudo que pode ser automático"): áudio, stages, texto, menus e a execução real de CNS/trigger são exatamente onde o automático para e o harness assistido assume — e o harness está montado, mas com 12/12 capacidades ainda planned no contrato.
+
+Se quiser, o próximo passo natural é um plano porpriorizado: (a) religar stage.py+decode de imagem de BG ao pipeline, (b) reparar ou aposentar palette_contract.py, (c) emissor C da VM (fechar o gap IR→ROM), (d) restore do diretório EIO.

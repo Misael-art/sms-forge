@@ -10,6 +10,8 @@ Reprova:
   required_state_missing
   pivot_inconsistent
   empty_or_identical_cycle
+  geometry_contract_violation (bbox, altura, largura, baseline ou canvas)
+  duplicate_frame_in_action (quando unique_frames_required)
 
 Uso:
   audit_animation_semantics.py --manifest <json>
@@ -28,7 +30,7 @@ import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from png_io import write_indexed_png, read_indexed_png  # noqa: E402
+from png_io import write_indexed_png, read_indexed_png, PngError  # noqa: E402
 
 
 def sha256_file(path):
@@ -43,6 +45,24 @@ def frame_hash(path):
     img = read_indexed_png(path)
     body = b"".join(img["pixels"])
     return hashlib.sha256(body).hexdigest()
+
+
+def visible_bbox(path):
+    """Mede bbox de pixels opacos; o indice 0 e sempre transparente."""
+    img = read_indexed_png(path)
+    points = [(x, y) for y, row in enumerate(img["pixels"])
+              for x, idx in enumerate(row) if idx != 0 and idx not in img["trns"]]
+    if not points:
+        return img, None
+    xs = [p[0] for p in points]
+    ys = [p[1] for p in points]
+    box = (min(xs), min(ys), max(xs), max(ys))
+    return img, {
+        "x0": box[0], "y0": box[1], "x1": box[2], "y1": box[3],
+        "width": box[2] - box[0] + 1,
+        "height": box[3] - box[1] + 1,
+        "baseline_y": box[3],
+    }
 
 
 def audit(manifest, project="."):
@@ -71,8 +91,52 @@ def audit(manifest, project="."):
             hashes.append(frame_hash(path))
             if isinstance(fr, dict) and "pivot" in fr:
                 pivots.append(tuple(fr["pivot"]))
+        geometry = action.get("geometry_contract")
+        if geometry:
+            expected_canvas = geometry.get("canvas_px")
+            width_range = geometry.get("visible_width_px")
+            height_range = geometry.get("visible_height_px")
+            expected_baseline = geometry.get("baseline_y_px")
+            tolerance = geometry.get("baseline_tolerance_px", 0)
+            for fr in frames:
+                rel = fr if isinstance(fr, str) else fr.get("png")
+                path = rel if os.path.isabs(rel) else os.path.join(project, rel)
+                if not os.path.isfile(path):
+                    continue
+                try:
+                    img, box = visible_bbox(path)
+                except (OSError, ValueError, PngError) as exc:
+                    problems.append(
+                        f"geometry_contract_violation: '{name}' frame '{rel}' ilegivel ({exc})")
+                    continue
+                if expected_canvas and [img["w"], img["h"]] != list(expected_canvas):
+                    problems.append(
+                        f"geometry_contract_violation: '{name}' frame '{rel}' canvas="
+                        f"{img['w']}x{img['h']} esperado={expected_canvas}")
+                if box is None:
+                    problems.append(
+                        f"geometry_contract_violation: '{name}' frame '{rel}' sem pixels visiveis")
+                    continue
+                if width_range and not width_range[0] <= box["width"] <= width_range[1]:
+                    problems.append(
+                        f"geometry_contract_violation: '{name}' frame '{rel}' largura="
+                        f"{box['width']} fora de {width_range}")
+                if height_range and not height_range[0] <= box["height"] <= height_range[1]:
+                    problems.append(
+                        f"geometry_contract_violation: '{name}' frame '{rel}' altura="
+                        f"{box['height']} fora de {height_range}")
+                if expected_baseline is not None and abs(box["baseline_y"] - expected_baseline) > tolerance:
+                    problems.append(
+                        f"geometry_contract_violation: '{name}' frame '{rel}' baseline="
+                        f"{box['baseline_y']} esperado={expected_baseline} ±{tolerance}")
         if hashes and len(set(hashes)) == 1 and len(hashes) > 1:
             problems.append(f"empty_or_identical_cycle: '{name}' é o mesmo frame repetido")
+        if action.get("unique_frames_required") and len(set(hashes)) != len(hashes):
+            duplicate_hashes = {h for h in hashes if hashes.count(h) > 1}
+            duplicate_indexes = [i for i, h in enumerate(hashes) if h in duplicate_hashes]
+            problems.append(
+                f"duplicate_frame_in_action: '{name}' indices={duplicate_indexes}; "
+                "unique_frames_required=true")
         sig_set = frozenset(hashes)
         sig_tuple = tuple(hashes)
         for other_name, (other_set, other_tuple) in signatures.items():
@@ -104,10 +168,17 @@ def _self_check():
         a2 = os.path.join(d, "idle_1.png")
         b1 = os.path.join(d, "walk_0.png")
         b2 = os.path.join(d, "walk_1.png")
+        g1 = os.path.join(d, "geometry_0.png")
+        g2 = os.path.join(d, "geometry_1.png")
         _frame(a1, lambda x, y: 1 if x < 8 else 0)
         _frame(a2, lambda x, y: 1 if y < 8 else 0)
         _frame(b1, lambda x, y: 2 if x > 8 else 1)
         _frame(b2, lambda x, y: 2 if y > 8 else 1)
+        _frame(g1, lambda x, y: 1 if 4 <= x < 12 and 4 <= y < 16 else 0)
+        _frame(g2, lambda x, y: 2 if 4 <= x < 12 and 4 <= y < 16 and x < 8 else
+                                (1 if 4 <= x < 12 and 4 <= y < 16 else 0))
+        _frame(os.path.join(d, "geometry_bad.png"),
+               lambda x, y: 1 if 4 <= x < 12 and 4 <= y < 15 else 0)
         good = {
             "required_states": ["idle", "walk"],
             "actions": [
@@ -122,6 +193,26 @@ def _self_check():
             {"png": b2, "pivot": [8, 16]},
         ]
         assert not audit(good, d), audit(good, d)
+
+        geometry = {
+            "actions": [{"name": "idle", "unique_frames_required": True,
+                         "frames": [g1, g2],
+                         "geometry_contract": {
+                             "canvas_px": [16, 16],
+                             "visible_width_px": [8, 8],
+                             "visible_height_px": [12, 12],
+                             "baseline_y_px": 15,
+                             "baseline_tolerance_px": 0,
+                         }}]
+        }
+        assert not audit(geometry, d), audit(geometry, d)
+        geometry["actions"][0]["frames"] = [g1, os.path.join(d, "geometry_bad.png")]
+        p = audit(geometry, d)
+        assert any("geometry_contract_violation" in x and "baseline" in x for x in p), p
+        assert any("geometry_contract_violation" in x and "altura" in x for x in p), p
+        geometry["actions"][0]["frames"] = [g1, g1]
+        p = audit(geometry, d)
+        assert any("duplicate_frame_in_action" in x for x in p), p
 
         missing = {"required_states": ["idle", "heavy"], "actions": good["actions"]}
         p = audit(missing, d)
@@ -158,7 +249,7 @@ def _self_check():
     finally:
         shutil.rmtree(d, ignore_errors=True)
     print("[SELF-CHECK OK] animation_semantics "
-          "(roster, permutação, clone, ciclo idêntico, pivot)")
+          "(roster, permutação, clone, ciclo idêntico, pivot, bbox, baseline, quadros únicos)")
     return 0
 
 

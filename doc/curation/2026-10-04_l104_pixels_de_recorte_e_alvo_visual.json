@@ -1,0 +1,69 @@
+{
+  "curation_id": "2026-10-04_l104_pixels_de_recorte_e_alvo_visual",
+  "date": "2026-10-04",
+  "scope": "sms_sprite_sheet_cleanup_and_visual_quality",
+  "authorization": "O dono apontou pixels deslocados e granulação na folha idle de J.J., pediu ajuste fino e estabeleceu a busca por qualidade AAA como objetivo das funções do agente. Em nova prancha, o dono reportou recidiva de halo/recorte sujo no Joe Musashi e pediu revisão obrigatória em toda proposta do roster; o estudo de recorte transparente gerado depois também foi rejeitado por franja cromática.",
+  "lessons": [
+    {
+      "id": "L104",
+      "status": "fechada_com_ferramenta_e_regra",
+      "lesson": "Uma folha pode passar em paleta e conectividade e ainda conter pixels de cor incompatível presos à silhueta. Para cada pose, revise recorte e agrupamento no tamanho nativo e em ampliação nearest-neighbor; declare cores por material nas regiões suscetíveis e rode audit_sprite_cutout.py. Qualidade AAA é objetivo aspiracional para o agente perseguir em cada função, não claim de entrega: aprovação visual, integração e evidências executáveis continuam necessárias. A component-only pass is not a clean-cutout verdict: the Joe Musashi review exposed a profile-schema gap and an owner-visible halo despite a limited detached-component check; valid material-region review plus human inspection remains mandatory.",
+      "root_cause": "A folha v4 passou nos gates de recursos e animação, e cada figura era um único componente conectado. Mesmo assim, 13 pixels #AA5555 ficaram no limite superior do cabelo em 9 quadros: cor da sombra da pele ligada diagonalmente ao contorno azul, não ruído detectado por componentes. A regra genérica de speckle não mede compatibilidade do pixel com o material local.",
+      "evidence": {
+        "owner_reference": "/run/user/1000/codex-desktop/tmp/codex-clipboard-b2b606f2-32c7-4c5f-be42-fdf373505b3d.png",
+        "predecessor_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v4.png",
+        "predecessor_sha256": "57b0b11e24306d37483b4d384a477db1663d624260ca56c70d102872249a98ec",
+        "pixels_removed": 13,
+        "removed_rgb": "#AA5555",
+        "removed_frame_cells": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          11
+        ],
+        "regions_checked": "visible_bbox_top, x=0..95 and y=0..5 in every 96x96 frame; permitted navy/blue/violet/white hair and outline colors",
+        "corrected_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v5.png",
+        "corrected_sha256": "1f5e4807320343279504b27a1f13e8fdbf81282a1d398c2312a72c349b1e8dd6",
+        "diff_result": "exactly 13 old opaque pixels became transparent; zero added pixels, zero recolored pixels, no rescaling or pose changes",
+        "old_sheet_gate": "FAIL: audit_sprite_cutout.py reports 13 off-material pixels in the declared hair region",
+        "new_sheet_gates": "PASS: audit_sprite_cutout.py; audit_validate_resources.py (13 useful SMS colors, no dithering); audit_animation_semantics.py (12 unique frames, geometry and common baseline)",
+        "rejected_methods": "ImageGen edit altered morphology and outlines; broad 18% multi-corner floodfill erased legitimate light details. Neither output was used.",
+        "limits": "The region gate checks declared material colors and disconnected components, not full visual fidelity. The v5 sheet awaits separate owner approval and has no ROM/emulator validation. AAA remains a target, not a certification.",
+        "followup_joe_musashi_2026_10_04": {
+          "owner_reference": "/run/user/1000/codex-desktop/tmp/codex-clipboard-75ffad7a-ae88-49e5-b2be-a2b82253438c.png",
+          "owner_reference_sha256": "2d3911cae3e2a0952fb724b2fd6d9b054e7e983b8593160c2ba10949899b98db",
+          "source_sheet": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+          "source_sheet_sha256": "f04da4b2c4930340315b19f5061cf7dc2dc4b6f86567cebfe6bc366a0019bd8d",
+          "owner_visual_result": "fail: owner identified dirty/haloed cutout around Joe Musashi in roster review",
+          "direct_cutout_audit_result": "Existing v2 asset contract is not in audit_sprite_cutout schema; invocation stopped because sheet.columns/rows/frame_px are absent.",
+          "limited_component_probe": "Temporary adapter with 12px minimum component and the entire character palette allowed returned PASS; this only measured detached islands and did not test material colors or explain the visible halo.",
+          "learning": "A component-only pass is not a clean-cutout verdict. Require a valid material-region profile and human inspection of transparent source at 1x and nearest-neighbor 4x on contrasting backgrounds.",
+          "sprite_owner_approval": "not approved; morphology is a reference only, cutout revision remains open",
+          "asset_contract_path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_asset_contract_v2.json",
+          "asset_contract_sha256": "447fd22379c7710417074d9b3c9391c0c241bd3e87cc2a9e887c259fabd90d8e",
+          "cutout_audit_tool": "tools/sms_wrapper/audit_sprite_cutout.py",
+          "cutout_audit_self_check": "PASS: tool self-check covers detached components and material-region colors; it does not judge full visual fidelity.",
+          "imagegen_cutout_study": {
+            "artifact": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v1_cutout_rejected.png",
+            "sha256": "bbc43bb984b9426ec4a49991d16eac5cc7b07b7741120f38c6a87c00aa2aa35e",
+            "result": "rejected: red/colored edge fringe remains after requested transparent-background cleanup",
+            "decision": "Do not equate imagegen transparency with a clean cutout; inspect on light and dark backgrounds and run a valid material-region profile."
+          }
+        }
+      },
+      "rule_section": "SMS_GLOBAL §89",
+      "tool_that_measures": "audit_sprite_cutout.py; audit_validate_resources.py; audit_animation_semantics.py",
+      "skill_that_teaches": "workflows/new-visual-asset.md",
+      "limits": "The 2026-10-04 Joe component-only probe used all palette colors as allowed and cannot prove a clean edge; owner flagged its cutout for revision."
+    }
+  ],
+  "note_ids": {
+    "next_id": "L105",
+    "mastery": "A material-region palette catches attached off-material flecks that connectivity misses. Extend region profiles only where the model sheet can define them; retain owner visual review for the rest of the silhouette."
+  }
+}

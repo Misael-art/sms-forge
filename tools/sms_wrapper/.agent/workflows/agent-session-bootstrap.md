@@ -5,6 +5,9 @@
 3. Se intenção ambígua → apresentar menu de modos (create/analyze/train/lab/curation).
 4. Projeto em foco: ler `doc/10-memory-bank.md` do projeto PRIMEIRO.
 5. Nunca substituir memory bank/GDD/TDD por estado de sessão.
+   Ao criar/retomar visual, aplicar `artifact-organization.md` central: resolver
+   papel e ID no registro, confrontar candidata/aprovada com a memória e
+   reconciliar divergências antes da próxima escrita.
 6. Pedido de produção contínua / "não pare no diagnóstico" →
    `workflows/causal-persistence-loop.md` + `workflows/production-loop.md`.
 7. Dois ou mais ramos independentes → `harness_orchestration.py` (máx. 3).

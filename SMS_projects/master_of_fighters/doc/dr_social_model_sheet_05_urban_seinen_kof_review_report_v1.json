@@ -1,0 +1,33 @@
+{
+  "schema": "sms_art_review_checklist_report_v1",
+  "status": "pending",
+  "exit_code": 2,
+  "asset_id": "dr_social_model_sheet_05_urban_seinen_kof_v1",
+  "characters_reviewed": 1,
+  "axis_counts": {
+    "pass": 0,
+    "fail": 0,
+    "pending": 13,
+    "not_applicable": 0
+  },
+  "failed_axes": [],
+  "pending_axes": [
+    "dr_ferdinand_social.document_and_layout",
+    "dr_ferdinand_social.style_reference_application",
+    "dr_ferdinand_social.lineart_and_contours",
+    "dr_ferdinand_social.morphology_and_biotype",
+    "dr_ferdinand_social.shading_and_palette",
+    "dr_ferdinand_social.relative_scale_and_baseline",
+    "dr_ferdinand_social.neutral_background",
+    "dr_ferdinand_social.face_and_identity_continuity",
+    "dr_ferdinand_social.costume_and_materials",
+    "dr_ferdinand_social.equipment_and_weapon_continuity",
+    "dr_ferdinand_social.cross_view_consistency",
+    "dr_ferdinand_social.legibility_and_crop_integrity",
+    "dr_ferdinand_social.human_traits_and_unapproved_details",
+    "owner_approval",
+    "independent_review"
+  ],
+  "problems": [],
+  "claim_ceiling": "checklist_completeness_only; artistic_truth_requires_human_review"
+}

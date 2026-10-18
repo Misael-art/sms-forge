@@ -1,0 +1,21 @@
+{
+  "curation_id": "2026-09-26_l084_makesms_merge_limit",
+  "date": "2026-09-26",
+  "scope": "mugen_scale_pilot_mapper_package",
+  "authorization": "pedido do usuário para prosseguir com o piloto de escala e alinhar as ferramentas ao piso de engenharia",
+  "lessons": [
+    {
+      "id": "L084",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "lesson": "makesms limita a oito operações -mbank, mas o parser ignora erros além do limite. Uma ROM pode buildar sem os bancos altos. Agrupe páginas contíguas de 16 KiB num arquivo por intervalo e faça o auditor reprovar mais de oito mapas.",
+      "evidence": {
+        "source": "sdk/devkitSMS-upstream/makesms/src/makesms.c: MAX_MERGES=8; addMerge retorna erro após o limite e o chamador ignora o retorno",
+        "observed": "candidato de escala com 35 mapas -mbank gerou ROM de 196608 bytes e não incluiu o banco 25 de Ryu, apesar de build success",
+        "correction": "versus_scene_cut.py concatena intervalos contíguos e o auditor de contrato verifica o máximo de oito mapas",
+        "validation": "PASS parcial do piloto: 35 páginas contíguas 16 KiB agregadas num -mbank; build 655360 B; TMR SEGA em 0x7ff0; bytes dos bancos 2, 24, 25 e 36 conferidos contra assets; vídeo Emulicious 302 frames/5,04 s. A captura mostra apenas idle estático e não aceita gameplay, áudio ou capacidade alvo de 1 MiB."
+      },
+      "rule_section": "SMS_GLOBAL §69",
+      "tool_that_measures": "audit_mugen_engine_contract.py"
+    }
+  ]
+}

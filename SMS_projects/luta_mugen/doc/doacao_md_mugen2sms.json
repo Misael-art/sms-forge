@@ -1,0 +1,271 @@
+{
+  "origin": "mugen2sgdk_forge (SGDK Forge, branch de E3) — copia em 2026-09-25",
+  "policy": "uso local; redistribuicao dos derivados bloqueada no GDD",
+  "files": [
+    {
+      "local": "__init__.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/__init__.py",
+      "donor_sha256": "19797a535cc064cd705be323306a245d534c478c409accf4c34b7e966938c300"
+    },
+    {
+      "local": "__main__.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/__main__.py",
+      "donor_sha256": "75989aba6759872e7f579556e51f9eacdef76e63ff6aa7acf71f6d94c13351f5",
+      "local_sha256_after_deviation": "185d159cb9969380b27eb6a2c523a2bb63ad56fb6e0807f7dc2ed874a5377569",
+      "note_deviation": "Revisão L083: substitui CLI MD quebrada por dispatch lazy das rotas SMS existentes e quality-check."
+    },
+    {
+      "local": "analysis/__init__.py",
+      "donor": null,
+      "donor_sha256": null
+    },
+    {
+      "local": "analysis/fidelity.py",
+      "origin": "local_original",
+      "motivo": "camada analysis SMS criada no fork (orcamento VDP + fidelidade por recurso); nao doada",
+      "local_sha256_after_deviation": "bc3a3fb48d276c20ef715ea0ba21b4fd79e147ee80ade4847f69fa0b3848bad9"
+    },
+    {
+      "local": "analysis/scale_pilot.py",
+      "origin": "local_original",
+      "motivo": "Medidor local do corte 72–88 px, sprites/scanline, SAT, RAM/VRAM e cadência versus AIR; não existia no doador MD.",
+      "local_sha256_after_deviation": "4730c5159b89826e599adda97108d074b119c5e3e100ae15ef02234d5ce533b4",
+      "note_deviation": "Medidor local 72–88 px: --self-check, grid 8px, máscara/pivô via --video, pools idle/deltas, remapeamento por facing/paleta, buffers current+next, dedup cross-ator exato e probe de reconstrução de metadata P1→P2 por bytes/máscara (L085/L086/L088). selected-facing transition prefetch: exact new 8x16 pairs divided by AIR ticks, current+next residency, explicit throughput-not-measured scope and alias resolution (L085/L086/L088). Adds deterministic cyclic idle_cache_plan with physical slots, remapped metadata, source offsets, axis/AIR preservation, and self-check (2026-09-26).",
+      "deviation_log": [
+        {
+          "date": "2026-09-29",
+          "from_sha256": "058e3f0502a25e005d96187e54be1e97879d6dbe7abc60f948089411c08141b3",
+          "to_sha256": "4730c5159b89826e599adda97108d074b119c5e3e100ae15ef02234d5ce533b4",
+          "reason": "L090: plano de slots idle periodico (ponto fixo guloso ou ping-pong) + _assert_idle_plan_periodic; self-check com fixture do defeito"
+        }
+      ]
+    },
+    {
+      "local": "analysis/sms_budget.py",
+      "origin": "local_original",
+      "motivo": "camada analysis SMS criada no fork (orcamento VDP + fidelidade por recurso); nao doada",
+      "local_sha256_after_deviation": "a5da917dd23f8ab440686001ce62830d70aee4e4995b6600d15f3925dbb94408"
+    },
+    {
+      "local": "character.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/character.py",
+      "donor_sha256": "8cef36324cef33a67648a531bb506de49a1bad224eebb6b55ae707cc5fcb64c0",
+      "local_sha256_after_deviation": "8fdce255eb545d0894412eb219eae13dc308f7879a11b1a70cd4c895242d2adf",
+      "motivo": "campo raw_states (CNS bruto) exposto para analysis/move_checklist e anim_time_contract; doc/21 itens 1-2"
+    },
+    {
+      "local": "converters/__init__.py",
+      "note": "init do doador (referencia a SGDK) descartado; local esvaziado — modulo SMS nasce na S4",
+      "discarded_donor_docstring": true
+    },
+    {
+      "local": "converters/sms_clsn.py",
+      "origin": "local_original",
+      "motivo": "camada conversao SMS criada no fork (doador MD tinha so __init__ vazio); nao doada",
+      "local_sha256_after_deviation": "3401143ef60ecaf50847e660810849882a3684f741daf4d1a0c507f10dbb03b0"
+    },
+    {
+      "local": "converters/sms_cmd.py",
+      "origin": "local_original",
+      "motivo": "camada conversao SMS criada no fork (doador MD tinha so __init__ vazio); nao doada",
+      "local_sha256_after_deviation": "308bdd9803b5405a2ed64b6c871dc386bbd324a7d13663b116ff15c7b208342d"
+    },
+    {
+      "local": "converters/sms_scale.py",
+      "origin": "local_original",
+      "note": "S4.5a contrato de escala do GDD 2026-09-25 (downscale 1:4, <=4 col x <=3 TALL)",
+      "local_sha256_after_deviation": "ebeeb2fb469e3d3d199f5f1bb222ac812f206888f6579847f8724a861e5ffa99",
+      "note_deviation": "Perfil legado 1:4 documentado como legacy_probe_quarter; adiciona transformação racional uniforme preservando pixels indexados, pivôs/eixos, AIR, flips e CLSN."
+    },
+    {
+      "local": "converters/sms_sound.py",
+      "origin": "local_original",
+      "motivo": "camada conversao SMS criada no fork (doador MD tinha so __init__ vazio); nao doada",
+      "local_sha256_after_deviation": "1f7a5c78ed03172ea772065bf81513a6d901b8b65c264a091e8d7a8c690a6ba4"
+    },
+    {
+      "local": "converters/sms_tiles.py",
+      "origin": "local_original",
+      "motivo": "camada conversao SMS criada no fork (doador MD tinha so __init__ vazio); nao doada",
+      "local_sha256_after_deviation": "040d99057793ec697079770c6691074b2bd84eb8a9a8082d6f5956507e685d0d"
+    },
+    {
+      "local": "data/__init__.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/data/__init__.py",
+      "donor_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local": "data/common_forge.cns",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/data/common_forge.cns",
+      "donor_sha256": "b4db950295cec76df96e22b6ae729dc0db0f19de5155fd169d0a3c933ec712c3"
+    },
+    {
+      "local": "generators/__init__.py",
+      "note": "init do doador (referencia a SGDK) descartado; local esvaziado — modulo SMS nasce na S4",
+      "discarded_donor_docstring": true
+    },
+    {
+      "local": "generators/emit_synth.py",
+      "origin": "local_original",
+      "motivo": "CLI que emite o fixture sintetico (mini) como header C committavel p/ cenas do runtime — arte real nunca entra no git; nao doado",
+      "local_sha256_after_deviation": "aa1d22f7af41563b434ec04b0cd886545d2b10c5b7bdf74f9fba579e981c1917",
+      "note_deviation": "T6: CLI --banked/--bin — emite header com _BANK/_OFF/_SIZE e escreve mini_bank2.bin (pagina 16 KB slot 2); sem --banked o formato antigo inline continua identico (usado pelos testes de byte)"
+    },
+    {
+      "local": "generators/runtime_format.py",
+      "origin": "local_original",
+      "motivo": "S4.5b formato de runtime do SMS criado no fork (metasprite 3B MSSF2T-provado, pares TALL, espelho-H como padrao, P2 por shift de indice); nao doado",
+      "local_sha256_after_deviation": "12cf43c33f46e3217c11133c0942b37cbf91ce173d53efd0032750bca3841297",
+      "note_deviation": "Documenta que deduplicacao P1/P2 pode divergir e exige metadata correspondente ao pool, L088."
+    },
+    {
+      "local": "generators/scene_cut.py",
+      "origin": "local_original",
+      "motivo": "Corte local de assets por lutador, ACT e orçamento SMS; derivado MUGEN permanece fora do Git",
+      "local_sha256_after_deviation": "e21a65af3e3168d97b526a402ffe49930ca5c723b4c0ea43d5badef7b27df6d3",
+      "note_deviation": "Corte SMS agora emite META/METAL P2 independentes e rejeita variantes sem metadata/geometry coerentes (L088)."
+    },
+    {
+      "local": "generators/smsdev.py",
+      "origin": "local_original",
+      "motivo": "camada conversao SMS criada no fork (doador MD tinha so __init__ vazio); nao doada",
+      "local_sha256_after_deviation": "b4952326047584bcb6c3dc034bc49f03889c2459e6a098db88dcaadfaabf2522",
+      "note_deviation": "Conversor SMS local; lote 2026-09-26 aceita assets pre_scaled e opção de omitir células metasprite vazias sem reescalar poses individualmente."
+    },
+    {
+      "local": "generators/versus_scene_cut.py",
+      "origin": "local_original",
+      "motivo": "Junção de dois cortes MUGEN em tables de runtime e mapper banks distintos para a cena versus",
+      "local_sha256_after_deviation": "ff0edf78a56472f10e693c64da96c57676826e885d1b700ad78549a9183aead0",
+      "note_deviation": "Junção de dois cortes; L083 habilitou dispatch SMS e L084 agrega bancos contíguos em arquivos mapper para respeitar MAX_MERGES=8 do makesms. exact byte-equality META/METAL aliases retaining every symbol and _SIZE; dedup summary recorded in generated manifest (L088)."
+    },
+    {
+      "local": "inventory.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/inventory.py",
+      "donor_sha256": "b965085864bc6fcc57516753d263b5177b7bfff4a183f7dda53fc84e1c6920a0",
+      "deviation": "S1: + --self-check com acervo sintetico embutido (§19); pipeline de inspecao inalterado",
+      "local_sha256_after_deviation": "30f9eb0d6fd0016bda8edc49cd78fd0f46a24b9bb2fedbc7d8ff2bf1bf450696"
+    },
+    {
+      "local": "ir/__init__.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/__init__.py",
+      "donor_sha256": "c94bd13c8beb1c3e20752a22cd2b6ab05f0f5fbcfb443cda2b5271396f8f478e"
+    },
+    {
+      "local": "ir/controllers.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/controllers.py",
+      "donor_sha256": "fef51865042274ee67069a82c2198419bb714e3710a8d8df423a03cfde58ff4d"
+    },
+    {
+      "local": "ir/expr.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/expr.py",
+      "donor_sha256": "9bd07ed3722ba29fe3e5e6005ab894db9e814221b7423b2e9fc34c4d2cbde745"
+    },
+    {
+      "local": "ir/opcodes.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/opcodes.py",
+      "donor_sha256": "5993763dae5873cec9f1b8ea2d17990cbd5c5fa661ca758821090379ed72b4f4"
+    },
+    {
+      "local": "ir/vm.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/vm.py",
+      "donor_sha256": "ef609ad7927492aa078504dbb00b5be987f27119c2281f495c3ec902347d9f55"
+    },
+    {
+      "local": "ken_full_parse.py",
+      "origin": "local_original",
+      "motivo": "arquivo de estudo S2: parseia personagem real e mede o IR; criado no fork SMS, nao doado",
+      "local_sha256_after_deviation": "e032d40a871c287bafc00684dd12cbe9efaedb9e074ddadf565535654d9b940e"
+    },
+    {
+      "local": "palette_contract.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/palette_contract.py",
+      "donor_sha256": "21fafca8c96babe7990dcf6a9ad9492e5dd8d967ebc7eddab46c56b19d0b1eb8"
+    },
+    {
+      "local": "parsers/__init__.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/__init__.py",
+      "donor_sha256": "4634c32ce4e053b53bd6619769aac822aee08970bb8c886d9404aff5ec4e20f3"
+    },
+    {
+      "local": "parsers/air.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/air.py",
+      "donor_sha256": "b914b9f69aac03bdc2352267639a07bc93c1e54626ef3aa7632bc0b0a2b3df32"
+    },
+    {
+      "local": "parsers/cmd.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/cmd.py",
+      "donor_sha256": "21e3d4c2ec1ac28c672f636cbddce0a3ece09422327d38d57f83e0ae0c5232cc"
+    },
+    {
+      "local": "parsers/cns.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/cns.py",
+      "donor_sha256": "e44d420619c223fd0a55336df8f520e88fe65c1c4e8b45c2671750e86f5d0b10"
+    },
+    {
+      "local": "parsers/ini.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/ini.py",
+      "donor_sha256": "3aa5514af51da470b3aa45e1a4acc47826f895bdca0b4383caf12ec15364ea3e"
+    },
+    {
+      "local": "parsers/sff.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/sff.py",
+      "donor_sha256": "2942ba2b878cda6894826b568660a546d6b7607c28f36e6838ea22ccc3d2a7a9"
+    },
+    {
+      "local": "parsers/snd.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/snd.py",
+      "donor_sha256": "1f54f4ef8b372426f1c682e292b69c23d15caed52ce9bfab2ca7a57a1d192de4"
+    },
+    {
+      "local": "parsers/stage.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/stage.py",
+      "donor_sha256": "43d21c871e7519bf966710f781d30bfa4badd200f8ccb162d9cec90c535daa0d"
+    },
+    {
+      "local": "provenance.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/provenance.py",
+      "donor_sha256": "12f00cea721574b1178b1983119b0af7e0fe5e269dbe4a03d89e4c8841fdca61"
+    },
+    {
+      "local": "source.py",
+      "donor_abspath_at_copy_time": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/source.py",
+      "donor_sha256": "405caeacb3e4a5a76bb6774aac43706b3a1a76803143e20fcac4b6c795724d38"
+    },
+    {
+      "local": "validate/__init__.py",
+      "donor": null,
+      "donor_sha256": null
+    },
+    {
+      "local": "analysis/move_checklist.py",
+      "origin": "local_original",
+      "motivo": "matriz de golpes assimilada por tecnica de move_checklist do forge MD + eixo pad SMS; doc/21 item 1",
+      "local_sha256_after_deviation": "5998451e780b9f38d05b77be58e5382d4d01a15c6218df156b92235942e03d4f"
+    },
+    {
+      "local": "analysis/anim_time_contract.py",
+      "origin": "local_original",
+      "motivo": "contrato temporal AIR->runtime SMS; tecnica de test_anim_time_contract do forge MD; doc/21 item 2",
+      "local_sha256_after_deviation": "3ab0d6dbdb1665f833493802bb7d88a1a0ec4ef88f99df1d110750cde8cc3b00"
+    },
+    {
+      "local": "converters/sms_controls.py",
+      "origin": "local_original",
+      "motivo": "mapa de controle por tempo de pressao (2 botoes SMS, tiers fraco/forte); doc/22",
+      "local_sha256_after_deviation": "68d898e89a77263ba70c7905d742f4bb3eae4676ebfd41c0e6a7a46c60e3a6f3"
+    },
+    {
+      "local": "analysis/trace_compare.py",
+      "origin": "local_original",
+      "motivo": "comparador de trilhas com igualdade de comprimento; tecnica de runtime_trace do forge MD sem o defeito do zip; doc/21 item 3",
+      "local_sha256_after_deviation": "e350d7c31338b87df4c9cd24d6c682b139d23be380bf6da596d59926d27f67c4"
+    },
+    {
+      "local": "analysis/trace_vs_air.py",
+      "origin": "local_original",
+      "motivo": "trilha por tick x duracoes do AIR (atraso por quadro); doc/21 itens 2+3",
+      "local_sha256_after_deviation": "2df90ef9586a882f6a6a7b7ba824715072605b74e4fcafd6a71cc7f236a21797"
+    }
+  ]
+}

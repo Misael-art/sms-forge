@@ -1,0 +1,99 @@
+{
+  "probe": "reg2_bit0_mirror",
+  "licao": "L130/§121",
+  "engine": "BlastEm 1.0.0 sms1/sms2",
+  "verdict": "inconclusivo_cenario_C",
+  "failures": [],
+  "sessions": {
+    "sms1_press": {
+      "reg2": "0xfe",
+      "mirrored": false,
+      "marker": [
+        83,
+        73,
+        77,
+        49,
+        254,
+        1,
+        179,
+        0
+      ],
+      "frame_final": 183,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms1_press/blastem-sms-383bc29450c546c9b42f62d5763b5481/screenshots/frame_20261014_230418.png"
+    },
+    "sms1_control": {
+      "reg2": "0xff",
+      "mirrored": false,
+      "marker": [
+        83,
+        73,
+        77,
+        49,
+        255,
+        0,
+        176,
+        0
+      ],
+      "frame_final": 180,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms1_control/blastem-sms-fcd41363dd5543938356bf3502ad5082/screenshots/frame_20261014_230424.png"
+    },
+    "sms2_press": {
+      "reg2": "0xfe",
+      "mirrored": false,
+      "marker": [
+        83,
+        73,
+        77,
+        49,
+        254,
+        1,
+        179,
+        0
+      ],
+      "frame_final": 183,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_press/blastem-sms-13f2b019f47b4995926b838831b39262/screenshots/frame_20261014_230429.png"
+    },
+    "sms2_control": {
+      "reg2": "0xff",
+      "mirrored": false,
+      "marker": [
+        83,
+        73,
+        77,
+        49,
+        255,
+        0,
+        176,
+        0
+      ],
+      "frame_final": 180,
+      "shot": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/sms2_control/blastem-sms-a56f46e4f5384dc49eca5983fbba104d/screenshots/frame_20261014_230434.png"
+    }
+  },
+  "gate_evidence": {
+    "gate_source_reprova": {
+      "exit": 1,
+      "output": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/gate_source_reprova.txt",
+      "summary": [
+        "}"
+      ]
+    },
+    "gate_source_excecao": {
+      "exit": 0,
+      "output": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/gate_source_excecao.txt",
+      "summary": [
+        "}"
+      ]
+    },
+    "gate_rom": {
+      "exit": 1,
+      "output": "/mnt/sdcard/Projects/SMSForge/out/campaign_tier1_2026-10-14/reg2_bit0_mirror/gate_rom.txt",
+      "summary": [
+        "}"
+      ]
+    }
+  },
+  "rom_sha256": "364b7edca8ea06f61996df690f28ad075530472c1bb655689731350c4b66b511",
+  "finding_gate_bypass": "audit_tilemap_mirror.py --source exige o identificador nu VDPControlPort na adjacencia; a unica porta exposta pela SMSlib vendorada e SMS_VDPControlPort (prefixada), que ESCAPA do padrao --source. O modo --rom ainda pega (ver gate_rom.txt). Proposta de patch exige aprovacao humana.",
+  "limits": "Mede apenas se o BlastEm modela o mirror SMS1; nao mede console real. Se cenrio C, L130 permanece documentado sem reproducao em simulador deste host; NENHUM upgrade de matriz de maestria/compatibilidade e reivindicado. Segunda engine (Emulicious) fica em LOTE F."
+}

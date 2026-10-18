@@ -1,0 +1,20 @@
+{
+  "curation_id": "2026-09-26_l086_metasprite_mirror_pivot",
+  "date": "2026-09-26",
+  "scope": "sms_mugen_fighter_scale_pilot",
+  "authorization": "pedido explícito para continuar o piloto de lutadores 72–88 px antes da arte completa",
+  "lessons": [
+    {
+      "id": "L086",
+      "status": "fechada_com_ferramenta_e_regra",
+      "lesson": "O espelhamento por metasprite SMS usa colunas arredondadas a 8 px. Usar largura exata desloca o pivô; medir a máscara na origem da grade também desloca a comparação por uma coluna transparente.",
+      "evidence": {
+        "observed": "Com Ryu de 31 px e facing esquerdo, a grade ocupa 32 px. A coluna excedente é transparente após o espelho; a imagem visível mantém seu pivô na coluna seguinte.",
+        "correction": "FIGHTER_MIRRORED_ORIGIN_X usa a largura arredondada; scale_pilot.py distingue origem da grade da origem raster e audita a máscara temporal do frame 0.",
+        "validation": "PASS: build canônico luta_mugen (131072 B); clone diagnóstico ROM SHA d5956fb38ff68331e128dfaf44cae015ec4faa189e37acca1725f381cdae271c; vídeo Emulicious 359 frames, ambos contornos com IoU 1.0 (Ken 2346/2346 px; Ryu 1710/1710 px); self-check e teste focado de escala passam. AIR em runtime permanece pendente."
+      },
+      "rule_section": "SMS_GLOBAL §71",
+      "tool_that_measures": "mugen2sms/analysis/scale_pilot.py"
+    }
+  ]
+}

@@ -47,8 +47,8 @@ def generate(outdir):
     f["bad_sprite"] = p
     # cenas de sprites
     p = os.path.join(outdir, "scene_ok.json")
-    json.dump({"sprite_size": "16x16", "zoomed": False, "screen_h": 192,
-               "sprites": [{"y": 8 + i * 22, "x": 40 + i * 24, "tile": i}
+    json.dump({"sprite_size": "8x16", "zoomed": False, "screen_h": 192,
+               "sprites": [{"y": 8 + i * 22, "x": 40 + i * 16, "tile": i}
                             for i in range(10)]}, open(p, "w"))
     f["scene_ok"] = p
     p = os.path.join(outdir, "scene_bad_line.json")
@@ -63,8 +63,27 @@ def generate(outdir):
     f["scene_bad_sat"] = p
     p = os.path.join(outdir, "scene_bad_d0.json")
     json.dump({"sprite_size": "8x8", "screen_h": 192,
-               "sprites": [{"y": 207, "x": 40, "tile": 0}]}, open(p, "w"))
+               "sprites": [{"y": 209, "x": 40, "tile": 0}]}, open(p, "w"))
     f["scene_bad_d0"] = p
+    # L129/§119: stored = y - 1, entao y=207 grava 0xCE e nao e terminador.
+    p = os.path.join(outdir, "scene_ok_y207.json")
+    json.dump({"sprite_size": "8x8", "screen_h": 192,
+               "sprites": [{"y": 207, "x": 40, "tile": 0}]}, open(p, "w"))
+    f["scene_ok_y207"] = p
+    # L129/§119: buffer de parsing conta entradas hidden; 8 delas derrubam o visivel.
+    p = os.path.join(outdir, "scene_bad_hidden_overflow.json")
+    json.dump({"sprite_size": "8x8", "screen_h": 192,
+               "sprites": [{"y": 50, "x": 0, "tile": 0, "hidden": True} for _ in range(8)]
+                          + [{"y": 50, "x": 120, "tile": 1}]}, open(p, "w"))
+    f["scene_bad_hidden_overflow"] = p
+    # L128/§118: o terminador 0xD0 so existe no modo 192 linhas.
+    d0 = [{"y": 209, "x": 40, "tile": 0}]
+    for name, extra in (("scene_ok_d0_224", {"screen_h": 224}),
+                        ("scene_bad_trunc_224", {"screen_h": 224, "sat_terminated": True}),
+                        ("scene_bad_screen_h", {"screen_h": 200})):
+        p = os.path.join(outdir, name + ".json")
+        json.dump({"sprite_size": "8x8", "sprites": d0, **extra}, open(p, "w"))
+        f[name] = p
     # cenas de contraste
     p = os.path.join(outdir, "luma_ok.json")
     json.dump({"pairs": [{"fg": list(C((3, 3, 3))), "bg": list(C((0, 0, 0)))}]},

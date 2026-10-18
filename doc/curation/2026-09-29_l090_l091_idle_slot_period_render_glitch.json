@@ -1,0 +1,38 @@
+{
+  "curation_id": "2026-09-29_l090_l091_idle_slot_period_render_glitch",
+  "date": "2026-09-29",
+  "scope": "plano_de_slots_ciclico_e_gate_de_imagem_renderizada",
+  "authorization": "pedido explícito do usuário: 'opção 3, e pode fazer a curadoria' (2026-09-29)",
+  "lessons": [
+    {
+      "id": "L090",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "O planejador de cache idle fazia uma única passada gulosa: na volta última→0 os pares da pose 0 iam para slots diferentes do layout inicial, a ROM mantinha a META inicial e o 0→1 seguinte sobrescrevia slots exibidos. Glitch determinístico a partir da 2ª volta, sempre nas mesmas peças (pés: Ken slots 58/59, Ryu 102/103).",
+      "evidence": {
+        "defeito": "SMS_projects/luta_mugen/out/local_study/generated/scale_pilot_80px_regenerated/scale_pilot_dedup_emulator_audit.json: next_metadata do loop difere da META inicial (Ken entradas 28-29, Ryu 18-19) e o 0→1 grava nesses slots.",
+        "captura": "scale_pilot_rom_zero_flicker/out/evidence/hyb3_zero_flicker.json: 87/537 quadros com a assinatura fixa 36/81 px nos pés do Ken, só após a 1ª volta; explica o fragmento no pé do Ryu do fast_render e o '3→0 slots 102/103 vs 82/83' do isolamento P2.",
+        "correcao": "scale_pilot.py itera o layout inicial até ponto fixo (volta == início); senão ping-pong par/ímpar; _assert_idle_plan_periodic simula dois ciclos e reprova pose que muda entre voltas ou upload em slot exibido. Relatório real regenerado: greedy_fixed_point nos dois lutadores, mesmos bytes de upload.",
+        "validacao": "scale_pilot.py --self-check com fixture do defeito (reprova), ciclo ímpar sem ponto fixo (ValueError) e ciclo par convergente (PASS); ROM scale_pilot_rom_flicker_min deadcfab71b7 passou audit_render_glitch em 3 capturas."
+      },
+      "rule_section": "SMS_GLOBAL §75",
+      "tool_that_measures": "mugen2sms/analysis/scale_pilot.py"
+    },
+    {
+      "id": "L091",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "lesson": "Simulador estático de scanline e vídeo 'com conteúdo' não provam a imagem: sprite perdido, tile residual, pose com pares trocados e flash de boot só aparecem comparando cada quadro do framebuffer com as imagens legais rasterizadas dos mesmos padrões/posições. No modo flicker, casar por faltando+sobrando escolhe a pose menor e fabrica 'sobrando'; casar primeiro por sobrando.",
+      "evidence": {
+        "negativo_flicker": "scale_pilot_rom_zero_flicker/out/evidence/neg_fast_render_zero_flicker.json: vídeo do fast_render reprova 536/536 no modo estrito.",
+        "vies_corrigido": "fm30: 595/1857 quadros 'com sobra' (todos com cor exata de paleta) viraram 0/1857 ao casar por sobra primeiro; a pose mista continua reprovando no self-check.",
+        "boot": "fm_r3.mp4: sprite perdido no canto (34 px) nos primeiros quadros; causa: display ligado antes da 1ª SAT; corrigido na ROM (SAT antes do displayOn, ligar em VBlank). Resta um flash de 7-9 px em y 135-136 antes do main, registrado em pre_content_lit_pixels, não julgado.",
+        "validacao": "audit_render_glitch.py --self-check (estrito, omissão, resíduo, flicker com cobertura, subconjunto sem viés, pose mista, omissão permanente, captura stale, início sustentado); ROM deadcfab71b7 PASS 0/767, 0/756, 0/761."
+      },
+      "rule_section": "SMS_GLOBAL §76",
+      "tool_that_measures": "audit_render_glitch.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L092",
+    "mastery": "Nada promovido a delivery: idle em palco preto, NTSC, sem input/combate/HUD/áudio. Opção 3 (flicker mínimo sem glitch) é o padrão escolhido; zero flicker a 72-88 px ficou bloqueado por hardware (limite inferior 9-10/linha; BG a 1 px = 12 px/s)."
+  }
+}

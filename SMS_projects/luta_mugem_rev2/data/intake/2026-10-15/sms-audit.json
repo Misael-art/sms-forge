@@ -1,0 +1,656 @@
+{
+  "schema": "sms_rev2_mugen_intake_code_audit_v1",
+  "date": "2026-10-15",
+  "root": "/mnt/sdcard/Projects/SMSForge",
+  "inputs": {
+    "tools/sms_wrapper/mugen2sms/__init__.py": {
+      "sha256": "b2b5cc75968caf50bcbdbf556b86f6d3507474850db4f5a60c9ccc5c0767da71",
+      "bytes": 72
+    },
+    "tools/sms_wrapper/mugen2sms/__main__.py": {
+      "sha256": "144de9ab4cb0fe3405eb2c485c38c781c48bf78cda53c7dad36be6454b089849",
+      "bytes": 1092
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/air_source_identity.py": {
+      "sha256": "d85658d1b2515b89d3196d2b00cf48f33322fd23b17de30cf8e64e083c3402c1",
+      "bytes": 8136
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/anim_time_contract.py": {
+      "sha256": "c94d99c824b81a02f3445295674a00071772cb95272bdc075ac5c42420746ed2",
+      "bytes": 16522
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/bg_normal_phase_probe.py": {
+      "sha256": "5c70bad0d3fd977216341958eb4f2ceaf129ecbcc8dfbc9e8f9b29dc3292c2f3",
+      "bytes": 22754
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/bg_probe_tiles.py": {
+      "sha256": "e1a8d51fefe34f0a82aa8e2dab46b5f6e14094773269bc6d8e918d8b5883a643",
+      "bytes": 6708
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/control_adapter.py": {
+      "sha256": "aaf7f5cbea432c1405970880d314565eee720eb5bc6b17d51929e965a81f7a92",
+      "bytes": 4640
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/fidelity.py": {
+      "sha256": "bc3a3fb48d276c20ef715ea0ba21b4fd79e147ee80ade4847f69fa0b3848bad9",
+      "bytes": 6888
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/move_checklist.py": {
+      "sha256": "5998451e780b9f38d05b77be58e5382d4d01a15c6218df156b92235942e03d4f",
+      "bytes": 10336
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/scale_pilot.py": {
+      "sha256": "bff9a0ca8b0804bd7c823da09b62fa2173464db1493ccc3a85a49ca5b5123e7e",
+      "bytes": 95881
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/sms_budget.py": {
+      "sha256": "a5da917dd23f8ab440686001ce62830d70aee4e4995b6600d15f3925dbb94408",
+      "bytes": 3028
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/trace_air_identity.py": {
+      "sha256": "3bff17a44560c0fba36bbdeed09883cafe10ab6c9471b16839b3709f88db27b1",
+      "bytes": 9144
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/trace_compare.py": {
+      "sha256": "e350d7c31338b87df4c9cd24d6c682b139d23be380bf6da596d59926d27f67c4",
+      "bytes": 4815
+    },
+    "tools/sms_wrapper/mugen2sms/analysis/trace_vs_air.py": {
+      "sha256": "2df90ef9586a882f6a6a7b7ba824715072605b74e4fcafd6a71cc7f236a21797",
+      "bytes": 9955
+    },
+    "tools/sms_wrapper/mugen2sms/character.py": {
+      "sha256": "c04826eeb700ae167b66887e22395a74fee705d6c004390a8e1db2c646036e5e",
+      "bytes": 10076
+    },
+    "tools/sms_wrapper/mugen2sms/converters/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tools/sms_wrapper/mugen2sms/converters/sms_clsn.py": {
+      "sha256": "3401143ef60ecaf50847e660810849882a3684f741daf4d1a0c507f10dbb03b0",
+      "bytes": 945
+    },
+    "tools/sms_wrapper/mugen2sms/converters/sms_cmd.py": {
+      "sha256": "11486c85d85c7f6b57e55a4ea70a93e010fff4c1940a89d355a756a59ef6defa",
+      "bytes": 7099
+    },
+    "tools/sms_wrapper/mugen2sms/converters/sms_controls.py": {
+      "sha256": "826663f0b52d2bc7ce5544c1272d8174b40f12c1a2346715daa2f4db692098b2",
+      "bytes": 10555
+    },
+    "tools/sms_wrapper/mugen2sms/converters/sms_scale.py": {
+      "sha256": "ebeeb2fb469e3d3d199f5f1bb222ac812f206888f6579847f8724a861e5ffa99",
+      "bytes": 8067
+    },
+    "tools/sms_wrapper/mugen2sms/converters/sms_sound.py": {
+      "sha256": "1f7a5c78ed03172ea772065bf81513a6d901b8b65c264a091e8d7a8c690a6ba4",
+      "bytes": 1404
+    },
+    "tools/sms_wrapper/mugen2sms/converters/sms_tiles.py": {
+      "sha256": "040d99057793ec697079770c6691074b2bd84eb8a9a8082d6f5956507e685d0d",
+      "bytes": 4729
+    },
+    "tools/sms_wrapper/mugen2sms/data/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tools/sms_wrapper/mugen2sms/generators/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tools/sms_wrapper/mugen2sms/generators/cmd_patterns.py": {
+      "sha256": "fbad9ab922a71a458d6d1b9233665e5c39ef283fc9edb8ddba7f0d7e1e909156",
+      "bytes": 8899
+    },
+    "tools/sms_wrapper/mugen2sms/generators/cpu_move_scripts.py": {
+      "sha256": "1e948d82e376bd625f6f23d41474d763d5d451ba6321a774c774e5618ee5ca4e",
+      "bytes": 18749
+    },
+    "tools/sms_wrapper/mugen2sms/generators/emit_synth.py": {
+      "sha256": "aa1d22f7af41563b434ec04b0cd886545d2b10c5b7bdf74f9fba579e981c1917",
+      "bytes": 2495
+    },
+    "tools/sms_wrapper/mugen2sms/generators/fight_runtime_data.py": {
+      "sha256": "49c07fae4ccbdc295cba7a912d71537596cfa98b49bdcd8deb436b1ad9cfe7ae",
+      "bytes": 47225
+    },
+    "tools/sms_wrapper/mugen2sms/generators/integrated_runtime_data.py": {
+      "sha256": "ff703f204f2c5dcf4c7342e01972c46e0eb7e50681acc4a8b87a7203250bec35",
+      "bytes": 11532
+    },
+    "tools/sms_wrapper/mugen2sms/generators/pose_table.py": {
+      "sha256": "3c627096118f46e47d4cdcb8a8bc344f9550192f14ab3f35862eacf049258102",
+      "bytes": 16700
+    },
+    "tools/sms_wrapper/mugen2sms/generators/runtime_format.py": {
+      "sha256": "406d70b8e07bc01b999011e87c90070394a1384e6710c4e4bbf8a8708d3cc90d",
+      "bytes": 5278
+    },
+    "tools/sms_wrapper/mugen2sms/generators/scene_cut.py": {
+      "sha256": "179062cd2bd635556fd740c905602f3035101f22f1af2466f9b4790ceecdcb9e",
+      "bytes": 67077
+    },
+    "tools/sms_wrapper/mugen2sms/generators/smsdev.py": {
+      "sha256": "9ee363c1bbd7c4a6ea60df7808fbc7f4a03cbca280a64a902116dc6835c2940f",
+      "bytes": 11683
+    },
+    "tools/sms_wrapper/mugen2sms/generators/source_frame_data.py": {
+      "sha256": "725c5b9cf4b95bed4e305050e9f212b2d66946cc66403f9b33896938c45aa2a2",
+      "bytes": 11087
+    },
+    "tools/sms_wrapper/mugen2sms/generators/versus_scene_cut.py": {
+      "sha256": "919ad3a4ef39a2f4ea1f378c5875d39378a62ae0c2f497cd35dd0216dbc464b2",
+      "bytes": 30769
+    },
+    "tools/sms_wrapper/mugen2sms/inventory.py": {
+      "sha256": "05dc0084ab2e43af6ef180d5bce23cda7ad0023403263f57102e36d93d253b9a",
+      "bytes": 10102
+    },
+    "tools/sms_wrapper/mugen2sms/ir/__init__.py": {
+      "sha256": "c94bd13c8beb1c3e20752a22cd2b6ab05f0f5fbcfb443cda2b5271396f8f478e",
+      "bytes": 78
+    },
+    "tools/sms_wrapper/mugen2sms/ir/controllers.py": {
+      "sha256": "fef51865042274ee67069a82c2198419bb714e3710a8d8df423a03cfde58ff4d",
+      "bytes": 15204
+    },
+    "tools/sms_wrapper/mugen2sms/ir/expr.py": {
+      "sha256": "5b4cc531fad96fd67144ac81b193e5834285680deb89c0227c5c09fe944b608a",
+      "bytes": 21587
+    },
+    "tools/sms_wrapper/mugen2sms/ir/opcodes.py": {
+      "sha256": "5993763dae5873cec9f1b8ea2d17990cbd5c5fa661ca758821090379ed72b4f4",
+      "bytes": 3763
+    },
+    "tools/sms_wrapper/mugen2sms/ir/vm.py": {
+      "sha256": "ef609ad7927492aa078504dbb00b5be987f27119c2281f495c3ec902347d9f55",
+      "bytes": 3742
+    },
+    "tools/sms_wrapper/mugen2sms/ken_full_parse.py": {
+      "sha256": "993b0d47680a74b4b13860b6b9292645e570bcf1f69fbcc1756cd793e9c1782f",
+      "bytes": 3257
+    },
+    "tools/sms_wrapper/mugen2sms/palette_contract.py": {
+      "sha256": "21fafca8c96babe7990dcf6a9ad9492e5dd8d967ebc7eddab46c56b19d0b1eb8",
+      "bytes": 6540
+    },
+    "tools/sms_wrapper/mugen2sms/parsers/__init__.py": {
+      "sha256": "4634c32ce4e053b53bd6619769aac822aee08970bb8c886d9404aff5ec4e20f3",
+      "bytes": 60
+    },
+    "tools/sms_wrapper/mugen2sms/parsers/air.py": {
+      "sha256": "b914b9f69aac03bdc2352267639a07bc93c1e54626ef3aa7632bc0b0a2b3df32",
+      "bytes": 4241
+    },
+    "tools/sms_wrapper/mugen2sms/parsers/cmd.py": {
+      "sha256": "21e3d4c2ec1ac28c672f636cbddce0a3ece09422327d38d57f83e0ae0c5232cc",
+      "bytes": 3481
+    },
+    "tools/sms_wrapper/mugen2sms/parsers/cns.py": {
+      "sha256": "e44d420619c223fd0a55336df8f520e88fe65c1c4e8b45c2671750e86f5d0b10",
+      "bytes": 3929
+    },
+    "tools/sms_wrapper/mugen2sms/parsers/ini.py": {
+      "sha256": "3aa5514af51da470b3aa45e1a4acc47826f895bdca0b4383caf12ec15364ea3e",
+      "bytes": 2172
+    },
+    "tools/sms_wrapper/mugen2sms/parsers/sff.py": {
+      "sha256": "2942ba2b878cda6894826b568660a546d6b7607c28f36e6838ea22ccc3d2a7a9",
+      "bytes": 4357
+    },
+    "tools/sms_wrapper/mugen2sms/parsers/snd.py": {
+      "sha256": "1f54f4ef8b372426f1c682e292b69c23d15caed52ce9bfab2ca7a57a1d192de4",
+      "bytes": 1632
+    },
+    "tools/sms_wrapper/mugen2sms/parsers/stage.py": {
+      "sha256": "43d21c871e7519bf966710f781d30bfa4badd200f8ccb162d9cec90c535daa0d",
+      "bytes": 10679
+    },
+    "tools/sms_wrapper/mugen2sms/provenance.py": {
+      "sha256": "f7804e0f8b7468f95434a8d84a2bf6016d2b8d23b1fa24ca065926eb96c552e1",
+      "bytes": 10891
+    },
+    "tools/sms_wrapper/mugen2sms/source.py": {
+      "sha256": "21340d72805b4cab222280aa0132845973c7c4bba86af077d9b76bec7c4dcce0",
+      "bytes": 5739
+    },
+    "tools/sms_wrapper/mugen2sms/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tools/sms_wrapper/mugen2sms/tests/make_fixtures.py": {
+      "sha256": "d719bc8068b16ee5376bfa5fe87114854cfbaba1b6c801c9b3bcce2c55f675f1",
+      "bytes": 6879
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_air_source_identity.py": {
+      "sha256": "24403093d1ee9f86f4fcdf1a60c2ef57285f66e1de4f2189e46a71df9544606d",
+      "bytes": 3269
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_analysis_move_anim.py": {
+      "sha256": "a5bc49b4de3791a639d345520fdcc34ba76b83a97e3a41fe98b4e9e0c45f1a04",
+      "bytes": 4783
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_body_push_c.py": {
+      "sha256": "8b3c398d9435c95d10027c31edb56ddb19c6d4ce33b26488efabbce1fdc68979",
+      "bytes": 6914
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_build_inner_compile_policy.py": {
+      "sha256": "e9e097cf9ec26c975158b64baa0373b4b2b9480cb8a35fdd7f8259be743cf1b4",
+      "bytes": 1010
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_build_recipe_cmd_sources.py": {
+      "sha256": "afd89995d112da454df302c14d62aef91ab7b1419ce51c936d4422c62fb8a1a8",
+      "bytes": 5905
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_cli_sms.py": {
+      "sha256": "af4de598391794cbbc00d51176cd5de1d67113959c12e90af44fe9d460907e56",
+      "bytes": 1000
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_close_attack_contract.py": {
+      "sha256": "fea4707f350415c9631ffb8ca7a452ad947cf8e871a6e9d9bfa3f00854672b9c",
+      "bytes": 8050
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_cmd_patterns_header.py": {
+      "sha256": "d10c0b9ff2c4833100e9ba7fa1704818d94c5fa088fea5529e5c7592777f2958",
+      "bytes": 4934
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_cmd_tier_blob.py": {
+      "sha256": "4baefc7278bb5a590d507053c4562a8bf7f919ecd8c900b1d8e9af1a5c0fd9ec",
+      "bytes": 6828
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_control_adapter.py": {
+      "sha256": "976028c0660269ac2f1da670d2eddc1a12b7626443ce24a09409b1510028b784",
+      "bytes": 2026
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_converters_golden.py": {
+      "sha256": "9ed1babc9888facc8357e464402c9797f4805674c49120a4bd0ef14e1998c5f0",
+      "bytes": 9027
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_cpu_controller_c.py": {
+      "sha256": "882e6c30272d802ed7c9bf58a4dff6c55c3dc6f4d8ff7fc6b0de88c0a678b6d9",
+      "bytes": 14570
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_cpu_move_scripts.py": {
+      "sha256": "8fd6d358c072e7b9b73074c695d1b48fbd533eb4e91b32cb452c0b2f7b103532",
+      "bytes": 4756
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_donation_parity.py": {
+      "sha256": "0a2a1cf0b591b7c883ec77a1ef744ae0c3e168f0a8b987e699caaf894d71f6ae",
+      "bytes": 2549
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_expr_redirect.py": {
+      "sha256": "78af868be874d07b448b108184f2ccb005206f227331dcb0867057590cc5ab19",
+      "bytes": 3648
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_expr_value_list.py": {
+      "sha256": "da8e13d38102cb7dc3edb9a59ad7a9dc5141bad06d9b97360084ddd5a47188d9",
+      "bytes": 3562
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_fight_runtime_data.py": {
+      "sha256": "1a8acf37d5de969981380a36199d81f7e5bd87d84dbdb04d654ab94961e522ed",
+      "bytes": 24848
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_input_chord_fail_closed.py": {
+      "sha256": "fd34528b3f0c0f303350cf9abd38678081f19479b71a39d476d13c4ed9032c1e",
+      "bytes": 1885
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_input_pad_c.py": {
+      "sha256": "15dc8c4c3f76555fe4bb40563442dca762223a0ec02357bcda3d7686c7d1ad09",
+      "bytes": 5985
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_input_ring_c.py": {
+      "sha256": "41501bf31616043fa27a48adce06c417a59afe884cc8f57dc61df83eff4c7981",
+      "bytes": 26453
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_input_tier_c.py": {
+      "sha256": "6406dc8a3285b92e37e080e09b5f7a1c4acd226e86931c150ee97a06b6d5e1c1",
+      "bytes": 2869
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_integrated_runtime_data.py": {
+      "sha256": "66e3535752792eacf7b1aacfef9efcb74f3e18d0f5289506442f11f5c7515491",
+      "bytes": 9077
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_inventory_selfcheck.py": {
+      "sha256": "b1476eccb8f8b0745ad3de144e3b4f2f8383dbfc766c328e36f19a9838167343",
+      "bytes": 1478
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_ken_full_parse.py": {
+      "sha256": "04bef3d3a8f713158f796d774b34f079dcae9292bdf8077f7c66daf8f914d204",
+      "bytes": 937
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_root_input_ring_c.py": {
+      "sha256": "a60cbefa612662fb71588604d52d2ce5937dc5a5d3964f778fca8275f09e7886",
+      "bytes": 10954
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_runtime_format.py": {
+      "sha256": "08684c16b11eea8d8b4a04401be01a920f0e024b010396dc226bee8e959efcc4",
+      "bytes": 4111
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_scene_cut_palette_binding.py": {
+      "sha256": "79a6a07f5be75bf645644b9f7d239b6bfa306e24de49f32180aa225678a40734",
+      "bytes": 3060
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_scene_cut_scale_order.py": {
+      "sha256": "5ba2687642179769b23c4d7e27100d3f4ea87aba8d8f075787b7f01283473625",
+      "bytes": 13206
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_sms_budget_synthetic.py": {
+      "sha256": "eea8932cd8fac742b273bd59ef94b379f06cfabc0077f0398cff554331541e3c",
+      "bytes": 5354
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_sms_scale.py": {
+      "sha256": "d8ad00d63db448cda19286a46dcfc77c020334b4b0ab92635bed9b33916a8d80",
+      "bytes": 3759
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_source_archives.py": {
+      "sha256": "9e74c185a7c43fdefc52b54fdfb9bef321d5e26f39d768b318c18c86aadda2f8",
+      "bytes": 4009
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_synthetic_character.py": {
+      "sha256": "200de3c78588f17f314bafe915884f54a9ed73fddd6c2ae6f60fb702b03a4a34",
+      "bytes": 3587
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_trace_air_identity.py": {
+      "sha256": "53fbef35469afe1f77fbdc71163b500b0b4b911ac699382e9816e59ece23365f",
+      "bytes": 5646
+    },
+    "tools/sms_wrapper/mugen2sms/tests/test_versus_scene_cut.py": {
+      "sha256": "bcca47fcdd4098a0dc95c717dede3f354e9691be0353aaf703e94ad3aaf3a828",
+      "bytes": 625
+    },
+    "tools/sms_wrapper/mugen2sms/validate/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "findings": [
+    {
+      "id": "VM",
+      "confirmed": true,
+      "scope": "No general SMS CNS C runtime/emitter found; fixed subset runtime exists",
+      "evidence": [
+        {
+          "path": "tools/sms_wrapper/mugen2sms/ir/vm.py",
+          "line": 1,
+          "fact": "Python reference doc claims mg_vm.c semantics; file not present in wrapper/integrada"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/ir/opcodes.py",
+          "line": 3,
+          "fact": "Names missing generators/c_runtime_spec.py and mg_ops.h"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/generators/fight_runtime_data.py",
+          "line": 859,
+          "fact": "Source route table only binds pattern/state/action; source predicates/effects not executed"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/generators/fight_runtime_data.py",
+          "line": 862,
+          "fact": "Explicit fixed common-state subset, not general CNS VM"
+        },
+        {
+          "path": "SMS_projects/luta_mugen/integrada/src/fight.c",
+          "line": 56,
+          "fact": "Fixed FSM runtime and hit logic exists, so not correct to say all runtime missing"
+        }
+      ],
+      "risk": "IR direct/controllerlabels do not prove consumed SMS behavior; Python host fixedpoint implementation uses float in MOD/POW helpers, noZ80performanceproof."
+    },
+    {
+      "id": "PALETTE",
+      "confirmed": true,
+      "evidence": [
+        {
+          "path": "tools/sms_wrapper/mugen2sms/palette_contract.py",
+          "line": 22,
+          "fact": "Imports missing .converters.sprites vdp_rgb"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/palette_contract.py",
+          "line": 28,
+          "fact": "SLOT_MAP PAL0/PAL1/PAL2/PAL3 and BG_A/BG_B are MD doctrine"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/palette_contract.py",
+          "line": 117,
+          "fact": "check_project assumes SGDK .res SPRITE and src/mg_gen u16palette arrays"
+        }
+      ],
+      "import_probe": "ModuleNotFoundError: mugen2sms.converters.sprites",
+      "risk": "Cannot fix by adding an import alias: target requires single P1sharedspritepalette, P0BG,6bitcolors, noPAL2/3."
+    },
+    {
+      "id": "STAGE",
+      "confirmed": true,
+      "evidence": [
+        {
+          "path": "tools/sms_wrapper/mugen2sms/parsers/stage.py",
+          "line": 174,
+          "fact": "Stage parser implementation exists"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/__main__.py",
+          "line": 8,
+          "fact": "Public commands have no stage route"
+        }
+      ],
+      "scan": "No imports/calls to parsers.stage found in package/tests; existing integrada/stage.c is separate prebuilt runtime not automatic stage import",
+      "risk": "Stage parsing not equivalent SMSscene generation/scroll/budget. Blackbackgroundrequested means defer stageintegration."
+    },
+    {
+      "id": "TESTCOUPLING",
+      "confirmed": true,
+      "evidence": [
+        {
+          "path": "tools/sms_wrapper/mugen2sms/tests/test_donation_parity.py",
+          "line": 8,
+          "fact": "Requires manifest in EIO historical doc tree"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/tests/test_ken_full_parse.py",
+          "line": 12,
+          "fact": "Hardcoded unrelated MugenesisKen archive"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/tests/test_control_adapter.py",
+          "line": 11,
+          "fact": "Hardcoded prior localstudyRyo profile"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/tests/test_body_push_c.py",
+          "line": 23,
+          "fact": "GCCtests compile C from previous integrada"
+        },
+        {
+          "path": "tools/sms_wrapper/mugen2sms/tests/test_root_input_ring_c.py",
+          "line": 12,
+          "fact": "Separatetests target previous rootprojectruntime"
+        }
+      ],
+      "risk": "Redirect all paths indiscriminately selects wrong runtimevariant; oldsource testpassnot newprojectproven."
+    }
+  ],
+  "hardcoded_project_references": [
+    {
+      "path": "tools/sms_wrapper/mugen2sms/generators/emit_synth.py",
+      "line": 6,
+      "text": "python3 -m mugen2sms.generators.emit_synth > ../../SMS_projects/luta_mugen/inc/gen/mini_art.h"
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/generators/emit_synth.py",
+      "line": 7,
+      "text": "python3 -m mugen2sms.generators.emit_synth --banked --bin ../../SMS_projects/luta_mugen/data/mini_bank2.bin \\"
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/generators/emit_synth.py",
+      "line": 8,
+      "text": "> ../../SMS_projects/luta_mugen/inc/gen/mini_art.h"
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_body_push_c.py",
+      "line": 23,
+      "text": "SRC = ROOT / \"SMS_projects/luta_mugen/integrada\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_control_adapter.py",
+      "line": 11,
+      "text": "PROFILE = ROOT / \"SMS_projects/luta_mugen/out/local_study/lote0_20261004/control_profile_ffspRyo_20261005.json\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_cpu_controller_c.py",
+      "line": 17,
+      "text": "SRC = ROOT / \"SMS_projects/luta_mugen/integrada\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_cpu_move_scripts.py",
+      "line": 19,
+      "text": "INTEGRATED = ROOT / \"SMS_projects/luta_mugen/integrada\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_donation_parity.py",
+      "line": 8,
+      "text": "MANIFEST = ROOT.parents[2] / \"SMS_projects/luta_mugen/doc/doacao_md_mugen2sms.json\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_input_chord_fail_closed.py",
+      "line": 10,
+      "text": "SRC = ROOT / \"SMS_projects/luta_mugen/integrada/src\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_input_chord_fail_closed.py",
+      "line": 11,
+      "text": "INC = ROOT / \"SMS_projects/luta_mugen/integrada/inc\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_input_pad_c.py",
+      "line": 22,
+      "text": "SRC = ROOT / \"SMS_projects/luta_mugen/integrada\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_input_ring_c.py",
+      "line": 24,
+      "text": "SRC = ROOT / \"SMS_projects/luta_mugen/integrada\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_input_tier_c.py",
+      "line": 13,
+      "text": "SRC = ROOT / \"SMS_projects/luta_mugen/integrada\""
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_root_input_ring_c.py",
+      "line": 12,
+      "text": "PROJECT = ROOT / \"SMS_projects/luta_mugen\""
+    }
+  ],
+  "read_access": [
+    {
+      "path": "SMS_projects/luta_mugen/doc/doacao_md_mugen2sms.json",
+      "readable": false,
+      "errno": 5,
+      "error": "[Errno 5] Input/output error: 'SMS_projects/luta_mugen/doc/doacao_md_mugen2sms.json'"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/integrada/src/fight.c",
+      "readable": true,
+      "bytes": 55110,
+      "sha256": "5172340dcd7646287a6b3121a92da52726df172de2eac68981f7cf9afe0ca9dc"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/integrada/src/input.c",
+      "readable": true,
+      "bytes": 12799,
+      "sha256": "8361021a684d0a1291278df4decee96386ddf13639b9c7b0a99b608f2dfe8344"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/integrada/src/body.c",
+      "readable": true,
+      "bytes": 1724,
+      "sha256": "fe06de6324ab2f8decb1a32ebaad9640fed62d9206f833e2c286ac0271ccc5a3"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/src/input.c",
+      "readable": true,
+      "bytes": 10206,
+      "sha256": "7e0cfed9fcc829463ef885d4245db9b133db93296988154a912378a6d7508c96"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ken_masters_adv.zip",
+      "readable": true,
+      "bytes": 1358812,
+      "sha256": "822936f0de76a51db6174ffced7f1cbce6c54bb532fda4e68fd177bf6aaf25a3"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Mugenesis/Base de Estudo/chars/street-fighter/ryu_kang.zip",
+      "readable": true,
+      "bytes": 100534,
+      "sha256": "d3430ad559e2be75a3a99986920533018a522bed1363f2d51f3175ca59f0e55f"
+    }
+  ],
+  "minimal_semantic_plan": [
+    {
+      "priority": 0,
+      "profile": "immutable_source_and_scope",
+      "work": "Hash actualSGDK rawKen/Ryu packages independently. Resolve .def/SFF/AIR/CMD/CNS/SND percharacter and enumerate references; license/provenance status. Never replacewithMugenesis archives solelybecauselegible."
+    },
+    {
+      "priority": 1,
+      "profile": "SMSvisual_core",
+      "work": "Choose measuredheight/pivot/global8x16 cache policy under <=8scanline,sharedP1palette with P2variation explicitly mapped. AIRframeIDs/durations/CLSN and sourceconditions preserved. Fail if twoactorworstcase cannotfit; nozero-flickerpromisebeforemeasurement."
+    },
+    {
+      "priority": 2,
+      "profile": "playable_common_state_subset",
+      "work": "standing/crouching/movement,jump/land,guard,hitstun/knockdown/getup,KO and basicnormalmoves. ExplicitChangeState/ChangeAnim/VelSet/VelAdd/Gravity/CtrlSet/PosAdd/HitDef conditions, timing/stateorder. Hostreference and actualZ80consumer parity beforebroadmoves."
+    },
+    {
+      "priority": 3,
+      "profile": "character_special_entities",
+      "work": "Ken/Ryu Hadouken/Shoryuken/Tatsumaki selectedsource-specificstates:projectilepool,lifetime/contact/guard/damage,power/hitstop,launch/landing andmultihitpolicy. SharedpadinputpathforAI, not directstatecheats. Unsupportedhelper/Explod/clsn/state logic catalogued, notmappedtobasicpunch."
+    },
+    {
+      "priority": 4,
+      "profile": "fight_system_and_shell",
+      "work": "round/life/timer/powerHUD,AI difficulty,KOshake/slowlogic,menus/title/select/VS/continue/final/training perGDD; SFX/voicePSGbudget/provenance separately. No stage currently."
+    }
+  ],
+  "test_parameterization": {
+    "project_root": "One pytest option --sms-project (or env SMSFORGE_TEST_PROJECT) resolvedabspath; require selected root/source/headerfiles andhashes, fail explicitoptin missing/EIO. Do notdefaultnewtests to historicalpath.",
+    "variant": "Declare root versus integrada layout/profile explicitly perCtest; adapterreturns knownsrc/incpaths andCsources, not globsearchfallback.",
+    "raw_archives": "Separate --ken-source/--ryu-source or hash-bound intake JSON; existing synthetic parser goldenunit tests remain independent; realpackageintegration explicitly selected.",
+    "donation_manifest": "Move/re-authorcanonicalwrapperdonationinventory onlyaftervalidatingreadablesources/hashes; retainoldunreadablemanifestblocked. Do not forgeoldmetadata from currentfiles oruse skip aspassingproof.",
+    "coverage": "SplitpurePythonunits,GCCsemanticmodules,sourceintakeintegration,Z80build/privateemulator. Report skipped/blocked separately; compilesourcefrom selectedrev2 andrecord its SHA.",
+    "no_mockpass": "Use syntheticfixtures onlyforunitcontracts; no fabricatedROM/gatefeedback/currentprodcontext."
+  },
+  "readable_canonical_entrypoints": [
+    "tools/sms_wrapper/mugen2sms/__main__.py",
+    "tools/sms_wrapper/mugen2sms/source.py",
+    "tools/sms_wrapper/mugen2sms/character.py",
+    "tools/sms_wrapper/mugen2sms/generators/scene_cut.py",
+    "tools/sms_wrapper/mugen2sms/generators/versus_scene_cut.py",
+    "tools/sms_wrapper/mugen2sms/generators/integrated_runtime_data.py",
+    "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+    "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md"
+  ],
+  "host_executable_availability": {
+    "python3": "/usr/sbin/python3",
+    "gcc": "/usr/sbin/gcc",
+    "sdcc": null,
+    "pytest": "/usr/sbin/pytest",
+    "7z": "/usr/sbin/7z"
+  },
+  "tests_not_run": [
+    "No pytest/fullsuite/build/emulator; import ofpalette_contract onlytoverifymissingbackend."
+  ],
+  "limits": [
+    "No annex text was supplied in this subtask; findings are independent currentcode verification, not quote attribution.",
+    "No claim ofcompleteSMSengine/generalVM/flicker/FPS/hardware.",
+    "Stage is deferred scope, not an instructiontoexpandstagefeature.",
+    "Read-onlyrepo; /tmpreportonly."
+  ]
+}

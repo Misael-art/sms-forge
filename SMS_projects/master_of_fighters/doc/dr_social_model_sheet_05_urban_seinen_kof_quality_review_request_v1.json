@@ -1,0 +1,27 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_05_urban_seinen_kof_art_review_v1",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Read-only independent visual review of this Urban-Seinen-KOF concept/model sheet, including the documented costume variance, five-view consistency, face, hands/grips/equipment, palette roles, scale and compositor layout. Return concrete defects and suggestions; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1.png",
+      "sha256": "dd79f1393380b075b81e10ee5988adbd22a282b4ebd7d8940b1500a4f35ca2fa",
+      "role": "candidate concept/model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_v1.json",
+      "sha256": "99c6438116db88f8d0deb146d3b9d289711fd02dfb091b5a55fa83daf745a187",
+      "role": "per-character checklist and authority references"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only; reviewer must be independent of producer.",
+    "Do not claim sprite, SMS resource, ROM, emulator or AAA approval.",
+    "Return concrete defects, risks or non-blocking opportunities with evidence."
+  ]
+}

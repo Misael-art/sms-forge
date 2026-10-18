@@ -1,0 +1,263 @@
+{
+  "curation_id": "2026-10-10_l124_fluxo_sombra_material_sprite",
+  "date": "2026-10-10",
+  "title": "Continuidade espacial de sombra por material em sprite convertido",
+  "kind": "lesson",
+  "scope": "Revisão de pixel art de personagens e conversão para Master System; aplicação direta à roupa azul/ciano do Dr. Social.",
+  "authorization": "O dono apontou a dispersão de azul/ciano no sprite in-game e pediu correção, dupla validação e registro para curadoria futura.",
+  "lessons": [
+    {
+      "id": "L124",
+      "status": "rule_promoted; conversion_v10_historical_candidate; owner_rejected_animation_source_v07_2026-10-12; project_rebuild_v08_pending",
+      "lesson": "Paleta válida não garante fluxo de sombra ou confinamento semântico. Para cada material, declare a rampa sombra/base/luz, agrupe-a em planos contíguos de borda dura, elimine dithering/confete injustificado e confira que branco/amarelo aparecem apenas nas regiões aprovadas do personagem. Revise todas as poses a 1× e nearest-neighbor 4×. A comparação exata com ROM prova render, não aprovação artística.",
+      "root_cause": "A v5 classificava tons RGB por pixel sem preservar adequadamente a continuidade espacial ao reduzir a arte. V6 testou média de área dentro do footprint do tecido (6.145 pixels), mas a conversão ainda precisava de rampa ordenada; v7 remapeou pela luminância, porém deixou ilhas e confete. A v8 só corrigia componentes totalmente cercados, deixando falsos negativos na borda do material. A v9 ancorou amarelo por cabelo/face e junção luva-haste, mas a inspeção ampliada encontrou 70 brancos isolados/pares fora dos papéis reconhecidos. A v10 adicionou uma segunda análise semântica para branco, preservando a geometria e deixando clusters ambíguos para revisão humana.",
+      "revision_history": [
+        {
+          "revision": "v5_baseline",
+          "result": "Conversão-base das 61 poses aprovadas para canvases SMS indexados de 80x80. A paleta era válida, mas os tons do tecido ainda apareciam intercalados após a redução.",
+          "lesson": "Conformidade de paleta e pixels válidos não garantem fluxo visual de sombra."
+        },
+        {
+          "revision": "v6_intermediate",
+          "report": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v6/conversion_report_61_pose_v6.json",
+          "result": "Média do RGB-fonte dentro dos footprints classificados como tecido azul/ciano, quantizada para a rampa SMS já existente; 6.145 pixels reclassificados. Silhueta nearest-neighbor, alpha e cores fora da rampa foram preservadas.",
+          "status": "candidata intermediária; a continuidade da sombra ainda não estava resolvida"
+        },
+        {
+          "revision": "v7_rejected",
+          "report": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/conversion_report_61_pose_v7.json",
+          "result": "A rampa sombra/base/luz foi ordenada por luminância (#005555, #00AAAA, #55AAFF); 15.690 remapeamentos em 61 poses, sem alteração de alpha ou pixels fora da rampa. A comparação de framebuffer cobriu somente ID01–ID03.",
+          "owner_decision": "rejeitada: ainda havia tons dispersos, sombras sem planos contíguos e acentos com aspecto de confete",
+          "lesson": "Uma melhora de luminância e três quadros de framebuffer não demonstram acabamento nem cobertura de toda a folha."
+        },
+        {
+          "revision": "v8_superseded",
+          "report": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v8/conversion_report_61_pose_v8.json",
+          "result": "Refinamento conservador 5x5 apenas dentro de tecido: 927 pixels (438 ilhas da rampa e 489 marcas navy interiores). Alpha, paleta e IDs de pose ficaram iguais; ROM comparada exatamente em 61/61 quadros.",
+          "false_negative": "O detector exigia que o ponto estivesse totalmente cercado pelo material e não encontrou vazamentos que tocavam sua borda; não alterou branco ou amarelo."
+        },
+        {
+          "revision": "v9_superseded_after_double_check",
+          "report": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/conversion_report_61_pose_v9.json",
+          "result": "Âncoras semânticas restringiram amarelo a rosto/cabelo e à junção luva-haste; 249 pixels foram reclassificados, sem mudança de branco, alpha, paleta ou geometria. ROM comparada exatamente em 61/61 quadros.",
+          "discovery": "A inspeção dupla a 1x e nearest-neighbor 4x ainda encontrou 70 pixels brancos em singles/pares fora de luvas e bengala. A revisão de um pigmento não fecha a revisão de todos os demais papéis semânticos."
+        },
+        {
+          "revision": "v10_candidate_pending_approval",
+          "report": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/conversion_report_61_pose_v10.json",
+          "result": "Detector geométrico separou segmentos longos e retos candidatos à haste; singles/pares brancos fora dessa máscara foram recoloridos pela cor material vizinha. Preservou clusters maiores para revisão humana. Resultado: 70 pixels reclassificados, zero singles/pares brancos não ancorados, zero novas cores, zero mudanças de alpha/geometria e ROM comparada exatamente em 61/61 quadros.",
+          "status": "candidata diagnóstica; revisão independente e aprovação do dono continuam pendentes"
+        }
+      ],
+      "reusable_workflow": [
+        "Fixar papel, caminho, SHA-256 e IDs da fonte visual aprovada antes de converter; não tratar preview, prova técnica ou ROM diagnóstica como fonte de arte substituta.",
+        "Registrar o defeito por material, região e poses afetadas; corrigir uma família de defeitos por versão e preservar a candidata rejeitada, seu parecer e o delta.",
+        "Separar máscara geométrica da escolha de cor: nearest-neighbor preserva silhueta/alpha; qualquer média de área usa somente amostras da máscara do material e nunca cruza contorno, transparência ou outro material.",
+        "Para vazamentos, combinar cor, conectividade e âncoras espaciais/semânticas. Um filtro que só identifica componentes totalmente internos falha nas bordas. Componentes e geometria apontam candidatos; não provam sozinhos o papel artístico.",
+        "Remapear apenas pixels comprovadamente fora do papel para cores locais já existentes. Manter agrupamentos ambíguos intactos para revisão humana; não usar blur, dithering, antialiasing, paleta nova ou limpeza global para ocultar defeitos.",
+        "Gerar delta por quadro e conferir invariantes: IDs/ordem das poses, alpha, geometria, paleta, contagens e regiões fora do material-alvo. Inspecionar cada pose em tamanho nativo (1x) e nearest-neighbor 4x, além da prancha geral.",
+        "Toda mudança de pixels invalida ROM, capturas e checklist derivados. Gerar saída versionada fresca, reconstruir a ROM e comparar todos os framebuffers contra os PNGs indexados; três quadros são amostra, não cobertura integral.",
+        "Manter o artefato em diagnostics até revisão independente e aprovação do dono. PASS de recurso/build/render só prova seus próprios eixos; nenhum desses resultados promove qualidade artística, gameplay ou orçamento de produção."
+      ],
+      "heuristic_limits": [
+        "Os limites específicos da haste da v10 (componentes conectados em 8 vizinhos, área mínima 7, extensão mínima 8 pixels, razão linear >=4 e dilatação 3x3) são parâmetros experimentais deste canvas e deste desenho; não são limites canônicos para outros personagens, acessórios ou escalas.",
+        "Zero singles/pares remanescentes não prova ausência de pixels sem papel: clusters maiores, limites de máscara, olhos, luvas, gola e equipamentos ainda exigem revisão visual independente.",
+        "Render exato da ROM confirma somente que a imagem indexada ligada ao SHA da ROM foi exibida sem divergência; não valida anatomia, luz, leitura em movimento, paleta compartilhada P1 ou estética."
+      ],
+      "evidence": {
+        "owner_observation": "O dono rejeitou v7 por dispersão de azuis, sombras sem áreas contínuas, pixels brancos/amarelos isolados e confusão em contorno/partes do corpo; pediu blocos cel-shaded, paleta sem confete e correção do fluxo revisor.",
+        "approved_source": {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+          "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057"
+        },
+        "before_conversion": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/project/res/sprites/",
+        "after_conversion": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/res/sprites/",
+        "candidate_preview": {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/dr_social_61_pose_converted_preview_4x.png",
+          "sha256": "5e23291629f7aca134c79e16d5097aab1a45c5f052c5156d4ac80814f6243719"
+        },
+        "comparison_image": {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/dr_social_61_pose_blue_shading_v5_v7_comparison.png",
+          "sha256": "b2a140de93d0ceb596a4199a811cd639f13bd7d468567016193b8b44b52f204d"
+        },
+        "delta_audit": {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/dr_social_61_pose_ramp_delta_v5_v7.json",
+          "sha256": "cff30b216a4a56594d6014cb090216ab159cbc223107917a2533ea8368811f46",
+          "result": "61/61 frames checked; 15,690 RGB changes; zero alpha/silhouette changes; zero RGB changes outside #005555, #00AAAA, #55AAFF"
+        },
+        "palette_roles": {
+          "shadow": "#005555",
+          "base": "#00AAAA",
+          "highlight": "#55AAFF"
+        },
+        "diagnostic_rom": {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/out/rom/dr_social_61_pose_review_v7.sms",
+          "sha256": "b27c328d11c58ba96474b83368d8a0afcda79600b388d21cb510b812632f53c2",
+          "build": "pass; 114,688 bytes"
+        },
+        "framebuffer_checks": [
+          {
+            "pose": "ID01",
+            "report": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/out/evidence/framebuffer_render_fidelity_ID01_v7.json",
+            "sha256": "90bbb0f1781314a49f28534c389cf6c76f03d88cd2a36d18d795865cfa9a1170"
+          },
+          {
+            "pose": "ID02",
+            "report": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/out/evidence/framebuffer_render_fidelity_ID02_v7.json",
+            "sha256": "ceba0500bae6adfdbed788933cd3a2c5e0ea3cf752b8dc4df7c00a60d031a9de"
+          },
+          {
+            "pose": "ID03",
+            "report": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/out/evidence/framebuffer_render_fidelity_ID03_v7.json",
+            "sha256": "ef96870ba56eee47e8996aa37ecf4abe3cbc3bc48ccdfb8e10b9f7b7d21bc4e2"
+          }
+        ],
+        "art_review": "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v7.json",
+        "v7_rejection": {
+          "status": "owner_rejected_not_approved",
+          "review": "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v7.json",
+          "reason": "Tons e acentos ainda não formavam planos de sombra limpos; revisão cromática não fechou qualidade artística."
+        },
+        "v8_candidate": {
+          "preview": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v8/dr_social_61_pose_converted_preview_4x.png",
+            "sha256": "09007058be12a6a95f36d4a0ca502485b4c955c560f6ce1740516002b3f50305"
+          },
+          "detail_comparison": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v8/v7_v8_cel_detail_compare.png",
+            "sha256": "126e0d58a5e2889296f2861d12d5f6b28a28dab04137b369adaa75fa91b4b864"
+          },
+          "delta_audit": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v8/dr_social_61_pose_cel_cluster_delta_v7_v8.json",
+            "sha256": "583b75c3659f166bdb9df00ddb11c79153e44992b53aa345d4619fe0a090470d",
+            "frames_checked": 61,
+            "changed_pixels": 927,
+            "cloth_tone_islands_reassigned": 438,
+            "enclosed_navy_confetti_to_deep_teal": 489,
+            "white_yellow_singletons_removed": 0,
+            "alpha_changed_pixels": 0,
+            "new_palette_colors": 0
+          },
+          "diagnostic_rom": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v8/project/out/rom/dr_social_61_pose_review_v8.sms",
+            "sha256": "e641d2a44a1da2ef4c8aa1b2d768bf54822df27f7e023036cf81d3f1dfc0e50d",
+            "build": "pass; 114,688 bytes"
+          },
+          "framebuffer": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v8/project/out/evidence/dr_social_61_framebuffer_v8/framebuffer_capture_index_v8.json",
+            "sha256": "8518005803f962b9b748c792de753c9637fc0a92d892096a8839033121bc0f26",
+            "session_id": "ff0b89a1501b4237aa738f299ad3ee70",
+            "exact_render_passes": 61,
+            "exact_render_failures": 0
+          },
+          "art_review": "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v8.json",
+          "art_review_status": "superseded_by_v9_after_semantic_accent_review"
+        },
+        "v9_candidate": {
+          "preview": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/dr_social_61_pose_converted_preview_4x.png",
+            "sha256": "99dd4a592ad223840a3d2b4cd64788239ccf0a48da6f7619c89b9537ddaf2f40"
+          },
+          "semantic_delta": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/dr_social_61_pose_semantic_delta_v8_v9.json",
+            "sha256": "e483617ee1cf6173a1ff5155394a07bcf9f5cdd61f9ef919a82cb4a97b80e259",
+            "frames_checked": 61,
+            "yellow_pixels_reassigned_outside_face_and_cane_grip": 249,
+            "white_pixels_changed": 0,
+            "alpha_changed_pixels": 0,
+            "new_palette_colors": 0,
+            "pose_geometry_changed": false
+          },
+          "rom": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/project/out/rom/dr_social_61_pose_review_v9.sms",
+            "sha256": "81c2e47f684b307de6d2bfa803dc7e56a6b22402f06d7ecc8d8250f2b059bfd2",
+            "bytes": 114688,
+            "build": "pass; diagnostic only"
+          },
+          "framebuffer": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/project/out/evidence/dr_social_61_framebuffer_v9/framebuffer_capture_index_v9.json",
+            "sha256": "eed561b63b17582d11c564d3c87678f8b639e2cf2783080f79fe2bdb3d84e8e6",
+            "session_id": "bfb478dfae0044d4a679db5df6bce018",
+            "exact_render_passes": 61,
+            "exact_render_failures": 0
+          },
+          "art_review": "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v9.json",
+          "status": "superseded_after_enlarged_white_leak_review",
+          "review_boundary": "ROM exact-render pass does not establish cel-shading quality, semantic correctness, or owner approval.",
+          "superseded_reason": "A inspeção 10× detectou 70 pixels brancos em componentes pequenos fora de luvas/haste/collar; a v9 não os havia alterado."
+        },
+        "v10_candidate": {
+          "preview": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/dr_social_61_pose_converted_preview_4x.png",
+            "sha256": "7d1ac3e85652b76630869df5bdf8ff89bea602761f73243867de47039982c58e"
+          },
+          "white_semantic_delta": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/dr_social_61_pose_white_semantic_delta_v9_v10.json",
+            "sha256": "67b27e731777d9eb156c34536da13df69ac0e631f8d0921b9e86920c924738e3",
+            "frames_checked": 61,
+            "white_pixels_reassigned": 70,
+            "yellow_pixels_reassigned_in_v9": 249,
+            "alpha_changed_pixels": 0,
+            "new_palette_colors": 0,
+            "pose_geometry_changed": false,
+            "remaining_unanchored_white_singletons_or_pairs": 0
+          },
+          "rom": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/project/out/rom/dr_social_61_pose_review_v10.sms",
+            "sha256": "41879e38c8a83caec07bd97e9208ca08f00fe35ec1e927ff31feab4eb7a3c8cc",
+            "bytes": 114688,
+            "build": "pass; diagnostic only"
+          },
+          "framebuffer": {
+            "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/project/out/evidence/dr_social_61_framebuffer_v10/framebuffer_capture_index_v10.json",
+            "sha256": "75304f48d10514efeff930405e25c4739f9e01e6fd63e8a3c5f64a391902ddda",
+            "session_id": "5e5ba2973da44f6293ef27b79429b050",
+            "exact_render_passes": 61,
+            "exact_render_failures": 0
+          },
+          "art_review": "SMS_projects/master_of_fighters/doc/dr_social_61_pose_art_review_v10.json",
+          "status": "candidate_pending_independent_visual_review_and_owner_approval",
+          "scope": "70 white singles/pairs outside the geometric shaft mask were remapped; long line segments are cane candidates, larger clusters remain semantically unclassified for human review."
+        }
+      },
+      "rule_section": "SMS_GLOBAL §114",
+      "tool_that_measures": "SMS_projects/master_of_fighters/tools/audit_dr_social_fabric_ramp.py (rampa/alpha); SMS_projects/master_of_fighters/tools/refine_dr_social_61_pose_cel_v8.py (clusters de tecido); SMS_projects/master_of_fighters/tools/refine_dr_social_61_pose_semantic_v9.py (papéis amarelos ancorados); SMS_projects/master_of_fighters/tools/refine_dr_social_61_pose_semantic_v10.py (singles/pares brancos, haste por geometria linear, self-check); tools/sms_wrapper/audit_art_review_checklist.py (cobertura dos eixos); SMS_projects/master_of_fighters/tools/capture_dr_social_61_pose_review.py e audit_render_fidelity.py --exact-indexed (61 framebuffers).",
+      "skill_that_teaches": "tools/sms_wrapper/.agent/workflows/art-review.md; tools/sms_wrapper/.agent/skills/sms-pixel-translate.md; tools/sms_wrapper/.agent/skills/sms-visual-excellence.md; tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+      "validation": "Self-checks da limpeza v10, checklist, captura e learning capture passaram. Build v10 passou com 114.688 bytes; 61/61 framebuffers corresponderam pixel a pixel. Checklist v10 continua pending: dez eixos artísticos, review independente e aprovação do dono permanecem abertos.",
+      "measurement_limits": "O delta prova somente reclassificação declarada, palette closure, alpha/geometry/IDs preservados. O framebuffer prova render exato. A máscara de linha e clusters não certifica todos os papéis de cor: 70 brancos isolados/pares fora da bengala foram reclassificados, e clusters maiores ficaram intocados para inspeção. Nenhum desses gates mede anatomia, estilo, luz artística, confinamento completo, gameplay, FPS, áudio, VBlank ou budget. V10 não está aprovada.",
+      "dedup_key": "l124_material_shadow_flow_coherence_sms_sprite_20261010"
+    }
+  ],
+  "owner_follow_up_2026_10_12": {
+    "artifact": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+      "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "decision": "rejected_by_owner_artistic"
+    },
+    "observed_failure": "The palette/index pipeline ran, but algorithmic color cleanup damaged visual hierarchy: coat became a mostly uniform speckled cyan/teal mass; gray hair acquired reddish/brown colors across poses; shadows lost directional, hard-edged cel-shaded planes.",
+    "required_evaluation": "Review the material ramp and semantic region on all 61 frames, not only pixel counts or palette membership. Hair is fixed to gray; coat tones must form deliberate contiguous planes; white, yellow, and burgundy must stay within explicitly declared regions.",
+    "owner_constraints": {
+      "palette_useful_color_limit": 15,
+      "single_shared_indexed_palette_across_all_61_poses": true,
+      "no_blur_average_distance_luminance_or_nearest_rgb_pixel_writes": true,
+      "scripts_may_measure_or_highlight_but_may_not_write_art_pixels": true,
+      "microclusters": "1x1 and 1x2 components are manual review flags; no automatic recoloring",
+      "required_samples": [
+        "idle frame 1",
+        "walk_forward frame 1",
+        "knockdown_fall frame 2"
+      ],
+      "hair_review_coverage": "61/61; only the two declared gray hair tones plus outline",
+      "white_yellow_outside_allowed_region": 0
+    },
+    "project_directive": "SMS_projects/master_of_fighters/doc/dr_social_sprite_rebuild_directive_v08.md",
+    "current_state": "v07 rejected; v08 direction documented; no manually repainted v08 sheet exists yet; owner/independent review, conversion and ROM evidence remain open.",
+    "curator_note": "This is follow-up evidence for existing L124, not a new lesson ID. Evaluate whether the shared rule/workflow must be narrowed so automatic remapping can only report candidates and never write color corrections."
+  },
+  "application_2026_10_13": {
+    "report": "doc/curation/evidence/2026-10-13_quality_cohesion/art-findings.json",
+    "scope": "Apply existing L124 with revision-specific authorization; solid2x2!=bbox/area; mask coverage/fringe; ownership/added-contour deltas; fixed-point != artistic quality",
+    "approved_source_only": "v08.2 existing owner decision and matching copy recorded as reconciliation in canonical artifact registry; memory/context conflict remains; no ROM v08.2 found",
+    "limits": "Existing reported pixel counts not reexecuted; source SHA rechecked; independent-per-cell report reference absent; no new art approval or emulator claim"
+  }
+}

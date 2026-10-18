@@ -18,7 +18,12 @@ PREFIXES = ("audit_", "validate_", "measure_", "capture_", "seal_", "reconcile_"
 SUFFIX_GATES = ("_gate.py",)
 # Oráculos de autonomia (L036): decisão/plano com --self-check obrigatório.
 DOCTRINE_ALWAYS = {"harness_orchestration.py", "quality_review_router.py",
-                   "emulator_input.py", "prepare_sms_pixel_art.py"}
+                   "emulator_input.py", "prepare_sms_pixel_art.py",
+                   "blastem_sms.py",
+                   "blastem_diagnostics.py", "blastem_maintenance.py",
+                   "blastem_dump_diff.py",
+                   "artifact_registry.py", "mugen2sms/analysis/trace_compare.py",
+                   "mugen2sms/analysis/scale_pilot.py"}
 
 # Nao sao ferramentas de medicao: constroem, geram ou orquestram.
 EXEMPT = {
@@ -32,14 +37,18 @@ EXEMPT = {
 }
 
 def discover(wrapper_dir):
-    """Retorna as ferramentas de medicao encontradas no wrapper."""
+    """Retorna ferramentas de medição na raiz e em subdiretórios do wrapper."""
     out = []
-    for fn in sorted(os.listdir(wrapper_dir)):
-        if not fn.endswith(".py") or fn in EXEMPT:
-            continue
-        if fn.startswith(PREFIXES) or fn.endswith(SUFFIX_GATES) or fn in DOCTRINE_ALWAYS:
-            out.append(fn)
-    return out
+    for current, dirs, files in os.walk(wrapper_dir):
+        dirs[:] = sorted(d for d in dirs if d not in {"__pycache__", ".pytest_cache"})
+        for fn in sorted(files):
+            rel = os.path.relpath(os.path.join(current, fn), wrapper_dir)
+            if not fn.endswith(".py") or (current == wrapper_dir and fn in EXEMPT):
+                continue
+            if (fn.startswith(PREFIXES) or fn.endswith(SUFFIX_GATES) or
+                    fn in DOCTRINE_ALWAYS or rel in DOCTRINE_ALWAYS):
+                out.append(rel)
+    return sorted(out)
 
 def audit(wrapper_dir, timeout=120):
     tools = discover(wrapper_dir)
@@ -90,6 +99,16 @@ def main():
                     "    print('[SELF-CHECK OK] bom'); sys.exit(0)\nsys.exit(0)\n")
         p, _ = audit(d)
         assert not p, f"ferramenta com self-check valido nao deveria reprovar: {p}"
+        nested = os.path.join(d, "mugen2sms", "analysis")
+        os.makedirs(nested)
+        with open(os.path.join(nested, "scale_pilot.py"), "w") as f:
+            f.write("import sys\nif '--self-check' in sys.argv:\n"
+                    "    print('[SELF-CHECK OK] nested'); sys.exit(0)\n"
+                    "sys.exit(0)\n")
+        p, report = audit(d)
+        assert not p, f"medidor nested com self-check valido reprovou: {p}"
+        assert any(row["tool"] == "mugen2sms/analysis/scale_pilot.py" and row["passes"]
+                   for row in report), "descoberta não alcançou a ferramenta nested"
         # ferramenta que NAO expoe self-check
         with open(os.path.join(d, "audit_sem_selfcheck.py"), "w") as f:
             f.write("print('meço coisas mas nao me provo')\n")
@@ -103,7 +122,7 @@ def main():
         p, _ = audit(d)
         assert any("REPROVOU" in x for x in p), "faltou reprovar self-check que falha"
         print("[SELF-CHECK OK] validate_measurement_tools "
-              "(detecta ausencia de self-check e self-check falhando)")
+              "(descobre nested e detecta ausência/self-check falhando)")
         return 0
 
     problems, report = audit(args.dir)

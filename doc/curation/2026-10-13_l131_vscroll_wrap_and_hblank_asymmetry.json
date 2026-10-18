@@ -1,0 +1,40 @@
+{
+  "curation_id": "2026-10-13_l131_vscroll_wrap_and_hblank_asymmetry",
+  "date": "2026-10-13",
+  "title": "Assimetria dos registros de scroll: Y lido uma vez por frame e wrapa ≥224 no modo 192; X atualizável em HBlank",
+  "kind": "curation",
+  "scope": "Hardware SMS (VDP modo 4): scroll X/Y na lei do VDP §6 e skill sms-runtime-optimization. Item A7 do dossiê out/curation_proposals_smspower_2026-10-12.md.",
+  "authorization": "O proprietário aprovou o item A7 em 2026-10-13 com a apresentação de evidência, lacuna, destino e medição ('aproveitamos a proposta da A7 e aplico tudo'), incluindo o gate novo audit_vscroll_wrap.py conforme desenhado na apresentação.",
+  "lessons": [
+    {
+      "id": "L131",
+      "status": "documentado_com_gate_novo; sem medição em emulador ou console; telemetria reg9 em measure_runtime_probe.py fica como verificação futura",
+      "lesson": "O registrador de scroll vertical (reg9) é lido uma única vez por frame, antes da tilemap ser desenhada — raster/split vertical por scroll não existe; o efeito de banda vertical fixa é troca de name table via reg2 em HBlank (técnica Sylvan Tale, com bit0=1 por §121). O scroll horizontal (reg8) pode ser atualizado durante HBlank. Em modo 192 a tilemap tem 224 px (32×28) e valores >223 escritos no reg9 dão wrap tratados como 0..31 (240 equivale a 16); a variável do jogo precisa de wrap explícito em 224 para não produzir descontinuidade a cada volta. Em 224/240 a tilemap tem 256 px e valores 0..255 são todos válidos — o truncamento de unsigned char já é o módulo 256. Base da tilemap: $3800 em 192, $3700 em 224/240.",
+      "root_cause": "A §6 ensinava split de scroll com line interrupt sem declarar que vale só para X, e nenhum texto registrava a constante de wrap do Y (tamanho da tilemap por modo, não tamanho da tela). Prosa de GDD poderia prometer parallax vertical por reg9 — defeito de design invisível até runtime — e um acumulador de scroll Y sem wrap em 224 passa em testes posicionais e quebra só na volta da tilemap.",
+      "evidence": {
+        "corpus_page": {
+          "path": "out/smspower_corpus_2026-10-12/Tilemap.txt",
+          "sha256": "2168bc88f6d7b7fb1a684cd192f812e1edae1e76e421753437c2798026cf854e",
+          "url": "https://www.smspower.org/Development/Tilemap",
+          "quote": "The vertical scroll register is only read once - before the Tilemap is drawn - so it cannot be updated as the screen is drawn for special effects.",
+          "quote_2": "In the regular 192-line display mode the Tilemap is 224 pixels tall (28 tiles * 8 pixels per tile = 224 pixels). Values written to the vertical scroll register which are greater than 223 will wrap around, and are treated as if the scroll value was between 0 and 31. This means that setting the vertical scroll register to 240 is equivalent to setting the vertical scroll register to 16. When programming vertical scrolling, variables used to track the vertical scroll should therefore also wrap back around to 0 at 224 to avoid discontinuities in the scrolling. In the 224 and 240-line display modes there is no such wrapping as the Tilemap is 256 pixels tall, so values from 0 to 255 are all valid.",
+          "quote_3": "The horizontal scroll register can be updated as the screen is being drawn, allowing for special effects where the horizontal scroll register is updated during the HBlank interrupt."
+        },
+        "corpus_page_2": {
+          "path": "out/smspower_corpus_2026-10-12/VRAMMemoryMap.txt",
+          "sha256": "ab4c480dd9e11373f6a8668cff5840bfeca2e788854ddc0a1334ccbd4ff3ad6f",
+          "url": "https://www.smspower.org/Development/VRAMMemoryMap",
+          "quote": "Changing the Tilemap mid-screen during HBlank for various effects (see Sylvan Tale's fixed status bar while scrolling effect)"
+        },
+        "corpus_manifest": "out/smspower_corpus_2026-10-12/MANIFEST.sha256 (linhas 58 e 64 conferidas em 2026-10-13)",
+        "header": "sdk/devkitSMS/SMSlib/SMSlib.h:50-51 (SMS_setBGScrollX/Y recebem unsigned char, __z88dk_fastcall) e 386-387 — a biblioteca oferece INLINE_SMS_setBGScrollX 'to be used in the line interrupt handler for raster effects' e NÃO oferece contraparte para Y: o header por si materializa a assimetria dos eixos; VDPFEATURE_LOCKVSCROLL existe como bit do reg1, não como reimplementação de reg9 por frame",
+        "gate_cases": "audit_vscroll_wrap.py --self-check: 8 casos verdes (acumulador 192 sem wrap reprovado, wrap 224 aprovado, literal 240≡16 em 192 reprovado, 240 válido em 224, >255 reprovado, chamada de função e extern = não provado, arquivo sem call)"
+      },
+      "rule_section": "SMS_GLOBAL §122 (bullets em §6)",
+      "tool_that_measures": "audit_vscroll_wrap.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
+      "measurement_limits": "O gate detecta presença de token de wrap (224/223) no arquivo, não fluxo de dados: presença não prova correção quadro a quadro e há ramos entre mutação e chamada. Lei Tier 1 do corpus; wrap ≥224 e leitura única não medidos em emulador nem console — fidelidade desses comportamentos nos emuladores-alvo é questão aberta (LOTE F). A técnica Sylvan Tale entra como documentado, não como receita implementada; telemetria de reg9 em measure_runtime_probe.py é verificação futura."
+    }
+  ],
+  "dedup_key": "l131_vdp_scroll_reg9_read_once_wrap224_192_hblank_x_20261013"
+}

@@ -1,0 +1,21 @@
+{
+  "curation_id": "2026-09-26_l083_mugen_engine_contract",
+  "date": "2026-09-26",
+  "scope": "piso_mugen_sms_e_cli_real",
+  "authorization": "pedido explícito do usuário de revisar padrões, tools/workflows e assimilar SGDKForge",
+  "lessons": [
+    {
+      "id": "L083",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "lesson": "Um preset de probe não é teto do motor. Contrato de qualidade deve distinguir planning de delivery; copiar CLI sem backends locais produz entrada quebrada apesar dos testes de parsers.",
+      "evidence": {
+        "before": "PYTHONPATH=tools/sms_wrapper python3 -m mugen2sms --help: ImportError converters.bgfx",
+        "code": "sms_scale.py SCALE=4/MAX_TALL_ROWS=3; fight.c ainda nomeia Ken/Ryu; a ROM T10 permanece probe",
+        "review": "SMS_projects/luta_mugen/doc/16-engine-review-2026-09-26.md",
+        "validation": "SMS_projects/luta_mugen/out/quality_review_2026-09-26/ (checks do lote; sem novo emulator claim)"
+      },
+      "rule_section": "SMS_GLOBAL §68",
+      "tool_that_measures": "audit_mugen_engine_contract.py"
+    }
+  ]
+}

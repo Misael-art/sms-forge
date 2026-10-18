@@ -1,0 +1,152 @@
+{
+  "curation_id": "2026-10-04_l105_harmonia_escala_roster",
+  "date": "2026-10-04",
+  "scope": "cross_character_visual_harmony_and_sprite_scale",
+  "authorization": "O dono confirmou a harmonia dos conceitos e a necessidade de revisão conjunta do roster. Depois rejeitou a estética da prancha frame00, apontando recorte sujo no Joe, morfologia atarracada/chibi nos demais e agrupamento de cor poluído; pediu que esses critérios sejam curados como perícia do agente canônico.",
+  "lessons": [
+    {
+      "id": "L105",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Em roster, compare concepts/model sheets e sprites juntos antes de aprovar uma nova folha. Registre escala e relações, mas trate-as como eixo separado de anatomia humana, biotipo, recorte, agrupamento cromático e acabamento. Declare escopo de cada referência: Hayato/Kenseiden é régua de acabamento/cluster; Joe Musashi é régua de proporção humana esguia e massa dos membros. Mantenha identidade e paleta de cada jogo, use clusters materiais coerentes e rejeite chibi/membros atarracados, halo ou poluição de cor. O audit mede dimensões e também registra pass/fail/pending dos eixos visuais; a decisão artística é humana.",
+      "root_cause": "A prancha frame00 v1 era marcada preliminary_visual_review_only e misturava folhas candidatas, fontes de escalas distintas e concept refs antigas. A montagem alinhava baselines e ampliava os pixels, mas não definia os tamanhos relativos aprovados nem bloqueava diferenças visuais: Golden Axe aparecia 78x88 diante de Alis 60x73; Dr Social era 44x81 e parecia menor que Joe 62x80; Landau 63x87 divergia em escala/acabamento; Alis 60x73 e J.J. 63x76 tinham leitura chibi. A folha Golden Axe v1 ainda antecedia o conceito v2 aprovado. Na revisão seguinte, a faixa dimensional passou, mas a estética foi rejeitada: a régua de escala não bloqueava morfologia atarracada/chibi; o Joe foi usado como âncora corporal sem validar seu recorte; e valores RGB conformes à paleta foram tratados como evidência suficiente de pintura limpa, embora a distribuição de clusters ainda parecesse poluída.",
+      "evidence": {
+        "owner_reference": "/run/user/1000/codex-desktop/tmp/codex-clipboard-146f4a3f-2cbb-4e39-a2c0-d66c6a481317.png",
+        "source_board": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_7char_v1.png",
+        "source_board_sha256": "65de0afe8a47b920120cc1a6c405fb4a9af91b3e611ca8d1cb7fbd5ae1eee0fc",
+        "source_manifest": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_review_manifest_v1.json",
+        "source_manifest_status": "preliminary_visual_review_only",
+        "profile": "SMS_projects/master_of_fighters/doc/roster_harmony_contract_v1.json",
+        "audit_report": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_audit_v1.json",
+        "measurements": {
+          "golden_axe_warrior": [
+            78,
+            88
+          ],
+          "hayato": [
+            54,
+            75
+          ],
+          "joe_musashi": [
+            62,
+            80
+          ],
+          "dr_social": [
+            44,
+            81
+          ],
+          "alis_landale": [
+            60,
+            73
+          ],
+          "landau": [
+            63,
+            87
+          ],
+          "jj": [
+            63,
+            76
+          ]
+        },
+        "owner_constraints": [
+          "Golden Axe Warrior <= Alis in visible height.",
+          "Dr Social must read at least as large as Joe Musashi while staying lean.",
+          "Landau design remains approved, but rendering technique/scale must harmonize with Hayato.",
+          "Alis and J.J. must not read chibi.",
+          "Roster-wide concept and sprite comparison is a recurring attention area."
+        ],
+        "audit_result": "needs_revision; source measurements confirm Golden Axe exceeds Alis by 15 px and misses its 72–74 px target; Dr Social width 44 px is below its 50–58 px working band; Alis and Landau miss their height bands. Dr Social and Joe differ only 1 px in height, showing that width/morphology contributes to the perceived size gap.",
+        "candidate_board": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_candidate_v1.png",
+        "candidate_board_sha256": "c47e657c1cb25ab024e0ed237867729d2613a79354e4ae2d3d32b8a4dea9de40",
+        "candidate_profile": "SMS_projects/master_of_fighters/doc/roster_harmony_candidate_review_v1.json",
+        "candidate_audit": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v1.json",
+        "candidate_audit_status": "v1: numeric dimensions/relations pass; subsequently rejected by owner on aesthetics. Historical report only.",
+        "candidate_frame00_dimensions_px": {
+          "golden_axe_warrior": [
+            65,
+            73
+          ],
+          "hayato": [
+            54,
+            75
+          ],
+          "joe_musashi": [
+            62,
+            80
+          ],
+          "dr_social": [
+            60,
+            78
+          ],
+          "alis_landale": [
+            68,
+            75
+          ],
+          "landau": [
+            60,
+            75
+          ],
+          "jj": [
+            61,
+            75
+          ]
+        },
+        "new_measurable_relations": [
+          "Golden Axe Warrior <= Alis in visible height",
+          "Dr Social ~= Joe Musashi in visible height (<=3 px difference)",
+          "Dr Social ~= Joe Musashi in visible width (<=8 px difference)"
+        ],
+        "width_band_revision": "Broad width bands account for whole opaque bounds including weapons, shields, cape and hair; body build/chibi read remains a human visual axis.",
+        "candidate_audit_sha256": "cdabe52a1c5a78439af94f70487284422ef23f573cc019b023f93bc3f5eb4c98",
+        "candidate_lineage": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_frame00_candidates_lineage_v1.json",
+        "candidate_review_scale": "4x nearest-neighbor",
+        "owner_review_followup_2026_10_04": {
+          "source": "/run/user/1000/codex-desktop/tmp/codex-clipboard-75ffad7a-ae88-49e5-b2be-a2b82253438c.png",
+          "source_sha256": "2d3911cae3e2a0952fb724b2fd6d9b054e7e983b8593160c2ba10949899b98db",
+          "decision": "aesthetic_rejected; scale comparison and general palette direction retained",
+          "owner_observations": [
+            "Joe Musashi has dirty/haloed cutout edges and repeats a previously curated defect.",
+            "Other characters read stocky/chibi, with wider limbs and less convincing human face/body proportions than Joe.",
+            "Some sprite conversions have color pollution and lost the cleaner painting/cluster quality of the earlier concepts, despite generally correct palette values."
+          ],
+          "direction": [
+            "Joe is the lean human morphology anchor only; do not copy his cutout flaw.",
+            "Hayato/Kenseiden remains the pixel-finish and cluster anchor.",
+            "Preserve per-game SMS palette entries while simplifying and grouping color by material.",
+            "A new proposal must pass explicit recorded axes for morphology, limb mass, cutout, palette clusters, shared finish and native-size readability."
+          ],
+          "review_profile": "SMS_projects/master_of_fighters/doc/roster_harmony_candidate_review_v1.json",
+          "review_report": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v2.json",
+          "review_board": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_review_v2.png",
+          "review_status": "owner_visual_revision_required",
+          "review_profile_sha256": "06834917b77ff3d1a5d05faa1c3fd3e455b47b100a1cb92bd74fac0a52d7f1d6",
+          "review_report_sha256": "c4a5e945405261293bad7d68937fcdb6104ef16d36a2a00c6f855fb32fd472f8",
+          "review_board_sha256": "741107363f37dc51ab872fd75f598989e0411be11942ec2c112082ad57b92fd5",
+          "numeric_dimensions_and_relations": "PASS; unchanged from v1",
+          "candidate_pixels_modified": "false; board v2 is a review-status rendering of the same candidate frame sources"
+        },
+        "candidate_review_board_v2": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_review_v2.png",
+        "candidate_review_board_v2_sha256": "741107363f37dc51ab872fd75f598989e0411be11942ec2c112082ad57b92fd5",
+        "candidate_audit_v2": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v2.json",
+        "candidate_audit_v2_sha256": "c4a5e945405261293bad7d68937fcdb6104ef16d36a2a00c6f855fb32fd472f8",
+        "candidate_profile_sha256": "06834917b77ff3d1a5d05faa1c3fd3e455b47b100a1cb92bd74fac0a52d7f1d6",
+        "art_direction_study_v1": {
+          "finish_study": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v1_finish.png",
+          "finish_study_sha256": "1863d6fe7d981e7b6c8aed1c1a2e5edac5bf06d2e07767405a63247fcf29da1a",
+          "lineage": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v1_lineage.json",
+          "prompt": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v1_prompt.txt",
+          "status": "new lean-morphology direction for owner evaluation; not palette-validated or approved sprite art"
+        },
+        "art_direction_cutout_rejected_sha256": "bbc43bb984b9426ec4a49991d16eac5cc7b07b7741120f38c6a87c00aa2aa35e",
+        "art_direction_cutout_rejected": "ImageGen transparent edit produced visible colored fringe; recorded as a negative cutout example and excluded from proposals."
+      },
+      "limits": "The audit measures bbox and declared size relations and records the reviewer’s visual decisions; it does not automatically classify anatomy, chibi read, clean style, material truth or palette-cluster quality. Width includes equipment/hair and is only occupancy. A registered visual fail blocks the candidate; only a new owner review can clear it. Frame00 does not approve animation, integration or ROM.",
+      "rule_section": "SMS_GLOBAL §90",
+      "tool_that_measures": "audit_roster_harmony.py; audit_sprite_cutout.py; audit_validate_resources.py; audit_animation_semantics.py",
+      "skill_that_teaches": "skills/sms-visual-excellence.md; skills/sms-pixel-translate.md; workflows/new-visual-asset.md"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L106",
+    "mastery": "Roster review records scale and per-axis visual pass/fail/pending. Hayato is finish/cluster anchor; Joe is lean morphology anchor only. Correct palette values do not prove clean clustering or cutout; owner rejection remains binding until a revised source passes a fresh shared board review."
+  }
+}

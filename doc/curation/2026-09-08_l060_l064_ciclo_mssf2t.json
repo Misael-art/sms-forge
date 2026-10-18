@@ -1,0 +1,52 @@
+{
+  "curation_id": "2026-09-08_l060_l064_ciclo_mssf2t",
+  "date": "2026-09-08",
+  "scope": "ciclo_mssf2t_soco_worstframe_ko_sessao",
+  "origin": "Ciclo MSSF2T 2026-09-08: re-selagem da ROM v085 (sha 0f4963c0) apos port da trilha de referencia, instrumentacao de probe e prova do soco; worst-frame medido pela primeira vez; banner K.O. capturado por roteiro; diálogo modal do emulador descoberto como causa de falha total de canal DAP.",
+  "lessons": [
+    {
+      "id": "L060",
+      "status": "absorvida_em_skill",
+      "lesson": "Whiff de golpe contra a CPU nao e defeito de colisao ate o estado do oponente estar na prova: a 'janela de 4 px' (PUSH_W=20 vs caixa gap<24) era teoria de leitura de codigo; os probes dataram a causa real — a IA recua andando com guarda quando o jogador ataca e (g_frame & 8) (ST_WALK_B + guard, gap 20->28 durante a janela ativa), contra-ataca (o hit dela interrompe o nosso antes do ativo) e chuta agachado. Prova de golpe exige ler P[1].state/guard (0xC027/0xC02F) e cronometrar por tempo de relogio com o emulador rodando continuo — polling DAP pausado tem granularidade de 2-4 frames e janela de frames fixa erra por ±8 px.",
+      "rule_section": "SMS_GLOBAL §48",
+      "skill_that_teaches": "skills/sms-fight-input-proof.md",
+      "evidence": "SMS_projects/MSSF2T/out/evidence/input_memory.json (v3): soco_provado=true com guile_hp 64->57 a gap=20 em v085; whiffs anteriores com guile_state WALK_B/PUNCH/KICK e gaps_ativos_sem_hit 24/28/30/42; hit -7 anterior em v084 (2026-09-07). Molde vivo: SMS_projects/MSSF2T/tools/prove_input_memory.py (punch_window, linha_tempo_b1, P1_STATES)."
+    },
+    {
+      "id": "L061",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Orcamento de cena 'declarado' vira dívida invisivel ate existir instrumento na ROM: o worst-frame de VBlank declarado em spec-cenas desde o inicio nunca tinha sido medido; o probe aditivo contou 247 de ~2700 frames com vline >= 0xC0 (vline_max 251/262) sob o criterio antigo. A interpretacao de que esses frames DERRAMAVAM foi invalidada por L082: 0xC0 marca o inicio do VBlank, portanto esse resultado nao prova derramamento nem folga. Derrame nao derruba fps — espreme o streaming de VRAM. Recolher o pior-frame com vline < 0xC0.",
+      "rule_section": "SMS_GLOBAL §49",
+      "tool_that_measures": "measure_worst_frame.py",
+      "evidence": "SMS_projects/MSSF2T/out/evidence/worst_frame.json (verdicto=derramou, vovf_delta=247, vline_max=251, estados ROUND/FIGHT/KO/RESULT)."
+    },
+    {
+      "id": "L062",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Estado raro de UI (banner de 120 frames = 2s) nao se captura com sorte de keyframe: em video de 100s, 8/12 frames uniformes perderam o banner K.O. tres vezes. O caminho é roteiro de input que FORCA o estado (B1 para sair da atracao + pressao continua em direcao ao oponente para esvaziar hp antes do TIME UP) e extracao densa (fps=1) para localizar o frame. Frame extraido do video prova o banner; o video selado prova a cadeia.",
+      "rule_section": "SMS_GLOBAL §50",
+      "tool_that_measures": "capture_video.py",
+      "evidence": "SMS_projects/MSSF2T/out/evidence/video_ko.mp4 + ko_banner.png (banner K.O. com Ken caido, ROM v085, 2026-09-08)."
+    },
+    {
+      "id": "L063",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "lesson": "Emulador pode abrir com DIALOGO MODAL (Update Behaviour) que impede o carregamento da ROM passada na linha de comando: o debugger interno nasce null e TODO evaluate DAP NPE-ia ('DAPDebugger.debugger is null') — as ferramentas concluiam 'canal DAP nao ficou vivo' e culpavam ambiente/ROM/medicao. Diagnostico: titulo da janela SEM o nome da ROM (so 'Emulicious') + janela 'Emulicious - Update Behaviour' via kdotool. Correcao: Update=0 no Emulicious.ini; usar config modificado como suspeita padrao quando o canario NPE-ia com porta viva.",
+      "rule_section": "SMS_GLOBAL §51",
+      "tool_that_measures": "emulator_session.py",
+      "evidence": "Log de 2026-09-08: 8+ falhas 'canal DAP nao ficou vivo' entre 01:55-02:50 com porta TCP viva; evaluate NPE reproduzido a mao; apos Update=0 a instancia abre direto em 'Emulicious - 100% (60 fps)' e o canario responde (@0xC7F0)."
+    },
+    {
+      "id": "L064",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Evidencia fresca (janela de 120 min) morre em vao entre turnos de sessao: a cadeia completa (boot -> probe -> audio -> worst-frame -> input -> video -> extração -> SELO) tem de rodar em UM UNICO comando de fundo, sem depender de turno do agente; doc/rom_asset_binding.json é escrito a mao (nenhum gerador no wrapper) e ficou duas geracoes de build defasado (09ed345a de 06/09 vs 1800c79c de 07/09 vs 0f4963c0 de 08/09) — atualizar o binding no mesmo ciclo do rebuild, nunca 'depois'.",
+      "rule_section": "SMS_GLOBAL §51",
+      "tool_that_measures": "seal_fresh_evidence_bundle.py",
+      "evidence": "Falha de selo em 2026-09-08: artefatos de 03:09-03:15 com 830 min na tentativa de selo de 16:55; segunda falha com 362 min apos vao entre turnos; cadeia unica com selo imediato passou."
+    }
+  ],
+  "note_ids": {
+    "calibration": "prove_input_memory.py --self-check 26 fixtures; measure_worst_frame.py --self-check 6 fixtures; audit_audio_provenance.py --self-check (L058/L059, §47).",
+    "attribution": "IDs L058/L059 em 2026-09-07_l058_l059_audio_provenancia.json; proximo ID livre apos este arquivo: L065."
+  }
+}

@@ -15,14 +15,20 @@ Exit: 0 ok/skip | 1 mismatch | 3 uso
 import argparse, json, os, re, shutil, sys, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PLAY = re.compile(
+ANY_PLAY = re.compile(
     r"(?:PSGSFXPlay(?:Loop)?|psg_sfx)\s*\(\s*(?:\(void\s*\*\)\s*)?(\w+)\s*,\s*"
-    r"(SFX_CHANNEL[A-Z0-9]+)\s*\)"
+    r"([^()]*)\)"
 )
-VAR_PLAY = re.compile(
-    r"(?:PSGSFXPlay(?:Loop)?|psg_sfx)\s*\(\s*(?:\(void\s*\*\)\s*)?(\w+)\s*,\s*"
-    r"(?!SFX_CHANNEL)(\w+)\s*\)"
-)
+
+
+def _norm_mask(ch):
+    return "|".join(sorted(t.strip() for t in str(ch).split("|")))
+
+
+def _literal_mask(arg):
+    toks = [t.strip() for t in arg.split("|")]
+    return bool(arg) and all(
+        re.fullmatch(r"SFX_CHANNEL[A-Z0-9]+", t) for t in toks if t)
 
 
 def _sources(project):
@@ -68,18 +74,20 @@ def audit_project(project):
             problems.append(f"{src}: ilegivel ({e})")
             continue
         rel = os.path.relpath(src, project)
-        for m in PLAY.finditer(text):
-            symbol, ch = m.group(1), m.group(2)
+        for m in ANY_PLAY.finditer(text):
+            symbol, arg = m.group(1), m.group(2).strip()
             want = mapping.get(symbol)
-            if want and want != ch:
+            if not want:
+                continue
+            if _literal_mask(arg):
+                if _norm_mask(arg) != _norm_mask(want):
+                    problems.append(
+                        f"{rel}: {symbol} tocado em {_norm_mask(arg)}, "
+                        f"manifesto autorou {_norm_mask(want)} (L041)")
+            else:
                 problems.append(
-                    f"{rel}: {symbol} tocado em {ch}, manifesto autorou {want} (L041)")
-        for m in VAR_PLAY.finditer(text):
-            symbol = m.group(1)
-            if symbol in mapping:
-                problems.append(
-                    f"{rel}: {symbol} tocado com canal em variavel "
-                    f"('{m.group(2)}') — nao provado (L041)")
+                    f"{rel}: {symbol} tocado com canal nao literal "
+                    f"('{arg}') — nao provado (L041)")
     return problems, None
 
 
@@ -91,18 +99,28 @@ def _self_check():
         json.dump({"assets": [
             {"file": "res/audio/sfx_shot.psg", "channels": "SFX_CHANNEL2"},
             {"file": "res/audio/sfx_hit.psg", "channels": "SFX_CHANNELS2AND3"},
+            {"file": "res/audio/sfx_fight.psg",
+             "channels": "SFX_CHANNEL1|SFX_CHANNEL2|SFX_CHANNEL3"},
         ]}, open(os.path.join(d, "doc", "audio_provenance_manifest.json"), "w"))
         open(os.path.join(d, "src", "ok.c"), "w").write(
             "PSGSFXPlay((void *)sfx_shot, SFX_CHANNEL2);\n"
-            "PSGSFXPlay((void *)sfx_hit, SFX_CHANNELS2AND3);\n")
+            "PSGSFXPlay((void *)sfx_hit, SFX_CHANNELS2AND3);\n"
+            "PSGSFXPlay((void *)sfx_fight,\n"
+            "           SFX_CHANNEL3 | SFX_CHANNEL1 | SFX_CHANNEL2);\n")
         p, _ = audit_project(d)
         assert not p, f"match nao deveria reprovar: {p}"
 
         open(os.path.join(d, "src", "bad.c"), "w").write(
-            "PSGSFXPlay((void *)sfx_shot, SFX_CHANNEL3);\n")
+            "PSGSFXPlay((void *)sfx_shot, SFX_CHANNEL3);\n"
+            "PSGSFXPlay((void *)sfx_fight, SFX_CHANNEL1 | chan);\n"
+            "psg_sfx(sfx_hit, SFX_CHANNEL2);\n")
         p, _ = audit_project(d)
         assert any("sfx_shot" in x and "SFX_CHANNEL3" in x for x in p), \
             f"faltou mismatch L041: {p}"
+        assert any("sfx_fight" in x and "nao literal" in x for x in p), \
+            f"faltou escape mascara+variavel: {p}"
+        assert any("sfx_hit" in x and "SFX_CHANNEL2" in x for x in p), \
+            f"faltou mismatch contra composto: {p}"
 
         e = tempfile.mkdtemp(prefix="smspsgch2_")
         try:

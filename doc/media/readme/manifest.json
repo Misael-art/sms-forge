@@ -1,0 +1,254 @@
+{
+  "schema": "smsforge_readme_media_v1",
+  "updated_on": "2026-10-18",
+  "purpose": "Public project showcase; all projects remain work in progress.",
+  "method": "Existing emulator footage only. GIFs are trimmed, downsampled to 15 fps, scaled with nearest-neighbor, and silent. PNG captures are copied byte-for-byte.",
+  "limits": [
+    "No fresh emulator execution or acceptance test in this documentation task",
+    "Some legacy capture records lack a ROM hash; their identity is not reconstructed from the current ROM",
+    "Historical art/diagnostic frames do not imply approved production assets",
+    "Original recordings stay in their project evidence locations; this directory holds publication derivatives and exact record copies"
+  ],
+  "entries": [
+    {
+      "id": "mssf2t",
+      "project": "MSSF2T",
+      "classification": "historical_emulator_capture_preview",
+      "asset": {
+        "path": "doc/media/readme/mssf2t.gif",
+        "sha256": "3bc1df406b93f8381e2895efd685de53741000c104c991a6859c46a0462c363c",
+        "bytes": 349016
+      },
+      "source": {
+        "path": "SMS_projects/MSSF2T/out/evidence/recipe_combate.mp4",
+        "sha256": "e971c127804a241bee279e9701fdb6b178fc1a275aeeb775344d2af377860b48",
+        "bytes": 1627615
+      },
+      "evidence_record": {
+        "original_path": "SMS_projects/MSSF2T/out/evidence/recipe_combate.json",
+        "path": "doc/media/readme/records/mssf2t.json",
+        "sha256": "850506e37ab4bcfabf2e22bf7e9e789e344fbf6d9f8f815873f23529133fec7f"
+      },
+      "rom_sha256": null,
+      "rom_identity_note": "Recorded hash when present; no retroactive binding to current ROM when absent.",
+      "emulator": "Emulicious",
+      "export": {
+        "start_s": 10,
+        "requested_duration_s": 8,
+        "frame_rate": 15,
+        "size": [
+          512,
+          384
+        ],
+        "scale": "2x nearest-neighbor",
+        "audio": false,
+        "palette": "GIF palette from the recorded video; no invented artwork",
+        "ffmpeg_filter": "fps=15,scale=512:384:flags=neighbor,split[a][b];[a]palettegen=stats_mode=full[p];[b][p]paletteuse=dither=none"
+      },
+      "claim_limits": [
+        "Presentation preview, not FPS/flicker or audio acceptance",
+        "Does not validate the current source tree/build"
+      ]
+    },
+    {
+      "id": "kage-matsuri",
+      "project": "Kage Matsuri",
+      "classification": "historical_emulator_capture_preview",
+      "asset": {
+        "path": "doc/media/readme/kage-matsuri.gif",
+        "sha256": "7379889df4d92470327f45f2019469ad9bb544fd4357fb7ab62afd345316751f",
+        "bytes": 105231
+      },
+      "source": {
+        "path": "SMS_projects/kage_matsuri/out/evidence/recipe_combate.mp4",
+        "sha256": "da35049e16e2bc1bf504decac412aafdea0d6f5c9467df84e344de1095f9bbf9",
+        "bytes": 1831239
+      },
+      "evidence_record": {
+        "original_path": "SMS_projects/kage_matsuri/out/evidence/recipe_combate.json",
+        "path": "doc/media/readme/records/kage-matsuri.json",
+        "sha256": "9c83cae0eebb186833b3d05c6dda3332be155d17298241bed723ac0b44a1821a"
+      },
+      "rom_sha256": null,
+      "rom_identity_note": "Recorded hash when present; no retroactive binding to current ROM when absent.",
+      "emulator": "Emulicious",
+      "export": {
+        "start_s": 13,
+        "requested_duration_s": 8,
+        "frame_rate": 15,
+        "size": [
+          512,
+          384
+        ],
+        "scale": "2x nearest-neighbor",
+        "audio": false,
+        "palette": "GIF palette from the recorded video; no invented artwork",
+        "ffmpeg_filter": "fps=15,scale=512:384:flags=neighbor,split[a][b];[a]palettegen=stats_mode=full[p];[b][p]paletteuse=dither=none"
+      },
+      "claim_limits": [
+        "Presentation preview, not FPS/flicker or audio acceptance",
+        "Does not validate the current source tree/build"
+      ]
+    },
+    {
+      "id": "arena-nocturna",
+      "project": "Arena Nocturna",
+      "classification": "historical_emulator_capture_preview",
+      "asset": {
+        "path": "doc/media/readme/arena-nocturna.gif",
+        "sha256": "4ec940d0390ee1c4479a7253e23537f55a2604b28c2467dbef6cc842f3d5f5c5",
+        "bytes": 156767
+      },
+      "source": {
+        "path": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1.mp4",
+        "sha256": "93bd90c89a1e6273b3c6f0c485b6fce012ee46a8475d5d4fbd901e6773a23314",
+        "bytes": 173919
+      },
+      "evidence_record": {
+        "original_path": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1.json",
+        "path": "doc/media/readme/records/arena-nocturna.json",
+        "sha256": "05c410c3f68d87344a268e2efe900e75a8faaf3053eff190b6d73140a05ffe29"
+      },
+      "rom_sha256": null,
+      "rom_identity_note": "Recorded hash when present; no retroactive binding to current ROM when absent.",
+      "emulator": "Emulicious",
+      "export": {
+        "start_s": 2.3,
+        "requested_duration_s": 3.4,
+        "frame_rate": 15,
+        "size": [
+          512,
+          384
+        ],
+        "scale": "2x nearest-neighbor",
+        "audio": false,
+        "palette": "GIF palette from the recorded video; no invented artwork",
+        "ffmpeg_filter": "fps=15,scale=512:384:flags=neighbor,split[a][b];[a]palettegen=stats_mode=full[p];[b][p]paletteuse=dither=none"
+      },
+      "claim_limits": [
+        "Presentation preview, not FPS/flicker or audio acceptance",
+        "Does not validate the current source tree/build"
+      ]
+    },
+    {
+      "id": "openbor-sms",
+      "project": "OpenBOR SMS",
+      "classification": "historical_emulator_capture_preview",
+      "asset": {
+        "path": "doc/media/readme/openbor-sms.gif",
+        "sha256": "1de305b913f6a12cf63ae327c71a9e259b17327cd708ea13a4f93941d231aa5a",
+        "bytes": 343267
+      },
+      "source": {
+        "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_jump.mp4",
+        "sha256": "435ef42e298a63babe30df9d9d847c1954b7ced51778ab14ef76ce02cf7dbda8",
+        "bytes": 263885
+      },
+      "evidence_record": {
+        "original_path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_jump.json",
+        "path": "doc/media/readme/records/openbor-sms.json",
+        "sha256": "5d0cd9e29b9725d44087e90cb90cb959eb79151801960c1a4f1cea9235ed61f4"
+      },
+      "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+      "rom_identity_note": "Recorded hash when present; no retroactive binding to current ROM when absent.",
+      "emulator": "Emulicious",
+      "export": {
+        "start_s": 0,
+        "requested_duration_s": 1.5019,
+        "frame_rate": 15,
+        "size": [
+          512,
+          384
+        ],
+        "scale": "2x nearest-neighbor",
+        "audio": false,
+        "palette": "GIF palette from the recorded video; no invented artwork",
+        "ffmpeg_filter": "fps=15,scale=512:384:flags=neighbor,split[a][b];[a]palettegen=stats_mode=full[p];[b][p]paletteuse=dither=none"
+      },
+      "claim_limits": [
+        "Presentation preview, not FPS/flicker or audio acceptance",
+        "Does not validate the current source tree/build"
+      ]
+    },
+    {
+      "id": "mugen-rev2",
+      "project": "MUGEN rev2",
+      "classification": "diagnostic_one_actor_visible",
+      "asset": {
+        "path": "doc/media/readme/mugen-rev2.png",
+        "sha256": "f59fe2f6a817eef54a847c42fd557333c9692d5950f4dc06c460671e6f1460d5",
+        "bytes": 1623
+      },
+      "source": {
+        "path": "SMS_projects/luta_mugem_rev2/out/evidence/m4_ryu_ken/det120_v025_r1.png",
+        "sha256": "f59fe2f6a817eef54a847c42fd557333c9692d5950f4dc06c460671e6f1460d5"
+      },
+      "emulator": "Emulicious",
+      "export": {
+        "operation": "byte_identical_copy",
+        "size": [
+          256,
+          192
+        ]
+      },
+      "rom_sha256": "bd144ee613c0ed1469f933ee255d06a435ee5045b3b10f60266e06e903d71f3f",
+      "claim_limits": [
+        "Diagnostic framebuffer only; not complete gameplay or delivery",
+        "Only one actor visible at this captured frame; does not prove a complete versus render"
+      ],
+      "rom_source_path": "SMS_projects/luta_mugem_rev2/changelog/roms/build_v025/rom.sms",
+      "evidence_record": {
+        "original_path": "SMS_projects/luta_mugem_rev2/out/logs/m4m_clip_plain_ab.log",
+        "path": "doc/media/readme/records/mugen-rev2.log",
+        "sha256": "4b89cbfff8b6652bae55a8f15cf93ab89aa9fdb6a9bec5eb020f875aaca193d6"
+      }
+    },
+    {
+      "id": "master-of-fighters",
+      "project": "Master of Fighters",
+      "classification": "historical_diagnostic_superseded_art",
+      "asset": {
+        "path": "doc/media/readme/master-of-fighters.png",
+        "sha256": "1806be681b579225f2290547e204059367d02425b084e971b18c08b8c7e16f8e",
+        "bytes": 2686
+      },
+      "source": {
+        "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/project/out/evidence/dr_social_61_framebuffer_v10/framebuffers/render_ID01.png",
+        "sha256": "1806be681b579225f2290547e204059367d02425b084e971b18c08b8c7e16f8e"
+      },
+      "emulator": "Emulicious",
+      "export": {
+        "operation": "byte_identical_copy",
+        "size": [
+          256,
+          192
+        ]
+      },
+      "rom_sha256": "41879e38c8a83caec07bd97e9208ca08f00fe35ec1e927ff31feab4eb7a3c8cc",
+      "claim_limits": [
+        "Diagnostic framebuffer only; not complete gameplay or delivery",
+        "Master of Fighters image uses a historical source subsequently superseded"
+      ],
+      "evidence_record": {
+        "original_path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/project/out/evidence/dr_social_61_framebuffer_v10/framebuffers/render_ID01.json",
+        "path": "doc/media/readme/records/master-of-fighters.json",
+        "sha256": "411e2114b62ea41a2d6bc8c689b5395defd9320e7bb2fc5b4a719dd668f8edbb"
+      }
+    }
+  ],
+  "export_tool": "ffmpeg version n9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "supplementary_records": [
+    {
+      "path": "doc/media/readme/records/openbor-m6.json",
+      "sha256": "db417f7cdc84bdc02bf647ba27489815e24ca4c27fbcd91817fb9d88c31a8169"
+    },
+    {
+      "path": "doc/media/readme/records/openbor-runtime.json",
+      "sha256": "abd2950cac44c6cf8a252f88c97ef78b259d503e1bd3b0e7de7f5997f1f1f786"
+    },
+    {
+      "path": "doc/media/readme/records/openbor-worst-frame.json",
+      "sha256": "8a1b040e04142e5bb35deda8a8808a77749530b0299bd57d7928e29eb346f518"
+    }
+  ]
+}

@@ -14,10 +14,14 @@ import argparse, os, re, shutil, sys, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEF_SIZE = re.compile(r"#define\s+([A-Z][A-Z0-9_]*_SIZE)\s+(\d+)")
-# `const unsigned char ken_idle_tiles[832]`
-ARRAY_SIMPLE = re.compile(
-    r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\[\s*(\d+)\s*\]"
+# `const unsigned char KEN_IDLE_TILES[832]` (declarations only)
+ARRAY_DECL = re.compile(
+    r"\b(?:(?:static|extern)\s+)*(?:const\s+)?"
+    r"(?:unsigned\s+|signed\s+)?(?:char|short|int|long|uint8_t|int8_t|"
+    r"uint16_t|int16_t)\s+([A-Za-z_][A-Za-z0-9_]*)\s*\[\s*(\d+)\s*\]"
 )
+ALIAS = re.compile(r"^#define\s+([A-Za-z_][A-Za-z0-9_]*)\s+"
+                   r"([A-Za-z_][A-Za-z0-9_]*)\s*$", re.M)
 
 
 def _sources(project):
@@ -34,13 +38,13 @@ def _sources(project):
 
 
 def _macro_to_array(macro):
-    stem = macro[:-5] if macro.endswith("_SIZE") else macro
-    return stem.lower()
+    return macro[:-5] if macro.endswith("_SIZE") else macro
 
 
 def audit_project(project):
     macros = {}   # name -> [(file, value)]
     arrays = {}   # name -> [(file, value)]
+    aliases = {}  # symbol -> [(file, target)]
     problems = []
     files = _sources(project)
     if not files:
@@ -54,11 +58,11 @@ def audit_project(project):
         rel = os.path.relpath(src, project)
         for m in DEF_SIZE.finditer(text):
             macros.setdefault(m.group(1), []).append((rel, int(m.group(2))))
-        for m in ARRAY_SIMPLE.finditer(text):
+        for m in ARRAY_DECL.finditer(text):
             name, n = m.group(1), int(m.group(2))
-            # ignora indexacao de uso (p[0], map[24]) sem ser declaracao
-            # de array: so conta se o nome aparece com tipo ou define irmao.
             arrays.setdefault(name, []).append((rel, n))
+        for m in ALIAS.finditer(text):
+            aliases.setdefault(m.group(1), []).append((rel, m.group(2)))
     for name, occs in macros.items():
         vals = {v for _, v in occs}
         if len(vals) > 1:
@@ -67,6 +71,33 @@ def audit_project(project):
                 f"{name} diverge entre headers ({detalhe}) (L052)")
         want = next(iter(vals))
         arr = _macro_to_array(name)
+        candidates = (arr, arr.lower())
+        target = next((candidate for candidate in candidates
+                       if candidate in aliases), None)
+        if target is not None:
+            targets = {value for _, value in aliases[target]}
+            if len(targets) > 1:
+                detail = ", ".join(f"{f}={value}" for f, value in aliases[target])
+                problems.append(f"{target} alias diverge ({detail}) (L052)")
+            target = next(iter(targets))
+            seen = {arr}
+            while target in aliases:
+                if target in seen:
+                    problems.append(f"{name} participa de ciclo de aliases (L052)")
+                    target = None
+                    break
+                seen.add(target)
+                target_values = {value for _, value in aliases[target]}
+                if len(target_values) != 1:
+                    problems.append(f"{target} alias diverge entre destinos (L052)")
+                    target = None
+                    break
+                target = next(iter(target_values))
+        if target is not None:
+            arr = target
+        elif arr not in arrays:
+            # Legacy assets often use lower-case C names with upper-case macros.
+            arr = arr.lower()
         if arr in arrays:
             for f, n in arrays[arr]:
                 if n != want:
@@ -93,6 +124,22 @@ def _self_check():
         p, _ = audit_project(d)
         assert any("diverge" in x or "1024" in x for x in p), \
             f"faltou pegar 1024 vs 832: {p}"
+
+        open(os.path.join(inc, "gfx.h"), "w").write(
+            "#define KEN_IDLE_TILES_SIZE 832\n")
+        open(os.path.join(inc, "alias.h"), "w").write(
+            "#define KEN_IDLE_META_SIZE 4\n"
+            "#define KEN_IDLE_META ken_idle_meta_canonical\n"
+            "const unsigned char ken_idle_meta_canonical[4] = {0};\n")
+        p, _ = audit_project(d)
+        assert not p, f"alias exato deveria passar: {p}"
+        open(os.path.join(inc, "alias.h"), "w").write(
+            "#define KEN_IDLE_META_SIZE 5\n"
+            "#define KEN_IDLE_META ken_idle_meta_canonical\n"
+            "const unsigned char ken_idle_meta_canonical[4] = {0};\n")
+        p, _ = audit_project(d)
+        assert any("KEN_IDLE_META_SIZE=5" in x for x in p), \
+            f"divergencia no alias deveria falhar: {p}"
 
         e = tempfile.mkdtemp(prefix="smssz2_")
         try:

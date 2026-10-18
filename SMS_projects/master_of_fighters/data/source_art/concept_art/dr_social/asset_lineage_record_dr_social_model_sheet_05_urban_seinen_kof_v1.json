@@ -1,0 +1,146 @@
+{
+  "schema": "asset_lineage_record_model_sheet_v1",
+  "asset_id": "dr_social_model_sheet_05_urban_seinen_kof_v1",
+  "created_date": "2026-10-08",
+  "status": "source_candidate",
+  "owner_review": "pending",
+  "style_id": "Urban-Seinen-KOF",
+  "style_reference": {
+    "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "catalog_sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "game": "The King of Fighters '98",
+    "platform_era": "Neo Geo (MVS) / 1998",
+    "base_art_style": "Fighting Manga Neogeo Classic",
+    "lineart": "Lineart firme de 1px com anti-aliasing manual",
+    "body_morphology": "Proporções atléticas de mangá Seinen urbano dos anos 90",
+    "palette_and_lighting": "Cores equilibradas de rua/urbanas, sombreamento cel em 3 tons",
+    "descriptor_validation_status": "initial catalog descriptor; not independently validated"
+  },
+  "identity_and_palette_authorities": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "role": "approved identity, face, palette, costume and equipment authority"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "project palette-role authority"
+    }
+  ],
+  "generation": {
+    "tool": "built-in image_gen",
+    "prompt_file": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt",
+    "prompt_sha256": "b33311b7d99f489a8262ccc45c06863adb5bd0800d3d888e5abcbcff98b6643b",
+    "input_images": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+        "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+        "role": "approved model-sheet identity and layout reference"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+        "role": "approved identity and materials reference"
+      }
+    ],
+    "attempts": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_art.png",
+        "sha256": "300354fcbc923aae513348827e577c604f6c464016b8d88a7fd14c844ba8019e",
+        "status": "discarded",
+        "reason": "wrong hair color, costume and weapon",
+        "prompt_file": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_prompt.txt",
+        "prompt_sha256": "bd7b68028d2b35c064cd85c099d7aa2b5097848edf73d2a8d0c07846eab510b3"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_art.png",
+        "sha256": "8fb4e85f486c014cad12bc8f60837e195ed354344bf5f9e2a10f2f33ef3112bf",
+        "status": "discarded",
+        "reason": "costume/shoe ornament and unneeded violet effect",
+        "prompt_file": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_prompt.txt",
+        "prompt_sha256": "bcd1553baab43f994f0f9390a0906391a8b7822936a80c6107210e24f952bb09"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png",
+        "sha256": "bf994540105b99a0a313a5ec12530f260fa54b0944e82bb7a93c26a892a0424d",
+        "status": "selected_for_candidate_review",
+        "dimensions_px": [
+          1983,
+          793
+        ],
+        "prompt_file": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt",
+        "prompt_sha256": "b33311b7d99f489a8262ccc45c06863adb5bd0800d3d888e5abcbcff98b6643b"
+      }
+    ],
+    "metadata_file": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_metadata.json",
+      "sha256": "9fc5439d54f4b3c3cf66e662d1d65b31e01bfeb44540142075154aaf781de9e7"
+    },
+    "layout_tool": {
+      "path": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+      "sha256": "33649ee2836c804a7a482e161ff9daf7eb425afc50972b002fac995aad36ee4d"
+    },
+    "final_sheet": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1.png",
+      "sha256": "dd79f1393380b075b81e10ee5988adbd22a282b4ebd7d8940b1500a4f35ca2fa",
+      "dimensions_px": [
+        2400,
+        1440
+      ]
+    },
+    "layout_composition": "Generated illustration uniformly reduced to 0.88 and positioned intact; shared compositor adds title, view labels, 7.5H guide, baseline, style fields, palette swatches and candidate badge; it does not redraw or recolor the character.",
+    "attempt_prompt_files": [
+      {
+        "attempt": 1,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_prompt.txt",
+        "sha256": "bd7b68028d2b35c064cd85c099d7aa2b5097848edf73d2a8d0c07846eab510b3",
+        "prompt_exact": true
+      },
+      {
+        "attempt": 2,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_prompt.txt",
+        "sha256": "bcd1553baab43f994f0f9390a0906391a8b7822936a80c6107210e24f952bb09",
+        "prompt_exact": true
+      },
+      {
+        "attempt": 3,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt",
+        "sha256": "b33311b7d99f489a8262ccc45c06863adb5bd0800d3d888e5abcbcff98b6643b",
+        "prompt_exact": true
+      }
+    ]
+  },
+  "required_views": [
+    "front full body",
+    "side-profile full body",
+    "back full body",
+    "face close-up",
+    "signature duelist pose"
+  ],
+  "design_invariants": [
+    "Adult tall slim Dr. Ferdinand Social, gray swept-back hair and round brass spectacles.",
+    "Keep approved blue/cyan Victorian coat, white shirt, burgundy cravat, dark trousers and brown footwear; visual variance remains pending owner review.",
+    "Keep cane, rapier and occult steel crescent boomerang; violet effect only if on boomerang.",
+    "Remain fully human; no monster traits."
+  ],
+  "review_notes": {
+    "visual_inspection": "Five views are present on clean pale cream; front/profile/back are close in scale and share an approximate baseline. Face, hair, coat, cane, rapier and crescent boomerang are visible. Uniform scale 0.88 was applied during composition to reduce overlap with ruler and captions.",
+    "pending": "All required art axes, owner review, and independent review remain pending. Recorded outfit variance specifically requires decision.",
+    "not_approved_by_this_record": "sprite sheet, animation, SMS palette quantization, resource conversion, ROM integration, or in-emulator behavior"
+  },
+  "review_checklist": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_v1.json",
+    "sha256": "99c6438116db88f8d0deb146d3b9d289711fd02dfb091b5a55fa83daf745a187",
+    "status": "pending owner and independent review",
+    "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_report_v1.json"
+  },
+  "independent_quality_review": {
+    "status": "plan_created; reviewer_assignment_and_report_pending",
+    "request_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_quality_review_request_v1.json",
+    "request_sha256": "bf3b475e04edd6c0e5a54a937c057d54b889bda0b4fa50eb7de21ed0b166faef",
+    "plan_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_quality_review_plan_v1.json",
+    "plan_sha256": "519762812233601e2e7958a44e3dbed9a45cea22e0cbe06c82d07a7a503b845b"
+  },
+  "claim_ceiling": "Concept/model sheet candidate only; no owner, pixel, runtime or emulator approval recorded."
+}

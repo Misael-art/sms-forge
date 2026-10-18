@@ -1,0 +1,38 @@
+{
+  "curation_id": "2026-09-25_l080_l081_andamento_transcricao_gate_cego",
+  "date": "2026-09-25",
+  "scope": "ramo_MSSF2T_identidade_tema_original_e_deboto_do_gate_de_canal",
+  "origin": "Feedback humano direto apos o fechamento do piso L078/L079: 'MSSF2T som diferente do tema original; necessario rever composicao e pode colocar voz para abertura da luta FIGHT; os demais: a musica carece de melhor composicao, harmonia e identidade e SOA ACELERADA'. O piso media ritmo por nota, dinamica, unissono, percussao, loop minimo de 125 frames e numero de canais — nada media ANDAMENTO PERCEBIDO (todas as camadas martelando sem respirar soa a 16 Hz mesmo 'conforme') nem IDENTIDADE quando existe referencia hasheada no acervo (o tema do Ken estava portado 'de memoria' por um compositor de codigo, e o resultado nao era o tema).",
+  "lessons": [
+    {
+      "id": "L080",
+      "status": "fechada_com_ferramenta_e_recomposicao",
+      "lesson": "Andamento percebido, folego de loop e identidade viram medicao. (a) M7 em audit_psg_quality.py: a camada com maior intervalo medio entre notas precisa de gap >= 8 frames — se todas as camadas escrevem todo frame, nada respira e o ouvinte le 'acelerada' independentemente do BPM; o piso LOOP_MIN subiu de 125 para 250 frames (>= ~4,2 s a 60 Hz) porque 'loop curto' era exatamente o que impedia frase musical completa. (b) Onde existe referencia hasheada (MID de VGMusic com sha256 no manifesto de audio), 'soa como o original' deixa de ser opiniao: o arranjador passa a TRANSCREVER deterministico do MID (parse SMF, grade de semicolcheias, unisonos dobrados colapsados, runs de acompanhamento fundidos em segmentos, bateria em grade de semicolcheias com simultaneidades deslocadas 1 frame) e o stream resultante e regeneravel byte-a-byte pelo script com --self-check. (c) A voz 'FIGHT' da abertura: sintese por formantes (glide F1/F2 em dois canais + rajada de ruido branco com decaimento) jogada como SFX nos canais 1+2+3 fora do cooldown de impacto — o PSGSFXFrame da lib rouba os canais e devolve sozinho. Economia PSG real: transcricao completa de 8 compassos com 4 papeis custou 750 B, MENOS que os 919 B do arranjo 'de memoria' de 7 compassos reprovado, porque so se escrevem latches de registro que MUDAM (re-articulacao em mesma nota = mute 1 frame, 2-3 B, nao par de tone).",
+      "evidence": {
+        "m7_loopmin": "audit_psg_quality.py: BREATH_MIN=8.0 (M7) e LOOP_MIN=250; self-check estendido com fixture que respira e com camada que nao respira reprovando",
+        "transcricao": "SMS_projects/MSSF2T/tools/gen_music_ken_stage.py reescrito de compositor-mao para transcritor do MID de referencia (ssf2_ken_stage_vgmusic.mid sha 4480480137e0..., ja hasheado no manifesto); battle 750 B / 1280 frames / gap medio {0: 14.53, 1: 135.56, 2: 78.67}, unissono 0.0, 0 violacoes 0 avisos; title 494 B / 1152 frames; voz 45 B / 24 frames passando S1/S2",
+        "medidas_pos_recomposicao": "0/8 streams reprovados no MSSF2T; 0/6 arena_nocturna; 0/6 hamoopig; 0/2 kage_matsuri (audit_psg_quality por projeto, 2026-09-25)",
+        "rom_cabe": "folga de 32K medida subiu de ~10 B para 123 B COM a voz e o oitavo compasso que antes estourava o makesms em 33 B — a transcricao mais barata pagou a paginao nao-autorizada",
+        "audio_eixo_fechado": "captura isolada do emulador (mssf2t_v3.wav 33.4 s, ativo=100%, peak 6029) + audit_audio PASS nos 4 projetos apos re-selagem"
+      },
+      "rule_section": "SMS_GLOBAL \u00a765",
+      "tool_that_measures": "audit_psg_quality.py"
+    },
+    {
+      "id": "L081",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Gate cuja regex nao conhece a forma da API que ele audita reprova barulho e PASSA em silencio o que nao consegue enxergar. audit_psg_channel_binding.py (L041) casava o literal de canal por `SFX_CHANNEL[A-Z0-9]+` isolado — `SFX_CHANNEL1 | SFX_CHANNEL2 | SFX_CHANNEL3`, forma legitimissima do header PSGlib (autoridade #8, os masks sao bits), nao casava com PLAY nem com VAR_PLAY: a chamada ficava INVISIVEL ao gate, e como o simbolo so entrava no mapeamento se declarado, um sfx_fight declarado era julgado sem nunca ter sido comparado. Correcao na ferramenta: um unico classificador ANY_PLAY para toda chamada, `_literal_mask` aceitando apenas sequencias puras de tokens SFX_*, `_norm_mask` comparando por conjunto ordenado (ordem dos termos nao e arranjo), e qualquer 2o argumento nao-literal para simbolo declarado virando 'nao literal — nao provado' em vez de skip silencioso. Recorrencia da familia L069/L041: verificar a codificacao real no header ANTES de afirmar a sintaxe que o gate aceita.",
+      "evidence": {
+        "escape_provado": "antes da correcao: PSGSFXPlay((void *)sfx_fight, SFX_CHANNEL1 | SFX_CHANNEL2 | SFX_CHANNEL3) com manifesto declarando o mesmo mask produzia [PASS] sem nenhuma comparacao (regex nunca casou)",
+        "correcao": "audit_psg_channel_binding.py reescrito em torno de ANY_PLAY/_literal_mask/_norm_mask; self-check agora cobre match composto (ordem trocada passa), mismatch composto, mascara com variavel no rabo ('SFX_CHANNEL1 | chan' reprova como nao-provado) e o comportamento antigo",
+        "autoaplicacao": "[SELF-CHECK OK] e MSSF2T [PASS] com sfx_fight declarado como SFX_CHANNEL1|SFX_CHANNEL2|SFX_CHANNEL3 no manifesto de audio; validate_measurement_tools 44/44; selftest 60/60"
+      },
+      "rule_section": "SMS_GLOBAL \u00a766",
+      "tool_that_measures": "audit_psg_channel_binding.py"
+    }
+  ],
+  "note_ids": {
+    "next_id": "L082",
+    "mastery": "Nenhuma tecnica promovida a 'validated' alem do que os gates medem. Dividas abertas declaradas: eixo gameplay/input do MSSF2T segue nao re-provado na arvore de trabalho (WIP g_control_mode do humano, L-herdada do ciclo anterior); resultado worst-frame do MSSF2T (vovf_delta=26 / 12 s, vline_max=199) invalidado por L082 porque usou vline>=0xC0; budget pede re-medicao corrigida. Corrida de re-selagem dependeu de arbitragem humana do PipeWire (janela java com Buffer/Sink Latency 0 sob concorrencia de testes de audio de outro workspace — ambiente, nao-ROM: a ROM de controle historico ficou muda junto)."
+  }
+}
