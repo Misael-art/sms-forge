@@ -91,46 +91,6 @@
       ]
     },
     {
-      "id": "hamoopig",
-      "project": "HAMOOPIG",
-      "classification": "historical_emulator_capture_preview",
-      "asset": {
-        "path": "doc/media/readme/hamoopig.gif",
-        "sha256": "a3b42ad0dffbbfe6486d7355d917c0c88741d23138a98b7d016e5a62c76680fe",
-        "bytes": 9095
-      },
-      "source": {
-        "path": "SMS_projects/hamoopig/out/evidence/ryo_cycles.mp4",
-        "sha256": "522b8b9381b9b14a71ae32fb02687cbbfc77b3b703c75e10df25d85e68176567",
-        "bytes": 225069
-      },
-      "evidence_record": {
-        "original_path": "SMS_projects/hamoopig/out/evidence/ryo_cycles.json",
-        "path": "doc/media/readme/records/hamoopig.json",
-        "sha256": "384d02cee0816e9344cfe9dc086ab5d7395411366bae2fd7b1574d2bebaa4949"
-      },
-      "rom_sha256": null,
-      "rom_identity_note": "Recorded hash when present; no retroactive binding to current ROM when absent.",
-      "emulator": "Emulicious",
-      "export": {
-        "start_s": 9,
-        "requested_duration_s": 8,
-        "frame_rate": 15,
-        "size": [
-          512,
-          384
-        ],
-        "scale": "2x nearest-neighbor",
-        "audio": false,
-        "palette": "GIF palette from the recorded video; no invented artwork",
-        "ffmpeg_filter": "fps=15,scale=512:384:flags=neighbor,split[a][b];[a]palettegen=stats_mode=full[p];[b][p]paletteuse=dither=none"
-      },
-      "claim_limits": [
-        "Presentation preview, not FPS/flicker or audio acceptance",
-        "Does not validate the current source tree/build"
-      ]
-    },
-    {
       "id": "arena-nocturna",
       "project": "Arena Nocturna",
       "classification": "historical_emulator_capture_preview",

@@ -255,3 +255,16 @@ Curadoria: `doc/curation/2026-10-05_l057_sessoes_privadas_emulicious.json`.
   Reteste independente do gate:25/25 vetores. Doc sync mantém os dez problemas
   anteriores do `luta_mugen` ilegível; aplicação local validada, fechamento
   global bloqueado por essa condição externa. Nenhum build/emulador novo.
+
+## HAMOOPIG aposentado — 2026-10-18
+
+- Pedido explícito do dono: retirar HAMOOPIG do README e do Git por obsolescência.
+- Diretório do projeto removido do índice na branch de publicação e ignorado;
+  arquivos locais, incluindo trabalho ainda não commitado, preservados.
+- Mídia e registro do projeto removidos da galeria pública; manifesto atualizado.
+- `session_bridge/consumer_acceptance.py` passou a replay histórico opt-in
+  (`--legacy`); o padrão recusa antes de criar sessões. A rota de infraestrutura
+  continua `session_bridge/acceptance.py`, sem depender desse consumidor.
+- Matriz de consumidores atualizada. Lições/medições históricas preservadas;
+  nenhuma ROM, build ou aceitação de emulador foi reexecutada nesta remoção.
+- Registro de escopo e recuperação: `doc/retired-projects.md`.

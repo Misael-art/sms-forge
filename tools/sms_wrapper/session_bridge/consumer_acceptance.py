@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Aceitacao de integracao de consumidores sobre sessoes privadas (§93/L057).
+"""Replay HISTORICO de consumidores sobre sessoes privadas (§93/L057).
+
+Aposentado em 2026-10-18 com o HAMOOPIG; requer --legacy e copias locais.
+Aceitacao ativa da infraestrutura: session_bridge/acceptance.py.
 
 Duas ROMs reais simultaneas (luta_mugen e hamoopig): IDs/displays/PIDs distintos, sequencias distintas sem
 cruzamento entre sessoes nem entre P1/P2, screenshot e video ligados a ROM/sessao, audio privado, fechamento
@@ -19,7 +22,12 @@ MUGEN = ROOT / "SMS_projects/luta_mugen/out/rom/luta_mugen.sms"
 HAMO = ROOT / "SMS_projects/hamoopig/out/rom/hamoopig.sms"
 
 
-def main(out):
+def main(out, *, legacy=False):
+    if not legacy:
+        print("[ARQUIVADO] HAMOOPIG foi retirado do versionamento. "
+              "Use session_bridge/acceptance.py para a infraestrutura; "
+              "este replay historico exige --legacy e as ROMs locais originais.")
+        return 3
     out = Path(out); out.mkdir(parents=True, exist_ok=True)
     rep, checks = {"schema": "consumer_acceptance_v1", "checks": checks_list()}, None
     checks = rep["checks"]
@@ -125,4 +133,4 @@ def checks_list():
 
 if __name__ == "__main__":
     out = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "out/local_study/sms_isolated_session/consumer_acceptance"
-    sys.exit(main(out))
+    sys.exit(main(out, legacy="--legacy" in sys.argv))

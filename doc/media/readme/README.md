@@ -14,11 +14,10 @@ hashes, recortes de tempo, transformações e limites de cada arquivo.
 |---|---|---|
 | [MSSF2T](mssf2t.gif) | `MSSF2T/out/evidence/recipe_combate.mp4` | Trecho 10–18 s, combate no cais. |
 | [Kage Matsuri](kage-matsuri.gif) | `kage_matsuri/out/evidence/recipe_combate.mp4` | Trecho 13–21 s, movimento e combate. |
-| [HAMOOPIG](hamoopig.gif) | `hamoopig/out/evidence/ryo_cycles.mp4` | Trecho 9–17 s, ciclos de Ryo/Musgo e HUD. |
 | [Arena Nocturna](arena-nocturna.gif) | `arena_nocturna/out/evidence/arena_transition_final_v1.mp4` | Trecho a partir de 2,3 s da atração automática; não prova controle humano. |
 | [OpenBOR SMS](openbor-sms.gif) | `openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_jump.mp4` | Pulo do piloto M6; vídeo original produzido por stepping. |
 
-Os caminhos da tabela são relativos a `SMS_projects/`. Os cinco registros
+Os caminhos da tabela são relativos a `SMS_projects/`. Os quatro registros
 originais de captura foram copiados sem alterações para `records/`.
 Os vídeos originais permanecem nos seus diretórios de evidência locais;
 o repositório publica os derivados leves e os registros de origem.
@@ -33,7 +32,7 @@ o repositório publica os derivados leves e os registros de origem.
 
 Os GIFs são previews editoriais: a redução temporal e a conversão de paleta
 não servem para auditar flicker, fidelidade de cor, latência ou FPS. Os registros
-legados de MSSF2T, Kage Matsuri, HAMOOPIG e Arena Nocturna não possuem hash
+legados de MSSF2T, Kage Matsuri e Arena Nocturna não possuem hash
 de ROM no próprio JSON de vídeo; o manifesto mantém esse campo nulo. Não foi
 deduzida identidade de ROM a partir do binário que existe hoje no diretório.
 

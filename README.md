@@ -48,7 +48,6 @@ do emulador, isoladamente, não fecha a qualidade do jogo.
 | **MSSF2T** | Combate 1×1, HUD, cenário e áudio PSG | Protótipo executado no emulador. Continuidade do input, orçamento e acabamento seguem em evolução. |
 | **OpenBOR SMS** | Conversão de módulos e motor de beat ’em up | M6 registrado com ataque, perseguição em profundidade, pulo, queda, dano e morte. Áudio e fechamento da entrega seguem pendentes. |
 | **MUGEN → SMS · rev2** | Importação de Ken/Ryu e motor de luta | ROMs diagnósticas dos pares Ken/Ken, Ryu/Ryu e cruzados. Render simultâneo, cadência, comandos e fidelidade da conversão ainda em desenvolvimento. |
-| **HAMOOPIG** | Luta com Ryo e Musgo | Seleção e ciclos de animação registrados no emulador. Mecânicas e validação integral continuam em progresso. |
 | **Kage Matsuri** | Ação, movimento, combate e apresentação de cena | Protótipo executável com cenário e ciclos de ação capturados. Orçamento do ciclo completo e acabamento seguem em trabalho. |
 | **Arena Nocturna** | Ação com projéteis, boss e efeitos de impacto | Coreografia de atração registrada. Controle humano e orçamento completo permanecem etapas próprias de validação. |
 | **Master of Fighters** | Direção de arte autoral e conversão de personagens | Concepts, model sheets e estudos de sprites em revisão. Há ROM diagnóstica histórica de poses; ainda não é um jogo de luta completo. |
@@ -77,12 +76,7 @@ de cada consumidor fica no seu `doc/10-memory-bank.md`.
     </td>
   </tr>
   <tr>
-    <td width="50%" valign="top">
-      <h4>HAMOOPIG</h4>
-      <img src="doc/media/readme/hamoopig.gif" alt="HAMOOPIG no Emulicious: Ryo e Musgo animados em uma arena de fundo preto, com barras de vida e timer" width="512">
-      <p><strong>Luta 1×1 · em progresso</strong><br>Estudo de personagens, animação e HUD com Ryo e Musgo.</p>
-    </td>
-    <td width="50%" valign="top">
+    <td colspan="2" align="center" valign="top">
       <h4>Arena Nocturna</h4>
       <img src="doc/media/readme/arena-nocturna.gif" alt="Arena Nocturna no Emulicious: personagem, boss e projéteis na coreografia automática da arena" width="512">
       <p><strong>Ação com boss · em progresso</strong><br>Trecho da atração automática com projéteis e reação de impacto.</p>
