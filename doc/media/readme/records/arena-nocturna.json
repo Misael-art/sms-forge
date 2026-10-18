@@ -1,0 +1,58 @@
+{
+  "schema": "emulator_evidence_v2",
+  "project": "arena_nocturna",
+  "rom": "SMS_projects/arena_nocturna/out/rom/arena_nocturna.sms",
+  "video": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1.mp4",
+  "screenshot": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1_f05.png",
+  "frames": [
+    {
+      "frame": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1_f00.png",
+      "informative": true,
+      "detail": "variancia de luma=2742.5 (min 40.0)"
+    },
+    {
+      "frame": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1_f01.png",
+      "informative": true,
+      "detail": "variancia de luma=2742.5 (min 40.0)"
+    },
+    {
+      "frame": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1_f02.png",
+      "informative": true,
+      "detail": "variancia de luma=1879.0 (min 40.0)"
+    },
+    {
+      "frame": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1_f03.png",
+      "informative": true,
+      "detail": "variancia de luma=1878.9 (min 40.0)"
+    },
+    {
+      "frame": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1_f04.png",
+      "informative": true,
+      "detail": "variancia de luma=1807.1 (min 40.0)"
+    },
+    {
+      "frame": "SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1_f05.png",
+      "informative": true,
+      "detail": "variancia de luma=1778.7 (min 40.0)"
+    }
+  ],
+  "motion_fraction": 0.5417,
+  "informative": true,
+  "detail": "h264 256x192, 289 frames, 5.82s | 6 de 6 frames com conteudo",
+  "has_audio": true,
+  "audio_attached": true,
+  "audio_detail": "1 canal(is) @ 44100Hz, peak=32767, 5.30s de audio para 5.82s de video, cabecalho declarava 934152 bytes e havia 467076",
+  "duration_s": 5.815,
+  "frame_count": 289,
+  "input_script": null,
+  "keys_pressed": null,
+  "tool": "emulicious-video+ffmpeg",
+  "chain_of_custody": [
+    "launch: java -jar Emulicious.jar -set Update=0",
+    "gate: nenhuma outra instancia de Emulicious viva",
+    "ini: KeysStartVideoRecording=F7 / KeysStopVideoRecording=F8",
+    "record: framebuffer do emulador (256x192), encode por FFMPEG",
+    "move: temp.mp4 -> SMS_projects/arena_nocturna/out/evidence/arena_transition_final_v1.mp4",
+    "check: ffprobe (dimensao/frames/duracao) + luma dos frames"
+  ]
+}

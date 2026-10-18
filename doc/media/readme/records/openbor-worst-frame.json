@@ -1,0 +1,47 @@
+{
+ "verdicto": "pass",
+ "vline_min": 202,
+ "vovf_delta": 0,
+ "amostras": 1,
+ "frames_medidos": 3000,
+ "frames_rom_final": 5443,
+ "janela_s_min": 50.0,
+ "janela_selada": true,
+ "janela_s": 50.0,
+ "runner_wait_s": 90,
+ "vovf_inicio": 0,
+ "vovf_fim": 0,
+ "rom": "/tmp/smsforge-1000/c722c359399446a2a6f60dc0c8a16d0f/emulator/rom.sms",
+ "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+ "estado_snapshot": "6",
+ "estados_vistos": [],
+ "amostras_brutas": [
+  {
+   "t": "snapshot",
+   "vline": 212,
+   "vline_min": 202,
+   "vovf": 0,
+   "phase": 1,
+   "estado_snapshot": "6",
+   "frame": 5443,
+   "done": 1
+  }
+ ],
+ "session_id": "c722c359399446a2a6f60dc0c8a16d0f",
+ "session_rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+ "frame_inicio_leitura": 50,
+ "host_load_before": [
+  2.82958984375,
+  2.8017578125,
+  3.2060546875
+ ],
+ "host_load_after": [
+  10.423828125,
+  5.04541015625,
+  3.9443359375
+ ],
+ "chain_of_custody": [
+  "sessao privada Emulicious; run em tempo real; nenhuma leitura na janela",
+  "uma leitura apos selo done=1; FPS/host nao atribuidos sem controle"
+ ]
+}
