@@ -81,6 +81,44 @@ lowering, consumidor, teste e prova por hash. Separar sempre
   jogador/câmera @0xC000. Ver `doc/13-spec-cenas.md` (medições) e o escopo
   `doc/artifacts/o2_vdp_pilot_scope_20261016.json` (rev2).
 
+## Runtime SMS observado (O3 — combate, M5/M6)
+- **FSM por ator** (`src/main.c`): idle/chase/attack/hit/drop/rise/dead; o
+  ataque consome a caixa `attack2` do frame ativo (D4 — `first..last`);
+  dano/knockback em `resolve_hits`; `hit_used` impede hit duplo no mesmo golpe.
+- **D13 — guarda pós-hit (medida)**: `guard` (13 q) decrementa no topo de
+  `actor_advance`, antes do hitstop e do gate de pose; sem isso a vítima ficava
+  imune para sempre e a morte era inalcançável. Prova: traço de morte com 8
+  hits 50→0 (`dead=1`, estado DEAD f114, HUD `hde=0`).
+- **IA chase (D6)**: `facing = alvo.x > e.x`; velocidade máxima 1,5× a do
+  jogador; decisão a cada 12 q; persegue **x e z** (`move_toward(dx,dz)` com
+  acumuladores Q8.8) e ataca com `|dx|<=40 && |dz|<=15`; facing congela no
+  ataque. Prova M6: e.x 299→240 (vídeo) e e.z 185→206 (traço dedicado).
+- **Pulo/queda (D5)**: tabelas congeladas `o3_jump_y/x` (40 q, ápice 55,
+  deriva 67 px), `o3_toss_y/x` (36 q) e `o3_entry_y` (entrada, 38 q); sem
+  float no runtime. TOSS só com `alt>0` (ou dead); o knockdown do M6 termina
+  em RISE f84.
+- **Uploader (D8)**: dois slots por ator (29 células × 2 tiles); commit
+  adaptativo em sub-chunks de 64 B, teto 320 B/ator/q, margem 22 linhas,
+  prólogo 30; throughput estável medido **128 B/q** (2 sub-chunks). A pose
+  seguinte é pré-carregada no slot não exibido; a troca de slot só ocorre com a
+  cópia pronta. **Consequência de pacing**: durante o ataque o avanço da
+  animação espera a pose ficar pronta — o ataque completo leva ~60 q, não os
+  21 q nominais; o hit causal ocorre em ~16 q (≈0,27 s). O jogador tem
+  prioridade e zera o budget do inimigo enquanto sobe pose.
+- **Render**: células posicionadas por `(x - cam) + dx`, `z - 32 - alt + dy`;
+  corte por scanline com tabela estática `o3_ax_rows` (D9-a2); HUD por delta
+  (linha inteira só quando o hp desenhado muda); coluna de BG fatiada
+  (`write_bg_row`/`write_bg_col`, guarda de 26 linhas).
+- **Arte na tela (medida)**: a âncora do canvas autoral é `(xh-32, base-80)`;
+  `audit_render_fidelity` confirma 100% estrutural na pose estável
+  (`ax_a105_right` em [92,68]); poses em troca de slot do uploader não casam
+  1:1 (o gate exige pose estável; declarado). Still canônico: sessão
+  `598625a4…`.
+- **Probe v2** (`0xC7E0..0xC7FF`): `vline` b10, `vovf` b11, `done` b14, frame
+  u16 b16..17; `py` @0xC7FD = altitude do jogador, `p2state` @0xC7FE, `p2z`
+  @0xC7FF. RAM medida: `pl` @0xC004 (30 B), `e` @0xC026 (30 B), câmera e
+  colunas @0xC044. Corredor de sondas verificado (`audit_probe_corridor`).
+
 ## Mapa de memória (RAM)
 Medido pós-link (O2, build #5): estáticas do jogador/câmera em `0xC000`
 (px u16, pz, facing, anim, walk_frame, anim_timer; `cam` u16 @0xC007;
@@ -93,16 +131,35 @@ O2: 1 jogador + 1 inimigo **estáticos** (sem pool dinâmico). O3+: pools com
 máximos medidos (1P × 1/2/3 inimigos, depois 2P se contratado). Pool cheio
 **não** autoriza apagar inimigo nem pular evento.
 
+## Features O3 — estado de conversão
+| Feature | Tag | Prova/limite |
+|---|---|---|
+| input causal frame-paced | `exact` | journal grava cada read (bytes de RAM); sessões isoladas |
+| hit/dano/guarda (D13) | `adapted` | ticks 200 Hz → frames NTSC; guarda 13 q; traço de morte 8 hits |
+| pulo/tombo/knockdown | `adapted` | tabelas por-frame; ápice 55; TOSS com windup 15 q |
+| profundidade/alvo móvel em z | `adapted` | `move_toward(dx,dz)`; e.z 185→206 no traço |
+| pacing do ataque | `adapted` | uploader domina: ~60 q completo; hit ~16 q (declarado) |
+| render fidelity | `exact` | 100% estrutural na pose estável; slot em troca não casa |
+| audit_render_glitch | `blocked` | sem renderizador legal full-frame 256×192 validado |
+| PAL | `blocked` | não medido |
+| áudio | `blocked` | M7 |
+
 ## Máquina de estados
-Pendente (O3): FSM por fonte com startup/active/recovery; hitstop como pausa
-curta com orçamento; transições de queda/getup/morte declaradas com testes.
+Implementada (O3/M5–M6): estados `idle/chase/attack/hit/drop/rise/dead`;
+`startup/active/recovery` vêm do anim (`o3_aframe` com delays e frames
+ativos); hitstop é pausa curta com orçamento no loop, não recursão; queda
+(TOSS com `alt>0`) e getup (RISE) são arcos tabelados; morte exige hp 0 e
+`guard==0` (D13). Transições provadas por input causal no M6 (attack, jump,
+knockdown, depth, death) — ver memory bank e `m6_evidence_76cdbee3.json`.
 
 ## Banking
 - Alvo inicial: **48 KB linear sem mapper**.
 - Se exceder: mapper Sega (páginas 16 KB, regs 0xFFFE/0xFFFF), código restrito
   a 32 KB, dados bancados a partir do bank 2.
-- Status (O2): ROM build #5 = 32768 B, conteúdo até `0x4DCA` (19915 B usados,
-  **12853 B livres**), sem mapper. `audit_probe_corridor` verde.
+- Status (O3/M6): ROM **131072 B** bancária (mapper Sega habilitado), 60
+  blocos de pose nos bancos 2–6 (79744/81920 B); código/`DATA` restritos a
+  32 KB; `audit_probe_corridor` verde na ROM atual. O2 sem mapper foi o piloto
+  (32768 B); o O3 excedeu o linear por medição (D1).
 
 ## Áudio
 - Driver: PSGlib (`sdk/devkitSMS/PSGlib/PSGlib.h` é a autoridade).
@@ -112,13 +169,15 @@ curta com orçamento; transições de queda/getup/morte declaradas com testes.
   bit2=1 branco, 0 periódico; preview/FFT/pico não certificam composição.
 
 ## Orçamento de frame
-Medido no O2: o quadro inteiro (SAT 33–36 entradas + PNT 48 B/passo de 8 px +
-lógica) roda com **1.0 loop/frame** em idle e caminhada completa
-(`measure_runtime_probe`, janelas 59.4–59.7 NTSC; `audit_sprite_line_sim`: pico
-8/linha, cortes 2–5 no encontro). `measure_worst_frame.py` é incompatível com o
-plano atual (declarado) — a prova do lote é o probe + simulações + verificação
-1:1 do framebuffer. FPS regional: NTSC medido; **PAL não medido** (declarado).
-Janela VBlank ~4.5 ms sem DMA permanece o contrato de O3+.
+- **O2 (piloto, histórico):** quadro inteiro (SAT 33–36 + PNT 48 B/passo de
+  8 px + lógica) a **1.0 loop/frame**; janelas 59,4–59,7 NTSC; pico 8/linha.
+- **O3/M6 (medido):** SAT até 2×29 células com corte por linhas exatas;
+  uploader 128 B/q (2×64 B) + coluna de BG fatiada + HUD por delta. MWF
+  3000 quadros `vovf_delta=0`, `vline_min=202`; MRP 3×8 s
+  59,48/59,66/59,78 (NTSC); stress com input até quadro ROM 3230 sem `vovf`.
+  NTSC medido; **PAL não medido** (declarado). `measure_fps`/
+  `measure_frame_advance` são N/A na sessão isolada (o probe mede fps/boot);
+  a janela VBlank ~4,5 ms sem DMA continua o contrato.
 
 ## Testes
 - Host: `python3 -m unittest discover -s tests` em

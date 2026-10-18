@@ -125,6 +125,15 @@ volatile unsigned char __at(0xC7FF) probe_p2z;        /* v2: profundidade do ini
 #define WORST_FRAME_WINDOW 3000u  /* janela canonica do worst-frame (MWF) */
 #define O3_UPLOAD_CHUNK 320u         /* teto por ator do commit por frame (M5) */
 #define O3_COMMIT_SUB   64u          /* granularidade do commit adaptativo */
+/* Margens do gate de commit (linhas restantes no VCounter):
+ *  MARGIN  = chunk + rabo (saida + probe ~2,5) + jitter ~3 => 16. Com o custo
+ *            antigo (~16 linhas/64 B) o M5 precisou de 30 porque o chunk era
+ *            seguido do rabo de 25 linhas; o hoist de locais + gate antes do
+ *            prologo baixaram o custo para ~10 e o rabo para ~2,5.
+ *  PROLOG  = MARGIN + prologo do ator (~7,3): nao pagar banco/enderecos se o
+ *            primeiro chunk ja nao cabe. */
+#define O3_COMMIT_MARGIN 22u
+#define O3_COMMIT_PROLOG (O3_COMMIT_MARGIN + 8u)
 #define O3_AI_THINK 12u              /* juizo de ataque (gs/5 = 40 ticks NTSC) */
 #define O3_DRAW_ASM 1                /* 1 = nucleo asm do draw (M5); 0 = C-ref (A/B) */
 #define O3_SPILL_TRACE 0             /* 0 no fechamento M5; 1 = diag TEMP (nao entregar) */
@@ -213,6 +222,13 @@ static o3_actor e;
 static unsigned char e_think;
 static unsigned int cam;           /* quantizada em 8 px (cam & ~7) */
 static unsigned char written_col;  /* ultima coluna de mundo escrita na PNT */
+/* Coluna de BG fatiada (M6): cursor persiste entre quadros. Escrita inteira
+ * custa ~44 linhas (22 linhas de PNT); com SAT (~14) nao cabe num VBlank.
+ * 11 linhas/quadro => coluna completa em 2 quadros; a camera a pe pede uma
+ * coluna a cada ~4,8 quadros (1,67 px/f em passos de 8), entao sobram ~2,8
+ * quadros livres por periodo para os chunks de upload dos atores. */
+static unsigned char col_pend_w;   /* coluna de mundo em escrita */
+static unsigned char col_pend_r;   /* proxima linha [0..O2_STAGE_ROWS] = livre */
 static unsigned char hp_drawn, hp_drawn_e;
 /* Redesenho parcial da barra do HUD (M5): faixa pendente [lo,hi) em colunas
  * de tela + fill usado. O gate por tile no VBlank adia o resto para os
@@ -308,29 +324,51 @@ static void start_anim(o3_actor *a, unsigned char id)
 
 /* ------------------------------------------------------------------ *
  * Escrita de BG (molde O2: anel mod-32 alinhado ao wrap de 256 px).
+ * A coluna inteira (22 linhas) custa ~44 linhas de VBlank; o stream a
+ * fatia em quadros com guarda por linha (M6, ver col_pend_*).
  * ------------------------------------------------------------------ */
-static void write_bg_col(unsigned char world_col)
+static void write_bg_row(unsigned char world_col, unsigned char row)
 {
-    const unsigned char *src = &o2_bg_cols[(unsigned int)world_col * O2_STAGE_ROWS];
-    unsigned char screen_col = (unsigned char)(world_col & 31u);
+    SMS_setNextTileatXY((unsigned char)(world_col & 31u),
+                        (unsigned char)(row + 2u));
+    SMS_setTile((unsigned int)(O3_TILE_BG_BASE
+                + o2_bg_cols[(unsigned int)world_col * O2_STAGE_ROWS + row]));
+}
+
+static void write_bg_col(unsigned char world_col)   /* boot: display desligado */
+{
     unsigned char i;
-    for (i = 0; i < O2_STAGE_ROWS; i++) {
-        SMS_setNextTileatXY(screen_col, (unsigned char)(i + 2u));
-        SMS_setTile((unsigned int)(O3_TILE_BG_BASE + src[i]));
-    }
+    for (i = 0; i < O2_STAGE_ROWS; i++)
+        write_bg_row(world_col, i);
 }
 
 static void stream_columns(void)
 {
-    int cam_col = (int)(cam >> 3);
-    int right = cam_col + 31;
-    while ((int)written_col < right) {
-        written_col++;
-        write_bg_col(written_col);
+    int right = (int)(cam >> 3) + 31;
+    unsigned char vc;
+
+    if (col_pend_r >= O2_STAGE_ROWS) {          /* sem coluna em curso */
+        if ((int)written_col == right)
+            return;
+        if ((int)written_col < right) {
+            col_pend_w = (unsigned char)(written_col + 1u);
+            written_col++;
+        } else {
+            col_pend_w = (unsigned char)(written_col - 32u);
+            written_col--;
+        }
+        col_pend_r = 0u;
     }
-    while ((int)written_col > right) {
-        write_bg_col((unsigned char)(written_col - 32));
-        written_col--;
+    while (col_pend_r < O2_STAGE_ROWS) {
+        /* Guarda por linha: deixa a margem do rabo fixo dos commits
+         * (2 prologos 14,6 + 2 saidas ~4 + probe ~2) com folga de jitter
+         * (~5 linhas) -- mesmo criterio do gate de commit
+         * (O3_COMMIT_MARGIN = 22 para chunks; O3_COMMIT_PROLOG = 30). */
+        vc = SMS_VCounterPort;
+        if ((unsigned char)(0xFFu - vc) < 26u)
+            return;                             /* conclui no proximo quadro */
+        write_bg_row(col_pend_w, col_pend_r);
+        col_pend_r++;
     }
 }
 
@@ -536,14 +574,28 @@ static void stream_update(o3_actor *a)
  * (contrato worst-frame, L061) e todo byte que cabe no quadro e usado. */
 static unsigned int stream_commit(o3_actor *a, unsigned int budget)
 {
-    unsigned int total, n, done = 0u;
+    unsigned int total, off, done = 0u, n;
+    unsigned int vaddr, saddr;
+    unsigned char vc;
 
     if (a->up_pose == 0xFFu || a->up_done || budget == 0u)
         return 0u;
+    /* M6: gate ANTES do prologo. Sem isto o 2o ator pagava banco + enderecos
+     * (~7,3 linhas) em todo quadro em que seu chunk ja nao cabia — trabalho
+     * jogado fora que encurtava a janela do 1o. */
+    vc = SMS_VCounterPort;
+    if (vc < 0xC0u || (unsigned char)(0xFFu - vc) < O3_COMMIT_PROLOG)
+        return 0u;
     total = (unsigned int)a->art->poses[a->up_pose].count << 6;
+    off = a->up_off;
+    vaddr = (unsigned int)(O3_SLOT_TILE(a->art->slot_a, a->up_slot) << 5) + off;
+    saddr = 0x8000u + (unsigned int)a->art->blocks[a->up_pose].addr + off;
     SMS_mapROMBank(a->art->blocks[a->up_pose].bank);
-    while (a->up_off < total && done < budget) {
-        unsigned char vc = SMS_VCounterPort;
+    /* M6: estado do lote em LOCAIS. O loop nao toca o ator ate o fim; SDCC
+     * deixa de recarregar a->up_off/total/budget da pilha a cada iteracao
+     * (era o grosso das ~4,6 linhas de overhead C por chunk no M5). */
+    while (off < total && done < budget) {
+        vc = SMS_VCounterPort;
 #if O3_SPILL_TRACE
         switch (diag_rd_n) {
         case 0u: diag_rd0 = vc; break;
@@ -559,28 +611,18 @@ static unsigned int stream_commit(o3_actor *a, unsigned int budget)
 #endif
         if (vc < 0xC0u)
             break;                              /* ja fora da janela */
-        /* Margem medida (Emulicious, 2026-10-17): 1 iteracao real deste loop
-         * custa ~16 linhas — 4,6 de codigo C antes do memcpy (soma de ciclos
-         * no asm: 1049 c) + ~8,4 do OUTI de 64 B + 1,2 depois (273 c) — e o
-         * rabo fixo do 2o ator (prologo medido em 1655 c = 7,3 linhas + saida/
-         * marco ~2) soma ~9. Total ~25; margem 26 ficou no fio (12 derrames de
-         * ~1 linha em 3000 quadros, vline_min=0) por causa do jitter de posicao
-         * do custo (~2-3 linhas) => 30. O modelo antigo de 30 c/B + 6 ignorava
-         * o custo por iteracao do C e derramava por 1-15 linhas. Custo por
-         * byte real no vblank ~57 c/B (16 linhas/64 B). */
-        if ((unsigned char)(0xFFu - vc)
-            < (unsigned char)((O3_COMMIT_SUB * 30u) / 228u + 22u))
+        /* M6 (re-medido): 1 chunk de 64 B custa ~10 linhas depois do hoist
+         * de locais (antes ~16). O rabo fixo virou ~2,5: gate antes do
+         * prologo impede o 2o ator de pagar banco/enderecos quando seu chunk
+         * nao cabe, entao o que resta e so a saida + o marco do probe. */
+        if ((unsigned char)(0xFFu - vc) < O3_COMMIT_MARGIN)
             break;                              /* nao cabe com margem */
-        n = total - a->up_off;
+        n = total - off;
         if (n > O3_COMMIT_SUB)
             n = O3_COMMIT_SUB;
         if (n > budget - done)
             n = budget - done;
-        SMS_VRAMmemcpy((unsigned int)(O3_SLOT_TILE(a->art->slot_a, a->up_slot) << 5)
-                       + a->up_off,
-                       (const void *)(0x8000u + a->art->blocks[a->up_pose].addr
-                                      + a->up_off),
-                       n);
+        SMS_VRAMmemcpy(vaddr, (const void *)saddr, n);
 #if O3_SPILL_TRACE
         diag_commit_chunks++;
         {
@@ -591,10 +633,13 @@ static unsigned int stream_commit(o3_actor *a, unsigned int budget)
             diag_commit_bytes_hi = (unsigned char)(b >> 8);
         }
 #endif
-        a->up_off += n;
+        off += n;
+        vaddr += n;
+        saddr += n;
         done += n;
     }
-    if (a->up_off >= total)
+    a->up_off = off;
+    if (off >= total)
         a->up_done = 1u;                    /* CPU finaliza (slot/troca) */
     return done;
 }
@@ -861,6 +906,13 @@ static void enemy_control(void)
 /* Avanco do ator: hitstop congela; pose pronta (D8) libera FSM e arcos. */
 static void actor_advance(o3_actor *a)
 {
+    /* M6 (medido 2026-10-17): a guarda de 13 quadros era ARMADA no hit e nunca
+     * desarmada — o primeiro acerto deixava a vitima imune para sempre e a
+     * morte do inimigo era impossivel. Conta em tempo real, antes do hitstop e
+     * do gate de pose: o D8 segura a FSM enquanto a pose nao chega, e uma
+     * guarda presa ao gate ficaria congelada justamente sob starvation. */
+    if (a->guard)
+        a->guard--;
     if (a->hitstop) {
         a->hitstop--;
         return;
@@ -1422,6 +1474,7 @@ void main(void)
     e_think = 0;
     cam = 0;
     written_col = 31;
+    col_pend_r = O2_STAGE_ROWS;        /* sem coluna em curso (stream fatiado) */
 
     /* BG/HUD estaticos; os sprites vem do stream bancado (D1/D8). */
     SMS_loadTiles(o2_bg_tiles, O3_TILE_BG_BASE, O2_BG_TILES_SIZE);

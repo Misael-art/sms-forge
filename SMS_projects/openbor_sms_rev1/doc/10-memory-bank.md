@@ -5,9 +5,64 @@
 > não substitui este arquivo.
 
 ## Última atualização
+**2026-10-17 — M6 (input causal, alvos móveis e pacing) fechado medido: ROM
+`76cdbee3…` (131072 B, bancária) rodou todos os traços causais por input em
+sessões isoladas frame-paced. A ROM do M5 (`b0eed40a…`) e a intermediária
+(`87954b7f…`) estão STALE; nenhuma evidência delas sustenta claim do M6.**
+
+O que entrou no M6:
+- **D13 — guarda pós-hit**: `guard` era armado com 13 e nunca decrementado; a
+  vítima ficava imune para sempre e a morte era inalcançável. Fix
+  `if (a->guard) a->guard--;` no topo de `actor_advance`, antes do hitstop e
+  do gate de pose (contagem em tempo real; o D8 pode segurar a pose sob
+  starvation). Traço de morte: 8 hits 50→43→…→0, `dead=1`, estado DEAD f114,
+  HUD `hde=0`.
+- **Traços causais** (journal grava cada read com bytes de RAM): ataque hit1
+  +16q (hp 50→43, guard 12) e hit2 +25q (43→36); pulo maxalt 55, 48q no ar,
+  pouso q62, dx 65; knockdown TOSS f32 (alt 2, hp 100→95), RISE f84, maxalt
+  51; profundidade whiff dz41 e hit alinhado dz6 (+19q, hp 43→36); morte 8
+  hits. `vovf=0` nos traços.
+- **Alvo móvel em z**: o inimigo persegue em profundidade — jogador z
+  180→221, `e.z` 185→206 (x 272→231) e ataca ao alinhar (st2).
+- **Vídeos por claim**: IA (e.x 299→240; 50/60 quadros distintos), ataque com
+  dano (hp 50→43 em 60 quadros, 37 distintos), pulo (45 distintos), queda
+  (termina em RISE), morte (hp 1→0, st6). Motion timelines e hashes nos JSONs.
+- **Pacing medido**: hit do ataque ~16q ≈ 0,27 s; ataque completo ~60q (o
+  uploader D8 segura o avanço das 5 poses; não é o somatório nominal de 21q);
+  guarda 13q; pain ~85q; caminhada 1,6–1,7× mais lenta que a fonte; TOSS
+  pequeno por windup de 15q. O jogador tem prioridade e zera o budget do
+  inimigo enquanto sobe pose (usado de propósito no knockdown). O M6 também
+  fechou o D8: hoist de locais + gate antes do prólogo baixaram o custo para
+  ~10 linhas/64 B; `O3_COMMIT_MARGIN=22`, `O3_COMMIT_PROLOG=30`; throughput
+  estável **128 B/q** (2 sub-commits).
+- **FPS/pacing**: MRP 3 janelas 59,48/59,66/59,78 (PASS, boot e frame
+  advance); MWF 3000 quadros `vovf_delta=0`, `vline_min=202` (PASS); stress
+  com input (30 ciclos RIGHT/A/idle/LEFT/B/idle) até quadro ROM 3230,
+  `vovf=0`, `done=1` (janela selada). Sessões e journals publicados.
+- **Render**: still canônico `598625a4…` mostra a pose final do ataque
+  (`ax_a105_right`, 100,0% estrutural em [92,68]) + inimigo em PAIN hp 43 +
+  HUD por delta; `screenshot_semantic_gate` PASS (paleta 100%, 18 cores).
+  A âncora da arte é `(xh-32, base-80)`; poses em troca de slot do uploader
+  não casam 1:1 (o gate exige pose estável; declarado).
+  `audit_render_glitch` **BLOQUEADO**: não há renderizador de referência
+  full-frame 256×192 validado — declarado, não silencioso.
+- **Coluna de BG fatiada**: `write_bg_row`/`write_bg_col` com `col_pend_w`/
+  `col_pend_r` e guarda de 26 linhas; scrolling medido no stress
+  (cam 160→360→200) sem `vovf`. A decisão aberta do M5 está fechada.
+- **Cross-checks**: `audit_tilemap_bounds` OK (16 arquivos, 0 escritas
+  ilegais; 5 literais não-provados são macros do HUD); registry `check` ok
+  (36 artefatos). `vdp_regs.bin` de BlastEm segue do SHA antigo — regenerar
+  no M7/M8 (D13 é lógica, sem mudança de layout de VRAM). `maxfallspeed`
+  pinado: entrada 12 px/q, toss 6, pulo 6 (tabelas congeladas; sem
+  velocidade acumulada).
+- **Limitações declaradas**: PAL não medido; sem áudio (M7);
+  `measure_fps`/`measure_frame_advance` N/A; `audit_render_glitch` bloqueado;
+  a borda exata da caixa de profundidade (dz 15..41) não foi varrida.
+
+## Histórico M5 (detalhe do fechamento)
 **2026-10-17 — M5 (runtime O3: FSM/IA/hit/uploader) fechado medido: ROM
 `b0eed40a…` (131072 B, bancária — 60 blocos de pose nos bancos 2–6) roda o
-combate O3 a 60 fps constante; `measure_worst_frame` PASS (`vovf_delta=0` em
+combate O3 a 59,5–59,8 fps medidos (nominal 59,92); `measure_worst_frame` PASS (`vovf_delta=0` em
 3000 quadros, `vline_min=207`) e `measure_runtime_probe` PASS (fps
 59,5/59,47/59,58; spread 0,11; boot provado) — ambos no mesmo SHA.**
 
@@ -182,13 +237,13 @@ Medições próprias do intake (ferramenta `openbor2sms`, não herdadas):
 ## Eixos de entrega (7) — gate final exige os 7 simultâneos
 | Eixo | Status | Prova |
 |------|--------|-------|
-| build | `buildado` | ROM `b0eed40a…` (131072 B) = `out/rom`; pré-gates verdes no build |
-| validation_report | `buildado` | MWF PASS (`vovf_delta=0`, 3000 quadros, `vline_min=207`) + MRP PASS (fps 59,5/59,47/59,58) — mesmo SHA |
-| boot no emulador | `testado_em_emulador` | `capture_evidence` PASS (canvas 256×192, luma 4031/1696) + MRP boot provado; sessões isoladas publicadas em `out/evidence/sessions/` |
-| gameplay | `testado_em_emulador` (recorte M5) | FSM/IA/hit/uploader rodando com luta na tela (captura); **QA por input causal = M6** (ainda não medida) |
-| fps regional (NTSC/PAL) | `testado_em_emulador` (NTSC) | MRP 8 s×3: 59,5/59,47/59,58 (spread 0,11; nominal 59.9227); **PAL declarado, não medido** |
-| áudio | `não iniciado` | M7 (declarado fora do M5) |
-| memory bank atualizado | `documentado` | este arquivo + registros O0/O1/O2/M5 |
+| build | `buildado` | ROM `76cdbee3…` (131072 B) = `out/rom`; build reprodutível (comentário não muda SHA) |
+| validation_report | `buildado` | MWF PASS (`vovf_delta=0`, 3000 quadros, `vline_min=202`) + MRP PASS (59,48/59,66/59,78) — mesmo SHA |
+| boot no emulador | `testado_em_emulador` | MRP boot provado + still canônico `598625a4…` (256×192) + sessões isoladas publicadas |
+| gameplay | `testado_em_emulador` (recorte M6) | traços causais de ataque/pulo/queda/profundidade/morte + alvo móvel em z; videos por claim |
+| fps regional (NTSC/PAL) | `testado_em_emulador` (NTSC) | MRP 8 s×3: 59,48/59,66/59,78; **PAL declarado, não medido** |
+| áudio | `não iniciado` | M7 |
+| memory bank atualizado | `documentado` | este arquivo + registros O0/O1/O2/M5/M6 |
 
 > Status válidos: `não iniciado`, `documentado`, `implementado`, `buildado`,
 > `testado_em_emulador`, `validado_budget`. Toda linha diferente de
@@ -296,12 +351,15 @@ manifests `audit_sprite_line_sim` + `measure_vram_map` aprovado + registry
 `o3-bank-blocks` no registry.
 **M5 fechado (2026-10-17)**: runtime O3 no emulador — FSM/IA/hit/uploader +
 A/B asm↔C byte a byte + MWF `vovf_delta=0` (3000 quadros) + MRP 59,5 fps,
-tudo no SHA `b0eed40a…` (detalhe na "Última atualização"). Próximo: **M6** —
-input causal (`emulator_input.py --session ID --script`), alvos móveis e
-profundidades diferentes, pulo/tombo/recuperação, reteste FPS/pacing/MWF;
-**decisão aberta do M6**: escrita fatiada da coluna de BG (44 linhas medidas —
-sem ela, scrolling derrama); cross-checks pendentes: `vdp_regs.bin` de sessão,
-`audit_tilemap_bounds`, `audit_render_glitch`; pinar maxfallspeed.
+tudo no SHA `b0eed40a…` (detalhe na "Última atualização").
+**M6 fechado (2026-10-17)**: input causal em sessões frame-paced (journal com
+bytes de RAM), ataque/pulo/knockdown/profundidade/morte, alvo móvel em x e z,
+vídeos por claim, pacing medido, MWF/MRP/stress no SHA `76cdbee3…`; D13
+(guarda pós-hit) corrigido e provado pela morte. A decisão da coluna de BG
+foi fechada com escrita fatiada (`write_bg_row`/`write_bg_col`, guarda 26) e
+scrolling medido sem `vovf`. `audit_render_glitch` declarado **bloqueado**
+(sem renderizador legal full-frame); `maxfallspeed` pinado; `vdp_regs.bin`
+fica para M7/M8 (mudança lógica, sem layout novo).
 Blockers persistentes registrados (não bloqueiam O3): origem externa dos PAKs
 desconhecida; `skills_scripts_and_callbacks` = unknown; medições MD não
 transferíveis; **player-start de 2 argumentos do BT sem decisão de semântica**
@@ -348,23 +406,21 @@ MD ficam fora do front-end neutro.
 O2 fechado medido e commitado (`555bb64`). **O3 em curso: M1–M4 commitados
 (`2d728da`) e curadoria L134/L135 (`2b2f4b3`) + L136 (`b6a2046`)** — branch
 `feat-luta-mugen-motor`, sem push (autorização do dono pendente).
-**M5 fechado medido nesta sessão** (ROM `b0eed40a…`; MWF `vovf_delta=0`; MRP
-59,5 fps; captura PASS). Próximo passo exato — **M6 (input causal)**:
-1. **Commit do lote M5**: pendente — `src/main.c` (runtime + HUD delta/gate +
-   margem 30), `inc/o3/o3_anim.h`, `.mddev/project.json`, `artifact_registry`,
-   este memory bank; ferramentas do probe v2 em commit **à parte** (curadoria).
-   Sem push.
-2. **M6 — input causal**: `emulator_input.py --session ID --script` com alvos
-   móveis, profundidades diferentes, pulo/tombo/recuperação e reteste
-   FPS/pacing/MWF. **Decisão aberta**: escrita fatiada da **coluna de BG (44
-   linhas medidas)** — sem ela, scrolling derrama; medir a taxa real de scroll
-   antes de escolher (2 meias-colunas/quadro vs sub-coluna vs gate). Cross-checks:
-   `vdp_regs.bin` de sessão, `audit_tilemap_bounds`, `audit_render_glitch`;
-   pinar maxfallspeed.
-3. **Curadoria do lote**: L134/L135/L136 fechadas e commitadas; probe v2
-   (`emulicious_dap.py`, `measure_runtime_probe.py`, `measure_worst_frame.py`)
-   falta commitar — mesmo lote do M5, à parte.
+**M5 fechado e commitado** (`4cb4d0b`, `70078c8`, `9ba2b6b`).
+**M6 fechado medido nesta sessão** (ROM `76cdbee3…`; traços causais + MWF
+`vovf_delta=0`; MRP 59,5; still com render fidelity 100%). Próximo passo:
+1. **Commit do lote M6**: pendente — `src/main.c` (D13 + comentário da coluna),
+   `doc/artifacts/o3_combat_scope_20261016.json`, `doc/artifact_registry.json`,
+   este memory bank, `doc/15-tdd.md` e as evidências em `out/evidence/m6/`,
+   `m6_evidence_76cdbee3.json`, `mwf_m6_76cdbee3_20261017.json`,
+   `mrp_m6_76cdbee3_20261017.json`, `m6_stress_input_…json` + sessões. Sem push.
+2. **M7 (áudio)**: SFX mínimos (D11), `capture_audio`/`audit_audio`/
+   `audit_psg_quality`/`audit_psg_channel_binding`/`audit_audio_provenance`.
+3. **M8 (fechamento)**: `audit_doc_sync`, `audit_causal_persistence`,
+   `audit_visual_delivery`, `audit_mastery_registry`, regenerar `vdp_regs.bin`
+   de BlastEm no SHA final e fechar os 7 eixos.
 4. Pendências declaradas que não bloqueiam: PAL não medido; áudio (M7);
+   `audit_render_glitch` bloqueado (sem renderizador legal full-frame);
    semântica de `spawn1 x z` (BT, diagnóstico preservado em `bef0f287…`);
    `audit_doc_sync` global FAIL por luta_mugen (EIO pré-existente, não tocar).
 
