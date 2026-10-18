@@ -1712,8 +1712,9 @@ TDD e spec de cena.
 
 Master System tem VRAM 16 KB (512 padrões 8×8 de 32 B), janela de 256 padrões
 por seleção da base de sprite, SAT de 64 objetos, teto de 8 sprites por linha,
-objetos de 8 px de largura por 8/16 px de altura, duas subpaletas de 16 com
-índice 0 transparente, RAM 8 KB, ROM linear 48 KB e sem DMA. O hardware não
+objetos de 8 px de largura por 8/16 px de altura, duas subpaletas de 16
+(BG índice 0 visível; sprite índice 0 transparente), RAM 8 KB, ROM linear
+48 KB e sem DMA. O hardware não
 estabelece máximo universal de quadros por folha: `max_frames_per_sprite_sheet`
 fica indefinido até medir compartilhamento, pools VRAM/RAM, ROM/banking,
 residência e upload por VBlank no TDD/scene budget. Inventário de padrões não
@@ -2575,3 +2576,48 @@ válida — o que se refuta é a perda de dado. Ferramentas: `capture_evidence.p
 (Emulicious com self-check) e `blastem_diagnostics.py` (views de decode
 planar); o caso é reproduzido pelo harness do probe de laboratório
 `mapper_vblank_copy` (campanha própria), não por ferramenta do wrapper.
+
+## 128. Asserts observados, apresentação e preservação dos relatórios
+
+Aplicação de L001/L013/L035/L036/L064/L086/L090/L091/L097–L099/L123/L125/L133/L136;
+sem novo ID. O ganho esperado é controle, leitura e continuidade do jogo, não
+um catálogo de técnicas ou uma promessa de qualidade comercial.
+
+Separe passos solicitados, ACK frame VDP, tick da lógica e elemento de
+animação. Média regional, prazo do commit VDP, resposta da ação e integridade
+dos pixels são eixos diferentes. Completar ticks por espera crescente não
+aprova latência. Frames absolutos não são deltas. Current/residente não prova
+submissão SAT/PNT nem apresentação no framebuffer; uma pose pode estar legal
+e aparecer na hora errada. Um vídeo que termina antes do retorno não fecha a
+duração completa da ação. Referência operacional: `sms-observed-case-evidence.md`.
+
+`audit_observed_cases.py --record RECORD` rederiva asserts dos reads primários
+e intervalos observados de ACKs, com ROM/sessão/journal/layout por SHA.
+O perfil `journal_ram_v1` valida identidade/ordem, pontos de reads sem execução
+intercalada, igualdade/delta de RAM e deadline observado ancorado em input.
+Reprova resumo de whiff quando os bytes mostram dano. Não autentica layout,
+instrumentação ou journal, não mede pixels apresentados, primeira ocorrência,
+FPS, voltas de contador nem cleanup; combina com `audit_subagent_session.py`,
+`audit_counter_window.py` e revisão nativa. Relato agregado sem primários pede
+coleta nova; não fabricar histórico. O selo de uma lista não prova que a lista
+inclui o controle negativo e o terminal previstos no pedido.
+
+L098/L099: medir pares/bytes realmente novos e prazo/idade/serviço por ator.
+Current+next de um ator não fecha residência do par/FX/HUD. “Desacoplar hit de
+arte” na lista histórica de §84 não autoriza dano invisível: a reorganização
+precisa manter contato/perigo legíveis e uma política coerente de apresentação.
+Legalidade da SAT após corte não prova integridade da arte; omissão permanente
+não recebe aprovação de qualidade por ter zero flicker. Híbrido BG/sprites
+continua candidato até medir atualização, overlap e restauração em ROM.
+Patterns, PNT e SAT são regiões simultâneas, não o mesmo orçamento reutilizado.
+L136 distingue integridade dos bytes e prazo visual; toda a lógica do jogo
+não precisa ocorrer no VBlank.
+
+Relatórios usam saída nova por run. `report_output.py` cria exclusivamente;
+`audit_learning_capture.py`, `audit_hardware_constants.py`,
+`audit_header_claims.py` e `audit_debug_markers.py` aceitam `--report-out`
+(alias histórico `--json`) e recusam destino existente, inclusive aliases por
+symlink/hardlink. A migração não abrange todas as outras ferramentas. Não
+apagar JSON de entrada para contornar a recusa; `selftest.py` cobre criação
+nova e preservação de fonte. O gate de constantes inclui a forma errada
+“índice 0 transparente nas duas paletas”; não infere o total de cores de uma cena.

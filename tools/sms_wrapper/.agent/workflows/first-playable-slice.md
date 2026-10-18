@@ -38,6 +38,14 @@ deixar explícito quando a pose sinaliza o impacto e quando a regra causa dano;
 uma atualização lógica rápida com arte atrasada continua sendo uma falha de
 feedback.
 
+Instrumentar desejado/residente/submetido separadamente quando existir cache;
+um probe com nome `disp` pode registrar current sem que o ator seja desenhado.
+Para conferir asserts dos reads e prazos VDP observados, consultar
+`skills/sms-observed-case-evidence.md` / `audit_observed_cases.py`. A imagem
+apresentada continua dependendo de captura alinhada. Não exigir que um baseline
+diagnóstico já passe: preservar suas falhas e produzir candidato com identidade
+própria; não reescrever o baseline para parecer pronto.
+
 Compilar pelo wrapper e rodar no emulador com uma sequência de entrada
 reproduzível (`emulator_input.py`). Capturar vídeo de framebuffer para provar
 movimento e transições (`capture_video.py`); usar probe de RAM para estado, não

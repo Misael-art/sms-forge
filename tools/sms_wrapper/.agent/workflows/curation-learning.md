@@ -38,3 +38,12 @@ Quando algo dá errado (gate furado, lição paga cara, regressão):
    demonstra absorção. Para refutações, apontar a aplicação corrigida e manter
    o limite histórico. O gate mede cobertura/frescor, não entendimento.
 9. Curadoria só altera wrapper/doc com aprovação humana explícita.
+
+Relatório de gate é saída, nunca o JSON da lição usado como entrada. As CLIs
+`audit_learning_capture.py`, `audit_hardware_constants.py`,
+`audit_header_claims.py` e `audit_debug_markers.py` aceitam `--report-out`
+(`--json` é alias) e recusam destino existente, inclusive symlink/hardlink.
+Usar arquivo novo por run; não apagar a fonte para contornar a recusa.
+`report_output.py` implementa criação exclusiva e tem regressão no selftest.
+Outras CLIs ainda podem ter semântica antiga de sobrescrita: conferir ajuda e
+escolher saída nova. Não afirmar que a família inteira já foi migrada.

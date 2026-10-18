@@ -74,6 +74,9 @@
   nunca importados como limites ou APIs do SMS.
 
 Números de Mega Drive não entram. Método sim (§32).
+Asserts ligados ao journal RAM e intervalos VDP: `skills/sms-observed-case-evidence.md`
+e `audit_observed_cases.py` (§128). A rota distingue cache de apresentação,
+prazo observado de primeira ocorrência e custódia de interpretação da mídia.
 Otimização de runtime: `skills/sms-runtime-optimization.md`, contador na janela
 `audit_counter_window.py` (§103); modelo/hipótese e ganho na ROM são distintos.
 

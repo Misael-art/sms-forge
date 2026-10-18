@@ -1,0 +1,42 @@
+{
+  "curation_id": "rev2_mugen_donor_intake_20261015",
+  "date": "2026-10-15",
+  "kind": "application_of_existing_lessons",
+  "scope": "New parallel consumer and implementation handoff; central engine code unchanged",
+  "new_lesson_ids": [],
+  "applied_lessons": [
+    "L083",
+    "L090",
+    "L093",
+    "L094",
+    "L095",
+    "L096",
+    "L112",
+    "L123",
+    "L125"
+  ],
+  "project": "SMS_projects/luta_mugem_rev2",
+  "inputs": [
+    "SMS_projects/luta_mugem_rev2/data/intake/2026-10-15/donor-audit.json",
+    "SMS_projects/luta_mugem_rev2/data/intake/2026-10-15/sms-audit.json"
+  ],
+  "decisions": [
+    "Freeze rawKen/Ryu exactly, never derivedMDresources asMUGENsource",
+    "No mandatory dependency on oldEIOdoc/output",
+    "Common1missing blocks affected semantics, common_forge not equated silently",
+    "Renderer lowerbound and ROMpilot before fullmoveset; AOTsubset vsVMcost explicit",
+    "Stage-free allscreens; stageparser not nextpriority",
+    "SGDKnewfrontendimplementedunbuilt, not donorROMvalidation",
+    "StrictCPU/VDP/palette/PSGplatformboundary andnativeQAsession ownership"
+  ],
+  "outputs": [
+    "SMS_projects/luta_mugem_rev2/doc/20-plano-implementacao.md",
+    "SMS_projects/luta_mugem_rev2/doc/21-prompt-agente-implementador.md",
+    "SMS_projects/luta_mugem_rev2/doc/22-intake-doador.json",
+    "SMS_projects/luta_mugem_rev2/doc/23-validacao-preparacao.json",
+    "SMS_projects/luta_mugem_rev2/doc/engine_quality_contract.json"
+  ],
+  "validation": "Own authority documents UTF8read/hash,4096Bfsync/readprobe passed; sourceZIPSHAverified; contract auditor selfcheck and planning contract_pass; no build/emulator/gameplay/FPS/audio proof",
+  "io_scope": "Same /mnt/sdcard physicalfilesystem, no EIOrepairclaimed; /run/user/1000 freespace changed externally and must be preflighted again",
+  "claim_ceiling": "documented_preparation_only"
+}

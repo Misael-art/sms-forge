@@ -19,7 +19,7 @@ grandeza conhecida, o numero tem que ser o do Master System.
 Uso: audit_hardware_constants.py [--root <workspace>] [--json <out>] [--self-check]
 Exit: 0 coerente | 1 numero de outro hardware | 3 uso
 """
-import sys, os, re, json, glob, argparse
+import sys, os, re, json, glob, argparse, unicodedata
 
 # Grandezas canonicas do Master System. Fonte: SMS_GLOBAL + headers devkitSMS;
 # cada uma ja custou (ou quase custou) um bug quando trocada pela do MegaDrive.
@@ -46,6 +46,10 @@ SPRITE_MODE_MD = re.compile(
 X_OFFSET_MD = re.compile(r"X\s*\+\s*32")
 SLOT0_FIXED = re.compile(r"slot\s*(?:0x0000|0)\s+(?:inteiro\s+)?fixo\s+na\s+p[aá]gina\s*0", re.I)
 SAT_FOUR_BYTES = re.compile(r"SAT\s*[:(=]?\s*64\s*(?:sprites?\s*)?[×x*]\s*4\s*B", re.I)
+# Narrow calibrated forms, not an inference of how many colors a scene uses.
+BOTH_ZERO_TRANSPARENT = re.compile(
+    r"indice\s*0[^.;|\n]{0,45}transparen[^.;|\n]{0,25}(?:nas\s+duas|em\s+ambas)"
+    r"|(?:duas|2)\s+subpaletas[^.;|\n]{0,70}indice\s*0\s+transparente")
 
 # L093: o pad do SMS tem KEY_1 e KEY_2 e diagonal = duas direcoes (SMSlib.h:296-302). Um conversor herdou
 # "1 botao" e "diagonal mecanicamente impossivel" e bloqueou 64 de 70 comandos do Ken por premissa errada.
@@ -79,6 +83,13 @@ def check_text(texto, origem="<texto>"):
         # fixtures REPROVADAS" pode estar 1-2 linhas acima do numero.
         ctx = " ".join(linhas[max(0, linha_n - 3):linha_n]).lower()
         low = linha.lower()
+        normalized = "".join(c for c in unicodedata.normalize("NFD", low) if not unicodedata.combining(c))
+        normalized_ctx = "".join(c for c in unicodedata.normalize("NFD", ctx) if not unicodedata.combining(c))
+        if BOTH_ZERO_TRANSPARENT.search(normalized) and not any(
+                w in normalized_ctx for w in ("corrigido", "dizia", "refutad", "errad", "afirmava", "incorret", "reprov", "fixture")):
+            problems.append(
+                f"{os.path.basename(origem)}:{linha_n}: indice zero transparente nas duas paletas — "
+                "em SMS Mode4 BG0 e visivel; somente sprite0 e transparente (L001)")
         for rotulo, rx, correto, md in CANON:
             for m in re.finditer(rx, linha, re.I):
                 val = int(m.group(1))
@@ -90,6 +101,10 @@ def check_text(texto, origem="<texto>"):
                 # "maximo de N" afirma que o teto E N — se N esta errado, e erro.
                 if any(t in antes for t in (">", "≥", "mais de", "acima de",
                                             "excesso")):
+                    continue
+                # Required entries before a declared cut are scene demand,
+                # not a claim that the hardware can display that many.
+                if rotulo == "sprites por scanline" and "antes dos cortes" in low:
                     continue
                 # descricao de caso de TESTE (o gate reprova 9 numa scanline)
                 if any(w in ctx for w in ("reprov", "rejeit", "fixture",
@@ -227,6 +242,13 @@ def _self_check():
     assert not check_text("O pad tem KEY_1 e KEY_2; diagonal = duas direcoes juntas.")
     assert not check_text("Corrigido (L093): dizia 'diagonal impossivel' e '1 botao no pad'.")
     assert not check_text("Direcoes opostas sao impossiveis no pad.")
+    assert check_text("| Subpaletas | 2 × 16 (índice 0 transparente nas duas) |")
+    assert check_text("Duas subpaletas de 16 com índice 0 transparente.")
+    assert not check_text("BG índice 0 visível; P1 sprite índice 0 transparente.")
+    assert not check_text("Corrigido: dizia índice 0 transparente nas duas paletas.")
+    assert not check_text("Cena usa 30 cores por contrato, com slots livres reservados.")
+    assert not check_text("Antes dos cortes, o pior par chega a 17 sprites/linha.")
+    assert check_text("O limite do Master System e 17 sprites/linha.")
     print("[SELF-CHECK OK] hardware_constants (reprova numero de outro console "
           "afirmado como lei; aceita os do SMS e as notas de correcao)")
     return 0
@@ -235,15 +257,19 @@ def main():
     here = os.path.dirname(os.path.abspath(__file__))
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=os.path.normpath(os.path.join(here, "..", "..")))
-    ap.add_argument("--json")
+    ap.add_argument("--json", "--report-out", dest="json", help="new report destination; existing files are refused")
     ap.add_argument("--self-check", action="store_true")
     a = ap.parse_args()
     if a.self_check:
         return _self_check()
     problems = audit(a.root)
     if a.json:
-        json.dump({"problems": problems, "clean": not problems},
-                  open(a.json, "w"), indent=2)
+        from report_output import write_new_report
+        try:
+            write_new_report(a.json, {"problems": problems, "clean": not problems})
+        except OSError as exc:
+            print(f"[FAIL] report destination refused: {exc}; choose a new --report-out path")
+            return 3
     if problems:
         for p in problems:
             print(f"[FAIL] {p}")

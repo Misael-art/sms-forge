@@ -424,15 +424,19 @@ def _self_check():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=os.path.normpath(os.path.join(HERE, "..", "..")))
-    ap.add_argument("--json")
+    ap.add_argument("--json", "--report-out", dest="json", help="new report destination; existing files are refused")
     ap.add_argument("--self-check", action="store_true")
     a = ap.parse_args()
     if a.self_check:
         return _self_check()
     problems = audit(a.root)
     if a.json:
-        json.dump({"problems": problems, "clean": not problems},
-                  open(a.json, "w"), indent=2)
+        from report_output import write_new_report
+        try:
+            write_new_report(a.json, {"problems": problems, "clean": not problems})
+        except OSError as exc:
+            print(f"[FAIL] report destination refused: {exc}; choose a new --report-out path")
+            return 3
     if problems:
         for p in problems:
             print(f"[FAIL] {p}")

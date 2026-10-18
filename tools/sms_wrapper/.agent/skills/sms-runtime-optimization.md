@@ -47,6 +47,37 @@ pose/profundidade/célula vai **pré-computada na emissão**, bit a bit
 
 ## Cache e fast path precisam de incidência útil
 
+### Deadline e publicação do cache (L098/L099, §128)
+
+Não confunda os quatro relógios: passos solicitados à ponte, ACK de frame VDP,
+tick de simulação e elemento de animação. Intervalo em VDP requer baseline e
+delta, não frame absoluto. Converter ticks até o teste passar comprova função,
+mas não o prazo de resposta. Compare antes/depois por SHA próprio, mesma carga
+e configuração; stepping não mede execução contínua.
+
+Registre por ator bytes realmente novos por transição, idade do pedido,
+cancelamentos e maior intervalo sem serviço. Current+next de um ator não paga
+residência do par, projéteis e HUD. Uma cota de 64/128 B pertence ao pipeline
+medido, não ao hardware. Compare reuso exato, cache, prefetch e cópia especializada
+contra o trabalho completo e deadlines, em vez de apenas trocar prioridade.
+
+Separe pose desejada, residente, submetida e apresentada. Não publicar cópia
+de geração abandonada depois de dano/facing; não desalojar o adversário para
+afirmar zero flicker. Reter a imagem anterior precisa de contrato coerente de
+colisão/estado e prazo, não dano de pose futura ou congelamento silencioso da
+física. `audit_observed_cases.py` rederiva asserts RAM e prazos observados dos
+journals; pixels apresentados e invalidação real precisam de QA nativa.
+
+### Representação que preserve o jogo (L090/L091/L133)
+
+Se as máscaras reais exigem mais de oito entradas por linha, reorganizar SAT
+não entrega sprite-only sem perdas naquele caso. Separar legalidade após corte
+de integridade da arte antes do corte; omissão permanente pode ter zero flicker.
+Híbrido BG/sprites é candidato até provar movimento sub-tile, overlap, facing,
+limpeza e custo patterns+PNT dos dois atores. Patterns não são espaço da PNT.
+Um bound estático baixo não aprova o renderer dinâmico. Reveja o menor contrato
+necessário; não reduzir arte/escala ou retirar perigo/FX sem decisão explícita.
+
 Comparar estado estável é trabalho pago mesmo quando o fast path não entra.
 Preflight de par por cima do cache de cada ator pode adicionar custo ao fallback.
 Não afirmar ganho pelo nome da otimização ou pelo contador acumulado no boot.

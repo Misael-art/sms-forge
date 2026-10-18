@@ -1,0 +1,960 @@
+{
+  "schema": "sms_rev2_donor_audit_v1",
+  "date": "2026-10-15",
+  "created_utc": "2026-10-15T22:45:33.035318+00:00",
+  "scope": "read-only donor intake for SMS luta_mugem_rev2; no copy/extraction/import/build/test/emulator/repo mutation",
+  "donor_workspace": "/mnt/sdcard/Projects/Sgdk Forge",
+  "donor_project": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]",
+  "instructions": {
+    "root_agents": "/mnt/sdcard/Projects/Sgdk Forge/AGENTS.md",
+    "no_project_or_relevant_tools_AGENTS_found": true,
+    "rtk_used": true,
+    "environment_guards_not_run": "read-only mandate; donor guards can install/update/write; do not apply MD methodology to SMS by running side effects"
+  },
+  "current_donor_context": {
+    "context_type": "technical_demo",
+    "delivery_claim_ceiling": "technical_demo",
+    "goal": "Construir uma engine MUGEN para SGDK 2.11 reutilizável, com contrato de compatibilidade versionado, conversor e runtime comuns; Mugenesis stage-free com Ken_Majik_ e Ryu é o primeiro consumidor e perfil técnico em validação.",
+    "matrix_updated": "2026-10-11",
+    "feature_states": [
+      {
+        "id": "scope_and_startup",
+        "status": "testado_em_emulador"
+      },
+      {
+        "id": "stage_free_resource_graph",
+        "status": "needs_evidence"
+      },
+      {
+        "id": "ken_ryu_source_profiles",
+        "status": "documentado"
+      },
+      {
+        "id": "p2_human_input",
+        "status": "partial"
+      },
+      {
+        "id": "ryu_crouch_x_repeat_and_defense",
+        "status": "testado_em_emulador"
+      },
+      {
+        "id": "ken_crouch_x",
+        "status": "testado_em_emulador"
+      },
+      {
+        "id": "complete_moveset_and_fight_core",
+        "status": "testado_em_emulador"
+      },
+      {
+        "id": "hud_sprites_palette_cache_fx",
+        "status": "needs_evidence"
+      },
+      {
+        "id": "front_end_options_training_results",
+        "status": "needs_evidence"
+      },
+      {
+        "id": "audio",
+        "status": "needs_evidence"
+      },
+      {
+        "id": "vdp_budget_and_60fps",
+        "status": "needs_evidence"
+      },
+      {
+        "id": "menu_return_to_title",
+        "status": "testado_em_emulador"
+      },
+      {
+        "id": "edge_crop_bounds",
+        "status": "partial"
+      }
+    ]
+  },
+  "selected_raw_packages": [
+    {
+      "fighter_id": "ken",
+      "container": {
+        "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/rascunho/inputs/mugen_authorized_20260929/characters/street-fighter-zero/Ken_Majik_.zip",
+        "sha256": "b244ec9a105fa0131b37c075dc06b032a87cf0f839f46ec7054ac60d9bd6f14c",
+        "bytes": 1152254
+      },
+      "matches_authorized_manifest_sha256": true,
+      "selected_def": "ken8/ken8.def",
+      "selected_def_sha256": "fdbe2fb2498be72078232ca68f2cc74fd8347aac2c8304c626d5f15dc68f5fc8",
+      "file_resolution": [
+        {
+          "key": "cmd",
+          "requested": "ken.cmd",
+          "package_relative_requested": "ken8/ken.cmd",
+          "matches": [
+            "ken8/ken.cmd"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "cns",
+          "requested": "ken.cns",
+          "package_relative_requested": "ken8/ken.cns",
+          "matches": [
+            "ken8/ken.cns"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "st",
+          "requested": "ken.cns",
+          "package_relative_requested": "ken8/ken.cns",
+          "matches": [
+            "ken8/ken.cns"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "stcommon",
+          "requested": "common1.cns",
+          "package_relative_requested": "ken8/common1.cns",
+          "matches": [],
+          "status": "missing"
+        },
+        {
+          "key": "sprite",
+          "requested": "ken.sff",
+          "package_relative_requested": "ken8/ken.sff",
+          "matches": [
+            "ken8/ken.sff"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "anim",
+          "requested": "ken.air",
+          "package_relative_requested": "ken8/ken.air",
+          "matches": [
+            "ken8/ken.air"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "sound",
+          "requested": "ken.snd",
+          "package_relative_requested": "ken8/ken.snd",
+          "matches": [
+            "ken8/ken.snd"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal1",
+          "requested": "ken1.act",
+          "package_relative_requested": "ken8/ken1.act",
+          "matches": [
+            "ken8/ken1.act"
+          ],
+          "status": "resolved"
+        }
+      ],
+      "members": [
+        {
+          "member": "ken8/end/sfakenend.def",
+          "bytes": 693,
+          "sha256": "7c5abc0069f9bb508db550edfcec7cea412ae6c88bfba6b58d12d21cb0d5603a"
+        },
+        {
+          "member": "ken8/end/sfakenend.sff",
+          "bytes": 837916,
+          "sha256": "614dca5b5a782d3eb4be7fb792eed36d1dc6d2f280cdd23a87e3c4b4bd2b08e4",
+          "signature_hex": "456c65636279746553707200",
+          "version_header_tuple": [
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "member": "ken8/ken.air",
+          "bytes": 34325,
+          "sha256": "b1f6c8d093dfd0849091035d7721a5748b59a476084bbc7ebf1ce2e1c6e7ed3a"
+        },
+        {
+          "member": "ken8/ken.cmd",
+          "bytes": 25391,
+          "sha256": "728e914f4de8d6de84af7c572af1e811c03ef142e1b168e49057bc0ba0416e16"
+        },
+        {
+          "member": "ken8/ken.cns",
+          "bytes": 66613,
+          "sha256": "0b4593b7fec0e555c41b21a032a95ea5efc540b61f201d2504a409cd4d692755"
+        },
+        {
+          "member": "ken8/ken.sff",
+          "bytes": 547131,
+          "sha256": "911e21b778af3e7a93cd69fe6132b8e87fb1cacddac757ada5842a8cb1c2172c",
+          "signature_hex": "456c65636279746553707200",
+          "version_header_tuple": [
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "member": "ken8/ken.snd",
+          "bytes": 943098,
+          "sha256": "4f0cfdc8a9b3dc825bbbfac14853d1d31ffa8cd5f9c64b92e8575fb131980521"
+        },
+        {
+          "member": "ken8/ken.txt",
+          "bytes": 1751,
+          "sha256": "00d3bc2c5b123cc22cc2ff69a07be9417eaf21981f3a86093dfa83d9331217ea"
+        },
+        {
+          "member": "ken8/ken1.act",
+          "bytes": 768,
+          "sha256": "89942f64862be6cb2bb0c094b2ab0ebb5cb411c06b7f1a6f9d69af64647687f2"
+        },
+        {
+          "member": "ken8/ken8.def",
+          "bytes": 944,
+          "sha256": "fdbe2fb2498be72078232ca68f2cc74fd8347aac2c8304c626d5f15dc68f5fc8"
+        }
+      ],
+      "folder_source": "No active raw directory nominated by current source manifest; ZIP is authoritative frozen input. Do not choose generated res/mugen or older entrada_bruta packages by character name.",
+      "common1_in_archive": false,
+      "authorization": {
+        "manifest_scope": "local project analysis and implementation; redistribution unverified",
+        "license_status": "unknown",
+        "redistribution_status": "unverified"
+      }
+    },
+    {
+      "fighter_id": "ryu",
+      "container": {
+        "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/rascunho/inputs/mugen_authorized_20260929/characters/street-fighter-zero/ryu.zip",
+        "sha256": "6db7e29d82fff1034e8c2ddab600e500fe8377ebdeef9b626fd6b580b812300d",
+        "bytes": 1920163
+      },
+      "matches_authorized_manifest_sha256": true,
+      "selected_def": "ryu/ryu.def",
+      "selected_def_sha256": "edb3db7714b5fc47f34f702eb06c166bfec039cc96a270288a3f8050b40a01e8",
+      "file_resolution": [
+        {
+          "key": "cmd",
+          "requested": "ryu.cmd",
+          "package_relative_requested": "ryu/ryu.cmd",
+          "matches": [
+            "ryu/ryu.cmd"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "cns",
+          "requested": "ryu.cns",
+          "package_relative_requested": "ryu/ryu.cns",
+          "matches": [
+            "ryu/ryu.cns"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "st",
+          "requested": "ryu.cns",
+          "package_relative_requested": "ryu/ryu.cns",
+          "matches": [
+            "ryu/ryu.cns"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "st2",
+          "requested": "ryu_s.cns",
+          "package_relative_requested": "ryu/ryu_s.cns",
+          "matches": [
+            "ryu/ryu_s.cns"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "st3",
+          "requested": "ryu_t.cns",
+          "package_relative_requested": "ryu/ryu_t.cns",
+          "matches": [
+            "ryu/ryu_t.cns"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "st4",
+          "requested": "ryu_h.cns",
+          "package_relative_requested": "ryu/ryu_h.cns",
+          "matches": [
+            "ryu/ryu_h.cns"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "stcommon",
+          "requested": "common1.cns",
+          "package_relative_requested": "ryu/common1.cns",
+          "matches": [],
+          "status": "missing"
+        },
+        {
+          "key": "sprite",
+          "requested": "ryu.sff",
+          "package_relative_requested": "ryu/ryu.sff",
+          "matches": [
+            "ryu/ryu.sff"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "anim",
+          "requested": "ryu.air",
+          "package_relative_requested": "ryu/ryu.air",
+          "matches": [
+            "ryu/ryu.air"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "sound",
+          "requested": "Ryu.snd",
+          "package_relative_requested": "ryu/Ryu.snd",
+          "matches": [
+            "ryu/ryu.snd"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal1",
+          "requested": "ryu02.act",
+          "package_relative_requested": "ryu/ryu02.act",
+          "matches": [
+            "ryu/Ryu02.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal2",
+          "requested": "ryu04.act",
+          "package_relative_requested": "ryu/ryu04.act",
+          "matches": [
+            "ryu/Ryu04.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal3",
+          "requested": "ryu06.act",
+          "package_relative_requested": "ryu/ryu06.act",
+          "matches": [
+            "ryu/Ryu06.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal4",
+          "requested": "ryu01.act",
+          "package_relative_requested": "ryu/ryu01.act",
+          "matches": [
+            "ryu/Ryu01.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal5",
+          "requested": "ryu03.act",
+          "package_relative_requested": "ryu/ryu03.act",
+          "matches": [
+            "ryu/Ryu03.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal6",
+          "requested": "ryu05.act",
+          "package_relative_requested": "ryu/ryu05.act",
+          "matches": [
+            "ryu/Ryu05.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal7",
+          "requested": "ryu_d.act",
+          "package_relative_requested": "ryu/ryu_d.act",
+          "matches": [
+            "ryu/ryu_d.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal8",
+          "requested": "ryu_f.act",
+          "package_relative_requested": "ryu/ryu_f.act",
+          "matches": [
+            "ryu/ryu_f.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal9",
+          "requested": "ryu_a.act",
+          "package_relative_requested": "ryu/ryu_a.act",
+          "matches": [
+            "ryu/ryu_a.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal10",
+          "requested": "ryu_c.act",
+          "package_relative_requested": "ryu/ryu_c.act",
+          "matches": [
+            "ryu/ryu_c.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal11",
+          "requested": "ryu_e.act",
+          "package_relative_requested": "ryu/ryu_e.act",
+          "matches": [
+            "ryu/ryu_e.ACT"
+          ],
+          "status": "resolved"
+        },
+        {
+          "key": "pal12",
+          "requested": "ryu_b.act",
+          "package_relative_requested": "ryu/ryu_b.act",
+          "matches": [
+            "ryu/ryu_b.ACT"
+          ],
+          "status": "resolved"
+        }
+      ],
+      "members": [
+        {
+          "member": "ryu/Read Me.txt",
+          "bytes": 353,
+          "sha256": "0bd22eeffd7fe3bcaca95ff1636750dd7c4871d84b6c05728658f1ef5e0d83a6"
+        },
+        {
+          "member": "ryu/readme.txt",
+          "bytes": 1378,
+          "sha256": "f7f5f0000ab85a1b2c05b637ae8b70ce00f06e8450c9e94d89c7581085252508"
+        },
+        {
+          "member": "ryu/ryu.air",
+          "bytes": 63741,
+          "sha256": "15285766e257aa4de6d1fc1092fb0eb248f0da16b52b34d9d3eeb9284ab65a3d"
+        },
+        {
+          "member": "ryu/ryu.cmd",
+          "bytes": 46165,
+          "sha256": "8954ff27a5813d073243de08704ca43ce0ac05fdc5f5f5a9c49f080837f8c3b9"
+        },
+        {
+          "member": "ryu/ryu.cns",
+          "bytes": 40892,
+          "sha256": "2bc41c79085798695d41c1dfc7ac03f3cfd7f4a31dec136192936c9aa6132bd6"
+        },
+        {
+          "member": "ryu/ryu.def",
+          "bytes": 641,
+          "sha256": "edb3db7714b5fc47f34f702eb06c166bfec039cc96a270288a3f8050b40a01e8"
+        },
+        {
+          "member": "ryu/ryu.sff",
+          "bytes": 1203860,
+          "sha256": "575dfc28fefa98b2d4c244cc5bc33ca189935f032006ab8a540ae218d93fcda8",
+          "signature_hex": "456c65636279746553707200",
+          "version_header_tuple": [
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "member": "ryu/ryu.snd",
+          "bytes": 2119836,
+          "sha256": "bd0e1fc32d1756c1ae7de0b5e5297361102c1a8e5f5fc5cad8c6ee9ccd8be7cd"
+        },
+        {
+          "member": "ryu/Ryu01.ACT",
+          "bytes": 768,
+          "sha256": "f7fde83e2211297d903937b4d99528cdc2d9c6f68c89c44ad93dc26ee20bdf1c"
+        },
+        {
+          "member": "ryu/Ryu02.ACT",
+          "bytes": 768,
+          "sha256": "cb1ec5287a20444aed7b0ac8d043d990ad15d308ebda47d113d1e401e819144b"
+        },
+        {
+          "member": "ryu/Ryu03.ACT",
+          "bytes": 768,
+          "sha256": "5685cda4dada09c7c03e58793a9159afd883ed82a3522dc5335fbda8f74d07e2"
+        },
+        {
+          "member": "ryu/Ryu04.ACT",
+          "bytes": 768,
+          "sha256": "81219726d8400e372ff68dd729fb908786a862022391f9b18eeccff78bc5dc8c"
+        },
+        {
+          "member": "ryu/Ryu05.ACT",
+          "bytes": 768,
+          "sha256": "ab5c3bb509b575899c823bb3af031623f79c4e195c700de19445d5c1519b694d"
+        },
+        {
+          "member": "ryu/Ryu06.ACT",
+          "bytes": 768,
+          "sha256": "129094f06f93a6afb817277bb8f60e3a18141d7032056954c04b46486e480d6d"
+        },
+        {
+          "member": "ryu/ryu_a.ACT",
+          "bytes": 768,
+          "sha256": "889fcbb1d6da1846ef3a94e483715d26942259553942d0b0817c3ae01c9332e5"
+        },
+        {
+          "member": "ryu/ryu_b.ACT",
+          "bytes": 768,
+          "sha256": "caf30d683226f09bc20207343da60709aaf8c4a605efc1f5eb87ac99d39a3e2e"
+        },
+        {
+          "member": "ryu/ryu_c.ACT",
+          "bytes": 768,
+          "sha256": "af5324b6b540fba6ffc523f1957a1dcd2faa5ea7d03c6ee80119b664abab1cd1"
+        },
+        {
+          "member": "ryu/ryu_d.ACT",
+          "bytes": 768,
+          "sha256": "3ec3c223fb0bc2acade7bfdb67b16a0cf636ae7515df848285c019021dcd8602"
+        },
+        {
+          "member": "ryu/ryu_e.ACT",
+          "bytes": 768,
+          "sha256": "6521a7e7853f0f0d800963f9188ac77950aed049b9ea92b763aea8e0b2690ece"
+        },
+        {
+          "member": "ryu/ryu_f.ACT",
+          "bytes": 768,
+          "sha256": "0f0e79e1370d101ef139c9ae718cfcf7b172b7898f326fff1349ba3922ae4260"
+        },
+        {
+          "member": "ryu/ryu_h.cns",
+          "bytes": 44572,
+          "sha256": "ec8992214be292fd3d479fd66a1a4f52e626a4e6a55031b0a8f1f98df1c61e1b"
+        },
+        {
+          "member": "ryu/ryu_s.cns",
+          "bytes": 27947,
+          "sha256": "501ac2c0cfdeb7aa4ac6731ff4767f49582a17a8a0156cdf996afe5c4044d79f"
+        },
+        {
+          "member": "ryu/ryu_t.cns",
+          "bytes": 7196,
+          "sha256": "6f88e1542f6be55e39a3f561ffa2e0dcc5132c51b9231fac970a142c467181b4"
+        }
+      ],
+      "folder_source": "No active raw directory nominated by current source manifest; ZIP is authoritative frozen input. Do not choose generated res/mugen or older entrada_bruta packages by character name.",
+      "common1_in_archive": false,
+      "authorization": {
+        "manifest_scope": "local project analysis and implementation; redistribution unverified",
+        "license_status": "unknown",
+        "redistribution_status": "unverified"
+      }
+    }
+  ],
+  "common_dependencies": {
+    "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/data/common_forge.cns",
+    "sha256": "ff7102534c181faffca8f8809961bc94a0a7447781218bb5f39cc43a34c28bf2",
+    "bytes": 10885,
+    "authorship_header": "SGDK Forge original common states, same repository license",
+    "state_ids": [
+      0,
+      10,
+      11,
+      12,
+      20,
+      40,
+      50,
+      52,
+      120,
+      130,
+      131,
+      132,
+      140,
+      150,
+      152,
+      154,
+      5000,
+      5001,
+      5010,
+      5011,
+      5020,
+      5030,
+      5050,
+      5100,
+      5101,
+      5110,
+      5120,
+      5150,
+      5070,
+      5080,
+      5081,
+      170,
+      175,
+      5900
+    ],
+    "equivalence_to_common1": "not proved; different authored source is a declared adaptation",
+    "loader": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/character.py",
+      "lines": "179-199",
+      "behavior": "source stcommon when resolved, otherwise bundled common_forge; character states take precedence; strict audit still reports missing source dependency"
+    },
+    "missing_states_recorded": {
+      "ken": [
+        51,
+        105,
+        300
+      ],
+      "ryu": [
+        5040,
+        5200,
+        5210
+      ]
+    },
+    "fightfx": "No global FightFX AIR/SFF/fight.snd supplied by this fallback; one PlaySnd does not provide shared asset package."
+  },
+  "adaptable_utilities": [
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/source.py",
+      "sha256": "a7f1d4c7f04244ab0b9d6ec9730198b6a2682c175ed8e85471600ec1a939cdee",
+      "bytes": 5010
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/ini.py",
+      "sha256": "3aa5514af51da470b3aa45e1a4acc47826f895bdca0b4383caf12ec15364ea3e",
+      "bytes": 2172
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/air.py",
+      "sha256": "b914b9f69aac03bdc2352267639a07bc93c1e54626ef3aa7632bc0b0a2b3df32",
+      "bytes": 4241
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/cmd.py",
+      "sha256": "bf8fa52ba8c4060baf09606ddf171ce972ca97c11980464dce5f57ac149cacfe",
+      "bytes": 3569
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/cns.py",
+      "sha256": "e44d420619c223fd0a55336df8f520e88fe65c1c4e8b45c2671750e86f5d0b10",
+      "bytes": 3929
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/sff.py",
+      "sha256": "2942ba2b878cda6894826b568660a546d6b7607c28f36e6838ea22ccc3d2a7a9",
+      "bytes": 4357
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/parsers/snd.py",
+      "sha256": "1f54f4ef8b372426f1c682e292b69c23d15caed52ce9bfab2ca7a57a1d192de4",
+      "bytes": 1632
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/character.py",
+      "sha256": "bab435c3f2076a2fd02d433b699ce8afd0e5921fbb867ffa991eefc8014fad13",
+      "bytes": 11081
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/inventory.py",
+      "sha256": "6aeaf65f37ee03e6f904450c647240ec412afebf07fe3d1cc44546bce478b73b",
+      "bytes": 16632
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/source_audit.py",
+      "sha256": "17058debbe7db394b014c06e916b5fa43ad79adf5f776785514bed6ec732d1aa",
+      "bytes": 78264
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/compatibility.py",
+      "sha256": "78d59e0af6edf47ee19e87347e059f2e1c606922dd5d859f3a61580e118ffcdb",
+      "bytes": 10361
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/intake.py",
+      "sha256": "2ae7500090f536307133a2722bfd8d95c520fef0c254ad80beb62dee5bbe2b8d",
+      "bytes": 5746
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/generation_manifest.py",
+      "sha256": "877b90f79cf2381502ef203c18b044f9a148cf66688273c0f75e4f79da2c557d",
+      "bytes": 8552
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/build_binding.py",
+      "sha256": "1351f45fb6410c0fb8786f89519b6a7052390684e15393b3cdf335800dee971b",
+      "bytes": 19713
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/cmd_input.py",
+      "sha256": "ac4162ed97cc6f0150845d7b8264feac8294faa95bb47a96182a8caae6477583",
+      "bytes": 3957
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/expr.py",
+      "sha256": "3762f8bbaddb1cb06f2b3648d49ad43501e15b7e081ee5c58c186542d54d4d09",
+      "bytes": 21001
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/controllers.py",
+      "sha256": "3528a977f49459d26acbdae4774af44cb5bec6a2277f40687d6e93ddf230946c",
+      "bytes": 20876
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/opcodes.py",
+      "sha256": "e95bf2cb6dd2b5ac810e4334190908d53f993b1f37666ac32c70e454920e1542",
+      "bytes": 4439
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/ir/vm.py",
+      "sha256": "ef609ad7927492aa078504dbb00b5be987f27119c2281f495c3ec902347d9f55",
+      "bytes": 3742
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/generators/anim_timing.py",
+      "sha256": "3d370e87677efeebbb4c0abcd354e8346f18b174a809c6a6be691d61b637b89d",
+      "bytes": 1327
+    }
+  ],
+  "methods_to_adapt": [
+    {
+      "method": "frozen source ZIP/folder resolver and intake",
+      "files": [
+        "source.py",
+        "intake.py",
+        "inventory.py",
+        "parsers/ini.py"
+      ],
+      "sms_adaptation": "Copy or reimplement source access snapshot and source:file:line diagnostics, case-insensitive resolution, external/ambiguous/missing states; bound reads and safe path/ZIP policy; no runtime SGDK dependency."
+    },
+    {
+      "method": "AIR/CMD/CNS/SFFv1/SND parsing",
+      "files": [
+        "parsers/air.py",
+        "parsers/cmd.py",
+        "parsers/cns.py",
+        "parsers/sff.py",
+        "parsers/snd.py"
+      ],
+      "sms_adaptation": "Preserve action IDs, durations, -1 infinite, loopstart, source axes, Clsn1/Clsn2, command timing/pressed-held-release, palette references, sound group/sample; reject unsupported revisions explicitly. Revalidate parser limits/malformed records in SMS wrapper; no static AST loss silently accepted."
+    },
+    {
+      "method": "compatibility manifest, strict/exploratory and effective source graph",
+      "files": [
+        "character.py",
+        "source_audit.py",
+        "compatibility.py",
+        "generation_manifest.py",
+        "build_binding.py"
+      ],
+      "sms_adaptation": "Independent SMS compatibility profile/version with original archive/member hashes, commons/overrides, reachable dependency classification, generator/IR/output/toolchain/ROM binding. A donor direct/supported claim does not qualify SMS runtime."
+    },
+    {
+      "method": "semantic host VM and compiler as differential oracle",
+      "files": [
+        "ir/expr.py",
+        "ir/controllers.py",
+        "ir/opcodes.py",
+        "ir/vm.py",
+        "cmd_input.py",
+        "generators/anim_timing.py"
+      ],
+      "sms_adaptation": "Use only relevant semantic contracts and tiny test vectors; compile offline to compact Q8.8/int16 data and specialized common runtime if measured. Preserve priority/order/side effects/RNG and same-tick transition semantics. Do not transplant full68000VM or assume its cost fits Z80."
+    },
+    {
+      "method": "input→command→state→hit→return trace and controlled A/B diagnostics",
+      "files": [
+        "runtime_trace.py",
+        "tests/test_source_audit.py",
+        "tests/test_host_runtime.py",
+        "tests/test_corner_pressure_recovery.py",
+        "tests/test_anim_time_contract.py"
+      ],
+      "sms_adaptation": "Borrow proof matrix method; implement SMS probes with measured RAM corridor and exact fresh private sessions. Count accepted commands separately from injected attempts; verify all frame boundaries N+1 and materialized assets."
+    },
+    {
+      "method": "consumer/profile separation and single shared runtime ownership",
+      "files": [
+        "runtime/README.md",
+        "runtime/mg_types.h",
+        "runtime/mg_char.c",
+        "runtime/mg_fight.c"
+      ],
+      "sms_adaptation": "Borrow architecture boundaries only; regenerate SMS runtime/layout, controls, banked resources and UI. Do not copy MegaDriveSPR/DMA/CRAM/XGM/H40 renderer or declarations of validated capacity."
+    }
+  ],
+  "do_not_transplant": [
+    "Megadrive320x224H40limits20sprites/320pixelsline/80SATlinks",
+    "MD4palettes16entries/PALownership and colorencoding",
+    "SPR_autoallocation,DMAupload,VDPplaneBG_A/B/WINDOW,XGM2PCMdriver",
+    "fullCVM dynamicwork/pointers24.8width withoutZ80RAM/ROM/timingbudget",
+    "generatedSGDKsheetindices,.res,mg_char_ken/ryutables as originalMUGENassets",
+    "currentdonor sourcecopyorbest_provenasvalidatedSMSbaseline"
+  ],
+  "blockers": [
+    {
+      "id": "missing_common",
+      "status": "source_dependency_unresolved",
+      "detail": "Both selected DEF name common1.cns; absent in both selected ZIPs. common_forge has34 statedefs and is adaptation, not recovered original."
+    },
+    {
+      "id": "strict_source",
+      "status": "blocked_recorded_2026-10-12",
+      "detail": "Ken170findings;Ryu157(154blocked+3supported_evidence_insufficient), source_preflight_blocked/review_required_before_pilot. These are donor strict findings, not newly executed tests or proof source corrupt."
+    },
+    {
+      "id": "ryu_missing_sff",
+      "status": "8_static_refs_unresolved",
+      "detail": "AIR refs(6000,0..5),(8400,5..6) absent selectedSFF; 8400frames referencedExplod3900; six6000literalreachabilityunknown."
+    },
+    {
+      "id": "global_fx_audio",
+      "status": "unresolved",
+      "detail": "Ken spark0/1,guard40 and common hitsounds5*/guardsound6,0 lack global FightFX/fight.snd. Ryu localS8060 supplied but exactFX8060fallback alias is explicitconsumeradaptation, not fullglobalfx support."
+    },
+    {
+      "id": "palette_SMS",
+      "status": "needs_new_SMS_contract",
+      "detail": "Donor historical exactbody+FX20Ken29Ryu exceed15perMDfighter; SMS hasone15usefulspritepalette sharedP1/P2+FX. Quantization/scale/overlap must be redesigned and reviewed, noinheritMDPAL1/PAL2/PAL3."
+    },
+    {
+      "id": "donor_hardware_budget",
+      "status": "measured_overage_diagnostic_only",
+      "detail": "FX8060H40fivecheckpoints linepixels504/552/512/608/376;3/5spriteoverage. A/Bspawnpath contributes, isolatedcostunknown. SMS8spritesline/64SATbudget must be measured fromnewSMSscene."
+    },
+    {
+      "id": "latest_frontend",
+      "status": "implemented_unbuilt_2026-10-15",
+      "detail": "Options/training/navigationcode updatedsource+installedcopy; runtimefull /run/user/1000 and projectoutlogsEIOpreventbuild. Donor memory says noROMnewerforlatestsource; notcurrenthoststatuschecked."
+    },
+    {
+      "id": "delivery",
+      "status": "technical_demo_partial_best_proven_null",
+      "detail": "MainROMhistorical1b66cd1d7d3117f7fec0e487e1d4a7473357b5fa0693c24d21cf333eada1c7a8; current gameplay/FPS/audio/physicalcontrols/visualmotionunvalidated; no SMSruntimeproof."
+    }
+  ],
+  "license_notes": {
+    "repository_license_record": {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/LICENSE",
+      "sha256": "0b685fab1e0d2e0a9f85a4356a91c7bb16126be7b06e899f6cfed155cad2cf24",
+      "bytes": 1080
+    },
+    "repository_license_text": "MIT SGDK-Forge contributors; preserve copyright/license when copying substantial Forge code. Not a license for third-party MUGEN character assets.",
+    "asset_scope": "Localprojectanalysis/implementation authorized in donor manifest; redistributionunverified. This audit does not grant additional asset rights or approveart."
+  },
+  "sources": [
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/10-memory-bank.md",
+      "sha256": "f709f1e99b005b2deedf8f09f0f1efceaf51a109929a19289c2b7300f2479077",
+      "bytes": 456418
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/project_context_manifest.json",
+      "sha256": "6f5c8bc7a58050767f2d7ed85b047f6222e61fa0cdc5575d72344b77b867ee77",
+      "bytes": 5992
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/project_hygiene_manifest.json",
+      "sha256": "32c95d0b43b342b6f7ce7ad3061f2b76bbe86e64ba53e6fc55da26fefc894507",
+      "bytes": 6186
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/.mddev/project.json",
+      "sha256": "64bb4d4554f44e4bb12c24b830654b38f95ad1cb9b6e107435e0df06baa1ad8b",
+      "bytes": 1694
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/mugen/active_scope_matrix_20261004.json",
+      "sha256": "22bd7726a0a9c276f73348211fcbbb591af77bed7152f6454f9ce6a9fcaef2e2",
+      "bytes": 54804
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/mugen/completion_backlog.json",
+      "sha256": "309d4806bc4ef19cc08771a8f5606fa564a613ad2f94f5e6e58b577db65b488a",
+      "bytes": 43957
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/build_routes/official_mugen_routes_20260929.json",
+      "sha256": "91346c24b09f8344dd922ec6761c1efc78b5da1d5fbae54417e10756f2ff9449",
+      "bytes": 33478
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/build_routes/source_decision_20260929.md",
+      "sha256": "db1429d9fad8e6401ddb1abe4bfaa3b02d4a13a3982a6ae545a022682d87b844",
+      "bytes": 19846
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/build_routes/pilot_contracts_m1_20260929.md",
+      "sha256": "fc080634aeaa36eaf8dd68f0aabdcc4fad54358c9015e168a6b63ad740e59593",
+      "bytes": 11127
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/mugen/prompt_engine_continuity_20261007.md",
+      "sha256": "712c725119076148a9df473a8b5d5a5392a5c988d9620ac4a848870adb5ff532",
+      "bytes": 12582
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/mugen/operational_index_2026_09_29.md",
+      "sha256": "dc2c17dc2ce65691f0b0c313b6f3dc821c6295fdc223cfec2dba949b23da452b",
+      "bytes": 4848
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/mugen/ken_conversion_report.json",
+      "sha256": "54a5968ec48d69541728450775bd356cd71d49824bd867f704e322f58a8bc826",
+      "bytes": 35805
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/doc/mugen/ryu_conversion_report.json",
+      "sha256": "f0c6b0976ed1e774b3347ca20ea2086129838d98a92d9c2510bdacc6f6ab97b8",
+      "bytes": 55725
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]/rascunho/inputs/mugen_authorized_20260929/inputs_manifest.json",
+      "sha256": "cd64b603923353a07de17101e3d7a447e42096d724d2a28681083b21abf095fe",
+      "bytes": 37389
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/AGENTS.md",
+      "sha256": "ac9b0063feaefaa3d59d28e16daea28b18082918501321ea76abaaee0ddac30d",
+      "bytes": 24453
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/LICENSE",
+      "sha256": "0b685fab1e0d2e0a9f85a4356a91c7bb16126be7b06e899f6cfed155cad2cf24",
+      "bytes": 1080
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/mugen2sgdk_forge/data/common_forge.cns",
+      "sha256": "ff7102534c181faffca8f8809961bc94a0a7447781218bb5f39cc43a34c28bf2",
+      "bytes": 10885
+    },
+    {
+      "path": "/mnt/sdcard/Projects/Sgdk Forge/tools/mugen2sgdk_forge/runtime/README.md",
+      "sha256": "99abea6cf8b94df19d329961f5980182a914240ec7a6bf595d48fca3e3159a58",
+      "bytes": 8667
+    }
+  ],
+  "freshness_notes": [
+    "Current15Octmemory outranks historical active_scope_matrix11Oct and Septemberpilot docs.",
+    "Historical pilot_contracts table paths omit characters/street-fighter-zero; authoritative manifest+actualarchive verified here.",
+    "Conversionreports listgenerator0.3.2 while latestmemory0.3.4 newMgSoundABI unbuilt; regenerate data againstchosenSMSABI instead of copying output.",
+    "RuntimeREADME has older divergence statements/helpers while code may have advanced; explicit supportprofile/sourceaudit/runtimeevidence wins."
+  ],
+  "recommendation": "StartSMSrev2 withtwo frozenZIPsandDEFselection+dependencyinventory; copy only into singleSMSintake manifest when coordinator performs authorizedcreation. Preserve donor as read-only. Reuse parsers/semantics bytests and adaptSMS backend; do not claim strictcompatibilityuntilcommons/sharedFX/sourcegapsresolved or explicitadaptationsaccepted. No sourcefolderinrascunhoguessed."
+}

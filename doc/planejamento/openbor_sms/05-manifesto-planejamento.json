@@ -1,0 +1,46 @@
+{
+  "schema": "sms_openbor_planning_bundle_v1",
+  "date": "2026-10-15",
+  "status": "planning_only",
+  "sources": "read-only donor audit; no packages copied or extracted",
+  "proposed_engine": "tools/sms_wrapper/openbor2sms/",
+  "proposed_consumer": "SMS_projects/openbor_sms_rev1/",
+  "created_runtime_or_project": false,
+  "build_tests_emulator": "not_run_not_requested_for_plan",
+  "files": [
+    {
+      "path": "doc/planejamento/openbor_sms/01-plano-openbor-sms.md",
+      "sha256": "3b64e9fbd9a27f5137fca1c05c98473d45060b6596ba68edb571e403969180a7",
+      "bytes": 18600
+    },
+    {
+      "path": "doc/planejamento/openbor_sms/02-prompt-agente-implementador.md",
+      "sha256": "29aac8ff94a69468aad22c4d4d9662d29544519657fe45041c94176b81ea5a25",
+      "bytes": 13461
+    },
+    {
+      "path": "doc/planejamento/openbor_sms/03-auditoria-doador.json",
+      "sha256": "96b5e39a64232a196ec076903f322062c048712b8852a9f287676a98b358e8b3",
+      "bytes": 44705
+    },
+    {
+      "path": "doc/planejamento/openbor_sms/04-parecer-doador.md",
+      "sha256": "af65a802ed5f4709fa4997e68b6e4bd7a6a39fd4739cd43ea7600d9913b59352",
+      "bytes": 4581
+    },
+    {
+      "path": "doc/planejamento/openbor_sms/06-revisao-plano.json",
+      "sha256": "dde917ab67b1f267be2b378fd9875788d93462e40cb17f59bf59749e9241ec0b",
+      "bytes": 4160
+    }
+  ],
+  "independent_review": {
+    "report": "doc/planejamento/openbor_sms/06-revisao-plano.json",
+    "scope": "read-only planning review, no runtime tests",
+    "minor_adjustments_applied": [
+      "PAK32/64 vs ZIP CLI distinction",
+      "one registry with raw/generated/resource roles",
+      "O4 prefix never permits skipping O5 event owners"
+    ]
+  }
+}

@@ -1115,13 +1115,34 @@
     {
       "ts": "2026-10-14",
       "kind": "lesson",
-      "summary": "Perda de evidencia canonica de OUTRA sessao, causada pela familia de flags `--json` que sao DESTINO de relatorio: `doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json` tem hoje 37 bytes e conteudo `{ \"problems\": [], \"clean\": true` (sha256 89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39), mtime 23:33. Os quatro formatos que escrevem esse objeto sao audit_learning_capture/audit_hardware_constants/audit_header_claims/audit_debug_markers, todos `open(<args.json>,\"w\")` sem guarda. Consequencia: `audit_learning_capture.py --root .` (rodado sem --json) devolve deriva vermelha no repo inteiro porque a linha correspondente em `lesson_routes.json` aponta para o caminho que agora contem um veredito, e as citacoes em ledger perdem o JSON de lastro. Diagnostico reutilizavel: `wc -c` dos JSONs de doc/curation; lição de 37 bytes com chave `problems` e veredito morando no lugar da lição. Esta sessao NAO restaurou o arquivo alheio (nao possui o texto original; inventar licao de outra sessao seria destruir a evidencia uma segunda vez) e NAO editou o gate para ficar verde: o FAIL esta declarado com atribuicao. Acao humana: replay da sessao que emitiu a licao, mais a emenda de curadoria ja candidatada (--report-out / recusar destino existente / check no validate_measurement_tools).",
+      "summary": "Perda de evidencia canonica de OUTRA sessao, causada pela familia de flags `--json` que sao DESTINO de relatorio: `doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json` tem hoje 37 bytes e conteudo `{ \"problems\": [], \"clean\": true` (sha256 89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39), mtime 23:33. Os quatro formatos que escrevem esse objeto sao audit_learning_capture/audit_hardware_constants/audit_header_claims/audit_debug_markers, todos `open(<args.json>,\"w\")` sem guarda. Consequencia: `audit_learning_capture.py --root .` (rodado sem --json) devolve deriva vermelha no repo inteiro porque a linha correspondente em `lesson_routes.json` aponta para o caminho que agora contem um veredito, e as citacoes em ledger perdem o JSON de lastro. Diagnostico reutilizavel: `wc -c` dos JSONs de doc/curation; lição de 37 bytes com chave `problems` e veredito morando no lugar da lição. Esta sessao NAO restaurou o arquivo alheio (nao possui o texto original; inventar licao de outra sessao seria destruir a evidencia uma segunda vez) e NAO editou o gate para ficar verde: o FAIL esta declarado com atribuicao. RETIFICACAO medida as 23:44: o veredito de 37 bytes esta COMMITADO em 74543b9 (git show HEAD do caminho devolve os mesmos 37 bytes e o mesmo sha; git status limpo), entao o git NAO tem copia da licao -- sobreviveram apenas a lei (SMS_GLOBAL §124, 67 linhas em HEAD) e a ferramenta (measure_vram_map.py, 15.735 B), que sao justamente o que o registro machine-readable deveria lastrear. Scan util: `wc -c doc/curation/*.json` com um arquivo < 120 bytes. Acao humana: replay da transcricao da sessao que emitiu a licao, mais a emenda de curadoria ja candidatada (--report-out / recusar destino existente / check no validate_measurement_tools).",
       "sources": [
         "doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json sha256=89924049fe579430922d181c74d5b4376a821db502bd525f604fcfc7301d0d39",
-        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json sha256=b3bcd00602d5fe414d726c1ec2da896f971e04d008eab5df5c7a9f8e07ec87fe",
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json sha256=4e8fb8194ef79ed938e5572069ee34f97fe532be2264e6751e54cdb5e6197aae",
         "SMS_projects/pulso_de_cristal/doc/10-memory-bank.md (§ Licoes abertas)"
       ],
       "dedup_key": "loss_json_destino_segunda_instancia_a9_vram_map_20261014e"
+    },
+    {
+      "ts": "2026-10-15",
+      "kind": "lesson",
+      "dedup_key": "restauracao_l133_por_transcript_com_sha_pre_desastre_20261015",
+      "summary": "FECHAMENTO da licao anterior (perda da L133): a restauracao foi EXECUTADA em 2026-10-15 (madrugada) por ordem direta do dono ('FACA 1 E 2'), pela rota de replay de transcricao, e nao por re-autoria. Fonte: jsonl da sessao A9 (eb043711-fae6-4b1d-b59a-0395b2ae588f) -- conteudo do tool_use Write (linha 2657) + Edit (linha 2670) aplicados programaticamente, com assert de old_string unico e json.loads. Prova de byte-exatidao: sha256 da reconstrucao == 7e725673c543b0328d5280efada085c12d2067221e8d4dc2c9df1cda7eaef108 == o sha do proprio lesson JSON que a A9 pregou em lesson_routes.application_records (comando da linha 2675) ANTES do clobber. Resultado medido: arquivo com 7273 bytes, JSON valido, 1 licao L133; veredito de 37 bytes preservado como evidencia em SMS_projects/pulso_de_cristal/rascunho/curation_backup/2026-10-14_l133_CLOBBED_37b.json; audit_learning_capture.py --root . saiu de exit 1 (3 derivas: 'lesson_routes ID desconhecido/duplicado: L133' + 2x 'ledger cita L133 sem JSON de curadoria') para exit 0 ([PASS] captura de licao sincronizada) POR DADOS, sem editar gate nem prosa alheia. MECANICA QUE PERMITIU A RECUPERACAO (candidato 10 do dossie): git NAO salvou porque o dano foi commitado (74543b9); file-history do host NAO snapshotou porque quem escreveu foi o --json de uma ferramenta wrapper, invisivel as ferramentas de escrita; o que restou foi o hash pre-desastre registrado no binding, e e isso que distingue 'recuperei' de 're-inventei'. Estado honesto: a restauracao esta no working tree e NADA foi commitado por esta sessao, entao HEAD ainda contem os 37 bytes; comitar e decisao do dono.",
+      "sources": [
+        "doc/curation/2026-10-14_l133_vram_map_reg6_sprite_window_free_pockets.json",
+        "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json",
+        "doc/agent_learning/lesson_routes.json"
+      ]
+    },
+    {
+      "ts": "2026-10-15",
+      "kind": "curation",
+      "summary": "Aplicação L083/L090/L093–L096/L112/L123/L125 no consumidor luta_mugem_rev2: intake Ken/Ryu raw SGDK por SHA, common1 ausente sem equivalênciafabricada, render lower-bound antes scheduler, sem olddocEIOdependency e sem transferir claims/limitesMD. Plano/promptM0–M8,capabilitiesplanned. Sem build/ROM/gameplay promovido.",
+      "sources": [
+        "doc/curation/2026-10-15_rev2_mugen_donor_intake.json",
+        "SMS_projects/luta_mugem_rev2/doc/21-prompt-agente-implementador.md"
+      ],
+      "dedup_key": "rev2_mugen_donor_intake_20261015"
     },
     {
       "ts": "2026-10-16",
@@ -1143,6 +1164,17 @@
         "SMS_projects/_laboratorio/mapper_vblank_copy/l136_candidate.json"
       ],
       "dedup_key": "l136_vram_fora_do_vblank_fechamento_20261017"
+    },
+    {
+      "ts": "2026-10-18",
+      "kind": "curation",
+      "summary": "Aplicação de L001/L013/L035/L036/L064/L086/L090/L091/L097–L099/L112/L123/L125/L133/L136: asserts rederivados de journals, clocks e apresentação separados, deadlines observados e custódia; quatro auditores protegidos contra clobber, paleta BG0 corrigida na matriz e L136 propagada. Novo audit_observed_cases, skills/workflows fortalecidos e revisões independentes. Sem ID novo, sem promoção dos jogos; fechamento global mantém EIO legado. Validação:120/120 selftest,70 ferramentas,25/25 vetores independentes; doc_sync conserva10 falhas EIO anteriores.",
+      "sources": [
+        "doc/curation/2026-10-18_runtime_evidence_workflow_application.json",
+        "doc/curation/evidence/2026-10-18_observed_cases/calibration.json",
+        "doc/curation/evidence/2026-10-18_observed_cases/summary.md"
+      ],
+      "dedup_key": "runtime_evidence_workflow_application_20261018"
     }
   ]
 }

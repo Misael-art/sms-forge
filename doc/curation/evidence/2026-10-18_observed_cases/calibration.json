@@ -1,0 +1,48 @@
+{
+  "scope": "historical raw bytes and deltas; no new ROM execution and no geometry/whiff timing proof",
+  "original_rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/changelog/roms/build_v054/rom.sms",
+    "sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73"
+  },
+  "cases": [
+    {
+      "id": "negative_control",
+      "record": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/negative_control/record.json",
+        "sha256": "e84da8a0d6976f014f699e1c5ca1f8106e7587ee124028777fa82370546f764a"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/negative_control/report.json",
+        "sha256": "439726443a849a6dcb65a0c7f38cce634b485b0fa147d8a5f78710ad642b8f4c"
+      },
+      "expected_ok": true,
+      "actual_ok": true
+    },
+    {
+      "id": "positive_control",
+      "record": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/positive_control/record.json",
+        "sha256": "ac93f54aab53b1e9a227bab0d150db51157987e3e6499f266b350a14a38dee35"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/positive_control/report.json",
+        "sha256": "60db1e9509b7f1ca4094d4cec756a667ffa7b45180c8a3d34e4ef1bc8d6e5fab"
+      },
+      "expected_ok": true,
+      "actual_ok": true
+    },
+    {
+      "id": "contradictory_whiff",
+      "record": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/contradictory_whiff/record.json",
+        "sha256": "ac3c0e5420c28fd15722cde125d1c443e2aeef1733e2c2df055b3dbac62ab4da"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/contradictory_whiff/report.json",
+        "sha256": "657eb44a1ca1da9271a8c98456c4c37038a720cc0689ac8dcf1b6fc83a6b65f5"
+      },
+      "expected_ok": false,
+      "actual_ok": false
+    }
+  ]
+}

@@ -46,6 +46,18 @@ pose/evento e consequência; relate atraso sem escolher um número universal de
 "controle bom". Hitstop intencional do GDD não se confunde com stall de upload.
 Vídeo/probe/trilha precisam identificar a mesma ROM, janela e ação.
 
+Ao interpretar um caso, usar `skills/sms-observed-case-evidence.md` e
+`audit_observed_cases.py` quando houver journal compatível. O assert deve
+reprovar direção errada, dano durante guarda, borda não atingida e ausência de
+terminal conforme o contrato. Comparar RAM com o valor esperado não demonstra
+apresentação; o revisor alinha desejado/residente/submetido com framebuffer.
+Animação/ataque ainda ativo ao fim do vídeo não prova duração completa da ação.
+
+Teste sob as cargas que coexistem, com prazo por ator e política de cache.
+Um ator invisível, pose congelada por upload ou corte permanente não recebe
+aprovação de qualidade porque SAT ficou legal ou o FPS médio passou. Antes de
+ampliar o elenco, o slice de produção fecha essa relação com um ciclo completo.
+
 ## Revisão e decisão de crescimento
 
 Revisor independente inspeciona os casos e relata defeito, risco, oportunidade
