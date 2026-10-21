@@ -1,0 +1,33 @@
+{
+  "record_consistency": {
+    "ok": true,
+    "problems": [],
+    "details": {
+      "modular_delta": 29,
+      "modulus": 256,
+      "possible_counts": null,
+      "candidate_counts": "unbounded: delta + k*modulus",
+      "exact_under_declared_bound": false,
+      "exact_count": null
+    },
+    "claim_ceiling": "declared_counter_arithmetic_only",
+    "limits": "Does not authenticate event bound, no-reset assertion, sampling window, source instrumentation or ROM execution. Does not validate event units, opportunities or denominator; no cache hit-rate or exclusive CPU-cost claim. Unbounded/multiwrap counts are not exact."
+  },
+  "exact_count_rejected": {
+    "ok": false,
+    "problems": [
+      "counter window ambiguous; shorter window or wider/saturating instrument required"
+    ],
+    "details": {
+      "modular_delta": 29,
+      "modulus": 256,
+      "possible_counts": null,
+      "candidate_counts": "unbounded: delta + k*modulus",
+      "exact_under_declared_bound": false,
+      "exact_count": null
+    },
+    "claim_ceiling": "declared_counter_arithmetic_only",
+    "limits": "Does not authenticate event bound, no-reset assertion, sampling window, source instrumentation or ROM execution. Does not validate event units, opportunities or denominator; no cache hit-rate or exclusive CPU-cost claim. Unbounded/multiwrap counts are not exact."
+  },
+  "historical_learning_correction": "29 is modular delta; no exact hit count, denominator or hit rate is authenticated"
+}

@@ -1,0 +1,31 @@
+{
+  "scene": "rua_matsuri",
+  "sprite_size": "16x16",
+  "hardware_sprite_geometry": "8x16 por entrada; entidade 16x32 em metasprite 2x2",
+  "zoomed": false,
+  "screen_h": 192,
+  "sprites": [
+    {"x": 56, "y": 128, "tile": 128, "who": "kage_tl"},
+    {"x": 64, "y": 128, "tile": 130, "who": "kage_tr"},
+    {"x": 56, "y": 144, "tile": 132, "who": "kage_bl"},
+    {"x": 64, "y": 144, "tile": 134, "who": "kage_br"},
+    {"x": 140, "y": 128, "tile": 192, "who": "sam0_tl"},
+    {"x": 148, "y": 128, "tile": 194, "who": "sam0_tr"},
+    {"x": 140, "y": 144, "tile": 196, "who": "sam0_bl"},
+    {"x": 148, "y": 144, "tile": 198, "who": "sam0_br"},
+    {"x": 176, "y": 128, "tile": 192, "who": "sam1_tl"},
+    {"x": 184, "y": 128, "tile": 194, "who": "sam1_tr"},
+    {"x": 176, "y": 144, "tile": 196, "who": "sam1_bl"},
+    {"x": 184, "y": 144, "tile": 198, "who": "sam1_br"},
+    {"x": 8, "y": 8, "tile": 128, "who": "hud_hp0_l"},
+    {"x": 16, "y": 8, "tile": 130, "who": "hud_hp0_r"},
+    {"x": 24, "y": 8, "tile": 128, "who": "hud_hp1_l"},
+    {"x": 32, "y": 8, "tile": 130, "who": "hud_hp1_r"},
+    {"x": 40, "y": 8, "tile": 128, "who": "hud_hp2_l"},
+    {"x": 48, "y": 8, "tile": 130, "who": "hud_hp2_r"},
+    {"x": 200, "y": 24, "tile": 192, "who": "hud_goal0_l"},
+    {"x": 208, "y": 24, "tile": 194, "who": "hud_goal0_r"},
+    {"x": 216, "y": 24, "tile": 192, "who": "hud_goal1_l"},
+    {"x": 224, "y": 24, "tile": 194, "who": "hud_goal1_r"}
+  ]
+}

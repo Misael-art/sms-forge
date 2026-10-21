@@ -102,6 +102,34 @@ class PolicyTest(unittest.TestCase):
         self.assertEqual([c["dens"] for c in order], [9, 7, 3])
 
 
+class AttackTrimTest(unittest.TestCase):
+    def test_cap_esquerda_remove_lado_externo(self):
+        cells = [{"row": 1, "col": col, "dens": 10 - col} for col in range(7)]
+        kept, dropped = se.o3_trim_attack_cells(cells, "left", 4)
+        self.assertEqual([c["col"] for c in kept], [0, 1, 2, 3])
+        self.assertEqual([c["col"] for c in dropped], [4, 5, 6])
+
+    def test_cap_direita_espelhado(self):
+        cells = [{"row": 2, "col": col, "dens": 10 - col} for col in range(8)]
+        kept, dropped = se.o3_trim_attack_cells(cells, "right", 4)
+        self.assertEqual([c["col"] for c in kept], [4, 5, 6, 7])
+        self.assertEqual([c["col"] for c in dropped], [0, 1, 2, 3])
+
+    def test_linhas_fora_do_cap_nao_mudam(self):
+        cells = ([{"row": 0, "col": 0, "dens": 1}]
+                 + [{"row": 1, "col": col, "dens": 1} for col in range(5)]
+                 + [{"row": 3, "col": 0, "dens": 1}])
+        kept, dropped = se.o3_trim_attack_cells(cells, "left", 4)
+        self.assertEqual([c["row"] for c in kept], [0, 1, 1, 1, 1, 3])
+        self.assertEqual(len(dropped), 1)
+
+    def test_cap_nao_inventa_celulas(self):
+        cells = [{"row": 1, "col": col, "dens": 1} for col in range(3)]
+        kept, dropped = se.o3_trim_attack_cells(cells, "left", 4)
+        self.assertEqual(kept, cells)
+        self.assertEqual(dropped, [])
+
+
 class BlocksTest(unittest.TestCase):
     def test_bloco_de_uma_celula(self):
         rows16 = [bytes([1] * 8) for _ in range(8)] + [bytes([8]) * 8 for _ in range(8)]

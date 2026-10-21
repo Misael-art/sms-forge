@@ -1,0 +1,355 @@
+{
+  "schema": "sms_blastem_session_v1",
+  "session_id": "blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+  "root": "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+  "emulator": "BlastEm",
+  "version": "1.0.0",
+  "machine": "sms",
+  "model": "sms2",
+  "region": "ntsc",
+  "source_rom": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/rom.sms",
+  "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+  "emulator_sha256": "1bd0f40ddcc6d769f6cc2aea59bb2973601b6db30bdd849b68315b9d83ad06ec",
+  "archive_sha256": "9e47b68a555e24db5ef5bd77e67967124ac3e28ae04ae32e9f3af3eaecf31860",
+  "wrapper_sha256": "5ee935582409ce0de02643634f950419543f6e94f1525c21411b27c322772b3b",
+  "config_sha256": "e99ee32ab75324b1f2f1891f73731d53555f88938e960f75f902ff5d7ea20010",
+  "sequence_sha256": "179eee51ad16f2dcec38a1b1ddd7348e4abe75576933dc2997a5c1e62576dbe9",
+  "started_at": 1791636109.5676775,
+  "host_load": [
+    4.3837890625,
+    5.1142578125,
+    4.66552734375
+  ],
+  "state": "completed",
+  "claim_scope": "diagnostic_states_only",
+  "audio": "dummy_not_tested",
+  "input": "native_debugger_process_local_bindings",
+  "frame_clock": "VDP_debugger",
+  "fps_claim": false,
+  "hardware_validation": false,
+  "diagnostics_sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+  "event_definitions": [],
+  "display": ":3",
+  "xvfb_process": {
+    "pid": 144075,
+    "start_ticks": "6917073"
+  },
+  "sandbox_command": [
+    "bwrap",
+    "--die-with-parent",
+    "--unshare-net",
+    "--ro-bind",
+    "/",
+    "/",
+    "--dev",
+    "/dev",
+    "--proc",
+    "/proc",
+    "--tmpfs",
+    "/tmp",
+    "--dir",
+    "/tmp/.X11-unix",
+    "--ro-bind",
+    "/tmp/.X11-unix/X3",
+    "/tmp/.X11-unix/X3",
+    "--bind",
+    "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+    "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+    "--chdir",
+    "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+    "/mnt/sdcard/Projects/SMSForge/out/host_tools/blastem/1.0.0/blastem",
+    "-d",
+    "-m",
+    "sms",
+    "-r",
+    "U",
+    "rom.sms"
+  ],
+  "sandbox_process": {
+    "pid": 144094,
+    "start_ticks": "6917083"
+  },
+  "baseline_checked_before_input": true,
+  "baseline_precondition_count": 0,
+  "case_applicability": "not_declared_generic_diagnostic_only",
+  "screenshot_informative": true,
+  "cpu_snapshots": [
+    {
+      "index": 0,
+      "pc": 31098,
+      "sp": 57314,
+      "af": 87,
+      "bc": 49486,
+      "de": 8192,
+      "hl": 49646,
+      "ix": 57324,
+      "iy": 49635,
+      "internal_cycle": 107291505,
+      "iff1": 0
+    },
+    {
+      "index": 1,
+      "pc": 16293,
+      "sp": 57312,
+      "af": 13312,
+      "bc": 49408,
+      "de": 8192,
+      "hl": 49486,
+      "ix": 57318,
+      "iy": 49635,
+      "internal_cycle": 55735815,
+      "iff1": 1
+    }
+  ],
+  "cycle_scope": "upstream internal master-clock counter; rebased by emulator; not CPU duration or realtime FPS",
+  "events": [],
+  "event_counts": [],
+  "native_media": {
+    "apng": {
+      "frames": 240,
+      "size": [
+        256,
+        192
+      ],
+      "different_from_first": 239,
+      "container_duration_ms": 4000.0000000000005,
+      "clock": "nominal_60Hz_not_realtime_FPS",
+      "raw_preserved": true,
+      "derived_acTL_crc_repairs": 1
+    },
+    "wave": {
+      "sample_rate": 48000,
+      "channels": 2,
+      "sample_frames": 192512,
+      "duration_seconds": 4.010666666666666,
+      "peak": 4026,
+      "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+    },
+    "vgm": {
+      "bytes": 396,
+      "scope": "PSG register log_not_audible_mix"
+    }
+  },
+  "boundaries": [
+    {
+      "index": 0,
+      "vdp_frame": 120
+    },
+    {
+      "index": 1,
+      "vdp_frame": 360
+    }
+  ],
+  "screenshot_extra_frames": 1,
+  "closed_at": 1791636117.0408592,
+  "cleanup": {
+    "sandbox_exited": true,
+    "xvfb_exited": true
+  },
+  "files": {
+    "debugger.log": {
+      "sha256": "bee9c613920797106756030dc09dbee11d74bc6ed0679280cfbaf50dfb446e88",
+      "bytes": 10684
+    },
+    "debugger_commands.txt": {
+      "sha256": "aed448f122a00f6d40f3d93b3926cfde722621cde4e175c387cf10b61985eb06",
+      "bytes": 2468
+    },
+    "xvfb.log": {
+      "sha256": "ea57a484b99c204ac15be199964f1d70c148210d7ccb0b40e5bc6f91ede9ead0",
+      "bytes": 1286
+    },
+    "diagnostics_source.py": {
+      "sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+      "bytes": 13162
+    },
+    "adapter_source.py": {
+      "sha256": "5ee935582409ce0de02643634f950419543f6e94f1525c21411b27c322772b3b",
+      "bytes": 27176
+    },
+    "sequence.json": {
+      "sha256": "179eee51ad16f2dcec38a1b1ddd7348e4abe75576933dc2997a5c1e62576dbe9",
+      "bytes": 218
+    },
+    "rom.sms": {
+      "sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+      "bytes": 32768
+    },
+    "media/decoded.apng": {
+      "sha256": "a537e998618d8cdf90f1906b33bbddd5435a5daf629d966387ee269a97526be1",
+      "bytes": 865279
+    },
+    "media/native.vgm": {
+      "sha256": "03c887bcbef6438ef7d0dd25dd51fbcca584d07ed9935ed5d0da445c34b7b513",
+      "bytes": 396
+    },
+    "media/native.wav": {
+      "sha256": "c19f8578ec207a62b53488eae5156bbb41d3474429208c3e336816874c381cc7",
+      "bytes": 770092
+    },
+    "media/native.apng": {
+      "sha256": "35b1a3ef09a31a560a39aa13cee74157948420b419193f341740952ba944a99d",
+      "bytes": 865279
+    },
+    "screenshots/frame_20261010_094156.png": {
+      "sha256": "f1c02d95f8cc793fb348dd2c271bcab51191f8dd8a91fa8be506413ce2e1f456",
+      "bytes": 2551
+    },
+    ".config/blastem/blastem.cfg": {
+      "sha256": "e99ee32ab75324b1f2f1891f73731d53555f88938e960f75f902ff5d7ea20010",
+      "bytes": 1155
+    },
+    "snapshots/001/decoded_views.json": {
+      "sha256": "2a5da9ecdae81498eceeaa7f895139fa235c9d28e431a6ab2f7e7f3d593f636c",
+      "bytes": 560
+    },
+    "snapshots/001/name_table_unscrolled.png": {
+      "sha256": "c5c16ad16846fbfbdad98b0244ac41cd864052252f01272a734cf49103064b72",
+      "bytes": 2223
+    },
+    "snapshots/001/tiles_palette_1.png": {
+      "sha256": "c489b9519b90255999260fdc78e9adef98a275630718b65271744284528f2e2b",
+      "bytes": 3863
+    },
+    "snapshots/001/tiles_palette_0.png": {
+      "sha256": "c1c01caad6cb3f8be835f14c4635984ee80f27e2ad9c5fbd427428e72b33c741",
+      "bytes": 4178
+    },
+    "snapshots/001/palette_sms.png": {
+      "sha256": "ef13597e2eafba7ceba49366b439c11f569d5104403d3517d38cf2357ae57f3a",
+      "bytes": 265
+    },
+    "snapshots/001/psg_volume.bin": {
+      "sha256": "56b5139401f2e3cec8c784fce9530858e7d99ed1663781696698c52cdc1c7aab",
+      "bytes": 4
+    },
+    "snapshots/001/psg_frequency.bin": {
+      "sha256": "4347a715da07250f5f2b02185000c1c1904ce172fc0e6e12923da4b9107bd4ee",
+      "bytes": 8
+    },
+    "snapshots/001/vdp_regs.bin": {
+      "sha256": "bf9a41ebca5ddc5fd6a89a242612a447ba80c6cf7289c52dab30613d4141a643",
+      "bytes": 11
+    },
+    "snapshots/001/cram_internal.bin": {
+      "sha256": "5d423ae1e2c00a2ca4d08e90261f2c715cdd5721a2b9f56182b15f2949154e3c",
+      "bytes": 64
+    },
+    "snapshots/001/vram.bin": {
+      "sha256": "c50b25e7abcd698877728783dcc7ddd6f274b2836ab764394f7aa5b06ac242df",
+      "bytes": 16384
+    },
+    "snapshots/001/ram.bin": {
+      "sha256": "9a3b31cbf3bbc18f30720397985dd553b5864e81177560f5707730a21ab6c058",
+      "bytes": 8192
+    },
+    "snapshots/000/decoded_views.json": {
+      "sha256": "2a5da9ecdae81498eceeaa7f895139fa235c9d28e431a6ab2f7e7f3d593f636c",
+      "bytes": 560
+    },
+    "snapshots/000/name_table_unscrolled.png": {
+      "sha256": "c5c16ad16846fbfbdad98b0244ac41cd864052252f01272a734cf49103064b72",
+      "bytes": 2223
+    },
+    "snapshots/000/tiles_palette_1.png": {
+      "sha256": "2f1a135af5069c87a9ba379109aa3b2c61934b9ba2f0498882b3bc4760679f38",
+      "bytes": 3841
+    },
+    "snapshots/000/tiles_palette_0.png": {
+      "sha256": "fadaed92bb03fac70aec82e6e7f6704a96e8adfeb768ad588f4e3ab94d2d8e5a",
+      "bytes": 4160
+    },
+    "snapshots/000/palette_sms.png": {
+      "sha256": "ef13597e2eafba7ceba49366b439c11f569d5104403d3517d38cf2357ae57f3a",
+      "bytes": 265
+    },
+    "snapshots/000/psg_volume.bin": {
+      "sha256": "d857d12b010037559771aa29b78dc2548624f89da1fd50d77dbbb00195cbb289",
+      "bytes": 4
+    },
+    "snapshots/000/psg_frequency.bin": {
+      "sha256": "fc0f7d58cf59a9cb56645ea940b25b0b9bc8b973994b7fae25558e9ff3507ce3",
+      "bytes": 8
+    },
+    "snapshots/000/vdp_regs.bin": {
+      "sha256": "71f231c2e91ab6f9a809a8a4b4701e3c8b62328745fdca5eae1f58a3a21c3f35",
+      "bytes": 11
+    },
+    "snapshots/000/cram_internal.bin": {
+      "sha256": "5d423ae1e2c00a2ca4d08e90261f2c715cdd5721a2b9f56182b15f2949154e3c",
+      "bytes": 64
+    },
+    "snapshots/000/vram.bin": {
+      "sha256": "980f6c0cb63d4e098e162bc9bdc75f61186ae57c43bd9c8a4359a59ea7b6bcf4",
+      "bytes": 16384
+    },
+    "snapshots/000/ram.bin": {
+      "sha256": "f465bf3e8614ed3bb4e21432e6d8149bf2452904b7f86c82cd9270d097614109",
+      "bytes": 8192
+    },
+    "cache/mesa_shader_cache/index": {
+      "sha256": "a2039164b27fdb5bbc843ba67ab7ac7d613b9ed7d27c239d1f18c29e8f669fe6",
+      "bytes": 2097160
+    },
+    "cache/mesa_shader_cache/marker": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "cache/mesa_shader_cache/fe/66975fa5b7b0c9d3597a98499973b1fa2a4d51ce5697226542fe2b11f0924b": {
+      "sha256": "7ab3e9277412d980333cbb7dda3362439752d263bcc7b029ee87a46ef58925f7",
+      "bytes": 1594
+    },
+    "cache/mesa_shader_cache/6f/33de361c6272380ec4dd5e2a0b015797d8ae63d567e6261cdd1c9406ab8ad7": {
+      "sha256": "12c08e3eefee0b1efaa921b0f987578ae3ceb0c93f1fc3d75dd2c10893047237",
+      "bytes": 3326
+    },
+    "cache/mesa_shader_cache/30/bca1ec9159171aaeeb4f83727b03f207035e691562ee0ab065c4882f1590d7": {
+      "sha256": "0d71d40f764e2debcb937998fa270ee89d1cbb52695989b500711e13549580e6",
+      "bytes": 1006
+    },
+    "cache/mesa_shader_cache/fc/fce4d572acf9feed11d9ed0bd3c69b2177f0bfc5b406a4e8e0b09fdef80474": {
+      "sha256": "60bc5183486ebc7170b0316d9a3ee7f41cbd011a32f876ef54e4fba01dccfb11",
+      "bytes": 1185
+    },
+    "cache/mesa_shader_cache/68/bc874ac80573a8a53b2b891e4734710ce8cc293dd81365115b0a398c74e9d9": {
+      "sha256": "09393088d0ac43f39f0577d374e5da792a9e2cfd01cd567bd2c87015ea7cbf0f",
+      "bytes": 693
+    },
+    "cache/mesa_shader_cache/b0/43eb044c7a1027e558615329751de372d4c5170aeefcc1732180a5c1e0931c": {
+      "sha256": "4de775ba6e27b33dec766243426248738d9b171c41becc52c113a99c19e07e12",
+      "bytes": 697
+    },
+    "cache/mesa_shader_cache/ce/6ac748de7c1bfd507cb96930fb606efc704b39f103074c8cb3c023538a5b90": {
+      "sha256": "0a474dad422fbedc78892cb76cf33da899ddbcba7ea6c2540c364d6d89131966",
+      "bytes": 693
+    },
+    "cache/mesa_shader_cache/df/c3ee3379c53feb904ad63f5997e1bad198750ebda62ebc921c971e9ea83ae9": {
+      "sha256": "8177788ea83b52637bd6370c35b8a655e970e37c04202b1b399c33d107de6991",
+      "bytes": 696
+    },
+    "cache/mesa_shader_cache/1e/75b51644e0b494eebc54cb72dfaa5dc067a05eb2643e760744553cbc1c2def": {
+      "sha256": "a087481864b2d19eb68f2c4db40d50fede64bad2fa73cf68b905aebbf8891881",
+      "bytes": 694
+    },
+    "cache/mesa_shader_cache/12/9edda84090d12614621f868e3e508f975d9470f8a9cbbf3d5b5375fd5bee67": {
+      "sha256": "c4a01722085547b2ada899a1fd2a1303bc05bb9f0e211156a23f3c3c8de7a3c3",
+      "bytes": 693
+    },
+    "cache/mesa_shader_cache/40/cf50288c1b60a43991b237c24ceef81a805fd09c7139c54cf9411a3592b39a": {
+      "sha256": "5152a7bcf5a313837416d830d060e83827c32e7c406415610a5a10dbe043b6e7",
+      "bytes": 693
+    },
+    "cache/mesa_shader_cache/9a/e9319e0c5151b65dc334eafb717ffcb9f23e3c5b6cf6377fb57a5b10de501d": {
+      "sha256": "e79d6a308a10e64a2dbd48f2e887e95c7277401918cf734a2de656e3116fc868",
+      "bytes": 695
+    },
+    "cache/mesa_shader_cache/ec/ff9086b5d5099017bbdd4d767285f7cea07daa23d3305855720eaedd02bd62": {
+      "sha256": "b9513915a73f4b62986eb936e7d425e6e8be80eeb9651750619317f98d8af302",
+      "bytes": 436
+    },
+    "cache/mesa_shader_cache/60/87ba49ade817fefe5a298fbd05e95906a2010d8455401fdbba1473e78e3282": {
+      "sha256": "1015b6b9dcd5a8fef94628591c7292cf367ccdae612049925d77da2e8412fb18",
+      "bytes": 461
+    }
+  }
+}

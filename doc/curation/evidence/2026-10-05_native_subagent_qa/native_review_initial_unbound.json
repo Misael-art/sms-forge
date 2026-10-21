@@ -1,0 +1,68 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "producer": "/root",
+  "reviewer": "native QA workers: runtime/visual/audio",
+  "status": "passed",
+  "claim_ceiling": "independent_quality_review_only",
+  "domains": [
+    "gameplay",
+    "art",
+    "audio"
+  ],
+  "execution_mode": "isolated_native_subagents",
+  "artifacts": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/run_e5eed07c9298431e97bdbdc93eea955e/report.json",
+      "sha256": "9831cd2ce09a92bf64f3e1fbf3bac4f5276a8410121eea623f002b4b874b82b9",
+      "observed_sha256": "9831cd2ce09a92bf64f3e1fbf3bac4f5276a8410121eea623f002b4b874b82b9"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/report.json",
+      "sha256": "52ed58a7f01282f95354e06466c6474401d15303a26ec7dd871f7de50909b136",
+      "observed_sha256": "52ed58a7f01282f95354e06466c6474401d15303a26ec7dd871f7de50909b136"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/report.json",
+      "sha256": "73be0f693a15fe2769e0589580fe4ecdc26f5fe573eba71e495b05038980272a",
+      "observed_sha256": "73be0f693a15fe2769e0589580fe4ecdc26f5fe573eba71e495b05038980272a"
+    }
+  ],
+  "session_reports": [
+    {
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/request.json",
+        "sha256": "ff20976845366abbe6ed371192137bd186b97e2f335d6040c6d4338bb455179d"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/run_e5eed07c9298431e97bdbdc93eea955e/report.json",
+        "sha256": "9831cd2ce09a92bf64f3e1fbf3bac4f5276a8410121eea623f002b4b874b82b9"
+      }
+    },
+    {
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/request.json",
+        "sha256": "73e3f18a99c446ec5c04715cd6369f382b95a685b7f0f846e7589a67c4e6f510"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/report.json",
+        "sha256": "52ed58a7f01282f95354e06466c6474401d15303a26ec7dd871f7de50909b136"
+      }
+    },
+    {
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/request.json",
+        "sha256": "c2019e56581b06adb52261dbc70e560617b2a9aa5174566673fac0751d25af30"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/report.json",
+        "sha256": "73be0f693a15fe2769e0589580fe4ecdc26f5fe573eba71e495b05038980272a"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "kind": "opportunity",
+      "summary": "assigned diagnostic control tests, title samples and private audio signal only; no full gameplay/artistic/music/FPS approval"
+    }
+  ]
+}

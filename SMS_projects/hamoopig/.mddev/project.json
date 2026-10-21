@@ -7,7 +7,13 @@
     "compiler": "sdcc>=4.2",
     "optimization": "code_size",
     "sdk": "devkitSMS",
-    "libs": ["SMSlib", "PSGlib"]
+    "libs": ["SMSlib", "PSGlib"],
+    "makesms_extra": [
+      "-pm",
+      "-mbank", "data/bank2.bin:0:1:2",
+      "-mbank", "data/bank3.bin:0:1:3",
+      "-mbank", "data/bank4.bin:0:1:4"
+    ]
   },
   "skeleton_version": 1,
   "doc_authority": [

@@ -1,0 +1,63 @@
+{
+  "schema": "mof_model_sheet_candidate_v1",
+  "character": "joe_musashi_shadow_dancer_sms",
+  "display_name": "Shinobi / Takashi (Shadow Dancer, Master System reference)",
+  "status": "superseded_by_owner_choice",
+  "owner_visual_review": "owner explicitly selected the v1 yellow-accent version on 2026-10-03",
+  "superseded_by": "joe_musashi_shadow_dancer_model_user_approved.png",
+  "asset_type": "concept_model_sheet",
+  "views": [
+    "three-quarter front fighting-ready stance",
+    "rear three-quarter turnaround"
+  ],
+  "artifact": "joe_musashi_shadow_dancer_model_v2_sms_palette.png",
+  "dimensions": {
+    "width": 1536,
+    "height": 1024,
+    "format": "indexed PNG with binary alpha",
+    "transparent_index": 0,
+    "game_sprite_scale_measured": false
+  },
+  "morphology": {
+    "class": "medium",
+    "description": "lean, agile, fully human; no bulky armor"
+  },
+  "palette": {
+    "source": "Shadow Dancer - The Secret Of Shinobi, Master System, Takashi - Standing Right",
+    "source_url": "https://www.smspower.org/Sprites/ShadowDancer-SMS",
+    "source_sha256": "ae6bb1dcb97dee95e917d2cde204da70d161f3c1bab3f3933a96f53fa9fc7639",
+    "mapping": "source RGB rounded to channel x85; black outline mapped to deep wine because index 0 is transparent",
+    "useful_colors": 7,
+    "colors": [
+      {"index": 1, "role": "outline_wine", "rgb": [85, 0, 0], "hex": "#550000"},
+      {"index": 2, "role": "skin_light", "rgb": [255, 170, 85], "hex": "#FFAA55"},
+      {"index": 3, "role": "gi_white", "rgb": [255, 255, 255], "hex": "#FFFFFF"},
+      {"index": 4, "role": "gi_gray_light", "rgb": [170, 170, 170], "hex": "#AAAAAA"},
+      {"index": 5, "role": "gi_gray_deep", "rgb": [85, 85, 85], "hex": "#555555"},
+      {"index": 6, "role": "sash_red", "rgb": [170, 0, 0], "hex": "#AA0000"},
+      {"index": 7, "role": "accent_yellow", "rgb": [255, 255, 0], "hex": "#FFFF00"}
+    ]
+  },
+  "cleanup": {
+    "dithering": false,
+    "grain": false,
+    "background": "transparent",
+    "alpha_threshold_percent": 80,
+    "palette_quantization": "nearest color, no dithering"
+  },
+  "provenance": {
+    "source_kind": "ai_generated_after_palette_and_costume_reference",
+    "external_pixels_copied": false,
+    "reference_role": "costume and color only"
+  },
+  "validation": {
+    "palette_generator": "PASS: 13 palette entries, 6-bit colors, <=15 useful colors",
+    "resource_gate": "PASS: audit_validate_resources.py accepted the indexed PNG against the character palette",
+    "animation_or_emulator_validation": "not applicable; concept model sheet, not runtime animation"
+  },
+  "production_notes": [
+    "This is a concept model sheet, not an animation sheet or production-ready fighter asset.",
+    "The candidate does not replace the existing Joe Musashi palette or change the GDD roster.",
+    "The generated source has two views; sprite height, hit geometry, scanlines and ROM binding remain unmeasured."
+  ]
+}

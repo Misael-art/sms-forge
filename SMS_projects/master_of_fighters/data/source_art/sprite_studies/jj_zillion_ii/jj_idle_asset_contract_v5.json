@@ -1,0 +1,80 @@
+{
+  "schema": "sms_sprite_study_contract_v1",
+  "asset_id": "jj_zillion_ii_idle_sms_96px_12f_v5",
+  "project": "master_of_fighters",
+  "asset_role": "source_art_sprite_study",
+  "character": "jj_zillion_ii",
+  "visual_reference": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+  "approval_scope": "Owner-approved concept v4 is the character design reference; this v5 cleanup is a sprite-study candidate awaiting its own visual review.",
+  "sheet": {
+    "columns": 4,
+    "rows": 3,
+    "frame_count": 12,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_px": [96, 96],
+    "sheet_px": [384, 288],
+    "ground_pivot_px": [48, 95],
+    "target_visible_height_px": 74,
+    "height_tolerance_px": [72, 76],
+    "visible_width_px": [61, 66],
+    "minimum_horizontal_margin_px": 15,
+    "normalization": "same scale and cell placement as v4; 13 individually identified head-edge outliers removed as transparency; no rescaling or pose edits"
+  },
+  "action": {
+    "state": "idle",
+    "facing": "right, three-quarter view",
+    "motion": "twelve distinct connected guard-idle keys with breathing, upper-body settling, a small hip-weight shift, hand/arm guard changes and shallow knee compression; no attack, step, jump or deep crouch",
+    "weapon_direction": "one Zillion pistol in the forward hand, muzzle always facing right",
+    "continuity": "same youthful lean morphology, scale, feet baseline, camera, costume and equipment as v4"
+  },
+  "design_lock": [
+    "young, lean and agile J.J.; avoid broad or bulky proportions",
+    "blue-violet rounded hair; bright magenta-red fitted uniform with high collar",
+    "small pale shoulder pads, dark navy diagonal harness and octagonal chest device",
+    "belt, one thigh holster, pale forearm guards, rounded knee guards, tall pale boots",
+    "exactly one compact Zillion pistol held forward; no second weapon, sword, backpack, cape, vehicle or transformed armor",
+    "Master System game defines identity, palette and game behavior; anime references inform garment construction only under the approved concept boundary"
+  ],
+  "palette": {
+    "manifest_character": "jj_zillion_ii",
+    "source": "doc/palettes_manifest.json",
+    "transparent_index": 0,
+    "maximum_useful_colors": 15,
+    "expected_useful_colors": 13,
+    "dither": "none",
+    "grain_or_texture": false,
+    "opaque_outline": "#000055"
+  },
+  "pixel_cleanup_profile": {
+    "minimum_opaque_component_px": 12,
+    "connectivity": 8,
+    "regions": [
+      {
+        "name": "hair_top_edge",
+        "anchor": "visible_bbox_top",
+        "offset_px": [0, 0],
+        "size_px": [96, 6],
+        "allowed_rgb": ["#000055", "#0000AA", "#5555FF", "#AAAAFF", "#FFFFFF"],
+        "purpose": "Reject attached skin-shadow or other off-material color flecks in the top hair cutout band."
+      }
+    ],
+    "manual_review": {
+      "native_size": true,
+      "nearest_neighbor_magnification": 8,
+      "inspect_each_frame_cutout": true,
+      "aaa_is_quality_target_not_delivery_claim": true
+    }
+  },
+  "gates": [
+    "audit_validate_resources.py --kind sheet --character jj_zillion_ii",
+    "audit_animation_semantics.py --manifest data/source_art/sprite_studies/jj_zillion_ii/jj_idle_semantics_v5.json",
+    "audit_sprite_cutout.py --image data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v5.png --contract data/source_art/sprite_studies/jj_zillion_ii/jj_idle_asset_contract_v5.json"
+  ],
+  "not_claimed": [
+    "owner approval of this sprite sheet",
+    "AAA quality certification",
+    "runtime sprite geometry or metasprite validity",
+    "scanline budget validity",
+    "ROM integration or emulator validation"
+  ]
+}

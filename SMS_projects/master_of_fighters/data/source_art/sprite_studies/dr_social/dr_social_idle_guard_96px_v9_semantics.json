@@ -1,0 +1,36 @@
+{
+  "schema": "animation_semantics_manifest_v1",
+  "character": "dr_ferdinand_social",
+  "asset_id": "dr_social_idle_guard_96px_12f_v9",
+  "required_states": [
+    "idle"
+  ],
+  "actions": [
+    {
+      "name": "idle",
+      "unique_frames_required": true,
+      "geometry_contract": {
+        "canvas_px": [96, 96],
+        "visible_width_px": [44, 84],
+        "visible_height_px": [72, 84],
+        "baseline_y_px": 86,
+        "baseline_tolerance_px": 2
+      },
+      "frames": [
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_00.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_01.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_02.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_03.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_04.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_05.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_06.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_07.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_08.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_09.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_10.png", "pivot": [48, 86]},
+        {"png": "data/source_art/sprite_studies/dr_social/frames_sms_v9/idle_11.png", "pivot": [48, 86]}
+      ]
+    }
+  ],
+  "notes": "Twelve distinct, connected cane-ready keys. Palette, contour, crop cleanup, and per-frame geometry are measured. This remains a source-art candidate pending owner review; ROM and runtime claims are out of scope."
+}

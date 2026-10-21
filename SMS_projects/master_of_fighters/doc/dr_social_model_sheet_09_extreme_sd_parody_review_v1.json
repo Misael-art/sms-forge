@@ -3,7 +3,7 @@
   "asset_id": "dr_social_model_sheet_09_extreme_sd_parody_v1",
   "producer": "codex_art_production",
   "asset": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
     "sha256": "e8d531701712f6b1479837b7caacf0b9e7798d81d21574d31883adc22b7a7e68",
     "kind": "character_concept_model_sheet",
     "dimensions_px": [
@@ -12,7 +12,7 @@
     ]
   },
   "source_evidence": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
     "sha256": "c98e7de775a1fc4e9b6329bf16f259998eb28d36633ac1bf62627740906e09a2"
   },
   "required_characters": [
@@ -31,14 +31,18 @@
     "equipment_and_weapon_continuity",
     "cross_view_consistency",
     "legibility_and_crop_integrity",
-    "human_traits_and_unapproved_details"
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
   ],
   "characters": [
     {
       "id": "dr_ferdinand_social",
       "references": [
         {
-          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
           "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
           "role": "approved layout reference"
         },
@@ -54,7 +58,7 @@
         },
         {
           "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
-          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
           "role": "initial style descriptor, unvalidated"
         }
       ],
@@ -121,6 +125,22 @@
         "human_traits_and_unapproved_details": {
           "status": "pending",
           "note": "Owner and independent visual review pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist/reference role and limits are recorded; independent review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "Distinctive style signature is registered; visual comparison pending."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace each posed limb from shoulder through hand; visual decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity/rendering coherence across views and distinction from neighboring styles; pending."
         }
       }
     }
@@ -132,5 +152,18 @@
     "approved": false
   },
   "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
-  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval"
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval",
+  "catalog_index": 9,
+  "artistic_style_reference": {
+    "named_artist": "Kinu Nishimura",
+    "reference_role_and_scope": "Capcom fighting-game illustration reference; no claim that she alone authored Pocket Fighter.",
+    "source_url": "https://www.capcom.co.jp/amusement/brands/capcomstore/2021/01/828/",
+    "attribution_status": "official_contextual_reference",
+    "style_signature": [
+      "expressive character acting",
+      "clear gesture and silhouette",
+      "playful facial exaggeration"
+    ],
+    "basis_and_limits": "Traits are an editorial visual analysis; use Pocket Fighter itself for SD proportions and animation."
+  }
 }

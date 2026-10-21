@@ -1,0 +1,140 @@
+{
+  "schema": "sms_animation_source_lineage_v1",
+  "character_id": "dr_social",
+  "status": "owner_approved_art_source_for_production_conversion",
+  "approval_scope": "visual source atlas for the nine basic animation sequences; converted indexed assets still require technical and pixel review",
+  "source": {
+    "file": "dr_social_basic_sequences_61f_owner_source_v1.png",
+    "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+    "dimensions_px": [
+      1323,
+      1189
+    ],
+    "origin": "owner-provided Codex attachment codex-clipboard-e8c7d650-0278-4099-a6e9-8481db4ef800.png",
+    "attachment_path_at_receipt": "/run/user/1000/codex-desktop/tmp/codex-clipboard-e8c7d650-0278-4099-a6e9-8481db4ef800.png"
+  },
+  "sequence_map": [
+    {
+      "id": "idle",
+      "pose_count": 4,
+      "frame_ids": [
+        "ID01",
+        "ID02",
+        "ID03",
+        "ID04"
+      ]
+    },
+    {
+      "id": "walk_forward",
+      "pose_count": 8,
+      "frame_ids": [
+        "WF01",
+        "WF02",
+        "WF03",
+        "WF04",
+        "WF05",
+        "WF06",
+        "WF07",
+        "WF08"
+      ]
+    },
+    {
+      "id": "walk_backward",
+      "pose_count": 8,
+      "frame_ids": [
+        "WB01",
+        "WB02",
+        "WB03",
+        "WB04",
+        "WB05",
+        "WB06",
+        "WB07",
+        "WB08"
+      ]
+    },
+    {
+      "id": "jump",
+      "pose_count": 8,
+      "frame_ids": [
+        "JU01",
+        "JU02",
+        "JU03",
+        "JU04",
+        "JU05",
+        "JU06",
+        "JU07",
+        "JU08"
+      ]
+    },
+    {
+      "id": "crouch",
+      "pose_count": 5,
+      "frame_ids": [
+        "CR01",
+        "CR02",
+        "CR03",
+        "CR04",
+        "CR05"
+      ]
+    },
+    {
+      "id": "dash_run",
+      "pose_count": 8,
+      "frame_ids": [
+        "DA01",
+        "DA02",
+        "DA03",
+        "DA04",
+        "DA05",
+        "DA06",
+        "DA07",
+        "DA08"
+      ]
+    },
+    {
+      "id": "knockdown_fall",
+      "pose_count": 8,
+      "frame_ids": [
+        "KF01",
+        "KF02",
+        "KF03",
+        "KF04",
+        "KF05",
+        "KF06",
+        "KF07",
+        "KF08"
+      ]
+    },
+    {
+      "id": "tech_roll_getup",
+      "pose_count": 8,
+      "frame_ids": [
+        "TR01",
+        "TR02",
+        "TR03",
+        "TR04",
+        "TR05",
+        "TR06",
+        "TR07",
+        "TR08"
+      ]
+    },
+    {
+      "id": "guard",
+      "pose_count": 4,
+      "frame_ids": [
+        "GU01",
+        "GU02",
+        "GU03",
+        "GU04"
+      ]
+    }
+  ],
+  "total_pose_count": 61,
+  "related_contract": "doc/dr_social_animation_contract_v1.json",
+  "distinct_from": {
+    "file": "data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.png",
+    "role": "mandatory two-pose conversion proof; not the source for this 61-pose animation"
+  },
+  "conversion_approval": "pixel_exact_emulicious_review_passed; human_art_review_and_scene_runtime_budget_pending"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "harness_plan_v1",
+  "tool": {
+    "name": "harness_orchestration",
+    "version": "1.1.0"
+  },
+  "coordinator_is_single_claim_owner": true,
+  "coordinator_is_single_promotion_owner": true,
+  "max_parallel": 3,
+  "lanes": [
+    "visual"
+  ],
+  "coordinator_tasks": [],
+  "worker_tasks": [
+    "grip"
+  ],
+  "rejected": [],
+  "tasks": [
+    {
+      "id": "grip",
+      "kind": "visual_production",
+      "artifact_ids": [
+        "ash.grip.weapon.r1"
+      ],
+      "write_paths": [
+        "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt",
+        "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json",
+        "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json"
+      ],
+      "assignment": "worker",
+      "lane": "visual"
+    }
+  ],
+  "claim_ceiling": "orchestration_diagnostic_only",
+  "artifact_registry_checked": true,
+  "artifact_registry_problem": null,
+  "preflight_only_not_filesystem_lock": true,
+  "ok": true
+}

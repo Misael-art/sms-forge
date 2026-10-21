@@ -10,6 +10,23 @@ Dois `Fighter` estáticos. FSM numérica herdada da tabela HAMOOPIG (subset).
 Hit/hurt/push boxes em pixels. Startup/active/recovery em frames.
 Projétil: um por lutador.
 
+### Contrato de núcleo MSSF2T v1
+
+- `SMS_getKeysStatus()` é lido uma vez por tick; `PORT_A` e `PORT_B` são
+  decodificados por comparação não nula enquanto ainda estão em 16 bits.
+- `ControlMode` é explícito por lutador: `CONTROL_HUMAN`, `CONTROL_CPU`,
+  `CONTROL_DUMMY` e `CONTROL_REPLAY`. Um modo humano neutro produz neutral,
+  nunca uma decisão de IA implícita.
+- O núcleo coleta `Contact` (atacante, defensor, identidade, dano e tipo) em
+  snapshot antes de aplicar qualquer dano. Um contato de cada instância é
+  consumido uma vez; dois contatos do mesmo tick podem produzir trade.
+- A resolução do round acontece depois de todos os contatos do tick. KO duplo,
+  timeout empatado e round empatado não recebem vitória silenciosa.
+- `reset_positions()` é um reset de estado completo: timers, janela de ataque,
+  guarda, histórico, projéteis, hitstop/shake, resultado e fila de stream.
+- O conteúdo final será compilado em `FighterDef`, `MoveDef`, `StageDef`,
+  `Ruleset` e `AudioCue`; o Z80 não interpreta JSON nem aloca memória.
+
 ## Poses
 8 folhas por lutador: idle, walk, punch, special, hit, KO, crouch, jump.
 `crouch`/`jump` vêm de `tools/author_pose_variants.py`, que remodela por faixa
@@ -85,6 +102,10 @@ gate `measure_worst_frame.py` (wrapper) no pior caso real — modo atração
 48 KB linear (B01). Se estourar: mapper Sega — ainda não. (Spec de migração:
 `doc/spec-banking.md`, preparada 2026-09-08, exige cerimônia de curadoria no
 `build_inner.py`.)
+
+O manifesto declara `optimization: code_size` enquanto a ROM permanece no
+limite linear. Isso é uma escolha de build, não uma prova de desempenho:
+M02 deve medir fps, fases e pior frame da ROM gerada antes de manter a opção.
 
 ## Áudio
 **Cada SFX no canal para o qual foi AUTORADO.** `make_psg_assets.py` gera

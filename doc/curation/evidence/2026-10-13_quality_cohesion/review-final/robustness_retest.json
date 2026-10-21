@@ -1,0 +1,23 @@
+[
+  {
+    "case": "unhashable_region_retest",
+    "actual": {
+      "region": [],
+      "target_fps": null,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "pass": true
+  },
+  {
+    "case": "invalid_UTF8_approval_retest",
+    "actual": [
+      "claim 'aaa' sem teto aprovado em doc/result.md:1"
+    ],
+    "pass": true
+  }
+]

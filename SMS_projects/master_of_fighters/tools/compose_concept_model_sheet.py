@@ -27,7 +27,7 @@ def font(name: str, size: int) -> ImageFont.FreeTypeFont:
 
 
 def draw_card(draw: ImageDraw.ImageDraw, box, title: str, body: str,
-              title_font, body_font, chips=()) -> None:
+              title_font, body_font, chips=(), line_spacing=24) -> None:
     x0, y0, x1, y1 = box
     draw.rounded_rectangle(box, radius=15, fill=CARD, outline=BORDER, width=2)
     draw.text((x0 + 17, y0 + 10), title.upper(), fill=INK, font=title_font)
@@ -35,7 +35,7 @@ def draw_card(draw: ImageDraw.ImageDraw, box, title: str, body: str,
     line_y = y0 + 40
     for line in lines:
         draw.text((x0 + 18, line_y), line, fill=(62, 68, 78), font=body_font)
-        line_y += 24
+        line_y += line_spacing
     if chips:
         chip_y = y1 - 25
         chip_x = x0 + 18
@@ -134,7 +134,7 @@ def main() -> int:
         draw_card(draw,
                   (grid_x[col], grid_y[row], grid_x[col] + card_w, grid_y[row] + card_h),
                   card["title"], card["body"], card_title_font, card_body_font,
-                  card.get("chips", ()))
+                  card.get("chips", ()), card.get("line_spacing", 24))
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(args.output, format="PNG", optimize=True)

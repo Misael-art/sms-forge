@@ -1,0 +1,261 @@
+{
+ "schema": "sms_derived_members_v1",
+ "generated": "t1_source_inventory",
+ "extraction_method": "python3 -m zipfile -e (sources untouched)",
+ "source_sha256": {
+  "ken/Ken_Majik_.zip": "b244ec9a105fa0131b37c075dc06b032a87cf0f839f46ec7054ac60d9bd6f14c",
+  "ryu/ryu.zip": "6db7e29d82fff1034e8c2ddab600e500fe8377ebdeef9b626fd6b580b812300d"
+ },
+ "characters": {
+  "ken": {
+   "zip": "data/source_mugen/ken/Ken_Majik_.zip",
+   "zip_members": 10,
+   "extracted": 10,
+   "case_collisions_missing": [],
+   "missing_on_disk": [],
+   "extra_on_disk": []
+  },
+  "ryu": {
+   "zip": "data/source_mugen/ryu/ryu.zip",
+   "zip_members": 23,
+   "extracted": 23,
+   "case_collisions_missing": [],
+   "missing_on_disk": [],
+   "extra_on_disk": []
+  }
+ },
+ "member_count": 33,
+ "members": [
+  {
+   "char": "ken",
+   "member": "ken8/end/sfakenend.def",
+   "path": "data/derived/ken/ken8/end/sfakenend.def",
+   "bytes": 693,
+   "sha256": "7c5abc0069f9bb508db550edfcec7cea412ae6c88bfba6b58d12d21cb0d5603a"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/end/sfakenend.sff",
+   "path": "data/derived/ken/ken8/end/sfakenend.sff",
+   "bytes": 837916,
+   "sha256": "614dca5b5a782d3eb4be7fb792eed36d1dc6d2f280cdd23a87e3c4b4bd2b08e4"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/ken.air",
+   "path": "data/derived/ken/ken8/ken.air",
+   "bytes": 34325,
+   "sha256": "b1f6c8d093dfd0849091035d7721a5748b59a476084bbc7ebf1ce2e1c6e7ed3a"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/ken.cmd",
+   "path": "data/derived/ken/ken8/ken.cmd",
+   "bytes": 25391,
+   "sha256": "728e914f4de8d6de84af7c572af1e811c03ef142e1b168e49057bc0ba0416e16"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/ken.cns",
+   "path": "data/derived/ken/ken8/ken.cns",
+   "bytes": 66613,
+   "sha256": "0b4593b7fec0e555c41b21a032a95ea5efc540b61f201d2504a409cd4d692755"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/ken.sff",
+   "path": "data/derived/ken/ken8/ken.sff",
+   "bytes": 547131,
+   "sha256": "911e21b778af3e7a93cd69fe6132b8e87fb1cacddac757ada5842a8cb1c2172c"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/ken.snd",
+   "path": "data/derived/ken/ken8/ken.snd",
+   "bytes": 943098,
+   "sha256": "4f0cfdc8a9b3dc825bbbfac14853d1d31ffa8cd5f9c64b92e8575fb131980521"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/ken.txt",
+   "path": "data/derived/ken/ken8/ken.txt",
+   "bytes": 1751,
+   "sha256": "00d3bc2c5b123cc22cc2ff69a07be9417eaf21981f3a86093dfa83d9331217ea"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/ken1.act",
+   "path": "data/derived/ken/ken8/ken1.act",
+   "bytes": 768,
+   "sha256": "89942f64862be6cb2bb0c094b2ab0ebb5cb411c06b7f1a6f9d69af64647687f2"
+  },
+  {
+   "char": "ken",
+   "member": "ken8/ken8.def",
+   "path": "data/derived/ken/ken8/ken8.def",
+   "bytes": 944,
+   "sha256": "fdbe2fb2498be72078232ca68f2cc74fd8347aac2c8304c626d5f15dc68f5fc8"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/Read Me.txt",
+   "path": "data/derived/ryu/ryu/Read Me.txt",
+   "bytes": 353,
+   "sha256": "0bd22eeffd7fe3bcaca95ff1636750dd7c4871d84b6c05728658f1ef5e0d83a6"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/Ryu01.ACT",
+   "path": "data/derived/ryu/ryu/Ryu01.ACT",
+   "bytes": 768,
+   "sha256": "f7fde83e2211297d903937b4d99528cdc2d9c6f68c89c44ad93dc26ee20bdf1c"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/Ryu02.ACT",
+   "path": "data/derived/ryu/ryu/Ryu02.ACT",
+   "bytes": 768,
+   "sha256": "cb1ec5287a20444aed7b0ac8d043d990ad15d308ebda47d113d1e401e819144b"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/Ryu03.ACT",
+   "path": "data/derived/ryu/ryu/Ryu03.ACT",
+   "bytes": 768,
+   "sha256": "5685cda4dada09c7c03e58793a9159afd883ed82a3522dc5335fbda8f74d07e2"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/Ryu04.ACT",
+   "path": "data/derived/ryu/ryu/Ryu04.ACT",
+   "bytes": 768,
+   "sha256": "81219726d8400e372ff68dd729fb908786a862022391f9b18eeccff78bc5dc8c"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/Ryu05.ACT",
+   "path": "data/derived/ryu/ryu/Ryu05.ACT",
+   "bytes": 768,
+   "sha256": "ab5c3bb509b575899c823bb3af031623f79c4e195c700de19445d5c1519b694d"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/Ryu06.ACT",
+   "path": "data/derived/ryu/ryu/Ryu06.ACT",
+   "bytes": 768,
+   "sha256": "129094f06f93a6afb817277bb8f60e3a18141d7032056954c04b46486e480d6d"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/readme.txt",
+   "path": "data/derived/ryu/ryu/readme.txt",
+   "bytes": 1378,
+   "sha256": "f7f5f0000ab85a1b2c05b637ae8b70ce00f06e8450c9e94d89c7581085252508"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu.air",
+   "path": "data/derived/ryu/ryu/ryu.air",
+   "bytes": 63741,
+   "sha256": "15285766e257aa4de6d1fc1092fb0eb248f0da16b52b34d9d3eeb9284ab65a3d"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu.cmd",
+   "path": "data/derived/ryu/ryu/ryu.cmd",
+   "bytes": 46165,
+   "sha256": "8954ff27a5813d073243de08704ca43ce0ac05fdc5f5f5a9c49f080837f8c3b9"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu.cns",
+   "path": "data/derived/ryu/ryu/ryu.cns",
+   "bytes": 40892,
+   "sha256": "2bc41c79085798695d41c1dfc7ac03f3cfd7f4a31dec136192936c9aa6132bd6"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu.def",
+   "path": "data/derived/ryu/ryu/ryu.def",
+   "bytes": 641,
+   "sha256": "edb3db7714b5fc47f34f702eb06c166bfec039cc96a270288a3f8050b40a01e8"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu.sff",
+   "path": "data/derived/ryu/ryu/ryu.sff",
+   "bytes": 1203860,
+   "sha256": "575dfc28fefa98b2d4c244cc5bc33ca189935f032006ab8a540ae218d93fcda8"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu.snd",
+   "path": "data/derived/ryu/ryu/ryu.snd",
+   "bytes": 2119836,
+   "sha256": "bd0e1fc32d1756c1ae7de0b5e5297361102c1a8e5f5fc5cad8c6ee9ccd8be7cd"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_a.ACT",
+   "path": "data/derived/ryu/ryu/ryu_a.ACT",
+   "bytes": 768,
+   "sha256": "889fcbb1d6da1846ef3a94e483715d26942259553942d0b0817c3ae01c9332e5"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_b.ACT",
+   "path": "data/derived/ryu/ryu/ryu_b.ACT",
+   "bytes": 768,
+   "sha256": "caf30d683226f09bc20207343da60709aaf8c4a605efc1f5eb87ac99d39a3e2e"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_c.ACT",
+   "path": "data/derived/ryu/ryu/ryu_c.ACT",
+   "bytes": 768,
+   "sha256": "af5324b6b540fba6ffc523f1957a1dcd2faa5ea7d03c6ee80119b664abab1cd1"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_d.ACT",
+   "path": "data/derived/ryu/ryu/ryu_d.ACT",
+   "bytes": 768,
+   "sha256": "3ec3c223fb0bc2acade7bfdb67b16a0cf636ae7515df848285c019021dcd8602"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_e.ACT",
+   "path": "data/derived/ryu/ryu/ryu_e.ACT",
+   "bytes": 768,
+   "sha256": "6521a7e7853f0f0d800963f9188ac77950aed049b9ea92b763aea8e0b2690ece"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_f.ACT",
+   "path": "data/derived/ryu/ryu/ryu_f.ACT",
+   "bytes": 768,
+   "sha256": "0f0e79e1370d101ef139c9ae718cfcf7b172b7898f326fff1349ba3922ae4260"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_h.cns",
+   "path": "data/derived/ryu/ryu/ryu_h.cns",
+   "bytes": 44572,
+   "sha256": "ec8992214be292fd3d479fd66a1a4f52e626a4e6a55031b0a8f1f98df1c61e1b"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_s.cns",
+   "path": "data/derived/ryu/ryu/ryu_s.cns",
+   "bytes": 27947,
+   "sha256": "501ac2c0cfdeb7aa4ac6731ff4767f49582a17a8a0156cdf996afe5c4044d79f"
+  },
+  {
+   "char": "ryu",
+   "member": "ryu/ryu_t.cns",
+   "path": "data/derived/ryu/ryu/ryu_t.cns",
+   "bytes": 7196,
+   "sha256": "6f88e1542f6be55e39a3f561ffa2e0dcc5132c51b9231fac970a142c467181b4"
+  }
+ ]
+}

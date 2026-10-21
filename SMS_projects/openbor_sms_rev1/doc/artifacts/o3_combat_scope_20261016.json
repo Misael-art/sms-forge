@@ -1,14 +1,14 @@
 {
   "schema": "openbor_sms_batch_boundary_v1",
   "artifact_kind": "openbor_sms_o3_combat_scope",
-  "revision": 1,
-  "supersedes": null,
-  "generated_at": "2026-10-16",
+  "revision": 2,
+  "supersedes": "out/evidence/post_m6_history/20261018_lote_a/objects/aaf3b5451495b4c2283065a9fc4e57523abbd60868eca258208eb0e8ffb9a87e",
+  "generated_at": "2026-10-18",
   "owner_project": "openbor_sms_rev1",
   "batch": "O3",
   "goal": "Combate do recorte TOWN1: movimento/profundidade, pulo/pouso, ataque->hit->dano->dor/queda/recuperacao, IA chase do inimigo e SFX PSG; arte por streaming (slots duplos empacotados + mapper Sega) e evidencia de input causal.",
   "gate": "Input causal (scripts de sessao em frames VDP), alvos moveis/em profundidades diferentes, reteste e FPS/pacing/worst-frame (plano linha 201; TDD eixos de hitbox/startup-active-recovery/hitstop/input-causal).",
-  "revision_scope": "Abertura do lote O3. Conjunto de combate medido (30 quadros x 2 lados = 60 poses), arquitetura de residencia decidida por medicao (residencia estatica impossivel -> streaming + mapper Sega, contingencia pre-autorizada pelo TDD), semantica de reacao de hit corrigida para pain2/fall2 (attack2 -> ATK_NORMAL2), fisica e IA pinadas no openbor.c 787b6770. Nenhuma mudanca visual foi reautorada: o recorte usa quadros do doador com proveniencia hash-bound (extract r2).",
+  "revision_scope": "Conciliação documental pós-M6 (Lote A), sem build/emulação: corrige vínculos depth, spec O3 e limites de pacing/IA; preserva fonte e histórico SHA-bound. M6 já commitado em da86de3, fechamento administrativo parcial; M7/M8 continuam pendentes, sem promoção.",
   "authority": {
     "plan": {
       "path": "doc/planejamento/openbor_sms/01-plano-openbor-sms.md",
@@ -27,8 +27,9 @@
     },
     "tdd": {
       "path": "doc/15-tdd.md",
-      "sha256": "beed3e5e07349f0912af35c1f269b1195a7494c201380144d9e4c5a087edee9d",
-      "clause": "Alvo inicial: 48 KB linear sem mapper. Se exceder: mapper Sega (paginas 16 KB, regs 0xFFFE/0xFFFF), codigo restrito a 32 KB, dados bancados a partir do bank 2"
+      "sha256": "0b9aec9d6e1a4b0627e1f6beab0cef79a349835490294672ab5f65e17d396d24",
+      "clause": "Alvo inicial: 48 KB linear sem mapper. Se exceder: mapper Sega (paginas 16 KB, regs 0xFFFE/0xFFFF), codigo restrito a 32 KB, dados bancados a partir do bank 2",
+      "note": "Hash do TDD conciliado pós-M6; valor anterior e contexto de abertura preservados no snapshot predecessor."
     },
     "pinned_reference": {
       "path": "/mnt/sdcard/Projects/Sgdk Forge/SGDK_projects/OpenBOR_Demo [VER.001] [SGDK 211] [GEN] [GAME] [BEAT_EM_UP]/rascunho/entrada_referencia/openbor_engine_787b6770/engine/openbor.c",
@@ -56,36 +57,136 @@
       "sha256": "b0eb624f4978d542c08513bf2aa2676da0a15c37d8879abdb9f58339be261385",
       "bytes": 32768,
       "content_end": "0x4DCA",
-      "free_bytes": 12853
+      "free_bytes": 12853,
+      "note": "Baseline de abertura O3 = O2 histórico b0eb624f, não a ROM atual M6; não reutilizar o path ativo para inferir bytes antigos."
     }
   },
   "measured_budgets": {
     "method": "scripts calibrados contra o O2 (reproduzem os 122 pares da conversao O2) + simulacao discreta da fisica por tick a 200 Hz; registros hasheados em data/generated/ e este artefato",
     "pose_set_final": {
-      "ax_frames": ["idle01", "walk01", "walk03", "a101", "a102", "a103", "a104", "a105", "jump01", "jump02", "pain01", "pain02", "fall01", "fall02", "fall03", "rise01"],
-      "long_frames": ["idle01", "walk01", "walk03", "a101", "a102", "a103", "a104", "pain01", "pain02", "fall01", "fall02", "fall03", "rise01", "death01"],
+      "ax_frames": [
+        "idle01",
+        "walk01",
+        "walk03",
+        "a101",
+        "a102",
+        "a103",
+        "a104",
+        "a105",
+        "jump01",
+        "jump02",
+        "pain01",
+        "pain02",
+        "fall01",
+        "fall02",
+        "fall03",
+        "rise01"
+      ],
+      "long_frames": [
+        "idle01",
+        "walk01",
+        "walk03",
+        "a101",
+        "a102",
+        "a103",
+        "a104",
+        "pain01",
+        "pain02",
+        "fall01",
+        "fall02",
+        "fall03",
+        "rise01",
+        "death01"
+      ],
       "frames_total": 30,
       "pose_sides_total": 60,
       "nota": "walk reduzido a walk01/walk03 (herdado O2); pulo do inimigo fora (IA chase nao pula); pain/fall v1 fora (attack2 -> pain2/fall2); pain03 do r1 fica extraido sem uso"
     },
     "canvas": {
-      "ax": {"dx0": -32, "dy0": -80, "w": 80, "h": 96, "cells": 60},
-      "long": {"dx0": -40, "dy0": -72, "w": 80, "h": 96, "cells": 60},
-      "anchor": [240, 204]
+      "ax": {
+        "dx0": -32,
+        "dy0": -80,
+        "w": 80,
+        "h": 96,
+        "cells": 60
+      },
+      "long": {
+        "dx0": -40,
+        "dy0": -72,
+        "w": 80,
+        "h": 96,
+        "cells": 60
+      },
+      "anchor": [
+        240,
+        204
+      ]
     },
     "cells_per_frame": {
-      "ax": {"idle01": 23, "walk01": 17, "walk03": 17, "a101": 23, "a102": 29, "a103": 25, "a104": 22, "a105": 21, "jump01": 22, "jump02": 19, "pain01": 23, "pain02": 20, "fall01": 21, "fall02": 20, "fall03": 19, "rise01": 18},
-      "long": {"idle01": 20, "walk01": 19, "walk03": 18, "a101": 20, "a102": 27, "a103": 28, "a104": 18, "pain01": 21, "pain02": 19, "fall01": 17, "fall02": 23, "fall03": 19, "rise01": 16, "death01": 19},
-      "max_cell": {"n": 29, "frame": "ax/a102"}
+      "ax": {
+        "idle01": 23,
+        "walk01": 17,
+        "walk03": 17,
+        "a101": 23,
+        "a102": 29,
+        "a103": 25,
+        "a104": 22,
+        "a105": 21,
+        "jump01": 22,
+        "jump02": 19,
+        "pain01": 23,
+        "pain02": 20,
+        "fall01": 21,
+        "fall02": 20,
+        "fall03": 19,
+        "rise01": 18
+      },
+      "long": {
+        "idle01": 20,
+        "walk01": 19,
+        "walk03": 18,
+        "a101": 20,
+        "a102": 27,
+        "a103": 28,
+        "a104": 18,
+        "pain01": 21,
+        "pain02": 19,
+        "fall01": 17,
+        "fall02": 23,
+        "fall03": 19,
+        "rise01": 16,
+        "death01": 19
+      },
+      "max_cell": {
+        "n": 29,
+        "frame": "ax/a102"
+      }
     },
     "rom_blocks": {
-      "cells_both_sides": {"ax_left": 339, "ax_right": 339, "long_left": 284, "long_right": 284, "total": 1246},
+      "cells_both_sides": {
+        "ax_left": 339,
+        "ax_right": 339,
+        "long_left": 284,
+        "long_right": 284,
+        "total": 1246
+      },
       "blocos_por_pose_sem_dedup_bytes": 79744,
-      "pool_dedup_ambos_lados": {"pares": 1135, "raw_bytes": 72640, "packbits_bytes": 48567, "packbits_ratio": 1.5},
-      "pool_so_left": {"pares": 569, "bytes": 36416}
+      "pool_dedup_ambos_lados": {
+        "pares": 1135,
+        "raw_bytes": 72640,
+        "packbits_bytes": 48567,
+        "packbits_ratio": 1.5
+      },
+      "pool_so_left": {
+        "pares": 569,
+        "bytes": 36416
+      }
     },
     "vram_plan_o3": {
-      "sprite_slots": [0, 231],
+      "sprite_slots": [
+        0,
+        231
+      ],
       "sprite_tiles": 232,
       "bg_base": 232,
       "bg_slots": 192,
@@ -106,8 +207,19 @@
     },
     "sprite_lines": {
       "limite": 8,
-      "ator_sozinho_max": {"ax": 8, "long": 9, "nota": "long fall03 e death01 tem 1 linha com 9 celulas; ax a102/fall01-03 = 8 (no limite)"},
-      "pior_par": {"max": 17, "caso": ["ax a102", "long fall03", "dz=24"]},
+      "ator_sozinho_max": {
+        "ax": 8,
+        "long": 9,
+        "nota": "long fall03 e death01 tem 1 linha com 9 celulas; ax a102/fall01-03 = 8 (no limite)"
+      },
+      "pior_par": {
+        "max": 17,
+        "caso": [
+          "ax a102",
+          "long fall03",
+          "dz=24"
+        ]
+      },
       "licao_o2": "contagem de linhas em C no runtime custava ~1 frame por volta no SDCC (comentario do main.c O2); O3 consulta/soma perfis pre-computados, nunca conta por linha"
     }
   },
@@ -149,31 +261,31 @@
     },
     {
       "id": "D6-ia-chase",
-      "decision": "Inimigo subtype chase: facing = (alvo.x > inimigo.x); velocidade maxima = speed.x * 1.5 = 75 px/s, dividida em x/z proporcional a |dx|,|dz|; ataque1 quando |dx| <= 40 (range do anim) e |dz| <= 15; cadencia de decisao (throttle) a pinar no fonte (M5). Anim up/down fora (walk em todas as direcoes, herdado do O2 para o jogador e estendido ao inimigo); sem pulo/grab/throw.",
+      "decision": "Baseline M6: O3_CHASE_Q8=0x0140 (320), O3_WALK_Q8=0x01AB (427); chase/jogador = 320/427 (~0.7494), com budget chase repartido por |dx|+|dz|. 1.5x da referência se aplica à base do inimigo (50->75 px/s), não à velocidade de Ax. Ataque com |dx|<=40 e |dz|<=15. Recarga O3_AI_THINK=12; ramo seguinte ao zero dá 13 chamadas livres/elegíveis entre decisões, sem claim de período sob outros estados.",
       "basis": "openbor.c arrow_move/SUBTYPE_CHASE l. 42490-42560; long.txt attack1 range 0 40; speed 5 -> 0.5 px/tick (min clamp 0.5)",
       "status": "pinned+adapted",
       "consequence": "alvos moveis do gate atendidos; scripts M6 exercitam aproximacao e ataque em profundidades diferentes"
     },
     {
       "id": "D7-velocidades",
-      "decision": "O3 adota as velocidades da fonte com acumuladores Q8.8: jogador 100 px/s (speed 10 /10 = 1.0 px/tick -> 0.5 px/tick de posicao; Q8.8 0x01AB/frame), inimigo chase ate 75 px/s (0x0140/frame). O piloto O2 rodava 1 px/frame (60 px/s) por constante de implementacao; a supersessao e declarada aqui e o pacing e re-medido no O3.",
+      "decision": "O3/M6 integra Q8.8: jogador 427/256 px por chamada de player_control elegível, chase 320/256 no budget x+z de move_toward; a 60 chamadas/s, 100.078125 e 75 px/s. Posição em IDLE/WALK é atualizada antes do gate de pose; animação da caminhada espera readiness. A frase histórica 1.6-1.7x mais lenta não tem janela discriminando posição/poses e não é medida aprovada de nenhum desses eixos. O2 1 px/frame é histórico b0eb624f.",
       "basis": "openbor.c CMD_MODEL_SPEED l. 16658-16666 (divisao por 10, clamp 0.5..30); integracao pos += v*100/gs; O2_WALK_SPEED=1 em inc/o2/level.h",
       "status": "decided",
       "consequence": "videos O2 permanecem validos como evidencia do piloto (nao sao superseded como registro); pacing O3 medido de novo (M6)"
     },
     {
       "id": "D8-streaming-e-uploads",
-      "decision": "Slots duplos por ator (2 x 29 celulas x 2 tiles = 116 tiles; 2 atores = 232). Upload de pose completa (maximo 1856 B) espalhado por VBlank na janela da pose corrente; slot escrito nunca e exibido (sem tearing); FSM segura 1 frame se a pose nao estiver pronta ('pose ready'). Patches byte-run intra-animacao (cadeias de ataque, janelas de 3 frames) ficam condicionados a medicao de throughput do M1.",
+      "decision": "Slots duplos por ator: 2 x 29 células x 2 tiles = 116 tiles; dois atores =232. Bloco máximo1856 B, slot não exibido recebe cópia; FSM espera readiness por quantos quadros forem necessários, não apenas1. M6: sub-commit64 B, budget compartilhado320 B/quadro (jogador primeiro), margens22/30. Registro de128 B/quadro descreve este caminho/carga; não prova serviço limitado por ator, publicação sem estado obsoleto, zero-tearing/glitch nem capacidade física universal.",
       "basis": "medicao de celulas (max 29 em ax/a102); orcamento de VBlank do O2 (upload espalhado); janelas de delay por animacao (attack 3 f por quadro; idle 5; walk 7; pain 5->30; jump 21; fall 999; rise 33)",
       "status": "decided",
-      "consequence": "M1 (laboratorio) mede bytes/frame reais de copia bancada->VRAM antes de decidir patches vs upload pleno; budget de VRAM 427/448"
+      "consequence": "M1 é histórico de mapper/cópia, não aprovação do pacing da cena. M6 relata contato+16q; vídeo dedicado60q termina ATTACK/frame4. Terminal/retorno elegível ao controle não medido. Cache/deltas/pré-carga/otimização e scheduler permanecem candidatos a comparar por SHA/carga sem promessa de ganho."
     },
     {
       "id": "D9-corte-por-banda",
-      "decision": "Corte de sprites por orcamento de 8/linha: politica consultada (nunca contada por linha no runtime, licao O2). Candidatos a escolher por medicao no M4: (a) contadores de banda de 8 linhas em RAM (24 B) somados a partir de perfis por pose + ordem de sacrificio por celula pre-computada; (b) mascara expandida por (pose do ator, bucket de z). Jogador tem prioridade total (max medido 8/linha); excedente sai do inimigo. long fall03/death01 sozinhos = 9/linha -> 1 celula cai sempre (drop estatico declarado no emit + revisao humana). Gate: audit_sprite_line_sim com manifesto da politica + audit_render_glitch + revisao; custo no worst-frame.",
+      "decision": "M4/M6 usa D9-a2 (scanline exata): tabela o3_ax_rows[32][6] em ROM + ec[6] u8 em RAM. Bandas de8 linhas foram refutadas na emissão. Varredura declarada48384 casos/0 violações e540 cross-checks. Pico legal8 após cortes não prova integridade da arte. Prioridade total de Ax e corte determinístico de Long; fall03/death01 solo9->8, uma célula omitida.",
       "basis": "medicao o3_lines (max por pose; pior par 17); comentario O2 main.c (contagem em C ~1 frame/loop); O2 D10 (mascara pre-computada)",
       "status": "measured+decided",
-      "consequence": "a 'selecao x-aware' registrada como open item O2 e endereçada: o orcamento e por linha (independente de x); a escolha fina de qual celula cai e por prioridade artistica revisada, nao por contagem em runtime"
+      "consequence": "Visibilidade horizontal/ordem por profundidade e sacrifício artístico permanecem pendentes; seleção x-aware não foi encerrada por contar linhas. Slots fora da tela também entram na política conservadora. Audit_render_glitch global bloqueado até oráculo independente validado; revisão artística não inferida de legalidade SAT."
     },
     {
       "id": "D10-probe-v2",
@@ -191,7 +303,7 @@
     },
     {
       "id": "D12-escopo-herdado",
-      "decision": "Herdados do O2 sem mudanca: view crop 32..224, z [160,232], x 1:1, camera q8 follow, transparencia indice 0, paleta P1 (14 cores) e P0 (12 uteis), BG pelo dicionario de 192 tiles (painel town1, sem re-autoria), HUD 3 tiles, ordem de trabalho de cena.",
+      "decision": "Herdados do O2: view crop32..224, z[160,232], x1:1, câmera quantizada8px, P1 com14 cores e sprite índice0 transparente; P0 com12 códigos úteis e BG índice0 visível (inclusive tile BG selecionando P1). BG192 tiles e HUD3 permanecem; bases O3 são232 e424, total427/448; SAT reserva256 B em $3F00..$3FFF, sem pockets.",
       "basis": "O2 scope artifact (sha) + O2 arte/emissao hasheadas",
       "status": "pinned",
       "consequence": "emissao O3 reusa a cadeia O2 para BG/HUD (verificar bytes identicos no M4)"
@@ -205,19 +317,173 @@
     }
   ],
   "slice_contract": {
-    "cast": {"player": "ax", "enemy": "long", "hp_player": 100, "hp_enemy": 50},
-    "spawn": {"player": {"x": 50, "z": 180, "altitude": 200}, "enemy": {"x": 500, "z": 180, "altitude": 200}, "entry_drop": "fall de ~27 frames com as tabelas de fisica"},
-    "delays_ntsc": {"unit_ms": 10, "regra": "max(1, round(delay*60/100))", "idle": 5, "walk": 7, "attack_frame": 3, "attack_recovery": 9, "pain_stagger": 5, "pain_hold": 30, "jump_launch": 21, "fall_seq": 5, "fall_hold_frame": 1, "rise_lying": 33, "rise_up": 12, "death_cycle": "5/1,4/2,3/3,2/4,1/5 + 30 (delay 50)"},
-    "attack_boxes": {
-      "ax_attack1": {"frames": ["a101", "a102", "a103", "a104", "a105"], "box": [240, 142, 44, 62, 7, 0, 0, 0, 15, 15], "ativo": ["a102", "a103", "a104"], "fases": {"startup": 3, "active": 9, "recovery": 9}},
-      "long_attack1": {"frames": ["a101", "a102", "a103", "a104"], "box": [240, 158, 40, 46, 5, 0, 0, 0, 10, 15], "ativo": ["a102", "a103"], "fases": {"startup": 3, "active": 6, "recovery": 9}}
+    "cast": {
+      "player": "ax",
+      "enemy": "long",
+      "hp_player": 100,
+      "hp_enemy": 50
     },
-    "hit_rules": {"z_tolerance": 15, "next_hit_frames": 13, "um_hit_por_ativacao": true, "aereo_derruba": true, "solo_dor": "pain2", "morte": "hp<=0", "hitstop_frames": {"ax": 5, "long": 3}},
-    "physics_tables": {"jump_frames": 40, "jump_apex_px": 54, "jump_drift_px_s": 100, "fall_frames": 36, "fall_apex_px": 46, "fall_drift_px_frame": 2, "entry_drop_frames": 27, "q88": {"player_walk": "0x01AB", "enemy_chase": "0x0140"}},
-    "ia": {"subtype": "chase", "maxspeed_px_s": 75, "attack_range_x": 40, "attack_range_z": 15, "cadencia": "pinar M5"},
-    "vram": {"sprites": [0, 231], "bg": [232, 423], "hud": [424, 426], "total": 427, "budget": 448},
-    "rom": {"mapper": "sega128", "banks_0_1": "codigo+tabelas", "banks_2_6": "blocos", "bank_7": "reserva"},
-    "probe": {"py": "0xC7FD", "p2state": "0xC7FE", "p2z": "0xC7FF", "schema": "runtime_metrics_v2"}
+    "spawn": {
+      "player": {
+        "x": 50,
+        "z": 180,
+        "altitude": 200
+      },
+      "enemy": {
+        "x": 500,
+        "z": 180,
+        "altitude": 200
+      },
+      "entry_drop": "Tabela emitida O3_ENTRY_FRAMES=38; abertura ~27 preservada no histórico; duração real com espera de pose não inferida da tabela."
+    },
+    "delays_ntsc": {
+      "unit_ms": 10,
+      "regra": "max(1, round(delay*60/100))",
+      "idle": 5,
+      "walk": 7,
+      "attack_frame": 3,
+      "attack_recovery": 9,
+      "pain_stagger": 5,
+      "pain_hold": 30,
+      "jump_launch": 21,
+      "fall_seq": 5,
+      "fall_hold_frame": 1,
+      "rise_lying": 33,
+      "rise_up": 12,
+      "death_cycle": "5/1,4/2,3/3,2/4,1/5 + 30 (delay 50)"
+    },
+    "attack_boxes": {
+      "ax_attack1": {
+        "frames": [
+          "a101",
+          "a102",
+          "a103",
+          "a104",
+          "a105"
+        ],
+        "box": [
+          240,
+          142,
+          44,
+          62,
+          7,
+          0,
+          0,
+          0,
+          15,
+          15
+        ],
+        "ativo": [
+          "a102",
+          "a103",
+          "a104"
+        ],
+        "fases": {
+          "startup": 3,
+          "active": 9,
+          "recovery": 9
+        }
+      },
+      "long_attack1": {
+        "frames": [
+          "a101",
+          "a102",
+          "a103",
+          "a104"
+        ],
+        "box": [
+          240,
+          158,
+          40,
+          46,
+          5,
+          0,
+          0,
+          0,
+          10,
+          15
+        ],
+        "ativo": [
+          "a102",
+          "a103"
+        ],
+        "fases": {
+          "startup": 3,
+          "active": 6,
+          "recovery": 9
+        }
+      }
+    },
+    "hit_rules": {
+      "z_tolerance": 15,
+      "next_hit_frames": 13,
+      "um_hit_por_ativacao": true,
+      "aereo_derruba": true,
+      "solo_dor": "pain2",
+      "morte": "hp<=0",
+      "hitstop_frames": {
+        "ax": 5,
+        "long": 3
+      }
+    },
+    "physics_tables": {
+      "jump_frames": 40,
+      "jump_apex_px": 55,
+      "jump_drift_px_s": 100,
+      "fall_frames": 36,
+      "fall_apex_px": 46,
+      "fall_drift_px_frame": 2,
+      "entry_drop_frames": 38,
+      "q88": {
+        "player_walk": "0x01AB",
+        "enemy_chase": "0x0140"
+      }
+    },
+    "ia": {
+      "subtype": "chase",
+      "maxspeed_px_s": 75,
+      "attack_range_x": 40,
+      "attack_range_z": 15,
+      "cadencia": "recarga12; 13 chamadas livres/elegíveis entre decisões; não medido sob interrupções",
+      "chase_q8": 320,
+      "player_q8": 427,
+      "ratio_to_player": "320/427"
+    },
+    "vram": {
+      "sprites": [
+        0,
+        231
+      ],
+      "bg": [
+        232,
+        423
+      ],
+      "hud": [
+        424,
+        426
+      ],
+      "total": 427,
+      "budget": 448,
+      "sat_base": "0x3F00",
+      "sat_reserved_bytes": 256,
+      "name_table_base": "0x3800",
+      "name_table_bytes": 1792,
+      "reg6": "0xFB",
+      "margin_tiles": 21,
+      "pockets": []
+    },
+    "rom": {
+      "mapper": "sega128",
+      "banks_0_1": "codigo+tabelas",
+      "banks_2_6": "blocos",
+      "bank_7": "reserva"
+    },
+    "probe": {
+      "py": "0xC7FD",
+      "p2state": "0xC7FE",
+      "p2z": "0xC7FF",
+      "schema": "runtime_metrics_v2"
+    }
   },
   "engine_plan": {
     "modules": {
@@ -228,14 +494,54 @@
       "lab": "SMS_projects/_laboratorio/mapper_upload_probe: ROM 128 KB com BANK2+, SMS_mapROMBank, copia OUTI bancada->VRAM, probe de vline/vovf, medicao de bytes/frame"
     },
     "milestones": [
-      {"id": "M1", "nome": "smoke de mapper + uploader (laboratorio)", "gate": "ROM 128 KB roda no Emulicious; copia bancada->VRAM medida (bytes/frame); decisao patches vs upload pleno", "evidencia": "ROM + probe + registro"},
-      {"id": "M2", "nome": "IR de animacao no frontend", "gate": "parser de anims com spans/origem + testes + self-check", "evidencia": "record + testes"},
-      {"id": "M3", "nome": "conversao de arte (60 poses)", "gate": "audit_validate_resources + luma + proveniencia", "evidencia": "PNGs + record de arte"},
-      {"id": "M4", "nome": "emissao (blocos, bancos, tabelas, cortes)", "gate": "audit_sprite_line_sim (politica) + measure_vram_map + tilemap bounds", "evidencia": "inc/o3/*.h + record de emissao"},
-      {"id": "M5", "nome": "runtime (FSM/IA/hit/uploader/probe)", "gate": "build + boot + probe v2 + worst-frame", "evidencia": "ROM + build record + probe"},
-      {"id": "M6", "nome": "evidencia de input causal e pacing", "gate": "scripts emulator_input (attack->hp, jump->py, knockdown->rise, profundidades, morte, IA), capture_video, FPS/pacing, selos, claims, glitch/fidelidade", "evidencia": "sessoes + videos + relatorios"},
-      {"id": "M7", "nome": "PSG (SFX)", "gate": "capture_audio + audit_audio + psg_quality + channel binding + proveniencia", "evidencia": "wavs, manifests, captura"},
-      {"id": "M8", "nome": "docs + curadoria", "gate": "memory bank, spec-cenas (orcamento medido), TDD, revisao do escopo, learning capture", "evidencia": "docs + registry"}
+      {
+        "id": "M1",
+        "nome": "smoke de mapper + uploader (laboratorio)",
+        "gate": "ROM 128 KB roda no Emulicious; copia bancada->VRAM medida (bytes/frame); decisao patches vs upload pleno",
+        "evidencia": "ROM + probe + registro"
+      },
+      {
+        "id": "M2",
+        "nome": "IR de animacao no frontend",
+        "gate": "parser de anims com spans/origem + testes + self-check",
+        "evidencia": "record + testes"
+      },
+      {
+        "id": "M3",
+        "nome": "conversao de arte (60 poses)",
+        "gate": "audit_validate_resources + luma + proveniencia",
+        "evidencia": "PNGs + record de arte"
+      },
+      {
+        "id": "M4",
+        "nome": "emissao (blocos, bancos, tabelas, cortes)",
+        "gate": "audit_sprite_line_sim (politica) + measure_vram_map + tilemap bounds",
+        "evidencia": "inc/o3/*.h + record de emissao"
+      },
+      {
+        "id": "M5",
+        "nome": "runtime (FSM/IA/hit/uploader/probe)",
+        "gate": "build + boot + probe v2 + worst-frame",
+        "evidencia": "ROM + build record + probe"
+      },
+      {
+        "id": "M6",
+        "nome": "evidencia de input causal e pacing",
+        "gate": "scripts emulator_input (attack->hp, jump->py, knockdown->rise, profundidades, morte, IA), capture_video, FPS/pacing, selos, claims, glitch/fidelidade",
+        "evidencia": "sessoes + videos + relatorios"
+      },
+      {
+        "id": "M7",
+        "nome": "PSG (SFX)",
+        "gate": "capture_audio + audit_audio + psg_quality + channel binding + proveniencia",
+        "evidencia": "wavs, manifests, captura"
+      },
+      {
+        "id": "M8",
+        "nome": "docs + curadoria",
+        "gate": "memory bank, spec-cenas (orcamento medido), TDD, revisao do escopo, learning capture",
+        "evidencia": "docs + registry"
+      }
     ],
     "tests": "unit (frontend/emissao) + gates da tabela do AGENTS.md aplicaveis ao O3 + sessoes de emulador isoladas para evidencia"
   },
@@ -255,25 +561,142 @@
       "pool_pairs": 1135,
       "pool_raw_bytes": 72640,
       "packbits_bytes": 48567,
-      "single_line_max": {"ax": 8, "long": 9},
+      "single_line_max": {
+        "ax": 8,
+        "long": 9
+      },
       "worst_pair": 17
     },
     "m6_runtime": {
       "method": "sessoes isoladas frame-paced (session_bridge.isolated) com journal de cada read (bytes de RAM = traco causal); ROM unica",
       "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
-      "attack": {"session": "3536672de61245eea8a077c3acbdca04", "hit1_frames": 16, "dmg": 7, "guard_after": 12, "hit2_frames": 25, "hp": "50->43->36", "vovf": 0},
-      "jump": {"session": "7c0d84bc012244719043bf7ddd3d93a6", "maxalt": 55, "air_frames": 48, "land_frame": 62, "dx": 65, "vovf": 0},
-      "knockdown": {"session": "a64b276fc41244e2b5fe13370385adfe", "toss_frame": 32, "alt": 2, "hp": "100->95", "rise_frame": 84, "maxalt": 51, "vovf": 0},
-      "depth": {"session": "f41e8c8c089042be85fd1c9643900043", "whiff_dz": 41, "aligned_dz": 6, "hit_frames": 19, "hp": "43->36", "vovf": 0},
-      "death": {"session": "14fee45458c74fc8bf539b19898a7db2", "hits": 8, "hp_sequence": [50, 43, 36, 29, 22, 15, 8, 1, 0], "dead": 1, "death_state_frame": 114, "hud_hde": 0, "vovf": 0},
-      "target_z": {"session": "ac5b26fc6f7b418ba212adafb26dc115", "player_z": "180->221", "enemy_z": "185->206", "enemy_x": "272->231", "verdict": "pass"},
-      "attack_video": {"session": "6083d677112e4c4a9356c9034c6867d5", "hp_before": 50, "hp_after": 43, "frames": [284, 344], "distinct_frames": 37, "journal_sha256": "cb32b6abcc6cee210c93544b73f84bccf3c4e5442c40816d4bcd1350581d659f"},
-      "pacing": {"attack_hit_frames": 16, "attack_hit_seconds": 0.27, "attack_full_frames": "~60 (5 poses; o uploader D8 segura o avanco, nao e o somatorio nominal de 21 quadros)", "guard_frames": 13, "pain_frames": "~85", "walk_ratio": "1.6-1.7x mais lenta que a fonte", "toss_small": "alt 2 por windup de 15 q; TOSS exige alt>0 ou dead", "player_priority": "o jogador zera o budget do inimigo enquanto sobe pose; usado de proposito no knockdown"},
-      "fps": {"tool": "measure_runtime_probe", "windows_s": 8, "janelas": 3, "fps": [59.48, 59.66, 59.78], "verdict": "PASS"},
-      "worst_frame": {"tool": "measure_worst_frame", "frames": 3000, "vovf_delta": 0, "vline_min": 202, "verdict": "PASS"},
-      "stress_input": {"session": "d5639465181a463a926f0e01f4d7af46", "input": "RIGHT30 A2 idle20 LEFT30 B2 idle20 x30", "rom_frame": 3230, "vovf": 0, "done": 1, "verdict": "PASS"},
-      "render": {"still_session": "598625a464dc491ab18f10d55ca65588", "still_pose": "ax_a105_right", "fidelity": "100.0% em [92,68]", "fidelity_anchor": "(xh-32, base-80)", "semantic_gate": "PASS (paleta 100%, 18 cores, nao-reuso)"},
-      "render_glitch": {"status": "blocked", "reason": "exige PNGs legais 256x192 de referencia; a composicao O3 usa stream de slots + corte por linha + coluna fatiada e nao existe renderizador full-frame validado. Gerar imagens 'legais' com um segundo renderizador nao seria evidencia. Cobertura atual: audit_render_fidelity + screenshot_semantic_gate + motion timeline dos videos."}
+      "attack": {
+        "session": "3536672de61245eea8a077c3acbdca04",
+        "hit1_frames": 16,
+        "dmg": 7,
+        "guard_after": 12,
+        "hit2_frames": 25,
+        "hp": "50->43->36",
+        "vovf": 0
+      },
+      "jump": {
+        "session": "7c0d84bc012244719043bf7ddd3d93a6",
+        "maxalt": 55,
+        "air_frames": 48,
+        "land_frame": 62,
+        "dx": 65,
+        "vovf": 0
+      },
+      "knockdown": {
+        "session": "a64b276fc41244e2b5fe13370385adfe",
+        "toss_frame": 32,
+        "alt": 2,
+        "hp": "100->95",
+        "rise_frame": 84,
+        "maxalt": 51,
+        "vovf": 0
+      },
+      "depth": {
+        "session": "f41e8c8c089042be85fd1c9643900043",
+        "whiff_dz": 41,
+        "aligned_dz": 6,
+        "hit_frames": 19,
+        "hp": "43->36",
+        "vovf": 0,
+        "whiff_session": "0b271ce0621a4adc914ab5c4d37be07b",
+        "aligned_session": "f41e8c8c089042be85fd1c9643900043",
+        "whiff_artifact": "out/evidence/m6/depth_0b271ce0621a4adc914ab5c4d37be07b.json",
+        "aligned_artifact": "out/evidence/m6/depth_f41e8c8c089042be85fd1c9643900043.json",
+        "successor_linkage": "doc/artifacts/post_m6_depth_linkage_20261018.json",
+        "status": "historical_linkage_qualified_cleanup_receipt_incomplete",
+        "limits": "Campo whiff_* do positivo é resumo tardio e ambíguo. Negativo41 e positivo6 ligados por janelas do journal, mesma ROM; não provam borda15/16, ambos sinais/facings ou nova build."
+      },
+      "death": {
+        "session": "14fee45458c74fc8bf539b19898a7db2",
+        "hits": 8,
+        "hp_sequence": [
+          50,
+          43,
+          36,
+          29,
+          22,
+          15,
+          8,
+          1,
+          0
+        ],
+        "dead": 1,
+        "death_state_frame": 114,
+        "hud_hde": 0,
+        "vovf": 0
+      },
+      "target_z": {
+        "session": "ac5b26fc6f7b418ba212adafb26dc115",
+        "player_z": "180->221",
+        "enemy_z": "185->206",
+        "enemy_x": "272->231",
+        "verdict": "pass"
+      },
+      "attack_video": {
+        "session": "6083d677112e4c4a9356c9034c6867d5",
+        "hp_before": 50,
+        "hp_after": 43,
+        "frames": [
+          284,
+          344
+        ],
+        "distinct_frames": 37,
+        "journal_sha256": "cb32b6abcc6cee210c93544b73f84bccf3c4e5442c40816d4bcd1350581d659f"
+      },
+      "pacing": {
+        "attack_hit_frames": 16,
+        "attack_hit_seconds": 0.27,
+        "attack_full_frames": null,
+        "guard_frames": 13,
+        "pain_frames": "~85",
+        "walk_ratio": "not_measured: posição e cadência de poses não foram separadas na afirmação histórica1.6-1.7x; usar Q8 para contrato posicional, não inferir velocidade da animação",
+        "toss_small": "alt 2 por windup de 15 q; TOSS exige alt>0 ou dead",
+        "player_priority": "o jogador zera o budget do inimigo enquanto sobe pose; usado de proposito no knockdown",
+        "attack_terminal_status": "not_measured: vídeo dedicado de60 quadros VDP (284->344) termina ATTACK/frame4; ~60 completo era afirmação histórica sem terminal",
+        "attack_nominal_delay_sum": 21
+      },
+      "fps": {
+        "tool": "measure_runtime_probe",
+        "windows_s": 8,
+        "janelas": 3,
+        "fps": [
+          59.48,
+          59.66,
+          59.78
+        ],
+        "verdict": "PASS"
+      },
+      "worst_frame": {
+        "tool": "measure_worst_frame",
+        "frames": 3000,
+        "vovf_delta": 0,
+        "vline_min": 202,
+        "verdict": "PASS"
+      },
+      "stress_input": {
+        "session": "d5639465181a463a926f0e01f4d7af46",
+        "input": "RIGHT30 A2 idle20 LEFT30 B2 idle20 x30",
+        "rom_frame": 3230,
+        "vovf": 0,
+        "done": 1,
+        "verdict": "PASS"
+      },
+      "render": {
+        "still_session": "598625a464dc491ab18f10d55ca65588",
+        "still_pose": "ax_a105_right",
+        "fidelity": "100.0% em [92,68]",
+        "fidelity_anchor": "(xh-32, base-80)",
+        "semantic_gate": "PASS (paleta 100%, 18 cores, nao-reuso)"
+      },
+      "render_glitch": {
+        "status": "blocked",
+        "reason": "exige PNGs legais 256x192 de referencia; a composicao O3 usa stream de slots + corte por linha + coluna fatiada e nao existe renderizador full-frame validado. Gerar imagens 'legais' com um segundo renderizador nao seria evidencia. Cobertura atual: audit_render_fidelity + screenshot_semantic_gate + motion timeline dos videos."
+      }
     }
   },
   "evidence_plan": [
@@ -286,16 +709,153 @@
     "M8: audit_doc_sync + audit_causal_persistence + audit_visual_delivery + audit_mastery_registry + memory bank"
   ],
   "open_items": [
-    "Patches intra-animacao vs upload pleno: decidido pelo throughput real medido no M1 (alvo ~600 B/frame; pior caso de upload pleno 1856 B em janelas de 3 frames)",
-    "Politica de corte (contadores de banda em RAM vs mascara expandida): escolhida por custo medido no M4; limite conhecido: contagem por linha em C custou ~1 frame/loop no O2",
-    "Cadencia de decisao da IA (throttle) a pinar no openbor.c (M5)",
-    "Caps maxfallspeed/maxtossspeed pinados (M6): entrada o3_entry_y max |delta| = 12 px/quadro; toss = 6; pulo = 6 (subida). Nao ha velocidade acumulada em runtime; o cap e o delta da propria tabela.",
-    "Semantica fina do z legacy da caixa (z_background=z_foreground) medida no M6: ataque acerta com |dz|<=15 e whiffa em dz41 (traco f41e8c8c...); a borda exata da caixa (dz 15..41) permanece nao varrida.",
-    "PSG: escopo minimo (3 SFX) declarado; musica fora; se autoria declarativa provar custosa, entregar parcial com declaracao ao dono",
-    "Emulicious com mapper: verificacao empirica no M1 (esperado suportado)",
-    "measure_fps/measure_frame_advance N/A na sessao isolada (registrado no O2); FPS/pacing por janelas do probe",
-    "Commits pendentes de autorizacao: curadoria O2 (8 arquivos) + trabalho O3 (working tree)",
-    "Origem externa dos PAKs e skills/scripts/callbacks: permanecem como registrado no O2 (unknown)"
+    {
+      "id": "upload_service_and_timing",
+      "status": "open",
+      "scope": "O3/M6 corrective follow-up",
+      "note": "M1 mapper medido; M6 registra128 B/q no caminho atual. Medir terminal de ataque, serviço/idade por ator e custo por transição; comparar cache/deltas/pré-carga/cópia/scheduler.600 B/q era alvo de abertura, não capacidade aprovada."
+    },
+    {
+      "id": "sprite_integrity",
+      "status": "open",
+      "scope": "O3",
+      "note": "D9-a2 implementado e varredura estática registrada. Sacrifício artístico, x-aware/profundidade e ausência global de glitches continuam não aprovados; oráculo full-frame pendente."
+    },
+    {
+      "id": "ia",
+      "status": "implemented_baseline_only",
+      "scope": "ROM76cdbee3",
+      "note": "Q8 chase320/player427; recarga de decisão12. Perseguição em x/z registrada; serviço/pacing sob carga precisa medição."
+    },
+    {
+      "id": "physics",
+      "status": "implemented_baseline_limits_open",
+      "scope": "ROM76cdbee3",
+      "note": "Tabelas emitidas: pulo40/ápice55, toss36/ápice46, entrada38 (abertura~27 superada). Caps declarados entrada12/toss6/pulo6 px/q; continuidade de hit aéreo/juggle e relógio sob congestionamento pendentes."
+    },
+    {
+      "id": "depth",
+      "status": "historical_cases_linked_boundary_open",
+      "scope": "ROM76cdbee3",
+      "note": "Negativo dz41 =0b271..., positivo dz6=f41e...; journals/ROM/origem vinculados no sucessor. Comparação <=15 é implementação, não borda varrida; dz14/15/16, sinais±, facings/altitude/guard e alvo móvel não cobertos por estes dois casos."
+    },
+    {
+      "id": "audio",
+      "status": "not_started",
+      "scope": "M7 interno de O3",
+      "note": "3 SFX mínimos, música fora deste recorte O3. Áudio do PAK não é PSG pronto; sem novo áudio ou budget com PSG no Lote A."
+    },
+    {
+      "id": "mapper",
+      "status": "historical_observed",
+      "scope": "M1 e ROM M5/M6",
+      "note": "Mapper foi exercitado; expectativa de suporte em M1 é histórica, não tarefa ainda não executada."
+    },
+    {
+      "id": "regional_and_render_registers",
+      "status": "open",
+      "scope": "M7/M8",
+      "note": "PAL não medido; measure_fps/frame_advance N/A na rota isolada; MRP cobre janelas NTSC. Dumps vdp_regs O2 não validam M6; regenerar no SHA final."
+    },
+    {
+      "id": "git_and_document_integration",
+      "status": "coordinator_integration_pending",
+      "scope": "post-M6 Lote A",
+      "note": "M6 já commitado em da86de303bca969a393032d270c9d245d4055180; não há commit M6 pendente. Novo delta documental sem commit/push; memory bank e artifact_registry serão integrados pelo coordenador."
+    },
+    {
+      "id": "objects",
+      "status": "outside_immediate_O3_runtime",
+      "scope": "O4/O5 do plano geral",
+      "note": "TEXT, ITEM/pickup/equip quando exigido, OBSTACLE e lifecycle são O5, com dependências da fila em O4. Antecipar owner bloqueante, sem saltar evento ou contar objeto como inimigo. Não são M7/M8 internos de O3 nem capacidades provadas pelo piloto Ax/Long."
+    },
+    {
+      "id": "source_unknowns",
+      "status": "blocked_unknown",
+      "scope": "origem/compatibilidade",
+      "note": "Origem externa dos PAKs e scripts/callbacks desconhecida; player-start2 argumentos BT sem decisão. Não herdar orçamento/semântica para segundo piloto."
+    }
   ],
-  "claim_ceiling": "Escopo O3 aberto a partir de fonte pinada (openbor.c 787b6770) e medicoes calibradas (122 pares O2 reproduzidos). Contencao/extracao/medicao nao provam runtime, pacing, qualidade artistica nem aceitacao: cada claim exige o gate correspondente com evidencia fresca. Os numeros de fisica sao adaptacao frame-discreta declarada do modelo de ticks (200 Hz), nao o engine original; a escala visual permanece 1:1 herdada do O2. Mapper e a contingencia pre-autorizada do TDD com gatilho medido; PackBits fica medido e rejeitado por custo de descompressao M6: o pacing do ataque e dominado pelo uploader (D8) - o ataque completo leva ~60 quadros de jogo, nao os 21 nominais; hit causal em ~16 quadros. O still de render prova a arte autoral e o dano no HUD, nao o timing do golpe; o timing vem dos tracos de RAM."
+  "claim_ceiling": "Piloto técnico jogável no teto do GDD, sem equivalência visual. Registros históricos exclusivos da ROM76cdbee3/commitda86de3: contato+16q, MRP/MWF/stress e still de pose estável; não provam recuperação completa, PAL, áudio, serviço justo ou zero-glitch. Somatório nominal21q e vídeo60q sem terminal não são duração completa do ataque. PackBits é alternativa medida em tamanho e não adotada; ganho/custo runtime não demonstrado aqui. Nenhuma nova emulação/medição/promoção no Lote A documental.",
+  "post_m6_reconciliation": {
+    "date": "2026-10-18",
+    "baseline_commit": "da86de303bca969a393032d270c9d245d4055180",
+    "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+    "predecessor": {
+      "origin": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/doc/artifacts/o3_combat_scope_20261016.json",
+      "snapshot": "out/evidence/post_m6_history/20261018_lote_a/objects/aaf3b5451495b4c2283065a9fc4e57523abbd60868eca258208eb0e8ffb9a87e",
+      "sha256": "aaf3b5451495b4c2283065a9fc4e57523abbd60868eca258208eb0e8ffb9a87e",
+      "bytes": 30055,
+      "role": "context_before_document_correction",
+      "origin_mtime_ns": 1792287883907523600
+    },
+    "previous_values": [
+      {
+        "id": "D6-ia-chase",
+        "field": "decision",
+        "value": "Inimigo subtype chase: facing = (alvo.x > inimigo.x); velocidade maxima = speed.x * 1.5 = 75 px/s, dividida em x/z proporcional a |dx|,|dz|; ataque1 quando |dx| <= 40 (range do anim) e |dz| <= 15; cadencia de decisao (throttle) a pinar no fonte (M5). Anim up/down fora (walk em todas as direcoes, herdado do O2 para o jogador e estendido ao inimigo); sem pulo/grab/throw."
+      },
+      {
+        "id": "D7-velocidades",
+        "field": "decision",
+        "value": "O3 adota as velocidades da fonte com acumuladores Q8.8: jogador 100 px/s (speed 10 /10 = 1.0 px/tick -> 0.5 px/tick de posicao; Q8.8 0x01AB/frame), inimigo chase ate 75 px/s (0x0140/frame). O piloto O2 rodava 1 px/frame (60 px/s) por constante de implementacao; a supersessao e declarada aqui e o pacing e re-medido no O3."
+      },
+      {
+        "id": "D8-streaming-e-uploads",
+        "field": "decision",
+        "value": "Slots duplos por ator (2 x 29 celulas x 2 tiles = 116 tiles; 2 atores = 232). Upload de pose completa (maximo 1856 B) espalhado por VBlank na janela da pose corrente; slot escrito nunca e exibido (sem tearing); FSM segura 1 frame se a pose nao estiver pronta ('pose ready'). Patches byte-run intra-animacao (cadeias de ataque, janelas de 3 frames) ficam condicionados a medicao de throughput do M1."
+      },
+      {
+        "id": "D8-streaming-e-uploads",
+        "field": "consequence",
+        "value": "M1 (laboratorio) mede bytes/frame reais de copia bancada->VRAM antes de decidir patches vs upload pleno; budget de VRAM 427/448"
+      },
+      {
+        "id": "D9-corte-por-banda",
+        "field": "decision",
+        "value": "Corte de sprites por orcamento de 8/linha: politica consultada (nunca contada por linha no runtime, licao O2). Candidatos a escolher por medicao no M4: (a) contadores de banda de 8 linhas em RAM (24 B) somados a partir de perfis por pose + ordem de sacrificio por celula pre-computada; (b) mascara expandida por (pose do ator, bucket de z). Jogador tem prioridade total (max medido 8/linha); excedente sai do inimigo. long fall03/death01 sozinhos = 9/linha -> 1 celula cai sempre (drop estatico declarado no emit + revisao humana). Gate: audit_sprite_line_sim com manifesto da politica + audit_render_glitch + revisao; custo no worst-frame."
+      },
+      {
+        "id": "D9-corte-por-banda",
+        "field": "consequence",
+        "value": "a 'selecao x-aware' registrada como open item O2 e endereçada: o orcamento e por linha (independente de x); a escolha fina de qual celula cai e por prioridade artistica revisada, nao por contagem em runtime"
+      },
+      {
+        "id": "D12-escopo-herdado",
+        "field": "decision",
+        "value": "Herdados do O2 sem mudanca: view crop 32..224, z [160,232], x 1:1, camera q8 follow, transparencia indice 0, paleta P1 (14 cores) e P0 (12 uteis), BG pelo dicionario de 192 tiles (painel town1, sem re-autoria), HUD 3 tiles, ordem de trabalho de cena."
+      },
+      {
+        "id": "measurements.m6_runtime.pacing",
+        "value": {
+          "attack_hit_frames": 16,
+          "attack_hit_seconds": 0.27,
+          "attack_full_frames": "~60 (5 poses; o uploader D8 segura o avanco, nao e o somatorio nominal de 21 quadros)",
+          "guard_frames": 13,
+          "pain_frames": "~85",
+          "walk_ratio": "1.6-1.7x mais lenta que a fonte",
+          "toss_small": "alt 2 por windup de 15 q; TOSS exige alt>0 ou dead",
+          "player_priority": "o jogador zera o budget do inimigo enquanto sobe pose; usado de proposito no knockdown"
+        }
+      },
+      {
+        "id": "measurements.m6_runtime.depth",
+        "value": {
+          "session": "f41e8c8c089042be85fd1c9643900043",
+          "whiff_dz": 41,
+          "aligned_dz": 6,
+          "hit_frames": 19,
+          "hp": "43->36",
+          "vovf": 0
+        }
+      }
+    ],
+    "successor_index": "doc/artifacts/post_m6_evidence_index_20261018.json",
+    "history_manifest": "out/evidence/post_m6_history/20261018_lote_a/inventory_initial.json",
+    "limits": [
+      "Original completo preservado por SHA; valores anteriores em previous_values são históricos, não contrato atual.",
+      "Hashes de abertura não revalidam fonte ativa automaticamente; contexto histórico permanece no predecessor.",
+      "Memory bank e artifact_registry não editados pelo worker; integração/hash do escopo pendente do coordenador."
+    ]
+  }
 }

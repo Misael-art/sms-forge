@@ -1,0 +1,152 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "dr_social_idle_guard_96px_12f_v9",
+  "project": "master_of_fighters",
+  "asset_role": "source_art_sprite_study",
+  "channel": "built_in_image_gen_edit + deterministic SMS palette/geometry conversion + visual component cleanup",
+  "revision_of": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_80px_v5_clean.png",
+  "inputs": [
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_game_palette_v8_weaponfix_source.png",
+      "sha256": "dd40a52820eeb92bd266d4c42e71fa25f27adf00e7963536ff6a68b28140b271",
+      "role": "previous game-palette recolor source; parent for final cane-continuity edit"
+    },
+    {
+      "path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+      "sha256": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f",
+      "role": "owner-requested youthful, humane Victorian identity and outfit details"
+    },
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_v3.png",
+      "sha256": "daa5b6fbfab6adf9cf6c7d78d5fc7a32c1b71bbead0117c61e448a81a52be082",
+      "role": "owner-approved slender morphology and twelve distinct cane-ready keys"
+    }
+  ],
+  "external_palette_reference": {
+    "url": "https://www.smspower.org/uploads/Sprites/MasterOfDarkness-SMS-Dr.FerdinandSocial-StandingRight.png",
+    "sha256": "f6a50cb5e18717d1a71f3b69e358832a82feeb863b982956a0708f992e5431fd",
+    "role": "original Master System character sprite; authority for costume colors and lean proportions",
+    "observed_rgb": [
+      [0, 0, 0],
+      [0, 85, 82],
+      [82, 0, 0],
+      [82, 85, 82],
+      [82, 170, 255],
+      [172, 85, 82],
+      [172, 170, 172],
+      [255, 170, 172],
+      [255, 255, 255]
+    ],
+    "nearest_sms_channel_x85": [
+      [0, 0, 0],
+      [0, 85, 85],
+      [85, 0, 0],
+      [85, 85, 85],
+      [85, 170, 255],
+      [170, 85, 85],
+      [170, 170, 170],
+      [255, 170, 170],
+      [255, 255, 255]
+    ],
+    "opaque_contour_adaptation": "source black maps to declared navy #000055 because index 0 is transparent"
+  },
+  "prompt": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_game_palette_prompt_v9.txt",
+    "sha256": "2011876aff906bc855fb9489f00938aa65d6c5c079be0f96d3c19896999af706"
+  },
+  "generated_source": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_game_palette_v9_cleanup_source.png",
+    "sha256": "8c263332273b8bf20f371a433fab5532de43fed1eec938973ae822952b46b066",
+    "dimensions_px": [1536, 1024],
+    "alpha_extrema": [0, 254]
+  },
+  "geometry_normalization": {
+    "input_dimensions_px": [1536, 1024],
+    "output_dimensions_px": [384, 288],
+    "columns": 4,
+    "rows": 3,
+    "source_column_boundaries_px": [0, 384, 768, 1152, 1536],
+    "source_row_boundaries_px": [0, 341, 683, 1024],
+    "cell_dimensions_px": [96, 96],
+    "normalization": "alpha threshold 90%; pure-black ink remapped to #000055; each row scaled by nearest neighbor to 384x85/86 and vertically padded 5 px per 96x96 cell"
+  },
+  "manual_cleanup": {
+    "detached_cane_artifacts_removed": [
+      {"frame_index": 4, "cell_local_bbox_px": [41, 84, 58, 90], "area_before_px": 47},
+      {"frame_index": 7, "cell_local_bbox_px": [0, 27, 22, 32], "area_before_px": 67}
+    ],
+    "idle_red_role_remap": {
+      "from_rgb": [255, 0, 0],
+      "to_rgb": [85, 0, 0],
+      "pixels_before": 65,
+      "reason": "bright red is an attack-effect role; original idle footwear uses dark brown"
+    }
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [384, 288],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "dr_ferdinand_social",
+      "speckle_cleanup": true,
+      "cell_size": [96, 96],
+      "minimum_connected_component_pixels": 12,
+      "transparent_index": 0
+    },
+    "prepalette_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_prepalette.png",
+    "prepalette_sha256": "cda33099c638d73ee0ab83eac55b96240a8c8c933722ab40dedfc43d88dabf57"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+    "sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+    "dimensions_px": [384, 288],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [0],
+    "useful_colors": 12,
+    "palette_rgb_with_transparent_index": [
+      [0, 0, 0],
+      [85, 170, 255],
+      [0, 85, 85],
+      [85, 0, 0],
+      [85, 85, 85],
+      [0, 170, 170],
+      [0, 0, 85],
+      [255, 255, 255],
+      [170, 85, 85],
+      [170, 0, 85],
+      [170, 170, 170],
+      [255, 170, 170],
+      [255, 255, 0]
+    ]
+  },
+  "sheet_layout": {
+    "columns": 4,
+    "rows": 3,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_count": 12,
+    "frame_dimensions_px": [96, 96],
+    "frame_hashes_unique": 12
+  },
+  "technical_review": {
+    "visible_width_px_range": [44, 84],
+    "visible_height_px_range": [72, 84],
+    "baseline_y_px_range": [84, 88],
+    "connected_components_per_frame": 1,
+    "all_frames_visually_distinct": true,
+    "palette_matches_character_manifest": true,
+    "all_palette_colors_are_sms_6bit": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "animation_semantics_gate": "PASS",
+    "independent_animation_review": "pending",
+    "owner_visual_review": "pending",
+    "rom_or_emulator_validation": false
+  },
+  "status": "source_candidate",
+  "owner_approval": null,
+  "next_gate": "owner visual review; independent animation review, runtime sprite/scanline validation, ROM binding, and emulator validation before promotion"
+}

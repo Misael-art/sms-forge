@@ -1,0 +1,129 @@
+{
+  "schema": "smsforge.blastem_dump_diff_native_final_review.v1",
+  "native_worker_id": "/root/review_qa_contract",
+  "created_at_utc": "2026-10-10T13:54:37.472987+00:00",
+  "status": "passed_focused_review_scope_only",
+  "scope": "Read-only source review; own temp fixtures and existing archived native comparisons. No emulator started and no product claim.",
+  "previous_review_preserved": "/tmp/smsforge-blastem-native-review/dump_diff/review.json",
+  "source_hashes": {
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_dump_diff.py": "9ccbb88c641c5e8161da98850771960289872af2fb47c4360701d4d9865f0bd7",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py": "eb1be91be884d837547d67ba8b423157901df0f090d2905a2b553b16f24bcee8",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9"
+  },
+  "findings": [
+    {
+      "id": "BDIFF-01",
+      "priority": "P1",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_dump_diff.py",
+      "line": 125,
+      "title": "Output hardlink can overwrite immutable acquisition dump",
+      "reproduction": "Temporary synthetic audited fixture; output outside bundle was os.link(snapshot000/ram.bin). --json resolve guard passes, write_json truncates linked inode and CLI exits0. Before8192bytes;after4297bytes.",
+      "impact": "A declared immutable audited acquisition can be changed while returning a successful comparison whose source SHA refers to pre-write data.",
+      "evidence": "/tmp/smsforge-blastem-native-review/dump_diff/focused_results.json",
+      "recommendation": "Write JSON via new temporary inode + atomic replace in target directory, or refuse hardlinked/existing alias outputs and compare samefile against session inputs. Include outputimmutability hardlink negative test. Preserve ordinary insidebundle/symlink resolution guard.",
+      "status": "corrected_and_independently_retested",
+      "retest": "Existing hardlink/symlink/insidebundle/labels overwrite rejected with source hashes intact. Hardlink introduced at replace-time did not truncate sourceinode; output is distinctinode. CurrentROM protected; changedanalyzer guardrejected."
+    }
+  ],
+  "selfcheck": "PASS",
+  "independent_retests": [
+    {
+      "case": "hardlink",
+      "exit_code": 1,
+      "dump_unchanged": true,
+      "labels_unchanged": true,
+      "message": "[FAIL] output is a linked file; choose a new report path"
+    },
+    {
+      "case": "symlink",
+      "exit_code": 1,
+      "dump_unchanged": true,
+      "labels_unchanged": true,
+      "message": "[FAIL] write diff outside immutable acquisition bundle"
+    },
+    {
+      "case": "inside",
+      "exit_code": 1,
+      "dump_unchanged": true,
+      "labels_unchanged": true,
+      "message": "[FAIL] write diff outside immutable acquisition bundle"
+    },
+    {
+      "case": "labels",
+      "exit_code": 1,
+      "dump_unchanged": true,
+      "labels_unchanged": true,
+      "message": "[FAIL] report must not overwrite an analysis input"
+    },
+    {
+      "case": "output_hardlink_created_after_guard",
+      "dump_unchanged": true,
+      "new_output_is_distinct_inode": true,
+      "report_valid": true
+    },
+    {
+      "case": "protected_current_rom",
+      "rejected": true,
+      "unchanged": true
+    },
+    {
+      "case": "changed_analyzer_import_guard",
+      "rejected": true
+    }
+  ],
+  "archived_comparisons_repeated": [
+    {
+      "sid": "blastem-sms-44577cac8cbc4a189068a1bdf9a9634a",
+      "window": [
+        0,
+        1
+      ],
+      "spaces_identical_to_prior_report": true,
+      "palette_identical": true,
+      "analyzer_sha256": "9ccbb88c641c5e8161da98850771960289872af2fb47c4360701d4d9865f0bd7"
+    },
+    {
+      "sid": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+      "window": [
+        0,
+        1
+      ],
+      "spaces_identical_to_prior_report": true,
+      "palette_identical": true,
+      "analyzer_sha256": "9ccbb88c641c5e8161da98850771960289872af2fb47c4360701d4d9865f0bd7"
+    },
+    {
+      "sid": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+      "window": [
+        0,
+        2
+      ],
+      "spaces_identical_to_prior_report": true,
+      "palette_identical": true,
+      "analyzer_sha256": "9ccbb88c641c5e8161da98850771960289872af2fb47c4360701d4d9865f0bd7"
+    }
+  ],
+  "native_values_restatement": {
+    "keys": [
+      0,
+      8,
+      0
+    ],
+    "P1right_held_field": [
+      0,
+      6,
+      6
+    ],
+    "meaning": "These are fixture RAM values at three snapshots. Do not interpret the delta as game frame-consumption, writes, action success or exact temporal coverage. Key endpoint zero coexists with a persistent accumulated field.",
+    "archived_sound_last2": "not_applicable; two snapshots only, invalid index rejected previously"
+  },
+  "claim_limits": [
+    "Net RAM/VRAM/register/PSG byte delta only, not writes or transfers.",
+    "32byteVRAM blocks include nonpattern addressspace; notuniquearttiles.",
+    "Callerlabels ROMbound but notauthenticatedSDCCsymbols.",
+    "Historical eligibility only; no currentROM/product validation.",
+    "Analyzer hash and import/endguards improve revisionbinding but do not authenticate arbitrary metadata or prove causality.",
+    "Atomic output protects destination inode from truncation; no adversarial mutatingdirectory/storage security qualification claimed."
+  ],
+  "recommendation": "BDIFF01 closed in this focused review. Keep initial failed evidence and corrected report; comparator is eligible for scoped netdelta diagnostics, without gameplay/FPS/SFX/artpromotion."
+}

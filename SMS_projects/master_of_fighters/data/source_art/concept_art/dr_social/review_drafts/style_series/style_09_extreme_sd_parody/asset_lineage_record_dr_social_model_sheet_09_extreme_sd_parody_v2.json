@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_09_extreme_sd_parody_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "catalog_index": 9,
+  "style_id": "Extreme-SD-Parody",
+  "artistic_style_reference": {
+    "named_artist": "Kinu Nishimura",
+    "reference_role_and_scope": "Capcom fighting-game illustration reference; no claim that she alone authored Pocket Fighter.",
+    "source_url": "https://www.capcom.co.jp/amusement/brands/capcomstore/2021/01/828/",
+    "attribution_status": "official_contextual_reference",
+    "style_signature": [
+      "expressive character acting",
+      "clear gesture and silhouette",
+      "playful facial exaggeration"
+    ],
+    "basis_and_limits": "Traits are an editorial visual analysis; use Pocket Fighter itself for SD proportions and animation."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v1.json",
+    "sha256": "891585a98e77ea9996b9dd8c21dc6bf73cdf13b9e06dbbbc1dff75896c1a5815"
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
+    "sha256": "c98e7de775a1fc4e9b6329bf16f259998eb28d36633ac1bf62627740906e09a2",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt",
+    "sha256": "b1f9047acb2fef8e698318e7f8cf7fd17205d004be3d85f15ea3e193f2f275a4",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_metadata.json",
+    "sha256": "2bc829e2fc6809ce3a9e6342a4b725af9e1c471fb862959cb6493898d969f43a"
+  },
+  "composition": {
+    "method": "metadata_card_only_overlay",
+    "tool": "Pillow card-only annotation; base art outside the metadata card was pixel-checked unchanged",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
+    "base_model_sheet_sha256": "e8d531701712f6b1479837b7caacf0b9e7798d81d21574d31883adc22b7a7e68",
+    "art_scale": "preserved from base sheet"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2.png",
+    "sha256": "51ab35053a9acc15d7dfa84a316db5b6f579d18c211ef9e7d50a4880bf1bb42a",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_v2.json",
+    "status": "pending_independent_and_owner_review"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

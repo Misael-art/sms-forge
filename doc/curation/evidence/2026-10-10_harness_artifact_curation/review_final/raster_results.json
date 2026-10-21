@@ -1,0 +1,75 @@
+[
+  {
+    "case": "blank_declared_slot",
+    "actual": {
+      "schema": "sms_source_raster_audit_v1",
+      "ok": true,
+      "scope": "saved_sprite_sheet_source_preconversion",
+      "claims": {
+        "declared_slots_only": true,
+        "background_uniformity": false,
+        "artistic_quality": false,
+        "sms_runtime_palette": false,
+        "runtime_validated": false,
+        "promotion_approved": false
+      },
+      "image": {
+        "path": "/tmp/smsforge-curation-coverage-20261010/review/raster_cases/sheet.png",
+        "sha256": "8bd17e6e5ee630b67ea07508550da2c138b92ee79efe67b066758881a935bc92",
+        "bytes": 79
+      },
+      "problems": [],
+      "measured": {
+        "dimensions_px": [
+          16,
+          8
+        ],
+        "mode": "RGBA",
+        "unique_rgb": 2,
+        "alpha_zero_pixels": 127,
+        "alpha_255_pixels": 1,
+        "partial_alpha_pixels": 0,
+        "declared_frame_ids": [
+          "A1",
+          "A2"
+        ],
+        "declared_frame_count": 2
+      }
+    },
+    "expectation": "PASS declared slots only; no recognized-drawn-pose claim"
+  },
+  {
+    "case": "APNG_rejected",
+    "actual": {
+      "schema": "sms_source_raster_audit_v1",
+      "ok": false,
+      "scope": "saved_sprite_sheet_source_preconversion",
+      "claims": {
+        "declared_slots_only": true,
+        "background_uniformity": false,
+        "artistic_quality": false,
+        "sms_runtime_palette": false,
+        "runtime_validated": false,
+        "promotion_approved": false
+      },
+      "image": {
+        "path": "/tmp/smsforge-curation-coverage-20261010/review/raster_cases/anim.png",
+        "sha256": "33298d285a4246e813c87e881008c369fc7addbfcc7cd840173b05ecebd1c4ad",
+        "bytes": 204
+      },
+      "problems": [
+        "source unreadable: source must be a single-image PNG, not APNG"
+      ]
+    }
+  },
+  {
+    "case": "hardlink_protected_output",
+    "actual": "report output must not overwrite image or contract",
+    "input_preserved": true
+  },
+  {
+    "case": "symlink_protected_output",
+    "actual": "report output must not overwrite image or contract",
+    "input_preserved": true
+  }
+]

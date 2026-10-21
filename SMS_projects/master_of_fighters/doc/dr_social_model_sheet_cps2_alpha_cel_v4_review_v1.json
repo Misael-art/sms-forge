@@ -1,0 +1,158 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v4_candidate",
+  "review_status": "owner_approved",
+  "producer": "codex_art_production",
+  "review_scope": "Concept/model sheet only; no sprite, moveset, animation, SMS conversion or ROM approval.",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      1619,
+      971
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+    "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+    "role": "owner-approved identity, face, palette, proportions and style reference"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+          "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+          "role": "owner-approved model-sheet reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+          "sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c",
+          "role": "project character identity and game-source equipment inventory"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/dr_social_combat_design_proposal_v1.md",
+          "sha256": "fba3fdadb46cb9ed0cd005edbd5fd1e3bf8cd8bb0ac35c10eb5ceebc2bc5db0e",
+          "role": "weapon reference boundary and source terminology discrepancy"
+        }
+      ],
+      "observed_defects": [
+        "The previous independent review found residual ambiguity in the cane-arm attachment and competition between the violet effect and boomerang silhouette. The v4 revision explicitly places the cane arm in front of the torso and reduces ambiguity; this primary defect still needs independent confirmation.",
+        "The GDD and combat proposal/source-guide terms differ for source-game inventory. The panel marks those objects as source-game references with terminology open; it is not a fan-game moveset approval."
+      ],
+      "revision_notes": [
+        "The signature pose was revised to show the cane-holding arm visibly in front of the torso and the throwing arm directed toward a larger, clearly separated steel boomerang.",
+        "Cane, rapier and steel boomerang are grouped as project concept gear. Knife, hammer, axe, pistol, bomb and stake are grouped as source-game references with open inventory terms.",
+        "Technical-card body copy was refined into concise, readable English. The late-19th-century London clothing, palette, face, profile pose, scale and visual language were retained."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pass",
+          "note": "Front, profile, back, face detail and signature pose share the pale cream sheet with 7.5H ruler and separated concept/source equipment groups."
+        },
+        "style_reference_application": {
+          "status": "pass",
+          "note": "Producer inspection sees the established CPS2-Alpha-Cel concept language; independent comparison to approved v2 remains required."
+        },
+        "lineart_and_contours": {
+          "status": "pass",
+          "note": "Contours read cleanly at full-sheet size without visible grain or detached pixels; independent inspection remains open."
+        },
+        "morphology_and_biotype": {
+          "status": "pass",
+          "note": "Tall, lean human ectomorph proportions and the 7.5H guide remain consistent with approved v2."
+        },
+        "shading_and_palette": {
+          "status": "pass",
+          "note": "Blue/cyan/teal, white, gray, burgundy and brown/brass dominate; violet remains associated with the occult boomerang effect."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pass",
+          "note": "Front/profile/back share a visible common baseline and retain the 7.5H scale ruler."
+        },
+        "neutral_background": {
+          "status": "pass",
+          "note": "Clean pale-cream background without a scene or texture."
+        },
+        "face_and_identity_continuity": {
+          "status": "pass",
+          "note": "Gray-brown hair, round brass spectacles, intelligent face, and fully human identity remain consistent with approved v2."
+        },
+        "costume_and_materials": {
+          "status": "pass",
+          "note": "Frock-coat tails/lapels, waistcoat, high collar, burgundy cravat, tailored trousers and leather boots now read as late-19th-century London attire across the turnaround."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pass",
+          "note": "Independent review confirms the blunt walking cane, separate rapier and steel boomerang have distinct silhouettes and readable labels. Source-game items remain reference-only; unresolved document terminology does not imply a fan-game moveset."
+        },
+        "cross_view_consistency": {
+          "status": "pass",
+          "note": "Front/profile/back retain one garment family, palette, scale and human identity; independent continuity check remains open."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pass",
+          "note": "Candidate status, weapon labels and concise technical-card text are readable at the saved full-sheet resolution; no key object touches the page edge."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pass",
+          "note": "No fangs, wings, transformation or other monster traits are visible."
+        },
+        "artist_reference_and_scope": {
+          "status": "pass",
+          "note": "Bengus remains a contextual CPS2/Street Fighter Alpha art reference, not a sole-authorship claim."
+        },
+        "distinctive_style_signature": {
+          "status": "pass",
+          "note": "Expressive fighting-game face planes, graphic silhouette and energetic action staging are retained."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pass",
+          "note": "Independent reviewer confirms the cane arm is in front of the torso with a visible shoulder-to-hand chain and the throwing arm is separate and anatomically coherent."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pass",
+          "note": "Independent review confirms face, late-Victorian clothing, palette, scale, orthographic views and action rendering remain coherent with approved v2."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "passed",
+    "reviewer": "/root/review_dr_social_v3",
+    "report": {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_cps2_alpha_cel_v4_independent_review_v1.json",
+      "sha256": "f05e195b0de66ba2c7b3780678fa5095f76e2b80ed7d211390e805da12e19497"
+    }
+  },
+  "owner_approval": {
+    "approved": true,
+    "reviewer": "project_owner",
+    "date": "2026-10-11",
+    "scope": "Concept/model-sheet reference only; no sprites, moveset, animation, SMS conversion, integration or ROM approval."
+  }
+}

@@ -11,10 +11,10 @@ Regra: eixo `true` no build_record EXIGE artefato que o sustente.
 
 Mapa eixo -> lastro exigido:
   build              out/rom/*.sms existe
-  boot_emulador      evidence.json com informative=true
-  gameplay           evidence.json.interaction_proven=true
+  boot_emulador      evidence.json informative=true E rom_sha256 == ROM atual
+  gameplay           evidence.json.interaction_proven=true E rom_sha256 == ROM atual
                      OU input_memory.json (input_provado + canal vivo + SHA da ROM)
-  fps_constante      fps.json com constante_50_60=true
+  fps_constante      fps.json constante_50_60=true E rom_sha256 == ROM atual
   audio              arquivo de audio capturado (audit_audio.py e quem julga)
   validation_report  build_record.steps.pre_gates == pass
   memory_bank_atualizado   doc/10-memory-bank.md existe
@@ -46,13 +46,15 @@ def _rom_sha(project):
 
 def _gameplay_supported(project, ev, rec):
     """Pixels (L018) OU memoria com SHA da ROM (L035/L039). Pixel sozinho
-    neste host mentia (L038); RAM com canal morto tambem (L039)."""
+    neste host mentia (L038); RAM com canal morto tambem (L039). O booleano
+    `interaction_proven` so vale para a ROM que o proprio evidence.json cita:
+    um `true` herdado de outro binario nao prova o build atual."""
+    sha = _rom_sha(project) or rec.get("rom_sha256")
     if bool((ev.get("gameplay") or {}).get("interaction_proven")):
-        return True
+        return bool(sha) and ev.get("rom_sha256") == sha
     mem = _load(os.path.join(project, "out", "evidence", "input_memory.json"))
     if not mem:
         return False
-    sha = rec.get("rom_sha256") or _rom_sha(project)
     return bool(mem.get("input_provado")
                 and mem.get("canal_teclado_vivo")
                 and sha
@@ -94,6 +96,7 @@ def axis_support(project, rec=None):
         project, "out", "build_record.json")) or {})
     ev = _load(os.path.join(project, "out", "evidence", "evidence.json")) or {}
     fps = _load(os.path.join(project, "out", "evidence", "fps.json")) or {}
+    sha = _rom_sha(project) or rec.get("rom_sha256")
     return {
         "build": (
             bool(glob.glob(os.path.join(project, "out", "rom", "*.sms"))),
@@ -102,15 +105,20 @@ def axis_support(project, rec=None):
             (rec.get("steps", {}) or {}).get("pre_gates") == "pass",
             "build_record.steps.pre_gates != 'pass'"),
         "boot_emulador": (
-            bool(ev.get("informative")),
-            "evidence.json nao tem informative=true"),
+            bool(ev.get("informative")) and bool(sha)
+            and ev.get("rom_sha256") == sha,
+            "evidence.json nao tem informative=true para a ROM atual "
+            "(rom_sha256 ausente ou de outro binario)"),
         "gameplay": (
             _gameplay_supported(project, ev, rec),
-            "nem evidence.json.interaction_proven nem input_memory.json "
-            "(input_provado + canal vivo + SHA da ROM) sustentam o eixo"),
+            "nem evidence.json.interaction_proven para a ROM atual nem "
+            "input_memory.json (input_provado + canal vivo + SHA da ROM) "
+            "sustentam o eixo"),
         "fps_constante": (
-            bool(fps.get("constante_50_60")),
-            "fps.json nao tem constante_50_60=true"),
+            bool(fps.get("constante_50_60")) and bool(sha)
+            and fps.get("rom_sha256") == sha,
+            "fps.json nao tem constante_50_60=true para a ROM atual "
+            "(rom_sha256 ausente ou de outro binario)"),
         "audio": (
             _audio_supported(project),
             "nao ha captura de audio (.wav) POSTERIOR a ROM e COM SINAL em "
@@ -152,6 +160,12 @@ def _self_check():
             os.makedirs(os.path.join(p, "doc"))
             if rom:
                 open(os.path.join(p, "out", "rom", "a.sms"), "wb").write(b"\0")
+            rom_sha = None
+            if rom:
+                import hashlib as _h
+                rom_sha = _h.sha256(
+                    open(os.path.join(p, "out", "rom", "a.sms"), "rb").read()
+                ).hexdigest()
             if wav:
                 # WAV valido COM sinal (16-bit mono, amostras nao-zero)
                 import wave as _w, struct as _s
@@ -163,9 +177,15 @@ def _self_check():
             json.dump({"axes": axes, "steps": {"pre_gates": "pass"}},
                       open(os.path.join(p, "out", "build_record.json"), "w"))
             if ev is not None:
+                ev = dict(ev)
+                if rom_sha:
+                    ev.setdefault("rom_sha256", rom_sha)
                 json.dump(ev, open(os.path.join(p, "out", "evidence",
                                                 "evidence.json"), "w"))
             if fps is not None:
+                fps = dict(fps)
+                if rom_sha:
+                    fps.setdefault("rom_sha256", rom_sha)
                 json.dump(fps, open(os.path.join(p, "out", "evidence",
                                                  "fps.json"), "w"))
             return p
@@ -214,6 +234,27 @@ def _self_check():
         p, _ = reconcile(ram)
         assert any("gameplay" in x for x in p), \
             f"input_memory de outra ROM deveria reprovar: {p}"
+
+        # REPROVA: evidence.json informative=true de OUTRA ROM (booleano sozinho)
+        stale_ev = build(all_true,
+                         ev={"informative": True, "rom_sha256": "deadbeef",
+                             "gameplay": {"interaction_proven": True}},
+                         fps={"constante_50_60": True})
+        p, _ = reconcile(stale_ev)
+        assert any("'boot_emulador'" in x for x in p), \
+            f"evidence de outra ROM deveria reprovar boot: {p}"
+        assert any("'gameplay'" in x for x in p), \
+            f"interaction_proven de outra ROM deveria reprovar gameplay: {p}"
+
+        # REPROVA: fps.json constante=true de OUTRA ROM (booleano sozinho)
+        stale_fps = build(all_true,
+                          ev={"informative": True,
+                              "gameplay": {"interaction_proven": True}},
+                          fps={"constante_50_60": True,
+                               "rom_sha256": "deadbeef"})
+        p, _ = reconcile(stale_fps)
+        assert any("'fps_constante'" in x for x in p), \
+            f"fps de outra ROM deveria reprovar: {p}"
 
         # REPROVA: fps=true sem fps.json
         p, _ = reconcile(build(all_true,

@@ -1,0 +1,92 @@
+{
+  "historical_duration": {
+    "ok": true,
+    "problems": [],
+    "details": {
+      "measured_frames": [
+        6,
+        8,
+        4,
+        4,
+        8
+      ],
+      "element_identity_and_order": "not_measured; require source/ROM IDs associated with every boundary"
+    },
+    "claim_ceiling": "declared_record_consistency_only",
+    "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. AIR identity is checked only in air_identity_timing and remains declared-record consistency, not authentication of the AIR export or ROM instrumentation. Distance profile is restricted; counters/revisions require source and native observations."
+  },
+  "historical_identity_refused": {
+    "ok": false,
+    "problems": [
+      "AIR identity requires air_identity_timing record"
+    ],
+    "details": {},
+    "claim_ceiling": "declared_record_consistency_only",
+    "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. AIR identity is checked only in air_identity_timing and remains declared-record consistency, not authentication of the AIR export or ROM instrumentation. Distance profile is restricted; counters/revisions require source and native observations."
+  },
+  "historical_missing_ids_refused": {
+    "ok": false,
+    "problems": [
+      "'source_air'"
+    ],
+    "details": {
+      "measured_frames": [
+        6,
+        8,
+        4,
+        4,
+        8
+      ],
+      "element_identity_and_order": "not_measured; require source/ROM IDs associated with every boundary"
+    },
+    "claim_ceiling": "declared_record_consistency_only",
+    "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. AIR identity is checked only in air_identity_timing and remains declared-record consistency, not authentication of the AIR export or ROM instrumentation. Distance profile is restricted; counters/revisions require source and native observations."
+  },
+  "offline_identity_rollover": {
+    "ok": true,
+    "problems": [],
+    "details": {
+      "measured_frames": [
+        6,
+        8
+      ],
+      "element_identity_and_order": "matched_declared_source_and_ROM_boundary_IDs",
+      "boundary_element_ids": [
+        0,
+        1,
+        "terminal"
+      ],
+      "source_export_truth": "requires independent source/export and ROM instrumentation review"
+    },
+    "claim_ceiling": "declared_record_consistency_only",
+    "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. AIR identity is checked only in air_identity_timing and remains declared-record consistency, not authentication of the AIR export or ROM instrumentation. Distance profile is restricted; counters/revisions require source and native observations."
+  },
+  "offline_equal_duration_permutation_refused": {
+    "ok": false,
+    "problems": [
+      "AIR element identity/order differs"
+    ],
+    "details": {
+      "measured_frames": [
+        6,
+        6
+      ],
+      "element_identity_and_order": "not_measured; require source/ROM IDs associated with every boundary"
+    },
+    "claim_ceiling": "declared_record_consistency_only",
+    "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. AIR identity is checked only in air_identity_timing and remains declared-record consistency, not authentication of the AIR export or ROM instrumentation. Distance profile is restricted; counters/revisions require source and native observations."
+  },
+  "offline_same_permutation_duration_only": {
+    "ok": true,
+    "problems": [],
+    "details": {
+      "measured_frames": [
+        6,
+        6
+      ],
+      "element_identity_and_order": "not_measured; require source/ROM IDs associated with every boundary"
+    },
+    "claim_ceiling": "declared_record_consistency_only",
+    "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. AIR identity is checked only in air_identity_timing and remains declared-record consistency, not authentication of the AIR export or ROM instrumentation. Distance profile is restricted; counters/revisions require source and native observations."
+  }
+}

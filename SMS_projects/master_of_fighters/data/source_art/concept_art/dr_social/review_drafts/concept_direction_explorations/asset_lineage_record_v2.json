@@ -1,0 +1,41 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "dr_social_concept_sheet_v2",
+  "project": "master_of_fighters",
+  "asset_role": "concept_art",
+  "channel": "built_in_image_gen_edit",
+  "parent_image": {
+    "path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v1.png",
+    "sha256": "2e07ec82b7de3890fbea3b88a79c4ebef13348f0040464170bb5cafe13a7dc20"
+  },
+  "prompt": {
+    "path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_prompt_v2.txt",
+    "sha256": "21655d583f12e46efbdf7515c78efd8436345c4563e8fe044e150be560441b1c"
+  },
+  "image": {
+    "path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+    "sha256": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f",
+    "dimensions_px": [1536, 1024]
+  },
+  "changes": [
+    "appearance slightly younger, around early thirties",
+    "calm compassionate expression and disciplined resolve to suggest virtue and courage in pursuit of justice"
+  ],
+  "preserved": [
+    "same character identity and Victorian clothing",
+    "two full-body poses on plain dark backdrop",
+    "cane, round glasses, tailcoat, cravat, rapier, and occult steel boomerang",
+    "entirely human; no fangs, wings, claws, or transformation"
+  ],
+  "status": "source_candidate",
+  "visual_check": {
+    "two_full_body_poses": true,
+    "same_identity_with_slightly_younger_appearance": true,
+    "virtue_and_courage_conveyed_by_expression_and_bearing": true,
+    "human_no_vampire_features": true,
+    "key_props_preserved": true,
+    "text_watermark_or_pixel_art": false,
+    "formal_palette_and_outline_measurement": "not performed"
+  },
+  "next_gate": "blind visual review and owner approval before promotion; pixel translation is a separate unstarted stage"
+}

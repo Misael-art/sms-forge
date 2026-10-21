@@ -1,0 +1,255 @@
+{
+  "schema": "dr_social_sms_61_pose_conversion_lineage_v1",
+  "date": "2026-10-10",
+  "project": "master_of_fighters",
+  "character_id": "dr_social",
+  "status": "diagnostic_conversion_framebuffer_exact_pending_human_art_and_game_integration_review",
+  "source": {
+    "role": "owner_approved_source_for_nine_basic_animation_sequences",
+    "project_relative_path": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+    "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+    "dimensions_px": [
+      1323,
+      1189
+    ],
+    "lineage_json": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.json",
+    "approval_scope": "visual source atlas for the nine basic animation sequences; converted indexed assets still require technical and pixel review",
+    "separate_conversion_proof": {
+      "path": "data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.png",
+      "role": "two-pose technical conversion proof only; not the source of the 61-pose animation"
+    }
+  },
+  "sequence_inventory": [
+    {
+      "id": "idle",
+      "pose_count": 4,
+      "frame_ids": [
+        "ID01",
+        "ID02",
+        "ID03",
+        "ID04"
+      ]
+    },
+    {
+      "id": "walk_forward",
+      "pose_count": 8,
+      "frame_ids": [
+        "WF01",
+        "WF02",
+        "WF03",
+        "WF04",
+        "WF05",
+        "WF06",
+        "WF07",
+        "WF08"
+      ]
+    },
+    {
+      "id": "walk_backward",
+      "pose_count": 8,
+      "frame_ids": [
+        "WB01",
+        "WB02",
+        "WB03",
+        "WB04",
+        "WB05",
+        "WB06",
+        "WB07",
+        "WB08"
+      ]
+    },
+    {
+      "id": "jump",
+      "pose_count": 8,
+      "frame_ids": [
+        "JU01",
+        "JU02",
+        "JU03",
+        "JU04",
+        "JU05",
+        "JU06",
+        "JU07",
+        "JU08"
+      ]
+    },
+    {
+      "id": "crouch",
+      "pose_count": 5,
+      "frame_ids": [
+        "CR01",
+        "CR02",
+        "CR03",
+        "CR04",
+        "CR05"
+      ]
+    },
+    {
+      "id": "dash_run",
+      "pose_count": 8,
+      "frame_ids": [
+        "DA01",
+        "DA02",
+        "DA03",
+        "DA04",
+        "DA05",
+        "DA06",
+        "DA07",
+        "DA08"
+      ]
+    },
+    {
+      "id": "knockdown_fall",
+      "pose_count": 8,
+      "frame_ids": [
+        "KF01",
+        "KF02",
+        "KF03",
+        "KF04",
+        "KF05",
+        "KF06",
+        "KF07",
+        "KF08"
+      ]
+    },
+    {
+      "id": "tech_roll_getup",
+      "pose_count": 8,
+      "frame_ids": [
+        "TR01",
+        "TR02",
+        "TR03",
+        "TR04",
+        "TR05",
+        "TR06",
+        "TR07",
+        "TR08"
+      ]
+    },
+    {
+      "id": "guard",
+      "pose_count": 4,
+      "frame_ids": [
+        "GU01",
+        "GU02",
+        "GU03",
+        "GU04"
+      ]
+    }
+  ],
+  "total_source_poses": 61,
+  "conversion": {
+    "tool": "tools/prepare_dr_social_61_pose_probe.py",
+    "tool_sha256": "ee103d0b7564590eccce1159b045b99ccf4e78ee2acbf0d44713219e0fa3a077",
+    "source_role_sha_guard": "--self-check passed; exact approved path and SHA required; two-pose proof rejected",
+    "packer": "tools/sms_wrapper/pack_sms_metasprite.py",
+    "packer_sha256": "6c81e11fcdd10ee54c83b0f0521717f64e2ab4c3fe865b6eaed4af4f75f9e626",
+    "output_directory": "out/diagnostics/dr_social_61_pose_review_v5/",
+    "report": "out/diagnostics/dr_social_61_pose_review_v5/conversion_report_61_pose_v5.json",
+    "report_sha256": "f288f3f113d33ed9c898acfb92476f28f858292e8f403c2c410c8fc2f0403bac",
+    "frame_manifest": "out/diagnostics/dr_social_61_pose_review_v5/project/doc/frame_manifest_61_pose_v5.json",
+    "converted_frame_count": 61,
+    "frame_canvas_px": [
+      80,
+      80
+    ],
+    "palette": {
+      "study_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+      "study_sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+      "useful_colors": 12,
+      "scope": "single-character diagnostic palette; shared P1 roster mapping remains pending"
+    },
+    "measurements": {
+      "peak_sat_objects_per_frame": 51,
+      "peak_sat_objects_per_scanline": 8,
+      "physical_resident_pattern_limit": 191,
+      "pattern_window": {
+        "sprite_pattern_base_address_hex": "0x2000",
+        "bg_name_table_base_address_hex": "0x3800",
+        "loaded_tile_base": 257,
+        "max_resident_unique_patterns": 191,
+        "overflow_policy": "load one pose at a time; never write into BG name table"
+      },
+      "bank_size_bytes": 16384,
+      "data_bank_count": 5,
+      "raw_4bpp_tile_bytes": 81920,
+      "metadata_bytes": 7453,
+      "sequence_pool_modes": {
+        "sequence_shared_pool": 2,
+        "pose_step_pool_required": 7
+      },
+      "shared_sequence_pools": {
+        "idle": 169,
+        "guard": 182
+      },
+      "step_only_sequences": [
+        "walk_forward",
+        "walk_backward",
+        "jump",
+        "crouch",
+        "dash_run",
+        "knockdown_fall",
+        "tech_roll_getup"
+      ]
+    }
+  },
+  "rom": {
+    "path": "out/diagnostics/dr_social_61_pose_review_v5/project/out/rom/dr_social_61_pose_review_v5.sms",
+    "sha256": "501161271e6cc51a7666520128375af04f6b8dde04cfa96071a410f09a78e6db",
+    "size_bytes": 114688,
+    "status": "built_and_observed_in_isolated_emulator; diagnostic viewer only"
+  },
+  "asset_rom_binding": {
+    "path": "out/diagnostics/dr_social_61_pose_review_v5/project/doc/rom_asset_binding.json",
+    "sha256": "0024367f5b8044120fc39209f788dfa54c523eae39dfa28090715161be58d6a4",
+    "entries": 61,
+    "audit": "audit_rom_asset_binding.py --require: PASS"
+  },
+  "emulator_review": {
+    "emulator": "Emulicious private isolated session",
+    "session_id": "c9709fd01c0742eb8c0eaebaa01f79d6",
+    "rom_sha256": "501161271e6cc51a7666520128375af04f6b8dde04cfa96071a410f09a78e6db",
+    "capture_count": 61,
+    "exact_indexed_render_passes": 61,
+    "exact_indexed_render_failures": 0,
+    "opaque_pixels_checked": 100333,
+    "opaque_pixel_mismatches": 0,
+    "transparent_pixels_checked": 290067,
+    "transparent_pixel_mismatches": 0,
+    "render_origin_px": [
+      88,
+      56
+    ],
+    "transparent_rgb": [
+      0,
+      0,
+      0
+    ],
+    "summary_path": "out/diagnostics/dr_social_61_pose_review_v5/project/out/evidence/framebuffer_render_fidelity_61_v5.json",
+    "detail_path": "out/diagnostics/dr_social_61_pose_review_v5/project/out/evidence/poses_61_emulicious_c9709fd01c0742eb8c0eaebaa01f79d6/framebuffer_render_fidelity_61_v5.json",
+    "visual_contact_sheet": "out/diagnostics/dr_social_61_pose_review_v5/dr_social_61_pose_emulicious_9_sequence_review_v5.png",
+    "sealed_sample_bundle": {
+      "path": "out/diagnostics/dr_social_61_pose_review_v5/project/out/evidence/sessions/de41dbaeaff044f4a07fb4fef89994e9",
+      "session_id": "de41dbaeaff044f4a07fb4fef89994e9",
+      "capture": "endpoint-GU04-sealed.png",
+      "rom_sha256": "501161271e6cc51a7666520128375af04f6b8dde04cfa96071a410f09a78e6db",
+      "check_bundle": "PASS: session-bound informative framebuffer; no gameplay/audio/FPS approval"
+    }
+  },
+  "viewer_controls": {
+    "left_right": "pose anterior/posterior da sequência",
+    "up_down": "sequência anterior/posterior",
+    "button_1": "reproduz/pausa timing proposto, apenas quando pool cabe na janela VRAM SMS",
+    "button_2": "volta à primeira pose e pausa"
+  },
+  "limitations": [
+    "Seven sequences use one-pose-at-a-time inspection because their shared pattern pools exceed the physical 191-pattern window; this ROM does not demonstrate continuous playback for those sequences.",
+    "Idle and guard shared pools display/play in the diagnostic viewer only; timing and VBlank throughput are not accepted for production.",
+    "Pixel-exact rendering proves the converted pixels/colors in this ROM framebuffer, not human art approval, anatomy, animation quality, gameplay, FPS, audio, PAL, roster-shared P1, scene coexistence, full VRAM/RAM/VBlank budgets, or physical hardware.",
+    "Converted frames remain in diagnostics and are not promoted to project res/ or a production release."
+  ],
+  "project_documents": {
+    "gdd": "doc/11-gdd.md",
+    "tdd": "doc/15-tdd.md",
+    "memory_bank": "doc/10-memory-bank.md"
+  }
+}

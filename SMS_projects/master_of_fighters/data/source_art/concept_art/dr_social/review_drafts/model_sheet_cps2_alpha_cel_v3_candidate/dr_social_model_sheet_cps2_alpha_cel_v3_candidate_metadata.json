@@ -1,0 +1,94 @@
+{
+  "schema": "sms_art_asset_candidate_metadata_v1",
+  "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v3_candidate",
+  "character": "DR. FERDINAND SOCIAL",
+  "artifact_kind": "character_concept_model_sheet",
+  "catalog_index": 1,
+  "revision": 3,
+  "style_id": "CPS2-Alpha-Cel",
+  "franchise_reference": "Street Fighter Zero (Alpha) · Arcade CPS-2 · 1990s",
+  "status": "superseded_after_independent_review",
+  "created_date": "2026-10-11",
+  "image": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/dr_social_model_sheet_cps2_alpha_cel_v3_candidate.png",
+    "sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e",
+    "dimensions_px": [
+      1619,
+      971
+    ],
+    "format": "PNG",
+    "color_mode": "RGB"
+  },
+  "parent_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+    "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+    "role": "owner-approved identity, palette, scale and style reference; remains approved"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/dr_social_model_sheet_cps2_alpha_cel_v3_candidate_prompt.txt",
+    "sha256": "46199a09cdbe7b2a4807485ed323546aa25df05e3b2a16000ec2dcdfdf011326"
+  },
+  "generation": {
+    "tool": "built-in image_gen.imagegen",
+    "method": "image edit using the approved v2 local image as reference",
+    "generated_output_preserved_without_pixel_edit": true
+  },
+  "preserved_identity": [
+    "Fully human adult investigator; no monster traits or transformation",
+    "Gray swept-back hair, round brass spectacles and mature intelligent face",
+    "Tall lean ectomorph proportions and 7.5H comparison guide",
+    "Approved blue/cyan/teal, white, gray, burgundy, brown/brass palette; violet reserved for boomerang effect",
+    "CPS2-Alpha-Cel visual language and neutral cream sheet layout"
+  ],
+  "requested_revision": [
+    "Costume updated consistently across front, profile and back to read as an 1880s–1890s London investigator: Victorian frock-coat tails and lapels, double-breasted waistcoat, high white collar, burgundy cravat, watch chain, period trousers and leather boots.",
+    "Profile pose and face-detail view retained; facial identity, body scale and palette preserved.",
+    "Signature action now shows a connected throwing arm releasing the boomerang and the other hand gripping a blunt, clearly identified walking cane; no sword thrust in this pose.",
+    "Separated equipment reference panel distinguishes concept identity items from the source-game arsenal."
+  ],
+  "equipment_reference_scope": {
+    "concept_identity": [
+      "walking cane",
+      "rapier",
+      "steel boomerang"
+    ],
+    "source_game_arsenal_reference_only": [
+      "knife",
+      "hammer",
+      "axe",
+      "pistol",
+      "bomb",
+      "stake"
+    ],
+    "not_a_fighter_moveset_approval": true,
+    "inventory_conflict": "GDD row 04 lists cane, rapier, knife, axe, pistol, bombs and boomerang. The combat design proposal records community-guide terminology as knife, sword, hammer and axe plus pistol, bomb, boomerang and stake, and explicitly says primary-weapon names differ between sources. The art panel labels reference objects separately; it does not resolve the project-doc discrepancy or approve all items as moves."
+  },
+  "sources": [
+    {
+      "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+      "role": "project roster and weapon inventory authority"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_combat_design_proposal_v1.md",
+      "role": "weapon-source discrepancy and fighter-adaptation boundary"
+    },
+    {
+      "url": "https://gamefaqs.gamespot.com/sms/588099-master-of-darkness/faqs/44643",
+      "role": "community guide consulted for the source-game item reference panel; not a substitute for project approval"
+    }
+  ],
+  "producer_visual_review": {
+    "status": "candidate_for_review",
+    "observed": [
+      "The action reads as a boomerang release with a visibly connected shoulder-to-hand path and a separate cane grip.",
+      "The object panel separates and labels the cane, rapier, boomerang and six source-game reference items without cropping.",
+      "The front and rear views carry the period costume cues while preserving the established palette and lean body shape."
+    ],
+    "open_review": [
+      "Independent reviewer and owner must judge anatomy, cross-view garment continuity and fidelity of each weapon silhouette.",
+      "Resolve the GDD/combat-proposal weapon terminology before treating the reference arsenal as the fan-game canonical moveset."
+    ]
+  },
+  "approval_scope": "Concept/model-sheet candidate only. The v2 approved reference remains active. This candidate does not approve sprites, moveset, animation, SMS palette conversion, integration, ROM or game delivery.",
+  "owner_approval": null
+}

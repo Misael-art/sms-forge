@@ -1,0 +1,216 @@
+{
+ "schema": "sprite_scene_manifest_v1",
+ "sprite_size": "8x16",
+ "zoomed": false,
+ "screen_h": 192,
+ "sat_terminated": true,
+ "sprites": [
+  {
+   "x": 100,
+   "y": 136,
+   "tile": 0
+  },
+  {
+   "x": 108,
+   "y": 136,
+   "tile": 2
+  },
+  {
+   "x": 116,
+   "y": 136,
+   "tile": 4
+  },
+  {
+   "x": 92,
+   "y": 152,
+   "tile": 6
+  },
+  {
+   "x": 100,
+   "y": 152,
+   "tile": 8
+  },
+  {
+   "x": 108,
+   "y": 152,
+   "tile": 10
+  },
+  {
+   "x": 116,
+   "y": 152,
+   "tile": 12
+  },
+  {
+   "x": 124,
+   "y": 152,
+   "tile": 14
+  },
+  {
+   "x": 132,
+   "y": 152,
+   "tile": 16
+  },
+  {
+   "x": 92,
+   "y": 168,
+   "tile": 18
+  },
+  {
+   "x": 100,
+   "y": 168,
+   "tile": 20
+  },
+  {
+   "x": 108,
+   "y": 168,
+   "tile": 22
+  },
+  {
+   "x": 116,
+   "y": 168,
+   "tile": 24
+  },
+  {
+   "x": 124,
+   "y": 168,
+   "tile": 26
+  },
+  {
+   "x": 132,
+   "y": 168,
+   "tile": 28
+  },
+  {
+   "x": 140,
+   "y": 168,
+   "tile": 30
+  },
+  {
+   "x": 148,
+   "y": 168,
+   "tile": 32
+  },
+  {
+   "x": 124,
+   "y": 184,
+   "tile": 34
+  },
+  {
+   "x": 132,
+   "y": 184,
+   "tile": 36
+  },
+  {
+   "x": 124,
+   "y": 200,
+   "tile": 38
+  },
+  {
+   "x": 132,
+   "y": 200,
+   "tile": 40
+  },
+  {
+   "x": 124,
+   "y": 144,
+   "tile": 140
+  },
+  {
+   "x": 132,
+   "y": 192,
+   "tile": 146
+  },
+  {
+   "x": 164,
+   "y": 144,
+   "tile": 148
+  },
+  {
+   "x": 124,
+   "y": 192,
+   "tile": 150
+  }
+ ],
+ "scene": {
+  "kind": "scan_pressure",
+  "policy": "o3 linhas exatas D9-a revisada",
+  "player": {
+   "frame": "fall01",
+   "side": "left",
+   "pose_index": 24,
+   "rows": "contagem por linha de canvas (sem x)"
+  },
+  "enemy": {
+   "frame": "fall02",
+   "side": "left",
+   "pose_index": 20
+  },
+  "dz": 0,
+  "base_player": 200,
+  "base_enemy": 200,
+  "counters": "linhas do jogador (estatico) + ec do inimigo",
+  "note": "cena de politica (x fixo para o gate; decisao x-independente, licao O2)",
+  "sat_order": "jogador (ordem da pose) + inimigo (dens desc)"
+ },
+ "simulation": {
+  "peak_per_line": 8,
+  "pre_policy_peak": 16,
+  "row_counters": {
+   "1": 2,
+   "4": 2
+  },
+  "drops": 19,
+  "drops_detail": [
+   {
+    "order": 0,
+    "row": 3,
+    "col": 5,
+    "dens": 111
+   },
+   {
+    "order": 1,
+    "row": 3,
+    "col": 3,
+    "dens": 107
+   },
+   {
+    "order": 2,
+    "row": 3,
+    "col": 2,
+    "dens": 103
+   },
+   {
+    "order": 3,
+    "row": 3,
+    "col": 4,
+    "dens": 99
+   },
+   {
+    "order": 4,
+    "row": 3,
+    "col": 6,
+    "dens": 88
+   },
+   {
+    "order": 5,
+    "row": 2,
+    "col": 8,
+    "dens": 67
+   },
+   {
+    "order": 6,
+    "row": 2,
+    "col": 3,
+    "dens": 59
+   },
+   {
+    "order": 7,
+    "row": 2,
+    "col": 6,
+    "dens": 54
+   }
+  ],
+  "sat_entries": 25,
+  "note": "politica D9-a revisada: contagem exata por linha de canvas (passo 16) + tabela estatica do jogador; conferido pelo gate audit_sprite_line_sim"
+ }
+}

@@ -1,10 +1,12 @@
 #include "engine.h"
+#include "stage_dojo.h"
 
-static const MoveDef mv_punch = {4, 4, 8, 7, 12, 8, 4, 0, {12, 10, 12, 8}};
-static const MoveDef mv_kick  = {6, 4, 10, 10, 14, 10, 5, 0, {8, 20, 14, 10}};
-static const MoveDef mv_hadou = {10, 4, 18, 12, 16, 12, 6, MF_PROJ, {12, 8, 16, 10}};
-static const MoveDef mv_slam  = {8, 6, 16, 14, 18, 12, 8, 0, {8, 8, 16, 20}};
-static const MoveDef mv_throw = {4, 6, 12, 10, 16, 0, 6, MF_THROW, {2, 8, 20, 20}};
+/* Caixas no canvas 32x64 (molde MSSF2T: soco alto y+18..32, chute y+40..58). */
+static const MoveDef mv_punch = {4, 4, 8, 7, 12, 8, 4, 0, {20, 18, 12, 14}};
+static const MoveDef mv_kick  = {6, 4, 10, 10, 14, 10, 5, 0, {8, 40, 14, 18}};
+static const MoveDef mv_hadou = {10, 4, 18, 12, 16, 12, 6, MF_PROJ, {20, 18, 16, 14}};
+static const MoveDef mv_slam  = {8, 6, 16, 14, 18, 12, 8, 0, {8, 18, 16, 28}};
+static const MoveDef mv_throw = {4, 6, 12, 10, 16, 0, 6, MF_THROW, {4, 12, 32, 40}};
 
 static const FighterDef def_ryo = {
     FID_RYO, 2, 8, 1, &mv_punch, &mv_kick, &mv_hadou
@@ -39,9 +41,57 @@ static unsigned char is_busy(unsigned int st)
                            st == ST_WIN || st == ST_GUARD);
 }
 
+static unsigned char face_flip(const Fighter *f)
+{
+    return (unsigned char)(f->facing ? 0 : 1);
+}
+
+static void anim_tick(unsigned char who)
+{
+    Fighter *f = &P[who];
+    const AnimDef *a = anim_of(f->id, f->pose);
+    unsigned char n = a->n;
+    unsigned char dur;
+    unsigned char nxt;
+    unsigned char flip = face_flip(f);
+    if (n == 0)
+        n = 1;
+    if (f->anim_i >= n)
+        f->anim_i = (unsigned char)(n - 1);
+    dur = a->dur[f->anim_i];
+    /* Prefetch do proximo quadro no banco ocioso enquanto o atual esta na tela. */
+    if (!stream_busy(who) && !stream_ready(who) && n > 1) {
+        if (a->loop)
+            nxt = (unsigned char)((f->anim_i + 1) % n);
+        else
+            nxt = (unsigned char)((f->anim_i + 1 < n) ? (f->anim_i + 1) : f->anim_i);
+        if (nxt != f->anim_i)
+            stream_request(who, f->pose, nxt, flip);
+    }
+    if (dur == 255)
+        return;
+    f->anim_t++;
+    if (f->anim_t < dur)
+        return;
+    if (stream_ready(who)) {
+        stream_present(who);
+        f->anim_i = stream_frame(who);
+        f->anim_t = 0;
+        return;
+    }
+    if (stream_busy(who))
+        return;
+    f->anim_t = 0;
+}
+
 void fighter_set_state(unsigned char who, unsigned int st)
 {
     Fighter *f = &P[who];
+    unsigned char flip = face_flip(f);
+    if (f->state == st && st != ST_HIT) {
+        stream_request(who, f->pose, f->anim_i, flip);
+        return;
+    }
     if (is_attack(st) && f->state != st) {
         f->attack_inst++;
         if (f->attack_inst == 0) {
@@ -51,18 +101,31 @@ void fighter_set_state(unsigned char who, unsigned int st)
     }
     f->state = st;
     f->timer = 0;
-    if (st == ST_PUNCH || st == ST_KICK || st == ST_SPECIAL || st == ST_THROW) {
+    f->anim_i = 0;
+    f->anim_t = 0;
+    if (st == ST_WALK_F || st == ST_WALK_B) {
+        f->pose = POSE_WALK;
+    } else if (st == ST_PUNCH || st == ST_KICK || st == ST_THROW) {
         f->pose = POSE_PUNCH;
-    } else if (st == ST_HIT || st == ST_KO) {
-        f->pose = POSE_PUNCH;
+    } else if (st == ST_SPECIAL) {
+        f->pose = POSE_SPECIAL;
+    } else if (st == ST_HIT) {
+        f->pose = POSE_HIT;
+    } else if (st == ST_KO || st == ST_WIN) {
+        f->pose = POSE_KO;
+    } else if (st == ST_CROUCH || st == ST_GUARD) {
+        f->pose = POSE_CROUCH;
+    } else if (st == ST_JUMP) {
+        f->pose = POSE_JUMP;
     } else {
         f->pose = POSE_IDLE;
     }
+    stream_request(who, f->pose, 0, flip);
     if (st == ST_SPECIAL && (fighter_def(f->id)->special->flags & MF_PROJ) &&
         f->fire_on == 0) {
         f->fire_on = 1;
-        f->fx = f->x + (f->facing ? 16 : -8);
-        f->fy = f->y + 8;
+        f->fx = f->x + (f->facing ? FIGHTER_W : -8);
+        f->fy = f->y + 24;
         f->fvx = (signed char)(f->facing ? 3 : -3);
         audio_shot();
     }
@@ -180,7 +243,7 @@ static void dummy_ai(unsigned char who)
         P[who].keys[INP_RIGHT] = KEY_HOLD;
     } else if (gap < -28) {
         P[who].keys[INP_LEFT] = KEY_HOLD;
-    } else if ((g_frame & 31) == 0) {
+    } else if ((g_frame & 15) == 0) {
         P[who].keys[INP_B1] = KEY_PRESSED;
     }
 }
@@ -194,6 +257,11 @@ static void fighter_logic(unsigned char who)
 
     if (f->control == CONTROL_CPU) {
         dummy_ai(who);
+    } else if (f->control == CONTROL_DUMMY) {
+        unsigned char b;
+        for (b = 0; b < INP_COUNT; b++) {
+            P[who].keys[b] = KEY_FREE;
+        }
     } else if (f->control == CONTROL_BLOCK) {
         unsigned char b;
         for (b = 0; b < INP_COUNT; b++) {
@@ -208,6 +276,7 @@ static void fighter_logic(unsigned char who)
     hist_push(who);
     apply_gravity(who);
     update_facing(who);
+    anim_tick(who);
 
     if (f->facing) {
         fwd = heldk(who, INP_RIGHT);
@@ -232,15 +301,26 @@ static void fighter_logic(unsigned char who)
 
     if (is_attack(f->state)) {
         const MoveDef *mv = move_of(f);
+        const AnimDef *a = anim_of(f->id, f->pose);
+        unsigned char end = (unsigned char)(mv->startup + mv->active + mv->recovery);
         f->timer++;
-        if (f->timer >= (unsigned char)(mv->startup + mv->active + mv->recovery)) {
+        /* Hitbox segue o timer; o estado espera o ultimo quadro aparecer. */
+        if (f->timer >= end && f->anim_i >= (unsigned char)(a->n ? a->n - 1 : 0)
+            && !stream_busy(who) && (f->timer >= 16)) {
+            fighter_set_state(who, (f->y < GROUND_Y) ? ST_JUMP : ST_IDLE);
+        }
+        if (f->timer >= 48) {
             fighter_set_state(who, (f->y < GROUND_Y) ? ST_JUMP : ST_IDLE);
         }
         return;
     }
     if (f->state == ST_HIT) {
+        const AnimDef *a = anim_of(f->id, f->pose);
         f->timer++;
-        if (f->timer > 12) {
+        if (f->timer > 12 && f->anim_i >= (unsigned char)(a->n ? a->n - 1 : 0)) {
+            fighter_set_state(who, ST_IDLE);
+        }
+        if (f->timer > 24) {
             fighter_set_state(who, ST_IDLE);
         }
         return;
@@ -282,19 +362,22 @@ static void fighter_logic(unsigned char who)
         if (g < 0) {
             g = -g;
         }
+        /* B1+B2 (GDD) ou frente+B1 a gap<=24: throw observavel sem B2. */
         if (g <= 24 && f->y >= GROUND_Y && P[who ^ 1].y >= GROUND_Y &&
             (heldk(who, INP_B1) || pressk(who, INP_B1)) &&
-            (heldk(who, INP_B2) || pressk(who, INP_B2))) {
+            (heldk(who, INP_B2) || pressk(who, INP_B2) || fwd)) {
             fighter_set_state(who, ST_THROW);
             return;
         }
     }
-    if (pressk(who, INP_B1)) {
-        fighter_set_state(who, ST_PUNCH);
+    /* B2 ou Down+B1 = chute (B2 pode nao existir no teclado). */
+    if (pressk(who, INP_B2) ||
+        (pressk(who, INP_B1) && heldk(who, INP_DOWN))) {
+        fighter_set_state(who, ST_KICK);
         return;
     }
-    if (pressk(who, INP_B2)) {
-        fighter_set_state(who, ST_KICK);
+    if (pressk(who, INP_B1)) {
+        fighter_set_state(who, ST_PUNCH);
         return;
     }
     if (pressk(who, INP_UP) && f->y >= GROUND_Y) {
@@ -363,14 +446,14 @@ static unsigned char boxes_hit(unsigned char atk, unsigned char def)
     } else {
         hx = a->x + FIGHTER_W - mv->hit.x - mv->hit.w;
     }
-    bx = d->x + 2;
-    bw = 12;
+    bx = d->x + 8;
+    bw = 16;
     if (d->state == ST_CROUCH) {
-        by = d->y + 16;
-        bh = 16;
+        by = d->y + 34;
+        bh = 26;
     } else {
-        by = d->y + 4;
-        bh = 28;
+        by = d->y + 12;
+        bh = 48;
     }
     if (hx < bx + bw && hx + hw > bx && hy < by + bh && hy + hh > by) {
         return 1;
@@ -388,10 +471,10 @@ static void separate(void)
     if (gap < 0) {
         gap = -gap;
     }
-    if (gap >= PUSH_W * 2) {
+    if (gap >= PUSH_W) {
         return;
     }
-    mid = (PUSH_W * 2 - gap) / 2;
+    mid = (PUSH_W - gap + 1) / 2;
     if (P[0].x <= P[1].x) {
         P[0].x -= mid;
         P[1].x += mid;
@@ -580,15 +663,23 @@ void fight_enter(void)
     P[0].rounds = 0;
     P[1].rounds = 0;
     g_round = 0;
-    for (row = 18; row < 24; row++) {
+    SMS_loadTiles(stage_dojo_tiles, TILE_STAGE, STAGE_DOJO_TILES_SIZE);
+    for (row = 0; row < 24; row++) {
         SMS_setNextTileatXY(0, row);
         for (col = 0; col < 32; col++) {
-            SMS_setTile(TILE_FLOOR);
+            if (row < 3) {
+                SMS_setTile(0);
+            } else {
+                SMS_setTile((unsigned int)TILE_STAGE + stage_dojo_map[row][col]);
+            }
         }
     }
     hud_enter_fight();
     audio_fight();
+    stream_init();
     fight_reset_round();
+    stream_load_now(0, P[0].pose, 0, (unsigned char)(P[0].facing ? 0 : 1));
+    stream_load_now(1, P[1].pose, 0, (unsigned char)(P[1].facing ? 0 : 1));
 }
 
 void fight_update(void)
@@ -615,52 +706,8 @@ void fight_update(void)
     round_logic();
 }
 
-static const signed char meta_idle[] = {
-    0, 0, 0,
-    8, 0, 2,
-    0, 16, 4,
-    8, 16, 6,
-    (signed char)METASPRITE_END
-};
-
-static unsigned char tile_base(unsigned char who)
-{
-    Fighter *f = &P[who];
-    unsigned char punch = (unsigned char)(f->pose == POSE_PUNCH);
-    if (who == 0) {
-        if (f->facing) {
-            return punch ? TILE_P1_PUNCH : TILE_P1_IDLE;
-        }
-        return punch ? TILE_P1_PUNCH_L : TILE_P1_IDLE_L;
-    }
-    if (f->facing) {
-        return punch ? TILE_P2_PUNCH : TILE_P2_IDLE;
-    }
-    return punch ? TILE_P2_PUNCH_L : TILE_P2_IDLE_L;
-}
-
 void fight_present(void)
 {
-    unsigned char who, i;
-    signed char meta[13];
-    unsigned char base;
-    SMS_initSprites();
-    for (who = 0; who < 2; who++) {
-        base = tile_base(who);
-        for (i = 0; i < 12; i++) {
-            meta[i] = meta_idle[i];
-        }
-        meta[12] = (signed char)METASPRITE_END;
-        meta[2] = (signed char)(base + 0);
-        meta[5] = (signed char)(base + 2);
-        meta[8] = (signed char)(base + 4);
-        meta[11] = (signed char)(base + 6);
-        SMS_addMetaSprite((unsigned char)P[who].x, (unsigned char)P[who].y, meta);
-        if (P[who].fire_on == 1) {
-            SMS_addSprite((unsigned char)P[who].fx, (unsigned char)P[who].fy,
-                          TILE_FB);
-        }
-    }
-    SMS_copySpritestoSAT();
+    stream_draw();
     hud_draw();
 }

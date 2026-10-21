@@ -136,6 +136,7 @@ def main():
               "audit_render_fidelity.py",
               "audit_hardware_constants.py",
               "audit_debug_markers.py",
+              "audit_observed_cases.py",
               "audit_tilemap_bounds.py",
               "audit_tilemap_mirror.py",
               "audit_vscroll_wrap.py",
@@ -170,7 +171,9 @@ def main():
               "audit_audio_provenance.py",
               "measure_worst_frame.py",
               "audit_header_claims.py", "audit_mugen_engine_contract.py",
-              "audit_art_review_checklist.py"):
+              "audit_art_review_checklist.py",
+              "mugen2sms/runtime/vram_plan.py",
+              "mugen2sms/runtime/commit_budget.py"):
         results.append(run([os.path.join(HERE, g), "--self-check"], 0,
                            f"selfcheck:{g}"))
     print("== Fase 2: fixtures geradas ==")
@@ -256,6 +259,16 @@ def main():
     print(f"  [{'OK ' if ok else 'XX '}] AIR N+1 identity/timing including rollover accepted")
     identity["kind"]="air_timing";reject=not evaluate_semantics(identity,True)["ok"];results.append(reject)
     print(f"  [{'OK ' if reject else 'XX '}] duration-only record cannot prove AIR identity")
+    from audit_observed_cases import fixture as observed_fixture, evaluate as evaluate_observed
+    observed = observed_fixture(Path(tmp)/"observed_cases")
+    ok = evaluate_observed(observed)["ok"]; results.append(ok)
+    print(f"  [{'OK ' if ok else 'XX '}] RAM assertions and input ACK deadline rederived from journal")
+    observed["cases"][0]["conditions"][1]["value"] = 0
+    reject = not evaluate_observed(observed)["ok"]; results.append(reject)
+    print(f"  [{'OK ' if reject else 'XX '}] claimed whiff rejected when raw reads show damage")
+    from report_output import self_check as report_output_self_check, cli_self_check
+    results.append(report_output_self_check() == 0)
+    results.append(cli_self_check() == 0)
     from capture_video import image_timeline_motion
     from PIL import Image
     a=Image.new('L',(256,192),0);b=Image.new('L',(256,192),255)

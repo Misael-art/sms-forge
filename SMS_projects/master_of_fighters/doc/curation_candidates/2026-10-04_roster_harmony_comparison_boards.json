@@ -1,0 +1,39 @@
+{
+  "schema": "smsforge.curation_candidate.v1",
+  "candidate_key": "roster_harmony_comparison_boards",
+  "date": "2026-10-04",
+  "status": "promoted_to_canonical_curation",
+  "scope": "project evidence promoted to cross-agent canonical practice",
+  "user_decision": "The owner approved the comparison-board layout as the project standard and requested that the practice be captured for later curation into the canonical agent. In the follow-up on 2026-10-04, the owner explicitly asked to make roster-wide concept harmony a permanent agent attention and requested a measured sprite-scale/morphology workflow.",
+  "evidence": [
+    {
+      "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concepts_7char_v1.png",
+      "role": "front/side concept comparison using one shared relative display ruler"
+    },
+    {
+      "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_7char_v1.png",
+      "role": "one existing frame per character; native colors/pixels preserved; x5 nearest-neighbor and common baseline"
+    },
+    {
+      "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_review_manifest_v1.json",
+      "role": "reference paths, SHA-256 values, frame sizes and review status"
+    }
+  ],
+  "proposed_practices": [
+    "Keep concept-art comparison and existing-sprite comparison as separate boards.",
+    "Use a common canvas, labeled character cards, consistent baselines and one relative ruler; state clearly that display units are not canonical heights.",
+    "Choose one existing source frame per sprite sheet; crop transparent margins only, enlarge by an integer nearest-neighbor factor, align baselines and disclose native cell and visible-pixel dimensions.",
+    "Do not repaint, recolor or otherwise normalize source sprite pixels for the comparison board.",
+    "Use approved project art only as a rendering-treatment reference; use each character game source and approved palette as the authority for identity and color.",
+    "Preserve source assets; confine background removal or isolated-fragment cleanup to derived review compositions and disclose those edits.",
+    "Mark generated turnaround studies as proposals and keep them out of runtime assets until separately reviewed and approved.",
+    "Store reference paths, hashes, transforms and review status in a manifest so later reviewers can reproduce the comparison."
+  ],
+  "future_curation": {
+    "canonical_lesson_id": "L105",
+    "deduplicate_against": "doc/curation/id_registry.json and doc/agent_learning/learning_ledger.json",
+    "candidate_workflow": "Promoted as L105 with a roster measurement tool and workflow/skill guidance; artistic morphology and rendering still require human review.",
+    "measurement_boundary": "Automate manifest completeness, file existence, hashes, frame extraction, scale and baseline metadata; human review remains necessary for artistic harmony and fidelity.",
+    "approval_required_before_canonical_changes": false
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "purpose": "isolated_controls_diagnostic",
+  "checks": {
+    "muted_boot_paused_start": "pass",
+    "two_distinct_roms_displays_processes": "pass",
+    "separate_sram_rom_observed_writes": "pass",
+    "parallel_exact_17_29_frames_no_cross_input": "pass",
+    "all_six_sms_controls_both_ports_both_roms": "pass",
+    "console_pause_nmi": "pass",
+    "wrong_session_token_stale_sequence_rejected": "pass",
+    "atomic_frame_script_release_and_rom_count": "pass",
+    "private_keyboard_events_do_not_change_rom_input": "pass",
+    "physical_device_paths_hidden_in_target": "pass",
+    "video_one_framebuffer_per_vdp_frame": "pass",
+    "canonical_runtime_probe_private_realtime_route": "pass",
+    "separate_informative_framebuffers_and_seals": "pass",
+    "bundle_rejects_changed_rom": "pass",
+    "owned_shutdown_other_session_survives": "pass",
+    "closed_session_rejected": "pass",
+    "shared_config_unchanged": "pass"
+  },
+  "audio": "not_validated",
+  "performance": {
+    "scope": "controls diagnostic only",
+    "fps_janelas": [
+      59.33,
+      58.86
+    ],
+    "host_load": [
+      10.384765625,
+      8.84619140625,
+      7.6611328125
+    ]
+  },
+  "rom_observations": {
+    "before": [
+      {
+        "id": 1,
+        "frame": 61,
+        "keys": 0,
+        "pause": 0,
+        "held": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 2,
+        "frame": 60,
+        "keys": 0,
+        "pause": 0,
+        "held": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "frame": 78,
+        "keys": 528,
+        "pause": 0,
+        "held": [
+          0,
+          0,
+          0,
+          0,
+          17,
+          0,
+          0,
+          0,
+          0,
+          17,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 2,
+        "frame": 89,
+        "keys": 2052,
+        "pause": 0,
+        "held": [
+          0,
+          0,
+          29,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          29
+        ]
+      }
+    ]
+  },
+  "physical_joystick_hotplug": "not_exercised; structural device denial verified",
+  "host_desktop_typing": "not_injected; host focus untouched",
+  "captures": [
+    {
+      "schema": 1,
+      "session_id": "e2b8abc337154566850b5531ae3dfa56",
+      "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "emulator_sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d",
+      "bridge_sha256": "58175d9096be2e58e968f38c62a7528577f9617c52faa659c4b6ba52a3eb5f7c",
+      "config_sha256": "96f1d666d3385321f7ff87ea6f260305647e00ca2f702dd44d26825aac26a559",
+      "display": ":2",
+      "effective_config_sha256": "572d1a866f47895b7831cdb97d88b2ab6e4718b39192773ef813bb5640f4b60d",
+      "emulator_process": {
+        "pid": 531373,
+        "start_ticks": "672871"
+      },
+      "frame": 621,
+      "captured_at": 1791249584.48427,
+      "path": "/tmp/smsforge-1000/e2b8abc337154566850b5531ae3dfa56/evidence/frame.png",
+      "sha256": "098a8f6684eb3a83bf7588b9ce23a0bd83a1a9ff7087ee64aba288963ddefe51",
+      "canvas": [
+        256,
+        192
+      ],
+      "audio": "private_sink_unvalidated",
+      "host_load": [
+        10.384765625,
+        8.84619140625,
+        7.6611328125
+      ],
+      "informative": true,
+      "detail": "variancia de luma=504.0 (min 40.0)"
+    },
+    {
+      "schema": 1,
+      "session_id": "31fc194fbad2445a9b4d631d27b1e905",
+      "rom_sha256": "ec405ade0d2070dac8f23bd21fe6df59f4fdbf233dae5062ec4044c78720897a",
+      "emulator_sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d",
+      "bridge_sha256": "58175d9096be2e58e968f38c62a7528577f9617c52faa659c4b6ba52a3eb5f7c",
+      "config_sha256": "96f1d666d3385321f7ff87ea6f260305647e00ca2f702dd44d26825aac26a559",
+      "display": ":4",
+      "effective_config_sha256": "572d1a866f47895b7831cdb97d88b2ab6e4718b39192773ef813bb5640f4b60d",
+      "emulator_process": {
+        "pid": 531747,
+        "start_ticks": "673326"
+      },
+      "frame": 236,
+      "captured_at": 1791249584.7181263,
+      "path": "/tmp/smsforge-1000/31fc194fbad2445a9b4d631d27b1e905/evidence/frame.png",
+      "sha256": "e0bc444d8e52f6a7624798c856717fe76bb55a1a5e5da6939063b463299e91df",
+      "canvas": [
+        256,
+        192
+      ],
+      "audio": "private_sink_unvalidated",
+      "host_load": [
+        10.384765625,
+        8.84619140625,
+        7.6611328125
+      ],
+      "informative": true,
+      "detail": "variancia de luma=768.6 (min 40.0)"
+    }
+  ],
+  "status": "pass",
+  "session_paths": [
+    "/tmp/smsforge-1000/e2b8abc337154566850b5531ae3dfa56",
+    "/tmp/smsforge-1000/31fc194fbad2445a9b4d631d27b1e905"
+  ],
+  "shared_config_before": "ba0ba303169595cf78b190904c8c59e9d2a776ce4ae11dbf7ef0dca9e9dcee0a",
+  "shared_config_after": "ba0ba303169595cf78b190904c8c59e9d2a776ce4ae11dbf7ef0dca9e9dcee0a"
+}

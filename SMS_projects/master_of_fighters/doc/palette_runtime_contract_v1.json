@@ -1,0 +1,84 @@
+{
+  "schema": "mof_sms_runtime_palette_contract_v1",
+  "project": "master_of_fighters",
+  "status": "allocation_model_defined_roster_mapping_pending",
+  "authority": [
+    "doc/11-gdd.md",
+    "doc/15-tdd.md",
+    "sdk/devkitSMS/SMSlib/SMSlib.h"
+  ],
+  "technical_references": [
+    {
+      "source": "sdk/devkitSMS/SMSlib/SMSlib.h",
+      "claims": "The build API exposes distinct BG and sprite palette loaders and TILE_USE_SPRITE_PALETTE for choosing the sprite palette on BG tiles."
+    },
+    {
+      "url": "https://github.com/gbdk-2020/gbdk-2020/blob/develop/docs/pages/06b_supported_consoles.md#colors-and-palettes",
+      "claims": "SMS/GG color tables, the shared sprite palette, background palette selection, and sprite palette index-0 transparency semantics."
+    },
+    {
+      "url": "https://www.smspower.org/maxim/HowToProgram/Palette",
+      "claims": "SMS CRAM palette behavior and distinction between background color 0 and transparent sprite color 0."
+    }
+  ],
+  "hardware": {
+    "cram_entries_total": 32,
+    "palette_tables": 2,
+    "entries_per_table": 16,
+    "sms_rgb_components": "2 bits per RGB channel; legal decoded values 0, 85, 170, 255",
+    "sprite_index_0": "transparent for sprite pixels",
+    "background_index_0": "visible backdrop color; not alpha",
+    "background_color_index_0": "visible color for BG pixels in the selected table; BG pixels never become transparent because their color index is zero",
+    "background_tiles_can_select_sprite_table": true,
+    "background_tile_palette_define": "TILE_USE_SPRITE_PALETTE"
+  },
+  "runtime_assignment": {
+    "fight": {
+      "bg_table": {
+        "id": "P0",
+        "users": ["stage_background", "hud"],
+        "entry_0": "backdrop color",
+        "entries_1_15": "HUD roles held stable across stages plus stage-specific colors in remaining slots",
+        "stage_change_policy": "load at scene transition or safe VBlank; keep locked during a round"
+      },
+      "sprite_table": {
+        "id": "P1",
+        "users": ["player_1", "player_2", "projectiles", "hit_effects", "other_hardware_sprites"],
+        "entry_0": "transparent",
+        "entries_1_15": "one roster-wide set of up to 15 useful colors shared by all sprite objects",
+        "per_character_cram_table": false,
+        "mapping_status": "pending_roster_wide_mapping_to_15_useful_colors"
+      },
+      "bg_reuse_of_sprite_table": {
+        "allowed": true,
+        "purpose": "background tiles may reuse colors already in P1 without adding CRAM entries",
+        "conditions": [
+          "tile attribute explicitly selects the sprite palette",
+          "does not change any sprite color assignment",
+          "verified in the scene palette and visual review"
+        ]
+      }
+    }
+  },
+  "authoring_palette_manifests": {
+    "scope": "per-character source and visual-intent RGBs; not independent runtime palettes",
+    "current_manifest": "doc/palettes_manifest.json",
+    "profiles_count": 14,
+    "distinct_nontransparent_rgb_count": 43,
+    "runtime_mapping_required_before_sprite_promotion": true,
+    "mapping_status": "pending"
+  },
+  "proof_sheet_requirements": {
+    "show_source_study_color_count_separately_from_runtime_palette": true,
+    "state_that_all_active_sprites_share_P1": true,
+    "state_that_runtime_mapping_is_pending_until_roster_palette_is_locked": true,
+    "do_not_claim_individual_manifest_palette_is_loaded_for_each_character": true
+  },
+  "runtime_measurements_still_required": [
+    "CRAM write bytes and worst-frame VBlank cost",
+    "scene-specific BG/HUD tile palette usage",
+    "all sprite colors mapped to the locked roster-wide P1 table",
+    "scanline and SAT simulation remain separate from palette validity"
+  ],
+  "limits": "This contract defines palette ownership and accounting. It does not select or approve the final 15-color sprite mapping, certify color readability, or prove the in-ROM palette writes."
+}

@@ -100,6 +100,12 @@ rtk proxy python3 tools/sms_wrapper/audit_subagent_session.py \
    casos/artefatos. Report stale exige novo pedido/coleta, não rehash manual.
    Coleta interrompida preserva metadata/closed da sessão parcial e artefatos;
    pode produzir `blocked` válido sem bundle completo, jamais `passed`.
+   Para asserts de RAM, `audit_observed_cases.py` pode rederivar valores e
+   intervalos VDP do journal preservado (`skills/sms-observed-case-evidence.md`).
+   Ele não substitui este gate de sessão nem autentica pixels apresentados.
+   Publicar journal/metadados finais antes de remover o temporário; conservar
+   positivos, negativos e terminal previstos no pedido. Um resumo 29/29 sem
+   primários não reconstrói a custódia perdida: novo pedido/coleta são necessários.
 10. Coordenador compara worker_id/report ao recibo e retorno da ferramenta
     nativa. O gate não autentica a origem de um chat nem julga a verdade de uma
     observação artística. Parecer independente continua responsabilidade real.

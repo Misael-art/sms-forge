@@ -1,0 +1,44 @@
+{
+  "schema": "sms_subagent_session_v1",
+  "artifact_kind": "session_qa_request",
+  "task_id": "605b4800688c4b7fa646eadd0e4d0ad6",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01",
+  "producer_id": "/root",
+  "worker_id": "/root/native_runtime_qa",
+  "lane": "runtime",
+  "scope": "negative diagnostic: partial collection and owned cleanup, expected blocked feedback",
+  "rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/rom.sms",
+    "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c"
+  },
+  "inputs": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/roms/probe1.sms",
+      "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01/doc/10-memory-bank.md",
+      "sha256": "71d64c1ce7cbef8790ab7e373a08d5dd342358b78e7a6bc87f6e052d03bfde04"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01/doc/11-gdd.md",
+      "sha256": "6207f00888a94e7f25ca82ff9756624ca89f6a5cc8a5f6f50db3169166ea2816"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01/doc/15-tdd.md",
+      "sha256": "77c2bdf67bb212bdc5f29fe506faaa58b44f06aebdbd1d1970a4394993e22168"
+    }
+  ],
+  "cases": [
+    {
+      "id": "unavailable_probe",
+      "axis": "negative collector test",
+      "proof": "rom_observation",
+      "expectation": "invalid RAM address must interrupt collection; closed partial session and artifacts preserved; report blocked/not_run; never passed",
+      "probe": {
+        "address": "0xBFFF",
+        "length": 2
+      }
+    }
+  ]
+}

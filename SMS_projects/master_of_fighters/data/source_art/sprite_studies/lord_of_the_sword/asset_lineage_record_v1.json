@@ -1,0 +1,314 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "landau_idle_sms_96px_12f_v3",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_study",
+  "source_kind": "ai_generated_post_translation",
+  "channel": "built_in_image_gen + ImageMagick cell normalization + prepare_sms_pixel_art.py + png_io.py frame extraction",
+  "status": "owner_approved_visual_reference",
+  "owner_approval": {
+    "date": "2026-10-03",
+    "scope": "visual approval of the 12-frame Landau idle study; source art only, not ROM integration or runtime validation",
+    "source": "explicit user approval in conversation"
+  },
+  "design_reference_approval": {
+    "source": "data/source_art/concept_art/lord_of_the_sword/approved_records/asset_lineage_record_v1.json",
+    "scope": "owner-approved rejuvenated concept used as visual design reference; this does not approve the sprite study"
+  },
+  "contract": {
+    "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_asset_contract_v3.json",
+    "sha256": "4058d17462097944fd9778f926955ebe5017d71c0014e55733e041c2617baff6"
+  },
+  "prompt": {
+    "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_pose_diversity_edit_prompt_v3.txt",
+    "sha256": "0b7eb6a4b6420cf3b7fc006349044cae834ea71b457e013d99980591ee0e0cd8"
+  },
+  "prompt_history": [
+    {
+      "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_prompt_v1.txt",
+      "sha256": "baa9e2402a3682cd7a2884c9470b96d3880bfbff5c89217cab87a705f1ebe43c",
+      "role": "first full-sheet attempt; poses did not fit the 88px height and cell-margin contract"
+    },
+    {
+      "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_prompt_v2.txt",
+      "sha256": "9b02ac02addc80036f3291268b743c6d9dbf84bf40fc30ad9db7a53529e812de",
+      "role": "compact idle direction; generated poses repeated too closely and was not selected"
+    },
+    {
+      "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_pose_diversity_edit_prompt_v3.txt",
+      "sha256": "0b7eb6a4b6420cf3b7fc006349044cae834ea71b457e013d99980591ee0e0cd8",
+      "role": "selected revision; increased visible pose changes while keeping a compact guarded idle"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+      "sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+      "role": "owner-approved young Landau design, anatomy, costume, weapons, and color reference"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "canonical Landau Master System palette; exact allowed colors"
+    },
+    {
+      "path": "doc/build_palettes_manifest.py",
+      "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e",
+      "role": "canonical palette builder"
+    },
+    {
+      "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_generated_v2.png",
+      "sha256": "382da81b1c18a80d77b50f0b0344df9d81163c4b31fed4c1abf567b3e27238e9",
+      "role": "layout and sprite-style input to the pose-diversity edit; not selected as final because the poses repeated"
+    }
+  ],
+  "generated_source": {
+    "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_generated_v3.png",
+    "sha256": "b84633fa2847b33ddd946af5dc0e2b0a792ca495d67f67a33bf31ab544196c82",
+    "dimensions_px": [
+      1448,
+      1086
+    ],
+    "layout": "4 columns x 3 rows; twelve 362x362 source cells",
+    "description": "ImageGen edit based on the owner-approved concept and earlier sheet; selected for twelve distinct guard-idle keys"
+  },
+  "alpha_cleanup": {
+    "tool": "ImageMagick",
+    "method": "threshold generated alpha at 90%; recolor fully black figure pixels to opaque #555555; apply the threshold mask and flatten the exterior to black for transparent-index conversion",
+    "mask_path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_alpha_mask_v3.png",
+    "mask_sha256": "2fd80a46817b4db741376f5fd18aefc7db1776ec33d20ef9b7622875a8a43644",
+    "intermediate_path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_alpha_cutout_v3.png",
+    "intermediate_sha256": "b79d30395b9fb25c9e3cbb49a52309c273e862e3324b5505bd23ec83576f75fe",
+    "reason": "remove transparent halos and detached background noise while retaining the opaque outline"
+  },
+  "geometry_normalization": {
+    "tool": "ImageMagick",
+    "input_dimensions_px": [
+      1448,
+      1086
+    ],
+    "source_grid": [
+      4,
+      3
+    ],
+    "source_cell_px": [
+      362,
+      362
+    ],
+    "output_cell_px": [
+      96,
+      96
+    ],
+    "character_scale_px": [
+      88,
+      88
+    ],
+    "placement": "uniform nearest-neighbor scaling, horizontally centered and bottom-aligned; four frames in the last row shifted down 3 logical pixels after baseline review",
+    "rgb_intermediate_path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_normalized_v3_aligned.png",
+    "rgb_intermediate_sha256": "dd9a0f745510f54963ebbe8fd0e24b723d8c6c9c0d4a78b900b385be18eb2fc2",
+    "baseline_y_px": 95
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [
+        384,
+        288
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "lord_of_the_sword",
+      "speckle_cleanup": true,
+      "cell_size": [
+        96,
+        96
+      ],
+      "transparent_index": 0
+    },
+    "palette_rgb_with_transparent_index": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        85,
+        0,
+        0
+      ],
+      [
+        170,
+        85,
+        0
+      ],
+      [
+        85,
+        170,
+        0
+      ],
+      [
+        255,
+        170,
+        170
+      ],
+      [
+        0,
+        85,
+        0
+      ],
+      [
+        255,
+        170,
+        0
+      ],
+      [
+        170,
+        170,
+        255
+      ],
+      [
+        255,
+        85,
+        85
+      ],
+      [
+        170,
+        170,
+        170
+      ],
+      [
+        85,
+        85,
+        170
+      ],
+      [
+        170,
+        0,
+        0
+      ],
+      [
+        85,
+        85,
+        0
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        85,
+        85,
+        85
+      ],
+      [
+        170,
+        255,
+        0
+      ]
+    ],
+    "resource_gate": "PASS: audit_validate_resources.py"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_v3.png",
+    "sha256": "91e4c2897ea7725a034e7bd6dc0b5f6aa37718a75537f5bdf53fc25d0bee9785",
+    "dimensions_px": [
+      384,
+      288
+    ],
+    "format": "8-bit indexed PNG",
+    "layout": "4 columns x 3 rows; twelve 96x96 frames",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 15
+  },
+  "frames": {
+    "directory": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/",
+    "pattern": "idle_NN.png",
+    "count": 12,
+    "unique_frame_hashes": 12,
+    "frame_sha256": [
+      "ff4173268bc3ebc469a4226e30210392db453bb696f0727ae43fe159efa3ee20",
+      "6b8348888d1627fe42b908f806a7dbf81444fac8b5f98ab6b3df6cc194271746",
+      "fa1635a5c00ec4e5c40eb25f1713ce6c08d5480e3721d96e279f5575baffb209",
+      "d5f12f6d3018e4f8ff166d89a49b21bde63e6215f4da305f8362717b86371da4",
+      "e045d702bf2f6134878c5abbeb769b9f7d93345da15ab0a98a84d702297c6e9d",
+      "9e30f27a19273a05883ac586c8309bd4b7b904a3d736109e2f9e6b9f93902281",
+      "4bae83b06b494b9bb382534f40bbf31aa84a5bb5b411dd9d2a2f648a4495ef9b",
+      "46f4d761ff5d10b4044dfdf5dabfba6a53a18f6b3cec2db21253c007a58b8ec0",
+      "e322f425e7a2f7533e417e4e0d0902e8496d689a116d0293ab5cffb342c5b6e6",
+      "2ea8f6ab8c37b6e569ef347eebb8973f1108a0b59e256788402989bca32496e5",
+      "62db4c83f2de273b1fbc6d783fa5c78697a89147c01aff5ea124ba727620f6f7",
+      "9ac2360c37b1864ce25938c5f91455c95ccbb8942e4a4719c3e3d7cf03652779"
+    ],
+    "common_pivot_px": [
+      48,
+      95
+    ],
+    "visible_height_range_px": [
+      83,
+      87
+    ],
+    "visible_width_range_px": [
+      63,
+      70
+    ],
+    "minimum_horizontal_margin_px": 6,
+    "baseline_y_px": 95,
+    "adjacent_pixel_delta_percent_range": [
+      13.7,
+      28.6
+    ],
+    "semantic_manifest": {
+      "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_semantics_v3.json",
+      "sha256": "02f6b259d57ace90bc602cdad2e5657be0819657357ecf8c6d9c21a2e057a567",
+      "tool_sha256": "7c41ef5ed9e0a7f6687c1ee8ce9cdb8a5b77f4859fc2fa3bd624757c4ed61e5d",
+      "geometry_contract": "canvas 96x96; visible width 63-70; visible height 83-87; baseline y=95, zero-pixel tolerance",
+      "gate": "PASS: audit_animation_semantics.py (frame hashes, pivot, bbox and baseline)"
+    }
+  },
+  "review_preview": {
+    "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_v3_preview_4x.png",
+    "sha256": "12224ffd002916b3a702f7b171ffe2fc9218a73617a554b387f276ec613cde64",
+    "description": "nearest-neighbor 4x review preview flattened on #444444; production source sheet retains transparent index 0"
+  },
+  "visual_check": {
+    "same_young_clean_shaven_character_in_all_frames": true,
+    "same_costume_and_weapon_loadout": true,
+    "four_by_three_layout_and_twelve_distinct_poses": true,
+    "compact_guard_idle_motion_readable": true,
+    "common_feet_baseline_and_pivot": true,
+    "palette_matches_manifest": true,
+    "grain_cleanup_and_non_dithered_conversion": true,
+    "external_game_pixels_used": false,
+    "owner_visual_review": "approved by owner 2026-10-03 as visual reference; runtime validation remains pending"
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "all_colors_on_sms_6bit_grid": true,
+    "per_character_manifest_palette_match": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "animation_semantics_gate": "PASS",
+    "geometry_contract_gate": "PASS: audit_animation_semantics.py",
+    "independent_animation_review": "pending",
+    "sprite_mode_or_metasprite_contract": "not assessed; source-art study only",
+    "scanline_budget_validation": false,
+    "rom_or_emulator_validation": false
+  },
+  "superseded_attempts": [
+    {
+      "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_v1.png",
+      "reason": "passed resource and frame-uniqueness gates but some silhouettes touched cell edges and exceeded the measured height contract"
+    },
+    {
+      "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_generated_v2.png",
+      "reason": "repeated near-identical guard poses; not selected"
+    }
+  ],
+  "next_gate": "independent visual review; then assess runtime geometry, scanline budget, asset binding, and ROM/emulator gates before any res integration"
+}

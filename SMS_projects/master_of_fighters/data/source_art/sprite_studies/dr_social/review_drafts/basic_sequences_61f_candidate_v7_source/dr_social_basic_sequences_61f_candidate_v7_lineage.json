@@ -1,0 +1,110 @@
+{
+  "schema": "mof_asset_lineage_v1",
+  "asset_id": "dr_social_animation_source_v07",
+  "status": "candidate_only",
+  "design_reference": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "role": "sole visual identity reference"
+  },
+  "generation_history": [
+    {
+      "stage": "raw pose sources",
+      "record": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v4_source/dr_social_basic_sequences_candidate_v4_processing_report.json",
+      "raw_sources": {
+        "initial_layout_atlas": {
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v4_source/raw_initial_layout_atlas_v1.png",
+          "sha256": "7ae00bb9c8d4f33baaceadfe424742517643befb1ef1bd5e2513a0bafe345b12",
+          "size_px": [
+            1448,
+            1086
+          ]
+        },
+        "revised_atlas": {
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v4_source/raw_revised_atlas_v2.png",
+          "sha256": "a9753fe5409019af24be0b40d330e470f3f5f3048cc0e20d1515386db34a2b4b",
+          "size_px": [
+            1448,
+            1086
+          ]
+        },
+        "backward_strip": {
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v4_source/raw_walk_backward_strip_v1.png",
+          "sha256": "dee6e6bb300987eb58d62aa8edde699165ac5a8ea122b7ffa0943d514a8db53d",
+          "size_px": [
+            2172,
+            724
+          ]
+        },
+        "dash_strip": {
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v4_source/raw_dash_strip_v1.png",
+          "sha256": "a3b9cdee771233eb99b77d8ed42c8c2614cabafcd3d0212758d8fcefadced7d5",
+          "size_px": [
+            2172,
+            724
+          ]
+        },
+        "fall_strip": {
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v4_source/raw_knockdown_fall_strip_v1.png",
+          "sha256": "bc935b253a918411f1feddf42f2921e27459965e761546978e33d38203733436",
+          "size_px": [
+            1983,
+            793
+          ]
+        }
+      },
+      "visual_identity": "approved CPS2-Alpha-Cel v4 concept only"
+    },
+    {
+      "stage": "v4 indexed candidate",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v4_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v4.png",
+      "sha256": "0afbb9a4aeae7f21279409d80bf65080874949a0652bc5f9602d9eb31a0207bf",
+      "status": "superseded intermediate"
+    },
+    {
+      "stage": "v5 palette/cluster cleanup",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v5_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v5.png",
+      "sha256": "ed66a88e46c1521ea4c39bf13fab6cf7f2b978ac6f04d4907347f2b45aa1c544",
+      "status": "superseded intermediate",
+      "report": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v5_source/dr_social_basic_sequences_candidate_v5_processing_report.json"
+    },
+    {
+      "stage": "v6 material-role correction",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v6_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v6.png",
+      "sha256": "8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455f",
+      "script": "tools/refine_dr_social_61_pose_sprite_candidate_v6.py",
+      "script_sha256": "9f623e552aad1bb4a66252739595a7fd60903f9c391523354bfa9f7dd2fb3607",
+      "report": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v6_source/dr_social_basic_sequences_candidate_v6_processing_report.json",
+      "status": "candidate; owner and independent review pending"
+    },
+    {
+      "stage": "v7 burgundy material-role cleanup",
+      "input": {
+        "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v6_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v6.png",
+        "sha256": "8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455f",
+        "role": "pixel-only input"
+      },
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+      "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "script": "tools/refine_dr_social_61_pose_sprite_candidate_v7.py",
+      "script_sha256": "2616ead0b5a5886fac8e0c5496c98fe94c4b75d2f94d1417f2e9ee6930629d8a",
+      "geometry_or_order_changed": false,
+      "status": "candidate; independent review and owner approval pending"
+    }
+  ],
+  "reference_boundary": {
+    "old_v1_sprite_sheet_used_as_visual_reference": false,
+    "old_v2_v3_or_prior_sprite_sheet_used_as_identity_reference": false,
+    "intermediate_v5_used_for_pixel_cleanup_only": true,
+    "v4_concept_is_identity_authority": true,
+    "v6_used_for_pixel_cleanup_only": true
+  },
+  "promotion_gates_pending": [
+    "independent art review",
+    "owner approval",
+    "resource contract and palette P1 allocation",
+    "sprite/scanline budget",
+    "ROM integration",
+    "emulator evidence"
+  ]
+}

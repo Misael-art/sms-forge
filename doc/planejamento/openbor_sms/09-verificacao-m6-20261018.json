@@ -1,0 +1,496 @@
+{
+  "schema": "sms_openbor_m6_review_v1",
+  "reviewed_at_utc": "2026-10-18T08:52:19.193504+00:00",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1",
+  "baseline_commit": "da86de303bca969a393032d270c9d245d4055180",
+  "rom": {
+    "path": "SMS_projects/openbor_sms_rev1/out/rom/openbor_sms_rev1.sms",
+    "bytes": 131072,
+    "sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73"
+  },
+  "status": "partial_milestone_real_evidence_combat_corrections_required",
+  "new_build": false,
+  "new_emulator_execution": false,
+  "runtime_or_canonical_skills_modified": false,
+  "sealed_artifact_checks": [
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6_evidence_76cdbee3.json",
+      "bytes": 7550,
+      "sha256": "db417f7cdc84bdc02bf647ba27489815e24ca4c27fbcd91817fb9d88c31a8169",
+      "sealed_sha256": "db417f7cdc84bdc02bf647ba27489815e24ca4c27fbcd91817fb9d88c31a8169",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/attack_3536672de61245eea8a077c3acbdca04.json",
+      "bytes": 2052,
+      "sha256": "6d71287730dfc690e245a2a5e2361ba9488380273f8d0a7d14cca030f5c7dd6f",
+      "sealed_sha256": "6d71287730dfc690e245a2a5e2361ba9488380273f8d0a7d14cca030f5c7dd6f",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/jump_7c0d84bc012244719043bf7ddd3d93a6.json",
+      "bytes": 1621,
+      "sha256": "2bad8f3a7b445bb25168c05ee09f8bffb35662d829f21cdb5ca6a85f9d4ad309",
+      "sealed_sha256": "2bad8f3a7b445bb25168c05ee09f8bffb35662d829f21cdb5ca6a85f9d4ad309",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/knock_a64b276fc41244e2b5fe13370385adfe.json",
+      "bytes": 1958,
+      "sha256": "0842f7c53b25cc5f0a16edf6e7cc3df88b70a73fd7fb443a0200e227dd73cd85",
+      "sealed_sha256": "0842f7c53b25cc5f0a16edf6e7cc3df88b70a73fd7fb443a0200e227dd73cd85",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/depth_f41e8c8c089042be85fd1c9643900043.json",
+      "bytes": 1695,
+      "sha256": "412e5ef3a38098dad97e5186f9975d0ef48b7dbb55d1f18fbfd347eaac7aa1fd",
+      "sealed_sha256": "412e5ef3a38098dad97e5186f9975d0ef48b7dbb55d1f18fbfd347eaac7aa1fd",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/death_14fee45458c74fc8bf539b19898a7db2.json",
+      "bytes": 2341,
+      "sha256": "1623b835f02d66426348b89f06f8e0a195720fa101eb0c383396ffd40afcb00e",
+      "sealed_sha256": "1623b835f02d66426348b89f06f8e0a195720fa101eb0c383396ffd40afcb00e",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/target_z_ac5b26fc6f7b418ba212adafb26dc115.json",
+      "bytes": 2489,
+      "sha256": "fa2fbf22c8819a3a6e7f1fa9c7971314770606c145bf6695857afc80205246e3",
+      "sealed_sha256": "fa2fbf22c8819a3a6e7f1fa9c7971314770606c145bf6695857afc80205246e3",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/attack_video_6083d677112e4c4a9356c9034c6867d5.json",
+      "bytes": 6391,
+      "sha256": "adb766975ad98ca4134297b41d7996a7936cee6d9c1a28adb110e12ed21f93c9",
+      "sealed_sha256": "adb766975ad98ca4134297b41d7996a7936cee6d9c1a28adb110e12ed21f93c9",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/videos_05030d2243d64962b6a1773278be8e29.json",
+      "bytes": 44156,
+      "sha256": "23c91a6536189b152abb351f8e2207bfaf36f79457a8b3321507ff32c9c7e4c9",
+      "sealed_sha256": "23c91a6536189b152abb351f8e2207bfaf36f79457a8b3321507ff32c9c7e4c9",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/mwf_m6_76cdbee3_20261017.json",
+      "bytes": 1136,
+      "sha256": "8a1b040e04142e5bb35deda8a8808a77749530b0299bd57d7928e29eb346f518",
+      "sealed_sha256": "8a1b040e04142e5bb35deda8a8808a77749530b0299bd57d7928e29eb346f518",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/mrp_m6_76cdbee3_20261017.json",
+      "bytes": 1978,
+      "sha256": "abd2950cac44c6cf8a252f88c97ef78b259d503e1bd3b0e7de7f5997f1f1f786",
+      "sealed_sha256": "abd2950cac44c6cf8a252f88c97ef78b259d503e1bd3b0e7de7f5997f1f1f786",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6_stress_input_d5639465181a463a926f0e01f4d7af46.json",
+      "bytes": 1935,
+      "sha256": "77905de4942fce2e3b64f33d57a801c03aed0a9e670e7e15bb6446511d5388b6",
+      "sealed_sha256": "77905de4942fce2e3b64f33d57a801c03aed0a9e670e7e15bb6446511d5388b6",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/3536672de61245eea8a077c3acbdca04/commands.jsonl",
+      "bytes": 105209,
+      "sha256": "ed682cd4784e77f04acf5827d6910b1273d850e85b5169ac6dd10bf380d0dc85",
+      "sealed_sha256": "ed682cd4784e77f04acf5827d6910b1273d850e85b5169ac6dd10bf380d0dc85",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/7c0d84bc012244719043bf7ddd3d93a6/commands.jsonl",
+      "bytes": 68054,
+      "sha256": "c5a9bb344acf8655fbe2d480706e41d414c08a091a9f94390516f67d76dd0aec",
+      "sealed_sha256": "c5a9bb344acf8655fbe2d480706e41d414c08a091a9f94390516f67d76dd0aec",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/a64b276fc41244e2b5fe13370385adfe/commands.jsonl",
+      "bytes": 278287,
+      "sha256": "09dcc8e2dcbe4e8f6df019c22a4495f5ad83ccd2d9767efa8edac577c17f4926",
+      "sealed_sha256": "09dcc8e2dcbe4e8f6df019c22a4495f5ad83ccd2d9767efa8edac577c17f4926",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/f41e8c8c089042be85fd1c9643900043/commands.jsonl",
+      "bytes": 308188,
+      "sha256": "7b199e5c1b013f4335d930752a44c6344bc28e6241694ac393982023b8286c9e",
+      "sealed_sha256": "7b199e5c1b013f4335d930752a44c6344bc28e6241694ac393982023b8286c9e",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/14fee45458c74fc8bf539b19898a7db2/commands.jsonl",
+      "bytes": 524021,
+      "sha256": "016e62c7c2345082eebc8fab017e879b176f3578552ed546a47dba1be75de2b6",
+      "sealed_sha256": "016e62c7c2345082eebc8fab017e879b176f3578552ed546a47dba1be75de2b6",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/ac5b26fc6f7b418ba212adafb26dc115/commands.jsonl",
+      "bytes": 13449,
+      "sha256": "acba55865aa85b0812bd3beecdbd9425148ba2ad32e7022ba0388c480069605e",
+      "sealed_sha256": "acba55865aa85b0812bd3beecdbd9425148ba2ad32e7022ba0388c480069605e",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/d5639465181a463a926f0e01f4d7af46/commands.jsonl",
+      "bytes": 28980,
+      "sha256": "3376285916b45759278fb5e7b71038fa4a1f37e9ebe9fdc6bea11b5d16bdc46d",
+      "sealed_sha256": "3376285916b45759278fb5e7b71038fa4a1f37e9ebe9fdc6bea11b5d16bdc46d",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/commands.jsonl",
+      "bytes": 541200,
+      "sha256": "7464c8e37b182056b41385404c5acf14e3a7ec4dd3540c84eeef570e5e825512",
+      "sealed_sha256": "7464c8e37b182056b41385404c5acf14e3a7ec4dd3540c84eeef570e5e825512",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_ia.mp4",
+      "bytes": 201009,
+      "sha256": "669b642fc40723d10f615e957ba1ef2ace6f2bb703ada1574ccd6926fcd29978",
+      "sealed_sha256": "669b642fc40723d10f615e957ba1ef2ace6f2bb703ada1574ccd6926fcd29978",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_ia.json",
+      "bytes": 5326,
+      "sha256": "f12d8afd2118c3b46b599dcd247da0f6120fd739fe73df97402f4aedde182f2c",
+      "sealed_sha256": "f12d8afd2118c3b46b599dcd247da0f6120fd739fe73df97402f4aedde182f2c",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_jump.mp4",
+      "bytes": 263885,
+      "sha256": "435ef42e298a63babe30df9d9d847c1954b7ced51778ab14ef76ce02cf7dbda8",
+      "sealed_sha256": "435ef42e298a63babe30df9d9d847c1954b7ced51778ab14ef76ce02cf7dbda8",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_jump.json",
+      "bytes": 7488,
+      "sha256": "5d0cd9e29b9725d44087e90cb90cb959eb79151801960c1a4f1cea9235ed61f4",
+      "sealed_sha256": "5d0cd9e29b9725d44087e90cb90cb959eb79151801960c1a4f1cea9235ed61f4",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_knock.mp4",
+      "bytes": 291016,
+      "sha256": "496aca11800bd84bf83b723e7d5c1b541e016f327288879c7bdbf29d27a86b46",
+      "sealed_sha256": "496aca11800bd84bf83b723e7d5c1b541e016f327288879c7bdbf29d27a86b46",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_knock.json",
+      "bytes": 8923,
+      "sha256": "2e4735302c28f68e66cd1d195fbf8c3e8ef6fdcc5573fca1ec00322ea686aa89",
+      "sealed_sha256": "2e4735302c28f68e66cd1d195fbf8c3e8ef6fdcc5573fca1ec00322ea686aa89",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_death.mp4",
+      "bytes": 227988,
+      "sha256": "1f61bf3b4d8b133eaa172a57f39bb955b71c9b735deea38131e5361482f1f20e",
+      "sealed_sha256": "1f61bf3b4d8b133eaa172a57f39bb955b71c9b735deea38131e5361482f1f20e",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/05030d2243d64962b6a1773278be8e29/m6_death.json",
+      "bytes": 15417,
+      "sha256": "31f9e2bc5456ef3509ff725ab7005ee031e6c597b3c5b7cdb5ab65a0daf0ae56",
+      "sealed_sha256": "31f9e2bc5456ef3509ff725ab7005ee031e6c597b3c5b7cdb5ab65a0daf0ae56",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/6083d677112e4c4a9356c9034c6867d5/commands.jsonl",
+      "bytes": 3724,
+      "sha256": "cb32b6abcc6cee210c93544b73f84bccf3c4e5442c40816d4bcd1350581d659f",
+      "sealed_sha256": "cb32b6abcc6cee210c93544b73f84bccf3c4e5442c40816d4bcd1350581d659f",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/6083d677112e4c4a9356c9034c6867d5/m6_attack.mp4",
+      "bytes": 171358,
+      "sha256": "15ee58604674e57e20d532d06e40200ab2fdb77635bbcc0708d9ef7413839152",
+      "sealed_sha256": "15ee58604674e57e20d532d06e40200ab2fdb77635bbcc0708d9ef7413839152",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/sessions/6083d677112e4c4a9356c9034c6867d5/m6_attack.json",
+      "bytes": 5338,
+      "sha256": "20de1c99e88222c7f22c7740e785e6b0a7fb386fc15ffa81bcc340aadbe3049b",
+      "sealed_sha256": "20de1c99e88222c7f22c7740e785e6b0a7fb386fc15ffa81bcc340aadbe3049b",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/capture.json",
+      "bytes": 1061,
+      "sha256": "d56d2ef5238ffc0a51e9d9b39274730155a807aa16553e5655d77bd2d2263a89",
+      "sealed_sha256": "d56d2ef5238ffc0a51e9d9b39274730155a807aa16553e5655d77bd2d2263a89",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/m6_evidence.png",
+      "bytes": 14885,
+      "sha256": "3e30c93d435ddd35358459ed25b7bbf4211b3be145dd624cf0946732ac9376fe",
+      "sealed_sha256": "3e30c93d435ddd35358459ed25b7bbf4211b3be145dd624cf0946732ac9376fe",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/semantic_gate.json",
+      "bytes": 1135,
+      "sha256": "1e09a98c0a1275d0a5d82faf042f36c7db59ca9573ffcf953fa5fed20a1df796",
+      "sealed_sha256": "1e09a98c0a1275d0a5d82faf042f36c7db59ca9573ffcf953fa5fed20a1df796",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/render_fidelity.json",
+      "bytes": 336,
+      "sha256": "af6c8fd255cad2bb37ceff0dbebcab8c0088490c7a56b8201fdc2c99ebe8361d",
+      "sealed_sha256": "af6c8fd255cad2bb37ceff0dbebcab8c0088490c7a56b8201fdc2c99ebe8361d",
+      "matches": true
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/commands.jsonl",
+      "bytes": 2383,
+      "sha256": "e023f62934ee8852d2cc78591608aa65fd2bd4aeabaf1488471b91e7fb009150",
+      "sealed_sha256": "e023f62934ee8852d2cc78591608aa65fd2bd4aeabaf1488471b91e7fb009150",
+      "matches": true
+    }
+  ],
+  "all_36_hashes_match": true,
+  "sources": [
+    {
+      "path": "SMS_projects/openbor_sms_rev1/src/main.c",
+      "bytes": 56560,
+      "sha256": "2048467ade64140965db73a9f40a06a5e2fdba26f29416841adf7d160979c56c"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/inc/o3/o3_anim.h",
+      "bytes": 2642,
+      "sha256": "d3fbb692a39ebb1d9f6655c5fec8f7d7f1af1bfb951cf16951c9296f1c3c267d"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/inc/o3/o3_arcs.h",
+      "bytes": 1483,
+      "sha256": "4ee9d0ed5175967652acb234f12aa17ea2b59f8336e24cf76afd484b55a4f815"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/doc/10-memory-bank.md",
+      "bytes": 30890,
+      "sha256": "be191037a84733bf202f9c5c43f35acd51c1650b14ebc30d3a6a139ef67303e0"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/doc/11-gdd.md",
+      "bytes": 3496,
+      "sha256": "c4d1adee627756b7180bb53817feb9bde395fb95b4370e0c3128ca8fd2aaaf42"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/doc/13-spec-cenas.md",
+      "bytes": 5027,
+      "sha256": "4c856759a24dd92be9ff7fc4bda9538458e05088fb2f8e6ad48124c34a515828"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/doc/15-tdd.md",
+      "bytes": 11702,
+      "sha256": "beed3e5e07349f0912af35c1f269b1195a7494c201380144d9e4c5a087edee9d"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/doc/artifacts/o3_combat_scope_20261016.json",
+      "bytes": 30055,
+      "sha256": "aaf3b5451495b4c2283065a9fc4e57523abbd60868eca258208eb0e8ffb9a87e"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/doc/artifact_registry.json",
+      "bytes": 57884,
+      "sha256": "23968030c80e95bf4c742ed3def0117a711524e297ce24bc61993622e0c46ec3"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/build_record.json",
+      "bytes": 694,
+      "sha256": "1029e40a803eb5b005dabbc663fc018871a38bdddeb0a16601d65b3c6b1a5f38"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6_evidence_76cdbee3.json",
+      "bytes": 7550,
+      "sha256": "db417f7cdc84bdc02bf647ba27489815e24ca4c27fbcd91817fb9d88c31a8169"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/seal_m6_76cdbee3_20261017.json",
+      "bytes": 11546,
+      "sha256": "3c3376234bf5e1ec201d524cca0aab7e416ddf41938b696b27fb39a5b86da239"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/mrp_m6_76cdbee3_20261017.json",
+      "bytes": 1978,
+      "sha256": "abd2950cac44c6cf8a252f88c97ef78b259d503e1bd3b0e7de7f5997f1f1f786"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/mwf_m6_76cdbee3_20261017.json",
+      "bytes": 1136,
+      "sha256": "8a1b040e04142e5bb35deda8a8808a77749530b0299bd57d7928e29eb346f518"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/m6/attack_video_6083d677112e4c4a9356c9034c6867d5.json",
+      "bytes": 6391,
+      "sha256": "adb766975ad98ca4134297b41d7996a7936cee6d9c1a28adb110e12ed21f93c9"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/m6_evidence.png",
+      "bytes": 14885,
+      "sha256": "3e30c93d435ddd35358459ed25b7bbf4211b3be145dd624cf0946732ac9376fe"
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/res/o3/poses/ax_a105_right.png",
+      "bytes": 613,
+      "sha256": "1236071bf451fa3e9ccb5210f102a1e1738214f6a056076bdc184a0eaca8b595"
+    }
+  ],
+  "new_documents": [
+    {
+      "path": "doc/planejamento/openbor_sms/07-parecer-m6-20261018.md",
+      "bytes": 15619,
+      "sha256": "24d58008ef897cab5142eaa0b0e0b0cc3bb97ab39d7b5542751c643b864f3aa7"
+    },
+    {
+      "path": "doc/planejamento/openbor_sms/08-prompt-continuidade-m6-20261018.md",
+      "bytes": 17371,
+      "sha256": "864493157b49d06e33f954aebe37bbd39f44fd76f07054676ebcf172cd557e08"
+    }
+  ],
+  "native_independent_reviews": [
+    {
+      "native_agent": "/root/artifact_inventory",
+      "dispatch_tool": "collaboration.followup_task",
+      "mode": "read_only_code_or_preserved_artifact_review",
+      "new_emulator_session": false,
+      "original_report": {
+        "path": "/tmp/openbor-m6-evidence-review.md",
+        "bytes": 7621,
+        "sha256": "01922690e90a05ede6f1aae5ce97745c0f7d72a00ace044cfe933261bcb1a714"
+      },
+      "report_text": "# Revisão independente — evidência OpenBOR SMS M6\n\nData: 2026-10-18. Escopo: somente leitura, hashes e consistência; sem rebuild, execução de testes ou emulador. CWD SMSForge; AGENTS raiz e RTK lidos; nenhum AGENTS local encontrado no consumidor.\n\n## Identidade e fatos conferidos\n\n- HEAD real: `da86de303bca969a393032d270c9d245d4055180`.\n- `SMS_projects/openbor_sms_rev1/out/rom/openbor_sms_rev1.sms`: 131.072 bytes, SHA-256 `76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73`, igual ao alegado.\n- O selo `out/evidence/seal_m6_76cdbee3_20261017.json` contém **36 artefatos existentes; todos os 36 hashes recalculados coincidem**. Isto prova integridade do conjunto enumerado, não completude de cobertura ou autenticidade de todos os claims.\n- Todos os artefatos referenciados nos claims existem. Onze manifests copiados em `out/evidence/m6/sessions/*/session.json` declaram o mesmo SHA da ROM. O `rom.sms` preservado na sessão do still `598625a4…` foi rehashado e corresponde à ROM alegada.\n- Seis manifests de vídeo possuem quantidades declaradas de hashes, PNGs e quadros coerentes; arquivos MP4 existem e seus hashes correspondem aos manifests: ataque antigo60/26distintos, morte200/83, IA60/50, pulo90/45, queda110/60 e ataque dedicado60/37. Não fiz revisão visual de todos os quadros.\n- Li os journals e contei operações: input por `sequence`, stepping e leituras; nenhuma operação `write`/`poke` encontrada nos onze journals M6. Extraí diretamente os reads do ator inimigo: ataque50→43 em frame300 e43→36 em384; morte50→43→36→29→22→15→8→1→0 nos frames310/396/480/564/650/734/820/904. São leituras de RAM preservadas, não uma nova execução nem autenticação independente do coletor.\n- Abri visualmente o still canônico: palco, dois atores próximos e barras de HUD aparecem. Isso não aprova qualidade artística, animação ou legibilidade em movimento.\n\n## Achados priorizados\n\n### P1 — O claim de profundidade mistura dois casos, mas sela somente o positivo\n\n`SMS_projects/openbor_sms_rev1/out/evidence/m6_evidence_76cdbee3.json:40` declara `whiff dz41 (hp43→43); alinhado dz6 hit…`. Seu único artefato aponta `m6/depth_f41e8c8c089042be85fd1c9643900043.json`.\n\nEsse JSON, linhas6–11, contém **whiff_dz=6 e whiff_hp43→36**, o mesmo acerto do caso alinhado; não contém o controle negativo41. O negativo real está em `out/evidence/m6/depth_0b271ce0621a4adc914ab5c4d37be07b.json:6`, com dz41 e43→43, mas esse arquivo/journal/sessão não integram o selo36 nem o índice `sessions.traces` M6. O caso existe e o journal tem HP43 estável depois do primeiro hit de setup; não precisa automaticamente repetir a medida. Corrigir vínculo/semântica dos campos, preservar ambos os controles e emitir novo índice/selo sem reescrever o antigo. Varrer a fronteira dz15..41 continua pendência já declarada.\n\n### P2 — Selo36 não inclui identidades/encerramento de sessão nem ROM preservada\n\nO selo contém relatórios, journals e mídia; **zero `session.json` e zero `rom.sms`**. Os manifests copiados permanecem em `input_verified` ou `captured`; o MWF em `out/evidence/m6/sessions/c722c359399446a2a6f60dc0c8a16d0f/session.json:5` diz `running`. Não há `close` nos journals. A cópia MRP contém somente `runtime_probe.json`, sem manifest de sessão em sua pasta preservada.\n\nInspeção atual dos PIDs/start_ticks de supervisor/Xvfb/sandbox/emulador dos onze manifests encontrou **zero processos próprios correspondentes vivos**. Portanto, não constatei zumbis vivos. A lacuna é o comprovante persistido de identidade/cleanup, não prova de emulador aberto. Completar próximo bundle com ROM ou vínculo imutável, manifest inicial/final e tooling SHA sem fabricar histórico. O SHA textual do report/journal sozinho não autentica a execução.\n\n### P2 — MRP/MWF sustentam recortes diferentes de desempenho, não fluidez completa\n\n`out/evidence/mrp_m6_76cdbee3_20261017.json:7` contém59,48/59,66/59,78, spread0,30 e frame delta1441. A aritmética satisfazNTSC60±1 e spread≤1. O próprio report limita a média regional, **não pacing por quadro/game feel** (`:72`). Não há timestamps/counterstart/end por janela no arquivo para recalcular separadamente as três janelas8s.\n\n`out/evidence/mwf_m6_76cdbee3_20261017.json:5` tem uma leitura de snapshot depois da janela selada de3000quadros, `vovf_delta=0`, `vline_min=202`, finalSTATE6 e `estados_vistos=[]` (`:17`). O código `src/main.c:1542` acumula o mínimo/vovf até `probe_frame==2999` e depois congela; é instrumentação coerente para o endpoint do bloco VBlank, não trace de todas as escritas, nem cobertura documentada de todos os ataques/poses/overlaps.\n\nStress input possui30ciclos, finalframe3230/done1/vovf0 e câmera0..360, mas não demonstra todas as cargas de combate no mesmo instante. Não extrapolar para áudio ativo, PAL,2P,maiorpool ou cenário futuro. Walk1,6–1,7×lento, ataque~60q em vez21qnominais e prioridade do player que pode impedir avanço do inimigo estão corretamente admitidos na memória: são problemas de ritmo/adaptação mesmo com a ROM em59,6FPS.\n\n### P2 — Render “exact” é somente match estrutural de uma pose estável\n\n`out/evidence/sessions/598625a464dc491ab18f10d55ca65588/render_fidelity.json:5` usa min_match0,9, best_match1,0 em[92,68] sobre `ax_a105_right`,80×96. Não usa `mode=exact_indexed`. `tools/sms_wrapper/audit_render_fidelity.py:45` relabela classes e torna a comparação independente da paleta; `:72` compara somente pixels opacos. Assim,100% não prova RGBexato, fundo, inimigo, HUD,poses transitórias ou quadros sem omissão.\n\nO índice `out/evidence/m6_evidence_76cdbee3.json:212` marca a feature como `exact`; reduzir o nome/claim ao casamento estrutural daquela pose. O bloqueio do `audit_render_glitch` é declarado (`:178` e memória`:47`) e permanece real: não existe prova full-frame de ausência de sprites perdidos/tile residual/omissão em todos os quadros. Nenhum achado prova visualmente um glitch específico; falta o oráculo para fechá-lo.\n\n### P3 — build_record false é conservador; há drift entre vocabulários de status\n\n`out/build_record.json:13`–`:16` mantém boot/gameplay/FPS/áudio false. `out/evidence/reconcile_claims_m6.json` considera isso coerente. A memória enumera gameplayM6/NTSC como testado (`doc/10-memory-bank.md:243`), mas isso não constitui o gate final entregue; áudio ePAL permanecem pendentes. Não trocar flags para true só para alinhar narrativa: vincular uma aprovação estreita da mesma ROM aos eixos certos e preservar build-record como recibo da fase build.\n\nA memória ainda diz commitM6pendente (`doc/10-memory-bank.md:412`), enquanto HEAD é o commitM6. É anotação stale de fechamento, não falha da ROM. Atualizar operacionalmente na próxima intervenção autorizada.\n\n## Conclusão para o handoff\n\nM6 tem evidência real, recuperável e hash-bound para o recorte de input/combatFSM e médiaNTSC, com correçãoD13 confirmada por sequência HP. Não é apenas boot nem relatório sem arquivos. Também não é jogo fluido equivalente à fonte, zero-glitch ou gate final: ritmo alterado por upload, render completo, cobertura worst-case, áudio/PAL e integração de módulo seguem abertos.\n\nA próxima tarefa deve primeiro conciliar o pardepth/selo/identidade e congelar este baseline; depois atacar a relação upload→animação→contato/IA, mantendo ROM59,6FPS separada de cadência das poses. Não repetir todos os testes pagos; reaproveitar controles existentes e gerar evidência nova somente para delta de fonte/ROM/claim.\n"
+    },
+    {
+      "native_agent": "/root/curation_coverage",
+      "dispatch_tool": "collaboration.followup_task",
+      "mode": "read_only_code_or_preserved_artifact_review",
+      "new_emulator_session": false,
+      "original_report": {
+        "path": "/tmp/openbor-m6-code-review.md",
+        "bytes": 6110,
+        "sha256": "54fdbe045f4f68318b7f9bbd3a45f9916cc66ed483613c1a0681b68d0f4a0a23"
+      },
+      "report_text": "# Revisão independente de código/timing — OpenBOR SMS M6\n\nSomente leitura. Nenhum build, teste ou emulador executado. Referência: commit `da86de3`; hashes no JSON.\n\n## P1 M6-R1\n\n**confirmed_static_timing** — `src/main.c:575–643,1525–1537,907–924`\n\n128B/qtotalmeasured+player-firstschedulerstallslogicalanimationandarcwheneverwantedposeunavailable; requested1856Bposealone needsceil(1856/128)=15qmin, whileattackframestarget3q. Secondactorhasnoboundedservice:playerstageduploadcanconsumeentireusefulVBlank.\n\nImpacto: ~60qattackvs21nominaland~85qpainareknownfunctionaldegradation,notvisualonly. 59.5Hzmainloopdoesnotrestoreactioncadence. Audio consumesremainingCPU/banktime beforedominantblockingcauseclosed.\n\nPróximo experimento: Measureposebytesactuallyneeded/currentcachedreusedtiles/changepertransition andperactorwaitage+off.progress. Compare delta/poolcached/required-first+ageboundedservice/asmcopy alternativeswithsamegameworkload; norescaledtimer orhiddenframesjusttopassFPS.\n\n## P1 M6-R2\n\n**confirmed_static_logic_mismatch_runtime_frame_needed** — `src/main.c:692–701,920–924,989–999,1566–1570`\n\nactoradvancechecksreadybeforefsm_tick;fsm_tickthenadvancesframe,resolve_hitsrunsusingnewlogicalframewithoutcheckingdisp_pose==pose_now. Activeframehitcanoccurwhilepriorposeisstillon-screen, andremainactivewhileuploaderstalls.\n\nImpacto: hit/damagecausevisiblefeedbackmismatch; declaredstill100%stableframedoesnotcovertransition.\n\nPróximo experimento: Tracewanted/displayedpose,frame,active/CLSN,hit/guard/hp onnewactiveboundary; definecommitsemanticsandtiehittoapprovedlogical/displaydeadlinepolicy. Do notclaimdetectionbugalreadyemulated.\n\n## P1 M6-R3\n\n**confirmed_static_search_boundary** — `src/main.c:974–982;inc/o3/o3_arcs.h:O3_JUMP_FRAMES/O3_TOSS_FRAMES`\n\nJumpaltmax55,tossmax46.Searchwhilet<36&&tossY[t]<victimaltends t=36foralt47..55;assignmentalt=tossY[36]=2 teleportsvictimfromapexnear55tobase2. Arrays37longsoisnotoutofbounds;itviolatescommentcurrentaltitudepreserve.\n\nImpacto: Apexairhitturnsintoabruptlowtoss; M6knockdownatalt2doesnotexerciseenvelope.\n\nPróximo experimento: Defineadaptedairhittrajectorypreservingheight/velocityorclampedphasewithsourceevidence; testalt0,1,46,47,55 andearlyentry200withactualreachablecollision.\n\n## P2 M6-R4\n\n**confirmed_static_timer_accounting** — `src/main.c:318–323,694–705;inc/o3/o3_anim.h:o3_ax_anim_attack1`\n\ntimersetNisdecrementedandreturnsforNcalls,thenadvancesonfollowingcall => steadyframeN+1actoradvancecalls. Attack5frames3/3/3/3/9has26nominalfsmcalls,not21sumdelays, beforestreaming/hitstop. Initialstartcallcanconsumeoneimmediately; explainboundarydefinitionratherthanassumingall60qisupload.\n\nImpacto: Offbyonedurationperposeinflateswalk/recoveryanddifferentialsourcecomparison; source200Hz→NTSCconversionalreadysetsN.\n\nPróximo experimento: Unit/referenceboundarytracewithreadyposesandnohitstop, thennativeboundaryrecords; fixorrecorddeliberatepolicybeforeuploadergainscompared.\n\n## P2 M6-R5\n\n**confirmed_static_stale_upload_policy** — `src/main.c:514–519,544–559`\n\nCompletedup_wantuploadsarealwaysdisplayeddespitewantchangedafterhit/FSM/facing; pendingwantedcopy deliberatelynotcancelled. Oldattack/walkposecanreplacecurrentdisplaywhileactornowpain/fallandnewwanteduploadstarts.\n\nImpacto: Non-tearinguploaddoesnotguaranteesemanticallycorrectpose; transitionglitchoraclecurrentlyblocked.\n\nPróximo experimento: Version/generationbindrequestedpose/slotcompletion; keepbyteprogressonlyifsafe, publishcompletedposeonlyifmatchescurrentrequestorrecognizedlegaltransition. Traceinterruptmidupload.\n\n## P2 M6-R6\n\n**declared_visual_loss_confirmed_static** — `src/main.c:35–41,1384–1389;doc/artifacts/o3_combat_scope_20261016.json:D9`\n\nDropcellspermanentlypreselected/deterministic,nottemporalhardwareflicker. Playergetsfullpriority;enemyculledbeforeXvisibilitytest,sooffscreenenemyslotsconsumeconservativeecandcanhideotherwisevisiblecell. Samepose+alignmentalwayslosessamepieces;solofall/deathalsoonecelllost.\n\nImpacto: Pico8passprovesemittedSATlegalafteromission,notwholeartpreserved/zeroomission.\n\nPróximo experimento: Comparevisibility-awareselection/orderandcompositionlowerboundwithsourcepixelmask; accepttradeoffonlywithownerreview. Needfullframelegalreferenceorglitchreviewbeforeclaimrendercomplete.\n\n## P2 M6-R7\n\n**confirmed_doc_runtime_contradiction** — `doc/13-spec-cenas.md:17–18,24–34,59;doc/15-tdd.md:IAchase;inc/o3/level.h`\n\nAuthority3specstillO2layout439tiles/BG244/HUD436andMWFincompatible,whileM6runtime427/BG232/HUD424andMWFpassed. Bothpaletteindex0transparent/30colorclaimwrong:BGindex0visible. IAtextmax1.5xplayerspeedcontradictactualCHASE320/WALK427=0.75 (1.25px/qvs1.668px/q).\n\nImpacto: Nextagentplanningaudiobudgetfromstalespecwouldusethewrongbaseline;documentationgatePASSdoesnotmeasurethesevalues.\n\nPróximo experimento: UpdateliveM6specwithcurrentROM/layout/evidenceandretainO2historicalsection; derivewalk/chasespeedandseparatepositionfromvisibleanimationcadence.\n\n## P2 M6-R8\n\n**confirmed_scope_limit** — `tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py:93–118,1123–1172;src/main.c:179–186,650–707`\n\nEmitter/runtimeusefixedax/longroles,filteredposes,pinneddelaysandhandchosenFSM/attackbox/hurtbbox/physics. OpenBORfront-endtypedIRpreservesorigin;itdoesnotexecuteallOpenBORfeatures/scripts/events. guardhereisposthitinvulnerability,notplayerblockinput.\n\nImpacto: Pilotisadaptedverticalslice,notgenericallyfaithfulOpenBORengine. Types/exactstablepixels/inputrouteexact do notmakecombat/timingexact.\n\nPróximo experimento: Keepperfeatureparsed/generated/consumed/observed/budgetstatus; migratehardcodedselectedconstantsintoversionedprofileonlyafterbehaviorproven. NoVMuniversalprecondition.\n\n## Ordem sugerida antes do áudio\n\nCorrigir vínculo de hit/pose e continuidade de hit aéreo; fechar relógio da animação sem I/O; medir serviço por ator/transição; evitar publicação stale; revisar omissões e atualizar budget. Depois adicionar áudio mínimo e repetir medições. 60Hz do loop, pacing da ação e ausência de corte são eixos distintos.\n"
+    }
+  ],
+  "commands": [
+    {
+      "command": "rtk proxy env PYTHONPATH=tools/sms_wrapper/openbor2sms python3 -m unittest discover -s tools/sms_wrapper/openbor2sms/tests -q",
+      "exit_code": 0,
+      "tests": 87,
+      "scope": "host parser/IR/emission tests, not C FSM execution"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/reconcile_claims.py --project SMS_projects/openbor_sms_rev1",
+      "exit_code": 0,
+      "scope": "declared true axes have support; false axes allowed"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_claims.py --project SMS_projects/openbor_sms_rev1",
+      "exit_code": 0,
+      "scope": "token ceilings, not semantic delivery approval"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_hardware_constants.py --root SMS_projects/openbor_sms_rev1",
+      "exit_code": 0,
+      "scope": "pattern audit; missed wrong BG transparency/30 colors in scene spec"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_tilemap_bounds.py SMS_projects/openbor_sms_rev1",
+      "exit_code": 0,
+      "files": 16,
+      "unproved_coordinates": 5,
+      "scope": "no detected illegal writes, not complete proof"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/artifact_registry.py check --project SMS_projects/openbor_sms_rev1",
+      "exit_code": 0,
+      "artifacts": 36,
+      "indexed_files": 170,
+      "warnings": [
+        "legacy locations are not exhaustively gated; use inventory before adoption"
+      ],
+      "scope": "organization_and_reference_consistency_only"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_render_fidelity.py --shot SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/m6_evidence.png --art SMS_projects/openbor_sms_rev1/res/o3/poses/ax_a105_right.png --at 92,68",
+      "exit_code": 0,
+      "best_match": 1.0,
+      "scope": "structural opaque pixels of one stable pose"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_render_fidelity.py --shot SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/m6_evidence.png --art SMS_projects/openbor_sms_rev1/res/o3/poses/ax_a105_right.png --at 92,68 --exact-indexed --json /tmp/openbor-m6-exact-opaque-review.json",
+      "exit_code": 0,
+      "result": {
+        "problems": [],
+        "shot": "SMS_projects/openbor_sms_rev1/out/evidence/sessions/598625a464dc491ab18f10d55ca65588/m6_evidence.png",
+        "art": "SMS_projects/openbor_sms_rev1/res/o3/poses/ax_a105_right.png",
+        "mode": "exact_indexed",
+        "at": [
+          92,
+          68
+        ],
+        "transparent_rgb": null,
+        "art_size": [
+          80,
+          96
+        ],
+        "opaque_pixels": 959,
+        "opaque_mismatches": 0,
+        "transparent_pixels_checked": 0,
+        "transparent_mismatches": 0,
+        "first_mismatches": []
+      }
+    }
+  ],
+  "self_checks_passed": [
+    "reconcile_claims",
+    "audit_claims",
+    "audit_hardware_constants",
+    "audit_render_fidelity",
+    "audit_tilemap_bounds",
+    "artifact_registry"
+  ],
+  "setup_correction": "First unittest invocation without PYTHONPATH failed imports. Correct package path invocation passed all 87 tests; not a product failure.",
+  "visual_review": {
+    "still": "out/evidence/sessions/598625a464dc491ab18f10d55ca65588/m6_evidence.png",
+    "attack_video": "out/evidence/m6/sessions/6083d677112e4c4a9356c9034c6867d5/m6_attack.mp4",
+    "sampling": "12 frames at indices 0,5,...55; derivative contact sheet in /tmp only",
+    "quality_approval": false
+  },
+  "important_limits": [
+    "no fresh ROM execution in this review",
+    "MRP regional means do not prove per-frame pacing",
+    "60 frame attack video ends in ATTACK frame4, not idle",
+    "render exact check covers 959 opaque pixels and zero transparent pixels",
+    "depth negative exists but absent from original sealed claim",
+    "static code paths require targeted reproduction and emulator retest",
+    "historical reports retained verbatim; coordinator narrowed claims in the new assessment"
+  ],
+  "git_action": "no stage, commit, push or branch change",
+  "handoff_document_review": {
+    "native_agent": "/root/artifact_inventory",
+    "result": "no conceptual blocker; wording clarified for per-candidate SHA and versioned child directories",
+    "record_09_exists_now": true,
+    "runtime_approval": false
+  }
+}

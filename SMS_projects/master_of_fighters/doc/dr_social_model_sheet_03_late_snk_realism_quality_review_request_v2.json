@@ -1,0 +1,38 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_03_late_snk_realism_art_review_v2",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Independent, read-only review of concept model sheet #03 (Late-SNK-Realism): identity and five-view consistency; artist attribution/role/scope; distinct style signature; shoulder-to-hand anatomical continuity; palette/materials; ruler, baseline, crop, labels and card overlap. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v2.png",
+      "sha256": "f70a89cfe643429ce6065247f25b764c60c705d7c31739cf6d33ca05ec96807f",
+      "role": "current candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_v2.json",
+      "sha256": "d100045d64bc827d72b1efb44b36b6eb714a8b150fe2b1189f929ddf86daee79",
+      "role": "hash-bound per-character review checklist"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v2_metadata.json",
+      "sha256": "0f94b4487d753019515d1b8312cef97b53ac38027d355343389cbe67d9763e3b",
+      "role": "style/card/layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_03_late_snk_realism_v2.json",
+      "sha256": "90dd24f5956c3c6a4d6d627ddc97f70ffa6fc1631ad39e6e0b04f8a6f25efa16",
+      "role": "source and composition lineage"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Separate artist reference from authorship of sprites/game assets; report unverified credit as such.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Return concrete findings for anatomy, identity, style distinction, five-view cohesion, page layout and labels."
+  ]
+}

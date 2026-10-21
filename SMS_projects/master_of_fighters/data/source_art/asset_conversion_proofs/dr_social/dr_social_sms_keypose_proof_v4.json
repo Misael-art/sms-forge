@@ -1,0 +1,982 @@
+{
+  "schema": "smsforge.keypose_proof_sheet.v4",
+  "status": "technical_candidate_visual_and_runtime_review_pending",
+  "asset": {
+    "asset_id": "dr_social_sms_keypose_proof_v4",
+    "display_name": "Dr. Ferdinand Social",
+    "project": "master_of_fighters",
+    "stage": "conversion proof; two reference poses only",
+    "source_study_status": "palette-corrected and measured revision candidate; owner visual review pending",
+    "not_a_sprite_sheet": true
+  },
+  "references": {
+    "approved_concept_path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+    "approved_concept_sha256": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f",
+    "source_parent_sheet_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+    "source_parent_sheet_sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+    "source_contract_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_96px_v9_asset_contract.json",
+    "source_contract_sha256": "171cfc9f394248c69ff9293d1d011d09a201d018f6e091b54e295bf4bad028ac",
+    "palette_manifest_path": "doc/palettes_manifest.json",
+    "palette_manifest_sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+    "palette_runtime_contract_path": "doc/palette_runtime_contract_v1.json",
+    "palette_runtime_contract_sha256": "0cc83b7d78afb858cced1b44725241a659809db6ee3955067d97760b226aecfb"
+  },
+  "poses": [
+    {
+      "role": "idle",
+      "frame_index": 0,
+      "label": "POSE A · IDLE / GUARDA NEUTRA",
+      "description": "Postura pronta e equilibrada; bengala apoiada, identidade visual preservada.",
+      "source_path": "data/source_art/asset_conversion_proofs/dr_social/poses_v4/dr_social_idle_keypose_v4.png",
+      "source_sha256": "b5fbc7775a30c921ede1e0278e9587dd030c39c5788cdaa605d44942b6d361c0",
+      "canvas_px": [
+        80,
+        80
+      ],
+      "transparent_index": 0,
+      "inspection_background_rgb": [
+        0,
+        255,
+        0
+      ],
+      "source_parent_sheet": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+      "source_parent_sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+      "source_frame_index_zero_based": 0,
+      "source_parent_grid": {
+        "columns": 4,
+        "rows": 3,
+        "frame_px": [
+          96,
+          96
+        ]
+      },
+      "source_transform": {
+        "method": "nearest_neighbor",
+        "scale_ratio_numerator_denominator": [
+          5,
+          6
+        ],
+        "input_px": [
+          96,
+          96
+        ],
+        "output_px": [
+          80,
+          80
+        ],
+        "resampling": "Pillow Image.Resampling.NEAREST"
+      },
+      "sprite_preview": {
+        "x": 110,
+        "y": 365,
+        "scale": 6
+      },
+      "native_preview": {
+        "x": 655,
+        "y": 395
+      }
+    },
+    {
+      "role": "action",
+      "frame_index": 5,
+      "label": "POSE B · AÇÃO / BENGALA COM TERMINAL ARREDONDADO",
+      "description": "Frame-fonte 06: forma redonda legível; bengala inteira dentro da célula.",
+      "source_path": "data/source_art/asset_conversion_proofs/dr_social/poses_v4/dr_social_action_keypose_v4.png",
+      "source_sha256": "d53c55e84b66035c9f37116ec853df3b2e600366ebd9703d26d4d0c03a874f09",
+      "canvas_px": [
+        80,
+        80
+      ],
+      "transparent_index": 0,
+      "inspection_background_rgb": [
+        0,
+        255,
+        0
+      ],
+      "source_parent_sheet": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+      "source_parent_sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+      "source_frame_index_zero_based": 5,
+      "source_parent_grid": {
+        "columns": 4,
+        "rows": 3,
+        "frame_px": [
+          96,
+          96
+        ]
+      },
+      "source_transform": {
+        "method": "nearest_neighbor",
+        "scale_ratio_numerator_denominator": [
+          5,
+          6
+        ],
+        "input_px": [
+          96,
+          96
+        ],
+        "output_px": [
+          80,
+          80
+        ],
+        "resampling": "Pillow Image.Resampling.NEAREST"
+      },
+      "sprite_preview": {
+        "x": 1675,
+        "y": 365,
+        "scale": 6
+      },
+      "native_preview": {
+        "x": 2220,
+        "y": 395
+      }
+    }
+  ],
+  "framing_contract": {
+    "minimum_empty_border_px": 1,
+    "fail_if_opaque_content_touches_canvas_edge": true,
+    "weapon_and_equipment_are_inside_the_declared_pose_canvas": true,
+    "canvas_dimensions_must_be_multiples_of_8": true
+  },
+  "measured": {
+    "poses": {
+      "idle": {
+        "bbox_xyxy_exclusive": [
+          20,
+          7,
+          57,
+          74
+        ],
+        "bbox_px": [
+          37,
+          67
+        ],
+        "empty_border_px_left_top_right_bottom": [
+          20,
+          7,
+          23,
+          6
+        ],
+        "occupied_tile_cells": 43,
+        "unique_tile_patterns": 42,
+        "occupied_tile_coordinates_xy": [
+          [
+            5,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        "raw_4bpp_bytes_for_unique_patterns": 1344,
+        "opaque_component_count_8_connected": 1,
+        "opaque_component_sizes_px_desc": [
+          1483
+        ]
+      },
+      "action": {
+        "bbox_xyxy_exclusive": [
+          13,
+          9,
+          71,
+          73
+        ],
+        "bbox_px": [
+          58,
+          64
+        ],
+        "empty_border_px_left_top_right_bottom": [
+          13,
+          9,
+          9,
+          7
+        ],
+        "occupied_tile_cells": 49,
+        "unique_tile_patterns": 47,
+        "occupied_tile_coordinates_xy": [
+          [
+            4,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            8,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            8
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        "raw_4bpp_bytes_for_unique_patterns": 1504,
+        "opaque_component_count_8_connected": 1,
+        "opaque_component_sizes_px_desc": [
+          1556
+        ]
+      }
+    },
+    "selected_pair_unique_patterns": 89,
+    "selected_pair_raw_4bpp_bytes_if_all_unique_patterns_loaded": 2848,
+    "measurement_scope": "exact indexed 8x8 patterns after declared nearest-neighbor conversion; no flip deduplication; art inventory only"
+  },
+  "resolution_and_scale": {
+    "source_canvas_px": [
+      96,
+      96
+    ],
+    "canvas_px_per_pose": [
+      80,
+      80
+    ],
+    "tile_px": [
+      8,
+      8
+    ],
+    "gdd_visible_height_range_px": [
+      66,
+      72
+    ],
+    "project_target_center_px": 70,
+    "height_measurement_scope": "opaque bboxes include handheld equipment; compare the GDD standing height range against anatomy crown-to-sole excluding held equipment; action pose height varies with pose",
+    "benchmark": {
+      "game": "Fatal Fury Special",
+      "platform": "Game Gear",
+      "screenshot_source": "https://www.mobygames.com/game/10591/fatal-fury-special/screenshots/game-gear/66969/",
+      "gameplay_image_gallery": "https://www.gamestar.de/galerien/fatal_fury_special_game_gear,46053.html",
+      "reference_screenshot_resolution_px": [
+        160,
+        144
+      ],
+      "sms_viewport_px": [
+        256,
+        192
+      ],
+      "standing_character_height_estimate_in_reference_px": 53,
+      "projected_sms_height_px": 71,
+      "working_target_px": [
+        66,
+        72
+      ],
+      "method": "manual screenshot proportion estimate, multiplied by SMS/Game Gear viewport height ratio; game depth/pose scaling means this is a project reference, not a hardware law"
+    },
+    "gdd_scale_status_by_pose": {
+      "idle": "standing_pose_reference; total_bbox_includes_cane; anatomy_only_height_measurement_pending",
+      "action": "pose_dependent_action_bbox_includes_equipment; anatomy_only_height_measurement_pending"
+    },
+    "bbox_note": "bbox includes handheld weapon; no opaque pixel reaches the canvas edge",
+    "minimum_empty_border_px": 1,
+    "ground_pivot_px": [
+      40,
+      71
+    ]
+  },
+  "palette": {
+    "transparent_index": 0,
+    "useful_color_limit_per_sprite_subpalette": 15,
+    "useful_colors_in_parent_sheet": 12,
+    "source_palette_scope": "character color study only; not a standalone runtime CRAM allocation",
+    "runtime_palette_policy_ref": "doc/palette_runtime_contract_v1.json",
+    "runtime_sprite_palette_assignment": "one shared sprite CRAM table for the complete active roster and effects",
+    "runtime_sprite_palette_mapping_status": "pending_roster_wide_mapping_to_15_useful_colors",
+    "roster_palette_source_manifest_count": 14,
+    "roster_distinct_source_rgb_count": 43,
+    "used_palette_indices_and_rgb": [
+      {
+        "index": 1,
+        "rgb": [
+          85,
+          170,
+          255
+        ],
+        "hex": "#55AAFF",
+        "pixel_count_in_parent_sheet": 9177,
+        "role": "suit_light"
+      },
+      {
+        "index": 2,
+        "rgb": [
+          0,
+          85,
+          85
+        ],
+        "hex": "#005555",
+        "pixel_count_in_parent_sheet": 7026,
+        "role": "suit_deep"
+      },
+      {
+        "index": 3,
+        "rgb": [
+          85,
+          0,
+          0
+        ],
+        "hex": "#550000",
+        "pixel_count_in_parent_sheet": 2438,
+        "role": "boot_brown"
+      },
+      {
+        "index": 4,
+        "rgb": [
+          85,
+          85,
+          85
+        ],
+        "hex": "#555555",
+        "pixel_count_in_parent_sheet": 1754,
+        "role": "hair_gray"
+      },
+      {
+        "index": 5,
+        "rgb": [
+          0,
+          170,
+          170
+        ],
+        "hex": "#00AAAA",
+        "pixel_count_in_parent_sheet": 1523,
+        "role": "suit_mid"
+      },
+      {
+        "index": 6,
+        "rgb": [
+          0,
+          0,
+          85
+        ],
+        "hex": "#000055",
+        "pixel_count_in_parent_sheet": 1260,
+        "role": "outline"
+      },
+      {
+        "index": 7,
+        "rgb": [
+          255,
+          255,
+          255
+        ],
+        "hex": "#FFFFFF",
+        "pixel_count_in_parent_sheet": 764,
+        "role": "shirt_light"
+      },
+      {
+        "index": 8,
+        "rgb": [
+          170,
+          85,
+          85
+        ],
+        "hex": "#AA5555",
+        "pixel_count_in_parent_sheet": 567,
+        "role": "skin_mid"
+      },
+      {
+        "index": 9,
+        "rgb": [
+          170,
+          0,
+          85
+        ],
+        "hex": "#AA0055",
+        "pixel_count_in_parent_sheet": 510,
+        "role": "tie_burgundy"
+      },
+      {
+        "index": 10,
+        "rgb": [
+          170,
+          170,
+          170
+        ],
+        "hex": "#AAAAAA",
+        "pixel_count_in_parent_sheet": 498,
+        "role": "shirt_shadow"
+      },
+      {
+        "index": 11,
+        "rgb": [
+          255,
+          170,
+          170
+        ],
+        "hex": "#FFAAAA",
+        "pixel_count_in_parent_sheet": 419,
+        "role": "skin_light"
+      },
+      {
+        "index": 12,
+        "rgb": [
+          255,
+          255,
+          0
+        ],
+        "hex": "#FFFF00",
+        "pixel_count_in_parent_sheet": 254,
+        "role": "brass_glasses"
+      }
+    ],
+    "palette_character_key": "dr_ferdinand_social",
+    "sms_rgb6_grid_pass": true,
+    "alpha_binary_pass": true,
+    "inspection_background_name": "green",
+    "inspection_background_rgb": [
+      0,
+      255,
+      0
+    ],
+    "inspection_background_is_not_asset_color": true
+  },
+  "sms_hardware": {
+    "visible_canvas_px": [
+      256,
+      192
+    ],
+    "vram_bytes": 16384,
+    "pattern_px": [
+      8,
+      8
+    ],
+    "pattern_bytes_4bpp": 32,
+    "pattern_slots_total": 512,
+    "sprite_pattern_window_slots": 256,
+    "sat_entries_max": 64,
+    "sprites_per_scanline_max": 8,
+    "sprite_width_px": 8,
+    "sprite_height_options_px": [
+      8,
+      16
+    ],
+    "cram_subpalettes": 2,
+    "cram_entries_per_subpalette": 16,
+    "cram_assignment": {
+      "background_palette": "P0; stage and HUD; entry 0 reserved as visible backdrop color",
+      "sprite_palette": "P1; one shared palette for all hardware sprites",
+      "sprite_palette_index_0": "transparent for sprite pixels",
+      "background_tiles_may_select_sprite_palette": true,
+      "background_palette_select_define": "TILE_USE_SPRITE_PALETTE"
+    },
+    "transparent_index": 0,
+    "useful_colors_per_subpalette_max": 15,
+    "useful_colors_simultaneous_max": 30,
+    "ram_bytes": 8192,
+    "rom_no_mapper_bytes": 49152,
+    "dma": false,
+    "vblank_ntsc_ms_approx": 4.5,
+    "max_frames_per_sprite_sheet": null,
+    "frame_count_policy": "project_runtime_budget_required",
+    "frame_count_reason": "physical hardware defines memory/transfer ceilings, not a universal animation-frame count"
+  },
+  "runtime_budget": {
+    "status": "pending_tdd_and_scene_budget",
+    "vram_residency": "pending",
+    "sat_and_scanline": "pending",
+    "vblank_upload": "pending",
+    "rom_banking": "pending",
+    "sheet_frame_count": "pending",
+    "required_before_animation_sheet": [
+      "GDD move/state frame semantics and duration",
+      "TDD static pools and pattern ownership",
+      "measured worst-frame VBlank upload budget",
+      "ROM/banking storage policy",
+      "metasprite geometry and audit_sprite_line_sim result"
+    ],
+    "not_claimed": "per-pose pattern count is not VRAM residency, SAT object count, scanline load, ROM size, or frame-load time"
+  },
+  "animation_principles": [
+    {
+      "id": "squash_stretch",
+      "name_en": "Squash and Stretch",
+      "name_pt": "Aperto e estiramento",
+      "criterion": "Preservar volume e massa; deformar só quando a ação justificar.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "anticipation",
+      "name_en": "Anticipation",
+      "name_pt": "Antecipação",
+      "criterion": "A pose anterior prepara a ação e deixa sua intenção legível.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "staging",
+      "name_en": "Staging",
+      "name_pt": "Encenação",
+      "criterion": "Silhueta, foco e trajetória da arma comunicam uma ação por vez.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "straight_ahead_pose_to_pose",
+      "name_en": "Straight Ahead / Pose to Pose",
+      "name_pt": "Ação direta / pose a pose",
+      "criterion": "Declarar o método; definir poses-chave antes dos intervalos quando usar pose a pose.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "follow_through_overlap",
+      "name_en": "Follow Through / Overlapping Action",
+      "name_pt": "Ação seguinte / sobreposição",
+      "criterion": "Casaco, cravat e cabelo acompanham o tronco com atraso controlado.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "slow_in_slow_out",
+      "name_en": "Slow In / Slow Out",
+      "name_pt": "Entrada / saída lenta",
+      "criterion": "Distribuir quadros e holds para acelerar e desacelerar a ação.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "arcs",
+      "name_en": "Arcs",
+      "name_pt": "Arcos",
+      "criterion": "Ombro, cotovelo, punho e arma percorrem trajetórias coerentes.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "secondary_action",
+      "name_en": "Secondary Action",
+      "name_pt": "Ação secundária",
+      "criterion": "Gestos e roupa apoiam a ação principal sem competir com ela.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "timing",
+      "name_en": "Timing",
+      "name_pt": "Temporização",
+      "criterion": "Declarar duração em frames e holds para cada trecho da ação.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "exaggeration",
+      "name_en": "Exaggeration",
+      "name_pt": "Exagero",
+      "criterion": "Acentuar a leitura sem quebrar anatomia, identidade ou volume.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "solid_drawing",
+      "name_en": "Solid Drawing",
+      "name_pt": "Desenho sólido",
+      "criterion": "Manter volume, perspectiva, articulações e encaixes de arma em todos os quadros.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    },
+    {
+      "id": "appeal",
+      "name_en": "Appeal",
+      "name_pt": "Apelo",
+      "criterion": "Preservar a virtude, coragem e identidade marcante de Dr. Social.",
+      "status": "pending",
+      "evidence": "Two static key poses only; animation cadence and transitions are not authored or validated."
+    }
+  ],
+  "review": {
+    "pixel_clusters": "pending",
+    "face_detail_readability": "pending",
+    "outline_and_cutout": "pending",
+    "component_integrity_gate": {
+      "mode": "components_only",
+      "minimum_opaque_component_px": 2,
+      "poses_with_island_below_minimum": 0,
+      "material_regions_status": "pending",
+      "tool": "audit_sprite_cutout.py"
+    },
+    "material_shading": "pending",
+    "hand_weapon_attachment": "pending",
+    "equipment_geometry": "pending",
+    "native_size_readability": "pending",
+    "standing_body_height_vs_gdd": {
+      "status": "pending",
+      "measurement_scope": "measure crown-to-sole anatomy excluding handheld cane/equipment",
+      "expected_range_px": [
+        66,
+        72
+      ],
+      "evidence": "compare standing idle in native and nearest-neighbor views against GDD range"
+    },
+    "concept_fidelity": "pending",
+    "known_pose_scope": "action key uses source frame 06, whose rounded cane terminal remains readable after the declared transform; full item identity and concept fidelity still require independent human review",
+    "equipment_terminal_shape": {
+      "status": "pending",
+      "expected_identity": "rounded cane terminal; do not flatten into a hammer-like cap",
+      "evidence": "inspect frame 06 source, native 1x crop, and nearest-neighbor enlargement"
+    },
+    "frame_bounds": "both transformed poses require at least one fully transparent pixel on all four edges; action frame 06 keeps the rounded cane terminal entirely inside the canvas",
+    "two_pose_staging": "pending",
+    "independent_review": "pending",
+    "owner_decision": "pending",
+    "board_overlay_pixel_identity": "measured_by_audit_asset_proof_sheet.py"
+  },
+  "proof_image": {
+    "path": "data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.png",
+    "sha256": "ea65eb1c082b03531c2c125d617f9942490e4cacdb0421e5bee0240ea04c569e",
+    "dimensions_px": [
+      3200,
+      1900
+    ],
+    "display_scale": "6x nearest-neighbor plus separate native 1x sample; source converted at 5/6 nearest-neighbor",
+    "overlay_policy": "no line, grid, label, or annotation intersects either converted pose preview"
+  },
+  "promotion": {
+    "approved_for_res": false,
+    "rom_asset_binding": "not_created",
+    "emulator_validation": "not_performed",
+    "aaa_claim": false
+  }
+}

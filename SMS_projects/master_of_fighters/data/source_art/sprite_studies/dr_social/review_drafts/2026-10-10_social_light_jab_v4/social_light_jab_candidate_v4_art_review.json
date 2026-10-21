@@ -1,0 +1,165 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_ferdinand_social_social_light_jab_candidate_v4",
+  "producer": "codex_imagegen_art_author",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/social_light_jab_candidate_v4.png",
+    "sha256": "22ca69b14ef0b9e60e643228353b2bdcff3b45c3c8253de1e348bfa067f20db9",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+    "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "semantic_palette_role_confinement"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+          "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+          "role": "owner-approved identity, anatomy, costume, equipment and basic pose source"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/dr_social_61_pose_converted_preview_4x.png",
+          "sha256": "7d1ac3e85652b76630869df5bdf8ff89bea602761f73243867de47039982c58e",
+          "role": "reference for clean color grouping and cel-shading only"
+        }
+      ],
+      "observed_defects": [
+        "RGB source has 83,402 colors, far above the indexed Master System sprite palette contract.",
+        "The background is visually black but not a uniform key; RGB corner values vary and no alpha channel exists.",
+        "The 3×2 layout uses six 512×512 cells; no 80×80 conversion or NN4× check exists.",
+        "Glasses are now visually readable in profile at source size; face readability at 80×80 is unverified.",
+        "Hand/fist/cane attachment, cane tip, shadow flow and outlines still require frame-by-frame native-size review."
+      ],
+      "revision_notes": [
+        "The 3x2 image is a movement-composition draft only; six slots visually follow guard, anticipation, half-extension, contact, recoil and return-to-guard.",
+        "J01 and J06 intentionally represent the same guard endpoint; do not treat endpoint continuity as an accidental duplicate.",
+        "ImageGen did not obey the exact background-key and palette constraints despite explicit prompts. This measured mismatch blocks promotion and conversion.",
+        "No frame is in res/ and no attack ROM has been built from this image."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "fail",
+          "note": "83,402 RGB values; no indexed palette or logical 80×80 frames."
+        },
+        "face_detail_readability": {
+          "status": "pending",
+          "note": "Round brass profile lens is visible in the source; validate face and glasses at 80×80."
+        },
+        "outline_and_cutout": {
+          "status": "fail",
+          "note": "RGB background is not a uniform key and alpha is absent; near-black fringe would risk outline damage during cutout."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Broad hard-edged color blocks are visible; inspect the reduced palette result before passing."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Track the coat-shadow planes through J01–J06 after frame extraction."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Inspect the punch arm chain and support-hand cane grip in each native frame."
+        },
+        "equipment_geometry": {
+          "status": "pending",
+          "note": "Verify the complete cane, gold pommel and rounded end at native frame size."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "The sequence reads in order at source size; verify distinct J01–J06 poses and timing after native export."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "No 80×80 frames exist."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "fail",
+          "note": "83,402 RGB values; no declared indexed SMS palette mapping."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "conversion_validation": {
+    "status": "not_started",
+    "scope": "No indexed conversion, tile count, hardware simulation, proof sheet or ROM has been produced."
+  },
+  "promotion_status": "candidate_only_blocked; exact cutout, indexed palette, native-size and independent-review gates unresolved",
+  "claim_ceiling": "Six-pose composition candidate only; not approved sprite art, not SMS-indexed, not hardware-validated, not integrated, no ROM.",
+  "revision_notes": [
+    "v4 is a six-pose jab composition draft only; it replaces no approved raster.",
+    "The round spectacles are more readable, but the raw file fails exact background and palette preflight.",
+    "No res/ asset, converted proof, ROM, or gameplay claim is derived from this file."
+  ],
+  "measured_preflight": {
+    "layout": {
+      "status": "pass_preliminary",
+      "columns": 3,
+      "rows": 2,
+      "cell_px": [
+        512,
+        512
+      ],
+      "frame_order": [
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06"
+      ],
+      "note": "Visually six consecutive jab poses in the agreed 3×2 order; logical 80×80 export not started."
+    },
+    "alpha_cutout": {
+      "status": "fail",
+      "expected": "uniform black key or binary transparent cutout; no near-black fringe",
+      "mode": "RGB",
+      "alpha": "absent",
+      "exact_black_pixels": 706581,
+      "near_black_pixels_max_channel_le_32": 1076331,
+      "note": "The background looks black in preview but varies across RGB values and cannot be treated as an exact key."
+    },
+    "color_count": {
+      "status": "fail_for_runtime_asset",
+      "unique_rgb_values": 83402,
+      "master_system_sprite_useful_color_ceiling": 15,
+      "note": "Unindexed 1536×1024 source; no SMS palette conversion has been approved or performed."
+    },
+    "native_frame_geometry": {
+      "status": "not_started",
+      "observed_cell_px": [
+        512,
+        512
+      ],
+      "required_review_canvas_px": [
+        80,
+        80
+      ],
+      "note": "No frame extraction or 1×/nearest-neighbor 4× native-size review."
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "sms_observed_case_audit_v1",
+  "ok": true,
+  "problems": [],
+  "cases": [
+    {
+      "id": "positive_control",
+      "passed": true,
+      "checks": [
+        {
+          "condition": {
+            "op": "eq",
+            "point": "before",
+            "field": "enemy_actor_byte_5",
+            "value": 43
+          },
+          "actual": 43,
+          "expected": 43,
+          "passed": true
+        },
+        {
+          "condition": {
+            "op": "delta_eq",
+            "from": "before",
+            "to": "after",
+            "field": "enemy_actor_byte_5",
+            "value": -7
+          },
+          "actual": -7,
+          "expected": -7,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "inputs": {
+    "rom": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/rom_m6.sms",
+      "sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73"
+    },
+    "session": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/positive_control/session.json",
+      "sha256": "50cb5ca435257a81d9d354b423f1f6c26e27a653bb939242191f5d95955f19ec"
+    },
+    "journal": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/positive_control/commands.jsonl",
+      "sha256": "7b199e5c1b013f4335d930752a44c6344bc28e6241694ac393982023b8286c9e"
+    },
+    "layout_source": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/layout.json",
+      "sha256": "bf93a9add1459a6050486b0698c48923d1b4f6dd6518f75f5f0647aaab00bc6c"
+    }
+  },
+  "points": {
+    "before": {
+      "frame": 310,
+      "seqs": [
+        59
+      ],
+      "values": {
+        "enemy_actor_byte_5": 43
+      },
+      "anchor": "read"
+    },
+    "after": {
+      "frame": 646,
+      "seqs": [
+        785
+      ],
+      "values": {
+        "enemy_actor_byte_5": 36
+      },
+      "anchor": "read"
+    }
+  },
+  "claim_ceiling": "journal_RAM_assertions_and_observed_VDP_intervals_only",
+  "limits": "Layout meaning, probe accuracy and journal authenticity require independent review. No framebuffer/presented-pixel proof, first-occurrence latency, FPS, counter-wrap disambiguation or cleanup approval. A missed sampled deadline does not establish when an unsampled event first occurred. Zero net endpoint delta does not prove absence of intermediate damage/healing.",
+  "record": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-18_observed_cases/positive_control/record.json",
+    "sha256": "ac93f54aab53b1e9a227bab0d150db51157987e3e6499f266b350a14a38dee35"
+  }
+}

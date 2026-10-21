@@ -1,0 +1,34 @@
+{
+  "schema": "animation_semantics_manifest_v1",
+  "character": "jj_zillion_ii",
+  "asset_id": "jj_zillion_ii_idle_sms_96px_12f_v4",
+  "required_states": ["idle"],
+  "actions": [
+    {
+      "name": "idle",
+      "unique_frames_required": true,
+      "geometry_contract": {
+        "canvas_px": [96, 96],
+        "visible_width_px": [61, 66],
+        "visible_height_px": [72, 76],
+        "baseline_y_px": 95,
+        "baseline_tolerance_px": 0
+      },
+      "frames": [
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_00.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_01.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_02.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_03.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_04.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_05.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_06.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_07.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_08.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_09.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_10.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/idle_11.png", "pivot": [48, 95]}
+      ]
+    }
+  ],
+  "notes": "Historical sprite-study candidate superseded by v5 before owner review. Retained for provenance; v5 preserves the 12 poses and geometry while removing 13 off-material pixels from the upper hair edge. It remains outside res and has no runtime approval."
+}

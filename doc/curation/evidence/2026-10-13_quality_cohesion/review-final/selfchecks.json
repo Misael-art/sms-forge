@@ -1,0 +1,54 @@
+[
+  {
+    "tool": "measure_runtime_probe.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "058ac5",
+        "wall_time_seconds": 0.019702422,
+        "exit_code": 0,
+        "original_token_count": 20,
+        "output": "[SELF-CHECK OK] runtime_probe (parse @, cabecalho, fps, veredito, schema_guard)\n"
+      }
+    }
+  },
+  {
+    "tool": "audit_claims.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "61e4f2",
+        "wall_time_seconds": 0.000047359,
+        "exit_code": 0,
+        "original_token_count": 6,
+        "output": "[SELF-CHECK OK] claims\n"
+      }
+    }
+  },
+  {
+    "tool": "audit_sprite_line_sim.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c1eaf1",
+        "wall_time_seconds": 0.000024469,
+        "exit_code": 0,
+        "original_token_count": 8,
+        "output": "[SELF-CHECK OK] sprite_line_sim\n"
+      }
+    }
+  },
+  {
+    "tool": "pack_sms_metasprite.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "4339a8",
+        "wall_time_seconds": 0.003030873,
+        "exit_code": 0,
+        "original_token_count": 21,
+        "output": "[SELF-CHECK OK] pack_sms_metasprite (dedupe, tile0 reservado, paleta e scanline)\n"
+      }
+    }
+  }
+]

@@ -1,7 +1,17 @@
 # skill: sms-vram-vblank-budget
 
 ## Não existe DMA
-Toda transferência em massa passa pela CPU dentro do VBlank (~4.5ms NTSC).
+Toda transferência passa pela CPU. A política de produção exige commits VDP
+dentro da janela medida da cena, com orçamento de SAT/PNT/CRAM/patterns; não
+usar uma duração aproximada fixa como prova de capacidade. Preparar lógica,
+metasprites e filas no display ativo pode ser a escolha correta: toda a lógica
+não precisa caber no VBlank.
+
+L136/§127 mediu integridade de escrita fora do VBlank em dois emuladores;
+isso não aprova tearing, prazo de apresentação ou efeito no ritmo. Separar
+integridade dos bytes, janela de commit e deadline do loop. Um VCounter lido
+apenas ao fim não exclui ter atravessado períodos inteiros; analisar serial,
+região e voltas quando o caminho puder exceder um frame (§103).
 
 ## Orçamento = contrato
 1. Listar transferências por frame (tiles, name table, SAT, paleta).
@@ -35,8 +45,8 @@ renderer-off e P2 passivo são controles diagnósticos, não budget de entrega.
 - Compressão ZX7/aPLib: descompressão custa CPU do frame — medir junto.
 - `SMS_VRAMmemcpy*` / `SMS_loadTileMapAreaatAddr` — assinaturas SEMPRE no header.
 - Transição de tela: **display off**, reescrever o mapa inteiro, display on.
-  Escritas fora do VBlank deixam resto na tela; limpar linha a linha não
-  fecha a classe (L047).
+  A receita fecha a classe de resíduos de transição de L047; não explicar o
+  resultado por perda automática de bytes fora do VBlank (corrigida por L136).
 
 ## Mapa de VRAM e a janela do reg6 (SMS_GLOBAL §124, L133)
 
@@ -60,3 +70,6 @@ julga colisões, janela do reg6, motivos de tilemap extra, sobras reclamadas
 e confere reg5/reg6 vivos dos dumps `blastem_sms.py` contra o plano.
 Na spec-cenas, o contrato declara endereços, janela de sprite e sobras
 usadas; sem plano declarado, "cou porque sobrou" não é argumento.
+Patterns BG, PNT e SAT precisam de regiões simultâneas disjuntas. Somar
+current/pending dos dois atores, FX e HUD na mesma cena; comparar o custo de
+um ator com a região inteira não demonstra que o par cabe.

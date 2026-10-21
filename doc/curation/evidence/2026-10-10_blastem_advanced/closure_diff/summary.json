@@ -1,0 +1,38 @@
+{
+  "scope": "second vertical batch: snapshot comparator closure; earlier closure preserved",
+  "results": [
+    {
+      "tool": "selftest",
+      "returncode": 0,
+      "elapsed_seconds": 15.057650566101074,
+      "log": "doc/curation/evidence/2026-10-10_blastem_advanced/closure_diff/selftest.log"
+    },
+    {
+      "tool": "measurement_tools",
+      "returncode": 0,
+      "elapsed_seconds": 12.6119863986969,
+      "log": "doc/curation/evidence/2026-10-10_blastem_advanced/closure_diff/measurement_tools.log"
+    },
+    {
+      "tool": "doc_sync",
+      "returncode": 1,
+      "elapsed_seconds": 0.20668482780456543,
+      "log": "doc/curation/evidence/2026-10-10_blastem_advanced/closure_diff/doc_sync.log"
+    },
+    {
+      "tool": "learning_capture",
+      "returncode": 0,
+      "elapsed_seconds": 0.2983376979827881,
+      "log": "doc/curation/evidence/2026-10-10_blastem_advanced/closure_diff/learning_capture.log"
+    }
+  ],
+  "selftest_passed": 102,
+  "measurement_tools_passed": 62,
+  "optional_project_build_probe": "not_run",
+  "learning_capture_clean": true,
+  "doc_sync_passed": false,
+  "doc_sync_problem_count": 10,
+  "open_gate": "luta_mugen: six truth-document EIO failures and four unresolved authority paths",
+  "whole_workspace_promotion": "not_closed",
+  "independent_diff_review": "doc/curation/evidence/2026-10-10_blastem_advanced/native_review/dump_diff/review_final2.json"
+}

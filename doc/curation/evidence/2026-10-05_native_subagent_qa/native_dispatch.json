@@ -1,0 +1,104 @@
+{
+  "schema": "sms_native_dispatch_record_v1",
+  "coordinator": "/root",
+  "native_calls_and_returns_observed_in_this_task": true,
+  "limit": "coordinator matched actual tool calls and returns; JSON alone does not authenticate native dispatch",
+  "workers": [
+    {
+      "lane": "runtime",
+      "task_id": "87972ef09456420e86ec3865a293d0fb",
+      "worker_id": "/root/native_runtime_qa",
+      "native_tool": "collaboration.spawn_agent",
+      "returned_by": "/root/native_runtime_qa",
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/request.json",
+        "sha256": "ff20976845366abbe6ed371192137bd186b97e2f335d6040c6d4338bb455179d"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/run_e5eed07c9298431e97bdbdc93eea955e/report.json",
+        "sha256": "9831cd2ce09a92bf64f3e1fbf3bac4f5276a8410121eea623f002b4b874b82b9"
+      },
+      "validation": {
+        "ok": true,
+        "tests_passed": true,
+        "problems": [],
+        "claim_ceiling": "assigned_checks_only",
+        "limit": "bindings/coverage only; coordinator must match native tool receipt and review observations"
+      }
+    },
+    {
+      "lane": "visual",
+      "task_id": "9a72c60025254ce6ae12d8bad557df01",
+      "worker_id": "/root/review_qa_contract",
+      "native_tool": "collaboration.followup_task",
+      "returned_by": "/root/review_qa_contract",
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/request.json",
+        "sha256": "73e3f18a99c446ec5c04715cd6369f382b95a685b7f0f846e7589a67c4e6f510"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/report.json",
+        "sha256": "52ed58a7f01282f95354e06466c6474401d15303a26ec7dd871f7de50909b136"
+      },
+      "validation": {
+        "ok": true,
+        "tests_passed": true,
+        "problems": [],
+        "claim_ceiling": "assigned_checks_only",
+        "limit": "bindings/coverage only; coordinator must match native tool receipt and review observations"
+      }
+    },
+    {
+      "lane": "audio",
+      "task_id": "75289c59b7934010ae593205b97cdf6a",
+      "worker_id": "/root/native_audio_qa",
+      "native_tool": "collaboration.spawn_agent",
+      "returned_by": "/root/native_audio_qa",
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/request.json",
+        "sha256": "c2019e56581b06adb52261dbc70e560617b2a9aa5174566673fac0751d25af30"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/report.json",
+        "sha256": "73be0f693a15fe2769e0589580fe4ecdc26f5fe573eba71e495b05038980272a"
+      },
+      "validation": {
+        "ok": true,
+        "tests_passed": true,
+        "problems": [],
+        "claim_ceiling": "assigned_checks_only",
+        "limit": "bindings/coverage only; coordinator must match native tool receipt and review observations"
+      }
+    },
+    {
+      "lane": "script_video",
+      "task_id": "ef1c6d0bf3334690a45cac6b26a9c027",
+      "worker_id": "/root/native_runtime_qa",
+      "native_tool": "collaboration.followup_task",
+      "returned_by": "/root/native_runtime_qa",
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/request.json",
+        "sha256": "2bb883c79af57b7dee1d2cc0971bee28f4d03bf9fffda24c48fef40df127a6f8"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/report.json",
+        "sha256": "7f74a7e91b39bd6e584024337ba8737da33035ca518ea1aa44b994fe134beea1"
+      }
+    },
+    {
+      "lane": "partial_failure",
+      "task_id": "605b4800688c4b7fa646eadd0e4d0ad6",
+      "worker_id": "/root/native_runtime_qa",
+      "native_tool": "collaboration.followup_task",
+      "returned_by": "/root/native_runtime_qa",
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/request.json",
+        "sha256": "7b42955de04c375822420c75e275cd57c23f840fbc6aa625d4def4e303de908c"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/run_e6e6eaf95335421dace4e3bdcda2ee55/report.json",
+        "sha256": "641659fa6f88f545b781c537ef85eafe8bdfaf22cc1a68511ab9fead9488d053"
+      }
+    }
+  ]
+}

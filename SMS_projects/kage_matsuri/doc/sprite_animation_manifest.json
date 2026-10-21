@@ -1,0 +1,19 @@
+{
+  "schema": "sprite_animation_manifest_v1",
+  "character": "kage",
+  "scope": "roster de poses discretas empacadas; cada estado do runtime usa uma pose authorada",
+  "required_states": ["kage_pose_roster"],
+  "actions": [
+    {
+      "name": "kage_pose_roster",
+      "frames": [
+        {"png": "res/proof/kage_idle_full.png", "pivot": [8, 32]},
+        {"png": "res/proof/kage_walk0_full.png", "pivot": [8, 32]},
+        {"png": "res/proof/kage_walk1_full.png", "pivot": [8, 32]},
+        {"png": "res/proof/kage_slash_full.png", "pivot": [8, 32]},
+        {"png": "res/proof/kage_slash2_full.png", "pivot": [8, 32]},
+        {"png": "res/proof/kage_jump_full.png", "pivot": [8, 32]}
+      ]
+    }
+  ]
+}

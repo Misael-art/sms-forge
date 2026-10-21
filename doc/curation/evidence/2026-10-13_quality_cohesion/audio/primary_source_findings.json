@@ -1,0 +1,46 @@
+[
+  {
+    "source": "/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS-upstream/PSGlib/src/PSGlib.c",
+    "sha256": "d285ee5f901c7bc6a5609dc778217be1f47fb76d228833c5970766f9196364ab",
+    "lines": [
+      17,
+      18,
+      26,
+      28,
+      29,
+      321,
+      365,
+      394,
+      438,
+      488,
+      504
+    ],
+    "finding": "Raw PSG latch/data transport plus WAIT/LOOP/END and compressed substring branch; does not invert noise bit."
+  },
+  {
+    "source": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/psg.c",
+    "sha256": "6cf1c92472b03d38694a818d4f47df22b792fb64bf7587b344e30df43d273d72",
+    "lines": [
+      58,
+      65,
+      69,
+      74,
+      77,
+      116,
+      119,
+      121,
+      123,
+      124,
+      125
+    ],
+    "finding": "Noise bit2 stored; nonzero branch white noise via rotate/XOR feedback. Tone flips output each period, factor2 gives clock32 divisor."
+  },
+  {
+    "source": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c",
+    "sha256": "654fe39d9056237bddf3be04b378f50ac9ed5f072f0667aa07df9f31b8c902cc",
+    "lines": [
+      1653
+    ],
+    "finding": "PSG master clock divider15*16; nominal SMS PSG clock approximated3579545NTSC/16 internal ticks."
+  }
+]

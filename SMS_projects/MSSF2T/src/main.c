@@ -48,7 +48,8 @@ volatile unsigned char __at(0xC7E7) probe_gap;      /* P[1].x - P[0].x      */
 volatile unsigned char __at(0xC7E8) probe_hitstop;  /* g_hitstop            */
 volatile unsigned char __at(0xC7E9) probe_hitused;  /* P[0].hit_used        */
 volatile unsigned char __at(0xC7EA) probe_vline;    /* VCounter fim do trabalho do frame */
-volatile unsigned char __at(0xC7EB) probe_vovf;     /* saturado (max 255): frames com vline >= 0xC0 */
+volatile unsigned int  __at(0xC7EB) probe_vovf;     /* frames com vline >= 0xC0, sem saturacao silenciosa */
+volatile unsigned char __at(0xC7ED) probe_phase;   /* 1 sim, 2 prepara, 3 antes VBlank, 4 apos upload */
 
 /* VCounter do VDP, porta 0x7E. Verificado no header autoridade #8: SMSlib.h
  * NAO expoe leitura de line counter (grep por VCounter/Line/0x7E so acha o
@@ -82,12 +83,19 @@ void main(void) {
     probe_magic0 = 'S'; probe_magic1 = 'M';
     probe_magic2 = 'R'; probe_magic3 = 'T';
     probe_schema = 1;
+    /* So o acumulador vovf precisa de init; frame/vline/phase sao
+     * reescritos a cada frame e o tool trabalha com deltas. Cada init de
+     * __at custa ~5 B num banco com margem de 16 B (makesms: Bank 1
+     * overflow visto 2026-09-24). */
+    probe_vovf = 0;
 
     for (;;) {
         /* Uma leitura cobre os dois portes: PORT_B_KEY_* sao os bits altos.
          * Passar 0 para o jogador 2 tornava o modo 2P impossivel. */
         ka = SMS_getKeysStatus();
+        probe_phase = 1;
         fight_update(ka);        /* logica FORA do VBlank; VRAM so depois */
+        probe_phase = 2;
         fight_prepare_stream();  /* espelha para a RAM tambem fora do VBlank */
         /* Fim do trabalho do frame: onde o VCounter esta AGORA prova se o
          * trabalho derramou no VBlank (>= 0xC0 = 192 linhas). Leitura ANTES
@@ -96,8 +104,9 @@ void main(void) {
          * ~44 bytes antes do banco estourar no makesms. */
         v = SMS_VCounterPort;
         probe_vline = v;
-        if (v >= 0xC0 && probe_vovf != 255)
-            probe_vovf++;        /* contador saturante, 1 por frame */
+        probe_phase = 3;
+        if (v >= 0xC0)
+            probe_vovf++;        /* word: nao perde a contagem em 255 */
         SMS_waitForVBlank();
         g_frame++;
         stage_scroll_frame();   /* arma o parallax antes de gastar o VBlank */
@@ -105,6 +114,7 @@ void main(void) {
         hud_draw();
         hud_banner();
         fight_draw();
+        probe_phase = 4;
 
         probe_frame = g_frame;
         probe_hp = P[0].hp;

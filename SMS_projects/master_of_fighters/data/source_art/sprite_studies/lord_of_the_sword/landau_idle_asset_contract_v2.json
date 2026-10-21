@@ -1,0 +1,52 @@
+{
+  "schema": "sms_sprite_study_contract_v1",
+  "asset_id": "landau_idle_sms_96px_12f_v2",
+  "project": "master_of_fighters",
+  "asset_role": "source_art_sprite_study",
+  "character": "landau",
+  "visual_reference": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+  "approval_scope": "owner-approved rejuvenated concept as visual reference; this contract covers an unapproved sprite study only",
+  "sheet": {
+    "columns": 4,
+    "rows": 3,
+    "frame_count": 12,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_px": [96, 96],
+    "sheet_px": [384, 288],
+    "ground_pivot_px": [48, 95],
+    "target_visible_height_px": 88,
+    "height_tolerance_px": [84, 88],
+    "max_visible_width_px": 84,
+    "minimum_horizontal_margin_px": 6
+  },
+  "action": {
+    "state": "idle",
+    "facing": "right, three-quarter side view",
+    "motion": "calm guard idle cycle; twelve small but visible connected pose changes; no attacks, lunges, locomotion, jumps, or weapon swings",
+    "continuity": "same scale, feet baseline, pivot, camera, silhouette, and weapon hands in all cells"
+  },
+  "design_lock": [
+    "young adult Landau, youthful face, clean-shaven",
+    "preserve the approved strong young-warrior morphology and original costume proportions",
+    "green tunic, leather guards, red sash, blue trousers, silver greaves, one sword in hand, bow and quiver on back",
+    "keep the idle guard upright and compact; do not spread the legs or extend the sword horizontally",
+    "do not add mature facial features, beard, moustache, duplicate weapons, armor redesign, or extra equipment"
+  ],
+  "palette": {
+    "manifest_character": "lord_of_the_sword",
+    "source": "doc/palettes_manifest.json",
+    "transparent_index": 0,
+    "maximum_useful_colors": 15,
+    "dither": "none",
+    "grain_or_texture": false
+  },
+  "gates": [
+    "audit_validate_resources.py",
+    "audit_animation_semantics.py"
+  ],
+  "not_claimed": [
+    "runtime sprite geometry or metasprite validity",
+    "scanline budget validity",
+    "ROM integration or emulator validation"
+  ]
+}

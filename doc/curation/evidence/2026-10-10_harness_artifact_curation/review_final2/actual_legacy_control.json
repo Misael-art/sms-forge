@@ -1,0 +1,72 @@
+{
+  "actual_existing_record": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.json",
+  "lineage_sha256": "6f025c5dbc0351c04e767f3fb48f0cd000406ce76dac80daea03dc3e92b14455",
+  "image_sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+  "registry": {
+    "schema": "sms_artifact_registry_v1",
+    "project_id": "master_of_fighters",
+    "locations": {
+      "source": {
+        "path": "data/source_art",
+        "purpose": "existing art source",
+        "mode": "legacy"
+      }
+    },
+    "kinds": {
+      "animation_source": {
+        "purpose": "source animation atlas",
+        "introduced_for": "existing source adoption",
+        "procedure": "artwork-to-rom-lifecycle.md",
+        "location": "source",
+        "required_file_roles": [
+          "source_animation"
+        ]
+      }
+    },
+    "artifacts": [
+      {
+        "id": "dr-social-basic61-owner-source-v1",
+        "asset_id": "dr_social",
+        "kind": "animation_source",
+        "variant": "basic61",
+        "revision": 1,
+        "status": "approved",
+        "parents": [],
+        "reason": "preserve original owner-provided source approval only",
+        "files": [
+          {
+            "role": "source_animation",
+            "path": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+            "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057"
+          }
+        ],
+        "decision": {
+          "path": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.json",
+          "sha256": "6f025c5dbc0351c04e767f3fb48f0cd000406ce76dac80daea03dc3e92b14455"
+        }
+      }
+    ],
+    "heads": [
+      {
+        "asset_id": "dr_social",
+        "kind": "animation_source",
+        "variant": "basic61",
+        "candidate": "dr-social-basic61-owner-source-v1",
+        "approved": "dr-social-basic61-owner-source-v1"
+      }
+    ]
+  },
+  "audit": {
+    "schema": "sms_artifact_audit_v1",
+    "ok": true,
+    "problems": [],
+    "warnings": [
+      "dr-social-basic61-owner-source-v1: existing source-only approval declaration imported; no authenticity/production claim",
+      "legacy locations are not exhaustively gated; use inventory before adoption"
+    ],
+    "artifact_count": 1,
+    "indexed_file_count": 1,
+    "claim_ceiling": "organization_and_reference_consistency_only"
+  },
+  "scope": "read-only in-memory control, not installed registry or owner authentication"
+}

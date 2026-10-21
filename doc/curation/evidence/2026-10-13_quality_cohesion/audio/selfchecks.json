@@ -1,0 +1,14 @@
+[
+  {
+    "tool": "audit_psg_quality.py",
+    "exit": 0,
+    "stdout": "  arena-estilo reprova em ritmo                    ok\n  arena-estilo reprova em unisono                  ok\n  arena-estilo reprova em ruido periodico          ok\n  arena-estilo reprova em loop                     ok\n  arena-estilo reprova em dinamica                 ok\n  arranjo passa (viol=[])                          ok\n  arranjo tem loop valido                          ok\n  granulado reprova exclusivamente M7              ok\n  granulado nao reprovava M1..M6                   ok\n  sfx com decay passa                              ok\n  sfx sem decay reprova                            ok\n  sfx longo reprova                                ok\n  round-trip de periodo                            ok\n  hold de 3 frames conta no tempo                  ok\n  nctl capturado com modo                          ok\n  modo 0 branco=False (bit2)                       ok\n  modo 1 branco=False (bit2)                       ok\n  modo 2 branco=False (bit2)                       ok\n  modo 3 branco=False (bit2)                       ok\n  modo 4 branco=True (bit2)                        ok\n  modo 5 branco=True (bit2)                        ok\n  modo 6 branco=True (bit2)                        ok\n  modo 7 branco=True (bit2)                        ok\n  mistura branco 0.50 e limiar M4                  ok\n  mistura branco 0.25 e limiar M4                  ok\n  substring PSGlib recusada sem expansao           ok\n  audit_one sfx classes e decide                   ok\n  audit_one music reprovada                        ok\n[SELF-CHECK OK] audit_psg_quality\n",
+    "stderr": ""
+  },
+  {
+    "tool": "make_psg_assets.py",
+    "exit": 0,
+    "stdout": "[SELF-CHECK OK] make_psg_assets (feedback8modos/divisor32/LFSR aproximado + politica de eventos nos temas; nao valida hardware)\n",
+    "stderr": ""
+  }
+]

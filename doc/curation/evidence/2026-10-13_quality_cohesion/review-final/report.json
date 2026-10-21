@@ -1,0 +1,55 @@
+{
+  "schema": "sms_independent_curation_delta_final_review_v1",
+  "review_status": "pass_focused_scope_with_explicit_limits",
+  "input_sha256": {
+    "tools/sms_wrapper/measure_runtime_probe.py": "5730224f85d6298428d287942359c743e575b2c8b8f3ebd5a19c3b719809f157",
+    "tools/sms_wrapper/emulicious_dap.py": "dc54f91858f8f7a31b85e19ecbde56e945c4984fd1471bc50340d18ef1220ea6",
+    "tools/sms_wrapper/audit_claims.py": "f3d1e81552975e4c6c705d95103cdb766ccef0a56107b2f3140d6a851a31faf0",
+    "tools/sms_wrapper/pack_sms_metasprite.py": "f59c0b0c0ba55fd3024a3e57aa03e88d0377516d9958716ada2c58b52cf6132d",
+    "tools/sms_wrapper/audit_sprite_line_sim.py": "9c35c091c30699aedb7588098b2b16e2fc3e02b41695ae1f0a19edd6ae210004",
+    "tools/sms_wrapper/schemas/sprite_scene_manifest_v1.schema.json": "6eb23f42838029323a32e4b33ebb12fc2aea4bccbd7243a038f25d9a313ce34b",
+    "tools/sms_wrapper/schemas/promotion_claim_v1.schema.json": "0f3199b788224fcf428512963756dc7077c12de55b26613d2b2beb310b83b427",
+    "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md": "94c1a59829ba4f16d7debd88218a52142f2e465888c00a760c0676f5c18e70d4",
+    "tools/sms_wrapper/.agent/workflows/art-review.md": "580a7dcdef56dadab3ab47b5d1b7352e1f55e846f6f18bd950ac5e9010102065"
+  },
+  "reviewed_changes": [
+    "Private FPS now targets regional NTSC60/PAL50 with at least2finite numeric samples, explicit tolerance/spread<=1FPS",
+    "Broad legacy fps_constant no longer drops missingwindows or accepts bool/singlewindow",
+    "Claim ceil fields nonempty and ceiling/ceiling_texto required; invalid UTF8 rejected after reviewer finding",
+    "Sprite schema8x8/8x16 and Xnooffset/Yminus1 consistent; packer storedYminus1 corrected",
+    "Product checkpoint separates rate,pacing,response,referencecomparison andmarketvalidation; artreview append avoids equating numericcleanup with quality"
+  ],
+  "focused_results": {
+    "mutant_cases": 29,
+    "robustness_findings_fixed": true,
+    "session_unit_cases": 5,
+    "schema_mode_cases": 3,
+    "selfchecks": 4
+  },
+  "native_feedback_independent_read_audit": {
+    "same_metric_payload": true,
+    "same_ROM": true,
+    "same_session": true,
+    "closed_reported": true,
+    "regional_math_matches": true,
+    "same_collector_current": false,
+    "no_original_process_alive": true
+  },
+  "native_execution_attribution": "Coordinator executed fixture; reviewer checked payload,ROM/SID identity,regionalmath and original-process absence only. Not an independent reviewer execution.",
+  "remaining_limits": [
+    "Native FPS evidence collector SHA differs from current collector after pure validator robustness edit; historical execution with focuseddelta validation, not identical currenttool capture.",
+    "Claim gate checks declared nonempty authorization fields; does not enforce arbitraryprose scope across statements or authenticate owner/evidence/market-quality. Concept-only approval still globallywaives AAA token.",
+    "Promotion JSON schema requires ceiling whereas reader permits ceiling_texto alias; declared compatibility not equivalent schema acceptance.",
+    "Framecounter source semantics still require review; ISR/VBlankcounter is not gameupdate/pacing/inputquality.",
+    "Private PAL branch exercised by synthetic unit cases, not real PAL emulator run.",
+    "Schema lacks sat_terminated booleanproperty (runtime gate validates); unknownfields allowed, no declared truncatedSAT approval.",
+    "No fullsuite/emulator by reviewer; no graphics/gameplay/hardware/market claim."
+  ],
+  "artifact_sha256": {
+    "selfchecks.json": "0bb7f0f0eb67bad53b278a1e08e31ceb7beb1fb540826ed57210742c2dd66dd0",
+    "robustness_retest.json": "3ea1a8789b693cd2ceb01b89c1b01ea8ed842eef7f9ef499bfeacdcc630e9fc6",
+    "schema_cases.json": "28bb80900847da3d3eb09240d439b1269deab5ac8dabb2260f0023a0316c964b",
+    "session_and_native_read_audit.json": "5d5d09176a191541cfac45738c6870c9b0dcfb40686fea5f7bac65ac11c1378b",
+    "mutants.json": "9b65bec415a08c91b7752fb3455c59183122c26f3cd4abd03f78d52d64c4a2ed"
+  }
+}

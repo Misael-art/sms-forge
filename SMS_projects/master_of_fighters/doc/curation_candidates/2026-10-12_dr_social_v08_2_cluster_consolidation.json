@@ -1,0 +1,117 @@
+{
+  "schema": "smsforge_art_curation_candidate_v1",
+  "id": "dr_social_v08_2_cluster_consolidation_2026-10-12",
+  "status": "owner_approved_for_promotion_and_diagnostic_conversion",
+  "owner_directive": {
+    "cross_material_reclassification": true,
+    "cross_outline_reclassification": true,
+    "preserve_alpha_geometry": true,
+    "grid_px": [
+      8,
+      9,
+      80,
+      80
+    ],
+    "minimum_cluster_contains_solid_2x2": true,
+    "coat_two_tone_indices": [
+      5,
+      6
+    ],
+    "hair_grayscale_only": true,
+    "yellow_glasses_authorized_pixels": 85,
+    "prohibit_image_generation_and_diffusion": true,
+    "no_rom_before_visual_approval": true
+  },
+  "source": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+    "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+    "role": "frozen geometry only"
+  },
+  "candidate": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_2_candidate.png",
+    "sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+    "samples_1x_4x": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/dr_social_v08_2_keypose_samples_1x_4x.png",
+    "report": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/dr_social_v08_2_mask_compliance_report.json",
+    "change_log": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/pixel_change_log.csv",
+    "mask_atlas": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/",
+    "approved_path": "res/approved_art/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_2_approved.png",
+    "approved_sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8"
+  },
+  "method": {
+    "tool": "tools/build_dr_social_61f_v08_2_masks.py",
+    "deterministic": true,
+    "cluster_vote": "dominant immediate opaque 8-neighbor color across material/outline boundaries",
+    "iteration": "one component at a time; recompute until fixed point",
+    "geometry_or_alpha_edits": false,
+    "rom_compiled": false,
+    "integrated_into_res": false
+  },
+  "results": {
+    "canvas_px": [
+      640,
+      720
+    ],
+    "grid": [
+      8,
+      9
+    ],
+    "cell_px": [
+      80,
+      80
+    ],
+    "active_poses": 61,
+    "useful_colors": 11,
+    "alpha_changed_pixels": 0,
+    "changes_outside_masks": 0,
+    "original_outline_modified_pixels": 0,
+    "outline_pixels_added_by_boundary_reclassification": 863,
+    "unresolved_pixels": 0,
+    "yellow_glasses_pixels_preserved": 85,
+    "hair_non_gray_pixels": 0,
+    "semantic_leaks": {
+      "white_outside_zone": 0,
+      "yellow_outside_zone": 0,
+      "burgundy_outside_zone": 0,
+      "gray_outside_hair_or_cane": 0
+    },
+    "cane_shaft_pixels": 1245,
+    "cane_shaft_nonwhite_pixels": 0,
+    "coat_indices_inside_material_mask": [
+      5,
+      6
+    ],
+    "singletons_after": {
+      "hair": 0,
+      "coat": 0,
+      "skin": 0
+    },
+    "components_without_solid_2x2_after": {
+      "hair": 0,
+      "coat": 0,
+      "skin": 0
+    },
+    "cluster_pixels_reclassified": {
+      "hair": 225,
+      "coat": 1949,
+      "skin": 1631
+    },
+    "all_color_changes": 23236,
+    "independent_per_cell_audit": "pass"
+  },
+  "curation_learning": [
+    "Cross-boundary cleanup must preserve the exact alpha/cell geometry while reporting material ownership transfers and newly added outline-color pixels separately from original-outline edits.",
+    "A real 2x2 block is a four-pixel solid square; area and bounding-box thresholds alone can accept an L-shaped or diagonal component that has no such block.",
+    "Applying neighbor votes simultaneously from a frozen snapshot can make adjacent small components oscillate between skin shades. Process one component, recompute, and iterate to a fixed point.",
+    "The coat palette must be audited by material mask, not by total palette size: this candidate confines textile pixels to cyan 5 and dark shadow 6.",
+    "A zero cluster audit is only quantitative evidence. The 1x/4x sample still requires human visual approval before asset promotion, ROM conversion, or gameplay claims."
+  ],
+  "next_gate": "Deterministic exact-cell crop, SMS metasprite packing, ROM build, and isolated Emulicious framebuffer/VDP validation.",
+  "owner_approval": {
+    "decision": "approved",
+    "date": "2026-10-12",
+    "decision_record": "doc/decisions/dr-social-animation-source-v08_2_owner_approval.json",
+    "approved_asset_path": "res/approved_art/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_2_approved.png",
+    "approved_asset_sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+    "scope": "art source approval and diagnostic ROM conversion"
+  }
+}

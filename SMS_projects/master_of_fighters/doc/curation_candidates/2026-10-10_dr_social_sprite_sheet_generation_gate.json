@@ -1,0 +1,207 @@
+{
+  "schema": "sms_curation_candidate_v1",
+  "candidate_id": "dr_social_sprite_sheet_generation_gate_2026-10-10",
+  "status": "project_applied; canonical_curator_review_pending",
+  "scope": "Sprite-sheet creation route for original Master System fighting-game characters; first exercised on Dr. Social light jab.",
+  "evidence": {
+    "contract": "SMS_projects/master_of_fighters/doc/dr_social_animation_contract_v2.json",
+    "contract_gate_result": "29 sequences and 224 proposed source poses passed audit_animation_contract.py before raster generation.",
+    "candidate": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v2/social_light_jab_candidate_v2.png",
+    "candidate_sha256": "8ac486bd47e83c4bdf8ec473a3647dd7ede2627ab4029ee4ffdf35bcf52e2c5a",
+    "review": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v2/social_light_jab_candidate_v2_review.json",
+    "observed": {
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "unique_rgb_values": 134238,
+      "exact_rgb_255_0_255_pixels": 4,
+      "corner_samples": [
+        [
+          230,
+          15,
+          239
+        ],
+        [
+          235,
+          23,
+          239
+        ],
+        [
+          230,
+          38,
+          234
+        ],
+        [
+          230,
+          31,
+          235
+        ]
+      ]
+    },
+    "art_checklist": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v2/social_light_jab_candidate_v2_art_review.json",
+    "observed_v2": {
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "unique_rgba_values": 184429,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "alpha_zero_pixels": 970884,
+      "alpha_255_pixels": 0,
+      "partial_alpha_pixels": 601980,
+      "grid": {
+        "columns": 3,
+        "rows": 2,
+        "cell_px": [
+          512,
+          512
+        ],
+        "frame_order": [
+          "J01",
+          "J02",
+          "J03",
+          "J04",
+          "J05",
+          "J06"
+        ]
+      },
+      "logical_sms_cell_target_px": [
+        80,
+        80
+      ],
+      "exact_rgb_key": null,
+      "note": "Transparent-background request returned semitransparent pixels across the character/halo; no binary cutout or indexed Master System palette."
+    },
+    "gate_results": {
+      "animation_contract": {
+        "status": "pass",
+        "summary": "29 sequências, 224 poses propostas; custos de metasprite/runtime separados."
+      },
+      "art_review_checklist": {
+        "status": "fail_block_promotion",
+        "failed_axes": [
+          "pixel_clusters",
+          "outline_and_cutout",
+          "semantic_palette_role_confinement"
+        ],
+        "pending_axes": [
+          "face_detail_readability",
+          "material_shading",
+          "material_shadow_flow_coherence",
+          "hand_weapon_attachment",
+          "equipment_geometry",
+          "frame_pose_integrity",
+          "native_size_readability",
+          "owner_approval",
+          "independent_review"
+        ],
+        "problems": []
+      },
+      "v4_art_review_checklist": {
+        "status": "fail_block_promotion",
+        "failed_axes": [
+          "pixel_clusters",
+          "outline_and_cutout",
+          "semantic_palette_role_confinement"
+        ],
+        "pending_axes": [
+          "face_detail_readability",
+          "material_shading",
+          "material_shadow_flow_coherence",
+          "hand_weapon_attachment",
+          "equipment_geometry",
+          "frame_pose_integrity",
+          "native_size_readability",
+          "owner_approval",
+          "independent_review"
+        ],
+        "problems": []
+      }
+    },
+    "latest_candidate": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/social_light_jab_candidate_v4.png",
+    "latest_candidate_sha256": "22ca69b14ef0b9e60e643228353b2bdcff3b45c3c8253de1e348bfa067f20db9",
+    "latest_candidate_review": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/social_light_jab_candidate_v4_review.json",
+    "latest_candidate_art_checklist": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/social_light_jab_candidate_v4_art_review.json",
+    "observed_v4": {
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "unique_rgb_values": 83402,
+      "exact_black_pixels": 706581,
+      "near_black_le_32_pixels": 1076331,
+      "grid": {
+        "columns": 3,
+        "rows": 2,
+        "cell_px": [
+          512,
+          512
+        ],
+        "frame_order": [
+          "J01",
+          "J02",
+          "J03",
+          "J04",
+          "J05",
+          "J06"
+        ]
+      },
+      "note": "Glasses read more clearly; background is nonuniform near-black, source is not indexed or at logical 80×80."
+    },
+    "transparent_attempt_v5": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v5_alpha_attempt/social_light_jab_transparency_failed_v5.png",
+      "sha256": "86e775de042f7aff5f60df2ef7b272be14f2eb80950b5c1be2061c90848d0f2b",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "unique_rgba_values": 219818,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "note": "Transparent-background request created glow and partial alpha; kept as rejected evidence, not candidate."
+    }
+  },
+  "lessons_to_retain": [
+    "A detailed prompt does not prove the generated raster obeyed exact color, transparency, palette, pose count, or frame-grid requirements.",
+    "Inspect the actual saved PNG after generation: read dimensions, color mode, alpha, color histogram, exact key-color samples, and each cell before accepting the visible preview.",
+    "A visual magenta-looking background may contain gradients or semi-transparent fringe; compare RGB samples to the exact required key and stop promotion on mismatch.",
+    "Keep authored pose IDs and the source-pose count distinct from cell dimensions, tiles, VDP objects, and animation timing.",
+    "Review all frames in temporal order at native size and nearest-neighbor 4x; explicitly trace face, both hands, shoulder-elbow-wrist chain, weapon grip, full weapon endpoints, baseline, silhouette, and material shadow flow.",
+    "Lock identity and morphology to the owner-approved source. Reuse the clean v10 color grouping as a treatment reference only; do not copy its movement or carry its earlier edge defects forward.",
+    "Keep every generated version in review_drafts with an immutable hash and prompt/source lineage. A detected defect makes that version a review-only candidate; do not place it in res/, a conversion proof, or a ROM.",
+    "An approved move design authorizes sequential art production only. It does not approve generated pixels, frame data, hitboxes, palette conversion, hardware budgets, or runtime behavior.",
+    "Record the planned effect of at least seven animation principles against exact pose IDs and justify the rest; after drawing, verify those effects in the actual sequence rather than relying on prompt language.",
+    "Transparent-background generation can return semi-transparent pixels across the character and halo; inspect the alpha histogram and require alpha exactly 0/255 before cutout, indexed conversion, or promotion. A transparent preview is not proof of a clean binary sprite mask.",
+    "A black-looking RGB preview is not an exact key: measure exact-key pixels, near-black counts, mode and unique-color histogram; do not infer a clean cutout from display appearance.",
+    "Requesting transparent_background=true can produce glow and partial alpha rather than a binary mask; require alpha exactly 0/255 and inspect the saved PNG before accepting it."
+  ],
+  "route_changes_applied_locally": [
+    "Created animation contract v2 with the owner-approved moveset, per-entity tracks, pose endpoints, provisional timing, and all twelve principles.",
+    "Updated GDD/TDD with the roster-wide Super-meter design boundary and implementation values still pending.",
+    "Created one six-pose jab sheet candidate and a hash-bound preflight sidecar; production promotion remains blocked by measured background and palette defects.",
+    "Separated the retired cane-riposte draft from the approved two-special plus Super structure.",
+    "Generated and archived jab candidate v2 from approved pixel references; its six-pose composition remains blocked by measured alpha/palette defects, so it stays outside res/ and ROM.",
+    "Generated jab v4 with more readable round spectacles; archived as review-only after measuring 83,402 RGB colors and a nonuniform near-black background. Hash-bound art checklist failed 3 axes and left 7 pending.",
+    "Tried a constrained transparent v5 as a targeted fix; archived separately as a failed alpha attempt after measuring 219,818 RGBA colors, alpha 0–254 and glow. Did not quantize, convert, or build ROM."
+  ],
+  "future_canonical_curator_work": {
+    "files_not_changed": [
+      "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+      "tools/sms_wrapper/.agent/workflows/art-review.md"
+    ],
+    "reason": "This is an evidence-backed project curation candidate for later canonical review, not a global rule promotion.",
+    "proposed_measurable_gates": [
+      "exact background or alpha contract check",
+      "frame-grid and pose-count geometry check",
+      "indexed palette and semantic material-color check after conversion",
+      "per-frame source/preview pixel identity check",
+      "hash-bound art checklist with complete micro-axes before promotion"
+    ]
+  }
+}

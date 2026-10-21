@@ -1,0 +1,97 @@
+{
+  "schema": "sms_subagent_session_v1",
+  "artifact_kind": "harness_worker_result",
+  "task_id": "9a72c60025254ce6ae12d8bad557df01",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T",
+  "producer_id": "/root",
+  "worker_id": "/root/review_qa_contract",
+  "lane": "visual",
+  "request": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/request.json",
+    "sha256": "73e3f18a99c446ec5c04715cd6369f382b95a685b7f0f846e7589a67c4e6f510"
+  },
+  "status": "failed",
+  "claim_ceiling": "assigned_checks_only",
+  "promoted": false,
+  "findings": [
+    {
+      "kind": "defect",
+      "priority": 2,
+      "summary": "Blink transition contains partially erased PRESS BUTTON 1 prompt in native frame 000015.",
+      "evidence": [
+        "title_sequence_video"
+      ],
+      "observed_frames": [
+        0,
+        15,
+        29
+      ],
+      "scope": "Title prompt transition only; title continuity failure. No causal attribution or gameplay/FPS claim."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "title_native_frame",
+      "kind": "framebuffer",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_0_frame.png",
+      "sha256": "063e518410609978fd47e0015a3d2143ec649189416367c9a5d52cda641fa452",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_0_frame.json",
+        "sha256": "50310c2ab077cf48039d748d1f4c2d6385aa8dafc258f67b9e05a79965f753e7"
+      }
+    },
+    {
+      "id": "title_sequence_frame",
+      "kind": "framebuffer",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_1_frame.png",
+      "sha256": "063e518410609978fd47e0015a3d2143ec649189416367c9a5d52cda641fa452",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_1_frame.json",
+        "sha256": "1785fc9e7bb6b17a609b4676aade349adf1849bddcfd073159ceace391d85105"
+      }
+    },
+    {
+      "id": "title_sequence_video",
+      "kind": "video",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_1.mp4",
+      "sha256": "276a3449e0ccf9b05e6a87d1da28609dde173604b9e9f71940d822e08aec81b3",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_1.json",
+        "sha256": "f885b855391334004ffb026ed4ea210571d4af91e15d7b1e0b9ca5144909d818"
+      }
+    },
+    {
+      "id": "commands",
+      "kind": "input_trace",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/commands.jsonl",
+      "sha256": "521bbf69cb7ac39bf0a8ae2f6e1b004e6e0fb18fadcbea00d5cdecb0a51deed8"
+    }
+  ],
+  "session": {
+    "id": "d0823eb87add4c3ab4189c9a073fa155",
+    "owner": "/root/review_qa_contract",
+    "bundle": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/bundles/d0823eb87add4c3ab4189c9a073fa155",
+    "closed": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/closed_session.json",
+      "sha256": "0ce7fad4fee9337c6c1f11f4e895931d74d647de6254afb4dd41990555081ffa"
+    }
+  },
+  "coverage": [
+    {
+      "id": "title_native",
+      "status": "passed",
+      "note": "Viewed case_0_frame.png at native 256x192. Observed centered MASTER SUPER / STREET FIGHTER II / TURBO, PRESS BUTTON 1, bottom SMSFORGE 2026; red/blond fighter left, green/blond fighter right, white ship and sea/dock. Lettering and both figures are recognizable; no blank frame or misplaced tiles observed in this screenshot. This is title/layout inspection only.",
+      "evidence": [
+        "title_native_frame"
+      ]
+    },
+    {
+      "id": "title_sequence",
+      "status": "failed",
+      "note": "Viewed native framebuffer video frames 000000, 000015 and 000029. Frame 0 shows complete PRESS BUTTON 1; frame 15 has partial left letters and isolated trailing 1 with central letters absent; frame 29 has no prompt. Main title, credits, both fighters and ship remain recognizable and positioned consistently. Cloud/water patterns shift. Partial prompt is an observed transitional visual defect; cause unproven. Only sampled frames inspected, no gameplay/AAA/full-animation/flicker/FPS approval. Video is stepped.",
+      "evidence": [
+        "title_sequence_video"
+      ]
+    }
+  ]
+}

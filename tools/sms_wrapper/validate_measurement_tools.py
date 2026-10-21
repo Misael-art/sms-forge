@@ -23,7 +23,9 @@ DOCTRINE_ALWAYS = {"harness_orchestration.py", "quality_review_router.py",
                    "blastem_diagnostics.py", "blastem_maintenance.py",
                    "blastem_dump_diff.py",
                    "artifact_registry.py", "mugen2sms/analysis/trace_compare.py",
-                   "mugen2sms/analysis/scale_pilot.py"}
+                   "mugen2sms/analysis/scale_pilot.py",
+                   "mugen2sms/runtime/vram_plan.py",
+                   "mugen2sms/runtime/commit_budget.py"}
 
 # Nao sao ferramentas de medicao: constroem, geram ou orquestram.
 EXEMPT = {

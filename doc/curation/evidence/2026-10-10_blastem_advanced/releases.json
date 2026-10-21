@@ -1,0 +1,20 @@
+{
+  "schema": "blastem_release_discovery_v1",
+  "checked_at": 1791635765.269926,
+  "source": "https://www.retrodev.com/blastem/downloads.html",
+  "page_sha256": "9481a16a89c3b23da2653433402383562e614f85e91f96015b2b13c6019f0161",
+  "releases": [
+    {
+      "version": "1.0.0",
+      "url": "https://www.retrodev.com/blastem/blastem64-1.0.0.tar.gz",
+      "platform": "linux_x86_64"
+    }
+  ],
+  "active_qualified": {
+    "version": "1.0.0",
+    "url": "https://www.retrodev.com/blastem/blastem64-1.0.0.tar.gz",
+    "archive_sha256": "9e47b68a555e24db5ef5bd77e67967124ac3e28ae04ae32e9f3af3eaecf31860",
+    "binary_sha256": "1bd0f40ddcc6d769f6cc2aea59bb2973601b6db30bdd849b68315b9d83ad06ec"
+  },
+  "policy": "discovery_does_not_change_pin_or_qualify_candidates"
+}

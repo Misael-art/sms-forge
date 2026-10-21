@@ -1,0 +1,48 @@
+{
+  "scope": "independent read-only verification of coordinator native run; reviewer did not emulate or collect this session",
+  "checks": {
+    "metrics_equal_preserved_report": true,
+    "tool_sha_current_matches": true,
+    "helper_sha_current_matches": true,
+    "three_session_ids_agree": true,
+    "rom_sha_matches_all_records": true,
+    "closed_record_state": true,
+    "same_nominal_hz_ntsc": true,
+    "regional_pass_arithmetic": true,
+    "advancing_frame_counter": true,
+    "narrow_claim_ceiling": true
+  },
+  "owned_processes": [
+    {
+      "identity": "supervisor",
+      "pid": 1114745,
+      "exact_owned_process_live": false
+    },
+    {
+      "identity": "xvfb_process",
+      "pid": 1114752,
+      "exact_owned_process_live": false
+    },
+    {
+      "identity": "sandbox",
+      "pid": 1114772,
+      "exact_owned_process_live": false
+    },
+    {
+      "identity": "emulator_process",
+      "pid": 1114774,
+      "exact_owned_process_live": false
+    }
+  ],
+  "ok": true,
+  "artifacts": {
+    "feedback_sha256": "67e40493c646cfea2635190616d3c8011896c4b731fce0dc9425d510084d07f5",
+    "runtime_probe_sha256": "088001c537d9daed1702132485f7da26154460aa5bc6905225cb50a303c14b88"
+  },
+  "limitations": [
+    "Raw report records only rounded mean FPS, aggregate frame delta; no individual start/end counter timestamps available to recompute each 8s window.",
+    "No per-frame pacing/jitter/stutter, gameplay/input reaction/art/music/audio/PAL/hardware validation.",
+    "frames_delta_total961 is consistent with ~16s59.6Hz, but summary is not independent authentication of each sample duration.",
+    "Closed session and exact process absence checked now; this does not validate unrelated sessions or host-wide cleanup."
+  ]
+}

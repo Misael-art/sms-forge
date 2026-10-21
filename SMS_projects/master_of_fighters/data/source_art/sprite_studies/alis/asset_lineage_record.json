@@ -1,0 +1,246 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "alis_guard_motion_sms_80px_12f_v1",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_study",
+  "source_kind": "ai_generated_post_translation",
+  "channel": "built_in_image_gen + ImageMagick frame normalization + prepare_sms_pixel_art.py",
+  "prompt": {
+    "path": "data/source_art/sprite_studies/alis/alis_guard_motion_12f_prompt_v2.txt",
+    "sha256": "541ee1bf31b04acebe55e5c6daf73cb990ddb66e357650616df4025c1752f284"
+  },
+  "prompt_history": [
+    {
+      "path": "data/source_art/sprite_studies/alis/alis_idle_12f_prompt_v1.txt",
+      "sha256": "5de410475fdf326e09e2536466593514b6840164c47be062c8d12d0a6502e733",
+      "role": "initial idle-sheet instruction; first output repeated the guard pose and was not selected"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+      "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+      "role": "owner-approved character design and canonical color reference"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "exact 13-color Alis SMS palette"
+    },
+    {
+      "path": "doc/build_palettes_manifest.py",
+      "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e",
+      "role": "canonical source for the character palette manifest"
+    }
+  ],
+  "palette_reference": {
+    "url": "https://www.smspower.org/Sprites/PhantasyStar-SMS",
+    "role": "original sprite archive consulted through the approved concept's color-only reference; no game pixels copied"
+  },
+  "generated_source": {
+    "path": "data/source_art/sprite_studies/alis/alis_idle_12f_generated_v2.png",
+    "sha256": "117b185c93d58ae7a1ba870abb14af010c4939401dd79c24790ca4276e48a7f6",
+    "dimensions_px": [
+      1448,
+      1086
+    ],
+    "description": "ImageGen output with a 4x3 contact sheet; selected for its twelve different guard poses and then reviewed as guard motion rather than pure idle"
+  },
+  "layout_normalization": {
+    "tool": "ImageMagick",
+    "input_canvas_px": [
+      1448,
+      1086
+    ],
+    "input_grid": [
+      4,
+      3
+    ],
+    "input_cell_px": [
+      362,
+      362
+    ],
+    "output_cell_px": [
+      80,
+      80
+    ],
+    "per_cell_scale_percent": 95,
+    "placement": "centered horizontally and bottom-aligned in each cell; preserved frame scale",
+    "row_baseline_offsets_px": [
+      0,
+      2,
+      4
+    ],
+    "row_baseline_offset_space": "logical output pixels after the first 320x240 conversion",
+    "baseline_reason": "rows 2 and 3 were raised in the generation; transparent padding shifted them down to align all foot baselines without changing poses",
+    "high_resolution_aligned_path": "data/source_art/sprite_studies/alis/alis_idle_guard_12f_aligned_v1.png",
+    "high_resolution_aligned_sha256": "6d8b5c2e79e9d6d7981a1b9ddf5d9a1234dc3a925e1e645b3f03c054ab490f2e",
+    "high_resolution_rgb_path": "data/source_art/sprite_studies/alis/alis_idle_guard_12f_aligned_rgb_v1.png",
+    "high_resolution_rgb_sha256": "38d7a83eb8afe7e15e3cae400adac565776baa21c64bb5214bd1b7450905c1ed",
+    "first_indexed_preview_path": "data/source_art/sprite_studies/alis/alis_idle_guard_12f_sms_80px_v1.png",
+    "first_indexed_preview_sha256": "382899fca205e96bad1e6744966764cb3fc028287a4eb02cba6364213285f4c8",
+    "rgb_intermediate_path": "data/source_art/sprite_studies/alis/alis_idle_guard_12f_aligned_rgb_v2.png",
+    "rgb_intermediate_sha256": "6206a43ab453746cfa3ec3db903a5200b6682822741fa6a4b7470be9fb074270",
+    "rgb_intermediate_dimensions_px": [
+      320,
+      240
+    ]
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [
+        320,
+        240
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "alis_landale",
+      "transparent_index": 0,
+      "speckle_cleanup": true,
+      "cell_size": [
+        80,
+        80
+      ],
+      "minimum_component_px": 12,
+      "foreground_threshold": 32,
+      "outline_margin_px": 1
+    },
+    "palette_rgb_with_transparent_index": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        85,
+        0,
+        0
+      ],
+      [
+        170,
+        85,
+        0
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        170,
+        0
+      ],
+      [
+        255,
+        255,
+        170
+      ],
+      [
+        85,
+        85,
+        170
+      ],
+      [
+        170,
+        170,
+        170
+      ],
+      [
+        255,
+        170,
+        170
+      ],
+      [
+        255,
+        255,
+        0
+      ],
+      [
+        255,
+        85,
+        170
+      ],
+      [
+        255,
+        170,
+        255
+      ],
+      [
+        0,
+        85,
+        255
+      ],
+      [
+        0,
+        255,
+        255
+      ]
+    ],
+    "resource_gate": "PASS: audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character alis_landale"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/alis/alis_guard_motion_12f_sms_80px_v1.png",
+    "sha256": "86327477417eda71823bc1dbd291b5a7604b3024d110f59aeedc4ecb92d3b59a",
+    "dimensions_px": [
+      320,
+      240
+    ],
+    "format": "8-bit indexed PNG",
+    "layout": "4 columns x 3 rows; twelve 80x80 frames",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 13
+  },
+  "review_preview": {
+    "path": "data/source_art/sprite_studies/alis/alis_guard_motion_12f_preview_4x.png",
+    "sha256": "3d579fed3923a0cb98efeb7702192cddfea2fea856819385f49c19f90e81d1d4",
+    "description": "nearest-neighbor 4x review preview flattened on #555555; the approved source PNG remains transparent"
+  },
+  "animation_semantics": {
+    "manifest_path": "data/source_art/sprite_studies/alis/alis_guard_motion_semantics_v1.json",
+    "manifest_sha256": "e9aa4b9f97863d5cf4e72015fecb0ccae3cc5b5a3de3757371815feb15699a14",
+    "action": "guard_transition",
+    "frame_count": 12,
+    "unique_frame_hashes": 12,
+    "pivot_px": [
+      40,
+      79
+    ],
+    "audit": "PASS: audit_animation_semantics.py"
+  },
+  "visual_check": {
+    "same_character_in_all_frames": true,
+    "slim_light_biotype_preserved": true,
+    "sword_and_shield_visible": true,
+    "all_frames_inside_cell": true,
+    "minimum_horizontal_margin_px": 1,
+    "visible_foreground_bbox_height_range_px": [
+      64,
+      73
+    ],
+    "palette_matches_approved_Alis_color_family": true,
+    "grain_cleanup_and_non_dithered_conversion": true,
+    "external_game_pixels_used": false,
+    "action_read": "twelve guard-transition poses; owner review should confirm the motion reads as the intended move"
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "all_colors_on_sms_6bit_grid": true,
+    "per_character_manifest_palette_match": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "animation_semantics_gate": "PASS",
+    "independent_review": "pending",
+    "sprite_mode_or_metasprite_contract": "not assessed; source-art study only",
+    "rom_or_emulator_validation": false
+  },
+  "status": "source_candidate",
+  "owner_approval": null,
+  "next_gate": "owner visual review of the 12 guard-motion poses and morphology; confirm scale/action contract before any runtime integration"
+}

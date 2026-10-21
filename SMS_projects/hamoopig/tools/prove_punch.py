@@ -1,106 +1,61 @@
 #!/usr/bin/env python3
-"""Aproxima P1 do dummy e tenta soco; le probe_boss (HP P2) e estado."""
-import os, sys, time, subprocess, json
+"""Prova de soco em SESSAO PRIVADA (§93/L057): aproximar por frames, B1, ler vida de P2 na RAM.
+Eixos: ACK da ponte/estado das portas (no JSON) separados da leitura da ROM (probe)."""
+import json, os, sys
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-WRAP = os.path.join(ROOT, "tools", "sms_wrapper")
-sys.path.insert(0, WRAP)
-from emulicious_dap import wait_port
-from emulator_session import require_no_stale
-import capture_evidence as CE
-import emulator_input as EI
+sys.path.insert(0, os.path.join(ROOT, "tools", "sms_wrapper"))
+import session_consumer as SC
 
 PROJ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 ROM = os.path.join(PROJ, "out", "rom", "hamoopig.sms")
-JAR = os.path.join(ROOT, "tools", "emuladores", "emulicious", "Emulicious.jar")
 OUT = os.path.join(PROJ, "out", "evidence")
-SHA = "550f7c99e0ddf897af50eb5ccaf6c6985cc6dee3ab2fa70bd834767c44d99977"
-
-
-def attach_live():
-    time.sleep(5.0)
-    for _ in range(4):
-        cand = wait_port(timeout_s=20)
-        if cand is None:
-            return None
-        try:
-            cand.start_session()
-            cand.cont()
-            time.sleep(2.0)
-            cand.pause()
-            if cand.read_byte(0xC7F6) is not None:
-                return cand
-        except (ConnectionError, AssertionError):
-            pass
-        cand.close()
-        time.sleep(2.0)
-    return None
 
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    if not require_no_stale(why="hamoopig punch"):
-        return 2
-    logf = open(os.path.join(OUT, "punch_emu.log"), "w")
-    proc = subprocess.Popen(
-        ["java", "-jar", JAR, "-remotedebug", "4901", "-set", "Update=0", ROM],
-        stdout=logf, stderr=subprocess.STDOUT, start_new_session=True)
     try:
+        ctx = SC.private_session(ROM)
+        s = ctx.__enter__()
+    except SC.SessionUnavailable as e:
+        print(f"[FAIL_AMBIENTE] {e}")
+        return 2
+    exc = (None, None, None)
+    try:
+        s.hold(0, 0, 180)
+        for _ in range(2):
+            s.hold(SC.B1, 0, 4)
+            s.hold(0, 0, 36)
+        s.hold(0, 0, 120)                       # ROUND+FIGHT lock: nao andar durante g_lock
+        gap, px, p2x, trace = 255, 0, 0, []
         for _ in range(40):
-            time.sleep(0.5)
-            if CE._main_window_id():
-                break
-        dap = attach_live()
-        if dap is None:
-            print("FAIL DAP")
-            return 2
-        dap.cont()
-        time.sleep(3.0)
-        EI.press_spec("a=180")
-        time.sleep(0.5)
-        EI.press_spec("a=180")
-        time.sleep(2.5)  # ROUND+FIGHT lock = 90 frames; nao andar durante g_lock
-        gap = 255
-        px = 0
-        p2x = 0
-        for _ in range(16):
-            dap.cont()
-            EI.press_spec("Right=500")
-            time.sleep(0.05)
-            dap.pause()
-            px = dap.read_byte(0xC7FA) or 0
-            p2x = dap.read_byte(0xC7FC) or 0
-            gap = dap.read_byte(0xC7E7) or 255
-            print(f"approach px={px} p2x={p2x} gap={gap}")
+            s.hold(SC.R, 0, 6)
+            px, p2x, gap = s.byte(0xC7FA), s.byte(0xC7FC), s.byte(0xC7E7)
+            trace.append({"px": px, "p2x": p2x, "gap": gap})
             if gap <= 24:
                 break
-        hp0 = dap.read_byte(0xC7F4)
-        st = dap.read_byte(0xC7E6)
-        print(f"pre hp2={hp0} px={px} p2x={p2x} gap={gap} state={st}")
-        dap.cont()
-        EI.press_spec("a=150")
-        time.sleep(0.12)  # amostrar na janela ativa (~4 frames)
-        dap.pause()
-        hp1 = dap.read_byte(0xC7F4)
-        st1 = dap.read_byte(0xC7E6)
-        used = dap.read_byte(0xC7E9)
-        rec = {
-            "rom_sha256": SHA,
-            "hp0": hp0, "hp1": hp1, "px": px, "p2x": p2x, "gap": gap,
-            "state_pre": st, "state_post": st1, "hit_used": used,
-            "delta": (hp0 or 0) - (hp1 or 0)
-        }
-        json.dump(rec, open(os.path.join(OUT, "punch_probe.json"), "w"), indent=2)
-        print(rec)
-        ok = hp0 == 64 and hp1 is not None and hp1 < hp0
+        s.hold(0, 0, 20)
+        hp0, st = s.byte(0xC7F4), s.byte(0xC7E6)
+        r = s.hold(SC.B1, 0, 4)
+        keys = s.byte(0xC7F8)
+        s.hold(0, 0, 40)                        # janela ativa + recuperacao
+        hp1, st1, used = s.byte(0xC7F4), s.byte(0xC7E6), s.byte(0xC7E9)
+        rec = {"schema": "hamoopig_punch_v2_session", "session_id": s.id, "rom_sha256": s.rom_sha256,
+               "hp0": hp0, "hp1": hp1, "px": px, "p2x": p2x, "gap": gap, "approach": trace,
+               "state_pre": st, "state_post": st1, "hit_used": used, "keys_durante": keys,
+               "ack_porta": r.get("emulator_input"), "delta": hp0 - hp1}
+        json.dump(rec, open(os.path.join(OUT, f"punch_probe_{s.id}.json"), "w"), indent=2)
+        print({k: rec[k] for k in ("hp0", "hp1", "gap", "state_pre", "state_post", "hit_used", "keys_durante", "delta")})
+        # probe_keys (0xC7F8) nao reteve B1 apos 4 frames (informativo); a chegada do comando e provada pela ROM:
+        # estado pre->pos diferente, hit_used e queda de vida de P2
+        ok = gap <= 24 and st != st1 and used == 1 and hp1 < hp0
         print("PASS punch" if ok else "FAIL punch")
-        dap.close()
         return 0 if ok else 1
+    except BaseException:
+        exc = sys.exc_info()
+        raise
     finally:
-        proc.terminate()
-        try:
-            proc.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            proc.kill()
+        ctx.__exit__(*exc)
 
 
 if __name__ == "__main__":

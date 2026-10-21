@@ -1,0 +1,192 @@
+{
+  "schema": "project_learning_candidate_v1",
+  "date": "2026-10-06",
+  "status": "pending_future_curation",
+  "canonical_lesson_id": null,
+  "dedup_key": "luta_mugen_cmdv2_host_rom_reconciliation_and_visual_runtime_failure_20261006",
+  "existing_lessons_to_review": [
+    "L035",
+    "L036",
+    "L057",
+    "L065",
+    "L066",
+    "L091"
+  ],
+  "scope": "Current root Ryo/Ryo CMD-v2 diagnostic ROMs only; findings do not establish generic Master System behavior or full engine capability.",
+  "observations": [
+    {
+      "topic": "Host semantic tests versus ROM behavior",
+      "fact": "The focused host suite for the CMD-v2 ring passed 7/7, while four private native sessions on ROM a5661aa6ccd690eaa569a69639ed5d21b5548f483e63a4e629c80bfa48648d51 failed their assigned ROM outcomes: short KEY_1 did not latch LP; a seven-frame KEY_1 hold resolved to K1_LIGHT/LP rather than K1_STRONG/HP; short KEY_2 did not latch LK; and QCF+KEY_1 resolved to LP rather than the unsupported-special marker. Each report passed structural/binding audit, with tests_passed=false and no missing cases.",
+      "interpretation": "Host tests establish parser semantics for their fixture, not the complete SMSlib pad → tier → CMD → fight-state chain. The ROM mismatch is observed; its cause is not yet isolated.",
+      "measurement": [
+        "tools/sms_wrapper/mugen2sms/tests/test_root_input_ring_c.py",
+        "tools/sms_wrapper/session_qa.py collect",
+        "tools/sms_wrapper/audit_subagent_session.py"
+      ]
+    },
+    {
+      "topic": "Visual/runtime defects in the same ROM",
+      "fact": "A native reviewer inspected all 64 256x192 frames. Right input translated Ryo by 8 px without a visible walk cycle; KEY_1 showed no attack pose; the upper HUD lost its left band and fragmented on the right; both fighters ended 9 px above the floor; a 6x4 px orange component was detached near P1. Both actors remained visible throughout. The visual report does not diagnose the renderer cause and stepped video does not measure FPS.",
+      "limitation": "The buffer-size discrepancy is a concrete layout risk, not proof that it caused each observed pixel defect. Renderer repair requires a new exact-ROM capture and review.",
+      "measurement": "tools/sms_wrapper/session_qa.py collect (visual lane), native 256x192 framebuffer video, direct frame inspection"
+    },
+    {
+      "topic": "Audio claim ceiling",
+      "fact": "The private audio case passed route verification and active-signal checks on the same ROM; it did not evaluate music or SFX fidelity.",
+      "limitation": "Signal/activity evidence must not be promoted to musical quality or complete game-audio coverage."
+    },
+    {
+      "topic": "Historical QA requests and mutable ROM inputs",
+      "fact": "The probe2 request/report records refer to a frozen ROM copy, but their input list also binds the mutable project path out/rom/luta_mugen.sms. After that path advanced to the 842ccd44 build, re-running audit_subagent_session.py on the probe2 reports returned ok=false with missing/stale artifact for the mutable project ROM. Probe3 requests still audit structurally against the current matching 842ccd44 ROM; their normal audits return ok=true and --require-passed returns exit 1 because the assigned cases failed.",
+      "limitation": "The stale result is a present-day revalidation result, not a retroactive change to the original worker observation. Preserve original request/report hashes and frozen ROM copies; do not rewrite hashes or restore an older ROM over the active product to make old requests pass. Review the shared request-input binding during future curation."
+    },
+    {
+      "topic": "Follow-up instrumentation",
+      "fact": "A new ROM was built at SHA-256 842ccd44a3c8608cb116387c8a255576f42c442c30eae9a664bcd3435517f397 with compact tier/event probes at C7D8-C7DF and C7E5-C7E9. Its focused host suite passed 7/7 and source→ROM/debug-marker gates passed. Four private native runtime sessions bound to this exact ROM all failed their assigned outcomes, but their requests/reports passed structural audit: 12 external KEY_1 frames left the tier count at 3 with no strong event; a short KEY_2 did record K2_LIGHT but no LK command; the QCF case did not record a tier or special command. The trace and probe readings show a remaining gap between ROM input/event telemetry and command dispatch; cause is not yet isolated. A second request now samples each VDP frame through a sustained KEY_1 press and release plus a KEY_2 pulse.",
+      "limitation": "Do not transfer QA results from ROM a5661aa6… to ROM 842ccd44…. The current telemetry does not prove why input samples/counts differ, and it does not repair command behavior."
+    },
+    {
+      "topic": "Frame-by-frame input trace and loop cadence",
+      "fact": "On ROM 842ccd44a3c8608cb116387c8a255576f42c442c30eae9a664bcd3435517f397, a private native trace applied 12 contiguous one-frame KEY_1 steps across VDP frames 123–135. The ROM normalized KEY_1 only by the fourth observed case, tier count reached 3/6 after all 12 holds, and two neutral steps still showed held KEY_1; K1_LIGHT/LP appeared only after four additional neutral frames. The subsequent KEY_2 pulse also reached the ROM probes late and did not dispatch LK. C7F0 advanced from 9 to 17 across 22 external frames. A continuous `measure_frame_advance.py` run on the same ROM at visible HUD cell (29,0) estimated 23.5 main-loop iterations/s and failed cadence: 5 of 6 completed intervals were outside tolerance. The self-check passed.",
+      "interpretation": "The ROM loop has low and irregular cadence on this build, consistent with delayed input sampling. The measurements do not yet isolate the CPU phase or prove that the CMD matcher itself is the cause. Do not change tier thresholds to mask the cadence failure.",
+      "limitation": "The probe4 report is collected against the exact ROM but its current structural re-audit fails because the request binds an older SHA for doc/10-memory-bank.md (request 9d72d6a0…, file f8945592… at audit time). The normal and strict audit both stop on that stale input. A separate 30-second attempt at cell (28,0) targeted the wrong visible cell and is discarded. The 23.5 estimate is a failed project-ROM measurement, not a product acceptance result or generic SMS claim.",
+      "evidence": [
+        "out/qa_native_20261006/ryo_cmdv2_probe4/prepared_input_timeline/request.json SHA-256 90a059255a92aa8ebd27c1057f2694a4b74b3c03e18c824b93f4db41038c9a37",
+        "out/qa_native_20261006/ryo_cmdv2_probe4/prepared_input_timeline/run_1e2b61a584aa4b67b11144cf61f27d3f/report.json SHA-256 68079ca8551a8f581f0620dfa961c6fa548c0802af1516da100a66d8bc00c289; session 89f63604444345e9a278b7b8b9b203f2",
+        "out/qa_native_20261006/rom842_frame_advance_final.json"
+      ]
+    },
+    {
+      "topic": "Phase profiler build",
+      "fact": "Build v061 produced ROM SHA-256 94ac326efd2b66a863a7a4277b697dc565a6ede9aafed37cead6aa15c319e40a, 589824 bytes. The VBlank callback increments C7C0 and C7D0-C7D4 count which phase is active at each frame interrupt. Private runtime QA on task 7e100b71c357456c9bc2ad328cc9d09c completed in closed session 915993c024d147ca823af50f461eab3f; coordinator audit and --require-passed passed for assigned observations. Continuous frame advance on cell (29,0) measured 24.2 iterations/s, with 9/13 complete intervals outside tolerance.",
+      "limitation": "C7D0-C7D4 are VBlank-boundary counts, not phase durations or CPU cycles, so they cannot locate the cadence bottleneck. The v061 frame-advance gate failed; boot, gameplay, nominal FPS, audio fidelity, and worst-frame budget are not approved by this diagnostic. A coherent complete-loop VCounter snapshot is the next measurement before optimization.",
+      "evidence": [
+        "out/rom/luta_mugen.sms build v061 ROM SHA-256 94ac326efd2b66a863a7a4277b697dc565a6ede9aafed37cead6aa15c319e40a",
+        "out/qa_native_20261006/phase_profile/prepared_histogram/run_344f287c1a1746a69fced7e662cfe47c/report.json SHA-256 a22e36c752a32f727d4f29e977a02dc3bd8ff48afcad25a25e1d56eb7678c72b; request SHA-256 32449e4cef9cdd08067f78579be4d47c2a8384423841fc32145897ec4417e06f",
+        "out/qa_native_20261006/phase_profile/frame_advance_v061.json SHA-256 c69fa1dc8d99c767f2f754a3f45047dea4470ceae1cc9d882cf20895715cae3f",
+        "tools/sms_wrapper/audit_debug_markers.py PASS",
+        "tools/sms_wrapper/audit_rom_asset_binding.py --require PASS",
+        "tools/sms_wrapper/audit_subagent_session.py normal and --require-passed PASS"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe2/runtime_lp/run_de3aad2a76e144db9e89e6a7135be64f/report.json",
+      "sha256": "2e45004980530315fe616a032e5fe7787d9dff039b084283c0de2b34efc41527",
+      "bytes": 4372
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe2/runtime_hp/run_f3c2fdda56ff4af582a029a63b22e0b8/report.json",
+      "sha256": "ea870500a1b3bc63a7868f5d0a0e2fa71be94a7acb45de69c8c627dbeb02a21f",
+      "bytes": 4229
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe2/runtime_lk/run_691c028723174f508f72d274116c5204/report.json",
+      "sha256": "5b7641511c73dfa22e31588eb1327c948f6b6e4af4614169ff451365f49e9e1b",
+      "bytes": 4164
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe2/runtime_qcf/run_5e098389be6542e996848523f095c918/report.json",
+      "sha256": "eae6c015ccda471a7cfb4b89aac51c10cc1314447ba419fd175000f94461f54f",
+      "bytes": 4560
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe2/visual/run_340be76967a64585b5ca927854f1616c/report.json",
+      "sha256": "888cdd361f2c1e310e1d141a36905bddd0252533ed7887d7361c345943a2fd6e",
+      "bytes": 6631
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe2/visual/run_340be76967a64585b5ca927854f1616c/case_0.mp4",
+      "sha256": "323868cff5ac7078df604a07b18b41b124b2dc9e124b255ab9a3ea0b787693b2",
+      "bytes": 13048
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe2/audio/run_9e8d18530d514cb9970871a7f88c9681/report.json",
+      "sha256": "7cf9ffc6b0df477afcfc01561435dfff184073aa5f5b0e4f4b5f86e776fc4d17",
+      "bytes": 4389
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe2/audio/run_9e8d18530d514cb9970871a7f88c9681/case_0.wav",
+      "sha256": "d53774e5da43007c9dd4ed2012e2c65fbe868e29f8d17c8e7c89a44a7713d5d1",
+      "bytes": 589868
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe3/prepared_runtime_lp/request.json",
+      "sha256": "ba545f2a18d0e41b288ed868febe6060ce7bc7b9069ac264f35ed5fc7a79eb1d",
+      "kind": "native_request",
+      "task_id": "6d6ecc4074fa4d1aab966fed909bc3e8"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe3/prepared_runtime_lp/run_6875acfdcd52415b97ffa70e46251ee5/report.json",
+      "sha256": "c836bb85f5dd569e0c8fff545556abd19aca67f0b947817c04347550716d9ff0",
+      "kind": "native_report",
+      "session_id": "77e78260694841c5aa6378426fa68fd0"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe3/prepared_runtime_hp/request.json",
+      "sha256": "b623f4672b278cf647bff3a18193e379963c5d58cecea2da9c166f048ee6a522",
+      "kind": "native_request",
+      "task_id": "91462be48b594c6196d2e78453dde3af"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe3/prepared_runtime_hp/run_683a9e422cc64e4090be3de7cad943e4/report.json",
+      "sha256": "e95ef2da305b9aeb36d08c1f3d7dec5730554e067c0bcf919077b4f8eab6d2bf",
+      "kind": "native_report",
+      "session_id": "1c06a369ec2a43eda88c29ce76e0d98c"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe3/prepared_runtime_lk/request.json",
+      "sha256": "b426d9a4cfaa1bf1c3f9fca9dcc092bfb7e2dd93464276831e8e0b154111c027",
+      "kind": "native_request",
+      "task_id": "ce4a2e9b279648beae02fc916868e055"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe3/prepared_runtime_lk/run_b38aeb7831d2437292ba478e398860b4/report.json",
+      "sha256": "c9a8acd3fa8ee214b5e69f7786a4a3ad525dbab0f3d4f0dc51aad7bfdc62e309",
+      "kind": "native_report",
+      "session_id": "c61ce53cc9c24c84853df1232d19fa3e"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe3/prepared_runtime_qcf/request.json",
+      "sha256": "2c5693577350f2e3ac84dfb9a4f938174d578ddd9d149a4e3a82239f70c4a42e",
+      "kind": "native_request",
+      "task_id": "ba52de18426c4d1b80ddad580a79f5b2"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe3/prepared_runtime_qcf/run_513865acac0343fd8eec662eb62c8533/report.json",
+      "sha256": "686a7d4101859f5c1f240456b0fe36982ef6c372fba43cd017c3c9cb0cd1cfa5",
+      "kind": "native_report",
+      "session_id": "f6460769709c429992a62c4c1c5814e4"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe4/prepared_input_timeline/request.json",
+      "sha256": "90a059255a92aa8ebd27c1057f2694a4b74b3c03e18c824b93f4db41038c9a37",
+      "kind": "native_request",
+      "task_id": "d9b445a9046741258b5a6a82cfc4cf7c",
+      "status": "failed",
+      "session_id": "89f63604444345e9a278b7b8b9b203f2",
+      "report_path": "SMS_projects/luta_mugen/out/qa_native_20261006/ryo_cmdv2_probe4/prepared_input_timeline/run_1e2b61a584aa4b67b11144cf61f27d3f/report.json",
+      "report_sha256": "68079ca8551a8f581f0620dfa961c6fa548c0802af1516da100a66d8bc00c289",
+      "collection_audit_ok": false,
+      "normal_audit_exit_code": 1,
+      "strict_audit_exit_code": 1,
+      "audit_problem": "stale bound doc/10-memory-bank.md: request expected 9d72d6a0…, file was f8945592… at audit time"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/rom842_frame_advance_final.json",
+      "sha256": "4fee9ac987defce3c92d14cf68d93908aaa0343d5f6ce431153bb08efde7fe4c",
+      "kind": "performance_measurement",
+      "rom_sha256": "842ccd44a3c8608cb116387c8a255576f42c442c30eae9a664bcd3435517f397",
+      "fps_estimate": 23.5,
+      "gate_passed": false
+    }
+  ],
+  "future_curation_actions": [
+    "Deduplicate the host-versus-ROM finding against L035/L036/L057/L065/L066 before assigning any lesson ID.",
+    "Replace v061 VBlank-phase counts with a coherent per-loop VCounter snapshot and identify phase duration before optimizing.",
+    "Keep visual defect observations separate from unproven renderer root cause; add no generic hardware claim from this project-only ROM.",
+    "No central doctrine, learning ledger, canonical registry, or wrapper gate was changed by this candidate."
+  ],
+  "promotion": "Pending future curation; no canonical lesson ID or rule assigned."
+}

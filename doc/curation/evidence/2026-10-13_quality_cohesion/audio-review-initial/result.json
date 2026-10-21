@@ -1,0 +1,691 @@
+{
+  "scope": "focused independent tests; temporary fixtures only, no assets/docs/repo mutations, no emulation/full suite",
+  "checks": [
+    {
+      "name": "selfcheck_audit_psg_quality.py",
+      "ok": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    {
+      "name": "selfcheck_make_psg_assets.py",
+      "ok": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    {
+      "name": "tone_freq_110",
+      "ok": true,
+      "details": {
+        "period": 1017,
+        "nominal_hz": 109.99093534906588
+      }
+    },
+    {
+      "name": "tone_freq_220",
+      "ok": true,
+      "details": {
+        "period": 508,
+        "nominal_hz": 220.19838828740157
+      }
+    },
+    {
+      "name": "tone_freq_440",
+      "ok": true,
+      "details": {
+        "period": 254,
+        "nominal_hz": 440.39677657480314
+      }
+    },
+    {
+      "name": "tone_freq_880",
+      "ok": true,
+      "details": {
+        "period": 127,
+        "nominal_hz": 880.7935531496063
+      }
+    },
+    {
+      "name": "tone_freq_1760",
+      "ok": true,
+      "details": {
+        "period": 64,
+        "nominal_hz": 1747.82470703125
+      }
+    },
+    {
+      "name": "tone_freq_4000",
+      "ok": true,
+      "details": {
+        "period": 28,
+        "nominal_hz": 3995.027901785714
+      }
+    },
+    {
+      "name": "mode_0",
+      "ok": true,
+      "details": {
+        "white_fraction": 0.0,
+        "M4_failure": true,
+        "shift_nominal_hz": 6991.298828125
+      }
+    },
+    {
+      "name": "mode_1",
+      "ok": true,
+      "details": {
+        "white_fraction": 0.0,
+        "M4_failure": true,
+        "shift_nominal_hz": 3495.6494140625
+      }
+    },
+    {
+      "name": "mode_2",
+      "ok": true,
+      "details": {
+        "white_fraction": 0.0,
+        "M4_failure": true,
+        "shift_nominal_hz": 1747.82470703125
+      }
+    },
+    {
+      "name": "mode_3",
+      "ok": true,
+      "details": {
+        "white_fraction": 0.0,
+        "M4_failure": true,
+        "shift_nominal_hz": 440.39677657480314
+      }
+    },
+    {
+      "name": "mode_4",
+      "ok": true,
+      "details": {
+        "white_fraction": 1.0,
+        "M4_failure": false,
+        "shift_nominal_hz": 6991.298828125
+      }
+    },
+    {
+      "name": "mode_5",
+      "ok": true,
+      "details": {
+        "white_fraction": 1.0,
+        "M4_failure": false,
+        "shift_nominal_hz": 3495.6494140625
+      }
+    },
+    {
+      "name": "mode_6",
+      "ok": true,
+      "details": {
+        "white_fraction": 1.0,
+        "M4_failure": false,
+        "shift_nominal_hz": 1747.82470703125
+      }
+    },
+    {
+      "name": "mode_7",
+      "ok": true,
+      "details": {
+        "white_fraction": 1.0,
+        "M4_failure": false,
+        "shift_nominal_hz": 440.39677657480314
+      }
+    },
+    {
+      "name": "compressed_audit_failure",
+      "ok": true,
+      "details": {
+        "arquivo": "compressed.psg",
+        "classe": "music",
+        "bytes": 5,
+        "sha256": "dfe7d23552714b6fe8aad35adc3395cf779ffb31c6a59ebd5525629d16562057",
+        "metricas": {
+          "escopo": "formato_nao_suportado"
+        },
+        "violacoes": [
+          "FORMAT: PSGlib comando 0x08 no offset 0 nao suportado; substring comprimida exige expansao antes da analise"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "name": "compressed_preview_failure_before_output",
+      "ok": true,
+      "details": "PSGlib comando 0x08 no offset 0 nao suportado; substring comprimida exige expansao antes da analise"
+    },
+    {
+      "name": "actual_preview_fundamental",
+      "ok": true,
+      "details": {
+        "peak_freq_hz": 440.625,
+        "duration": 1.0666666666666667,
+        "expected_seconds": 1.0666666666666667
+      }
+    },
+    {
+      "name": "noise_preview_0",
+      "ok": true,
+      "details": {
+        "peak": 27851,
+        "duration": 0.64,
+        "scope": "preview signal only; not PSG fidelity"
+      }
+    },
+    {
+      "name": "noise_preview_1",
+      "ok": true,
+      "details": {
+        "peak": 27851,
+        "duration": 0.64,
+        "scope": "preview signal only; not PSG fidelity"
+      }
+    },
+    {
+      "name": "noise_preview_2",
+      "ok": true,
+      "details": {
+        "peak": 27851,
+        "duration": 0.64,
+        "scope": "preview signal only; not PSG fidelity"
+      }
+    },
+    {
+      "name": "noise_preview_3",
+      "ok": true,
+      "details": {
+        "peak": 27851,
+        "duration": 0.64,
+        "scope": "preview signal only; not PSG fidelity"
+      }
+    },
+    {
+      "name": "noise_preview_4",
+      "ok": true,
+      "details": {
+        "peak": 27851,
+        "duration": 0.64,
+        "scope": "preview signal only; not PSG fidelity"
+      }
+    },
+    {
+      "name": "noise_preview_5",
+      "ok": true,
+      "details": {
+        "peak": 27851,
+        "duration": 0.64,
+        "scope": "preview signal only; not PSG fidelity"
+      }
+    },
+    {
+      "name": "noise_preview_6",
+      "ok": true,
+      "details": {
+        "peak": 27851,
+        "duration": 0.64,
+        "scope": "preview signal only; not PSG fidelity"
+      }
+    },
+    {
+      "name": "noise_preview_7",
+      "ok": true,
+      "details": {
+        "peak": 27851,
+        "duration": 0.64,
+        "scope": "preview signal only; not PSG fidelity"
+      }
+    },
+    {
+      "name": "lone_latch_wait_preview",
+      "ok": false,
+      "details": {
+        "decoder_duration": 1,
+        "preview_seconds": 0.000125,
+        "hardware_expectation": "low4 update then one PSGFrame; preview consumes WAIT as highdata"
+      }
+    },
+    {
+      "name": "volume_data_classification",
+      "ok": false,
+      "details": {
+        "decoded": [
+          [
+            0,
+            "v",
+            0,
+            0
+          ],
+          [
+            0,
+            "f",
+            0,
+            32
+          ]
+        ],
+        "expected": "reject data after volume latch as unsupported PSGlib simple grammar, or ignore consistently with pinned BlastEm; never invent frequency event. PSGlib source states non-latch commands are tone data only."
+      }
+    },
+    {
+      "name": "sfx_temporal_attenuation_order",
+      "ok": false,
+      "details": {
+        "violations": [
+          "S1 decaimento: comeca na atenuacao 14 e termina em 1 — sem fade o SFX corta seco e vira clique"
+        ],
+        "expected_first": 1,
+        "expected_last": 14
+      }
+    }
+  ],
+  "failures": [
+    {
+      "name": "lone_latch_wait_preview",
+      "ok": false,
+      "details": {
+        "decoder_duration": 1,
+        "preview_seconds": 0.000125,
+        "hardware_expectation": "low4 update then one PSGFrame; preview consumes WAIT as highdata"
+      }
+    },
+    {
+      "name": "volume_data_classification",
+      "ok": false,
+      "details": {
+        "decoded": [
+          [
+            0,
+            "v",
+            0,
+            0
+          ],
+          [
+            0,
+            "f",
+            0,
+            32
+          ]
+        ],
+        "expected": "reject data after volume latch as unsupported PSGlib simple grammar, or ignore consistently with pinned BlastEm; never invent frequency event. PSGlib source states non-latch commands are tone data only."
+      }
+    },
+    {
+      "name": "sfx_temporal_attenuation_order",
+      "ok": false,
+      "details": {
+        "violations": [
+          "S1 decaimento: comeca na atenuacao 14 e termina em 1 — sem fade o SFX corta seco e vira clique"
+        ],
+        "expected_first": 1,
+        "expected_last": 14
+      }
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_psg_quality.py",
+      "sha256": "4ff654692d7818a2ccd43b44a31462956ecfb0f2c37316c3ca7385ad5fc95725"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/make_psg_assets.py",
+      "sha256": "f04cac002f78c1511d65bfad12a7d3abc0f62a34b0a74b2cfd1813618d1465fd"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+      "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+      "sha256": "2bf8a3bf1c1ae81b55f3de81808f4ef80822f1af2d2bad1d947149bc0d07e6a0"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS-upstream/PSGlib/src/PSGlib.c",
+      "sha256": "d285ee5f901c7bc6a5609dc778217be1f47fb76d228833c5970766f9196364ab"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/psg.c",
+      "sha256": "6cf1c92472b03d38694a818d4f47df22b792fb64bf7587b344e30df43d273d72"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c",
+      "sha256": "654fe39d9056237bddf3be04b378f50ac9ed5f072f0667aa07df9f31b8c902cc"
+    }
+  ],
+  "limitations": [
+    "Tone2-dependent noise modeled only nominal rate, not shared hardwarephase/changes/counters.",
+    "All8 modes verified logic and positive preview signal, not timbre/audiofidelity.",
+    "LFSR source pin establishes chosen model, not siliconsync.",
+    "M4 corpus correction may change previous verdicts; majoritywhite is policy and legitimateperiodicpercussion must be reviewed by intendedmusic/listening.",
+    "Preview samples quantized perwait and normalizes peak; no absolute loudness/mix.",
+    "No runtimeaudio proof generated."
+  ],
+  "worker_report_comparison": {
+    "worker_report_read_after_independent_analysis": true,
+    "worker_status": "passed_focused_audio_source_and_regression_checks",
+    "agreement": "bit2 feedback/divisor32/8modes/compression failures correct; targeted generator-only checks pass",
+    "differences": "valid latch-only updates/unsupported data-after-volume and chronological multichannel SFX remain outside worker exercises; generator pass must not imply complete decoder/preview transport"
+  },
+  "corpus_review": {
+    "streams": 36,
+    "failed": 11,
+    "all_asset_hashes_match": true,
+    "all_verdicts_match": true,
+    "scope": "direct res/audio corpus only; old unchanged assets, no audible judgement",
+    "rows": [
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_battle.psg",
+        "sha256": "67349cfc41833ed4da18235d9e2a9382165606fd91e643e9b9b422fc896d7544",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_ken_stage.psg",
+        "sha256": "67349cfc41833ed4da18235d9e2a9382165606fd91e643e9b9b422fc896d7544",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_title.psg",
+        "sha256": "57126310daca95d295a5ed1255328aafd1ab47cac7343480791811f45d3c2f5f",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_down.psg",
+        "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_fight.psg",
+        "sha256": "608c564569e54ca7592dd342546ee818746a50c5f739b0cba96b2ed8d8260092",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_hit.psg",
+        "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_hurt.psg",
+        "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_shot.psg",
+        "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/music_battle.psg",
+        "sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/music_title.psg",
+        "sha256": "4c9a95301e623caf339de97ed21e857b105ff4e3433a4743e32c58ea39bcd619",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_down.psg",
+        "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_hit.psg",
+        "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_hurt.psg",
+        "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_shot.psg",
+        "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/music_battle.psg",
+        "sha256": "86f9b7cdadc10816310c7fc4f77a6b11c1b5b0f84a37a2897344205596b6b617",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/music_title.psg",
+        "sha256": "d35dc93b44d504ac51517e422fc6c11e10f2b62bb19291fdd379b69746a41422",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_down.psg",
+        "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_hit.psg",
+        "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_hurt.psg",
+        "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_shot.psg",
+        "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/kage_matsuri/res/audio/music_kage.psg",
+        "sha256": "c582ff359b0102cf5f376bb53ff6656178b166c63be1f60013a0244f1bb3628e",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/kage_matsuri/res/audio/sfx_slash.psg",
+        "sha256": "0811f9234435fc7835eef66bb5e692731a98fc5d484b3a08a93f5c1abc10742b",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/music_battle.psg",
+        "sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_down.psg",
+        "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_hit.psg",
+        "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_hurt.psg",
+        "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_round.psg",
+        "sha256": "17ca8275035f79c98dcf1d170c283ba0c4635021936965d6a511b4adc195d694",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_shot.psg",
+        "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_special.psg",
+        "sha256": "96d853814146600bf9ac43469a81c7c18785f264c0a8e86a9ee0256a36ed3b59",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_dawn.psg",
+        "sha256": "ec0066a22c818a6df8d3ba48a07e3344c829df1e0d33ea1bd886cd06b0cc630b",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_eco.psg",
+        "sha256": "7ec813ce2e5d413144903136e77eec0249bc85b5e8525bedbfb27cd584f2e5f0",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_storm.psg",
+        "sha256": "5b469574ef4d045357e424a67a889da64f4ad1d6fdb101bc2a3c7fb6047cd81c",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_title.psg",
+        "sha256": "f14f61efc50ef15a187ea8232434078216fde58d4f48d6b1d76afd1f0a7c572b",
+        "matches_preserved": true,
+        "verdict": "reprova",
+        "violations": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_chime.psg",
+        "sha256": "cbbb09365b19fdba606fb9ab2831086fd1b1d137e711e4efbb344c91d56aa559",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_crack.psg",
+        "sha256": "487525d816dd48c357bc3717c34c21c5cb506086ffec66513e10bf43ef84f30a",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      },
+      {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_crystal.psg",
+        "sha256": "188b3aeab357f4724c66717f142c77e9965cf7de11041924ac489dbe399183ec",
+        "matches_preserved": true,
+        "verdict": "passa",
+        "violations": [],
+        "matches_report_verdict": true
+      }
+    ]
+  },
+  "status": "focused_corrections_passed_transport_and_sfx_limitations_need_fix_or_explicit_rejection"
+}

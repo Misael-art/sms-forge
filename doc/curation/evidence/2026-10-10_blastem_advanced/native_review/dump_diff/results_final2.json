@@ -1,0 +1,45 @@
+[
+  {
+    "case": "hardlink",
+    "exit_code": 1,
+    "dump_unchanged": true,
+    "labels_unchanged": true,
+    "message": "[FAIL] output is a linked file; choose a new report path"
+  },
+  {
+    "case": "symlink",
+    "exit_code": 1,
+    "dump_unchanged": true,
+    "labels_unchanged": true,
+    "message": "[FAIL] write diff outside immutable acquisition bundle"
+  },
+  {
+    "case": "inside",
+    "exit_code": 1,
+    "dump_unchanged": true,
+    "labels_unchanged": true,
+    "message": "[FAIL] write diff outside immutable acquisition bundle"
+  },
+  {
+    "case": "labels",
+    "exit_code": 1,
+    "dump_unchanged": true,
+    "labels_unchanged": true,
+    "message": "[FAIL] report must not overwrite an analysis input"
+  },
+  {
+    "case": "output_hardlink_created_after_guard",
+    "dump_unchanged": true,
+    "new_output_is_distinct_inode": true,
+    "report_valid": true
+  },
+  {
+    "case": "protected_current_rom",
+    "rejected": true,
+    "unchanged": true
+  },
+  {
+    "case": "changed_analyzer_import_guard",
+    "rejected": true
+  }
+]

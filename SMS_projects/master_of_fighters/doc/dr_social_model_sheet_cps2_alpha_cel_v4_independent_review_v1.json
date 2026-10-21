@@ -1,0 +1,77 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "producer": "codex_art_production",
+  "reviewer": "/root/review_dr_social_v3",
+  "status": "passed",
+  "domains": [
+    "art"
+  ],
+  "review_scope": "Read-only visual review of the exact v4 candidate against approved v2, prior v3 findings, project design references and owner request. Reviewer status: ready_for_owner_review; this is not owner approval.",
+  "reviewed_request_id": "dr_social_model_sheet_cps2_alpha_cel_v4_art_review",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate.png",
+      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "observed_sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_metadata.json",
+      "sha256": "8c4cb412eb9dcee0640e18e4d46a15431724a989948c997f088171e85c705588",
+      "observed_sha256": "8c4cb412eb9dcee0640e18e4d46a15431724a989948c997f088171e85c705588"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_lineage.json",
+      "sha256": "4de8531c160f3e5668ac1069891dfd23338a71d42db56dd6457330748cd99bf8",
+      "observed_sha256": "4de8531c160f3e5668ac1069891dfd23338a71d42db56dd6457330748cd99bf8"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/dr_social_model_sheet_cps2_alpha_cel_v3_candidate.png",
+      "sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e",
+      "observed_sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+      "observed_sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+      "sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c",
+      "observed_sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_combat_design_proposal_v1.md",
+      "sha256": "fba3fdadb46cb9ed0cd005edbd5fd1e3bf8cd8bb0ac35c10eb5ceebc2bc5db0e",
+      "observed_sha256": "fba3fdadb46cb9ed0cd005edbd5fd1e3bf8cd8bb0ac35c10eb5ceebc2bc5db0e"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_cps2_alpha_cel_v4_quality_review_request.json",
+      "sha256": "fd8429676d7897e820f07494d2e4a2ce96eefdce2079d866261d05e2bbf74dff",
+      "observed_sha256": "fd8429676d7897e820f07494d2e4a2ce96eefdce2079d866261d05e2bbf74dff"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_cps2_alpha_cel_v4_quality_review_plan.json",
+      "sha256": "519762812233601e2e7958a44e3dbed9a45cea22e0cbe06c82d07a7a503b845b",
+      "observed_sha256": "519762812233601e2e7958a44e3dbed9a45cea22e0cbe06c82d07a7a503b845b"
+    }
+  ],
+  "findings": [],
+  "positive_observations": [
+    "The cane-holding arm is visibly in front of the torso with a readable shoulder-to-hand chain; the throwing arm is separate and anatomically coherent.",
+    "The full steel boomerang is larger and clear against violet effects; the blunt walking cane has a curved handle, straight shaft and grounded ferrule, distinct from the separate rapier.",
+    "The equipment panels distinguish project concept gear from source-game references without defining a fan-game moveset.",
+    "The late-19th-century London costume, face, palette, scale, profile and turnaround remain consistent with approved v2.",
+    "Technical cards and equipment labels are readable at full-sheet scale; no visible crop issue."
+  ],
+  "open_questions": [
+    "The GDD and combat proposal retain differing source-game weapon terminology. The sheet correctly labels the extra objects as source-game references with inventory terms open; reconcile project documents before canonizing them as fan-game gear or moves."
+  ],
+  "hash_audit": {
+    "all_request_artifacts_match": true,
+    "verified_count": 7,
+    "request_v3_digest_correction": "The stale v3 image digest was corrected to the actual stored PNG hash before final confirmation; all seven request artifacts now match."
+  },
+  "ready_for_aaa": false,
+  "approval_scope": "Concept/model-sheet review only. This report does not approve the owner matrix, sprites, moveset, animation, SMS conversion, ROM or game delivery."
+}

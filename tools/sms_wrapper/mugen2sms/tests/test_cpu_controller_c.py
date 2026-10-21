@@ -347,3 +347,7 @@ def test_cpu_button_scripts_match_ryo_command_families(tmp_path: Path):
     run = subprocess.run([str(exe)], capture_output=True, text=True)
     assert run.returncode == 0, run.stdout + run.stderr
     assert "PASS Ryo CPU button families" in run.stdout
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

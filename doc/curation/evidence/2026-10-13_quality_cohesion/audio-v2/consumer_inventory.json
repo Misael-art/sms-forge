@@ -1,0 +1,48 @@
+{
+  "read_only": true,
+  "consumers": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/kage_matsuri/tools/gen_music_kage.py",
+      "sha256": "dc0ec010babdb5b311b93168783fd04290434b36bfa9745f357def56ac536d65"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/tools/gen_pulso_music.py",
+      "sha256": "78a17fa48376f4c4f8ea8628ebebb0998c46565f7ff7bc836577f017e3518bf3"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/tools/escuta_player.py",
+      "sha256": "bc4cc1bcb2a030f63b872813a57d25bccb88486180623cac0af75680552de14c"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/tools/gen_music_ken_ref.py",
+      "sha256": "710800fec90a2f7982bb735ed31f9f3c48d290dcaa8293bcf13acb5cce5c9bff"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/tools/gen_music_ken_stage.py",
+      "sha256": "84bb1bc5678764b4c2303fa128f0eef5174cbce110816693f43ee0786f7f659a"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/luta_mugen_gen_psg_blobs.py",
+      "sha256": "ee5f951012c6aaa1009d270d5fa8cb90d7e7f2e86c14888e7d380d9f216f6975"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/selftest.py",
+      "sha256": "e691e31e7f5566c94d25bcad9e519b49e002b1f0eb2aab2b830dbba9ad6436a9"
+    }
+  ],
+  "findings": [
+    "kage_matsuri gen_music_kage imports root make_psg_assets.arrange/render and audit. Future authoring changes encoding/pitch after root correction.",
+    "pulso_de_cristal gen_pulso_music imports _hz_to_period/render; local direct noise encoding still forces modes0..3 and says white. Self-check expects A2 rejection; corrected physical divisor permits A2 period1017. Local generator self-check not run or changed.",
+    "pulso_de_cristal escuta_player imports root render/audit, JS decoder mirrored PSGlib grammar; review compressed support separately.",
+    "MSSF2T gen_music_ken_stage/ref render_wav retain random noise and ignore bit2; stage labels modes0/3 white incorrectly. Future local preview is not qualified PSG fidelity.",
+    "luta_mugen_gen_psg_blobs copies manifest-bound bytes and does not reauthor; no root pitch correction reaches preserved .psg assets until explicitly authored.",
+    "Root selftest runs make_psg_assets --self-check. New corrected test passes offline; fullsuite not run by worker."
+  ],
+  "unchanged_assets": "36 direct current project .psg SHA verified after tests",
+  "preview_limits": [
+    "Nominal NTSC clock; no PAL switch",
+    "No bus timing analog filter DC fidelity or exact ch2/noise counter phase",
+    "Seed0x8000 rotate/xorbit2 explicit Sega16-bit model; deterministic periodic differs white",
+    "Preview samples and normalization do not prove mixing loudness/source fidelity"
+  ]
+}

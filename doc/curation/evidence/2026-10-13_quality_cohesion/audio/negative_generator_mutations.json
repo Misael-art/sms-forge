@@ -1,0 +1,16 @@
+[
+  {
+    "case": "pitch_divisor16",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/smsforge-curation-20261013/audio/mutant_make_pitch_divisor16.py\", line 600, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/tmp/smsforge-curation-20261013/audio/mutant_make_pitch_divisor16.py\", line 485, in main\n    assert _hz_to_period(440.0) == 254\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+    "source_sha256": "401104957ebe97f99dcd57f308c90d178e69b5646503318cac8bee507039e83a"
+  },
+  {
+    "case": "arrange_removes_white",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/smsforge-curation-20261013/audio/mutant_make_arrange_removes_white.py\", line 600, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/tmp/smsforge-curation-20261013/audio/mutant_make_arrange_removes_white.py\", line 506, in main\n    assert [v for _, k, _, v in ev if k == 'nctl'] == [4 | (mode & 3)]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+    "source_sha256": "a39acf072f9f14201c3baf3b4699aa25b91ebf30bc26adba78c7b338e779d57b"
+  }
+]

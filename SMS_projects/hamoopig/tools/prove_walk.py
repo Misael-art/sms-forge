@@ -1,88 +1,51 @@
 #!/usr/bin/env python3
-"""Prova minima: DAP continue, entrar na luta, Right, ler probe_px."""
-import os, sys, time, subprocess
+"""Prova minima em SESSAO PRIVADA (§93/L057): entrar na luta, Right por frames, ler probe_px.
+Sem teclado/foco/DAP do desktop; duracao = frames do VDP; ROM+SHA reais da sessao no JSON."""
+import json, os, sys
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-WRAP = os.path.join(ROOT, "tools", "sms_wrapper")
-sys.path.insert(0, WRAP)
-from emulicious_dap import wait_port
-from emulator_session import require_no_stale
-import capture_evidence as CE
-import emulator_input as EI
+sys.path.insert(0, os.path.join(ROOT, "tools", "sms_wrapper"))
+import session_consumer as SC
 
 PROJ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 ROM = os.path.join(PROJ, "out", "rom", "hamoopig.sms")
-JAR = os.path.join(ROOT, "tools", "emuladores", "emulicious", "Emulicious.jar")
 OUT = os.path.join(PROJ, "out", "evidence")
+SCENE_FIGHT = 10
 
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    if not require_no_stale(why="hamoopig walk"):
-        return 2
-    logf = open(os.path.join(OUT, "walk_emu.log"), "w")
-    proc = subprocess.Popen(
-        ["java", "-jar", JAR, "-remotedebug", "4901", "-set", "Update=0", ROM],
-        stdout=logf, stderr=subprocess.STDOUT, start_new_session=True)
     try:
-        for _ in range(40):
-            time.sleep(0.5)
-            if CE._main_window_id():
-                break
-        time.sleep(5.0)
-        dap = None
-        for _ in range(4):
-            cand = wait_port(timeout_s=20)
-            if cand is None:
-                break
-            try:
-                cand.start_session()
-                cand.cont()
-                time.sleep(2.0)
-                cand.pause()
-                if cand.read_byte(0xC7F6) is not None:
-                    dap = cand
-                    break
-            except (ConnectionError, AssertionError):
-                pass
-            cand.close()
-            time.sleep(2.0)
-        if dap is None:
-            print("FAIL DAP")
-            return 2
-        dap.cont()
-        time.sleep(3.0)
-        EI.press_spec("a=180")
-        time.sleep(0.6)
-        EI.press_spec("a=180")
-        time.sleep(1.5)
-        dap.pause()
-        scene = dap.read_byte(0xC7F6)
-        px0 = dap.read_byte(0xC7FA)
+        ctx = SC.private_session(ROM)
+        s = ctx.__enter__()
+    except SC.SessionUnavailable as e:
+        print(f"[FAIL_AMBIENTE] {e}")
+        return 2
+    exc = (None, None, None)
+    try:
+        s.hold(0, 0, 180)                       # boot/titulo
+        for _ in range(2):                      # botao 1 duas vezes: titulo -> selecao -> luta
+            s.hold(SC.B1, 0, 4)
+            s.hold(0, 0, 36)
+        s.hold(0, 0, 120)                       # ROUND+FIGHT lock (~90 frames)
+        scene, px0 = s.byte(0xC7F6), s.byte(0xC7FA)
         print(f"pre scene={scene} px={px0}")
-        dap.cont()
-        EI.press_spec("Right=800")
-        time.sleep(0.2)
-        dap.pause()
-        px1 = dap.read_byte(0xC7FA)
-        keys = dap.read_byte(0xC7F8)
-        scene = dap.read_byte(0xC7F6)
-        print(f"post scene={scene} px={px1} keys={keys} dx={(px1 or 0)-(px0 or 0)}")
-        import json
-        json.dump({
-            "scene": scene, "px0": px0, "px1": px1, "keys": keys,
-            "dx": (px1 or 0) - (px0 or 0),
-            "rom_sha256": "9e3cc240b915b50c5f118cdc8741f8d91eef871a60aa9b28fa4fed28a0dd9a4d"
-        }, open(os.path.join(OUT, "walk_probe.json"), "w"), indent=2)
-        dap.close()
-        ok = scene == 10 and px0 is not None and px1 is not None and (px1 - px0) >= 8
+        r = s.hold(SC.R, 0, 48)
+        px1, keys, scene = s.byte(0xC7FA), s.byte(0xC7F8), s.byte(0xC7F6)
+        dx = px1 - px0
+        print(f"post scene={scene} px={px1} keys={keys} dx={dx}")
+        rec = {"schema": "hamoopig_walk_v2_session", "session_id": s.id, "rom_sha256": s.rom_sha256,
+               "scene": scene, "px0": px0, "px1": px1, "keys": keys, "dx": dx,
+               "ack_porta": r.get("emulator_input"), "frames_held": 48}
+        json.dump(rec, open(os.path.join(OUT, f"walk_probe_{s.id}.json"), "w"), indent=2)
+        ok = scene == SCENE_FIGHT and dx >= 8
         print("PASS walk" if ok else "FAIL walk")
         return 0 if ok else 1
+    except BaseException:
+        exc = sys.exc_info()
+        raise
     finally:
-        proc.terminate()
-        try:
-            proc.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            proc.kill()
+        ctx.__exit__(*exc)
 
 
 if __name__ == "__main__":

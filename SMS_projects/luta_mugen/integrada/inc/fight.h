@@ -7,18 +7,11 @@
 #ifndef FIGHT_H
 #define FIGHT_H
 
+#include "input.h"
 #include "luta.h"
 
-/* Bits de input ja na convencao do motor (Task 5 liga SMS_getKeysHeld a
- * estes bits via padroes do CMD; aqui vem de roteiro deterministico). */
-#define K_UP     0x01
-#define K_DOWN   0x02
-#define K_LEFT   0x04
-#define K_RIGHT  0x08
-#define K_LP     0x10            /* botão 1 -> ação de soco selecionada */
-#define K_HP     0x20            /* botão 2 -> ação de chute selecionada */
-#define K_GUARD  0x40            /* guarda      -> state 120 */
-#define K_SPECIAL 0x80           /* comando de movimento remapeado pelo buffer */
+/* Bits de input vivem em inc/input.h (K_*): o modelo temporal nao depende de
+ * luta.h/SMSlib e por isso compila no host (test_input_ring_c.py). */
 
 #define FIGHT_EVENT_NONE  0u
 #define FIGHT_EVENT_PUNCH 1u
@@ -35,6 +28,8 @@ volatile extern unsigned char dbg_frame;   /* contador do loop p/ HUD */
 void fight_init(void);                     /* inicializa o stream de poses (T6) */
 void fight_reset(Fighter *p, unsigned char slot);
 void fight_set_ko(Fighter *p);
+void fight_cpu_init(unsigned char difficulty, unsigned int seed);
+unsigned char fight_cpu_input(unsigned char slot);
 unsigned char fight_step(Fighter *p, unsigned int keys,
                          unsigned int opp_keys);
 void fight_draw(void);
@@ -49,6 +44,8 @@ unsigned char fight_visible_pose(unsigned char slot);
 unsigned char fight_visible_dur(unsigned char slot);
 unsigned char fight_visible_hitbox(unsigned char slot);
 unsigned char fight_state_pose0(unsigned char slot);
+unsigned short fight_source_action_id(unsigned char slot);
+unsigned char fight_source_element_index(unsigned char slot);
 unsigned short fight_max_life(unsigned char slot);
 
 #endif /* FIGHT_H */

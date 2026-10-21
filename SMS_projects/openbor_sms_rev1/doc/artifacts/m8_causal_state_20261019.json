@@ -1,0 +1,20 @@
+{
+ "schema": "openbor_sms_causal_state_v1",
+ "generated_at": "2026-10-19",
+ "batch": "O3/M8",
+ "claim": "Lote E v2: bundle consumivel aceito e QA independente no SHA a7f02b84",
+ "cause": "environment_failure",
+ "delta_status": "advanced",
+ "used_equivalent_attempts": 0,
+ "evidence_before": "consumer recusou o bundle em /mnt/sdcard: 'immutable snapshot required: inputs/rom.sms' (fuseblk default_permissions, modo sintetico 777; chmod nao gruda)",
+ "evidence_after": "consumer aceitou o bundle em /home (btrfs, 444 reais): eligible=true, problems=[]; relatorio sha ade6c1b7dfc31cb4ea0848a9e7d84b5fc86f10457a3d7c8089d8f98a14966059",
+ "available_routes": [
+  "materializar o bundle em filesystem com permissoes reais (executado)",
+  "reconstruir a partir do mirror com chmod -R a-w (documentado no relatorio do Lote E)"
+ ],
+ "proposed_action": "record_evidence",
+ "artifact_kind": "evidence",
+ "blockers_removed": 1,
+ "blocker_relevant": true,
+ "human_gate_pending": null
+}

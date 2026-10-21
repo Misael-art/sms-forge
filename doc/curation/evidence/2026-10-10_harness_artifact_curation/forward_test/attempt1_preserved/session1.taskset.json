@@ -1,0 +1,47 @@
+{
+  "artifact_registry": {
+    "project": "/tmp/smsforge-harness-forward-20261010/fixture_game",
+    "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/artifact_registry.json",
+    "sha256": "d5ebc30fcd3e0533301598aef82e43df7b9f5b7561fc4dec332dc18cff0ab00d"
+  },
+  "tasks": [
+    {
+      "id": "ash.grip.weapon.r1",
+      "kind": "visual_production",
+      "artifact_ids": [
+        "ash.grip.weapon.r1"
+      ],
+      "write_paths": [
+        "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt",
+        "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json",
+        "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json"
+      ],
+      "context_file": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/new-request.fixture.json"
+    },
+    {
+      "id": "ash.shadow.pose07_19_42.r1",
+      "kind": "visual_production",
+      "artifact_ids": [
+        "ash.shadow.pose07_19_42.r1"
+      ],
+      "write_paths": [
+        "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/document.fixture.txt",
+        "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/metadata.json",
+        "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/lineage.json"
+      ],
+      "context_file": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/new-request.fixture.json"
+    },
+    {
+      "id": "review_sources",
+      "kind": "source_audit",
+      "write_paths": []
+    },
+    {
+      "id": "update_memory",
+      "kind": "canonical_memory_update",
+      "write_paths": [
+        "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/10-memory-bank.md"
+      ]
+    }
+  ]
+}

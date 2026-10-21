@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_15_ghibli_cel_simulation_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "catalog_index": 15,
+  "style_id": "Ghibli-Cel-Simulation",
+  "artistic_style_reference": {
+    "named_artist": "Akihiko Yamashita",
+    "reference_role_and_scope": "Secondary credits listing for Wonder Project J2 anime character design; not a Ghibli artist credit and not sole game-art authorship.",
+    "source_url": "https://www.mobygames.com/game/97845/wonder-project-j2/credits/n64/?autoplatform=true",
+    "attribution_status": "secondary_source_reference",
+    "style_signature": [
+      "1990s cel-anime line and shape language",
+      "expressive face and clear pose silhouette",
+      "warm, clean cel-color blocks"
+    ],
+    "basis_and_limits": "Do not equate the game with Studio Ghibli or attribute its art to Miyazaki; Ghibli-Simulation remains a style label, not a production credit."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v1.json",
+    "sha256": "b0e677ae44ef521321848faad8f0a87a26e61d7a598f60d7244f61b578867795"
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
+    "sha256": "f908e40c2f5cf650e0f3bd7609b5f66b6d910c318b16cacee55c07f026613b96",
+    "dimensions_px": [
+      1619,
+      971
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt",
+    "sha256": "3e2657ab4f521a49cfa3f44697d665c2f7ddf3c806096d405ea59a372a2ad04d",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2_metadata.json",
+    "sha256": "a39dadd7600120be164cbccc3509b1da82fdb4a54a20d09d9228df1a0560d907"
+  },
+  "composition": {
+    "method": "metadata_card_only_overlay",
+    "tool": "Pillow card-only annotation; base art outside the metadata card was pixel-checked unchanged",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png",
+    "base_model_sheet_sha256": "5e97c74b596c7ffe28c6d4473f2a43e6448908ccb8ae97db2bebde6170515457",
+    "art_scale": "preserved from base sheet"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2.png",
+    "sha256": "86a83b5b6c9756b912b4a1a28c3e8263c6810b03bac27fdb075436dc0605bb1c",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_review_v2.json",
+    "status": "pending_independent_and_owner_review"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

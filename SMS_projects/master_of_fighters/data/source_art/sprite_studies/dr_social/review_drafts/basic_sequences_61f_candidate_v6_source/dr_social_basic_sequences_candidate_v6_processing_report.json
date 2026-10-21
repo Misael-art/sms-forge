@@ -1,0 +1,2400 @@
+{
+  "schema": "mof_dr_social_61_pose_refinement_v6",
+  "candidate_status": "candidate_only; independent review and owner approval pending",
+  "design_reference": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "role": "sole visual identity/design reference"
+  },
+  "pixel_source": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v5_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v5.png",
+    "sha256": "ed66a88e46c1521ea4c39bf13fab6cf7f2b978ac6f04d4907347f2b45aa1c544",
+    "role": "intermediate palette-cleaned candidate; v4 concept remains sole identity/design reference"
+  },
+  "refinement": {
+    "operation": "v5 cleanup plus head-region material-role correction; no pose redraw or frame reordering",
+    "changes": {
+      "reserved_red_reassigned_pixels": 554,
+      "enclosed_alpha_pinhole_pixels_filled": 79,
+      "blue_ramp_confetti_pixels_reassigned": 5504,
+      "off_material_burgundy_pixels_reassigned": 2048,
+      "detached_skin_singletons_removed": 1
+    },
+    "reserved_effect_color": "accent_red excluded from basic movement; each occurrence reassigned to local material",
+    "cel_shading": "1\u20133 pixel isolated clusters in the three suit tones merged into neighboring suit tone; larger hard-edged shade blocks preserved",
+    "transparency": "only enclosed transparent pinholes up to 4 pixels filled; open gaps between limbs/equipment preserved",
+    "other_artifact_cleanup": "detached 1-pixel skin artifacts outside the face area removed; tiny burgundy fragments outside torso/arm band reassigned",
+    "new_rgb_colors": 0,
+    "frame_geometry_changed": false,
+    "head_color_role_correction": {
+      "rule": "identify the largest skin cluster nearest gray hair; preserve that face cluster and recolor adjacent off-material hair pixels inside a tight head box to hair_gray",
+      "frames_matched": 61,
+      "pixels_recolored": 4765,
+      "per_frame": [
+        {
+          "row": 1,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 100,
+          "head_bbox": [
+            32,
+            5,
+            20,
+            23
+          ]
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 75,
+          "head_bbox": [
+            35,
+            6,
+            21,
+            22
+          ]
+        },
+        {
+          "row": 1,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 116,
+          "head_bbox": [
+            33,
+            7,
+            23,
+            23
+          ]
+        },
+        {
+          "row": 1,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 115,
+          "head_bbox": [
+            35,
+            8,
+            22,
+            21
+          ]
+        },
+        {
+          "row": 2,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 92,
+          "head_bbox": [
+            37,
+            8,
+            19,
+            21
+          ]
+        },
+        {
+          "row": 2,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 134,
+          "head_bbox": [
+            35,
+            8,
+            23,
+            24
+          ]
+        },
+        {
+          "row": 2,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 105,
+          "head_bbox": [
+            35,
+            8,
+            22,
+            22
+          ]
+        },
+        {
+          "row": 2,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 82,
+          "head_bbox": [
+            38,
+            7,
+            21,
+            24
+          ]
+        },
+        {
+          "row": 2,
+          "column": 5,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 73,
+          "head_bbox": [
+            37,
+            8,
+            22,
+            18
+          ]
+        },
+        {
+          "row": 2,
+          "column": 6,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 71,
+          "head_bbox": [
+            38,
+            7,
+            21,
+            21
+          ]
+        },
+        {
+          "row": 2,
+          "column": 7,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 69,
+          "head_bbox": [
+            38,
+            8,
+            21,
+            17
+          ]
+        },
+        {
+          "row": 2,
+          "column": 8,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 98,
+          "head_bbox": [
+            37,
+            7,
+            22,
+            21
+          ]
+        },
+        {
+          "row": 3,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 59,
+          "head_bbox": [
+            36,
+            1,
+            17,
+            19
+          ]
+        },
+        {
+          "row": 3,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 74,
+          "head_bbox": [
+            37,
+            2,
+            16,
+            19
+          ]
+        },
+        {
+          "row": 3,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 61,
+          "head_bbox": [
+            38,
+            1,
+            16,
+            20
+          ]
+        },
+        {
+          "row": 3,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 42,
+          "head_bbox": [
+            38,
+            2,
+            15,
+            16
+          ]
+        },
+        {
+          "row": 3,
+          "column": 5,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 48,
+          "head_bbox": [
+            36,
+            1,
+            16,
+            18
+          ]
+        },
+        {
+          "row": 3,
+          "column": 6,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 56,
+          "head_bbox": [
+            38,
+            2,
+            15,
+            20
+          ]
+        },
+        {
+          "row": 3,
+          "column": 7,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 59,
+          "head_bbox": [
+            36,
+            1,
+            16,
+            18
+          ]
+        },
+        {
+          "row": 3,
+          "column": 8,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 52,
+          "head_bbox": [
+            37,
+            1,
+            14,
+            20
+          ]
+        },
+        {
+          "row": 4,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 97,
+          "head_bbox": [
+            42,
+            17,
+            20,
+            24
+          ]
+        },
+        {
+          "row": 4,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 73,
+          "head_bbox": [
+            41,
+            14,
+            19,
+            20
+          ]
+        },
+        {
+          "row": 4,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 101,
+          "head_bbox": [
+            44,
+            13,
+            20,
+            20
+          ]
+        },
+        {
+          "row": 4,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 51,
+          "head_bbox": [
+            37,
+            10,
+            19,
+            18
+          ]
+        },
+        {
+          "row": 4,
+          "column": 5,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 67,
+          "head_bbox": [
+            36,
+            13,
+            19,
+            19
+          ]
+        },
+        {
+          "row": 4,
+          "column": 6,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 72,
+          "head_bbox": [
+            39,
+            18,
+            19,
+            17
+          ]
+        },
+        {
+          "row": 4,
+          "column": 7,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 76,
+          "head_bbox": [
+            40,
+            22,
+            20,
+            17
+          ]
+        },
+        {
+          "row": 4,
+          "column": 8,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 73,
+          "head_bbox": [
+            47,
+            30,
+            20,
+            18
+          ]
+        },
+        {
+          "row": 5,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 108,
+          "head_bbox": [
+            39,
+            18,
+            22,
+            22
+          ]
+        },
+        {
+          "row": 5,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 141,
+          "head_bbox": [
+            45,
+            25,
+            23,
+            24
+          ]
+        },
+        {
+          "row": 5,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 118,
+          "head_bbox": [
+            43,
+            25,
+            23,
+            20
+          ]
+        },
+        {
+          "row": 5,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 115,
+          "head_bbox": [
+            41,
+            30,
+            22,
+            22
+          ]
+        },
+        {
+          "row": 5,
+          "column": 5,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 126,
+          "head_bbox": [
+            41,
+            29,
+            23,
+            21
+          ]
+        },
+        {
+          "row": 6,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 39,
+          "head_bbox": [
+            35,
+            5,
+            14,
+            18
+          ]
+        },
+        {
+          "row": 6,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 76,
+          "head_bbox": [
+            48,
+            14,
+            16,
+            20
+          ]
+        },
+        {
+          "row": 6,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 42,
+          "head_bbox": [
+            46,
+            14,
+            17,
+            14
+          ]
+        },
+        {
+          "row": 6,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 40,
+          "head_bbox": [
+            52,
+            15,
+            16,
+            15
+          ]
+        },
+        {
+          "row": 6,
+          "column": 5,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 51,
+          "head_bbox": [
+            53,
+            15,
+            16,
+            16
+          ]
+        },
+        {
+          "row": 6,
+          "column": 6,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 48,
+          "head_bbox": [
+            50,
+            15,
+            17,
+            14
+          ]
+        },
+        {
+          "row": 6,
+          "column": 7,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 33,
+          "head_bbox": [
+            41,
+            10,
+            19,
+            15
+          ]
+        },
+        {
+          "row": 6,
+          "column": 8,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 37,
+          "head_bbox": [
+            34,
+            5,
+            16,
+            15
+          ]
+        },
+        {
+          "row": 7,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 59,
+          "head_bbox": [
+            34,
+            3,
+            17,
+            18
+          ]
+        },
+        {
+          "row": 7,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 63,
+          "head_bbox": [
+            19,
+            6,
+            18,
+            17
+          ]
+        },
+        {
+          "row": 7,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 40,
+          "head_bbox": [
+            18,
+            9,
+            17,
+            16
+          ]
+        },
+        {
+          "row": 7,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 52,
+          "head_bbox": [
+            16,
+            26,
+            17,
+            16
+          ]
+        },
+        {
+          "row": 7,
+          "column": 5,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 40,
+          "head_bbox": [
+            11,
+            37,
+            17,
+            17
+          ]
+        },
+        {
+          "row": 7,
+          "column": 6,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 36,
+          "head_bbox": [
+            16,
+            50,
+            17,
+            17
+          ]
+        },
+        {
+          "row": 7,
+          "column": 7,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 31,
+          "head_bbox": [
+            16,
+            52,
+            16,
+            19
+          ]
+        },
+        {
+          "row": 7,
+          "column": 8,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 51,
+          "head_bbox": [
+            15,
+            52,
+            17,
+            19
+          ]
+        },
+        {
+          "row": 8,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 70,
+          "head_bbox": [
+            41,
+            27,
+            21,
+            18
+          ]
+        },
+        {
+          "row": 8,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 65,
+          "head_bbox": [
+            34,
+            56,
+            22,
+            21
+          ]
+        },
+        {
+          "row": 8,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 62,
+          "head_bbox": [
+            15,
+            54,
+            21,
+            19
+          ]
+        },
+        {
+          "row": 8,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 84,
+          "head_bbox": [
+            8,
+            52,
+            26,
+            20
+          ]
+        },
+        {
+          "row": 8,
+          "column": 5,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 109,
+          "head_bbox": [
+            54,
+            32,
+            23,
+            20
+          ]
+        },
+        {
+          "row": 8,
+          "column": 6,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 151,
+          "head_bbox": [
+            46,
+            25,
+            22,
+            23
+          ]
+        },
+        {
+          "row": 8,
+          "column": 7,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 79,
+          "head_bbox": [
+            38,
+            17,
+            21,
+            20
+          ]
+        },
+        {
+          "row": 8,
+          "column": 8,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 91,
+          "head_bbox": [
+            34,
+            16,
+            19,
+            21
+          ]
+        },
+        {
+          "row": 9,
+          "column": 1,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 155,
+          "head_bbox": [
+            26,
+            1,
+            24,
+            25
+          ]
+        },
+        {
+          "row": 9,
+          "column": 2,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 105,
+          "head_bbox": [
+            29,
+            1,
+            21,
+            23
+          ]
+        },
+        {
+          "row": 9,
+          "column": 3,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 157,
+          "head_bbox": [
+            33,
+            2,
+            21,
+            23
+          ]
+        },
+        {
+          "row": 9,
+          "column": 4,
+          "matched": true,
+          "face_to_hair_distance_px": 0.955,
+          "pixels_recolored": 100,
+          "head_bbox": [
+            29,
+            1,
+            22,
+            23
+          ]
+        }
+      ]
+    }
+  },
+  "palette": {
+    "source": "doc/palettes_manifest.json :: characters.dr_ferdinand_social",
+    "useful_colors": 12,
+    "transparent_index": 0,
+    "roles_by_index": [
+      "transparent",
+      "outline",
+      "skin_light",
+      "skin_mid",
+      "suit_light",
+      "suit_mid",
+      "suit_deep",
+      "shirt_light",
+      "shirt_shadow",
+      "hair_gray",
+      "boot_brown",
+      "tie_burgundy",
+      "brass_glasses"
+    ],
+    "rgb_by_index": [
+      [
+        255,
+        0,
+        255
+      ],
+      [
+        0,
+        0,
+        85
+      ],
+      [
+        255,
+        170,
+        170
+      ],
+      [
+        170,
+        85,
+        85
+      ],
+      [
+        85,
+        170,
+        255
+      ],
+      [
+        0,
+        170,
+        170
+      ],
+      [
+        0,
+        85,
+        85
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        170,
+        170,
+        170
+      ],
+      [
+        85,
+        85,
+        85
+      ],
+      [
+        85,
+        0,
+        0
+      ],
+      [
+        170,
+        0,
+        85
+      ],
+      [
+        255,
+        255,
+        0
+      ]
+    ],
+    "accent_red_used": false,
+    "arcane_violet_used": false
+  },
+  "atlas": {
+    "columns": 8,
+    "rows": 9,
+    "cell_px": [
+      80,
+      80
+    ],
+    "sheet_px": [
+      640,
+      720
+    ],
+    "active_poses": 61,
+    "blank_cells": 11,
+    "sequence_rows": {
+      "idle": 4,
+      "walk_forward": 8,
+      "walk_backward": 8,
+      "jump": 8,
+      "crouch": 5,
+      "dash_run": 8,
+      "knockdown_fall": 8,
+      "tech_roll_getup": 8,
+      "guard": 4
+    }
+  },
+  "output": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v6_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v6.png",
+    "sha256": "8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455f",
+    "mode": "P",
+    "palette_indices_used": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "opaque_indices_used": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "transparent_pixels": 353824,
+    "opaque_pixels": 106976,
+    "cells_touching_edge": 0,
+    "frames_with_components_lt4px": 0,
+    "frames": [
+      {
+        "row": 1,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2027
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1988
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 1,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1964
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1963
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2113
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2172
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 2,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2095
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2068
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2056
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2182
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 2,
+        "column": 7,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2294
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 2,
+        "column": 8,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2186
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 3,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1727
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1627
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1595
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1645
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1644
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2025
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 3,
+        "column": 7,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1611
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 3,
+        "column": 8,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1759
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1775
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2035
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1704
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1650
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1870
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1644
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 4,
+        "column": 7,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1761
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 4,
+        "column": 8,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1541
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 5,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1838
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 5,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1790
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 5,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1729
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 5,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1547
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 5,
+        "column": 5,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1500
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 6,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1357
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 6,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1439
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 6,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1456
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 6,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1486
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 6,
+        "column": 5,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1483
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 6,
+        "column": 6,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1498
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 6,
+        "column": 7,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1452
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 6,
+        "column": 8,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1405
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 7,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1461
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 7,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1511
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 7,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1355
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 7,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1216
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 7,
+        "column": 5,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1187
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 7,
+        "column": 6,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          761
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 7,
+        "column": 7,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          748
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 7,
+        "column": 8,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          713
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 8,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1922
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 8,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1661
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 8,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1779
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 8,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1924
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 8,
+        "column": 5,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2023
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 8,
+        "column": 6,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1974
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 8,
+        "column": 7,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1833
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 8,
+        "column": 8,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          1607
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 9,
+        "column": 1,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2573
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 9,
+        "column": 2,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2671
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 9,
+        "column": 3,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2595
+        ],
+        "orphan_component_pixels_lt4": 0
+      },
+      {
+        "row": 9,
+        "column": 4,
+        "opaque_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "connected_components_8": 1,
+        "component_areas_px": [
+          2761
+        ],
+        "orphan_component_pixels_lt4": 0
+      }
+    ]
+  },
+  "validation_scope": {
+    "passed": [
+      "exact 8\u00d79 grid of 80\u00d780 cells",
+      "61 active poses distributed 4/8/8/8/5/8/8/8/4",
+      "12-color closed basic-movement palette; no effect red/violet",
+      "index 0 transparency; no partial alpha",
+      "no opaque pixels touch cell edges",
+      "tiny color clusters cleaned without changing pose geometry",
+      "head/hair palette-role cleanup matched and corrected all 61 frames"
+    ],
+    "pending_human_review": [
+      "anatomy and action readability across all 61 frames",
+      "fidelity to approved concept v4, including cane, coat, face, and body type",
+      "pixel clusters, hair/skin boundary, outlines, and cel shading at native 80\u00d780 and nearest-neighbor enlargement",
+      "animation timing/physics and sequence transitions"
+    ],
+    "not_claimed": [
+      "owner approval",
+      "ROM integration",
+      "Master System runtime palette allocation",
+      "resource/scanline budget validation",
+      "emulator validation or production readiness"
+    ]
+  }
+}

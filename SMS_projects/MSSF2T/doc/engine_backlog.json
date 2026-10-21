@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "project": "MSSF2T",
+  "items": [
+    {"id": "M00", "state": "verified", "depends_on": [], "evidence": ["git SHA ae9e0cc08b2862b56fb78db810c6596b22c76770", "wrapper selftest 59/59", "measurement tools self-check"]},
+    {"id": "M01", "state": "in_progress", "depends_on": ["M00"], "evidence": ["mssf2t_regression.py", "out/evidence/runtime_probe.json", "out/evidence/evidence.png", "out/evidence/fps.json"], "blocker": "provar P2 humano, trade/timeout/reset no alvo; replay_input_memory travou nesta sessão"},
+    {"id": "M02", "state": "pending", "depends_on": ["M01"]},
+    {"id": "M03", "state": "pending", "depends_on": ["M01", "M02"]},
+    {"id": "M04", "state": "pending", "depends_on": ["M01", "M02"]},
+    {"id": "M05", "state": "pending", "depends_on": ["M03", "M04"]},
+    {"id": "M06", "state": "pending", "depends_on": ["M03", "M04"]},
+    {"id": "M07", "state": "pending", "depends_on": ["M04", "M06"]},
+    {"id": "M08", "state": "pending", "depends_on": ["M05", "M06", "M07"]},
+    {"id": "M09", "state": "pending", "depends_on": ["M08"]}
+  ]
+}

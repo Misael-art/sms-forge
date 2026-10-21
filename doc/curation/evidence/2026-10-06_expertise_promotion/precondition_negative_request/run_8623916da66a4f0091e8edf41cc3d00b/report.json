@@ -1,0 +1,76 @@
+{
+  "schema": "sms_subagent_session_v2",
+  "artifact_kind": "harness_worker_result",
+  "task_id": "fd5cd7e611434ceb86aac1cdc54e20ab",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01",
+  "producer_id": "/root",
+  "worker_id": "/root/native_runtime_qa",
+  "lane": "runtime",
+  "request": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/request.json",
+    "sha256": "3701d3bcc0495d54a9a624afff1d2cc57d9f9f7c7290c637028638705e24d922"
+  },
+  "case_relation": "independent",
+  "status": "blocked",
+  "claim_ceiling": "assigned_checks_only",
+  "promoted": false,
+  "findings": [],
+  "artifacts": [
+    {
+      "id": "wrong_initial_state_baseline",
+      "kind": "framebuffer",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/run_8623916da66a4f0091e8edf41cc3d00b/case_0_baseline.png",
+      "sha256": "05441fcc8f75d1f1cae1da430a1dcebcf7d7d8f7c45bdc9c4972702255ddbd8d",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/run_8623916da66a4f0091e8edf41cc3d00b/case_0_baseline.json",
+        "sha256": "9420e333d09f8a55f50cbb6e46a29546511775fdce17d8a97a220402bffcb5b3"
+      }
+    },
+    {
+      "id": "wrong_initial_state_precondition",
+      "kind": "rom_observation",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/run_8623916da66a4f0091e8edf41cc3d00b/case_0_precondition.json",
+      "sha256": "304e0c370871eab1e95817d22c7d988eaa0122aab04eae53ab2886d6fd62640b",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/run_8623916da66a4f0091e8edf41cc3d00b/case_0_precondition.json",
+        "sha256": "304e0c370871eab1e95817d22c7d988eaa0122aab04eae53ab2886d6fd62640b"
+      }
+    },
+    {
+      "id": "commands",
+      "kind": "input_trace",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/run_8623916da66a4f0091e8edf41cc3d00b/commands.jsonl",
+      "sha256": "a0bab2553c0fdabe205d6cbfb05641e928e14947e6c7b23be40ce0fff1987747"
+    }
+  ],
+  "session": {
+    "id": "dc3dd82c987645918548fd8066a999ec",
+    "owner": "/root/native_runtime_qa",
+    "bundle": null,
+    "metadata": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/run_8623916da66a4f0091e8edf41cc3d00b/closed_session.json",
+      "sha256": "b79af6349c041ce025efb5f316afedb42e45e9217562b4c46c91501f02bd88ed"
+    },
+    "closed": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/run_8623916da66a4f0091e8edf41cc3d00b/closed_session.json",
+      "sha256": "b79af6349c041ce025efb5f316afedb42e45e9217562b4c46c91501f02bd88ed"
+    }
+  },
+  "coverage": [
+    {
+      "id": "wrong_initial_state",
+      "status": "not_run",
+      "note": "Precondition negativa conferida no VDP120: RAM0xC700/5 contém534d493101, pedido exige534d493102. Collector exit1: ROM initial precondition failed:wrong_initial_state. Journal sóaudio-enable,capturebaseline,readprecondition; nenhumsequence/input/step/run/video e gestoP1right nãoexecutado. Metadata, baselinePNG e preconditionRAM preservadas; sessãorealencerrada. Feedbackblocked válido, nãoaprovação do caso.",
+      "evidence": [
+        "wrong_initial_state_baseline",
+        "wrong_initial_state_precondition",
+        "commands"
+      ]
+    }
+  ],
+  "review_limits": [
+    "intentional negative precondition test",
+    "gesture not_run; report blocked expected",
+    "no gameplay/FPS claim"
+  ]
+}

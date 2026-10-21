@@ -1,0 +1,195 @@
+{
+  "schema": "sms_blastem_dump_diff_v1",
+  "session_id": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+  "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+  "session_manifest_sha256": "1c549ceb9cc20794249ce9d91500304701a4bc196290d2a43629cd4692f52268",
+  "emulator_sha256": "1bd0f40ddcc6d769f6cc2aea59bb2973601b6db30bdd849b68315b9d83ad06ec",
+  "eligibility": "historical_record_only",
+  "current_rom_checked": false,
+  "first": {
+    "index": 0,
+    "vdp_frame": 120
+  },
+  "last": {
+    "index": 2,
+    "vdp_frame": 130
+  },
+  "vdp_frames_between": 10,
+  "scope": "net_snapshot_changes_only_not_bus_writes_unique_art_tiles_timing_or_causality",
+  "spaces": {
+    "ram": {
+      "changed_bytes": 5,
+      "offsets": [
+        1797,
+        1808,
+        2032,
+        8170,
+        8172
+      ],
+      "runs": [
+        {
+          "address": 50949,
+          "offset": 1797,
+          "length": 1,
+          "before_prefix_hex": "74",
+          "after_prefix_hex": "7d",
+          "prefix_truncated": false
+        },
+        {
+          "address": 50960,
+          "offset": 1808,
+          "length": 1,
+          "before_prefix_hex": "00",
+          "after_prefix_hex": "06",
+          "prefix_truncated": false
+        },
+        {
+          "address": 51184,
+          "offset": 2032,
+          "length": 1,
+          "before_prefix_hex": "74",
+          "after_prefix_hex": "7d",
+          "prefix_truncated": false
+        },
+        {
+          "address": 57322,
+          "offset": 8170,
+          "length": 1,
+          "before_prefix_hex": "b0",
+          "after_prefix_hex": "ae",
+          "prefix_truncated": false
+        },
+        {
+          "address": 57324,
+          "offset": 8172,
+          "length": 1,
+          "before_prefix_hex": "84",
+          "after_prefix_hex": "78",
+          "prefix_truncated": false
+        }
+      ]
+    },
+    "vram": {
+      "changed_bytes": 3,
+      "offsets": [
+        15372,
+        15376,
+        15380
+      ],
+      "runs": [
+        {
+          "address": 15372,
+          "offset": 15372,
+          "length": 1,
+          "before_prefix_hex": "01",
+          "after_prefix_hex": "00",
+          "prefix_truncated": false
+        },
+        {
+          "address": 15376,
+          "offset": 15376,
+          "length": 1,
+          "before_prefix_hex": "00",
+          "after_prefix_hex": "01",
+          "prefix_truncated": false
+        },
+        {
+          "address": 15380,
+          "offset": 15380,
+          "length": 1,
+          "before_prefix_hex": "00",
+          "after_prefix_hex": "01",
+          "prefix_truncated": false
+        }
+      ],
+      "changed_32byte_blocks": [
+        480
+      ],
+      "block_scope": "address blocks; includes tilemaps/SAT/nonpattern data; not unique graphics tiles or transfer bytes"
+    },
+    "vdp_regs": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    },
+    "cram_internal": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    },
+    "psg_frequency": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    },
+    "psg_volume": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    }
+  },
+  "source_dumps": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/ram.bin",
+      "sha256": "37af0daa0cd1800a0637ace297b654572a211d0313e4697886337f54a4372033",
+      "bytes": 8192
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/ram.bin",
+      "sha256": "d28f9b096ecbde31c9bbaffa578b49bb358442e717dbb45f5fa8b02b02b84597",
+      "bytes": 8192
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/vram.bin",
+      "sha256": "03e2c0fff76425b94b50ffbb1d8bf32fb3ea5b6ec4f0c5c80a194cd605b36ce6",
+      "bytes": 16384
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/vram.bin",
+      "sha256": "eba2b76a2fe5e8d2a4f7a222d472bf3a0ea3f18c1812929748414c26087ab91f",
+      "bytes": 16384
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/vdp_regs.bin",
+      "sha256": "97528e937ae9bac1a7087b0575510b5a3fbf8214a7d67fd58e5ea8ccf73fd7b4",
+      "bytes": 11
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/vdp_regs.bin",
+      "sha256": "97528e937ae9bac1a7087b0575510b5a3fbf8214a7d67fd58e5ea8ccf73fd7b4",
+      "bytes": 11
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/cram_internal.bin",
+      "sha256": "6895d2a121dc4a0c1e861ba3b3248e30eb0f1ef5fc1d76a71f12d3f53fcce75c",
+      "bytes": 64
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/cram_internal.bin",
+      "sha256": "6895d2a121dc4a0c1e861ba3b3248e30eb0f1ef5fc1d76a71f12d3f53fcce75c",
+      "bytes": 64
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/psg_frequency.bin",
+      "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "bytes": 8
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/psg_frequency.bin",
+      "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "bytes": 8
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/psg_volume.bin",
+      "sha256": "ba458c12003d7a23207f1b27c4ddbbe57298f7ad243f0ddb45d6bdf068761858",
+      "bytes": 4
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/native_media/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/psg_volume.bin",
+      "sha256": "ba458c12003d7a23207f1b27c4ddbbe57298f7ad243f0ddb45d6bdf068761858",
+      "bytes": 4
+    }
+  ],
+  "palette_changes": [],
+  "named_ranges": []
+}

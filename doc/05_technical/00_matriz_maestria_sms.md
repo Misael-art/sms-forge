@@ -32,7 +32,7 @@ build + evidência de emulador em algum projeto (`doc/curation/` promove).
 | S07 | Rotação de buffer de sprites p/ reduzir flicker | ordenar prioridades na SAT |
 
 ## 3. Paleta / cor
-| P01 | 2 subpaletas ×16, índice 0 transparente nas duas | máx 30 cores úteis simultâneas |
+| P01 | 2 subpaletas ×16; BG índice 0 visível, sprite índice 0 transparente | até 16 entradas BG + 15 entradas opacas de sprite; cores distintas dependem da paleta da cena |
 | P02 | Cor = código 6-bit (canais 0–3); paleta mestra fixa | sem gradiente suave; fade = troca de paleta |
 | P03 | Contraste medido em degraus (luma derivada dos códigos) | gate audit_luma_floor.py |
 | P04 | Half-brightness / color add/sub do SMSlib | efeitos sem alpha (não existe alpha) |

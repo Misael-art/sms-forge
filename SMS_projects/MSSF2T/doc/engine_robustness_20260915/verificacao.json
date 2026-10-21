@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-15",
+  "build": "passed",
+  "rom_sha256": "8a83ca2da18e2690d066cc29eed597986c97f6dd1d9af23baf204b00be8b27c4",
+  "rom_bytes": 32768,
+  "reconcile_claims": "passed",
+  "audit_doc_sync": "passed",
+  "historical_bundle_hashes": "8_of_8_match",
+  "new_emulator_capture": {
+    "video": "out/evidence/analysis_20260915.mp4",
+    "report": "out/evidence/analysis_20260915.json",
+    "frames": 777,
+    "duration_seconds": 12.97,
+    "canvas": "256x192",
+    "tool_result": "passed",
+    "scope": "short_boot_attract_capture_not_complete_gameplay_QA",
+    "audio": "signal_present_not_critical_listening"
+  },
+  "runtime_source_changes": false,
+  "limitations": [
+    "Static findings need target regression tests during implementation",
+    "No critical audio listening",
+    "No complete human 2P playtest",
+    "No fresh independent worst-frame measurement"
+  ]
+}

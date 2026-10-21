@@ -1,0 +1,95 @@
+{
+  "session_unit_cases": [
+    {
+      "nominal": 59.9227,
+      "returncode": 0,
+      "region": "NTSC",
+      "check": {
+        "region": "NTSC",
+        "target_fps": 60.0,
+        "tolerance_fps": 1.0,
+        "max_spread_fps": 1.0,
+        "sample_count": 2,
+        "spread_fps": 0.0,
+        "passed": true,
+        "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+      },
+      "expected": "60frame/s matchesNTSC, mismatchesPAL,invalidnominalfails"
+    },
+    {
+      "nominal": 50.0,
+      "returncode": 1,
+      "region": "PAL",
+      "check": {
+        "region": "PAL",
+        "target_fps": 50.0,
+        "tolerance_fps": 1.0,
+        "max_spread_fps": 1.0,
+        "sample_count": 2,
+        "spread_fps": 0.0,
+        "passed": false,
+        "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+      },
+      "expected": "60frame/s matchesNTSC, mismatchesPAL,invalidnominalfails"
+    },
+    {
+      "nominal": null,
+      "returncode": 1,
+      "region": null,
+      "check": null,
+      "expected": "60frame/s matchesNTSC, mismatchesPAL,invalidnominalfails"
+    },
+    {
+      "nominal": true,
+      "returncode": 1,
+      "region": null,
+      "check": null,
+      "expected": "60frame/s matchesNTSC, mismatchesPAL,invalidnominalfails"
+    },
+    {
+      "nominal": 55.0,
+      "returncode": 1,
+      "region": null,
+      "check": null,
+      "expected": "60frame/s matchesNTSC, mismatchesPAL,invalidnominalfails"
+    }
+  ],
+  "native_feedback_audit": {
+    "same_metric_payload": true,
+    "same_ROM": true,
+    "same_session": true,
+    "closed_reported": true,
+    "regional_math_matches": true,
+    "same_collector_current": false,
+    "no_original_process_alive": true
+  },
+  "original_process_readcheck": [
+    {
+      "role": "supervisor",
+      "pid": 1092952,
+      "matching_original_process_alive": false
+    },
+    {
+      "role": "xvfb_process",
+      "pid": 1092971,
+      "matching_original_process_alive": false
+    },
+    {
+      "role": "sandbox",
+      "pid": 1092996,
+      "matching_original_process_alive": false
+    },
+    {
+      "role": "emulator_process",
+      "pid": 1092997,
+      "matching_original_process_alive": false
+    }
+  ],
+  "feedback_sha256": "b5e21cf908c5c2ca490bf35c111f0d75463f79bc4c6c0f840d64e2d8da61c926",
+  "metrics_sha256": "420fea76c2c1557453d61ca04c6fc4ced833114dc23a0bf500db12af65f6b3d5",
+  "native_measurements": [
+    59.6,
+    59.77
+  ],
+  "native_scope": "Coordinator execution only; independent read/identity/math/cleanup audit, no reviewer emulator execution"
+}

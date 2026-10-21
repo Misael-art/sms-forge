@@ -1,0 +1,63 @@
+{
+  "schema": "smsforge.art_candidate_review.v1",
+  "asset_id": "dr_social_basic_sequences_atlas_v1",
+  "project": "master_of_fighters",
+  "character_id": "dr_social",
+  "status": "draft_not_promoted",
+  "review_kind": "producer_precheck",
+  "medium": "AI-generated RGBA sprite-atlas illustration",
+  "image": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_basic_sequences_atlas_v1/dr_social_basic_sequences_atlas_v1_draft.png",
+    "sha256": "1389f2fd92fbf4c479a271395bc5b8784375faf9c34f814892ec250ac77ad57d",
+    "dimensions_px": [1323, 1189],
+    "alpha_levels": 256,
+    "semi_transparent_pixels": 716811,
+    "unique_rgba_colors": 320839,
+    "opaque_rgb_colors": 1390
+  },
+  "reference": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+    "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+    "role": "approved character identity and costume reference"
+  },
+  "layout_intent": {
+    "columns": 8,
+    "rows": 9,
+    "cell_size_px": [80, 80],
+    "cell_size_status": "not_verified; output dimensions do not establish exact grid",
+    "sequences": [
+      {"row": 1, "id": "idle", "expected_source_poses": 4},
+      {"row": 2, "id": "walk_forward", "expected_source_poses": 8},
+      {"row": 3, "id": "walk_backward", "expected_source_poses": 8},
+      {"row": 4, "id": "jump", "expected_source_poses": 8},
+      {"row": 5, "id": "crouch", "expected_source_poses": 5},
+      {"row": 6, "id": "dash_run", "expected_source_poses": 8},
+      {"row": 7, "id": "knockdown_fall", "expected_source_poses": 8},
+      {"row": 8, "id": "tech_roll_getup", "expected_source_poses": 8},
+      {"row": 9, "id": "guard", "expected_source_poses": 4}
+    ],
+    "expected_source_pose_total": 61,
+    "actual_grid_and_pose_identity": "not verified"
+  },
+  "review_axes": {
+    "character_identity_and_costume": {"status": "candidate_readable", "note": "Hair, glasses, blue coat, burgundy cravat, gloves, shoes, and cane remain recognizable at atlas scale."},
+    "sequence_order": {"status": "visual_candidate_only", "note": "Rows roughly follow the requested movement categories; exact per-cell boundaries and pose IDs are not mechanically established."},
+    "pixel_clusters_and_palette": {"status": "fail", "note": "The final image has 1390 fully opaque RGB colors, far above the declared 12-color palette."},
+    "outline_and_cutout": {"status": "fail", "note": "Bright blue/cyan fringe remains around sprite silhouettes, with 256 alpha levels and 716811 partially transparent pixels."},
+    "anatomy_and_equipment": {"status": "pending", "note": "Requires per-frame native-size review; this precheck is not an independent art review."},
+    "cell_integrity_and_runtime": {"status": "pending", "note": "No exact cell grid, per-frame 80×80 canvas, hardware-object decomposition, tile/palette budget, SAT/scanline, VRAM/VBlank, ROM, or emulator evidence."}
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "passes": 3,
+    "prompt_summary": "One 8×9 atlas from the approved CPS2-Alpha-Cel identity reference; nine basic animation rows; 12-color SMS palette intent; transparent background; hard pixel clusters and clean navy outlines. Two edit passes attempted to remove blue/cyan halos and partial alpha; the defect persisted."
+  },
+  "promotion": {
+    "entered_canonical_sprite_lineage": false,
+    "approved_for_res": false,
+    "rom_asset_binding": "not_created",
+    "emulator_validation": "not_performed",
+    "aaa_claim": false
+  },
+  "next_action": "Rebuild the sprite source with hard-edged opaque palette clusters and an exact verified cell grid before submitting it for independent review."
+}

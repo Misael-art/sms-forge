@@ -3,7 +3,7 @@
   "asset_id": "dr_social_model_sheet_07_hidrive_anime_vector_v1",
   "producer": "codex_art_production",
   "asset": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1.png",
     "sha256": "822be99e0a61ebf72029e662c61f23aec509e4028ea75c7e58487810eb9e1b30",
     "kind": "character_concept_model_sheet",
     "dimensions_px": [
@@ -12,7 +12,7 @@
     ]
   },
   "source_evidence": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
     "sha256": "2cd090e9a614cb4a8fe4c15ac38e05713425b28c2cf7459ae9d2749c288407a6"
   },
   "required_characters": [
@@ -31,14 +31,18 @@
     "equipment_and_weapon_continuity",
     "cross_view_consistency",
     "legibility_and_crop_integrity",
-    "human_traits_and_unapproved_details"
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
   ],
   "characters": [
     {
       "id": "dr_ferdinand_social",
       "references": [
         {
-          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
           "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
           "role": "approved model sheet identity and five-view form"
         },
@@ -54,7 +58,7 @@
         },
         {
           "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
-          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
           "role": "initial style descriptor, not independently validated"
         }
       ],
@@ -120,6 +124,22 @@
         "human_traits_and_unapproved_details": {
           "status": "pending",
           "note": "No monster traits observed; costume variance remains pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist/reference role and limits are recorded; independent review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "Distinctive style signature is registered; visual comparison pending."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace each posed limb from shoulder through hand; visual decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity/rendering coherence across views and distinction from neighboring styles; pending."
         }
       }
     }
@@ -131,5 +151,18 @@
     "approved": false
   },
   "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
-  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval"
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval",
+  "catalog_index": 7,
+  "artistic_style_reference": {
+    "named_artist": "Daisuke Ishiwatari",
+    "reference_role_and_scope": "Creator and authorial visual-direction reference for the original Guilty Gear; not sole character-art or sprite credit.",
+    "source_url": "https://www.arcsystemworks.com/game/guilty-gear/",
+    "attribution_status": "verified_primary_source",
+    "style_signature": [
+      "angular, high-contrast silhouettes",
+      "dense costume/accessory accents",
+      "graphic shapes with strong motion"
+    ],
+    "basis_and_limits": "Traits are an editorial reading of the selected Guilty Gear visual reference."
+  }
 }

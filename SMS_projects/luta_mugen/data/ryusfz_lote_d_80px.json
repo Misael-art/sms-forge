@@ -1,0 +1,27 @@
+{
+  "source": "ryu_sfz",
+  "palette_p1": "ryu01",
+  "palette_p2": "ryu02",
+  "fighter_scale": {
+    "target_idle_opaque_height_px": 80,
+    "accepted_height_px": [72, 88]
+  },
+  "actions": [
+    { "role": "idle", "action": 0, "loop_start": 0 },
+    { "role": "walk_f", "action": 20, "loop_start": 0 },
+    { "role": "walk_b", "action": 21, "loop_start": 0 },
+    { "role": "jump", "action": 41, "loop_start": 0 },
+    { "role": "crouch", "action": 11, "loop_start": 0 },
+    { "role": "guard", "action": 130, "loop_start": 0 },
+    { "role": "punch", "action": 260, "state": 260, "loop_start": null },
+    { "role": "punch_hp", "action": 280, "state": 280, "loop_start": null },
+    { "role": "kick", "action": 200, "state": 200, "loop_start": null },
+    { "role": "kick_hk", "action": 240, "state": 240, "loop_start": null },
+    { "role": "special", "action": 1000, "state": 1000, "loop_start": null },
+    { "role": "ko", "action": 5050, "loop_start": null }
+  ],
+  "commands": {
+    "button1": "A",
+    "forward_double": "FF"
+  }
+}

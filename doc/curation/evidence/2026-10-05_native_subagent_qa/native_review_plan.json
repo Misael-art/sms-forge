@@ -1,0 +1,40 @@
+{
+  "schema": "quality_review_plan_v1",
+  "artifact_kind": "quality_review_plan",
+  "tool": {
+    "name": "quality_review_router",
+    "version": "1.0.0"
+  },
+  "stage": "vertical_slice",
+  "producer": "/root",
+  "reviews": [
+    {
+      "domain": "art",
+      "owner_skill": "skills/sms-visual-excellence.md",
+      "read_only": true,
+      "independent_of_producer": true,
+      "private_session_per_worker": true
+    },
+    {
+      "domain": "audio",
+      "owner_skill": "skills/sms-psg-audio.md",
+      "read_only": true,
+      "independent_of_producer": true,
+      "private_session_per_worker": true
+    }
+  ],
+  "findings": [],
+  "claim_ceiling": "quality_review_plan_only",
+  "ok": true,
+  "execution_mode": "isolated_native_subagents",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T",
+  "rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/rom.sms",
+    "sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3"
+  },
+  "requested_tasks": [
+    "9a72c60025254ce6ae12d8bad557df01",
+    "75289c59b7934010ae593205b97cdf6a"
+  ],
+  "workflow": "workflows/subagent-emulator-qa.md"
+}

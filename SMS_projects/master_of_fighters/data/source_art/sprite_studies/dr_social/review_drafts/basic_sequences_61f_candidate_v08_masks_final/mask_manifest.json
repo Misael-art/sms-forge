@@ -1,0 +1,36 @@
+{
+  "schema": "dr_social_explicit_mask_atlas_v1",
+  "source_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+  "mask_atlases": {
+    "hair": "masks/mask_hair.png",
+    "coat": "masks/mask_coat.png",
+    "skin": "masks/mask_skin.png",
+    "leather": "masks/mask_leather.png",
+    "white_accessory": "masks/mask_white_accessory.png",
+    "yellow_allowed": "masks/mask_yellow_allowed.png",
+    "yellow_pending": "masks/mask_yellow_pending.png",
+    "burgundy_allowed": "masks/mask_burgundy_allowed.png",
+    "outline": "masks/mask_outline.png",
+    "transparent": "masks/mask_transparent.png"
+  },
+  "pixel_counts": {
+    "hair": 9862,
+    "coat": 55936,
+    "skin": 5720,
+    "leather": 13279,
+    "white_accessory": 2782,
+    "yellow_allowed": 177,
+    "yellow_pending": 85,
+    "burgundy_allowed": 378,
+    "outline": 18749,
+    "transparent": 283424
+  },
+  "mask_rules": {
+    "hair": "largest index-9 hair anchor plus nearby index-8/9 gray locks and 5-of-8 interior support inside a local head halo",
+    "coat_skin_leather": "source palette seed masks plus unambiguous 5-of-8 same-material interior support; no expansion over outline, transparency, or protected accent zones",
+    "white_accessory": "compact glove clusters, collar pixels attached to the cravat anchor, and long straight white/gray cane-shaft components",
+    "burgundy_allowed": "central upper-torso cravat component and burgundy components touching leather near the boot baseline",
+    "yellow_allowed": "yellow component anchored to the cane shaft/pommel; brass glasses remain configurable pending owner decision",
+    "yellow_pending": "unmodified yellow pixels near the face preserved until the brass-spectacles policy is resolved"
+  }
+}

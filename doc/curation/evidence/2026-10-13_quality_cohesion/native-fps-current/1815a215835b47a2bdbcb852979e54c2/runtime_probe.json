@@ -1,0 +1,75 @@
+{
+  "schema": "runtime_metrics_v1",
+  "rom": "/tmp/smsforge-1000/1815a215835b47a2bdbcb852979e54c2/emulator/rom.sms",
+  "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+  "region": "NTSC",
+  "fps_measured": 59.52,
+  "fps_janelas": [
+    59.52,
+    59.72
+  ],
+  "fps_spread": 0.19999999999999574,
+  "fps_constante": true,
+  "frame_advance_proved": true,
+  "frames_delta_total": 961,
+  "audio_active_pct": null,
+  "boot_proved": true,
+  "probe": {
+    "magic": "SMRT",
+    "header": [
+      83,
+      77,
+      82,
+      84,
+      1
+    ],
+    "base": "0xc7e0",
+    "schema_version": 1,
+    "frame_addr": "0xc7f0",
+    "snapshot": {
+      "hp": 0,
+      "score": 0,
+      "boss": 0,
+      "over": 0,
+      "state": 0,
+      "wave": 0,
+      "keys": 0,
+      "px": 0,
+      "py": 0
+    }
+  },
+  "input_route": {
+    "canal": "process-local SMSJoypad P1/P2; VDP frame pacing",
+    "escrita_memoria": "disabled; read-only bridge",
+    "rom_input_observation": "not proved by FPS probe"
+  },
+  "tool": "emulicious-original-JAR/private-process-bridge",
+  "chain_of_custody": [
+    "session: 1815a215835b47a2bdbcb852979e54c2",
+    "display: :1",
+    "ROM SHA: be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+    "frame delta observed in ROM RAM; original realtime runner; conservative clock"
+  ],
+  "session_id": "1815a215835b47a2bdbcb852979e54c2",
+  "host_load": [
+    4.66748046875,
+    4.05419921875,
+    3.259765625
+  ],
+  "regional_frame_rate_check": {
+    "region": "NTSC",
+    "target_fps": 60.0,
+    "tolerance_fps": 1.0,
+    "max_spread_fps": 1.0,
+    "sample_count": 2,
+    "spread_fps": 0.19999999999999574,
+    "passed": true,
+    "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+  },
+  "axes": {
+    "boot": true,
+    "frame_advance": true,
+    "fps_constante": true,
+    "aprovado": true
+  }
+}

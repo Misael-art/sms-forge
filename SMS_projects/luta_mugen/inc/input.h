@@ -1,26 +1,28 @@
-/* input.h — pad físico (Porta A) -> bits K_* + buffer temporal de comandos.
- *
- * Contrato (Plano 2, Task 5):
- *  - input_read(): bits de NÍVEL K_* (fight.h); fight_step calcula as
- *    arestas por keys_prev. O pad de 2 botoes guarda segurando BAIXO+TRAS;
- *    K_GUARD segue como atalho sintetico do roteiro, nao e botao fisico.
- *  - input_tick(): registra a amostra do frame no buffer circular de 16,
- *    ja relativa ao LADO (F=para o oponente, B=para tras), na mesma
- *    codificacao do blob CMD gerado por converters/sms_cmd.py:
- *    nibble baixo = direcional (U1 D2 B4 F8), nibble alto = botao (a1 s2).
- *  - input_pattern_hit(): varredura do buffer do passo mais novo para tras,
- *    janela = byte 1 do blob; flag hold(1) exige o direcional ainda baixo na
- *    amostra corrente; flag release(2) exige o contrario. Passo de direcional
- *    ignora botao e vice-versa (semantica de token unico do MUGEN).
- */
+/* Entrada do pad e leitura dos blobs CMD versionados emitidos pelo conversor. */
 #ifndef INPUT_H
 #define INPUT_H
 
-#define INPUT_BUF 16
+#define INPUT_BUF 16u
+#define INPUT_BUF_MASK (INPUT_BUF - 1u)
+
+/* Mesmo contrato de bits do fight.h, sem dependência de SMSlib no anel host. */
+#define INPUT_UP     0x01u
+#define INPUT_DOWN   0x02u
+#define INPUT_LEFT   0x04u
+#define INPUT_RIGHT  0x08u
+#define INPUT_KEY1   0x10u
+#define INPUT_KEY2   0x20u
+#define INPUT_GUARD  0x40u
 
 void input_init(void);
+void input_set_thresholds(unsigned char slot, unsigned char key1,
+                          unsigned char key2);
 unsigned char input_read(void);
-void input_tick(unsigned char keys, unsigned char facing);
-unsigned char input_pattern_hit(const unsigned char *pattern);
+unsigned char input_tick(unsigned char slot, unsigned char keys,
+                         unsigned char facing);
+unsigned char input_pattern_hit(unsigned char slot,
+                                const unsigned char *pattern);
+unsigned char input_take_command_dirty(unsigned char slot);
+void input_flush(unsigned char slot);
 
 #endif /* INPUT_H */

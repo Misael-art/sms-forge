@@ -1,0 +1,341 @@
+{
+  "schema": "smsforge.roster_harmony_candidate_lineage.v1",
+  "date": "2026-10-04",
+  "project": "master_of_fighters",
+  "status": "preliminary_frame00_candidates_not_approved",
+  "owner_approval": null,
+  "purpose": "Review roster scale, silhouette and rendering harmony before any animation-sheet or ROM promotion.",
+  "method": {
+    "common_baseline_y": 95,
+    "review_scale": "native logical pixels, board displayed at 4x nearest-neighbor",
+    "palette": "exact per-character Master System palette; no dithering; transparent index 0",
+    "frame_scope": "frame 00 only; no animation claim",
+    "head_body_morphology": "human visual review required; bbox audit cannot classify chibi or body proportions"
+  },
+  "profile": {
+    "path": "doc/roster_harmony_candidate_review_v1.json",
+    "sha256": "87e24f3ca5d03638aeff54e36791df87904de67dfaeea02408f9f218d79dea71"
+  },
+  "board": {
+    "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_candidate_v1.png",
+    "sha256": "c47e657c1cb25ab024e0ed237867729d2613a79354e4ae2d3d32b8a4dea9de40"
+  },
+  "audit": {
+    "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v1.json",
+    "sha256": "cdabe52a1c5a78439af94f70487284422ef23f573cc019b023f93bc3f5eb4c98",
+    "status": "human_review_required",
+    "numeric_dimensions_and_relations_pass": true,
+    "human_review_required": [
+      "golden_axe_warrior",
+      "joe_musashi",
+      "dr_social",
+      "alis_landale",
+      "landau",
+      "jj"
+    ]
+  },
+  "characters": [
+    {
+      "key": "golden_axe_warrior",
+      "game": "Golden Axe Warrior",
+      "role": "new_frame00_proposal",
+      "source_concept": {
+        "path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_preview.png",
+        "sha256": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91",
+        "authority": "identity, costume and source-game palette roles"
+      },
+      "style_reference": {
+        "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+        "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+        "authority": "pixel cluster finish and roster scale only"
+      },
+      "generated_source": {
+        "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_generated_harmony_v1.png",
+        "sha256": "5847d64a514aad0063347dd7fee9e7aa3b0c09eed84522c4bc6932578478b21e",
+        "dimensions_px": [
+          1448,
+          1086
+        ]
+      },
+      "output": {
+        "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_sms_96px_harmony_candidate_v2.png",
+        "sha256": "f9dab0a54c0821d7e7c5c810013d822854ed9cb1626b1b617347c65fc6fceeb7",
+        "measured_width_height_px": [
+          65,
+          73
+        ],
+        "transformation": "Frame 00 from the 4x3 generated grid; 96px cells recorded in harmony_generation_transforms_v2.json; exact Golden Axe palette, no dithering, speckle cleanup."
+      },
+      "review_status": "pending_owner_visual_review"
+    },
+    {
+      "key": "hayato",
+      "game": "Kenseiden",
+      "role": "retained_comparison_reference",
+      "source_concept": {
+        "path": "data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+        "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+      },
+      "source_sprite": {
+        "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+        "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+        "measured_width_height_px": [
+          54,
+          75
+        ]
+      },
+      "review_status": "scale_or_style_reference_only"
+    },
+    {
+      "key": "joe_musashi",
+      "game": "Shinobi / Shadow Dancer",
+      "role": "retained_comparison_reference",
+      "source_concept": {
+        "path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+        "sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1"
+      },
+      "source_sprite": {
+        "path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+        "sha256": "f04da4b2c4930340315b19f5061cf7dc2dc4b6f86567cebfe6bc366a0019bd8d",
+        "measured_width_height_px": [
+          62,
+          80
+        ]
+      },
+      "review_status": "scale_or_style_reference_only"
+    },
+    {
+      "key": "dr_social",
+      "game": "Master of Darkness",
+      "role": "new_frame00_proposal",
+      "source_concept": {
+        "path": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+        "authority": "identity, costume and source-game palette roles"
+      },
+      "style_reference": {
+        "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+        "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+        "authority": "pixel cluster finish and roster scale only"
+      },
+      "generated_source": {
+        "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_12f_generated_harmony_v3.png",
+        "sha256": "1232ababe5a42c48525942284243f7613aee3eb1e2635a376ee079f084fe5879",
+        "dimensions_px": [
+          1448,
+          1086
+        ]
+      },
+      "output": {
+        "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_12f_sms_96px_harmony_candidate_v2.png",
+        "sha256": "7271cc3bf922089fb217ee3ff1bc76438c4d07592973f0266af0b48fd4aeec05",
+        "measured_width_height_px": [
+          60,
+          78
+        ],
+        "transformation": "Frame 00 from the 4x3 generated grid; 96px cell normalization; exact Dr Social palette, no dithering, speckle cleanup."
+      },
+      "review_status": "pending_owner_visual_review"
+    },
+    {
+      "key": "alis_landale",
+      "game": "Phantasy Star",
+      "role": "new_frame00_proposal",
+      "source_concept": {
+        "path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+        "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+        "authority": "identity, costume and source-game palette roles"
+      },
+      "style_reference": {
+        "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+        "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+        "authority": "pixel cluster finish and roster scale only"
+      },
+      "generated_source": {
+        "path": "data/source_art/sprite_studies/alis/alis_landale_idle_12f_generated_harmony_v4.png",
+        "sha256": "bfe0d732710e5a73af6cc5f10e49e0f1737b0c37c638d82e1a9f97272ef0a8d6",
+        "dimensions_px": [
+          1448,
+          1086
+        ]
+      },
+      "output": {
+        "path": "data/source_art/sprite_studies/alis/alis_idle_12f_sms_96px_harmony_candidate_v6_scale75.png",
+        "sha256": "29454068bc6da9089f699b46a0191c08c167bf9eb43a0a4e63c064e894a1281d",
+        "measured_width_height_px": [
+          68,
+          75
+        ],
+        "transformation": "4x3 generated sheet translated to exact character palette with no dithering and speckle cleanup, then entire silhouette uniformly scaled to 75px visible height by nearest-neighbor and baseline y=95."
+      },
+      "review_status": "pending_owner_visual_review",
+      "prompt": {
+        "path": "data/source_art/sprite_studies/alis/alis_idle_morphology_harmony_prompt_v4.txt",
+        "sha256": "74bfb5126a75526312fe4f5a2be24a3b975b62fdb6b3c4a03e3a9865a0aaeef8"
+      }
+    },
+    {
+      "key": "landau",
+      "game": "Lord of the Sword",
+      "role": "new_frame00_proposal",
+      "source_concept": {
+        "path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+        "sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+        "authority": "identity, costume and source-game palette roles"
+      },
+      "style_reference": {
+        "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+        "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+        "authority": "pixel cluster finish and roster scale only"
+      },
+      "generated_source": {
+        "path": "data/source_art/sprite_studies/lord_of_the_sword/lord_of_the_sword_idle_12f_generated_harmony_v1.png",
+        "sha256": "98ca7bc514a90d0fd428a44a07307d2716af98cee8b0bb6c9ce851fda58c904f",
+        "dimensions_px": [
+          1448,
+          1086
+        ]
+      },
+      "output": {
+        "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_harmony_candidate_v3_scale75.png",
+        "sha256": "aa436edd6bc224b48860b55ba5a351a0cc88f07cfcd2ab6c4b0968cb95f02c22",
+        "measured_width_height_px": [
+          60,
+          75
+        ],
+        "transformation": "Frame 00 from generated 4x3 grid; exact Lord of the Sword palette; entire silhouette uniformly scaled 80px to 75px (0.9375) with nearest-neighbor and baseline y=95."
+      },
+      "review_status": "pending_owner_visual_review"
+    },
+    {
+      "key": "jj",
+      "game": "Zillion II: The Tri Formation",
+      "role": "new_frame00_proposal",
+      "source_concept": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+        "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+        "authority": "identity, costume and source-game palette roles"
+      },
+      "style_reference": {
+        "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+        "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+        "authority": "pixel cluster finish and roster scale only"
+      },
+      "generated_source": {
+        "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_zillion_ii_idle_12f_generated_harmony_v4.png",
+        "sha256": "bdeb73c007ed27dfa254190f277b0d7360395722dcdc4a16212883e0ff80e4a9",
+        "dimensions_px": [
+          1448,
+          1086
+        ]
+      },
+      "output": {
+        "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_harmony_candidate_v6_scale75.png",
+        "sha256": "4ee64f65ebb6259594846b021ca2fdc63d0e8f5b6077629c42913b09482d0fcc",
+        "measured_width_height_px": [
+          61,
+          75
+        ],
+        "transformation": "4x3 generated sheet translated to exact character palette with no dithering and speckle cleanup, then entire silhouette uniformly scaled to 75px visible height by nearest-neighbor and baseline y=95."
+      },
+      "review_status": "pending_owner_visual_review",
+      "prompt": {
+        "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_morphology_harmony_prompt_v4.txt",
+        "sha256": "77f89f2e990e6232ef0e7748e56ffc10f6b9a484deb964dc3478dab2d943bd28"
+      }
+    }
+  ],
+  "prompt_capture_limit": "Exact prompts for the original selected Golden Axe, Dr Social and Landau generated candidates were not archived in this experiment. The selected Alis and J.J. morphology revision prompts are archived with their files. None of these candidates may be promoted to res; archive any missing exact prompt and complete human visual review before promotion.",
+  "open_visual_axes": [
+    "lean human morphology and correct head/face proportions across the roster",
+    "less stocky limb mass compared with the Joe morphology anchor",
+    "clean Joe cutout; do not carry halo pixels into future frames",
+    "coherent per-material color clusters in exact character SMS palettes",
+    "shared finish against Hayato without borrowing identity or palette",
+    "owner approval after a new frame00 review"
+  ],
+  "tool": {
+    "path": "tools/sms_wrapper/audit_roster_harmony.py",
+    "sha256": "ad063e37d681af39993f77bbbd50ee176c3a19696a8e696703685eb878ff4ad3",
+    "self_check": "PASS"
+  },
+  "superseded_trials": [
+    {
+      "path": "data/source_art/sprite_studies/alis/alis_idle_frame0_sms_harmony_candidate_v1.png",
+      "sha256": "01ca2abee0ce7b3fdc268590563c831a968ec0b4735d6e73a32c8664eab2eee7",
+      "status": "not selected for the roster board",
+      "reason": "single-frame pose departed from the existing guard-idle sheet; kept as a morphology study only"
+    },
+    {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_frame0_sms_harmony_candidate_v1.png",
+      "sha256": "9d9c3b05570d692c47f03d5a66fe0b2d50c8b489b4911b1cceeffb326f27f4a7",
+      "status": "not selected for the roster board",
+      "reason": "single-frame pose departed from the existing guard-idle sheet; kept as a morphology study only"
+    },
+    {
+      "path": "data/source_art/sprite_studies/alis/alis_idle_12f_sms_96px_harmony_candidate_v5.png",
+      "sha256": "7ecb79b9c903f9b16f2505e42b9074ef07a8295e636721e13dec1d46061ffe58",
+      "status": "superseded by v6_scale75",
+      "reason": "newest head/body iteration was normalized uniformly to the roster target scale"
+    },
+    {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_harmony_candidate_v5.png",
+      "sha256": "0287d7ac237257e6724cf5e9b4cf3189a9a9db03ec716ac52f6e039e31484fa9",
+      "status": "superseded by v6_scale75",
+      "reason": "newest head/body iteration was normalized uniformly to the roster target scale"
+    }
+  ],
+  "owner_review_status": "rejected_for_aesthetic_revision",
+  "owner_feedback_2026_10_04": {
+    "source": "/run/user/1000/codex-desktop/tmp/codex-clipboard-75ffad7a-ae88-49e5-b2be-a2b82253438c.png",
+    "source_sha256": "2d3911cae3e2a0952fb724b2fd6d9b054e7e983b8593160c2ba10949899b98db",
+    "decision": "Scale relations retained; aesthetic proposal rejected.",
+    "observations": [
+      "Joe cutout has visible dirt/halo.",
+      "Other roster candidates read stocky/chibi, with thick limbs and less convincing human face/body proportions.",
+      "Some color groupings look polluted despite generally correct palette values; finish declined from the approved concepts."
+    ],
+    "reference_scope": {
+      "joe_musashi": "lean morphology and relative limb mass only; cutout remains rejected",
+      "hayato": "pixel finish and cluster economy only"
+    },
+    "required_next_review": [
+      "human morphology",
+      "head/face proportion",
+      "limb mass",
+      "clean transparent cutout",
+      "palette cluster harmony",
+      "shared finish",
+      "native-size readability"
+    ]
+  },
+  "audit_followup_v2": {
+    "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v2.json",
+    "sha256": "c4a5e945405261293bad7d68937fcdb6104ef16d36a2a00c6f855fb32fd472f8",
+    "status": "owner_visual_revision_required",
+    "profile_sha256": "06834917b77ff3d1a5d05faa1c3fd3e455b47b100a1cb92bd74fac0a52d7f1d6",
+    "numeric_dimensions_and_relations_pass": true,
+    "visual_review_failed": [
+      "golden_axe_warrior",
+      "joe_musashi",
+      "dr_social",
+      "alis_landale",
+      "landau",
+      "jj"
+    ],
+    "visual_review_pending": [
+      "golden_axe_warrior",
+      "joe_musashi",
+      "dr_social",
+      "alis_landale",
+      "landau",
+      "jj"
+    ]
+  },
+  "review_board_followup_v2": {
+    "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_review_v2.png",
+    "sha256": "741107363f37dc51ab872fd75f598989e0411be11942ec2c112082ad57b92fd5",
+    "source_pixels_changed": false,
+    "purpose": "Shows the owner rejection and per-axis review state; it is not new art or an approved delivery."
+  }
+}

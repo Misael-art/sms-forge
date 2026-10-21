@@ -1,0 +1,62 @@
+{
+  "schema": "sms_subagent_session_v1",
+  "artifact_kind": "harness_worker_result",
+  "task_id": "75289c59b7934010ae593205b97cdf6a",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T",
+  "producer_id": "/root",
+  "worker_id": "/root/native_audio_qa",
+  "lane": "audio_qa",
+  "request": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/request.json",
+    "sha256": "c2019e56581b06adb52261dbc70e560617b2a9aa5174566673fac0751d25af30"
+  },
+  "status": "needs_review",
+  "claim_ceiling": "assigned_checks_only",
+  "promoted": false,
+  "findings": [],
+  "artifacts": [
+    {
+      "id": "private_signal_frame",
+      "kind": "framebuffer",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/case_0_frame.png",
+      "sha256": "5261aa4328da526461256b64ae4e06ffe900be569567914a11efbb41267cf0df",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/case_0_frame.json",
+        "sha256": "4b910fbd8e745df9952c652f9373cdcc68af6b6f4e0ed1bbd9e8b283184a9245"
+      }
+    },
+    {
+      "id": "private_signal_audio",
+      "kind": "audio",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/case_0.wav",
+      "sha256": "8e308705395e5615621d7195a5ec9022005e19b0e91c51e8a8a405d2f1f53e02",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/case_0.audio.json",
+        "sha256": "43d9cc5be33ea5ca3d2afe579e0f4c71387294f7570c8539c817f3497181c556"
+      }
+    },
+    {
+      "id": "commands",
+      "kind": "input_trace",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/commands.jsonl",
+      "sha256": "2a203e570a69442902ad14ebec3502643368fa36bc75b95d4f3584ed4a8fe567"
+    }
+  ],
+  "session": {
+    "id": "643fee706843499a9b07b8e66d246e88",
+    "owner": "/root/native_audio_qa",
+    "bundle": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/bundles/643fee706843499a9b07b8e66d246e88",
+    "closed": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/closed_session.json",
+      "sha256": "1ef1bd1e1cbf28b3f54a98bc60b4a4ad365a935e4f43d5dce22be94c5ace0d48"
+    }
+  },
+  "coverage": [
+    {
+      "id": "private_signal",
+      "status": "not_run",
+      "note": "native worker inspection pending",
+      "evidence": []
+    }
+  ]
+}

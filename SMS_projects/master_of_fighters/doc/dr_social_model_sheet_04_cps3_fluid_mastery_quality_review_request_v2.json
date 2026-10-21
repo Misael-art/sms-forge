@@ -1,0 +1,38 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_04_cps3_fluid_mastery_art_review_v2",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Independent, read-only review of concept model sheet #04 (CPS3-Fluid-Mastery): identity and five-view consistency; artist attribution/role/scope; distinct style signature; shoulder-to-hand anatomical continuity; palette/materials; ruler, baseline, crop, labels and card overlap. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2.png",
+      "sha256": "3be06c1e994f7efafe8497ce696e43178073dd181f57ff8412b19779c1f0fede",
+      "role": "current candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_review_v2.json",
+      "sha256": "fb85ef14660d9094b0bf901d3cf2a74212b26f06036bbee31458cfc4ab0b7b6f",
+      "role": "hash-bound per-character review checklist"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2_metadata.json",
+      "sha256": "b5facc2c4d1fac12b2170ed7e79bffa40db28d4db769c764ee8939acc235cbaf",
+      "role": "style/card/layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_04_cps3_fluid_mastery_v2.json",
+      "sha256": "b92b8cfb3ab79537df20b5c606092c09781cfd581bb468cc0af76993a9945156",
+      "role": "source and composition lineage"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Separate artist reference from authorship of sprites/game assets; report unverified credit as such.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Return concrete findings for anatomy, identity, style distinction, five-view cohesion, page layout and labels."
+  ]
+}

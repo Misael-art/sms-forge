@@ -1,0 +1,167 @@
+{
+  "schema": "sms_artifact_registry_v1",
+  "project_id": "luta_mugem_rev2",
+  "locations": {
+    "source": {
+      "path": "data/source_art",
+      "purpose": "concepts, model sheets, sprite sources and proofs",
+      "mode": "managed"
+    },
+    "planning": {
+      "path": "doc/artifacts",
+      "purpose": "planning sheets, contracts and reviews",
+      "mode": "managed"
+    },
+    "production": {
+      "path": "res",
+      "purpose": "integrated resources only after production gates",
+      "mode": "managed"
+    },
+    "diagnostic": {
+      "path": "out/diagnostics",
+      "purpose": "session manifests and diagnostic derivatives; audited by their own gates",
+      "mode": "legacy"
+    },
+    "mugen_raw": {
+      "path": "data/source_mugen",
+      "purpose": "frozen raw source packages for Ken/Ryu, no generated runtime",
+      "mode": "managed"
+    }
+  },
+  "kinds": {
+    "concept": {
+      "location": "source",
+      "purpose": "identity exploration",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "original-artwork.md",
+      "required_file_roles": [
+        "image"
+      ]
+    },
+    "model_sheet": {
+      "location": "source",
+      "purpose": "character identity reference",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "original-artwork.md",
+      "required_file_roles": [
+        "image"
+      ]
+    },
+    "animation_source": {
+      "location": "source",
+      "purpose": "complete animation drawing source",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "artwork-to-rom-lifecycle.md",
+      "required_file_roles": [
+        "image"
+      ]
+    },
+    "conversion_proof": {
+      "location": "source",
+      "purpose": "two keyposes proving conversion procedure",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "new-visual-asset.md",
+      "required_file_roles": [
+        "image"
+      ]
+    },
+    "planning_sheet": {
+      "location": "planning",
+      "purpose": "spreadsheet or structured production plan",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "artifact-organization.md",
+      "required_file_roles": [
+        "document"
+      ]
+    },
+    "art_review": {
+      "location": "planning",
+      "purpose": "review tied to a particular hash",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "art-review.md",
+      "required_file_roles": [
+        "report"
+      ]
+    },
+    "diagnostic_conversion": {
+      "location": "diagnostic",
+      "purpose": "conversion report and private ROM evidence",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "artwork-to-rom-lifecycle.md",
+      "required_file_roles": [
+        "report"
+      ]
+    },
+    "runtime_resource": {
+      "location": "production",
+      "purpose": "integrated game asset",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "new-visual-asset.md",
+      "required_file_roles": [
+        "resource"
+      ]
+    },
+    "mugen_source_package": {
+      "location": "mugen_raw",
+      "purpose": "MUGEN raw identity, not converted SMS artwork",
+      "introduced_for": "owner request15oct Ken/Ryu same raw SGDKpackages",
+      "procedure": "mugen-engine-quality.md",
+      "required_file_roles": [
+        "archive"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "id": "ken-raw-source-v01",
+      "asset_id": "ken",
+      "kind": "mugen_source_package",
+      "variant": "main",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [],
+      "reason": "Freeze verified authorized local-use source from SGDK; no artistic/runtime/redistribution approval",
+      "files": [
+        {
+          "role": "archive",
+          "path": "data/source_mugen/ken/Ken_Majik_.zip",
+          "sha256": "b244ec9a105fa0131b37c075dc06b032a87cf0f839f46ec7054ac60d9bd6f14c"
+        }
+      ]
+    },
+    {
+      "id": "ryu-raw-source-v01",
+      "asset_id": "ryu",
+      "kind": "mugen_source_package",
+      "variant": "main",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [],
+      "reason": "Freeze verified authorized local-use source from SGDK; no artistic/runtime/redistribution approval",
+      "files": [
+        {
+          "role": "archive",
+          "path": "data/source_mugen/ryu/ryu.zip",
+          "sha256": "6db7e29d82fff1034e8c2ddab600e500fe8377ebdeef9b626fd6b580b812300d"
+        }
+      ]
+    }
+  ],
+  "heads": [
+    {
+      "asset_id": "ken",
+      "kind": "mugen_source_package",
+      "variant": "main",
+      "candidate": "ken-raw-source-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "ryu",
+      "kind": "mugen_source_package",
+      "variant": "main",
+      "candidate": "ryu-raw-source-v01",
+      "approved": null
+    }
+  ],
+  "legacy_inventory": []
+}

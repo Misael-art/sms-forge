@@ -1,0 +1,27 @@
+{
+  "artifact_kind": "quality_review_request",
+  "stage": "vertical_slice",
+  "execution_mode": "isolated_native_subagents",
+  "producer": "/root",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01",
+  "rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/rom.sms",
+    "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c"
+  },
+  "requested_tasks": [
+    "87972ef09456420e86ec3865a293d0fb"
+  ],
+  "domains": [
+    "hardware"
+  ],
+  "artifacts": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/rom.sms",
+      "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/run_e5eed07c9298431e97bdbdc93eea955e/report.json",
+      "sha256": "9831cd2ce09a92bf64f3e1fbf3bac4f5276a8410121eea623f002b4b874b82b9"
+    }
+  ]
+}

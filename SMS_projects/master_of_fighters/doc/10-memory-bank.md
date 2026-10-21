@@ -5,15 +5,99 @@
 > não substitui este arquivo.
 
 ## Última atualização
-A folha 15 `Ghibli-Cel-Simulation` foi composta em 2400×1440 após quatro gerações preservadas. A v4 tem contorno limpo e cel-shading de dois tons, rosto adulto e traje sem colete; leve variação no corte do casaco e ausência do efeito violeta na pose final ficam pendentes de revisão. Checklist estrutural/hash válido, com 13 eixos, review independente e aprovação do dono pendentes. Total atual: 1 referência aprovada, 10 candidatas pendentes, 3 bloqueadas, 35 estilos não iniciados. A prancha vertical final ainda não foi produzida.
+2026-10-12 — Diretriz v08.2 executada como candidata determinística. A reclassificação autorizada atravessou fronteiras de materiais/contorno, preservando alpha e grade; o casaco foi limitado aos índices 5/6. Uma auditoria independente por célula encontrou zero singletons e zero componentes sem bloco sólido 2×2 em cabelo, casaco e pele. Permanecem 11 cores úteis, zero vazamentos semânticos, 85 pixels de óculos dourados, haste branca de 1.245 pixels e zero pixels não cinza na máscara do cabelo em 61/61 poses. Foram adicionados 863 pixels ao contorno por voto de vizinhança, sem modificar nenhum pixel do contorno original. A candidata ainda aguarda revisão visual do dono; não foi promovida, integrada em `res/` nem compilada em ROM. Amostras, relatório, máscaras e log estão em `data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/`; contrato, diretriz e registro de curadoria estão em `doc/dr_social_sprite_mask_contract_v08_2.json`, `doc/dr_social_sprite_rebuild_directive_v08_2.md` e `doc/curation_candidates/2026-10-12_dr_social_v08_2_cluster_consolidation.json`. A matriz v07 permanece congelada como geometria; model sheet CPS2-Alpha-Cel v4 continua a referência aprovada de identidade.
 
-A sequência avançou até o estilo 14. `Gothic-Ayami-Art` (#11) e `Detailed-Military-Caricature` (#12) ficaram bloqueados após quatro gerações cada: não alcançaram distinção estilística consistente, apesar dos prompts/revisões preservados. `Fairytale-Storybook-2D` (#13) também foi bloqueado após quatro gerações; o resultado permaneceu manga digital com textura aquarelada e desvios no traje/equipamento. `Gouache-Fantasy-Art` (#14) está registrada como candidata pendente: quatro artes-fonte e prompts preservados; v4 composta em 2400×1440, com pincelada de guache legível, mas construção de casaco/lapela ainda difere da referência aprovada. Checklist estrutural/hash válido; 13 eixos artísticos, revisão independente e aprovação do dono pendentes. Contagens do manifesto: 1 referência aprovada, 9 candidatas pendentes, 3 bloqueadas, 36 não iniciadas (49 total). A prancha visual final com folhas individuais ainda não foi produzida.
+2026-10-12 — Diretriz v08.1 e candidata de cor: o dono autorizou os óculos de latão na zona amarela e confirmou a preservação de 85 pixels faciais. O passe determinístico classificou os 36 resíduos da auditoria v08, zerou vazamentos branco/amarelo/bordô/cinza e deixou 1.245 pixels da haste da bengala brancos e uniformes; alpha, grade 8×9, 61 poses e paleta indexada foram preservados. A inspeção também localizou e corrigiu a sombra avermelhada da franja: 1.014 pixels avermelhados foram recuperados como cabelo cinza e há zero pixels não cinza dentro das máscaras de cabelo em 61/61 poses. A limpeza 2×2 ainda falha: restam 73 singletons de cabelo, 96 do casaco e 341 da pele (102/139/553 componentes abaixo de 2×2). A candidata não foi promovida, integrada em `res/` nem compilada em ROM. Arquivos: `doc/dr_social_sprite_mask_contract_v08_1.json`, `doc/dr_social_sprite_rebuild_directive_v08_1.md` e `doc/curation_candidates/2026-10-12_dr_social_v08_1_cluster_consolidation.json`; amostras e relatório estão em `data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/`. A matriz v07 segue congelada como geometria; model sheet CPS2-Alpha-Cel v4 segue como única referência de identidade.
+
+2026-10-12 — Registro-base v08: o dono rejeitou artisticamente a sprite sheet v07 de 61 poses, SHA-256 `f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8`: o casaco perdeu hierarquia, o cabelo varia entre cinza e avermelhado/castanho e o cel shading ficou granulado. A diretriz v08 congelou paleta indexada, papéis de material, cabelo exclusivamente cinza e planos contíguos; o dono autorizou máscaras explícitas por material e clustering determinístico apenas dentro delas, com ImageGen/difusão proibidos. A tentativa generativa anterior falhou (1182×1330, fundo opaco, 287.407 valores RGBA) e está arquivada em `doc/curation_candidates/2026-10-12_dr_social_v08_imagegen_trial_rejection.json`. Contrato base: `doc/dr_social_sprite_mask_contract_v08.json`.
+
+2026-10-11 — O proprietário aprovou a model sheet CPS2-Alpha-Cel v4 do Dr. Social depois de a revisão independente passar sem blockers. A candidata foi promovida no índice central como head `approved` do papel `model_sheet/main`; v2 foi marcada `superseded` e arquivada, enquanto a concept sheet v3 continua aprovada apenas como referência separada de identidade. A raiz `data/source_art/concept_art/dr_social/` contém agora somente a folha v4, metadata, lineage e prompt canonizados. A cópia exata usada na revisão independente permanece em `review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/` como evidência; nenhuma imagem foi apagada ou teve pixels alterados. O mapa de relocação e hashes está em `doc/curation/dr_social_model_sheet_v4_promotion_organization_2026-10-11.json`. L127/§117 registra o fluxo de delta explícito, invariantes, dupla checagem, decisão com escopo e arquivamento. A aprovação cobre somente model sheet: sprite, moveset, animação, conversão SMS, integração e ROM seguem separados.
+
+### Registro da organização inicial (2026-10-11)
+
+Na organização inicial, ficaram como referências estritamente aprovadas as concept sheets já marcadas como owner-approved nas linhagens do elenco (Alis v4, Golden Axe Warrior v2 com paleta SMS, Hayato v2, Dr. Social v3, J.J. v4 e Landau v1), o model sheet CPS2-Alpha-Cel v2 do Dr. Social e a prancha de harmonização Waku Waku 7 em duas páginas (Landau 80 U, J.J. 75 U e pistola Zillion corrigida). As decisões do dono e hashes estão em `doc/decisions/`; o índice é `../../doc/artifact_registries/master_of_fighters.json` (catálogo central). A aprovação da prancha é apenas para comparação visual do elenco; revisão artística independente permanece pendente e nenhuma sprite sheet, animação, conversão SMS, integração ou ROM foi aprovada por esse registro. Rascunhos e estudos de concept/model foram movidos para subpastas `review_drafts/`; o model sheet CPS2 v1 permanece em `historical_approved/` como baseline anterior aprovada. O mapa reversível de movimentações está em `doc/curation/artifact_organization_2026-10-11.json`.
+
+2026-10-10 — O dono aprovou a direção do moveset do Dr. Social e autorizou a produção sequencial das folhas de golpes. O contrato v2 contém 20 estados comuns e 8 sequências ativas de combate; `audit_animation_contract.py` reportou 29 sequências/224 poses-fonte propostas, mantendo objetos VDP e custos de hardware separados. O primeiro jab continua em arte candidata. A v4, arquivada em `data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/`, deixou os óculos redondos legíveis e mantém seis poses organizadas em 3×2, mas o preflight mediu 1536×1024 RGB e 83.402 cores; o fundo visualmente preto não é chave uniforme. O checklist hash-bound bloqueou promoção com 3 eixos em fail e 7 pendentes. A tentativa v5 com `transparent_background: true` também falhou: 219.818 valores RGBA, alpha 0–254 e halo luminoso; foi arquivada apenas como evidência em `review_drafts/2026-10-10_social_light_jab_v5_alpha_attempt/`. Nenhuma versão foi aprovada, quantizada, colocada em `res/` ou compilada em ROM. Aprovação do dono e revisão independente seguem pendentes. Lições locais estão em `doc/curation_candidates/2026-10-10_dr_social_sprite_sheet_generation_gate.json`; o agente canônico não foi alterado.
+
+2026-10-10 — Foi registrada a estrutura canônica de sequência animada com L113/§109. O contrato inicial do Dr. Social lista 20 estados comuns e 4 ciclos de combate candidatos: 24 sequências e 191 poses-fonte propostas. `audit_animation_contract.py --self-check` e a validação do contrato passaram. Ainda não há PNGs de animação promovidos: moveset/frame-data, aprovação humana, decomposição metasprite, mapa P1, orçamento de runtime e validação em emulador continuam pendentes. A pesquisa de armas do jogo original tem conflito entre fontes comunitárias e fica aberta até confronto com manual/ROM. A primeira tentativa visual de atlas básico (9 sequências/61 poses) ficou em `data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_basic_sequences_atlas_v1/`; duas revisões não removeram halos azul/ciano nem alpha/paleta fora do contrato, portanto aquele rascunho gerado não entrou na linhagem canônica nem em `res/`. A rejeição não se aplica à imagem diferente anexada depois pelo dono, agora registrada por SHA como fonte aprovada para conversão.
+
+O fluxo consolidado de criação, revisão, harmonia do elenco, prova técnica, conversão e promoção está em [`fluxo-criacao-curadoria-personagens.md`](fluxo-criacao-curadoria-personagens.md). A conversão v10 das 61 poses é histórica: ROM diagnóstica e comparação exata 61/61 permanecem evidência da antiga fonte v1. V10 não é a fonte visual atual nem foi promovida a `res/`. A v2 falhou no preflight, v6/v7 foram tentativas de reconstrução derivadas e v07 foi rejeitada artisticamente pelo dono em 2026-10-12. A diretiva ativa é v08; ainda não há nova sprite sheet. A síntese canônica transversal foi registrada como L123/§113 em `doc/curation/2026-10-10_l123_ciclo_arte_autoral_ate_rom.json`.
+
+### Síntese de refinamento do sprite — L124 (2026-10-10)
+
+A revisão v6–v10 confirmou que converter as cores para uma paleta legal não
+resolve a continuidade de luz nem o papel semântico de cada pixel. A v6 testou
+média de área dentro do tecido (6.145 pixels); v7 ordenou a rampa por luminância
+(15.690 mudanças), mas foi rejeitada e só teve três poses comparadas no
+framebuffer. V8 reorganizou 927 clusters e passou a comparação integral 61/61,
+mas a máscara limitada a pixels internos deixou vazamentos de borda. V9 ancorou
+amarelos a cabelo/face e à junção luva-haste (249 pixels), e a inspeção posterior
+encontrou 70 brancos isolados/pares. V10 removeu esses 70 sem alterar alpha,
+paleta ou geometria e passou comparação exata 61/61; clusters maiores, revisão
+independente e aprovação do dono continuam pendentes. A rotina reutilizável e
+seus limites estão em `doc/curation/2026-10-10_l124_fluxo_sombra_material_sprite.json`
+e SMS_GLOBAL §114.
+
+### Contrato de animação Dr. Social — proposta v1 (2026-10-10)
+
+Arquivos: `doc/dr_social_animation_contract_v1.md` e `.json`. A proposta
+documenta idle, avanço/recuo, pulo/aterrissagem, crouch, dash, queda, rolagem,
+guard, duas vitórias, derrota por tempo, empate, duas provocações, duas
+apresentações e três retratos versus, além de quatro candidatos (toque de
+bengala, lunge de rapieira, riposte, bumerangue). Cada track de objeto tem
+estados inicial/final e contagem de poses separada. Cada sequência revê os 12
+princípios e planeja aplicar pelo menos sete, ligados a IDs de quadro; essas
+pistas ainda não são evidência visual.
+
+O campo `source_pose_count` conta desenhos planejados, não objetos VDP. Os
+valores candidatos de startup/active/recovery, alcance e dano estão marcados
+`proposal_unmeasured`; não foram testados nem aprovados. Um guia de SMS relata
+Button 1 para ataque, Up+1 para subarma, Button 2 para pulo e armas de curto e
+longo alcance; há divergência entre fontes nos nomes das armas primárias. Não
+cristalizar nomes ou mecânicas antes de revisar o manual e a ROM original.
+
+### Histórico: fonte aprovada de animação v1 — 61 poses; janela VDP corrigida (2026-10-10)
+
+O dono havia designado `data/source_art/sprite_studies/dr_social/
+historical_approved/basic_sequences_61f_owner_source_v1/
+dr_social_basic_sequences_61f_owner_source_v1.png` como fonte aprovada para
+conversão de produção, SHA-256
+`a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057`.
+Essa aprovação permanece histórica; a folha foi arquivada em 2026-10-11 e
+deixou de ser referência visual ativa. Na época, ela continha 9 sequências com contagens
+`4+8+8+8+5+8+8+8+4 = 61`; a aprovação da fonte não promove automaticamente a
+quantização/conversão nem o runtime.
+
+A primeira conversão tratou os 256 índices lógicos como 256 padrões residentes
+seguros. Com sprites na base 0x2000, PNT em 0x3800 e tile base 257, o espaço
+real antes da name table é 191 padrões. Pools de 200/246 padrões sobrepuseram
+a name table e corromperam rótulos. `pack_sms_metasprite.py` agora deriva o
+limite físico pelas bases do layout; `--self-check` verifica a capacidade 191
+e reprova 192. No viewer v5, idle (169) e defesa (182) usam pool compartilhado;
+os outros sete estados carregam um quadro por vez. A ROM diagnóstica usa a
+fonte aprovada, contém 61 PNGs 80×80, mede pico de 8 sprites/scanline e 51
+entradas SAT, e foi vista no Emulicious com as nove sequências e endpoints
+CR05/GU04. Build: 114.688 bytes; SHA e captura estão nos registros vinculados.
+
+Esses resultados provam navegação e renderização dos quadros no viewer; não
+provam gameplay, animação contínua, FPS, áudio, VBlank de produção, cenário/HUD,
+paleta P1 global ou hardware físico. O atlas convertido fica em
+`out/diagnostics/`, não em `res/`; conversão pixel-a-pixel e aprovação técnica
+permanecem pendentes.
+
+Prova técnica v4: `data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.png` e JSON homônimo. Canvas 80×80, nearest-neighbor 5/6; pose idle frame-fonte 01 e ação frame-fonte 06. Contagem: 42 padrões únicos idle, 47 ação, união de 89 (2.848 bytes 4bpp). A ponta arredondada foi conferida visualmente na amostra e requer novo aceite do dono/revisor; a forma correta da bengala, altura anatômica sem equipamento, regiões de material, anatomia e orçamento de runtime continuam gates. `audit_asset_proof_sheet.py` confere a reprodução de pixels e exige eixos explícitos para geometria do terminal e altura do corpo separada de equipamento, mas não decide identidade visual sozinho. `doc/palette_runtime_contract_v1.json` define propriedade das tabelas CRAM; a seleção final da paleta P1 continua sem mapeamento. Nada foi integrado em `res/`, ROM ou emulador.
+
+Folha #14 `Gouache-Fantasy-Art` v3 corrige a pose de ação: braço do boomerang dobrado junto ao quadril, cotovelo e pegada legíveis, espaço negativo separando-o do braço da rapieira. Quatro vistas, identidade, paleta e folha padrão foram preservadas. A ficha traz índice #14, Shinichi Kameoka, papel de designer de personagens e assinatura visual. Casaco/lapela ainda diferem da referência aprovada; 17 eixos, revisão independente e aprovação do dono continuam pendentes. Arte-fonte v7, prompt, composição v3, metadata, lineage, checklist, pedido de revisão e relatório estão registrados.
+
+As folhas atuais #01–#05, #07–#10, #14 e #15 exibem índice estável e referência de estilo; #03 (Eisuke Ogura) e #05 (Toshiaki Mori/Shinkiro) explicitam assinaturas diferentes, e #08 declara crédito individual não confirmado. Uma revisão de composição com coordenadas antigas foi reprovada visualmente e isolada em `data/source_art/concept_art/dr_social/review_drafts/2026-10-08_bad_metadata_recomposition/`; nenhuma dessas imagens foi promovida. Estado do manifesto: 1 referência aprovada, 10 candidatas pendentes, 3 bloqueadas, 35 não iniciadas (49 estilos). A anotação de estilo #13 no histórico deste arquivo diverge do status atual `not_started` do manifesto; exige reconciliação de evidência antes de alterar o status.
+
+A sequência avançou até o estilo 14. `Gothic-Ayami-Art` (#11) e `Detailed-Military-Caricature` (#12) ficaram bloqueados após quatro gerações cada: não alcançaram distinção estilística consistente, apesar dos prompts/revisões preservados. `Fairytale-Storybook-2D` (#13) tem uma nota histórica de bloqueio após quatro gerações, mas o manifesto ativo marca `not_started` e o source atual contém somente um prompt; status exige reconciliação do material antes de classificar ou gerar novamente. `Gouache-Fantasy-Art` (#14) permanece candidata: após seis tentativas, v7 reposiciona o braço que lança o boomerang baixo junto ao quadril, com cotovelo/pegada legíveis e separação visível do braço da rapieira; a v3 composta em 2400×1440 registra Kameoka/assinatura visual. A variação de casaco/lapela ainda aguarda decisão do dono. Checklist v3/hash-bound tem 17 eixos pendentes, revisão independente e aprovação do dono. Contagens do manifesto: 1 referência aprovada, 9 candidatas pendentes, 3 bloqueadas, 36 não iniciadas (49 total). A prancha visual final com folhas individuais ainda não foi produzida.
 
 A folha 10 `Digicel-Handdrawn` foi registrada em 2026-10-08 como candidata após três tentativas preservadas. V1–V2 foram descartadas por acabamento brilhante/fighter e efeito violeta; v3 apresenta contorno orgânico mais leve e planos cel amplos. Face, identidade, traje e armas permanecem pendentes de review; não é arte pixel/SMS. Arte, prompts, metadata, checklist, pedido/plano e lineage ligados ao manifesto; owner e revisão independente pendentes.
 A folha 09 `Extreme-SD-Parody` foi registrada em 2026-10-08 como candidata a partir da segunda tentativa. A primeira repetia o acabamento sério e inseriu efeito violeta grande; a segunda usa contorno arredondado, expressão brincalhona adulta e gesto elástico, sem encurtar o biotipo. Vestuário contém detalhes dourados extras para revisão. Arte-fonte, prompts, metadata, checklist, pedido/plano e lineage hash-bound; owner e independent review pendentes.
 A folha 08 `32Bit-Mecha-Chibi` foi registrada como candidata após quatro gerações preservadas; v1–v3 tinham uma lâmina solta, e v4 separa visualmente a bengala das vistas ortográficas e rapieira/bumerangue da pose final. O acabamento de cel de animação é mais simples; figurino ainda contém colete/botões divergentes. Cinco vistas, composição 2400×1440 e registro hash-bound; eixos, revisão independente e dono pendentes.
 A folha 07 `HiDrive-Anime-Vector` foi composta como candidata a partir da quarta geração: cinco vistas e tratamento de contornos/sombras geométricas, com uniform scale 0.78 para manter separação das legendas. As três primeiras tentativas foram preservadas e descartadas por semelhança com o acabamento anterior. Cabelo, óculos, casaco azul/ciano, rapieira, bengala e bumerangue estão visíveis; detalhes de figurino e distinção estilística precisam review. Checklist, request/plan e lineage hash-bound permanecem pendentes.
-A sequência 06 `Classic-Arcade-Heroic` permanece bloqueada: quatro imagens foram geradas e preservadas (inicial + três revisões), mas todas repetem acabamento de mangá polido e não atingem a distinção visual clássica plana exigida. Nenhuma foi registrada como folha candidata. Prompts, hashes e causa estão em `data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_blocked_record_v1.json`; revisitar após avançar estilos independentes.
+A sequência 06 `Classic-Arcade-Heroic` permanece bloqueada: quatro imagens foram geradas e preservadas (inicial + três revisões), mas todas repetem acabamento de mangá polido e não atingem a distinção visual clássica plana exigida. Nenhuma foi registrada como folha candidata. Prompts, hashes e causa estão em `data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_blocked_record_v1.json`; revisitar após avançar estilos independentes.
 2026-10-08 — folha 05 `Urban-Seinen-KOF` gerada em três tentativas preservadas; as duas primeiras foram descartadas por cabelo, traje e arma divergentes. A terceira foi composta em 2400×1440, com cinco vistas, close, pose, régua 7.5H, fichas, fundo creme e selo CANDIDATE. Cabelo grisalho, óculos, casaco longo azul/ciano, bengala, rapieira e bumerangue de aço estão visíveis; o figurino ainda difere parcialmente da referência aprovada. Todas as 13 axes artísticas, revisão independente e aprovação do dono permanecem pendentes. A folha é concept candidate; não é sprite art nem asset SMS. Arte-fonte, prompt, metadata, checklist, pedido/plano de review e lineage vinculados em `dr_social_style_series_manifest_v1.json`. Restam 44 estilos sem folha registrada.
 
 2026-10-07 — primeira folha de model sheet do Dr. Social foi aprovada pelo dono
@@ -50,11 +134,11 @@ O complemento do dono esclarece o padrão: contornos contínuos em degraus de
 pixel, clusters e cel shading definidos, sem blur, antialiasing ou dithering;
 a mão de Hayato também exige verificação de um dedo pouco legível.
 O feedback textual hash-bound está em
-`data/source_art/roster_harmony_review/harmony_sprites_owner_feedback_20261005.json`;
+`data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_owner_feedback_20261005.json`;
 a checklist por personagem está em
 `doc/roster_harmony_refinement_review_v1.json` e ainda bloqueia promoção.
 O feedback não anexou a imagem pós-tratamento. A prancha atual
-`data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v2.png`
+`data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v2.png`
 compara os sete candidatos hash-bound no frame 00, ampliados 3× nearest-neighbor,
 sem reescala individual e com baseline comum. A v1, com 3000 px, era reduzida
 fracionariamente no visualizador; a v2 tem 2048 px para preservar degraus de
@@ -74,7 +158,7 @@ As auditorias de recurso dos sete candidatos passam agora com os IDs canônicos
 de paleta. Alis, Landau e J.J. tinham PNGs indexados em 4 bits; cópias v1 em
 8 bits foram feitas com `prepare_sms_pixel_art.py`, compararam `AE=0` com as
 fontes e preservaram os originais. Lineage em
-`data/source_art/roster_harmony_review/harmony_sprite_index8_reencodes_v1.json`.
+`data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprite_index8_reencodes_v1.json`.
 
 2026-10-04 — o dono identificou falhas anatômicas e de encaixe de armas nos
 sete personagens da prancha: olhos/rosto, mãos e polegares, empunhaduras, guarda
@@ -205,8 +289,9 @@ hierarquia verificados pelo próprio script).
   `/mnt/sdcard/SGDKForge/.../res/mugen/ryu/sheets/g0.png` (288×104, 15 cores
   úteis + fundo = 1 sub-paleta; contorno 1 px; 3 tons/material). Contratos no
   GDD §Direção de arte: ≤15 cores/sub-paleta, contorno 1 px, 3 tons por
-  material, idle 72–88 px (refit dos ~104 px da referência), biotipo por
-  classe de peso (proposta pendente de confirmação do dono). Referência é
+  material, idle 72–88 px (refit dos ~104 px da referência, orientação histórica
+  do scale_pilot; supersedida em 2026-10-09 pela faixa de corpo 66–72 px derivada
+  de Fatal Fury Special Game Gear), biotipo por classe de peso. Referência é
   `inspiration_only` — risco de clone delimitado por política de prompt
   (descritores neutros, sem "in the style of") e proveniência de asset.
 - **Blocker dominante atualizado**: direção de arte agora declarada → o
@@ -292,7 +377,7 @@ hierarquia verificados pelo próprio script).
 - **Concept art Dr. Social (2026-10-03)**: após duas tentativas nativas
   anteriores com 403/billing, o retry do prompt corrigido v2 gerou uma folha
   horizontal 1536×1024 pelo ImageGen nativo. Está em
-  `data/source_art/concept_art/dr_social/dr_social_concept_sheet_v1.png`, com
+  `data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v1.png`, com
   prompt e SHA em `dr_social_concept_prompt_v1.txt` e
   `asset_lineage_record.json`; estado `source_candidate`. Inspeção visual:
   duas poses de corpo inteiro, traços humanos, bengala/óculos/sobrecasaco/
@@ -303,7 +388,7 @@ hierarquia verificados pelo próprio script).
 - **Concept art Dr. Social — revisão 2 (2026-10-03)**: variante editada da
   folha anterior, com aparência um pouco mais jovem (~início dos 30) e
   expressão/postura voltadas a virtude, coragem e busca da justiça. Arquivo:
-  `data/source_art/concept_art/dr_social/dr_social_concept_sheet_v2.png`;
+  `data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png`;
   prompt e lineage v2 no mesmo diretório. Mantém duas poses completas, armas e
   identidade humana. Continua `source_candidate`; revisão cega, medição formal
   e aprovação do dono seguem pendentes.
@@ -383,7 +468,7 @@ hierarquia verificados pelo próprio script).
   Nenhum pixel externo foi usado. A classe pesada permanece proposta no GDD;
   escala/geometry de runtime, scanline, integração em ROM e validação no
   emulador não foram feitos. Prompt, proveniência, fontes e hashes estão em
-  `data/source_art/concept_art/lord_of_the_sword/asset_lineage_record_v1.json`.
+  `data/source_art/concept_art/lord_of_the_sword/approved_records/asset_lineage_record_v1.json`.
 
 - **Estudo de sprite Landau — idle (2026-10-03)**: folha aprovada visualmente
   pelo dono em 2026-10-03 como referência provisória; v3 em
@@ -491,7 +576,7 @@ hierarquia verificados pelo próprio script).
   confirmou a harmonia das concepts e definiu Hayato como referência de
   acabamento; sprites continuam exigindo correção/revisão própria. Nada foi
   movido para `res/` ou vinculado a ROM. A prancha
-  `data/source_art/roster_harmony_review/harmony_sprites_frame00_candidate_v1.png`
+  `data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_candidate_v1.png`
   mostra cinco propostas frame 00 ao lado das referências Hayato/Joe; todas as
   relações dimensionais declaradas passam, mas o dono rejeitou a estética. Joe é
   referência de morfologia esguia, porém seu recorte apresenta halo/sujeira e
@@ -538,9 +623,9 @@ que originou luta_mugen.
   acabamento; Joe ancora apenas biotipo e massa dos membros. A ferramenta não
   julga pixels de anatomia, recorte ou paleta, mas agora distingue revisão visual
   pendente de reprovação humana registrada. O relatório v1 segue histórico; a
-  avaliação atual está em `data/source_art/roster_harmony_review/harmony_candidate_frame00_audit_v2.json`,
+  avaliação atual está em `data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v2.json`,
   status `owner_visual_revision_required`, e o board em
-  `data/source_art/roster_harmony_review/harmony_sprites_frame00_review_v2.png`.
+  `data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_review_v2.png`.
   Não é aprovação de folha.
 - Candidato para curadoria futura: quando preto é índice transparente 0, usar
   para o contorno opaco um tom profundo não preto declarado na paleta e revisar
@@ -564,3 +649,372 @@ que originou luta_mugen.
    `audit_provenance.py` exige proveniência declarada por símbolo).
 4. Primeiro ciclo honesto de `./build.sh` e registro do status real dos 7
    eixos (provavelmente falho se a toolchain não estiver no PATH).
+
+
+## Fluxo oficial de arte autoral
+
+Desde 2026-10-08, pedidos de arte autoral seguem o workflow compartilhado
+`tools/sms_wrapper/.agent/workflows/original-artwork.md`: consultar o catálogo
+central `doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json`, trabalhar
+por ciclos incrementais e usar o concept/model sheet aprovado com cinco vistas,
+régua relativa, fundo neutro e fichas de estilo. Guardar prompt, fonte gerada,
+composição, metadados, lineage e validação sob `data/source_art/`; não tratar
+concept como arte integrada em `res/`. O catálogo contém 49 referências, mas
+seus estilos são individualmente não validados até revisão própria. Evitar
+geração simultânea dos 48 candidatos por custo e baixa viabilidade de revisão.
+
+### Prancha conceitual consolidada do elenco — avaliação pendente (2026-10-08)
+
+Foram compostas duas pranchas comparativas a partir das sete referências
+confirmadas no contrato atual, distribuídas em grupos de quatro e três. Os
+personagens aparecem lado a lado, com fundo neutro, baseline compartilhada e
+régua relativa; as imagens de origem foram preservadas sem redesenho, alteração
+de cor ou deformação não uniforme. Arquivos e hashes das fontes/saídas estão em
+`data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concept_lineup_v2_manifest.json`;
+as imagens são `harmony_concept_lineup_v2_part_01.png` e
+`harmony_concept_lineup_v2_part_02.png` no mesmo diretório. Estado:
+`candidate_pending_owner_visual_review`; a composição foi inspecionada, mas não
+há aprovação humana inferida.
+
+A régua usa U derivados dos alvos de altura de trabalho do contrato, em escala
+de apresentação 8 px/U, e dimensiona a caixa visível inteira da pose escolhida.
+Ela inclui cabelo/capacete e equipamento que se estende além do corpo; portanto,
+é uma comparação de ocupação visual da referência, não uma medida anatômica
+ortográfica ou altura canônica. Joe Musashi usa a referência aprovada em pixel
+art do Master System, de meio visual diferente dos conceitos ilustrados. Black
+Belt e a Bruxa de Psychic World não foram incluídos porque ainda não há conceito
+aprovado registrado para eles. Os eixos de coesão artística, morfologia, escala
+e legibilidade de identidade permanecem para avaliação do dono.
+
+### Harmonização Waku Waku 7 — revisão de escala e pistola Zillion (2026-10-08)
+
+Foi criada uma nova candidata do elenco com acabamento unificado inspirado em
+Waku Waku 7. As duas folhas e a procedência estão em
+`data/source_art/roster_harmony_review/waku_waku_7/`: `harmony_waku_waku_7_lineup_v1_part_01.png`,
+`harmony_waku_waku_7_lineup_v1_part_02.png`, manifesto JSON, prompts, fontes
+geradas e referência da pistola anexada pelo dono. A composição usa grupos de
+quatro e três personagens, baseline e régua comuns.
+
+Alvos de altura da cabeça à sola, com 1 U = 8 px na prancha: Guerreiro de Golden
+Axe 74 U; Hayato e J.J. 75 U; Alis 75 U; Joe Musashi, Dr. Social e Landau 80 U.
+Assim, Landau iguala Dr. Social/Joe Musashi e J.J. iguala Hayato. A escala é
+uniforme por personagem, sem deformação não uniforme. A arma de J.J. segue a
+referência fornecida: perfil horizontal alongado, azul-marinho com inserções
+ciano. A segmentação final separa as silhuetas conectadas para evitar que
+equipamento/contorno de Dr. Social invada a coluna de Joe.
+
+Estado: `candidate_pending_owner_visual_review`. A composição e hashes foram
+conferidos; continuam pendentes a avaliação humana de coesão estilística,
+fidelidade dos detalhes, anatomia e encaixe das mãos/equipamentos. Isto não
+aprova sprite, animação, paleta SMS ou ROM.
+
+### Prova técnica de conversão de asset SMS — piloto v1 (2026-10-09)
+
+Foi criado um padrão de contrato visual/inventário de tiles em
+doc/asset_conversion_proof_standard_v1.md, com modelo copiável em
+doc/asset_conversion_contract_template_v1.json e compositor determinístico em
+tools/compose_sms_asset_conversion_proof.py. O fluxo do projeto também aponta
+para esse padrão em doc/00-diretrizes-agente.md. Este contrato cobre proveniência,
+resolução, escala de trabalho, paleta indexada, recorte e contagem exata de
+padrões 8×8; não substitui o contrato de runtime, VRAM/RAM, metasprite,
+banking, ROM binding ou validação no emulador.
+
+O piloto usa a folha Dr. Social
+data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png
+e a referência de escala/identidade CPS2-Alpha-Cel #01. A prancha e seu relatório
+estão em
+data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_conversion_proof_v1.png
+e .json. SHA-256 da prancha:
+011e9b49e34befcd37d8d3323845916667773e9e4fef1f25dc3673cff7e08671.
+
+Medições: 12 quadros de 96×96 px; cada quadro tem 144 posições 8×8. O quadro
+09/12 tem bbox opaca 65×82 px (inclui equipamento), 62 células ocupadas, 62
+padrões únicos e 1.984 bytes brutos de padrões 4bpp. A folha soma 706 colocações
+ocupadas, 690 padrões únicos exatos e 22.080 bytes brutos se todos forem
+representados em 4bpp. O PNG indexado usa 12 cores úteis, índice 0 transparente
+e RGB na grade de 6 bits. O fundo de inspeção é verde puro #00FF00, ausente da
+paleta do asset. audit_validate_resources.py passou para a folha-fonte.
+
+O board v1 foi **rejeitado** pelo dono em 2026-10-09: a grade 8×8 foi
+composicionada sobre o sprite ampliado e alterou a imagem que deveria provar.
+A fonte permaneceu intacta; a prancha não é válida para julgar pixels. Artefato
+e relatório foram preservados com status `rejected_invalid_proof_overlay`.
+
+### Prova técnica de asset SMS — duas poses v2 (2026-10-09)
+
+O padrão atual está em `doc/asset_conversion_proof_standard_v2.md`, com template
+`doc/asset_conversion_contract_template_v2.json`. A prancha v2 contém somente
+dois estudos separados: idle (frame-fonte 01) e ação (frame-fonte 07). A grade
+8×8 foi movida para mapas independentes. `audit_asset_proof_sheet.py` compara os
+recortes ampliado e 1× pixel a pixel com PNGs indexados; `--self-check` aprovou
+uma fixture limpa e reprovou uma linha de overlay injetada.
+
+Prancha e relatório:
+`data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v2.png`
+e `.json`. Fonte pai SHA-256:
+`3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b`.
+Inventário: idle 54 padrões únicos; ação 57; união do par 111 padrões/3.552 B
+brutos 4bpp. São números da arte, não alocação residente. Paleta tem 12 cores
+úteis, índice 0 transparente, canais RGB 6-bit e fundo verde puro fora do
+asset. A auditoria mecânica de preview/paleta/tiles passou. O scan de
+componentes do `audit_sprite_cutout.py` encontrou zero ilhas abaixo de 2 px nas
+duas poses; o perfil está em `components_only`, então o comando retorna pending
+até que regiões de cor por material sejam declaradas e revisadas.
+
+Status continua candidato: revisão de anatomia, clusters, face, recorte e
+fidelidade pendente de revisor independente e dono. A pose de ação usa bengala
+do estudo de jogo e precisa ser reconciliada com rapier/boomerang do concept.
+O TDD ainda não fecha pools, residência, metasprite, SAT/scanline, banking,
+VBlank ou máximo de quadros por folha; hardware não define um máximo universal.
+Nada entrou em `res/`, tem vínculo ROM ou foi validado em emulador. L109 registra
+a regra canônica em `doc/curation/2026-10-09_l109_prova_pose_pixels_hardware_animacao.json`.
+
+### Prova de asset v3 e escala GG→SMS (2026-10-09)
+
+O dono rejeitou como amostra a v2: a arma tocava a borda do frame e 96×96
+estava grande para a direção de luta pretendida. A referência adotada é Fatal
+Fury Special no Game Gear, tela 160×144; a captura consultada mostra cerca de
+53 px para um lutador em pé. Projetando proporção para SMS 256×192 resulta em
+aprox. 71 px; GDD/TDD agora usam faixa visual 66–72, centro 70. Não é lei de
+hardware. Mantêm-se o vínculo Landau≈Dr. Social≈Shinobi e JJ≈Hayato.
+
+A proposta v3 está em
+`data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v3.png`
+e JSON homônimo. Duas poses 80×80 (10×10 tiles), nearest-neighbor uniforme
+5/6; fonte frame 01 idle e frame 08 ação. Bbox opaca: 37×67 e 68×70; células
+ocupadas 43/52, padrões únicos 42/52, união 94/3.008 B brutos 4bpp. A arma da
+ação permanece dentro do canvas; margens vazias L/T/R/B: 20/7/23/6 e 7/4/5/6.
+O auditor agora reconstitui a escala declarada e reprova pixels encostados na
+borda, preview divergente ou canvas que não seja múltiplo de 8. Self-check e
+auditoria mecânica passaram. Componentes por material, anatomia/concept,
+review independente, decisão do dono, metasprite/SAT/scanline e budget de
+runtime seguem pendentes; não houve promoção para `res/` ou ROM.
+
+### Prova estática de conversão em ROM diagnóstica (2026-10-10)
+
+O usuário pediu avanço no fluxo técnico de conversão ao Master System. A lição
+L121 foi registrada em `doc/curation/2026-10-10_l121_sms_asset_to_rom_conversion.json`,
+no ledger e em SMS_GLOBAL §111; a skill executável é
+`tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md`. A rota normaliza PNG
+indexado sem alterar pixels, valida contrato/proveniência/geometria, empacota
+poses como tiles 4bpp compartilhados, simula SAT/scanline, inicializa o mapa BG,
+constrói ROM diagnóstica, vincula asset→ROM por SHA e compara cada captura de
+framebuffer com a fonte indexada.
+
+Dr. Social v4: idle e ação, 80×80; 89 padrões 8×8 únicos + 1 padrão vazio = 90
+carregados/2.880 B brutos. Simulação: 43/49 objetos, pico 6/7 por scanline.
+ROM diagnóstica: 16.384 B, SHA-256
+`6ec05a9b4caae97b36833eddcffb5536d4e63b4a64f75cff681fd998720fcc14`. Duas
+sessões Emulicious privadas e isoladas mostraram, respectivamente, 1.483 e
+1.556 pixels opacos exatos e zero discrepâncias nos 4.917 e 4.844 pixels
+transparentes inspecionados. O binding SHA também passou. Relatório:
+`data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_conversion_verification_v3.json`;
+capturas e relatórios individuais ficam em
+`out/diagnostics/dr_social_asset_probe_v3/project/out/evidence/`.
+
+As tentativas anteriores foram mantidas para auditoria: v1 deixou o tilemap de
+fundo sem inicialização completa; v2 não capturou a mudança para ação no limite
+da sessão. A v3 corrigiu a tabela de nomes, reservou o padrão vazio e usou
+entrada aplicada por quadros VDP. O valor nominal de clock informado pelo
+emulador não é medição de FPS da ROM. Estas são duas poses estáticas; a prova
+não fecha paleta P1 do elenco, budgets de cena/RAM/VBlank/banking, animação,
+gameplay, áudio ou aprovação visual. O material continua em
+`out/diagnostics/`, fora de `res/`, e não é entrega de produção.
+
+### Fonte de animação aprovada e viewer ROM de 61 poses (2026-10-10)
+
+O dono corrigiu a seleção da fonte: a folha de prova técnica de duas poses é
+somente referência de conversão; a folha aprovada de 61 poses é a origem para
+as nove sequências básicas. Fonte e papel estão presos por SHA em
+`data/source_art/sprite_studies/dr_social/
+dr_social_basic_sequences_61f_owner_source_v1.json`; SHA-256 da PNG:
+`a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057`.
+`prepare_dr_social_61_pose_probe.py --self-check` confirma o caminho e SHA
+aprovados e rejeita a prova técnica de duas poses como fonte de animação.
+
+A revisão v5 converteu e incluiu idle (4), avanço (8), recuo (8), pulo (8),
+abaixar (5), dash (8), queda (8), rolagem/levantada (8) e defesa (4): 61/61.
+Os 61 PNGs passam gates de recurso, proveniência, geometria, SAT/scanline; o
+empacotador limitou padrões residentes a 191 antes da name table. O primeiro
+candidato com pool de 200/246 patterns atravessava esse limite e corrompia a
+name table. Na v5, idle (169) e defesa (182) compartilham pool; as outras sete
+sequências carregam uma pose por vez. Esse modo é para inspeção manual, não
+mede reprodução contínua nem upload dentro do VBlank de uma cena de jogo.
+
+ROM diagnóstica: `out/diagnostics/dr_social_61_pose_review_v5/project/out/rom/
+dr_social_61_pose_review_v5.sms`, 114.688 bytes, SHA-256
+`501161271e6cc51a7666520128375af04f6b8dde04cfa96071a410f09a78e6db`. O mapa
+asset→ROM lista os 61 PNGs e passou no auditor com `--require`. A sessão
+Emulicious privada `c9709fd01c0742eb8c0eaebaa01f79d6` percorreu cada ID e
+comparou exatamente o framebuffer com o PNG indexado: 61/61, zero divergências
+em 100.333 pixels opacos e 290.067 transparentes. Evidência completa e resumo:
+`out/diagnostics/dr_social_61_pose_review_v5/project/out/evidence/`; amostra
+visual de uma pose por sequência:
+`out/diagnostics/dr_social_61_pose_review_v5/
+dr_social_61_pose_emulicious_9_sequence_review_v5.png`.
+
+O resultado fecha conversão e exibição pixel a pixel nesta ROM de revisão. Não
+é gameplay nem promoção para `res/`: revisão artística humana, timing real das
+sete sequências em passo manual, FPS, áudio, paleta P1 compartilhada, VBlank,
+residência com cenário/HUD, banking de produção e ROM final continuam pendentes.
+O lineage técnico completo da fonte histórica está em
+`data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/dr_social_61_pose_source_lineage_v1.json`.
+
+### Revisão de continuidade da sombra azul — candidato v7 (2026-10-10)
+
+O dono observou que azul e ciano estavam dispersos pelo tecido e não formavam
+uma progressão de sombra coerente. A conversão v5 obedecia à paleta, mas a
+correspondência RGB por pixel não preservava os planos de luz depois da redução.
+O conversor v7 aplica amostragem média dentro do footprint do material azul já
+classificado e remapeia pela luminância para a rampa existente:
+`#005555` sombra → `#00AAAA` base → `#55AAFF` luz. A silhueta nearest-neighbor,
+alpha e cores fora dessa rampa ficaram intactos. A comparação v5→v7 mediu
+15.690 remapeamentos em 61/61 quadros, zero mudanças de alpha e zero mudanças
+fora dos três tons da roupa.
+
+ROM diagnóstica candidata: `out/diagnostics/dr_social_61_pose_review_v7/project/out/rom/dr_social_61_pose_review_v7.sms`,
+SHA-256 `b27c328d11c58ba96474b83368d8a0afcda79600b388d21cb510b812632f53c`.
+Build passou; ID01, ID02 e ID03 passaram comparação exata do framebuffer em
+Emulicious privado. Isso confirma render da ROM, não aprovação da arte. A folha
+4× e comparação estão em `out/diagnostics/dr_social_61_pose_review_v7/`; o
+checklist vinculado ao hash segue pendente de revisão artística independente
+e aprovação do dono. Os outros 58 quadros não foram conferidos individualmente
+no framebuffer nesta versão. P1 do elenco, timing contínuo, VBlank, produção e
+entrega continuam pendentes.
+
+### Rejeição da v7 e refinamento de cel shading — candidata v8 (2026-10-10)
+
+O dono rejeitou v7 porque ainda viu pixels azuis dispersos, sombras sem planos
+contíguos e acentos brancos/amarelos com risco de vazamento. A v7 permanece
+histórica e não aprovada. A v8 usa a linha inferior/v7 como base cromática,
+preserva os 61 IDs, a geometria, a alpha e a paleta, e reorganiza 927 pixels:
+438 pequenas ilhas dos três tons de tecido e 489 marcas navy interiores,
+substituídas pelo teal de sombra existente. Nenhum branco/amarelo foi alterado
+porque o detector conservador não encontrou singleton desses tons totalmente
+cercado por tecido; o eixo semântico continua pendente para revisão visual.
+
+ROM de revisão v8, SHA-256
+`e641d2a44a1da2ef4c8aa1b2d768bf54822df27f7e023036cf81d3f1dfc0e50d`, passou
+render exato nos 61 quadros em Emulicious privado (zero divergências), sessão
+`ff0b89a1501b4237aa738f299ad3ee70`. Checklist v8 tem 10 eixos pending, revisão
+independente ainda sem atribuição e aprovação do dono `false`. O novo eixo
+obrigatório `semantic_palette_role_confinement` pede que acentos permaneçam nas
+regiões do concept; o checklist mede cobertura, não estética. V8 segue
+candidata de diagnóstico em `out/diagnostics`, não entrou em `res/` nem prova
+gameplay, FPS, áudio, VBlank ou orçamento de produção.
+
+
+### Refinamento semântico de acentos — candidata v9 (2026-10-10)
+
+A revisão v8 revelou um furo: procurar somente pixels de acento totalmente
+cercados pelo tecido não detecta vazamentos na borda. A candidata v9 usa o
+cluster de cabelo para localizar rosto/óculos e a junção entre luva e haste
+para localizar o pomo da bengala; 249 pixels amarelos fora dessas regiões foram
+reclassificados usando cores vizinhas já existentes. Nenhum pixel branco, alpha
+ou cor nova foi alterado. V9 permanece preservada como histórico e foi supersedida pela v10 após a
+revisão encontrar brancos isolados. A aprovação artística continua pendente.
+
+Preview: `out/diagnostics/dr_social_61_pose_review_v9/
+dr_social_61_pose_converted_preview_4x.png`, SHA-256
+`99dd4a592ad223840a3d2b4cd64788239ccf0a48da6f7619c89b9537ddaf2f40`. ROM
+diagnóstica: 114.688 bytes, SHA-256
+`81c2e47f684b307de6d2bfa803dc7e56a6b22402f06d7ecc8d8250f2b059bfd2`. A sessão
+Emulicious `bfb478dfae0044d4a679db5df6bce018` comparou 61/61 framebuffers com
+zero divergências; índice
+`out/diagnostics/dr_social_61_pose_review_v9/project/out/evidence/
+dr_social_61_framebuffer_v9/framebuffer_capture_index_v9.json`. Isso confirma
+render exato nesta ROM de diagnóstico, não qualidade artística ou promoção.
+
+
+
+### Dupla checagem de branco — candidata v10 (2026-10-10)
+
+A inspeção ampliada da v9 encontrou 70 pixels brancos isolados/em pares em
+regiões fora de luvas e bengala. A v10 usa máscaras geométricas para segmentos lineares candidatos à haste,
+mantém clusters brancos maiores para review humano e reclassifica singles/pares
+fora da haste com o material local. O scan não encontrou singles/pares sem
+âncora; clusters maiores continuam sujeitos a review. Nenhuma cor nova, alpha
+ou geometria foi alterada.
+
+Preview v10: `out/diagnostics/dr_social_61_pose_review_v10/
+dr_social_61_pose_converted_preview_4x.png`. ROM diagnóstica: 114.688 bytes,
+SHA-256 `41879e38c8a83caec07bd97e9208ca08f00fe35ec1e927ff31feab4eb7a3c8cc`.
+Emulicious `5e5ba2973da44f6293ef27b79429b050` conferiu 61/61 poses sem
+divergências. Checklist v10 ainda tem dez eixos artísticos pendentes, revisão
+independente sem atribuição e aprovação do dono `false`.
+
+### Identidade de luta do Dr. Social — proposta v1 (2026-10-10)
+
+Foi criada `doc/dr_social_combat_design_proposal_v1.md`, ainda
+`proposal_pending_owner`. O perfil recomendado é duelista investigativo de
+médio alcance: normais leves de luva/bota, bengala como assinatura, rapieira
+linear e bumerangue em arco. A proposta limita a dois especiais conforme o
+GDD, incorpora o contragolpe de bengala no Super candidato “Laudo Final”, e
+descreve-o como contra-leitura. O GDD/TDD ainda não define
+medidor compartilhado de Super; a folha conceitual #14 também segue candidata.
+Não foram produzidas folhas de golpes nesta etapa; é necessária decisão do
+dono e atualização do contrato antes do primeiro sprite. Pesquisa confirmou
+que o jogo original é plataforma/ação e não fornece frame data de luta; a
+estrutura M.U.G.E.N foi usada apenas como organização de comandos, estados e
+animações. Foram consultados
+`SMS_projects/luta_mugen/rascunho/character/ryu.zip` e
+`SMS_projects/luta_mugen/rascunho/character/Ken_Majik_.zip`: os exemplos separam sequência de entrada,
+transição de estado, hit definition e quadros/caixas de colisão; Ken também
+mostra cancelamento explícito após `MoveContact` e exigência de `Power` para
+Super. Esses arquivos de terceiros são referência estrutural, não fonte de
+movimentos a copiar nem autoridade para controles do SMS.
+
+### Revisão da matriz CPS2 do Dr. Social — v3 supersedida (2026-10-11)
+
+A candidata v3 foi preservada em
+`data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/`.
+SHA-256 real da imagem:
+`7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e`.
+A revisão independente marcou `revise_before_growth`: o braço da bengala ainda
+podia parecer sair de trás do casaco; os efeitos violetas competiam com a
+silhueta do bumerangue; e a lista de arsenal de referência exigia uma fronteira
+mais explícita diante da divergência entre GDD e proposta de combate. A v3 foi
+supersedida pela v4 e não substitui a matriz aprovada v2.
+
+Durante a checagem da v4 foi detectado um hash antigo incorreto da imagem v3 no
+pedido de revisão. O valor real foi conferido diretamente no arquivo, corrigido
+nos pedidos e referências de linhagem, e os artefatos hash-bound foram
+revalidados. Essa falha reforça uma prática obrigatória: confirmar o digest dos
+arquivos reais, incluindo referências herdadas, antes de selar qualquer parecer.
+
+### Revisão da matriz CPS2 do Dr. Social — candidata v4 (2026-10-11)
+
+Atualização posterior no mesmo dia: este registro descreve o estado anterior à
+decisão do proprietário. A v4 foi aprovada e é agora a matriz ativa em
+`data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png`;
+a v2 está `superseded` e foi movida para `historical_approved/`. O parágrafo
+abaixo permanece como histórico da revisão pré-aprovação, não como estado atual.
+
+A candidata v4 está registrada em
+`data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/`.
+SHA-256 da imagem:
+`ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644`.
+Ela mantém rosto, cabelo, óculos, biotipo esguio, paleta, escala 7.5H e pose de
+perfil da v2; torna o vestuário legível como Londres no fim do século XIX; e
+separa a bengala romba da rapieira. Na pose de ação, a bengala fica à frente do
+torso com o braço ligado de ombro a mão; o braço lançador é independente, e o
+bumerangue aparece separado dos efeitos violetas. A folha mostra bengala,
+rapieira e bumerangue como equipamento do conceito; faca, martelo, machado,
+pistola, bomba e estaca aparecem como referências do jogo-fonte com termos em
+aberto, sem aprovação de moveset.
+
+A revisão independente concluiu `ready_for_owner_review`. O checklist v4 tem
+17 eixos aprovados, nenhum eixo reprovado e apenas a aprovação do dono pendente.
+A v2 segue como matriz aprovada ativa até decisão explícita do usuário. A
+checagem de registro dos artefatos passou sem problemas estruturais; alertas de
+histórico legado não são aprovação. GDD/TDD e moveset não foram alterados; a
+divergência dos nomes/itens do jogo-fonte ainda deve ser reconciliada antes de
+promover esses objetos a equipamento canônico do fan game.
+
+Fluxo aprendido nesta revisão: congelar a matriz aprovada; comparar candidato
+com imagem e documentos hash-bound; expor toda a cadeia anatômica do braço e a
+pegada do objeto; manter arma contundente visualmente distinta de lâmina; isolar
+silhueta do projétil dos efeitos; separar equipamento de identidade de
+referências do jogo-fonte; e repetir a checagem de hashes após qualquer ajuste de
+metadata/linhagem. A revisão aprova apenas a folha conceitual para avaliação do
+dono, não sprites, animação, conversão SMS, ROM ou qualidade final.

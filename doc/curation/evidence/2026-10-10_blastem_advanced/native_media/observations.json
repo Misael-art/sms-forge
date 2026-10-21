@@ -1,0 +1,206 @@
+{
+  "silent": {
+    "root": "/tmp/smsforge-blastem-native-media-plan/silent_runs/blastem-sms-0fddd13e11c54322b3f451ac24810425",
+    "session_id": "blastem-sms-0fddd13e11c54322b3f451ac24810425",
+    "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+    "wrapper_sha256": "5ee935582409ce0de02643634f950419543f6e94f1525c21411b27c322772b3b",
+    "diagnostics_sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+    "native_media": {
+      "apng": {
+        "frames": 120,
+        "size": [
+          256,
+          192
+        ],
+        "different_from_first": 119,
+        "container_duration_ms": 2000.0000000000002,
+        "clock": "nominal_60Hz_not_realtime_FPS",
+        "raw_preserved": true,
+        "derived_acTL_crc_repairs": 1
+      },
+      "wave": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_frames": 96256,
+        "duration_seconds": 2.005333333333333,
+        "peak": 0,
+        "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+      },
+      "vgm": {
+        "bytes": 88,
+        "scope": "PSG register log_not_audible_mix"
+      }
+    },
+    "raw_APNG_SHA": "95b5adeef5e427abdb5dc7e405eba005076a2abb0f0737d028882bf809bffd3a",
+    "derived_APNG_SHA": "c4362eacc39323050a109e9011fdea1f8824b934c850f808314cf105dbecb1a9",
+    "raw_CRC_mismatches": [
+      {
+        "tag": "acTL",
+        "stored_crc": 4266324102,
+        "expected_crc": 937974664,
+        "offset": 33,
+        "initial_zero_frames_crc": 4266324102
+      }
+    ],
+    "raw_derived_changed_byte_offsets": [
+      49,
+      50,
+      51,
+      52
+    ],
+    "APNG_frames": 120,
+    "frame_inspection": [
+      {
+        "frame": 0,
+        "colors": 2,
+        "bbox": [
+          32,
+          32,
+          136,
+          136
+        ],
+        "duration_ms": 16.666666666666668
+      },
+      {
+        "frame": 119,
+        "colors": 2,
+        "bbox": [
+          32,
+          32,
+          152,
+          136
+        ],
+        "duration_ms": 16.666666666666668
+      }
+    ],
+    "WAVE": {
+      "rate": 48000,
+      "channels": 2,
+      "width": 2,
+      "sample_frames": 96256,
+      "duration_seconds": 2.005333333333333,
+      "peak": 0,
+      "nonzero_samples": 0
+    },
+    "VGM": {
+      "magic": "Vgm ",
+      "bytes": 88,
+      "EOF_declared_plus4": 88,
+      "version": "0x150",
+      "PSG_clock_raw": 3579545,
+      "total_samples_declared": 1,
+      "data_offset": 64,
+      "data_first64": "70509f5080500050bf50a0500050df50c0500050ff50e066",
+      "last16": "bf50a0500050df50c0500050ff50e066"
+    },
+    "baseline_probe_hex": "534d4931017400000000000000000000000000000000000000000000000000000000",
+    "cleanup": {
+      "sandbox_exited": true,
+      "xvfb_exited": true
+    },
+    "sandbox_alive": false,
+    "xvfb_alive": false
+  },
+  "sound": {
+    "root": "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+    "session_id": "blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+    "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+    "wrapper_sha256": "5ee935582409ce0de02643634f950419543f6e94f1525c21411b27c322772b3b",
+    "diagnostics_sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+    "native_media": {
+      "apng": {
+        "frames": 240,
+        "size": [
+          256,
+          192
+        ],
+        "different_from_first": 239,
+        "container_duration_ms": 4000.0000000000005,
+        "clock": "nominal_60Hz_not_realtime_FPS",
+        "raw_preserved": true,
+        "derived_acTL_crc_repairs": 1
+      },
+      "wave": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_frames": 192512,
+        "duration_seconds": 4.010666666666666,
+        "peak": 4026,
+        "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+      },
+      "vgm": {
+        "bytes": 396,
+        "scope": "PSG register log_not_audible_mix"
+      }
+    },
+    "raw_APNG_SHA": "35b1a3ef09a31a560a39aa13cee74157948420b419193f341740952ba944a99d",
+    "derived_APNG_SHA": "a537e998618d8cdf90f1906b33bbddd5435a5daf629d966387ee269a97526be1",
+    "raw_CRC_mismatches": [
+      {
+        "tag": "acTL",
+        "stored_crc": 4266324102,
+        "expected_crc": 3061752027,
+        "offset": 33,
+        "initial_zero_frames_crc": 4266324102
+      }
+    ],
+    "raw_derived_changed_byte_offsets": [
+      49,
+      50,
+      51,
+      52
+    ],
+    "APNG_frames": 240,
+    "frame_inspection": [
+      {
+        "frame": 0,
+        "colors": 17,
+        "bbox": [
+          8,
+          16,
+          255,
+          192
+        ],
+        "duration_ms": 16.666666666666668
+      },
+      {
+        "frame": 239,
+        "colors": 17,
+        "bbox": [
+          8,
+          16,
+          255,
+          192
+        ],
+        "duration_ms": 16.666666666666668
+      }
+    ],
+    "WAVE": {
+      "rate": 48000,
+      "channels": 2,
+      "width": 2,
+      "sample_frames": 192512,
+      "duration_seconds": 4.010666666666666,
+      "peak": 4026,
+      "nonzero_samples": 318304
+    },
+    "VGM": {
+      "magic": "Vgm ",
+      "bytes": 396,
+      "EOF_declared_plus4": 396,
+      "version": "0x150",
+      "PSG_clock_raw": 3579545,
+      "total_samples_declared": 173695,
+      "data_offset": 64,
+      "data_first64": "509f5080500050b650a8501650d250c7503250fd50e061a91f50ac72505a7250b77350df61d80250d2619f3650df627050d4619e3650df7350f261dd0250d262",
+      "last16": "7350e37250f361da0250d2627050fd66"
+    },
+    "baseline_probe_hex": "00000000000000000000000000000000000000000000000000000000000000000000",
+    "cleanup": {
+      "sandbox_exited": true,
+      "xvfb_exited": true
+    },
+    "sandbox_alive": false,
+    "xvfb_alive": false
+  }
+}

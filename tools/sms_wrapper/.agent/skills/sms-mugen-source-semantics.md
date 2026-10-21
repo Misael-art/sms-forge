@@ -59,6 +59,18 @@ L132); rode `--self-check` antes de interpretar. Ver SMS_GLOBAL §123.
 
 ## States, actions e comportamento
 
+O AIR da especificação MUGEN 1.0 usa game ticks, nominalmente 60/s; não aplicar
+a unidade de outro motor, como uma interpretação de delay OpenBOR. PAL exige
+política temporal explícita e prova regional. Verifique exposição inicial,
+elementos de duração 1, holds/LoopStart e terminal; avançar a FSM antes de emitir
+pode pular a primeira imagem. Fonte primária: [AIR Elecbyte](https://www.elecbyte.com/mugendocs/air.html).
+
+CLSN sem Default é associado ao elemento; Default fornece a caixa persistente
+da ação. Não inferir carry-forward de caixas comuns por intenção presumida do
+autor. Testar caixa específica, Default, override e transição de ação conforme
+a versão fonte. Concordância de parsers e bytes no binário não é replay do
+executável MUGEN. Consulte também o [tutorial oficial de colisões](https://www.elecbyte.com/mugendocs-11b1/tutorial2.html).
+
 Resolva a ação realmente chamada pelo estado; não inferir KO/crouch/guard por
 número semelhante. Guarde hold `-1`, GUARDEND finito, fases de salto e
 transições CNS separadamente. `loop_start=0` imposto pelo corte é política

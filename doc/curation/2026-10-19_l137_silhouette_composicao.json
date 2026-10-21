@@ -1,0 +1,69 @@
+{
+  "curation_id": "2026-10-19_l137_silhouette_composicao",
+  "date": "2026-10-19",
+  "title": "L137: silhueta na composição — o orçamento de 8/linha é compartilhado e paleta/canvas/decode não provam personagem",
+  "kind": "curation",
+  "project": "SMS_projects/openbor_sms_rev1",
+  "scope": "Composição de dois atores no O3 com oito entradas de sprite por scanline. Mede a tabela emitida (1000 casos estáticos) e uma leitura viva de uma cena/input no cap5, além da comparação old/cap4/cap5. Não mede PAL, arte/AAA, oráculo full-frame ou a ROM pelo gate estático.",
+  "authorization": "O dono aprovou em 2026-10-19 o plano de correção da silhueta, a expectativa de QA por gate e a curadoria desta lição (pedido de fechar o defeito do a102 sem enfraquecer a política de 8/linha). Não há promoção de arte, delivery ou budget não medido.",
+  "relation": {
+    "applies": ["L129", "L128", "L098", "L099"],
+    "note": "L129 fixa ordem/limite da SAT; L098/L099 separam legalidade de SAT de integridade visual. L137 mede a consequência de composição no orçamento compartilhado e cria o gate. Nenhuma lição anterior é refutada."
+  },
+  "lessons": [
+    {
+      "id": "L137",
+      "status": "fechada_com_ferramenta",
+      "lesson": "Uma passada visual que confere paleta, canvas 256×192 e decode pode esconder cabeça/tronco ausentes quando o ataque do jogador ocupa as linhas 1–2. No O3 a102 cap8, o jogador pedia 7/8 células nas linhas 1–2 e o inimigo ficava em ec=[0,0,0,2,2,0]; só as pernas sobreviviam. O cap5 (5 células/linha, lado externo primeiro) devolve 3/3 ao inimigo e preserva um swoosh; o cap4 devolve 4/4 mas remove quase todo o arco. O gate estático de 1000 casos mede as linhas críticas dos dois atores; a composição viva exige leitura de ec/SAT e revisão do framebuffer no SHA da ROM.",
+      "evidence": {
+        "gate": "doc/artifacts/o3_silhouette_gate_20261019.json",
+        "gate_sha256": "bd0afced54e3a1b3db4dc17ead2fc9fa41e619d8bb666b880492097bf3c07ce8",
+        "report": "doc/artifacts/o3_silhouette_presentation_20261019.json",
+        "evidence_dir": "out/evidence/o3_silhouette_presentation_20261019",
+        "manifest_sha256": "a093aee84135155161932b79b8a586dd492b2c7aa2f7f04f3c411b9af0c7d362",
+        "roms": {
+          "old_defect": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+          "cap4": "56a09458d94d4933a79d6b32289d260fc54d0dff799c79c9b7a9ed3d133f887b",
+          "cap5": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9"
+        },
+        "live": {
+          "a102_walk03_ec": [0, 3, 3, 2, 2, 0],
+          "a102_pain01_ec": [2, 3, 3, 2, 2, 0],
+          "a103_pain02_ec": [0, 3, 2, 2, 3, 0],
+          "a103_pain02_critical_rows": [3, 2]
+        }
+      },
+      "tool_that_measures": "audit_silhouette_integrity.py --self-check (1000 casos; inimigo >=2 por linha 1–2 e >=5 total; jogador >=3 nas linhas 1–3; ataque <=5 nas linhas 1–2). A QA viva lê ec/SAT e revisa o framebuffer no SHA da ROM; capture_video.py registra o estado transitório e session_qa.py e audit_subagent_session.py exigem a sessão/ROM.",
+      "rule_section": "SMS_GLOBAL §129",
+      "applications": [
+        "O3 a102: cap8 7/8 -> 0/0 no inimigo; cap5 5/5 -> 3/3; cap4 4/4 sem arco; cap5 promovido como candidato.",
+        "a103/pain02 cap5: 3/2 no piso do gate; o cap4 mantém 4/2 na linha 1, mas também 2 na linha 2 — o cap5 troca 1 célula por arco e não piora a linha 2.",
+        "QA de qualquer pose de ataque: medir os dois atores, não só o atacante; o gate estático não substitui a leitura viva."
+      ],
+      "limits": [
+        "O gate é estático: não prova SAT/framebuffer nem arte.",
+        "A leitura viva cobre uma cena/um input; o ataque do inimigo contra idle/pain do jogador não está na matriz.",
+        "NTSC; PAL não medido.",
+        "Não há oráculo full-frame independente; audit_render_glitch segue bloqueado.",
+        "O cap5 não foi re-medido em MWF/MRP3/áudio; a correção de composição não promove os eixos do delivery."
+      ]
+    }
+  ],
+  "registry_and_process_notes": [
+    "ID novo L137; id_registry issued_through L136 -> L137.",
+    "SMS_GLOBAL §129 apendada; AGENTS.md recebeu a linha do gate.",
+    "Rota L137 -> subagent-emulator-qa.md, emulator-isolated-session.md e sms-sprites-metasprite.md com SHA.",
+    "O gate self-check prova cap8 zero/cap5 preserva e o parser C; a rodada no projeto cobre 1000 casos."
+  ],
+  "closure": {
+    "new_lesson_ids_emitted": true,
+    "ids": ["L137"],
+    "registry_updated": "issued_through L136 -> L137",
+    "sms_global_updated": "§129 apendada",
+    "skills_updated": [],
+    "lesson_routes": "L137 -> workflows/subagent-emulator-qa.md + workflows/emulator-isolated-session.md + skills/sms-sprites-metasprite.md",
+    "next_gate_to_run": "audit_learning_capture.py --root .",
+    "open_gap": "gate estático; QA viva precisa de ec/SAT no SHA; ataque do inimigo contra idle/pain fora da matriz; PAL/arte não julgadas"
+  },
+  "dedup_key": "l137_silhouette_composicao_20261019"
+}

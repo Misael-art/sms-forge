@@ -1,0 +1,51 @@
+{
+  "schema": "harness_plan_v1",
+  "tool": {
+    "name": "harness_orchestration",
+    "version": "1.1.0"
+  },
+  "coordinator_is_single_claim_owner": true,
+  "coordinator_is_single_promotion_owner": true,
+  "max_parallel": 3,
+  "lanes": [
+    "visual"
+  ],
+  "coordinator_tasks": [
+    "update_memory"
+  ],
+  "worker_tasks": [
+    "review_sources"
+  ],
+  "rejected": [
+    {
+      "id": "ash.grip.weapon.r1",
+      "reason": "visual_outputs_need_valid_registry:stale registry snapshot"
+    },
+    {
+      "id": "ash.shadow.pose07_19_42.r1",
+      "reason": "visual_outputs_need_valid_registry:stale registry snapshot"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "update_memory",
+      "kind": "canonical_memory_update",
+      "write_paths": [
+        "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/10-memory-bank.md"
+      ],
+      "assignment": "coordinator"
+    },
+    {
+      "id": "review_sources",
+      "kind": "source_audit",
+      "write_paths": [],
+      "assignment": "worker",
+      "lane": "visual"
+    }
+  ],
+  "claim_ceiling": "orchestration_diagnostic_only",
+  "artifact_registry_checked": false,
+  "artifact_registry_problem": "stale registry snapshot",
+  "preflight_only_not_filesystem_lock": true,
+  "ok": false
+}

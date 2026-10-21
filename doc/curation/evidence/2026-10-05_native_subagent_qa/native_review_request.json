@@ -1,0 +1,33 @@
+{
+  "artifact_kind": "quality_review_request",
+  "stage": "vertical_slice",
+  "execution_mode": "isolated_native_subagents",
+  "producer": "/root",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T",
+  "rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/rom.sms",
+    "sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3"
+  },
+  "requested_tasks": [
+    "9a72c60025254ce6ae12d8bad557df01",
+    "75289c59b7934010ae593205b97cdf6a"
+  ],
+  "domains": [
+    "art",
+    "audio"
+  ],
+  "artifacts": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/rom.sms",
+      "sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/report.json",
+      "sha256": "52ed58a7f01282f95354e06466c6474401d15303a26ec7dd871f7de50909b136"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/run_7f9a53cb14a7493e814884079d75ac3c/report.json",
+      "sha256": "73be0f693a15fe2769e0589580fe4ecdc26f5fe573eba71e495b05038980272a"
+    }
+  ]
+}

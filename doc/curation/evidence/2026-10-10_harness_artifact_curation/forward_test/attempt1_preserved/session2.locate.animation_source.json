@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/artifact_registry.py",
+    "locate",
+    "--project",
+    "/tmp/smsforge-harness-forward-20261010/fixture_game",
+    "--asset",
+    "fighter_ash",
+    "--kind",
+    "animation_source",
+    "--variant",
+    "main"
+  ],
+  "exit": 0,
+  "stdout": "{\n  \"schema\": \"sms_artifact_audit_v1\",\n  \"ok\": true,\n  \"problems\": [],\n  \"warnings\": [],\n  \"artifact_count\": 6,\n  \"indexed_file_count\": 18,\n  \"claim_ceiling\": \"organization_and_reference_consistency_only\",\n  \"registry_sha256\": \"d5ebc30fcd3e0533301598aef82e43df7b9f5b7561fc4dec332dc18cff0ab00d\",\n  \"head\": {\n    \"asset_id\": \"fighter_ash\",\n    \"kind\": \"animation_source\",\n    \"variant\": \"main\",\n    \"candidate\": \"ash.animation.main.r1\",\n    \"approved\": \"ash.animation.main.r1\"\n  },\n  \"artifacts\": [\n    {\n      \"id\": \"ash.animation.main.r1\",\n      \"asset_id\": \"fighter_ash\",\n      \"kind\": \"animation_source\",\n      \"variant\": \"main\",\n      \"revision\": 1,\n      \"status\": \"approved\",\n      \"parents\": [\n        \"ash.model.main.r1\"\n      ],\n      \"reason\": \"Fixture scenario baseline\",\n      \"files\": [\n        {\n          \"role\": \"document\",\n          \"path\": \"data/source_art/fighter_ash/animation_source/main/v01/document.fixture.txt\",\n          \"sha256\": \"1e75ae02ad9ec9631d1de78b82ad82b1376596beb05c34d53833de9450f7727a\"\n        },\n        {\n          \"role\": \"metadata\",\n          \"path\": \"data/source_art/fighter_ash/animation_source/main/v01/metadata.json\",\n          \"sha256\": \"76c5bbd2d083c64418f75b22332f8518dbcbaf794e0eeb8d0f94ef16581b67e6\"\n        },\n        {\n          \"role\": \"lineage\",\n          \"path\": \"data/source_art/fighter_ash/animation_source/main/v01/lineage.json\",\n          \"sha256\": \"68b94660c141a5023b2945016a15b4bc6f6ece096eb617023a8f2fead2703a37\"\n        }\n      ],\n      \"approval_scope\": \"source_only_conversion\",\n      \"decision\": {\n        \"path\": \"doc/decisions/ash.animation.main.r1.json\",\n        \"sha256\": \"74356166513916e6964b19b529a4698eb35328346b3a26f4b344e7c68cb72bda\"\n      }\n    }\n  ]\n}\n",
+  "stderr": ""
+}

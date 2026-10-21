@@ -1,0 +1,4667 @@
+{
+  "schema": "sms_fight_runtime_data_v5",
+  "source_slots": [
+    {
+      "character_initializer": "p1_frames_all, p1_anims, p1_states, p1_commands, 5, P1_CUT_POSE_COUNT, P1_POSE_BASE, 106, 1000, 2585, 110, 8, 3, 5, p1_close_distances_q8, p1_far_distances_q8, 3101",
+      "meta_max_bytes": 106,
+      "source_sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133",
+      "source_def": "ffspRyo.def",
+      "source_routes": [
+        {
+          "route_id": "special_236_x",
+          "source_command_terms": [
+            "236_x"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 1560,
+          "source_triggerall": [
+            "Var(0) > 999"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S || statetype = C",
+              "ctrl"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact"
+            ],
+            "12": [
+              "stateno = 220",
+              "movecontact"
+            ],
+            "13": [
+              "stateno = 221",
+              "movecontact"
+            ],
+            "14": [
+              "stateno = 250",
+              "movecontact"
+            ],
+            "15": [
+              "stateno = 251",
+              "movecontact"
+            ],
+            "16": [
+              "stateno = 400",
+              "movecontact"
+            ],
+            "17": [
+              "stateno = 430",
+              "movecontact"
+            ],
+            "18": [
+              "stateno = 410",
+              "movecontact"
+            ],
+            "19": [
+              "stateno = 440",
+              "movecontact"
+            ],
+            "20": [
+              "stateno = 300",
+              "movecontact"
+            ],
+            "21": [
+              "stateno = 310",
+              "movecontact"
+            ],
+            "22": [
+              "Var(0) = 3100",
+              "stateno = 1212",
+              "movecontact"
+            ],
+            "23": [
+              "Var(0) = 3100",
+              "stateno = 3200",
+              "movecontact",
+              "Life  <= 200  ||  power >= 3000"
+            ],
+            "24": [
+              "Var(0) = 3100",
+              "stateno = 3300",
+              "Life  <= 200  ||  power >= 3000",
+              "Time > 80"
+            ]
+          },
+          "source_state": 1000,
+          "source_action": 1000,
+          "action_role": "special",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "236_x",
+              "source_command": "236_x",
+              "source_command_line": 349,
+              "source_command_raw": "~D, DF, F, x",
+              "source_command_time": 15,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "D",
+                      "release": true,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                },
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "DF",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                },
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "F",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                },
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "x",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04040f010202000a0000080000100400",
+              "runtime_command_symbol": "CUT_R_SPEC_834F878D_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": [],
+          "source_state_resolution": {
+            "kind": "varset_constant",
+            "change_state_expression": "Var(0)",
+            "source_variable": 0,
+            "setter_controller_line": 1339,
+            "setter_value": 1000
+          },
+          "source_command_assignment": {
+            "source_controller_type": "varset",
+            "source_controller_line": 1339,
+            "source_variable": 0,
+            "source_value": 1000,
+            "source_triggerall": [],
+            "source_triggers": {
+              "1": [
+                "Command = \"236_x\""
+              ]
+            }
+          }
+        },
+        {
+          "route_id": "stand_lp_primary",
+          "source_command_terms": [
+            "x"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 1885,
+          "source_triggerall": [
+            "command = \"x\"",
+            "command != \"holddown\"",
+            "P2BodyDist X < 32"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20",
+              "stateno = 200",
+              "time >= 7"
+            ],
+            "3": [
+              "stateno = 21"
+            ]
+          },
+          "source_state": 200,
+          "source_action": 200,
+          "action_role": "punch",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "x",
+              "source_command": "x",
+              "source_command_line": 829,
+              "source_command_raw": "x",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "x",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100400",
+              "runtime_command_symbol": "CUT_R_STAN_E9900711_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_lp_alternate",
+          "source_command_terms": [
+            "x"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 1902,
+          "source_triggerall": [
+            "command = \"x\"",
+            "command != \"holddown\""
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "time >= 7"
+            ]
+          },
+          "source_state": 201,
+          "source_action": 201,
+          "action_role": "punch_far",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "x",
+              "source_command": "x",
+              "source_command_line": 829,
+              "source_command_raw": "x",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "x",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100400",
+              "runtime_command_symbol": "CUT_R_STAN_5F3F5843_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_hp_primary",
+          "source_command_terms": [
+            "z"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 1972,
+          "source_triggerall": [
+            "command = \"z\"",
+            "command != \"holddown\"",
+            "P2BodyDist X < 32"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 220,
+          "source_action": 220,
+          "action_role": "hp",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "z",
+              "source_command": "z",
+              "source_command_line": 839,
+              "source_command_raw": "z",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "z",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100800",
+              "runtime_command_symbol": "CUT_R_STAN_FDB8E700_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_hp_alternate",
+          "source_command_terms": [
+            "z"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2011,
+          "source_triggerall": [
+            "command = \"z\"",
+            "command != \"holddown\""
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 221,
+          "source_action": 221,
+          "action_role": "hp_far",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "z",
+              "source_command": "z",
+              "source_command_line": 839,
+              "source_command_raw": "z",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "z",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100800",
+              "runtime_command_symbol": "CUT_R_STAN_34823DFA_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_lk_primary",
+          "source_command_terms": [
+            "a"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2051,
+          "source_triggerall": [
+            "command = \"a\"",
+            "command != \"holddown\"",
+            "P2BodyDist X < 32"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 230,
+          "source_action": 230,
+          "action_role": "kick",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "a",
+              "source_command": "a",
+              "source_command_line": 814,
+              "source_command_raw": "a",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "a",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200400",
+              "runtime_command_symbol": "CUT_R_STAN_27EC3C54_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_lk_alternate",
+          "source_command_terms": [
+            "a"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2072,
+          "source_triggerall": [
+            "command = \"a\"",
+            "command != \"holddown\""
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 231,
+          "source_action": 231,
+          "action_role": "kick_far",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "a",
+              "source_command": "a",
+              "source_command_line": 814,
+              "source_command_raw": "a",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "a",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200400",
+              "runtime_command_symbol": "CUT_R_STAN_09D0273D_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_hk_primary",
+          "source_command_terms": [
+            "c"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2161,
+          "source_triggerall": [
+            "command = \"c\"",
+            "command != \"holddown\"",
+            "P2BodyDist X < 32"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 250,
+          "source_action": 250,
+          "action_role": "hk",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "c",
+              "source_command": "c",
+              "source_command_line": 824,
+              "source_command_raw": "c",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "c",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200800",
+              "runtime_command_symbol": "CUT_R_STAN_FD83A8FC_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_hk_alternate",
+          "source_command_terms": [
+            "c"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2204,
+          "source_triggerall": [
+            "command = \"c\"",
+            "command != \"holddown\""
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 251,
+          "source_action": 251,
+          "action_role": "hk_far",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "c",
+              "source_command": "c",
+              "source_command_line": 824,
+              "source_command_raw": "c",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "c",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200800",
+              "runtime_command_symbol": "CUT_R_STAN_8E72B206_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "air_lp",
+          "source_command_terms": [
+            "x"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2394,
+          "source_triggerall": [],
+          "source_triggers": {
+            "1": [
+              "command = \"x\"",
+              "statetype = A",
+              "ctrl = 1",
+              "Pos Y < -50"
+            ]
+          },
+          "source_state": 600,
+          "source_action": 600,
+          "action_role": "air_lp",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "x",
+              "source_command": "x",
+              "source_command_line": 829,
+              "source_command_raw": "x",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "x",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100400",
+              "runtime_command_symbol": "CUT_R_AIR__6E24E634_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "air_hp",
+          "source_command_terms": [
+            "z"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2418,
+          "source_triggerall": [
+            "command = \"z\"",
+            "statetype = A"
+          ],
+          "source_triggers": {
+            "1": [
+              "ctrl = 1",
+              "Pos Y < -50"
+            ],
+            "2": [
+              "stateno = 600",
+              "movecontact = 1"
+            ],
+            "3": [
+              "stateno = 610",
+              "movecontact = 1"
+            ],
+            "4": [
+              "stateno = 630",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 640",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 620,
+          "source_action": 620,
+          "action_role": "air_hp",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "z",
+              "source_command": "z",
+              "source_command_line": 839,
+              "source_command_raw": "z",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "z",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100800",
+              "runtime_command_symbol": "CUT_R_AIR__E1AE110C_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "air_lk",
+          "source_command_terms": [
+            "a"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2436,
+          "source_triggerall": [
+            "command = \"a\"",
+            "statetype = A"
+          ],
+          "source_triggers": {
+            "1": [
+              "ctrl = 1",
+              "Pos Y < -50"
+            ],
+            "2": [
+              "stateno = 600",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 630,
+          "source_action": 630,
+          "action_role": "air_lk",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "a",
+              "source_command": "a",
+              "source_command_line": 814,
+              "source_command_raw": "a",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "a",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200400",
+              "runtime_command_symbol": "CUT_R_AIR__CCBC2C90_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "air_hk",
+          "source_command_terms": [
+            "c"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2464,
+          "source_triggerall": [
+            "command = \"c\"",
+            "statetype = A"
+          ],
+          "source_triggers": {
+            "1": [
+              "ctrl = 1",
+              "Pos Y < -50"
+            ],
+            "2": [
+              "stateno = 600",
+              "movecontact = 1"
+            ],
+            "3": [
+              "stateno = 610",
+              "movecontact = 1"
+            ],
+            "4": [
+              "stateno = 620",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 630",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 640",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 650,
+          "source_action": 650,
+          "action_role": "air_hk",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "c",
+              "source_command": "c",
+              "source_command_line": 824,
+              "source_command_raw": "c",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "c",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200800",
+              "runtime_command_symbol": "CUT_R_AIR__72867306_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        }
+      ],
+      "source_route_pattern_count": 13,
+      "state_coverage": {
+        "idle": {
+          "available": true,
+          "source_action": 0,
+          "source_state": null
+        },
+        "walk_f": {
+          "available": true,
+          "source_action": 20,
+          "source_state": null
+        },
+        "walk_b": {
+          "available": true,
+          "source_action": 21,
+          "source_state": null
+        },
+        "jump": {
+          "available": true,
+          "source_action": 40,
+          "source_state": null
+        },
+        "crouch": {
+          "available": true,
+          "source_action": 100,
+          "source_state": null
+        },
+        "guard": {
+          "available": true,
+          "source_action": 120,
+          "source_state": null
+        },
+        "punch": {
+          "available": true,
+          "source_action": 200,
+          "source_state": 200
+        },
+        "hp": {
+          "available": true,
+          "source_action": 220,
+          "source_state": 220
+        },
+        "special": {
+          "available": true,
+          "source_action": 1000,
+          "source_state": 1000
+        },
+        "ko": {
+          "available": true,
+          "source_action": 5050,
+          "source_state": 5050
+        },
+        "kick": {
+          "available": true,
+          "source_action": 230,
+          "source_state": 230
+        },
+        "hk": {
+          "available": true,
+          "source_action": 250,
+          "source_state": 250
+        },
+        "punch_close": {
+          "available": false
+        },
+        "hp_close": {
+          "available": false
+        },
+        "kick_close": {
+          "available": false
+        },
+        "hk_close": {
+          "available": false
+        },
+        "punch_far": {
+          "available": true,
+          "source_action": 201,
+          "source_state": 201
+        },
+        "hp_far": {
+          "available": true,
+          "source_action": 221,
+          "source_state": 221
+        },
+        "kick_far": {
+          "available": true,
+          "source_action": 231,
+          "source_state": 231
+        },
+        "hk_far": {
+          "available": true,
+          "source_action": 251,
+          "source_state": 251
+        }
+      },
+      "unconsumed_source_roles": [
+        {
+          "role": "hit",
+          "source_action": 5000,
+          "source_state": 5000
+        },
+        {
+          "role": "air_lp",
+          "source_action": 600,
+          "source_state": 600
+        },
+        {
+          "role": "air_hp",
+          "source_action": 620,
+          "source_state": 620
+        },
+        {
+          "role": "air_lk",
+          "source_action": 630,
+          "source_state": 630
+        },
+        {
+          "role": "air_hk",
+          "source_action": 650,
+          "source_state": 650
+        }
+      ],
+      "command_coverage": {
+        "special": {
+          "source_command": "236_x",
+          "pattern_symbol": "P1_CUT_CMD_SPECIAL",
+          "runtime_command": "FIGHT_CMD_SPECIAL_UNSUPPORTED"
+        },
+        "hp": {
+          "source_command": "z",
+          "pattern_symbol": "P1_CUT_CMD_HP",
+          "runtime_command": "FIGHT_CMD_HP"
+        },
+        "lp": {
+          "source_command": "x",
+          "pattern_symbol": "P1_CUT_CMD_LP",
+          "runtime_command": "FIGHT_CMD_LP"
+        },
+        "hk": {
+          "source_command": "c",
+          "pattern_symbol": "P1_CUT_CMD_HK",
+          "runtime_command": "FIGHT_CMD_HK"
+        },
+        "lk": {
+          "source_command": "a",
+          "pattern_symbol": "P1_CUT_CMD_LK",
+          "runtime_command": "FIGHT_CMD_LK"
+        }
+      },
+      "command_priority": [
+        "special",
+        "hp",
+        "lp",
+        "hk",
+        "lk"
+      ],
+      "input_thresholds": {
+        "key1": 6,
+        "key2": 6
+      },
+      "damage_models": [
+        {
+          "role": "punch",
+          "source_state": 200,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp",
+          "source_state": 220,
+          "source_hitdef_count": 2,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick",
+          "source_state": 230,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk",
+          "source_state": 250,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "punch_far",
+          "source_state": 201,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp_far",
+          "source_state": 221,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick_far",
+          "source_state": 231,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk_far",
+          "source_state": 251,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        }
+      ],
+      "unsupported_capabilities": [
+        {
+          "role": "special",
+          "source_action": 1000,
+          "source_state": 1000,
+          "fidelity": "unsupported",
+          "reason": "projectile entities are not implemented in the fight runtime"
+        }
+      ],
+      "source_limitations": [
+        "common1.cns ausente; o parser usou fallback local common_forge.cns",
+        "licença desconhecida; manter derivações locais e não redistribuídas",
+        "tiers médios y e b foram descartados pelo mapa de controle de dois tiers",
+        "acordes simultâneos sem papel de runtime são rejeitados como golpes simples; botões precisam corresponder exatamente ao padrão importado",
+        "as variantes far State 201/221/231/251 são selecionadas como fallback ordenado após State 200/220/230/250 com P2BodyDist X < 32; apenas entrada direta em pé/controle é executada e grupos de cancelamento/chain do source CMD não rodam",
+        "State 220 near HP declara velset=2,0,0, mas a velocidade do papel base HP no runtime permanece zero; esse movimento não é reproduzido",
+        "States 250/251 usam physics=N; essa semântica de física não é importada pelo runtime",
+        "este corte não inclui as ações especiais bloqueadas por dependências não representáveis nem a entidade projectile",
+        "binding special=236_x deriva do .cmd e é preservado como rota indireta VarSet v0=1000 (linha 1339) -> ChangeState Var(0) (linha 1560); o importador valida essa cadeia, mas o runtime ainda não comprova seu despacho",
+        "source_routes preserva oito rotas de ataques em pé, quatro aéreas e a rota indireta special_236_x; State, AIR Action, controlador, VarSet e gatilhos são evidência de importação, não execução de comandos, trigger groups, cancelamentos ou alcance pelo runtime"
+      ],
+      "optional_state_role_coverage": {
+        "punch_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "punch",
+          "distance_runtime_q8": 0
+        },
+        "hp_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hp",
+          "distance_runtime_q8": 0
+        },
+        "kick_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "kick",
+          "distance_runtime_q8": 0
+        },
+        "hk_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hk",
+          "distance_runtime_q8": 0
+        }
+      },
+      "close_attack_coverage": [],
+      "optional_far_attack_role_coverage": {
+        "punch_far": {
+          "role": "punch_far",
+          "available": true,
+          "source_action": 201,
+          "source_state": 201,
+          "runtime_state_id": 201,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "punch",
+          "distance_runtime_q8": 5512,
+          "source_command": "x",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 200,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "time >= 7"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20",
+              "stateno = 200",
+              "time >= 7"
+            ],
+            "3": [
+              "stateno = 21"
+            ]
+          }
+        },
+        "hp_far": {
+          "role": "hp_far",
+          "available": true,
+          "source_action": 221,
+          "source_state": 221,
+          "runtime_state_id": 221,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 62,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hp",
+          "distance_runtime_q8": 5512,
+          "source_command": "z",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 220,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        },
+        "kick_far": {
+          "role": "kick_far",
+          "available": true,
+          "source_action": 231,
+          "source_state": 231,
+          "runtime_state_id": 231,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 35,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "kick",
+          "distance_runtime_q8": 5512,
+          "source_command": "a",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 230,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          }
+        },
+        "hk_far": {
+          "role": "hk_far",
+          "available": true,
+          "source_action": 251,
+          "source_state": 251,
+          "runtime_state_id": 251,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 80,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hk",
+          "distance_runtime_q8": 5512,
+          "source_command": "c",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 250,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        }
+      },
+      "far_attack_coverage": [
+        {
+          "role": "punch_far",
+          "available": true,
+          "source_action": 201,
+          "source_state": 201,
+          "runtime_state_id": 201,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "punch",
+          "distance_runtime_q8": 5512,
+          "source_command": "x",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 200,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "time >= 7"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20",
+              "stateno = 200",
+              "time >= 7"
+            ],
+            "3": [
+              "stateno = 21"
+            ]
+          }
+        },
+        {
+          "role": "hp_far",
+          "available": true,
+          "source_action": 221,
+          "source_state": 221,
+          "runtime_state_id": 221,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 62,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hp",
+          "distance_runtime_q8": 5512,
+          "source_command": "z",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 220,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        },
+        {
+          "role": "kick_far",
+          "available": true,
+          "source_action": 231,
+          "source_state": 231,
+          "runtime_state_id": 231,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 35,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "kick",
+          "distance_runtime_q8": 5512,
+          "source_command": "a",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 230,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          }
+        },
+        {
+          "role": "hk_far",
+          "available": true,
+          "source_action": 251,
+          "source_state": 251,
+          "runtime_state_id": 251,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 80,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hk",
+          "distance_runtime_q8": 5512,
+          "source_command": "c",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 250,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        }
+      ],
+      "close_distance_q8_values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "far_distance_q8_values": [
+        5512,
+        5512,
+        5512,
+        5512
+      ],
+      "ground_front_runtime_q8": 3101,
+      "close_geometry": {
+        "ground_front_source_units": 18,
+        "fighter_scale_ratio": {
+          "numerator": 72,
+          "denominator": 107
+        },
+        "ground_front_runtime_q8": 3101
+      }
+    },
+    {
+      "character_initializer": "p2_frames_all, p2_anims, p2_states, p2_commands, 5, P2_CUT_POSE_COUNT, P2_POSE_BASE, 106, 1000, 2585, 110, 8, 3, 5, p2_close_distances_q8, p2_far_distances_q8, 3101",
+      "meta_max_bytes": 106,
+      "source_sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133",
+      "source_def": "ffspRyo.def",
+      "source_routes": [
+        {
+          "route_id": "special_236_x",
+          "source_command_terms": [
+            "236_x"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 1560,
+          "source_triggerall": [
+            "Var(0) > 999"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S || statetype = C",
+              "ctrl"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact"
+            ],
+            "12": [
+              "stateno = 220",
+              "movecontact"
+            ],
+            "13": [
+              "stateno = 221",
+              "movecontact"
+            ],
+            "14": [
+              "stateno = 250",
+              "movecontact"
+            ],
+            "15": [
+              "stateno = 251",
+              "movecontact"
+            ],
+            "16": [
+              "stateno = 400",
+              "movecontact"
+            ],
+            "17": [
+              "stateno = 430",
+              "movecontact"
+            ],
+            "18": [
+              "stateno = 410",
+              "movecontact"
+            ],
+            "19": [
+              "stateno = 440",
+              "movecontact"
+            ],
+            "20": [
+              "stateno = 300",
+              "movecontact"
+            ],
+            "21": [
+              "stateno = 310",
+              "movecontact"
+            ],
+            "22": [
+              "Var(0) = 3100",
+              "stateno = 1212",
+              "movecontact"
+            ],
+            "23": [
+              "Var(0) = 3100",
+              "stateno = 3200",
+              "movecontact",
+              "Life  <= 200  ||  power >= 3000"
+            ],
+            "24": [
+              "Var(0) = 3100",
+              "stateno = 3300",
+              "Life  <= 200  ||  power >= 3000",
+              "Time > 80"
+            ]
+          },
+          "source_state": 1000,
+          "source_action": 1000,
+          "action_role": "special",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "236_x",
+              "source_command": "236_x",
+              "source_command_line": 349,
+              "source_command_raw": "~D, DF, F, x",
+              "source_command_time": 15,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "D",
+                      "release": true,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                },
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "DF",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                },
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "F",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                },
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "x",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04040f010202000a0000080000100400",
+              "runtime_command_symbol": "CUT_R_SPEC_834F878D_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": [],
+          "source_state_resolution": {
+            "kind": "varset_constant",
+            "change_state_expression": "Var(0)",
+            "source_variable": 0,
+            "setter_controller_line": 1339,
+            "setter_value": 1000
+          },
+          "source_command_assignment": {
+            "source_controller_type": "varset",
+            "source_controller_line": 1339,
+            "source_variable": 0,
+            "source_value": 1000,
+            "source_triggerall": [],
+            "source_triggers": {
+              "1": [
+                "Command = \"236_x\""
+              ]
+            }
+          }
+        },
+        {
+          "route_id": "stand_lp_primary",
+          "source_command_terms": [
+            "x"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 1885,
+          "source_triggerall": [
+            "command = \"x\"",
+            "command != \"holddown\"",
+            "P2BodyDist X < 32"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20",
+              "stateno = 200",
+              "time >= 7"
+            ],
+            "3": [
+              "stateno = 21"
+            ]
+          },
+          "source_state": 200,
+          "source_action": 200,
+          "action_role": "punch",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "x",
+              "source_command": "x",
+              "source_command_line": 829,
+              "source_command_raw": "x",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "x",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100400",
+              "runtime_command_symbol": "CUT_R_STAN_E9900711_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_lp_alternate",
+          "source_command_terms": [
+            "x"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 1902,
+          "source_triggerall": [
+            "command = \"x\"",
+            "command != \"holddown\""
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "time >= 7"
+            ]
+          },
+          "source_state": 201,
+          "source_action": 201,
+          "action_role": "punch_far",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "x",
+              "source_command": "x",
+              "source_command_line": 829,
+              "source_command_raw": "x",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "x",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100400",
+              "runtime_command_symbol": "CUT_R_STAN_5F3F5843_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_hp_primary",
+          "source_command_terms": [
+            "z"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 1972,
+          "source_triggerall": [
+            "command = \"z\"",
+            "command != \"holddown\"",
+            "P2BodyDist X < 32"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 220,
+          "source_action": 220,
+          "action_role": "hp",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "z",
+              "source_command": "z",
+              "source_command_line": 839,
+              "source_command_raw": "z",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "z",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100800",
+              "runtime_command_symbol": "CUT_R_STAN_FDB8E700_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_hp_alternate",
+          "source_command_terms": [
+            "z"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2011,
+          "source_triggerall": [
+            "command = \"z\"",
+            "command != \"holddown\""
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 221,
+          "source_action": 221,
+          "action_role": "hp_far",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "z",
+              "source_command": "z",
+              "source_command_line": 839,
+              "source_command_raw": "z",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "z",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100800",
+              "runtime_command_symbol": "CUT_R_STAN_34823DFA_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_lk_primary",
+          "source_command_terms": [
+            "a"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2051,
+          "source_triggerall": [
+            "command = \"a\"",
+            "command != \"holddown\"",
+            "P2BodyDist X < 32"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 230,
+          "source_action": 230,
+          "action_role": "kick",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "a",
+              "source_command": "a",
+              "source_command_line": 814,
+              "source_command_raw": "a",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "a",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200400",
+              "runtime_command_symbol": "CUT_R_STAN_27EC3C54_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_lk_alternate",
+          "source_command_terms": [
+            "a"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2072,
+          "source_triggerall": [
+            "command = \"a\"",
+            "command != \"holddown\""
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 231,
+          "source_action": 231,
+          "action_role": "kick_far",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "a",
+              "source_command": "a",
+              "source_command_line": 814,
+              "source_command_raw": "a",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "a",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200400",
+              "runtime_command_symbol": "CUT_R_STAN_09D0273D_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_hk_primary",
+          "source_command_terms": [
+            "c"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2161,
+          "source_triggerall": [
+            "command = \"c\"",
+            "command != \"holddown\"",
+            "P2BodyDist X < 32"
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 250,
+          "source_action": 250,
+          "action_role": "hk",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "c",
+              "source_command": "c",
+              "source_command_line": 824,
+              "source_command_raw": "c",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "c",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200800",
+              "runtime_command_symbol": "CUT_R_STAN_FD83A8FC_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "stand_hk_alternate",
+          "source_command_terms": [
+            "c"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2204,
+          "source_triggerall": [
+            "command = \"c\"",
+            "command != \"holddown\""
+          ],
+          "source_triggers": {
+            "1": [
+              "statetype = S",
+              "ctrl = 1"
+            ],
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 251,
+          "source_action": 251,
+          "action_role": "hk_far",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "c",
+              "source_command": "c",
+              "source_command_line": 824,
+              "source_command_raw": "c",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "c",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200800",
+              "runtime_command_symbol": "CUT_R_STAN_8E72B206_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "air_lp",
+          "source_command_terms": [
+            "x"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2394,
+          "source_triggerall": [],
+          "source_triggers": {
+            "1": [
+              "command = \"x\"",
+              "statetype = A",
+              "ctrl = 1",
+              "Pos Y < -50"
+            ]
+          },
+          "source_state": 600,
+          "source_action": 600,
+          "action_role": "air_lp",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "x",
+              "source_command": "x",
+              "source_command_line": 829,
+              "source_command_raw": "x",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "x",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100400",
+              "runtime_command_symbol": "CUT_R_AIR__6E24E634_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "air_hp",
+          "source_command_terms": [
+            "z"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2418,
+          "source_triggerall": [
+            "command = \"z\"",
+            "statetype = A"
+          ],
+          "source_triggers": {
+            "1": [
+              "ctrl = 1",
+              "Pos Y < -50"
+            ],
+            "2": [
+              "stateno = 600",
+              "movecontact = 1"
+            ],
+            "3": [
+              "stateno = 610",
+              "movecontact = 1"
+            ],
+            "4": [
+              "stateno = 630",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 640",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 620,
+          "source_action": 620,
+          "action_role": "air_hp",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "z",
+              "source_command": "z",
+              "source_command_line": 839,
+              "source_command_raw": "z",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "z",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101100800",
+              "runtime_command_symbol": "CUT_R_AIR__E1AE110C_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "air_lk",
+          "source_command_terms": [
+            "a"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2436,
+          "source_triggerall": [
+            "command = \"a\"",
+            "statetype = A"
+          ],
+          "source_triggers": {
+            "1": [
+              "ctrl = 1",
+              "Pos Y < -50"
+            ],
+            "2": [
+              "stateno = 600",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 630,
+          "source_action": 630,
+          "action_role": "air_lk",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "a",
+              "source_command": "a",
+              "source_command_line": 814,
+              "source_command_raw": "a",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "a",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200400",
+              "runtime_command_symbol": "CUT_R_AIR__CCBC2C90_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        },
+        {
+          "route_id": "air_hk",
+          "source_command_terms": [
+            "c"
+          ],
+          "source_controller_type": "changestate",
+          "source_controller_line": 2464,
+          "source_triggerall": [
+            "command = \"c\"",
+            "statetype = A"
+          ],
+          "source_triggers": {
+            "1": [
+              "ctrl = 1",
+              "Pos Y < -50"
+            ],
+            "2": [
+              "stateno = 600",
+              "movecontact = 1"
+            ],
+            "3": [
+              "stateno = 610",
+              "movecontact = 1"
+            ],
+            "4": [
+              "stateno = 620",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 630",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 640",
+              "movecontact = 1"
+            ]
+          },
+          "source_state": 650,
+          "source_action": 650,
+          "action_role": "air_hk",
+          "alias_of": null,
+          "source_command_definitions": [
+            {
+              "source_command_term": "c",
+              "source_command": "c",
+              "source_command_line": 824,
+              "source_command_raw": "c",
+              "source_command_time": 1,
+              "source_command_buffer_time": 1,
+              "source_command_errors": [],
+              "source_command_steps": [
+                {
+                  "strict": false,
+                  "keys": [
+                    {
+                      "key": "c",
+                      "release": false,
+                      "release_time": 0,
+                      "hold": false,
+                      "four_way": false
+                    }
+                  ]
+                }
+              ],
+              "conversion_status": "represented",
+              "conversion_reason": null,
+              "pattern_blob_hex": "04010101200800",
+              "runtime_command_symbol": "CUT_R_AIR__72867306_0"
+            }
+          ],
+          "command_pattern_coverage": "complete",
+          "unrepresented_command_patterns": []
+        }
+      ],
+      "source_route_pattern_count": 13,
+      "state_coverage": {
+        "idle": {
+          "available": true,
+          "source_action": 0,
+          "source_state": null
+        },
+        "walk_f": {
+          "available": true,
+          "source_action": 20,
+          "source_state": null
+        },
+        "walk_b": {
+          "available": true,
+          "source_action": 21,
+          "source_state": null
+        },
+        "jump": {
+          "available": true,
+          "source_action": 40,
+          "source_state": null
+        },
+        "crouch": {
+          "available": true,
+          "source_action": 100,
+          "source_state": null
+        },
+        "guard": {
+          "available": true,
+          "source_action": 120,
+          "source_state": null
+        },
+        "punch": {
+          "available": true,
+          "source_action": 200,
+          "source_state": 200
+        },
+        "hp": {
+          "available": true,
+          "source_action": 220,
+          "source_state": 220
+        },
+        "special": {
+          "available": true,
+          "source_action": 1000,
+          "source_state": 1000
+        },
+        "ko": {
+          "available": true,
+          "source_action": 5050,
+          "source_state": 5050
+        },
+        "kick": {
+          "available": true,
+          "source_action": 230,
+          "source_state": 230
+        },
+        "hk": {
+          "available": true,
+          "source_action": 250,
+          "source_state": 250
+        },
+        "punch_close": {
+          "available": false
+        },
+        "hp_close": {
+          "available": false
+        },
+        "kick_close": {
+          "available": false
+        },
+        "hk_close": {
+          "available": false
+        },
+        "punch_far": {
+          "available": true,
+          "source_action": 201,
+          "source_state": 201
+        },
+        "hp_far": {
+          "available": true,
+          "source_action": 221,
+          "source_state": 221
+        },
+        "kick_far": {
+          "available": true,
+          "source_action": 231,
+          "source_state": 231
+        },
+        "hk_far": {
+          "available": true,
+          "source_action": 251,
+          "source_state": 251
+        }
+      },
+      "unconsumed_source_roles": [
+        {
+          "role": "hit",
+          "source_action": 5000,
+          "source_state": 5000
+        },
+        {
+          "role": "air_lp",
+          "source_action": 600,
+          "source_state": 600
+        },
+        {
+          "role": "air_hp",
+          "source_action": 620,
+          "source_state": 620
+        },
+        {
+          "role": "air_lk",
+          "source_action": 630,
+          "source_state": 630
+        },
+        {
+          "role": "air_hk",
+          "source_action": 650,
+          "source_state": 650
+        }
+      ],
+      "command_coverage": {
+        "special": {
+          "source_command": "236_x",
+          "pattern_symbol": "P2_CUT_CMD_SPECIAL",
+          "runtime_command": "FIGHT_CMD_SPECIAL_UNSUPPORTED"
+        },
+        "hp": {
+          "source_command": "z",
+          "pattern_symbol": "P2_CUT_CMD_HP",
+          "runtime_command": "FIGHT_CMD_HP"
+        },
+        "lp": {
+          "source_command": "x",
+          "pattern_symbol": "P2_CUT_CMD_LP",
+          "runtime_command": "FIGHT_CMD_LP"
+        },
+        "hk": {
+          "source_command": "c",
+          "pattern_symbol": "P2_CUT_CMD_HK",
+          "runtime_command": "FIGHT_CMD_HK"
+        },
+        "lk": {
+          "source_command": "a",
+          "pattern_symbol": "P2_CUT_CMD_LK",
+          "runtime_command": "FIGHT_CMD_LK"
+        }
+      },
+      "command_priority": [
+        "special",
+        "hp",
+        "lp",
+        "hk",
+        "lk"
+      ],
+      "input_thresholds": {
+        "key1": 6,
+        "key2": 6
+      },
+      "damage_models": [
+        {
+          "role": "punch",
+          "source_state": 200,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp",
+          "source_state": 220,
+          "source_hitdef_count": 2,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick",
+          "source_state": 230,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk",
+          "source_state": 250,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "punch_far",
+          "source_state": 201,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp_far",
+          "source_state": 221,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick_far",
+          "source_state": 231,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk_far",
+          "source_state": 251,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        }
+      ],
+      "unsupported_capabilities": [
+        {
+          "role": "special",
+          "source_action": 1000,
+          "source_state": 1000,
+          "fidelity": "unsupported",
+          "reason": "projectile entities are not implemented in the fight runtime"
+        }
+      ],
+      "source_limitations": [
+        "common1.cns ausente; o parser usou fallback local common_forge.cns",
+        "licença desconhecida; manter derivações locais e não redistribuídas",
+        "tiers médios y e b foram descartados pelo mapa de controle de dois tiers",
+        "acordes simultâneos sem papel de runtime são rejeitados como golpes simples; botões precisam corresponder exatamente ao padrão importado",
+        "as variantes far State 201/221/231/251 são selecionadas como fallback ordenado após State 200/220/230/250 com P2BodyDist X < 32; apenas entrada direta em pé/controle é executada e grupos de cancelamento/chain do source CMD não rodam",
+        "State 220 near HP declara velset=2,0,0, mas a velocidade do papel base HP no runtime permanece zero; esse movimento não é reproduzido",
+        "States 250/251 usam physics=N; essa semântica de física não é importada pelo runtime",
+        "este corte não inclui as ações especiais bloqueadas por dependências não representáveis nem a entidade projectile",
+        "binding special=236_x deriva do .cmd e é preservado como rota indireta VarSet v0=1000 (linha 1339) -> ChangeState Var(0) (linha 1560); o importador valida essa cadeia, mas o runtime ainda não comprova seu despacho",
+        "source_routes preserva oito rotas de ataques em pé, quatro aéreas e a rota indireta special_236_x; State, AIR Action, controlador, VarSet e gatilhos são evidência de importação, não execução de comandos, trigger groups, cancelamentos ou alcance pelo runtime"
+      ],
+      "optional_state_role_coverage": {
+        "punch_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "punch",
+          "distance_runtime_q8": 0
+        },
+        "hp_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hp",
+          "distance_runtime_q8": 0
+        },
+        "kick_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "kick",
+          "distance_runtime_q8": 0
+        },
+        "hk_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hk",
+          "distance_runtime_q8": 0
+        }
+      },
+      "close_attack_coverage": [],
+      "optional_far_attack_role_coverage": {
+        "punch_far": {
+          "role": "punch_far",
+          "available": true,
+          "source_action": 201,
+          "source_state": 201,
+          "runtime_state_id": 201,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "punch",
+          "distance_runtime_q8": 5512,
+          "source_command": "x",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 200,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "time >= 7"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20",
+              "stateno = 200",
+              "time >= 7"
+            ],
+            "3": [
+              "stateno = 21"
+            ]
+          }
+        },
+        "hp_far": {
+          "role": "hp_far",
+          "available": true,
+          "source_action": 221,
+          "source_state": 221,
+          "runtime_state_id": 221,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 62,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hp",
+          "distance_runtime_q8": 5512,
+          "source_command": "z",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 220,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        },
+        "kick_far": {
+          "role": "kick_far",
+          "available": true,
+          "source_action": 231,
+          "source_state": 231,
+          "runtime_state_id": 231,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 35,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "kick",
+          "distance_runtime_q8": 5512,
+          "source_command": "a",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 230,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          }
+        },
+        "hk_far": {
+          "role": "hk_far",
+          "available": true,
+          "source_action": 251,
+          "source_state": 251,
+          "runtime_state_id": 251,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 80,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hk",
+          "distance_runtime_q8": 5512,
+          "source_command": "c",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 250,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        }
+      },
+      "far_attack_coverage": [
+        {
+          "role": "punch_far",
+          "available": true,
+          "source_action": 201,
+          "source_state": 201,
+          "runtime_state_id": 201,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "punch",
+          "distance_runtime_q8": 5512,
+          "source_command": "x",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 200,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "time >= 7"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20",
+              "stateno = 200",
+              "time >= 7"
+            ],
+            "3": [
+              "stateno = 21"
+            ]
+          }
+        },
+        {
+          "role": "hp_far",
+          "available": true,
+          "source_action": 221,
+          "source_state": 221,
+          "runtime_state_id": 221,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 62,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hp",
+          "distance_runtime_q8": 5512,
+          "source_command": "z",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 220,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        },
+        {
+          "role": "kick_far",
+          "available": true,
+          "source_action": 231,
+          "source_state": 231,
+          "runtime_state_id": 231,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 35,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "kick",
+          "distance_runtime_q8": 5512,
+          "source_command": "a",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 230,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          }
+        },
+        {
+          "role": "hk_far",
+          "available": true,
+          "source_action": 251,
+          "source_state": 251,
+          "runtime_state_id": 251,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 80,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hk",
+          "distance_runtime_q8": 5512,
+          "source_command": "c",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 250,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        }
+      ],
+      "close_distance_q8_values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "far_distance_q8_values": [
+        5512,
+        5512,
+        5512,
+        5512
+      ],
+      "ground_front_runtime_q8": 3101,
+      "close_geometry": {
+        "ground_front_source_units": 18,
+        "fighter_scale_ratio": {
+          "numerator": 72,
+          "denominator": 107
+        },
+        "ground_front_runtime_q8": 3101
+      }
+    }
+  ],
+  "role_policy": [
+    "idle",
+    "walk_f",
+    "walk_b",
+    "jump",
+    "crouch",
+    "guard",
+    "punch",
+    "hp",
+    "special",
+    "ko",
+    "kick",
+    "hk",
+    "punch_close",
+    "hp_close",
+    "kick_close",
+    "hk_close",
+    "punch_far",
+    "hp_far",
+    "kick_far",
+    "hk_far"
+  ],
+  "unsupported_runtime_roles": {
+    "special": "projectile entities are not implemented; command recognition never enters a strike state",
+    "close_attacks": "close variants use source State -1 P2BodyDist X rules after scale conversion",
+    "far_attack_variants": "far fallbacks use the ordered complement of an earlier near rule; chain/cancel trigger groups are not executed",
+    "unconsumed_source_roles": "source actions are imported as data but have no runtime state/input mapping"
+  },
+  "role_accounting": {
+    "required_runtime_roles": [
+      "idle",
+      "walk_f",
+      "walk_b",
+      "jump",
+      "crouch",
+      "guard",
+      "punch",
+      "hp",
+      "special",
+      "ko",
+      "kick",
+      "hk"
+    ],
+    "optional_runtime_roles": [
+      "punch_close",
+      "hp_close",
+      "kick_close",
+      "hk_close",
+      "punch_far",
+      "hp_far",
+      "kick_far",
+      "hk_far"
+    ],
+    "unconsumed_source_roles_by_slot": {
+      "p1": [
+        {
+          "role": "hit",
+          "source_action": 5000,
+          "source_state": 5000
+        },
+        {
+          "role": "air_lp",
+          "source_action": 600,
+          "source_state": 600
+        },
+        {
+          "role": "air_hp",
+          "source_action": 620,
+          "source_state": 620
+        },
+        {
+          "role": "air_lk",
+          "source_action": 630,
+          "source_state": 630
+        },
+        {
+          "role": "air_hk",
+          "source_action": 650,
+          "source_state": 650
+        }
+      ],
+      "p2": [
+        {
+          "role": "hit",
+          "source_action": 5000,
+          "source_state": 5000
+        },
+        {
+          "role": "air_lp",
+          "source_action": 600,
+          "source_state": 600
+        },
+        {
+          "role": "air_hp",
+          "source_action": 620,
+          "source_state": 620
+        },
+        {
+          "role": "air_lk",
+          "source_action": 630,
+          "source_state": 630
+        },
+        {
+          "role": "air_hk",
+          "source_action": 650,
+          "source_state": 650
+        }
+      ]
+    },
+    "scope": "unconsumed roles are not selectable; distance variants need matching imported source rules"
+  },
+  "source_route_dispatch_contract": {
+    "compiled_tables": [
+      "p1_source_routes",
+      "p2_source_routes"
+    ],
+    "fields": [
+      "pattern",
+      "source_state",
+      "source_action",
+      "action_anim"
+    ],
+    "scope": "pattern-to-source target binding only; source controller predicates and gameplay effects are not executed by these tables"
+  },
+  "unknown_source_state_id": 65535,
+  "scope": "current fixed common-state subset; not a general CNS VM",
+  "close_geometry_contract": {
+    "required_when_close_attacks_exist": false,
+    "required_when_far_attack_variants_exist": true,
+    "ground_front_runtime_q8_by_slot": [
+      3101,
+      3101
+    ]
+  },
+  "input_profile_header": {
+    "path": "fight_input_profile.h",
+    "sha256": "b4fe476194c07d576653910db2ddb46d9672bc3281b07b8f3ec72bfcdb3fa3bd"
+  }
+}

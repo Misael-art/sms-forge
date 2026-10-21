@@ -1,0 +1,20 @@
+{
+  "fixture_only": true,
+  "asset": "fighter_ash",
+  "registry": "doc/artifact_registry.json",
+  "delta": [
+    "weapon_grip",
+    "shadow_poses_07_19_42"
+  ],
+  "read_only_inputs": {
+    "identity": "ash.model.main.r1",
+    "animation": "ash.animation.main.r1",
+    "negative_reference_only": "ash.converted.main.r1"
+  },
+  "forbidden_source_substitution": "ash.proof.main.r1",
+  "hypotheses": {
+    "A": "preserve approved source ramp placement",
+    "B": "adjust shadow continuity only"
+  },
+  "next_gate": "Independent visual review then owner; no production integration or ROM claim"
+}

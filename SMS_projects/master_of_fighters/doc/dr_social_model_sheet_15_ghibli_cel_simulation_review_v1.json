@@ -3,7 +3,7 @@
   "asset_id": "dr_social_model_sheet_15_ghibli_cel_simulation_v1",
   "producer": "codex_art_production",
   "asset": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png",
     "sha256": "5e97c74b596c7ffe28c6d4473f2a43e6448908ccb8ae97db2bebde6170515457",
     "kind": "character_concept_model_sheet",
     "dimensions_px": [
@@ -12,7 +12,7 @@
     ]
   },
   "source_evidence": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
     "sha256": "f908e40c2f5cf650e0f3bd7609b5f66b6d910c318b16cacee55c07f026613b96"
   },
   "required_characters": [
@@ -31,14 +31,18 @@
     "equipment_and_weapon_continuity",
     "cross_view_consistency",
     "legibility_and_crop_integrity",
-    "human_traits_and_unapproved_details"
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
   ],
   "characters": [
     {
       "id": "dr_ferdinand_social",
       "references": [
         {
-          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
           "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
           "role": "approved identity and sheet authority"
         }
@@ -101,6 +105,22 @@
         "human_traits_and_unapproved_details": {
           "status": "pending",
           "note": "Fully human traits retained; unapproved details review pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist/reference role and limits are recorded; independent review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "Distinctive style signature is registered; visual comparison pending."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace each posed limb from shoulder through hand; visual decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity/rendering coherence across views and distinction from neighboring styles; pending."
         }
       }
     }
@@ -112,5 +132,18 @@
     "approved": false
   },
   "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
-  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM or emulator approval"
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM or emulator approval",
+  "catalog_index": 15,
+  "artistic_style_reference": {
+    "named_artist": "Akihiko Yamashita",
+    "reference_role_and_scope": "Secondary credits listing for Wonder Project J2 anime character design; not a Ghibli artist credit and not sole game-art authorship.",
+    "source_url": "https://www.mobygames.com/game/97845/wonder-project-j2/credits/n64/?autoplatform=true",
+    "attribution_status": "secondary_source_reference",
+    "style_signature": [
+      "1990s cel-anime line and shape language",
+      "expressive face and clear pose silhouette",
+      "warm, clean cel-color blocks"
+    ],
+    "basis_and_limits": "Do not equate the game with Studio Ghibli or attribute its art to Miyazaki; Ghibli-Simulation remains a style label, not a production credit."
+  }
 }

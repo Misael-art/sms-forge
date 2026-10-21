@@ -1,0 +1,408 @@
+{
+  "tool_sha256": {
+    "artifact_registry.py": "ea9de1aa9532dd965f42212a36dbe1c96f06e75864d1835b9ad8f2fb5f906c79",
+    "harness_orchestration.py": "69ab32dd9feb1db11d9221b45bedc7fa6fd3afa534fb8df7964eebc3e353c1c1",
+    "audit_learning_capture.py": "0403911566b197c24278c40f90c4133d361f2c3a51d1db23c79245b35cd0f95f",
+    "audit_source_raster.py": "4b6dead11d4538b68c9f8bbdf760ee007210076db26ba07a33c3c176d4853b40"
+  },
+  "results": [
+    {
+      "case": "valid_baseline",
+      "expected": "PASS",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "symlink_location_alias",
+      "expected": "FAIL overlapping canonical destinations",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "file_escapes_kind_destination_inside_project",
+      "expected": "FAIL resolved file outside kind destination",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "managed_file_as_legacy_inventory",
+      "expected": "policy review: FAIL or explicit historical frozen adoption proof",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [
+          "1 historical files indexed without classification/approval"
+        ],
+        "artifact_count": 1,
+        "indexed_file_count": 2,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "revision2_without_lineage",
+      "expected": "policy review: FAIL missing predecessor or explicit independent origin reason",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 2,
+        "indexed_file_count": 2,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "visual_output_kind_bypass",
+      "expected": "policy review: asset write should require registry regardless lane/kind",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "bad"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "bad",
+            "kind": "runtime_production",
+            "write_paths": [
+              "/tmp/smsforge-curation-coverage-20261010/review/cases/game/data/source_art/unreserved.png"
+            ],
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_tasks_{}",
+      "expected": "FAIL tasks_not_array",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_tasks_False",
+      "expected": "FAIL tasks_not_array",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_tasks_0",
+      "expected": "FAIL tasks_not_array",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_tasks_''",
+      "expected": "FAIL tasks_not_array",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_id_0",
+      "expected": "FAIL task IDs must be strings",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "t0"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "t0",
+            "kind": "inventory",
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_id_False",
+      "expected": "FAIL task IDs must be strings",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "t0"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "t0",
+            "kind": "inventory",
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_id_[]",
+      "expected": "FAIL task IDs must be strings",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "t0"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "t0",
+            "kind": "inventory",
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_id_{}",
+      "expected": "FAIL task IDs must be strings",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "t0"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "t0",
+            "kind": "inventory",
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "symlink_cycle",
+      "expected": "FAIL structured diagnostic, not RuntimeError",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "overlapping locations create competing destinations"
+        ],
+        "warnings": [],
+        "artifact_count": 0,
+        "indexed_file_count": 0,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "routes_none",
+      "expected": "FAIL structured",
+      "actual": [
+        "L001: 'NoneType' object is not subscriptable"
+      ]
+    },
+    {
+      "case": "routes_int",
+      "expected": "FAIL structured",
+      "actual": [
+        "L001: 'int' object is not subscriptable"
+      ]
+    },
+    {
+      "case": "routes_path_list",
+      "expected": "FAIL structured",
+      "actual": [
+        "L001: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'list'"
+      ]
+    },
+    {
+      "case": "routes_path_symlinkoutside",
+      "expected": "FAIL structured",
+      "actual": [
+        "L001: [Errno 2] No such file or directory: '/tmp/smsforge-curation-coverage-20261010/review/route_game/tools/sms_wrapper/.agent/skills/out.md'"
+      ]
+    },
+    {
+      "case": "hardlink_multiple_ownership",
+      "expected": "FAIL same inode owned by different artifacts",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 2,
+        "indexed_file_count": 2,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      },
+      "samefile": true
+    }
+  ]
+}

@@ -43,11 +43,11 @@
 #define SP_MAX          32u
 #define SP_COST         32u
 #define GROUND_Y        112
-#define FIGHTER_W       16
-#define FIGHTER_H       32
+#define FIGHTER_W       32
+#define FIGHTER_H       64
 #define STAGE_X_MIN     8
-#define STAGE_X_MAX     232
-#define PUSH_W          10
+#define STAGE_X_MAX     216
+#define PUSH_W          20
 #define ROUNDS_TO_WIN   2u
 #define CLOCK_START     99u
 #define HITSTOP_FRAMES  6u
@@ -65,23 +65,34 @@
 #define CE_THROW  2u
 #define CE_CAP    4u
 
-#define POSE_IDLE  0u
-#define POSE_PUNCH 1u
+#define POSE_IDLE    0u
+#define POSE_WALK    1u
+#define POSE_PUNCH   2u
+#define POSE_SPECIAL 3u
+#define POSE_HIT     4u
+#define POSE_KO      5u
+#define POSE_CROUCH  6u
+#define POSE_JUMP    7u
+#define ANIM_FR_MAX  6u
+
+typedef struct {
+    unsigned char n;
+    unsigned char loop;
+    unsigned char dur[6];
+} AnimDef;
 
 #define TILE_FONT       1u
 #define TILE_FLOOR      48u
 #define TILE_BAR_HP     49u
 #define TILE_BAR_SP     50u
 #define TILE_BAR_EMPTY  51u
-#define TILE_P1_IDLE    128u
-#define TILE_P1_PUNCH   136u
-#define TILE_P1_IDLE_L  160u
-#define TILE_P1_PUNCH_L 168u
-#define TILE_P2_IDLE    144u
-#define TILE_P2_PUNCH   152u
-#define TILE_P2_IDLE_L  176u
-#define TILE_P2_PUNCH_L 184u
-#define TILE_FB         192u
+#define TILE_P1A        96u
+#define TILE_P1B        128u
+#define TILE_P2A        160u
+#define TILE_P2B        192u
+#define TILE_FB         224u
+#define TILE_FB_L       228u
+#define TILE_STAGE      256u
 
 #define MF_LOW   0x01u
 #define MF_AIR   0x02u
@@ -119,6 +130,8 @@ typedef struct {
     unsigned int state;
     unsigned char timer;
     unsigned char pose;
+    unsigned char anim_i;
+    unsigned char anim_t;
     unsigned char hit_used;
     unsigned char guard;
     unsigned char rounds;

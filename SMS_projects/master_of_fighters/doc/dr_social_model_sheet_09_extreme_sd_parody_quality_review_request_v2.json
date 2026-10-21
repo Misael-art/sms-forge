@@ -1,0 +1,38 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_09_extreme_sd_parody_art_review_v2",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Independent, read-only review of concept model sheet #09 (Extreme-SD-Parody): identity and five-view consistency; artist attribution/role/scope; distinct style signature; shoulder-to-hand anatomical continuity; palette/materials; ruler, baseline, crop, labels and card overlap. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2.png",
+      "sha256": "51ab35053a9acc15d7dfa84a316db5b6f579d18c211ef9e7d50a4880bf1bb42a",
+      "role": "current candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_v2.json",
+      "sha256": "d6349e857d095142f97a103c7fd5a45b359a703d29e9c4b3fe82601f6fe87483",
+      "role": "hash-bound per-character review checklist"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_metadata.json",
+      "sha256": "2bc829e2fc6809ce3a9e6342a4b725af9e1c471fb862959cb6493898d969f43a",
+      "role": "style/card/layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v2.json",
+      "sha256": "fdff8e67ef50958c56f532f4d4363d4c3d1072aa5968d440b2d4b54bd54cd5c9",
+      "role": "source and composition lineage"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Separate artist reference from authorship of sprites/game assets; report unverified credit as such.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Return concrete findings for anatomy, identity, style distinction, five-view cohesion, page layout and labels."
+  ]
+}

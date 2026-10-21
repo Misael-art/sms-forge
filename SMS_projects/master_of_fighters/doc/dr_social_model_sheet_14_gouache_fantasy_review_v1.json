@@ -1,0 +1,149 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_14_gouache_fantasy_v1",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1.png",
+    "sha256": "adc6e85568776dd89a0172c5e17d87b146c21f2bec8e1525b780672eb7a56bd0",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v4_art.png",
+    "sha256": "d987d2f8d55307310bc2d56c5d86ed0ebf7de91181749829c8221174966bdf53"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+          "role": "approved identity and sheet authority"
+        }
+      ],
+      "observed_defects": [
+        "Blue coat construction and lapel shapes vary from approved outfit; owner review required. Gouache contour/brush planes visible; identity and equipment grips legible."
+      ],
+      "revision_notes": [
+        "Four source generations and three directed revisions preserved. Selected v4 for gouache treatment, identity palette and equipment attachment. Coat/lapel construction remains a pending owner review point."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Five views composed at 0.78 scale; independent review pending."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "Gouache paint handling is visible; independent style fidelity review pending."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Fine brushlike sepia contours visible; review pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Adult slim identity preserved; review pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Opaque brush color planes visible; colors not quantized."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Turnaround scale and baseline are visual guides; independent check pending."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Plain cream background."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Gray hair, glasses and adult facial identity retained; owner review pending."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Coat/lapel construction varies from approved reference and needs owner review."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Cane in neutral views; rapier and crescent held in action pose; review hand/guard attachment."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Five views present; cross-view outfit consistency review pending."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "No obvious crop loss; legibility review pending."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "Human appearance retained; no monster traits; unapproved coat details remain pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist/reference role and limits are recorded; independent review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "Distinctive style signature is registered; visual comparison pending."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace each posed limb from shoulder through hand; visual decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity/rendering coherence across views and distinction from neighboring styles; pending."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM or emulator approval",
+  "catalog_index": 14,
+  "artistic_style_reference": {
+    "named_artist": "Shinichi Kameoka",
+    "reference_role_and_scope": "Main character designer for Legend of Mana, per Square Enix creator comment.",
+    "source_url": "https://www.jp.square-enix.com/mana30th/",
+    "attribution_status": "verified_primary_source",
+    "style_signature": [
+      "hand-painted gouache color planes with warm fine contours",
+      "luminous storybook fantasy color with controlled texture",
+      "distinctive character silhouettes and readable costume shapes"
+    ],
+    "basis_and_limits": "Editorial visual-analysis descriptors; the source confirms character-design role, not sole authorship of every asset."
+  }
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "name": "selftest",
+    "command": [
+      "rtk",
+      "proxy",
+      "/usr/sbin/python3",
+      "tools/sms_wrapper/selftest.py"
+    ],
+    "exit_code": 0,
+    "log": "doc/curation/evidence/2026-10-18_observed_cases/validation/selftest.log",
+    "log_sha256": "ea7838633c354a438a8a9a5ec4f88531747ebff59f59586f506da3a8ca236fd1",
+    "tail": [
+      "",
+      "SELFTEST: 120/120 verdes (120 base + probe opcional nao rodado)",
+      "[SELFTEST OK] todos os gates provados: aprovam o valido, reprovam o invalido."
+    ]
+  },
+  {
+    "name": "measurement_tools",
+    "command": [
+      "rtk",
+      "proxy",
+      "/usr/sbin/python3",
+      "tools/sms_wrapper/validate_measurement_tools.py"
+    ],
+    "exit_code": 0,
+    "log": "doc/curation/evidence/2026-10-18_observed_cases/validation/measurement_tools.log",
+    "log_sha256": "de51d27a7beda45912c0361f5c6d8d757f4fa7a387576626b2a05ada2529c214",
+    "tail": [
+      "[PASS] 70 ferramentas de medicao com --self-check passando"
+    ]
+  },
+  {
+    "name": "doc_sync",
+    "command": [
+      "rtk",
+      "proxy",
+      "/usr/sbin/python3",
+      "tools/sms_wrapper/audit_doc_sync.py"
+    ],
+    "exit_code": 1,
+    "log": "doc/curation/evidence/2026-10-18_observed_cases/validation/doc_sync.log",
+    "log_sha256": "f06e323fc4168e72fe6fa4af0b1576cc71a323c4a43b5781e2ffc5433a5f1e55",
+    "tail": [
+      "[FAIL] luta_mugen: doc_authority aponta para 'doc/13-spec-cenas.md' ausente (ENOENT)",
+      "[FAIL] luta_mugen: doc_authority aponta para 'doc/15-tdd.md' ausente (ENOENT)",
+      "[FAIL] 10 deriva(s) doc<->repo. Documento que afirma estado falso e overclaim."
+    ]
+  },
+  {
+    "name": "learning_capture",
+    "command": [
+      "rtk",
+      "proxy",
+      "/usr/sbin/python3",
+      "tools/sms_wrapper/audit_learning_capture.py",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "log": "doc/curation/evidence/2026-10-18_observed_cases/validation/learning_capture.log",
+    "log_sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3",
+    "tail": [
+      "[PASS] captura de licao sincronizada (JSON, furos, ferramentas, doutrina)"
+    ]
+  },
+  {
+    "name": "hardware",
+    "command": [
+      "rtk",
+      "proxy",
+      "/usr/sbin/python3",
+      "tools/sms_wrapper/audit_hardware_constants.py"
+    ],
+    "exit_code": 0,
+    "log": "doc/curation/evidence/2026-10-18_observed_cases/validation/hardware.log",
+    "log_sha256": "ba033a684393ce6caa9f4994e167b9037452d706665eb42895273f2f792492c2",
+    "tail": [
+      "[PASS] grandezas do SMS coerentes na doutrina"
+    ]
+  },
+  {
+    "name": "header",
+    "command": [
+      "rtk",
+      "proxy",
+      "/usr/sbin/python3",
+      "tools/sms_wrapper/audit_header_claims.py"
+    ],
+    "exit_code": 0,
+    "log": "doc/curation/evidence/2026-10-18_observed_cases/validation/header.log",
+    "log_sha256": "e3a00d87fc6108c0b6f7bb19f0f4a1f7bbdf17fe2d56dce8e683e0a2f4a26e11",
+    "tail": [
+      "[PASS] doutrina coerente com os defines do SMSlib.h"
+    ]
+  }
+]

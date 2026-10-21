@@ -6,5 +6,7 @@
 void stage_load(void) {
     SMS_loadBGPalette(stage_palette);
     SMS_loadTiles(stage_tiles, STAGE_TILE_BASE, sizeof(stage_tiles));
-    SMS_VRAMmemcpy(0x3800u, stage_nametable, 1536u);
+    /* O jogo não tem cenário: tile 256 é a amostra sólida de fundo usada
+     * também atrás do texto do HUD. 768 palavras ocupam toda a PNT (1536 B). */
+    SMS_VRAMmemsetW(0x3800u, 0x0100u, 1536u);
 }

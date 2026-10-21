@@ -1,0 +1,38 @@
+{
+  "dispatches": [
+    {
+      "method": "collaboration.followup_task",
+      "worker_id": "/root/native_runtime_qa",
+      "native_feedback_received": true,
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request/request.json",
+        "sha256": "f70671407b011b80a2b6ad125d72b95dc18d7c07c0447de444be8e3b2f2512e6"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request/run_c008926fe5314529b820899d376da5e2/report.json",
+        "sha256": "b73f979613603ceac85b2b75f50b44d589134a7bebd1187e1f9be04973c96ea6"
+      },
+      "session_id": "9c8d0804050043df96008a3119471d5b",
+      "tests_passed": true,
+      "context_mode": "diagnostic"
+    },
+    {
+      "method": "collaboration.followup_task",
+      "worker_id": "/root/native_runtime_qa",
+      "native_feedback_received": true,
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request_corrected/request.json",
+        "sha256": "97775df9e5c1574e5034b6e8ed17882b973b84c78228614d3feedfc67754c05f"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request_corrected/run_b8108ed1eabe4848b541bc2184915ade/report.json",
+        "sha256": "2f0c00400fe444532971f1c2791c7a9a100256b6894a1024f59e1e788e13feaa"
+      },
+      "session_id": "cca70c512e594fb0bbcfba76c2e1b6b1",
+      "tests_passed": true,
+      "context_mode": "diagnostic"
+    }
+  ],
+  "correction": "TDD logical counter vs uint16 byte offsets corrected via new request; historical request/report preserved",
+  "scope": "diagnostic SMI1 current collector only"
+}

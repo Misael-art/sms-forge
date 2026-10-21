@@ -1,0 +1,11 @@
+{
+  "schema": "sms_vram_plan_v1",
+  "screen_height": 192,
+  "vertical_scroll": false,
+  "max_sprites": 32,
+  "reg6": "0xFF",
+  "name_base": "0x3800",
+  "regions": [
+    {"label": "tile60_probe", "addr": "0x0780", "bytes": 32, "role": "bg_tiles"}
+  ]
+}

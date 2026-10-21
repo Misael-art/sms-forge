@@ -1,0 +1,49 @@
+{
+  "schema": "sms_sprite_study_contract_v1",
+  "asset_id": "landau_idle_sms_96px_12f_v1",
+  "project": "master_of_fighters",
+  "asset_role": "source_art_sprite_study",
+  "character": "landau",
+  "visual_reference": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+  "approval_scope": "owner-approved rejuvenated concept as visual reference; this contract covers an unapproved sprite study only",
+  "sheet": {
+    "columns": 4,
+    "rows": 3,
+    "frame_count": 12,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_px": [96, 96],
+    "sheet_px": [384, 288],
+    "ground_pivot_px": [48, 95],
+    "target_visible_height_px": 88,
+    "height_tolerance_px": [84, 88]
+  },
+  "action": {
+    "state": "idle",
+    "facing": "right, three-quarter side view",
+    "motion": "one calm guard idle cycle with twelve visibly distinct connected poses; no attacks, locomotion, jumps, or weapon swaps",
+    "continuity": "same scale, feet baseline, pivot, camera, silhouette, and weapon hands in all cells"
+  },
+  "design_lock": [
+    "young adult Landau, youthful face, clean-shaven",
+    "preserve the approved strong young-warrior morphology and original costume proportions",
+    "green tunic, leather guards, red sash, blue trousers, silver greaves, sword in hand, bow and quiver on back",
+    "do not add mature facial features, beard, moustache, armor redesign, or extra equipment"
+  ],
+  "palette": {
+    "manifest_character": "lord_of_the_sword",
+    "source": "doc/palettes_manifest.json",
+    "transparent_index": 0,
+    "maximum_useful_colors": 15,
+    "dither": "none",
+    "grain_or_texture": false
+  },
+  "gates": [
+    "audit_validate_resources.py",
+    "audit_animation_semantics.py"
+  ],
+  "not_claimed": [
+    "runtime sprite geometry or metasprite validity",
+    "scanline budget validity",
+    "ROM integration or emulator validation"
+  ]
+}

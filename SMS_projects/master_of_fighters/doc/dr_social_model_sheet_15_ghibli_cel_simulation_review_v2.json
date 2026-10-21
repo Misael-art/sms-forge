@@ -1,0 +1,151 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_15_ghibli_cel_simulation_v2",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2.png",
+    "sha256": "86a83b5b6c9756b912b4a1a28c3e8263c6810b03bac27fdb075436dc0605bb1c",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
+    "sha256": "f908e40c2f5cf650e0f3bd7609b5f66b6d910c318b16cacee55c07f026613b96"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+          "role": "approved identity and sheet authority"
+        }
+      ],
+      "observed_defects": [
+        "Coat cut differs mildly from anchor; violet boomerang energy is absent. Independent and owner review required."
+      ],
+      "revision_notes": [
+        "Four source generations and three directed revisions preserved. V4 selected for mature face, removal of waistcoat, fixed material palette, and clearer held equipment.",
+        "Version 2 adds visible catalog index and named style-reference attribution; artwork remains a candidate and requires fresh review.",
+        "V2 adds the visible catalog index, artist/reference role, and concise signature. The prior illustration/layout is preserved outside the style-information card; independent/owner review remains pending."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist, role, source, and attribution limits are recorded; independent verification/review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "The selected reference signature is listed; visual separation from neighboring styles requires visual review."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace shoulder, upper arm, elbow, forearm, wrist, and hand across each posed view; reviewer decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity and rendering consistency across five views, and distinction from neighboring catalog styles."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM or emulator approval",
+  "artistic_style_reference": {
+    "named_artist": "Akihiko Yamashita",
+    "reference_role_and_scope": "Secondary credits listing for Wonder Project J2 anime character design; not a Ghibli artist credit and not sole game-art authorship.",
+    "source_url": "https://www.mobygames.com/game/97845/wonder-project-j2/credits/n64/?autoplatform=true",
+    "attribution_status": "secondary_source_reference",
+    "style_signature": [
+      "1990s cel-anime line and shape language",
+      "expressive face and clear pose silhouette",
+      "warm, clean cel-color blocks"
+    ],
+    "basis_and_limits": "Do not equate the game with Studio Ghibli or attribute its art to Miyazaki; Ghibli-Simulation remains a style label, not a production credit."
+  },
+  "catalog_index": 15
+}

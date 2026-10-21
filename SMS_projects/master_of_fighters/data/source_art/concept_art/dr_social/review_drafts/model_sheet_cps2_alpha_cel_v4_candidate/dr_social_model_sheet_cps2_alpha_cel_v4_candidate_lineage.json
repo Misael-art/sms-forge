@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v4_candidate",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_approval",
+  "catalog_index": 1,
+  "revision": 4,
+  "style_id": "CPS2-Alpha-Cel",
+  "artistic_style_reference": {
+    "named_artist": "Bengus",
+    "reference_role_and_scope": "Capcom concept-art reference associated with Street Fighter Alpha development; not a blanket sprite authorship claim.",
+    "source_url": "https://game.capcom.com/cfn/sfv/column/112448?lang=en",
+    "attribution_status": "official_contextual_reference",
+    "style_signature": [
+      "expressive 1990s fighting-anime faces",
+      "strong graphic contour and readable silhouettes",
+      "high-energy pose staging"
+    ],
+    "basis_and_limits": "Retained from the approved v2 lineage. Visual-analysis descriptors; the cited Capcom interview supplies development context, not sole-art credit."
+  },
+  "parent_lineage": [
+    {
+      "artifact_id": "dr-social-model-sheet-cps2-alpha-cel-v03-candidate",
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/dr_social_model_sheet_cps2_alpha_cel_v3_candidate.png",
+      "sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e",
+      "role": "direct composition and costume candidate; independently reviewed with arm-continuity and weapon-read risks"
+    },
+    {
+      "artifact_id": "dr-social-model-sheet-cps2-alpha-cel-v02",
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+      "role": "owner-approved identity, face, palette, scale and style reference; remains approved"
+    }
+  ],
+  "generated_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "dimensions_px": [
+      1619,
+      971
+    ],
+    "tool": "built-in image_gen.imagegen",
+    "reference_method": "referenced_image_paths; v3 candidate and approved v2 used for the first edit; first generated image and approved v2 used for technical typography refinement"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_prompt.txt",
+    "sha256": "464eccb292332a990941bbecfb7f27c50693934f6ff5b3c088d7c05794242885",
+    "role": "record of both exact generation prompts"
+  },
+  "source_research": [
+    {
+      "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+      "sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c",
+      "role": "project weapon list and character identity"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_combat_design_proposal_v1.md",
+      "sha256": "fba3fdadb46cb9ed0cd005edbd5fd1e3bf8cd8bb0ac35c10eb5ceebc2bc5db0e",
+      "role": "source-game weapon naming discrepancy and fan-game adaptation boundary"
+    },
+    {
+      "url": "https://gamefaqs.gamespot.com/sms/588099-master-of-darkness/faqs/44643",
+      "role": "secondary source-game item reference only; not authority for project moveset"
+    }
+  ],
+  "review": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_cps2_alpha_cel_v4_review_v1.json",
+    "status": "passed_independent_review_pending_owner"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only",
+  "owner_approval_decision": null
+}

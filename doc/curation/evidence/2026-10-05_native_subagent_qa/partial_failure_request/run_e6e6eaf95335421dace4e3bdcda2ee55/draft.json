@@ -1,0 +1,56 @@
+{
+  "schema": "sms_subagent_session_v1",
+  "artifact_kind": "harness_worker_result",
+  "task_id": "605b4800688c4b7fa646eadd0e4d0ad6",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01",
+  "producer_id": "/root",
+  "worker_id": "/root/native_runtime_qa",
+  "lane": "runtime",
+  "request": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/request.json",
+    "sha256": "7b42955de04c375822420c75e275cd57c23f840fbc6aa625d4def4e303de908c"
+  },
+  "status": "blocked",
+  "claim_ceiling": "assigned_checks_only",
+  "promoted": false,
+  "findings": [],
+  "artifacts": [
+    {
+      "id": "unavailable_probe_frame",
+      "kind": "framebuffer",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/run_e6e6eaf95335421dace4e3bdcda2ee55/case_0_frame.png",
+      "sha256": "469b6944b1da58610804c4a94c5a98a8f587fc87ee8afa2a5b095f592e96530b",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/run_e6e6eaf95335421dace4e3bdcda2ee55/case_0_frame.json",
+        "sha256": "992934ee9d81bd11ded3014ccb3229cd5bc9826e5758826ced826e9adf4df140"
+      }
+    },
+    {
+      "id": "commands",
+      "kind": "input_trace",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/run_e6e6eaf95335421dace4e3bdcda2ee55/commands.jsonl",
+      "sha256": "4b1753fdb9486fe04fa59242bdcc939b4115ece11adee77b41851b7acb70d9b9"
+    }
+  ],
+  "session": {
+    "id": "64389bd2f3b64ba78379981ebc517a00",
+    "owner": "/root/native_runtime_qa",
+    "bundle": null,
+    "metadata": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/run_e6e6eaf95335421dace4e3bdcda2ee55/closed_session.json",
+      "sha256": "84d02132e81c91313f80409c33291361baef8d3f394047e28e1d8e71d9a90acf"
+    },
+    "closed": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/partial_failure_request/run_e6e6eaf95335421dace4e3bdcda2ee55/closed_session.json",
+      "sha256": "84d02132e81c91313f80409c33291361baef8d3f394047e28e1d8e71d9a90acf"
+    }
+  },
+  "coverage": [
+    {
+      "id": "unavailable_probe",
+      "status": "not_run",
+      "note": "bridge rejected command or identity mismatch",
+      "evidence": []
+    }
+  ]
+}

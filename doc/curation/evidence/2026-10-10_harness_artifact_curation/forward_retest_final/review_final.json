@@ -1,0 +1,1466 @@
+{
+  "status": "passed_focused_retest",
+  "fixture_only": true,
+  "prior_result_preserved": "/tmp/smsforge-harness-forward-20261010/result.json",
+  "prior_result_sha256": "33d8b26c7ef4a2eb452b89c47b4d17387cc090cf093f905a379eac6e609467cf",
+  "fixed_misclassified_visual_outputs": [
+    {
+      "kind": "visual_review",
+      "suffix": ".xlsx",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.xlsx"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".ods",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.ods"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".png",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.png"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".jpg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.jpg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".jpeg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.jpeg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".gif",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.gif"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".webp",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.webp"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".svg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.svg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".aseprite",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.aseprite"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "visual_review",
+      "suffix": ".psd",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_visual_review",
+            "kind": "visual_review",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.psd"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_visual_review",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".xlsx",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.xlsx"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".ods",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.ods"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".png",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.png"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".jpg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.jpg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".jpeg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.jpeg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".gif",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.gif"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".webp",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.webp"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".svg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.svg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".aseprite",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.aseprite"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "suffix": ".psd",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_documentation_update",
+            "kind": "documentation_update",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.psd"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_documentation_update",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".xlsx",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.xlsx"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".ods",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.ods"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".png",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.png"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".jpg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.jpg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".jpeg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.jpeg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".gif",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.gif"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".webp",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.webp"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".svg",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.svg"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".aseprite",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.aseprite"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "kind": "inventory",
+      "suffix": ".psd",
+      "taskset": {
+        "tasks": [
+          {
+            "id": "misclassified_inventory",
+            "kind": "inventory",
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/unregistered-comparison.psd"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "misclassified_inventory",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    }
+  ],
+  "valid_registered_routes": [
+    {
+      "kind": "visual_production",
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "registered_visual_production"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "registered_visual_production",
+            "kind": "visual_production",
+            "artifact_ids": [
+              "ash.grip.weapon.r1"
+            ],
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt",
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json",
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json"
+            ],
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": true,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "kind": "visual_review",
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "registered_visual_review"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "registered_visual_review",
+            "kind": "visual_review",
+            "artifact_ids": [
+              "ash.grip.weapon.r1"
+            ],
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt",
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json",
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json"
+            ],
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": true,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "kind": "inventory",
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "registered_inventory"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "registered_inventory",
+            "kind": "inventory",
+            "artifact_ids": [
+              "ash.grip.weapon.r1"
+            ],
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt",
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json",
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json"
+            ],
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": true,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "kind": "documentation_update",
+      "result": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [
+          "registered_documentation_update"
+        ],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "registered_documentation_update",
+            "kind": "documentation_update",
+            "artifact_ids": [
+              "ash.grip.weapon.r1"
+            ],
+            "write_paths": [
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt",
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json",
+              "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json"
+            ],
+            "assignment": "coordinator",
+            "serialized_reason": "kind_not_parallel:documentation_update"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": true,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    }
+  ],
+  "generic_qa_directory_preflight": {
+    "schema": "harness_plan_v1",
+    "tool": {
+      "name": "harness_orchestration",
+      "version": "1.1.0"
+    },
+    "coordinator_is_single_claim_owner": true,
+    "coordinator_is_single_promotion_owner": true,
+    "max_parallel": 3,
+    "lanes": [
+      "visual"
+    ],
+    "coordinator_tasks": [],
+    "worker_tasks": [
+      "native_qa"
+    ],
+    "rejected": [],
+    "tasks": [
+      {
+        "id": "native_qa",
+        "kind": "test_execution",
+        "write_paths": [
+          "/tmp/smsforge-harness-forward-20261010/native_qa/exclusive_session"
+        ],
+        "assignment": "worker",
+        "lane": "visual"
+      }
+    ],
+    "claim_ceiling": "orchestration_diagnostic_only",
+    "artifact_registry_checked": false,
+    "artifact_registry_problem": null,
+    "preflight_only_not_filesystem_lock": true,
+    "ok": true
+  },
+  "explicit_media_requires_registry": {
+    "schema": "harness_plan_v1",
+    "tool": {
+      "name": "harness_orchestration",
+      "version": "1.1.0"
+    },
+    "coordinator_is_single_claim_owner": true,
+    "coordinator_is_single_promotion_owner": true,
+    "max_parallel": 3,
+    "lanes": [],
+    "coordinator_tasks": [],
+    "worker_tasks": [],
+    "rejected": [
+      {
+        "id": "explicit_qa_png",
+        "reason": "visual_outputs_need_valid_registry:missing"
+      }
+    ],
+    "tasks": [],
+    "claim_ceiling": "orchestration_diagnostic_only",
+    "artifact_registry_checked": false,
+    "artifact_registry_problem": null,
+    "preflight_only_not_filesystem_lock": true,
+    "ok": false
+  },
+  "self_checks": [
+    {
+      "tool": "artifact_registry.py",
+      "exit": 0,
+      "stdout": "[SELF-CHECK OK] artifact_registry (unique heads, hashes, ownership, lineage, extension, scan, decision binding)\n",
+      "stderr": ""
+    },
+    {
+      "tool": "harness_orchestration.py",
+      "exit": 0,
+      "stdout": "[SELF-CHECK OK] harness_orchestration (3 ramos; claim no coordenador; overlap serializa; teto 3; worker não promove; visual outputs registry-bound)\n",
+      "stderr": ""
+    }
+  ],
+  "final_fixture_audit": {
+    "schema": "sms_artifact_audit_v1",
+    "ok": true,
+    "problems": [],
+    "warnings": [],
+    "artifact_count": 6,
+    "indexed_file_count": 18,
+    "claim_ceiling": "organization_and_reference_consistency_only"
+  },
+  "source_hashes": {
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/harness_orchestration.py": "f34ba8f4f24599b671d5010f9e78e1696a2185550f3b4d32cb4f5728285cf426",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/artifact_registry.py": "69b74cdd842863a64e99dc47e16450769a08631ee3d2f0d3dea8323f8e812991",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/artifact-organization.md": "5a44953c300438769b13bb127cd51035468f3eaf9306b900b18d261d026068cb",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-harness-orchestration.md": "eb001a783e5e1d8e61dfeef9cd891970f84cd191af5ecdb5fc221d95bc3c404e"
+  },
+  "scope": "Source/context artistic semantics and future contents of generic output directories remain outside preflight; actual QA requires session_qa native request, exclusive directory and own audited manifest. No production art in QA directories; no duplicate media tree.",
+  "no_repo_edits_no_art_no_emulator_no_saas": true
+}

@@ -3,6 +3,138 @@
 > ESTADO OPERACIONAL REAL. Autoridade #1.
 
 ## Última atualização
+2026-09-25 (2) — **ÁUDIO REGENERADO NO PISO L078/L079; ROM CANÔNICA AGORA É
+`78794874877935e3269528f5756829f2d50ee45f09a21b261b3dfb9c8b9651ef`, 32768 B.**
+O tema do Ken foi recomposto pelo próprio gerador do projeto
+(`tools/gen_music_ken_stage.py`, o arranjo original de 4 canais que nunca
+chegara ao binário — ver L079) com as correções do piso: acento alternado no
+arpejo (M2 ch1), pizzicato no baixo (M2 ch2), percussão toda em ruído BRANCO
+(0x00/0x03/0x02, L079) e decay no lead. Reprovado pelo orçamento: a versão de
+8 compassos mediu 1040 B (+123 sobre os 917 jogados) e a árvore de trabalho
+atual já não comportava o acréscimo — makesms morreu de novo em "Bank 1
+overflow", agora 33 B além do fim. Corte medido, não apertado: caiu o 2º
+compassinho, que repetia a tônica Am já exposta no 1º (7 compassos = 672
+frames, múltiplo de 4/4, cadência G# preservada). Stream final: **919 B
+(dur=672f=11,2 s), piso `audit_psg_quality`: viol=[], gaps 14,7/16,2/12,
+2 atenuações/canal, uníssono 0%, ruído branco 100%**. `music_title.psg/h`
+regenerados compliantes (577 B, viol=[]) mas continuam fora da compilação —
+a tela de título não referencia o header; o arquivo em disco não é mais o
+reprovado de 10 cláusulas. Manifest de áudio re-hasheado (3 streams),
+binding→ROM re-hasheado (15 entradas, `audit_rom_asset_binding --require`
+ok), bundle selado com 7 artefatos pós-ROM, `reconcile_claims` PASS.
+Folga real medida: dados terminam em 0x7FA8 e o bloco de cabecalho comeca em
+0x7FB2 — sobram ~10 B. Qualquer proximo acrescimo a esta ROM exige primeira
+medição (redundancia removivel ou paginacao 64 KB declarada no TDD), nao
+suposicao.
+`capture_audio` 20 s: peak=6430, ativo=100% (era 89% — a dinâmica agora é
+visível até na métrica de presença), runtime probe: boot/frame_advance/
+fps_constante PASS. O resultado worst-frame (`vline_max=216`, delta=57 em
+12 s; o anterior era 181/~2900) foi **invalidado por L082**: a ROM contava
+`vline >= 0xC0`, que seleciona finais ainda no VBlank. Ele não prova PASS nem
+derramamento. Medir novamente o SHA corrente com `measure_worst_frame.py` antes
+de reivindicar orçamento.
+**EIXO INPUT REPROVADO NESTA ÁRVORE (não pelo áudio):**
+`prove_input_memory.py` rodou contra a nova ROM com canal de teclado vivo
+(BackSpace provado, foco ok), luta em FIGHT, mas `Left` deslocou dx=+0 e o
+soco por input não conectou (alcance nunca atingido por teclado); o soco na
+atração passou (19 hits). A refatoração WIP não-commitada em `fight.c`
+(`g_control_mode` HUMAN/CPU/REPLAY) mudou o caminho do input — a prova do
+efd7162f (dx +96/−94) não se reconstitui sozinha. Entrega com eixo gameplay
+exige re-provar input depois que o WIP assentar.
+
+2026-09-25 — **PISO DE QUALIDADE DE ÁUDIO MEDIDO (L078/L079, gate
+`audit_psg_quality.py`).** O eixo `audio` deste projeto sempre significou
+PRESENÇA (peak/ativo); a qualidade musical nunca foi medida, e a medição
+reprovou: `music_battle.psg`/`music_ken_stage.psg` (SHA `aaf1cf1b8e54…`, as
+duas são byte-idênticas) erram 2 cláusulas cirúrgicas — baixo ch2 com
+atenuação única e percussão 99% PERIÓDICA (o gerador chama "bumbo/caixa" a
+modos ≥ 4, que o SN76489 toca como assobio tonal); `music_title.psg`
+(`64acda75ca90…`, herança do gerador compartilhado) reprova em 10 cláusulas.
+Achado doc↔dado: o bank declarava o tema do Ken em 4 papéis, mas o stream em
+disco não tem UM evento de nota em ch1 — o arpejo nunca chegou ao binário.
+SFX 4/4 passam (decay e duração corretos). Artefato:
+`out/logs/psg_quality.json`; dívida para fechar o piso no ledger
+`doc/psg_quality_ledger.json`. Até a regeração conforme, o claim de entrega
+com áudio tem qualidade demonstrada NÃO.
+
+2026-09-24 — **RE-CONCILIAÇÃO (curadoria passo 2): ROM CANÔNICA AGORA É
+`efd7162f8c9f829b4826047d24ac2cfed5ab163e094520ee4ca1d00521892122`, 32768 B, e
+toda a cadeia de evidência foi re-medida contra ela.** O bank anterior selava
+eixos em `8a83ca2d…` (v086); desde então entraram L065–L068 (chip de guarda,
+contrato de throw, QCF) e o probe M02 ficou no fonte **sem builds válidos**:
+o conteúdo chegava a 0x8000 e o makesms morria em "Bank 1 overflow" (16 B
+além do espaço reservado). Destravado por remoção de redundância medida, não
+de função: `probe_missed` (0xC7EE) era incrementado sob condição idêntica à de
+`probe_vovf` e nunca era consumido por `analyze()` — L051 aplicado ao próprio
+probe ("contador redundante come ROM"); inits mortos de frame/vline/phase
+fora (são reescritos todo frame; o tool trabalha com deltas). Folga atual:
+fim do conteúdo em 0x7DF2 → **501 B livres** antes do espaço SDSC (0x7FE7).
+Rebuild idempotente na mesma SHA.
+
+Medições FRES CAS nesta ROM (todas com lastro de arquivo em `out/evidence/`):
+- `runtime_probe.json`: boot + frame advance + fps da própria ROM — janelas
+  55,69 / 55,53 (205→656→1108 frames). PASS.
+- `fps.json`: título do Emulicious 59–60 fps, média 59,8, 6 amostras,
+  `constante_50_60=true`.
+- `evidence.png`/`evidence.json`: boot capturado (variância luma 6317/5123).
+- `audio_m03.wav` + `audit_audio`: peak 5143, **ativo 100%** (trilha do Ken
+  continua na ROM nova).
+- `input_memory.json` v3, SHA `efd7162f…`: `input_provado=true` (dx +96/−94
+  com `probe_keys` 0x08/0x04 lidos durante o hold); **soco −7 por input a
+  gap=19**, `keys_b1=0x10`, pose 0x82, `hit_used=true`; sideswap
+  `cruzou_no_ar=true` (min_py 58, facing 0x82→0x00); atração connecta 14
+  hits sozinha.
+- `worst_frame_m03.json`: **veredito honesto = DERRAMOU** com número real.
+  O contador agora é a word não-saturante de `probe_vovf` (o defeito que o
+  curador apontou — 255 indistinguível entre saturação e contagem — morreu
+  junto com o byte antigo): delta **181 frames derramados** em ~2.900 na
+  janela de 45 s de atração (≈ 6 %), `vline_max=235/262` (0xEB), fases 1–3
+  observadas em FIGHT com derrame. O M02 (instrumento) está fechado como
+  MEDIÇÃO; a dívida de orçamento continua em pé — o número fresco é 181/235,
+  não mais o 247/251 com byte saturado.
+
+Eixos derivados por `build_inner`+`reconcile_claims` nesta SHA: build,
+validation_report, boot_emulador, gameplay, fps_constante, audio,
+memory_bank_atualizado — **todos `true` com evidência desta ROM**.
+Complementos do mesmo dia: `semantic_boot_current.json` — boot PASS no
+`screenshot_semantic_gate` em escala nativa (157 cores, dominante 19,5%; o
+gate precisou de conserto sensível à escala, L072); binding asset→ROM
+re-hasheado para `efd7162f…` (15 entradas, `audit_rom_asset_binding --require`
+PASS); bundle selado com **8 artefatos** pós-ROM
+(`evidence_bundle.json`, 25/09, rom_sha256 `efd7162f…`). Em 25/09 (curadoria
+passo 3) entrou vídeo nativo da receita de combate: `recipe_combate.mp4`
+(256×192, 46,34 s, movimento 76,4%, 6/6 frames informativos; f02 = luta,
+f05 = "KEN WINS" com Guile caído — laço golpe→dano→KO OBSERVADO nesta ROM, o
+que antes era inferência de `8a83ca2d…`) + `recipe_combate.json` + frames
+`recipe_combate_f00..f05.png`. O que NÃO
+foi re-medido, e portanto vale como binário antigo: `video_ko.mp4`,
+`ko_banner.png`, `laco*.png`, `poses.json` — selados
+em `8a83ca2d…`.
+
+2026-09-15 — **CICLO M01 PARCIAL NA ROM `5ac2dcc8…`.** O GDD/TDD agora
+declara o contrato de engine reutilizável e o backlog/checkpoint estão em
+`doc/engine_backlog.json` e `doc/engine_progress.json`. O núcleo passou a
+decodificar P1/P2 com comparação em 16 bits (`key_down`), possui modos
+explícitos HUMAN/CPU/DUMMY/REPLAY, limpa o `Fighter` por atribuição estática no
+reset, resolve contatos após um snapshot compacto de identidades e corrige
+empate/timeout e direção da IA após troca de lado. A regressão permanente é
+`tools/sms_wrapper/mssf2t_regression.py`: a fixture que falhava no fonte
+legado reprova truncamento P2 e testa trade/deduplicação; agora passa.
+
+Build canônico passou com `--opt-code-size`, 32768 B, SHA-256
+`5ac2dcc8576a5dcb17fe419c1d5a754fb15a419d4841a181947ab8f9b5747362`.
+`out/evidence/evidence.png` foi observado no Emulicious;
+`out/evidence/runtime_probe.json` provou boot, frame advance e 57,35 fps em
+NTSC, enquanto `out/evidence/fps.json` teve 5 amostras 59–60 fps (média
+59,6). `out/evidence/worst_frame_m01.json` reprovou honestamente o orçamento:
+11 frames derramaram em uma janela curta; o instrumento ainda é o contador de
+8 bits legado e não fecha M02. A tentativa de `prove_input_memory.py` ficou
+sem sessão DAP/log útil; o JSON de 09/09 não foi promovido para esta SHA.
+
+Próximo bloqueador: M02 — trocar `probe_vovf` por contador sem saturação
+silenciosa, medir fases antes/depois de upload e missed VBlank, e criar prova
+P2/trade/reset no Z80 antes de voltar ao renderer.
+
 2026-09-08 — **GOLDEN SLICE RE-SELADO NA v086 COM O SOCO PROVADO E GUILE DE FRENTE.** Ciclo
 completo: (1) trilha do palco do Ken substituída pelo **port do tema de
 referência** (MIDI de fã em `art_src_base/audio/music/reference/`, sha256
@@ -30,6 +162,9 @@ em 0x7E1C; teto real do makesms: 0x7F80). Bundle:
 video_ko.mp4, ko_banner.png).
 
 ## Eixos — medidos NESTA SHA (8a83ca2d…), selados em 2026-09-08
+> **SUPERSEDIDO em 2026-09-24** pela re-conciliação `efd7162f…` (bloco no topo
+> — 7 eixos canônicos re-medidos; KO/laço NÃO re-medidos, viraram inferência).
+
 | Eixo | Status | Prova |
 |------|--------|-------|
 | build | buildado | 32768 B, 484 B livres, rebuild idempotente (mesma SHA) |
@@ -373,3 +508,29 @@ v086 com whiff-punish por relógio. A nota antiga "não reivindicar" fica
 aqui como registro do estado da época; o teto de claim vigente é o do GDD
 ("protótipo jogável de luta 1v1"), e o soco consta como provado nos eixos.
 
+## Ciclo 2026-09-25 (3) — identidade do tema: transcrição + voz "FIGHT" + re-selagem
+
+- Pedido humano: "som diferente do tema original; pode colocar voz FIGHT na
+  abertura; soa acelerada". Resposta medida: piso ganhou M7 (respiro >= 8
+  frames) e LOOP_MIN 250 (L080, SMS_GLOBAL 65).
+- `tools/gen_music_ken_stage.py` reescrito: transcritor determinístico do MID
+  de referência hasheado. Battle 750 B / 1280 f (0 violações, 0 avisos,
+  uníssono 0.0, gaps 14.5/135.6/78.7), title 494 B / 1152 f, voz 45 B / 24 f
+  (formantes, canais 1+2+3, autorizada explicitamente — única mudança em
+  `fight.c` além do WIP do humano: include, helper `psg_voice_fight`, chamada
+  na transição ROUND→FIGHT).
+- ROM 71af64d1cad9…: 32 K com 123 B de folga — o oitavo compasso e a voz
+  couberam sem paginação (dívida dos 33 B que cortavam o compasso foi paga
+  pela economia da transcrição, não por corte).
+- `audit_psg_channel_binding.py` corrigido (L081, SMS_GLOBAL 66): máscaras
+  compostas eram invisíveis ao gate; agora compara conjuntos de tokens e
+  reprova canal não-literal. Manifesto de áudio reescrito com os SHAs finais
+  + entrada sfx_fight; mapa `doc/rom_asset_binding.json` agora inclui os 7
+  streams compilados (precedente do kage) e passa `--require`.
+- Eixos re-medidos na ROM final: boot+semântica PASS, fps 8×60 constante,
+  runtime probe PASS (após re-medida limpa — host estava sob carga de outro
+  workspace), áudio isolado 33.4 s ativo=100% audit PASS, worst-frame segue
+  honesto: derramou vovf_delta=26/12 s, vline_max=199 (classe pré-existente,
+  não agravada). Bundle `out/evidence/evidence_bundle.json` selado com 7
+  artefatos. Input/gameplay continuam NÃO re-provados (WIP g_control_mode do
+  humano — dívida viva, decisão de quando refazer é humana).

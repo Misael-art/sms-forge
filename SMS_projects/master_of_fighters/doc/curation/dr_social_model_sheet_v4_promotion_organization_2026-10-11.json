@@ -1,0 +1,155 @@
+{
+  "schema": "sms_artifact_organization_v1",
+  "date": "2026-10-11",
+  "scope": "Dr. Social model-sheet v4 owner promotion and clean active concept-art directory.",
+  "supersedes_organization_snapshot": "SMS_projects/master_of_fighters/doc/curation/artifact_organization_2026-10-11.json",
+  "approved_model_sheet": {
+    "artifact_id": "dr-social-model-sheet-cps2-alpha-cel-v04-candidate",
+    "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "decision": "doc/decisions/dr_social_model_sheet_cps2_alpha_cel_v04_owner_approval.json",
+    "scope": "model_sheet only"
+  },
+  "active_root_files": [
+    {
+      "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "role": "image"
+    },
+    {
+      "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4_metadata.json",
+      "sha256": "0f22a2cf6788c59168734a6c78307bd5179bfcb05589da00bebfe7941fff601a",
+      "role": "metadata"
+    },
+    {
+      "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4_lineage.json",
+      "sha256": "f211ec6b66fb0c9ebb75e47e8ae526ed271d0612472389a6d92ed3267b5f84f8",
+      "role": "lineage"
+    },
+    {
+      "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4_prompt.txt",
+      "sha256": "464eccb292332a990941bbecfb7f27c50693934f6ff5b3c088d7c05794242885",
+      "role": "prompt"
+    }
+  ],
+  "operations": [
+    {
+      "operation": "move",
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "to": "data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "sha256_before": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+      "sha256_after": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+      "pixels_changed": false,
+      "status_change": "approved historical reference -> superseded active head"
+    },
+    {
+      "operation": "move",
+      "from": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "to": "data/source_art/concept_art/dr_social/approved_records/concept_v3/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "sha256_before": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "sha256_after": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "pixels_changed": false,
+      "status_change": "remains approved as a distinct concept identity/reference role"
+    },
+    {
+      "operation": "copy",
+      "from": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate.png",
+      "to": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+      "sha256_before": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "sha256_after": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "pixels_changed": false,
+      "review_snapshot_retained_at_source": true
+    },
+    {
+      "operation": "move",
+      "from": "data/source_art/concept_art/dr_social/approved_records/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2_metadata.json",
+      "sha256_before": "ddeed4a2f8c89f5e51265f4ca179c09a4429f8d5e28cc5adf95d6532d12648f7",
+      "sha256_after": "ddeed4a2f8c89f5e51265f4ca179c09a4429f8d5e28cc5adf95d6532d12648f7",
+      "content_changed": false
+    },
+    {
+      "operation": "move_and_repoint_lineage",
+      "from": "data/source_art/concept_art/dr_social/approved_records/model_sheet_cps2_alpha_cel_v2/asset_lineage_record_dr_social_model_sheet_cps2_alpha_cel_v2.json",
+      "to": "data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/asset_lineage_record_dr_social_model_sheet_cps2_alpha_cel_v2.json",
+      "sha256_before": "2e169d283fc5a2aa616696d492abdfc3a6ad2abdec8f143a80bc7800d2ce7cec",
+      "sha256_after": "a8d975bd3913917c9d6c2d4e23fd641ab1e9f9adbc07bec1d53ba3b5dfb80625",
+      "content_change": "internal references updated to the archived v1/v2 locations; artwork pixels unchanged"
+    },
+    {
+      "operation": "move_and_repoint_lineage",
+      "from": "data/source_art/concept_art/dr_social/approved_records/concept_v3/asset_lineage_record_harmony_proposal_v3.json",
+      "to": "data/source_art/concept_art/dr_social/approved_records/concept_v3/asset_lineage_record_harmony_proposal_v3.json",
+      "sha256_before": "4fe5126d19907d4c62044d08f93b79eb02e8b6e847fba8bfa805f13189982573",
+      "sha256_after": "eec7857856f3a078176169467b26693caa60f7822a01f2481a2e21946e670181",
+      "content_change": "image and owner-decision paths/hashes updated for administrative relocation; concept image SHA unchanged"
+    },
+    {
+      "operation": "derive_approved_metadata",
+      "from": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4_metadata.json",
+      "sha256_before": "8c4cb412eb9dcee0640e18e4d46a15431724a989948c997f088171e85c705588",
+      "sha256_after": "0f22a2cf6788c59168734a6c78307bd5179bfcb05589da00bebfe7941fff601a",
+      "content_change": "approval state and canonical paths added; image bytes unchanged"
+    },
+    {
+      "operation": "derive_approved_lineage",
+      "from": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_lineage.json",
+      "to": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4_lineage.json",
+      "sha256_before": "4de8531c160f3e5668ac1069891dfd23338a71d42db56dd6457330748cd99bf8",
+      "sha256_after": "f211ec6b66fb0c9ebb75e47e8ae526ed271d0612472389a6d92ed3267b5f84f8",
+      "content_change": "approval state and canonical paths added; image bytes unchanged"
+    },
+    {
+      "operation": "copy_exact_prompt",
+      "from": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4_prompt.txt",
+      "sha256_before": "464eccb292332a990941bbecfb7f27c50693934f6ff5b3c088d7c05794242885",
+      "sha256_after": "464eccb292332a990941bbecfb7f27c50693934f6ff5b3c088d7c05794242885",
+      "content_changed": false
+    }
+  ],
+  "review_snapshot": {
+    "path": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/",
+    "files": [
+      {
+        "path": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate.png",
+        "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+      },
+      {
+        "path": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_metadata.json",
+        "sha256": "8c4cb412eb9dcee0640e18e4d46a15431724a989948c997f088171e85c705588"
+      },
+      {
+        "path": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_lineage.json",
+        "sha256": "4de8531c160f3e5668ac1069891dfd23338a71d42db56dd6457330748cd99bf8"
+      },
+      {
+        "path": "data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_prompt.txt",
+        "sha256": "464eccb292332a990941bbecfb7f27c50693934f6ff5b3c088d7c05794242885"
+      }
+    ],
+    "purpose": "Preserve exact hash-bound independent-review inputs; not the active approved directory."
+  },
+  "storage_policy": {
+    "active_root": "latest approved model sheet plus its canonized metadata, lineage and exact prompt only",
+    "approved_records": "approved artwork of a separate role",
+    "historical_approved": "previously approved sheet superseded as active",
+    "review_drafts": "candidate/exercise and immutable review snapshots",
+    "deletion": "none"
+  },
+  "historical_decisions_preserved": [
+    {
+      "artifact_id": "dr-social-model-sheet-cps2-alpha-cel-v02",
+      "decision": "doc/decisions/dr_social_model_sheet_cps2_alpha_cel_v02_owner_approval.json",
+      "note": "Original owner decision preserved as the historical approval snapshot; the central artifact registry now records the image at its archived path and status superseded."
+    }
+  ],
+  "independent_review_path_resolution": {
+    "report": "doc/dr_social_model_sheet_cps2_alpha_cel_v4_independent_review_v1.json",
+    "reviewed_v2_path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+    "current_v2_archive_path": "data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+    "sha256_unchanged": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+    "meaning": "The reviewer report remains an immutable record of the paths available at review time; byte identity is confirmed by hash and this relocation map."
+  }
+}

@@ -116,6 +116,11 @@ O3_BANK_FIRST = 2                # blocos nos bancos 2..6 (D1)
 O3_BANK_COUNT = 5
 O3_BANK_BYTES = 16384
 O3_DELAY_CAP = 255               # delay 999 (hold da fonte) satura em 255
+# D9-a3 (M8): o ataque do jogador e o unico conjunto que, sozinho, enche as
+# linhas 1/2 (a102 = 7/8 celulas) e deixa zero scanlines para cabeca/tronco do
+# inimigo. O arco externo da espada e sacrificado ate o cap; o corpo fica.
+O3_AX_ATTACK_FRAMES = ("a101", "a102", "a103", "a104", "a105")
+O3_AX_ATTACK_ROW_CAP = 5
 
 
 def sha256_file(path: Path) -> str:
@@ -409,6 +414,30 @@ def o3_priority_order(cells):
     """Ordem de inclusao/sacrificio do inimigo: densidade desc, banda asc,
     coluna asc (celula esparsa cai primeiro; revisao artistica pendente)."""
     return sorted(cells, key=lambda c: (-c["dens"], c["row"], c["col"]))
+
+
+def o3_trim_attack_cells(cells, side, cap=O3_AX_ATTACK_ROW_CAP,
+                         rows=(1, 2)):
+    """D9-a3: cap de celulas/linha nas poses de ataque do jogador.
+
+    O lado externo (arco da espada, no sentido do inimigo) cai primeiro:
+    para a arte `left` e a coluna alta; para a arte `right`, espelhada, e a
+    coluna baixa. Cabeca/tronco ficam no lado interno. Retorna (kept, dropped)
+    com `dropped` ordenado por (linha, coluna) para registro deterministico.
+    """
+    drop = []
+    for row in rows:
+        row_cells = [c for c in cells if c["row"] == row]
+        excess = len(row_cells) - cap
+        if excess <= 0:
+            continue
+        row_cells = sorted(row_cells, key=lambda c: c["col"],
+                           reverse=(side == "left"))
+        drop.extend(row_cells[:excess])
+    drop.sort(key=lambda c: (c["row"], c["col"]))
+    drop_keys = {(c["row"], c["col"]) for c in drop}
+    kept = [c for c in cells if (c["row"], c["col"]) not in drop_keys]
+    return kept, drop
 
 
 def o3_line_peak_rows(ax_row, enemy_row, dy0p, dy0e, base_p, base_e):
@@ -1388,6 +1417,11 @@ def emit_o3(project: Path, generated_at: str, record_suffix: str = ""):
     cells_both = {"ax": 0, "long": 0}
     max_cells = 0
     max_row = {"ax": 0, "long": 0}
+    max_row_source = {"ax": 0, "long": 0}
+    max_upper_row_ax = 0
+    max_attack_row_ax = 0
+    max_attack_upper_row_ax = 0
+    trim_dropped = []
     long_over = []
     for actor in ("ax", "long"):
         order = o3_priority_order if actor == "long" else \
@@ -1407,17 +1441,44 @@ def emit_o3(project: Path, generated_at: str, record_suffix: str = ""):
             if declared != mb["cells_per_frame"][actor][frame]:
                 raise SystemExit(f"{actor}/{frame}: contagem diverge do escopo")
             for side in ("left", "right"):
-                per_row = o3_row_counts(side_cells[side])
-                row_peak = max(per_row.values())
-                if actor == "ax" and row_peak > O3_PER_LINE:
+                # A checagem de 8/linha vale para a arte-fonte; o cap D9-a3
+                # reduz somente a pose emitida do ataque do jogador.
+                source_rows = o3_row_counts(side_cells[side])
+                source_peak = max(source_rows.values())
+                max_row_source[actor] = max(max_row_source[actor], source_peak)
+                if actor == "ax" and source_peak > O3_PER_LINE:
                     raise SystemExit(
-                        f"ax/{frame}/{side}: {row_peak} celulas na mesma linha"
-                        " (jogador desenha inteiro, sem mecanismo de corte)")
+                        f"ax/{frame}/{side}: {source_peak} celulas na mesma linha"
+                        " (fonte acima do limite; corrigir a arte)")
+                emitted = side_cells[side]
+                if actor == "ax" and frame in O3_AX_ATTACK_FRAMES:
+                    emitted, dropped = o3_trim_attack_cells(emitted, side)
+                    for c in dropped:
+                        trim_dropped.append(
+                            {"frame": frame, "side": side,
+                             "row": c["row"], "col": c["col"],
+                             "dens": c["dens"],
+                             "dx": canvas["ax"]["dx0"] + c["col"] * 8,
+                             "dy": canvas["ax"]["dy0"] + c["row"] * 16})
+                per_row = o3_row_counts(emitted)
+                row_peak = max(per_row.values())
+                upper_peak = max(per_row.get(1, 0), per_row.get(2, 0))
+                if actor == "ax":
+                    max_upper_row_ax = max(max_upper_row_ax, upper_peak)
+                    if frame in O3_AX_ATTACK_FRAMES:
+                        max_attack_row_ax = max(max_attack_row_ax, row_peak)
+                        max_attack_upper_row_ax = max(
+                            max_attack_upper_row_ax, upper_peak)
+                if (actor == "ax" and frame in O3_AX_ATTACK_FRAMES
+                        and upper_peak > O3_AX_ATTACK_ROW_CAP):
+                    raise SystemExit(
+                        f"ax/{frame}/{side}: cap D9-a3 {upper_peak} > "
+                        f"{O3_AX_ATTACK_ROW_CAP} nas linhas 1-2")
                 if actor == "long" and row_peak > O3_PER_LINE:
                     long_over.append({"frame": frame, "side": side,
                                       "row_peak": row_peak})
                 max_row[actor] = max(max_row[actor], row_peak)
-                packed = _o3_pose_cells(side_cells[side], canvas, actor, order)
+                packed = _o3_pose_cells(emitted, canvas, actor, order)
                 poses[actor].append(
                     {"frame": frame, "side": side, "cells": packed,
                      "rows": per_row})
@@ -1776,6 +1837,19 @@ def emit_o3(project: Path, generated_at: str, record_suffix: str = ""):
                       "drops": s["drops"], "peak": s["peak"],
                       "dropped": s["dropped"]}
                      for s in solo if s["drops"]]},
+        "ax_attack_trim": {
+            "policy": ("D9-a3: poses de ataque ax a101..a105 limitadas a "
+                       f"{O3_AX_ATTACK_ROW_CAP} celulas/linha nas linhas 1-2; "
+                       "o lado externo (arco da espada) cai primeiro para "
+                       "devolver scanlines a cabeca/tronco do inimigo"),
+            "frames": list(O3_AX_ATTACK_FRAMES),
+            "row_cap": O3_AX_ATTACK_ROW_CAP,
+            "dropped_cells": len(trim_dropped),
+            "rows_emitted": {f"{p['frame']}_{p['side']}": p["rows"]
+                             for p in poses["ax"]
+                             if p["frame"] in O3_AX_ATTACK_FRAMES},
+            "dropped": trim_dropped,
+        },
         "arcs": {"method": ("D5 simulado por tick em Python na emissao "
                             "(pos += v*100/gs; v -= g*100/gs; g=0.1; gs=200) "
                             "e amostrado por frame NTSC"),
@@ -1823,6 +1897,9 @@ def emit_o3(project: Path, generated_at: str, record_suffix: str = ""):
             "o2_reuse_sha_bound": len(reuse),
             "pal_p1_byte_identical_o2": True,
             "cells_match_m3_and_scope": True,
+            "cells_emitted_after_trim": {"ax": cells_both["ax"],
+                                         "long": cells_both["long"]},
+            "ax_attack_trim_cells": len(trim_dropped),
             "policy_crosscheck_cases": xcheck_cases,
             "policy_crosscheck_violations": xcheck_bad,
             "policy_scan_cases": scan["cases"],
@@ -1830,6 +1907,11 @@ def emit_o3(project: Path, generated_at: str, record_suffix: str = ""):
             "solo_declared_drops": {f"{s['frame']}_{s['side']}": s["drops"]
                                     for s in solo_declared},
             "player_row_peak_cells": max_row["ax"],
+            "player_row_peak_cells_source": max_row_source["ax"],
+            "player_attack_row_peak_cells": max_attack_row_ax,
+            "player_attack_upper_row_peak_cells": max_attack_upper_row_ax,
+            "player_attack_upper_row_peak_cells_cap": O3_AX_ATTACK_ROW_CAP,
+            "player_upper_row_peak_cells_all": max_upper_row_ax,
             "long_rows_over_8": long_over,
             "banks_fit": True,
             "vram_total_vs_budget": [O3_SPR_TILES + O3_BG_TILES + O3_HUD_TILES,
@@ -1843,6 +1925,7 @@ def emit_o3(project: Path, generated_at: str, record_suffix: str = ""):
             "walk da fonte tem 4 quadros; pose set usa walk01/walk03 (walk02/04 omitidos por escopo)",
             "ax anim attack2 (movimento, th101-103) fora do recorte O3; declarar na revisao de escopo (M8)",
             "solo fall03/death01: 9 celulas na mesma linha do canvas -> a 9a cai (drop declarado; contagem por linha, nao por banda)",
+            "D9-a3: o ataque do jogador (a101..a105) cede o arco externo da espada nas linhas 1-2 (cap 4) para a cabeca/tronco do inimigo; as celulas removidas ficam em ax_attack_trim.dropped",
             "tabelas O3 cabem nos 32 KB com o codigo (O2 free_bytes = 12853; tabelas ~6 KB)"],
         "open_items": [
             "ordem de sacrificio fina (dens desc) pendente de revisao artistica",
@@ -1877,6 +1960,15 @@ def self_check_o3() -> bool:
         ({1: 5, 2: 5, 3: 5}, [{"row": i % 6, "col": i, "dens": 1}
                               for i in range(7)], -80, -72, 176, 152)])
     ok &= cases == 4 and bad == 0
+    # D9-a3: cap do ataque remove o lado externo e preserva o interno
+    attack = [{"row": 1, "col": col, "dens": 1} for col in range(7)]
+    kept, dropped = o3_trim_attack_cells(attack, "left", 4)
+    ok &= [c["col"] for c in kept] == [0, 1, 2, 3]
+    ok &= [c["col"] for c in dropped] == [4, 5, 6]
+    attack = [{"row": 2, "col": col, "dens": 1} for col in range(8)]
+    kept, dropped = o3_trim_attack_cells(attack, "right", 4)
+    ok &= [c["col"] for c in kept] == [4, 5, 6, 7]
+    ok &= [c["col"] for c in dropped] == [0, 1, 2, 3]
     jy, jx, _jt = o3_sim_arc(3.3, 1.0)
     ty, tx, _tt = o3_sim_arc(3.0, 1.2)
     ok &= 39 <= len(jy) - 1 <= 41 and 53 <= max(jy) <= 56

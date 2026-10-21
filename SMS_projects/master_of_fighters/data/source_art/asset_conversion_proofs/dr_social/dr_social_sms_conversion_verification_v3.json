@@ -1,0 +1,97 @@
+{
+  "schema": "sms_asset_rom_conversion_verification_v1",
+  "date": "2026-10-10",
+  "project": "master_of_fighters",
+  "status": "diagnostic_static_pose_conversion_pass",
+  "promotion": "not_promoted_to_production_res_or_delivery",
+  "source_pose_proof": "data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.json",
+  "converter": "tools/sms_wrapper/pack_sms_metasprite.py",
+  "tool_sha256": {
+    "tools/sms_wrapper/pack_sms_metasprite.py": "c872210e6f841c8e4de9ca8b3ff23c495c26038fab52d139fb9d507e416426ef",
+    "tools/sms_wrapper/audit_render_fidelity.py": "06b6533a89332b0105965115e1a77c28a6278e8f12b279177435857951796d7d",
+    "tools/sms_wrapper/build_inner.py": "7ae00916839e41f097ae76786fa46a951d31062c11493def3db58b9e68fbd755",
+    "tools/sms_wrapper/audit_rom_asset_binding.py": "1eb111c20713d8029f6e68cf552a42bd309112e5ad91ae1b19749f2cc5b3b3f2"
+  },
+  "rom": {
+    "path": "out/diagnostics/dr_social_asset_probe_v3/project/out/rom/dr_social_asset_probe_v3.sms",
+    "sha256": "6ec05a9b4caae97b36833eddcffb5536d4e63b4a64f75cff681fd998720fcc14",
+    "size_bytes": 16384,
+    "asset_binding": "out/diagnostics/dr_social_asset_probe_v3/project/doc/rom_asset_binding.json",
+    "asset_binding_sha256": "92b3efee25bf9d144e138fc502ac97cf57238ea7a759f446e9c4c03a9ed45d90",
+    "generated_header": "out/diagnostics/dr_social_asset_probe_v3/project/inc/dr_social_tiles.h",
+    "generated_header_sha256": "89106dd119bbaf1e54f042765a1dda256e003801661b3c24b724d13d6e8fc920"
+  },
+  "conversion": {
+    "source_index_values_preserved": true,
+    "source_pixels_resampled_during_normalization": false,
+    "useful_colors_in_character_study": 12,
+    "p1_scope": "Dr Social only; roster-wide P1 mapping pending",
+    "shared_unique_8x8_patterns": 89,
+    "reserved_blank_pattern_count": 1,
+    "loaded_patterns_total": 90,
+    "raw_4bpp_tile_bytes": 2880,
+    "pose_object_and_scanline": {
+      "idle": {
+        "objects": 43,
+        "peak_per_scanline": 6
+      },
+      "action": {
+        "objects": 49,
+        "peak_per_scanline": 7
+      }
+    }
+  },
+  "gates": {
+    "resource_png_indexed_8bit": "pass",
+    "resource_palette_character_contract": "pass",
+    "provenance": "pass",
+    "sprite_geometry_mode": "pass",
+    "scanline_and_sat": "pass",
+    "rom_asset_sha_binding": "pass",
+    "framebuffer_exact_rgb_and_shape": "pass"
+  },
+  "captures": [
+    {
+      "pose": "idle",
+      "session_id": "5ae116a8a78b49c79b311b5f2be061da",
+      "frame": 121,
+      "image": "out/diagnostics/dr_social_asset_probe_v3/project/out/evidence/sessions/5ae116a8a78b49c79b311b5f2be061da/idle_v3.png",
+      "image_sha256": "bf423722d69d0832b0fcd9d6d93adec5dd7dd69bbbcfaa2cbc09d7bfaac21630",
+      "rom_sha256": "6ec05a9b4caae97b36833eddcffb5536d4e63b4a64f75cff681fd998720fcc14",
+      "opaque_pixels": 1483,
+      "opaque_mismatches": 0,
+      "transparent_pixels_checked": 4917,
+      "transparent_mismatches": 0,
+      "fidelity_audit": "out/diagnostics/dr_social_asset_probe_v3/project/out/evidence/idle_exact_v3.json"
+    },
+    {
+      "pose": "action",
+      "session_id": "f28164491f0d484bbbc4e661d1f5f36a",
+      "frame": 124,
+      "image": "out/diagnostics/dr_social_asset_probe_v3/project/out/evidence/sessions/f28164491f0d484bbbc4e661d1f5f36a/action_v3.png",
+      "image_sha256": "4e6ab19936b07ee2bbc949150ae1c0e22d854c02f12ff8403e05cd0ea79e968b",
+      "rom_sha256": "6ec05a9b4caae97b36833eddcffb5536d4e63b4a64f75cff681fd998720fcc14",
+      "opaque_pixels": 1556,
+      "opaque_mismatches": 0,
+      "transparent_pixels_checked": 4844,
+      "transparent_mismatches": 0,
+      "fidelity_audit": "out/diagnostics/dr_social_asset_probe_v3/project/out/evidence/action_exact_v3.json"
+    }
+  ],
+  "emulator_observation": {
+    "tool": "Emulicious private isolated sessions",
+    "nominal_clock_hz_reported": [
+      59.92274340431231,
+      59.92274340431231
+    ],
+    "fps_claim": "not measured",
+    "audio": "not validated",
+    "gameplay": "not tested; action keypose selected only for visual capture"
+  },
+  "known_limitations": [
+    "two static keyposes do not validate animation timing or motion",
+    "single-character P1 study is not the shared roster palette",
+    "no project scene VRAM/RAM/VBlank or banking budget",
+    "no production resource integration or release acceptance"
+  ]
+}

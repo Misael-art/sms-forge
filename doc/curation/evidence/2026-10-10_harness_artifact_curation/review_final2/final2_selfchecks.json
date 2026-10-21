@@ -1,0 +1,67 @@
+[
+  {
+    "tool": "artifact_registry.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "167642",
+        "wall_time_seconds": 0.239008496,
+        "exit_code": 0,
+        "original_token_count": 28,
+        "output": "[SELF-CHECK OK] artifact_registry (unique heads, hashes, ownership, lineage, extension, scan, decision binding)\n"
+      }
+    }
+  },
+  {
+    "tool": "harness_orchestration.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "b56eb8",
+        "wall_time_seconds": 0.142557298,
+        "exit_code": 0,
+        "original_token_count": 38,
+        "output": "[SELF-CHECK OK] harness_orchestration (3 ramos; claim no coordenador; overlap serializa; teto 3; worker não promove; visual outputs registry-bound)\n"
+      }
+    }
+  },
+  {
+    "tool": "audit_learning_capture.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "2c8bcd",
+        "wall_time_seconds": 0.164151895,
+        "exit_code": 0,
+        "original_token_count": 28,
+        "output": "[SELF-CHECK OK] learning_capture (ledger orfao, ferramenta fantasma, doutrina supersedida, furo nao declarado)\n"
+      }
+    }
+  },
+  {
+    "tool": "audit_source_raster.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "1aa02e",
+        "wall_time_seconds": 0.518792621,
+        "exit_code": 0,
+        "original_token_count": 21,
+        "output": "self-check: PASS (binary/RGB/indexed positives; 35 negatives; input preservation)\n"
+      }
+    }
+  },
+  {
+    "tool": "audit_hardware_constants.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "5ffe03",
+        "wall_time_seconds": 0.212859046,
+        "exit_code": 0,
+        "original_token_count": 32,
+        "output": "[SELF-CHECK OK] hardware_constants (reprova numero de outro console afirmado como lei; aceita os do SMS e as notas de correcao)\n"
+      }
+    }
+  }
+]

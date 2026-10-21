@@ -1,0 +1,465 @@
+{
+  "schema": "smsforge.blastem_feature_source_review.v1",
+  "native_worker_id": "/root/review_qa_contract",
+  "created_at_utc": "2026-10-10T12:34:59.244533+00:00",
+  "source_root": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522",
+  "source_release_label": "1.0.0",
+  "source_revision_directory": "blastem-2b2a182f4522",
+  "status": "source_matrix_complete_runtime_not_run",
+  "scope": "Read-only source inspection; no emulator, host input, desktop or project source mutation. No product promotion.",
+  "feature_matrix": [
+    {
+      "feature": "cpu_instruction_breakpoint",
+      "sms_z80_source_availability": "present_with_legacy_Z80_core_!NEW_CORE",
+      "md_m68k_source_availability": "present_native_m68k",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 4570,
+          "end_line": 4587
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 4876,
+          "end_line": 4968
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 5953,
+          "end_line": 5986
+        }
+      ],
+      "limits": [
+        "Z80 command table excludes breakpoint/step/watchpoint under NEW_CORE. Inspect actual pinned binary capability before accepting requests.",
+        "CPU logical address and bank identity must be explicit."
+      ],
+      "integration_recommendation": "Versioned allowlist: breakpoint/advance/step/next; bound command count, stop reason, wall timeout and hit count.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "cpu_memory_write_watchpoint",
+      "sms_z80_source_availability": "present_with_legacy_Z80_core_!NEW_CORE",
+      "md_m68k_source_availability": "present_native_m68k",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 4589,
+          "end_line": 4612
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/z80_to_x86.c",
+          "line": 3907,
+          "end_line": 3984
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c",
+          "line": 1137,
+          "end_line": 1158
+        }
+      ],
+      "limits": [
+        "Z80 handler instruments WRITE_8 memory, not memory reads nor I/O port writes.",
+        "Readable mapped chunks set check_change: an unchanged byte write does not hit. This is not a record of every write attempt.",
+        "Address and size reach uint16_t parameters; reject zero size, truncation, overflow and ranges crossing 0xFFFF. Max individually representable size is 65535.",
+        "Range check_change is derived from the first mapped chunk; require a coherent range/mapping, not an arbitrary cross-map range."
+      ],
+      "integration_recommendation": "Use changed-RAM-byte fixtures for positive and unchanged-write/read/OUT negative cases. Preserve old/new address, PC and cycles as observed, without claiming a bus trace.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "cpu_memory_read_or_access_watchpoint",
+      "sms_z80_source_availability": "not_identified_in_Z80_memory_handlers",
+      "md_m68k_source_availability": "GDB_Z3_Z4_explicitly_unsupported",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/z80_to_x86.c",
+          "line": 3939,
+          "end_line": 3958
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/gdb_remote.c",
+          "line": 233,
+          "end_line": 261
+        }
+      ],
+      "limits": [
+        "Do not label write/change watchpoints read/access watches."
+      ],
+      "integration_recommendation": "Reject unsupported modes explicitly; use Emulicious capability-qualified path if required.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "vdp_register_write_breakpoint",
+      "sms_z80_source_availability": "not_exposed_in_SMS_native_command_table",
+      "md_m68k_source_availability": "present_m68k_vdpregbreak",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 3632,
+          "end_line": 3698
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 4433,
+          "end_line": 4440
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 4999,
+          "end_line": 5023
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 5964,
+          "end_line": 5965
+        }
+      ],
+      "limits": [
+        "Shared reg_hook exists but callback casts system to genesis_context and finds M68K root. It is not safe to transplant into SMS.",
+        "Existing hook ignores same-value register writes.",
+        "SMS commands expose vdpsprites/vdpregs, not vdpregbreak."
+      ],
+      "integration_recommendation": "Reject as unavailable on current SMS backend. A new SMS-aware adapter/hook needs its own fixture and code review; never cast SMS as Genesis.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "vdp_vram_event_watchpoint",
+      "sms_z80_source_availability": "no_SMS_command_or_event_hook_identified",
+      "md_m68k_source_availability": "changelog_claim_not_confirmed_as_standalone_VRAM_event_command",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/CHANGELOG",
+          "line": 36,
+          "end_line": 41
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 1901,
+          "end_line": 1932
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 4999,
+          "end_line": 5023
+        }
+      ],
+      "limits": [
+        "Source search of debug.c and vdp.c found no dedicated native SMS VRAM event watchpoint command.",
+        "vdp:vram array access/save is a snapshot and can expose mutable array elements; it is not an event watchpoint.",
+        "A CPU memory watchpoint does not watch SMS OUT writes to VDP ports.",
+        "The broad changelog wording cannot establish platform-specific availability."
+      ],
+      "integration_recommendation": "Keep unsupported/requires_adapter, or use bounded snapshots and describe only endpoint changes. No claim to catch transient writes.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "programmable_debugger",
+      "sms_z80_source_availability": "present_common_commands_in_SMS_root",
+      "md_m68k_source_availability": "present_common_commands_in_m68k_root",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 4057,
+          "end_line": 4313
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 3096,
+          "end_line": 3133
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c",
+          "line": 5953,
+          "end_line": 5986
+        }
+      ],
+      "limits": [
+        "Commands/functions/conditions/if/while/variables/arrays/save/load and bindings are not an automatic safe protocol.",
+        "while/function recursion can hang; set/load/array setters mutate ROM state.",
+        "frames N requests a future debugger entry, and a breakpoint/watchpoint can stop earlier; prompt arrival alone does not prove N frames advanced."
+      ],
+      "integration_recommendation": "Separate bounded observation from explicit mutation; allowlist schema and state snapshots; require actual frame/cycle deltas and stop reason; reject unrestricted scripts by default.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "apng_recording",
+      "sms_z80_source_availability": "shared_render_path_reachable_through_bindup_ui.record_video",
+      "md_m68k_source_availability": "same_shared_render_path",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/bindings.c",
+          "line": 430,
+          "end_line": 442
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/bindings.c",
+          "line": 724,
+          "end_line": 725
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/render_sdl.c",
+          "line": 1736,
+          "end_line": 1769
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/render_sdl.c",
+          "line": 2235,
+          "end_line": 2290
+        }
+      ],
+      "limits": [
+        "APNG writing is inside render_gl main framebuffer path and compiled with zlib; SDL fallback or DISABLE_ZLIB cannot be silently treated as APNG success.",
+        "Animation duration uses nominal PAL50/NTSC60 with source TODO more precise rate. It does not prove real-time throughput or exact SMS NTSC timing.",
+        "Canvas follows overscan configuration, not an unconditional 256x192.",
+        "Explicitly toggle stop and check finalized animation, full frame count, dimensions, frame delays and content; file existence alone is inadequate."
+      ],
+      "integration_recommendation": "Use private process-local bindup ui.record_video; hash config, assert GL/zlib, close recording before cleanup, audit decoded frames with the cumulative timeline.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "wave_recording",
+      "sms_z80_source_availability": "shared_mixer_output_reachable_with_video_binding",
+      "md_m68k_source_availability": "same_shared_mixer_path",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/bindings.c",
+          "line": 430,
+          "end_line": 442
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/render_audio.c",
+          "line": 23,
+          "end_line": 74
+        }
+      ],
+      "limits": [
+        "ui.record_video starts/stops both APNG and WAVE. No independent WAVE debugger command identified.",
+        "Header is sample_rate,16-bit,2-channel; capture follows audio mixing callbacks, not exact VDP command boundaries.",
+        "Silent/short/truncated WAVE remains possible and must fail the appropriate gate. Dummy output isolation is not proof of correct capture alignment.",
+        "sms.c cassette WAVE input is a separate feature and not output recording."
+      ],
+      "integration_recommendation": "Finalize then audit RIFF lengths, sample rate, channels, duration, peak/RMS, signal identity and bounded alignment; preserve audio not_run when not collected.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "vdp_plane_and_sprite_viewers",
+      "sms_z80_source_availability": "present_explicit_Mode4_renderers",
+      "md_m68k_source_availability": "present_Mode5_renderers",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/bindings.c",
+          "line": 732,
+          "end_line": 741
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c",
+          "line": 1455,
+          "end_line": 1473
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 2754,
+          "end_line": 2930
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 2930,
+          "end_line": 2951
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 6751,
+          "end_line": 6825
+        }
+      ],
+      "limits": [
+        "Plane viewer alternates plane/sprite via debug_modes; no independent ui.sprite_debug binding identified.",
+        "ui.vdp_debug_mode changes the active auxiliary framebuffer only: selection requires private window identity/focus or a qualified direct adapter.",
+        "Auxiliary planes are not the main-game 256x192 framebuffer and do not prove rendered SAT order/flicker/game quality."
+      ],
+      "integration_recommendation": "Capture named private auxiliary window/framebuffer with role, dimensions, mode and ROM/session identity; never use host focus or claim game visual approval.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "vram_cram_compositing_viewers",
+      "sms_z80_source_availability": "present_Mode4_VRAM_CRAM_and_compositing_source_paths",
+      "md_m68k_source_availability": "present_Mode5_paths",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 2316,
+          "end_line": 2343
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 2071,
+          "end_line": 2102
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 2149,
+          "end_line": 2247
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 2957,
+          "end_line": 3029
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+          "line": 6751,
+          "end_line": 6800
+        }
+      ],
+      "limits": [
+        "Mode4 render/dispatch is present; output fidelity has not been exercised in this review.",
+        "Viewer canvases include 1024x512 VRAM,512x512 CRAM and LINEBUF_SIZE composition; they are diagnostic presentations.",
+        "Internal CRAM arrays and physical SMS palette presentation have different indexing/size contracts. Do not treat internal64-byte dumps as64 physical SMS colors."
+      ],
+      "integration_recommendation": "Use distinct artifact roles and hardware-specific array bounds/normalization; validate with known Mode4 fixture before feature qualification.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "psg_oscilloscope",
+      "sms_z80_source_availability": "present_SMS_PSG_scope_toggle",
+      "md_m68k_source_availability": "scope_available_for_MD_sound_sources",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/bindings.c",
+          "line": 732,
+          "end_line": 741
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c",
+          "line": 1455,
+          "end_line": 1473
+        }
+      ],
+      "limits": [
+        "PSGscope visualizes waveforms, not an audio fidelity or music-quality verdict.",
+        "Private auxiliary window still needs ownership/capture identity."
+      ],
+      "integration_recommendation": "Optional diagnostic artifact, separately from WAVE and musical-quality review.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "gdb_remote_breakpoints_Z0_Z1_and_write_watchpoint_Z2",
+      "sms_z80_source_availability": "no_SMS_Z80_GDB_routing_identified",
+      "md_m68k_source_availability": "present_m68k_context_only",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/gdb_remote.c",
+          "line": 172
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/gdb_remote.c",
+          "line": 233,
+          "end_line": 261
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/gdb_remote.c",
+          "line": 505
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/genesis.c",
+          "line": 674,
+          "end_line": 677
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c",
+          "line": 1137,
+          "end_line": 1158
+        }
+      ],
+      "limits": [
+        "GDB handler takes m68k_context and Z2 calls m68k_add_watchpoint. It is not a Z80GDB implementation.",
+        "Z3 read/Z4 access return unsupported.",
+        "Global CLI -D selection is not evidence of working SMS transport."
+      ],
+      "integration_recommendation": "Reject SMS GDB requests explicitly; prefer the native Z80 debugger backend. Do not advertise GDBZ2 as SMS capability.",
+      "runtime_test": "not_run_source_review_only"
+    },
+    {
+      "feature": "maintenance_release_evidence",
+      "sms_z80_source_availability": "pinned_1.0.0_source_review_only",
+      "md_m68k_source_availability": "same_release_source",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/CHANGELOG",
+          "line": 1,
+          "end_line": 79
+        },
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/CHANGELOG",
+          "line": 81,
+          "end_line": 109
+        }
+      ],
+      "limits": [
+        "1.0.0 lists Z80 IN(C) and Sega mapper-state fixes potentially relevant to SMS, but no affected SMS fixture was run here.",
+        "YM2612/M68K/DMA fixes do not become SMS improvements.",
+        "No later release or current maintenance status verified; no external release lookup performed."
+      ],
+      "integration_recommendation": "Releases require manual source/archive/binary hashes, capability manifest and focused positive/negative plus ROM baselines before changing default. Preserve old evidence with its original binary pin.",
+      "runtime_test": "not_run_source_review_only"
+    }
+  ],
+  "lesson_candidates_no_canonical_ids_assigned": [
+    {
+      "candidate": 1,
+      "lesson": "Capability belongs to a platform, CPU core and build configuration, not to an emulator marketing list.",
+      "measurable_gate": "Per-feature applicability and unsupported-mode negatives; source/binary hash pins."
+    },
+    {
+      "candidate": 2,
+      "lesson": "Distinguish changed-byte memory watches from every-write, read/access and I/O/VDP events.",
+      "measurable_gate": "Changed write hits, identical write/read/OUT do not satisfy the changed-byte fixture; coherent range bounds enforced."
+    },
+    {
+      "candidate": 3,
+      "lesson": "A programmable debugger needs bounded stop reasons and separate observational/mutating modes.",
+      "measurable_gate": "Reject arbitrary scripts; enforce command/hit/wall limits; verify frame/cycle boundaries after early stops."
+    },
+    {
+      "candidate": 4,
+      "lesson": "APNG nominal delays do not measure throughput, ROM logic FPS or exact NTSC cadence.",
+      "measurable_gate": "Decode complete frame sequence, verify dimensions/delays and keep throughput claim false without independent measurement."
+    },
+    {
+      "candidate": 5,
+      "lesson": "A WAVE filename does not prove duration, alignment, correct signal or host isolation.",
+      "measurable_gate": "Finalize, RIFF-size/actualduration/signal checks and explicit timeline/tail/alignment contract."
+    },
+    {
+      "candidate": 6,
+      "lesson": "Auxiliary viewer evidence must keep its own role, mode and private window identity.",
+      "measurable_gate": "Reject diagnostic viewer images promoted to main framebuffer/game quality; never select host desktop by title."
+    },
+    {
+      "candidate": 7,
+      "lesson": "Maintenance upgrades preserve versioned evidence and require new platform-specific qualification.",
+      "measurable_gate": "New archive/binary/source pins with capability and negative regression reports; no inherited current-build approval."
+    }
+  ],
+  "source_hashes": {
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/CHANGELOG": "30ec7203a0c58c28223637c7f172b1ef30160b78164822fc4ecbadcc598d3503",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/bindings.c": "d6f2e4d5d7b38a1180654ed7354776a3f1d2879b1e454733687d906f3810a429",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/debug.c": "dfc74249bae0ebd1c5dea87adc52d3b33e2470a52b3898fdaf916f34c4a092f8",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/gdb_remote.c": "9eda587f9d11c6a8a624dc2f17c2293ba5600a8cfa6370639841b6fb6708cf92",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/genesis.c": "142e8271076752ae602aa7ad70bdc5c91cfc8c0d32777c50cb523416dc148403",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/render_audio.c": "077492da7f02bf59d4aef10acde8daaf60dea45603ecb14a687bfcb27ba5364d",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/render_sdl.c": "c969bb16e1d83c76602835a9dc2caa5dde6899b5810e3260de5a7588d795b85e",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c": "654fe39d9056237bddf3be04b378f50ac9ed5f072f0667aa07df9f31b8c902cc",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c": "4c30c5b36a2c82eb056adff31a122196845ffe892a14ea1bc058e8e1e9576144",
+    "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/z80_to_x86.c": "93004cdac31b59db4bbc3834a1b529b391ce69ab5992e731ee285ec3268a560e"
+  },
+  "coverage": {
+    "source_inspection": "done",
+    "binary_compiled_capabilities": "not_run",
+    "SMS_runtime_positive_negative_fixtures": "not_run",
+    "APNG_WAVE_decode_alignment": "not_run",
+    "private_viewer_capture": "not_run",
+    "latest_maintenance_release_lookup": "not_run"
+  },
+  "claim_ceiling": "Platform-scoped source implementation/path findings. No assertion of current wrapper integration, actual binary availability, runtime accuracy, throughput, audio correctness or game quality."
+}

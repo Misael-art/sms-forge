@@ -1,0 +1,47 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "hayato_concept_sheet_v1",
+  "project": "master_of_fighters",
+  "asset_role": "concept_art",
+  "channel": "built_in_image_gen",
+  "prompt": {
+    "path": "data/source_art/concept_art/hayato/review_drafts/prompts/hayato_concept_prompt_v1.txt",
+    "sha256": "80e9cde04901f2d6c1003e6f762fc3abeba0af6a44b2f2068c1cf446e1fe7957"
+  },
+  "image": {
+    "path": "data/source_art/concept_art/hayato/review_drafts/image_iterations/hayato_concept_sheet_v1.png",
+    "sha256": "ea84df49f50ec619c26ded9d345d00e5a4fa742518c24172a827b15253076ecb",
+    "dimensions_px": [1536, 1024]
+  },
+  "authority_refs": [
+    {
+      "path": "doc/11-gdd.md",
+      "role": "project canon: Hayato is a Kenseiden samurai with katana and scroll magic; medium-build roster proposal"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "role": "project palette roles for Hayato"
+    }
+  ],
+  "research_refs": [
+    {
+      "url": "https://www.smspower.org/Sprites/Kenseiden-SMS",
+      "role": "public sprite inventory for Hayato katana poses and scroll items; consulted as reference, no source pixels used"
+    },
+    {
+      "url": "https://segaretro.org/images/e/e6/Kenseiden_sms_us_manual.pdf",
+      "role": "indexed US manual scan for setting and scroll context"
+    }
+  ],
+  "status": "source_candidate",
+  "visual_check": {
+    "two_full_body_poses": true,
+    "katana_and_scroll_magic_visible": true,
+    "same_character_across_poses": true,
+    "no_cropped_body_parts": true,
+    "external_labels_or_watermark": false,
+    "visual_details_outside_gdd_are_provisional": true,
+    "formal_palette_and_80px_scale_validation": "not performed"
+  },
+  "next_gate": "owner review of concept; any sprite translation remains a separate stage requiring palette, scale, and animation validation"
+}

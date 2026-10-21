@@ -1,0 +1,438 @@
+{
+  "meta": {
+    "nome": "music_dawn",
+    "cena": "02 amanhecer no vale de cristais",
+    "bpm": 60,
+    "fps": 60,
+    "tom": "Do maior (relativa maior de Am — o mesmo vale agora iluminado)",
+    "estrutura": "8 compassos: C | Am | F | G | C | Am | F→G | C (I–vi–IV–V); aurora em camadas: cps 1-2 so lead esparso + baixo, cps 3-6 arpejo e chimbal timidissimo, cps 7-8 groove pleno com o salto de quinta do tema-titulo uma oitava acima (A5->E6 no comp.7) e repouso final em sustentacao alta",
+    "identidade": "resposta ascendente ao motivo-ancora: la o tema descia (A4->E5, resposta C5-B4-A4); aqui o vale devolve a pergunta subindo — escadinhas C5-G5, F5-G5-A5-C6, ate o citado salto A5->E6 no clímax; silêncios entre notas sao parte da frase; o tema-titulo (music_title) e o mesmo sangue em outra luz"
+  },
+  "papeis": {
+    "ch0": "lead (frase lirica em C5-E6 que cresce do sussurro ao salto de quinta do clímax; respiracao media ~88 frames por nota — M7 mora aqui)",
+    "ch1": "arpejo cintilante multiplexado a 12 Hz (5 frames/nota), sempre uma oitava ou mais ACIMA do lead — o vidro por onde a luz entra; unissono real ~0%",
+    "ch2": "baixo pizzicato no registro legitimo A3-F4 (~220-350 Hz, piso SN76489), duas notas por compasso abrindo espaco",
+    "ch3": "percussao branca gateada: entra so chimbal timidissimo no comp.3, bumbo+caixa somente no groove pleno dos comps 7-8"
+  },
+  "envelopes": {
+    "lead": {
+      "ataque": 4,
+      "sustentacao": 7,
+      "soltura_frames": 6
+    },
+    "arpejo": {
+      "quadros_por_nota": 5,
+      "ataques": [
+        7,
+        10
+      ]
+    },
+    "baixo": {
+      "ataque": 2,
+      "decay_frames": 6,
+      "decay_att": 6,
+      "mudo_frames": 14
+    },
+    "percussao": {
+      "bumbo": {
+        "shift": 7,
+        "att": 3,
+        "decay": 8
+      },
+      "caixa": {
+        "shift": 6,
+        "att": 5,
+        "decay": 4
+      },
+      "chimbal": {
+        "shift": 5,
+        "att": 8,
+        "decay": 3
+      }
+    }
+  },
+  "compassos": [
+    {
+      "acorde": [
+        "C6",
+        "E6",
+        "G6"
+      ],
+      "arpejo": false,
+      "dinamica": {
+        "ataque": 6,
+        "sustentacao": 9
+      },
+      "melodia": [
+        [
+          0,
+          "C5",
+          6
+        ],
+        [
+          8,
+          "G5",
+          8
+        ]
+      ],
+      "baixo": [
+        [
+          0,
+          "C4",
+          4
+        ],
+        [
+          8,
+          "A3",
+          4
+        ]
+      ],
+      "percussao": []
+    },
+    {
+      "acorde": [
+        "A5",
+        "C6",
+        "E6"
+      ],
+      "arpejo": false,
+      "dinamica": {
+        "ataque": 5,
+        "sustentacao": 8
+      },
+      "melodia": [
+        [
+          0,
+          "E5",
+          4
+        ],
+        [
+          6,
+          "A5",
+          4
+        ],
+        [
+          12,
+          "G5",
+          4
+        ]
+      ],
+      "baixo": [
+        [
+          0,
+          "A3",
+          4
+        ],
+        [
+          8,
+          "E4",
+          4
+        ]
+      ],
+      "percussao": []
+    },
+    {
+      "acorde": [
+        "F6",
+        "A6",
+        "C7"
+      ],
+      "arpejo": true,
+      "dinamica": {
+        "ataque": 4,
+        "sustentacao": 8
+      },
+      "melodia": [
+        [
+          0,
+          "F5",
+          4
+        ],
+        [
+          4,
+          "G5",
+          4
+        ],
+        [
+          8,
+          "A5",
+          6
+        ],
+        [
+          14,
+          "C6",
+          2
+        ]
+      ],
+      "baixo": [
+        [
+          0,
+          "F4",
+          4
+        ],
+        [
+          8,
+          "C4",
+          4
+        ]
+      ],
+      "percussao": [
+        [
+          8,
+          "chimbal"
+        ]
+      ]
+    },
+    {
+      "acorde": [
+        "G6",
+        "B6",
+        "D7"
+      ],
+      "arpejo": true,
+      "dinamica": {
+        "ataque": 4,
+        "sustentacao": 7
+      },
+      "melodia": [
+        [
+          0,
+          "B5",
+          6
+        ],
+        [
+          8,
+          "D6",
+          8
+        ]
+      ],
+      "baixo": [
+        [
+          0,
+          "G4",
+          4
+        ],
+        [
+          8,
+          "D4",
+          4
+        ]
+      ],
+      "percussao": [
+        [
+          4,
+          "chimbal"
+        ],
+        [
+          12,
+          "chimbal"
+        ]
+      ]
+    },
+    {
+      "acorde": [
+        "E6",
+        "G6",
+        "C7"
+      ],
+      "arpejo": true,
+      "dinamica": {
+        "ataque": 3,
+        "sustentacao": 6
+      },
+      "melodia": [
+        [
+          0,
+          "C6",
+          8
+        ],
+        [
+          12,
+          "G5",
+          4
+        ]
+      ],
+      "baixo": [
+        [
+          0,
+          "C4",
+          4
+        ],
+        [
+          8,
+          "G4",
+          4
+        ]
+      ],
+      "percussao": [
+        [
+          8,
+          "chimbal"
+        ],
+        [
+          12,
+          "chimbal"
+        ]
+      ]
+    },
+    {
+      "acorde": [
+        "A6",
+        "C7",
+        "E7"
+      ],
+      "arpejo": true,
+      "dinamica": {
+        "ataque": 4,
+        "sustentacao": 8
+      },
+      "melodia": [
+        [
+          0,
+          "A5",
+          4
+        ],
+        [
+          6,
+          "G5",
+          4
+        ],
+        [
+          10,
+          "E5",
+          6
+        ]
+      ],
+      "baixo": [
+        [
+          0,
+          "A3",
+          4
+        ],
+        [
+          8,
+          "E4",
+          4
+        ]
+      ],
+      "percussao": [
+        [
+          4,
+          "chimbal"
+        ],
+        [
+          12,
+          "chimbal"
+        ]
+      ]
+    },
+    {
+      "acorde": [
+        "F6",
+        "A6",
+        "C7"
+      ],
+      "arpejo": true,
+      "dinamica": {
+        "ataque": 2,
+        "sustentacao": 5
+      },
+      "melodia": [
+        [
+          0,
+          "A5",
+          8
+        ],
+        [
+          8,
+          "E6",
+          8
+        ]
+      ],
+      "baixo": [
+        [
+          0,
+          "F4",
+          4
+        ],
+        [
+          8,
+          "G4",
+          4
+        ]
+      ],
+      "percussao": [
+        [
+          0,
+          "bumbo"
+        ],
+        [
+          4,
+          "chimbal"
+        ],
+        [
+          8,
+          "caixa"
+        ],
+        [
+          12,
+          "chimbal"
+        ]
+      ]
+    },
+    {
+      "acorde": [
+        "E6",
+        "G6",
+        "C7"
+      ],
+      "arpejo": true,
+      "dinamica": {
+        "ataque": 5,
+        "sustentacao": 10
+      },
+      "melodia": [
+        [
+          0,
+          "E5",
+          4
+        ],
+        [
+          6,
+          "C6",
+          10
+        ]
+      ],
+      "baixo": [
+        [
+          0,
+          "C4",
+          4
+        ],
+        [
+          8,
+          "G4",
+          4
+        ]
+      ],
+      "percussao": [
+        [
+          0,
+          "bumbo"
+        ],
+        [
+          6,
+          "chimbal"
+        ],
+        [
+          8,
+          "caixa"
+        ],
+        [
+          12,
+          "chimbal"
+        ]
+      ]
+    }
+  ]
+}

@@ -1712,8 +1712,9 @@ TDD e spec de cena.
 
 Master System tem VRAM 16 KB (512 padrões 8×8 de 32 B), janela de 256 padrões
 por seleção da base de sprite, SAT de 64 objetos, teto de 8 sprites por linha,
-objetos de 8 px de largura por 8/16 px de altura, duas subpaletas de 16 com
-índice 0 transparente, RAM 8 KB, ROM linear 48 KB e sem DMA. O hardware não
+objetos de 8 px de largura por 8/16 px de altura, duas subpaletas de 16
+(BG índice 0 visível; sprite índice 0 transparente), RAM 8 KB, ROM linear
+48 KB e sem DMA. O hardware não
 estabelece máximo universal de quadros por folha: `max_frames_per_sprite_sheet`
 fica indefinido até medir compartilhamento, pools VRAM/RAM, ROM/banking,
 residência e upload por VBlank no TDD/scene budget. Inventário de padrões não
@@ -2575,3 +2576,97 @@ válida — o que se refuta é a perda de dado. Ferramentas: `capture_evidence.p
 (Emulicious com self-check) e `blastem_diagnostics.py` (views de decode
 planar); o caso é reproduzido pelo harness do probe de laboratório
 `mapper_vblank_copy` (campanha própria), não por ferramenta do wrapper.
+
+## 128. Asserts observados, apresentação e preservação dos relatórios
+
+Aplicação de L001/L013/L035/L036/L064/L086/L090/L091/L097–L099/L123/L125/L133/L136;
+sem novo ID. O ganho esperado é controle, leitura e continuidade do jogo, não
+um catálogo de técnicas ou uma promessa de qualidade comercial.
+
+Separe passos solicitados, ACK frame VDP, tick da lógica e elemento de
+animação. Média regional, prazo do commit VDP, resposta da ação e integridade
+dos pixels são eixos diferentes. Completar ticks por espera crescente não
+aprova latência. Frames absolutos não são deltas. Current/residente não prova
+submissão SAT/PNT nem apresentação no framebuffer; uma pose pode estar legal
+e aparecer na hora errada. Um vídeo que termina antes do retorno não fecha a
+duração completa da ação. Referência operacional: `sms-observed-case-evidence.md`.
+
+`audit_observed_cases.py --record RECORD` rederiva asserts dos reads primários
+e intervalos observados de ACKs, com ROM/sessão/journal/layout por SHA.
+O perfil `journal_ram_v1` valida identidade/ordem, pontos de reads sem execução
+intercalada, igualdade/delta de RAM e deadline observado ancorado em input.
+Reprova resumo de whiff quando os bytes mostram dano. Não autentica layout,
+instrumentação ou journal, não mede pixels apresentados, primeira ocorrência,
+FPS, voltas de contador nem cleanup; combina com `audit_subagent_session.py`,
+`audit_counter_window.py` e revisão nativa. Relato agregado sem primários pede
+coleta nova; não fabricar histórico. O selo de uma lista não prova que a lista
+inclui o controle negativo e o terminal previstos no pedido.
+
+L098/L099: medir pares/bytes realmente novos e prazo/idade/serviço por ator.
+Current+next de um ator não fecha residência do par/FX/HUD. “Desacoplar hit de
+arte” na lista histórica de §84 não autoriza dano invisível: a reorganização
+precisa manter contato/perigo legíveis e uma política coerente de apresentação.
+Legalidade da SAT após corte não prova integridade da arte; omissão permanente
+não recebe aprovação de qualidade por ter zero flicker. Híbrido BG/sprites
+continua candidato até medir atualização, overlap e restauração em ROM.
+Patterns, PNT e SAT são regiões simultâneas, não o mesmo orçamento reutilizado.
+L136 distingue integridade dos bytes e prazo visual; toda a lógica do jogo
+não precisa ocorrer no VBlank.
+
+Relatórios usam saída nova por run. `report_output.py` cria exclusivamente;
+`audit_learning_capture.py`, `audit_hardware_constants.py`,
+`audit_header_claims.py` e `audit_debug_markers.py` aceitam `--report-out`
+(alias histórico `--json`) e recusam destino existente, inclusive aliases por
+symlink/hardlink. A migração não abrange todas as outras ferramentas. Não
+apagar JSON de entrada para contornar a recusa; `selftest.py` cobre criação
+nova e preservação de fonte. O gate de constantes inclui a forma errada
+“índice 0 transparente nas duas paletas”; não infere o total de cores de uma cena.
+
+## 129. Silhueta na composição: o orçamento de 8/linha é compartilhado (L137)
+
+Uma QA visual que confere paleta, canvas 256×192, decode e a presença de *algum*
+sprite **não** prova integridade de personagem. O VDP entrega no máximo 8
+entradas de sprite por scanline; um ataque do jogador com 7–8 células nas linhas
+1–2 pode zerar a cabeça/tronco do inimigo e ainda produzir uma captura com
+paleta/canvas legais. O caso O3 `a102` (cap8) é a prova: 7/8 no jogador,
+`ec=[0,0,0,2,2,0]` no inimigo — só as pernas sobrevivem.
+
+Regra: medir as linhas críticas **dos dois atores** na tabela emitida antes de
+promover pose de ataque. Piso O3: inimigo em pé ≥2 células em cada uma das
+linhas 1–2 e ≥5 no total; jogador ≥3 nas linhas 1–3; ataque do jogador ≤5 nas
+linhas 1–2. O corte remove primeiro o lado externo (arco da espada), só em
+`a101..a105`; a contagem-fonte e o gate de 8/linha continuam **pré-trim**.
+`audit_silhouette_integrity.py` cobre 1000 casos estáticos e tem `--self-check`
+(cap8 zera a cabeça; cap5 preserva). O cap5 do O3 fica em 3/3 no `a102` e 3/2
+no `a103`/`pain02` (piso); o cap4 devolve 4/4 mas perde o arco.
+
+Limites: o gate mede células emitidas, não arte, não a SAT viva e não o
+framebuffer. A QA viva precisa ler `ec`/SAT e revisar o vídeo **no SHA da ROM**;
+o ataque do inimigo contra idle/pain do jogador não está na matriz e entra na
+regressão de dano. Uma captura com paleta/canvas/decode corretos e sem o
+personagem é reprovada, não aprovada.
+
+## 130. Projeção de evidência exige o SHA da ROM atual (L138)
+
+Uma projeção (`out/evidence/evidence.json`, `out/evidence/fps.json`) **não é
+medição nova**, e um booleano não se autentica. `informative: true` ou
+`constante_50_60: true` pode ter sido medido em outro binário; sozinho, ele
+deixa um build novo herdar os eixos do anterior. O caso real: a projeção
+canônica do O3 citava `rom_sha256 = a7f02b84…` enquanto o `reconcile_claims.py`
+aceitava `boot_emulador`/`fps_constante` só pelo booleano; o cap5 `701379cc…`
+não podia herdar o 7/7 do M8, mas o gate não impedia a tentativa.
+
+Regra: toda projeção deve carregar `rom_sha256` e o gerador deve **recusar**
+fontes cujo SHA difira da ROM atual (`--current-rom`) antes de escrever
+qualquer arquivo. `reconcile_claims.py` exige o mesmo SHA para
+`boot_emulador`, `gameplay.interaction_proven` e `fps_constante`; o booleano
+sem SHA, ou com SHA de outro binário, reprova. `axis_projection.py` tem
+`--self-check`: a mesma ROM projeta; ROM antiga ou fonte sem SHA recusa sem
+deixar `evidence.json`/`fps.json`. A projeção do M8 `a7f02b84` continua
+reproduzível com o ROM antigo, mas é **histórica** e não se transfere ao cap5.
+
+Limites: identidade de SHA não mede gameplay, FPS, áudio, arte nem PAL; a
+projeção é `assigned_checks_only` e nunca promove delivery. O build record do
+cap5 mantém `build`/`validation_report` verdadeiros e os demais eixos falsos até
+nova medição. O binding `doc/rom_asset_binding.json` prova source→res→símbolo→ROM
+por identidade, não por render independente.

@@ -1,0 +1,75 @@
+{
+  "scope": "Canonical quality/cohesion application; infrastructure native FPS proof not game delivery",
+  "results": [
+    {
+      "tool": "selftest",
+      "returncode": 1,
+      "elapsed_seconds": 18.392,
+      "log": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/selftest.log"
+    },
+    {
+      "tool": "measurement_tools",
+      "returncode": 0,
+      "elapsed_seconds": 16.014,
+      "log": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/measurement_tools.log"
+    },
+    {
+      "tool": "doc_sync",
+      "returncode": 1,
+      "elapsed_seconds": 0.595,
+      "log": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/doc_sync.log"
+    },
+    {
+      "tool": "learning_capture",
+      "returncode": 0,
+      "elapsed_seconds": 1.368,
+      "log": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/learning_capture.log"
+    },
+    {
+      "tool": "hardware_doctrine",
+      "returncode": 0,
+      "elapsed_seconds": 4.826,
+      "log": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/hardware_doctrine.log"
+    },
+    {
+      "tool": "artifact_registry",
+      "returncode": 1,
+      "elapsed_seconds": 10.907,
+      "log": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/artifact_registry.log"
+    }
+  ],
+  "selftest_initial": "112/113; invalid positive fixture X=256 was corrected to within byte range",
+  "selftest_final_passed": 113,
+  "selftest_final_total": 113,
+  "selftest_final_log": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/selftest_final.log",
+  "measurement_tools_passed": 65,
+  "learning_capture_clean": true,
+  "hardware_doctrine_clean": true,
+  "registry_initial": "371 unregistered existing files; original failed scan preserved",
+  "registry_final": {
+    "passed": true,
+    "artifacts": 27,
+    "indexed_files": 1176,
+    "legacy_unclassified": 1122,
+    "report": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/artifact_registry_final.json"
+  },
+  "doc_sync_passed": false,
+  "doc_sync_known_problems": 10,
+  "optional_project_build_probe": "not_run",
+  "native_current_fps": {
+    "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+    "session_id": "1815a215835b47a2bdbcb852979e54c2",
+    "fps_windows": [
+      59.52,
+      59.72
+    ],
+    "window_seconds": 8,
+    "region": "NTSC",
+    "executor": "coordinator",
+    "independent_review": "read audit only, not independent execution",
+    "report": "doc/curation/evidence/2026-10-13_quality_cohesion/native-fps-current/feedback.json",
+    "scope": "infrastructure fixture rate, not production game"
+  },
+  "audio_independent_cases_passed": 25,
+  "global_promotion": "open_Mugen_doc_EIO_and_game_quality_evidence_not_paid"
+}

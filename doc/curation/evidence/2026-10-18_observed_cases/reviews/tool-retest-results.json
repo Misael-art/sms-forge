@@ -1,0 +1,229 @@
+{
+  "sources": {
+    "tools/sms_wrapper/audit_observed_cases.py": "8da7759e7d45eb9e39adcef2d33f30677d3b8527eb7e13fd8f65390167ae17bf",
+    "tools/sms_wrapper/report_output.py": "ec7316303dbae1b7f44099dacba101d65e129a70eeeb976b669f918a430b422a",
+    "tools/sms_wrapper/selftest.py": "0f4629492e453b0fe54043f25dbdc72e466ccf17df95e2617057c0ae159917e5"
+  },
+  "checks": [
+    {
+      "name": "positive",
+      "expected_ok": true,
+      "actual_ok": true,
+      "passed": true,
+      "problems": []
+    },
+    {
+      "name": "pid_bool",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "invalid integer: ACK PID"
+      ]
+    },
+    {
+      "name": "input_bad_args",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "input ACK lacks three explicit control masks"
+      ]
+    },
+    {
+      "name": "input_mask_bool",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "invalid integer: input mask"
+      ]
+    },
+    {
+      "name": "input_mask_range",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "input mask differs from ACK: p1"
+      ]
+    },
+    {
+      "name": "input_ack_mismatch",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "input mask differs from ACK: p1"
+      ]
+    },
+    {
+      "name": "input_ack_bool",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "input mask differs from ACK: p1"
+      ]
+    },
+    {
+      "name": "deadline_no_endpoint_assert",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "deadline endpoint needs its own ROM assertion"
+      ]
+    },
+    {
+      "name": "deadline_no_input",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "deadline must start at actual input ACK"
+      ]
+    },
+    {
+      "name": "deadline_miss",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "observations disagree with case: hit"
+      ]
+    },
+    {
+      "name": "deadline_absolute_not_delta",
+      "expected_ok": true,
+      "actual_ok": true,
+      "passed": true,
+      "problems": []
+    },
+    {
+      "name": "out_of_ram",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "read block length/address differs"
+      ]
+    },
+    {
+      "name": "read_257",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "read block length/address differs"
+      ]
+    },
+    {
+      "name": "read_cross_e000",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "read block length/address differs"
+      ]
+    },
+    {
+      "name": "field_cross_e000",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "invalid field domain"
+      ]
+    },
+    {
+      "name": "unknown_operation",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "operation outside supported read-only session protocol"
+      ]
+    },
+    {
+      "name": "duplicate_seq",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "journal sequence/frame is not ordered"
+      ]
+    },
+    {
+      "name": "frame_regression",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "journal sequence/frame is not ordered"
+      ]
+    },
+    {
+      "name": "wrong_session",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "ACK status/session/PID differs"
+      ]
+    },
+    {
+      "name": "ram_bool",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "invalid RAM byte"
+      ]
+    },
+    {
+      "name": "whiff_contradiction",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "observations disagree with case: hit"
+      ]
+    },
+    {
+      "name": "intracpu_sameframe",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "executing/input operation between point reads"
+      ]
+    },
+    {
+      "name": "sameframe_reads_positive",
+      "expected_ok": true,
+      "actual_ok": true,
+      "passed": true,
+      "problems": []
+    },
+    {
+      "name": "condition_scalar",
+      "expected_ok": false,
+      "actual_ok": false,
+      "passed": true,
+      "problems": [
+        "string indices must be integers, not 'str'"
+      ]
+    },
+    {
+      "name": "signed16_endpoints",
+      "expected_ok": true,
+      "actual_ok": true,
+      "passed": true,
+      "problems": []
+    }
+  ],
+  "selfchecks": true,
+  "cli_record_hash_and_no_clobber": true,
+  "all_passed": true
+}

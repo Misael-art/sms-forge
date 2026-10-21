@@ -1,0 +1,206 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "ga_warrior_concept_sheet_v1_sms_palette",
+  "project": "master_of_fighters",
+  "asset_role": "concept_art",
+  "source_kind": "ai_generated_post_translation",
+  "channel": "built_in_image_gen + ImageMagick alpha/outline cleanup + prepare_sms_pixel_art.py",
+  "status": "source_candidate",
+  "owner_approval": null,
+  "contract": {
+    "path": "data/source_art/concept_art/ga_warrior/review_drafts/records/ga_warrior_concept_asset_contract_v1.json",
+    "sha256": "5c5774da6bcb6279ce75ead066f48637c6ff8fd38592a50186c9f2b9915705cd"
+  },
+  "prompt": {
+    "path": "data/source_art/concept_art/ga_warrior/review_drafts/prompts/ga_warrior_concept_prompt_v1.txt",
+    "sha256": "3c7670a937e3c7a5ee701c958864bbb250f8efd017535c1d5df5e03ffb7c8ecc"
+  },
+  "inputs": [
+    {
+      "path": "doc/11-gdd.md",
+      "role": "owner direction: young and agile Golden Axe Warrior hero, horned helmet, cape; game weight does not prescribe body shape"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "regenerated ga_warrior palette derived from original SMS character colors"
+    },
+    {
+      "path": "doc/build_palettes_manifest.py",
+      "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e",
+      "role": "canonical source for the generated palette manifest"
+    },
+    {
+      "path": "/run/user/1000/codex-desktop/tmp/codex-clipboard-208d0371-39d3-43be-9057-f6bb4d181e50.png",
+      "role": "user-provided Dragon Quest III art reference for youthful fantasy RPG illustration cues only"
+    },
+    {
+      "path": "/run/user/1000/codex-desktop/tmp/codex-clipboard-277664c7-fe20-4c73-b32b-1f94c06e8585.png",
+      "role": "user-provided Dragon Quest I & II art reference for horned helmet and red cape cues only"
+    }
+  ],
+  "research_refs": [
+    {
+      "url": "https://www.spriters-resource.com/master_system/goldenaxewarrior/asset/29261/",
+      "role": "original Master System playable-character sprite sheet; visual/color study only, no sprite pixels copied"
+    },
+    {
+      "url": "https://www.spriters-resource.com/media/assets/27/29261.png?updated=1755472635",
+      "sha256": "4db6d15d61e0fd08cb85bccedcaf8bd228e20295b3079814b956688bca20fbe0",
+      "role": "palette and silhouette reference only; teal sheet background excluded; no pixels copied"
+    }
+  ],
+  "generated_source": {
+    "tool": "built-in ImageGen",
+    "path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_generated.png",
+    "sha256": "a6363a4438cb43dc9d757da2ba581131b61e49b48fa9f754e3db41f07a676454",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "format": "RGBA PNG",
+    "description": "Two full-body poses of the same young, lean hero; blue horned helmet and armor, red cape, gold details, sword and shield"
+  },
+  "alpha_cleanup": {
+    "tool": "ImageMagick",
+    "method": "threshold generated alpha at 90%; apply binary mask; recolor retained pure-black contour pixels to opaque #550000; flatten transparent pixels to pure black before RGB-only conversion",
+    "mask_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_alpha_mask_v1.png",
+    "mask_sha256": "ac84b1e1a2485d0396ce8024108c614d5753bed8be480b99ccaa153f96fad93e",
+    "cutout_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_alpha.png",
+    "cutout_sha256": "57173014257192b1d1ae09729da465945779b2e69e656b130a1674eb7274fdf2",
+    "flattened_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_flattened.png",
+    "flattened_sha256": "22a706e0239a5f6d6737b7ad986646e4df894d8e9fa3cba92cb22b30007cc0e0",
+    "reason": "remove the soft generated backdrop, keep the figure edges clean, retain an opaque dark outline, and reserve black for transparent index 0"
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [
+        1536,
+        1024
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "ga_warrior",
+      "speckle_cleanup": true,
+      "cell_size": [
+        1536,
+        1024
+      ],
+      "transparent_index": 0
+    },
+    "palette_mapping": {
+      "useful_colors": 12,
+      "palette_rgb_with_transparent_index": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          85,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          255
+        ],
+        [
+          255,
+          170,
+          85
+        ],
+        [
+          170,
+          85,
+          0
+        ],
+        [
+          255,
+          0,
+          85
+        ],
+        [
+          85,
+          170,
+          255
+        ],
+        [
+          255,
+          170,
+          170
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          0,
+          170,
+          255
+        ],
+        [
+          255,
+          255,
+          85
+        ],
+        [
+          170,
+          85,
+          85
+        ],
+        [
+          85,
+          255,
+          255
+        ]
+      ],
+      "roles": "dark burgundy outline; blue and cyan armor; peach skin; brown leather; red cape; yellow-gold helmet details; white steel"
+    },
+    "resource_gate": "PASS: audit_validate_resources.py --kind sheet --character ga_warrior"
+  },
+  "image": {
+    "path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_sms_palette.png",
+    "sha256": "83dc4d943be7c05b75f8ca4d580f1fc0603ae1cc7b2f4940fbb98d82260b24bd",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 12
+  },
+  "review_preview": {
+    "path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_preview.png",
+    "sha256": "80889a3acf58179eb2776366adbac65cc89b902fa754c9ecffc08a705ac48dd8",
+    "description": "Indexed concept sheet composited on a flat dark gray backdrop for review"
+  },
+  "visual_check": {
+    "two_full_body_poses": true,
+    "same_character_and_costume": true,
+    "youthful_lean_morphology": true,
+    "horned_helmet_red_cape_sword_round_shield": true,
+    "palette_matches_sms_color_family": true,
+    "no_visible_generated_glow_or_detached_grain": true,
+    "external_game_pixels_used": false,
+    "text_or_watermark": false
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "all_colors_on_sms_6bit_grid": true,
+    "per_character_palette_match": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "independent_review": "pending",
+    "rom_or_emulator_validation": false
+  },
+  "next_gate": "owner visual review of the concept; if accepted, create a separate sprite study and measure its per-frame geometry before considering integration"
+}

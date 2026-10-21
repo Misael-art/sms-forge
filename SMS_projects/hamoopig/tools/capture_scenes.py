@@ -44,13 +44,26 @@ def main():
         if not wid:
             print("FAIL no window")
             return 1
-        dap = wait_port(timeout_s=20)
+        time.sleep(2.0)
+        dap = None
+        for _ in range(4):
+            cand = wait_port(timeout_s=10)
+            if cand is None:
+                continue
+            try:
+                cand.start_session()
+                cand.cont()
+                dap = cand
+                break
+            except (ConnectionError, AssertionError):
+                try:
+                    cand.close()
+                except (OSError, ConnectionError):
+                    pass
+                time.sleep(2.0)
         if dap is None:
-            print("FAIL no DAP")
-            return 1
-        dap.start_session()
-        dap.cont()
-        time.sleep(5.0)  # opening ~2s + title; DAP precisa de continue real
+            print("WARN DAP ausente — captura so da janela")
+        time.sleep(5.0)
         shot("title.png", wid)
         EI.press_spec("a=200")
         time.sleep(0.8)
@@ -58,15 +71,21 @@ def main():
         EI.press_spec("a=200")
         time.sleep(1.2)
         shot("fight.png", wid)
-        EI.press_spec("Right=700")
-        time.sleep(0.4)
-        shot("fight_right.png", wid)
-        dap.pause()
-        frame = dap.eval_int("word.ram@@0xC7F0")
-        scene = dap.eval_int("@0xC7F6")
-        px = dap.eval_int("@0xC7FA")
-        print(f"probe frame={frame} scene={scene} px={px}")
-        dap.close()
+        time.sleep(0.55)
+        shot("fight_idle_b.png", wid)
+        EI.press_spec("Right=900")
+        time.sleep(0.2)
+        shot("fight_walk.png", wid)
+        EI.press_spec("a=200")
+        time.sleep(0.25)
+        shot("fight_punch.png", wid)
+        if dap is not None:
+            dap.pause()
+            frame = dap.eval_int("word.ram@@0xC7F0")
+            scene = dap.eval_int("@0xC7F6")
+            px = dap.eval_int("@0xC7FA")
+            print(f"probe frame={frame} scene={scene} px={px}")
+            dap.close()
     finally:
         proc.terminate()
         try:

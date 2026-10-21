@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/artifact_registry.py",
+    "locate",
+    "--project",
+    "/tmp/smsforge-harness-forward-20261010/fixture_game",
+    "--asset",
+    "fighter_ash",
+    "--kind",
+    "equipment_detail",
+    "--variant",
+    "weapon_grip"
+  ],
+  "exit": 0,
+  "stdout": "{\n  \"schema\": \"sms_artifact_audit_v1\",\n  \"ok\": true,\n  \"problems\": [],\n  \"warnings\": [],\n  \"artifact_count\": 6,\n  \"indexed_file_count\": 18,\n  \"claim_ceiling\": \"organization_and_reference_consistency_only\",\n  \"registry_sha256\": \"d5ebc30fcd3e0533301598aef82e43df7b9f5b7561fc4dec332dc18cff0ab00d\",\n  \"head\": {\n    \"asset_id\": \"fighter_ash\",\n    \"kind\": \"equipment_detail\",\n    \"variant\": \"weapon_grip\",\n    \"candidate\": \"ash.grip.weapon.r1\",\n    \"approved\": null\n  },\n  \"artifacts\": [\n    {\n      \"id\": \"ash.grip.weapon.r1\",\n      \"asset_id\": \"fighter_ash\",\n      \"kind\": \"equipment_detail\",\n      \"variant\": \"weapon_grip\",\n      \"revision\": 1,\n      \"status\": \"reserved\",\n      \"parents\": [\n        \"ash.model.main.r1\"\n      ],\n      \"reason\": \"New request: inspect hand-to-grip attachment; no identity redesign\",\n      \"files\": [\n        {\n          \"role\": \"document\",\n          \"path\": \"data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt\"\n        },\n        {\n          \"role\": \"metadata\",\n          \"path\": \"data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json\"\n        },\n        {\n          \"role\": \"lineage\",\n          \"path\": \"data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "dr_social_idle_sheet_v2",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_sheet_study",
+  "channel": "built_in_image_gen_edit",
+  "parent_image": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_sheet_v1.png",
+    "sha256": "dab82dc3efa61ef2701b34fd6661a972d2e347993571520b7df9a4bf1b6871ce"
+  },
+  "inputs": [
+    {
+      "path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+      "sha256": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f",
+      "role": "Dr. Social identity and costume reference"
+    }
+  ],
+  "prompt": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_sheet_prompt_v2.txt",
+    "sha256": "7466fc32e36d2807eacdf0cd9ae9fec37eea449be24de8a4981b635a6330e3dd"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_sheet_v2.png",
+    "sha256": "4b4b157914c9e6673f216c6c5b4331fc94ebab6ceef724b491b9eeecaa4b0fb0",
+    "dimensions_px": [2079, 756]
+  },
+  "status": "rejected_by_owner",
+  "changes": ["palette-and-edge cleanup attempted while preserving four idle frames"],
+  "owner_feedback": {
+    "date": "2026-10-03",
+    "reasons": [
+      "anatomy and silhouette too broad/strong; Dr. Social should read as slender",
+      "frames repeat substantially the same pose; insufficient animation semantics"
+    ],
+    "requested_direction": "slender morphology and a visibly staged 12-step animation using the animation principles"
+  },
+  "technical_review": {
+    "four_full_body_idle_frames": true,
+    "transparent_canvas": true,
+    "opaque_rgb_colors": 261,
+    "visible_rgb_colors": 111150,
+    "alpha_levels": 256,
+    "target_palette_colors": 12,
+    "palette_limit_met": false,
+    "target_logical_height_px": 80,
+    "normalized_to_target_size": false
+  },
+  "next_gate": "manual sprite/palette translation and size review before any res integration; not emulator-tested"
+}

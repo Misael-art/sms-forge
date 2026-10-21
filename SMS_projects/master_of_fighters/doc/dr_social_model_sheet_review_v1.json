@@ -3,13 +3,16 @@
   "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v1",
   "producer": "codex_art_production",
   "asset": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
     "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
     "kind": "character_concept_model_sheet",
-    "dimensions_px": [2400, 1440]
+    "dimensions_px": [
+      2400,
+      1440
+    ]
   },
   "source_evidence": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1_art.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1_art.png",
     "sha256": "20d24c2d9d15a2d00e212ad7420bd5585707955a72a7a076c8f9ece505a36f42"
   },
   "required_characters": [
@@ -28,7 +31,11 @@
     "equipment_and_weapon_continuity",
     "cross_view_consistency",
     "legibility_and_crop_integrity",
-    "human_traits_and_unapproved_details"
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
   ],
   "characters": [
     {
@@ -46,7 +53,7 @@
         },
         {
           "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
-          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
           "role": "initial style descriptor for CPS2-Alpha-Cel; not independently validated"
         }
       ],
@@ -57,19 +64,74 @@
         "Independent review of the detailed axes remains pending; the producer does not self-approve the artwork."
       ],
       "review_axes": {
-        "document_and_layout": {"status": "pending", "note": "Owner approved the sheet as the series baseline; independent review of the five views and layout remains pending."},
-        "style_reference_application": {"status": "pending", "note": "Owner approved this CPS2-Alpha-Cel sheet; independent review of style application remains pending."},
-        "lineart_and_contours": {"status": "pending", "note": "Owner approved the document; independent inspection of line weight, contours, and edges remains pending."},
-        "morphology_and_biotype": {"status": "pending", "note": "Owner approved the document; independent inspection of the lean ectomorph proportions remains pending."},
-        "shading_and_palette": {"status": "pending", "note": "Owner approved the document; independent review of cel shading and palette roles remains pending."},
-        "relative_scale_and_baseline": {"status": "pending", "note": "Owner approved the document; independent review of H, 7.5H target, scale, and baseline remains pending."},
-        "neutral_background": {"status": "pending", "note": "Owner approved the document; independent review of background cleanliness remains pending."},
-        "face_and_identity_continuity": {"status": "pending", "note": "Owner approved the document; independent comparison of face, hair, glasses, age, and identity remains pending."},
-        "costume_and_materials": {"status": "pending", "note": "Owner approved the document; independent comparison of costume, materials, and colors remains pending."},
-        "equipment_and_weapon_continuity": {"status": "pending", "note": "Owner approved the document; independent trace of cane, rapier, and boomerang remains pending."},
-        "cross_view_consistency": {"status": "pending", "note": "Owner approved the document; independent comparison across all five views remains pending."},
-        "legibility_and_crop_integrity": {"status": "pending", "note": "Owner approved the document; independent inspection of labels and crop integrity remains pending."},
-        "human_traits_and_unapproved_details": {"status": "pending", "note": "Owner approved the document; independent confirmation of human traits and allowed details remains pending."}
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Owner approved the sheet as the series baseline; independent review of the five views and layout remains pending."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "Owner approved this CPS2-Alpha-Cel sheet; independent review of style application remains pending."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Owner approved the document; independent inspection of line weight, contours, and edges remains pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Owner approved the document; independent inspection of the lean ectomorph proportions remains pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Owner approved the document; independent review of cel shading and palette roles remains pending."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Owner approved the document; independent review of H, 7.5H target, scale, and baseline remains pending."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Owner approved the document; independent review of background cleanliness remains pending."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Owner approved the document; independent comparison of face, hair, glasses, age, and identity remains pending."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Owner approved the document; independent comparison of costume, materials, and colors remains pending."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Owner approved the document; independent trace of cane, rapier, and boomerang remains pending."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Owner approved the document; independent comparison across all five views remains pending."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Owner approved the document; independent inspection of labels and crop integrity remains pending."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "Owner approved the document; independent confirmation of human traits and allowed details remains pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist/reference role and limits are recorded; independent review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "Distinctive style signature is registered; visual comparison pending."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace each posed limb from shoulder through hand; visual decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity/rendering coherence across views and distinction from neighboring styles; pending."
+        }
       }
     }
   ],
@@ -83,5 +145,18 @@
     "scope": "Dr. Social model-sheet form and CPS2-Alpha-Cel sheet approved as the baseline for the style series."
   },
   "promotion_status": "owner_approved_reference; independent_review_and_axis_closure_pending",
-  "claim_ceiling": "owner-approved concept/model sheet reference; no sprite, animation, resource, ROM, or emulator approval"
+  "claim_ceiling": "owner-approved concept/model sheet reference; no sprite, animation, resource, ROM, or emulator approval",
+  "catalog_index": 1,
+  "artistic_style_reference": {
+    "named_artist": "Bengus",
+    "reference_role_and_scope": "Capcom concept-art reference associated with Street Fighter Alpha development; not a blanket sprite authorship claim.",
+    "source_url": "https://game.capcom.com/cfn/sfv/column/112448?lang=en",
+    "attribution_status": "official_contextual_reference",
+    "style_signature": [
+      "expressive 1990s fighting-anime faces",
+      "strong graphic contour and readable silhouettes",
+      "high-energy pose staging"
+    ],
+    "basis_and_limits": "Visual-analysis descriptors; Capcom interview supplies development context, not sole-art credit."
+  }
 }

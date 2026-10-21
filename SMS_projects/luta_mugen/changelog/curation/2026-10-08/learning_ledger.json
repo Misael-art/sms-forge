@@ -1,0 +1,388 @@
+{
+  "schema": "luta_mugen_learning_ledger_v1",
+  "captured_at": "2026-10-08T22:56:11Z",
+  "inventory": "frontier_inventory.json",
+  "archive": "local_study_source_and_reports.tar.gz",
+  "scope": "Project-local continuity findings for future SMSForge curation. Entries preserve observations and next checks; they do not promote an implementation or alter global doctrine.",
+  "lessons": [
+    {
+      "id": "LMUGEN-001",
+      "area": "canonical-history",
+      "observation": "The tracked release sequence ends at build_v088, while v089-v110 labels occur in out/local_study experiments. Build labels in ignored clones are not canonical releases.",
+      "evidence": [
+        "out/build_record.json",
+        "changelog/roms/build_v088/rom.sms",
+        "out/local_study/*/out/build_record.json"
+      ],
+      "confidence": "verified_by_index_and_build_record",
+      "curation_action": "Assign the next canonical version only after a self-contained integration build and fresh evidence."
+    },
+    {
+      "id": "LMUGEN-002",
+      "area": "reproducible-build",
+      "observation": "The root source includes generated headers from out/local_study/generated/versus_cut, whose manifest assigns both slots to ffspRyo.def (SHA 7272abcf...f32133, 77 poses each, 507904-byte bank SHA 67400983...dd6870). The root project manifest instead selects the cmdv4 bank (1753088 bytes, SHA a85aeb99...b598e), generated for Ryo ffspRyo.def (94 poses) plus Terry A-Terry.def (185 poses, SHA ad646be4...5687c). These are incompatible generation identities, not merely separate path names.",
+      "evidence": [
+        "src/fight.c",
+        "src/main.c",
+        ".mddev/project.json",
+        "out/local_study/generated/versus_cut/versus_scene_manifest.json",
+        "out/local_study/generated/versus_cut/fight_runtime_data_manifest.json",
+        "out/local_study/generated/versus_cut/versus_scene_banks_02.bin",
+        "out/local_study/ryo_terry_cmdv4_20261008/versus_scene_manifest.json",
+        "out/local_study/ryo_terry_cmdv4_20261008/versus_scene_banks_02.bin"
+      ],
+      "confidence": "mismatched_source_identity_pose_counts_and_bank_hashes_verified",
+      "curation_action": "Choose one complete generated set. Do not mix the old Ryo/Ryo headers with the Ryo/Terry cmdv4 bank; move the selected runtime headers, bank and manifest into project-owned paths and bind all of them to a fresh ROM SHA."
+    },
+    {
+      "id": "LMUGEN-003",
+      "area": "vblank-and-frame-budget",
+      "observation": "The v109 branch has fresh stage-profile and frame-advance evidence against its own measured candidate (56.2 FPS constant, vline_min 198, vovf_delta 0). v110 branches contain reused evidence associated with earlier ROM identities and lack an independent measurement against their own ROM SHA.",
+      "evidence": [
+        "out/local_study/v109_route_build_cpu_phase_probe_20261007/out/evidence/sessions/c16ba2ebe157408eb407ccea5910398b/frame_advance.json",
+        "out/local_study/v109_route_build_cpu_phase_probe_20261007/out/evidence/sessions/c16ba2ebe157408eb407ccea5910398b/worst_frame/stage_profile.json",
+        "out/local_study/v110_cpu_prepare_vblank_route_commit_20261007/out/evidence/",
+        "out/local_study/v110_route_area_commit_vblank_20261007/out/evidence/"
+      ],
+      "confidence": "v109_measured_v110_staleness_indicated_by_identity_mismatch",
+      "curation_action": "Use v109 only as a candidate optimization to rebase; rerun measurement on each integrated ROM and never inherit a predecessor's pass."
+    },
+    {
+      "id": "LMUGEN-004",
+      "area": "renderer-performance",
+      "observation": "The no-CPU renderer comparison measured about 42.32-44.33 FPS with rendering and 58.86-59.37 FPS with rendering disabled; attacks measured 28.24 FPS and recovery 43.68 FPS. This points to renderer cost, but does not isolate a single cause. The no-render variant does not advance visible attack poses and is diagnostic only.",
+      "evidence": [
+        "out/local_study/ryo_terry_nocpu_render_attack_diag_20261008/out/evidence/renderer_cost_pair_20261008.json",
+        "out/local_study/ryo_terry_nocpu_render_attack_diag_20261008/out/evidence/fight_draw_phase_cost_20261008.json",
+        "out/local_study/ryo_terry_drawfast_stable_diag_20261008/out/evidence/"
+      ],
+      "confidence": "measured_comparison_causal_attribution_incomplete",
+      "curation_action": "Profile scan, schedule and emit costs independently on the integrated runtime, preserving realistic animation progression."
+    },
+    {
+      "id": "LMUGEN-005",
+      "area": "renderer-optimization",
+      "observation": "Stable-pair fast path and dirty-bit optimization were measured and rejected: observed frame rates remained materially below the target and SAT emission work did not fall enough. They are negative results and must stay visible to prevent accidental reintroduction as presumed wins.",
+      "evidence": [
+        "out/local_study/ryo_terry_drawfast_stable_diag_20261008/out/evidence/stable_pair_fastpath_rejected_20261008.json",
+        "out/local_study/ryo_terry_drawdirty_stable_diag_20261008/out/evidence/drawdirty_fastpath_rejected_20261008.json"
+      ],
+      "confidence": "measured_and_rejected_for_tested_builds",
+      "curation_action": "Keep the rejected variants as baselines; require a new cost model and same-ROM comparison before revisiting."
+    },
+    {
+      "id": "LMUGEN-006",
+      "area": "fight-runtime",
+      "observation": "The runtime_rom_ramfix manifest identifies P1 as ffspRyo.def (SHA 7272abcf...f32133) and P2 as A-Terry.def (SHA ad646be4...5687c). The hitbroad candidate shares its matching bank and generated headers: banks_integrada.bin (1818624 bytes, SHA 4360ca5f...a096cd), versus_scene_runtime_full_generated.h SHA 5f3623ac...857b34 and fight_runtime_data.h SHA 7be3440b...2155c556. Its build record declares boot/gameplay, and a private ROM-RAM observation sees damage in both directions. However screenshot and bundle publication failed; native subagent QA preparation aborted before request creation on canonical memory-bank EIO. The same-ROM runtime record reports 47.3/27.61/29.57/29.90 FPS with fps_constante=false. Treat it as a useful implementation candidate with a narrow interaction observation, not a reviewed or delivery-eligible gameplay build.",
+      "evidence": [
+        "out/local_study/ryo_terry_runtime_rom_ramfix_20261008/out/fight_runtime_data_manifest.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/.mddev/project.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/inc/versus_scene_runtime_full_generated.h",
+        "out/local_study/ryo_terry_hitbroad_20261008/inc/fight_runtime_data.h",
+        "out/local_study/ryo_terry_hitbroad_20261008/assets/banks/banks_integrada.bin",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/build_record.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/hitbroad_gameplay_probe_20261008.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/hitbroad_gameplay_full_sequence.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/row_schedule_hitbroad_20261008.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/hitbroad_gameplay_probe_20261008.md",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/hitbroad_native_qa_blocked_20261008.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/sessions/1e0ff16c241847818f7d03689562f5fa/runtime/hitbroad_runtime_20261008.json"
+      ],
+      "confidence": "source_hash_bound_ram_effect_observed_but_native_qa_blocked_visual_bundle_missing_and_fps_failed",
+      "curation_action": "Keep the Ryo/Terry source/header/bank bundle as a component candidate only. After current authority documents are readable, reconcile it file-by-file with the canonical tree, follow the GDD mirror order, prepare a fresh V2 native QA request, and collect visual/runtime/performance/audio/memory evidence on the exact new ROM SHA."
+    },
+    {
+      "id": "LMUGEN-007",
+      "area": "sprite-scheduling",
+      "observation": "The hitbroad pose-pair simulation covered 17,390 pairs, with a maximum of 48 SAT sprites and 8 sprites on a scanline. The SAT-slot prototype passed 400 row-model comparisons but has no isolated emulator QA session, so the model result does not establish ROM behavior.",
+      "evidence": [
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/row_schedule_hitbroad_20261008.json",
+        "out/local_study/ryo_terry_sat_slots_diag_20261008/out/evidence/sat_slots_qa_blocked_20261008.json"
+      ],
+      "confidence": "simulation_measured_emulator_behavior_unproven",
+      "curation_action": "Keep the SAT-slot change unpromoted until prepared private-session QA and fresh framebuffer/glitch evidence run on its exact ROM."
+    },
+    {
+      "id": "LMUGEN-008",
+      "area": "import-and-animation-semantics",
+      "observation": "The study tree contains independent Ryo/Terry data cuts and routes for normals, throws, specials, unique actions, AIR identity, command-v4 input and timed release. Their existence is preserved, but separate studies and build records mean their combination is not automatically a coherent roster/runtime.",
+      "evidence": [
+        "out/local_study/ryo_air_identity_20261007/",
+        "out/local_study/terry_air_identity_20261007/",
+        "out/local_study/ryo_terry_cmdv4_20261008/",
+        "out/local_study/terry_timed_release_cmdv4_20261008/",
+        "data/"
+      ],
+      "confidence": "study-fronts-inventoried_integration-unproven",
+      "curation_action": "Select source data by character and semantic action ID; check AIR frame identity/order and command timing against the same generated runtime tables."
+    },
+    {
+      "id": "LMUGEN-009",
+      "area": "authority-and-qa",
+      "observation": "Project authority documents returned EIO and the working tree reports doc/10-memory-bank.md deleted. Historical document copies inside study clones are not authoritative. Native isolated QA context preparation depends on readable current project documents.",
+      "evidence": [
+        "doc/10-memory-bank.md",
+        "doc/11-gdd.md",
+        "doc/13-spec-cenas.md",
+        "doc/15-tdd.md",
+        "doc/plano-sessoes-emulicious-isoladas.md",
+        "out/local_study/*/doc/10-memory-bank.md"
+      ],
+      "confidence": "filesystem_error_and_worktree_status_observed",
+      "curation_action": "Restore access to the current authority source and verify its provenance before preparing private QA sessions or updating the memory bank."
+    },
+    {
+      "id": "LMUGEN-010",
+      "area": "evidence-identity",
+      "observation": "Study branches share repeated ROMs and evidence files. A copied report or historical probe can look like a branch result while referring to another binary; file identity must be checked at the evidence-to-ROM boundary.",
+      "evidence": [
+        "frontier_inventory.json",
+        "out/local_study/v109_route_build_cpu_phase_probe_20261007/out/evidence/",
+        "out/local_study/v110_cpu_prepare_vblank_route_commit_20261007/out/evidence/",
+        "out/local_study/v110_route_area_commit_vblank_20261007/out/evidence/"
+      ],
+      "confidence": "reused-identities-visible-in-hash-index",
+      "curation_action": "Require exact ROM SHA, session ID and artifact freshness for every promoted axis; preserve predecessor evidence as historical context only."
+    },
+    {
+      "id": "LMUGEN-011",
+      "area": "import-identity",
+      "observation": "Generated directory names, slot labels and symbol prefixes such as p1_ken, p2_ryu, KEN_CUT and RYU_CUT can be inherited placeholders. In the cmdv4 manifests those labels represent ffspRyo.def and A-Terry.def; in the older versus_cut both source slots actually point to ffspRyo.def. Source definition plus SHA-256 is the reliable identity.",
+      "evidence": [
+        "out/local_study/generated/versus_cut/versus_scene_manifest.json",
+        "out/local_study/ryo_terry_cmdv4_20261008/versus_scene_manifest.json",
+        "out/local_study/ryo_terry_cmdv4_20261008/fight_runtime_data_manifest.json",
+        "out/local_study/ryo_terry_runtime_rom_ramfix_20261008/out/fight_runtime_data_manifest.json"
+      ],
+      "confidence": "source_def_and_sha_identity_verified_across_manifests",
+      "curation_action": "Make character identity in importer/runtime manifests derive from verified source IDs and hashes; never infer it from inherited directory, slot or C-symbol names."
+    },
+    {
+      "id": "LMUGEN-012",
+      "area": "candidate-reproducibility",
+      "observation": "A fresh temporary copy of the hitbroad study, with prior out/ artifacts excluded, passed normal pre-gates, compiled 11 objects and reproduced the recorded 1900544-byte ROM exactly (SHA 931d7f338205473a44387e1093bb4c0578b7e88717bc6fe7b12f97d0a59c5dca). The reproduction did not run an emulator; its runtime axes remain false.",
+      "evidence": [
+        "changelog/curation/2026-10-08/candidate_repro_build_20261008.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/build_record.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/.mddev/project.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/assets/banks/banks_integrada.bin",
+        "out/local_study/ryo_terry_hitbroad_20261008/inc/versus_scene_runtime_full_generated.h",
+        "out/local_study/ryo_terry_hitbroad_20261008/inc/fight_runtime_data.h"
+      ],
+      "confidence": "fresh_copy_build_and_rom_hash_match_verified_emulator_unrun",
+      "curation_action": "Use the exact source/header/bank set as an integration baseline; after moving it to project-owned paths, rerun pre-gates and bind its new canonical ROM SHA before collecting fresh isolated emulator evidence."
+    },
+    {
+      "id": "LMUGEN-013",
+      "area": "canonical-integration-boundary",
+      "observation": "The current canonical tree is not a drop-in copy of either the hitbroad candidate or integrada/. Excluding Python caches, src/inc/tools/.mddev/assets/data contain 41 canonical files, 39 candidate files, and 38 integrada files. Each route shares 14 paths with the canonical tree and all 14 have different SHA-256 values. The candidate has 25 route-only files; integrada/ has 24. The reproducible candidate ROM therefore validates a distinct code lineage, not the current worktree.",
+      "evidence": [
+        "changelog/curation/2026-10-08/route_reconciliation_20261008.json",
+        "src/fight.c",
+        "src/main.c",
+        "inc/fight.h",
+        ".mddev/project.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/src/fight.c",
+        "out/local_study/ryo_terry_hitbroad_20261008/src/main.c",
+        "out/local_study/ryo_terry_hitbroad_20261008/inc/fight.h",
+        "out/local_study/ryo_terry_hitbroad_20261008/.mddev/project.json",
+        "integrada/src/fight.c",
+        "integrada/.mddev/project.json"
+      ],
+      "confidence": "verified_by_per_file_sha256_comparison",
+      "curation_action": "Use the reconciliation matrix as a file-level integration baseline. Once current authority documents are readable, map each changed and route-only component to the GDD/TDD and integrate small reviewed diffs on top of the current worktree; then build and run native isolated emulator QA before promotion."
+    },
+    {
+      "id": "LMUGEN-014",
+      "area": "native-gameplay-evidence-and-candidate-eligibility",
+      "observation": "For hitbroad ROM SHA 931d7f338205473a44387e1093bb4c0578b7e88717bc6fe7b12f97d0a59c5dca, the closed private probe observed P1 HP_FAR and life changes from 232/232 to 172/170 after the recorded sequence, supporting a limited two-way damage interaction. Screenshot and bundle publication failed. The native QA preparation record says EIO blocked before request creation and no native worker was spawned. A separate same-ROM runtime record has FPS windows 47.3, 27.61, 29.57, 29.90 and fps_constante=false. The row-schedule model is SHA-bound to the Ryo/Terry generated header but its scope text still says Ken/Ryu.",
+      "evidence": [
+        "out/local_study/ryo_terry_hitbroad_20261008/out/build_record.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/hitbroad_gameplay_probe_20261008.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/hitbroad_gameplay_probe_20261008.md",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/hitbroad_native_qa_blocked_20261008.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/sessions/1e0ff16c241847818f7d03689562f5fa/runtime/hitbroad_runtime_20261008.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/evidence/row_schedule_hitbroad_20261008.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/inc/versus_scene_runtime_full_generated.h"
+      ],
+      "confidence": "ROM_sha_bound_RAM_observation_and_runtime_record; QA explicitly blocked; FPS failed",
+      "curation_action": "Preserve the limited damage observation without treating the build-record gameplay flag as independent approval. After the current project context is readable, prepare a new V2 native QA request, obtain a reviewer report for the exact ROM, correct legacy Ken/Ryu schedule labels, and measure the GDD-ordered Ryo mirror before the mixed Ryo/Terry cut."
+    },
+    {
+      "id": "LMUGEN-015",
+      "area": "mugen-runtime-schema-compatibility",
+      "observation": "The current versus-cut generator reproduces the Ryo/Ryo image bank byte-for-byte (622,592 bytes; SHA-256 1e002a1729566132cfa1efadd77b65cc216106246671ff9db5cdcf74bf5186f2) but emits sms_fight_runtime_data_v5, while the Ryo/Ryo study package is v4 and canonical fight.c still has the older CharacterData/state shape. The initial temporary build fails at AT_N and missing close/far/ground-front fields. Adding only those declarations in a second temporary probe compiles and links, but reveals 20 generated StateDef rows versus ST_N_STATES=12 (truncation warnings), then makesms fails with Bank 1 overflow; no ROM results. Current fight.c consumes generic command rows only and does not consume generated source-route tables. The v5 manifest limits those tables to pattern-to-target binding, without CNS controller predicates or gameplay effects. Forty focused generator/runtime tests pass, but do not close the C integration gap.",
+      "evidence": [
+        "changelog/curation/2026-10-08/runtime_schema_reconciliation_20261008.json",
+        "changelog/curation/2026-10-08/runtime_schema_reconciliation_build.log",
+        "src/fight.c",
+        "src/input.c",
+        "tools/sms_wrapper/mugen2sms/generators/fight_runtime_data.py",
+        "tools/sms_wrapper/mugen2sms/generators/integrated_runtime_data.py",
+        "out/local_study/ryo_ryo_cut_20261008a_source_routes/versus_cut/versus_scene_manifest.json",
+        "out/local_study/generated/versus_cut/fight_runtime_data.h",
+        "out/local_study/ryo_terry_runtime_rom_20261008/src/fight.c",
+        "changelog/curation/2026-10-08/runtime_schema_compatibility_probe_build.log"
+      ],
+      "confidence": "byte_identical_image_bank_and_manifest_hash_diff; 40 focused tests passed; temporary build failure reproduced; no emulator validation",
+      "curation_action": "Keep the candidate out of the canonical route until the authority documents are readable. Reconcile the generated runtime schema, source-route dispatch, input decoder, and state model together; do not cherry-pick only AT_N or treat compiled bindings as executed behavior. Build and perform isolated native QA on the exact resulting ROM."
+    },
+    {
+      "id": "LMUGEN-016",
+      "area": "banked-ryo-mirror-build-and-scanline-scheduling",
+      "observation": "The existing advanced banked runtime can build the Ryo/Ryo 94-pose-per-slot cut when regenerated through source_frame_data, pose_table, integrated_runtime_data schema 6, and cmd_patterns. The bank layout is tile pages 2–39, frame/CLSN page 40, pose metadata pages 41–42, and pose index page 43. A 42-page bank image (688,128 bytes) is byte-identical at ROM offset 0x8000 in a 720,896-byte candidate ROM (SHA-256 b5549e29368e03efe0cc3f0a280d0bd7b2c426fd84f0d2b7e92b6cac970814d4); build and project pre-gates passed. Raw rows reach 11 pieces, but the self-checked row-scheduler model evaluated all 8,836 Ryo/Ryo pose pairs in both parities and reported max SAT 48 and max scanline 8. The result is still model-only: rom_asset_binding fails because its map is absent, no emulator/visual/FPS/audio/memory QA was run, and generated source-route tables are not consumed by this study runtime.",
+      "evidence": [
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/probe_record.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/rom.sms",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/banks_integrada.bin",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/row_schedule_ryo_ryo_20261008.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/generated/fight_runtime_data_manifest.json",
+        "changelog/curation/2026-10-08/runtime_schema_reconciliation_20261008.json",
+        "out/local_study/ryo_terry_runtime_rom_20261008/src/fight.c"
+      ],
+      "confidence": "isolated build record and pre-gates pass; exact ROM bank bytes verified; self-checked scheduler model pass; asset-binding and native QA not passed",
+      "curation_action": "Preserve this as the GDD-ordered Ryo mirror candidate while authority docs recover. Review the advanced runtime source against the current memory/GDD/spec/TDD, bind source→generated artifacts→ROM with a valid map, then request independent private native QA for this exact ROM. Do not claim universal MUGEN route execution or gameplay validation."
+    },
+    {
+      "id": "LMUGEN-017",
+      "area": "mugen-import-provenance-and-asset-binding-scope",
+      "observation": "The existing audit_rom_asset_binding.py is intentionally scoped to source→res_path PNG→symbol/generated file→ROM SHA and requires each entry to name a project res_path image. That contract does not represent a MUGEN import whose source is an SFF/DEF/AIR/CMD/CNS archive and whose derived runtime payload is banked binary data. The absent PNG map is therefore a scope gap, not evidence that the candidate bank bytes are absent. The package-level verifier now passes 27 checks, and a companion per-frame verifier records the mapping for this one selected Ryo/Ryo cut; the canonical importer manifest and PNG gate still do not carry a reusable MUGEN provenance contract. The current generator resolves each AIR frame's (group,image) to an SFF sprite and derives an action/frame symbol, but the emitted frame manifest omits the source sprite key and generated symbol/bank/offset. Do not generalize this result beyond the 94 selected poses per slot or treat it as visual fidelity, runtime CMD compatibility, or a pass of the canonical PNG gate.",
+      "evidence": [
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/verify_mugen_provenance.py",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/mugen_import_to_rom_provenance.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/verify_mugen_frame_lineage.py",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/mugen_frame_lineage.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/probe_record.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/generated/versus_scene_manifest.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/generated/fight_runtime_data_manifest.json",
+        "tools/sms_wrapper/mugen2sms/generators/scene_cut.py",
+        "tools/sms_wrapper/audit_rom_asset_binding.py",
+        "base/OUTROS/ffspRyo_v3.zip",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/banks_integrada.bin",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/rom.sms"
+      ],
+      "confidence": "27 package-level checks and 25 selected-frame checks passed; source, rendered tile payload, merged bank and exact ROM bytes are mapped for this cut; canonical asset gate remains unproven",
+      "curation_action": "Keep both reports as scoped sidecars and do not fill res_path with a non-PNG source. When authority docs are readable, decide whether the canonical asset-binding contract should gain an explicit MUGEN import mode based on the validated frame records. Add the record to the actual importer manifest, create a self-check and separate MUGEN fixture, and preserve explicit scope for unsupported frames. Keep the CMD v3/v4 runtime mismatch separate from sprite-byte provenance. Rerun private native QA on the exact ROM before promotion."
+    },
+    {
+      "id": "LMUGEN-018",
+      "area": "selected-mugen-frame-to-rom-byte-lineage",
+      "observation": "A curation-only replay parsed the source AIR/SFF from the ZIP and regenerated both scene-cut outputs. All 38 tile-bank files and 188 frame tile macros per slot match the preserved study outputs; the preserved full headers/manifests differ because their command blobs are wire version 3 while the current generator emits version 4. Separately, 376 records (94 AIR frames × two slots × two palette variants) resolve source group/image and sprite dimensions to generated symbol, source bank, final merged bank, byte offset/size, payload SHA, and the same bytes in the candidate ROM at SHA b5549e29368e03efe0cc3f0a280d0bd7b2c426fd84f0d2b7e92b6cac970814d4. The 25 focused checks passed. The full AIR parser emitted warnings for annotations and fractional frame timings elsewhere in the file; selected cut action/frame counts and sprite references resolved. This proves byte lineage for this fixed cut only. It does not prove visual fidelity, runtime CMD v4 compatibility, emulator behavior, or universal MUGEN import support.",
+      "evidence": [
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/verify_mugen_frame_lineage.py",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/mugen_frame_lineage.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/mugen_import_to_rom_provenance.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/rom.sms",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/banks_integrada.bin",
+        "out/local_study/ryo_ryo_cut_20261008a_source_routes/versus_cut/versus_scene_manifest.json",
+        "out/local_study/ryo_ryo_cut_20261008a_source_routes/versus_cut/p1_ken/ken_scene_runtime.h",
+        "out/local_study/ryo_ryo_cut_20261008a_source_routes/versus_cut/p2_ryu/ken_scene_runtime.h",
+        "base/OUTROS/ffspRyo_v3.zip",
+        "tools/sms_wrapper/mugen2sms/generators/scene_cut.py"
+      ],
+      "confidence": "25 lineage checks passed; clean banks/macros replayed; command encoding delta independently recorded; no emulator or visual review",
+      "curation_action": "Use this fixed-cut map to design a reusable MUGEN provenance record in a separate reviewed lot. Keep imported AIR/SFF frame identity, generated tile symbol, source/final bank, offset, length, byte hash and ROM hash in the generator manifest. Scope parser diagnostics to selected actions without suppressing unsupported selected data. Add changing-source, missing-sprite, bank-boundary and wrong-ROM fixtures before promoting the gate. Resolve CMD v3/v4 integration independently, then validate the exact ROM in an isolated native session after authority context is readable."
+    },
+    {
+      "id": "LMUGEN-019",
+      "area": "pre-transform-source-identity-and-reusable-frame-lineage",
+      "observation": "An isolated scene-cut manifest draft initially computed source SFF identity from the sprite after _prepare_scene had scaled it, which caused false source pixel-hash/dimension mismatches. Capturing the original Character sprite map before _prepare_scene fixed the mismatch. The draft now records each selected AIR action/frame/line/group/image, original SFF group/image/index/axis/pixel hash, and both generated palette variants with symbol/bank/offset/size/payload hash. Replaying p1_ken and p2_ryu passed 11 focused checks: 94 frames and 188 generated assets per slot, 38 bank pages reproduced per slot, 376 frame-to-ROM payload records total, and exact payload bytes matched the candidate ROM SHA b5549e29368e03efe0cc3f0a280d0bd7b2c426fd84f0d2b7e92b6cac970814d4. This remains a cut-specific prototype, not a canonical gate or evidence of visual/runtime behavior.",
+      "evidence": [
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/draft_scene_cut_lineage.py",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/scene_cut_lineage_draft.patch",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/scene_cut_lineage_draft_validation.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/scene_cut_lineage_draft_manifest.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/mugen_frame_lineage.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/probe_record.json",
+        "tools/sms_wrapper/mugen2sms/generators/scene_cut.py",
+        "base/OUTROS/ffspRyo_v3.zip"
+      ],
+      "confidence": "isolated two-slot replay passed 11/11 checks; 376 payload references match exact candidate ROM bytes; no emulator or visual validation",
+      "curation_action": "Keep the patch and manifest as reviewable sidecars while authority documents remain unreadable. After they recover, review the metadata schema, add it to the real importer manifest with a self-check and fixtures for changed source, missing sprite, bank boundary and wrong ROM, and decide whether the canonical asset-binding contract needs an explicit MUGEN mode. Capture original source identity before every transform. Run native QA on the exact ROM after context preparation is unblocked; do not infer visual fidelity, CMD execution, or general importer coverage."
+    },
+    {
+      "id": "LMUGEN-020",
+      "area": "mugen-frame-lineage-contract-selfcheck",
+      "observation": "A curation-only validator now checks the isolated lineage manifest against the exact source ZIP, selected AIR/SFF identities, profile, base generator, candidate ROM SHA, 94 frames per slot, p1/p2 asset pairs, bank bounds, ROM offsets and tile payload hashes. Its self-check passed the valid baseline and four fail-closed mutations: changed source archive, missing source sprite, payload crossing the 16 KiB bank boundary, and wrong ROM bytes. The manifest now records palette_variant per payload and candidate_rom_sha256. This remains a fixture-backed sidecar for the fixed Ryo/Ryo cut; it is not a canonical gate or emulator evidence.",
+      "evidence": [
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/validate_scene_cut_lineage_manifest.py",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/scene_cut_lineage_manifest_selfcheck.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/draft_scene_cut_lineage.py",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/scene_cut_lineage_draft_manifest.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/scene_cut_lineage_draft_validation.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/mugen_frame_lineage.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/probe_record.json",
+        "base/OUTROS/ffspRyo_v3.zip",
+        "tools/sms_wrapper/mugen2sms/generators/scene_cut.py"
+      ],
+      "confidence": "valid baseline plus four fail-closed fixtures passed; exact source/profile/generator/ROM identities checked; no emulator or visual QA",
+      "curation_action": "Keep the validator and mutations beside the isolated prototype. After project authority documents are readable and curation is authorized, review whether to move the contract and fixtures into a canonical importer mode. Retain the PNG gate as a distinct contract, preserve the explicit Ryo/Ryo scope, and run native QA on the exact ROM only after valid context preparation."
+    },
+    {
+      "id": "LMUGEN-021",
+      "area": "terry-source-frame-lineage-and-local-to-final-bank-mapping",
+      "observation": "For the Ryo/Terry candidate, the inherited p2_ryu label resolves to source A-Terry.def (A-Terry.zip SHA ad646be47eb314ee0ea8d5595b4524823e277a722c9162c59ce8bd05b085687c). The preserved P2 generator banks are locally numbered 5–73 and the merged scene maps those pages to final ROM banks 40–108. An exploratory replay incorrectly started generation at final bank 40 and compared same-numbered local filenames, producing a false 69-page mismatch. Replaying from the correct local first bank 5 reproduces all 69 pages and 370 frame macros. The verifier resolves 185 selected AIR frames × two palette payloads each to original SFF identity, page bytes, merged mapper image, integrated bank and exact hitbroad ROM SHA 931d7f338205473a44387e1093bb4c0578b7e88717bc6fe7b12f97d0a59c5dca; all 15 checks pass. The 107-page mapper is the scene prefix of the 111-page integrated bank image, and that image is byte-identical in the ROM at bank-2 offset 0x8000. This proves scoped data-byte lineage and generator replay, not visual fidelity or command/runtime behavior.",
+      "evidence": [
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/verify_terry_frame_lineage.py",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/terry_frame_lineage.json",
+        "base/OUTROS/A-Terry.zip",
+        "data/terry_falchion22_runtime_cut_20261008f_source_routes.json",
+        "out/local_study/ryo_terry_cmdv4_20261008/p2_ryu/ken_scene_manifest.json",
+        "out/local_study/ryo_terry_cmdv4_20261008/p2_ryu/ken_scene_runtime.h",
+        "out/local_study/ryo_terry_cmdv4_20261008/versus_scene_manifest.json",
+        "out/local_study/ryo_terry_cmdv4_20261008/versus_scene_banks_02.bin",
+        "out/local_study/ryo_terry_hitbroad_20261008/assets/banks/banks_integrada.bin",
+        "out/local_study/ryo_terry_hitbroad_20261008/changelog/roms/build_v002/rom.sms",
+        "out/local_study/ryo_terry_hitbroad_20261008/out/build_record.json",
+        "tools/sms_wrapper/mugen2sms/generators/scene_cut.py"
+      ],
+      "confidence": "15/15 focused checks pass; 69 clean page matches; 370 frame-macro/payload links reach exact candidate ROM bytes; no fresh emulator QA",
+      "curation_action": "Preserve local source-bank IDs separately from merged final ROM bank IDs; never compare same-numbered filenames without the manifest mapping. Keep inherited directory/slot labels separate from source_def plus SHA. After authority docs are readable and curation is approved, evaluate a shared manifest contract for Ryo and Terry, then prepare isolated native QA for the exact ROM; do not promote this scoped proof as visual or runtime validation."
+    },
+    {
+      "id": "LMUGEN-022",
+      "area": "shared-ryo-terry-rom-frame-lineage",
+      "observation": "A single curation-only verifier bound the mixed Ryo/Terry cut to candidate ROM SHA 931d7f338205473a44387e1093bb4c0578b7e88717bc6fe7b12f97d0a59c5dca. It replayed Ryo P1 from local bank 2 and mapped 94 selected AIR frames × two palette variants (188 payloads), then rechecked Terry P2’s 185 selected frames × two variants (370 payloads) against the same ROM. All 20 checks passed; source archive, current profiles, generator identity, local-to-final bank placement, mapper/integrated-bank bytes, and frame payloads were checked. Slot names p1_ken/p2_ryu remain inherited labels; source definitions and hashes establish ffspRyo.def and A-Terry.def. This is byte lineage for the fixed cut only, not visual fidelity, CMD/CNS execution, gameplay, performance, audio, memory, or emulator validation.",
+      "evidence": [
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/verify_ryo_terry_frame_lineage.py",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/ryo_terry_frame_lineage.json",
+        "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/terry_frame_lineage.json",
+        "base/OUTROS/ffspRyo_v3.zip",
+        "base/OUTROS/A-Terry.zip",
+        "data/ryo_v3_runtime_cut_20261006.json",
+        "data/terry_falchion22_runtime_cut_20261008f_source_routes.json",
+        "out/local_study/ryo_terry_hitbroad_20261008/changelog/roms/build_v002/rom.sms",
+        "tools/sms_wrapper/mugen2sms/generators/scene_cut.py"
+      ],
+      "confidence": "20/20 focused checks pass; 558 selected frame-palette payloads across both source identities match one exact ROM; no emulator or visual review",
+      "curation_action": "Preserve the mixed Ryo/Terry lineage as a separate candidate from the Ryo/Ryo banked candidate. Review a shared source-identity/frame-lineage schema only after current project authority documents are readable. Then prepare native isolated QA for this exact ROM and separately validate visual fidelity, CMD/CNS behavior, runtime/FPS, audio and memory. Do not promote this sidecar as canonical importer coverage or delivery evidence."
+    },
+    {
+      "id": "LMUGEN-023",
+      "area": "curation-frontier-inventory-delta-preservation",
+      "observation": "The recaptured frontier inventory at 2026-10-08T18:11:21Z did not index 46 current curation artifacts absent from or changed since that snapshot (43 absent, 3 changed). The external backup already held the prior curation payloads. A hash-bound addendum links every delta to the recaptured inventory SHA and archive SHA 5e78b0ec8c2099c65532d44bf393d1aa517f18c51cda1cdb9978b3ae78c7e21d; both original and recaptured snapshot pairs are preserved separately in the external backup. The capture script now discovers curation artifacts recursively while excluding its own generated inventory/archive, caches and symlinks.",
+      "evidence": [
+        "changelog/curation/2026-10-08/frontier_inventory.json",
+        "changelog/curation/2026-10-08/frontier_addendum_20261008.json",
+        "changelog/curation/2026-10-08/capture_frontier_snapshot.py",
+        "changelog/curation/2026-10-08/frontier_summary.md",
+        "changelog/curation/2026-10-08/learning_ledger.json",
+        "/home/misael/.codex/curation_backups/luta_mugen/2026-10-08/backup_manifest.json"
+      ],
+      "confidence": "46/46 curation deltas hash-bound to the recaptured baseline and mirrored in the verified backup; original and recaptured inventory/archive pairs both retained; collector self-check passes",
+      "curation_action": "Use the recursive curation collector for future full captures. Keep each inventory/archive pair versioned in the external backup, and bind additive deltas to the exact pair they extend. Do not infer current authority from historical recovery candidates."
+    },
+    {
+      "id": "LMUGEN-024",
+      "area": "snapshot-cli-help-and-versioned-capture-safety",
+      "observation": "capture_frontier_snapshot.py initially had no argument parser, so invoking it with --help silently ran the full capture and regenerated the local inventory/archive. The new archive identity is 5e78b0ec8c2099c65532d44bf393d1aa517f18c51cda1cdb9978b3ae78c7e21d (130865218 bytes); the external backup still retains the earlier archive faa029075d8f605492fea35da1d3ad663967bbad360ea145d62158862af6bbf7 (130861830 bytes) and its matching inventory. Both pairs are being preserved under distinct names. The script now parses CLI arguments, handles --help without side effects, and exposes --self-check for the curation collector.",
+      "evidence": [
+        "changelog/curation/2026-10-08/capture_frontier_snapshot.py",
+        "changelog/curation/2026-10-08/frontier_addendum_20261008.json",
+        "/home/misael/.codex/curation_backups/luta_mugen/2026-10-08/backup_manifest.json"
+      ],
+      "confidence": "post-fix --help, --self-check and archive/index immutability check pass; both archive identities and both inventory identities are hash-recorded in the external backup",
+      "curation_action": "Keep an explicit parser on capture utilities; provide a side-effect-free help path and a temporary-fixture self-check. Before any full capture, verify whether the destination is an existing snapshot and preserve old identities under versioned names."
+    }
+  ]
+}

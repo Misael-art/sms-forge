@@ -263,3 +263,7 @@ def test_root_ring_requires_pure_cardinal_for_timed_release_without_dollar(tmp_p
         script.append(f"t 0 {sample} 0")
     script.append(f"q 0 {_idx('RISING_EXACT')}")
     assert _run(exe, script) == [0]
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

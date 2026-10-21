@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "nome": "sfx_chime",
+    "tipo": "sfx",
+    "canal": 2,
+    "cena": "04 eco — o vale devolve a nota",
+    "identidade": "sino em quinta: E6 bate, o sino B5 responde mais baixo e mais longe, e o E6 volta morrendo; tres badaladas com ataques 3/5/8 — eco nao repete igual"
+  },
+  "eventos": [
+    { "f": 0,  "nota": "E6", "att": 3 },
+    { "f": 5,  "att": 7 },
+    { "f": 8,  "nota": "B5", "att": 5 },
+    { "f": 13, "att": 9 },
+    { "f": 16, "nota": "E6", "att": 8 },
+    { "f": 21, "att": 12 },
+    { "f": 25, "att": 14 },
+    { "f": 28, "att": 15 }
+  ]
+}

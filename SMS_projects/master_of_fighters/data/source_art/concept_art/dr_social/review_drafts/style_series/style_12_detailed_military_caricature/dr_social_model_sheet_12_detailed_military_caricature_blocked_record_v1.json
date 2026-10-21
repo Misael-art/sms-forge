@@ -1,0 +1,41 @@
+{
+  "schema": "dr_social_style_generation_block_v1",
+  "sequence": 12,
+  "style_id": "Detailed-Military-Caricature",
+  "status": "blocked_style_not_distinct_after_three_directed_revisions",
+  "catalog_reference": "SMS_projects/master_of_fighters/doc/dr_social_style_series_manifest_v1.json#styles[11]",
+  "attempts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v1_art.png",
+      "sha256": "09fd0b90403eef1d3778bee60cfc31bae1e0ee6e6a1af81b6944749f95ef3058",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v1_prompt.txt",
+      "prompt_sha256": "22b2ac1b6ee3f964b4b1478a10b5bb85b5421008a1809790a90c4262787b9181",
+      "visual_review": "First generation has high-contrast caricature contour and orange edge accents but adds unauthorized gold piping/buttons and duplicates/loosens the crescent weapon."
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v2_art.png",
+      "sha256": "0bcbd5aad47d47c56919470e4b92a2b92257173429c2acd2bb21ae31a38edb64",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v2_prompt.txt",
+      "prompt_sha256": "dfc5d2c3b7f48d35494f1dff12d3a3b481d7f2a9a41681c4dc640fdbad1e39ec",
+      "visual_review": "Revision removes coat piping and gives clear grips, but introduces dark vest-like panel and still reads modern manga rather than Metal Slug military caricature."
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v3_art.png",
+      "sha256": "eb8bebd7b4bdbd37eb2c470d76e9115df8267a6d3213d4031e13c6555e00e8d4",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v3_prompt.txt",
+      "prompt_sha256": "ece5442fe77bd9582d9fd71be35ca78c8426d05c44ce4bbc1e710e8ac243c9bf",
+      "visual_review": "Revision reduces ornament slightly and restores a bright cyan coat; dark vest and manga rendering remain; action equipment is correctly held."
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v4_art.png",
+      "sha256": "082f1da774a13387c7f24cfa028dfaba41b85bfd39728c337d3e0cc132ef6a18",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v4_prompt.txt",
+      "prompt_sha256": "ac94f9733d7bf4aeb1575db6c0fba6ece4832fff086eb102856667ee2f5feaa9",
+      "visual_review": "Final revision simplifies torso but changes the fixed coat/shirt construction and retains contemporary manga proportions/rendering; arcade military caricature distinction remains weak."
+    }
+  ],
+  "blocker": "Four generations with three directed revisions improved the held equipment but consistently returned to detailed contemporary manga, not a distinct Metal Slug arcade military caricature. Repeated unapproved waistcoat/coat construction and high-density decorative buttons conflict with the owner-approved costume. No candidate sheet is registered.",
+  "next_action": "Return after independent styles proceed; revisit using a materially different art direction or generation method with owner input. Do not promote any attempt.",
+  "reviewer": "codex_art_production",
+  "claim_ceiling": "blocked_candidate_generation_only"
+}

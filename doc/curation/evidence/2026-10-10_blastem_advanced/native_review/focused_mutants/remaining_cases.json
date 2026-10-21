@@ -1,0 +1,43 @@
+[
+  {
+    "case": "bankable_or_boundary_site",
+    "pc": 1023,
+    "accepted": true,
+    "commands": [
+      "breakpoint 1023",
+      "variable sms_hits_0 0",
+      "commands 0\nset sms_hits_0 sms_hits_0+1\nprintf \"SMSFORGE_EVENT 0 %d %d %d %d %d %d %d %d\\n\" frame pc (af / 256) 191 vdp:vcounter vdp:hcounter vdp:address vdp:cd\ncontinue\nend"
+    ],
+    "definitions": [
+      {
+        "index": 0,
+        "kind": "vdp_io_before_out",
+        "address": 1023,
+        "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+      }
+    ]
+  },
+  {
+    "case": "bankable_or_boundary_site",
+    "pc": 4096,
+    "accepted": true,
+    "commands": [
+      "breakpoint 4096",
+      "variable sms_hits_0 0",
+      "commands 0\nset sms_hits_0 sms_hits_0+1\nprintf \"SMSFORGE_EVENT 0 %d %d %d %d %d %d %d %d\\n\" frame pc (af / 256) 191 vdp:vcounter vdp:hcounter vdp:address vdp:cd\ncontinue\nend"
+    ],
+    "definitions": [
+      {
+        "index": 0,
+        "kind": "vdp_io_before_out",
+        "address": 4096,
+        "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+      }
+    ]
+  },
+  {
+    "case": "invalid_wave_format_audit",
+    "unhandled_exception": "wave.Error",
+    "message": "unknown format: 3"
+  }
+]

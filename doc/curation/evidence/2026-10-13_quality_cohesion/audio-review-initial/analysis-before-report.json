@@ -1,0 +1,23 @@
+{
+  "scope": "independent static analysis before reading audio/result.json",
+  "expected_primary_source_conclusions": [
+    "PSGlib passes noise latch mode bit2 without inversion; 0x38 wait and 0x39..0x3f hold increment PSGFrame calls.",
+    "BlastEm SMS master clock53693175/div15*16 toggles tone state each period; full square wave32*period relative3579545Hz PSG clock. Noise shifts on every positive toggle, same nominal32 divisor.",
+    "Noise white modes4..7, periodic0..3; lowbits3 tracks tone2 load.",
+    "M4 majority white remains declared composition policy, not musical/hardware gate."
+  ],
+  "positive_code_review": [
+    "Corrected divisor32 gives A4period254 not508.",
+    "Preview LFSR matches rotate+postrotatebit2XOR Sega16 source, deterministic reset0x8000.",
+    "Compressed substring bytes refused by aq.decode before creating WAV.",
+    "Skills declare event heuristic/non-audibility/framecadence and no regeneration."
+  ],
+  "issues_to_probe": [
+    "Preview assumes every tone latch immediately followed by a high-data byte; PSGlib/chip permits low-bit-only tone writes and separate waits.",
+    "Decoder treats data after a volume latch as frequency write for ch<3; these are valid PSG register-data writes but event reconstruction may be wrong.",
+    "SFX attenuation first/last is grouped by channel rather than event chronology.",
+    "WAV chunks floor samples perwait; approximate clock duration/phase, peak normalization not absolute mix validation.",
+    "Minimum composition period16 is policy, but _hz_to_period error says outside SN76489 and old repertoire comment says A3lowest220 despite new109Hz formula."
+  ],
+  "no_rom_claim": true
+}

@@ -1,0 +1,485 @@
+{
+  "schema": "smsforge.asset_conversion_proof.v1",
+  "status": "rejected_invalid_proof_overlay",
+  "asset": {
+    "asset_id": "dr_social_sms_conversion_proof_v1",
+    "asset_type": "character",
+    "display_name": "Dr. Ferdinand Social",
+    "project": "master_of_fighters",
+    "role": "source_art_technical_conversion_proof",
+    "source_contract_status": "palette-corrected and measured revision candidate; owner visual review pending"
+  },
+  "style_reference": {
+    "concept_style_name": "Concept model sheet #01 · CPS2-Alpha-Cel",
+    "translation_target": "Pixel art SMS · paleta Master of Darkness",
+    "note": "concept style reference and SMS technical rendering are distinct review axes"
+  },
+  "references": {
+    "approved_concept_or_scale_reference_path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+    "approved_concept_or_scale_reference_sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+    "source_asset_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+    "source_asset_sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+    "source_asset_contract_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_96px_v9_asset_contract.json",
+    "source_asset_contract_sha256": "a9dd58abf51f28a204af82f1ba72472a635e7d0cc83402f80600b4e3b45d56bb",
+    "palette_manifest_path": "doc/palettes_manifest.json",
+    "palette_manifest_sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+    "concept_reference_role": "identity_and_relative_scale_context; not claimed as direct pixel-conversion input"
+  },
+  "target": {
+    "platform": "Sega Master System",
+    "medium": "indexed pixel art",
+    "gdd_visible_height_range_px": [
+      78,
+      82
+    ],
+    "gdd_working_center_px": 80,
+    "selected_frame_opaque_bbox_height_px_including_equipment": 82,
+    "delta_to_working_center_px": 2,
+    "scale_status": "within_working_band_by_opaque_bbox",
+    "body_only_height_status": "pending_human_masked_measurement",
+    "bbox_measurement_note": "alpha bbox measures total opaque silhouette and may include weapon/equipment; it is not a body-only anatomy measure"
+  },
+  "geometry": {
+    "source_image_dimensions_px": [
+      384,
+      288
+    ],
+    "frame_width_px": 96,
+    "frame_height_px": 96,
+    "columns": 4,
+    "rows": 3,
+    "frame_count": 12,
+    "reading_order": "left-to-right, top-to-bottom",
+    "tile_px": 8,
+    "transparent_index": 0,
+    "selected_frame_index_zero_based": 8,
+    "selected_frame_number_one_based": 9,
+    "selected_frame_opaque_bbox_xyxy_exclusive": [
+      12,
+      5,
+      77,
+      87
+    ],
+    "selected_frame_opaque_bbox_px_including_equipment": [
+      65,
+      82
+    ],
+    "selected_frame_bbox_includes_equipment": true
+  },
+  "palette": {
+    "indexed_png": true,
+    "transparent_palette_index": 0,
+    "useful_color_limit": 15,
+    "useful_colors_used": 12,
+    "sms_rgb_6bit_grid_pass": true,
+    "alpha_binary_pass": true,
+    "palette_manifest_character_key": "dr_ferdinand_social",
+    "manifest_defined_useful_colors": 14,
+    "manifest_roles_not_used_in_source": [
+      {
+        "role": "accent_red",
+        "rgb": [
+          255,
+          0,
+          0
+        ]
+      },
+      {
+        "role": "arcane_violet",
+        "rgb": [
+          170,
+          0,
+          255
+        ]
+      }
+    ],
+    "entries": [
+      {
+        "palette_index": 1,
+        "rgb": [
+          85,
+          170,
+          255
+        ],
+        "hex": "#55AAFF",
+        "role": "suit_light",
+        "pixel_count": 9177
+      },
+      {
+        "palette_index": 2,
+        "rgb": [
+          0,
+          85,
+          85
+        ],
+        "hex": "#005555",
+        "role": "suit_deep",
+        "pixel_count": 7026
+      },
+      {
+        "palette_index": 3,
+        "rgb": [
+          85,
+          0,
+          0
+        ],
+        "hex": "#550000",
+        "role": "boot_brown",
+        "pixel_count": 2438
+      },
+      {
+        "palette_index": 4,
+        "rgb": [
+          85,
+          85,
+          85
+        ],
+        "hex": "#555555",
+        "role": "hair_gray",
+        "pixel_count": 1754
+      },
+      {
+        "palette_index": 5,
+        "rgb": [
+          0,
+          170,
+          170
+        ],
+        "hex": "#00AAAA",
+        "role": "suit_mid",
+        "pixel_count": 1523
+      },
+      {
+        "palette_index": 6,
+        "rgb": [
+          0,
+          0,
+          85
+        ],
+        "hex": "#000055",
+        "role": "outline",
+        "pixel_count": 1260
+      },
+      {
+        "palette_index": 7,
+        "rgb": [
+          255,
+          255,
+          255
+        ],
+        "hex": "#FFFFFF",
+        "role": "shirt_light",
+        "pixel_count": 764
+      },
+      {
+        "palette_index": 8,
+        "rgb": [
+          170,
+          85,
+          85
+        ],
+        "hex": "#AA5555",
+        "role": "skin_mid",
+        "pixel_count": 567
+      },
+      {
+        "palette_index": 9,
+        "rgb": [
+          170,
+          0,
+          85
+        ],
+        "hex": "#AA0055",
+        "role": "tie_burgundy",
+        "pixel_count": 510
+      },
+      {
+        "palette_index": 10,
+        "rgb": [
+          170,
+          170,
+          170
+        ],
+        "hex": "#AAAAAA",
+        "role": "shirt_shadow",
+        "pixel_count": 498
+      },
+      {
+        "palette_index": 11,
+        "rgb": [
+          255,
+          170,
+          170
+        ],
+        "hex": "#FFAAAA",
+        "role": "skin_light",
+        "pixel_count": 419
+      },
+      {
+        "palette_index": 12,
+        "rgb": [
+          255,
+          255,
+          0
+        ],
+        "hex": "#FFFF00",
+        "role": "brass_glasses",
+        "pixel_count": 254
+      }
+    ],
+    "inspection_key_name": "green",
+    "inspection_key_rgb": [
+      0,
+      255,
+      0
+    ],
+    "inspection_key_hex": "#00FF00",
+    "inspection_key_is_asset_color": false,
+    "inspection_key_contrast_metric": {
+      "selection_metric": "maximum mean Euclidean RGB distance to used opaque colors",
+      "mean_nearest_rgb_distance": 264.13,
+      "minimum_nearest_rgb_distance": 190.07,
+      "key_matches_opaque_asset_color": false
+    }
+  },
+  "tile_accounting": {
+    "method": "exact indexed 8x8 patterns; omit empty transparent cells; no flip deduplication",
+    "canvas_tile_slots_per_frame": 144,
+    "selected_frame_occupied_tile_cells": 62,
+    "selected_frame_unique_tile_patterns": 62,
+    "raw_4bpp_bytes_per_pattern": 32,
+    "raw_4bpp_bytes_selected_frame": 1984,
+    "occupied_tile_placements_all_frames": 706,
+    "unique_tile_patterns_all_frames": 690,
+    "raw_4bpp_bytes_unique_sheet_patterns": 22080,
+    "runtime_vram_residency": "not_claimed; runtime tables, pools, banking, and frame-loading policy are unresolved",
+    "frames": [
+      {
+        "frame_index_zero_based": 0,
+        "opaque_bbox_xyxy_exclusive": [
+          24,
+          8,
+          68,
+          89
+        ],
+        "opaque_bbox_px_including_equipment": [
+          44,
+          81
+        ],
+        "occupied_tile_cells": 54,
+        "unique_tile_patterns": 54,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1728
+      },
+      {
+        "frame_index_zero_based": 1,
+        "opaque_bbox_xyxy_exclusive": [
+          22,
+          16,
+          73,
+          89
+        ],
+        "opaque_bbox_px_including_equipment": [
+          51,
+          73
+        ],
+        "occupied_tile_cells": 52,
+        "unique_tile_patterns": 52,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1664
+      },
+      {
+        "frame_index_zero_based": 2,
+        "opaque_bbox_xyxy_exclusive": [
+          0,
+          15,
+          74,
+          89
+        ],
+        "opaque_bbox_px_including_equipment": [
+          74,
+          74
+        ],
+        "occupied_tile_cells": 65,
+        "unique_tile_patterns": 65,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 2080
+      },
+      {
+        "frame_index_zero_based": 3,
+        "opaque_bbox_xyxy_exclusive": [
+          0,
+          15,
+          83,
+          89
+        ],
+        "opaque_bbox_px_including_equipment": [
+          83,
+          74
+        ],
+        "occupied_tile_cells": 63,
+        "unique_tile_patterns": 61,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1952
+      },
+      {
+        "frame_index_zero_based": 4,
+        "opaque_bbox_xyxy_exclusive": [
+          15,
+          11,
+          94,
+          88
+        ],
+        "opaque_bbox_px_including_equipment": [
+          79,
+          77
+        ],
+        "occupied_tile_cells": 65,
+        "unique_tile_patterns": 65,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 2080
+      },
+      {
+        "frame_index_zero_based": 5,
+        "opaque_bbox_xyxy_exclusive": [
+          16,
+          11,
+          85,
+          88
+        ],
+        "opaque_bbox_px_including_equipment": [
+          69,
+          77
+        ],
+        "occupied_tile_cells": 61,
+        "unique_tile_patterns": 61,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1952
+      },
+      {
+        "frame_index_zero_based": 6,
+        "opaque_bbox_xyxy_exclusive": [
+          11,
+          14,
+          95,
+          88
+        ],
+        "opaque_bbox_px_including_equipment": [
+          84,
+          74
+        ],
+        "occupied_tile_cells": 57,
+        "unique_tile_patterns": 57,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1824
+      },
+      {
+        "frame_index_zero_based": 7,
+        "opaque_bbox_xyxy_exclusive": [
+          9,
+          5,
+          90,
+          89
+        ],
+        "opaque_bbox_px_including_equipment": [
+          81,
+          84
+        ],
+        "occupied_tile_cells": 61,
+        "unique_tile_patterns": 61,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1952
+      },
+      {
+        "frame_index_zero_based": 8,
+        "opaque_bbox_xyxy_exclusive": [
+          12,
+          5,
+          77,
+          87
+        ],
+        "opaque_bbox_px_including_equipment": [
+          65,
+          82
+        ],
+        "occupied_tile_cells": 62,
+        "unique_tile_patterns": 62,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1984
+      },
+      {
+        "frame_index_zero_based": 9,
+        "opaque_bbox_xyxy_exclusive": [
+          20,
+          13,
+          88,
+          85
+        ],
+        "opaque_bbox_px_including_equipment": [
+          68,
+          72
+        ],
+        "occupied_tile_cells": 54,
+        "unique_tile_patterns": 54,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1728
+      },
+      {
+        "frame_index_zero_based": 10,
+        "opaque_bbox_xyxy_exclusive": [
+          4,
+          13,
+          76,
+          86
+        ],
+        "opaque_bbox_px_including_equipment": [
+          72,
+          73
+        ],
+        "occupied_tile_cells": 55,
+        "unique_tile_patterns": 55,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1760
+      },
+      {
+        "frame_index_zero_based": 11,
+        "opaque_bbox_xyxy_exclusive": [
+          27,
+          6,
+          73,
+          87
+        ],
+        "opaque_bbox_px_including_equipment": [
+          46,
+          81
+        ],
+        "occupied_tile_cells": 57,
+        "unique_tile_patterns": 57,
+        "raw_4bpp_bytes_if_frame_patterns_loaded": 1824
+      }
+    ]
+  },
+  "proof_sheet": {
+    "image_path": "data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_conversion_proof_v1.png",
+    "image_sha256": "011e9b49e34befcd37d8d3323845916667773e9e4fef1f25dc3673cff7e08671",
+    "report_path": "data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_conversion_proof_v1.json",
+    "display_scale": "native 1x plus nearest-neighbor enlarged views",
+    "inspection_background_rule": "one of #FF00FF, #00FF00, #0000FF chosen by palette contrast; not included in asset palette",
+    "validity": "rejected: 8x8 grid was composited over the enlarged character preview and changed the apparent sprite pixels",
+    "superseded_by": "data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v2.png"
+  },
+  "review": {
+    "pixel_clusters": "pending",
+    "face_detail_readability": "pending",
+    "outline_and_cutout": "pending",
+    "material_shading": "pending",
+    "hand_weapon_attachment": "pending",
+    "equipment_geometry": "pending",
+    "frame_pose_integrity": "pending",
+    "native_size_readability": "pending",
+    "artist_reference_and_scope": "pending",
+    "style_signature_and_distinction": "pending",
+    "document_and_layout": "fail: tile-grid overlay intersects the sprite preview; the board cannot be used to judge source pixels",
+    "identity_and_palette": "pending",
+    "scale_and_morphology": "pending",
+    "anatomy_and_equipment": "pending",
+    "clusters_and_cutout": "pending",
+    "frame_integrity": "pending",
+    "independent_review": "pending",
+    "owner_decision": "pending"
+  },
+  "promotion": {
+    "approved_for_res": false,
+    "rom_asset_binding": "not_created",
+    "emulator_validation": "not_performed"
+  }
+}

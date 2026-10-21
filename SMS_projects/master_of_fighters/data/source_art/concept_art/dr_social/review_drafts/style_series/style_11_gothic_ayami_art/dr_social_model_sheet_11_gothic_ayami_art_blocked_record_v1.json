@@ -1,0 +1,41 @@
+{
+  "schema": "dr_social_style_generation_block_v1",
+  "sequence": 11,
+  "style_id": "Gothic-Ayami-Art",
+  "status": "blocked_style_not_distinct_after_three_directed_revisions",
+  "catalog_reference": "SMS_projects/master_of_fighters/doc/dr_social_style_series_manifest_v1.json#styles[10]",
+  "attempts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v1.png",
+      "sha256": "7f39c1e334094c5528dafdf2a5d87fc770971c735153c8c18a8a906d93a8118c",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v1_prompt.txt",
+      "prompt_sha256": "26ea95f229a3f632ba40647681282ba8683143065632433d3fe7017b1c5c4f2f",
+      "visual_review": "Initial generation repeats polished contemporary fighting-manga rendering; requested gothic atmosphere and fine line distinction are not evident."
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v2.png",
+      "sha256": "e0b50a074f1bbfeec3fc7f6372db34b4ff757718b4b0ac1dbae729bdd9efbe98",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v2_prompt.txt",
+      "prompt_sha256": "527c8e787eca3089583741ed566e7eef6ccc2a9173fb54b85d8bead476a461cc",
+      "visual_review": "Revision adds darker tone but invents ornamental costume detail and separate weapon studies; style still reads as contemporary manga."
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v3.png",
+      "sha256": "023ecb10fef94bbd5c92a292206ace3cb7d0c65df59914e5bc93a2a1f70f071c",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v3_prompt.txt",
+      "prompt_sha256": "40691efe5c04355d1bf5e095d0c7ec002e20298f15d996aa469a9e753670ac5a",
+      "visual_review": "Revision removes some extra rendering noise but retains separate weapon diagrams, added gold costume details, saturated blue, and the same modern manga rendering."
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v4.png",
+      "sha256": "88a8f38606f43ecdd3db7611d912f35edf5f1e85adecea889236af2cf102dc59",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v4_prompt.txt",
+      "prompt_sha256": "51f73fbe4e867efdb75f7870ace2daa14c8a2c7937b385abbc5755a4c36f6f8b",
+      "visual_review": "Final revision removes separate object studies, but visual language and costume remain nearly identical to adjacent modern manga sheets; gothic Ayami distinction was not achieved."
+    }
+  ],
+  "blocker": "Four preserved generations (initial plus three directed revisions) retain substantially the same polished contemporary fighting-manga rendering and saturated blue ornamental costume as adjacent styles; they do not achieve the delicate gothic Ayami-inspired line, slender refined proportions, or muted wine/midnight palette. The final attempt also retains an unapproved coat-like silhouette. No candidate sheet is registered.",
+  "next_action": "Revisit after progressing through independent styles; consider a distinct art direction or generation method with owner input. Do not promote any attempt as the style-specific sheet.",
+  "reviewer": "codex_art_production",
+  "claim_ceiling": "blocked_candidate_generation_only"
+}

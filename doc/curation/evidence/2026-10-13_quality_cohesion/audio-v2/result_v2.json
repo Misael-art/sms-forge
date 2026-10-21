@@ -1,0 +1,70 @@
+{
+  "status": "passed_focused_audio_source_and_regression_checks",
+  "sources": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_psg_quality.py",
+      "sha256": "e017278a551ae49b5c249d9aeb42fad831748e885bcba06b7b20439d2db2e509"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/make_psg_assets.py",
+      "sha256": "c78a4a082af17c8fd5fb307fafa3703e4ac45c9ce574b15d17f73e7df179396d"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+      "sha256": "fdc55fcbba31cc67c11e18a15ffeb130d75ef4f10d89a362bd364081a4db5fc2"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+      "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib/PSGlib.h",
+      "sha256": "89391c5e48b4d7ad5bc71fe840c531f9701ad705a0ba00252aacc382a75fa7f4"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS-upstream/PSGlib/src/PSGlib.c",
+      "sha256": "d285ee5f901c7bc6a5609dc778217be1f47fb76d228833c5970766f9196364ab"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/psg.c",
+      "sha256": "6cf1c92472b03d38694a818d4f47df22b792fb64bf7587b344e30df43d273d72"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c",
+      "sha256": "654fe39d9056237bddf3be04b378f50ac9ed5f072f0667aa07df9f31b8c902cc"
+    }
+  ],
+  "hardware_feedback": "noise bit2=1 white;0 periodic;low2=3 nominal tone2 source",
+  "corpus_streams": 36,
+  "before_failed": 0,
+  "after_failed": 11,
+  "delta_streams": 11,
+  "changed_source_files": [
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_psg_quality.py",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/make_psg_assets.py",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-psg-audio.md"
+  ],
+  "project_assets_unchanged": true,
+  "no_emulator_fullsuite_or_saas": true,
+  "limits": [
+    "Policy over uncompressed event streams, not audible musical quality/AAA",
+    "Noise preview model nominal Sega16-bit LFSR; not shared counter/cycle/analog fidelity",
+    "SFX chronological global first audible attenuation versus last volume write is heuristic, not per-channel fade/mix/waveform proof",
+    "Current game assets retain old authored bytes and may now fail corrected M4; do not regenerate or relabel automatically"
+  ],
+  "version": "v2",
+  "independent_review_input": {
+    "path": "/tmp/smsforge-curation-20261013/audio-review/result.json",
+    "sha256": "ea425f53ca3d21c7a0f932cab78f71adbdcc2d487f9aa6d9a5e919fe1096bd42"
+  },
+  "prior_v1_result_sha256": "48611b4081185f0c9b56903a2341af6d0d9b4bff7f56103b784a9aee58cfeaa5",
+  "fixed_findings": [
+    "tone low requires contiguous high; WAIT never consumed as data",
+    "volume-latch plus data rejected as unsupported; no frequency event fabricated",
+    "SFX first/last attenuation uses stable chronological write order; last mute allowed; global multichannel limitation declared",
+    "Stale A3 hardware-lowest comment corrected to composition choice; nominal floor~109Hz"
+  ],
+  "regression_report": "v2/review_findings_regressions.json",
+  "rerendered_noise_modes": 8
+}

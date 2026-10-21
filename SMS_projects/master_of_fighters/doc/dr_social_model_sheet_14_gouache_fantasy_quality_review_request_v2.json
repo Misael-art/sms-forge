@@ -1,0 +1,39 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_14_gouache_fantasy_art_review_v2",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Read-only independent review of Gouache-Fantasy-Art candidate #14: verify artist credit/role and visual signature, Dr. Social identity and costume, shoulder-to-hand continuity of the boomerang arm, pose anatomy, five-view cohesion, palette, scale/baseline, crop, labels and card clearance. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2.png",
+      "sha256": "fda6ac29b32f0b40ddbd80d5795b889aabd55854c6d3d712edffa7064be3cef6",
+      "role": "current candidate model sheet v2"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v2.json",
+      "sha256": "692438e001924fb718bb5c805504bbc6be370ebebc6cbece537fb82eef9f6499",
+      "role": "hash-bound review checklist with four concept-specific axes"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2_metadata.json",
+      "sha256": "925fb050b4d04f0a84dde04fcdd9d74ba51de94cbd575028a409d45e3d7cb5c0",
+      "role": "catalog index, Kameoka attribution, signature and layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v2.json",
+      "sha256": "727acad791ad30c22b4e61eac936d0dd6158c2cff8ae9e7f92f8edcdcbf10e11",
+      "role": "source/composition lineage"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Treat Kameoka as the documented Legend of Mana character-design reference, not as sole author of every game asset.",
+    "Trace shoulder→upper arm→elbow→forearm→wrist→hand to the crescent boomerang grip.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Report remaining coat/lapel differences separately from the arm revision."
+  ]
+}

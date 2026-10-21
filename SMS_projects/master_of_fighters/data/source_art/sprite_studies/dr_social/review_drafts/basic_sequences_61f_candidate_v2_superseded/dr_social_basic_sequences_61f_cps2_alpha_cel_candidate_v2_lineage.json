@@ -1,0 +1,249 @@
+{
+  "schema": "sms_artifact_lineage_v2",
+  "artifact_id": "dr-social-animation-source-v02",
+  "asset_id": "dr_social",
+  "kind": "animation_source",
+  "status": "candidate_blocked_pending_review",
+  "parent_lineage": [
+    {
+      "artifact_id": "dr-social-model-sheet-cps2-alpha-cel-v04-candidate",
+      "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "role": "sole visual parent; approved concept/model sheet"
+    }
+  ],
+  "specification_sources": [
+    {
+      "path": "doc/11-gdd.md",
+      "sha256_at_generation": "3c50822b2fe4d54a9da44e3cdd697d1e4f428ea7148ec76065a04bbe6859aca5",
+      "role": "GDD character and required sequence scope"
+    },
+    {
+      "path": "doc/15-tdd.md",
+      "sha256_at_generation": "1f0f6840ed50987fd0f000b49b4863edc2223617b2a9eef31f333a12bb351291",
+      "role": "TDD hardware and pixel-asset constraints"
+    }
+  ],
+  "excluded_visual_sources": [
+    {
+      "path": "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/dr_social_basic_sequences_61f_owner_source_v1.png",
+      "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+      "role": "archived/superseded; not opened as a visual reference or used for the new generation"
+    }
+  ],
+  "prompt": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v2_prompt.txt",
+    "sha256": "3ee8e50a73683b1577d7ca0c0fd71c8b478e2344b88a687e940b1da2c7704501"
+  },
+  "generated_asset": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v2.png",
+    "sha256": "bc5c7fee6155669c5539cfa09629a627dcd14e9702c200fe9469cd7029d05670",
+    "dimensions_px": [
+      1254,
+      1254
+    ],
+    "tool": "built-in image_gen.imagegen"
+  },
+  "sequence_map": [
+    {
+      "id": "idle",
+      "pose_count": 4,
+      "frame_ids": [
+        "ID01",
+        "ID02",
+        "ID03",
+        "ID04"
+      ],
+      "intended_cells_1_based": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "walk_forward",
+      "pose_count": 8,
+      "frame_ids": [
+        "WF01",
+        "WF02",
+        "WF03",
+        "WF04",
+        "WF05",
+        "WF06",
+        "WF07",
+        "WF08"
+      ],
+      "intended_cells_1_based": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": "walk_backward",
+      "pose_count": 8,
+      "frame_ids": [
+        "WB01",
+        "WB02",
+        "WB03",
+        "WB04",
+        "WB05",
+        "WB06",
+        "WB07",
+        "WB08"
+      ],
+      "intended_cells_1_based": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "id": "jump",
+      "pose_count": 8,
+      "frame_ids": [
+        "JU01",
+        "JU02",
+        "JU03",
+        "JU04",
+        "JU05",
+        "JU06",
+        "JU07",
+        "JU08"
+      ],
+      "intended_cells_1_based": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "id": "crouch",
+      "pose_count": 5,
+      "frame_ids": [
+        "CR01",
+        "CR02",
+        "CR03",
+        "CR04",
+        "CR05"
+      ],
+      "intended_cells_1_based": [
+        29,
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "id": "dash_run",
+      "pose_count": 8,
+      "frame_ids": [
+        "DA01",
+        "DA02",
+        "DA03",
+        "DA04",
+        "DA05",
+        "DA06",
+        "DA07",
+        "DA08"
+      ],
+      "intended_cells_1_based": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "id": "knockdown_fall",
+      "pose_count": 8,
+      "frame_ids": [
+        "KF01",
+        "KF02",
+        "KF03",
+        "KF04",
+        "KF05",
+        "KF06",
+        "KF07",
+        "KF08"
+      ],
+      "intended_cells_1_based": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ]
+    },
+    {
+      "id": "tech_roll_getup",
+      "pose_count": 8,
+      "frame_ids": [
+        "TR01",
+        "TR02",
+        "TR03",
+        "TR04",
+        "TR05",
+        "TR06",
+        "TR07",
+        "TR08"
+      ],
+      "intended_cells_1_based": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "id": "guard",
+      "pose_count": 4,
+      "frame_ids": [
+        "GU01",
+        "GU02",
+        "GU03",
+        "GU04"
+      ],
+      "intended_cells_1_based": [
+        58,
+        59,
+        60,
+        61
+      ]
+    }
+  ],
+  "technical_and_art_review": {
+    "status": "blocked_pending_review",
+    "producer_preflight_path": "doc/dr_social_61_pose_art_review_v11.json",
+    "owner_approval": false
+  },
+  "claim_ceiling": "unapproved source-art candidate with known alpha/grid/color blockers"
+}

@@ -1,0 +1,49 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_14_gouache_fantasy_art_review_v3",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Read-only independent review of Gouache-Fantasy-Art candidate #14 v3: specifically verify that the boomerang arm is visibly anatomically separate from the rapier arm, trace both shoulder-to-hand paths, inspect five-view cohesion, artist credit/signature, costume, palette, scale/baseline, crop, labels, and card clearance. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3.png",
+      "sha256": "b584fd87ec2fe1560e5a5d77373198ba87d0fd63a714302982c8f35ab34177aa",
+      "role": "current candidate model sheet v3"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v3.json",
+      "sha256": "b0386c5c018c703ea050ab30228987595ff9f917fbd030ef268e01cc5083bf67",
+      "role": "hash-bound review checklist with 17 axes"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3_metadata.json",
+      "sha256": "d2f712e2eb55465376287899d9a6f21afeccbf12d4441ce461e253fa1ba70dca",
+      "role": "catalog index, Kameoka attribution, signature and layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v3.json",
+      "sha256": "d8b554e22e610bd93cd033a84a737905dacc3dfab02e1465522323e782f8722e",
+      "role": "source/composition lineage"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v7_art.png",
+      "sha256": "342cd588426032d67053ebaf86b82dc819f1248f32234fa2d2ef4b5214915697",
+      "role": "raw source art v7 for direct pose inspection"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v7_prompt.txt",
+      "sha256": "36f72baeda6ed8ed91d9a253ac4e8bcb99a2492835c09177d6380d0161a4f3b3",
+      "role": "exact v7 generation prompt"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Treat Kameoka as the documented Legend of Mana character-design reference, not as sole author of every game asset.",
+    "Trace both shoulders to wrists/hands; specifically check whether the low boomerang arm is distinct from the raised rapier arm and has a readable elbow and grip.",
+    "Record coat/lapel variation separately from the arm correction.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval."
+  ]
+}

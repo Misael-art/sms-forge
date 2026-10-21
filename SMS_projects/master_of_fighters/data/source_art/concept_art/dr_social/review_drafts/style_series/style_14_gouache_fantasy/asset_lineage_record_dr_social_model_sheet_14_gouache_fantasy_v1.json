@@ -1,0 +1,34 @@
+{
+  "schema": "sms_art_asset_lineage_v1",
+  "asset_id": "dr_social_model_sheet_14_gouache_fantasy_v1",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v4_art.png",
+    "sha256": "d987d2f8d55307310bc2d56c5d86ed0ebf7de91181749829c8221174966bdf53"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v4_prompt.txt",
+    "sha256": "f06fe3df8d6a25ea96f603a584e3086e858bae205164db8a54edfa5f22d6db6a"
+  },
+  "composition": {
+    "tool": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+    "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_metadata.json",
+    "art_scale": 0.78
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity and sheet authority"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1.png",
+    "sha256": "adc6e85568776dd89a0172c5e17d87b146c21f2bec8e1525b780672eb7a56bd0",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "visual_review": "Gouache brush treatment is legible and equipment grips read; coat construction and lapel vary from owner-approved costume and need review. Candidate only.",
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

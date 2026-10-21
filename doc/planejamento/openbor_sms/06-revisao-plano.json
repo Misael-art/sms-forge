@@ -1,0 +1,70 @@
+{
+  "schema": "openbor_sms_plan_review_v1",
+  "created_utc": "2026-10-15T23:51:43.266641+00:00",
+  "status": "passed_with_minor_clarifications",
+  "scope": "read-only plan/prompt/donor-audit review, not engine QA; no tests/build/emulator/edits",
+  "reviewed_files": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/planejamento/openbor_sms/01-plano-openbor-sms.md",
+      "sha256": "81a7f9c8970d43b32b02a99630a8f572928beb9ae59176a741cfac27559dae95",
+      "bytes": 17604
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/planejamento/openbor_sms/02-prompt-agente-implementador.md",
+      "sha256": "9d8242f536f1171c8e224b7de15fd0fa955aa0392e63e5e13b69e2ced05adb6a",
+      "bytes": 12764
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/planejamento/openbor_sms/03-auditoria-doador.json",
+      "sha256": "96b5e39a64232a196ec076903f322062c048712b8852a9f287676a98b358e8b3",
+      "bytes": 44705
+    }
+  ],
+  "checks": {
+    "donor_path_and_raw_packages_correct": true,
+    "audit_copy_matches_read_only_intake": true,
+    "proposed_engine_path_absent_as_declared": true,
+    "proposed_consumer_path_absent_as_declared": true,
+    "all_six_workflow_references_exist": true,
+    "stages_included_not_MUGEN_stage_free": true,
+    "host_reuse_distinguished_from_SMS_renderer_audio_memory": true,
+    "original_engine_versions_unknown_and_reference_pin_conditional": true,
+    "source_to_IR_to_consumed_observed_budget_states_separate": true,
+    "depth_world_altitude_types_units_explicit": true,
+    "wave_admission_gameplay_adaptation_explicit": true,
+    "no_MD_fps_budget_inheritance": true,
+    "runtime_consumer_owned_and_new_engine_not_installed": true,
+    "no_assets_copied_or_implementation_claimed": true
+  },
+  "blocking_findings": [],
+  "minor_findings": [
+    {
+      "id": "P01",
+      "priority": "low",
+      "file": "/mnt/sdcard/Projects/SMSForge/doc/planejamento/openbor_sms/01-plano-openbor-sms.md",
+      "section": "3 / tabela reaproveitamento / PAK/ZIP",
+      "issue": "A linha PAK/ZIP pode sugerir suporte ZIP pelo pak.py. A fonte inspecionada implementa PACK PAK32/64; os ZIPs são containers de descoberta registrados no manifesto, não entrada equivalente desse leitor.",
+      "adjustment": "Renomear a camada para PAK32/PAK64; ZIP externo só como intake separado e explicitamente validado quando necessário.",
+      "blocking": false
+    },
+    {
+      "id": "P02",
+      "priority": "low",
+      "file": "/mnt/sdcard/Projects/SMSForge/doc/planejamento/openbor_sms/01-plano-openbor-sms.md",
+      "section": "1 / destinos data/source_openbor e data/generated",
+      "issue": "Os destinos novos são válidos, mas precisam da extensão explícita do registro de artefatos/localizações para evitar que rascunhos e fontes escapem da varredura gerenciada padrão data/source_art.",
+      "adjustment": "Adicionar uma frase: registrar data/source_openbor e data/generated como localizações e papéis no mesmo artifact_registry antes da primeira escrita, preservando fontes imutáveis e diferenciando gerado intermediário de recurso runtime em res/.",
+      "blocking": false
+    },
+    {
+      "id": "P03",
+      "priority": "low",
+      "file": "/mnt/sdcard/Projects/SMSForge/doc/planejamento/openbor_sms/01-plano-openbor-sms.md",
+      "section": "6 / passagem O4→O5",
+      "issue": "O4 depende da fila real que pode parar em TEXT49/ITEM58, enquanto os owners completos estão listados no lote O5. Texto já proíbe salto; explicitar a dependência evitará que o agente trate O4 como fase completa antes dos owners.",
+      "adjustment": "Declarar que O4 pode fechar kernel/controle sintético e prefixo real aceito; o avanço integral da fase exige puxar de O5 o primeiro owner alcançável bloqueante. Nenhum gate exige pular TEXT/ITEM para chegar ao fim.",
+      "blocking": false
+    }
+  ],
+  "summary": "Plano e prompt cobrem pedido e achados: cenários próprios de beatemup, fontePAKcorreta, origem/versãodesconhecidas, backendSMSnovo, profundidade separada, waveadmissionadaptation, planejamento sem instalação. Três ajustes pontuais de clareza, sem blocker técnico confirmado."
+}

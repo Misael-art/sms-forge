@@ -1,0 +1,28 @@
+{
+  "kind": "source_distance",
+  "evidence": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_physical_input_trace_20261005.json",
+      "sha256": "fc4f92b27e6dcf70d241a7eec75ea793da96974c5ace4e24d0d865aaa4e48e37"
+    }
+  ],
+  "profile": "standing_facing_pair_uniform_scale",
+  "scale_num": 72,
+  "scale_den": 107,
+  "source_front_widths": [
+    18,
+    18
+  ],
+  "source_threshold": 32,
+  "cases": [
+    {
+      "axis_gap_sms": 45,
+      "expected_lt_threshold": true
+    },
+    {
+      "axis_gap_sms": 46,
+      "expected_lt_threshold": false,
+      "observed_numerator": 2330
+    }
+  ]
+}

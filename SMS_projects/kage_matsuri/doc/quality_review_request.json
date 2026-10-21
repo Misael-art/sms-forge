@@ -1,0 +1,32 @@
+{
+  "artifact_kind": "quality_review_request",
+  "schema": "quality_review_request_v1",
+  "stage": "vertical_slice",
+  "producer": "codex-continuation-agent",
+  "domains": ["gameplay", "art", "hardware"],
+  "artifacts": [
+    {"path": "out/rom/kage_matsuri.sms", "sha256": "283e250a2df13ca87df58dd5ddcf16ff314f71e5c79aabf38c37cf12b3f7941e"},
+    {"path": "out/evidence/full_cycle_memory.json", "sha256": "05de0ecdd1cd8ce68b7a0fbc7b5b1e137ad7cb108a2991e51e19061a62c8f04f"},
+    {"path": "out/evidence/runtime_probe_final7.json.json", "sha256": "eb33bfa7fc67dbaecf88f878f947531205a1648e92a6186d7831aba4ab33f65c"},
+    {"path": "out/evidence/runtime_probe_pal_final7.json.json", "sha256": "856474ca961e4cf035a8838505d05b2597172adae8aaddf0b69dba996abca91b"},
+    {"path": "out/evidence/worst_frame_final6.json", "sha256": "818da3b07f20ee22f34fde46155ce1ba95633f00c266947726fcb9ee63432f49"},
+    {"path": "out/evidence/worst_frame_cycle.json", "sha256": "38a17c9183cfbc11435db563f741fbb57bfe4d6c0769f29eb929e86994232257"},
+    {"path": "out/evidence/cycle_video_final7.mp4.mp4", "sha256": "faa7d9a811d91874faceefb866bb09ee424ad8d29ac67f8e133eb87504213263"},
+    {"path": "out/evidence/cycle_video_final7.mp4.json", "sha256": "7407d849dbadae343e7acc8a36b7063d39b6ef8697ed327be928eb0ceaef3113"},
+    {"path": "out/evidence/render_fidelity_video7_kage.json", "sha256": "9ba966cf6f42b3fc6e8d1142e38d7156e3dcc11320f258362cbd0ca45c880f7a"},
+    {"path": "out/evidence/evidence_final7.json.png", "sha256": "6c2c07963f63d2092282c23d834e6fdc99492bf46e51a1d74a2088120b30b088"},
+    {"path": "out/evidence/evidence_final7.json.json", "sha256": "7abb0576106cdc701a160757d23439e2e2884be873acc7d058533ae831c9e8e9"},
+    {"path": "out/evidence/semantic_boot_final7.json", "sha256": "5e9c9c7fe2746ec6951433511f2cfb822a8e102a6ee7c7b36e4345152a6d526e"},
+    {"path": "out/evidence/audio_final7.wav.wav", "sha256": "87bcf19c38e9420c84c30a23d585b6967228b9a225fa837711cc6b9e7ac0b6c3"},
+    {"path": "out/evidence/visual_delivery_final6.json", "sha256": "cd0201920dd896ac028af94625e20eb16f2b592270316000dafcc3b2404cb507"},
+    {"path": "out/evidence/binding_audit_final6.json", "sha256": "94bac1410e2ac54b77ce69555b35fa967530bc932540488ac6e81915f19d095b"},
+    {"path": "out/evidence/claims_reconcile_final6.json", "sha256": "51783345275b799315431c328762d0bf15b40b7d61fe8821c5e71165a524147a"},
+    {"path": "doc/rom_asset_binding.json", "sha256": "24a0ca3d0e2f470e0a20ce4af258cca0a82d4d9a3625df6e00674bd620bc61a3"}
+  ],
+  "constraints": {
+    "claim_ceiling": "independent_quality_review_only",
+    "no_aaa": true,
+    "pal_observation": "Emulicious SMSPAL=true: 48.99/48.22 quadros/s; central gate requires 50-60",
+    "action_budget_observation": "worst_frame_cycle.json: vline_max=243, vovf_delta=66; central passive budget remains separate"
+  }
+}

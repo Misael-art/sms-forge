@@ -1,0 +1,56 @@
+{
+  "schema": "mof_asset_lineage_v1",
+  "asset": "joe_musashi_shadow_dancer_model_v2_sms_palette.png",
+  "status": "superseded_by_owner_choice",
+  "owner_visual_review": "owner selected the original yellow-accent concept on 2026-10-03",
+  "reference": {
+    "description": "Takashi - Standing Right sprite archive entry for Shadow Dancer, Master System",
+    "url": "https://www.smspower.org/Sprites/ShadowDancer-SMS",
+    "direct_image_url": "https://www.smspower.org/uploads/Sprites/ShadowDancer-SMS-Takashi-StandingRight.png",
+    "sha256": "ae6bb1dcb97dee95e917d2cde204da70d161f3c1bab3f3933a96f53fa9fc7639",
+    "use": "costume silhouette and color mapping only; no pixels copied"
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "base_prompt": "joe_musashi_shadow_dancer_model_v1_prompt.txt",
+    "base_source": "joe_musashi_shadow_dancer_model_v1_source.png",
+    "base_source_sha256": "3f38a1a96183a949a9d04e32f3daf06485c93b4f458ff326ea29d312f42aa502",
+    "edit_prompt": "joe_musashi_shadow_dancer_model_v2_prompt.txt",
+    "edited_source": "joe_musashi_shadow_dancer_model_v2_source.png",
+    "edited_source_sha256": "34f804a08c550d845e9a129ed3f855e885d69885d9c25baac48b11f8fbf15699",
+    "note": "Second generation/edit reduces yellow costume accents; palette and cleanup were applied after visual review."
+  },
+  "translation": {
+    "palette_entry": "joe_musashi_shadow_dancer_sms",
+    "palette_generator": "SMS_projects/master_of_fighters/doc/build_palettes_manifest.py",
+    "palette_generator_sha256": "87b2b09b2709715b83709171384007f78a3d87ab88491a46ba1c09b4a2bbb6ab",
+    "palette_manifest": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+    "palette_manifest_sha256": "e4dfa2d265e273ea86459b9ea0d9c9c130fa2970f58e8750820c68f2052266a3",
+    "operations": [
+      "alpha threshold 80 percent to remove translucent glow/background",
+      "source black outline remapped to SMS deep wine #550000; index 0 remains transparent",
+      "prepare_sms_pixel_art.py with --block 1 --dither none and the declared character palette"
+    ]
+  },
+  "output": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_v2_sms_palette.png",
+    "sha256": "d28b1eb4416f1ef005632d4f9fbf1f7967f307cd01840059e2326a3678f39d5c",
+    "dimensions": [1536, 1024],
+    "indexed_colors_including_transparency": 8,
+    "useful_colors": 7,
+    "transparent_index": 0
+  },
+  "validation": {
+    "palette_generation": "PASS: 13 palette entries validated",
+    "resource_gate": "PASS: 1 PNG within declared SMS color/index contract",
+    "resource_gate_command": "python tools/sms_wrapper/audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character joe_musashi_shadow_dancer_sms SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_v2_sms_palette.png",
+    "rom_integration": "not done",
+    "emulator_validation": "not done; candidate is concept art"
+  },
+  "claims": {
+    "concept_model_sheet": true,
+    "animation_ready": false,
+    "rom_bound": false,
+    "emulator_validated": false
+  }
+}

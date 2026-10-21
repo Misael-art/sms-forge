@@ -1,0 +1,32 @@
+{
+  "schema": "quality_review_plan_v1",
+  "artifact_kind": "quality_review_plan",
+  "tool": {
+    "name": "quality_review_router",
+    "version": "1.0.0"
+  },
+  "stage": "vertical_slice",
+  "producer": "/root",
+  "reviews": [
+    {
+      "domain": "hardware",
+      "owner_skill": "skills/sms-vdp-budget-analyst.md",
+      "read_only": true,
+      "independent_of_producer": true,
+      "private_session_per_worker": true
+    }
+  ],
+  "findings": [],
+  "claim_ceiling": "quality_review_plan_only",
+  "ok": true,
+  "execution_mode": "isolated_native_subagents",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01",
+  "rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/rom.sms",
+    "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c"
+  },
+  "requested_tasks": [
+    "87972ef09456420e86ec3865a293d0fb"
+  ],
+  "workflow": "workflows/subagent-emulator-qa.md"
+}

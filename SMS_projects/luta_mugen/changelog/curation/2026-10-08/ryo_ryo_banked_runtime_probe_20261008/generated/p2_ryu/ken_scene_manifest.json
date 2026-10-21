@@ -1,0 +1,7201 @@
+{
+  "source_sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133",
+  "source_def": "ffspRyo.def",
+  "palette_p1_act": "ffspryo_4",
+  "palette_p2_act": "ffspryo_5",
+  "palette_p1_words": [
+    27,
+    63,
+    41,
+    2,
+    42,
+    21,
+    62
+  ],
+  "palette_p2_words": [
+    2,
+    27,
+    1,
+    6,
+    47,
+    63,
+    11
+  ],
+  "palette_index_shift_p2": 8,
+  "runtime_constants": {
+    "life": 1000,
+    "walk_fwd": 512,
+    "walk_back": -460,
+    "jump_vy": 2585,
+    "gravity": 110,
+    "damage_punch": 30,
+    "damage_hp": 20,
+    "damage_kick": 35,
+    "damage_hk": 80,
+    "damage_special": 105,
+    "special_vel": 512,
+    "input_threshold_key1": 6,
+    "input_threshold_key2": 6,
+    "hitstop": 8,
+    "hit_push": 3,
+    "guard_push": 5,
+    "ground_front_source": 18,
+    "damage_punch_far": 30,
+    "damage_hp_far": 62,
+    "damage_kick_far": 35,
+    "damage_hk_far": 80
+  },
+  "close_attack_rules": [],
+  "far_attack_rules": [
+    {
+      "role": "punch_far",
+      "near_role": "punch",
+      "command_alias": "lp",
+      "source_command": "x",
+      "source_state": 201,
+      "near_source_state": 200,
+      "comparison": "ge",
+      "threshold_source_units": 32,
+      "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+      "source_near_condition": "P2BodyDist X < 32",
+      "source_line": 1902,
+      "source_near_line": 1885,
+      "source_near_uncompiled_trigger_groups": {
+        "2": [
+          "stateno = 20",
+          "stateno = 200",
+          "time >= 7"
+        ],
+        "3": [
+          "stateno = 21"
+        ]
+      },
+      "source_uncompiled_trigger_groups": {
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "time >= 7"
+        ]
+      },
+      "runtime_gate": {
+        "command_alias": "lp",
+        "hold_down": false,
+        "statetype": "S",
+        "ctrl": true,
+        "distance": {
+          "axis": "x",
+          "comparison": "ge",
+          "threshold_source_units": 32
+        }
+      },
+      "scope": "direct standing/control far fallback only; chain/cancel trigger groups are not executed"
+    },
+    {
+      "role": "hp_far",
+      "near_role": "hp",
+      "command_alias": "hp",
+      "source_command": "z",
+      "source_state": 221,
+      "near_source_state": 220,
+      "comparison": "ge",
+      "threshold_source_units": 32,
+      "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+      "source_near_condition": "P2BodyDist X < 32",
+      "source_line": 2011,
+      "source_near_line": 1972,
+      "source_near_uncompiled_trigger_groups": {
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact = 1"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact = 1"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact = 1"
+        ],
+        "12": [
+          "stateno = 400",
+          "movecontact = 1"
+        ],
+        "13": [
+          "stateno = 430",
+          "movecontact = 1"
+        ],
+        "14": [
+          "stateno = 410",
+          "movecontact = 1"
+        ],
+        "15": [
+          "stateno = 440",
+          "movecontact = 1"
+        ]
+      },
+      "source_uncompiled_trigger_groups": {
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact = 1"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact = 1"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact = 1"
+        ],
+        "12": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "13": [
+          "stateno = 400",
+          "movecontact = 1"
+        ],
+        "14": [
+          "stateno = 430",
+          "movecontact = 1"
+        ],
+        "15": [
+          "stateno = 410",
+          "movecontact = 1"
+        ],
+        "16": [
+          "stateno = 440",
+          "movecontact = 1"
+        ]
+      },
+      "runtime_gate": {
+        "command_alias": "hp",
+        "hold_down": false,
+        "statetype": "S",
+        "ctrl": true,
+        "distance": {
+          "axis": "x",
+          "comparison": "ge",
+          "threshold_source_units": 32
+        }
+      },
+      "scope": "direct standing/control far fallback only; chain/cancel trigger groups are not executed"
+    },
+    {
+      "role": "kick_far",
+      "near_role": "kick",
+      "command_alias": "lk",
+      "source_command": "a",
+      "source_state": 231,
+      "near_source_state": 230,
+      "comparison": "ge",
+      "threshold_source_units": 32,
+      "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+      "source_near_condition": "P2BodyDist X < 32",
+      "source_line": 2072,
+      "source_near_line": 2051,
+      "source_near_uncompiled_trigger_groups": {
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 400",
+          "movecontact = 1"
+        ]
+      },
+      "source_uncompiled_trigger_groups": {
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 400",
+          "movecontact = 1"
+        ]
+      },
+      "runtime_gate": {
+        "command_alias": "lk",
+        "hold_down": false,
+        "statetype": "S",
+        "ctrl": true,
+        "distance": {
+          "axis": "x",
+          "comparison": "ge",
+          "threshold_source_units": 32
+        }
+      },
+      "scope": "direct standing/control far fallback only; chain/cancel trigger groups are not executed"
+    },
+    {
+      "role": "hk_far",
+      "near_role": "hk",
+      "command_alias": "hk",
+      "source_command": "c",
+      "source_state": 251,
+      "near_source_state": 250,
+      "comparison": "ge",
+      "threshold_source_units": 32,
+      "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+      "source_near_condition": "P2BodyDist X < 32",
+      "source_line": 2204,
+      "source_near_line": 2161,
+      "source_near_uncompiled_trigger_groups": {
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact = 1"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact = 1"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact = 1"
+        ],
+        "12": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "13": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "14": [
+          "stateno = 400",
+          "movecontact = 1"
+        ],
+        "15": [
+          "stateno = 430",
+          "movecontact = 1"
+        ],
+        "16": [
+          "stateno = 410",
+          "movecontact = 1"
+        ],
+        "17": [
+          "stateno = 440",
+          "movecontact = 1"
+        ]
+      },
+      "source_uncompiled_trigger_groups": {
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact = 1"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact = 1"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact = 1"
+        ],
+        "12": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "13": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "14": [
+          "stateno = 400",
+          "movecontact = 1"
+        ],
+        "15": [
+          "stateno = 430",
+          "movecontact = 1"
+        ],
+        "16": [
+          "stateno = 410",
+          "movecontact = 1"
+        ],
+        "17": [
+          "stateno = 440",
+          "movecontact = 1"
+        ]
+      },
+      "runtime_gate": {
+        "command_alias": "hk",
+        "hold_down": false,
+        "statetype": "S",
+        "ctrl": true,
+        "distance": {
+          "axis": "x",
+          "comparison": "ge",
+          "threshold_source_units": 32
+        }
+      },
+      "scope": "direct standing/control far fallback only; chain/cancel trigger groups are not executed"
+    }
+  ],
+  "source_routes": [
+    {
+      "route_id": "special_236_x",
+      "source_command_terms": [
+        "236_x"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 1560,
+      "source_triggerall": [
+        "Var(0) > 999"
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S || statetype = C",
+          "ctrl"
+        ],
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact"
+        ],
+        "12": [
+          "stateno = 220",
+          "movecontact"
+        ],
+        "13": [
+          "stateno = 221",
+          "movecontact"
+        ],
+        "14": [
+          "stateno = 250",
+          "movecontact"
+        ],
+        "15": [
+          "stateno = 251",
+          "movecontact"
+        ],
+        "16": [
+          "stateno = 400",
+          "movecontact"
+        ],
+        "17": [
+          "stateno = 430",
+          "movecontact"
+        ],
+        "18": [
+          "stateno = 410",
+          "movecontact"
+        ],
+        "19": [
+          "stateno = 440",
+          "movecontact"
+        ],
+        "20": [
+          "stateno = 300",
+          "movecontact"
+        ],
+        "21": [
+          "stateno = 310",
+          "movecontact"
+        ],
+        "22": [
+          "Var(0) = 3100",
+          "stateno = 1212",
+          "movecontact"
+        ],
+        "23": [
+          "Var(0) = 3100",
+          "stateno = 3200",
+          "movecontact",
+          "Life  <= 200  ||  power >= 3000"
+        ],
+        "24": [
+          "Var(0) = 3100",
+          "stateno = 3300",
+          "Life  <= 200  ||  power >= 3000",
+          "Time > 80"
+        ]
+      },
+      "source_state": 1000,
+      "source_action": 1000,
+      "action_role": "special",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "236_x",
+          "source_command": "236_x",
+          "source_command_line": 349,
+          "source_command_raw": "~D, DF, F, x",
+          "source_command_time": 15,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "D",
+                  "release": true,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            },
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "DF",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            },
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "F",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            },
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "x",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04040f010202000a0000080000100400",
+          "runtime_command_symbol": "CUT_R_SPEC_834F878D_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": [],
+      "source_state_resolution": {
+        "kind": "varset_constant",
+        "change_state_expression": "Var(0)",
+        "source_variable": 0,
+        "setter_controller_line": 1339,
+        "setter_value": 1000
+      },
+      "source_command_assignment": {
+        "source_controller_type": "varset",
+        "source_controller_line": 1339,
+        "source_variable": 0,
+        "source_value": 1000,
+        "source_triggerall": [],
+        "source_triggers": {
+          "1": [
+            "Command = \"236_x\""
+          ]
+        }
+      }
+    },
+    {
+      "route_id": "stand_lp_primary",
+      "source_command_terms": [
+        "x"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 1885,
+      "source_triggerall": [
+        "command = \"x\"",
+        "command != \"holddown\"",
+        "P2BodyDist X < 32"
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S",
+          "ctrl = 1"
+        ],
+        "2": [
+          "stateno = 20",
+          "stateno = 200",
+          "time >= 7"
+        ],
+        "3": [
+          "stateno = 21"
+        ]
+      },
+      "source_state": 200,
+      "source_action": 200,
+      "action_role": "punch",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "x",
+          "source_command": "x",
+          "source_command_line": 829,
+          "source_command_raw": "x",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "x",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101100400",
+          "runtime_command_symbol": "CUT_R_STAN_E9900711_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "stand_lp_alternate",
+      "source_command_terms": [
+        "x"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 1902,
+      "source_triggerall": [
+        "command = \"x\"",
+        "command != \"holddown\""
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S",
+          "ctrl = 1"
+        ],
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "time >= 7"
+        ]
+      },
+      "source_state": 201,
+      "source_action": 201,
+      "action_role": "punch_far",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "x",
+          "source_command": "x",
+          "source_command_line": 829,
+          "source_command_raw": "x",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "x",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101100400",
+          "runtime_command_symbol": "CUT_R_STAN_5F3F5843_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "stand_hp_primary",
+      "source_command_terms": [
+        "z"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 1972,
+      "source_triggerall": [
+        "command = \"z\"",
+        "command != \"holddown\"",
+        "P2BodyDist X < 32"
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S",
+          "ctrl = 1"
+        ],
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact = 1"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact = 1"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact = 1"
+        ],
+        "12": [
+          "stateno = 400",
+          "movecontact = 1"
+        ],
+        "13": [
+          "stateno = 430",
+          "movecontact = 1"
+        ],
+        "14": [
+          "stateno = 410",
+          "movecontact = 1"
+        ],
+        "15": [
+          "stateno = 440",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 220,
+      "source_action": 220,
+      "action_role": "hp",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "z",
+          "source_command": "z",
+          "source_command_line": 839,
+          "source_command_raw": "z",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "z",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101100800",
+          "runtime_command_symbol": "CUT_R_STAN_FDB8E700_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "stand_hp_alternate",
+      "source_command_terms": [
+        "z"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2011,
+      "source_triggerall": [
+        "command = \"z\"",
+        "command != \"holddown\""
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S",
+          "ctrl = 1"
+        ],
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact = 1"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact = 1"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact = 1"
+        ],
+        "12": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "13": [
+          "stateno = 400",
+          "movecontact = 1"
+        ],
+        "14": [
+          "stateno = 430",
+          "movecontact = 1"
+        ],
+        "15": [
+          "stateno = 410",
+          "movecontact = 1"
+        ],
+        "16": [
+          "stateno = 440",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 221,
+      "source_action": 221,
+      "action_role": "hp_far",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "z",
+          "source_command": "z",
+          "source_command_line": 839,
+          "source_command_raw": "z",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "z",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101100800",
+          "runtime_command_symbol": "CUT_R_STAN_34823DFA_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "stand_lk_primary",
+      "source_command_terms": [
+        "a"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2051,
+      "source_triggerall": [
+        "command = \"a\"",
+        "command != \"holddown\"",
+        "P2BodyDist X < 32"
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S",
+          "ctrl = 1"
+        ],
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 400",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 230,
+      "source_action": 230,
+      "action_role": "kick",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "a",
+          "source_command": "a",
+          "source_command_line": 814,
+          "source_command_raw": "a",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "a",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101200400",
+          "runtime_command_symbol": "CUT_R_STAN_27EC3C54_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "stand_lk_alternate",
+      "source_command_terms": [
+        "a"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2072,
+      "source_triggerall": [
+        "command = \"a\"",
+        "command != \"holddown\""
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S",
+          "ctrl = 1"
+        ],
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 400",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 231,
+      "source_action": 231,
+      "action_role": "kick_far",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "a",
+          "source_command": "a",
+          "source_command_line": 814,
+          "source_command_raw": "a",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "a",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101200400",
+          "runtime_command_symbol": "CUT_R_STAN_09D0273D_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "stand_hk_primary",
+      "source_command_terms": [
+        "c"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2161,
+      "source_triggerall": [
+        "command = \"c\"",
+        "command != \"holddown\"",
+        "P2BodyDist X < 32"
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S",
+          "ctrl = 1"
+        ],
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact = 1"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact = 1"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact = 1"
+        ],
+        "12": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "13": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "14": [
+          "stateno = 400",
+          "movecontact = 1"
+        ],
+        "15": [
+          "stateno = 430",
+          "movecontact = 1"
+        ],
+        "16": [
+          "stateno = 410",
+          "movecontact = 1"
+        ],
+        "17": [
+          "stateno = 440",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 250,
+      "source_action": 250,
+      "action_role": "hk",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "c",
+          "source_command": "c",
+          "source_command_line": 824,
+          "source_command_raw": "c",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "c",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101200800",
+          "runtime_command_symbol": "CUT_R_STAN_FD83A8FC_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "stand_hk_alternate",
+      "source_command_terms": [
+        "c"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2204,
+      "source_triggerall": [
+        "command = \"c\"",
+        "command != \"holddown\""
+      ],
+      "source_triggers": {
+        "1": [
+          "statetype = S",
+          "ctrl = 1"
+        ],
+        "2": [
+          "stateno = 20"
+        ],
+        "3": [
+          "stateno = 21"
+        ],
+        "4": [
+          "stateno = 200",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 201",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 230",
+          "movecontact = 1"
+        ],
+        "7": [
+          "stateno = 231",
+          "movecontact = 1"
+        ],
+        "8": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "9": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "10": [
+          "stateno = 240",
+          "movecontact = 1"
+        ],
+        "11": [
+          "stateno = 241",
+          "movecontact = 1"
+        ],
+        "12": [
+          "stateno = 210",
+          "movecontact = 1"
+        ],
+        "13": [
+          "stateno = 211",
+          "movecontact = 1"
+        ],
+        "14": [
+          "stateno = 400",
+          "movecontact = 1"
+        ],
+        "15": [
+          "stateno = 430",
+          "movecontact = 1"
+        ],
+        "16": [
+          "stateno = 410",
+          "movecontact = 1"
+        ],
+        "17": [
+          "stateno = 440",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 251,
+      "source_action": 251,
+      "action_role": "hk_far",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "c",
+          "source_command": "c",
+          "source_command_line": 824,
+          "source_command_raw": "c",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "c",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101200800",
+          "runtime_command_symbol": "CUT_R_STAN_8E72B206_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "air_lp",
+      "source_command_terms": [
+        "x"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2394,
+      "source_triggerall": [],
+      "source_triggers": {
+        "1": [
+          "command = \"x\"",
+          "statetype = A",
+          "ctrl = 1",
+          "Pos Y < -50"
+        ]
+      },
+      "source_state": 600,
+      "source_action": 600,
+      "action_role": "air_lp",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "x",
+          "source_command": "x",
+          "source_command_line": 829,
+          "source_command_raw": "x",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "x",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101100400",
+          "runtime_command_symbol": "CUT_R_AIR__6E24E634_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "air_hp",
+      "source_command_terms": [
+        "z"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2418,
+      "source_triggerall": [
+        "command = \"z\"",
+        "statetype = A"
+      ],
+      "source_triggers": {
+        "1": [
+          "ctrl = 1",
+          "Pos Y < -50"
+        ],
+        "2": [
+          "stateno = 600",
+          "movecontact = 1"
+        ],
+        "3": [
+          "stateno = 610",
+          "movecontact = 1"
+        ],
+        "4": [
+          "stateno = 630",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 640",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 620,
+      "source_action": 620,
+      "action_role": "air_hp",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "z",
+          "source_command": "z",
+          "source_command_line": 839,
+          "source_command_raw": "z",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "z",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101100800",
+          "runtime_command_symbol": "CUT_R_AIR__E1AE110C_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "air_lk",
+      "source_command_terms": [
+        "a"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2436,
+      "source_triggerall": [
+        "command = \"a\"",
+        "statetype = A"
+      ],
+      "source_triggers": {
+        "1": [
+          "ctrl = 1",
+          "Pos Y < -50"
+        ],
+        "2": [
+          "stateno = 600",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 630,
+      "source_action": 630,
+      "action_role": "air_lk",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "a",
+          "source_command": "a",
+          "source_command_line": 814,
+          "source_command_raw": "a",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "a",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101200400",
+          "runtime_command_symbol": "CUT_R_AIR__CCBC2C90_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    },
+    {
+      "route_id": "air_hk",
+      "source_command_terms": [
+        "c"
+      ],
+      "source_controller_type": "changestate",
+      "source_controller_line": 2464,
+      "source_triggerall": [
+        "command = \"c\"",
+        "statetype = A"
+      ],
+      "source_triggers": {
+        "1": [
+          "ctrl = 1",
+          "Pos Y < -50"
+        ],
+        "2": [
+          "stateno = 600",
+          "movecontact = 1"
+        ],
+        "3": [
+          "stateno = 610",
+          "movecontact = 1"
+        ],
+        "4": [
+          "stateno = 620",
+          "movecontact = 1"
+        ],
+        "5": [
+          "stateno = 630",
+          "movecontact = 1"
+        ],
+        "6": [
+          "stateno = 640",
+          "movecontact = 1"
+        ]
+      },
+      "source_state": 650,
+      "source_action": 650,
+      "action_role": "air_hk",
+      "alias_of": null,
+      "source_command_definitions": [
+        {
+          "source_command_term": "c",
+          "source_command": "c",
+          "source_command_line": 824,
+          "source_command_raw": "c",
+          "source_command_time": 1,
+          "source_command_buffer_time": 1,
+          "source_command_errors": [],
+          "source_command_steps": [
+            {
+              "strict": false,
+              "keys": [
+                {
+                  "key": "c",
+                  "release": false,
+                  "release_time": 0,
+                  "hold": false,
+                  "four_way": false
+                }
+              ]
+            }
+          ],
+          "conversion_status": "represented",
+          "conversion_reason": null,
+          "pattern_blob_hex": "04010101200800",
+          "runtime_command_symbol": "CUT_R_AIR__72867306_0"
+        }
+      ],
+      "command_pattern_coverage": "complete",
+      "unrepresented_command_patterns": []
+    }
+  ],
+  "damage_models": [
+    {
+      "role": "punch",
+      "source_state": 200,
+      "source_hitdef_count": 1,
+      "runtime_hit_policy": "first_visible_overlap_once",
+      "fidelity": "approximate",
+      "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+    },
+    {
+      "role": "hp",
+      "source_state": 220,
+      "source_hitdef_count": 2,
+      "runtime_hit_policy": "first_visible_overlap_once",
+      "fidelity": "approximate",
+      "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+    },
+    {
+      "role": "kick",
+      "source_state": 230,
+      "source_hitdef_count": 1,
+      "runtime_hit_policy": "first_visible_overlap_once",
+      "fidelity": "approximate",
+      "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+    },
+    {
+      "role": "hk",
+      "source_state": 250,
+      "source_hitdef_count": 1,
+      "runtime_hit_policy": "first_visible_overlap_once",
+      "fidelity": "approximate",
+      "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+    },
+    {
+      "role": "punch_far",
+      "source_state": 201,
+      "source_hitdef_count": 1,
+      "runtime_hit_policy": "first_visible_overlap_once",
+      "fidelity": "approximate",
+      "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+    },
+    {
+      "role": "hp_far",
+      "source_state": 221,
+      "source_hitdef_count": 1,
+      "runtime_hit_policy": "first_visible_overlap_once",
+      "fidelity": "approximate",
+      "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+    },
+    {
+      "role": "kick_far",
+      "source_state": 231,
+      "source_hitdef_count": 1,
+      "runtime_hit_policy": "first_visible_overlap_once",
+      "fidelity": "approximate",
+      "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+    },
+    {
+      "role": "hk_far",
+      "source_state": 251,
+      "source_hitdef_count": 1,
+      "runtime_hit_policy": "first_visible_overlap_once",
+      "fidelity": "approximate",
+      "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+    }
+  ],
+  "unsupported_capabilities": [
+    {
+      "role": "special",
+      "source_action": 1000,
+      "source_state": 1000,
+      "fidelity": "unsupported",
+      "reason": "projectile entities are not implemented in the fight runtime"
+    }
+  ],
+  "source_limitations": [
+    "common1.cns ausente; o parser usou fallback local common_forge.cns",
+    "licença desconhecida; manter derivações locais e não redistribuídas",
+    "tiers médios y e b foram descartados pelo mapa de controle de dois tiers",
+    "acordes simultâneos sem papel de runtime são rejeitados como golpes simples; botões precisam corresponder exatamente ao padrão importado",
+    "as variantes far State 201/221/231/251 são selecionadas como fallback ordenado após State 200/220/230/250 com P2BodyDist X < 32; apenas entrada direta em pé/controle é executada e grupos de cancelamento/chain do source CMD não rodam",
+    "State 220 near HP declara velset=2,0,0, mas a velocidade do papel base HP no runtime permanece zero; esse movimento não é reproduzido",
+    "States 250/251 usam physics=N; essa semântica de física não é importada pelo runtime",
+    "este corte não inclui as ações especiais bloqueadas por dependências não representáveis nem a entidade projectile",
+    "binding special=236_x deriva do .cmd e é preservado como rota indireta VarSet v0=1000 (linha 1339) -> ChangeState Var(0) (linha 1560); o importador valida essa cadeia, mas o runtime ainda não comprova seu despacho",
+    "source_routes preserva oito rotas de ataques em pé, quatro aéreas e a rota indireta special_236_x; State, AIR Action, controlador, VarSet e gatilhos são evidência de importação, não execução de comandos, trigger groups, cancelamentos ou alcance pelo runtime"
+  ],
+  "roles": [
+    {
+      "role": "idle",
+      "action": 0,
+      "state": null,
+      "loop_start": 0,
+      "frame_count": 6
+    },
+    {
+      "role": "walk_f",
+      "action": 20,
+      "state": null,
+      "loop_start": 0,
+      "frame_count": 6
+    },
+    {
+      "role": "walk_b",
+      "action": 21,
+      "state": null,
+      "loop_start": 0,
+      "frame_count": 6
+    },
+    {
+      "role": "jump",
+      "action": 40,
+      "state": null,
+      "loop_start": null,
+      "frame_count": 2
+    },
+    {
+      "role": "crouch",
+      "action": 100,
+      "state": null,
+      "loop_start": 0,
+      "frame_count": 3
+    },
+    {
+      "role": "guard",
+      "action": 120,
+      "state": null,
+      "loop_start": 0,
+      "frame_count": 2
+    },
+    {
+      "role": "punch",
+      "action": 200,
+      "state": 200,
+      "loop_start": null,
+      "frame_count": 3
+    },
+    {
+      "role": "hp",
+      "action": 220,
+      "state": 220,
+      "loop_start": null,
+      "frame_count": 5
+    },
+    {
+      "role": "kick",
+      "action": 230,
+      "state": 230,
+      "loop_start": null,
+      "frame_count": 6
+    },
+    {
+      "role": "hk",
+      "action": 250,
+      "state": 250,
+      "loop_start": null,
+      "frame_count": 10
+    },
+    {
+      "role": "special",
+      "action": 1000,
+      "state": 1000,
+      "loop_start": null,
+      "frame_count": 9
+    },
+    {
+      "role": "hit",
+      "action": 5000,
+      "state": 5000,
+      "loop_start": null,
+      "frame_count": 1
+    },
+    {
+      "role": "ko",
+      "action": 5050,
+      "state": 5050,
+      "loop_start": null,
+      "frame_count": 1
+    },
+    {
+      "role": "air_lp",
+      "action": 600,
+      "state": 600,
+      "loop_start": null,
+      "frame_count": 2
+    },
+    {
+      "role": "air_hp",
+      "action": 620,
+      "state": 620,
+      "loop_start": null,
+      "frame_count": 4
+    },
+    {
+      "role": "air_lk",
+      "action": 630,
+      "state": 630,
+      "loop_start": null,
+      "frame_count": 3
+    },
+    {
+      "role": "air_hk",
+      "action": 650,
+      "state": 650,
+      "loop_start": null,
+      "frame_count": 5
+    },
+    {
+      "role": "punch_far",
+      "action": 201,
+      "state": 201,
+      "loop_start": null,
+      "frame_count": 3
+    },
+    {
+      "role": "hp_far",
+      "action": 221,
+      "state": 221,
+      "loop_start": null,
+      "frame_count": 5
+    },
+    {
+      "role": "kick_far",
+      "action": 231,
+      "state": 231,
+      "loop_start": null,
+      "frame_count": 5
+    },
+    {
+      "role": "hk_far",
+      "action": 251,
+      "state": 251,
+      "loop_start": null,
+      "frame_count": 7
+    }
+  ],
+  "commands": {
+    "button1": "z",
+    "forward_double": "FF",
+    "lp": "x",
+    "hp": "z",
+    "lk": "a",
+    "hk": "c",
+    "special": "236_x"
+  },
+  "frames": {
+    "anim:0.0": {
+      "class": "approximate",
+      "size_source": [
+        78,
+        114
+      ],
+      "size_after_pre_scale": [
+        52,
+        77
+      ],
+      "size_runtime": [
+        52,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:0.1": {
+      "class": "approximate",
+      "size_source": [
+        71,
+        118
+      ],
+      "size_after_pre_scale": [
+        48,
+        79
+      ],
+      "size_runtime": [
+        48,
+        79
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:0.2": {
+      "class": "approximate",
+      "size_source": [
+        72,
+        115
+      ],
+      "size_after_pre_scale": [
+        48,
+        77
+      ],
+      "size_runtime": [
+        48,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:0.3": {
+      "class": "approximate",
+      "size_source": [
+        75,
+        109
+      ],
+      "size_after_pre_scale": [
+        50,
+        73
+      ],
+      "size_runtime": [
+        50,
+        73
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:0.4": {
+      "class": "approximate",
+      "size_source": [
+        72,
+        109
+      ],
+      "size_after_pre_scale": [
+        48,
+        73
+      ],
+      "size_runtime": [
+        48,
+        73
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:0.5": {
+      "class": "approximate",
+      "size_source": [
+        74,
+        110
+      ],
+      "size_after_pre_scale": [
+        50,
+        74
+      ],
+      "size_runtime": [
+        50,
+        74
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:20.0": {
+      "class": "approximate",
+      "size_source": [
+        70,
+        110
+      ],
+      "size_after_pre_scale": [
+        47,
+        74
+      ],
+      "size_runtime": [
+        47,
+        74
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:20.1": {
+      "class": "approximate",
+      "size_source": [
+        72,
+        115
+      ],
+      "size_after_pre_scale": [
+        48,
+        77
+      ],
+      "size_runtime": [
+        48,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 22,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:20.2": {
+      "class": "approximate",
+      "size_source": [
+        63,
+        114
+      ],
+      "size_after_pre_scale": [
+        42,
+        77
+      ],
+      "size_runtime": [
+        42,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 19,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:20.3": {
+      "class": "approximate",
+      "size_source": [
+        68,
+        113
+      ],
+      "size_after_pre_scale": [
+        46,
+        76
+      ],
+      "size_runtime": [
+        46,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:20.4": {
+      "class": "approximate",
+      "size_source": [
+        66,
+        110
+      ],
+      "size_after_pre_scale": [
+        44,
+        74
+      ],
+      "size_runtime": [
+        44,
+        74
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 22,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:20.5": {
+      "class": "approximate",
+      "size_source": [
+        64,
+        111
+      ],
+      "size_after_pre_scale": [
+        43,
+        75
+      ],
+      "size_runtime": [
+        43,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 21,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:21.0": {
+      "class": "approximate",
+      "size_source": [
+        67,
+        111
+      ],
+      "size_after_pre_scale": [
+        45,
+        75
+      ],
+      "size_runtime": [
+        45,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:21.1": {
+      "class": "approximate",
+      "size_source": [
+        61,
+        113
+      ],
+      "size_after_pre_scale": [
+        41,
+        76
+      ],
+      "size_runtime": [
+        41,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 21,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:21.2": {
+      "class": "approximate",
+      "size_source": [
+        65,
+        113
+      ],
+      "size_after_pre_scale": [
+        44,
+        76
+      ],
+      "size_runtime": [
+        44,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 20,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:21.3": {
+      "class": "approximate",
+      "size_source": [
+        67,
+        113
+      ],
+      "size_after_pre_scale": [
+        45,
+        76
+      ],
+      "size_runtime": [
+        45,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:21.4": {
+      "class": "approximate",
+      "size_source": [
+        67,
+        114
+      ],
+      "size_after_pre_scale": [
+        45,
+        77
+      ],
+      "size_runtime": [
+        45,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 18,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:21.5": {
+      "class": "approximate",
+      "size_source": [
+        65,
+        113
+      ],
+      "size_after_pre_scale": [
+        44,
+        76
+      ],
+      "size_runtime": [
+        44,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:40.0": {
+      "class": "approximate",
+      "size_source": [
+        71,
+        95
+      ],
+      "size_after_pre_scale": [
+        48,
+        64
+      ],
+      "size_runtime": [
+        48,
+        64
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 21,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:40.1": {
+      "class": "approximate",
+      "size_source": [
+        62,
+        125
+      ],
+      "size_after_pre_scale": [
+        42,
+        84
+      ],
+      "size_runtime": [
+        42,
+        84
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 1,
+      "duration_runtime": 1,
+      "stream_ticks": 22,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:100.0": {
+      "class": "approximate",
+      "size_source": [
+        71,
+        95
+      ],
+      "size_after_pre_scale": [
+        48,
+        64
+      ],
+      "size_runtime": [
+        48,
+        64
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 21,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:100.1": {
+      "class": "approximate",
+      "size_source": [
+        110,
+        100
+      ],
+      "size_after_pre_scale": [
+        74,
+        67
+      ],
+      "size_runtime": [
+        74,
+        67
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 16,
+      "duration_runtime": 16,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 5
+    },
+    "anim:100.2": {
+      "class": "approximate",
+      "size_source": [
+        83,
+        99
+      ],
+      "size_after_pre_scale": [
+        56,
+        67
+      ],
+      "size_runtime": [
+        56,
+        67
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 20,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:120.0": {
+      "class": "approximate",
+      "size_source": [
+        75,
+        110
+      ],
+      "size_after_pre_scale": [
+        50,
+        74
+      ],
+      "size_runtime": [
+        50,
+        74
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 1,
+      "duration_runtime": 1,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:120.1": {
+      "class": "approximate",
+      "size_source": [
+        79,
+        102
+      ],
+      "size_after_pre_scale": [
+        53,
+        69
+      ],
+      "size_runtime": [
+        53,
+        69
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 1,
+      "duration_runtime": 1,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:200.0": {
+      "class": "approximate",
+      "size_source": [
+        84,
+        115
+      ],
+      "size_after_pre_scale": [
+        57,
+        77
+      ],
+      "size_runtime": [
+        57,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 1,
+      "duration_runtime": 1,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:200.1": {
+      "class": "approximate",
+      "size_source": [
+        91,
+        113
+      ],
+      "size_after_pre_scale": [
+        61,
+        76
+      ],
+      "size_runtime": [
+        61,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 26,
+      "clsn1": 1,
+      "clsn2": 4
+    },
+    "anim:200.2": {
+      "class": "approximate",
+      "size_source": [
+        84,
+        115
+      ],
+      "size_after_pre_scale": [
+        57,
+        77
+      ],
+      "size_runtime": [
+        57,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 1,
+      "duration_runtime": 1,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:220.0": {
+      "class": "approximate",
+      "size_source": [
+        73,
+        115
+      ],
+      "size_after_pre_scale": [
+        49,
+        77
+      ],
+      "size_runtime": [
+        49,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 22,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:220.1": {
+      "class": "approximate",
+      "size_source": [
+        79,
+        113
+      ],
+      "size_after_pre_scale": [
+        53,
+        76
+      ],
+      "size_runtime": [
+        53,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 28,
+      "clsn1": 1,
+      "clsn2": 3
+    },
+    "anim:220.2": {
+      "class": "approximate",
+      "size_source": [
+        75,
+        113
+      ],
+      "size_after_pre_scale": [
+        50,
+        76
+      ],
+      "size_runtime": [
+        50,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:220.3": {
+      "class": "approximate",
+      "size_source": [
+        102,
+        116
+      ],
+      "size_after_pre_scale": [
+        69,
+        78
+      ],
+      "size_runtime": [
+        69,
+        78
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 12,
+      "duration_runtime": 12,
+      "stream_ticks": 30,
+      "clsn1": 1,
+      "clsn2": 2
+    },
+    "anim:220.4": {
+      "class": "approximate",
+      "size_source": [
+        75,
+        113
+      ],
+      "size_after_pre_scale": [
+        50,
+        76
+      ],
+      "size_runtime": [
+        50,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:230.0": {
+      "class": "approximate",
+      "size_source": [
+        87,
+        113
+      ],
+      "size_after_pre_scale": [
+        59,
+        76
+      ],
+      "size_runtime": [
+        59,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 1,
+      "duration_runtime": 1,
+      "stream_ticks": 27,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:230.1": {
+      "class": "approximate",
+      "size_source": [
+        84,
+        120
+      ],
+      "size_after_pre_scale": [
+        57,
+        81
+      ],
+      "size_runtime": [
+        57,
+        81
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:230.2": {
+      "class": "approximate",
+      "size_source": [
+        69,
+        116
+      ],
+      "size_after_pre_scale": [
+        46,
+        78
+      ],
+      "size_runtime": [
+        46,
+        78
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 22,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:230.3": {
+      "class": "approximate",
+      "size_source": [
+        81,
+        109
+      ],
+      "size_after_pre_scale": [
+        55,
+        73
+      ],
+      "size_runtime": [
+        55,
+        73
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 22,
+      "clsn1": 3,
+      "clsn2": 5
+    },
+    "anim:230.4": {
+      "class": "approximate",
+      "size_source": [
+        69,
+        116
+      ],
+      "size_after_pre_scale": [
+        46,
+        78
+      ],
+      "size_runtime": [
+        46,
+        78
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 22,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:230.5": {
+      "class": "approximate",
+      "size_source": [
+        84,
+        120
+      ],
+      "size_after_pre_scale": [
+        57,
+        81
+      ],
+      "size_runtime": [
+        57,
+        81
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:250.0": {
+      "class": "approximate",
+      "size_source": [
+        58,
+        118
+      ],
+      "size_after_pre_scale": [
+        39,
+        79
+      ],
+      "size_runtime": [
+        39,
+        79
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 19,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:250.1": {
+      "class": "approximate",
+      "size_source": [
+        70,
+        112
+      ],
+      "size_after_pre_scale": [
+        47,
+        75
+      ],
+      "size_runtime": [
+        47,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:250.2": {
+      "class": "approximate",
+      "size_source": [
+        82,
+        108
+      ],
+      "size_after_pre_scale": [
+        55,
+        73
+      ],
+      "size_runtime": [
+        55,
+        73
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:250.3": {
+      "class": "approximate",
+      "size_source": [
+        81,
+        108
+      ],
+      "size_after_pre_scale": [
+        55,
+        73
+      ],
+      "size_runtime": [
+        55,
+        73
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 22,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:250.4": {
+      "class": "approximate",
+      "size_source": [
+        68,
+        115
+      ],
+      "size_after_pre_scale": [
+        46,
+        77
+      ],
+      "size_runtime": [
+        46,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 21,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:250.5": {
+      "class": "approximate",
+      "size_source": [
+        77,
+        114
+      ],
+      "size_after_pre_scale": [
+        52,
+        77
+      ],
+      "size_runtime": [
+        52,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 22,
+      "clsn1": 0,
+      "clsn2": 4
+    },
+    "anim:250.6": {
+      "class": "approximate",
+      "size_source": [
+        100,
+        128
+      ],
+      "size_after_pre_scale": [
+        67,
+        86
+      ],
+      "size_runtime": [
+        67,
+        86
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 33,
+      "clsn1": 3,
+      "clsn2": 5
+    },
+    "anim:250.7": {
+      "class": "approximate",
+      "size_source": [
+        106,
+        113
+      ],
+      "size_after_pre_scale": [
+        71,
+        76
+      ],
+      "size_runtime": [
+        71,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 28,
+      "clsn1": 0,
+      "clsn2": 4
+    },
+    "anim:250.8": {
+      "class": "approximate",
+      "size_source": [
+        99,
+        117
+      ],
+      "size_after_pre_scale": [
+        67,
+        79
+      ],
+      "size_runtime": [
+        67,
+        79
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 28,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:250.9": {
+      "class": "approximate",
+      "size_source": [
+        67,
+        117
+      ],
+      "size_after_pre_scale": [
+        45,
+        79
+      ],
+      "size_runtime": [
+        45,
+        79
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:1000.0": {
+      "class": "approximate",
+      "size_source": [
+        77,
+        113
+      ],
+      "size_after_pre_scale": [
+        52,
+        76
+      ],
+      "size_runtime": [
+        52,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 1,
+      "duration_runtime": 1,
+      "stream_ticks": 23,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:1000.1": {
+      "class": "approximate",
+      "size_source": [
+        82,
+        136
+      ],
+      "size_after_pre_scale": [
+        55,
+        92
+      ],
+      "size_runtime": [
+        55,
+        92
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 31,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:1000.2": {
+      "class": "approximate",
+      "size_source": [
+        90,
+        135
+      ],
+      "size_after_pre_scale": [
+        61,
+        91
+      ],
+      "size_runtime": [
+        61,
+        91
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 35,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:1000.3": {
+      "class": "approximate",
+      "size_source": [
+        93,
+        119
+      ],
+      "size_after_pre_scale": [
+        63,
+        80
+      ],
+      "size_runtime": [
+        63,
+        80
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 28,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:1000.4": {
+      "class": "approximate",
+      "size_source": [
+        97,
+        113
+      ],
+      "size_after_pre_scale": [
+        65,
+        76
+      ],
+      "size_runtime": [
+        65,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 31,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:1000.5": {
+      "class": "approximate",
+      "size_source": [
+        104,
+        109
+      ],
+      "size_after_pre_scale": [
+        70,
+        73
+      ],
+      "size_runtime": [
+        70,
+        73
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 31,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:1000.6": {
+      "class": "approximate",
+      "size_source": [
+        113,
+        111
+      ],
+      "size_after_pre_scale": [
+        76,
+        75
+      ],
+      "size_runtime": [
+        76,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 30,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:1000.7": {
+      "class": "approximate",
+      "size_source": [
+        113,
+        114
+      ],
+      "size_after_pre_scale": [
+        76,
+        77
+      ],
+      "size_runtime": [
+        76,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 29,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:1000.8": {
+      "class": "approximate",
+      "size_source": [
+        115,
+        112
+      ],
+      "size_after_pre_scale": [
+        77,
+        75
+      ],
+      "size_runtime": [
+        77,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 16,
+      "duration_runtime": 16,
+      "stream_ticks": 30,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:5000.0": {
+      "class": "approximate",
+      "size_source": [
+        74,
+        112
+      ],
+      "size_after_pre_scale": [
+        50,
+        75
+      ],
+      "size_runtime": [
+        50,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 5,
+      "duration_runtime": 5,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:5050.0": {
+      "class": "approximate",
+      "size_source": [
+        112,
+        75
+      ],
+      "size_after_pre_scale": [
+        75,
+        50
+      ],
+      "size_runtime": [
+        75,
+        50
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": -1,
+      "duration_runtime": 255,
+      "stream_ticks": 21,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:600.0": {
+      "class": "approximate",
+      "size_source": [
+        75,
+        84
+      ],
+      "size_after_pre_scale": [
+        50,
+        57
+      ],
+      "size_runtime": [
+        50,
+        57
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 17,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:600.1": {
+      "class": "approximate",
+      "size_source": [
+        105,
+        88
+      ],
+      "size_after_pre_scale": [
+        71,
+        59
+      ],
+      "size_runtime": [
+        71,
+        59
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 100,
+      "duration_runtime": 100,
+      "stream_ticks": 21,
+      "clsn1": 2,
+      "clsn2": 3
+    },
+    "anim:620.0": {
+      "class": "approximate",
+      "size_source": [
+        61,
+        82
+      ],
+      "size_after_pre_scale": [
+        41,
+        55
+      ],
+      "size_runtime": [
+        41,
+        55
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 17,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:620.1": {
+      "class": "approximate",
+      "size_source": [
+        75,
+        84
+      ],
+      "size_after_pre_scale": [
+        50,
+        57
+      ],
+      "size_runtime": [
+        50,
+        57
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 17,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:620.2": {
+      "class": "approximate",
+      "size_source": [
+        104,
+        87
+      ],
+      "size_after_pre_scale": [
+        70,
+        59
+      ],
+      "size_runtime": [
+        70,
+        59
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 21,
+      "clsn1": 1,
+      "clsn2": 3
+    },
+    "anim:620.3": {
+      "class": "approximate",
+      "size_source": [
+        75,
+        84
+      ],
+      "size_after_pre_scale": [
+        50,
+        57
+      ],
+      "size_runtime": [
+        50,
+        57
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 12,
+      "duration_runtime": 12,
+      "stream_ticks": 17,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:630.0": {
+      "class": "approximate",
+      "size_source": [
+        61,
+        82
+      ],
+      "size_after_pre_scale": [
+        41,
+        55
+      ],
+      "size_runtime": [
+        41,
+        55
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 17,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:630.1": {
+      "class": "approximate",
+      "size_source": [
+        62,
+        83
+      ],
+      "size_after_pre_scale": [
+        42,
+        56
+      ],
+      "size_runtime": [
+        42,
+        56
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 18,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:630.2": {
+      "class": "approximate",
+      "size_source": [
+        128,
+        103
+      ],
+      "size_after_pre_scale": [
+        86,
+        69
+      ],
+      "size_runtime": [
+        86,
+        69
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 100,
+      "duration_runtime": 100,
+      "stream_ticks": 25,
+      "clsn1": 1,
+      "clsn2": 4
+    },
+    "anim:650.0": {
+      "class": "approximate",
+      "size_source": [
+        61,
+        82
+      ],
+      "size_after_pre_scale": [
+        41,
+        55
+      ],
+      "size_runtime": [
+        41,
+        55
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 17,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:650.1": {
+      "class": "approximate",
+      "size_source": [
+        62,
+        83
+      ],
+      "size_after_pre_scale": [
+        42,
+        56
+      ],
+      "size_runtime": [
+        42,
+        56
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 18,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:650.2": {
+      "class": "approximate",
+      "size_source": [
+        110,
+        92
+      ],
+      "size_after_pre_scale": [
+        74,
+        62
+      ],
+      "size_runtime": [
+        74,
+        62
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 12,
+      "duration_runtime": 12,
+      "stream_ticks": 24,
+      "clsn1": 4,
+      "clsn2": 6
+    },
+    "anim:650.3": {
+      "class": "approximate",
+      "size_source": [
+        62,
+        83
+      ],
+      "size_after_pre_scale": [
+        42,
+        56
+      ],
+      "size_runtime": [
+        42,
+        56
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 18,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:650.4": {
+      "class": "approximate",
+      "size_source": [
+        61,
+        82
+      ],
+      "size_after_pre_scale": [
+        41,
+        55
+      ],
+      "size_runtime": [
+        41,
+        55
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 100,
+      "duration_runtime": 100,
+      "stream_ticks": 17,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:201.0": {
+      "class": "approximate",
+      "size_source": [
+        83,
+        111
+      ],
+      "size_after_pre_scale": [
+        56,
+        75
+      ],
+      "size_runtime": [
+        56,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 26,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:201.1": {
+      "class": "approximate",
+      "size_source": [
+        100,
+        113
+      ],
+      "size_after_pre_scale": [
+        67,
+        76
+      ],
+      "size_runtime": [
+        67,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 28,
+      "clsn1": 1,
+      "clsn2": 3
+    },
+    "anim:201.2": {
+      "class": "approximate",
+      "size_source": [
+        83,
+        111
+      ],
+      "size_after_pre_scale": [
+        56,
+        75
+      ],
+      "size_runtime": [
+        56,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 26,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:221.0": {
+      "class": "approximate",
+      "size_source": [
+        85,
+        111
+      ],
+      "size_after_pre_scale": [
+        57,
+        75
+      ],
+      "size_runtime": [
+        57,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 26,
+      "clsn1": 0,
+      "clsn2": 4
+    },
+    "anim:221.1": {
+      "class": "approximate",
+      "size_source": [
+        126,
+        114
+      ],
+      "size_after_pre_scale": [
+        85,
+        77
+      ],
+      "size_runtime": [
+        85,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 30,
+      "clsn1": 1,
+      "clsn2": 4
+    },
+    "anim:221.2": {
+      "class": "approximate",
+      "size_source": [
+        118,
+        115
+      ],
+      "size_after_pre_scale": [
+        79,
+        77
+      ],
+      "size_runtime": [
+        79,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 29,
+      "clsn1": 0,
+      "clsn2": 4
+    },
+    "anim:221.3": {
+      "class": "approximate",
+      "size_source": [
+        117,
+        114
+      ],
+      "size_after_pre_scale": [
+        79,
+        77
+      ],
+      "size_runtime": [
+        79,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 31,
+      "clsn1": 0,
+      "clsn2": 4
+    },
+    "anim:221.4": {
+      "class": "approximate",
+      "size_source": [
+        85,
+        111
+      ],
+      "size_after_pre_scale": [
+        57,
+        75
+      ],
+      "size_runtime": [
+        57,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 26,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:231.0": {
+      "class": "approximate",
+      "size_source": [
+        67,
+        117
+      ],
+      "size_after_pre_scale": [
+        45,
+        79
+      ],
+      "size_runtime": [
+        45,
+        79
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 2,
+      "duration_runtime": 2,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:231.1": {
+      "class": "approximate",
+      "size_source": [
+        63,
+        117
+      ],
+      "size_after_pre_scale": [
+        42,
+        79
+      ],
+      "size_runtime": [
+        42,
+        79
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 18,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:231.2": {
+      "class": "approximate",
+      "size_source": [
+        116,
+        115
+      ],
+      "size_after_pre_scale": [
+        78,
+        77
+      ],
+      "size_runtime": [
+        78,
+        77
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 25,
+      "clsn1": 2,
+      "clsn2": 5
+    },
+    "anim:231.3": {
+      "class": "approximate",
+      "size_source": [
+        63,
+        117
+      ],
+      "size_after_pre_scale": [
+        42,
+        79
+      ],
+      "size_runtime": [
+        42,
+        79
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 18,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:231.4": {
+      "class": "approximate",
+      "size_source": [
+        67,
+        117
+      ],
+      "size_after_pre_scale": [
+        45,
+        79
+      ],
+      "size_runtime": [
+        45,
+        79
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 25,
+      "clsn1": 0,
+      "clsn2": 1
+    },
+    "anim:251.0": {
+      "class": "approximate",
+      "size_source": [
+        87,
+        113
+      ],
+      "size_after_pre_scale": [
+        59,
+        76
+      ],
+      "size_runtime": [
+        59,
+        76
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 27,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:251.1": {
+      "class": "approximate",
+      "size_source": [
+        86,
+        116
+      ],
+      "size_after_pre_scale": [
+        58,
+        78
+      ],
+      "size_runtime": [
+        58,
+        78
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 4,
+      "duration_runtime": 4,
+      "stream_ticks": 20,
+      "clsn1": 0,
+      "clsn2": 4
+    },
+    "anim:251.2": {
+      "class": "approximate",
+      "size_source": [
+        76,
+        120
+      ],
+      "size_after_pre_scale": [
+        51,
+        81
+      ],
+      "size_runtime": [
+        51,
+        81
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 3,
+      "duration_runtime": 3,
+      "stream_ticks": 19,
+      "clsn1": 0,
+      "clsn2": 2
+    },
+    "anim:251.3": {
+      "class": "approximate",
+      "size_source": [
+        96,
+        109
+      ],
+      "size_after_pre_scale": [
+        65,
+        73
+      ],
+      "size_runtime": [
+        65,
+        73
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 21,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:251.4": {
+      "class": "approximate",
+      "size_source": [
+        111,
+        138
+      ],
+      "size_after_pre_scale": [
+        75,
+        93
+      ],
+      "size_runtime": [
+        75,
+        93
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 26,
+      "clsn1": 3,
+      "clsn2": 6
+    },
+    "anim:251.5": {
+      "class": "approximate",
+      "size_source": [
+        64,
+        107
+      ],
+      "size_after_pre_scale": [
+        43,
+        72
+      ],
+      "size_runtime": [
+        43,
+        72
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 8,
+      "duration_runtime": 8,
+      "stream_ticks": 17,
+      "clsn1": 0,
+      "clsn2": 3
+    },
+    "anim:251.6": {
+      "class": "approximate",
+      "size_source": [
+        71,
+        111
+      ],
+      "size_after_pre_scale": [
+        48,
+        75
+      ],
+      "size_runtime": [
+        48,
+        75
+      ],
+      "scale": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "uniform_scale_ratio": {
+        "numerator": 72,
+        "denominator": 107
+      },
+      "duration_air": 6,
+      "duration_runtime": 6,
+      "stream_ticks": 24,
+      "clsn1": 0,
+      "clsn2": 1
+    }
+  },
+  "pose_count_per_fighter": 94,
+  "stream_chunk_bytes": 64,
+  "duration_policy": "air_exact_candidate_stream_timing_unproven",
+  "fighter_scale": {
+    "policy": "uniform_per_character_scene_contract",
+    "ratio": {
+      "numerator": 72,
+      "denominator": 107
+    },
+    "target_idle_opaque_height_px": 72,
+    "accepted_height_px": [
+      72,
+      88
+    ],
+    "source_idle_opaque_bounds_xyxy": [
+      -23,
+      38,
+      -104,
+      2
+    ],
+    "source_idle_opaque_height_px": 107,
+    "runtime_idle_opaque_bounds_xyxy": [
+      -16,
+      25,
+      -70,
+      1
+    ],
+    "runtime_idle_opaque_height_px": 72,
+    "idle_frame_bounds_source": [
+      {
+        "frame": 0,
+        "xyxy": [
+          -23,
+          -103,
+          34,
+          2
+        ],
+        "source_size": [
+          78,
+          114
+        ]
+      },
+      {
+        "frame": 1,
+        "xyxy": [
+          -23,
+          -104,
+          31,
+          2
+        ],
+        "source_size": [
+          71,
+          118
+        ]
+      },
+      {
+        "frame": 2,
+        "xyxy": [
+          -23,
+          -103,
+          34,
+          2
+        ],
+        "source_size": [
+          72,
+          115
+        ]
+      },
+      {
+        "frame": 3,
+        "xyxy": [
+          -23,
+          -101,
+          36,
+          2
+        ],
+        "source_size": [
+          75,
+          109
+        ]
+      },
+      {
+        "frame": 4,
+        "xyxy": [
+          -23,
+          -100,
+          38,
+          2
+        ],
+        "source_size": [
+          72,
+          109
+        ]
+      },
+      {
+        "frame": 5,
+        "xyxy": [
+          -23,
+          -101,
+          36,
+          2
+        ],
+        "source_size": [
+          74,
+          110
+        ]
+      }
+    ],
+    "idle_frame_bounds_runtime": [
+      {
+        "frame": 0,
+        "xyxy": [
+          -16,
+          -69,
+          22,
+          1
+        ],
+        "source_size": [
+          52,
+          77
+        ]
+      },
+      {
+        "frame": 1,
+        "xyxy": [
+          -15,
+          -70,
+          21,
+          1
+        ],
+        "source_size": [
+          48,
+          79
+        ]
+      },
+      {
+        "frame": 2,
+        "xyxy": [
+          -15,
+          -69,
+          23,
+          1
+        ],
+        "source_size": [
+          48,
+          77
+        ]
+      },
+      {
+        "frame": 3,
+        "xyxy": [
+          -16,
+          -68,
+          24,
+          1
+        ],
+        "source_size": [
+          50,
+          73
+        ]
+      },
+      {
+        "frame": 4,
+        "xyxy": [
+          -16,
+          -67,
+          25,
+          1
+        ],
+        "source_size": [
+          48,
+          73
+        ]
+      },
+      {
+        "frame": 5,
+        "xyxy": [
+          -16,
+          -68,
+          23,
+          1
+        ],
+        "source_size": [
+          50,
+          74
+        ]
+      }
+    ],
+    "selected_action_frame_counts_preserved": true,
+    "selected_action_air_durations_preserved": true,
+    "selected_action_clsn_box_counts_preserved": true,
+    "sampling": "nearest_neighbor_indexed_pixels",
+    "source_sizes_by_group_image": {
+      "9000:0": [
+        22,
+        22
+      ],
+      "9000:1": [
+        158,
+        131
+      ],
+      "9999:0": [
+        24,
+        24
+      ],
+      "0:0": [
+        78,
+        114
+      ],
+      "0:1": [
+        71,
+        118
+      ],
+      "0:2": [
+        72,
+        115
+      ],
+      "0:3": [
+        75,
+        109
+      ],
+      "0:4": [
+        72,
+        109
+      ],
+      "0:5": [
+        74,
+        110
+      ],
+      "5:0": [
+        62,
+        110
+      ],
+      "6:0": [
+        62,
+        77
+      ],
+      "10:0": [
+        71,
+        95
+      ],
+      "10:1": [
+        70,
+        76
+      ],
+      "20:0": [
+        70,
+        110
+      ],
+      "20:1": [
+        72,
+        115
+      ],
+      "20:2": [
+        63,
+        114
+      ],
+      "20:3": [
+        68,
+        113
+      ],
+      "20:4": [
+        66,
+        110
+      ],
+      "20:5": [
+        64,
+        111
+      ],
+      "21:0": [
+        67,
+        111
+      ],
+      "21:1": [
+        61,
+        113
+      ],
+      "21:2": [
+        65,
+        113
+      ],
+      "21:3": [
+        67,
+        113
+      ],
+      "21:4": [
+        67,
+        114
+      ],
+      "21:5": [
+        65,
+        113
+      ],
+      "30:0": [
+        65,
+        75
+      ],
+      "30:1": [
+        64,
+        78
+      ],
+      "30:2": [
+        67,
+        82
+      ],
+      "30:3": [
+        72,
+        77
+      ],
+      "30:4": [
+        66,
+        80
+      ],
+      "30:5": [
+        73,
+        79
+      ],
+      "40:0": [
+        62,
+        125
+      ],
+      "40:1": [
+        65,
+        110
+      ],
+      "40:2": [
+        68,
+        97
+      ],
+      "40:3": [
+        62,
+        84
+      ],
+      "40:4": [
+        71,
+        98
+      ],
+      "40:5": [
+        62,
+        126
+      ],
+      "42:1": [
+        78,
+        88
+      ],
+      "42:2": [
+        82,
+        56
+      ],
+      "42:3": [
+        54,
+        80
+      ],
+      "42:4": [
+        123,
+        57
+      ],
+      "42:5": [
+        83,
+        115
+      ],
+      "100:0": [
+        110,
+        100
+      ],
+      "100:1": [
+        83,
+        99
+      ],
+      "105:0": [
+        97,
+        101
+      ],
+      "105:1": [
+        88,
+        96
+      ],
+      "120:0": [
+        75,
+        110
+      ],
+      "120:1": [
+        79,
+        102
+      ],
+      "121:0": [
+        66,
+        76
+      ],
+      "121:1": [
+        72,
+        81
+      ],
+      "150:0": [
+        73,
+        105
+      ],
+      "150:1": [
+        75,
+        103
+      ],
+      "175:0": [
+        67,
+        113
+      ],
+      "175:1": [
+        68,
+        116
+      ],
+      "175:2": [
+        70,
+        116
+      ],
+      "181:0": [
+        73,
+        120
+      ],
+      "181:1": [
+        69,
+        124
+      ],
+      "181:2": [
+        80,
+        115
+      ],
+      "182:2": [
+        67,
+        125
+      ],
+      "190:0": [
+        69,
+        120
+      ],
+      "190:1": [
+        77,
+        107
+      ],
+      "190:2": [
+        72,
+        115
+      ],
+      "190:3": [
+        72,
+        114
+      ],
+      "190:4": [
+        62,
+        120
+      ],
+      "190:5": [
+        75,
+        121
+      ],
+      "190:6": [
+        56,
+        41
+      ],
+      "190:7": [
+        54,
+        43
+      ],
+      "190:8": [
+        57,
+        51
+      ],
+      "190:9": [
+        48,
+        51
+      ],
+      "195:0": [
+        57,
+        115
+      ],
+      "195:1": [
+        73,
+        117
+      ],
+      "195:2": [
+        59,
+        116
+      ],
+      "200:0": [
+        84,
+        115
+      ],
+      "200:1": [
+        91,
+        113
+      ],
+      "201:0": [
+        83,
+        111
+      ],
+      "201:1": [
+        100,
+        113
+      ],
+      "210:0": [
+        84,
+        114
+      ],
+      "210:1": [
+        86,
+        115
+      ],
+      "210:2": [
+        82,
+        114
+      ],
+      "211:0": [
+        82,
+        112
+      ],
+      "211:1": [
+        111,
+        114
+      ],
+      "220:0": [
+        73,
+        115
+      ],
+      "220:1": [
+        79,
+        113
+      ],
+      "220:2": [
+        75,
+        113
+      ],
+      "220:3": [
+        102,
+        116
+      ],
+      "221:0": [
+        85,
+        111
+      ],
+      "221:1": [
+        126,
+        114
+      ],
+      "221:2": [
+        118,
+        115
+      ],
+      "221:3": [
+        117,
+        114
+      ],
+      "230:0": [
+        87,
+        113
+      ],
+      "230:1": [
+        84,
+        120
+      ],
+      "230:2": [
+        69,
+        116
+      ],
+      "230:3": [
+        81,
+        109
+      ],
+      "231:0": [
+        67,
+        117
+      ],
+      "231:1": [
+        63,
+        117
+      ],
+      "231:2": [
+        116,
+        115
+      ],
+      "240:0": [
+        87,
+        113
+      ],
+      "240:1": [
+        84,
+        120
+      ],
+      "240:2": [
+        69,
+        116
+      ],
+      "240:3": [
+        64,
+        107
+      ],
+      "241:0": [
+        76,
+        105
+      ],
+      "241:1": [
+        128,
+        123
+      ],
+      "241:2": [
+        77,
+        117
+      ],
+      "250:0": [
+        58,
+        118
+      ],
+      "250:1": [
+        70,
+        112
+      ],
+      "250:2": [
+        82,
+        108
+      ],
+      "250:3": [
+        81,
+        108
+      ],
+      "250:4": [
+        68,
+        115
+      ],
+      "250:5": [
+        77,
+        114
+      ],
+      "250:6": [
+        100,
+        128
+      ],
+      "250:7": [
+        106,
+        113
+      ],
+      "250:8": [
+        99,
+        117
+      ],
+      "250:9": [
+        67,
+        117
+      ],
+      "251:0": [
+        87,
+        113
+      ],
+      "251:1": [
+        86,
+        116
+      ],
+      "251:2": [
+        76,
+        120
+      ],
+      "251:3": [
+        96,
+        109
+      ],
+      "251:4": [
+        111,
+        138
+      ],
+      "251:5": [
+        64,
+        107
+      ],
+      "251:6": [
+        71,
+        111
+      ],
+      "300:0": [
+        88,
+        115
+      ],
+      "300:1": [
+        86,
+        116
+      ],
+      "300:2": [
+        76,
+        120
+      ],
+      "300:3": [
+        96,
+        109
+      ],
+      "300:4": [
+        127,
+        114
+      ],
+      "300:5": [
+        68,
+        113
+      ],
+      "300:6": [
+        76,
+        113
+      ],
+      "310:0": [
+        76,
+        105
+      ],
+      "310:1": [
+        91,
+        101
+      ],
+      "310:2": [
+        123,
+        95
+      ],
+      "320:0": [
+        84,
+        120
+      ],
+      "320:1": [
+        69,
+        116
+      ],
+      "320:2": [
+        59,
+        116
+      ],
+      "320:3": [
+        121,
+        116
+      ],
+      "400:0": [
+        74,
+        78
+      ],
+      "400:1": [
+        99,
+        78
+      ],
+      "410:0": [
+        74,
+        78
+      ],
+      "410:1": [
+        71,
+        89
+      ],
+      "410:2": [
+        100,
+        88
+      ],
+      "420:0": [
+        85,
+        92
+      ],
+      "420:1": [
+        83,
+        91
+      ],
+      "420:2": [
+        80,
+        105
+      ],
+      "420:3": [
+        104,
+        139
+      ],
+      "430:0": [
+        69,
+        72
+      ],
+      "430:1": [
+        125,
+        69
+      ],
+      "440:0": [
+        69,
+        72
+      ],
+      "440:1": [
+        125,
+        69
+      ],
+      "450:0": [
+        69,
+        72
+      ],
+      "450:1": [
+        86,
+        76
+      ],
+      "450:2": [
+        90,
+        79
+      ],
+      "450:3": [
+        79,
+        80
+      ],
+      "450:4": [
+        126,
+        80
+      ],
+      "450:5": [
+        56,
+        78
+      ],
+      "450:6": [
+        84,
+        75
+      ],
+      "450:7": [
+        70,
+        79
+      ],
+      "600:0": [
+        75,
+        84
+      ],
+      "600:1": [
+        105,
+        88
+      ],
+      "610:0": [
+        61,
+        82
+      ],
+      "610:1": [
+        75,
+        84
+      ],
+      "610:2": [
+        105,
+        88
+      ],
+      "620:0": [
+        61,
+        82
+      ],
+      "620:1": [
+        75,
+        84
+      ],
+      "620:2": [
+        104,
+        87
+      ],
+      "630:0": [
+        61,
+        82
+      ],
+      "630:1": [
+        62,
+        83
+      ],
+      "630:2": [
+        128,
+        103
+      ],
+      "640:0": [
+        61,
+        82
+      ],
+      "640:1": [
+        62,
+        83
+      ],
+      "640:2": [
+        128,
+        103
+      ],
+      "640:3": [
+        60,
+        99
+      ],
+      "650:0": [
+        61,
+        82
+      ],
+      "650:1": [
+        62,
+        83
+      ],
+      "650:2": [
+        110,
+        92
+      ],
+      "1000:0": [
+        77,
+        113
+      ],
+      "1000:1": [
+        82,
+        136
+      ],
+      "1000:2": [
+        90,
+        135
+      ],
+      "1000:3": [
+        93,
+        119
+      ],
+      "1000:4": [
+        97,
+        113
+      ],
+      "1000:5": [
+        104,
+        109
+      ],
+      "1000:6": [
+        113,
+        111
+      ],
+      "1000:7": [
+        113,
+        114
+      ],
+      "1000:8": [
+        115,
+        112
+      ],
+      "1005:0": [
+        53,
+        45
+      ],
+      "1005:1": [
+        70,
+        37
+      ],
+      "1005:2": [
+        53,
+        45
+      ],
+      "1005:3": [
+        70,
+        37
+      ],
+      "1005:4": [
+        76,
+        34
+      ],
+      "1005:5": [
+        66,
+        36
+      ],
+      "1006:0": [
+        47,
+        49
+      ],
+      "1006:1": [
+        35,
+        57
+      ],
+      "1006:2": [
+        34,
+        68
+      ],
+      "1006:3": [
+        29,
+        67
+      ],
+      "1100:0": [
+        81,
+        98
+      ],
+      "1100:1": [
+        80,
+        97
+      ],
+      "1100:2": [
+        79,
+        102
+      ],
+      "1100:3": [
+        84,
+        110
+      ],
+      "1100:4": [
+        76,
+        128
+      ],
+      "1100:5": [
+        62,
+        138
+      ],
+      "1100:6": [
+        64,
+        118
+      ],
+      "1100:7": [
+        82,
+        117
+      ],
+      "1100:8": [
+        62,
+        125
+      ],
+      "1100:9": [
+        71,
+        95
+      ],
+      "1200:0": [
+        70,
+        76
+      ],
+      "1200:1": [
+        69,
+        72
+      ],
+      "1200:2": [
+        70,
+        80
+      ],
+      "1200:3": [
+        131,
+        78
+      ],
+      "1200:4": [
+        128,
+        73
+      ],
+      "1200:5": [
+        129,
+        77
+      ],
+      "1200:6": [
+        78,
+        107
+      ],
+      "1200:7": [
+        84,
+        101
+      ],
+      "1200:8": [
+        118,
+        104
+      ],
+      "1200:9": [
+        64,
+        107
+      ],
+      "1200:10": [
+        71,
+        111
+      ],
+      "1200:11": [
+        71,
+        95
+      ],
+      "1205:0": [
+        64,
+        31
+      ],
+      "1205:1": [
+        60,
+        43
+      ],
+      "1205:2": [
+        68,
+        50
+      ],
+      "1205:3": [
+        70,
+        51
+      ],
+      "1300:0": [
+        71,
+        110
+      ],
+      "1300:1": [
+        115,
+        113
+      ],
+      "1300:2": [
+        141,
+        117
+      ],
+      "1300:3": [
+        96,
+        113
+      ],
+      "1300:4": [
+        109,
+        116
+      ],
+      "1300:5": [
+        104,
+        126
+      ],
+      "1300:6": [
+        121,
+        147
+      ],
+      "1300:7": [
+        108,
+        114
+      ],
+      "1300:8": [
+        122,
+        112
+      ],
+      "1301:0": [
+        96,
+        113
+      ],
+      "1301:1": [
+        109,
+        116
+      ],
+      "1301:2": [
+        108,
+        114
+      ],
+      "1301:3": [
+        122,
+        112
+      ],
+      "1301:4": [
+        115,
+        113
+      ],
+      "1301:5": [
+        141,
+        117
+      ],
+      "1301:6": [
+        104,
+        126
+      ],
+      "1301:7": [
+        121,
+        147
+      ],
+      "1302:0": [
+        82,
+        111
+      ],
+      "1302:1": [
+        125,
+        113
+      ],
+      "1302:2": [
+        118,
+        114
+      ],
+      "1302:3": [
+        116,
+        110
+      ],
+      "1400:0": [
+        77,
+        107
+      ],
+      "1400:1": [
+        72,
+        115
+      ],
+      "1400:2": [
+        72,
+        114
+      ],
+      "1400:3": [
+        62,
+        120
+      ],
+      "1400:4": [
+        75,
+        121
+      ],
+      "1400:5": [
+        114,
+        110
+      ],
+      "1400:6": [
+        111,
+        117
+      ],
+      "1400:7": [
+        117,
+        118
+      ],
+      "1405:0": [
+        60,
+        93
+      ],
+      "1405:1": [
+        64,
+        81
+      ],
+      "1405:2": [
+        55,
+        121
+      ],
+      "1405:3": [
+        51,
+        125
+      ],
+      "1406:0": [
+        42,
+        60
+      ],
+      "1406:1": [
+        40,
+        79
+      ],
+      "1406:2": [
+        41,
+        82
+      ],
+      "1406:3": [
+        44,
+        99
+      ],
+      "1500:0": [
+        70,
+        116
+      ],
+      "1500:1": [
+        85,
+        111
+      ],
+      "1500:2": [
+        65,
+        108
+      ],
+      "1500:3": [
+        72,
+        101
+      ],
+      "1500:4": [
+        94,
+        86
+      ],
+      "1500:5": [
+        99,
+        103
+      ],
+      "1500:6": [
+        108,
+        91
+      ],
+      "1500:7": [
+        118,
+        87
+      ],
+      "1500:8": [
+        112,
+        65
+      ],
+      "1500:9": [
+        86,
+        68
+      ],
+      "1500:10": [
+        74,
+        82
+      ],
+      "1500:11": [
+        70,
+        102
+      ],
+      "1600:0": [
+        75,
+        120
+      ],
+      "1600:1": [
+        75,
+        120
+      ],
+      "1600:2": [
+        100,
+        120
+      ],
+      "1600:3": [
+        100,
+        120
+      ],
+      "1600:4": [
+        100,
+        120
+      ],
+      "1600:5": [
+        120,
+        120
+      ],
+      "1600:6": [
+        120,
+        100
+      ],
+      "1600:7": [
+        120,
+        100
+      ],
+      "1705:0": [
+        70,
+        70
+      ],
+      "1705:1": [
+        76,
+        76
+      ],
+      "1705:2": [
+        70,
+        70
+      ],
+      "1705:3": [
+        76,
+        76
+      ],
+      "1705:4": [
+        78,
+        78
+      ],
+      "1705:5": [
+        73,
+        73
+      ],
+      "1706:0": [
+        68,
+        68
+      ],
+      "1706:1": [
+        66,
+        66
+      ],
+      "1706:2": [
+        73,
+        73
+      ],
+      "1706:3": [
+        68,
+        68
+      ],
+      "3100:0": [
+        77,
+        107
+      ],
+      "3100:1": [
+        72,
+        115
+      ],
+      "3100:2": [
+        71,
+        95
+      ],
+      "3101:0": [
+        110,
+        100
+      ],
+      "3101:1": [
+        83,
+        99
+      ],
+      "5000:0": [
+        74,
+        112
+      ],
+      "5000:10": [
+        81,
+        106
+      ],
+      "5000:20": [
+        86,
+        104
+      ],
+      "5001:0": [
+        74,
+        112
+      ],
+      "5001:10": [
+        81,
+        106
+      ],
+      "5001:20": [
+        86,
+        104
+      ],
+      "5002:0": [
+        74,
+        112
+      ],
+      "5002:10": [
+        81,
+        106
+      ],
+      "5002:20": [
+        86,
+        104
+      ],
+      "5010:0": [
+        74,
+        108
+      ],
+      "5010:10": [
+        63,
+        100
+      ],
+      "5010:20": [
+        53,
+        89
+      ],
+      "5011:0": [
+        74,
+        108
+      ],
+      "5011:10": [
+        63,
+        100
+      ],
+      "5011:20": [
+        53,
+        89
+      ],
+      "5012:0": [
+        74,
+        108
+      ],
+      "5012:10": [
+        63,
+        100
+      ],
+      "5012:20": [
+        53,
+        89
+      ],
+      "5020:0": [
+        71,
+        80
+      ],
+      "5020:10": [
+        85,
+        78
+      ],
+      "5020:20": [
+        91,
+        76
+      ],
+      "5030:0": [
+        87,
+        104
+      ],
+      "5030:10": [
+        128,
+        66
+      ],
+      "5030:20": [
+        112,
+        75
+      ],
+      "5030:30": [
+        128,
+        66
+      ],
+      "5030:40": [
+        128,
+        128
+      ],
+      "5030:50": [
+        133,
+        133
+      ],
+      "5031:0": [
+        87,
+        104
+      ],
+      "5031:10": [
+        128,
+        66
+      ],
+      "5031:20": [
+        112,
+        75
+      ],
+      "5031:30": [
+        128,
+        66
+      ],
+      "5031:40": [
+        128,
+        128
+      ],
+      "5031:50": [
+        133,
+        133
+      ],
+      "5032:0": [
+        87,
+        104
+      ],
+      "5032:10": [
+        128,
+        66
+      ],
+      "5032:20": [
+        112,
+        75
+      ],
+      "5032:30": [
+        128,
+        66
+      ],
+      "5032:40": [
+        128,
+        128
+      ],
+      "5032:50": [
+        133,
+        133
+      ],
+      "5040:0": [
+        112,
+        75
+      ],
+      "5040:10": [
+        132,
+        45
+      ],
+      "5040:20": [
+        125,
+        61
+      ],
+      "5041:0": [
+        112,
+        75
+      ],
+      "5041:10": [
+        132,
+        45
+      ],
+      "5041:20": [
+        125,
+        61
+      ],
+      "5042:0": [
+        112,
+        75
+      ],
+      "5042:10": [
+        132,
+        45
+      ],
+      "5042:20": [
+        125,
+        61
+      ],
+      "5060:0": [
+        93,
+        100
+      ],
+      "5060:10": [
+        81,
+        97
+      ],
+      "5061:0": [
+        93,
+        100
+      ],
+      "5061:2": [
+        128,
+        128
+      ],
+      "5061:10": [
+        81,
+        97
+      ],
+      "5062:0": [
+        93,
+        100
+      ],
+      "5062:10": [
+        81,
+        97
+      ],
+      "5068:0": [
+        112,
+        75
+      ],
+      "5068:1": [
+        97,
+        81
+      ],
+      "5068:2": [
+        125,
+        61
+      ],
+      "5068:3": [
+        100,
+        93
+      ],
+      "5070:0": [
+        133,
+        133
+      ],
+      "5070:10": [
+        128,
+        128
+      ],
+      "5070:20": [
+        128,
+        66
+      ],
+      "5071:0": [
+        133,
+        133
+      ],
+      "5071:10": [
+        128,
+        128
+      ],
+      "5071:20": [
+        128,
+        66
+      ],
+      "5072:0": [
+        133,
+        133
+      ],
+      "5072:10": [
+        128,
+        128
+      ],
+      "5072:20": [
+        128,
+        66
+      ],
+      "5120:0": [
+        106,
+        67
+      ],
+      "5120:1": [
+        89,
+        69
+      ],
+      "5120:2": [
+        70,
+        80
+      ],
+      "5120:3": [
+        76,
+        94
+      ],
+      "5300:1": [
+        69,
+        80
+      ],
+      "5300:2": [
+        68,
+        81
+      ],
+      "5300:3": [
+        66,
+        82
+      ],
+      "5300:4": [
+        71,
+        81
+      ],
+      "5300:5": [
+        68,
+        80
+      ],
+      "20000:0": [
+        26,
+        6
+      ],
+      "20000:1": [
+        31,
+        13
+      ],
+      "20000:2": [
+        27,
+        8
+      ],
+      "20000:3": [
+        29,
+        12
+      ],
+      "20001:0": [
+        11,
+        11
+      ],
+      "20001:1": [
+        14,
+        14
+      ],
+      "20001:2": [
+        19,
+        19
+      ],
+      "20001:3": [
+        26,
+        25
+      ],
+      "20002:0": [
+        10,
+        10
+      ],
+      "20002:1": [
+        29,
+        29
+      ],
+      "20002:2": [
+        32,
+        32
+      ],
+      "20002:3": [
+        32,
+        32
+      ],
+      "20003:0": [
+        10,
+        10
+      ],
+      "20003:1": [
+        27,
+        27
+      ],
+      "20003:2": [
+        30,
+        28
+      ],
+      "20003:3": [
+        32,
+        32
+      ],
+      "20004:0": [
+        26,
+        6
+      ],
+      "20004:1": [
+        31,
+        13
+      ],
+      "20004:2": [
+        27,
+        8
+      ],
+      "20004:3": [
+        29,
+        12
+      ],
+      "20005:0": [
+        25,
+        25
+      ],
+      "20005:1": [
+        25,
+        25
+      ],
+      "20005:2": [
+        30,
+        30
+      ],
+      "20005:3": [
+        30,
+        30
+      ],
+      "20005:4": [
+        37,
+        45
+      ],
+      "196:0": [
+        304,
+        224
+      ],
+      "196:1": [
+        304,
+        224
+      ],
+      "196:2": [
+        304,
+        224
+      ],
+      "196:3": [
+        304,
+        224
+      ],
+      "196:4": [
+        304,
+        224
+      ],
+      "196:5": [
+        304,
+        224
+      ],
+      "196:6": [
+        304,
+        224
+      ],
+      "196:7": [
+        304,
+        224
+      ],
+      "196:8": [
+        304,
+        224
+      ],
+      "196:9": [
+        304,
+        224
+      ],
+      "196:10": [
+        304,
+        224
+      ],
+      "196:11": [
+        304,
+        224
+      ],
+      "196:12": [
+        304,
+        224
+      ],
+      "196:13": [
+        304,
+        224
+      ],
+      "196:14": [
+        304,
+        224
+      ],
+      "196:15": [
+        304,
+        224
+      ],
+      "196:16": [
+        304,
+        224
+      ],
+      "196:17": [
+        304,
+        224
+      ],
+      "196:18": [
+        304,
+        224
+      ],
+      "196:19": [
+        304,
+        224
+      ],
+      "196:20": [
+        304,
+        224
+      ],
+      "196:21": [
+        304,
+        224
+      ],
+      "196:22": [
+        304,
+        224
+      ],
+      "196:23": [
+        304,
+        224
+      ],
+      "196:24": [
+        304,
+        224
+      ],
+      "196:25": [
+        304,
+        224
+      ],
+      "196:26": [
+        304,
+        224
+      ],
+      "196:27": [
+        304,
+        224
+      ],
+      "196:28": [
+        304,
+        224
+      ],
+      "196:29": [
+        304,
+        224
+      ],
+      "196:30": [
+        304,
+        224
+      ],
+      "196:31": [
+        304,
+        224
+      ],
+      "196:32": [
+        304,
+        224
+      ],
+      "196:33": [
+        304,
+        224
+      ],
+      "196:34": [
+        304,
+        224
+      ],
+      "196:35": [
+        304,
+        224
+      ],
+      "196:36": [
+        304,
+        224
+      ],
+      "196:37": [
+        304,
+        224
+      ],
+      "196:38": [
+        304,
+        224
+      ],
+      "196:39": [
+        304,
+        224
+      ],
+      "196:40": [
+        304,
+        224
+      ],
+      "196:41": [
+        304,
+        224
+      ],
+      "196:42": [
+        304,
+        224
+      ],
+      "196:43": [
+        304,
+        224
+      ],
+      "196:44": [
+        304,
+        224
+      ],
+      "196:45": [
+        304,
+        224
+      ],
+      "196:46": [
+        304,
+        224
+      ],
+      "196:47": [
+        304,
+        224
+      ],
+      "196:48": [
+        304,
+        224
+      ],
+      "196:49": [
+        304,
+        224
+      ],
+      "196:50": [
+        304,
+        224
+      ],
+      "196:51": [
+        304,
+        224
+      ],
+      "196:52": [
+        304,
+        224
+      ],
+      "196:53": [
+        304,
+        224
+      ],
+      "196:54": [
+        304,
+        224
+      ],
+      "196:55": [
+        304,
+        224
+      ],
+      "196:56": [
+        304,
+        224
+      ],
+      "196:57": [
+        304,
+        224
+      ],
+      "196:58": [
+        304,
+        224
+      ],
+      "196:59": [
+        304,
+        224
+      ],
+      "196:60": [
+        304,
+        224
+      ],
+      "196:61": [
+        304,
+        224
+      ],
+      "196:62": [
+        304,
+        224
+      ],
+      "196:63": [
+        304,
+        224
+      ],
+      "196:64": [
+        304,
+        224
+      ],
+      "197:0": [
+        320,
+        240
+      ],
+      "10000:0": [
+        74,
+        115
+      ],
+      "10000:1": [
+        73,
+        112
+      ],
+      "10000:2": [
+        77,
+        108
+      ],
+      "10000:3": [
+        74,
+        110
+      ],
+      "10000:4": [
+        71,
+        113
+      ],
+      "10000:5": [
+        70,
+        113
+      ],
+      "10005:0": [
+        65,
+        113
+      ],
+      "10020:0": [
+        73,
+        110
+      ],
+      "10020:1": [
+        61,
+        118
+      ],
+      "10020:2": [
+        66,
+        119
+      ],
+      "10020:3": [
+        53,
+        122
+      ],
+      "10020:4": [
+        55,
+        117
+      ],
+      "10020:5": [
+        73,
+        116
+      ],
+      "10021:0": [
+        72,
+        115
+      ],
+      "10021:1": [
+        65,
+        118
+      ],
+      "10021:2": [
+        74,
+        127
+      ],
+      "10021:3": [
+        74,
+        125
+      ],
+      "10021:4": [
+        71,
+        117
+      ],
+      "10021:5": [
+        79,
+        115
+      ],
+      "10175:0": [
+        52,
+        119
+      ],
+      "10175:1": [
+        62,
+        114
+      ],
+      "10175:2": [
+        91,
+        133
+      ],
+      "10175:3": [
+        83,
+        128
+      ],
+      "10175:4": [
+        105,
+        97
+      ],
+      "10175:5": [
+        102,
+        104
+      ],
+      "10181:0": [
+        72,
+        107
+      ],
+      "10181:1": [
+        65,
+        110
+      ],
+      "10181:2": [
+        63,
+        122
+      ],
+      "10181:3": [
+        72,
+        116
+      ],
+      "10200:0": [
+        83,
+        115
+      ],
+      "10200:1": [
+        100,
+        113
+      ],
+      "10210:0": [
+        78,
+        115
+      ],
+      "10210:1": [
+        76,
+        108
+      ],
+      "10210:2": [
+        111,
+        106
+      ],
+      "10230:0": [
+        72,
+        112
+      ],
+      "10230:1": [
+        60,
+        120
+      ],
+      "10230:2": [
+        93,
+        116
+      ],
+      "10240:0": [
+        79,
+        109
+      ],
+      "10240:1": [
+        76,
+        115
+      ],
+      "10240:2": [
+        93,
+        120
+      ],
+      "10240:3": [
+        64,
+        150
+      ],
+      "10240:4": [
+        89,
+        123
+      ],
+      "10240:5": [
+        87,
+        117
+      ],
+      "10240:6": [
+        67,
+        114
+      ],
+      "11000:0": [
+        78,
+        104
+      ],
+      "11000:1": [
+        82,
+        96
+      ],
+      "11000:2": [
+        82,
+        96
+      ],
+      "11000:3": [
+        107,
+        98
+      ],
+      "11000:4": [
+        86,
+        107
+      ],
+      "11100:0": [
+        74,
+        112
+      ],
+      "11100:1": [
+        62,
+        102
+      ],
+      "11100:2": [
+        66,
+        94
+      ],
+      "11100:3": [
+        93,
+        104
+      ],
+      "11100:4": [
+        58,
+        142
+      ],
+      "11100:5": [
+        58,
+        131
+      ],
+      "11100:6": [
+        63,
+        118
+      ],
+      "11100:7": [
+        64,
+        128
+      ],
+      "11100:8": [
+        66,
+        115
+      ],
+      "11100:9": [
+        66,
+        100
+      ],
+      "11200:0": [
+        69,
+        105
+      ],
+      "11200:1": [
+        75,
+        92
+      ],
+      "11200:2": [
+        145,
+        83
+      ],
+      "11200:3": [
+        110,
+        116
+      ],
+      "11200:4": [
+        88,
+        119
+      ],
+      "11200:5": [
+        104,
+        90
+      ],
+      "11200:6": [
+        74,
+        119
+      ],
+      "11300:0": [
+        99,
+        113
+      ],
+      "11300:1": [
+        109,
+        117
+      ],
+      "11300:2": [
+        91,
+        109
+      ],
+      "11300:3": [
+        97,
+        111
+      ],
+      "11300:4": [
+        107,
+        111
+      ],
+      "11300:5": [
+        120,
+        112
+      ],
+      "11300:6": [
+        108,
+        111
+      ],
+      "11300:7": [
+        112,
+        108
+      ],
+      "11300:8": [
+        92,
+        109
+      ],
+      "11301:0": [
+        66,
+        109
+      ],
+      "11301:1": [
+        76,
+        119
+      ],
+      "11301:2": [
+        60,
+        110
+      ],
+      "11301:3": [
+        109,
+        118
+      ],
+      "11301:4": [
+        80,
+        107
+      ],
+      "11301:5": [
+        67,
+        121
+      ],
+      "11301:6": [
+        71,
+        108
+      ],
+      "11301:7": [
+        69,
+        105
+      ],
+      "11400:0": [
+        83,
+        120
+      ],
+      "11400:1": [
+        77,
+        104
+      ],
+      "11400:2": [
+        74,
+        97
+      ],
+      "11400:3": [
+        78,
+        93
+      ],
+      "11400:4": [
+        96,
+        106
+      ],
+      "11400:5": [
+        98,
+        98
+      ],
+      "11400:6": [
+        77,
+        103
+      ],
+      "13100:0": [
+        79,
+        111
+      ],
+      "13100:1": [
+        80,
+        111
+      ],
+      "13100:2": [
+        76,
+        105
+      ],
+      "13101:0": [
+        69,
+        94
+      ],
+      "13101:1": [
+        82,
+        99
+      ]
+    },
+    "runtime_note": "AIR values are preserved in generated tables; runtime timing still depends on pose streaming and requires emulator measurement."
+  },
+  "bank_page_bytes": 16384,
+  "banks": [
+    {
+      "bank": 5,
+      "file": "ken_scene_bank5.bin",
+      "used_bytes": 15488,
+      "file_bytes": 16384,
+      "sha256": "0bbf21532340e3eab0ea3188658134f99e91cca475373727bb21607e0fe874de"
+    },
+    {
+      "bank": 6,
+      "file": "ken_scene_bank6.bin",
+      "used_bytes": 15232,
+      "file_bytes": 16384,
+      "sha256": "3647acf934c31ec452c0eb7a789e516eaf08a9e8867e04b11e60a7826244fe42"
+    },
+    {
+      "bank": 7,
+      "file": "ken_scene_bank7.bin",
+      "used_bytes": 15616,
+      "file_bytes": 16384,
+      "sha256": "2ebb46724a43b2eccd7870c9752f830215da88c7642d46345769c3fccc0d283f"
+    },
+    {
+      "bank": 8,
+      "file": "ken_scene_bank8.bin",
+      "used_bytes": 16384,
+      "file_bytes": 16384,
+      "sha256": "ea5bea5722eb889b44314836acf38cccb2528a37fd452c7003f4cdd44fa2e32a"
+    },
+    {
+      "bank": 9,
+      "file": "ken_scene_bank9.bin",
+      "used_bytes": 14080,
+      "file_bytes": 16384,
+      "sha256": "8c44cdcb4674d0cabd2d68f1422eb6fe4ee42fea7657e475646228b47ae61448"
+    },
+    {
+      "bank": 10,
+      "file": "ken_scene_bank10.bin",
+      "used_bytes": 16384,
+      "file_bytes": 16384,
+      "sha256": "f49bacd6a7eb126b32e17368ec5ce9c2fb5fad0e3c722276350280d0427ca381"
+    },
+    {
+      "bank": 11,
+      "file": "ken_scene_bank11.bin",
+      "used_bytes": 15872,
+      "file_bytes": 16384,
+      "sha256": "b707913a7841606ed592067ba36c44e57e3ae7d889d26b44f8dd4bdd31b9e03c"
+    },
+    {
+      "bank": 12,
+      "file": "ken_scene_bank12.bin",
+      "used_bytes": 14080,
+      "file_bytes": 16384,
+      "sha256": "07df82fbb9a34a75fc527eeae8e176000f9379bfb109b6418c7f84ad4ce4c164"
+    },
+    {
+      "bank": 13,
+      "file": "ken_scene_bank13.bin",
+      "used_bytes": 14080,
+      "file_bytes": 16384,
+      "sha256": "64c1210f8f6dc27859848a8eafc5673507c6d9783a504c326b5a377353b24c18"
+    },
+    {
+      "bank": 14,
+      "file": "ken_scene_bank14.bin",
+      "used_bytes": 15872,
+      "file_bytes": 16384,
+      "sha256": "5190c206a49b725fe0976066b2809de0fb4c7d532bf3207c4c68986daa0f3349"
+    },
+    {
+      "bank": 15,
+      "file": "ken_scene_bank15.bin",
+      "used_bytes": 15104,
+      "file_bytes": 16384,
+      "sha256": "2fd49388da8bb80c23a56b264d54d2d2a3fbb7828a2ae8a32dd8325aa5dde7ca"
+    },
+    {
+      "bank": 16,
+      "file": "ken_scene_bank16.bin",
+      "used_bytes": 13312,
+      "file_bytes": 16384,
+      "sha256": "8dd299f4b50b312fbd8aeab754e0cdd9a40025682eee254c9a5fe757230164e8"
+    },
+    {
+      "bank": 17,
+      "file": "ken_scene_bank17.bin",
+      "used_bytes": 13824,
+      "file_bytes": 16384,
+      "sha256": "ad42984f8cd46f601557dc81bc78bd7c11b6982bb8f2c7e7dcee9964a47e0c88"
+    },
+    {
+      "bank": 18,
+      "file": "ken_scene_bank18.bin",
+      "used_bytes": 15872,
+      "file_bytes": 16384,
+      "sha256": "b94ea6ce6967e23f68a912a6df253e241e13cdca5500a27992b5b068e6e3c8d7"
+    },
+    {
+      "bank": 19,
+      "file": "ken_scene_bank19.bin",
+      "used_bytes": 14080,
+      "file_bytes": 16384,
+      "sha256": "30b5b05f710b66ba7a20b7dd901356748bdea76371c78f6f7426e76c920c0a4a"
+    },
+    {
+      "bank": 20,
+      "file": "ken_scene_bank20.bin",
+      "used_bytes": 14208,
+      "file_bytes": 16384,
+      "sha256": "9d5d75b3c0953183b87857d2a864d05aa38c0b0062046cca18f20bf76e348f16"
+    },
+    {
+      "bank": 21,
+      "file": "ken_scene_bank21.bin",
+      "used_bytes": 14720,
+      "file_bytes": 16384,
+      "sha256": "9d6e95794c772f99f3bb2640fb8301ffbf15746d7676f9e07702a487ae823548"
+    },
+    {
+      "bank": 22,
+      "file": "ken_scene_bank22.bin",
+      "used_bytes": 15232,
+      "file_bytes": 16384,
+      "sha256": "198218dd9a629b1e595a42c16c7527a5915f68bf11485891980975ffe5288ffe"
+    },
+    {
+      "bank": 23,
+      "file": "ken_scene_bank23.bin",
+      "used_bytes": 14976,
+      "file_bytes": 16384,
+      "sha256": "3c779e33679166982057b0d7840c39fcccbf986f1e19e138385e5d46c606f06f"
+    },
+    {
+      "bank": 24,
+      "file": "ken_scene_bank24.bin",
+      "used_bytes": 15872,
+      "file_bytes": 16384,
+      "sha256": "12fb2a4028df30a3e9ac26f9504ff2f4d3002757a7e4b5d344fae1a6be9d1f93"
+    },
+    {
+      "bank": 25,
+      "file": "ken_scene_bank25.bin",
+      "used_bytes": 12288,
+      "file_bytes": 16384,
+      "sha256": "8c39ce590951b73f9010123930ce72927a0d335d202291417312f2794e58fffd"
+    },
+    {
+      "bank": 26,
+      "file": "ken_scene_bank26.bin",
+      "used_bytes": 15616,
+      "file_bytes": 16384,
+      "sha256": "553684a762ca18bad12199e80d9aa68453deb86602e963762e6ade1945bd220f"
+    },
+    {
+      "bank": 27,
+      "file": "ken_scene_bank27.bin",
+      "used_bytes": 15744,
+      "file_bytes": 16384,
+      "sha256": "a3f785e53c78fab7bf59e8b0aaff7a40f06a852d4bdfc4c7c65e3c375aef63f4"
+    },
+    {
+      "bank": 28,
+      "file": "ken_scene_bank28.bin",
+      "used_bytes": 15104,
+      "file_bytes": 16384,
+      "sha256": "1a7d98d5adb792b7fdc71b60eb0bd68a67579ba6bdab670ca2936a5d0f9f4b70"
+    },
+    {
+      "bank": 29,
+      "file": "ken_scene_bank29.bin",
+      "used_bytes": 15616,
+      "file_bytes": 16384,
+      "sha256": "b5b479eae7641ada1d63a3b67782d284d6fbd7792796e956cce43bb6f5dea0c6"
+    },
+    {
+      "bank": 30,
+      "file": "ken_scene_bank30.bin",
+      "used_bytes": 16256,
+      "file_bytes": 16384,
+      "sha256": "309d31dbdeeffc0517ef477ecf985195295ae2ba1db832069b50adc087c5b21d"
+    },
+    {
+      "bank": 31,
+      "file": "ken_scene_bank31.bin",
+      "used_bytes": 16256,
+      "file_bytes": 16384,
+      "sha256": "b6dcb59984e0b2471f944bdfd522ad1ad177ad2da7792cacf2e08173be27c0b1"
+    },
+    {
+      "bank": 32,
+      "file": "ken_scene_bank32.bin",
+      "used_bytes": 15360,
+      "file_bytes": 16384,
+      "sha256": "72f14c69636751a5c335133f6bef6211214737bbad46b8dc39e0b43d3cdf96df"
+    },
+    {
+      "bank": 33,
+      "file": "ken_scene_bank33.bin",
+      "used_bytes": 15360,
+      "file_bytes": 16384,
+      "sha256": "4b7a845ce18e9af8850a2cb9411ef6917c68d525763bb7d233b7fe5ef4a26379"
+    },
+    {
+      "bank": 34,
+      "file": "ken_scene_bank34.bin",
+      "used_bytes": 14592,
+      "file_bytes": 16384,
+      "sha256": "2b02049d5c2ecd12cd363a6355c60345faacadd8dff3a255b7a1a15ab3945a47"
+    },
+    {
+      "bank": 35,
+      "file": "ken_scene_bank35.bin",
+      "used_bytes": 13568,
+      "file_bytes": 16384,
+      "sha256": "1f18cf552c1d06388b541fa893e46a9ed97a11b957a8c91d3e4afa44691bd66e"
+    },
+    {
+      "bank": 36,
+      "file": "ken_scene_bank36.bin",
+      "used_bytes": 14720,
+      "file_bytes": 16384,
+      "sha256": "0ec0085108963f85709ffb75e35f04c93fb05d6b6eccac5f53dbbcf5c0be2596"
+    },
+    {
+      "bank": 37,
+      "file": "ken_scene_bank37.bin",
+      "used_bytes": 14976,
+      "file_bytes": 16384,
+      "sha256": "a2e3d4bfab2bc868af559f337fd3da470fcfeb05363b8355a415ed5c61a1947e"
+    },
+    {
+      "bank": 38,
+      "file": "ken_scene_bank38.bin",
+      "used_bytes": 14336,
+      "file_bytes": 16384,
+      "sha256": "1838c22c122ed7c866222b2e1cbdc0dbce4b5fd30442e8f70afc9af8d44c0ee9"
+    },
+    {
+      "bank": 39,
+      "file": "ken_scene_bank39.bin",
+      "used_bytes": 14208,
+      "file_bytes": 16384,
+      "sha256": "f8a9df96cad7c3147443bf2c38f14522b5206e08ffb12ca318235d50e5679d18"
+    },
+    {
+      "bank": 40,
+      "file": "ken_scene_bank40.bin",
+      "used_bytes": 15232,
+      "file_bytes": 16384,
+      "sha256": "8368940d7aaa72d513dc2ba19bde1c4045a6ef8d6176132ef26cfc15bc881d03"
+    },
+    {
+      "bank": 41,
+      "file": "ken_scene_bank41.bin",
+      "used_bytes": 13568,
+      "file_bytes": 16384,
+      "sha256": "339831dcbc2df74a872beb12c3066eb38fc35d501814fbe45d43c0e6c7132bcb"
+    },
+    {
+      "bank": 42,
+      "file": "ken_scene_bank42.bin",
+      "used_bytes": 13824,
+      "file_bytes": 16384,
+      "sha256": "6904e15aeef012a5bcaa3098719fedbf9bcc5064d57d9d4aa5b17a1a141afcac"
+    }
+  ],
+  "asset_sha256": {
+    "ken_scene_runtime.h": "4765725b8e798bf0a8d4ba387b6b74b9a6aa530253a7ddf694df8e1dd7de8f97"
+  }
+}

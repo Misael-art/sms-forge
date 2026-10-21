@@ -1,0 +1,86 @@
+[
+  {
+    "case": "truncated_wave",
+    "audit": {
+      "schema": "sms_blastem_audit_v1",
+      "ok": false,
+      "errors": [
+        "unreadable/invalid bundle: invalid/truncated native WAVE container"
+      ],
+      "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+    }
+  },
+  {
+    "case": "invalid_vgm",
+    "audit": {
+      "schema": "sms_blastem_audit_v1",
+      "ok": false,
+      "errors": [
+        "unreadable/invalid bundle: invalid/truncated native VGM container"
+      ],
+      "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+    }
+  },
+  {
+    "case": "invalid_vdp_internals",
+    "audit": {
+      "schema": "sms_blastem_audit_v1",
+      "ok": false,
+      "errors": [
+        "VDP internal observation exceeds upstream field types"
+      ],
+      "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+    }
+  },
+  {
+    "case": "wrong_vdp_site_pc",
+    "audit": {
+      "schema": "sms_blastem_audit_v1",
+      "ok": true,
+      "errors": [],
+      "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+    }
+  },
+  {
+    "case": "unknown_wave_format",
+    "audit": {
+      "schema": "sms_blastem_audit_v1",
+      "ok": false,
+      "errors": [
+        "unreadable/invalid bundle: invalid native WAVE format: unknown format: 3"
+      ],
+      "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+    }
+  },
+  {
+    "case": "bankable_pc",
+    "pc": 1023,
+    "rejected": true,
+    "reason": "VDP I/O breakpoint must fit in first 1KiB; other sites need mapping qualification"
+  },
+  {
+    "case": "bankable_pc",
+    "pc": 4096,
+    "rejected": true,
+    "reason": "VDP I/O breakpoint must fit in first 1KiB; other sites need mapping qualification"
+  },
+  {
+    "case": "dynamic_out_guard_source",
+    "commands": [
+      "breakpoint 32",
+      "variable sms_hits_0 0",
+      "commands 0\nif ([32] = 237) & ([33] = 105)\nif ((bc & 255) = 190) | ((bc & 255) = 191)\nset sms_hits_0 sms_hits_0+1\nprintf \"SMSFORGE_EVENT 0 %d %d %d %d %d %d %d %d\\n\" frame pc (hl & 255) (bc & 255) vdp:vcounter vdp:hcounter vdp:address vdp:cd\nend\nelse\nprintf \"SMSFORGE_SITE_MISMATCH 0 %d\\n\" frame\nend\ncontinue\nend"
+    ]
+  },
+  {
+    "case": "site_mismatch_marker",
+    "audit": {
+      "schema": "sms_blastem_audit_v1",
+      "ok": false,
+      "errors": [
+        "VDP site opcode changed at runtime"
+      ],
+      "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+    }
+  }
+]

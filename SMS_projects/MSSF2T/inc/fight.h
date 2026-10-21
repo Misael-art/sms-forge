@@ -63,6 +63,22 @@
 #define POSE_CROUCH  6
 #define POSE_JUMP    7
 
+/* Controle é uma propriedade explicita da partida. Neutral humano nunca
+ * cai no caminho da CPU por acidente. */
+#define CONTROL_HUMAN  0
+#define CONTROL_CPU    1
+#define CONTROL_DUMMY  2
+typedef unsigned char ControlMode;
+#define CONTROL_REPLAY 3
+
+typedef struct {
+    unsigned char attacker;
+    unsigned char defender;
+    unsigned char identity;
+    unsigned char kind;
+    unsigned char damage;
+} Contact;
+
 typedef struct {
     signed int x;
     signed int y;
@@ -95,6 +111,8 @@ extern unsigned char g_attract;   /* 1 = ninguem tocou no controle ainda */
 extern unsigned char g_banner;    /* frames restantes do texto central */
 extern unsigned char g_banner_id;
 extern unsigned char g_shake;     /* deslocamento vertical do impacto */
+extern unsigned char g_round_number;
+extern ControlMode g_control_mode[2];
 
 /* IDs de banner (texto central). */
 #define BN_NONE     0
@@ -115,6 +133,8 @@ void stage_scroll_frame(void);
 void fight_init(void);
 void fight_go_live(void);
 void fight_update(unsigned int keys);
+void fight_set_control_mode(unsigned char who, unsigned char mode);
+void fight_set_replay_input(unsigned char who, unsigned int keys);
 void fight_prepare_stream(void);
 void fight_stream(void);
 void fight_draw(void);

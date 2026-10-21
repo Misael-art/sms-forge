@@ -1,0 +1,103 @@
+{
+  "schema": "sms_artifact_registry_v1",
+  "project_id": "pulso_de_cristal",
+  "locations": {
+    "source": {
+      "path": "data/source_art",
+      "purpose": "concepts, model sheets, sprite sources and proofs",
+      "mode": "managed"
+    },
+    "planning": {
+      "path": "doc/artifacts",
+      "purpose": "planning sheets, contracts and reviews",
+      "mode": "managed"
+    },
+    "production": {
+      "path": "res",
+      "purpose": "integrated resources only after production gates",
+      "mode": "managed"
+    },
+    "diagnostic": {
+      "path": "out/diagnostics",
+      "purpose": "session manifests and diagnostic derivatives; audited by their own gates",
+      "mode": "legacy"
+    }
+  },
+  "kinds": {
+    "concept": {
+      "location": "source",
+      "purpose": "identity exploration",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "original-artwork.md",
+      "required_file_roles": [
+        "image"
+      ]
+    },
+    "model_sheet": {
+      "location": "source",
+      "purpose": "character identity reference",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "original-artwork.md",
+      "required_file_roles": [
+        "image"
+      ]
+    },
+    "animation_source": {
+      "location": "source",
+      "purpose": "complete animation drawing source",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "artwork-to-rom-lifecycle.md",
+      "required_file_roles": [
+        "image"
+      ]
+    },
+    "conversion_proof": {
+      "location": "source",
+      "purpose": "two keyposes proving conversion procedure",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "new-visual-asset.md",
+      "required_file_roles": [
+        "image"
+      ]
+    },
+    "planning_sheet": {
+      "location": "planning",
+      "purpose": "spreadsheet or structured production plan",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "artifact-organization.md",
+      "required_file_roles": [
+        "document"
+      ]
+    },
+    "art_review": {
+      "location": "planning",
+      "purpose": "review tied to a particular hash",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "art-review.md",
+      "required_file_roles": [
+        "report"
+      ]
+    },
+    "diagnostic_conversion": {
+      "location": "diagnostic",
+      "purpose": "conversion report and private ROM evidence",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "artwork-to-rom-lifecycle.md",
+      "required_file_roles": [
+        "report"
+      ]
+    },
+    "runtime_resource": {
+      "location": "production",
+      "purpose": "integrated game asset",
+      "introduced_for": "canonical project bootstrap",
+      "procedure": "new-visual-asset.md",
+      "required_file_roles": [
+        "resource"
+      ]
+    }
+  },
+  "artifacts": [],
+  "heads": [],
+  "legacy_inventory": []
+}

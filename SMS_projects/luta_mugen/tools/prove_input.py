@@ -3,13 +3,13 @@
 
 Plano 2, Task 5. Precedente canonico: SMS_projects/MSSF2T/tools/
 prove_input_memory.py (L035/L038/L039/L053) — o canal real em Wayland/KWin e
-uinput (kdotool foco + ydotool tecla, via emulator_input.py); XTEST NAO
-atravessa o compositor. Aqui a ROM e mais simples que a do MSSF2T: sem
-titulo/rounds, a atracao morre na primeira tecla e P2 segue o roteiro.
+uinput. ESTA VERSAO usa SESSAO PRIVADA (§93/L057): portas P1/P2 virtuais dentro
+da JVM, duracao em FRAMES do VDP, leitura de RAM pela ponte; nenhum teclado,
+foco, janela ou porta DAP do desktop. Eixos separados no JSON: acks (ponte),
+portas (emulator_input no ACK) e RAM da ROM; o veredito de gameplay so vem da RAM.
 
-Fases (todas por leitura DAP do mapa SMRT 0xC7E0.. desta ROM):
-  1. canario do CANAL: Ctrl+BackSpace (reset do Emulicious) zera probe_frame;
-     sem canal vivo nenhuma outra leitura tem lastro (L039);
+Fases (todas por leitura da RAM SMRT 0xC7E0.. desta ROM):
+  1. canario do CANAL: probe_frame avanca exatamente o numero de frames pedido;
   2. direcao: dx >= 8 px NA DIRECAO COMANDADA nos dois sentidos
      (criterio canonico emulator_input.evaluate_direction);
   3. pulo: probe_py (ALTITUDE) > 0 durante o voo e estado JUMP;
@@ -32,18 +32,13 @@ import argparse
 import hashlib
 import json
 import os
-import subprocess
 import sys
-import time
 
 TOOLS = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                      "..", "..", "..", "tools", "sms_wrapper")
 sys.path.insert(0, os.path.abspath(TOOLS))
 
-import capture_evidence as CE                                    # noqa: E402
-import emulator_input as EI                                      # noqa: E402
-import measure_runtime_probe as MRP                              # noqa: E402
-from emulicious_dap import PORT                                  # noqa: E402
+import session_consumer as SC                                    # noqa: E402
 
 ROM_REL = "SMS_projects/luta_mugen/out/rom/luta_mugen.sms"
 EVID = "SMS_projects/luta_mugen/out/evidence"
@@ -146,483 +141,180 @@ def special_verdict(pattern_bits, event_latch):
     return True, "QCF+B1 reconhecido e FIGHT_EVENT_SPECIAL observado"
 
 
-# ------------------------------------------------------------------ injecao
-def _focus_x11():
-    """Fallback legado X11 so vale em host X11 (L039: XTEST nao atravessa
-    KWin em Wayland — o canal real e uinput, via emulator_input)."""
-    wid = CE._main_window_id()
-    iid = CE._input_window_id(wid)
-    return bool(wid) and EI.focus_x11(wid, iid)
 
-
-# -------------------------------------------------------------------- prova
-def run(rom_path, gap_min=PUNCH_GAP_MIN, gap_max=PUNCH_GAP_MAX,
-        approach_ms=50):
-    if EI.select_backend() is None:
-        print("[FAIL_AMBIENTE] sem kdotool/ydotool nem xdotool no PATH")
-        return 2, None
-    logf = open(os.path.join(EVID, "t5_input_memory_emu.log"), "w")
-    jar = CE.resolve_jar()
-    proc = subprocess.Popen(
-        ["java", "-jar", jar, "-remotedebug", str(PORT),
-         os.path.abspath(rom_path)],
-        stdout=logf, stderr=subprocess.STDOUT, start_new_session=True,
-        env=EI.ENV)
-    dap = None
-    out = {"schema": "luta_input_v1", "rom": rom_path,
-           "rom_sha256": _sha(rom_path), "backend": EI.select_backend(),
-           "punch_gap_window": [gap_min, gap_max],
-           "approach_hold_ms": approach_ms,
-           "chain_of_custody": [
-               "launch: java -jar Emulicious.jar -remotedebug " + str(PORT),
-               "attach DAP; leituras com a emulacao PAUSADA",
-               "input: uinput via emulator_input.py (L039: XTEST nao "
-               "atravessa KWin)",
-               "mapa: src/main.c probe SMRT 0xC7E0.. (px=0xC7FA, keys=0xC7F8)"]}
-    try:
-        dap = MRP._connect_live()
-        if dap is None:
-            print("[FAIL] canal DAP nao ficou vivo (porta %s)" % PORT)
-            return 1, out
-        dap.cont()
-        time.sleep(SETTLE)
-
-        # ---- 1. canario do canal (reset do proprio Emulicious zera o frame)
-        dap.pause()
-        f0 = dap.read_word(P_FRAME)
-        backend = EI.select_backend()
-        if backend == "wayland":
-            focado = EI.focus_wayland()
-        else:
-            focado = _focus_x11()
-        dap.cont()
-        EI.tap_reset()
-        time.sleep(1.2)
-        dap.pause()
-        f1 = dap.read_word(P_FRAME)
-        canal_vivo = f0 is not None and f1 is not None and f1 < f0
-        out["canario"] = {"frame_antes": f0, "frame_depois": f1,
-                          "canal_vivo": canal_vivo, "foco": focado}
-        print("canario: frame %s -> %s => canal %s (foco=%s)"
-              % (f0, f1, "VIVO" if canal_vivo else "MORTO", focado))
-        if not canal_vivo:
-            print("[FAIL] canal de teclado morto — nada a provar (L039)")
-            return 1, out
-
-        # ---- atracao completa antes de tocar em qualquer tecla
-        fim_atracao = time.time() + 40.0
-        while time.time() < fim_atracao:
-            dap.cont()
-            time.sleep(0.5)
-            dap.pause()
-            fr = dap.read_word(P_FRAME) or 0
-            if fr >= ATTRACT_END:
-                break
-        else:
-            print("[FAIL] atracao nao completou em 40 s (frame=%s)" % fr)
-            return 1, out
-        dap.cont()
-
-        # ---- 2. direcionais: dx >= 8 na direcao comandada, DOIS sentidos
-        samples = []
-        prev = _read_byte(dap, P_PX)
-        for tecla, sentido in (("Right", +1), ("Left", -1)):
-            if backend == "wayland" and not EI.focus_wayland():
-                samples.append({"tecla": tecla, "sentido_esperado": sentido,
-                                "x_antes": prev, "x_depois": None,
-                                "dx": None, "probe_keys_durante": None})
-                break
-            dap.cont()
-            def read_fn(d=dap):
-                d.pause()
-                v = (d.read_byte(P_PX), d.read_byte(P_KEYS))
-                d.cont()
-                return v
-            got = _hold_key_run(dap, tecla, HOLD_S, read_fn, backend)
-            x, k = got if got else (None, None)
-            dx = (x - prev) if (x is not None and prev is not None) else None
-            print("  %s: P1.x %s -> %s (dx=%s) keys=0x%02X"
-                  % (tecla, prev, x, dx, (k or 0)))
-            samples.append({"tecla": tecla, "sentido_esperado": sentido,
-                            "x_antes": prev, "x_depois": x, "dx": dx,
-                            "probe_keys_durante": k})
-            prev = x
-        ok_dir, motivo_dir = EI.evaluate_direction(samples, canal_vivo)
-        out["direcionais"] = {"amostras": samples, "provado": ok_dir,
-                              "motivo": motivo_dir}
-
-        # ---- 3. pulo: aguardar estado neutro para que uma borda Up enviada
-        # durante recovery/ataque nao seja diagnosticada como bug da FSM.
-        idle_before_jump, state_before_jump = _wait_for_state(
-            dap, ST_IDLE, timeout=5.0)
-        pys, states, jump_keys, landed = [], [], [], False
-        if idle_before_jump:
-            if backend == "wayland":
-                EI.focus_wayland()
-            dap.cont()
-            _hold_key_run(dap, "Up", 0.10, None, backend, release=False)
-            fim = time.time() + 2.0
-            while time.time() < fim:
-                time.sleep(0.06)
-                dap.pause()
-                pys.append(dap.read_byte(P_PY))
-                states.append(dap.read_byte(P_STATE))
-                jump_keys.append(dap.read_byte(P_KEYS))
-                dap.cont()
-            _release_key("Up", backend)
-            time.sleep(0.5)
-            dap.pause()
-            landed = (dap.read_byte(P_PY) == 0)
-        if idle_before_jump:
-            ok_jump, motivo_jump = jump_verdict(
-                pys, [s for s in states if s is not None])
-        else:
-            ok_jump, motivo_jump = False, (
-                "P1 nao voltou a IDLE antes do comando Up "
-                "(estado=%s)" % state_before_jump)
-        out["pulo"] = {"estado_antes": state_before_jump,
-                       "idle_antes": idle_before_jump,
-                       "py_amostras": pys[-12:],
-                       "state_amostras": states[-12:],
-                       "keys_amostras": jump_keys[-12:],
-                       "provado": ok_jump,
-                       "terrissou": landed, "motivo": motivo_jump}
-        print("pulo: %s (%s)" % ("PROVADO" if ok_jump else "nao", motivo_jump))
-
-        # ---- 4. aproximacao + soco com B1 observado DURANTE o hold
-        soco = _punch_phase(dap, backend, out, gap_min, gap_max,
-                            approach_ms)
-        ok_punch, motivo_punch = soco["veredito"]
-        idle_after_punch, state_after_punch = _wait_for_state(dap, ST_IDLE, 5.0)
-        out["soco"]["idle_after_release"] = idle_after_punch
-        out["soco"]["state_after_release"] = state_after_punch
-
-        # ---- 5. agachar: Down segurado, estado CROUCH na leitura
-        if backend == "wayland":
-            EI.focus_wayland()
-        dap.cont()
-
-        def crouch_read(d=dap):
-            d.pause()
-            v = d.read_byte(P_STATE)
-            d.cont()
-            return v
-        st_c = _hold_key_run(dap, "Down", 0.5, crouch_read, backend)
-        idle_after_crouch, state_after_crouch = _wait_for_state(dap, ST_IDLE, 5.0)
-        ok_crouch = st_c == ST_CROUCH and idle_after_punch
-        out["agachar"] = {"estado_lido": st_c, "idle_depois": idle_after_crouch,
-                          "estado_depois": state_after_crouch,
-                          "provado": ok_crouch}
-        print("agachar: estado=%s => %s" % (st_c,
-                                            "CROUCH" if ok_crouch else "nao"))
-
-        # Recuar + Down precisa escolher GUARD, nao CROUCH. Back e calculado
-        # em relacao ao oponente observado na RAM; o par vai junto por uinput.
-        px_guard, p2x_guard = dap.read_byte(P_PX), dap.read_byte(P_P2X)
-        back_key = "Left" if (px_guard or 0) < (p2x_guard or 0) else "Right"
-        win = CE._main_window_id() if backend == "x11" else None
-        iid = CE._input_window_id(win) if win else None
-        chord, chord_backend, focused, st_g, keys_g = _sample_chord_run(
-            dap, ["Down", back_key], 0.5, backend, win, iid)
-        expected_back = 0x04 if back_key == "Left" else 0x08
-        ok_guard = (bool(chord) and focused and st_g == ST_GUARD and
-                    keys_g is not None and (keys_g & 0x02) and
-                    (keys_g & expected_back) and idle_after_crouch)
-        idle_after_guard, state_after_guard = _wait_for_state(dap, ST_IDLE, 5.0)
-        out["guard"] = {"teclas": ["Down", back_key],
-                        "backend": chord_backend, "foco": focused,
-                        "keys_durante": keys_g, "estado_lido": st_g,
-                        "idle_depois": idle_after_guard,
-                        "estado_depois": state_after_guard,
-                        "provado": bool(ok_guard)}
-        print("guard: Down+%s estado=%s keys=%s => %s"
-              % (back_key, st_g, keys_g,
-                 "GUARD" if ok_guard else "nao"))
-
-        # ---- 6. QCF+B1. Cada token passa pelo canal fisico e a ROM deixa
-        # um latch no evento de estado, independente do tempo de pausa DAP.
-        p1x, p2x = dap.read_byte(P_PX), dap.read_byte(P_P2X)
-        forward_key = "Right" if (p1x or 0) < (p2x or 0) else "Left"
-        if backend == "wayland":
-            focused = EI.focus_wayland()
-        else:
-            focused = _focus_x11()
-        sequence = [("Down", EI.EVDEV["Down"]),
-                    (forward_key, EI.EVDEV[forward_key]),
-                    ("a", EI.EVDEV["a"])]
-        dap.cont()
-        for name, code in sequence:
-            if backend == "wayland":
-                EI.ydotool_key(code, True)
-            else:
-                CE._run(["xdotool", "keydown", name])
-            time.sleep(0.055)
-            if backend == "wayland":
-                EI.ydotool_key(code, False)
-            else:
-                CE._run(["xdotool", "keyup", name])
-        time.sleep(0.15)
-        dap.pause()
-        pat_special = dap.read_byte(P_PATTERN) or 0
-        special_event = dap.read_byte(P_SPECIAL) or 0
-        special_state = dap.read_byte(P_STATE)
-        ok_special, special_reason = special_verdict(pat_special, special_event)
-        if not idle_after_guard:
-            ok_special = False
-            special_reason = "P1 nao voltou a IDLE antes do comando QCF+B1"
-        out["especial"] = {"sequencia": ["Down", forward_key, "B1"],
-                           "foco": focused, "latch_pattern": pat_special,
-                           "event_latch": special_event,
-                           "estado_apos_comando": special_state,
-                           "motivo": special_reason,
-                           "provado": ok_special}
-        print("especial: QCF+B1 frente=%s pattern=0x%02X evento=%s estado=%s => %s"
-              % (forward_key, pat_special, special_event, special_state,
-                 "PROVADO" if ok_special else "nao"))
-
-        # ---- 7. os latches de A e FF vieram das fases anteriores.
-        dap.pause()
-        pat = dap.read_byte(P_PATTERN)
-        bits = pat or 0
-        out["padroes"] = {"latch": bits,
-                          "punch_bit0": bool(bits & 1),
-                          "double_forward_bit1": bool(bits & 2),
-                          "qcf_b1_bit2": bool(bits & 4)}
-        ok_pattern = bool(bits & 0x03) and ok_special
-        print("padroes: latch=0x%02X (cmd_a=%s cmd_ff=%s qcf_b1=%s)"
-              % (bits, bool(bits & 1), bool(bits & 2), bool(bits & 4)))
-
-        tudo = dict(ok_dir=ok_dir, ok_jump=ok_jump, ok_punch=ok_punch,
-                    ok_crouch=ok_crouch, ok_guard=ok_guard,
-                    ok_special=ok_special, ok_pattern=ok_pattern)
-        out["eixos"] = tudo
-        out["aprovado"] = all(tudo.values())
-        return (0 if out["aprovado"] else 1), out
-    finally:
-        try:
-            if dap:
-                dap.close()
-        finally:
-            if proc.poll() is None:
-                proc.terminate()
-                try:
-                    proc.wait(timeout=10)
-                except subprocess.TimeoutExpired:
-                    proc.kill()
-            logf.close()
-
-
-def _hold_key_run(dap, tecla, seconds, read_fn, backend, release=True):
-    """Hold com o JOGO RODANDO; leitura (se houver) no meio do hold."""
-    code = EI.EVDEV[tecla]
-    if backend == "wayland":
-        EI.ydotool_key(code, True)
-    else:
-        CE._run(["xdotool", "keydown", tecla])
-    time.sleep(seconds)
-    v = read_fn() if read_fn else None
-    if release:
-        _release_key(tecla, backend)
-    return v
-
-
-def _release_key(tecla, backend):
-    if backend == "wayland":
-        EI.ydotool_key(EI.EVDEV[tecla], False)
-    else:
-        CE._run(["xdotool", "keyup", tecla])
-
-
-def _sample_chord_run(dap, teclas, seconds, backend, x11_window=None,
-                      x11_input=None):
-    """Amostra estado e joypad enquanto o chord fisico segue pressionado."""
-    if backend == "wayland":
-        focused = EI.focus_wayland()
-    else:
-        focused = EI.focus_x11(x11_window, x11_input or x11_window)
-    if not focused:
-        return [], backend, False, None, None
-
-    for key in teclas:
-        if backend == "wayland":
-            EI.ydotool_key(EI.EVDEV[key], True)
-        else:
-            CE._run(["xdotool", "keydown", "--window", str(x11_input), key])
-    try:
-        dap.cont()
-        time.sleep(min(0.10, seconds / 3.0))
-        dap.pause()
-        state = dap.read_byte(P_STATE)
-        keys = dap.read_byte(P_KEYS)
-        dap.cont()
-        time.sleep(max(0.0, seconds - min(0.10, seconds / 3.0)))
-        return list(teclas), backend, focused, state, keys
-    finally:
-        for key in reversed(teclas):
-            if backend == "wayland":
-                EI.ydotool_key(EI.EVDEV[key], False)
-            else:
-                CE._run(["xdotool", "keyup", "--window", str(x11_input), key])
-
-
-def _read_byte(dap, addr):
-    try:
-        return dap.read_byte(addr)
-    except Exception:
-        return None
-
-
-def _punch_phase(dap, backend, out, gap_min, gap_max, approach_ms):
-    """Aproxima ate alcance, B1 com probe_keys amostrado COM o jogo rodando
-    (o ciclo antigo do MSSF2T lia pausado demais e culpava o jogo por falha
-    do canal — aqui o ciclo roda ~3 frames entre pausas curtas)."""
-    def rd(*addrs):
-        dap.pause()
-        vals = tuple(dap.read_byte(a) for a in addrs)
-        if any(v is None for v in vals):
-            dap.cont()
-            return None
-        dap.cont()
-        return vals
-
-    # Foque uma vez antes das rajadas. Reativar KWin a cada passo acrescenta
-    # ~300 ms e deixa o dummy avançar enquanto P1 ainda está se posicionando.
-    focused = EI.focus_wayland() if backend == "wayland" else _focus_x11()
-    if not focused:
-        res = {"provado": False, "motivo": "janela não focada antes da aproximação",
-               "foco": False}
-        out["soco"] = res
-        return res
-
-    # aproxima
-    fim = time.time() + 12.0
-    gap = None
-    approach_trace = []
-    while time.time() < fim:
-        vals = rd(P_PX, P_P2X)
-        if vals is None:
-            break
-        px, p2x = vals
-        gap = p2x - px
-        tecla = choose_approach_key(px, p2x, gap_min, gap_max)
-        if tecla is None:
-            break
-        approach_trace.append({"px": px, "p2x": p2x, "gap": gap,
-                               "key": tecla})
-        _hold_key_run(dap, tecla, approach_ms / 1000.0, None, backend)
-
-    # O roteiro anterior pode deixar P1 no fim de um ataque. Espere o estado
-    # neutro para que este B1 produza uma transicao nova, com baseline limpo.
-    state_before = rd(P_STATE)
-    idle_deadline = time.time() + 3.0
-    while state_before and state_before[0] != ST_IDLE and time.time() < idle_deadline:
-        time.sleep(0.05)
-        state_before = rd(P_STATE)
-
-    # O dummy pode mudar de posição enquanto o golpe anterior recupera. Releia
-    # P1/P2 depois do IDLE e corrija a distância antes de chamar qualquer
-    # ausência de dano de whiff.
-    range_trace = []
-    for _ in range(8):
-        positions = rd(P_PX, P_P2X)
-        if positions is None:
-            break
-        px, p2x = positions
-        gap = p2x - px
-        if punch_range_valid(px, p2x, gap_min, gap_max):
-            break
-        tecla = choose_approach_key(px, p2x, gap_min, gap_max)
-        if tecla is None:
-            break
-        range_trace.append({"px": px, "p2x": p2x, "gap": gap,
-                            "key": tecla})
-        _hold_key_run(dap, tecla, approach_ms / 1000.0, None, backend)
-        state_before = rd(P_STATE)
-        idle_deadline = time.time() + 1.0
-        while (state_before and state_before[0] != ST_IDLE and
-               time.time() < idle_deadline):
-            time.sleep(0.05)
-            state_before = rd(P_STATE)
-
-    # Baseline e posição são amostrados com a emulação pausada. B1 vai para
-    # uinput antes do continue, removendo a lacuna entre medir alcance e atacar.
-    dap.pause()
-    vals = tuple(dap.read_byte(a) for a in
-                 (P_BOSS, P_SCORE, P_PATTERN, P_STATE, P_POSE, P_PX, P_P2X))
-    boss0, score0, _, state0, pose0, px0, p2x0 = vals
-    gap = (p2x0 - px0) if px0 is not None and p2x0 is not None else None
-    range_valid = punch_range_valid(px0, p2x0, gap_min, gap_max)
-    keys_seen = 0
-    fim_b1 = time.time() + 1.0
-    code = EI.EVDEV["a"] if backend == "wayland" else None
-    if backend == "wayland":
-        EI.ydotool_key(code, True)
-    else:
-        CE._run(["xdotool", "keydown", "a"])
-    dap.cont()
-    while time.time() < fim_b1:
-        time.sleep(0.05)                       # ~3 frames rodando por ciclo
-        v = rd(P_KEYS)
-        if v:
-            keys_seen |= v[0]
-    if backend == "wayland":
-        EI.ydotool_key(code, False)
-    else:
-        CE._run(["xdotool", "keyup", "a"])
-    # A pose MUGEN chega por chunks medidos; observar o hit até a animação
-    # completa a carga, em vez de chamar latência de streaming de whiff.
-    after_deadline = time.time() + 5.0
-    vals = None
-    while time.time() < after_deadline:
-        vals = rd(P_BOSS, P_SCORE, P_PATTERN, P_STATE, P_POSE)
-        if vals and ((vals[0] < boss0) or (vals[1] > score0) or
-                     vals[3] == ST_IDLE):
-            break
-        time.sleep(0.05)
-    if vals is None:
-        vals = rd(P_BOSS, P_SCORE, P_PATTERN, P_STATE, P_POSE)
-    boss1, score1, pat1 = vals[:3] if vals else (None, None, None)
-    state1, pose1 = vals[3:] if vals else (None, None)
-    ok, motivo = punch_verdict(boss0, boss1, keys_seen, pat1,
-                               score0, score1)
-    if not ok and not range_valid and (keys_seen & 0x10):
-        motivo = ("B1 chegou, mas a posição final P1=%s P2=%s (gap=%s) estava "
-                  "fora da janela; tentativa inconclusiva, não classificada como whiff"
-                  % (px0, p2x0, gap))
-    print("soco: gap=%s state=%s pose=%s B1=0x%02X boss %s->%s score=%s->%s pattern=0x%02X => %s"
-          % (gap, state0, pose0, keys_seen, boss0, boss1, score0, score1, pat1,
-             "CONECTOU POR INPUT" if ok else motivo))
-    res = {"gap": gap, "range_valid_at_input": range_valid,
-           "position_p1_at_input": px0, "position_p2_at_input": p2x0,
-           "range_refresh_trace": range_trace,
-           "boss_antes": boss0, "boss_depois": boss1,
-           "approach_trace": approach_trace,
-           "state_antes": state0, "state_depois": state1,
-           "pose_antes": pose0, "pose_depois": pose1,
-           "keys_durante_b1": keys_seen, "score_antes": score0,
-           "score": score1, "pattern": pat1,
-           "veredito": (ok, motivo), "provado": ok, "motivo": motivo}
-    out["soco"] = res
-    return res
-
-
-def _wait_for_state(dap, target, timeout=5.0):
-    """Espera uma transicao real da FSM antes do proximo comando de input."""
-    deadline = time.time() + timeout
-    last = None
-    while time.time() < deadline:
-        dap.pause()
-        last = dap.read_byte(P_STATE)
-        dap.cont()
-        if last == target:
-            return True, last
-        time.sleep(0.05)
-    return False, last
+# ------------------------------------------------------------ sessao privada
+HOLD_FRAMES = 48           # direcional segurado (equivale a ~0.8 s a 60 Hz, agora medido em frames)
+SMRT_MAGIC = [83, 77, 82, 84]
 
 
 def _sha(path):
     with open(path, "rb") as f:
         return hashlib.sha256(f.read()).hexdigest()
+
+
+def _wait_state(s, target, max_frames=300, chunk=5):
+    """Avanca em frames (sem botoes) ate o estado de P1 ser `target`; devolve (ok, estado)."""
+    st = s.byte(P_STATE)
+    done = 0
+    while st != target and done < max_frames:
+        s.hold(0, 0, chunk)
+        done += chunk
+        st = s.byte(P_STATE)
+    return st == target, st
+
+
+def run(rom_path, gap_min=PUNCH_GAP_MIN, gap_max=PUNCH_GAP_MAX, approach_ms=50):
+    out = {"schema": "luta_input_v2_session", "rom": rom_path, "rom_sha256": _sha(rom_path),
+           "punch_gap_window": [gap_min, gap_max], "approach_hold_frames": max(1, round(approach_ms / 16.7)),
+           "chain_of_custody": [
+               "sessao privada Emulicious (Xvfb+bwrap, SMSJoypad P1/P2 dentro da JVM); sem teclado/foco/DAP do desktop",
+               "duracao de comando = frames do VDP (input + step), leitura de RAM pela ponte com a emulacao pausada",
+               "mapa: src/main.c probe SMRT 0xC7E0.. (px=0xC7FA, keys=0xC7F8)"]}
+    try:
+        ctx = SC.private_session(rom_path)
+        s = ctx.__enter__()
+    except SC.SessionUnavailable as e:
+        print("[FAIL_AMBIENTE] %s" % e)
+        return 2, out
+    exc = (None, None, None)
+    try:
+        out["session_id"], out["session_rom_sha256"] = s.id, s.rom_sha256
+        if s.rom_sha256 != out["rom_sha256"]:
+            print("[FAIL] SHA da ROM da sessao difere da ROM pedida")
+            return 1, out
+        # ---- 1. canario do canal: magic SMRT e frame avancando por frames exatos
+        magic = s.read(0xC7E0, 4)
+        f0 = s.word(P_FRAME)
+        s.hold(0, 0, 30)
+        f1 = s.word(P_FRAME)
+        ok_canal = magic == SMRT_MAGIC and (f1 - f0) == 30
+        out["canal"] = {"magic": magic, "frame_antes": f0, "frame_depois": f1, "delta": f1 - f0,
+                        "provado": ok_canal}
+        print("canal: magic=%s frame %s->%s (delta %s) => %s"
+              % (magic, f0, f1, f1 - f0, "PROVADO" if ok_canal else "nao"))
+        if not ok_canal:
+            return 1, out
+
+        # ---- 2. direcao (a atracao morre na primeira tecla; Right e Left com dx >= 8 px)
+        s.hold(0, 0, 60)
+        dirs = {}
+        for nome, mask, sinal in (("Right", SC.R, 1), ("Left", SC.L, -1)):
+            x0 = s.byte(P_PX)
+            r = s.hold(mask, 0, HOLD_FRAMES)
+            x1 = s.byte(P_PX)
+            dx = (x1 - x0) * sinal
+            dirs[nome] = {"x0": x0, "x1": x1, "dx_na_direcao": dx, "ack_porta": r.get("emulator_input"),
+                          "estado": s.byte(P_STATE), "provado": dx >= 8}
+            s.hold(0, 0, 0)
+            _wait_state(s, ST_IDLE)
+        ok_dir = all(v["provado"] for v in dirs.values())
+        out["direcao"] = dirs
+        print("direcao: %s => %s" % ({k: v["dx_na_direcao"] for k, v in dirs.items()},
+                                     "PROVADO" if ok_dir else "nao"))
+
+        # ---- 3. pulo (borda de Up em IDLE; altitude e estado amostrados a cada 4 frames)
+        _wait_state(s, ST_IDLE)
+        pys, states = [], []
+        s.hold(SC.U, 0, 3)
+        for _ in range(20):
+            s.hold(0, 0, 4)
+            pys.append(s.byte(P_PY))
+            states.append(s.byte(P_STATE))
+        s.hold(0, 0, 60)
+        landed = s.byte(P_PY) == 0
+        ok_jump, why = jump_verdict(pys, set(states))
+        ok_jump = ok_jump and landed
+        out["pulo"] = {"alt": pys, "estados": sorted(set(states)), "pousou": landed, "motivo": why,
+                       "provado": ok_jump}
+        print("pulo: %s pousou=%s => %s" % (why, landed, "PROVADO" if ok_jump else "nao"))
+
+        # ---- 4. soco: aproximar P1 de P2 pela janela, B1 visto em keys COM a mascara ativa
+        _wait_state(s, ST_IDLE)
+        for _ in range(40):
+            # alvo = centro da janela medida (a borda de 16 px falhou em medicao real: whiff)
+            k = choose_approach_key(s.byte(P_PX), s.byte(P_P2X), gap_min, gap_min + (gap_max - gap_min) // 2)
+            if k is None:
+                break
+            s.hold(SC.R if k == "Right" else SC.L, 0, out["approach_hold_frames"])
+            s.hold(0, 0, 6)
+        _wait_state(s, ST_IDLE)
+        px, p2x = s.byte(P_PX), s.byte(P_P2X)
+        in_range = punch_range_valid(px, p2x, gap_min, gap_max)
+        boss0, score0 = s.byte(P_BOSS), s.byte(P_SCORE)
+        r = s.hold(SC.B1, 0, 4)
+        keys_durante = s.byte(P_KEYS)
+        # o dano chega no fim da animacao do golpe (medido: >60 frames em PUNCH1): esperar o retorno a IDLE
+        recuperou, _st = _wait_state(s, ST_IDLE, 400)
+        pat = s.byte(P_PATTERN)
+        boss1, score1 = s.byte(P_BOSS), s.byte(P_SCORE)
+        ok_punch, why = punch_verdict(boss0, boss1, keys_durante, pat, score0, score1)
+        ok_punch = ok_punch and in_range
+        out["soco"] = {"px": px, "p2x": p2x, "gap_valido": in_range, "boss": [boss0, boss1],
+                       "score": [score0, score1], "keys_durante": keys_durante, "recuperou_idle": recuperou,
+                       "ack_porta": r.get("emulator_input"), "padrao": pat, "motivo": why,
+                       "provado": ok_punch}
+        print("soco: %s => %s" % (why, "PROVADO" if ok_punch else "nao"))
+        _wait_state(s, ST_IDLE)
+
+        # ---- 5. agachar
+        s.hold(SC.D, 0, 20)
+        st_c = s.byte(P_STATE)
+        ok_crouch = st_c == ST_CROUCH
+        out["agachar"] = {"estado": st_c, "provado": ok_crouch}
+        print("agachar: estado=%s => %s" % (st_c, "PROVADO" if ok_crouch else "nao"))
+        s.hold(0, 0, 0)
+        _wait_state(s, ST_IDLE)
+
+        # ---- 6. guarda: baixo + costas (P1 a esquerda de P2 => costas = Left)
+        px_g, p2x_g = s.byte(P_PX), s.byte(P_P2X)
+        back = SC.L if px_g < p2x_g else SC.R
+        s.hold(SC.D | back, 0, 20)
+        st_g, keys_g = s.byte(P_STATE), s.byte(P_KEYS)
+        ok_guard = st_g == ST_GUARD
+        out["guarda"] = {"px": px_g, "p2x": p2x_g, "estado": st_g, "keys": keys_g, "provado": ok_guard}
+        print("guarda: estado=%s keys=0x%02X => %s" % (st_g, keys_g, "PROVADO" if ok_guard else "nao"))
+        s.hold(0, 0, 0)
+        _wait_state(s, ST_IDLE)
+
+        # ---- 6b. duplo frente (bit1) e 7. especial QCF+B1: sequencia atomica em frames (frente relativa a P2)
+        px, p2x = s.byte(P_PX), s.byte(P_P2X)
+        fwd = SC.R if px < p2x else SC.L
+        s.sequence([{"p1": fwd, "frames": 3}, {"p1": 0, "frames": 3}, {"p1": fwd, "frames": 3}])
+        s.hold(0, 0, 2)
+        ff_bits = s.byte(P_PATTERN)
+        _wait_state(s, ST_IDLE)
+        antes = {"px": px, "p2x": p2x, "estado": s.byte(P_STATE), "pattern": s.byte(P_PATTERN), "evento": s.byte(P_SPECIAL)}
+        # tokens contiguos D, frente, B1 (como o roteiro fisico original: ~3 frames cada) + 12 frames para o latch do evento
+        s.sequence([{"p1": SC.D, "frames": 3}, {"p1": fwd, "frames": 3}, {"p1": SC.B1, "frames": 3}])
+        s.hold(0, 0, 12)
+        pat_special = s.byte(P_PATTERN) or 0
+        special_event = s.byte(P_SPECIAL)
+        special_state = s.byte(P_STATE)
+        ok_special, why_s = special_verdict(pat_special, special_event)
+        if antes["evento"] == 1:     # latch ja armado antes do comando: nao prova este comando
+            ok_special, why_s = False, "evento ja estava latchado antes do QCF+B1 (sem transicao observavel)"
+        out["especial"] = {"antes": antes, "frente": "Right" if fwd == SC.R else "Left", "latch_pattern": pat_special,
+                           "evento": special_event, "estado_apos_comando": special_state,
+                           "motivo": why_s, "provado": ok_special}
+        print("especial: pattern=0x%02X evento=%s estado=%s => %s"
+              % (pat_special, special_event, special_state, "PROVADO" if ok_special else "nao"))
+
+        bits = (s.byte(P_PATTERN) or 0) | (ff_bits or 0)
+        out["padroes"] = {"latch": bits, "punch_bit0": bool(bits & 1), "double_forward_bit1": bool(bits & 2),
+                          "qcf_b1_bit2": bool(bits & 4)}
+        ok_pattern = bool(bits & 0x03) and ok_special
+        print("padroes: latch=0x%02X" % bits)
+        out["acks"] = s.acks[-12:]
+        tudo = dict(ok_dir=ok_dir, ok_jump=ok_jump, ok_punch=ok_punch, ok_crouch=ok_crouch,
+                    ok_guard=ok_guard, ok_special=ok_special, ok_pattern=ok_pattern)
+        out["eixos"] = tudo
+        out["aprovado"] = all(tudo.values())
+        return (0 if out["aprovado"] else 1), out
+    except BaseException:
+        exc = sys.exc_info()
+        raise
+    finally:
+        ctx.__exit__(*exc)
 
 
 # ---------------------------------------------------------------- self-check
@@ -731,6 +423,9 @@ def main():
     if metrics:
         with open(os.path.join(EVID, "t5_input_memory.json"), "w") as f:
             json.dump(metrics, f, indent=1)
+        if metrics.get("session_id"):    # copia exclusiva da sessao: nunca depender do "ultimo escrito"
+            with open(os.path.join(EVID, "t5_input_memory_%s.json" % metrics["session_id"]), "w") as f:
+                json.dump(metrics, f, indent=1)
     print("[%s] input vivo: %s" % ("PASS" if rc == 0 else "FAIL",
                                    ROM_REL))
     return rc

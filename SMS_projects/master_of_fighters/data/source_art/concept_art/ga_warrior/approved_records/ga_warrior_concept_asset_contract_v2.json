@@ -1,0 +1,49 @@
+{
+  "schema": "asset_contract_v1",
+  "asset_id": "ga_warrior_concept_sheet_v2",
+  "project": "master_of_fighters",
+  "asset_role": "concept_art",
+  "status": "owner_approved_visual_reference",
+  "parent_asset": "ga_warrior_concept_sheet_v1",
+  "image": {
+    "dimensions_px": [1536, 1024],
+    "format": "8-bit indexed PNG",
+    "background": "transparent index 0",
+    "layout": "two side-by-side full-body poses; same character, composition and illustration style"
+  },
+  "character_contract": {
+    "identity": "young Golden Axe Warrior hero",
+    "age_read": "late teen to early twenties",
+    "morphology": "lean, agile, narrow waist, modest athletic definition; not brute/tank",
+    "required_design": [
+      "bare chest and shoulders",
+      "blue animal-fur mantle/cape with a few clear, clean tufts",
+      "blue trousers and brown leather boots with amber/gold details",
+      "blue horned helmet with gold details",
+      "steel sword",
+      "round shield"
+    ],
+    "preserved_from_v1": [
+      "two full-body pose compositions",
+      "youthful face and hair",
+      "horned helmet and gold ornaments",
+      "sword, shield, belt and arm bracers",
+      "bold dark contours and hard cel shading"
+    ],
+    "poses": [
+      "three-quarter ready stance with sword relaxed and shield readable",
+      "dynamic forward step, sword attack and shield guard"
+    ]
+  },
+  "palette_contract": {
+    "manifest_path": "doc/palettes_manifest.json",
+    "character": "ga_warrior",
+    "transparent_index": 0,
+    "useful_colors_max": 15,
+    "dither": "none",
+    "outline": "opaque dark burgundy role; pure black reserved for transparent index 0",
+    "material_palette": "reuse existing blue/cyan roles for pelt and trousers, brown/amber roles for boots, and existing skin, gold and steel roles",
+    "grain_or_background_glow": "not allowed"
+  },
+  "approval_scope": "owner-approved concept art wardrobe variant; this approval does not cover animation, sprite geometry, ROM integration, scanline budget or emulator validation"
+}

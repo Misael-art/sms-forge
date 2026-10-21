@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "project": "MSSF2T",
+  "updated": "2026-09-15",
+  "milestone": "M01",
+  "item": "input_modes_and_symmetric_contacts",
+  "hypothesis": "Normalizar máscaras de 16 bits e resolver contatos em snapshot elimina a perda de P2 e o viés de ordem sem alterar dano autorado.",
+  "last_result": "M01 código passa regressão, strict build e boot/probe/fps no Emulicious; input P2 e trade ainda aguardam prova específica no alvo.",
+  "rom_sha256": "5ac2dcc8576a5dcb17fe419c1d5a754fb15a419d4841a181947ab8f9b5747362",
+  "evidence": [
+    "out/evidence/evidence.png (captura 256x192 observada no Emulicious)",
+    "out/evidence/runtime_probe.json (boot + frame advance + 57.35 fps NTSC)",
+    "out/evidence/fps.json (5 amostras do título, 59–60 fps, média 59.6)",
+    "tools/sms_wrapper/mssf2t_regression.py (fixtures M01; self-check verde)"
+  ],
+  "consecutive_failures_by_cause": {},
+  "blockers": [
+    "banking ainda não foi pago no toolchain real",
+    "worst-frame atual não mede fases nem missed VBlank",
+    "arte final e audição crítica continuam pendentes"
+  ],
+  "next_command": "python3 SMS_projects/MSSF2T/tools/prove_input_memory.py --rom SMS_projects/MSSF2T/out/rom/MSSF2T.sms; depois medir worst-frame por fase"
+}

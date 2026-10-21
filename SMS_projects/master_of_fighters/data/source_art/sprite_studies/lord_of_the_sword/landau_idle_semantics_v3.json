@@ -1,0 +1,36 @@
+{
+  "schema": "animation_semantics_manifest_v1",
+  "character": "landau",
+  "asset_id": "landau_idle_sms_96px_12f_v3",
+  "required_states": [
+    "idle"
+  ],
+  "actions": [
+    {
+      "name": "idle",
+      "unique_frames_required": true,
+      "geometry_contract": {
+        "canvas_px": [96, 96],
+        "visible_width_px": [63, 70],
+        "visible_height_px": [83, 87],
+        "baseline_y_px": 95,
+        "baseline_tolerance_px": 0
+      },
+      "frames": [
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_00.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_01.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_02.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_03.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_04.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_05.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_06.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_07.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_08.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_09.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_10.png", "pivot": [48, 95]},
+        {"png": "data/source_art/sprite_studies/lord_of_the_sword/frames_sms_v3/idle_11.png", "pivot": [48, 95]}
+      ]
+    }
+  ],
+  "notes": "Owner-approved rejuvenated concept used as the design reference. Twelve normalized guard-idle poses, all indexed to the Lord of the Sword SMS palette; source-art study only, not approved for runtime."
+}

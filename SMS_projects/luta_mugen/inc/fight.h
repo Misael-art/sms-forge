@@ -9,16 +9,22 @@
 
 #include "luta.h"
 
-/* Bits de input ja na convencao do motor (Task 5 liga SMS_getKeysHeld a
- * estes bits via padroes do CMD; aqui vem de roteiro deterministico). */
+/* Bits de direcao/guarda. Botoes fisicos sao classificados pelo anel CMD e
+ * chegam ao nucleo como FightCommand, nunca como golpe por tecla crua. */
 #define K_UP     0x01
 #define K_DOWN   0x02
 #define K_LEFT   0x04
 #define K_RIGHT  0x08
-#define K_LP     0x10            /* botão 1 -> ação de soco selecionada */
-#define K_HP     0x20            /* botão 2 -> ação de chute selecionada */
+#define K_LP     0x10            /* nivel fisico KEY_1 no adaptador */
+#define K_HP     0x20            /* nivel fisico KEY_2 no adaptador */
 #define K_GUARD  0x40            /* guarda      -> state 120 */
-#define K_SPECIAL 0x80           /* comando de movimento remapeado pelo buffer */
+
+#define FIGHT_CMD_NONE                 0u
+#define FIGHT_CMD_LP                   1u
+#define FIGHT_CMD_HP                   2u
+#define FIGHT_CMD_LK                   3u
+#define FIGHT_CMD_HK                   4u
+#define FIGHT_CMD_SPECIAL_UNSUPPORTED  5u
 
 #define FIGHT_EVENT_NONE  0u
 #define FIGHT_EVENT_PUNCH 1u
@@ -36,10 +42,15 @@ void fight_init(void);                     /* inicializa o stream de poses (T6) 
 void fight_reset(Fighter *p, unsigned char slot);
 void fight_set_ko(Fighter *p);
 unsigned char fight_step(Fighter *p, unsigned int keys,
-                         unsigned int opp_keys);
+                         unsigned int opp_keys, unsigned char command);
+unsigned char fight_decode_command(unsigned char slot);
 void fight_draw(void);
 void fight_upload_palette(void);            /* chamada no VBlank */
+unsigned char fight_sat_needs_copy(void);
 void fight_sat_copied(void);                /* após copiar meta para SAT */
 unsigned short fight_max_life(unsigned char slot);
+/* Leituras estreitas para o probe privado de avanço AIR/stream. */
+unsigned char fight_visible_pose(unsigned char slot);
+unsigned char fight_target_pose(unsigned char slot);
 
 #endif /* FIGHT_H */

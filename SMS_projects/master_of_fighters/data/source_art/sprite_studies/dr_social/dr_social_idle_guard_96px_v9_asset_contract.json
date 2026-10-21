@@ -1,0 +1,68 @@
+{
+  "schema": "sms_sprite_study_contract_v1",
+  "asset_id": "dr_social_idle_guard_96px_12f_v9",
+  "project": "master_of_fighters",
+  "asset_role": "source_art_sprite_study",
+  "character": "dr_ferdinand_social",
+  "visual_references": [
+    "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+    "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_v3.png",
+    "https://www.smspower.org/uploads/Sprites/MasterOfDarkness-SMS-Dr.FerdinandSocial-StandingRight.png"
+  ],
+  "approval_scope": "palette-corrected and measured revision candidate; owner visual review pending",
+  "sheet": {
+    "columns": 4,
+    "rows": 3,
+    "frame_count": 12,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_px": [96, 96],
+    "sheet_px": [384, 288],
+    "ground_pivot_px": [48, 86],
+    "target_visible_height_px": 80,
+    "height_tolerance_px": [72, 88],
+    "max_visible_width_px": 88,
+    "minimum_horizontal_margin_px": 4,
+    "normalization": "uniform nearest-neighbor source-cell normalization to 96x85/86 pixels, top-padded 5 pixels and bottom-aligned in each 96x96 cell"
+  },
+  "action": {
+    "state": "idle",
+    "facing": "right, three-quarter side view",
+    "motion": "twelve distinct cane-ready guard-flourish keys with readable changes in stance, torso, arms, and cane angle; non-attacking study",
+    "continuity": "same identity, lean proportions, 96x96 canvas, ground pivot, and continuous held cane in all frames"
+  },
+  "design_lock": [
+    "slender medium-build human man in his early thirties; no broad or tank-like anatomy",
+    "blue/cyan Victorian tailcoat and trousers with deep teal shading, based on the original Master System sprite",
+    "gray hair, white shirt, burgundy cravat, round brass-rimmed spectacles, brown boots, and cane",
+    "fully human: no fangs, wings, claws, cape, or transformation",
+    "use opaque navy #000055 for contour; pure black belongs only to transparent index 0",
+    "no grain, dithering, gradients, detached weapon fragments, or background effects"
+  ],
+  "palette": {
+    "manifest_character": "dr_ferdinand_social",
+    "source": "doc/palettes_manifest.json",
+    "transparent_index": 0,
+    "maximum_useful_colors": 15,
+    "useful_colors_in_sheet": 12,
+    "dither": "none",
+    "grain_or_texture": false,
+    "original_sprite_reference": "SMS Power, Master of Darkness SMS, Dr. Ferdinand Social - Standing Right"
+  },
+  "pixel_cleanup_profile": {
+    "mode": "components_only",
+    "minimum_opaque_component_px": 2,
+    "connectivity": 8,
+    "material_regions_status": "pending",
+    "regions": [],
+    "reason": "Detecta ilhas opacas de 1 px sem declarar uma auditoria de cor por material; regiões de material exigem contrato visual próprio e permanecem pendentes."
+  },
+  "gates": [
+    "audit_validate_resources.py --kind sheet --character dr_ferdinand_social",
+    "audit_animation_semantics.py"
+  ],
+  "not_claimed": [
+    "runtime metasprite or scanline validity",
+    "moveset approval or in-game animation feel",
+    "ROM integration, FPS, emulator validation, or delivery status"
+  ]
+}

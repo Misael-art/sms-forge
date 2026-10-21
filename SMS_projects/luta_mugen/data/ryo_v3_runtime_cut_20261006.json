@@ -1,0 +1,306 @@
+{
+  "schema": "sms_mugen_scene_cut_config_v1",
+  "source": "ffspRyo_v3.zip",
+  "source_sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133",
+  "palette_p1": "ffspRyo_4",
+  "palette_p2": "ffspRyo_5",
+  "fighter_scale": {
+    "target_idle_opaque_height_px": 72,
+    "accepted_height_px": [
+      72,
+      88
+    ]
+  },
+  "controls": {
+    "families": {
+      "1": [
+        "x",
+        "z"
+      ],
+      "2": [
+        "a",
+        "c"
+      ]
+    },
+    "thresholds": {
+      "1": [
+        6
+      ],
+      "2": [
+        6
+      ]
+    },
+    "policy": "release_or_threshold",
+    "dropped": [
+      "b",
+      "y"
+    ]
+  },
+  "actions": [
+    {
+      "role": "idle",
+      "action": 0,
+      "loop_start": 0
+    },
+    {
+      "role": "walk_f",
+      "action": 20,
+      "loop_start": 0
+    },
+    {
+      "role": "walk_b",
+      "action": 21,
+      "loop_start": 0
+    },
+    {
+      "role": "jump",
+      "action": 40,
+      "loop_start": null
+    },
+    {
+      "role": "crouch",
+      "action": 100,
+      "loop_start": 0
+    },
+    {
+      "role": "guard",
+      "action": 120,
+      "loop_start": 0
+    },
+    {
+      "role": "punch",
+      "action": 200,
+      "state": 200,
+      "loop_start": null
+    },
+    {
+      "role": "hp",
+      "action": 220,
+      "state": 220,
+      "loop_start": null
+    },
+    {
+      "role": "kick",
+      "action": 230,
+      "state": 230,
+      "loop_start": null
+    },
+    {
+      "role": "hk",
+      "action": 250,
+      "state": 250,
+      "loop_start": null
+    },
+    {
+      "role": "special",
+      "action": 1000,
+      "state": 1000,
+      "loop_start": null
+    },
+    {
+      "role": "hit",
+      "action": 5000,
+      "state": 5000,
+      "loop_start": null
+    },
+    {
+      "role": "ko",
+      "action": 5050,
+      "state": 5050,
+      "loop_start": null
+    },
+    {
+      "role": "air_lp",
+      "action": 600,
+      "state": 600,
+      "loop_start": null
+    },
+    {
+      "role": "air_hp",
+      "action": 620,
+      "state": 620,
+      "loop_start": null
+    },
+    {
+      "role": "air_lk",
+      "action": 630,
+      "state": 630,
+      "loop_start": null
+    },
+    {
+      "role": "air_hk",
+      "action": 650,
+      "state": 650,
+      "loop_start": null
+    },
+    {
+      "role": "punch_far",
+      "action": 201,
+      "state": 201,
+      "loop_start": null
+    },
+    {
+      "role": "hp_far",
+      "action": 221,
+      "state": 221,
+      "loop_start": null
+    },
+    {
+      "role": "kick_far",
+      "action": 231,
+      "state": 231,
+      "loop_start": null
+    },
+    {
+      "role": "hk_far",
+      "action": 251,
+      "state": 251,
+      "loop_start": null
+    }
+  ],
+  "commands": {
+    "button1": "z",
+    "forward_double": "FF",
+    "lp": "x",
+    "hp": "z",
+    "lk": "a",
+    "hk": "c",
+    "special": "236_x"
+  },
+  "source_limitations": [
+    "common1.cns ausente; o parser usou fallback local common_forge.cns",
+    "licença desconhecida; manter derivações locais e não redistribuídas",
+    "tiers médios y e b foram descartados pelo mapa de controle de dois tiers",
+    "acordes simultâneos sem papel de runtime são rejeitados como golpes simples; botões precisam corresponder exatamente ao padrão importado",
+    "as variantes far State 201/221/231/251 são selecionadas como fallback ordenado após State 200/220/230/250 com P2BodyDist X < 32; apenas entrada direta em pé/controle é executada e grupos de cancelamento/chain do source CMD não rodam",
+    "State 220 near HP declara velset=2,0,0, mas a velocidade do papel base HP no runtime permanece zero; esse movimento não é reproduzido",
+    "States 250/251 usam physics=N; essa semântica de física não é importada pelo runtime",
+    "este corte não inclui as ações especiais bloqueadas por dependências não representáveis nem a entidade projectile",
+    "binding special=236_x deriva do .cmd e é preservado como rota indireta VarSet v0=1000 (linha 1339) -> ChangeState Var(0) (linha 1560); o importador valida essa cadeia, mas o runtime ainda não comprova seu despacho",
+    "source_routes preserva oito rotas de ataques em pé, quatro aéreas e a rota indireta special_236_x; State, AIR Action, controlador, VarSet e gatilhos são evidência de importação, não execução de comandos, trigger groups, cancelamentos ou alcance pelo runtime"
+  ],
+  "source_routes": [
+    {
+      "route_id": "special_236_x",
+      "source_command_terms": [
+        "236_x"
+      ],
+      "source_controller_line": 1560,
+      "source_state": 1000,
+      "action_role": "special",
+      "source_state_resolution": {
+        "kind": "varset_constant",
+        "source_variable": 0,
+        "setter_controller_line": 1339
+      }
+    },
+    {
+      "route_id": "stand_lp_primary",
+      "source_command_terms": [
+        "x"
+      ],
+      "source_controller_line": 1885,
+      "source_state": 200,
+      "action_role": "punch"
+    },
+    {
+      "route_id": "stand_lp_alternate",
+      "source_command_terms": [
+        "x"
+      ],
+      "source_controller_line": 1902,
+      "source_state": 201,
+      "action_role": "punch_far"
+    },
+    {
+      "route_id": "stand_hp_primary",
+      "source_command_terms": [
+        "z"
+      ],
+      "source_controller_line": 1972,
+      "source_state": 220,
+      "action_role": "hp"
+    },
+    {
+      "route_id": "stand_hp_alternate",
+      "source_command_terms": [
+        "z"
+      ],
+      "source_controller_line": 2011,
+      "source_state": 221,
+      "action_role": "hp_far"
+    },
+    {
+      "route_id": "stand_lk_primary",
+      "source_command_terms": [
+        "a"
+      ],
+      "source_controller_line": 2051,
+      "source_state": 230,
+      "action_role": "kick"
+    },
+    {
+      "route_id": "stand_lk_alternate",
+      "source_command_terms": [
+        "a"
+      ],
+      "source_controller_line": 2072,
+      "source_state": 231,
+      "action_role": "kick_far"
+    },
+    {
+      "route_id": "stand_hk_primary",
+      "source_command_terms": [
+        "c"
+      ],
+      "source_controller_line": 2161,
+      "source_state": 250,
+      "action_role": "hk"
+    },
+    {
+      "route_id": "stand_hk_alternate",
+      "source_command_terms": [
+        "c"
+      ],
+      "source_controller_line": 2204,
+      "source_state": 251,
+      "action_role": "hk_far"
+    },
+    {
+      "route_id": "air_lp",
+      "source_command_terms": [
+        "x"
+      ],
+      "source_controller_line": 2394,
+      "source_state": 600,
+      "action_role": "air_lp"
+    },
+    {
+      "route_id": "air_hp",
+      "source_command_terms": [
+        "z"
+      ],
+      "source_controller_line": 2418,
+      "source_state": 620,
+      "action_role": "air_hp"
+    },
+    {
+      "route_id": "air_lk",
+      "source_command_terms": [
+        "a"
+      ],
+      "source_controller_line": 2436,
+      "source_state": 630,
+      "action_role": "air_lk"
+    },
+    {
+      "route_id": "air_hk",
+      "source_command_terms": [
+        "c"
+      ],
+      "source_controller_line": 2464,
+      "source_state": 650,
+      "action_role": "air_hk"
+    }
+  ]
+}

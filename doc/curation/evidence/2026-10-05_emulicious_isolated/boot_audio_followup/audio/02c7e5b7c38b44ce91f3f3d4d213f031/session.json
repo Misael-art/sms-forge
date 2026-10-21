@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "session_id": "02c7e5b7c38b44ce91f3f3d4d213f031",
+  "root": "/tmp/smsforge-1000/02c7e5b7c38b44ce91f3f3d4d213f031",
+  "state": "running",
+  "created_at": 1791249564.9490154,
+  "source_rom": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/out/rom/MSSF2T.sms",
+  "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+  "emulator_sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d",
+  "bridge_sha256": "58175d9096be2e58e968f38c62a7528577f9617c52faa659c4b6ba52a3eb5f7c",
+  "bridge_source_sha256": "1c5332246c0c6bbf90fb782008f42f4173c34a6b5d3d138288ede2560587ceba",
+  "config_initial_sha256": "96f1d666d3385321f7ff87ea6f260305647e00ca2f702dd44d26825aac26a559",
+  "xvfb": "/mnt/sdcard/Projects/SMSForge/out/session_bridge/runtime/xvfb/usr/bin/Xvfb",
+  "host_display": ":0",
+  "xvfb_sha256": "5bfd315a8c7bc626d0b183d176e130c34f910a4a1279d9d53ea45769f62a3351",
+  "ttl_seconds": 1800,
+  "host_load": [
+    9.09912109375,
+    8.50830078125,
+    7.52783203125
+  ],
+  "audio": "private_sink_unvalidated",
+  "enable_audio_requested": false,
+  "input": "process_local_SMSJoypad",
+  "supervisor": {
+    "pid": 531328,
+    "start_ticks": "672832"
+  },
+  "audio_sink": "smsforge_02c7e5b7c38b44ce",
+  "audio_sink_module": "536870916",
+  "display": ":1",
+  "xvfb_process": {
+    "pid": 531340,
+    "start_ticks": "672854"
+  },
+  "sandbox": {
+    "pid": 531370,
+    "start_ticks": "672871"
+  },
+  "emulator_process": {
+    "pid": 531372,
+    "start_ticks": "672871"
+  },
+  "ready": {
+    "ok": true,
+    "pid": 531372,
+    "frame": 120,
+    "p1": 0,
+    "p2": 0,
+    "console": 0,
+    "emulator_input": 0,
+    "nominal_hz": 59.92274340431231,
+    "audio_enabled": false,
+    "running": false
+  },
+  "audio_route": {
+    "sink_inputs": [
+      "3175"
+    ],
+    "pid": 531372,
+    "sink": "smsforge_02c7e5b7c38b44ce",
+    "at": 1791249569.3984873,
+    "verified": true
+  },
+  "audio_boot": {
+    "muted_from_launch": true,
+    "ready_audio_enabled": false,
+    "silent_stream_priming": true
+  }
+}

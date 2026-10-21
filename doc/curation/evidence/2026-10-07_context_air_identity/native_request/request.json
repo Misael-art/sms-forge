@@ -1,0 +1,86 @@
+{
+  "schema": "sms_subagent_session_v2",
+  "artifact_kind": "session_qa_request",
+  "task_id": "694588dd904440db96ec71725a6ffffb",
+  "project": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/diagnostic_consumer",
+  "producer_id": "/root",
+  "worker_id": "/root/native_runtime_qa",
+  "lane": "runtime",
+  "scope": "Verify current context contract and private collector with archived SMI1 fixture",
+  "rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request/rom.sms",
+    "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c"
+  },
+  "inputs": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request/rom.sms",
+      "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "origin": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/independent_request/rom.sms",
+      "role": "rom"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request/inputs/doc/10-memory-bank.md",
+      "sha256": "42f2cc52678cc9c2128231fa960e905710700461ce9404d5778d5e9a5896f99c",
+      "origin": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/diagnostic_consumer/doc/10-memory-bank.md",
+      "role": "doc/10-memory-bank.md"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request/inputs/doc/15-tdd.md",
+      "sha256": "be55ff1b0412b621ea2038aa1169b26c1dbecb1d391d98912e82db831bcf5891",
+      "origin": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/diagnostic_consumer/doc/15-tdd.md",
+      "role": "doc/15-tdd.md"
+    }
+  ],
+  "cases": [
+    {
+      "id": "private_p1_right",
+      "axis": "runtime_input_observation",
+      "proof": "rom_observation",
+      "expectation": "SMI1 signature valid; P1 right held counter 7, all other held counters zero; no gameplay/FPS claim",
+      "precondition": {
+        "address": "0xC700",
+        "length": 5,
+        "equals_hex": "534d493101"
+      },
+      "probe": {
+        "address": "0xC700",
+        "length": 34
+      },
+      "sequence": [
+        {
+          "frames": 60
+        },
+        {
+          "p1": 8,
+          "frames": 7
+        }
+      ]
+    }
+  ],
+  "input_binding": "frozen_snapshot_v1",
+  "input_root": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request",
+  "case_relation": "independent",
+  "context_contract": "readable_project_context_v1",
+  "context_mode": "diagnostic",
+  "context_documents": [
+    {
+      "role": "doc/10-memory-bank.md",
+      "status": "snapshot"
+    },
+    {
+      "role": "doc/11-gdd.md",
+      "status": "missing",
+      "reason": "Archived ROM diagnostic consumer has no production GDD/scene spec; no game scope or delivery claims"
+    },
+    {
+      "role": "doc/13-spec-cenas.md",
+      "status": "missing",
+      "reason": "Archived ROM diagnostic consumer has no production GDD/scene spec; no game scope or delivery claims"
+    },
+    {
+      "role": "doc/15-tdd.md",
+      "status": "snapshot"
+    }
+  ],
+  "diagnostic_reason": "Archived ROM diagnostic consumer has no production GDD/scene spec; no game scope or delivery claims"
+}

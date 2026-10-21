@@ -1,0 +1,145 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_61_pose_sms_conversion_v9",
+  "producer": "codex_sprite_conversion",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/dr_social_61_pose_converted_preview_4x.png",
+    "sha256": "99dd4a592ad223840a3d2b4cd64788239ccf0a48da6f7619c89b9537ddaf2f40",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+    "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "semantic_palette_role_confinement"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+          "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+          "role": "owner-approved 61-pose identity, anatomy, clothing, equipment and animation source"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "approved visual direction and costume/material reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "character palette authority; palette compliance does not approve shade placement"
+        }
+      ],
+      "observed_defects": [
+        "Blue/cyan values remained dispersed across cape, coat and trousers rather than reading as clean, hard-edged anime cel-shading planes.",
+        "Small navy marks and isolated palette accents risked reading as color confetti inside garment materials.",
+        "White/yellow accents require explicit semantic-region confinement; preserve only intentional character, hand, face and equipment details.",
+        "Material boundaries must separate body, coat/cape, trousers, gloves and cane without muddy color transitions."
+      ],
+      "revision_notes": [
+        "V7 is owner-rejected and retained as the lower-row color base only; it is not approved art.",
+        "V8 preserves all 61 pose IDs, 80x80 canvases, source geometry/alpha, SMS palette and equipment pixels except the declared palette-only cluster refinement.",
+        "V8 refined 927 pixels: 438 interior cloth-tone islands and 489 enclosed navy marks remapped into the existing deep-teal shadow; no new colors and no alpha changes.",
+        "The white/yellow singleton detector found no isolated white/yellow pixels fully surrounded by cloth (0 changed); visible accents remain pending semantic visual review.",
+        "All 61 indexed PNGs render exactly in a private Emulicious framebuffer session; this proves conversion/render fidelity only."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "pending",
+          "note": "Inspect every converted frame at native size and nearest-neighbor 4x."
+        },
+        "face_detail_readability": {
+          "status": "pending",
+          "note": "Independent visual review pending."
+        },
+        "outline_and_cutout": {
+          "status": "pending",
+          "note": "Independent visual review pending."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Independent visual review pending."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Compare contiguous shadow/base/highlight planes across every pose; verify cape interior and garment folds at 1x and nearest-neighbor 4x."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Independent visual review pending."
+        },
+        "equipment_geometry": {
+          "status": "pending",
+          "note": "Independent visual review pending."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "Independent visual review pending."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "Independent visual review pending."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pending",
+          "note": "Check every white/yellow accent against its approved semantic region; inspect face, hair, gloves, collar, cane and cloth for leaks or confetti."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "conversion_validation": {
+    "delta_audit": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/dr_social_61_pose_semantic_delta_v8_v9.json",
+    "delta_audit_status": "pass",
+    "delta_audit_sha256": "e483617ee1cf6173a1ff5155394a07bcf9f5cdd61f9ef919a82cb4a97b80e259",
+    "delta_summary": {
+      "frames_checked": 61,
+      "changed_pixels": 249,
+      "alpha_changed_pixels": 0,
+      "new_palette_colors": 0,
+      "pose_geometry_changed": false,
+      "yellow_pixels_reassigned_outside_face_and_cane_grip": 249,
+      "white_pixels_changed": 0
+    },
+    "rom": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/project/out/rom/dr_social_61_pose_review_v9.sms",
+    "rom_sha256": "81c2e47f684b307de6d2bfa803dc7e56a6b22402f06d7ecc8d8250f2b059bfd2",
+    "rom_bytes": 114688,
+    "framebuffer_capture_index": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v9/project/out/evidence/dr_social_61_framebuffer_v9/framebuffer_capture_index_v9.json",
+    "framebuffer_capture_index_sha256": "eed561b63b17582d11c564d3c87678f8b639e2cf2783080f79fe2bdb3d84e8e6",
+    "framebuffer_session_id": "bfb478dfae0044d4a679db5df6bce018",
+    "framebuffer_verified_poses": 61,
+    "exact_render_failures": 0,
+    "scope": "Render diagnóstico exato; não prova aprovação artística, gameplay, FPS, áudio ou orçamento de produção."
+  },
+  "promotion_status": "superseded_by_v10_diagnostic_candidate; no owner approval recorded",
+  "claim_ceiling": "v9 historical diagnostic conversion; superseded by v10; evidence remains version-bound and approval axes were not closed",
+  "revision_notes": [
+    "V7 permanece rejeitada pelo dono; v8 foi superseded pela candidata v9 após encontrar pixels amarelos fora dos papéis semânticos declarados.",
+    "V9 preserva 61 IDs de pose, canvases 80x80, geometria, alpha e a paleta existente; não altera a fonte de animação.",
+    "V9 reclassificou 249 pixels amarelos fora das regiões do rosto/óculos e da junção luva-haste do pomo da bengala; zero pixels brancos, alpha ou cores novas foram alterados.",
+    "V9 herda a limpeza cel-shading v8: 927 pixels agrupados (438 ilhas de tom de tecido e 489 marcas navy internas), sem dithering adicionado.",
+    "ROM diagnóstica v9 construída e comparada pixel a pixel em Emulicious: 61/61 poses, zero divergências. Isso prova render exato, não aprovação artística.",
+    "Esta é candidata não aprovada. Todos os eixos artísticos, revisão independente e aprovação do dono permanecem pendentes."
+  ]
+}

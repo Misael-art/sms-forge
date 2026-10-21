@@ -58,6 +58,7 @@ void opening_enter(void);
 void opening_update(void);
 void select_enter(void);
 void select_update(void);
+void select_present(void);
 
 void fight_enter(void);
 void fight_reset_round(void);
@@ -65,7 +66,21 @@ void fight_update(void);
 void fight_present(void);
 const FighterDef *fighter_def(unsigned char id);
 void fighter_set_state(unsigned char who, unsigned int st);
+void stream_init(void);
+void stream_request(unsigned char who, unsigned char pose, unsigned char fr,
+                    unsigned char flip);
+void stream_prepare(void);
+void stream_upload(void);
+void stream_draw(void);
+void stream_load_now(unsigned char who, unsigned char pose, unsigned char fr,
+                     unsigned char flip);
+unsigned char stream_busy(unsigned char who);
+unsigned char stream_ready(unsigned char who);
+void stream_present(unsigned char who);
+unsigned char stream_frame(unsigned char who);
+const AnimDef *anim_of(unsigned char id, unsigned char pose);
 void audio_boot(void);
+void audio_title(void);
 void audio_fight(void);
 void audio_tick(void);
 void audio_hit(void);

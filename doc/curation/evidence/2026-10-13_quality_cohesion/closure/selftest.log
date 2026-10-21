@@ -1,0 +1,122 @@
+== Fase 1: self-check de cada gate ==
+  [OK ] selfcheck:build_inner.py  ([SELF-CHECK OK] build resource routing: 8x8/8x16/16x16 sprites, 80x80 sheet and off-grid r)
+  [OK ] selfcheck:audit_validate_resources.py  ([SELF-CHECK OK] validate_resources: sheet, sprite 8x8/8x16/16x16, grid, 6-bit, limite 15 e)
+  [OK ] selfcheck:audit_sprite_line_sim.py  ([SELF-CHECK OK] sprite_line_sim)
+  [OK ] selfcheck:audit_luma_floor.py  ([SELF-CHECK OK] luma_floor)
+  [OK ] selfcheck:audit_provenance.py  ([SELF-CHECK OK] provenance)
+  [OK ] selfcheck:audit_claims.py  ([SELF-CHECK OK] claims)
+  [OK ] selfcheck:capture_evidence.py  ([SELF-CHECK OK] evidence (imagem vazia, direcao, eco, escala nativa))
+  [OK ] selfcheck:audit_meaningful_change.py  ([SELF-CHECK OK] meaningful_change)
+  [OK ] selfcheck:audit_placeholder_quarantine.py  ([SELF-CHECK OK] placeholder_quarantine (aprovacao estruturada; prosa como 'final pendente')
+  [OK ] selfcheck:audit_deterministic_boot.py  ([SELF-CHECK OK] deterministic_boot (logica de comparacao))
+  [OK ] selfcheck:canonical_fixture_gate.py  ([SELF-CHECK OK] canonical_fixture_gate)
+  [OK ] selfcheck:audit_mastery_registry.py  ([SELF-CHECK OK] mastery_registry (overclaim + tecnica citada na matriz sem entrada no regi)
+  [OK ] selfcheck:audit_specialization.py  ([SELF-CHECK OK] specialization)
+  [OK ] selfcheck:audit_audio.py  ([SELF-CHECK OK] audit_audio (energia em janela: silencio 0%, tom continuo 100%, lacuna det)
+  [OK ] selfcheck:measure_fps.py  ([SELF-CHECK OK] measure_fps (parse de titulo + veredito: reprova fps fora da faixa, amostr)
+  [OK ] selfcheck:validate_measurement_tools.py  ([SELF-CHECK OK] validate_measurement_tools (descobre nested e detecta ausência/self-check )
+  [OK ] selfcheck:audit_doc_sync.py  ([SELF-CHECK OK] doc_sync (gate fantasma, gate invisivel, hierarquia incompleta, doc_author)
+  [OK ] selfcheck:screenshot_semantic_gate.py  ([SELF-CHECK OK] screenshot_semantic_gate (reprova cor fora da paleta mestra, reuso de capt)
+  [OK ] selfcheck:seal_fresh_evidence_bundle.py  ([SELF-CHECK OK] seal_fresh_evidence_bundle (reprova captura anterior a ROM, evidencia de o)
+  [OK ] selfcheck:reconcile_claims.py  ([SELF-CHECK OK] reconcile_claims (pega eixo TRUE sem lastro no artefato; nao pune eixo dec)
+  [OK ] selfcheck:audit_sprite_mode.py  ([SELF-CHECK OK] sprite_mode (reprova o caso L006, altura excedente, a ilusao do ZOOMED e a)
+  [OK ] selfcheck:capture_audio.py  ([SELF-CHECK OK] capture_audio (WAV gerado e legivel pelo audit_audio; tom ativo, silencio )
+  [OK ] selfcheck:audit_render_fidelity.py  ([SELF-CHECK OK] render_fidelity (comparação estrutural e pixel-a-pixel; reprova pixel dive)
+  [OK ] selfcheck:audit_hardware_constants.py  ([SELF-CHECK OK] hardware_constants (reprova numero de outro console afirmado como lei; ace)
+  [OK ] selfcheck:audit_debug_markers.py  ([SELF-CHECK OK] debug_markers (reprova __at sem volatile; aceita volatile, __sfr e comenta)
+  [OK ] selfcheck:audit_tilemap_bounds.py  ([SELF-CHECK OK] audit_tilemap_bounds (reprova linha invisivel, escrita na SAT, coluna >=32)
+  [OK ] selfcheck:measure_frame_advance.py  ([SELF-CHECK OK] measure_frame_advance (reprova ROM congelada que o titulo diria 60fps, rep)
+  [OK ] selfcheck:measure_runtime_probe.py  ([SELF-CHECK OK] runtime_probe (parse @, cabecalho, fps, veredito, schema_guard))
+  [OK ] selfcheck:audit_causal_persistence.py  ([SELF-CHECK OK] causal_persistence (F1–F10 + documento sem delta: fecha rota, não projeto))
+  [OK ] selfcheck:audit_visual_delivery.py  ([SELF-CHECK OK] visual_delivery (entrega válida passa; D1/probe/HAMOOPIG/duplicata/escala/)
+  [OK ] selfcheck:audit_rom_asset_binding.py  ([SELF-CHECK OK] rom_asset_binding (válido passa; SHA ROM/PNG divergem; mapa ausente só com)
+  [OK ] selfcheck:harness_orchestration.py  ([SELF-CHECK OK] harness_orchestration (3 ramos; claim no coordenador; overlap serializa; t)
+  [OK ] selfcheck:artifact_registry.py  ([SELF-CHECK OK] artifact_registry (unique heads, hashes, ownership, lineage, extension, sc)
+  [OK ] selfcheck:audit_source_raster.py  (self-check: PASS (binary/RGB/indexed positives; 35 negatives; input preservation))
+  [OK ] selfcheck:audit_subagent_session.py  ([SELF-CHECK OK] subagent session: coverage, independent identity, stale bytes, binding, li)
+  [OK ] selfcheck:blastem_sms.py  ([SELF-CHECK OK] BlastEm SMS script bounds, machine, PAL and injection rejection)
+  [OK ] selfcheck:audit_blastem_sms.py  ([SELF-CHECK OK] BlastEm SMS audit: synthetic valid record, MD/PAL/claims/pin/baseline/clea)
+  [OK ] selfcheck:blastem_diagnostics.py  ([SELF-CHECK OK] SMS diagnostic watch contracts, 64-color inversion and decoded viewers)
+  [OK ] selfcheck:blastem_maintenance.py  ([SELF-CHECK OK] Release manifest restrictions and candidate hash tamper rejection)
+  [OK ] selfcheck:blastem_dump_diff.py  ([SELF-CHECK OK] Snapshot net deltas, ordered windows, range identity and tamper rejection)
+  [OK ] selfcheck:audit_counter_window.py  ([SELF-CHECK OK] counter windows: rollover, ambiguous/unbounded counts, exact bound and inv)
+  [OK ] selfcheck:audit_stage_attribution.py  ([SELF-CHECK OK] sealed stage boundaries: baseline, monotonic counts, same ROM/window and c)
+  [OK ] selfcheck:audit_import_semantics.py  ([SELF-CHECK OK] explicit source coordinates, ROM AIR boundaries and cache revision validit)
+  [OK ] selfcheck:quality_review_router.py  ([SELF-CHECK OK] quality_review_router (máx 3; sem autoaprovação; sem AAA; hash stale cai))
+  [OK ] selfcheck:audit_animation_semantics.py  ([SELF-CHECK OK] animation_semantics (roster, permutação, clone, ciclo idêntico, pivot, bbo)
+  [OK ] selfcheck:audit_learning_capture.py  ([SELF-CHECK OK] learning_capture (ledger orfao, ferramenta fantasma, doutrina supersedida,)
+  [OK ] selfcheck:audit_psg_channel_binding.py  ([SELF-CHECK OK] psg_channel_binding (match passa, canal errado reprova, sem manifesto skip)
+  [OK ] selfcheck:audit_hscroll_blank.py  ([SELF-CHECK OK] hscroll_blank (zero passa, vivo sem blank reprova, vivo com blank passa))
+  [OK ] selfcheck:audit_symbol_size_sync.py  ([SELF-CHECK OK] symbol_size_sync (match passa, 1024 vs 832 reprova))
+  [OK ] selfcheck:audit_psg_redundancy.py  ([SELF-CHECK OK] psg_redundancy (12 copias reprovam, ostinato distinto e SFX curto passam))
+  [OK ] selfcheck:emulator_input.py  ([SELF-CHECK OK] emulator_input (mapa evdev, backend=wayland, L038/L039/L053))
+  [OK ] selfcheck:emulator_session.py  ([OK] emulator_session self-check)
+  [OK ] selfcheck:capture_video.py  ([OK] capture_video self-check)
+  [OK ] selfcheck:make_psg_assets.py  ([SELF-CHECK OK] make_psg_assets (feedback8modos/divisor32/LFSR aproximado + politica de ev)
+  [OK ] selfcheck:png_to_sms_tiles.py  ([SELF-CHECK OK] png_to_sms_tiles)
+  [OK ] selfcheck:pack_sms_metasprite.py  ([SELF-CHECK OK] pack_sms_metasprite (dedupe, tile0 reservado, paleta e scanline))
+  [OK ] selfcheck:prepare_sms_pixel_art.py  ([SELF-CHECK OK] prepare_sms_pixel_art (6-bit, idx0, grid 8, sem dithering, paleta alvo, li)
+  [OK ] selfcheck:audit_audio_provenance.py  ([SELF-CHECK OK] audio_provenance (orfao, entrada ausente, sha256/bytes divergentes, port s)
+  [OK ] selfcheck:measure_worst_frame.py  ([SELF-CHECK OK] measure_worst_frame)
+  [OK ] selfcheck:audit_header_claims.py  ([SELF-CHECK OK] header_claims (reprova a lei SG-1000 como lei SMS, exige defines do header)
+  [OK ] selfcheck:audit_mugen_engine_contract.py  ([PASS] MUGEN contract self-check: planning, incomplete delivery, hardware, hashes, ROM, pa)
+  [OK ] selfcheck:audit_art_review_checklist.py  ([SELF-CHECK OK] audit_art_review_checklist (eixos conceituais, fluxo sombra/material obrig)
+== Fase 2: fixtures geradas ==
+  [OK ] unique artifact registry accepted
+  [OK ] competing artifact heads rejected
+  [OK ] synthetic BlastEm SMS contract accepted
+  [OK ] BlastEm stepping promoted to FPS rejected
+  [OK ] counter rollover bounded exact accepted
+  [OK ] 8-bit counter ambiguous 29/285 exact claim rejected
+  [OK ] complete concept final-layout review accepted
+  [OK ] concept final-layout omission rejected
+  [OK ] skill QA vigente e menção histórica aceita
+  [OK ] skill com encerramento global de emulador rejeitada
+  [OK ] subagent QA: valid binding/coverage fixture
+  [OK ] subagent QA: passed with not_run rejected
+  [OK ] historical snapshots survive active evolution; current ROM ineligible
+  [OK ] independent multi-case reset assumption rejected
+  [OK ] explicitly chained timeline accepted
+  [OK ] readable context: production/diagnostic, EIO/EACCES, historical collection refusal
+  [OK ] sealed stage attribution accepted within claim ceiling
+  [OK ] attribution without pre-stage baseline rejected
+  [OK ] source front-distance boundary accepted
+  [OK ] axis-only distance substitution rejected
+  [OK ] AIR N+1 identity/timing including rollover accepted
+  [OK ] duration-only record cannot prove AIR identity
+  [OK ] cyclic video with equal endpoints retains motion
+  [OK ] unchanged video has no motion proof
+  [OK ] sessao: bundle com vinculos validos  ([PASS] session-bound informative framebuffer; no gameplay/audio/FPS approval)
+  [OK ] sessao: ROM trocada rejeitada  ([FAIL] session/ROM/capture/config binding mismatch)
+  [OK ] sessao: captura preta rejeitada apesar dos hashes validos  ([FAIL] session/ROM/capture/config binding mismatch)
+== Fase 3: bateria valida/reprova ==
+  [OK ] bg valido aprovado  ([PASS] 1 PNG(s) dentro do contrato)
+  [OK ] gate reprovou grid fora de 8x8  ([FAIL] grid 8x8 violado: 250x100)
+  [OK ] gate reprovou cor fora dos codigos 6-bit  ([FAIL] /run/user/1000/codex-desktop/tmp/smsforge_selftest_pihojlyg/bad_color_bg.png: palet)
+  [OK ] gate reprovou indice 0 opaco  ([FAIL] /run/user/1000/codex-desktop/tmp/smsforge_selftest_pihojlyg/opaque_idx0_bg.png: ind)
+  [OK ] sprite 16x16 aprovado  ([PASS] 1 PNG(s) dentro do contrato)
+  [OK ] gate reprovou sprite 12x12  ([FAIL] sprite 12x12 fora de {8x8,8x16,16x16})
+  [XX ] cena com 10 sprites dispersos aprovada  ([FAIL] sprite 9: x must be integer 0..255)
+  [OK ] gate reprovou 9 sprites numa scanline  ([FAIL] scanline 104: 9 entradas > 8; buffer cheio, overflow (status bit 6); visiveis desca)
+  [OK ] gate reprovou SAT >64  ([FAIL] SAT overflow: 65 sprites > 64)
+  [OK ] gate reprovou colisao com terminador 0xD0  ([FAIL] sprite em (40,209): Y armazenado colide com terminador 0xD0)
+  [OK ] y=207 grava 0xCE: nao colide com o terminador (L129)  ([PASS] 1 sprites, pico 0/linha)
+  [OK ] gate reprovou 8 sprites hidden + 1 visivel na linha (L129)  ([FAIL] scanline 54: 9 entradas > 8; buffer cheio, overflow (status bit 6); visiveis descar)
+  [OK ] Y 0xD0 em 224 linhas aprovado: sem terminador (L128)  ([PASS] 1 sprites, pico 1/linha)
+  [OK ] gate reprovou SAT truncada declarada em 224 linhas  ([FAIL] sat_terminated declarado em 224 linhas: 0xD0 so termina a SAT no modo 192; o VDP pe)
+  [OK ] gate reprovou screen_h fora de 192/224/240  ([FAIL] screen_h 200 fora dos modos do VDP (192, 224, 240); integer required)
+  [OK ] contraste branco/preto aprovado  ([PASS] contraste acima do piso)
+  [OK ] gate reprovou cinza sobre branco  ([FAIL] contraste dY=16 < piso 17 entre (85, 85, 0) e (0, 85, 85))
+  [OK ] MUGEN contrato válido planning  (})
+  [OK ] MUGEN probe não vira delivery  (})
+  [OK ] MUGEN número MD rejeitado no SMS  (})
+  [OK ] checklist artístico válido e hash-bound aprovado  ([PASS] review checklist complete; owner-approved)
+  [OK ] gate artístico reprova sprite sheet sem micro-eixos L107  ([FAIL] invalid checklist or failed artistic axes block promotion)
+  [OK ] gate artístico reprova tipo pixel_sprite desconhecido  ([FAIL] invalid checklist or failed artistic axes block promotion)
+== Fase 4: bootstrap materializa a hierarquia de verdade ==
+  [OK ] bootstrap materializa hierarquia de verdade  (10 arquivos, sem placeholder)
+== Fase 5: build honesto (ambiente sem toolchain) ==
+  [--] probe de projeto ausente (SMSFORGE_PROBE_PROJECT); pulado
+
+SELFTEST: 112/113 verdes (113 base + probe opcional nao rodado)
+[SELFTEST FAIL] ha gate mentindo. Corrigir antes de qualquer uso.

@@ -1,0 +1,2227 @@
+{
+  "schema": "sms_canonical_cohesion_audit_20261013_v1",
+  "date": "2026-10-13",
+  "root": "/mnt/sdcard/Projects/SMSForge",
+  "input_hashes": {
+    "doc/curation/2026-08-25_fundacao.json": {
+      "sha256": "53cbed4c3cc637cc4007fdfa34aac18437fe40560907d046d0dc99049ba3435d",
+      "bytes": 18040
+    },
+    "doc/curation/2026-08-31_l006_geometria_sprite.json": {
+      "sha256": "1051cb7610406be7f983112879b232b870d9aa7b20d394fdea8fa5b8db8ca3df",
+      "bytes": 8491
+    },
+    "doc/curation/2026-09-04_l035_canal_runtime.json": {
+      "sha256": "0e995640dc18ae47cff215d58513158a831fe60839f39a5f5b188f806cb08ae7",
+      "bytes": 5006
+    },
+    "doc/curation/2026-09-06_l036_autonomia_visual_epoch.json": {
+      "sha256": "3ef8eb74232c2d8d293ec1f8ee25c784db91a1d09e9e0b5d6aaa364afa4c817e",
+      "bytes": 3632
+    },
+    "doc/curation/2026-09-06_l038_l049_absorcao.json": {
+      "sha256": "ad612cdcb86652e792d600647479d3905a789f83ba160ab46d093a07b46d5455",
+      "bytes": 7110
+    },
+    "doc/curation/2026-09-06_l050_l054_absorcao.json": {
+      "sha256": "74104c93cf662ff0b27b23cadf49150dc9f260857d7e73ce8e50a086a98fb563",
+      "bytes": 3478
+    },
+    "doc/curation/2026-09-07_l055_pixel_translate.json": {
+      "sha256": "29fde986e3f996cb6c75a16cd9bd9af9fc5858d643c5e604c0ebbd12a7304817",
+      "bytes": 1770
+    },
+    "doc/curation/2026-09-07_l056_video_evidencia.json": {
+      "sha256": "4721b9f7d84808c513233fcf4e60136174ee04d88ee3ec54c073c1e19d9faa8d",
+      "bytes": 5779
+    },
+    "doc/curation/2026-09-07_l057_sessao_emulador.json": {
+      "sha256": "57509ce7ff95e41b3d82384d21a498fd4d20eacf1c4b8a3ba0303754f30580c0",
+      "bytes": 4333
+    },
+    "doc/curation/2026-09-07_l058_l059_audio_provenancia.json": {
+      "sha256": "afd8b4bc1a2959bdd477d3af126330dd73767df3d4f1fc3af145599e1b29271d",
+      "bytes": 3260
+    },
+    "doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json": {
+      "sha256": "3ec8abd734250ea91c63b5ae4880b1a5730f03169c0920af4e1799699eabf526",
+      "bytes": 5467
+    },
+    "doc/curation/2026-09-19_l065_l068_qcf_harness.json": {
+      "sha256": "4be54305a984eb24be3500492e085251aad9071312a531f4392cb6d3f61c02cc",
+      "bytes": 3248
+    },
+    "doc/curation/2026-09-25_l071_l073_reconciliacao.json": {
+      "sha256": "612f76bec2bafab8259aa3c73b670e517154a11116899c53a090e3a79c9b27d6",
+      "bytes": 4646
+    },
+    "doc/curation/2026-09-25_l074_l076_receitas.json": {
+      "sha256": "377640e685b6e080ef14c9942eebf2ee90cca4eb507751a992da4ed40c8ec36d",
+      "bytes": 5599
+    },
+    "doc/curation/2026-09-25_l077_gate_sem_contrato.json": {
+      "sha256": "d7c376b3930a5e98133b60d8a845240586c76b7b2a11867594c7d2db04ee8874",
+      "bytes": 3022
+    },
+    "doc/curation/2026-09-25_l078_l079_piso_audio_psg.json": {
+      "sha256": "25922ee03635dd9f3254d8ec64fa161db74c9eea3cb78d20580c217a2d55e5f2",
+      "bytes": 4890
+    },
+    "doc/curation/2026-09-25_l080_l081_andamento_transcricao_gate_cego.json": {
+      "sha256": "60e3d8a96ecb80b3f35dd8bf7f77ce6d4df53e0731bee28080cdb656fda79270",
+      "bytes": 6156
+    },
+    "doc/curation/2026-09-25_passo4_validacao_receitas_hamoopig.json": {
+      "sha256": "6e05b0e2ce92986edfee9a697be757d753a6deb160fec0e083fd679b1bb4007b",
+      "bytes": 4500
+    },
+    "doc/curation/2026-09-26_l082_vcounter_vblank_deadline.json": {
+      "sha256": "6047244a20fe77bedbb18d77c3d4091ebbd352f5992935b5ef6f8a036c866b5c",
+      "bytes": 3320
+    },
+    "doc/curation/2026-09-26_l083_mugen_engine_contract.json": {
+      "sha256": "3d5ea2216619f9ba3e100432f4c10909bc506eb513a03aef460b38855b9f5777",
+      "bytes": 1099
+    },
+    "doc/curation/2026-09-26_l084_makesms_merge_limit.json": {
+      "sha256": "cb6da675c8c02994bb3d75d7abb0c24994021cbff55a3650f2f0c5a61bb5502a",
+      "bytes": 1508
+    },
+    "doc/curation/2026-09-26_l085_nested_measurement_discovery.json": {
+      "sha256": "4cc2cf66472a79dcc4ba5b46fe310ef7c38a853b252bc8a5607f8858a155b92f",
+      "bytes": 1223
+    },
+    "doc/curation/2026-09-26_l086_metasprite_mirror_pivot.json": {
+      "sha256": "1fc2f11280c58f331586c689ec529fef32159f487a7608cebc93f1d940714ebe",
+      "bytes": 1398
+    },
+    "doc/curation/2026-09-26_l088_palette_metasprite_binding.json": {
+      "sha256": "e962752176bd16bc5c622d17bde9071beab9f4f6da5568ab35f6a2b5b9ba0ab5",
+      "bytes": 3234
+    },
+    "doc/curation/2026-09-26_l089_worst_frame_wait_slow_rom.json": {
+      "sha256": "1b09ee1dbf94dc66f6ccbdc8024c2ae384f2b59c47fff9350653d55575dfa1c7",
+      "bytes": 2115
+    },
+    "doc/curation/2026-09-29_l090_l091_idle_slot_period_render_glitch.json": {
+      "sha256": "a690044c5d24b6c276bee9d15df62fd5c0ef3e3782bf676fbefc44de9adf01fb",
+      "bytes": 3776
+    },
+    "doc/curation/2026-09-30_l092_render_glitch_background_mask.json": {
+      "sha256": "625eb915270823f695928bc996df99b7a8f50187c36079f4b6b9442d86cbcf00",
+      "bytes": 3694
+    },
+    "doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json": {
+      "sha256": "6907b4b7efee8a160d0d2e4e7d5004ed605250eafd617ace39ae1fe677752170",
+      "bytes": 5766
+    },
+    "doc/curation/2026-09-30_l096_trace_compare_zip.json": {
+      "sha256": "0228e28edf1947d719b042b1ea002b41097840a50f63953271ca607244953628",
+      "bytes": 1540
+    },
+    "doc/curation/2026-09-30_l097_produtor_trilha_dap.json": {
+      "sha256": "a38307d6c2f1481650e0aceb44a8e44d030ca6394e0482eba7a947429b58efd3",
+      "bytes": 2922
+    },
+    "doc/curation/2026-10-01_l098_atraso_de_pose_visivel.json": {
+      "sha256": "fbdb9bb89f16dd7532fbbb37980c36cba3c1ddb71d11d73aba67401687e250ef",
+      "bytes": 2907
+    },
+    "doc/curation/2026-10-01_l099_banda_de_upload_de_poses.json": {
+      "sha256": "c311fefdc8cf645056ef5aa03dd21ff5214d01f8ec84b29800592d33e3fceeba",
+      "bytes": 3409
+    },
+    "doc/curation/2026-10-03_l100_paleta_sms_no_conceito.json": {
+      "sha256": "059acc8498a2878faee4b0532930454ff3417bd8c97114f651f19cf1a191ed11",
+      "bytes": 9669
+    },
+    "doc/curation/2026-10-03_l101_limpeza_granulacao_sprite.json": {
+      "sha256": "ceaee40618863f4bccd62a2edc4a2ab60d4287af164d546fe9c4eb8e04dd94bc",
+      "bytes": 5646
+    },
+    "doc/curation/2026-09-24_l069_header_claims.json": {
+      "sha256": "4b9c8b780d0c1fbf7e87a93e28a23fe3fee72d6986d390cc716baed1b3bae24a",
+      "bytes": 3174
+    },
+    "doc/curation/2026-09-26_l087_nested_learning_tool.json": {
+      "sha256": "86628654c63cc4fbf08ea174f6199733a1a13a37dffc6ea408a05ad32c8151e4",
+      "bytes": 1159
+    },
+    "doc/curation/2026-10-03_l102_geometria_folha_sprite.json": {
+      "sha256": "2b3200f8073d9e37860b0b548d6f5374542ca1ee4ff88508024305795756554e",
+      "bytes": 1990
+    },
+    "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json": {
+      "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+      "bytes": 60947
+    },
+    "doc/curation/2026-10-03_workflow_first_playable_slice.json": {
+      "sha256": "063c601d9579d3f1961072c788c097d7728d539b2f40c6ec13283388d11ddf6a",
+      "bytes": 2225
+    },
+    "doc/curation/2026-10-04_l103_fronteira_referencias_multimidia.json": {
+      "sha256": "5feddddeaece89be8806d1b087017866f8e3d4f653e5bd432fc7fea29283977e",
+      "bytes": 3722
+    },
+    "doc/curation/2026-10-04_l104_pixels_de_recorte_e_alvo_visual.json": {
+      "sha256": "a0e291332c526ae39af3ca341545d6452df7473737439847bac371bf8b4a89c3",
+      "bytes": 6829
+    },
+    "doc/curation/2026-10-04_l105_harmonia_escala_roster.json": {
+      "sha256": "a3e415319ad46339442d43dcfb49335085b16292742ef17fcfffd9e350eab0ce",
+      "bytes": 11565
+    },
+    "doc/curation/2026-10-04_l106_revisao_artistica_anatomia_e_equipamento.json": {
+      "sha256": "f532558eb7cda1ae8f4bbeab5859dc06417ddeae0ddc8d6e3e0632419edb9fe8",
+      "bytes": 14724
+    },
+    "doc/curation/2026-10-04_sgdk_state_transition_skill_sms.json": {
+      "sha256": "1324c3fe7f9b2a3d62b85109d00d17e55bd497296fcd139b70904b12bbb7cb5e",
+      "bytes": 2907
+    },
+    "doc/curation/2026-10-05_l057_sessoes_privadas_emulicious.json": {
+      "sha256": "560d0ee09bd2d7f5c213cad9f39b9059c3d24fd651a428ea52ccf7b65d7041b6",
+      "bytes": 11221
+    },
+    "doc/curation/2026-10-05_l107_refino_pixelart_quadro_e_microeixos.json": {
+      "sha256": "e9aac5f3a096f98c0b303541c07850511475878f529c421d158e17f05620b199",
+      "bytes": 7633
+    },
+    "doc/curation/2026-10-05_native_subagent_session_qa.json": {
+      "sha256": "60f2f9a2eea0da0ebe561802ce1dac189b657a6f92730d49ae5ebe83929ecaef",
+      "bytes": 5385
+    },
+    "doc/curation/2026-10-06_expertise_promotion.json": {
+      "sha256": "f6bc0d56529beadf6c5e555427105bef30e75e47a6940b03741823f5df8edd96",
+      "bytes": 4688
+    },
+    "doc/curation/2026-10-07_context_air_identity.json": {
+      "sha256": "7f912a6c994e5d7376f67a5a0a4fcd8f3ee2d90712e1a36a7fadd5f02c46bcdd",
+      "bytes": 5054
+    },
+    "doc/curation/2026-10-07_model_sheet_formulario_dr_social_cps2.json": {
+      "sha256": "727fae6a5f7c54aea967775a473fb075f420f0bf453328cb89a8c05c835b83bc",
+      "bytes": 4748
+    },
+    "doc/curation/2026-10-07_skills_propagation.json": {
+      "sha256": "00bbe8b659d199cfa1861e539bbe3eb16a78cd518ce5ec36e934de14a82fedd7",
+      "bytes": 6756
+    },
+    "doc/curation/2026-10-08_l108_fluxo_arte_autoral_incremental.json": {
+      "sha256": "e043ebf673cdcb376d39157563f0bdafb63f257d5d28b2ab70f8c0222ba13ba5",
+      "bytes": 6403
+    },
+    "doc/curation/2026-10-08_runtime_counter_layout.json": {
+      "sha256": "f7416f16f6fbb84ca2575fb061b6b18b37dfb95a1f65712429382fe4d06685a8",
+      "bytes": 5206
+    },
+    "doc/curation/2026-10-09_l109_prova_pose_pixels_hardware_animacao.json": {
+      "sha256": "83eadcae6669c23423b28cb64b84b1077da77a919a141ade3398fe69b3931623",
+      "bytes": 3915
+    },
+    "doc/curation/2026-10-09_l110_asset_bounds_gg_sms_scale.json": {
+      "sha256": "1f6821bd475f87ece775291b82b4929d25a6c74c6b92441aa9766178b4b03db6",
+      "bytes": 4388
+    },
+    "doc/curation/2026-10-09_l111_equipment_terminal_and_shared_sms_palette.json": {
+      "sha256": "75de6b4dd00df4e850bd23eb7953f7b25368d547792899d6575d46562c78a137",
+      "bytes": 5661
+    },
+    "doc/curation/2026-10-10_l112_blastem_sms_diagnostic_boundary.json": {
+      "sha256": "5b33735048ce484e2d4ff5d3cbf6db7adb1bfa935e53ec78d08aefdbda1b088c",
+      "bytes": 2796
+    },
+    "doc/curation/2026-10-10_l113_animation_contract_minimum_principles.json": {
+      "sha256": "1b42aac7a0ff72b8706301854c27934208af7f0882a5cf201d40ca9270c693c7",
+      "bytes": 4799
+    },
+    "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json": {
+      "sha256": "683fabdb9a7c59b1fb78b9bb9c463f456ed6f0392c0c550d44b351a227bf6ecf",
+      "bytes": 12125
+    },
+    "doc/curation/2026-10-10_l121_sms_asset_to_rom_conversion.json": {
+      "sha256": "36889a4c155325a90d4b31e1f3af2d406218f87db3a83c3b40b0ec11b4a77e3b",
+      "bytes": 6318
+    },
+    "doc/curation/2026-10-10_l122_aprovacao_fonte_61_poses_janela_patterns.json": {
+      "sha256": "60564c0838013a0012ae2271c060863d3f8baea1bb61a40afead5dc34c2eba5f",
+      "bytes": 6236
+    },
+    "doc/curation/2026-10-10_l123_ciclo_arte_autoral_ate_rom.json": {
+      "sha256": "694e6815251a5da4df991ccab7903e4a53d49910999cc5fff0baa5dc5947dc29",
+      "bytes": 5204
+    },
+    "doc/curation/2026-10-10_l124_fluxo_sombra_material_sprite.json": {
+      "sha256": "c4cb69a120a4124e3ca484c01c8244f88ba4deca48c2363f71d3481aa696e38a",
+      "bytes": 21952
+    },
+    "doc/curation/2026-10-10_l125_l126_harness_artifact_and_raster.json": {
+      "sha256": "3d1bd6fd54dd94becf7153143665c89d66c8ab84d24b1091c96bf39a9e4b498e",
+      "bytes": 5684
+    },
+    "doc/curation/2026-10-11_l127_model_sheet_revision_promotion.json": {
+      "sha256": "5d4db13b568dfdbcad6c89682bbda5fdc32b6d6fa97f4a50a2aa12582b93b8e2",
+      "bytes": 4667
+    },
+    "doc/curation/2026-10-13_l128_sat_terminator_192_only.json": {
+      "sha256": "59f052d10ac5283cdb1a68dc9015c71d8b4c24ff66776dc556f3bb2081c43ed5",
+      "bytes": 2675
+    },
+    "doc/curation/2026-10-13_l129_sprite_buffer_fill_and_stored_y.json": {
+      "sha256": "65d6d862af7ade9c8cd27ff3c38d8e808940b743ede5810c486e49cf5695e562",
+      "bytes": 3691
+    },
+    "doc/curation/id_registry.json": {
+      "sha256": "86fdc0f52ed637cb34fa0ca494fda8d8aa6c0cd5f67cbd0e1f5eeeb9a4b8ba52",
+      "bytes": 540
+    },
+    "tools/sms_wrapper/.agent/ARCHITECTURE.md": {
+      "sha256": "5d9b2a41bbe2344fe616d8d41b1349f2bcdfee2707dbe6ef224e5030daf87ac7",
+      "bytes": 5257
+    },
+    "tools/sms_wrapper/.agent/agents/sms-audio-engineer.md": {
+      "sha256": "9ab48fc051d73ff3b2f5106482c85a3219aa964fd43fee5d6c8b81b366aa06c0",
+      "bytes": 655
+    },
+    "tools/sms_wrapper/.agent/agents/sms-game-director.md": {
+      "sha256": "0a45b56de4d9962dc2f53ed5b9a4978b0f5e1d0c6b52f9955b3fb63c04bac28d",
+      "bytes": 666
+    },
+    "tools/sms_wrapper/.agent/agents/sms-hardware-budget-guardian.md": {
+      "sha256": "8be933411145578af576d8b1a6cf0f0b7c4acc6de7f8c9ab006bd2c9b3c487f3",
+      "bytes": 751
+    },
+    "tools/sms_wrapper/.agent/agents/sms-pixel-engineer.md": {
+      "sha256": "13952aaa3fed7a79a8624c0170f779fe80801b9296d4dc74a3269557e58c01fc",
+      "bytes": 788
+    },
+    "tools/sms_wrapper/.agent/agents/sms-qa-emulator-tester.md": {
+      "sha256": "8492aa8d5bc88fbc7b5f9c02be0c48811aab8eaec72ea3a30a4c92ae0ce55e69",
+      "bytes": 1477
+    },
+    "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md": {
+      "sha256": "affe828eb192bec0f8d94ac4d17d9edc115f6f0c4862d5c81e00d86539484e1d",
+      "bytes": 143274
+    },
+    "tools/sms_wrapper/.agent/skills/sms-region-timing.md": {
+      "sha256": "a33306adbb2b207ccd7365b9a9110c22e8c97b42680f4ee3b68597fb6bed26b4",
+      "bytes": 681
+    },
+    "tools/sms_wrapper/.agent/skills/evidence-protocol.md": {
+      "sha256": "bf9ffa60286ea885e974179f082270442d3c6d8808fb8ed277c02a9b7851d546",
+      "bytes": 3096
+    },
+    "tools/sms_wrapper/.agent/skills/game-design-core-loop.md": {
+      "sha256": "449b1260fc01231249b3c99d6dd2569747332b1276cd271047d2ede3055b8bd8",
+      "bytes": 1071
+    },
+    "tools/sms_wrapper/.agent/skills/sms-asset-pipeline.md": {
+      "sha256": "076c32e8c65695d0f89253567043f4e8801d55906c5667b859a88a9c270eef1c",
+      "bytes": 2311
+    },
+    "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md": {
+      "sha256": "4a7d09f0197b74c475b7a9fb834765a3c53ead99557d47daa145275d76386265",
+      "bytes": 9804
+    },
+    "tools/sms_wrapper/.agent/skills/sms-banking-header.md": {
+      "sha256": "91c72324e4acb57ca7ca677f0f64f9aac1a789bd8054ee628293d20102aac5f9",
+      "bytes": 813
+    },
+    "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md": {
+      "sha256": "da1d932094004d9bacaa4988ef0a621a79a1c0a7ac84a50dbaf51e130dd28181",
+      "bytes": 3347
+    },
+    "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md": {
+      "sha256": "ca4bb10ae636c23671333a81c4af87d756a65e83377d2d9cf55b70ad85902e2f",
+      "bytes": 3758
+    },
+    "tools/sms_wrapper/.agent/skills/sms-gameplay-experience-review.md": {
+      "sha256": "48056f7402ce9822c1491cd78cf6ccdaaa911a5a388a61ef240a95a83ddbae14",
+      "bytes": 1254
+    },
+    "tools/sms_wrapper/.agent/skills/sms-harness-orchestration.md": {
+      "sha256": "eb001a783e5e1d8e61dfeef9cd891970f84cd191af5ecdb5fc221d95bc3c404e",
+      "bytes": 3126
+    },
+    "tools/sms_wrapper/.agent/skills/sms-input-pause.md": {
+      "sha256": "b991d58e8527d6e4f2202301d6bbabc94451ec88faebf2a14d3738b76cbc04a6",
+      "bytes": 1550
+    },
+    "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md": {
+      "sha256": "81f5a392d07512570212d3f56247937234b48aa089f2d932d0e34e1601cffc1f",
+      "bytes": 5512
+    },
+    "tools/sms_wrapper/.agent/skills/sms-palette-codes.md": {
+      "sha256": "15a078c9be2c652652023d495e44b0f4c47810d16f4fbcdb651c4088d58f2a1b",
+      "bytes": 928
+    },
+    "tools/sms_wrapper/.agent/skills/sms-pixel-strict-rules.md": {
+      "sha256": "350bd17e551e253f0e85a96c389b9728ba53658cf0d3b4e4b9d62f27af79a0d1",
+      "bytes": 1237
+    },
+    "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md": {
+      "sha256": "f0c07d1f9448be36f2226084912bbd8b5cb90eba5c988fd7500569a4f83262bf",
+      "bytes": 6631
+    },
+    "tools/sms_wrapper/.agent/skills/sms-psg-audio.md": {
+      "sha256": "31c618a466af2bfb17217df6c96e1698604fcea911735a038fc2de41750980ad",
+      "bytes": 1785
+    },
+    "tools/sms_wrapper/.agent/skills/sms-psg-composition.md": {
+      "sha256": "2869e940175ff2de97dd4cdbd2cdaae559dbd8e3838c9bfb6ae72183cf4bae15",
+      "bytes": 4955
+    },
+    "tools/sms_wrapper/.agent/skills/sms-recipe-animacao-impacto.md": {
+      "sha256": "4186be61648bf1c0c1a7119dcde44b4ad19cd399d8e872f5ad54c85b3fdc3348",
+      "bytes": 6331
+    },
+    "tools/sms_wrapper/.agent/skills/sms-recipe-asset-a-rom.md": {
+      "sha256": "357924026ecaefa22c27c6d50dfd042ea9574ca396f28899c59ac11c65ee4b5f",
+      "bytes": 6930
+    },
+    "tools/sms_wrapper/.agent/skills/sms-recipe-combate-1v1.md": {
+      "sha256": "3ba6478944c4b6365f6e6b536538dd4cf0fb452e54cd90ddb64d2ea133200df9",
+      "bytes": 6124
+    },
+    "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md": {
+      "sha256": "137c58eebbce9beac23aa8d37858ebdcae84ffcf51bd1be71ef3228083438ab0",
+      "bytes": 3333
+    },
+    "tools/sms_wrapper/.agent/skills/sms-score-banking.md": {
+      "sha256": "dcce02f12da7f7a07ce27cdbc4ff92ef92f5df56c66a5d66dca9996c5bd8e33b",
+      "bytes": 786
+    },
+    "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md": {
+      "sha256": "99f0543f52c23a3c56bd19e3ff8d82fff6f83ccd024e281f0c3f7853211605f4",
+      "bytes": 5112
+    },
+    "tools/sms_wrapper/.agent/skills/sms-sprite-geometry-modes.md": {
+      "sha256": "dd04422c575e102c987167e8de92f8c10ba9add4c081067e36c99d72906219d9",
+      "bytes": 2438
+    },
+    "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md": {
+      "sha256": "5d9f19675def73b94faad4d348947dfe268645a4b5b68ccce3ec53e1224e5cd4",
+      "bytes": 1239
+    },
+    "tools/sms_wrapper/.agent/skills/sms-state-transitions.md": {
+      "sha256": "e6b8b71f2cc259558c740d58dfae38285a65e90ed6ea22679d4318d407d1da17",
+      "bytes": 3370
+    },
+    "tools/sms_wrapper/.agent/skills/sms-tile-occupancy.md": {
+      "sha256": "b0dbffa3c041f2fc408ffe7ab618e72bac8d47898f42f5d337ffd08a1a97d044",
+      "bytes": 456
+    },
+    "tools/sms_wrapper/.agent/skills/sms-vdp-budget-analyst.md": {
+      "sha256": "99008588ef5c5e6620766aff0f08126d71bff63dc6216df10a137ef72d4ad50d",
+      "bytes": 1264
+    },
+    "tools/sms_wrapper/.agent/skills/sms-vdp-tiles.md": {
+      "sha256": "4ba307e6af7371eea997584c1e003c505deb3ef7b0e797ae88e30ad7cca7269e",
+      "bytes": 1300
+    },
+    "tools/sms_wrapper/.agent/skills/sms-video-evidence.md": {
+      "sha256": "1401531b590b99645c0b3a91bef3a93b975445e6557e64d4b881846c09cbfc01",
+      "bytes": 3853
+    },
+    "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md": {
+      "sha256": "f6174f20a0a2ff9c65e87287f3284f04f6490c63c049f4226dfe3aade57e7846",
+      "bytes": 9998
+    },
+    "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md": {
+      "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b",
+      "bytes": 2127
+    },
+    "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md": {
+      "sha256": "65632b02db5ede0ff62b9a27efe275e4505e2c4c363d3304624cc3fc90cfb4cf",
+      "bytes": 1929
+    },
+    "tools/sms_wrapper/.agent/workflows/agent-session-bootstrap.md": {
+      "sha256": "fdbefacabe538ce7311869834165d4e7d8a9761327a01ae05f97a72502147ee9",
+      "bytes": 1007
+    },
+    "tools/sms_wrapper/.agent/workflows/analyze-existing-project.md": {
+      "sha256": "764a534dd9030b72714172cac5520240030f2b1d069e4c89ac3bfbe2f82419fe",
+      "bytes": 1612
+    },
+    "tools/sms_wrapper/.agent/workflows/art-review.md": {
+      "sha256": "05e60981e29f77352a94bcd0d036a0b70a14b434114cfaf33b88285d75f18c7e",
+      "bytes": 15197
+    },
+    "tools/sms_wrapper/.agent/workflows/artifact-organization.md": {
+      "sha256": "7e9b1e5ea96b301e9f04eae4e92e30438f676ad8fd2be376caf09f5156ac2b2c",
+      "bytes": 7293
+    },
+    "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md": {
+      "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+      "bytes": 8525
+    },
+    "tools/sms_wrapper/.agent/workflows/async-promotion-loop.md": {
+      "sha256": "b686e9e87bb1444e9979a8faf18f15e69893306ead17afae8b97e8abad637f58",
+      "bytes": 3603
+    },
+    "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md": {
+      "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+      "bytes": 15365
+    },
+    "tools/sms_wrapper/.agent/workflows/causal-persistence-loop.md": {
+      "sha256": "fc0490786362e9c4d76cf690fd7ca21d35320135ac4b581eb33c6496e0c54923",
+      "bytes": 2544
+    },
+    "tools/sms_wrapper/.agent/workflows/curation-learning.md": {
+      "sha256": "7a90474c791e7e465ae11f0f3d1363b495e49b9608089d9f90ece080d7133eb5",
+      "bytes": 2737
+    },
+    "tools/sms_wrapper/.agent/workflows/curation-mode.md": {
+      "sha256": "da5f9ee0a28efb1a2267ed6404ce4b698a2027b0a1021e112b04b8d2f794577c",
+      "bytes": 1701
+    },
+    "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md": {
+      "sha256": "7218ac0bee50f8a346fe20788be9a5cde817818a38b7de934d3c62f18fd0a333",
+      "bytes": 3561
+    },
+    "tools/sms_wrapper/.agent/workflows/first-playable-slice.md": {
+      "sha256": "d5bfe8723247682e06d2da6c0f3fac7a652df7f6941592f3f81bfd5dd179f455",
+      "bytes": 3757
+    },
+    "tools/sms_wrapper/.agent/workflows/independent-quality-review.md": {
+      "sha256": "a633e365072819f9f623a012b7efc912dc9024a2b8aaa04e73f20555a12cf004",
+      "bytes": 1928
+    },
+    "tools/sms_wrapper/.agent/workflows/laboratory-mode.md": {
+      "sha256": "1db01d7a8853a216ce5830378be1c581e67acecdac94b6a10a444e97a77a8ddd",
+      "bytes": 1601
+    },
+    "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md": {
+      "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b",
+      "bytes": 9574
+    },
+    "tools/sms_wrapper/.agent/workflows/new-audio.md": {
+      "sha256": "f2171c25a7b3ad701bf21f570d89ef600542fd3cdf0feae3af544e157f4674c2",
+      "bytes": 604
+    },
+    "tools/sms_wrapper/.agent/workflows/new-project.md": {
+      "sha256": "808fda45f22493e06318856bd81a49d93c1aa51e6fbc431405e1da0d4e6ae6be",
+      "bytes": 1102
+    },
+    "tools/sms_wrapper/.agent/workflows/new-scene.md": {
+      "sha256": "d676f0b934e7f58c4abe63a478394d6ee0fa583a27cef1766244a9f50bfc0c52",
+      "bytes": 1219
+    },
+    "tools/sms_wrapper/.agent/workflows/new-visual-asset.md": {
+      "sha256": "f36f16cdaedf4d22306e6d32d0f8aee22da44b0aba0101b2ad510d4645f04780",
+      "bytes": 9167
+    },
+    "tools/sms_wrapper/.agent/workflows/original-artwork.md": {
+      "sha256": "e3c3af1b107f6b3ff2a6095d0e9802dcca90cf3d0bd62e928a335615cf4611d2",
+      "bytes": 11163
+    },
+    "tools/sms_wrapper/.agent/workflows/perspective-switch-gate.md": {
+      "sha256": "5cad66b5d2ccd5ba60f8476e8dfaa52fef9f5a12b02f9702ce1655c014fb4e19",
+      "bytes": 402
+    },
+    "tools/sms_wrapper/.agent/workflows/production-loop.md": {
+      "sha256": "7aacda159733c031e28830e0f067b35cc9ca9972c65aaf2cfa8a71339fb639fa",
+      "bytes": 3573
+    },
+    "tools/sms_wrapper/.agent/workflows/release-rom.md": {
+      "sha256": "00108f39f23d6a244f814569dfbd10562fe4a159202846112803ac13e0ac3845",
+      "bytes": 2927
+    },
+    "tools/sms_wrapper/.agent/workflows/subagent-emulator-qa.md": {
+      "sha256": "2b7c2b3942180d5dfbe975bd0f0d570cbb78befaf3a2c9cd10c097ffdabf7e3d",
+      "bytes": 9405
+    },
+    "tools/sms_wrapper/.agent/workflows/train-agent.md": {
+      "sha256": "4e4a368c03784cabc393dfb8a8a1ae430d533e60b7ac5467332efbe7471877ef",
+      "bytes": 1447
+    },
+    "tools/sms_wrapper/.agent/pipelines/aaa_scene_v1.json": {
+      "sha256": "8e44a206197645e34b3374afecfcb24244348277c84f98ca93da4a5156ffe64f",
+      "bytes": 2170
+    },
+    "tools/sms_wrapper/.agent/pipelines/game_production_v1.json": {
+      "sha256": "1b77589720acba48772661a3b245c8814a11805ea8da769e43484203a0ee0278",
+      "bytes": 679
+    },
+    "tools/sms_wrapper/.agent/pipelines/mugen_fighting_v1.json": {
+      "sha256": "91327395b371903532a60df5b147fe4267718af6c742ad583ecf5341c66abb95",
+      "bytes": 4098
+    },
+    "tools/sms_wrapper/.agent/pipelines/quality_review_v1.json": {
+      "sha256": "97591e96c44d4cd7e1f8b06c379b2a4cdf1354341c34170371a0414af10a5e3f",
+      "bytes": 1063
+    },
+    "tools/sms_wrapper/.agent/pipelines/vibe_playable_loop_v1.json": {
+      "sha256": "97592c672a16df0cc6f547077f3fd4a9bf85da651dc4ad81b89d2eaf305030dc",
+      "bytes": 713
+    },
+    "doc/agent_learning/lesson_routes.json": {
+      "sha256": "48ea3fc1a0aae7a0b7b10ba354662c31ff73e89c53f5ec8f576e23ba85ce7b67",
+      "bytes": 181966
+    },
+    "doc/agent_learning/learning_ledger.json": {
+      "sha256": "53cfb632be7be9c6dcf60fbf17ceec42bf4aec53a46dc2c5f1c2511f5238db76",
+      "bytes": 67523
+    },
+    "AGENTS.md": {
+      "sha256": "9f36f4100e515302ad83ef5e65011cffc07934cba2426374c319da4a0e8cd9e6",
+      "bytes": 18577
+    },
+    "tools/sms_wrapper/audit_sprite_line_sim.py": {
+      "sha256": "9c35c091c30699aedb7588098b2b16e2fc3e02b41695ae1f0a19edd6ae210004",
+      "bytes": 10988
+    },
+    "tools/sms_wrapper/emulicious_dap.py": {
+      "sha256": "73926ac57f781186835d7c27f5a85538cec9f94347584a7d72442b25ba12bda6",
+      "bytes": 9143
+    },
+    "tools/sms_wrapper/measure_runtime_probe.py": {
+      "sha256": "c56794ca7fc3c96f0cc661e5e4fabd1aecf190de04138c26ceb5dc9a13bdb6e6",
+      "bytes": 20301
+    },
+    "tools/sms_wrapper/measure_frame_advance.py": {
+      "sha256": "4ffd4c11409e57c9542225b22bdcf055423e9fea558cb979f49ec12fefdf6142",
+      "bytes": 37039
+    },
+    "tools/sms_wrapper/measure_worst_frame.py": {
+      "sha256": "874a32ffcfc3b53cbfea249be8c4264ed626b855f39b9569db80f63d008dd7da",
+      "bytes": 41758
+    },
+    "tools/sms_wrapper/audit_claims.py": {
+      "sha256": "9383133de2002232f237b9024fbce08447717fe916558fc138c14bcb35ffea25",
+      "bytes": 3828
+    },
+    "tools/sms_wrapper/quality_review_router.py": {
+      "sha256": "b07ce19cd7b307616f48f0432ebbaeb0445e69aa13bc12896507344af6445421",
+      "bytes": 11858
+    },
+    "tools/sms_wrapper/audit_audio.py": {
+      "sha256": "9a246f8e77c0d05e56f9ae05a65c888b4cf4eed5f675b5dfe81472adcac3ae26",
+      "bytes": 6041
+    },
+    "tools/sms_wrapper/audit_psg_quality.py": {
+      "sha256": "21e40452056a2156a345124a3b91e4aa251c576dec3cea15bbf9bbe8ea20810b",
+      "bytes": 21002
+    },
+    "tools/sms_wrapper/capture_audio.py": {
+      "sha256": "263e65753642b150bc1a6cf866400a3894b7f650c027db0fc4e2df2abe83b742",
+      "bytes": 15840
+    },
+    "tools/sms_wrapper/emulator_input.py": {
+      "sha256": "40e16f3273f00ebca8594fdc6c932e00e791aec94bba12964612f1df4ae8a797",
+      "bytes": 11821
+    },
+    "tools/sms_wrapper/pack_sms_metasprite.py": {
+      "sha256": "f59c0b0c0ba55fd3024a3e57aa03e88d0377516d9958716ada2c58b52cf6132d",
+      "bytes": 15634
+    },
+    "tools/sms_wrapper/audit_learning_capture.py": {
+      "sha256": "2ee7c12f711d14b68d9c657d95529416ad28ffe44493f002e9a9130ad10fd306",
+      "bytes": 20096
+    },
+    "tools/sms_wrapper/audit_doc_sync.py": {
+      "sha256": "07bc09e5c94e07f7f8acc811dd1b136e8ad35e1f19a63e4fe40f233d4f3e2641",
+      "bytes": 11666
+    },
+    "tools/sms_wrapper/audit_hardware_constants.py": {
+      "sha256": "85256e295445e087de9d2eb1c117566221b8583fa1d0161db2e97b4fbd52c567",
+      "bytes": 14388
+    },
+    "tools/sms_wrapper/schemas/asset_contract_v1.schema.json": {
+      "sha256": "5988546735e258880e31ace4dfaf3c2972a4e23c2a8ac62bfefd650d01a5caea",
+      "bytes": 730
+    },
+    "tools/sms_wrapper/schemas/asset_provenance_manifest_v1.schema.json": {
+      "sha256": "c674c9dc2cd14a97745630e3fbd3daf706ddf043c082f7ba67052320bc4f05c0",
+      "bytes": 862
+    },
+    "tools/sms_wrapper/schemas/emulator_evidence_v1.schema.json": {
+      "sha256": "984d52c0278022dbd03cc744100c4f2cb3e9f0005354083475ebe0cbed42bc21",
+      "bytes": 653
+    },
+    "tools/sms_wrapper/schemas/learning_ledger_entry_v1.schema.json": {
+      "sha256": "0fb79bec31ea7daf4ff5d54eabff5ec39be8b8f7fed5175606356f1d6fe5d221",
+      "bytes": 606
+    },
+    "tools/sms_wrapper/schemas/project_manifest_v1.schema.json": {
+      "sha256": "b1aec0ead82859cfb9fca4c623a7b32e2e58366b702d64d35ccaaacdae8553bb",
+      "bytes": 489
+    },
+    "tools/sms_wrapper/schemas/promotion_claim_v1.schema.json": {
+      "sha256": "0f3199b788224fcf428512963756dc7077c12de55b26613d2b2beb310b83b427",
+      "bytes": 577
+    },
+    "tools/sms_wrapper/schemas/rom_asset_binding_v1.schema.json": {
+      "sha256": "d57cb6aba6924820ff495023aa1fa684686eb45c241c860f16f1c376976be968",
+      "bytes": 762
+    },
+    "tools/sms_wrapper/schemas/rom_build_record_v1.schema.json": {
+      "sha256": "c78b6d55d25d9bca72121e0752ada16851cb558388b957f30aa1f97ed6e61bce",
+      "bytes": 562
+    },
+    "tools/sms_wrapper/schemas/runtime_metrics_v1.schema.json": {
+      "sha256": "4942abb0e4fcae378e19751c16cc81a461b0ada4236e76d18618e3e3cb1daf20",
+      "bytes": 2625
+    },
+    "tools/sms_wrapper/schemas/scene_budget_v1.schema.json": {
+      "sha256": "3e67e3cec25f1014eab60678d7132440be512a8607d75d9e5c3cf8eea62fa056",
+      "bytes": 821
+    },
+    "tools/sms_wrapper/schemas/sprite_scene_manifest_v1.schema.json": {
+      "sha256": "6eb23f42838029323a32e4b33ebb12fc2aea4bccbd7243a038f25d9a313ce34b",
+      "bytes": 1138
+    },
+    "tools/sms_wrapper/schemas/status_axes_v1.schema.json": {
+      "sha256": "33d86f354bfcd4d0c63a69e17fdc489793a7c2e26b109ffe4b0c2866672e68dd",
+      "bytes": 1110
+    },
+    "tools/sms_wrapper/schemas/visual_delivery_contract_v1.schema.json": {
+      "sha256": "4e24000ec7ac344f723aee40aec46bf574cac7882bebc26014ea4cc5b56b6cbb",
+      "bytes": 1042
+    }
+  },
+  "read_errors": [],
+  "curation_records": 68,
+  "issued_through": "L129",
+  "emitted_lessons": 113,
+  "lesson_routes": 113,
+  "ledger_entries": 81,
+  "duplicates": [],
+  "coverage": [
+    {
+      "lesson_id": "L001",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §7, §32",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vdp-budget-analyst.md",
+        "tools/sms_wrapper/.agent/workflows/new-scene.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L002",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §20, §19",
+      "status": null,
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/workflows/release-rom.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L003",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §23",
+      "status": "fechada_com_evidencia",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/laboratory-mode.md"
+      ],
+      "declared_limit": "Hardware revisions SMS1/SMS2 not universally qualified."
+    },
+    {
+      "lesson_id": "L004",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §23",
+      "status": null,
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L005",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §23, §14",
+      "status": null,
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L006",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §7 (metasprite em vez de TALL 16x16)",
+      "status": "fechada_com_evidencia",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-sprite-geometry-modes.md",
+        "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L007",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §19, §30, §34",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L008",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §28, §30, §34",
+      "status": "fechada_com_correcao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L009",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §10, §23, §33",
+      "status": "fechada_com_evidencia",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L010",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §23",
+      "status": "escopada_com_evidencia",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L011",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §35",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vdp-tiles.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L013",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §31, §36",
+      "status": "fechada_com_ferramenta_e_refutacao_parcial",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L014",
+      "record": "doc/curation/2026-08-25_fundacao.json",
+      "rule": "SMS_GLOBAL §23, §24",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/laboratory-mode.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L015",
+      "record": "doc/curation/2026-08-31_l006_geometria_sprite.json",
+      "rule": "SMS_GLOBAL §27",
+      "status": "fechada_com_evidencia",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-sprite-geometry-modes.md",
+        "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L016",
+      "record": "doc/curation/2026-08-31_l006_geometria_sprite.json",
+      "rule": "SMS_GLOBAL §28",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L017",
+      "record": "doc/curation/2026-08-31_l006_geometria_sprite.json",
+      "rule": "SMS_GLOBAL §30",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L018",
+      "record": "doc/curation/2026-08-31_l006_geometria_sprite.json",
+      "rule": "SMS_GLOBAL §29",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L019",
+      "record": "doc/curation/2026-08-31_l006_geometria_sprite.json",
+      "rule": "SMS_GLOBAL §31",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L035",
+      "record": "doc/curation/2026-09-04_l035_canal_runtime.json",
+      "rule": "SMS_GLOBAL §37 (novo) + corolario no §33 + fix §29 no capture_evidence",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L036",
+      "record": "doc/curation/2026-09-06_l036_autonomia_visual_epoch.json",
+      "rule": "SMS_GLOBAL §38–§41",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-harness-orchestration.md",
+        "tools/sms_wrapper/.agent/workflows/causal-persistence-loop.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L037",
+      "record": "doc/curation/2026-09-06_l036_autonomia_visual_epoch.json",
+      "rule": "SMS_GLOBAL §42",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L038",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §29",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L039",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §29, §34",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L040",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §29",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L041",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §12",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/new-audio.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L042",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §39",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L043",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §6",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L044",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §33",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/causal-persistence-loop.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L045",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §10",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": "Measured STREAM_BYTES thresholds are historical ROM/host observations, not hardware limits."
+    },
+    {
+      "lesson_id": "L046",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §6",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-region-timing.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L047",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §9",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L048",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §31",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L049",
+      "record": "doc/curation/2026-09-06_l038_l049_absorcao.json",
+      "rule": "SMS_GLOBAL §39",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L050",
+      "record": "doc/curation/2026-09-06_l050_l054_absorcao.json",
+      "rule": "SMS_GLOBAL §10",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/game-design-core-loop.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L051",
+      "record": "doc/curation/2026-09-06_l050_l054_absorcao.json",
+      "rule": "SMS_GLOBAL §12",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/new-audio.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L052",
+      "record": "doc/curation/2026-09-06_l050_l054_absorcao.json",
+      "rule": "SMS_GLOBAL §44",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-asset-pipeline.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L053",
+      "record": "doc/curation/2026-09-06_l050_l054_absorcao.json",
+      "rule": "SMS_GLOBAL §38",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L054",
+      "record": "doc/curation/2026-09-06_l050_l054_absorcao.json",
+      "rule": "SMS_GLOBAL §37",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L055",
+      "record": "doc/curation/2026-09-07_l055_pixel_translate.json",
+      "rule": "SMS_GLOBAL §8, §32",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L056",
+      "record": "doc/curation/2026-09-07_l056_video_evidencia.json",
+      "rule": "SMS_GLOBAL §45 (e §34, §36)",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-video-evidence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L057",
+      "record": "doc/curation/2026-09-07_l057_sessao_emulador.json",
+      "rule": "SMS_GLOBAL §46 (e §34, L017)",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L058",
+      "record": "doc/curation/2026-09-07_l058_l059_audio_provenancia.json",
+      "rule": "SMS_GLOBAL §47",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/new-audio.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L059",
+      "record": "doc/curation/2026-09-07_l058_l059_audio_provenancia.json",
+      "rule": "SMS_GLOBAL §47",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/new-audio.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L060",
+      "record": "doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json",
+      "rule": "SMS_GLOBAL §48",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L061",
+      "record": "doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json",
+      "rule": "SMS_GLOBAL §49",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L062",
+      "record": "doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json",
+      "rule": "SMS_GLOBAL §50",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-video-evidence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L063",
+      "record": "doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json",
+      "rule": "SMS_GLOBAL §51",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L064",
+      "record": "doc/curation/2026-09-08_l060_l064_ciclo_mssf2t.json",
+      "rule": "SMS_GLOBAL §51",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/workflows/release-rom.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L065",
+      "record": "doc/curation/2026-09-19_l065_l068_qcf_harness.json",
+      "rule": "SMS_GLOBAL §52",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L066",
+      "record": "doc/curation/2026-09-19_l065_l068_qcf_harness.json",
+      "rule": "SMS_GLOBAL §52",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L067",
+      "record": "doc/curation/2026-09-19_l065_l068_qcf_harness.json",
+      "rule": "SMS_GLOBAL §52",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L068",
+      "record": "doc/curation/2026-09-19_l065_l068_qcf_harness.json",
+      "rule": "SMS_GLOBAL §53",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/workflows/release-rom.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L069",
+      "record": "doc/curation/2026-09-24_l069_header_claims.json",
+      "rule": "SMS_GLOBAL §54",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vdp-tiles.md",
+        "tools/sms_wrapper/.agent/skills/sms-vdp-budget-analyst.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L070",
+      "record": "doc/curation/2026-09-24_l069_header_claims.json",
+      "rule": "SMS_GLOBAL §55",
+      "status": "absorvida_em_doutrina",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vdp-tiles.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L071",
+      "record": "doc/curation/2026-09-25_l071_l073_reconciliacao.json",
+      "rule": "SMS_GLOBAL §56",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L072",
+      "record": "doc/curation/2026-09-25_l071_l073_reconciliacao.json",
+      "rule": "SMS_GLOBAL §57",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L073",
+      "record": "doc/curation/2026-09-25_l071_l073_reconciliacao.json",
+      "rule": "SMS_GLOBAL §58",
+      "status": "absorvida_em_doutrina",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-recipe-asset-a-rom.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L074",
+      "record": "doc/curation/2026-09-25_l074_l076_receitas.json",
+      "rule": "SMS_GLOBAL §59",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-recipe-combate-1v1.md"
+      ],
+      "declared_limit": "Combat timing recipe is snapshot of one donor; gameplay improvements remain separately measured."
+    },
+    {
+      "lesson_id": "L075",
+      "record": "doc/curation/2026-09-25_l074_l076_receitas.json",
+      "rule": "SMS_GLOBAL §60",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-recipe-animacao-impacto.md"
+      ],
+      "declared_limit": "Receipt includes explicit animation/impact debt; not full-game quality."
+    },
+    {
+      "lesson_id": "L076",
+      "record": "doc/curation/2026-09-25_l074_l076_receitas.json",
+      "rule": "SMS_GLOBAL §61",
+      "status": "absorvida_em_skill",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-recipe-asset-a-rom.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L077",
+      "record": "doc/curation/2026-09-25_l077_gate_sem_contrato.json",
+      "rule": "SMS_GLOBAL §62",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L078",
+      "record": "doc/curation/2026-09-25_l078_l079_piso_audio_psg.json",
+      "rule": "SMS_GLOBAL §63",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/new-audio.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L079",
+      "record": "doc/curation/2026-09-25_l078_l079_piso_audio_psg.json",
+      "rule": "SMS_GLOBAL §64",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/new-audio.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L080",
+      "record": "doc/curation/2026-09-25_l080_l081_andamento_transcricao_gate_cego.json",
+      "rule": "SMS_GLOBAL §65",
+      "status": "fechada_com_ferramenta_e_recomposicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/new-audio.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L081",
+      "record": "doc/curation/2026-09-25_l080_l081_andamento_transcricao_gate_cego.json",
+      "rule": "SMS_GLOBAL §66",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+        "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+        "tools/sms_wrapper/.agent/workflows/new-audio.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L082",
+      "record": "doc/curation/2026-09-26_l082_vcounter_vblank_deadline.json",
+      "rule": "SMS_GLOBAL §67",
+      "status": "fechada_com_ferramenta_e_medicao_corrigida",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L083",
+      "record": "doc/curation/2026-09-26_l083_mugen_engine_contract.json",
+      "rule": "SMS_GLOBAL §68",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L084",
+      "record": "doc/curation/2026-09-26_l084_makesms_merge_limit.json",
+      "rule": "SMS_GLOBAL §69",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L085",
+      "record": "doc/curation/2026-09-26_l085_nested_measurement_discovery.json",
+      "rule": "SMS_GLOBAL §70",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/curation-learning.md",
+        "tools/sms_wrapper/.agent/workflows/release-rom.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L086",
+      "record": "doc/curation/2026-09-26_l086_metasprite_mirror_pivot.json",
+      "rule": "SMS_GLOBAL §71",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L087",
+      "record": "doc/curation/2026-09-26_l087_nested_learning_tool.json",
+      "rule": "SMS_GLOBAL §72",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/curation-learning.md",
+        "tools/sms_wrapper/.agent/workflows/release-rom.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L088",
+      "record": "doc/curation/2026-09-26_l088_palette_metasprite_binding.json",
+      "rule": "SMS_GLOBAL §73",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L089",
+      "record": "doc/curation/2026-09-26_l089_worst_frame_wait_slow_rom.json",
+      "rule": "SMS_GLOBAL §74",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L090",
+      "record": "doc/curation/2026-09-29_l090_l091_idle_slot_period_render_glitch.json",
+      "rule": "SMS_GLOBAL §75",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L091",
+      "record": "doc/curation/2026-09-29_l090_l091_idle_slot_period_render_glitch.json",
+      "rule": "SMS_GLOBAL §76",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L092",
+      "record": "doc/curation/2026-09-30_l092_render_glitch_background_mask.json",
+      "rule": "SMS_GLOBAL §77",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L093",
+      "record": "doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json",
+      "rule": "SMS_GLOBAL §78",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L094",
+      "record": "doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json",
+      "rule": "SMS_GLOBAL §79",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L095",
+      "record": "doc/curation/2026-09-30_l093_l095_assimilacao_sgdk_controle_sms.json",
+      "rule": "SMS_GLOBAL §80",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
+        "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L096",
+      "record": "doc/curation/2026-09-30_l096_trace_compare_zip.json",
+      "rule": "SMS_GLOBAL §81",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L097",
+      "record": "doc/curation/2026-09-30_l097_produtor_trilha_dap.json",
+      "rule": "SMS_GLOBAL §82",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/production-loop.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": "Diagnostic ROM traces do not establish real-host input or continuous FPS."
+    },
+    {
+      "lesson_id": "L098",
+      "record": "doc/curation/2026-10-01_l098_atraso_de_pose_visivel.json",
+      "rule": "SMS_GLOBAL §83",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/production-loop.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": "Streaming latency measured in donor version, not AIR/input failure for all engines."
+    },
+    {
+      "lesson_id": "L099",
+      "record": "doc/curation/2026-10-01_l099_banda_de_upload_de_poses.json",
+      "rule": "SMS_GLOBAL §84",
+      "status": "fechada_com_ferramenta_regra_e_medicao",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/production-loop.md",
+        "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md"
+      ],
+      "declared_limit": "Upload band measured in donor version; not universal SMS ceiling."
+    },
+    {
+      "lesson_id": "L100",
+      "record": "doc/curation/2026-10-03_l100_paleta_sms_no_conceito.json",
+      "rule": "SMS_GLOBAL §85",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L101",
+      "record": "doc/curation/2026-10-03_l101_limpeza_granulacao_sprite.json",
+      "rule": "SMS_GLOBAL §86",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L102",
+      "record": "doc/curation/2026-10-03_l102_geometria_folha_sprite.json",
+      "rule": "SMS_GLOBAL §87",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md",
+        "tools/sms_wrapper/.agent/workflows/new-visual-asset.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L103",
+      "record": "doc/curation/2026-10-04_l103_fronteira_referencias_multimidia.json",
+      "rule": "SMS_GLOBAL §88",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/original-artwork.md",
+        "tools/sms_wrapper/.agent/workflows/curation-learning.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L104",
+      "record": "doc/curation/2026-10-04_l104_pixels_de_recorte_e_alvo_visual.json",
+      "rule": "SMS_GLOBAL §89",
+      "status": "fechada_com_ferramenta_e_regra",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L105",
+      "record": "doc/curation/2026-10-04_l105_harmonia_escala_roster.json",
+      "rule": "SMS_GLOBAL §90",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L106",
+      "record": "doc/curation/2026-10-04_l106_revisao_artistica_anatomia_e_equipamento.json",
+      "rule": "SMS_GLOBAL §91",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L107",
+      "record": "doc/curation/2026-10-05_l107_refino_pixelart_quadro_e_microeixos.json",
+      "rule": "SMS_GLOBAL §92",
+      "status": "fechada_com_ferramenta",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L108",
+      "record": "doc/curation/2026-10-08_l108_fluxo_arte_autoral_incremental.json",
+      "rule": "SMS_GLOBAL §102",
+      "status": "promovida_com_workflow_e_gate_de_cobertura",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/original-artwork.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L109",
+      "record": "doc/curation/2026-10-09_l109_prova_pose_pixels_hardware_animacao.json",
+      "rule": "SMS_GLOBAL §105",
+      "status": "promovida_com_gate_de_pixels_exatos_e_fluxo_documentado",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L110",
+      "record": "doc/curation/2026-10-09_l110_asset_bounds_gg_sms_scale.json",
+      "rule": "SMS_GLOBAL §106",
+      "status": "promovida_com_medicao_de_bordas_e_alvo_visual_documentado",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L111",
+      "record": "doc/curation/2026-10-09_l111_equipment_terminal_and_shared_sms_palette.json",
+      "rule": "SMS_GLOBAL §107; palette semantics corrected in §8 and §85",
+      "status": "regra_canonica_registrada_com_gate_de_contrato_e_review_humano_pendente_no_asset",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md"
+      ],
+      "declared_limit": "Equipment semantic review of asset remains pending despite rule/gate promotion."
+    },
+    {
+      "lesson_id": "L112",
+      "record": "doc/curation/2026-10-10_l112_blastem_sms_diagnostic_boundary.json",
+      "rule": "SMS_GLOBAL §108",
+      "status": "regra_canonica_com_evidencia_diagnostica_limitada",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L113",
+      "record": "doc/curation/2026-10-10_l113_animation_contract_minimum_principles.json",
+      "rule": "SMS_GLOBAL §109",
+      "status": "regra_canonica_registrada_com_gate_e_exercicio_proposto_nao_renderizado",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md",
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md"
+      ],
+      "declared_limit": "Animation exercise proposed/not rendered; gate checks structural coverage only."
+    },
+    {
+      "lesson_id": "L114",
+      "record": "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json",
+      "rule": "SMS_GLOBAL §110",
+      "status": "canonical_with_explicit_evidence_scope",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L115",
+      "record": "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json",
+      "rule": "SMS_GLOBAL §110",
+      "status": "canonical_with_explicit_evidence_scope",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "declared_limit": "Source inspection plus user-reported MD test; no independent Z80 GDB qualification."
+    },
+    {
+      "lesson_id": "L116",
+      "record": "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json",
+      "rule": "SMS_GLOBAL §110",
+      "status": "canonical_with_explicit_evidence_scope",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L117",
+      "record": "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json",
+      "rule": "SMS_GLOBAL §110",
+      "status": "canonical_with_explicit_evidence_scope",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "declared_limit": "CPU OUT sites with live opcode guard, not direct VDP watchpoints."
+    },
+    {
+      "lesson_id": "L118",
+      "record": "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json",
+      "rule": "SMS_GLOBAL §110",
+      "status": "canonical_with_explicit_evidence_scope",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L119",
+      "record": "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json",
+      "rule": "SMS_GLOBAL §110",
+      "status": "canonical_with_explicit_evidence_scope",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L120",
+      "record": "doc/curation/2026-10-10_l114_l120_blastem_advanced_diagnostics.json",
+      "rule": "SMS_GLOBAL §110",
+      "status": "canonical_with_explicit_evidence_scope",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+        "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md"
+      ],
+      "declared_limit": "Decoded diagnostic views exclude scroll/sprites/raster; net diffs not transfer counts."
+    },
+    {
+      "lesson_id": "L121",
+      "record": "doc/curation/2026-10-10_l121_sms_asset_to_rom_conversion.json",
+      "rule": "SMS_GLOBAL §111",
+      "status": "regra_canonica_registrada_com_ferramentas_e_prova_rom_diagnostica",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L122",
+      "record": "doc/curation/2026-10-10_l122_aprovacao_fonte_61_poses_janela_patterns.json",
+      "rule": "SMS_GLOBAL §112",
+      "status": "regra_canonica_registrada_com_guard_de_papel_sha_e_prova_rom_61_frames",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L123",
+      "record": "doc/curation/2026-10-10_l123_ciclo_arte_autoral_ate_rom.json",
+      "rule": "SMS_GLOBAL §113",
+      "status": "promovida_com_workflow_transversal_e_gates_por_etapa",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md"
+      ],
+      "declared_limit": null
+    },
+    {
+      "lesson_id": "L124",
+      "record": "doc/curation/2026-10-10_l124_fluxo_sombra_material_sprite.json",
+      "rule": "SMS_GLOBAL §114",
+      "status": "rule_promoted; conversion_v10_historical_candidate; owner_rejected_animation_source_v07_2026-10-12; project_rebuild_v08_pending",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md",
+        "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md"
+      ],
+      "declared_limit": "For Dr. Social v08, tools are read-only for pixel correction: verify manually annotated zones and report violations, never remap. User feedback is attached to L124; curator must decide whether to amend SMS_GLOBAL §114 and add a measured gate. Exact ROM render does not imply visual acceptance."
+    },
+    {
+      "lesson_id": "L125",
+      "record": "doc/curation/2026-10-10_l125_l126_harness_artifact_and_raster.json",
+      "rule": "SMS_GLOBAL §115",
+      "status": "fechada_com_ferramenta_e_revisao_independente",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-harness-orchestration.md",
+        "tools/sms_wrapper/.agent/workflows/artifact-organization.md"
+      ],
+      "declared_limit": "Organization/export consistency only; art, authentication and runtime require separate evidence"
+    },
+    {
+      "lesson_id": "L126",
+      "record": "doc/curation/2026-10-10_l125_l126_harness_artifact_and_raster.json",
+      "rule": "SMS_GLOBAL §116",
+      "status": "fechada_com_ferramenta_e_casos_reais",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-asset-pipeline.md",
+        "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md"
+      ],
+      "declared_limit": "Organization/export consistency only; art, authentication and runtime require separate evidence"
+    },
+    {
+      "lesson_id": "L127",
+      "record": "doc/curation/2026-10-11_l127_model_sheet_revision_promotion.json",
+      "rule": "SMS_GLOBAL §117",
+      "status": "promovida_com_workflows_e_gates_existentes",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/workflows/original-artwork.md",
+        "tools/sms_wrapper/.agent/workflows/art-review.md",
+        "tools/sms_wrapper/.agent/workflows/artifact-organization.md"
+      ],
+      "declared_limit": "Applies to concept/model sheet production and promotion. Registry/checklist hashes measure declared consistency; visual truth still requires independent review and owner decision. Approval does not extend to derived sprites or ROM."
+    },
+    {
+      "lesson_id": "L128",
+      "record": "doc/curation/2026-10-13_l128_sat_terminator_192_only.json",
+      "rule": "SMS_GLOBAL §118",
+      "status": "documentado_com_gate_estendido; sem medição em emulador ou console",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md"
+      ],
+      "declared_limit": "SMS VDP mode 4 sprite table. Corpus-derived; 224/240 silicon behaviour pending hardware_pass. Stored-Y offset convention of the simulator remains open (A2)."
+    },
+    {
+      "lesson_id": "L129",
+      "record": "doc/curation/2026-10-13_l129_sprite_buffer_fill_and_stored_y.json",
+      "rule": "SMS_GLOBAL §119",
+      "status": "documentado_com_gate_estendido; sem medição em emulador ou console",
+      "route_present": true,
+      "application_entrypoints": [
+        "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md",
+        "tools/sms_wrapper/.agent/skills/sms-vdp-budget-analyst.md"
+      ],
+      "declared_limit": "SMS VDP mode 4 sprite parsing and SMSlib Y convention. Gate measures the declared manifest only; runtime overflow flag unread; stored Y near 0xFF not modelled."
+    }
+  ],
+  "pipeline_references": [
+    {
+      "pipeline": "tools/sms_wrapper/.agent/pipelines/aaa_scene_v1.json",
+      "reference": "schemas/asset_contract_v1.schema.json",
+      "resolved": [
+        "tools/sms_wrapper/schemas/asset_contract_v1.schema.json"
+      ]
+    },
+    {
+      "pipeline": "tools/sms_wrapper/.agent/pipelines/aaa_scene_v1.json",
+      "reference": "schemas/scene_budget_v1.schema.json",
+      "resolved": [
+        "tools/sms_wrapper/schemas/scene_budget_v1.schema.json"
+      ]
+    },
+    {
+      "pipeline": "tools/sms_wrapper/.agent/pipelines/aaa_scene_v1.json",
+      "reference": "skills/sms-sprites-metasprite.md",
+      "resolved": [
+        "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md"
+      ]
+    },
+    {
+      "pipeline": "tools/sms_wrapper/.agent/pipelines/aaa_scene_v1.json",
+      "reference": "skills/sms-vdp-tiles.md",
+      "resolved": [
+        "tools/sms_wrapper/.agent/skills/sms-vdp-tiles.md"
+      ]
+    },
+    {
+      "pipeline": "tools/sms_wrapper/.agent/pipelines/mugen_fighting_v1.json",
+      "reference": "workflows/mugen-engine-quality.md",
+      "resolved": [
+        "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "C1",
+      "priority": "P1",
+      "domain": "sprites/schema",
+      "status": "open_outside_owned_file",
+      "paths": [
+        "tools/sms_wrapper/schemas/sprite_scene_manifest_v1.schema.json"
+      ],
+      "fact": "Schema enum8x8/16x16 still excludes valid8x16 and x description says storedX=X+32, supersededL003/L006; strict simulator now enforces8x8/8x16.",
+      "dedup_lessons": [
+        "L003",
+        "L006",
+        "L128",
+        "L129"
+      ],
+      "proposal": "Align schema mode/X/Y/profile to simulator; optionalhiddenbool/sat_terminatedbool. No newlesson needed."
+    },
+    {
+      "id": "C2",
+      "priority": "P2",
+      "domain": "route_metadata",
+      "status": "open_at_snapshot",
+      "paths": [
+        "doc/agent_learning/lesson_routes.json:L128"
+      ],
+      "fact": "L128 scope still says storedYoffset open(A2); L129+§118 record closure y−1; routeSHA validates skillbytes only, not metadata truth.",
+      "dedup_lessons": [
+        "L128",
+        "L129"
+      ],
+      "proposal": "Update existinglimit to referenceL129 closure while keeping silicionwrap/runtimeproofpending."
+    },
+    {
+      "id": "C3",
+      "priority": "P1",
+      "domain": "FPS_measurement",
+      "status": "open",
+      "paths": [
+        "tools/sms_wrapper/emulicious_dap.py:fps_constant",
+        "tools/sms_wrapper/measure_runtime_probe.py:_session"
+      ],
+      "fact": "fps_constant([60,None]) and([50,50]) both true. Missingwindows discarded; _session hardcodesNTSC yetaccepts50Hz throughput. Doesnotestablish60FPSregiontarget.",
+      "dedup_lessons": [
+        "L013",
+        "L035",
+        "L061",
+        "L077"
+      ],
+      "proposal": "Reject missing/insufficientwindows, bindexpectedrefresh/regiontolerancetoconsumer. Recordactualgameupdatecountersemantics apartfromVDPHz."
+    },
+    {
+      "id": "C4",
+      "priority": "P1",
+      "domain": "claim_scope_and_market_quality",
+      "status": "open",
+      "paths": [
+        "tools/sms_wrapper/audit_claims.py:load_ceilings",
+        "tools/sms_wrapper/schemas/promotion_claim_v1.schema.json"
+      ],
+      "fact": "Blankapproved_by/date:null/noceiling with tokens AAA/60fps and restrictedconcept/bootscope globallywaives tokenchecks. Noevidenceref/hash/marketcomparison measured. Gatesandvisualchecklists intentionally do notcertifyAAA.",
+      "dedup_lessons": [
+        "L002",
+        "L036",
+        "L104",
+        "L123"
+      ],
+      "proposal": "Validateexistingapprovalschema/nonemptyfields+immutableevidencereferences; associateclaimwithscope/axis/artifact. Addreviewcriterionforcomparisonactualreferencegameonlywhenrequested; neverturnAAAapprovaltokenintomeasuredmarketquality."
+    },
+    {
+      "id": "C5",
+      "priority": "P2",
+      "domain": "asset_conversion",
+      "status": "open",
+      "paths": [
+        "tools/sms_wrapper/pack_sms_metasprite.py:129"
+      ],
+      "fact": "Packer stillchecks itemy+1==0xD0, while L129 corrected logicalYstored=y−1. Mostcurrentcanvassmall; falsecheckmaymisclassify expandedheight.",
+      "dedup_lessons": [
+        "L121",
+        "L128",
+        "L129"
+      ],
+      "proposal": "Use same logicalYterminator conventioninproducer andgate, retainnegative/wraplimits."
+    },
+    {
+      "id": "C6",
+      "priority": "P2",
+      "domain": "sprite_skill_cost",
+      "status": "open",
+      "paths": [
+        "tools/sms_wrapper/.agent/skills/sms-sprite-geometry-modes.md"
+      ],
+      "fact": "4objects16x16metaspriteactually2perrow; skill says two sidebyside consume8width. Theyconsume4perline (2each),8SATtotal.",
+      "dedup_lessons": [
+        "L001",
+        "L006",
+        "L061"
+      ],
+      "proposal": "SeparateSATcountfromscanlinecount; clarify tall8x16 twoobjects vsnormal8x8fourobjects."
+    },
+    {
+      "id": "C7",
+      "priority": "P2",
+      "domain": "learning_capture_schema",
+      "status": "documented_limitation",
+      "paths": [
+        "tools/sms_wrapper/audit_learning_capture.py"
+      ],
+      "fact": "LearningcapturePASSprovesrecords/routes/toolpaths, notmetadataaccuracy orschemasupersededclaims; C1/C2 passcurrentgate.",
+      "dedup_lessons": [
+        "L002",
+        "L069",
+        "L125"
+      ],
+      "proposal": "ExtendfocusedregressionsforactiveJSONschemadoctrine/routeclaimedopenresolvedstate; do notinventIDs."
+    },
+    {
+      "id": "C8",
+      "priority": "P1",
+      "domain": "sprite_manifest",
+      "status": "implemented_focused_validated",
+      "paths": [
+        "tools/sms_wrapper/audit_sprite_line_sim.py"
+      ],
+      "fact": "Invalidmode16x16,coercedcoordinates/booleans/nonarray/unknownmode nowrejectstructured; negative/wrappedYexplicitlyunmodelled.",
+      "dedup_lessons": [
+        "L006",
+        "L128",
+        "L129"
+      ],
+      "proposal": "Parentcoordinatesfixtureand-schemaalignment; onlythisfilemutatedbyauthorization."
+    }
+  ],
+  "focused_gates": {
+    "audit_learning_capture_real": "PASS",
+    "selfchecks_initial": [
+      "audit_learning_capture",
+      "audit_doc_sync",
+      "audit_hardware_constants",
+      "audit_sprite_line_sim"
+    ],
+    "sprite_strict_validation": "sprite_manifest_strict_validation.json:24cases70realmanifestspass; selfcheckPASS"
+  },
+  "limits": [
+    "Noemulator/fullsuite/hardwareexecuted.",
+    "Onlyaudit_sprite_line_sim.pymodifiedunderparentauthorization; otherfilesread-only.",
+    "Curationcoverage lexical/structural; marketquality,art,gamefeel notauthenticated.",
+    "EIOMugendoc observed inbroadfilediscovery, notfixed oromittedasPASS.",
+    "FPSfindingsarepuresyntheticcountercases, notemulatorperformancemeasurements.",
+    "SpriteYwrapsilicon andSMS1zoomquirks excluded."
+  ],
+  "focus_cases_sha256": "846c8b8f6f41a4fd288f1eb91bab868ebd959c361b6edc39dffd9c8f5fd236db",
+  "sprite_validation_sha256": "113931f6b2f6eb003b7020c3ea5cf175052432ddff0900f560219dcc54a00d3a"
+}

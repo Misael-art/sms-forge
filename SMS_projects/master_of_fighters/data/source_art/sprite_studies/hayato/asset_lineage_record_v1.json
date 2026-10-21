@@ -1,0 +1,80 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "hayato_idle_12f_v1",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_sheet_study",
+  "channel": "built_in_image_gen",
+  "inputs": [
+    {
+      "path": "data/source_art/concept_art/hayato/review_drafts/image_iterations/hayato_concept_sheet_v1.png",
+      "sha256": "ea84df49f50ec619c26ded9d345d00e5a4fa742518c24172a827b15253076ecb",
+      "role": "Hayato character design reference used at the owner's request; no source pixels copied"
+    }
+  ],
+  "prompt": {
+    "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_prompt_v1.txt",
+    "sha256": "29e11f3b0e2faa1f3c5010b22a1d20403af065c572fc349596d0bab31c50d37c"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_v1.png",
+    "sha256": "bb0159a60ae59669c414ec15acf08386887b36998d382cb1856ce4ae3d3eeabe",
+    "dimensions_px": [1448, 1086],
+    "alpha_extrema": [0, 255]
+  },
+  "authority_refs": [
+    {
+      "path": "doc/11-gdd.md",
+      "role": "Hayato identity, katana, scroll magic, and medium-class build proposal"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "role": "project palette roles used as generation targets"
+    }
+  ],
+  "status": "source_candidate",
+  "animation_action": "restrained left-facing idle guard with the katana sheathed",
+  "sheet_layout": {
+    "columns": 4,
+    "rows": 3,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_count": 12,
+    "cell_dimensions_px": [362, 362]
+  },
+  "animation_principles_targeted": [
+    "staging",
+    "anticipation",
+    "timing and spacing",
+    "slow in and slow out",
+    "small hand and sword arcs",
+    "follow-through in hair and clothing",
+    "secondary hand adjustment",
+    "consistent drawing",
+    "appeal",
+    "minimal natural body compression"
+  ],
+  "key_pose_sequence": [
+    "rested side guard",
+    "subtle inhale and shoulder settle",
+    "small weight shift toward the rear foot",
+    "hand edges slightly toward the hilt",
+    "torso rises into the breath",
+    "sleeve and sash lag behind the torso",
+    "balanced guard hold",
+    "weight begins to settle back",
+    "hand eases away from the hilt",
+    "shoulder relaxes and hakama shifts",
+    "sash and sleeve settle",
+    "near-ready closing pose with a distinct cloth position"
+  ],
+  "technical_review": {
+    "twelve_full_body_frames_visually_observed": true,
+    "four_by_three_layout_visually_observed": true,
+    "transparent_background_verified": true,
+    "sheet_dimensions_divide_evenly_into_cells": true,
+    "exact_80px_logical_scale": "not normalized or validated",
+    "exact_project_palette": "not validated",
+    "independent_animation_review": "pending",
+    "rom_or_emulator_validation": false
+  },
+  "next_gate": "independent animation review and formal palette/scale translation before any res integration"
+}

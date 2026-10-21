@@ -1,0 +1,85 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "dr_social_idle_guard_12f_v3",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_sheet_study",
+  "channel": "built_in_image_gen",
+  "inputs": [
+    {
+      "path": "/run/user/1000/codex-desktop/tmp/codex-clipboard-c9e129b3-da86-4774-b567-bf7cbb18e3a8.png",
+      "sha256": "5fd0682e10dc23e2f7e85aed47c616a070b9776297b5d185e96932557e293423",
+      "role": "pixel-cluster and sheet-presentation inspiration only; no source character pixels copied"
+    },
+    {
+      "path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+      "sha256": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f",
+      "role": "Dr. Social identity, face, hair, clothing, and cane reference"
+    }
+  ],
+  "prompt": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_prompt_v3.txt",
+    "sha256": "bc44cfbfb86165c9f307e31e1969c6a4851ca5bea9f6aa83b0a77104d0bc8fd9"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_v3.png",
+    "sha256": "daa5b6fbfab6adf9cf6c7d78d5fc7a32c1b71bbead0117c61e448a81a52be082",
+    "dimensions_px": [1536, 1024],
+    "alpha_extrema": [0, 254]
+  },
+  "status": "owner_approved_visual_reference",
+  "owner_approval": {
+    "date": "2026-10-03",
+    "scope": "visual direction and 12-frame cane-ready animation study",
+    "source": "explicit user approval in conversation"
+  },
+  "owner_feedback_addressed": [
+    "slender medium-build morphology replaces the broad/strong rejected silhouette",
+    "12 visibly distinct sequential poses replace repeated idle copies"
+  ],
+  "animation_action": "non-attacking cane-ready idle flourish",
+  "sheet_layout": {
+    "columns": 4,
+    "rows": 3,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_count": 12
+  },
+  "animation_principles_targeted": [
+    "squash and stretch",
+    "anticipation",
+    "staging",
+    "pose-to-pose",
+    "follow-through and overlap",
+    "slow in and slow out",
+    "arcs",
+    "secondary action",
+    "timing",
+    "restrained exaggeration",
+    "solid drawing",
+    "appeal"
+  ],
+  "key_pose_sequence": [
+    "ready stance",
+    "anticipatory weight-set",
+    "rear-foot load and cane lift",
+    "cane rising arc and lead-foot slide",
+    "torso rotation and low cross-body cane",
+    "diagonal cane rise and free-hand guard",
+    "planted en-garde silhouette",
+    "high parry point",
+    "brief apex hold with cloth follow-through",
+    "body recovery and cane arc continuation",
+    "cane descent and cloth settling",
+    "near-ready closing pose with distinct cane and cloth position"
+  ],
+  "technical_review": {
+    "twelve_full_body_frames_visually_observed": true,
+    "four_by_three_layout_visually_observed": true,
+    "slender_silhouette_visually_observed": true,
+    "pose_delta_visually_observed": true,
+    "exact_80px_logical_scale": "not normalized or validated",
+    "exact_12_color_palette": "not validated",
+    "independent_animation_review": "pending",
+    "rom_or_emulator_validation": false
+  },
+  "next_gate": "independent animation review and palette/scale translation before any res integration"
+}

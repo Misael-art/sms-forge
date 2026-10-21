@@ -1,0 +1,41 @@
+{
+  "schema": "asset_contract_v1",
+  "asset_id": "jj_zillion_ii_concept_sheet_v1",
+  "project": "master_of_fighters",
+  "character_id": "jj_zillion_ii",
+  "asset_role": "concept_art",
+  "status": "superseded_by_owner_costume_correction_v4",
+  "source_game": "Zillion II: The Tri Formation (Sega Master System)",
+  "reference_boundary": {
+    "allowed_source": "J.J - Standing gameplay sprite from the Master System game",
+    "anime_reference": false,
+    "external_pixels_copied": false,
+    "purpose": "broad silhouette and color-role reference only"
+  },
+  "image": {
+    "dimensions_px": [1536, 1024],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [0],
+    "useful_colors": 13,
+    "layout": "two side-by-side full-body poses of the same character"
+  },
+  "character_contract": {
+    "morphology": "youthful, lean, compact athletic; no bulky armor",
+    "visual_roles": ["short blue-violet hair", "magenta-red fitted uniform", "orange accents", "warm skin", "pale boots/equipment"],
+    "equipment": ["compact Zillion laser pistol"],
+    "poses": ["three-quarter moving guard with pistol low", "lateral advance with one controlled shot"],
+    "not_included": ["anime-only design cues", "Tri-Formation vehicle", "transformed Armorater suit", "other characters"]
+  },
+  "palette_contract": {
+    "manifest": "doc/palettes_manifest.json",
+    "palette_source": "doc/build_palettes_manifest.py",
+    "character": "jj_zillion_ii",
+    "useful_colors_max": 15,
+    "useful_colors": 13,
+    "dither": "none",
+    "transparent_index": 0,
+    "outline": "opaque navy #000055",
+    "grain": "not allowed"
+  },
+  "approval_scope": "concept-art visual reference only; approval does not approve sprites, moveset frame data, ROM integration, scanline budget, or emulator validation"
+}

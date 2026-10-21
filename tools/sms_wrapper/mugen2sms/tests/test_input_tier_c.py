@@ -77,3 +77,7 @@ def test_worst_case_latency_is_T_minus_1(tmp_path):
     assert _run(exe, [1] * 9) == [(5, 0, 1)]                 # forte no tick T-1
     assert _run(exe, [1] * 5 + [0]) == [(5, 0, 0)]           # fraco mais lento possivel: tambem T-1
     assert _run(exe, [2, 2, 0]) == [(2, 1, 0)]               # toque tipico de 2 ticks
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

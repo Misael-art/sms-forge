@@ -1,0 +1,2181 @@
+{
+  "schema": "mof_dr_social_61_pose_refinement_v7",
+  "candidate_status": "candidate_only; independent review and owner approval pending",
+  "pixel_source": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v6_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v6.png",
+    "sha256": "8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455f",
+    "role": "pixel-only input; not an identity reference"
+  },
+  "identity_reference": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "role": "sole visual identity reference"
+  },
+  "refinement": {
+    "operation": "semantic burgundy confinement to the cravat and cuffs; all other burgundy pixels reassigned to the nearest extant non-transparent role in the same frame",
+    "method": "face-to-upper-torso axis for cravat; compact glove and sleeve adjacency plus body-facing vector for cuffs; reject elongated staff/cane anchors",
+    "geometry_or_order_changed": false,
+    "script": "tools/refine_dr_social_61_pose_sprite_candidate_v7.py",
+    "script_sha256": "2616ead0b5a5886fac8e0c5496c98fe94c4b75d2f94d1417f2e9ee6930629d8a",
+    "burgundy_before": 4182,
+    "burgundy_after": 793,
+    "burgundy_recolored": 3389,
+    "recolored_by_role": {
+      "boot_brown": 729,
+      "brass_glasses": 11,
+      "hair_gray": 238,
+      "outline": 1243,
+      "shirt_light": 85,
+      "shirt_shadow": 161,
+      "skin_light": 78,
+      "skin_mid": 288,
+      "suit_deep": 106,
+      "suit_light": 106,
+      "suit_mid": 344
+    },
+    "per_frame": [
+      {
+        "row": 1,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          39,
+          9,
+          10,
+          17
+        ],
+        "face_center_xy": [
+          43.65,
+          16.41
+        ],
+        "face_bottom_y": 25,
+        "torso_center_xy": [
+          42.0,
+          39.0
+        ],
+        "burgundy_before": 109,
+        "burgundy_kept_cravat": 13,
+        "burgundy_kept_cuffs": 3,
+        "burgundy_after": 16,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 17,
+          "brass_glasses": 1,
+          "hair_gray": 10,
+          "outline": 32,
+          "shirt_light": 1,
+          "shirt_shadow": 3,
+          "skin_light": 7,
+          "skin_mid": 5,
+          "suit_deep": 4,
+          "suit_light": 4,
+          "suit_mid": 9
+        }
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          39,
+          8,
+          13,
+          19
+        ],
+        "face_center_xy": [
+          45.74,
+          16.54
+        ],
+        "face_bottom_y": 26,
+        "torso_center_xy": [
+          44.0,
+          40.0
+        ],
+        "burgundy_before": 115,
+        "burgundy_kept_cravat": 12,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 17,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 9,
+          "hair_gray": 8,
+          "outline": 49,
+          "shirt_shadow": 18,
+          "skin_mid": 7,
+          "suit_deep": 2,
+          "suit_light": 3,
+          "suit_mid": 2
+        }
+      },
+      {
+        "row": 1,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          40,
+          13,
+          11,
+          12
+        ],
+        "face_center_xy": [
+          45.56,
+          18.52
+        ],
+        "face_bottom_y": 24,
+        "torso_center_xy": [
+          44.0,
+          38.0
+        ],
+        "burgundy_before": 107,
+        "burgundy_kept_cravat": 7,
+        "burgundy_kept_cuffs": 3,
+        "burgundy_after": 10,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 11,
+          "hair_gray": 15,
+          "outline": 24,
+          "shirt_light": 1,
+          "shirt_shadow": 25,
+          "skin_mid": 5,
+          "suit_mid": 16
+        }
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          43,
+          14,
+          10,
+          10
+        ],
+        "face_center_xy": [
+          47.5,
+          18.84
+        ],
+        "face_bottom_y": 23,
+        "torso_center_xy": [
+          46.0,
+          38.0
+        ],
+        "burgundy_before": 84,
+        "burgundy_kept_cravat": 10,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 14,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 22,
+          "hair_gray": 5,
+          "outline": 23,
+          "shirt_light": 2,
+          "shirt_shadow": 2,
+          "skin_mid": 9,
+          "suit_light": 1,
+          "suit_mid": 6
+        }
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          42,
+          15,
+          10,
+          10
+        ],
+        "face_center_xy": [
+          47.02,
+          20.15
+        ],
+        "face_bottom_y": 24,
+        "torso_center_xy": [
+          44.0,
+          38.0
+        ],
+        "burgundy_before": 113,
+        "burgundy_kept_cravat": 15,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 20,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 12,
+          "brass_glasses": 2,
+          "hair_gray": 9,
+          "outline": 42,
+          "shirt_light": 1,
+          "shirt_shadow": 6,
+          "skin_light": 3,
+          "skin_mid": 1,
+          "suit_deep": 3,
+          "suit_light": 4,
+          "suit_mid": 10
+        }
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          42,
+          15,
+          11,
+          10
+        ],
+        "face_center_xy": [
+          46.71,
+          20.47
+        ],
+        "face_bottom_y": 24,
+        "torso_center_xy": [
+          42.0,
+          36.0
+        ],
+        "burgundy_before": 90,
+        "burgundy_kept_cravat": 2,
+        "burgundy_kept_cuffs": 8,
+        "burgundy_after": 10,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 19,
+          "hair_gray": 4,
+          "outline": 34,
+          "shirt_shadow": 5,
+          "skin_light": 3,
+          "skin_mid": 3,
+          "suit_light": 4,
+          "suit_mid": 8
+        }
+      },
+      {
+        "row": 2,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          42,
+          13,
+          11,
+          13
+        ],
+        "face_center_xy": [
+          47.31,
+          19.45
+        ],
+        "face_bottom_y": 25,
+        "torso_center_xy": [
+          43.0,
+          39.0
+        ],
+        "burgundy_before": 126,
+        "burgundy_kept_cravat": 13,
+        "burgundy_kept_cuffs": 1,
+        "burgundy_after": 14,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 31,
+          "hair_gray": 10,
+          "outline": 42,
+          "shirt_light": 1,
+          "shirt_shadow": 2,
+          "skin_light": 1,
+          "skin_mid": 7,
+          "suit_deep": 6,
+          "suit_light": 1,
+          "suit_mid": 11
+        }
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          44,
+          11,
+          11,
+          14
+        ],
+        "face_center_xy": [
+          49.1,
+          18.04
+        ],
+        "face_bottom_y": 24,
+        "torso_center_xy": [
+          45.0,
+          36.0
+        ],
+        "burgundy_before": 59,
+        "burgundy_kept_cravat": 4,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 4,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 12,
+          "brass_glasses": 1,
+          "hair_gray": 4,
+          "outline": 22,
+          "shirt_shadow": 6,
+          "skin_mid": 3,
+          "suit_mid": 7
+        }
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          43,
+          9,
+          11,
+          15
+        ],
+        "face_center_xy": [
+          48.3,
+          17.04
+        ],
+        "face_bottom_y": 23,
+        "torso_center_xy": [
+          45.0,
+          33.5
+        ],
+        "burgundy_before": 81,
+        "burgundy_kept_cravat": 2,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 2,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 23,
+          "hair_gray": 1,
+          "outline": 40,
+          "shirt_shadow": 1,
+          "skin_mid": 8,
+          "suit_light": 2,
+          "suit_mid": 4
+        }
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          43,
+          10,
+          11,
+          15
+        ],
+        "face_center_xy": [
+          48.31,
+          18.14
+        ],
+        "face_bottom_y": 24,
+        "torso_center_xy": [
+          44.0,
+          36.0
+        ],
+        "burgundy_before": 99,
+        "burgundy_kept_cravat": 20,
+        "burgundy_kept_cuffs": 2,
+        "burgundy_after": 22,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 22,
+          "hair_gray": 1,
+          "outline": 39,
+          "shirt_light": 2,
+          "shirt_shadow": 2,
+          "suit_light": 2,
+          "suit_mid": 9
+        }
+      },
+      {
+        "row": 2,
+        "column": 7,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          41,
+          13,
+          13,
+          11
+        ],
+        "face_center_xy": [
+          47.57,
+          19.0
+        ],
+        "face_bottom_y": 23,
+        "torso_center_xy": [
+          44.0,
+          32.5
+        ],
+        "burgundy_before": 76,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 0,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 11,
+          "hair_gray": 3,
+          "outline": 42,
+          "shirt_shadow": 4,
+          "skin_mid": 7,
+          "suit_light": 1,
+          "suit_mid": 8
+        }
+      },
+      {
+        "row": 2,
+        "column": 8,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          44,
+          15,
+          11,
+          10
+        ],
+        "face_center_xy": [
+          49.49,
+          20.47
+        ],
+        "face_bottom_y": 24,
+        "torso_center_xy": [
+          46.0,
+          34.0
+        ],
+        "burgundy_before": 97,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 0,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 16,
+          "hair_gray": 10,
+          "outline": 47,
+          "shirt_shadow": 5,
+          "skin_mid": 8,
+          "suit_deep": 7,
+          "suit_light": 2,
+          "suit_mid": 2
+        }
+      },
+      {
+        "row": 3,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          41,
+          6,
+          8,
+          9
+        ],
+        "face_center_xy": [
+          45.36,
+          11.32
+        ],
+        "face_bottom_y": 14,
+        "torso_center_xy": [
+          44.0,
+          26.0
+        ],
+        "burgundy_before": 55,
+        "burgundy_kept_cravat": 11,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 15,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 8,
+          "hair_gray": 1,
+          "outline": 16,
+          "shirt_light": 3,
+          "skin_mid": 5,
+          "suit_deep": 2,
+          "suit_light": 4,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          41,
+          9,
+          9,
+          7
+        ],
+        "face_center_xy": [
+          45.24,
+          12.24
+        ],
+        "face_bottom_y": 15,
+        "torso_center_xy": [
+          41.0,
+          26.0
+        ],
+        "burgundy_before": 39,
+        "burgundy_kept_cravat": 9,
+        "burgundy_kept_cuffs": 8,
+        "burgundy_after": 17,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 2,
+          "outline": 10,
+          "shirt_light": 1,
+          "skin_mid": 2,
+          "suit_deep": 2,
+          "suit_light": 5
+        }
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          43,
+          9,
+          9,
+          6
+        ],
+        "face_center_xy": [
+          46.97,
+          11.7
+        ],
+        "face_bottom_y": 14,
+        "torso_center_xy": [
+          43.0,
+          25.0
+        ],
+        "burgundy_before": 49,
+        "burgundy_kept_cravat": 9,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 13,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 8,
+          "outline": 10,
+          "shirt_light": 2,
+          "skin_light": 1,
+          "skin_mid": 7,
+          "suit_deep": 5,
+          "suit_light": 2,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          41,
+          9,
+          9,
+          8
+        ],
+        "face_center_xy": [
+          45.23,
+          12.71
+        ],
+        "face_bottom_y": 16,
+        "torso_center_xy": [
+          42.0,
+          27.0
+        ],
+        "burgundy_before": 57,
+        "burgundy_kept_cravat": 23,
+        "burgundy_kept_cuffs": 6,
+        "burgundy_after": 29,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 3,
+          "outline": 10,
+          "shirt_light": 2,
+          "shirt_shadow": 2,
+          "skin_mid": 9,
+          "suit_light": 2
+        }
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          40,
+          9,
+          9,
+          7
+        ],
+        "face_center_xy": [
+          43.77,
+          11.84
+        ],
+        "face_bottom_y": 15,
+        "torso_center_xy": [
+          41.0,
+          27.0
+        ],
+        "burgundy_before": 49,
+        "burgundy_kept_cravat": 18,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 23,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 4,
+          "hair_gray": 2,
+          "outline": 7,
+          "shirt_light": 2,
+          "skin_mid": 5,
+          "suit_light": 5,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          42,
+          8,
+          8,
+          8
+        ],
+        "face_center_xy": [
+          45.71,
+          12.32
+        ],
+        "face_bottom_y": 15,
+        "torso_center_xy": [
+          43.0,
+          26.0
+        ],
+        "burgundy_before": 53,
+        "burgundy_kept_cravat": 6,
+        "burgundy_kept_cuffs": 8,
+        "burgundy_after": 14,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 9,
+          "hair_gray": 3,
+          "outline": 12,
+          "shirt_light": 1,
+          "shirt_shadow": 1,
+          "skin_light": 1,
+          "skin_mid": 7,
+          "suit_deep": 1,
+          "suit_light": 4
+        }
+      },
+      {
+        "row": 3,
+        "column": 7,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          41,
+          9,
+          7,
+          6
+        ],
+        "face_center_xy": [
+          44.5,
+          11.5
+        ],
+        "face_bottom_y": 14,
+        "torso_center_xy": [
+          42.0,
+          25.0
+        ],
+        "burgundy_before": 43,
+        "burgundy_kept_cravat": 14,
+        "burgundy_kept_cuffs": 6,
+        "burgundy_after": 20,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 6,
+          "hair_gray": 1,
+          "outline": 6,
+          "shirt_light": 2,
+          "skin_mid": 3,
+          "suit_deep": 3,
+          "suit_light": 1,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 3,
+        "column": 8,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          41,
+          6,
+          8,
+          9
+        ],
+        "face_center_xy": [
+          44.8,
+          10.89
+        ],
+        "face_bottom_y": 14,
+        "torso_center_xy": [
+          42.0,
+          26.0
+        ],
+        "burgundy_before": 49,
+        "burgundy_kept_cravat": 11,
+        "burgundy_kept_cuffs": 8,
+        "burgundy_after": 19,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 7,
+          "outline": 8,
+          "shirt_light": 2,
+          "shirt_shadow": 2,
+          "skin_light": 3,
+          "skin_mid": 5,
+          "suit_deep": 1,
+          "suit_light": 1,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 4,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          48,
+          20,
+          10,
+          14
+        ],
+        "face_center_xy": [
+          52.54,
+          27.59
+        ],
+        "face_bottom_y": 33,
+        "torso_center_xy": [
+          49.0,
+          51.0
+        ],
+        "burgundy_before": 47,
+        "burgundy_kept_cravat": 1,
+        "burgundy_kept_cuffs": 8,
+        "burgundy_after": 9,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 4,
+          "hair_gray": 3,
+          "outline": 16,
+          "shirt_light": 2,
+          "shirt_shadow": 1,
+          "skin_light": 2,
+          "skin_mid": 3,
+          "suit_deep": 4,
+          "suit_light": 1,
+          "suit_mid": 2
+        }
+      },
+      {
+        "row": 4,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          46,
+          23,
+          9,
+          6
+        ],
+        "face_center_xy": [
+          50.5,
+          25.64
+        ],
+        "face_bottom_y": 28,
+        "torso_center_xy": [
+          49.0,
+          46.0
+        ],
+        "burgundy_before": 77,
+        "burgundy_kept_cravat": 14,
+        "burgundy_kept_cuffs": 7,
+        "burgundy_after": 21,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 15,
+          "hair_gray": 4,
+          "outline": 23,
+          "shirt_light": 3,
+          "shirt_shadow": 1,
+          "skin_light": 1,
+          "skin_mid": 2,
+          "suit_deep": 2,
+          "suit_light": 1,
+          "suit_mid": 4
+        }
+      },
+      {
+        "row": 4,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          49,
+          21,
+          11,
+          7
+        ],
+        "face_center_xy": [
+          53.05,
+          24.07
+        ],
+        "face_bottom_y": 27,
+        "torso_center_xy": [
+          52.0,
+          41.0
+        ],
+        "burgundy_before": 80,
+        "burgundy_kept_cravat": 6,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 11,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 13,
+          "hair_gray": 1,
+          "outline": 23,
+          "shirt_light": 4,
+          "shirt_shadow": 4,
+          "skin_light": 3,
+          "skin_mid": 2,
+          "suit_light": 5,
+          "suit_mid": 14
+        }
+      },
+      {
+        "row": 4,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          41,
+          15,
+          12,
+          10
+        ],
+        "face_center_xy": [
+          46.78,
+          20.43
+        ],
+        "face_bottom_y": 24,
+        "torso_center_xy": [
+          46.0,
+          41.0
+        ],
+        "burgundy_before": 87,
+        "burgundy_kept_cravat": 10,
+        "burgundy_kept_cuffs": 7,
+        "burgundy_after": 17,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 7,
+          "hair_gray": 5,
+          "outline": 36,
+          "shirt_light": 1,
+          "shirt_shadow": 3,
+          "skin_light": 1,
+          "skin_mid": 7,
+          "suit_deep": 2,
+          "suit_light": 1,
+          "suit_mid": 7
+        }
+      },
+      {
+        "row": 4,
+        "column": 5,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          41,
+          16,
+          11,
+          13
+        ],
+        "face_center_xy": [
+          46.03,
+          22.31
+        ],
+        "face_bottom_y": 28,
+        "torso_center_xy": [
+          47.0,
+          45.0
+        ],
+        "burgundy_before": 64,
+        "burgundy_kept_cravat": 7,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 11,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 10,
+          "hair_gray": 4,
+          "outline": 23,
+          "shirt_light": 5,
+          "shirt_shadow": 2,
+          "skin_mid": 1,
+          "suit_light": 2,
+          "suit_mid": 6
+        }
+      },
+      {
+        "row": 4,
+        "column": 6,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          44,
+          25,
+          9,
+          7
+        ],
+        "face_center_xy": [
+          47.89,
+          27.97
+        ],
+        "face_bottom_y": 31,
+        "torso_center_xy": [
+          48.0,
+          47.5
+        ],
+        "burgundy_before": 80,
+        "burgundy_kept_cravat": 15,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 20,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 6,
+          "hair_gray": 5,
+          "outline": 29,
+          "shirt_shadow": 1,
+          "skin_light": 1,
+          "skin_mid": 9,
+          "suit_deep": 1,
+          "suit_mid": 8
+        }
+      },
+      {
+        "row": 4,
+        "column": 7,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          46,
+          30,
+          9,
+          8
+        ],
+        "face_center_xy": [
+          49.16,
+          33.23
+        ],
+        "face_bottom_y": 37,
+        "torso_center_xy": [
+          49.0,
+          54.0
+        ],
+        "burgundy_before": 84,
+        "burgundy_kept_cravat": 19,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 19,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 6,
+          "brass_glasses": 2,
+          "hair_gray": 4,
+          "outline": 36,
+          "shirt_light": 2,
+          "shirt_shadow": 1,
+          "skin_light": 2,
+          "skin_mid": 2,
+          "suit_deep": 1,
+          "suit_light": 2,
+          "suit_mid": 7
+        }
+      },
+      {
+        "row": 4,
+        "column": 8,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          52,
+          35,
+          12,
+          11
+        ],
+        "face_center_xy": [
+          56.78,
+          40.43
+        ],
+        "face_bottom_y": 45,
+        "torso_center_xy": [
+          53.0,
+          59.0
+        ],
+        "burgundy_before": 64,
+        "burgundy_kept_cravat": 11,
+        "burgundy_kept_cuffs": 3,
+        "burgundy_after": 11,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 20,
+          "hair_gray": 4,
+          "outline": 11,
+          "shirt_shadow": 1,
+          "skin_light": 3,
+          "skin_mid": 5,
+          "suit_light": 1,
+          "suit_mid": 8
+        }
+      },
+      {
+        "row": 5,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          45,
+          20,
+          11,
+          15
+        ],
+        "face_center_xy": [
+          50.09,
+          27.93
+        ],
+        "face_bottom_y": 34,
+        "torso_center_xy": [
+          49.0,
+          52.0
+        ],
+        "burgundy_before": 93,
+        "burgundy_kept_cravat": 7,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 12,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 24,
+          "hair_gray": 9,
+          "outline": 18,
+          "shirt_light": 1,
+          "shirt_shadow": 3,
+          "skin_light": 4,
+          "skin_mid": 10,
+          "suit_light": 1,
+          "suit_mid": 11
+        }
+      },
+      {
+        "row": 5,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          49,
+          31,
+          13,
+          11
+        ],
+        "face_center_xy": [
+          55.8,
+          37.14
+        ],
+        "face_bottom_y": 41,
+        "torso_center_xy": [
+          56.0,
+          58.0
+        ],
+        "burgundy_before": 78,
+        "burgundy_kept_cravat": 7,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 7,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 14,
+          "brass_glasses": 4,
+          "hair_gray": 6,
+          "outline": 22,
+          "shirt_shadow": 4,
+          "skin_light": 3,
+          "skin_mid": 1,
+          "suit_deep": 2,
+          "suit_light": 4,
+          "suit_mid": 11
+        }
+      },
+      {
+        "row": 5,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          48,
+          31,
+          12,
+          12
+        ],
+        "face_center_xy": [
+          53.47,
+          37.43
+        ],
+        "face_bottom_y": 42,
+        "torso_center_xy": [
+          53.0,
+          57.0
+        ],
+        "burgundy_before": 69,
+        "burgundy_kept_cravat": 14,
+        "burgundy_kept_cuffs": 1,
+        "burgundy_after": 15,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 12,
+          "hair_gray": 5,
+          "outline": 23,
+          "shirt_light": 3,
+          "skin_light": 2,
+          "skin_mid": 4,
+          "suit_mid": 5
+        }
+      },
+      {
+        "row": 5,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          45,
+          35,
+          13,
+          12
+        ],
+        "face_center_xy": [
+          51.36,
+          41.29
+        ],
+        "face_bottom_y": 46,
+        "torso_center_xy": [
+          49.0,
+          61.0
+        ],
+        "burgundy_before": 63,
+        "burgundy_kept_cravat": 6,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 6,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 13,
+          "hair_gray": 1,
+          "outline": 22,
+          "shirt_shadow": 4,
+          "skin_light": 2,
+          "skin_mid": 6,
+          "suit_light": 2,
+          "suit_mid": 7
+        }
+      },
+      {
+        "row": 5,
+        "column": 5,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          47,
+          36,
+          11,
+          11
+        ],
+        "face_center_xy": [
+          52.52,
+          41.08
+        ],
+        "face_bottom_y": 46,
+        "torso_center_xy": [
+          49.0,
+          62.0
+        ],
+        "burgundy_before": 73,
+        "burgundy_kept_cravat": 9,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 9,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 13,
+          "brass_glasses": 1,
+          "hair_gray": 8,
+          "outline": 18,
+          "shirt_shadow": 8,
+          "skin_light": 1,
+          "skin_mid": 5,
+          "suit_deep": 4,
+          "suit_mid": 6
+        }
+      },
+      {
+        "row": 6,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          39,
+          9,
+          7,
+          9
+        ],
+        "face_center_xy": [
+          41.58,
+          13.39
+        ],
+        "face_bottom_y": 17,
+        "torso_center_xy": [
+          39.0,
+          31.0
+        ],
+        "burgundy_before": 47,
+        "burgundy_kept_cravat": 7,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 12,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 9,
+          "hair_gray": 3,
+          "outline": 9,
+          "shirt_light": 1,
+          "skin_mid": 5,
+          "suit_light": 4,
+          "suit_mid": 4
+        }
+      },
+      {
+        "row": 6,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          53,
+          20,
+          8,
+          7
+        ],
+        "face_center_xy": [
+          56.58,
+          23.58
+        ],
+        "face_bottom_y": 26,
+        "torso_center_xy": [
+          52.0,
+          38.0
+        ],
+        "burgundy_before": 39,
+        "burgundy_kept_cravat": 1,
+        "burgundy_kept_cuffs": 12,
+        "burgundy_after": 13,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 7,
+          "outline": 6,
+          "shirt_light": 4,
+          "skin_light": 1,
+          "skin_mid": 2,
+          "suit_light": 1,
+          "suit_mid": 5
+        }
+      },
+      {
+        "row": 6,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          51,
+          19,
+          8,
+          7
+        ],
+        "face_center_xy": [
+          54.87,
+          22.35
+        ],
+        "face_bottom_y": 25,
+        "torso_center_xy": [
+          50.0,
+          38.0
+        ],
+        "burgundy_before": 59,
+        "burgundy_kept_cravat": 19,
+        "burgundy_kept_cuffs": 9,
+        "burgundy_after": 28,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 7,
+          "hair_gray": 1,
+          "outline": 8,
+          "shirt_light": 2,
+          "skin_light": 2,
+          "skin_mid": 6,
+          "suit_mid": 5
+        }
+      },
+      {
+        "row": 6,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          58,
+          18,
+          7,
+          9
+        ],
+        "face_center_xy": [
+          60.78,
+          23.04
+        ],
+        "face_bottom_y": 26,
+        "torso_center_xy": [
+          56.0,
+          42.0
+        ],
+        "burgundy_before": 52,
+        "burgundy_kept_cravat": 16,
+        "burgundy_kept_cuffs": 2,
+        "burgundy_after": 16,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 7,
+          "hair_gray": 1,
+          "outline": 5,
+          "shirt_light": 5,
+          "skin_mid": 12,
+          "suit_deep": 2,
+          "suit_light": 3,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 6,
+        "column": 5,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          60,
+          21,
+          7,
+          6
+        ],
+        "face_center_xy": [
+          62.48,
+          23.67
+        ],
+        "face_bottom_y": 26,
+        "torso_center_xy": [
+          59.0,
+          45.0
+        ],
+        "burgundy_before": 71,
+        "burgundy_kept_cravat": 18,
+        "burgundy_kept_cuffs": 2,
+        "burgundy_after": 18,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 13,
+          "hair_gray": 1,
+          "outline": 13,
+          "shirt_shadow": 5,
+          "skin_light": 1,
+          "skin_mid": 12,
+          "suit_deep": 2,
+          "suit_light": 2,
+          "suit_mid": 4
+        }
+      },
+      {
+        "row": 6,
+        "column": 6,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          56,
+          20,
+          7,
+          7
+        ],
+        "face_center_xy": [
+          58.91,
+          23.87
+        ],
+        "face_bottom_y": 26,
+        "torso_center_xy": [
+          54.0,
+          42.0
+        ],
+        "burgundy_before": 78,
+        "burgundy_kept_cravat": 20,
+        "burgundy_kept_cuffs": 0,
+        "burgundy_after": 20,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 15,
+          "outline": 13,
+          "shirt_light": 3,
+          "shirt_shadow": 2,
+          "skin_mid": 15,
+          "suit_deep": 4,
+          "suit_light": 3,
+          "suit_mid": 3
+        }
+      },
+      {
+        "row": 6,
+        "column": 7,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          49,
+          12,
+          7,
+          11
+        ],
+        "face_center_xy": [
+          51.43,
+          18.3
+        ],
+        "face_bottom_y": 22,
+        "torso_center_xy": [
+          47.0,
+          35.0
+        ],
+        "burgundy_before": 64,
+        "burgundy_kept_cravat": 16,
+        "burgundy_kept_cuffs": 14,
+        "burgundy_after": 30,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 10,
+          "outline": 9,
+          "shirt_shadow": 1,
+          "skin_light": 3,
+          "skin_mid": 3,
+          "suit_deep": 3,
+          "suit_light": 1,
+          "suit_mid": 4
+        }
+      },
+      {
+        "row": 6,
+        "column": 8,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          39,
+          12,
+          7,
+          5
+        ],
+        "face_center_xy": [
+          41.76,
+          14.0
+        ],
+        "face_bottom_y": 16,
+        "torso_center_xy": [
+          39.0,
+          30.0
+        ],
+        "burgundy_before": 43,
+        "burgundy_kept_cravat": 14,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 18,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 4,
+          "outline": 13,
+          "shirt_light": 1,
+          "skin_mid": 3,
+          "suit_deep": 1,
+          "suit_light": 2,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 7,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          39,
+          10,
+          7,
+          6
+        ],
+        "face_center_xy": [
+          41.78,
+          12.61
+        ],
+        "face_bottom_y": 15,
+        "torso_center_xy": [
+          41.0,
+          28.0
+        ],
+        "burgundy_before": 38,
+        "burgundy_kept_cravat": 10,
+        "burgundy_kept_cuffs": 11,
+        "burgundy_after": 21,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 2,
+          "outline": 8,
+          "skin_mid": 1,
+          "suit_deep": 1,
+          "suit_mid": 5
+        }
+      },
+      {
+        "row": 7,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          25,
+          12,
+          8,
+          7
+        ],
+        "face_center_xy": [
+          29.39,
+          15.7
+        ],
+        "face_bottom_y": 18,
+        "torso_center_xy": [
+          31.0,
+          29.0
+        ],
+        "burgundy_before": 37,
+        "burgundy_kept_cravat": 3,
+        "burgundy_kept_cuffs": 6,
+        "burgundy_after": 9,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 4,
+          "hair_gray": 2,
+          "outline": 11,
+          "skin_light": 1,
+          "skin_mid": 3,
+          "suit_deep": 3,
+          "suit_mid": 4
+        }
+      },
+      {
+        "row": 7,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          27,
+          13,
+          6,
+          10
+        ],
+        "face_center_xy": [
+          29.24,
+          17.84
+        ],
+        "face_bottom_y": 22,
+        "torso_center_xy": [
+          32.0,
+          31.0
+        ],
+        "burgundy_before": 52,
+        "burgundy_kept_cravat": 2,
+        "burgundy_kept_cuffs": 7,
+        "burgundy_after": 9,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 9,
+          "hair_gray": 2,
+          "outline": 14,
+          "shirt_light": 4,
+          "shirt_shadow": 2,
+          "skin_mid": 2,
+          "suit_deep": 2,
+          "suit_mid": 8
+        }
+      },
+      {
+        "row": 7,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          22,
+          33,
+          8,
+          6
+        ],
+        "face_center_xy": [
+          25.9,
+          35.4
+        ],
+        "face_bottom_y": 38,
+        "torso_center_xy": [
+          28.0,
+          48.0
+        ],
+        "burgundy_before": 40,
+        "burgundy_kept_cravat": 8,
+        "burgundy_kept_cuffs": 6,
+        "burgundy_after": 14,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 7,
+          "hair_gray": 1,
+          "outline": 5,
+          "shirt_light": 1,
+          "shirt_shadow": 4,
+          "skin_light": 1,
+          "skin_mid": 3,
+          "suit_deep": 1,
+          "suit_mid": 3
+        }
+      },
+      {
+        "row": 7,
+        "column": 5,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          18,
+          46,
+          7,
+          6
+        ],
+        "face_center_xy": [
+          21.36,
+          48.09
+        ],
+        "face_bottom_y": 51,
+        "torso_center_xy": [
+          23.0,
+          61.0
+        ],
+        "burgundy_before": 38,
+        "burgundy_kept_cravat": 2,
+        "burgundy_kept_cuffs": 6,
+        "burgundy_after": 8,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 7,
+          "hair_gray": 5,
+          "outline": 5,
+          "shirt_light": 2,
+          "skin_mid": 2,
+          "suit_deep": 2,
+          "suit_mid": 7
+        }
+      },
+      {
+        "row": 7,
+        "column": 6,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          22,
+          55,
+          8,
+          8
+        ],
+        "face_center_xy": [
+          26.22,
+          59.56
+        ],
+        "face_bottom_y": 62,
+        "torso_center_xy": [
+          26.0,
+          68.0
+        ],
+        "burgundy_before": 19,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 3,
+        "burgundy_after": 3,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 4,
+          "hair_gray": 5,
+          "outline": 2,
+          "skin_light": 1,
+          "skin_mid": 1,
+          "suit_deep": 2,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 7,
+        "column": 7,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          20,
+          55,
+          10,
+          10
+        ],
+        "face_center_xy": [
+          25.42,
+          59.84
+        ],
+        "face_bottom_y": 64,
+        "torso_center_xy": [
+          25.0,
+          68.0
+        ],
+        "burgundy_before": 25,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 3,
+        "burgundy_after": 3,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 9,
+          "hair_gray": 4,
+          "outline": 2,
+          "shirt_light": 1,
+          "skin_mid": 2,
+          "suit_mid": 4
+        }
+      },
+      {
+        "row": 7,
+        "column": 8,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          24,
+          59,
+          6,
+          6
+        ],
+        "face_center_xy": [
+          26.22,
+          61.78
+        ],
+        "face_bottom_y": 64,
+        "torso_center_xy": [
+          25.5,
+          67.0
+        ],
+        "burgundy_before": 33,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 1,
+        "burgundy_after": 1,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 10,
+          "hair_gray": 2,
+          "outline": 8,
+          "shirt_light": 3,
+          "shirt_shadow": 1,
+          "suit_deep": 1,
+          "suit_mid": 7
+        }
+      },
+      {
+        "row": 8,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          46,
+          28,
+          12,
+          16
+        ],
+        "face_center_xy": [
+          51.19,
+          35.81
+        ],
+        "face_bottom_y": 43,
+        "torso_center_xy": [
+          50.0,
+          55.0
+        ],
+        "burgundy_before": 70,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 4,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 18,
+          "hair_gray": 13,
+          "outline": 22,
+          "shirt_light": 2,
+          "shirt_shadow": 1,
+          "skin_light": 3,
+          "skin_mid": 2,
+          "suit_light": 3,
+          "suit_mid": 2
+        }
+      },
+      {
+        "row": 8,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          42,
+          62,
+          9,
+          10
+        ],
+        "face_center_xy": [
+          46.19,
+          66.1
+        ],
+        "face_bottom_y": 71,
+        "torso_center_xy": [
+          46.19,
+          81.0
+        ],
+        "burgundy_before": 54,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 1,
+        "burgundy_after": 1,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 7,
+          "hair_gray": 11,
+          "outline": 15,
+          "shirt_light": 1,
+          "skin_mid": 1,
+          "suit_deep": 2,
+          "suit_light": 3,
+          "suit_mid": 13
+        }
+      },
+      {
+        "row": 8,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          23,
+          59,
+          12,
+          9
+        ],
+        "face_center_xy": [
+          28.34,
+          62.83
+        ],
+        "face_bottom_y": 67,
+        "torso_center_xy": [
+          33.0,
+          70.0
+        ],
+        "burgundy_before": 59,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 5,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 24,
+          "outline": 18,
+          "shirt_light": 1,
+          "shirt_shadow": 1,
+          "skin_mid": 5,
+          "suit_deep": 3,
+          "suit_mid": 2
+        }
+      },
+      {
+        "row": 8,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          16,
+          57,
+          9,
+          11
+        ],
+        "face_center_xy": [
+          20.46,
+          61.73
+        ],
+        "face_bottom_y": 67,
+        "torso_center_xy": [
+          25.0,
+          71.0
+        ],
+        "burgundy_before": 69,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 4,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 18,
+          "hair_gray": 1,
+          "outline": 16,
+          "shirt_shadow": 1,
+          "skin_mid": 3,
+          "suit_deep": 5,
+          "suit_light": 2,
+          "suit_mid": 19
+        }
+      },
+      {
+        "row": 8,
+        "column": 5,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          55,
+          40,
+          16,
+          9
+        ],
+        "face_center_xy": [
+          63.1,
+          44.73
+        ],
+        "face_bottom_y": 48,
+        "torso_center_xy": [
+          57.0,
+          60.5
+        ],
+        "burgundy_before": 78,
+        "burgundy_kept_cravat": 1,
+        "burgundy_kept_cuffs": 2,
+        "burgundy_after": 3,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 22,
+          "hair_gray": 6,
+          "outline": 24,
+          "shirt_light": 2,
+          "shirt_shadow": 2,
+          "skin_light": 4,
+          "skin_mid": 7,
+          "suit_deep": 3,
+          "suit_mid": 5
+        }
+      },
+      {
+        "row": 8,
+        "column": 6,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          52,
+          32,
+          10,
+          10
+        ],
+        "face_center_xy": [
+          56.04,
+          37.09
+        ],
+        "face_bottom_y": 41,
+        "torso_center_xy": [
+          52.0,
+          51.0
+        ],
+        "burgundy_before": 79,
+        "burgundy_kept_cravat": 0,
+        "burgundy_kept_cuffs": 6,
+        "burgundy_after": 6,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 25,
+          "hair_gray": 6,
+          "outline": 8,
+          "shirt_light": 2,
+          "shirt_shadow": 11,
+          "skin_light": 2,
+          "skin_mid": 9,
+          "suit_deep": 5,
+          "suit_light": 2,
+          "suit_mid": 3
+        }
+      },
+      {
+        "row": 8,
+        "column": 7,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          44,
+          26,
+          10,
+          7
+        ],
+        "face_center_xy": [
+          47.98,
+          28.91
+        ],
+        "face_bottom_y": 32,
+        "torso_center_xy": [
+          45.0,
+          50.0
+        ],
+        "burgundy_before": 80,
+        "burgundy_kept_cravat": 17,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 21,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 16,
+          "hair_gray": 5,
+          "outline": 28,
+          "shirt_shadow": 4,
+          "skin_mid": 5,
+          "suit_mid": 1
+        }
+      },
+      {
+        "row": 8,
+        "column": 8,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          40,
+          24,
+          9,
+          9
+        ],
+        "face_center_xy": [
+          43.16,
+          27.81
+        ],
+        "face_bottom_y": 32,
+        "torso_center_xy": [
+          41.0,
+          45.0
+        ],
+        "burgundy_before": 72,
+        "burgundy_kept_cravat": 4,
+        "burgundy_kept_cuffs": 9,
+        "burgundy_after": 13,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 8,
+          "hair_gray": 2,
+          "outline": 22,
+          "shirt_light": 1,
+          "shirt_shadow": 4,
+          "skin_light": 2,
+          "skin_mid": 11,
+          "suit_deep": 1,
+          "suit_light": 3,
+          "suit_mid": 5
+        }
+      },
+      {
+        "row": 9,
+        "column": 1,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          34,
+          9,
+          11,
+          11
+        ],
+        "face_center_xy": [
+          38.79,
+          14.79
+        ],
+        "face_bottom_y": 19,
+        "torso_center_xy": [
+          41.0,
+          32.5
+        ],
+        "burgundy_before": 95,
+        "burgundy_kept_cravat": 9,
+        "burgundy_kept_cuffs": 1,
+        "burgundy_after": 10,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 20,
+          "hair_gray": 8,
+          "outline": 29,
+          "skin_light": 4,
+          "skin_mid": 2,
+          "suit_deep": 5,
+          "suit_light": 4,
+          "suit_mid": 13
+        }
+      },
+      {
+        "row": 9,
+        "column": 2,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          36,
+          4,
+          10,
+          18
+        ],
+        "face_center_xy": [
+          40.11,
+          13.35
+        ],
+        "face_bottom_y": 21,
+        "torso_center_xy": [
+          36.0,
+          40.0
+        ],
+        "burgundy_before": 113,
+        "burgundy_kept_cravat": 37,
+        "burgundy_kept_cuffs": 3,
+        "burgundy_after": 40,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 15,
+          "hair_gray": 2,
+          "outline": 45,
+          "skin_light": 3,
+          "skin_mid": 3,
+          "suit_deep": 1,
+          "suit_mid": 4
+        }
+      },
+      {
+        "row": 9,
+        "column": 3,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          38,
+          8,
+          11,
+          13
+        ],
+        "face_center_xy": [
+          42.92,
+          14.92
+        ],
+        "face_bottom_y": 20,
+        "torso_center_xy": [
+          45.0,
+          39.0
+        ],
+        "burgundy_before": 73,
+        "burgundy_kept_cravat": 2,
+        "burgundy_kept_cuffs": 4,
+        "burgundy_after": 5,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 19,
+          "hair_gray": 3,
+          "outline": 19,
+          "shirt_light": 4,
+          "shirt_shadow": 2,
+          "skin_light": 3,
+          "skin_mid": 3,
+          "suit_light": 2,
+          "suit_mid": 13
+        }
+      },
+      {
+        "row": 9,
+        "column": 4,
+        "face_to_hair_distance_px": 0.955,
+        "face_bbox_xywh": [
+          35,
+          8,
+          12,
+          14
+        ],
+        "face_center_xy": [
+          40.59,
+          15.07
+        ],
+        "face_bottom_y": 21,
+        "torso_center_xy": [
+          43.0,
+          40.0
+        ],
+        "burgundy_before": 96,
+        "burgundy_kept_cravat": 6,
+        "burgundy_kept_cuffs": 5,
+        "burgundy_after": 11,
+        "burgundy_recolored_by_role": {
+          "boot_brown": 4,
+          "hair_gray": 8,
+          "outline": 51,
+          "shirt_light": 1,
+          "shirt_shadow": 3,
+          "skin_light": 3,
+          "skin_mid": 2,
+          "suit_deep": 5,
+          "suit_light": 3,
+          "suit_mid": 5
+        }
+      }
+    ]
+  },
+  "output": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+    "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+    "dimensions_px": [
+      640,
+      720
+    ],
+    "palette_indices_used": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "useful_color_count": 12,
+    "transparent_index": 0
+  },
+  "structural_checks": {
+    "active_frames": 61,
+    "blank_cells": 11,
+    "row_counts": [
+      4,
+      8,
+      8,
+      8,
+      5,
+      8,
+      8,
+      8,
+      4
+    ],
+    "cell_px": [
+      80,
+      80
+    ],
+    "alpha_geometry_unchanged": true,
+    "changed_pixels_were_burgundy_only": true,
+    "opaque_pixels_touch_cell_edges": false
+  },
+  "human_review_pending": [
+    "visual confirmation that burgundy now appears only on cravat/cuffs and is absent from hair, suit, cane, and boots in all 61 frames",
+    "anatomy, face readability, hand orientation, grip continuity, and cane terminal shape frame by frame",
+    "cel-shaded shadow flow and pixel clusters at 1x and nearest-neighbor 4x",
+    "sequence timing, pose order, and action readability"
+  ],
+  "not_claimed": [
+    "owner approval",
+    "independent art approval",
+    "hardware resource budget",
+    "ROM integration",
+    "emulator validation",
+    "production readiness"
+  ]
+}

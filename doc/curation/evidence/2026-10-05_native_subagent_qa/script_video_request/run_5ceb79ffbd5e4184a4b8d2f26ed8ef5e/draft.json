@@ -1,0 +1,66 @@
+{
+  "schema": "sms_subagent_session_v1",
+  "artifact_kind": "harness_worker_result",
+  "task_id": "ef1c6d0bf3334690a45cac6b26a9c027",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01",
+  "producer_id": "/root",
+  "worker_id": "/root/native_runtime_qa",
+  "lane": "runtime",
+  "request": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/request.json",
+    "sha256": "2bb883c79af57b7dee1d2cc0971bee28f4d03bf9fffda24c48fef40df127a6f8"
+  },
+  "status": "needs_review",
+  "claim_ceiling": "assigned_checks_only",
+  "promoted": false,
+  "findings": [],
+  "artifacts": [
+    {
+      "id": "held_input_video_frame",
+      "kind": "framebuffer",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/case_0_frame.png",
+      "sha256": "05441fcc8f75d1f1cae1da430a1dcebcf7d7d8f7c45bdc9c4972702255ddbd8d",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/case_0_frame.json",
+        "sha256": "177e8efe646478dbf7373f6baf1c0b63786558c1a51c501ea0590f6a83291003"
+      }
+    },
+    {
+      "id": "held_input_video_video",
+      "kind": "video",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/case_0.mp4",
+      "sha256": "4c463991130ac8d3e50ee431ac48325548aa143977c27f75201a5d50edf31e2d",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/case_0.json",
+        "sha256": "e341acdb119d7e52520e9c9d81ba14ec020b69676c95c777eb36d6d4dc973048"
+      }
+    },
+    {
+      "id": "commands",
+      "kind": "input_trace",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/commands.jsonl",
+      "sha256": "639df6d5504bc4e1634d343d7e397c47da78c2647f4c53e594d0327cc2f65de7"
+    }
+  ],
+  "session": {
+    "id": "b4903730ea514b3cb9466a2158816502",
+    "owner": "/root/native_runtime_qa",
+    "bundle": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/bundles/b4903730ea514b3cb9466a2158816502",
+    "metadata": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/closed_session.json",
+      "sha256": "2c920a167ff7d88a106fcd16c9135a71ffe5cb850316bcc7332e15d843dc4864"
+    },
+    "closed": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/script_video_request/run_5ceb79ffbd5e4184a4b8d2f26ed8ef5e/closed_session.json",
+      "sha256": "2c920a167ff7d88a106fcd16c9135a71ffe5cb850316bcc7332e15d843dc4864"
+    }
+  },
+  "coverage": [
+    {
+      "id": "held_input_video",
+      "status": "not_run",
+      "note": "native worker inspection pending",
+      "evidence": []
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "date": "2026-09-15",
+  "scope": "analysis_and_plan_not_implementation",
+  "sources": [
+    {
+      "path": "src/main.c",
+      "sha256": "d8fd8ca8c93643d9349052914e7acc7adbd0b04a551fc995e848e9aa1d17ff69",
+      "bytes": 6060
+    },
+    {
+      "path": "src/fight.c",
+      "sha256": "b290e844d1f985e69bf6c41d2333e69994b539fed5b3e1abca8c068746c202e7",
+      "bytes": 42425
+    },
+    {
+      "path": "src/hud.c",
+      "sha256": "e0efce8f31b2d815a1e937d016a7bfe9909214c8213219eba35eea4e17a26a7c",
+      "bytes": 7164
+    },
+    {
+      "path": "inc/fight.h",
+      "sha256": "7025e5df478fe2a1ebdcb1ae72a0761b63fe1adcbc1f3d26ca7c8afdf78480d4",
+      "bytes": 4336
+    },
+    {
+      "path": "inc/hadouken_tiles.h",
+      "sha256": "47ddbda68c6e28e739f1698b770da73468046bbacdb5a1645fdf7b1b89a70574",
+      "bytes": 1024
+    },
+    {
+      "path": "inc/sonicboom_tiles.h",
+      "sha256": "1f1728a48365e27cc9e80dd0ddca7e5fd2f9ce472fab3a36d0e956e4d4975038",
+      "bytes": 1029
+    },
+    {
+      "path": "doc/10-memory-bank.md",
+      "sha256": "da3cefd76aaeeffde4070ec6d0edea1dacac25b301c46e04543ea5d3b5fab7dc",
+      "bytes": 22465
+    },
+    {
+      "path": "doc/15-tdd.md",
+      "sha256": "fcc740e3644cda4045ee1288a2292c890fb92c9123342239b2c2a8e194b32145",
+      "bytes": 11517
+    },
+    {
+      "path": "doc/sprite_scene_golden.json",
+      "sha256": "e94a0f7bd1604081cc9be28749e5e4d91a1e7c5c35f6bb0821dd060bca64602a",
+      "bytes": 674
+    },
+    {
+      "path": "doc/spec-banking.md",
+      "sha256": "716c536251eaae80d463b2c6248bfb48f37b1d2ee7697fbc1461a00e7ff5e0c8",
+      "bytes": 2642
+    },
+    {
+      "path": "tools/author_stage_ken.py",
+      "sha256": "a5eeee604227a32af29fd1a3576913c6f7ccea16e2e07346ebe37adafebc84ae",
+      "bytes": 11577
+    },
+    {
+      "path": "tools/author_native_fighters.py",
+      "sha256": "22c957b5a3e43613c01ddab91ce088b44150c5fa2bfcd9dd8d8df2855469bcdc",
+      "bytes": 13685
+    },
+    {
+      "path": "out/build_record.json",
+      "sha256": "ac02648e2b3c1956cd60fa96d8c5ee81cd69068833276d72513d2783f23c5499",
+      "bytes": 649
+    },
+    {
+      "path": "out/evidence/evidence_bundle.json",
+      "sha256": "8ac3f3f04e1b85c3b63dcec932d0f78db9bed08e592e8bb7207b83344bf79f3b",
+      "bytes": 2482
+    },
+    {
+      "path": "out/evidence/worst_frame.json",
+      "sha256": "47cf26d0098a2776f4dbe6d80636bee22059c3ef4aa1d9070bed9059dfd4d50d",
+      "bytes": 3056
+    },
+    {
+      "path": "out/evidence/ko_banner.png",
+      "sha256": "c453f864e585b13adb100ce97d11eef35bb9e1d24fb66a71cc868f998443f326",
+      "bytes": 4299
+    },
+    {
+      "path": "out/rom/MSSF2T.sms",
+      "sha256": "8a83ca2da18e2690d066cc29eed597986c97f6dd1d9af23baf204b00be8b27c4",
+      "bytes": 32768
+    }
+  ],
+  "bundle_integrity": [
+    {
+      "path": "out/evidence/evidence.json",
+      "hash_matches": true
+    },
+    {
+      "path": "out/evidence/evidence.png",
+      "hash_matches": true
+    },
+    {
+      "path": "out/evidence/runtime_probe.json",
+      "hash_matches": true
+    },
+    {
+      "path": "out/evidence/audio.wav",
+      "hash_matches": true
+    },
+    {
+      "path": "out/evidence/input_memory.json",
+      "hash_matches": true
+    },
+    {
+      "path": "out/evidence/worst_frame.json",
+      "hash_matches": true
+    },
+    {
+      "path": "out/evidence/video_ko.mp4",
+      "hash_matches": true
+    },
+    {
+      "path": "out/evidence/ko_banner.png",
+      "hash_matches": true
+    }
+  ],
+  "checks": {
+    "build": "passed_32768_bytes",
+    "reconcile_claims": "passed_does_not_prove_complete_engine",
+    "audit_doc_sync": "passed_does_not_prove_semantic_consistency"
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "case": "parallel_same_candidate",
+    "ok": true,
+    "same_path": true,
+    "fetch_calls": 1
+  },
+  {
+    "case": "ancillary_hash_tamper",
+    "rejected": true,
+    "error": "candidate files diverge"
+  },
+  {
+    "case": "traversal",
+    "rejected": true,
+    "error": "'../../outside' would be extracted to '/tmp/smsforge-blastem-native-review/focused_mutants/maintenance/tmp1rfvq49s/candidates/outside', which is outside the destination"
+  }
+]

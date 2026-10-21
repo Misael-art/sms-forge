@@ -1,0 +1,403 @@
+{
+  "assets": [
+    {
+      "adaptation": "WAV do PAK e referencia de papel, nao PSG pronto. Envelope e timbre autorados; sem transcricao automatica ou comparacao auditiva com a fonte.",
+      "author": "Codex, worker audio PSG OpenBOR pos-M6 (autoria assistida por IA)",
+      "bytes": 13,
+      "channel_indices": [
+        3
+      ],
+      "channels": "SFX_CHANNEL3",
+      "classification": "adapted",
+      "driver_calls_through_stop": 7,
+      "duration_ms_at_50_calls_per_second": 120,
+      "duration_ms_at_60_calls_per_second": {
+        "denominator": 60,
+        "numerator": 6000
+      },
+      "duration_ticks": 6,
+      "encoded_events": [
+        {
+          "register": "noise",
+          "tick": 0,
+          "value": 4
+        },
+        {
+          "register": "attenuation",
+          "tick": 0,
+          "value": 3
+        },
+        {
+          "register": "noise",
+          "tick": 1,
+          "value": 5
+        },
+        {
+          "register": "attenuation",
+          "tick": 1,
+          "value": 5
+        },
+        {
+          "register": "noise",
+          "tick": 3,
+          "value": 6
+        },
+        {
+          "register": "attenuation",
+          "tick": 3,
+          "value": 9
+        },
+        {
+          "register": "attenuation",
+          "tick": 5,
+          "value": 12
+        },
+        {
+          "register": "attenuation",
+          "tick": 6,
+          "value": 15
+        }
+      ],
+      "events": [
+        {
+          "attenuation": 3,
+          "noise_mode": 4,
+          "tick": 0
+        },
+        {
+          "attenuation": 5,
+          "noise_mode": 5,
+          "tick": 1
+        },
+        {
+          "attenuation": 9,
+          "noise_mode": 6,
+          "tick": 3
+        },
+        {
+          "attenuation": 12,
+          "noise_mode": null,
+          "tick": 5
+        },
+        {
+          "attenuation": 15,
+          "noise_mode": null,
+          "tick": 6
+        }
+      ],
+      "fidelity_claim": false,
+      "file": "res/audio/sfx_attack.psg",
+      "intent": "Sopro curto de golpe; brilho inicial e cauda breve.",
+      "kind": "sfx",
+      "mask": 2,
+      "origin": "reautoria/adaptacao PSG declarativa do papel sonoro OpenBOR",
+      "priority": 1,
+      "reference": {
+        "bytes": 4092,
+        "file": "data/source_openbor/gal_audio/data/sounds/att1.wav",
+        "pak_member": "data/sounds/att1.wav",
+        "sha256": "aefa21ba4960a65153ba6a2e2526f6c90d660afe7b3981d924da4dc3aee4f6e1",
+        "wav": {
+          "channels": 1,
+          "format": "PCM_WAV_reference_only",
+          "sample_rate": 22050,
+          "sample_width_bytes": 1,
+          "samples": 4048
+        }
+      },
+      "sha256": "c431529733827ebe838cd1b907f9c7413a8edc7aaed82b36fd63e8c97b422215",
+      "symbol": "sfx_attack",
+      "trigger": "accepted_attack_once"
+    },
+    {
+      "adaptation": "WAV do PAK e referencia de papel, nao PSG pronto. Envelope e timbre autorados; sem transcricao automatica ou comparacao auditiva com a fonte.",
+      "author": "Codex, worker audio PSG OpenBOR pos-M6 (autoria assistida por IA)",
+      "bytes": 15,
+      "channel_indices": [
+        3
+      ],
+      "channels": "SFX_CHANNEL3",
+      "classification": "adapted",
+      "driver_calls_through_stop": 11,
+      "duration_ms_at_50_calls_per_second": 200,
+      "duration_ms_at_60_calls_per_second": {
+        "denominator": 60,
+        "numerator": 10000
+      },
+      "duration_ticks": 10,
+      "encoded_events": [
+        {
+          "register": "noise",
+          "tick": 0,
+          "value": 4
+        },
+        {
+          "register": "attenuation",
+          "tick": 0,
+          "value": 0
+        },
+        {
+          "register": "noise",
+          "tick": 1,
+          "value": 5
+        },
+        {
+          "register": "attenuation",
+          "tick": 1,
+          "value": 3
+        },
+        {
+          "register": "noise",
+          "tick": 3,
+          "value": 6
+        },
+        {
+          "register": "attenuation",
+          "tick": 3,
+          "value": 6
+        },
+        {
+          "register": "attenuation",
+          "tick": 6,
+          "value": 10
+        },
+        {
+          "register": "attenuation",
+          "tick": 9,
+          "value": 13
+        },
+        {
+          "register": "attenuation",
+          "tick": 10,
+          "value": 15
+        }
+      ],
+      "events": [
+        {
+          "attenuation": 0,
+          "noise_mode": 4,
+          "tick": 0
+        },
+        {
+          "attenuation": 3,
+          "noise_mode": 5,
+          "tick": 1
+        },
+        {
+          "attenuation": 6,
+          "noise_mode": 6,
+          "tick": 3
+        },
+        {
+          "attenuation": 10,
+          "noise_mode": null,
+          "tick": 6
+        },
+        {
+          "attenuation": 13,
+          "noise_mode": null,
+          "tick": 9
+        },
+        {
+          "attenuation": 15,
+          "noise_mode": null,
+          "tick": 10
+        }
+      ],
+      "fidelity_claim": false,
+      "file": "res/audio/sfx_impact.psg",
+      "intent": "Transiente de contato forte com cauda descendente em volume.",
+      "kind": "sfx",
+      "mask": 2,
+      "origin": "reautoria/adaptacao PSG declarativa do papel sonoro OpenBOR",
+      "priority": 2,
+      "reference": {
+        "bytes": 4082,
+        "file": "data/source_openbor/gal_audio/data/sounds/hit1.wav",
+        "pak_member": "data/sounds/hit1.wav",
+        "sha256": "7c30e0f04cc0619aafdbbb69ffb83531f5f03073dd47c0d04b357a267d0af192",
+        "wav": {
+          "channels": 1,
+          "format": "PCM_WAV_reference_only",
+          "sample_rate": 11025,
+          "sample_width_bytes": 1,
+          "samples": 4024
+        }
+      },
+      "sha256": "8a346f1bc912922fb438d64bf0d47c4923268684aefac962dc48cc688441325b",
+      "symbol": "sfx_impact",
+      "trigger": "confirmed_hit_once"
+    },
+    {
+      "adaptation": "WAV do PAK e referencia de papel, nao PSG pronto. Envelope e timbre autorados; sem transcricao automatica ou comparacao auditiva com a fonte.",
+      "author": "Codex, worker audio PSG OpenBOR pos-M6 (autoria assistida por IA)",
+      "bytes": 14,
+      "channel_indices": [
+        3
+      ],
+      "channels": "SFX_CHANNEL3",
+      "classification": "adapted",
+      "driver_calls_through_stop": 19,
+      "duration_ms_at_50_calls_per_second": 360,
+      "duration_ms_at_60_calls_per_second": {
+        "denominator": 60,
+        "numerator": 18000
+      },
+      "duration_ticks": 18,
+      "encoded_events": [
+        {
+          "register": "noise",
+          "tick": 0,
+          "value": 5
+        },
+        {
+          "register": "attenuation",
+          "tick": 0,
+          "value": 1
+        },
+        {
+          "register": "noise",
+          "tick": 2,
+          "value": 6
+        },
+        {
+          "register": "attenuation",
+          "tick": 2,
+          "value": 4
+        },
+        {
+          "register": "attenuation",
+          "tick": 5,
+          "value": 7
+        },
+        {
+          "register": "attenuation",
+          "tick": 9,
+          "value": 10
+        },
+        {
+          "register": "attenuation",
+          "tick": 14,
+          "value": 13
+        },
+        {
+          "register": "attenuation",
+          "tick": 18,
+          "value": 15
+        }
+      ],
+      "events": [
+        {
+          "attenuation": 1,
+          "noise_mode": 5,
+          "tick": 0
+        },
+        {
+          "attenuation": 4,
+          "noise_mode": 6,
+          "tick": 2
+        },
+        {
+          "attenuation": 7,
+          "noise_mode": null,
+          "tick": 5
+        },
+        {
+          "attenuation": 10,
+          "noise_mode": null,
+          "tick": 9
+        },
+        {
+          "attenuation": 13,
+          "noise_mode": null,
+          "tick": 14
+        },
+        {
+          "attenuation": 15,
+          "noise_mode": null,
+          "tick": 18
+        }
+      ],
+      "fidelity_claim": false,
+      "file": "res/audio/sfx_fall.psg",
+      "intent": "Batida de queda no solo; cauda de ruido mais longa.",
+      "kind": "sfx",
+      "mask": 2,
+      "origin": "reautoria/adaptacao PSG declarativa do papel sonoro OpenBOR",
+      "priority": 3,
+      "reference": {
+        "bytes": 5512,
+        "file": "data/source_openbor/gal_audio/data/sounds/fall.wav",
+        "pak_member": "data/sounds/fall.wav",
+        "sha256": "338ef562041e9e1ac97987ed3257d197e38e86fa476281cc8d55fe0028a07f33",
+        "wav": {
+          "channels": 1,
+          "format": "PCM_WAV_reference_only",
+          "sample_rate": 11025,
+          "sample_width_bytes": 1,
+          "samples": 5453
+        }
+      },
+      "sha256": "b7bee6f8b8f5532945d2aa9152f8ca3b766eda4a53215efd4556dfff4e3d8025",
+      "symbol": "sfx_fall",
+      "trigger": "knockdown_ground_contact_once"
+    }
+  ],
+  "author": "Codex, worker audio PSG OpenBOR pos-M6 (autoria assistida por IA)",
+  "claim_ceiling": "offline_generation_and_stream_checks_only",
+  "contract": "O3/D11/M7",
+  "driver_sources": [
+    {
+      "bytes": 2721,
+      "file": "sdk/devkitSMS/PSGlib/PSGlib.h",
+      "sha256": "89391c5e48b4d7ad5bc71fe840c531f9701ad705a0ba00252aacc382a75fa7f4"
+    },
+    {
+      "bytes": 25227,
+      "file": "sdk/devkitSMS-upstream/PSGlib/src/PSGlib.c",
+      "sha256": "d285ee5f901c7bc6a5609dc778217be1f47fb76d228833c5970766f9196364ab"
+    }
+  ],
+  "generator": {
+    "file": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_audio.py",
+    "sha256": "083aebd17af01c9b22ddd031dcb672a91146aced3ec5a95ec2df12fb9fa6102f"
+  },
+  "header": {
+    "bytes": 1338,
+    "file": "inc/o3/psg_sfx.h",
+    "sha256": "8f036645c3b08ffc3875c8f40157cf08f028fd5d03d132b5c6bab573e33e8ad3"
+  },
+  "runtime_contract": {
+    "arbitration": "one SFX owner; fall(3)>impact(2)>attack(1); choose highest pending per tick before PSGSFXPlay; equal priority keeps current; lower/equal dropped, no queue; higher preempts without resume; clear priority when PSGSFXGetStatus()==PSG_STOPPED",
+    "attenuation": "initialize PSGSetSFXVolumeAttenuation(0) before playback",
+    "channels": "SFX_CHANNEL3",
+    "clock": "PSGSFXFrame exactly once per VBlank; never in both ISR and main",
+    "duration": "ticks are intervals from onset tick 0 to mute/stop tick D; D+1 driver calls include the terminal call; PAL not normalized",
+    "implementation_status": "coordinator_integration_required",
+    "loop": "PSGSFXPlay only; never PSGSFXPlayLoop or PSGPlay for these streams",
+    "mask": 2,
+    "music": "outside_O3",
+    "pause_restart": "pause: freeze owner and PSGSFXFrame, PSGSilenceChannels; resume: PSGRestoreVolumes then resume ticks; restart: PSGSFXStop and clear owner priority/pending events",
+    "placement": {
+      "address_end_exclusive": 32768,
+      "banks": [
+        0,
+        1
+      ],
+      "slot2_owner": "pose_stream",
+      "verify_in_linker_map": true
+    },
+    "restore": "PSGSFXPlay calls PSGSFXStop before replacing; terminal 0x00 calls PSGSFXStop and releases ch3; no music means mute. Music restoration must be revalidated if music enters scope."
+  },
+  "schema": "openbor2sms.audio_provenance.v1",
+  "source_archive": {
+    "bytes": 39500889,
+    "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4"
+  },
+  "validation": {
+    "audition": "not_run",
+    "budget": "not_run",
+    "host_streams": "checked",
+    "runtime": "not_run"
+  }
+}

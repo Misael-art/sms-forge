@@ -1,0 +1,19 @@
+Edit Image 1 into a genuinely readable 12-frame idle animation sheet. Image 1 provides the exact 4-column by 3-row layout; Image 2 is the approved Alis character/costume/color reference only. Keep one 4:3 canvas, twelve equal square cells, 4 columns x 3 rows, edge-to-edge with no gutters. Rebuild the poses so no cell is a clone of another. At final 80x80 logical size, every neighboring frame must show a clearly visible change in at least two body/weapon areas. The current sheet repeats its guard pose; remove those duplicates completely.
+
+Character: same slim, light-built Alis Landale, facing right in a 3/4 side-view fighting guard. Chestnut hair; pink and indigo upper costume; pink skirt; cream-white leg armor; silver-gray shoulder/knee plates; gold trim; short blue/cyan sword in right hand and compact pink/ivory/indigo shield on left forearm. Narrow shoulders and waist, slender arms, long lean legs; never broaden or bulk her up. Keep identity, costume, weapons, proportions, line width, height and bottom pivot consistent. The complete figure stays within each cell, approx. 72-74px tall in the final 80px cell. Same ground baseline, same scale and same camera. No cell borders, numbers, labels, scenery or text.
+
+Make one calm defensive idle cycle with conspicuous but small sequential pose changes, not attacks, jumps, or locomotion. Read cells left-to-right then top-to-bottom as these twelve different steps:
+1 settled guard, knees flexed, sword point diagonally up-forward;
+2 exhale: shoulders lower, sword point dips toward the hip;
+3 knees bend and torso lowers 2-3 logical pixels, shield draws closer;
+4 weight shifts back, rear heel lifts, sword hand moves inward;
+5 torso rises from bend, shield rotates edge-forward;
+6 shield arm lifts to cover upper torso, sword angles down across the body;
+7 weight starts forward, lead knee bends, sword wrist turns outward;
+8 shoulders inhale and rise, shield opens outward, hair lifts slightly;
+9 sword lifts beside the shoulder, torso turns a little more toward camera, feet remain planted;
+10 breath releases: torso dips, shield lowers, sword returns diagonally across the body;
+11 front heel settles, shoulders and arms soften, hair and cloth finish their motion;
+12 recover into a ready guard close to frame 1 but visibly different: sword lower, shield still slightly angled, weight centered. Each pose must be unique and connected by believable in-between movement; do not repeat a pose four times per row. Keep changes readable at sprite scale and do not change the weapon hand or facing direction.
+
+Pixel art only: large crisp square clusters, no anti-aliasing, no painterly smoothing. Exact opaque RGB swatches only: #550000 outline, #FFAAAA skin, #FFFFAA cream, #AA5500 hair, #FFAA00 warm gold, #FF55AA pink, #FFAAFF pink light, #5555AA indigo, #AAAAAA silver, #0055FF blade blue, #00FFFF blade cyan, #FFFF00 gold highlight, #FFFFFF white. Pure black only in transparent background, never on character. Flat hard cel shading, no gradients, dithering, glow, grain, red fringe, speckles, text, watermark, or extra colors.

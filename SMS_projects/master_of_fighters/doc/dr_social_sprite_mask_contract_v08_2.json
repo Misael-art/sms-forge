@@ -1,0 +1,110 @@
+{
+  "schema": "dr_social_sprite_mask_contract_v08_2",
+  "status": "owner_approved_for_production_source_and_diagnostic_rom",
+  "date": "2026-10-12",
+  "source_geometry": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+    "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+    "canvas_px": [
+      640,
+      720
+    ],
+    "grid": [
+      8,
+      9
+    ],
+    "cell_px": [
+      80,
+      80
+    ],
+    "active_pose_count": 61,
+    "sequence_counts": [
+      4,
+      8,
+      8,
+      8,
+      5,
+      8,
+      8,
+      8,
+      4
+    ],
+    "role": "frozen geometry only; not an approved color or production reference"
+  },
+  "palette": {
+    "transparent_index": 0,
+    "max_useful_colors": 12,
+    "candidate_useful_colors": 11,
+    "coat_ramp_indices": [
+      5,
+      6
+    ],
+    "coat_base_cyan": {
+      "index": 5,
+      "rgb": "#00AAAA"
+    },
+    "coat_shadow_dark_blue": {
+      "index": 6,
+      "rgb": "#005555"
+    },
+    "hair_grayscale_indices": [
+      8,
+      9
+    ],
+    "owner_authorized_yellow_glasses_pixels": 85,
+    "cane_shaft": "white index 7, continuous 1px exception"
+  },
+  "edit_authorization": {
+    "explicit_material_masks": true,
+    "cross_material_reclassification": true,
+    "cross_outline_reclassification": true,
+    "allowed_scope": "reclassify opaque pixels in clusters smaller than a true 2x2 block to the dominant color in their immediate 8-neighbor ring, including material and outline boundaries",
+    "strict_invariants": [
+      "binary transparency and exact alpha geometry",
+      "640x720 canvas and 8x9 grid of 80x80 cells",
+      "61 active poses and their ordering",
+      "original source-outline pixels remain outline",
+      "semantic white/yellow/burgundy anchors do not leak"
+    ],
+    "semantic_accent_targets_excluded": [
+      7,
+      11,
+      12
+    ],
+    "no_image_generation_or_diffusion": true
+  },
+  "cluster_rule": {
+    "minimum": "component must contain at least one solid 2x2 square",
+    "connectivity": 8,
+    "vote_neighborhood": "immediate 8-connected opaque ring only",
+    "remapping": "dominant adjacent indexed color; transfer material ownership when the winning index belongs to another material; index 1 may absorb boundary pixels as outline",
+    "execution": "one component at a time, recompute immediately, repeat to fixed point; stop as failed if unresolved or iteration limit reached",
+    "postconditions": {
+      "hair_sub2x2_components": 0,
+      "coat_sub2x2_components": 0,
+      "skin_sub2x2_components": 0,
+      "coat_noncanonical_indices_inside_mask": 0
+    }
+  },
+  "prohibited": [
+    "ImageGen or diffusion",
+    "blur, antialias, interpolation, color averaging, luminance filters, RGB-distance mapping",
+    "alpha changes or cell/frame resampling",
+    "ROM compilation before owner visual approval"
+  ],
+  "required_review_artifacts": [
+    "indexed 61-pose candidate PNG",
+    "per-material masks and pixel change log",
+    "1x/4x samples for Idle 1, Advance 1, Fall 2",
+    "semantic compliance and independent per-cell cluster audit",
+    "explicit note that quantitative pass is not artistic approval"
+  ],
+  "approval": {
+    "decision": "approved",
+    "date": "2026-10-12",
+    "decision_record": "doc/decisions/dr-social-animation-source-v08_2_owner_approval.json",
+    "asset_path": "res/approved_art/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_2_approved.png",
+    "sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+    "scope": "61-pose art source; runtime integration remains a distinct gate"
+  }
+}

@@ -1,0 +1,84 @@
+help
+frames 120
+printf "SMSFORGE_BOUNDARY 0 %d\n" frame
+printf "SMSFORGE_CPU 0 %d %d %d %d %d %d %d %d %d %d\n" pc sp af bc de hl ix iy cycle iff1
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/ram.bin" [0xc000] 8192
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/vram.bin" vdp:vram 16384
+save/w "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/cram_internal.bin" vdp:cram 32
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/vdp_regs.bin" vdp:reg 11
+save/w "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/psg_frequency.bin" psg:frequency 4
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/000/psg_volume.bin" psg:volume 4
+watchpoint 51192 1
+variable sms_hits_0 0
+commands 0
+set sms_hits_0 sms_hits_0+1
+printf "SMSFORGE_EVENT 0 %d %d %d %d %d %d %d %d\n" frame pc [51192] 0 vdp:vcounter vdp:hcounter vdp:address vdp:cd
+continue
+end
+breakpoint 11
+variable sms_hits_1 0
+commands 1
+if ([11] = 237) & ([12] = 105)
+if ((bc & 255) = 190) | ((bc & 255) = 191)
+set sms_hits_1 sms_hits_1+1
+printf "SMSFORGE_EVENT 1 %d %d %d %d %d %d %d %d\n" frame pc (hl & 255) (bc & 255) vdp:vcounter vdp:hcounter vdp:address vdp:cd
+end
+else
+printf "SMSFORGE_SITE_MISMATCH 1 %d\n" frame
+end
+continue
+end
+breakpoint 25
+variable sms_hits_2 0
+commands 2
+if ([25] = 211) & ([26] = 190)
+set sms_hits_2 sms_hits_2+1
+printf "SMSFORGE_EVENT 2 %d %d %d %d %d %d %d %d\n" frame pc (af / 256) 190 vdp:vcounter vdp:hcounter vdp:address vdp:cd
+else
+printf "SMSFORGE_SITE_MISMATCH 2 %d\n" frame
+end
+continue
+end
+binddown "gamepads.1.right"
+frames 7
+printf "SMSFORGE_BOUNDARY 1 %d\n" frame
+printf "SMSFORGE_CPU 1 %d %d %d %d %d %d %d %d %d %d\n" pc sp af bc de hl ix iy cycle iff1
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/001/ram.bin" [0xc000] 8192
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/001/vram.bin" vdp:vram 16384
+save/w "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/001/cram_internal.bin" vdp:cram 32
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/001/vdp_regs.bin" vdp:reg 11
+save/w "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/001/psg_frequency.bin" psg:frequency 4
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/001/psg_volume.bin" psg:volume 4
+bindup "gamepads.1.right"
+frames 3
+printf "SMSFORGE_BOUNDARY 2 %d\n" frame
+printf "SMSFORGE_CPU 2 %d %d %d %d %d %d %d %d %d %d\n" pc sp af bc de hl ix iy cycle iff1
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/ram.bin" [0xc000] 8192
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/vram.bin" vdp:vram 16384
+save/w "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/cram_internal.bin" vdp:cram 32
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/vdp_regs.bin" vdp:reg 11
+save/w "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/psg_frequency.bin" psg:frequency 4
+save/b "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/snapshots/002/psg_volume.bin" psg:volume 4
+bindup "gamepads.1.up"
+bindup "gamepads.1.down"
+bindup "gamepads.1.left"
+bindup "gamepads.1.right"
+bindup "gamepads.1.b"
+bindup "gamepads.1.c"
+bindup "gamepads.2.up"
+bindup "gamepads.2.down"
+bindup "gamepads.2.left"
+bindup "gamepads.2.right"
+bindup "gamepads.2.b"
+bindup "gamepads.2.c"
+printf "SMSFORGE_HITS 0 %d\n" sms_hits_0
+delete 0
+printf "SMSFORGE_HITS 1 %d\n" sms_hits_1
+delete 1
+printf "SMSFORGE_HITS 2 %d\n" sms_hits_2
+delete 2
+vdpsprites
+vr
+bindup "ui.screenshot"
+frames 1
+quit

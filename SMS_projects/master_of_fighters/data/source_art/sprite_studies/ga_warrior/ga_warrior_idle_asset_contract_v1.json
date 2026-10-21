@@ -1,0 +1,57 @@
+{
+  "schema": "sms_sprite_study_contract_v1",
+  "asset_id": "ga_warrior_idle_sms_96px_12f_v1",
+  "project": "master_of_fighters",
+  "asset_role": "source_art_sprite_study",
+  "character": "ga_warrior",
+  "visual_reference": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_sms_palette.png",
+  "approval_scope": "owner-approved concept v2 used as design reference; this sprite study remains unapproved pending owner review",
+  "sheet": {
+    "columns": 4,
+    "rows": 3,
+    "frame_count": 12,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_px": [96, 96],
+    "sheet_px": [384, 288],
+    "ground_pivot_px": [48, 95],
+    "target_visible_height_px": 88,
+    "height_tolerance_px": [84, 88],
+    "max_visible_width_px": 88,
+    "minimum_horizontal_margin_px": 4,
+    "normalization": "uniform nearest-neighbor fit of each isolated silhouette within an 88x88 px envelope, centered horizontally and bottom-aligned at y=95",
+    "scale_note": "provisional GDD heavy-class envelope near 88 px; confirm final runtime scale with scale_pilot before locking"
+  },
+  "action": {
+    "state": "idle",
+    "facing": "right, three-quarter side view",
+    "motion": "twelve distinct, connected guard-idle keys with subtle breathing and weight shifts; no attacks, lunges, jumps, steps or locomotion",
+    "continuity": "same scale, feet baseline, pivot, camera, silhouette, design and weapon hands in all cells"
+  },
+  "design_lock": [
+    "young lean-athletic Golden Axe Warrior, not a brute or tank",
+    "bare chest and shoulders",
+    "blue animal-fur cape with large clean stylized tufts, no noisy texture",
+    "blue trousers and brown boots with amber/gold details",
+    "blue horned helmet with gold details",
+    "one sword held close with point down; one round blue-and-gold shield on the lead arm",
+    "no extra weapons, armor redesign, cape recolor or bodybuilder anatomy"
+  ],
+  "palette": {
+    "manifest_character": "ga_warrior",
+    "source": "doc/palettes_manifest.json",
+    "transparent_index": 0,
+    "maximum_useful_colors": 15,
+    "dither": "none",
+    "grain_or_texture": false
+  },
+  "gates": [
+    "audit_validate_resources.py",
+    "audit_animation_semantics.py"
+  ],
+  "not_claimed": [
+    "final game animation or complete moveset",
+    "runtime sprite geometry or metasprite validity",
+    "scanline budget validity",
+    "ROM integration or emulator validation"
+  ]
+}

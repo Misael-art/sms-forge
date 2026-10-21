@@ -1,0 +1,57 @@
+{
+  "visual_epoch": "delivery",
+  "delivery_intent": true,
+  "claim": "delivery",
+  "canvas": {
+    "w": 256,
+    "h": 192,
+    "console": "sms"
+  },
+  "characters": [
+    {
+      "id": "kage",
+      "role": "player",
+      "png": "res/proof/kage_idle_full.png",
+      "min_visible_height_px": 31,
+      "visible_height_px": 32,
+      "entity_geometry_px": [16, 32],
+      "runtime_parts": ["res/sprites/kage_idle_u.png", "res/sprites/kage_idle_d.png"],
+      "note": "Kage shinobi matsuri protagonist; prova integral 16x32, runtime em duas partes 8x16"
+    },
+    {
+      "id": "samurai",
+      "role": "enemy",
+      "png": "res/proof/samurai_idle_full.png",
+      "min_visible_height_px": 31,
+      "visible_height_px": 32,
+      "entity_geometry_px": [16, 32],
+      "runtime_parts": ["res/sprites/samurai_idle_u.png", "res/sprites/samurai_idle_d.png"],
+      "note": "Samurai matsuri festival guard; prova integral 16x32, runtime em duas partes 8x16"
+    }
+  ],
+  "stage": {
+    "bga": "res/bg/stage.png",
+    "contains_branding": false,
+    "note": "Rua matsuri lateral autoral sem branding"
+  },
+  "hud": {
+    "boxes": [
+      {
+        "name": "player_hp",
+        "x": 8,
+        "y": 8,
+        "w": 48,
+        "h": 16
+      },
+      {
+        "name": "goal_torii",
+        "x": 200,
+        "y": 24,
+        "w": 48,
+        "h": 16
+      }
+    ]
+  },
+  "rom_path": "out/rom/kage_matsuri.sms",
+  "binding_map": "doc/rom_asset_binding.json"
+}

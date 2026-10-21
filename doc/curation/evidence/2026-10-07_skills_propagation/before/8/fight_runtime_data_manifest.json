@@ -1,0 +1,1653 @@
+{
+  "schema": "sms_integrated_fight_runtime_data_v2",
+  "source_slots": [
+    {
+      "meta_max_bytes": 106,
+      "source_sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133",
+      "source_def": "ffspRyo.def",
+      "state_coverage": {
+        "idle": {
+          "available": true,
+          "source_action": 0,
+          "source_state": null
+        },
+        "walk_f": {
+          "available": true,
+          "source_action": 20,
+          "source_state": null
+        },
+        "walk_b": {
+          "available": true,
+          "source_action": 21,
+          "source_state": null
+        },
+        "jump": {
+          "available": true,
+          "source_action": 40,
+          "source_state": null
+        },
+        "crouch": {
+          "available": true,
+          "source_action": 100,
+          "source_state": null
+        },
+        "guard": {
+          "available": true,
+          "source_action": 120,
+          "source_state": null
+        },
+        "punch": {
+          "available": true,
+          "source_action": 200,
+          "source_state": 200
+        },
+        "hp": {
+          "available": true,
+          "source_action": 220,
+          "source_state": 220
+        },
+        "special": {
+          "available": true,
+          "source_action": 1000,
+          "source_state": 1000
+        },
+        "ko": {
+          "available": true,
+          "source_action": 5050,
+          "source_state": 5050
+        },
+        "kick": {
+          "available": true,
+          "source_action": 230,
+          "source_state": 230
+        },
+        "hk": {
+          "available": true,
+          "source_action": 250,
+          "source_state": 250
+        },
+        "punch_close": {
+          "available": false
+        },
+        "hp_close": {
+          "available": false
+        },
+        "kick_close": {
+          "available": false
+        },
+        "hk_close": {
+          "available": false
+        },
+        "punch_far": {
+          "available": true,
+          "source_action": 201,
+          "source_state": 201
+        },
+        "hp_far": {
+          "available": true,
+          "source_action": 221,
+          "source_state": 221
+        },
+        "kick_far": {
+          "available": true,
+          "source_action": 231,
+          "source_state": 231
+        },
+        "hk_far": {
+          "available": true,
+          "source_action": 251,
+          "source_state": 251
+        }
+      },
+      "unconsumed_source_roles": [
+        {
+          "role": "hit",
+          "source_action": 5000,
+          "source_state": 5000
+        },
+        {
+          "role": "air_lp",
+          "source_action": 600,
+          "source_state": 600
+        },
+        {
+          "role": "air_hp",
+          "source_action": 620,
+          "source_state": 620
+        },
+        {
+          "role": "air_lk",
+          "source_action": 630,
+          "source_state": 630
+        },
+        {
+          "role": "air_hk",
+          "source_action": 650,
+          "source_state": 650
+        }
+      ],
+      "command_coverage": {
+        "special": {
+          "source_command": "236_x",
+          "pattern_symbol": "KEN_CUT_CMD_SPECIAL",
+          "runtime_command": "FIGHT_CMD_SPECIAL_UNSUPPORTED"
+        },
+        "hp": {
+          "source_command": "z",
+          "pattern_symbol": "KEN_CUT_CMD_HP",
+          "runtime_command": "FIGHT_CMD_HP"
+        },
+        "lp": {
+          "source_command": "x",
+          "pattern_symbol": "KEN_CUT_CMD_LP",
+          "runtime_command": "FIGHT_CMD_LP"
+        },
+        "hk": {
+          "source_command": "c",
+          "pattern_symbol": "KEN_CUT_CMD_HK",
+          "runtime_command": "FIGHT_CMD_HK"
+        },
+        "lk": {
+          "source_command": "a",
+          "pattern_symbol": "KEN_CUT_CMD_LK",
+          "runtime_command": "FIGHT_CMD_LK"
+        }
+      },
+      "command_priority": [
+        "special",
+        "hp",
+        "lp",
+        "hk",
+        "lk"
+      ],
+      "input_thresholds": {
+        "key1": 6,
+        "key2": 6
+      },
+      "damage_models": [
+        {
+          "role": "punch",
+          "source_state": 200,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp",
+          "source_state": 220,
+          "source_hitdef_count": 2,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick",
+          "source_state": 230,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk",
+          "source_state": 250,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "punch_far",
+          "source_state": 201,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp_far",
+          "source_state": 221,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick_far",
+          "source_state": 231,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk_far",
+          "source_state": 251,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        }
+      ],
+      "unsupported_capabilities": [
+        {
+          "role": "special",
+          "source_action": 1000,
+          "source_state": 1000,
+          "fidelity": "unsupported",
+          "reason": "projectile entities are not implemented in the fight runtime"
+        }
+      ],
+      "source_limitations": [
+        "common1.cns ausente; o parser usou fallback local common_forge.cns",
+        "licença desconhecida; manter derivações locais e não redistribuídas",
+        "tiers médios y e b foram descartados pelo mapa de controle de dois tiers",
+        "acordes simultâneos sem papel de runtime são rejeitados como golpes simples; botões precisam corresponder exatamente ao padrão importado",
+        "as variantes far State 201/221/231/251 são selecionadas como fallback ordenado após State 200/220/230/250 com P2BodyDist X < 32; apenas entrada direta em pé/controle é executada e grupos de cancelamento/chain do source CMD não rodam",
+        "State 220 near HP declara velset=2,0,0, mas a velocidade do papel base HP no runtime permanece zero; esse movimento não é reproduzido",
+        "States 250/251 usam physics=N; essa semântica de física não é importada pelo runtime",
+        "este corte não inclui as ações especiais bloqueadas por dependências não representáveis nem a entidade projectile",
+        "binding special=236_x deriva da entrada observável do .cmd; transição CNS ainda precisa de verificação no conversor/runtime"
+      ],
+      "optional_state_role_coverage": {
+        "punch_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "punch",
+          "distance_runtime_q8": 0
+        },
+        "hp_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hp",
+          "distance_runtime_q8": 0
+        },
+        "kick_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "kick",
+          "distance_runtime_q8": 0
+        },
+        "hk_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hk",
+          "distance_runtime_q8": 0
+        }
+      },
+      "close_attack_coverage": [],
+      "optional_far_attack_role_coverage": {
+        "punch_far": {
+          "role": "punch_far",
+          "available": true,
+          "source_action": 201,
+          "source_state": 201,
+          "runtime_state_id": 201,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "punch",
+          "distance_runtime_q8": 5512,
+          "source_command": "x",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 200,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "time >= 7"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20",
+              "stateno = 200",
+              "time >= 7"
+            ],
+            "3": [
+              "stateno = 21"
+            ]
+          }
+        },
+        "hp_far": {
+          "role": "hp_far",
+          "available": true,
+          "source_action": 221,
+          "source_state": 221,
+          "runtime_state_id": 221,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 62,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hp",
+          "distance_runtime_q8": 5512,
+          "source_command": "z",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 220,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        },
+        "kick_far": {
+          "role": "kick_far",
+          "available": true,
+          "source_action": 231,
+          "source_state": 231,
+          "runtime_state_id": 231,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 35,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "kick",
+          "distance_runtime_q8": 5512,
+          "source_command": "a",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 230,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          }
+        },
+        "hk_far": {
+          "role": "hk_far",
+          "available": true,
+          "source_action": 251,
+          "source_state": 251,
+          "runtime_state_id": 251,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 80,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hk",
+          "distance_runtime_q8": 5512,
+          "source_command": "c",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 250,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        }
+      },
+      "far_attack_coverage": [
+        {
+          "role": "punch_far",
+          "available": true,
+          "source_action": 201,
+          "source_state": 201,
+          "runtime_state_id": 201,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "punch",
+          "distance_runtime_q8": 5512,
+          "source_command": "x",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 200,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "time >= 7"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20",
+              "stateno = 200",
+              "time >= 7"
+            ],
+            "3": [
+              "stateno = 21"
+            ]
+          }
+        },
+        {
+          "role": "hp_far",
+          "available": true,
+          "source_action": 221,
+          "source_state": 221,
+          "runtime_state_id": 221,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 62,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hp",
+          "distance_runtime_q8": 5512,
+          "source_command": "z",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 220,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        },
+        {
+          "role": "kick_far",
+          "available": true,
+          "source_action": 231,
+          "source_state": 231,
+          "runtime_state_id": 231,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 35,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "kick",
+          "distance_runtime_q8": 5512,
+          "source_command": "a",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 230,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 400",
+              "movecontact = 1"
+            ]
+          }
+        },
+        {
+          "role": "hk_far",
+          "available": true,
+          "source_action": 251,
+          "source_state": 251,
+          "runtime_state_id": 251,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 80,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hk",
+          "distance_runtime_q8": 5512,
+          "source_command": "c",
+          "source_condition": "P2BodyDist X >= 32 (ordered fallback after < 32)",
+          "near_source_state": 250,
+          "near_source_condition": "P2BodyDist X < 32",
+          "source_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          },
+          "source_near_uncompiled_trigger_groups": {
+            "2": [
+              "stateno = 20"
+            ],
+            "3": [
+              "stateno = 21"
+            ],
+            "4": [
+              "stateno = 200",
+              "movecontact = 1"
+            ],
+            "5": [
+              "stateno = 201",
+              "movecontact = 1"
+            ],
+            "6": [
+              "stateno = 230",
+              "movecontact = 1"
+            ],
+            "7": [
+              "stateno = 231",
+              "movecontact = 1"
+            ],
+            "8": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "9": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "10": [
+              "stateno = 240",
+              "movecontact = 1"
+            ],
+            "11": [
+              "stateno = 241",
+              "movecontact = 1"
+            ],
+            "12": [
+              "stateno = 210",
+              "movecontact = 1"
+            ],
+            "13": [
+              "stateno = 211",
+              "movecontact = 1"
+            ],
+            "14": [
+              "stateno = 400",
+              "movecontact = 1"
+            ],
+            "15": [
+              "stateno = 430",
+              "movecontact = 1"
+            ],
+            "16": [
+              "stateno = 410",
+              "movecontact = 1"
+            ],
+            "17": [
+              "stateno = 440",
+              "movecontact = 1"
+            ]
+          }
+        }
+      ],
+      "close_distance_q8_values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "far_distance_q8_values": [
+        5512,
+        5512,
+        5512,
+        5512
+      ],
+      "ground_front_runtime_q8": 3101,
+      "close_geometry": {
+        "ground_front_source_units": 18,
+        "fighter_scale_ratio": {
+          "numerator": 72,
+          "denominator": 107
+        },
+        "ground_front_runtime_q8": 3101
+      },
+      "integrated_character_initializer": "{ ken_anims, p1_states, KEN_CUT_POSE_COUNT, KEN_POSE_BASE, KEN_FRAME_DATA_BANK, KEN_FRAME_DATA_OFF, KEN_POSE_INDEX_BANK, KEN_POSE_META_BANK, KEN_POSE_INDEX_OFF, 1000, 2585, 110, 8, 3, 5, ken_close_distances_q8, ken_far_distances_q8, 3101 },"
+    },
+    {
+      "meta_max_bytes": 97,
+      "source_sha256": "ad646be47eb314ee0ea8d5595b4524823e277a722c9162c59ce8bd05b085687c",
+      "source_def": "A-Terry.def",
+      "state_coverage": {
+        "idle": {
+          "available": true,
+          "source_action": 0,
+          "source_state": null
+        },
+        "walk_f": {
+          "available": true,
+          "source_action": 20,
+          "source_state": null
+        },
+        "walk_b": {
+          "available": true,
+          "source_action": 21,
+          "source_state": null
+        },
+        "jump": {
+          "available": true,
+          "source_action": 41,
+          "source_state": null
+        },
+        "crouch": {
+          "available": true,
+          "source_action": 11,
+          "source_state": null
+        },
+        "guard": {
+          "available": true,
+          "source_action": 131,
+          "source_state": null
+        },
+        "punch": {
+          "available": true,
+          "source_action": 200,
+          "source_state": 200
+        },
+        "hp": {
+          "available": true,
+          "source_action": 210,
+          "source_state": 210
+        },
+        "special": {
+          "available": true,
+          "source_action": 1000,
+          "source_state": 1000
+        },
+        "ko": {
+          "available": true,
+          "source_action": 5110,
+          "source_state": 5150
+        },
+        "kick": {
+          "available": true,
+          "source_action": 220,
+          "source_state": 220
+        },
+        "hk": {
+          "available": true,
+          "source_action": 230,
+          "source_state": 230
+        },
+        "punch_close": {
+          "available": true,
+          "source_action": 205,
+          "source_state": 205
+        },
+        "hp_close": {
+          "available": true,
+          "source_action": 215,
+          "source_state": 215
+        },
+        "kick_close": {
+          "available": true,
+          "source_action": 225,
+          "source_state": 225
+        },
+        "hk_close": {
+          "available": true,
+          "source_action": 235,
+          "source_state": 235
+        },
+        "punch_far": {
+          "available": false
+        },
+        "hp_far": {
+          "available": false
+        },
+        "kick_far": {
+          "available": false
+        },
+        "hk_far": {
+          "available": false
+        }
+      },
+      "unconsumed_source_roles": [
+        {
+          "role": "hit",
+          "source_action": 5000,
+          "source_state": 5000
+        },
+        {
+          "role": "air_lp",
+          "source_action": 600,
+          "source_state": 600
+        },
+        {
+          "role": "air_hp",
+          "source_action": 610,
+          "source_state": 610
+        },
+        {
+          "role": "air_lk",
+          "source_action": 620,
+          "source_state": 620
+        },
+        {
+          "role": "air_hk",
+          "source_action": 640,
+          "source_state": 640
+        }
+      ],
+      "command_coverage": {
+        "special": {
+          "source_command": "PowerWave_x",
+          "pattern_symbol": "RYU_CUT_CMD_SPECIAL",
+          "runtime_command": "FIGHT_CMD_SPECIAL_UNSUPPORTED"
+        },
+        "hp": {
+          "source_command": "y",
+          "pattern_symbol": "RYU_CUT_CMD_HP",
+          "runtime_command": "FIGHT_CMD_HP"
+        },
+        "lp": {
+          "source_command": "x",
+          "pattern_symbol": "RYU_CUT_CMD_LP",
+          "runtime_command": "FIGHT_CMD_LP"
+        },
+        "hk": {
+          "source_command": "b",
+          "pattern_symbol": "RYU_CUT_CMD_HK",
+          "runtime_command": "FIGHT_CMD_HK"
+        },
+        "lk": {
+          "source_command": "a",
+          "pattern_symbol": "RYU_CUT_CMD_LK",
+          "runtime_command": "FIGHT_CMD_LK"
+        }
+      },
+      "command_priority": [
+        "special",
+        "hp",
+        "lp",
+        "hk",
+        "lk"
+      ],
+      "input_thresholds": {
+        "key1": 6,
+        "key2": 6
+      },
+      "damage_models": [
+        {
+          "role": "punch",
+          "source_state": 200,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp",
+          "source_state": 210,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick",
+          "source_state": 220,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk",
+          "source_state": 230,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "punch_close",
+          "source_state": 205,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp_close",
+          "source_state": 215,
+          "source_hitdef_count": 2,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick_close",
+          "source_state": 225,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk_close",
+          "source_state": 235,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        }
+      ],
+      "unsupported_capabilities": [
+        {
+          "role": "special",
+          "source_action": 1000,
+          "source_state": 1000,
+          "fidelity": "unsupported",
+          "reason": "projectile entities are not implemented in the fight runtime"
+        }
+      ],
+      "source_limitations": [
+        "licença desconhecida; manter derivações locais e não redistribuídas",
+        "este perfil do Terry usa x/y para socos e a/b para chutes; z/c pertencem ao mapa de outro personagem, como Ryo, e não devem ser descartados globalmente",
+        "as variantes de curta distância 205/215/225/235 usam P2BodyDist X < 15; o runtime converte ground.front e o limite pela escala uniforme de cada ator, sem executar outros controladores CNS",
+        "ataques agachados não estão no corte; golpes de botão ficam bloqueados enquanto baixo estiver pressionado ou o estado atual for crouch",
+        "o comando y+b do State -1 vai ao State 240 e não é importado; o reconhecedor exige máscara exata de botões para impedir que um acorde não mapeado vire um golpe simples",
+        "as ações aéreas incluídas são 600/610/620/640; variantes 625/630 e as quatro ações aéreas importadas não são selecionadas pelo runtime atual",
+        "o salto importa apenas Action 41; a fonte usa Action 40 de início e variantes direcionais/descida, que o runtime não encadeia",
+        "loop_start=0 em idle, caminhada, salto e agachamento é política local e não declara o LoopStart original do AIR; guarda e hit não recebem reinício forçado, mas KO usa só a pose Action 5110 de um frame, sem executar as transições CNS",
+        "o papel KO aponta para State 5150 e Action 5110: Action 5140 está ausente e common.cns cai para 5110; a tabela atual usa a pose de um frame, sem executar transições do CNS",
+        "Action 131 é a pose de guarda agachada ativa; início/fim da guarda e variantes em pé/aérea não estão no runtime",
+        "o .cmd inclui PowerWave_x/y, Burn Knuckle_x/y, Crack Shoot_a/b, Rising Tackle_x/y e Power Geyser_x/y; só PowerWave_x está declarado no corte, nenhum desses comandos entra na luta e não há entidade de projétil",
+        "a seleção próxima é derivada do recorte State -1 e usa dano de primeiro overlap visível; os tempos HitDef, cancelamentos e demais transições CNS continuam aproximados",
+        "a ação hit e os golpes aéreos são importados como dados, mas não são consumidos pela tabela de luta atual",
+        "sprites ausentes (99,0), (99,2) e (1010,2) aparecem em outras ações; nenhuma dessas ações entra neste corte"
+      ],
+      "optional_state_role_coverage": {
+        "punch_close": {
+          "role": "punch_close",
+          "available": true,
+          "source_action": 205,
+          "source_state": 205,
+          "runtime_state_id": 205,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 20,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "punch",
+          "distance_runtime_q8": 2584,
+          "source_command": "x",
+          "source_condition": "P2BodyDist X < 15",
+          "threshold_source_units": 15,
+          "threshold_runtime_q8": 2584
+        },
+        "hp_close": {
+          "role": "hp_close",
+          "available": true,
+          "source_action": 215,
+          "source_state": 215,
+          "runtime_state_id": 215,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 2,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hp",
+          "distance_runtime_q8": 2584,
+          "source_command": "y",
+          "source_condition": "P2BodyDist X < 15",
+          "threshold_source_units": 15,
+          "threshold_runtime_q8": 2584
+        },
+        "kick_close": {
+          "role": "kick_close",
+          "available": true,
+          "source_action": 225,
+          "source_state": 225,
+          "runtime_state_id": 225,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 20,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "kick",
+          "distance_runtime_q8": 2584,
+          "source_command": "a",
+          "source_condition": "P2BodyDist X < 15",
+          "threshold_source_units": 15,
+          "threshold_runtime_q8": 2584
+        },
+        "hk_close": {
+          "role": "hk_close",
+          "available": true,
+          "source_action": 235,
+          "source_state": 235,
+          "runtime_state_id": 235,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hk",
+          "distance_runtime_q8": 2584,
+          "source_command": "b",
+          "source_condition": "P2BodyDist X < 15",
+          "threshold_source_units": 15,
+          "threshold_runtime_q8": 2584
+        }
+      },
+      "close_attack_coverage": [
+        {
+          "role": "punch_close",
+          "available": true,
+          "source_action": 205,
+          "source_state": 205,
+          "runtime_state_id": 205,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 20,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "punch",
+          "distance_runtime_q8": 2584,
+          "source_command": "x",
+          "source_condition": "P2BodyDist X < 15",
+          "threshold_source_units": 15,
+          "threshold_runtime_q8": 2584
+        },
+        {
+          "role": "hp_close",
+          "available": true,
+          "source_action": 215,
+          "source_state": 215,
+          "runtime_state_id": 215,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 2,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hp",
+          "distance_runtime_q8": 2584,
+          "source_command": "y",
+          "source_condition": "P2BodyDist X < 15",
+          "threshold_source_units": 15,
+          "threshold_runtime_q8": 2584
+        },
+        {
+          "role": "kick_close",
+          "available": true,
+          "source_action": 225,
+          "source_state": 225,
+          "runtime_state_id": 225,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 20,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "kick",
+          "distance_runtime_q8": 2584,
+          "source_command": "a",
+          "source_condition": "P2BodyDist X < 15",
+          "threshold_source_units": 15,
+          "threshold_runtime_q8": 2584
+        },
+        {
+          "role": "hk_close",
+          "available": true,
+          "source_action": 235,
+          "source_state": 235,
+          "runtime_state_id": 235,
+          "runtime_flags": "S_HIT",
+          "runtime_damage": 30,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "source_hitdef_count": 1,
+          "fidelity": "approximate",
+          "fidelity_reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage",
+          "fallback_role": "hk",
+          "distance_runtime_q8": 2584,
+          "source_command": "b",
+          "source_condition": "P2BodyDist X < 15",
+          "threshold_source_units": 15,
+          "threshold_runtime_q8": 2584
+        }
+      ],
+      "optional_far_attack_role_coverage": {
+        "punch_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "punch",
+          "distance_runtime_q8": 0
+        },
+        "hp_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hp",
+          "distance_runtime_q8": 0
+        },
+        "kick_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "kick",
+          "distance_runtime_q8": 0
+        },
+        "hk_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hk",
+          "distance_runtime_q8": 0
+        }
+      },
+      "far_attack_coverage": [],
+      "close_distance_q8_values": [
+        2584,
+        2584,
+        2584,
+        2584
+      ],
+      "far_distance_q8_values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "ground_front_runtime_q8": 2928,
+      "close_geometry": {
+        "ground_front_source_units": 17,
+        "fighter_scale_ratio": {
+          "numerator": 72,
+          "denominator": 107
+        },
+        "ground_front_runtime_q8": 2928
+      },
+      "integrated_character_initializer": "{ ryu_anims, p2_states, RYU_CUT_POSE_COUNT, RYU_POSE_BASE, RYU_FRAME_DATA_BANK, RYU_FRAME_DATA_OFF, RYU_POSE_INDEX_BANK, RYU_POSE_META_BANK, RYU_POSE_INDEX_OFF, 1000, 2560, 128, 10, 4, 5, ryu_close_distances_q8, ryu_far_distances_q8, 2928 },"
+    }
+  ],
+  "runtime_actor_aliases": {
+    "p1": "ken",
+    "p2": "ryu"
+  },
+  "runtime_actor_alias_scope": "legacy C storage namespaces only; not character identity",
+  "source_identity_by_slot": {
+    "p1": {
+      "source_def": "ffspRyo.def",
+      "source_sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133"
+    },
+    "p2": {
+      "source_def": "A-Terry.def",
+      "source_sha256": "ad646be47eb314ee0ea8d5595b4524823e277a722c9162c59ce8bd05b085687c"
+    }
+  },
+  "role_accounting": {
+    "runtime_roles": [
+      "idle",
+      "walk_f",
+      "walk_b",
+      "jump",
+      "crouch",
+      "guard",
+      "punch",
+      "hp",
+      "special",
+      "ko",
+      "kick",
+      "hk",
+      "punch_close",
+      "hp_close",
+      "kick_close",
+      "hk_close",
+      "punch_far",
+      "hp_far",
+      "kick_far",
+      "hk_far"
+    ],
+    "unconsumed_source_roles_by_slot": {
+      "p1": [
+        {
+          "role": "hit",
+          "source_action": 5000,
+          "source_state": 5000
+        },
+        {
+          "role": "air_lp",
+          "source_action": 600,
+          "source_state": 600
+        },
+        {
+          "role": "air_hp",
+          "source_action": 620,
+          "source_state": 620
+        },
+        {
+          "role": "air_lk",
+          "source_action": 630,
+          "source_state": 630
+        },
+        {
+          "role": "air_hk",
+          "source_action": 650,
+          "source_state": 650
+        }
+      ],
+      "p2": [
+        {
+          "role": "hit",
+          "source_action": 5000,
+          "source_state": 5000
+        },
+        {
+          "role": "air_lp",
+          "source_action": 600,
+          "source_state": 600
+        },
+        {
+          "role": "air_hp",
+          "source_action": 610,
+          "source_state": 610
+        },
+        {
+          "role": "air_lk",
+          "source_action": 620,
+          "source_state": 620
+        },
+        {
+          "role": "air_hk",
+          "source_action": 640,
+          "source_state": 640
+        }
+      ]
+    },
+    "scope": "unconsumed roles have no state or input mapping in this runtime"
+  },
+  "scope": "fixed common-state subset; no general CNS interpreter"
+}

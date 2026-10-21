@@ -1,0 +1,51 @@
+{
+  "schema": "mof_character_moveset_concept_v1",
+  "character_id": "jj_zillion_ii",
+  "display_name": "J.J.",
+  "source_game": "Zillion II: The Tri Formation (Sega Master System)",
+  "status": "draft_for_owner_review_not_balanced",
+  "design_role": "mobile mid-range laser fighter",
+  "weight_class_proposal": "leve",
+  "source_boundary": "Weapon identity and move concepts use Master System game evidence only. At the owner's request, anime references inform costume construction in the visual concept only; they do not define moves, lore, or palette.",
+  "principles": [
+    "Keep shots single-hit until the project's multi-hit rule is decided.",
+    "Preserve recovery windows so the Zillion Laser can be approached or guarded against.",
+    "Treat Armorater movement as a brief, telegraphed repositioning action, not a permanent form change.",
+    "Do not assign frame data, damage, invulnerability, or projectile speed before the character is reviewed and measured."
+  ],
+  "basic_attack_direction": [
+    "compact lead-hand punch",
+    "short low kick",
+    "quick Zillion pistol butt strike at point blank"
+  ],
+  "specials": [
+    {
+      "id": "zillion_laser",
+      "name": "Disparo Zillion",
+      "source_basis": "J.J.'s laser weapon is part of the Master System game depiction and equipment identity.",
+      "concept": "One straight, clearly telegraphed laser shot for mid-range control.",
+      "frame_data": null,
+      "damage": null,
+      "measurement_gates": ["projectile slot and hitbox contract", "worst-frame budget", "single-hit semantics"]
+    },
+    {
+      "id": "armorater_shift",
+      "name": "Evasão Armorater",
+      "source_basis": "The Japanese package description says J.J.'s buggy can change into Armorater; see SMS Power scan.",
+      "concept": "A brief, telegraphed upward displacement using Armorater propulsion, then an immediate return to the normal J.J. silhouette.",
+      "frame_data": null,
+      "damage": null,
+      "measurement_gates": ["owner approval of vehicle/armor interpretation", "coreografia and hitbox contract", "worst-frame budget", "pose upload bandwidth"]
+    }
+  ],
+  "open_questions": [
+    "Does Armorater appear as a complete transformation, a short boost, or stay outside the playable moveset?",
+    "Should the Zillion Laser be a projectile that can be guarded, or a short-range ray with a different counter window?",
+    "Confirm light class and 72–76 px height through the project scale pilot."
+  ],
+  "approval": {
+    "owner_approved": false,
+    "frame_data_measured": false,
+    "rom_implementation": false
+  }
+}

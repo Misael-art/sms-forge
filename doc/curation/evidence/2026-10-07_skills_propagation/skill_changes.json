@@ -1,0 +1,98 @@
+{
+  "changes": [
+    {
+      "skill": "evidence-protocol",
+      "change": "sessão privada, agência, throughput separado de stepping",
+      "lessons": [
+        "L038",
+        "L057",
+        "L071"
+      ],
+      "measurement": [
+        "audit_learning_capture",
+        "audit_subagent_session"
+      ]
+    },
+    {
+      "skill": "sms-input-pause",
+      "change": "input em frames, ACK separado de consumo, console separado da pausa técnica",
+      "lessons": [
+        "L039",
+        "L065",
+        "L066",
+        "L067"
+      ],
+      "measurement": [
+        "audit_learning_capture",
+        "session_bridge/acceptance"
+      ]
+    },
+    {
+      "skill": "sms-fight-input-proof",
+      "change": "frames VDP, baseline, estado do defensor e dano atribuível",
+      "lessons": [
+        "L060",
+        "L065",
+        "L097"
+      ],
+      "measurement": [
+        "audit_learning_capture",
+        "audit_import_semantics"
+      ]
+    },
+    {
+      "skill": "sms-video-evidence",
+      "change": "timeline inteira, vídeo durante gesto, cleanup próprio; legado explícito",
+      "lessons": [
+        "L056",
+        "L057"
+      ],
+      "measurement": [
+        "capture_video",
+        "audit_learning_capture"
+      ]
+    },
+    {
+      "skill": "sms-sprite-animation",
+      "change": "IDs AIR distintos para mesmo RGB; fonte-only e limites dos loops",
+      "lessons": [
+        "L037",
+        "L071",
+        "L083"
+      ],
+      "measurement": [
+        "audit_import_semantics",
+        "air_source_identity"
+      ]
+    },
+    {
+      "skill": "sms-psg-audio",
+      "change": "captura privada, gate de rota/duração, sinal vs música",
+      "lessons": [
+        "L057"
+      ],
+      "measurement": [
+        "capture_audio",
+        "session_bridge/audio_acceptance"
+      ]
+    },
+    {
+      "skill": "sms-mugen-source-semantics (nova)",
+      "change": "parse/generated/consumed/runtime, perfil close/far e fonteAIR",
+      "lessons": [
+        "L071",
+        "L083",
+        "L093",
+        "L094",
+        "L095"
+      ],
+      "measurement": [
+        "scene_cut",
+        "fight_runtime_data",
+        "audit_import_semantics",
+        "45 focused tests"
+      ]
+    }
+  ],
+  "warning": "lesson applications; measurement references do not claim new execution of historical acceptance suites"
+}

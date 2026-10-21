@@ -1,0 +1,185 @@
+{
+  "schema": "sms_independent_backend_review_v2",
+  "reviewer_id": "/root/review_qa_contract",
+  "producer_id": "/root",
+  "review_date": "2026-10-10",
+  "status": "needs_revision",
+  "scope": "Final read-only wrapper/auditor/skill forward review; parser/auditor selfchecks only; no emulator",
+  "reviewed_files": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py",
+      "sha256": "eedf896583cdb481e695c06dddd4a72869f6dcef38b5c46139831ceeac30b777",
+      "snapshot": "/tmp/smsforge-blastem-native-review/0_final_blastem_sms.py",
+      "snapshot_sha256": "eedf896583cdb481e695c06dddd4a72869f6dcef38b5c46139831ceeac30b777"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py",
+      "sha256": "c0ecfba5c4e3695ead708840d7595547ba5c14f9c0057358421b7c5ff78f2d76",
+      "snapshot": "/tmp/smsforge-blastem-native-review/1_final_audit_blastem_sms.py",
+      "snapshot_sha256": "c0ecfba5c4e3695ead708840d7595547ba5c14f9c0057358421b7c5ff78f2d76"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+      "sha256": "b6bfe94012d612555be072bf4ddd8ea090b812ef8b1a9e50d39bcf56fe7e3aea",
+      "snapshot": "/tmp/smsforge-blastem-native-review/2_final_sms-emulator-diagnostics.md",
+      "snapshot_sha256": "b6bfe94012d612555be072bf4ddd8ea090b812ef8b1a9e50d39bcf56fe7e3aea"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "sha256": "93ce50f22dc60617d85dc3a11177964470ac44284b0d1f638be864e64c3deacf",
+      "snapshot": "/tmp/smsforge-blastem-native-review/3_final_blastem-sms-diagnostics.md",
+      "snapshot_sha256": "93ce50f22dc60617d85dc3a11177964470ac44284b0d1f638be864e64c3deacf"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+      "sha256": "5114b08179eb1a3a3f7fb3d7fed13b44e1a8e6a5d5ccefab559f34e1eea67922",
+      "snapshot": "/tmp/smsforge-blastem-native-review/4_final_SMS_GLOBAL.md",
+      "snapshot_sha256": "5114b08179eb1a3a3f7fb3d7fed13b44e1a8e6a5d5ccefab559f34e1eea67922"
+    }
+  ],
+  "forward_review": {
+    "request": "Tenho bug VRAM/timing ROM.sms: qual emulador usar, roteiro com P1/P2+neutral e como avaliar?",
+    "chosen_route": "Emulicious privado para reproduzir a falha e medir vídeo/probe/throughput/worst-frame; BlastEm SMS privado como segunda observação de RAM/VDP/Z80 para uma hipótese concreta.",
+    "context_before_execution": [
+      "Ler memory bank/GDD/spec/TDD reais e legíveis",
+      "Fixar SHA ROM, modelo/região e contrato de baseline",
+      "EIO/EACCES bloqueiam caso de produção; não inventar contexto",
+      "Substituir magic/endereço de fixture pelos predicados reais do jogo"
+    ],
+    "sequence_template": {
+      "schema": "sms_blastem_sequence_v1",
+      "model": "sms2",
+      "region": "ntsc",
+      "warmup_frames": 120,
+      "steps": [
+        {
+          "frames": 7,
+          "p1": 8,
+          "p2": 0
+        },
+        {
+          "frames": 3,
+          "p1": 0,
+          "p2": 0
+        },
+        {
+          "frames": 9,
+          "p1": 0,
+          "p2": 16
+        },
+        {
+          "frames": 3,
+          "p1": 0,
+          "p2": 0
+        }
+      ]
+    },
+    "template_limits": "Somente exemplo não executado; duração e warmup precisam casar com contrato real. Ausência de predicates implica generic_diagnostic_only, não aplicabilidade do caso. P1right8/P2button1=16; neutral explícito libera ambos.",
+    "bounded_execution": [
+      "blastem_sms.py --self-check e audit_blastem_sms.py --self-check",
+      "blastem_sms.py run --rom ABS_ROM --script ABS_JSON --output ABS_EVIDENCE",
+      "audit_blastem_sms.py --session ABS_SESSION --current-rom ABS_ROM --require-current-tool"
+    ],
+    "review": [
+      "Inspecionar logs e hashes, baseline/tamanhos, RAM/VRAM/VDP por fronteira e CPU coerente",
+      "Consumo P1/P2 precisa de telemetria/hook/probe da própria ROM; ACK/comando aplicado não bastam",
+      "Comparar estados homologados entre emuladores; não exigir igualdade de PC, boot-frame ou representações CRAM internas",
+      "Screenshot é um frame depois do último dump com inputs soltos; não é imagem daquele snapshot",
+      "Divergência abre hipótese e reteste; concordância não prova hardware físico",
+      "Não extrair FPS/duração CPU dos ciclos internos; PAL/audio/throughput BlastEm não qualificados"
+    ],
+    "state": "forward_review_source_only_not_executed"
+  },
+  "self_checks": [
+    {
+      "tool": "blastem_sms.py --self-check",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "tool": "audit_blastem_sms.py --self-check",
+      "exit_code": 0,
+      "status": "passed",
+      "scope": "Synthetic schema fixtures, not ROM/runtime evidence"
+    }
+  ],
+  "resolved_prior_findings": [
+    {
+      "id": "B01",
+      "detail": "Predicate count and explicit generic vs passed applicability present; auditor independently checks coverage/status."
+    },
+    {
+      "id": "B02",
+      "detail": "check_dumps(root,0) runs before any binding input; truncated baseline selfcheck added."
+    },
+    {
+      "id": "B03",
+      "detail": "cleanup_owned attempts both processes independently and closes FDs after first subprocess error; state failed on cleanup errors; selfcheck exercises first cleanup failure."
+    },
+    {
+      "id": "B04",
+      "detail": "Precondition list/type/string/limit and unknown top-level fields rejected explicitly."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "priority": 2,
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py",
+      "line": 93,
+      "status": "open",
+      "title": "CPU snapshot indices not validated against boundaries",
+      "detail": "Auditor compares decoded rows to metadata and checks length only. Consistently duplicated/reordered CPU indices can pass while boundaries are0..N; the wrapper itself rejects these.",
+      "recommendation": "Demand indices exactly range(len(bounds)), with negative selfcheck for duplicate/swappedCPU indices and correspondingly updated metadata/file hashes."
+    },
+    {
+      "id": "F02",
+      "priority": 2,
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py",
+      "line": 113,
+      "status": "open",
+      "title": "Renderer rejection differs from wrapper",
+      "detail": "Auditor rejects falling back to SDL2 renderer but not Initialization of GLEW failed, which wrapper rejects.",
+      "recommendation": "Use shared qualified-renderer rejection helper or mirror both tokens; negative synthetic test should include GLEW failure plus matching hashes."
+    }
+  ],
+  "missing_contracts_and_limits": [
+    {
+      "topic": "Input consumption",
+      "detail": "Bundle auditor validates record acquisition/identity; it does not compare requested gestures with actual ROM input consumption or prove fighter action. Skill/workflow correctly demand real consumption. Future automated approval needs per-case hash-bound input/state trace contract."
+    },
+    {
+      "topic": "Sequence and config semantics",
+      "detail": "Config/debugger commands are hash-bound but auditor does not reconstruct their semantic correspondence to sequence. Treat PASS as record consistency, not independent input execution authentication."
+    },
+    {
+      "topic": "Capture",
+      "detail": "Monochrome256x192 can retain completed RAM diagnostic status; no visual pass. Only final screenshot+1 frame collected, no full motion/flicker timeline proof."
+    },
+    {
+      "topic": "Performance and sound",
+      "detail": "No realtime throughput, CPU-exclusive duration, PAL or audio/music verification in BlastEm backend; route to Emulicious for these axes."
+    },
+    {
+      "topic": "Source provenance",
+      "detail": "Imported source hash is guarded and adapter_source.py is preserved. Full supporting release inventory remains locally recorded, not a separately pinned immutable manifest; keep provenance ceiling explicit."
+    },
+    {
+      "topic": "Cleanup",
+      "detail": "Metadata polls direct owned parents; no claim of OS isolation/security or entire host liveness should be inferred."
+    }
+  ],
+  "runtime_coverage": {
+    "emulator_run": "not_run",
+    "rom_sha": "not_applicable_source_review",
+    "session_id": null,
+    "visual_review": "not_run",
+    "audio": "not_run",
+    "fps": "not_run",
+    "input_consumption": "not_run"
+  },
+  "claim_ceiling": "source_review_and_synthetic_contract_checks_only",
+  "recommendation": "Correct F01/F02 and rerun focused selfchecks before accepting auditor consistency contract; central route/skill/workflow scope is appropriate. Native acceptance remains separate.",
+  "next_action": "Coordinator fixes two audit gaps and seals final hashes; then own-session native workers evaluate real SMS traces and current-ROM eligibility. No product promotion.",
+  "files_written_scope": "/tmp/smsforge-blastem-native-review only; earlier review.json preserved"
+}

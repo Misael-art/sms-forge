@@ -1,0 +1,112 @@
+{
+  "schema": "sms_art_asset_candidate_metadata_v1",
+  "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v4_candidate",
+  "character": "DR. FERDINAND SOCIAL",
+  "artifact_kind": "character_concept_model_sheet",
+  "catalog_index": 1,
+  "revision": 4,
+  "style_id": "CPS2-Alpha-Cel",
+  "franchise_reference": "Street Fighter Zero (Alpha) · Arcade CPS-2 · 1990s",
+  "status": "owner_approved",
+  "created_date": "2026-10-11",
+  "image": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "dimensions_px": [
+      1619,
+      971
+    ],
+    "format": "PNG",
+    "color_mode": "RGB"
+  },
+  "parent_references": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/dr_social_model_sheet_cps2_alpha_cel_v3_candidate.png",
+      "sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e",
+      "role": "direct composition/costume reference; superseded as active candidate"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+      "role": "previously approved identity/style matrix; now superseded as active model-sheet head and retained historically"
+    }
+  ],
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4_prompt.txt",
+    "sha256": "464eccb292332a990941bbecfb7f27c50693934f6ff5b3c088d7c05794242885",
+    "stages": 2
+  },
+  "generation": {
+    "tool": "built-in image_gen.imagegen",
+    "method": "image edit in two stages: composition/anatomy revision, then technical typography refinement",
+    "generated_output_preserved_without_pixel_edit": true,
+    "outputs": [
+      "/home/misael/.codex/generated_images/01a0ffb3-0f5b-70a0-8e6c-33a88a5cada7/exec-ed32cbab-b524-4092-91fa-a085f98691cd.png",
+      "/home/misael/.codex/generated_images/01a0ffb3-0f5b-70a0-8e6c-33a88a5cada7/exec-dba78034-e7ac-4b7f-8a71-736b71c1bf5e.png"
+    ]
+  },
+  "preserved_identity": [
+    "Fully human adult investigator; no monster traits or transformation",
+    "Gray-brown wavy hair, round brass spectacles and intelligent face",
+    "Tall lean ectomorph proportions and 7.5H comparison guide",
+    "Approved blue/cyan/teal, white, gray, burgundy, brown/brass palette; violet reserved for boomerang effect",
+    "CPS2-Alpha-Cel visual language and neutral cream sheet layout"
+  ],
+  "requested_revision": [
+    "Late-19th-century London frock coat, waistcoat, high collar, burgundy cravat, period trousers and leather boots consistently across front/profile/back.",
+    "Keep the profile pose and face identity close to approved v2.",
+    "Show the cane-holding arm in front of the torso with a visible shoulder-to-elbow-to-wrist-to-hand chain; keep the blunt walking cane distinct from any blade.",
+    "Show the boomerang throwing arm as a separate continuous anatomical chain and make the steel crescent silhouette distinct from violet effects.",
+    "Show the walking cane, rapier and steel boomerang as project concept gear; place knife, hammer, axe, pistol, bomb and stake under source-game references with inventory terms explicitly open.",
+    "Replace small technical pseudo-text with short readable English lines."
+  ],
+  "equipment_reference_scope": {
+    "project_concept_gear": [
+      "walking cane",
+      "rapier",
+      "steel boomerang"
+    ],
+    "source_game_arsenal_reference_only": [
+      "knife",
+      "hammer",
+      "axe",
+      "pistol",
+      "bomb",
+      "stake"
+    ],
+    "not_a_fighter_moveset_approval": true,
+    "inventory_conflict": "The GDD inventory and combat-design proposal/community-guide terminology disagree on several items. This sheet marks the source-game list as reference with open terminology and does not resolve project canon."
+  },
+  "sources": [
+    {
+      "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+      "sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c",
+      "role": "project roster and weapon inventory authority"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_combat_design_proposal_v1.md",
+      "sha256": "fba3fdadb46cb9ed0cd005edbd5fd1e3bf8cd8bb0ac35c10eb5ceebc2bc5db0e",
+      "role": "weapon-source discrepancy and fighter adaptation boundary"
+    }
+  ],
+  "producer_visual_review": {
+    "status": "independent_review_passed_and_owner_approved",
+    "observed": [
+      "In the signature pose, the cane is held in front of the body with the curved brass handle, straight shaft and rounded ground ferrule visible; the rapier remains separate in the gear panel.",
+      "The boomerang silhouette is visually distinct from the violet motion accents, and its throwing arm is extended toward it.",
+      "The accessory panel separates project concept gear from source-game references and the technical-card text is substantially more legible than the prior draft."
+    ],
+    "open_review": [
+      "The source-game inventory terminology differs between the GDD and combat proposal. The sheet keeps those objects reference-only; reconcile source terminology before any fan-game moveset or equipment decision."
+    ]
+  },
+  "approval_scope": "Approved character concept/model-sheet reference only; no sprites, moveset, animation, SMS conversion, integration, ROM or game-delivery approval.",
+  "owner_approval": {
+    "approved": true,
+    "reviewer": "project_owner",
+    "date": "2026-10-11",
+    "scope": "Concept/model-sheet reference only; no sprites, moveset, animation, SMS conversion, integration or ROM approval.",
+    "decision_path": "SMS_projects/master_of_fighters/doc/decisions/dr_social_model_sheet_cps2_alpha_cel_v04_owner_approval.json",
+    "approved_image_sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "native_agent_id": "/root/native_audio_qa",
+  "state": "prepared_not_executed_waiting_freeze",
+  "context_mode": "diagnostic",
+  "cases": [
+    {
+      "id": "silent_probe_native_media",
+      "rom": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/independent_request/rom.sms",
+      "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "runtime_precondition": {
+        "address": 50944,
+        "equals_hex": "534d493101"
+      },
+      "warmup_frames": 120,
+      "sequence": [
+        {
+          "frames": 120
+        }
+      ],
+      "checks": [
+        "Runtime SMI1 ID1 before recording; no assumption from binary literal search",
+        "APNG native raw retained/hash; CRC traverse allows only pinned acTL zero-frame CRC correction to derived decoded",
+        "APNG native canvas256x192, frame count positive and changing ROM frame display, nominal duration only",
+        "WAVE PCM16 stereo nonempty sampleframes/rate/duration, expected peak0",
+        "VGM header/length/version/chipclock/dataoffset/footer fields and bounded PSG event decode if format supported; registerlog only"
+      ]
+    },
+    {
+      "id": "sonic_archived_native_media",
+      "rom": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/rom.sms",
+      "sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+      "runtime_precondition": "Inspect snapshot/header without assuming SMRT magic or reusing probe RAM address",
+      "warmup_frames": 120,
+      "sequence": [
+        {
+          "frames": 240
+        }
+      ],
+      "checks": [
+        "Same APNG/WAVE/VGM structuralchecks",
+        "WAVE expected peak>0, report samples/duration; no equality to nominal APNG duration required by async mixer contract",
+        "Do not infer note correctness or compare unaligned historicalaudio",
+        "Report native snapshot PSG volumes/frequencies as bounded observations, not audible mix"
+      ]
+    }
+  ],
+  "limits": [
+    "No realtimeFPS claim",
+    "No universal audio fidelity or musiccorrectness",
+    "No session_qaBlastEm integration approval",
+    "Original rawfiles immutable; derivedfiles named separately",
+    "Independent ownsession perROM; exacthash beforelaunch; cleanupfinally; no hostroutingorinput"
+  ]
+}

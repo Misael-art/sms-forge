@@ -1,0 +1,331 @@
+{
+  "schema": "smsforge.blastem_expansion_native_final_review.v1",
+  "native_worker_id": "/root/review_qa_contract",
+  "created_at_utc": "2026-10-10T12:50:21.251191+00:00",
+  "status": "passed_focused_review_scope_only",
+  "scope": "Read-only independent tool and workflow review; own synthetic negatives in/tmp; existing native session reviewed as recorded source/contract evidence, not claimed as my own execution. No emulator/desktop/hostinput used.",
+  "source_hashes": {
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_maintenance.py": "2410f096accf3f9d12b43e521d697311c826aa766d730315554791829df7f7b1",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py": "eb1be91be884d837547d67ba8b423157901df0f090d2905a2b553b16f24bcee8",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md": "490c6ea73deaee1612a165db0bd91b140d6ec2acf5f36f84717f60ebb724f7a3",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md": "7d3525d521536b1b529f7e40d5539a51e55dc31622dc22a726792d7569457aa6",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md": "a85d020ae40accf97158310ebf73876c9f72f5c981a4c2adc518463a44798567",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/subagent-emulator-qa.md": "2b7c2b3942180d5dfbe975bd0f0d570cbb78befaf3a2c9cd10c097ffdabf7e3d"
+  },
+  "original_review_preserved": "/tmp/smsforge-blastem-native-review/expanded_review.json",
+  "findings": [
+    {
+      "id": "BEX-01",
+      "priority": "P1",
+      "status": "corrected_and_retested",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py",
+      "line": 63,
+      "title": "Bankable PC accepted as fixed VDP OUT site",
+      "observed": "validate_features and instrumentation accept pc=0x03FF or0x1000 and only compare ROM file bytes; generated breakpoint commands have no live opcode guard.",
+      "why": "Official Sega mapper fixes only first1024bytes; laterbankchanges alter logical bytes0400–3FFF. An event can be labeled vdp_io_before_out at a site executing another instruction. Codemasters also prevents universal fixedlowbank assumption.",
+      "evidence": "focused_mutants/remaining_cases.json",
+      "source_refs": [
+        "sms.c:727–738",
+        "romdb.c:1690–1717",
+        "debug.c:read_z80"
+      ],
+      "recommendation": "Require qualified mapper+fullyfixed2byte site, or validate exact live opcode bytes for every hit; preserve mismatch/skipped scope and count. Add a bank-switch negative fixture.",
+      "retest": "PC03FF/1000 rejected; two-byte<=03FE bounds and live Z80byte guard present; injected SITE_MISMATCH makes audit fail. OUT(C),r filter nested inside opcode guard. Identity/routine equivalence with same opcode remains outside scope."
+    },
+    {
+      "id": "BEX-02",
+      "priority": "P2",
+      "status": "corrected_and_retested",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py",
+      "line": 137,
+      "title": "Impossible VDP internal event values accepted",
+      "observed": "Complete rebound synthetic bundle with vcounter/hslot/address/cd=99999 passes audit.",
+      "why": "NoCPUresync permits stalephase, not values impossible for storedfieldtypes. vcounter is uint16,hslot/cd uint8 in vdp.h.",
+      "evidence": "focused_mutants/full_audit/results_after_media_fix.json",
+      "recommendation": "Validate source-type ranges for each raw internal field, without claiming CPU alignment; add negative event fixtures. Address is uint32, so use actual qualified bound or type scope rather than inventing14bit for internal state.",
+      "retest": "Same preserved 99999 internals fixture now structuredFAIL; source-type bounds present."
+    },
+    {
+      "id": "BEX-03",
+      "priority": "P2",
+      "status": "corrected_and_retested",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py",
+      "line": 163,
+      "title": "Unknown WAVE format escapes structured audit result",
+      "observed": "A size-consistent WAVE with formatTag3 throws wave.Error through audit(), which catchesOSError/ValueError/TypeError/etc but notwave.Error.",
+      "evidence": "focused_mutants/remaining_cases.json",
+      "recommendation": "Translate wave.Error to ValueError in wave_summary or catch explicitly in audit; return structured failed audit. Negative test formatTag3.",
+      "retest": "Same unknownformatTag3 fixture now structuredFAIL ValueError, no escapingwave.Error."
+    },
+    {
+      "id": "BEX-04",
+      "priority": "P2",
+      "status": "corrected_and_retested",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py",
+      "title": "Truncated WAVE accepted with declared duration",
+      "observed_before_fix": "Header claimed1920PCMbytes but actual1520; media_summary and fullaudit previouslyPASS.",
+      "observed_after_fix": "Same preserved fixture nowFAIL invalid/truncated native WAVE container.",
+      "evidence": [
+        "focused_mutants/results.json",
+        "focused_mutants/full_audit/results.json",
+        "focused_mutants/full_audit/results_after_media_fix.json"
+      ]
+    },
+    {
+      "id": "BEX-05",
+      "priority": "P2",
+      "status": "corrected_and_retested",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py",
+      "title": "Header-only VGM accepted as PSG log",
+      "observed_before_fix": "Vgm+60zeros accepted by media_summary and fullaudit.",
+      "observed_after_fix": "Same fixture nowFAIL invalid/truncated native VGM container; helper validates qualified version/clock/EOF/data/waits/end.",
+      "evidence": [
+        "focused_mutants/results.json",
+        "focused_mutants/full_audit/results.json",
+        "focused_mutants/full_audit/results_after_media_fix.json"
+      ]
+    }
+  ],
+  "selfchecks": {
+    "blastem_sms.py": "PASS",
+    "blastem_diagnostics.py": "PASS",
+    "blastem_maintenance.py": "PASS",
+    "audit_blastem_sms.py": "PASS"
+  },
+  "focused_retests": [
+    {
+      "case": "truncated_wave",
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": false,
+        "errors": [
+          "unreadable/invalid bundle: invalid/truncated native WAVE container"
+        ],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      }
+    },
+    {
+      "case": "invalid_vgm",
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": false,
+        "errors": [
+          "unreadable/invalid bundle: invalid/truncated native VGM container"
+        ],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      }
+    },
+    {
+      "case": "invalid_vdp_internals",
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": false,
+        "errors": [
+          "VDP internal observation exceeds upstream field types"
+        ],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      }
+    },
+    {
+      "case": "wrong_vdp_site_pc",
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": true,
+        "errors": [],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      }
+    },
+    {
+      "case": "unknown_wave_format",
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": false,
+        "errors": [
+          "unreadable/invalid bundle: invalid native WAVE format: unknown format: 3"
+        ],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      }
+    },
+    {
+      "case": "bankable_pc",
+      "pc": 1023,
+      "rejected": true,
+      "reason": "VDP I/O breakpoint must fit in first 1KiB; other sites need mapping qualification"
+    },
+    {
+      "case": "bankable_pc",
+      "pc": 4096,
+      "rejected": true,
+      "reason": "VDP I/O breakpoint must fit in first 1KiB; other sites need mapping qualification"
+    },
+    {
+      "case": "dynamic_out_guard_source",
+      "commands": [
+        "breakpoint 32",
+        "variable sms_hits_0 0",
+        "commands 0\nif ([32] = 237) & ([33] = 105)\nif ((bc & 255) = 190) | ((bc & 255) = 191)\nset sms_hits_0 sms_hits_0+1\nprintf \"SMSFORGE_EVENT 0 %d %d %d %d %d %d %d %d\\n\" frame pc (hl & 255) (bc & 255) vdp:vcounter vdp:hcounter vdp:address vdp:cd\nend\nelse\nprintf \"SMSFORGE_SITE_MISMATCH 0 %d\\n\" frame\nend\ncontinue\nend"
+      ]
+    },
+    {
+      "case": "site_mismatch_marker",
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": false,
+        "errors": [
+          "VDP site opcode changed at runtime"
+        ],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      }
+    }
+  ],
+  "maintenance_focused_cases": [
+    {
+      "case": "parallel_same_candidate",
+      "ok": true,
+      "same_path": true,
+      "fetch_calls": 1
+    },
+    {
+      "case": "ancillary_hash_tamper",
+      "rejected": true,
+      "error": "candidate files diverge"
+    },
+    {
+      "case": "traversal",
+      "rejected": true,
+      "error": "'../../outside' would be extracted to '/tmp/smsforge-blastem-native-review/focused_mutants/maintenance/tmp1rfvq49s/candidates/outside', which is outside the destination"
+    }
+  ],
+  "existing_native_review": {
+    "session": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/final3/blastem-sms-7358c1f3de6a429c9e6df733ae8a6297",
+    "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+    "event_counts": [
+      2,
+      952,
+      952
+    ],
+    "event_definitions": [
+      {
+        "index": 0,
+        "kind": "cpu_write",
+        "address": 51192,
+        "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+      },
+      {
+        "index": 1,
+        "kind": "vdp_io_before_out",
+        "address": 11,
+        "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+      },
+      {
+        "index": 2,
+        "kind": "vdp_io_before_out",
+        "address": 25,
+        "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+      }
+    ],
+    "native_media": {
+      "apng": {
+        "frames": 34,
+        "size": [
+          256,
+          192
+        ],
+        "different_from_first": 33,
+        "container_duration_ms": 566.6666666666667,
+        "clock": "nominal_60Hz_not_realtime_FPS",
+        "raw_preserved": true,
+        "derived_acTL_crc_repairs": 1
+      },
+      "wave": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_frames": 27648,
+        "duration_seconds": 0.576,
+        "peak": 0,
+        "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+      },
+      "vgm": {
+        "bytes": 88,
+        "psg_writes": 11,
+        "wait_samples_44100": 1,
+        "scope": "PSG register log_not_audible_mix_or_trailing_silence_duration"
+      }
+    },
+    "cleanup": {
+      "sandbox_exited": true,
+      "xvfb_exited": true
+    },
+    "source_pins": {
+      "wrapper_sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+      "diagnostics_sha256": "3f2ad687afb94a08911393dc465dbb491aaa7d4ed9a0e397657eba13c571b40b"
+    },
+    "audit_historical": {
+      "schema": "sms_blastem_audit_v1",
+      "ok": true,
+      "errors": [],
+      "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+    },
+    "audit_current_tool": {
+      "schema": "sms_blastem_audit_v1",
+      "ok": false,
+      "errors": [
+        "bundle generated with another diagnostics revision"
+      ],
+      "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+    },
+    "mismatch_marker_present": false,
+    "count_lines": [
+      "> SMSFORGE_HITS 0 2",
+      "> SMSFORGE_HITS 1 952",
+      "> SMSFORGE_HITS 2 952"
+    ]
+  },
+  "historical_helper_ast_diff": {
+    "changed_functions": [
+      "self_check"
+    ],
+    "note": "AST function comparison only; no relaxation of require-current-tool"
+  },
+  "forward_skill_review": {
+    "request": "lifebar corrompe depois de golpe; 60fps e SFX corretos?",
+    "response": "Eu começaria reproduzindo o golpe em Emulicious privado com a ROM congelada e o estado inicial confirmado. Capturaria a sequência completa, a alteração real de life/FSM e a recuperação. Para investigar a corrupção, compararia o framebuffer com RAM de life, buffers do HUD, tiles/name table, registradores e paleta. Usaria BlastEm como segunda observação quando houver uma hipótese concreta de RAM, upload ou mapper. A confirmação de60FPS viria de medição em tempo real com probe da ROM; SFX correto exige o evento esperado e áudio do mesmo trecho alinhado. Ainda não há ROM/probe/trecho para concluir esses três resultados.",
+    "required_context": [
+      "memorybank/GDD/spec/TDD legíveis sem EIO/EACCES",
+      "ROMreal congelada/SHA/buildmap e endereços reais de probe",
+      "estado inicial estável e bytes de precondição",
+      "comando do golpe e consequência esperada provenientes do contrato de luta",
+      "SFXID, canal e referência/timestamps do trecho esperado"
+    ],
+    "primary_emulicious_plan": [
+      "Preparar pedidosV2production por session_qa.py, com workerID nativo e uma sessão privada por worker, relaçãochained para gesto+consequência+cauda; manterinputP1/P2+neutro emframesinteiros.",
+      "Runtime: provar consumo da sequência, golpe/FSM/vida esperada e leitura estável após reação; ACKnão prova acerto. Testar ataqueP1 e ataqueP2 em casos aplicáveis separados ou timelinecumulativa explicitamente contratada.",
+      "Visual: abrir PNG/framebuffer nativo e frames da timeline antes/durante/depois da corrupção; procurar tiles residuais, mapa/paleta errados, omissão/flicker. audit_render_glitch/renderfidelity quando houver imagens legais e assetbinding da SHA atual. Contagem de cores ou HUD mudando não decide animação nem qualidade.",
+      "Desempenho: rodada emtempo real com measure_runtime_probe.py e probeSMRT real, reserva cooperativa e cargahost registrada; medir piorframe/VBlank com ferramenta própria se upload for suspeito. APNG/stepping não pagam throughput nem60FPS.",
+      "Áudio: captura isolada capture_audio.py com duração efetiva, PID/rota/mute corretos; conferir SFXID/canal/momento no probe/manifest e comparar ou ouvir trechos alinhados. Pico/sinal sozinho não prova SFXcorreto. Se worker não puder ouvir/comparar, fidelidade fica not_run.",
+      "Máximo3workers: runtime,visual,audio_qa; sem compartilhar sessões nem simular pareceres. Audit_subagent_session valida vínculo/cobertura/cleanup; produtor consolida observações nativas sem autopromoção."
+    ],
+    "secondary_blastem_plan": [
+      "Mesma ROM/SHA, modeloNTSC e precondição real; roteiro próprio cumulativo com o mesmo gesto/cauda sem copiar PCs/bootframe entreemuladores.",
+      "cpu_watches em vida/FSM/cacheHUD do mapa real. Evento é mudança RAM observada no trap, não escrita committed nem writerinferido deobserved_pc stale. Snapshot/probe posterior completa consequência.",
+      "vdp_io_breakpoints apenas em PCs<=03FE e opcodequalificado; guard lê doisbytesZ80vivos emcadahit e mismatches falham. OUT(C),r filtraCBE/BF. Não cobreOUTI/OTIR, aliasesoutros, sitesbankáveis nem hooksVDP nativos.",
+      "Comparar dumps/visoresderivados a framebuffer real. Nametableunscrolled256x224 não é screenshot; CRAM interna é decodificada noencodingSMS.",
+      "APNGraw preservado+derivadoCRCestreito, WAVE/VGM comvalidade/cobertura medida como diagnóstico. Não inferir frame-lock, SFX correto ou60FPS dessas mídias.",
+      "Executar audit_blastem_sms com currentROM e require-current-tool para elegibilidade atual; coleçãohistórica e concordância entreemuladores não aprovam hardware/produto."
+    ],
+    "judgment": "skill_and_workflow_route_requests_to_measurable_evidence_without_overclaiming",
+    "execution": "forward_plan_only_no_game_ROM_supplied_no_emulator_started"
+  },
+  "limits": [
+    "No game lifebar/gameplay/60FPS/SFX claim validated.",
+    "Current-tool native collection not executed; preserved final3 helper hash differs, so require-current-tool fails as designed.",
+    "Native session images/audio were not perceptually reviewed here; numerical/media decoding is record validation only.",
+    "observed_pc remains stale-capable; trap observation is before OUT/write commit and VDP state is not CPU-resynchronized.",
+    "Live identical opcode does not authenticate routine/bank identity; unsupported instructionpaths may bypass sites.",
+    "Only source-type bounds paid for raw VDP internals, not hardware timing or stricter semantic ranges.",
+    "Maintenance tests used mockedarchives/network; no candidate binary executed and no new release qualified."
+  ],
+  "recommendation": "Focused blockers corrected and independently retested. Preserve old reviews and historical IDs/hashes; perform fresh current-tool native acceptance for any current-revision eligibility claim. Game quality remains untested."
+}

@@ -1,0 +1,23 @@
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/audio.rel --opt-code-size -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_build_20261008/inc src/audio.c
+src/audio.c:18: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:19: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:28: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:32: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:36: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:40: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:44: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:48: warning 357: pointer to object in read-only code space should be pointer to const
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/fight.rel --opt-code-size -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_build_20261008/inc src/fight.c
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:57: error 20: Undefined identifier 'AT_N'
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:57: error 289: variable length array declarators must have function prototype scope or block scope
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:57: error 290: variable length arrays can be initialized by empty initalizers only
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:58: error 20: Undefined identifier 'AT_N'
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:58: error 289: variable length array declarators must have function prototype scope or block scope
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:58: error 290: variable length arrays can be initialized by empty initalizers only
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:59: error 20: Undefined identifier 'AT_N'
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:59: error 289: variable length array declarators must have function prototype scope or block scope
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:59: error 290: variable length arrays can be initialized by empty initalizers only
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:60: error 20: Undefined identifier 'AT_N'
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:60: error 289: variable length array declarators must have function prototype scope or block scope
+src/../out/local_study/generated/versus_cut/fight_runtime_data.h:60: error 290: variable length arrays can be initialized by empty initalizers only

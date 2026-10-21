@@ -5,6 +5,7 @@
   "region_target": ["NTSC", "PAL"],
   "toolchain": {
     "compiler": "sdcc>=4.2",
+    "optimization": "code_size",
     "sdk": "devkitSMS",
     "libs": ["SMSlib", "PSGlib"]
   },

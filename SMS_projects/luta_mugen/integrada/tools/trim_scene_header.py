@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Drop the unpruned metasprite arrays from the generated scene header.
-
-The integrated runtime draws from pose_table.h (pruned, per-fighter blob);
-the Frame table only needs dur/pose/clsn/axis/width. Keeping the original
-META/METAL/P2 arrays overflowed ROM bank 0. Their definitions are removed
-and the matching Frame initializer fields become 0. Every other definition
-is kept byte for byte (checked).
-"""
+"""Remove source arrays now consumed through the banked runtime data tables."""
 from __future__ import annotations
 
 import argparse
@@ -14,26 +7,44 @@ import re
 import sys
 from pathlib import Path
 
-META_ARRAY = re.compile(
-    r"(?:#define (\w+_(?:P2_)?METAL?)_SIZE \d+\n)?const unsigned char (\w+_(?:P2_)?METAL?)\[\d+\] = \{.*?\};\n",
+SOURCE_ARRAY = re.compile(
+    r"(?:#define (\w+_(?:P2_)?(?:META|METAL|CLSN|AXIS))_SIZE \d+\n)?"
+    r"const unsigned char (\w+_(?:P2_)?(?:META|METAL|CLSN|AXIS))\[\d+\] = \{.*?\};\n",
     re.S)
+FRAME_TABLE = re.compile(
+    r"static const Frame \w+_frames_all\[\w+\] = \{.*?\n\};\n", re.S)
+ANIM_TABLE = re.compile(
+    r"static const Anim \w+_anims\[\w+\] = \{.*?\n\};\n", re.S)
+LEGACY_POSE_TABLE = re.compile(
+    r"static const PoseRef versus_poses\[\w+\] = \{.*?\n\};\n", re.S)
 
 
 def trim(text: str) -> tuple[str, list[str]]:
-    names = [m.group(2) for m in META_ARRAY.finditer(text)]
-    out = META_ARRAY.sub("", text)
+    names = [m.group(2) for m in SOURCE_ARRAY.finditer(text)]
+    out = SOURCE_ARRAY.sub("", text)
+    out = FRAME_TABLE.sub("", out)
+    out = ANIM_TABLE.sub("", out)
+    out = LEGACY_POSE_TABLE.sub("", out)
     for name in names:
         out = re.sub(rf"\b{name}\b", "0", out)
     return out, names
 
 
 def self_check() -> None:
-    src = ("#define A_META_SIZE 4\nconst unsigned char A_META[4] = {\n 1,2,3,0x80,\n};\n"
-           "const unsigned char A_CLSN[2] = {\n 9,9,\n};\n"
-           "static const Frame f[1] = {\n    { 4, 0, A_META, A_CLSN },\n};\n")
+    src = ("#define A_META_SIZE 4\nconst unsigned char A_META[4] = {1,2,3,0x80};\n"
+           "const unsigned char A_CLSN[2] = {9,9};\n"
+           "const unsigned char A_AXIS[4] = {0,0,0,0};\n"
+           "static const Frame ken_frames_all[1] = {\n"
+           "    { 4, 0, A_META, A_META, A_CLSN, A_AXIS, 8, 16, 0, 0 },\n};\n"
+           "static const Anim ken_anims[1] = {\n"
+           "    { 0, 1, 0, ken_frames_all + 0 },\n};\n")
+    src += ("static const PoseRef versus_poses[1] = {\n"
+            "    { 2, 0, 73 },\n};\n")
     out, names = trim(src)
-    assert names == ["A_META"]
-    assert "A_CLSN[2]" in out and "{ 4, 0, 0, A_CLSN }" in out and "A_META" not in out
+    assert names == ["A_META", "A_CLSN", "A_AXIS"]
+    assert "ken_frames_all" not in out and "ken_anims" not in out
+    assert "A_META[4]" not in out and "A_CLSN[2]" not in out
+    assert "versus_poses" not in out
     print("[PASS] trim_scene_header self-check")
 
 
@@ -53,7 +64,7 @@ def main() -> int:
     if kept_before != kept_after:
         raise SystemExit(f"definicoes perdidas: {sorted(kept_before - kept_after)[:5]}")
     a.out.write_text(out)
-    print(f"[TRIM] {len(names)} arrays de metasprite removidos; {len(text)} -> {len(out)} bytes de texto")
+    print(f"[TRIM] {len(names)} arrays-fonte removidos; {len(text)} -> {len(out)} bytes de texto")
     return 0
 
 

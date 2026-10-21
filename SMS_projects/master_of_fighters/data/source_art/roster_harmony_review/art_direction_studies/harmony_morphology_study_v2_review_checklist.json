@@ -1,0 +1,302 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "roster_morphology_finish_study_v2_review_candidate",
+  "producer": "Codex ImageGen / Codex",
+  "medium": "high_resolution_art_direction_illustration",
+  "is_sms_sprite": false,
+  "palette_status": "not_validated_against_sms_manifest",
+  "asset": {
+    "path": "data/source_art/roster_harmony_review/art_direction_studies/harmony_morphology_study_v2_review_candidate.png",
+    "sha256": "ad1b657bddd4da27f1d9033f436d8987130da6b8d408dca9f6610a94110e471a",
+    "kind": "high_resolution_roster_art_direction_board",
+    "dimensions_px": [2172, 724]
+  },
+  "source_evidence": {
+    "path": "data/source_art/roster_harmony_review/art_direction_studies/review_evidence/harmony_morphology_study_v1_user_input_20261004.png",
+    "sha256": "84596e58edbc062ed065cc2c1709f8e6150db9834fe0c83af7c2e65b3ab1b7d0",
+    "kind": "owner_supplied_review_target"
+  },
+  "review_scope": "Correct the seven-character high-resolution art-direction board per owner defect report, then assess every character and roster harmony. This board is not a pixel sprite sheet and cannot prove palette conversion, sprite cutout, animation, integration, or ROM behavior.",
+  "required_characters": [
+    "golden_axe_warrior",
+    "hayato_kenseiden",
+    "joe_musashi",
+    "dr_ferdinand_social",
+    "alis_landale",
+    "landau_lord_of_the_sword",
+    "jj_zillion_ii"
+  ],
+  "required_axes": [
+    "canonical_identity_and_costume",
+    "face_eyes_and_mask",
+    "hand_anatomy_and_handedness",
+    "hand_to_weapon_continuity",
+    "joint_alignment",
+    "equipment_attachment_and_perspective",
+    "silhouette_and_body_proportion",
+    "foot_ground_clearance",
+    "outline_and_cutout_cleanliness",
+    "palette_material_and_lighting",
+    "shared_roster_rendering_harmony"
+  ],
+  "initial_user_report": {
+    "reviewer": "owner",
+    "date": "2026-10-04",
+    "status": "reported_defects_on_all_seven_figures",
+    "global_defects": [
+      "contour thickness/continuity differs across figures and equipment",
+      "loose marks and rough edge artifacts appear near feet and crops",
+      "weapon highlights do not consistently share the body's palette grouping and light direction",
+      "pixel-art cleanliness was described, but the supplied board is a high-resolution illustration and contains no SMS pixel grid to audit"
+    ]
+  },
+  "characters": [
+    {
+      "id": "golden_axe_warrior",
+      "name": "Golden Axe Warrior",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_sms_palette.png",
+          "sha256": "5b88ea863db2f6ebf97722d39196812f9290f8532aee3a3c40312e07d3ca932f",
+          "role": "owner-established costume and character color family"
+        }
+      ],
+      "observed_defects": [
+        "eyes slightly blurred/asymmetric",
+        "sword grip and thumb unclear",
+        "round shield appears rigidly attached without a readable grip/strap",
+        "small contour artifacts at cape tips and below scabbard"
+      ],
+      "revision_notes": [
+        "retained young, lean warrior, horned helmet, blue fur cape and approved color family",
+        "redrew eye alignment, sword-hand grip and shield/wrist attachment; cleaned cape and scabbard edge in the review candidate"
+      ],
+      "review_axes": {
+        "canonical_identity_and_costume": {"status": "pending", "note": "Compare helmet, blue fur mantle, shield, sword and silhouette with approved source."},
+        "face_eyes_and_mask": {"status": "pending", "note": "Confirm both eyes are sharp, aligned and readable at normal viewing size."},
+        "hand_anatomy_and_handedness": {"status": "pending", "note": "Confirm the sword hand has a clear thumb and plausible finger count."},
+        "hand_to_weapon_continuity": {"status": "pending", "note": "Trace palm through hilt and guard into the blade without a gap."},
+        "joint_alignment": {"status": "pending", "note": "Confirm both wrists, elbows, knees and ankles follow the pose."},
+        "equipment_attachment_and_perspective": {"status": "pending", "note": "Confirm the round shield has a readable left-forearm grip or strap."},
+        "silhouette_and_body_proportion": {"status": "pending", "note": "Compare youthful lean proportions and relative roster scale."},
+        "foot_ground_clearance": {"status": "pending", "note": "Check both boots and weapon tips against the common ground line."},
+        "outline_and_cutout_cleanliness": {"status": "pending", "note": "Inspect cape tips and scabbard edges for detached marks or broken contour."},
+        "palette_material_and_lighting": {"status": "pending", "note": "Check material grouping and consistent light; exact SMS palette remains unvalidated."},
+        "shared_roster_rendering_harmony": {"status": "pending", "note": "Compare outline weight, finish and scale with all six other figures."}
+      }
+    },
+    {
+      "id": "hayato_kenseiden",
+      "name": "Hayato / Kenseiden",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+          "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+          "role": "accepted visual direction and costume reference"
+        }
+      ],
+      "observed_defects": [
+        "extended left hand has flattened/disformed fingers",
+        "right hand/staff grip obscures thumb orientation",
+        "visible eye highlight is too large and oddly colored under hair",
+        "staff ends abruptly and loses straight alignment"
+      ],
+      "revision_notes": [
+        "redrew the open hand and its thumb, cleaned the eye highlight and made the carried shaft continuous and straight in the review candidate"
+      ],
+      "review_axes": {
+        "canonical_identity_and_costume": {"status": "pending", "note": "Verify Hayato's accepted Kenseiden look and retain the source-game color family."},
+        "face_eyes_and_mask": {"status": "pending", "note": "Check the visible eye highlight sits naturally below the hair."},
+        "hand_anatomy_and_handedness": {"status": "pending", "note": "Check open left fingers and thumb, plus right-hand orientation."},
+        "hand_to_weapon_continuity": {"status": "pending", "note": "Confirm the staff or grip remains straight, continuous and attached where held."},
+        "joint_alignment": {"status": "pending", "note": "Review both arms and legs for plausible bends and connection."},
+        "equipment_attachment_and_perspective": {"status": "pending", "note": "Confirm staff placement behind the body does not merge with sash or scabbard."},
+        "silhouette_and_body_proportion": {"status": "pending", "note": "Compare lean human morphology and established roster height."},
+        "foot_ground_clearance": {"status": "pending", "note": "Check sandals and staff ends against the common ground line."},
+        "outline_and_cutout_cleanliness": {"status": "pending", "note": "Inspect fingers, hair edges and both staff ends for stray marks."},
+        "palette_material_and_lighting": {"status": "pending", "note": "Confirm red/white garments remain controlled and weapon shading follows the light."},
+        "shared_roster_rendering_harmony": {"status": "pending", "note": "Compare his approved cluster economy and finish with the roster."}
+      }
+    },
+    {
+      "id": "joe_musashi",
+      "name": "Joe Musashi / Shinobi",
+      "references": [
+        {
+          "path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+          "sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+          "role": "owner-approved lean morphology and costume reference"
+        }
+      ],
+      "observed_defects": [
+        "forward right fist reads as a featureless block",
+        "left elbow appears too straight for the guard pose",
+        "reddish/brown pixel overlaps the eye opening in the mask"
+      ],
+      "revision_notes": [
+        "clarified knuckle planes and elbow bend; cleaned mask opening in the review candidate"
+      ],
+      "review_axes": {
+        "canonical_identity_and_costume": {"status": "pending", "note": "Check mask, white gi and red bands against the owner-approved Joe reference."},
+        "face_eyes_and_mask": {"status": "pending", "note": "Inspect eye opening for coherent skin/mask colors and no stray pixel."},
+        "hand_anatomy_and_handedness": {"status": "pending", "note": "Confirm fist reads as a compact human fist with a clear knuckle plane."},
+        "hand_to_weapon_continuity": {"status": "pending", "note": "Confirm any visible weapon grip is continuous and attached to the hand."},
+        "joint_alignment": {"status": "pending", "note": "Confirm the guard-side elbow is naturally flexed and wrists remain connected."},
+        "equipment_attachment_and_perspective": {"status": "pending", "note": "Check sword/scabbard position and belt attachment."},
+        "silhouette_and_body_proportion": {"status": "pending", "note": "Use approved lean human morphology; avoid broadening limbs or torso."},
+        "foot_ground_clearance": {"status": "pending", "note": "Check both feet and sandals sit on the shared ground line."},
+        "outline_and_cutout_cleanliness": {"status": "pending", "note": "Inspect mask opening and feet for the previously reported pixels/halo."},
+        "palette_material_and_lighting": {"status": "pending", "note": "Check red/white/skin clusters and unified weapon/body lighting."},
+        "shared_roster_rendering_harmony": {"status": "pending", "note": "Compare his line weight and detail density with the other figures."}
+      }
+    },
+    {
+      "id": "dr_ferdinand_social",
+      "name": "Dr. Ferdinand Social",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "accepted harmonized costume and character reference"
+        }
+      ],
+      "observed_defects": [
+        "downward sword/cane-sword intersects the foot or ground",
+        "right-hand grip, handle and guard do not read as one connected weapon",
+        "raised left palm appears mirrored/inverted",
+        "dark purple mark in the eye reads as a misplaced patch or blur"
+      ],
+      "revision_notes": [
+        "second localized edit adds a visible handle, crossguard and continuous narrow blade ending above the ground beside the boot",
+        "revised the raised left-hand orientation and cleaned the eye/glasses area in the roster candidate"
+      ],
+      "review_axes": {
+        "canonical_identity_and_costume": {"status": "pending", "note": "Confirm the same slender Victorian psychologist-hunter design and colors."},
+        "face_eyes_and_mask": {"status": "pending", "note": "Check glasses, eye and hair without purple smudge or false eyepatch."},
+        "hand_anatomy_and_handedness": {"status": "pending", "note": "Verify the raised hand is anatomically the left hand and reads as open."},
+        "hand_to_weapon_continuity": {"status": "pending", "note": "Trace right palm to handle, distinct guard and continuous rapier blade."},
+        "joint_alignment": {"status": "pending", "note": "Check both wrists/elbows, knees and ankles against the upright duelist pose."},
+        "equipment_attachment_and_perspective": {"status": "pending", "note": "Confirm cane-sword construction and any sheath remain separate from hand and coat."},
+        "silhouette_and_body_proportion": {"status": "pending", "note": "Preserve the approved lean body and roster-comparable visual height."},
+        "foot_ground_clearance": {"status": "pending", "note": "Blade point must stop above the shared line and clear both boots."},
+        "outline_and_cutout_cleanliness": {"status": "pending", "note": "Inspect rapier, cuffs, coat tails and shoes for broken contour or loose marks."},
+        "palette_material_and_lighting": {"status": "pending", "note": "Check teal coat, burgundy accents and metallic weapon under a single light direction."},
+        "shared_roster_rendering_harmony": {"status": "pending", "note": "Compare outline and detail economy against the six other characters."}
+      }
+    },
+    {
+      "id": "alis_landale",
+      "name": "Alis Landale / Phantasy Star",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+          "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+          "role": "owner-approved design and palette family"
+        }
+      ],
+      "observed_defects": [
+        "sword grip blends into glove without readable fingers",
+        "eye under fringe appears blurred or red-stained",
+        "oval shield reads flat against the rotated forearm/body"
+      ],
+      "revision_notes": [
+        "clarified thumb/finger wrap on sword, eye under fringe and shield angle to follow the forearm in the review candidate"
+      ],
+      "review_axes": {
+        "canonical_identity_and_costume": {"status": "pending", "note": "Compare armor, hair and approved Phantasy Star color family."},
+        "face_eyes_and_mask": {"status": "pending", "note": "Check the eye beneath the fringe for clean color and readable expression."},
+        "hand_anatomy_and_handedness": {"status": "pending", "note": "Check sword hand has visible thumb and finger wrap rather than a fused glove."},
+        "hand_to_weapon_continuity": {"status": "pending", "note": "Trace fingers around the hilt through a clear guard into the blade."},
+        "joint_alignment": {"status": "pending", "note": "Check shoulder, wrist, elbow, knee and ankle positions in the combat stance."},
+        "equipment_attachment_and_perspective": {"status": "pending", "note": "Confirm shield plane follows left forearm and body rotation."},
+        "silhouette_and_body_proportion": {"status": "pending", "note": "Keep adult human proportions rather than chibi head/limb ratios."},
+        "foot_ground_clearance": {"status": "pending", "note": "Check boots and sword tip against the roster baseline."},
+        "outline_and_cutout_cleanliness": {"status": "pending", "note": "Inspect hair fringe, sword edge and shield contour for color artifacts."},
+        "palette_material_and_lighting": {"status": "pending", "note": "Retain approved palette; unify steel and armor highlights with body lighting."},
+        "shared_roster_rendering_harmony": {"status": "pending", "note": "Compare head scale, line weight and finish with the other six figures."}
+      }
+    },
+    {
+      "id": "landau_lord_of_the_sword",
+      "name": "Landau / Lord of the Sword",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+          "sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+          "role": "owner-approved rejuvenated design, costume and gear reference"
+        }
+      ],
+      "observed_defects": [
+        "sword blade is not aligned to hand/grip and lacks a clear guard",
+        "forward left hand is undersized and fingers merge",
+        "bow, arrows and quiver merge; bow tips differ and string is missing"
+      ],
+      "revision_notes": [
+        "aligned the held sword and added a visible guard; clarified the forward hand; separated bow/quiver and added bow string in the review candidate"
+      ],
+      "review_axes": {
+        "canonical_identity_and_costume": {"status": "pending", "note": "Preserve the approved young hero, costume, bow, quiver and colors."},
+        "face_eyes_and_mask": {"status": "pending", "note": "Check face remains youthful and eye/hair details are crisp."},
+        "hand_anatomy_and_handedness": {"status": "pending", "note": "Check forward left hand scale, thumb and separate fingers."},
+        "hand_to_weapon_continuity": {"status": "pending", "note": "Trace sword hand, handle, crossguard and blade along one coherent axis."},
+        "joint_alignment": {"status": "pending", "note": "Review sword arm, knees and both ankles for connected human joints."},
+        "equipment_attachment_and_perspective": {"status": "pending", "note": "Check symmetric bow, visible string, arrows and quiver as distinct objects."},
+        "silhouette_and_body_proportion": {"status": "pending", "note": "Retain approved youthful lean morphology and scale relative to Alis."},
+        "foot_ground_clearance": {"status": "pending", "note": "Check sword, boots and back gear do not pierce the baseline."},
+        "outline_and_cutout_cleanliness": {"status": "pending", "note": "Inspect bow tips, arrows, sword and hand contour for detached artifacts."},
+        "palette_material_and_lighting": {"status": "pending", "note": "Check the approved greens, leather, metal and weapon highlights share one light."},
+        "shared_roster_rendering_harmony": {"status": "pending", "note": "Compare style/outline density and relative scale with the lineup."}
+      }
+    },
+    {
+      "id": "jj_zillion_ii",
+      "name": "J.J. / Zillion II: The Tri Formation",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_preview.png",
+          "sha256": "12196c4e20d002ff105ded07ea671a5dfd402d723b291c0bebb5713ef5228035",
+          "role": "owner-approved identity, costume and Zillion pistol silhouette for this board; SMS game remains source authority per lineage v4"
+        }
+      ],
+      "observed_defects": [
+        "laser pistol silhouette and grip are distorted and no longer read as the approved Zillion weapon",
+        "hair and helmet/cap treatment conflict; a white eye pixel floats outside the face",
+        "rear knee and pad are misaligned"
+      ],
+      "revision_notes": [
+        "used the approved v4 concept silhouette to clarify the compact navy/white Zillion pistol with restrained orange detail; restored coherent blue hair and knee-pad placement"
+      ],
+      "review_axes": {
+        "canonical_identity_and_costume": {"status": "pending", "note": "Confirm identity follows Zillion II SMS lineage and owner-approved concept v4."},
+        "face_eyes_and_mask": {"status": "pending", "note": "Check blue hair, face and eye with no floating highlight or conflicting helmet."},
+        "hand_anatomy_and_handedness": {"status": "pending", "note": "Check the weapon hand's thumb/fingers and the opposite hand's anatomy."},
+        "hand_to_weapon_continuity": {"status": "pending", "note": "Confirm J.J.'s hand wraps the approved Zillion pistol grip and trigger area."},
+        "joint_alignment": {"status": "pending", "note": "Check rear knee, aligned kneepad, hip and ankle as one connected leg."},
+        "equipment_attachment_and_perspective": {"status": "pending", "note": "Check pistol, holster and belt fit; retain game identity and approved concept shape."},
+        "silhouette_and_body_proportion": {"status": "pending", "note": "Avoid chibi proportions; compare head/body and leg length with roster contract."},
+        "foot_ground_clearance": {"status": "pending", "note": "Check both boots share the lineup baseline and are not clipped."},
+        "outline_and_cutout_cleanliness": {"status": "pending", "note": "Inspect hair, eyes, kneepad and pistol edges for stray marks or broken outline."},
+        "palette_material_and_lighting": {"status": "pending", "note": "Retain the approved red, white and navy family; SMS palette compliance is not tested here."},
+        "shared_roster_rendering_harmony": {"status": "pending", "note": "Compare finish and human proportions without diminishing J.J.'s game identity."}
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment",
+    "workflow": "tools/sms_wrapper/.agent/workflows/independent-quality-review.md",
+    "domain": "art",
+    "producer_may_approve": false
+  },
+  "owner_approval": {
+    "approved": false,
+    "reviewer": null,
+    "date": null,
+    "scope": "owner visual approval of this revised art-direction board only; no sprite sheet, SMS palette, integration, or ROM approval"
+  },
+  "promotion_status": "blocked_pending_independent_review_and_owner_approval",
+  "validation_limits": [
+    "The checklist gate validates axis coverage, notes, statuses and hashes only; humans judge drawing quality.",
+    "This RGB concept illustration is not indexed SMS art, has no animation frames, is not integrated into res, and has no ROM binding.",
+    "Actual pixel sprite sheets must receive a separate native-size and nearest-neighbor review plus palette, cutout, animation and roster gates."
+  ]
+}

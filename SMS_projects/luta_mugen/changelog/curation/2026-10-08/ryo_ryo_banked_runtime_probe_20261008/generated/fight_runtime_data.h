@@ -1,0 +1,93 @@
+/* Generated per-slot state/physics tables; do not hand-edit. */
+#ifndef FIGHT_RUNTIME_DATA_H
+#define FIGHT_RUNTIME_DATA_H
+#define FIGHT_RUNTIME_DATA_SCHEMA 6
+static const unsigned short ken_close_distances_q8[AT_N] = { 0, 0, 0, 0 };
+static const unsigned short ryu_close_distances_q8[AT_N] = { 0, 0, 0, 0 };
+static const unsigned short ken_far_distances_q8[AT_N] = { 5512, 5512, 5512, 5512 };
+static const unsigned short ryu_far_distances_q8[AT_N] = { 5512, 5512, 5512, 5512 };
+static const StateDef p1_states[ST_N_STATES] = {
+    { 65535, KEN_CUT_ANIM_IDLE, S_CONTROL, 0, 0 },
+    { 65535, KEN_CUT_ANIM_WALK_F, S_CONTROL, 512, 0 },
+    { 65535, KEN_CUT_ANIM_WALK_B, S_CONTROL, -460, 0 },
+    { 65535, KEN_CUT_ANIM_JUMP, S_AIR, 0, 0 },
+    { 65535, KEN_CUT_ANIM_CROUCH, S_CONTROL | S_BLOCKABLE, 0, 0 },
+    { 65535, KEN_CUT_ANIM_GUARD, S_CONTROL | S_BLOCKABLE, 0, 0 },
+    { 200, KEN_CUT_ANIM_PUNCH, S_HIT, 0, 30 },
+    { 220, KEN_CUT_ANIM_HP, S_HIT, 0, 20 },
+    { 1000, KEN_CUT_ANIM_SPECIAL, 0, 0, 0 },
+    { 5050, KEN_CUT_ANIM_KO, 0, 0, 0 },
+    { 230, KEN_CUT_ANIM_KICK, S_HIT, 0, 35 },
+    { 250, KEN_CUT_ANIM_HK, S_HIT, 0, 80 },
+    { 65535, KEN_CUT_ANIM_PUNCH, 0, 0, 0 },
+    { 65535, KEN_CUT_ANIM_HP, 0, 0, 0 },
+    { 65535, KEN_CUT_ANIM_KICK, 0, 0, 0 },
+    { 65535, KEN_CUT_ANIM_HK, 0, 0, 0 },
+    { 201, KEN_CUT_ANIM_PUNCH_FAR, S_HIT, 0, 30 },
+    { 221, KEN_CUT_ANIM_HP_FAR, S_HIT, 0, 62 },
+    { 231, KEN_CUT_ANIM_KICK_FAR, S_HIT, 0, 35 },
+    { 251, KEN_CUT_ANIM_HK_FAR, S_HIT, 0, 80 },
+};
+static const StateDef p2_states[ST_N_STATES] = {
+    { 65535, RYU_CUT_ANIM_IDLE, S_CONTROL, 0, 0 },
+    { 65535, RYU_CUT_ANIM_WALK_F, S_CONTROL, 512, 0 },
+    { 65535, RYU_CUT_ANIM_WALK_B, S_CONTROL, -460, 0 },
+    { 65535, RYU_CUT_ANIM_JUMP, S_AIR, 0, 0 },
+    { 65535, RYU_CUT_ANIM_CROUCH, S_CONTROL | S_BLOCKABLE, 0, 0 },
+    { 65535, RYU_CUT_ANIM_GUARD, S_CONTROL | S_BLOCKABLE, 0, 0 },
+    { 200, RYU_CUT_ANIM_PUNCH, S_HIT, 0, 30 },
+    { 220, RYU_CUT_ANIM_HP, S_HIT, 0, 20 },
+    { 1000, RYU_CUT_ANIM_SPECIAL, 0, 0, 0 },
+    { 5050, RYU_CUT_ANIM_KO, 0, 0, 0 },
+    { 230, RYU_CUT_ANIM_KICK, S_HIT, 0, 35 },
+    { 250, RYU_CUT_ANIM_HK, S_HIT, 0, 80 },
+    { 65535, RYU_CUT_ANIM_PUNCH, 0, 0, 0 },
+    { 65535, RYU_CUT_ANIM_HP, 0, 0, 0 },
+    { 65535, RYU_CUT_ANIM_KICK, 0, 0, 0 },
+    { 65535, RYU_CUT_ANIM_HK, 0, 0, 0 },
+    { 201, RYU_CUT_ANIM_PUNCH_FAR, S_HIT, 0, 30 },
+    { 221, RYU_CUT_ANIM_HP_FAR, S_HIT, 0, 62 },
+    { 231, RYU_CUT_ANIM_KICK_FAR, S_HIT, 0, 35 },
+    { 251, RYU_CUT_ANIM_HK_FAR, S_HIT, 0, 80 },
+};
+#ifndef FIGHT_SOURCE_ROUTE_DEF_DEFINED
+#define FIGHT_SOURCE_ROUTE_DEF_DEFINED
+typedef struct { const unsigned char *pattern; unsigned short source_state; unsigned short source_action; unsigned char action_anim; } FightSourceRouteDef;
+#endif
+#define P1_SOURCE_ROUTE_PATTERN_COUNT 13
+static const FightSourceRouteDef p1_source_routes[] = {
+    { KEN_CUT_R_SPEC_834F878D_0, 1000, 1000, KEN_CUT_ANIM_SPECIAL },
+    { KEN_CUT_R_STAN_E9900711_0, 200, 200, KEN_CUT_ANIM_PUNCH },
+    { KEN_CUT_R_STAN_5F3F5843_0, 201, 201, KEN_CUT_ANIM_PUNCH_FAR },
+    { KEN_CUT_R_STAN_FDB8E700_0, 220, 220, KEN_CUT_ANIM_HP },
+    { KEN_CUT_R_STAN_34823DFA_0, 221, 221, KEN_CUT_ANIM_HP_FAR },
+    { KEN_CUT_R_STAN_27EC3C54_0, 230, 230, KEN_CUT_ANIM_KICK },
+    { KEN_CUT_R_STAN_09D0273D_0, 231, 231, KEN_CUT_ANIM_KICK_FAR },
+    { KEN_CUT_R_STAN_FD83A8FC_0, 250, 250, KEN_CUT_ANIM_HK },
+    { KEN_CUT_R_STAN_8E72B206_0, 251, 251, KEN_CUT_ANIM_HK_FAR },
+    { KEN_CUT_R_AIR__6E24E634_0, 600, 600, KEN_CUT_ANIM_AIR_LP },
+    { KEN_CUT_R_AIR__E1AE110C_0, 620, 620, KEN_CUT_ANIM_AIR_HP },
+    { KEN_CUT_R_AIR__CCBC2C90_0, 630, 630, KEN_CUT_ANIM_AIR_LK },
+    { KEN_CUT_R_AIR__72867306_0, 650, 650, KEN_CUT_ANIM_AIR_HK },
+};
+#define P2_SOURCE_ROUTE_PATTERN_COUNT 13
+static const FightSourceRouteDef p2_source_routes[] = {
+    { RYU_CUT_R_SPEC_834F878D_0, 1000, 1000, RYU_CUT_ANIM_SPECIAL },
+    { RYU_CUT_R_STAN_E9900711_0, 200, 200, RYU_CUT_ANIM_PUNCH },
+    { RYU_CUT_R_STAN_5F3F5843_0, 201, 201, RYU_CUT_ANIM_PUNCH_FAR },
+    { RYU_CUT_R_STAN_FDB8E700_0, 220, 220, RYU_CUT_ANIM_HP },
+    { RYU_CUT_R_STAN_34823DFA_0, 221, 221, RYU_CUT_ANIM_HP_FAR },
+    { RYU_CUT_R_STAN_27EC3C54_0, 230, 230, RYU_CUT_ANIM_KICK },
+    { RYU_CUT_R_STAN_09D0273D_0, 231, 231, RYU_CUT_ANIM_KICK_FAR },
+    { RYU_CUT_R_STAN_FD83A8FC_0, 250, 250, RYU_CUT_ANIM_HK },
+    { RYU_CUT_R_STAN_8E72B206_0, 251, 251, RYU_CUT_ANIM_HK_FAR },
+    { RYU_CUT_R_AIR__6E24E634_0, 600, 600, RYU_CUT_ANIM_AIR_LP },
+    { RYU_CUT_R_AIR__E1AE110C_0, 620, 620, RYU_CUT_ANIM_AIR_HP },
+    { RYU_CUT_R_AIR__CCBC2C90_0, 630, 630, RYU_CUT_ANIM_AIR_LK },
+    { RYU_CUT_R_AIR__72867306_0, 650, 650, RYU_CUT_ANIM_AIR_HK },
+};
+static const CharacterData characters[2] = {
+    { ken_anims, p1_states, KEN_CUT_POSE_COUNT, KEN_POSE_BASE, KEN_FRAME_DATA_BANK, KEN_FRAME_DATA_OFF, KEN_POSE_INDEX_BANK, KEN_POSE_META_BANK, KEN_POSE_INDEX_OFF, 1000, 2585, 110, 8, 3, 5, ken_close_distances_q8, ken_far_distances_q8, 3101 },
+    { ryu_anims, p2_states, RYU_CUT_POSE_COUNT, RYU_POSE_BASE, RYU_FRAME_DATA_BANK, RYU_FRAME_DATA_OFF, RYU_POSE_INDEX_BANK, RYU_POSE_META_BANK, RYU_POSE_INDEX_OFF, 1000, 2585, 110, 8, 3, 5, ryu_close_distances_q8, ryu_far_distances_q8, 3101 },
+};
+#endif /* FIGHT_RUNTIME_DATA_H */

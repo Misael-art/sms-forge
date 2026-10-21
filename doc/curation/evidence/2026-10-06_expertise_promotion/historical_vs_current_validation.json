@@ -1,0 +1,17 @@
+{
+  "historical": {
+    "ok": true,
+    "tests_passed": true,
+    "problems": [],
+    "claim_ceiling": "assigned_checks_only",
+    "case_relation": "independent",
+    "input_binding": "frozen_snapshot_v1",
+    "limit": "bindings/coverage only; coordinator must match native tool receipt and review observations"
+  },
+  "current_eligibility": {
+    "eligible": false,
+    "observed_rom_sha256": "faf28649ae385c7779fe32e8648a9dff56170379af71fa9b0cedc5525e793740",
+    "expected_rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+    "scope": "ROM only; current design/context needs coordinator reconciliation"
+  }
+}

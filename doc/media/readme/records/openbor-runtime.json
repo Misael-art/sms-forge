@@ -1,0 +1,80 @@
+{
+  "schema": "runtime_metrics_v1",
+  "rom": "/tmp/smsforge-1000/8eaa864d68c14f2b8f4b156db159bc0f/emulator/rom.sms",
+  "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+  "region": "NTSC",
+  "fps_measured": 59.48,
+  "fps_janelas": [
+    59.48,
+    59.66,
+    59.78
+  ],
+  "fps_spread": 0.30000000000000426,
+  "fps_constante": true,
+  "frame_advance_proved": true,
+  "frames_delta_total": 1441,
+  "audio_active_pct": null,
+  "boot_proved": true,
+  "probe": {
+    "magic": "SMRT",
+    "header": [
+      83,
+      77,
+      82,
+      84,
+      2
+    ],
+    "base": "0xc7e0",
+    "schema_version": 2,
+    "frame_addr": "0xc7f0",
+    "snapshot": {
+      "hp": 40,
+      "score": 0,
+      "boss": 50,
+      "over": 0,
+      "state": 0,
+      "wave": 0,
+      "keys": 0,
+      "px": 0,
+      "pz": 180,
+      "p2x": 0,
+      "py": 0,
+      "p2state": 2,
+      "p2z": 180
+    }
+  },
+  "input_route": {
+    "canal": "process-local SMSJoypad P1/P2; VDP frame pacing",
+    "escrita_memoria": "disabled; read-only bridge",
+    "rom_input_observation": "not proved by FPS probe"
+  },
+  "tool": "emulicious-original-JAR/private-process-bridge",
+  "chain_of_custody": [
+    "session: 8eaa864d68c14f2b8f4b156db159bc0f",
+    "display: :5",
+    "ROM SHA: 76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+    "frame delta observed in ROM RAM; original realtime runner; conservative clock"
+  ],
+  "session_id": "8eaa864d68c14f2b8f4b156db159bc0f",
+  "host_load": [
+    7.24755859375,
+    5.8681640625,
+    4.38232421875
+  ],
+  "regional_frame_rate_check": {
+    "region": "NTSC",
+    "target_fps": 60.0,
+    "tolerance_fps": 1.0,
+    "max_spread_fps": 1.0,
+    "sample_count": 3,
+    "spread_fps": 0.30000000000000426,
+    "passed": true,
+    "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+  },
+  "axes": {
+    "boot": true,
+    "frame_advance": true,
+    "fps_constante": true,
+    "aprovado": true
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "schema": "sms_artifact_archive_manifest_v1",
+  "date": "2026-10-11",
+  "asset_id": "dr_social",
+  "artifact_id": "dr-social-animation-source-v01",
+  "status": "archived_superseded_as_active_source",
+  "reason": "Owner-directed hygiene. Preserve the prior 61-pose source and its source lineage; it is not a visual reference for the new candidate generated from the approved concept model sheet plus GDD/TDD.",
+  "direct_files": [
+    {
+      "from": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+      "to": "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/dr_social_basic_sequences_61f_owner_source_v1.png",
+      "sha256_before": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+      "sha256_after": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057"
+    },
+    {
+      "from": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.json",
+      "to": "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/dr_social_basic_sequences_61f_owner_source_v1.json",
+      "sha256_before": "6f025c5dbc0351c04e767f3fb48f0cd000406ce76dac80daea03dc3e92b14455",
+      "sha256_after": "6f025c5dbc0351c04e767f3fb48f0cd000406ce76dac80daea03dc3e92b14455"
+    },
+    {
+      "from": "doc/dr_social_61_pose_source_lineage_v1.json",
+      "to": "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/dr_social_61_pose_source_lineage_v1.json",
+      "sha256_before": "167a12ac05bcd4b669a382570b2b91dca907584d58f1a8a7b706a5855a11d9ab",
+      "sha256_after": "167a12ac05bcd4b669a382570b2b91dca907584d58f1a8a7b706a5855a11d9ab"
+    }
+  ],
+  "related_records_preserved_in_existing_historical_locations": [
+    {
+      "path": "doc/dr_social_61_pose_art_review_v7.json",
+      "sha256": "b3a43c81c43e78fe111e2f408b2ca26aee89187e114cc26c0aa6c5ef1224560d",
+      "role": "immutable historical review record; source path reflects review-time location"
+    },
+    {
+      "path": "doc/dr_social_61_pose_art_review_v7_audit.json",
+      "sha256": "9afb3b40d2ab1de575e7c022833d291d48e14ba83c7156b3c7fa726a64ae1934",
+      "role": "immutable historical review record; source path reflects review-time location"
+    },
+    {
+      "path": "doc/dr_social_61_pose_art_review_v8.json",
+      "sha256": "f4c0b93644e33c0a9e7722e46cea8c6574d28581aa01e370b2e1bcacb39700c6",
+      "role": "immutable historical review record; source path reflects review-time location"
+    },
+    {
+      "path": "doc/dr_social_61_pose_art_review_v8_audit.json",
+      "sha256": "cf46838abefc2d699ef780dd6a2445dda264e58ab0caf06fbd7d4e400af17a58",
+      "role": "immutable historical review record; source path reflects review-time location"
+    },
+    {
+      "path": "doc/dr_social_61_pose_art_review_v9.json",
+      "sha256": "bfebadf8155c95e45d5df08b77971eb399aca92408f7f9844cc8615a82aa7cbb",
+      "role": "immutable historical review record; source path reflects review-time location"
+    },
+    {
+      "path": "doc/dr_social_61_pose_art_review_v10.json",
+      "sha256": "b21f8ce6cb7001498773798ffb46a9f55b983d9c17a1fce97abe1a5a7c04a904",
+      "role": "immutable historical review record; source path reflects review-time location"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v10",
+      "file_count": 341,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v3",
+      "file_count": 206,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v4",
+      "file_count": 216,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v5",
+      "file_count": 343,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v6",
+      "file_count": 195,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v7",
+      "file_count": 224,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v8",
+      "file_count": 353,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v9",
+      "file_count": 341,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v9_first_pass",
+      "file_count": 197,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v9_generation_attempt1",
+      "file_count": 61,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v9_skin_anchor_alpha_attempt1",
+      "file_count": 193,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v9_stale_build_attempt2",
+      "file_count": 229,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    },
+    {
+      "path": "out/diagnostics/dr_social_61_pose_review_v9_wide_face_attempt",
+      "file_count": 341,
+      "role": "historical diagnostic derivative; not an input or active approval"
+    }
+  ],
+  "new_source_input_policy": {
+    "approved_visual_reference_only": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "allowed_project_documents": [
+      "doc/11-gdd.md",
+      "doc/15-tdd.md"
+    ],
+    "archived_source_used_as_visual_input": false
+  }
+}

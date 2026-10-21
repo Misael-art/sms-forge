@@ -56,3 +56,7 @@ def test_local_file_is_donor_plus_rename(local):
 def test_no_donor_imports_remain():
     for f in _files():
         assert DONOR_TOKEN not in f.read_text(), f"{f} ainda referencia o pacote doador"
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

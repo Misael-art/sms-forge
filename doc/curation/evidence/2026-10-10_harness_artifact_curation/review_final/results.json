@@ -1,0 +1,529 @@
+{
+  "tool_sha256": {
+    "artifact_registry.py": "ea9de1aa9532dd965f42212a36dbe1c96f06e75864d1835b9ad8f2fb5f906c79",
+    "harness_orchestration.py": "69ab32dd9feb1db11d9221b45bedc7fa6fd3afa534fb8df7964eebc3e353c1c1",
+    "audit_learning_capture.py": "0403911566b197c24278c40f90c4133d361f2c3a51d1db23c79245b35cd0f95f",
+    "audit_source_raster.py": "4b6dead11d4538b68c9f8bbdf760ee007210076db26ba07a33c3c176d4853b40"
+  },
+  "results": [
+    {
+      "case": "valid_baseline",
+      "expected": "PASS",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "symlink_location_alias",
+      "expected": "FAIL overlapping canonical destinations",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "file_escapes_kind_destination_inside_project",
+      "expected": "FAIL resolved file outside kind destination",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "managed_file_as_legacy_inventory",
+      "expected": "policy review: FAIL or explicit historical frozen adoption proof",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [
+          "1 historical files indexed without classification/approval"
+        ],
+        "artifact_count": 1,
+        "indexed_file_count": 2,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "revision2_without_lineage",
+      "expected": "policy review: FAIL missing predecessor or explicit independent origin reason",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 2,
+        "indexed_file_count": 2,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "visual_output_kind_bypass",
+      "expected": "policy review: asset write should require registry regardless lane/kind",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "bad"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "bad",
+            "kind": "runtime_production",
+            "write_paths": [
+              "/tmp/smsforge-curation-coverage-20261010/review/cases/game/data/source_art/unreserved.png"
+            ],
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_tasks_{}",
+      "expected": "FAIL tasks_not_array",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_tasks_False",
+      "expected": "FAIL tasks_not_array",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_tasks_0",
+      "expected": "FAIL tasks_not_array",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_tasks_''",
+      "expected": "FAIL tasks_not_array",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_id_0",
+      "expected": "FAIL task IDs must be strings",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "t0"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "t0",
+            "kind": "inventory",
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_id_False",
+      "expected": "FAIL task IDs must be strings",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "t0"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "t0",
+            "kind": "inventory",
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_id_[]",
+      "expected": "FAIL task IDs must be strings",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "t0"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "t0",
+            "kind": "inventory",
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "malformed_falsey_id_{}",
+      "expected": "FAIL task IDs must be strings",
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "t0"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "t0",
+            "kind": "inventory",
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "symlink_cycle",
+      "expected": "FAIL structured diagnostic, not RuntimeError",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "overlapping locations create competing destinations"
+        ],
+        "warnings": [],
+        "artifact_count": 0,
+        "indexed_file_count": 0,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "routes_none",
+      "expected": "FAIL structured",
+      "actual": [
+        "L001: 'NoneType' object is not subscriptable"
+      ]
+    },
+    {
+      "case": "routes_int",
+      "expected": "FAIL structured",
+      "actual": [
+        "L001: 'int' object is not subscriptable"
+      ]
+    },
+    {
+      "case": "routes_path_list",
+      "expected": "FAIL structured",
+      "actual": [
+        "L001: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'list'"
+      ]
+    },
+    {
+      "case": "routes_path_symlinkoutside",
+      "expected": "FAIL structured",
+      "actual": [
+        "L001: [Errno 2] No such file or directory: '/tmp/smsforge-curation-coverage-20261010/review/route_game/tools/sms_wrapper/.agent/skills/out.md'"
+      ]
+    },
+    {
+      "case": "hardlink_multiple_ownership",
+      "expected": "FAIL same inode owned by different artifacts",
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 2,
+        "indexed_file_count": 2,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      },
+      "samefile": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P1",
+      "file": "tools/sms_wrapper/artifact_registry.py",
+      "lines": [
+        110,
+        120
+      ],
+      "title": "Canonical destination aliases are accepted",
+      "reproduction": "reproduce.py case location_alias: add location alias -> existing data/source_art. audit returns ok:true.",
+      "cause": "inside validates resolved root confinement but returns lexical path; overlapping location checks compare lexical p/q.",
+      "required_change": "Compare resolved locations for equality/ancestry and make destination containment use resolved paths. For reserved outputs resolve existing ancestors before checking."
+    },
+    {
+      "id": "R2",
+      "priority": "P1",
+      "file": "tools/sms_wrapper/artifact_registry.py",
+      "lines": [
+        166,
+        179
+      ],
+      "title": "File bypasses its kind destination through project-internal symlink",
+      "reproduction": "reproduce.py case file_destination_escape: data/source_art/foreign -> elsewhere, file is elsewhere/image.png but registered as source_art/foreign/image.png. audit returns ok:true.",
+      "cause": "p.is_relative_to(location) is lexical; inside only confines to whole project.",
+      "required_change": "Check p.resolve() belongs to location.resolve(), including canonical parent chain of reserved output. Preserve legitimate symlinks only when resolved target remains in declared destination."
+    },
+    {
+      "id": "R3",
+      "priority": "P1",
+      "file": "tools/sms_wrapper/artifact_registry.py",
+      "lines": [
+        176,
+        179
+      ],
+      "title": "Two artifacts can own the same inode via hardlinks",
+      "reproduction": "reproduce.py case hardlink_ownership: distinct paths and different artifact kind/asset IDs hardlinked to same source. audit returns ok:true; os.path.samefile true.",
+      "cause": "ownership keyed only by p.resolve() distinguishes hardlink aliases.",
+      "required_change": "For sealed files track (st_dev,st_ino), or samefile, alongside resolved path; reject shared physical file ownership and require parent/role reference instead. Also check legacy ownership by inode."
+    },
+    {
+      "id": "R4",
+      "priority": "P2",
+      "file": "tools/sms_wrapper/harness_orchestration.py",
+      "lines": [
+        47,
+        54
+      ],
+      "title": "Malformed falsy tasks and IDs become valid plans",
+      "reproduction": "reproduce.py malformed_tasks_{} /False/0/empty-string all ok:true; malformed_ID_0 /False/[]/{} become t0 and worker.",
+      "cause": "tasks = get(...) or [] and id = get(...) or fallback discard invalid explicit types before validation.",
+      "required_change": "Apply defaults only if field omitted; explicit tasks must list and provided ID must nonempty string, then enforce uniqueness."
+    }
+  ],
+  "policy_gaps": [
+    {
+      "id": "P1",
+      "case": "managed_file_as_legacy_inventory",
+      "observation": "Unregistered new file in managed location can be put in legacy_inventory and scan passes (warning only).",
+      "recommendation": "If gate promises new production is reserved/owned, freeze adoption inventory hash in canonical catalog or allow unclassified entries only in explicit legacy locations. State current limit otherwise."
+    },
+    {
+      "id": "P2",
+      "case": "revision2_without_lineage",
+      "observation": "Superseded v1 and changed candidate v2 with parents:[] pass. Acyclicity is measured, completeness of derivation is not.",
+      "recommendation": "Require same logical group predecessor for later revisions, or an explicit independent-origin record bound to immutable source. Do not claim full provenance based on acyclic graph alone."
+    },
+    {
+      "id": "P3",
+      "case": "visual_output_kind_bypass",
+      "observation": "runtime_production writes data/source_art/unreserved.png without registry and plan passes.",
+      "recommendation": "With a registry, check all writes under managed locations regardless of worker kind; classify artifact writes explicitly. If no project/registry context, claim only kind-specific declared-output preflight, not universal organization enforcement."
+    }
+  ],
+  "selfchecks": {
+    "artifact_registry": "PASS",
+    "harness_orchestration": "PASS",
+    "audit_learning_capture": "PASS",
+    "audit_source_raster": "PASS"
+  },
+  "review_status": "needs_revision",
+  "limits": [
+    "No full selftest or emulator run.",
+    "Artifacts/approval are audited as declarations; no actor authentication inferred.",
+    "Recorded scope is tool SHA snapshot captured in results.json; current code may evolve concurrently.",
+    "Source raster checks declared slots, not image recognition; blank declared frame is explicitly outside recognized-pose scope.",
+    "Review does not authenticate source-raster artistic identity or source-generation dimensions."
+  ],
+  "followup_findings": [
+    {
+      "id": "R5",
+      "priority": "P1",
+      "file": "tools/sms_wrapper/artifact_registry.py",
+      "title": "Animation approval adapter ignores character identity",
+      "reproduction": "legacy_adapter.json wrong_character changes lineage character_id to terry; asset_id hero still PASS",
+      "required_change": "Require character_id matches artifact asset_id or explicit validated namespace mapping. Preserve actual dr_social source control."
+    },
+    {
+      "id": "R6",
+      "priority": "P1",
+      "file": "tools/sms_wrapper/audit_learning_capture.py",
+      "title": "Canonical application route can alias SMS_GLOBAL",
+      "reproduction": "routes_symlink_authority.json: skills/fake.md symlink->rules/SMS_GLOBAL.md with matchingSHA passes audit_routes",
+      "required_change": "Require resolved target within canonical skills/workflows root, not only lexicalprefix and workspace root."
+    }
+  ],
+  "retest_progress": {
+    "fixed": [
+      "R1",
+      "R2",
+      "R4",
+      "lineage revision completeness",
+      "kind-based visual output bypass"
+    ],
+    "still_open_at_read": [
+      "R3",
+      "R5",
+      "R6"
+    ],
+    "legacy_scope": "Explicit historical adoption exception without authenticity/production approval. Semantic approval_scope is only nonempty checked; not claimed authenticated."
+  }
+}

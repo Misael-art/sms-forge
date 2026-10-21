@@ -1,0 +1,4960 @@
+{
+  "schema": "dr_social_sprite_masks_v08_compliance_v1",
+  "status": "fail_closed_candidate_needs_mask_review",
+  "source": {
+    "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+    "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+    "mode": "P",
+    "dimensions_px": [
+      640,
+      720
+    ]
+  },
+  "candidate": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_masks_r5/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_candidate.png",
+    "sha256": "f3788d6aac41fd3d85753a764e809b2d8bc859b6286d55daa21d3cfbf37ef670",
+    "mode": "P",
+    "dimensions_px": [
+      640,
+      720
+    ]
+  },
+  "grid": {
+    "columns": 8,
+    "rows": 9,
+    "cell_px": [
+      80,
+      80
+    ],
+    "active_poses": 61,
+    "sequence_counts": [
+      4,
+      8,
+      8,
+      8,
+      5,
+      8,
+      8,
+      8,
+      4
+    ],
+    "unused_cells_transparent": true
+  },
+  "palette": {
+    "useful_colors": 12,
+    "used_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "rgba_by_index": {
+      "0": "#FF00FF",
+      "1": "#000055",
+      "2": "#FFAAAA",
+      "3": "#AA5555",
+      "4": "#55AAFF",
+      "5": "#00AAAA",
+      "6": "#005555",
+      "7": "#FFFFFF",
+      "8": "#AAAAAA",
+      "9": "#555555",
+      "10": "#550000",
+      "11": "#AA0055",
+      "12": "#FFFF00"
+    }
+  },
+  "authorized_method": "explicit per-frame semantic material masks plus deterministic component cleanup restricted to each mask; no ImageGen/diffusion, no RGB distance, blur, antialias, or resampling",
+  "yellow_glasses_option": "strict",
+  "mask_pixel_counts": {
+    "hair": 9862,
+    "coat": 55936,
+    "skin": 5720,
+    "leather": 13279,
+    "white_accessory": 2782,
+    "yellow_allowed": 177,
+    "yellow_pending": 85,
+    "burgundy_allowed": 378,
+    "outline": 18749,
+    "transparent": 283424
+  },
+  "semantic_confinement": {
+    "white_outside_allowed_zone": 1,
+    "yellow_outside_allowed_zone": 85,
+    "burgundy_outside_allowed_zone": 0
+  },
+  "hair_gray_audit": {
+    "frames_checked": 61,
+    "hair_mask_roles": [
+      8,
+      9
+    ],
+    "forbidden_hair_colors_inside_mask": 0,
+    "gray_pixels_outside_hair_or_cane": 7
+  },
+  "cluster_audit": {
+    "singletons_inside_material_masks_after": {
+      "hair": 88,
+      "coat": 98,
+      "skin": 311
+    }
+  },
+  "integrity": {
+    "alpha_changed_pixels": 0,
+    "geometry_same": true,
+    "changed_pixels": 6611,
+    "changes_outside_masks": 0,
+    "unresolved_mask_pixels": 36
+  },
+  "outputs": {
+    "keypose_samples_1x_4x": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_masks_r5/dr_social_v08_keypose_samples_1x_4x.png",
+    "mask_directory": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_masks_r5/masks",
+    "pixel_change_log": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_masks_r5/pixel_change_log.csv",
+    "unresolved_mask_pixels": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_masks_r5/unresolved_mask_pixels.csv"
+  },
+  "frames": [
+    {
+      "anchor_area_index9": 115,
+      "anchor_bbox_xywh": [
+        32,
+        5,
+        15,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        32,
+        5,
+        50,
+        28
+      ],
+      "hair_mask_pixels": 184,
+      "recovered_interior_pixels": 116,
+      "hair_bottom_y": 28,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 41,
+      "cane_shaft_components": 1,
+      "glove_pixels": 29,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 13,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 5,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 70,
+      "yellow_allowed_pixels": 5,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 13,
+      "coat_mask_pixels": 1030,
+      "skin_mask_pixels": 129,
+      "leather_mask_pixels": 250,
+      "ambiguous_expansion_pixels": 15,
+      "changed_pixels": 135,
+      "changed_pixels_by_role": {
+        "coat": 42,
+        "hair": 1,
+        "skin": 15,
+        "leather": 38,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 1
+      },
+      "unresolved_pixels": 1,
+      "frame_id": "IDLE_01",
+      "sequence": "idle",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        0,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        0
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        5,
+        62,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 104,
+      "anchor_bbox_xywh": [
+        35,
+        8,
+        21,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        7,
+        55,
+        27
+      ],
+      "hair_mask_pixels": 155,
+      "recovered_interior_pixels": 78,
+      "hair_bottom_y": 27,
+      "torso_center_x": 40.0,
+      "cane_shaft_pixels": 66,
+      "cane_shaft_components": 1,
+      "glove_pixels": 34,
+      "glove_components": 2,
+      "collar_pixels": 1,
+      "tie_pixels": 12,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 6,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 101,
+      "yellow_allowed_pixels": 6,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 12,
+      "coat_mask_pixels": 953,
+      "skin_mask_pixels": 152,
+      "leather_mask_pixels": 225,
+      "ambiguous_expansion_pixels": 10,
+      "changed_pixels": 156,
+      "changed_pixels_by_role": {
+        "coat": 36,
+        "hair": 0,
+        "skin": 27,
+        "leather": 29,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 2,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "IDLE_02",
+      "sequence": "idle",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        0,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        0
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        7,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 205,
+      "anchor_bbox_xywh": [
+        33,
+        8,
+        23,
+        22
+      ],
+      "hair_core_bbox_xyxy": [
+        33,
+        8,
+        55,
+        34
+      ],
+      "hair_mask_pixels": 219,
+      "recovered_interior_pixels": 155,
+      "hair_bottom_y": 34,
+      "torso_center_x": 41.0,
+      "cane_shaft_pixels": 73,
+      "cane_shaft_components": 1,
+      "glove_pixels": 32,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 6,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 105,
+      "yellow_allowed_pixels": 6,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 983,
+      "skin_mask_pixels": 114,
+      "leather_mask_pixels": 196,
+      "ambiguous_expansion_pixels": 19,
+      "changed_pixels": 181,
+      "changed_pixels_by_role": {
+        "coat": 51,
+        "hair": 6,
+        "skin": 24,
+        "leather": 29,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 4,
+        "coat": 3,
+        "skin": 1
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "IDLE_03",
+      "sequence": "idle",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        0,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        0
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        7,
+        62,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 138,
+      "anchor_bbox_xywh": [
+        35,
+        8,
+        19,
+        14
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        8,
+        56,
+        28
+      ],
+      "hair_mask_pixels": 203,
+      "recovered_interior_pixels": 140,
+      "hair_bottom_y": 28,
+      "torso_center_x": 41.0,
+      "cane_shaft_pixels": 23,
+      "cane_shaft_components": 1,
+      "glove_pixels": 34,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 10,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 9,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 57,
+      "yellow_allowed_pixels": 9,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 10,
+      "coat_mask_pixels": 938,
+      "skin_mask_pixels": 101,
+      "leather_mask_pixels": 236,
+      "ambiguous_expansion_pixels": 32,
+      "changed_pixels": 123,
+      "changed_pixels_by_role": {
+        "coat": 45,
+        "hair": 4,
+        "skin": 20,
+        "leather": 28,
+        "semantic_reassignment": 8
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 3,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "IDLE_04",
+      "sequence": "idle",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        0,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        0
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        15,
+        7,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 177,
+      "anchor_bbox_xywh": [
+        37,
+        9,
+        19,
+        20
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        9,
+        55,
+        28
+      ],
+      "hair_mask_pixels": 183,
+      "recovered_interior_pixels": 130,
+      "hair_bottom_y": 28,
+      "torso_center_x": 39.0,
+      "cane_shaft_pixels": 39,
+      "cane_shaft_components": 1,
+      "glove_pixels": 39,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 15,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 12,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 78,
+      "yellow_allowed_pixels": 12,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 15,
+      "coat_mask_pixels": 1000,
+      "skin_mask_pixels": 88,
+      "leather_mask_pixels": 321,
+      "ambiguous_expansion_pixels": 17,
+      "changed_pixels": 136,
+      "changed_pixels_by_role": {
+        "coat": 31,
+        "hair": 3,
+        "skin": 12,
+        "leather": 49,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 3,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_FORWARD_01",
+      "sequence": "walk_forward",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        1,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        80
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        8,
+        9,
+        71,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 174,
+      "anchor_bbox_xywh": [
+        35,
+        8,
+        22,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        8,
+        56,
+        31
+      ],
+      "hair_mask_pixels": 236,
+      "recovered_interior_pixels": 185,
+      "hair_bottom_y": 31,
+      "torso_center_x": 37.0,
+      "cane_shaft_pixels": 21,
+      "cane_shaft_components": 1,
+      "glove_pixels": 34,
+      "glove_components": 2,
+      "collar_pixels": 1,
+      "tie_pixels": 5,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 2,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 56,
+      "yellow_allowed_pixels": 2,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 5,
+      "coat_mask_pixels": 1074,
+      "skin_mask_pixels": 117,
+      "leather_mask_pixels": 294,
+      "ambiguous_expansion_pixels": 16,
+      "changed_pixels": 127,
+      "changed_pixels_by_role": {
+        "coat": 35,
+        "hair": 3,
+        "skin": 40,
+        "leather": 32,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 2,
+        "skin": 9
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_FORWARD_02",
+      "sequence": "walk_forward",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        1,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        80
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        5,
+        8,
+        73,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 156,
+      "anchor_bbox_xywh": [
+        35,
+        8,
+        22,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        8,
+        56,
+        29
+      ],
+      "hair_mask_pixels": 207,
+      "recovered_interior_pixels": 147,
+      "hair_bottom_y": 29,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 30,
+      "cane_shaft_components": 2,
+      "glove_pixels": 34,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 13,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 7,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 64,
+      "yellow_allowed_pixels": 7,
+      "yellow_pending_pixels": 1,
+      "burgundy_allowed_pixels": 13,
+      "coat_mask_pixels": 1005,
+      "skin_mask_pixels": 113,
+      "leather_mask_pixels": 313,
+      "ambiguous_expansion_pixels": 22,
+      "changed_pixels": 132,
+      "changed_pixels_by_role": {
+        "coat": 42,
+        "hair": 1,
+        "skin": 26,
+        "leather": 36,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 3,
+        "skin": 7
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 1,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_FORWARD_03",
+      "sequence": "walk_forward",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        1,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        80
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        7,
+        8,
+        72,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 138,
+      "anchor_bbox_xywh": [
+        37,
+        8,
+        21,
+        15
+      ],
+      "hair_core_bbox_xyxy": [
+        37,
+        8,
+        57,
+        30
+      ],
+      "hair_mask_pixels": 185,
+      "recovered_interior_pixels": 128,
+      "hair_bottom_y": 30,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 34,
+      "cane_shaft_components": 1,
+      "glove_pixels": 18,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 4,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 6,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 52,
+      "yellow_allowed_pixels": 6,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 4,
+      "coat_mask_pixels": 1067,
+      "skin_mask_pixels": 96,
+      "leather_mask_pixels": 305,
+      "ambiguous_expansion_pixels": 11,
+      "changed_pixels": 82,
+      "changed_pixels_by_role": {
+        "coat": 9,
+        "hair": 0,
+        "skin": 3,
+        "leather": 35,
+        "semantic_reassignment": 2
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 4,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 1,
+      "frame_id": "WALK_FORWARD_04",
+      "sequence": "walk_forward",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        1,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        80
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        4,
+        8,
+        74,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 141,
+      "anchor_bbox_xywh": [
+        37,
+        8,
+        21,
+        13
+      ],
+      "hair_core_bbox_xyxy": [
+        37,
+        8,
+        57,
+        25
+      ],
+      "hair_mask_pixels": 159,
+      "recovered_interior_pixels": 97,
+      "hair_bottom_y": 25,
+      "torso_center_x": 39.0,
+      "cane_shaft_pixels": 29,
+      "cane_shaft_components": 1,
+      "glove_pixels": 16,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 2,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 5,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 45,
+      "yellow_allowed_pixels": 5,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 2,
+      "coat_mask_pixels": 1079,
+      "skin_mask_pixels": 126,
+      "leather_mask_pixels": 266,
+      "ambiguous_expansion_pixels": 2,
+      "changed_pixels": 82,
+      "changed_pixels_by_role": {
+        "coat": 19,
+        "hair": 0,
+        "skin": 14,
+        "leather": 21,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 4,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 1,
+      "frame_id": "WALK_FORWARD_05",
+      "sequence": "walk_forward",
+      "sequence_frame": 5,
+      "cell_row_col": [
+        1,
+        4
+      ],
+      "cell_origin_px": [
+        320,
+        80
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        4,
+        8,
+        74,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 153,
+      "anchor_bbox_xywh": [
+        37,
+        8,
+        21,
+        15
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        8,
+        57,
+        27
+      ],
+      "hair_mask_pixels": 177,
+      "recovered_interior_pixels": 125,
+      "hair_bottom_y": 27,
+      "torso_center_x": 36.0,
+      "cane_shaft_pixels": 36,
+      "cane_shaft_components": 1,
+      "glove_pixels": 22,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 20,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 12,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 58,
+      "yellow_allowed_pixels": 12,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 20,
+      "coat_mask_pixels": 1077,
+      "skin_mask_pixels": 104,
+      "leather_mask_pixels": 335,
+      "ambiguous_expansion_pixels": 14,
+      "changed_pixels": 94,
+      "changed_pixels_by_role": {
+        "coat": 16,
+        "hair": 1,
+        "skin": 9,
+        "leather": 29,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 3,
+        "coat": 1,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 1,
+      "frame_id": "WALK_FORWARD_06",
+      "sequence": "walk_forward",
+      "sequence_frame": 6,
+      "cell_row_col": [
+        1,
+        5
+      ],
+      "cell_origin_px": [
+        400,
+        80
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        4,
+        8,
+        75,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 168,
+      "anchor_bbox_xywh": [
+        36,
+        9,
+        23,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        36,
+        9,
+        58,
+        24
+      ],
+      "hair_mask_pixels": 170,
+      "recovered_interior_pixels": 104,
+      "hair_bottom_y": 24,
+      "torso_center_x": 39.0,
+      "cane_shaft_pixels": 40,
+      "cane_shaft_components": 1,
+      "glove_pixels": 16,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 6,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 56,
+      "yellow_allowed_pixels": 6,
+      "yellow_pending_pixels": 1,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 1286,
+      "skin_mask_pixels": 102,
+      "leather_mask_pixels": 283,
+      "ambiguous_expansion_pixels": 16,
+      "changed_pixels": 106,
+      "changed_pixels_by_role": {
+        "coat": 21,
+        "hair": 1,
+        "skin": 18,
+        "leather": 27,
+        "semantic_reassignment": 6
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 6,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 1,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_FORWARD_07",
+      "sequence": "walk_forward",
+      "sequence_frame": 7,
+      "cell_row_col": [
+        1,
+        6
+      ],
+      "cell_origin_px": [
+        480,
+        80
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        2,
+        8,
+        77,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 181,
+      "anchor_bbox_xywh": [
+        37,
+        8,
+        22,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        37,
+        8,
+        58,
+        27
+      ],
+      "hair_mask_pixels": 187,
+      "recovered_interior_pixels": 141,
+      "hair_bottom_y": 27,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 37,
+      "cane_shaft_components": 1,
+      "glove_pixels": 15,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 5,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 52,
+      "yellow_allowed_pixels": 5,
+      "yellow_pending_pixels": 1,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 1155,
+      "skin_mask_pixels": 116,
+      "leather_mask_pixels": 286,
+      "ambiguous_expansion_pixels": 17,
+      "changed_pixels": 122,
+      "changed_pixels_by_role": {
+        "coat": 21,
+        "hair": 0,
+        "skin": 30,
+        "leather": 32,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 5,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 1,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_FORWARD_08",
+      "sequence": "walk_forward",
+      "sequence_frame": 8,
+      "cell_row_col": [
+        1,
+        7
+      ],
+      "cell_origin_px": [
+        560,
+        80
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        4,
+        8,
+        74,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 88,
+      "anchor_bbox_xywh": [
+        37,
+        2,
+        15,
+        12
+      ],
+      "hair_core_bbox_xyxy": [
+        37,
+        2,
+        51,
+        20
+      ],
+      "hair_mask_pixels": 118,
+      "recovered_interior_pixels": 73,
+      "hair_bottom_y": 20,
+      "torso_center_x": 36.0,
+      "cane_shaft_pixels": 22,
+      "cane_shaft_components": 1,
+      "glove_pixels": 22,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 11,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 1,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 41,
+      "yellow_allowed_pixels": 1,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 11,
+      "coat_mask_pixels": 997,
+      "skin_mask_pixels": 76,
+      "leather_mask_pixels": 188,
+      "ambiguous_expansion_pixels": 7,
+      "changed_pixels": 124,
+      "changed_pixels_by_role": {
+        "coat": 31,
+        "hair": 5,
+        "skin": 17,
+        "leather": 57,
+        "semantic_reassignment": 1
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 0,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_BACKWARD_01",
+      "sequence": "walk_backward",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        2,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        160
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        2,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 89,
+      "anchor_bbox_xywh": [
+        38,
+        2,
+        14,
+        13
+      ],
+      "hair_core_bbox_xyxy": [
+        38,
+        2,
+        51,
+        20
+      ],
+      "hair_mask_pixels": 116,
+      "recovered_interior_pixels": 75,
+      "hair_bottom_y": 20,
+      "torso_center_x": 36.0,
+      "cane_shaft_pixels": 28,
+      "cane_shaft_components": 2,
+      "glove_pixels": 38,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 9,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 66,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 9,
+      "coat_mask_pixels": 944,
+      "skin_mask_pixels": 69,
+      "leather_mask_pixels": 179,
+      "ambiguous_expansion_pixels": 18,
+      "changed_pixels": 88,
+      "changed_pixels_by_role": {
+        "coat": 29,
+        "hair": 1,
+        "skin": 9,
+        "leather": 22,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 1,
+        "skin": 4
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_BACKWARD_02",
+      "sequence": "walk_backward",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        2,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        160
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        15,
+        2,
+        64,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 87,
+      "anchor_bbox_xywh": [
+        39,
+        2,
+        15,
+        11
+      ],
+      "hair_core_bbox_xyxy": [
+        39,
+        2,
+        53,
+        20
+      ],
+      "hair_mask_pixels": 121,
+      "recovered_interior_pixels": 76,
+      "hair_bottom_y": 20,
+      "torso_center_x": 37.0,
+      "cane_shaft_pixels": 27,
+      "cane_shaft_components": 2,
+      "glove_pixels": 19,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 9,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 46,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 9,
+      "coat_mask_pixels": 899,
+      "skin_mask_pixels": 82,
+      "leather_mask_pixels": 171,
+      "ambiguous_expansion_pixels": 12,
+      "changed_pixels": 106,
+      "changed_pixels_by_role": {
+        "coat": 21,
+        "hair": 6,
+        "skin": 8,
+        "leather": 35,
+        "semantic_reassignment": 16
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 9
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 5,
+      "frame_id": "WALK_BACKWARD_03",
+      "sequence": "walk_backward",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        2,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        160
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        14,
+        2,
+        65,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 90,
+      "anchor_bbox_xywh": [
+        38,
+        3,
+        14,
+        15
+      ],
+      "hair_core_bbox_xyxy": [
+        38,
+        3,
+        51,
+        18
+      ],
+      "hair_mask_pixels": 98,
+      "recovered_interior_pixels": 60,
+      "hair_bottom_y": 18,
+      "torso_center_x": 36.0,
+      "cane_shaft_pixels": 17,
+      "cane_shaft_components": 1,
+      "glove_pixels": 35,
+      "glove_components": 2,
+      "collar_pixels": 7,
+      "tie_pixels": 23,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 59,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 23,
+      "coat_mask_pixels": 927,
+      "skin_mask_pixels": 68,
+      "leather_mask_pixels": 190,
+      "ambiguous_expansion_pixels": 12,
+      "changed_pixels": 93,
+      "changed_pixels_by_role": {
+        "coat": 22,
+        "hair": 3,
+        "skin": 18,
+        "leather": 40,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 1,
+        "skin": 7
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_BACKWARD_04",
+      "sequence": "walk_backward",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        2,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        160
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        15,
+        3,
+        64,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 102,
+      "anchor_bbox_xywh": [
+        36,
+        2,
+        15,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        36,
+        2,
+        50,
+        21
+      ],
+      "hair_mask_pixels": 114,
+      "recovered_interior_pixels": 66,
+      "hair_bottom_y": 21,
+      "torso_center_x": 37.0,
+      "cane_shaft_pixels": 19,
+      "cane_shaft_components": 1,
+      "glove_pixels": 24,
+      "glove_components": 2,
+      "collar_pixels": 2,
+      "tie_pixels": 18,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 45,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 18,
+      "coat_mask_pixels": 933,
+      "skin_mask_pixels": 69,
+      "leather_mask_pixels": 197,
+      "ambiguous_expansion_pixels": 22,
+      "changed_pixels": 109,
+      "changed_pixels_by_role": {
+        "coat": 21,
+        "hair": 6,
+        "skin": 22,
+        "leather": 56,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 3,
+        "skin": 8
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_BACKWARD_05",
+      "sequence": "walk_backward",
+      "sequence_frame": 5,
+      "cell_row_col": [
+        2,
+        4
+      ],
+      "cell_origin_px": [
+        320,
+        160
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        2,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 110,
+      "anchor_bbox_xywh": [
+        38,
+        3,
+        14,
+        19
+      ],
+      "hair_core_bbox_xyxy": [
+        38,
+        3,
+        51,
+        21
+      ],
+      "hair_mask_pixels": 118,
+      "recovered_interior_pixels": 63,
+      "hair_bottom_y": 21,
+      "torso_center_x": 37.0,
+      "cane_shaft_pixels": 37,
+      "cane_shaft_components": 3,
+      "glove_pixels": 22,
+      "glove_components": 1,
+      "collar_pixels": 1,
+      "tie_pixels": 6,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 60,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 6,
+      "coat_mask_pixels": 1271,
+      "skin_mask_pixels": 93,
+      "leather_mask_pixels": 184,
+      "ambiguous_expansion_pixels": 25,
+      "changed_pixels": 115,
+      "changed_pixels_by_role": {
+        "coat": 22,
+        "hair": 3,
+        "skin": 21,
+        "leather": 45,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 3,
+        "coat": 1,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_BACKWARD_06",
+      "sequence": "walk_backward",
+      "sequence_frame": 6,
+      "cell_row_col": [
+        2,
+        5
+      ],
+      "cell_origin_px": [
+        400,
+        160
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        6,
+        3,
+        73,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 114,
+      "anchor_bbox_xywh": [
+        37,
+        2,
+        15,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        37,
+        2,
+        51,
+        18
+      ],
+      "hair_mask_pixels": 120,
+      "recovered_interior_pixels": 77,
+      "hair_bottom_y": 18,
+      "torso_center_x": 35.0,
+      "cane_shaft_pixels": 32,
+      "cane_shaft_components": 2,
+      "glove_pixels": 35,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 14,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 67,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 14,
+      "coat_mask_pixels": 915,
+      "skin_mask_pixels": 48,
+      "leather_mask_pixels": 161,
+      "ambiguous_expansion_pixels": 13,
+      "changed_pixels": 92,
+      "changed_pixels_by_role": {
+        "coat": 22,
+        "hair": 5,
+        "skin": 6,
+        "leather": 32,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 2,
+        "skin": 8
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_BACKWARD_07",
+      "sequence": "walk_backward",
+      "sequence_frame": 7,
+      "cell_row_col": [
+        2,
+        6
+      ],
+      "cell_origin_px": [
+        480,
+        160
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        2,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 70,
+      "anchor_bbox_xywh": [
+        38,
+        2,
+        13,
+        11
+      ],
+      "hair_core_bbox_xyxy": [
+        38,
+        2,
+        50,
+        20
+      ],
+      "hair_mask_pixels": 104,
+      "recovered_interior_pixels": 59,
+      "hair_bottom_y": 20,
+      "torso_center_x": 37.0,
+      "cane_shaft_pixels": 16,
+      "cane_shaft_components": 1,
+      "glove_pixels": 32,
+      "glove_components": 3,
+      "collar_pixels": 0,
+      "tie_pixels": 11,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 48,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 11,
+      "coat_mask_pixels": 1015,
+      "skin_mask_pixels": 85,
+      "leather_mask_pixels": 178,
+      "ambiguous_expansion_pixels": 10,
+      "changed_pixels": 111,
+      "changed_pixels_by_role": {
+        "coat": 39,
+        "hair": 4,
+        "skin": 11,
+        "leather": 46,
+        "semantic_reassignment": 2
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 2,
+        "skin": 7
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "WALK_BACKWARD_08",
+      "sequence": "walk_backward",
+      "sequence_frame": 8,
+      "cell_row_col": [
+        2,
+        7
+      ],
+      "cell_origin_px": [
+        560,
+        160
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        2,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 124,
+      "anchor_bbox_xywh": [
+        42,
+        18,
+        20,
+        13
+      ],
+      "hair_core_bbox_xyxy": [
+        42,
+        18,
+        61,
+        42
+      ],
+      "hair_mask_pixels": 185,
+      "recovered_interior_pixels": 116,
+      "hair_bottom_y": 42,
+      "torso_center_x": 29.0,
+      "cane_shaft_pixels": 24,
+      "cane_shaft_components": 1,
+      "glove_pixels": 45,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 7,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 69,
+      "yellow_allowed_pixels": 7,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 846,
+      "skin_mask_pixels": 107,
+      "leather_mask_pixels": 240,
+      "ambiguous_expansion_pixels": 19,
+      "changed_pixels": 94,
+      "changed_pixels_by_role": {
+        "coat": 37,
+        "hair": 2,
+        "skin": 12,
+        "leather": 24,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 4,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "JUMP_01",
+      "sequence": "jump",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        3,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        240
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        6,
+        18,
+        72,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 137,
+      "anchor_bbox_xywh": [
+        41,
+        15,
+        19,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        41,
+        15,
+        59,
+        33
+      ],
+      "hair_mask_pixels": 165,
+      "recovered_interior_pixels": 111,
+      "hair_bottom_y": 33,
+      "torso_center_x": 34.0,
+      "cane_shaft_pixels": 25,
+      "cane_shaft_components": 1,
+      "glove_pixels": 47,
+      "glove_components": 2,
+      "collar_pixels": 4,
+      "tie_pixels": 5,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 8,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 72,
+      "yellow_allowed_pixels": 8,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 5,
+      "coat_mask_pixels": 1056,
+      "skin_mask_pixels": 72,
+      "leather_mask_pixels": 266,
+      "ambiguous_expansion_pixels": 35,
+      "changed_pixels": 122,
+      "changed_pixels_by_role": {
+        "coat": 40,
+        "hair": 6,
+        "skin": 13,
+        "leather": 40,
+        "semantic_reassignment": 6
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 3,
+        "coat": 0,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "JUMP_02",
+      "sequence": "jump",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        3,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        240
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        5,
+        15,
+        73,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 129,
+      "anchor_bbox_xywh": [
+        44,
+        13,
+        19,
+        11
+      ],
+      "hair_core_bbox_xyxy": [
+        44,
+        13,
+        62,
+        30
+      ],
+      "hair_mask_pixels": 139,
+      "recovered_interior_pixels": 103,
+      "hair_bottom_y": 30,
+      "torso_center_x": 36.0,
+      "cane_shaft_pixels": 17,
+      "cane_shaft_components": 1,
+      "glove_pixels": 44,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 2,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 4,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 61,
+      "yellow_allowed_pixels": 4,
+      "yellow_pending_pixels": 2,
+      "burgundy_allowed_pixels": 2,
+      "coat_mask_pixels": 879,
+      "skin_mask_pixels": 89,
+      "leather_mask_pixels": 219,
+      "ambiguous_expansion_pixels": 21,
+      "changed_pixels": 135,
+      "changed_pixels_by_role": {
+        "coat": 47,
+        "hair": 0,
+        "skin": 26,
+        "leather": 48,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 4,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 2,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "JUMP_03",
+      "sequence": "jump",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        3,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        240
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        5,
+        13,
+        73,
+        68
+      ]
+    },
+    {
+      "anchor_area_index9": 130,
+      "anchor_bbox_xywh": [
+        38,
+        11,
+        17,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        38,
+        11,
+        54,
+        27
+      ],
+      "hair_mask_pixels": 135,
+      "recovered_interior_pixels": 79,
+      "hair_bottom_y": 27,
+      "torso_center_x": 30.0,
+      "cane_shaft_pixels": 30,
+      "cane_shaft_components": 1,
+      "glove_pixels": 30,
+      "glove_components": 2,
+      "collar_pixels": 2,
+      "tie_pixels": 4,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 8,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 60,
+      "yellow_allowed_pixels": 8,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 4,
+      "coat_mask_pixels": 813,
+      "skin_mask_pixels": 113,
+      "leather_mask_pixels": 220,
+      "ambiguous_expansion_pixels": 10,
+      "changed_pixels": 111,
+      "changed_pixels_by_role": {
+        "coat": 13,
+        "hair": 4,
+        "skin": 26,
+        "leather": 38,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "JUMP_04",
+      "sequence": "jump",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        3,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        240
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        6,
+        11,
+        72,
+        64
+      ]
+    },
+    {
+      "anchor_area_index9": 113,
+      "anchor_bbox_xywh": [
+        35,
+        13,
+        15,
+        20
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        13,
+        54,
+        32
+      ],
+      "hair_mask_pixels": 139,
+      "recovered_interior_pixels": 84,
+      "hair_bottom_y": 32,
+      "torso_center_x": 28.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 51,
+      "glove_components": 2,
+      "collar_pixels": 4,
+      "tie_pixels": 4,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 51,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 4,
+      "burgundy_allowed_pixels": 4,
+      "coat_mask_pixels": 929,
+      "skin_mask_pixels": 97,
+      "leather_mask_pixels": 281,
+      "ambiguous_expansion_pixels": 15,
+      "changed_pixels": 103,
+      "changed_pixels_by_role": {
+        "coat": 34,
+        "hair": 2,
+        "skin": 15,
+        "leather": 48,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 4,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "JUMP_05",
+      "sequence": "jump",
+      "sequence_frame": 5,
+      "cell_row_col": [
+        3,
+        4
+      ],
+      "cell_origin_px": [
+        320,
+        240
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        3,
+        13,
+        75,
+        71
+      ]
+    },
+    {
+      "anchor_area_index9": 129,
+      "anchor_bbox_xywh": [
+        40,
+        18,
+        18,
+        12
+      ],
+      "hair_core_bbox_xyxy": [
+        40,
+        18,
+        57,
+        35
+      ],
+      "hair_mask_pixels": 159,
+      "recovered_interior_pixels": 115,
+      "hair_bottom_y": 35,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 28,
+      "cane_shaft_components": 1,
+      "glove_pixels": 36,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 14,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 7,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 64,
+      "yellow_allowed_pixels": 7,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 14,
+      "coat_mask_pixels": 766,
+      "skin_mask_pixels": 104,
+      "leather_mask_pixels": 226,
+      "ambiguous_expansion_pixels": 23,
+      "changed_pixels": 111,
+      "changed_pixels_by_role": {
+        "coat": 29,
+        "hair": 3,
+        "skin": 28,
+        "leather": 25,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 1,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "JUMP_06",
+      "sequence": "jump",
+      "sequence_frame": 6,
+      "cell_row_col": [
+        3,
+        5
+      ],
+      "cell_origin_px": [
+        400,
+        240
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        4,
+        17,
+        74,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 156,
+      "anchor_bbox_xywh": [
+        40,
+        22,
+        20,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        40,
+        22,
+        59,
+        39
+      ],
+      "hair_mask_pixels": 163,
+      "recovered_interior_pixels": 112,
+      "hair_bottom_y": 39,
+      "torso_center_x": 30.0,
+      "cane_shaft_pixels": 13,
+      "cane_shaft_components": 1,
+      "glove_pixels": 37,
+      "glove_components": 3,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 3,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 50,
+      "yellow_allowed_pixels": 3,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 880,
+      "skin_mask_pixels": 91,
+      "leather_mask_pixels": 248,
+      "ambiguous_expansion_pixels": 21,
+      "changed_pixels": 129,
+      "changed_pixels_by_role": {
+        "coat": 46,
+        "hair": 4,
+        "skin": 33,
+        "leather": 41,
+        "semantic_reassignment": 8
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 3,
+        "skin": 8
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "JUMP_07",
+      "sequence": "jump",
+      "sequence_frame": 7,
+      "cell_row_col": [
+        3,
+        6
+      ],
+      "cell_origin_px": [
+        480,
+        240
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        6,
+        22,
+        73,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 146,
+      "anchor_bbox_xywh": [
+        47,
+        30,
+        20,
+        19
+      ],
+      "hair_core_bbox_xyxy": [
+        46,
+        30,
+        66,
+        53
+      ],
+      "hair_mask_pixels": 155,
+      "recovered_interior_pixels": 86,
+      "hair_bottom_y": 53,
+      "torso_center_x": 36.0,
+      "cane_shaft_pixels": 14,
+      "cane_shaft_components": 1,
+      "glove_pixels": 4,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 5,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 14,
+      "yellow_allowed_pixels": 5,
+      "yellow_pending_pixels": 2,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 717,
+      "skin_mask_pixels": 140,
+      "leather_mask_pixels": 210,
+      "ambiguous_expansion_pixels": 19,
+      "changed_pixels": 123,
+      "changed_pixels_by_role": {
+        "coat": 17,
+        "hair": 4,
+        "skin": 57,
+        "leather": 34,
+        "semantic_reassignment": 12
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 2,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "JUMP_08",
+      "sequence": "jump",
+      "sequence_frame": 8,
+      "cell_row_col": [
+        3,
+        7
+      ],
+      "cell_origin_px": [
+        560,
+        240
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        10,
+        30,
+        68,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 181,
+      "anchor_bbox_xywh": [
+        39,
+        18,
+        21,
+        23
+      ],
+      "hair_core_bbox_xyxy": [
+        39,
+        18,
+        60,
+        41
+      ],
+      "hair_mask_pixels": 220,
+      "recovered_interior_pixels": 121,
+      "hair_bottom_y": 41,
+      "torso_center_x": 40.0,
+      "cane_shaft_pixels": 39,
+      "cane_shaft_components": 2,
+      "glove_pixels": 34,
+      "glove_components": 1,
+      "collar_pixels": 3,
+      "tie_pixels": 5,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 3,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 73,
+      "yellow_allowed_pixels": 3,
+      "yellow_pending_pixels": 2,
+      "burgundy_allowed_pixels": 5,
+      "coat_mask_pixels": 817,
+      "skin_mask_pixels": 129,
+      "leather_mask_pixels": 258,
+      "ambiguous_expansion_pixels": 5,
+      "changed_pixels": 111,
+      "changed_pixels_by_role": {
+        "coat": 26,
+        "hair": 15,
+        "skin": 19,
+        "leather": 14,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 2,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 2,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "CROUCH_01",
+      "sequence": "crouch",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        4,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        320
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        13,
+        18,
+        65,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 164,
+      "anchor_bbox_xywh": [
+        45,
+        25,
+        22,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        45,
+        25,
+        67,
+        48
+      ],
+      "hair_mask_pixels": 268,
+      "recovered_interior_pixels": 175,
+      "hair_bottom_y": 48,
+      "torso_center_x": 40.0,
+      "cane_shaft_pixels": 23,
+      "cane_shaft_components": 1,
+      "glove_pixels": 28,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 10,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 51,
+      "yellow_allowed_pixels": 10,
+      "yellow_pending_pixels": 3,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 867,
+      "skin_mask_pixels": 87,
+      "leather_mask_pixels": 207,
+      "ambiguous_expansion_pixels": 23,
+      "changed_pixels": 95,
+      "changed_pixels_by_role": {
+        "coat": 25,
+        "hair": 19,
+        "skin": 11,
+        "leather": 13,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 1,
+        "skin": 2
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 3,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "CROUCH_02",
+      "sequence": "crouch",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        4,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        320
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        10,
+        25,
+        69,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 212,
+      "anchor_bbox_xywh": [
+        42,
+        25,
+        25,
+        20
+      ],
+      "hair_core_bbox_xyxy": [
+        42,
+        25,
+        66,
+        44
+      ],
+      "hair_mask_pixels": 244,
+      "recovered_interior_pixels": 148,
+      "hair_bottom_y": 44,
+      "torso_center_x": 43.0,
+      "cane_shaft_pixels": 20,
+      "cane_shaft_components": 1,
+      "glove_pixels": 25,
+      "glove_components": 1,
+      "collar_pixels": 3,
+      "tie_pixels": 14,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 7,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 48,
+      "yellow_allowed_pixels": 7,
+      "yellow_pending_pixels": 3,
+      "burgundy_allowed_pixels": 14,
+      "coat_mask_pixels": 801,
+      "skin_mask_pixels": 85,
+      "leather_mask_pixels": 164,
+      "ambiguous_expansion_pixels": 15,
+      "changed_pixels": 78,
+      "changed_pixels_by_role": {
+        "coat": 25,
+        "hair": 19,
+        "skin": 5,
+        "leather": 6,
+        "semantic_reassignment": 9
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 0,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 3,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "CROUCH_03",
+      "sequence": "crouch",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        4,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        320
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        11,
+        25,
+        67,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 183,
+      "anchor_bbox_xywh": [
+        41,
+        30,
+        22,
+        22
+      ],
+      "hair_core_bbox_xyxy": [
+        41,
+        30,
+        62,
+        52
+      ],
+      "hair_mask_pixels": 221,
+      "recovered_interior_pixels": 126,
+      "hair_bottom_y": 52,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 16,
+      "cane_shaft_components": 1,
+      "glove_pixels": 20,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 6,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 36,
+      "yellow_allowed_pixels": 6,
+      "yellow_pending_pixels": 2,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 673,
+      "skin_mask_pixels": 120,
+      "leather_mask_pixels": 177,
+      "ambiguous_expansion_pixels": 15,
+      "changed_pixels": 88,
+      "changed_pixels_by_role": {
+        "coat": 18,
+        "hair": 14,
+        "skin": 30,
+        "leather": 10,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 3,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 2,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "CROUCH_04",
+      "sequence": "crouch",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        4,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        320
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        13,
+        30,
+        65,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 191,
+      "anchor_bbox_xywh": [
+        41,
+        29,
+        23,
+        22
+      ],
+      "hair_core_bbox_xyxy": [
+        41,
+        29,
+        66,
+        53
+      ],
+      "hair_mask_pixels": 248,
+      "recovered_interior_pixels": 147,
+      "hair_bottom_y": 53,
+      "torso_center_x": 33.0,
+      "cane_shaft_pixels": 26,
+      "cane_shaft_components": 1,
+      "glove_pixels": 21,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 3,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 47,
+      "yellow_allowed_pixels": 3,
+      "yellow_pending_pixels": 5,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 636,
+      "skin_mask_pixels": 89,
+      "leather_mask_pixels": 152,
+      "ambiguous_expansion_pixels": 17,
+      "changed_pixels": 108,
+      "changed_pixels_by_role": {
+        "coat": 23,
+        "hair": 21,
+        "skin": 18,
+        "leather": 18,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 3,
+        "skin": 2
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 5,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "CROUCH_05",
+      "sequence": "crouch",
+      "sequence_frame": 5,
+      "cell_row_col": [
+        4,
+        4
+      ],
+      "cell_origin_px": [
+        320,
+        320
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        10,
+        29,
+        68,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 46,
+      "anchor_bbox_xywh": [
+        35,
+        6,
+        11,
+        12
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        6,
+        47,
+        23
+      ],
+      "hair_mask_pixels": 80,
+      "recovered_interior_pixels": 20,
+      "hair_bottom_y": 23,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 23,
+      "cane_shaft_components": 1,
+      "glove_pixels": 19,
+      "glove_components": 3,
+      "collar_pixels": 0,
+      "tie_pixels": 7,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 42,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 2,
+      "burgundy_allowed_pixels": 7,
+      "coat_mask_pixels": 786,
+      "skin_mask_pixels": 59,
+      "leather_mask_pixels": 132,
+      "ambiguous_expansion_pixels": 9,
+      "changed_pixels": 89,
+      "changed_pixels_by_role": {
+        "coat": 27,
+        "hair": 4,
+        "skin": 12,
+        "leather": 37,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 5,
+        "skin": 4
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 2,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 1,
+      "frame_id": "DASH_RUN_01",
+      "sequence": "dash_run",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        5,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        400
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        22,
+        6,
+        56,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 99,
+      "anchor_bbox_xywh": [
+        48,
+        15,
+        14,
+        19
+      ],
+      "hair_core_bbox_xyxy": [
+        48,
+        15,
+        62,
+        36
+      ],
+      "hair_mask_pixels": 116,
+      "recovered_interior_pixels": 67,
+      "hair_bottom_y": 36,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 21,
+      "cane_shaft_components": 1,
+      "glove_pixels": 30,
+      "glove_components": 3,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 51,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 1,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 837,
+      "skin_mask_pixels": 56,
+      "leather_mask_pixels": 121,
+      "ambiguous_expansion_pixels": 21,
+      "changed_pixels": 84,
+      "changed_pixels_by_role": {
+        "coat": 27,
+        "hair": 8,
+        "skin": 30,
+        "leather": 12,
+        "semantic_reassignment": 19
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 3,
+        "coat": 3,
+        "skin": 11
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 1,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 1,
+      "frame_id": "DASH_RUN_02",
+      "sequence": "dash_run",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        5,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        400
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        15,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 71,
+      "anchor_bbox_xywh": [
+        46,
+        15,
+        16,
+        13
+      ],
+      "hair_core_bbox_xyxy": [
+        46,
+        15,
+        61,
+        27
+      ],
+      "hair_mask_pixels": 78,
+      "recovered_interior_pixels": 32,
+      "hair_bottom_y": 27,
+      "torso_center_x": 42.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 29,
+      "glove_components": 3,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 29,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 1,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 852,
+      "skin_mask_pixels": 66,
+      "leather_mask_pixels": 154,
+      "ambiguous_expansion_pixels": 13,
+      "changed_pixels": 99,
+      "changed_pixels_by_role": {
+        "coat": 30,
+        "hair": 4,
+        "skin": 16,
+        "leather": 35,
+        "semantic_reassignment": 17
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 0,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 1,
+        "yellow": 1,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 3,
+      "frame_id": "DASH_RUN_03",
+      "sequence": "dash_run",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        5,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        400
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        15,
+        14,
+        64,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 57,
+      "anchor_bbox_xywh": [
+        53,
+        16,
+        15,
+        9
+      ],
+      "hair_core_bbox_xyxy": [
+        53,
+        16,
+        67,
+        30
+      ],
+      "hair_mask_pixels": 87,
+      "recovered_interior_pixels": 37,
+      "hair_bottom_y": 30,
+      "torso_center_x": 43.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 26,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 26,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 906,
+      "skin_mask_pixels": 74,
+      "leather_mask_pixels": 157,
+      "ambiguous_expansion_pixels": 14,
+      "changed_pixels": 101,
+      "changed_pixels_by_role": {
+        "coat": 43,
+        "hair": 7,
+        "skin": 16,
+        "leather": 38,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 0,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "DASH_RUN_04",
+      "sequence": "dash_run",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        5,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        400
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        12,
+        15,
+        67,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 54,
+      "anchor_bbox_xywh": [
+        53,
+        16,
+        16,
+        8
+      ],
+      "hair_core_bbox_xyxy": [
+        53,
+        16,
+        69,
+        31
+      ],
+      "hair_mask_pixels": 93,
+      "recovered_interior_pixels": 37,
+      "hair_bottom_y": 31,
+      "torso_center_x": 44.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 24,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 24,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 2,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 900,
+      "skin_mask_pixels": 73,
+      "leather_mask_pixels": 128,
+      "ambiguous_expansion_pixels": 14,
+      "changed_pixels": 103,
+      "changed_pixels_by_role": {
+        "coat": 43,
+        "hair": 12,
+        "skin": 14,
+        "leather": 33,
+        "semantic_reassignment": 1
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 0,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 2,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "DASH_RUN_05",
+      "sequence": "dash_run",
+      "sequence_frame": 5,
+      "cell_row_col": [
+        5,
+        4
+      ],
+      "cell_origin_px": [
+        320,
+        400
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        10,
+        15,
+        69,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 81,
+      "anchor_bbox_xywh": [
+        50,
+        16,
+        15,
+        13
+      ],
+      "hair_core_bbox_xyxy": [
+        50,
+        16,
+        66,
+        28
+      ],
+      "hair_mask_pixels": 92,
+      "recovered_interior_pixels": 50,
+      "hair_bottom_y": 28,
+      "torso_center_x": 43.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 29,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 29,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 883,
+      "skin_mask_pixels": 80,
+      "leather_mask_pixels": 159,
+      "ambiguous_expansion_pixels": 14,
+      "changed_pixels": 93,
+      "changed_pixels_by_role": {
+        "coat": 34,
+        "hair": 3,
+        "skin": 13,
+        "leather": 38,
+        "semantic_reassignment": 13
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 4,
+        "coat": 2,
+        "skin": 8
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 1,
+      "frame_id": "DASH_RUN_06",
+      "sequence": "dash_run",
+      "sequence_frame": 6,
+      "cell_row_col": [
+        5,
+        5
+      ],
+      "cell_origin_px": [
+        400,
+        400
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        9,
+        15,
+        70,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 68,
+      "anchor_bbox_xywh": [
+        42,
+        11,
+        16,
+        14
+      ],
+      "hair_core_bbox_xyxy": [
+        42,
+        11,
+        58,
+        24
+      ],
+      "hair_mask_pixels": 75,
+      "recovered_interior_pixels": 35,
+      "hair_bottom_y": 24,
+      "torso_center_x": 43.5,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 21,
+      "glove_components": 2,
+      "collar_pixels": 1,
+      "tie_pixels": 16,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 22,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 1,
+      "burgundy_allowed_pixels": 16,
+      "coat_mask_pixels": 900,
+      "skin_mask_pixels": 68,
+      "leather_mask_pixels": 126,
+      "ambiguous_expansion_pixels": 9,
+      "changed_pixels": 76,
+      "changed_pixels_by_role": {
+        "coat": 46,
+        "hair": 1,
+        "skin": 14,
+        "leather": 15,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 1,
+        "skin": 4
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 1,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 5
+      },
+      "unresolved_pixels": 5,
+      "frame_id": "DASH_RUN_07",
+      "sequence": "dash_run",
+      "sequence_frame": 7,
+      "cell_row_col": [
+        5,
+        6
+      ],
+      "cell_origin_px": [
+        480,
+        400
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        15,
+        11,
+        64,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 52,
+      "anchor_bbox_xywh": [
+        36,
+        6,
+        10,
+        11
+      ],
+      "hair_core_bbox_xyxy": [
+        34,
+        6,
+        48,
+        19
+      ],
+      "hair_mask_pixels": 77,
+      "recovered_interior_pixels": 31,
+      "hair_bottom_y": 19,
+      "torso_center_x": 38.0,
+      "cane_shaft_pixels": 21,
+      "cane_shaft_components": 2,
+      "glove_pixels": 19,
+      "glove_components": 2,
+      "collar_pixels": 2,
+      "tie_pixels": 14,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 42,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 14,
+      "coat_mask_pixels": 827,
+      "skin_mask_pixels": 37,
+      "leather_mask_pixels": 125,
+      "ambiguous_expansion_pixels": 6,
+      "changed_pixels": 84,
+      "changed_pixels_by_role": {
+        "coat": 16,
+        "hair": 4,
+        "skin": 6,
+        "leather": 36,
+        "semantic_reassignment": 6
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 0,
+        "skin": 8
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 1
+      },
+      "unresolved_pixels": 2,
+      "frame_id": "DASH_RUN_08",
+      "sequence": "dash_run",
+      "sequence_frame": 8,
+      "cell_row_col": [
+        5,
+        7
+      ],
+      "cell_origin_px": [
+        560,
+        400
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        22,
+        5,
+        57,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 87,
+      "anchor_bbox_xywh": [
+        35,
+        3,
+        16,
+        12
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        3,
+        50,
+        20
+      ],
+      "hair_mask_pixels": 123,
+      "recovered_interior_pixels": 73,
+      "hair_bottom_y": 20,
+      "torso_center_x": 41.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 24,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 10,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 24,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 10,
+      "coat_mask_pixels": 853,
+      "skin_mask_pixels": 51,
+      "leather_mask_pixels": 132,
+      "ambiguous_expansion_pixels": 6,
+      "changed_pixels": 48,
+      "changed_pixels_by_role": {
+        "coat": 23,
+        "hair": 5,
+        "skin": 3,
+        "leather": 17,
+        "semantic_reassignment": 2
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 2,
+        "skin": 7
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "KNOCKDOWN_FALL_01",
+      "sequence": "knockdown_fall",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        6,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        480
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        23,
+        3,
+        56,
+        75
+      ]
+    },
+    {
+      "anchor_area_index9": 92,
+      "anchor_bbox_xywh": [
+        20,
+        7,
+        16,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        20,
+        7,
+        37,
+        23
+      ],
+      "hair_mask_pixels": 123,
+      "recovered_interior_pixels": 66,
+      "hair_bottom_y": 23,
+      "torso_center_x": 37.0,
+      "cane_shaft_pixels": 27,
+      "cane_shaft_components": 1,
+      "glove_pixels": 11,
+      "glove_components": 1,
+      "collar_pixels": 1,
+      "tie_pixels": 3,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 4,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 39,
+      "yellow_allowed_pixels": 4,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 3,
+      "coat_mask_pixels": 933,
+      "skin_mask_pixels": 61,
+      "leather_mask_pixels": 110,
+      "ambiguous_expansion_pixels": 17,
+      "changed_pixels": 103,
+      "changed_pixels_by_role": {
+        "coat": 28,
+        "hair": 3,
+        "skin": 23,
+        "leather": 22,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 3,
+        "coat": 0,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "KNOCKDOWN_FALL_02",
+      "sequence": "knockdown_fall",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        6,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        480
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        19,
+        6,
+        59,
+        75
+      ]
+    },
+    {
+      "anchor_area_index9": 110,
+      "anchor_bbox_xywh": [
+        19,
+        9,
+        17,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        18,
+        9,
+        38,
+        27
+      ],
+      "hair_mask_pixels": 118,
+      "recovered_interior_pixels": 66,
+      "hair_bottom_y": 27,
+      "torso_center_x": 40.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 13,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 13,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 792,
+      "skin_mask_pixels": 48,
+      "leather_mask_pixels": 132,
+      "ambiguous_expansion_pixels": 8,
+      "changed_pixels": 67,
+      "changed_pixels_by_role": {
+        "coat": 18,
+        "hair": 2,
+        "skin": 5,
+        "leather": 28,
+        "semantic_reassignment": 14
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 1,
+        "skin": 4
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 5,
+      "frame_id": "KNOCKDOWN_FALL_03",
+      "sequence": "knockdown_fall",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        6,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        480
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        18,
+        9,
+        61,
+        75
+      ]
+    },
+    {
+      "anchor_area_index9": 125,
+      "anchor_bbox_xywh": [
+        17,
+        26,
+        16,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        17,
+        26,
+        32,
+        42
+      ],
+      "hair_mask_pixels": 129,
+      "recovered_interior_pixels": 78,
+      "hair_bottom_y": 42,
+      "torso_center_x": 36.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 10,
+      "glove_components": 1,
+      "collar_pixels": 1,
+      "tie_pixels": 8,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 11,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 8,
+      "coat_mask_pixels": 655,
+      "skin_mask_pixels": 76,
+      "leather_mask_pixels": 139,
+      "ambiguous_expansion_pixels": 9,
+      "changed_pixels": 97,
+      "changed_pixels_by_role": {
+        "coat": 27,
+        "hair": 3,
+        "skin": 36,
+        "leather": 29,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 0,
+        "skin": 2
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "KNOCKDOWN_FALL_04",
+      "sequence": "knockdown_fall",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        6,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        480
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        26,
+        63,
+        75
+      ]
+    },
+    {
+      "anchor_area_index9": 96,
+      "anchor_bbox_xywh": [
+        12,
+        38,
+        15,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        12,
+        38,
+        28,
+        54
+      ],
+      "hair_mask_pixels": 117,
+      "recovered_interior_pixels": 73,
+      "hair_bottom_y": 54,
+      "torso_center_x": 40.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 10,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 10,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 3,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 676,
+      "skin_mask_pixels": 36,
+      "leather_mask_pixels": 128,
+      "ambiguous_expansion_pixels": 6,
+      "changed_pixels": 86,
+      "changed_pixels_by_role": {
+        "coat": 29,
+        "hair": 3,
+        "skin": 6,
+        "leather": 37,
+        "semantic_reassignment": 20
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 1,
+        "skin": 7
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 3,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 2,
+      "frame_id": "KNOCKDOWN_FALL_05",
+      "sequence": "knockdown_fall",
+      "sequence_frame": 5,
+      "cell_row_col": [
+        6,
+        4
+      ],
+      "cell_origin_px": [
+        320,
+        480
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        11,
+        38,
+        67,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 109,
+      "anchor_bbox_xywh": [
+        17,
+        51,
+        17,
+        17
+      ],
+      "hair_core_bbox_xyxy": [
+        17,
+        51,
+        33,
+        70
+      ],
+      "hair_mask_pixels": 120,
+      "recovered_interior_pixels": 64,
+      "hair_bottom_y": 70,
+      "torso_center_x": 43.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 0,
+      "glove_components": 0,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 3,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 0,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 4,
+      "burgundy_allowed_pixels": 3,
+      "coat_mask_pixels": 369,
+      "skin_mask_pixels": 48,
+      "leather_mask_pixels": 76,
+      "ambiguous_expansion_pixels": 15,
+      "changed_pixels": 57,
+      "changed_pixels_by_role": {
+        "coat": 36,
+        "hair": 5,
+        "skin": 11,
+        "leather": 5,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 3,
+        "coat": 0,
+        "skin": 2
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 4,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "KNOCKDOWN_FALL_06",
+      "sequence": "knockdown_fall",
+      "sequence_frame": 6,
+      "cell_row_col": [
+        6,
+        5
+      ],
+      "cell_origin_px": [
+        400,
+        480
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        51,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 70,
+      "anchor_bbox_xywh": [
+        17,
+        52,
+        14,
+        14
+      ],
+      "hair_core_bbox_xyxy": [
+        16,
+        52,
+        30,
+        70
+      ],
+      "hair_mask_pixels": 85,
+      "recovered_interior_pixels": 31,
+      "hair_bottom_y": 70,
+      "torso_center_x": 43.5,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 0,
+      "glove_components": 0,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 2,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 0,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 4,
+      "burgundy_allowed_pixels": 2,
+      "coat_mask_pixels": 364,
+      "skin_mask_pixels": 64,
+      "leather_mask_pixels": 92,
+      "ambiguous_expansion_pixels": 31,
+      "changed_pixels": 83,
+      "changed_pixels_by_role": {
+        "coat": 57,
+        "hair": 4,
+        "skin": 14,
+        "leather": 15,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 0,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 4,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "KNOCKDOWN_FALL_07",
+      "sequence": "knockdown_fall",
+      "sequence_frame": 7,
+      "cell_row_col": [
+        6,
+        6
+      ],
+      "cell_origin_px": [
+        480,
+        480
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        52,
+        63,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 79,
+      "anchor_bbox_xywh": [
+        16,
+        53,
+        14,
+        15
+      ],
+      "hair_core_bbox_xyxy": [
+        16,
+        53,
+        32,
+        72
+      ],
+      "hair_mask_pixels": 125,
+      "recovered_interior_pixels": 56,
+      "hair_bottom_y": 72,
+      "torso_center_x": 47.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 0,
+      "glove_components": 0,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 1,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 0,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 5,
+      "burgundy_allowed_pixels": 1,
+      "coat_mask_pixels": 322,
+      "skin_mask_pixels": 31,
+      "leather_mask_pixels": 100,
+      "ambiguous_expansion_pixels": 13,
+      "changed_pixels": 77,
+      "changed_pixels_by_role": {
+        "coat": 37,
+        "hair": 17,
+        "skin": 6,
+        "leather": 17,
+        "semantic_reassignment": 2
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 0,
+        "skin": 2
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 5,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "KNOCKDOWN_FALL_08",
+      "sequence": "knockdown_fall",
+      "sequence_frame": 8,
+      "cell_row_col": [
+        6,
+        7
+      ],
+      "cell_origin_px": [
+        560,
+        480
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        16,
+        53,
+        62,
+        75
+      ]
+    },
+    {
+      "anchor_area_index9": 153,
+      "anchor_bbox_xywh": [
+        41,
+        27,
+        21,
+        19
+      ],
+      "hair_core_bbox_xyxy": [
+        39,
+        27,
+        61,
+        48
+      ],
+      "hair_mask_pixels": 163,
+      "recovered_interior_pixels": 93,
+      "hair_bottom_y": 48,
+      "torso_center_x": 35.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 19,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 19,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 939,
+      "skin_mask_pixels": 162,
+      "leather_mask_pixels": 307,
+      "ambiguous_expansion_pixels": 32,
+      "changed_pixels": 120,
+      "changed_pixels_by_role": {
+        "coat": 24,
+        "hair": 3,
+        "skin": 44,
+        "leather": 46,
+        "semantic_reassignment": 4
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 0,
+        "skin": 8
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "TECH_ROLL_GETUP_01",
+      "sequence": "tech_roll_getup",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        7,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        560
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        10,
+        27,
+        68,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 193,
+      "anchor_bbox_xywh": [
+        35,
+        55,
+        20,
+        21
+      ],
+      "hair_core_bbox_xyxy": [
+        35,
+        52,
+        54,
+        75
+      ],
+      "hair_mask_pixels": 210,
+      "recovered_interior_pixels": 134,
+      "hair_bottom_y": 75,
+      "torso_center_x": 41.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 0,
+      "glove_components": 0,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 0,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 939,
+      "skin_mask_pixels": 56,
+      "leather_mask_pixels": 164,
+      "ambiguous_expansion_pixels": 13,
+      "changed_pixels": 101,
+      "changed_pixels_by_role": {
+        "coat": 59,
+        "hair": 13,
+        "skin": 17,
+        "leather": 12,
+        "semantic_reassignment": 2
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 0,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "TECH_ROLL_GETUP_02",
+      "sequence": "tech_roll_getup",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        7,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        560
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        11,
+        31,
+        68,
+        75
+      ]
+    },
+    {
+      "anchor_area_index9": 152,
+      "anchor_bbox_xywh": [
+        15,
+        55,
+        15,
+        18
+      ],
+      "hair_core_bbox_xyxy": [
+        15,
+        54,
+        33,
+        72
+      ],
+      "hair_mask_pixels": 164,
+      "recovered_interior_pixels": 112,
+      "hair_bottom_y": 72,
+      "torso_center_x": 43.5,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 0,
+      "glove_components": 0,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 5,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 0,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 2,
+      "burgundy_allowed_pixels": 5,
+      "coat_mask_pixels": 892,
+      "skin_mask_pixels": 97,
+      "leather_mask_pixels": 295,
+      "ambiguous_expansion_pixels": 7,
+      "changed_pixels": 69,
+      "changed_pixels_by_role": {
+        "coat": 22,
+        "hair": 0,
+        "skin": 25,
+        "leather": 22,
+        "semantic_reassignment": 1
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 2,
+        "coat": 0,
+        "skin": 4
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 2,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "TECH_ROLL_GETUP_03",
+      "sequence": "tech_roll_getup",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        7,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        560
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        11,
+        29,
+        67,
+        75
+      ]
+    },
+    {
+      "anchor_area_index9": 139,
+      "anchor_bbox_xywh": [
+        8,
+        53,
+        14,
+        18
+      ],
+      "hair_core_bbox_xyxy": [
+        8,
+        53,
+        35,
+        71
+      ],
+      "hair_mask_pixels": 214,
+      "recovered_interior_pixels": 129,
+      "hair_bottom_y": 71,
+      "torso_center_x": 36.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 0,
+      "glove_components": 0,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 4,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 0,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 5,
+      "burgundy_allowed_pixels": 4,
+      "coat_mask_pixels": 1042,
+      "skin_mask_pixels": 96,
+      "leather_mask_pixels": 218,
+      "ambiguous_expansion_pixels": 16,
+      "changed_pixels": 109,
+      "changed_pixels_by_role": {
+        "coat": 54,
+        "hair": 21,
+        "skin": 33,
+        "leather": 6,
+        "semantic_reassignment": 11
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 2
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 5,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "TECH_ROLL_GETUP_04",
+      "sequence": "tech_roll_getup",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        7,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        560
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        8,
+        28,
+        70,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 174,
+      "anchor_bbox_xywh": [
+        54,
+        32,
+        23,
+        16
+      ],
+      "hair_core_bbox_xyxy": [
+        54,
+        32,
+        76,
+        49
+      ],
+      "hair_mask_pixels": 181,
+      "recovered_interior_pixels": 142,
+      "hair_bottom_y": 49,
+      "torso_center_x": 32.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 40,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 40,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 990,
+      "skin_mask_pixels": 130,
+      "leather_mask_pixels": 351,
+      "ambiguous_expansion_pixels": 21,
+      "changed_pixels": 120,
+      "changed_pixels_by_role": {
+        "coat": 21,
+        "hair": 0,
+        "skin": 43,
+        "leather": 53,
+        "semantic_reassignment": 5
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 0,
+        "coat": 1,
+        "skin": 2
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "TECH_ROLL_GETUP_05",
+      "sequence": "tech_roll_getup",
+      "sequence_frame": 5,
+      "cell_row_col": [
+        7,
+        4
+      ],
+      "cell_origin_px": [
+        320,
+        560
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        2,
+        32,
+        76,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 204,
+      "anchor_bbox_xywh": [
+        47,
+        25,
+        21,
+        24
+      ],
+      "hair_core_bbox_xyxy": [
+        44,
+        25,
+        67,
+        50
+      ],
+      "hair_mask_pixels": 261,
+      "recovered_interior_pixels": 165,
+      "hair_bottom_y": 50,
+      "torso_center_x": 32.0,
+      "cane_shaft_pixels": 20,
+      "cane_shaft_components": 1,
+      "glove_pixels": 37,
+      "glove_components": 1,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 57,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 4,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 965,
+      "skin_mask_pixels": 100,
+      "leather_mask_pixels": 281,
+      "ambiguous_expansion_pixels": 10,
+      "changed_pixels": 85,
+      "changed_pixels_by_role": {
+        "coat": 18,
+        "hair": 15,
+        "skin": 15,
+        "leather": 16,
+        "semantic_reassignment": 2
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 2
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 4,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "TECH_ROLL_GETUP_06",
+      "sequence": "tech_roll_getup",
+      "sequence_frame": 6,
+      "cell_row_col": [
+        7,
+        5
+      ],
+      "cell_origin_px": [
+        400,
+        560
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        10,
+        25,
+        68,
+        76
+      ]
+    },
+    {
+      "anchor_area_index9": 166,
+      "anchor_bbox_xywh": [
+        38,
+        17,
+        20,
+        20
+      ],
+      "hair_core_bbox_xyxy": [
+        38,
+        17,
+        57,
+        36
+      ],
+      "hair_mask_pixels": 175,
+      "recovered_interior_pixels": 134,
+      "hair_bottom_y": 36,
+      "torso_center_x": 37.0,
+      "cane_shaft_pixels": 53,
+      "cane_shaft_components": 2,
+      "glove_pixels": 37,
+      "glove_components": 2,
+      "collar_pixels": 1,
+      "tie_pixels": 16,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 12,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 91,
+      "yellow_allowed_pixels": 12,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 16,
+      "coat_mask_pixels": 786,
+      "skin_mask_pixels": 102,
+      "leather_mask_pixels": 287,
+      "ambiguous_expansion_pixels": 20,
+      "changed_pixels": 140,
+      "changed_pixels_by_role": {
+        "coat": 31,
+        "hair": 1,
+        "skin": 24,
+        "leather": 37,
+        "semantic_reassignment": 9
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 2,
+        "skin": 7
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "TECH_ROLL_GETUP_07",
+      "sequence": "tech_roll_getup",
+      "sequence_frame": 7,
+      "cell_row_col": [
+        7,
+        6
+      ],
+      "cell_origin_px": [
+        480,
+        560
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        11,
+        17,
+        68,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 129,
+      "anchor_bbox_xywh": [
+        33,
+        16,
+        20,
+        14
+      ],
+      "hair_core_bbox_xyxy": [
+        33,
+        16,
+        52,
+        31
+      ],
+      "hair_mask_pixels": 135,
+      "recovered_interior_pixels": 101,
+      "hair_bottom_y": 31,
+      "torso_center_x": 37.0,
+      "cane_shaft_pixels": 9,
+      "cane_shaft_components": 1,
+      "glove_pixels": 41,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 4,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 3,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 50,
+      "yellow_allowed_pixels": 3,
+      "yellow_pending_pixels": 0,
+      "burgundy_allowed_pixels": 4,
+      "coat_mask_pixels": 824,
+      "skin_mask_pixels": 130,
+      "leather_mask_pixels": 196,
+      "ambiguous_expansion_pixels": 33,
+      "changed_pixels": 139,
+      "changed_pixels_by_role": {
+        "coat": 58,
+        "hair": 0,
+        "skin": 42,
+        "leather": 27,
+        "semantic_reassignment": 10
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 3,
+        "coat": 0,
+        "skin": 3
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 0,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "TECH_ROLL_GETUP_08",
+      "sequence": "tech_roll_getup",
+      "sequence_frame": 8,
+      "cell_row_col": [
+        7,
+        7
+      ],
+      "cell_origin_px": [
+        560,
+        560
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        15,
+        16,
+        64,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 273,
+      "anchor_bbox_xywh": [
+        27,
+        2,
+        24,
+        25
+      ],
+      "hair_core_bbox_xyxy": [
+        27,
+        2,
+        52,
+        42
+      ],
+      "hair_mask_pixels": 347,
+      "recovered_interior_pixels": 216,
+      "hair_bottom_y": 42,
+      "torso_center_x": 33.0,
+      "cane_shaft_pixels": 0,
+      "cane_shaft_components": 0,
+      "glove_pixels": 0,
+      "glove_components": 0,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 0,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 7,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 1282,
+      "skin_mask_pixels": 140,
+      "leather_mask_pixels": 372,
+      "ambiguous_expansion_pixels": 21,
+      "changed_pixels": 179,
+      "changed_pixels_by_role": {
+        "coat": 39,
+        "hair": 42,
+        "skin": 42,
+        "leather": 55,
+        "semantic_reassignment": 14
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 6
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 7,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "GUARD_01",
+      "sequence": "guard",
+      "sequence_frame": 1,
+      "cell_row_col": [
+        8,
+        0
+      ],
+      "cell_origin_px": [
+        0,
+        640
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        9,
+        2,
+        70,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 208,
+      "anchor_bbox_xywh": [
+        29,
+        2,
+        26,
+        22
+      ],
+      "hair_core_bbox_xyxy": [
+        29,
+        2,
+        56,
+        28
+      ],
+      "hair_mask_pixels": 263,
+      "recovered_interior_pixels": 145,
+      "hair_bottom_y": 28,
+      "torso_center_x": 31.0,
+      "cane_shaft_pixels": 47,
+      "cane_shaft_components": 1,
+      "glove_pixels": 32,
+      "glove_components": 1,
+      "collar_pixels": 4,
+      "tie_pixels": 37,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 83,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 7,
+      "burgundy_allowed_pixels": 37,
+      "coat_mask_pixels": 1349,
+      "skin_mask_pixels": 165,
+      "leather_mask_pixels": 312,
+      "ambiguous_expansion_pixels": 14,
+      "changed_pixels": 139,
+      "changed_pixels_by_role": {
+        "coat": 23,
+        "hair": 29,
+        "skin": 28,
+        "leather": 13,
+        "semantic_reassignment": 3
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 4,
+        "coat": 1,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 7,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "GUARD_02",
+      "sequence": "guard",
+      "sequence_frame": 2,
+      "cell_row_col": [
+        8,
+        1
+      ],
+      "cell_origin_px": [
+        80,
+        640
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        3,
+        2,
+        75,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 239,
+      "anchor_bbox_xywh": [
+        32,
+        2,
+        21,
+        24
+      ],
+      "hair_core_bbox_xyxy": [
+        32,
+        2,
+        57,
+        25
+      ],
+      "hair_mask_pixels": 257,
+      "recovered_interior_pixels": 181,
+      "hair_bottom_y": 25,
+      "torso_center_x": 30.0,
+      "cane_shaft_pixels": 28,
+      "cane_shaft_components": 1,
+      "glove_pixels": 41,
+      "glove_components": 2,
+      "collar_pixels": 0,
+      "tie_pixels": 0,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 0,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 69,
+      "yellow_allowed_pixels": 0,
+      "yellow_pending_pixels": 7,
+      "burgundy_allowed_pixels": 0,
+      "coat_mask_pixels": 1332,
+      "skin_mask_pixels": 148,
+      "leather_mask_pixels": 365,
+      "ambiguous_expansion_pixels": 35,
+      "changed_pixels": 155,
+      "changed_pixels_by_role": {
+        "coat": 19,
+        "hair": 16,
+        "skin": 50,
+        "leather": 50,
+        "semantic_reassignment": 18
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 1,
+        "skin": 5
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 7,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 0,
+      "frame_id": "GUARD_03",
+      "sequence": "guard",
+      "sequence_frame": 3,
+      "cell_row_col": [
+        8,
+        2
+      ],
+      "cell_origin_px": [
+        160,
+        640
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        4,
+        2,
+        74,
+        77
+      ]
+    },
+    {
+      "anchor_area_index9": 225,
+      "anchor_bbox_xywh": [
+        28,
+        2,
+        22,
+        22
+      ],
+      "hair_core_bbox_xyxy": [
+        28,
+        2,
+        51,
+        24
+      ],
+      "hair_mask_pixels": 232,
+      "recovered_interior_pixels": 166,
+      "hair_bottom_y": 24,
+      "torso_center_x": 30.0,
+      "cane_shaft_pixels": 54,
+      "cane_shaft_components": 1,
+      "glove_pixels": 34,
+      "glove_components": 1,
+      "collar_pixels": 1,
+      "tie_pixels": 5,
+      "boot_trim_pixels": 0,
+      "yellow_cane_pixels": 5,
+      "yellow_glasses_option": "strict_cane_only",
+      "white_allowed_pixels": 89,
+      "yellow_allowed_pixels": 5,
+      "yellow_pending_pixels": 4,
+      "burgundy_allowed_pixels": 5,
+      "coat_mask_pixels": 1406,
+      "skin_mask_pixels": 161,
+      "leather_mask_pixels": 400,
+      "ambiguous_expansion_pixels": 22,
+      "changed_pixels": 186,
+      "changed_pixels_by_role": {
+        "coat": 19,
+        "hair": 1,
+        "skin": 51,
+        "leather": 64,
+        "semantic_reassignment": 20
+      },
+      "alpha_changed_pixels": 0,
+      "outline_changed_pixels": 0,
+      "singleton_components_after": {
+        "hair": 1,
+        "coat": 3,
+        "skin": 8
+      },
+      "semantic_leak_pixels_after": {
+        "white": 0,
+        "yellow": 4,
+        "burgundy": 0,
+        "gray_outside_hair_or_cane": 0
+      },
+      "unresolved_pixels": 7,
+      "frame_id": "GUARD_04",
+      "sequence": "guard",
+      "sequence_frame": 4,
+      "cell_row_col": [
+        8,
+        3
+      ],
+      "cell_origin_px": [
+        240,
+        640
+      ],
+      "source_visible_bbox_cell_xyxy": [
+        3,
+        2,
+        76,
+        77
+      ]
+    }
+  ],
+  "unresolved_pixels": [
+    {
+      "frame_id": "IDLE_01",
+      "x": 24,
+      "y": 45,
+      "source_index": 9,
+      "material": "gray_outside_hair"
+    },
+    {
+      "frame_id": "WALK_FORWARD_04",
+      "x": 67,
+      "y": 37,
+      "source_index": 9,
+      "material": "leather"
+    },
+    {
+      "frame_id": "WALK_FORWARD_05",
+      "x": 67,
+      "y": 35,
+      "source_index": 9,
+      "material": "skin"
+    },
+    {
+      "frame_id": "WALK_FORWARD_06",
+      "x": 68,
+      "y": 35,
+      "source_index": 9,
+      "material": "leather"
+    },
+    {
+      "frame_id": "WALK_BACKWARD_03",
+      "x": 60,
+      "y": 18,
+      "source_index": 9,
+      "material": "leather"
+    },
+    {
+      "frame_id": "WALK_BACKWARD_03",
+      "x": 60,
+      "y": 19,
+      "source_index": 7,
+      "material": "leather"
+    },
+    {
+      "frame_id": "WALK_BACKWARD_03",
+      "x": 60,
+      "y": 20,
+      "source_index": 9,
+      "material": "leather"
+    },
+    {
+      "frame_id": "WALK_BACKWARD_03",
+      "x": 61,
+      "y": 20,
+      "source_index": 7,
+      "material": "leather"
+    },
+    {
+      "frame_id": "WALK_BACKWARD_03",
+      "x": 62,
+      "y": 22,
+      "source_index": 8,
+      "material": "leather"
+    },
+    {
+      "frame_id": "DASH_RUN_01",
+      "x": 23,
+      "y": 69,
+      "source_index": 9,
+      "material": "skin"
+    },
+    {
+      "frame_id": "DASH_RUN_02",
+      "x": 27,
+      "y": 38,
+      "source_index": 9,
+      "material": "skin"
+    },
+    {
+      "frame_id": "DASH_RUN_03",
+      "x": 21,
+      "y": 60,
+      "source_index": 8,
+      "material": "skin"
+    },
+    {
+      "frame_id": "DASH_RUN_03",
+      "x": 22,
+      "y": 60,
+      "source_index": 9,
+      "material": "skin"
+    },
+    {
+      "frame_id": "DASH_RUN_03",
+      "x": 19,
+      "y": 64,
+      "source_index": 7,
+      "material": "white_accessory"
+    },
+    {
+      "frame_id": "DASH_RUN_06",
+      "x": 14,
+      "y": 61,
+      "source_index": 7,
+      "material": "skin"
+    },
+    {
+      "frame_id": "DASH_RUN_07",
+      "x": 61,
+      "y": 28,
+      "source_index": 8,
+      "material": "gray_outside_hair"
+    },
+    {
+      "frame_id": "DASH_RUN_07",
+      "x": 62,
+      "y": 28,
+      "source_index": 9,
+      "material": "gray_outside_hair"
+    },
+    {
+      "frame_id": "DASH_RUN_07",
+      "x": 59,
+      "y": 29,
+      "source_index": 9,
+      "material": "gray_outside_hair"
+    },
+    {
+      "frame_id": "DASH_RUN_07",
+      "x": 61,
+      "y": 29,
+      "source_index": 9,
+      "material": "gray_outside_hair"
+    },
+    {
+      "frame_id": "DASH_RUN_07",
+      "x": 62,
+      "y": 29,
+      "source_index": 9,
+      "material": "gray_outside_hair"
+    },
+    {
+      "frame_id": "DASH_RUN_08",
+      "x": 25,
+      "y": 51,
+      "source_index": 9,
+      "material": "leather"
+    },
+    {
+      "frame_id": "DASH_RUN_08",
+      "x": 54,
+      "y": 22,
+      "source_index": 9,
+      "material": "gray_outside_hair"
+    },
+    {
+      "frame_id": "KNOCKDOWN_FALL_03",
+      "x": 56,
+      "y": 17,
+      "source_index": 7,
+      "material": "leather"
+    },
+    {
+      "frame_id": "KNOCKDOWN_FALL_03",
+      "x": 57,
+      "y": 17,
+      "source_index": 9,
+      "material": "leather"
+    },
+    {
+      "frame_id": "KNOCKDOWN_FALL_03",
+      "x": 58,
+      "y": 18,
+      "source_index": 7,
+      "material": "leather"
+    },
+    {
+      "frame_id": "KNOCKDOWN_FALL_03",
+      "x": 58,
+      "y": 19,
+      "source_index": 7,
+      "material": "leather"
+    },
+    {
+      "frame_id": "KNOCKDOWN_FALL_03",
+      "x": 58,
+      "y": 20,
+      "source_index": 8,
+      "material": "leather"
+    },
+    {
+      "frame_id": "KNOCKDOWN_FALL_05",
+      "x": 47,
+      "y": 43,
+      "source_index": 7,
+      "material": "leather"
+    },
+    {
+      "frame_id": "KNOCKDOWN_FALL_05",
+      "x": 47,
+      "y": 44,
+      "source_index": 8,
+      "material": "leather"
+    },
+    {
+      "frame_id": "GUARD_04",
+      "x": 59,
+      "y": 17,
+      "source_index": 9,
+      "material": "skin"
+    },
+    {
+      "frame_id": "GUARD_04",
+      "x": 59,
+      "y": 18,
+      "source_index": 8,
+      "material": "skin"
+    },
+    {
+      "frame_id": "GUARD_04",
+      "x": 57,
+      "y": 16,
+      "source_index": 9,
+      "material": "leather"
+    },
+    {
+      "frame_id": "GUARD_04",
+      "x": 58,
+      "y": 16,
+      "source_index": 7,
+      "material": "leather"
+    },
+    {
+      "frame_id": "GUARD_04",
+      "x": 59,
+      "y": 16,
+      "source_index": 8,
+      "material": "leather"
+    },
+    {
+      "frame_id": "GUARD_04",
+      "x": 60,
+      "y": 16,
+      "source_index": 8,
+      "material": "leather"
+    },
+    {
+      "frame_id": "GUARD_04",
+      "x": 61,
+      "y": 16,
+      "source_index": 9,
+      "material": "leather"
+    }
+  ],
+  "limitations": [
+    "Mask algorithm and accent anchors require visual review; a numerical pass does not approve anatomy, identity, or style.",
+    "The approved concept specifies brass glasses while the v08 yellow zones omit glasses; the owner decision is pending.",
+    "This candidate is not integrated in res/ and no ROM is compiled by this tool."
+  ]
+}

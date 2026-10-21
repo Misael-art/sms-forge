@@ -1,0 +1,74 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "hayato_idle_12f_v2",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_sheet_study",
+  "channel": "built_in_image_gen",
+  "inputs": [
+    {
+      "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_v1.png",
+      "sha256": "bb0159a60ae59669c414ec15acf08386887b36998d382cb1856ce4ae3d3eeabe",
+      "role": "original character proportions, cell layout, and twelve-pose sequence"
+    },
+    {
+      "path": "/home/misael/.codex/generated_images/01a0ffb3-0f5b-70a0-8e6c-33a88a5cada7/exec-c92719c1-5f00-4339-b10d-68f9b3fa8db3.png",
+      "sha256": "272e682b420520e2aa11c8e03b20941be3bc82147c3fd672eda49a52b6a910fb",
+      "role": "intermediate color revision used as direct target for the hard-cluster pass"
+    },
+    {
+      "path": "/run/user/1000/codex-desktop/tmp/codex-clipboard-737d44c2-364b-4a78-bcb0-227c531ae72f.png",
+      "sha256": "03f0897a2cf18d08c3008e0a98b0125fdb4d0a1743518c9f4a2027ab4111f88a",
+      "role": "owner-provided in-game Hayato costume and color reference; no source pixels copied"
+    }
+  ],
+  "prompt": {
+    "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_prompt_v2.txt",
+    "sha256": "7fef19b911e4ece53c7bc285ed8d64c3e6477c91edd4e4b9d02af721794d0cc3"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_v2.png",
+    "sha256": "de82374eb8016efcc744854b67ba66f3a0c7954d339b4cd73f45a6891bc3414b",
+    "dimensions_px": [1448, 1086],
+    "alpha_extrema": [0, 255]
+  },
+  "palette_target_rgb": [
+    "#000000",
+    "#FFAAAA",
+    "#AA5555",
+    "#555500",
+    "#555555",
+    "#FFFFFF",
+    "#AAAAAA",
+    "#FF5500",
+    "#FF0000",
+    "#AA0000",
+    "#550000",
+    "#FFAA00"
+  ],
+  "status": "source_candidate",
+  "owner_feedback_addressed": [
+    "replaced the blue clothing with an ivory-white upper garment and red-orange lower garment guided by the supplied Kenseiden screenshot",
+    "changed the rendering toward hard pixel clusters while retaining the twelve idle poses"
+  ],
+  "sheet_layout": {
+    "columns": 4,
+    "rows": 3,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_count": 12,
+    "cell_dimensions_px": [362, 362]
+  },
+  "technical_review": {
+    "twelve_full_body_frames_visually_observed": true,
+    "four_by_three_layout_visually_observed": true,
+    "costume_colors_visually_match_reference_direction": true,
+    "opaque_unique_rgb_count": 130557,
+    "colors_in_sms_6bit_grid": 35,
+    "colors_outside_sms_6bit_grid": 130522,
+    "distinct_alpha_values": 256,
+    "exact_master_system_palette": false,
+    "exact_80px_logical_scale": "not normalized or validated",
+    "independent_animation_review": "pending",
+    "rom_or_emulator_validation": false
+  },
+  "next_gate": "reduce to the declared SMS palette while preserving transparent pixels and visible outlines, then normalize and review before any res integration"
+}

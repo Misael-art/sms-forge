@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_03_late_snk_realism_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "catalog_index": 3,
+  "style_id": "Late-SNK-Realism",
+  "artistic_style_reference": {
+    "named_artist": "Eisuke Ogura",
+    "reference_role_and_scope": "SNK illustrator/character designer; official SNK profile documents his Garou-team connection and broader Fatal Fury work. Reference for a forceful SNK illustration direction, not a claim of sole authorship of Garou: Mark of the Wolves pixels.",
+    "source_url": "https://www.snk-corp.co.jp/snk40th/spillust/illust/eisukeogura.php",
+    "attribution_status": "official_contextual_reference",
+    "style_signature": [
+      "forceful hand-rendered contours",
+      "graphic facial planes and strong gesture",
+      "broad shape contrast with direct action staging"
+    ],
+    "basis_and_limits": "The phrasing of visual traits is an editorial reading of representative artwork; keep distinct from Shinkiro’s more realistic promotional rendering."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_03_late_snk_realism_v1.json",
+    "sha256": "28fe2e1d061b392a837d3af42dcf9b32c21012449e71ff9ff5d3046c9356ce6f"
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_art.png",
+    "sha256": "c61f68daee80dec2da06b0cf377fe2ef799b3930eacfc83458c3e4b058af7aac",
+    "dimensions_px": [
+      1619,
+      971
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_prompt.txt",
+    "sha256": "7fe393d0d77345a889bd7534f794d8c58534612f641c33676ab67d7a1fff9eaa",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v2_metadata.json",
+    "sha256": "0f94b4487d753019515d1b8312cef97b53ac38027d355343389cbe67d9763e3b"
+  },
+  "composition": {
+    "method": "metadata_card_only_overlay",
+    "tool": "Pillow card-only annotation; base art outside the metadata card was pixel-checked unchanged",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1.png",
+    "base_model_sheet_sha256": "321f10ffc5923398a5468786d988661d89ad9c22662c82b6228dc4f5b0dafd13",
+    "art_scale": "preserved from base sheet"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v2.png",
+    "sha256": "f70a89cfe643429ce6065247f25b764c60c705d7c31739cf6d33ca05ec96807f",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_v2.json",
+    "status": "pending_independent_and_owner_review"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

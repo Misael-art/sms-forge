@@ -1,0 +1,134 @@
+{
+  "schema": "sms_sprite_sheet_candidate_review_v1",
+  "asset_id": "dr_ferdinand_social_social_light_jab_candidate_v4",
+  "status": "draft_for_visual_owner_review; raw_background_palette_preflight_failed",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/social_light_jab_candidate_v4.png",
+    "sha256": "22ca69b14ef0b9e60e643228353b2bdcff3b45c3c8253de1e348bfa067f20db9",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "kind": "pixel_sprite_sheet_art_candidate"
+  },
+  "lineage": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+      "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+      "role": "approved identity, adult morphology, costume and equipment"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "role": "approved face identity and round brass spectacles"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/dr_social_61_pose_converted_preview_4x.png",
+      "sha256": "7d1ac3e85652b76630869df5bdf8ff89bea602761f73243867de47039982c58e",
+      "role": "clean color-block and shadow-flow treatment reference"
+    }
+  ],
+  "animation_contract": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_animation_contract_v2.json",
+    "sequence_id": "social_light_jab",
+    "frame_ids_row_major": [
+      "J01",
+      "J02",
+      "J03",
+      "J04",
+      "J05",
+      "J06"
+    ],
+    "intended_grid": {
+      "columns": 3,
+      "rows": 2,
+      "cell_px": [
+        512,
+        512
+      ]
+    },
+    "logical_sms_canvas_target_px": [
+      80,
+      80
+    ],
+    "durations_ticks_proposal": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      3
+    ],
+    "status": "design_approved; animation_art_pending_owner_review"
+  },
+  "measured_preflight": {
+    "layout": {
+      "status": "pass_preliminary",
+      "columns": 3,
+      "rows": 2,
+      "cell_px": [
+        512,
+        512
+      ],
+      "frame_order": [
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06"
+      ],
+      "note": "Visually six consecutive jab poses in the agreed 3×2 order; logical 80×80 export not started."
+    },
+    "alpha_cutout": {
+      "status": "fail",
+      "expected": "uniform black key or binary transparent cutout; no near-black fringe",
+      "mode": "RGB",
+      "alpha": "absent",
+      "exact_black_pixels": 706581,
+      "near_black_pixels_max_channel_le_32": 1076331,
+      "note": "The background looks black in preview but varies across RGB values and cannot be treated as an exact key."
+    },
+    "color_count": {
+      "status": "fail_for_runtime_asset",
+      "unique_rgb_values": 83402,
+      "master_system_sprite_useful_color_ceiling": 15,
+      "note": "Unindexed 1536×1024 source; no SMS palette conversion has been approved or performed."
+    },
+    "native_frame_geometry": {
+      "status": "not_started",
+      "observed_cell_px": [
+        512,
+        512
+      ],
+      "required_review_canvas_px": [
+        80,
+        80
+      ],
+      "note": "No frame extraction or 1×/nearest-neighbor 4× native-size review."
+    }
+  },
+  "producer_preflight_notes": {
+    "pose_read": "J01 guard, J02 anticipation, J03 extension, J04 contact, J05 recoil, J06 return to guard; six slots read as a sequence, with J01/J06 as endpoint poses.",
+    "identity_and_face": "The visible profile now reads with a circular brass spectacle lens. Verify face and glasses after reduction to 80×80.",
+    "anatomy_and_equipment": "The support hand holds the cane and its tip appears fully in canvas. Shoulder-to-fist chain, grip and cane end still need frame-by-frame review at native size.",
+    "pixel_finish": "The raster is RGB with 83,402 unique colors and a nonuniform near-black background; visual pixel clusters do not establish SMS palette or clean cutout."
+  },
+  "required_next_actions": [
+    "Obtain owner review of the six-pose choreography and character identity; this is not pixel/palette approval.",
+    "After art approval, use the documented SMS conversion route to create six exact 80×80 binary-cutout frames with ≤15 useful sprite colors.",
+    "Inspect every native frame and NN4× for face/glasses, both hands, shoulder-elbow-wrist, fist contact, cane grip and full rounded cane tip, baseline, outline, shadow planes and stray pixels.",
+    "Complete independent art review and rerun hash-bound checklist; owner approval remains separate.",
+    "Only after all art/conversion gates pass, continue to tile/metasprite budgets and ROM diagnostic build."
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "conversion_validation": {
+    "status": "not_started"
+  },
+  "promotion_status": "blocked_candidate_only"
+}

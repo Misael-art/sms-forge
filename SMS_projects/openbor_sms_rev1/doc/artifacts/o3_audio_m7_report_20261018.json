@@ -1,0 +1,184 @@
+{
+ "schema": "openbor_sms_o3_audio_m7_v1",
+ "generated_at": "2026-10-18",
+ "author": "Codex, worker audio PSG OpenBOR pos-M6 (coordenacao desta sessao)",
+ "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+ "rom_bytes": 131072,
+ "rom_status": "candidate M7 (audio); predecessor pre-audio 957122ae24f64d362767d10e903dd71cdf47d18800066c57d562123a573ddfa7",
+ "authoring": {
+  "tool": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_audio.py",
+  "source_archive": {
+   "sha256": "64da17e8b60118ca9bd3a0bbbf87ef4acea705b1485ec6b4c58bf2f4f50634c4",
+   "bytes": 39500889,
+   "revalidado_no_autor": true
+  },
+  "channel": 3,
+  "mask_name": "SFX_CHANNEL3",
+  "mask": 2,
+  "durations_ticks": {
+   "attack": 6,
+   "impact": 10,
+   "fall": 18
+  },
+  "nota": "ticks = intervalos de onset ate mute/stop (D+1 chamadas); PAL nao normalizado; reautoria declarativa, sem conversao WAV->PSG"
+ },
+ "integration": {
+  "file": "src/main.c",
+  "placement_banks": [
+   0,
+   1
+  ],
+  "map_addresses": {
+   "sfx_attack": "0x30FF",
+   "sfx_impact": "0x310C",
+   "sfx_fall": "0x311B",
+   "endereco_fim_exclusivo": 32768,
+   "ok": true
+  },
+  "data_size_antes": "0x6F",
+  "data_size_depois": "0x71",
+  "clock": "PSGSFXFrame exatamente 1x/quadro no inicio da fase CPU (sincronizado por SMS_waitForVBlank; sem ISR de audio)",
+  "arbitration": "fall(3)>impact(2)>attack(1); maior pendente por quadro; igual mantem o atual; menor/igual descartado sem fila; maior preempta sem retomar; owner limpa em PSG_STOPPED",
+  "triggers": {
+   "attack": "start_attack (ataque aceito, 1x/ativacao)",
+   "impact": "apply_hit (hit confirmado)",
+   "fall": "arc_advance ramo was_toss (contato com o solo)"
+  },
+  "boot": "PSGSetSFXVolumeAttenuation(0) apos SMS_init"
+ },
+ "gameplay_neutrality": {
+  "teste": "attack_hold 650q (mesmo script/boot/ticks do pre-audio)",
+  "quedas_hp_inimigo": [
+   30,
+   126,
+   213,
+   300,
+   387,
+   474,
+   561,
+   648
+  ],
+  "hp_final_inimigo": 0,
+  "hp_final_jogador": 100,
+  "vdp_final": 1050,
+  "veredito": "identico ao pre-audio 957122ae em hp/estado/timing; diferencas somente em ponteiros de struct relocados"
+ },
+ "gates": {
+  "audit_audio_provenance": "PASS",
+  "audit_psg_channel_binding": "PASS",
+  "audit_psg_redundancy": "PASS",
+  "audit_psg_quality": "PASS (0/6 streams reprovados)",
+  "audit_audio": "PASS com --active-floor 5 declarado; medido ativo=13%; mix SFX-only (musica fora do escopo O3); piso padrao 90 destina-se a mix com musica"
+ },
+ "capture": {
+  "session_id": "b7fcff2c9e294b2f96cd0c067a9d62a7",
+  "sink": "smsforge_b7fcff2c9e294b2f",
+  "input": "p1=16 segurado (op input da bridge; persistente)",
+  "samples": 294912,
+  "effective_seconds": 6.687,
+  "peak": 1963,
+  "active_pct": 13,
+  "wav_sha256": "c933ec31fb8d0b20a28c2e7e3e64d6050169aa719c7976798d861d6438a24a06",
+  "journal_ops": [
+   "audio-enable",
+   "sequence(boot 280)",
+   "input",
+   "run",
+   "pause",
+   "close"
+  ],
+  "claim": "sinal do PID exato da sessao; nao prova qual SFX nem correcao musical"
+ },
+ "budget": {
+  "mwf": {
+   "session_id": "ae60dae3c24f47f6b55e4c5834ca8b13",
+   "input": "p1=16 em tempo real",
+   "janela_frames": 3000,
+   "verdicto": "pass",
+   "vline_min": 207,
+   "vovf_delta": 0,
+   "estado_no_selo": "KO",
+   "json_sha256": "41d83bd45f61f97e5927950d0c9789e1a70af1b899dd1f3cf67ae7b4ef76041b"
+  },
+  "mrp": {
+   "session_id": "7c3aa06b881a463bb2aaee16d813d065",
+   "janelas": 2,
+   "seconds": 8.04,
+   "fps": [
+    59.67,
+    59.69
+   ],
+   "veredito": "pass (boot, frame_advance, fps_constante)",
+   "json_sha256": "2efa6930682f99bc3139ea49295bc89bef4e2f611809458fce0352b09a122766"
+  }
+ },
+ "files": [
+  {
+   "role": "header",
+   "path": "inc/o3/psg_sfx.h",
+   "sha256": "8f036645c3b08ffc3875c8f40157cf08f028fd5d03d132b5c6bab573e33e8ad3"
+  },
+  {
+   "role": "stream",
+   "path": "res/audio/sfx_attack.psg",
+   "sha256": "c431529733827ebe838cd1b907f9c7413a8edc7aaed82b36fd63e8c97b422215"
+  },
+  {
+   "role": "stream",
+   "path": "res/audio/sfx_impact.psg",
+   "sha256": "8a346f1bc912922fb438d64bf0d47c4923268684aefac962dc48cc688441325b"
+  },
+  {
+   "role": "stream",
+   "path": "res/audio/sfx_fall.psg",
+   "sha256": "b7bee6f8b8f5532945d2aa9152f8ca3b766eda4a53215efd4556dfff4e3d8025"
+  },
+  {
+   "role": "manifest",
+   "path": "doc/audio_provenance_manifest.json",
+   "sha256": "818bc9a8b9d900a6430b248f8a001e3751d6d832cf3720fa35f8a639afb3acc1"
+  },
+  {
+   "role": "source_reference",
+   "path": "data/source_openbor/gal_audio/data/sounds/att1.wav",
+   "sha256": "aefa21ba4960a65153ba6a2e2526f6c90d660afe7b3981d924da4dc3aee4f6e1"
+  },
+  {
+   "role": "source_reference",
+   "path": "data/source_openbor/gal_audio/data/sounds/hit1.wav",
+   "sha256": "7c30e0f04cc0619aafdbbb69ffb83531f5f03073dd47c0d04b357a267d0af192"
+  },
+  {
+   "role": "source_reference",
+   "path": "data/source_openbor/gal_audio/data/sounds/fall.wav",
+   "sha256": "338ef562041e9e1ac97987ed3257d197e38e86fa476281cc8d55fe0028a07f33"
+  },
+  {
+   "role": "audio_capture",
+   "path": "out/evidence/post_m6/candidate_audio_a7f02b84/audio_attack/audio_attack.wav",
+   "sha256": "c933ec31fb8d0b20a28c2e7e3e64d6050169aa719c7976798d861d6438a24a06"
+  },
+  {
+   "role": "audio_capture_meta",
+   "path": "out/evidence/post_m6/candidate_audio_a7f02b84/audio_attack/audio_attack.audio.json",
+   "sha256": "5011019547534497ba75373d5a4b93235999064bed251d2479aa2e9abc86e333"
+  },
+  {
+   "role": "worst_frame",
+   "path": "out/evidence/post_m6/candidate_audio_a7f02b84/mwf/worst_frame_audio_attack.json",
+   "sha256": "41d83bd45f61f97e5927950d0c9789e1a70af1b899dd1f3cf67ae7b4ef76041b"
+  },
+  {
+   "role": "runtime_probe",
+   "path": "out/evidence/post_m6/candidate_audio_a7f02b84/mrp/runtime_probe_audio_attack.json",
+   "sha256": "2efa6930682f99bc3139ea49295bc89bef4e2f611809458fce0352b09a122766"
+  }
+ ],
+ "pending": [
+  "capturas visuais (still/video) do SHA final",
+  "stress no SHA final",
+  "vdp_regs.bin do SHA final",
+  "bundle v2 do Lote E sobre midia fresca",
+  "PAL nao medido"
+ ]
+}

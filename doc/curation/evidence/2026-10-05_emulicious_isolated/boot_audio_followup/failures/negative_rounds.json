@@ -1,0 +1,20 @@
+{
+  "scope": "historical failed iterations; not current acceptance",
+  "failures": [
+    {
+      "round": "audio_boot_final_v3",
+      "observed": "partial displayfd read then close; Xvfb fatal Cannot write display number; bwrap socket missing",
+      "correction": "wait for complete newline before closing pipe"
+    },
+    {
+      "round": "audio_boot_final_v4",
+      "observed": "open-line proxy without keepalive failed stream identity during repeat",
+      "correction": "zero keepalive during muted/paused states; route checked before advancement"
+    },
+    {
+      "round": "audio_boot_keepalive_final",
+      "observed": "physical sink move did not yield a persistent negative routing fixture before gate; unexpected successful step",
+      "correction": "deterministic tampered sink-contract fixture, verifies actual disagreement before expecting refusal"
+    }
+  ]
+}

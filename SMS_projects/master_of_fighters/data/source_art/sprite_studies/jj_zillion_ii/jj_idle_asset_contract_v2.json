@@ -1,0 +1,58 @@
+{
+  "schema": "sms_sprite_study_contract_v1",
+  "asset_id": "jj_zillion_ii_idle_sms_96px_12f_v2",
+  "project": "master_of_fighters",
+  "asset_role": "source_art_sprite_study",
+  "character": "jj_zillion_ii",
+  "visual_reference": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+  "approval_scope": "Superseded by sprite study v4 before owner review; retain this version only as provenance, not as the active candidate.",
+  "sheet": {
+    "columns": 4,
+    "rows": 3,
+    "frame_count": 12,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_px": [96, 96],
+    "sheet_px": [384, 288],
+    "ground_pivot_px": [48, 95],
+    "target_visible_height_px": 74,
+    "height_tolerance_px": [72, 76],
+    "visible_width_px": [63, 69],
+    "minimum_horizontal_margin_px": 13,
+    "normalization": "uniform 22.6% nearest-neighbor scale per source cell, centered horizontally and bottom-aligned at y=95; no per-frame rescaling"
+  },
+  "action": {
+    "state": "idle",
+    "facing": "right, three-quarter view",
+    "motion": "twelve distinct connected guard-idle keys: breathing, small hip-weight shifts, hand/arm guard changes, shallow knee compression; no attack, step, jump, or deep crouch",
+    "weapon_direction": "one Zillion pistol in the forward hand, muzzle always facing right",
+    "continuity": "same youthful lean morphology, scale, feet baseline, camera, costume, and equipment in all cells"
+  },
+  "design_lock": [
+    "young, lean and agile J.J.; avoid broad or bulky proportions",
+    "blue-violet rounded hair; bright magenta-red fitted uniform with high collar",
+    "small pale shoulder pads, dark navy diagonal harness and octagonal chest device",
+    "belt, one thigh holster, pale forearm guards, rounded knee guards, tall pale boots",
+    "exactly one compact Zillion pistol held forward; no second weapon, sword, backpack, cape, vehicle or transformed armor",
+    "the Master System game defines identity, palette and game behavior; anime references inform garment construction only as recorded in the approved concept reference boundary"
+  ],
+  "palette": {
+    "manifest_character": "jj_zillion_ii",
+    "source": "doc/palettes_manifest.json",
+    "transparent_index": 0,
+    "maximum_useful_colors": 15,
+    "expected_useful_colors": 13,
+    "dither": "none",
+    "grain_or_texture": false,
+    "opaque_outline": "#000055"
+  },
+  "gates": [
+    "audit_validate_resources.py --kind sheet --character jj_zillion_ii",
+    "audit_animation_semantics.py --manifest data/source_art/sprite_studies/jj_zillion_ii/jj_idle_semantics_v2.json"
+  ],
+  "not_claimed": [
+    "approval of this sprite sheet",
+    "runtime sprite geometry or metasprite validity",
+    "scanline budget validity",
+    "ROM integration or emulator validation"
+  ]
+}

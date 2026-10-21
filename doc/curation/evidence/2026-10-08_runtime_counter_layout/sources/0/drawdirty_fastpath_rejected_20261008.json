@@ -1,0 +1,50 @@
+{
+  "schema": "mugen_optimization_trial_v1",
+  "optimization": "dirty-bit gated stable-pair DrawCache bypass; fast path retains emitter and flicker",
+  "status": "rejected_after_ROM_measurement",
+  "rom_sha256": "2b0aeb8d24241c66892388fd849643611edd41de782ff972ce91af8f4500f873",
+  "session_id": "d472d021e60f4c0887e0987fbeb55c1f",
+  "session_closed": true,
+  "build": "pass with full local pre-gates",
+  "active_idle_runtime_fps": [
+    37.69,
+    38.36,
+    41.29
+  ],
+  "base_render_on_idle_reference_fps": [
+    43.15,
+    42.32
+  ],
+  "fast_hits_before_active_phase": 155,
+  "fast_hits_after_three_runtime_windows": 184,
+  "active_window_fast_hits_delta": 29,
+  "draw_phase_sample": {
+    "start": 100,
+    "scan_end": 154,
+    "schedule_end": 155,
+    "emit_end": 222,
+    "add_end": 222,
+    "render_end": 223,
+    "scan_delta": 54,
+    "emit_delta": 67
+  },
+  "base_phase_reference": {
+    "scan_delta": 53,
+    "emit_delta": 65
+  },
+  "gameplay_probe": {
+    "p1_life_before": 232,
+    "p2_life_before": 232,
+    "p1_life_after": 232,
+    "p2_life_after": 170,
+    "p2_damage": 62
+  },
+  "result": "P1 damage still works on this passive-P2 diagnostic ROM, but the renderer optimization regressed measured runtime; do not promote.",
+  "interpretation": "The fast branch is reached during quiet periods, but only 29 more times over the active idle measurement. VCounter phase still includes about the same scan and emitter cost. Idle animation and active-state dirtiness leave too few reusable frames.",
+  "learning": "A stable-pair bypass is ineffective for animated idle. Optimize the per-frame SAT emission path or its data representation; retain pose-change gates and flicker parity.",
+  "limitations": [
+    "CPU-disabled diagnostic only.",
+    "No screenshot/audio captured.",
+    "No delivery claim."
+  ]
+}

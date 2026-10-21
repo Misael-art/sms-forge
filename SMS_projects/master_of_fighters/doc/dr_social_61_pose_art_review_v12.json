@@ -1,0 +1,150 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_animation_source_v06",
+  "producer": "codex_sprite_refinement_v6",
+  "asset": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v6_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v6.png",
+    "sha256": "8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455f",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "role": "sole visual identity reference"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "semantic_palette_role_confinement",
+    "grid_alignment",
+    "pose_count_and_order"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+          "role": "sole visual identity reference; GDD/TDD constrain sequence and hardware"
+        }
+      ],
+      "observed_defects": [
+        "Prior global nearest-RGB mapping let boot-brown and burgundy pixels leak into gray hair.",
+        "The v6 preview is a candidate raster; subtle anatomy, outlines, and timing have not received independent frame-by-frame review."
+      ],
+      "revision_notes": [
+        "Archived v2\u2013v5 intermediates; v6 is the sole current candidate.",
+        "v6 uses 12 useful palette roles, excludes effect red/violet, reassigns small suit-ramp clusters, and anchors hair cleanup to the nearest face cluster.",
+        "No pose geometry or frame order was changed by v5/v6 cleanup.",
+        "This checklist records producer measurements and pending axes only; it does not approve the sheet.",
+        "v6 was archived as a byte-identical file before v7 work; the original image SHA is unchanged."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "pending",
+          "note": "12-color indexed output and small suit-tone islands were processed; independent frame-by-frame cluster judgment remains open."
+        },
+        "face_detail_readability": {
+          "status": "pending",
+          "note": "Hair role cleanup matched all 61 frames; eyes, glasses, expression and face readability require independent native-size review."
+        },
+        "outline_and_cutout": {
+          "status": "pending",
+          "note": "Index-0 transparency and no cell-edge pixels are measured; outline quality and residual edge noise need independent visual review."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Three suit tones are constrained to contiguous palette roles; full visual confirmation across frames is pending."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Small suit-tone islands were merged; directional shadow continuity still needs independent review."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Cane remains visible in sequence previews; grip and hand-to-cane attachment require frame-by-frame review."
+        },
+        "equipment_geometry": {
+          "status": "pending",
+          "note": "One cane is expected per frame; geometry and terminal shape require independent review."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "61 cells are structurally present; anatomy, pose silhouette and transitions need independent review."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "80\u00d780 cell source exists; assess individual frames at native size before acceptance."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pending",
+          "note": "Effect red/violet are excluded and hair leaks were corrected algorithmically; semantic material confinement still needs independent visual review."
+        },
+        "grid_alignment": {
+          "status": "pass",
+          "note": "640\u00d7720 indexed sheet; exact 8\u00d79 grid of 80\u00d780 cells; no opaque pixels touch a cell edge."
+        },
+        "pose_count_and_order": {
+          "status": "pending",
+          "note": "Row counts are 4/8/8/8/5/8/8/8/4; verify each pose identity and temporal order independently."
+        }
+      }
+    }
+  ],
+  "producer_measurements": {
+    "width_px": 640,
+    "height_px": 720,
+    "grid": "8x9 cells; 80x80 pixels each",
+    "active_poses": 61,
+    "blank_cells": 11,
+    "row_counts": [
+      4,
+      8,
+      8,
+      8,
+      5,
+      8,
+      8,
+      8,
+      4
+    ],
+    "useful_palette_colors": 12,
+    "palette_indices_used": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "partial_alpha_pixels": 0,
+    "cells_touching_edge": 0,
+    "frames_with_orphan_components_lt4px": 0,
+    "head_role_corrections": 61
+  },
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; no res integration, ROM build, hardware budget or runtime approval",
+  "claim_ceiling": "indexed 61-pose candidate with structural/palette preflight only; visual review and owner approval pending"
+}

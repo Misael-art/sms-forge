@@ -59,3 +59,7 @@ def test_runtime_chord_is_not_consumed_by_single_button_patterns(tmp_path):
         [str(executable)], capture_output=True, text=True, check=True
     )
     assert result.stdout == "1 0 0\n0 1 0\n0 0 1\n"
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

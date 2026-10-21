@@ -1,0 +1,65 @@
+{
+  "scope": "canonical harness/artifact/raster/lesson-application factory closure; no new emulator/game validation",
+  "results": [
+    {
+      "tool": "selftest",
+      "returncode": 0,
+      "elapsed_seconds": 52.778,
+      "log": "doc/curation/evidence/2026-10-10_harness_artifact_curation/closure/selftest.log"
+    },
+    {
+      "tool": "measurement_tools",
+      "returncode": 0,
+      "elapsed_seconds": 43.09,
+      "log": "doc/curation/evidence/2026-10-10_harness_artifact_curation/closure/measurement_tools.log"
+    },
+    {
+      "tool": "doc_sync",
+      "returncode": 1,
+      "elapsed_seconds": 0.645,
+      "log": "doc/curation/evidence/2026-10-10_harness_artifact_curation/closure/doc_sync.log"
+    },
+    {
+      "tool": "learning_capture",
+      "returncode": 0,
+      "elapsed_seconds": 2.183,
+      "log": "doc/curation/evidence/2026-10-10_harness_artifact_curation/closure/learning_capture.log"
+    },
+    {
+      "tool": "hardware_doctrine",
+      "returncode": 0,
+      "elapsed_seconds": 6.124,
+      "log": "doc/curation/evidence/2026-10-10_harness_artifact_curation/closure/hardware_doctrine.log"
+    },
+    {
+      "tool": "artifact_registry",
+      "returncode": 0,
+      "elapsed_seconds": 12.806,
+      "log": "doc/curation/evidence/2026-10-10_harness_artifact_curation/closure/artifact_registry.log"
+    }
+  ],
+  "global_promotion": "not_closed_Mugen_document_EIO",
+  "selftest_passed": 108,
+  "measurement_tools_passed": 65,
+  "optional_project_build_probe": "not_run",
+  "new_emulator_run": "not_run_no_game_or_rom_changed",
+  "learning_capture_clean": true,
+  "hardware_doctrine_clean": true,
+  "artifact_registry_passed": true,
+  "classified_artifacts": 9,
+  "indexed_files": 748,
+  "unclassified_legacy_files": 737,
+  "doc_sync_passed": false,
+  "doc_sync_initial_problem_count": 11,
+  "doc_sync_final_problem_count": 10,
+  "doc_sync_focused_followup": "doc/curation/evidence/2026-10-10_harness_artifact_curation/closure/doc_sync_final.json",
+  "doc_sync_correction": "accept current central SMS_GLOBAL citations as doctrine; positive and ghost negative selfchecks passed",
+  "native_forward_retest": "doc/curation/evidence/2026-10-10_harness_artifact_curation/forward_retest_final/review_final.json",
+  "native_code_review": "doc/curation/evidence/2026-10-10_harness_artifact_curation/review_final2/final2_report.json",
+  "doc_sync_independent_followup": {
+    "report": "doc/curation/evidence/2026-10-10_harness_artifact_curation/doc_sync_review_final/doc_sync_delta.json",
+    "cases_passed": 13,
+    "selfcheck_passed": true,
+    "scope": "citation/readability only; no teaching or runtime approval"
+  }
+}

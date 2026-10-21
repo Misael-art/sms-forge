@@ -3,7 +3,7 @@
   "asset_id": "dr_social_model_sheet_10_digicel_handdrawn_v1",
   "producer": "codex_art_production",
   "asset": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v1.png",
     "sha256": "e7db65f283a7df8e206ec71b57d65acb1635d3d798bbc32476ad57d3a773b06b",
     "kind": "character_concept_model_sheet",
     "dimensions_px": [
@@ -12,7 +12,7 @@
     ]
   },
   "source_evidence": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
     "sha256": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81"
   },
   "required_characters": [
@@ -31,14 +31,18 @@
     "equipment_and_weapon_continuity",
     "cross_view_consistency",
     "legibility_and_crop_integrity",
-    "human_traits_and_unapproved_details"
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
   ],
   "characters": [
     {
       "id": "dr_ferdinand_social",
       "references": [
         {
-          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
           "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
           "role": "approved sheet layout and scale"
         },
@@ -54,7 +58,7 @@
         },
         {
           "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
-          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
           "role": "initial style record; not independently validated"
         }
       ],
@@ -120,6 +124,22 @@
         "human_traits_and_unapproved_details": {
           "status": "pending",
           "note": "Owner and independent reviewer pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist/reference role and limits are recorded; independent review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "Distinctive style signature is registered; visual comparison pending."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace each posed limb from shoulder through hand; visual decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity/rendering coherence across views and distinction from neighboring styles; pending."
         }
       }
     }
@@ -131,5 +151,18 @@
     "approved": false
   },
   "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
-  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM or emulator approval"
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM or emulator approval",
+  "catalog_index": 10,
+  "artistic_style_reference": {
+    "named_artist": "Glen Keane",
+    "reference_role_and_scope": "Directing animator for Aladdin, the titular character, in Disney’s 1992 animated film; reference is film animation, not Mega Drive game-art credit.",
+    "source_url": "https://d23.com/a-to-z/keane-glen/",
+    "attribution_status": "verified_primary_source",
+    "style_signature": [
+      "fluid character gesture",
+      "elastic but readable silhouette",
+      "organic hand-drawn animation contour"
+    ],
+    "basis_and_limits": "Visual-analysis descriptors of the film-animation reference."
+  }
 }

@@ -1,0 +1,92 @@
+{
+  "schema": "openbor_sms_post_m6_depth_linkage_v1",
+  "artifact_kind": "openbor_sms_post_m6_depth_linkage",
+  "revision": 1,
+  "date": "2026-10-18",
+  "owner_project": "openbor_sms_rev1",
+  "rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+  "purpose": "indice honesto whiff/dano das duas sessoes de profundidade do M6; originais intactos",
+  "successor_of": "doc/artifacts/o3_combat_scope_20261016.json",
+  "cases": [
+    {
+      "role": "negative_whiff",
+      "dz": 41,
+      "session": "0b271ce0621a4adc914ab5c4d37be07b",
+      "artifact": {
+        "path": "out/evidence/m6/depth_0b271ce0621a4adc914ab5c4d37be07b.json",
+        "sha256": "3d396b8711364600455660c42243e273758fc393392ee4545aec87972b66dea1",
+        "bytes": 1704
+      },
+      "observed": {
+        "whiff_hp0": 43,
+        "whiff_hp1": 43,
+        "aligned": null,
+        "vovf": 0,
+        "end": {
+          "pl": {
+            "x": 240,
+            "z": 194,
+            "hp": 95
+          },
+          "e": {
+            "x": 273,
+            "z": 180,
+            "hp": 43,
+            "st": 2
+          },
+          "cam": {
+            "cam": 120
+          }
+        }
+      },
+      "reading": "sem dano em dz41; controle negativo da mesma montagem"
+    },
+    {
+      "role": "positive_damage",
+      "dz": 6,
+      "session": "f41e8c8c089042be85fd1c9643900043",
+      "artifact": {
+        "path": "out/evidence/m6/depth_f41e8c8c089042be85fd1c9643900043.json",
+        "sha256": "412e5ef3a38098dad97e5186f9975d0ef48b7dbb55d1f18fbfd347eaac7aa1fd",
+        "bytes": 1695
+      },
+      "observed": {
+        "whiff_hp0": 43,
+        "whiff_hp1": 36,
+        "aligned": 19,
+        "vovf": 0,
+        "end": {
+          "pl": {
+            "x": 243,
+            "z": 186,
+            "hp": 95
+          },
+          "e": {
+            "x": 273,
+            "z": 180,
+            "hp": 36,
+            "st": 3
+          },
+          "cam": {
+            "cam": 120
+          }
+        }
+      },
+      "reading": "dano em dz6 (inimigo 43->36) com hit no quadro 19; o campo whiff_dz=6 do original e rotulo historico de fase, preservado sem edicao"
+    }
+  ],
+  "scope_correction": "O escopo O3 rev2 usa whiff_session=0b271 e aligned_session=f41e (correto); este artefato remove a ambiguidade do campo session unico e nomeia dz41 como o whiff honesto.",
+  "boundary_open": [
+    "dz14/15/16",
+    "sinais +/-",
+    "ambos os facings",
+    "altitude no contato",
+    "guarda",
+    "alvo movel em z"
+  ],
+  "limits": [
+    "Nao e nova execucao; le os dois JSONs originais por hash.",
+    "Nao mede a borda <=15; a comparacao de implementacao nao e borda varrida.",
+    "Nao substitui os originais preservados no inventario Lote A."
+  ]
+}

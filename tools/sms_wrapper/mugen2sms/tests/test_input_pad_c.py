@@ -153,3 +153,7 @@ def test_direcional_com_tecla_preserva_os_dois_bits(tmp_path):
     assert _drive(exe, [(0x0002 | 0x0004 | 0x0010, 0),
                         (0x0080 | 0x0100 | 0x0400, 1)]) == [
         K_DOWN | K_LEFT | K_LP, K_DOWN | K_LEFT | K_LP]
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

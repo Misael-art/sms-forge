@@ -1,0 +1,90 @@
+{
+  "schema": "sms_source_raster_contract_v1",
+  "image_sha256": "22ca69b14ef0b9e60e643228353b2bdcff3b45c3c8253de1e348bfa067f20db9",
+  "dimensions_px": [
+    1536,
+    1024
+  ],
+  "frame_count": 6,
+  "expected_frame_ids": [
+    "J01",
+    "J02",
+    "J03",
+    "J04",
+    "J05",
+    "J06"
+  ],
+  "frames": [
+    {
+      "id": "J01",
+      "rect_px": [
+        0,
+        0,
+        512,
+        512
+      ]
+    },
+    {
+      "id": "J02",
+      "rect_px": [
+        512,
+        0,
+        512,
+        512
+      ]
+    },
+    {
+      "id": "J03",
+      "rect_px": [
+        1024,
+        0,
+        512,
+        512
+      ]
+    },
+    {
+      "id": "J04",
+      "rect_px": [
+        0,
+        512,
+        512,
+        512
+      ]
+    },
+    {
+      "id": "J05",
+      "rect_px": [
+        512,
+        512,
+        512,
+        512
+      ]
+    },
+    {
+      "id": "J06",
+      "rect_px": [
+        1024,
+        512,
+        512,
+        512
+      ]
+    }
+  ],
+  "transparency": {
+    "mode": "opaque_key",
+    "rgb": [
+      0,
+      0,
+      0
+    ]
+  },
+  "grid": {
+    "columns": 3,
+    "rows": 2,
+    "cell_px": [
+      512,
+      512
+    ]
+  },
+  "notes": "Retrospective narrow contract from recorded source layout, no new source-color ceiling, no approval/promotion."
+}

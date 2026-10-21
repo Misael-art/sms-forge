@@ -8,47 +8,13 @@ static const unsigned char pal_bg[16] = {
 };
 
 static const unsigned char pal_sp[16] = {
-    RGB(0,0,0), RGB(3,1,0), RGB(3,3,3), RGB(3,3,1),
-    RGB(0,2,3), RGB(3,3,3), RGB(1,3,3), RGB(2,0,0),
-    RGB(0,0,0), RGB(0,0,0), RGB(0,0,0), RGB(0,0,0),
-    RGB(0,0,0), RGB(0,0,0), RGB(0,0,0), RGB(0,0,0)
+    RGB(0,0,0), RGB(0,0,0), RGB(3,3,3), RGB(3,2,1),
+    RGB(2,1,0), RGB(3,3,1), RGB(2,2,0), RGB(3,1,0),
+    RGB(2,0,0), RGB(1,2,0), RGB(0,1,0), RGB(2,2,1),
+    RGB(0,1,3), RGB(3,3,0), RGB(3,0,0), RGB(1,1,1)
 };
 
 static const char charset[] = CHARSET_STR;
-static unsigned char scratch[256];
-
-static unsigned char rev8(unsigned char b)
-{
-    b = (unsigned char)(((b & 0xF0) >> 4) | ((b & 0x0F) << 4));
-    b = (unsigned char)(((b & 0xCC) >> 2) | ((b & 0x33) << 2));
-    b = (unsigned char)(((b & 0xAA) >> 1) | ((b & 0x55) << 1));
-    return b;
-}
-
-/* Espelha 16x32 TALL: troca colunas L/R e bitrev de cada 8x8.
- * Pares TALL: 0=esq-topo, 1=dir-topo, 2=esq-base, 3=dir-base (64 B cada).
- * Nao trocar topo/base do mesmo par — isso rachava o P2 ao olhar para a esquerda. */
-static void mirror_fighter(const unsigned char *src, unsigned char *dst)
-{
-    unsigned char pair, tile, r, p;
-    unsigned char sp;
-    const unsigned char *s;
-    unsigned char *d;
-    static const unsigned char src_pair[4] = {1, 0, 3, 2};
-
-    for (pair = 0; pair < 4; pair++) {
-        sp = src_pair[pair];
-        for (tile = 0; tile < 2; tile++) {
-            s = src + ((unsigned int)sp * 64u) + (unsigned int)tile * 32u;
-            d = dst + ((unsigned int)pair * 64u) + (unsigned int)tile * 32u;
-            for (r = 0; r < 8; r++) {
-                for (p = 0; p < 4; p++) {
-                    d[r * 4 + p] = rev8(s[r * 4 + p]);
-                }
-            }
-        }
-    }
-}
 
 void gfx_clear_nametable(void)
 {
@@ -71,19 +37,6 @@ void gfx_boot(void)
     SMS_loadTiles(tile_bar_hp, TILE_BAR_HP, 32);
     SMS_loadTiles(tile_bar_sp, TILE_BAR_SP, 32);
     SMS_loadTiles(tile_bar_empty, TILE_BAR_EMPTY, 32);
-    SMS_loadTiles(fighter_idle_p1, TILE_P1_IDLE, FIGHTER_TILE_BYTES);
-    SMS_loadTiles(fighter_punch_p1, TILE_P1_PUNCH, FIGHTER_TILE_BYTES);
-    SMS_loadTiles(fighter_idle_p2, TILE_P2_IDLE, FIGHTER_TILE_BYTES);
-    SMS_loadTiles(fighter_punch_p2, TILE_P2_PUNCH, FIGHTER_TILE_BYTES);
-    mirror_fighter(fighter_idle_p1, scratch);
-    SMS_loadTiles(scratch, TILE_P1_IDLE_L, FIGHTER_TILE_BYTES);
-    mirror_fighter(fighter_punch_p1, scratch);
-    SMS_loadTiles(scratch, TILE_P1_PUNCH_L, FIGHTER_TILE_BYTES);
-    mirror_fighter(fighter_idle_p2, scratch);
-    SMS_loadTiles(scratch, TILE_P2_IDLE_L, FIGHTER_TILE_BYTES);
-    mirror_fighter(fighter_punch_p2, scratch);
-    SMS_loadTiles(scratch, TILE_P2_PUNCH_L, FIGHTER_TILE_BYTES);
-    SMS_loadTiles(tile_fb, TILE_FB, 64);
 }
 
 static unsigned char glyph_of(char c)

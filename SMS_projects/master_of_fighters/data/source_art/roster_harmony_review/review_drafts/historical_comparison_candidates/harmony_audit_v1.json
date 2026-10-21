@@ -1,0 +1,222 @@
+{
+  "schema": "smsforge.roster_harmony_report.v1",
+  "project": "master_of_fighters",
+  "profile_status": "owner_directed_reconciliation_targets",
+  "status": "needs_revision",
+  "scope_note": "Measures declared source-frame bounds and relations only; it does not certify visual harmony or ROM quality.",
+  "issues": [
+    "relative constraint failed: golden_axe_not_taller_than_alis"
+  ],
+  "characters": [
+    {
+      "key": "golden_axe_warrior",
+      "name": "Golden Axe Warrior",
+      "sprite_path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_sms_96px_v1.png",
+      "issues": [
+        "width 78 outside [48, 58]",
+        "height 88 outside [72, 74]"
+      ],
+      "sha256": "f5d558ec239e46fd87451d1fdf1029e23068d46a80ad42a17359fe5897f869fe",
+      "measured": {
+        "bbox_xyxy": [
+          9,
+          8,
+          87,
+          96
+        ],
+        "width_px": 78,
+        "height_px": 88,
+        "baseline_y_px": 96
+      },
+      "visual_review_missing_or_failed": [
+        "identity_palette",
+        "head_torso_leg_proportion",
+        "rendering_harmony",
+        "native_size_readability"
+      ],
+      "numeric_status": "fail"
+    },
+    {
+      "key": "hayato",
+      "name": "Hayato",
+      "sprite_path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+      "issues": [],
+      "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+      "measured": {
+        "bbox_xyxy": [
+          16,
+          5,
+          70,
+          80
+        ],
+        "width_px": 54,
+        "height_px": 75,
+        "baseline_y_px": 80
+      },
+      "visual_review_missing_or_failed": [],
+      "numeric_status": "pass"
+    },
+    {
+      "key": "joe_musashi",
+      "name": "Joe Musashi",
+      "sprite_path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+      "issues": [],
+      "sha256": "f04da4b2c4930340315b19f5061cf7dc2dc4b6f86567cebfe6bc366a0019bd8d",
+      "measured": {
+        "bbox_xyxy": [
+          16,
+          0,
+          78,
+          80
+        ],
+        "width_px": 62,
+        "height_px": 80,
+        "baseline_y_px": 80
+      },
+      "visual_review_missing_or_failed": [
+        "identity_palette",
+        "head_torso_leg_proportion",
+        "rendering_harmony",
+        "native_size_readability"
+      ],
+      "numeric_status": "pass"
+    },
+    {
+      "key": "dr_social",
+      "name": "Dr. Ferdinand Social",
+      "sprite_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+      "issues": [
+        "width 44 outside [50, 58]"
+      ],
+      "sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+      "measured": {
+        "bbox_xyxy": [
+          24,
+          8,
+          68,
+          89
+        ],
+        "width_px": 44,
+        "height_px": 81,
+        "baseline_y_px": 89
+      },
+      "visual_review_missing_or_failed": [
+        "identity_palette",
+        "head_torso_leg_proportion",
+        "rendering_harmony",
+        "native_size_readability"
+      ],
+      "numeric_status": "fail"
+    },
+    {
+      "key": "alis_landale",
+      "name": "Alis Landale",
+      "sprite_path": "data/source_art/sprite_studies/alis/alis_guard_motion_12f_sms_80px_v1.png",
+      "issues": [
+        "height 73 outside [74, 76]"
+      ],
+      "sha256": "86327477417eda71823bc1dbd291b5a7604b3024d110f59aeedc4ecb92d3b59a",
+      "measured": {
+        "bbox_xyxy": [
+          12,
+          7,
+          72,
+          80
+        ],
+        "width_px": 60,
+        "height_px": 73,
+        "baseline_y_px": 80
+      },
+      "visual_review_missing_or_failed": [
+        "identity_palette",
+        "head_torso_leg_proportion",
+        "rendering_harmony",
+        "native_size_readability"
+      ],
+      "numeric_status": "fail"
+    },
+    {
+      "key": "landau",
+      "name": "Landau",
+      "sprite_path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_v3.png",
+      "issues": [
+        "height 87 outside [79, 82]"
+      ],
+      "sha256": "91e4c2897ea7725a034e7bd6dc0b5f6aa37718a75537f5bdf53fc25d0bee9785",
+      "measured": {
+        "bbox_xyxy": [
+          23,
+          9,
+          86,
+          96
+        ],
+        "width_px": 63,
+        "height_px": 87,
+        "baseline_y_px": 96
+      },
+      "visual_review_missing_or_failed": [
+        "head_torso_leg_proportion",
+        "rendering_harmony",
+        "native_size_readability"
+      ],
+      "numeric_status": "fail"
+    },
+    {
+      "key": "jj",
+      "name": "J.J.",
+      "sprite_path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v5.png",
+      "issues": [],
+      "sha256": "1f5e4807320343279504b27a1f13e8fdbf81282a1d398c2312a72c349b1e8dd6",
+      "measured": {
+        "bbox_xyxy": [
+          16,
+          20,
+          79,
+          96
+        ],
+        "width_px": 63,
+        "height_px": 76,
+        "baseline_y_px": 96
+      },
+      "visual_review_missing_or_failed": [
+        "head_torso_leg_proportion",
+        "rendering_harmony",
+        "native_size_readability"
+      ],
+      "numeric_status": "pass"
+    }
+  ],
+  "relative_constraints": [
+    {
+      "rule": {
+        "id": "golden_axe_not_taller_than_alis",
+        "left": "golden_axe_warrior",
+        "right": "alis_landale",
+        "relation": "height_lte"
+      },
+      "status": "fail",
+      "left_height_px": 88,
+      "right_height_px": 73
+    },
+    {
+      "rule": {
+        "id": "dr_social_matches_joe_scale",
+        "left": "dr_social",
+        "right": "joe_musashi",
+        "relation": "height_near",
+        "max_difference_px": 3
+      },
+      "status": "pass",
+      "left_height_px": 81,
+      "right_height_px": 80
+    }
+  ],
+  "human_review_required": [
+    "golden_axe_warrior",
+    "joe_musashi",
+    "dr_social",
+    "alis_landale",
+    "landau",
+    "jj"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "kind": "source_distance",
+  "evidence": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/base/OUTROS/ffspRyo_v3.zip",
+      "sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/base/OUTROS/A-Terry.zip",
+      "sha256": "ad646be47eb314ee0ea8d5595b4524823e277a722c9162c59ce8bd05b085687c"
+    }
+  ],
+  "profile": "standing_facing_pair_uniform_scale",
+  "scale_num": 72,
+  "scale_den": 107,
+  "source_front_widths": [
+    18,
+    17
+  ],
+  "source_threshold": 32,
+  "cases": [
+    {
+      "axis_gap_sms": 45,
+      "expected_lt_threshold": true,
+      "observed_numerator": 2295
+    },
+    {
+      "axis_gap_sms": 46,
+      "expected_lt_threshold": false,
+      "observed_numerator": 2402
+    }
+  ],
+  "mapped_roles": [
+    {
+      "role": "punch_far",
+      "near_state": 200,
+      "far_state": 201,
+      "source_command": "x"
+    },
+    {
+      "role": "hp_far",
+      "near_state": 220,
+      "far_state": 221,
+      "source_command": "z"
+    },
+    {
+      "role": "kick_far",
+      "near_state": 230,
+      "far_state": 231,
+      "source_command": "a"
+    },
+    {
+      "role": "hk_far",
+      "near_state": 250,
+      "far_state": 251,
+      "source_command": "c"
+    }
+  ]
+}

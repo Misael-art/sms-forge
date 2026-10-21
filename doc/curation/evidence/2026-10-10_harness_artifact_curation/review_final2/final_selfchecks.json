@@ -1,0 +1,54 @@
+[
+  {
+    "tool": "artifact_registry.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "13b0aa",
+        "wall_time_seconds": 0.219898579,
+        "exit_code": 0,
+        "original_token_count": 28,
+        "output": "[SELF-CHECK OK] artifact_registry (unique heads, hashes, ownership, lineage, extension, scan, decision binding)\n"
+      }
+    }
+  },
+  {
+    "tool": "harness_orchestration.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "5205e5",
+        "wall_time_seconds": 0.345567089,
+        "exit_code": 0,
+        "original_token_count": 38,
+        "output": "[SELF-CHECK OK] harness_orchestration (3 ramos; claim no coordenador; overlap serializa; teto 3; worker não promove; visual outputs registry-bound)\n"
+      }
+    }
+  },
+  {
+    "tool": "audit_learning_capture.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "2db50e",
+        "wall_time_seconds": 0.142531249,
+        "exit_code": 0,
+        "original_token_count": 28,
+        "output": "[SELF-CHECK OK] learning_capture (ledger orfao, ferramenta fantasma, doutrina supersedida, furo nao declarado)\n"
+      }
+    }
+  },
+  {
+    "tool": "audit_source_raster.py",
+    "result": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "262aa3",
+        "wall_time_seconds": 0.443049204,
+        "exit_code": 0,
+        "original_token_count": 21,
+        "output": "self-check: PASS (binary/RGB/indexed positives; 35 negatives; input preservation)\n"
+      }
+    }
+  }
+]

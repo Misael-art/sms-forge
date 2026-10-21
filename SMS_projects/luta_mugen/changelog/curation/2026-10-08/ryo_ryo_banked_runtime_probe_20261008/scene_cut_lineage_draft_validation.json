@@ -1,0 +1,100 @@
+{
+  "schema": "luta_mugen_scene_cut_lineage_draft_validation_v1",
+  "status": "PASS_ISOLATED_DRAFT",
+  "patch_path": "scene_cut_lineage_draft.patch",
+  "patch_sha256": "69e57cad5763e9ee78f945922aa50b74693591c02feb69aed363d1d2ef43a4a5",
+  "draft_manifest_path": "scene_cut_lineage_draft_manifest.json",
+  "draft_manifest_sha256": "18ef5b1fef43b434524c4f008affa37732f7954d34c28a965dbb04c586db3912",
+  "checks": [
+    {
+      "name": "source_sff_parse_clean",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "draft_reproduces_38_scene_pages_p1_ken",
+      "ok": true,
+      "details": {
+        "bank_count": 38,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "draft_frame_metadata_and_rom_payloads_p1_ken",
+      "ok": true,
+      "details": {
+        "frames": 94,
+        "assets_verified": 188,
+        "errors": []
+      }
+    },
+    {
+      "name": "draft_frame_count_94_p1_ken",
+      "ok": true,
+      "details": 94
+    },
+    {
+      "name": "draft_asset_count_188_p1_ken",
+      "ok": true,
+      "details": 188
+    },
+    {
+      "name": "draft_reproduces_38_scene_pages_p2_ryu",
+      "ok": true,
+      "details": {
+        "bank_count": 38,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "draft_frame_metadata_and_rom_payloads_p2_ryu",
+      "ok": true,
+      "details": {
+        "frames": 94,
+        "assets_verified": 188,
+        "errors": []
+      }
+    },
+    {
+      "name": "draft_frame_count_94_p2_ryu",
+      "ok": true,
+      "details": 94
+    },
+    {
+      "name": "draft_asset_count_188_p2_ryu",
+      "ok": true,
+      "details": 188
+    },
+    {
+      "name": "draft_asset_count_376_total",
+      "ok": true,
+      "details": 376
+    },
+    {
+      "name": "candidate_rom_sha_matches_probe",
+      "ok": true,
+      "details": null
+    }
+  ],
+  "failures": [],
+  "air_parser_warnings": {
+    "count": 13,
+    "sample": [
+      "ffspRyo.air:262: linha ignorada 'n[V'",
+      "ffspRyo.air:284: linha ignorada 'Run forwards'",
+      "ffspRyo.air:2305: linha ignorada 'n  i¬å¤Êj'",
+      "ffspRyo.air:2413: linha ignorada 'n'",
+      "ffspRyo.air:2936: linha ignorada 'j'",
+      "ffspRyo.air:2966: frame invalido '251,2, 0,0, 1.5'",
+      "ffspRyo.air:2979: frame invalido '200,0, 0,0, 0.5'",
+      "ffspRyo.air:3022: frame invalido '250,1, 0,0, 1.5'",
+      "ffspRyo.air:3023: frame invalido '250,2, 0,0, 1.5'",
+      "ffspRyo.air:3657: linha ignorada 'n]'",
+      "ffspRyo.air:3675: linha ignorada 'n]'",
+      "ffspRyo.air:3702: linha ignorada 'n]'"
+    ],
+    "scope": "full AIR file; selected action/frame identities are checked separately"
+  },
+  "sff_parser_warnings": [],
+  "disposition": "Keep as an isolated reviewable draft until authority docs are readable; do not copy into tools/sms_wrapper or promote the generated schema yet."
+}

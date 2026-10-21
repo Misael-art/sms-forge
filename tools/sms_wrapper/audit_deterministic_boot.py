@@ -49,7 +49,13 @@ def capture_playfield_hash(rom, jar, runs=2):
                 g = subprocess.run(["xdotool", "getwindowgeometry", "--shell", i],
                                    capture_output=True, text=True)
                 kv = dict(l.split("=") for l in g.stdout.strip().splitlines() if "=" in l)
-                if kv.get("WIDTH") in ("256", "300"):
+                # capture_evidence usa WIDTH>=256 (janela 320x265 a 100% neste host);
+                # a whitelist {256,300} ficou obsoleta e o gate não achava janela.
+                try:
+                    wide = int(kv.get("WIDTH", "0"))
+                except ValueError:
+                    wide = 0
+                if wide >= 256:
                     main = i
                     break
             if main:

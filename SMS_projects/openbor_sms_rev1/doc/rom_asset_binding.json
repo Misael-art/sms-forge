@@ -1,0 +1,179 @@
+{
+ "schema": "rom_asset_binding_v1",
+ "rom_path": "out/rom/openbor_sms_rev1.sms",
+ "rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+ "rom_size_bytes": 131072,
+ "linker_map": "out/obj/openbor_sms_rev1.map",
+ "linker_map_sha256": "cdb2815c290ff43e3db822d6fc72fb6d1df5fb7c1790e41b104273ef025ae0ad",
+ "claim_ceiling": "source_to_res_to_symbol_to_rom_identity_only",
+ "notes": [
+  "Candidato pos-M8 cap5; nao e render independente nem prova visual.",
+  "As entradas de pose/animacao usam o header emitido como res; o linker map prova o simbolo no binario.",
+  "o3_long_rows nao entra: o simbolo nao aparece no linker map atual (o runtime usa as poses/anim arrays).",
+  "Audio: o .psg e source e res; o header inc/o3/psg_sfx.h e a projecao C. As arrays static nao aparecem no linker map; a captura de audio do cap5 segue pendente (M8 a7f e a ultima medida).",
+  "O oracle full-frame audit_render_glitch segue bloqueado; a epoca visual delivery nao e reivindicada."
+ ],
+ "entries": [
+  {
+   "asset": "o3.ax.a102.left",
+   "source": "data/source_openbor/gal_town1/data/chars/ax/a102.gif",
+   "res_path": "inc/o3/o3_poses.h",
+   "source_paths": [
+    "data/source_openbor/gal_town1/data/chars/ax/a102.gif"
+   ],
+   "asset_group": "o3_ax_attack_a102",
+   "symbol": "o3_ax_pose08",
+   "generated": "inc/o3/o3_poses.h",
+   "sha256": "987eb4e96df5cfb5f2a3a7d20bb745dde02b28d9f57293bba9eae96c97145d69",
+   "symbol_in_linker_map": "_o3_ax_pose08",
+   "pose_index": 8
+  },
+  {
+   "asset": "o3.ax.a102.right",
+   "source": "data/source_openbor/gal_town1/data/chars/ax/a102.gif",
+   "res_path": "inc/o3/o3_poses.h",
+   "source_paths": [
+    "data/source_openbor/gal_town1/data/chars/ax/a102.gif"
+   ],
+   "asset_group": "o3_ax_attack_a102",
+   "symbol": "o3_ax_pose09",
+   "generated": "inc/o3/o3_poses.h",
+   "sha256": "987eb4e96df5cfb5f2a3a7d20bb745dde02b28d9f57293bba9eae96c97145d69",
+   "symbol_in_linker_map": "_o3_ax_pose09",
+   "pose_index": 9
+  },
+  {
+   "asset": "o3.ax.a102.rows",
+   "source": "data/source_openbor/gal_town1/data/chars/ax/a102.gif",
+   "res_path": "inc/o3/o3_rows.h",
+   "source_paths": [
+    "data/source_openbor/gal_town1/data/chars/ax/a102.gif"
+   ],
+   "asset_group": "o3_ax_attack_a102",
+   "symbol": "o3_ax_rows",
+   "generated": "inc/o3/o3_rows.h",
+   "sha256": "2099937dafecc5a4100e71eaa42a840dbb89cbad98ae0fa4f890f5cc552e82b4",
+   "symbol_in_linker_map": "_o3_ax_rows",
+   "row_index": 8
+  },
+  {
+   "asset": "o3.long.walk",
+   "source": "data/source_openbor/gal_town1/data/chars/long/walk03.gif",
+   "res_path": "inc/o3/o3_anim.h",
+   "source_paths": [
+    "data/source_openbor/gal_town1/data/chars/long/walk03.gif"
+   ],
+   "asset_group": "o3_long_walk",
+   "symbol": "o3_long_anim_walk",
+   "generated": "inc/o3/o3_anim.h",
+   "sha256": "d3fbb692a39ebb1d9f6655c5fec8f7d7f1af1bfb951cf16951c9296f1c3c267d",
+   "symbol_in_linker_map": "_o3_long_anim_walk",
+   "pose_indices": [
+    1,
+    2
+   ]
+  },
+  {
+   "asset": "o3.long.pain2",
+   "source": "data/source_openbor/gal_town1/data/chars/long/pain01.gif",
+   "res_path": "inc/o3/o3_anim.h",
+   "source_paths": [
+    "data/source_openbor/gal_town1/data/chars/long/pain01.gif",
+    "data/source_openbor/gal_town1/data/chars/long/pain02.gif"
+   ],
+   "asset_group": "o3_long_pain",
+   "symbol": "o3_long_anim_pain2",
+   "generated": "inc/o3/o3_anim.h",
+   "sha256": "d3fbb692a39ebb1d9f6655c5fec8f7d7f1af1bfb951cf16951c9296f1c3c267d",
+   "symbol_in_linker_map": "_o3_long_anim_pain2",
+   "pose_indices": [
+    7,
+    8
+   ]
+  },
+  {
+   "asset": "o3.long.attack1",
+   "source": "data/source_openbor/gal_town1/data/chars/long/a102.gif",
+   "res_path": "inc/o3/o3_anim.h",
+   "source_paths": [
+    "data/source_openbor/gal_town1/data/chars/long/a101.gif",
+    "data/source_openbor/gal_town1/data/chars/long/a102.gif",
+    "data/source_openbor/gal_town1/data/chars/long/a103.gif",
+    "data/source_openbor/gal_town1/data/chars/long/a104.gif"
+   ],
+   "asset_group": "o3_long_attack",
+   "symbol": "o3_long_anim_attack1",
+   "generated": "inc/o3/o3_anim.h",
+   "sha256": "d3fbb692a39ebb1d9f6655c5fec8f7d7f1af1bfb951cf16951c9296f1c3c267d",
+   "symbol_in_linker_map": "_o3_long_anim_attack1",
+   "pose_indices": [
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "asset": "o3.blocks.ax",
+   "source": "data/generated/emit/o3_emission_20261017_r3.json",
+   "res_path": "res/o3/banks/o3_pose_blocks_20261017.bin",
+   "source_paths": [
+    "data/generated/emit/o3_emission_20261017_r3.json"
+   ],
+   "asset_group": "o3_pose_bank",
+   "symbol": "o3_ax_blocks",
+   "generated": "inc/o3/o3_blocks.h",
+   "sha256": "1772a365c787b389cd7ef71b8d3c1e86d87e1efaf4cb6926831196e234814c8c",
+   "symbol_in_linker_map": "_o3_ax_blocks"
+  },
+  {
+   "asset": "o3.blocks.long",
+   "source": "data/generated/emit/o3_emission_20261017_r3.json",
+   "res_path": "res/o3/banks/o3_pose_blocks_20261017.bin",
+   "source_paths": [
+    "data/generated/emit/o3_emission_20261017_r3.json"
+   ],
+   "asset_group": "o3_pose_bank",
+   "symbol": "o3_long_blocks",
+   "generated": "inc/o3/o3_blocks.h",
+   "sha256": "1772a365c787b389cd7ef71b8d3c1e86d87e1efaf4cb6926831196e234814c8c",
+   "symbol_in_linker_map": "_o3_long_blocks"
+  },
+  {
+   "asset": "o3.audio.sfx_attack",
+   "source": "res/audio/sfx_attack.psg",
+   "res_path": "res/audio/sfx_attack.psg",
+   "source_paths": [
+    "res/audio/sfx_attack.psg"
+   ],
+   "asset_group": "o3_audio_sfx",
+   "symbol": "sfx_attack",
+   "generated": "inc/o3/psg_sfx.h",
+   "sha256": "c431529733827ebe838cd1b907f9c7413a8edc7aaed82b36fd63e8c97b422215"
+  },
+  {
+   "asset": "o3.audio.sfx_impact",
+   "source": "res/audio/sfx_impact.psg",
+   "res_path": "res/audio/sfx_impact.psg",
+   "source_paths": [
+    "res/audio/sfx_impact.psg"
+   ],
+   "asset_group": "o3_audio_sfx",
+   "symbol": "sfx_impact",
+   "generated": "inc/o3/psg_sfx.h",
+   "sha256": "8a346f1bc912922fb438d64bf0d47c4923268684aefac962dc48cc688441325b"
+  },
+  {
+   "asset": "o3.audio.sfx_fall",
+   "source": "res/audio/sfx_fall.psg",
+   "res_path": "res/audio/sfx_fall.psg",
+   "source_paths": [
+    "res/audio/sfx_fall.psg"
+   ],
+   "asset_group": "o3_audio_sfx",
+   "symbol": "sfx_fall",
+   "generated": "inc/o3/psg_sfx.h",
+   "sha256": "b7bee6f8b8f5532945d2aa9152f8ca3b766eda4a53215efd4556dfff4e3d8025"
+  }
+ ]
+}

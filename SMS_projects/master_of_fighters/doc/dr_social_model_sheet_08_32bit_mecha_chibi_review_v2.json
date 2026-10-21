@@ -1,0 +1,170 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_08_32bit_mecha_chibi_v2",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2.png",
+    "sha256": "c390a2eb20eb4d81710ec1f0f1dd812dfbc86d4f3e29d6152bf6197c0c591e75",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png",
+    "sha256": "2e5f3b6371e56be1384ec44e6c4b9d64915ca22e10dfb4d2c535584f9e5b3c1d"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+          "role": "approved form/layout reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "identity and approved costume/equipment authority"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "palette-role authority"
+        },
+        {
+          "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+          "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+          "role": "style descriptor, not independently validated"
+        }
+      ],
+      "observed_defects": [
+        "Generated vest and coat button ornament differ from approved costume and remain for owner review.",
+        "Attempts 1–3 contained a loose blade; attempt 4 removes it by visual inspection, but hand/equipment attachment needs independent inspection."
+      ],
+      "revision_notes": [
+        "Attempts 1–3 preserved; third attempt explicitly failed due a loose ungripped blade in front view.",
+        "Attempt 4 selected for separated equipment placement, simple clean cel rendering and five-view content.",
+        "Artwork uniformly reduced to 0.78 and positioned intact; no retouch/recolor.",
+        "Owner and independent art review remain pending.",
+        "Version 2 adds visible catalog index and named style-reference attribution; artwork remains a candidate and requires fresh review.",
+        "V2 adds the visible catalog index, artist/reference role, and concise signature. The prior illustration/layout is preserved outside the style-information card; independent/owner review remains pending."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist, role, source, and attribution limits are recorded; independent verification/review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "The selected reference signature is listed; visual separation from neighboring styles requires visual review."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace shoulder, upper arm, elbow, forearm, wrist, and hand across each posed view; reviewer decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity and rendering consistency across five views, and distinction from neighboring catalog styles."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval",
+  "artistic_style_reference": {
+    "named_artist": null,
+    "reference_role_and_scope": "No individual artist attribution assigned for Mega Man 8 in this curation. Keep the game’s animated sci-fi mascot direction as the reference until a title-specific credit is verified.",
+    "source_url": null,
+    "attribution_status": "individual_credit_unverified",
+    "style_signature": [
+      "clean cel-animation contour",
+      "rounded mechanical joints and simplified shapes",
+      "bright 2–3 tone color blocks"
+    ],
+    "basis_and_limits": "Style descriptors come from the selected game reference, not a named artist."
+  },
+  "catalog_index": 8
+}

@@ -1,0 +1,12 @@
+{
+  "problems": [
+    ".agent/skills/evidence-protocol.md:11: doutrina supersedida (desktop como canal padr\u00e3o de QA (\u00a793)): com canal vivo. Neste host: `emulator_input.py` (kdotool+ydotool).",
+    ".agent/skills/sms-fight-input-proof.md:14: doutrina supersedida (sleep de host como regra \u00fanica de input; sess\u00e3o privada usa frames VDP (\u00a793)): 2. **Cronometragem \u00e9 por tempo de rel\u00f3gio, com o emulador RODANDO cont\u00ednuo.**",
+    ".agent/skills/sms-input-pause.md:7: doutrina supersedida (desktop como canal padr\u00e3o de QA (\u00a793)): tecla. Neste host (KDE/Wayland) o canal \u00e9 kdotool+ydotool",
+    ".agent/skills/sms-sprite-animation.md:33: doutrina supersedida (delta RGB obrigat\u00f3rio confunde elemento AIR com pixels (\u00a7100)): Cada estado precisa de delta vis\u00edvel entre frames (n\u00e3o s\u00f3 rename).",
+    ".agent/skills/sms-video-evidence.md:39: doutrina supersedida (endpoints como or\u00e1culo de freeze; usar timeline completa (\u00a797)): | `motion_fraction` | < 1% entre o primeiro e o \u00faltimo \u2192 tela congelada |",
+    ".agent/skills/sms-video-evidence.md:51: doutrina supersedida (comando de encerramento global de Emulicious (\u00a793)): aborta se achar outro Emulicious vivo \u2014 `pkill -f Emulicious.jar` antes.",
+    ".agent/workflows/release-rom.md:32: doutrina supersedida (comando de encerramento global de Emulicious (\u00a793)): pkill -f Emulicious.jar"
+  ],
+  "clean": false
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "animation_semantics_manifest_v1",
+  "character": "joe_musashi_shadow_dancer_sms",
+  "asset_id": "joe_musashi_idle_sms_80px_12f_v2",
+  "required_states": ["idle"],
+  "actions": [
+    {
+      "name": "idle",
+      "unique_frames_required": true,
+      "geometry_contract": {
+        "canvas_px": [80, 80],
+        "visible_width_px": [56, 64],
+        "visible_height_px": [73, 80],
+        "baseline_y_px": 79,
+        "baseline_tolerance_px": 0
+      },
+      "frames": [
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_00.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_01.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_02.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_03.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_04.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_05.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_06.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_07.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_08.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_09.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_10.png", "pivot": [40, 79]},
+        {"png": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/frames_sms_v2/idle_11.png", "pivot": [40, 79]}
+      ]
+    }
+  ],
+  "notes": "Twelve distinct sequential idle-guard poses are a source-art candidate derived from the owner's approved yellow-accent concept. Uses the declared Shadow Dancer SMS palette; awaiting owner review of this animation sheet. Not approved for runtime."
+}

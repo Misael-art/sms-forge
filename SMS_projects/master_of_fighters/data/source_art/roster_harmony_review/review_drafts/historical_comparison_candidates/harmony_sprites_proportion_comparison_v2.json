@@ -1,0 +1,341 @@
+{
+  "schema": "mof_sprite_proportion_comparison_v2",
+  "project": "master_of_fighters",
+  "status": "review_candidate",
+  "purpose": "Prancha comparativa do frame 00 para revisar alturas e silhuetas; não aprova estilo, anatomia, animação ou integração.",
+  "board": {
+    "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v2.png",
+    "sha256": "3a444c91dcba39b72eec0a8c9affb68c0239285cc3b06f1b0669b791c112b236",
+    "canvas_px": [
+      2048,
+      680
+    ],
+    "display_scale": "3x nearest-neighbor",
+    "display_width_px": 2048,
+    "per_character_rescale": false,
+    "vertical_alignment": "última linha opaca comum",
+    "horizontal_alignment": "centro da silhueta visível",
+    "source_pixel_ruler": true,
+    "revision_reason": "v1 tinha 3000 px de largura e era exibida com redução fracionária; v2 usa largura 2048 px e escala inteira 3× para evitar reamostragem da prancha pelo visualizador."
+  },
+  "working_contract": {
+    "path": "doc/roster_harmony_contract_v1.json",
+    "sha256": "1190cd367e4a4a1e639214753fcbe150157a40c5a0a38bec5adc31abace76a97",
+    "status": "owner_directed_reconciliation_targets",
+    "bands_are": "alvos métricos de trabalho, não limites de hardware nem aprovação artística"
+  },
+  "presentation_diagnostic": {
+    "joe_musashi_frame00_alpha_values": [
+      0,
+      255
+    ],
+    "joe_musashi_frame00_connected_opaque_components_8": 1,
+    "owner_feedback": "O dono ainda percebe ruído no contorno do Shinobi/Joe Musashi.",
+    "outline_axis_status": "fail_pending_source_art_refinement",
+    "source_pixels_filtered_or_recolored": false
+  },
+  "summary_source_px": {
+    "minimum_height": 73,
+    "maximum_height": 80,
+    "height_range": 7,
+    "mean_height": 75.86,
+    "within_both_bands": 7,
+    "golden_axe_height_lte_alis": {
+      "measured": true,
+      "values": [
+        73,
+        75
+      ]
+    },
+    "dr_social_joe_scale": {
+      "height_difference_px": 2,
+      "contract_max_height_difference_px": 3,
+      "width_difference_px": 2,
+      "contract_max_width_difference_px": 8
+    }
+  },
+  "claim_ceiling": "medição de silhueta frame 00 e apresentação comparativa; avaliação visual continua humana",
+  "owner_approval": "pending",
+  "characters": [
+    {
+      "character_id": "golden_axe_warrior",
+      "name": "Golden Axe Warrior",
+      "game": "Golden Axe Warrior (SMS)",
+      "source": {
+        "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_sms_96px_harmony_candidate_v2.png",
+        "sha256": "f9dab0a54c0821d7e7c5c810013d822854ed9cb1626b1b617347c65fc6fceeb7",
+        "canvas_px": [
+          384,
+          288
+        ],
+        "cell_px": [
+          96,
+          96
+        ],
+        "frame_index": 0
+      },
+      "visible_bounds_source_cell_px": {
+        "bbox_xyxy_exclusive": [
+          15,
+          22,
+          80,
+          95
+        ],
+        "width_px": 65,
+        "height_px": 73,
+        "bottom_row_px": 94
+      },
+      "contract_working_bands_px": {
+        "width": [
+          58,
+          68
+        ],
+        "height": [
+          72,
+          75
+        ],
+        "within_both": true
+      }
+    },
+    {
+      "character_id": "hayato",
+      "name": "Hayato",
+      "game": "Kenseiden (SMS)",
+      "source": {
+        "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+        "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+        "canvas_px": [
+          320,
+          240
+        ],
+        "cell_px": [
+          80,
+          80
+        ],
+        "frame_index": 0
+      },
+      "visible_bounds_source_cell_px": {
+        "bbox_xyxy_exclusive": [
+          16,
+          5,
+          70,
+          80
+        ],
+        "width_px": 54,
+        "height_px": 75,
+        "bottom_row_px": 79
+      },
+      "contract_working_bands_px": {
+        "width": [
+          50,
+          58
+        ],
+        "height": [
+          74,
+          76
+        ],
+        "within_both": true
+      }
+    },
+    {
+      "character_id": "joe_musashi",
+      "name": "Joe Musashi",
+      "game": "Shinobi / Shadow Dancer",
+      "source": {
+        "path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+        "sha256": "f04da4b2c4930340315b19f5061cf7dc2dc4b6f86567cebfe6bc366a0019bd8d",
+        "canvas_px": [
+          320,
+          240
+        ],
+        "cell_px": [
+          80,
+          80
+        ],
+        "frame_index": 0
+      },
+      "visible_bounds_source_cell_px": {
+        "bbox_xyxy_exclusive": [
+          16,
+          0,
+          78,
+          80
+        ],
+        "width_px": 62,
+        "height_px": 80,
+        "bottom_row_px": 79
+      },
+      "contract_working_bands_px": {
+        "width": [
+          58,
+          66
+        ],
+        "height": [
+          78,
+          82
+        ],
+        "within_both": true
+      }
+    },
+    {
+      "character_id": "dr_social",
+      "name": "Dr. Ferdinand Social",
+      "game": "Master of Darkness (SMS)",
+      "source": {
+        "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_12f_sms_96px_harmony_candidate_v2.png",
+        "sha256": "7271cc3bf922089fb217ee3ff1bc76438c4d07592973f0266af0b48fd4aeec05",
+        "canvas_px": [
+          384,
+          288
+        ],
+        "cell_px": [
+          96,
+          96
+        ],
+        "frame_index": 0
+      },
+      "visible_bounds_source_cell_px": {
+        "bbox_xyxy_exclusive": [
+          19,
+          15,
+          79,
+          93
+        ],
+        "width_px": 60,
+        "height_px": 78,
+        "bottom_row_px": 92
+      },
+      "contract_working_bands_px": {
+        "width": [
+          50,
+          64
+        ],
+        "height": [
+          78,
+          82
+        ],
+        "within_both": true
+      }
+    },
+    {
+      "character_id": "alis_landale",
+      "name": "Alis Landale",
+      "game": "Phantasy Star (SMS)",
+      "source": {
+        "path": "data/source_art/sprite_studies/alis/alis_idle_12f_sms_96px_harmony_candidate_v6_scale75_index8_v1.png",
+        "sha256": "999d0e5de468a5663977854ef1c70bb90e305da37568b89bfcc812849399582b",
+        "canvas_px": [
+          384,
+          288
+        ],
+        "cell_px": [
+          96,
+          96
+        ],
+        "frame_index": 0
+      },
+      "visible_bounds_source_cell_px": {
+        "bbox_xyxy_exclusive": [
+          14,
+          20,
+          82,
+          95
+        ],
+        "width_px": 68,
+        "height_px": 75,
+        "bottom_row_px": 94
+      },
+      "contract_working_bands_px": {
+        "width": [
+          54,
+          68
+        ],
+        "height": [
+          74,
+          76
+        ],
+        "within_both": true
+      }
+    },
+    {
+      "character_id": "landau",
+      "name": "Landau",
+      "game": "Lord of the Sword (SMS)",
+      "source": {
+        "path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_harmony_candidate_v3_scale75_index8_v1.png",
+        "sha256": "d54b4b17686201650900150515e87dc785abe5c9603920b0317f0039c165a96f",
+        "canvas_px": [
+          384,
+          288
+        ],
+        "cell_px": [
+          96,
+          96
+        ],
+        "frame_index": 0
+      },
+      "visible_bounds_source_cell_px": {
+        "bbox_xyxy_exclusive": [
+          18,
+          20,
+          78,
+          95
+        ],
+        "width_px": 60,
+        "height_px": 75,
+        "bottom_row_px": 94
+      },
+      "contract_working_bands_px": {
+        "width": [
+          54,
+          66
+        ],
+        "height": [
+          74,
+          76
+        ],
+        "within_both": true
+      }
+    },
+    {
+      "character_id": "jj",
+      "name": "J.J.",
+      "game": "Zillion II: The Tri Formation (SMS)",
+      "source": {
+        "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_harmony_candidate_v6_scale75_index8_v1.png",
+        "sha256": "8287607b30265ffab0a40e2a4546ccd3ccd0747f9cd1b0cc9e37717d8dd34fe4",
+        "canvas_px": [
+          384,
+          288
+        ],
+        "cell_px": [
+          96,
+          96
+        ],
+        "frame_index": 0
+      },
+      "visible_bounds_source_cell_px": {
+        "bbox_xyxy_exclusive": [
+          17,
+          20,
+          78,
+          95
+        ],
+        "width_px": 61,
+        "height_px": 75,
+        "bottom_row_px": 94
+      },
+      "contract_working_bands_px": {
+        "width": [
+          54,
+          66
+        ],
+        "height": [
+          74,
+          78
+        ],
+        "within_both": true
+      }
+    }
+  ]
+}

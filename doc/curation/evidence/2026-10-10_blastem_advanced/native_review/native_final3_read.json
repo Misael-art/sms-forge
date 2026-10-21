@@ -1,0 +1,85 @@
+{
+  "session": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/final3/blastem-sms-7358c1f3de6a429c9e6df733ae8a6297",
+  "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+  "event_counts": [
+    2,
+    952,
+    952
+  ],
+  "event_definitions": [
+    {
+      "index": 0,
+      "kind": "cpu_write",
+      "address": 51192,
+      "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+    },
+    {
+      "index": 1,
+      "kind": "vdp_io_before_out",
+      "address": 11,
+      "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+    },
+    {
+      "index": 2,
+      "kind": "vdp_io_before_out",
+      "address": 25,
+      "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+    }
+  ],
+  "native_media": {
+    "apng": {
+      "frames": 34,
+      "size": [
+        256,
+        192
+      ],
+      "different_from_first": 33,
+      "container_duration_ms": 566.6666666666667,
+      "clock": "nominal_60Hz_not_realtime_FPS",
+      "raw_preserved": true,
+      "derived_acTL_crc_repairs": 1
+    },
+    "wave": {
+      "sample_rate": 48000,
+      "channels": 2,
+      "sample_frames": 27648,
+      "duration_seconds": 0.576,
+      "peak": 0,
+      "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+    },
+    "vgm": {
+      "bytes": 88,
+      "psg_writes": 11,
+      "wait_samples_44100": 1,
+      "scope": "PSG register log_not_audible_mix_or_trailing_silence_duration"
+    }
+  },
+  "cleanup": {
+    "sandbox_exited": true,
+    "xvfb_exited": true
+  },
+  "source_pins": {
+    "wrapper_sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+    "diagnostics_sha256": "3f2ad687afb94a08911393dc465dbb491aaa7d4ed9a0e397657eba13c571b40b"
+  },
+  "audit_historical": {
+    "schema": "sms_blastem_audit_v1",
+    "ok": true,
+    "errors": [],
+    "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+  },
+  "audit_current_tool": {
+    "schema": "sms_blastem_audit_v1",
+    "ok": false,
+    "errors": [
+      "bundle generated with another diagnostics revision"
+    ],
+    "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+  },
+  "mismatch_marker_present": false,
+  "count_lines": [
+    "> SMSFORGE_HITS 0 2",
+    "> SMSFORGE_HITS 1 952",
+    "> SMSFORGE_HITS 2 952"
+  ]
+}

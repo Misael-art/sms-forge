@@ -1,0 +1,293 @@
+[
+  {
+    "case": "NTSCvalid",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": 0.1700000000000017,
+      "passed": true,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "NTSC50",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": 0,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "PAL50",
+    "actual": {
+      "region": "PAL",
+      "target_fps": 50.0,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": 0,
+      "passed": true,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "partial",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "single",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 1,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "bool",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "nan",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "inf",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "invalidregion",
+    "actual": {
+      "region": "bad",
+      "target_fps": null,
+      "tolerance_fps": 1.0,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "unhashableregion",
+    "exception": "TypeError",
+    "error": "cannot use 'list' as a dict key (unhashable type: 'list')",
+    "expected": "true only valid regionalsamples; invalid reject"
+  },
+  {
+    "case": "tolerance_True",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": true,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "false"
+  },
+  {
+    "case": "tolerance_-1",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": -1,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "false"
+  },
+  {
+    "case": "tolerance_2",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 2,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "false"
+  },
+  {
+    "case": "tolerance_nan",
+    "actual": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": NaN,
+      "max_spread_fps": 1.0,
+      "sample_count": 2,
+      "spread_fps": null,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "expected": "false"
+  },
+  {
+    "case": "strictsamples_[60, None]",
+    "actual": [
+      false,
+      null
+    ],
+    "expected": "false except validtwo"
+  },
+  {
+    "case": "strictsamples_[60]",
+    "actual": [
+      false,
+      null
+    ],
+    "expected": "false except validtwo"
+  },
+  {
+    "case": "strictsamples_[True, 60]",
+    "actual": [
+      false,
+      null
+    ],
+    "expected": "false except validtwo"
+  },
+  {
+    "case": "strictsamples_[nan, 60]",
+    "actual": [
+      false,
+      null
+    ],
+    "expected": "false except validtwo"
+  },
+  {
+    "case": "strictsamples_[59.6, 59.77]",
+    "actual": [
+      true,
+      0.17
+    ],
+    "expected": "false except validtwo"
+  },
+  {
+    "case": "valid_ceiling",
+    "actual": [],
+    "expected": "validnonemptyaccept; othersreject"
+  },
+  {
+    "case": "emptyowner",
+    "actual": [
+      "claim 'aaa' sem teto aprovado em doc/result.md:1"
+    ],
+    "expected": "validnonemptyaccept; othersreject"
+  },
+  {
+    "case": "emptydate",
+    "actual": [
+      "claim 'aaa' sem teto aprovado em doc/result.md:1"
+    ],
+    "expected": "validnonemptyaccept; othersreject"
+  },
+  {
+    "case": "null_date",
+    "actual": [
+      "claim 'aaa' sem teto aprovado em doc/result.md:1"
+    ],
+    "expected": "validnonemptyaccept; othersreject"
+  },
+  {
+    "case": "empty_scope",
+    "actual": [
+      "claim 'aaa' sem teto aprovado em doc/result.md:1"
+    ],
+    "expected": "validnonemptyaccept; othersreject"
+  },
+  {
+    "case": "empty_ceiling",
+    "actual": [
+      "claim 'aaa' sem teto aprovado em doc/result.md:1"
+    ],
+    "expected": "validnonemptyaccept; othersreject"
+  },
+  {
+    "case": "ceiling_texto",
+    "actual": [],
+    "expected": "validnonemptyaccept; othersreject"
+  },
+  {
+    "case": "missing_ceiling",
+    "actual": [
+      "claim 'aaa' sem teto aprovado em doc/result.md:1"
+    ],
+    "expected": "validnonemptyaccept; othersreject"
+  },
+  {
+    "case": "invalidUTF8_approval",
+    "exception": "UnicodeDecodeError",
+    "error": "'utf-8' codec can't decode byte 0xff in position 0: invalid start byte",
+    "expected": "structuredfailnoclash"
+  },
+  {
+    "case": "broad_claim_beyond_scope",
+    "actual": [],
+    "expected": "knownscopeconsistencylimitation,gateonlytokenpresence"
+  }
+]

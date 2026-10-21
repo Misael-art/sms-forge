@@ -1,0 +1,24 @@
+{
+  "schema": "sms_blastem_memory_labels_v1",
+  "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+  "ranges": [
+    {
+      "name": "SMI1 keys word",
+      "space": "ram",
+      "address": 50951,
+      "length": 2
+    },
+    {
+      "name": "SMRT input snapshot",
+      "space": "ram",
+      "address": 51192,
+      "length": 2
+    },
+    {
+      "name": "SMI1 P1-right held counter",
+      "space": "ram",
+      "address": 50960,
+      "length": 2
+    }
+  ]
+}

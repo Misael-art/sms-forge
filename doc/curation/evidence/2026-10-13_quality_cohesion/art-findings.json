@@ -1,0 +1,558 @@
+{
+  "schema": "sms_art_curation_findings_readonly_v1",
+  "date": "2026-10-13",
+  "created_utc": "2026-10-13T22:33:20.607510+00:00",
+  "scope": "read-only textual/code/record inspection and hash checks, no art review, no repo mutations, no emulation/test execution",
+  "five_candidates": [
+    "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-11_dr_social_sprite_material_role_cleanup.json",
+    "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v07_artistic_rejection.json",
+    "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_1_cluster_consolidation.json",
+    "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_2_cluster_consolidation.json",
+    "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_imagegen_trial_rejection.json"
+  ],
+  "findings": [
+    {
+      "id": "A01",
+      "classification": "extend_L124_no_duplicate_id",
+      "title": "Autorização de edição por revisão substitui proibição genérica",
+      "evidence": "Feedback v07 proibiu scripts; emenda v08 autorizou máscaras intramaterial; v08.2 autorizou cruzar fronteiras de material/contorno preservando alpha. L124 follow_up ainda afirma scripts_may_measure_or_highlight_but_may_not_write_art_pixels=true.",
+      "action": "L124/art-review/sms-pixel-translate: default diagnosticar sem mutação; edição só com contrato vigente e autorização explícita de operador, máscara, alvos, fronteiras, invariantes, empates, limite de iteração, delta; registrar emenda supersedendo restrição específica. Não canonizar ImageGen proibido para toda criação autoral."
+    },
+    {
+      "id": "A02",
+      "classification": "extend_L124",
+      "title": "Máscara exportada não equivale a semântica validada",
+      "evidence": "v08.1 report cabelo máscara61/61 zero não cinza; houve recuperação de1014 pixels da franja vermelha. Máscaras geradas heuristicamente usam anchors/halo65%, não anotação humana autenticada.",
+      "action": "Revisar mask overlay e cobertura das fronteiras no fonte antes de aceitar zero vazamentos; separar mask_origin=heuristic/manual, revisão, SHA e delta de ownership. Zero dentro máscara cobre somente região classificada."
+    },
+    {
+      "id": "A03",
+      "classification": "new_measurable_detail_under_L124",
+      "title": "Bloco sólido2×2 é predicado distinto de área/bbox",
+      "evidence": "v08.1 usa area>=4 e bbox>=2x2, resta102/139/553 componentes; v08.2 small_cluster_components testa quatro vizinhos do quadrado com AND.",
+      "action": "Gate diagnóstico genérico deve declarar connectivity, criterion=contains_solid_square e tamanho por material; negativos L/diagonal/linha.2×2 é diretriz deste asset, não mínimo universal. Exceções nomeadas haste1px/olhos/óculos precisam máscara/papel/autorização."
+    },
+    {
+      "id": "A04",
+      "classification": "new_algorithm_detail_under_L124",
+      "title": "Convergência e limite não provam qualidade artística",
+      "evidence": "Candidato cita oscillação em snapshot; código v08.2 processa um componente,recalcula,limita10000; report registraiterations per61frames,sem limite atingido.",
+      "action": "Documentar one-at-time/recompute/cap/no-neighbor/tie policy; diagnóstico deve confirmar fixed-point e unresolved sem pintar. Algoritmo estabilizado não prova iluminação/anatomia; não reutilizar thresholds heurísticos como receita universal."
+    },
+    {
+      "id": "A05",
+      "classification": "extend_L124",
+      "title": "Alpha preservado não significa contorno/material preservados",
+      "evidence": "Reportv08.2 alpha0delta/original_outline_modified0, mas863 novos pixels índicecontorno e23236 RGBalterados com transferências entre materiais.",
+      "action": "Delta separa alpha, contorno original removido/recolorido, contorno acrescentado, ownershiptransfer, rampachanges e coordenadas porframe. Não reportar geometry_same como garantia da silhueta interna ou semântica."
+    },
+    {
+      "id": "A06",
+      "classification": "reinforce_L126_no_new_id",
+      "title": "Geração não é edição pixel exata",
+      "evidence": "Tentativa ImageGenv08 manteve fontehash masoutput1182×1330,287407RGBA,opaco,6/13cores; recortar/resample fabricaria continuidade.",
+      "action": "Rota artwork-to-rom-lifecycle escolhe export/edit pixel-exato quando invariantes são canvas/grid/alpha/paleta; outputgenerativo falho preservado attempt-only antes de preflight. Nunca inferir pose61/61 do prompt ou restaurar grid via resize como prova."
+    },
+    {
+      "id": "A07",
+      "classification": "operational_reconciliation_L125_L127",
+      "title": "Aprovação v08.2 existente não reconciliada",
+      "evidence": "Decisão sms_artifact_decision_v1 author owner aprova fonte exata e conversão diagnóstica; cópiares/approved_art idênticaSHA4e557095...; candidato/contrato dizemapproved. Memorytop e diretiva v08.2 dizempending/semres; registryhead animation_source/main null/null e não contémv08.2; método candidato ainda integrated_into_res=false.",
+      "action": "Coordenador reconciliar registros sob escopo animation_source, nunca runtime_resource; atualizar memory/diretiva/registry e marcar timestamps históricos. Não fabricar review independente ou promover jogo. Auditorread-only não realiza essa promoção."
+    },
+    {
+      "id": "A08",
+      "classification": "evidence_freshness_L125_L127",
+      "title": "Relatórios e máscara com paths/doutrina stale",
+      "evidence": "Reportv08.1 outputs aponta basic_sequences_61f_candidate_v08_1_masks/ mas arquivos em _masks_candidate/. Maskmanifestv08.2 cluster_cleanup ainda diz inside their own mask embora método ativo cross-boundary. Fluxoartestado2026-10-10 seguev5/fonteantigacomoatual.",
+      "action": "Apósrelocação/emenda, mapareversível e paths/heads/métodovigente precisam conciliar; manter relatóriosproducer históricos sem reescrever metadados como se recémmedidos; manifestnovo com hashesmask/report/log e método ativo."
+    },
+    {
+      "id": "A09",
+      "classification": "promotion_boundary_L127_L123",
+      "title": "Aprovação artística registrada, evidência independente/runtime distintas",
+      "evidence": "Ownerapprovrecord fontearte/diagnosticROMscope sem runtime. Reportproducer zeroquantitativo, candidato diz independent_per_cell_audit=pass sem artifactreferenciado; nenhum.sprite independent report encontrado no escopo auditado; diagnósticov08.2 pasta project sem.sms.",
+      "action": "Registrar aprovaçãofonteexistente sem inventar checklistindependente; qualificar zeros comoproducer-measured até gateindependente auditar fontes/masksSHA. Buildado/testado/FPS/audio/AAA pendentes. Aprovação na res/approved_art não demonstra integração runtime."
+    },
+    {
+      "id": "A10",
+      "classification": "evidence_integrity_L125",
+      "title": "Hash de v6 truncado no candidato local",
+      "evidence": "2026-10-11_dr_social_sprite_material_role_cleanup.json v6_evidence.sha256 tem 63 caracteres: 8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455. O arquivo presente tem SHA256 completo 8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455f.",
+      "action": "Corrigir ou registrar errata do hash da evidência antes da promoção da lição; divergência é truncamento de registro, não prova de pixels alterados. Guardar candidato original como fonte histórica."
+    }
+  ],
+  "proposed_application": [
+    {
+      "file": "tools/sms_wrapper/.agent/workflows/art-review.md",
+      "apply": "Adicionar pré-repair: contratoautorização por revisão, maskoverlayreview, predicadocluster/exceções, deltasownership, tie/cap/fixedpoint, depois61frame1x/NN4x."
+    },
+    {
+      "file": "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md",
+      "apply": "Separar conversão técnica de repintura autoral; nearestRGB/legalpaleta não semântica; máscaras heurísticas candidatas não autoridade; edit respeita emenda específica vigente."
+    },
+    {
+      "file": "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
+      "apply": "zero clusters/zero leaks são eixos quantitativos; revisar planos,luz,identidade,contorno e pixels mínimos justificados; evitar universal2x2."
+    },
+    {
+      "file": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
+      "apply": "Definir aprovação da folha artística vs presença emapproved_art vs recurso runtime; atualizaçãoatômicade head/decisão/contrato/memory para fonte nova; sem emulaçãohistóricaherdada."
+    },
+    {
+      "file": "tools/sms_wrapper/.agent/workflows/artifact-organization.md",
+      "apply": "Selo das máscaras/log/report/source/candidate e emendas; graphpapéis, cleanupattempts e pathsrelocação conciliar antes de próxima execução."
+    }
+  ],
+  "hash_reference_checks": [
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-11_dr_social_sprite_material_role_cleanup.json",
+      "field": ".v6_evidence",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v6_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v6.png",
+      "expected_sha256": "8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455",
+      "exists": true,
+      "actual_sha256": "8445a0fd47700a38a1fb1ed25ff67c8b22aa2086551d6fe7a54155321a41455f",
+      "match": false
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-11_dr_social_sprite_material_role_cleanup.json",
+      "field": ".v7_evidence",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+      "expected_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "exists": true,
+      "actual_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "match": true
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v07_artistic_rejection.json",
+      "field": ".review_target",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+      "expected_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "exists": true,
+      "actual_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "match": true
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v07_artistic_rejection.json",
+      "field": ".review_target.identity_reference",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+      "expected_sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "exists": true,
+      "actual_sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "match": true
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_1_cluster_consolidation.json",
+      "field": ".source",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+      "expected_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "exists": true,
+      "actual_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "match": true
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_1_cluster_consolidation.json",
+      "field": ".candidate",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_1_candidate.png",
+      "expected_sha256": "c533542455566ab237c41b6395dd1fccf6bf95d7d3abfe44ce95ad10ddfc096a",
+      "exists": true,
+      "actual_sha256": "c533542455566ab237c41b6395dd1fccf6bf95d7d3abfe44ce95ad10ddfc096a",
+      "match": true
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_2_cluster_consolidation.json",
+      "field": ".source",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+      "expected_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "exists": true,
+      "actual_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "match": true
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_2_cluster_consolidation.json",
+      "field": ".candidate",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_2_candidate.png",
+      "expected_sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+      "exists": true,
+      "actual_sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+      "match": true
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_imagegen_trial_rejection.json",
+      "field": ".source",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+      "expected_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "exists": true,
+      "actual_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+      "match": true
+    },
+    {
+      "candidate_record": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_imagegen_trial_rejection.json",
+      "field": ".trial_output",
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_imagegen_rejected/dr_social_v08_imagegen_trial_not_compliant.png",
+      "expected_sha256": "68e65ee2a269ada623d1a9b1971fab0e54ecee481cf473e313910e3b6e08748e",
+      "exists": true,
+      "actual_sha256": "68e65ee2a269ada623d1a9b1971fab0e54ecee481cf473e313910e3b6e08748e",
+      "match": true
+    }
+  ],
+  "operational_facts": {
+    "candidate_sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+    "approved_copy_sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+    "copy_bytes_equal": true,
+    "model_sheet_v4_sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "diagnostic_v08_2_rom_files": [],
+    "v08_2_registry_entries": [],
+    "independent_sprite_report_discovered": false,
+    "independent_search_scope": [
+      "v08_2 source directory files",
+      "project doc top-level names",
+      "project out/logs top-level names"
+    ],
+    "visual_quality_inspection_performed": false
+  },
+  "source_documents_and_evidence": [
+    {
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-11_dr_social_sprite_material_role_cleanup.json",
+      "sha256": "5e42f93b45d3344ad0cc5bed5dc7da7dd873c82c4d625cbab838b24149e75fa6",
+      "bytes": 3395
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v07_artistic_rejection.json",
+      "sha256": "4b924e48dc1890294a4a014afc39b271efcc87cd9710ae4ed4e702809b980589",
+      "bytes": 4753
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_1_cluster_consolidation.json",
+      "sha256": "d106b06b1e46602f1f0710b1c97596e0e8aad364d5fa320cb1032ee43523a879",
+      "bytes": 4213
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_2_cluster_consolidation.json",
+      "sha256": "4d17165274619e93f1564a031dba476976da18a47c7181b9e7c60a73057b8070",
+      "bytes": 5107
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-12_dr_social_v08_imagegen_trial_rejection.json",
+      "sha256": "b82057c8a766defa89e4a0045fd5531268baff883061183378ee99ef15cdcb30",
+      "bytes": 3135
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/10-memory-bank.md",
+      "sha256": "de6f67a047a5164a0d211c3a3c562f724d3bac123d6ebadc7d507ac1c6712f5d",
+      "bytes": 80385
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/fluxo-criacao-curadoria-personagens.md",
+      "sha256": "321aec3433844792f2e3bf0bcdf85056504e240865567dd183929038cc3c453b",
+      "bytes": 11759
+    },
+    {
+      "path": "doc/artifact_registries/master_of_fighters.json",
+      "sha256": "22c555d7592e2eeef2f05f9b96c052f46b8fa4e6f3694713198197355b8b81c4",
+      "bytes": 204131
+    },
+    {
+      "path": "doc/curation/2026-10-10_l124_fluxo_sombra_material_sprite.json",
+      "sha256": "c4cb69a120a4124e3ca484c01c8244f88ba4deca48c2363f71d3481aa696e38a",
+      "bytes": 21952
+    },
+    {
+      "path": "doc/curation/2026-10-11_l127_model_sheet_revision_promotion.json",
+      "sha256": "5d4db13b568dfdbcad6c89682bbda5fdc32b6d6fa97f4a50a2aa12582b93b8e2",
+      "bytes": 4667
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/decisions/dr-social-animation-source-v08_2_owner_approval.json",
+      "sha256": "b1caf3e59242c3ad7b36a094c2c92b3f4e43a4d6d52c525422c9a334d1baf74e",
+      "bytes": 821
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_sprite_rebuild_directive_v08.md",
+      "sha256": "1e9050d3563f32383fccf0458fbfbf8b2c41c516faf4e55fa714b58ac613ea45",
+      "bytes": 7961
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_sprite_rebuild_directive_v08_1.md",
+      "sha256": "07423a982cc5b942bc5842d77182efa65bc605cf0d89847cf1b7bbdc50ba7703",
+      "bytes": 3362
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_sprite_rebuild_directive_v08_2.md",
+      "sha256": "83244506360d26ef7aab7bc1c2684bfb07667ed9289c6af970a33010c9f1f572",
+      "bytes": 3487
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_sprite_mask_contract_v08_2.json",
+      "sha256": "737aab776475d00cf549f57fb9b3d2510c2c4e23c0610d47a71592b44304779c",
+      "bytes": 3720
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/tools/build_dr_social_61f_v08_2_masks.py",
+      "sha256": "361e4dd0eaed6dc137c5f3f46360848c35f66e183d3413eee6c900ec90e46cdc",
+      "bytes": 57805
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/art-review.md",
+      "sha256": "05e60981e29f77352a94bcd0d036a0b70a14b434114cfaf33b88285d75f18c7e",
+      "bytes": 15197
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
+      "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+      "bytes": 8525
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/original-artwork.md",
+      "sha256": "e3c3af1b107f6b3ff2a6095d0e9802dcca90cf3d0bd62e928a335615cf4611d2",
+      "bytes": 11163
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_1_candidate.png",
+      "sha256": "c533542455566ab237c41b6395dd1fccf6bf95d7d3abfe44ce95ad10ddfc096a",
+      "bytes": 43268
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/dr_social_v08_1_keypose_samples_1x_4x.png",
+      "sha256": "bad03367d40ae3174901a3a10b9e9c07e57d55b137d25186183d2ed725d579f4",
+      "bytes": 20287
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/dr_social_v08_1_mask_compliance_report.json",
+      "sha256": "302a018239d631455efa6f27b92564aac14d2a1b611801e0169f7a0a06ddd0f3",
+      "bytes": 252758
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/dr_social_v08_1_mask_compliance_summary.md",
+      "sha256": "60dd13eb9174d59b1efb7b2fdbaa38fbf020db1d41b4f9cbb8be1c48c2098cd9",
+      "bytes": 1629
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/mask_manifest.json",
+      "sha256": "5fc9604791c629a1499e13950056561783bd342dac7e51f40724f121774aaaf4",
+      "bytes": 2427
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/pixel_change_log.csv",
+      "sha256": "80dd07b51bc9139eec9a00135782f9a2aa30ea03514aab674b492e92b3360adc",
+      "bytes": 257351
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/unresolved_mask_pixels.csv",
+      "sha256": "dff01bcb120fdb94d01c671004603b4c9b6af6774d85e5ef3c8d948e9541cdc8",
+      "bytes": 36
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_boot_trim.png",
+      "sha256": "806ffecf0e2a72423fbc8910de14c9e4899ad22a1b2cf46526fb777b96e64c30",
+      "bytes": 566
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_burgundy_allowed.png",
+      "sha256": "64a82fd722317055ada9f4208e6882f984bfd04e6195220515f6b23fc4f8b85d",
+      "bytes": 1104
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_cane_shaft.png",
+      "sha256": "1d671bbc9413e0c1767d36ad2dcdf9d635a183ee3a9b08198b58384912077d58",
+      "bytes": 2101
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_coat.png",
+      "sha256": "eef7db382c009696e4ddfbba0d980099ae0c4eec70a43001596c861950fdeb48",
+      "bytes": 18785
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_collar.png",
+      "sha256": "6d5de53332454c2ee718bbb96de5eba7c0743b2cd3b8795fabca794f498c7b6c",
+      "bytes": 645
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_cravat.png",
+      "sha256": "720fc354d927a457e94dccb9e9cdab89be29294b0890e9f39a0ae572f89520b2",
+      "bytes": 1070
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_glove.png",
+      "sha256": "705339e0775f2f5d33d5849b345b27e6f2ba63d3178335dc4a4fc93a3f09adbb",
+      "bytes": 2373
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_hair.png",
+      "sha256": "475281d800fb0ffd1886c6a125f1d2ede1e5e962b1ff545a6996127e5d7967f8",
+      "bytes": 7376
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_leather.png",
+      "sha256": "0eb6c42072b4285a1f1a5017d276f7a1b440d46507bcef4216fa56c50f20c994",
+      "bytes": 12322
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_outline.png",
+      "sha256": "a0086ae87ff40e4172310da3fe2dc17e34e23f563385023c794d8048cd1bdf15",
+      "bytes": 20903
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_ownership_overlay.png",
+      "sha256": "b04c22f30dbea03b22d7219f1f4bbf5a38b08bf10e160664c6276cb557e6a0fe",
+      "bytes": 68735
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_skin.png",
+      "sha256": "a423f1d0f0d056029e1e358c907eda046a3ac8f891a46b718c5f0e7c57f21014",
+      "bytes": 6660
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_transparent.png",
+      "sha256": "57e35a11ce8e3675ca2e9f4e5572e2ea4923b816f2351a95395734dae2a78595",
+      "bytes": 15941
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_white_accessory.png",
+      "sha256": "468ad6079893d33c67c9accd678d096504d5d1a0fb7eb922a4473deb8135da17",
+      "bytes": 3918
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_yellow_allowed.png",
+      "sha256": "43e1c2071e114b7b45a71396a252cdb97e6460ecde589e9bfd790f3e185adbe3",
+      "bytes": 1121
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_yellow_glasses.png",
+      "sha256": "013e3ce7608cc36977a64538c8ead070a2b8ebb4ff7c80533d6d130bb4fea241",
+      "bytes": 736
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/mask_yellow_pending.png",
+      "sha256": "1687c1a9ad1a0440f16893649af38f1a3bf9df1ba307ac121fefb09927dd1976",
+      "bytes": 527
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_2_candidate.png",
+      "sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+      "bytes": 37618
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/dr_social_v08_2_keypose_samples_1x_4x.png",
+      "sha256": "60b2d83bfd1ecfbefc94a9d808ae03494dc6f808887e271b397a7c3ba693cb10",
+      "bytes": 18850
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/dr_social_v08_2_mask_compliance_report.json",
+      "sha256": "ec92db223f2ec0bbb50c23e112909a201260626742aacfd184767dd691d342c1",
+      "bytes": 341209
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/dr_social_v08_2_mask_compliance_summary.md",
+      "sha256": "ea6c19808c7ce334f83984198e0f273940f4190e2daf930a937d2e6a7d7a8372",
+      "bytes": 1780
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/mask_manifest.json",
+      "sha256": "1f40a44854dd30fdf6834148bb97fe05e8432daf7598a54864e078f15bbef66b",
+      "bytes": 2427
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/pixel_change_log.csv",
+      "sha256": "826c84914424dd1a1226fdc9f0561237091654276edd8304e9808424b0455745",
+      "bytes": 756982
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/unresolved_mask_pixels.csv",
+      "sha256": "dff01bcb120fdb94d01c671004603b4c9b6af6774d85e5ef3c8d948e9541cdc8",
+      "bytes": 36
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_boot_trim.png",
+      "sha256": "806ffecf0e2a72423fbc8910de14c9e4899ad22a1b2cf46526fb777b96e64c30",
+      "bytes": 566
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_burgundy_allowed.png",
+      "sha256": "64a82fd722317055ada9f4208e6882f984bfd04e6195220515f6b23fc4f8b85d",
+      "bytes": 1104
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_cane_shaft.png",
+      "sha256": "1d671bbc9413e0c1767d36ad2dcdf9d635a183ee3a9b08198b58384912077d58",
+      "bytes": 2101
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_coat.png",
+      "sha256": "6f59862f5f944184829a1d6f5b0ecfebcf89b4dfdfb4b969632c3e715c653f90",
+      "bytes": 18131
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_collar.png",
+      "sha256": "6d5de53332454c2ee718bbb96de5eba7c0743b2cd3b8795fabca794f498c7b6c",
+      "bytes": 645
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_cravat.png",
+      "sha256": "720fc354d927a457e94dccb9e9cdab89be29294b0890e9f39a0ae572f89520b2",
+      "bytes": 1070
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_glove.png",
+      "sha256": "705339e0775f2f5d33d5849b345b27e6f2ba63d3178335dc4a4fc93a3f09adbb",
+      "bytes": 2373
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_hair.png",
+      "sha256": "e68057a48f574c43bb399fc361e395f17eed5f269771809b15d6ed61f1fe10e4",
+      "bytes": 6985
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_leather.png",
+      "sha256": "b713ce9921d116a16d9398b6161fff89e8a460fa31f91d0d72dbfde183bf625a",
+      "bytes": 12117
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_outline.png",
+      "sha256": "29a6141ced5d27a0ab148504907c2dd38b61675a480355d3a616cb9606d79184",
+      "bytes": 21418
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_ownership_overlay.png",
+      "sha256": "2100772282fe9368d82a6afbc242f58df82f1de1bb47035ef6035b9a7ea2921c",
+      "bytes": 65134
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_skin.png",
+      "sha256": "94798c53256717b7db20f73e5cd3f732e8cad04e6d63cb5a64804706323217b8",
+      "bytes": 4309
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_transparent.png",
+      "sha256": "57e35a11ce8e3675ca2e9f4e5572e2ea4923b816f2351a95395734dae2a78595",
+      "bytes": 15941
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_white_accessory.png",
+      "sha256": "468ad6079893d33c67c9accd678d096504d5d1a0fb7eb922a4473deb8135da17",
+      "bytes": 3918
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_yellow_allowed.png",
+      "sha256": "43e1c2071e114b7b45a71396a252cdb97e6460ecde589e9bfd790f3e185adbe3",
+      "bytes": 1121
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_yellow_glasses.png",
+      "sha256": "013e3ce7608cc36977a64538c8ead070a2b8ebb4ff7c80533d6d130bb4fea241",
+      "bytes": 736
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/masks/mask_yellow_pending.png",
+      "sha256": "1687c1a9ad1a0440f16893649af38f1a3bf9df1ba307ac121fefb09927dd1976",
+      "bytes": 527
+    }
+  ],
+  "limits": [
+    "Primary source PNG hashes verified; reported numerical masks/cluster/pixel metrics not recomputed in this audit.",
+    "Independent pass string without referenced artifact is unverified, not proof of native independent worker.",
+    "Owner decision authenticity recorded by repository; this audit cannot authenticate human approval.",
+    "Curation advice does not promote art or reserve canonical lesson IDs.",
+    "Snapshot is per-file hash-bound; concurrent filesystem changes remain possible."
+  ]
+}

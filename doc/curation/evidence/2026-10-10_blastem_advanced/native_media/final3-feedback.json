@@ -1,0 +1,374 @@
+{
+  "schema": "sms_native_media_comparison_v1",
+  "native_agent_id": "/root/native_audio_qa",
+  "status": "assigned_diagnostic_checks_passed_current_final3",
+  "context_mode": "diagnostic",
+  "tools": {
+    "wrapper": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+    "diagnostics": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9",
+    "auditor": "eb1be91be884d837547d67ba8b423157901df0f090d2905a2b553b16f24bcee8"
+  },
+  "sessions": {
+    "silent": {
+      "root": "/tmp/smsforge-blastem-native-media-plan/silent_final3_runs/blastem-sms-fc49b67db714455199d3b6b7a371c994",
+      "session_id": "blastem-sms-fc49b67db714455199d3b6b7a371c994",
+      "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "wrapper_sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+      "diagnostics_sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9",
+      "native_media": {
+        "apng": {
+          "frames": 120,
+          "size": [
+            256,
+            192
+          ],
+          "different_from_first": 119,
+          "container_duration_ms": 2000.0000000000002,
+          "clock": "nominal_60Hz_not_realtime_FPS",
+          "raw_preserved": true,
+          "derived_acTL_crc_repairs": 1
+        },
+        "wave": {
+          "sample_rate": 48000,
+          "channels": 2,
+          "sample_frames": 96256,
+          "duration_seconds": 2.005333333333333,
+          "peak": 0,
+          "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+        },
+        "vgm": {
+          "bytes": 88,
+          "psg_writes": 11,
+          "wait_samples_44100": 1,
+          "scope": "PSG register log_not_audible_mix_or_trailing_silence_duration"
+        }
+      },
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": true,
+        "errors": [],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      },
+      "cleanup": {
+        "sandbox_exited": true,
+        "xvfb_exited": true
+      },
+      "sandbox_alive": false,
+      "xvfb_alive": false,
+      "raw_CRC_mismatches": [
+        {
+          "tag": "acTL",
+          "offset": 33,
+          "stored_crc": 4266324102,
+          "expected_crc": 937974664,
+          "initial_zero_count_crc": 4266324102
+        }
+      ],
+      "raw_derived_changed_byte_offsets": [
+        49,
+        50,
+        51,
+        52
+      ],
+      "frames_to_inspect": [
+        "/tmp/smsforge-blastem-native-media-plan/silent_final3_frame_000.png",
+        "/tmp/smsforge-blastem-native-media-plan/silent_final3_frame_119.png"
+      ],
+      "PCM_independent": {
+        "sample_frames_declared": 96256,
+        "sample_frames_actual": 96256,
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width": 2,
+        "duration_seconds": 2.005333333333333,
+        "peak": 0,
+        "nonzero_samples": 0
+      }
+    },
+    "sound": {
+      "root": "/tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a",
+      "session_id": "blastem-sms-44577cac8cbc4a189068a1bdf9a9634a",
+      "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+      "wrapper_sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+      "diagnostics_sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9",
+      "native_media": {
+        "apng": {
+          "frames": 240,
+          "size": [
+            256,
+            192
+          ],
+          "different_from_first": 239,
+          "container_duration_ms": 4000.0000000000005,
+          "clock": "nominal_60Hz_not_realtime_FPS",
+          "raw_preserved": true,
+          "derived_acTL_crc_repairs": 1
+        },
+        "wave": {
+          "sample_rate": 48000,
+          "channels": 2,
+          "sample_frames": 192512,
+          "duration_seconds": 4.010666666666666,
+          "peak": 4026,
+          "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+        },
+        "vgm": {
+          "bytes": 396,
+          "psg_writes": 93,
+          "wait_samples_44100": 173695,
+          "scope": "PSG register log_not_audible_mix_or_trailing_silence_duration"
+        }
+      },
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": true,
+        "errors": [],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      },
+      "cleanup": {
+        "sandbox_exited": true,
+        "xvfb_exited": true
+      },
+      "sandbox_alive": false,
+      "xvfb_alive": false,
+      "raw_CRC_mismatches": [
+        {
+          "tag": "acTL",
+          "offset": 33,
+          "stored_crc": 4266324102,
+          "expected_crc": 3061752027,
+          "initial_zero_count_crc": 4266324102
+        }
+      ],
+      "raw_derived_changed_byte_offsets": [
+        49,
+        50,
+        51,
+        52
+      ],
+      "frames_to_inspect": [
+        "/tmp/smsforge-blastem-native-media-plan/sound_final3_frame_000.png",
+        "/tmp/smsforge-blastem-native-media-plan/sound_final3_frame_239.png"
+      ],
+      "PCM_independent": {
+        "sample_frames_declared": 192512,
+        "sample_frames_actual": 192512,
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width": 2,
+        "duration_seconds": 4.010666666666666,
+        "peak": 4026,
+        "nonzero_samples": 318058
+      }
+    },
+    "instrument": {
+      "root": "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c",
+      "session_id": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+      "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "wrapper_sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84",
+      "diagnostics_sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9",
+      "native_media": {},
+      "audit": {
+        "schema": "sms_blastem_audit_v1",
+        "ok": true,
+        "errors": [],
+        "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware"
+      },
+      "cleanup": {
+        "sandbox_exited": true,
+        "xvfb_exited": true
+      },
+      "sandbox_alive": false,
+      "xvfb_alive": false,
+      "snapshot_C7F8": [
+        0,
+        8,
+        0
+      ],
+      "CPU_events": [
+        {
+          "index": 0,
+          "vdp_frame": 121,
+          "observed_pc": 923,
+          "value": 8,
+          "port": 0,
+          "vdp_internal_vcounter": 195,
+          "vdp_internal_hslot": 37,
+          "vdp_internal_address": 15398,
+          "vdp_internal_cd": 1
+        },
+        {
+          "index": 0,
+          "vdp_frame": 127,
+          "observed_pc": 923,
+          "value": 0,
+          "port": 0,
+          "vdp_internal_vcounter": 195,
+          "vdp_internal_hslot": 37,
+          "vdp_internal_address": 15398,
+          "vdp_internal_cd": 1
+        }
+      ],
+      "event_count_by_index": {
+        "1": 280,
+        "2": 280,
+        "0": 2
+      },
+      "metadata_event_counts": [
+        2,
+        280,
+        280
+      ],
+      "native_programmed_hit_counts": [
+        [
+          "0",
+          "2"
+        ],
+        [
+          "1",
+          "280"
+        ],
+        [
+          "2",
+          "280"
+        ]
+      ],
+      "opcode_mismatch_records": [],
+      "live_opcode_guards_present": [
+        true,
+        true
+      ],
+      "boundaries": [
+        {
+          "index": 0,
+          "vdp_frame": 120
+        },
+        {
+          "index": 1,
+          "vdp_frame": 127
+        },
+        {
+          "index": 2,
+          "vdp_frame": 130
+        }
+      ],
+      "native_screenshot": "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/screenshots/frame_20261010_094815.png"
+    }
+  },
+  "coverage": [
+    {
+      "id": "current_source_and_ROM_audits",
+      "status": "passed",
+      "observation": "Three new CLI processes; three current-ROM/current-tool audits passed."
+    },
+    {
+      "id": "APNG_preservation_and_CRC",
+      "status": "passed",
+      "observation": "Raw preserved. Independently checked acTL mismatch matches zero-count CRC; derived changes bytes 49..52 only. APNG 120/240 native frames; first/last inspected."
+    },
+    {
+      "id": "WAVE_silent_sound_contrast",
+      "status": "passed",
+      "observation": "Independent PCM frames equal declared; silent peak zero, sound peak nonzero; durations recorded per native async mixer."
+    },
+    {
+      "id": "VGM_event_structure",
+      "status": "passed",
+      "observation": "Native PSG writes/wait sample counts recorded; register log only, silence tail duration not represented."
+    },
+    {
+      "id": "CPU_watch_and_RAM_consequence",
+      "status": "passed",
+      "observation": "C7F8 snapshots 0 -> 8 -> 0; two native CPU events value 8 then0. ROM observation agrees with private P1 right press/release."
+    },
+    {
+      "id": "VDP_native_IO_sites_and_guards",
+      "status": "passed",
+      "observation": "ed69 at PC11, d3be at PC25 frozen ROM bytes verified. Live byte guards in native commands, no mismatch events. Event counts 2/280/280 match programmed/native summary. observed_pc is debugger context, not asserted equal to site PC; traps do not prove committed bus writes."
+    },
+    {
+      "id": "cleanup",
+      "status": "passed",
+      "observation": "All owned processes exited, all cleanup records true."
+    },
+    {
+      "id": "audio_fidelity_FPS_gameplay_universalhardware",
+      "status": "not_tested",
+      "reason": "Outside diagnostic scope; SDL dummy host audio; stepped frames not throughput."
+    }
+  ],
+  "limits": [
+    "Historical feedback/artifacts preserved untouched",
+    "No negative-mutant tests by this worker in final3",
+    "No subjective listening or music correctness",
+    "No session_qa BlastEm supported claim",
+    "Native event PC/internal VDP counters are implementation diagnostics, not calibrated hardware timing",
+    "Do not infer exact ROM-loop completed frame counts from VDP break boundaries"
+  ],
+  "artifacts": [
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent-final3-audit.json",
+      "sha256": "f5e815b0fd36a9a847ae2309bee9813ec456207cef45477f1d4725e75f2c1636"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound-final3-audit.json",
+      "sha256": "f5e815b0fd36a9a847ae2309bee9813ec456207cef45477f1d4725e75f2c1636"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/instrument-final3-audit.json",
+      "sha256": "f5e815b0fd36a9a847ae2309bee9813ec456207cef45477f1d4725e75f2c1636"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_final3_runs/blastem-sms-fc49b67db714455199d3b6b7a371c994/session.json",
+      "sha256": "3b88b9a1c2a4fe5e7f49121ee58ae075018ded6256cd34f084c297e7d96749e6"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_final3_runs/blastem-sms-fc49b67db714455199d3b6b7a371c994/adapter_source.py",
+      "sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_final3_runs/blastem-sms-fc49b67db714455199d3b6b7a371c994/diagnostics_source.py",
+      "sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_final3_runs/blastem-sms-fc49b67db714455199d3b6b7a371c994/debugger.log",
+      "sha256": "0411f339db93f4ab5f3e05608f43c879e54beaf291ca2bd3e39fd3d893f63880"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a/session.json",
+      "sha256": "37864d07a81b8aa8c7861ec96899c550f7871d53826f9ee36f3858aa91a83240"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a/adapter_source.py",
+      "sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a/diagnostics_source.py",
+      "sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a/debugger.log",
+      "sha256": "5785a2187bccf8ea0f9fa4bba5c43fb2c730dad31c33bf484a0d73b5927524e2"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/session.json",
+      "sha256": "1c549ceb9cc20794249ce9d91500304701a4bc196290d2a43629cd4692f52268"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/adapter_source.py",
+      "sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/diagnostics_source.py",
+      "sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/instrument_final3_runs/blastem-sms-55468433cf974d1f9f5f425f94df517c/debugger.log",
+      "sha256": "1205636096a7547cf451339a4abd5424d1b063182e9ad1955b7061e515224b26"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/final2-feedback.json",
+      "sha256": "bc89f3fd7782203f0625b42924fcc578b7ca4c531eeb412670e386a78cad798e"
+    }
+  ]
+}

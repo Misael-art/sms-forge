@@ -1,0 +1,381 @@
+{
+ "schema": "openbor_sms_o3_lote_c_scope_decision_v1",
+ "generated_at": "2026-10-19",
+ "author": "Codex, worker Lote C/M8 OpenBOR SMS (coordenacao desta sessao)",
+ "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+ "rom_bytes": 131072,
+ "owner_decision": {
+  "date": "2026-10-19",
+  "question": "fechar o Lote C no baseline medido ou implementar os tres candidatos de transformacao de codigo",
+  "decision": "fechar no baseline medido",
+  "label": "dropped_by_owner",
+  "candidates_dropped": [
+   "tile_pair_reuse_resident_cache",
+   "per_transition_deltas_preload_invalidate",
+   "specialized_copy"
+  ],
+  "reopening_conditions": [
+   "exigencia de recuperacao de ataque menor que i93/i94 sob a mesma cena/carga/input (o retorno atual e uploader-bound, nao fisica)",
+   "necessidade de throughput de upload acima de 128 B/q (2 sub-commits) sem violar vovf=0",
+   "novo conteudo que aumente poses/celulas ao ponto de estourar o orcamento de upload medido"
+  ],
+  "note": "Nao houve comparacao dos tres candidatos; nenhum claim de ganho ou perda e feito. A decisao reduz escopo, nao promove otimizacao nao medida."
+ },
+ "baseline": {
+  "policy": "sched_update na fase CPU apos os dois stream_update; VBlank executa ordem/cap; jogador primeiro; preload promovida a up_want quando coincide com a pose corrente; dor do inimigo preempta; O3_UPLOAD_CONTEND_CAP=128; O3_COMMIT_MARGIN=22; O3_COMMIT_PROLOG=30",
+  "throughput": {
+   "bytes_per_frame": 128,
+   "sub_commits": 2,
+   "opening_target_not_capacity": "600 B/q era alvo de abertura, nao capacidade aprovada (scope open_items.upload_service_and_timing)"
+  },
+  "cap_matrix": {
+   "note": "Matriz de contencao comparada sob a mesma cena/input, trials frame-paced (um quadro VDP por sequencia); nao e medicao de throughput.",
+   "candidates": [
+    {
+     "rom_sha256": "b345043a6b8de449abc954c43a7d176db7b06a5bf62451392b9e7b190be530fa",
+     "trial_dir": "out/evidence/post_m6/candidate_b345/",
+     "summary": "base: 8 hits, intervalos 72 q, dor 108/36 q"
+    },
+    {
+     "rom_sha256": "bdd4e832fe4c11d364532cfe09212650682946eb723dee1b54c2312ed6127b79",
+     "trial_dir": "out/evidence/post_m6/candidate_service_cap64/",
+     "summary": "cap64: 6 hits, dor 56 q"
+    },
+    {
+     "rom_sha256": "ef1786c44d02f23943483f1b14e51512586f23482e0ff9402095fe1bcbf0586b",
+     "trial_dir": "out/evidence/post_m6/candidate_service_cap96/",
+     "summary": "cap96: 7 hits, intervalos 96 q"
+    },
+    {
+     "rom_sha256": "957122ae24f64d362767d10e903dd71cdf47d18800066c57d562123a573ddfa7",
+     "trial_dir": "out/evidence/post_m6/candidate_service_cap128/",
+     "summary": "cap128: 8 hits, intervalos 96/87x6, dor 11 q/hit, HP final 0 em i648"
+    }
+   ]
+  },
+  "attack_terminal": {
+   "a7f02b84_final": {
+    "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+    "session_id": "d4e552029e6f4e8d9a55324bf6b7750e",
+    "trace_path": "out/evidence/post_m6/candidate_audio_a7f02b84/trials/attack_tap/trace.json",
+    "trace_sha256": "4437dea9807f5c3bf66ce78b76fa378500c7a6e17761118ad42ed009040a7e02",
+    "attack_state": "player[10]=2",
+    "attack_frames": [
+     1,
+     93
+    ],
+    "return_to_control_index": 94,
+    "first_hit_index": 30,
+    "enemy_hp": [
+     50,
+     43
+    ],
+    "player_hp_min": 95,
+    "player_hp_final": 95,
+    "pose_runs_player12": [
+     {
+      "start": 0,
+      "end": 16,
+      "value": 0
+     },
+     {
+      "start": 17,
+      "end": 36,
+      "value": 1
+     },
+     {
+      "start": 37,
+      "end": 65,
+      "value": 2
+     },
+     {
+      "start": 66,
+      "end": 76,
+      "value": 3
+     },
+     {
+      "start": 77,
+      "end": 93,
+      "value": 4
+     },
+     {
+      "start": 94,
+      "end": 131,
+      "value": 0
+     }
+    ],
+    "vdp_frames": [
+     400,
+     531
+    ],
+    "cleanup_state": "closed"
+   },
+   "b345_historical": {
+    "rom_sha256": "b345043a6b8de449abc954c43a7d176db7b06a5bf62451392b9e7b190be530fa",
+    "session_id": "1f1f8506517f41cdbfd21deab21c4c9c",
+    "trace_path": "out/evidence/post_m6/candidate_b345/trials/attack_tap/trace.json",
+    "trace_sha256": "bbc402d7498fd66ab43a7660ff85426d42ec1f5fd5bdecc79b826c00fd43e921",
+    "attack_state": "player[10]=2",
+    "attack_frames": [
+     1,
+     72
+    ],
+    "return_to_control_index": 73,
+    "first_hit_index": 30,
+    "enemy_hp": [
+     50,
+     43
+    ],
+    "player_hp_min": 100,
+    "player_hp_final": 100,
+    "pose_runs_player12": [
+     {
+      "start": 0,
+      "end": 16,
+      "value": 0
+     },
+     {
+      "start": 17,
+      "end": 36,
+      "value": 1
+     },
+     {
+      "start": 37,
+      "end": 44,
+      "value": 2
+     },
+     {
+      "start": 45,
+      "end": 55,
+      "value": 3
+     },
+     {
+      "start": 56,
+      "end": 72,
+      "value": 4
+     },
+     {
+      "start": 73,
+      "end": 131,
+      "value": 0
+     }
+    ],
+    "vdp_frames": [
+     400,
+     531
+    ],
+    "cleanup_state": "closed"
+   },
+   "cap128_957122ae": {
+    "rom_sha256": "957122ae24f64d362767d10e903dd71cdf47d18800066c57d562123a573ddfa7",
+    "session_id": "0480333236f54d97824d344e3e013d8d",
+    "trace_path": "out/evidence/post_m6/candidate_service_cap128/trials/attack_tap/trace.json",
+    "trace_sha256": "14df862033b2a90fef99a8200a4f6ff9711baeb6b9600c6ad7e5efb3b53b0d89",
+    "attack_state": "player[10]=2",
+    "attack_frames": [
+     1,
+     93
+    ],
+    "return_to_control_index": 94,
+    "first_hit_index": 30,
+    "enemy_hp": [
+     50,
+     43
+    ],
+    "player_hp_min": 95,
+    "player_hp_final": 95,
+    "pose_runs_player12": [
+     {
+      "start": 0,
+      "end": 16,
+      "value": 0
+     },
+     {
+      "start": 17,
+      "end": 36,
+      "value": 1
+     },
+     {
+      "start": 37,
+      "end": 65,
+      "value": 2
+     },
+     {
+      "start": 66,
+      "end": 76,
+      "value": 3
+     },
+     {
+      "start": 77,
+      "end": 93,
+      "value": 4
+     },
+     {
+      "start": 94,
+      "end": 131,
+      "value": 0
+     }
+    ],
+    "vdp_frames": [
+     400,
+     531
+    ],
+    "cleanup_state": "closed"
+   }
+  },
+  "worst_frame": {
+   "path": "out/evidence/post_m6/candidate_audio_a7f02b84/mwf/worst_frame_audio_attack.json",
+   "sha256": "41d83bd45f61f97e5927950d0c9789e1a70af1b899dd1f3cf67ae7b4ef76041b",
+   "session_id": "ae60dae3c24f47f6b55e4c5834ca8b13",
+   "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+   "vovf_delta": 0,
+   "vline_min": 207,
+   "scope": "attack_hold em tempo real; vline_min nao e folga livre nem duracao maxima"
+  },
+  "runtime_mrp3": {
+   "path": "out/evidence/m8/session_inputs/4f1f45411420453d9c93a76f160410ba/runtime_metrics.json",
+   "sha256": "bed56ff566aa6d4dd73f8b973d18973517ba77b0f7e93aa2911765d38f1735a9",
+   "session_id": "4f1f45411420453d9c93a76f160410ba",
+   "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+   "region": "NTSC",
+   "fps_janelas": [
+    59.61,
+    59.62,
+    59.69
+   ],
+   "fps_spread": 0.0799999999999983,
+   "frames_delta_total": 1441,
+   "fps_constante": true,
+   "frame_advance_proved": true
+  },
+  "runtime_mrp_m7_legacy": {
+   "path": "out/evidence/post_m6/candidate_audio_a7f02b84/mrp/runtime_probe_audio_attack.json",
+   "sha256": "2efa6930682f99bc3139ea49295bc89bef4e2f611809458fce0352b09a122766",
+   "session_id": "7c3aa06b881a463bb2aaee16d813d065",
+   "fps_janelas": [
+    59.67,
+    59.69
+   ],
+   "frames_delta_total": 960
+  }
+ },
+ "service_instrumentation": {
+  "gates": "out/evidence/post_m6/candidate_audio_a7f02b84/gates/gates_audio_20261018.json",
+  "gates_sha256": "987502a52fa3dd6560adfdf5a5d31b039ec8a2cc652c9599c19694ccd6a3a990",
+  "audit_debug_markers": "PASS (marcadores de endereco fixo declarados volatile)",
+  "audit_probe_corridor": "PASS (0xC7A6..0xC7FF, 62 sondas, folga 1585)",
+  "perturbation": "O3_SERVICE_TRACE=1 perturba o VBlank (128->64 B/q); timing absoluto so de builds O3_SERVICE_TRACE=0"
+ },
+ "candidates": [
+  {
+   "id": "deadline_age_scheduler",
+   "status": "implemented_and_measured",
+   "implemented": true,
+   "measured": true,
+   "evidence": [
+    "cap_matrix",
+    "attack_terminal.a7f02b84_final",
+    "worst_frame",
+    "runtime_mrp3"
+   ],
+   "note": "baseline do Lote C; decisao na fase CPU, prioridade/preempcao e cap de contencao"
+  },
+  {
+   "id": "tile_pair_reuse_resident_cache",
+   "status": "dropped_by_owner",
+   "implemented": false,
+   "measured": false,
+   "note": "nao comparado; nenhum claim de ganho/perda",
+   "target": "reduzir bytes/frame do upload de pose reaproveitando tiles/pares e cache residente"
+  },
+  {
+   "id": "per_transition_deltas_preload_invalidate",
+   "status": "dropped_by_owner",
+   "implemented": false,
+   "measured": false,
+   "note": "nao comparado; nenhum claim de ganho/perda",
+   "target": "enviar apenas deltas por transicao de pose, com preload/invalidate declarados"
+  },
+  {
+   "id": "specialized_copy",
+   "status": "dropped_by_owner",
+   "implemented": false,
+   "measured": false,
+   "note": "nao comparado; nenhum claim de ganho/perda",
+   "target": "copia especializada por layout de tile para reduzir custo de CPU por byte"
+  }
+ ],
+ "satisfied": [
+  "terminal de ataque medido no SHA final a7f02b84: ataque i1-i93, retorno i94, primeiro hit i30; claim de ~60 q nao e repetido",
+  "instrumentacao de servico auditada (debug markers volatile, corredor de sondas); timing absoluto separado do trace",
+  "baseline com vovf=0, vline_min=207 e MRP3 59,61/59,62/59,69 fps NTSC",
+  "matriz de contencao com 4 SHAs comparada sob mesma cena/input (frame-paced)"
+ ],
+ "not_satisfied": [
+  "comparacao dos 3 candidatos de transformacao de codigo nao executada (reduzida por decisao do dono); nenhuma conclusao de throughput sobre eles",
+  "PAL nao medido"
+ ],
+ "limits": [
+  "vline_min=207 nao e folga livre nem duracao maxima de quadro; MWF mede overflow de VBlank",
+  "trials de ataque sao frame-paced (um quadro VDP por sequencia), nao medicao de throughput",
+  "a recuperacao i93/i94 e consequencia do uploader atual, nao da fisica; fisica nao foi alterada",
+  "evidencia de audio/MWF/MRP e do SHA a7f02b84; b345/cap128 sao historicos do mesmo recorte"
+ ],
+ "reopen_20261019": {
+  "date": "2026-10-19",
+  "trigger": "criterio 1 registrado: recuperacao de ataque menor que i93/i94 na mesma cena/carga/input",
+  "current_rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+  "criterion_1_control": {
+   "baseline_i": 94,
+   "current_control_i": 90,
+   "met": true,
+   "margin_frames": 4,
+   "current_display_idle_i": 102,
+   "display_met": false,
+   "note": "controle 4 q menor; display 8 q depois de i94; o criterio e do controle, nao da apresentacao"
+  },
+  "criterion_1_damage": {
+   "current_hit_i": 129,
+   "enemy_attack_state_i": 103,
+   "player_control_i": 90,
+   "player_display_idle_i": 102,
+   "conclusion": "dano e ataque do inimigo, nao recuperacao longa; input neutro apos o ataque"
+  },
+  "criterion_2_throughput": {
+   "met": false,
+   "current_cap": 128,
+   "above_128_vovf0": "nao demonstrado",
+   "current_cap5_mwf": "nao re-medido"
+  },
+  "criterion_3_content": {
+   "met": false,
+   "trim_drops": 14,
+   "bank_free": 3072,
+   "overflow": false
+  },
+  "analytical_comparison": {
+   "label": "static_emitted_blocks_not_runtime",
+   "full_attack_bytes_both_sides": 14464,
+   "unique_attack_cells_left": 87,
+   "unique_attack_cells_both": 174,
+   "unique_attack_idle_walk_cells_left": 140,
+   "cache_capacity_cells": 128,
+   "cache_best_case_saving_bytes": 1600,
+   "cache_best_case_saving_frames_at_128": 12.5,
+   "same_slot_delta": {
+    "a101_to_a103": 20,
+    "a102_to_a104": 22,
+    "a103_to_a105": 21,
+    "a104_to_idle": 22,
+    "of_cells": 23,
+    "verdict": "delta por slot refutado"
+   },
+   "specialized_copy": "nao implementado; >128 nao testado",
+   "no_runtime_gain_claimed": true
+  },
+  "status": "reopened_criterion_1_control_only",
+  "owner_decision_pending": true,
+  "report": "doc/artifacts/o3_silhouette_presentation_20261019.json"
+ },
+ "reopen_status": "criterion_1_control_met_display_not_met"
+}

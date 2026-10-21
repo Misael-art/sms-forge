@@ -1,0 +1,78 @@
+[
+  {
+    "name": "sound_final3_runs",
+    "window": [
+      0,
+      1
+    ],
+    "sid": "blastem-sms-44577cac8cbc4a189068a1bdf9a9634a",
+    "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+    "vdp_frames": 240,
+    "changed_bytes": {
+      "ram": 64,
+      "vram": 28,
+      "vdp_regs": 1,
+      "cram_internal": 0,
+      "psg_frequency": 6,
+      "psg_volume": 1
+    },
+    "changed32blocks": [
+      504
+    ],
+    "path": "/tmp/smsforge-blastem-native-review/dump_diff/sound_final3_runs_0_1.json"
+  },
+  {
+    "name": "sound_final3_runs",
+    "window": [
+      0,
+      2
+    ],
+    "rejected": true,
+    "reason": "require ordered snapshot indices in audited timeline"
+  },
+  {
+    "name": "instrument_final3_runs",
+    "window": [
+      0,
+      1
+    ],
+    "sid": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+    "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+    "vdp_frames": 7,
+    "changed_bytes": {
+      "ram": 14,
+      "vram": 3,
+      "vdp_regs": 0,
+      "cram_internal": 0,
+      "psg_frequency": 0,
+      "psg_volume": 0
+    },
+    "changed32blocks": [
+      464,
+      480
+    ],
+    "path": "/tmp/smsforge-blastem-native-review/dump_diff/instrument_final3_runs_0_1.json"
+  },
+  {
+    "name": "instrument_final3_runs",
+    "window": [
+      0,
+      2
+    ],
+    "sid": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+    "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+    "vdp_frames": 10,
+    "changed_bytes": {
+      "ram": 5,
+      "vram": 3,
+      "vdp_regs": 0,
+      "cram_internal": 0,
+      "psg_frequency": 0,
+      "psg_volume": 0
+    },
+    "changed32blocks": [
+      480
+    ],
+    "path": "/tmp/smsforge-blastem-native-review/dump_diff/instrument_final3_runs_0_2.json"
+  }
+]

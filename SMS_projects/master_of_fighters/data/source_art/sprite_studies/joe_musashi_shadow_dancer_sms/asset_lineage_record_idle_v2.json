@@ -1,0 +1,81 @@
+{
+  "schema": "mof_asset_lineage_v1",
+  "asset": "joe_musashi_idle_12f_sms_80px_v2.png",
+  "status": "source_candidate_awaiting_owner_visual_review",
+  "design_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+    "sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+    "owner_approval": "yellow-accent concept explicitly approved 2026-10-03"
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "prompt": "joe_musashi_idle_12f_prompt_v2.txt",
+    "source": "joe_musashi_idle_12f_generated_v2.png",
+    "source_sha256": "534819cbddf04eb320bfba54c46e1c8b8dede55a9c78206d4d7f2af917048d0a"
+  },
+  "translation": {
+    "palette_entry": "joe_musashi_shadow_dancer_sms",
+    "palette_manifest": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+    "palette_manifest_sha256": "e4dfa2d265e273ea86459b9ea0d9c9c130fa2970f58e8750820c68f2052266a3",
+    "palette_generator": "SMS_projects/master_of_fighters/doc/build_palettes_manifest.py",
+    "palette_generator_sha256": "87b2b09b2709715b83709171384007f78a3d87ab88491a46ba1c09b4a2bbb6ab",
+    "operations": [
+      "prepare_sms_pixel_art.py with --project . --character joe_musashi_shadow_dancer_sms --size 320x240 --dither none --speckle-cleanup --cell-size 80x80",
+      "split row-major into twelve 80x80 transparent cells",
+      "create a 4x nearest-neighbor review preview on a neutral gray background"
+    ]
+  },
+  "output": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+    "sha256": "f04da4b2c4930340315b19f5061cf7dc2dc4b6f86567cebfe6bc366a0019bd8d",
+    "preview": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2_preview.png",
+    "preview_sha256": "a8d54a5ea7c1e03b1a3adb18b0794aa82af6f29ee9ef2e04b3866c8f9661da1f",
+    "dimensions": [320, 240],
+    "cell_px": [80, 80],
+    "layout": [4, 3],
+    "transparent_index": 0,
+    "useful_colors": 7,
+    "semantics_manifest": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_semantics_v2.json",
+    "frame_sha256": [
+      "65d33d5d97d42fd663e277301a31b3b06f88c48a0e04498c13365f26a0bef719",
+      "844882199aeed46ef8885da87ff8714ef82b4150fe6b89df3946ce9e867d203e",
+      "245c702701bc86c459e158d75da16f99663d5393ea49e9bc4c58598ea3889bf8",
+      "65a9859f406e4e5c776effbe746b86cf129aa20beee04e73e002cb6b96c70bb2",
+      "670b9b160f2c2ec201ac329e2443402c3c57fcd4c31cb3432c6fa88f1dcab736",
+      "6a0778944935108d401fa5e0a770c19c302ce67cd7ce1515d45646f87dde096a",
+      "04a89a58556baa367d01abcc4558fb1bc9188e093278ab9e60d0acc1ad87c826",
+      "6f69d3c9fb0f01bbecad3b386381a139aa0c3557b0ec8f26353f2511b9c50f6f",
+      "5c1640428c91ac115fbe1c6f23110b10a6e25b2e9ad7324942a86e49bbcdf6bc",
+      "0687d2c551460816f1b2a3086d04761b05fcd0d140719affdcbb4211e71f5aa7",
+      "d3b792421ac58d341bf221d611502455f427f0b5998b6ffb31189c0f1283259e",
+      "0471fd138733dc40f8495a3746e719760aac15c37e072896184b0ed92da05239"
+    ]
+  },
+  "iteration_history": [
+    {
+      "iteration": "v1",
+      "source": "joe_musashi_idle_12f_generated_v1.png",
+      "review_result": "rejected_before_owner_review",
+      "reason": "visual inspection found that many poses read as the same guard pose after reduction to 80x80, despite distinct file hashes"
+    },
+    {
+      "iteration": "v2",
+      "review_result": "12 distinct guard and breathing poses; submitted as the current visual-review candidate"
+    }
+  ],
+  "validation": {
+    "palette_translation": "PASS: prepare_sms_pixel_art.py self-check passed",
+    "resource_gate": "PASS",
+    "animation_semantics_gate": "PASS",
+    "visual_review": "preliminary internal review passed for pose variation; awaiting owner approval",
+    "rom_integration": "not done",
+    "emulator_validation": "not done; this is source art only"
+  },
+  "claims": {
+    "owner_approved_design_reference": true,
+    "owner_approved_animation": false,
+    "runtime_ready": false,
+    "rom_bound": false,
+    "emulator_validated": false
+  }
+}

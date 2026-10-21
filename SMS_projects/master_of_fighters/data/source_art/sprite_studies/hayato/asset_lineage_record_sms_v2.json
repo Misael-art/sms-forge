@@ -1,0 +1,177 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "hayato_idle_sms_80px_12f_cleanup_v2",
+  "project": "master_of_fighters",
+  "asset_role": "sms_sprite_sheet_cleanup_study",
+  "channel": "built_in_image_gen + prepare_sms_pixel_art.py",
+  "inputs": [
+    {
+      "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v1.png",
+      "sha256": "697916f18d5a746ec2ec010db6001c6f2aeec3934fcda734190da7f450b9a92b",
+      "role": "owner-approved palette-native sprite study; source of the cleanup request"
+    },
+    {
+      "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_grain_cleanup_v2_source.png",
+      "sha256": "18335798998934e4575f4fc5961e3f864f20b13c816a4113166e46fee5eb71bd",
+      "role": "ImageGen cleanup edit source, no additional character design"
+    }
+  ],
+  "prompt": {
+    "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_grain_cleanup_prompt_v2.txt",
+    "sha256": "16627674892c06f400c89468df99d8664a582570ea637f88e60d295bb6842739"
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "options": {
+      "size": [
+        320,
+        240
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "hayato",
+      "speckle_cleanup": true,
+      "cell_size": [
+        80,
+        80
+      ],
+      "foreground_threshold_max_channel": 32,
+      "minimum_connected_component_pixels": 12,
+      "contour_margin_pixels": 1,
+      "transparent_index": 0
+    }
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+    "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+    "dimensions_px": [
+      320,
+      240
+    ],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 15,
+    "palette_rgb_with_transparent_index": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        85,
+        0,
+        0
+      ],
+      [
+        255,
+        85,
+        0
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        170,
+        0,
+        0
+      ],
+      [
+        255,
+        0,
+        0
+      ],
+      [
+        170,
+        170,
+        170
+      ],
+      [
+        85,
+        85,
+        85
+      ],
+      [
+        0,
+        85,
+        0
+      ],
+      [
+        255,
+        170,
+        170
+      ],
+      [
+        255,
+        170,
+        85
+      ],
+      [
+        170,
+        85,
+        0
+      ],
+      [
+        255,
+        85,
+        85
+      ],
+      [
+        85,
+        85,
+        0
+      ],
+      [
+        170,
+        85,
+        85
+      ],
+      [
+        85,
+        0,
+        85
+      ]
+    ]
+  },
+  "status": "owner_approved_visual_reference",
+  "sheet_layout": {
+    "columns": 4,
+    "rows": 3,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_count": 12,
+    "cell_dimensions_px": [
+      80,
+      80
+    ]
+  },
+  "owner_feedback_addressed": [
+    "Dono observou granulação e pixels soltos ao redor das silhuetas e pediu que o agente tratasse a folha.",
+    "Edição visual limpa + máscara por componentes conectados por célula; tradução sem dithering na paleta declarada de Hayato."
+  ],
+  "technical_review": {
+    "twelve_full_body_frames_visually_observed": true,
+    "four_by_three_layout_visually_observed": true,
+    "indexed_png_verified": true,
+    "all_palette_colors_match_sms_6bit_grid": true,
+    "per_character_manifest_palette_match": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "small_connected_components_under_12px_before": 201,
+    "small_connected_components_under_12px_after": 0,
+    "exact_visible_character_height_80px": "not measured",
+    "independent_animation_review": "pending",
+    "rom_or_emulator_validation": false,
+    "owner_visual_review": "approved by owner on 2026-10-03 as palette/cleanup reference; runtime integration remains pending",
+    "resource_gate_command": "python3 tools/sms_wrapper/audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character hayato SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png"
+  },
+  "next_gate": "measure exact visible character height and complete independent animation, provenance, asset-to-ROM binding and ROM/emulator gates before res integration",
+  "owner_approval": {
+    "date": "2026-10-03",
+    "scope": "cleaned palette-native idle sheet approved as a visual cleanup reference; not runtime delivery",
+    "source": "explicit user approval in conversation"
+  }
+}

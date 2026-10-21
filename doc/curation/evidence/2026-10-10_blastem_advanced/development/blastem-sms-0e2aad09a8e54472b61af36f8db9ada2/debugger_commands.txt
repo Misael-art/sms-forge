@@ -1,0 +1,79 @@
+help
+frames 120
+printf "SMSFORGE_BOUNDARY 0 %d\n" frame
+printf "SMSFORGE_CPU 0 %d %d %d %d %d %d %d %d %d %d\n" pc sp af bc de hl ix iy cycle iff1
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/000/ram.bin" [0xc000] 8192
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/000/vram.bin" vdp:vram 16384
+save/w "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/000/cram_internal.bin" vdp:cram 32
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/000/vdp_regs.bin" vdp:reg 11
+save/w "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/000/psg_frequency.bin" psg:frequency 4
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/000/psg_volume.bin" psg:volume 4
+watchpoint 51192 1
+variable sms_hits_0 0
+commands 0
+set sms_hits_0 sms_hits_0+1
+printf "SMSFORGE_EVENT 0 %d %d %d %d\n" frame pc [51192] 0
+continue
+end
+breakpoint 11
+variable sms_hits_1 0
+condition 1 ((bc & 255) = 190) | ((bc & 255) = 191)
+commands 1
+set sms_hits_1 sms_hits_1+1
+printf "SMSFORGE_EVENT 1 %d %d %d %d\n" frame pc (hl & 255) (bc & 255)
+continue
+end
+breakpoint 25
+variable sms_hits_2 0
+commands 2
+set sms_hits_2 sms_hits_2+1
+printf "SMSFORGE_EVENT 2 %d %d %d %d\n" frame pc (af >> 8) 190
+continue
+end
+bindup "ui.record_video"
+bindup "ui.vgm_log"
+binddown "gamepads.1.right"
+frames 30
+printf "SMSFORGE_BOUNDARY 1 %d\n" frame
+printf "SMSFORGE_CPU 1 %d %d %d %d %d %d %d %d %d %d\n" pc sp af bc de hl ix iy cycle iff1
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/001/ram.bin" [0xc000] 8192
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/001/vram.bin" vdp:vram 16384
+save/w "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/001/cram_internal.bin" vdp:cram 32
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/001/vdp_regs.bin" vdp:reg 11
+save/w "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/001/psg_frequency.bin" psg:frequency 4
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/001/psg_volume.bin" psg:volume 4
+bindup "gamepads.1.right"
+frames 4
+printf "SMSFORGE_BOUNDARY 2 %d\n" frame
+printf "SMSFORGE_CPU 2 %d %d %d %d %d %d %d %d %d %d\n" pc sp af bc de hl ix iy cycle iff1
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/002/ram.bin" [0xc000] 8192
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/002/vram.bin" vdp:vram 16384
+save/w "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/002/cram_internal.bin" vdp:cram 32
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/002/vdp_regs.bin" vdp:reg 11
+save/w "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/002/psg_frequency.bin" psg:frequency 4
+save/b "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_advanced/development/blastem-sms-0e2aad09a8e54472b61af36f8db9ada2/snapshots/002/psg_volume.bin" psg:volume 4
+bindup "gamepads.1.up"
+bindup "gamepads.1.down"
+bindup "gamepads.1.left"
+bindup "gamepads.1.right"
+bindup "gamepads.1.b"
+bindup "gamepads.1.c"
+bindup "gamepads.2.up"
+bindup "gamepads.2.down"
+bindup "gamepads.2.left"
+bindup "gamepads.2.right"
+bindup "gamepads.2.b"
+bindup "gamepads.2.c"
+printf "SMSFORGE_HITS 0 %d\n" sms_hits_0
+delete 0
+printf "SMSFORGE_HITS 1 %d\n" sms_hits_1
+delete 1
+printf "SMSFORGE_HITS 2 %d\n" sms_hits_2
+delete 2
+bindup "ui.record_video"
+bindup "ui.vgm_log"
+vdpsprites
+vr
+bindup "ui.screenshot"
+frames 1
+quit

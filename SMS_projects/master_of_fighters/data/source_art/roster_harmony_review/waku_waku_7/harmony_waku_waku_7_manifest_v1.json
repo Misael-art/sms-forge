@@ -1,0 +1,301 @@
+{
+  "schema": "smsforge_roster_harmony_waku_waku_7_v1",
+  "asset_id": "master_of_fighters_harmony_waku_waku_7_lineup_v1",
+  "created_date": "2026-10-08",
+  "status": "owner_approved_reference",
+  "purpose": "Apply a unified Waku Waku 7-inspired illustration finish and correct roster height relationships for concept comparison.",
+  "style_direction": {
+    "name": "Waku Waku 7-inspired",
+    "era": "1990s Neo Geo manga fighter illustration",
+    "notes": "One shared outline weight, saturated controlled colors, crisp cel shading, expressive arcade-fighter presence; preserve each character identity, palette and body type."
+  },
+  "sources": {
+    "character_references": {
+      "golden_axe_warrior": {
+        "path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_preview.png",
+        "sha256": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91"
+      },
+      "hayato": {
+        "path": "data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+        "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+      },
+      "joe_musashi": {
+        "path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+        "sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1"
+      },
+      "dr_social": {
+        "path": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4"
+      },
+      "alis_landale": {
+        "path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+        "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95"
+      },
+      "landau": {
+        "path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+        "sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8"
+      },
+      "jj": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+        "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a"
+      }
+    },
+    "user_weapon_reference": {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/reference_inputs/zillion_pistol_user_reference_20261008.png",
+      "sha256": "7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49",
+      "description": "User-supplied Zillion pistol reference; long horizontal navy/cyan silhouette."
+    },
+    "generated_lineup_art": {
+      "page_01": {
+        "path": "data/source_art/roster_harmony_review/waku_waku_7/generated_sources/waku_waku_7_roster_page_01_raw_v1.png",
+        "sha256": "978de287517359938a2018f65ed111c09518942cc537665765ac3f8d153d2fb8",
+        "dimensions_px": [
+          1926,
+          816
+        ]
+      },
+      "page_02": {
+        "path": "data/source_art/roster_harmony_review/waku_waku_7/generated_sources/waku_waku_7_roster_page_02_raw_v1.png",
+        "sha256": "b41e0acad9234d14b08542db87c92ad3d8a248fd614d8be1cbec386749b167de",
+        "dimensions_px": [
+          1927,
+          816
+        ]
+      }
+    },
+    "style_reference_urls": [
+      "https://www.snk-corp.co.jp/official/akeaka/titles/waku_waku7/",
+      "https://www.nintendo.com/pt-br/store/products/aca-neogeo-waku-waku-7-switch/"
+    ]
+  },
+  "method": {
+    "art_generation": "built-in image_gen, followed by targeted style/scale/weapon refinement",
+    "layout": "uniform proportional scaling from crown of head to shoe soles; 1 U = 8 presentation pixels; shared baseline",
+    "resampling": "Lanczos for clean concept illustration reduction",
+    "background": "neutral cream; checkerboard export artifact removed through regeneration",
+    "pose": "front-facing guard lineup; some poses retain slight three-quarter angle",
+    "claim_limit": "Owner-approved concept comparison reference only; independent artistic review remains pending; does not approve individual character artwork, sprites, animation, SMS palette, ROM or production integration.",
+    "extraction": "background-connected component segmentation; component assignment by character centroid, preserving overlap-free silhouettes"
+  },
+  "height_targets_units": {
+    "golden_axe_warrior": 74,
+    "hayato": 75,
+    "joe_musashi": 80,
+    "dr_social": 80,
+    "alis_landale": 75,
+    "landau": 80,
+    "jj": 75
+  },
+  "corrections": {
+    "landau": "80 U; same crown-to-sole body height as Dr. Social and Joe Musashi",
+    "jj": "75 U; same crown-to-sole body height as Hayato",
+    "jj_zillion_pistol": "horizontal elongated navy-blue body with cyan inserts, based on supplied user reference"
+  },
+  "pages": [
+    {
+      "page": 1,
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_01.png",
+      "sha256": "b48e9e5b894751a3a2dfd332977703de9a456155457f474a94428f16a7c1f8ba",
+      "dimensions_px": [
+        2400,
+        1440
+      ],
+      "characters": [
+        {
+          "key": "golden_axe_warrior",
+          "name": "GOLDEN AXE WARRIOR",
+          "game": "Golden Axe Warrior",
+          "target_height_units": 74,
+          "target_body_height_px": 592,
+          "source_body_measurement_px": 670,
+          "uniform_scale_factor": 0.883408,
+          "source_crop_bbox_xywh": [
+            29,
+            121,
+            460,
+            669
+          ],
+          "output_image_bbox_xywh": [
+            207,
+            499,
+            406,
+            591
+          ],
+          "body_head_top_y_px": 499,
+          "body_sole_y_px": 1090,
+          "reference_source_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_preview.png"
+        },
+        {
+          "key": "hayato",
+          "name": "HAYATO",
+          "game": "Kenseiden",
+          "target_height_units": 75,
+          "target_body_height_px": 600,
+          "source_body_measurement_px": 716,
+          "uniform_scale_factor": 0.837762,
+          "source_crop_bbox_xywh": [
+            510,
+            77,
+            388,
+            715
+          ],
+          "output_image_bbox_xywh": [
+            768,
+            491,
+            325,
+            599
+          ],
+          "body_head_top_y_px": 491,
+          "body_sole_y_px": 1090,
+          "reference_source_path": "data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png"
+        },
+        {
+          "key": "joe_musashi",
+          "name": "JOE MUSASHI",
+          "game": "Shinobi / Shadow Dancer",
+          "target_height_units": 80,
+          "target_body_height_px": 640,
+          "source_body_measurement_px": 756,
+          "uniform_scale_factor": 0.846358,
+          "source_crop_bbox_xywh": [
+            932,
+            31,
+            460,
+            756
+          ],
+          "output_image_bbox_xywh": [
+            1266,
+            451,
+            389,
+            640
+          ],
+          "body_head_top_y_px": 451,
+          "body_sole_y_px": 1090,
+          "reference_source_path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png"
+        },
+        {
+          "key": "dr_social",
+          "name": "DR. FERDINAND SOCIAL",
+          "game": "Master of Darkness",
+          "target_height_units": 80,
+          "target_body_height_px": 640,
+          "source_body_measurement_px": 780,
+          "uniform_scale_factor": 0.820282,
+          "source_crop_bbox_xywh": [
+            1368,
+            18,
+            530,
+            780
+          ],
+          "output_image_bbox_xywh": [
+            1772,
+            451,
+            435,
+            640
+          ],
+          "body_head_top_y_px": 451,
+          "body_sole_y_px": 1090,
+          "reference_source_path": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png"
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+      "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+      "dimensions_px": [
+        2400,
+        1440
+      ],
+      "characters": [
+        {
+          "key": "alis_landale",
+          "name": "ALIS LANDALE",
+          "game": "Phantasy Star",
+          "target_height_units": 75,
+          "target_body_height_px": 600,
+          "source_body_measurement_px": 708,
+          "uniform_scale_factor": 0.847242,
+          "source_crop_bbox_xywh": [
+            232,
+            75,
+            455,
+            708
+          ],
+          "output_image_bbox_xywh": [
+            368,
+            491,
+            385,
+            600
+          ],
+          "body_head_top_y_px": 491,
+          "body_sole_y_px": 1090,
+          "reference_source_path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png"
+        },
+        {
+          "key": "landau",
+          "name": "LANDAU",
+          "game": "Lord of the Sword",
+          "target_height_units": 80,
+          "target_body_height_px": 640,
+          "source_body_measurement_px": 754,
+          "uniform_scale_factor": 0.848606,
+          "source_crop_bbox_xywh": [
+            727,
+            19,
+            473,
+            763
+          ],
+          "output_image_bbox_xywh": [
+            1000,
+            443,
+            401,
+            647
+          ],
+          "body_head_top_y_px": 451,
+          "body_sole_y_px": 1090,
+          "reference_source_path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png"
+        },
+        {
+          "key": "jj",
+          "name": "J.J.",
+          "game": "Zillion II: The Tri Formation",
+          "target_height_units": 75,
+          "target_body_height_px": 600,
+          "source_body_measurement_px": 722,
+          "uniform_scale_factor": 0.830791,
+          "source_crop_bbox_xywh": [
+            1230,
+            61,
+            661,
+            722
+          ],
+          "output_image_bbox_xywh": [
+            1566,
+            491,
+            549,
+            600
+          ],
+          "body_head_top_y_px": 491,
+          "body_sole_y_px": 1090,
+          "reference_source_path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png"
+        }
+      ]
+    }
+  ],
+  "prompt_file": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_prompts_v1.md",
+  "review_axes": {
+    "style_cohesion": "pending_owner_review",
+    "height_and_morphology": "pending_owner_review",
+    "identity_and_palette": "pending_owner_review",
+    "anatomy_hands_and_equipment": "pending_owner_review",
+    "zillion_pistol_fidelity": "pending_owner_review"
+  },
+  "owner_approval": {
+    "decision_path": "doc/decisions/roster_harmony_waku_waku_7_v01_owner_approval.json",
+    "decision_sha256": "5ee0da205aa70379d2a85f395222903795259070784616e58ed2ca328b09a117",
+    "date": "2026-10-11",
+    "scope": "two-page roster style and relative-scale comparison only"
+  },
+  "independent_review_status": "pending"
+}

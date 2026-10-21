@@ -1,0 +1,26 @@
+{
+  "schema": "sms_artifact_decision_v1",
+  "artifact_id": "ash.converted.main.r1",
+  "scope": "converted_candidate",
+  "decision": "rejected",
+  "actor_role": "owner",
+  "actor": "SYNTHETIC fixture owner; not the real user",
+  "source_note": "Synthetic fixture decision required to exercise structural gate; no real artwork approved",
+  "files": [
+    {
+      "role": "document",
+      "path": "data/source_art/fighter_ash/converted_candidate/main/v01/document.fixture.txt",
+      "sha256": "f869c396c211c5d37900997fec7e7890f4cce78df6dd99fbed3cda6062c2a292"
+    },
+    {
+      "role": "metadata",
+      "path": "data/source_art/fighter_ash/converted_candidate/main/v01/metadata.json",
+      "sha256": "a720a378bccf7cd89b2d95a34a01c77aaf3f469e950aa8942ab84d24ff1546e4"
+    },
+    {
+      "role": "lineage",
+      "path": "data/source_art/fighter_ash/converted_candidate/main/v01/lineage.json",
+      "sha256": "b909221553e3b9a59f56131b729da81c6aeab2351faa82afe4a94f12f32ca7d2"
+    }
+  ]
+}

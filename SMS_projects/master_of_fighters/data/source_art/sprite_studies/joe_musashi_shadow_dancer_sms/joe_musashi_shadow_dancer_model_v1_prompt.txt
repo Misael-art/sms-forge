@@ -1,0 +1,14 @@
+Use case: stylized-concept
+Asset type: original pixel-art character model sheet for a Sega Master System fighting-game project
+Input image: SMS Power's Takashi - Standing Right sprite, used only as costume/color reference; no source pixels copied.
+Primary request: Design a clean, readable model sheet for the young adult ninja Takashi / Joe Musashi, inspired by his appearance in the Master System version of Shadow Dancer. Show the same slim, agile character in two full-body views side by side: a three-quarter front fighting-ready stance and a rear three-quarter turnaround view. Keep face and clothing consistent between the views.
+Subject: A fully human Japanese shinobi with a lean athletic build, covered in the game's white ninja outfit: white hood/head wrap and white tunic with loose trousers, cool gray cloth shadows, a deep red waist sash and small red bindings, warm exposed skin around the eyes and hands, dark nearly black outlines, restrained yellow accents from the game sprite. A simple sheathed short blade at the waist is acceptable, but keep the silhouette and costume faithful to the reference.
+Style/medium: Crisp, hand-crafted 8-bit Master System pixel-art concept, enlarged clean pixel clusters, strong readable silhouette, limited flat color regions and hard cel-shaded edges.
+Composition/framing: Wide horizontal transparent canvas; both figures fully visible, equal scale, ample gap; no overlap or cropped limbs; model-sheet clarity.
+Color palette: SMS palette mapped from the original sprite: #000000 source outline, #FFFFFF cloth light, #AAAAAA cloth mid, #555555 cloth shadow, #550000 deep red, #AA0000 red accent, #FFAA55 skin, #FFFF00 tiny accent. During project conversion, source black outline maps to opaque #550000 because index 0 is transparent.
+Materials/textures: Clean, flat pixel clusters; crisp edges; no noise, grain, dithering, gradients, or anti-aliased edges.
+Constraints: Fully human ninja; narrow agile anatomy; preserve the Master System Shadow Dancer costume colors and silhouette cues. Make this a design/model sheet, not a repeated-frame animation sheet.
+Avoid: extra characters, dog, scenery, background, UI, labels, text, logo, watermark, heavy armor, bulky body, blue cloth, smooth digital painting, photographic rendering, pixel noise.
+
+Generation: built-in image_gen, 2026-10-03.
+Post-processing: alpha threshold 80%, source black outline mapped to #550000, quantized without dithering to the local SMS palette contract; index 0 transparent.

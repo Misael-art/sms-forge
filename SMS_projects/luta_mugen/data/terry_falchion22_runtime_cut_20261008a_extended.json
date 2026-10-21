@@ -1,0 +1,203 @@
+{
+  "schema": "sms_mugen_scene_cut_config_v1",
+  "source": "A-Terry.zip",
+  "source_sha256": "ad646be47eb314ee0ea8d5595b4524823e277a722c9162c59ce8bd05b085687c",
+  "palette_p1": "norm",
+  "palette_p2": "black",
+  "fighter_scale": {
+    "target_idle_opaque_height_px": 72,
+    "accepted_height_px": [
+      72,
+      88
+    ]
+  },
+  "controls": {
+    "families": {
+      "1": [
+        "x",
+        "y"
+      ],
+      "2": [
+        "a",
+        "b"
+      ]
+    },
+    "thresholds": {
+      "1": [
+        6
+      ],
+      "2": [
+        6
+      ]
+    },
+    "policy": "release_or_threshold",
+    "dropped": [
+      "z",
+      "c"
+    ]
+  },
+  "actions": [
+    {
+      "role": "idle",
+      "action": 0,
+      "loop_start": 0
+    },
+    {
+      "role": "walk_f",
+      "action": 20,
+      "loop_start": 0
+    },
+    {
+      "role": "walk_b",
+      "action": 21,
+      "loop_start": 0
+    },
+    {
+      "role": "jump",
+      "action": 41,
+      "loop_start": 0
+    },
+    {
+      "role": "crouch",
+      "action": 11,
+      "loop_start": 0
+    },
+    {
+      "role": "guard",
+      "action": 131,
+      "loop_start": null
+    },
+    {
+      "role": "punch",
+      "action": 200,
+      "state": 200,
+      "loop_start": null
+    },
+    {
+      "role": "hp",
+      "action": 210,
+      "state": 210,
+      "loop_start": null
+    },
+    {
+      "role": "special",
+      "action": 1000,
+      "state": 1000,
+      "loop_start": null
+    },
+    {
+      "role": "heavy_strike",
+      "action": 240,
+      "state": 240,
+      "loop_start": null
+    },
+    {
+      "role": "ko",
+      "action": 5110,
+      "state": 5150,
+      "loop_start": null
+    },
+    {
+      "role": "kick",
+      "action": 220,
+      "state": 220,
+      "loop_start": null
+    },
+    {
+      "role": "hk",
+      "action": 230,
+      "state": 230,
+      "loop_start": null
+    },
+    {
+      "role": "hit",
+      "action": 5000,
+      "state": 5000,
+      "loop_start": null
+    },
+    {
+      "role": "air_lp",
+      "action": 600,
+      "state": 600,
+      "loop_start": null
+    },
+    {
+      "role": "air_hp",
+      "action": 610,
+      "state": 610,
+      "loop_start": null
+    },
+    {
+      "role": "air_lk",
+      "action": 620,
+      "state": 620,
+      "loop_start": null
+    },
+    {
+      "role": "air_lk_neutral",
+      "action": 625,
+      "state": 625,
+      "loop_start": null
+    },
+    {
+      "role": "air_hk_moving",
+      "action": 630,
+      "state": 630,
+      "loop_start": null
+    },
+    {
+      "role": "air_hk",
+      "action": 640,
+      "state": 640,
+      "loop_start": null
+    },
+    {
+      "role": "punch_close",
+      "action": 205,
+      "state": 205,
+      "loop_start": null
+    },
+    {
+      "role": "hp_close",
+      "action": 215,
+      "state": 215,
+      "loop_start": null
+    },
+    {
+      "role": "kick_close",
+      "action": 225,
+      "state": 225,
+      "loop_start": null
+    },
+    {
+      "role": "hk_close",
+      "action": 235,
+      "state": 235,
+      "loop_start": null
+    }
+  ],
+  "commands": {
+    "lp": "x",
+    "hp": "y",
+    "lk": "a",
+    "hk": "b",
+    "special": "PowerWave_x"
+  },
+  "source_limitations": [
+    "licença desconhecida; manter derivações locais e não redistribuídas",
+    "este perfil do Terry usa x/y para socos e a/b para chutes; z/c pertencem ao mapa de outro personagem, como Ryo, e não devem ser descartados globalmente",
+    "as variantes de curta distância 205/215/225/235 usam P2BodyDist X < 15; o runtime converte ground.front e o limite pela escala uniforme de cada ator, sem executar outros controladores CNS",
+    "não há variantes de ataque em pé específicas para longe no State -1: após os quatro testes < 15 (Cmd.cmd linhas 573–611), x/y/a/b seguem para os estados base 200/210/220/230 (linhas 621–660); o corte mantém esses estados base como fallback e declara far_attack_rules vazio",
+    "ataques agachados não estão no corte; golpes de botão ficam bloqueados enquanto baixo estiver pressionado ou o estado atual for crouch",
+    "o comando y+b do State -1 vai ao State/Action 240 e é importado como heavy_strike, mas não há reconhecimento desse acorde nem seleção da role no runtime; máscaras exatas impedem que o acorde vire um golpe simples",
+    "o corte importa as seis ações aéreas roteadas pelo State -1 (600/610/620/625/630/640), incluindo 625 para LK com Vel X=0 e 630 como fallback de HK no salto com direção; nenhuma role aérea é selecionável pelo runtime atual",
+    "o salto importa apenas Action 41; a fonte usa Action 40 de início e variantes direcionais/descida, que o runtime não encadeia",
+    "loop_start=0 em idle, caminhada, salto e agachamento é política local e não declara o LoopStart original do AIR; guarda e hit não recebem reinício forçado, mas KO usa só a pose Action 5110 de um frame, sem executar as transições CNS",
+    "o papel KO aponta para State 5150 e Action 5110: Action 5140 está ausente e common.cns cai para 5110; a tabela atual usa a pose de um frame, sem executar transições do CNS",
+    "Action 131 é a pose de guarda agachada ativa; início/fim da guarda e variantes em pé/aérea não estão no runtime",
+    "o .cmd inclui PowerWave_x/y, Burn Knuckle_x/y, Crack Shoot_a/b, Rising Tackle_x/y e Power Geyser_x/y; só PowerWave_x está declarado no corte, nenhum desses comandos entra na luta e não há entidade de projétil",
+    "a seleção próxima é derivada do recorte State -1 e usa dano de primeiro overlap visível; os tempos HitDef, cancelamentos e demais transições CNS continuam aproximados",
+    "a ação hit e os golpes aéreos são importados como dados, mas não são consumidos pela tabela de luta atual",
+    "sprites ausentes (99,0), (99,2) e (1010,2) aparecem em outras ações; nenhuma dessas ações entra neste corte"
+  ]
+}

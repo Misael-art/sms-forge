@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_10_digicel_handdrawn_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "catalog_index": 10,
+  "style_id": "Digicel-Handdrawn",
+  "artistic_style_reference": {
+    "named_artist": "Glen Keane",
+    "reference_role_and_scope": "Directing animator for Aladdin, the titular character, in Disney’s 1992 animated film; reference is film animation, not Mega Drive game-art credit.",
+    "source_url": "https://d23.com/a-to-z/keane-glen/",
+    "attribution_status": "verified_primary_source",
+    "style_signature": [
+      "fluid character gesture",
+      "elastic but readable silhouette",
+      "organic hand-drawn animation contour"
+    ],
+    "basis_and_limits": "Visual-analysis descriptors of the film-animation reference."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v1.json",
+    "sha256": "fa0a24805adc8e79330c11db2b2eb1819b50e8c47d79f4ff625e2567a6c1eab8"
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
+    "sha256": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt",
+    "sha256": "e01f9f4b797937cee02b5e7fa80be1fce0447d81933ba7a8ac35da2f785dbd0f",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2_metadata.json",
+    "sha256": "8904bfaa24e448a0845f5e3970c2bfd19743ccd74fd080c6c60db70b68b3a38d"
+  },
+  "composition": {
+    "method": "metadata_card_only_overlay",
+    "tool": "Pillow card-only annotation; base art outside the metadata card was pixel-checked unchanged",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v1.png",
+    "base_model_sheet_sha256": "e7db65f283a7df8e206ec71b57d65acb1635d3d798bbc32476ad57d3a773b06b",
+    "art_scale": "preserved from base sheet"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2.png",
+    "sha256": "b937f4eba849d07cbeab706ac425b4fbaeff62b5797e8b66c83dd12a55fb4fce",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_review_v2.json",
+    "status": "pending_independent_and_owner_review"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

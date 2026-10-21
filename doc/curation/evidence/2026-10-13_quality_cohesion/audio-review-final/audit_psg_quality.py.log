@@ -1,0 +1,36 @@
+  arena-estilo reprova em ritmo                    ok
+  arena-estilo reprova em unisono                  ok
+  arena-estilo reprova em ruido periodico          ok
+  arena-estilo reprova em loop                     ok
+  arena-estilo reprova em dinamica                 ok
+  arranjo passa (viol=[])                          ok
+  arranjo tem loop valido                          ok
+  granulado reprova exclusivamente M7              ok
+  granulado nao reprovava M1..M6                   ok
+  sfx com decay passa                              ok
+  sfx sem decay reprova                            ok
+  sfx longo reprova                                ok
+  round-trip de periodo                            ok
+  hold de 3 frames conta no tempo                  ok
+  nctl capturado com modo                          ok
+  modo 0 branco=False (bit2)                       ok
+  modo 1 branco=False (bit2)                       ok
+  modo 2 branco=False (bit2)                       ok
+  modo 3 branco=False (bit2)                       ok
+  modo 4 branco=True (bit2)                        ok
+  modo 5 branco=True (bit2)                        ok
+  modo 6 branco=True (bit2)                        ok
+  modo 7 branco=True (bit2)                        ok
+  mistura branco 0.50 e limiar M4                  ok
+  mistura branco 0.25 e limiar M4                  ok
+  substring PSGlib recusada sem expansao           ok
+  tone low seguido WAIT recusado sem alterar bytes ok
+  volume latch seguido data recusado sem alterar bytes ok
+  tone low truncado recusado sem alterar bytes     ok
+  data sem latch recusado sem alterar bytes        ok
+  SFX canais nao invertem ordem temporal           ok
+  SFX ordem temporal contraria reprova             ok
+  SFX ultima escrita mudo permite decay            ok
+  audit_one sfx classes e decide                   ok
+  audit_one music reprovada                        ok
+[SELF-CHECK OK] audit_psg_quality

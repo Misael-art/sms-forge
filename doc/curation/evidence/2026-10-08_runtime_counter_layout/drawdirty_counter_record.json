@@ -1,0 +1,21 @@
+{
+  "schema": "sms_counter_window_v1",
+  "counter_mode": "wrapping_monotonic",
+  "bits": 8,
+  "before": 155,
+  "after": 184,
+  "max_events": null,
+  "no_reset_in_window": true,
+  "no_reset_assertion_status": "declared for arithmetic illustration; not authenticated",
+  "evidence": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/sources/0/drawdirty_fastpath_rejected_20261008.json",
+      "sha256": "2e1e1bb9ec5dcdec79df92774d4ed4eb127ff4bf064f8eb40263f2896ab78703"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/sources/1/fight.c",
+      "sha256": "4f5a68dbc7c5fa914ac372d32a54613fa86ff35dabef9975c8f90718c02faf5f"
+    }
+  ],
+  "scope": "historical record arithmetic; no exact count, denominator or rate claim"
+}

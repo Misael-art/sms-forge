@@ -1,0 +1,37 @@
+{
+  "schema": "mugen_optimization_trial_v1",
+  "optimization": "preflight both DrawCache entries and bypass per-fighter setup loop for stable pair",
+  "status": "rejected_after_ROM_measurement",
+  "rom_sha256": "c6903fb8eedac46cb09ec1ea367fd1df79b5a0ad24b0885c505a93fe8e373d4c",
+  "session_id": "5e16aaeb29304dd3887ad6f6a56067e7",
+  "session_closed": true,
+  "build": "pass after moving SMS_saveROMBank macro into function scope; header contract verified in SMSlib.h:79-83",
+  "runtime_fps": [
+    32.46,
+    33.11,
+    36.14
+  ],
+  "state_at_measurement_end": {
+    "p1": 0,
+    "p2": 0,
+    "p1_life": 232,
+    "p2_life": 232,
+    "probe_frame": 498
+  },
+  "phase_sample": {
+    "draw_start": 52,
+    "scan_end": 159,
+    "schedule_end": 161,
+    "emit_end": 161,
+    "add_end": 162,
+    "stable_hits_byte": 26
+  },
+  "baseline_runtime_reference": [
+    43.15,
+    42.32
+  ],
+  "conclusion": "candidate is slower than render-on/no-CPU baseline; do not promote or merge.",
+  "hypothesis": "The preflight can be paid before the original per-fighter path when either animated idle pose is unstable. The one phase sample is consistent with a scan+fallback but does not instrument branch hits, so the exact cause remains unproven.",
+  "learning": "Do not add a pair-wide preflight atop the existing per-fighter cache checks without a hit counter; use a dirty bit set by state/pose/motion changes if optimizing stable draws.",
+  "scope": "diagnostic only; no gameplay, visual, audio, or delivery claim"
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_04_cps3_fluid_mastery_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "catalog_index": 4,
+  "style_id": "CPS3-Fluid-Mastery",
+  "artistic_style_reference": {
+    "named_artist": "Daigo Ikeno",
+    "reference_role_and_scope": "Secondary-source attribution for Street Fighter III character/promotional artwork; use as a named visual reference, not sole authorship of in-game animation.",
+    "source_url": "https://www.fightersgeneration.com/games/sf3-thirdstrike.html",
+    "attribution_status": "secondary_source_reference",
+    "style_signature": [
+      "long athletic anatomy",
+      "rhythmic, flowing pose lines",
+      "controlled painted shadows and crisp contour"
+    ],
+    "basis_and_limits": "Visual-analysis descriptors; title-specific attribution remains secondary-source pending."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_04_cps3_fluid_mastery_v1.json",
+    "sha256": "74cfe4a2964280a322e5200d25cb0fdec7cbbf8a11be9117212a5f14af546494"
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png",
+    "sha256": "f96e0fd84ba84b45f5e658f4874f598923b04fe57f6ea04f363da061ce49b202",
+    "dimensions_px": [
+      2066,
+      761
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1_prompt.txt",
+    "sha256": "73070983464dc29f9878ca9f8327b2e829cead934f5e141adb3fe4ee375c09bd",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2_metadata.json",
+    "sha256": "b5facc2c4d1fac12b2170ed7e79bffa40db28d4db769c764ee8939acc235cbaf"
+  },
+  "composition": {
+    "method": "metadata_card_only_overlay",
+    "tool": "Pillow card-only annotation; base art outside the metadata card was pixel-checked unchanged",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1.png",
+    "base_model_sheet_sha256": "d3271701674692024fe923706df1c3f90856ba2a5bedd25edefe900a7e650316",
+    "art_scale": "preserved from base sheet"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2.png",
+    "sha256": "3be06c1e994f7efafe8497ce696e43178073dd181f57ff8412b19779c1f0fede",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_review_v2.json",
+    "status": "pending_independent_and_owner_review"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

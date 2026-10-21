@@ -1,7 +1,10 @@
 #include "engine.h"
 
+static unsigned char last_bn = 255;
+
 void hud_enter_fight(void)
 {
+    last_bn = 255;
     text_at(1, 0, "P1");
     text_at(28, 0, "P2");
     text_at(12, 2, "ROUND");
@@ -46,31 +49,34 @@ void hud_draw(void)
     text_num(14, 0, g_clock);
     text_num(1, 2, P[0].rounds);
     text_num(29, 2, P[1].rounds);
-    text_clear(10, 11, 12);
-    switch (g_banner_id) {
-    case BN_ROUND:
-        text_at(12, 11, "ROUND");
-        text_num(18, 11, g_round);
-        break;
-    case BN_FIGHT:
-        text_at(13, 11, "FIGHT");
-        break;
-    case BN_KO:
-        text_at(14, 11, "K.O.");
-        break;
-    case BN_DRAW:
-        text_at(14, 11, "DRAW");
-        break;
-    case BN_TIME:
-        text_at(11, 11, "TIME OVER");
-        break;
-    case BN_P1WIN:
-        text_at(12, 11, "P1 WINS");
-        break;
-    case BN_P2WIN:
-        text_at(12, 11, "P2 WINS");
-        break;
-    default:
-        break;
+    if (last_bn != g_banner_id) {
+        last_bn = g_banner_id;
+        text_clear(10, 11, 12);
+        switch (g_banner_id) {
+        case BN_ROUND:
+            text_at(12, 11, "ROUND");
+            text_num(18, 11, g_round);
+            break;
+        case BN_FIGHT:
+            text_at(13, 11, "FIGHT");
+            break;
+        case BN_KO:
+            text_at(14, 11, "K.O.");
+            break;
+        case BN_DRAW:
+            text_at(14, 11, "DRAW");
+            break;
+        case BN_TIME:
+            text_at(11, 11, "TIME OVER");
+            break;
+        case BN_P1WIN:
+            text_at(12, 11, "P1 WINS");
+            break;
+        case BN_P2WIN:
+            text_at(12, 11, "P2 WINS");
+            break;
+        default:
+            break;
+        }
     }
 }

@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "session_id": "cca70c512e594fb0bbcfba76c2e1b6b1",
+  "root": "/tmp/smsforge-1000/cca70c512e594fb0bbcfba76c2e1b6b1",
+  "state": "closed",
+  "created_at": 1791375996.3505528,
+  "source_rom": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request_corrected/rom.sms",
+  "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+  "emulator_sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d",
+  "bridge_sha256": "a283b54202112434927ed8f83bb292376a2d6f74830dde6f04f9589da377333a",
+  "bridge_source_sha256": "99d4d2e95ce91c05f60d54f5ccc2c877e9c7f68a0aadf52cf5be603da2daba3d",
+  "config_initial_sha256": "96f1d666d3385321f7ff87ea6f260305647e00ca2f702dd44d26825aac26a559",
+  "xvfb": "/mnt/sdcard/Projects/SMSForge/out/session_bridge/runtime/xvfb/usr/bin/Xvfb",
+  "host_display": ":0",
+  "xvfb_sha256": "5bfd315a8c7bc626d0b183d176e130c34f910a4a1279d9d53ea45769f62a3351",
+  "ttl_seconds": 1800,
+  "host_load": [
+    2.3173828125,
+    2.115234375,
+    2.86376953125
+  ],
+  "audio": "private_sink_unvalidated",
+  "enable_audio_requested": true,
+  "input": "process_local_SMSJoypad",
+  "supervisor": {
+    "pid": 2666449,
+    "start_ticks": "3922456"
+  },
+  "audio_sink": "smsforge_cca70c512e594fb0",
+  "audio_sink_module": "536870917",
+  "display": ":1",
+  "xvfb_process": {
+    "pid": 2666456,
+    "start_ticks": "3922465"
+  },
+  "sandbox": {
+    "pid": 2666468,
+    "start_ticks": "3922474"
+  },
+  "emulator_process": {
+    "pid": 2666469,
+    "start_ticks": "3922474"
+  },
+  "ready": {
+    "ok": true,
+    "pid": 2666469,
+    "frame": 120,
+    "p1": 0,
+    "p2": 0,
+    "console": 0,
+    "emulator_input": 0,
+    "nominal_hz": 59.92274340431231,
+    "audio_enabled": false,
+    "running": false
+  },
+  "audio_route": {
+    "sink_inputs": [
+      "14790"
+    ],
+    "pid": 2666469,
+    "sink": "smsforge_cca70c512e594fb0",
+    "at": 1791375998.8153217,
+    "verified": true
+  },
+  "audio_boot": {
+    "muted_from_launch": true,
+    "ready_audio_enabled": false,
+    "silent_stream_priming": true,
+    "unmuted_after_verified_route": true
+  },
+  "published": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-07_context_air_identity/native_request_corrected/run_b8108ed1eabe4848b541bc2184915ade/bundles/cca70c512e594fb0bbcfba76c2e1b6b1",
+  "closed_at": 1791375999.2507193
+}

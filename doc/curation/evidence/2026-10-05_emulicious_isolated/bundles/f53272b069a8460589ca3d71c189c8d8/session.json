@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "session_id": "f53272b069a8460589ca3d71c189c8d8",
+  "root": "/tmp/smsforge-1000/f53272b069a8460589ca3d71c189c8d8",
+  "state": "captured",
+  "created_at": 1791246733.9097607,
+  "source_rom": "/mnt/sdcard/Projects/SMSForge/out/local_study/sms_isolated_session/run05/roms/probe1.sms",
+  "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+  "emulator_sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d",
+  "bridge_sha256": "ca53d8e542201d39136103415c4662f5e4058931cef1ed76816ffc8140320e40",
+  "bridge_source_sha256": "8c3a425417dfb9f2b2868704eb7dde625d9a775bf6eedfa90fc35538f8da56b7",
+  "config_initial_sha256": "96f1d666d3385321f7ff87ea6f260305647e00ca2f702dd44d26825aac26a559",
+  "xvfb": "/mnt/sdcard/Projects/SMSForge/out/session_bridge/runtime/xvfb/usr/bin/Xvfb",
+  "host_display": ":0",
+  "xvfb_sha256": "5bfd315a8c7bc626d0b183d176e130c34f910a4a1279d9d53ea45769f62a3351",
+  "ttl_seconds": 1800,
+  "host_load": [
+    2.111328125,
+    4.05322265625,
+    4.72607421875
+  ],
+  "audio": "muted_unvalidated",
+  "input": "process_local_SMSJoypad",
+  "supervisor": {
+    "pid": 315385,
+    "start_ticks": "389727"
+  },
+  "display": ":1",
+  "xvfb_process": {
+    "pid": 315389,
+    "start_ticks": "389735"
+  },
+  "sandbox": {
+    "pid": 315400,
+    "start_ticks": "389744"
+  },
+  "emulator_process": {
+    "pid": 315401,
+    "start_ticks": "389744"
+  },
+  "ready": {
+    "ok": true,
+    "pid": 315401,
+    "frame": 120,
+    "p1": 0,
+    "p2": 0,
+    "console": 0,
+    "emulator_input": 0,
+    "nominal_hz": 59.92274340431231,
+    "running": false
+  }
+}

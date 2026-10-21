@@ -1,0 +1,86 @@
+{
+  "schema": "sms_subagent_session_v2",
+  "artifact_kind": "harness_worker_result",
+  "task_id": "9136fdaed96d49e6805a78a5da8ca320",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01",
+  "producer_id": "/root",
+  "worker_id": "/root/review_qa_contract",
+  "lane": "visual",
+  "request": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/request.json",
+    "sha256": "fca7d61c5ecd2e99969e199fff05c98962318ad1c0f5a7a2edb3ceeaa6f2e98a"
+  },
+  "case_relation": "chained",
+  "status": "passed",
+  "claim_ceiling": "assigned_checks_only",
+  "promoted": false,
+  "findings": [],
+  "artifacts": [
+    {
+      "id": "chained_input_video_baseline",
+      "kind": "framebuffer",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/case_0_baseline.png",
+      "sha256": "469b6944b1da58610804c4a94c5a98a8f587fc87ee8afa2a5b095f592e96530b",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/case_0_baseline.json",
+        "sha256": "9847bc7139f8103a0ddda93d08cb98690038a4dd85e3e6c75900f37a80eeb6e1"
+      }
+    },
+    {
+      "id": "chained_input_video_frame",
+      "kind": "framebuffer",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/case_0_frame.png",
+      "sha256": "469b6944b1da58610804c4a94c5a98a8f587fc87ee8afa2a5b095f592e96530b",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/case_0_frame.json",
+        "sha256": "e5dad50a314b1777618e487be9e75f8c29b3fd3656051dbd83485d35567929de"
+      }
+    },
+    {
+      "id": "chained_input_video_video",
+      "kind": "video",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/case_0.mp4",
+      "sha256": "555e9dff3757a25f1586d46ff1238e5f81f1316c61bfc86a787345c940ef34c6",
+      "metadata": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/case_0.json",
+        "sha256": "c400bd7816103487b9108d91f3440dbd146570b277da411f525a00b9c0446431"
+      }
+    },
+    {
+      "id": "commands",
+      "kind": "input_trace",
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/commands.jsonl",
+      "sha256": "69273d7c20d316d4aeb3bbfa69324c3df73b048208a09a7f6b7e8c9798d1b9ee"
+    }
+  ],
+  "session": {
+    "id": "e4da858551604976a90913cd7b979eb5",
+    "owner": "/root/review_qa_contract",
+    "bundle": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/bundles/e4da858551604976a90913cd7b979eb5",
+    "metadata": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/closed_session.json",
+      "sha256": "a42419319eafbacf5e68cbd99a523acc747d25ab3164bfdfa7819014b854e053"
+    },
+    "closed": {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/closed_session.json",
+      "sha256": "a42419319eafbacf5e68cbd99a523acc747d25ab3164bfdfa7819014b854e053"
+    }
+  },
+  "coverage": [
+    {
+      "id": "chained_input_video",
+      "status": "passed",
+      "note": "Native diagnostic baseline and frames 3,10,22 viewed individually at 256x192; all 23 frame hashes match sidecar. White tile P1 row appears at x80..87/y64..71 in frame index3 (VDP124), P2 row at x96..103/y96..103 in index10 (VDP131), both absent in index22 (VDP143). Command windows: neutral120..122, P1=8 122..129, P2=16 129..140, neutral140..143. First corresponding visual changes occur at VDP124/131/142, two frame-boundary labels after input ACK122/129/140; visibility is delayed and not assumed simultaneous with input/RAM. Three-frame neutral tail captures release. Pixel sampling of known diagnostic tile centers across all frames corroborates direct inspections: P1 visible indexes3..9, P2 indexes10..20, both off21..22. motion_timeline decoded23 frames, changed22 transitions, max_from_initial=0.0104167, max_adjacent=0.0091146, endpoint=0.0065104: timeline captures variation above endpoints; endpoints differ partly because frame-counter bits advance. This is cumulative chained diagnostic control visibility, without independent-reset, gameplay/actor-animation, audio or realtime-throughput approval.",
+      "evidence": [
+        "chained_input_video_baseline",
+        "chained_input_video_video",
+        "commands"
+      ]
+    }
+  ],
+  "review_observations": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/observed_visual_bits.json",
+    "sha256": "4712beb257e67f8cab28bc2a5895659b5fe2ced493d1138db6603746e9ace931",
+    "scope": "review helper, not ROM RAM telemetry"
+  }
+}

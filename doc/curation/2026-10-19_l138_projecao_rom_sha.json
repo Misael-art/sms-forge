@@ -1,0 +1,107 @@
+{
+  "curation_id": "2026-10-19_l138_projecao_rom_sha",
+  "date": "2026-10-19",
+  "title": "L138: projeção de evidência sem SHA da ROM — booleano não se autentica",
+  "kind": "curation",
+  "project": "SMS_projects/openbor_sms_rev1",
+  "scope": "Projeção canônica de evidence.json/fps.json a partir do bundle consumidor, MRP3 e QA do M8. Mede a identidade da ROM nas fontes (rom_sha256) e a aceitação booleana em reconcile_claims.py; não é nova medição de gameplay, FPS, áudio, PAL ou arte. A projeção do cap5 só será válida quando houver fontes com o SHA do cap5.",
+  "authorization": "O dono pediu em 2026-10-19 endurecer a projeção para verificar o SHA da ROM atual e fechar a aceitação booleana em reconcile_claims.py:104. Não há promoção de delivery, arte ou eixos não medidos.",
+  "relation": {
+    "applies": ["L018", "L035", "L036"],
+    "note": "L018 separa pixel de prova; L035 exige RAM/SHA da ROM; L036 impede representação (booleano, relatório) virar progresso. L138 estende a mesma lei à projeção de evidência: o booleano só vale para o binário que a fonte cita."
+  },
+  "lessons": [
+    {
+      "id": "L138",
+      "status": "fechada_com_ferramenta",
+      "lesson": "A projeção canônica do M8 escrevia evidence.json/fps.json com rom_sha256=a7f02b84, mas reconcile_claims.py aceitava boot_emulador por informative=true e fps_constante por constante_50_60=true sem comparar o SHA. Um build novo (cap5 701379cc) podia herdar o 7/7 do M8 por booleano, mesmo com a ROM diferente. O build record do cap5 permaneceu honesto (só build/validation true), mas o gate não impedia a herança. A correção exige rom_sha256 == ROM atual em boot/gameplay/fps e um gerador que recusa fontes de outro SHA antes de escrever. O M8 a7f02b84 continua histórico e reproduzível com o ROM antigo; o cap5 não herda nenhum eixo.",
+      "evidence": {
+        "current_rom": {
+          "path": "out/rom/openbor_sms_rev1.sms",
+          "sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9"
+        },
+        "m8_rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+        "canonical_evidence": {
+          "path": "out/evidence/evidence.json",
+          "sha256": "21c7be622d224f6b5c57b29979277b6033568d9e704ad793b2c2050952da174f",
+          "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+          "informative": true,
+          "gameplay_interaction_proven": true
+        },
+        "canonical_fps": {
+          "path": "out/evidence/fps.json",
+          "sha256": "904f629d0e9c55492981799718dc0b568ffca3def7faf75b3e04b891cd4aef76",
+          "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+          "constante_50_60": true
+        },
+        "cap5_build_record": {
+          "path": "out/build_record.json",
+          "sha256": "bfc8cbd86e62ce2f081b94aa734c0baf5d845ec2e2a53eb8510100a2266593d3",
+          "rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+          "axes": {
+            "build": true,
+            "validation_report": true,
+            "boot_emulador": false,
+            "gameplay": false,
+            "fps_constante": false,
+            "audio": false,
+            "memory_bank_atualizado": false
+          }
+        },
+        "m8_build_record": {
+          "path": "out/evidence/m8/gates/build_record_m8.json",
+          "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+          "axes": "7/7 historico"
+        },
+        "reconcile_self_check": "PASS: evidence.json/fps.json com rom_sha256 de outra ROM reprovam boot/gameplay/fps; input_memory com SHA errado tambem.",
+        "projection_self_check": "PASS: mesma ROM projeta; ROM antiga ou fonte sem SHA recusa sem escrever evidence/fps.",
+        "m8_historical_projection": {
+          "current_rom": "a7f02b84 (ROM preservada em o3_diag/rom_before)",
+          "out_dir": "/tmp/proj_a7f (temporario)",
+          "evidence_sha256": "01d39eaed20e3ed5ad2780c2b3b220eb42240d7cd00b78148cdaa6a472d56eda",
+          "fps_sha256": "904f629d0e9c55492981799718dc0b568ffca3def7faf75b3e04b891cd4aef76"
+        },
+        "cap5_projection_refusal": "atual=701379cc88e0 fontes=a7f02b847693; projecao recusada (nao herde eixos de outro binario)",
+        "binding": {
+          "path": "doc/rom_asset_binding.json",
+          "sha256": "6c2caa9a69b0d321627982a9e0873e0343cafb1545df5a3fcb8acc2c5d104cba",
+          "entries": 11,
+          "audit": "audit_rom_asset_binding --require PASS; identidade source->res->simbolo->ROM, sem render independente"
+        }
+      },
+      "tool_that_measures": "reconcile_claims.py --self-check (boot/gameplay/fps exigem rom_sha256 == ROM atual; evidencia/fps de outra ROM reprovam); axis_projection.py --self-check (mesma ROM projeta; ROM antiga/sem SHA recusa sem escrever). A projecao nao e medicao nova e nao promove delivery.",
+      "rule_section": "SMS_GLOBAL §130",
+      "applications": [
+        "cap5 701379cc: out/build_record.json mantem somente build/validation true; boot/gameplay/fps/audio false; reconcile_claims passa sem promover eixos.",
+        "M8 a7f02b84: o 7/7 do build_record_m8 e historico; a projecao e reproduzivel com --current-rom no ROM antigo, mas nao se transfere ao cap5.",
+        "Projecao nova: axis_projection.py --current-rom deve citar a ROM; fonte de outro SHA e recusada antes de qualquer escrita.",
+        "Aceitacao booleana: informative=true ou constante_50_60=true sem rom_sha256 nao fecha eixo; o SHA e o lastro."
+      ],
+      "limits": [
+        "Projecao e assigned_checks_only; nao e nova medicao de gameplay, FPS, audio ou arte.",
+        "O cap5 nao foi re-medido em MWF/MRP3/FPS/audio; os eixos do delivery seguem pendentes.",
+        "PAL nao medido; o oracle full-frame audit_render_glitch segue bloqueado.",
+        "O binding de 11 entradas e identidade source->res->simbolo->ROM; os simbolos de pose/anim/blocks aparecem no linker map, os de audio sao static e nao aparecem; nao e render.",
+        "O M8 7/7 pertence ao a7f02b84; o cap5 e candidato pos-M8, nao delivery."
+      ]
+    }
+  ],
+  "registry_and_process_notes": [
+    "ID novo L138; id_registry issued_through L137 -> L138.",
+    "SMS_GLOBAL §130 apendada; a linha de reconcile_claims no AGENTS.md foi atualizada para citar evidencia de outra ROM.",
+    "axis_projection.py e gerador de projecao, nao gate de medicao; reconcile_claims.py e o gate que exige o SHA.",
+    "Rota L138 -> workflows/release-rom.md e workflows/async-promotion-loop.md com SHA.",
+    "O self-check do reconcile e do axis_projection prova o caso antigo e o atual; a projecao do M8 em /tmp nao substitui o evidence canonico."
+  ],
+  "closure": {
+    "new_lesson_ids_emitted": true,
+    "ids": ["L138"],
+    "registry_updated": "issued_through L137 -> L138",
+    "sms_global_updated": "§130 apendada",
+    "skills_updated": [],
+    "lesson_routes": "L138 -> workflows/release-rom.md + workflows/async-promotion-loop.md",
+    "next_gate_to_run": "audit_learning_capture.py --root .",
+    "open_gap": "cap5 MWF/MRP3/FPS/audio, PAL, oracle full-frame e regressao de gameplay"
+  },
+  "dedup_key": "l138_projecao_rom_sha_20261019"
+}

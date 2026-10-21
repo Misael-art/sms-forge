@@ -1,0 +1,56 @@
+{
+  "schema": "mof_roster_art_direction_study_v1",
+  "project": "master_of_fighters",
+  "asset_id": "roster_morphology_finish_study_v1",
+  "status": "study_only_pending_owner_review",
+  "scope": "single-frame morphology and shared-rendering proposal; not a game sprite sheet",
+  "generation_tool": "built-in image_gen",
+  "prompt_file": "harmony_morphology_study_v1_prompt.txt",
+  "references": [
+    {
+      "path": "../harmony_sprites_frame00_candidate_v1.png",
+      "sha256": "c47e657c1cb25ab024e0ed237867729d2613a79354e4ae2d3d32b8a4dea9de40",
+      "authority": "identity, costume, equipment and per-character color families only; proportions and finish explicitly rejected"
+    },
+    {
+      "path": "../../sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+      "sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+      "authority": "lean human morphology and relative limb mass only"
+    },
+    {
+      "path": "../../sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+      "sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+      "authority": "pixel-cluster finish and outline economy only"
+    }
+  ],
+  "outputs": {
+    "initial_morphology_pass": {
+      "path": "harmony_morphology_study_v1_generated.png",
+      "sha256": "8c630e1a3b5bfb8e2f7e7973a69ec0001e7016f2f68abdc92fa86067a54b5d15",
+      "dimensions_px": [2172, 724],
+      "status": "intermediate"
+    },
+    "finish_cleanup_pass": {
+      "path": "harmony_morphology_study_v1_finish.png",
+      "sha256": "1863d6fe7d981e7b6c8aed1c1a2e5edac5bf06d2e07767405a63247fcf29da1a",
+      "dimensions_px": [2172, 724],
+      "status": "morphology study for owner review; background still has tonal variation; palette is not verified against the SMS manifest"
+    },
+    "transparent_cutout_experiment": {
+      "path": "harmony_morphology_study_v1_cutout_rejected.png",
+      "sha256": "bbc43bb984b9426ec4a49991d16eac5cc7b07b7741120f38c6a87c00aa2aa35e",
+      "dimensions_px": [2172, 724],
+      "status": "rejected study; visible red/colored fringe around cutout despite transparent background request"
+    }
+  },
+  "validation": {
+    "owner_approval": false,
+    "exact_sms_palette": "not validated; do not treat imagegen color values as palette-conformant",
+    "transparent_cutout": "rejected experiment; fringe requires correction",
+    "animation": "one pose per character; no animation claim",
+    "resource_integration": "not done",
+    "rom_binding": "not done",
+    "emulator_validation": "not applicable; source-art study only"
+  },
+  "lineage_limit": "Use the finish study only to evaluate body proportions and broad style direction. Palette, cutout, pixel-grid, source-game fidelity and sprite animation remain unapproved. The transparent experiment is a negative cutout example, not an alternate delivery."
+}

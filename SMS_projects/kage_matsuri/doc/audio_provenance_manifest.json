@@ -1,0 +1,28 @@
+{
+  "assets": [
+    {
+      "file": "res/audio/sfx_slash.psg",
+      "origin": "stream autoral sintetizado para PSGlib",
+      "author": "SMSForge",
+      "tool": "pack_kage.py",
+      "role": "corte da katana",
+      "channels": "SFX_CHANNEL3",
+      "frames": 7,
+      "format": "PSGlib stream",
+      "bytes": 22,
+      "sha256": "0811f9234435fc7835eef66bb5e692731a98fc5d484b3a08a93f5c1abc10742b"
+    },
+    {
+      "file": "res/audio/music_kage.psg",
+      "origin": "ostinato pentatonico matsuri — escala yo em Re, duas secoes (canto + taiko), piso L078+M7",
+      "author": "SMSForge",
+      "tool": "gen_music_kage.py",
+      "role": "musica de fundo ch0+ch1",
+      "channels": "music_ch0_ch1",
+      "frames": 1152,
+      "format": "PSGlib stream",
+      "bytes": 1174,
+      "sha256": "c582ff359b0102cf5f376bb53ff6656178b166c63be1f60013a0244f1bb3628e"
+    }
+  ]
+}

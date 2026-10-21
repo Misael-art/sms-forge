@@ -1,0 +1,111 @@
+{
+  "schema": "mof_roster_art_direction_study_v2",
+  "project": "master_of_fighters",
+  "asset_id": "roster_morphology_finish_study_v2_review_candidate",
+  "status": "owner_review_pending",
+  "scope": "corrected high-resolution art-direction board for review of seven-character identity, construction and shared rendering; not a game sprite sheet",
+  "generation_tool": "built-in Codex ImageGen",
+  "prompt": {
+    "path": "harmony_morphology_study_v2_prompt.txt",
+    "sha256": "2b5b1ea6d3682b18983923ff7358ecc2a519f7518d9a1f2e1c8cb5e117b04bc7"
+  },
+  "input": {
+    "path": "review_evidence/harmony_morphology_study_v1_user_input_20261004.png",
+    "sha256": "84596e58edbc062ed065cc2c1709f8e6150db9834fe0c83af7c2e65b3ab1b7d0",
+    "dimensions_px": [2172, 724],
+    "role": "exact edit target; owner defect analysis retained separately in review checklist"
+  },
+  "supporting_generation_reference": {
+    "path": "../../concept_art/jj_zillion_ii/jj_concept_sheet_v4_preview.png",
+    "sha256": "12196c4e20d002ff105ded07ea671a5dfd402d723b291c0bebb5713ef5228035",
+    "role": "J.J. approved costume and Zillion pistol silhouette only; game lineage remains authority for identity, palette and behavior"
+  },
+  "generation_steps": [
+    {
+      "step": 1,
+      "tool": "built-in Codex ImageGen precise-object edit",
+      "input": "review_evidence/harmony_morphology_study_v1_user_input_20261004.png",
+      "prompt_path": "harmony_morphology_study_v2_prompt.txt",
+      "output": {
+        "path": "review_evidence/harmony_morphology_study_v2_intermediate.png",
+        "sha256": "afbff3919270c01c32eed50c5dedaf8eef2e5ee64f8c08f029180ca7bb6eb362",
+        "dimensions_px": [2172, 724],
+        "status": "intermediate; Dr. Social's rapier grip/guard still needed a more explicit localized edit"
+      }
+    },
+    {
+      "step": 2,
+      "tool": "built-in Codex ImageGen precise-object edit",
+      "input": "review_evidence/harmony_morphology_study_v2_intermediate.png",
+      "prompt_path": "harmony_morphology_study_v2_prompt.txt",
+      "scope": "localized Dr. Social cane-sword handle, guard and blade continuity correction",
+      "output": {
+        "path": "harmony_morphology_study_v2_review_candidate.png",
+        "sha256": "ad1b657bddd4da27f1d9033f436d8987130da6b8d408dca9f6610a94110e471a",
+        "dimensions_px": [2172, 724],
+        "status": "candidate for independent and owner review"
+      }
+    }
+  ],
+  "character_review_references": [
+    {
+      "character": "golden_axe_warrior",
+      "path": "../../concept_art/ga_warrior/ga_warrior_concept_sheet_v2_sms_palette.png",
+      "sha256": "5b88ea863db2f6ebf97722d39196812f9290f8532aee3a3c40312e07d3ca932f",
+      "role": "accepted design and color-family comparison"
+    },
+    {
+      "character": "hayato_kenseiden",
+      "path": "../../concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "role": "accepted costume and visual direction comparison"
+    },
+    {
+      "character": "joe_musashi",
+      "path": "../../sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+      "sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+      "role": "owner-approved identity and lean-morphology comparison"
+    },
+    {
+      "character": "dr_ferdinand_social",
+      "path": "../../concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "role": "accepted harmonized design comparison"
+    },
+    {
+      "character": "alis_landale",
+      "path": "../../concept_art/alis_landale/alis_concept_sheet_v4.png",
+      "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+      "role": "owner-approved design and color-family comparison"
+    },
+    {
+      "character": "landau_lord_of_the_sword",
+      "path": "../../concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+      "sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+      "role": "owner-approved youthful design, costume and gear comparison"
+    },
+    {
+      "character": "jj_zillion_ii",
+      "path": "../../concept_art/jj_zillion_ii/jj_concept_sheet_v4_preview.png",
+      "sha256": "12196c4e20d002ff105ded07ea671a5dfd402d723b291c0bebb5713ef5228035",
+      "role": "owner-approved concept; its lineage records SMS game authority and reference boundaries"
+    }
+  ],
+  "review_artifact": {
+    "path": "harmony_morphology_study_v2_review_checklist.json",
+    "report_path": "harmony_morphology_study_v2_review_report.json",
+    "report_sha256": "03f0021b1e9b7ae027cebcd98b72cc29c796698b1c77ad151640a6d5d4fd4c59",
+    "status": "all character axes pending; independent review not assigned; owner approval false"
+  },
+  "validation": {
+    "owner_approval": false,
+    "independent_art_review": "pending",
+    "exact_sms_palette": "not validated; this RGB illustration is not pixel art",
+    "pixel_cutout_and_cluster_quality": "not applicable to this high-resolution concept board; must be checked on actual sprite sheets",
+    "animation": "not present",
+    "resource_integration": false,
+    "rom_binding": false,
+    "emulator_validation": "not applicable to source-art review"
+  },
+  "promotion_limit": "Do not replace the separately reviewed pixel sprite sheets or mark any character/sprite/ROM approved from this board. The corrected illustration only proposes construction fixes for human review."
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "harness_plan_v1",
+  "tool": {
+    "name": "harness_orchestration",
+    "version": "1.1.0"
+  },
+  "coordinator_is_single_claim_owner": true,
+  "coordinator_is_single_promotion_owner": true,
+  "max_parallel": 3,
+  "lanes": [],
+  "coordinator_tasks": [],
+  "worker_tasks": [],
+  "rejected": [
+    {
+      "id": "grip",
+      "reason": "visual_outputs_need_valid_registry:missing"
+    }
+  ],
+  "tasks": [],
+  "claim_ceiling": "orchestration_diagnostic_only",
+  "artifact_registry_checked": false,
+  "artifact_registry_problem": null,
+  "preflight_only_not_filesystem_lock": true,
+  "ok": false
+}

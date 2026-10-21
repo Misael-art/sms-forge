@@ -1,0 +1,67 @@
+{
+  "schema": "sms_subagent_session_v2",
+  "artifact_kind": "session_qa_request",
+  "task_id": "9136fdaed96d49e6805a78a5da8ca320",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01",
+  "producer_id": "/root",
+  "worker_id": "/root/review_qa_contract",
+  "lane": "visual",
+  "scope": "cumulative diagnostic input video",
+  "rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/rom.sms",
+    "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c"
+  },
+  "inputs": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/rom.sms",
+      "sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "origin": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/runtime_request/rom.sms",
+      "role": "rom"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/inputs/doc/10-memory-bank.md",
+      "sha256": "71d64c1ce7cbef8790ab7e373a08d5dd342358b78e7a6bc87f6e052d03bfde04",
+      "origin": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01/doc/10-memory-bank.md",
+      "role": "doc/10-memory-bank.md"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/inputs/doc/11-gdd.md",
+      "sha256": "6207f00888a94e7f25ca82ff9756624ca89f6a5cc8a5f6f50db3169166ea2816",
+      "origin": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01/doc/11-gdd.md",
+      "role": "doc/11-gdd.md"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/inputs/doc/15-tdd.md",
+      "sha256": "77c2bdf67bb212bdc5f29fe506faaa58b44f06aebdbd1d1970a4394993e22168",
+      "origin": "/mnt/sdcard/Projects/SMSForge/SMS_projects/laboratorio_01/doc/15-tdd.md",
+      "role": "doc/15-tdd.md"
+    }
+  ],
+  "cases": [
+    {
+      "id": "chained_input_video",
+      "axis": "controls_visual",
+      "proof": "video",
+      "expectation": "One cumulative video covers P1 then P2 controls and neutral recovery; no independent reset claim",
+      "sequence": [
+        {
+          "frames": 2
+        },
+        {
+          "p1": 8,
+          "frames": 7
+        },
+        {
+          "p2": 16,
+          "frames": 11
+        },
+        {
+          "frames": 3
+        }
+      ]
+    }
+  ],
+  "input_binding": "frozen_snapshot_v1",
+  "input_root": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request",
+  "case_relation": "chained"
+}

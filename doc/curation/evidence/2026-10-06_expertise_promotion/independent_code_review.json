@@ -1,0 +1,18 @@
+{
+  "reviewer": "/root/review_qa_contract",
+  "native_tool": "collaboration.followup_task",
+  "status": "findings_addressed",
+  "scope": "read-only tooling and doctrine review, not runtime product approval",
+  "findings": [
+    {
+      "kind": "defect",
+      "finding": "AIR stamps/durations do not prove identity/order of equal-duration elements",
+      "resolution": "Removed order from error; details and limits say not_measured; §97 requires source/ROM IDs for identity/order separately"
+    },
+    {
+      "kind": "defect",
+      "finding": "Stage numeric gate cannot prove counters froze at seal",
+      "resolution": "Claim ceiling narrowed to declared_boundary_consistency_only; source/probe review required in §97/skill/AGENTS"
+    }
+  ]
+}

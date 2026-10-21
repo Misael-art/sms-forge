@@ -1,0 +1,360 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "lord_of_the_sword_concept_sheet_v1",
+  "project": "master_of_fighters",
+  "asset_role": "concept_art",
+  "channel": "built_in_image_gen + ImageMagick + prepare_sms_pixel_art.py",
+  "design_brief": {
+    "path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_concept_prompt_v1.txt",
+    "sha256": "092e59a184fb456167de8e420db0e713549fa9d54ba570a49fb4ccfeca2175d7"
+  },
+  "prompt": {
+    "path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_surface_cleanup_prompt_v1.txt",
+    "sha256": "f1bf4fd4766179926337adf4f735c1ac3aa57208789bc30cc385485516baf2c2"
+  },
+  "prompt_history": [
+    {
+      "path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_base_generation_prompt_v1.txt",
+      "sha256": "22377e11a489833025e8e20000c2008618dcc356ae0f9d50995808bb1049787c",
+      "role": "initial concept generation; the age and moustache were later corrected from owner feedback"
+    },
+    {
+      "path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_background_cleanup_prompt_v1.txt",
+      "sha256": "2cc78a812d4f2d751e687a9b7e6798ba8b0336eae75d6ca955fcfd32d8c2dd73",
+      "role": "background and surface cleanup"
+    },
+    {
+      "path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_youth_edit_prompt_v1.txt",
+      "sha256": "346554df83d05fc1da7e62f35f986617a63721d2db2ffb2069df2d9612b0d468",
+      "role": "owner-directed youth revision; clean-shaven young adult"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "doc/11-gdd.md",
+      "sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c",
+      "role": "Landau identity, side-view source direction, sword and bow; heavy build remains a proposal"
+    },
+    {
+      "path": "doc/build_palettes_manifest.py",
+      "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e",
+      "role": "canonical palette source corrected from original Landau sprite color families"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "generated and validated per-character Master System 6-bit palette"
+    },
+    {
+      "path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_preclean_indexed.png",
+      "sha256": "b866da18642bad64d2db797826be65f25d8efa233065dc9505a7250ac03def0a",
+      "role": "youth-corrected sheet supplied to the final surface-cleanup edit"
+    }
+  ],
+  "research_refs": [
+    {
+      "url": "https://www.smspower.org/seganotebook/lordswd/manual/lordswdm.html",
+      "role": "US manual identifies Landau the Brave as a northern warrior and confirms sword and bow"
+    },
+    {
+      "url": "https://www.smspower.org/Sprites/LordOfTheSword-SMS",
+      "role": "SMS sprite archive used to verify Landau side poses"
+    },
+    {
+      "url": "https://www.smspower.org/uploads/Sprites/LordOfTheSword-SMS-Landau-StandingLeft.png",
+      "sha256": "c912d3e6aa0cf1569ff080a2427ba9c4064427eccad2b3c02c781f484a1a5de6",
+      "role": "original SMS color-block reference only; no sprite pixels copied"
+    },
+    {
+      "url": "https://www.mobygames.com/game/8261/lord-of-the-sword/cover/group-94539/cover-258514/",
+      "role": "original package illustration consulted for human features and leather/green costume; pose and composition not copied"
+    }
+  ],
+  "alpha_cleanup": {
+    "tool": "ImageMagick",
+    "method": "threshold generated alpha at 90%; recolor exact black figure pixels to opaque #555555; copy the threshold mask and flatten the exterior to black for index-0 conversion",
+    "intermediate_path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_alpha_cutout.png",
+    "intermediate_sha256": "be08e17df0dca75dc1b22c4e2ea7e24c1b6213ff3c8a3be455207291aef2814f",
+    "reason": "remove transparent halos and background speckles while preserving opaque outlines and transparent index 0"
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [
+        1536,
+        1024
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "lord_of_the_sword",
+      "speckle_cleanup": true,
+      "cell_size": [
+        768,
+        1024
+      ],
+      "transparent_index": 0
+    },
+    "palette_mapping": {
+      "useful_colors": 14,
+      "palette_rgb_with_transparent_index": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          85,
+          0,
+          0
+        ],
+        [
+          170,
+          85,
+          0
+        ],
+        [
+          85,
+          170,
+          0
+        ],
+        [
+          0,
+          85,
+          0
+        ],
+        [
+          85,
+          85,
+          170
+        ],
+        [
+          255,
+          170,
+          170
+        ],
+        [
+          170,
+          170,
+          170
+        ],
+        [
+          255,
+          85,
+          85
+        ],
+        [
+          170,
+          170,
+          255
+        ],
+        [
+          255,
+          170,
+          0
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          170,
+          0,
+          0
+        ],
+        [
+          85,
+          85,
+          0
+        ],
+        [
+          85,
+          85,
+          85
+        ]
+      ],
+      "used_role_mapping": [
+        {
+          "index": 1,
+          "rgb": [
+            85,
+            0,
+            0
+          ],
+          "role": "hair_deep"
+        },
+        {
+          "index": 2,
+          "rgb": [
+            170,
+            85,
+            0
+          ],
+          "role": "warm_mid"
+        },
+        {
+          "index": 3,
+          "rgb": [
+            85,
+            170,
+            0
+          ],
+          "role": "tunic_mid"
+        },
+        {
+          "index": 4,
+          "rgb": [
+            0,
+            85,
+            0
+          ],
+          "role": "tunic_shadow"
+        },
+        {
+          "index": 5,
+          "rgb": [
+            85,
+            85,
+            170
+          ],
+          "role": "blue_cloth_mid"
+        },
+        {
+          "index": 6,
+          "rgb": [
+            255,
+            170,
+            170
+          ],
+          "role": "skin_light"
+        },
+        {
+          "index": 7,
+          "rgb": [
+            170,
+            170,
+            170
+          ],
+          "role": "steel_mid"
+        },
+        {
+          "index": 8,
+          "rgb": [
+            255,
+            85,
+            85
+          ],
+          "role": "skin_mid"
+        },
+        {
+          "index": 9,
+          "rgb": [
+            170,
+            170,
+            255
+          ],
+          "role": "blue_cloth_light"
+        },
+        {
+          "index": 10,
+          "rgb": [
+            255,
+            170,
+            0
+          ],
+          "role": "leather_light"
+        },
+        {
+          "index": 11,
+          "rgb": [
+            255,
+            255,
+            255
+          ],
+          "role": "steel_light"
+        },
+        {
+          "index": 12,
+          "rgb": [
+            170,
+            0,
+            0
+          ],
+          "role": "red_accent"
+        },
+        {
+          "index": 13,
+          "rgb": [
+            85,
+            85,
+            0
+          ],
+          "role": "hair_olive"
+        },
+        {
+          "index": 14,
+          "rgb": [
+            85,
+            85,
+            85
+          ],
+          "role": "outline"
+        }
+      ]
+    },
+    "resource_gate": "PASS: audit_validate_resources.py --project SMS_projects/master_of_fighters --character lord_of_the_sword --kind sheet"
+  },
+  "intermediate_images": [
+    {
+      "path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_youth_generated.png",
+      "sha256": "8eed2ba1da4f3378fa844d5d134350ad249403aa049b39e02b866c0f30210698",
+      "role": "owner-directed clean-shaven young adult revision before index conversion"
+    },
+    {
+      "path": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_surface_cleaned_generated.png",
+      "sha256": "09f1815eb7ebe6072c181643f63f17cba808611c8a42115eb2d59b169121dc37",
+      "role": "selected flat-surface ImageGen cleanup before alpha and palette conversion"
+    }
+  ],
+  "image": {
+    "path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+    "sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 14
+  },
+  "visual_check": {
+    "two_distinct_full_body_poses": true,
+    "same_young_clean_shaven_character_in_both_poses": true,
+    "clothes_accessories_sword_bow_and_quiver_preserved_after_owner_feedback": true,
+    "canonical_game_color_family_used": true,
+    "granular_surface_noise_reviewed_and_cleaned": true,
+    "transparent_background_and_no_text_or_watermark": true,
+    "visual_details_outside_gdd_are_provisional": true
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "all_colors_on_sms_6bit_grid": true,
+    "per_character_manifest_palette_match": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "formal_sprite_scale_validation": false,
+    "rom_or_emulator_validation": false
+  },
+  "status": "owner_approved_visual_reference",
+  "owner_approval": {
+    "date": "2026-10-03",
+    "scope": "full rejuvenated concept approved as the visual reference for a separate idle sprite study; approval does not include the sprite sheet or runtime integration",
+    "source": "explicit user approval: 'ultima proposta rejuvenecida aprovada prossiga para os sprites'"
+  },
+  "next_gate": "create and review a separate 12-frame idle sprite study; runtime integration remains a separate gate"
+}

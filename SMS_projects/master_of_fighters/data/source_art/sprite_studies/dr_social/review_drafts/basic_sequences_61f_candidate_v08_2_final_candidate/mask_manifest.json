@@ -1,0 +1,50 @@
+{
+  "schema": "dr_social_explicit_mask_atlas_v08_2",
+  "source_sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+  "mask_atlases": {
+    "hair": "masks/mask_hair.png",
+    "coat": "masks/mask_coat.png",
+    "skin": "masks/mask_skin.png",
+    "leather": "masks/mask_leather.png",
+    "white_accessory": "masks/mask_white_accessory.png",
+    "yellow_allowed": "masks/mask_yellow_allowed.png",
+    "yellow_pending": "masks/mask_yellow_pending.png",
+    "yellow_glasses": "masks/mask_yellow_glasses.png",
+    "burgundy_allowed": "masks/mask_burgundy_allowed.png",
+    "cane_shaft": "masks/mask_cane_shaft.png",
+    "glove": "masks/mask_glove.png",
+    "collar": "masks/mask_collar.png",
+    "cravat": "masks/mask_cravat.png",
+    "boot_trim": "masks/mask_boot_trim.png",
+    "outline": "masks/mask_outline.png",
+    "transparent": "masks/mask_transparent.png"
+  },
+  "pixel_counts": {
+    "hair": 10937,
+    "coat": 55495,
+    "skin": 3322,
+    "leather": 14188,
+    "white_accessory": 2782,
+    "yellow_allowed": 262,
+    "yellow_pending": 0,
+    "yellow_glasses": 85,
+    "burgundy_allowed": 378,
+    "cane_shaft": 1245,
+    "glove": 1518,
+    "collar": 39,
+    "cravat": 363,
+    "boot_trim": 15,
+    "outline": 19612,
+    "transparent": 283424
+  },
+  "mask_rules": {
+    "hair": "largest index-9 anchor plus nearby index-8/9 locks and red index-3 fringe components touching the gray anchor in the upper 65% of the hair mass; base-skin index 2 is the face anchor",
+    "coat_skin_leather": "source palette seed masks plus unambiguous 5-of-8 same-material interior support; no expansion over outline, transparency, or protected accent zones",
+    "white_accessory": "compact glove clusters, collar pixels attached to the cravat anchor, and long straight white/gray cane-shaft components",
+    "burgundy_allowed": "central upper-torso cravat component and burgundy components touching leather near the boot baseline",
+    "yellow_allowed": "yellow components anchored to the cane shaft/pommel and owner-authorized brass glasses near the face",
+    "yellow_pending": "empty under the owner-approved v08.1 glasses policy",
+    "cane_shaft": "white 1px centerline; the original dark outline is preserved, and internal gray/white striping is forbidden",
+    "cluster_cleanup": "sub-2x2 components in hair, coat, and skin shading ramps are reassigned to a neighboring legal tone inside their own mask"
+  }
+}

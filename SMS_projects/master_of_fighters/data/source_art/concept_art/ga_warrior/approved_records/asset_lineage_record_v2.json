@@ -1,0 +1,205 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "ga_warrior_concept_sheet_v2_sms_palette",
+  "project": "master_of_fighters",
+  "asset_role": "concept_art",
+  "source_kind": "ai_generated_post_translation",
+  "channel": "built-in ImageGen image edit + ImageMagick alpha cleanup + prepare_sms_pixel_art.py palette conversion",
+  "status": "owner_approved_visual_reference",
+  "owner_approval": {
+    "date": "2026-10-03",
+    "scope": "concept art wardrobe variant only; sprite sheet and runtime assets remain separate approvals"
+  },
+  "contract": {
+    "path": "data/source_art/concept_art/ga_warrior/approved_records/ga_warrior_concept_asset_contract_v2.json",
+    "sha256": "a282948863cdd2fe71f4bc48965adc2678a9575d8fd9c7aef6e85ef3e4ae4e88"
+  },
+  "prompt": {
+    "path": "data/source_art/concept_art/ga_warrior/review_drafts/prompts/ga_warrior_concept_prompt_v2.txt",
+    "sha256": "11b36da45d0613248b1eec29545543558856c2a4a99581fa709487355ef054bb"
+  },
+  "inputs": [
+    {
+      "path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_sms_palette.png",
+      "sha256": "83dc4d943be7c05b75f8ca4d580f1fc0603ae1cc7b2f4940fbb98d82260b24bd",
+      "role": "ImageGen edit reference; preserves the pre-validated v1 identity, poses, composition and line style"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "existing hard palette contract for the translated v2 output"
+    },
+    {
+      "path": "doc/build_palettes_manifest.py",
+      "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e",
+      "role": "canonical source for the generated palette manifest"
+    }
+  ],
+  "research_refs": [
+    {
+      "url": "https://www.spriters-resource.com/master_system/goldenaxewarrior/asset/29261/",
+      "role": "original Master System playable-character sprite sheet; visual/color study only, no sprite pixels copied"
+    },
+    {
+      "url": "https://www.spriters-resource.com/media/assets/27/29261.png?updated=1755472635",
+      "sha256": "4db6d15d61e0fd08cb85bccedcaf8bd228e20295b3079814b956688bca20fbe0",
+      "role": "palette and silhouette reference only; teal sheet background excluded; no pixels copied"
+    }
+  ],
+  "generated_source": {
+    "tool": "built-in ImageGen image edit",
+    "path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_generated.png",
+    "sha256": "cd6efc4ba8f0fd5ba84f95ad00a357a733d477479be1383bbe7e1771b07a4a7b",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "format": "RGBA PNG",
+    "description": "Wardrobe edit of v1 in the same two compositions: bare chest, blue fur cape, blue trousers and brown boots; horned helmet, sword and shield retained"
+  },
+  "alpha_cleanup": {
+    "tool": "ImageMagick",
+    "method": "threshold generated alpha at 90%; apply binary mask; recolor retained pure-black contour pixels to opaque #550000; flatten transparent pixels to pure black before RGB-only conversion",
+    "mask_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_alpha_mask_v2.png",
+    "mask_sha256": "c40a8e62e51652dd33c249a77ac69cf8fa2cb8725357bded38148416528ab65c",
+    "cutout_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_alpha.png",
+    "cutout_sha256": "978000f76ab89e3f97c044044500126a03e4e2fca0b6111ae77c6311e5596af9",
+    "flattened_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_flattened.png",
+    "flattened_sha256": "236f57de0654d24c49840f98e1f8df55ebac33656e7acbd2d4b68d89afb47fe6",
+    "reason": "remove generated backdrop/glow while retaining clean opaque contours and reserving black for transparent index 0"
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [
+        1536,
+        1024
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "ga_warrior",
+      "speckle_cleanup": true,
+      "cell_size": [
+        1536,
+        1024
+      ],
+      "transparent_index": 0
+    },
+    "palette_mapping": {
+      "useful_colors": 11,
+      "palette_rgb_with_transparent_index": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          85,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          255
+        ],
+        [
+          255,
+          170,
+          85
+        ],
+        [
+          170,
+          85,
+          0
+        ],
+        [
+          255,
+          0,
+          85
+        ],
+        [
+          85,
+          170,
+          255
+        ],
+        [
+          255,
+          170,
+          170
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          0,
+          170,
+          255
+        ],
+        [
+          255,
+          255,
+          85
+        ],
+        [
+          170,
+          85,
+          85
+        ],
+        [
+          85,
+          255,
+          255
+        ]
+      ],
+      "roles": "existing blue/cyan roles for fur and trousers; skin, leather brown, gold and steel roles; cape_red remains permitted by the manifest but is unused in v2"
+    },
+    "resource_gate": "PASS: audit_validate_resources.py --kind sheet --character ga_warrior --project SMS_projects/master_of_fighters"
+  },
+  "image": {
+    "path": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_sms_palette.png",
+    "sha256": "5b88ea863db2f6ebf97722d39196812f9290f8532aee3a3c40312e07d3ca932f",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 11
+  },
+  "review_preview": {
+    "path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_preview.png",
+    "sha256": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91",
+    "description": "Indexed v2 concept sheet composited on a flat dark gray background for owner review"
+  },
+  "visual_check": {
+    "two_full_body_poses": true,
+    "same_character_and_costume_across_both_poses": true,
+    "v1_pose_compositions_and_illustration_style_retained": true,
+    "youthful_lean_morphology": true,
+    "bare_chest_blue_fur_cape_trousers_and_boots": true,
+    "horned_helmet_sword_round_shield_retained": true,
+    "palette_matches_sms_color_family": true,
+    "no_visible_generated_glow_or_detached_grain": true,
+    "external_game_pixels_used": false,
+    "text_or_watermark": false
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "all_colors_on_sms_6bit_grid": true,
+    "per_character_palette_match": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "independent_review": "pending",
+    "rom_or_emulator_validation": false
+  },
+  "next_gate": "concept v2 approved as visual reference; sprite study requires its own owner review and geometry/animation gates before integration",
+  "parent_asset": "ga_warrior_concept_sheet_v1_sms_palette"
+}

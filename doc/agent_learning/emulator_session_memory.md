@@ -230,3 +230,41 @@ Curadoria: `doc/curation/2026-10-05_l057_sessoes_privadas_emulicious.json`.
   focado após retestar hardlink/symlink/corrida e integridade das entradas.
   Probe opcional de build não rodado; doc sync mantém os dez problemas Mugen.
   `closure_diff/summary.json` registra este lote; promoção global permanece aberta.
+
+## Curadoria de asserts e apresentação — 2026-10-18, §128
+
+- Nova rota `sms-observed-case-evidence.md` / `audit_observed_cases.py`: valores
+  e deltas são rederivados de reads/ACKs, não do resumo escrito pelo produtor.
+  ROM, sessão, journal e layout são ligados por hash; o perfil é limitado à
+  RAM nativa e ao protocolo atual, sem autenticar o significado dos probes.
+- Calibração no acervo OpenBOR M6: byte do ator43→43 sustentou saldo0;
+  byte43→36 sustentou−7; declarar whiff/delta0 para o segundo journal reprovou.
+  Saldo zero não exclui dano/cura intermediários. Não houve execução nova de ROM.
+- ACK VDP, tick lógico, elemento e pose residente/submetida/apresentada são
+  domínios separados. Aguardar ticks até o teste passar não aprova prazo VDP;
+  RAM não comprova os pixels da pose. Deadline observado não é primeira ocorrência.
+- Quatro CLIs migradas: `audit_learning_capture.py`, `audit_hardware_constants.py`,
+  `audit_header_claims.py`, `audit_debug_markers.py` aceitam `--report-out` e
+  `--json`, criando exclusivamente. Destino existente, symlink/hardlink recusados;
+  demais CLIs podem manter a semântica antiga. Nunca apontar relatório à lição.
+- Evidências e revisões: `doc/curation/evidence/2026-10-18_observed_cases/`.
+  Registro: `doc/curation/2026-10-18_runtime_evidence_workflow_application.json`.
+  Não houve promoção de bug estático dos jogos a técnica resolvida nem ID novo.
+- Validação do wrapper: selftest120/120 (probe opcional de jogo não rodado),
+  70 ferramentas com self-check, learning capture/hardware/header aprovados.
+  Reteste independente do gate:25/25 vetores. Doc sync mantém os dez problemas
+  anteriores do `luta_mugen` ilegível; aplicação local validada, fechamento
+  global bloqueado por essa condição externa. Nenhum build/emulador novo.
+
+## HAMOOPIG aposentado — 2026-10-18
+
+- Pedido explícito do dono: retirar HAMOOPIG do README e do Git por obsolescência.
+- Diretório do projeto removido do índice na branch de publicação e ignorado;
+  arquivos locais, incluindo trabalho ainda não commitado, preservados.
+- Mídia e registro do projeto removidos da galeria pública; manifesto atualizado.
+- `session_bridge/consumer_acceptance.py` passou a replay histórico opt-in
+  (`--legacy`); o padrão recusa antes de criar sessões. A rota de infraestrutura
+  continua `session_bridge/acceptance.py`, sem depender desse consumidor.
+- Matriz de consumidores atualizada. Lições/medições históricas preservadas;
+  nenhuma ROM, build ou aceitação de emulador foi reexecutada nesta remoção.
+- Registro de escopo e recuperação: `doc/retired-projects.md`.

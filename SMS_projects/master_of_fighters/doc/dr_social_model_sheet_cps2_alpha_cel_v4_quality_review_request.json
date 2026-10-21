@@ -1,0 +1,54 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_cps2_alpha_cel_v4_art_review",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Independent, read-only review of Dr. Social model-sheet candidate v4 against the approved v2 matrix, the user request, and the v3 review findings. Inspect late-19th-century London costume cues across views; face, palette, scale and style continuity; both shoulder-to-hand anatomical chains and grips in the signature action; whether the cane arm is clearly in front of the torso instead of emerging behind the coat; distinction between blunt walking cane and separate rapier; boomerang silhouette versus violet trails; all labeled equipment silhouettes and reference-only boundary; ruler, baseline, card readability and crop integrity. The three v3 findings to verify are cane-arm attachment, boomerang/effects separation, and explicit source-game inventory boundary. The producer checklist is maintained as a separate record; this independent scope is anchored to the candidate image, approved matrix, project docs and source references.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate.png",
+      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "role": "current candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_metadata.json",
+      "sha256": "8c4cb412eb9dcee0640e18e4d46a15431724a989948c997f088171e85c705588",
+      "role": "candidate metadata and source-inventory boundary"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v4_candidate/dr_social_model_sheet_cps2_alpha_cel_v4_candidate_lineage.json",
+      "sha256": "4de8531c160f3e5668ac1069891dfd23338a71d42db56dd6457330748cd99bf8",
+      "role": "source and generation lineage"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/dr_social_model_sheet_cps2_alpha_cel_v3_candidate.png",
+      "sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e",
+      "role": "previous candidate and direct comparison point"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+      "role": "owner-approved identity reference; remains approved"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+      "sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c",
+      "role": "project inventory and character identity authority"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_combat_design_proposal_v1.md",
+      "sha256": "fba3fdadb46cb9ed0cd005edbd5fd1e3bf8cd8bb0ac35c10eb5ceebc2bc5db0e",
+      "role": "weapon terminology discrepancy and adaptation boundary"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not edit, replace or promote any file.",
+    "Assess the exact candidate hash and compare against the supplied v2 and v3 references; stale files block review.",
+    "Report evidence-based defects, risks and opportunities separately, with at most three revision priorities.",
+    "Do not claim AAA, sprite, moveset, animation, SMS conversion, ROM or delivery approval.",
+    "The source-game equipment panel is reference-only and inventory wording remains open; do not treat it as approval of the fan-game moveset."
+  ]
+}

@@ -12,6 +12,8 @@ COMMANDS = {
     "scene-cut": "mugen2sms.generators.scene_cut",
     "versus-cut": "mugen2sms.generators.versus_scene_cut",
     "quality-check": "audit_mugen_engine_contract",
+    "runtime-vram-plan": "mugen2sms.runtime.vram_plan",
+    "runtime-commit-budget": "mugen2sms.runtime.commit_budget",
 }
 
 def main(argv=None):

@@ -1,0 +1,58 @@
+{
+  "schema": "mof_sprite_sheet_candidate_v1",
+  "character": "joe_musashi_shadow_dancer_sms",
+  "display_name": "Shinobi / Takashi (Shadow Dancer, Master System reference)",
+  "asset_id": "joe_musashi_idle_sms_80px_12f_v2",
+  "status": "source_candidate_awaiting_owner_visual_review",
+  "owner_approved_design_reference": {
+    "artifact": "joe_musashi_shadow_dancer_model_user_approved.png",
+    "sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+    "approval_date": "2026-10-03"
+  },
+  "asset_type": "idle_animation_sprite_sheet",
+  "artifact": "joe_musashi_idle_12f_sms_80px_v2.png",
+  "preview": "joe_musashi_idle_12f_sms_80px_v2_preview.png",
+  "dimensions": {
+    "width": 320,
+    "height": 240,
+    "cell_px": [80, 80],
+    "layout": [4, 3],
+    "frame_count": 12,
+    "transparent_index": 0
+  },
+  "animation": {
+    "state": "idle_guard_breathing",
+    "loop": true,
+    "unique_frame_hashes": 12,
+    "baseline_y_px": 79,
+    "pivot_px": [40, 79],
+    "visible_width_px": [56, 64],
+    "visible_height_px": [73, 80]
+  },
+  "morphology": {
+    "class": "medium",
+    "description": "slim, agile fighter; compact guard stance; no added bulk"
+  },
+  "palette": {
+    "entry": "joe_musashi_shadow_dancer_sms",
+    "useful_colors": 7,
+    "colors": ["#550000", "#FFAA55", "#FFFFFF", "#AAAAAA", "#555555", "#AA0000", "#FFFF00"],
+    "transparent_index": 0
+  },
+  "cleanup": {
+    "dither": false,
+    "speckle_cleanup_per_cell": true,
+    "visual_review_at_target_size": true
+  },
+  "provenance": {
+    "source_kind": "ai_generated_from_owner_approved_concept",
+    "external_pixels_copied": false
+  },
+  "validation": {
+    "resource_gate": "PASS: audit_validate_resources.py accepted the 7-color character palette",
+    "animation_semantics_gate": "PASS: 12 unique frame hashes, common pivot and baseline, geometry within declared ranges",
+    "owner_visual_review": "pending",
+    "rom_integration": "not done",
+    "emulator_validation": "not done"
+  }
+}

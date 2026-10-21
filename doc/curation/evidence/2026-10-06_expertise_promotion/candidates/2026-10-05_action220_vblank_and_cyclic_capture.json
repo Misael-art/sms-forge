@@ -1,0 +1,230 @@
+{
+  "schema": "project_learning_candidate_v1",
+  "date": "2026-10-05",
+  "status": "pending_future_curation",
+  "canonical_lesson_id": null,
+  "dedup_key": "luta_mugen_action220_vblank_phase_attribution_and_cyclic_capture_20261005",
+  "existing_lessons_to_review": [
+    "L061",
+    "L082",
+    "L091",
+    "L037"
+  ],
+  "scope": "Isolated BG-only Ryo/Ryo action220/221 NTSC studies, stationary P2; limited standing-mirror CMD distance; no promotion to full engine.",
+  "rom": {
+    "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/rom/ryo_ryo_action220_streaming_visual_probe_20261005.sms",
+    "sha256": "3435e07f5e02b600cb28ae7f35e525f4b187d8e93ec5f8f7e62377f9425ca5f5",
+    "bytes": 786432
+  },
+  "observations": [
+    {
+      "topic": "Phase attribution",
+      "fact": "The first-overflow code 136 covers transition8 including PNT commit and subsequent hit logic. It does not identify the transfer alone. Explicit persisted checkpoints separated the stages.",
+      "before_raw_vcounter": [
+        199,
+        246,
+        11
+      ],
+      "before_elapsed_scanlines": [
+        0,
+        53,
+        74
+      ],
+      "after_raw_vcounter": [
+        199,
+        246,
+        251
+      ],
+      "after_elapsed_scanlines": [
+        0,
+        53,
+        58
+      ],
+      "conversion": "measure_worst_frame.profile_lines accounts for NTSC DA->D5 and FF->00. Raw subtraction 246-199 undercounts by six scanlines."
+    },
+    {
+      "topic": "Work scheduling",
+      "fact": "OTIR alone still produced two overflows. Preparing CLSN overlap during the first tick of the preceding AIR element, then applying damage only when the impact element starts, passed a sealed 3000-frame window: vovf_delta=0, vline_min=199.",
+      "limitation": "Cached overlap is valid only for the stationary positions/hurt state in this diagnostic. Moving or guarding CPU requires recomputation/invalidation based on current state; this is not a general collision solution."
+    },
+    {
+      "topic": "Cyclic video",
+      "fact": "capture_video rejected first/last equality at 0.00%, but audit_render_glitch inspected all 694 frames and observed action220 frames0/1/2/3, with zero illegal pixels. Returning to idle can produce equal endpoints while the middle contains animation.",
+      "proposed_future_gate": "Measure motion across the full decoded timeline and preserve the endpoint metric separately; do not label a video frozen using endpoints alone."
+    },
+    {
+      "topic": "Pixel identity vs AIR identity",
+      "fact": "Expected images for action220 frame2 and frame4 are byte-identical in RGB, both with and without the frame marker. images_seen therefore cannot prove absence of AIR frame4.",
+      "completed_proof": "Physical Button2 DAP trace observed AIR indices 0/1/2/3/4, two source hits (20 and42), P2 1000->980->938, return to idle and zero overflow. Request->start 0 ROM frames after prefetch; start->first hit5. DAP sampling pauses the emulator and does not prove continuous wallclock AIR timing."
+    },
+    {
+      "topic": "Fresh closure",
+      "fact": "Fresh native video passed capture:288 frames,256x192,4.81s,motion4.4%; strict audit0/288. Runtime probe59.61/59.65FPS;90s visual frame advance59.7FPS with14 transitions,no irregular states; title6 samples59-60FPS. Mandatory asset binding passed3 entries; original bank blob matches ROM slice byte-for-byte.",
+      "limitation": "NTSC stationary-P2 action220 diagnostic only; cached collision, missing source motion velset2,0,0, hitstop, reactions, guards, AI, audio, PAL and full game."
+    },
+    {
+      "topic": "Coordinate semantics correction",
+      "fact": "Ryo source ground.front=18 per actor, scale ratio72/107. P2BodyDist is front-to-front, not axis gap. Source threshold32 gives axis SMS boundary45/46. Earlier action200/201 axis31/32 variants and forced action221 axis32 do not prove source near/far dispatch. Their AIR/hit/render measurements remain scoped to manually chosen actions.",
+      "primary_documentation": "https://www.elecbyte.com/mugendocs/trigger.html",
+      "implemented_measurement": "tools/sms_wrapper/mugen2sms/analysis/bg_normal_phase_probe.py --self-check (13 cases); new ROM logs rational source body distance and AIR boundary stamps.",
+      "scope": "Standing mirrored Ryo with source xscale1; air Width/state changes and complete ordered CMD dispatch remain unproved."
+    },
+    {
+      "topic": "Continuous AIR telemetry vs DAP coverage",
+      "fact": "First action221 trace sampled AIR indices0/1/4 and failed sampled coverage; the same ROM recorded all six boundaries and exact durations6/8/4/4/8. DAP pauses/read timing can skip short elements. Failed report retained. Second physical trace observed0/1/2/3/4, all ROM durations, body-distance2330/72, sourceaction221, pose latency1frame and pose->hit6frames; one source62hit and nooverflow.",
+      "measurement": "ROM-written boundary timestamps are compared against source AIR, with six self-check cases including missing/duplicate/changed boundaries and16-bit rollover; full-framebuffer strict proof remains separate.",
+      "limitation": "No claims of wallclock duration from paused DAP; no hitstop/reactions or moving-opponent collision."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_otir_worst_frame_20261005.json.json",
+      "sha256": "4ec6078e282868d6dccbd30422cff5f67d09e6814126d35083c95cd7b6c25bdc",
+      "bytes": 772
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_pnt_profile_worst_frame_20261005.json.json",
+      "sha256": "63f48a7c1ac79450c3572086f0ea32ff175cf48840eee94d4607a18f87fd6375",
+      "bytes": 1894
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_deferred_hit_worst_frame_20261005.json",
+      "sha256": "b85af81021fd1394d28ca97085deffc6b458c7b799557b7f964055101a1e57dc",
+      "bytes": 1899
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_deferred_hit_sequence_20261005.mp4.mp4",
+      "sha256": "138f359b80cf0789e129eae0f036f116f1824027ce3a44986f0159491ad8628c",
+      "bytes": 119931
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_deferred_hit_render_glitch_20261005.json",
+      "sha256": "9e227ed906d30726ef9e536e775382efb1a0e974dc6319b455fd68a71a6aea47",
+      "bytes": 1051
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_physical_input_trace_20261005.json",
+      "sha256": "a98354a377240f378a055ef55a2136eaba7f8c872b5bfa48a8d2253ab510083b",
+      "bytes": 6606
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_deferred_hit_native_20261005.mp4",
+      "sha256": "a424943af35ea61a85a2887e6d5ef15e8446fc164241fd155a653161495e49b8",
+      "bytes": 66465
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_deferred_hit_native_render_glitch_20261005.json",
+      "sha256": "260ca42264e82d584183c92e87e94db1790365a82db517100099ed4b0a01e37b",
+      "bytes": 1133
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_runtime_probe_20261005.json",
+      "sha256": "d9cc403730dc6adff17b52f8166192fcc81e60e5d43c2aba80fe0a28f13cb7f8",
+      "bytes": 1579
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_frame_advance_20261005.json",
+      "sha256": "75387f80b0b837055ef0205153c8150399c50d4be19fe7eed8eb1a8cd0891107",
+      "bytes": 825
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_title_fps_20261005.json",
+      "sha256": "0e5bc30f79850fcacc7296c33507888cc752101cf931b4b76c6dd2a61b7f8abc",
+      "bytes": 621
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action220_streaming_visual_probe_20261005/out/evidence/action220_rom_asset_binding_20261005.json",
+      "sha256": "d445cc36a13d7de71a521fc1552c60c1ecad1b8e2ce06f93a223b8885b55987a",
+      "bytes": 322
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_worst_frame_20261005.json",
+      "sha256": "75999008fdc7001a8d3ed28856b04baf1e5005aaf94bba72232518224918d6b1",
+      "bytes": 1886
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_physical_input_trace_20261005.json",
+      "sha256": "fc4f92b27e6dcf70d241a7eec75ea793da96974c5ace4e24d0d865aaa4e48e37",
+      "bytes": 6560
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_dap_sample_coverage_fail_20261005.json",
+      "sha256": "85c470978a3e3b49c3af951c03b0005d1e7c5f5466413f08d2dd02907f8840cc",
+      "bytes": 5176
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/normal_phase_plan_20261005.json",
+      "sha256": "062dee1174af512ad2bf7e4300d260db7c6a1ceb5f16a026a085ec99f5194ab5",
+      "bytes": 2212
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_rom_asset_binding_20261005.json",
+      "sha256": "16938ca1d04d505aeb98bb9d163840ee639abc47f9b592b3f60109cb669cf132",
+      "bytes": 420
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_native_20261005.mp4",
+      "sha256": "36705039c3987049aeab9047b20d75f78ee481046efba4691644e7cc67f7dea9",
+      "bytes": 65924
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_native_render_glitch_20261005.json",
+      "sha256": "cba2cfeae663db263c2be4e2aa061b0e2610f4b9fbd9a8a6685a39d5070d0502",
+      "bytes": 1296
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_runtime_probe_20261005.json",
+      "sha256": "f2e7fbe760f14d0857e6ec217f79efc1a7a403a934b5738a699b45b844ecd8bd",
+      "bytes": 1539
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_frame_advance_20261005.json",
+      "sha256": "8e8ee342354be954b31c579bdb16ad2afeae8ffad21004b546bd8a055c0a90fe",
+      "bytes": 815
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_title_fps_20261005.json",
+      "sha256": "bdc206ac94793878624650e07017e30f92685899c54c64ece534ecfa5737c3f9",
+      "bytes": 623
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_fresh_bundle_20261005.json",
+      "sha256": "085efa0098e81c9590a326154c2cec573f1beb1c56dcf30bfa4f9d57d6b07c0a",
+      "bytes": 3674
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action220_221_source_boundary_pair_budget_20261005.json",
+      "sha256": "6c199d9106daa231f528d32df6a6a02ae7e12990629a842d496f79c5aa1b0a59",
+      "bytes": 781
+    }
+  ],
+  "tools_that_measure": [
+    "measure_worst_frame.py",
+    "audit_render_glitch.py",
+    "capture_video.py",
+    "measure_runtime_probe.py",
+    "measure_frame_advance.py",
+    "measure_fps.py",
+    "audit_rom_asset_binding.py",
+    "mugen2sms/analysis/bg_normal_phase_probe.py",
+    "out/evidence/trace_action221_bodydist_physical_input_20261005.py (diagnostic driver)"
+  ],
+  "self_checks_observed": [
+    "measure_worst_frame.py --self-check PASS",
+    "audit_render_glitch.py --self-check PASS",
+    "capture_video.py --self-check PASS",
+    "measure_runtime_probe.py --self-check PASS",
+    "measure_frame_advance.py --self-check PASS",
+    "measure_fps.py --self-check PASS",
+    "audit_rom_asset_binding.py --self-check PASS",
+    "bg_normal_phase_probe --self-check PASS13 cases",
+    "trace_action221_bodydist_physical_input --self-check PASS6 cases"
+  ],
+  "future_curation_actions": [
+    "Deduplicate against L061/L082/L091/L037 and canonical learning ledger before issuing any ID.",
+    "Review temporal-motion rejection in capture_video with a cyclic-animation regression fixture.",
+    "Review optional explicit stage and AIR-index telemetry for overlapping data-transfer and collision work.",
+    "Deduplicate coordinate-domain/axis-vs-front lesson, require source-unit body widths in CMD dispatch fidelity evidence; do not retroactively relabel old AIR captures as dispatcher proof."
+  ],
+  "promotion": "No canonical rules, wrapper tools, registry or central learning ledger changed by this candidate."
+}

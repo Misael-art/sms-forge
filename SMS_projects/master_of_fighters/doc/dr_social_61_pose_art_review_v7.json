@@ -1,0 +1,86 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_61_pose_sms_conversion_v7",
+  "producer": "codex_sprite_conversion",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/dr_social_61_pose_converted_preview_4x.png",
+    "sha256": "5e23291629f7aca134c79e16d5097aab1a45c5f052c5156d4ac80814f6243719",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+    "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057"
+  },
+  "required_characters": ["dr_ferdinand_social"],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+          "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+          "role": "owner-approved 61-pose identity, anatomy, clothing, equipment and animation source"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "approved visual direction and costume/material reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "character palette authority; palette compliance does not approve shade placement"
+        }
+      ],
+      "observed_defects": [
+        "Blue and cyan clothing tones were dispersed through the garment without a clear spatial shadow-to-base-to-light progression."
+      ],
+      "revision_notes": [
+        "V7 uses the existing cloth ramp in luminance order: #005555 shadow, #00AAAA base, #55AAFF highlight.",
+        "The v5-to-v7 audit checked all 61 frames: 15,690 RGB changes, zero alpha/silhouette changes, and zero changes outside those three cloth colors.",
+        "The material shadow-flow axis still needs independent visual review in every frame at 1x and nearest-neighbor 4x. The author has not approved this conversion."
+      ],
+      "review_axes": {
+        "pixel_clusters": {"status": "pending", "note": "Inspect every converted frame at native size and nearest-neighbor 4x."},
+        "face_detail_readability": {"status": "pending", "note": "Independent visual review pending."},
+        "outline_and_cutout": {"status": "pending", "note": "Independent visual review pending."},
+        "material_shading": {"status": "pending", "note": "Independent visual review pending."},
+        "material_shadow_flow_coherence": {"status": "pending", "note": "Confirm the blue/cyan cloth ramp follows coherent garment planes and folds across all 61 poses."},
+        "hand_weapon_attachment": {"status": "pending", "note": "Independent visual review pending."},
+        "equipment_geometry": {"status": "pending", "note": "Independent visual review pending."},
+        "frame_pose_integrity": {"status": "pending", "note": "Independent visual review pending."},
+        "native_size_readability": {"status": "pending", "note": "Independent visual review pending."}
+      }
+    }
+  ],
+  "independent_review": {"status": "pending_assignment"},
+  "owner_approval": {"approved": false},
+  "conversion_validation": {
+    "delta_audit": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/dr_social_61_pose_ramp_delta_v5_v7.json",
+    "delta_audit_status": "pass",
+    "delta_audit_sha256": "cff30b216a4a56594d6014cb090216ab159cbc223107917a2533ea8368811f46",
+    "rom": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/out/rom/dr_social_61_pose_review_v7.sms",
+    "rom_sha256": "b27c328d11c58ba96474b83368d8a0afcda79600b388d21cb510b812632f53c2",
+    "framebuffer_fidelity_reports": [
+      "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/out/evidence/framebuffer_render_fidelity_ID01_v7.json",
+      "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/out/evidence/framebuffer_render_fidelity_ID02_v7.json",
+      "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v7/project/out/evidence/framebuffer_render_fidelity_ID03_v7.json"
+    ],
+    "framebuffer_verified_poses": 3,
+    "total_poses": 61,
+    "scope": "Diagnostic render only; it does not establish artistic approval, continuous animation, gameplay, FPS, audio or production budgets."
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "diagnostic_sprite_conversion_candidate; three poses exact in this diagnostic ROM; remaining artistic and production axes pending"
+}

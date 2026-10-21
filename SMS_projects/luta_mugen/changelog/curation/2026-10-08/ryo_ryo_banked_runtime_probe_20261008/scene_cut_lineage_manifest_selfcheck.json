@@ -1,0 +1,47 @@
+{
+  "schema": "luta_mugen_scene_cut_lineage_manifest_selfcheck_v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "valid_baseline",
+      "ok": true,
+      "errors": [],
+      "expected_error": null
+    },
+    {
+      "name": "changed_source_fails_closed",
+      "ok": true,
+      "errors": [
+        "source_archive_sha256_mismatch"
+      ],
+      "expected_error": "source_archive_sha256_mismatch"
+    },
+    {
+      "name": "missing_sprite_fails_closed",
+      "ok": true,
+      "errors": [
+        "source_air_identity_mismatch",
+        "missing_source_sprite"
+      ],
+      "expected_error": "missing_source_sprite"
+    },
+    {
+      "name": "bank_boundary_fails_closed",
+      "ok": true,
+      "errors": [
+        "tile_payload_crosses_bank"
+      ],
+      "expected_error": "tile_payload_crosses_bank"
+    },
+    {
+      "name": "wrong_rom_fails_closed",
+      "ok": true,
+      "errors": [
+        "candidate_rom_sha256_mismatch"
+      ],
+      "expected_error": "candidate_rom_sha256_mismatch"
+    }
+  ],
+  "failures": [],
+  "scope": "isolated Ryo/Ryo draft contract fixtures; no canonical gate or emulator proof"
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "asset_contract_v1",
+  "asset_id": "jj_zillion_ii_concept_sheet_v4",
+  "project": "master_of_fighters",
+  "character_id": "jj_zillion_ii",
+  "asset_role": "concept_art",
+  "status": "owner_approved_visual_reference",
+  "source_game": "Zillion II: The Tri Formation (Sega Master System)",
+  "lineage_record": "data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_lineage_v4.json",
+  "owner_approval": {
+    "date": "2026-10-04",
+    "scope": "visual approval of concept v4; authorizes a separate sprite study, not sprite approval, gameplay data, ROM integration or emulator validation",
+    "source": "explicit user approval in conversation"
+  },
+  "image": {
+    "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+    "dimensions_px": [1536, 1024],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [0],
+    "useful_colors": 13,
+    "layout": "two side-by-side full-body poses of the same character"
+  },
+  "reference_boundary": {
+    "game_sprite": "J.J - Standing from the Master System game; source of character identity and SMS color family",
+    "primary_source": {
+      "medium": "game_sms",
+      "source": "J.J - Standing",
+      "roles": ["identity", "sms_palette", "gameplay_behavior"]
+    },
+    "anime_refs": [
+      "official Production I.G. full-body J.J. model sheet for costume construction only",
+      "Akai Koudan Zillion color art scan for red suit/collar and pale guards only"
+    ],
+    "supplementary_sources": [
+      {
+        "medium": "anime",
+        "source": "Production I.G. Zillion art gallery, J.J. three-view model sheet",
+        "url": "https://note.com/production_ig_p/n/n4bf0b19573c1",
+        "role": "costume_construction",
+        "owner_requested": true,
+        "defines_identity": false,
+        "defines_palette": false,
+        "defines_gameplay": false,
+        "defines_lore": false,
+        "copies_pixels": false,
+        "copies_poses": false
+      },
+      {
+        "medium": "anime",
+        "source": "Akai Koudan Zillion color art scan",
+        "url": "https://safebooru.org/index.php?id=6459990&page=post&s=view",
+        "role": "costume_color_mapping",
+        "owner_requested": true,
+        "defines_identity": false,
+        "defines_palette": false,
+        "defines_gameplay": false,
+        "defines_lore": false,
+        "copies_pixels": false,
+        "copies_poses": false
+      }
+    ],
+    "anime_reference_used_for_costume_only": true,
+    "anime_reference_used_for_palette_or_moveset": false,
+    "external_pixels_copied": false,
+    "poses_or_composition_copied": false
+  },
+  "character_contract": {
+    "morphology": "youthful reading, lean and agile; no bulky armor",
+    "costume": [
+      "fitted red-magenta White Knights suit",
+      "high protective collar/neck wrap",
+      "small rounded pale shoulder caps",
+      "diagonal dark harness with octagonal chest mount",
+      "utility belt and thigh holster",
+      "pale forearm guards and rounded knee guards",
+      "tall boots"
+    ],
+    "hair_color_family": "blue-violet from the Master System sprite; exact cut remains provisional",
+    "equipment": ["compact Zillion laser pistol"],
+    "poses": [
+      "three-quarter moving guard with pistol low",
+      "lateral advance with one controlled shot"
+    ],
+    "not_included": [
+      "anime-specific pose or composition",
+      "other characters",
+      "Tri-Formation vehicle",
+      "transformed Armorater suit",
+      "logos or background"
+    ]
+  },
+  "palette_contract": {
+    "manifest": "doc/palettes_manifest.json",
+    "palette_source": "doc/build_palettes_manifest.py",
+    "character": "jj_zillion_ii",
+    "useful_colors_max": 15,
+    "useful_colors": 13,
+    "dither": "none",
+    "transparent_index": 0,
+    "outline": "opaque navy #000055",
+    "grain_or_speckle": "not allowed"
+  },
+  "approval_scope": "owner-approved concept-art visual reference only; this approval authorizes a separate sprite study but does not approve sprite frames, moveset frame data, ROM integration, scanline budget, or emulator validation"
+}

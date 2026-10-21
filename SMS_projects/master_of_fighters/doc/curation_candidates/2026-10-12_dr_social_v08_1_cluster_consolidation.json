@@ -1,0 +1,81 @@
+{
+  "schema": "smsforge_art_curation_candidate_v1",
+  "id": "dr_social_v08_1_cluster_consolidation_2026-10-12",
+  "status": "candidate_fail_cluster_gate_pending_owner_visual_review",
+  "owner_directive": {
+    "yellow_glasses_authorized": true,
+    "preserve_glasses_pixels": 85,
+    "minimum_shade_cluster_px": [2, 2],
+    "cane_shaft_exception": "continuous 1px white shaft with original dark outline",
+    "resolve_pending_residuals": true,
+    "prohibit_image_generation_and_diffusion": true
+  },
+  "source": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+    "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+    "role": "frozen geometry only"
+  },
+  "candidate": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_1_candidate.png",
+    "sha256": "c533542455566ab237c41b6395dd1fccf6bf95d7d3abfe44ce95ad10ddfc096a",
+    "samples_1x_4x": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/dr_social_v08_1_keypose_samples_1x_4x.png",
+    "report": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/dr_social_v08_1_mask_compliance_report.json",
+    "change_log": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/pixel_change_log.csv",
+    "mask_atlas": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/masks/"
+  },
+  "method": {
+    "tool": "tools/build_dr_social_61f_v08_1_masks.py",
+    "deterministic": true,
+    "masks": "per-frame semantic material masks",
+    "cluster_vote": "frozen snapshot; adjacent legal material-ramp tones only",
+    "geometry_or_alpha_edits": false,
+    "rom_compiled": false,
+    "integrated_into_res": false
+  },
+  "results": {
+    "canvas_px": [640, 720],
+    "grid": [8, 9],
+    "cell_px": [80, 80],
+    "active_poses": 61,
+    "alpha_changed_pixels": 0,
+    "changes_outside_masks": 0,
+    "unresolved_pixels": 0,
+    "yellow_pixels_source_total": 398,
+    "yellow_pixels_candidate_total": 262,
+    "yellow_glasses_pixels_preserved": 85,
+      "hair_non_gray_pixels_inside_mask": 0,
+      "hair_frames_audited": 61,
+      "red_shadow_pixels_reclaimed_from_upper_fringe": 1014,
+    "semantic_leaks": {
+      "white_outside_zone": 0,
+      "yellow_outside_zone": 0,
+      "burgundy_outside_zone": 0,
+      "gray_outside_hair_or_cane": 0
+    },
+    "cane_shaft_pixels": 1245,
+    "cane_shaft_nonwhite_pixels": 0,
+    "singletons_after": {
+      "hair": 73,
+      "coat": 96,
+      "skin": 341
+    },
+    "components_below_2x2_after": {
+      "hair": 102,
+      "coat": 139,
+      "skin": 553
+    },
+    "cluster_cleanup_pixels_changed": {
+      "hair": 25,
+      "coat": 457,
+      "skin": 322
+    }
+  },
+  "curation_learning": [
+    "Owner authorization of a semantic color zone must be represented as a named mask and counted separately from other uses of that palette index.",
+    "The cane is a deliberate 1px structural exception; uniform color and outline continuity are more useful checks than a generic 2x2 threshold.",
+    "A mask-constrained clustering pass can remove supported shade islands but cannot safely merge pixels separated from all legal same-material tones without changing semantic ownership or outline geometry.",
+    "Hair-color validation must inspect the material mask and the visible hairline. A color-clean mask can still miss a red source component at the fringe; recover that component only when it is anchored to the gray hair and outside the skin-face region.",
+    "A zero semantic-leak report is not equivalent to a clean cluster audit or artistic approval; the candidate remains failed while any mandated cluster gate is nonzero."
+  ],
+  "next_gate": "Do not promote. Owner visual review of the 1x/4x sample; then obtain explicit scope approval before touching outline or material ownership to resolve remaining isolated components."
+}

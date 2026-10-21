@@ -170,3 +170,7 @@ def test_push_e_idempotente_aplicar_duas_vezes_nao_anda_mais(tmp_path):
     segundo = _sep(exe, primeiro["ax"], primeiro["bx"])
     assert segundo["moved"] == 0
     assert (segundo["ax"], segundo["bx"]) == (primeiro["ax"], primeiro["bx"])
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

@@ -1,0 +1,203 @@
+{
+  "schema": "attack_cmds_v1",
+  "generated_by": "tools/sms_wrapper/mugen2sms/generators/cmd_patterns.py",
+  "blob_fmt_version": 4,
+  "sources": {
+    "p1": "SMS_projects/luta_mugen/base/OUTROS/ffspRyo_v3.zip",
+    "p2": "SMS_projects/luta_mugen/base/OUTROS/ffspRyo_v3.zip"
+  },
+  "configs": {
+    "p1": "SMS_projects/luta_mugen/data/ryo_v3_runtime_cut_20261006.json",
+    "p2": "SMS_projects/luta_mugen/data/ryo_v3_runtime_cut_20261006.json"
+  },
+  "source_sha256": {
+    "p1": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133",
+    "p2": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133"
+  },
+  "patterns": {
+    "p1": {
+      "lp": "04010101100400",
+      "hp": "04010101100800",
+      "lk": "04010101200400",
+      "hk": "04010101200800"
+    },
+    "p2": {
+      "lp": "04010101100400",
+      "hp": "04010101100800",
+      "lk": "04010101200400",
+      "hk": "04010101200800"
+    }
+  },
+  "provenance": {
+    "p1": {
+      "slug": "FFSPRYO",
+      "def_path": "ffspRyo.def",
+      "aliases": {
+        "BUTTON1": "z",
+        "FORWARD_DOUBLE": "FF",
+        "LP": "x",
+        "HP": "z",
+        "LK": "a",
+        "HK": "c",
+        "SPECIAL": "236_x"
+      },
+      "commands_parseados": 123,
+      "commands_pulados": {
+        "16_b": "botao-sem-tier-no-mapa",
+        "16_y": "botao-sem-tier-no-mapa",
+        "236236_b": "botao-sem-tier-no-mapa",
+        "236236_y": "botao-sem-tier-no-mapa",
+        "236_b": "botao-sem-tier-no-mapa",
+        "236_y": "botao-sem-tier-no-mapa",
+        "623_b": "botao-sem-tier-no-mapa",
+        "623_y": "botao-sem-tier-no-mapa",
+        "641236_b": "botao-sem-tier-no-mapa",
+        "641236_y": "botao-sem-tier-no-mapa",
+        "646_y": "botao-sem-tier-no-mapa",
+        "AI_22": "botao-sem-tier-no-mapa",
+        "AI_23": "botao-sem-tier-no-mapa",
+        "AI_24": "botao-sem-tier-no-mapa",
+        "AI_25": "botao-sem-tier-no-mapa",
+        "AI_26": "botao-sem-tier-no-mapa",
+        "AI_27": "botao-sem-tier-no-mapa",
+        "AI_28": "start-reservado",
+        "AI_29": "start-reservado",
+        "ab": "botao-sem-tier-no-mapa",
+        "abc": "botao-sem-tier-no-mapa",
+        "b": "botao-sem-tier-no-mapa",
+        "back_ab": "botao-sem-tier-no-mapa",
+        "back_b": "botao-sem-tier-no-mapa",
+        "back_y": "botao-sem-tier-no-mapa",
+        "bc": "botao-sem-tier-no-mapa",
+        "by": "botao-sem-tier-no-mapa",
+        "down_b": "botao-sem-tier-no-mapa",
+        "down_y": "botao-sem-tier-no-mapa",
+        "fwd_ab": "botao-sem-tier-no-mapa",
+        "fwd_b": "botao-sem-tier-no-mapa",
+        "fwd_y": "botao-sem-tier-no-mapa",
+        "hold2_b": "botao-sem-tier-no-mapa",
+        "hold2_y": "botao-sem-tier-no-mapa",
+        "hold_b": "botao-sem-tier-no-mapa",
+        "hold_y": "botao-sem-tier-no-mapa",
+        "ranbu_k": "acorde-na-mesma-tecla",
+        "ranbu_p": "acorde-na-mesma-tecla",
+        "s": "start-reservado",
+        "xy": "botao-sem-tier-no-mapa",
+        "xyz": "botao-sem-tier-no-mapa",
+        "y": "botao-sem-tier-no-mapa",
+        "yz": "botao-sem-tier-no-mapa"
+      },
+      "control_map": {
+        "families": {
+          "1": [
+            "x",
+            "z"
+          ],
+          "2": [
+            "a",
+            "c"
+          ]
+        },
+        "thresholds": {
+          "1": [
+            6
+          ],
+          "2": [
+            6
+          ]
+        },
+        "policy": "release_or_threshold",
+        "dropped": [
+          "b",
+          "y"
+        ],
+        "declarado_no_config": true
+      }
+    },
+    "p2": {
+      "slug": "FFSPRYO",
+      "def_path": "ffspRyo.def",
+      "aliases": {
+        "BUTTON1": "z",
+        "FORWARD_DOUBLE": "FF",
+        "LP": "x",
+        "HP": "z",
+        "LK": "a",
+        "HK": "c",
+        "SPECIAL": "236_x"
+      },
+      "commands_parseados": 123,
+      "commands_pulados": {
+        "16_b": "botao-sem-tier-no-mapa",
+        "16_y": "botao-sem-tier-no-mapa",
+        "236236_b": "botao-sem-tier-no-mapa",
+        "236236_y": "botao-sem-tier-no-mapa",
+        "236_b": "botao-sem-tier-no-mapa",
+        "236_y": "botao-sem-tier-no-mapa",
+        "623_b": "botao-sem-tier-no-mapa",
+        "623_y": "botao-sem-tier-no-mapa",
+        "641236_b": "botao-sem-tier-no-mapa",
+        "641236_y": "botao-sem-tier-no-mapa",
+        "646_y": "botao-sem-tier-no-mapa",
+        "AI_22": "botao-sem-tier-no-mapa",
+        "AI_23": "botao-sem-tier-no-mapa",
+        "AI_24": "botao-sem-tier-no-mapa",
+        "AI_25": "botao-sem-tier-no-mapa",
+        "AI_26": "botao-sem-tier-no-mapa",
+        "AI_27": "botao-sem-tier-no-mapa",
+        "AI_28": "start-reservado",
+        "AI_29": "start-reservado",
+        "ab": "botao-sem-tier-no-mapa",
+        "abc": "botao-sem-tier-no-mapa",
+        "b": "botao-sem-tier-no-mapa",
+        "back_ab": "botao-sem-tier-no-mapa",
+        "back_b": "botao-sem-tier-no-mapa",
+        "back_y": "botao-sem-tier-no-mapa",
+        "bc": "botao-sem-tier-no-mapa",
+        "by": "botao-sem-tier-no-mapa",
+        "down_b": "botao-sem-tier-no-mapa",
+        "down_y": "botao-sem-tier-no-mapa",
+        "fwd_ab": "botao-sem-tier-no-mapa",
+        "fwd_b": "botao-sem-tier-no-mapa",
+        "fwd_y": "botao-sem-tier-no-mapa",
+        "hold2_b": "botao-sem-tier-no-mapa",
+        "hold2_y": "botao-sem-tier-no-mapa",
+        "hold_b": "botao-sem-tier-no-mapa",
+        "hold_y": "botao-sem-tier-no-mapa",
+        "ranbu_k": "acorde-na-mesma-tecla",
+        "ranbu_p": "acorde-na-mesma-tecla",
+        "s": "start-reservado",
+        "xy": "botao-sem-tier-no-mapa",
+        "xyz": "botao-sem-tier-no-mapa",
+        "y": "botao-sem-tier-no-mapa",
+        "yz": "botao-sem-tier-no-mapa"
+      },
+      "control_map": {
+        "families": {
+          "1": [
+            "x",
+            "z"
+          ],
+          "2": [
+            "a",
+            "c"
+          ]
+        },
+        "thresholds": {
+          "1": [
+            6
+          ],
+          "2": [
+            6
+          ]
+        },
+        "policy": "release_or_threshold",
+        "dropped": [
+          "b",
+          "y"
+        ],
+        "declarado_no_config": true
+      }
+    }
+  }
+}

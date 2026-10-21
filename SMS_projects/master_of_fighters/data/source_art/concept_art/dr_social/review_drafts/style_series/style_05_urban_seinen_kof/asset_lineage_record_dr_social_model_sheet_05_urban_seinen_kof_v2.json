@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_05_urban_seinen_kof_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "catalog_index": 5,
+  "style_id": "Urban-Seinen-KOF",
+  "artistic_style_reference": {
+    "named_artist": "Toshiaki Mori (Shinkiro)",
+    "reference_role_and_scope": "Official artist of the KOF 98 promotional poster/main visual.",
+    "source_url": "https://www.snk-corp.co.jp/snkmasterpiece/gallery07/",
+    "attribution_status": "verified_primary_source",
+    "style_signature": [
+      "hand-rendered promotional realism",
+      "mature facial and material modeling",
+      "cinematic lighting and refined anatomy"
+    ],
+    "basis_and_limits": "SNK explicitly describes the artwork as hand-drawn and strikingly realistic; this is promotional art, not sprite technique."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v1.json",
+    "sha256": "4cb5f011c467c9ed4437fab51d9778f90eb648b135db881d18b4f90b6b84e05a"
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png",
+    "sha256": "bf994540105b99a0a313a5ec12530f260fa54b0944e82bb7a93c26a892a0424d",
+    "dimensions_px": [
+      1983,
+      793
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt",
+    "sha256": "b33311b7d99f489a8262ccc45c06863adb5bd0800d3d888e5abcbcff98b6643b",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2_metadata.json",
+    "sha256": "2164249e1cb27e70b5332740aab96b0de34dcc05cb92e91a59ae039eaf5d2387"
+  },
+  "composition": {
+    "method": "metadata_card_only_overlay",
+    "tool": "Pillow card-only annotation; base art outside the metadata card was pixel-checked unchanged",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v1.png",
+    "base_model_sheet_sha256": "dd79f1393380b075b81e10ee5988adbd22a282b4ebd7d8940b1500a4f35ca2fa",
+    "art_scale": "preserved from base sheet"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2.png",
+    "sha256": "5abeb8c28efb74afa443c1a0873cbd671ac9c0d4e17527c705c08e2b3f1101db",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_v2.json",
+    "status": "pending_independent_and_owner_review"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

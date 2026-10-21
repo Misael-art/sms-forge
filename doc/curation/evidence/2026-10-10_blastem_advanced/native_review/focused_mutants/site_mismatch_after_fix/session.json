@@ -1,0 +1,180 @@
+{
+  "schema": "sms_blastem_session_v1",
+  "session_id": "site_mismatch_after_fix",
+  "state": "completed",
+  "machine": "sms",
+  "model": "sms2",
+  "region": "ntsc",
+  "emulator_sha256": "1bd0f40ddcc6d769f6cc2aea59bb2973601b6db30bdd849b68315b9d83ad06ec",
+  "archive_sha256": "9e47b68a555e24db5ef5bd77e67967124ac3e28ae04ae32e9f3af3eaecf31860",
+  "claim_scope": "diagnostic_states_only",
+  "fps_claim": false,
+  "hardware_validation": false,
+  "audio": "dummy_not_tested",
+  "frame_clock": "VDP_debugger",
+  "input": "native_debugger_process_local_bindings",
+  "baseline_checked_before_input": true,
+  "rom_sha256": "1e8a4015772479f2da9a9325b4a4d0d12df2d903602beb3c860178f369432684",
+  "baseline_precondition_count": 0,
+  "case_applicability": "not_declared_generic_diagnostic_only",
+  "wrapper_sha256": "eac3c1e9473d2c5915e607c902fd78c03bd5c18cdf1272ac0e01580486b2f0b6",
+  "sequence_sha256": "46571e4f8551380e7404d251e3f127e7875105f3d1f737eb2a9822de57ccc93d",
+  "config_sha256": "018b4a058428b5c232c90e0fb753a080e8f810a6679c086e70888a40925d500e",
+  "cleanup": {
+    "sandbox_exited": true,
+    "xvfb_exited": true
+  },
+  "sandbox_process": {
+    "pid": 999999999,
+    "start_ticks": "absent"
+  },
+  "xvfb_process": {
+    "pid": 999999998,
+    "start_ticks": "absent"
+  },
+  "boundaries": [
+    {
+      "index": 0,
+      "vdp_frame": 120
+    },
+    {
+      "index": 1,
+      "vdp_frame": 127
+    }
+  ],
+  "cpu_snapshots": [
+    {
+      "index": 0,
+      "pc": 1,
+      "sp": 2,
+      "af": 3,
+      "bc": 4,
+      "de": 5,
+      "hl": 6,
+      "ix": 7,
+      "iy": 8,
+      "internal_cycle": 9,
+      "iff1": 1
+    },
+    {
+      "index": 1,
+      "pc": 1,
+      "sp": 2,
+      "af": 3,
+      "bc": 4,
+      "de": 5,
+      "hl": 6,
+      "ix": 7,
+      "iy": 8,
+      "internal_cycle": 9,
+      "iff1": 1
+    }
+  ],
+  "screenshot_extra_frames": 1,
+  "screenshot_informative": true,
+  "files": {
+    "adapter_source.py": {
+      "sha256": "eac3c1e9473d2c5915e607c902fd78c03bd5c18cdf1272ac0e01580486b2f0b6",
+      "bytes": 28
+    },
+    "rom.sms": {
+      "sha256": "1e8a4015772479f2da9a9325b4a4d0d12df2d903602beb3c860178f369432684",
+      "bytes": 34
+    },
+    "sequence.json": {
+      "sha256": "46571e4f8551380e7404d251e3f127e7875105f3d1f737eb2a9822de57ccc93d",
+      "bytes": 211
+    },
+    "debugger.log": {
+      "sha256": "9aab2a5663f4b45ebc9ab50dd5f6072c955f5993c6f2f6b9f2902b62faa200b4",
+      "bytes": 202
+    },
+    "diagnostics_source.py": {
+      "sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+      "bytes": 13162
+    },
+    "screenshots/native.png": {
+      "sha256": "389fe2220ed02cf59b820b1098f35a9b54ecee24884fff7faf8c87ee2c822fca",
+      "bytes": 225
+    },
+    "snapshots/000/ram.bin": {
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "bytes": 8192
+    },
+    "snapshots/000/vram.bin": {
+      "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "bytes": 16384
+    },
+    "snapshots/000/cram_internal.bin": {
+      "sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "bytes": 64
+    },
+    "snapshots/000/vdp_regs.bin": {
+      "sha256": "c6f378205327fa9e8eb42cfdbeff1702d60a5fbf5e1a909ba6c6ca0ecd971907",
+      "bytes": 11
+    },
+    "snapshots/000/psg_frequency.bin": {
+      "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "bytes": 8
+    },
+    "snapshots/000/psg_volume.bin": {
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "bytes": 4
+    },
+    "snapshots/001/ram.bin": {
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "bytes": 8192
+    },
+    "snapshots/001/vram.bin": {
+      "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "bytes": 16384
+    },
+    "snapshots/001/cram_internal.bin": {
+      "sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "bytes": 64
+    },
+    "snapshots/001/vdp_regs.bin": {
+      "sha256": "c6f378205327fa9e8eb42cfdbeff1702d60a5fbf5e1a909ba6c6ca0ecd971907",
+      "bytes": 11
+    },
+    "snapshots/001/psg_frequency.bin": {
+      "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "bytes": 8
+    },
+    "snapshots/001/psg_volume.bin": {
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "bytes": 4
+    },
+    ".config/blastem/blastem.cfg": {
+      "sha256": "018b4a058428b5c232c90e0fb753a080e8f810a6679c086e70888a40925d500e",
+      "bytes": 1055
+    }
+  },
+  "root": "/tmp/smsforge-blastem-native-review/focused_mutants/site_mismatch_after_fix",
+  "diagnostics_sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+  "event_definitions": [
+    {
+      "index": 0,
+      "kind": "vdp_io_before_out",
+      "address": 32,
+      "value_scope": "debugger_observation_at_trap_not_committed_bus_write"
+    }
+  ],
+  "events": [
+    {
+      "index": 0,
+      "vdp_frame": 120,
+      "observed_pc": 1,
+      "value": 3,
+      "port": 191,
+      "vdp_internal_vcounter": 0,
+      "vdp_internal_hslot": 0,
+      "vdp_internal_address": 0,
+      "vdp_internal_cd": 0
+    }
+  ],
+  "event_counts": [
+    1
+  ],
+  "native_media": {}
+}

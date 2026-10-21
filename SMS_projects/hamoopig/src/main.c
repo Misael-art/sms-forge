@@ -68,8 +68,10 @@ static void game_present(void)
     switch (g_scene) {
     case SCENE_OPENING:
     case SCENE_TITLE:
-    case SCENE_SELECT:
         title_present();
+        break;
+    case SCENE_SELECT:
+        select_present();
         break;
     case SCENE_FIGHT:
     case SCENE_AFTER_MATCH:
@@ -106,6 +108,7 @@ void main(void)
         probe_phase = 1;
         game_update();
         probe_phase = 2;
+        stream_prepare();
         v = SMS_VCounterPort;
         probe_vline = v;
         probe_phase = 3;
@@ -115,6 +118,7 @@ void main(void)
         }
         SMS_waitForVBlank();
         audio_tick();
+        stream_upload();
         g_frame++;
         game_present();
         probe_phase = 4;

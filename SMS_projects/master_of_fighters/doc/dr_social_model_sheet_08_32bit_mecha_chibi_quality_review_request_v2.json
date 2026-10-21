@@ -1,0 +1,38 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_08_32bit_mecha_chibi_art_review_v2",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Independent, read-only review of concept model sheet #08 (32Bit-Mecha-Chibi): identity and five-view consistency; artist attribution/role/scope; distinct style signature; shoulder-to-hand anatomical continuity; palette/materials; ruler, baseline, crop, labels and card overlap. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2.png",
+      "sha256": "c390a2eb20eb4d81710ec1f0f1dd812dfbc86d4f3e29d6152bf6197c0c591e75",
+      "role": "current candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_review_v2.json",
+      "sha256": "bf4669ae9e675711a4049d44d0c1688e864453066543a44965347ac093856dbb",
+      "role": "hash-bound per-character review checklist"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2_metadata.json",
+      "sha256": "ce4641fcd9afeed84b6fcdd5fc260054251cc23b1b8f983ebb93025539d20889",
+      "role": "style/card/layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v2.json",
+      "sha256": "35d99ceafde716c301be98155725cd43a35c8ebf5ecb5c8afd0bbe4ce4c42e04",
+      "role": "source and composition lineage"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Separate artist reference from authorship of sprites/game assets; report unverified credit as such.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Return concrete findings for anatomy, identity, style distinction, five-view cohesion, page layout and labels."
+  ]
+}

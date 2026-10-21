@@ -1,0 +1,46 @@
+{
+  "kind": "retracted_visual_finding",
+  "reviewer": "/root/review_qa_contract",
+  "initial_report": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/report_initial_visual.json",
+    "sha256": "eb21f9e0a847701b9f962f967082773524812f14f44839f4e42ce3bd1a075ee5"
+  },
+  "statement": "Initial claimed partial prompt at frame15 was an observation error. Same file shows complete PRESS BUTTON 1 on reinspection; prompt region matches frame0. No cause assigned to reviewer error.",
+  "inspection": {
+    "zoom_region": [
+      64,
+      88,
+      192,
+      112
+    ],
+    "comparison_region": [
+      64,
+      96,
+      192,
+      104
+    ],
+    "zoom": "integer 8x nearest-neighbor, inspection artifact only"
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_1/000000.png",
+      "sha256": "063e518410609978fd47e0015a3d2143ec649189416367c9a5d52cda641fa452",
+      "prompt_region_rgb_sha256": "7a79aec2ef070b1ac31336f973b37635b22ea61edc69f26f15cfdd58e605ccf0"
+    },
+    {
+      "frame": 15,
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_1/000015.png",
+      "sha256": "a3cc1a6399dcc86bb7db754e0ccd518d7e457c8a08d74847b17ded004aaef087",
+      "prompt_region_rgb_sha256": "7a79aec2ef070b1ac31336f973b37635b22ea61edc69f26f15cfdd58e605ccf0"
+    },
+    {
+      "frame": 29,
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/visual_request/run_af77a49f9e7c4e4db2f185c359a3fa38/case_1/000029.png",
+      "sha256": "7b8ccf42b31c1fd14fa5a62492af503b80dc6b33bd474e1374ccf036debc540b",
+      "prompt_region_rgb_sha256": "d611153eaeb616ee343b513ad4b4b0e8b8a56ea8f455c38444d95a6d6a333d02"
+    }
+  ],
+  "revised_case_status": "passed",
+  "claim_ceiling": "assigned_checks_only"
+}

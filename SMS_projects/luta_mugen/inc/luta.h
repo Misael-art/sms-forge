@@ -2,8 +2,8 @@
  *
  * Formato byte-a-byte provado em ROM por MSSF2T (inc/ken_idle_tiles.h:58 e
  * src/fight.c rebuild_meta/draw_fb): metasprite = triplas assinadas
- * (dx, dy, tile) com dx=0x80 no terminador; tile de runtime =
- * (pool_idx*2) + base_de_carga_do_pose, por isso o draw soma `base` ao ler.
+ * (dx, dy, tile) com dx=0x80 no terminador; tile de runtime consulta o mapa
+ * de pares compactos para o slot físico que recebeu cada upload.
  * Espelho horizontal E outro padrao no pool (SMS nao tem flip de sprite);
  * o blob METAL ja traz base+idx do espelho e dx refletido (dx' = lo+hi-dx).
  *
@@ -61,10 +61,11 @@ typedef struct { unsigned char facing;              /* 0=dir, 1=esq */
 /* Sprites leem a primeira metade da VRAM: base 0 (SMSlib.h:53, L006). */
 #define FIGHTER_TILE_BASE 0x00
 
-/* Copia as triplas de `meta` para `dst` somando `base` ao byte de tile e
- * devolve o numero de entradas (precedente: rebuild_meta do MSSF2T).
- * dst precisa de espaco para 3*(n+1) bytes. */
-extern unsigned char meta_rebase(const unsigned char *meta, unsigned char base,
-                                 signed char *dst);
+/* Copia as triplas de `meta` para `dst`, traduzindo o par compacto pelo mapa
+ * de slots físicos; devolve o numero de entradas. dst precisa de 3*(n+1) B. */
+extern unsigned char meta_rebase(const unsigned char *meta,
+                                 const unsigned char *slot_map,
+                                 signed char *dst, unsigned char capacity,
+                                 unsigned char pair_count);
 
 #endif /* LUTA_H */

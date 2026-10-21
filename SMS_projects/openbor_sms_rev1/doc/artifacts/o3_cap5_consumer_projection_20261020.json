@@ -1,0 +1,261 @@
+{
+ "schema": "sms_openbor_cap5_consumer_projection_v1",
+ "artifact_kind": "planning_sheet",
+ "generated_at": "2026-10-20",
+ "project": "openbor_sms_rev1",
+ "rom": {
+  "sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+  "bytes": 131072,
+  "region": "NTSC"
+ },
+ "build_record": {
+  "path": "out/build_record.json",
+  "sha256": "8ba4bc2453366d62da93af59b1244518cfaacbb92aad46a7e51d392e93c49755",
+  "axes": {
+   "build": true,
+   "validation_report": true,
+   "boot_emulador": true,
+   "gameplay": true,
+   "fps_constante": true,
+   "audio": true,
+   "memory_bank_atualizado": true
+  },
+  "changelog": "/mnt/sdcard/Projects/SMSForge/SMS_projects/openbor_sms_rev1/changelog/roms/build_v078/rom.sms"
+ },
+ "consumer": {
+  "bundle": {
+   "path": "out/evidence/o3_cap5_consumer_20261020/bundle.json",
+   "sha256": "2f69939a1a3f1d83ef46998da03e691f60ee1df8d472df242da12e67cf9fbd1a",
+   "bytes": 7785
+  },
+  "consumption": {
+   "path": "out/evidence/o3_cap5_consumption_20261020.json",
+   "sha256": "e1af7fad1bf540bc5046655f070ca06df76c1bd8c804ca45e794700dc02af10a",
+   "bytes": 2273
+  },
+  "eligible": true,
+  "problems": [],
+  "axes": {
+   "build": false,
+   "validation_report": false,
+   "boot_emulador": true,
+   "gameplay": true,
+   "fps_constante": true,
+   "audio": true,
+   "memory_bank_atualizado": false
+  },
+  "coverage_derived": {
+   "boot_emulador": {
+    "canvas": [
+     256,
+     192
+    ]
+   },
+   "gameplay": {
+    "before": 50,
+    "after": 29,
+    "relation": "decrease"
+   },
+   "fps_constante": {
+    "fps_janelas": [
+     59.38735039528079,
+     59.437218939386824,
+     59.570958515767764
+    ],
+    "frames_delta_total": 1441,
+    "region": "NTSC"
+   },
+   "audio": {
+    "samples": 360448,
+    "peak": 1986,
+    "seconds": 8.17342403628118
+   }
+  }
+ },
+ "sessions": [
+  {
+   "role": "gameplay",
+   "id": "2f25ce4a85b94ed89a2d9901d7e39d36",
+   "final_state": "closed"
+  },
+  {
+   "role": "mrp3",
+   "id": "43d33c39583040ef99f53e56d228145d",
+   "final_state": "closed"
+  },
+  {
+   "role": "audio",
+   "id": "42fb1b685cf645699e8034dd70d0c2cd",
+   "final_state": "closed"
+  }
+ ],
+ "qa_runtime": {
+  "request": {
+   "path": "out/evidence/o3_cap5_qa_20261020/runtime/request.json",
+   "sha256": "519c5a872228c5600482cb78cd41363f6ce7d23318f858c1325ec5a3ba511d64",
+   "bytes": 4351
+  },
+  "report": {
+   "path": "out/evidence/o3_cap5_qa_20261020/runtime/run_1b8a3f28bb644e3e89f536bdd7acf42f/report.json",
+   "sha256": "5fe14599f50181ec2a4cf0cd482625ea7f4cda439ea02202ed3f5312cc83daa5",
+   "bytes": 9208
+  },
+  "session_id": "5aeb79606a414d4088d8c99b49c3ba41",
+  "status": "passed",
+  "coverage": [
+   {
+    "id": "boot_baseline",
+    "status": "passed",
+    "note": "commands seq 3: 280 quadros neutros, frame 120->400. Probe @0xC7E0 lido no frame 400 (seq 5): 0xC7E0..0xC7E3=53 4D 52 54 (SMRT), 0xC7E4=2 (schema), 0xC7F2=100 (hp), 0xC7F4=50 (boss), 0xC7F5=0 (over), 0xC7F6=0 (state), 0xC7FE=1 (p2state); 0xC7F0=0x014A (u16 LE=330, probe_frame). PNG case_0_baseline.png (frame 120) mostra o jogador na queda de entrada do boot; case_0_frame.png (frame 400) mostra o jogador em pe com HUD cheio (barra verde 160 px, barra vermelha 80 px). Nenhum dano ou morte."
+   },
+   {
+    "id": "attack_contact",
+    "status": "passed",
+    "note": "Precondition @0xC7F4 lida no frame 400 (commands seq 7): 0xC7F4=0x32 (50). Seq 8: P1=16 (botao 1) por 1 quadro VDP (400->401) + 130 neutros (401->531). Probe @0xC7E0 no frame 531 (seq 10): 0xC7F2=95 (hp do jogador), 0xC7F4=43 (boss), 0xC7F5=0 (over), 0xC7F6=3 (PAIN), 0xC7FE=2 (p2state); 0xC7F0=0x01CD (u16 LE=461, probe_frame), delta +131 = 1+130. PNG case_1_frame.png (frame 531): jogador e inimigo em contato; barra verde 160->152 px (hp 95) e barra vermelha 80->64 px (8 colunas, boss 43 quantizado), sem morte. Tempos i30/i94 do trial attack_tap nao foram reamostrados nesta timeline unica e nao sao alegados como medicao desta sessao."
+   }
+  ],
+  "findings": [
+   {
+    "kind": "observation",
+    "note": "Cadeia unica: commands seq 3 rodou 280 quadros neutros do frame 120 ao 400; seq 8 aplicou P1=16 (botao 1) por 1 quadro (400->401) e 130 neutros (401->531). O contador u16 em 0xC7F0 avancou de 0x014A=330 no probe do frame 400 para 0x01CD=461 no probe do frame 531, delta +131 exato, ligando o estado medido a esta timeline."
+   },
+   {
+    "kind": "observation",
+    "note": "Frame 531 (PNG case_1_frame.png, 256x192): barra verde do jogador (linhas 0-7) caiu de 160 px para 152 px, coerente com hp=95; barra vermelha do inimigo (linhas 8-15) caiu de 80 px para 64 px (8 colunas, quantizacao de boss=43). Jogador e inimigo aparecem em contato, sem morte."
+   },
+   {
+    "kind": "observation",
+    "note": "case_1_baseline.png e byte-identico a case_0_frame.png (sha256 67e87e20...9eabbe, frame 400), confirmando que o ataque partiu do mesmo framebuffer em que o boot foi encerrado."
+   },
+   {
+    "kind": "observation",
+    "note": "Os tempos i30 (1o hit) e i94 (retorno ao controle) do trial attack_tap citados na expectativa nao foram reamostrados nesta timeline unica; nao sao alegados como medicao desta sessao. FPS e audio nao foram medidos (audio=private_sink_unvalidated)."
+   }
+  ],
+  "gate": {
+   "ok": true,
+   "tests_passed": true,
+   "problems": []
+  }
+ },
+ "qa_visual": {
+  "request": {
+   "path": "out/evidence/o3_cap5_qa_20261020/visual/request.json",
+   "sha256": "91bee80deea03892326dad83e5bb483f756d74c9f07bbde2d15a9fdafbb4294b",
+   "bytes": 4059
+  },
+  "report": {
+   "path": "out/evidence/o3_cap5_qa_20261020/visual/run_fbbd7a45b82349bd8e2182b8f9184086/report.json",
+   "sha256": "a7662a8ba62cf7e31eadfabd9dc7f950393523743a710742f788567d5cf984df",
+   "bytes": 9573
+  },
+  "session_id": "37b1481d09a541a1b055f0db0d26c14b",
+  "status": "passed",
+  "coverage": [
+   {
+    "id": "boot_scene",
+    "status": "passed",
+    "note": "Inspecionado case_0_frame.png no tamanho nativo 256x192 (frame ROM 400; baseline 120 + 280 VDP frames; sha256 0c780307...). Cena TOWN1 legivel, nao preta/branca/ruido: 18 cores unicas, todas 6-bit; variancia de luma 1474.1. HUD verde 160x8 em (8,0) e vermelho 80x8 em (8,8). Jogador a esquerda (x~48..85) e inimigo a direita (x~119..156) legiveis; inimigo com cabeca/capacete, tronco, bracos e pernas; sem sprite faltando ou fundido no fundo. case_1_baseline.png e identico a case_0_frame.png (mesmo sha256)."
+   },
+   {
+    "id": "attack_video",
+    "status": "passed",
+    "note": "Inspecionados os 81 PNGs (indices 0..80) e o MP4 nativo 256x192/81 frames (ffprobe h264 yuv444p, 1.3517 s). 32 frames distintos, 31 transicoes; todos os quadros 256x192 e 18 cores 6-bit. Indice 14: primeira pose de ataque; 27: hit (barra vermelha 640->512 px) e inicio da reacao; 38 e 53: mudancas da pose de dor do inimigo; 59: mudanca de pose do jogador; 70: inicio da recuperacao do jogador. Inimigo legivel em 27/38/41/53/56/59/65/69/70/80; jogador legivel; sem clipping, sprite faltando, tile residual, quadro corrompido ou video congelado. Ressalva visual: a lamina branca ocupa x42..64 e o inimigo x86..132, entao o golpe nao toca visualmente o alvo (ver finding de apresentacao)."
+   }
+  ],
+  "findings": [
+   {
+    "kind": "observation",
+    "note": "boot_scene (case_0_frame.png, raw ROM frame 400 = baseline 120 + 280 VDP frames): canvas nativo 256x192, 18 cores unicas e todas com componentes em {0,85,170,255} (paleta mestra 6-bit), variancia de luma 1474.1. Cena TOWN1 legivel: fundo de tijolo/pedra, jogador a esquerda (x~48..85; tunica/maos e espada visiveis) e inimigo a direita (x~119..156; capacete/cabeca, tronco, bracos e pernas visiveis). HUD: barra verde 160x8 em (8,0) e barra vermelha 80x8 em (8,8). Nao e preto/branco/ruido; HUD e atores presentes."
+   },
+   {
+    "kind": "observation",
+    "note": "attack_video, integridade do inimigo: nos indices PNG 27, 38, 41, 53, 56, 59, 65, 69, 70 e 80 o inimigo permanece um corpo unico e legivel (capacete/cabeca, tronco, bracos e pernas); em 38-52 ele esta inclinado para frente e em 53-80 mais curvado, mas cabeca/tronco nao foram zerados nem fundidos no fundo. SAT/ec do cap5: f27 [0,3,3,2,2,0], f38 [2,3,3,2,2,0], f59 [0,3,2,2,3,0]; linhas 1-2 nunca ficam em zero. O corte cap5 (14 celulas) suprime 1-3 celulas por linha na pose de dor, sem apagar cabeca/tronco; e um limite de composicao, nao o defeito a102 do M8."
+   },
+   {
+    "kind": "observation",
+    "note": "attack_video, direcao do golpe vs alvo (achado de apresentacao, nao de integridade): o jogador usa as poses esquerdas a101..a105_left. No contato (indice 27) e nos holds 27-58 os pixels brancos da espada ocupam x42..64, enquanto o inimigo ocupa x86..132; nao ha sobreposicao visual lamina-inimigo. Mesmo assim a barra vermelha do HUD cai de 640 para 512 px (80->64 px de largura) no indice 27, e a dor do inimigo comeca no indice 38. O hit e legivel por HUD/reacao, mas o ataque aponta para o lado oposto ao alvo; isso exige decisao de apresentacao do coordenador e nao promove epoca visual/delivery."
+   },
+   {
+    "kind": "observation",
+    "note": "attack_video, movimento e recuperacao: 81 PNGs (indices 0..80, frames ROM 400..481), 32 frames distintos e 31 transicoes; primeira pose de ataque visivel no indice 14, hit/HUD no 27, mudancas de dor do inimigo em 38 e 53, mudanca de pose do jogador em 59, inicio da recuperacao do jogador em 70. O inimigo continua em pain02 ate o indice 80, logo a janela prova apenas o inicio da recuperacao, nao a recuperacao completa (idle/display i102 do video de 171 q). Maior hold identico: 15 frames (38-52); nao e video congelado (31 transicoes)."
+   },
+   {
+    "kind": "observation",
+    "note": "attack_video, bordas e residuos: todos os 81 quadros sao 256x192, com 18 cores legais 6-bit; o bbox de foreground fica em x32..156 / y78..154, sem sprite cortado pela canvas; fundo/tiles estaveis e sem tile residual perceptivel; nenhum quadro corrompido. Os 81 arquivos PNG batem byte a byte com frame_sha256 de case_1.json, e o MP4 decodificado difere dos PNGs em no maximo 1/255 (media 0.298), consistente com reencode, nao com quadro perdido."
+   }
+  ],
+  "gate": {
+   "ok": true,
+   "tests_passed": true,
+   "problems": []
+  },
+  "window": "81 q; prova legibilidade/integridade, inicio da recuperacao no indice 70; nao prova idle i102 nem recuperacao completa do inimigo"
+ },
+ "projection": {
+  "evidence": {
+   "path": "out/evidence/evidence.json",
+   "sha256": "a473d670d8f05e4de9a5e8c4b855c73ab3656d47e77f0089a296efcfa2947fb0",
+   "bytes": 2051
+  },
+  "fps": {
+   "path": "out/evidence/fps.json",
+   "sha256": "1ccfa0af7b352be65573fb0878e66c006010ffd6ca594ec74849588271fb132c",
+   "bytes": 857
+  },
+  "audio": {
+   "path": "out/evidence/audio_701379cc.wav",
+   "sha256": "f16b48b81648b69aa40930afdca7d670139e83c4dc08b31d296daffaddf61439",
+   "bytes": 720940
+  },
+  "sources": {
+   "bundle": {
+    "path": "out/evidence/o3_cap5_consumer_20261020/bundle.json",
+    "sha256": "2f69939a1a3f1d83ef46998da03e691f60ee1df8d472df242da12e67cf9fbd1a"
+   },
+   "consumption": {
+    "path": "out/evidence/o3_cap5_consumption_20261020.json",
+    "sha256": "e1af7fad1bf540bc5046655f070ca06df76c1bd8c804ca45e794700dc02af10a"
+   },
+   "runtime_mrp3": {
+    "path": "out/evidence/o3_cap5_consumer_20261020/artifacts/fps_metrics.json",
+    "sha256": "5f7f838f06c17fb11df0fbae5c1247a2ef85a53bacdb01c4523b2b1959226204",
+    "session_id": "43d33c39583040ef99f53e56d228145d"
+   },
+   "qa_runtime": {
+    "path": "out/evidence/o3_cap5_qa_20261020/runtime/run_1b8a3f28bb644e3e89f536bdd7acf42f/report.json",
+    "sha256": "5fe14599f50181ec2a4cf0cd482625ea7f4cda439ea02202ed3f5312cc83daa5"
+   },
+   "qa_visual": {
+    "path": "out/evidence/o3_cap5_qa_20261020/visual/run_fbbd7a45b82349bd8e2182b8f9184086/report.json",
+    "sha256": "a7662a8ba62cf7e31eadfabd9dc7f950393523743a710742f788567d5cf984df"
+   },
+   "audio": {
+    "path": "out/evidence/o3_cap5_consumer_20261020/artifacts/audio_signal.wav",
+    "sha256": "f16b48b81648b69aa40930afdca7d670139e83c4dc08b31d296daffaddf61439"
+   }
+  }
+ },
+ "presentation_finding": {
+  "id": "attack_direction_vs_target",
+  "status": "blocked",
+  "evidence": "QA visual cap5, run_fbbd7a45, indice 27: lamina branca x42..64; inimigo x86..132; sem sobreposicao visual. Dano legivel pela barra 80->64 px e pela dor no indice 38.",
+  "impact": "golpe nao toca visualmente o alvo; apresentacao/epoca visual nao pode ser promovida",
+  "owner_decision_required": true
+ },
+ "not_delivery": true,
+ "claim_ceiling": "assigned_checks_only",
+ "limits": [
+  "projecao de evidencia aceita; nao e nova medicao",
+  "consumer/QA: assigned_checks_only; sem aprovacao de entrega ou qualidade visual",
+  "NTSC apenas; PAL nao medido",
+  "QA runtime nao reamostrou i30/i94; usa o trial historico attack_tap como referencia",
+  "window visual de 81 q; nao prova idle i102 nem recuperacao completa",
+  "attack_direction_vs_target bloqueia apresentacao/visual epoch",
+  "Lote C: criterio de controle atendido (i90<i94), display nao (i102>i94); decisao do dono pendente",
+  "boot deterministico cap5 nao rerodado: instancia Emulicious estrangeira viva (475afba2...) e o gate recusa medir com zumbi/alheia",
+  "audit_render_glitch sem oraculo full-frame independente",
+  "46/47 contatos e altura 200 nao alcancados; regressao de dano/whiff/queda/morte/bordas/scroll/audio concorrente pendente",
+  "sem commit/push/archive sem autorizacao"
+ ]
+}

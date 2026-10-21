@@ -1,0 +1,152 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_ferdinand_social_social_light_jab_candidate_v2",
+  "producer": "codex_imagegen_art_author",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v2/social_light_jab_candidate_v2.png",
+    "sha256": "8ac486bd47e83c4bdf8ec473a3647dd7ede2627ab4029ee4ffdf35bcf52e2c5a",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+    "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "semantic_palette_role_confinement"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+          "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+          "role": "owner-approved identity, anatomy, costume, equipment and basic pose source"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/dr_social_61_pose_converted_preview_4x.png",
+          "sha256": "7d1ac3e85652b76630869df5bdf8ff89bea602761f73243867de47039982c58e",
+          "role": "reference for clean color grouping and cel-shading only"
+        }
+      ],
+      "observed_defects": [
+        "The saved RGB background looks magenta in the preview but is not uniform RGB(255,0,255); corner samples vary and only four pixels equal the requested key.",
+        "The sheet contains 134238 unique RGB values and is not an indexed Master System palette asset.",
+        "The raw grid uses six 512x512 cells; no 80x80 conversion, exact crop, or nearest-neighbor native-size check has been performed.",
+        "Round-glasses readability, individual hand/cane attachment, shadow flow and per-frame outline quality still need independent review at intended size."
+      ],
+      "revision_notes": [
+        "The 3x2 image is a movement-composition draft only; six slots visually follow guard, anticipation, half-extension, contact, recoil and return-to-guard.",
+        "J01 and J06 intentionally represent the same guard endpoint; do not treat endpoint continuity as an accidental duplicate.",
+        "ImageGen did not obey the exact background-key and palette constraints despite explicit prompts. This measured mismatch blocks promotion and conversion.",
+        "No frame is in res/ and no attack ROM has been built from this image."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "fail",
+          "note": "184429 RGBA values and no 80×80 logical-frame export; clusters are not palette-quantized."
+        },
+        "face_detail_readability": {
+          "status": "pending",
+          "note": "Spectacles and eye readability need independent review at 80×80 and NN4×."
+        },
+        "outline_and_cutout": {
+          "status": "fail",
+          "note": "Alpha ranges 0–254 with zero fully opaque pixels; semitransparent halo remains."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Review hard-edged material ramps after approved indexed conversion."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Check contiguous coat-shadow planes through all six extracted frames."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Trace both shoulder-to-glove chain and support-hand-to-cane grip in each native frame."
+        },
+        "equipment_geometry": {
+          "status": "pending",
+          "note": "Check cane shaft, rounded gold pommel and tip after cell extraction."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "Six slots read in order, but compare to exact J01–J06 semantics after native extraction."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "No 80×80 frame exports exist."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "fail",
+          "note": "RGBA candidate is not indexed to the declared SMS palette and contains semitransparent colors."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "conversion_validation": {
+    "status": "not_started",
+    "scope": "No indexed conversion, tile count, hardware simulation, proof sheet or ROM has been produced."
+  },
+  "promotion_status": "candidate_only_blocked; alpha, indexed palette, native-frame and independent-review gates unresolved",
+  "claim_ceiling": "Six-pose composition candidate only; not approved sprite art, not SMS-indexed, not hardware-validated, not integrated, no ROM.",
+  "revision_notes": [
+    "This v2 replaces v1 only as the latest motion-composition draft; it is not approved art.",
+    "The requested transparent canvas is not binary: alpha max is 254 and there are 601980 partial-alpha pixels.",
+    "Do not promote, convert, add to res/, or build a ROM from this candidate."
+  ],
+  "measured_preflight": {
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "unique_rgba_values": 184429,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "alpha_zero_pixels": 970884,
+    "alpha_255_pixels": 0,
+    "partial_alpha_pixels": 601980,
+    "grid": {
+      "columns": 3,
+      "rows": 2,
+      "cell_px": [
+        512,
+        512
+      ],
+      "frame_order": [
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06"
+      ]
+    },
+    "logical_sms_cell_target_px": [
+      80,
+      80
+    ],
+    "exact_rgb_key": null,
+    "note": "Transparent-background request returned semitransparent pixels across the character/halo; no binary cutout or indexed Master System palette."
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_animation_source_v02",
+  "producer": "codex_art_preflight",
+  "asset": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v2.png",
+    "sha256": "bc5c7fee6155669c5539cfa09629a627dcd14e9702c200fe9469cd7029d05670",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "semantic_palette_role_confinement",
+    "grid_alignment",
+    "pose_count_and_order"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+          "role": "sole visual identity reference; GDD/TDD constrain action scope and hardware"
+        }
+      ],
+      "observed_defects": [
+        "The generated raster has 1254x1254 dimensions and cannot be partitioned into the declared exact 8x8 cell grid.",
+        "Partial alpha and visible cyan/blue fringe are present around many silhouettes.",
+        "The image contains 208338 visible RGB values and does not use a limited pixel-art palette.",
+        "Exact frame extraction, pose uniqueness/order, and cane attachment are not established by this raster."
+      ],
+      "revision_notes": [
+        "Candidate was generated with the approved concept model sheet v4 as its sole visual reference; GDD/TDD supplied written movement and hardware constraints.",
+        "The archived v1 sheet and all prior converted previews were excluded from visual inputs.",
+        "No pixels were edited after generation. This checklist records producer preflight only; independent review and owner approval remain pending.",
+        "Do not convert or promote until hard alpha, fringe, palette, exact grid, and pose-by-pose review blockers are resolved."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "fail",
+          "note": "Raw image contains 208,338 visible RGB values; not a limited pixel-art palette."
+        },
+        "face_detail_readability": {
+          "status": "pending",
+          "note": "Needs frame-by-frame inspection at intended native size."
+        },
+        "outline_and_cutout": {
+          "status": "fail",
+          "note": "Visible cyan/blue fringe; 741,833 pixels have partial alpha."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Needs frame-by-frame confirmation of hard, contiguous shade planes."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Needs frame-by-frame shadow-flow review."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Confirm cane grip and hand-to-cane continuity in every pose."
+        },
+        "equipment_geometry": {
+          "status": "pending",
+          "note": "Confirm exactly one blunt walking cane per pose; no blade-like or duplicated object."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "Visual layout suggests 61 poses, but exact cell bounds/order and semantic uniqueness are not confirmed."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "No normalized SMS-size frames exist yet."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pending",
+          "note": "Color roles need review; no palette-indexed output exists."
+        },
+        "grid_alignment": {
+          "status": "fail",
+          "note": "Raster is 1254×1254; dimensions do not divide evenly into 8×8 cells."
+        },
+        "pose_count_and_order": {
+          "status": "pending",
+          "note": "Intended sequence map totals 61; exact cell extraction and count remain unverified."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked for technical conversion until alpha, grid, palette and art-review blockers are resolved",
+  "claim_ceiling": "candidate source sheet only; not approved animation art, not SMS-converted, not ROM-tested"
+}

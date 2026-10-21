@@ -1,0 +1,67 @@
+{
+  "schema": "project_learning_candidate_v1",
+  "date": "2026-10-06",
+  "status": "pending_future_curation",
+  "canonical_lesson_id": null,
+  "dedup_key": "sms_mugen_exact_cmd_pattern_dedup_for_fixed_bank_20261006",
+  "existing_lessons_to_review": [
+    "L036",
+    "L052",
+    "L083"
+  ],
+  "scope": "Ryo/Ryo v074 generated CMD arrays and this SMSForge build only; command recognition and broad MUGEN compatibility remain under native review.",
+  "observations": [
+    {
+      "topic": "Exact byte deduplication preserves generic slot symbols while reducing fixed code",
+      "fact": "The two generated Ryo slots emitted eight redundant exact CMD-array copies under the stable P1/P2_CUT_CMD_* symbols. The generator now aliases equal arrays only within the command-pattern namespace and retains each size macro and semantic symbol. Manifest reports 8 aliases and 56 bytes saved. The prior regenerated schema-v3 build map had _CODE=32162 bytes and makesms rejected Bank 1; after dedup, the successful build_v075 map has _CODE=32106 bytes. The successful ROM is 589824 bytes with SHA-256 d77ae0899efde363f77bb964e73f171bbcf7c8adfba98855284ce5802b271809.",
+      "interpretation": "This shows the exact aliasing removed the measured size delta needed for packaging this build. It does not establish command acceptance in ROM, savings for different characters, or spare capacity for later features.",
+      "measurement": [
+        "tools/sms_wrapper/mugen2sms/generators/versus_scene_cut.py",
+        "versus_scene_manifest.json header_metadata_deduplication",
+        "SDCC map _CODE",
+        "build_inner.py / makesms result"
+      ]
+    },
+    {
+      "topic": "Validation ceiling",
+      "fact": "Generator self-check and the focused test files test_versus_scene_cut.py plus test_fight_runtime_data.py passed (5 tests). ROM asset binding and debug-marker audits passed. Native runtime and visual QA requests were prepared and dispatched; their case status is still pending in this candidate.",
+      "limitation": "Host tests and packaging do not prove ROM CMD dispatch, gameplay, animation recovery, cadence, or visual delivery. Do not assign a canonical lesson ID before comparing later source pairs and the native reports."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "tools/sms_wrapper/mugen2sms/generators/versus_scene_cut.py",
+      "sha256": "919ad3a4ef39a2f4ea1f378c5875d39378a62ae0c2f497cd35dd0216dbc464b2"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/generated/versus_cut/versus_scene_runtime.h",
+      "sha256": "735f404c3321b8f08a4b7c2871e7d7ab349df17aef7bc78dfec7831fdd4da845"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/local_study/generated/versus_cut/versus_scene_manifest.json",
+      "sha256": "5da0abd60ff6c5f63eda4259de73b0f3250586895f1237c87f8537177b5e9c2b"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/obj/luta_mugen.map",
+      "sha256": "ac39bd0756f3bef50216988a376a27edc996af2a2ceb8511429ef0579172a886"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/doc/rom_asset_binding.json",
+      "sha256": "a22127e201dfc8f30a054e08e95f1894e8ed5dde33e4310f976b3d4f2a97c33e"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/v074/runtime/request.json",
+      "kind": "pending_native_review_request"
+    },
+    {
+      "path": "SMS_projects/luta_mugen/out/qa_native_20261006/v074/visual/request.json",
+      "kind": "pending_native_review_request"
+    }
+  ],
+  "future_curation_actions": [
+    "Compare exact CMD pattern aliasing with different source packages and semantic command maps.",
+    "Review whether savings belong in the generic generator contract or as a project-local engineering note.",
+    "Keep exact-byte equality and size checks; never merge nonidentical CMD streams to fit Bank 1."
+  ],
+  "promotion": "Pending future curation; no central doctrine, canonical lesson ID, or global gate assigned."
+}

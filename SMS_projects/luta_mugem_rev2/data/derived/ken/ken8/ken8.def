@@ -1,0 +1,33 @@
+; Definition file for ryu
+; Contains all the filenames needed for the character
+; made by k-man 2000
+; Player information
+[Info]
+mugenversion = 14/04/2001
+name = "Ken Masters"
+
+; Files for the player
+[Files]
+cmd = ken.cmd
+cns = ken.cns;Constants
+st = ken.cns;States
+;st1     = ryu-s.cns    ;Extra state data (optional);States
+stcommon = common1.cns;Common states (in data/)
+sprite = ken.sff;Sprite
+;lsprite = ryu.ls       ;Layered sprite;Sprite
+anim = ken.air;Animation
+sound = ken.snd;Sound
+pal1 = ken1.act;Palettes
+;pal2    = ken2.act;Palettes
+;pal3    = ken3.act;Palettes
+;pal4    = ken4.act;Palettes
+;pal5    = ken5.act;Palettes
+;pal6    = ken6.act;Palettes
+;pal7    = ryu7.act;Palettes
+;pal8    = ryu8.act;Palettes
+;pal9    = ryu9.act;Palettes
+;pal10   = ryu10.act;Palettes
+
+[Arcade]
+intro.storyboard = D:\MUGEN\extrastuff\add-ons\Intros&Endings\sfa2intro/introsfa2.def
+ending.storyboard = end/sfakenend.def

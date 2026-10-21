@@ -1,0 +1,167 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_04_cps3_fluid_mastery_v2",
+  "producer": "codex_art_production",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2.png",
+    "sha256": "3be06c1e994f7efafe8497ce696e43178073dd181f57ff8412b19779c1f0fede",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png",
+    "sha256": "f96e0fd84ba84b45f5e658f4874f598923b04fe57f6ea04f363da061ce49b202"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+          "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+          "role": "owner-approved Dr. Social identity, face, costume, proportions, and equipment"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/palettes_manifest.json",
+          "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+          "role": "project palette-role authority"
+        },
+        {
+          "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+          "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+          "role": "initial CPS3-Fluid-Mastery descriptor; not independently validated"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+          "role": "owner-approved model-sheet form, five-view arrangement, and relative scale"
+        }
+      ],
+      "observed_defects": [],
+      "revision_notes": [
+        "Generated from the approved five-view form and owner-approved identity concept; the rendering treatment follows CPS3-Fluid-Mastery.",
+        "The shared compositor adds the five view headings, relative ruler, baseline, style metadata, and exact project palette swatches.",
+        "Character identity, proportions, clothing color roles, cane, rapier, and occult steel boomerang remain fixed.",
+        "Owner approval and independent visual review remain pending; no sprite or SMS resource claim is made.",
+        "Version 2 adds visible catalog index and named style-reference attribution; artwork remains a candidate and requires fresh review.",
+        "V2 adds the visible catalog index, artist/reference role, and concise signature. The prior illustration/layout is preserved outside the style-information card; independent/owner review remains pending."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "style_reference_application": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "lineart_and_contours": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "shading_and_palette": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "neutral_background": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "face_and_identity_continuity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "costume_and_materials": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "cross_view_consistency": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pending",
+          "note": "Fresh visual review of this version is pending."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist, role, source, and attribution limits are recorded; independent verification/review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "The selected reference signature is listed; visual separation from neighboring styles requires visual review."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace shoulder, upper arm, elbow, forearm, wrist, and hand across each posed view; reviewer decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity and rendering consistency across five views, and distinction from neighboring catalog styles."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, resource, ROM, or emulator approval",
+  "artistic_style_reference": {
+    "named_artist": "Daigo Ikeno",
+    "reference_role_and_scope": "Secondary-source attribution for Street Fighter III character/promotional artwork; use as a named visual reference, not sole authorship of in-game animation.",
+    "source_url": "https://www.fightersgeneration.com/games/sf3-thirdstrike.html",
+    "attribution_status": "secondary_source_reference",
+    "style_signature": [
+      "long athletic anatomy",
+      "rhythmic, flowing pose lines",
+      "controlled painted shadows and crisp contour"
+    ],
+    "basis_and_limits": "Visual-analysis descriptors; title-specific attribution remains secondary-source pending."
+  },
+  "catalog_index": 4
+}

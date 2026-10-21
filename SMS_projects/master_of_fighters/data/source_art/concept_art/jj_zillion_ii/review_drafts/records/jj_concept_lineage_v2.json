@@ -1,0 +1,101 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "jj_zillion_ii_concept_sheet_v2",
+  "status": "superseded_after_owner_costume_reference_correction",
+  "generated_source": {
+    "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_generated.png",
+    "sha256": "b599114fb259a69d292e30ddbbe9101e2dd3fce84408e38695164ebe328b8d39",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "tool": "Codex ImageGen"
+  },
+  "prompts": [
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_prompt_v1.txt",
+      "sha256": "d66d37cc9953555ceaf3400999c46b0204b00db35e80d8eb943e009b0189e91d",
+      "purpose": "initial two-pose concept sheet"
+    },
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_cleanup_prompt_v2.txt",
+      "sha256": "78000a9a89f5a6baaec9a1e40160e95de235fc58633a7a7f9f7ecc37dc3f1fc2",
+      "purpose": "surface cleanup of orange panels while preserving composition and design"
+    }
+  ],
+  "reference": {
+    "source_game": "Zillion II: The Tri Formation (Sega Master System)",
+    "source_name": "J.J - Standing",
+    "url": "https://www.smspower.org/uploads/Sprites/ZillionII-SMS-J.J-Standing.png",
+    "sha256": "102b797311b5790272bf2ef63bb5a568b972fe1d74961d46e85163be2e4495b6",
+    "dimensions_px": [
+      13,
+      40
+    ],
+    "anime_reference_used": false,
+    "external_pixels_copied": false,
+    "usage": "silhouette and color-role guidance only"
+  },
+  "transformations": [
+    {
+      "operation": "alpha cleanup",
+      "method": "retain pixels at or above 90 percent opacity, create cutout, preserve transparent background, and remap opaque pure-black outline pixels to SMS navy #000055",
+      "mask": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_alpha_mask.png",
+        "sha256": "6df8b6fbba034a7b395874c1bc3703aece1dbe9be190e5e9062bb5fba4f7dc74"
+      },
+      "cutout": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_alpha_cutout.png",
+        "sha256": "1291cc96d19608d3e06e9238b5348b3e448c79c6e17bfe945899656ae14bea94"
+      },
+      "flattened_input": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_flattened.png",
+        "sha256": "31567a6034b8653929f8f7f11aba812b0eb57703f04ffa0bff41ca47cd7ec817"
+      }
+    },
+    {
+      "operation": "SMS palette conversion",
+      "tool": "tools/sms_wrapper/prepare_sms_pixel_art.py",
+      "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+      "arguments": [
+        "--project .",
+        "--character jj_zillion_ii",
+        "--size 1536x1024",
+        "--dither none",
+        "--speckle-cleanup",
+        "--cell-size 1536x1024"
+      ],
+      "palette_source": {
+        "path": "doc/build_palettes_manifest.py",
+        "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e"
+      },
+      "palette_manifest": {
+        "path": "doc/palettes_manifest.json",
+        "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff"
+      },
+      "output": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2.png",
+        "sha256": "f00746f576b757f18aadaa0a3bc9da8fd878ead9b5d3b9cd0ef2a008342bcc01",
+        "format": "8-bit indexed PNG",
+        "transparent_index": 0,
+        "useful_colors": 13,
+        "dither": "none"
+      }
+    }
+  ],
+  "preview": {
+    "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_preview.png",
+    "sha256": "0855dbc299879e585e4b7e357e636126877edad4de1d3978264dc58a562fb2b6",
+    "background": "neutral dark gray for visual review; not the indexed source asset"
+  },
+  "validation": {
+    "palette_generator": "[OK] 14 paletas validadas: codigos 6-bit, rampas ΔY>=17, <=15 uteis",
+    "focused_resource_gate": {
+      "command": "audit_validate_resources.py --project . --kind sheet --character jj_zillion_ii data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2.png",
+      "result": "PASS: 1 PNG dentro do contrato"
+    },
+    "rom_or_emulator_validation": false,
+    "integrated_in_res": false
+  },
+  "approval_scope": "concept art only; owner visual review is pending, and this record makes no sprite, gameplay, ROM, frame-rate, audio, or budget claim"
+}

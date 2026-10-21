@@ -1,0 +1,246 @@
+{
+  "schema": "openbor_sms_post_m6_evidence_index_v1",
+  "artifact_kind": "openbor_sms_post_m6_evidence_index",
+  "revision": 1,
+  "date": "2026-10-18",
+  "owner_project": "openbor_sms_rev1",
+  "kind": "documentary_successor_index_no_new_emulator_run",
+  "baseline_commit": "da86de303bca969a393032d270c9d245d4055180",
+  "baseline_rom": {
+    "sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+    "bytes": 131072
+  },
+  "references": {
+    "freeze": {
+      "path": "out/evidence/post_m6/baseline_76cdbee3/freeze.json",
+      "sha256": "4db61e425d1eb56d825166a1f13d7312433ae1863303d428b0105f06f81f6cc7",
+      "bytes": 1685
+    },
+    "seal": {
+      "path": "out/evidence/seal_m6_76cdbee3_20261017.json",
+      "sha256": "3c3376234bf5e1ec201d524cca0aab7e416ddf41938b696b27fb39a5b86da239",
+      "bytes": 11546
+    },
+    "m6_evidence": {
+      "path": "out/evidence/m6_evidence_76cdbee3.json",
+      "sha256": "db417f7cdc84bdc02bf647ba27489815e24ca4c27fbcd91817fb9d88c31a8169",
+      "bytes": 7550
+    },
+    "history_manifest": {
+      "path": "out/evidence/post_m6_history/20261018_lote_a/inventory_initial.json",
+      "sha256": "d12f508078590d2e8a665425c637dde2d641fbce3f3463b9f03e1d1344b1685a",
+      "bytes": 452356
+    },
+    "scheduler_comparison": {
+      "path": "out/evidence/post_m6/candidate_service_cap128/scheduler_comparison_20261018.json",
+      "sha256": "57c0819d38e5b62d8238555c04557825624ddede3fab06be3fb58b6e18d10b3f",
+      "bytes": 8599
+    },
+    "lote_a_report": "doc/artifacts/post_m6_lote_a_report_20261018.json",
+    "depth_linkage": "doc/artifacts/post_m6_depth_linkage_20261018.json",
+    "scope_predecessor": {
+      "path": "doc/artifacts/o3_combat_scope_20261016_predecessor.json",
+      "sha256": "aaf3b5451495b4c2283065a9fc4e57523abbd60868eca258208eb0e8ffb9a87e",
+      "bytes": 30055
+    }
+  },
+  "depth_cases": {
+    "negative_whiff_dz41": {
+      "session": "0b271ce0621a4adc914ab5c4d37be07b",
+      "artifact": {
+        "path": "out/evidence/m6/depth_0b271ce0621a4adc914ab5c4d37be07b.json",
+        "sha256": "3d396b8711364600455660c42243e273758fc393392ee4545aec87972b66dea1",
+        "bytes": 1704
+      },
+      "observed": {
+        "enemy_hp": "43->43",
+        "aligned": null,
+        "vovf": 0
+      },
+      "reading": "sem dano em dz41; controle negativo"
+    },
+    "positive_damage_dz6": {
+      "session": "f41e8c8c089042be85fd1c9643900043",
+      "artifact": {
+        "path": "out/evidence/m6/depth_f41e8c8c089042be85fd1c9643900043.json",
+        "sha256": "412e5ef3a38098dad97e5186f9975d0ef48b7dbb55d1f18fbfd347eaac7aa1fd",
+        "bytes": 1695
+      },
+      "observed": {
+        "enemy_hp": "43->36",
+        "hit_frame": 19,
+        "vovf": 0
+      },
+      "reading": "dano em dz6; o campo interno whiff_dz=6 e rotulo historico de fase do trial, nao resultado de whiff"
+    }
+  },
+  "post_m6_candidates": [
+    {
+      "name": "b345_nosched",
+      "rom_sha256": "b345043a6b8de449abc954c43a7d176db7b06a5bf62451392b9e7b190be530fa",
+      "role": "historical WIP baseline, preserved ROM at candidate_b345/trials/attack_hold/rom.sms",
+      "trials": [
+        {
+          "path": "out/evidence/post_m6/candidate_b345/trials/attack_hold/rom.sms",
+          "sha256": "b345043a6b8de449abc954c43a7d176db7b06a5bf62451392b9e7b190be530fa",
+          "bytes": 131072
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_b345/trials/attack_hold/trace.json",
+          "sha256": "3afbaee44668ddf7364e1bb9599e8e618fe508c25815b891dbd7288466c2bb65",
+          "bytes": 1051671
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_b345/trials/attack_tap/trace.json",
+          "sha256": "bbc402d7498fd66ab43a7660ff85426d42ec1f5fd5bdecc79b826c00fd43e921",
+          "bytes": 212743
+        }
+      ]
+    },
+    {
+      "name": "enemyfirst_nopromo",
+      "rom_sha256": "592d4f94f227486e73a3fc23ddfdcd081954a5f596abbd4e3897603d9b016a1c",
+      "trials": [
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap64/trials/attack_hold_delivery/trace.json",
+          "sha256": "3a83fb005f371fc8bec5383fc511ea81cbc8bdb67278c06d612c4fab44f6ec42",
+          "bytes": 1050805
+        }
+      ]
+    },
+    {
+      "name": "promote_cap64",
+      "rom_sha256": "3e231e346e9bdd2fc1d2a9fd08812bccdf44ee6e77d4683b807948403fb48382",
+      "trials": [
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap64/trials/attack_hold_promote64/trace.json",
+          "sha256": "5840a59345e769f3df6b69220a5366c442b67007077575a297fc628cc876d9a3",
+          "bytes": 1050202
+        }
+      ]
+    },
+    {
+      "name": "promote_cap96",
+      "rom_sha256": "ef1786c44d02f23943483f1b14e51512586f23482e0ff9402095fe1bcbf0586b",
+      "trials": [
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap96/trials/attack_hold_painprio/trace.json",
+          "sha256": "baa683044d79ac08dfe45b639227cf039eaaaf9b2d853b9e53604c87492d5570",
+          "bytes": 1050446
+        }
+      ]
+    },
+    {
+      "name": "promote_cap128",
+      "rom_sha256": "a987ca5ba508e512677ca1cfcb06868d9d1d091a39c934a74985498547a6b2e4",
+      "trials": [
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/attack_hold_promote128/trace.json",
+          "sha256": "cdc4ef8382e6c7b99764d08653a729e65b67da44ac28b9d2db33ef1fd5134bc0",
+          "bytes": 1050573
+        }
+      ]
+    },
+    {
+      "name": "srf_cpu",
+      "rom_sha256": "44301bd23bbba5663fcf14992e2baa092ee9e78429603e5353693eca31249c86",
+      "trials": [
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/attack_hold_srf_cpu/trace.json",
+          "sha256": "c0f06e5829bf5c559edaa62daeda727e35128f873133b4b6d68f4eca2a495256",
+          "bytes": 1048709
+        }
+      ]
+    },
+    {
+      "name": "painprio_cap128 (selected)",
+      "rom_sha256": "957122ae24f64d362767d10e903dd71cdf47d18800066c57d562123a573ddfa7",
+      "trials": [
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/attack_hold_painprio/trace.json",
+          "sha256": "2fd3920fe9119de9be91caff07e479513ce7764b8dc919b8d7f7362ad1459a9b",
+          "bytes": 1050517
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/attack_tap/trace.json",
+          "sha256": "14df862033b2a90fef99a8200a4f6ff9711baeb6b9600c6ad7e5efb3b53b0d89",
+          "bytes": 212677
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/stand/trace.json",
+          "sha256": "ad47f1c470af460852bfc40f35ad52ffaedde001c6856d44259ec6e270a0cd14",
+          "bytes": 482992
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_56/trace.json",
+          "sha256": "955b66135a1004352ff14ad156e8636b7efeeb56f2f7c8c445fdb838aa62a16d",
+          "bytes": 414861
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_60/trace.json",
+          "sha256": "5479eb8f1719526cef082fc79d50f0b04e1f261715b1a47219b259c7e220b13d",
+          "bytes": 356920
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_62/trace.json",
+          "sha256": "40595ad67c6c1fcb8e7ecec8cbcaeabe6ecfd497759bc9656c387d7172db79f8",
+          "bytes": 424974
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_64/trace.json",
+          "sha256": "fbf2855ae9ffc5e8fc5d015c173f46b7b3c3bb0737a29a4d71b015ca02026752",
+          "bytes": 428184
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_66/trace.json",
+          "sha256": "e4a7623fb3a63e45b2296ca8d92954783991b4493d5a6cd4485de7749ddef7b6",
+          "bytes": 430541
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_67/trace.json",
+          "sha256": "0bcb023b697337b4773c7b7524577b5d5c1d96f609f5fdc7c89e6095d564ae44",
+          "bytes": 432768
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_68/trace.json",
+          "sha256": "78aa81fe2e09de6a93600d53bd15072997bdbe5b2464a0f8864f3d7d5f865ce5",
+          "bytes": 433867
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_69/trace.json",
+          "sha256": "91d692de2ea1c7f0eef8b6e4beaa6b6182ce866395ed480ad0224c6171a92c6f",
+          "bytes": 436273
+        },
+        {
+          "path": "out/evidence/post_m6/candidate_service_cap128/trials/jump_70/trace.json",
+          "sha256": "f4a72e87d4da82d7f1da6f9c32d33e16607369540bffa5dcf55b8d647d5dfe15",
+          "bytes": 373490
+        }
+      ]
+    }
+  ],
+  "stale_evidence": [
+    {
+      "item": "M5 ROM b0eed40a",
+      "reason": "superseded by M6 76cdbee3"
+    },
+    {
+      "item": "MWF 87954b7f (5696 frames)",
+      "reason": "not the M6 SHA; do not cite as M6 proof"
+    },
+    {
+      "item": "actor layout 30/34 B and addresses 0xC004/0xC026",
+      "reason": "M6 layout; WIP candidate uses 48 B at 0xC000/0xC030"
+    },
+    {
+      "item": "vdp_regs.bin snapshots",
+      "reason": "from the old SHA; regenerate on the M7/M8 candidate"
+    }
+  ],
+  "limits": [
+    "Indice documental: nao roda gates, nao renova selo de frescor e nao promove qualidade.",
+    "Metricas comparativas vivem no scheduler_comparison; este indice vincula SHAs de ROM, traces e hashes.",
+    "out/ e gitignored; caminhos sao relativos a raiz do projeto.",
+    "audit_render_glitch segue bloqueado; PAL e audio nao medidos neste indice."
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schema": "sms_artwork_source_hygiene_v1",
+  "date": "2026-10-11",
+  "asset_id": "dr_social",
+  "scope": "replace the 61-pose basic animation source while preserving its historical approval and excluding it from new visual generation",
+  "previous_source": {
+    "artifact_id": "dr-social-animation-source-v01",
+    "status": "archived_superseded_as_active_source",
+    "archive_directory": "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/",
+    "source_path": "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/dr_social_basic_sequences_61f_owner_source_v1.png",
+    "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+    "source_approval_preserved_as_historical": true,
+    "used_as_visual_input_for_replacement": false,
+    "archived_direct_collateral": [
+      "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/dr_social_basic_sequences_61f_owner_source_v1.json",
+      "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/dr_social_61_pose_source_lineage_v1.json",
+      "data/source_art/sprite_studies/dr_social/historical_approved/basic_sequences_61f_owner_source_v1/archive_manifest.json"
+    ],
+    "historical_reviews_and_conversion_diagnostics": "Retained at their canonical doc/ and out/diagnostics/ paths, indexed by archive_manifest.json with hashes; they are records of the previous source, not active visual references."
+  },
+  "replacement_candidate": {
+    "artifact_id": "dr-social-animation-source-v02",
+    "status": "candidate_blocked_pending_review",
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v2.png",
+    "sha256": "bc5c7fee6155669c5539cfa09629a627dcd14e9702c200fe9469cd7029d05670",
+    "dimensions_px": [1254, 1254],
+    "generation_source_policy": {
+      "sole_approved_visual_reference": {
+        "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+        "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+      },
+      "written_specifications_only": [
+        "doc/11-gdd.md",
+        "doc/15-tdd.md"
+      ],
+      "previous_sprite_sheet_used": false,
+      "previous_conversion_preview_used": false
+    },
+    "sidecars": [
+      "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v2_metadata.json",
+      "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v2_lineage.json",
+      "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v2_prompt.txt",
+      "doc/dr_social_61_pose_art_review_v11.json"
+    ],
+    "preflight_blockers": [
+      "1254x1254 raster does not divide into the intended exact 8x8 cell grid.",
+      "741833 pixels have partial alpha; hard cutout was not produced.",
+      "Visible cyan/blue fringe is present around silhouettes.",
+      "208338 visible RGB values exceed any limited pixel-art/runtime palette.",
+      "Exact frame extraction, frame order, pose uniqueness, and object attachment remain unverified."
+    ],
+    "conversion_allowed": false,
+    "owner_approved": false,
+    "independent_review": "pending"
+  },
+  "sequence_scope_unchanged": {
+    "total_poses": 61,
+    "sequences": [
+      ["idle", 4],
+      ["walk_forward", 8],
+      ["walk_backward", 8],
+      ["jump", 8],
+      ["crouch", 5],
+      ["dash_run", 8],
+      ["knockdown_fall", 8],
+      ["tech_roll_getup", 8],
+      ["guard", 4]
+    ]
+  },
+  "registry": {
+    "central_registry": "../../../../doc/artifact_registries/master_of_fighters.json",
+    "previous_source_status": "superseded",
+    "replacement_status": "candidate",
+    "active_approved_animation_source": null
+  },
+  "learning": [
+    "Archival must preserve the source, its approval declaration, metadata/lineage, and a hash-indexed map of associated immutable reviews and diagnostics.",
+    "A replacement's lineage must name the approved model sheet as its only visual parent; GDD/TDD are written constraints, not visual references.",
+    "A generated image is not promotable because it resembles a sprite atlas: alpha, silhouette fringe, exact cell geometry, palette, and frame semantics must pass before conversion.",
+    "Keep the replacement explicitly blocked and unapproved when preflight fails; do not convert it or describe it as a production-ready sprite sheet."
+  ],
+  "claim_ceiling": "source organization verified; replacement remains a blocked candidate, with no conversion or ROM claim"
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "project_learning_candidate_v1",
+  "date": "2026-10-06",
+  "status": "pending_future_curation",
+  "canonical_lesson_id": null,
+  "dedup_key": "sms_mugen_native_qa_console_reset_did_not_isolate_cases_20261006",
+  "existing_lessons_to_review": [
+    "L036",
+    "L057",
+    "L065",
+    "L093",
+    "L094"
+  ],
+  "scope": "Project-local runtime QA on Ryo/Ryo build_v075 and the observed session_qa request; do not infer console-reset behavior for other emulators or ROMs.",
+  "observations": [
+    {
+      "topic": "A console reset pulse did not isolate consecutive runtime cases",
+      "fact": "The v074 runtime request reused one private session for all cases. Each sequence began with console=2 for one frame, then issued controls. The bridge acknowledged the input, but the bridge frame counter remained continuous and SMRT telemetry accumulated: after the short KEY_1 case C7E5/C7E6 were 0x01/0x01; after the later long KEY_1 case they were 0x03/0x03. The latter therefore includes events/commands from the prior gesture and is not evidence of a long-hold-only result. The submitted case descriptions treated the pulse as a reset without verifying reset state.",
+      "interpretation": "The runtime report remains valid for the combined input timeline and its sampled endpoint, but per-case causal attribution is invalid wherever it assumes console=2 cleared ROM state. Preserve the original report and mark this coordinator retification separately.",
+      "evidence": [
+        "out/qa_native_20261006/v074/runtime/request.json",
+        "out/qa_native_20261006/v074/runtime/run_fed32d2db3f140b78853571ee431e872/commands.jsonl",
+        "out/qa_native_20261006/v074/runtime/run_fed32d2db3f140b78853571ee431e872/case_1_probe.json",
+        "out/qa_native_20261006/v074/runtime/run_fed32d2db3f140b78853571ee431e872/case_2_probe.json",
+        "out/qa_native_20261006/v074/runtime/run_fed32d2db3f140b78853571ee431e872/report.json"
+      ]
+    },
+    {
+      "topic": "Isolation rule for follow-up cases",
+      "fact": "Three follow-up requests on the same frozen build_v075 ROM SHA d77ae0899efde363f77bb964e73f171bbcf7c8adfba98855284ce5802b271809 were prepared, each with one case and a distinct worker-owned private session: a strong-only dispatch, a close strong-contact probe, and a matching visual timeline.",
+      "interpretation": "A follow-up result is attributable only to its single assigned timeline and must be audited against its own request, native dispatch ID, session ID, and frozen ROM SHA. A reset can be used for test isolation only after the ROM-level reset indicator and expected baseline fields are observed.",
+      "evidence": [
+        "out/qa_native_20261006/v075_strong_isolated/strong_runtime/request.json",
+        "out/qa_native_20261006/v075_strong_isolated/contact_runtime/request.json",
+        "out/qa_native_20261006/v075_strong_isolated/contact_visual/request.json"
+      ]
+    },
+    {
+      "topic": "Isolated v075 dispatch confirms HP; the native visual report contains one false absence claim",
+      "fact": "Three native agents each used a distinct private session bound to the same build_v075 SHA. The strong-only runtime worker observed K1_STRONG/HP masks 0x02/0x02 and ST_PUNCH2/HP animation 7/7. The close runtime case ended after 40 neutral frames with P2 life 232, score 0 and P1 still in ST_PUNCH2. The visual worker inspected 68 native 256x192 frames and reported the first punch only at frame index 54, 26 neutral frames after release, with no idle recovery shown. Coordinator review of frame 67 (SHA 2500a9b0...) and review_unique_frames.png (SHA d4b76562...) shows P1 remains visible; the worker's final-frame-absent claim is withdrawn without editing the original report.",
+      "interpretation": "The command/tier route is demonstrated for this exact ROM and assigned gesture. Attack contact and recovery remain unproved at this timeline. The 26-frame delay correlates with a large pose upload but does not, alone, establish the cause; the upcoming measured VBlank delta must be tied to the same ROM.",
+      "evidence": [
+        "out/qa_native_20261006/v075_strong_isolated/strong_runtime/request.json",
+        "out/qa_native_20261006/v075_strong_isolated/strong_runtime/run_69380d4972f9450a9e1d1ca97f787935/report.json",
+        "out/qa_native_20261006/v075_strong_isolated/contact_runtime/run_deca9833be2a40329bf3dd5645bc4365/report.json",
+        "out/qa_native_20261006/v075_strong_isolated/contact_visual/run_5d1df14ad8524dee9f30d853a86ebb73/report.json",
+        "out/qa_native_20261006/v075_strong_isolated/contact_visual/run_5d1df14ad8524dee9f30d853a86ebb73/case_0/000067.png"
+      ]
+    }
+  ],
+  "future_curation_actions": [
+    "Compare against L057, L093, and L094 before assigning a canonical lesson ID.",
+    "Consider a generic request option for a fresh emulator session per independent case, or require a ROM-verified reset precondition in request validation.",
+    "Do not rewrite worker reports or promote the v074 combined-sequence result into a strong-only command verdict."
+  ],
+  "promotion": "Pending future curation; no canonical lesson ID, central doctrine, learning ledger, or global gate changed."
+}

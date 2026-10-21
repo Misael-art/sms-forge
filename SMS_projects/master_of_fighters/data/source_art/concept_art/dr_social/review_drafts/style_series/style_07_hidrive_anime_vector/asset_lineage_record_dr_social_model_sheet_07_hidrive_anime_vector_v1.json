@@ -1,0 +1,124 @@
+{
+  "schema": "asset_lineage_record_model_sheet_v1",
+  "asset_id": "dr_social_model_sheet_07_hidrive_anime_vector_v1",
+  "created_date": "2026-10-08",
+  "status": "source_candidate",
+  "owner_review": "pending",
+  "style_id": "HiDrive-Anime-Vector",
+  "style_reference": {
+    "catalog": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "catalog_sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "game": "Guilty Gear (2D) / BlazBlue",
+    "platform_era": "PS2 / Arcade / Arc System Works",
+    "base_art_style": "High-Speed Anime Fighter Pixel Art",
+    "lineart": "Lineart fina tipo vetor, animação rápida e técnica",
+    "body_morphology": "Anatomia de anime moderno estilizado com trajes complexos e esguio",
+    "palette_and_lighting": "Paleta ultra-saturada, cel-shading limpo, efeitos de partículas intensos",
+    "descriptor_validation_status": "initial catalog descriptor; not independently validated"
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "selected_prompt": {
+      "attempt": 4,
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt",
+      "sha256": "7fde6d596896933f1a5a00ceb655df378376110b79494c6f97605c03bb07661e"
+    },
+    "attempt_prompts": [
+      {
+        "attempt": 1,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1_prompt.txt",
+        "sha256": "436845f76a9d8ad79ffeb0a5508e64ebfc52d0a2b31b49f3bb1d16fbb16c57b1"
+      },
+      {
+        "attempt": 2,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_prompt.txt",
+        "sha256": "d3b897a30b8c7f34a12830e60cbf78ab36d8191b99f5756e289647c0962943b7"
+      },
+      {
+        "attempt": 3,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v3_prompt.txt",
+        "sha256": "7778701b1ebb5d0e8ef2f1bd66f3db822ee05ba13f3ad0ec7b837a8e7f62d134"
+      },
+      {
+        "attempt": 4,
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt",
+        "sha256": "7fde6d596896933f1a5a00ceb655df378376110b79494c6f97605c03bb07661e"
+      }
+    ],
+    "input_images": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+        "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+        "role": "identity/material reference; layout generated from text for this attempt"
+      }
+    ],
+    "attempts": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1_art.png",
+        "sha256": "0ce33fda83bed27431c0ce855a42fb7baf6c13cd13f98c40afc2a0f1c963b997",
+        "status": "discarded",
+        "reason": "v1–v3 repeat prior treatment/add costume detail"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_art.png",
+        "sha256": "209782249a34c4315e78df41f91344b6bf8edf9908e9b8fc3e3bfb17537a4403",
+        "status": "discarded",
+        "reason": "v1–v3 repeat prior treatment/add costume detail"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v3_art.png",
+        "sha256": "eedd5d3f7bb842533181d1926ec03611a120d50cf58a353ab9e3784f676bcc3b",
+        "status": "discarded",
+        "reason": "v1–v3 repeat prior treatment/add costume detail"
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
+        "sha256": "2cd090e9a614cb4a8fe4c15ac38e05713425b28c2cf7459ae9d2749c288407a6",
+        "status": "selected_for_candidate_review",
+        "reason": "selected for cleaner geometric/vector-like contours and shadow planes"
+      }
+    ],
+    "metadata_file": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_metadata.json",
+      "sha256": "a56855ec66adc94bb93e1e4bdff1546817d7c453b3c47795980887c7c264ea89"
+    },
+    "layout_tool": {
+      "path": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+      "sha256": "a0249a00ddfbb00b5993398c9aeb4137c5b49502eb54b25699aa42f5893b5d43"
+    },
+    "final_sheet": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1.png",
+      "sha256": "822be99e0a61ebf72029e662c61f23aec509e4028ea75c7e58487810eb9e1b30",
+      "dimensions_px": [
+        2400,
+        1440
+      ]
+    },
+    "layout_composition": "Generated illustration uniformly reduced to 0.78 and placed intact; compositor adds title, view labels, 7.5H visual ruler, baseline, style cards, palette chips and candidate badge."
+  },
+  "required_views": [
+    "front full body",
+    "side-profile full body",
+    "back full body",
+    "face close-up",
+    "signature pose"
+  ],
+  "review_notes": {
+    "visual_inspection": "Five views present on pale cream; gray hair, round glasses, long blue/cyan coat, white shirt, burgundy cravat, cane, rapier and steel crescent boomerang visible. Cleaner angular shadows distinguish this attempt somewhat, but style review is pending.",
+    "pending": "13 review axes, owner review and independent review.",
+    "not_approved_by_this_record": "SMS palette quantization, sprites, animation, ROM integration or emulator behavior"
+  },
+  "review_checklist": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_review_v1.json",
+    "sha256": "f16eee7575adeb2fa5295d858924b8be1742e8c1fa94047772c5a969b977b064",
+    "report_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_review_report_v1.json"
+  },
+  "independent_quality_review": {
+    "status": "plan_created; reviewer_assignment_and_report_pending",
+    "request_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_quality_review_request_v1.json",
+    "request_sha256": "6c34c1e4411c599f01d85c317e9d8f5a13316da7f0c90af5abc7bbb43ef70b2f",
+    "plan_path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_quality_review_plan_v1.json",
+    "plan_sha256": "519762812233601e2e7958a44e3dbed9a45cea22e0cbe06c82d07a7a503b845b"
+  },
+  "claim_ceiling": "concept model sheet candidate only"
+}

@@ -1,0 +1,349 @@
+{
+  "schema": "smsforge_roster_concept_lineup_v2",
+  "asset_id": "master_of_fighters_harmony_concept_lineup_v2",
+  "status": "candidate_pending_owner_visual_review",
+  "created_date": "2026-10-08",
+  "purpose": "Compare current accepted character references side by side for line/rendering cohesion, morphology, silhouette and relative screen height.",
+  "scope": {
+    "current_confirmed_character_references": 7,
+    "characters_in_gdd_without_approved_concept_reference": [
+      "Karateca de Black Belt",
+      "Bruxa de Psychic World"
+    ],
+    "page_split": [
+      4,
+      3
+    ],
+    "maximum_characters_per_page": 5
+  },
+  "source_contract": {
+    "path": "SMS_projects/master_of_fighters/doc/roster_harmony_contract_v1.json",
+    "sha256": "1190cd367e4a4a1e639214753fcbe150157a40c5a0a38bec5adc31abace76a97",
+    "role": "owner-directed roster identity and working height bands"
+  },
+  "comparison_method": {
+    "composition": "deterministic crop-and-compose from exact source art; no redraw, repaint, color normalization, or nonuniform geometry changes",
+    "pose": "leftmost existing full-body front/three-quarter stance; source has no identical orthographic front for every character",
+    "background": "clean neutral cream",
+    "baseline": "one shared horizontal baseline per page",
+    "ruler": "contract-derived relative target units U; display scale 8 px/U",
+    "height_basis": "rounded representative value from each current contract target_height_px band; comparison proposal, not absolute canonical body height",
+    "resampling": "Lanczos for illustration sources; nearest-neighbor for Joe Musashi pixel reference",
+    "limitations": [
+      "Joe Musashi is represented by the approved SMS pixel reference, so medium/rendering differs from the painted concept illustrations.",
+      "The boards show current references and target scale; they do not certify stylistic cohesion or final proportions.",
+      "Some source poses are three-quarter rather than orthographic front."
+    ]
+  },
+  "characters": [
+    {
+      "key": "golden_axe_warrior",
+      "name": "Golden Axe Warrior",
+      "game": "Golden Axe Warrior",
+      "source_path": "SMS_projects/master_of_fighters/data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_preview.png",
+      "source_sha256": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91",
+      "source_role": "owner_confirmed_harmonized_reference",
+      "source_mode": "P",
+      "source_dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_pose": "leftmost full-body front/three-quarter pose in the current accepted reference",
+      "extraction_method": "border-connected flat-background removal; RGB max-distance tolerance 12",
+      "component_bbox_xywh": [
+        15,
+        9,
+        747,
+        983
+      ],
+      "component_area_px": 350989,
+      "source_visible_height_px": 983,
+      "target_height_units": 74,
+      "contract_target_height_band_px": [
+        72,
+        75
+      ],
+      "resampling": "Lanczos"
+    },
+    {
+      "key": "hayato",
+      "name": "Hayato",
+      "game": "Kenseiden",
+      "source_path": "SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "source_sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "source_role": "owner_confirmed_harmonized_reference",
+      "source_mode": "RGB",
+      "source_dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_pose": "leftmost full-body front/three-quarter pose in the current accepted reference",
+      "extraction_method": "border-connected flat-background removal; RGB max-distance tolerance 12",
+      "component_bbox_xywh": [
+        60,
+        11,
+        534,
+        944
+      ],
+      "component_area_px": 261565,
+      "source_visible_height_px": 944,
+      "target_height_units": 75,
+      "contract_target_height_band_px": [
+        74,
+        76
+      ],
+      "resampling": "Lanczos"
+    },
+    {
+      "key": "joe_musashi",
+      "name": "Joe Musashi",
+      "game": "Shinobi / Shadow Dancer",
+      "source_path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+      "source_sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+      "source_role": "owner_confirmed_harmonized_reference",
+      "source_mode": "RGBA",
+      "source_dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_pose": "leftmost full-body front/three-quarter pose in the current accepted reference",
+      "extraction_method": "preserve_existing_alpha",
+      "component_bbox_xywh": [
+        109,
+        3,
+        693,
+        1010
+      ],
+      "component_area_px": 291652,
+      "source_visible_height_px": 1010,
+      "target_height_units": 80,
+      "contract_target_height_band_px": [
+        78,
+        82
+      ],
+      "resampling": "nearest-neighbor"
+    },
+    {
+      "key": "dr_social",
+      "name": "Dr. Ferdinand Social",
+      "game": "Master of Darkness",
+      "source_path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "source_sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "source_role": "owner_confirmed_harmonized_reference",
+      "source_mode": "RGB",
+      "source_dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_pose": "leftmost full-body front/three-quarter pose in the current accepted reference",
+      "extraction_method": "border-connected flat-background removal; RGB max-distance tolerance 12",
+      "component_bbox_xywh": [
+        40,
+        21,
+        581,
+        931
+      ],
+      "component_area_px": 281716,
+      "source_visible_height_px": 931,
+      "target_height_units": 80,
+      "contract_target_height_band_px": [
+        78,
+        82
+      ],
+      "resampling": "Lanczos"
+    },
+    {
+      "key": "alis_landale",
+      "name": "Alis Landale",
+      "game": "Phantasy Star",
+      "source_path": "SMS_projects/master_of_fighters/data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+      "source_sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+      "source_role": "owner_confirmed_harmonized_reference",
+      "source_mode": "P",
+      "source_dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_pose": "leftmost full-body front/three-quarter pose in the current accepted reference",
+      "extraction_method": "preserve_existing_alpha",
+      "component_bbox_xywh": [
+        63,
+        11,
+        662,
+        977
+      ],
+      "component_area_px": 211898,
+      "source_visible_height_px": 977,
+      "target_height_units": 75,
+      "contract_target_height_band_px": [
+        74,
+        76
+      ],
+      "resampling": "Lanczos"
+    },
+    {
+      "key": "landau",
+      "name": "Landau",
+      "game": "Lord of the Sword",
+      "source_path": "SMS_projects/master_of_fighters/data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+      "source_sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+      "source_role": "owner_confirmed_harmonized_reference",
+      "source_mode": "P",
+      "source_dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_pose": "leftmost full-body front/three-quarter pose in the current accepted reference",
+      "extraction_method": "preserve_existing_alpha",
+      "component_bbox_xywh": [
+        37,
+        22,
+        714,
+        972
+      ],
+      "component_area_px": 272457,
+      "source_visible_height_px": 972,
+      "target_height_units": 75,
+      "contract_target_height_band_px": [
+        74,
+        76
+      ],
+      "resampling": "Lanczos"
+    },
+    {
+      "key": "jj",
+      "name": "J.J.",
+      "game": "Zillion II: The Tri Formation",
+      "source_path": "SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "source_sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "source_role": "owner_confirmed_harmonized_reference",
+      "source_mode": "P",
+      "source_dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_pose": "leftmost full-body front/three-quarter pose in the current accepted reference",
+      "extraction_method": "preserve_existing_alpha",
+      "component_bbox_xywh": [
+        79,
+        25,
+        604,
+        984
+      ],
+      "component_area_px": 200333,
+      "source_visible_height_px": 984,
+      "target_height_units": 76,
+      "contract_target_height_band_px": [
+        74,
+        78
+      ],
+      "resampling": "Lanczos"
+    }
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "characters": [
+        {
+          "key": "golden_axe_warrior",
+          "name": "Golden Axe Warrior",
+          "target_height_units": 74,
+          "display_height_px": 592,
+          "display_width_px": 450,
+          "top_y_px": 518,
+          "baseline_y_px": 1110,
+          "center_x_px": 405
+        },
+        {
+          "key": "hayato",
+          "name": "Hayato",
+          "target_height_units": 75,
+          "display_height_px": 600,
+          "display_width_px": 339,
+          "top_y_px": 510,
+          "baseline_y_px": 1110,
+          "center_x_px": 930
+        },
+        {
+          "key": "joe_musashi",
+          "name": "Joe Musashi",
+          "target_height_units": 80,
+          "display_height_px": 640,
+          "display_width_px": 439,
+          "top_y_px": 470,
+          "baseline_y_px": 1110,
+          "center_x_px": 1455
+        },
+        {
+          "key": "dr_social",
+          "name": "Dr. Ferdinand Social",
+          "target_height_units": 80,
+          "display_height_px": 640,
+          "display_width_px": 399,
+          "top_y_px": 470,
+          "baseline_y_px": 1110,
+          "center_x_px": 1980
+        }
+      ],
+      "output": {
+        "path": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concept_lineup_v2_part_01.png",
+        "sha256": "38ca6bcbd9887a7cc628c7df554f7cc1bca10276cac44b06cf88f6e43887d5f3",
+        "dimensions_px": [
+          2400,
+          1440
+        ]
+      }
+    },
+    {
+      "page": 2,
+      "characters": [
+        {
+          "key": "alis_landale",
+          "name": "Alis Landale",
+          "target_height_units": 75,
+          "display_height_px": 600,
+          "display_width_px": 407,
+          "top_y_px": 510,
+          "baseline_y_px": 1110,
+          "center_x_px": 560
+        },
+        {
+          "key": "landau",
+          "name": "Landau",
+          "target_height_units": 75,
+          "display_height_px": 600,
+          "display_width_px": 441,
+          "top_y_px": 510,
+          "baseline_y_px": 1110,
+          "center_x_px": 1200
+        },
+        {
+          "key": "jj",
+          "name": "J.J.",
+          "target_height_units": 76,
+          "display_height_px": 608,
+          "display_width_px": 373,
+          "top_y_px": 502,
+          "baseline_y_px": 1110,
+          "center_x_px": 1840
+        }
+      ],
+      "output": {
+        "path": "SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concept_lineup_v2_part_02.png",
+        "sha256": "458b3e072a9509b4ac7a8c1b6184097ab1f99c77932ea19784030cb2fed7bdab",
+        "dimensions_px": [
+          2400,
+          1440
+        ]
+      }
+    }
+  ],
+  "review_axes": {
+    "line_and_rendering_cohesion": "pending_owner_review",
+    "body_morphology_and_proportion": "pending_owner_review",
+    "relative_height_targets": "pending_owner_review",
+    "source_identity_and_pose_readability": "pending_owner_review",
+    "shared_baseline_and_layout": "producer_composition_checked_owner_review_pending"
+  },
+  "claim_ceiling": "comparison_board_candidate_only; not sprite, animation, SMS palette, integration, ROM, or emulator approval"
+}

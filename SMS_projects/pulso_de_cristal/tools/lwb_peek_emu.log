@@ -1,0 +1,5 @@
+java.io.IOException: Connection closed
+	at dap.base.DebugAdapterBaseProtocol.readHeaderLine(Unknown Source)
+	at dap.base.DebugAdapterBaseProtocol.readHeader(Unknown Source)
+	at dap.base.DebugAdapterBaseProtocol.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)

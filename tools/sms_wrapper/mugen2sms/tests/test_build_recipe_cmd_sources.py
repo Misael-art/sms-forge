@@ -145,3 +145,9 @@ def test_sync_copia_header_do_controlador_cpu(tmp_path, monkeypatch):
 
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-v"]))
+
+
+# Escopo donor: a prova do manifesto VIGENTE le luga_mugen/doc/rom_asset_binding.json (EIO);
+# as provas negativas acima usam fixtures temporarias e continuam em todos os escopos.
+test_fontes_reais_do_manifesto_com_hash_confurado = pytest.mark.donor(
+    test_fontes_reais_do_manifesto_com_hash_confurado)

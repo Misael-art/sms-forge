@@ -1,0 +1,80 @@
+{
+  "status": "pass",
+  "scope": "private audio routing and signal only",
+  "checks": {
+    "boot_muted_and_nonzero_ROM_samples_blocked": "pass",
+    "muted_capture_refused": "pass",
+    "unrouted_activation_rejected": "pass",
+    "pause_step_unmute_preserve_stream_identity": "pass",
+    "tampered_sink_contract_refuses_frame_advance": "pass",
+    "parallel_audible_and_silent_ROMs_private_monitors": "pass",
+    "effective_duration_at_least_95_percent": "pass",
+    "owned_cleanup_removes_sink_preserves_other_session": "pass"
+  },
+  "sessions": [
+    {
+      "id": "62de8333050d4f60a120ec6cb3b41e1e",
+      "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+      "bridge_sha256": "a283b54202112434927ed8f83bb292376a2d6f74830dde6f04f9589da377333a",
+      "audio": {
+        "session_id": "62de8333050d4f60a120ec6cb3b41e1e",
+        "pid": 564329,
+        "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+        "sink": "smsforge_62de8333050d4f60",
+        "moved_sink_inputs": [
+          "4352"
+        ],
+        "requested_seconds": 8,
+        "effective_seconds": 8.173,
+        "audio_route": {
+          "sink_inputs": [
+            "4352"
+          ],
+          "pid": 564329,
+          "sink": "smsforge_62de8333050d4f60",
+          "at": 1791249974.3459287,
+          "verified": true
+        },
+        "samples": 360448,
+        "peak": 6012,
+        "wav_sha256": "62ae5be4550c9cc46ea7e44c414336e327f54d9acdba0fb88c891e5f7120bc2c",
+        "claim": "signal_from_session_pid; not music correctness"
+      }
+    },
+    {
+      "id": "c11b98740351498484f263363e072723",
+      "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "bridge_sha256": "a283b54202112434927ed8f83bb292376a2d6f74830dde6f04f9589da377333a",
+      "audio": {
+        "session_id": "c11b98740351498484f263363e072723",
+        "pid": 564580,
+        "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+        "sink": "smsforge_c11b987403514984",
+        "moved_sink_inputs": [
+          "4386"
+        ],
+        "requested_seconds": 8,
+        "effective_seconds": 8.173,
+        "audio_route": {
+          "sink_inputs": [
+            "4386"
+          ],
+          "pid": 564580,
+          "sink": "smsforge_c11b987403514984",
+          "at": 1791249977.5461154,
+          "verified": true
+        },
+        "samples": 360448,
+        "peak": 0,
+        "wav_sha256": "e659ce3c6ac2a734ad51744149e0da7c910545ca63acdb9116ec1e8c5607778e",
+        "claim": "signal_from_session_pid; not music correctness"
+      }
+    }
+  ],
+  "muted_pcm": {
+    "seconds": 2.2291156462585033,
+    "peak": 0,
+    "sha256": "c2efe636e969a73c3e76b702f6a718b738acef2680d7d7395023c146c2cbe8fa"
+  },
+  "script_sha256": "10b3d34258b2f8aa0a448fb9ca7014ed0782a8b43258d297fa6b8b80d58f67ac"
+}

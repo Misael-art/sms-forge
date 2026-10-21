@@ -1,0 +1,41 @@
+{
+  "schema": "sms_blastem_audit_v1",
+  "ok": true,
+  "errors": [],
+  "scope": "record_consistency_only_not_gameplay_fps_audio_or_hardware",
+  "session": "doc/curation/evidence/2026-10-10_blastem_advanced/final4/blastem-sms-8b29bbc90b744989abbcd6ec2d15205d",
+  "event_counts": [
+    2,
+    952,
+    952
+  ],
+  "native_media": {
+    "apng": {
+      "frames": 34,
+      "size": [
+        256,
+        192
+      ],
+      "different_from_first": 33,
+      "container_duration_ms": 566.6666666666667,
+      "clock": "nominal_60Hz_not_realtime_FPS",
+      "raw_preserved": true,
+      "derived_acTL_crc_repairs": 1
+    },
+    "wave": {
+      "sample_rate": 48000,
+      "channels": 2,
+      "sample_frames": 27648,
+      "duration_seconds": 0.576,
+      "peak": 0,
+      "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+    },
+    "vgm": {
+      "bytes": 88,
+      "psg_writes": 11,
+      "wait_samples_44100": 1,
+      "scope": "PSG register log_not_audible_mix_or_trailing_silence_duration"
+    }
+  },
+  "decoded_plane_fixture_top128_matches_framebuffer": true
+}

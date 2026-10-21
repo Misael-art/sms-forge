@@ -1,0 +1,195 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "jj_zillion_ii_idle_sms_96px_12f_v4",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_study",
+  "source_kind": "ai_generated_post_translation",
+  "status": "superseded_by_v5_before_owner_review",
+  "superseded_by": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_lineage_v5.json",
+  "design_reference_approval": {
+    "source": "data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_lineage_v4.json",
+    "source_image": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+    "source_image_sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+    "approval_date": "2026-10-04",
+    "scope": "owner-approved concept defines J.J. identity, outfit, anatomy and palette mapping; it authorizes a separate sprite study but does not approve this sheet"
+  },
+  "contract": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_asset_contract_v4.json",
+    "sha256": "7201637620f4578d48c8725891df75165ceda143470460ff2b0c1c274c2217ca"
+  },
+  "prompt": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_prompt_v4.txt",
+    "sha256": "9a0fd77e573135e696e2b3f6c361a7d30eeb3a7c4f41b80a81a35c685e44a8fa"
+  },
+  "generation_history": [
+    {
+      "version": "generated v1",
+      "tool": "Codex ImageGen",
+      "output": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_generated_v1.png",
+      "sha256": "fad70d5f59a9a3c9b2ad2d30442f2b7ad651248107a99518e17a7ce3facf12d9",
+      "decision": "discarded: head faced right while the pistol pointed backward; pose differences were too small"
+    },
+    {
+      "version": "generated v2",
+      "tool": "Codex ImageGen edit",
+      "input": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_generated_v1.png",
+      "output": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_generated_v2.png",
+      "sha256": "944ea5c82158693fb3889cb3e36915d67a1260557ac9a914d77d4ff9a8546411",
+      "decision": "corrected pistol muzzle to right, but sheet still had near-repeated poses"
+    },
+    {
+      "version": "generated v3",
+      "tool": "Codex ImageGen edit",
+      "input": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_generated_v2.png",
+      "output": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_generated_v3.png",
+      "sha256": "15b637a08caed0071a09bc110f6dec184c48e050f4ce2e68212b6123ada285e2",
+      "dimensions_px": [1448, 1086],
+      "layout": "4 columns x 3 rows; twelve 362x362 cells",
+      "decision": "selected ten poses for stronger frame-to-frame changes; its deep-crouch cells 5 and 6 were excluded because they broke the shared visible-height range"
+    }
+  ],
+  "cell_sources": {
+    "generated_v3_cells": [0, 1, 2, 3, 4, 7, 8, 9, 10, 11],
+    "generated_v2_cells": [5, 6],
+    "v2_sheet_sha256": "944ea5c82158693fb3889cb3e36915d67a1260557ac9a914d77d4ff9a8546411",
+    "row_major_order": true
+  },
+  "source_roles": {
+    "game_master_system": "authoritative for J.J. identity, palette and game behavior; its sprite is represented through the owner-approved concept reference",
+    "anime": "only clarified costume construction and color-to-garment mapping in the owner-approved concept after the owner requested it; no anime pixels or poses were used directly for this sprite sheet",
+    "direct_sprite_design_input": "owner-approved concept v4 only"
+  },
+  "alpha_cleanup": {
+    "tool": "ImageMagick",
+    "method": "crop each 362x362 cell and flood-fill checkerboard background from top-left with 18% color tolerance; retain enclosed character pixels; composite and review on #444444",
+    "reason": "ImageGen baked a checkerboard into RGB rather than storing transparency. Cell-local flood fill removes it without discarding enclosed pale shoulder guards, forearm guards, knee guards or boots."
+  },
+  "geometry_normalization": {
+    "tool": "ImageMagick nearest-neighbor",
+    "input_cell_px": [362, 362],
+    "output_cell_px": [96, 96],
+    "uniform_scale_percent": 22.3,
+    "placement": "uniform scale for every selected cell; centered horizontally and bottom-aligned at y=95; no per-frame rescaling",
+    "rgba_sheet": {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_rgba_12f_v4.png",
+      "sha256": "a4d7d94a088076946f99325381ce8c3ce0e89fce2f0073e53b28a24516aecfd7",
+      "dimensions_px": [384, 288]
+    },
+    "visible_width_range_px": [61, 66],
+    "visible_height_range_px": [72, 76],
+    "baseline_y_px": 95,
+    "common_pivot_px": [48, 95]
+  },
+  "conversion": {
+    "tool_path": "tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "arguments": [
+      "--size 384x288",
+      "--dither none",
+      "--project SMS_projects/master_of_fighters",
+      "--character jj_zillion_ii",
+      "--speckle-cleanup",
+      "--cell-size 96x96"
+    ],
+    "palette_source": {
+      "path": "doc/build_palettes_manifest.py",
+      "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e"
+    },
+    "palette_manifest": {
+      "path": "doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff"
+    },
+    "palette_rgb_with_transparent_index": [
+      [0, 0, 0], [0, 0, 85], [0, 0, 170], [85, 85, 255], [170, 170, 255],
+      [170, 0, 85], [255, 0, 85], [255, 85, 170], [170, 85, 0],
+      [255, 85, 0], [255, 170, 85], [170, 85, 85], [255, 170, 170], [255, 255, 255]
+    ]
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v4.png",
+    "sha256": "57b0b11e24306d37483b4d384a477db1663d624260ca56c70d102872249a98ec",
+    "dimensions_px": [384, 288],
+    "format": "8-bit indexed PNG",
+    "layout": "4 columns x 3 rows; twelve 96x96 frames",
+    "transparent_indices": [0],
+    "useful_colors": 13,
+    "dither": "none"
+  },
+  "frames": {
+    "directory": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v4/",
+    "pattern": "idle_NN.png",
+    "count": 12,
+    "unique_frame_hashes": 12,
+    "sha256": [
+      "6506de03ec1bbfbc7fa1eb77d0a56d146dbb660c4642187823e5ddbfb1f1fbb0",
+      "68b9cb71cda400ad96982be78823c1da69953556e65ddba646662ddb9496cd35",
+      "cecf72d7118566d3b68126a445cfe048da17f0f524ce3cdad00aac928b477293",
+      "4d84ba15481b1ebfbc73f1845fed6f1c8d4b997a957f970281f2ad9def2755a7",
+      "9309991aac131273569f73964dbf9b67deeac9031f7ea25a8115f295c41501e3",
+      "885e439065466fcc5b4ced61737973f75606c6afa64fd7f0ced18413786f6f62",
+      "1cc65ae8ee2ab0c1da04042858de91a71b62d4fe738e4fa64e592b47ab4159c7",
+      "9dfaefcbc75f4b7866213273cc6483c6eaaad9fbf3d5661f64a1e4aa57082b36",
+      "ab6cf26386d0bf84aaf453fddb24f29bc187514956e516695cad9967c2c26bac",
+      "07411bd6cc8b9dfdca8ec7a10caa2679925bfdbc772fa4c910e2fec0c3386795",
+      "4d98e306205e82b32192c3b2e8466597d7bdd85ca6c3fd8c43790700cec978d0",
+      "1793e7fd72f294db9f5ba3c98b9ee0e52897dc53c6618f8f73ade32038272d87"
+    ],
+    "visible_width_range_px": [61, 66],
+    "visible_height_range_px": [72, 76],
+    "baseline_y_px": 95,
+    "common_pivot_px": [48, 95],
+    "semantic_manifest": {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_semantics_v4.json",
+      "sha256": "51dc085c09eb00c9f4c68ad119fb83d969ab71331db9f3c8e32c94a2a4630bd3",
+      "tool_sha256": "7c41ef5ed9e0a7f6687c1ee8ce9cdb8a5b77f4859fc2fa3bd624757c4ed61e5d",
+      "geometry_contract": "canvas 96x96; visible width 61-66; visible height 72-76; baseline y=95, zero-pixel tolerance",
+      "gate": "PASS: twelve unique frame hashes, common pivot, bbox and baseline meet the contract"
+    }
+  },
+  "review_preview": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v4_preview_4x.png",
+    "sha256": "e2e5cbd9310e64a0c58c1fa7690d3b910325671c69ae23c556ca7d15e4627bb0",
+    "description": "nearest-neighbor 4x review preview flattened on #444444; indexed production source retains index-0 transparency"
+  },
+  "visual_check": {
+    "approved_concept_identity_and_outfit_preserved": true,
+    "young_lean_morphology": true,
+    "pistol_muzzle_faces_right_in_all_frames": true,
+    "twelve_idle_keys_are_distinct_and_readable": true,
+    "same_scale_and_feet_baseline": true,
+    "checkerboard_removed_and_speckle_cleanup_applied": true,
+    "no_dithering": true,
+    "palette_matches_manifest": true,
+    "external_game_or_anime_pixels_copied": false,
+    "owner_visual_review": "pending; this sheet is a source candidate only"
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "resource_gate": "PASS: audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character jj_zillion_ii",
+    "animation_gate": "PASS: audit_animation_semantics.py --manifest SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_semantics_v4.json --project SMS_projects/master_of_fighters",
+    "reference_boundary_for_concept": "PASS: audit_reference_boundary.py --project SMS_projects/master_of_fighters",
+    "sprite_mode_or_metasprite_contract": "not assessed; source-art study only",
+    "scanline_budget_validation": false,
+    "rom_or_emulator_validation": false
+  },
+  "superseded_attempts": [
+    {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v1.png",
+      "sha256": "0eb9092f988bcad8e5db2224874d8023c37de8c6238d063382b9a75d47d60493",
+      "reason": "weapon orientation pointed backward and key poses varied too little"
+    },
+    {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v2.png",
+      "sha256": "c237dc104b3e5a0a3e6c564c2ba815da5f8fe3524c7eb793d14093778795421a",
+      "reason": "uniform geometry and palette passed, but frame-to-frame changes were too subtle; two of its cells are reused as source keys in v4"
+    },
+    {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v3.png",
+      "sha256": "567858e169e6859440eb5f1d0b7f4a67547772352ab8301b373ed3f5efb35923",
+      "reason": "pose changes were clear but mixing the v4 image-generation sheet with v3 made style continuity less even"
+    }
+  ],
+  "next_gate": "superseded by v5 before owner review; do not promote or integrate v4"
+}

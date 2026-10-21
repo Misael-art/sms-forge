@@ -1,0 +1,830 @@
+{
+  "status": "passed_organization_forward_test_with_declared_limits",
+  "fixture_only": true,
+  "project": "/tmp/smsforge-harness-forward-20261010/fixture_game",
+  "two_sessions": true,
+  "final_audit": {
+    "schema": "sms_artifact_audit_v1",
+    "ok": true,
+    "problems": [],
+    "warnings": [],
+    "artifact_count": 6,
+    "indexed_file_count": 18,
+    "claim_ceiling": "organization_and_reference_consistency_only"
+  },
+  "negative_cases": [
+    {
+      "case": "old_session_preflight",
+      "rejected": true,
+      "details": [
+        {
+          "id": "ash.grip.weapon.r1",
+          "reason": "visual_outputs_need_valid_registry:stale registry snapshot"
+        },
+        {
+          "id": "ash.shadow.pose07_19_42.r1",
+          "reason": "visual_outputs_need_valid_registry:stale registry snapshot"
+        }
+      ]
+    },
+    {
+      "case": "missing_registry",
+      "rejected": true,
+      "details": [
+        {
+          "id": "grip",
+          "reason": "visual_outputs_need_valid_registry:missing"
+        }
+      ]
+    },
+    {
+      "case": "broad_directory",
+      "rejected": true,
+      "details": [
+        {
+          "id": "grip",
+          "reason": "write_paths_differ_from_reserved_files"
+        }
+      ]
+    },
+    {
+      "case": "overwrite_approved_input",
+      "rejected": true,
+      "details": [
+        {
+          "id": "grip",
+          "reason": "write_paths_differ_from_reserved_files"
+        }
+      ]
+    },
+    {
+      "case": "sealed_parent_as_output",
+      "rejected": true,
+      "details": [
+        {
+          "id": "grip",
+          "reason": "visual_outputs_need_reserved_artifact_ids"
+        }
+      ]
+    },
+    {
+      "case": "unreserved_extra_file",
+      "rejected": true,
+      "details": [
+        {
+          "id": "grip",
+          "reason": "write_paths_differ_from_reserved_files"
+        }
+      ]
+    },
+    {
+      "case": "technical_candidate_promoted_without_owner",
+      "rejected": true,
+      "details": [
+        "invalid approved head: ash.proof.main.r1"
+      ]
+    },
+    {
+      "case": "two_artifact_owners_one_output",
+      "rejected": true,
+      "details": [
+        "ash.shadow.pose07_19_42.r1: file already owned by ash.grip.weapon.r1; use parent ID"
+      ]
+    },
+    {
+      "case": "stale_approved_hash",
+      "rejected": true,
+      "details": [
+        "missing/stale file: data/source_art/fighter_ash/model_sheet/main/v01/document.fixture.txt"
+      ]
+    },
+    {
+      "case": "worker_promotion",
+      "rejected": true,
+      "details": [
+        "worker não pode elevar claim_ceiling",
+        "worker não promove"
+      ]
+    },
+    {
+      "case": "unregistered_managed_output",
+      "rejected": true,
+      "details": [
+        "unregistered file in managed location source: data/source_art/fighter_ash/orphan.fixture.txt"
+      ]
+    }
+  ],
+  "semantic_parent_limit": "Gate accepts sealed proof parent structurally; coordinator must enforce source61 role, not infer from PASS",
+  "plan_context_limit": "Registry preflight checks destinations; does not validate artistic source context or GDD approval",
+  "approvals": "Only synthetic fixture decisions. New requested artifacts remain candidates. No real owner approval fabricated.",
+  "no_art_generation_no_emulation_no_saas": true,
+  "source_hashes": {
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/artifact_registry.py": "69b74cdd842863a64e99dc47e16450769a08631ee3d2f0d3dea8323f8e812991",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/harness_orchestration.py": "af227131b7e7ee7e28e2729ff6465ffbfb1cd2f26ff6c1f21fe9630814b6f719",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-harness-orchestration.md": "eb001a783e5e1d8e61dfeef9cd891970f84cd191af5ecdb5fc221d95bc3c404e",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/artifact-organization.md": "8c8385c860b1b9d5d4811a7ff2267afeb3aecde75d8a26d6d514c49218ec6cd0",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/original-artwork.md": "758953c840ae59adaab924909a5bcccaec893e883a72eec00a86df37a26c9987",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91"
+  },
+  "artifacts": [
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/animation_source/main/v01/document.fixture.txt",
+      "sha256": "1e75ae02ad9ec9631d1de78b82ad82b1376596beb05c34d53833de9450f7727a",
+      "bytes": 414
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/animation_source/main/v01/lineage.json",
+      "sha256": "68b94660c141a5023b2945016a15b4bc6f6ece096eb617023a8f2fead2703a37",
+      "bytes": 685
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/animation_source/main/v01/metadata.json",
+      "sha256": "76c5bbd2d083c64418f75b22332f8518dbcbaf794e0eeb8d0f94ef16581b67e6",
+      "bytes": 686
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/document.fixture.txt",
+      "sha256": "bf7311b4ae0b76897365b0f3c30bb0839d465548cfa4dc8802388cfe0cd9cb5c",
+      "bytes": 176
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/lineage.json",
+      "sha256": "b49e7ffb8b5a10589e1323f2837244002857e7a0aa081eb5d90de95a53357b66",
+      "bytes": 211
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/metadata.json",
+      "sha256": "0156948c51c082d290b33a9963a10b188b81b7aef084ea8e3f4dd301db902b31",
+      "bytes": 212
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/document.fixture.txt",
+      "sha256": "f869c396c211c5d37900997fec7e7890f4cce78df6dd99fbed3cda6062c2a292",
+      "bytes": 203
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/lineage.json",
+      "sha256": "b909221553e3b9a59f56131b729da81c6aeab2351faa82afe4a94f12f32ca7d2",
+      "bytes": 230
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/metadata.json",
+      "sha256": "a720a378bccf7cd89b2d95a34a01c77aaf3f469e950aa8942ab84d24ff1546e4",
+      "bytes": 231
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt",
+      "sha256": "d77eba1ed2e1eb91374ce4f50f3bbcfdb2ea5656d1e9d5a593200109eec3d7fd",
+      "bytes": 517
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json",
+      "sha256": "709dee6f1337743e73f6d740e077ffe5b9d3d7047c0886462b26cff3eee8eda3",
+      "bytes": 516
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json",
+      "sha256": "aeded35a3938dd2fdef45c2a8eba1cd9db00bf7f959db477344b6dcab5f99322",
+      "bytes": 517
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/document.fixture.txt",
+      "sha256": "d48fc268731dff557ae2d7f4a30950fb96086d93486fc5ed36beb25842472f61",
+      "bytes": 147
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/lineage.json",
+      "sha256": "72a21351da22f9b767095fd856c7f69ac21b7ab7a1bc831aeaeece5f1d3133ce",
+      "bytes": 162
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/metadata.json",
+      "sha256": "6e6817abf8ec8512e4f3f93bddb46f4980add47ea57ac79de11b63fd0b43dde7",
+      "bytes": 163
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/document.fixture.txt",
+      "sha256": "e09b16b8b58c1b7ce45c923dbc4c4976f9f37a8097769d8aee565a9dc6c41f4f",
+      "bytes": 648
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/lineage.json",
+      "sha256": "ea65ee9ef247489822ae9c2b504c0593230daa15fae39fb2d0974642f916df38",
+      "bytes": 647
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/metadata.json",
+      "sha256": "7ca88da9d7cb658e1999b800b4cdbd52137bc840a77ea63006c2f96bd8135914",
+      "bytes": 648
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/doc/10-memory-bank.md",
+      "sha256": "292dabdcf2ed0e08590b08e61dc08efff9d7338c179d5c296066a82ad186e937",
+      "bytes": 386
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/doc/artifact_registry.json",
+      "sha256": "dd7db38af0dcee4e6eb9aef272867bc2bc027b5056ce4ce70880fcefd3523686",
+      "bytes": 10987
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/doc/decisions/ash.animation.main.r1.json",
+      "sha256": "74356166513916e6964b19b529a4698eb35328346b3a26f4b344e7c68cb72bda",
+      "bytes": 977
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/doc/decisions/ash.converted.main.r1.json",
+      "sha256": "8dc9b63e1487e835965f8269cc94b356185618a95534a562a9cd4515dd6d64a0",
+      "bytes": 989
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/doc/decisions/ash.model.main.r1.json",
+      "sha256": "6f5f4dcccbf1db1d69d3c5d08e112af689bf07049c4e149c8216777392feaab9",
+      "bytes": 953
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/fixture_game/doc/new-request.fixture.json",
+      "sha256": "4ad1a2558718ac8c14d28f9806a46b01ad17de3748ee18643615d32646a5351d",
+      "bytes": 592
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/limit.misclassified_documentation_update.json",
+      "sha256": "9fd31d2efd6b07fc0f0198129fa5ef37db461eac3ab39b3cd8227fa8a900dd2c",
+      "bytes": 870
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/limit.misclassified_inventory.json",
+      "sha256": "0e295a51bb85e7bf493d3eb09caf92924ac75d23999265c3afa301ec69d75bc5",
+      "bytes": 803
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/limit.misclassified_visual_review.json",
+      "sha256": "13ec634059b874269961b1f1eaaa60df8a99ff5bc4677ab6038be9d4333c28f1",
+      "bytes": 815
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/limit.plan_no_visual_context.json",
+      "sha256": "cd602067e84b11ccbf2edc982d5888f8d5de6c8859ff11d8107ed33862560959",
+      "bytes": 1202
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/limit.wrong_semantic_parent.json",
+      "sha256": "bd9fd65959db78d76f666006b46251c49619eec632981169443628210b895c98",
+      "bytes": 207
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.broad_directory.json",
+      "sha256": "12f1882500603c47640dd55441aacf7d2361b0c1c912083807b9ce857cc35bb7",
+      "bytes": 602
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.missing_registry.json",
+      "sha256": "be65b137ff1a4f58514807578b7d82bbe450ab064b6921be383ae4db1eda10ad",
+      "bytes": 607
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.old_session_preflight.json",
+      "sha256": "90b1384b4ecae76a46088945a3fe7109ce6e74c58d5bfeef5192e9d3fa8dcf89",
+      "bytes": 1239
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.overwrite_approved_input.json",
+      "sha256": "12f1882500603c47640dd55441aacf7d2361b0c1c912083807b9ce857cc35bb7",
+      "bytes": 602
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.sealed_parent_as_output.json",
+      "sha256": "df46bab267dffdd1c6e4c0a49c4a4d7da86cc36a8922b790dd7b4fe51ac4298e",
+      "bytes": 605
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.stale_approved_hash.json",
+      "sha256": "fbd9fc013f0bfbfd6f7f2ad31878adc4b217aa46c97ab76bbdefdb7c1d532906",
+      "bytes": 306
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.technical_candidate_promoted_without_owner.json",
+      "sha256": "6c68456b9294ae8d3d1b5aea3f5cee311b8cab18a58922f71f73aa59a1239b3c",
+      "bytes": 258
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.two_artifact_owners_one_output.json",
+      "sha256": "03714b72c6bbfc0f46356f49f306927541b43e4e45719350c076f1d85175571a",
+      "bytes": 301
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.unregistered_managed_output.json",
+      "sha256": "492be0f0e9fe5c86feb4e42d6fa1debb11f16a0dbcf41a35a5fb97c650461725",
+      "bytes": 310
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.unreserved_extra_file.json",
+      "sha256": "12f1882500603c47640dd55441aacf7d2361b0c1c912083807b9ce857cc35bb7",
+      "bytes": 602
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative.worker_promotion.json",
+      "sha256": "e6837688fa0efa80db4cfc8339e96847ff9b8df229d60feedd2d1d3de1d65467",
+      "bytes": 95
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/animation_source/main/v01/document.fixture.txt",
+      "sha256": "1e75ae02ad9ec9631d1de78b82ad82b1376596beb05c34d53833de9450f7727a",
+      "bytes": 414
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/animation_source/main/v01/lineage.json",
+      "sha256": "68b94660c141a5023b2945016a15b4bc6f6ece096eb617023a8f2fead2703a37",
+      "bytes": 685
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/animation_source/main/v01/metadata.json",
+      "sha256": "76c5bbd2d083c64418f75b22332f8518dbcbaf794e0eeb8d0f94ef16581b67e6",
+      "bytes": 686
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/document.fixture.txt",
+      "sha256": "bf7311b4ae0b76897365b0f3c30bb0839d465548cfa4dc8802388cfe0cd9cb5c",
+      "bytes": 176
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/lineage.json",
+      "sha256": "b49e7ffb8b5a10589e1323f2837244002857e7a0aa081eb5d90de95a53357b66",
+      "bytes": 211
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/metadata.json",
+      "sha256": "0156948c51c082d290b33a9963a10b188b81b7aef084ea8e3f4dd301db902b31",
+      "bytes": 212
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/document.fixture.txt",
+      "sha256": "f869c396c211c5d37900997fec7e7890f4cce78df6dd99fbed3cda6062c2a292",
+      "bytes": 203
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/lineage.json",
+      "sha256": "b909221553e3b9a59f56131b729da81c6aeab2351faa82afe4a94f12f32ca7d2",
+      "bytes": 230
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/metadata.json",
+      "sha256": "a720a378bccf7cd89b2d95a34a01c77aaf3f469e950aa8942ab84d24ff1546e4",
+      "bytes": 231
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/document.fixture.txt",
+      "sha256": "d48fc268731dff557ae2d7f4a30950fb96086d93486fc5ed36beb25842472f61",
+      "bytes": 147
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/lineage.json",
+      "sha256": "72a21351da22f9b767095fd856c7f69ac21b7ab7a1bc831aeaeece5f1d3133ce",
+      "bytes": 162
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/metadata.json",
+      "sha256": "6e6817abf8ec8512e4f3f93bddb46f4980add47ea57ac79de11b63fd0b43dde7",
+      "bytes": 163
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/doc/10-memory-bank.md",
+      "sha256": "292dabdcf2ed0e08590b08e61dc08efff9d7338c179d5c296066a82ad186e937",
+      "bytes": 386
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/doc/artifact_registry.json",
+      "sha256": "c3e54972705f46be331928ab0095d5a0fea4ed505b371d31572c88960f82285f",
+      "bytes": 10466
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/doc/decisions/ash.animation.main.r1.json",
+      "sha256": "74356166513916e6964b19b529a4698eb35328346b3a26f4b344e7c68cb72bda",
+      "bytes": 977
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/doc/decisions/ash.converted.main.r1.json",
+      "sha256": "8dc9b63e1487e835965f8269cc94b356185618a95534a562a9cd4515dd6d64a0",
+      "bytes": 989
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/doc/decisions/ash.model.main.r1.json",
+      "sha256": "6f5f4dcccbf1db1d69d3c5d08e112af689bf07049c4e149c8216777392feaab9",
+      "bytes": 953
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/negative_fixture_game/doc/new-request.fixture.json",
+      "sha256": "4ad1a2558718ac8c14d28f9806a46b01ad17de3748ee18643615d32646a5351d",
+      "bytes": 592
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session1.locate.animation.json",
+      "sha256": "3401b1a3aef964d324d5c64e903b8ed890528d91c94c7195b328884ecb6512f9",
+      "bytes": 2211
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session1.plan.json",
+      "sha256": "4a4599c02a134176e0a74f12ba1575cf7a6fb1195bf2cb6cbe55549d208e1805",
+      "bytes": 3089
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session1.registry.snapshot.json",
+      "sha256": "d5ebc30fcd3e0533301598aef82e43df7b9f5b7561fc4dec332dc18cff0ab00d",
+      "bytes": 10457
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session1.scan.reserved.json",
+      "sha256": "62a791e9324f2b8bb1816381dc009a2ba4be43225a8326197aae1dd4a86afca6",
+      "bytes": 571
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session1.taskset.json",
+      "sha256": "62e82f0c75e039bc2fa0e262e10bed46e8485ed2e2890d7975b1ec1b90a001e9",
+      "bytes": 2048
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session2.locate.animation_source.json",
+      "sha256": "b0a8b9759aac926675f737c41c763cb9b52ac0578ac5abed8ea3d41c04d33a8a",
+      "bytes": 2240
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session2.locate.equipment_detail.json",
+      "sha256": "654805a4087125598a0bc64e35d6c6339e267c398e1049fa0e8faf3109feced7",
+      "bytes": 1774
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session2.locate.model_sheet.json",
+      "sha256": "506e67d1dd21208c52c81e6e27cdd8c09a9a98ca83e378a5ef0b00b525a0dce7",
+      "bytes": 2144
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session2.locate.shadow_comparison.json",
+      "sha256": "ba3fd294b90e9ca482665636c8cfb82854f849ada2f909e73f05d1a7592b1918",
+      "bytes": 1924
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session2.registry.snapshot.json",
+      "sha256": "dd7db38af0dcee4e6eb9aef272867bc2bc027b5056ce4ce70880fcefd3523686",
+      "bytes": 10987
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/attempt1_preserved/session2.scan.sealed.json",
+      "sha256": "dc031030b7e8e45fc991f8b213d212eae698888c2cade34cb1c372ca137c4fdb",
+      "bytes": 571
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/animation_source/main/v01/document.fixture.txt",
+      "sha256": "1e75ae02ad9ec9631d1de78b82ad82b1376596beb05c34d53833de9450f7727a",
+      "bytes": 414
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/animation_source/main/v01/lineage.json",
+      "sha256": "68b94660c141a5023b2945016a15b4bc6f6ece096eb617023a8f2fead2703a37",
+      "bytes": 685
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/animation_source/main/v01/metadata.json",
+      "sha256": "76c5bbd2d083c64418f75b22332f8518dbcbaf794e0eeb8d0f94ef16581b67e6",
+      "bytes": 686
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/document.fixture.txt",
+      "sha256": "bf7311b4ae0b76897365b0f3c30bb0839d465548cfa4dc8802388cfe0cd9cb5c",
+      "bytes": 176
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/lineage.json",
+      "sha256": "b49e7ffb8b5a10589e1323f2837244002857e7a0aa081eb5d90de95a53357b66",
+      "bytes": 211
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/metadata.json",
+      "sha256": "0156948c51c082d290b33a9963a10b188b81b7aef084ea8e3f4dd301db902b31",
+      "bytes": 212
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/document.fixture.txt",
+      "sha256": "f869c396c211c5d37900997fec7e7890f4cce78df6dd99fbed3cda6062c2a292",
+      "bytes": 203
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/lineage.json",
+      "sha256": "b909221553e3b9a59f56131b729da81c6aeab2351faa82afe4a94f12f32ca7d2",
+      "bytes": 230
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/metadata.json",
+      "sha256": "a720a378bccf7cd89b2d95a34a01c77aaf3f469e950aa8942ab84d24ff1546e4",
+      "bytes": 231
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/document.fixture.txt",
+      "sha256": "d77eba1ed2e1eb91374ce4f50f3bbcfdb2ea5656d1e9d5a593200109eec3d7fd",
+      "bytes": 517
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/lineage.json",
+      "sha256": "709dee6f1337743e73f6d740e077ffe5b9d3d7047c0886462b26cff3eee8eda3",
+      "bytes": 516
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/equipment_detail/weapon_grip/v01/metadata.json",
+      "sha256": "aeded35a3938dd2fdef45c2a8eba1cd9db00bf7f959db477344b6dcab5f99322",
+      "bytes": 517
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/document.fixture.txt",
+      "sha256": "d48fc268731dff557ae2d7f4a30950fb96086d93486fc5ed36beb25842472f61",
+      "bytes": 147
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/lineage.json",
+      "sha256": "72a21351da22f9b767095fd856c7f69ac21b7ab7a1bc831aeaeece5f1d3133ce",
+      "bytes": 162
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/metadata.json",
+      "sha256": "6e6817abf8ec8512e4f3f93bddb46f4980add47ea57ac79de11b63fd0b43dde7",
+      "bytes": 163
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/document.fixture.txt",
+      "sha256": "e09b16b8b58c1b7ce45c923dbc4c4976f9f37a8097769d8aee565a9dc6c41f4f",
+      "bytes": 648
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/lineage.json",
+      "sha256": "ea65ee9ef247489822ae9c2b504c0593230daa15fae39fb2d0974642f916df38",
+      "bytes": 647
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/data/source_art/fighter_ash/shadow_comparison/ramp_a_vs_b_pose07_19_42/v01/metadata.json",
+      "sha256": "7ca88da9d7cb658e1999b800b4cdbd52137bc840a77ea63006c2f96bd8135914",
+      "bytes": 648
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/10-memory-bank.md",
+      "sha256": "292dabdcf2ed0e08590b08e61dc08efff9d7338c179d5c296066a82ad186e937",
+      "bytes": 386
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/artifact_registry.json",
+      "sha256": "dd7db38af0dcee4e6eb9aef272867bc2bc027b5056ce4ce70880fcefd3523686",
+      "bytes": 10987
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/decisions/ash.animation.main.r1.json",
+      "sha256": "74356166513916e6964b19b529a4698eb35328346b3a26f4b344e7c68cb72bda",
+      "bytes": 977
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/decisions/ash.converted.main.r1.json",
+      "sha256": "8dc9b63e1487e835965f8269cc94b356185618a95534a562a9cd4515dd6d64a0",
+      "bytes": 989
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/decisions/ash.model.main.r1.json",
+      "sha256": "6f5f4dcccbf1db1d69d3c5d08e112af689bf07049c4e149c8216777392feaab9",
+      "bytes": 953
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/fixture_game/doc/new-request.fixture.json",
+      "sha256": "4ad1a2558718ac8c14d28f9806a46b01ad17de3748ee18643615d32646a5351d",
+      "bytes": 592
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/forward_test.py",
+      "sha256": "1bd30be5f6c53aab776441b82ca1ab63c4053e06e8ea0c21fe9eb43b5176bb77",
+      "bytes": 13904
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/limit.plan_no_visual_context.json",
+      "sha256": "cd602067e84b11ccbf2edc982d5888f8d5de6c8859ff11d8107ed33862560959",
+      "bytes": 1202
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/limit.wrong_semantic_parent.json",
+      "sha256": "bd9fd65959db78d76f666006b46251c49619eec632981169443628210b895c98",
+      "bytes": 207
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.broad_directory.json",
+      "sha256": "12f1882500603c47640dd55441aacf7d2361b0c1c912083807b9ce857cc35bb7",
+      "bytes": 602
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.missing_registry.json",
+      "sha256": "be65b137ff1a4f58514807578b7d82bbe450ab064b6921be383ae4db1eda10ad",
+      "bytes": 607
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.old_session_preflight.json",
+      "sha256": "90b1384b4ecae76a46088945a3fe7109ce6e74c58d5bfeef5192e9d3fa8dcf89",
+      "bytes": 1239
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.overwrite_approved_input.json",
+      "sha256": "12f1882500603c47640dd55441aacf7d2361b0c1c912083807b9ce857cc35bb7",
+      "bytes": 602
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.sealed_parent_as_output.json",
+      "sha256": "df46bab267dffdd1c6e4c0a49c4a4d7da86cc36a8922b790dd7b4fe51ac4298e",
+      "bytes": 605
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.stale_approved_hash.json",
+      "sha256": "fbd9fc013f0bfbfd6f7f2ad31878adc4b217aa46c97ab76bbdefdb7c1d532906",
+      "bytes": 306
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.technical_candidate_promoted_without_owner.json",
+      "sha256": "6c68456b9294ae8d3d1b5aea3f5cee311b8cab18a58922f71f73aa59a1239b3c",
+      "bytes": 258
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.two_artifact_owners_one_output.json",
+      "sha256": "03714b72c6bbfc0f46356f49f306927541b43e4e45719350c076f1d85175571a",
+      "bytes": 301
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.unregistered_managed_output.json",
+      "sha256": "492be0f0e9fe5c86feb4e42d6fa1debb11f16a0dbcf41a35a5fb97c650461725",
+      "bytes": 310
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.unreserved_extra_file.json",
+      "sha256": "12f1882500603c47640dd55441aacf7d2361b0c1c912083807b9ce857cc35bb7",
+      "bytes": 602
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative.worker_promotion.json",
+      "sha256": "e6837688fa0efa80db4cfc8339e96847ff9b8df229d60feedd2d1d3de1d65467",
+      "bytes": 95
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/animation_source/main/v01/document.fixture.txt",
+      "sha256": "1e75ae02ad9ec9631d1de78b82ad82b1376596beb05c34d53833de9450f7727a",
+      "bytes": 414
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/animation_source/main/v01/lineage.json",
+      "sha256": "68b94660c141a5023b2945016a15b4bc6f6ece096eb617023a8f2fead2703a37",
+      "bytes": 685
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/animation_source/main/v01/metadata.json",
+      "sha256": "76c5bbd2d083c64418f75b22332f8518dbcbaf794e0eeb8d0f94ef16581b67e6",
+      "bytes": 686
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/document.fixture.txt",
+      "sha256": "bf7311b4ae0b76897365b0f3c30bb0839d465548cfa4dc8802388cfe0cd9cb5c",
+      "bytes": 176
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/lineage.json",
+      "sha256": "b49e7ffb8b5a10589e1323f2837244002857e7a0aa081eb5d90de95a53357b66",
+      "bytes": 211
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/conversion_proof/main/v01/metadata.json",
+      "sha256": "0156948c51c082d290b33a9963a10b188b81b7aef084ea8e3f4dd301db902b31",
+      "bytes": 212
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/document.fixture.txt",
+      "sha256": "f869c396c211c5d37900997fec7e7890f4cce78df6dd99fbed3cda6062c2a292",
+      "bytes": 203
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/lineage.json",
+      "sha256": "b909221553e3b9a59f56131b729da81c6aeab2351faa82afe4a94f12f32ca7d2",
+      "bytes": 230
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/converted_candidate/main/v01/metadata.json",
+      "sha256": "a720a378bccf7cd89b2d95a34a01c77aaf3f469e950aa8942ab84d24ff1546e4",
+      "bytes": 231
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/document.fixture.txt",
+      "sha256": "d48fc268731dff557ae2d7f4a30950fb96086d93486fc5ed36beb25842472f61",
+      "bytes": 147
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/lineage.json",
+      "sha256": "72a21351da22f9b767095fd856c7f69ac21b7ab7a1bc831aeaeece5f1d3133ce",
+      "bytes": 162
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/data/source_art/fighter_ash/model_sheet/main/v01/metadata.json",
+      "sha256": "6e6817abf8ec8512e4f3f93bddb46f4980add47ea57ac79de11b63fd0b43dde7",
+      "bytes": 163
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/doc/10-memory-bank.md",
+      "sha256": "292dabdcf2ed0e08590b08e61dc08efff9d7338c179d5c296066a82ad186e937",
+      "bytes": 386
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/doc/artifact_registry.json",
+      "sha256": "c3e54972705f46be331928ab0095d5a0fea4ed505b371d31572c88960f82285f",
+      "bytes": 10466
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/doc/decisions/ash.animation.main.r1.json",
+      "sha256": "74356166513916e6964b19b529a4698eb35328346b3a26f4b344e7c68cb72bda",
+      "bytes": 977
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/doc/decisions/ash.converted.main.r1.json",
+      "sha256": "8dc9b63e1487e835965f8269cc94b356185618a95534a562a9cd4515dd6d64a0",
+      "bytes": 989
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/doc/decisions/ash.model.main.r1.json",
+      "sha256": "6f5f4dcccbf1db1d69d3c5d08e112af689bf07049c4e149c8216777392feaab9",
+      "bytes": 953
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/negative_fixture_game/doc/new-request.fixture.json",
+      "sha256": "4ad1a2558718ac8c14d28f9806a46b01ad17de3748ee18643615d32646a5351d",
+      "bytes": 592
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session1.locate.animation.json",
+      "sha256": "3401b1a3aef964d324d5c64e903b8ed890528d91c94c7195b328884ecb6512f9",
+      "bytes": 2211
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session1.plan.json",
+      "sha256": "4a4599c02a134176e0a74f12ba1575cf7a6fb1195bf2cb6cbe55549d208e1805",
+      "bytes": 3089
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session1.registry.snapshot.json",
+      "sha256": "d5ebc30fcd3e0533301598aef82e43df7b9f5b7561fc4dec332dc18cff0ab00d",
+      "bytes": 10457
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session1.scan.reserved.json",
+      "sha256": "62a791e9324f2b8bb1816381dc009a2ba4be43225a8326197aae1dd4a86afca6",
+      "bytes": 571
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session1.taskset.json",
+      "sha256": "62e82f0c75e039bc2fa0e262e10bed46e8485ed2e2890d7975b1ec1b90a001e9",
+      "bytes": 2048
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session2.locate.animation_source.json",
+      "sha256": "b0a8b9759aac926675f737c41c763cb9b52ac0578ac5abed8ea3d41c04d33a8a",
+      "bytes": 2240
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session2.locate.equipment_detail.json",
+      "sha256": "654805a4087125598a0bc64e35d6c6339e267c398e1049fa0e8faf3109feced7",
+      "bytes": 1774
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session2.locate.model_sheet.json",
+      "sha256": "506e67d1dd21208c52c81e6e27cdd8c09a9a98ca83e378a5ef0b00b525a0dce7",
+      "bytes": 2144
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session2.locate.shadow_comparison.json",
+      "sha256": "ba3fd294b90e9ca482665636c8cfb82854f849ada2f909e73f05d1a7592b1918",
+      "bytes": 1924
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session2.preflight.reloaded.json",
+      "sha256": "4a4599c02a134176e0a74f12ba1575cf7a6fb1195bf2cb6cbe55549d208e1805",
+      "bytes": 3089
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session2.registry.snapshot.json",
+      "sha256": "dd7db38af0dcee4e6eb9aef272867bc2bc027b5056ce4ce70880fcefd3523686",
+      "bytes": 10987
+    },
+    {
+      "path": "/tmp/smsforge-harness-forward-20261010/session2.scan.sealed.json",
+      "sha256": "dc031030b7e8e45fc991f8b213d212eae698888c2cade34cb1c372ca137c4fdb",
+      "bytes": 571
+    }
+  ],
+  "misclassified_output_gap": {
+    "status": "accepted_without_registry",
+    "cases": [
+      "visual_review",
+      "inventory",
+      "documentation_update"
+    ],
+    "evidence": [
+      "/tmp/smsforge-harness-forward-20261010/limit.misclassified_visual_review.json",
+      "/tmp/smsforge-harness-forward-20261010/limit.misclassified_inventory.json",
+      "/tmp/smsforge-harness-forward-20261010/limit.misclassified_documentation_update.json"
+    ],
+    "expectation": "Require visual/spreadsheet destinations regardless task kind, or explicitly restrict tasks."
+  }
+}

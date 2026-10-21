@@ -1,0 +1,479 @@
+{
+  "schema": "smsforge.roster_harmony_review.v1",
+  "status": "preliminary_visual_review_only",
+  "created_date": "2026-10-04",
+  "project": "master_of_fighters",
+  "purpose": "First visual review of roster line/style and relative proportions using generated front/side turnaround studies, plus one existing sprite frame per character.",
+  "concept_board": {
+    "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concepts_7char_v1.png",
+    "sha256": "9749df03d780745f8b99acd65e8d6b4e4941851fb4913f06de9afe184cd9323a",
+    "method": "Each generated turnaround was cropped into front and side views; edge-connected near-background pixels and tiny remote cutout artifacts were removed for display, character RGB retained, views uniformly scaled to a relative display height, and baselines aligned. U is a comparison unit only; canonical heights and head proportions are not established.",
+    "approval_note": "The turnaround panels are generated review studies based on existing project references. They are not owner-approved design changes or runtime assets.",
+    "display_pixels_per_comparison_unit": 55,
+    "ruler_range_comparison_units": [
+      0,
+      8
+    ]
+  },
+  "sprite_board": {
+    "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_7char_v1.png",
+    "sha256": "65de0afe8a47b920120cc1a6c405fb4a9af91b3e611ca8d1cb7fbd5ae1eee0fc",
+    "method": "Frame index 0 cropped from each existing source sheet to its nontransparent bbox, enlarged 5x with nearest-neighbor, and baseline-aligned. No sprite pixels or palette colors were edited.",
+    "display_scale": "5x nearest-neighbor",
+    "approval_note": "Comparative source-frame selection only. Sheet review statuses remain as recorded per character; nothing is promoted to res/ or bound to a ROM."
+  },
+  "characters": [
+    {
+      "key": "golden_axe_warrior",
+      "name": "Golden Axe Warrior",
+      "game": "Golden Axe Warrior",
+      "concept_reference_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_preview.png",
+      "concept_reference_sha256": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91",
+      "turnaround_path": "data/source_art/roster_harmony_review/turnarounds/golden_axe_warrior_turnaround.png",
+      "turnaround_sha256": "9306edf847e73740b1980baa584c14e7b7e5e5e7096d2543aadc8e19024ce877",
+      "turnaround_crop_records": [
+        {
+          "view": "front",
+          "source_bbox_xyxy": [
+            105,
+            11,
+            768,
+            993
+          ],
+          "scaled_size_px": [
+            204,
+            302
+          ],
+          "display_scale": 0.307536,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        },
+        {
+          "view": "side",
+          "source_bbox_xyxy": [
+            768,
+            4,
+            1293,
+            999
+          ],
+          "scaled_size_px": [
+            159,
+            302
+          ],
+          "display_scale": 0.303518,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": [
+            {
+              "area_px": 497,
+              "bbox_xyxy_crop": [
+                0,
+                616,
+                8,
+                709
+              ],
+              "distance_from_main_px": 53.0
+            }
+          ]
+        }
+      ],
+      "sprite_source_path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_sms_96px_v1.png",
+      "sprite_sha256": "f5d558ec239e46fd87451d1fdf1029e23068d46a80ad42a17359fe5897f869fe",
+      "sprite_frame_index": 0,
+      "sprite_cell_size_px": [
+        96,
+        96
+      ],
+      "sprite_visible_bbox_xyxy_cell": [
+        9,
+        8,
+        87,
+        96
+      ],
+      "sprite_visible_size_px": [
+        78,
+        88
+      ],
+      "sprite_sheet_review_status": "source candidate",
+      "relative_display_height_units": 5.5,
+      "display_pixels_per_comparison_unit": 55
+    },
+    {
+      "key": "hayato",
+      "name": "Hayato",
+      "game": "Kenseiden",
+      "concept_reference_path": "data/source_art/concept_art/hayato/review_drafts/image_iterations/hayato_concept_sheet_v1.png",
+      "concept_reference_sha256": "ea84df49f50ec619c26ded9d345d00e5a4fa742518c24172a827b15253076ecb",
+      "turnaround_path": "data/source_art/roster_harmony_review/turnarounds/hayato_turnaround.png",
+      "turnaround_sha256": "1bf7a5451e2ce2306c601ee18d58c61bfd45966ead2a04cc2101a2fc3f9d0ae8",
+      "turnaround_crop_records": [
+        {
+          "view": "front",
+          "source_bbox_xyxy": [
+            219,
+            0,
+            695,
+            980
+          ],
+          "scaled_size_px": [
+            182,
+            374
+          ],
+          "display_scale": 0.381633,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        },
+        {
+          "view": "side",
+          "source_bbox_xyxy": [
+            918,
+            2,
+            1196,
+            978
+          ],
+          "scaled_size_px": [
+            107,
+            374
+          ],
+          "display_scale": 0.383197,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        }
+      ],
+      "sprite_source_path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+      "sprite_sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+      "sprite_frame_index": 0,
+      "sprite_cell_size_px": [
+        80,
+        80
+      ],
+      "sprite_visible_bbox_xyxy_cell": [
+        16,
+        5,
+        70,
+        80
+      ],
+      "sprite_visible_size_px": [
+        54,
+        75
+      ],
+      "sprite_sheet_review_status": "owner-approved visual reference; animation and ROM status remain separate",
+      "relative_display_height_units": 6.8,
+      "display_pixels_per_comparison_unit": 55
+    },
+    {
+      "key": "joe_musashi",
+      "name": "Joe Musashi",
+      "game": "Shinobi / Shadow Dancer",
+      "concept_reference_path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+      "concept_reference_sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+      "turnaround_path": "data/source_art/roster_harmony_review/turnarounds/joe_musashi_turnaround.png",
+      "turnaround_sha256": "38c2df4158d7038dcbfe155ce2cdd04424840e44844ff425943fc832ffd4107b",
+      "turnaround_crop_records": [
+        {
+          "view": "front",
+          "source_bbox_xyxy": [
+            210,
+            11,
+            768,
+            989
+          ],
+          "scaled_size_px": [
+            217,
+            380
+          ],
+          "display_scale": 0.388548,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        },
+        {
+          "view": "side",
+          "source_bbox_xyxy": [
+            928,
+            11,
+            1268,
+            995
+          ],
+          "scaled_size_px": [
+            131,
+            380
+          ],
+          "display_scale": 0.386179,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        }
+      ],
+      "sprite_source_path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+      "sprite_sha256": "f04da4b2c4930340315b19f5061cf7dc2dc4b6f86567cebfe6bc366a0019bd8d",
+      "sprite_frame_index": 0,
+      "sprite_cell_size_px": [
+        80,
+        80
+      ],
+      "sprite_visible_bbox_xyxy_cell": [
+        16,
+        0,
+        78,
+        80
+      ],
+      "sprite_visible_size_px": [
+        62,
+        80
+      ],
+      "sprite_sheet_review_status": "candidate; owner review pending",
+      "relative_display_height_units": 6.9,
+      "display_pixels_per_comparison_unit": 55
+    },
+    {
+      "key": "dr_social",
+      "name": "Dr. Ferdinand Social",
+      "game": "Master of Darkness",
+      "concept_reference_path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+      "concept_reference_sha256": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f",
+      "turnaround_path": "data/source_art/roster_harmony_review/turnarounds/dr_social_turnaround.png",
+      "turnaround_sha256": "d2f2c2a2d528cdd19265a2d00c8d539d073d811ab5962297b85743bd989cf553",
+      "turnaround_crop_records": [
+        {
+          "view": "front",
+          "source_bbox_xyxy": [
+            251,
+            0,
+            699,
+            997
+          ],
+          "scaled_size_px": [
+            175,
+            390
+          ],
+          "display_scale": 0.391174,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        },
+        {
+          "view": "side",
+          "source_bbox_xyxy": [
+            834,
+            0,
+            1161,
+            985
+          ],
+          "scaled_size_px": [
+            129,
+            390
+          ],
+          "display_scale": 0.395939,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        }
+      ],
+      "sprite_source_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_96px_v9_clean.png",
+      "sprite_sha256": "3ca568e5a51cff4cd37a4d618274a902422e3ecc5f740a09d1b614f5eb3f303b",
+      "sprite_frame_index": 0,
+      "sprite_cell_size_px": [
+        96,
+        96
+      ],
+      "sprite_visible_bbox_xyxy_cell": [
+        24,
+        8,
+        68,
+        89
+      ],
+      "sprite_visible_size_px": [
+        44,
+        81
+      ],
+      "sprite_sheet_review_status": "source candidate",
+      "relative_display_height_units": 7.1,
+      "display_pixels_per_comparison_unit": 55
+    },
+    {
+      "key": "alis_landale",
+      "name": "Alis Landale",
+      "game": "Phantasy Star",
+      "concept_reference_path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+      "concept_reference_sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+      "turnaround_path": "data/source_art/roster_harmony_review/turnarounds/alis_turnaround.png",
+      "turnaround_sha256": "c5e9f1c1d91fb13c2d75239523efce636ccdb02ba4b2b44c0720e9de8e579d35",
+      "turnaround_crop_records": [
+        {
+          "view": "front",
+          "source_bbox_xyxy": [
+            59,
+            9,
+            705,
+            960
+          ],
+          "scaled_size_px": [
+            232,
+            341
+          ],
+          "display_scale": 0.35857,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        },
+        {
+          "view": "side",
+          "source_bbox_xyxy": [
+            926,
+            11,
+            1326,
+            964
+          ],
+          "scaled_size_px": [
+            143,
+            341
+          ],
+          "display_scale": 0.357817,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        }
+      ],
+      "sprite_source_path": "data/source_art/sprite_studies/alis/alis_guard_motion_12f_sms_80px_v1.png",
+      "sprite_sha256": "86327477417eda71823bc1dbd291b5a7604b3024d110f59aeedc4ecb92d3b59a",
+      "sprite_frame_index": 0,
+      "sprite_cell_size_px": [
+        80,
+        80
+      ],
+      "sprite_visible_bbox_xyxy_cell": [
+        12,
+        7,
+        72,
+        80
+      ],
+      "sprite_visible_size_px": [
+        60,
+        73
+      ],
+      "sprite_sheet_review_status": "lineaged source candidate",
+      "relative_display_height_units": 6.2,
+      "display_pixels_per_comparison_unit": 55
+    },
+    {
+      "key": "landau",
+      "name": "Landau",
+      "game": "Lord of the Sword",
+      "concept_reference_path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+      "concept_reference_sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+      "turnaround_path": "data/source_art/roster_harmony_review/turnarounds/landau_turnaround.png",
+      "turnaround_sha256": "55fa87f8a04d3098048679271694f1755a3110e80ba26ab56dcb4f390c931cc9",
+      "turnaround_crop_records": [
+        {
+          "view": "front",
+          "source_bbox_xyxy": [
+            193,
+            3,
+            672,
+            970
+          ],
+          "scaled_size_px": [
+            180,
+            363
+          ],
+          "display_scale": 0.375388,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        },
+        {
+          "view": "side",
+          "source_bbox_xyxy": [
+            877,
+            3,
+            1403,
+            970
+          ],
+          "scaled_size_px": [
+            197,
+            363
+          ],
+          "display_scale": 0.375388,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        }
+      ],
+      "sprite_source_path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_v3.png",
+      "sprite_sha256": "91e4c2897ea7725a034e7bd6dc0b5f6aa37718a75537f5bdf53fc25d0bee9785",
+      "sprite_frame_index": 0,
+      "sprite_cell_size_px": [
+        96,
+        96
+      ],
+      "sprite_visible_bbox_xyxy_cell": [
+        23,
+        9,
+        86,
+        96
+      ],
+      "sprite_visible_size_px": [
+        63,
+        87
+      ],
+      "sprite_sheet_review_status": "owner-approved visual reference; runtime integration remains separate",
+      "relative_display_height_units": 6.6,
+      "display_pixels_per_comparison_unit": 55
+    },
+    {
+      "key": "jj",
+      "name": "J.J.",
+      "game": "Zillion II: The Tri Formation",
+      "concept_reference_path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "concept_reference_sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "turnaround_path": "data/source_art/roster_harmony_review/turnarounds/jj_turnaround.png",
+      "turnaround_sha256": "3d288fea9fa4251a3bf78a66b81354c5292e12cd651fbd394ae7c288e767f715",
+      "turnaround_crop_records": [
+        {
+          "view": "front",
+          "source_bbox_xyxy": [
+            253,
+            1,
+            675,
+            966
+          ],
+          "scaled_size_px": [
+            157,
+            358
+          ],
+          "display_scale": 0.370984,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        },
+        {
+          "view": "side",
+          "source_bbox_xyxy": [
+            928,
+            1,
+            1165,
+            968
+          ],
+          "scaled_size_px": [
+            88,
+            358
+          ],
+          "display_scale": 0.370217,
+          "background": "edge-connected near-background pixels removed; character RGB retained",
+          "remote_artifacts_removed": []
+        }
+      ],
+      "sprite_source_path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v5.png",
+      "sprite_sha256": "1f5e4807320343279504b27a1f13e8fdbf81282a1d398c2312a72c349b1e8dd6",
+      "sprite_frame_index": 0,
+      "sprite_cell_size_px": [
+        96,
+        96
+      ],
+      "sprite_visible_bbox_xyxy_cell": [
+        16,
+        20,
+        79,
+        96
+      ],
+      "sprite_visible_size_px": [
+        63,
+        76
+      ],
+      "sprite_sheet_review_status": "candidate; owner review pending",
+      "relative_display_height_units": 6.5,
+      "display_pixels_per_comparison_unit": 55
+    }
+  ]
+}

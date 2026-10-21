@@ -1,0 +1,75 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "owner_approved_reference",
+  "catalog_index": 1,
+  "style_id": "CPS2-Alpha-Cel",
+  "artistic_style_reference": {
+    "named_artist": "Bengus",
+    "reference_role_and_scope": "Capcom concept-art reference associated with Street Fighter Alpha development; not a blanket sprite authorship claim.",
+    "source_url": "https://game.capcom.com/cfn/sfv/column/112448?lang=en",
+    "attribution_status": "official_contextual_reference",
+    "style_signature": [
+      "expressive 1990s fighting-anime faces",
+      "strong graphic contour and readable silhouettes",
+      "high-energy pose staging"
+    ],
+    "basis_and_limits": "Visual-analysis descriptors; Capcom interview supplies development context, not sole-art credit."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": null,
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1_art.png",
+    "sha256": "20d24c2d9d15a2d00e212ad7420bd5585707955a72a7a076c8f9ece505a36f42",
+    "dimensions_px": [
+      1983,
+      793
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1_prompt.txt",
+    "sha256": "bc4aeb1f0148b566407fb34e5102b1228805abc5f5dd88b2e0d6035f7f62d346",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2_metadata.json",
+    "sha256": "ddeed4a2f8c89f5e51265f4ca179c09a4429f8d5e28cc5adf95d6532d12648f7"
+  },
+  "composition": {
+    "method": "standard_compose_from_raw_art",
+    "tool": "SMS_projects/master_of_fighters/tools/compose_concept_model_sheet.py",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "base_model_sheet_sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "art_scale": 0.85
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+    "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": null,
+    "status": "approved_reference"
+  },
+  "claim_ceiling": "concept_model_sheet_reference_only",
+  "owner_approval_decision": {
+    "path": "doc/decisions/dr_social_model_sheet_cps2_alpha_cel_v02_owner_approval.json",
+    "sha256": "a4feda623dbc710e0105405c625b58607651262491cf3b6f0c664f95c2ca407d",
+    "date": "2026-10-11",
+    "scope": "concept/model-sheet reference only"
+  }
+}

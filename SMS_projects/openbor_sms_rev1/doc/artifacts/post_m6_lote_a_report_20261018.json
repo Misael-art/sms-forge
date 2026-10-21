@@ -1,0 +1,53 @@
+{
+  "schema": "openbor_sms_post_m6_lote_a_report_v1",
+  "artifact_kind": "openbor_sms_post_m6_lote_a_report",
+  "revision": 1,
+  "date": "2026-10-18",
+  "owner_project": "openbor_sms_rev1",
+  "scope": "conciliacao documental pos-M6 (Lote A), sem build e sem execucao de emulador",
+  "baseline_commit": "da86de303bca969a393032d270c9d245d4055180",
+  "baseline_rom_sha256": "76cdbee3f10a58a07199b9012ff6dbe53df372d7532d6a8aa324089824425e73",
+  "preservation": {
+    "inventory": {
+      "path": "out/evidence/post_m6_history/20261018_lote_a/inventory_initial.json",
+      "sha256": "d12f508078590d2e8a665425c637dde2d641fbce3f3463b9f03e1d1344b1685a",
+      "bytes": 452356
+    },
+    "files": 762,
+    "seal_checks": 36,
+    "sessions": 12
+  },
+  "document_changes": [
+    {
+      "path": "doc/13-spec-cenas.md",
+      "summary": "layout/budget O3 mantido com O2 como historico; BG index 0 visivel, sprite index 0 transparente; uploader e pacing atualizados com medicao pos-M6"
+    },
+    {
+      "path": "doc/15-tdd.md",
+      "summary": "contrato tecnico WIP; escalonador, layout 48 B, leitura de servico e limites de instrumentacao registrados"
+    },
+    {
+      "path": "doc/artifacts/o3_combat_scope_20261016.json",
+      "summary": "revisao 2 sem execucao; predecessor aaf3b545 preservado; successor_index e successor_linkage resolvidos; predecessor byte-identico em doc/artifacts/o3_combat_scope_20261016_predecessor.json (dono unico por path no registro)"
+    }
+  ],
+  "successor_artifacts": [
+    "doc/artifacts/post_m6_evidence_index_20261018.json",
+    "doc/artifacts/post_m6_depth_linkage_20261018.json",
+    "doc/artifacts/post_m6_lote_a_report_20261018.json"
+  ],
+  "recovered": "manifests finais/journals recuperados de /tmp e snapshots com origem/bytes proprios; ver inventory_initial.json.sessions",
+  "open_gaps": [
+    "audit_render_glitch sem oraculo full-frame 256x192 validado",
+    "PAL nao medido",
+    "audio M7 nao integrado",
+    "contato aereo em 46/47 nao observado diretamente (mais proximo: 48)",
+    "altura 1 observada so na cauda do TOSS; altura 200 inalcancavel nesta cena"
+  ],
+  "no_promotion": true,
+  "scope_predecessor": {
+    "path": "doc/artifacts/o3_combat_scope_20261016_predecessor.json",
+    "sha256": "aaf3b5451495b4c2283065a9fc4e57523abbd60868eca258208eb0e8ffb9a87e",
+    "bytes": 30055
+  }
+}

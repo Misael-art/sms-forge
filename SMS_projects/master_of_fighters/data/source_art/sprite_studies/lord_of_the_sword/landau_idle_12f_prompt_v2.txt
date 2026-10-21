@@ -1,0 +1,21 @@
+Create a single clean sprite study for Landau, using the supplied approved concept sheet as the exact youthful character design and costume reference. Draw one 4-column by 3-row grid of twelve equal square cells on a 4:3 canvas, read left-to-right then top-to-bottom. The grid is invisible; no dividers, borders, gutters, labels or text. This is a compact standing guard idle, not twelve attack poses.
+
+In every cell draw the same young adult, clean-shaven Landau in a right-facing three-quarter side stance. Preserve the approved strong but youthful anatomy, do not make him older or wider than the concept: dark chestnut hair and headband, green tunic, brown leather guards and harness, red sash, blue trousers, silver greaves, exactly one sword in the same hand, bow and quiver on his back. Keep the sword close to the body with its tip angled down-forward. His free hand stays near his chest in a relaxed guard. Feet are planted at hip-to-shoulder width, knees softly bent, torso upright. Do not lunge, kneel, jump, walk, swing, sweep the sword across the canvas, or spread the legs into a huge fighting stance.
+
+Logical target per cell is 96x96. The complete silhouette including bow, quiver, sword and boots must be 84-88 pixels tall, at most 84 pixels wide, centered horizontally with at least 6 transparent pixels at each side and grounded on y=95. Preserve the same camera and scale in all twelve frames; no body part or weapon may touch or cross a cell edge. Keep the feet on one shared baseline and the bow/quiver attached to the same point on the back.
+
+Make a readable but restrained breathing-and-weight-shift idle cycle with twelve unique in-between poses. Every neighboring frame must change at least two areas (torso/shoulders, elbow/hand, knee/weight, hair/sash), but changes stay small, around 1-3 logical pixels; the sword angle stays within a small arc of its down-forward guard. Read these pose cues in order:
+1. settled upright guard, sword point low-forward;
+2. inhale, shoulders and chest rise slightly, sword hand lifts a pixel;
+3. breath crest, head angle and hair shift, free hand tightens;
+4. exhale starts, shoulders lower, sash follows with a small delay;
+5. weight moves back through hips, rear knee flexes without lifting the foot;
+6. guard closes a little, free hand draws nearer to chest, sword wrist turns inward;
+7. brief shallow knee compression, torso lowers slightly, blade point dips;
+8. recovery begins, torso rises, hair and sash follow through;
+9. weight returns toward center, front shoulder advances slightly, blade eases outward;
+10. breath releases, elbows soften, sword returns closer to guard;
+11. heels settle, head and hair finish their small motion, bow remains fixed;
+12. ready guard almost at frame 1 but visibly distinct, with breath reset and blade a pixel higher.
+
+Pixel-art finish: large intentional square clusters, crisp connected dark outlines, no antialiasing, no blur, no painterly shading. Exact colors from the Lord of the Sword Master System palette only: outline #555555, skin #FFAAAA and #FF5555, warm brown #AA5500, hair #550000 and #555500, sash #AA0000, tunic #55AA00 and #005500, leather highlight #FFAA00, steel #FFFFFF and #AAAAAA, trousers #AAAAFF and #5555AA. No other colors, no gradients, dithering, texture, grain, glow, red/magenta fringe, detached speckles, duplicate weapons, cell labels, background objects or watermark. Keep the canvas transparent.

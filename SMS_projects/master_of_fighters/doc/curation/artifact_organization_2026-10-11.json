@@ -1,0 +1,1837 @@
+{
+  "schema": "sms_artifact_organization_v1",
+  "date": "2026-10-11",
+  "scope": "Dr. Social concept/model references, owner-approved concept sheets for the roster, roster-harmony comparisons, and a pre-existing unregistered promotional source.",
+  "approved_current_references": [
+    {
+      "type": "concept_sheet",
+      "path": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "decision": "doc/decisions/dr_social_concept_v03_owner_approval.json"
+    },
+    {
+      "type": "model_sheet",
+      "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+      "decision": "doc/decisions/dr_social_model_sheet_cps2_alpha_cel_v02_owner_approval.json"
+    },
+    {
+      "type": "roster_harmony_sheet_page_1",
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_01.png",
+      "sha256": "b48e9e5b894751a3a2dfd332977703de9a456155457f474a94428f16a7c1f8ba",
+      "decision": "doc/decisions/roster_harmony_waku_waku_7_v01_owner_approval.json"
+    },
+    {
+      "type": "roster_harmony_sheet_page_2",
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+      "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+      "decision": "doc/decisions/roster_harmony_waku_waku_7_v01_owner_approval.json"
+    },
+    {
+      "type": "concept_sheet",
+      "path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+      "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+      "decision": "doc/decisions/alis-landale-concept-v04_owner_approval.json"
+    },
+    {
+      "type": "concept_sheet",
+      "path": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_sms_palette.png",
+      "sha256": "5b88ea863db2f6ebf97722d39196812f9290f8532aee3a3c40312e07d3ca932f",
+      "decision": "doc/decisions/ga-warrior-concept-v02-sms-palette_owner_approval.json"
+    },
+    {
+      "type": "concept_sheet",
+      "path": "data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "decision": "doc/decisions/hayato-concept-v02_owner_approval.json"
+    },
+    {
+      "type": "concept_sheet",
+      "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "decision": "doc/decisions/jj-zillion-ii-concept-v04_owner_approval.json"
+    },
+    {
+      "type": "concept_sheet",
+      "path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+      "sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+      "decision": "doc/decisions/landau-concept-v01_owner_approval.json"
+    }
+  ],
+  "moves": [
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record.json",
+      "sha256_before_path_rewrite": "1d25b033c4621bdd59e4691d470aa09ee06be4d41e813c9e12c4525a86f13ad2",
+      "sha256_after_path_rewrite": "51ab4a2a5f7476cb4dce04d6e552bc2765011a5b404ab2f470c8ad641bc290b0"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_02_dark_gothic_pop_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_02_dark_gothic_pop_v1.json",
+      "sha256_before_path_rewrite": "2fd28f6996f2d992796fdd68eb5062054f90ea986f7469699bbbb73c57e340a7",
+      "sha256_after_path_rewrite": "0971c479c42c7644a50c0c3caa747d04fb2cf177515df7db13fcb0cb47ce85ba"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_02_dark_gothic_pop_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_02_dark_gothic_pop_v2.json",
+      "sha256_before_path_rewrite": "0bf23a1902faf7eb6401d3b5ac6b3921013490d2a5c41f1fd7413f87e2f3b462",
+      "sha256_after_path_rewrite": "58adfa3b1c6fda74b1203c21bd85c402f776ec14fda15f7a3250fd5233ab6269"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_03_late_snk_realism_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_03_late_snk_realism_v1.json",
+      "sha256_before_path_rewrite": "45eb5d50f80dcb7088c44977833a7214e99d049f784383918d5cbf5e0f27ad43",
+      "sha256_after_path_rewrite": "28fe2e1d061b392a837d3af42dcf9b32c21012449e71ff9ff5d3046c9356ce6f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_03_late_snk_realism_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_03_late_snk_realism_v2.json",
+      "sha256_before_path_rewrite": "188c64fd1b52c864929fe2b40e3489720379281f6319e90a761b250914b6265b",
+      "sha256_after_path_rewrite": "90dd24f5956c3c6a4d6d627ddc97f70ffa6fc1631ad39e6e0b04f8a6f25efa16"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_04_cps3_fluid_mastery_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_04_cps3_fluid_mastery_v1.json",
+      "sha256_before_path_rewrite": "79e8c62bbad017f855437a40707cd585c80918207dc76e9d3a394589baa39a89",
+      "sha256_after_path_rewrite": "74cfe4a2964280a322e5200d25cb0fdec7cbbf8a11be9117212a5f14af546494"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_04_cps3_fluid_mastery_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_04_cps3_fluid_mastery_v2.json",
+      "sha256_before_path_rewrite": "1135bb07e8cd22dc1dd64332aef39ce981f4dfc1a95da25de6abc9a8935010d7",
+      "sha256_after_path_rewrite": "b92b8cfb3ab79537df20b5c606092c09781cfd581bb468cc0af76993a9945156"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v1.json",
+      "sha256_before_path_rewrite": "db8e6fac099297f073599cb3ca2bac2241a6502c61821d52d3469683148fd128",
+      "sha256_after_path_rewrite": "4cb5f011c467c9ed4437fab51d9778f90eb648b135db881d18b4f90b6b84e05a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v2.json",
+      "sha256_before_path_rewrite": "faed7250769fc62aee0a7318e7bda6e656bad6a5ca7c56c8db1618ba09b3451d",
+      "sha256_after_path_rewrite": "2f40d649bdf3c2a38f8ab40b9c8e035ab61654a47ddd7d36c3a1796f779fb4cc"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v1.json",
+      "sha256_before_path_rewrite": "deeefc29402627402485e77ad453bfc68488aedbd4ea30a5c6e2df4d07a33cfd",
+      "sha256_after_path_rewrite": "db19f59996d4ecc47a4a7dd4a120b40a152d85d3ab6c2b744a0fd5ed78da1b8f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v2.json",
+      "sha256_before_path_rewrite": "ab713f97d7ae511dfeb63a605ebe9fb09e763ba475db3a7b88a266ef28bdddce",
+      "sha256_after_path_rewrite": "9db1442cb8f6dd152d721d0f8afaa325b3d3df03e0349b303ce6ad425c2a36d3"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v1.json",
+      "sha256_before_path_rewrite": "fa9a4e6e71cfe0f3922a264765ee6c148de80375d76c345dd887ea44db6232a5",
+      "sha256_after_path_rewrite": "a87a9d9fb9c065d60021be15031cd9f828ff8658ae890fad72eae1911564d43a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v2.json",
+      "sha256_before_path_rewrite": "55553183c2df354df8c7586b6d3e1c8b7329f50119f2c4c6dd056530cf9ea65b",
+      "sha256_after_path_rewrite": "35d99ceafde716c301be98155725cd43a35c8ebf5ecb5c8afd0bbe4ce4c42e04"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v1.json",
+      "sha256_before_path_rewrite": "72eca0c5ee1e475d47240d4b2c4dc570c5a3e1664ed8085914c8f6b633afd65b",
+      "sha256_after_path_rewrite": "891585a98e77ea9996b9dd8c21dc6bf73cdf13b9e06dbbbc1dff75896c1a5815"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v2.json",
+      "sha256_before_path_rewrite": "f4f12ff7d64dc0a58b791bf72b4d17823035ee7b0a6e7dceaaf17d96dbe01257",
+      "sha256_after_path_rewrite": "fdff8e67ef50958c56f532f4d4363d4c3d1072aa5968d440b2d4b54bd54cd5c9"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v1.json",
+      "sha256_before_path_rewrite": "8d9569ce77963b4c11eeb5b0fb5753a3b898a207b1d7d04aae196912b37b0ca7",
+      "sha256_after_path_rewrite": "fa0a24805adc8e79330c11db2b2eb1819b50e8c47d79f4ff625e2567a6c1eab8"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v2.json",
+      "sha256_before_path_rewrite": "3c071c79fd266c3a121e68e14f242e056f026a7b70318727e847d1c7d4a84a2c",
+      "sha256_after_path_rewrite": "4940e07385528497971d8a76472a15b7779a5b8e3fa5502a60411350e1f8b7fa"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v1.json",
+      "sha256_before_path_rewrite": "5f99890964db82ab4093b12ba81af496fc97052464438ad9aac054e94caad75f",
+      "sha256_after_path_rewrite": "2a10c406d9b03533a0c3f6cc9eaee2b94f591022b53cad8ef7f876528ef3c8bc"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v2.json",
+      "sha256_before_path_rewrite": "2b90006dcfb12eb33859ad0ef687a2c9ba7c0602ffe822b0cce4b1bae9096d23",
+      "sha256_after_path_rewrite": "727acad791ad30c22b4e61eac936d0dd6158c2cff8ae9e7f92f8edcdcbf10e11"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v3.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v3.json",
+      "sha256_before_path_rewrite": "99194718e18f990777b550ab1a35bfdf6b4e81c376263f5587a9f1ac7dfe49ee",
+      "sha256_after_path_rewrite": "d8b554e22e610bd93cd033a84a737905dacc3dfab02e1465522323e782f8722e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v1.json",
+      "sha256_before_path_rewrite": "6509380aea67b1f13393f2e7271c9ee468ce2d937bbe1fc2784ced5de7a92303",
+      "sha256_after_path_rewrite": "b0e677ae44ef521321848faad8f0a87a26e61d7a598f60d7244f61b578867795"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v2.json",
+      "sha256_before_path_rewrite": "18fc4bff8cd5166e5aa45034b0d17bc0234871f36fa6197a92f671dd1c56f05c",
+      "sha256_after_path_rewrite": "98852b7e3aa9527dabcd0d153a3376cefdaf9dc929c3ef06897c43d46630e61b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_cps2_alpha_cel_v2.json",
+      "to": "data/source_art/concept_art/dr_social/approved_records/model_sheet_cps2_alpha_cel_v2/asset_lineage_record_dr_social_model_sheet_cps2_alpha_cel_v2.json",
+      "sha256_before_path_rewrite": "57c93ae9b9dfbf6d2a1977a598775cba986037793833c3e4de77b1874e5410a7",
+      "sha256_after_path_rewrite": "2e169d283fc5a2aa616696d492abdfc3a6ad2abdec8f143a80bc7800d2ce7cec"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_harmony_proposal_v3.json",
+      "to": "data/source_art/concept_art/dr_social/approved_records/concept_v3/asset_lineage_record_harmony_proposal_v3.json",
+      "sha256_before_path_rewrite": "10f7caeabf0d342dac559e12171d69c1e6bfdbea10399a407cc6292fa381805e",
+      "sha256_after_path_rewrite": "4fe5126d19907d4c62044d08f93b79eb02e8b6e847fba8bfa805f13189982573"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_model_sheet_v1.json",
+      "to": "data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/asset_lineage_record_model_sheet_v1.json",
+      "sha256_before_path_rewrite": "b27d3642a436b28b21663bba1fc3c8e0aaf721455c27ce0617c5a15db853eaa9",
+      "sha256_after_path_rewrite": "451fb132b3a8d73a4cc03a5205a09a83d7b8ae94598e2c4a9909894901863b43"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/asset_lineage_record_v2.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_v2.json",
+      "sha256_before_path_rewrite": "0ebe7428273c0c3b6b052ac6b6f37d92a7ad6446a53f9990756eae528afc2a66",
+      "sha256_after_path_rewrite": "9db7131c3986554b611093db65dc4c7e3f7c5f99f522ee477f25d6a99ac69733"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_48_style_atlas_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_48_style_atlas_v1.png",
+      "sha256_before_path_rewrite": "dde4a0fda7dba19452ca4e8c8b712df17f7b8fd0f503afc874bc08cd948716e9",
+      "sha256_after_path_rewrite": "dde4a0fda7dba19452ca4e8c8b712df17f7b8fd0f503afc874bc08cd948716e9"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_concept_prompt_v1.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_prompt_v1.txt",
+      "sha256_before_path_rewrite": "3d43d911a9dd2f5a7461b439b7c90f81c75039229dffdc70a9a00858a86da8e7",
+      "sha256_after_path_rewrite": "3d43d911a9dd2f5a7461b439b7c90f81c75039229dffdc70a9a00858a86da8e7"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_concept_prompt_v2.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_prompt_v2.txt",
+      "sha256_before_path_rewrite": "21655d583f12e46efbdf7515c78efd8436345c4563e8fe044e150be560441b1c",
+      "sha256_after_path_rewrite": "21655d583f12e46efbdf7515c78efd8436345c4563e8fe044e150be560441b1c"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_concept_prompt_v3_harmony_proposal.txt",
+      "to": "data/source_art/concept_art/dr_social/approved_records/concept_v3/dr_social_concept_prompt_v3_harmony_proposal.txt",
+      "sha256_before_path_rewrite": "5ab548b028b9d15ade3dce282a346ccb3e2f76d38179b1d167c9827dde121cf3",
+      "sha256_after_path_rewrite": "5ab548b028b9d15ade3dce282a346ccb3e2f76d38179b1d167c9827dde121cf3"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v1.png",
+      "sha256_before_path_rewrite": "2e07ec82b7de3890fbea3b88a79c4ebef13348f0040464170bb5cafe13a7dc20",
+      "sha256_after_path_rewrite": "2e07ec82b7de3890fbea3b88a79c4ebef13348f0040464170bb5cafe13a7dc20"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+      "sha256_before_path_rewrite": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f",
+      "sha256_after_path_rewrite": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1.png",
+      "sha256_before_path_rewrite": "4302834bbd99511201ce5e0ab4baece8876584c333162c681caae539f551b276",
+      "sha256_after_path_rewrite": "4302834bbd99511201ce5e0ab4baece8876584c333162c681caae539f551b276"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png",
+      "sha256_before_path_rewrite": "b697a47dbdc387ad2a4f98c2d406256565f74fadc8d1507ba7c1809863b502a3",
+      "sha256_after_path_rewrite": "b697a47dbdc387ad2a4f98c2d406256565f74fadc8d1507ba7c1809863b502a3"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1_metadata.json",
+      "sha256_before_path_rewrite": "9cc39b700122298021d714028925506ac40ce4a1f6ec9f57de737f4f991a397c",
+      "sha256_after_path_rewrite": "9cc39b700122298021d714028925506ac40ce4a1f6ec9f57de737f4f991a397c"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1_prompt.txt",
+      "sha256_before_path_rewrite": "fad7d97ef4d1b0530cf6ae00ed0f32f2abba802c81e0ac16ce6d8f51b6572a1e",
+      "sha256_after_path_rewrite": "fad7d97ef4d1b0530cf6ae00ed0f32f2abba802c81e0ac16ce6d8f51b6572a1e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v2.png",
+      "sha256_before_path_rewrite": "db54012926e57dcaa3d99ed89e74e37e1624e6b465e2da97f3d0fd59a6a69e6c",
+      "sha256_after_path_rewrite": "db54012926e57dcaa3d99ed89e74e37e1624e6b465e2da97f3d0fd59a6a69e6c"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v2_metadata.json",
+      "sha256_before_path_rewrite": "a8cbc343e00133bf7cb34fd8842f6f952602a72fa7a994da9588186b056551d5",
+      "sha256_after_path_rewrite": "ae874d03e36b0df65ae7066b63097ea4fc3ddd71dd794c80f781d0b84589fff5"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1.png",
+      "sha256_before_path_rewrite": "321f10ffc5923398a5468786d988661d89ad9c22662c82b6228dc4f5b0dafd13",
+      "sha256_after_path_rewrite": "321f10ffc5923398a5468786d988661d89ad9c22662c82b6228dc4f5b0dafd13"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_art.png",
+      "sha256_before_path_rewrite": "c61f68daee80dec2da06b0cf377fe2ef799b3930eacfc83458c3e4b058af7aac",
+      "sha256_after_path_rewrite": "c61f68daee80dec2da06b0cf377fe2ef799b3930eacfc83458c3e4b058af7aac"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_art_prepared.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_art_prepared.png",
+      "sha256_before_path_rewrite": "a29904eb31f1711814085e903bf517d44d03822032e818639914367e3ff27be1",
+      "sha256_after_path_rewrite": "a29904eb31f1711814085e903bf517d44d03822032e818639914367e3ff27be1"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_metadata.json",
+      "sha256_before_path_rewrite": "43def3e585a79872e51fb093035bcd40e4d4dad7828f76a55553cc37d6f33880",
+      "sha256_after_path_rewrite": "43def3e585a79872e51fb093035bcd40e4d4dad7828f76a55553cc37d6f33880"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_prompt.txt",
+      "sha256_before_path_rewrite": "7fe393d0d77345a889bd7534f794d8c58534612f641c33676ab67d7a1fff9eaa",
+      "sha256_after_path_rewrite": "7fe393d0d77345a889bd7534f794d8c58534612f641c33676ab67d7a1fff9eaa"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v2.png",
+      "sha256_before_path_rewrite": "f70a89cfe643429ce6065247f25b764c60c705d7c31739cf6d33ca05ec96807f",
+      "sha256_after_path_rewrite": "f70a89cfe643429ce6065247f25b764c60c705d7c31739cf6d33ca05ec96807f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v2_metadata.json",
+      "sha256_before_path_rewrite": "6dd5da76f2e6ffb5ef00bce4de5f6c2292f28bf6a7ef02819a80c702d87bdc70",
+      "sha256_after_path_rewrite": "0f94b4487d753019515d1b8312cef97b53ac38027d355343389cbe67d9763e3b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1.png",
+      "sha256_before_path_rewrite": "d3271701674692024fe923706df1c3f90856ba2a5bedd25edefe900a7e650316",
+      "sha256_after_path_rewrite": "d3271701674692024fe923706df1c3f90856ba2a5bedd25edefe900a7e650316"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png",
+      "sha256_before_path_rewrite": "f96e0fd84ba84b45f5e658f4874f598923b04fe57f6ea04f363da061ce49b202",
+      "sha256_after_path_rewrite": "f96e0fd84ba84b45f5e658f4874f598923b04fe57f6ea04f363da061ce49b202"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1_metadata.json",
+      "sha256_before_path_rewrite": "2f726573ec3e1c90474518c73f696d91647856c6465647eb857ead3f364ddbd0",
+      "sha256_after_path_rewrite": "2f726573ec3e1c90474518c73f696d91647856c6465647eb857ead3f364ddbd0"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1_prompt.txt",
+      "sha256_before_path_rewrite": "73070983464dc29f9878ca9f8327b2e829cead934f5e141adb3fe4ee375c09bd",
+      "sha256_after_path_rewrite": "73070983464dc29f9878ca9f8327b2e829cead934f5e141adb3fe4ee375c09bd"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2.png",
+      "sha256_before_path_rewrite": "3be06c1e994f7efafe8497ce696e43178073dd181f57ff8412b19779c1f0fede",
+      "sha256_after_path_rewrite": "3be06c1e994f7efafe8497ce696e43178073dd181f57ff8412b19779c1f0fede"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2_metadata.json",
+      "sha256_before_path_rewrite": "19cd9648d9d76b0163962e95db4097ebe8fd4a49a2169f08ae37df9671d5fc6a",
+      "sha256_after_path_rewrite": "b5facc2c4d1fac12b2170ed7e79bffa40db28d4db769c764ee8939acc235cbaf"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_metadata.json",
+      "sha256_before_path_rewrite": "9fc5439d54f4b3c3cf66e662d1d65b31e01bfeb44540142075154aaf781de9e7",
+      "sha256_after_path_rewrite": "9fc5439d54f4b3c3cf66e662d1d65b31e01bfeb44540142075154aaf781de9e7"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof_prompt/dr_social_model_sheet_05_urban_seinen_kof_prompt.txt",
+      "sha256_before_path_rewrite": "55f5f64d3a273bb8ff2a51a4a1cf2e28fd2efe729e4f40d49bda7d3535a708c5",
+      "sha256_after_path_rewrite": "55f5f64d3a273bb8ff2a51a4a1cf2e28fd2efe729e4f40d49bda7d3535a708c5"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v1.png",
+      "sha256_before_path_rewrite": "dd79f1393380b075b81e10ee5988adbd22a282b4ebd7d8940b1500a4f35ca2fa",
+      "sha256_after_path_rewrite": "dd79f1393380b075b81e10ee5988adbd22a282b4ebd7d8940b1500a4f35ca2fa"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v1_art.png",
+      "sha256_before_path_rewrite": "300354fcbc923aae513348827e577c604f6c464016b8d88a7fd14c844ba8019e",
+      "sha256_after_path_rewrite": "300354fcbc923aae513348827e577c604f6c464016b8d88a7fd14c844ba8019e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v1_prompt.txt",
+      "sha256_before_path_rewrite": "bd7b68028d2b35c064cd85c099d7aa2b5097848edf73d2a8d0c07846eab510b3",
+      "sha256_after_path_rewrite": "bd7b68028d2b35c064cd85c099d7aa2b5097848edf73d2a8d0c07846eab510b3"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2.png",
+      "sha256_before_path_rewrite": "5abeb8c28efb74afa443c1a0873cbd671ac9c0d4e17527c705c08e2b3f1101db",
+      "sha256_after_path_rewrite": "5abeb8c28efb74afa443c1a0873cbd671ac9c0d4e17527c705c08e2b3f1101db"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2_art.png",
+      "sha256_before_path_rewrite": "8fb4e85f486c014cad12bc8f60837e195ed354344bf5f9e2a10f2f33ef3112bf",
+      "sha256_after_path_rewrite": "8fb4e85f486c014cad12bc8f60837e195ed354344bf5f9e2a10f2f33ef3112bf"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2_metadata.json",
+      "sha256_before_path_rewrite": "bcfb7c158befdf7266c20b85d88e7c2c5cc9a3f341384c782f1162ce05453e04",
+      "sha256_after_path_rewrite": "2164249e1cb27e70b5332740aab96b0de34dcc05cb92e91a59ae039eaf5d2387"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2_prompt.txt",
+      "sha256_before_path_rewrite": "bcd1553baab43f994f0f9390a0906391a8b7822936a80c6107210e24f952bb09",
+      "sha256_after_path_rewrite": "bcd1553baab43f994f0f9390a0906391a8b7822936a80c6107210e24f952bb09"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png",
+      "sha256_before_path_rewrite": "bf994540105b99a0a313a5ec12530f260fa54b0944e82bb7a93c26a892a0424d",
+      "sha256_after_path_rewrite": "bf994540105b99a0a313a5ec12530f260fa54b0944e82bb7a93c26a892a0424d"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt",
+      "sha256_before_path_rewrite": "b33311b7d99f489a8262ccc45c06863adb5bd0800d3d888e5abcbcff98b6643b",
+      "sha256_after_path_rewrite": "b33311b7d99f489a8262ccc45c06863adb5bd0800d3d888e5abcbcff98b6643b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_blocked_record_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_blocked_record_v1.json",
+      "sha256_before_path_rewrite": "d2412cfcc68afb8b0d453d23ebf930a6cb24ef999dcc4b499f0c5c1e1a0f1fe9",
+      "sha256_after_path_rewrite": "46500a638d987a2b1ca2acef3163111804efd2d227e88a9377470d69e724d22b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v1_art.png",
+      "sha256_before_path_rewrite": "8dbb4112dd2715bbf8cc643bf4a3d16456c445635cce98d82cd411e5075b2be9",
+      "sha256_after_path_rewrite": "8dbb4112dd2715bbf8cc643bf4a3d16456c445635cce98d82cd411e5075b2be9"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v1_prompt.txt",
+      "sha256_before_path_rewrite": "05e4ffab8fe4347a854c1a165c4c80ca29eb0d1a2e1d84f2cd4df01c4d3583e4",
+      "sha256_after_path_rewrite": "05e4ffab8fe4347a854c1a165c4c80ca29eb0d1a2e1d84f2cd4df01c4d3583e4"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v2_art.png",
+      "sha256_before_path_rewrite": "175d6b7552b312a3bf679e0c9136a2adf04570bfb29965fc7c9df03d4c5e0afc",
+      "sha256_after_path_rewrite": "175d6b7552b312a3bf679e0c9136a2adf04570bfb29965fc7c9df03d4c5e0afc"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v2_prompt.txt",
+      "sha256_before_path_rewrite": "2a70a7fb6acc7ce47dc7c16ad2cebbb598d43e7c5e026c6b6d425946e9dce1e8",
+      "sha256_after_path_rewrite": "2a70a7fb6acc7ce47dc7c16ad2cebbb598d43e7c5e026c6b6d425946e9dce1e8"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v3_art.png",
+      "sha256_before_path_rewrite": "c29f4922e6199a7b5e0714d6450010c87b3bf7f51b78d2f94e7f4ac0a5fd7e86",
+      "sha256_after_path_rewrite": "c29f4922e6199a7b5e0714d6450010c87b3bf7f51b78d2f94e7f4ac0a5fd7e86"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v3_prompt.txt",
+      "sha256_before_path_rewrite": "b1bc6d3f8c3dc264fbe5939beea5d47538dcd76833b6f7cee109a50fa84e809d",
+      "sha256_after_path_rewrite": "b1bc6d3f8c3dc264fbe5939beea5d47538dcd76833b6f7cee109a50fa84e809d"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v4_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v4_art.png",
+      "sha256_before_path_rewrite": "babc74aeb3dab7e145018ba4c426930c36a0569ee9b3d9194839a780f35bbbcc",
+      "sha256_after_path_rewrite": "babc74aeb3dab7e145018ba4c426930c36a0569ee9b3d9194839a780f35bbbcc"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v4_prompt.txt",
+      "sha256_before_path_rewrite": "465fbcb75612dad06d3a64b9afb1125edd90aac55499dfbf13a5b441b405c764",
+      "sha256_after_path_rewrite": "465fbcb75612dad06d3a64b9afb1125edd90aac55499dfbf13a5b441b405c764"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_metadata.json",
+      "sha256_before_path_rewrite": "a56855ec66adc94bb93e1e4bdff1546817d7c453b3c47795980887c7c264ea89",
+      "sha256_after_path_rewrite": "a56855ec66adc94bb93e1e4bdff1546817d7c453b3c47795980887c7c264ea89"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1.png",
+      "sha256_before_path_rewrite": "822be99e0a61ebf72029e662c61f23aec509e4028ea75c7e58487810eb9e1b30",
+      "sha256_after_path_rewrite": "822be99e0a61ebf72029e662c61f23aec509e4028ea75c7e58487810eb9e1b30"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1_art.png",
+      "sha256_before_path_rewrite": "0ce33fda83bed27431c0ce855a42fb7baf6c13cd13f98c40afc2a0f1c963b997",
+      "sha256_after_path_rewrite": "0ce33fda83bed27431c0ce855a42fb7baf6c13cd13f98c40afc2a0f1c963b997"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1_prompt.txt",
+      "sha256_before_path_rewrite": "436845f76a9d8ad79ffeb0a5508e64ebfc52d0a2b31b49f3bb1d16fbb16c57b1",
+      "sha256_after_path_rewrite": "436845f76a9d8ad79ffeb0a5508e64ebfc52d0a2b31b49f3bb1d16fbb16c57b1"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2.png",
+      "sha256_before_path_rewrite": "2cdd2051340283eca8e7d11799e2e1fab3be7c04a2bc8f40a904174a72476a09",
+      "sha256_after_path_rewrite": "2cdd2051340283eca8e7d11799e2e1fab3be7c04a2bc8f40a904174a72476a09"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_art.png",
+      "sha256_before_path_rewrite": "209782249a34c4315e78df41f91344b6bf8edf9908e9b8fc3e3bfb17537a4403",
+      "sha256_after_path_rewrite": "209782249a34c4315e78df41f91344b6bf8edf9908e9b8fc3e3bfb17537a4403"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_metadata.json",
+      "sha256_before_path_rewrite": "bd1fe25410fb81ce330d23f6b10c520ead26441574d91b3488835500aa7c8073",
+      "sha256_after_path_rewrite": "285b0d8a62895fb019368505f730c316514a7b0b3d1d26dad58b7dc7022a403b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_prompt.txt",
+      "sha256_before_path_rewrite": "d3b897a30b8c7f34a12830e60cbf78ab36d8191b99f5756e289647c0962943b7",
+      "sha256_after_path_rewrite": "d3b897a30b8c7f34a12830e60cbf78ab36d8191b99f5756e289647c0962943b7"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v3_art.png",
+      "sha256_before_path_rewrite": "eedd5d3f7bb842533181d1926ec03611a120d50cf58a353ab9e3784f676bcc3b",
+      "sha256_after_path_rewrite": "eedd5d3f7bb842533181d1926ec03611a120d50cf58a353ab9e3784f676bcc3b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v3_prompt.txt",
+      "sha256_before_path_rewrite": "7778701b1ebb5d0e8ef2f1bd66f3db822ee05ba13f3ad0ec7b837a8e7f62d134",
+      "sha256_after_path_rewrite": "7778701b1ebb5d0e8ef2f1bd66f3db822ee05ba13f3ad0ec7b837a8e7f62d134"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
+      "sha256_before_path_rewrite": "2cd090e9a614cb4a8fe4c15ac38e05713425b28c2cf7459ae9d2749c288407a6",
+      "sha256_after_path_rewrite": "2cd090e9a614cb4a8fe4c15ac38e05713425b28c2cf7459ae9d2749c288407a6"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt",
+      "sha256_before_path_rewrite": "7fde6d596896933f1a5a00ceb655df378376110b79494c6f97605c03bb07661e",
+      "sha256_after_path_rewrite": "7fde6d596896933f1a5a00ceb655df378376110b79494c6f97605c03bb07661e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_metadata.json",
+      "sha256_before_path_rewrite": "d453b9b6f352306c2095044c5f545cf5b11c7d92d3029f2dbdc81317ce037645",
+      "sha256_after_path_rewrite": "d453b9b6f352306c2095044c5f545cf5b11c7d92d3029f2dbdc81317ce037645"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png",
+      "sha256_before_path_rewrite": "7b1340ab917b8571635882f08fc4ebef9052afced1766b62ab7d307c22a9f665",
+      "sha256_after_path_rewrite": "7b1340ab917b8571635882f08fc4ebef9052afced1766b62ab7d307c22a9f665"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v1_art.png",
+      "sha256_before_path_rewrite": "844a1d7f20eadad01339a8124fc0c48ed32cde92be47b5477875ddffb87b82e9",
+      "sha256_after_path_rewrite": "844a1d7f20eadad01339a8124fc0c48ed32cde92be47b5477875ddffb87b82e9"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v1_prompt.txt",
+      "sha256_before_path_rewrite": "7608992b9b08766fef9dd7d75cb2053165c329de38c5750cc669a40b7c3e08b7",
+      "sha256_after_path_rewrite": "7608992b9b08766fef9dd7d75cb2053165c329de38c5750cc669a40b7c3e08b7"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2.png",
+      "sha256_before_path_rewrite": "c390a2eb20eb4d81710ec1f0f1dd812dfbc86d4f3e29d6152bf6197c0c591e75",
+      "sha256_after_path_rewrite": "c390a2eb20eb4d81710ec1f0f1dd812dfbc86d4f3e29d6152bf6197c0c591e75"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2_art.png",
+      "sha256_before_path_rewrite": "ab9f625e5606282ba899f638282c8ec9ee35a9628c1be67aff2e297cc4b3e85e",
+      "sha256_after_path_rewrite": "ab9f625e5606282ba899f638282c8ec9ee35a9628c1be67aff2e297cc4b3e85e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2_metadata.json",
+      "sha256_before_path_rewrite": "14c986c34bc62a4cf272a6319d2e6f73eea5d866b8f6597c6c4ee5326adac981",
+      "sha256_after_path_rewrite": "ce4641fcd9afeed84b6fcdd5fc260054251cc23b1b8f983ebb93025539d20889"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2_prompt.txt",
+      "sha256_before_path_rewrite": "3a5de3473cfd9c40ecf0723e0b01ecd3c28189741a48438e606d0c765221c533",
+      "sha256_after_path_rewrite": "3a5de3473cfd9c40ecf0723e0b01ecd3c28189741a48438e606d0c765221c533"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v3_art.png",
+      "sha256_before_path_rewrite": "8f72fb518616b6d242b0a51ff285f552b92f5144f9c0e8f27ce97e56be48272e",
+      "sha256_after_path_rewrite": "8f72fb518616b6d242b0a51ff285f552b92f5144f9c0e8f27ce97e56be48272e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v3_prompt.txt",
+      "sha256_before_path_rewrite": "545dd97cabcea07be007fb4f246e4b86ed3b493e3dbc089e8726469e12d2a6a9",
+      "sha256_after_path_rewrite": "545dd97cabcea07be007fb4f246e4b86ed3b493e3dbc089e8726469e12d2a6a9"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png",
+      "sha256_before_path_rewrite": "2e5f3b6371e56be1384ec44e6c4b9d64915ca22e10dfb4d2c535584f9e5b3c1d",
+      "sha256_after_path_rewrite": "2e5f3b6371e56be1384ec44e6c4b9d64915ca22e10dfb4d2c535584f9e5b3c1d"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt",
+      "sha256_before_path_rewrite": "2fb10bf0fc0f18610e3f33a2690e4be73ca8926e5335cd8b1e2d1219b46514af",
+      "sha256_after_path_rewrite": "2fb10bf0fc0f18610e3f33a2690e4be73ca8926e5335cd8b1e2d1219b46514af"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_metadata.json",
+      "sha256_before_path_rewrite": "aa95f2a1a667690d99cedccd370a0d193a7aa7780f1a5b8abb1aeac81e24f921",
+      "sha256_after_path_rewrite": "aa95f2a1a667690d99cedccd370a0d193a7aa7780f1a5b8abb1aeac81e24f921"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
+      "sha256_before_path_rewrite": "e8d531701712f6b1479837b7caacf0b9e7798d81d21574d31883adc22b7a7e68",
+      "sha256_after_path_rewrite": "e8d531701712f6b1479837b7caacf0b9e7798d81d21574d31883adc22b7a7e68"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v1_art.png",
+      "sha256_before_path_rewrite": "0291be287c0675d0ab2aa4505186c68487e9a90fa9e9a266f72f21deb8a844da",
+      "sha256_after_path_rewrite": "0291be287c0675d0ab2aa4505186c68487e9a90fa9e9a266f72f21deb8a844da"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v1_prompt.txt",
+      "sha256_before_path_rewrite": "bddfff55d0dfe2f5f0d25cbe6c4f2fcf3e33e367222d6d6a5825b288046dd434",
+      "sha256_after_path_rewrite": "bddfff55d0dfe2f5f0d25cbe6c4f2fcf3e33e367222d6d6a5825b288046dd434"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2.png",
+      "sha256_before_path_rewrite": "51ab35053a9acc15d7dfa84a316db5b6f579d18c211ef9e7d50a4880bf1bb42a",
+      "sha256_after_path_rewrite": "51ab35053a9acc15d7dfa84a316db5b6f579d18c211ef9e7d50a4880bf1bb42a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
+      "sha256_before_path_rewrite": "c98e7de775a1fc4e9b6329bf16f259998eb28d36633ac1bf62627740906e09a2",
+      "sha256_after_path_rewrite": "c98e7de775a1fc4e9b6329bf16f259998eb28d36633ac1bf62627740906e09a2"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_metadata.json",
+      "sha256_before_path_rewrite": "f6f7a1490d464d37c3e7e009836e5acbc7ded77c07c9e959b8ae317820f2912d",
+      "sha256_after_path_rewrite": "2bc829e2fc6809ce3a9e6342a4b725af9e1c471fb862959cb6493898d969f43a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt",
+      "sha256_before_path_rewrite": "b1f9047acb2fef8e698318e7f8cf7fd17205d004be3d85f15ea3e193f2f275a4",
+      "sha256_after_path_rewrite": "b1f9047acb2fef8e698318e7f8cf7fd17205d004be3d85f15ea3e193f2f275a4"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_metadata.json",
+      "sha256_before_path_rewrite": "31d3709f93ab71b09a5187d4cf9d6ef8eb0d4b998e09a9f59888a093302f2a43",
+      "sha256_after_path_rewrite": "31d3709f93ab71b09a5187d4cf9d6ef8eb0d4b998e09a9f59888a093302f2a43"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v1.png",
+      "sha256_before_path_rewrite": "e7db65f283a7df8e206ec71b57d65acb1635d3d798bbc32476ad57d3a773b06b",
+      "sha256_after_path_rewrite": "e7db65f283a7df8e206ec71b57d65acb1635d3d798bbc32476ad57d3a773b06b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v1_art.png",
+      "sha256_before_path_rewrite": "99677242ba790b20ea24965a974a5d6dae3535f819068ae5824aef505257dcfc",
+      "sha256_after_path_rewrite": "99677242ba790b20ea24965a974a5d6dae3535f819068ae5824aef505257dcfc"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v1_prompt.txt",
+      "sha256_before_path_rewrite": "6c8937f86fffe463dd680022eca7a0a01b79fba48e0a79761980582199ce5b3a",
+      "sha256_after_path_rewrite": "6c8937f86fffe463dd680022eca7a0a01b79fba48e0a79761980582199ce5b3a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2.png",
+      "sha256_before_path_rewrite": "b937f4eba849d07cbeab706ac425b4fbaeff62b5797e8b66c83dd12a55fb4fce",
+      "sha256_after_path_rewrite": "b937f4eba849d07cbeab706ac425b4fbaeff62b5797e8b66c83dd12a55fb4fce"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2_art.png",
+      "sha256_before_path_rewrite": "50f5ab1803d2cb94c63af24ff83bc0eef5af020bc93c7c2cff57f7149de8a060",
+      "sha256_after_path_rewrite": "50f5ab1803d2cb94c63af24ff83bc0eef5af020bc93c7c2cff57f7149de8a060"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2_metadata.json",
+      "sha256_before_path_rewrite": "70b5928e0b9e56cca06d6ed03c831af32decb3495e2356ba28bf0739a7ed5e6c",
+      "sha256_after_path_rewrite": "8904bfaa24e448a0845f5e3970c2bfd19743ccd74fd080c6c60db70b68b3a38d"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2_prompt.txt",
+      "sha256_before_path_rewrite": "6797f4fd22441b49c1ff2b9d5cecbe1bfb4b87826add00b11cf70ff89db2c1b4",
+      "sha256_after_path_rewrite": "6797f4fd22441b49c1ff2b9d5cecbe1bfb4b87826add00b11cf70ff89db2c1b4"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
+      "sha256_before_path_rewrite": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81",
+      "sha256_after_path_rewrite": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt",
+      "sha256_before_path_rewrite": "e01f9f4b797937cee02b5e7fa80be1fce0447d81933ba7a8ac35da2f785dbd0f",
+      "sha256_after_path_rewrite": "e01f9f4b797937cee02b5e7fa80be1fce0447d81933ba7a8ac35da2f785dbd0f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_blocked_record_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_blocked_record_v1.json",
+      "sha256_before_path_rewrite": "746518197169fd272989752fa0be63635c1b660c5271fec50bb9aa4bf9502211",
+      "sha256_after_path_rewrite": "7183b958c7b8714926c7dbc8325656c4226588146dc14de01f9e54933a63232b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v1.png",
+      "sha256_before_path_rewrite": "7f39c1e334094c5528dafdf2a5d87fc770971c735153c8c18a8a906d93a8118c",
+      "sha256_after_path_rewrite": "7f39c1e334094c5528dafdf2a5d87fc770971c735153c8c18a8a906d93a8118c"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v1_prompt.txt",
+      "sha256_before_path_rewrite": "26ea95f229a3f632ba40647681282ba8683143065632433d3fe7017b1c5c4f2f",
+      "sha256_after_path_rewrite": "26ea95f229a3f632ba40647681282ba8683143065632433d3fe7017b1c5c4f2f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v2.png",
+      "sha256_before_path_rewrite": "e0b50a074f1bbfeec3fc7f6372db34b4ff757718b4b0ac1dbae729bdd9efbe98",
+      "sha256_after_path_rewrite": "e0b50a074f1bbfeec3fc7f6372db34b4ff757718b4b0ac1dbae729bdd9efbe98"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v2_prompt.txt",
+      "sha256_before_path_rewrite": "527c8e787eca3089583741ed566e7eef6ccc2a9173fb54b85d8bead476a461cc",
+      "sha256_after_path_rewrite": "527c8e787eca3089583741ed566e7eef6ccc2a9173fb54b85d8bead476a461cc"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v3.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v3.png",
+      "sha256_before_path_rewrite": "023ecb10fef94bbd5c92a292206ace3cb7d0c65df59914e5bc93a2a1f70f071c",
+      "sha256_after_path_rewrite": "023ecb10fef94bbd5c92a292206ace3cb7d0c65df59914e5bc93a2a1f70f071c"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v3_prompt.txt",
+      "sha256_before_path_rewrite": "40691efe5c04355d1bf5e095d0c7ec002e20298f15d996aa469a9e753670ac5a",
+      "sha256_after_path_rewrite": "40691efe5c04355d1bf5e095d0c7ec002e20298f15d996aa469a9e753670ac5a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v4.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v4.png",
+      "sha256_before_path_rewrite": "88a8f38606f43ecdd3db7611d912f35edf5f1e85adecea889236af2cf102dc59",
+      "sha256_after_path_rewrite": "88a8f38606f43ecdd3db7611d912f35edf5f1e85adecea889236af2cf102dc59"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v4_prompt.txt",
+      "sha256_before_path_rewrite": "51f73fbe4e867efdb75f7870ace2daa14c8a2c7937b385abbc5755a4c36f6f8b",
+      "sha256_after_path_rewrite": "51f73fbe4e867efdb75f7870ace2daa14c8a2c7937b385abbc5755a4c36f6f8b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_blocked_record_v1.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_blocked_record_v1.json",
+      "sha256_before_path_rewrite": "027f082de9b933b9de68c8a46ed3079c2f1a7a8286f18d35e434ba5794870690",
+      "sha256_after_path_rewrite": "7316bc3185a73cc6279ed7fe90e0944eefb758547625eb485f904b4c50755b57"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_metadata.json",
+      "sha256_before_path_rewrite": "62d939bba08fa75f52676ff0d69fe6a46a275ba40c94a9bb0ded6b48385a63b2",
+      "sha256_after_path_rewrite": "62d939bba08fa75f52676ff0d69fe6a46a275ba40c94a9bb0ded6b48385a63b2"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v0_identity_reference.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v0_identity_reference.png",
+      "sha256_before_path_rewrite": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81",
+      "sha256_after_path_rewrite": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v1_art.png",
+      "sha256_before_path_rewrite": "09fd0b90403eef1d3778bee60cfc31bae1e0ee6e6a1af81b6944749f95ef3058",
+      "sha256_after_path_rewrite": "09fd0b90403eef1d3778bee60cfc31bae1e0ee6e6a1af81b6944749f95ef3058"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v1_prompt.txt",
+      "sha256_before_path_rewrite": "22b2ac1b6ee3f964b4b1478a10b5bb85b5421008a1809790a90c4262787b9181",
+      "sha256_after_path_rewrite": "22b2ac1b6ee3f964b4b1478a10b5bb85b5421008a1809790a90c4262787b9181"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v2_art.png",
+      "sha256_before_path_rewrite": "0bcbd5aad47d47c56919470e4b92a2b92257173429c2acd2bb21ae31a38edb64",
+      "sha256_after_path_rewrite": "0bcbd5aad47d47c56919470e4b92a2b92257173429c2acd2bb21ae31a38edb64"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v2_prompt.txt",
+      "sha256_before_path_rewrite": "dfc5d2c3b7f48d35494f1dff12d3a3b481d7f2a9a41681c4dc640fdbad1e39ec",
+      "sha256_after_path_rewrite": "dfc5d2c3b7f48d35494f1dff12d3a3b481d7f2a9a41681c4dc640fdbad1e39ec"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v3_art.png",
+      "sha256_before_path_rewrite": "eb8bebd7b4bdbd37eb2c470d76e9115df8267a6d3213d4031e13c6555e00e8d4",
+      "sha256_after_path_rewrite": "eb8bebd7b4bdbd37eb2c470d76e9115df8267a6d3213d4031e13c6555e00e8d4"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v3_prompt.txt",
+      "sha256_before_path_rewrite": "ece5442fe77bd9582d9fd71be35ca78c8426d05c44ce4bbc1e710e8ac243c9bf",
+      "sha256_after_path_rewrite": "ece5442fe77bd9582d9fd71be35ca78c8426d05c44ce4bbc1e710e8ac243c9bf"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v4_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v4_art.png",
+      "sha256_before_path_rewrite": "082f1da774a13387c7f24cfa028dfaba41b85bfd39728c337d3e0cc132ef6a18",
+      "sha256_after_path_rewrite": "082f1da774a13387c7f24cfa028dfaba41b85bfd39728c337d3e0cc132ef6a18"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v4_prompt.txt",
+      "sha256_before_path_rewrite": "ac94f9733d7bf4aeb1575db6c0fba6ece4832fff086eb102856667ee2f5feaa9",
+      "sha256_after_path_rewrite": "ac94f9733d7bf4aeb1575db6c0fba6ece4832fff086eb102856667ee2f5feaa9"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v5_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v5_art.png",
+      "sha256_before_path_rewrite": "7aadab737f4eb231a7aaf4830a760ea762e7e14db08bfb19cf63097d87007b45",
+      "sha256_after_path_rewrite": "7aadab737f4eb231a7aaf4830a760ea762e7e14db08bfb19cf63097d87007b45"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v0_identity_reference.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v0_identity_reference.png",
+      "sha256_before_path_rewrite": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81",
+      "sha256_after_path_rewrite": "a879948f91d98ee90179903ed2b9cedec95ad481120d1782464bd1cab0d77d81"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v1_art.png",
+      "sha256_before_path_rewrite": "df75bdf8c13b43f07bd412f9f81dab9aea84e7e1964ea2820f336a55c3c33dff",
+      "sha256_after_path_rewrite": "df75bdf8c13b43f07bd412f9f81dab9aea84e7e1964ea2820f336a55c3c33dff"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v1_prompt.txt",
+      "sha256_before_path_rewrite": "0fd7feea6e7a8182bdf3bb1d4dbfb7630c8014e9de72b8846279916d16b22365",
+      "sha256_after_path_rewrite": "0fd7feea6e7a8182bdf3bb1d4dbfb7630c8014e9de72b8846279916d16b22365"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v2_art.png",
+      "sha256_before_path_rewrite": "ccd5fe0dd3b76468e6efe31654e5917298c71faa971f2fb104ecb87abcfe3b55",
+      "sha256_after_path_rewrite": "ccd5fe0dd3b76468e6efe31654e5917298c71faa971f2fb104ecb87abcfe3b55"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v2_prompt.txt",
+      "sha256_before_path_rewrite": "dc44e73451d679c5b5e64417b651813fc97c9c479f82f96e2048d6ce2721f685",
+      "sha256_after_path_rewrite": "dc44e73451d679c5b5e64417b651813fc97c9c479f82f96e2048d6ce2721f685"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v3_art.png",
+      "sha256_before_path_rewrite": "6bd83b807103db9ee7b76b1cb5b9b1de183e8a7a85d42fa000576ca4cb2c7240",
+      "sha256_after_path_rewrite": "6bd83b807103db9ee7b76b1cb5b9b1de183e8a7a85d42fa000576ca4cb2c7240"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v3_prompt.txt",
+      "sha256_before_path_rewrite": "349b138433ca7141068156db356d7155dfb16fabfc1bbf2cbd1a5a3a35c210d1",
+      "sha256_after_path_rewrite": "349b138433ca7141068156db356d7155dfb16fabfc1bbf2cbd1a5a3a35c210d1"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v4_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v4_art.png",
+      "sha256_before_path_rewrite": "f0a026c1841115c23930209295e867478dc891b7839fdd5f9a37a47cb44b443a",
+      "sha256_after_path_rewrite": "f0a026c1841115c23930209295e867478dc891b7839fdd5f9a37a47cb44b443a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_13_fairytale_storybook_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_13_fairytale_storybook/dr_social_model_sheet_13_fairytale_storybook_v4_prompt.txt",
+      "sha256_before_path_rewrite": "05265a504b6789210fcc0076b2dc984797b6eb2776c7f6ca48b2e5b25408f316",
+      "sha256_after_path_rewrite": "05265a504b6789210fcc0076b2dc984797b6eb2776c7f6ca48b2e5b25408f316"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_metadata.json",
+      "sha256_before_path_rewrite": "9ae73a5573b2aaab2e721c8714d6916e52b86a35018c972aadd9ad4dd2a92589",
+      "sha256_after_path_rewrite": "9ae73a5573b2aaab2e721c8714d6916e52b86a35018c972aadd9ad4dd2a92589"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1.png",
+      "sha256_before_path_rewrite": "adc6e85568776dd89a0172c5e17d87b146c21f2bec8e1525b780672eb7a56bd0",
+      "sha256_after_path_rewrite": "adc6e85568776dd89a0172c5e17d87b146c21f2bec8e1525b780672eb7a56bd0"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1_art.png",
+      "sha256_before_path_rewrite": "af3d8cfe2e08ada36b44201d7f0501e54c34018719cfa829866dc138faa8017f",
+      "sha256_after_path_rewrite": "af3d8cfe2e08ada36b44201d7f0501e54c34018719cfa829866dc138faa8017f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1_prompt.txt",
+      "sha256_before_path_rewrite": "74bbaf6c2833d81b4638ae4c3b8cd2a658d1d24f6951d850f235166ae6174a7b",
+      "sha256_after_path_rewrite": "74bbaf6c2833d81b4638ae4c3b8cd2a658d1d24f6951d850f235166ae6174a7b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2.png",
+      "sha256_before_path_rewrite": "fda6ac29b32f0b40ddbd80d5795b889aabd55854c6d3d712edffa7064be3cef6",
+      "sha256_after_path_rewrite": "fda6ac29b32f0b40ddbd80d5795b889aabd55854c6d3d712edffa7064be3cef6"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2_art.png",
+      "sha256_before_path_rewrite": "d4a8c81e75b838c015fe5235169bba1038f4cab39779b887faff596e78994e06",
+      "sha256_after_path_rewrite": "d4a8c81e75b838c015fe5235169bba1038f4cab39779b887faff596e78994e06"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2_layout_draft.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2_layout_draft.png",
+      "sha256_before_path_rewrite": "171775a1ea5ebc671be289082199a4c0c6a43782719fe200a51822306da52d6f",
+      "sha256_after_path_rewrite": "171775a1ea5ebc671be289082199a4c0c6a43782719fe200a51822306da52d6f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2_metadata.json",
+      "sha256_before_path_rewrite": "6754af7b6f15edf703bfd4e41051fe40448657377620be98f3f22d0881a0695a",
+      "sha256_after_path_rewrite": "925fb050b4d04f0a84dde04fcdd9d74ba51de94cbd575028a409d45e3d7cb5c0"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2_prompt.txt",
+      "sha256_before_path_rewrite": "3d550c30fa78e37d54e95e7f20cad2ff03e834f81a57cfc7c4df0d50bcd5be76",
+      "sha256_after_path_rewrite": "3d550c30fa78e37d54e95e7f20cad2ff03e834f81a57cfc7c4df0d50bcd5be76"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v3.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3.png",
+      "sha256_before_path_rewrite": "b584fd87ec2fe1560e5a5d77373198ba87d0fd63a714302982c8f35ab34177aa",
+      "sha256_after_path_rewrite": "b584fd87ec2fe1560e5a5d77373198ba87d0fd63a714302982c8f35ab34177aa"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3_art.png",
+      "sha256_before_path_rewrite": "8f1a557dee951b6e53be83fe8fc148943824830d138bed7ad87c95ff4c8f3b2e",
+      "sha256_after_path_rewrite": "8f1a557dee951b6e53be83fe8fc148943824830d138bed7ad87c95ff4c8f3b2e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v3_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3_metadata.json",
+      "sha256_before_path_rewrite": "5c2e18bf1d72d9fef966fa283919ce8d7fe5af94fc2cdf5fe8eb3efc69e06f77",
+      "sha256_after_path_rewrite": "d2f712e2eb55465376287899d9a6f21afeccbf12d4441ce461e253fa1ba70dca"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3_prompt.txt",
+      "sha256_before_path_rewrite": "41b5c85bd18c4a71001506df56cd55e8eb370831668297f4dd1b236a4fe95ced",
+      "sha256_after_path_rewrite": "41b5c85bd18c4a71001506df56cd55e8eb370831668297f4dd1b236a4fe95ced"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v4_art.png",
+      "sha256_before_path_rewrite": "d987d2f8d55307310bc2d56c5d86ed0ebf7de91181749829c8221174966bdf53",
+      "sha256_after_path_rewrite": "d987d2f8d55307310bc2d56c5d86ed0ebf7de91181749829c8221174966bdf53"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v4_prompt.txt",
+      "sha256_before_path_rewrite": "f06fe3df8d6a25ea96f603a584e3086e858bae205164db8a54edfa5f22d6db6a",
+      "sha256_after_path_rewrite": "f06fe3df8d6a25ea96f603a584e3086e858bae205164db8a54edfa5f22d6db6a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v5_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v5_art.png",
+      "sha256_before_path_rewrite": "1a22e9bd2446696c375ef957bb4e596a499969d3822fcaf79c4a760035e47b68",
+      "sha256_after_path_rewrite": "1a22e9bd2446696c375ef957bb4e596a499969d3822fcaf79c4a760035e47b68"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v5_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v5_prompt.txt",
+      "sha256_before_path_rewrite": "fdd65d28538fe78d48e0edd980cfe66358f8969b3d6b87ba0b237eced1984158",
+      "sha256_after_path_rewrite": "fdd65d28538fe78d48e0edd980cfe66358f8969b3d6b87ba0b237eced1984158"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v6_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v6_art.png",
+      "sha256_before_path_rewrite": "f62c387e53e102cadd19b9df89959f93e353340987180d68734c4e5677237ba1",
+      "sha256_after_path_rewrite": "f62c387e53e102cadd19b9df89959f93e353340987180d68734c4e5677237ba1"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v6_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v6_prompt.txt",
+      "sha256_before_path_rewrite": "783f8b2c438d74ed5df5ef9b4f2400558c2a3a77d45b03fb61087c2b6c1f2a63",
+      "sha256_after_path_rewrite": "783f8b2c438d74ed5df5ef9b4f2400558c2a3a77d45b03fb61087c2b6c1f2a63"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v7_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v7_art.png",
+      "sha256_before_path_rewrite": "342cd588426032d67053ebaf86b82dc819f1248f32234fa2d2ef4b5214915697",
+      "sha256_after_path_rewrite": "342cd588426032d67053ebaf86b82dc819f1248f32234fa2d2ef4b5214915697"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v7_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v7_prompt.txt",
+      "sha256_before_path_rewrite": "36f72baeda6ed8ed91d9a253ac4e8bcb99a2492835c09177d6380d0161a4f3b3",
+      "sha256_after_path_rewrite": "36f72baeda6ed8ed91d9a253ac4e8bcb99a2492835c09177d6380d0161a4f3b3"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_metadata.json",
+      "sha256_before_path_rewrite": "f0a504df9a120db62bcad84c2b6d8cfa5bb2e4c888307abc286f18f844e89b1a",
+      "sha256_after_path_rewrite": "f0a504df9a120db62bcad84c2b6d8cfa5bb2e4c888307abc286f18f844e89b1a"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v0_identity_reference.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v0_identity_reference.png",
+      "sha256_before_path_rewrite": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+      "sha256_after_path_rewrite": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png",
+      "sha256_before_path_rewrite": "5e97c74b596c7ffe28c6d4473f2a43e6448908ccb8ae97db2bebde6170515457",
+      "sha256_after_path_rewrite": "5e97c74b596c7ffe28c6d4473f2a43e6448908ccb8ae97db2bebde6170515457"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v1_art.png",
+      "sha256_before_path_rewrite": "e754fef07e91eafc6e0a3d51054ebd5d72e9bc644e8505143458eba3cb4e02cf",
+      "sha256_after_path_rewrite": "e754fef07e91eafc6e0a3d51054ebd5d72e9bc644e8505143458eba3cb4e02cf"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v1_prompt.txt",
+      "sha256_before_path_rewrite": "c1d81f1bc5d2b25d3886770edf0c1ac3f57171e770243ed8a65a92c00d4a440e",
+      "sha256_after_path_rewrite": "c1d81f1bc5d2b25d3886770edf0c1ac3f57171e770243ed8a65a92c00d4a440e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2.png",
+      "sha256_before_path_rewrite": "86a83b5b6c9756b912b4a1a28c3e8263c6810b03bac27fdb075436dc0605bb1c",
+      "sha256_after_path_rewrite": "86a83b5b6c9756b912b4a1a28c3e8263c6810b03bac27fdb075436dc0605bb1c"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2_art.png",
+      "sha256_before_path_rewrite": "933a0eb66ac26956a4e2453a15e780b76e94cb6424f9bfa365a4974de27e3be6",
+      "sha256_after_path_rewrite": "933a0eb66ac26956a4e2453a15e780b76e94cb6424f9bfa365a4974de27e3be6"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2_metadata.json",
+      "sha256_before_path_rewrite": "28fbec870c3da87e354b61e26c7eb463683c263f6ab6eb1d5f735c8b7405e95b",
+      "sha256_after_path_rewrite": "a39dadd7600120be164cbccc3509b1da82fdb4a54a20d09d9228df1a0560d907"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2_prompt.txt",
+      "sha256_before_path_rewrite": "3667513c200c058124fb9dd75423fc2ec015505bda945631a88ea1bb8695227f",
+      "sha256_after_path_rewrite": "3667513c200c058124fb9dd75423fc2ec015505bda945631a88ea1bb8695227f"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v3_art.png",
+      "sha256_before_path_rewrite": "362ee50145ce0e6d866392da11eb701177e9f7f3aa1686c5d9bee06099810a87",
+      "sha256_after_path_rewrite": "362ee50145ce0e6d866392da11eb701177e9f7f3aa1686c5d9bee06099810a87"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v3_prompt.txt",
+      "sha256_before_path_rewrite": "c67e2083dfd5bac5968035b88a97df0c7b508d1b10a5082389e2bcd93225967e",
+      "sha256_after_path_rewrite": "c67e2083dfd5bac5968035b88a97df0c7b508d1b10a5082389e2bcd93225967e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
+      "sha256_before_path_rewrite": "f908e40c2f5cf650e0f3bd7609b5f66b6d910c318b16cacee55c07f026613b96",
+      "sha256_after_path_rewrite": "f908e40c2f5cf650e0f3bd7609b5f66b6d910c318b16cacee55c07f026613b96"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt",
+      "sha256_before_path_rewrite": "3e2657ab4f521a49cfa3f44697d665c2f7ddf3c806096d405ea59a372a2ad04d",
+      "sha256_after_path_rewrite": "3e2657ab4f521a49cfa3f44697d665c2f7ddf3c806096d405ea59a372a2ad04d"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_16_feudal_poetic_v0_identity_reference.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_16_feudal_poetic/dr_social_model_sheet_16_feudal_poetic_v0_identity_reference.png",
+      "sha256_before_path_rewrite": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+      "sha256_after_path_rewrite": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_16_feudal_poetic_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_16_feudal_poetic/dr_social_model_sheet_16_feudal_poetic_v1_art.png",
+      "sha256_before_path_rewrite": "fc3f9b31efbcd1eb5f0e5b3d2012e49910d89261d1f02997810df93e8e452e39",
+      "sha256_after_path_rewrite": "fc3f9b31efbcd1eb5f0e5b3d2012e49910d89261d1f02997810df93e8e452e39"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_16_feudal_poetic_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_16_feudal_poetic/dr_social_model_sheet_16_feudal_poetic_v1_prompt.txt",
+      "sha256_before_path_rewrite": "2f6d0df56bb957b8a56049e3a3a0ec7b33670ad53451f75613ca6fdb1c71f67b",
+      "sha256_after_path_rewrite": "2f6d0df56bb957b8a56049e3a3a0ec7b33670ad53451f75613ca6fdb1c71f67b"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_16_feudal_poetic_v2_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_16_feudal_poetic/dr_social_model_sheet_16_feudal_poetic_v2_art.png",
+      "sha256_before_path_rewrite": "387b541e02818decbddba38d4187372983599b875da41c7118ecbfb5c6abdff7",
+      "sha256_after_path_rewrite": "387b541e02818decbddba38d4187372983599b875da41c7118ecbfb5c6abdff7"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_16_feudal_poetic_v2_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_16_feudal_poetic/dr_social_model_sheet_16_feudal_poetic_v2_prompt.txt",
+      "sha256_before_path_rewrite": "3896d9ce2e5f1980abbc954557c6ba8f9b0c2c4f149b5b264e5ee7dd7da3335c",
+      "sha256_after_path_rewrite": "3896d9ce2e5f1980abbc954557c6ba8f9b0c2c4f149b5b264e5ee7dd7da3335c"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_16_feudal_poetic_v3_art.png",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_16_feudal_poetic/dr_social_model_sheet_16_feudal_poetic_v3_art.png",
+      "sha256_before_path_rewrite": "6522fec8b2a1f5c3f5b9a02b2556640b4ff419bbd53138c87a079224e27b0993",
+      "sha256_after_path_rewrite": "6522fec8b2a1f5c3f5b9a02b2556640b4ff419bbd53138c87a079224e27b0993"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_16_feudal_poetic_v3_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_16_feudal_poetic/dr_social_model_sheet_16_feudal_poetic_v3_prompt.txt",
+      "sha256_before_path_rewrite": "e7f4c4e81dd7937b6babdcbd8f301c8053663adc961e540f92d4158be26db5e1",
+      "sha256_after_path_rewrite": "e7f4c4e81dd7937b6babdcbd8f301c8053663adc961e540f92d4158be26db5e1"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_16_feudal_poetic_v4_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_16_feudal_poetic/dr_social_model_sheet_16_feudal_poetic_v4_prompt.txt",
+      "sha256_before_path_rewrite": "4cfef11623a3b8cd1545d4dbe3c3abc00f2070c5c68d2ac086d38cd0a51288e6",
+      "sha256_after_path_rewrite": "4cfef11623a3b8cd1545d4dbe3c3abc00f2070c5c68d2ac086d38cd0a51288e6"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+      "to": "data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+      "sha256_before_path_rewrite": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+      "sha256_after_path_rewrite": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1_art.png",
+      "to": "data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1_art.png",
+      "sha256_before_path_rewrite": "20d24c2d9d15a2d00e212ad7420bd5585707955a72a7a076c8f9ece505a36f42",
+      "sha256_after_path_rewrite": "20d24c2d9d15a2d00e212ad7420bd5585707955a72a7a076c8f9ece505a36f42"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1_prompt.txt",
+      "to": "data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1_prompt.txt",
+      "sha256_before_path_rewrite": "bc4aeb1f0148b566407fb34e5102b1228805abc5f5dd88b2e0d6035f7f62d346",
+      "sha256_after_path_rewrite": "bc4aeb1f0148b566407fb34e5102b1228805abc5f5dd88b2e0d6035f7f62d346"
+    },
+    {
+      "from": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2_metadata.json",
+      "to": "data/source_art/concept_art/dr_social/approved_records/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2_metadata.json",
+      "sha256_before_path_rewrite": "b98cd85789a1bc6c290e7403e6e459b18a2bf6cfccfa9622d02a6a84388e7b57",
+      "sha256_after_path_rewrite": "ddeed4a2f8c89f5e51265f4ca179c09a4429f8d5e28cc5adf95d6532d12648f7"
+    },
+    {
+      "from": "data/source_art/promotional/Gemini_Generated_Image_brex6lbrex6lbrex.jpeg",
+      "to": "data/source_art/promotional/review_drafts/Gemini_Generated_Image_brex6lbrex6lbrex.jpeg",
+      "sha256_before_path_rewrite": "18dee18e2ff4747a1130cca01f1cefd13eb46a14be73145a51205eae7ffb2266",
+      "sha256_after_path_rewrite": "18dee18e2ff4747a1130cca01f1cefd13eb46a14be73145a51205eae7ffb2266"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_audit_v1.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_audit_v1.json",
+      "sha256_before_path_rewrite": "d3e06ca72a5d22dda1e2db81ca13ce8696872c1a553b14290902bdbdbe585c0f",
+      "sha256_after_path_rewrite": "d3e06ca72a5d22dda1e2db81ca13ce8696872c1a553b14290902bdbdbe585c0f"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_audit_v2.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_audit_v2.json",
+      "sha256_before_path_rewrite": "b725668a6e395590fff05898dd50bf471a1af6bc17138f87098f4cbfe55c6b4f",
+      "sha256_after_path_rewrite": "b725668a6e395590fff05898dd50bf471a1af6bc17138f87098f4cbfe55c6b4f"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_candidate_frame00_audit_v1.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v1.json",
+      "sha256_before_path_rewrite": "cdabe52a1c5a78439af94f70487284422ef23f573cc019b023f93bc3f5eb4c98",
+      "sha256_after_path_rewrite": "cdabe52a1c5a78439af94f70487284422ef23f573cc019b023f93bc3f5eb4c98"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_candidate_frame00_audit_v2.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v2.json",
+      "sha256_before_path_rewrite": "c4a5e945405261293bad7d68937fcdb6104ef16d36a2a00c6f855fb32fd472f8",
+      "sha256_after_path_rewrite": "c4a5e945405261293bad7d68937fcdb6104ef16d36a2a00c6f855fb32fd472f8"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_concept_lineup_v2_manifest.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concept_lineup_v2_manifest.json",
+      "sha256_before_path_rewrite": "2b1ac842a6e5d4f8ee5d9ef59bedfa6ced5cfa8d39acde552c2f061701a9b86c",
+      "sha256_after_path_rewrite": "0ae6c57e11030114339b8f52004f85241bc8872ef9e1eb17ec371e5d115f8d9e"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_concept_lineup_v2_part_01.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concept_lineup_v2_part_01.png",
+      "sha256_before_path_rewrite": "38ca6bcbd9887a7cc628c7df554f7cc1bca10276cac44b06cf88f6e43887d5f3",
+      "sha256_after_path_rewrite": "38ca6bcbd9887a7cc628c7df554f7cc1bca10276cac44b06cf88f6e43887d5f3"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_concept_lineup_v2_part_02.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concept_lineup_v2_part_02.png",
+      "sha256_before_path_rewrite": "458b3e072a9509b4ac7a8c1b6184097ab1f99c77932ea19784030cb2fed7bdab",
+      "sha256_after_path_rewrite": "458b3e072a9509b4ac7a8c1b6184097ab1f99c77932ea19784030cb2fed7bdab"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_concepts_7char_v1.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_concepts_7char_v1.png",
+      "sha256_before_path_rewrite": "9749df03d780745f8b99acd65e8d6b4e4941851fb4913f06de9afe184cd9323a",
+      "sha256_after_path_rewrite": "9749df03d780745f8b99acd65e8d6b4e4941851fb4913f06de9afe184cd9323a"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_frame00_candidates_lineage_v1.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_frame00_candidates_lineage_v1.json",
+      "sha256_before_path_rewrite": "23e02f0bc91e29092bb31ce64cdb37c9b95dc6f97e7ef6e2c0af80f401aedc92",
+      "sha256_after_path_rewrite": "239d57f8b5c1cd352188c7ea012594f860609f92169b8b66b8af35fda4b10774"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_generation_transforms_v1.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_generation_transforms_v1.json",
+      "sha256_before_path_rewrite": "b4c87d3f1935ea2d90ad8bf0b2be1ebf272b3b2f0d99067abbb21a818ec8778e",
+      "sha256_after_path_rewrite": "b4c87d3f1935ea2d90ad8bf0b2be1ebf272b3b2f0d99067abbb21a818ec8778e"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_generation_transforms_v2.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_generation_transforms_v2.json",
+      "sha256_before_path_rewrite": "70beed59ce3b1358d6ed9d13bb9cf95d0d66ded5d638955b714f90f2f42d7d04",
+      "sha256_after_path_rewrite": "70beed59ce3b1358d6ed9d13bb9cf95d0d66ded5d638955b714f90f2f42d7d04"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_review_manifest_v1.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_review_manifest_v1.json",
+      "sha256_before_path_rewrite": "43603de33a51dff7e28e714b784641df83fce9d76927235589279cfacbf5f068",
+      "sha256_after_path_rewrite": "58727d323181c87d949df06620a63ccc67ae2169e51339cbbf77a4d6fbe809f7"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprite_index8_reencodes_v1.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprite_index8_reencodes_v1.json",
+      "sha256_before_path_rewrite": "b312b92039d6bd26cd71ee5bf1406de1a5988b42aedbefed4602ce0a5094a899",
+      "sha256_after_path_rewrite": "b312b92039d6bd26cd71ee5bf1406de1a5988b42aedbefed4602ce0a5094a899"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_alignment_audit_v1.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_alignment_audit_v1.png",
+      "sha256_before_path_rewrite": "db024e542e91125adff6256284c2696c3e261f199aae6b9fe13368855e80ae2a",
+      "sha256_after_path_rewrite": "db024e542e91125adff6256284c2696c3e261f199aae6b9fe13368855e80ae2a"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_alignment_audit_v2.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_alignment_audit_v2.png",
+      "sha256_before_path_rewrite": "2a22cfa8fec9542639f1d5bbade068e5ce20426c516e1360b3f3d6b8ccd0e535",
+      "sha256_after_path_rewrite": "2a22cfa8fec9542639f1d5bbade068e5ce20426c516e1360b3f3d6b8ccd0e535"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_frame00_7char_v1.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_7char_v1.png",
+      "sha256_before_path_rewrite": "65de0afe8a47b920120cc1a6c405fb4a9af91b3e611ca8d1cb7fbd5ae1eee0fc",
+      "sha256_after_path_rewrite": "65de0afe8a47b920120cc1a6c405fb4a9af91b3e611ca8d1cb7fbd5ae1eee0fc"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_frame00_candidate_v1.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_candidate_v1.png",
+      "sha256_before_path_rewrite": "c47e657c1cb25ab024e0ed237867729d2613a79354e4ae2d3d32b8a4dea9de40",
+      "sha256_after_path_rewrite": "c47e657c1cb25ab024e0ed237867729d2613a79354e4ae2d3d32b8a4dea9de40"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_frame00_review_v2.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_review_v2.png",
+      "sha256_before_path_rewrite": "741107363f37dc51ab872fd75f598989e0411be11942ec2c112082ad57b92fd5",
+      "sha256_after_path_rewrite": "741107363f37dc51ab872fd75f598989e0411be11942ec2c112082ad57b92fd5"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_owner_feedback_20261005.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_owner_feedback_20261005.json",
+      "sha256_before_path_rewrite": "a7aed98a65c81a3a559bdea37593ef47c2ab7ca09424445b8a77c38607177e55",
+      "sha256_after_path_rewrite": "64f782964562e48fef1294e374a03ae76355de4434a9ff6a4504cf3c1f1ff860"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_post_treatment_review_report_v1.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_post_treatment_review_report_v1.json",
+      "sha256_before_path_rewrite": "e34c474090c0c6be0db240242349ab8dd86c6dd0a68a826579874c1559fa009d",
+      "sha256_after_path_rewrite": "e34c474090c0c6be0db240242349ab8dd86c6dd0a68a826579874c1559fa009d"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v1.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v1.json",
+      "sha256_before_path_rewrite": "e43d09833ebb3f2ec34a6cfe43b4f048bfc01c1e2f7e9f9cf5a551f6ca88cde8",
+      "sha256_after_path_rewrite": "581c290fdb08362de85ce6a725e94a9faa03196fa7fa9abe4ec5cfe1febaa539"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v1.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v1.png",
+      "sha256_before_path_rewrite": "3800261b6d471548ab5caeb5be52f19b5953f4d3d32e6d2a4aa30f7d11f8ed5a",
+      "sha256_after_path_rewrite": "3800261b6d471548ab5caeb5be52f19b5953f4d3d32e6d2a4aa30f7d11f8ed5a"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v2.json",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v2.json",
+      "sha256_before_path_rewrite": "686672416c58622d1c4ba15bc8266b5f1ad8da801fe28f68d92c4343552b4741",
+      "sha256_after_path_rewrite": "7adcb4577c88da3d651c0e8284a5e47203649c7d53ef1974fc4a9eb18e4f512c"
+    },
+    {
+      "from": "data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v2.png",
+      "to": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v2.png",
+      "sha256_before_path_rewrite": "3a444c91dcba39b72eec0a8c9affb68c0239285cc3b06f1b0669b791c112b236",
+      "sha256_after_path_rewrite": "3a444c91dcba39b72eec0a8c9affb68c0239285cc3b06f1b0669b791c112b236"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/asset_lineage_record_v4.json",
+      "to": "data/source_art/concept_art/alis_landale/approved_records/asset_lineage_record_v4.json",
+      "sha256_after_path_rewrite": "115e9641be0783782da8ed03d70d0991bd2fad7bebe93eaa06cfaea17f1f48bc",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v1.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v1.png",
+      "sha256_after_path_rewrite": "24d59c2aaa50016f3eb5dbf785865e46e5542d13f14f57ce0c8f52564757cddf",
+      "sha256_before_path_rewrite": "24d59c2aaa50016f3eb5dbf785865e46e5542d13f14f57ce0c8f52564757cddf"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v1_alpha_cutout.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v1_alpha_cutout.png",
+      "sha256_after_path_rewrite": "efe5043ea0977c9ebe9104855426494ceef110ad2c83890ce32c06ab5c177690",
+      "sha256_before_path_rewrite": "efe5043ea0977c9ebe9104855426494ceef110ad2c83890ce32c06ab5c177690"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v1_generated.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v1_generated.png",
+      "sha256_after_path_rewrite": "8306221f36afac377778d7788ccc48868a16dba4a3f9f68e6becae8323cec94d",
+      "sha256_before_path_rewrite": "8306221f36afac377778d7788ccc48868a16dba4a3f9f68e6becae8323cec94d"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v2.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v2.png",
+      "sha256_after_path_rewrite": "cd3551881ca0f7c2a1097bc01b979fcad3f23717eed904e75e4d48bc32b05c10",
+      "sha256_before_path_rewrite": "cd3551881ca0f7c2a1097bc01b979fcad3f23717eed904e75e4d48bc32b05c10"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v2_alpha_cutout.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v2_alpha_cutout.png",
+      "sha256_after_path_rewrite": "f1309f157bd4bc52e22e42d8f9a0fca4da3de7c05907dd25c423d7d7fe5847b8",
+      "sha256_before_path_rewrite": "f1309f157bd4bc52e22e42d8f9a0fca4da3de7c05907dd25c423d7d7fe5847b8"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v3.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v3.png",
+      "sha256_after_path_rewrite": "756f5afdefb53328d853c20a15ccca8645fe1570418a608ccb28fda78881ce40",
+      "sha256_before_path_rewrite": "756f5afdefb53328d853c20a15ccca8645fe1570418a608ccb28fda78881ce40"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v3_alpha_cutout.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v3_alpha_cutout.png",
+      "sha256_after_path_rewrite": "9ff186e903742a26f5a250b5ffd725b0727397d4228b05702c623efb6af57280",
+      "sha256_before_path_rewrite": "9ff186e903742a26f5a250b5ffd725b0727397d4228b05702c623efb6af57280"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v3_generated.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v3_generated.png",
+      "sha256_after_path_rewrite": "d4970c455af45547d5786fc147677c76275752a578b9777fcf5b8e0c71f44ce3",
+      "sha256_before_path_rewrite": "d4970c455af45547d5786fc147677c76275752a578b9777fcf5b8e0c71f44ce3"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4_alpha_cutout.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v4_alpha_cutout.png",
+      "sha256_after_path_rewrite": "f5c7263cc6b1575476fae4c10ed2cd62c838eaab50e233e69fdf722974e7635e",
+      "sha256_before_path_rewrite": "f5c7263cc6b1575476fae4c10ed2cd62c838eaab50e233e69fdf722974e7635e"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4_generated.png",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v4_generated.png",
+      "sha256_after_path_rewrite": "627faa24201d4f0207f89ed5ecd35bca9f4cda51a8cfde5814a81e0c15af2957",
+      "sha256_before_path_rewrite": "627faa24201d4f0207f89ed5ecd35bca9f4cda51a8cfde5814a81e0c15af2957"
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_cleanup_prompt_v4.txt",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/prompts/alis_cleanup_prompt_v4.txt",
+      "sha256_after_path_rewrite": "85dfb0ba58004ddf2d16cf88cd3fb4a7fc5953714a1dd06bb699743716fa4fbc",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_edit_prompt_v1.txt",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/prompts/alis_concept_edit_prompt_v1.txt",
+      "sha256_after_path_rewrite": "47b49f3edcb119f9346fcbd9ebc5356bc2995fd70b8f9ef8e2769591d7f704db",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_concept_prompt_v1.txt",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/prompts/alis_concept_prompt_v1.txt",
+      "sha256_after_path_rewrite": "3438fc6ba852cbfd8879db46dd2ad5bd630d0d90b317180e950f513bb2ffa720",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/alis_recolor_prompt_v3.txt",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/prompts/alis_recolor_prompt_v3.txt",
+      "sha256_after_path_rewrite": "d1f23845b25d1d30a9e9259b0ccfdd89526b1c870aa98f44b4d0e3d215e4dab9",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/alis_landale/asset_lineage_record.json",
+      "to": "data/source_art/concept_art/alis_landale/review_drafts/records/asset_lineage_record.json",
+      "sha256_after_path_rewrite": "6da580c0b849900a58cf14f281083788a127b10eee555e1c060e6161f92d7b2b",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/asset_lineage_record_v2.json",
+      "to": "data/source_art/concept_art/ga_warrior/approved_records/asset_lineage_record_v2.json",
+      "sha256_after_path_rewrite": "3e956c5f29361149bc390b87b974737380e9eff148d2e5205037a4378c8b3a5f",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_asset_contract_v2.json",
+      "to": "data/source_art/concept_art/ga_warrior/approved_records/ga_warrior_concept_asset_contract_v2.json",
+      "sha256_after_path_rewrite": "a282948863cdd2fe71f4bc48965adc2678a9575d8fd9c7aef6e85ef3e4ae4e88",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_alpha_mask_v1.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_alpha_mask_v1.png",
+      "sha256_after_path_rewrite": "ac84b1e1a2485d0396ce8024108c614d5753bed8be480b99ccaa153f96fad93e",
+      "sha256_before_path_rewrite": "ac84b1e1a2485d0396ce8024108c614d5753bed8be480b99ccaa153f96fad93e"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_alpha_mask_v2.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_alpha_mask_v2.png",
+      "sha256_after_path_rewrite": "c40a8e62e51652dd33c249a77ac69cf8fa2cb8725357bded38148416528ab65c",
+      "sha256_before_path_rewrite": "c40a8e62e51652dd33c249a77ac69cf8fa2cb8725357bded38148416528ab65c"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v1_alpha.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_alpha.png",
+      "sha256_after_path_rewrite": "57173014257192b1d1ae09729da465945779b2e69e656b130a1674eb7274fdf2",
+      "sha256_before_path_rewrite": "57173014257192b1d1ae09729da465945779b2e69e656b130a1674eb7274fdf2"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v1_cutout_preview.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_cutout_preview.png",
+      "sha256_after_path_rewrite": "298546a949dc078fab94c1cf90c51086b4660955e6ab9701cab656d46c99c1db",
+      "sha256_before_path_rewrite": "298546a949dc078fab94c1cf90c51086b4660955e6ab9701cab656d46c99c1db"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v1_flattened.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_flattened.png",
+      "sha256_after_path_rewrite": "22a706e0239a5f6d6737b7ad986646e4df894d8e9fa3cba92cb22b30007cc0e0",
+      "sha256_before_path_rewrite": "22a706e0239a5f6d6737b7ad986646e4df894d8e9fa3cba92cb22b30007cc0e0"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v1_generated.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_generated.png",
+      "sha256_after_path_rewrite": "a6363a4438cb43dc9d757da2ba581131b61e49b48fa9f754e3db41f07a676454",
+      "sha256_before_path_rewrite": "a6363a4438cb43dc9d757da2ba581131b61e49b48fa9f754e3db41f07a676454"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v1_preview.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_preview.png",
+      "sha256_after_path_rewrite": "80889a3acf58179eb2776366adbac65cc89b902fa754c9ecffc08a705ac48dd8",
+      "sha256_before_path_rewrite": "80889a3acf58179eb2776366adbac65cc89b902fa754c9ecffc08a705ac48dd8"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v1_sms_palette.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v1_sms_palette.png",
+      "sha256_after_path_rewrite": "83dc4d943be7c05b75f8ca4d580f1fc0603ae1cc7b2f4940fbb98d82260b24bd",
+      "sha256_before_path_rewrite": "83dc4d943be7c05b75f8ca4d580f1fc0603ae1cc7b2f4940fbb98d82260b24bd"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_alpha.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_alpha.png",
+      "sha256_after_path_rewrite": "978000f76ab89e3f97c044044500126a03e4e2fca0b6111ae77c6311e5596af9",
+      "sha256_before_path_rewrite": "978000f76ab89e3f97c044044500126a03e4e2fca0b6111ae77c6311e5596af9"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_flattened.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_flattened.png",
+      "sha256_after_path_rewrite": "236f57de0654d24c49840f98e1f8df55ebac33656e7acbd2d4b68d89afb47fe6",
+      "sha256_before_path_rewrite": "236f57de0654d24c49840f98e1f8df55ebac33656e7acbd2d4b68d89afb47fe6"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_generated.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_generated.png",
+      "sha256_after_path_rewrite": "cd6efc4ba8f0fd5ba84f95ad00a357a733d477479be1383bbe7e1771b07a4a7b",
+      "sha256_before_path_rewrite": "cd6efc4ba8f0fd5ba84f95ad00a357a733d477479be1383bbe7e1771b07a4a7b"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_preview.png",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_preview.png",
+      "sha256_after_path_rewrite": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91",
+      "sha256_before_path_rewrite": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91"
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_prompt_v1.txt",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/prompts/ga_warrior_concept_prompt_v1.txt",
+      "sha256_after_path_rewrite": "3c7670a937e3c7a5ee701c958864bbb250f8efd017535c1d5df5e03ffb7c8ecc",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_prompt_v2.txt",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/prompts/ga_warrior_concept_prompt_v2.txt",
+      "sha256_after_path_rewrite": "11b36da45d0613248b1eec29545543558856c2a4a99581fa709487355ef054bb",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/asset_lineage_record_v1.json",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/records/asset_lineage_record_v1.json",
+      "sha256_after_path_rewrite": "17a6c07c79828d5fa18e038e7aa1e10cfca46c8d8f3425e2f082327bf404ec6b",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_asset_contract_v1.json",
+      "to": "data/source_art/concept_art/ga_warrior/review_drafts/records/ga_warrior_concept_asset_contract_v1.json",
+      "sha256_after_path_rewrite": "5c5774da6bcb6279ce75ead066f48637c6ff8fd38592a50186c9f2b9915705cd",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/hayato/asset_lineage_record_harmony_proposal_v2.json",
+      "to": "data/source_art/concept_art/hayato/approved_records/asset_lineage_record_harmony_proposal_v2.json",
+      "sha256_after_path_rewrite": "840e4c8e2f03f5462ceb4ab30e532781732c880d30e79f86878428f31e5f67e0",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/hayato/hayato_concept_sheet_v1.png",
+      "to": "data/source_art/concept_art/hayato/review_drafts/image_iterations/hayato_concept_sheet_v1.png",
+      "sha256_after_path_rewrite": "ea84df49f50ec619c26ded9d345d00e5a4fa742518c24172a827b15253076ecb",
+      "sha256_before_path_rewrite": "ea84df49f50ec619c26ded9d345d00e5a4fa742518c24172a827b15253076ecb"
+    },
+    {
+      "from": "data/source_art/concept_art/hayato/hayato_concept_prompt_v1.txt",
+      "to": "data/source_art/concept_art/hayato/review_drafts/prompts/hayato_concept_prompt_v1.txt",
+      "sha256_after_path_rewrite": "80e9cde04901f2d6c1003e6f762fc3abeba0af6a44b2f2068c1cf446e1fe7957",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/hayato/hayato_concept_prompt_v2_harmony_proposal.txt",
+      "to": "data/source_art/concept_art/hayato/review_drafts/prompts/hayato_concept_prompt_v2_harmony_proposal.txt",
+      "sha256_after_path_rewrite": "7064e6a2833e48b6a01d4d7dafa0a820d90d68f06ec147dda8e2fe0c4758bbcf",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/hayato/asset_lineage_record.json",
+      "to": "data/source_art/concept_art/hayato/review_drafts/records/asset_lineage_record.json",
+      "sha256_after_path_rewrite": "e42b01cb8d921c14ae447a852beadbdfc3f66938750cd08b07c283cc963e627d",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_asset_contract_v4.json",
+      "to": "data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_asset_contract_v4.json",
+      "sha256_after_path_rewrite": "f3b72ec56152e0c63597bdfbf9e9d4a06dfa7e14c58b847078f37627afb75ddb",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_lineage_v4.json",
+      "to": "data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_lineage_v4.json",
+      "sha256_after_path_rewrite": "9dac5d1e1a2af84618095d677c18b9d5d874e591ac550e60779c03f172b2679c",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v1.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v1.png",
+      "sha256_after_path_rewrite": "60b2892bd62ad15b73492915229d1162b94ec08e6d4cda60e44b39f4c9bb2a7a",
+      "sha256_before_path_rewrite": "60b2892bd62ad15b73492915229d1162b94ec08e6d4cda60e44b39f4c9bb2a7a"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v1_alpha_cutout.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v1_alpha_cutout.png",
+      "sha256_after_path_rewrite": "bb08dcbbc450e40c55f1a48ba5ccc3f37ded5645542e5527c28abc76f5b2901d",
+      "sha256_before_path_rewrite": "bb08dcbbc450e40c55f1a48ba5ccc3f37ded5645542e5527c28abc76f5b2901d"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v1_alpha_mask.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v1_alpha_mask.png",
+      "sha256_after_path_rewrite": "5f0d36f18a1171205950bf9fe74c0d1745233b4bd4bf8cedf06876e755c7c307",
+      "sha256_before_path_rewrite": "5f0d36f18a1171205950bf9fe74c0d1745233b4bd4bf8cedf06876e755c7c307"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v1_flattened.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v1_flattened.png",
+      "sha256_after_path_rewrite": "887b5e55a60ec66c930610e726f618dfa11b89b69d523e1f512fd926dcbaff1e",
+      "sha256_before_path_rewrite": "887b5e55a60ec66c930610e726f618dfa11b89b69d523e1f512fd926dcbaff1e"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v1_generated.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v1_generated.png",
+      "sha256_after_path_rewrite": "eb0672b92e27d3f0bd765a0beee9e21011856e02ddda9fb58eb1f63769635195",
+      "sha256_before_path_rewrite": "eb0672b92e27d3f0bd765a0beee9e21011856e02ddda9fb58eb1f63769635195"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v1_preview.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v1_preview.png",
+      "sha256_after_path_rewrite": "ebfd06d944efedf41aee751d2af8815f0cb5570f1e77f9de53e2cc1d61fe51f2",
+      "sha256_before_path_rewrite": "ebfd06d944efedf41aee751d2af8815f0cb5570f1e77f9de53e2cc1d61fe51f2"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v2.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2.png",
+      "sha256_after_path_rewrite": "f00746f576b757f18aadaa0a3bc9da8fd878ead9b5d3b9cd0ef2a008342bcc01",
+      "sha256_before_path_rewrite": "f00746f576b757f18aadaa0a3bc9da8fd878ead9b5d3b9cd0ef2a008342bcc01"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v2_alpha_cutout.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_alpha_cutout.png",
+      "sha256_after_path_rewrite": "1291cc96d19608d3e06e9238b5348b3e448c79c6e17bfe945899656ae14bea94",
+      "sha256_before_path_rewrite": "1291cc96d19608d3e06e9238b5348b3e448c79c6e17bfe945899656ae14bea94"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v2_alpha_mask.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_alpha_mask.png",
+      "sha256_after_path_rewrite": "6df8b6fbba034a7b395874c1bc3703aece1dbe9be190e5e9062bb5fba4f7dc74",
+      "sha256_before_path_rewrite": "6df8b6fbba034a7b395874c1bc3703aece1dbe9be190e5e9062bb5fba4f7dc74"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v2_flattened.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_flattened.png",
+      "sha256_after_path_rewrite": "31567a6034b8653929f8f7f11aba812b0eb57703f04ffa0bff41ca47cd7ec817",
+      "sha256_before_path_rewrite": "31567a6034b8653929f8f7f11aba812b0eb57703f04ffa0bff41ca47cd7ec817"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v2_generated.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_generated.png",
+      "sha256_after_path_rewrite": "b599114fb259a69d292e30ddbbe9101e2dd3fce84408e38695164ebe328b8d39",
+      "sha256_before_path_rewrite": "b599114fb259a69d292e30ddbbe9101e2dd3fce84408e38695164ebe328b8d39"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v2_preview.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_preview.png",
+      "sha256_after_path_rewrite": "0855dbc299879e585e4b7e357e636126877edad4de1d3978264dc58a562fb2b6",
+      "sha256_before_path_rewrite": "0855dbc299879e585e4b7e357e636126877edad4de1d3978264dc58a562fb2b6"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v3_generated.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v3_generated.png",
+      "sha256_after_path_rewrite": "0ea5aecc71ea59e75a0fb5cad367f9ab5b1c6deefb14bc7c3d83dace1288013e",
+      "sha256_before_path_rewrite": "0ea5aecc71ea59e75a0fb5cad367f9ab5b1c6deefb14bc7c3d83dace1288013e"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4_alpha_cutout.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_alpha_cutout.png",
+      "sha256_after_path_rewrite": "20ef2780d0f9a27819ea25474f0c27ff9414ae82e778aaa90160ff96a0ec392a",
+      "sha256_before_path_rewrite": "20ef2780d0f9a27819ea25474f0c27ff9414ae82e778aaa90160ff96a0ec392a"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4_alpha_mask.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_alpha_mask.png",
+      "sha256_after_path_rewrite": "a81b5887437123813b3ba354a7668c8142e85e286824a199537f8d6db640e129",
+      "sha256_before_path_rewrite": "a81b5887437123813b3ba354a7668c8142e85e286824a199537f8d6db640e129"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4_flattened.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_flattened.png",
+      "sha256_after_path_rewrite": "75cfac782b729ae024775d6f5a8e9b50aca28c92160c36d3ab01c860a80b91a8",
+      "sha256_before_path_rewrite": "75cfac782b729ae024775d6f5a8e9b50aca28c92160c36d3ab01c860a80b91a8"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4_generated.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_generated.png",
+      "sha256_after_path_rewrite": "12ad54cef38a24ae57f1b8b183cef9eb78eb34bffa35169a9d9851ad47c400f6",
+      "sha256_before_path_rewrite": "12ad54cef38a24ae57f1b8b183cef9eb78eb34bffa35169a9d9851ad47c400f6"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4_preview.png",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_preview.png",
+      "sha256_after_path_rewrite": "12196c4e20d002ff105ded07ea671a5dfd402d723b291c0bebb5713ef5228035",
+      "sha256_before_path_rewrite": "12196c4e20d002ff105ded07ea671a5dfd402d723b291c0bebb5713ef5228035"
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_cleanup_prompt_v2.txt",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_cleanup_prompt_v2.txt",
+      "sha256_after_path_rewrite": "78000a9a89f5a6baaec9a1e40160e95de235fc58633a7a7f9f7ecc37dc3f1fc2",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_cleanup_prompt_v4.txt",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_cleanup_prompt_v4.txt",
+      "sha256_after_path_rewrite": "ab8f0d7179478b0f21bb45c7a4080418ab89e9e86b173b363e807e1e74f9082c",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_prompt_v1.txt",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_prompt_v1.txt",
+      "sha256_after_path_rewrite": "d66d37cc9953555ceaf3400999c46b0204b00db35e80d8eb943e009b0189e91d",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_prompt_v3.txt",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_prompt_v3.txt",
+      "sha256_after_path_rewrite": "1114fa84a6b03c0880ecfe20f3299b4b6c2b24238634b74fb71cbfea70a21668",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_asset_contract_v1.json",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/records/jj_concept_asset_contract_v1.json",
+      "sha256_after_path_rewrite": "b4cf72465f431476c0c4b1db9573253fbccbb148952af4584e1f7f59437e4c23",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_asset_contract_v2.json",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/records/jj_concept_asset_contract_v2.json",
+      "sha256_after_path_rewrite": "1627363e55f6fe1285cbf1a8d7dab0b8a9432dfc744713d2a44f270fbefc72f8",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_concept_lineage_v2.json",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/records/jj_concept_lineage_v2.json",
+      "sha256_after_path_rewrite": "015eb9c977ff0728b0735b671eaef2d8a41753e53270b7e17829e7e0b03ba101",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_reference_notes.md",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/reference_notes/jj_reference_notes.md",
+      "sha256_after_path_rewrite": "ae861fdb16c2bd546acedde3aecc217f08104d9659c00797d44999f1c3662dbf",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/jj_zillion_ii/jj_reference_notes_v2.md",
+      "to": "data/source_art/concept_art/jj_zillion_ii/review_drafts/reference_notes/jj_reference_notes_v2.md",
+      "sha256_after_path_rewrite": "87ce123fd7977679d4e1c27ee013cfd0e055d795a5d7d4d700c1c3f251946657",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/asset_lineage_record_v1.json",
+      "to": "data/source_art/concept_art/lord_of_the_sword/approved_records/asset_lineage_record_v1.json",
+      "sha256_after_path_rewrite": "a91d7bae775554bb00becfae2ec2d3aa135a5781aef965a534bbc09a5bd67d2c",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1_alpha_cutout.png",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_alpha_cutout.png",
+      "sha256_after_path_rewrite": "be08e17df0dca75dc1b22c4e2ea7e24c1b6213ff3c8a3be455207291aef2814f",
+      "sha256_before_path_rewrite": "be08e17df0dca75dc1b22c4e2ea7e24c1b6213ff3c8a3be455207291aef2814f"
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1_cleanup_generated.png",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_cleanup_generated.png",
+      "sha256_after_path_rewrite": "90ca3ddcc4d78a1925f5b3a77a3ff5fc7a6579a9e71e0e3531759c3212690cce",
+      "sha256_before_path_rewrite": "90ca3ddcc4d78a1925f5b3a77a3ff5fc7a6579a9e71e0e3531759c3212690cce"
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1_generated.png",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_generated.png",
+      "sha256_after_path_rewrite": "a06162ad8ce0c9aa82790a092e9677bc2de547e3bc4009d694e32edc98a47ef1",
+      "sha256_before_path_rewrite": "a06162ad8ce0c9aa82790a092e9677bc2de547e3bc4009d694e32edc98a47ef1"
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1_preclean_indexed.png",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_preclean_indexed.png",
+      "sha256_after_path_rewrite": "b866da18642bad64d2db797826be65f25d8efa233065dc9505a7250ac03def0a",
+      "sha256_before_path_rewrite": "b866da18642bad64d2db797826be65f25d8efa233065dc9505a7250ac03def0a"
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1_surface_cleaned_generated.png",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_surface_cleaned_generated.png",
+      "sha256_after_path_rewrite": "09f1815eb7ebe6072c181643f63f17cba808611c8a42115eb2d59b169121dc37",
+      "sha256_before_path_rewrite": "09f1815eb7ebe6072c181643f63f17cba808611c8a42115eb2d59b169121dc37"
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1_youth_generated.png",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/image_iterations/lord_of_the_sword_concept_sheet_v1_youth_generated.png",
+      "sha256_after_path_rewrite": "8eed2ba1da4f3378fa844d5d134350ad249403aa049b39e02b866c0f30210698",
+      "sha256_before_path_rewrite": "8eed2ba1da4f3378fa844d5d134350ad249403aa049b39e02b866c0f30210698"
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_background_cleanup_prompt_v1.txt",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_background_cleanup_prompt_v1.txt",
+      "sha256_after_path_rewrite": "2cc78a812d4f2d751e687a9b7e6798ba8b0336eae75d6ca955fcfd32d8c2dd73",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_base_generation_prompt_v1.txt",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_base_generation_prompt_v1.txt",
+      "sha256_after_path_rewrite": "22377e11a489833025e8e20000c2008618dcc356ae0f9d50995808bb1049787c",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_prompt_v1.txt",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_concept_prompt_v1.txt",
+      "sha256_after_path_rewrite": "092e59a184fb456167de8e420db0e713549fa9d54ba570a49fb4ccfeca2175d7",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_surface_cleanup_prompt_v1.txt",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_surface_cleanup_prompt_v1.txt",
+      "sha256_after_path_rewrite": "f1bf4fd4766179926337adf4f735c1ac3aa57208789bc30cc385485516baf2c2",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    },
+    {
+      "from": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_youth_edit_prompt_v1.txt",
+      "to": "data/source_art/concept_art/lord_of_the_sword/review_drafts/prompts/lord_of_the_sword_youth_edit_prompt_v1.txt",
+      "sha256_after_path_rewrite": "346554df83d05fc1da7e62f35f986617a63721d2db2ffb2069df2d9612b0d468",
+      "source_sha_note": "Original text hash unavailable after path-reference rewrite; current destination hash is recorded."
+    }
+  ],
+  "interpretation": "The owner-approved harmony sheet is interpreted as the latest Waku Waku 7 two-page roster lineup with the requested relative-height and Zillion pistol corrections. Approval is limited to comparison/reference use.",
+  "independent_review": "pending for roster harmony; no independent review is fabricated.",
+  "verification_note": "Approved artwork binaries retain their recorded SHA-256. Path-bearing text records were rewritten; current destination hashes and bound references were refreshed. Some newly archived text records were path-rewritten before a pre-move digest could be retained.",
+  "additional_concept_folders_organized": [
+    "alis_landale",
+    "ga_warrior",
+    "hayato",
+    "jj_zillion_ii",
+    "lord_of_the_sword"
+  ]
+}

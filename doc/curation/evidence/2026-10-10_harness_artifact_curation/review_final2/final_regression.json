@@ -1,0 +1,289 @@
+{
+  "schema": "sms_independent_focused_regression_v1",
+  "review_status": "pass_focused_scope_only",
+  "tool_sha256": {
+    "artifact_registry.py": "70c73e865e7c70501ebc8721f5f9e29596dfb7badb672f482d59304a175f9ede",
+    "harness_orchestration.py": "af227131b7e7ee7e28e2729ff6465ffbfb1cd2f26ff6c1f21fe9630814b6f719",
+    "audit_learning_capture.py": "2ee7c12f711d14b68d9c657d95529416ad28ffe44493f002e9a9130ad10fd306",
+    "audit_source_raster.py": "4b6dead11d4538b68c9f8bbdf760ee007210076db26ba07a33c3c176d4853b40"
+  },
+  "results": [
+    {
+      "case": "positive_baseline",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R1_location_alias_rejected",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "overlapping locations create competing destinations"
+        ],
+        "warnings": [],
+        "artifact_count": 0,
+        "indexed_file_count": 0,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R2_file_destination_escape_rejected",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "hero-concept-v01: file outside its kind's destination"
+        ],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 0,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R3_hardlink_ownership_rejected",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "weapon-v01: hardlink already owned by hero-concept-v01; use parent ID"
+        ],
+        "warnings": [],
+        "artifact_count": 2,
+        "indexed_file_count": 2,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R4_tasks_{}",
+      "pass": true,
+      "actual": "tasks_not_array"
+    },
+    {
+      "case": "R4_tasks_False",
+      "pass": true,
+      "actual": "tasks_not_array"
+    },
+    {
+      "case": "R4_tasks_0",
+      "pass": true,
+      "actual": "tasks_not_array"
+    },
+    {
+      "case": "R4_tasks_''",
+      "pass": true,
+      "actual": "tasks_not_array"
+    },
+    {
+      "case": "R4_ID_0",
+      "pass": true,
+      "actual": "task_ids_must_be_unique_strings"
+    },
+    {
+      "case": "R4_ID_False",
+      "pass": true,
+      "actual": "task_ids_must_be_unique_strings"
+    },
+    {
+      "case": "R4_ID_[]",
+      "pass": true,
+      "actual": "task_ids_must_be_unique_strings"
+    },
+    {
+      "case": "R4_ID_{}",
+      "pass": true,
+      "actual": "task_ids_must_be_unique_strings"
+    },
+    {
+      "case": "R5_adapter_valid",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [
+          "hero-concept-v01: existing source-only approval declaration imported; no authenticity/production claim"
+        ],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R5_adapter_wrong_character",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "hero-concept-v01: decision is not owner/hash/role-bound"
+        ],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R5_adapter_wrong_scope",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "hero-concept-v01: decision is not owner/hash/role-bound"
+        ],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R5_adapter_pending",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "hero-concept-v01: decision is not owner/hash/role-bound"
+        ],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R5_adapter_wrong_sha",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": false,
+        "problems": [
+          "hero-concept-v01: decision is not owner/hash/role-bound"
+        ],
+        "warnings": [],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    },
+    {
+      "case": "R6_skill_alias_to_rule_rejected",
+      "pass": true,
+      "actual": [
+        "L001: entrypoint resolvido fora de skills/workflows"
+      ]
+    },
+    {
+      "case": "positive_QA_screenshot_without_art_registry",
+      "pass": true,
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [
+          "visual"
+        ],
+        "coordinator_tasks": [],
+        "worker_tasks": [
+          "qa"
+        ],
+        "rejected": [],
+        "tasks": [
+          {
+            "id": "qa",
+            "kind": "test_execution",
+            "write_paths": [
+              "/tmp/smsforge-curation-coverage-20261010/review/six-regression-ugeqg73b/out/qa/screenshot.png"
+            ],
+            "assignment": "worker",
+            "lane": "visual"
+          }
+        ],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": true
+      }
+    },
+    {
+      "case": "asset_destination_protected_even_QA_kind",
+      "pass": true,
+      "actual": {
+        "schema": "harness_plan_v1",
+        "tool": {
+          "name": "harness_orchestration",
+          "version": "1.1.0"
+        },
+        "coordinator_is_single_claim_owner": true,
+        "coordinator_is_single_promotion_owner": true,
+        "max_parallel": 3,
+        "lanes": [],
+        "coordinator_tasks": [],
+        "worker_tasks": [],
+        "rejected": [
+          {
+            "id": "asset",
+            "reason": "visual_outputs_need_valid_registry:missing"
+          }
+        ],
+        "tasks": [],
+        "claim_ceiling": "orchestration_diagnostic_only",
+        "artifact_registry_checked": false,
+        "artifact_registry_problem": null,
+        "preflight_only_not_filesystem_lock": true,
+        "ok": false
+      }
+    },
+    {
+      "case": "positive_actual_dr_social_61_pose_source",
+      "pass": true,
+      "actual": {
+        "schema": "sms_artifact_audit_v1",
+        "ok": true,
+        "problems": [],
+        "warnings": [
+          "dr-social-basic61-owner-source-v1: existing source-only approval declaration imported; no authenticity/production claim",
+          "legacy locations are not exhaustively gated; use inventory before adoption"
+        ],
+        "artifact_count": 1,
+        "indexed_file_count": 1,
+        "claim_ceiling": "organization_and_reference_consistency_only"
+      }
+    }
+  ],
+  "actual_source_record": {
+    "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.json",
+    "sha256": "6f025c5dbc0351c04e767f3fb48f0cd000406ce76dac80daea03dc3e92b14455",
+    "image_sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057"
+  },
+  "limits": [
+    "No emulator/full suite executed.",
+    "Approval checks declared identity/hash/scope consistency, not actor authenticity or semantics of arbitrary prose.",
+    "Actual source control is an in-memory read-only registry, not production approval."
+  ],
+  "selfchecks_file": "final_selfchecks.json",
+  "selfchecks_sha256": "523b7579832f75c66d919027dda51aa57d4a4d6003da25110854dac44826e7b6",
+  "regression_script_sha256": "dfadb8221c35a4d08ba74b79ed6b97f34d4d6fc1e53cccce13aa6c1742393ff0",
+  "all_six_findings_resolved_in_focused_retest": true
+}

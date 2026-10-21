@@ -1,0 +1,129 @@
+{
+  "schema": "sms_independent_backend_review_v1",
+  "reviewer_id": "/root/review_qa_contract",
+  "producer_id": "/root",
+  "review_date": "2026-10-10",
+  "status": "needs_revision",
+  "scope": "Static read-only review of BlastEm SMS bounded private backend, plus authorized parser selfcheck; no native emulator run by reviewer",
+  "evidence": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py",
+      "sha256": "db858f4c60c2cc8d3ee838a030a10590e618fa0cbd604a6cd547d3fdde31353b",
+      "snapshot": "/tmp/smsforge-blastem-native-review/blastem_sms.reviewed.py",
+      "snapshot_sha256": "db858f4c60c2cc8d3ee838a030a10590e618fa0cbd604a6cd547d3fdde31353b"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/session_bridge/isolated.py",
+      "sha256": "cf768a158b035e18c54ac65776b66e5c6aac7811b19d78bd5ec90c3eed0c1e6d"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-10_blastem_sms/root_run/blastem-sms-68c40fe124a94b7cbac8dfc49b844235/session.json",
+      "sha256": "141a7253e3bc33f431b3f83175fb8ace68c590723ffe3c4f2a6942e1a583b08e",
+      "session_id": "blastem-sms-68c40fe124a94b7cbac8dfc49b844235",
+      "state": "failed",
+      "wrapper_sha256": "bf5e68d63409eab6990e5768c5b0f06fccc3646102400dc1924dfea3b99a261a",
+      "artifact_files_hash_verified": [
+        "debugger.log",
+        "debugger_commands.txt",
+        "rom.sms",
+        "sequence.json",
+        "xvfb.log",
+        "cache/mesa_shader_cache/index",
+        "cache/mesa_shader_cache/marker",
+        "cache/mesa_shader_cache/12/9edda84090d12614621f868e3e508f975d9470f8a9cbbf3d5b5375fd5bee67",
+        "cache/mesa_shader_cache/1e/75b51644e0b494eebc54cb72dfaa5dc067a05eb2643e760744553cbc1c2def",
+        "cache/mesa_shader_cache/40/cf50288c1b60a43991b237c24ceef81a805fd09c7139c54cf9411a3592b39a",
+        "cache/mesa_shader_cache/60/87ba49ade817fefe5a298fbd05e95906a2010d8455401fdbba1473e78e3282",
+        "cache/mesa_shader_cache/68/bc874ac80573a8a53b2b891e4734710ce8cc293dd81365115b0a398c74e9d9",
+        "cache/mesa_shader_cache/9a/e9319e0c5151b65dc334eafb717ffcb9f23e3c5b6cf6377fb57a5b10de501d",
+        "cache/mesa_shader_cache/b0/43eb044c7a1027e558615329751de372d4c5170aeefcc1732180a5c1e0931c",
+        "cache/mesa_shader_cache/ce/6ac748de7c1bfd507cb96930fb606efc704b39f103074c8cb3c023538a5b90",
+        "cache/mesa_shader_cache/df/c3ee3379c53feb904ad63f5997e1bad198750ebda62ebc921c971e9ea83ae9",
+        "cache/mesa_shader_cache/ec/ff9086b5d5099017bbdd4d767285f7cea07daa23d3305855720eaedd02bd62",
+        ".config/blastem/blastem.cfg"
+      ]
+    }
+  ],
+  "self_checks": [
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/blastem_sms.py --self-check",
+      "exit_code": 0,
+      "status": "passed",
+      "output": "[SELF-CHECK OK] BlastEm SMS script bounds, machine, PAL and injection rejection",
+      "scope": "Parser bounds, model/region, raw step-command injection; does not exercise lifecycle, debugger, capture or ROM input"
+    }
+  ],
+  "findings": [
+    {
+      "id": "B01",
+      "priority": 2,
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py",
+      "line": 338,
+      "title": "Baseline proof flag can be true without any ROM applicability assertion",
+      "detail": "After baseline dumps, baseline_checked_before_input is set True even when preconditions is omitted or empty. The sequence validates with no preconditions; completed and this boolean cannot prove the intended fight/menu state was reached.",
+      "recommendation": "Record precondition count and explicit status not_requested vs passed; workflow/bundle auditor must require applicable preconditions before claiming a specific tested case."
+    },
+    {
+      "id": "B02",
+      "priority": 2,
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py",
+      "line": 339,
+      "title": "Baseline dump width checked only after all inputs",
+      "detail": "first_ram is sliced for declared magic without confirming its full8192-byte length. A short prefix can match a precondition, allowing input before the final dump-size gate rejects it. Other baseline dump widths are likewise deferred.",
+      "recommendation": "Validate every baseline dump expected size before the first binding input, then evaluate ROM preconditions."
+    },
+    {
+      "id": "B03",
+      "priority": 2,
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py",
+      "line": 387,
+      "title": "Cleanup exception prevents remaining cleanup and failure evidence",
+      "detail": "finally calls terminate_group(p), terminate_group(x), closes FDs and writes metadata sequentially. TimeoutExpired/OSError in the first call skips Xvfb termination, descriptor closure and final session.json. terminate_group has a second wait(timeout3) that can raise.",
+      "recommendation": "Attempt emulator and Xvfb cleanup independently in nested try/finally; aggregate errors, attempt every FD close, write failed cleanup metadata and reject promotion."
+    },
+    {
+      "id": "B04",
+      "priority": 2,
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py",
+      "line": 115,
+      "title": "Malformed precondition types lack explicit validation",
+      "detail": "preconditions itself is not checked as a list and equals_hex is not checked as a string before bytes.fromhex. Values such as preconditions:null or equals_hex:true raise TypeError; main catches neither TypeError nor AttributeError. This is a rejection rather than false acceptance, but yields traceback instead of the promised structured failure.",
+      "recommendation": "Validate list and equals_hex string explicitly; reject unknown top-level fields to detect misspelled preconditions before boot."
+    },
+    {
+      "id": "B05",
+      "priority": 3,
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py",
+      "line": 367,
+      "title": "Informative screenshot flag is advisory, not a visual pass",
+      "detail": "A monochrome256x192 screenshot sets screenshot_informative False but can still end state completed. A real blank screen may be valid diagnostic state; consumers must distinguish execution completion from usable visual evidence.",
+      "recommendation": "Bundle visual eligibility must reject non-informative capture; retain RAM-only diagnostics with explicit limited scope."
+    },
+    {
+      "id": "B06",
+      "priority": 3,
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py",
+      "line": 73,
+      "title": "Runtime package manifest is local integrity, not an independent immutable archive proof",
+      "detail": "Binary hash is independently pinned. Supporting files are checked against mutable installation.json and no required supporting-file inventory is enforced beyond blastem. This protects ordinary drift for inventoried assets, not intentional/reduced manifest edits.",
+      "recommendation": "At minimum require known supporting files and hash the installation manifest in session provenance. Do not claim full release authenticity from the nominal archive hash alone."
+    }
+  ],
+  "verified_strengths": [
+    "Private Xvfb allocated with displayfd, cookie and TCP disabled; bwrap exposes only its X socket inside private/tmp. Environment strips SDL/LD and desktop/audio variables, fixesX11/softwareGL and uses dummy audio; /dev is private.",
+    "No physical/host joystick required: debugger binddown/bindup is process local. Forced -m sms, preserved rom.sms, sms1/sms2 config and correct SMS1/2 bindings b/c avoid MD/PBC inheritance.",
+    "Current code explicitly rejects SDL renderer fallback/GLEW initialization failure. Snapshot dimensions and dump sizes are validated before completed.",
+    "PTY prevents debugger desktop-terminal bootstrap; per-command markers serialize stepping; boundaries enforce requested VDP deltas. Internal cycle is correctly limited and is not FPS or CPU duration.",
+    "PAL and MD models rejected, limits1..3600frames, dummy audio not tested, fps_claim/hardware_validationFalse and diagnostic_states_only ceilings explicit.",
+    "Observed historical root session is failed with both cleanup booleans true and no fabricated boundaries/CPU claims. Its wrapper hash differs from current source and it is not a current runtime PASS."
+  ],
+  "limits": [
+    "No emulator started by this reviewer; debugger, current render calibration, native P1/P2 input and pause/NMI remain outside this review.",
+    "Selfcheck does not exercise run() lifecycle or renderer fallback; request targeted negatives in parent QA.",
+    "No artistic judgment, 60FPS claim, audio/music claim, fight-mechanics approval or game delivery.",
+    "Read-only source inspection; only report/source snapshot under /tmp/smsforge-blastem-native-review written.",
+    "No SGDK changes or luta_mugen/doc access."
+  ],
+  "next_action": "Fix lifecycle/baseline metadata weaknesses, add bundle auditor and private workflow; then native acceptance on SMS oracle plus real ROM for exact SHA, including failed precondition, short dump, renderer fallback and pause/each input.",
+  "claim_ceiling": "implementation_review_and_parser_only"
+}

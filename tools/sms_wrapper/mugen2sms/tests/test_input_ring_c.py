@@ -604,3 +604,7 @@ def test_contadores_do_anel_igualam_a_propria_recontagem_em_cada_tick(tmp_path):
     assert any(r[2] > 0 for r in depois), ("pulso que nenhum padrao consultado "
                                            "consome sumiu do anel")
     assert any(r[2] == 0 for r in depois), "mar sem tick de anel limpo"
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

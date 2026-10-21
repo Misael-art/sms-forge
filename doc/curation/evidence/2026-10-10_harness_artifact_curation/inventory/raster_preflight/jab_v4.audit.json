@@ -1,0 +1,44 @@
+{
+  "schema": "sms_source_raster_audit_v1",
+  "ok": true,
+  "scope": "saved_sprite_sheet_source_preconversion",
+  "claims": {
+    "declared_slots_only": true,
+    "background_uniformity": false,
+    "artistic_quality": false,
+    "sms_runtime_palette": false,
+    "runtime_validated": false,
+    "promotion_approved": false
+  },
+  "image": {
+    "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/social_light_jab_candidate_v4.png",
+    "sha256": "22ca69b14ef0b9e60e643228353b2bdcff3b45c3c8253de1e348bfa067f20db9",
+    "bytes": 1091936
+  },
+  "problems": [],
+  "measured": {
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "unique_rgb": 83402,
+    "alpha_zero_pixels": 0,
+    "alpha_255_pixels": 1572864,
+    "partial_alpha_pixels": 0,
+    "declared_frame_ids": [
+      "J01",
+      "J02",
+      "J03",
+      "J04",
+      "J05",
+      "J06"
+    ],
+    "declared_frame_count": 6,
+    "exact_key_pixels": 706581
+  },
+  "contract": {
+    "path": "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_v4.contract.json",
+    "sha256": "b918b62619006dbbdbf6096650c41e42c0cdeb951d2775396edc80134c52bc07"
+  }
+}

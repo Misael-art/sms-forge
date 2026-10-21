@@ -1,0 +1,46 @@
+{
+  "schema": "mof_asset_lineage_v1",
+  "asset": "joe_musashi_shadow_dancer_model_user_approved.png",
+  "status": "owner_approved_concept",
+  "owner_visual_review": {
+    "date": "2026-10-03",
+    "decision": "The owner selected this attached yellow-accent version as the approved concept reference.",
+    "approved_artifact": "joe_musashi_shadow_dancer_model_user_approved.png",
+    "approved_artifact_sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1"
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "related_generated_source": "joe_musashi_shadow_dancer_model_v1_source.png",
+    "related_generated_source_sha256": "3f38a1a96183a949a9d04e32f3daf06485c93b4f458ff326ea29d312f42aa502",
+    "note": "The approved attachment matches the v1 concept design; it differs from the related source by 45 pixels and is preserved separately as the authoritative approved artifact."
+  },
+  "palette_reference": {
+    "description": "Takashi - Standing Right, Shadow Dancer, Master System",
+    "url": "https://www.smspower.org/Sprites/ShadowDancer-SMS",
+    "source_sha256": "ae6bb1dcb97dee95e917d2cde204da70d161f3c1bab3f3933a96f53fa9fc7639",
+    "use": "costume and color roles only; no external pixels copied"
+  },
+  "palette_derivative": {
+    "path": "joe_musashi_shadow_dancer_model_v1_sms_palette.png",
+    "sha256": "1845b3de8890ebecf8b597939bcb5d9fe0d2a83ec39dad0f4a9595221517adf0",
+    "derived_from": "joe_musashi_shadow_dancer_model_v1_source.png",
+    "palette_entry": "joe_musashi_shadow_dancer_sms",
+    "useful_colors": 7,
+    "transparent_index": 0,
+    "note": "Technical palette derivative; this file was not separately selected by the owner as the approved concept image."
+  },
+  "validation": {
+    "palette_generator": "PASS: 13 project palettes, all SMS 6-bit and within useful-color limits",
+    "resource_gate": "PASS: the 7-color v1 palette derivative matches the declared character palette",
+    "animation_ready": false,
+    "rom_integration": "not done",
+    "emulator_validation": "not done; concept art only"
+  },
+  "claims": {
+    "approved_concept_artifact": true,
+    "palette_derivative_separately_owner_approved": false,
+    "runtime_ready": false,
+    "rom_bound": false,
+    "emulator_validated": false
+  }
+}

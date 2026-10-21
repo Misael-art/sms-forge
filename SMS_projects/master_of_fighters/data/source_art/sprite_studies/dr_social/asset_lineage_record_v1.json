@@ -1,0 +1,42 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "dr_social_idle_sheet_v1",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_sheet_study",
+  "channel": "built_in_image_gen",
+  "inputs": [
+    {
+      "path": "/run/user/1000/codex-desktop/tmp/codex-clipboard-c9e129b3-da86-4774-b567-bf7cbb18e3a8.png",
+      "sha256": "5fd0682e10dc23e2f7e85aed47c616a070b9776297b5d185e96932557e293423",
+      "role": "layout_and_idle_cadence_inspiration_only; no character pixels copied"
+    },
+    {
+      "path": "data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_concept_sheet_v2.png",
+      "sha256": "5ede6f71adde64bd31e4e995ca0af6c99f5890bc2e050131893ff174fe93975f",
+      "role": "Dr. Social identity and costume reference"
+    }
+  ],
+  "prompt": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_sheet_prompt_v1.txt",
+    "sha256": "5d676c3a98447388ebe1a734113aeaca9001c3d271e16bc084eb336b6dd5a8f1"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_sheet_v1.png",
+    "sha256": "dab82dc3efa61ef2701b34fd6661a972d2e347993571520b7df9a4bf1b6871ce",
+    "dimensions_px": [2079, 756]
+  },
+  "status": "source_candidate",
+  "visual_check": {
+    "four_full_body_idle_frames": true,
+    "cane_and_victorian_costume_visible": true,
+    "fully_human": true,
+    "transparent_canvas": true,
+    "opaque_rgb_colors": 271,
+    "visible_rgb_colors": 110146,
+    "target_palette_colors": 12,
+    "palette_limit_met": false,
+    "target_logical_height_px": 80,
+    "normalized_to_target_size": false
+  },
+  "next_gate": "manual sprite/palette translation and size review before any res integration; not emulator-tested"
+}

@@ -1,0 +1,49 @@
+--- tools/sms_wrapper/mugen2sms/generators/scene_cut.py
++++ scene_cut.py + MUGEN frame lineage fields (draft)
+@@ -878,6 +878,8 @@
+              first_bank: int = 2,
+              project_json: Path | None = None) -> dict:
+     ch = character_loader.load(Source(source_path))
++    source_sprites_by_key = {(sprite.group, sprite.image): sprite
++                            for sprite in ch.sprites}
+     config = json.loads(config_path.read_text(encoding="utf-8"))
+     source_limitations = config.get("source_limitations", [])
+     if (not isinstance(source_limitations, list) or
+@@ -1052,6 +1054,7 @@
+         header = header[:-len(guard_end)]
+         pose_frames: dict[str, list[dict]] = {}
+         source_frames = {}
++        final_by_symbol = {artifact.symbol: artifact for artifact in final}
+         for role in roles:
+             aid = int(role["action"])
+             action = selected[aid]
+@@ -1073,11 +1076,29 @@
+                                                     "raw_duration": frame.time,
+                                                     "stream_ticks": stream_ticks,
+                                                     "width": width, "height": height})
++                frame_asset_refs = {}
++                source_sprite = source_sprites_by_key[(frame.group, frame.image)]
++                for palette_variant, asset_symbol in (("p1", tile_symbol), ("p2", p2_symbol)):
++                    asset_bank, asset_offset = bank_map[asset_symbol]
++                    asset_data = final_by_symbol[asset_symbol].data
++                    frame_asset_refs[palette_variant] = {
++                        "symbol": asset_symbol, "bank": asset_bank,
++                        "offset": asset_offset, "size": len(asset_data),
++                        "sha256": hashlib.sha256(asset_data).hexdigest(),
++                    }
+                 source_frames[f"anim:{aid}.{i}"] = {
+                     "class": fidelity.by_id[f"anim:{aid}.{i}"].classe,
+                     "size_source": source_sizes[(frame.group, frame.image)],
+                     "size_after_pre_scale": [sprite.width, sprite.height],
+                     "size_runtime": [width, height],
++                    "source_air": {"action": aid, "frame_index": i,
++                                    "line": frame.line, "group": frame.group,
++                                    "image": frame.image},
++                    "source_sff": {"group": source_sprite.group, "image": source_sprite.image,
++                                    "sprite_index": source_sprite.index,
++                                    "axis": [source_sprite.axis_x, source_sprite.axis_y],
++                                    "pixel_sha256": hashlib.sha256(source_sprite.pixels).hexdigest()},
++                    "generated_tile_assets": frame_asset_refs,
+                     "scale": (scale_report["ratio"] if scale_report else divisor),
+                     "uniform_scale_ratio": (scale_report["ratio"]
+                                              if scale_report else None),

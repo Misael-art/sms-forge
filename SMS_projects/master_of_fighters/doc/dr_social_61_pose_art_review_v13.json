@@ -1,0 +1,154 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_animation_source_v07",
+  "producer": "codex_sprite_refinement_v7",
+  "asset": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+    "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "role": "sole visual identity reference"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "semantic_palette_role_confinement",
+    "grid_alignment",
+    "pose_count_and_order"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+          "role": "sole visual identity reference; GDD/TDD constrain sequence and hardware"
+        }
+      ],
+      "observed_defects": [
+        "v06 contained burgundy pixels beyond the cravat/cuffs, including costume edges and cane-adjacent regions.",
+        "v07 maps burgundy outside dynamically anchored cravat/cuff regions to nearby valid material roles without changing alpha geometry; human visual confirmation is still required.",
+        "The original candidate still requires frame-by-frame review for anatomy, pixel clusters, face, cane attachment/terminal, pose identity and temporal readability."
+      ],
+      "revision_notes": [
+        "v07 derives pixel data from archived v06; approved CPS2-Alpha-Cel v4 remains the sole identity authority.",
+        "3389 burgundy pixels were reassigned; 793 remain in the algorithmically anchored cravat/cuff regions. The 61-frame alpha masks and pose order are unchanged.",
+        "This producer checklist is not an independent review or owner approval; no ROM or hardware budget claim is made."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "pending",
+          "note": "Burgundy-role cleanup was measured; overall clusters and residual isolated colors require independent visual review."
+        },
+        "face_detail_readability": {
+          "status": "pending",
+          "note": "Hair/skin roles are indexed; verify eyes, glasses and expression at 1x and nearest-neighbor 4x."
+        },
+        "outline_and_cutout": {
+          "status": "pending",
+          "note": "Grid/edge and alpha geometry are measured; inspect outline noise, stray pixels and cutout on light/dark backgrounds."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Three-tone suit roles remain; verify contiguous cel-shaded blocks and no remaining color confetti in every frame."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Verify that each fold keeps consistent light/base/shadow flow across the sequence."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Verify both hands, grip and cane continuity frame by frame."
+        },
+        "equipment_geometry": {
+          "status": "pending",
+          "note": "Verify cane shaft, hand contact and rounded ferrule; ensure no duplicate or blade-like reading."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "The raster grid is preserved; judge anatomy, silhouette and completeness of each pose independently."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "Inspect at native 80x80 before acceptance."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pending",
+          "note": "The v7 operation confines burgundy algorithmically; independently inspect all palette roles, especially white/yellow, hair, suit, cane and boots."
+        },
+        "grid_alignment": {
+          "status": "pass",
+          "note": "640x720 indexed PNG; exact 8x9 grid of 80x80 cells; no opaque pixel touches a cell edge."
+        },
+        "pose_count_and_order": {
+          "status": "pending",
+          "note": "Measured row counts 4/8/8/8/5/8/8/8/4; independently confirm semantic pose identity and temporal order."
+        }
+      }
+    }
+  ],
+  "producer_measurements": {
+    "width_px": 640,
+    "height_px": 720,
+    "grid": "8x9 cells; 80x80 pixels each",
+    "active_poses": 61,
+    "blank_cells": 11,
+    "row_counts": [
+      4,
+      8,
+      8,
+      8,
+      5,
+      8,
+      8,
+      8,
+      4
+    ],
+    "useful_palette_colors": 12,
+    "palette_indices_used": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "partial_alpha_pixels": 0,
+    "cells_touching_edge": 0,
+    "frames_with_orphan_components_lt4px": 0,
+    "head_role_corrections": 61,
+    "burgundy_pixels_v06": 4182,
+    "burgundy_pixels_v07": 793,
+    "burgundy_pixels_reassigned": 3389,
+    "changed_pixels_outside_burgundy_role": 0,
+    "alpha_geometry_changed": false
+  },
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "promotion_status": "candidate_only; no res integration, ROM build, hardware budget or runtime approval",
+  "claim_ceiling": "indexed 61-pose candidate with structural and burgundy-role preflight only; artistic review and owner approval pending"
+}

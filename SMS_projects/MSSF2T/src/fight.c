@@ -6,6 +6,7 @@
 #include "sfx_shot.h"
 #include "sfx_hurt.h"
 #include "sfx_down.h"
+#include "sfx_fight.h"
 
 Fighter P[2];
 unsigned char g_gs;
@@ -17,6 +18,13 @@ unsigned char g_attract;
 unsigned char g_banner;
 unsigned char g_banner_id;
 unsigned char g_shake;
+unsigned char g_round_number;
+ControlMode g_control_mode[2];
+static unsigned int g_replay_keys[2];
+
+static unsigned char contact_count;
+static unsigned char contact_mask;
+static Fighter blank_fighter;
 
 /* Probe SMRT — definidos em src/main.c (mapa 0xC7E0..0xC7FC). Escritas
  * ADITIVAS de instrumentacao: medir a janela REAL do soco na RAM (collide()
@@ -101,6 +109,20 @@ static unsigned char cur_pose[2], cur_flip[2];
 static signed char meta_ram[2][64];
 static unsigned char meta_dirty[2];
 
+/* Comparação enquanto a máscara ainda é de 16 bits. Cast direto de
+ * PORT_B_KEY_* para unsigned char perde LEFT/RIGHT/B1/B2 (A02). */
+#define key_down(keys, mask) ((unsigned char)(((keys) & (mask)) != 0))
+
+void fight_set_control_mode(unsigned char who, unsigned char mode) {
+    if (who < 2 && mode <= CONTROL_REPLAY)
+        g_control_mode[who] = mode;
+}
+
+void fight_set_replay_input(unsigned char who, unsigned int keys) {
+    if (who < 2)
+        g_replay_keys[who] = keys;
+}
+
 /* Cada SFX no canal para o qual FOI AUTORADO.
  *
  * make_psg_assets.py gera sfx_shot para SFX_CHANNEL2 e sfx_hit para
@@ -126,6 +148,15 @@ static void psg_sfx(const unsigned char *sfx, unsigned char ch) {
 /* Fireball: sfx_shot, canal 2 (o canal do proprio asset). */
 static void psg_beep(void) {
     psg_sfx(sfx_shot, SFX_CHANNEL2);
+}
+
+/* Voz da abertura: "FIGHT" sintetizado por formantes nos canais 1+2+3
+ * (mascara verificada em sdk/devkitSMS/PSGlib/PSGlib.h). Fora do cooldown
+ * de impacto porque dispara num momento fixo do round — o PSGSFXFrame da
+ * lib rouba os tres canais da musica por ~0,4 s e devolve sozinho. */
+static void psg_voice_fight(void) {
+    PSGSFXPlay((void *)sfx_fight,
+               SFX_CHANNEL1 | SFX_CHANNEL2 | SFX_CHANNEL3);
 }
 
 /* Impacto: sfx_hurt ("hero recebe dano"), canal 3. Semantica e canal certos. */
@@ -447,9 +478,27 @@ static void set_state(unsigned char who, unsigned int st) {
 }
 
 static void reset_positions(void) {
-    P[0].x = 40; P[0].y = GROUND_Y; P[0].vy = 0; P[0].facing = 1;
-    P[1].x = 176; P[1].y = GROUND_Y; P[1].vy = 0; P[1].facing = 0;
-    P[0].fireball_on = 0; P[1].fireball_on = 0;
+    unsigned char who, rounds;
+    /* Reset é uma fronteira de estado, não só uma teletransportação. */
+    for (who = 0; who < 2; who++) {
+        /* A rodada preserva apenas o placar; a atribuição zera todos os
+         * bytes transitivos de Fighter, inclusive qualquer campo novo. */
+        rounds = P[who].rounds;
+        P[who] = blank_fighter;
+        P[who].hp = HP_MAX;
+        P[who].rounds = rounds;
+        P[who].x = who ? 176 : 40;
+        P[who].y = GROUND_Y;
+        P[who].facing = who ? 0 : 1;
+        st_on[who] = 0;
+        st_len[who] = 0;
+    }
+    st_turn = 0;
+    contact_count = 0;
+    contact_mask = 0;
+    g_hitstop = 0;
+    g_shake = 0;
+    g_tics = 0;
     P[0].state = P[1].state = 0;
     set_state(0, ST_IDLE);
     set_state(1, ST_IDLE);
@@ -482,9 +531,8 @@ static void title_enter(void) {
     g_gs = GS_TITLE;
     t_wait = 0;
     g_attract = 1;
-    P[0].hp = HP_MAX; P[1].hp = HP_MAX;
     P[0].rounds = 0; P[1].rounds = 0;
-    g_timer = 99; g_tics = 0; g_hitstop = 0; g_shake = 0;
+    g_timer = 99;
     g_banner = 0; g_banner_id = BN_NONE;
     scr_sky = 0;                 /* zera antes de congelar, senao o ceu salta */
     reset_positions();
@@ -502,8 +550,10 @@ static void title_exit(unsigned char demo) {
     hud_reset();
     hud_static();
     g_attract = demo;
-    P[0].hp = HP_MAX; P[1].hp = HP_MAX;
     P[0].rounds = 0; P[1].rounds = 0;
+    g_round_number = 0;
+    g_control_mode[0] = demo ? CONTROL_CPU : CONTROL_HUMAN;
+    g_control_mode[1] = demo ? CONTROL_CPU : CONTROL_HUMAN;
     reset_positions();
     g_gs = GS_ROUND; g_timer = 99; g_tics = 0;
     banner(BN_ROUND1, 90);
@@ -536,17 +586,9 @@ void fight_init(void) {
     /* O mapa guarda indices relativos (byte); o banco 256+ entra aqui. */
     stage_map_draw();
 
-    P[0].hp = HP_MAX; P[1].hp = HP_MAX;
-    P[0].rounds = 0; P[1].rounds = 0;
-    P[0].hist_i = 0; P[1].hist_i = 0;
-    g_gs = GS_ROUND; g_timer = 99; g_tics = 0; g_hitstop = 0;
-    g_shake = 0;
-    g_attract = 1;
     g_live = 0;
     cur_bank[0] = bank_b(0); cur_bank[1] = bank_b(1);
     cur_pose[0] = cur_pose[1] = 0xFF;
-    st_on[0] = st_on[1] = 0;
-    st_len[0] = st_len[1] = 0;
     reset_positions();
     PSGPlay((void *)music_battle);
     /* A ROM nasce na abertura, nao no meio de um round. */
@@ -632,7 +674,6 @@ static void end_round(unsigned char loser) {
     set_state(loser, ST_KO);
     set_state((unsigned char)(1 - loser), ST_WIN);
     g_gs = GS_KO;
-    banner(BN_KO, 120);
 }
 
 static void apply_hit(unsigned char att, unsigned char def, unsigned char dmg) {
@@ -656,12 +697,44 @@ static void apply_hit(unsigned char att, unsigned char def, unsigned char dmg) {
     g_hitstop = 6;
     g_shake = 6;
     psg_hit();
-    if (P[def].hp == 0) {
-        end_round(def);
-    } else {
+    if (P[def].hp != 0) {
         set_state(def, ST_HIT);
         P[def].x += P[def].facing ? -4 : 4;
     }
+}
+
+static void record_contact(unsigned char identity) {
+    /* Há no máximo dois normais e dois projéteis por tick; o limite é
+     * estrutural e não depende de um contador que possa estourar. */
+    contact_mask |= (unsigned char)(1 << identity);
+    contact_count++;
+}
+
+static void resolve_contacts(void) {
+    /* O bit é a identidade compacta do contato: 0/1 normais de P0/P1,
+     * 2/3 projéteis. O snapshot permite aplicar todos depois da coleta. */
+    if (!contact_count) return;
+    if (contact_mask & 1)
+        apply_hit(0, 1, (unsigned char)(P[0].state == ST_KICK ? 10 : 7));
+    if (contact_mask & 2)
+        apply_hit(1, 0, (unsigned char)(P[1].state == ST_KICK ? 10 : 7));
+    if (contact_mask & 4) apply_hit(0, 1, 12);
+    if (contact_mask & 8) apply_hit(1, 0, 12);
+    /* O resultado só é decidido depois do snapshot inteiro: trade e dupla
+     * KO não dependem da ordem P0/P1. */
+    if (P[0].hp == 0 && P[1].hp == 0) {
+        psg_ko();
+        set_state(0, ST_KO);
+        set_state(1, ST_KO);
+        g_gs = GS_KO;
+    } else if (P[0].hp == 0 || P[1].hp == 0) {
+        end_round((unsigned char)(P[0].hp == 0 ? 0 : 1));
+    }
+    if (P[0].hp == 0 || P[1].hp == 0) {
+        banner(BN_KO, 120);
+    }
+    contact_count = 0;
+    contact_mask = 0;
 }
 
 static void collide(void) {
@@ -671,6 +744,8 @@ static void collide(void) {
      * entao a janela ativa do P1 sai daqui por ~14 bytes em vez de ~30 no
      * fight_update. Zerado no topo: quem nao esta em PUNCH/KICK deixa 0. */
     probe_atkwin = 0;
+    contact_count = 0;
+    contact_mask = 0;
     for (a = 0; a < 2; a++) {
         b = (unsigned char)(1 - a);
         if (P[a].state != ST_PUNCH && P[a].state != ST_KICK) continue;
@@ -691,7 +766,7 @@ static void collide(void) {
         by1 = P[b].y + 60;
         if (ax < bx + 16 && ax + 12 > bx && ay0 < by1 && ay1 > by0) {
             P[a].hit_used = 1;   /* um golpe, um acerto */
-            apply_hit(a, b, (unsigned char)(P[a].state == ST_KICK ? 10 : 7));
+            record_contact(a);
         }
     }
     for (a = 0; a < 2; a++) {
@@ -703,9 +778,10 @@ static void collide(void) {
         if (P[a].fx < bx + 16 && P[a].fx + 16 > bx &&
             P[a].fy < by1 && P[a].fy + 16 > by0) {
             P[a].fireball_on = 0;
-            apply_hit(a, b, 12);
+            record_contact((unsigned char)(a + 2));
         }
     }
+    resolve_contacts();
 }
 
 /* Corpos deixam de se atravessar: quem anda empurra, ninguem ocupa o mesmo
@@ -776,20 +852,30 @@ static void attract_script(unsigned char *left, unsigned char *right,
     else if (t >= 150 && t < 175) *down = 1;
 }
 
-static void control(unsigned char who, unsigned int keys, unsigned char cpu) {
-    unsigned char left  = (unsigned char)(keys & (who ? PORT_B_KEY_LEFT  : PORT_A_KEY_LEFT));
-    unsigned char right = (unsigned char)(keys & (who ? PORT_B_KEY_RIGHT : PORT_A_KEY_RIGHT));
-    unsigned char down  = (unsigned char)(keys & (who ? PORT_B_KEY_DOWN  : PORT_A_KEY_DOWN));
-    unsigned char up    = (unsigned char)(keys & (who ? PORT_B_KEY_UP    : PORT_A_KEY_UP));
-    unsigned char b1    = (unsigned char)(keys & (who ? PORT_B_KEY_1     : PORT_A_KEY_1));
-    unsigned char b2    = (unsigned char)(keys & (who ? PORT_B_KEY_2     : PORT_A_KEY_2));
+static void control(unsigned char who, unsigned int keys) {
+    unsigned char mode = g_control_mode[who];
+    unsigned int source_keys = 0;
+    unsigned char left, right, down, up, b1, b2;
     unsigned char dir = 0, back, fwd;
     signed int dist;
+
+    if (mode == CONTROL_HUMAN)
+        source_keys = keys;
+    else if (mode == CONTROL_REPLAY)
+        source_keys = g_replay_keys[who];
+
+    /* Decodificáão P2 permanece em 16 bits até a comparação (A02). */
+    left  = key_down(source_keys, who ? PORT_B_KEY_LEFT  : PORT_A_KEY_LEFT);
+    right = key_down(source_keys, who ? PORT_B_KEY_RIGHT : PORT_A_KEY_RIGHT);
+    down  = key_down(source_keys, who ? PORT_B_KEY_DOWN  : PORT_A_KEY_DOWN);
+    up    = key_down(source_keys, who ? PORT_B_KEY_UP    : PORT_A_KEY_UP);
+    b1    = key_down(source_keys, who ? PORT_B_KEY_1     : PORT_A_KEY_1);
+    b2    = key_down(source_keys, who ? PORT_B_KEY_2     : PORT_A_KEY_2);
 
     if (who == 0 && g_attract)
         attract_script(&left, &right, &b1, &b2, &down, &up);
 
-    if (cpu && !(left | right | down | up | b1 | b2)) {
+    if (mode == CONTROL_CPU && !(left | right | down | up | b1 | b2)) {
         dist = P[1].x - P[0].x;
         if (dist < 0) dist = -dist;
         if (dist < 44) {
@@ -803,7 +889,10 @@ static void control(unsigned char who, unsigned int keys, unsigned char cpu) {
                      && (g_frame & 8))
                 right = 1;
         } else if ((g_frame & 7) < 5) {
-            left = 1;
+            /* IA aproxima pela posição, não por uma direção fixa. Depois
+             * de uma troca de lado o caminho continua semanticamente certo. */
+            if (P[who].x < P[1 - who].x) right = 1;
+            else left = 1;
         }
     }
 
@@ -880,7 +969,9 @@ static void next_round(void) {
     unsigned char win1 = (unsigned char)(P[0].hp == 0 && P[1].hp > 0);
     if (win0) P[0].rounds++;
     else if (win1) P[1].rounds++;
-    else { P[0].rounds++; P[1].rounds++; }   /* duplo KO / tempo empatado */
+    /* Empate não fabrica uma vitória para nenhum lado. O número da rodada
+     * avança separadamente, para ROUND2 continuar correto após empate. */
+    g_round_number++;
 
     if (P[0].rounds >= 2 || P[1].rounds >= 2) {
         g_gs = GS_RESULT;
@@ -889,10 +980,9 @@ static void next_round(void) {
                : (P[1].rounds > P[0].rounds ? BN_P2WINS : BN_DRAW), 255);
         return;
     }
-    P[0].hp = HP_MAX; P[1].hp = HP_MAX;
     reset_positions();
     g_gs = GS_ROUND; g_timer = 99; g_tics = 0;
-    banner((unsigned char)(BN_ROUND1 + P[0].rounds + P[1].rounds), 90);
+    banner((unsigned char)(BN_ROUND1 + (g_round_number > 2 ? 2 : g_round_number)), 90);
 }
 
 #define TITLE_DEMO_WAIT 540   /* ~9 s parado -> a ROM se demonstra sozinha */
@@ -925,7 +1015,7 @@ void fight_update(unsigned int keys) {
         if (g_banner == 0) {
             g_gs = GS_FIGHT;
             banner(BN_FIGHT, 40);
-            psg_beep();
+            psg_voice_fight();
         }
         return;
     }
@@ -971,8 +1061,8 @@ void fight_update(unsigned int keys) {
         return;
     }
 
-    control(0, keys, 0);
-    control(1, keys, 1);
+    control(0, keys);
+    control(1, keys);
     apply_gravity(0);
     apply_gravity(1);
     separate();

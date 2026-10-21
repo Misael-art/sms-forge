@@ -1,0 +1,20 @@
+{
+  "input": {
+    "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/out/evidence/sessions/7da4cdeb7fdd49d29da11163e5cfe584/worst_frame/v082_stage_counts.json",
+    "sha256": "66aa6803babc7741ecf82f27baffb1bc971c29cdb8f1d23036236a12756acdb8"
+  },
+  "validation": {
+    "ok": true,
+    "problems": [],
+    "baseline_exposed_frames": 0,
+    "first_crossing_frames_by_stage": {
+      "after_stream": 105,
+      "after_palette": 0,
+      "after_hud": 0,
+      "after_sat": 1
+    },
+    "claim_ceiling": "declared_boundary_consistency_only",
+    "budget_passed": false,
+    "limits": "Gate checks declared numeric consistency, not whether ROM counters really froze at the seal. Coordinator must review instrumentation and source/observation binding. Same sealed window and one boolean observation per frame/stage required. No CPU durations, sole root cause, multi-wrap inference, or safe upload rate."
+  }
+}

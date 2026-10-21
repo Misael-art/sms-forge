@@ -1,0 +1,78 @@
+{
+  "schema": "sms_animation_semantics_v1",
+  "project": "arena_nocturna",
+  "required_states": [
+    "hero_idle",
+    "hero_walk",
+    "hero_attack",
+    "boss_idle",
+    "boss_telegraph",
+    "boss_hurt",
+    "boss_dead",
+    "impact"
+  ],
+  "actions": [
+    {
+      "name": "hero_idle",
+      "frames": [
+        {"png": "res/sprites/hero.png", "pivot": [8, 16]},
+        {"png": "res/sprites/hero_walk_1.png", "pivot": [8, 16]}
+      ]
+    },
+    {
+      "name": "hero_walk",
+      "frames": [
+        {"png": "res/sprites/hero_walk_1.png", "pivot": [8, 16]},
+        {"png": "res/sprites/hero_walk_2.png", "pivot": [8, 16]},
+        {"png": "res/sprites/hero_walk_3.png", "pivot": [8, 16]}
+      ]
+    },
+    {
+      "name": "hero_attack",
+      "frames": [
+        {"png": "res/sprites/hero_walk_3.png", "pivot": [8, 16]},
+        {"png": "res/sprites/hero_walk_2.png", "pivot": [8, 16]}
+      ]
+    },
+    {
+      "name": "boss_idle",
+      "frames": [
+        {"png": "res/sprites/boss_tl.png", "pivot": [32, 32]},
+        {"png": "res/sprites/boss_tr.png", "pivot": [32, 32]}
+      ]
+    },
+    {
+      "name": "boss_telegraph",
+      "frames": [
+        {"png": "res/sprites/boss_charge_tl.png", "pivot": [32, 32]},
+        {"png": "res/sprites/boss_charge_tr.png", "pivot": [32, 32]}
+      ]
+    },
+    {
+      "name": "boss_hurt",
+      "frames": [
+        {"png": "res/sprites/boss_hurt_tl.png", "pivot": [32, 32]},
+        {"png": "res/sprites/boss_hurt_tr.png", "pivot": [32, 32]}
+      ]
+    },
+    {
+      "name": "boss_dead",
+      "frames": [
+        {"png": "res/sprites/boss_dead_tl.png", "pivot": [32, 32]},
+        {"png": "res/sprites/boss_dead_tr.png", "pivot": [32, 32]}
+      ]
+    },
+    {
+      "name": "impact",
+      "frames": [
+        {"png": "res/sprites/impact_0.png", "pivot": [8, 8]},
+        {"png": "res/sprites/impact_1.png", "pivot": [8, 8]},
+        {"png": "res/sprites/impact_2.png", "pivot": [8, 8]}
+      ]
+    }
+  ],
+  "notes": {
+    "runtime": "poses são streamadas para slots fixos de VRAM; o manifest mede semântica, não quantidade de tiles simultâneos",
+    "counter": "contra-ataque é FX de entidade e tem leitura registrada no vídeo, não entra no roster de poses de personagem"
+  }
+}

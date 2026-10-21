@@ -77,12 +77,13 @@
 #include "o3/o3_blocks.h"
 #include "o3/o3_anim.h"
 #include "o3/o3_arcs.h"
+#include "o3/psg_sfx.h"   /* M7/D11: SFX PSG reautorados (una unica inclusao) */
 #include "o3/o3_rows.h"
 
 /* Header SEGA + SDSC (boot em Master System real/emulador que checa o
  * header; M5). SDSC com AUTO_DATE (0,0,0 no fonte). */
 SMS_EMBED_SEGA_ROM_HEADER(0, 0);
-SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "openbor_sms_rev1 O3",
+SMS_EMBED_SDSC_HEADER(0, 1, 2026, 10, 18, "SMSForge", "openbor_sms_rev1 O3",
                                 "combate O3: stream bancado, hit, IA");
 
 /* VCounter: porta do registro de status (molde O2/luta_mugen). */
@@ -134,9 +135,13 @@ volatile unsigned char __at(0xC7FF) probe_p2z;        /* v2: profundidade do ini
  *            primeiro chunk ja nao cabe. */
 #define O3_COMMIT_MARGIN 22u
 #define O3_COMMIT_PROLOG (O3_COMMIT_MARGIN + 8u)
+/* Lote C: quando os DOIS atores querem a pose corrente no mesmo quadro, o
+ * primeiro recebe no maximo este teto; o resto da janela fica para o segundo.
+ * Pre-carga especulativa nunca passa na frente de uma pose corrente alheia. */
+#define O3_UPLOAD_CONTEND_CAP 128u
+#define O3_SERVICE_TRACE 0           /* 1 = contadores auditados (nao entregar) */
 #define O3_AI_THINK 12u              /* juizo de ataque (gs/5 = 40 ticks NTSC) */
 #define O3_DRAW_ASM 1                /* 1 = nucleo asm do draw (M5); 0 = C-ref (A/B) */
-#define O3_SPILL_TRACE 0             /* 0 no fechamento M5; 1 = diag TEMP (nao entregar) */
 #define O3_FACING_LEFT 0u
 #define O3_FACING_RIGHT 1u
 
@@ -215,11 +220,21 @@ typedef struct {
     unsigned char up_done;        /* chunk final ja copiado; CPU finaliza */
     unsigned char slot_pose[2];   /* conteudo de cada slot (0xFF = vazio) */
     unsigned int up_off;          /* bytes ja copiados do bloco */
+    /* Identity of the animation activation and of the SAT actually sent.
+     * queued is copied to shown only after SMS_copySpritestoSAT. Reusing
+     * identical pixel data is legal; reusing a previous activation's box is not. */
+    unsigned int generation;
+    unsigned int queued_generation, shown_generation;
+    unsigned char queued_frame, queued_facing, queued_pose, queued_valid;
+    unsigned char shown_frame, shown_facing, shown_pose, shown_valid;
 } o3_actor;
 
 static o3_actor pl;
 static o3_actor e;
 static unsigned char e_think;
+/* Decisao do upload para o proximo VBlank (fase de CPU, nao no VBlank):
+ * bit0/1 pendente, bit2/3 want, bit6 inimigo primeiro. */
+static unsigned char sched_flags;
 static unsigned int cam;           /* quantizada em 8 px (cam & ~7) */
 static unsigned char written_col;  /* ultima coluna de mundo escrita na PNT */
 /* Coluna de BG fatiada (M6): cursor persiste entre quadros. Escrita inteira
@@ -235,6 +250,11 @@ static unsigned char hp_drawn, hp_drawn_e;
  * proximos quadros (medido: 1 tile ~1,6 linha de VBlank). */
 static unsigned char hud_pl_lo, hud_pl_hi, hud_pl_fill;
 static unsigned char hud_e_lo, hud_e_hi, hud_e_fill;
+/* M7 (D11): arbitragem minima dos SFX. Declaradas DEPOIS de todos os
+ * globais do ator/camera para nao deslocar pl/e (lidos pelo probe em
+ * 0xC000/0xC030). Contrato: doc/audio_provenance_manifest.json. */
+static unsigned char sfx_owner;    /* prioridade em execucao; 0 = livre */
+static unsigned char sfx_pending;  /* maior prioridade pedida no quadro */
 static volatile unsigned char __at(0xC7A0) ec[O3_ROWS]; /* zeros por linha (asm) */
 
 /* Interface fixa C <-> nucleo asm do draw (M5). Enderecos absolutos para o
@@ -267,41 +287,50 @@ extern unsigned char SpriteTableY[];
 extern unsigned char SpriteTableXN[];
 extern unsigned char SpriteNextFree;
 
-#if O3_SPILL_TRACE
-/* Diag M5 (inativo com O3_SPILL_TRACE 0; bancada so para diagnostico):
- * perfil de custo de 5 chunks de 64 B no topo
- * do VBlank (quadro 100) + serie de leituras do gate no ultimo quadro, em bytes
- * livres do corredor (C7CC..C7DF; C7D2 = vline_min e C7E0+ = header/diag/frame).
- * NAO usar 0xC400: C45C e variavel viva do programa (medido por varredura de
- * operandos absolutos na ROM — o map nao lista as estaticas do main).
- * pr0..pr5 = VCounter antes/depois de cada um dos 5 chunks (320 B);
- * rd0..rd5 + rd_n = as 6 primeiras leituras do gate (e quantas houve) no
- * ultimo quadro; t_pl/t_e = VCounter apos stream_commit(pl)/(e). */
-volatile unsigned char __at(0xC7CC) diag_pr0;
-volatile unsigned char __at(0xC7CD) diag_pr1;
-volatile unsigned char __at(0xC7CE) diag_pr2;
-volatile unsigned char __at(0xC7CF) diag_pr3;
-volatile unsigned char __at(0xC7D0) diag_pr4;
-volatile unsigned char __at(0xC7D1) diag_pr5;
-volatile unsigned char __at(0xC7D3) diag_rd0;
-volatile unsigned char __at(0xC7D4) diag_rd1;
-volatile unsigned char __at(0xC7D5) diag_commit_chunks;    /* live: chunks do quadro */
-volatile unsigned char __at(0xC7D6) diag_commit_bytes_lo;  /* live: bytes do quadro */
-volatile unsigned char __at(0xC7D7) diag_commit_bytes_hi;
-volatile unsigned char __at(0xC7D8) diag_vc_last;          /* live: ultima leitura */
-volatile unsigned char __at(0xC7D9) diag_rd2;
-volatile unsigned char __at(0xC7DA) diag_rd3;
-volatile unsigned char __at(0xC7DB) diag_rd4;
-volatile unsigned char __at(0xC7DC) diag_rd5;
-volatile unsigned char __at(0xC7DD) diag_rd_n;             /* leituras no quadro */
-volatile unsigned char __at(0xC7DE) diag_t_e;              /* pos stream_commit(e) */
-volatile unsigned char __at(0xC7DF) diag_t_pl;             /* pos stream_commit(pl) */
-static unsigned char spill_v1, spill_v2, spill_v3;
-#endif
+/* Lote C: bloco minimo auditado (C7CC..C7D1; C7D2 = probe_vline_min e
+ * C7E0+ = corredor). Todo __at e volatile (L009). Bytes por ator por quadro,
+ * flags de pendencia/vontade/ordem e VCounter antes/depois do par de commits.
+ * Idade e espera sao derivadas do estado do ator lido na mesma linha; nao
+ * pagam stores na fase de CPU (medido: um bloco maior derrubava 128 -> 64 B/f).
+ * Declarados sempre (o gate de corredor deriva sondas do fonte); usados
+ * apenas quando O3_SERVICE_TRACE=1. */
+volatile unsigned char __at(0xC7CC) svc_bytes_p;
+volatile unsigned char __at(0xC7CD) svc_bytes_e;
+volatile unsigned char __at(0xC7CE) svc_flags;
+volatile unsigned char __at(0xC7D0) svc_vc0;
+volatile unsigned char __at(0xC7D1) svc_vc1;
 
 static int iabs(int v)
 {
     return v < 0 ? -v : v;
+}
+
+/* M7 (D11): arbitragem dos SFX. Contrato do manifesto de proveniencia:
+ * fall(3) > impact(2) > attack(1); igual mantem o atual; menor/igual e
+ * descartado, sem fila; maior preempta sem retomar (PSGSFXPlay ja para o
+ * stream anterior). A prioridade do owner limpa quando o stream termina. */
+static void sfx_request(unsigned char prio)
+{
+    if (prio > sfx_pending)
+        sfx_pending = prio;
+}
+
+static void sfx_update(void)
+{
+    if (sfx_owner != 0u && PSGSFXGetStatus() == PSG_STOPPED)
+        sfx_owner = 0u;
+    if (sfx_pending == 0u)
+        return;
+    if (sfx_owner == 0u || sfx_pending > sfx_owner) {
+        if (sfx_pending >= SFX_FALL_PRIORITY)
+            PSGSFXPlay((void *)sfx_fall, SFX_CHANNEL3);
+        else if (sfx_pending >= SFX_IMPACT_PRIORITY)
+            PSGSFXPlay((void *)sfx_impact, SFX_CHANNEL3);
+        else
+            PSGSFXPlay((void *)sfx_attack, SFX_CHANNEL3);
+        sfx_owner = sfx_pending;
+    }
+    sfx_pending = 0u;
 }
 
 static unsigned char pose_of(const o3_anim *an, unsigned char idx,
@@ -317,9 +346,35 @@ static unsigned char pose_now(const o3_actor *a)
 
 static void start_anim(o3_actor *a, unsigned char id)
 {
+    a->generation++;
     a->anim = id;
     a->frame = 0;
     a->timer = a->as->tbl[id].frames[0].delay;
+}
+
+static unsigned char actor_presented(const o3_actor *a)
+{
+    return a->shown_valid && a->shown_generation == a->generation
+        && a->shown_frame == a->frame && a->shown_facing == a->facing
+        && a->shown_pose == pose_now(a);
+}
+
+static void queue_presentation(o3_actor *a)
+{
+    a->queued_generation = a->generation;
+    a->queued_frame = a->frame;
+    a->queued_facing = a->facing;
+    a->queued_pose = a->disp_pose;
+    a->queued_valid = (a->disp_pose == pose_now(a));
+}
+
+static void latch_presentation(o3_actor *a)
+{
+    a->shown_generation = a->queued_generation;
+    a->shown_frame = a->queued_frame;
+    a->shown_facing = a->queued_facing;
+    a->shown_pose = a->queued_pose;
+    a->shown_valid = a->queued_valid;
 }
 
 /* ------------------------------------------------------------------ *
@@ -513,12 +568,13 @@ static void stream_update(o3_actor *a)
 
     if (a->up_done) {                       /* copia terminou no VBlank */
         a->slot_pose[a->up_slot] = a->up_pose;
-        if (a->up_want || a->up_pose == want) {
+        if (a->up_pose == want) {
             a->disp = a->up_slot;           /* troca so com a copia pronta */
             a->disp_pose = a->up_pose;
         }
         a->up_pose = 0xFFu;
         a->up_done = 0;
+        tgt = (unsigned char)(1u - a->disp);
     }
 
     if (a->up_pose == 0xFFu) {
@@ -529,6 +585,7 @@ static void stream_update(o3_actor *a)
             } else {
                 a->up_pose = want;
                 a->up_slot = tgt;
+                a->slot_pose[tgt] = 0xFFu; /* overwritten slot is not resident */
                 a->up_off = 0;
                 a->up_want = 1;
             }
@@ -537,27 +594,48 @@ static void stream_update(o3_actor *a)
             if (nxt != 0xFFu && nxt != want && a->slot_pose[tgt] != nxt) {
                 a->up_pose = nxt;               /* pre-carga da pose seguinte */
                 a->up_slot = tgt;
+                a->slot_pose[tgt] = 0xFFu;
                 a->up_off = 0;
                 a->up_want = 0;
             }
         }
-    } else if (a->up_want) {
-        /* Copia desejada em andamento: deixa COMPLETAR (M5). A banda da
-         * janela de VBlank e menor que a taxa de ticks do ataque (3 ticks
-         * contra ~5 quadros de copia da maior pose); reiniciar a cada
-         * mudanca de want congelava a pose exibida para sempre. Ao
-         * terminar, o topo deste bloco inicia a want mais recente. */
-    } else if (want != a->disp_pose && a->up_pose != want) {
-        if (a->slot_pose[a->up_slot] == want) {
+    } else if (want != a->disp_pose) {
+        if (a->up_pose == want) {
+            /* A pre-carga virou a pose corrente enquanto copiava. Promover e
+             * obrigatorio: sem isto o escalonador a trata como especulativa e
+             * a pose atual do jogador pode esperar a dor inteira do inimigo. */
+            a->up_want = 1;
+        } else if (a->slot_pose[a->up_slot] == want) {
             a->up_pose = 0xFFu;                 /* pre-carga ja servia o alvo */
             a->disp = a->up_slot;
             a->disp_pose = want;
         } else {
             a->up_pose = want;                  /* interrompe a pre-carga */
             a->up_want = 1;
+            a->slot_pose[a->up_slot] = 0xFFu;
             a->up_off = 0;
         }
     }
+}
+
+/* Roda na fase de CPU, depois de stream_update dos dois atores. O VBlank
+ * apenas executa a ordem. Regra medida: jogador primeiro em disputa; a unica
+ * preempcao e a dor do inimigo (reacao com prazo de feel), que nao pode
+ * esperar a pose grande de ataque terminar. Pose de caminhada do inimigo NAO
+ * preempta pose corrente do jogador (SRF puro faminto o jogador por 27+ q). */
+static void sched_update(void)
+{
+    unsigned char pp = (unsigned char)(pl.up_pose != 0xFFu && !pl.up_done);
+    unsigned char ep = (unsigned char)(e.up_pose != 0xFFu && !e.up_done);
+    unsigned char pw = (unsigned char)(pp && pl.up_want);
+    unsigned char ew = (unsigned char)(ep && e.up_want);
+    unsigned char fe = 0u;
+
+    if (ew && (!pw || e.state == O3_S_PAIN))
+        fe = 1u;
+    sched_flags = (unsigned char)((pp ? 1u : 0u) | (ep ? 2u : 0u)
+                                  | (pw ? 4u : 0u) | (ew ? 8u : 0u)
+                                  | (fe ? 64u : 0u));
 }
 
 /* Bloco de VBlank: um chunk do upload pendente, dentro da janela (D8).
@@ -596,19 +674,6 @@ static unsigned int stream_commit(o3_actor *a, unsigned int budget)
      * (era o grosso das ~4,6 linhas de overhead C por chunk no M5). */
     while (off < total && done < budget) {
         vc = SMS_VCounterPort;
-#if O3_SPILL_TRACE
-        switch (diag_rd_n) {
-        case 0u: diag_rd0 = vc; break;
-        case 1u: diag_rd1 = vc; break;
-        case 2u: diag_rd2 = vc; break;
-        case 3u: diag_rd3 = vc; break;
-        case 4u: diag_rd4 = vc; break;
-        case 5u: diag_rd5 = vc; break;
-        default: break;
-        }
-        diag_rd_n++;
-        diag_vc_last = vc;
-#endif
         if (vc < 0xC0u)
             break;                              /* ja fora da janela */
         /* M6 (re-medido): 1 chunk de 64 B custa ~10 linhas depois do hoist
@@ -623,16 +688,6 @@ static unsigned int stream_commit(o3_actor *a, unsigned int budget)
         if (n > budget - done)
             n = budget - done;
         SMS_VRAMmemcpy(vaddr, (const void *)saddr, n);
-#if O3_SPILL_TRACE
-        diag_commit_chunks++;
-        {
-            unsigned int b = (unsigned int)diag_commit_bytes_lo
-                             | ((unsigned int)diag_commit_bytes_hi << 8);
-            b += n;
-            diag_commit_bytes_lo = (unsigned char)b;
-            diag_commit_bytes_hi = (unsigned char)(b >> 8);
-        }
-#endif
         off += n;
         vaddr += n;
         saddr += n;
@@ -649,6 +704,7 @@ static unsigned int stream_commit(o3_actor *a, unsigned int budget)
  * ------------------------------------------------------------------ */
 static void start_attack(o3_actor *a)
 {
+    sfx_request(SFX_ATTACK_PRIORITY);  /* D11: ataque aceito (1x/ativacao) */
     a->state = O3_S_ATTACK;
     a->hit_used = 0;
     start_anim(a, a->as->attack);
@@ -689,11 +745,12 @@ static void fsm_tick(o3_actor *a)
 
     if (a->state == O3_S_DEAD && a->timer == 0u)
         return;                              /* morte: ultimo quadro fica */
-    if (pose_now(a) != a->disp_pose)
+    if (!actor_presented(a))
         return;                              /* D8: pose ready */
     if (a->timer) {
         a->timer--;
-        return;
+        if (a->timer)
+            return;
     }
     d = (unsigned char)(a->frame + 1u);
     if (d < an->count) {
@@ -715,6 +772,12 @@ static void arc_advance(o3_actor *a)
 
     /* Pouso checado ANTES da leitura da tabela: o inicio do arco pode estar
      * no fim (juggle entra na altura atual) e t passaria do ultimo indice. */
+    if (a->arc == O3_ARC_TOSS && t >= O3_TOSS_FRAMES && a->alt > 6u) {
+        /* Continue descending at the adapted toss cap. No high-altitude
+         * snap at the end of the table, including entry at altitude 200. */
+        a->alt -= 6u;
+        return;
+    }
     if ((a->arc == O3_ARC_JUMP && t >= O3_JUMP_FRAMES)
         || (a->arc == O3_ARC_TOSS && t >= O3_TOSS_FRAMES)
         || (a->arc == O3_ARC_ENTRY && t >= O3_ENTRY_FRAMES)) {
@@ -722,6 +785,7 @@ static void arc_advance(o3_actor *a)
         a->alt = 0;
         a->arc = O3_ARC_NONE;
         if (was_toss) {
+            sfx_request(SFX_FALL_PRIORITY);  /* D11: contato com o solo */
             a->frame = a->as->tbl[a->as->fall].land;   /* sequencia de land */
             a->timer = a->as->tbl[a->as->fall].frames[a->frame].delay;
         } else {
@@ -736,7 +800,10 @@ static void arc_advance(o3_actor *a)
         d = (int)o3_jump_x[t] - (int)o3_jump_x[t - 1u];
         right = a->facing;
     } else if (a->arc == O3_ARC_TOSS) {
-        a->alt = o3_toss_y[t];
+        /* Integrate displacement from the contact altitude. Starting a hit
+         * never changes altitude, even outside the old toss envelope. */
+        int next = (int)a->alt + (int)o3_toss_y[t] - (int)o3_toss_y[t - 1u];
+        a->alt = (unsigned char)(next > 0 ? next : 0);
         d = (int)o3_toss_x[t] - (int)o3_toss_x[t - 1u];
         right = (unsigned char)!a->facing;   /* derruba para tras do facing */
     } else {
@@ -917,10 +984,13 @@ static void actor_advance(o3_actor *a)
         a->hitstop--;
         return;
     }
-    if (pose_now(a) != a->disp_pose)
-        return;                            /* D8: pose ready (segura o FSM) */
-    if (a->state == O3_S_FALL && a->arc)
+    if (a->state == O3_S_FALL && a->arc) {
+        /* Physics has its own VDP clock; I/O cannot suspend gravity. Land
+         * installs a new timer, whose first eligible call is after its SAT. */
         arc_advance(a);
+        if (!a->arc)
+            return;
+    }
     fsm_tick(a);
 }
 
@@ -959,6 +1029,7 @@ static unsigned char hit_test(const o3_actor *a, const o3_actor *v,
 static void apply_hit(o3_actor *a, o3_actor *v, const o3_attack *at,
                       unsigned char hitstop)
 {
+    sfx_request(SFX_IMPACT_PRIORITY);  /* D11: hit confirmado */
     a->hit_used = 1;
     a->hitstop = hitstop;
     v->hitstop = hitstop;                  /* hitpause tambem na vitima */
@@ -972,14 +1043,10 @@ static void apply_hit(o3_actor *a, o3_actor *v, const o3_attack *at,
     if (v->state == O3_S_FALL && v->arc == O3_ARC_TOSS)
         return;                            /* re-hit na queda: so hp/guarda */
     if (v->alt > 0u || v->dead) {
-        unsigned char t = 0;
         v->state = O3_S_FALL;
         start_anim(v, v->as->fall);
         v->arc = O3_ARC_TOSS;
-        while (t < O3_TOSS_FRAMES && o3_toss_y[t] < v->alt)
-            t++;                           /* juggle: entra na altitude atual */
-        v->arc_t = t;
-        v->alt = o3_toss_y[t];
+        v->arc_t = 0;              /* retain exact altitude at contact */
     } else {
         v->state = O3_S_PAIN;
         start_anim(v, v->as->pain);
@@ -988,12 +1055,14 @@ static void apply_hit(o3_actor *a, o3_actor *v, const o3_attack *at,
 
 static void resolve_hits(void)
 {
-    if (pl.state == O3_S_ATTACK && !pl.hit_used
+    if (pl.state == O3_S_ATTACK && !pl.hit_used && !pl.hitstop
+        && actor_presented(&pl)
         && pl.frame >= o3_ax_attack.first && pl.frame <= o3_ax_attack.last) {
         if (hit_test(&pl, &e, &o3_ax_attack))
             apply_hit(&pl, &e, &o3_ax_attack, O3_HITSTOP_AX);
     }
-    if (e.state == O3_S_ATTACK && !e.hit_used
+    if (e.state == O3_S_ATTACK && !e.hit_used && !e.hitstop
+        && actor_presented(&e)
         && e.frame >= o3_long_attack.first && e.frame <= o3_long_attack.last) {
         if (hit_test(&e, &pl, &o3_long_attack))
             apply_hit(&e, &pl, &o3_long_attack, O3_HITSTOP_LONG);
@@ -1419,6 +1488,8 @@ static void actor_spawn(o3_actor *a, const o3_as *as, const o3_art *art,
 {
     a->as = as;
     a->art = art;
+    a->generation = 0;
+    a->queued_valid = a->shown_valid = 0;
     a->x = x;
     a->z = z;
     a->alt = o3_entry_y[0];
@@ -1451,6 +1522,7 @@ void main(void)
     unsigned int keys;
 
     SMS_init();
+    PSGSetSFXVolumeAttenuation(0);     /* M7: atenuacao cheia antes do 1o SFX */
     SMS_setSpriteMode(SPRITEMODE_TALL);
     SMS_useFirstHalfTilesforSprites(1);
     SMS_displayOff();
@@ -1466,6 +1538,11 @@ void main(void)
     probe_worst_done = 0;
     probe_vline_min = 0xFFu;
     probe_phase = 0;
+#if O3_SERVICE_TRACE
+    svc_bytes_p = 0u;
+    svc_bytes_e = 0u;
+    svc_flags = 0u;
+#endif
 
     actor_spawn(&pl, &pl_as, &pl_art, O3_PLAYER_START_X, O3_PLAYER_START_Z,
                 O3_FACING_RIGHT, O3_HP_PLAYER);
@@ -1498,7 +1575,11 @@ void main(void)
 
     SMS_initSprites();
     draw_sprites();
+    queue_presentation(&pl);
+    queue_presentation(&e);
     SMS_copySpritestoSAT();
+    latch_presentation(&pl);
+    latch_presentation(&e);
     update_probe_fields(0);
 
     SMS_displayOn();
@@ -1508,35 +1589,56 @@ void main(void)
 
         /* Bloco de VBlank: SAT pronta, 1 coluna de PNT, H-scroll e o
          * chunk de upload (D8: escrita em display ativo derruba o loop). */
+#if O3_SERVICE_TRACE
+        svc_bytes_p = 0u;
+        svc_bytes_e = 0u;
+#endif
         probe_phase = 2;
         SMS_copySpritestoSAT();
-#if O3_SPILL_TRACE
-        spill_v1 = SMS_VCounterPort;
-#endif
+        latch_presentation(&pl);
+        latch_presentation(&e);
         draw_hud();                     /* so reescreve a linha que mudou */
-#if O3_SPILL_TRACE
-        spill_v2 = SMS_VCounterPort;
-#endif
         stream_columns();
         SMS_setBGScrollX((unsigned char)(0u - cam));
-#if O3_SPILL_TRACE
-        spill_v3 = SMS_VCounterPort;
-#endif
         {
-            unsigned int budget = O3_UPLOAD_CHUNK;   /* jogador primeiro */
-#if O3_SPILL_TRACE
-            diag_commit_chunks = 0u;
-            diag_commit_bytes_lo = 0u;
-            diag_commit_bytes_hi = 0u;
-            diag_rd_n = 0u;
+            unsigned int budget = O3_UPLOAD_CHUNK;
+            unsigned int n, cap;
+            unsigned char sf = sched_flags;
+#if O3_SERVICE_TRACE
+            svc_flags = sf;
+            svc_vc0 = SMS_VCounterPort;
 #endif
-            budget -= stream_commit(&pl, budget);
-#if O3_SPILL_TRACE
-            diag_t_pl = SMS_VCounterPort;
+            if (sf & 64u) {
+                /* Ordem ja decidida na CPU (menor restante / dor do inimigo). */
+                n = stream_commit(&e, budget);
+                budget -= n;
+#if O3_SERVICE_TRACE
+                svc_bytes_e = (unsigned char)(svc_bytes_e + n);
 #endif
-            budget -= stream_commit(&e, budget);
-#if O3_SPILL_TRACE
-            diag_t_e = SMS_VCounterPort;
+                n = stream_commit(&pl, budget);
+                budget -= n;
+#if O3_SERVICE_TRACE
+                svc_bytes_p = (unsigned char)(svc_bytes_p + n);
+#endif
+            } else {
+                /* Jogador primeiro; se ambos querem, o teto deixa uma fatia
+                 * para o segundo ator. */
+                cap = budget;
+                if ((sf & 12u) == 12u && cap > O3_UPLOAD_CONTEND_CAP)
+                    cap = O3_UPLOAD_CONTEND_CAP;
+                n = stream_commit(&pl, cap);
+                budget -= n;
+#if O3_SERVICE_TRACE
+                svc_bytes_p = (unsigned char)(svc_bytes_p + n);
+#endif
+                n = stream_commit(&e, budget);
+                budget -= n;
+#if O3_SERVICE_TRACE
+                svc_bytes_e = (unsigned char)(svc_bytes_e + n);
+#endif
+            }
+#if O3_SERVICE_TRACE
+            svc_vc1 = SMS_VCounterPort;
 #endif
         }
         if (!probe_worst_done) {
@@ -1559,15 +1661,23 @@ void main(void)
         probe_frame++;
         probe_phase = 1;
 
+        /* M7: relogio do PSGlib — exatamente um PSGSFXFrame por quadro
+         * (sincronizado pelo waitForVBlank; nao ha ISR de audio). */
+        PSGSFXFrame();
+
         /* Fase de CPU: input/IA -> FSM/arcos -> hit -> stream -> desenho. */
         keys = SMS_getKeysStatus();
         player_control(keys);
         enemy_control();
+        /* Contacts use this frame's SAT identity, before the animation
+         * clock can advance to a future frame. Victim reaction has the
+         * normal one-SAT latency; abandoned activations are ineligible. */
+        resolve_hits();
         actor_advance(&pl);
         actor_advance(&e);
-        resolve_hits();
         stream_update(&pl);
         stream_update(&e);
+        sched_update();
 
         {
             int c = (int)pl.x - O3_CAM_DX;
@@ -1580,6 +1690,11 @@ void main(void)
 
         SMS_initSprites();
         draw_sprites();
+        queue_presentation(&pl);
+        queue_presentation(&e);
         update_probe_fields(keys);
+
+        /* M7: aplica a maior prioridade pedida no quadro (sem fila). */
+        sfx_update();
     }
 }

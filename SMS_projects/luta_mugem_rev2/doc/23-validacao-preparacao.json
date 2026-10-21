@@ -1,0 +1,137 @@
+{
+  "scope": "Preparation integrity/readability and small file write/read only; no physical media health or engine/runtime validation",
+  "documents": [
+    {
+      "path": "doc/00-diretrizes-agente.md",
+      "sha256": "48d5e407c4a0b27e55452a8b2c9c10614f3c1e4e0f537c85a14b90265a9b755d",
+      "bytes": 1637,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/08-bible-artistica.md",
+      "sha256": "80229dec9de864fa537f1b28d72081f5058a4a53670d515cb92ce6dbe25ca105",
+      "bytes": 720,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/10-memory-bank.md",
+      "sha256": "580b8493f7f20067033a945fa620b7c7ece43987be2806c959c7ef08c6a8c25b",
+      "bytes": 2274,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/11-gdd.md",
+      "sha256": "1219d5d8e3d06434c2e66e52fd3eb568e195d632c451d2235dc08908bd86e15c",
+      "bytes": 2830,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/12-roteiro.md",
+      "sha256": "b0956f8dbc10243547e7bf6a18e4197d3f9a8b2a3e7e7f6839312ffd5dc34e3a",
+      "bytes": 353,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/13-spec-cenas.md",
+      "sha256": "6ab9f846998da485ac74f8931d27699afd15d7d2f5b488f7d46e8ddff5a354f7",
+      "bytes": 1742,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/15-tdd.md",
+      "sha256": "f1c41ccb43d0d589677ebbcbed47d9cf5bc80f6bd9be307ced22a6db5eac364b",
+      "bytes": 2186,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/20-plano-implementacao.md",
+      "sha256": "67e61eabd11343ea36a794dee329d1bb2278980e25bb9881a2754ff135615e02",
+      "bytes": 7205,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/21-prompt-agente-implementador.md",
+      "sha256": "656acc7c8ec3fe3c026d81b9076b29cf0d3c50e7686602f63a84c7a2b30973c5",
+      "bytes": 7561,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/22-intake-doador.json",
+      "sha256": "371f75060688d9d533422713691f9e698c0cf22f8e20522d6d216681209beb4d",
+      "bytes": 2978,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/artifact_registry.json",
+      "sha256": "7f09444d36b314b58cf982fec3d8151930826a49ca60aec358e2f40ba87b60af",
+      "bytes": 4822,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/asset_provenance_manifest.json",
+      "sha256": "3ff5f36c9d4b232659ddd88f4d22f3f01d313884e5a22190bda7a07a235333fa",
+      "bytes": 19,
+      "utf8_readable": true
+    },
+    {
+      "path": "doc/engine_quality_contract.json",
+      "sha256": "474ebe54287405cff9fb6dcfedca6365e54bb0d7b41b5cc2d0cc2f5f65ec5bc0",
+      "bytes": 9951,
+      "utf8_readable": true
+    }
+  ],
+  "storage_write_read_4096_bytes": "pass",
+  "new_root_same_media_as_legacy": true,
+  "storage": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2",
+      "free_bytes": 199627304960,
+      "device": 45825
+    },
+    {
+      "path": "/tmp",
+      "free_bytes": 7516377088,
+      "device": 52
+    },
+    {
+      "path": "/run/user/1000",
+      "free_bytes": 1552310272,
+      "device": 74
+    },
+    {
+      "path": "/home/misael",
+      "free_bytes": 160282046464,
+      "device": 30
+    }
+  ],
+  "build": "not_run",
+  "emulator": "not_run",
+  "gameplay_fps_audio": "not_validated",
+  "sources": "local ZIP bytes verified in doc/22-intake-doador.json",
+  "artifact_registry_audit": {
+    "schema": "sms_artifact_audit_v1",
+    "ok": true,
+    "problems": [],
+    "warnings": [
+      "legacy locations are not exhaustively gated; use inventory before adoption"
+    ],
+    "artifact_count": 2,
+    "indexed_file_count": 2,
+    "claim_ceiling": "organization_and_reference_consistency_only"
+  },
+  "engine_contract_audit": {
+    "schema": "sms_mugen_engine_contract_audit_v1",
+    "status": "contract_pass",
+    "mode": "planning",
+    "fighter_idle_opaque_height_target_px": [
+      72,
+      88
+    ],
+    "makesms_bank_merges": 0,
+    "makesms_bank_merge_limit": 8,
+    "problems": [],
+    "aaa_approved": false,
+    "scope": "contrato e vínculos; gates runtime/visual e revisão independente continuam obrigatórios"
+  },
+  "review_scope": "Donor and converter independent read-only audits preserved; handoff structural review by coordinator, no independent runtime approval"
+}

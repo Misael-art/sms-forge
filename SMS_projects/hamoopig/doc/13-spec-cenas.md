@@ -12,7 +12,7 @@
 | SAT | 64 | SMS_GLOBAL §7 |
 | Subpaletas | 2×16, índice 0 transparente | §8 |
 | VBlank | ~4.5 ms NTSC, sem DMA | §9 |
-| ROM linear | 48 KB | B01 |
+| ROM | 128 KB (mapper Sega, banks 2–4) | v014; código em 0x0000–0x7FFF |
 
 ## Cena TITLE / OPENING
 ### Layout de VRAM declarado
@@ -24,13 +24,15 @@
 ### Orçamento worst-frame
 Ainda **não medido**. Método previsto: `measure_worst_frame.py` + probe `vline`.
 
-## Cena FIGHT (arena técnica)
+## Cena FIGHT (arena 32×64, molde MSSF2T)
 ### Layout de VRAM
 | Região | Faixa | Uso |
 |--------|-------|-----|
 | BG fonte/HUD | 1–51 | texto, chão, barras |
-| sprites | 128–191 | 2 lutadores × 2 poses × 2 direções |
-| SAT | 8 sprites | 4+4 TALL |
+| sprites P1 | 96–159 | dual-bank pose |
+| sprites P2 | 160–223 | dual-bank pose |
+| projétil | 224–231 | hadouken + espelho |
+| SAT | até ~36 | metasprite 32×64 + 2 sprites de projétil |
 
 ### Sprites por scanline (pico declarado, não simulado ainda)
 8 quando os dois lutadores compartilham linhas. Manifesto de simulação pendente.

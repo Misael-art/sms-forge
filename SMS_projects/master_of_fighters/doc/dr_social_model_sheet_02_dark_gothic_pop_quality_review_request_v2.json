@@ -1,0 +1,38 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_02_dark_gothic_pop_art_review_v2",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Independent, read-only review of concept model sheet #02 (Dark-Gothic-Pop): identity and five-view consistency; artist attribution/role/scope; distinct style signature; shoulder-to-hand anatomical continuity; palette/materials; ruler, baseline, crop, labels and card overlap. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v2.png",
+      "sha256": "db54012926e57dcaa3d99ed89e74e37e1624e6b465e2da97f3d0fd59a6a69e6c",
+      "role": "current candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_v2.json",
+      "sha256": "59b2e9a32ec674b683613748f1817986602b1f067b1a59edcd89ec25d98b234f",
+      "role": "hash-bound per-character review checklist"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v2_metadata.json",
+      "sha256": "ae874d03e36b0df65ae7066b63097ea4fc3ddd71dd794c80f781d0b84589fff5",
+      "role": "style/card/layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_02_dark_gothic_pop_v2.json",
+      "sha256": "58adfa3b1c6fda74b1203c21bd85c402f776ec14fda15f7a3250fd5233ab6269",
+      "role": "source and composition lineage"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Separate artist reference from authorship of sprites/game assets; report unverified credit as such.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Return concrete findings for anatomy, identity, style distinction, five-view cohesion, page layout and labels."
+  ]
+}

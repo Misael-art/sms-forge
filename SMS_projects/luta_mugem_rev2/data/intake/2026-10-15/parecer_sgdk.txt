@@ -1,0 +1,118 @@
+Parecer — Status real do projeto MUGEN→Mega Drive (Mugenesis)
+Fontes que venceram na hierarquia: doc/10-memory-bank.md (entradas até 2026-10-15) + doc/mugen/active_scope_matrix_20261004.json (atualizado 2026-10-11) + doc/project_context_manifest.json > código > relatórios antigos. Mugenesis (workspace irmão) só contém corpus de estudo (Base de Estudo) e o briefing; todo o motor e evidência vive em tools/mugen2sgdk_forge/ e SGDK_projects/Mugenesis_Demo .../.
+Status operacional real (sem adjetivos)
+
+Classificação: technical_demo, teto de claim technical_demo — declarado no manifesto e na matriz de escopo. Meta do produto é a engine reutilizável (importador + contrato de compatibilidade + conversor + runtime + instalação versionada); Mugenesis stage-free com Ken/Ryu (+Vega) é o primeiro consumidor, não o limite da engine.
+ROM: out/rom.bin existe (SHA 1b66cd1d…) mas está com source_binding=unknown e best_proven=null. Nenhuma candidata atual é promovida — as capturas FX80 de 12–15/10 são diagnostic_only. Logo o status máximo honesto da cena de luta é testado_em_emulador em partes (boot/title/menu confirmado na matriz), e não entrega.
+Preflight estrito: Ken e Ryu estão hoje source_preflight_blocked (170 e 154 blockers, schema v2) — o motor atual não permite reconvertê-los em strict. As conversões existentes vieram do Forge 0.3.2 e têm 4 outputs divergentes (mgres_*.res/mg_*.c) por reconciliar. Gate de metodologia bloqueado por perceptual_motion_unvalidated.
+WIP da branch: feat/mugenesis-impact-fx-v2 com pressão H40 do FX80 não resolvida (5/5 amostras acima de 320 px/scanline; A/B provou o 8060 como contribuinte, não causa única). Branch com ~54 itens alterados, sem commit/promoção sem autorização.
+
+1. O que o motor interpreta e converte automaticamente
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CamadaAutomáticoEvidênciaParsers.def/INI, .cmd, .cns/.st/.stcommon, .air (frames, offsets, flips, Clsn1/2), SFF v1 só (PCX 8bpp), .snd v1 (WAV), stage .def, screenpack parcial p/ HUD (fight.def+fight.sff+.fnt)mugen2sgdk_forge/parsers/*, converters/hud.pyControllers~40 com lowering real em C: ChangeState, AnimChange, HitDef (36 params), Projectile, ReversalDef, VarSet/Random, Explod/RemoveExplod, Target*, LifeAdd/PowerAdd, Pause, SuperPause, AssertSpecial (parseado, no-op), Helper (reduzido: roda estados do dono)ir/controllers.py:17-96 + runtime/mg_char.c:318-531Expressõescompilador com precedência MUGEN, triggers (time, random, p2dist, life, round*, gethitvar, var(), ifelse…) enumerados; desconhecidas viram opcode UNSUPPORTED com motivo reportado, nunca silenciosoir/expr.py, ir/opcodes.py:36-77Saídasheets PNG, WAV→XGM2, mgres_<id>.res, máquina de estados mg_<id>.c, retrato 32×32, sombra; install-runtime com SHA256 + rollback atômico; 23 subcomandos CLI. A ROM não é buildada pelo conversor (bind-build só vincula)generators/sgdk.py:184-532, __mainpy:78-236Rejeições explícitasSFF v2/v3, PCX≠8bpp, .fnt fora do HUD, [Remap] do CMD, ProjStateSet/PlayerAir/PalFX/EnvColor/AfterImage/AttackMulSet, sprites >248px, WAV ≠8/16-bit, >16 helpers persistentesparsers/sff.py, controllers.py:98-114
+2. Harness de conversão assistida (existe, e é forte)
+
+Suite do conversor: 73 arquivos pytest / ~356 testes, incluindo contrato de AnimTime validado contra fontes externas (Elecbyte/Ikemen, não auto-referente), perfis strict/exploratory, teste de rollback do instalador. Os "xfails estritos" citados no commit são asserções de divergência conhecida (test_runtime_sync.py exige exatamente os 3 deltas documentados).
+Pós-conversão, no projeto: compare_hitdef.py (Level B: CNS-fonte vs runtime compilado — 726 match / 0 mismatch), dump_anim_boxes.py (CLSN por frame), run_natural_input_sweep.py (CMD→estado-alvo em 6 contextos causais), run_level_c.py (golpes observados na ROM via BlastEm), sondas SRAM NAVD/FX80/VDP-SAT/fight-probe com self-check, build_combat_inventory.py, QA de palette-cache com ROMs diagnósticas serializadas.
+Evidência: pipeline BlastEm-first com selo/hash de ROM, skill emulator-vdp-evidence-curator, curadorias .agent/references/mugen_conversion_safety_2026_09_24.md, mugen2sgdk_fidelity_matrix.md (implementado/aproximado/ausente com teste-âncora por linha), orquestração multi-agente harness_orchestration.py.
+Lacunas declaradas nos reviews: audição humana, mix/loop sob carga, fluxo completo gameplay/KO/reinicio, fluidez; suíte integral não repetida após última correção (R2); G11/G12 (Options/Treino) abertos.
+
+3–13. Domínios
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DomínioTratativaEstado realGráficos/tamanhoscélula ≤248px, split automático ≤4 partes, orçamento 12 blocos 32×32/parte e 16 sprites HW/linha, index 0 transparente, compressão FAST/NONE pós-geraçãoAutomático com gates duros. Quadro de tela cheia não cabe → reautoria manual como plano/paleta; sombra é silhueta derivada 32×8 chata, não shadow bit; 8 pares AIR de Ryu sem sprite classificados sem placeholderCores15 cores+transparência/linha CRAM, k-means p/ FX, fusão sem-perda REGRA 1b, contrato de ownership PAL0–PAL3Automático + promoção humana obrigatória. Conflito real documentado: HUD vive em PAL0[9..15] e PAL3 é FX compartilhada só da paleta P1; Ken não cabe (15/15); PalFX ignorado em runtime (flash por tabela CRAM)Jogabilidade/inputCMD vira tabela de comandos compilada (cmds[], hold_cmds, buckets) + buffer circular de histórico no runtime; 6 botões lógicos A–Z com binding reatribuível por pad, fallback 3 botões automático (JOY_TYPE_PAD6); NAVD v5 prova cadeia pad→in_raw→statenoConvertido + verificado. [Remap] não suportado; adaptador de remapeamento por jogador implementado mas Options UI e prova na ROM pendentesSons.snd WAV → mono 16-bit 13300 Hz XGM2; não referenciados são omitidosAutomático p/ WAV (Ryu: 27 convertidos, 1.37MB de ROM, ~38% do budget 4MiB). MP3/OGG/MID = external_audio_conversion_required; música não vem do MUGEN (VGM autoral)VozesVoiceGroup não tem tratamento próprio: viram sons comuns via PlaySnd; seleção aleatória MUGEN não reproduzidaParcial/sem suporte semântico — as 17 vozes de Ryu saem como sfx comunsCenáriosparser completo (camera, BG normal/parallax/anim, BGCtrlDef) mas "só lê e normaliza"; stage-measure/candidate/bands/plane geram views bloqueadas por orçamentoAssistido, nunca automático — reautoria humana guiada por medição (Suzaku: 6 deltas→2 planos VDP, chão fixo y=200). Stage é forbidden no perfil atual (stage-free)Texto/fontes.fnt v1 → tiles 8×8 nos 7 slots PAL0, só para HUDAutomático restrito ao HUD; .fnt fora do HUD e FTR = não suportadoMenus/screenpackexcluded_by_product_decision no contrato; sem conversor de select.def/system.def; front-end é autoral SGDKNão-tratado por decisão; branch experimental screenpack-menu existe, não canonizadaTransições/introszero suporte no conversor; abertura é contrato de autoria própria (branding_sequence_contract — arte final ainda não existe)Manual-sem-suporteFXExplod/Helper/ProjCode com schema real; super de tela cheia → animação de paleta em BG_B ≤14 cores; FX de impacto = flash CRAM + motor de cram-swap planejado; Hadouken é piloto com harness próprio (26 tiles/2 sprites; "aceite do piloto não é aceite do Ken")Híbrido; pressão H40 do FX80 é o problema aberto da branch
+Conclusão
+O desenho que você enunciou — motor converte tudo o que puder; o resto vira harness + skills + contexto — está estruturalmente implementado para sprites, paleta, estados, som, HUD, estágio e FX (gates numéricos duros, relatórios de incompatibilidade nunca silenciosos, matrizes de fidelidade e promoção humana por SHA). O harness é o ponto mais maduro do projeto: 356 testes + níveis B/C de prova pós-conversão + selo de evidência BlastEm.
+Mas o status real não é "convertido": os dois pacotes pilotos estão bloqueados no preflight strict atual, a ROM baseline está sem vínculo de fonte (best_proven=null), o FX de impacto estoura H40 e PalFX, vozes-aleatórias, [Remap], SFF2, intros e screenpack permanecem sem caminho — os quatro últimos por decisão de escopo, os demais como lacunas abertas. Risco de drift principal: dezenas de relatórios doc/mugen/ de 2026-09/10 descrevem fases superadas; a única fotografia vigente é o memory bank + matriz de 2026-10-11. Antes de qualquer claim, a sequência canônica declarada é: obter os common1.cns autorizados ou fechar a equivalência da adaptação common_forge.cns, reconciliar os 4 outputs divergentes, resolver H40 do FX80 com medição, e só então re-rodar preflight e capturar gate BlastEm completo.

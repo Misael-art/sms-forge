@@ -1,0 +1,79 @@
+{
+  "coordinator": "/root",
+  "actual_native_calls_and_returns_observed": true,
+  "limit": "JSON does not authenticate native chat; coordinator matched actual IDs and returns",
+  "workers": [
+    {
+      "worker_id": "/root/native_runtime_qa",
+      "task_id": "7f2a72ec2be741769dfef092a9b26ada",
+      "native_tool": "collaboration.followup_task",
+      "native_return_observed": true,
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/independent_request/request.json",
+        "sha256": "a74478415fc9e129b70c08f48e86f0ac5a4b2a767050b2bf1c9a31dc07bdb601"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/independent_request/run_64b5d0cb871445cabd02e36a329e2201/report.json",
+        "sha256": "86a879e17596133044f3ee3e3d72c638dacc812a23e5b37470b1691beda40ffd"
+      },
+      "session_id": "4cb901a89bdc4252b52350a73f6ba782",
+      "result": {
+        "ok": true,
+        "tests_passed": true,
+        "problems": [],
+        "claim_ceiling": "assigned_checks_only",
+        "case_relation": "independent",
+        "input_binding": "frozen_snapshot_v1",
+        "limit": "bindings/coverage only; coordinator must match native tool receipt and review observations"
+      }
+    },
+    {
+      "worker_id": "/root/review_qa_contract",
+      "task_id": "9136fdaed96d49e6805a78a5da8ca320",
+      "native_tool": "collaboration.followup_task",
+      "native_return_observed": true,
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/request.json",
+        "sha256": "fca7d61c5ecd2e99969e199fff05c98962318ad1c0f5a7a2edb3ceeaa6f2e98a"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/chained_request/run_5d4bdeba5a174a2e884330b4631ff698/report.json",
+        "sha256": "b70af354dc4ea7d0bdd688b0d80c1e81776d5243f0fc9106acb8f6f081a7cc93"
+      },
+      "session_id": "e4da858551604976a90913cd7b979eb5",
+      "result": {
+        "ok": true,
+        "tests_passed": true,
+        "problems": [],
+        "claim_ceiling": "assigned_checks_only",
+        "case_relation": "chained",
+        "input_binding": "frozen_snapshot_v1",
+        "limit": "bindings/coverage only; coordinator must match native tool receipt and review observations"
+      }
+    },
+    {
+      "worker_id": "/root/native_runtime_qa",
+      "task_id": "fd5cd7e611434ceb86aac1cdc54e20ab",
+      "native_tool": "collaboration.followup_task",
+      "native_return_observed": true,
+      "request": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/request.json",
+        "sha256": "3701d3bcc0495d54a9a624afff1d2cc57d9f9f7c7290c637028638705e24d922"
+      },
+      "report": {
+        "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/precondition_negative_request/run_8623916da66a4f0091e8edf41cc3d00b/report.json",
+        "sha256": "ab0b89e962b2c6d4901831271fa1dcd14c39181f67643227d40a816455dc5d45"
+      },
+      "session_id": "dc3dd82c987645918548fd8066a999ec",
+      "result": {
+        "ok": true,
+        "tests_passed": false,
+        "problems": [],
+        "claim_ceiling": "assigned_checks_only",
+        "case_relation": "independent",
+        "input_binding": "frozen_snapshot_v1",
+        "limit": "bindings/coverage only; coordinator must match native tool receipt and review observations"
+      }
+    }
+  ]
+}

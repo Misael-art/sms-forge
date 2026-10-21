@@ -1,0 +1,43 @@
+{
+  "schema": "luta_ryo_ryo_banked_image_layout_v1",
+  "parts": [
+    {
+      "name": "scene_tiles",
+      "first_bank": 2,
+      "bank_count": 38,
+      "last_bank": 39,
+      "bytes": 622592,
+      "sha256": "1e002a1729566132cfa1efadd77b65cc216106246671ff9db5cdcf74bf5186f2"
+    },
+    {
+      "name": "frame_descriptors_and_clsn",
+      "first_bank": 40,
+      "bank_count": 1,
+      "last_bank": 40,
+      "bytes": 16384,
+      "sha256": "4d8f7e80f166d39a0a6b073aa02bdcf628425ffa4beccbff8e662887a483dffc"
+    },
+    {
+      "name": "pose_metadata",
+      "first_bank": 41,
+      "bank_count": 2,
+      "last_bank": 42,
+      "bytes": 32768,
+      "sha256": "2b730e2ce0b07a6dfe2f6bd6a128013946432c631d807474ae1fa08f2bfcd9dd"
+    },
+    {
+      "name": "pose_index",
+      "first_bank": 43,
+      "bank_count": 1,
+      "last_bank": 43,
+      "bytes": 16384,
+      "sha256": "e1dcfb0374311eddcaf4b219484e7e2d55a299dfb5ca46d61841316589cc65b0"
+    }
+  ],
+  "total_bytes": 688128,
+  "total_banks": 42,
+  "first_bank": 2,
+  "last_bank": 43,
+  "merged_sha256": "91d42b5c15781f6619f0a327aec24e85c8b30a64d1d3ed3df141461e385f763a",
+  "bank_contract": "makesms -mbank <image>:0:42:2; generated frame and pose macros occupy banks 40-43"
+}

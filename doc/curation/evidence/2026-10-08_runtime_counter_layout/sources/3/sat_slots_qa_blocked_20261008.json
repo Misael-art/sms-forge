@@ -1,0 +1,28 @@
+{
+  "schema": "mugen_sat_fixed_slot_candidate_qa_v1",
+  "candidate": "ryo_terry_sat_slots_diag_20261008",
+  "rom": "out/rom/ryo_terry_schedopt_20261008.sms",
+  "rom_sha256": "67ff3a2d7497483726558ca1240eea05ddc9c7b0b552ee0e5002a60a617a9918",
+  "scope": "stable-pose fixed SAT slots with Y-only flicker visibility updates",
+  "build": {
+    "status": "pass",
+    "pre_gates": "pass",
+    "bytes": 1900544
+  },
+  "focused_model_check": {
+    "status": "pass",
+    "row_frames_compared": 400,
+    "frames": 40,
+    "result": "fixed-slot visible indices and priority order matched the current rotating-run emitter for the measured idle row geometry"
+  },
+  "runtime_qa": {
+    "status": "blocked",
+    "private_session_started": false,
+    "session_id": null,
+    "reason": "required isolated-session plan is unreadable due to filesystem EIO",
+    "unreadable_path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/plano-sessoes-emulicious-isoladas.md",
+    "native_subagent_prepare": "blocked by EIO on project authority context; no worker request or session was fabricated"
+  },
+  "promotion": "not_promoted",
+  "next_action": "restore readable project session plan and authority documents, then prepare V2 native QA and run a fresh private emulator session against this ROM SHA"
+}

@@ -51,3 +51,7 @@ def test_loader_binds_control_profile_file_hash_and_package_hash():
     assert len(trigger["profile_sha256"]) == 64
     with pytest.raises(ValueError, match="source SHA"):
         load_trigger(PROFILE, "0" * 64, "z")
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

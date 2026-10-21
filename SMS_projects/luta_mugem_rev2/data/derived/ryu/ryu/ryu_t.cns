@@ -1,0 +1,485 @@
+;ÉäÉÖÉEÅ@ìäÇ∞ÇÉÇéÇì
+;===============================
+;îwïâÇ¢ìäÇ∞
+[Statedef 800]
+type = S
+movetype = A
+physics = S
+anim = 800
+velset = 0,0
+ctrl = 0
+poweradd = 14
+
+[State 800, 1]
+type = Hitdef
+triggerall = P2BodyDist X < 40
+trigger1 = AnimElem = 3
+attr = S, NT
+givepower = 0
+getpower = 0
+guardflag = 
+hitflag = M-
+sparkno = -1
+hitsound = -1
+pausetime = 0,0
+p1stateno = 810
+p2facing = 1
+p2stateno = 820
+fall.recover = 0
+fall = 1
+fall.recover = 0
+down.bounce = 0
+
+[State 800, 9]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------------------------
+[Statedef 810]
+type = S
+movetype = A
+physics = S
+anim = 810
+velset = 0,0
+
+[State 810, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s100,30
+
+[State 810, 1]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s20,1
+
+[State 810, 1]
+type = Width
+trigger1 = Time >= 0
+edge = 20,20
+
+[State 810, 2]
+type = TargetBind
+trigger1 = AnimElem = 1
+pos = -55,0
+
+[State 810, 2]
+type = TargetBind
+trigger1 = AnimElem = 2
+pos = -45,-95
+
+[State 810, 2]
+type = TargetBind
+trigger1 = AnimElem = 3
+pos = -10,-90
+
+[State 810, 2]
+type = TargetBind
+trigger1 = AnimElem = 4
+pos = 55,-80
+
+[State 810, 2]
+type = TargetBind
+trigger1 = AnimElem = 5
+pos = 80,-40
+
+[State 810, 3]
+type = TargetLifeAdd
+trigger1 = AnimElem = 5
+value = -140
+
+[State 180, snd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s100,30
+
+[State 180, snd]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s20,1
+
+[State 810, 9]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-----------------------------------
+[Statedef 820]
+type = A
+movetype = H
+physics = N
+velset = 0,0
+
+[State 820, 1]
+type = ChangeAnim2
+trigger1 = Time = 0
+value = 820
+
+[State 820, 2]
+type = VelSet
+trigger1 = Time = 36
+X = -4
+Y = -6
+
+[State 820, 3]
+type = VelAdd
+trigger1 = Time >= 36
+Y = 0.4
+
+[State 820, 8]
+type = Turn
+trigger1 = Time > 36 && Pos Y >= 0
+
+[State 820, 9]
+type = SelfState
+trigger1 = Time > 36 && Pos Y >= 0
+value = 5100
+
+;--------------------------
+[Statedef 805]
+type = S
+movetype = A
+physics = S
+anim = 800
+velset = 0,0
+ctrl = 0
+poweradd = 14
+
+[State 805, 1]
+type = Hitdef
+triggerall = P2BodyDist X < 40
+trigger1 = AnimElem = 3
+attr = S, NT
+givepower = 0
+getpower = 0
+guardflag = 
+hitflag = M-
+sparkno = -1
+hitsound = -1
+pausetime = 0,0
+p1stateno = 815
+p2facing = -1
+p2stateno = 820
+fall.recover = 0
+fall = 1
+fall.recover = 0
+down.bounce = 0
+
+[State 805, 9]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------------------------
+[Statedef 815]
+type = S
+movetype = A
+physics = S
+anim = 810
+velset = 0,0
+
+[State 810, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s100,30
+
+[State 810, 1]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s20,1
+
+[State 815, 0]
+type = Turn
+trigger1 = Time = 0
+
+[State 815, 1]
+type = Width
+trigger1 = Time >= 0
+edge = 20,20
+
+[State 815, 2]
+type = TargetBind
+trigger1 = AnimElem = 1
+pos = -55,0
+
+[State 815, 2]
+type = TargetBind
+trigger1 = AnimElem = 2
+pos = -40,-95
+
+[State 815, 2]
+type = TargetBind
+trigger1 = AnimElem = 3
+pos = -10,-90
+
+[State 815, 2]
+type = TargetBind
+trigger1 = AnimElem = 4
+pos = 55,-80
+
+[State 815, 2]
+type = TargetBind
+trigger1 = AnimElem = 5
+pos = 80,-40
+
+[State 815, 3]
+type = TargetLifeAdd
+trigger1 = AnimElem = 5
+value = -140
+
+[State 180, snd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s100,30
+
+[State 180, snd]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s20,1
+
+[State 815, 9]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;================================
+;îbìäÇ∞
+[Statedef 850]
+type = S
+movetype = A
+physics = S
+anim = 800
+velset = 0,0
+ctrl = 0
+poweradd = 14
+
+[State 850, 1]
+type = Hitdef
+triggerall = P2BodyDist X < 40
+trigger1 = AnimElem = 3
+attr = S, NT
+givepower = 0
+getpower = 0
+guardflag = 
+hitflag = M-
+sparkno = -1
+hitsound = -1
+pausetime = 0,0
+p1stateno = 860
+p2facing = 1
+p2stateno = 870
+fall.recover = 0
+fall = 1
+fall.recover = 0
+down.bounce = 0
+
+[State 820, 9]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------------------------
+[Statedef 860]
+type = S
+movetype = A
+physics = S
+anim = 850
+velset = 0,0
+
+[State 810, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s100,30
+
+[State 810, 1]
+type = PlaySnd
+trigger1 = AnimElem = 6
+value = s20,0
+
+[State 850, 1]
+type = Width
+trigger1 = Time >= 0
+edge = 100,20
+
+[State 850, 2]
+type = TargetBind
+trigger1 = AnimElem = 1
+pos = -55,0
+
+[State 850, 2]
+type = TargetBind
+trigger1 = AnimElem = 2
+pos = -17,-85
+
+[State 850, 2]
+type = TargetBind
+trigger1 = AnimElem = 3
+pos = 75,-60
+
+[State 850, 2]
+type = TargetBind
+trigger1 = AnimElem = 4
+pos = 120,-50
+
+[State 850, 3]
+type = TargetLifeAdd
+trigger1 = AnimElem = 4
+value = -140
+
+[State 180, snd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s100,30
+
+[State 180, snd]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s20,1
+
+[State 850, 9]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-----------------------------------
+[Statedef 870]
+type = A
+movetype = H
+physics = N
+velset = 0,0
+
+[State 870, 1]
+type = ChangeAnim2
+trigger1 = Time = 0
+value = 860
+
+[State 870, 2]
+type = VelSet
+trigger1 = Time = 31
+X = -4
+Y = -6
+
+[State 820, 3]
+type = VelAdd
+trigger1 = Time >= 31
+Y = 0.4
+
+[State 820, 8]
+type = Turn
+trigger1 = Time > 31 && Pos Y >= 0
+
+[State 820, 9]
+type = SelfState
+trigger1 = Time > 31 && Pos Y >= 0
+value = 5100
+
+;----------------------------
+[Statedef 855]
+type = S
+movetype = A
+physics = S
+anim = 800
+velset = 0,0
+ctrl = 0
+poweradd = 14
+
+[State 850, 1]
+type = Hitdef
+triggerall = P2BodyDist X < 40
+trigger1 = AnimElem = 3
+attr = S, NT
+givepower = 0
+getpower = 0
+guardflag = 
+hitflag = M-
+sparkno = -1
+hitsound = -1
+pausetime = 0,0
+p1stateno = 865
+p2facing = -1
+p2stateno = 870
+fall.recover = 0
+fall = 1
+fall.recover = 0
+down.bounce = 0
+
+[State 820, 9]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------------------------
+[Statedef 865]
+type = S
+movetype = A
+physics = S
+anim = 850
+velset = 0,0
+
+[State 810, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s100,30
+
+[State 810, 1]
+type = PlaySnd
+trigger1 = AnimElem = 6
+value = s20,0
+
+[State 865, 0]
+type = Turn
+trigger1 = Time = 0
+
+[State 850, 1]
+type = Width
+trigger1 = Time >= 0
+edge = 100,20
+
+[State 850, 2]
+type = TargetBind
+trigger1 = AnimElem = 1
+pos = -55,0
+
+[State 850, 2]
+type = TargetBind
+trigger1 = AnimElem = 2
+pos = -17,-85
+
+[State 850, 2]
+type = TargetBind
+trigger1 = AnimElem = 3
+pos = 75,-60
+
+[State 850, 2]
+type = TargetBind
+trigger1 = AnimElem = 4
+pos = 120,-50
+
+[State 850, 3]
+type = TargetLifeAdd
+trigger1 = AnimElem = 4
+value = -140
+
+[State 180, snd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s100,30
+
+[State 180, snd]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = s20,1
+
+[State 850, 9]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+

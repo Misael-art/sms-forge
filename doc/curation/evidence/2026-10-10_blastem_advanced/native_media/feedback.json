@@ -1,0 +1,393 @@
+{
+  "schema": "sms_native_media_comparison_v1",
+  "native_agent_id": "/root/native_audio_qa",
+  "context_mode": "diagnostic",
+  "status": "assigned_media_checks_passed",
+  "tools": {
+    "wrapper_sha256": "5ee935582409ce0de02643634f950419543f6e94f1525c21411b27c322772b3b",
+    "diagnostics_sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+    "auditor_sha256": "9b6cc08ceb2cab6194aa4d0371e0086f4926e069180736cb03dc4c23b2fd2601"
+  },
+  "sessions": {
+    "silent": {
+      "root": "/tmp/smsforge-blastem-native-media-plan/silent_runs/blastem-sms-0fddd13e11c54322b3f451ac24810425",
+      "session_id": "blastem-sms-0fddd13e11c54322b3f451ac24810425",
+      "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "wrapper_sha256": "5ee935582409ce0de02643634f950419543f6e94f1525c21411b27c322772b3b",
+      "diagnostics_sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+      "native_media": {
+        "apng": {
+          "frames": 120,
+          "size": [
+            256,
+            192
+          ],
+          "different_from_first": 119,
+          "container_duration_ms": 2000.0000000000002,
+          "clock": "nominal_60Hz_not_realtime_FPS",
+          "raw_preserved": true,
+          "derived_acTL_crc_repairs": 1
+        },
+        "wave": {
+          "sample_rate": 48000,
+          "channels": 2,
+          "sample_frames": 96256,
+          "duration_seconds": 2.005333333333333,
+          "peak": 0,
+          "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+        },
+        "vgm": {
+          "bytes": 88,
+          "scope": "PSG register log_not_audible_mix"
+        }
+      },
+      "raw_APNG_SHA": "95b5adeef5e427abdb5dc7e405eba005076a2abb0f0737d028882bf809bffd3a",
+      "derived_APNG_SHA": "c4362eacc39323050a109e9011fdea1f8824b934c850f808314cf105dbecb1a9",
+      "raw_CRC_mismatches": [
+        {
+          "tag": "acTL",
+          "stored_crc": 4266324102,
+          "expected_crc": 937974664,
+          "offset": 33,
+          "initial_zero_frames_crc": 4266324102
+        }
+      ],
+      "raw_derived_changed_byte_offsets": [
+        49,
+        50,
+        51,
+        52
+      ],
+      "APNG_frames": 120,
+      "frame_inspection": [
+        {
+          "frame": 0,
+          "colors": 2,
+          "bbox": [
+            32,
+            32,
+            136,
+            136
+          ],
+          "duration_ms": 16.666666666666668
+        },
+        {
+          "frame": 119,
+          "colors": 2,
+          "bbox": [
+            32,
+            32,
+            152,
+            136
+          ],
+          "duration_ms": 16.666666666666668
+        }
+      ],
+      "WAVE": {
+        "rate": 48000,
+        "channels": 2,
+        "width": 2,
+        "sample_frames": 96256,
+        "duration_seconds": 2.005333333333333,
+        "peak": 0,
+        "nonzero_samples": 0
+      },
+      "VGM": {
+        "magic": "Vgm ",
+        "bytes": 88,
+        "EOF_declared_plus4": 88,
+        "version": "0x150",
+        "PSG_clock_raw": 3579545,
+        "total_samples_declared": 1,
+        "data_offset": 64,
+        "data_first64": "70509f5080500050bf50a0500050df50c0500050ff50e066",
+        "last16": "bf50a0500050df50c0500050ff50e066"
+      },
+      "baseline_probe_hex": "534d4931017400000000000000000000000000000000000000000000000000000000",
+      "cleanup": {
+        "sandbox_exited": true,
+        "xvfb_exited": true
+      },
+      "sandbox_alive": false,
+      "xvfb_alive": false
+    },
+    "sound": {
+      "root": "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+      "session_id": "blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1",
+      "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+      "wrapper_sha256": "5ee935582409ce0de02643634f950419543f6e94f1525c21411b27c322772b3b",
+      "diagnostics_sha256": "8ce33b46332f65bd8844ec541688ab7bb5848aca21de147330dc10a3bfe1e00f",
+      "native_media": {
+        "apng": {
+          "frames": 240,
+          "size": [
+            256,
+            192
+          ],
+          "different_from_first": 239,
+          "container_duration_ms": 4000.0000000000005,
+          "clock": "nominal_60Hz_not_realtime_FPS",
+          "raw_preserved": true,
+          "derived_acTL_crc_repairs": 1
+        },
+        "wave": {
+          "sample_rate": 48000,
+          "channels": 2,
+          "sample_frames": 192512,
+          "duration_seconds": 4.010666666666666,
+          "peak": 4026,
+          "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+        },
+        "vgm": {
+          "bytes": 396,
+          "scope": "PSG register log_not_audible_mix"
+        }
+      },
+      "raw_APNG_SHA": "35b1a3ef09a31a560a39aa13cee74157948420b419193f341740952ba944a99d",
+      "derived_APNG_SHA": "a537e998618d8cdf90f1906b33bbddd5435a5daf629d966387ee269a97526be1",
+      "raw_CRC_mismatches": [
+        {
+          "tag": "acTL",
+          "stored_crc": 4266324102,
+          "expected_crc": 3061752027,
+          "offset": 33,
+          "initial_zero_frames_crc": 4266324102
+        }
+      ],
+      "raw_derived_changed_byte_offsets": [
+        49,
+        50,
+        51,
+        52
+      ],
+      "APNG_frames": 240,
+      "frame_inspection": [
+        {
+          "frame": 0,
+          "colors": 17,
+          "bbox": [
+            8,
+            16,
+            255,
+            192
+          ],
+          "duration_ms": 16.666666666666668
+        },
+        {
+          "frame": 239,
+          "colors": 17,
+          "bbox": [
+            8,
+            16,
+            255,
+            192
+          ],
+          "duration_ms": 16.666666666666668
+        }
+      ],
+      "WAVE": {
+        "rate": 48000,
+        "channels": 2,
+        "width": 2,
+        "sample_frames": 192512,
+        "duration_seconds": 4.010666666666666,
+        "peak": 4026,
+        "nonzero_samples": 318304
+      },
+      "VGM": {
+        "magic": "Vgm ",
+        "bytes": 396,
+        "EOF_declared_plus4": 396,
+        "version": "0x150",
+        "PSG_clock_raw": 3579545,
+        "total_samples_declared": 173695,
+        "data_offset": 64,
+        "data_first64": "509f5080500050b650a8501650d250c7503250fd50e061a91f50ac72505a7250b77350df61d80250d2619f3650df627050d4619e3650df7350f261dd0250d262",
+        "last16": "7350e37250f361da0250d2627050fd66"
+      },
+      "baseline_probe_hex": "00000000000000000000000000000000000000000000000000000000000000000000",
+      "cleanup": {
+        "sandbox_exited": true,
+        "xvfb_exited": true
+      },
+      "sandbox_alive": false,
+      "xvfb_alive": false
+    }
+  },
+  "vgm_decode": {
+    "silent": {
+      "PSG_writes": 11,
+      "wait_samples": 1,
+      "declared_samples": 1,
+      "terminal_66": true,
+      "parse_end": 88,
+      "bytes": 88,
+      "unknown": [],
+      "scope": "PSGregistereventtimeline_not_WAVE_duration_or_audible_quality"
+    },
+    "sound": {
+      "PSG_writes": 93,
+      "wait_samples": 173695,
+      "declared_samples": 173695,
+      "terminal_66": true,
+      "parse_end": 396,
+      "bytes": 396,
+      "unknown": [],
+      "scope": "PSGregistereventtimeline_not_WAVE_duration_or_audible_quality"
+    }
+  },
+  "coverage": [
+    {
+      "id": "source_pins_and_current_ROM_audit",
+      "status": "passed",
+      "observation": "Fresh independent CLI processes, pinnedwrapper/diagnostics hashes, both audit --current-rom --require-current-tool passed."
+    },
+    {
+      "id": "silent_fixture_identity",
+      "status": "passed",
+      "observation": "Beforeinput baseline SMI1 ID1 atC700; archiveROMSHAbe21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c."
+    },
+    {
+      "id": "sound_archive_identity",
+      "status": "passed",
+      "observation": "ArchiveSHA71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3. C700baseline zeros; noSMI1/SMRTclaim."
+    },
+    {
+      "id": "APNG_raw_preservation_and_derivedCRC",
+      "status": "passed",
+      "observation": "Independently traversed rawchunks. Each hasexactlyonebadCRC: acTL stored matcheszero-framecountCRC; decoded differsfromrawonlybytes49..52. 120/240native256x192frames. Inspected first/last for each."
+    },
+    {
+      "id": "native_WAVE_signal_contrast",
+      "status": "passed",
+      "observation": "PCM16stereo48000Hz silent96256frames2.005333speak0nonzeros0 versus sound192512frames4.010667speak4026nonzeros318304. Native asyncmixer only; hostaudioSDLdummy."
+    },
+    {
+      "id": "VGM_structural_and_PSG_events",
+      "status": "passed",
+      "observation": {
+        "silent": {
+          "PSG_writes": 11,
+          "wait_samples": 1,
+          "declared_samples": 1,
+          "terminal_66": true,
+          "parse_end": 88,
+          "bytes": 88,
+          "unknown": [],
+          "scope": "PSGregistereventtimeline_not_WAVE_duration_or_audible_quality"
+        },
+        "sound": {
+          "PSG_writes": 93,
+          "wait_samples": 173695,
+          "declared_samples": 173695,
+          "terminal_66": true,
+          "parse_end": 396,
+          "bytes": 396,
+          "unknown": [],
+          "scope": "PSGregistereventtimeline_not_WAVE_duration_or_audible_quality"
+        }
+      }
+    },
+    {
+      "id": "cleanup",
+      "status": "passed",
+      "observation": "Bothsessionmeta cleanup true, owned sandbox/Xvfb notalive."
+    },
+    {
+      "id": "subjective_music_fidelity_FPS_gameplay_compatibility",
+      "status": "not_tested",
+      "reason": "Outside native media infrastructure assignedchecks."
+    }
+  ],
+  "findings": [
+    {
+      "kind": "limit",
+      "note": "Native VGM control silent timeline wait1sample althoughAPNG120frames/WAVE2s; VGMregisterlogendsatlastPSGevent and doesnot encode silent trailing capturetime. Do not require equivalenceofdurations."
+    },
+    {
+      "kind": "limit",
+      "note": "NativeWAVE duration asyncmixer, APNG nominal60Hz, VGM44100Hzregisterwaitunits aredifferentclocks and not realtimeFPS."
+    },
+    {
+      "kind": "visual_observation",
+      "note": "Silentfirst/lastimages showROMidentityandchangingframebits, no gameplay. Soundimages showSMSForge2026 MSSF2T StreetFighterII graphic: twofighters positions/poses differ betweenframes0and239; noquality/gameplayclaim."
+    }
+  ],
+  "limits": [
+    "No session_qa BlastEm supported claim",
+    "No audiblehostroutevalidation; SDLdummy while native mixerWAVE captured",
+    "No listeningperformed; nonzerosignal only",
+    "No referencealignment/musiccorrectness",
+    "No runtimeFPS, AAA, Mugenproduction or universalhardwarecompatibility claim"
+  ],
+  "artifacts": [
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/observations.json",
+      "sha256": "5bed34da9a24d8482209dcd8bd871dcf17d80a3f51fda45d5104503722f9984a"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent-audit.json",
+      "sha256": "f5e815b0fd36a9a847ae2309bee9813ec456207cef45477f1d4725e75f2c1636"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound-audit.json",
+      "sha256": "f5e815b0fd36a9a847ae2309bee9813ec456207cef45477f1d4725e75f2c1636"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_runs/blastem-sms-0fddd13e11c54322b3f451ac24810425/session.json",
+      "sha256": "0f3a37ff8789afdbd02c0cd202cbb22de586432ae12a51feedceeba7ed7ab021"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_runs/blastem-sms-0fddd13e11c54322b3f451ac24810425/media/native.apng",
+      "sha256": "95b5adeef5e427abdb5dc7e405eba005076a2abb0f0737d028882bf809bffd3a"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_runs/blastem-sms-0fddd13e11c54322b3f451ac24810425/media/decoded.apng",
+      "sha256": "c4362eacc39323050a109e9011fdea1f8824b934c850f808314cf105dbecb1a9"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_runs/blastem-sms-0fddd13e11c54322b3f451ac24810425/media/native.wav",
+      "sha256": "1c67238b706d7515bf7685c895794cb156682c63c18113f49cb5e65ab2d8dddc"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_runs/blastem-sms-0fddd13e11c54322b3f451ac24810425/media/native.vgm",
+      "sha256": "9452d2446c9f41db05beaaccdcef410529ce9a34f74b646228a887dbe8930256"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1/session.json",
+      "sha256": "333b0269059029882e8d33850d1f88aa736bcb339d996aa4cbb6863338497428"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1/media/native.apng",
+      "sha256": "35b1a3ef09a31a560a39aa13cee74157948420b419193f341740952ba944a99d"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1/media/decoded.apng",
+      "sha256": "a537e998618d8cdf90f1906b33bbddd5435a5daf629d966387ee269a97526be1"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1/media/native.wav",
+      "sha256": "c19f8578ec207a62b53488eae5156bbb41d3474429208c3e336816874c381cc7"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_runs/blastem-sms-a0686f1c1a6a41ad894857c4a896b7a1/media/native.vgm",
+      "sha256": "03c887bcbef6438ef7d0dd25dd51fbcca584d07ed9935ed5d0da445c34b7b513"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_frame_000.png",
+      "sha256": "a0f0fe9340149421b9ca534dfa38103afdd54903592ed2b9735a8547d2a2540b"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/silent_frame_119.png",
+      "sha256": "36989729dfed64f2881b11d741a3b974743e92c4418089d4fcf028af73bb4c24"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_frame_000.png",
+      "sha256": "529b5fcaef4243d8cc9de46e583c83dfafa1e326f2b881943ad5ccbfc6c005f2"
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-media-plan/sound_frame_239.png",
+      "sha256": "a6843b962da7f8a950dd6ab14ae33e5d1876260e9e2a414e8dfaa5999fe69107"
+    }
+  ]
+}

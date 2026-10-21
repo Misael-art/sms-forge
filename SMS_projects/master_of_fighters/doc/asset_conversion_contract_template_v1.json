@@ -1,0 +1,104 @@
+{
+  "schema": "smsforge.asset_conversion_proof.v1",
+  "status": "candidate_pending_owner_visual_review",
+  "asset": {
+    "asset_id": "REPLACE_WITH_STABLE_ID",
+    "asset_type": "character",
+    "display_name": "REPLACE_WITH_CHARACTER_OR_ITEM",
+    "role": "REPLACE_WITH_GAMEPLAY_ROLE"
+  },
+  "style_reference": {
+    "concept_catalog_index": null,
+    "concept_style_name": "REPLACE_WITH_STYLE_NAME",
+    "translation_target": "Master System indexed pixel art",
+    "note": "Style reference and technical translation are separate review axes"
+  },
+  "references": {
+    "approved_concept_path": "data/source_art/concept_art/...",
+    "approved_concept_sha256": "REQUIRED",
+    "identity_reference_path": "REQUIRED",
+    "identity_reference_sha256": "REQUIRED",
+    "palette_manifest_path": "doc/palettes_manifest.json",
+    "source_asset_path": "data/source_art/...",
+    "source_asset_sha256": "REQUIRED",
+    "source_asset_contract_path": "REQUIRED"
+  },
+  "target": {
+    "platform": "Sega Master System",
+    "medium": "indexed pixel art",
+    "gdd_scale_target_px": null,
+    "gdd_scale_range_px": null,
+    "baseline_y_px": null,
+    "pivot_xy_px": null,
+    "scale_status": "pending"
+  },
+  "geometry": {
+    "frame_width_px": null,
+    "frame_height_px": null,
+    "columns": null,
+    "rows": null,
+    "frame_count": null,
+    "reading_order": "left-to-right, top-to-bottom",
+    "tile_px": 8,
+    "transparent_index": 0,
+    "selected_frame_index_zero_based": null,
+    "selected_frame_opaque_bbox_xyxy": null,
+    "bbox_includes_equipment": null
+  },
+  "palette": {
+    "useful_color_limit": 15,
+    "useful_colors_used": null,
+    "indexed_png": null,
+    "sms_rgb_6bit_grid_pass": null,
+    "palette_manifest_character_key": null,
+    "manifest_defined_useful_colors": null,
+    "manifest_roles_not_used_in_source": [],
+    "entries": [],
+    "inspection_key_rgb": null,
+    "inspection_key_is_asset_color": false
+  },
+  "tile_accounting": {
+    "method": "exact indexed 8x8 patterns; omit empty transparent cells; no flip deduplication",
+    "canvas_tile_slots_per_frame": null,
+    "occupied_tile_cells_per_frame": null,
+    "unique_tile_patterns_per_frame": null,
+    "occupied_tile_placements_all_frames": null,
+    "unique_tile_patterns_all_frames": null,
+    "raw_4bpp_bytes_per_pattern": 32,
+    "raw_4bpp_bytes_selected_frame": null,
+    "raw_4bpp_bytes_unique_sheet_patterns": null,
+    "runtime_vram_residency": "not_claimed"
+  },
+  "proof_sheet": {
+    "image_path": "data/source_art/asset_conversion_proofs/...",
+    "image_sha256": "REQUIRED_AFTER_COMPOSITION",
+    "report_path": "data/source_art/asset_conversion_proofs/...",
+    "display_scale": "native 1x plus nearest-neighbor enlarged views",
+    "inspection_background_rule": "choose among #FF00FF, #00FF00, #0000FF by palette contrast; background excluded from asset palette"
+  },
+  "review": {
+    "pixel_clusters": "pending",
+    "face_detail_readability": "pending",
+    "outline_and_cutout": "pending",
+    "material_shading": "pending",
+    "hand_weapon_attachment": "pending",
+    "equipment_geometry": "pending",
+    "frame_pose_integrity": "pending",
+    "native_size_readability": "pending",
+    "artist_reference_and_scope": "pending",
+    "style_signature_and_distinction": "pending",
+    "document_and_layout": "pending",
+    "identity_and_palette": "pending",
+    "scale_and_morphology": "pending",
+    "anatomy_and_equipment": "pending",
+    "clusters_and_cutout": "pending",
+    "frame_integrity": "pending",
+    "independent_review": "pending",
+    "owner_decision": "pending"
+  },
+  "promotion": {
+    "approved_for_res": false,
+    "rom_asset_binding": "not_created",
+    "emulator_validation": "not_performed"
+  }
+}

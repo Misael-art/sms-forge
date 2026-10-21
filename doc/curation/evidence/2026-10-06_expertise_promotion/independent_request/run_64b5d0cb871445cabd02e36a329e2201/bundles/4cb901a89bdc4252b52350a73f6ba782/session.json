@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "session_id": "4cb901a89bdc4252b52350a73f6ba782",
+  "root": "/tmp/smsforge-1000/4cb901a89bdc4252b52350a73f6ba782",
+  "state": "captured",
+  "created_at": 1791339229.3756077,
+  "source_rom": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/independent_request/rom.sms",
+  "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+  "emulator_sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d",
+  "bridge_sha256": "a283b54202112434927ed8f83bb292376a2d6f74830dde6f04f9589da377333a",
+  "bridge_source_sha256": "99d4d2e95ce91c05f60d54f5ccc2c877e9c7f68a0aadf52cf5be603da2daba3d",
+  "config_initial_sha256": "96f1d666d3385321f7ff87ea6f260305647e00ca2f702dd44d26825aac26a559",
+  "xvfb": "/mnt/sdcard/Projects/SMSForge/out/session_bridge/runtime/xvfb/usr/bin/Xvfb",
+  "host_display": ":0",
+  "xvfb_sha256": "5bfd315a8c7bc626d0b183d176e130c34f910a4a1279d9d53ea45769f62a3351",
+  "ttl_seconds": 1800,
+  "host_load": [
+    3.107421875,
+    3.51806640625,
+    3.498046875
+  ],
+  "audio": "private_sink_unvalidated",
+  "enable_audio_requested": true,
+  "input": "process_local_SMSJoypad",
+  "supervisor": {
+    "pid": 177313,
+    "start_ticks": "245759"
+  },
+  "audio_sink": "smsforge_4cb901a89bdc4252",
+  "audio_sink_module": "536870916",
+  "display": ":1",
+  "xvfb_process": {
+    "pid": 177321,
+    "start_ticks": "245767"
+  },
+  "sandbox": {
+    "pid": 177335,
+    "start_ticks": "245779"
+  },
+  "emulator_process": {
+    "pid": 177336,
+    "start_ticks": "245779"
+  },
+  "ready": {
+    "ok": true,
+    "pid": 177336,
+    "frame": 120,
+    "p1": 0,
+    "p2": 0,
+    "console": 0,
+    "emulator_input": 0,
+    "nominal_hz": 59.92274340431231,
+    "audio_enabled": false,
+    "running": false
+  },
+  "audio_route": {
+    "sink_inputs": [
+      "773"
+    ],
+    "pid": 177336,
+    "sink": "smsforge_4cb901a89bdc4252",
+    "at": 1791339232.5958576,
+    "verified": true
+  },
+  "audio_boot": {
+    "muted_from_launch": true,
+    "ready_audio_enabled": false,
+    "silent_stream_priming": true,
+    "unmuted_after_verified_route": true
+  }
+}

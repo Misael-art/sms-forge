@@ -1,0 +1,131 @@
+{
+  "schema": "sms_sprite_sheet_candidate_review_v1",
+  "asset_id": "dr_social_social_light_jab_candidate_v2",
+  "status": "draft_for_motion_readability_only; alpha_palette_preflight_failed",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v2/social_light_jab_candidate_v2.png",
+    "sha256": "8ac486bd47e83c4bdf8ec473a3647dd7ede2627ab4029ee4ffdf35bcf52e2c5a",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "kind": "pixel_sprite_sheet_art_candidate"
+  },
+  "lineage": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+      "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+      "role": "owner-approved identity, body silhouette, costume, equipment and basic pose source"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/dr_social_61_pose_converted_preview_4x.png",
+      "sha256": "7d1ac3e85652b76630869df5bdf8ff89bea602761f73243867de47039982c58e",
+      "role": "color grouping and clean cel-shading treatment reference only"
+    }
+  ],
+  "animation_contract": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_animation_contract_v2.json",
+    "sequence_id": "social_light_jab",
+    "frame_ids_row_major": [
+      "J01",
+      "J02",
+      "J03",
+      "J04",
+      "J05",
+      "J06"
+    ],
+    "intended_grid": {
+      "columns": 3,
+      "rows": 2,
+      "cell_px": [
+        512,
+        512
+      ]
+    },
+    "logical_sms_canvas_target_px": [
+      80,
+      80
+    ],
+    "durations_ticks_proposal": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      3
+    ],
+    "status": "design_approved; animation_art_pending_owner_review"
+  },
+  "measured_preflight": {
+    "layout": {
+      "status": "pass_preliminary",
+      "columns": 3,
+      "rows": 2,
+      "cell_px": [
+        512,
+        512
+      ],
+      "frame_order": [
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06"
+      ],
+      "note": "A composição organiza seis poses em 3×2; células ainda não são 80×80."
+    },
+    "alpha_cutout": {
+      "status": "fail",
+      "expected": "alpha 0 no fundo e alpha 255 no sprite; sem pixels de borda parcial",
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "alpha_zero_pixels": 970884,
+      "alpha_255_pixels": 0,
+      "partial_alpha_pixels": 601980,
+      "note": "Nenhum pixel é totalmente opaco; o halo semitransparente impede recorte limpo."
+    },
+    "color_count": {
+      "status": "fail_for_runtime_asset",
+      "unique_rgba_values": 184429,
+      "master_system_sprite_useful_color_ceiling": 15,
+      "note": "Imagem RGBA de alta resolução, não indexada à paleta SMS."
+    },
+    "native_frame_geometry": {
+      "status": "not_started",
+      "observed_cell_px": [
+        512,
+        512
+      ],
+      "required_review_canvas_px": [
+        80,
+        80
+      ],
+      "note": "Nenhuma extração, downscale, limpeza de clusters ou validação em tamanho nativo foi feita."
+    }
+  },
+  "producer_preflight_notes": {
+    "pose_read": "J01 guarda, J02 antecipação, J03 extensão parcial, J04 contato, J05 recolha, J06 retorno à guarda. J01/J06 são o endpoint repetido intencional; J02–J05 são visualmente distintos.",
+    "anatomy_and_equipment": "A visão geral mostra o punho ativo e a bengala de apoio, mas continuidade articular, pegada, pomo e ponta requerem inspeção por quadro em 80×80/4×.",
+    "morphology_and_identity": "A silhueta é adulta e esguia; a leitura dos óculos redondos e a fidelidade facial ainda requerem revisão no tamanho alvo.",
+    "pixel_finish": "A aparência ampliada tem clusters mais definidos que v1, mas alpha parcial, halo e 184.429 cores RGBA bloqueiam alegação de pixel art limpa ou conformidade SMS."
+  },
+  "required_next_actions": [
+    "Eliminar ou regenerar o halo para obter alpha estritamente binário sem alterar anatomia, silhueta ou equipamento.",
+    "Extrair seis canvases 80×80 alinhados e inspecionar cada quadro em 1× e nearest-neighbor 4× sobre fundos claro/escuro.",
+    "Validar rosto/óculos, as duas mãos, continuidade ombro-cotovelo-punho, pegada da bengala, ponta arredondada, baseline, contorno e sombra do casaco.",
+    "Completar revisão artística independente e obter aprovação do dono.",
+    "Só depois iniciar conversão indexada, contagem tiles/metasprites, gates SMS e ROM diagnóstica."
+  ],
+  "independent_review": {
+    "status": "pending_assignment"
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "conversion_validation": {
+    "status": "not_started"
+  },
+  "promotion_status": "blocked_candidate_only"
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "jj_zillion_ii_concept_sheet_v4",
+  "status": "owner_approved_visual_reference",
+  "owner_approval": {
+    "date": "2026-10-04",
+    "scope": "visual approval of concept v4; authorizes a separate sprite study only",
+    "source": "explicit user approval in conversation"
+  },
+  "generation_steps": [
+    {
+      "version": "v3 costume correction",
+      "tool": "Codex ImageGen",
+      "input": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2_alpha_cutout.png",
+      "prompt": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_prompt_v3.txt",
+        "sha256": "1114fa84a6b03c0880ecfe20f3299b4b6c2b24238634b74fb71cbfea70a21668"
+      },
+      "output": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v3_generated.png",
+        "sha256": "0ea5aecc71ea59e75a0fb5cad367f9ab5b1c6deefb14bc7c3d83dace1288013e",
+        "dimensions_px": [1536, 1024]
+      }
+    },
+    {
+      "version": "v4 costume/detail refinement",
+      "tool": "Codex ImageGen",
+      "input": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v3_generated.png",
+      "prompt": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_cleanup_prompt_v4.txt",
+        "sha256": "ab8f0d7179478b0f21bb45c7a4080418ab89e9e86b173b363e807e1e74f9082c"
+      },
+      "output": {
+        "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_generated.png",
+        "sha256": "12ad54cef38a24ae57f1b8b183cef9eb78eb34bffa35169a9d9851ad47c400f6",
+        "dimensions_px": [1536, 1024]
+      }
+    }
+  ],
+  "references": [
+    {
+      "medium": "game_sms",
+      "role": "game identity, SMS palette, and gameplay behavior",
+      "source_game": "Zillion II: The Tri Formation (Sega Master System)",
+      "source_name": "J.J - Standing",
+      "url": "https://www.smspower.org/uploads/Sprites/ZillionII-SMS-J.J-Standing.png",
+      "sha256": "102b797311b5790272bf2ef63bb5a568b972fe1d74961d46e85163be2e4495b6",
+      "dimensions_px": [13, 40],
+      "external_pixels_copied": false
+    },
+    {
+      "medium": "anime",
+      "role": "costume construction only",
+      "source": "Production I.G. Zillion art gallery, J.J. three-view model sheet",
+      "page_url": "https://note.com/production_ig_p/n/n4bf0b19573c1",
+      "image_url": "https://assets.st-note.com/production/uploads/images/43956842/picture_pc_96c1d26402e1bba6b915086350155abd.jpg?width=1200",
+      "sha256": "8b3cb252ac7b7deba526dabc72a910c9055a3f8821ff8ed7356e93f94663de6e",
+      "anime_pixels_copied": false,
+      "external_pixels_copied": false
+    },
+    {
+      "medium": "anime",
+      "role": "costume color-to-garment mapping only",
+      "source": "Akai Koudan Zillion color art scan, secondary archive page",
+      "page_url": "https://safebooru.org/index.php?id=6459990&page=post&s=view",
+      "image_url": "https://safebooru.org//images/44/7423927ce37b28f2aa869aff662192463cc588f2.png?6459990=",
+      "sha256": "ca2de8e6839a3853f5975bda1637f9a11d3c756a40a66f1118cae0c4b26603c9",
+      "anime_pixels_copied": false,
+      "external_pixels_copied": false
+    }
+  ],
+  "alpha_and_palette_conversion": {
+    "method": "retain alpha >= 230/255, discard low-alpha glow, remap opaque pure-black line pixels to navy #000055, flatten transparency to black for converter input",
+    "retained_canvas_fraction": 0.253,
+    "mask": {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_alpha_mask.png",
+      "sha256": "a81b5887437123813b3ba354a7668c8142e85e286824a199537f8d6db640e129"
+    },
+    "cutout": {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_alpha_cutout.png",
+      "sha256": "20ef2780d0f9a27819ea25474f0c27ff9414ae82e778aaa90160ff96a0ec392a"
+    },
+    "flattened_input": {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_flattened.png",
+      "sha256": "75cfac782b729ae024775d6f5a8e9b50aca28c92160c36d3ab01c860a80b91a8"
+    },
+    "converter": {
+      "path": "tools/sms_wrapper/prepare_sms_pixel_art.py",
+      "sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+      "arguments": [
+        "--project .",
+        "--character jj_zillion_ii",
+        "--size 1536x1024",
+        "--dither none",
+        "--speckle-cleanup",
+        "--cell-size 1536x1024"
+      ]
+    },
+    "palette_source": {
+      "path": "doc/build_palettes_manifest.py",
+      "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e"
+    },
+    "palette_manifest": {
+      "path": "doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff"
+    },
+    "final": {
+      "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "format": "8-bit indexed PNG",
+      "dimensions_px": [1536, 1024],
+      "transparent_index": 0,
+      "useful_colors": 13,
+      "dither": "none"
+    }
+  },
+  "preview": {
+    "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v4_preview.png",
+    "sha256": "12196c4e20d002ff105ded07ea671a5dfd402d723b291c0bebb5713ef5228035",
+    "background": "neutral dark gray for review, not the indexed source"
+  },
+  "validation": {
+    "palette_generator": "PASS: 14 palettes validated, 6-bit colors, ramp floor >=17, max 15 useful colors",
+    "focused_resource_gate": {
+      "command": "audit_validate_resources.py --project . --kind sheet --character jj_zillion_ii data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "result": "PASS: 1 PNG within contract"
+    },
+    "integrated_in_res": false,
+    "rom_or_emulator_validation": false
+  },
+  "approval_scope": "owner-approved concept art only; sprite creation may proceed, but there is no sprite approval, gameplay, ROM, FPS, audio or budget claim"
+}

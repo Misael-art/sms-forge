@@ -1,0 +1,447 @@
+{
+  "schema": "sms_independent_curation_review_v1",
+  "review_date": "2026-10-08",
+  "reviewer_id": "/root/review_qa_contract",
+  "producer_id": "/root",
+  "scope": "Independent review of counter-window arithmetic, concept layout contract and canonical documentation; no product promotion",
+  "status": "passed_with_limits",
+  "recommendation": "Accept central curation within declared scope; no exact historical cache hit count/rate, causal FPS improvement, SAT runtime approval or art approval.",
+  "reviewed_files": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_counter_window.py",
+      "sha256": "306689dad0b60eaf62b9e58b0170e8f93ac7d4d29185e57343b3c58d92083061"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_art_review_checklist.py",
+      "sha256": "1566cb7a613a745daefb66d88e416ff5ece35e046cd092283ee266bba0707c7d"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_subagent_session.py",
+      "sha256": "9406183fa4f3b4ad5d74496004b7521be0c54208ecbc4b08c3833a36f0b48f90"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/selftest.py",
+      "sha256": "0f9ef154dc12186d166a855bc4f7bfd3950eddc1a1883a1f07c2c48d402dd657"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+      "sha256": "d4753308b1d998b4bd2263666bae7eea2f288aa17ce675ccc7fcdd63a8c7b0b0"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
+      "sha256": "137c58eebbce9beac23aa8d37858ebdcae84ffcf51bd1be71ef3228083438ab0"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+      "sha256": "4213d80bc6d1933517567b9a8e25f95be95561c4296d913c6af8b045b551e39b"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
+      "sha256": "f6174f20a0a2ff9c65e87287f3284f04f6490c63c049f4226dfe3aade57e7846"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/art-review.md",
+      "sha256": "a4e3c69d4821e06b23230f7061727d2ae4f970a2b47a6b001665a10a24d28a2e"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+      "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/workflows/original-artwork.md",
+      "sha256": "758953c840ae59adaab924909a5bcccaec893e883a72eec00a86df37a26c9987"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/2026-10-08_l108_fluxo_arte_autoral_incremental.json",
+      "sha256": "e043ebf673cdcb376d39157563f0bdafb63f257d5d28b2ab70f8c0222ba13ba5"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/source_inventory.json",
+      "sha256": "efc1e5c86a810e6ebd9638641133b43ffc18e427c5397b1666695dadebff4ef2"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/drawdirty_counter_record.json",
+      "sha256": "f62e64a7e6ca8822de68b57c3ea48a5f13c3fedeb772b59e511aefc63df51418"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/counter_calibration.json",
+      "sha256": "7ee99b1c3aa35ab93b4c317d6a847ad59bf5e7da9c50f4525b242188e429e446"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-08_runtime_counter_layout/counter_358_bound_offline_illustration.json",
+      "sha256": "d538b0497d41b7db8775622869a3209f68b8a1b0b95278843f8e364d5b3d9754"
+    }
+  ],
+  "source_inventory_verified": {
+    "count": 6,
+    "all_snapshot_hashes_valid": true,
+    "origins_not_reopened": true
+  },
+  "self_checks": [
+    {
+      "tool": "audit_counter_window.py --self-check",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "tool": "audit_art_review_checklist.py --self-check",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "tool": "audit_counter_window.py --self-check",
+      "exit_code": 0,
+      "status": "passed",
+      "phase": "after_final_limits_clarification"
+    }
+  ],
+  "focused_counter_tests": {
+    "cases": [
+      {
+        "case": "exact29",
+        "expected_ok": true,
+        "actual_ok": true,
+        "matched": true,
+        "problems": []
+      },
+      {
+        "case": "bool_bound",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "invalid event bound"
+        ]
+      },
+      {
+        "case": "float_bound",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "invalid event bound"
+        ]
+      },
+      {
+        "case": "negative_bound",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "invalid event bound"
+        ]
+      },
+      {
+        "case": "bound_below_delta",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "event bound contradicts modular delta"
+        ]
+      },
+      {
+        "case": "bound_at_delta",
+        "expected_ok": true,
+        "actual_ok": true,
+        "matched": true,
+        "problems": []
+      },
+      {
+        "case": "bound_before_second",
+        "expected_ok": true,
+        "actual_ok": true,
+        "matched": true,
+        "problems": []
+      },
+      {
+        "case": "bound_second",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "counter window ambiguous; shorter window or wider/saturating instrument required"
+        ]
+      },
+      {
+        "case": "zero_full_wrap",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "counter window ambiguous; shorter window or wider/saturating instrument required"
+        ]
+      },
+      {
+        "case": "zero_zero_bound",
+        "expected_ok": true,
+        "actual_ok": true,
+        "matched": true,
+        "problems": []
+      },
+      {
+        "case": "bool_before",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "counter sample outside width"
+        ]
+      },
+      {
+        "case": "bool_after",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "counter sample outside width"
+        ]
+      },
+      {
+        "case": "float_after",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "counter sample outside width"
+        ]
+      },
+      {
+        "case": "bool_bits",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "counter bits must be 8, 16 or 32"
+        ]
+      },
+      {
+        "case": "reset_false",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "no-reset precondition absent"
+        ]
+      },
+      {
+        "case": "reset_integer",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "no-reset precondition absent"
+        ]
+      },
+      {
+        "case": "reset_unknown",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "no-reset precondition absent"
+        ]
+      },
+      {
+        "case": "bool_claim",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "exact count unsupported or disagrees"
+        ]
+      },
+      {
+        "case": "float_claim",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "exact count unsupported or disagrees"
+        ]
+      },
+      {
+        "case": "wrong_claim",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "exact count unsupported or disagrees"
+        ]
+      },
+      {
+        "case": "unbounded_non_strict",
+        "expected_ok": true,
+        "actual_ok": true,
+        "matched": true,
+        "problems": []
+      },
+      {
+        "case": "unbounded_strict",
+        "expected_ok": false,
+        "actual_ok": false,
+        "matched": true,
+        "problems": [
+          "counter window ambiguous; shorter window or wider/saturating instrument required"
+        ]
+      },
+      {
+        "case": "event_units_not_validated",
+        "expected_ok": true,
+        "actual_ok": true,
+        "matched": true,
+        "problems": []
+      }
+    ],
+    "direct_enumeration_count": 250,
+    "all_passed": true,
+    "fixture_scope": "Offline in-memory arithmetic; synthetic bound200 is not linked to real trial"
+  },
+  "focused_art_tests": {
+    "cases": [
+      {
+        "case": "layout_missing",
+        "status": "fail",
+        "problems": [
+          "concept model sheet review requires explicit axes: document_and_layout"
+        ],
+        "failed_axes": []
+      },
+      {
+        "case": "layout_na",
+        "status": "fail",
+        "problems": [
+          "dr_ferdinand_social.document_and_layout: concept sheet layout cannot be exempted"
+        ],
+        "failed_axes": []
+      },
+      {
+        "case": "layout_failed",
+        "status": "fail",
+        "problems": [],
+        "failed_axes": [
+          "dr_ferdinand_social.document_and_layout"
+        ]
+      }
+    ],
+    "all_passed": true,
+    "fixture_scope": "In-memory gate negatives, not perceptual art findings or approval"
+  },
+  "historical_counter_strict_result": {
+    "ok": false,
+    "problems": [
+      "counter window ambiguous; shorter window or wider/saturating instrument required"
+    ],
+    "details": {
+      "modular_delta": 29,
+      "modulus": 256,
+      "possible_counts": null,
+      "candidate_counts": "unbounded: delta + k*modulus",
+      "exact_under_declared_bound": false,
+      "exact_count": null
+    },
+    "claim_ceiling": "declared_counter_arithmetic_only",
+    "limits": "Does not authenticate event bound, no-reset assertion, sampling window, source instrumentation or ROM execution. Does not validate event units, opportunities or denominator; no cache hit-rate or exclusive CPU-cost claim. Unbounded/multiwrap counts are not exact."
+  },
+  "actual_art_current_validation": {
+    "schema": "sms_art_review_checklist_report_v1",
+    "status": "pending",
+    "exit_code": 2,
+    "asset_id": "dr_social_model_sheet_14_gouache_fantasy_v3",
+    "characters_reviewed": 1,
+    "axis_counts": {
+      "pass": 0,
+      "fail": 0,
+      "pending": 17,
+      "not_applicable": 0
+    },
+    "failed_axes": [],
+    "pending_axes": [
+      "dr_ferdinand_social.document_and_layout",
+      "dr_ferdinand_social.style_reference_application",
+      "dr_ferdinand_social.lineart_and_contours",
+      "dr_ferdinand_social.morphology_and_biotype",
+      "dr_ferdinand_social.shading_and_palette",
+      "dr_ferdinand_social.relative_scale_and_baseline",
+      "dr_ferdinand_social.neutral_background",
+      "dr_ferdinand_social.face_and_identity_continuity",
+      "dr_ferdinand_social.costume_and_materials",
+      "dr_ferdinand_social.equipment_and_weapon_continuity",
+      "dr_ferdinand_social.cross_view_consistency",
+      "dr_ferdinand_social.legibility_and_crop_integrity",
+      "dr_ferdinand_social.human_traits_and_unapproved_details",
+      "dr_ferdinand_social.artist_reference_and_scope",
+      "dr_ferdinand_social.distinctive_style_signature",
+      "dr_ferdinand_social.pose_anatomy_and_joint_continuity",
+      "dr_ferdinand_social.visual_cohesion_and_distinction",
+      "owner_approval",
+      "independent_review"
+    ],
+    "problems": [],
+    "claim_ceiling": "checklist_completeness_only; artistic_truth_requires_human_review"
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "status": "resolved",
+      "detail": "Initial concept layout omission now resolved by mandatory document_and_layout, explicit N/A rejection and negative selfcheck. L108 selfcheck text updated; ID not duplicated."
+    },
+    {
+      "id": "F02",
+      "status": "resolved",
+      "detail": "Counter155->184 with width8 and unknown bound is correctly ambiguous; strict fails. Bound358 illustration has candidates29 and285 and explicitly lacks runtime-window authentication."
+    },
+    {
+      "id": "F03",
+      "status": "clarified_limit",
+      "severity": "informational",
+      "detail": "Gate validates integer samples/width/bounds and declared no-reset boolean, not actual reset, sampling atomicity/endpoints, event units/owner or denominator. In-memory event_units=False does not change arithmetic PASS. This is compatible with declared_counter_arithmetic_only; do not consume PASS as hit-rate eligibility.",
+      "recommendation": "Clarification implemented in emitted limits. Future rate gate still needs unit-aligned counters and opportunities."
+    },
+    {
+      "id": "F04",
+      "status": "limit",
+      "severity": "informational",
+      "detail": "Comparison with two baseline FPS windows vs three candidate windows remains observational; VCounter spans are raster phases and SAT static parity is model evidence, not runtime. New skill/sections preserve these limits."
+    },
+    {
+      "id": "F05",
+      "status": "observation",
+      "detail": "Current DrSocialv3 hashes pass but 17 axes, owner and independent review remain pending. No visual judgment performed."
+    },
+    {
+      "id": "F06",
+      "status": "recommendation",
+      "severity": "low",
+      "detail": "original-artwork.md delegates to art-review but its inline list at section5 still names four concept axes, omitting final composition/layout. Linked art-review and mandatory gate cover layout; add the axis to the inline list for discoverability."
+    }
+  ],
+  "operator_correction": {
+    "detail": "One art audit invocation incorrectly used project-root SMS_projects/master_of_fighters although manifest paths are workspace-relative; missing-path FAIL was caused by reviewer invocation. Correct rerun project-root . returns pending with no problems.",
+    "incorrect_exit_code": 1,
+    "corrected_exit_code": 2
+  },
+  "limits": [
+    "No emulator opened, no host input or desktop manipulated, no game/ROM/source/docs edited.",
+    "No luta_mugen/doc read or repair attempted; known EIO and global doc_sync gate remain outside this local passing review.",
+    "No art perceptual inspection or owner approval; checklist coverage/hashes are not artistic truth.",
+    "No through-put, cache hit-rate, FPS causal gain, CPU cycle cost, SAT runtime or AAA claim.",
+    "Background regression logs not adopted as final evidence because coordinator was still running them."
+  ],
+  "claim_ceiling": "central_gate_and_documentation_scope_only",
+  "next_action": "Coordinator closes full regression once and retains real doc_sync failure; future SAT/optimization needs fresh production context and native ROM QA.",
+  "post_review_changes": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_counter_window.py",
+      "prior_sha256": "306689dad0b60eaf62b9e58b0170e8f93ac7d4d29185e57343b3c58d92083061",
+      "current_sha256": "306689dad0b60eaf62b9e58b0170e8f93ac7d4d29185e57343b3c58d92083061",
+      "change": "Limits now explicitly reject event-unit/denominator/hit-rate/CPU-cost promotion; selfcheck rerun passed."
+    }
+  ],
+  "final_verification": {
+    "reviewed_file_hashes_valid": true,
+    "counter_calibration_matches_final_tool": true,
+    "offline_358_illustration_matches_final_tool": true,
+    "historical_sources_preserved": true
+  }
+}

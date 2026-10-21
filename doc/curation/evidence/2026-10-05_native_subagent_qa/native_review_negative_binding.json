@@ -1,0 +1,22 @@
+{
+  "different_ROM": {
+    "schema": "independent_quality_review_validation",
+    "ok": false,
+    "problems": [
+      "native result belongs to another producer/project/ROM",
+      "native result belongs to another producer/project/ROM",
+      "native checkpoint differs from plan:rom"
+    ],
+    "claim_ceiling": "quality_review_validation_only"
+  },
+  "different_project": {
+    "schema": "independent_quality_review_validation",
+    "ok": false,
+    "problems": [
+      "native result belongs to another producer/project/ROM",
+      "native result belongs to another producer/project/ROM",
+      "native checkpoint differs from plan:project"
+    ],
+    "claim_ceiling": "quality_review_validation_only"
+  }
+}

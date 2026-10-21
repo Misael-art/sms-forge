@@ -1,0 +1,124 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "jj_zillion_ii_idle_sms_96px_12f_v5",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_study",
+  "source_kind": "ai_generated_post_translation",
+  "status": "source_candidate_pending_owner_visual_review",
+  "design_reference_approval": {
+    "source": "data/source_art/concept_art/jj_zillion_ii/approved_records/jj_concept_lineage_v4.json",
+    "source_image": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+    "source_image_sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+    "approval_date": "2026-10-04",
+    "scope": "owner-approved concept v4 defines identity, outfit, anatomy and palette mapping; approval does not approve the sprite sheet"
+  },
+  "predecessor": {
+    "lineage": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_lineage_v4.json",
+    "lineage_sha256": "b5d560ac83ebeadfd7e9c6478c2fc46c0119448858eadce40f648cb8585b1dea",
+    "sheet": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v4.png",
+    "sheet_sha256": "57b0b11e24306d37483b4d384a477db1663d624260ca56c70d102872249a98ec",
+    "reason_for_revision": "owner identified displaced color pixels on the cutout edge that made some sprites look grainy"
+  },
+  "contract": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_asset_contract_v5.json",
+    "sha256": "1ba776e4471dd1e921be6519e503e8fa09ae25099fe093e9b9b3f8f49b39264f"
+  },
+  "prompt": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_prompt_v4.txt",
+    "sha256": "9a0fd77e573135e696e2b3f6c361a7d30eeb3a7c4f41b80a81a35c685e44a8fa",
+    "role": "original design-generation prompt; the v5 edit is a pixel cleanup, not a new generation"
+  },
+  "pixel_cleanup": {
+    "editor": "ImageMagick exact-pixel RGBA edit followed by prepare_sms_pixel_art.py",
+    "source_sheet": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v4.png",
+    "source_sha256": "57b0b11e24306d37483b4d384a477db1663d624260ca56c70d102872249a98ec",
+    "color_rgb_removed": "#AA5555",
+    "region_profile": "six rows from each frame's visible top; allowed colors are the declared navy, blue/violet hair ramp and white highlight",
+    "removed_pixels_by_frame_local_xy": {
+      "00": [[46, 20]],
+      "01": [[49, 20]],
+      "02": [[58, 26]],
+      "04": [[57, 25]],
+      "05": [[38, 27]],
+      "07": [[50, 24]],
+      "08": [[54, 22], [61, 24], [42, 27]],
+      "09": [[51, 23]],
+      "11": [[54, 22], [55, 23], [56, 23]]
+    },
+    "total_removed": 13,
+    "output_diff": "13 opaque source pixels became transparent; no other pixel RGB/alpha changed; no pose, placement, scale, outline or equipment changes",
+    "palette_conversion": {
+      "tool_path": "tools/sms_wrapper/prepare_sms_pixel_art.py",
+      "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+      "arguments": ["--size 384x288", "--dither none", "--speckle-cleanup", "--cell-size 96x96"],
+      "palette": "project doc/palettes_manifest.json, character jj_zillion_ii"
+    },
+    "rejected_methods": [
+      "ImageGen cleanup changed the morphology and outline; output discarded.",
+      "Broad 18% four-corner flood fill erased legitimate pale face/armor pixels; output discarded."
+    ]
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v5.png",
+    "sha256": "1f5e4807320343279504b27a1f13e8fdbf81282a1d398c2312a72c349b1e8dd6",
+    "dimensions_px": [384, 288],
+    "format": "8-bit indexed PNG",
+    "layout": "4 columns x 3 rows; twelve 96x96 frames",
+    "transparent_indices": [0],
+    "useful_colors": 13,
+    "dither": "none"
+  },
+  "frames": {
+    "directory": "data/source_art/sprite_studies/jj_zillion_ii/frames_sms_v5/",
+    "count": 12,
+    "unique_frame_hashes": 12,
+    "sha256": [
+      "d00468941cd8ab9330dfd976aff934f1337595958d6a3ed823770833d9844873",
+      "92022bf189058a4ed48ba324da484b0077dfb8bf879d2842fd039bf85c161b89",
+      "f32da195e83dc8294bdad9919ec5430320c45460c2d84a217dbbb8db00bc43c8",
+      "b3b6edecba2cf01770134d96af09f86118d9913009dec91805eeb291bba58d0d",
+      "448fdf492d91e6fd6b202711da0a6ff6c0a818ee8f007194dca8545e12633b58",
+      "7973d08423791212b309b5804daa3d19a40365da8fb9766f6c874b7885872461",
+      "d802f219a512f4eee5455869c96d1df4841525c28f3fbf35ed7bfc24ca6cf665",
+      "637058f84a982682b68c18b82827ed00601aa0fc740bdf8e89bfd57de0ff24fb",
+      "7867e6b6945a231f68ac2226e87f06d60c92b1f43c98dfe02fad73ff3c89a455",
+      "468b2cbd897f3d49b4d062397e5fd93e78ba8a9d17a4d9b0357adfa24a4bfa1c",
+      "a50b9b58850e965c7f0e15623c3e300735be665bc69f4981880785f0e3cb8bf8",
+      "aefd7b9202058935214e9d174641b00906cdbe45c57e8b6243e68eb2b095ac2c"
+    ],
+    "geometry": {
+      "visible_width_px": [61, 66],
+      "visible_height_px": [72, 76],
+      "baseline_y_px": 95,
+      "common_pivot_px": [48, 95]
+    },
+    "semantic_manifest": {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_semantics_v5.json",
+      "sha256": "57b9ca8a0e0c21f47f9d32e3c9de2da3ca2b90daca7f73cc16afe37fdb856477",
+      "gate": "PASS: twelve unique frame hashes, bbox, baseline and pivot contract"
+    }
+  },
+  "review_preview": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v5_preview_4x.png",
+    "sha256": "82fd1367aadce590db3083a2851cdb865d052e3c8622713a71a3f688abf2c26e",
+    "scale": "4x nearest-neighbor on #444444"
+  },
+  "visual_check": {
+    "same_design_and_morphology_as_v4": true,
+    "same_pose_and_placement_in_all_cells": true,
+    "off-material_hair_edge_pixels_removed": true,
+    "no_new_pixels_or_colors": true,
+    "no_dithering_or_texture": true,
+    "owner_visual_review": "pending; v5 is a source candidate only",
+    "aaa_quality_claim": false
+  },
+  "technical_review": {
+    "resource_gate": "PASS: audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character jj_zillion_ii",
+    "animation_gate": "PASS: audit_animation_semantics.py --manifest SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_semantics_v5.json --project SMS_projects/master_of_fighters",
+    "cutout_gate": "PASS: audit_sprite_cutout.py --image SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_v5.png --contract SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_asset_contract_v5.json",
+    "reference_boundary": "PASS: audit_reference_boundary.py --project SMS_projects/master_of_fighters",
+    "scanline_budget_validation": false,
+    "rom_or_emulator_validation": false
+  },
+  "next_gate": "owner visual review of v5; only after approval consider independent review and runtime geometry/scanline/asset-binding/emulator gates before any res integration"
+}

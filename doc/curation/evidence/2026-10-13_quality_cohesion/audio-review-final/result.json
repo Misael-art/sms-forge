@@ -1,0 +1,445 @@
+{
+  "status": "passed_independent_focused_audio_v2_review",
+  "checks": [
+    {
+      "name": "selfcheck_audit_psg_quality.py",
+      "ok": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    {
+      "name": "selfcheck_make_psg_assets.py",
+      "ok": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    {
+      "name": "reject_low_wait",
+      "ok": true,
+      "details": {
+        "audit": [
+          "FORMAT: tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado"
+        ],
+        "preview": "tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado",
+        "no_wave_file": true
+      }
+    },
+    {
+      "name": "reject_low_end",
+      "ok": true,
+      "details": {
+        "audit": [
+          "FORMAT: tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado"
+        ],
+        "preview": "tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado",
+        "no_wave_file": true
+      }
+    },
+    {
+      "name": "reject_low_eof",
+      "ok": true,
+      "details": {
+        "audit": [
+          "FORMAT: tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado"
+        ],
+        "preview": "tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado",
+        "no_wave_file": true
+      }
+    },
+    {
+      "name": "reject_volume_data",
+      "ok": true,
+      "details": {
+        "audit": [
+          "FORMAT: PSG data no offset 1 sem tone-pair contiguo; data apos volume/noise ou high-only nao suportado"
+        ],
+        "preview": "PSG data no offset 1 sem tone-pair contiguo; data apos volume/noise ou high-only nao suportado",
+        "no_wave_file": true
+      }
+    },
+    {
+      "name": "reject_noise_data",
+      "ok": true,
+      "details": {
+        "audit": [
+          "FORMAT: PSG data no offset 1 sem tone-pair contiguo; data apos volume/noise ou high-only nao suportado"
+        ],
+        "preview": "PSG data no offset 1 sem tone-pair contiguo; data apos volume/noise ou high-only nao suportado",
+        "no_wave_file": true
+      }
+    },
+    {
+      "name": "reject_high_only",
+      "ok": true,
+      "details": {
+        "audit": [
+          "FORMAT: PSG data no offset 0 sem tone-pair contiguo; data apos volume/noise ou high-only nao suportado"
+        ],
+        "preview": "PSG data no offset 0 sem tone-pair contiguo; data apos volume/noise ou high-only nao suportado",
+        "no_wave_file": true
+      }
+    },
+    {
+      "name": "reject_compressed",
+      "ok": true,
+      "details": {
+        "audit": [
+          "FORMAT: PSGlib comando 0x08 no offset 0 nao suportado; substring comprimida exige expansao antes da analise"
+        ],
+        "preview": "PSGlib comando 0x08 no offset 0 nao suportado; substring comprimida exige expansao antes da analise",
+        "no_wave_file": true
+      }
+    },
+    {
+      "name": "sfx_multi_ch_decay",
+      "ok": true,
+      "details": {
+        "violations": [],
+        "warnings": [
+          "S1 multicanal: compara escritas inicial/final globalmente; nao prova fade de cada canal nem mix silencioso"
+        ]
+      }
+    },
+    {
+      "name": "sfx_multi_ch_bad",
+      "ok": true,
+      "details": {
+        "violations": [
+          "S1 decaimento: primeira atenuacao nao muda 14 e ultima escrita 1 — sem crescimento liquido na politica temporal; nao mede waveform/clique"
+        ],
+        "warnings": [
+          "S1 multicanal: compara escritas inicial/final globalmente; nao prova fade de cada canal nem mix silencioso"
+        ]
+      }
+    },
+    {
+      "name": "sfx_out_of_order_sort",
+      "ok": true,
+      "details": {
+        "violations": [],
+        "warnings": [
+          "S1 multicanal: compara escritas inicial/final globalmente; nao prova fade de cada canal nem mix silencioso"
+        ]
+      }
+    },
+    {
+      "name": "sfx_same_time_stable",
+      "ok": true,
+      "details": {
+        "violations": [],
+        "warnings": [
+          "S1 multicanal: compara escritas inicial/final globalmente; nao prova fade de cada canal nem mix silencioso"
+        ]
+      }
+    },
+    {
+      "name": "sfx_final_mute",
+      "ok": true,
+      "details": {
+        "violations": [],
+        "warnings": []
+      }
+    },
+    {
+      "name": "sfx_silent",
+      "ok": true,
+      "details": {
+        "violations": [
+          "S1: nenhuma atenuacao !=15 declarada — nao prova som"
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "name": "noise_mode_0",
+      "ok": true,
+      "details": {
+        "white_fraction": 0.0,
+        "noise_step_nominal_hz": 6991.298828125
+      }
+    },
+    {
+      "name": "noise_mode_1",
+      "ok": true,
+      "details": {
+        "white_fraction": 0.0,
+        "noise_step_nominal_hz": 3495.6494140625
+      }
+    },
+    {
+      "name": "noise_mode_2",
+      "ok": true,
+      "details": {
+        "white_fraction": 0.0,
+        "noise_step_nominal_hz": 1747.82470703125
+      }
+    },
+    {
+      "name": "noise_mode_3",
+      "ok": true,
+      "details": {
+        "white_fraction": 0.0,
+        "noise_step_nominal_hz": 440.39677657480314
+      }
+    },
+    {
+      "name": "noise_mode_4",
+      "ok": true,
+      "details": {
+        "white_fraction": 1.0,
+        "noise_step_nominal_hz": 6991.298828125
+      }
+    },
+    {
+      "name": "noise_mode_5",
+      "ok": true,
+      "details": {
+        "white_fraction": 1.0,
+        "noise_step_nominal_hz": 3495.6494140625
+      }
+    },
+    {
+      "name": "noise_mode_6",
+      "ok": true,
+      "details": {
+        "white_fraction": 1.0,
+        "noise_step_nominal_hz": 1747.82470703125
+      }
+    },
+    {
+      "name": "noise_mode_7",
+      "ok": true,
+      "details": {
+        "white_fraction": 1.0,
+        "noise_step_nominal_hz": 440.39677657480314
+      }
+    },
+    {
+      "name": "pitch_A4_period254",
+      "ok": true,
+      "details": {
+        "fft_hz": 440.625
+      }
+    },
+    {
+      "name": "corpus_sha_and_M4",
+      "ok": true,
+      "details": {
+        "streams": 36,
+        "reprova": 11
+      }
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_psg_quality.py",
+      "sha256": "e017278a551ae49b5c249d9aeb42fad831748e885bcba06b7b20439d2db2e509"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/make_psg_assets.py",
+      "sha256": "c78a4a082af17c8fd5fb307fafa3703e4ac45c9ce574b15d17f73e7df179396d"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+      "sha256": "fdc55fcbba31cc67c11e18a15ffeb130d75ef4f10d89a362bd364081a4db5fc2"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+      "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4"
+    }
+  ],
+  "all_checks_pass": true,
+  "check_count": 25,
+  "corpus": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_battle.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_ken_stage.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_title.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_down.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_fight.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_hit.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_hurt.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_shot.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/music_battle.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/music_title.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_down.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_hit.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_hurt.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_shot.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/music_battle.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/music_title.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_down.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_hit.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_hurt.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_shot.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/kage_matsuri/res/audio/music_kage.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/kage_matsuri/res/audio/sfx_slash.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/music_battle.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_down.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_hit.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_hurt.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_round.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_shot.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_special.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_dawn.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_eco.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_storm.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_title.psg",
+      "sha_matches": true,
+      "verdict": "reprova"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_chime.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_crack.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_crystal.psg",
+      "sha_matches": true,
+      "verdict": "passa"
+    }
+  ],
+  "scope": "three previous findings retested; limited transport explicitly refuses unsupported streams; no repo/assets changes, no emulation/full suite",
+  "limitations": [
+    "Low-only and high-only updates can be valid chip/driver writes but are deliberately rejected by the narrower tool subset.",
+    "M4 failures mark event-policy exceptions, not musical faults; periodnoise can be intentional.",
+    "Multichannel SFX first/last is global and does not prove each channel fades/mutes or mix/click absence.",
+    "Noise preview nominal Sega16LFSR and ch2period only, no exactphase/cycle/analog fidelity.",
+    "Runtime audio/gameplay/fps/hardware not reviewed here."
+  ]
+}

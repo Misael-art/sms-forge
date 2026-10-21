@@ -1,0 +1,38 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_15_ghibli_cel_simulation_art_review_v2",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Independent, read-only review of concept model sheet #15 (Ghibli-Cel-Simulation): identity and five-view consistency; artist attribution/role/scope; distinct style signature; shoulder-to-hand anatomical continuity; palette/materials; ruler, baseline, crop, labels and card overlap. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2.png",
+      "sha256": "86a83b5b6c9756b912b4a1a28c3e8263c6810b03bac27fdb075436dc0605bb1c",
+      "role": "current candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_review_v2.json",
+      "sha256": "41e0b05ad7bf4f2f576de74a9c51d0e35afc5efa7adeaf77938230574c5ee071",
+      "role": "hash-bound per-character review checklist"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2_metadata.json",
+      "sha256": "a39dadd7600120be164cbccc3509b1da82fdb4a54a20d09d9228df1a0560d907",
+      "role": "style/card/layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v2.json",
+      "sha256": "98852b7e3aa9527dabcd0d153a3376cefdaf9dc929c3ef06897c43d46630e61b",
+      "role": "source and composition lineage"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Separate artist reference from authorship of sprites/game assets; report unverified credit as such.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Return concrete findings for anatomy, identity, style distinction, five-view cohesion, page layout and labels."
+  ]
+}

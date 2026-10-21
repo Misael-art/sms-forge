@@ -1,0 +1,19 @@
+Create a clean 12-frame idle sprite study for Landau using the supplied approved Lord of the Sword concept sheet as the exact character design and color reference. Recompose it as a single transparent 4-column by 3-row sheet of twelve equal square cells, read left to right then top to bottom. The grid is invisible: no borders, gaps, labels, numbers, typography, background objects, or watermark. Keep each whole figure inside its own cell. Aim for the final 96x96 logical cell with an 88px-tall visible character, feet grounded at the same baseline and a common pivot at [48,95].
+
+Character lock: the same young adult Landau in every frame, youthful face and jaw, clean-shaven, no moustache or beard. Preserve the approved strong young-warrior build and the concept's design: dark chestnut hair with a simple headband, green tunic, brown leather guards and harness, red sash, blue trousers, bright silver greaves, sword in his right hand, bow and quiver on his back. He remains young and heroic, never an aged veteran. Keep the same facing direction, three-quarter side view toward the right, same height, costume, equipment and hand assignment in all twelve cells.
+
+Action is a calm guarded idle cycle, not an attack or walk. Read the twelve cells in order and make every neighboring pose visibly different in at least two areas (torso/shoulders, knees/weight, sword angle, off-hand, hair/sash follow-through). Keep motion small but clear at final sprite scale; no identical poses or simple repeated pose with only a renamed frame. Suggested sequence:
+1. settled guard, knees softly bent, sword held low-forward;
+2. quiet inhale, chest and sword hand lift slightly;
+3. shoulders reach the breath crest, sword tip angles outward, hair shifts;
+4. exhale begins, torso lowers, sash lags behind the movement;
+5. weight shifts back through the hips, rear knee bends, sword draws closer;
+6. guard closes, off-hand tightens near the chest, blade rotates inward;
+7. brief compressed stance, knees lower, blade point dips;
+8. weight begins returning forward, torso rises, hair and sash follow;
+9. front shoulder settles forward, sword wrist turns and point lifts;
+10. breath releases, shoulders drop, off-hand relaxes, blade eases down;
+11. feet and hips recenter, bow and quiver remain fixed to his back while hair settles;
+12. poised recovery close to frame 1 but visibly distinct, sword at a slightly changed angle and weight centered for the loop.
+
+Style: crisp, hand-placed-looking pixel clusters for a 1990s Japanese console fighting game; hard three-tone cel shading where the palette supports it; strong readable silhouette; no blur, antialiasing, painterly texture, gradients, dithering, grain, speckles, detached pixels, or soft glow. Use only these exact RGB colors from the approved Master System palette: outline #555555; skin #FFAAAA and #FF5555; chestnut/warm leather #AA5500; deep hair #550000 and #555500; red sash #AA0000; tunic #55AA00 and #005500; gold leather highlight #FFAA00; silver greaves #FFFFFF and #AAAAAA; blue trousers #AAAAFF and #5555AA. Pure transparency only outside the figure. Do not introduce any unlisted color. Keep deliberate outline pixels opaque and clean.

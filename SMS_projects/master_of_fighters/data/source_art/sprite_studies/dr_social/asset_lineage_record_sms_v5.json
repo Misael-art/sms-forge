@@ -1,0 +1,250 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "dr_social_idle_guard_sms_80px_12f_cleanup_v5",
+  "project": "master_of_fighters",
+  "asset_role": "sms_sprite_sheet_cleanup_study",
+  "channel": "built_in_image_gen + prepare_sms_pixel_art.py + palette-role edge mapping",
+  "inputs": [
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_v3.png",
+      "sha256": "daa5b6fbfab6adf9cf6c7d78d5fc7a32c1b71bbead0117c61e448a81a52be082",
+      "role": "owner-approved 12-pose visual and animation reference; preserved as original"
+    },
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_grain_cleanup_v4_source.png",
+      "sha256": "5472c183802170e370e4ed5e1b8a01b4edab18ee5da45b5e1239641412ce8658",
+      "role": "first cleanup edit applying L101; source of palette refinement chain"
+    },
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_palette_ink_v5_source.png",
+      "sha256": "66a37eceb1ebafc8f00e034e78762daebb7df6007125c5ba763f2029528403d4",
+      "role": "palette-ink edit reference; established dark navy as opaque contour color"
+    },
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_palette_corrected_v6_source.png",
+      "sha256": "c780fd87e7f92bd41d104b57c706c4cc0f43a5622559760d088398d7907a0f47",
+      "role": "final visual source with charcoal gray coat and navy contour/shadow"
+    }
+  ],
+  "prompt": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_palette_roles_prompt_v6.txt",
+    "sha256": "30f39a64833c6d407f57d6504e746e81c4e39cafa28308a58b052a2315d85e86"
+  },
+  "prompt_history": [
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_grain_cleanup_prompt_v4.txt",
+      "sha256": "7d3345278f9f9d5607082496a49a3d0f599d906c27f664d35f74cb4a2158c98e"
+    },
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_palette_ink_prompt_v5.txt",
+      "sha256": "0d0fb2a0e9e1009df491ef53d61a888bce4547f9d04b38882b035b4bc7daa73f"
+    },
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_palette_roles_prompt_v6.txt",
+      "sha256": "30f39a64833c6d407f57d6504e746e81c4e39cafa28308a58b052a2315d85e86"
+    }
+  ],
+  "geometry_normalization": {
+    "input_dimensions_px": [
+      1536,
+      1024
+    ],
+    "output_dimensions_px": [
+      320,
+      240
+    ],
+    "columns": 4,
+    "rows": 3,
+    "source_column_boundaries_px": [
+      0,
+      384,
+      768,
+      1152,
+      1536
+    ],
+    "source_row_boundaries_px": [
+      0,
+      341,
+      683,
+      1024
+    ],
+    "cell_dimensions_px": [
+      80,
+      80
+    ],
+    "resize": "nearest-neighbor; uniform scale to 80 px cell width; source row crop resized to 71 px height and vertically centered in the 80 px cell"
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [
+        320,
+        240
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "dr_ferdinand_social",
+      "speckle_cleanup": true,
+      "cell_size": [
+        80,
+        80
+      ],
+      "foreground_threshold_max_channel": 32,
+      "minimum_connected_component_pixels": 12,
+      "contour_margin_pixels": 1,
+      "transparent_index": 0
+    },
+    "palette_edge_restore": {
+      "method": "Per 80x80 cell, retain 8-connected source components with max RGB channel >32 and area >=12 px, expand the retained mask by 1 px, then remap transparent output pixels inside that mask to manifest suit_deep #000055. This keeps dark contour pixels opaque because pure black is reserved for transparent index 0.",
+      "transparent_pixels_mapped_to_suit_deep": 6909,
+      "accent_red_pixel_mapped_to_skin_light": 1,
+      "small_connected_components_under_12_before_edge_restore": 3,
+      "small_connected_components_under_12_after": 0,
+      "small_connected_components_without_cleanup": 8
+    }
+  },
+  "intermediate_images": [
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_80px_v0_unclean_palette_reference.png",
+      "sha256": "51e987868bad159b1b2fce81051c0ee95c7b30b9b3959a87b2e545db2dcda8c0",
+      "dimensions_px": [
+        320,
+        240
+      ],
+      "role": "same palette/no-dither conversion without speckle cleanup; preserved baseline with 8 opaque components under 12 px"
+    },
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_80px_v5_prepalette.png",
+      "sha256": "86bfeab11bfafd36aa8e018356b2bccf59c5165026cbc035964821851cd0a430",
+      "dimensions_px": [
+        320,
+        240
+      ],
+      "role": "aspect-preserving 80x80 cell normalization before palette conversion"
+    },
+    {
+      "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_80px_v5_preink.png",
+      "sha256": "7333c504816c64f38ab9d5f8935d17f15ed8b09752bbb1a17a18e8d62b3c2d44",
+      "dimensions_px": [
+        320,
+        240
+      ],
+      "role": "palette-limited, no-dither output before final opaque navy contour restoration"
+    }
+  ],
+  "image": {
+    "path": "data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_80px_v5_clean.png",
+    "sha256": "df0e04894a417e257490405a29958ffcb7fca7f3b40117df7f8cfd3bede0b8eb",
+    "dimensions_px": [
+      320,
+      240
+    ],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 9,
+    "palette_rgb_with_transparent_index": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        85,
+        85,
+        85
+      ],
+      [
+        0,
+        0,
+        85
+      ],
+      [
+        170,
+        85,
+        0
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        170,
+        170,
+        170
+      ],
+      [
+        255,
+        170,
+        170
+      ],
+      [
+        170,
+        0,
+        85
+      ],
+      [
+        255,
+        255,
+        0
+      ],
+      [
+        170,
+        85,
+        85
+      ]
+    ]
+  },
+  "sheet_layout": {
+    "columns": 4,
+    "rows": 3,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_count": 12,
+    "cell_dimensions_px": [
+      80,
+      80
+    ]
+  },
+  "status": "owner_approved_visual_reference_provisional",
+  "owner_approval": {
+    "date": "2026-10-03",
+    "scope": "provisional visual approval of this cleaned palette translation; design will be revisited later; not runtime delivery",
+    "source": "explicit user approval in conversation"
+  },
+  "owner_feedback_addressed": [
+    "L101 grain and detached background speckles were cleaned by per-cell connected-component filtering without dithering.",
+    "The approved slender Dr. Social proportions and distinct 12-pose cane-ready idle sequence were retained.",
+    "The final coat uses declared charcoal gray #555555; opaque contour/shadow uses declared deep navy #000055; index 0 remains transparent."
+  ],
+  "technical_review": {
+    "twelve_full_body_frames_visually_observed": true,
+    "four_by_three_layout_visually_observed": true,
+    "pose_delta_visually_observed": true,
+    "slender_silhouette_visually_observed": true,
+    "indexed_png_verified": true,
+    "all_palette_colors_match_sms_6bit_grid": true,
+    "per_character_manifest_palette_match": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "nonblack_background_alpha_qa": "PASS; opaque navy contours and clothing fills remain closed against a nonblack preview background",
+    "small_connected_components_under_12px_before_edge_restore": 3,
+    "small_connected_components_under_12px_after": 0,
+    "exact_visible_character_height_80px": "not measured",
+    "independent_animation_review": "pending",
+    "rom_or_emulator_validation": false,
+    "owner_visual_review": "provisionally approved by owner as current visual reference; design revisit explicitly deferred",
+    "resource_gate_command": "python3 tools/sms_wrapper/audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character dr_ferdinand_social SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_idle_guard_12f_sms_80px_v5_clean.png"
+  },
+  "supersedes": [
+    "dr_social_idle_guard_12f_sms_80px_v1_clean.png",
+    "dr_social_idle_guard_12f_sms_80px_v2_clean.png",
+    "dr_social_idle_guard_12f_sms_80px_v3_clean.png",
+    "dr_social_idle_guard_12f_sms_80px_v4_clean.png"
+  ],
+  "next_gate": "revisit design later; measure exact visible character height and complete independent animation, asset provenance/binding and ROM/emulator gates before any res integration"
+}

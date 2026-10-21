@@ -1,0 +1,413 @@
+{
+ "schema": "openbor_sms_o3_m8_closure_v1",
+ "generated_at": "2026-10-19",
+ "author": "Codex, coordenacao O3/M8 (OpenBOR SMS)",
+ "claim": "M8 fecha os 7 eixos de entrega no SHA a7f02b84; nao e delivery visual, nao e PAL, nao promove QA acima de assigned_checks_only",
+ "rom": {
+  "path": "out/rom/openbor_sms_rev1.sms",
+  "sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+  "bytes": 131072,
+  "build_command": "./build.sh",
+  "build_rc": 0,
+  "build_record_sha256": "d57032402219770bfff3d151cb26f488cdf7999a2bbcd000ee76958ff3a7d3cd",
+  "build_record_axes": {
+   "build": true,
+   "validation_report": true,
+   "boot_emulador": true,
+   "gameplay": true,
+   "fps_constante": true,
+   "audio": true,
+   "memory_bank_atualizado": true
+  },
+  "build_log_sha256": "6e5fb60d2fd11fa1d1124328e850c775aa9931c1be32bdd43222c398d5aa65f3"
+ },
+ "consumer": {
+  "bundle_path": "out/evidence/m8/bundle_a7f02b84/bundle.json",
+  "bundle_sha256": "a0cc1f37470af5e2f1e3cc82c1c4b46a57a78f9e925b82fcdeb76f503ab287a7",
+  "report_path": "out/evidence/m8/consumption_a7f02b84.json",
+  "report_sha256": "ade6c1b7dfc31cb4ea0848a9e7d84b5fc86f10457a3d7c8089d8f98a14966059",
+  "eligible": true,
+  "problems": [],
+  "axes": {
+   "build": false,
+   "validation_report": false,
+   "boot_emulador": true,
+   "gameplay": true,
+   "fps_constante": true,
+   "audio": true,
+   "memory_bank_atualizado": false
+  },
+  "axis_scope": {
+   "boot_emulador": "informative_native_framebuffer_only",
+   "gameplay": "assigned_input_and_ram_effect_cases_only",
+   "fps_constante": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel",
+   "audio": "isolated_session_signal_only_not_music_correctness"
+  },
+  "scope": {
+   "claim_ceiling": "assigned_checks_only",
+   "region": "NTSC",
+   "scene": "TOWN1"
+  },
+  "coverage": {
+   "boot_emulador": {
+    "axis": "boot_emulador",
+    "proof": "framebuffer",
+    "artifacts": [
+     "boot_png"
+    ],
+    "derived": {
+     "canvas": [
+      256,
+      192
+     ]
+    }
+   },
+   "gameplay": {
+    "axis": "gameplay",
+    "proof": "input_ram_video",
+    "artifacts": [
+     "gameplay_observation",
+     "gameplay_video"
+    ],
+    "derived": {
+     "before": 50,
+     "after": 29,
+     "relation": "decrease"
+    }
+   },
+   "fps_constante": {
+    "axis": "fps_constante",
+    "proof": "regional_runtime_windows",
+    "artifacts": [
+     "fps_metrics"
+    ],
+    "derived": {
+     "fps_janelas": [
+      59.61355619758742,
+      59.61658363446885,
+      59.69380259889601
+     ],
+     "frames_delta_total": 1441,
+     "region": "NTSC"
+    }
+   },
+   "audio": {
+    "axis": "audio",
+    "proof": "audio_signal",
+    "artifacts": [
+     "audio_signal"
+    ],
+    "derived": {
+     "samples": 294912,
+     "peak": 1936,
+     "seconds": 6.6873469387755105
+    }
+   }
+  },
+  "limits": [
+   "record_consistency_not_producer_authentication",
+   "assigned_checks_only",
+   "no_delivery_or_visual_quality_approval",
+   "video_limit_600_frames_per_artifact"
+  ]
+ },
+ "qa": {
+  "runtime": {
+   "native_subagent_session": "ses_ea99c6e71ffeXEObwHUWZ5bwOV",
+   "lane": "runtime",
+   "worker_id": "opencode:worker:runtime-qa",
+   "emulator_session": "aade3375e9f740cba2626fc72c5180f9",
+   "session_closed_sha256": "1ddb322cd456dea1e7dd6748a211f7bd2e107563cd0bfc58b5c6cdbb18c96643",
+   "request": {
+    "path": "out/evidence/m8/qa/runtime/request.json",
+    "sha256": "5e546ea29eb5337fb58833f0c205d76f8c708457eea74a40a991babb22bb8a6b"
+   },
+   "report": {
+    "path": "out/evidence/m8/qa/runtime/run_ce3bb103775b4d07aff60ee736a2a210/report.json",
+    "sha256": "28cb7d39220149e30ea233ee8fa9261371256c386c6145a731a9c450bc7195e0"
+   },
+   "cases": [
+    {
+     "id": "boot_baseline",
+     "status": "passed",
+     "evidence": [
+      "boot_baseline_probe",
+      "boot_baseline_frame"
+     ]
+    },
+    {
+     "id": "attack_contact",
+     "status": "passed",
+     "evidence": [
+      "attack_contact_precondition",
+      "attack_contact_probe",
+      "attack_contact_frame"
+     ]
+    }
+   ],
+   "findings": [],
+   "claim_ceiling": "assigned_checks_only",
+   "gate": {
+    "path": "out/evidence/m8/gates/qa_runtime_audit.txt",
+    "sha256": "79df13162fbd2e4054c374e04eb7af702ae92bbf830dc06f7e229286c54655e2",
+    "ok": true,
+    "tests_passed": true,
+    "problems": [],
+    "eligible": true
+   }
+  },
+  "visual": {
+   "native_subagent_session": "ses_ea99c6e6fffeaVU10ayUv0LvYS",
+   "lane": "visual",
+   "worker_id": "opencode:worker:visual-qa",
+   "emulator_session": "28d7fe90612f46d5b47dfea7c20aaf3e",
+   "session_closed_sha256": "7c75b0ecc006a73b2dc14953ed3d9da956f257f1c3a16b8c847dc7c83a970bd5",
+   "request": {
+    "path": "out/evidence/m8/qa/visual/request.json",
+    "sha256": "3d09cc851e010017e69fc06fbd2769593ec9bfcb42fde19f6dbf0f3c12c88c77"
+   },
+   "report": {
+    "path": "out/evidence/m8/qa/visual/run_a4c73f390ab44855a855e69044cf0eaa/report.json",
+    "sha256": "c43e9ed248647f1c6daa838fd140cbff0f6e66c74c69e595c8d2c2f8eae9ad02"
+   },
+   "cases": [
+    {
+     "id": "boot_scene",
+     "status": "passed",
+     "evidence": [
+      "boot_scene_frame"
+     ]
+    },
+    {
+     "id": "attack_video",
+     "status": "passed",
+     "evidence": [
+      "attack_video_video"
+     ]
+    }
+   ],
+   "findings": [],
+   "claim_ceiling": "assigned_checks_only",
+   "gate": {
+    "path": "out/evidence/m8/gates/qa_visual_audit.txt",
+    "sha256": "79df13162fbd2e4054c374e04eb7af702ae92bbf830dc06f7e229286c54655e2",
+    "ok": true,
+    "tests_passed": true,
+    "problems": [],
+    "eligible": true
+   }
+  }
+ },
+ "canonical_axis_projection": {
+  "rationale": "build_inner/reconcile_claims leem out/evidence/evidence.json, fps.json e *.wav; a projecao deriva esses caminhos dos relatorios reais (bundle/consumer/MRP/QA), sem nova medicao e sem booleano manual",
+  "generator": {
+   "path": "out/evidence/m8/gates/m8_axis_projection.py",
+   "sha256": "888f05356049024488d95d4d2a6fa4b42b9955e68d89a0929f0cbb997aa9b11f"
+  },
+  "evidence_json": {
+   "path": "out/evidence/evidence.json",
+   "sha256": "21c7be622d224f6b5c57b29979277b6033568d9e704ad793b2c2050952da174f"
+  },
+  "fps_json": {
+   "path": "out/evidence/fps.json",
+   "sha256": "904f629d0e9c55492981799718dc0b568ffca3def7faf75b3e04b891cd4aef76"
+  },
+  "audio_wav": {
+   "path": "out/evidence/audio_m8_a7f02b84.wav",
+   "sha256": "1638dd1916adab29b112c52a8c2cf73389027eb73cdba68f385fe626b6e42d74",
+   "bytes": 589868
+  },
+  "reconcile_report": {
+   "path": "out/evidence/m8/gates/reconcile_claims_after.json",
+   "sha256": "e08d3392ac49b9791cab0e1aeef1c68e777c2b222d9a2f0df084feb9f961a4b4"
+  }
+ },
+ "gates": {
+  "manifest_path": "out/evidence/m8/gates/gate_manifest.json",
+  "manifest_sha256": "81b2afe7ee8cee40e6d583c729e0bceeb74e454cd8064c381abaeb14005a5dac",
+  "passed": [
+   "audit_debug_markers",
+   "audit_probe_corridor",
+   "audit_tilemap_bounds",
+   "audit_symbol_size_sync",
+   "audit_claims",
+   "audit_meaningful_change",
+   "audit_audio_provenance",
+   "audit_psg_channel_binding",
+   "audit_psg_redundancy",
+   "audit_psg_quality",
+   "audit_audio",
+   "audit_reference_boundary",
+   "audit_hardware_constants",
+   "audit_mastery_registry",
+   "audit_visual_delivery",
+   "audit_deterministic_boot",
+   "audit_causal_persistence",
+   "reconcile_claims",
+   "validate_measurement_tools",
+   "qa_runtime_audit",
+   "qa_visual_audit"
+  ],
+  "failed_but_nonblocking": [
+   "audit_doc_sync"
+  ],
+  "blocked_for_delivery": [
+   "audit_visual_delivery --delivery",
+   "audit_rom_asset_binding"
+  ],
+  "not_run": [
+   "audit_render_glitch"
+  ]
+ },
+ "before_after": [
+  {
+   "metric": "terminal de ataque / retorno ao controle",
+   "b345043a": "i1-i72 / i73",
+   "957122ae": "nao reamostrado em attack_tap; attack_hold identico ao a7f02b84",
+   "a7f02b84": "i1-i93 / i94",
+   "evidence": "doc/artifacts/o3_lote_c_scope_decision_20261019.json; trace a7f02b84 sha 4437dea9"
+  },
+  {
+   "metric": "primeiro hit",
+   "b345043a": "i30",
+   "957122ae": "i30 (attack_hold)",
+   "a7f02b84": "i30",
+   "evidence": "Lote C; QA runtime attack_contact"
+  },
+  {
+   "metric": "HP do jogador apos recuperacao",
+   "b345043a": "100",
+   "957122ae": "nao medido no attack_tap",
+   "a7f02b84": "95 (hit em i131)",
+   "evidence": "Lote C; trace a7f02b84"
+  },
+  {
+   "metric": "matriz de contencao (attack_hold)",
+   "b345043a": "8 hits, intervalos 72 q, dor 108/36 q",
+   "957122ae": "8 hits, intervalos 96/87x6, dor 11 q/hit, HP 0 em i648",
+   "a7f02b84": "8 quedas de HP em 30/126/213/300/387/474/561/648, HP 0, VDP 1050",
+   "evidence": "Lote C cap_matrix; M7 gameplay neutrality"
+  },
+  {
+   "metric": "servico de upload (entrega)",
+   "b345043a": "nao medido no M8",
+   "957122ae": "128 B/q, 2 sub-commits",
+   "a7f02b84": "128 B/q, 2 sub-commits; O3_SERVICE_TRACE=1 = 64 B/q (perturbado)",
+   "evidence": "Lote C baseline; instrumentacao auditada"
+  },
+  {
+   "metric": "pior quadro / VBlank",
+   "b345043a": "nao medido no M8",
+   "957122ae": "nao medido no M8",
+   "a7f02b84": "vovf_delta=0, vline_min=207 (MWF 3000 q)",
+   "evidence": "out/evidence/post_m6/candidate_audio_a7f02b84/mwf/worst_frame_audio_attack.json sha 41d83bd4"
+  },
+  {
+   "metric": "fps NTSC (3 janelas)",
+   "b345043a": "nao medido no M8",
+   "957122ae": "nao medido no M8",
+   "a7f02b84": "59.6135 / 59.6165 / 59.6938; 1441 quadros; spread 0.080",
+   "evidence": "MRP3 sessao 4f1f4541; consumer coverage"
+  },
+  {
+   "metric": "carga PSG / audio",
+   "b345043a": "sem audio",
+   "957122ae": "sem audio (pre-M7)",
+   "a7f02b84": "3 SFX (13/14/15 B; 6/10/18 ticks), canal 3, 1x PSGSFXFrame/q; WAV 1638dd19, 294912 amostras, peak 1936, 6.687 s, ativo 12-13%",
+   "evidence": "bundle audio_signal; audit_audio --active-floor 5; M7"
+  },
+  {
+   "metric": "bytes de ROM",
+   "b345043a": "131072",
+   "957122ae": "131072",
+   "a7f02b84": "131072",
+   "evidence": "changelog/roms/build_v055, v066, v074 (sha conferido)"
+  },
+  {
+   "metric": "RAM / VRAM",
+   "b345043a": "nao verificado no M8",
+   "957122ae": "nao verificado no M8",
+   "a7f02b84": "corredor 0xC7A6..0xC7FF, 62 sondas, folga 1585; measure_vram_map 0 blockers; vdp_regs 818dd0f0",
+   "evidence": "audit_probe_corridor; M7 measure_vram_map; BlastEm regs_a7f02b84"
+  },
+  {
+   "metric": "erro visual full-frame",
+   "b345043a": "nao medido no M8",
+   "957122ae": "nao medido no M8",
+   "a7f02b84": "nao medido (audit_render_glitch bloqueado sem oraculo); QA visual: 81 quadros, 18 cores legais 6-bit, sem quadro corrompido",
+   "evidence": "out/evidence/m8/qa/visual/report; Lote D bloqueado"
+  },
+  {
+   "metric": "NTSC / PAL",
+   "b345043a": "nao medido no M8",
+   "957122ae": "nao medido no M8",
+   "a7f02b84": "NTSC medido; PAL nao medido",
+   "evidence": "MRP3; testes PAL ausentes"
+  }
+ ],
+ "blocked": [
+  {
+   "gate": "audit_render_glitch",
+   "status": "blocked",
+   "reason": "sem oraculo full-frame independente validado (Lote D); nao executado nesta sessao",
+   "evidence": "out/evidence/m8/gates/gate_manifest.json (not_run)"
+  },
+  {
+   "gate": "audit_visual_delivery --delivery",
+   "status": "fail",
+   "reason": "wrong_visual_epoch: contrato de entrega visual ausente",
+   "evidence": "out/evidence/m8/gates/audit_visual_delivery_delivery.txt"
+  },
+  {
+   "gate": "audit_rom_asset_binding --require",
+   "status": "fail",
+   "reason": "rom_asset_binding_unproven: mapa ausente (doc/rom_asset_binding.json)",
+   "evidence": "out/evidence/m8/gates/audit_rom_asset_binding_require.txt"
+  },
+  {
+   "item": "epoca visual delivery / vinculo asset->ROM",
+   "status": "blocked",
+   "reason": "sem contrato de entrega visual e sem mapa asset->ROM; QA visual tem teto assigned_checks_only"
+  },
+  {
+   "item": "PAL",
+   "status": "not_measured",
+   "reason": "sem ROM/timing/teste PAL; apenas NTSC medido"
+  },
+  {
+   "item": "contato aereo direto em 46/47",
+   "status": "not_observed",
+   "reason": "tabela de queda pula 46/47; contato mais proximo 48"
+  },
+  {
+   "item": "altura 200",
+   "status": "unreachable",
+   "reason": "altura maxima medida 101"
+  },
+  {
+   "item": "O3_SERVICE_TRACE=1 timing absoluto",
+   "status": "perturbed",
+   "reason": "trace reduz upload 128->64 B/q; timing absoluto apenas em builds trace=0"
+  },
+  {
+   "item": "audit_doc_sync global",
+   "status": "pre_existing_fail",
+   "reason": "10 derivas de luta_mugen (EIO/ENOENT); 0 derivas no openbor_sms_rev1"
+  },
+  {
+   "item": "commit/push",
+   "status": "not_authorized",
+   "reason": "nenhuma autorizacao do dono nesta sessao; working tree segue WIP"
+  }
+ ],
+ "limits": [
+  "QA de subagentes: teto assigned_checks_only; nao aprova qualidade visual, gameplay amplo, audio/FPS fora dos casos atribuidos",
+  "consumer: assigned_checks_only; sem aprovacao de entrega/qualidade visual",
+  "sem PAL; sem oraculo full-frame de render glitch; sem mapa asset->ROM de entrega",
+  "ciclos de CPU nao medidos; vline_min=207 nao e folga livre nem duracao maxima",
+  "b345/cap128 sao trials historicos do mesmo recorte; nao foram reexecutados no M8",
+  "instrumentacao de servico (O3_SERVICE_TRACE=1) perturba o timing; numeros absolutos so de builds trace=0"
+ ],
+ "registry_entry_expected": "o3-m8",
+ "memory_bank": "doc/10-memory-bank.md"
+}

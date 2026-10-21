@@ -1,0 +1,191 @@
+{
+ "schema": "rom_asset_binding_v1",
+ "rom_path": "out/rom/kage_matsuri.sms",
+ "rom_sha256": "b1eb19bfbf9176d29cbdbf568a9b49ad31e795227212babbe51fbe3e6bc007b0",
+ "rom_size_bytes": 16384,
+ "linker_map": "out/obj/kage_matsuri.map",
+ "entries": [
+  {
+   "res_path": "res/sprites/kage_idle_u.png",
+   "res_paths": [
+    "res/sprites/kage_idle_u.png",
+    "res/sprites/kage_idle_d.png",
+    "res/sprites/kage_walk0_u.png",
+    "res/sprites/kage_walk0_d.png",
+    "res/sprites/kage_walk1_u.png",
+    "res/sprites/kage_walk1_d.png",
+    "res/sprites/kage_slash_u.png",
+    "res/sprites/kage_slash_d.png"
+   ],
+   "source_paths": [
+    "rascunho/kage_side_idle.jpg",
+    "rascunho/kage_walk0.png",
+    "rascunho/kage_walk1.png",
+    "rascunho/kage_slash.png"
+   ],
+   "asset_group": "kage_base_right_poses",
+   "tile_range": [
+    128,
+    159
+   ],
+   "symbol": "kage_right_tiles",
+   "symbol_in_linker_map": "_kage_right_tiles",
+   "generated": "inc/kage_right_tiles.h",
+   "sha256": "5d90da811960ec0a623bdcb0d043aff2c6eb97f1353797e115d554ff83eed0b7"
+  },
+  {
+   "res_path": "res/sprites/kage_idle_d.png",
+   "res_paths": [
+    "res/sprites/kage_idle_u.png",
+    "res/sprites/kage_idle_d.png",
+    "res/sprites/kage_walk0_u.png",
+    "res/sprites/kage_walk0_d.png",
+    "res/sprites/kage_walk1_u.png",
+    "res/sprites/kage_walk1_d.png",
+    "res/sprites/kage_slash_u.png",
+    "res/sprites/kage_slash_d.png"
+   ],
+   "asset_group": "kage_base_left_poses_bitrev",
+   "tile_range": [
+    160,
+    191
+   ],
+   "symbol": "kage_left_tiles",
+   "symbol_in_linker_map": "_kage_left_tiles",
+   "generated": "inc/kage_left_tiles.h",
+   "sha256": "b0ec54b2a2d8cf45c23bc401bc277b42c79e667ac32204b39285433e6639e132"
+  },
+  {
+   "res_path": "res/sprites/samurai_idle_u.png",
+   "res_paths": [
+    "res/sprites/samurai_idle_u.png",
+    "res/sprites/samurai_idle_d.png",
+    "res/sprites/samurai_walk_u.png",
+    "res/sprites/samurai_walk_d.png"
+   ],
+   "source_paths": [
+    "rascunho/samurai_side_idle.jpg",
+    "rascunho/samurai_side_walk.jpg"
+   ],
+   "asset_group": "samurai_right_poses",
+   "tile_range": [
+    192,
+    207
+   ],
+   "symbol": "samurai_tiles",
+   "symbol_in_linker_map": "_samurai_tiles",
+   "generated": "inc/samurai_tiles.h",
+   "sha256": "6b4f98f0d3ce5ca3749e75683995c4b4e83431e61a9e0d22f19e00c9d8c0efda"
+  },
+  {
+   "res_path": "res/sprites/samurai_idle_d.png",
+   "res_paths": [
+    "res/sprites/samurai_idle_u.png",
+    "res/sprites/samurai_idle_d.png",
+    "res/sprites/samurai_walk_u.png",
+    "res/sprites/samurai_walk_d.png"
+   ],
+   "asset_group": "samurai_left_poses_bitrev",
+   "tile_range": [
+    208,
+    223
+   ],
+   "symbol": "samurai_left_tiles",
+   "symbol_in_linker_map": "_samurai_left_tiles",
+   "generated": "inc/samurai_left_tiles.h",
+   "sha256": "c3d8d980d10ff2540bb167193f7b1d2fbdb4ea4539b843fdc3a361ceb5d39734"
+  },
+  {
+   "res_path": "res/sprites/kage_slash2_u.png",
+   "res_paths": [
+    "res/sprites/kage_slash2_u.png",
+    "res/sprites/kage_slash2_d.png",
+    "res/sprites/kage_jump_u.png",
+    "res/sprites/kage_jump_d.png"
+   ],
+   "source_paths": [
+    "rascunho/kage_slash2.png",
+    "rascunho/kage_jump.jpg"
+   ],
+   "asset_group": "kage_slash2_jump_right",
+   "tile_range": [
+    224,
+    239
+   ],
+   "symbol": "kage_ext_right_tiles",
+   "symbol_in_linker_map": "_kage_ext_right_tiles",
+   "generated": "inc/kage_ext_right_tiles.h",
+   "sha256": "68d5feca0f6742c157d65597d3ccf96d7433690e9a31aa5cf12b7598f47ec206"
+  },
+  {
+   "res_path": "res/sprites/kage_slash2_d.png",
+   "res_paths": [
+    "res/sprites/kage_slash2_u.png",
+    "res/sprites/kage_slash2_d.png",
+    "res/sprites/kage_jump_u.png",
+    "res/sprites/kage_jump_d.png"
+   ],
+   "asset_group": "kage_slash2_jump_left_bitrev",
+   "tile_range": [
+    240,
+    255
+   ],
+   "symbol": "kage_ext_left_tiles",
+   "symbol_in_linker_map": "_kage_ext_left_tiles",
+   "generated": "inc/kage_ext_left_tiles.h",
+   "sha256": "7629b4d339227941eb9bde8d1f605a31bfe31579e0be289b21a615019fc4830f"
+  },
+  {
+   "res_path": "res/bg/stage.png",
+   "asset_group": "stage_patterns",
+   "tile_range": [
+    0,
+    127
+   ],
+   "symbol": "stage_tiles",
+   "symbol_in_linker_map": "_stage_tiles",
+   "generated": "inc/stage_tiles.h",
+   "sha256": "4ffe433ac713555ca0d12b2382dfc4eb171aa6885c70ecf4095d66b33d1f6dfd"
+  },
+  {
+   "res_path": "res/bg/stage_map.bin",
+   "asset_group": "stage_name_table",
+   "symbol": "stage_map",
+   "symbol_in_linker_map": "_stage_map",
+   "generated": "inc/stage_map.h",
+   "sha256": "8d7c19526db25cd404256ba8154f87b80e930ccd0a0b862cedc0a2eafb4763ef"
+  },
+  {
+   "res_path": "res/palettes/palette_bg.sms",
+   "asset_group": "bg_palette",
+   "symbol": "palette_bg",
+   "symbol_in_linker_map": "_palette_bg",
+   "generated": "inc/palette_bg.h",
+   "sha256": "8fb744cab7bf60682fb471c5acada8ae254585bdda6c0fa2a2177f23e4b55943"
+  },
+  {
+   "res_path": "res/palettes/palette_sprite.sms",
+   "asset_group": "sprite_palette",
+   "symbol": "palette_sprite",
+   "symbol_in_linker_map": "_palette_sprite",
+   "generated": "inc/palette_sprite.h",
+   "sha256": "f25ac5ab8741f4e9fe0634563432b395fd02bd15ee9496ebfc22df370ba259bb"
+  },
+  {
+   "res_path": "res/audio/music_kage.psg",
+   "asset_group": "music",
+   "symbol": "music_kage",
+   "symbol_in_linker_map": "_music_kage",
+   "generated": "inc/music_kage.h",
+   "sha256": "c582ff359b0102cf5f376bb53ff6656178b166c63be1f60013a0244f1bb3628e"
+  },
+  {
+   "res_path": "res/audio/sfx_slash.psg",
+   "asset_group": "slash_sfx",
+   "symbol": "sfx_slash",
+   "symbol_in_linker_map": "_sfx_slash",
+   "generated": "inc/sfx_slash.h",
+   "sha256": "0811f9234435fc7835eef66bb5e692731a98fc5d484b3a08a93f5c1abc10742b"
+  }
+ ]
+}

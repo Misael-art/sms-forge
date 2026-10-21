@@ -1,0 +1,202 @@
+width: 256, height: 192
+Window created with size: 256 x 192
+Failed to set vsync to off: That operation is not supported
+Using 512x512 textures
+Initialized 2 channel audio at frequency 48000 with a 1024 sample buffer, 32-bit float format
+Added 395 game controller mappings from gamecontrollerdb.txt
+Product Code: sms:00000
+SHA1: 78b9d33aab496d7e2c24f83da8bb57a6e3a3f583
+Not found in ROM DB, examining header
+
+IO port 1 connected to gamepad #1 with type 'SMS gamepad'
+IO port 2 connected to gamepad #2 with type 'SMS gamepad'
+IO port EXT connected to device 'None'
+0:	di
+>   help                               - Print a list of available commands for
+    Aliases: ?                         the current debug context
+  advance ADDRESS                    - Advance to ADDRESS
+
+  append NAME VALUE                  - Increase the size of array NAME by 1 and
+                                       set the last element to VALUE
+  array NAME [VALUE...]              - Create a new array called NAME if it
+                                       doesn't already exist. The array is initialized with the remaining parameters
+  breakpoint ADDRESSS                - Set a breakpoint at ADDRESS
+    Aliases: b
+  backtrace                          - Print a backtrace
+    Aliases: bt
+  bindown NAME                       - Simulate a keydown for binding NAME
+
+  bindup NAME                        - Simulate a keyup for binding NAME
+
+  continue                           - Resume execution
+    Aliases: c
+  command BREAKPOINT                 - Set a list of debugger commands to be
+                                       executed when the given breakpoint is hit
+  condition BREAKPOINT [EXPRESSION]  - Makes breakpoint BREAKPOINT conditional
+                                       on the value of EXPRESSION or removes a condition if EXPRESSION is omitted
+  delete BREAKPOINT                  - Remove breakpoint identified by
+    Aliases: d                         BREAKPOINT
+  deletedisplay DISPLAYNUM           - Remove expressions added with the
+    Aliases: dd                        `display` command
+  disassemble [ADDRESS]              - Disassemble code starting at ADDRESS if
+    Aliases: disasm                    provided or the current address if not
+  display[/FORMAT] EXPRESSION...     - Print one or more expressions every time
+                                       the debugger is entered
+  frames EXPRESSION                  - Resume execution for EXPRESSION video
+                                       frames
+  function NAME [ARGS...]            - Creates a user-defined function named
+                                       NAME with arguments ARGS
+  if CONDITION                       - If the condition is true, the following
+                                       block is executed. Otherwise the else block is executed if present
+  load[/SIZE] FILENAME ARRAY [COUNT] - Loads COUNT elements of size SIZE from a
+                                       file to the array or memory region specified by ARRAY
+  next                               - Advance to the next instruction
+
+  over                               - Advance to the next instruction, ignoring
+                                       branches to lower addresses
+  print[/FORMAT] EXPRESSION...       - Print one or more expressions using the
+    Aliases: p                         optional format character
+  printf FORMAT EXPRESSION...        - Print a string with C-style formatting
+                                       specifiers replaced with the value of the remaining arguments
+  quit                               - Quit BlastEm
+
+  return VALUE                       - Return from a user defined function with
+                                       the result VALUE
+  step                               - Advance to the next instruction, stepping
+    Aliases: s                         into subroutines
+  save[/SIZE] FILENAME ARRAY [COUNT] - Saves COUNT elements of size SIZE from
+                                       the array or memory region specified by ARRAY to a file
+  set MEM|NAME VALUE                 - Set a register, symbol or memory location
+                                       to the result of evaluating VALUE
+  softreset                          - Perform a soft-reset for the current
+    Aliases: sr                        system
+  symbols [FILENAME]                 - Loads a list of symbols from the file
+                                       indicated by FILENAME or lists currently loaded symbols if FILENAME is omitted
+  variable NAME [VALUE]              - Create a new variable called NAME and set
+                                       it to VALUE or 0 if no value provided
+  vdpsprites                         - Print the VDP sprite table
+    Aliases: vs
+  vdpregs                            - Print VDP register values with a short
+    Aliases: vr                        description
+  watchpoint ADDRESS [SIZE]          - Set a watchpoint at ADDRESS with an
+                                       optional SIZE in bytes. SIZE defaults to 1
+  while CONDITION                    - The following block is executed
+                                       repeatedly until the condition is false. If the condition is false at the start, the else block is executed if present
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_0
+> 797A:	inc hl
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_1
+> SMSFORGE_BOUNDARY 0 120
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_2
+> SMSFORGE_CPU 0 31098 57314 87 49486 8192 49646 57324 49635 107291505 0
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_3
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_4
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_5
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_6
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_7
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_8
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_9
+> Saving video to /tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a/media/native.apng
+Saving audio to /tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a/media/native.wav
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_10
+> Started logging VGM to /tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a/media/native.vgm
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_11
+> 3FA5:	ld a, $FFC1
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_12
+> SMSFORGE_BOUNDARY 1 360
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_13
+> SMSFORGE_CPU 1 16293 57312 13312 49408 8192 49486 57318 49635 55735815 1
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_14
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_15
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_16
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_17
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_18
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_19
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_20
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_21
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_22
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_23
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_24
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_25
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_26
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_27
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_28
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_29
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_30
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_31
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_32
+> Ending recording
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_33
+> Stopped VGM log
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_34
+> Sprite 0: X=64, Y=111, Pat=C00
+Sprite 1: X=56, Y=111, Pat=C40
+Sprite 2: X=48, Y=111, Pat=C80
+Sprite 3: X=40, Y=111, Pat=CC0
+Sprite 4: X=56, Y=127, Pat=D00
+Sprite 5: X=48, Y=127, Pat=D40
+Sprite 6: X=40, Y=127, Pat=D80
+Sprite 7: X=56, Y=143, Pat=DC0
+Sprite 8: X=48, Y=143, Pat=E00
+Sprite 9: X=40, Y=143, Pat=E40
+Sprite 10: X=56, Y=159, Pat=E80
+Sprite 11: X=48, Y=159, Pat=EC0
+Sprite 12: X=40, Y=159, Pat=F00
+Sprite 13: X=176, Y=111, Pat=1400
+Sprite 14: X=184, Y=111, Pat=1440
+Sprite 15: X=192, Y=111, Pat=1480
+Sprite 16: X=176, Y=127, Pat=14C0
+Sprite 17: X=184, Y=127, Pat=1500
+Sprite 18: X=192, Y=127, Pat=1540
+Sprite 19: X=200, Y=127, Pat=1580
+Sprite 20: X=176, Y=143, Pat=15C0
+Sprite 21: X=184, Y=143, Pat=1600
+Sprite 22: X=192, Y=143, Pat=1640
+Sprite 23: X=200, Y=143, Pat=1680
+Sprite 24: X=176, Y=159, Pat=16C0
+Sprite 25: X=184, Y=159, Pat=1700
+Sprite 26: X=192, Y=159, Pat=1740
+Sprite 27: X=200, Y=159, Pat=1780
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_35
+> **Mode Group**
+00: 74 | H-ints enabled, Pal Select 1, HVC latch disabled, Display gen enabled
+01: 62 | Display enabled, V-ints enabled, Height: 28, Mode 4, 64K VRAM
+0B: 00 | E-ints disabled, V-Scroll: full, H-Scroll: full
+0C: 00 | Width: 32, Shadow/Highlight: disabled
+
+**Table Group**
+02: FF | Background Name Table:  $3800
+05: FF | Sprite Attribute Table: $3F00
+06: FB | Sprite Tile Base:       $1000
+08: 00 | Background X Scroll:    0
+09: 00 | Background Y Scroll:    0
+
+**Misc Group**
+07: 00 | Backdrop Color: $0
+0A: 3F | H-Int Counter: 63
+0F: 00 | Auto-increment: $0
+10: 00 | Scroll A/B Size: 32x32
+
+**DMA Group**
+13: 00 |
+14: 00 | DMA Length: $0000 words
+15: 00 |
+16: 00 |
+17: 00 | DMA Source Address: $000000, Type: 68K
+
+**Internal Group**
+Address: A3F
+CD:      2 - invalid
+Pending: none
+VCounter: 197
+HCounter: 176
+VINT Pending: false
+HINT Pending: false
+Status: FE08
+
+Debug Register: 0 | Output disabled: false, Force Layer: 0
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_36
+> > SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_37
+> Saving screenshot to /tmp/smsforge-blastem-native-media-plan/sound_final3_runs/blastem-sms-44577cac8cbc4a189068a1bdf9a9634a/screenshots/frame_20261010_094819.png
+5BAB:	rl (ix+-8)
+> SMSFORGE_ACK_blastem-sms-44577cac8cbc4a189068a1bdf9a9634a_38
+> 

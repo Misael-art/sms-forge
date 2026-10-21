@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_02_dark_gothic_pop_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "catalog_index": 2,
+  "style_id": "Dark-Gothic-Pop",
+  "artistic_style_reference": {
+    "named_artist": "Akiman (Akira Yasuda)",
+    "reference_role_and_scope": "Capcom artist with documented Darkstalkers involvement; reference for character illustration, not sole title authorship.",
+    "source_url": "https://game.capcom.com/cfn/sfv/column/132581?lang=en",
+    "attribution_status": "official_contextual_reference",
+    "style_signature": [
+      "organic and elastic contour",
+      "strong silhouette design",
+      "playful dark-fantasy character shapes"
+    ],
+    "basis_and_limits": "Visual-analysis descriptors; Capcom profile confirms series involvement."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_02_dark_gothic_pop_v1.json",
+    "sha256": "0971c479c42c7644a50c0c3caa747d04fb2cf177515df7db13fcb0cb47ce85ba"
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png",
+    "sha256": "b697a47dbdc387ad2a4f98c2d406256565f74fadc8d1507ba7c1809863b502a3",
+    "dimensions_px": [
+      1983,
+      793
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1_prompt.txt",
+    "sha256": "fad7d97ef4d1b0530cf6ae00ed0f32f2abba802c81e0ac16ce6d8f51b6572a1e",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v2_metadata.json",
+    "sha256": "ae874d03e36b0df65ae7066b63097ea4fc3ddd71dd794c80f781d0b84589fff5"
+  },
+  "composition": {
+    "method": "metadata_card_only_overlay",
+    "tool": "Pillow card-only annotation; base art outside the metadata card was pixel-checked unchanged",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1.png",
+    "base_model_sheet_sha256": "4302834bbd99511201ce5e0ab4baece8876584c333162c681caae539f551b276",
+    "art_scale": "preserved from base sheet"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v2.png",
+    "sha256": "db54012926e57dcaa3d99ed89e74e37e1624e6b465e2da97f3d0fd59a6a69e6c",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_v2.json",
+    "status": "pending_independent_and_owner_review"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

@@ -1,0 +1,250 @@
+{
+  "schema": "luta_mugen_ryo_ryo_banked_runtime_probe_v1",
+  "classification": "local diagnostic candidate; not canonical and not emulator-validated",
+  "captured_at_utc": "2026-10-08T18:44:24Z",
+  "inputs": {
+    "source_zip": {
+      "path": "base/OUTROS/ffspRyo_v3.zip",
+      "sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133"
+    },
+    "profile": {
+      "path": "data/ryo_v3_runtime_cut_20261006.json",
+      "sha256": "b7a1fbd32670f09dc09f6c5d365c3dbaa88923810a99ec7a67f7a284986b6d6f"
+    },
+    "scene_cut": "out/local_study/ryo_ryo_cut_20261008a_source_routes/versus_cut",
+    "runtime_source": "out/local_study/ryo_terry_runtime_rom_20261008",
+    "runtime_source_manifest": "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/runtime_source_manifest.json",
+    "source_slots": [
+      "Ryo",
+      "Ryo"
+    ],
+    "poses_per_slot": 94,
+    "distribution": "source license unknown; keep derived bank and ROM local; do not redistribute"
+  },
+  "pipeline": {
+    "scene_bank_sha256": "1e002a1729566132cfa1efadd77b65cc216106246671ff9db5cdcf74bf5186f2",
+    "source_frame_data": {
+      "first_bank": 40,
+      "bank_count": 1,
+      "frame_records_per_slot": 94,
+      "max_clsn_bytes_per_slot": 84
+    },
+    "pose_table": {
+      "meta_banks": {
+        "ken_alias": 41,
+        "ryu_alias": 42
+      },
+      "meta_bank_count": 2,
+      "index_bank": 43,
+      "index_bytes": 2068,
+      "max_pieces_per_pose": 35,
+      "raw_rows_over_8": "24 actor-pose-side entries had 9–11 pieces in one row; row scheduling was required"
+    },
+    "integrated_runtime_schema": 6,
+    "source_route_patterns_per_slot": [
+      13,
+      13
+    ],
+    "source_route_execution": "not proven; generated contract is pattern-to-target binding only and the advanced runtime C does not consume these tables",
+    "attack_patterns": 8,
+    "bank_layout": {
+      "schema": "luta_ryo_ryo_banked_image_layout_v1",
+      "parts": [
+        {
+          "name": "scene_tiles",
+          "first_bank": 2,
+          "bank_count": 38,
+          "last_bank": 39,
+          "bytes": 622592,
+          "sha256": "1e002a1729566132cfa1efadd77b65cc216106246671ff9db5cdcf74bf5186f2"
+        },
+        {
+          "name": "frame_descriptors_and_clsn",
+          "first_bank": 40,
+          "bank_count": 1,
+          "last_bank": 40,
+          "bytes": 16384,
+          "sha256": "4d8f7e80f166d39a0a6b073aa02bdcf628425ffa4beccbff8e662887a483dffc"
+        },
+        {
+          "name": "pose_metadata",
+          "first_bank": 41,
+          "bank_count": 2,
+          "last_bank": 42,
+          "bytes": 32768,
+          "sha256": "2b730e2ce0b07a6dfe2f6bd6a128013946432c631d807474ae1fa08f2bfcd9dd"
+        },
+        {
+          "name": "pose_index",
+          "first_bank": 43,
+          "bank_count": 1,
+          "last_bank": 43,
+          "bytes": 16384,
+          "sha256": "e1dcfb0374311eddcaf4b219484e7e2d55a299dfb5ca46d61841316589cc65b0"
+        }
+      ],
+      "total_bytes": 688128,
+      "total_banks": 42,
+      "first_bank": 2,
+      "last_bank": 43,
+      "merged_sha256": "91d42b5c15781f6619f0a327aec24e85c8b30a64d1d3ed3df141461e385f763a",
+      "bank_contract": "makesms -mbank <image>:0:42:2; generated frame and pose macros occupy banks 40-43"
+    }
+  },
+  "row_schedule_model": {
+    "report_path": "row_schedule_ryo_ryo_20261008.json",
+    "report_sha256": "ea9ec1a3bb4717dc39f20798cd62f9fb4cceb8e9b20856ce9e5a68ffaa55c5f0",
+    "passed": true,
+    "pose_pairs": 8836,
+    "parities": 2,
+    "max_sat": 48,
+    "max_sprites_per_scanline": 8,
+    "scope": "Ryo/Ryo; 94 source-derived poses per slot; fixed grounded anchors; both scheduler parities; model-only, not framebuffer or timing evidence"
+  },
+  "build": {
+    "project_name": "ryo_ryo_integrated_runtime_probe_20261008",
+    "axes": {
+      "build": true,
+      "validation_report": true,
+      "boot_emulador": false,
+      "gameplay": false,
+      "fps_constante": false,
+      "audio": false,
+      "memory_bank_atualizado": false
+    },
+    "steps": {
+      "pre_gates": "pass",
+      "toolchain": "ok",
+      "compile": "11 objeto(s)",
+      "rom": "/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/out/rom/ryo_ryo_integrated_runtime_probe_20261008.sms (720896 bytes)"
+    },
+    "rom": {
+      "path": "rom.sms",
+      "bytes": 720896,
+      "sha256": "b5549e29368e03efe0cc3f0a280d0bd7b2c426fd84f0d2b7e92b6cac970814d4"
+    },
+    "bank_image": {
+      "path": "banks_integrada.bin",
+      "bytes": 688128,
+      "sha256": "91d42b5c15781f6619f0a327aec24e85c8b30a64d1d3ed3df141461e385f763a",
+      "exactly_bound_at_rom_offset_0x8000": true
+    },
+    "rom_asset_binding_gate": {
+      "self_check": "PASS",
+      "candidate_result": {
+        "problems": [
+          "rom_asset_binding_unproven: mapa ausente (doc/rom_asset_binding.json)"
+        ],
+        "report": {
+          "present": false,
+          "entries": 0
+        }
+      }
+    },
+    "emulator_qa": "not performed; native QA preparation remains blocked by unreadable canonical authority documents under SMS_GLOBAL §99",
+    "FPS_audio_memory": "unmeasured/unproven"
+  },
+  "disposition": "Build and pre-gates passed for this isolated Ryo/Ryo candidate. It is not the current canonical tree, has no rom_asset_binding map, has no emulator evidence, and does not execute general MUGEN CNS/source-route semantics.",
+  "artifacts": [
+    {
+      "path": "bank_layout.json",
+      "bytes": 1231,
+      "sha256": "4d17755c22462f0bb42ab5c0e2119e186df03c464beb6624012fdaa785aea048"
+    },
+    {
+      "path": "banks_integrada.bin",
+      "bytes": 688128,
+      "sha256": "91d42b5c15781f6619f0a327aec24e85c8b30a64d1d3ed3df141461e385f763a"
+    },
+    {
+      "path": "build.log",
+      "bytes": 5356,
+      "sha256": "f39f6eabb0a448fd9dc15378d56e4504a4a7c4262654bc2223d2c38e4b7b3ff8"
+    },
+    {
+      "path": "build_record.json",
+      "bytes": 768,
+      "sha256": "889bb95d5bd05f07e24c43ac89c2c349fcf905fff3dfd9a09671221c4cf34f0f"
+    },
+    {
+      "path": "generated/attack_cmds.h",
+      "bytes": 1034,
+      "sha256": "573fe78c54eb21294b2629035742512b4cae0be09545af14bdbcecd481f7b018"
+    },
+    {
+      "path": "generated/attack_cmds_report.json",
+      "bytes": 6159,
+      "sha256": "65cece272fea4e24fea97e7d14d982069c339752ae07c3c8c8ca7d601fd09c33"
+    },
+    {
+      "path": "generated/fight_runtime_data.h",
+      "bytes": 5254,
+      "sha256": "7122bab33f9377aee04777b400f6e136f09b34917663544fcd56dc53947fb49d"
+    },
+    {
+      "path": "generated/fight_runtime_data_manifest.json",
+      "bytes": 133558,
+      "sha256": "6e16c4100a1ad563327733430a7bb7e3d2d01d22f45177bff0be43980555df54"
+    },
+    {
+      "path": "generated/p1_ken/ken_scene_manifest.json",
+      "bytes": 134718,
+      "sha256": "632e50d1f12a5266486acfe90d7f87f433a1adb584e2e9a0f4e28e6e51ec3529"
+    },
+    {
+      "path": "generated/p2_ryu/ken_scene_manifest.json",
+      "bytes": 134724,
+      "sha256": "6f06bd9280245a1011d60a45bdd0200dcc33b97d328a3b12a6d8624389b452a4"
+    },
+    {
+      "path": "generated/pose_table.h",
+      "bytes": 773,
+      "sha256": "6ac416dd9668d5d9ce12468e811ef0c6244db5c6b65cb52f2996802f0439b9ba"
+    },
+    {
+      "path": "generated/scene_trimmed.h",
+      "bytes": 142028,
+      "sha256": "ba74aa73360ed157747a1d7dd14a8b3e89eba496fb352a2b1540ebf92a444bb4"
+    },
+    {
+      "path": "generated/source_frame_data.h",
+      "bytes": 1677,
+      "sha256": "05872ccd2af123f13a2fc669d0257e82f7861dcca9503de28a0fa4971e453087"
+    },
+    {
+      "path": "generated/versus_scene_manifest.json",
+      "bytes": 158173,
+      "sha256": "6dee40b6fe8e2748ceff04576a42fd8bb57cbd297f1b4e9830bbc76b633c41b0"
+    },
+    {
+      "path": "generated/versus_scene_runtime_namespaced.h",
+      "bytes": 318117,
+      "sha256": "3dfb687f3b43dfcd8dfcccc1cb59230388f8e61240cf9f1f964c8ddf155753a7"
+    },
+    {
+      "path": "project.json",
+      "bytes": 516,
+      "sha256": "c2b49a5de7314c3c25c293f44201f3d62c8ec5d2b104e6e31dd025d2f7d4d898"
+    },
+    {
+      "path": "rom.sms",
+      "bytes": 720896,
+      "sha256": "b5549e29368e03efe0cc3f0a280d0bd7b2c426fd84f0d2b7e92b6cac970814d4"
+    },
+    {
+      "path": "rom_asset_binding_audit.json",
+      "bytes": 157,
+      "sha256": "bdd3c769d693cb07fd52cb40b528c7daf154924c1249de47054d34fe6af3b84c"
+    },
+    {
+      "path": "row_schedule_ryo_ryo_20261008.json",
+      "bytes": 3356,
+      "sha256": "ea9ec1a3bb4717dc39f20798cd62f9fb4cceb8e9b20856ce9e5a68ffaa55c5f0"
+    },
+    {
+      "path": "runtime_source_manifest.json",
+      "bytes": 5778,
+      "sha256": "3904a794b8d4e8c593f84ad814b555bebd5fdf909e4dd4acc1ccc6a95943101c"
+    }
+  ]
+}

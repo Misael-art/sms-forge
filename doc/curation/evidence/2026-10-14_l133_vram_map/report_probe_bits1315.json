@@ -1,0 +1,84 @@
+{
+  "verdict": "aprovado",
+  "blockers": [],
+  "alerts": [],
+  "metrics": {
+    "reg6": "0xff",
+    "sprite_janela": [
+      "0x2000",
+      "0x3800"
+    ],
+    "sprite_tiles_unicos": 192,
+    "pnt_bloco": [
+      "0x3800",
+      "0x3f00"
+    ],
+    "bytes_usados": 2080,
+    "bytes_livres": 14304,
+    "pockets_oferecidos": [
+      {
+        "kind": "gap_sat",
+        "ranges": [
+          [
+            16192,
+            16256
+          ]
+        ],
+        "tiles": 2,
+        "guards": [],
+        "legal": true,
+        "note": "sprite idx 250 (0xFA) / tilemap idx 506 (0x1FA) quando reg6=0xFF"
+      },
+      {
+        "kind": "tilemap_bottom",
+        "ranges": [
+          [
+            15872,
+            16128
+          ]
+        ],
+        "tiles": 8,
+        "guards": [
+          "sem scroll vertical",
+          "modo 192 (tilemap de 28 linhas)"
+        ],
+        "legal": true,
+        "note": "sprite idx 240 (0xF0) / tilemap idx 496 (0x1F0)"
+      },
+      {
+        "kind": "sat_tail",
+        "ranges": [
+          [
+            16160,
+            16192
+          ],
+          [
+            16320,
+            16384
+          ]
+        ],
+        "tiles": 3,
+        "guards": [
+          "max 31 (ou 15) sprites com $D0 no Y da 32a entrada",
+          "terminador $D0 so vale em modo 192 (L128/§118)"
+        ],
+        "legal": false,
+        "note": "Y dos sprites 32-63 e X/tile idx correspondentes"
+      }
+    ]
+  },
+  "snapshots": [
+    {
+      "arquivo": "out/campaign_tier1_2026-10-14/tilemap_bits1315/blastem-sms-2e1f017bc1b74154a4be68e7b03b5ee0/snapshots/000/vdp_regs.bin",
+      "reg2": "0xff",
+      "reg5": "0xff",
+      "reg6": "0xff"
+    },
+    {
+      "arquivo": "out/campaign_tier1_2026-10-14/tilemap_bits1315/blastem-sms-2e1f017bc1b74154a4be68e7b03b5ee0/snapshots/001/vdp_regs.bin",
+      "reg2": "0xff",
+      "reg5": "0xff",
+      "reg6": "0xff"
+    }
+  ]
+}

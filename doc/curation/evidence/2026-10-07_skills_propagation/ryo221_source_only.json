@@ -1,0 +1,246 @@
+{
+  "action_id": 221,
+  "action_line": 1388,
+  "boundary_cumulative_ticks": [
+    0,
+    6,
+    14,
+    18,
+    22,
+    30
+  ],
+  "boundary_element_ids": [
+    "221:0",
+    "221:1",
+    "221:2",
+    "221:3",
+    "221:4",
+    "221:terminal"
+  ],
+  "counter_bits": 16,
+  "durations": [
+    6,
+    8,
+    4,
+    4,
+    8
+  ],
+  "elements": [
+    {
+      "blend": "",
+      "clsn1": [],
+      "clsn2": [
+        [
+          11,
+          -100,
+          29,
+          -86
+        ],
+        [
+          -3,
+          -86,
+          26,
+          -30
+        ],
+        [
+          -24,
+          -30,
+          -2,
+          3
+        ],
+        [
+          19,
+          -38,
+          37,
+          1
+        ]
+      ],
+      "duration": 6,
+      "element_id": "221:0",
+      "element_index": 0,
+      "group": 221,
+      "hflip": false,
+      "image": 0,
+      "source_line": 1394,
+      "vflip": false,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "blend": "",
+      "clsn1": [
+        [
+          18,
+          -91,
+          92,
+          -54
+        ]
+      ],
+      "clsn2": [
+        [
+          -3,
+          -97,
+          39,
+          -30
+        ],
+        [
+          -19,
+          -30,
+          5,
+          2
+        ],
+        [
+          29,
+          -30,
+          42,
+          -1
+        ],
+        [
+          39,
+          -86,
+          84,
+          -73
+        ]
+      ],
+      "duration": 8,
+      "element_id": "221:1",
+      "element_index": 1,
+      "group": 221,
+      "hflip": false,
+      "image": 1,
+      "source_line": 1402,
+      "vflip": false,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "blend": "",
+      "clsn1": [],
+      "clsn2": [
+        [
+          -3,
+          -97,
+          39,
+          -30
+        ],
+        [
+          -19,
+          -30,
+          5,
+          2
+        ],
+        [
+          29,
+          -30,
+          42,
+          -1
+        ],
+        [
+          39,
+          -86,
+          84,
+          -73
+        ]
+      ],
+      "duration": 4,
+      "element_id": "221:2",
+      "element_index": 2,
+      "group": 221,
+      "hflip": false,
+      "image": 2,
+      "source_line": 1408,
+      "vflip": false,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "blend": "",
+      "clsn1": [],
+      "clsn2": [
+        [
+          -3,
+          -97,
+          39,
+          -30
+        ],
+        [
+          -19,
+          -30,
+          5,
+          2
+        ],
+        [
+          29,
+          -30,
+          42,
+          -1
+        ],
+        [
+          39,
+          -86,
+          84,
+          -73
+        ]
+      ],
+      "duration": 4,
+      "element_id": "221:3",
+      "element_index": 3,
+      "group": 221,
+      "hflip": false,
+      "image": 3,
+      "source_line": 1414,
+      "vflip": false,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "blend": "",
+      "clsn1": [],
+      "clsn2": [
+        [
+          -3,
+          -97,
+          39,
+          -30
+        ],
+        [
+          -19,
+          -30,
+          5,
+          2
+        ],
+        [
+          29,
+          -30,
+          42,
+          -1
+        ]
+      ],
+      "duration": 8,
+      "element_id": "221:4",
+      "element_index": 4,
+      "group": 221,
+      "hflip": false,
+      "image": 0,
+      "source_line": 1419,
+      "vflip": false,
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "kind": "air_source_identity",
+  "limits": [
+    "source AIR identity and order only; no ROM execution is measured",
+    "terminal boundary applies to this finite non-looping action pass",
+    "sprite pixel equality does not merge AIR element identities"
+  ],
+  "schema": "mugen2sms.air-source-identity/v1",
+  "sequence_scope": "one_finite_non_looping_action_pass",
+  "source": {
+    "air_path": "ffspRyo.air",
+    "air_sha256": "ccd87558911cb4421a5fe539b86ffc818559254181744ca58e7c807d0a3a2ed4",
+    "def_path": "ffspRyo.def",
+    "package_name": "ffspRyo_v3.zip",
+    "package_sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133"
+  }
+}

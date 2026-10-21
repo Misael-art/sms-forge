@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/artifact_registry.py",
+    "locate",
+    "--project",
+    "/tmp/smsforge-harness-forward-20261010/fixture_game",
+    "--asset",
+    "fighter_ash",
+    "--kind",
+    "model_sheet",
+    "--variant",
+    "main"
+  ],
+  "exit": 0,
+  "stdout": "{\n  \"schema\": \"sms_artifact_audit_v1\",\n  \"ok\": true,\n  \"problems\": [],\n  \"warnings\": [],\n  \"artifact_count\": 6,\n  \"indexed_file_count\": 18,\n  \"claim_ceiling\": \"organization_and_reference_consistency_only\",\n  \"registry_sha256\": \"d5ebc30fcd3e0533301598aef82e43df7b9f5b7561fc4dec332dc18cff0ab00d\",\n  \"head\": {\n    \"asset_id\": \"fighter_ash\",\n    \"kind\": \"model_sheet\",\n    \"variant\": \"main\",\n    \"candidate\": \"ash.model.main.r1\",\n    \"approved\": \"ash.model.main.r1\"\n  },\n  \"artifacts\": [\n    {\n      \"id\": \"ash.model.main.r1\",\n      \"asset_id\": \"fighter_ash\",\n      \"kind\": \"model_sheet\",\n      \"variant\": \"main\",\n      \"revision\": 1,\n      \"status\": \"approved\",\n      \"parents\": [],\n      \"reason\": \"Fixture scenario baseline\",\n      \"files\": [\n        {\n          \"role\": \"document\",\n          \"path\": \"data/source_art/fighter_ash/model_sheet/main/v01/document.fixture.txt\",\n          \"sha256\": \"d48fc268731dff557ae2d7f4a30950fb96086d93486fc5ed36beb25842472f61\"\n        },\n        {\n          \"role\": \"metadata\",\n          \"path\": \"data/source_art/fighter_ash/model_sheet/main/v01/metadata.json\",\n          \"sha256\": \"6e6817abf8ec8512e4f3f93bddb46f4980add47ea57ac79de11b63fd0b43dde7\"\n        },\n        {\n          \"role\": \"lineage\",\n          \"path\": \"data/source_art/fighter_ash/model_sheet/main/v01/lineage.json\",\n          \"sha256\": \"72a21351da22f9b767095fd856c7f69ac21b7ab7a1bc831aeaeece5f1d3133ce\"\n        }\n      ],\n      \"approval_scope\": \"model_sheet\",\n      \"decision\": {\n        \"path\": \"doc/decisions/ash.model.main.r1.json\",\n        \"sha256\": \"6f5f4dcccbf1db1d69d3c5d08e112af689bf07049c4e149c8216777392feaab9\"\n      }\n    }\n  ]\n}\n",
+  "stderr": ""
+}

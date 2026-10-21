@@ -1,0 +1,27 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_14_gouache_fantasy_art_review_v1",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Read-only independent review of Gouache-Fantasy-Art candidate: style distinction, identity, costume silhouette, paint treatment, palette, face, equipment grips, five-view consistency, scale, crop and clean layout. Record concrete observations; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1.png",
+      "sha256": "adc6e85568776dd89a0172c5e17d87b146c21f2bec8e1525b780672eb7a56bd0",
+      "role": "candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v1.json",
+      "sha256": "1dbd078d9a3eab175bcf8cb1e6853d6248561bb12df3d86df240c4e0cc393851",
+      "role": "review checklist"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Document defects and opportunities with evidence."
+  ]
+}

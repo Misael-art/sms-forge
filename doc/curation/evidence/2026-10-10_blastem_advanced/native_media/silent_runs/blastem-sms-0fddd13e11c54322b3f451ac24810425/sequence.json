@@ -1,0 +1,21 @@
+{
+  "schema": "sms_blastem_sequence_v1",
+  "region": "ntsc",
+  "model": "sms2",
+  "warmup_frames": 120,
+  "steps": [
+    {
+      "frames": 120
+    }
+  ],
+  "diagnostics": {
+    "record_av": true,
+    "vgm": true
+  },
+  "preconditions": [
+    {
+      "address": 50944,
+      "equals_hex": "534d493101"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "producer": "codex_art_production",
+  "reviewer": "/root/review_dr_social_v3",
+  "status": "revise_before_growth",
+  "domains": [
+    "art"
+  ],
+  "review_scope": "Read-only visual review of candidate v3 against approved v2; concept sheet only.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/dr_social_model_sheet_cps2_alpha_cel_v3_candidate.png",
+      "sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e",
+      "observed_sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+      "observed_sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4"
+    }
+  ],
+  "findings": [
+    {
+      "kind": "risk",
+      "summary": "The cane hand and wrist are visible, but the sleeve and elbow partially disappear into the torso. At sheet scale, the arm can still read as emerging from behind the coat.",
+      "priority": 1
+    },
+    {
+      "kind": "opportunity",
+      "summary": "The steel boomerang is intact, but violet motion curves compete with its silhouette in the signature pose. Keep the effects behind the object and reinforce the crescent contour.",
+      "priority": 2
+    },
+    {
+      "kind": "risk",
+      "summary": "The source-game arsenal panel's items do not fully match GDD and combat-proposal wording. Treating the panel as reference-only is correct, but inventory terminology remains open and must not imply a canonical fan-game moveset.",
+      "priority": 3
+    }
+  ],
+  "positive_observations": [
+    "Identity, face, palette, lean proportions and period clothing remain consistent with approved v2.",
+    "The signature accessory reads as a blunt walking cane, distinct from the separate rapier in the equipment panel.",
+    "Front, profile and back views share baseline and scale."
+  ],
+  "ready_for_aaa": false,
+  "approval_scope": "This review does not approve sprites, moveset, animation, SMS conversion, ROM or game delivery."
+}

@@ -112,3 +112,7 @@ int main(void) {
         assert build.returncode == 0, build.stderr
         run = subprocess.run([str(exe_path)], capture_output=True, text=True)
         assert run.returncode == 0, run.stdout + run.stderr
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

@@ -1,0 +1,26 @@
+{
+  "scope": "Primary local source/header inspection, not new hardware/emulator validation",
+  "sources": [
+    {
+      "source": "out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/sms.c",
+      "sha256": "654fe39d9056237bddf3be04b378f50ac9ed5f072f0667aa07df9f31b8c902cc",
+      "first_line": 701,
+      "last_line": 741,
+      "excerpt": "static uint8_t i8255_input_poll(i8255 *ppi, uint32_t cycle, uint32_t port)\n{\n\tif (port > 1) {\n\t\treturn 0xFF;\n\t}\n\tsms_context *sms = ppi->system;\n\tif (sms->kb_mux == 7) {\n\t\tif (port) {\n\t\t\t//TODO: printer port BUSY/FAULT\n\t\t\tuint8_t port_b = io_data_read(sms->io.ports+1, cycle);\n\t\t\treturn (port_b >> 2 & 0xF) | 0x10 | cassette_read(sms, cycle);\n\t\t} else {\n\t\t\tuint8_t port_a = io_data_read(sms->io.ports, cycle);\n\t\t\tuint8_t port_b = io_data_read(sms->io.ports+1, cycle);\n\t\t\treturn (port_a & 0x3F) | (port_b << 6);\n\t\t}\n\t}\n\tprocess_events();\n\tprocess_paste(sms, cycle);\n\t//TODO: keyboard matrix ghosting\n\tif (port) {\n\t\t//TODO: printer port BUSY/FAULT\n\t\treturn (sms->keystate[sms->kb_mux] >> 8) | 0x10 | cassette_read(sms, cycle);\n\t}\n\treturn sms->keystate[sms->kb_mux];\n}\n\nstatic void update_mem_map(uint32_t location, sms_context *sms, uint8_t value)\n{\n\tz80_context *z80 = sms->z80;\n\tvoid *old_value;\n\tif (location) {\n\t\tuint32_t idx = sms->header.info.mapper_start_index + location - 1;\n\t\told_value = z80->mem_pointers[idx];\n\t\tz80->mem_pointers[idx] = sms->rom + (value << 14 & (sms->rom_size-1));\n\t\tif (old_value != z80->mem_pointers[idx]) {\n\t\t\t//invalidate any code we translated for the relevant bank\n\t\t\tz80_invalidate_code_range(z80, idx ? idx * 0x4000 : 0x400, idx * 0x4000 + 0x4000);\n\t\t}\n\t} else {\n\t\tuint32_t idx = sms->header.info.mapper_start_index + 2;"
+    },
+    {
+      "source": "out/blastem_downloads/blastem-source-1.0.0/blastem-2b2a182f4522/vdp.c",
+      "sha256": "4c30c5b36a2c82eb056adff31a122196845ffe892a14ea1bc058e8e1e9576144",
+      "first_line": 741,
+      "last_line": 760,
+      "excerpt": "\t\t\tprintf(\"Sprite %d: X=%d(%d), Y=%d(%d), Width=%u, Height=%u, Link=%u, Pal=%u, Pri=%u, Pat=%X\\n\", current_index, x, x-128, y, y-128, width, height, link, pal, pri, pattern);\n\t\t\tcurrent_index = link;\n\t\t\tcount++;\n\t\t} while (current_index != 0 && count < 80);\n\t} else if (context->type != VDP_TMS9918A && context->regs[REG_MODE_1] & BIT_MODE_4) {\n\t\tuint16_t sat_address = (context->regs[REG_SAT] & 0x7E) << 7;\n\t\tfor (int i = 0; i < 64; i++)\n\t\t{\n\t\t\tuint8_t y = context->vdpmem[mode4_address_map[sat_address + (i ^ 1)]];\n\t\t\tif (y == 0xD0) {\n\t\t\t\tbreak;\n\t\t\t}\n\t\t\tuint8_t x = context->vdpmem[mode4_address_map[sat_address + 0x80 + i*2 + 1]];\n\t\t\tuint16_t tile_address = context->vdpmem[mode4_address_map[sat_address + 0x80 + i*2]] * 32\n\t\t\t\t+ (context->regs[REG_STILE_BASE] << 11 & 0x2000);\n\t\t\tif (context->regs[REG_MODE_2] & BIT_SPRITE_SZ) {\n\t\t\t\ttile_address &= ~32;\n\t\t\t}\n\t\t\tprintf(\"Sprite %d: X=%d, Y=%d, Pat=%X\\n\", i, x, y, tile_address);\n\t\t}"
+    },
+    {
+      "source": "sdk/devkitSMS/SMSlib/SMSlib.h",
+      "sha256": "a258e4df64dbc4bf4ae0ddf20e68796cbda02e4635cd2123a7d0b6ffda1d0c4a",
+      "first_line": 68,
+      "last_line": 89,
+      "excerpt": "/* macro for ROM bankswitching */\nvolatile __at (0xffff) unsigned char ROM_bank_to_be_mapped_on_slot2;\n#define SMS_mapROMBank(n)       ROM_bank_to_be_mapped_on_slot2=(n)\n\n/* macro to retrieve the currently mapped ROM bank */\n#define SMS_getROMBank()        (ROM_bank_to_be_mapped_on_slot2)\n\n/* macros to preserve and restore the currently mapped ROM bank */\n/* NOTE: they need to be used within the same scope (they use local variables) */\n/* Typical use: In functions using SMS_mapROMBank(), to make sure the mapped bank */\n/* when entering the function is unchanged upon return. */\n/* Use only one SMS_saveROMBank() before the first SMS_mapROMBank() in the function, */\n/* and at least one SMS_restoreROMBank() per following return statement. */\n/* SMS_restoreROMBank() may be used several times, for instance to access data in the original bank. */\n#define SMS_saveROMBank()       unsigned char _saved_slot2_ROM_bank = ROM_bank_to_be_mapped_on_slot2\n#define SMS_restoreROMBank()    SMS_mapROMBank(_saved_slot2_ROM_bank)\n\n/* additional symbols to control other mapper slots - use with care! */\nvolatile __at (0xfffe) unsigned char ROM_bank_to_be_mapped_on_slot1;\nvolatile __at (0xfffd) unsigned char ROM_bank_to_be_mapped_on_slot0;\n\n/* macro for SRAM access */"
+    }
+  ]
+}

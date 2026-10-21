@@ -5,8 +5,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT=Path(__file__).resolve().parents[1]
 MAN=ROOT/'doc/dr_social_style_series_manifest_v1.json'
-ANCHOR=ROOT/'data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png'
-OUT=ROOT/'data/source_art/concept_art/dr_social/dr_social_48_style_atlas_v1.png'
+ANCHOR=ROOT/'data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png'
+OUT=ROOT/'data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_48_style_atlas_v1.png'
 FONT=Path('/usr/share/fonts/liberation')
 def f(name,size): return ImageFont.truetype(str(FONT/name),size)
 def wrap(draw, text, ft, width):

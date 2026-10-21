@@ -1,0 +1,124 @@
+{
+  "schema": "smsforge.blastem_expansion_native_review.v1",
+  "native_worker_id": "/root/review_qa_contract",
+  "created_at_utc": "2026-10-10T12:46:44.844321+00:00",
+  "status": "needs_revision",
+  "scope": "Read-only tool/source review and independent synthetic cases in/tmp; no emulators, network download, desktop or hostinputs; no product promotion.",
+  "source_hashes": {
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_sms.py": "5ee935582409ce0de02643634f950419543f6e94f1525c21411b27c322772b3b",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py": "d7f72018e9ad9f930531b55a929cb58fcf2af42154b0ff3f1272c477be49d29a",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_maintenance.py": "2410f096accf3f9d12b43e521d697311c826aa766d730315554791829df7f7b1",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py": "d3c34891c86bc038ade25a347cd706bdf2ec2b73bcb7c2a707f1c446682bd91f"
+  },
+  "selfchecks": {
+    "blastem_sms.py": "passed",
+    "blastem_diagnostics.py": "passed",
+    "blastem_maintenance.py": "passed",
+    "audit_blastem_sms.py": "passed"
+  },
+  "focused_checks": {
+    "maintenance_parallel_same_candidate": "PASS onefetch/samepath/qualifiedFalse",
+    "maintenance_ancillary_tamper": "rejected",
+    "maintenance_tar_traversal": "rejected",
+    "cpu_indices_glew": "existing negatives exercised in audit selfcheck",
+    "APNG_raw_derived_crc": "source reviewed+existingpositive/negative selfcheck PASS; no native recording",
+    "WAVE_truncation": "initial falsepass; samefixture rejected after fix",
+    "VGM_header_only": "initial falsepass; samefixture rejected after fix",
+    "VDP_internal_ranges": "falsepass persists",
+    "VDP_bankable_sites": "accepted withoutliveopcodeguard",
+    "unknown_WAVE_format": "unhandled wave.Error"
+  },
+  "findings": [
+    {
+      "id": "BEX-01",
+      "priority": "P1",
+      "status": "open",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py",
+      "line": 63,
+      "title": "Bankable PC accepted as fixed VDP OUT site",
+      "observed": "validate_features and instrumentation accept pc=0x03FF or0x1000 and only compare ROM file bytes; generated breakpoint commands have no live opcode guard.",
+      "why": "Official Sega mapper fixes only first1024bytes; laterbankchanges alter logical bytes0400–3FFF. An event can be labeled vdp_io_before_out at a site executing another instruction. Codemasters also prevents universal fixedlowbank assumption.",
+      "evidence": "focused_mutants/remaining_cases.json",
+      "source_refs": [
+        "sms.c:727–738",
+        "romdb.c:1690–1717",
+        "debug.c:read_z80"
+      ],
+      "recommendation": "Require qualified mapper+fullyfixed2byte site, or validate exact live opcode bytes for every hit; preserve mismatch/skipped scope and count. Add a bank-switch negative fixture."
+    },
+    {
+      "id": "BEX-02",
+      "priority": "P2",
+      "status": "open",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py",
+      "line": 137,
+      "title": "Impossible VDP internal event values accepted",
+      "observed": "Complete rebound synthetic bundle with vcounter/hslot/address/cd=99999 passes audit.",
+      "why": "NoCPUresync permits stalephase, not values impossible for storedfieldtypes. vcounter is uint16,hslot/cd uint8 in vdp.h.",
+      "evidence": "focused_mutants/full_audit/results_after_media_fix.json",
+      "recommendation": "Validate source-type ranges for each raw internal field, without claiming CPU alignment; add negative event fixtures. Address is uint32, so use actual qualified bound or type scope rather than inventing14bit for internal state."
+    },
+    {
+      "id": "BEX-03",
+      "priority": "P2",
+      "status": "open",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py",
+      "line": 163,
+      "title": "Unknown WAVE format escapes structured audit result",
+      "observed": "A size-consistent WAVE with formatTag3 throws wave.Error through audit(), which catchesOSError/ValueError/TypeError/etc but notwave.Error.",
+      "evidence": "focused_mutants/remaining_cases.json",
+      "recommendation": "Translate wave.Error to ValueError in wave_summary or catch explicitly in audit; return structured failed audit. Negative test formatTag3."
+    },
+    {
+      "id": "BEX-04",
+      "priority": "P2",
+      "status": "corrected_and_retested",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py",
+      "title": "Truncated WAVE accepted with declared duration",
+      "observed_before_fix": "Header claimed1920PCMbytes but actual1520; media_summary and fullaudit previouslyPASS.",
+      "observed_after_fix": "Same preserved fixture nowFAIL invalid/truncated native WAVE container.",
+      "evidence": [
+        "focused_mutants/results.json",
+        "focused_mutants/full_audit/results.json",
+        "focused_mutants/full_audit/results_after_media_fix.json"
+      ]
+    },
+    {
+      "id": "BEX-05",
+      "priority": "P2",
+      "status": "corrected_and_retested",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py",
+      "title": "Header-only VGM accepted as PSG log",
+      "observed_before_fix": "Vgm+60zeros accepted by media_summary and fullaudit.",
+      "observed_after_fix": "Same fixture nowFAIL invalid/truncated native VGM container; helper validates qualified version/clock/EOF/data/waits/end.",
+      "evidence": [
+        "focused_mutants/results.json",
+        "focused_mutants/full_audit/results.json",
+        "focused_mutants/full_audit/results_after_media_fix.json"
+      ]
+    }
+  ],
+  "expected_limitations_not_findings": [
+    {
+      "case": "observed_pc differs from configured breakpointPC",
+      "result": "Accepted byaudit; intentional: observed_pc may be stale, so cannot demand equalPC. Definitionaddress identifies hooksite, not observedPC.",
+      "evidence": "focused_mutants/full_audit/results_after_media_fix.json"
+    },
+    "CPUwatch value is debugger read at trap, not committed bus value, exactwrittenaddress or complete2bytewrite payload.",
+    "VDP internalclock/address is not resynchronized toCPU and does not prove OUT commit or hardwarephase.",
+    "APNG nominal60Hz container is not throughput/logicFPS.",
+    "WAVE native mix is asynchronous, no frame-lock or musical-quality claim.",
+    "Maintenance expectedSHA is curator-manifest trust, not upstream signature; no autoqualification/pin change."
+  ],
+  "coverage": {
+    "source_review": "done",
+    "selfchecks": "4/4PASS; diagnosticsrepeatedaftermediafix",
+    "independent_negative_cases": "done_synthetic",
+    "native_emulator_cases": "not_run",
+    "physical_hardware": "not_run",
+    "maintenance_live_network_discovery": "not_run",
+    "candidate_binary_execution": "not_run"
+  },
+  "evidence_root": "/tmp/smsforge-blastem-native-review/focused_mutants",
+  "recommendation": "ResolveBEX01 before promoting VDP_OUT applicability; closeBEX02/03 for strict record and JSON contracts. Existing source/record review does not qualify current runtime capture after helper change."
+}

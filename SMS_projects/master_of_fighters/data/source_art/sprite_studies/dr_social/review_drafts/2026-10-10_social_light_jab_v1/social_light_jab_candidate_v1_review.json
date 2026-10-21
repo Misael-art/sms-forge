@@ -1,0 +1,75 @@
+{
+  "schema": "sms_sprite_sheet_candidate_review_v1",
+  "asset_id": "dr_social_social_light_jab_candidate_v1",
+  "status": "draft_for_motion_readability_only",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v1/social_light_jab_candidate_v1.png",
+    "sha256": "cd835dcfd473021cce8f44035ca3fe9ee7c01d44ad0b50b3a696fa6e776a6e2e",
+    "dimensions_px": [1536, 1024],
+    "mode": "RGB",
+    "kind": "pixel_sprite_sheet_art_candidate"
+  },
+  "lineage": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_owner_source_v1.png",
+      "sha256": "a95fc144f6d2574a9dfb43028b7b1d1fc91108b442f03fcfebac2df3f6d56057",
+      "role": "owner-approved identity, body silhouette, costume, equipment and basic pose source"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v10/dr_social_61_pose_converted_preview_4x.png",
+      "sha256": "7d1ac3e85652b76630869df5bdf8ff89bea602761f73243867de47039982c58e",
+      "role": "color grouping and clean cel-shading treatment reference only"
+    }
+  ],
+  "animation_contract": {
+    "path": "SMS_projects/master_of_fighters/doc/dr_social_animation_contract_v2.json",
+    "sequence_id": "social_light_jab",
+    "frame_ids_row_major": ["J01", "J02", "J03", "J04", "J05", "J06"],
+    "intended_grid": {"columns": 3, "rows": 2, "cell_px": [512, 512]},
+    "logical_sms_canvas_target_px": [80, 80],
+    "durations_ticks_proposal": [2, 1, 1, 1, 1, 3],
+    "status": "design_approved; animation_art_pending_owner_review"
+  },
+  "measured_preflight": {
+    "layout": {
+      "status": "pass_preliminary",
+      "note": "1536×1024 divides into six equal 512×512 cells in the intended 3×2 order; no sheet labels are baked in."
+    },
+    "background_key": {
+      "status": "fail",
+      "required_rgb": [255, 0, 255],
+      "exact_key_pixel_count": 4,
+      "corner_rgb_samples": [[230, 15, 239], [235, 23, 239], [230, 38, 234], [230, 31, 235]],
+      "note": "Visual magenta appearance is a varying RGB background, not a pure chroma key."
+    },
+    "color_count": {
+      "status": "fail_for_runtime_asset",
+      "unique_rgb_count": 134238,
+      "master_system_sprite_useful_color_ceiling": 15,
+      "note": "This is an unindexed high-resolution art candidate, not an SMS palette-converted sprite."
+    },
+    "native_frame_geometry": {
+      "status": "not_started",
+      "observed_cell_px": [512, 512],
+      "required_review_canvas_px": [80, 80],
+      "note": "No nearest-neighbor scale, crop, palette quantization, or pixel cleanup has been applied."
+    }
+  },
+  "producer_preflight_notes": {
+    "pose_read": "The six slots read as guard, anticipation, half-extension, full contact, recoil and returned guard. J01/J06 intentionally share the guard state; the in-between poses remain distinct.",
+    "anatomy_and_equipment": "Shoulder-to-glove and hand-to-cane paths appear connected at overview size; this remains pending frame-by-frame independent review at native size and nearest-neighbor 4×.",
+    "morphology_and_identity": "The sheet reads as a slim adult with gray hair, glasses, burgundy cravat and teal coat; exact likeness and style fidelity remain pending owner review.",
+    "pixel_finish": "The RGB count and nonuniform background block any claim of native pixel-art cleanliness or SMS palette compliance."
+  },
+  "required_next_actions": [
+    "Resolve the nonuniform background without modifying character pixels, or regenerate and remeasure the complete sheet.",
+    "Freeze a true six-frame grid with no clipped body part, cane, pommel or tip.",
+    "Review all poses at intended 80×80 native scale and nearest-neighbor 4× before palette conversion.",
+    "Complete the independent art-review checklist and obtain owner approval.",
+    "Only then start indexed palette conversion, tile/metasprite accounting, SMS hardware gates and a diagnostic ROM."
+  ],
+  "independent_review": {"status": "pending_assignment"},
+  "owner_approval": {"approved": false},
+  "conversion_validation": {"status": "not_started"},
+  "promotion_status": "blocked_candidate_only"
+}

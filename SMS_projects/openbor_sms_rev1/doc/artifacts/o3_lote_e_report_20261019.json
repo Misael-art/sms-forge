@@ -1,0 +1,199 @@
+{
+ "schema": "openbor_sms_o3_lote_e_v1",
+ "generated_at": "2026-10-19",
+ "author": "Codex, worker Lote E/M8 OpenBOR SMS (coordenacao desta sessao)",
+ "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+ "rom_bytes": 131072,
+ "rom_status": "candidate M7 (audio); predecessor pre-audio 957122ae24f64d362767d10e903dd71cdf47d18800066c57d562123a573ddfa7",
+ "builder": {
+  "path": "tools/sms_wrapper/openbor2sms/openbor2sms/evidence_bundle.py",
+  "sha256": "051342c9952e80f1794c953ed6baadd9a0fe2daa83a03cae7f42e5e478528732",
+  "role": "constroi bundle v2 a partir de sessoes privadas reais (session_inputs); nao inventa metrica"
+ },
+ "bundle": {
+  "schema": "sms_openbor_evidence_v2",
+  "sha256": "a0cc1f37470af5e2f1e3cc82c1c4b46a57a78f9e925b82fcdeb76f503ab287a7",
+  "bytes": 7787,
+  "frozen_at": 1792349436.9910038,
+  "sealed_at": 1792401416.8412776,
+  "canonical_path": "/home/misael/.cache/phasezero/agent-tmp/opencode/smsforge_bundles/bundle_a7f02b84/bundle.json",
+  "mirror_path": "out/evidence/m8/bundle_a7f02b84/bundle.json",
+  "mirror_identity": "diff -r entre canonical e mirror sem diferencas; mesmos bytes",
+  "immutability_note": "/mnt/sdcard e fuseblk (default_permissions, modo sintetico 777): a checagem de imutabilidade do consumidor (st_mode & 0o222 == 0) nao e representavel nesse mount. O bundle canonico consumivel vive em /home (btrfs, chmod efetivo).",
+  "recreate_recipe": "cp -a do mirror para um FS com permissoes reais; chmod a-w em inputs/rom.sms, inputs/contract.json, inputs/tools/* e inputs/context/*; consumir. Alternativa: reexecutar evidence_bundle.py sobre out/evidence/m8/session_inputs/."
+ },
+ "sessions": [
+  {
+   "id": "8743f6abeedb46a38a7b4bccba41920f",
+   "journal_sha256": "34e81926217b6df4220cb8828fb140c25e47e3fc825bd407e39cd9cd92093336",
+   "cleanup_sha256": "5c98cbe96ee8a90fbf1038141c34de9bb5f316e12566deed1f27aa436abe088a"
+  },
+  {
+   "id": "4f1f45411420453d9c93a76f160410ba",
+   "journal_sha256": "c11faf9516b3eedf56b27fa6441c80e36d9b21839a8dd4b491c6bf3f49a21ded",
+   "cleanup_sha256": "02776dc7fae9aac155bfe70d855dee2f9a994b8a5bcb8ce62f42ff2b20f3f56c"
+  },
+  {
+   "id": "a9d92820085c4188be53dbf5fc4bd7c9",
+   "journal_sha256": "da3396ca97978ac092cd3d72e4ff9cf6e59ba44e2f55013be4b871cb306c1f45",
+   "cleanup_sha256": "5a7517064bd65a9addae183a8cd175ffe2c95840c9ca0e6ef7bf924892b2583a"
+  }
+ ],
+ "session_roles": {
+  "8743f6abeedb46a38a7b4bccba41920f": "gameplay: boot png + observacao de input + video (240 quadros, input real -> boss 50->29)",
+  "4f1f45411420453d9c93a76f160410ba": "MRP3: tres janelas regionais de runtime (NTSC)",
+  "a9d92820085c4188be53dbf5fc4bd7c9": "audio: captura isolada de ataque (WAV)"
+ },
+ "tools": [
+  {
+   "bytes": 3110303,
+   "path": "inputs/tools/emulator.jar",
+   "role": "emulator",
+   "sha256": "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371d"
+  },
+  {
+   "bytes": 9290,
+   "path": "inputs/tools/bridge.jar",
+   "role": "bridge",
+   "sha256": "a283b54202112434927ed8f83bb292376a2d6f74830dde6f04f9589da377333a"
+  },
+  {
+   "bytes": 14982,
+   "path": "inputs/tools/bridge_source.java",
+   "role": "bridge_source",
+   "sha256": "99d4d2e95ce91c05f60d54f5ccc2c877e9c7f68a0aadf52cf5be603da2daba3d"
+  },
+  {
+   "bytes": 281,
+   "path": "inputs/tools/config_initial.ini",
+   "role": "config_initial",
+   "sha256": "96f1d666d3385321f7ff87ea6f260305647e00ca2f702dd44d26825aac26a559"
+  }
+ ],
+ "artifacts": [
+  {
+   "id": "boot_png",
+   "kind": "png",
+   "session_id": "8743f6abeedb46a38a7b4bccba41920f",
+   "captured_at": 1792355356.6565611,
+   "file_sha256": "67e87e20f4e784aba1b28fab2cb48860d5f8ede81d6190ad6e54792c8d9eabbe",
+   "file_bytes": 14454
+  },
+  {
+   "id": "gameplay_observation",
+   "kind": "input_observation",
+   "session_id": "8743f6abeedb46a38a7b4bccba41920f",
+   "captured_at": 1792355358.7945454,
+   "file_sha256": "10f6aa4f56c72218f1c523981143cf9934ebf25e54164364ce0c8401a053250d",
+   "file_bytes": 420
+  },
+  {
+   "id": "gameplay_video",
+   "kind": "video",
+   "session_id": "8743f6abeedb46a38a7b4bccba41920f",
+   "captured_at": 1792355358.4403377,
+   "file_sha256": "1762b82290bd5c63ac77998dc783f8337f27db6eb176963d96aee774f54d8729",
+   "file_bytes": 234623
+  },
+  {
+   "id": "fps_metrics",
+   "kind": "runtime_metrics",
+   "session_id": "4f1f45411420453d9c93a76f160410ba",
+   "captured_at": 1792399394.8012831,
+   "file_sha256": "bed56ff566aa6d4dd73f8b973d18973517ba77b0f7e93aa2911765d38f1735a9",
+   "file_bytes": 1976
+  },
+  {
+   "id": "audio_signal",
+   "kind": "wav",
+   "session_id": "a9d92820085c4188be53dbf5fc4bd7c9",
+   "captured_at": 1792355381.1316147,
+   "file_sha256": "1638dd1916adab29b112c52a8c2cf73389027eb73cdba68f385fe626b6e42d74",
+   "file_bytes": 589868
+  }
+ ],
+ "consumer": {
+  "path": "tools/sms_wrapper/openbor2sms/openbor2sms/evidence_consumer.py",
+  "sha256": "d7a940ff17927b771b20db383fee9e18b8540baf94fef7dea948d6fff4aba5cc",
+  "report_path": "out/evidence/m8/consumption_a7f02b84.json",
+  "report_sha256": "ade6c1b7dfc31cb4ea0848a9e7d84b5fc86f10457a3d7c8089d8f98a14966059",
+  "eligible": true,
+  "axes": {
+   "build": false,
+   "validation_report": false,
+   "boot_emulador": true,
+   "gameplay": true,
+   "fps_constante": true,
+   "audio": true,
+   "memory_bank_atualizado": false
+  },
+  "scope": {
+   "claim_ceiling": "assigned_checks_only",
+   "region": "NTSC",
+   "scene": "TOWN1"
+  },
+  "limits": [
+   "record_consistency_not_producer_authentication",
+   "assigned_checks_only",
+   "no_delivery_or_visual_quality_approval",
+   "video_limit_600_frames_per_artifact"
+  ],
+  "derived": {
+   "boot_emulador": {
+    "proof": "framebuffer",
+    "derived": {
+     "canvas": [
+      256,
+      192
+     ]
+    }
+   },
+   "gameplay": {
+    "proof": "input_ram_video",
+    "derived": {
+     "before": 50,
+     "after": 29,
+     "relation": "decrease"
+    }
+   },
+   "fps_constante": {
+    "proof": "regional_runtime_windows",
+    "derived": {
+     "fps_janelas": [
+      59.61355619758742,
+      59.61658363446885,
+      59.69380259889601
+     ],
+     "frames_delta_total": 1441,
+     "region": "NTSC"
+    }
+   },
+   "audio": {
+    "proof": "audio_signal",
+    "derived": {
+     "samples": 294912,
+     "peak": 1936,
+     "seconds": 6.6873469387755105
+    }
+   }
+  },
+  "self_check": "39 testes OK (python3 -m openbor2sms.evidence_consumer --self-check)"
+ },
+ "negative_probes": {
+  "script_path": "out/evidence/m8/negative_probe.py",
+  "script_sha256": "548c47a0a491105909a315e6ff9b8401ec4e0883a211c254e05cc5ca6c4a9fc1",
+  "log_path": "out/evidence/m8/negative_probe_20261019.txt",
+  "log_sha256": "6a26b7b7920292218e7552b05a2d8e48c457888b832230ddf738061340133602",
+  "cases": [
+   {
+    "case": "bitflip_png",
+    "outcome": "eligible= False problems= ['SHA mismatch: artifacts/boot_png.png']"
+   },
+   {
+    "case": "janelas_2",
+    "outcome": "eligible= False problems= ['at least three regional runtime windows required']"
+   }
+  ],
+  "note": "mutacoes aplicadas sobre copia do bundle canonico; referencias internas atualizadas quando aplicavel (janelas 2)"
+ }
+}

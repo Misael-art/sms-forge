@@ -1,0 +1,118 @@
+{
+  "schema": "mof_owner_sprite_feedback_v1",
+  "project": "master_of_fighters",
+  "date": "2026-10-05",
+  "source": {
+    "kind": "owner_textual_post_treatment_review",
+    "image_attached_with_message": false,
+    "tracked_comparison_board": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_alignment_audit_v2.png",
+    "tracked_comparison_board_sha256": "2a22cfa8fec9542639f1d5bbade068e5ce20426c516e1360b3f3d6b8ccd0e535"
+  },
+  "owner_assessment": "O dono relata que as falhas anatômicas e estruturais mais críticas foram corrigidas. Permanecem refinamentos de clusters de pixel, contornos, leitura de rosto/olhos, sombreamento de materiais e alguns encaixes de equipamento. A nova radiografia especifica que os contornos devem ficar limpos em degraus de pixel, sem blur ou antialiasing, e que o sombreamento deve usar blocos de cel shading sem dithering. Isto não aprova as folhas para promoção.",
+  "follow_up_assessment": {
+    "date": "2026-10-05",
+    "detail": "O acabamento melhorou e os defeitos estruturais graves foram em grande parte resolvidos; agora a avaliação se concentra em consistência de pixel art, recorte, clusters faciais, volume dos materiais e fidelidade de equipamento.",
+    "rendering_rule": "Manter clusters duros e legíveis, contorno contínuo em degraus discretos de pixel, luz/sombra por blocos de cor e sem dithering. Não suavizar pixel art com blur, antialiasing ou mistura de cor.",
+    "specific_followups": [
+      "Shinobi: reduzir o aspecto pintado/suavizado do gi branco e tornar os cinzas em blocos de cel shading mais definidos.",
+      "Alis: recuperar clusters das pernas e sombras rosas; evitar aparência desfocada; dar volume ao metal do escudo sem dithering.",
+      "Contornos dos pés de todo o elenco: remover pixels órfãos sem arredondar ou borrar a escada de pixels.",
+      "Landau: deixar pupila/olhos mais legíveis e aumentar/definir o arco e sua corda atrás da cabeça.",
+      "J.J.: conferir rosto e arma contra o sprite canônico de Zillion II SMS; a pistola atual ainda não comunica a arma do jogo."
+    ]
+  },
+  "latest_comparison_feedback": {
+    "owner_observation": "O contorno do Shinobi/Joe Musashi apresenta ruído visível na prancha comparativa.",
+    "first_board": {
+      "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v1.png",
+      "sha256": "3800261b6d471548ab5caeb5be52f19b5953f4d3d32e6d2a4aa30f7d11f8ed5a",
+      "display_issue": "3000 px de largura exigia redução fracionária no visualizador."
+    },
+    "revised_board": {
+      "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v2.png",
+      "sha256": "3a444c91dcba39b72eec0a8c9affb68c0239285cc3b06f1b0669b791c112b236",
+      "display": "2048×680 px, sprite ampliado 3× nearest-neighbor, sem redimensionamento individual."
+    },
+    "source_diagnostic": "O frame 00 tem alfa binário e um único componente opaco 8-conectado; não há ilha destacada. A textura percebida permanece registrada como falha visual do contorno, pois a montagem preserva os pixels-fonte.",
+    "source_pixels_modified": false
+  },
+  "scope_note": "O texto recebido não anexou a imagem pós-tratamento. O quadro de comparação v2 é a referência local mais recente para organizar os comentários; antes de aplicar retoques em pixels, confirme que ele e as folhas vinculadas abaixo são exatamente a versão avaliada.",
+  "global_observations": [
+    "Os sprites ainda variam entre clusters duros e sombreamento suavizado, principalmente Shinobi e Alis; uniformizar em cel shading por blocos, sem blur, antialiasing ou dithering.",
+    "Pés e bases de vários personagens têm pixels escuros soltos ou contornos irregulares; verificar em escala nativa e nearest-neighbor, mantendo contorno limpo em degraus de pixel.",
+    "Realces metálicos de escudos estão planos; representar volume com poucos blocos de base, sombra e luz, sem dithering.",
+    "A revisão deve comparar as sete identidades e os doze quadros de cada folha; o quadro frame00 não fecha integridade de animação."
+  ],
+  "characters": [
+    {
+      "id": "golden_axe_warrior",
+      "reported_state": "refinamento",
+      "observations": [
+        "A borda azul da capa no ombro esquerdo está descontínua.",
+        "Remover pixels soltos e regularizar o contorno dos pés.",
+        "Dar profundidade à capa de pelo azul.",
+        "O brilho do escudo precisa de blocos de sombreamento metálico mais volumétricos."
+      ]
+    },
+    {
+      "id": "hayato",
+      "reported_state": "refinamento",
+      "observations": [
+        "A leitura do olho e do rosto ainda pode ficar mais clara.",
+        "A mão deve mostrar os dedos de forma legível; a radiografia aponta um dedo faltando ou pouco legível. Confirmar contagem e separação em escala nativa sem deformar a empunhadura.",
+        "Limpar o contorno dos pés."
+      ]
+    },
+    {
+      "id": "joe_musashi",
+      "reported_state": "refinamento",
+      "observations": [
+        "O sombreamento do gi branco está suavizado demais e destoa do acabamento em clusters dos demais.",
+        "Definir sombras cinza como blocos de cel shading no padrão de sprites de luta 2D dos anos 1990, sem blur, antialiasing ou dithering.",
+        "O dono voltou a apontar ruído visível no contorno do Shinobi na prancha comparativa; manter o eixo de contorno em fail até revisão da arte-fonte."
+      ]
+    },
+    {
+      "id": "dr_social",
+      "reported_state": "refinamento",
+      "observations": [
+        "O contorno da barra inferior do casaco verde está irregular.",
+        "O olho visível permanece borrado.",
+        "A mão precisa conectar claramente ao cabo da espada-cana."
+      ]
+    },
+    {
+      "id": "alis_landale",
+      "reported_state": "refinamento",
+      "observations": [
+        "As pernas e sombras rosa perderam definição de clusters e parecem desfocadas; reconstruir em blocos de pixel nítidos, sem blur, antialiasing ou dithering.",
+        "O brilho do escudo está plano; dar volume com poucos clusters de base, sombra e luz sem dithering.",
+        "Clarificar os dedos envolvendo a empunhadura da espada."
+      ]
+    },
+    {
+      "id": "landau",
+      "reported_state": "refinamento",
+      "observations": [
+        "Clarificar olhos e pequenos clusters do rosto.",
+        "Limpar contorno e pixels soltos ao redor dos pés.",
+        "Aumentar e definir o arco atrás da cabeça; tornar a corda claramente visível."
+      ]
+    },
+    {
+      "id": "jj",
+      "reported_state": "refinamento",
+      "observations": [
+        "A limpeza dos pés precisa de um ajuste fino.",
+        "A arma ainda não comunica a pistola Zillion canônica.",
+        "A fisionomia se afastou do J.J. do jogo e deve ser conferida contra a referência SMS."
+      ]
+    }
+  ],
+  "promotion": {
+    "status": "blocked_pending_pixel_refinement_and_hash_bound_review",
+    "owner_approval_for_sprite_delivery": false,
+    "rom_integration": "not_authorized_by_this_feedback",
+    "emulator_validation": "not_run"
+  }
+}

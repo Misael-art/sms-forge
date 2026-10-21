@@ -1,0 +1,149 @@
+[
+  {
+    "case": "lone_tone_wait",
+    "raw_sha256": "a47fe7f6ec040a966cb24a4799930b575501c9fc0592cc5f2bb577ee74f7cdda",
+    "raw_preserved": true,
+    "audit": {
+      "arquivo": "lone_tone_wait.psg",
+      "classe": "music",
+      "bytes": 3,
+      "sha256": "a47fe7f6ec040a966cb24a4799930b575501c9fc0592cc5f2bb577ee74f7cdda",
+      "metricas": {
+        "escopo": "formato_nao_suportado"
+      },
+      "violacoes": [
+        "FORMAT: tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado"
+      ],
+      "avisos": [],
+      "veredito": "reprova"
+    },
+    "preview_rejected": "tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado",
+    "output_not_created": true
+  },
+  {
+    "case": "volume_data",
+    "raw_sha256": "f9214e24232c4d17958961a613475e65b31f5eec6fab48b08a8a380d4c5bca8f",
+    "raw_preserved": true,
+    "audit": {
+      "arquivo": "volume_data.psg",
+      "classe": "music",
+      "bytes": 4,
+      "sha256": "f9214e24232c4d17958961a613475e65b31f5eec6fab48b08a8a380d4c5bca8f",
+      "metricas": {
+        "escopo": "formato_nao_suportado"
+      },
+      "violacoes": [
+        "FORMAT: PSG data no offset 1 sem tone-pair contiguo; data apos volume/noise ou high-only nao suportado"
+      ],
+      "avisos": [],
+      "veredito": "reprova"
+    },
+    "preview_rejected": "PSG data no offset 1 sem tone-pair contiguo; data apos volume/noise ou high-only nao suportado",
+    "output_not_created": true
+  },
+  {
+    "case": "truncated_tone",
+    "raw_sha256": "76be8b528d0075f7aae98d6fa57a6d3c83ae480a8469e668d7b0af968995ac71",
+    "raw_preserved": true,
+    "audit": {
+      "arquivo": "truncated_tone.psg",
+      "classe": "music",
+      "bytes": 1,
+      "sha256": "76be8b528d0075f7aae98d6fa57a6d3c83ae480a8469e668d7b0af968995ac71",
+      "metricas": {
+        "escopo": "formato_nao_suportado"
+      },
+      "violacoes": [
+        "FORMAT: tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado"
+      ],
+      "avisos": [],
+      "veredito": "reprova"
+    },
+    "preview_rejected": "tone latch no offset 0 exige high-data 0x40..0x7F imediatamente; low-only nao suportado",
+    "output_not_created": true
+  },
+  {
+    "case": "chronological_across_channels",
+    "events": [
+      [
+        0,
+        "v",
+        3,
+        1
+      ],
+      [
+        1,
+        "v",
+        0,
+        14
+      ]
+    ],
+    "violations": [],
+    "warnings": [
+      "S1 multicanal: compara escritas inicial/final globalmente; nao prova fade de cada canal nem mix silencioso"
+    ]
+  },
+  {
+    "case": "reverse_chronological_decay",
+    "events": [
+      [
+        0,
+        "v",
+        0,
+        14
+      ],
+      [
+        1,
+        "v",
+        3,
+        1
+      ]
+    ],
+    "violations": [
+      "S1 decaimento: primeira atenuacao nao muda 14 e ultima escrita 1 \u2014 sem crescimento liquido na politica temporal; nao mede waveform/clique"
+    ],
+    "warnings": [
+      "S1 multicanal: compara escritas inicial/final globalmente; nao prova fade de cada canal nem mix silencioso"
+    ]
+  },
+  {
+    "case": "ends_muted",
+    "events": [
+      [
+        0,
+        "v",
+        2,
+        1
+      ],
+      [
+        1,
+        "v",
+        2,
+        15
+      ]
+    ],
+    "violations": [],
+    "warnings": []
+  },
+  {
+    "case": "equal_timestamp_preserves_order",
+    "events": [
+      [
+        0,
+        "v",
+        3,
+        1
+      ],
+      [
+        0,
+        "v",
+        0,
+        14
+      ]
+    ],
+    "violations": [],
+    "warnings": [
+      "S1 multicanal: compara escritas inicial/final globalmente; nao prova fade de cada canal nem mix silencioso"
+    ]
+  }
+]

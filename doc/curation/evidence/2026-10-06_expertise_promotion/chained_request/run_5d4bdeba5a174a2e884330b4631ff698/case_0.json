@@ -1,0 +1,76 @@
+{
+  "session_id": "e4da858551604976a90913cd7b979eb5",
+  "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+  "first_frame": 120,
+  "last_frame": 143,
+  "frames": 23,
+  "frame_sha256": [
+    "05441fcc8f75d1f1cae1da430a1dcebcf7d7d8f7c45bdc9c4972702255ddbd8d",
+    "2e063202d13dae6783044c32e05e9602f4eac3cbc3c7af71dba6b284b5fd7741",
+    "4ae1e48e7741e73693d2651db3fd54828cf283444bbc3e44400e1aea2f9a2a9d",
+    "5bf5e07f08d93e92057f0f29f07a2730c83b64056a2acd7e5d14dc4b65655a2a",
+    "7c33cd434d57e345186957b35d0afafbbc912880dfae29f0d96c3de26c1817bf",
+    "73dd47a53ebbf892fd2d95b9548a72de42ef2675f2d7525c8922502ea662fb98",
+    "41fcad704b163d88905e4ba1a73935e1dd9e8ea1a5a8c051d5ff1c5fec5596eb",
+    "b4a91b92332f6d2676ff1c74aac222af80efe0ad3109af4b00427d9e12bafee0",
+    "b9d9c12b5ee49206e92df706498b31933ab70191d6f9eea16e0cf593c31f96c4",
+    "bfab6a44b426c872e20f518fd614deb5673e6abc917a4447cf7f9545026b64d2",
+    "7abb78599c5e1bb51e54e7a442325a86a3e351414344b34834e58694f1ea9f72",
+    "af6a01b55b4f6205d6c7fcf2f6ac1050ab4386aa85a6496bac099d9e299d0aac",
+    "8b447c723d106383ade4736ccbec676a09cf9efd14c07d10c2b876a0f325df01",
+    "a888392b0f402b1576bb274f75a8bb5f9fed2e05d399282221971440245de41e",
+    "3c2dd238754491b84a3c383e810cacb4674f0964e48dc21b2a5b1d0ad45c09f9",
+    "afd9391302804a9f190402605fcb9c9a42aa2e7f263a29f1a0bd2a1f3881d31b",
+    "4806ea229f3d06c1a2dcdddcd949ea1ac8f61fe3ccc504cdd7ddb91ebc9acdbb",
+    "169de64f816f54f83e09ff12f50e8ef190dfbba98c20879645202792a151ef48",
+    "0c9871d116c94d2249d80fbb83a9d1abb4d00d887a3ee24a1594c657f08b6f86",
+    "634f8e04ab80552a130a143ce0b59d8543f6f2bcff574be965de52b29d159a69",
+    "55496c4b6dd82346fa46c65821edc01c71472cd557aa81e2bcde11633a190571",
+    "cbc81f931ea4f94d45ade79623bffcfb1adaa7c7e65f0be2cd43f8ebdddb0cd3",
+    "6b632412a819141cb07c67c84796029cbd51971a165f0df9043dbb69d67d43ad"
+  ],
+  "canvas": [
+    256,
+    192
+  ],
+  "path": "/tmp/smsforge-1000/e4da858551604976a90913cd7b979eb5/evidence/case_0.mp4",
+  "sha256": "555e9dff3757a25f1586d46ff1238e5f81f1316c61bfc86a787345c940ef34c6",
+  "method": "native framebuffer per VDP frame during assigned input script",
+  "input_trace": [
+    {
+      "begin": 120,
+      "end": 122,
+      "p1": 0,
+      "p2": 0
+    },
+    {
+      "begin": 122,
+      "end": 129,
+      "p1": 8,
+      "p2": 0
+    },
+    {
+      "begin": 129,
+      "end": 140,
+      "p1": 0,
+      "p2": 16
+    },
+    {
+      "begin": 140,
+      "end": 143,
+      "p1": 0,
+      "p2": 0
+    }
+  ],
+  "performance": "not_measured",
+  "audio": "not_recorded",
+  "motion_timeline": {
+    "decoded_frames": 23,
+    "max_from_initial_fraction": 0.010416666666666666,
+    "max_adjacent_fraction": 0.009114583333333334,
+    "endpoint_fraction": 0.006510416666666667,
+    "changed_transitions": 22,
+    "motion_fraction": 0.010416666666666666,
+    "scope": "whole-frame pixel variation only; HUD changes do not prove fighter motion or AIR state"
+  }
+}

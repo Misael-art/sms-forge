@@ -1,0 +1,108 @@
+[
+  {
+    "case": "size16",
+    "actual": {
+      "sprites": 1,
+      "peak_per_line": 1,
+      "overflow_lines": 0,
+      "overflow": [],
+      "violations": []
+    },
+    "expected": "Reject invalid manifest as structured diagnostic"
+  },
+  {
+    "case": "height_float",
+    "actual": {
+      "sprites": 1,
+      "peak_per_line": 1,
+      "overflow_lines": 0,
+      "overflow": [],
+      "violations": []
+    },
+    "expected": "Reject invalid manifest as structured diagnostic"
+  },
+  {
+    "case": "height_bool",
+    "actual": {
+      "sprites": 1,
+      "peak_per_line": 0,
+      "violations": [
+        "screen_h True fora dos modos do VDP (192, 224, 240)"
+      ]
+    },
+    "expected": "Reject invalid manifest as structured diagnostic"
+  },
+  {
+    "case": "invalid_size",
+    "exception": "KeyError",
+    "message": "'32x32'",
+    "expected": "Reject invalid manifest as structured diagnostic"
+  },
+  {
+    "case": "nonobject",
+    "exception": "AttributeError",
+    "message": "'NoneType' object has no attribute 'get'",
+    "expected": "Reject invalid manifest as structured diagnostic"
+  },
+  {
+    "case": "sprites_notarray",
+    "actual": {
+      "sprites": 0,
+      "peak_per_line": 0,
+      "overflow_lines": 0,
+      "overflow": [],
+      "violations": []
+    },
+    "expected": "Reject invalid manifest as structured diagnostic"
+  },
+  {
+    "case": "y_float",
+    "actual": {
+      "sprites": 1,
+      "peak_per_line": 1,
+      "overflow_lines": 0,
+      "overflow": [],
+      "violations": []
+    },
+    "expected": "Reject invalid manifest as structured diagnostic"
+  },
+  {
+    "case": "y_string",
+    "actual": {
+      "sprites": 1,
+      "peak_per_line": 1,
+      "overflow_lines": 0,
+      "overflow": [],
+      "violations": []
+    },
+    "expected": "Reject invalid manifest as structured diagnostic"
+  },
+  {
+    "case": "fps_NTSC_50Hz",
+    "actual": [
+      true,
+      0
+    ],
+    "expected": "Must not qualify 60FPS NTSC claim"
+  },
+  {
+    "case": "fps_missing_window",
+    "actual": [
+      true,
+      0
+    ],
+    "expected": "Invalid/missing window must not qualify"
+  },
+  {
+    "case": "AAA_empty_approval_keys_bypass",
+    "actual": [
+      "claim '60fps' sem teto aprovado em doc/result.md:1"
+    ],
+    "expected": "Reject empty owner/date and broad statement outside approved scope"
+  },
+  {
+    "case": "AAA_FPS_unscoped_tokens_bypass",
+    "actual": [],
+    "expected": "Reject invalid empty/limited approvals"
+  }
+]

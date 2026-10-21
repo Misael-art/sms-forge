@@ -1,0 +1,327 @@
+{
+  "schema": "smsforge.blastem_dump_diff_native_review.v1",
+  "native_worker_id": "/root/review_qa_contract",
+  "created_at_utc": "2026-10-10T13:52:26.762198+00:00",
+  "status": "needs_revision",
+  "scope": "Read-only code inspection; independent selfcheck/mutants and historical archived native bundle comparisons. Only/tmp outputs changed; no emulator or game claim.",
+  "source_hashes": {
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_dump_diff.py": "c67f5758ea6055f5e6b41172c86236d41de8fcb82c0e43e828ba685dafe6ab64",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_blastem_sms.py": "eb1be91be884d837547d67ba8b423157901df0f090d2905a2b553b16f24bcee8",
+    "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_diagnostics.py": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9"
+  },
+  "selfcheck": "PASS",
+  "focused_cases": [
+    {
+      "case": "indices",
+      "indices": [
+        1,
+        0
+      ],
+      "rejected": true,
+      "message": "require ordered snapshot indices in audited timeline"
+    },
+    {
+      "case": "indices",
+      "indices": [
+        0,
+        0
+      ],
+      "rejected": true,
+      "message": "require ordered snapshot indices in audited timeline"
+    },
+    {
+      "case": "indices",
+      "indices": [
+        0,
+        2
+      ],
+      "rejected": true,
+      "message": "require ordered snapshot indices in audited timeline"
+    },
+    {
+      "case": "indices",
+      "indices": [
+        true,
+        1
+      ],
+      "rejected": true,
+      "message": "require ordered snapshot indices in audited timeline"
+    },
+    {
+      "case": "indices",
+      "indices": [
+        0,
+        false
+      ],
+      "rejected": true,
+      "message": "require ordered snapshot indices in audited timeline"
+    },
+    {
+      "case": "indices",
+      "indices": [
+        -1,
+        1
+      ],
+      "rejected": true,
+      "message": "require ordered snapshot indices in audited timeline"
+    },
+    {
+      "case": "staleROM",
+      "rejected": true,
+      "message": "labels belong to another ROM"
+    },
+    {
+      "case": "booladdress",
+      "rejected": true,
+      "message": "invalid label space/range"
+    },
+    {
+      "case": "zero",
+      "rejected": true,
+      "message": "invalid label space/range"
+    },
+    {
+      "case": "overflow",
+      "rejected": true,
+      "message": "label outside SMS address space"
+    },
+    {
+      "case": "duplicate",
+      "rejected": true,
+      "message": "label names must be nonempty and unique"
+    },
+    {
+      "case": "outside_output_hardlink_to_dump",
+      "exit_code": 0,
+      "dump_modified": true,
+      "before_bytes": 8192,
+      "after_bytes": 4297,
+      "output_tail": "dc43dd748ea778adc52bc498ce80524c014b81119\",\n      \"bytes\": 4\n    }\n  ],\n  \"palette_changes\": [],\n  \"named_ranges\": []\n}\n"
+    },
+    {
+      "case": "native_keys_and_held",
+      "snapshots": [
+        {
+          "index": 0,
+          "keys": 0,
+          "P1right_held": 0,
+          "allheld": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "keys": 8,
+          "P1right_held": 6,
+          "allheld": [
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "keys": 0,
+          "P1right_held": 6,
+          "allheld": [
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "named_ranges": [
+        {
+          "name": "SMI1 keys word",
+          "space": "ram",
+          "address": 50951,
+          "length": 2,
+          "delta": {
+            "changed_bytes": 0,
+            "offsets": [],
+            "runs": []
+          }
+        },
+        {
+          "name": "SMRT input snapshot",
+          "space": "ram",
+          "address": 51192,
+          "length": 2,
+          "delta": {
+            "changed_bytes": 0,
+            "offsets": [],
+            "runs": []
+          }
+        },
+        {
+          "name": "SMI1 P1-right held counter",
+          "space": "ram",
+          "address": 50960,
+          "length": 2,
+          "delta": {
+            "changed_bytes": 1,
+            "offsets": [
+              0
+            ],
+            "runs": [
+              {
+                "address": 50960,
+                "offset": 0,
+                "length": 1,
+                "before_prefix_hex": "00",
+                "after_prefix_hex": "06",
+                "prefix_truncated": false
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "archived_comparisons": [
+    {
+      "name": "sound_final3_runs",
+      "window": [
+        0,
+        1
+      ],
+      "sid": "blastem-sms-44577cac8cbc4a189068a1bdf9a9634a",
+      "rom_sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3",
+      "vdp_frames": 240,
+      "changed_bytes": {
+        "ram": 64,
+        "vram": 28,
+        "vdp_regs": 1,
+        "cram_internal": 0,
+        "psg_frequency": 6,
+        "psg_volume": 1
+      },
+      "changed32blocks": [
+        504
+      ],
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/sound_final3_runs_0_1.json"
+    },
+    {
+      "name": "sound_final3_runs",
+      "window": [
+        0,
+        2
+      ],
+      "rejected": true,
+      "reason": "require ordered snapshot indices in audited timeline"
+    },
+    {
+      "name": "instrument_final3_runs",
+      "window": [
+        0,
+        1
+      ],
+      "sid": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+      "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "vdp_frames": 7,
+      "changed_bytes": {
+        "ram": 14,
+        "vram": 3,
+        "vdp_regs": 0,
+        "cram_internal": 0,
+        "psg_frequency": 0,
+        "psg_volume": 0
+      },
+      "changed32blocks": [
+        464,
+        480
+      ],
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/instrument_final3_runs_0_1.json"
+    },
+    {
+      "name": "instrument_final3_runs",
+      "window": [
+        0,
+        2
+      ],
+      "sid": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+      "rom_sha256": "be21f3686aae5ac9b54c38dc936fca4c52209050b8cff58042588865580e296c",
+      "vdp_frames": 10,
+      "changed_bytes": {
+        "ram": 5,
+        "vram": 3,
+        "vdp_regs": 0,
+        "cram_internal": 0,
+        "psg_frequency": 0,
+        "psg_volume": 0
+      },
+      "changed32blocks": [
+        480
+      ],
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/instrument_final3_runs_0_2.json"
+    }
+  ],
+  "findings": [
+    {
+      "id": "BDIFF-01",
+      "priority": "P1",
+      "file": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/blastem_dump_diff.py",
+      "line": 125,
+      "title": "Output hardlink can overwrite immutable acquisition dump",
+      "reproduction": "Temporary synthetic audited fixture; output outside bundle was os.link(snapshot000/ram.bin). --json resolve guard passes, write_json truncates linked inode and CLI exits0. Before8192bytes;after4297bytes.",
+      "impact": "A declared immutable audited acquisition can be changed while returning a successful comparison whose source SHA refers to pre-write data.",
+      "evidence": "/tmp/smsforge-blastem-native-review/dump_diff/focused_results.json",
+      "recommendation": "Write JSON via new temporary inode + atomic replace in target directory, or refuse hardlinked/existing alias outputs and compare samefile against session inputs. Include outputimmutability hardlink negative test. Preserve ordinary insidebundle/symlink resolution guard."
+    }
+  ],
+  "native_observations": {
+    "instrument_sid": "blastem-sms-55468433cf974d1f9f5f425f94df517c",
+    "keys_sequence": [
+      0,
+      8,
+      0
+    ],
+    "P1right_held_sequence": [
+      0,
+      6,
+      6
+    ],
+    "scope": "Reads of fixture-bound RAM fields only. Held is cumulative input consumption, not memory-write count, golpe/impact proof or exact full7frames sample coverage.",
+    "neutral_0_2_named_keys_delta": 0,
+    "neutral_0_2_held_changed_bytes": 1,
+    "sound_window_0_2": "not_applicable: archived sound session has only2snapshotboundaries; rejected as expected."
+  },
+  "causality_review": "Scope and block_scope correctly restrict netchanges. Changed32byteblocks include nametable/SAT/nonpattern data, notuniqueart/transfer count. Zero endpoint delta cannot establish nointermediatewrites. No exclusive cause inferred. Labels are ROMSHA-bound caller declarations, notauthenticatedSDCCsymbols.",
+  "limits": [
+    "All native sessions were existing archived evidence owned by other workers, reviewedreadonly. No native run performed here.",
+    "Comparisons explicitly historical=True; no current-tool eligibility asserted.",
+    "No gameplay/60FPS/SFX/artquality approval.",
+    "No currentROMprovided; reports current_rom_checkedFalse.",
+    "No raw audio listening or framebuffer perceptual review in this focused task."
+  ],
+  "recommendation": "CloseBDIFF01 before asserting output immutability. Other inspected range/order/label and netdelta contracts passed focused checks."
+}

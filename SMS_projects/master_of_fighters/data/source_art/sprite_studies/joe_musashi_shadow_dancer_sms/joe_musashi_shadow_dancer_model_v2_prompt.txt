@@ -1,0 +1,11 @@
+Base generation: see joe_musashi_shadow_dancer_model_v1_prompt.txt.
+
+Image edit prompt (built-in image_gen):
+Use case: precise-object-edit
+Asset type: pixel-art character model sheet cleanup
+Primary request: recolor only the yellow costume pixels in the attached two-view ninja model sheet. Remove yellow from the head wrap, face/temple, gloves, waist, trousers, and boots. Replace those yellow costume pixels with the nearby white, gray, red, or skin tone that fits the fabric or object.
+Constraints: retain exactly the same two figures, poses, scale, silhouette, clothing, face, sword, and spacing. Preserve all non-yellow colors and linework. Leave at most one tiny yellow glint at each sword hilt; no yellow anywhere else. Keep the background transparent, with no halo.
+Color palette: only #000000, #FFFFFF, #AAAAAA, #555555, #550000, #AA0000, #FFAA55, and the tiny optional #FFFF00 hilt glint.
+Avoid: new details, changed clothing, extra yellow decorations, background, gradients, glow, grain, dithering, text or watermark.
+
+Post-processing: alpha threshold 80%, source black outline mapped to #550000, flattened to transparent black, then quantized with prepare_sms_pixel_art.py using --dither none and the joe_musashi_shadow_dancer_sms palette.

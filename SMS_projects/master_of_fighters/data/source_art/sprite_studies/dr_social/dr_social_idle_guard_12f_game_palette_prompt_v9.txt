@@ -1,0 +1,25 @@
+Dr. Social idle-guard palette revision, applied to the prior 4x3 cane-ready sequence.
+
+Primary source reference: Dr. Ferdinand Social, Master of Darkness (Sega Master
+System), standing-right sprite from SMS Power's sprite archive. Use the original
+sprite for the blue/cyan clothing, teal shadow, gray hair, brown footwear, and
+slender build. Preserve the owner-reviewed character identity and cane sequence.
+
+Recolor the 12 poses without changing their order or anatomy. The outer coat and
+trousers use SMS blue/cyan #55AAFF, #00AAAA, and #005555; hair #555555; boots
+#550000; shirt #FFFFFF/#AAAAAA; skin #FFAAAA/#AA5555; cravat #AA0055; brass
+glasses #FFFF00. Opaque contour is navy #000055 because index 0 is transparent.
+Red #FF0000 and violet #AA00FF remain reserved for weapon effects, not this idle.
+The character remains fully human, lean, and medium build.
+
+Maintain 12 distinct cane-ready keys in a 4x3 sheet. After generation, threshold
+source alpha at 90%, map pure-black character ink to opaque navy, normalize each
+frame by nearest-neighbor to 96x85/86 within a 96x96 cell, and leave black as
+transparent space. Convert with no dithering and per-cell speckle cleanup. Two
+visually detached cane artifacts were manually removed from frame 04 near
+(41,84)-(58,90) and frame 07 near (0,27)-(22,32), in cell-local coordinates.
+For this idle sheet only, bright red role pixels are remapped to original-game
+boot brown #550000; red/violet remain available for other authored attack FX.
+
+Final sheet dimensions: 384x288, 12 indexed 96x96 frames, 12 useful palette
+colors plus transparent index 0. This is a source-art candidate, not a ROM asset.

@@ -1,0 +1,170 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "hayato_idle_sms_80px_12f_v1",
+  "project": "master_of_fighters",
+  "asset_role": "sms_palette_translation_study",
+  "channel": "tools/sms_wrapper/prepare_sms_pixel_art.py",
+  "inputs": [
+    {
+      "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_v2.png",
+      "sha256": "de82374eb8016efcc744854b67ba66f3a0c7954d339b4cd73f45a6891bc3414b",
+      "role": "recolored twelve-pose source sheet"
+    },
+    {
+      "path": "/run/user/1000/codex-desktop/tmp/codex-clipboard-737d44c2-364b-4a78-bcb0-227c531ae72f.png",
+      "sha256": "03f0897a2cf18d08c3008e0a98b0125fdb4d0a1743518c9f4a2027ab4111f88a",
+      "role": "owner-provided costume and color reference inherited from the source sheet; no source pixels copied"
+    }
+  ],
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "options": {
+      "size": [
+        320,
+        240
+      ],
+      "block": 1,
+      "palette": "Master System 6-bit RGB grid",
+      "useful_color_limit": 15,
+      "transparent_index": 0
+    }
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v1.png",
+    "sha256": "697916f18d5a746ec2ec010db6001c6f2aeec3934fcda734190da7f450b9a92b",
+    "dimensions_px": [
+      320,
+      240
+    ],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 15,
+    "palette_rgb_with_transparent_index": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        255,
+        85,
+        0
+      ],
+      [
+        85,
+        0,
+        0
+      ],
+      [
+        170,
+        0,
+        0
+      ],
+      [
+        255,
+        255,
+        255
+      ],
+      [
+        255,
+        0,
+        0
+      ],
+      [
+        85,
+        85,
+        85
+      ],
+      [
+        170,
+        170,
+        170
+      ],
+      [
+        85,
+        85,
+        0
+      ],
+      [
+        170,
+        85,
+        0
+      ],
+      [
+        255,
+        170,
+        170
+      ],
+      [
+        170,
+        85,
+        85
+      ],
+      [
+        85,
+        0,
+        85
+      ],
+      [
+        255,
+        170,
+        85
+      ],
+      [
+        255,
+        85,
+        85
+      ],
+      [
+        0,
+        85,
+        0
+      ]
+    ]
+  },
+  "status": "owner_approved_visual_reference",
+  "sheet_layout": {
+    "columns": 4,
+    "rows": 3,
+    "reading_order": "left-to-right, top-to-bottom",
+    "frame_count": 12,
+    "cell_dimensions_px": [
+      80,
+      80
+    ]
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "all_palette_colors_match_sms_6bit_grid": true,
+    "useful_colors_within_sms_limit": true,
+    "transparent_index_zero_verified": true,
+    "twelve_full_body_frames_visually_observed": true,
+    "exact_visible_character_height_80px": "not measured",
+    "independent_animation_review": "pending",
+    "rom_or_emulator_validation": false,
+    "per_character_manifest_palette_match": true,
+    "resource_gate": {
+      "status": "pass",
+      "command": "python3 tools/sms_wrapper/audit_validate_resources.py --project SMS_projects/master_of_fighters --kind sheet --character hayato SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v1.png"
+    },
+    "palette_manifest_generator": "doc/build_palettes_manifest.py; generated and validated 12 palettes, including Hayato 15-color palette",
+    "granular_noise_detected_by_owner": true,
+    "cleanup_candidate": "hayato_idle_sms_80px_12f_cleanup_v2"
+  },
+  "next_gate": "measure exact visible character height, complete independent animation review and provenance/binding/ROM gates before res integration",
+  "owner_approval": {
+    "date": "2026-10-03",
+    "scope": "Aprovação da direção visual e da folha idle indexada de 12 poses como referência; aprovação explícita da paleta Master System 6-bit como regra para arte do projeto.",
+    "recorded_from": "mensagem explícita do dono: aprovado; usar as cores da paleta como regra e registrar aprendizado de curadoria"
+  },
+  "owner_feedback_log": [
+    {
+      "date": "2026-10-03",
+      "finding": "Owner observed granular pollution and loose pixels around the sprites in the approved sheet.",
+      "disposition": "cleanup candidate recorded in asset_lineage_record_sms_v2.json; original preserved as historical palette reference."
+    }
+  ]
+}

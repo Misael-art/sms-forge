@@ -1,0 +1,29 @@
+{
+  "schema": "luta_mugen_candidate_reproduction_v1",
+  "captured_at": "2026-10-08",
+  "candidate": "out/local_study/ryo_terry_hitbroad_20261008",
+  "candidate_project_name": "ryo_terry_schedopt_20261008",
+  "source_tree_sha256": "1b0ca222a909d68cb9843340aaaddf6e63582e9271baaa0f79d1b982ed1abd3d",
+  "method": {
+    "copy": "temporary full copy of candidate study, excluding out/ and Python caches",
+    "builder": "tools/sms_wrapper/build_inner.py",
+    "strict_workspace_mode": false,
+    "pre_gates": "pass",
+    "toolchain": "ok",
+    "compiled_objects": 11
+  },
+  "reproduced_rom": {
+    "bytes": 1900544,
+    "sha256": "931d7f338205473a44387e1093bb4c0578b7e88717bc6fe7b12f97d0a59c5dca",
+    "matches_candidate_build_record": true
+  },
+  "temporary_copy": "/run/user/1000/codex-desktop/tmp/smsforge_ryo_terry_repro_jqd09y0o/project",
+  "runtime_axes_from_reproduction": {
+    "boot_emulador": false,
+    "gameplay": false,
+    "fps_constante": false,
+    "audio": false,
+    "memory_bank_atualizado": false
+  },
+  "limits": "This proves the copied candidate sources and bank reproduce the recorded binary with pre-gates passing. It is not a fresh emulator session and does not promote the candidate to the canonical project or delivery."
+}

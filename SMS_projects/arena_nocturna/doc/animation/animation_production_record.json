@@ -1,0 +1,112 @@
+{
+  "schema": "smsforge_animation_study_record_v1",
+  "project": "arena_nocturna",
+  "animation_lifecycle_stage": 12,
+  "lifecycle_steps": [
+    "gameplay_scene_brief",
+    "source_identity_audit",
+    "scale_pivot_collision_budget_lock",
+    "native_pose_construction",
+    "state_roster_motion_language",
+    "method_and_key_poses",
+    "staging_silhouette_appeal_gate",
+    "timing_spacing_physics",
+    "native_frame_authorship",
+    "strip_sheet_metasprite_assembly",
+    "artifact_motion_principles_budget_qa",
+    "runtime_canonization"
+  ],
+  "animation_state_plan": {
+    "hero": ["idle_breathe", "walk", "attack_ready", "attack_active", "attack_recovery", "hurt"],
+    "boss": ["idle_hover", "counter_ready", "counter_active", "hurt", "defeat"],
+    "fx": ["hero_shot", "counter_orb", "impact_burst"]
+  },
+  "pivot_and_scale_contract": {
+    "hero_logical_canvas": "16x16",
+    "hero_vdp_footprint": "32x32",
+    "boss_logical_canvas": "32x32 modular",
+    "boss_vdp_footprint": "64x64",
+    "pivot": "bottom_center",
+    "hero_pivot": [8, 16],
+    "boss_pivot": [16, 32],
+    "ground_rule": "pivot e ground_y permanecem constantes; idle usa deslocamento interno e nao desloca o contato",
+    "collision_rule": "hurtbox hero 24x24 dentro do envelope 32x32; boss core 48x48 dentro do envelope 64x64"
+  },
+  "frame_budget_table": {
+    "hero_idle_breathe": {"frames": 2, "hold_vblank": [8, 8], "tiles_resident": 8, "sprites_sat": 4},
+    "hero_walk": {"frames": 4, "hold_vblank": [8, 8, 8, 8], "tiles_resident": 4, "sprites_sat": 4},
+    "hero_attack": {"frames": 1, "hold_vblank": [1], "tiles_resident": 4, "sprites_sat": 5},
+    "boss_idle_hover": {"frames": 2, "hold_vblank": [10, 10], "tiles_resident": 32, "sprites_sat": 16},
+    "boss_counter": {"frames": 4, "hold_vblank": [12, 6, 2, 10], "tiles_resident": 32, "sprites_sat": 16},
+    "impact_burst": {"frames": 3, "hold_vblank": [4, 4, 4], "tiles_resident": 3, "sprites_sat": 1}
+  },
+  "actions": {
+    "hero_walk": {
+      "production_method": "pose_to_pose",
+      "motion_archetype": "contact_down_passing_up",
+      "pose_roster": ["contact_left", "passing_right", "contact_right", "passing_left"],
+      "motion_phase_map": ["contact", "down", "passing", "up"],
+      "timing": [8, 8, 8, 8],
+      "transition": "idle_breathe -> contact_left -> passing_right -> idle_breathe",
+      "secondary_motion": "capa e ponta da faixa atrasam 1 VBlank",
+      "status": "implemented_observed_in_attraction"
+    },
+    "hero_attack": {
+      "production_method": "native_pose_reuse_plus_projectile",
+      "motion_archetype": "compression_burst_recovery",
+      "phase_sequence": ["attack_active"],
+      "timing": [1],
+      "active_recovery_map": {"startup": 0, "active": "shot_on", "recovery": "shot_off"},
+      "impact_frame": 2,
+      "hitstop_vblank": 4,
+      "impact_visible_vblank": 12,
+      "collision_rule": "o tiro so deixa o hero quando cruza o envelope do boss; impacto cria burst separado",
+      "runtime_mapping": "shot_on streama hero_walk_3 no slot HERO_TILE e mantém shot como sprite separado",
+      "status": "implemented_observed_in_attraction"
+    },
+    "boss_counter": {
+      "production_method": "hybrid",
+      "motion_archetype": "hover_telegraph_release_recoil",
+      "phase_sequence": ["idle", "telegraph", "release", "recoil", "return"],
+      "timing": [12, 6, 2, 4, 10],
+      "impact_frame": 3,
+      "hitstop_vblank": 4,
+      "modular_boss_rig": "torso/core/shoulders compartilham pivot; core pulsa por janela ativa",
+      "status": "implemented_observed_in_attraction"
+    }
+  },
+  "principles_12": {
+    "squash_and_stretch": "hero comprime na antecipacao; boss usa recoil sem alterar hurtbox",
+    "anticipation": "ataque tem ready/anticipation antes do tiro; counter tem telegraph",
+    "staging": "hero a esquerda, boss a direita, linhas de ataque horizontais",
+    "straight_ahead_and_pose_to_pose": "pose_to_pose para locomocao; hybrid para ataque e counter",
+    "follow_through_and_overlapping_action": "arma e faixa retornam apos torso",
+    "slow_in_and_slow_out": "holds diferentes nas pontas e burst no contato",
+    "arcs": "lamina faz arco curto; boss oscila em arco vertical de 8 px",
+    "secondary_action": "respiracao e brilho do nucleo reforcam a acao sem cobrir o contato",
+    "timing": "tabela unica em VBlank, consumida pelo loop",
+    "exaggeration": "telegraph e recoil ampliam leitura sem mudar escala",
+    "solid_drawing": "pivot, volumes e linha de contato preservados por frame",
+    "appeal": "silhueta heroica contrastada com massa circular do guardiao"
+  },
+  "palette_flash_policy": "impacto usa paleta/FX separado; nenhum recolor acidental de personagem",
+  "runtime_streaming": {
+    "hero": "hero_walk_0..3 e hero_left ocupam o mesmo HERO_TILE; troca após VBlank",
+    "boss": "normal, telegraph, hurt e dead ocupam os mesmos 16 tiles de quadrantes",
+    "impact": "impact_0..2 ocupam o mesmo IMPACT_TILE durante 12 VBlanks",
+    "evidence": ["out/evidence/arena_title_final_v10.png", "out/evidence/arena_showcase_final_v9.png", "out/evidence/arena_shot_video_final_v1.png", "out/evidence/arena_counter_video_final_v1.png", "out/evidence/arena_impact_final_v5.png", "out/evidence/arena_transition_final_v1.mp4"]
+  },
+  "recorte_policy": "alpha binario, bbox conectado, sem halo, sombra, poeira ou pixels orfaos",
+  "validation_plan": [
+    "audit_validate_resources",
+    "audit_provenance",
+    "audit_sprite_mode",
+    "audit_sprite_line_sim",
+    "audit_render_fidelity",
+    "capture_evidence",
+    "measure_fps",
+    "measure_frame_advance",
+    "audit_audio"
+  ],
+  "study_note": "Este registro separa o plano dos 12 principios da prova de ROM; status so sobe apos PNG, runtime e emulador observados."
+}

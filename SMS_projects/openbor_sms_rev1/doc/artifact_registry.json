@@ -996,18 +996,18 @@
    "kind": "planning_sheet",
    "variant": "main",
    "revision": 1,
-   "status": "candidate",
+   "status": "superseded",
    "parents": [
     "o2-vdp-pilot-scope-r2",
     "o1-neutral-frontend-scope",
     "o1-level-ir-gal-town1",
     "o1-models-ir-gal-town1"
    ],
-   "reason": "Escopo O3 aberto por medicao: 60 pose-sides, blocos 79744 B, mapper Sega habilitado pela clausula do TDD, reacao pain2/fall2 corrigida, fisica/IA pinadas no openbor.c 787b6770; M6: guarda pos-hit (D13), tracos causais, pacing de uploader e render fidelity medidos",
+   "reason": "Escopo O3 aberto por medicao: 60 pose-sides, blocos 79744 B, mapper Sega habilitado pela clausula do TDD, reacao pain2/fall2 corrigida, fisica/IA pinadas no openbor.c 787b6770; M6: guarda pos-hit (D13), tracos causais, pacing de uploader e render fidelity medidos | Revisao r1 preservada byte-identica; relocada para path proprio quando o path original passou a r2 (dono unico por path)",
    "files": [
     {
      "role": "document",
-     "path": "doc/artifacts/o3_combat_scope_20261016.json",
+     "path": "doc/artifacts/o3_combat_scope_20261016_predecessor.json",
      "sha256": "aaf3b5451495b4c2283065a9fc4e57523abbd60868eca258208eb0e8ffb9a87e"
     }
    ]
@@ -1380,22 +1380,12 @@
     "o3-model-ir-gal-town1-long",
     "o2-emission-r2"
    ],
-   "reason": "Emissao O3 M4 (20261017): headers de bloco/pose/rows/anim/arcs + bancos do mapper (5x16 KB) + plano de VRAM + politica de corte D9-a2 (linhas exatas; bandas refutadas por medicao) + 12 manifests aprovados no audit_sprite_line_sim; determinismo byte-identico",
+   "reason": "Emissao O3 M4 (20261017): headers de bloco/pose/rows/anim/arcs + bancos do mapper (5x16 KB) + plano de VRAM + politica de corte D9-a2 (linhas exatas; bandas refutadas por medicao) + 12 manifests aprovados no audit_sprite_line_sim; determinismo byte-identico ; os dois manifestos a102/fall03 foram sobrescritos pela emissao r3 (cap5) e vivem em o3-emission-r3; o r1 permanece historico.",
    "files": [
     {
      "role": "record",
      "path": "data/generated/emit/o3_emission_20261017.json",
      "sha256": "a8108c2dd9ba1fb443b08602c32cc38bf6a6745a502dc1d200f11cd32f9384f3"
-    },
-    {
-     "role": "manifest_pair_a102_left_fall03_left_dz24",
-     "path": "data/generated/emit/o3_sprite_scene_pair_a102_left_fall03_left_dz24_20261017.json",
-     "sha256": "df776d5f3b2f5d584594a6d12535f7f42484a2301142a6ac4d962599237fb586"
-    },
-    {
-     "role": "manifest_pair_a102_right_fall03_right_dz24",
-     "path": "data/generated/emit/o3_sprite_scene_pair_a102_right_fall03_right_dz24_20261017.json",
-     "sha256": "a13d2d2ffff2d44b3990dfeaaf68df72792ba9bc38d9e10769466aa20e172c35"
     },
     {
      "role": "manifest_scan0_ax_a102_left_long_a103_left_dz0",
@@ -1474,7 +1464,7 @@
     {
      "role": "resource",
      "path": "res/o3/banks/o3_pose_blocks_20261017.bin",
-     "sha256": "564ea87b32627ba8b21f3e3941345aadded50172693e95d923abb0516af9f19b"
+     "sha256": "1772a365c787b389cd7ef71b8d3c1e86d87e1efaf4cb6926831196e234814c8c"
     }
    ]
   },
@@ -1484,7 +1474,7 @@
    "kind": "generated_record",
    "variant": "main",
    "revision": 2,
-   "status": "candidate",
+   "status": "superseded",
    "supersedes": "o3-emission-r1",
    "parents": [
     "o3-emission-r1"
@@ -1496,6 +1486,320 @@
      "path": "data/generated/emit/o3_emission_20261017_r2.json",
      "sha256": "34d5b4fa73dbd9700827aba6564a275ff481f85284867826bbffc224b9810495",
      "bytes": 21323
+    }
+   ]
+  },
+  {
+   "id": "o3-emission-r3",
+   "asset_id": "emission_gal_town1_o3",
+   "kind": "generated_record",
+   "variant": "main",
+   "revision": 3,
+   "status": "candidate",
+   "supersedes": "o3-emission-r2",
+   "parents": [
+    "o3-emission-r2"
+   ],
+   "reason": "Pos-M8 cap5 (20261019): a101..a105 limitados a 5 celulas/linha 1-2 (lado externo primeiro; 14 drops); headers/bin/manifests regerados; par a102/fall03 esquerdo/direito e fall scans novos; solo fall/death, vram_plan e gates inalterados; ROM 701379cc. Diferenca byte a byte em relacao ao r2 registrada no proprio record.",
+   "files": [
+    {
+     "role": "record",
+     "path": "data/generated/emit/o3_emission_20261017_r3.json",
+     "sha256": "486f9f07f8bcac7c9c47237d6f707160d82e9c8f79bb8fd52f2adb861e0b915a",
+     "bytes": 24827
+    },
+    {
+     "role": "manifest_pair_a102_left_fall03_left_dz24",
+     "path": "data/generated/emit/o3_sprite_scene_pair_a102_left_fall03_left_dz24_20261017.json",
+     "sha256": "5b7eae4307ba8c78ed555c38bc4f41d6572aafc16c5ecc3eb5ddcffcf61ad326",
+     "bytes": 3247
+    },
+    {
+     "role": "manifest_pair_a102_right_fall03_right_dz24",
+     "path": "data/generated/emit/o3_sprite_scene_pair_a102_right_fall03_right_dz24_20261017.json",
+     "sha256": "b01aec4242e432a1c509ea1f904de93a91355bd3a1f7276bcab87ff5db1454a7",
+     "bytes": 3249
+    },
+    {
+     "role": "manifest_scan0_ax_fall01_left_long_fall02_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan0_ax_fall01_left_long_fall02_left_dz0_20261017.json",
+     "sha256": "be875aed246339cf7fe02c2546135fcb602aee8732dc4d2cddbac310a0348195",
+     "bytes": 2790
+    },
+    {
+     "role": "manifest_scan1_ax_fall01_left_long_fall02_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan1_ax_fall01_left_long_fall02_left_dz0_20261017.json",
+     "sha256": "7d7e308db5c396d6877a4b51288cf11145024ad40b82cd8938b407ff6e9197a8",
+     "bytes": 2793
+    },
+    {
+     "role": "manifest_scan2_ax_fall01_left_long_fall02_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan2_ax_fall01_left_long_fall02_left_dz0_20261017.json",
+     "sha256": "3c6b78516734f64634b72a4446e78ab1e5130fe974f299acbb25f1f3c5a8535c",
+     "bytes": 2815
+    },
+    {
+     "role": "manifest_scan3_ax_fall01_left_long_fall02_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan3_ax_fall01_left_long_fall02_left_dz0_20261017.json",
+     "sha256": "936bb2d572d9464838ab4c4df86a6f7c0431576a57b9d95c98bc8ecd8b560f1a",
+     "bytes": 2817
+    },
+    {
+     "role": "manifest_scan4_ax_fall01_left_long_fall02_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan4_ax_fall01_left_long_fall02_left_dz0_20261017.json",
+     "sha256": "b94381a1f9c2ac9659c652596946fd342c621542ab59e7911a20a59f1adb35db",
+     "bytes": 2820
+    },
+    {
+     "role": "manifest_scan5_ax_fall01_left_long_fall02_left_dz0",
+     "path": "data/generated/emit/o3_sprite_scene_scan5_ax_fall01_left_long_fall02_left_dz0_20261017.json",
+     "sha256": "865b78f6c2f1bc1e2c8e656c688387c51c12e8e065c2bb2c008f051a3d1251f4",
+     "bytes": 2820
+    }
+   ]
+  },
+  {
+   "id": "o3-combat-scope-r2",
+   "asset_id": "o3_combat_scope",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 2,
+   "status": "candidate",
+   "parents": [
+    "o3-combat-scope"
+   ],
+   "reason": "Revisao pos-M6 (Lote A): reconciliacao documental, successor_index e successor_linkage; sem build/emulacao",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_combat_scope_20261016.json",
+     "sha256": "99982453e292c4e401619e054fb0efe005e1e2d7bac6c965ae6fe1fd404dbcc5"
+    }
+   ],
+   "supersedes": "o3-combat-scope"
+  },
+  {
+   "id": "o3-post-m6-evidence-index",
+   "asset_id": "post_m6_evidence_index",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "Indice sucessor pos-M6 com SHAs de ROM/traces e distincao whiff dz41 vs dano dz6",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/post_m6_evidence_index_20261018.json",
+     "sha256": "13b8cf0aeb236af26359af5ad44bca75d355aa5694199cc4b163cf61c603f9f0"
+    }
+   ]
+  },
+  {
+   "id": "o3-post-m6-depth-linkage",
+   "asset_id": "post_m6_depth_linkage",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "Linkage honesto whiff dz41 (0b271) vs dano dz6 (f41e); originais intactos",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/post_m6_depth_linkage_20261018.json",
+     "sha256": "e631e9981b6873616dae5a73f5c711c9aa49a4d08ba0c045a9cd9a96e992a7a3"
+    }
+   ]
+  },
+  {
+   "id": "o3-post-m6-lote-a-report",
+   "asset_id": "post_m6_lote_a_report",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "Relatorio do Lote A: preservacao 762 arquivos, mudancas documentais e lacunas",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/post_m6_lote_a_report_20261018.json",
+     "sha256": "1e0a5039b1679d0ccb46ac64ba3d8ddbdef9aa74246ad819a46ee7e00c3a5032"
+    }
+   ]
+  },
+  {
+   "id": "o3-audio-m7",
+   "asset_id": "o3_audio_m7",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "M7: relatorio do pacote de audio (autoria PSG canal 3, integracao runtime a7f02b84, captura isolada, MWF/MRP com audio sob combate); recursos PSG e fontes WAV ficam nos grupos de destino proprios",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_audio_m7_report_20261018.json",
+     "sha256": "d3b5ed3f6b9039d6ab81c07e122e93f797cb41693abb2e4af23e608a8da8f0d9"
+    }
+   ]
+  },
+  {
+   "id": "o3-lote-e",
+   "asset_id": "o3_lote_e",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "Lote E/M8: bundle de evidencia v2 (a7f02b84) construido de sessoes privadas reais, consumo eligible nos 4 eixos e negativos recusados (bitflip PNG, janelas 2); imutabilidade verificavel somente em FS com permissoes reais",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_lote_e_report_20261019.json",
+     "sha256": "75109fd06f01455eddd29c85de51b1ff2fa5da1f98b910a9fb8c8ca8592d1299"
+    }
+   ]
+  },
+  {
+   "id": "o3-lote-c-scope",
+   "asset_id": "o3_lote_c_scope_decision",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "Lote C: decisao de escopo do dono (2026-10-19) — fechar no baseline medido (escalonador CPU + contencao 128); reuso/cache, deltas por transicao e copia especializada dropped_by_owner com condicoes de reabertura; terminal de ataque medido no a7f02b84 (retorno i94)",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_lote_c_scope_decision_20261019.json",
+     "sha256": "8f8a56989f0fb75fd6c5fca5ce264ff737c3fc024314f4729fb200adce68b63a"
+    }
+   ]
+  },
+  {
+   "id": "o3-m8",
+   "asset_id": "o3_m8_closure",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "M8: fecha os 7 eixos no SHA a7f02b84 com build 7/7, MWF+MRP3, bundle consumido eligible e QA runtime/visual 2+2 casos (gate ok); bloqueios declarados: audit_render_glitch sem oraculo, visual delivery/asset binding, PAL, ar 46/47, altura 200; nao e delivery visual",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_m8_report_20261019.json",
+     "sha256": "2fed8a5bfd5747ecbd51fa603e1890f50f684fc70dea1ac918d923e32f431b73"
+    },
+    {
+     "role": "causal_state",
+     "path": "doc/artifacts/m8_causal_state_20261019.json",
+     "sha256": "6f667de4e5aa17eec4e100f74c6705863f7ebc5c4281251b59e25d5ebacca071"
+    }
+   ]
+  },
+  {
+   "id": "o3-audio-psg",
+   "asset_id": "o3_audio_psg",
+   "kind": "runtime_resource",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "M7: 3 SFX PSG autorais (ataque/impacto/queda) no canal 3, integrados em res/audio (13/14/15 B; 6/10/18 ticks); gerados por openbor2sms.sms_audio a partir de referencias WAV hasheadas",
+   "files": [
+    {
+     "role": "resource",
+     "path": "res/audio/sfx_attack.psg",
+     "sha256": "c431529733827ebe838cd1b907f9c7413a8edc7aaed82b36fd63e8c97b422215"
+    },
+    {
+     "role": "resource_impact",
+     "path": "res/audio/sfx_impact.psg",
+     "sha256": "8a346f1bc912922fb438d64bf0d47c4923268684aefac962dc48cc688441325b"
+    },
+    {
+     "role": "resource_fall",
+     "path": "res/audio/sfx_fall.psg",
+     "sha256": "b7bee6f8b8f5532945d2aa9152f8ca3b766eda4a53215efd4556dfff4e3d8025"
+    }
+   ]
+  },
+  {
+   "id": "o3-audio-source",
+   "asset_id": "o3_audio_source",
+   "kind": "openbor_source",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [],
+   "reason": "M7: 3 WAV de origem (att1/hit1/fall) extraidos do PAK doador e hasheados no manifesto de procedencia; PAK completo nunca copiado",
+   "files": [
+    {
+     "role": "source",
+     "path": "data/source_openbor/gal_audio/data/sounds/att1.wav",
+     "sha256": "aefa21ba4960a65153ba6a2e2526f6c90d660afe7b3981d924da4dc3aee4f6e1"
+    },
+    {
+     "role": "source_hit1",
+     "path": "data/source_openbor/gal_audio/data/sounds/hit1.wav",
+     "sha256": "7c30e0f04cc0619aafdbbb69ffb83531f5f03073dd47c0d04b357a267d0af192"
+    },
+    {
+     "role": "source_fall",
+     "path": "data/source_openbor/gal_audio/data/sounds/fall.wav",
+     "sha256": "338ef562041e9e1ac97987ed3257d197e38e86fa476281cc8d55fe0028a07f33"
+    }
+   ]
+  },
+  {
+   "id": "o3-silhouette-presentation",
+   "asset_id": "o3_silhouette_presentation",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-emission-r3",
+    "o3-lote-c-scope"
+   ],
+   "reason": "Pos-M8: correcao da silhueta a102 (cap8 7/8 -> inimigo 0/0; cap5 5/5 -> 3/3; cap4 4/4 sem arco), gate estatico 1000 casos com self-check, apresentacao NTSC 171 q (controle i90, display idle i102, 1o hit i27, dano i129 = ataque do inimigo), Lote C reaberto so no criterio de controle. Runtime cap5 20261020 fechado no bundle consumidor 2f69939a/consumo e1af7fad e QAs 5fe14599/a7662a8b; projecao evidence a473d670/fps 1ccfa0af. Achado de apresentacao (lamina x42..64 vs inimigo x86..132 no indice 27) bloqueia epoca visual/delivery; nao e delivery.",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_silhouette_presentation_20261019.json",
+     "sha256": "1ace5dba921f40329228431ad6b5c53843775427927412b402a10d46ef9195f3",
+     "bytes": 27678
+    },
+    {
+     "role": "gate",
+     "path": "doc/artifacts/o3_silhouette_gate_20261019.json",
+     "sha256": "bd0afced54e3a1b3db4dc17ead2fc9fa41e619d8bb666b880492097bf3c07ce8",
+     "bytes": 3647
+    }
+   ]
+  },
+  {
+   "id": "o3-cap5-consumer-projection",
+   "asset_id": "o3_cap5_consumer_projection",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "revision": 1,
+   "status": "candidate",
+   "parents": [
+    "o3-silhouette-presentation"
+   ],
+   "reason": "Pos-M8 cap5 701379cc: bundle consumidor 2f69939a com sessoes gameplay 2f25ce4a, MRP3 43d33c39 e audio 42fb1b68; consumo e1af7fad eligible true; QA runtime 5fe14599 (sessao 5aeb7960, 2/2 PASS) e visual a7662a8b (sessao 37b1481d, 2/2 legibilidade/integridade PASS, 5 achados); projecao evidence a473d670 e fps 1ccfa0af; audio f16b48b8. Achado de apresentacao: lamina x42..64 vs inimigo x86..132 no indice 27; golpe nao toca visualmente o alvo; bloqueia epoca visual/delivery. NTSC; PAL, regressao, boot deterministico cap5, oraculo full-frame, Lote C e commit/push pendentes.",
+   "files": [
+    {
+     "role": "document",
+     "path": "doc/artifacts/o3_cap5_consumer_projection_20261020.json",
+     "sha256": "deb5389395f2456f09b3c1e59b158105914d2cd2d6a23558f37bfba88029d41e",
+     "bytes": 13338
     }
    ]
   }
@@ -1673,7 +1977,7 @@
    "asset_id": "o3_combat_scope",
    "kind": "planning_sheet",
    "variant": "main",
-   "candidate": "o3-combat-scope",
+   "candidate": "o3-combat-scope-r2",
    "approved": null
   },
   {
@@ -1715,7 +2019,7 @@
    "asset_id": "emission_gal_town1_o3",
    "kind": "generated_record",
    "variant": "main",
-   "candidate": "o3-emission-r2",
+   "candidate": "o3-emission-r3",
    "approved": null
   },
   {
@@ -1723,6 +2027,83 @@
    "kind": "runtime_resource",
    "variant": "main",
    "candidate": "o3-bank-blocks",
+   "approved": null
+  },
+  {
+   "asset_id": "post_m6_evidence_index",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-post-m6-evidence-index",
+   "approved": null
+  },
+  {
+   "asset_id": "post_m6_depth_linkage",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-post-m6-depth-linkage",
+   "approved": null
+  },
+  {
+   "asset_id": "post_m6_lote_a_report",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-post-m6-lote-a-report",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_audio_m7",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-audio-m7",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_lote_e",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-lote-e",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_lote_c_scope_decision",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-lote-c-scope",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_m8_closure",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-m8",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_audio_psg",
+   "kind": "runtime_resource",
+   "variant": "main",
+   "candidate": "o3-audio-psg",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_audio_source",
+   "kind": "openbor_source",
+   "variant": "main",
+   "candidate": "o3-audio-source",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_silhouette_presentation",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-silhouette-presentation",
+   "approved": null
+  },
+  {
+   "asset_id": "o3_cap5_consumer_projection",
+   "kind": "planning_sheet",
+   "variant": "main",
+   "candidate": "o3-cap5-consumer-projection",
    "approved": null
   }
  ],

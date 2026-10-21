@@ -1,0 +1,253 @@
+[
+  {
+    "case": "source_distance_record.json",
+    "mutated_record": {
+      "kind": "source_distance",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_physical_input_trace_20261005.json",
+          "sha256": "fc4f92b27e6dcf70d241a7eec75ea793da96974c5ace4e24d0d865aaa4e48e37"
+        }
+      ],
+      "profile": "standing_facing_pair_uniform_scale",
+      "scale_num": 72,
+      "scale_den": 107,
+      "source_front_widths": [
+        0,
+        0
+      ],
+      "source_threshold": 32,
+      "cases": [
+        {
+          "axis_gap_sms": 45,
+          "expected_lt_threshold": true
+        },
+        {
+          "axis_gap_sms": 46,
+          "expected_lt_threshold": false,
+          "observed_numerator": 2330
+        }
+      ]
+    },
+    "result": {
+      "ok": false,
+      "problems": [
+        "axis/front comparison disagrees"
+      ],
+      "details": {
+        "cases": []
+      },
+      "claim_ceiling": "declared_record_consistency_only",
+      "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. Distance profile is restricted; counters/revisions require source and native observations."
+    }
+  },
+  {
+    "case": "air_timing_record.json",
+    "mutated_record": {
+      "kind": "air_timing",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_physical_input_trace_20261005.json",
+          "sha256": "fc4f92b27e6dcf70d241a7eec75ea793da96974c5ace4e24d0d865aaa4e48e37"
+        }
+      ],
+      "trace": {
+        "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/out/local_study/lote0_20261004/rom_action221_bodydist_visual_probe_20261005/out/evidence/action221_bodydist_physical_input_trace_20261005.json",
+        "sha256": "fc4f92b27e6dcf70d241a7eec75ea793da96974c5ace4e24d0d865aaa4e48e37"
+      },
+      "counter_bits": 16,
+      "source_durations": [
+        6,
+        9,
+        4,
+        4,
+        8
+      ]
+    },
+    "result": {
+      "ok": false,
+      "problems": [
+        "AIR timing/order differs from source"
+      ],
+      "details": {},
+      "claim_ceiling": "declared_record_consistency_only",
+      "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. Distance profile is restricted; counters/revisions require source and native observations."
+    }
+  },
+  {
+    "case": "stale_position_revision",
+    "mutated_record": {
+      "kind": "collision_cache",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/cache_fixture/source.json",
+          "sha256": "5c401fbe8e29b5553a9d6517e8ff2442edd50e097d2be7788a281489b9925f8c"
+        }
+      ],
+      "prepared": {
+        "position_revision": 1,
+        "facing_revision": 1,
+        "hurtbox_revision": 1,
+        "state_revision": 1
+      },
+      "at_contact": {
+        "position_revision": 2,
+        "facing_revision": 1,
+        "hurtbox_revision": 1,
+        "state_revision": 1,
+        "frame": 10
+      },
+      "valid_until_frame": 10
+    },
+    "result": {
+      "ok": false,
+      "problems": [
+        "stale collision cache:position_revision"
+      ],
+      "details": {},
+      "claim_ceiling": "declared_record_consistency_only",
+      "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. Distance profile is restricted; counters/revisions require source and native observations."
+    }
+  },
+  {
+    "case": "stale_facing_revision",
+    "mutated_record": {
+      "kind": "collision_cache",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/cache_fixture/source.json",
+          "sha256": "5c401fbe8e29b5553a9d6517e8ff2442edd50e097d2be7788a281489b9925f8c"
+        }
+      ],
+      "prepared": {
+        "position_revision": 1,
+        "facing_revision": 1,
+        "hurtbox_revision": 1,
+        "state_revision": 1
+      },
+      "at_contact": {
+        "position_revision": 1,
+        "facing_revision": 2,
+        "hurtbox_revision": 1,
+        "state_revision": 1,
+        "frame": 10
+      },
+      "valid_until_frame": 10
+    },
+    "result": {
+      "ok": false,
+      "problems": [
+        "stale collision cache:facing_revision"
+      ],
+      "details": {},
+      "claim_ceiling": "declared_record_consistency_only",
+      "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. Distance profile is restricted; counters/revisions require source and native observations."
+    }
+  },
+  {
+    "case": "stale_hurtbox_revision",
+    "mutated_record": {
+      "kind": "collision_cache",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/cache_fixture/source.json",
+          "sha256": "5c401fbe8e29b5553a9d6517e8ff2442edd50e097d2be7788a281489b9925f8c"
+        }
+      ],
+      "prepared": {
+        "position_revision": 1,
+        "facing_revision": 1,
+        "hurtbox_revision": 1,
+        "state_revision": 1
+      },
+      "at_contact": {
+        "position_revision": 1,
+        "facing_revision": 1,
+        "hurtbox_revision": 2,
+        "state_revision": 1,
+        "frame": 10
+      },
+      "valid_until_frame": 10
+    },
+    "result": {
+      "ok": false,
+      "problems": [
+        "stale collision cache:hurtbox_revision"
+      ],
+      "details": {},
+      "claim_ceiling": "declared_record_consistency_only",
+      "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. Distance profile is restricted; counters/revisions require source and native observations."
+    }
+  },
+  {
+    "case": "stale_state_revision",
+    "mutated_record": {
+      "kind": "collision_cache",
+      "evidence": [
+        {
+          "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-06_expertise_promotion/cache_fixture/source.json",
+          "sha256": "5c401fbe8e29b5553a9d6517e8ff2442edd50e097d2be7788a281489b9925f8c"
+        }
+      ],
+      "prepared": {
+        "position_revision": 1,
+        "facing_revision": 1,
+        "hurtbox_revision": 1,
+        "state_revision": 1
+      },
+      "at_contact": {
+        "position_revision": 1,
+        "facing_revision": 1,
+        "hurtbox_revision": 1,
+        "state_revision": 2,
+        "frame": 10
+      },
+      "valid_until_frame": 10
+    },
+    "result": {
+      "ok": false,
+      "problems": [
+        "stale collision cache:state_revision"
+      ],
+      "details": {},
+      "claim_ceiling": "declared_record_consistency_only",
+      "limits": "No universal CNS compatibility, wall-clock FPS, dynamic opponent proof, or artistic judgment. Distance profile is restricted; counters/revisions require source and native observations."
+    }
+  },
+  {
+    "case": "v081_stage_counts.json_missing_baseline",
+    "result": {
+      "ok": false,
+      "problems": [
+        "missing/invalid pre-stage baseline or stage count"
+      ],
+      "baseline_exposed_frames": null,
+      "first_crossing_frames_by_stage": {},
+      "claim_ceiling": "observed_boundary_counts_only",
+      "budget_passed": false,
+      "limits": "Same sealed window and one boolean crossing observation per frame/stage required in ROM. No CPU durations, sole root cause, multi-wrap inference, or safe upload rate."
+    },
+    "input": {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/out/evidence/sessions/d4d59021c6c64a13b2e511167699029d/worst_frame/v081_stage_counts.json",
+      "sha256": "d2c9d57db9964375b7b5b1c7115a93804b180ac3deda38509900a59569649a30"
+    }
+  },
+  {
+    "case": "v082_stage_counts.json_missing_baseline",
+    "result": {
+      "ok": false,
+      "problems": [
+        "missing/invalid pre-stage baseline or stage count"
+      ],
+      "baseline_exposed_frames": null,
+      "first_crossing_frames_by_stage": {},
+      "claim_ceiling": "observed_boundary_counts_only",
+      "budget_passed": false,
+      "limits": "Same sealed window and one boolean crossing observation per frame/stage required in ROM. No CPU durations, sole root cause, multi-wrap inference, or safe upload rate."
+    },
+    "input": {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/out/evidence/sessions/7da4cdeb7fdd49d29da11163e5cfe584/worst_frame/v082_stage_counts.json",
+      "sha256": "66aa6803babc7741ecf82f27baffb1bc971c29cdb8f1d23036236a12756acdb8"
+    }
+  }
+]

@@ -6,9 +6,9 @@
   "scope": "Produce one Dr. Social concept/model sheet for every style in the registered catalog, in catalog order, preserving the approved identity and model-sheet form.",
   "catalog": {
     "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
-    "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
     "style_count": 49,
-    "sequence_rule": "Use the complete registered catalog order. The approved CPS2-Alpha-Cel sheet is item 1; the next item is Dark-Gothic-Pop."
+    "sequence_rule": "Use stable catalog_index 1–49. A sheet displays its index, reference artist or explicit unverified-credit note, artist role/scope, and distinctive visual signature. Catalog references do not imply ownership or exact reproduction."
   },
   "owner_direction": "On 2026-10-07 the owner approved the Dr. Social model-sheet document and authorized generating and registering the style series.",
   "standard_form": {
@@ -84,8 +84,26 @@
         "palette_and_lighting": "Cores saturadas (3 tons cel-shading), efeitos de energia reluzentes"
       },
       "status": "owner_approved_reference",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
-      "owner_review": "approved 2026-10-07 as series baseline; independent review still pending"
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+      "owner_review": "approved 2026-10-07 as series baseline; independent review still pending",
+      "catalog_index": 1,
+      "artistic_style_reference": {
+        "named_artist": "Bengus",
+        "reference_role_and_scope": "Capcom concept-art reference associated with Street Fighter Alpha development; not a blanket sprite authorship claim.",
+        "source_url": "https://game.capcom.com/cfn/sfv/column/112448?lang=en",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "expressive 1990s fighting-anime faces",
+          "strong graphic contour and readable silhouettes",
+          "high-energy pose staging"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors; Capcom interview supplies development context, not sole-art credit."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png"
+      ],
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/approved_records/model_sheet_cps2_alpha_cel_v2/dr_social_model_sheet_cps2_alpha_cel_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/approved_records/model_sheet_cps2_alpha_cel_v2/asset_lineage_record_dr_social_model_sheet_cps2_alpha_cel_v2.json"
     },
     {
       "sequence": 2,
@@ -99,17 +117,33 @@
         "palette_and_lighting": "Paleta vibrante e gótica, iluminação de contraste, auras de magia"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v2.png",
       "owner_review": "pending",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png",
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_02_dark_gothic_pop_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_v1.json",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_02_dark_gothic_pop_v2.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_v2.json",
       "palette_policy": "fixed Dr. Social game palette; gothic contrast only",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_quality_review_request_v1.json",
-      "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_quality_review_plan_v1.json"
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_review_report_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_quality_review_request_v2.json",
+      "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_02_dark_gothic_pop_quality_review_plan_v1.json",
+      "catalog_index": 2,
+      "artistic_style_reference": {
+        "named_artist": "Akiman (Akira Yasuda)",
+        "reference_role_and_scope": "Capcom artist with documented Darkstalkers involvement; reference for character illustration, not sole title authorship.",
+        "source_url": "https://game.capcom.com/cfn/sfv/column/132581?lang=en",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "organic and elastic contour",
+          "strong silhouette design",
+          "playful dark-fantasy character shapes"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors; Capcom profile confirms series involvement."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_02_dark_gothic_pop/dr_social_model_sheet_02_dark_gothic_pop_v1.png"
+      ]
     },
     {
       "sequence": 3,
@@ -123,18 +157,34 @@
         "palette_and_lighting": "Tons sóbrios com destaques, sombreamento técnico em 3-4 tons"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v2.png",
       "owner_review": "pending",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_art.png",
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_metadata.json",
-      "prepared_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_art_prepared.png",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_03_late_snk_realism_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_v1.json",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_art.png",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v2_metadata.json",
+      "prepared_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1_art_prepared.png",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_03_late_snk_realism_v2.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_v2.json",
       "palette_policy": "fixed Master of Darkness game palette; Late-SNK rendering treatment only",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_quality_review_request_v1.json",
-      "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_quality_review_plan_v1.json"
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_review_report_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_quality_review_request_v2.json",
+      "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_03_late_snk_realism_quality_review_plan_v1.json",
+      "catalog_index": 3,
+      "artistic_style_reference": {
+        "named_artist": "Eisuke Ogura",
+        "reference_role_and_scope": "SNK illustrator/character designer; official SNK profile documents his Garou-team connection and broader Fatal Fury work. Reference for a forceful SNK illustration direction, not a claim of sole authorship of Garou: Mark of the Wolves pixels.",
+        "source_url": "https://www.snk-corp.co.jp/snk40th/spillust/illust/eisukeogura.php",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "forceful hand-rendered contours",
+          "graphic facial planes and strong gesture",
+          "broad shape contrast with direct action staging"
+        ],
+        "basis_and_limits": "The phrasing of visual traits is an editorial reading of representative artwork; keep distinct from Shinkiro’s more realistic promotional rendering."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_03_late_snk_realism/dr_social_model_sheet_03_late_snk_realism_v1.png"
+      ]
     },
     {
       "sequence": 4,
@@ -148,17 +198,33 @@
         "palette_and_lighting": "Paleta madura, cel-shading refinado, efeitos de iluminação em tempo real"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2.png",
       "owner_review": "pending",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_review_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_quality_review_request_v1.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_review_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_quality_review_request_v2.json",
       "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_quality_review_plan_v1.json",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png",
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_04_cps3_fluid_mastery_v1.json",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/asset_lineage_record_04_cps3_fluid_mastery_v2.json",
       "palette_policy": "fixed Master of Darkness game palette; CPS-3 rendering treatment only",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_review_report_v1.json"
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_04_cps3_fluid_mastery_review_report_v2.json",
+      "catalog_index": 4,
+      "artistic_style_reference": {
+        "named_artist": "Daigo Ikeno",
+        "reference_role_and_scope": "Secondary-source attribution for Street Fighter III character/promotional artwork; use as a named visual reference, not sole authorship of in-game animation.",
+        "source_url": "https://www.fightersgeneration.com/games/sf3-thirdstrike.html",
+        "attribution_status": "secondary_source_reference",
+        "style_signature": [
+          "long athletic anatomy",
+          "rhythmic, flowing pose lines",
+          "controlled painted shadows and crisp contour"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors; title-specific attribution remains secondary-source pending."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_04_cps3_fluid_mastery/dr_social_model_sheet_04_cps3_fluid_mastery_v1.png"
+      ]
     },
     {
       "sequence": 5,
@@ -172,26 +238,42 @@
         "palette_and_lighting": "Cores equilibradas de rua/urbanas, sombreamento cel em 3 tons"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2.png",
       "owner_review": "pending; outfit variance noted for owner decision",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png"
       ],
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_v1.json",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_quality_review_request_v1.json",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v2.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_v2.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_report_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_quality_review_request_v2.json",
       "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_quality_review_plan_v1.json",
       "palette_policy": "fixed Dr. Social identity color roles; KOF urban linework/shadow only",
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt"
+      ],
+      "catalog_index": 5,
+      "artistic_style_reference": {
+        "named_artist": "Toshiaki Mori (Shinkiro)",
+        "reference_role_and_scope": "Official artist of the KOF 98 promotional poster/main visual.",
+        "source_url": "https://www.snk-corp.co.jp/snkmasterpiece/gallery07/",
+        "attribution_status": "verified_primary_source",
+        "style_signature": [
+          "hand-rendered promotional realism",
+          "mature facial and material modeling",
+          "cinematic lighting and refined anatomy"
+        ],
+        "basis_and_limits": "SNK explicitly describes the artwork as hand-drawn and strikingly realistic; this is promotional art, not sprite technique."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v1.png"
       ]
     },
     {
@@ -209,18 +291,18 @@
       "model_sheet": null,
       "owner_review": "not_requested",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v2_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v3_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v4_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v4_art.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v3_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v4_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_v4_prompt.txt"
       ],
-      "block_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_blocked_record_v1.json"
+      "block_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_06_classic_arcade_heroic/dr_social_model_sheet_06_classic_arcade_heroic_blocked_record_v1.json"
     },
     {
       "sequence": 7,
@@ -234,29 +316,45 @@
         "palette_and_lighting": "Paleta ultra-saturada, cel-shading limpo, efeitos de partículas intensos"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2.png",
       "owner_review": "pending; costume/style review required",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v2_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v3_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v3_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt"
       ],
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_review_v1.json",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_quality_review_request_v1.json",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v2.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_review_v2.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_review_report_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_quality_review_request_v2.json",
       "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_quality_review_plan_v1.json",
-      "palette_policy": "fixed Dr. Social color roles; vector line/shadow treatment only"
+      "palette_policy": "fixed Dr. Social color roles; vector line/shadow treatment only",
+      "catalog_index": 7,
+      "artistic_style_reference": {
+        "named_artist": "Daisuke Ishiwatari",
+        "reference_role_and_scope": "Creator and authorial visual-direction reference for the original Guilty Gear; not sole character-art or sprite credit.",
+        "source_url": "https://www.arcsystemworks.com/game/guilty-gear/",
+        "attribution_status": "verified_primary_source",
+        "style_signature": [
+          "angular, high-contrast silhouettes",
+          "dense costume/accessory accents",
+          "graphic shapes with strong motion"
+        ],
+        "basis_and_limits": "Traits are an editorial reading of the selected Guilty Gear visual reference."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1.png"
+      ]
     },
     {
       "sequence": 8,
@@ -270,29 +368,45 @@
         "palette_and_lighting": "Cores vivas e luminosas, 2-3 tons de cel-shading sem dithering"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2.png",
       "owner_review": "pending; vest/button costume variance needs decision",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v3_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v3_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt"
       ],
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_review_v1.json",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_quality_review_request_v1.json",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v2.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_review_v2.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_review_report_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_quality_review_request_v2.json",
       "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_08_32bit_mecha_chibi_quality_review_plan_v1.json",
-      "palette_policy": "fixed Dr Social identity colors; simple 32-bit cel-animation finish only"
+      "palette_policy": "fixed Dr Social identity colors; simple 32-bit cel-animation finish only",
+      "catalog_index": 8,
+      "artistic_style_reference": {
+        "named_artist": null,
+        "reference_role_and_scope": "No individual artist attribution assigned for Mega Man 8 in this curation. Keep the game’s animated sci-fi mascot direction as the reference until a title-specific credit is verified.",
+        "source_url": null,
+        "attribution_status": "individual_credit_unverified",
+        "style_signature": [
+          "clean cel-animation contour",
+          "rounded mechanical joints and simplified shapes",
+          "bright 2–3 tone color blocks"
+        ],
+        "basis_and_limits": "Style descriptors come from the selected game reference, not a named artist."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png"
+      ]
     },
     {
       "sequence": 9,
@@ -306,25 +420,41 @@
         "palette_and_lighting": "Paleta pastel e néon festiva, efeitos de impacto com objetos e itens cômicos"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2.png",
       "owner_review": "pending; costume embellishment requires review",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt"
       ],
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_v1.json",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_quality_review_request_v1.json",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v2.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_v2.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_review_report_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_quality_review_request_v2.json",
       "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_09_extreme_sd_parody_quality_review_plan_v1.json",
-      "palette_policy": "fixed identity material colors; expressive rounded line/pose only"
+      "palette_policy": "fixed identity material colors; expressive rounded line/pose only",
+      "catalog_index": 9,
+      "artistic_style_reference": {
+        "named_artist": "Kinu Nishimura",
+        "reference_role_and_scope": "Capcom fighting-game illustration reference; no claim that she alone authored Pocket Fighter.",
+        "source_url": "https://www.capcom.co.jp/amusement/brands/capcomstore/2021/01/828/",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "expressive character acting",
+          "clear gesture and silhouette",
+          "playful facial exaggeration"
+        ],
+        "basis_and_limits": "Traits are an editorial visual analysis; use Pocket Fighter itself for SD proportions and animation."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_09_extreme_sd_parody/dr_social_model_sheet_09_extreme_sd_parody_v1.png"
+      ]
     },
     {
       "sequence": 10,
@@ -338,27 +468,43 @@
         "palette_and_lighting": "Paleta rica do Mega Drive, sombreamento suave de cel-animation"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2.png",
       "owner_review": "pending; outfit/equipment review required",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt"
       ],
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_review_v1.json",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_quality_review_request_v1.json",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v2.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_review_v2.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_review_report_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_quality_review_request_v2.json",
       "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_10_digicel_handdrawn_quality_review_plan_v1.json",
-      "palette_policy": "fixed identity material colors; organic Digicel linework only"
+      "palette_policy": "fixed identity material colors; organic Digicel linework only",
+      "catalog_index": 10,
+      "artistic_style_reference": {
+        "named_artist": "Glen Keane",
+        "reference_role_and_scope": "Directing animator for Aladdin, the titular character, in Disney’s 1992 animated film; reference is film animation, not Mega Drive game-art credit.",
+        "source_url": "https://d23.com/a-to-z/keane-glen/",
+        "attribution_status": "verified_primary_source",
+        "style_signature": [
+          "fluid character gesture",
+          "elastic but readable silhouette",
+          "organic hand-drawn animation contour"
+        ],
+        "basis_and_limits": "Visual-analysis descriptors of the film-animation reference."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_10_digicel_handdrawn/dr_social_model_sheet_10_digicel_handdrawn_v1.png"
+      ]
     },
     {
       "sequence": 11,
@@ -375,18 +521,19 @@
       "model_sheet": null,
       "owner_review": "not_requested",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v1.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v2.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v3.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v4.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v1.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v2.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v3.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v4.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v3_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_v4_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_v4_prompt.txt"
       ],
-      "block_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_11_gothic_ayami_art_blocked_record_v1.json"
+      "block_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_blocked_record_v1.json",
+      "blocked_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_11_gothic_ayami_art/dr_social_model_sheet_11_gothic_ayami_art_blocked_record_v1.json"
     },
     {
       "sequence": 12,
@@ -403,18 +550,33 @@
       "model_sheet": null,
       "owner_review": "not_requested",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v2_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v3_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v4_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v4_art.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v3_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_v4_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_v4_prompt.txt"
       ],
-      "block_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_12_detailed_military_caricature_blocked_record_v1.json"
+      "block_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_blocked_record_v1.json",
+      "blocked_record": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_blocked_record_v1.json",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_12_detailed_military_caricature/dr_social_model_sheet_12_detailed_military_caricature_metadata.json",
+      "catalog_index": 12,
+      "artistic_style_reference": {
+        "named_artist": "TONKO",
+        "reference_role_and_scope": "SNK illustrator with documented Metal Slug series illustration work, especially later-series/promo art; not pixel-sprite authorship for Metal Slug X/3.",
+        "source_url": "https://www.snk-corp.co.jp/snk40th/spillust/illust/tonko.php",
+        "attribution_status": "official_contextual_reference",
+        "style_signature": [
+          "rounded military caricature",
+          "dense readable props",
+          "contrast between sturdy machinery and elastic character acting"
+        ],
+        "basis_and_limits": "Use as an illustration reference only; the game’s sprite art is a team achievement."
+      }
     },
     {
       "sequence": 13,
@@ -429,7 +591,8 @@
       },
       "status": "not_started",
       "model_sheet": null,
-      "owner_review": "not_requested"
+      "owner_review": "not_requested",
+      "legacy_status_conflict": "10-memory-bank.md historically says blocked after four generations, but active manifest is not_started and only a prompt is present in the current tree; keep not_started until source/evidence is restored and reconciled."
     },
     {
       "sequence": 14,
@@ -443,29 +606,51 @@
         "palette_and_lighting": "Fundos pintados em guache/aquarela, sprites coloridos e luminosos"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1.png",
-      "owner_review": "pending; coat construction/lapel variation noted",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_art.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3.png",
+      "owner_review": "pending; v3 separates the boomerang arm from the rapier arm with a low bent pose and visible negative space; coat/lapel variation still awaits owner review",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v7_art.png",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v3_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v4_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v5_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v6_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v7_art.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v3_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v4_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v5_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v6_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v7_prompt.txt"
       ],
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_v4_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_14_gouache_fantasy_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v1.json",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_quality_review_request_v1.json",
-      "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_quality_review_plan_v1.json",
-      "palette_policy": "fixed identity material colors; gouache pigment and lighting treatment only"
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v7_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/asset_lineage_record_dr_social_model_sheet_14_gouache_fantasy_v3.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_v3.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_review_report_v3.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_14_gouache_fantasy_quality_review_request_v3.json",
+      "palette_policy": "fixed identity material colors; gouache pigment and lighting treatment only",
+      "catalog_index": 14,
+      "artistic_style_reference": {
+        "named_artist": "Shinichi Kameoka",
+        "reference_role_and_scope": "Main character designer for Legend of Mana, per Square Enix creator comment.",
+        "source_url": "https://www.jp.square-enix.com/mana30th/",
+        "attribution_status": "verified_primary_source",
+        "style_signature": [
+          "hand-painted gouache color planes with warm fine contours",
+          "luminous storybook fantasy color with controlled texture",
+          "distinctive character silhouettes and readable costume shapes"
+        ],
+        "basis_and_limits": "Editorial visual-analysis descriptors; the source confirms character-design role, not sole authorship of every asset."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v1.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v2.png"
+      ]
     },
     {
       "sequence": 15,
@@ -479,29 +664,45 @@
         "palette_and_lighting": "Cores vivas, cel-shading de 2 tons super limpo, clima acolhedor"
       },
       "status": "candidate_pending_owner_review",
-      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png",
+      "model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2.png",
       "owner_review": "pending; mild coat-cut variance and missing violet boomerang effect noted",
-      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
+      "raw_art": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png",
       "generation_attempts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v3_art.png",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v1_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v3_art.png",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png"
       ],
       "attempt_prompts": [
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v3_prompt.txt",
-        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt"
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v1_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v3_prompt.txt",
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt"
       ],
-      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt",
-      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_metadata.json",
-      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v1.json",
-      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_review_v1.json",
-      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_review_report_v1.json",
-      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_quality_review_request_v1.json",
+      "prompt": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt",
+      "metadata": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v2_metadata.json",
+      "lineage": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v2.json",
+      "review_checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_review_v2.json",
+      "review_report": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_review_report_v2.json",
+      "quality_review_request": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_quality_review_request_v2.json",
       "quality_review_plan": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_15_ghibli_cel_simulation_quality_review_plan_v1.json",
-      "palette_policy": "fixed identity material colors; two-tone cel treatment only"
+      "palette_policy": "fixed identity material colors; two-tone cel treatment only",
+      "catalog_index": 15,
+      "artistic_style_reference": {
+        "named_artist": "Akihiko Yamashita",
+        "reference_role_and_scope": "Secondary credits listing for Wonder Project J2 anime character design; not a Ghibli artist credit and not sole game-art authorship.",
+        "source_url": "https://www.mobygames.com/game/97845/wonder-project-j2/credits/n64/?autoplatform=true",
+        "attribution_status": "secondary_source_reference",
+        "style_signature": [
+          "1990s cel-anime line and shape language",
+          "expressive face and clear pose silhouette",
+          "warm, clean cel-color blocks"
+        ],
+        "basis_and_limits": "Do not equate the game with Studio Ghibli or attribute its art to Miyazaki; Ghibli-Simulation remains a style label, not a production credit."
+      },
+      "model_sheet_history": [
+        "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_15_ghibli_cel_simulation/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png"
+      ]
     },
     {
       "sequence": 16,
@@ -1015,7 +1216,7 @@
     }
   ],
   "selection_atlas": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_48_style_atlas_v1.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/concept_direction_explorations/dr_social_48_style_atlas_v1.png",
     "sha256": "dde4a0fda7dba19452ca4e8c8b712df17f7b8fd0f503afc874bc08cd948716e9",
     "dimensions_px": [
       2200,

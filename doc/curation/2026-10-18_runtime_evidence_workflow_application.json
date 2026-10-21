@@ -1,0 +1,198 @@
+{
+  "curation_id": "runtime_evidence_workflow_application_20261018",
+  "date": "2026-10-18",
+  "kind": "application_of_existing_lessons",
+  "authorization": "Pedido explícito do dono para curadoria de skills/ferramentas e incorporação das lições aprendidas nesta sessão.",
+  "scope": "Central wrapper, doctrine, skills, workflows and institutional memory; game code and archived evidence unchanged.",
+  "new_lesson_ids": [],
+  "lessons": [],
+  "applied_lessons": [
+    "L001",
+    "L013",
+    "L035",
+    "L036",
+    "L064",
+    "L086",
+    "L090",
+    "L091",
+    "L097",
+    "L098",
+    "L099",
+    "L112",
+    "L123",
+    "L125",
+    "L133",
+    "L136"
+  ],
+  "rule_section": "SMS_GLOBAL §128; esclarecimentos de aplicação em §§84/105/127",
+  "inputs": [
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/24-parecer-continuidade-20261018.md",
+      "sha256": "7556dfec75efe4c3497bcacd2b960326069584c7fd55665a7e7a0d8fd78921ff",
+      "bytes": 14923
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/26-verificacao-continuidade-20261018.json",
+      "sha256": "c82fa34272fabd900e8a177eeea64532ea51fb6f34c6b80de2c424df9c89766c",
+      "bytes": 42308
+    },
+    {
+      "path": "doc/planejamento/openbor_sms/07-parecer-m6-20261018.md",
+      "sha256": "24d58008ef897cab5142eaa0b0e0b0cc3bb97ab39d7b5542751c643b864f3aa7",
+      "bytes": 15619
+    },
+    {
+      "path": "doc/planejamento/openbor_sms/09-verificacao-m6-20261018.json",
+      "sha256": "af7e40ac732152a3dcd5ae14808cbebb34472bc20fc18b4273543d3bca7ef141",
+      "bytes": 36135
+    },
+    {
+      "path": "doc/curation/2026-10-14_pulso_m3_candidatos_curadoria.json",
+      "sha256": "5b5fb17e3084700c90ea8b0ebe78fba7ba6de20c2e08c9a2d3a59818fb678507",
+      "bytes": 54179
+    }
+  ],
+  "changes": [
+    "Gate journal_ram_v1 rederives declared assertions and observed VDP intervals from hash-bound RAM reads and actual input ACKs; no pixels/FPS/first-event claim.",
+    "Exclusive report_output adopted by four audit CLIs, with --report-out alias and legacy --json; refuses existing destinations and aliases, no source clobber.",
+    "Hardware gate calibrated to both-palettes index-zero error and scene demand before cuts; canonical mastery palette statement corrected.",
+    "Existing lessons routed to presentation/cache/deadline/custody/VRAM skills and workflows; MUGEN tick unit and CLSN default authority taught.",
+    "L136 propagated: byte integrity outside VBlank, commit timing and whole-game timing are separate; no universal 64/128 B throughput.",
+    "No new global lesson IDs: preserve registry L136 and previous numbering."
+  ],
+  "applied_entrypoints": [
+    "tools/sms_wrapper/.agent/skills/sms-observed-case-evidence.md",
+    "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
+    "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+    "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
+    "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
+    "tools/sms_wrapper/.agent/workflows/first-playable-slice.md",
+    "tools/sms_wrapper/.agent/workflows/subagent-emulator-qa.md",
+    "tools/sms_wrapper/.agent/workflows/curation-learning.md"
+  ],
+  "measuring_tools": [
+    "audit_observed_cases.py",
+    "audit_hardware_constants.py",
+    "audit_subagent_session.py",
+    "audit_import_semantics.py",
+    "audit_counter_window.py",
+    "selftest.py"
+  ],
+  "calibration": {
+    "path": "doc/curation/evidence/2026-10-18_observed_cases/calibration.json",
+    "sha256": "cf03e87dd53f8962cd2d1bf709f9073aeff54a30dcb95dba6d4b1ddfc7f6c198",
+    "bytes": 2065
+  },
+  "native_reviews": [
+    {
+      "path": "doc/curation/evidence/2026-10-18_observed_cases/reviews/coverage.md",
+      "sha256": "e78727709b46640890d7048acbb36d9f4bb26c275ab52a0641e3a9690e4b1272",
+      "bytes": 14582
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-18_observed_cases/reviews/skill-forward-test.md",
+      "sha256": "bde36887f75c2a012f85d9f1ca18c5ec42bada6e87e51fe70301da35fe463683",
+      "bytes": 8890
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-18_observed_cases/reviews/tool-design.md",
+      "sha256": "251e1e3d5530e4b72117f21d641d132ed273464ef96559fd7ef01a3ee9f24020",
+      "bytes": 14213
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-18_observed_cases/reviews/tool-retest-results.json",
+      "sha256": "0e84ec2efe67185a8246df6c2f1c464218967b89c8fed8a67aa0c8bcd2e1ad03",
+      "bytes": 5139
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-18_observed_cases/reviews/tool-retest.md",
+      "sha256": "0d8bb265a12cf25b3d18077d53b7ffb2b283479dd6376cfc5bc9356331420a31",
+      "bytes": 3593
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-18_observed_cases/reviews/tool-review-initial.md",
+      "sha256": "4f58017c551787c0416b74775f3042fb7a43a6b45b3b7731a50edabbbe8c13db",
+      "bytes": 7588
+    }
+  ],
+  "runtime_or_art_promoted": false,
+  "static_candidates_not_promoted": [
+    "OpenBOR high-TOSS continuity",
+    "uploader generation/old-pose publication in game runtime",
+    "timer off-by-one per game",
+    "hitstop/pusher and simultaneous KO policies"
+  ],
+  "limits": [
+    "No fresh emulator or hardware run in this curation",
+    "journal layout/probe authenticity and framebuffer presentation require independent inspection",
+    "endpoint delta is net, not absence of transient events",
+    "four report CLIs migrated, other writers not automatically migrated",
+    "existing global doc-sync EIO in luta_mugen remains external blocker"
+  ],
+  "validation_status": "applied_locally_validated_global_doc_sync_blocked_by_preexisting_legacy_EIO",
+  "validation_evidence_directory": "doc/curation/evidence/2026-10-18_observed_cases/validation",
+  "validation": {
+    "selftest": "120/120; optional game build probe not run",
+    "measurement_tools": "70/70 self-checks",
+    "learning_capture": "pass",
+    "hardware": "pass",
+    "header_claims": "pass",
+    "doc_sync": "fail: same 10 preexisting luta_mugen EIO/authority problems",
+    "native_adversarial_retest": "25/25 vectors",
+    "native_skill_forward_test": "passed within RAM/observed-interval scope",
+    "fresh_emulator_execution": false,
+    "game_promotion": false,
+    "results": {
+      "path": "doc/curation/evidence/2026-10-18_observed_cases/validation/results.json",
+      "sha256": "a1464a8f0ef197dfcc6a011ad3b447cfb6ffc868e5136d2c93c835dbc17fe520",
+      "bytes": 2997
+    },
+    "observed_cases": {
+      "path": "doc/curation/evidence/2026-10-18_observed_cases/validation/observed_cases.json",
+      "sha256": "c8b3afffb63c7cb980e93d8db6066e7a550b6752a31dbc13c696362079d03c5d",
+      "bytes": 1555
+    }
+  },
+  "summary": {
+    "path": "doc/curation/evidence/2026-10-18_observed_cases/summary.md",
+    "sha256": "2d704c81f29b58eebeb002deb44dc30f1c08f046301a945475e4ae488845684a",
+    "bytes": 4637
+  },
+  "tool_snapshots": [
+    {
+      "path": "tools/sms_wrapper/audit_observed_cases.py",
+      "sha256": "8da7759e7d45eb9e39adcef2d33f30677d3b8527eb7e13fd8f65390167ae17bf",
+      "bytes": 16748
+    },
+    {
+      "path": "tools/sms_wrapper/report_output.py",
+      "sha256": "4fdb2ea80f8146fd9150121464fb2b99c7c7ef79207301bd2dffff5f7edb4b8b",
+      "bytes": 3042
+    },
+    {
+      "path": "tools/sms_wrapper/selftest.py",
+      "sha256": "f714026d32545ef7a6bae0878b6d90dcc911d9bdb00d12f2b0bcd2a83f448574",
+      "bytes": 22883
+    },
+    {
+      "path": "tools/sms_wrapper/audit_hardware_constants.py",
+      "sha256": "968f7e2b144b453fb3f055930aa82c9a52a14b180f16579c4e3ded81f8ef151a",
+      "bytes": 16409
+    },
+    {
+      "path": "tools/sms_wrapper/audit_debug_markers.py",
+      "sha256": "8e3cd9a9f8de68a2267349629b2f3010763c9c9da3adba800fc750a895bfcf60",
+      "bytes": 4294
+    },
+    {
+      "path": "tools/sms_wrapper/audit_header_claims.py",
+      "sha256": "9a78bbcd65ef9a5c1e956a065044ac0d80ae97f7bdccf40ab33ba1b94be6c880",
+      "bytes": 10677
+    },
+    {
+      "path": "tools/sms_wrapper/audit_learning_capture.py",
+      "sha256": "18cb0e5d377c9493cbbf0e7d79144d3bdbf6108a918df4cd361064378de46726",
+      "bytes": 20367
+    }
+  ]
+}

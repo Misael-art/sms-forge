@@ -1,7 +1,11 @@
-/* main.c -- integrated runtime: 72-88 px Ken vs Ryu, static stage, HUD
+/* main.c -- integrated legacy fixture: Ken vs Ryu, solid-color field, HUD,
+ * with the requested P1-human/P2-CPU input route enabled as a logic harness.
  * on the name table, PSG and a best-of-three round cycle.
  *
- * Button 1 = punch, button 2 = guard; directions stay masked.
+ * Mapa de controle do GDD nos DOIS pads (doc/22, doc/23 secao 6.B): os seis
+ * niveis do pad chegam decodificados por `input_pad_levels()`; tecla 1 =
+ * familia do soco, tecla 2 = familia do chute, e a forca sai do tempo de
+ * pressao no anel de `input.c`. Guarda nao e botao: e recuo + baixo.
  * P1 = port A, P2 = port B.
  * Round: 99 seconds x 60 NTSC ROM frames (GDD 2026-09-30). Tie and
  * double KO score nobody. The anim clock and the stream budget are the
@@ -15,6 +19,8 @@
 #include "SMSlib.h"
 #include "luta.h"
 #include "fight.h"
+#include "cpu_controller.h"
+#include "input_pad.h"
 #include "stream.h"
 #include "stage.h"
 #include "hud.h"
@@ -50,7 +56,6 @@ volatile unsigned char __at(0xC7EF) probe_vline_min;
 volatile unsigned int  __at(0xC7F0) probe_frame;
 volatile unsigned char __at(0xC7D0) probe_profile_wait;
 volatile unsigned char __at(0xC7D1) probe_profile_stream;
-volatile unsigned char __at(0xC7D2) probe_profile_palette;
 volatile unsigned char __at(0xC7D3) probe_profile_hud;
 volatile unsigned char __at(0xC7D4) probe_profile_sat;
 volatile unsigned char __at(0xC7D6) probe_vline_spill_max;
@@ -83,12 +88,13 @@ volatile unsigned char __at(0xC7BC) tl_magic;
 volatile unsigned char __at(0xC7BD) tl_ph_track;
 volatile unsigned char __at(0xC7BE) tl_ph_step0;
 volatile unsigned char __at(0xC7BF) tl_ph_step1;
-volatile unsigned char __at(0xC790) tl_snap[10];
-volatile unsigned char __at(0xC79A) tl_snap_seq;
+volatile unsigned char __at(0xC800) tl_snap[16];
+volatile unsigned char __at(0xC7D2) tl_snap_seq;
 
 extern unsigned char render_dropped;
 
 static unsigned char track_on[2], track_t[2], track_pose0[2];
+static unsigned char track_press_t[2], track_pending[2];
 static unsigned char track_vis_done[2], track_hit_done[2], track_state[2];
 static unsigned char keys_prev[2];
 static unsigned char vis_pose[2], vis_frames[2], vis_dur[2];
@@ -97,18 +103,14 @@ static unsigned char rm_state, rm_wait, rm_timer_s, rm_ticks;
 static unsigned char rm_winner, rm_scored, rm_round, match_prev;
 static unsigned char rm_wins[2];
 static unsigned char probe_ready;
+static unsigned char p2_cpu_enabled; /* enabled explicitly during startup */
 
+/* A palavra dos dois pads vem de SMS_getKeysHeld(); a traducao para os seis
+ * niveis K_* de um ator e de `input_pad.c`, garantida bit a bit contra o
+ * header (SMSlib.h:296-302). Aqui nao se escolhe semantica de botao: tecla 2
+ * e K_HP, nao guarda — guarda nasce de recuo+baixo no anel. */
 static unsigned char read_pad(unsigned char who) {
-    unsigned int h = SMS_getKeysHeld();
-    unsigned char k = 0;
-    if (who) {
-        if (h & PORT_B_KEY_1) k |= K_LP;
-        if (h & PORT_B_KEY_2) k |= K_GUARD;
-    } else {
-        if (h & PORT_A_KEY_1) k |= K_LP;
-        if (h & PORT_A_KEY_2) k |= K_GUARD;
-    }
-    return k;
+    return input_pad_levels(SMS_getKeysHeld(), who);
 }
 
 static void track_after_sat(unsigned char who) {
@@ -149,11 +151,22 @@ static void track_input(unsigned char who, unsigned char k, unsigned char ev,
                         unsigned char state_before) {
     unsigned char pressed = (unsigned char)(k & ~keys_prev[who]);
     keys_prev[who] = k;
-    if (!pressed) return;
+    /* A ancora da trilha e a PRENSA, nao a mudanca de estado. Com o tier do
+     * GDD o golpe pode nascer em outro tick: o FRACO no tick em que a tecla ja
+     * foi solta, o FORTE no tick T-1. Se a trilha so armasse no tick da borda,
+     * o soco fraco nunca seria medido. */
+    if (pressed) {
+        track_press_t[who] = 0;
+        track_pending[who] = 1;
+    } else if (track_pending[who] && track_press_t[who] < 255u) {
+        track_press_t[who]++;
+    }
+    if (!track_pending[who]) return;
     if (fighters[who].state == state_before) return;
+    track_pending[who] = 0;
     tl_presses[who]++;
     track_on[who] = 1;
-    track_t[who] = 0;
+    track_t[who] = track_press_t[who];
     track_vis_done[who] = track_hit_done[who] = 0;
     track_state[who] = (unsigned char)(ev == FIGHT_EVENT_PUNCH ? 1u : 2u);
     track_pose0[who] = fight_state_pose0(who);
@@ -246,6 +259,7 @@ static void finish_result(void) {
 
 void main(void) {
     unsigned char i, k[2], ev[2], before[2];
+    unsigned char input_vline, audio_vline;
     unsigned short life_before[2];
 
     probe_ready = 0;
@@ -264,6 +278,8 @@ void main(void) {
         tl_lat_visible_max[i] = tl_lat_hitbox_max[i] = tl_presses[i] = 0;
         tl_dur_hist[i][0] = tl_dur_hist[i][1] = tl_dur_hist[i][2] = tl_dur_hist[i][3] = 0;
         track_on[i] = 0;
+        track_press_t[i] = 0;
+        track_pending[i] = 0;
         keys_prev[i] = 0;
         vis_pose[i] = 0xFFu;
         vis_frames[i] = 0;
@@ -275,6 +291,8 @@ void main(void) {
 
     fight_init();
     hud_init();
+    fight_cpu_init(CPU_DIFFICULTY_NORMAL, 0x5A31u);
+    p2_cpu_enabled = 1u;
     reset_round();
 
     probe_magic0 = 'S';
@@ -292,6 +310,7 @@ void main(void) {
     probe_vline_spill_max = 0;
     probe_score = 0;
     tl_magic = 'I';
+    tl_snap_seq = 0;
 
     for (;;) {
         SMS_waitForVBlank();
@@ -318,7 +337,9 @@ void main(void) {
         tl_ph_track = SMS_VCounterPort;
 
         k[0] = TRACE_PAD(0, read_pad(0));
-        k[1] = TRACE_PAD(1, read_pad(1));
+        k[1] = TRACE_PAD(1, (rm_state == RM_ACTIVE && p2_cpu_enabled) ?
+                              fight_cpu_input(1u) : read_pad(1));
+        input_vline = SMS_VCounterPort;
         if (rm_state == RM_ACTIVE) {
             for (i = 0; i < 2; i++) {
                 before[i] = fighters[i].state;
@@ -385,18 +406,31 @@ void main(void) {
             tl_render_end_max = tl_render_end;
         if (render_dropped > tl_render_dropped_max) tl_render_dropped_max = render_dropped;
         audio_frame();
+        audio_vline = SMS_VCounterPort;
 
-        tl_snap[0] = probe_profile_stream;
-        tl_snap[1] = tl_ph_track;
-        tl_snap[2] = tl_ph_step0;
-        tl_snap[3] = tl_ph_step1;
-        tl_snap[4] = tl_logic_end;
-        tl_snap[5] = *(volatile unsigned char *)0xC7C5;
-        tl_snap[6] = *(volatile unsigned char *)0xC7C1;
-        tl_snap[7] = *(volatile unsigned char *)0xC7C2;
-        tl_snap[8] = *(volatile unsigned char *)0xC7C3;
-        tl_snap[9] = *(volatile unsigned char *)0xC7C4;
-        tl_snap_seq++;
+        /* Seqlock: DAP readers accept only an even sequence with a complete
+         * set of phase stamps. Freeze the last sample inside the measured
+         * 3000-frame window; the DAP attaches only after that window seals. */
+        if (probe_frame <= WORST_FRAME_WINDOW) {
+            tl_snap_seq++;
+            tl_snap[0] = probe_profile_wait;
+            tl_snap[1] = probe_profile_hud;
+            tl_snap[2] = probe_profile_sat;
+            tl_snap[3] = probe_profile_stream;
+            tl_snap[4] = tl_ph_track;
+            tl_snap[5] = input_vline;
+            tl_snap[6] = tl_ph_step0;
+            tl_snap[7] = tl_ph_step1;
+            tl_snap[8] = tl_logic_end;
+            tl_snap[9] = *(volatile unsigned char *)0xC7C5;
+            tl_snap[10] = *(volatile unsigned char *)0xC7C1;
+            tl_snap[11] = *(volatile unsigned char *)0xC7C2;
+            tl_snap[12] = *(volatile unsigned char *)0xC7C3;
+            tl_snap[13] = *(volatile unsigned char *)0xC7C4;
+            tl_snap[14] = tl_render_end;
+            tl_snap[15] = audio_vline;
+            tl_snap_seq++;
+        }
         tl_slots_used = stream_slots_used;
         tl_slots_peak = stream_slots_peak;
         tl_alloc_fail = stream_alloc_fail;

@@ -50,24 +50,30 @@
     },
     {
       "file": "res/audio/music_title.psg",
-      "origin": "stream autoral sintetizado para PSGlib",
+      "origin": "arranjo sem bateria do mesmo tema Ken Stage (6 compassos, respiracao mais lenta) — transcricao do MID de referencia para PSGlib",
       "author": "SMSForge",
-      "tool": "make_psg_assets.py + shrink_music_loop.py",
+      "tool": "SMS_projects/MSSF2T/tools/gen_music_ken_stage.py",
       "role": "tema da tela de titulo",
       "channels": "music channels 0-3",
-      "frames": 12,
-      "sha256": "64acda75ca90bf1c5592906663e7b347794fe9e9b693046be71a5a6f74ec7a85",
-      "bytes": 145,
-      "format": "PSGlib stream"
+      "frames": 1152,
+      "sha256": "57126310daca95d295a5ed1255328aafd1ab47cac7343480791811f45d3c2f5f",
+      "bytes": 494,
+      "format": "PSGlib stream",
+      "reference": {
+        "file": "art_src_base/audio/music/reference/ssf2_ken_stage_vgmusic.mid",
+        "sha256": "4480480137e00ec8a29e2d6e6ae2813185fdb14ca1a4d3c1691d5563f10fd1dc",
+        "url": "https://www.vgmusic.com/music/console/nintendo/snes/street_fighter_ii_-_ken.mid",
+        "format": "midi"
+      }
     },
     {
-      "origin": "transcrição do tema Ken Stage (SSF2T) para PSG de 4 canais — referência em art_src_base/audio/music/reference/",
+      "origin": "transcricao deterministica do tema Ken Stage (SSF2T) do MID de referencia para PSGlib de 4 canais — metais/guitarra/baixo/bateria, 8 compassos, 90 BPM",
       "author": "SMSForge",
-      "tool": "gen_music_ken_ref.py",
+      "tool": "SMS_projects/MSSF2T/tools/gen_music_ken_stage.py",
       "channels": "music channels 0-3",
       "frames": 1280,
-      "sha256": "aaf1cf1b8e5424ac46517820a95f87d3c7298f44473521f23e119ae4702daadf",
-      "bytes": 917,
+      "sha256": "67349cfc41833ed4da18235d9e2a9382165606fd91e643e9b9b422fc896d7544",
+      "bytes": 750,
       "format": "PSGlib stream",
       "reference": {
         "file": "art_src_base/audio/music/reference/ssf2_ken_stage_vgmusic.mid",
@@ -79,13 +85,13 @@
       "role": "espelho do tema do palco do Ken (mesmo conteúdo de music_ken_stage.psg; o C consome via inc/music_battle.h)"
     },
     {
-      "origin": "transcrição do tema Ken Stage (SSF2T) para PSG de 4 canais — referência em art_src_base/audio/music/reference/",
+      "origin": "transcricao deterministica do tema Ken Stage (SSF2T) do MID de referencia para PSGlib de 4 canais — metais/guitarra/baixo/bateria, 8 compassos, 90 BPM",
       "author": "SMSForge",
-      "tool": "gen_music_ken_ref.py",
+      "tool": "SMS_projects/MSSF2T/tools/gen_music_ken_stage.py",
       "channels": "music channels 0-3",
       "frames": 1280,
-      "sha256": "aaf1cf1b8e5424ac46517820a95f87d3c7298f44473521f23e119ae4702daadf",
-      "bytes": 917,
+      "sha256": "67349cfc41833ed4da18235d9e2a9382165606fd91e643e9b9b422fc896d7544",
+      "bytes": 750,
       "format": "PSGlib stream",
       "reference": {
         "file": "art_src_base/audio/music/reference/ssf2_ken_stage_vgmusic.mid",
@@ -95,6 +101,18 @@
       },
       "file": "res/audio/music_ken_stage.psg",
       "role": "tema do palco do Ken"
+    },
+    {
+      "file": "res/audio/sfx_fight.psg",
+      "origin": "voz \"FIGHT\" da abertura da luta — sintese por formantes em ruido branco + tons (canais 1+2+3)",
+      "author": "SMSForge",
+      "tool": "SMS_projects/MSSF2T/tools/gen_music_ken_stage.py",
+      "role": "abertura do round (GS_ROUND -> GS_FIGHT)",
+      "channels": "SFX_CHANNEL1|SFX_CHANNEL2|SFX_CHANNEL3",
+      "frames": 24,
+      "sha256": "608c564569e54ca7592dd342546ee818746a50c5f739b0cba96b2ed8d8260092",
+      "bytes": 45,
+      "format": "PSGlib stream"
     }
   ]
 }

@@ -1,0 +1,36 @@
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/audio.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/audio.c
+src/audio.c:25: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:36: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:41: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:46: warning 357: pointer to object in read-only code space should be pointer to const
+src/audio.c:51: warning 357: pointer to object in read-only code space should be pointer to const
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/body.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/body.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/cpu_controller.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/cpu_controller.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/fight.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/fight.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/hud.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/hud.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/input.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/input.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/input_pad.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/input_pad.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/input_tier.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/input_tier.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/main.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/main.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/stage.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/stage.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -c -mz80 -o out/obj/stream.rel -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib -I/mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib -I/run/user/1000/codex-desktop/ryo_ryo_integrated_runtime_build_20261008/inc src/stream.c
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc -o out/obj/ryo_ryo_integrated_runtime_probe_20261008.ihx -mz80 --no-std-crt0 --data-loc 0xC000 /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/crt0/crt0_sms.rel out/obj/audio.rel out/obj/body.rel out/obj/cpu_controller.rel out/obj/fight.rel out/obj/hud.rel out/obj/input.rel out/obj/input_pad.rel out/obj/input_tier.rel out/obj/main.rel out/obj/stage.rel out/obj/stream.rel /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/SMSlib/SMSlib.lib /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/PSGlib/PSGlib.lib
+
+$ /mnt/sdcard/Projects/SMSForge/sdk/devkitSMS/tools/makesms -pm -mbank assets/banks/banks_integrada.bin:0:42:2 out/obj/ryo_ryo_integrated_runtime_probe_20261008.ihx out/rom/ryo_ryo_integrated_runtime_probe_20261008.sms
+*** sverx's makesms converter ***
+Merged 688128 bytes from assets/banks/banks_integrada.bin:0x000000 to ROM:0x008000
+Info: 29702 bytes used/720896 total [4.12%] - size of output ROM is 704 KB
+Info: [bank0 0] [bank1 3066] [bank2 16384] [bank3 16384] [bank4 16384] [bank5 16384] [bank6 16384] [bank7 16384] [bank8 16384] [bank9 16384] [bank10 16384] [bank11 16384] [bank12 16384] [bank13 16384] [bank14 16384] [bank15 16384] [bank16 16384] [bank17 16384] [bank18 16384] [bank19 16384] [bank20 16384] [bank21 16384] [bank22 16384] [bank23 16384] [bank24 16384] [bank25 16384] [bank26 16384] [bank27 16384] [bank28 16384] [bank29 16384] [bank30 16384] [bank31 16384] [bank32 16384] [bank33 16384] [bank34 16384] [bank35 16384] [bank36 16384] [bank37 16384] [bank38 16384] [bank39 16384] [bank40 16384] [bank41 16384] [bank42 16384] [bank43 16384] bytes free
+Info: SEGA header found, checksum updated
+Info: ROM size padded to 704 KB

@@ -49,3 +49,22 @@ Aproximar / afastar → escolher normal ou especial → o oponente guarda ou lev
 ## Benchmark (régua, não fonte)
 HAMOOPIG-SGDK / TaiketsuUltraHeroGenesis: FSM, hitboxes, rounds, feedback.
 SSF2T arcade: densidade, silhueta, timing. Pixels só com tradução nativa.
+
+## Contrato de engine reutilizável (MSSF2T v1)
+
+O projeto hospedeiro também é a primeira implementação de uma engine de luta
+1v1 configurável. O núcleo não conhece nomes de personagens, golpes ou palco:
+esses dados entram por tabelas compiladas offline. Cada lutador declara o modo
+de controle (`HUMAN`, `CPU`, `DUMMY` ou `REPLAY`) por partida; neutral humano
+não autoriza a CPU a assumir o controle.
+
+O tick possui uma única leitura de input de 16 bits para os dois controles,
+normalizada antes de qualquer conversão para `unsigned char`. Contatos são
+fotografados antes de dano, com identidade de ataque e resolução simétrica;
+HUD, áudio e render apenas consomem o evento produzido pelo núcleo. Reset de
+round e partida limpa explicitamente timers, histórico, projéteis, stream,
+eventos e resultado. Timeout e empate são resultados distintos de KO.
+
+Esta seção define a direção da engine; só capacidades marcadas como
+`testado_em_emulador` na memória operacional podem ser promovidas como
+implementadas.

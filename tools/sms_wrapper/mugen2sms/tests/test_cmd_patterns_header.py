@@ -117,3 +117,7 @@ def test_relatorio_registra_procedencia_e_os_bytes_dos_quatro_padroes(tmp_path):
 
 def test_self_check_nao_depende_do_acervo():
     assert cmd_patterns.main(["--self-check"]) == 0
+
+
+# Escopo donor: le SMS_projects/luta_mugen (doc/ EIO na midia). Deselecionado por --project rev2.
+pytestmark = pytest.mark.donor

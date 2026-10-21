@@ -1,0 +1,41 @@
+{
+  "schema": "sms_subagent_session_v1",
+  "artifact_kind": "session_qa_request",
+  "task_id": "75289c59b7934010ae593205b97cdf6a",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T",
+  "producer_id": "/root",
+  "worker_id": "/root/native_audio_qa",
+  "lane": "audio_qa",
+  "scope": "private audio signal and duration only; no musical fidelity, gameplay or FPS approval",
+  "rom": {
+    "path": "/mnt/sdcard/Projects/SMSForge/doc/curation/evidence/2026-10-05_native_subagent_qa/audio_request/rom.sms",
+    "sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3"
+  },
+  "inputs": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/out/rom/MSSF2T.sms",
+      "sha256": "71af64d1cad938dd49a45a9d1cf93ae2203d3e80d19b4d1b546120f4a008beb3"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/doc/10-memory-bank.md",
+      "sha256": "82b97ea990542ddcb5905c29ea05951375bf0522f356c2f3b9dadcc00eb62658"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/doc/11-gdd.md",
+      "sha256": "7655250774d0888b1fe554ab25cbdf341175b8fe7828d056080fba7e214412eb"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/doc/15-tdd.md",
+      "sha256": "a78125fd13171b615f1f4cf03f998d5fefd57bf68a0e1e73c2aa32fc36c8255f"
+    }
+  ],
+  "cases": [
+    {
+      "id": "private_signal",
+      "axis": "audio_signal",
+      "proof": "audio",
+      "seconds": 4,
+      "expectation": "Private session produces nonzero PCM signal for >=95% of 4 requested seconds, bound to exact ROM/session PID. Signal only; do not approve notes/music fidelity."
+    }
+  ]
+}

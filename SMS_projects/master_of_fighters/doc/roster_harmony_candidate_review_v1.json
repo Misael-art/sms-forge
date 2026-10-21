@@ -1,0 +1,358 @@
+{
+  "schema": "smsforge.roster_harmony_profile.v1",
+  "project": "master_of_fighters",
+  "date": "2026-10-04",
+  "status": "owner_rejected_aesthetic_revision_required",
+  "source_board_path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_frame00_candidate_v1.png",
+  "purpose": "Record scale compliance separately from owner-rejected aesthetics: the candidate pixels remain source-only until morphology, cutout, color grouping, and shared finish pass review.",
+  "anchor": {
+    "character": "hayato",
+    "sprite_path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+    "role": "owner-approved scale and pixel-cluster finish reference only; identity, costume and palette are not borrowed by other characters"
+  },
+  "explicit_owner_constraints": [
+    "Golden Axe Warrior is no taller than Alis.",
+    "Dr. Social reads at least as large as Joe Musashi while remaining lean.",
+    "Landau keeps the approved character design while matching the roster pixel-art production finish of Hayato.",
+    "Alis and J.J. must not read as chibi.",
+    "All roster sprites must be reviewed together for scale, style and morphology.",
+    "Use Joe Musashi as the lean human morphology reference, not as a source of edge or palette defects.",
+    "Make head/face, torso/waist and limbs read as human proportions; avoid squat bodies, oversized heads and thickened limbs.",
+    "Separate correct palette entries from palette use: coherent material clusters, no dithering, halo, or decorative color speckles.",
+    "A common roster board must include recorded visual outcomes for morphology, clean cutout, palette grouping and shared finish."
+  ],
+  "derived_working_targets_note": "Pixel bands are reviewable working targets inferred from the measured Hayato sprite and owner constraints; they are not hardware limits. Width measures the opaque outer silhouette including hair, cape, weapon and shield, so it screens visual occupancy and never replaces a human body-proportion review.",
+  "width_measurement_note": "The measured width includes all visible equipment and hair. Use width relations as a coarse perceived-size screen; judge torso/limb build and chibi read in the common review board.",
+  "required_visual_review_axes": [
+    "identity_palette",
+    "head_torso_leg_proportion",
+    "limb_mass",
+    "cutout_cleanliness",
+    "palette_cluster_harmony",
+    "rendering_harmony",
+    "native_size_readability"
+  ],
+  "relative_constraints": [
+    {
+      "id": "golden_axe_not_taller_than_alis",
+      "left": "golden_axe_warrior",
+      "right": "alis_landale",
+      "relation": "height_lte"
+    },
+    {
+      "id": "dr_social_matches_joe_scale",
+      "left": "dr_social",
+      "right": "joe_musashi",
+      "relation": "height_near",
+      "max_difference_px": 3
+    },
+    {
+      "id": "dr_social_width_near_joe",
+      "left": "dr_social",
+      "right": "joe_musashi",
+      "relation": "width_near",
+      "max_difference_px": 8
+    }
+  ],
+  "visual_standard": [
+    "One common baseline and native sprite scale; nearest-neighbor enlargement is presentation only.",
+    "Use each source game for identity and palette values; no character borrows another character’s colors.",
+    "Hayato is the finish/cluster reference; Joe is the lean body-proportion reference. These authorities are separate.",
+    "Check human head/face, torso/waist and limb mass; avoid stocky/chibi reads and wide limbs unless the approved concept requires them.",
+    "Keep exact SMS palette entries but group them by material with deliberate base/shadow/highlight clusters; no dithering, halo or color speckles.",
+    "Inspect cutout edges at native size and 4x nearest-neighbor on light and dark backgrounds; run resource and material-region audits where defined.",
+    "Record pass/fail/pending separately for identity/palette, anatomy, cutout, color grouping, shared finish and native readability.",
+    "A dimension pass never approves identity, visual style, animation, resource integration or ROM."
+  ],
+  "characters": [
+    {
+      "key": "golden_axe_warrior",
+      "name": "Golden Axe Warrior",
+      "concept_reference_path": "data/source_art/concept_art/ga_warrior/review_drafts/image_iterations/ga_warrior_concept_sheet_v2_preview.png",
+      "concept_reference_sha256": "45a5a01101ae00254da3fcbcd5a5e3537b1731ef4901a89a9560c7c19d237c91",
+      "concept_direction": "owner_confirmed_harmonized_reference",
+      "sprite_path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_sms_96px_harmony_candidate_v2.png",
+      "sprite_sha256": "f9dab0a54c0821d7e7c5c810013d822854ed9cb1626b1b617347c65fc6fceeb7",
+      "cell_size_px": [
+        96,
+        96
+      ],
+      "columns": 4,
+      "frame_index": 0,
+      "transparent_index": 0,
+      "measured_visible_size_px": null,
+      "target_width_px": [
+        58,
+        68
+      ],
+      "target_height_px": [
+        72,
+        75
+      ],
+      "visual_review": {
+        "identity_palette": "pass",
+        "head_torso_leg_proportion": "fail",
+        "limb_mass": "fail",
+        "cutout_cleanliness": "pending",
+        "palette_cluster_harmony": "pending",
+        "rendering_harmony": "fail",
+        "native_size_readability": "pass"
+      },
+      "sprite_status_at_audit": "owner-rejected aesthetic proposal; frame 00 only; revise source art before resubmission",
+      "game": "Golden Axe Warrior",
+      "short_observation": "Owner requested leaner human build, cleaner color clusters and shared pixel finish."
+    },
+    {
+      "key": "hayato",
+      "name": "Hayato",
+      "concept_reference_path": "data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "concept_reference_sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "concept_direction": "owner_confirmed_harmonized_reference",
+      "sprite_path": "data/source_art/sprite_studies/hayato/hayato_idle_12f_sms_80px_v2_cleanup.png",
+      "sprite_sha256": "eb962d3ab9dd7b02a37034a8054ee2d3164b07f1fbb0adac45cae6a57bed10ce",
+      "cell_size_px": [
+        80,
+        80
+      ],
+      "columns": 4,
+      "frame_index": 0,
+      "transparent_index": 0,
+      "measured_visible_size_px": null,
+      "target_width_px": [
+        50,
+        58
+      ],
+      "target_height_px": [
+        74,
+        76
+      ],
+      "visual_review": {
+        "identity_palette": "pass",
+        "head_torso_leg_proportion": "pass",
+        "limb_mass": "pass",
+        "cutout_cleanliness": "pass",
+        "palette_cluster_harmony": "pass",
+        "rendering_harmony": "pass",
+        "native_size_readability": "pass"
+      },
+      "sprite_status_at_audit": "frame-00 reference only",
+      "game": "Kenseiden",
+      "short_observation": "Scale and pixel-cluster finish reference only; do not copy identity or palette."
+    },
+    {
+      "key": "joe_musashi",
+      "name": "Joe Musashi",
+      "concept_reference_path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_shadow_dancer_model_user_approved.png",
+      "concept_reference_sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+      "concept_direction": "owner_confirmed_harmonized_reference",
+      "sprite_path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+      "sprite_sha256": "f04da4b2c4930340315b19f5061cf7dc2dc4b6f86567cebfe6bc366a0019bd8d",
+      "cell_size_px": [
+        80,
+        80
+      ],
+      "columns": 4,
+      "frame_index": 0,
+      "transparent_index": 0,
+      "measured_visible_size_px": null,
+      "target_width_px": [
+        58,
+        66
+      ],
+      "target_height_px": [
+        78,
+        82
+      ],
+      "visual_review": {
+        "identity_palette": "pass",
+        "head_torso_leg_proportion": "pass",
+        "limb_mass": "pass",
+        "cutout_cleanliness": "fail",
+        "palette_cluster_harmony": "pending",
+        "rendering_harmony": "pass",
+        "native_size_readability": "pass"
+      },
+      "sprite_status_at_audit": "owner-rejected cutout; morphology reference only; source sheet is not approved",
+      "game": "Shinobi / Shadow Dancer",
+      "short_observation": "Lean morphology anchor; owner flagged dirty halo/cutout for revision."
+    },
+    {
+      "key": "dr_social",
+      "name": "Dr. Ferdinand Social",
+      "concept_reference_path": "data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png",
+      "concept_reference_sha256": "164ed0b1dbcdd27ff554f6d2ac743824461a861006feb8efde9630fe04f3b4d4",
+      "concept_direction": "owner_confirmed_harmonized_reference",
+      "sprite_path": "data/source_art/sprite_studies/dr_social/dr_social_idle_12f_sms_96px_harmony_candidate_v2.png",
+      "sprite_sha256": "7271cc3bf922089fb217ee3ff1bc76438c4d07592973f0266af0b48fd4aeec05",
+      "cell_size_px": [
+        96,
+        96
+      ],
+      "columns": 4,
+      "frame_index": 0,
+      "transparent_index": 0,
+      "measured_visible_size_px": null,
+      "target_width_px": [
+        50,
+        64
+      ],
+      "target_height_px": [
+        78,
+        82
+      ],
+      "visual_review": {
+        "identity_palette": "pass",
+        "head_torso_leg_proportion": "fail",
+        "limb_mass": "fail",
+        "cutout_cleanliness": "pending",
+        "palette_cluster_harmony": "pending",
+        "rendering_harmony": "fail",
+        "native_size_readability": "pass"
+      },
+      "sprite_status_at_audit": "owner-rejected aesthetic proposal; frame 00 only; revise source art before resubmission",
+      "game": "Master of Darkness",
+      "short_observation": "Owner requested leaner human build, cleaner color clusters and shared pixel finish."
+    },
+    {
+      "key": "alis_landale",
+      "name": "Alis Landale",
+      "concept_reference_path": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+      "concept_reference_sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+      "concept_direction": "owner_confirmed_harmonized_reference",
+      "sprite_path": "data/source_art/sprite_studies/alis/alis_idle_12f_sms_96px_harmony_candidate_v6_scale75.png",
+      "sprite_sha256": "29454068bc6da9089f699b46a0191c08c167bf9eb43a0a4e63c064e894a1281d",
+      "cell_size_px": [
+        96,
+        96
+      ],
+      "columns": 4,
+      "frame_index": 0,
+      "transparent_index": 0,
+      "measured_visible_size_px": null,
+      "target_width_px": [
+        54,
+        68
+      ],
+      "target_height_px": [
+        74,
+        76
+      ],
+      "visual_review": {
+        "identity_palette": "pass",
+        "head_torso_leg_proportion": "fail",
+        "limb_mass": "fail",
+        "cutout_cleanliness": "pending",
+        "palette_cluster_harmony": "pending",
+        "rendering_harmony": "fail",
+        "native_size_readability": "pass"
+      },
+      "sprite_status_at_audit": "owner-rejected aesthetic proposal; frame 00 only; revise source art before resubmission",
+      "game": "Phantasy Star",
+      "short_observation": "Owner requested leaner human build, cleaner color clusters and shared pixel finish."
+    },
+    {
+      "key": "landau",
+      "name": "Landau",
+      "concept_reference_path": "data/source_art/concept_art/lord_of_the_sword/lord_of_the_sword_concept_sheet_v1.png",
+      "concept_reference_sha256": "6603901f400025739fa48297f4502484761a52ed15737b840e3ed0de0d64b5b8",
+      "concept_direction": "owner_confirmed_harmonized_reference",
+      "sprite_path": "data/source_art/sprite_studies/lord_of_the_sword/landau_idle_12f_sms_96px_harmony_candidate_v3_scale75.png",
+      "sprite_sha256": "aa436edd6bc224b48860b55ba5a351a0cc88f07cfcd2ab6c4b0968cb95f02c22",
+      "cell_size_px": [
+        96,
+        96
+      ],
+      "columns": 4,
+      "frame_index": 0,
+      "transparent_index": 0,
+      "measured_visible_size_px": null,
+      "target_width_px": [
+        54,
+        66
+      ],
+      "target_height_px": [
+        74,
+        76
+      ],
+      "visual_review": {
+        "identity_palette": "pass",
+        "head_torso_leg_proportion": "fail",
+        "limb_mass": "fail",
+        "cutout_cleanliness": "pending",
+        "palette_cluster_harmony": "pending",
+        "rendering_harmony": "fail",
+        "native_size_readability": "pass"
+      },
+      "sprite_status_at_audit": "owner-rejected aesthetic proposal; frame 00 only; revise source art before resubmission",
+      "game": "Lord of the Sword",
+      "short_observation": "Owner requested leaner human build, cleaner color clusters and shared pixel finish."
+    },
+    {
+      "key": "jj",
+      "name": "J.J.",
+      "concept_reference_path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "concept_reference_sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "concept_direction": "owner_confirmed_harmonized_reference",
+      "sprite_path": "data/source_art/sprite_studies/jj_zillion_ii/jj_idle_12f_sms_96px_harmony_candidate_v6_scale75.png",
+      "sprite_sha256": "4ee64f65ebb6259594846b021ca2fdc63d0e8f5b6077629c42913b09482d0fcc",
+      "cell_size_px": [
+        96,
+        96
+      ],
+      "columns": 4,
+      "frame_index": 0,
+      "transparent_index": 0,
+      "measured_visible_size_px": null,
+      "target_width_px": [
+        54,
+        66
+      ],
+      "target_height_px": [
+        74,
+        78
+      ],
+      "visual_review": {
+        "identity_palette": "pass",
+        "head_torso_leg_proportion": "fail",
+        "limb_mass": "fail",
+        "cutout_cleanliness": "pending",
+        "palette_cluster_harmony": "pending",
+        "rendering_harmony": "fail",
+        "native_size_readability": "pass"
+      },
+      "sprite_status_at_audit": "owner-rejected aesthetic proposal; frame 00 only; revise source art before resubmission",
+      "game": "Zillion II: The Tri Formation",
+      "short_observation": "Owner requested leaner human build, cleaner color clusters and shared pixel finish."
+    }
+  ],
+  "revision_note_2026_10_04": "The owner accepted the common scale comparison and generally correct palette values, but rejected this aesthetic proposal: Joe cutout dirt; stocky/chibi morphology in other characters; and color-cluster/finish pollution. New review axes are mandatory. Scale bands and sprite pixels remain unchanged in this review record.",
+  "audit_report_path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_candidate_frame00_audit_v2.json",
+  "morphology_anchor": {
+    "character": "joe_musashi",
+    "sprite_path": "data/source_art/sprite_studies/joe_musashi_shadow_dancer_sms/joe_musashi_idle_12f_sms_80px_v2.png",
+    "role": "owner-designated reference for lean human head/torso/limb proportions and fighter mass only; do not copy its cutout/edge defects, costume, palette or rendering finish"
+  },
+  "owner_review": {
+    "date": "2026-10-04",
+    "status": "rejected_for_aesthetic_revision",
+    "source": "/run/user/1000/codex-desktop/tmp/codex-clipboard-75ffad7a-ae88-49e5-b2be-a2b82253438c.png",
+    "source_sha256": "2d3911cae3e2a0952fb724b2fd6d9b054e7e983b8593160c2ba10949899b98db",
+    "accepted_axes": [
+      "common scale comparison",
+      "palette values are generally on direction"
+    ],
+    "rejected_axes": [
+      "lean human morphology",
+      "clean Joe cutout",
+      "palette cluster harmony",
+      "shared rendering finish"
+    ],
+    "observations": [
+      "Joe Musashi has visible dirt/halo around the cutout; prior clean-edge lessons did not prevent regression.",
+      "Other roster figures read stocky/chibi, with overly wide limbs and less convincing human head/face proportions than Joe.",
+      "Keep the declared Master System palette values, but regroup color into quieter coherent material clusters; some conversions read color-polluted.",
+      "The earlier concepts had stronger painting/cluster quality; palette conversion must preserve that clarity rather than add noise."
+    ],
+    "revision_direction": "Use Joe only as a lean-morphology reference and Hayato only as a pixel-finish reference. Revise original sprite source on the native grid; do not fix anatomy by whole-sprite scaling."
+  }
+}

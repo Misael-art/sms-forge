@@ -3,7 +3,7 @@
   "asset_id": "dr_social_model_sheet_08_32bit_mecha_chibi_v1",
   "producer": "codex_art_production",
   "asset": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png",
     "sha256": "7b1340ab917b8571635882f08fc4ebef9052afced1766b62ab7d307c22a9f665",
     "kind": "character_concept_model_sheet",
     "dimensions_px": [
@@ -12,7 +12,7 @@
     ]
   },
   "source_evidence": {
-    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png",
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_08_32bit_mecha_chibi/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png",
     "sha256": "2e5f3b6371e56be1384ec44e6c4b9d64915ca22e10dfb4d2c535584f9e5b3c1d"
   },
   "required_characters": [
@@ -31,14 +31,18 @@
     "equipment_and_weapon_continuity",
     "cross_view_consistency",
     "legibility_and_crop_integrity",
-    "human_traits_and_unapproved_details"
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
   ],
   "characters": [
     {
       "id": "dr_ferdinand_social",
       "references": [
         {
-          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
           "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
           "role": "approved form/layout reference"
         },
@@ -54,7 +58,7 @@
         },
         {
           "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
-          "sha256": "00492903909d559fd78227ee9116efcf1b96595b75de12194f79338760c07ddc",
+          "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
           "role": "style descriptor, not independently validated"
         }
       ],
@@ -120,6 +124,22 @@
         "human_traits_and_unapproved_details": {
           "status": "pending",
           "note": "Review pending; producer did not approve this art."
+        },
+        "artist_reference_and_scope": {
+          "status": "pending",
+          "note": "Artist/reference role and limits are recorded; independent review pending."
+        },
+        "distinctive_style_signature": {
+          "status": "pending",
+          "note": "Distinctive style signature is registered; visual comparison pending."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Trace each posed limb from shoulder through hand; visual decision pending."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Review identity/rendering coherence across views and distinction from neighboring styles; pending."
         }
       }
     }
@@ -131,5 +151,18 @@
     "approved": false
   },
   "promotion_status": "candidate_only; blocked_until_independent_review_and_owner_approval",
-  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval"
+  "claim_ceiling": "concept_model_sheet_candidate_only; no sprite, animation, SMS resource, ROM, or emulator approval",
+  "catalog_index": 8,
+  "artistic_style_reference": {
+    "named_artist": null,
+    "reference_role_and_scope": "No individual artist attribution assigned for Mega Man 8 in this curation. Keep the game’s animated sci-fi mascot direction as the reference until a title-specific credit is verified.",
+    "source_url": null,
+    "attribution_status": "individual_credit_unverified",
+    "style_signature": [
+      "clean cel-animation contour",
+      "rounded mechanical joints and simplified shapes",
+      "bright 2–3 tone color blocks"
+    ],
+    "basis_and_limits": "Style descriptors come from the selected game reference, not a named artist."
+  }
 }

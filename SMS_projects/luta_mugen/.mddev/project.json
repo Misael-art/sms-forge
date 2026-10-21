@@ -12,18 +12,19 @@
       "SMSlib",
       "PSGlib"
     ],
+    "code_size_sources": [
+      "src/fight.c",
+      "src/main.c",
+      "src/input.c",
+      "src/stream.c",
+      "src/audio.c",
+      "src/input_pad.c",
+      "src/input_tier.c"
+    ],
     "makesms_extra": [
       "-pm",
       "-mbank",
-      "out/local_study/generated/versus_cut/ken_scene_bank2.bin:0:1:2",
-      "-mbank",
-      "out/local_study/generated/versus_cut/ken_scene_bank3.bin:0:1:3",
-      "-mbank",
-      "out/local_study/generated/versus_cut/ken_scene_bank4.bin:0:1:4",
-      "-mbank",
-      "out/local_study/generated/versus_cut/ryu_scene_bank5.bin:0:1:5",
-      "-mbank",
-      "out/local_study/generated/versus_cut/ryu_scene_bank6.bin:0:1:6"
+      "out/local_study/ryo_terry_cmdv4_20261008/versus_scene_banks_02.bin:0:107:2"
     ]
   },
   "skeleton_version": 1,

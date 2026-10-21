@@ -1,0 +1,70 @@
+{
+  "schema": "project_learning_candidate_v1",
+  "date": "2026-10-06",
+  "status": "pending_future_curation",
+  "canonical_lesson_id": null,
+  "dedup_key": "sms_mugen_vblank_stage_profile_causal_attribution_20261006",
+  "existing_lessons_to_review": [
+    "L061",
+    "L071",
+    "L082",
+    "L091",
+    "L099"
+  ],
+  "scope": "Ryo/Ryo diagnostics in luta_mugen builds v079–v083 only. This does not generalize a safe VCounter band or streaming budget to other projects.",
+  "observations": [
+    {
+      "topic": "An ORed stage mask detects exposure but cannot assign the first failing stage",
+      "fact": "v079 ROM SHA 30e2edbf6597010abbca1c5512085c9e008abeb866955ef8b636983eea4b0de7 sealed 3,000 frames with vovf_delta=245 and vline_min=5. The post-stage OR mask was 0x0F, meaning at least one sampled boundary after each of stream, palette, HUD and SAT was below 0xC0 during the window. Because bits accumulate across frames, it does not identify which stage first crossed on an individual frame.",
+      "interpretation": "Keep the v079 result as a detection-only profile. Do not attribute all 245 spills to the streamer or claim each stage independently caused an overflow.",
+      "evidence": [
+        "out/evidence/sessions/df7c787e291d4d5486265e050ca8f281/worst_frame/v079_stage_profile.json",
+        "changelog/roms/build_v079/rom.sms"
+      ]
+    },
+    {
+      "topic": "A rolling multi-pair burst increased the measured spill count",
+      "fact": "v080 changed stream_step to continue round-robin uploads while VCounter remained in 0xC0..0xDF. In a sealed 3,000-frame private session on ROM SHA ca5620efb7148c7272e3dcdee7f64f2df060b8666b4705ffbda7f1250bc5f0ab, vovf_delta rose to 442 and vline_min fell to 0. Stage counters read after stream/palette/HUD/SAT were 212/212/212/442. The calculated interval deltas were 212/0/0/230; the profile did not sample immediately before stream, so the first 212 are not yet proven to begin inside stream_step.",
+      "interpretation": "Do not promote the rolling burst or E0 threshold as safe. Revert to a two-pair maximum and add a before-stream counter before drawing a causal conclusion. Test the adjusted path on a new exact ROM SHA.",
+      "evidence": [
+        "out/evidence/sessions/031a39b06a534fd6897ed9bae5a7fb2f/worst_frame/v080_stage_counts.json",
+        "changelog/roms/build_v080/rom.sms"
+      ]
+    },
+    {
+      "topic": "A pre-stage baseline makes aggregate stage counts attributable",
+      "fact": "v081 ROM SHA 96cc53084408bee302ee6c435bbcb2d3833d8f2e0b0d2542f64006a88e49de05 added a before-stream counter and capped stream_step at two pairs total per frame. In 3,000 sealed frames the pre-stream count was 0, after-stream 212, after-palette/HUD 212, and after-SAT 442; after-SAT equaled the canonical vovf count. Thus 212 frames first crossed at or during stream_step and another 230 crossed during SAT update, with no first-crossing delta at palette or HUD. vovf_delta remained 442, so the two-pair cap did not improve this ROM over the rolling burst.",
+      "interpretation": "The VBlank work before stream is not the source in this measured window. Stream and SAT are two independently observed crossing boundaries; do not collapse them into a single cause. The next experiment limits to one pair total to estimate its effect before modifying SAT behavior.",
+      "evidence": [
+        "out/evidence/sessions/d4d59021c6c64a13b2e511167699029d/worst_frame/v081_stage_counts.json",
+        "changelog/roms/build_v081/rom.sms"
+      ]
+    },
+    {
+      "topic": "One pair per VBlank reduces, but does not remove, stream-stage spill",
+      "fact": "v082 ROM SHA c1603ee0e804cb0c645a7255c6a4363dee33ad525adeb33921ea1828d6a2d351 capped stream_step at one 64-byte pair total. In 3,000 sealed frames it reduced vovf_delta from 442 to 106. Stage counters were 0 before stream, 105 after stream/palette/HUD and 106 after SAT; the final counter matches vovf. Thus 105 crossings first appeared by the stream boundary and one during SAT. This confirms the cap reduces load but the tested C0..DF start band still permits spill.",
+      "interpretation": "Do not promote one pair or C0..DF as a safe cadence. The next experiment narrows the start band to C0..CF, measures the same window and checks visual/runtime latency separately.",
+      "evidence": [
+        "out/evidence/sessions/7da4cdeb7fdd49d29da11163e5cfe584/worst_frame/v082_stage_counts.json",
+        "changelog/roms/build_v082/rom.sms"
+      ]
+    },
+    {
+      "topic": "Narrowing the one-pair admission band did not change the measured spill",
+      "fact": "v083 ROM SHA d4858b9f8e3d0b7bd0b162b1a1509d43adb2419895328b238d37eb9fe2ccb64c retained the one-pair cap and narrowed admission to VCounter C0..CF. Its first boot attempt timed out before readiness and produced no measurement. A retry in private session 122d091a887a4ff58867505a3b0f1495 sealed 3,000 frames/50 s: vovf_delta=106, vline_min=0, with 0/105/105/105/106 at before-stream/after-stream/palette/HUD/SAT. The boundary deltas were 105 at stream and 1 at SAT, identical to v082.",
+      "interpretation": "The tested narrower start band did not reduce spill in this workload. This does not prove the band has no timing effect in other frame phases or workloads. Optimize per-pair setup outside VBlank and measure a new ROM before changing SAT behavior or promoting a budget.",
+      "evidence": [
+        "out/evidence/sessions/122d091a887a4ff58867505a3b0f1495/worst_frame/v083_stage_counts_retry1.json",
+        "out/evidence/sessions/122d091a887a4ff58867505a3b0f1495/worst_frame/closed_session.json",
+        "changelog/roms/build_v083/rom.sms"
+      ]
+    }
+  ],
+  "future_curation_actions": [
+    "Compare with L061/L071/L082 before assigning a canonical lesson ID.",
+    "Retain per-stage counters in one sealed 3,000-frame window and include a pre-stage sample so spill differences have an explicit baseline.",
+    "Keep any VCounter safety limit specific to this measured ROM/layout until another backend independently measures its own budget.",
+    "Do not treat the C0..CF admission threshold as an improvement over C0..DF for this workload; the sealed spill profile was unchanged."
+  ],
+  "promotion": "Pending future curation; no central doctrine, SMS_GLOBAL, learning ledger, or global measurement tool changed."
+}

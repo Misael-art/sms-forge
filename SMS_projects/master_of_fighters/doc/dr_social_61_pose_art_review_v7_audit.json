@@ -1,0 +1,29 @@
+{
+  "schema": "sms_art_review_checklist_report_v1",
+  "status": "pending",
+  "exit_code": 2,
+  "asset_id": "dr_social_61_pose_sms_conversion_v7",
+  "characters_reviewed": 1,
+  "axis_counts": {
+    "pass": 0,
+    "fail": 0,
+    "pending": 9,
+    "not_applicable": 0
+  },
+  "failed_axes": [],
+  "pending_axes": [
+    "dr_ferdinand_social.pixel_clusters",
+    "dr_ferdinand_social.face_detail_readability",
+    "dr_ferdinand_social.outline_and_cutout",
+    "dr_ferdinand_social.material_shading",
+    "dr_ferdinand_social.material_shadow_flow_coherence",
+    "dr_ferdinand_social.hand_weapon_attachment",
+    "dr_ferdinand_social.equipment_geometry",
+    "dr_ferdinand_social.frame_pose_integrity",
+    "dr_ferdinand_social.native_size_readability",
+    "owner_approval",
+    "independent_review"
+  ],
+  "problems": [],
+  "claim_ceiling": "checklist_completeness_only; artistic_truth_requires_human_review"
+}

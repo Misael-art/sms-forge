@@ -1,0 +1,136 @@
+{
+  "scope": "Approximate offline mono model; no emulator, hardware/cycle/filter/DC certification",
+  "mode_tests": [
+    {
+      "mode": 0,
+      "files": [
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode0_a.wav",
+          "sha256": "f6190ea90347ee368cb317064336d1c2b3b95d3cea81249db1603eef232f63fb",
+          "seconds": 1.0
+        },
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode0_b.wav",
+          "sha256": "f6190ea90347ee368cb317064336d1c2b3b95d3cea81249db1603eef232f63fb",
+          "seconds": 1.0
+        }
+      ],
+      "nominal_step_hz": 6991.298828125
+    },
+    {
+      "mode": 1,
+      "files": [
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode1_a.wav",
+          "sha256": "5e110adee4a35d95343b34b31112e0fa464ee60344cd280177be13db6f11e1ad",
+          "seconds": 1.0
+        },
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode1_b.wav",
+          "sha256": "5e110adee4a35d95343b34b31112e0fa464ee60344cd280177be13db6f11e1ad",
+          "seconds": 1.0
+        }
+      ],
+      "nominal_step_hz": 3495.6494140625
+    },
+    {
+      "mode": 2,
+      "files": [
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode2_a.wav",
+          "sha256": "2a03e4e480aa2f1ea1c6139c06ef152079de4cdb7a5d8829a367c20fad70b03c",
+          "seconds": 1.0
+        },
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode2_b.wav",
+          "sha256": "2a03e4e480aa2f1ea1c6139c06ef152079de4cdb7a5d8829a367c20fad70b03c",
+          "seconds": 1.0
+        }
+      ],
+      "nominal_step_hz": 1747.82470703125
+    },
+    {
+      "mode": 3,
+      "files": [
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode3_a.wav",
+          "sha256": "69695dc616f60db3ef05d8d891a4eafaa7d5bcd9479b6dc06ddcf9af363c9aa7",
+          "seconds": 1.0
+        },
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode3_b.wav",
+          "sha256": "69695dc616f60db3ef05d8d891a4eafaa7d5bcd9479b6dc06ddcf9af363c9aa7",
+          "seconds": 1.0
+        }
+      ],
+      "nominal_step_hz": 440.39677657480314
+    },
+    {
+      "mode": 4,
+      "files": [
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode4_a.wav",
+          "sha256": "ad1a6adcea6be054e04f8afe27cd21339374fa94d1cdc1552c11e31fc7121ffa",
+          "seconds": 1.0
+        },
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode4_b.wav",
+          "sha256": "ad1a6adcea6be054e04f8afe27cd21339374fa94d1cdc1552c11e31fc7121ffa",
+          "seconds": 1.0
+        }
+      ],
+      "nominal_step_hz": 6991.298828125
+    },
+    {
+      "mode": 5,
+      "files": [
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode5_a.wav",
+          "sha256": "73c39a085ed657bc62c2248d454cf97dc14c90739980959c1c6a8189f1bba6ed",
+          "seconds": 1.0
+        },
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode5_b.wav",
+          "sha256": "73c39a085ed657bc62c2248d454cf97dc14c90739980959c1c6a8189f1bba6ed",
+          "seconds": 1.0
+        }
+      ],
+      "nominal_step_hz": 3495.6494140625
+    },
+    {
+      "mode": 6,
+      "files": [
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode6_a.wav",
+          "sha256": "6a824db2a9e1a2130f9fafc8c5ac7bd24fcf3d9d8092060d13c21dedb366f222",
+          "seconds": 1.0
+        },
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode6_b.wav",
+          "sha256": "6a824db2a9e1a2130f9fafc8c5ac7bd24fcf3d9d8092060d13c21dedb366f222",
+          "seconds": 1.0
+        }
+      ],
+      "nominal_step_hz": 1747.82470703125
+    },
+    {
+      "mode": 7,
+      "files": [
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode7_a.wav",
+          "sha256": "4ecfd8eab41c2693ced380991ae32692798ea3f7f3302c0865b1f231af555af5",
+          "seconds": 1.0
+        },
+        {
+          "path": "/tmp/smsforge-curation-20261013/audio/preview_mode7_b.wav",
+          "sha256": "4ecfd8eab41c2693ced380991ae32692798ea3f7f3302c0865b1f231af555af5",
+          "seconds": 1.0
+        }
+      ],
+      "nominal_step_hz": 440.39677657480314
+    }
+  ],
+  "a4_period": 254,
+  "a4_peak_fft_hz": 440.0,
+  "a4_sha256": "262df3401f1020b53c2bb571ecb627a1d51209f994159b3fedfcb07c877f56ef"
+}

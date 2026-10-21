@@ -1,0 +1,1180 @@
+{
+  "schema": "sms_sprite_manifest_strict_focused_validation_v1",
+  "tool_sha256": "9c35c091c30699aedb7588098b2b16e2fc3e02b41695ae1f0a19edd6ae210004",
+  "selfcheck": "PASS after bounding synthetic tall-pair tile IDs to byte range",
+  "cases": [
+    {
+      "case": "sprite_size_'16x16'",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite_size must be hardware mode 8x8 or 8x16; wide art needs metasprites"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "sprite_size_'32x32'",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite_size must be hardware mode 8x8 or 8x16; wide art needs metasprites"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "sprite_size_[]",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite_size must be hardware mode 8x8 or 8x16; wide art needs metasprites"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "sprites_{}",
+      "pass": true,
+      "report": {
+        "sprites": 0,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprites must be an array in SAT order"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "sprites_[None]",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: entry must be an object"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "screen_h_192.0",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "screen_h 192.0 fora dos modos do VDP (192, 224, 240); integer required"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "screen_h_True",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "screen_h True fora dos modos do VDP (192, 224, 240); integer required"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "zoomed_1",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "zoomed must be boolean"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "sat_terminated_'false'",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sat_terminated must be boolean"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "x_True",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: x must be integer 0..255"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "x_-1",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: x must be integer 0..255"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "tile_256",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: tile must be integer 0..255"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "y_-1",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: y must be integer 0..255; negative/wrapped Y is outside this profile"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "y_256",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: y must be integer 0..255; negative/wrapped Y is outside this profile"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "y_40.9",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: y must be integer 0..255; negative/wrapped Y is outside this profile"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "y_'40'",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: y must be integer 0..255; negative/wrapped Y is outside this profile"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "hidden_'false'",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "sprite 0: hidden must be boolean"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "manifest_None",
+      "pass": true,
+      "report": {
+        "sprites": 0,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "manifest must be an object"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "manifest_[]",
+      "pass": true,
+      "report": {
+        "sprites": 0,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "manifest must be an object"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "manifest_1",
+      "pass": true,
+      "report": {
+        "sprites": 0,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "manifest must be an object"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "manifest_'bad'",
+      "pass": true,
+      "report": {
+        "sprites": 0,
+        "peak_per_line": 0,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": [
+          "manifest must be an object"
+        ],
+        "scope": "declared_SMSlib_entries_only; negative/wrapped_Y_not_modelled"
+      }
+    },
+    {
+      "case": "valid_8x8",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 1,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "case": "valid_8x16",
+      "pass": true,
+      "report": {
+        "sprites": 1,
+        "peak_per_line": 1,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "case": "CLI_invalid_JSON",
+      "pass": true,
+      "exit_code": 1,
+      "stdout": "{\"sprites\": 0, \"peak_per_line\": 0, \"violations\": [\"manifest unreadable: Expecting value: line 1 column 1 (char 0)\"]}\n[FAIL] manifest unreadable: Expecting value: line 1 column 1 (char 0)\n",
+      "stderr": ""
+    }
+  ],
+  "real_diagnostic_manifests": [
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_CR01.json",
+      "sha256": "49fe8943be2924fc6c3cf0f2cab373a3361d4381cfec976fbfaf43711edb2cf1",
+      "pass": true,
+      "report": {
+        "sprites": 41,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_CR02.json",
+      "sha256": "defe50e9a42e4a4bc836c441d81c893ae087c73fddf3693f7afb5ec44b189efb",
+      "pass": true,
+      "report": {
+        "sprites": 42,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_CR03.json",
+      "sha256": "24b99e6d19070a05f88dc6d6c38cb7a2c7600a8d7ba94aadc1518048fd897576",
+      "pass": true,
+      "report": {
+        "sprites": 38,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_CR04.json",
+      "sha256": "6b826407e4c3c9c7c4a41ce0b49d7031e5a31187629e25d2530cb62b503d6114",
+      "pass": true,
+      "report": {
+        "sprites": 38,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_CR05.json",
+      "sha256": "2b2c32fd48197888a574f6a7ae5744c6c4e58be72771f7a504f93133ae0a2298",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_DA01.json",
+      "sha256": "4c247a0f46b1a89c5d963d747741b739a5b0b74583067823eae167ebfe7f59a4",
+      "pass": true,
+      "report": {
+        "sprites": 46,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_DA02.json",
+      "sha256": "4b0aaed0f4eeda4d39c416a46889f3c197aecd96173c50cc064444af1581c59d",
+      "pass": true,
+      "report": {
+        "sprites": 45,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_DA03.json",
+      "sha256": "917899d4a7724c8b1052ee9ac72d8e77fd8adca7f54360f135543608e3460644",
+      "pass": true,
+      "report": {
+        "sprites": 40,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_DA04.json",
+      "sha256": "93a67ac823d16c5c19bc0086fbc873a00fbd2a869f29db54daf282dd61d320ff",
+      "pass": true,
+      "report": {
+        "sprites": 47,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_DA05.json",
+      "sha256": "bc8724f46beaf84e21bfe2c1eb9fdce2cbc04f21692f274e1f44bf98758dcf3c",
+      "pass": true,
+      "report": {
+        "sprites": 41,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_DA06.json",
+      "sha256": "2a969a966427b78bbd7a42adac3ab6740060f0f5b10c4807a10bf290f9fbb0f1",
+      "pass": true,
+      "report": {
+        "sprites": 39,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_DA07.json",
+      "sha256": "5e26a631f9297513450902bd52646e5f36539a5a5bd8220a892d6cd6a0f3577d",
+      "pass": true,
+      "report": {
+        "sprites": 47,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_DA08.json",
+      "sha256": "44fb64058d063a7eaefadb7098e394e53912fb531221dc7058c2dbb719e8b1a8",
+      "pass": true,
+      "report": {
+        "sprites": 44,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_GU01.json",
+      "sha256": "2cf570928d90573d9968731b456d4ae48c52eaf582e8847eea09dd2ca89c7c74",
+      "pass": true,
+      "report": {
+        "sprites": 51,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_GU02.json",
+      "sha256": "4f9545a0dbdfc9c5e45d33840d5d9bb684a0858b10288b018346a7742cf0ee57",
+      "pass": true,
+      "report": {
+        "sprites": 46,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_GU03.json",
+      "sha256": "35c50d66aa0d2bb5a621eac26d95d2b8bb706592ae5035f41de72244af90db5a",
+      "pass": true,
+      "report": {
+        "sprites": 44,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_GU04.json",
+      "sha256": "7e92f2705a7b2a7174b0bb322fa79b1ef3c7971480e4a9d1886ba39807e85adf",
+      "pass": true,
+      "report": {
+        "sprites": 45,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_ID01.json",
+      "sha256": "4e0d3476b69b086f93a9509ecddfb7ea918ebccf884770ff179682b6b2ef7de3",
+      "pass": true,
+      "report": {
+        "sprites": 42,
+        "peak_per_line": 6,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_ID02.json",
+      "sha256": "c6b6d94b617e7c1e379ef708a31e3f20a229865dc4dc0d08de236d32f4b0f95d",
+      "pass": true,
+      "report": {
+        "sprites": 44,
+        "peak_per_line": 6,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_ID03.json",
+      "sha256": "a7dcd32f545571939955afdf57a4ce8da2ad422bf285186e52d377955f3d88fd",
+      "pass": true,
+      "report": {
+        "sprites": 42,
+        "peak_per_line": 6,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_ID04.json",
+      "sha256": "5deb8ea95a01de281a0b5bd734600ea5e8ef758e0038c2e4596b7372f1127e47",
+      "pass": true,
+      "report": {
+        "sprites": 41,
+        "peak_per_line": 6,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_JU01.json",
+      "sha256": "c2da233dee36795c2f92d0fcd5ca60ccd893d0d0f0fd1948a8b6573f819c9125",
+      "pass": true,
+      "report": {
+        "sprites": 45,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_JU02.json",
+      "sha256": "98ef962f1e11f1e52f1c272acac552d193b0a52368fe756e62843de33cfbeca0",
+      "pass": true,
+      "report": {
+        "sprites": 46,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_JU03.json",
+      "sha256": "e01d376b0fdd0db5ceba79f4fceced570b0757dbf4c8ee4a5b4e7bb3542aa440",
+      "pass": true,
+      "report": {
+        "sprites": 45,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_JU04.json",
+      "sha256": "1669ea8f62b3575ba83a17b77f0894ceb44933c52375c589da7fc351bf798f7d",
+      "pass": true,
+      "report": {
+        "sprites": 36,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_JU05.json",
+      "sha256": "a95132a6b9c727d6540ac731cf11a007993f9d73ec221f3b858b0397a0f18f5f",
+      "pass": true,
+      "report": {
+        "sprites": 37,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_JU06.json",
+      "sha256": "fb911dd27149a9983bac8307f18aa1b8bb772e029f38568ee67205b854623cbf",
+      "pass": true,
+      "report": {
+        "sprites": 48,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_JU07.json",
+      "sha256": "74d39ef26b704722b9aaf87084a094b73d6750fce89bc8d707d5fc78e58b1ac3",
+      "pass": true,
+      "report": {
+        "sprites": 40,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_JU08.json",
+      "sha256": "0501fc0131a9160198ff173e061baf01e0b7b7fdf9f26a511f195e524a52b5c0",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_KF01.json",
+      "sha256": "f1b78b89341dde0a9b96c7c9baa67234f11f342b0c575eab84eee33dcf28bb3b",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_KF02.json",
+      "sha256": "03a27569475ade891c85de5198d44d94252c693b1076bf37c205a88927c75947",
+      "pass": true,
+      "report": {
+        "sprites": 34,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_KF03.json",
+      "sha256": "2b8041b022813bcb6bd3db870fe75ea7ba9890d2a5337891ab95dc31704c9927",
+      "pass": true,
+      "report": {
+        "sprites": 36,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_KF04.json",
+      "sha256": "d73751d43da226aaca82e5ecceb676fb20e2bc26b856bcf87119bdeb0c7411f2",
+      "pass": true,
+      "report": {
+        "sprites": 35,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_KF05.json",
+      "sha256": "33a389dfdb230bebdd6ab790194cf94110c1ef075f31c32f673cbda366adda8f",
+      "pass": true,
+      "report": {
+        "sprites": 28,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_KF06.json",
+      "sha256": "07ae0f63ddce78946be63be1a79b2aa21a8ec3cf1fd5d055f241e87d3f34f96f",
+      "pass": true,
+      "report": {
+        "sprites": 25,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_KF07.json",
+      "sha256": "07a2d92f31e3cd5ecd6dd310a5da4cd37e1504bc1d1806d68796edb9d7d10768",
+      "pass": true,
+      "report": {
+        "sprites": 22,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_KF08.json",
+      "sha256": "58123b5b6dda976941ce59b261a0cefd205853597b8145380b101092fc6479c0",
+      "pass": true,
+      "report": {
+        "sprites": 23,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_TR01.json",
+      "sha256": "cd25ac44761b12ebf4a2cd0c64007e36ed6682b9423c33ce9c3b2f38be8d4600",
+      "pass": true,
+      "report": {
+        "sprites": 33,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_TR02.json",
+      "sha256": "2814790c27f0096a51531d86972266b308266faf0f54ff20b3a749832964996a",
+      "pass": true,
+      "report": {
+        "sprites": 33,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_TR03.json",
+      "sha256": "d83d6549ce204a8d25138467439168a07235d4f2b148624c6301822c7552f2b9",
+      "pass": true,
+      "report": {
+        "sprites": 34,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_TR04.json",
+      "sha256": "400f3736c1e57a21749c0cd01bff5770709a0657fccb40b46bcacd77ae0a2d99",
+      "pass": true,
+      "report": {
+        "sprites": 33,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_TR05.json",
+      "sha256": "a13d942a06f323034518940d72dbbdb8e2d615f52544fbdb409eadb1f3fe8058",
+      "pass": true,
+      "report": {
+        "sprites": 38,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_TR06.json",
+      "sha256": "bd299376fe96b8593dddab2bce71d3ad0e363746fa2753241001193c2fe4a67c",
+      "pass": true,
+      "report": {
+        "sprites": 38,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_TR07.json",
+      "sha256": "26e71eada502a667b23aa365544d44cc08fc0e9fcb352c68cd802ce6b3944094",
+      "pass": true,
+      "report": {
+        "sprites": 39,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_TR08.json",
+      "sha256": "65b1e96d1cf2836344c557ea292ffb1cafc2fb7bff291331bae87fb8817ae5cd",
+      "pass": true,
+      "report": {
+        "sprites": 35,
+        "peak_per_line": 6,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WB01.json",
+      "sha256": "753e5a231ac859fb167c17bde38035d77273a6e887a1356d11a4540d7041beca",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WB02.json",
+      "sha256": "eb59c8be51a6c52b0517e9590ced0a8e391fd5c872648c178266d12f3f21d08f",
+      "pass": true,
+      "report": {
+        "sprites": 44,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WB03.json",
+      "sha256": "a10cde9323952586667d93ef53a06a36881786b28af3dc6796ac061825583bb6",
+      "pass": true,
+      "report": {
+        "sprites": 45,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WB04.json",
+      "sha256": "b68da88476cdb70a81a2d0be5cc214eb8b2aa08e6fe01412120e84146a353a54",
+      "pass": true,
+      "report": {
+        "sprites": 41,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WB05.json",
+      "sha256": "609430d0ed7df32406b06c0357e619c860d34e875c4a81c6721af8f327850ec6",
+      "pass": true,
+      "report": {
+        "sprites": 44,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WB06.json",
+      "sha256": "2477a82164671c07efa50d41e76925442ee4c42c502165005f4ad41e67ea0f0c",
+      "pass": true,
+      "report": {
+        "sprites": 44,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WB07.json",
+      "sha256": "97fcbeccb093da535e024428c80f8bcc7be98fb2b7d12da105296af4747c0aca",
+      "pass": true,
+      "report": {
+        "sprites": 41,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WB08.json",
+      "sha256": "f87adeb24645cc811dbed767b71a2cab425b6e59fe9cfaed05b89a9a08cd4bea",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WF01.json",
+      "sha256": "117d71a3a4bf3e2557c28c63c425b287227b713b29ca41cdb4899cdd3130430a",
+      "pass": true,
+      "report": {
+        "sprites": 42,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WF02.json",
+      "sha256": "5633992426efcab95b10c89c51ef8a91f3b2fb724d7838ed9804bf259923c6d5",
+      "pass": true,
+      "report": {
+        "sprites": 44,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WF03.json",
+      "sha256": "aeffc03b258b1fc930c94a2bea953480adb5ab787c92ee955a031fe0f8fa3868",
+      "pass": true,
+      "report": {
+        "sprites": 44,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WF04.json",
+      "sha256": "15c0e6cfc617f761cedf8c5bd606ed794627461341c3c19013dba5ef161ec47d",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WF05.json",
+      "sha256": "ae192639545bed3f1b06a8880ffda73a9accae090a7911fb97eb67f29696e3b9",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WF06.json",
+      "sha256": "4ca8061a34f96cd4fe569c671af1019371f32b744107c783265fe4c480fa81c0",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WF07.json",
+      "sha256": "e00a52914d5a9ea425f47ce03571696ee829d9bac4304f433e784c7a12d5298d",
+      "pass": true,
+      "report": {
+        "sprites": 46,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v1/project/doc/sprite_scene_WF08.json",
+      "sha256": "612a84120a348093e14604253134b4618237b32c02d68d1b5f45112833a33b5a",
+      "pass": true,
+      "report": {
+        "sprites": 39,
+        "peak_per_line": 6,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_CR01.json",
+      "sha256": "49fe8943be2924fc6c3cf0f2cab373a3361d4381cfec976fbfaf43711edb2cf1",
+      "pass": true,
+      "report": {
+        "sprites": 41,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_CR02.json",
+      "sha256": "defe50e9a42e4a4bc836c441d81c893ae087c73fddf3693f7afb5ec44b189efb",
+      "pass": true,
+      "report": {
+        "sprites": 42,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_CR03.json",
+      "sha256": "24b99e6d19070a05f88dc6d6c38cb7a2c7600a8d7ba94aadc1518048fd897576",
+      "pass": true,
+      "report": {
+        "sprites": 38,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_CR04.json",
+      "sha256": "6b826407e4c3c9c7c4a41ce0b49d7031e5a31187629e25d2530cb62b503d6114",
+      "pass": true,
+      "report": {
+        "sprites": 38,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_CR05.json",
+      "sha256": "2b2c32fd48197888a574f6a7ae5744c6c4e58be72771f7a504f93133ae0a2298",
+      "pass": true,
+      "report": {
+        "sprites": 43,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_DA01.json",
+      "sha256": "4c247a0f46b1a89c5d963d747741b739a5b0b74583067823eae167ebfe7f59a4",
+      "pass": true,
+      "report": {
+        "sprites": 46,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_DA02.json",
+      "sha256": "4b0aaed0f4eeda4d39c416a46889f3c197aecd96173c50cc064444af1581c59d",
+      "pass": true,
+      "report": {
+        "sprites": 45,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_DA03.json",
+      "sha256": "917899d4a7724c8b1052ee9ac72d8e77fd8adca7f54360f135543608e3460644",
+      "pass": true,
+      "report": {
+        "sprites": 40,
+        "peak_per_line": 7,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_probe_v2/project/doc/sprite_scene_DA04.json",
+      "sha256": "93a67ac823d16c5c19bc0086fbc873a00fbd2a869f29db54daf282dd61d320ff",
+      "pass": true,
+      "report": {
+        "sprites": 47,
+        "peak_per_line": 8,
+        "overflow_lines": 0,
+        "overflow": [],
+        "violations": []
+      }
+    }
+  ],
+  "case_count": 24,
+  "real_count": 70,
+  "all_focused_pass": true,
+  "limits": [
+    "No emulator/fullsuite.",
+    "Existing diagnostic manifests only; no dynamic SAT/runtime overflow validation.",
+    "Negative/wrapped Y out of profile; no silicon wrap or SMS1 zoom quirk modelled."
+  ]
+}

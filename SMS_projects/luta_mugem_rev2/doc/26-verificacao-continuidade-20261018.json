@@ -1,0 +1,399 @@
+{
+  "schema": "sms_mugen_rev2_continuation_review_v1",
+  "reviewed_utc": "2026-10-18T09:20:42.678242+00:00",
+  "project": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2",
+  "status": "diagnostic_progress_production_renderer_and_semantics_required",
+  "rom": {
+    "path": "SMS_projects/luta_mugem_rev2/out/rom/luta_mugem_rev2.sms",
+    "bytes": 851968,
+    "sha256": "6f4a3cf5e336c20ff1dc0fb5225345270823350eada55d4d43655cdfca0b6e9a"
+  },
+  "archived_rom": {
+    "path": "SMS_projects/luta_mugem_rev2/changelog/roms/build_v031/rom.sms",
+    "bytes": 851968,
+    "sha256": "6f4a3cf5e336c20ff1dc0fb5225345270823350eada55d4d43655cdfca0b6e9a"
+  },
+  "git_consumer_status": "untracked_at_review_time_no_consumer_commit",
+  "new_build": false,
+  "new_emulator_execution": false,
+  "runtime_or_canonical_skills_modified": false,
+  "created_files": [
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/24-parecer-continuidade-20261018.md",
+      "bytes": 14923,
+      "sha256": "7556dfec75efe4c3497bcacd2b960326069584c7fd55665a7e7a0d8fd78921ff"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/25-prompt-continuidade-20261018.md",
+      "bytes": 23366,
+      "sha256": "59e6ac8872ac29c540d31a304cd766f567479b8b1b05be95efcad0006db2c37a"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "SMS_projects/luta_mugem_rev2/src/main.c",
+      "bytes": 51486,
+      "sha256": "596beb9c756a7dfacf45ddf2cccc07f87ea36e3069b40a3055a33946f205ad61"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/src/fight_input.c",
+      "bytes": 9283,
+      "sha256": "7964630077a26819a595dddf2bce05c462c08766e48ab5cd114345a47482efea"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/src/input.c",
+      "bytes": 12799,
+      "sha256": "8361021a684d0a1291278df4decee96386ddf13639b9c7b0a99b608f2dfe8344"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/src/input_tier.c",
+      "bytes": 845,
+      "sha256": "0101d4c4067d659421b9bc0e23c328de8f58b9210c56268d5cb3fb678c411d75"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/inc/rev2_diag.h",
+      "bytes": 3474,
+      "sha256": "5bd5f3a735729b4c3b0c1d4fca7910bdeb4e0b5e65b522cf1d2cec7f20385e2c"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/inc/fight_input.h",
+      "bytes": 3760,
+      "sha256": "038f90ce972ccf601c63f09359bf786b63e5de39ea42526e2ad457752eef605d"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/inc/input.h",
+      "bytes": 3826,
+      "sha256": "93c48b6302fa4bbe27470a693a3a9e0c8850ad67e933c2218bd92e916c71ff87"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/inc/input_tier.h",
+      "bytes": 1467,
+      "sha256": "baceac61e1eca63a3db39c13cb4561b27fa099637219708e0412542d1707caaa"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+      "bytes": 102649,
+      "sha256": "4ecde649434c5da668145bdece74cb73bc769e86717be9f8bfe709ffb28c51e3"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/11-gdd.md",
+      "bytes": 2830,
+      "sha256": "1219d5d8e3d06434c2e66e52fd3eb568e195d632c451d2235dc08908bd86e15c"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/13-spec-cenas.md",
+      "bytes": 1742,
+      "sha256": "6ab9f846998da485ac74f8931d27699afd15d7d2f5b488f7d46e8ddff5a354f7"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/15-tdd.md",
+      "bytes": 2186,
+      "sha256": "f1c41ccb43d0d589677ebbcbed47d9cf5bc80f6bd9be307ced22a6db5eac364b"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/20-plano-implementacao.md",
+      "bytes": 7205,
+      "sha256": "67e61eabd11343ea36a794dee329d1bb2278980e25bb9881a2754ff135615e02"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/22-intake-doador.json",
+      "bytes": 2978,
+      "sha256": "371f75060688d9d533422713691f9e698c0cf22f8e20522d6d216681209beb4d"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/engine_quality_contract.json",
+      "bytes": 9951,
+      "sha256": "474ebe54287405cff9fb6dcfedca6365e54bb0d7b41b5cc2d0cc2f5f65ec5bc0"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/.mddev/project.json",
+      "bytes": 1067,
+      "sha256": "13629554d4c32f76f596b8209f40b21c174ca7f01cad18a15f5bed3f04a2372a"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/build_record.json",
+      "bytes": 691,
+      "sha256": "3f52bdc7222c30798fc8f2961c5fafd62ae4b48bff4b6054599db447b5a346ca"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/logs/wave5b_rom_causal.json",
+      "bytes": 5322,
+      "sha256": "58ac20403637b81921486f0ee824284dc844946017a637e40f34aa857c36e1f2"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/logs/wave5b_rom_causal_run.log",
+      "bytes": 4989,
+      "sha256": "6d7e0693a45b2bacad7f438f61e6e7ffa8517ae1bb025cb0e68b7dd76485f3b1"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/logs/clsn_diff_report.json",
+      "bytes": 7909,
+      "sha256": "30ff632d100645149046132877d06f265670c7afb7f503143ad7d7a9dc3a26b2"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/logs/clsn_needle_scoped.json",
+      "bytes": 8982,
+      "sha256": "9aae97a4b938636682d691baacacbcd7e8ad3ae0c9698f15e328b902a26b80b5"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/tests/input_wave5b_rom_causal.py",
+      "bytes": 26851,
+      "sha256": "ad54356076db0d112161c70641ca941f300b2efbc22e1deb080c6daca78f9c06"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/tests/input_wave5b_diff.py",
+      "bytes": 23298,
+      "sha256": "58eb8d516646b09cc98881dc7b345807c914047e17449ed21cf9ce1bc0eb84cf"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/tests/clsn_source_to_rom_diff.py",
+      "bytes": 41267,
+      "sha256": "2f92e2d227550fabe004ac0c40828adb78b0e7eb3697358d08141f43cf5560ab"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/obj/luta_mugem_rev2.map",
+      "bytes": 38219,
+      "sha256": "83475983b2a08de33860d1970ea2cb951d653b70f3f2d4c58a0d84937ed59af0"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/obj/luta_mugem_rev2.ihx",
+      "bytes": 62510,
+      "sha256": "d0f4224dff4c61bc6fd4d05725ab1a4c53e285f5e03715ab78c2be03b1709e7f"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/obj/fight_input.asm",
+      "bytes": 16324,
+      "sha256": "b708b94c476d3b5664a5177e405322fb759a99924bfbf31a615b5fc101ea3e4b"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/generated/ryu_ken_cross/fight_runtime_data.h",
+      "bytes": 3767,
+      "sha256": "ebf2ef3d1a86147e86d72286274439ecce19c0d4f1bc6ca9ff326a46f4fc5f2a"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/generated/ryu_ken_cross/versus_scene_runtime.h",
+      "bytes": 178244,
+      "sha256": "19edb320606f660a6a13c67933b99a3d5d19e0501acd2995e2250370cac98949"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/generated/ryu_ken_cross/fight_runtime_data_manifest.json",
+      "bytes": 19159,
+      "sha256": "40446a9fd1f3ab4bb19f0226fef4495ca2163555b239db0ea1e59a2abcb76792"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/budget/pilot_report.md",
+      "bytes": 11534,
+      "sha256": "001809acac6ec2e91b1babf0e864985f582992546da63a35c5bdb8ff0ba922fa"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/budget/vram_upload_budget.json",
+      "bytes": 14591,
+      "sha256": "a935c6c9752b72d3d3fe0e6393d8c1d29bbf229885ef554e084346da0e5b19b0"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/budget/scanline_lower_bound.json",
+      "bytes": 19338,
+      "sha256": "df50e8d1d6b902edcd7353bda4d1c040d6d3612a5abe537c156e2d6d340a2bc5"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/semantics/cmd_2button_audit.json",
+      "bytes": 33534,
+      "sha256": "86481f6f4ca31bfafdcfedb649f8842efc887eef0c384483c80129bf289558a3"
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/out/semantics/reachability_matrix.json",
+      "bytes": 251798,
+      "sha256": "88e02c1838b45c4a10c33e9886c1c5c3f36c135f28db6c73fd6d08dfffff7601"
+    }
+  ],
+  "native_independent_reviews": [
+    {
+      "native_agent": "/root/artifact_inventory",
+      "dispatch_tool": "collaboration.followup_task",
+      "scope": "read_only_static_code_or_existing_evidence_review",
+      "new_emulator_execution": false,
+      "report": {
+        "path": "/tmp/mugen-rev2-evidence-review.md",
+        "bytes": 13395,
+        "sha256": "c4259ec980cd20d14054e6b0bef6f6698af958aa9f9b7d456279761ebd4440ad"
+      },
+      "report_text": "# Revisão independente de evidência — luta_mugem_rev2\n\nData: 2026-10-18. Escopo: inspeção somente leitura do projeto `/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2`, fontes dos instrumentos e artefatos já existentes. Nenhum build, teste, self-check ou emulador executado. Nenhum arquivo do projeto modificado. Este parecer verifica custódia, consistência e alcance dos registros; não renova os resultados de execução.\n\n## Parecer\n\nHá progresso técnico verificável em um protótipo de diagnóstico: arquivo ROM atual preservado, importação de um recorte de CLSN com rastreabilidade forte e relato de combate/input na ROM atual coerente com os instrumentos. Não há evidência atual suficiente para promover engine completa, 60 FPS, zero flicker, dois lutadores controlados por IA, fidelidade visual dinâmica ou entrega. A própria memória e o build_record mantêm esse teto, corretamente.\n\n## Achados prioritários\n\n### P1 — Custódia incompleta da execução wave5b atual\n\n- `out/logs/wave5b_rom_causal.json:5` vincula o resultado à ROM atual e à sessão `2881669466e8452ea65d9871ce3c54dc` (linha 6), com PID/display, mas não registra os hashes do emulador/bridge/configuração, leituras RAM brutas ou respostas de cada comando.\n- `tests/input_wave5b_rom_causal.py:153` chama `request(..., \"step\", n)` e descarta o ACK. `Rig.read()` devolve apenas a RAM decodificada; não preserva o `frame` de VDP, sequência e PID dos ACKs como parte de cada checkpoint. O relatório final (linhas 536–558) só conserva agregados e casos selecionados.\n- O wrapper atual mantém `commands.jsonl` na sessão temporária (`tools/sms_wrapper/session_bridge/isolated.py:342`), mas não foi encontrado esse journal em `out/`, nem `session.json` da wave5b no projeto. O diretório `/tmp/smsforge-1000/2881669466e8452ea65d9871ce3c54dc` já não existe nesta inspeção.\n- O log preservado registra cleanup bem sucedido; não há recibo persistido que permita confirmar novamente identidade/processo/fechamento. Isso não prova execução falsa: limita a reauditoria independente do relato 29/29.\n\nContinuidade: repetir os casos relevantes em sessão nova, arquivando antes do cleanup metadados com hashes, journal autenticado, leituras brutas e identificação dos casos/ROM. Não substituir nem invalidar a evidência histórica existente. O `publish` central já possui caminho para copiar journal (`isolated.py:440`); evitar criar outro mecanismo local equivalente.\n\n### P1 — Nenhum selo de desempenho atual; passos, iterações e VDP precisam de vínculo explícito\n\n- ROM atual e arquivo v031 têm SHA-256 idêntico `6f4a3cf5e336c20ff1dc0fb5225345270823350eada55d4d43655cdfca0b6e9a`, 851968 bytes. Não foi localizado selo worst-frame nem medição FPS dessa ROM.\n- Os três selos preservados são de ROMs anteriores e todos dizem `derramou`:\n\n| Artefato sob `out/evidence/sessions/` | ROM | Contagem |\n|---|---|---:|\n| `c765bc6c465540c6ab1af842eac99d1d/worst_frame/wf_m1_attraction.json` | `8880a5e3…` | 2758/3000 |\n| `40755d7124f34bcf81a19c7c1ae24f7f/worst_frame/wf_m2_reseal.json` | `e9a3a1bd…` | 2954/3000 |\n| `2990233e89c44c76a9d65c4c716a0a18/worst_frame/wf_m4l_notelem.json` | `ee07d9a6…` (v022) | 2456/3000 |\n\n- O nome `wf_m2_reseal` não significa wave5b/v031: seu hash é anterior. A memória mais recente já exige novo selo (linha 531).\n- As medições runtime existentes também são históricas e falharam FPS constante: `803b41b1…` [15.57,18.1,17.05], `3b34d5c7…` [19.36,10.6,16.95], `ef379a16…` [15.25,15.84,14.23,9.29,13.66]. Não classificam o desempenho da v031. Os doze `session.json` BlastEm presentes declaram `fps_claim:false` e usam ROMs históricas; não os promover a medição FPS.\n- Na fonte atual, `probe_frame` cresce uma vez por iteração depois de `SMS_waitForVBlank` (`src/main.c:940`); a janela worst-frame é fechada por esse contador, e `VCounter` é amostrado só ao fim do corpo (`main.c:1108`). Portanto, seus 3000 são iterações ROM; esse registro isolado não demonstra o número de períodos VDP atravessados nem a fase de cada transferência. Terminar em VBlank também não exclui ter atravessado períodos inteiros.\n- A implementação atual do bridge incrementa `frames` no `Pad.frameFinished()` e usa `target = frames + count` para step (`ForgeSMS.java:102` e seguintes). Valor absoluto 240 após `step 120` não prova que step dobrou: requer o baseline anterior. Os logs A/B históricos preservam frames absolutos 240 e720; o segundo trecho é consistente com incremento480.\n- A wave5b calcula 100 passos solicitados /45 avanços ROM =2.222 e soma6157 passos/2550 ticks; não conserva os ACKs VDP dessa calibração. Logo a unidade dos prazos do harness melhorou (espera pelo contador ROM), mas ainda falta aferir a relação efetiva entre deltaVDP e deltaROM com custódia. Não dividir esses valores pelo tempo de execução do script para declarar FPS nem concluir que todo déficit é do host.\n\nContinuidade: medir, na ROM atual e com dois atores ativos, deltaVDP, deltaROM, relógio nominal e tempo de execução contínua em janelas explícitas; separar custo CPU, fase/custo de uploads VRAM/SAT e interferência do host. Preservar instrumento/ROM imutáveis durante cada medição. Corrigir primeiro qualquer unidade/label impreciso, sem esconder as falhas históricas.\n\n### P1 — Cobertura de combate é um recorte; fidelidade visível ainda não foi demonstrada\n\n- A v031 é Ryu P1 por pad e Ken P2 por scheduler determinístico (12 beats de25 ticks), conforme `src/main.c:756` e `src/fight_input.c:169`. Os dois usam o anel/matcher. Isso não é IA adaptativa, nem AI×AI, nem P2 controlável pelo segundo pad nesta ROM.\n- Dados atuais têm SPECIAL_UNSUPPORTED, HP e HK (`out/generated/ryu_ken_cross/fight_runtime_data.h:8`). LP/LK ausentes da tabela; especial reconhecido conta como sem rota. A memória registra colisão entre HK e especial, supers/remapeamentos pendentes, falta de HITSTUN de fonte e KO terminal sem reset de round (`doc/10-memory-bank.md:513`). Não há base para afirmar elenco completo ou todos os golpes funcionais.\n- O relatório 29/29 sustenta: eco de níveis P1, contadores de rota, HP forte com papel7, checagem CLSN, dano112, guarda observada, danos nos dois lados ao longo da execução e KO P2 com vida0. O caso `B_IA_nao_escreve_por_fora_do_input` só exige dano acompanhado de algum comando na mesma janela (`tests/input_wave5b_rom_causal.py:306`); esse assert é correlação. A leitura estática de `input_stage()` corrobora que essa função só aplica papel, mas o assert sozinho não exclui outros escritores.\n- Casos C exigem eco e `role_changes>=1`, não o ID esperado de cada contexto. O clamp esquerdo exige16; o direito só exige `16 < x <=240`, não chegada exata240. O caso G aceita dano menor que dois HP (224), apesar de nesta rodada reportar0. Simultaneidade é rota na mesma janela e dano cruzado em até três iterações, não troca de golpes no mesmo tick.\n- O KO medido é P2: o ramo que verifica role terminal e tentativa de comando após KO próprio do humano não foi exercitado nessa rodada. Não há sonda role P2. A janela pós-KO usa pad0, não uma tentativa ativa de novo golpe sobre o morto.\n- `combat_step(frames_now[0],frames_now[1])` usa a pose lógica antes de `request_pose` completar upload; a emissão só ocorre quando `current.pose_global == poses_req` (`main.c:1008`, `1039`). A própria fonte limita a igualdade lógico/visível a ausência de stall. Assim, dano correto em RAM não demonstra que a pose correspondente estava visível no contato. Precisa correlacionar a timeline de input→role→frame AIR→pose pedida/exibida→CLSN→dano e vídeo framebuffer da mesma sessão.\n- Não foram localizados MP4/WebM em `out/`. A prova v029 é screenshot de checkpoint, não prova de animação ou fluidez. Maxline13/used_max128 são achados históricos da composição; o probe bruto v029 preserva omittedSAT8. Não há nova prova v031 que quite zero flicker ou ausência de omissão permanente. Telemetria de scanline atual está desligada (`main.c:51`).\n\nContinuidade: fechar o caminho crítico visual e o orçamento antes de UI/polimento; preservar uma matriz por par/ROM e casos por comando, controle, defesa, HITSTUN, KO/reset, espelhamento e input concorrente. Decisões humanas pendentes não devem virar remapeamento inventado.\n\n### P2 — Quatro pares bootados em versões distintas não equivalem a quatro pares com combate atual\n\nHashes foram recalculados dos arquivos preservados:\n\n| Par descrito na memória | Build | SHA prefixo | Alcance registrado |\n|---|---|---|---|\n| Ken/Ken | v022 | `ee07d9a6…` | boot/render histórico e worst-frame falho |\n| Ryu/Ryu | v023 | `e5834144…` | boot/render/determinismo histórico |\n| Ken/Ryu | v024 | `870da893…` | boot/render/determinismo histórico |\n| Ryu/Ken | v025 | `bd144ee6…` | boot/render/determinismo histórico |\n| Ryu/Ken | v029 | `4c38eeb9…` | combate scriptado/probe+checkpoint |\n| Ryu/Ken | v031 | `6f4a3cf5…` | input humano/IA, relatório29casos e CLSN byte-bound |\n\nNão extrapolar wave5b/c para outros pares. Os paths `p1_ken` e `p2_ryu` do pacote atual têm rótulos invertidos em relação ao conteúdo; o report CLSN identifica corretamente `P1_RYU` e `P2_KEN8`. Usar identidade e hash da fonte/manifests, não o nome da pasta, no handoff.\n\n### P2 — Regressões de manutenção e persistência que merecem entrar no próximo lote\n\n- O projeto inteiro aparece `?? SMS_projects/luta_mugem_rev2/` no status Git, portanto nenhum commit ancora seus arquivos nesta inspeção. Guardar uma baseline revisável com inventário/hashes antes de outra modificação concorrente; não misturar com mudanças externas.\n- `tests/sim_combat_wave5a.py` continua modelando o driver de papéis removido; memória já pede relabel. Preservar como modelo histórico, sem tratá-lo como oráculo da v031.\n- Warning110 do caminho AI_BEAT_JUMP segue item declarado aberto; esta revisão não examinou o ASM nem comprovou defeito. Não ocultar warning nem declará-lo bug sem essa análise.\n- A memória linha494 contém erro aritmético: 61440 reinterpretado como signed16 é −4096, não −3926. A classe do problema Q8.8/unsigned está correta; corrigir a cifra documental no lote apropriado.\n\n## Evidência bem preservada e verificada nesta leitura\n\n- ROM atual e v031: igualdade exata de SHA/tamanho indicada acima. `out/build_record.json:20` confere e mantém boot/gameplay/FPS/áudio/memory-bank false; `build:true` é relato existente, não rebuild independente.\n- Instrumento wave5b SHA `ad54356076db0d112161c70641ca941f300b2efbc22e1deb080c6daca78f9c06`; report SHA `58ac20403637b81921486f0ee824284dc844946017a637e40f34aa857c36e1f2`; log SHA `6d7e0693a45b2bacad7f438f61e6e7ffa8517ae1bb025cb0e68b7dd76485f3b1`. Batem a memória.\n- Wave5a PNG v029 SHA `b2ab49f01574566f280c8e2601a1220926d6df7c71bec3962e76e7fb6c7322db`, em `out/evidence/m2_wave5a/` e arquivo de changelog v029. JSON vincula ROM4c38…, sessão0c617…, emulador/bridge/config; `probe_read_f1027.json` preserva ACK seq12/PID/frameVDP2220 e bytes RAM com frameROM1027, hit3/guard1/dano110/42/vida890/958. O JSON original ainda aponta caminho temporário, mas cópia persistida e hash correspondem.\n- Report CLSN A SHA `30ff632d100645149046132877d06f265670c7afb7f503143ad7d7a9dc3a26b2`; B SHA `9aae97a4b938636682d691baacacbcd7e8ad3ae0c9698f15e328b902a26b80b5`, ambos ROM atual. Recalculei todos os12 hashes em `inputs` de A: AIRs, manifests/headers, map, ihx e ROM continuam iguais.\n- A registra59arrays/33aliases/184checagens sentinela sem divergência; B registra194caixas presentes no recorte. Esses números foram conferidos nos relatórios e no código de método, sem reexecutar comparação nesta revisão. A é posicional; B é presença de bytes e não localização. Ryu possui183ações,12importadas; Ken102,12importadas. Não são prova de importação integral dos personagens nem de execução correta de todo CLSN.\n- A hipótese carry-forward versus reset+default foi explorada em B (17frames/27caixas de ataque diferentes), mas esse diferencial não autentica qual semântica MUGEN é correta. O coordenador informou documentação primária Elecbyte compatível com default persistente e Clsn simples por frame. Usar essa autoridade para resolver a dúvida documental, sem converter a alternativa carry-forward em bug provado do conversor e sem alegar replay MUGEN comparativo ausente.\n\n## Ordem recomendada para o prompt de continuidade\n\n1. Congelar baselinev031 e recuperar/preservar custódia; explicitar tabela par→build→ROM→casos→evidência.\n2. Fechar unidade temporal com ACKs VDP e loop ROM; medir a v031 atual sem extrapolar números históricos nem steps a FPS.\n3. Correlacionar o contato lógico com pose exibida e ausência de stall/omissões em vídeo fresco; escolher/medir solução de representação para limite8sprites/linha antes de expansão de UI.\n4. Tratar warning e modelo histórico em lote focado; documentar autoridade CLSN já disponível.\n5. Após decisões explícitas de remapeamento e representação, completar estados/cmds e repetir por par com IA/controles declarados. HUD/rounds/reset/menu/áudio seguem escopo futuro, com gates próprios. Nenhuma aprovação desta revisão promove AAA, zero flicker, 60FPS ou engine completa.\n"
+    },
+    {
+      "native_agent": "/root/curation_coverage",
+      "dispatch_tool": "collaboration.followup_task",
+      "scope": "read_only_static_code_or_existing_evidence_review",
+      "new_emulator_execution": false,
+      "report": {
+        "path": "/tmp/mugen-rev2-code-review.md",
+        "bytes": 13478,
+        "sha256": "663b2400fcb707d43bba21758d7291e9e9a7339506400d7d9fc544161ddfc99f"
+      },
+      "report_text": "# Revisão estática independente — luta_mugem_rev2\n\nData: 2026-10-18. Escopo: renderer/cache/pacing, input/combate wave-5a–c, dados gerados e plano. Somente leitura: não alterei o workspace, não compilei, não executei testes nem emuladores. Os números de execução abaixo são registros históricos lidos, não medições novas deste revisor. SHA dos insumos em `/tmp/mugen-rev2-code-review-inputs.json`. Projeto WIP: nenhuma promoção de gameplay, hardware, FPS, áudio ou qualidade artística é feita.\n\n## Parecer\n\nHá avanços reais: consumidor C de input compartilhado entre humano e driver de pad da IA; colisão geométrica CLSN, dano, guarda, hitstop, pusher e KO observáveis; prova de presença/identidade dos bytes CLSN fonte→dados→ROM registrada na wave-5c. A arquitetura em execução continua sendo um diagnóstico por papéis fixos. Ainda não é uma engine Ken/Ryu completa nem execução fiel do CNS.\n\nA prioridade seguinte deve fechar **renderer + calendário de execução + acoplamento do combate ao quadro apresentado** em um pequeno recorte completo. HUD, menus, áudio e mais golpes não removem esses bloqueadores. O plano M1/M2 já oferece a ordem adequada; o estado atual não autoriza pular M1 e anunciar M3 fechado.\n\n## Achados por prioridade\n\n### P1 — cache/streamer pode tornar invisível o ator enquanto a simulação continua causando dano\n\n**Confirmado no código, ocorrência/frequência atual não medida nesta revisão.**\n\n- `src/main.c:324–353`: upload runtime é um par de 64 B; `main.c:961` chama um único lado alternado por iteração. Cada lado recebe, em regime alternado, um par a cada duas iterações; não é um carregamento de pose por frame.\n- `main.c:359–400`: trocar pose cancela o pending do próprio lado; falta de espaço cancela pending do adversário e pode expulsar current dele. Não existe garantia de residência mínima por lado nem deadline de próxima pose.\n- `main.c:506–555`: FSM/pose avança independentemente da conclusão do upload.\n- `main.c:1008–1009`: dano/pusher usa `frames_now`, a pose lógica. Somente em `main.c:1038–1042` o renderer verifica `current.pose_global == poses_req`; caso contrário não emite **nenhuma** sprite daquele ator.\n- `main.c:1044–1045`: `probe_disp_p*` recebe a pose armazenada em current mesmo quando ela não foi emitida nesta iteração. Esse campo sozinho não prova pose apresentada.\n\nA omissão é declarada no diagnóstico, não um comportamento escondido; constitui bloqueador de produção. Solução deve definir um contrato de apresentação: reserva justa por lado, conjunto residente/next medido, prefetch e deadline, e contador explícito `submitted_pose`/omissão. Não basta trocar por desenhar current antigo e continuar calculando hitboxes da pose nova. Também não basta congelar toda a simulação silenciosamente para esperar cada upload: isso altera input/timing. Escolher a política e medir o recorte fonte completo, incluindo pior transição.\n\n### P1 — calendário atual acumula lógica e SAT depois do VBlank; 60 Hz de emulador não é 60 ticks úteis\n\n**Ordem confirmada estaticamente; desempenho atual requer nova execução.**\n\n`main.c:940` espera VBlank, depois faz upload (`961`), input/FSM/combate (`984–1014`), preparação de metasprites (`1025–1042`) e só então `SMS_copySpritestoSAT` (`1094`). O orçamento precisa separar CPU durante display ativo, preparação em RAM e commit de VDP bounded no VBlank; a ordenação atual não demonstra esse contrato.\n\nO memory bank `doc/10-memory-bank.md:419–426` registra worst-frame **2456/3000 derrames (81,9%)** na ROM **ee07d9a6…**, anterior à v031. `:511` registra **100 passos VDP→45 loops ROM**, razão 2,222, durante a wave-5b, e retrata corretamente a hipótese de botão sem rota. Isso prova distinção de relógios nesse experimento; **não** é medição de FPS contínuo/velocidade nativa e não autoriza converter em um número atual de gameplay FPS. `:514/:531` ainda pede re-selo worst-frame na v031 com ambos os atores e investigação do warning 110.\n\nPróximo passo mensurável: baseline na ROM atual, telemetria mínima válida, atividade real dos dois lados, maiores transições e rastreio por regiões. Só então aumentar upload/batch, pré-computar metasprites ou mover trabalho para outra fase. Manter os clocks VDP, loop/simulação, input e apresentação separados nos relatórios.\n\n### P1 — esquerda visual não corresponde à colisão espelhada\n\n**Confirmado e explicitamente declarado no código.** `main.c:415–420` conserva tiles da face direita. `:427–432` altera somente a origem; os deslocamentos/pixels internos permanecem os mesmos. Em contraste, `clsn_box_at/screen` e o facing de combate espelham geometria (`main.c:624–654`). Essa combinação não entrega golpes/defesa coerentes em troca de lado. Converter/selecionar face esquerda de tiles e metasprite com pivô preservado, medindo ROM/VRAM/upload adicionais e testando as duas orientações. A prova de bytes CLSN wave-5c não prova render correto.\n\n### P1 — híbrido continua candidato; relatório de budget contém afirmação de VRAM inválida\n\n**Contradição documental confirmada; viabilidade runtime não demonstrada.** `out/budget/pilot_report.md:103–107` diz que 1440 B e 800 B de patterns cabem em região PNT de 1792 B “pattern-wise”. PNT reservada para entradas de name table não é espaço livre simultâneo para os patterns que ela referencia. O mapa VRAM precisa reservar separadamente patterns BG/sprite, PNT, SAT e guardas.\n\nO mesmo relatório `:122–124` declara 6016–6592 B current+next **de um ator**, insuficiente para concluir residência dos dois. O memory bank `:255` resume o candidato sem preservar integralmente essa restrição. `pilot_report:60–89` mede lower bounds que refutam sprite-only para as composições fonte analisadas na escala72–88; não se deve atribuir seus números a toda pose atual (o diagnóstico selecionou outras actions em alguns papéis). O estudo é útil para escolher o próximo protótipo de híbrido, sem aprová-lo como renderer completo.\n\nProduzir mapa físico, composição com corpos sobrepostos/cross-up/canto/pulo/FX, restauração/oclusão/PNT e custo de updates em ROM. Medir delta patterns+PNT dos dois atores no pior frame. O híbrido pode ser feito e testado sem cenário artístico: uma cor de fundo não remove a necessidade de restaurar os tiles BG anteriores.\n\n### P2 — hitstop congela parte do ator, mas pusher e decisões continuam\n\n**Contradição interna confirmada, política fonte ainda precisa ser especificada.** `main.c:515–521` afirma e implementa congelamento de movimento/gravidade/animação em `advance_actor`. Entretanto `pusher_step` (`729–739`) só testa chão e sobreposição: ainda desloca ambos durante stop e também não testa life/KO. `facing_step` (`715–727`) e `input_stage` (`756–813`) ocorrem antes e não recebem stop; comandos/contexto podem trocar papel enquanto o ator está parado pelo hitstop.\n\nDefinir separadamente input buffering, consumo de comando, virada, movimento físico e body push durante hitstop/KO. Congelar o input buffer não é automaticamente a solução; a política deve vir do perfil semântico suportado. Ao aplicar KO em `combat_step:687–692`, os ponteiros/poses previamente calculados continuam os da ação anterior no restante dessa iteração: revalidar snapshots após transição terminal ou tornar a ordem do commit explícita.\n\n### P2 — consumidor de combate ainda é aproximação por papel; não confundir com HitDef/CNS completo\n\n**Limite confirmado, em grande parte bem documentado.** `fight_runtime_data.h:21–28` tem zero source routes; `:33–75` todos source_state são65535. Guarda vem de flags estáticas: crouch e guard têm `S_BLOCKABLE` (`:38–39/:60–61`), e `main.c:676` bloqueia qualquer contato nesses papéis sem distinguir HitFlag, GuardFlag, alto/baixo/ar/guarda correta. Dano é um valor por papel (`main.c:681–686`), hitstop/push por personagem; `hit_done` admite um contato por instância. Não há hitstun, cancel, projétil, entidade helper, super/power ou rehit fiel.\n\n`combat_step` processa lado0 antes do lado1 (`657–707`). KO do primeiro pode retirar a ação do segundo antes da avaliação: não usar a evidência histórica de danos em janela de3 iterações como prova de trade simultâneo. Decidir e testar ordem de resolução/commit, especialmente KO simultâneo.\n\nPróximo recorte: um normal identificado pela fonte e seus triggers, estados/action, HitDef, hitpausetime, hit/guard/recovery, facing e timing. Compilar AOT esse subconjunto consumido; rejeitar/revelar estados fora de perfil. Não construir um VM CNS universal como pré-requisito nem clonar especiais em C por nome de lutador.\n\n### P2 — rotas de input e IA atual não cobrem o produto solicitado\n\n**Confirmado no código/dados.** `fight_runtime_data.h:7–16` emite apenas HP, HK e especial reconhecido sem rota. Não há LP/LK roteados; `fight_input.c:13–20` rejeita especial; `:78–94` só aceita comandos em papel controlável no chão. Isso é um corte declarado, não personagens completos. `main.c:766–775` usa pad físico somente para P1; P2 é driver IA, logo Versus humano×humano ainda não existe.\n\nA IA (`fight_input.c:177–204`, `inc/fight_input.h:67–73`) é função de frame+face, ciclo12×25ticks, sem distância/vida/estado do adversário. Ela é boa ferramenta causal de input pelo mesmo consumidor, mas não é IA de combate reativa ou nível de dificuldade. Separar modo script de QA e controlador de combate por slot.\n\n`input_tier.c:14–20` dispara forte no sexto tick e leve na soltura antes do limiar. Portanto a latência/força depende de ticks efetivamente consumidos, não bridge steps; o atraso percebido deve ser medido em regime contínuo na ROM, junto do polling e apresentação. Remapeamento de golpes/supers a dois botões exige proposta concreta/revisão de contrato, sem bloquear diagnósticos reversíveis nem omitir ações silenciosamente.\n\n### P2 — timing AIR e convenções de fronteira precisam de revisão antes de promoção semântica\n\n`main.c:533–534` chama a duração AIR fiel de “1/100s”; esse comentário não é sustentado pelos artefatos lidos e deve ser confrontado com autoridade Elecbyte, não promovido a lei. O tick da animação é incrementado/avançado antes de sua primeira emissão (`494–555` + `990–1008`); o primeiro quadro finito de uma ação pode ter exposição menor que `dur` nesse calendário, e poses de1tick devem entrar na matriz de fronteiras. Não executei teste diferencial nesta revisão; trato a fidelidade como risco de fronteira a verificar, não como corrupção CLSN provada.\n\nNão alterar parser de caixas por intuição: a ressalva reset/default no memory bank `:527` não prova bug. A autoridade Elecbyte deve decidir a semântica, separando default persistente de caixa específica do quadro.\n\n## O que preservar\n\n- Anel/tier separados do hardware e uso do mesmo `fight_input_step` para ambos os lados; não retornar ao script que escreve papel/dano diretamente.\n- Dados gerados com identidades/fonte e `forge_proxy_unproven` explícito (`fight_runtime_data_manifest.json:168–169/:430–431/:602`). Preservar scopes, não converter proxy em equivalência CNS.\n- Provas CLSN não vazias fonte→dados→ROM e normalização/escala40/49 registradas no memory bank `:516–528`. Elas sustentam os bytes no escopo, não a semântica completa da luta nem a correção do renderer.\n- Correção do harness que conta frames ROM em vez de presumir1bridge-step=1tick; slots/side atuais devem aparecer nos contextos de QA apesar dos nomes legados de diretório `p1_ken/p2_ryu`.\n\n## Ordem proposta ao próximo agente\n\n1. Atualizar sumário operacional com v031, lista de limites atuais e evidências históricas separadas. Manter TDD proposto (`doc/15-tdd.md:3`) e registrar arquitetura real sem fingir implementação de M3. Corrigir inferências de PNT/residência no resumo de budget.\n2. Baseline atual com dois atores e relógios separados; confirmar warning110 no ASM. Medir antes e depois de cada otimização; não repetir profiling completo indefinidamente sem delta causal.\n3. Fechar protótipo visual M1: mapa VRAM, política residente/prefetch/commit, apresentação sem omissão, facing real, scanlines e upload/pior frame. Comparar híbrido a alternativa concreta sob mesmo recorte. Não exigir aprovação para todo experimento; pedir decisão só para mudar contrato do produto/fidelidade.\n4. Fechar M2 vertical de um golpe por fonte (não por alias de papel), input→pose apresentada→CLSN→HitDef→recovery. Acrescentar contratos de hitstop/pusher/KO e teste de fronteiras/troca de lados. Sem cenário.\n5. Escalar Ken/Ken, Ryu/Ryu e cruzados no mesmo caminho gerado; humano/IA por slot + IA reativa e dois pads; projetéis/supers/power/cancels e matriz explícita unsupported/approximate. Só então lifecycle de match/HUD/áudio e front-end M6/M7.\n\n## Limites deste parecer\n\nNão verifiquei os binários das capturas históricas nem os repliquei; li seus registros e SHA no memory bank. Não medi FPS, latência, CPU, VDP, áudio, flicker ou fidelidade artística da ROM atual. Não executei a ferramenta de conversão nem os testes gerados. As propostas acima são próximas decisões/experimentos; nenhum ganho de desempenho ou qualidade é garantido.\n"
+    }
+  ],
+  "commands": [
+    {
+      "command": "rtk proxy env PYTHONPATH=tools/sms_wrapper python3 -m pytest tools/sms_wrapper/mugen2sms/tests --project rev2 -q",
+      "exit_code": 0,
+      "passed": 184,
+      "deselected": 146,
+      "scope": "host tests in selected scope, not emulator acceptance"
+    },
+    {
+      "command": "rtk proxy python3 SMS_projects/luta_mugem_rev2/tests/input_wave5b_rom_causal.py --self-check",
+      "exit_code": 0,
+      "scope": "decoder/contracts only"
+    },
+    {
+      "command": "rtk proxy python3 SMS_projects/luta_mugem_rev2/tests/clsn_source_to_rom_diff.py --self-check",
+      "exit_code": 0,
+      "scope": "synthetic fixtures, original report not overwritten"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_mugen_engine_contract.py --self-check",
+      "exit_code": 0
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_mugen_engine_contract.py --project SMS_projects/luta_mugem_rev2",
+      "exit_code": 0,
+      "mode": "planning"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_mugen_engine_contract.py --project SMS_projects/luta_mugem_rev2 --delivery",
+      "exit_code": 1,
+      "status": "blocked",
+      "unaccepted_capabilities": 12
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/reconcile_claims.py --project SMS_projects/luta_mugem_rev2",
+      "exit_code": 0,
+      "scope": "declared axes consistent; false allowed"
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_debug_markers.py --self-check",
+      "exit_code": 0
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_debug_markers.py --project SMS_projects/luta_mugem_rev2",
+      "exit_code": 0
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_probe_corridor.py --self-check",
+      "exit_code": 0
+    },
+    {
+      "command": "rtk proxy python3 tools/sms_wrapper/audit_probe_corridor.py --project SMS_projects/luta_mugem_rev2 --out /tmp/mugen-rev2-corridor-review",
+      "exit_code": 0,
+      "result": {
+        "fonte": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2/src",
+        "map": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2/out/obj/luta_mugem_rev2.map",
+        "map_sha256": "83475983b2a08de33860d1970ea2cb951d653b70f3f2d4c58a0d84937ed59af0",
+        "sondas": 77,
+        "margin_min": 16,
+        "invasoes": [],
+        "sondas_sumidas": [],
+        "verdicto": "pass",
+        "corredor": "0xC800..0xC8FB",
+        "corredor_lo": 51200,
+        "corredor_hi": 51451,
+        "folga_bytes": 1547
+      }
+    }
+  ],
+  "historical_worst_frame_records": [
+    {
+      "artifact": {
+        "path": "SMS_projects/luta_mugem_rev2/out/evidence/sessions/2990233e89c44c76a9d65c4c716a0a18/worst_frame/wf_m4l_notelem.json",
+        "bytes": 1158,
+        "sha256": "9e3c9f58659f7032664fd7fd25ce326db127bbdaf0b12d1b29aa3d83f442b4e7"
+      },
+      "rom_sha256": "ee07d9a6e06c720d884271f3f766992c0fa24dbbf4b53bd5b1e97b84f2e3635f",
+      "verdict": "derramou",
+      "overflows": 2456,
+      "iterations": 3000,
+      "is_current_rom": false
+    },
+    {
+      "artifact": {
+        "path": "SMS_projects/luta_mugem_rev2/out/evidence/sessions/40755d7124f34bcf81a19c7c1ae24f7f/worst_frame/wf_m2_reseal.json",
+        "bytes": 1157,
+        "sha256": "267b3c3ee15ab4634efd1f35cbb3992a10d1aac32d9a0145d2e99dc491deb39b"
+      },
+      "rom_sha256": "e9a3a1bd66a97696d9b07e86977b147a4b5ec94fe9a72fa2b0195da0255fe190",
+      "verdict": "derramou",
+      "overflows": 2954,
+      "iterations": 3000,
+      "is_current_rom": false
+    },
+    {
+      "artifact": {
+        "path": "SMS_projects/luta_mugem_rev2/out/evidence/sessions/c765bc6c465540c6ab1af842eac99d1d/worst_frame/wf_m1_attraction.json",
+        "bytes": 1153,
+        "sha256": "39d364e359d16224f23cc36b00aba9f7a46b4b5b88540d1d4163f7db9a6b1a42"
+      },
+      "rom_sha256": "8880a5e3814cd9ffedb8894c47e0ab8013cb6287c028cb7e720a8cfb37c00339",
+      "verdict": "derramou",
+      "overflows": 2758,
+      "iterations": 3000,
+      "is_current_rom": false
+    }
+  ],
+  "primary_web_sources": [
+    {
+      "url": "https://www.elecbyte.com/mugendocs/air.html",
+      "title": "The AIR format and standard",
+      "version": "MUGEN 1.0 (2009)",
+      "accessed": "2026-10-18",
+      "supports": [
+        "AIR durations use game ticks, nominal 60 per second",
+        "plain per-element collision versus persistent defaults",
+        "action170 convention is Lose"
+      ],
+      "limit": "documentation, not replay of the original character runtime"
+    },
+    {
+      "url": "https://www.elecbyte.com/mugendocs-11b1/tutorial2.html",
+      "title": "Tutorial Part 2 Collision boxes",
+      "accessed": "2026-10-18",
+      "supports": [
+        "assign boxes to current element; Default for recurring boxes"
+      ]
+    },
+    {
+      "url": "https://www.elecbyte.com/mugendocs/cns.html",
+      "title": "The CNS format",
+      "version": "MUGEN 1.0 (2009)",
+      "accessed": "2026-10-18",
+      "supports": [
+        "states/controllers evaluated with triggers in order"
+      ]
+    }
+  ],
+  "visual_inspection": {
+    "artifact": {
+      "path": "SMS_projects/luta_mugem_rev2/out/evidence/m2_wave5a/m2_wave5a_v029_f1027.png",
+      "bytes": 1935,
+      "sha256": "b2ab49f01574566f280c8e2601a1220926d6df7c71bec3962e76e7fb6c7322db"
+    },
+    "rom_version": "v029_historical",
+    "observation": "two partial/uneven fighter groups on solid black; not approval of v031 or moving render",
+    "new_current_visual_qa": false
+  },
+  "claim_limits": [
+    "no current FPS or worst-frame approval",
+    "historical29/29 preserved but raw session/journal missing",
+    "CLSN byte identity is not dynamic hit correctness",
+    "hybrid selected for experiment, no runtime viability approval",
+    "full four-pair combat and control modes not proved",
+    "no audio/UI/match delivery",
+    "source paths and namespaces may name a different character than their actual manifest identity"
+  ],
+  "git_actions": "no stage, commit, push or branch change",
+  "handoff_review": {
+    "native_agent": "/root/artifact_inventory",
+    "verdict": "no_new_blocker",
+    "applied_clarification": "failing visual/deadline results on frozen v031 are baseline findings, not a requirement to alter it",
+    "verification_record_exists": true
+  }
+}

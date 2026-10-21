@@ -1,0 +1,63 @@
+{
+  "schema": "mof_model_sheet_candidate_v1",
+  "character": "joe_musashi_shadow_dancer_sms",
+  "display_name": "Shinobi / Takashi (Shadow Dancer, Master System reference)",
+  "status": "owner_approved_concept",
+  "owner_visual_review": "approved by owner on 2026-10-03; owner explicitly selected the yellow-accent version",
+  "artifact": "joe_musashi_shadow_dancer_model_user_approved.png",
+  "approved_artifact_sha256": "983e58e159d44f3b8d9bb41baf4b2e856e08e6d3764ae6e28d30db401f9ae1f1",
+  "palette_translated_derivative": "joe_musashi_shadow_dancer_model_v1_sms_palette.png",
+  "asset_type": "concept_model_sheet",
+  "views": [
+    "three-quarter front fighting-ready stance",
+    "rear three-quarter turnaround"
+  ],
+  "dimensions": {
+    "width": 1536,
+    "height": 1024,
+    "format": "RGBA concept image; indexed derivative uses transparent index 0",
+    "transparent_index": 0,
+    "game_sprite_scale_measured": false
+  },
+  "morphology": {
+    "class": "medium",
+    "description": "lean, agile, fully human; no bulky armor"
+  },
+  "palette": {
+    "source": "Shadow Dancer - The Secret Of Shinobi, Master System, Takashi - Standing Right",
+    "source_url": "https://www.smspower.org/Sprites/ShadowDancer-SMS",
+    "source_sha256": "ae6bb1dcb97dee95e917d2cde204da70d161f3c1bab3f3933a96f53fa9fc7639",
+    "mapping": "original source colors rounded to RGB channel x85; black outline mapped to deep wine because index 0 is transparent",
+    "useful_colors": 7,
+    "colors": [
+      {"index": 1, "role": "outline_wine", "rgb": [85, 0, 0], "hex": "#550000"},
+      {"index": 2, "role": "skin_light", "rgb": [255, 170, 85], "hex": "#FFAA55"},
+      {"index": 3, "role": "gi_white", "rgb": [255, 255, 255], "hex": "#FFFFFF"},
+      {"index": 4, "role": "gi_gray_light", "rgb": [170, 170, 170], "hex": "#AAAAAA"},
+      {"index": 5, "role": "gi_gray_deep", "rgb": [85, 85, 85], "hex": "#555555"},
+      {"index": 6, "role": "sash_red", "rgb": [170, 0, 0], "hex": "#AA0000"},
+      {"index": 7, "role": "accent_yellow", "rgb": [255, 255, 0], "hex": "#FFFF00"}
+    ]
+  },
+  "cleanup": {
+    "dithering": false,
+    "grain": false,
+    "background": "transparent",
+    "alpha_threshold_percent": 80,
+    "detached_speckles": "removed by alpha threshold and fixed palette quantization"
+  },
+  "provenance": {
+    "source_kind": "ai_generated_after_palette_and_costume_reference",
+    "external_pixels_copied": false,
+    "reference_role": "costume and color only"
+  },
+  "validation": {
+    "palette_manifest_generator": "pass; 13 palette entries, all 6-bit and <=15 useful colors",
+    "resource_gate": "PASS for indexed derivative: audit_validate_resources.py accepted the 7-color SMS palette"
+  },
+  "production_notes": [
+    "The user-approved image is the design authority for the 12-frame idle study.",
+    "This is a concept model sheet, not a runtime-approved fighter asset.",
+    "The candidate does not replace the existing Joe Musashi palette or change the GDD roster."
+  ]
+}

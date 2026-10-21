@@ -1,0 +1,1185 @@
+{
+  "count": 36,
+  "results": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_battle.psg",
+      "sha256": "67349cfc41833ed4da18235d9e2a9382165606fd91e643e9b9b422fc896d7544",
+      "audit": {
+        "arquivo": "music_battle.psg",
+        "classe": "music",
+        "bytes": 750,
+        "sha256": "67349cfc41833ed4da18235d9e2a9382165606fd91e643e9b9b422fc896d7544",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1280,
+          "notas": {
+            "0": 76,
+            "1": 10,
+            "2": 16
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 14.53,
+            "1": 135.56,
+            "2": 78.67
+          },
+          "camada_respira": {
+            "ch": 1,
+            "gap": 135.56
+          },
+          "atenuacoes": {
+            "0": [
+              1,
+              3,
+              5
+            ],
+            "1": [
+              6,
+              7
+            ],
+            "2": [
+              2,
+              4
+            ],
+            "3": [
+              2,
+              3,
+              4,
+              5,
+              13
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_ken_stage.psg",
+      "sha256": "67349cfc41833ed4da18235d9e2a9382165606fd91e643e9b9b422fc896d7544",
+      "audit": {
+        "arquivo": "music_ken_stage.psg",
+        "classe": "music",
+        "bytes": 750,
+        "sha256": "67349cfc41833ed4da18235d9e2a9382165606fd91e643e9b9b422fc896d7544",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1280,
+          "notas": {
+            "0": 76,
+            "1": 10,
+            "2": 16
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 14.53,
+            "1": 135.56,
+            "2": 78.67
+          },
+          "camada_respira": {
+            "ch": 1,
+            "gap": 135.56
+          },
+          "atenuacoes": {
+            "0": [
+              1,
+              3,
+              5
+            ],
+            "1": [
+              6,
+              7
+            ],
+            "2": [
+              2,
+              4
+            ],
+            "3": [
+              2,
+              3,
+              4,
+              5,
+              13
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/music_title.psg",
+      "sha256": "57126310daca95d295a5ed1255328aafd1ab47cac7343480791811f45d3c2f5f",
+      "audit": {
+        "arquivo": "music_title.psg",
+        "classe": "music",
+        "bytes": 494,
+        "sha256": "57126310daca95d295a5ed1255328aafd1ab47cac7343480791811f45d3c2f5f",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1152,
+          "notas": {
+            "0": 55,
+            "1": 8,
+            "2": 12
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 17.11,
+            "1": 154.29,
+            "2": 102.55
+          },
+          "camada_respira": {
+            "ch": 1,
+            "gap": 154.29
+          },
+          "atenuacoes": {
+            "0": [
+              1,
+              3,
+              5
+            ],
+            "1": [
+              6,
+              7
+            ],
+            "2": [
+              2,
+              4
+            ]
+          },
+          "unison": 0.0
+        },
+        "violacoes": [],
+        "avisos": [
+          "M4: sem comandos de ruido; permitido, nao permite inferir presenca/ausencia de percussao ou qualidade do mix"
+        ],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_down.psg",
+      "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+      "audit": {
+        "arquivo": "sfx_down.psg",
+        "classe": "sfx",
+        "bytes": 91,
+        "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+        "metricas": {
+          "duracao_frames": 30
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_fight.psg",
+      "sha256": "608c564569e54ca7592dd342546ee818746a50c5f739b0cba96b2ed8d8260092",
+      "audit": {
+        "arquivo": "sfx_fight.psg",
+        "classe": "sfx",
+        "bytes": 45,
+        "sha256": "608c564569e54ca7592dd342546ee818746a50c5f739b0cba96b2ed8d8260092",
+        "metricas": {
+          "duracao_frames": 24
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_hit.psg",
+      "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+      "audit": {
+        "arquivo": "sfx_hit.psg",
+        "classe": "sfx",
+        "bytes": 37,
+        "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+        "metricas": {
+          "duracao_frames": 6
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_hurt.psg",
+      "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+      "audit": {
+        "arquivo": "sfx_hurt.psg",
+        "classe": "sfx",
+        "bytes": 49,
+        "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+        "metricas": {
+          "duracao_frames": 16
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/MSSF2T/res/audio/sfx_shot.psg",
+      "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+      "audit": {
+        "arquivo": "sfx_shot.psg",
+        "classe": "sfx",
+        "bytes": 25,
+        "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+        "metricas": {
+          "duracao_frames": 6
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/music_battle.psg",
+      "sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa",
+      "audit": {
+        "arquivo": "music_battle.psg",
+        "classe": "music",
+        "bytes": 1001,
+        "sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 896,
+          "notas": {
+            "0": 36,
+            "1": 64,
+            "2": 32
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 24.8,
+            "1": 14.0,
+            "2": 28.23
+          },
+          "camada_respira": {
+            "ch": 2,
+            "gap": 28.23
+          },
+          "atenuacoes": {
+            "0": [
+              1,
+              4
+            ],
+            "1": [
+              7,
+              9
+            ],
+            "2": [
+              2,
+              7
+            ],
+            "3": [
+              2,
+              8
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/music_title.psg",
+      "sha256": "4c9a95301e623caf339de97ed21e857b105ff4e3433a4743e32c58ea39bcd619",
+      "audit": {
+        "arquivo": "music_title.psg",
+        "classe": "music",
+        "bytes": 1241,
+        "sha256": "4c9a95301e623caf339de97ed21e857b105ff4e3433a4743e32c58ea39bcd619",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1280,
+          "notas": {
+            "0": 26,
+            "1": 32,
+            "2": 16
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 49.6,
+            "1": 40.0,
+            "2": 80.0
+          },
+          "camada_respira": {
+            "ch": 2,
+            "gap": 80.0
+          },
+          "atenuacoes": {
+            "0": [
+              2,
+              5
+            ],
+            "1": [
+              7,
+              9
+            ],
+            "2": [
+              2,
+              7
+            ],
+            "3": [
+              5,
+              6,
+              7
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_down.psg",
+      "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+      "audit": {
+        "arquivo": "sfx_down.psg",
+        "classe": "sfx",
+        "bytes": 91,
+        "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+        "metricas": {
+          "duracao_frames": 30
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_hit.psg",
+      "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+      "audit": {
+        "arquivo": "sfx_hit.psg",
+        "classe": "sfx",
+        "bytes": 37,
+        "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+        "metricas": {
+          "duracao_frames": 6
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_hurt.psg",
+      "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+      "audit": {
+        "arquivo": "sfx_hurt.psg",
+        "classe": "sfx",
+        "bytes": 49,
+        "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+        "metricas": {
+          "duracao_frames": 16
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/arena_nocturna/res/audio/sfx_shot.psg",
+      "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+      "audit": {
+        "arquivo": "sfx_shot.psg",
+        "classe": "sfx",
+        "bytes": 25,
+        "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+        "metricas": {
+          "duracao_frames": 6
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/music_battle.psg",
+      "sha256": "86f9b7cdadc10816310c7fc4f77a6b11c1b5b0f84a37a2897344205596b6b617",
+      "audit": {
+        "arquivo": "music_battle.psg",
+        "classe": "music",
+        "bytes": 881,
+        "sha256": "86f9b7cdadc10816310c7fc4f77a6b11c1b5b0f84a37a2897344205596b6b617",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 768,
+          "notas": {
+            "0": 48,
+            "1": 64,
+            "2": 32
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 16.13,
+            "1": 12.03,
+            "2": 24.0
+          },
+          "camada_respira": {
+            "ch": 2,
+            "gap": 24.0
+          },
+          "atenuacoes": {
+            "0": [
+              1,
+              4
+            ],
+            "1": [
+              7,
+              9
+            ],
+            "2": [
+              2,
+              7
+            ],
+            "3": [
+              3,
+              5
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/music_title.psg",
+      "sha256": "d35dc93b44d504ac51517e422fc6c11e10f2b62bb19291fdd379b69746a41422",
+      "audit": {
+        "arquivo": "music_title.psg",
+        "classe": "music",
+        "bytes": 1100,
+        "sha256": "d35dc93b44d504ac51517e422fc6c11e10f2b62bb19291fdd379b69746a41422",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1152,
+          "notas": {
+            "0": 25,
+            "1": 32,
+            "2": 16
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 45.0,
+            "1": 36.0,
+            "2": 72.0
+          },
+          "camada_respira": {
+            "ch": 2,
+            "gap": 72.0
+          },
+          "atenuacoes": {
+            "0": [
+              2,
+              5
+            ],
+            "1": [
+              7,
+              9
+            ],
+            "2": [
+              2,
+              7
+            ],
+            "3": [
+              4,
+              8
+            ]
+          },
+          "unison": 0.026,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_down.psg",
+      "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+      "audit": {
+        "arquivo": "sfx_down.psg",
+        "classe": "sfx",
+        "bytes": 91,
+        "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+        "metricas": {
+          "duracao_frames": 30
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_hit.psg",
+      "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+      "audit": {
+        "arquivo": "sfx_hit.psg",
+        "classe": "sfx",
+        "bytes": 37,
+        "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+        "metricas": {
+          "duracao_frames": 6
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_hurt.psg",
+      "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+      "audit": {
+        "arquivo": "sfx_hurt.psg",
+        "classe": "sfx",
+        "bytes": 49,
+        "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+        "metricas": {
+          "duracao_frames": 16
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/hamoopig/res/audio/sfx_shot.psg",
+      "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+      "audit": {
+        "arquivo": "sfx_shot.psg",
+        "classe": "sfx",
+        "bytes": 25,
+        "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+        "metricas": {
+          "duracao_frames": 6
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/kage_matsuri/res/audio/music_kage.psg",
+      "sha256": "c582ff359b0102cf5f376bb53ff6656178b166c63be1f60013a0244f1bb3628e",
+      "audit": {
+        "arquivo": "music_kage.psg",
+        "classe": "music",
+        "bytes": 1174,
+        "sha256": "c582ff359b0102cf5f376bb53ff6656178b166c63be1f60013a0244f1bb3628e",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1152,
+          "notas": {
+            "0": 36,
+            "1": 64,
+            "2": 31
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 31.89,
+            "1": 18.0,
+            "2": 37.2
+          },
+          "camada_respira": {
+            "ch": 2,
+            "gap": 37.2
+          },
+          "atenuacoes": {
+            "0": [
+              1,
+              4
+            ],
+            "1": [
+              7,
+              9
+            ],
+            "2": [
+              2,
+              7
+            ],
+            "3": [
+              2,
+              3,
+              5,
+              7,
+              8
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/kage_matsuri/res/audio/sfx_slash.psg",
+      "sha256": "0811f9234435fc7835eef66bb5e692731a98fc5d484b3a08a93f5c1abc10742b",
+      "audit": {
+        "arquivo": "sfx_slash.psg",
+        "classe": "sfx",
+        "bytes": 22,
+        "sha256": "0811f9234435fc7835eef66bb5e692731a98fc5d484b3a08a93f5c1abc10742b",
+        "metricas": {
+          "duracao_frames": 7
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/music_battle.psg",
+      "sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa",
+      "audit": {
+        "arquivo": "music_battle.psg",
+        "classe": "music",
+        "bytes": 1001,
+        "sha256": "c9861a780dbc98f9ccbd9554e156678ed263a34bae70f9ffca5115cefc1ee8fa",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 896,
+          "notas": {
+            "0": 36,
+            "1": 64,
+            "2": 32
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 24.8,
+            "1": 14.0,
+            "2": 28.23
+          },
+          "camada_respira": {
+            "ch": 2,
+            "gap": 28.23
+          },
+          "atenuacoes": {
+            "0": [
+              1,
+              4
+            ],
+            "1": [
+              7,
+              9
+            ],
+            "2": [
+              2,
+              7
+            ],
+            "3": [
+              2,
+              8
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_down.psg",
+      "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+      "audit": {
+        "arquivo": "sfx_down.psg",
+        "classe": "sfx",
+        "bytes": 91,
+        "sha256": "9cbcb27170fee9289eaf79f1796a8d2931980f622a03c3acfa5f355400f15a42",
+        "metricas": {
+          "duracao_frames": 30
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_hit.psg",
+      "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+      "audit": {
+        "arquivo": "sfx_hit.psg",
+        "classe": "sfx",
+        "bytes": 37,
+        "sha256": "6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3",
+        "metricas": {
+          "duracao_frames": 6
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_hurt.psg",
+      "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+      "audit": {
+        "arquivo": "sfx_hurt.psg",
+        "classe": "sfx",
+        "bytes": 49,
+        "sha256": "5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e",
+        "metricas": {
+          "duracao_frames": 16
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_round.psg",
+      "sha256": "17ca8275035f79c98dcf1d170c283ba0c4635021936965d6a511b4adc195d694",
+      "audit": {
+        "arquivo": "sfx_round.psg",
+        "classe": "sfx",
+        "bytes": 33,
+        "sha256": "17ca8275035f79c98dcf1d170c283ba0c4635021936965d6a511b4adc195d694",
+        "metricas": {
+          "duracao_frames": 16
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_shot.psg",
+      "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+      "audit": {
+        "arquivo": "sfx_shot.psg",
+        "classe": "sfx",
+        "bytes": 25,
+        "sha256": "5b99d0b5ab0bc7fd2da9150ec06e04204900267c0e4af21a9aa20b73185bbfce",
+        "metricas": {
+          "duracao_frames": 6
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/res/audio/sfx_special.psg",
+      "sha256": "96d853814146600bf9ac43469a81c7c18785f264c0a8e86a9ee0256a36ed3b59",
+      "audit": {
+        "arquivo": "sfx_special.psg",
+        "classe": "sfx",
+        "bytes": 73,
+        "sha256": "96d853814146600bf9ac43469a81c7c18785f264c0a8e86a9ee0256a36ed3b59",
+        "metricas": {
+          "duracao_frames": 12
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_dawn.psg",
+      "sha256": "ec0066a22c818a6df8d3ba48a07e3344c829df1e0d33ea1bd886cd06b0cc630b",
+      "audit": {
+        "arquivo": "music_dawn.psg",
+        "classe": "music",
+        "bytes": 1789,
+        "sha256": "ec0066a22c818a6df8d3ba48a07e3344c829df1e0d33ea1bd886cd06b0cc630b",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1920,
+          "notas": {
+            "0": 20,
+            "1": 288,
+            "2": 16
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 93.16,
+            "1": 5.0,
+            "2": 120.0
+          },
+          "camada_respira": {
+            "ch": 2,
+            "gap": 120.0
+          },
+          "atenuacoes": {
+            "0": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "1": [
+              7,
+              10
+            ],
+            "2": [
+              2,
+              6
+            ],
+            "3": [
+              3,
+              5,
+              8
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_eco.psg",
+      "sha256": "7ec813ce2e5d413144903136e77eec0249bc85b5e8525bedbfb27cd584f2e5f0",
+      "audit": {
+        "arquivo": "music_eco.psg",
+        "classe": "music",
+        "bytes": 1453,
+        "sha256": "7ec813ce2e5d413144903136e77eec0249bc85b5e8525bedbfb27cd584f2e5f0",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1728,
+          "notas": {
+            "0": 10,
+            "1": 84,
+            "2": 6
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 172.0,
+            "1": 6.93
+          },
+          "camada_respira": {
+            "ch": 0,
+            "gap": 172.0
+          },
+          "atenuacoes": {
+            "0": [
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "1": [
+              9,
+              11
+            ],
+            "2": [
+              9,
+              12
+            ],
+            "3": [
+              8,
+              11
+            ]
+          },
+          "unison": 0.0
+        },
+        "violacoes": [],
+        "avisos": [
+          "M4: ch3 com apenas 4 eventos (abaixo da elegibilidade)"
+        ],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_storm.psg",
+      "sha256": "5b469574ef4d045357e424a67a889da64f4ad1d6fdb101bc2a3c7fb6047cd81c",
+      "audit": {
+        "arquivo": "music_storm.psg",
+        "classe": "music",
+        "bytes": 1808,
+        "sha256": "5b469574ef4d045357e424a67a889da64f4ad1d6fdb101bc2a3c7fb6047cd81c",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 896,
+          "notas": {
+            "0": 44,
+            "1": 224,
+            "2": 64
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 20.35,
+            "1": 4.0,
+            "2": 14.0
+          },
+          "camada_respira": {
+            "ch": 0,
+            "gap": 20.35
+          },
+          "atenuacoes": {
+            "0": [
+              2,
+              3,
+              5,
+              6,
+              7,
+              8
+            ],
+            "1": [
+              5,
+              7
+            ],
+            "2": [
+              2,
+              7
+            ],
+            "3": [
+              2,
+              3,
+              5
+            ]
+          },
+          "unison": 0.0,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/music_title.psg",
+      "sha256": "f14f61efc50ef15a187ea8232434078216fde58d4f48d6b1d76afd1f0a7c572b",
+      "audit": {
+        "arquivo": "music_title.psg",
+        "classe": "music",
+        "bytes": 1956,
+        "sha256": "f14f61efc50ef15a187ea8232434078216fde58d4f48d6b1d76afd1f0a7c572b",
+        "metricas": {
+          "canais_tone": [
+            0,
+            1,
+            2
+          ],
+          "duracao_frames": 1536,
+          "notas": {
+            "0": 24,
+            "1": 256,
+            "2": 16
+          },
+          "escopo": "heuristica_eventos_psglib_simples_primeira_passagem",
+          "contagem_notas_significa": "escritas_periodo; nao notas distintas/ataques",
+          "unison_denominador": "instantes_com_eventos_multicanal; nao frames sustentados",
+          "gap_medio": {
+            "0": 64.7,
+            "1": 3.75,
+            "2": 96.0
+          },
+          "camada_respira": {
+            "ch": 2,
+            "gap": 96.0
+          },
+          "atenuacoes": {
+            "0": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "1": [
+              6,
+              8
+            ],
+            "2": [
+              2,
+              6
+            ],
+            "3": [
+              2,
+              4,
+              7
+            ]
+          },
+          "unison": 0.041,
+          "ruido_branco": 0.0
+        },
+        "violacoes": [
+          "M4 ruido: 100% dos eventos de ch3 sao ruido PERIODICO (R3 bit2=0); politica de maioria branca exige mode & 4 != 0; nao e lei de percussao"
+        ],
+        "avisos": [],
+        "veredito": "reprova"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_chime.psg",
+      "sha256": "cbbb09365b19fdba606fb9ab2831086fd1b1d137e711e4efbb344c91d56aa559",
+      "audit": {
+        "arquivo": "sfx_chime.psg",
+        "classe": "sfx",
+        "bytes": 23,
+        "sha256": "cbbb09365b19fdba606fb9ab2831086fd1b1d137e711e4efbb344c91d56aa559",
+        "metricas": {
+          "duracao_frames": 29
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_crack.psg",
+      "sha256": "487525d816dd48c357bc3717c34c21c5cb506086ffec66513e10bf43ef84f30a",
+      "audit": {
+        "arquivo": "sfx_crack.psg",
+        "classe": "sfx",
+        "bytes": 23,
+        "sha256": "487525d816dd48c357bc3717c34c21c5cb506086ffec66513e10bf43ef84f30a",
+        "metricas": {
+          "duracao_frames": 11
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/SMS_projects/pulso_de_cristal/res/audio/sfx_crystal.psg",
+      "sha256": "188b3aeab357f4724c66717f142c77e9965cf7de11041924ac489dbe399183ec",
+      "audit": {
+        "arquivo": "sfx_crystal.psg",
+        "classe": "sfx",
+        "bytes": 27,
+        "sha256": "188b3aeab357f4724c66717f142c77e9965cf7de11041924ac489dbe399183ec",
+        "metricas": {
+          "duracao_frames": 19
+        },
+        "violacoes": [],
+        "avisos": [],
+        "veredito": "passa"
+      }
+    }
+  ],
+  "read_only_all_hashes_unchanged": true
+}

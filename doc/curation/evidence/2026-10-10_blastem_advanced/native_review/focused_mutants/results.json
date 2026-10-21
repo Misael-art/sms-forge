@@ -1,0 +1,82 @@
+[
+  {
+    "case": "truncated_wave",
+    "result": "accepted",
+    "declared_pcm_bytes": 1920,
+    "actual_pcm_bytes": 1520,
+    "summary": {
+      "apng": {
+        "frames": 2,
+        "size": [
+          256,
+          192
+        ],
+        "different_from_first": 1,
+        "container_duration_ms": 33.333333333333336,
+        "clock": "nominal_60Hz_not_realtime_FPS",
+        "raw_preserved": true,
+        "derived_acTL_crc_repairs": 0
+      },
+      "wave": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_frames": 480,
+        "duration_seconds": 0.01,
+        "peak": 1234,
+        "scope": "asynchronous_native_mixer_not_frame_locked_or_music_quality"
+      }
+    }
+  },
+  {
+    "case": "header_only_invalid_vgm",
+    "result": "accepted",
+    "summary": {
+      "vgm": {
+        "bytes": 64,
+        "scope": "PSG register log_not_audible_mix"
+      }
+    }
+  },
+  {
+    "case": "decode_event",
+    "input": "SMSFORGE_EVENT 0 120 1 999 0 0 0 0 0",
+    "result": "accepted_parser",
+    "events": [
+      {
+        "index": 0,
+        "vdp_frame": 120,
+        "observed_pc": 1,
+        "value": 999,
+        "port": 0,
+        "vdp_internal_vcounter": 0,
+        "vdp_internal_hslot": 0,
+        "vdp_internal_address": 0,
+        "vdp_internal_cd": 0
+      }
+    ]
+  },
+  {
+    "case": "decode_event",
+    "input": "SMSFORGE_EVENT 0 120 1 3 0 99999 99999 99999 99999",
+    "result": "accepted_parser",
+    "events": [
+      {
+        "index": 0,
+        "vdp_frame": 120,
+        "observed_pc": 1,
+        "value": 3,
+        "port": 0,
+        "vdp_internal_vcounter": 99999,
+        "vdp_internal_hslot": 99999,
+        "vdp_internal_address": 99999,
+        "vdp_internal_cd": 99999
+      }
+    ]
+  },
+  {
+    "case": "decode_event",
+    "input": "SMSFORGE_EVENT -1 120 1 3 0 0 0 0 0",
+    "result": "accepted_parser",
+    "events": []
+  }
+]

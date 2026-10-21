@@ -1,0 +1,64 @@
+{
+  "schema": "dr_social_sprite_mask_contract_v08_1",
+  "status": "owner_authorized_candidate_for_deterministic_reconstruction",
+  "approval_date": "2026-10-12",
+  "source_geometry": {
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v7_source/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v7.png",
+    "sha256": "f5c41fb2204e3b2fff9a6e824fc55a767c2456dcdd9c62d17351f76696c95dc8",
+    "canvas_px": [640, 720],
+    "grid": [8, 9],
+    "cell_px": [80, 80],
+    "active_pose_count": 61,
+    "sequence_counts": [4, 8, 8, 8, 5, 8, 8, 8, 4],
+    "geometry_role": "frozen pose/cell/silhouette base; never an approved color reference"
+  },
+  "palette": {
+    "transparent_index": 0,
+    "max_useful_colors": 12,
+    "rgb_by_index": {
+      "0": "#FF00FF",
+      "1": "#000055",
+      "2": "#FFAAAA",
+      "3": "#AA5555",
+      "4": "#55AAFF",
+      "5": "#00AAAA",
+      "6": "#005555",
+      "7": "#FFFFFF",
+      "8": "#AAAAAA",
+      "9": "#555555",
+      "10": "#550000",
+      "11": "#AA0055",
+      "12": "#FFFF00"
+    },
+    "roles": {
+      "1": "outline and structural separation",
+      "2-3": "skin light and skin shadow",
+      "4-6": "coat light, base, and shadow",
+      "7": "gloves, shirt/collar, cane shaft",
+      "8-9": "gray hair light/shadow only",
+      "10": "leather/boot brown",
+      "11": "cravat and approved boot trim only",
+      "12": "cane pommel/grip, brass spectacles/monocle, and hair ribbon if confirmed"
+    },
+    "owner_resolved_semantic_decisions": [
+      "Index 12 (#FFFF00) is explicitly allowed for the brass glasses/monocle. Preserve the 85 pixels identified in the v08.1 candidate mask.",
+      "The cane shaft is a semantic exception to the 2x2 block rule: retain a continuous 1px white centerline and the immutable dark outline."
+    ]
+  },
+  "mask_and_edit_rules": {
+    "required_masks": ["hair", "coat", "skin", "white_accessories", "leather", "burgundy_accents", "yellow_accents", "outline", "transparent"],
+    "mask_scope": "per-frame and per-semantic-material; export mask atlases and counts",
+    "allowed_writes": "deterministic recolor/cluster edits only inside an explicit reviewed material mask and only to that material's listed palette ramp",
+    "cluster_rule": "merge any shade component smaller than 2x2 inside explicit hair, coat, or skin masks to the dominant neighboring legal tone from a frozen snapshot; do not interpolate, cross a material/outline/alpha boundary, or edit an unclassified pixel. Report unmergeable small components as a blocking review result. Cane shaft remains 1px continuous white with dark outline.",
+    "immutable": ["source file", "canvas dimensions", "cell boundaries", "frame order", "alpha silhouette", "outline outside any explicitly approved correction mask"],
+    "prohibited": ["ImageGen", "diffusion", "blur", "antialias", "global or neighborhood color averaging", "nearest-RGB remapping", "luminance filters", "edits outside masks", "silent frame/cell resampling"]
+  },
+  "required_delivery": [
+    "candidate indexed PNG preserving the 640x720 8x9 atlas and 61 poses",
+    "per-material mask atlas and pixel-change log",
+    "Idle frame 1, Advance frame 1, Fall frame 2 preview at 1x and 4x nearest-neighbor",
+    "semantic compliance report for white, yellow, and burgundy zones",
+    "hair grayscale coverage for 61/61 frames and sub-2x2 cluster audit",
+    "no ROM compilation before owner visual approval"
+  ]
+}

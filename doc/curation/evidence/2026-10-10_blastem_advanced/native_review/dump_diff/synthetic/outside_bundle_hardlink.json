@@ -1,0 +1,117 @@
+{
+  "schema": "sms_blastem_dump_diff_v1",
+  "session_id": "blastem-sms-selfcheck",
+  "rom_sha256": "f660b3f0e7d27c237e57d1cebb243b477278a0b3d5b1802a23f3ce8020bcb7fc",
+  "session_manifest_sha256": "ae413f7aa3c01e0449ea1a679805adc379f7aaf6e685145eb9487f208c8f6af9",
+  "emulator_sha256": "1bd0f40ddcc6d769f6cc2aea59bb2973601b6db30bdd849b68315b9d83ad06ec",
+  "eligibility": "historical_record_only",
+  "current_rom_checked": false,
+  "first": {
+    "index": 0,
+    "vdp_frame": 120
+  },
+  "last": {
+    "index": 1,
+    "vdp_frame": 127
+  },
+  "vdp_frames_between": 7,
+  "scope": "net_snapshot_changes_only_not_bus_writes_unique_art_tiles_timing_or_causality",
+  "spaces": {
+    "ram": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    },
+    "vram": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": [],
+      "changed_32byte_blocks": [],
+      "block_scope": "address blocks; includes tilemaps/SAT/nonpattern data; not unique graphics tiles or transfer bytes"
+    },
+    "vdp_regs": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    },
+    "cram_internal": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    },
+    "psg_frequency": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    },
+    "psg_volume": {
+      "changed_bytes": 0,
+      "offsets": [],
+      "runs": []
+    }
+  },
+  "source_dumps": [
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/000/ram.bin",
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "bytes": 8192
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/001/ram.bin",
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "bytes": 8192
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/000/vram.bin",
+      "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "bytes": 16384
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/001/vram.bin",
+      "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "bytes": 16384
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/000/vdp_regs.bin",
+      "sha256": "c6f378205327fa9e8eb42cfdbeff1702d60a5fbf5e1a909ba6c6ca0ecd971907",
+      "bytes": 11
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/001/vdp_regs.bin",
+      "sha256": "c6f378205327fa9e8eb42cfdbeff1702d60a5fbf5e1a909ba6c6ca0ecd971907",
+      "bytes": 11
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/000/cram_internal.bin",
+      "sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "bytes": 64
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/001/cram_internal.bin",
+      "sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "bytes": 64
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/000/psg_frequency.bin",
+      "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "bytes": 8
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/001/psg_frequency.bin",
+      "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "bytes": 8
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/000/psg_volume.bin",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "bytes": 4
+    },
+    {
+      "path": "/tmp/smsforge-blastem-native-review/dump_diff/synthetic/blastem-sms-selfcheck/snapshots/001/psg_volume.bin",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "bytes": 4
+    }
+  ],
+  "palette_changes": [],
+  "named_ranges": []
+}

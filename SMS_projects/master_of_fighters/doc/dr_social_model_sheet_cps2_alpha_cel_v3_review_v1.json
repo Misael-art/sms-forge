@@ -1,0 +1,155 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "dr_social_model_sheet_cps2_alpha_cel_v3_candidate",
+  "review_status": "revise_before_growth",
+  "producer": "codex_art_production",
+  "review_scope": "Concept/model sheet only; no sprite, moveset, animation, SMS conversion or ROM approval.",
+  "asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/model_sheet_cps2_alpha_cel_v3_candidate/dr_social_model_sheet_cps2_alpha_cel_v3_candidate.png",
+    "sha256": "7861f4ca4ad308856cc51a2f8c098e497b0ec3b93eb41498b377871016b07f6e",
+    "kind": "character_concept_model_sheet",
+    "dimensions_px": [
+      1619,
+      971
+    ]
+  },
+  "source_evidence": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+    "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+    "role": "owner-approved identity, face, palette, proportions and style reference"
+  },
+  "required_characters": [
+    "dr_ferdinand_social"
+  ],
+  "required_axes": [
+    "document_and_layout",
+    "style_reference_application",
+    "lineart_and_contours",
+    "morphology_and_biotype",
+    "shading_and_palette",
+    "relative_scale_and_baseline",
+    "neutral_background",
+    "face_and_identity_continuity",
+    "costume_and_materials",
+    "equipment_and_weapon_continuity",
+    "cross_view_consistency",
+    "legibility_and_crop_integrity",
+    "human_traits_and_unapproved_details",
+    "artist_reference_and_scope",
+    "distinctive_style_signature",
+    "pose_anatomy_and_joint_continuity",
+    "visual_cohesion_and_distinction"
+  ],
+  "characters": [
+    {
+      "id": "dr_ferdinand_social",
+      "references": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v2.png",
+          "sha256": "fc1dfe01e49d9801dda26f1c818ddd1d68a93bfdda27d102a56dd0128e0ff7a4",
+          "role": "owner-approved model-sheet reference"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+          "sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c",
+          "role": "project character identity and source-game inventory"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/dr_social_combat_design_proposal_v1.md",
+          "sha256": "fba3fdadb46cb9ed0cd005edbd5fd1e3bf8cd8bb0ac35c10eb5ceebc2bc5db0e",
+          "role": "weapon reference boundary and source terminology discrepancy"
+        }
+      ],
+      "observed_defects": [
+        "The source-game item terminology differs between the GDD and combat proposal/community guide. The new arsenal panel is explicitly reference-only until the project resolves that discrepancy.",
+        "The action arm and cane grip read more clearly in the producer inspection, but shoulder/elbow/wrist continuity still needs an independent reviewer."
+      ],
+      "revision_notes": [
+        "Front/profile/back costume cues were aligned to a late-19th-century London investigator while preserving face, lean body, palette, 7.5H scale and the profile pose.",
+        "The signature action now pairs a visibly connected boomerang release with a blunt walking cane held in the other hand; no rapier/sword thrust is shown.",
+        "An adjacent, labeled equipment panel separates concept identity objects from the source-game arsenal references."
+      ],
+      "review_axes": {
+        "document_and_layout": {
+          "status": "pass",
+          "note": "Five model views, shared ruler/baseline, style cards and an adjacent two-group equipment panel are visible; no main figure or equipment is visibly cropped."
+        },
+        "style_reference_application": {
+          "status": "pass",
+          "note": "Producer inspection sees the established 1990s fighting-game cel concept language and cream technical-sheet treatment; independent comparison remains required before promotion."
+        },
+        "lineart_and_contours": {
+          "status": "pass",
+          "note": "Contours appear clean and the figure/equipment silhouettes remain separated at sheet scale; independent review remains required."
+        },
+        "morphology_and_biotype": {
+          "status": "pass",
+          "note": "Tall, lean adult ectomorph proportions and the established 7.5H guide are retained; no chibi or bulky redesign is visible."
+        },
+        "shading_and_palette": {
+          "status": "pass",
+          "note": "Blue/cyan/teal, white, gray, burgundy and brass/brown remain the dominant palette; violet remains confined to the occult boomerang effect."
+        },
+        "relative_scale_and_baseline": {
+          "status": "pass",
+          "note": "The orthographic figures share a common baseline and the 7.5H ruler remains visible."
+        },
+        "neutral_background": {
+          "status": "pass",
+          "note": "The page uses a clean pale-cream background without scenery or texture."
+        },
+        "face_and_identity_continuity": {
+          "status": "pass",
+          "note": "Gray hair, brass spectacles, mature intelligent face and fully human identity remain aligned to the approved v2 reference."
+        },
+        "costume_and_materials": {
+          "status": "pass",
+          "note": "The long frock-coat tails/lapels, waistcoat, high collar, burgundy cravat and watch-chain cue read more clearly as late-Victorian London attire across the turnaround."
+        },
+        "equipment_and_weapon_continuity": {
+          "status": "pending",
+          "note": "The cane is distinct from the rapier, but independent review found the source-game inventory terminology differs across project documents; list remains reference-only and unresolved."
+        },
+        "cross_view_consistency": {
+          "status": "pass",
+          "note": "Front, profile and back keep the same coat family, palette, body scale and character identity; the profile pose remains consistent with the reference."
+        },
+        "legibility_and_crop_integrity": {
+          "status": "pass",
+          "note": "The title, candidate status, equipment labels and technical cards are visible at the saved resolution; no object touches a page edge."
+        },
+        "human_traits_and_unapproved_details": {
+          "status": "pass",
+          "note": "The figure remains fully human; no fangs, wings, vampiric transformation or unrequested costume props are visible."
+        },
+        "artist_reference_and_scope": {
+          "status": "pass",
+          "note": "The CPS2-Alpha-Cel reference role is carried forward from the approved v2 lineage; it is a contextual style reference, not a sole-authorship claim."
+        },
+        "distinctive_style_signature": {
+          "status": "pass",
+          "note": "Expressive fighting-game face planes, clean graphic silhouette and high-energy action staging are retained."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "fail",
+          "note": "Independent review found the cane hand and wrist visible but the sleeve/elbow partially disappear into the torso, leaving an arm-emergence ambiguity at sheet scale."
+        },
+        "visual_cohesion_and_distinction": {
+          "status": "pending",
+          "note": "Identity/style cohesion is positive, but independent reviewer requested clearer steel-boomerang silhouette against violet motion curves."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "revise_before_growth",
+    "reviewer": "/root/review_dr_social_v3",
+    "report": {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_cps2_alpha_cel_v3_independent_review_v1.json",
+      "sha256": "2a7ec2042c6062e3db8a80a8a8ce9ec3e9488822abc4001de62012c443e291cf"
+    }
+  },
+  "owner_approval": {
+    "approved": false
+  }
+}

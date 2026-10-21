@@ -1,0 +1,38 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr_social_model_sheet_05_urban_seinen_kof_art_review_v2",
+  "stage": "foundation",
+  "producer": "codex_art_production",
+  "domains": [
+    "art"
+  ],
+  "scope": "Independent, read-only review of concept model sheet #05 (Urban-Seinen-KOF): identity and five-view consistency; artist attribution/role/scope; distinct style signature; shoulder-to-hand anatomical continuity; palette/materials; ruler, baseline, crop, labels and card overlap. Record concrete findings; do not promote.",
+  "artifacts": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2.png",
+      "sha256": "5abeb8c28efb74afa443c1a0873cbd671ac9c0d4e17527c705c08e2b3f1101db",
+      "role": "current candidate model sheet"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_05_urban_seinen_kof_review_v2.json",
+      "sha256": "31d17315954e56299681ae2ecfa73d0ac44e94af06a77cba3f41817e4a3c850b",
+      "role": "hash-bound per-character review checklist"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/dr_social_model_sheet_05_urban_seinen_kof_v2_metadata.json",
+      "sha256": "2164249e1cb27e70b5332740aab96b0de34dcc05cb92e91a59ae039eaf5d2387",
+      "role": "style/card/layout metadata"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_05_urban_seinen_kof/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v2.json",
+      "sha256": "2f40d649bdf3c2a38f8ab40b9c8e035ab61654a47ddd7d36c3a1796f779fb4cc",
+      "role": "source and composition lineage"
+    }
+  ],
+  "reviewer_constraints": [
+    "Read-only independent reviewer; do not change or promote assets.",
+    "Separate artist reference from authorship of sprites/game assets; report unverified credit as such.",
+    "No sprite/SMS resource/ROM/emulator/AAA approval.",
+    "Return concrete findings for anatomy, identity, style distinction, five-view cohesion, page layout and labels."
+  ]
+}

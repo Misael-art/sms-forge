@@ -1,0 +1,183 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "alis_landale_concept_sheet_v2_sms_palette",
+  "project": "master_of_fighters",
+  "asset_role": "concept_art",
+  "channel": "built_in_image_gen + ImageMagick alpha cutoff + prepare_sms_pixel_art.py",
+  "prompt": {
+    "path": "data/source_art/concept_art/alis_landale/review_drafts/prompts/alis_concept_prompt_v1.txt",
+    "sha256": "3438fc6ba852cbfd8879db46dd2ad5bd630d0d90b317180e950f513bb2ffa720"
+  },
+  "prompt_history": [
+    {
+      "path": "data/source_art/concept_art/alis_landale/review_drafts/prompts/alis_concept_edit_prompt_v1.txt",
+      "sha256": "47b49f3edcb119f9346fcbd9ebc5356bc2995fd70b8f9ef8e2769591d7f704db",
+      "role": "two background/color cleanup edit instructions; the selected result still needed deterministic alpha cleanup"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v1_generated.png",
+      "sha256": "8306221f36afac377778d7788ccc48868a16dba4a3f9f68e6becae8323cec94d",
+      "role": "selected ImageGen output; source of both palette-converted variants"
+    },
+    {
+      "path": "doc/11-gdd.md",
+      "role": "project canon: Alis is the Phantasy Star heroine; light biotype is a roster proposal"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "role": "exact Alis Master System 6-bit palette and role names"
+    }
+  ],
+  "research_refs": [
+    {
+      "url": "https://www.smspower.org/Manuals/PhantasyStar-SMS-US",
+      "role": "original SMS manual text: Alis begins with a short sword, vows to continue Nero's quest, and can use a light Laconian shield; no source pixels used"
+    },
+    {
+      "url": "https://www.sega-16.com/2017/12/behind-the-design-phantasy-star/",
+      "role": "historical design context describing Alis as serious, passionate, and resolute; used for characterization only, no source pixels used"
+    }
+  ],
+  "alpha_cleanup": {
+    "tool": "ImageMagick",
+    "method": "threshold source alpha at 90%; pixels below threshold are composited to RGB black, which prepare_sms_pixel_art.py maps to transparent index 0",
+    "intermediate_path": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v2_alpha_cutout.png",
+    "intermediate_sha256": "f1309f157bd4bc52e22e42d8f9a0fca4da3de7c05907dd25c423d7d7fe5847b8",
+    "reason": "a 50% cutoff left a faint halo in the nonblack preview; 90% removed the soft glow while retaining the opaque character contours"
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [
+        1536,
+        1024
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "alis_landale",
+      "transparent_index": 0
+    },
+    "palette_mapping": {
+      "used_colors": 10,
+      "palette_rgb_with_transparent_index": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          170,
+          170,
+          170
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          0,
+          0,
+          170
+        ],
+        [
+          85,
+          85,
+          255
+        ],
+        [
+          170,
+          85,
+          0
+        ],
+        [
+          85,
+          0,
+          0
+        ],
+        [
+          255,
+          170,
+          170
+        ],
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          255,
+          255,
+          0
+        ],
+        [
+          170,
+          85,
+          85
+        ]
+      ],
+      "opaque_contour": "armor_deep #0000AA; pure black is transparent index 0"
+    },
+    "resource_gate": "PASS: audit_validate_resources.py --kind sheet --character alis_landale"
+  },
+  "intermediate_images": [
+    {
+      "path": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v1_alpha_cutout.png",
+      "sha256": "efe5043ea0977c9ebe9104855426494ceef110ad2c83890ce32c06ab5c177690",
+      "role": "first 50% alpha cutoff; nonblack review revealed a faint edge halo"
+    },
+    {
+      "path": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v1.png",
+      "sha256": "24d59c2aaa50016f3eb5dbf785865e46e5542d13f14f57ce0c8f52564757cddf",
+      "role": "first indexed palette conversion; superseded by the 90% alpha cutoff"
+    }
+  ],
+  "image": {
+    "path": "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v2.png",
+    "sha256": "cd3551881ca0f7c2a1097bc01b979fcad3f23717eed904e75e4d48bc32b05c10",
+    "dimensions_px": [
+      1536,
+      1024
+    ],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 10
+  },
+  "visual_check": {
+    "two_distinct_full_body_poses": true,
+    "same_character_in_both_poses": true,
+    "short_sword_and_light_shield_visible": true,
+    "light_agile_build_observed": true,
+    "transparent_background_observed": true,
+    "nonblack_background_edge_review": "PASS after 90% alpha cutoff",
+    "external_pixels_used": false,
+    "text_or_watermark": false,
+    "design_details_not_fixed_by_gdd": "provisional fan-game interpretation"
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "all_colors_on_sms_6bit_grid": true,
+    "per_character_manifest_palette_match": "historical pass against the former manifest palette; that palette did not match Alis's canonical colors and was replaced in v4",
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "idle_sprite_scale_or_animation_validation": "not performed; concept art only",
+    "independent_review": "pending",
+    "rom_or_emulator_validation": false
+  },
+  "status": "superseded_by_canonical_palette_revision",
+  "owner_feedback": "O dono gostou da composição, mas apontou que as cores não correspondiam à personagem; solicitou recoloração conforme as cores de Alis.",
+  "owner_approval": null,
+  "supersedes": [
+    "data/source_art/concept_art/alis_landale/review_drafts/image_iterations/alis_concept_sheet_v1.png"
+  ],
+  "superseded_by": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+  "palette_fidelity": "rejected_by_owner; superseded by canonical-color revision",
+  "next_gate": "owner visual review; an idle sprite sheet is a separate stage and still requires the approved design, exact target morphology, animation review, provenance, resource gates and ROM/emulator validation before res integration"
+}

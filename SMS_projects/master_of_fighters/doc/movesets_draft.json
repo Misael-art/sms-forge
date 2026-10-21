@@ -1,0 +1,122 @@
+{
+  "schema": "mof_movesets_draft_v1",
+  "date": "2026-10-02",
+  "status": "SUGESTAO_TEMPORARIA — dono não aprovou; cada personagem terá moveset discutido e fechado na sua construção. Não usar como contrato de asset nem de FSM.",
+  "authority_basis": "molde medido MSSF2T/hamoopig (sms-recipe-combate-1v1.md): soco 4/4/8 d7, chute 7/5/13 d10, projétil 10/4/18 d12, chip guarda 2, hitstop 6/3; cláusulas: um-golpe-um-acerto, guarda posicional, snapshot de trade",
+  "time_unit": "frames@60fps",
+  "frame_fields": ["startup", "active", "recovery", "damage", "hitstop"],
+  "balance": "nao-testado — números são alvos do molde, não balanceamento",
+  "open_decisions": [
+    "multi-hit: encadear janelas active separadas por recovery interno vs cortar multi-hits (cláusula um-golpe-um-acerto)",
+    "golpes tela-cheia (Onda da Morte, Nova): manter apenas se measure_worst_frame.py aprovar com eles em cena"
+  ],
+  "characters": {
+    "ga_warrior": {
+      "classe": "pesado",
+      "moves": [
+        {"id": "axe_swipe", "nome": "Machadada", "startup": 10, "active": 5, "recovery": 16, "damage": 13, "hitstop": 6},
+        {"id": "shield_bash", "nome": "Escudo", "startup": 7, "active": 4, "recovery": 12, "damage": 6, "hitstop": 6, "nota": "pushback seguro"},
+        {"id": "wave_of_death", "nome": "Onda da Morte", "startup": 16, "active": 6, "recovery": 24, "damage": 20, "hitstop": 6, "tipo": "especial_tela_cheia", "gate": "worst-frame obrigatório"},
+        {"id": "mount_charge", "nome": "Investida a Cavalo", "startup": 8, "active": 8, "recovery": 18, "damage": 12, "hitstop": 6, "tipo": "dash_knockback"}
+      ]
+    },
+    "lord_of_the_sword": {
+      "classe": "pesado",
+      "moves": [
+        {"id": "royal_slash", "nome": "Espada Real", "startup": 9, "active": 4, "recovery": 14, "damage": 12, "hitstop": 6},
+        {"id": "shield_push", "nome": "Empurrão de Escudo", "startup": 6, "active": 3, "recovery": 10, "damage": 6, "hitstop": 6},
+        {"id": "solar_beam", "nome": "Raio Solar", "startup": 12, "active": 6, "recovery": 18, "damage": 11, "hitstop": 6, "tipo": "projetil"},
+        {"id": "royal_justice", "nome": "Justiça", "startup": 14, "active": 4, "recovery": 20, "damage": 15, "hitstop": 6, "tipo": "overhead", "nota": "não-bloqueável contra agachado"}
+      ]
+    },
+    "hayato": {
+      "classe": "medio",
+      "moves": [
+        {"id": "katana_cut", "nome": "Corte de Katana", "startup": 5, "active": 3, "recovery": 7, "damage": 6, "hitstop": 6},
+        {"id": "diagonal_slash", "nome": "Corte Diagonal", "startup": 8, "active": 4, "recovery": 12, "damage": 11, "hitstop": 6, "nota": "anti-aéreo lento"},
+        {"id": "scroll_fire", "nome": "Pergaminho de Fogo", "startup": 10, "active": 4, "recovery": 18, "damage": 12, "hitstop": 6, "tipo": "projetil"},
+        {"id": "iai_dash", "nome": "Iai", "startup": 12, "active": 4, "recovery": 18, "damage": 14, "hitstop": 6, "tipo": "dash_punicao"}
+      ]
+    },
+    "joe_musashi": {
+      "classe": "medio",
+      "moves": [
+        {"id": "quick_punch", "nome": "Soco Rápido", "startup": 4, "active": 3, "recovery": 6, "damage": 5, "hitstop": 6},
+        {"id": "low_lunge", "nome": "Bote Baixo", "startup": 6, "active": 4, "recovery": 9, "damage": 8, "hitstop": 6},
+        {"id": "shuriken", "nome": "Shuriken", "startup": 8, "active": 6, "recovery": 14, "damage": 10, "hitstop": 6, "tipo": "projetil_rapido"},
+        {"id": "wood_body", "nome": "Corpo-de-Madeira", "startup": 3, "active": 10, "recovery": 6, "damage": 9, "hitstop": 6, "tipo": "parry_invulneravel"}
+      ],
+      "alternos": {"classic_shinobi1": "mesmo moveset; traje clássico do 1º Shinobi por troca de roles de paleta"}
+    },
+    "dr_ferdinand_social": {
+      "classe": "medio",
+      "correcao_2026-10-03": "dono: Dr. Social NAO vira vampiro — a transformacao e premissa de Vampire: Master of Darkness (Game Gear 1993), nao do SMS. Moves ancorados no arsenal real do original (Wikipedia): bengala, rapier, faca, machado + pistola, bombas, boomerang.",
+      "moves": [
+        {"id": "cane_jab", "nome": "Bengada", "startup": 6, "active": 3, "recovery": 8, "damage": 6, "hitstop": 6},
+        {"id": "rapier_thrust", "nome": "Estocada de Rapier", "startup": 8, "active": 4, "recovery": 12, "damage": 11, "hitstop": 6, "nota": "alcance longo, dano medio — anti-spaced"},
+        {"id": "occult_boomerang", "nome": "Boomerang Oculto", "startup": 10, "active": 8, "recovery": 16, "damage": 11, "hitstop": 6, "tipo": "projetil_boomerang", "nota": "fiel ao item real do jogo"},
+        {"id": "duel_pistol", "nome": "Pistola de Duelo", "startup": 12, "active": 4, "recovery": 18, "damage": 12, "hitstop": 6, "tipo": "projetil_reto", "nota": "carregavel/limite de munição a definir na discussão do personagem"}
+      ]
+    },
+    "black_belt_karateka": {
+      "classe": "medio",
+      "moves": [
+        {"id": "jab", "nome": "Jab", "startup": 4, "active": 3, "recovery": 6, "damage": 5, "hitstop": 6},
+        {"id": "cross", "nome": "Direto", "startup": 7, "active": 4, "recovery": 10, "damage": 11, "hitstop": 6},
+        {"id": "flying_kick", "nome": "Chute-Voador", "startup": 6, "active": 4, "recovery": 16, "damage": 12, "hitstop": 6, "tipo": "dash_strike"},
+        {"id": "lightning_kick", "nome": "Golpe Relâmpago", "startup": 6, "active": "3x3", "recovery": 18, "damage": "4+4+4", "hitstop": 6, "pendencia": "multi-hit — ver open_decisions"}
+      ]
+    },
+    "witch_psychic_world": {
+      "classe": "leve",
+      "moves": [
+        {"id": "wand_swing", "nome": "Varinha", "startup": 6, "active": 3, "recovery": 8, "damage": 5, "hitstop": 6},
+        {"id": "sweep", "nome": "Rasteira", "startup": 5, "active": 3, "recovery": 8, "damage": 7, "hitstop": 6, "tipo": "low"},
+        {"id": "psychic_orb", "nome": "Orbe Psíquico", "startup": 14, "active": 10, "recovery": 18, "damage": 12, "hitstop": 6, "tipo": "projetil_lento_flutuante"},
+        {"id": "teleport_backhit", "nome": "Teleporte", "startup": 5, "active": 4, "recovery": 10, "damage": 9, "hitstop": 6, "nota": "ataca pelas costas — testa guarda posicional"}
+      ]
+    },
+    "alis_landale": {
+      "classe": "leve",
+      "moves": [
+        {"id": "dagger", "nome": "Adaga", "startup": 5, "active": 3, "recovery": 7, "damage": 6, "hitstop": 6},
+        {"id": "kick", "nome": "Chute", "startup": 7, "active": 4, "recovery": 10, "damage": 10, "hitstop": 6},
+        {"id": "energy_wave", "nome": "Onda de Energia", "startup": 10, "active": 4, "recovery": 16, "damage": 11, "hitstop": 6, "tipo": "projetil"},
+        {"id": "dodge_counter", "nome": "Esquiva-Contra", "startup": 4, "active": 8, "recovery": 8, "damage": 9, "hitstop": 6, "tipo": "rolamento_invulneravel"}
+      ]
+    },
+    "boss_ninja_master": {
+      "classe": "chefe",
+      "moves": [
+        {"id": "clone_dash", "nome": "Rastros de Clone", "startup": 6, "active": 6, "recovery": 14, "damage": 10, "hitstop": 6, "nota": "deixa hitbox falsa"},
+        {"id": "shuriken_cloud", "nome": "Nuvem de Shurikens", "startup": 10, "active": 8, "recovery": 16, "damage": "3x4", "hitstop": 6, "pendencia": "multi-hit — ver open_decisions"},
+        {"id": "shadow_grab", "nome": "Agarre das Sombras", "startup": 6, "active": 4, "recovery": 22, "damage": 16, "hitstop": 6, "tipo": "command_grab"}
+      ]
+    },
+    "boss_count_dracula": {
+      "classe": "chefe",
+      "moves": [
+        {"id": "bats", "nome": "Morcegos", "startup": 10, "active": 8, "recovery": 16, "damage": 10, "hitstop": 6, "tipo": "projetil_arco"},
+        {"id": "mist_tp", "nome": "Teleporte+Bruma", "startup": 4, "active": 8, "recovery": 10, "damage": 0, "hitstop": 0, "tipo": "repositionamento_invulneravel"},
+        {"id": "life_drain", "nome": "Dreno Vital", "startup": 14, "active": 6, "recovery": 24, "damage": 14, "hitstop": 6, "tipo": "grab_cura_chefe"}
+      ]
+    },
+    "boss_luter": {
+      "classe": "chefe",
+      "moves": [
+        {"id": "barrier", "nome": "Barreira Mágica", "startup": 2, "active": 12, "recovery": 8, "damage": 0, "hitstop": 0, "tipo": "parry_projeteis"},
+        {"id": "dark_bolt", "nome": "Raio Sombrio", "startup": 6, "active": 4, "recovery": 14, "damage": 12, "hitstop": 6, "tipo": "projetil_vertical"},
+        {"id": "second_form", "nome": "Segunda Forma", "startup": 0, "active": 0, "recovery": 0, "damage": 0, "hitstop": 0, "tipo": "fase", "nota": "aos 30% HP: -2 frames de startup em tudo"}
+      ]
+    },
+    "boss_dark_force": {
+      "classe": "chefe",
+      "origem_pendente": "confirmar Phantasy Star II vs outro Dark Falz",
+      "moves": [
+        {"id": "energy_orbs", "nome": "Orbes de Energia", "startup": 10, "active": 6, "recovery": 16, "damage": "2x6", "hitstop": 6, "pendencia": "multi-hit — ver open_decisions"},
+        {"id": "tentacle", "nome": "Tentáculo", "startup": 3, "active": 10, "recovery": 26, "damage": 14, "hitstop": 6, "tipo": "grab_longo"},
+        {"id": "nova", "nome": "Nova", "startup": 40, "active": 6, "recovery": 24, "damage": 18, "hitstop": 6, "tipo": "tela_cheia_telegrafada", "gate": "worst-frame obrigatório"}
+      ]
+    }
+  }
+}

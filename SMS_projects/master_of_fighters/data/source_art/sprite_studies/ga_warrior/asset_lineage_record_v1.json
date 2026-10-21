@@ -1,0 +1,506 @@
+{
+  "schema": "asset_lineage_record_v1",
+  "asset_id": "ga_warrior_idle_sms_96px_12f_v1",
+  "project": "master_of_fighters",
+  "asset_role": "sprite_study",
+  "source_kind": "ai_generated_post_translation",
+  "channel": "built-in ImageGen image edit + ImageMagick alpha/cell cleanup and normalization + prepare_sms_pixel_art.py + ImageMagick indexed-frame extraction",
+  "status": "source_candidate",
+  "owner_approval": null,
+  "contract": {
+    "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_asset_contract_v1.json",
+    "sha256": "d769f987afa5983d324c3495c616afd07d297dbee83deda6b495c79389347d91"
+  },
+  "prompt": {
+    "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_prompt_v2.txt",
+    "sha256": "21a2e1efe2d767e3bc4fc3c70c7684511967b60126f53cd025aa5262c901d4d3"
+  },
+  "semantic_manifest": {
+    "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_semantics_v1.json",
+    "sha256": "4a49a3a0354c659940befc5cd4ce3d0db7657d2d35b6f7947eb600967870a8fe"
+  },
+  "inputs": [
+    {
+      "path": "data/source_art/concept_art/ga_warrior/ga_warrior_concept_sheet_v2_sms_palette.png",
+      "sha256": "5b88ea863db2f6ebf97722d39196812f9290f8532aee3a3c40312e07d3ca932f",
+      "role": "owner-approved v2 concept design reference: character identity, costume and palette"
+    },
+    {
+      "path": "doc/11-gdd.md",
+      "sha256": "61c6373cc208f1bd33f86432fadc2177dcc3fdf7c66175e1b3f85acda024c47c",
+      "role": "fighting-game direction and provisional 72-88 px idle scale window; heavy-class target near 88 px remains subject to scale-pilot confirmation"
+    },
+    {
+      "path": "doc/palettes_manifest.json",
+      "sha256": "e62d441e3e1ca6c4798308c802e1d4e6d70ddff57e4acd26557ee4ebcd5f9fff",
+      "role": "declared ga_warrior Master System palette, hard color contract"
+    },
+    {
+      "path": "doc/build_palettes_manifest.py",
+      "sha256": "75de3c03311663c844a68e65e2feffc962915231347a3020a8b71b1c1dff296e",
+      "role": "canonical palette-manifest generator"
+    },
+    {
+      "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_generated_v1.png",
+      "sha256": "fec0c670f44186913356bbd52b8200ab44ebad641461550ea8a14fa2c0f1eac2",
+      "role": "first sprite-grid draft used only as ImageGen layout reference; rejected after downscale review for insufficient pose diversity"
+    }
+  ],
+  "generation_iterations": [
+    {
+      "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_generated_v1.png",
+      "sha256": "fec0c670f44186913356bbd52b8200ab44ebad641461550ea8a14fa2c0f1eac2",
+      "disposition": "rejected",
+      "reason": "after logical-size normalization, poses grouped into overly similar row patterns; regenerated with explicit per-frame pose cues"
+    }
+  ],
+  "generated_source": {
+    "tool": "built-in ImageGen image edit",
+    "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_generated_v2.png",
+    "sha256": "acbd2aecb8928f8c70b9865c0adbb92b4f13e5dcb6bda5dbd64b654b6c8a1322",
+    "dimensions_px": [
+      1448,
+      1086
+    ],
+    "format": "RGBA PNG",
+    "layout": "4 columns x 3 rows; twelve 362x362 source cells",
+    "description": "Selected refined 12-frame guard-idle cycle based on the owner-approved v2 concept and first layout draft"
+  },
+  "alpha_cleanup": {
+    "tool": "ImageMagick",
+    "method": "threshold generated alpha at 90%; apply binary mask with CopyOpacity; crop the 4x3 source grid; trim each silhouette; retain transparent exterior",
+    "mask_path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_alpha_mask_v2.png",
+    "mask_sha256": "7b79915d3368152cda8ff1329f5b1f7afa1c94285a547c43f9f6c7bc693edca3",
+    "cutout_path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_alpha_v2.png",
+    "cutout_sha256": "a266e2f02f6af63a8218dfed0405aab55a8a549d2c6ced7b33db89894400e344",
+    "reason": "remove generated glow/edge halos and preserve only the authored silhouette before logical-size normalization"
+  },
+  "geometry_normalization": {
+    "tool": "ImageMagick",
+    "source_grid": [
+      4,
+      3
+    ],
+    "source_cell_px": [
+      362,
+      362
+    ],
+    "output_cell_px": [
+      96,
+      96
+    ],
+    "silhouette_envelope_px": [
+      88,
+      88
+    ],
+    "method": "trim each cell to opaque silhouette; uniform nearest-neighbor fit into 88x88; center horizontally and bottom-align at y=95 on a transparent 96x96 cell",
+    "normalized_sheet_path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_normalized_v2.png",
+    "normalized_sheet_sha256": "ff0cea976167d1dc1586d6dfbf3fff74e0e905ecd383e804d06ddc5b1e0e81a7",
+    "flattened_rgb_path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_flattened_v2.png",
+    "flattened_rgb_sha256": "bb6cc7ffb8e9e8d7c8cced852075dea212c4ec0d722e0ca07c43ab20a20d3c8c",
+    "observed_visible_width_px": [
+      77,
+      88
+    ],
+    "observed_visible_height_px": [
+      87,
+      88
+    ],
+    "baseline_y_px": 95,
+    "pivot_px": [
+      48,
+      95
+    ]
+  },
+  "conversion": {
+    "tool_path": "../../tools/sms_wrapper/prepare_sms_pixel_art.py",
+    "tool_sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463",
+    "png_writer_path": "../../tools/sms_wrapper/png_io.py",
+    "png_writer_sha256": "4971a586449a616a6b207458b60894dd5ea8d2cc910fb817d0e4d750f2739789",
+    "options": {
+      "size": [
+        384,
+        288
+      ],
+      "block": 1,
+      "dither": "none",
+      "project_palette": "ga_warrior",
+      "speckle_cleanup": true,
+      "cell_size": [
+        96,
+        96
+      ],
+      "transparent_index": 0
+    },
+    "palette_mapping": {
+      "manifest_character": "ga_warrior",
+      "useful_colors": 11,
+      "allowed_palette_rgb_with_transparent_index": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          85,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          255
+        ],
+        [
+          255,
+          170,
+          85
+        ],
+        [
+          170,
+          85,
+          0
+        ],
+        [
+          255,
+          0,
+          85
+        ],
+        [
+          85,
+          170,
+          255
+        ],
+        [
+          255,
+          170,
+          170
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          0,
+          170,
+          255
+        ],
+        [
+          255,
+          255,
+          85
+        ],
+        [
+          170,
+          85,
+          85
+        ],
+        [
+          85,
+          255,
+          255
+        ]
+      ],
+      "roles": "dark burgundy outline; blue/cyan fur cape and trousers; exposed skin; brown leather boots and guards; gold accents; white/cyan steel; unused red-cape color remains permitted by the manifest but is absent from this sheet"
+    },
+    "resource_gate": "PASS: audit_validate_resources.py --kind sheet --character ga_warrior --project SMS_projects/master_of_fighters"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_sms_96px_v1.png",
+    "sha256": "f5d558ec239e46fd87451d1fdf1029e23068d46a80ad42a17359fe5897f869fe",
+    "dimensions_px": [
+      384,
+      288
+    ],
+    "format": "8-bit indexed PNG",
+    "layout": "4 columns x 3 rows; twelve 96x96 frames",
+    "transparent_indices": [
+      0
+    ],
+    "useful_colors": 11,
+    "unique_frame_count": 12
+  },
+  "frames": [
+    {
+      "index": 0,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_00.png",
+      "sha256": "d308ca042b5999f6fea37842eeb1892a34d8c89d778195a0f92e5408854eebea",
+      "pixel_sha256": "991690229e212242145d93d080169efe1bd27eaaa8559ddd945d90137c3e5417",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        9,
+        8,
+        86,
+        95
+      ],
+      "visible_size_px": [
+        78,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 1,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_01.png",
+      "sha256": "77c9bbca54ff54943fa453ee1b4023aa0209747b8d090160f8bf1c88dacb9774",
+      "pixel_sha256": "a71e0f9e976b815dce0c435888152710c93f57b725785a4d24cd8c7443ad0a2d",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        9,
+        8,
+        85,
+        95
+      ],
+      "visible_size_px": [
+        77,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 2,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_02.png",
+      "sha256": "e2035303e02c3d47f72c18c8821cba8a6ad3f8d681dc5714944b04f53a5a6397",
+      "pixel_sha256": "c73f5c382c674e3ceb293a6922fcf249a9be9c7fbf05c37b7a2fbf44de190ab5",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        8,
+        8,
+        86,
+        95
+      ],
+      "visible_size_px": [
+        79,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 3,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_03.png",
+      "sha256": "3c4a0d2f85b451b30037755dbe01aef87dd1a60a985dadc1c11e17318adfba87",
+      "pixel_sha256": "39f21aa771289748c51dc94e357db7ca688500836fd3fe6af756452f8cdcab54",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        7,
+        8,
+        88,
+        95
+      ],
+      "visible_size_px": [
+        82,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 4,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_04.png",
+      "sha256": "f6c17b34b1a2d0fccb4dda2b68d7f57a5e53dc3d351e1aadc31e0f5dc53b50a5",
+      "pixel_sha256": "3b85cce860bda9d82a4fc79a923e4f578a5f77cc561687dcc7e19876ab723489",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        8,
+        8,
+        87,
+        95
+      ],
+      "visible_size_px": [
+        80,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 5,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_05.png",
+      "sha256": "1b066c8410a12c7820a0bb9063b3e76257670d379c9c0cc54e0cb96c61ea095c",
+      "pixel_sha256": "280f0d83b8200d6ee3daf388447f70ae7ada8ca3607c6fcc615294b4eaa769eb",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        9,
+        8,
+        86,
+        95
+      ],
+      "visible_size_px": [
+        78,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 6,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_06.png",
+      "sha256": "38b077f1d0a82138a602c4a5b506dec99fcee86bfa2bb61846c9683714f9483f",
+      "pixel_sha256": "1cb4008b487fc5c595659d12df1c7381e4b87bc44be7b5b5aee8265a2286e2a0",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        4,
+        9,
+        91,
+        95
+      ],
+      "visible_size_px": [
+        88,
+        87
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 7,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_07.png",
+      "sha256": "67f1cdb231d194914e30f5e6a8d18d34247f9d02a4c5c3008d5963f87dad3add",
+      "pixel_sha256": "4c1ed4f7e2cd7761e15d050dfc500a3fb5b959298de56140f489bc0988e7466a",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        8,
+        8,
+        86,
+        95
+      ],
+      "visible_size_px": [
+        79,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 8,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_08.png",
+      "sha256": "a6a845ceb876d1ad5a857154c49d15bb4fa22b1c1dbbee440aa6ce3d537113f8",
+      "pixel_sha256": "169a3a29f3e7418b6529d702a8e2af16d7b647b9b5778e6a55efc16e69958f5f",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        5,
+        8,
+        90,
+        95
+      ],
+      "visible_size_px": [
+        86,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 9,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_09.png",
+      "sha256": "131c0550741049d82022c15c6f671b7aca93657fd29ba32952bb90ec369dbf60",
+      "pixel_sha256": "0cc9bfdae51057b6db0eaae2891a1aa996394f6a255a6f2db376b5ecd6ac482b",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        6,
+        8,
+        88,
+        95
+      ],
+      "visible_size_px": [
+        83,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 10,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_10.png",
+      "sha256": "509c57c8f35327997d82284e4a3795112ad041d0786d7c7e90e0c2fca17aba0b",
+      "pixel_sha256": "e9871cc77f3988fd6e6c1034300bfad8280e6f1fd72bd0331df1c52992847db2",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        6,
+        8,
+        89,
+        95
+      ],
+      "visible_size_px": [
+        84,
+        88
+      ],
+      "baseline_y_px": 95
+    },
+    {
+      "index": 11,
+      "path": "data/source_art/sprite_studies/ga_warrior/frames_sms_v1/idle_11.png",
+      "sha256": "4a77a88ce7137266a5a319152ec91f0052f0e5741798603d535702c5f1f2ea16",
+      "pixel_sha256": "456869bca9de0b0997ee9ddec2acfa21dcb6e7bff8e04e792bb222c2beaacb53",
+      "pivot": [
+        48,
+        95
+      ],
+      "visible_bbox": [
+        8,
+        8,
+        87,
+        95
+      ],
+      "visible_size_px": [
+        80,
+        88
+      ],
+      "baseline_y_px": 95
+    }
+  ],
+  "review_preview": {
+    "path": "data/source_art/sprite_studies/ga_warrior/ga_warrior_idle_12f_sms_96px_v1_preview_4x.png",
+    "sha256": "01482aae1dfa6baba34d31787570af29bc227304dccafc6594ac4b6a03bdd6a6",
+    "description": "nearest-neighbor 4x preview flattened on #444444; production sprite sheet retains transparent index 0"
+  },
+  "visual_check": {
+    "twelve_full_body_poses": true,
+    "all_twelve_frames_unique_after_palette_conversion": true,
+    "same_character_and_approved_v2_costume": true,
+    "right_facing_guard_idle": true,
+    "bare_chest_blue_fur_cape_trousers_boots": true,
+    "horned_helmet_sword_and_round_shield_retained": true,
+    "shared_ground_baseline_and_pivot": true,
+    "no_visible_generated_glow_or_detached_grain": true,
+    "text_or_watermark": false
+  },
+  "technical_review": {
+    "indexed_png_verified": true,
+    "all_colors_on_sms_6bit_grid": true,
+    "per_character_manifest_palette_match": true,
+    "transparent_index_zero_verified": true,
+    "resource_gate": "PASS",
+    "animation_semantics_gate": "PASS",
+    "independent_review": "pending",
+    "rom_or_emulator_validation": false,
+    "scale_pilot_confirmation": "pending; current 87-88 px sheet scale is a study target, not a locked runtime scale"
+  },
+  "next_gate": "owner visual review of this idle sprite study; if accepted, close runtime scale with scale_pilot and separately measure metasprite, scanline and ROM binding before integration"
+}

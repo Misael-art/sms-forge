@@ -30,14 +30,14 @@ typedef struct { unsigned char bank; unsigned int off; unsigned char slot; } Pai
 typedef char pair_load_is_4_bytes[(sizeof(PairLoad) == 4u) ? 1 : -1];
 
 typedef struct {
-    const PoseTiles *pt;          /* 0 = empty */
-    unsigned char facing, pose;
+    unsigned char facing, pose, cache_slot, pose_valid;
     unsigned char nslots;
     unsigned char map[MAP_IDS];   /* compact pair id -> pool slot */
     PairLoad loads[MAX_UPLOADS];  /* one per slot: also the slot list */
 } Target;
 
 static Target tgt[2][2];
+extern volatile unsigned char pose_runtime_cache[];
 static unsigned char shown_i[2];          /* tgt[who][shown_i] is SHOWN */
 static unsigned char load_done[2];        /* progress of NEXT */
 static unsigned char presenting[2];       /* NEXT was put in the SAT being built */
@@ -54,8 +54,59 @@ unsigned char stream_alloc_fail, stream_dropped;
 #define SHOWN(w) (&tgt[w][shown_i[w]])
 #define NEXT(w)  (&tgt[w][shown_i[w] ^ 1u])
 
+typedef char pose_cache_layout_matches[
+    sizeof(PoseTiles) == POSE_CACHE_RECORD_BYTES ? 1 : -1];
+
+static volatile PoseTiles *target_pose_desc(const Target *t) {
+    return (volatile PoseTiles *)(pose_runtime_cache +
+        (unsigned int)t->cache_slot * POSE_CACHE_RECORD_BYTES);
+}
+
+static unsigned char actor_pose_count(unsigned char who) {
+    return who ? RYU_POSE_COUNT : KEN_POSE_COUNT;
+}
+
+static unsigned char actor_pose_base(unsigned char who) {
+    return who ? RYU_POSE_BASE : KEN_POSE_BASE;
+}
+
+static unsigned char actor_pose_index_bank(unsigned char who) {
+    return who ? RYU_POSE_INDEX_BANK : KEN_POSE_INDEX_BANK;
+}
+
+static unsigned int actor_pose_index_off(unsigned char who) {
+    return who ? RYU_POSE_INDEX_OFF : KEN_POSE_INDEX_OFF;
+}
+
+static unsigned char actor_pose_meta_bank(unsigned char who) {
+    return who ? RYU_POSE_META_BANK : KEN_POSE_META_BANK;
+}
+
+static void load_pose_desc(unsigned char who, unsigned char pose,
+                           volatile PoseTiles *out) {
+    const unsigned char *record;
+    unsigned int off = actor_pose_index_off(who);
+    unsigned char base = actor_pose_base(who);
+    if (pose < base || (unsigned char)(pose - base) >= actor_pose_count(who))
+        pose = base;
+    off += (unsigned int)(pose - base) * POSE_INDEX_RECORD_BYTES;
+    SMS_saveROMBank();
+    SMS_mapROMBank(actor_pose_index_bank(who));
+    record = (const unsigned char *)(0x8000u + off);
+    out->bank = record[0];
+    out->off = (unsigned int)record[1] | ((unsigned int)record[2] << 8);
+    out->meta_bank = actor_pose_meta_bank(who);
+    out->meta_r_off = (unsigned int)record[3] | ((unsigned int)record[4] << 8);
+    out->meta_l_off = (unsigned int)record[5] | ((unsigned int)record[6] << 8);
+    out->rows_r_off = (unsigned int)record[7] | ((unsigned int)record[8] << 8);
+    out->rows_l_off = (unsigned int)record[9] | ((unsigned int)record[10] << 8);
+    SMS_restoreROMBank();
+}
+
 static const unsigned char *target_meta(const Target *t) {
-    return t->facing ? t->pt->meta_l : t->pt->meta_r;
+    const volatile PoseTiles *pt = target_pose_desc(t);
+    unsigned int off = t->facing ? pt->meta_l_off : pt->meta_r_off;
+    return (const unsigned char *)(0x8000u + off);
 }
 
 /* ---- pool bookkeeping in assembly (the C loops cost ~40 lines per pose
@@ -98,7 +149,7 @@ static void release(Target *t) {
     release_asm();
     stream_slots_used -= t->nslots;
     t->nslots = 0;
-    t->pt = 0;
+    t->pose_valid = 0;
 }
 
 /* Walk only the pose's pieces (<= 38): a generation stamp per pair id says
@@ -203,17 +254,18 @@ static void allocate_asm(void) __naked {
  * fighters hold at most current + next (125 of 128, sized). */
 static unsigned char allocate(Target *t) {
     unsigned char id;
+    volatile PoseTiles *pt = target_pose_desc(t);
     if (++gen == 0) {                 /* wrapped: clear stamps once */
         for (id = 0; id < MAP_IDS; id++) seen_gen[id] = 0;
         gen = 1;
     }
-    al_meta = target_meta(t);
     al_map = t->map;
     al_loads = t->loads;
-    al_bank = t->pt->bank;
-    al_off = t->pt->off;
+    al_bank = pt->bank;
+    al_off = pt->off;
     SMS_saveROMBank();
-    SMS_mapROMBank(POSE_META_BANK);
+    SMS_mapROMBank(pt->meta_bank);
+    al_meta = target_meta(t);
     tl_al[0] = st_vcounter;
     allocate_asm();
     tl_al[1] = st_vcounter;
@@ -237,7 +289,9 @@ void stream_init(void) {
     for (s = 0; s < STREAM_SLOTS; s++) free_stack[s] = (unsigned char)(STREAM_SLOTS - 1u - s);
     free_top = STREAM_SLOTS;
     for (s = 0; s < 2; s++) {
-        tgt[s][0].pt = tgt[s][1].pt = 0;
+        tgt[s][0].pose_valid = tgt[s][1].pose_valid = 0;
+        tgt[s][0].cache_slot = (unsigned char)(s * 2u);
+        tgt[s][1].cache_slot = (unsigned char)(s * 2u + 1u);
         tgt[s][0].nslots = tgt[s][1].nslots = 0;
         shown_i[s] = 0;
         presenting[s] = 0;
@@ -246,31 +300,31 @@ void stream_init(void) {
     stream_alloc_fail = stream_dropped = 0;
 }
 
-void stream_request(unsigned char who, const PoseTiles *pt, unsigned char facing,
-                    unsigned char pose) {
+void stream_request(unsigned char who, unsigned char pose, unsigned char facing) {
     Target *n = NEXT(who);
     Target *sh = SHOWN(who);
     if (presenting[who]) return;              /* committed at the SAT copy */
-    if (sh->pt == pt && sh->facing == facing) {
-        if (n->pt) { release(n); stream_dropped++; }
+    if (sh->pose_valid && sh->pose == pose && sh->facing == facing) {
+        if (n->pose_valid) { release(n); stream_dropped++; }
         return;
     }
-    if (n->pt == pt && n->facing == facing) return;
-    if (n->pt) { release(n); stream_dropped++; }   /* stale upload never shown */
-    n->pt = pt;
+    if (n->pose_valid && n->pose == pose && n->facing == facing) return;
+    if (n->pose_valid) { release(n); stream_dropped++; }   /* stale upload never shown */
     n->facing = facing;
     n->pose = pose;
+    load_pose_desc(who, pose, target_pose_desc(n));
+    n->pose_valid = 1u;
     load_done[who] = 0;
-    if (!allocate(n)) n->pt = 0;
+    if (!allocate(n)) n->pose_valid = 0;
 }
 
-unsigned char stream_will_allocate(unsigned char who, const PoseTiles *pt,
+unsigned char stream_will_allocate(unsigned char who, unsigned char pose,
                                    unsigned char facing) {
     Target *n = NEXT(who);
     Target *sh = SHOWN(who);
     if (presenting[who]) return 0;
-    if (sh->pt == pt && sh->facing == facing) return 0;
-    if (n->pt == pt && n->facing == facing) return 0;
+    if (sh->pose_valid && sh->pose == pose && sh->facing == facing) return 0;
+    if (n->pose_valid && n->pose == pose && n->facing == facing) return 0;
     return 1;
 }
 
@@ -378,7 +432,7 @@ static void stream_pairs_asm(void) __naked {
 static void upload(unsigned char who) {
     Target *n = NEXT(who);
     unsigned char left;
-    if (!n->pt || reclaim[who]) return;
+    if (!n->pose_valid || reclaim[who]) return;
     left = n->nslots - load_done[who];
     if (!left) return;
     sa_ptr = &n->loads[load_done[who]];
@@ -398,17 +452,17 @@ void stream_step(void) {
     SMS_restoreROMBank();
 }
 
-void stream_load_now(unsigned char who, const PoseTiles *pt, unsigned char facing,
-                     unsigned char pose) {
+void stream_load_now(unsigned char who, unsigned char pose, unsigned char facing) {
     const unsigned char *src;
     unsigned char i;
     Target *n = NEXT(who);
-    if (SHOWN(who)->pt) release(SHOWN(who));
-    if (n->pt) release(n);
-    n->pt = pt;
+    if (SHOWN(who)->pose_valid) release(SHOWN(who));
+    if (n->pose_valid) release(n);
     n->facing = facing;
     n->pose = pose;
-    if (!allocate(n)) return;
+    load_pose_desc(who, pose, target_pose_desc(n));
+    n->pose_valid = 1u;
+    if (!allocate(n)) { n->pose_valid = 0u; return; }
     SMS_saveROMBank();
     for (i = 0; i < n->nslots; i++) {
         SMS_mapROMBank(n->loads[i].bank);
@@ -422,8 +476,9 @@ void stream_load_now(unsigned char who, const PoseTiles *pt, unsigned char facin
     stream_reclaim();
 }
 
-unsigned char stream_shows(unsigned char who, const PoseTiles *pt, unsigned char facing) {
-    return SHOWN(who)->pt == pt && SHOWN(who)->facing == facing;
+unsigned char stream_shows(unsigned char who, unsigned char pose, unsigned char facing) {
+    return SHOWN(who)->pose_valid && SHOWN(who)->pose == pose &&
+           SHOWN(who)->facing == facing;
 }
 
 unsigned char stream_presenting(void) {
@@ -436,19 +491,25 @@ void stream_cancel_present(void) {
 
 /* NEXT is presented only when it is exactly the target the logic wants:
  * a prefetched pose must never appear before its AIR turn. */
-unsigned char stream_display(unsigned char who, const PoseTiles *want, unsigned char want_facing,
+unsigned char stream_display(unsigned char who, unsigned char want_pose,
+                             unsigned char want_facing,
                              const unsigned char **meta, const unsigned char **map,
                              unsigned char *facing, const unsigned char **rows) {
     const Target *t = SHOWN(who);
     const Target *n = NEXT(who);
     presenting[who] = 0;
-    if (!reclaim[who] && n->pt == want && n->facing == want_facing &&
+    if (!reclaim[who] && n->pose_valid && n->pose == want_pose &&
+        n->facing == want_facing &&
         load_done[who] == n->nslots) {
         t = n;
         presenting[who] = 1;
     }
     *meta = target_meta(t);
-    *rows = t->facing ? t->pt->rows_l : t->pt->rows_r;
+    {
+        const volatile PoseTiles *pt = target_pose_desc(t);
+        unsigned int off = t->facing ? pt->rows_l_off : pt->rows_r_off;
+        *rows = (const unsigned char *)(0x8000u + off);
+    }
     *map = t->map;
     *facing = t->facing;
     return t->pose;
@@ -474,6 +535,6 @@ void stream_reclaim(void) {
     for (who = 0; who < 2; who++) {
         if (!reclaim[who]) continue;
         reclaim[who] = 0;
-        if (NEXT(who)->pt) release(NEXT(who));
+        if (NEXT(who)->pose_valid) release(NEXT(who));
     }
 }

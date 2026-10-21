@@ -1,0 +1,105 @@
+{
+  "tool": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_source_raster.py",
+  "tool_sha256": "4b6dead11d4538b68c9f8bbdf760ee007210076db26ba07a33c3c176d4853b40",
+  "selfcheck_returncode": 0,
+  "selfcheck": "self-check: PASS (binary/RGB/indexed positives; 35 negatives; input preservation)",
+  "cases": [
+    {
+      "case": "jab_v4",
+      "command": [
+        "/usr/sbin/python3",
+        "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_source_raster.py",
+        "--image",
+        "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/social_light_jab_candidate_v4.png",
+        "--contract",
+        "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_v4.contract.json",
+        "--json",
+        "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_v4.audit.json"
+      ],
+      "contract": "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_v4.contract.json",
+      "report": "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_v4.audit.json",
+      "returncode": 0,
+      "ok": true,
+      "problems": [],
+      "measured": {
+        "dimensions_px": [
+          1536,
+          1024
+        ],
+        "mode": "RGB",
+        "unique_rgb": 83402,
+        "alpha_zero_pixels": 0,
+        "alpha_255_pixels": 1572864,
+        "partial_alpha_pixels": 0,
+        "declared_frame_ids": [
+          "J01",
+          "J02",
+          "J03",
+          "J04",
+          "J05",
+          "J06"
+        ],
+        "declared_frame_count": 6,
+        "exact_key_pixels": 706581
+      },
+      "image_unchanged": true
+    },
+    {
+      "case": "jab_alpha_v5",
+      "command": [
+        "/usr/sbin/python3",
+        "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_source_raster.py",
+        "--image",
+        "/mnt/sdcard/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v5_alpha_attempt/social_light_jab_transparency_failed_v5.png",
+        "--contract",
+        "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_alpha_v5.contract.json",
+        "--json",
+        "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_alpha_v5.audit.json"
+      ],
+      "contract": "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_alpha_v5.contract.json",
+      "report": "/tmp/smsforge-artifact-inventory-20261010/raster_preflight/jab_alpha_v5.audit.json",
+      "returncode": 1,
+      "ok": false,
+      "problems": [
+        "binary_alpha: saved image contains intermediate alpha",
+        "binary_alpha: no opaque pixels"
+      ],
+      "measured": {
+        "dimensions_px": [
+          1536,
+          1024
+        ],
+        "mode": "RGBA",
+        "unique_rgb": 136533,
+        "alpha_zero_pixels": 971998,
+        "alpha_255_pixels": 0,
+        "partial_alpha_pixels": 600866,
+        "declared_frame_ids": [
+          "J01",
+          "J02",
+          "J03",
+          "J04",
+          "J05",
+          "J06"
+        ],
+        "declared_frame_count": 6
+      },
+      "image_unchanged": true
+    }
+  ],
+  "malformed_cli_returncode": 1,
+  "malformed_cli_no_traceback": true,
+  "interpretation": [
+    "Jab v4 passes the narrow opaque/key-present slot contract; this does NOT validate a uniform background, clean cutout, pose drawings or artistic review. Its existing review failures remain binding.",
+    "No explicit source color ceiling added, so source RGB count is measured and not treated as a universal SMS-source restriction.",
+    "Alpha v5 fails binary alpha directly: partial-alpha pixels and no fully opaque pixels.",
+    "Read-only checks: image hashes before/after equal; contracts/reports written only to temporary evidence directory."
+  ],
+  "existing_gate_roles": {
+    "audit_validate_resources.py": "runtime indexed palette/grid resources",
+    "audit_sprite_cutout.py": "indexed component islands and material bands",
+    "audit_asset_proof_sheet.py": "indexed proof transform/pixel identity and declared gates",
+    "audit_animation_contract.py": "authored pose/track/timing declarations",
+    "audit_source_raster.py": "actual saved preconversion sheet SHA/dimensions/declared slot geometry/source transparency contract"
+  }
+}

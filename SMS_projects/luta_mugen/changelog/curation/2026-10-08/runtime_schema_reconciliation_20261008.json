@@ -1,0 +1,203 @@
+{
+  "schema": "luta_mugen_runtime_schema_reconciliation_v1",
+  "captured_at_utc": "2026-10-08T18:26:28Z",
+  "purpose": "Reconcile the reproducible Ryo/Ryo source cut with the runtime schema in the current project tree; this is a study result, not promotion.",
+  "inputs": {
+    "source_zip": {
+      "path": "base/OUTROS/ffspRyo_v3.zip",
+      "bytes": 2342078,
+      "sha256": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133"
+    },
+    "profile": {
+      "path": "data/ryo_v3_runtime_cut_20261006.json",
+      "bytes": 7082,
+      "sha256": "b7a1fbd32670f09dc09f6c5d365c3dbaa88923810a99ec7a67f7a284986b6d6f"
+    },
+    "generator": {
+      "path": "../../tools/sms_wrapper/mugen2sms/generators/fight_runtime_data.py",
+      "sha256": "49c07fae4ccbdc295cba7a912d71537596cfa98b49bdcd8deb436b1ad9cfe7ae"
+    },
+    "reference_study": "out/local_study/ryo_ryo_cut_20261008a_source_routes/versus_cut",
+    "reproduction_command": "PYTHONPATH=tools/sms_wrapper python3 -m mugen2sms versus-cut --p1-source base/OUTROS/ffspRyo_v3.zip --p1-config data/ryo_v3_runtime_cut_20261006.json --p2-source base/OUTROS/ffspRyo_v3.zip --p2-config data/ryo_v3_runtime_cut_20261006.json --out <temporary-output>",
+    "self_check": "PASS: versus-cut --self-check"
+  },
+  "generation_comparison": {
+    "new_scene_schema": "sms_versus_scene_cut_v1",
+    "new_runtime_schema": "sms_fight_runtime_data_v5",
+    "reference_runtime_schema": "sms_fight_runtime_data_v4",
+    "poses_per_slot": {
+      "p1_ken": 94,
+      "p2_ryu": 94
+    },
+    "source_sha256_by_slot": {
+      "p1_ken": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133",
+      "p2_ryu": "7272abcf787c0946fd388be84010b720579be5d301590b0eec8e7f22f0f32133"
+    },
+    "source_route_pattern_count_by_slot": [
+      13,
+      13
+    ],
+    "source_route_dispatch_contract": {
+      "compiled_tables": [
+        "p1_source_routes",
+        "p2_source_routes"
+      ],
+      "fields": [
+        "pattern",
+        "source_state",
+        "source_action",
+        "action_anim"
+      ],
+      "scope": "pattern-to-source target binding only; source controller predicates and gameplay effects are not executed by these tables"
+    },
+    "output_file_counts": {
+      "generated": 124,
+      "reference": 126
+    },
+    "generated_only_files": [],
+    "reference_only_files": [
+      "attack_cmds.h",
+      "attack_cmds_report.json"
+    ],
+    "hash_mismatches": [
+      "fight_runtime_data.h",
+      "fight_runtime_data_manifest.json",
+      "p1_ken/ken_scene_manifest.json",
+      "p1_ken/ken_scene_runtime.h",
+      "p2_ryu/ken_scene_manifest.json",
+      "p2_ryu/ken_scene_runtime.h",
+      "versus_scene_manifest.json",
+      "versus_scene_runtime.h"
+    ],
+    "image_bank": {
+      "bytes": 622592,
+      "generated_sha256": "1e002a1729566132cfa1efadd77b65cc216106246671ff9db5cdcf74bf5186f2",
+      "reference_sha256": "1e002a1729566132cfa1efadd77b65cc216106246671ff9db5cdcf74bf5186f2",
+      "byte_identical": true
+    },
+    "runtime_delta": "Generated v5 adds a 13-route source binding table per slot, updates CMD patterns to v4 encoding, and records the dispatch contract. The source-route table binds pattern to source state/action/animation; it does not execute controller predicates or gameplay effects."
+  },
+  "runtime_compatibility": {
+    "canonical_fight_c_sha256": "1180363b930f24c3ed43ee32e4313c8c5cb83fe380dd687cd79a69739bf31aa5",
+    "canonical_generated_runtime_header": {
+      "path": "out/local_study/generated/versus_cut/fight_runtime_data.h",
+      "schema": "sms_fight_runtime_data_v3",
+      "sha256": "bf605a44e4974c77595ff6e83453846d2ecf5a27870c4d900343fcc061dd4ef5"
+    },
+    "canonical_fight_c_consumes_source_routes": false,
+    "input_decoder_supports_cmd_v4": true,
+    "compile_attempt": {
+      "scope": "temporary copy under /run/user/1000/codex-desktop/ryo_ryo_build_20261008; project source tree was not changed",
+      "command": "python3 tools/sms_wrapper/build_inner.py --project <temporary-project>",
+      "pre_gates": "passed; compilation began",
+      "result": "FAILED during src/fight.c compile; no ROM was produced",
+      "first_error": "Initial unmodified copy: generated fight_runtime_data.h uses AT_N but canonical src/fight.c does not define it; its CharacterData declaration also lacks close_distances_q8, far_distances_q8, and ground_front_q8. After adding only those declarations in a temporary probe, compilation/linking succeeded with 20 generated state rows overflowing 12 runtime slots, then makesms failed with Bank 1 overflow; no ROM was produced.",
+      "log_path": "changelog/curation/2026-10-08/runtime_schema_reconciliation_build.log",
+      "log_sha256": "0b43cc7b1dc0760c02fe9674c10e88651c09586df53bee0319b0c5fb1f5078d4"
+    },
+    "nearby_study_implementation": {
+      "path": "out/local_study/ryo_terry_runtime_rom_20261008/src/fight.c",
+      "sha256": "a8ea7c44da11edacbaa2d978705f44516c034dc0c356c573bf83c8e46d7ff039",
+      "has_AT_N_and_close_far_fields": true,
+      "is_drop_in": false,
+      "reason": "uses an expanded state model and a different banked runtime contract; not a file-level substitute for canonical fight.c"
+    },
+    "interpretation": "Do not fix this by adding AT_N and fields alone. State indices/count, route consumption, and banked metadata layout need one explicit runtime contract.",
+    "compatibility_probe": {
+      "scope": "second build attempt in the same temporary project after a local-only struct patch; original project src/fight.c was not modified",
+      "temporary_patch_sha256_before": "1180363b930f24c3ed43ee32e4313c8c5cb83fe380dd687cd79a69739bf31aa5",
+      "temporary_patch_sha256_after": "b69f970171eeeb29e3e0f11326f522cb9606a0460e0f05ef9ac1c53459b7824b",
+      "changes": "added enum AT_LP/AT_HP/AT_LK/AT_HK/AT_N and three CharacterData fields: close_distances_q8, far_distances_q8, ground_front_q8",
+      "compile_and_link": "completed for all seven C modules and linked an 88,044-byte IHX",
+      "warnings": [
+        "generated p1_states and p2_states each provide 20 StateDef rows, while the current fight.c ST_N_STATES is 12; SDCC reports excess initializer elements, so the generated far-state rows are truncated from those arrays"
+      ],
+      "makesms": "FAILED: Fatal: Bank 1 overflow while merging the 38-bank image bundle at destination bank 2",
+      "rom_produced": false,
+      "log_path": "changelog/curation/2026-10-08/runtime_schema_compatibility_probe_build.log",
+      "log_sha256": "4578d97814b74ee361c5ac62b16d34ad56f7237fdec0fa0f9cdbf01709f097db",
+      "conclusion": "The minimal struct patch is insufficient. The generated state-table shape and banked metadata layout also require a matching runtime integration; route tables remain unconsumed by the current C code."
+    }
+  },
+  "focused_validation": {
+    "command": "PYTHONPATH=tools/sms_wrapper python3 -m pytest -q tools/sms_wrapper/mugen2sms/tests/test_fight_runtime_data.py tools/sms_wrapper/mugen2sms/tests/test_integrated_runtime_data.py tools/sms_wrapper/mugen2sms/tests/test_scene_cut_scale_order.py tools/sms_wrapper/mugen2sms/tests/test_cmd_tier_blob.py",
+    "result": "40 passed in 0.39s",
+    "runtime_probe": "Second temporary build compiled and linked but emitted state-array truncation warnings; makesms failed Bank 1 overflow; no ROM."
+  },
+  "native_qa": {
+    "status": "blocked_before_request_creation",
+    "reason": "Canonical doc/10-memory-bank.md and companion authority docs previously returned EIO; SMS_GLOBAL §99 prohibits substituting historical snapshots or preparing QA with unreadable authority context. No ROM or native worker was produced in this step."
+  },
+  "preserved_semantic_artifacts": [
+    {
+      "path": "runtime_schema_reconciliation_20261008/fight_runtime_data.h",
+      "bytes": 5591,
+      "sha256": "80ee71c739a936e81a8985c626efff0afbf32c3540f6dc0c55f0549653834b2e",
+      "source_sha256": "80ee71c739a936e81a8985c626efff0afbf32c3540f6dc0c55f0549653834b2e"
+    },
+    {
+      "path": "runtime_schema_reconciliation_20261008/fight_runtime_data_manifest.json",
+      "bytes": 134150,
+      "sha256": "50e6b3c677ef73e55fb7887a7adfefbe59a515109e84aeaf67872805f684b0b7",
+      "source_sha256": "50e6b3c677ef73e55fb7887a7adfefbe59a515109e84aeaf67872805f684b0b7"
+    },
+    {
+      "path": "runtime_schema_reconciliation_20261008/versus_scene_manifest.json",
+      "bytes": 158173,
+      "sha256": "6dee40b6fe8e2748ceff04576a42fd8bb57cbd297f1b4e9830bbc76b633c41b0",
+      "source_sha256": "6dee40b6fe8e2748ceff04576a42fd8bb57cbd297f1b4e9830bbc76b633c41b0"
+    },
+    {
+      "path": "runtime_schema_reconciliation_20261008/p1_ken/ken_scene_manifest.json",
+      "bytes": 134718,
+      "sha256": "632e50d1f12a5266486acfe90d7f87f433a1adb584e2e9a0f4e28e6e51ec3529",
+      "source_sha256": "632e50d1f12a5266486acfe90d7f87f433a1adb584e2e9a0f4e28e6e51ec3529"
+    },
+    {
+      "path": "runtime_schema_reconciliation_20261008/p2_ryu/ken_scene_manifest.json",
+      "bytes": 134724,
+      "sha256": "6f06bd9280245a1011d60a45bdd0200dcc33b97d328a3b12a6d8624389b452a4",
+      "source_sha256": "6f06bd9280245a1011d60a45bdd0200dcc33b97d328a3b12a6d8624389b452a4"
+    }
+  ],
+  "next_safe_actions": [
+    "After current authority documents are readable, choose the supported runtime schema and reconcile the Ryo/Ryo package against its state model instead of mixing generated headers with the old FSM.",
+    "Add explicit C runtime consumption for source-route tables only with a bounded semantics contract; keep predicates/effects marked unsupported until implemented.",
+    "Build the complete candidate, then run private native QA on that exact ROM before promotion."
+  ],
+  "disposition": "The direct versus-cut v5 output does not build against canonical fight.c. A separate banked schema-v6 pipeline using the Ryo/Ryo cut and the advanced study runtime built a 720,896-byte candidate ROM with pre-gates passing and exact bank bytes in the ROM. It remains a study candidate: source-route behavior is not executed, the asset-binding map is absent, and there is no emulator evidence.",
+  "banked_runtime_probe": {
+    "report_path": "changelog/curation/2026-10-08/ryo_ryo_banked_runtime_probe_20261008/probe_record.json",
+    "rom_sha256": "b5549e29368e03efe0cc3f0a280d0bd7b2c426fd84f0d2b7e92b6cac970814d4",
+    "rom_bytes": 720896,
+    "bank_image_sha256": "91d42b5c15781f6619f0a327aec24e85c8b30a64d1d3ed3df141461e385f763a",
+    "bank_image_bytes": 688128,
+    "bank_image_exactly_bound": true,
+    "build_axes": {
+      "build": true,
+      "validation_report": true,
+      "boot_emulador": false,
+      "gameplay": false,
+      "fps_constante": false,
+      "audio": false,
+      "memory_bank_atualizado": false
+    },
+    "row_schedule_model": {
+      "passed": true,
+      "pose_pairs": 8836,
+      "max_sat": 48,
+      "max_scanline": 8
+    },
+    "rom_asset_binding": {
+      "problems": [
+        "rom_asset_binding_unproven: mapa ausente (doc/rom_asset_binding.json)"
+      ],
+      "report": {
+        "present": false,
+        "entries": 0
+      }
+    },
+    "emulator_qa": "not performed; §99 blocks QA context while canonical docs return EIO",
+    "classification": "separate schema-v6 banked runtime study candidate; not a canonical-source build and not promoted"
+  }
+}

@@ -1,0 +1,1008 @@
+{
+ "schema": "openbor_sms_o3_silhouette_presentation_v1",
+ "generated_at": "2026-10-19",
+ "project": "openbor_sms_rev1",
+ "author": "OpenCode, sessao de correcao pos-M8 (silhueta + apresentacao + Lote C)",
+ "status": "post_m8_candidate_not_delivery",
+ "scope": "NTSC; uma cena/um input; leitura de SAT/RAM por quadro VDP e video de framebuffer; gate estatico de celulas emitidas. Evidencia de correcao e resposta, nao oraculo de render, nao medicao de FPS/throughput/audio e nao delivery visual.",
+ "rom": {
+  "sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+  "bytes": 131072,
+  "path": "out/rom/openbor_sms_rev1.sms",
+  "copy": "out/evidence/o3_silhouette_presentation_20261019/rom/openbor_sms_rev1_701379cc.sms",
+  "role": "candidato pos-M8 com corte cap5"
+ },
+ "old_rom": {
+  "sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+  "bytes": 131072,
+  "copy": "out/evidence/o3_silhouette_presentation_20261019/rom/openbor_sms_rev1_a7f02b84.sms",
+  "role": "SHA do M8/audio com o defeito a102 (cap8, sem corte)"
+ },
+ "cap4_rom": {
+  "sha256": "56a09458d94d4933a79d6b32289d260fc54d0dff799c79c9b7a9ed3d133f887b",
+  "bytes": 131072,
+  "copy": "out/evidence/o3_silhouette_presentation_20261019/rom/openbor_sms_rev1_56a09458_cap4.sms",
+  "role": "comparacao A/B do corte cap4; nao promovido"
+ },
+ "emission": {
+  "record": "data/generated/emit/o3_emission_20261017_r3.json",
+  "record_sha256": "486f9f07f8bcac7c9c47237d6f707160d82e9c8f79bb8fd52f2adb861e0b915a",
+  "evidence_copy": "out/evidence/o3_silhouette_presentation_20261019/emission_r3.json",
+  "banks": {
+   "used": 78848,
+   "free": 3072,
+   "capacity": 81920
+  },
+  "trim": {
+   "policy": "D9-a3: a101..a105 limitados a 5 celulas/linha nas linhas 1-2; o lado externo (arco da espada) cai primeiro",
+   "row_cap": 5,
+   "dropped_cells": 14,
+   "frames": [
+    "a101",
+    "a102",
+    "a103",
+    "a104",
+    "a105"
+   ],
+   "source_count_and_8_per_line_gate": "permanecem pre-trim; o corte e de composicao, nao de conteudo"
+  }
+ },
+ "silhouette": {
+  "defect": {
+   "observed_on": "a7f02b84 (cap8)",
+   "case": "ataque a102 do jogador contra long walk03/pain01",
+   "old_player_a102_cells": 29,
+   "old_player_a102_row_peaks": [
+    0,
+    7,
+    8,
+    4,
+    6,
+    4
+   ],
+   "old_live_ec_i29": [
+    0,
+    0,
+    0,
+    2,
+    2,
+    0
+   ],
+   "meaning": "cabeca/tronco do inimigo com 0 celulas nas linhas 1-2; so pernas sobrevivem",
+   "frames": [
+    "comparison/old_000029.png",
+    "comparison/old_000030.png",
+    "comparison/old_000045.png"
+   ]
+  },
+  "cause": "O orcamento de 8 entradas de sprite por scanline e compartilhado. As linhas 1-2 do a102 pediam 7/8 celulas e consumiam a linha antes do inimigo; SAT legal, paleta legal e canvas 256x192 nao provam personagem presente.",
+  "fix": {
+   "policy": "O3_AX_ATTACK_ROW_CAP = 5 nas linhas 1-2 das poses ax a101..a105; remover primeiro o lado externo (maior col para left, menor col para right)",
+   "source": "tools/sms_wrapper/openbor2sms/openbor2sms/sms_emit.py",
+   "applies_to": [
+    "a101",
+    "a102",
+    "a103",
+    "a104",
+    "a105"
+   ],
+   "not_applied_to": [
+    "idle",
+    "walk",
+    "pain",
+    "fall",
+    "rise",
+    "ataque do inimigo"
+   ],
+   "live_cap5": {
+    "a102_vs_walk03": {
+     "ec": [
+      0,
+      3,
+      3,
+      2,
+      2,
+      0
+     ],
+     "enemy_kept": "10/18",
+     "enemy_critical_rows": [
+      3,
+      3
+     ],
+     "player_rows": [
+      5,
+      5,
+      4,
+      6,
+      4
+     ]
+    },
+    "a102_vs_pain01": {
+     "ec": [
+      2,
+      3,
+      3,
+      2,
+      2,
+      0
+     ],
+     "enemy_critical_rows": [
+      3,
+      3
+     ]
+    },
+    "a103_vs_pain02": {
+     "ec": [
+      0,
+      3,
+      2,
+      2,
+      3,
+      0
+     ],
+     "enemy_kept": "10/19",
+     "enemy_critical_rows": [
+      3,
+      2
+     ],
+     "note": "linha 2 no piso do gate (2); cap4 tambem tem 2 nessa linha"
+    }
+   },
+   "tradeoff": "cap4 devolve 4/4 ao inimigo mas remove quase todo o arco da espada; cap5 preserva 3/3 e um swoosh curto. O cap5 foi escolhido por equilibrio visual, nao por maximizar um ator."
+  },
+  "live_ec_key_frames": {
+   "old_a7f02b84": {
+    "i29": [
+     0,
+     0,
+     0,
+     2,
+     2,
+     0
+    ],
+    "verdict": "defeito: cabeca/tronco 0/0"
+   },
+   "cap4_56a09458": {
+    "i26": [
+     0,
+     4,
+     4,
+     2,
+     2,
+     0
+    ],
+    "i58": [
+     0,
+     4,
+     2,
+     2,
+     3,
+     0
+    ],
+    "drops": 24,
+    "verdict": "inimigo 4/4; arco da espada quase ausente"
+   },
+   "cap5_701379cc": {
+    "i26": [
+     0,
+     3,
+     3,
+     2,
+     2,
+     0
+    ],
+    "i38": [
+     2,
+     3,
+     3,
+     2,
+     2,
+     0
+    ],
+    "i59": [
+     0,
+     3,
+     2,
+     2,
+     3,
+     0
+    ],
+    "i70": [
+     0,
+     3,
+     3,
+     2,
+     2,
+     0
+    ],
+    "drops": 14,
+    "verdict": "inimigo 3/3 na pose mais dura; 3/2 no piso a103/pain02; swoosh curto preservado"
+   }
+  },
+  "gate": {
+   "tool": "tools/sms_wrapper/audit_silhouette_integrity.py",
+   "self_check": "PASS (cap8 zera cabeca; cap5 preserva; parser C)",
+   "report": "doc/artifacts/o3_silhouette_gate_20261019.json",
+   "report_sha256": "bd0afced54e3a1b3db4dc17ead2fc9fa41e619d8bb666b880492097bf3c07ce8",
+   "ok": true,
+   "cases": 1000,
+   "thresholds": {
+    "enemy_standing_critical_rows": [
+     1,
+     2
+    ],
+    "enemy_min_per_row": 2,
+    "enemy_min_total": 5,
+    "player_critical_rows": [
+     1,
+     2,
+     3
+    ],
+    "player_min_per_row": 3,
+    "attack_upper_cap_rows_1_2": 5
+   },
+   "worst": {
+    "player_frame": "a103",
+    "player_rows": [
+     3,
+     5,
+     6,
+     5,
+     4
+    ],
+    "enemy_frame": "idle01",
+    "ec": [
+     0,
+     3,
+     2,
+     2,
+     3,
+     0
+    ],
+    "enemy_critical_rows": [
+     3,
+     2
+    ],
+    "enemy_total": 5
+   },
+   "scope_limit": "mede celulas emitidas (estatico), nao arte, nao a SAT viva da ROM, nao o framebuffer; a QA viva precisa ler ec/SAT e revisar o video no SHA"
+  },
+  "visual_evidence": {
+   "three_way": "comparison/comparison_3way_zoom.png",
+   "three_way_full": "comparison/comparison_3way.png",
+   "a103_zoom": "comparison/comparison_a103_zoom.png",
+   "old_frames": [
+    "comparison/old_000029.png",
+    "comparison/old_000030.png",
+    "comparison/old_000045.png"
+   ],
+   "cap5_frames": [
+    "comparison/cap5_000013.png",
+    "comparison/cap5_000025.png",
+    "comparison/cap5_000026.png",
+    "comparison/cap5_000101.png",
+    "comparison/cap5_000112.png",
+    "comparison/cap5_000128.png"
+   ],
+   "source_art": [
+    "art/ax_a101_left.png",
+    "art/ax_a102_left.png",
+    "art/ax_a103_left.png",
+    "art/ax_a104_left.png",
+    "art/ax_a105_left.png",
+    "art/long_walk03_left.png",
+    "art/long_pain01_left.png",
+    "art/long_pain02_left.png"
+   ],
+   "sat_decodes": [
+    "composition/sat_start_decode.txt",
+    "composition/sat_end_decode.txt"
+   ],
+   "comparison_limits": "a arte-fonte e o SAT foram comparados por leitura de celulas e pelo recorte do framebuffer; nao ha oraculo full-frame independente (audit_render_glitch segue bloqueado)"
+  },
+  "residual": {
+   "a103_pain02_row2": 2,
+   "floor": 2,
+   "cap4_same_row": 2,
+   "enemy_attack_vs_player_idle": "nao esta na matriz do gate: o a102 do inimigo fica em 15/27 e o a103 em 19/28 contra o idle/pain do jogador; cabeca/tronco 3/3 e 4/4, mas o caso entra na regressao de dano",
+   "not_covered": [
+    "ataque do inimigo",
+    "queda/morte",
+    "2P",
+    "outras cenas",
+    "PAL"
+   ]
+  }
+ },
+ "presentation": {
+  "method": "Um quadro VDP por sequencia + leituras de RAM; video de framebuffer 256x192; decode da SAT; mesmo boot/cena/input/quadro para trace, SAT e video. Frame-paced: nao mede FPS, throughput ou audio.",
+  "frame_mapping": {
+   "i": "VDP_frame - 400",
+   "video_index": "VDP_frame - 401",
+   "video_first_frame_status": 400,
+   "video_first_captured": 401,
+   "video_last_captured": 571,
+   "video_frames": 171,
+   "trace_samples": "i0..i170 (VDP 400..570); o ultimo quadro do video (571) nao tem leitura de RAM",
+   "key_frames": {
+    "i14_first_visible": {
+     "vdp": 414,
+     "video": 13
+    },
+    "i27_contact": {
+     "vdp": 427,
+     "video": 26
+    },
+    "i90_control_return": {
+     "vdp": 490,
+     "video": 89
+    },
+    "i102_display_idle": {
+     "vdp": 502,
+     "video": 101
+    },
+    "i129_damage": {
+     "vdp": 529,
+     "video": 128
+    }
+   }
+  },
+  "input": {
+   "i": 1,
+   "vdp_frame": 401,
+   "p1": 16,
+   "duration": "1 quadro",
+   "after_input": "p1=0; neutro ate o fim (input_trace 401..571)"
+  },
+  "timeline": [
+   {
+    "i": 1,
+    "event": "input attack",
+    "vdp": 401
+   },
+   {
+    "i": 1,
+    "event": "FSM state=2 (attack)",
+    "vdp": 401
+   },
+   {
+    "i": 14,
+    "event": "primeira pose visivel a101",
+    "vdp": 414
+   },
+   {
+    "i": 26,
+    "event": "a102 visivel",
+    "vdp": 426
+   },
+   {
+    "i": 27,
+    "event": "contato; enemy HP 50->43",
+    "vdp": 427
+   },
+   {
+    "i": 38,
+    "event": "enemy pain01 visivel (11 q apos o contato)",
+    "vdp": 438
+   },
+   {
+    "i": 59,
+    "event": "a103 visivel",
+    "vdp": 459
+   },
+   {
+    "i": 70,
+    "event": "a104 visivel",
+    "vdp": 470
+   },
+   {
+    "i": 82,
+    "event": "a105 visivel",
+    "vdp": 482
+   },
+   {
+    "i": 90,
+    "event": "retorno de controle: state=0",
+    "vdp": 490
+   },
+   {
+    "i": 102,
+    "event": "idle01 visivel (fim visual do ataque do jogador)",
+    "vdp": 502
+   },
+   {
+    "i": 103,
+    "event": "enemy state=2 (ataque do inimigo)",
+    "vdp": 503
+   },
+   {
+    "i": 113,
+    "event": "enemy a101 visivel",
+    "vdp": 513
+   },
+   {
+    "i": 127,
+    "event": "enemy a102 visivel",
+    "vdp": 527
+   },
+   {
+    "i": 129,
+    "event": "dano no jogador; HP 100->95; state=3",
+    "vdp": 529
+   },
+   {
+    "i": 140,
+    "event": "player pain01 visivel (11 q apos o dano)",
+    "vdp": 540
+   },
+   {
+    "i": 155,
+    "event": "player pain02 visivel",
+    "vdp": 555
+   },
+   {
+    "i": 163,
+    "event": "enemy a103 visivel",
+    "vdp": 563
+   },
+   {
+    "i": 170,
+    "event": "ultimo sample de trace; player pain02/enemy a103",
+    "vdp": 570
+   }
+  ],
+  "player_display_runs": [
+   {
+    "pose": "idle01_left",
+    "cells": "23/23",
+    "from": 0,
+    "to": 13
+   },
+   {
+    "pose": "a101_left",
+    "cells": "23/23",
+    "from": 14,
+    "to": 25
+   },
+   {
+    "pose": "a102_left",
+    "cells": "24/24",
+    "from": 26,
+    "to": 58
+   },
+   {
+    "pose": "a103_left",
+    "cells": "23/23",
+    "from": 59,
+    "to": 69
+   },
+   {
+    "pose": "a104_left",
+    "cells": "22/22",
+    "from": 70,
+    "to": 80
+   },
+   {
+    "pose": "a105_left",
+    "cells": "21/21",
+    "from": 82,
+    "to": 101,
+    "note": "i81 e transicao nao identificada pelo decoder"
+   },
+   {
+    "pose": "idle01_left",
+    "cells": "23/23",
+    "from": 102,
+    "to": 139
+   },
+   {
+    "pose": "pain01_left",
+    "cells": "23/23",
+    "from": 140,
+    "to": 154
+   },
+   {
+    "pose": "pain02_left",
+    "cells": "20/20",
+    "from": 155,
+    "to": 170
+   }
+  ],
+  "enemy_display_runs": [
+   {
+    "pose": "walk01/walk03",
+    "cells": "12/19..14/18",
+    "from": 0,
+    "to": 25
+   },
+   {
+    "pose": "walk03_left",
+    "cells": "14/18",
+    "from": 26,
+    "to": 37
+   },
+   {
+    "pose": "pain01_left",
+    "cells": "12/19",
+    "from": 38,
+    "to": 58
+   },
+   {
+    "pose": "pain02_left",
+    "cells": "10/19",
+    "from": 59,
+    "to": 112
+   },
+   {
+    "pose": "a101_left",
+    "cells": "12/20",
+    "from": 113,
+    "to": 126
+   },
+   {
+    "pose": "a102_left",
+    "cells": "15/27",
+    "from": 127,
+    "to": 162
+   },
+   {
+    "pose": "a103_left",
+    "cells": "19/28",
+    "from": 163,
+    "to": 170
+   }
+  ],
+  "ec_runs": [
+   {
+    "from": 0,
+    "to": 13,
+    "ec": [
+     0,
+     3,
+     3,
+     3,
+     3,
+     0
+    ]
+   },
+   {
+    "from": 14,
+    "to": 25,
+    "ec": [
+     0,
+     4,
+     4,
+     3,
+     3,
+     0
+    ]
+   },
+   {
+    "from": 26,
+    "to": 37,
+    "ec": [
+     0,
+     3,
+     3,
+     2,
+     2,
+     0
+    ]
+   },
+   {
+    "from": 38,
+    "to": 58,
+    "ec": [
+     2,
+     3,
+     3,
+     2,
+     2,
+     0
+    ]
+   },
+   {
+    "from": 59,
+    "to": 69,
+    "ec": [
+     0,
+     3,
+     2,
+     2,
+     3,
+     0
+    ]
+   },
+   {
+    "from": 70,
+    "to": 101,
+    "ec": [
+     0,
+     3,
+     3,
+     2,
+     2,
+     0
+    ]
+   },
+   {
+    "from": 102,
+    "to": 126,
+    "ec": [
+     0,
+     3,
+     3,
+     3,
+     3,
+     0
+    ]
+   },
+   {
+    "from": 127,
+    "to": 139,
+    "ec": [
+     3,
+     3,
+     3,
+     3,
+     3,
+     0
+    ]
+   },
+   {
+    "from": 140,
+    "to": 154,
+    "ec": [
+     4,
+     3,
+     3,
+     2,
+     2,
+     0
+    ]
+   },
+   {
+    "from": 155,
+    "to": 170,
+    "ec": [
+     5,
+     4,
+     4,
+     3,
+     3,
+     0
+    ]
+   }
+  ],
+  "response_metrics": {
+   "input_to_first_fsm_reaction_frames": 0,
+   "input_to_first_visible_frames": 13,
+   "input_to_contact_frames": 26,
+   "input_to_control_return_frames": 89,
+   "input_to_display_idle_frames": 101,
+   "contact_to_enemy_pain_display_frames": 11,
+   "control_return_to_display_idle_frames": 12,
+   "control_return_to_damage_frames": 39,
+   "display_idle_to_damage_frames": 27,
+   "enemy_attack_state_to_damage_frames": 26,
+   "damage_to_player_pain_display_frames": 11
+  },
+  "damage_isolation": {
+   "player_control_return_i": 90,
+   "player_display_idle_i": 102,
+   "enemy_attack_state_i": 103,
+   "enemy_a101_display_i": 113,
+   "enemy_a102_display_i": 127,
+   "player_hp_drop_i": 129,
+   "player_input_after_attack": "neutro",
+   "conclusion": "O dano em i129 e o ataque do inimigo, que comeca em i103, depois de o jogador ja ter controle (i90) e idle visivel (i102). Nao e recuperacao longa do jogador. O gap de 39 q inclui 27 q de idle visivel antes do golpe.",
+   "old_i131_isolation": {
+    "player_control_return_i": 94,
+    "enemy_attack_state_i": 102,
+    "player_hp_drop_i": 131,
+    "player_input_after_attack": "neutro",
+    "conclusion": "O i131 antigo tambem vem do ataque do inimigo iniciado em i102 (8 q apos o controle), nao de recuperacao maior; a display antiga nao foi medida."
+   }
+  },
+  "old_baseline": {
+   "rom": "a7f02b84",
+   "player_attack_state": "i1..i93",
+   "control_return_i": 94,
+   "first_hit_i": 30,
+   "player_hp_drop_i": 131,
+   "enemy_attack_state_i": 102,
+   "player_hp": "100->95",
+   "display_recovery": "nao medido",
+   "pre_audio_b345_control_return_i": 73,
+   "note": "b345 e o baseline pre-audio; a7f02b84 adiciona o audio e retorna em i94. O cap5 recupera 4 q de controle e 3 q no primeiro hit, mas o display ainda termina em i102."
+  },
+  "video": {
+   "path": "out/evidence/o3_silhouette_presentation_20261019/video/attack_terminal_cap5.mp4",
+   "sha256": "9a91d274596e6a740139d031d8786fc49057bdad50fd69e5c3000e1460f7ffb7",
+   "record": "out/evidence/o3_silhouette_presentation_20261019/video/attack_terminal_cap5.json",
+   "record_sha256": "3315ecc8f26c05f012fdcff9c6de51760fdf213ca6efb43a307238ce5c573eea",
+   "frames": 171,
+   "first_frame": 400,
+   "last_frame": 571,
+   "canvas": [
+    256,
+    192
+   ],
+   "performance": "not_measured"
+  }
+ },
+ "lote_c": {
+  "decision_doc": "doc/artifacts/o3_lote_c_scope_decision_20261019.json",
+  "original_owner_decision": "dropped_by_owner (sem comparacao dos 3 candidatos)",
+  "reopen": {
+   "date": "2026-10-19",
+   "trigger": "criterio 1 registrado: recuperacao de ataque menor que i93/i94 sob a mesma cena/carga/input",
+   "status": "reopened_criterion_1_control_only",
+   "candidate_comparison": "analitica dos dados emitidos; nenhum candidato implementado ou medido em runtime",
+   "owner_decision_pending": true
+  },
+  "criterion_1_control": {
+   "baseline": "a7f02b84 i93/i94",
+   "current_control_return_i": 90,
+   "met": true,
+   "margin_frames": 4,
+   "current_display_idle_i": 102,
+   "display_vs_baseline": "8 q depois de i94",
+   "display_met": false,
+   "note": "O controle melhorou 4 q; a apresentacao do ataque continua 8 q alem do baseline de controle. O criterio e do controle, nao do que o jogador ve. b345 pre-audio ainda retorna em i73; a contencao de audio permanece."
+  },
+  "criterion_2_throughput": {
+   "current_cap_bytes_per_frame": 128,
+   "cap_128_vovf_0_historical": "957122ae (matriz de contencao)",
+   "current_cap5_mwf": "nao re-medido",
+   "above_128_with_vovf_0": "nao demonstrado",
+   "met": false
+  },
+  "criterion_3_content": {
+   "trim_dropped_cells": 14,
+   "cells_after_trim": 1232,
+   "bank_free_bytes": 3072,
+   "overflow": false,
+   "met": false
+  },
+  "analytical_comparison": {
+   "label": "static_emitted_block_analysis_not_runtime",
+   "attack_cells_left": {
+    "a101": 23,
+    "a102": 24,
+    "a103": 23,
+    "a104": 22,
+    "a105": 21,
+    "total": 113
+   },
+   "attack_cells_both_sides": 226,
+   "full_attack_bytes_both_sides": 14464,
+   "unique_attack_cells": {
+    "left": 87,
+    "both": 174,
+    "left_bytes": 5568,
+    "both_bytes": 11136
+   },
+   "unique_attack_idle_walk_cells_left": 140,
+   "cache_capacity_cells": 128,
+   "cache_capacity_issue": "o conjunto unico ataque+idle/walk de um lado (140) excede 128; o conjunto atual+proximo pode caber, mas a cache residente de todas as poses nao.",
+   "minimal_new_cells_per_transition_left": {
+    "a101": 23,
+    "a102": 21,
+    "a103": 19,
+    "a104": 19,
+    "a105": 6,
+    "total_after_a101": 88
+   },
+   "cache_best_case": {
+    "cells_uploaded_instead_of_113": 88,
+    "saving_cells": 25,
+    "saving_bytes": 1600,
+    "saving_frames_at_128_bq": 12.5,
+    "caveat": "conta apenas o ataque esquerdo; nao inclui inimigo, idle/pain, preload/invalidate, ROM extra, VRAM da cache nem contencao. Nao implementado nem medido."
+   },
+   "same_slot_by_index_delta": {
+    "a101_to_a103": {
+     "changed_of": 23,
+     "changed": 20,
+     "bytes": 1280
+    },
+    "a102_to_a104": {
+     "changed_of": 24,
+     "changed": 22,
+     "bytes": 1408
+    },
+    "a103_to_a105": {
+     "changed_of": 23,
+     "changed": 21,
+     "bytes": 1344
+    },
+    "a104_to_idle01": {
+     "changed_of": 22,
+     "changed": 22,
+     "new_slots": 1,
+     "bytes": 1472
+    },
+    "verdict": "delta por indice de slot nao economiza: 20-22 de 23-24 celulas mudam. 'per_transition_deltas' fica refutado como delta de slot; a alternativa de conjunto minimo e a cache, nao o delta."
+   },
+   "specialized_copy": {
+    "matrix": "cap64/cap96/cap128; cap128 vovf=0 na matriz historica",
+    "above_128": "nao testado",
+    "verdict": "sem implementacao e sem medida; nao ha claim de ganho"
+   }
+  },
+  "status": "criterio 1 de controle atendido; criterio 1 de display nao; criterios 2 e 3 nao; cache tem ganho teorico de 1.600 B/12,5 q no ataque esquerdo mas working set >128 e nada foi implementado; delta por slot refutado; specialized_copy nao medido.",
+  "no_gain_claim": true
+ },
+ "axes": {
+  "m8_historical_7_of_7": {
+   "rom": "a7f02b84",
+   "valid": true,
+   "scope": "historico; nao transferido para 701379cc"
+  },
+  "current_rom": {
+   "build": "pass (ROM gerada)",
+   "validation_report": "pass (build do cap5)",
+   "boot_emulator": "MRP3 boot_proved true na sessao cap5; nao e bundle consumidor",
+   "gameplay": "caso unico de ataque; regressao pendente",
+   "fps": "MRP3 cap5 59,67/59,69/59,43 NTSC, spread 0,26, 1438 frames, frame_advance true; MWF vovf=0/vline_min=207; nao projetado no canonico (bundle cap5 ausente)",
+   "audio": "sinal cap5 peak 1976/8,17 s na sessao fresca; audit_audio --active-floor 5 PASS (6%; M8 floor 5 12%); default 90% musica falha; consumer/bundle pendente",
+   "memory_bank": "atualizado nesta rodada",
+   "delivery": false,
+   "projection": "pass: fontes de outro SHA recusadas; reconcile exige o SHA",
+   "asset_binding": "identidade PASS (11 entradas); nao e oraculo"
+  }
+ },
+ "evidence": {
+  "dir": "out/evidence/o3_silhouette_presentation_20261019",
+  "manifest": "out/evidence/o3_silhouette_presentation_20261019/manifest.json",
+  "manifest_sha256": "a093aee84135155161932b79b8a586dd492b2c7aa2f7f04f3c411b9af0c7d362",
+  "files": 211,
+  "key": {
+   "trace": {
+    "path": "trace/trace.json",
+    "sha256": "8d8849dfce9d5f4c236c11d268384ef390cf3d0967505b861ed0b7abc31af910"
+   },
+   "old_composition": {
+    "path": "composition/old_a7f02b84_composition_reads.json",
+    "sha256": "c5b1d4fd52bef67af452ff6159861178d83398ca30326afba82acbfa1db41540"
+   },
+   "cap4_composition": {
+    "path": "composition/cap4_56a09458_composition_reads.json",
+    "sha256": "932674209cd0feec10ccd36abe796e1d775cd9d5a772a5ec5d8ad3396efbdfdf"
+   },
+   "cap5_composition": {
+    "path": "composition/cap5_701379cc_composition_reads.json",
+    "sha256": "f2ea62d7eeb8e052c47d62e61b1d47d30f700158ed423a12374a6a26d1773c3a"
+   },
+   "sat_start": {
+    "path": "composition/sat_start_cap5.json",
+    "sha256": "087c31335715d4a83cfd5b6c70a18921698d18d0084333c196becb9e8c4c5219"
+   },
+   "sat_end": {
+    "path": "composition/sat_end_cap5.json",
+    "sha256": "bc8abb6e4753431cda0b7dbe6a9d9125d033e7a28654b083dbbf4ea4cf1338ec"
+   },
+   "video": {
+    "path": "video/attack_terminal_cap5.mp4",
+    "sha256": "9a91d274596e6a740139d031d8786fc49057bdad50fd69e5c3000e1460f7ffb7"
+   },
+   "gate": {
+    "path": "doc/artifacts/o3_silhouette_gate_20261019.json",
+    "sha256": "bd0afced54e3a1b3db4dc17ead2fc9fa41e619d8bb666b880492097bf3c07ce8"
+   },
+   "three_way": {
+    "path": "comparison/comparison_3way_zoom.png",
+    "sha256": "00ee4986d4191a795d94c1ecfa10ffe68cb040aa1af52ed9ad08b8487d327556"
+   },
+   "emission": {
+    "path": "emission_r3.json",
+    "sha256": "486f9f07f8bcac7c9c47237d6f707160d82e9c8f79bb8fd52f2adb861e0b915a"
+   }
+  }
+ },
+ "limits": [
+  "O gate de silhueta e estatico (celulas emitidas) e nao prova a SAT/framebuffer da ROM.",
+  "A composicao viva e uma cena/um input; o caso inverso (ataque do inimigo contra idle/pain do jogador) nao esta na matriz.",
+  "O video e framebuffer 256x192, frame-paced; nao mede FPS, throughput, audio nem tempo de CPU.",
+  "A display antiga (a7f02b84) nao foi medida; a comparacao de terminal usa o controle do trace antigo.",
+  "O cap5 nao foi re-medido com MWF/MRP3/audio no SHA atual.",
+  "O delta por slot foi refutado analiticamente; a cache tem ganho teorico e working set >128; nada foi implementado/medido.",
+  "specialized_copy acima de 128 B/q nao foi testado.",
+  "PAL nao medido; esta evidencia e NTSC.",
+  "Contato aereo 46/47 e altura 200 continuam limites de cobertura; nao substituem a correcao de personagem.",
+  "Working tree sem commit/push; o SHA de git citado no checkpoint e da86de30..., mas as mudancas do cap5 estao unstaged.",
+  "A projecao canonica de out/evidence continua do a7f02b84; o cap5 nao herdou 7/7 e nao tem evidence.json/fps.json proprios.",
+  "O binding de 11 entradas prova identidade source->res->simbolo->ROM; os simbolos de audio sao static e nao aparecem no linker map; nao e prova de render.",
+  "O MWF do cap5 terminou em estado dead (snapshot 6) depois de 3000 frames; cobre VBlank/IA e uploads inimigos, mas nao um ataque scriptado do jogador. O cap5 so reduz celulas; o ataque scriptado segue na regressao.",
+  "A primeira captura de audio na sessao longa (dead) deu peak=0; a sessao fresca com mask 16 deu peak=1976. Silencio no estado dead nao prova ausencia de audio.",
+  "audit_audio: o gate M8 usou --active-floor 5 (mix SFX-only); o cap5 passa com 6% e o M8 com 12% no piso 5; o default 90% (musica) falha em ambos. E prova de sinal/mix SFX, nao musica continua; o cap5 nao tem bundle consumidor.",
+  "MRP3/MWF/audio do cap5 foram medidos mas nao projetados; out/evidence/evidence.json e fps.json continuam a7f02b84."
+ ],
+ "open_items": [
+  "Regressao de dano/whiff/profundidade/queda/morte/bordas/scroll/audio concorrente no cap5; incluir o ataque do inimigo contra idle/pain.",
+  "MWF/MRP3/FPS/audio medidos no 701379cc (runtime bundle 20261020); audit_audio passa no piso SFX 5 (6%); o piso 90% de musica nao se aplica. Falta bundle consumidor/QA e regressao.",
+  "Implementar e medir cache e/ou specialized_copy apenas com autorizacao; hoje nao ha ganho medido.",
+  "Fechar o bundle do consumidor no ROM atual (scope/required cases/current-rom); o binding ja existe, mas e identidade, nao oraculo.",
+  "Oraculo de render independente para audit_render_glitch.",
+  "L137/L138 registrados no AGENTS/SMS_GLOBAL/registry; falta caso de QA fresco para 701379cc.",
+  "Archive/version e commit/push com autorizacao."
+ ],
+ "projection": {
+  "tool": "tools/sms_wrapper/openbor2sms/openbor2sms/axis_projection.py",
+  "tool_sha256": "487a3248c0b82268ce3d8713b3fc0364883457b9722503c180734f85ef690b75",
+  "reconcile": "tools/sms_wrapper/reconcile_claims.py",
+  "reconcile_sha256": "282cf3806e95709b97778be8160f3ec7e471ff4516d4c1a311b9a568fa457e4d",
+  "current_rom": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+  "m8_sources_rom": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+  "cap5_projection": "recusada: atual=701379cc fontes=a7f02b84; nenhum evidence/fps escrito",
+  "m8_historical_projection": "reproduzida em diretorio temporario com o ROM a7f02b84; nao substitui o canonico",
+  "canonical_evidence": "out/evidence/evidence.json e fps.json continuam do a7f02b84; os booleanos valem so para esse SHA",
+  "reconcile_rule": "boot/gameplay/fps exigem rom_sha256 == ROM atual; self-check cobre ROM antiga"
+ },
+ "binding": {
+  "path": "doc/rom_asset_binding.json",
+  "sha256": "6c2caa9a69b0d321627982a9e0873e0343cafb1545df5a3fcb8acc2c5d104cba",
+  "entries": 11,
+  "rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+  "claim": "identity_only_source_to_res_to_symbol_to_rom",
+  "linker_symbols": [
+   "o3_ax_pose08",
+   "o3_ax_pose09",
+   "o3_ax_rows",
+   "o3_long_anim_walk",
+   "o3_long_anim_pain2",
+   "o3_long_anim_attack1",
+   "o3_ax_blocks",
+   "o3_long_blocks"
+  ],
+  "audio_symbols": "sfx_attack/sfx_impact/sfx_fall static; nao aparecem no linker map",
+  "audit": "audit_rom_asset_binding --require PASS",
+  "oracle": "nao e render independente; audit_render_glitch segue bloqueado"
+ },
+ "runtime_cap5": {
+  "dir": "out/evidence/o3_cap5_runtime_20261020",
+  "manifest": "out/evidence/o3_cap5_runtime_20261020/manifest.json",
+  "manifest_sha256": "a95309e3bd51f755acb4e24c0913076375c2eaf9ec253de7b9eb8cddd348877d",
+  "notes_sha256": "a7791716196c130c1c1c6fddf3d503fac8abd237c58c65c50deb55f48ee371b2",
+  "rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+  "mrp3": {
+   "pass": true,
+   "region": "NTSC",
+   "fps_janelas": [
+    59.67,
+    59.69,
+    59.43
+   ],
+   "fps_spread": 0.26,
+   "frames_delta_total": 1438,
+   "boot_proved": true,
+   "frame_advance_proved": true,
+   "session_id": "0009288bf1754cc199b58eacf05743d2",
+   "sha256": "852955db43bd1afb138c975033e91e18613a21c734a8662b6fc567056b2198ac"
+  },
+  "mwf": {
+   "pass": true,
+   "vovf_delta": 0,
+   "vline_min": 207,
+   "frames_medidos": 3000,
+   "frames_rom_final": 7695,
+   "estado_snapshot": 6,
+   "session_id": "0009288bf1754cc199b58eacf05743d2",
+   "sha256": "79af3a098343ce73c716fb75cdf233aa4dc1f9a8c560002bc6eae859e59d4338"
+  },
+  "audio": {
+   "signal": true,
+   "peak": 1976,
+   "samples": 360448,
+   "effective_seconds": 8.173,
+   "input_mask": 16,
+   "session_id": "8e86e6aa80a74480af0f24040b4781ba",
+   "wav_sha256": "1630d7e7ba083473697afc3c46517ad532e9028c42b71d6ca8687bba8ccf0866",
+   "audit_audio": "PASS --active-floor 5 (6% ativo; M8 usou floor 5 com 12%); default 90% (musica) falha; mix SFX-only, nao musica continua",
+   "audit_sfx_sha256": "0ff183e94c14da3deb20ce8d56a2ed0d6d4270703d1ffb0496e4083e9bc4c32d",
+   "audit_default90_sha256": "3776e48fb9367270f857c9c05c5e84caffae286f1a1f2294c578561d79c12f13"
+  },
+  "claim": "measured_not_projected; nao e bundle consumidor, regressao ou delivery"
+ }
+}

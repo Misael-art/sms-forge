@@ -5,6 +5,160 @@
 > não substitui este arquivo.
 
 ## Última atualização
+**2026-10-20 (pós-M8 — bundle consumidor, QA cap5 e projeção). O candidato
+`701379cc88e0…` fechou o bundle consumidor selado com três sessões reais
+(gameplay `2f25ce4a…`, MRP3 `43d33c39…`, áudio `42fb1b68…`): bundle
+`2f69939a…`, consumo `e1af7fad…`, `eligible=true` e eixos
+boot/gameplay/fps/áudio true. O MRP3 da sessão nova mede
+59,39/59,44/59,57 fps NTSC (spread 0,18; 1.441 frames); o áudio tem peak
+1986/8,173 s. QA nativa cap5: runtime `5aeb7960…` (2/2 PASS; boot frame 400
+SMRT hp=100/boss=50; ataque hp=95/boss=43/state=3/p2state=2; probe_frame
+330) e visual `37b1481d…` (2/2 de legibilidade/integridade PASS, 5 achados;
+81 q, 32 distintos/31 transições; inimigo íntegro em dor/recuperação).
+**Achado de apresentação NÃO resolvido**: no contato (índice 27) a lâmina
+branca está em x42..64 e o inimigo em x86..132; o golpe não toca visualmente
+o alvo e o dano só é legível pela barra (80→64 px) e pela dor em 38. Isso
+bloqueia promoção de apresentação/época visual; não invalida os eixos
+atribuídos. A projeção cap5 foi escrita: `evidence.json`
+`a473d670…` e `fps.json` `1ccfa0af…` (fontes QA `5fe14599…`/`a7662a8b…`,
+áudio `f16b48b8…`). O cap5 segue candidato, não delivery: Lote C (controle
+i90 < i94; display i102 > i94) e a direção do golpe aguardam decisão do
+dono; PAL, regressão, oráculo full-frame, archive/version e commit/push
+continuam pendentes.**
+
+**2026-10-19 (pós-M8 — silhueta + apresentação). Candidato `701379cc88e0…`
+(131072 B, cap5): corrige o a102 que zerava cabeça/tronco do inimigo; gate
+`audit_silhouette_integrity.py` 1000 casos PASS; terminal do ataque medido
+(controle i90, display idle i102, 1º hit i27; dano i129 = ataque do inimigo,
+não recuperação); Lote C reaberto só no critério de controle (90 < 94), display
+não. O M8 `a7f02b84…` continua histórico 7/7; o cap5 NÃO herdou os eixos:
+MWF/MRP3/FPS/áudio/bundle do SHA atual pendentes. Não é delivery.**
+
+**2026-10-19 (pós-M8 — projeção e binding). A projeção canônica agora exige
+o `rom_sha256` da ROM atual: `openbor2sms.axis_projection` (durável em
+`tools/sms_wrapper/openbor2sms/openbor2sms/axis_projection.py`) recusa fontes
+do M8 `a7f02b84` ao projetar o cap5 `701379cc` e não escreve nada;
+`reconcile_claims.py` exige o mesmo SHA em `boot_emulador`, `gameplay` e
+`fps_constante` (booleano sozinho não conta), com self-check de ROM antiga.
+`doc/rom_asset_binding.json` registra 11 entradas source→res→símbolo→ROM do
+cap5 (poses/rows/anim/blocks/PSG; símbolos de pose/anim/blocks no linker map;
+áudio static) e passa `audit_rom_asset_binding --require`. O binding é
+identidade, **não** render independente. O cap5 segue candidato; o M8 7/7 é
+histórico do `a7f02b84`; regressão/MWF/MRP3/FPS/áudio/PAL/oráculo e
+archive/version continuam pendentes.**
+
+**2026-10-20 (pós-M8 — runtime do cap5). Sessão isolada `0009288b…` no
+`701379cc`: MRP3 59,67/59,69/59,43 fps NTSC (spread 0,26; 1.438 frames;
+boot/frame_advance true) PASS; MWF `vovf_delta=0`/`vline_min=207` (3.000
+frames; snapshot final estado 6/dead) PASS. Sessão fresca `8e86e6aa…`: áudio
+com ataque (mask 16) peak 1976/8,17 s; a primeira captura na sessão longa
+(dead) deu peak 0 — silêncio no estado dead não é ausência de áudio.
+`audit_audio --active-floor 5` (o mesmo piso do gate M8, mix SFX-only) passa
+com 6% no cap5 (M8 a7f 12%); o default 90% (música) falha em ambos. É mix de
+SFX, não música contínua. Medido, **não projetado**:
+`evidence.json`/`fps.json` canônicos seguem `a7f02b84`; bundle consumidor/QA,
+regressão, PAL, oráculo e delivery continuam pendentes. Pacote
+`out/evidence/o3_cap5_runtime_20261020` (manifest `aa493b5a…`).**
+
+**2026-10-19 — M8 fechado nos 7 eixos no SHA
+`a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953`
+(131072 B): `./build.sh` deriva **7/7 true**, bundle consumido `eligible=true`
+nos 4 eixos, QA runtime/visual 2+2 casos com gate `ok`, MWF `vovf_delta=0`/
+`vline_min=207`, MRP3 59,61/59,62/59,69 NTSC e áudio SFX capturado. Relatório
+M8 `doc/artifacts/o3_m8_report_20261019.json` sha `2fed8a5b…`; registry
+`check --scan` ok (46 artefatos/185 arquivos, sha `f603b196…`). **Não é
+delivery visual**: época `delivery`, vínculo asset→ROM e `audit_render_glitch`
+continuam bloqueados; PAL não medido — detalhe na Atualização M8 ao fim.**
+(Lote E v2 e Lote C seguem registrados nas seções de 2026-10-19 ao fim do
+arquivo.)
+
+**2026-10-18 — corretivo pós-M6 (Lotes A–C, parcial). Candidato de então:
+ROM `957122ae24f64d362767d10e903dd71cdf47d18800066c57d562123a573ddfa7`
+(131072 B), reproduzível byte a byte a partir do `src/main.c` WIP.** O M6
+(`76cdbee3…`) permanece a prova histórica e nada nele foi sobrescrito;
+`b0eed40a…` (M5) e `87954b7f…` (intermediária) seguem STALE.
+- **Escalonador de uploader (D8)**: decisão na fase CPU (`sched_update` após os
+  dois `stream_update`); VBlank só executa ordem/cap (decidir no VBlank perdeu
+  o 2º sub-chunk: 128→64 B/q). Política: jogador primeiro, pré-carga promovida
+  a `up_want` quando coincide com a pose corrente, dor do inimigo preempta,
+  contenção `O3_UPLOAD_CONTEND_CAP 128u`. Matriz com 4 SHAs: b345 base (8
+  hits, intervalos 72 q, dor 108/36 q) < cap64 (6 hits, dor 56 q) < cap96
+  `ef1786c4…` (7 hits, intervalos 96 q) < candidato `957122ae…` (8 hits,
+  intervalos 96/87×6, dor 11 q, HP final 0 em i648). Tetos 64 e 96 reprovados
+  por medição, não por preferência.
+- **Ataque (wall-clock real)**: `attack_tap` — ataque i1–i72 com retorno i73
+  (base b345) vs i1–i93/i94 (candidato); 1º hit i30 em ambos; HP final do
+  jogador 100 (b345) vs 95 (candidato). O dano em i131 foi isolado em
+  2026-10-19: o inimigo entra em ataque (estado2) em i102, 8 q após o
+  controle em i94, e o jogador está neutro — **não é recuperação maior**;
+  ver Atualização pós-M8. A janela de vídeo de 60 q termina em ATTACK/frame4 —
+  não é o terminal. O somatório
+  nominal 3+3+3+3+9=21 não é duração: o avanço é limitado pelo upload de pose.
+- **Ar/hit/queda**: TOSS preserva a altitude de contato (arc 1→2; contatos em
+  alt 0/5/48/51/52/53/55; Δalt máx. 12/q; Δx máx. 4; sem snap para 0; pouso
+  arc→0 e RISE em st5; alt 1 só na cauda do TOSS jump_60 i130). Contato direto
+  em 46/47 não observado (mais próximo 48 — a tabela de queda pula 46/47);
+  alt 200 inalcançável (máx. 101). Lacunas declaradas.
+- **Índice de profundidade honesto (Lote A)**: whiff = sessão dz41
+  `0b271ce0…` (HP inimigo 43→43, alinhado null); dano = dz6 `f41e8c8c…`
+  (43→36, hit frame 19). O rótulo interno `whiff_dz: 6` do segundo é fase de
+  ensaio, não classificação. Originais intactos.
+- **Instrumentação de serviço**: `O3_SERVICE_TRACE=1` perturba o VBlank
+  (128→64 B/q) — contadores só para contabilidade relativa de estágio; timing
+  absoluto vem de builds de entrega (`O3_SERVICE_TRACE=0`). Bloco de 6 B em
+  `0xC7CC..0xC7D1` (bytes_p, bytes_e, flags, pad, vc0, vc1); `0xC7D2` =
+  `probe_vline_min`. Sondas declaradas fora de `#if` (SHA neutro: `957122ae`
+  antes e depois) para o gate de corredor derivar do fonte.
+- **Layout WIP medido**: ator de 48 B; `pl` @0xC000, `e` @0xC030, `cam` u16
+  @0xC062, `written_col` @0xC064, `_DATA` 0x6F (`out/obj/main.sym`). Corredor
+  `0xC7A6..0xC7FF`, 62 sondas, folga 1637 — `audit_probe_corridor` PASS.
+- **Gates focados no candidato** (`gates_20261018.json`, SHA `44a591c5…`):
+  marcadores PASS, corredor PASS, tilemap 16 arquivos/0 escritas ilegais,
+  símbolos PASS, claims PASS, 144 testes host OK, 72/72 ferramentas de medição
+  provadas, registro ok (40 artefatos/174 arquivos); `audit_doc_sync` sem
+  derivas do projeto (global falha só por luta_mugen, EIO pré-existente).
+- **Sucessão (Lote A)**: índice
+  `doc/artifacts/post_m6_evidence_index_20261018.json`, linkage
+  `post_m6_depth_linkage_20261018.json`, relatório
+  `post_m6_lote_a_report_20261018.json`; predecessor do escopo preservado
+  byte-idêntico em `doc/artifacts/o3_combat_scope_20261016_predecessor.json`
+  (`aaf3b545…`).
+- **M7 — áudio (2026-10-18)**: reautoria PSG dos 3 SFX O3/D11 a partir do PAK
+  doador (SHA revalidado `64da17e8…`, 39500889 B) por `openbor2sms.sms_audio`:
+  `inc/o3/psg_sfx.h` (canal 3, `SFX_CHANNEL3`),
+  `res/audio/sfx_{attack,impact,fall}.psg` (13/14/15 B; 6/10/18 ticks),
+  referências extraídas `data/source_openbor/gal_audio/data/sounds/{att1,hit1,fall}.wav`
+  e `doc/audio_provenance_manifest.json`. Integração runtime (`src/main.c`):
+  arrays em bancos 0–1 (map 0x30FF/0x310C/0x311B < 0x8000);
+  `PSGSetSFXVolumeAttenuation(0)` no boot; `PSGSFXFrame()` 1×/quadro no início
+  da fase CPU (sem ISR); arbitragem declarada fall(3)>impact(2)>attack(1) com
+  owner/pending; gatilhos em `start_attack`, `apply_hit` e contato de queda
+  (`was_toss`). `_DATA` 0x6F→0x71 (`sfx_owner/sfx_pending` no fim);
+  `pl/e/cam/written_col` intactos. **ROM
+  `a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953` (131072 B).**
+  - Gameplay **idêntico** ao pré-áudio `957122ae…` (`attack_hold` 650 q: 8
+    quedas de HP nos mesmos índices 30/126/213/300/387/474/561/648, HP final 0,
+    VDP final 1050; diferenças só em ponteiros relocados).
+  - Gates: `audit_audio_provenance` PASS; `audit_psg_channel_binding` PASS;
+    `audit_psg_redundancy` PASS; `audit_psg_quality` 0/6 reprovados.
+  - Captura isolada (sessão `b7fcff2c…`, sink privado, `input` p1 segurado):
+    `audio_attack.wav` 294912 amostras/6,687 s, peak=1963, ativo=13%, sha256
+    `c933ec31fb8d0b20a28c2e7e3e64d6050169aa719c7976798d861d6438a24a06`;
+    `audit_audio` PASS com piso declarado 5% — mix SFX-only (música fora do
+    escopo O3); o piso padrão 90% é para mix com música.
+  - Budget com áudio e combate real: MWF sessão `ae60dae3…` (input de ataque em
+    tempo real, janela de 3000 q selada) `vovf_delta=0`, `vline_min=207`, estado
+    no selo KO — `worst_frame_audio_attack.json` sha `41d83bd4…`; MRP sessão
+    `7c3aa06b…` 59,67/59,69 fps (2 janelas de 8 s, combate dentro das janelas) —
+    `runtime_probe_audio_attack.json` sha `2efa6930…`. Evidência em
+    `out/evidence/post_m6/candidate_audio_a7f02b84/`. Registro: entry
+    `o3-audio-m7` → `doc/artifacts/o3_audio_m7_report_20261018.json`
+    (sha `d3b5ed3f…`); `check` ok (41 artefatos/175 arquivos, sha `ab90d5f0…`);
+    gates agregados `gates_audio_20261018.json` sha `987502a5…`. Os testes host
+    passam a usar stub do gatilho sonoro (`sfx_request`; prioridades lidas do
+    header autoral) para continuarem compilando o FSM real — o som é provado na
+    ROM, nunca no host.
+
 **2026-10-17 — M6 (input causal, alvos móveis e pacing) fechado medido: ROM
 `76cdbee3…` (131072 B, bancária) rodou todos os traços causais por input em
 sessões isoladas frame-paced. A ROM do M5 (`b0eed40a…`) e a intermediária
@@ -237,19 +391,25 @@ Medições próprias do intake (ferramenta `openbor2sms`, não herdadas):
 ## Eixos de entrega (7) — gate final exige os 7 simultâneos
 | Eixo | Status | Prova |
 |------|--------|-------|
-| build | `buildado` | ROM `76cdbee3…` (131072 B) = `out/rom`; build reprodutível (comentário não muda SHA) |
-| validation_report | `buildado` | MWF PASS (`vovf_delta=0`, 3000 quadros, `vline_min=202`) + MRP PASS (59,48/59,66/59,78) — mesmo SHA |
-| boot no emulador | `testado_em_emulador` | MRP boot provado + still canônico `598625a4…` (256×192) + sessões isoladas publicadas |
-| gameplay | `testado_em_emulador` (recorte M6) | traços causais de ataque/pulo/queda/profundidade/morte + alvo móvel em z; videos por claim |
-| fps regional (NTSC/PAL) | `testado_em_emulador` (NTSC) | MRP 8 s×3: 59,48/59,66/59,78; **PAL declarado, não medido** |
-| áudio | `não iniciado` | M7 |
-| memory bank atualizado | `documentado` | este arquivo + registros O0/O1/O2/M5/M6 |
+| build | `buildado` | ROM `a7f02b84…` (131072 B) = `out/rom`; `./build.sh` rc 0; `out/build_record.json` deriva **7/7 true** (`build_record_m8.json` `d5703240…`) |
+| validation_report | `testado_em_emulador` | MWF PASS (`vovf_delta=0`, `vline_min=207`) + MRP3 3 janelas NTSC 59,6135/59,6165/59,6938 (`frames_delta_total=1441`); bundle consumido `eligible=true`, problems `[]` (`ade6c1b7…`) |
+| boot no emulador | `testado_em_emulador` (teto `assigned_checks_only`) | bundle boot framebuffer 256×192 + QA runtime `boot_baseline` (SMRT, hp 100/boss 50) e QA visual `boot_scene` (frame 400); reports `28cb7d39…`/`c43e9ed2…`; `audit_deterministic_boot` PASS (2 execuções idênticas) |
+| gameplay | `testado_em_emulador` (recorte QA `assigned_checks_only`) | consumer `input_ram_video`: boss 50→29; QA `attack_contact`: boss 43/hp 95/state 3; vídeo de 81 quadros com dano no índice 30 (barra 80→64 px) |
+| fps regional (NTSC/PAL) | `testado_em_emulador` (NTSC) | MRP3 sessão `4f1f4541…`: 59,6135/59,6165/59,6938; spread 0,080; **PAL declarado, não medido** |
+| áudio | `testado_em_emulador` (escopo SFX) | WAV `1638dd19…` (589868 B, 294912 amostras, peak 1936, 6,687 s); `audit_audio --active-floor 5` PASS (ativo 12–13%); `audit_psg_*` PASS; sessão `a9d92820…` |
+| memory bank atualizado | `documentado` | este arquivo (Atualização M8 2026-10-19) + `out/evidence/m8/` |
 
 > Status válidos: `não iniciado`, `documentado`, `implementado`, `buildado`,
 > `testado_em_emulador`, `validado_budget`. Toda linha diferente de
 > "não iniciado" EXIGE prova citada (caminho de arquivo/captura), não prosa.
-> **O M5 não é o gate final de entrega**: gameplay por input causal (M6),
-> áudio (M7) e PAL pendentes — marco medido, não delivery.
+> **Os 7 eixos fecham no SHA `a7f02b84…`, mas o resultado NÃO é `delivery`:**
+> a época visual `delivery` segue não paga — `audit_visual_delivery --delivery`
+> reprova (`wrong_visual_epoch: contrato de entrega visual ausente`),
+> `audit_rom_asset_binding --require` reprova (`rom_asset_binding_unproven:
+> mapa ausente`), `audit_render_glitch` continua bloqueado (sem oráculo
+> full-frame independente) e PAL não foi medido. QA de subagentes tem teto
+> `assigned_checks_only`; não aprova qualidade visual, gameplay amplo, áudio
+> além do SFX capturado nem FPS além das janelas medidas.
 
 ## Decisões registradas
 - **Pilotos:** GAL = piloto inicial (recorte TOWN1 já inventariado pelo doador,
@@ -368,6 +528,21 @@ estática** (seleção x-aware adiada — limitação visual declarada, não blo
 `measure_fps`/`measure_frame_advance` N/A na sessão isolada (substituídos pelo
 probe); PAL não medido; sem áudio. Restrição de lote: `semantics.py` e decisões
 MD ficam fora do front-end neutro.
+**Pós-M6 (2026-10-18)**: Lotes A (evidência/sucessão) e B (ar/pacing) fechados
+no candidato `957122ae…`; Lote C **fechado no baseline medido por decisão do
+dono (2026-10-19)**: escalonador na fase CPU + contenção 128 (matriz de 4 SHAs
+de contenção), terminal de ataque medido no SHA final (i1–i93, retorno i94,
+1º hit i30); reuso de tile/par + cache residente, deltas/preload/invalidate por
+transição e cópia especializada ficam `dropped_by_owner` (não comparados;
+nenhum claim de ganho/perda; reabre se exigirem retorno < i93/i94 ou
+throughput > 128 B/q sem vovf).
+Lote D (`audit_render_glitch`) segue bloqueado por falta de oráculo full-frame
+independente validado; Lote E v2 **fechado em 2026-10-19** (bundle de sessões
+nativas consumido `eligible=true` nos 4 eixos + negativos recusados; ver
+Atualização 2026-10-19). M7 áudio **integrado e medido** (SFX canal 3, captura isolada,
+MWF/MRP com áudio sob combate) — deixa de ser módulo morto; PAL não medido;
+`vdp_regs.bin` ainda do SHA anterior; capturas visuais do SHA final e stress do
+fechamento pendentes (uma vez, no SHA final).
 
 ## Lições abertas
 - **Curadoria do lote O2 feita em 2026-10-16**
@@ -423,6 +598,218 @@ O2 fechado medido e commitado (`555bb64`). **O3 em curso: M1–M4 commitados
    `audit_render_glitch` bloqueado (sem renderizador legal full-frame);
    semântica de `spawn1 x z` (BT, diagnóstico preservado em `bef0f287…`);
    `audit_doc_sync` global FAIL por luta_mugen (EIO pré-existente, não tocar).
+
+**Atualização 2026-10-18 (corretivo)**: Lotes A/B fechados no pré-áudio
+`957122ae…`; **M7 fechado no candidato de áudio `a7f02b84…`** (autoria PSG +
+integração + captura isolada + MWF/MRP sob combate); gates focados e registro
+reconciliados; memory bank atualizado.
+Próximo: (1) bundle v2 do Lote E (consumidor + testes host prontos; falta o
+construtor sobre a mídia nativa do SHA — nenhum existe ainda); (2) Lote C
+candidatos 2–4 (reuso de tile/par + cache residente; deltas/preload/invalidate
+por transição; cópia especializada) — sem alvo não atendido que os justifique
+até aqui; escopo explícito pendente; (3) QA por subagentes; (4) M8 (7 eixos).
+Nada commitado ou pushado sem autorização — `src/main.c`, docs e artefatos
+seguem WIP sobre HEAD `da86de303bca969a393032d270c9d245d4055180`.
+
+**Atualização 2026-10-18 (mídia de fechamento do SHA de áudio)**: capturas
+visuais, stress e diagnóstico BlastEm feitos no `a7f02b84…`:
+- still de impacto na sessão publicada `20a4616cd59e4ffc8096b0a49c90be23`
+  (`o3_m7_impact.png` sha `f05485d9…`, luma var 1445 — `--check-image` PASS;
+  bundle selado com `rom.sms` do SHA em `out/evidence/sessions/<sid>/`);
+- vídeo 650 q do combate (mesma sessão), 86 framebuffers distintos, 256×192,
+  59,92 Hz: `o3_m7_combat.mp4` sha `f15b8ed4…` + record `o3_m7_combat.json`
+  sha `b59960a9…` — copiados em
+  `out/evidence/post_m6/candidate_audio_a7f02b84/media/`;
+- stress churn (RIGHT30 A2 idle20 LEFT30 B2 idle20 ×30 = 3120 q) em trial
+  frame-paced: sessão `99e49239dcc14587be248a33ab560022`, 3121 linhas
+  contíguas (VDP 400→3520), 8 hits, enemy final 0, player HP 100→75, cleanup
+  closed (`trials/stress_churn/`; trace sha `d56d1ae1…`, resumo sha
+  `99eb119e…`);
+- `vdp_regs.bin` do SHA final via BlastEm: sessão
+  `blastem-sms-81a8d07b9c4a463cab953a96e8834116` (state completed, NTSC, SMS2),
+  snapshots 000/001/002 com reg2=0xFF, reg5=0xFF, reg6=0xFB; `measure_vram_map`
+  com o plano O3 => **aprovado**, 0 blockers/0 alertas, janela de sprite 256
+  tiles, PNT 0x3800–0x3F00, 15712 B usados/672 B livres
+  (`out/evidence/blastem/regs_a7f02b84/vram_map_a7f02b84.json`, sha
+  `97628642…`).
+
+**Atualização 2026-10-19 (Lote E v2 — bundle de evidência do SHA de áudio)**:
+o Lote E v2 está **materializado e consumido** no `a7f02b84…`:
+- Construtor novo `openbor2sms/evidence_bundle.py` monta o bundle a partir das
+  sessões privadas reais em `out/evidence/m8/session_inputs/` (gameplay
+  `8743f6ab…` com boot PNG + observação de input + vídeo; MRP3 `4f1f4541…`
+  com 3 janelas; áudio `a9d92820…`), derivando janelas de runtime dos journals
+  e cruzando com `runtime_metrics_v1`; não inventa métrica. A sessão MRP2
+  `54ee190c…` (2 janelas) foi superada pela MRP3.
+- Consumidor (`evidence_consumer.py`): **`eligible=true`** nos 4 eixos
+  (boot_emulador, gameplay, fps_constante, audio), escopo TOWN1/NTSC,
+  `claim_ceiling=assigned_checks_only`; derivados reais: boss 50→29
+  (`decrease`), janelas 59,613/59,617/59,694 fps, `frames_delta_total=1441`,
+  áudio 294912 amostras/pico 1936/6,687 s. Relatório
+  `out/evidence/m8/consumption_a7f02b84.json` (sha `ade6c1b7…`); `bundle.json`
+  sha `a0cc1f37…`.
+- **Limitação de ambiente medida**: `/mnt/sdcard` é fuseblk com modo sintético
+  777 — `chmod` não gruda e a checagem de imutabilidade do consumidor
+  (`st_mode & 0o222 == 0`) não é representável ali. O bundle canônico
+  consumível vive em `/home/…/smsforge_bundles/bundle_a7f02b84/` (btrfs);
+  cópia byte-idêntica espelhada em `out/evidence/m8/bundle_a7f02b84/`
+  (`diff -r` limpo). Receita de re-materialização no relatório.
+- Negativos sobre o bundle real: bitflip de 1 byte no PNG → recusa
+  `SHA mismatch: artifacts/boot_png.png`; `fps_windows.json` com 2 janelas →
+  recusa `at least three regional runtime windows required`; self-check do
+  consumidor 39 testes OK. Log `out/evidence/m8/negative_probe_20261019.txt`
+  (sha `6a26b7b7…`).
+- Registro: entry `o3-lote-e` → `doc/artifacts/o3_lote_e_report_20261019.json`
+  (sha `75109fd0…`); `check` ok (42 artefatos/176 arquivos, sha `6959c0ff…`).
+
+**Atualização 2026-10-19 (Lote C — escopo fechado por decisão do dono)**:
+- Baseline medido: escalonador na fase CPU + contenção 128 (jogador primeiro,
+  preload promovida, dor preempta); matriz de contenção com 4 SHAs comparada
+  sob a mesma cena/input (b345 base, cap64 `bdd4e832…`, cap96 `ef1786c4…`,
+  cap128 `957122ae…` → selecionado).
+- **Terminal de ataque medido no SHA final** (`d4e55202…`, trial frame-paced):
+  ataque i1–i93, retorno ao controle i94, 1º hit i30, HP do jogador 95 (hit em
+  i131); b345 histórico retorna em i73. O claim de ~60 q não é repetido.
+  Pose 2 do ataque segura 29 q no cap128 vs 8 q no b345 — é o uploader, não a
+  física (física intocada).
+- Budget: MWF `ae60dae3…` `vovf_delta=0`/`vline_min=207` (não é folga livre);
+  MRP3 `4f1f4541…` 59,61/59,62/59,69 fps NTSC (3 janelas, 1441 quadros).
+- **Decisão**: candidatos de reuso de tile/par + cache residente,
+  deltas/preload/invalidate por transição e cópia especializada
+  `dropped_by_owner` — não implementados nem comparados; nenhum claim de
+  ganho/perda. Reabertura: retorno < i93/i94 sob a mesma cena/carga/input,
+  throughput > 128 B/q sem violar `vovf=0`, ou conteúdo que estoure o upload.
+- Registro: entry `o3-lote-c-scope` →
+  `doc/artifacts/o3_lote_c_scope_decision_20261019.json` (sha `72722c45…`);
+  `check` ok (43 artefatos/177 arquivos, sha `954cd8f8…`).
+
+**Atualização 2026-10-19 (M8 — fechamento dos 7 eixos no SHA de áudio)**:
+- **Build**: `./build.sh` rc 0; ROM `a7f02b84…` (131072 B) reproduzida;
+  `out/build_record.json` com **7/7 eixos true** (`build_record_m8.json` sha
+  `d5703240…`; log `6e5fb60d…`). O build lê os caminhos canônicos
+  `out/evidence/evidence.json`/`fps.json`/`*.wav`; o M8 materializou esses
+  caminhos por **projeção automática** dos relatórios reais
+  (consumer/MRP/QA), sem nova medição e sem booleano manual: `evidence.json`
+  sha `21c7be62…`, `fps.json` sha `904f629d…`, WAV `1638dd19…`; gerador
+  `888f0535…`; `reconcile_claims` PASS 7/7.
+- **Consumidor**: bundle `a0cc1f37…` → `eligible=true`, problems `[]`, 4 eixos
+  (boot/gameplay/fps/áudio), `assigned_checks_only`; relatório `ade6c1b7…`;
+  derivados boss 50→29, 59,6135/59,6165/59,6938 fps, 1441 quadros, áudio
+  294912 amostras/peak 1936/6,687 s. A projeção para o build preserva os
+  valores arredondados do MRP3 (`59,61/59,62/59,69`, spread 0,08); os precisos
+  vêm das janelas do consumidor.
+- **QA independente**: runtime (subagente nativo `ses_ea99c6e7…`, sessão
+  `aade3375…`) 2/2 casos, request `5e546ea2…`, report `28cb7d39…`; visual
+  (subagente nativo `ses_ea99c6e6…`, sessão `28d7fe90…`) 2/2, request
+  `3d09cc85…`, report `c43e9ed2…`; ambos
+  `audit_subagent_session --require-passed --current-rom` ok, problems `[]`,
+  elegível; teto `assigned_checks_only`.
+- **Gates**: PASS `audit_debug_markers`, `audit_probe_corridor`
+  (0xC7A6..0xC7FF, 62 sondas, folga 1585), `audit_tilemap_bounds` (17
+  arquivos, 0 escritas ilegais), `audit_symbol_size_sync`, `audit_claims`,
+  `audit_meaningful_change`, `audit_audio_provenance`,
+  `audit_psg_channel_binding`, `audit_psg_redundancy`, `audit_psg_quality`
+  (0/3), `audit_audio` (piso 5; ativo 12–13%), `audit_reference_boundary`,
+  `audit_hardware_constants`, `audit_mastery_registry`,
+  `audit_visual_delivery` (default), `audit_deterministic_boot` (2 execuções
+  idênticas), `audit_causal_persistence` (`advance`), `reconcile_claims`,
+  `validate_measurement_tools` 72/72. Manifesto de gates `81b2afe7…`.
+- **Bloqueios declarados**: `audit_render_glitch` não executado (sem oráculo
+  full-frame independente); `audit_visual_delivery --delivery` →
+  `wrong_visual_epoch` (contrato ausente); `audit_rom_asset_binding --require`
+  → mapa `doc/rom_asset_binding.json` ausente; PAL não medido; contato aéreo
+  46/47 não observado (mais próximo 48); altura 200 inalcançável (máx. 101);
+  `O3_SERVICE_TRACE=1` perturba 128→64 B/q (timing absoluto só trace=0);
+  `audit_doc_sync` global FAIL por 10 derivas de luta_mugen (EIO/ENOENT; 0 no
+  openbor).
+- **Antes/depois**: ataque b345 i1–i72/retorno i73 vs a7f02b84 i1–i93/i94
+  (1º hit i30 em ambos; HP 100 vs 95); MWF `vovf=0`/`vline_min=207`; MRP3
+  59,61/59,62/59,69 NTSC; 128 B/q (2 sub-commits); ROM 131072 B; VRAM
+  `measure_vram_map` 0 blockers (`vdp_regs` `818dd0f0…`); áudio 3 SFX
+  (6/10/18 ticks, canal 3). Erro visual full-frame não medido; PAL não medido.
+- **Registro**: entry `o3-m8` → `o3_m8_report_20261019.json` (sha
+  `2fed8a5b…`) + `m8_causal_state_20261019.json`; PSG/fontes do M7 agora
+  registrados nos grupos de destino `o3-audio-psg` (`runtime_resource`) e
+  `o3-audio-source` (`openbor_source`); `check --scan` ok (46 artefatos/185
+  arquivos, sha `f603b196…`). Sem commit/push (sem autorização).
+
+**Atualização 2026-10-19 (pós-M8 — silhueta, apresentação e Lote C)**:
+- **Defeito e correção**: o `a7f02b84` (cap8) exibia o `a102` com 29 células e
+  7/8 nas linhas 1–2; a SAT compartilhada zerava cabeça/tronco do inimigo
+  (`ec=[0,0,0,2,2,0]`; frames 29/30/45 do run aprovado). O cap5
+  `701379cc…` limita a101..a105 a 5 células/linha 1–2 (lado externo primeiro),
+  remove 14 células e devolve 3/3 ao inimigo; o cap4 `56a09458…` devolve 4/4
+  mas apaga quase todo o arco da espada. A contagem-fonte e o gate de 8/linha
+  permanecem pré-trim.
+- **Gate**: `audit_silhouette_integrity.py` (novo; `--self-check` PASS) mede
+  1000 casos estáticos: inimigo em pé ≥2 nas linhas 1–2 e ≥5 no total,
+  jogador ≥3 nas linhas 1–3, ataque do jogador ≤5 nas linhas 1–2. Relatório
+  `doc/artifacts/o3_silhouette_gate_20261019.json` sha `bd0afced…`; pior
+  caso 3/2 total 5. Limite: é estático, não prova a SAT/framebuffer; a QA
+  viva lê `ec`/SAT no SHA. O caso a103/pain02 do cap5 fica 3/2 (piso) e o
+  ataque do inimigo contra idle/pain do jogador não está na matriz.
+- **Apresentação**: vídeo de framebuffer 171 q (`attack_terminal_cap5.mp4`,
+  sha `9a91d274…`), 256×192; input em i1; 1ª pose visível i14; contato i27;
+  controle i90; display idle i102; dano i129. O dano é o ataque do inimigo
+  (estado2 i103, a101 visível i113, a102 i127); o jogador está neutro e já
+  tinha controle/idle — não é recuperação longa. O `a7f02b84` também tem o
+  estado2 em i102 e dano i131, 8 q após o controle i94; a display antiga não
+  foi medida.
+- **Lote C**: critério 1 de controle atendido (i90 < i94; 4 q); display não
+  (i102 > i94; 8 q depois); critério 2 (>128 B/q sem violar `vovf=0`) não
+  demonstrado; critério 3 (conteúdo) não. A comparação cache/delta é
+  analítica: ataque completo 113 células/7.232 B por lado; único 87/5.568 B
+  esquerdo; ataque+idle/walk 140 > 128 de cache; melhor caso de cache 88
+  células/1.600 B/12,5 q, não implementado; delta por slot refutado (20–22 de
+  23–24 mudam); cópia especializada >128 não testada. Nenhum ganho de runtime
+  é reivindicado; reabertura registrada em
+  `o3_lote_c_scope_decision_20261019.json`.
+- **Evidência**: `out/evidence/o3_silhouette_presentation_20261019/`
+  (211 arquivos; manifest sha `a093aee8…`), com ROMs old/cap4/cap5, gate,
+  composições/SAT, vídeo e arte-fonte; relatório consolidado
+  `doc/artifacts/o3_silhouette_presentation_20261019.json`.
+- **Projeção e binding**: a projeção canônica do M8 foi endurecida com SHA da
+  ROM: `axis_projection.py` (novo, durável no pacote `openbor2sms`) recusa
+  fontes cujo `rom_sha256` difere de `--current-rom` antes de escrever;
+  `reconcile_claims.py` exige o mesmo SHA em boot/gameplay/fps. Teste real:
+  fontes M8 `a7f02b84` + ROM cap5 `701379cc` → recusa; ROM M8 antiga +
+  fontes M8 → projeta em diretório temporário (7/7 histórico preservado).
+  `doc/rom_asset_binding.json` (sha `6c2caa9a…`, 11 entradas) liga
+  a102/rows/anim/blocks/PSG por source→res→símbolo→ROM; os símbolos de
+  pose/anim/blocks aparecem no linker map, os de áudio são `static` e não
+  aparecem. `audit_rom_asset_binding --require` PASS. O mapa é identidade,
+  **não** render independente.
+- **Runtime cap5 (2026-10-20)**: pacote histórico de medição
+  `out/evidence/o3_cap5_runtime_20261020` (manifest `aa493b5a…`): MRP3
+  `59,67/59,69/59,43` fps NTSC (spread 0,26; 1.438 frames;
+  boot/frame_advance), MWF `vovf=0`/`vline_min=207` (3.000 frames), áudio
+  fresco peak 1976/8,17 s com ataque (mask 16). O MWF terminou em estado dead
+  (snapshot 6); cobre VBlank/IA/uploads inimigos, não ataque scriptado do
+  jogador. A primeira captura de áudio no estado dead deu silêncio; a fresca
+  provou sinal. `audit_audio --active-floor 5` (mesmo piso do M8) passa (6%
+  cap5; 12% a7f); o default 90% de música falha em ambos.
+- **Bundle, QA e projeção cap5 (2026-10-20)**: bundle consumidor
+  `out/evidence/o3_cap5_consumer_20261020/bundle.json` (`2f69939a…`) selado
+  com gameplay `2f25ce4a…`, MRP3 `43d33c39…` e áudio `42fb1b68…`; consumo
+  `out/evidence/o3_cap5_consumption_20261020.json` (`e1af7fad…`) com
+  `eligible=true`, problemas vazios e eixos boot/gameplay/fps/áudio true. O
+  MRP3 novo mede 59,39/59,44/59,57 fps NTSC (spread 0,18; 1.441 frames);
+  áudio peak 1986/8,173 s; `audit_audio --active-floor 5` PASS (6%). QA
+  runtime `out/evidence/o3_cap5_qa_20261020/runtime/run_1b8a3f28…/report.json`
+  (`5fe14599…`, sessão `5aeb7960…`) 2/2 PASS; QA visual
+  `.../visual/run_fbbd7a45…/report.json` (`a7662a8b…`, sessão `37b1481d…`)
+  2/2 de legibilidade/integridade PASS, 5 achados e nenhum `findings: []`.
+  Projeção canônica no cap5: `out/evidence/evidence.json` (`a473d670…`) e
+  `out/evidence/fps.json` (`1ccfa0af…`); áudio `audio_701379cc.wav`
+  (`f16b48b8…`). O ataque ainda aponta para a esquerda enquanto o inimigo
+  está à direita (índice 27: lâmina x42..64, inimigo x86..132; dano só por
+  HUD/dor); isso é bloqueio de apresentação, não dos eixos atribuídos.
+- **Estado**: o cap5 é candidato pós-M8, **não delivery**; os 7 eixos do M8
+  não se transferem. A projeção cap5 cobre boot/gameplay/fps/áudio; o build
+  record será rederivado após esta atualização. Pendente: regressão de
+  dano/whiff/profundidade/queda/morte/bordas/scroll/áudio concorrente,
+  direção do golpe/Lote C por decisão do dono, oráculo full-frame, PAL,
+  archive/version e commit/push. A árvore segue sem commit.
 
 Nota herdada do O0: `data/source_art/concept_art/` materializado **vazio** é o
 local designado do registry; sem contratos de arte em O0/O1, o

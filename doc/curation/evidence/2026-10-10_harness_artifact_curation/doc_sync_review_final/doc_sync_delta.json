@@ -1,0 +1,114 @@
+{
+  "schema": "sms_doc_sync_delta_independent_review_v1",
+  "status": "pass_focused_scope_only",
+  "tool_sha256": "07bc09e5c94e07f7f8acc811dd1b136e8ad35e1f19a63e4fe40f233d4f3e2641",
+  "tool_unchanged_during_review": true,
+  "results": [
+    {
+      "case": "AGENTS_only_positive_compatibility",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "case": "central_law_only_positive",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "case": "union_duplicate_citation_positive",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "case": "uncited_tool_negative",
+      "pass": true,
+      "actual": [
+        "'audit_x.py' existe no wrapper mas NAO esta citada em AGENTS.md/SMS_GLOBAL.md (gate invisivel na doutrina)"
+      ]
+    },
+    {
+      "case": "law_ghost_negative",
+      "pass": true,
+      "actual": [
+        "AGENTS.md/SMS_GLOBAL.md cita 'audit_ghost.py' que NAO existe no wrapper"
+      ]
+    },
+    {
+      "case": "artifact_registry_uncited_negative",
+      "pass": true,
+      "actual": [
+        "'artifact_registry.py' existe no wrapper mas NAO esta citada em AGENTS.md/SMS_GLOBAL.md (gate invisivel na doutrina)"
+      ]
+    },
+    {
+      "case": "artifact_registry_central_cited_positive",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "case": "artifact_registry_cited_missing_negative",
+      "pass": true,
+      "actual": [
+        "AGENTS.md/SMS_GLOBAL.md cita 'artifact_registry.py' que NAO existe no wrapper"
+      ]
+    },
+    {
+      "case": "unreadable_law_5",
+      "pass": true,
+      "actual": [
+        "SMS_GLOBAL.md ilegivel: [Errno 5] injected law read failure"
+      ]
+    },
+    {
+      "case": "unreadable_law_13",
+      "pass": true,
+      "actual": [
+        "SMS_GLOBAL.md ilegivel: [Errno 13] injected law read failure"
+      ]
+    },
+    {
+      "case": "invalid_UTF8_law_negative",
+      "pass": true,
+      "actual": [
+        "SMS_GLOBAL.md ilegivel: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte"
+      ]
+    },
+    {
+      "case": "dangling_law_negative",
+      "pass": true,
+      "actual": [
+        "SMS_GLOBAL.md ilegivel: [Errno 2] No such file or directory: '/tmp/smsforge-curation-coverage-20261010/review/doc-sync-union-htjq9ybk/tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md'"
+      ]
+    },
+    {
+      "case": "real_workspace_only_known_Mugen_blockers",
+      "pass": true,
+      "actual": [
+        "luta_mugen: 'doc/10-memory-bank.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/10-memory-bank.md') (hierarquia de verdade)",
+        "luta_mugen: 'doc/11-gdd.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/11-gdd.md') (hierarquia de verdade)",
+        "luta_mugen: 'doc/13-spec-cenas.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/13-spec-cenas.md') (hierarquia de verdade)",
+        "luta_mugen: 'doc/00-diretrizes-agente.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/00-diretrizes-agente.md') (hierarquia de verdade)",
+        "luta_mugen: 'doc/12-roteiro.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/12-roteiro.md') (hierarquia de verdade)",
+        "luta_mugen: 'doc/15-tdd.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/15-tdd.md') (hierarquia de verdade)",
+        "luta_mugen: doc_authority aponta para 'doc/10-memory-bank.md' ausente (ENOENT)",
+        "luta_mugen: doc_authority aponta para 'doc/11-gdd.md' ausente (ENOENT)",
+        "luta_mugen: doc_authority aponta para 'doc/13-spec-cenas.md' ausente (ENOENT)",
+        "luta_mugen: doc_authority aponta para 'doc/15-tdd.md' ausente (ENOENT)"
+      ]
+    }
+  ],
+  "case_count": 13,
+  "scope": "AGENTS plus canonical law citation union, artifact_registry doctrine coverage, read failures and real focused gate",
+  "limits": [
+    "No full suite or emulator run.",
+    "Citation presence/existence is not teaching quality or runtime proof.",
+    "AGENTS-only fixture remains accepted when law is absent; this gate does not newly enforce framework completeness.",
+    "Real workspace remains globally not in sync because10Mugen document blockers persist.",
+    "No project files changed by reviewer."
+  ],
+  "selfcheck": {
+    "exit_code": 0,
+    "result": "PASS",
+    "scope": "audit_doc_sync.py --self-check only"
+  }
+}

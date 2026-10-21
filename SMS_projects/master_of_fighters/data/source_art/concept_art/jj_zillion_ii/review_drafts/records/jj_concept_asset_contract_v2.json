@@ -1,0 +1,56 @@
+{
+  "schema": "asset_contract_v1",
+  "asset_id": "jj_zillion_ii_concept_sheet_v2",
+  "project": "master_of_fighters",
+  "character_id": "jj_zillion_ii",
+  "asset_role": "concept_art",
+  "status": "superseded_after_owner_costume_reference_correction",
+  "source_game": "Zillion II: The Tri Formation (Sega Master System)",
+  "image": {
+    "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/image_iterations/jj_concept_sheet_v2.png",
+    "dimensions_px": [1536, 1024],
+    "format": "8-bit indexed PNG",
+    "transparent_indices": [0],
+    "useful_colors": 13,
+    "layout": "two side-by-side full-body poses of the same character"
+  },
+  "reference_boundary": {
+    "allowed_source": "J.J - Standing gameplay sprite from the Master System game",
+    "anime_reference": false,
+    "external_pixels_copied": false,
+    "purpose": "broad silhouette and color-role reference only"
+  },
+  "character_contract": {
+    "morphology": "youthful reading, lean and compact athletic build; avoid bulky armor",
+    "visual_roles": [
+      "blue-violet hair",
+      "magenta-red fitted uniform",
+      "orange accents",
+      "warm skin",
+      "pale boots and equipment"
+    ],
+    "equipment": ["compact Zillion laser pistol"],
+    "poses": [
+      "three-quarter moving guard with pistol low",
+      "lateral advance with one controlled shot"
+    ],
+    "not_included": [
+      "anime-only design cues",
+      "Tri-Formation vehicle",
+      "transformed Armorater suit",
+      "other characters"
+    ]
+  },
+  "palette_contract": {
+    "manifest": "doc/palettes_manifest.json",
+    "palette_source": "doc/build_palettes_manifest.py",
+    "character": "jj_zillion_ii",
+    "useful_colors_max": 15,
+    "useful_colors": 13,
+    "dither": "none",
+    "transparent_index": 0,
+    "outline": "opaque navy #000055",
+    "grain_or_speckle": "not allowed"
+  },
+  "approval_scope": "concept-art visual reference only; approval does not approve sprites, moveset frame data, ROM integration, scanline budget, or emulator validation"
+}

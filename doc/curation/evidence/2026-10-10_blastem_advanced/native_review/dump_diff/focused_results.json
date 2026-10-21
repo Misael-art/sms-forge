@@ -1,0 +1,197 @@
+[
+  {
+    "case": "indices",
+    "indices": [
+      1,
+      0
+    ],
+    "rejected": true,
+    "message": "require ordered snapshot indices in audited timeline"
+  },
+  {
+    "case": "indices",
+    "indices": [
+      0,
+      0
+    ],
+    "rejected": true,
+    "message": "require ordered snapshot indices in audited timeline"
+  },
+  {
+    "case": "indices",
+    "indices": [
+      0,
+      2
+    ],
+    "rejected": true,
+    "message": "require ordered snapshot indices in audited timeline"
+  },
+  {
+    "case": "indices",
+    "indices": [
+      true,
+      1
+    ],
+    "rejected": true,
+    "message": "require ordered snapshot indices in audited timeline"
+  },
+  {
+    "case": "indices",
+    "indices": [
+      0,
+      false
+    ],
+    "rejected": true,
+    "message": "require ordered snapshot indices in audited timeline"
+  },
+  {
+    "case": "indices",
+    "indices": [
+      -1,
+      1
+    ],
+    "rejected": true,
+    "message": "require ordered snapshot indices in audited timeline"
+  },
+  {
+    "case": "staleROM",
+    "rejected": true,
+    "message": "labels belong to another ROM"
+  },
+  {
+    "case": "booladdress",
+    "rejected": true,
+    "message": "invalid label space/range"
+  },
+  {
+    "case": "zero",
+    "rejected": true,
+    "message": "invalid label space/range"
+  },
+  {
+    "case": "overflow",
+    "rejected": true,
+    "message": "label outside SMS address space"
+  },
+  {
+    "case": "duplicate",
+    "rejected": true,
+    "message": "label names must be nonempty and unique"
+  },
+  {
+    "case": "outside_output_hardlink_to_dump",
+    "exit_code": 0,
+    "dump_modified": true,
+    "before_bytes": 8192,
+    "after_bytes": 4297,
+    "output_tail": "dc43dd748ea778adc52bc498ce80524c014b81119\",\n      \"bytes\": 4\n    }\n  ],\n  \"palette_changes\": [],\n  \"named_ranges\": []\n}\n"
+  },
+  {
+    "case": "native_keys_and_held",
+    "snapshots": [
+      {
+        "index": 0,
+        "keys": 0,
+        "P1right_held": 0,
+        "allheld": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 1,
+        "keys": 8,
+        "P1right_held": 6,
+        "allheld": [
+          0,
+          0,
+          0,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 2,
+        "keys": 0,
+        "P1right_held": 6,
+        "allheld": [
+          0,
+          0,
+          0,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "named_ranges": [
+      {
+        "name": "SMI1 keys word",
+        "space": "ram",
+        "address": 50951,
+        "length": 2,
+        "delta": {
+          "changed_bytes": 0,
+          "offsets": [],
+          "runs": []
+        }
+      },
+      {
+        "name": "SMRT input snapshot",
+        "space": "ram",
+        "address": 51192,
+        "length": 2,
+        "delta": {
+          "changed_bytes": 0,
+          "offsets": [],
+          "runs": []
+        }
+      },
+      {
+        "name": "SMI1 P1-right held counter",
+        "space": "ram",
+        "address": 50960,
+        "length": 2,
+        "delta": {
+          "changed_bytes": 1,
+          "offsets": [
+            0
+          ],
+          "runs": [
+            {
+              "address": 50960,
+              "offset": 0,
+              "length": 1,
+              "before_prefix_hex": "00",
+              "after_prefix_hex": "06",
+              "prefix_truncated": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

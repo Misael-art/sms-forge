@@ -1,0 +1,99 @@
+{
+  "schema": "independent_curation_code_review_v1",
+  "date": "2026-10-07",
+  "reviewer": "/root/review_qa_contract",
+  "producer": "/root",
+  "status": "passed_with_limits",
+  "recommendation": "Accept the context and optional AIR identity contract within declared-record and offline-validation scope; preserve the existing global doc_sync failure as a separate unresolved storage/read blocker. No game or global production approval.",
+  "claim_ceiling": "curation_contract_review_only",
+  "scope": "Read-only source review, focused offline selfchecks and synthetic negative fixtures; no emulator/host controls and no access to luta_mugen/doc.",
+  "reviewed_files": [
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/session_qa.py",
+      "sha256": "d51d16e3a4b9d660c196f2584b490447d6bd884ade43225b54fd350a650d7c2c"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_subagent_session.py",
+      "sha256": "9406183fa4f3b4ad5d74496004b7521be0c54208ecbc4b08c3833a36f0b48f90"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_import_semantics.py",
+      "sha256": "b51c044b4ade00cd37a204237482af792e2119aab46bc554de5e22e93d517232"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/audit_doc_sync.py",
+      "sha256": "07bc09e5c94e07f7f8acc811dd1b136e8ad35e1f19a63e4fe40f233d4f3e2641"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/selftest.py",
+      "sha256": "0f9ef154dc12186d166a855bc4f7bfd3950eddc1a1883a1f07c2c48d402dd657"
+    },
+    {
+      "path": "/mnt/sdcard/Projects/SMSForge/tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+      "sha256": "d4753308b1d998b4bd2263666bae7eea2f288aa17ce675ccc7fcdd63a8c7b0b0"
+    }
+  ],
+  "checks": [
+    {
+      "name": "audit_subagent_session --self-check",
+      "status": "passed"
+    },
+    {
+      "name": "audit_import_semantics --self-check",
+      "status": "passed",
+      "repeat_after_correction": true
+    },
+    {
+      "name": "session_qa.context_self_check",
+      "status": "passed",
+      "result": true
+    },
+    {
+      "name": "audit_doc_sync --self-check",
+      "status": "passed"
+    },
+    {
+      "name": "additional AIR negatives",
+      "status": "passed",
+      "cases": [
+        "N+1 valid identity accepted",
+        "equal-duration IDs permutation rejected",
+        "terminal omission rejected",
+        "boolean ID rejected",
+        "duration_only cannot satisfy require_air_identity",
+        "float export durations rejected after correction"
+      ]
+    }
+  ],
+  "observations": [
+    "Production preparation reads all four canonical context documents before creating output or launching emulator; missing production context fails.",
+    "Diagnostic missing context is explicit and only lstat ENOENT is admitted; EIO/EACCES/read/UTF8/empty errors abort.",
+    "Historical v2 lacking context_contract remains auditable, while collect refuses it before iso.start.",
+    "Snapshots reject symlink/hardlink; origin metadata OSError no longer invalidates a historical snapshot; this does not approve active origin health.",
+    "AIR identity compares N+1 source and ROM ID vectors in order with strict ID type equality, including terminal transition; old air_timing remains duration-only.",
+    "document_problem reads bytes directly and classifies missing, unreadable and empty separately; its selfcheck exercises injected EIO/EACCES.",
+    "selftest includes context_self_check and explicit AIR N+1/duration_only coverage. Full factory/global doc_sync was not run by this reviewer."
+  ],
+  "findings": [],
+  "resolved_findings": [
+    {
+      "id": "source_export_duration_types",
+      "file": "tools/sms_wrapper/audit_import_semantics.py",
+      "finding": "Initial source export equality accepted float durations equal to integer source_durations. Synthetic reproduction confirmed this.",
+      "correction": "Producer added list validation, type(v) is int, finite range1..32767 and equality; focused selfcheck and reviewer reproduction now reject float source durations.",
+      "status": "resolved"
+    }
+  ],
+  "limits": [
+    "Hashes and UTF8/nonempty coverage do not prove semantic completeness of GDD/spec/TDD or a transactional filesystem epoch.",
+    "Source AIR namespace and terminal meaning require independent source/export review; the gate compares declared records and does not authenticate their origin.",
+    "16-bit stamps alone cannot disprove additional full counter wraps; finite interval/source and instrumentation review remain required.",
+    "AIR IDs are element/action identity; RGB identity and sampled DAP indices do not provide equivalent proof.",
+    "No native ROM AIR-identity trace, gameplay, audio fidelity, throughput, flicker or AAA approval was performed in this review.",
+    "Global doc_sync remains failed on affected luta_mugen documentation per coordinator report; no bypass or storage repair was attempted. Factory totals88/88 and54 tools were reported by coordinator, not independently rerun here."
+  ],
+  "writes": [
+    "this review JSON only; focused selfchecks use temporary synthetic fixtures"
+  ],
+  "blocking_findings": []
+}

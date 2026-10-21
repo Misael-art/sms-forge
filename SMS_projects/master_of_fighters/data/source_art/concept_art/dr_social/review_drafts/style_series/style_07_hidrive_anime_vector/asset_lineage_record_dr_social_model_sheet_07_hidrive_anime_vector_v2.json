@@ -1,0 +1,72 @@
+{
+  "schema": "sms_art_asset_lineage_v2",
+  "asset_id": "dr_social_model_sheet_07_hidrive_anime_vector_v2",
+  "artifact_kind": "character_concept_model_sheet",
+  "status": "candidate_pending_owner_review",
+  "catalog_index": 7,
+  "style_id": "HiDrive-Anime-Vector",
+  "artistic_style_reference": {
+    "named_artist": "Daisuke Ishiwatari",
+    "reference_role_and_scope": "Creator and authorial visual-direction reference for the original Guilty Gear; not sole character-art or sprite credit.",
+    "source_url": "https://www.arcsystemworks.com/game/guilty-gear/",
+    "attribution_status": "verified_primary_source",
+    "style_signature": [
+      "angular, high-contrast silhouettes",
+      "dense costume/accessory accents",
+      "graphic shapes with strong motion"
+    ],
+    "basis_and_limits": "Traits are an editorial reading of the selected Guilty Gear visual reference."
+  },
+  "catalog": {
+    "path": "doc/curation/2026-10-07_catalogo_inicial_estilos_visuais.json",
+    "sha256": "be0a09bb8de25ca1744beecb773909e4ce42d1f00058fa568d7ec964d6778697",
+    "entry_count": 49
+  },
+  "parent_lineage": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v1.json",
+    "sha256": "db19f59996d4ecc47a4a7dd4a120b40a152d85d3ab6c2b744a0fd5ed78da1b8f"
+  },
+  "identity_reference": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/historical_approved/model_sheet_cps2_alpha_cel_v1/dr_social_model_sheet_cps2_alpha_cel_v1.png",
+    "sha256": "a68ef89e26f16ca381221bc54919c898a1f8a2c2ffd9ee62fca244d0d5bde49e",
+    "role": "approved identity/model-sheet authority"
+  },
+  "source_art": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png",
+    "sha256": "2cd090e9a614cb4a8fe4c15ac38e05713425b28c2cf7459ae9d2749c288407a6",
+    "dimensions_px": [
+      1774,
+      887
+    ],
+    "role": "raw generated art source"
+  },
+  "prompt": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt",
+    "sha256": "7fde6d596896933f1a5a00ceb655df378376110b79494c6f97605c03bb07661e",
+    "role": "exact generation prompt"
+  },
+  "metadata": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2_metadata.json",
+    "sha256": "285b0d8a62895fb019368505f730c316514a7b0b3d1d26dad58b7dc7022a403b"
+  },
+  "composition": {
+    "method": "metadata_card_only_overlay",
+    "tool": "Pillow card-only annotation; base art outside the metadata card was pixel-checked unchanged",
+    "base_model_sheet": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v1.png",
+    "base_model_sheet_sha256": "822be99e0a61ebf72029e662c61f23aec509e4028ea75c7e58487810eb9e1b30",
+    "art_scale": "preserved from base sheet"
+  },
+  "final_asset": {
+    "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/review_drafts/style_series/style_07_hidrive_anime_vector/dr_social_model_sheet_07_hidrive_anime_vector_v2.png",
+    "sha256": "2cdd2051340283eca8e7d11799e2e1fab3be7c04a2bc8f40a904174a72476a09",
+    "dimensions_px": [
+      2400,
+      1440
+    ]
+  },
+  "review": {
+    "checklist": "SMS_projects/master_of_fighters/doc/dr_social_model_sheet_07_hidrive_anime_vector_review_v2.json",
+    "status": "pending_independent_and_owner_review"
+  },
+  "claim_ceiling": "concept_model_sheet_candidate_only"
+}

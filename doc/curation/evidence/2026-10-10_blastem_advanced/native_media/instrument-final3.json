@@ -1,0 +1,39 @@
+{
+  "schema": "sms_blastem_sequence_v1",
+  "region": "ntsc",
+  "model": "sms2",
+  "warmup_frames": 120,
+  "steps": [
+    {
+      "frames": 7,
+      "p1": 8
+    },
+    {
+      "frames": 3
+    }
+  ],
+  "preconditions": [
+    {
+      "address": 50944,
+      "equals_hex": "534d493101"
+    }
+  ],
+  "diagnostics": {
+    "cpu_watches": [
+      {
+        "address": 51192,
+        "size": 1
+      }
+    ],
+    "vdp_io_breakpoints": [
+      {
+        "pc": 11,
+        "opcode_hex": "ed69"
+      },
+      {
+        "pc": 25,
+        "opcode_hex": "d3be"
+      }
+    ]
+  }
+}
