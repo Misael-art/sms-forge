@@ -1,0 +1,25 @@
+=== audit_sprite_line_sim.py --self-check
+[SELF-CHECK OK] sprite_line_sim
+=== capture_video.py --self-check
+[OK] capture_video self-check
+=== measure_worst_frame.py --self-check
+  perfil do loop rejeita nomes duplicados    ok
+  fonte realocada em 0xC900 reprova sob a base canonica ok
+  fonte realocada autentica sob a base declarada ok
+  realocar move cabecalho, frame, estado e perfil ok
+  fonte canonica reprova sob a base realocada ok
+  base invalida 0xc950 rejeitada             ok
+  base invalida 0xbf00 rejeitada             ok
+  base invalida 0xe000 rejeitada             ok
+  base canonica restaurada                   ok
+  declared_probes expande word e array       ok
+  sonda no byte alto de um word vira sobreposicao ok
+  byte baixo dentro de um word reprovado     ok
+  fonte sem __at devolve corredor vazio      ok
+  enum de estado do projeto rotula snapshot corretamente ok
+[SELF-CHECK OK] measure_worst_frame
+=== blastem_sms.py --self-check
+[SELF-CHECK OK] BlastEm SMS script bounds, machine, PAL and injection rejection
+=== emulator_session.py --self-check
+[OK] isolated session self-check (pure; runtime acceptance separate)
+[OK] emulator_session self-check

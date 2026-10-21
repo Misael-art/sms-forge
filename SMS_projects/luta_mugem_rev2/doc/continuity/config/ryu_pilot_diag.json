@@ -1,0 +1,76 @@
+{
+  "actions": [
+    {
+      "role": "idle",
+      "action": 0,
+      "loop_start": 0
+    },
+    {
+      "role": "walk_f",
+      "action": 20
+    },
+    {
+      "role": "walk_b",
+      "action": 21
+    },
+    {
+      "role": "jump",
+      "action": 41
+    },
+    {
+      "role": "crouch",
+      "action": 11
+    },
+    {
+      "role": "guard",
+      "action": 120
+    },
+    {
+      "role": "punch",
+      "action": 260
+    },
+    {
+      "role": "hp",
+      "action": 280
+    },
+    {
+      "role": "kick",
+      "action": 200
+    },
+    {
+      "role": "hk",
+      "action": 240
+    },
+    {
+      "role": "special",
+      "action": 1000
+    },
+    {
+      "role": "ko",
+      "action": 170
+    }
+  ],
+  "fighter_scale": {
+    "target_idle_opaque_height_px": 80,
+    "accepted_height_px": [
+      72,
+      88
+      ]
+  },
+  "palette_p1": "ryu02",
+  "palette_p2": "ryu02",
+  "source_limitations": [
+    "papéis comuns idle(0)/crouch(11)/jump(41)/guard(120): estados 0/11/50/120 do ryu são forge_proxy (common_forge.cns) porque common1.cns está ausente do pacote (intake: common1_in_archive false) — anims 0/11/41/120 existem no ryu.air do próprio pacote; decisão de contrato espelha o registro do Ken no memory bank 2026-10-15 (forge_proxy_unproven / approximate; NÃO é equivalência MUGEN)",
+    "walk_f(20)/walk_b(21): estados 18/19 hard_absent_no_proxy na matriz t4; anims correspondentes só são aceitas se existirem no ryu.air do próprio pacote — se o gerador reprovar, walk fica blocked e vira gate humano",
+    "ko(170): estado próprio 170 é unmapped_orphan (ryu.cns:55, rationale 'LOSE block: anim 170'); alvo de KO do motor usa pose do AIR se existir (anim 170 presente no ryu.air), senão reprovação explícita",
+    "supers/especiais gateados por botões y/b ou 3-botões ficam fora deste corte diagnóstico: matriz t4 ryu registra 18 estados needs_remap_decision e out/semantics/cmd_2button_audit.json ryu registra 113 comandos parseados com 15 dropped_button_only e 4 três-simultâneos; nada removido em silêncio",
+    "escala 80px alvo: medições t3 mostram composições punch/crouch, projétil+impacto, esquina e kick-vs-guard IMPOSSIBLE em sprite-only (>8/scanline); este pacote é dados, a decisão de renderer (híbrido-BG) vem com o envelope t3; banda aceita 72–88"
+  ],
+  "commands": {
+    "punch": "a",
+    "hp": "c",
+    "kick": "x",
+    "hk": "z",
+    "special": "SP1_w"
+  }
+}

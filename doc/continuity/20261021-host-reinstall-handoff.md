@@ -206,3 +206,36 @@ memory bank e neste handoff.
 
 **Regra final:** se não foi visto rodando no emulador, não existe. Este
 snapshot preserva o que foi medido; não promove o que ainda está bloqueado.
+
+---
+
+## 8. `luta_mugem_rev2` — continuidade específica
+
+O snapshot `bdb32e7` também versiona fonte, dados, docs e scripts do
+`luta_mugem_rev2`. O recorte específico (estado canônico, B.2b-3b, repro,
+validação e próximo candidato) está em:
+
+`SMS_projects/luta_mugem_rev2/doc/27-continuidade-reinstalacao-2026-10-21.md`
+
+Leia-o junto com `doc/10-memory-bank.md` do projeto. O commit de continuidade
+do projeto é filho de `bdb32e7` no branch `feat/luta-mugen-motor`; a tag
+`continuity-20261021` aponta para o snapshot de workspace. Para ter os docs
+específicos, faça checkout do branch (ou use o asset `full`, que os contém).
+
+- ROM canônica: `087df676…`; fonte `042ba22e…`.
+- Candidato v043: `13b78bd2…`, **não promovido** (pacing 5033 < 5745; §129 passa).
+- Build de produção e v043 revalidada no host antigo: payload idêntico após
+  restaurar data SDSC (`0x7FE6`) e checksum SEGA (`0x7FFA`). Logs e script em
+  `doc/continuity/`.
+- Assets específicos na release `continuity-20261021`:
+  `luta_mugem_rev2_full_20261021.tar.zst` (projeto completo com `out/`),
+  `loteB2_20261021.tar.zst` (custódia temp), `sdk_20261021.tar.zst`,
+  `emulators_20261021.tar.zst`, `qa_toolchain_20261021.tar.zst`,
+  `workspace_out_20261021.tar.zst` e
+  `workspace_untracked_nonout_20261021.tar.zst`. Hashes em
+  `SMS_projects/luta_mugem_rev2/doc/continuity/RELEASE_ASSETS.sha256`.
+- Próximo trabalho: v044 com lista 5/3 pré-computada; nenhuma política 5/3,
+  6/2, híbrido ou FX está aprovada. Build não é delivery.
+- `SMS_projects/luta_mugen` segue com EIO pré-existente e intocado; o `out/`
+  de ~3,3 GB desse irmão **não** está nesta release. Se for necessário, copie
+  para disco externo antes de formatar, sem fsck/remount.

@@ -1,0 +1,76 @@
+{
+  "actions": [
+    {
+      "role": "idle",
+      "action": 0,
+      "loop_start": 0
+    },
+    {
+      "role": "walk_f",
+      "action": 20
+    },
+    {
+      "role": "walk_b",
+      "action": 21
+    },
+    {
+      "role": "jump",
+      "action": 41
+    },
+    {
+      "role": "crouch",
+      "action": 11
+    },
+    {
+      "role": "guard",
+      "action": 120
+    },
+    {
+      "role": "punch",
+      "action": 250
+    },
+    {
+      "role": "hp",
+      "action": 450
+    },
+    {
+      "role": "kick",
+      "action": 200
+    },
+    {
+      "role": "hk",
+      "action": 220
+    },
+    {
+      "role": "special",
+      "action": 1000
+    },
+    {
+      "role": "ko",
+      "action": 5080
+    }
+  ],
+  "fighter_scale": {
+    "target_idle_opaque_height_px": 80,
+    "accepted_height_px": [
+      72,
+      88
+    ]
+  },
+  "palette_p1": "ken1",
+  "palette_p2": "ken1",
+  "source_limitations": [
+    "papéis comuns idle(0)/crouch(11)/jump(41)/guard(120): nenhuma state própria no ken.cns; origem comum é common1.cns ausente — anims usadas existem no AIR do personagem, decisão de contrato registrada no memory bank 2026-10-15 (forge_proxy_unproven / approximate; NÃO é equivalência MUGEN)",
+    "walk_f(20)/walk_b(21): estados 18/19 hard_absent_no_proxy; anims correspondentes só são aceitas se existirem no ken.air do próprio pacote — se o gerador reprovar, walk fica blocked e vira gate humano",
+    "ko(5080): estado próprio 170 é unmapped_orphan; alvo de KO do motor usa pose do AIR se existir, senão reprovação explícita",
+    "supers/9 especiais gateados por botões y/b ou 3-botoes (cmd_2button_audit) ficam fora deste corte diagnóstico; nada removido em silêncio",
+    "escala 80px alvo: medições t3 mostram composições punch/crouch, projétil+impacto, esquina e kick-vs-guard IMPOSSIBLE em sprite-only (>8/scanline); este pacote é dados, a decisão de renderer vem com o envelope t3"
+  ],
+  "commands": {
+    "punch": "a",
+    "hp": "c",
+    "kick": "x",
+    "hk": "z",
+    "special": "fireball_x"
+  }
+}

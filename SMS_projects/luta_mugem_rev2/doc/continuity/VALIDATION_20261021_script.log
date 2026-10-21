@@ -1,0 +1,40 @@
+== luta_mugem_rev2 continuity validation ==
+repo      : /mnt/sdcard/Projects/SMSForge
+commit    : bdb32e7
+branch    : feat/luta-mugen-motor
+source    : 042ba22e4a0763daaa4e402b90a0a5d0d40a7b5923c17575ed012b6a89773bfe
+sdk       : /mnt/sdcard/Projects/SMSForge/sdk/sdcc-portable/bin/sdcc
+temp      : /mnt/sdcard/Projects/SMSForge/SMS_projects/_continuity_validate.kwqYFB
+
+== production rebuild ==
+[BUILD OK] /mnt/sdcard/Projects/SMSForge/SMS_projects/_continuity_validate.kwqYFB/out/rom/luta_mugem_rev2.sms (851968B) | eixos restantes para entrega: ['boot_emulador', 'gameplay', 'fps_constante', 'audio', 'memory_bank_atualizado']
+production built sha: 9873b3ff99194f40bd2baa804ca03ec0393ddee1677168366b7903414b1c44ac
+built     : /mnt/sdcard/Projects/SMSForge/SMS_projects/_continuity_validate.kwqYFB/out/rom/luta_mugem_rev2.sms
+built_sha : 9873b3ff99194f40bd2baa804ca03ec0393ddee1677168366b7903414b1c44ac
+canonical : /mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2/doc/continuity/assets/luta_mugem_rev2_canonical_087df676.sms
+canon_sha : 087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65
+diffs     : 2
+diff_offsets: 0x07FE6 0x07FFA
+canonicalized_sha: 087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65
+PASS canonicalizable: payload identical; only SDSC timestamp/SEGA checksum differed and were restored
+
+== v043 candidate rebuild ==
+[BUILD OK] /mnt/sdcard/Projects/SMSForge/SMS_projects/_continuity_validate.kwqYFB/out/rom/luta_mugem_rev2.sms (851968B) | eixos restantes para entrega: ['boot_emulador', 'gameplay', 'fps_constante', 'audio', 'memory_bank_atualizado']
+v043 built sha: 26b305672e1c8e47ec961e099d2991ae492145a875d67f0e58fd62409c7421e6
+built     : /mnt/sdcard/Projects/SMSForge/SMS_projects/_continuity_validate.kwqYFB/out/rom/luta_mugem_rev2.sms
+built_sha : 26b305672e1c8e47ec961e099d2991ae492145a875d67f0e58fd62409c7421e6
+canonical : /mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2/doc/continuity/assets/candidate_v043_13b78bd2435673df.sms
+canon_sha : 13b78bd2435673df089ed69302522d332c9418ea74331aeff95065c85e3920c7
+diffs     : 2
+diff_offsets: 0x07FE6 0x07FFA
+canonicalized_sha: 13b78bd2435673df089ed69302522d332c9418ea74331aeff95065c85e3920c7
+PASS canonicalizable: payload identical; only SDSC timestamp/SEGA checksum differed and were restored
+
+PASS build-only (production + v043); emulator/gameplay/fps/audio NOT tested
+Logs: /mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2/doc/continuity/post_reinstall_20261021T180429Z_prod.log
+      /mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugem_rev2/doc/continuity/post_reinstall_20261021T180429Z_v043.log
+
+Next, with the release emulator assets extracted and a private display:
+  tools/sms_wrapper/emulator_session.py ...   # read the runbook before starting
+  SMS_projects/luta_mugem_rev2/run.sh
+Do not declare delivery: boot/gameplay/fps/audio/render axes are still unproven here.
