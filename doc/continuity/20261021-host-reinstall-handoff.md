@@ -6,11 +6,14 @@
 >
 > **Repositório:** <https://github.com/Misael-art/sms-forge> (público)
 > **Branch de trabalho:** `feat/luta-mugen-motor`
-> **Tag de continuidade:** `continuity-20261021`
+> **Tag inicial:** `continuity-20261021` (snapshot `bdb32e7`)
+> **Tag de retomada:** `continuity-20261021-final`
 > **Snapshot anterior:** `da86de3` (branch `backup/pre-continuity-20261021`)
 >
-> O commit/tag exato é o que contém este arquivo. Não confie em um SHA escrito
-> aqui; confirme com `git rev-parse continuity-20261021`.
+> A tag `continuity-20261021` é o snapshot inicial; a tag
+> `continuity-20261021-final` contém este arquivo, a reconciliação e o
+> trabalho posterior de `luta_mugem_rev2`. Confirme com
+> `git rev-parse continuity-20261021-final`.
 
 ---
 
@@ -20,8 +23,12 @@
 git clone https://github.com/Misael-art/sms-forge.git
 cd sms-forge
 git fetch --tags
-git checkout continuity-20261021
+git checkout continuity-20261021-final
 ```
+
+`continuity-20261021` é o snapshot original (`bdb32e7`); a tag `-final`
+inclui os docs de `luta_mugem_rev2`, o bank O3, o changelog do openbor, os
+bits executáveis e esta reconciliação.
 
 O clone normal traz **código, documentação, ROMs changelog e o framework**.
 Os arquivos grandes/ignorados (`out/`, `sdk/`, emuladores e arte não versionada)
@@ -119,11 +126,15 @@ continuidade do host, não substitui o memory bank.
 ## 3. O que está no Git (clone normal)
 
 - Todo o histórico e as 31+ commits que estavam à frente do remoto;
-- alterações rastreadas pendentes de todos os projetos (incluindo as remoções
-  de curadoria do `master_of_fighters`; o conteúdo removido continua no
-  histórico do Git);
+- alterações rastreadas pendentes de todos os projetos. O stage detectou
+  **100 renomeações** (conteúdo preservado, 99 no `master_of_fighters` e 1 em
+  `tools/`) e **1 deleção real** (`luta_mugen/doc/promotion_claims/aaa.json`);
+  o ledger está em `doc/continuity/20261021-deleted-paths.txt`;
 - fontes, documentos, artefatos de documentação e arte pequena (<5 MB por
   arquivo) dos projetos;
+- o changelog de ROMs do openbor (`changelog/roms/build_v001..v078`) e o bank
+  O3 `res/o3/banks/o3_pose_blocks_20261017.bin`, necessários para rebuild em
+  clone novo; `build.sh` e `ensure_toolchain.sh` têm bit executável;
 - `doc/artifact_registry.json`, `doc/artifacts/` do openbor e o registro do
   snapshot;
 - `AGENTS.md`, `README.md`, `.gitignore`, `tools/sms_wrapper/`.
@@ -139,7 +150,13 @@ Baixe com:
 gh release download continuity-20261021 --dir /tmp/smsforge-continuity
 ```
 
-Os nomes previstos são:
+O release contém dois conjuntos produzidos em paralelo. O manifesto canônico
+com SHA-256/bytes verificados pela API do GitHub é
+`doc/continuity/20261021-release-assets.sha256`; o manifesto do fluxo
+paralelo é
+`SMS_projects/luta_mugem_rev2/doc/continuity/RELEASE_ASSETS.sha256`.
+
+Conjunto SMSForge/openbor:
 
 - `smsforge-openbor-out-20261021.tar.zst` — `SMS_projects/openbor_sms_rev1/out/`
   inteiro: ROM cap5, evidence, bundle, QA, build record e logs;
@@ -149,7 +166,17 @@ Os nomes previstos são:
 - `smsforge-toolchain-20261021.tar.zst` — `sdk/` e `tools/emuladores/`;
 - `smsforge-generated-other-20261021.tar.zst` — `out/` gerado dos outros
   projetos, exceto `luta_mugen/out` (3,3 GB, gerado e reproduzível; veja §5);
-- manifesto de hashes em `doc/continuity/20261021-assets.sha256`.
+- `smsforge-changelogs-remaining-20261021.tar.zst` — changelogs ignorados de
+  `luta_mugen` e dos demais projetos, mais `_laboratorio/pnt_16bit/out`.
+
+Conjunto `luta_mugem_rev2` (fluxo paralelo):
+`luta_mugem_rev2_full_20261021.tar.zst`, `loteB2_20261021.tar.zst`,
+`sdk_20261021.tar.zst`, `emulators_20261021.tar.zst`,
+`qa_toolchain_20261021.tar.zst`, `workspace_out_20261021.tar.zst`,
+`workspace_untracked_nonout_20261021.tar.zst` e `RELEASE_ASSETS.sha256`.
+O `luta_mugem_rev2_full` publicado tem SHA `8bb4222e…`, alinhado em
+`e3eb26b`; leia `SMS_projects/luta_mugem_rev2/doc/continuity/` para o recorte
+completo.
 
 Extraia sempre preservando os caminhos relativos:
 
@@ -170,9 +197,14 @@ podem ser reconstruídos. Eles **não** entram na release por tamanho/tempo:
 - `SMS_projects/*/out/` dos outros projetos (o subconjunto menor vai no asset
   `generated-other`; `luta_mugen/out` fica de fora);
 - `.mimosa/` (~727 MB, hooks/estado de sessão do agente);
-- caches `__pycache__/`, `.pytest_cache/`, temporários;
+- caches `__pycache__/`, `.pytest_cache/`, temporários, `SMS_Engines/*/build`
+  e cópias ignoradas de toolchain (`SMS_Engines/devkitSMS`, `smslib`);
 - `sdk/` e `tools/emuladores/` **são** arquivados, mas também podem ser
   reinstalados por `ensure_toolchain.sh`/download oficial.
+
+O changelog do openbor **está no Git** (`1abf107`); o changelog de
+`luta_mugen` e dos demais projetos (exceto `luta_mugem_rev2`, que está no
+`full`) está em `smsforge-changelogs-remaining-20261021.tar.zst`.
 
 Se você precisa de `luta_mugen/out` ou de outro `out/` integral, copie-o para
 um disco externo **antes** de formatar; ele não está nesta release.
@@ -194,13 +226,21 @@ memory bank e neste handoff.
 
 ## 7. Ordem sugerida de retomada
 
-1. Clonar e checkout da tag; rodar `ensure_toolchain.sh`.
+1. Clonar e checkout de `continuity-20261021-final`; rodar
+   `tools/sms_wrapper/ensure_toolchain.sh`.
 2. Restaurar `openbor/out` da release; conferir os SHAs da §2.
-3. Ler `doc/10-memory-bank.md` (autoridade #1) e este handoff.
+3. Ler `doc/10-memory-bank.md` (autoridade #1), este handoff e
+   `20261021-reconciliation.md`.
 4. Decidir o achado de direção do golpe/Lote C e PAL/NTSC.
 5. Rodar a regressão de gameplay no ROM atual; se houver correção de
    apresentação, gerar novo SHA e refazer consumer/QA/projeção.
 6. Só então archive/version e commit/push adicionais.
+
+`./build.sh` funciona em clone novo: o bank O3 e o changelog do openbor estão
+no Git. Se você rebuildar, a ROM continua `701379cc…`, mas o gate de frescor
+rebaixa boot/gameplay/FPS/áudio porque o binário é mais novo que as evidências
+cap5. Para o registro histórico 7/7, use o `out/` restaurado sem rebuild; para
+um claim novo, refaça a QA de emulador e áudio.
 
 ---
 
@@ -244,3 +284,29 @@ específicos, faça checkout do branch (ou use o asset `full`, que os contém).
 - `SMS_projects/luta_mugen` segue com EIO pré-existente e intocado; o `out/`
   de ~3,3 GB desse irmão **não** está nesta release. Se for necessário, copie
   para disco externo antes de formatar, sem fsck/remount.
+
+---
+
+## 9. Reconciliação final e validação do clone
+
+O snapshot inicial (`bdb32e7`) foi complementado pelo fluxo paralelo de
+`luta_mugem_rev2` (`dea07bf`…`164b309`) e pelo commit `1abf107`, que
+versiona o bank O3, o changelog do openbor e os bits executáveis. A tag
+`continuity-20261021-final` aponta para o commit que contém este §9, o
+manifesto `20261021-release-assets.sha256` e a reconciliação.
+
+Validação executada neste host:
+
+- build local: `BUILD OK`, ROM
+  `701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9`,
+  131.072 bytes; build record 7/7 na mesma sessão;
+- clone parcial direto do GitHub de `1abf107`: `./build.sh` executou com bit
+  +x confirmado e reproduziu o mesmo SHA; o gate de frescor rebaixou os eixos
+  de evidência, como esperado para um rebuild em data posterior;
+- assets conferidos por digest da API do GitHub; ver
+  `doc/continuity/20261021-reconciliation.md` e
+  `doc/continuity/20261021-release-assets.sha256`.
+
+Isso fecha o caminho **GitHub → clone → build → ROM idêntica**. Não fecha a
+promoção de cap5: ataque/Lote C, PAL, regressão de gameplay e época visual
+`delivery` continuam decisões/medições pendentes.
