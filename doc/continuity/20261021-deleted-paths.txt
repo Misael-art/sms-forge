@@ -1,106 +1,178 @@
-# Caminhos removidos no snapshot de continuidade 2026-10-21.
-# O conteudo permanece no historico do Git; recupere com:
-#   git log --diff-filter=D -- <path>
-#   git show <commit>^:<path>
+# Snapshot 2026-10-21 — ledger de remoções, renomeações e EIO
 
-SMS_projects/luta_mugen/doc/promotion_claims/aaa.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_02_dark_gothic_pop_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_03_late_snk_realism_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_04_cps3_fluid_mastery_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_harmony_proposal_v3.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/asset_lineage_record_model_sheet_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_48_style_atlas_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_prompt_v3_harmony_proposal.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_concept_sheet_v3_harmony_proposal.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_02_dark_gothic_pop_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_art_prepared.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_03_late_snk_realism_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_04_cps3_fluid_mastery_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v2_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_blocked_record_v1.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v2_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v2_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v3_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v3_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v4_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_06_classic_arcade_heroic_v4_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v2_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v2_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v3_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v3_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v2_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v3_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v3_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v2_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_metadata.json
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v0_identity_reference.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v2_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v3_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v3_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1_art.png
-SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v1_prompt.txt
-SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/harmony_sprite_index8_reencodes_v1.json
-SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/harmony_sprites_owner_feedback_20261005.json
-SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/harmony_sprites_post_treatment_review_report_v1.json
-SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v1.json
-SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v1.png
-SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v2.json
-SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/harmony_sprites_proportion_comparison_v2.png
-tools/sms_wrapper/mugen2sms/palette_contract.py
+Este arquivo substitui a lista gerada **antes do stage**, que classificava
+cegamente 101 caminhos como deletados. O stage do Git detectou 100
+renomeações com conteúdo preservado; só houve uma deleção real.
+
+## A. Deleção real no commit bdb32e7 (1)
+
+- `SMS_projects/luta_mugen/doc/promotion_claims/aaa.json`
+
+O conteúdo anterior continua no pai de `bdb32e7`; recupere com
+`git show bdb32e7^:<path>` ou `git log --diff-filter=D -- <path>`.
+
+## B. Renomeações com conteúdo preservado (100)
+
+O `git show --summary` do commit registra:
+
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => approved_records/concept_v3}/asset_lineage_record_harmony_proposal_v3.json (84%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => approved_records/concept_v3}/dr_social_concept_prompt_v3_harmony_proposal.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => approved_records/concept_v3}/dr_social_concept_sheet_v3_harmony_proposal.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => historical_approved/model_sheet_cps2_alpha_cel_v1}/asset_lineage_record_model_sheet_v1.json (90%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => historical_approved/model_sheet_cps2_alpha_cel_v1}/dr_social_model_sheet_cps2_alpha_cel_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => historical_approved/model_sheet_cps2_alpha_cel_v1}/dr_social_model_sheet_cps2_alpha_cel_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => historical_approved/model_sheet_cps2_alpha_cel_v1}/dr_social_model_sheet_cps2_alpha_cel_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/concept_direction_explorations}/asset_lineage_record_02_dark_gothic_pop_v1.json (88%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/concept_direction_explorations}/asset_lineage_record_03_late_snk_realism_v1.json (87%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/concept_direction_explorations}/asset_lineage_record_04_cps3_fluid_mastery_v1.json (88%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/concept_direction_explorations}/dr_social_48_style_atlas_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_02_dark_gothic_pop}/dr_social_model_sheet_02_dark_gothic_pop_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_02_dark_gothic_pop}/dr_social_model_sheet_02_dark_gothic_pop_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_02_dark_gothic_pop}/dr_social_model_sheet_02_dark_gothic_pop_v1_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_02_dark_gothic_pop}/dr_social_model_sheet_02_dark_gothic_pop_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_03_late_snk_realism}/dr_social_model_sheet_03_late_snk_realism_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_03_late_snk_realism}/dr_social_model_sheet_03_late_snk_realism_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_03_late_snk_realism}/dr_social_model_sheet_03_late_snk_realism_v1_art_prepared.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_03_late_snk_realism}/dr_social_model_sheet_03_late_snk_realism_v1_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_03_late_snk_realism}/dr_social_model_sheet_03_late_snk_realism_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_04_cps3_fluid_mastery}/dr_social_model_sheet_04_cps3_fluid_mastery_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_04_cps3_fluid_mastery}/dr_social_model_sheet_04_cps3_fluid_mastery_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_04_cps3_fluid_mastery}/dr_social_model_sheet_04_cps3_fluid_mastery_v1_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_04_cps3_fluid_mastery}/dr_social_model_sheet_04_cps3_fluid_mastery_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/asset_lineage_record_dr_social_model_sheet_05_urban_seinen_kof_v1.json (80%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/dr_social_model_sheet_05_urban_seinen_kof_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/dr_social_model_sheet_05_urban_seinen_kof_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/dr_social_model_sheet_05_urban_seinen_kof_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/dr_social_model_sheet_05_urban_seinen_kof_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/dr_social_model_sheet_05_urban_seinen_kof_v2_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/dr_social_model_sheet_05_urban_seinen_kof_v2_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/dr_social_model_sheet_05_urban_seinen_kof_v3_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_05_urban_seinen_kof}/dr_social_model_sheet_05_urban_seinen_kof_v3_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_blocked_record_v1.json (70%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_v2_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_v2_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_v3_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_v3_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_v4_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_06_classic_arcade_heroic}/dr_social_model_sheet_06_classic_arcade_heroic_v4_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/asset_lineage_record_dr_social_model_sheet_07_hidrive_anime_vector_v1.json (78%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v2_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v2_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v3_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v3_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v4_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_07_hidrive_anime_vector}/dr_social_model_sheet_07_hidrive_anime_vector_v4_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/asset_lineage_record_dr_social_model_sheet_08_32bit_mecha_chibi_v1.json (78%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v2_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v2_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v3_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v3_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v4_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_08_32bit_mecha_chibi}/dr_social_model_sheet_08_32bit_mecha_chibi_v4_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_09_extreme_sd_parody}/asset_lineage_record_dr_social_model_sheet_09_extreme_sd_parody_v1.json (81%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_09_extreme_sd_parody}/dr_social_model_sheet_09_extreme_sd_parody_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_09_extreme_sd_parody}/dr_social_model_sheet_09_extreme_sd_parody_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_09_extreme_sd_parody}/dr_social_model_sheet_09_extreme_sd_parody_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_09_extreme_sd_parody}/dr_social_model_sheet_09_extreme_sd_parody_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_09_extreme_sd_parody}/dr_social_model_sheet_09_extreme_sd_parody_v2_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_09_extreme_sd_parody}/dr_social_model_sheet_09_extreme_sd_parody_v2_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/asset_lineage_record_dr_social_model_sheet_10_digicel_handdrawn_v1.json (80%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/dr_social_model_sheet_10_digicel_handdrawn_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/dr_social_model_sheet_10_digicel_handdrawn_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/dr_social_model_sheet_10_digicel_handdrawn_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/dr_social_model_sheet_10_digicel_handdrawn_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/dr_social_model_sheet_10_digicel_handdrawn_v2_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/dr_social_model_sheet_10_digicel_handdrawn_v2_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/dr_social_model_sheet_10_digicel_handdrawn_v3_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_10_digicel_handdrawn}/dr_social_model_sheet_10_digicel_handdrawn_v3_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/asset_lineage_record_dr_social_model_sheet_15_ghibli_cel_simulation_v1.json (68%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_metadata.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v0_identity_reference.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v1_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v1_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v2_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v2_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v3_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v3_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v4_art.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/{ => review_drafts/style_series/style_15_ghibli_cel_simulation}/dr_social_model_sheet_15_ghibli_cel_simulation_v4_prompt.txt (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/{ => review_drafts/historical_comparison_candidates}/harmony_sprite_index8_reencodes_v1.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/{ => review_drafts/historical_comparison_candidates}/harmony_sprites_owner_feedback_20261005.json (94%)`
+- `SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/{ => review_drafts/historical_comparison_candidates}/harmony_sprites_post_treatment_review_report_v1.json (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/{ => review_drafts/historical_comparison_candidates}/harmony_sprites_proportion_comparison_v1.json (97%)`
+- `SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/{ => review_drafts/historical_comparison_candidates}/harmony_sprites_proportion_comparison_v1.png (100%)`
+- `SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/{ => review_drafts/historical_comparison_candidates}/harmony_sprites_proportion_comparison_v2.json (97%)`
+- `SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/{ => review_drafts/historical_comparison_candidates}/harmony_sprites_proportion_comparison_v2.png (100%)`
+- `tools/sms_wrapper/mugen2sms/{palette_contract.py => quarantine/palette_contract_MD_LEGACY.py} (100%)`
+
+## C. Docs de `luta_mugen` não estagiados por EIO (25)
+
+Estes caminhos estavam ausentes/ilegíveis no worktree no momento do
+snapshot. Eles **não** foram removidos do commit: as versões do último
+commit continuam presentes em `bdb32e7` e no clone. O `EIO` é uma
+limitação do armazenamento, não uma decisão de curadoria.
+
+- `SMS_projects/luta_mugen/doc/00-diretrizes-agente.md`
+- `SMS_projects/luta_mugen/doc/08-bible-artistica.md`
+- `SMS_projects/luta_mugen/doc/10-memory-bank.md`
+- `SMS_projects/luta_mugen/doc/11-gdd.md`
+- `SMS_projects/luta_mugen/doc/12-roteiro.md`
+- `SMS_projects/luta_mugen/doc/13-spec-cenas.md`
+- `SMS_projects/luta_mugen/doc/15-tdd.md`
+- `SMS_projects/luta_mugen/doc/16-engine-review-2026-09-26.md`
+- `SMS_projects/luta_mugen/doc/17-scale-pilot-2026-09-26.md`
+- `SMS_projects/luta_mugen/doc/18-gap-diagnostico-plano-prompt-2026-09-29.md`
+- `SMS_projects/luta_mugen/doc/19-prompt-continuidade-assimilacao-sgdk-2026-09-29.md`
+- `SMS_projects/luta_mugen/doc/20-prompt-lote-c-palco-hud-psg-round-2026-09-30.md`
+- `SMS_projects/luta_mugen/doc/22-mapa-de-controle-sms-2026-09-30.md`
+- `SMS_projects/luta_mugen/doc/23-prompt-lote-d-movimento-golpes-tipo-p1-p2-medicao-2026-10-02.md`
+- `SMS_projects/luta_mugen/doc/asset_provenance_manifest.json`
+- `SMS_projects/luta_mugen/doc/audio_provenance_manifest.json`
+- `SMS_projects/luta_mugen/doc/doacao_md_mugen2sms.json`
+- `SMS_projects/luta_mugen/doc/donor_review_2026-09-26.json`
+- `SMS_projects/luta_mugen/doc/engine_quality_contract.json`
+- `SMS_projects/luta_mugen/doc/plan-1-motor-s0-s4.md`
+- `SMS_projects/luta_mugen/doc/plan-2-runtime-s5-s6.md`
+- `SMS_projects/luta_mugen/doc/promotion_claims/60fps.json`
+- `SMS_projects/luta_mugen/doc/rom_asset_binding.json`
+- `SMS_projects/luta_mugen/doc/rom_asset_binding_lote_c.json`
+- `SMS_projects/luta_mugen/doc/scale_pilot_freeze_p2_2026-09-26.json`
+
+## D. Arquivos grandes não versionados no Git
+
+Estes caminhos ficaram fora do commit por tamanho; estão no asset
+`smsforge-untracked-large-20261021.tar.zst` (release `continuity-20261021`),
+exceto `SMS_projects/luta_mugen/out` e `.mimosa`, que não foram arquivados:
+
+- `SMS_projects/_laboratorio/pnt_16bit/out/`
+- `SMS_projects/luta_mugen/changelog/curation/2026-10-08/frontier_inventory.json`
+- `SMS_projects/luta_mugen/changelog/curation/2026-10-08/local_study_source_and_reports.tar.gz`
+- `frame_advance_v062_private`
+- `out/DEEP_RESEARCH_smspower_curacao.md`
+- `out/blastem_downloads/`
+- `out/curation_proposals_smspower_2026-10-12.md`
+- `out/evidence/`
+- `out/host_tools/`
+- `out/local_study/`
+- `out/logs/`
+- `out/prompt_agente_curador_smspower_2026-10-12.md`
+- `out/prompt_curador_smspower_2026-10-13.md`
+- `out/session_bridge/`
+- `out/smspower_corpus_2026-10-12/`
+
+## E. Não arquivado por tamanho/efemeridade
+
+- `SMS_projects/luta_mugen/out/` — 3,3 GB, gerado; copie para disco externo se necessário.
+- `.mimosa/` — 727 MB, estado de hooks/sessão do agente; não é fonte.
+

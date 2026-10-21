@@ -15,6 +15,9 @@ tools/ai_imagegen/
 # artefatos de build / ROMs versionadas / saídas
 SMS_projects/*/out/
 SMS_projects/*/changelog/roms/
+# Continuidade: o histórico de ROMs do openbor é evidência do cap5, não lixo.
+!SMS_projects/openbor_sms_rev1/changelog/roms/
+!SMS_projects/openbor_sms_rev1/changelog/roms/**
 SMS_Engines/*/build/
 SMS_Engines/*/*.sms
 SMS_projects/*/main.asm
@@ -39,6 +42,8 @@ doc/tela_funcional_referencia.png
 **/*.noi
 **/*.lk
 **/*.bin
+# O bank O3 é gerado, mas o build o consome; 80 KiB exatos precisam sobreviver.
+!SMS_projects/openbor_sms_rev1/res/o3/banks/o3_pose_blocks_20261017.bin
 
 # python
 __pycache__/
