@@ -58,7 +58,7 @@ fps, áudio, render final nem delivery.
 
 ### 1.2 Na release (arquivos grandes/ignorados)
 
-Release alvo: **`continuity-20261021`** no repositório
+**Release:** **`continuity-20261021`** no repositório
 `https://github.com/Misael-art/sms-forge`. Confirme os hashes em
 `doc/continuity/RELEASE_ASSETS.sha256` antes de usar.
 
@@ -281,7 +281,7 @@ Os eixos `boot_emulador`, `gameplay`, `fps_constante`, `audio` e
 
 ---
 
-## 5. Validação feita neste host (pré-formatação)
+## 5. Validação feita neste host e no clone remoto
 
 Executada em 2026-10-21, no host BigLinux/Manjaro, a partir do clone local
 (`bdb32e7`) e do tarball gerado versionado:
@@ -305,6 +305,14 @@ Logs versionados:
   `..._v043.log` — primeira execução manual;
 - `doc/continuity/post_reinstall_*.log` — logs da execução do script;
 - `doc/continuity/assets/tool_selfchecks.txt` — self-checks das ferramentas.
+
+**Pós-push (GitHub):** um clone esparso direto do remoto, no commit
+`e3eb26b` da branch `feat/luta-mugen-motor`, passou
+`sha256sum -c doc/continuity/ASSETS.sha256` e repetiu produção + v043 com os
+mesmos resultados (`9873b3ff…`→`087df676…`, `26b30567…`→`13b78bd2…`). O SDK
+usado foi o mesmo binário do asset `sdk_20261021.tar.zst`; a extração do asset
+deve ser repetida no host novo. Log:
+`VALIDATION_20261021_github_clone.log`.
 
 **Limite honesto:** isso prova build/reprodutibilidade de payload. Não prova
 que a ROM boota neste host novo, nem gameplay/fps/áudio. A regra de ferro

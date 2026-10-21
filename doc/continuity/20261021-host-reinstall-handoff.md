@@ -236,6 +236,11 @@ específicos, faça checkout do branch (ou use o asset `full`, que os contém).
   `SMS_projects/luta_mugem_rev2/doc/continuity/RELEASE_ASSETS.sha256`.
 - Próximo trabalho: v044 com lista 5/3 pré-computada; nenhuma política 5/3,
   6/2, híbrido ou FX está aprovada. Build não é delivery.
+- **Validação pós-push:** clone esparso direto do GitHub no commit `e3eb26b`
+  passou `ASSETS.sha256` e reconstruiu produção + v043 com canonicalização
+  PASS; log em
+  `SMS_projects/luta_mugem_rev2/doc/continuity/VALIDATION_20261021_github_clone.log`.
+  Emulador/gameplay/fps/áudio continuam não medidos.
 - `SMS_projects/luta_mugen` segue com EIO pré-existente e intocado; o `out/`
   de ~3,3 GB desse irmão **não** está nesta release. Se for necessário, copie
   para disco externo antes de formatar, sem fsck/remount.

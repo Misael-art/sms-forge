@@ -25,6 +25,47 @@ Saída completa: `VALIDATION_20261021_script.log`.
 - Toolchain: SDCC 4.6.0 #16555, `makesms` sha `617b2e79…`, Emulicious não
   usado nesta validação.
 
+## Clone limpo do GitHub (pós-push)
+
+Depois do push, foi feito um clone **direto do GitHub**, esparso e raso, no
+commit `e3eb26b` (branch `feat/luta-mugen-motor`):
+
+```sh
+git clone --filter=blob:none --sparse --depth 1 \
+  --branch feat/luta-mugen-motor \
+  https://github.com/Misael-art/sms-forge.git github_sparse
+cd github_sparse
+git sparse-checkout set SMS_projects/luta_mugem_rev2 tools/sms_wrapper doc/continuity
+```
+
+- `sha256sum -c doc/continuity/ASSETS.sha256` no clone: **PASS** (inclui
+  fonte, docs, configs, assets de continuidade e dados de origem).
+- Produção: `9873b3ff…` → canonicalizado `087df676…` — **PASS**.
+- v043: `26b30567…` → canonicalizado `13b78bd2…` — **PASS**.
+- `validate_after_reinstall.sh`: **PASS build-only**.
+- Log: `VALIDATION_20261021_github_clone.log`.
+
+O SDK usado nesse clone foi o mesmo binário já verificado neste host (o asset
+`sdk_20261021.tar.zst`, sha256 `ca2ab84e…`); a extração do asset não foi
+repetida nesta rodada. A build usa exatamente os mesmos binários; o host novo
+deve extrair o asset e repetir o script.
+
+## Release publicada
+
+Release `continuity-20261021` em
+`https://github.com/Misael-art/sms-forge/releases/tag/continuity-20261021`.
+
+Os sete assets abaixo estão publicados com `state=uploaded`; os digests
+SHA-256 do GitHub batem com `RELEASE_ASSETS.sha256`:
+
+- `luta_mugem_rev2_full_20261021.tar.zst`
+- `loteB2_20261021.tar.zst`
+- `sdk_20261021.tar.zst`
+- `emulators_20261021.tar.zst`
+- `qa_toolchain_20261021.tar.zst`
+- `workspace_out_20261021.tar.zst`
+- `workspace_untracked_nonout_20261021.tar.zst`
+
 ## O que continua aberto
 
 `boot_emulador`, `gameplay`, `fps_constante`, `audio`,
