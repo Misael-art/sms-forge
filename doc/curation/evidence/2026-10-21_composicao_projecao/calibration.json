@@ -1,0 +1,22 @@
+{
+  "schema": "sms_curation_calibration_v1",
+  "new_emulator_execution": false,
+  "cases": [
+    {
+      "case": "cap5",
+      "accepted": false,
+      "error": "bundle nao revalidado: ['immutable snapshot required: inputs/rom.sms']"
+    },
+    {
+      "case": "m8",
+      "accepted": false,
+      "error": "bundle nao revalidado: ['immutable snapshot required: inputs/rom.sms']"
+    },
+    {
+      "case": "m8_sources_on_cap5",
+      "refused": true,
+      "reason": "ROM atual nao e a ROM das fontes: atual=701379cc88e0 fontes=a7f02b847693; projecao recusada (nao herde eixos de outro binario)",
+      "output_created": false
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+ "schema": "openbor_sms_axis_evidence_projection_v1",
+ "artifact_kind": "axis_evidence_projection",
+ "generated_at": "2026-10-21",
+ "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+ "rom_bytes": 131072,
+ "region": "NTSC",
+ "informative": true,
+ "boot": {
+  "proof": "framebuffer",
+  "canvas": [
+   256,
+   192
+  ],
+  "artifacts": [
+   "boot_png"
+  ]
+ },
+ "gameplay": {
+  "interaction_proven": true,
+  "proof": "input_ram_video",
+  "artifacts": [
+   "gameplay_observation",
+   "gameplay_video"
+  ],
+  "before": 50,
+  "after": 29,
+  "relation": "decrease",
+  "qa_runtime_cases": [
+   "boot_baseline",
+   "attack_contact"
+  ]
+ },
+ "sources": {
+  "bundle": {
+   "path": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/m8/bundle.json",
+   "sha256": "a0cc1f37470af5e2f1e3cc82c1c4b46a57a78f9e925b82fcdeb76f503ab287a7"
+  },
+  "consumption": {
+   "path": "out/evidence/m8/consumption_a7f02b84.json",
+   "sha256": "ade6c1b7dfc31cb4ea0848a9e7d84b5fc86f10457a3d7c8089d8f98a14966059"
+  },
+  "runtime_mrp3": {
+   "path": "out/evidence/m8/session_inputs/4f1f45411420453d9c93a76f160410ba/runtime_metrics.json",
+   "sha256": "bed56ff566aa6d4dd73f8b973d18973517ba77b0f7e93aa2911765d38f1735a9",
+   "session_id": "4f1f45411420453d9c93a76f160410ba"
+  },
+  "qa_runtime": {
+   "path": "out/evidence/m8/qa/runtime/run_ce3bb103775b4d07aff60ee736a2a210/report.json",
+   "sha256": "28cb7d39220149e30ea233ee8fa9261371256c386c6145a731a9c450bc7195e0"
+  },
+  "qa_visual": {
+   "path": "out/evidence/m8/qa/visual/run_a4c73f390ab44855a855e69044cf0eaa/report.json",
+   "sha256": "c43e9ed248647f1c6daa838fd140cbff0f6e66c74c69e595c8d2c2f8eae9ad02"
+  },
+  "audio": {
+   "path": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/m8/artifacts/audio_signal.wav",
+   "sha256": "1638dd1916adab29b112c52a8c2cf73389027eb73cdba68f385fe626b6e42d74"
+  }
+ },
+ "claim_ceiling": "assigned_checks_only",
+ "limits": [
+  "projecao de evidencia aceita; nao e nova medicao",
+  "consumer: assigned_checks_only; sem aprovacao de entrega ou qualidade visual",
+  "PAL nao medido",
+  "achados QA preservados nas fontes; passed nao aprova contato visual ou delivery"
+ ]
+}

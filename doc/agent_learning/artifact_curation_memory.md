@@ -59,3 +59,19 @@
   fixtureXfora dobyte corrigida e falhainicialpreservada. Registry27records/
   1176files/1122legacy,371arquivosrecentesindexadossemaprovação. Doc sync
   continua dez problemasMugen; probe opcional debuildnão rodado.
+
+## 2026-10-21 — aplicação de L137/L138 e custódia
+
+- Sem novo ID: propagados perfil O3, composição bilateral, contato orientado
+  e terminais de controle/apresentação às skills e workflows em uso.
+- Projeção revalida bundle/consumo, métricas/WAV e QA/pedido/sessão/ROM; casos
+  aprovados são derivados da cobertura. Saídas existentes e aliases recusados.
+- Continuidade exige clone/build com recursos e executáveis preservados;
+  snapshot/release não aprova jogo nem restauração em host não exercitado.
+- HAMOOPIG reincluído pelo snapshot volta a ser retirado do índice nesta
+  branch; cópia de trabalho original e lições históricas preservadas.
+- Resultados e limites: `doc/curation/2026-10-21_composicao_projecao_continuidade.json`
+  e `doc/curation/evidence/2026-10-21_composicao_projecao/summary.md`.
+- Fechamento: selftest124/124, ferramentas73/73, learning capture e doc-sync
+  da worktree PASS. No workspace original permanecem dez falhas documentais
+  legadas; exclusões não incorporadas. Sem nova execução de emulador.

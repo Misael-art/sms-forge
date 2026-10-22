@@ -155,3 +155,27 @@ Exemplo de caso de controles (diagnóstico, não gameplay):
 ```
 
 O endereço acima pertence à fixture SMI1; localizar o probe real de cada ROM.
+
+## Casos visuais de combate: integridade e contato (L137/L138)
+
+O pedido visual distingue decode/paleta/canvas, silhueta dos **dois** atores,
+contato visível e recuperação. Cobrir somente os primeiros não aprova os
+demais. Para o renderer O3, usar `audit_silhouette_integrity.py` antes da QA
+viva; seus pisos são do perfil O3, não números universais de qualquer jogo.
+Na ROM, alinhar SAT/ec, posição/pose e framebuffer em ataque contra idle/pain
+nas duas direções. Paleta correta com cabeça/tronco omitidos reprova silhueta.
+
+Alinhar frame do hit, orientação do ator, região visível do golpe, alvo e
+reação: HP diminuindo com a espada apontando para o lado oposto é prova de
+lógica de dano, com apresentação defeituosa. Vídeo precisa ir até o retorno
+visual e a reentrada de comando; anotar esses dois terminais separadamente.
+Upload pendente pode devolver controle antes de exibir a pose de retorno.
+O ritmo do loop, sozinho, não mede a velocidade da animação.
+
+Se um caso limitado passou e revelou um defeito fora do caso, manter o
+escopo aprovado e registrar o defeito como bloqueio da promoção correspondente
+no parecer do coordenador. Não ocultar defeito em `observation` para aprovar
+um caso cuja expectativa ele viola. `assigned_checks_only` continua valendo;
+QA de integridade não constitui aprovação de apresentação/entrega.
+Projeções usam pedidos/relatórios íntegros do SHA atual, preservam as fontes
+e listam os IDs efetivamente aprovados; seguir `release-rom.md`.

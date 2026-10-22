@@ -22,3 +22,11 @@ Lições canônicas, registros de curadoria e medições anteriores são mantido
 como histórico técnico. Essas citações não tornam o projeto ativo nem provam
 resultados nas ROMs atuais. Não houve execução de testes ou de emuladores
 nesta retirada.
+
+### Reconciliação de 21/10/2026
+
+O snapshot de continuidade `bdb32e7` voltou a rastrear 108 arquivos do projeto
+apesar do ignore. A curadoria reaplica a retirada já autorizada em commit
+normal: o diretório deixa o índice da branch de curadoria; a cópia original
+do workspace e o histórico permanecem. `.gitignore` não remove arquivos já
+versionados. Snapshots futuros devem cotejar este registro com o índice.

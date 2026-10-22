@@ -55,3 +55,42 @@ worst-frame/pacing e resposta do jogo são provas adicionais.
 laboratorio_01 (F6): as provas eram 6h mais velhas que o binário entregue.
 Hoje `build_inner.py` rebaixa o eixo sozinho — não tente reescrever o registro
 à mão para contornar.
+
+## Projetar eixos e preservar fontes (L138; custódia L125/L133)
+
+Para OpenBOR, `axis_projection.py --current-rom ROM --bundle BUNDLE
+--consumption CONSUMPTION --runtime-metrics METRICS --qa-runtime RUNTIME
+--qa-visual VISUAL --wav WAV --out-dir DIRETORIO_NOVO` revalida o bundle,
+confere seu vínculo com o consumo e os hashes de métricas/WAV selados. Valida
+cada QA contra pedido, contexto, cobertura, ROM, sessão fechada e bundle;
+workers/sessões runtime e visual são distintos. IDs de casos vêm do relatório,
+sem lista fixa. A autoridade nativa do reviewer ainda exige recibo conferido
+pelo coordenador; JSON íntegro não autentica o agente que o escreveu.
+
+Destino existente (inclusive symlink/hardlink) é recusado: criar saída nova
+por lote. Para ativar caminhos legados do build, preservar a projeção anterior,
+registrar a substituição deliberada e só então instalar a nova projeção
+verificada. Não apagar fontes para fazer o gerador passar. Defaults M8 são
+históricos e não autorizam herança no SHA atual. Projeção não mede novamente
+FPS/áudio/gameplay e não apaga os achados visuais das fontes.
+
+## Continuidade e restauração
+
+Backup/snapshot e clone reproduzível sustentam continuidade, sem fechar
+delivery. Conferir fonte, recursos bancados inclusive binários ignorados,
+submódulos, permissões executáveis e toolchain; build a partir de clone limpo,
+com log e SHA da ROM. Dependências em release devem ter nome, tamanho e hash
+verificados. O caso de continuidade de 21/10 perdeu um banco O3 ignorado e
+bits executáveis antes da correção: consultar `doc/continuity/20261021-reconciliation.md`.
+Assets disponíveis no GitHub não provam restauração completa em outro host.
+Depois da restauração, nova QA privada no ambiente atual; evidência antiga
+é histórica. Projetos aposentados em `doc/retired-projects.md` não retornam ao
+índice por um snapshot abrangente; conferir o índice, não somente `.gitignore`.
+
+Ao restaurar evidência histórica, conferir também permissões: os bundles
+O3 locais de M8/cap5 foram encontrados em 0777 nesta curadoria e o consumidor
+recusou `immutable snapshot required`. Não desabilitar esse teste nem alterar
+o original selado. Criar cópia separada em filesystem com semântica POSIX,
+preservar bytes/tempos, restaurar somente nessa cópia o modo somente leitura
+e revalidar integralmente hashes, sessões e cleanup. Declarar restauração de
+acervo, sem nova medição e sem ativar projeções diagnósticas no build.

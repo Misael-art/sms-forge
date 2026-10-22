@@ -73,3 +73,17 @@ integrais no fechamento. Uma técnica avançada entra se melhorar a experiência
 com budget medido e fallback; tamanho maior, mais cores/efeitos ou PCM não são
 ganho automático. Atualize memory bank com ROM/SHA, casos, métricas, pareceres,
 limites e próxima ação. Release segue `release-rom.md` e todos os eixos atuais.
+
+## Composição e terminais na mesma ação (L137)
+
+Nos casos de combate, medir legibilidade do atacante e do defensor durante
+contato, dor e recuperação, nas duas direções. Contagem legal de sprites,
+paleta válida e decode íntegro não demonstram cabeça/tronco visíveis. O gate
+`audit_silhouette_integrity.py` é específico das tabelas O3; cruzar a análise
+estática com SAT/probes e vídeo da ROM, sem transferir seus pisos a outro motor.
+
+Registrar separadamente entrada → primeiro feedback → hit → controle livre
+→ pose final apresentada. No O3 cap5, controle i90 e retorno visual i102
+fecham critérios diferentes; esse número não é orçamento para outros jogos.
+HP correto não aprova espada do lado errado. Se a câmera/FX/corte mascara a
+ação, corrigir esse blocker antes de aumentar escala, elenco ou efeitos.

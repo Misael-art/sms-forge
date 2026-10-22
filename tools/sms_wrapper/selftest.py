@@ -131,6 +131,7 @@ def main():
               "screenshot_semantic_gate.py",
               "seal_fresh_evidence_bundle.py",
               "reconcile_claims.py",
+              "axis_projection.py", "audit_silhouette_integrity.py",
               "audit_sprite_mode.py",
               "capture_audio.py",
               "audit_render_fidelity.py",
