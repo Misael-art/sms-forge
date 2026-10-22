@@ -74,3 +74,11 @@ desenvolvimento do próximo slice.
   `harness_orchestration.py` e `quality_review_router.py`.
 - Este runbook não autoriza pular a ordem de trabalho de cena nem nenhum gate
   da tabela de AGENTS.md.
+
+## Identidade entre lotes (L138)
+
+Antes de projetar eixos, conferir SHA atual e revalidar bundle/consumo, QA
+vinculada ao pedido, sessão e mídia. Usar `axis_projection.py` com saída nova;
+a projeção recusa sobrescrita e não mede novamente. Herança de booleanos de
+outro binário reprova. Preservar achados e teto `assigned_checks_only`; 7/7
+no build não fecha apresentação/época delivery, PAL ou oráculo ausente.

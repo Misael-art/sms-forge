@@ -68,3 +68,12 @@ sessão previstos no pedido. Falta de controle negativo é lacuna de cobertura.
 Para decidir crescimento do jogo, leia `workflows/product-quality-checkpoint.md`.
 Para mudar cache/renderer, leia `skills/sms-runtime-optimization.md`. Um teste
 de consistência aprovado não substitui essas decisões nem a revisão perceptiva.
+
+### Contato e recuperação de combate
+
+Para dano, a observação RAM mede consequência lógica. Para contato perceptivo,
+alinhar orientação, extensão visível do golpe e alvo no mesmo frame do hit.
+Uma espada atrás do atacante com dano no adversário à frente é defeito de
+apresentação mesmo com probe correto. Medir separadamente controle liberado
+e pose final exibida; a fila de upload pode separar os dois. Definir o terminal
+no pedido, capturar sua cauda e não extrapolar além da janela observada.

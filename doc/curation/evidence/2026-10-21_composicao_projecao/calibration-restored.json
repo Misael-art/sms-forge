@@ -1,0 +1,87 @@
+{
+  "schema": "sms_curation_calibration_v1",
+  "new_emulator_execution": false,
+  "method": "Disposable copy2 replica on POSIX storage; restore read-only mode, then consumer+QA full validation; original 0777 artifacts untouched. Historical revalidation, not new runtime proof.",
+  "cases": [
+    {
+      "case": "cap5",
+      "accepted": true,
+      "rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+      "outputs": {
+        "rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+        "evidence_sha256": "5369b5a25a3ce24fa2b7e103e182140f82d6b822a5069179fb435139bfd10f97",
+        "fps_sha256": "258fa8a12a2cfd5c01e2724649808514d65aefcb7c9ddd56ab9e614e692eb369",
+        "audio_sha256": "f16b48b81648b69aa40930afdca7d670139e83c4dc08b31d296daffaddf61439"
+      },
+      "sources": {
+        "bundle": {
+          "path": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/cap5/bundle.json",
+          "sha256": "2f69939a1a3f1d83ef46998da03e691f60ee1df8d472df242da12e67cf9fbd1a"
+        },
+        "consumption": {
+          "path": "out/evidence/o3_cap5_consumption_20261020.json",
+          "sha256": "e1af7fad1bf540bc5046655f070ca06df76c1bd8c804ca45e794700dc02af10a"
+        },
+        "runtime_mrp3": {
+          "path": "out/evidence/o3_cap5_consumer_20261020/artifacts/fps_metrics.json",
+          "sha256": "5f7f838f06c17fb11df0fbae5c1247a2ef85a53bacdb01c4523b2b1959226204",
+          "session_id": "43d33c39583040ef99f53e56d228145d"
+        },
+        "qa_runtime": {
+          "path": "out/evidence/o3_cap5_qa_20261020/runtime/run_1b8a3f28bb644e3e89f536bdd7acf42f/report.json",
+          "sha256": "5fe14599f50181ec2a4cf0cd482625ea7f4cda439ea02202ed3f5312cc83daa5"
+        },
+        "qa_visual": {
+          "path": "out/evidence/o3_cap5_qa_20261020/visual/run_fbbd7a45b82349bd8e2182b8f9184086/report.json",
+          "sha256": "a7662a8ba62cf7e31eadfabd9dc7f950393523743a710742f788567d5cf984df"
+        },
+        "audio": {
+          "path": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/cap5/artifacts/audio_signal.wav",
+          "sha256": "f16b48b81648b69aa40930afdca7d670139e83c4dc08b31d296daffaddf61439"
+        }
+      },
+      "restored_immutable_replica": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/cap5",
+      "original_untouched": true
+    },
+    {
+      "case": "m8",
+      "accepted": true,
+      "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+      "outputs": {
+        "rom_sha256": "a7f02b847693c836045806eef6016624a826edaff2b94ed89a3b07c5e64a4953",
+        "evidence_sha256": "9775e42e864c991cd970ecf2fcfebf3da7f60c381905d2cda3f537d253e0cf99",
+        "fps_sha256": "8297309e6a6af58a2ec793bfdfa5abccdd012434c92896481d41b80659373215",
+        "audio_sha256": "1638dd1916adab29b112c52a8c2cf73389027eb73cdba68f385fe626b6e42d74"
+      },
+      "sources": {
+        "bundle": {
+          "path": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/m8/bundle.json",
+          "sha256": "a0cc1f37470af5e2f1e3cc82c1c4b46a57a78f9e925b82fcdeb76f503ab287a7"
+        },
+        "consumption": {
+          "path": "out/evidence/m8/consumption_a7f02b84.json",
+          "sha256": "ade6c1b7dfc31cb4ea0848a9e7d84b5fc86f10457a3d7c8089d8f98a14966059"
+        },
+        "runtime_mrp3": {
+          "path": "out/evidence/m8/session_inputs/4f1f45411420453d9c93a76f160410ba/runtime_metrics.json",
+          "sha256": "bed56ff566aa6d4dd73f8b973d18973517ba77b0f7e93aa2911765d38f1735a9",
+          "session_id": "4f1f45411420453d9c93a76f160410ba"
+        },
+        "qa_runtime": {
+          "path": "out/evidence/m8/qa/runtime/run_ce3bb103775b4d07aff60ee736a2a210/report.json",
+          "sha256": "28cb7d39220149e30ea233ee8fa9261371256c386c6145a731a9c450bc7195e0"
+        },
+        "qa_visual": {
+          "path": "out/evidence/m8/qa/visual/run_a4c73f390ab44855a855e69044cf0eaa/report.json",
+          "sha256": "c43e9ed248647f1c6daa838fd140cbff0f6e66c74c69e595c8d2c2f8eae9ad02"
+        },
+        "audio": {
+          "path": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/m8/artifacts/audio_signal.wav",
+          "sha256": "1638dd1916adab29b112c52a8c2cf73389027eb73cdba68f385fe626b6e42d74"
+        }
+      },
+      "restored_immutable_replica": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/m8",
+      "original_untouched": true
+    }
+  ]
+}

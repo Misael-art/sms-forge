@@ -4,7 +4,8 @@
 This is NOT a new measurement. It copies fields from the sealed consumer
 bundle, the MRP3 runtime metrics and the QA reports into
 `out/evidence/evidence.json` and `out/evidence/fps.json`, but only after
-proving that every source names the SAME ROM SHA as `--current-rom`.
+revalidating the consumer bundle and both hash-bound QA requests/reports
+against the SAME ROM SHA as `--current-rom`. Existing outputs are refused.
 
 A stale report from another binary is refused and nothing is written. That is
 the hardening the M8 projection lacked: an `informative: true` or
@@ -29,9 +30,15 @@ import argparse
 import datetime as _dt
 import hashlib
 import json
-import shutil
+import os
+import sys
 import tempfile
 from pathlib import Path
+
+# Also support python -m openbor2sms.axis_projection with only the package on PYTHONPATH.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from audit_subagent_session import check_ref, validate_report
+from .evidence_consumer import consume
 
 DEFAULT_SOURCES = {
     "bundle": "out/evidence/m8/bundle_a7f02b84/bundle.json",
@@ -99,6 +106,42 @@ def _current_rom(project: Path, explicit: str | None) -> Path:
     return max(roms, key=lambda p: p.stat().st_mtime).resolve()
 
 
+def _qa(path: Path, lane: str, root: Path, current_sha: str) -> dict:
+    report = _load(path)
+    try:
+        request = _load(check_ref(report.get("request")))
+        if request.get("lane") != lane or Path(request.get("project", "")).resolve() != root:
+            raise ValueError("lane/projeto diferente")
+        if request.get("rom", {}).get("sha256") != current_sha:
+            raise ValueError("QA de outra ROM ou sem SHA")
+        checked = validate_report(report, request)
+        if not checked["ok"] or not checked["tests_passed"]:
+            raise ValueError(str(checked["problems"]) + "; QA deve estar passed")
+    except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
+        raise ProjectionError(f"QA {lane} recusada: {exc}") from exc
+    return report
+
+
+def _write_projection(destination: Path, payloads: dict[str, bytes]) -> None:
+    # Refuse existing files, including broken symlinks and hardlink aliases.
+    # Exclusive creates also close the race after preflight; roll back only files
+    # created by this invocation on a partial write failure.
+    destination.mkdir(parents=True, exist_ok=True)
+    if any(os.path.lexists(destination / name) for name in payloads):
+        raise ProjectionError("destino existente: escolha --out-dir novo; historico preservado")
+    created = []
+    try:
+        for name, payload in payloads.items():
+            target = destination / name
+            with target.open("xb") as stream:
+                created.append(target)
+                stream.write(payload)
+    except OSError as exc:
+        for target in created:
+            target.unlink()
+        raise ProjectionError(f"escrita recusada: {exc}") from exc
+
+
 def project(
     project: str | Path,
     *,
@@ -136,8 +179,6 @@ def project(
     bundle_doc = _load(paths["bundle"])
     cons = _load(paths["consumption"])
     mrp3 = _load(paths["runtime_metrics"])
-    _load(paths["qa_runtime"])
-    _load(paths["qa_visual"])
 
     source_sha = ((bundle_doc.get("rom") or {}).get("sha256") or "").lower()
     cons_sha = (cons.get("rom_sha256") or "").lower()
@@ -152,6 +193,19 @@ def project(
             "ROM atual nao e a ROM das fontes: "
             f"atual={current_sha[:12]} fontes={source_sha[:12]}; "
             "projecao recusada (nao herde eixos de outro binario)")
+
+    if cons.get("bundle_sha256") != sha256_file(paths["bundle"]):
+        raise ProjectionError("consumption nao pertence ao bundle informado")
+    fresh = consume(paths["bundle"], rom)
+    if fresh.get("eligible") is not True or fresh.get("problems"):
+        raise ProjectionError(f"bundle nao revalidado: {fresh.get('problems')}")
+    if any(cons.get(key) != fresh.get(key) for key in ("axes", "coverage", "scope")):
+        raise ProjectionError("consumption diverge da revalidacao do bundle")
+    qa_r = _qa(paths["qa_runtime"], "runtime", root, current_sha)
+    qa_v = _qa(paths["qa_visual"], "visual", root, current_sha)
+    if (qa_r["worker_id"] == qa_v["worker_id"] or
+            qa_r["session"]["id"] == qa_v["session"]["id"]):
+        raise ProjectionError("QA runtime/visual requer workers e sessoes distintos")
 
     if cons.get("eligible") is not True or cons.get("problems"):
         raise ProjectionError(
@@ -176,12 +230,13 @@ def project(
         None,
     )
     wav_sha = sha256_file(paths["wav"])
-    if audio_art:
-        declared = (((audio_art.get("file") or {}).get("sha256")) or "").lower()
-        if declared and declared != wav_sha:
-            raise ProjectionError(
-                "wav diverge do artefato selado do bundle: "
-                f"wav={wav_sha[:12]} bundle={declared[:12]}")
+    declared = ((audio_art or {}).get("file") or {}).get("sha256")
+    if not declared or declared != wav_sha:
+        raise ProjectionError("wav ausente/diverge do artefato selado do bundle")
+    fps_art = next((a for a in bundle_doc.get("artifacts", [])
+                    if a.get("id") == "fps_metrics"), {})
+    if fps_art.get("file", {}).get("sha256") != sha256_file(paths["runtime_metrics"]):
+        raise ProjectionError("runtime_metrics diverge do artefato selado do bundle")
 
     cov = cons.get("coverage") or {}
     try:
@@ -240,7 +295,7 @@ def project(
             "before": gameplay.get("before"),
             "after": gameplay.get("after"),
             "relation": gameplay.get("relation"),
-            "qa_runtime_cases": ["boot_baseline", "attack_contact"],
+            "qa_runtime_cases": [c["id"] for c in qa_r["coverage"] if c["status"] == "passed"],
         },
         "sources": sources,
         "claim_ceiling": "assigned_checks_only",
@@ -248,6 +303,7 @@ def project(
             "projecao de evidencia aceita; nao e nova medicao",
             "consumer: assigned_checks_only; sem aprovacao de entrega ou qualidade visual",
             "PAL nao medido",
+            "achados QA preservados nas fontes; passed nao aprova contato visual ou delivery",
         ],
     }
     fps_doc = {
@@ -273,17 +329,14 @@ def project(
     }
 
     destination = Path(out_dir).resolve() if out_dir else root / "out" / "evidence"
-    destination.mkdir(parents=True, exist_ok=True)
     evidence_path = destination / "evidence.json"
     fps_path = destination / "fps.json"
     wav_path = destination / f"audio_{current_sha[:8]}.wav"
-    evidence_path.write_text(
-        json.dumps(evidence, indent=1, ensure_ascii=False) + "\n",
-        encoding="utf-8")
-    fps_path.write_text(
-        json.dumps(fps_doc, indent=1, ensure_ascii=False) + "\n",
-        encoding="utf-8")
-    shutil.copy2(paths["wav"], wav_path)
+    _write_projection(destination, {
+        evidence_path.name: (json.dumps(evidence, indent=1, ensure_ascii=False) + "\n").encode("utf-8"),
+        fps_path.name: (json.dumps(fps_doc, indent=1, ensure_ascii=False) + "\n").encode("utf-8"),
+        wav_path.name: paths["wav"].read_bytes(),
+    })
     return {
         "rom_sha256": current_sha,
         "evidence": str(evidence_path),
@@ -297,117 +350,119 @@ def project(
 
 
 def _self_check() -> int:
-    base = Path(tempfile.mkdtemp(prefix="smspoj_"))
-    try:
-        def make_case(name: str, rom_bytes: bytes, source_sha: str | None = None):
+    """Offline projection tests; mocked consumer/seal are never runtime evidence."""
+    import copy
+    from unittest.mock import patch
+    from audit_subagent_session import fixture, ref
+    module = sys.modules[__name__]
+    with tempfile.TemporaryDirectory(prefix="smsproj_") as temp:
+        base = Path(temp)
+
+        def make_case(name):
             root = base / name
-            (root / "out" / "rom").mkdir(parents=True)
-            (root / "out" / "evidence").mkdir(parents=True)
-            rom = root / "out" / "rom" / "a.sms"
-            rom.write_bytes(rom_bytes)
-            rom_sha = sha256_file(rom)
-            wav = root / "sources" / "audio_signal.wav"
-            wav.parent.mkdir(parents=True)
-            wav.write_bytes(b"RIFF" + b"\x00" * 60)
-            wav_sha = sha256_file(wav)
-            qa = root / "sources" / "qa.json"
-            qa.write_text("{}", encoding="utf-8")
-            sha = rom_sha if source_sha is None else source_sha
-            bundle = {
-                "rom": {"sha256": sha, "bytes": len(rom_bytes)},
-                "artifacts": [{
-                    "id": "audio_signal",
-                    "kind": "wav",
-                    "file": {"path": "artifacts/audio_signal.wav",
-                             "sha256": wav_sha, "bytes": wav.stat().st_size},
-                }],
-            }
-            cons = {
-                "rom_sha256": sha,
-                "eligible": True,
-                "problems": [],
-                "axes": {"boot_emulador": True, "gameplay": True,
-                         "fps_constante": True, "audio": True},
-                "coverage": {
-                    "boot_emulador": {"proof": "framebuffer",
-                                      "artifacts": ["boot_png"],
-                                      "derived": {"canvas": [256, 192]}},
-                    "gameplay": {"proof": "input_ram_video",
-                                 "artifacts": ["gameplay_observation"],
-                                 "derived": {"before": 50, "after": 29,
-                                             "relation": "decrease"}},
-                    "fps_constante": {"proof": "regional_runtime_windows",
-                                      "artifacts": ["fps_metrics"],
-                                      "derived": {"region": "NTSC"}},
-                    "audio": {"proof": "audio_signal",
-                              "artifacts": ["audio_signal"],
-                              "derived": {"peak": 1}},
-                },
-            }
-            mrp3 = {
-                "rom_sha256": sha,
-                "session_id": "self-check",
-                "fps_constante": True,
-                "frame_advance_proved": True,
-                "region": "NTSC",
-                "fps_janelas": [59.6, 59.7, 59.8],
-                "fps_spread": 0.2,
-                "frames_delta_total": 100,
-            }
-            files = {}
-            for key, doc in (("bundle", bundle), ("consumption", cons),
-                             ("runtime_metrics", mrp3)):
-                files[key] = root / "sources" / f"{key}.json"
-                files[key].write_text(json.dumps(doc), encoding="utf-8")
-            files["qa_runtime"] = qa
-            files["qa_visual"] = qa
-            files["wav"] = wav
-            return root, rom, files
+            root.mkdir()
+            rom = root / "rom.sms"
+            rom.write_bytes(b"fixture not runnable")
+            digest = sha256_file(rom)
+            wav = root / "audio.wav"
+            wav.write_bytes(b"offline waveform fixture")
+            files = {"wav": wav}
+            for lane in ("runtime", "visual"):
+                folder = root / lane
+                req, report = fixture(folder)
+                req.update(project=str(root), lane=lane, worker_id=lane)
+                (folder / "request.json").write_text(json.dumps(req))
+                report.update(project=str(root), lane=lane, worker_id=lane,
+                              request=ref(folder / "request.json"))
+                report["session"].update(owner=lane, id=lane)
+                for file in (folder / "bundle/session.json", folder / "closed.json"):
+                    meta = json.loads(file.read_text());meta["session_id"] = lane
+                    file.write_text(json.dumps(meta))
+                (folder / "commands.jsonl").write_text(json.dumps({"ack":{"ok":True,"session_id":lane}})+"\n")
+                report["session"]["closed"] = ref(folder / "closed.json")
+                report["artifacts"][0].update(ref(folder / "commands.jsonl"))
+                files["qa_" + lane] = folder / "report.json"
+                files["qa_" + lane].write_text(json.dumps(report))
+            mrp = {"rom_sha256":digest,"session_id":"metrics", "region":"NTSC",
+                   "fps_constante":True,"frame_advance_proved":True,
+                   "fps_janelas":[59.6,59.7,59.8],"frames_delta_total":100}
+            files["runtime_metrics"] = root / "metrics.json"
+            files["runtime_metrics"].write_text(json.dumps(mrp))
+            bundle = {"rom":{"sha256":digest,"bytes":rom.stat().st_size},
+                      "artifacts":[{"id":"audio_signal","kind":"wav","file":ref(wav)},
+                                   {"id":"fps_metrics","kind":"runtime_metrics","file":ref(files["runtime_metrics"])}]}
+            cons = {"rom_sha256":digest,"eligible":True,"problems":[],"scope":{"claim_ceiling":"assigned_checks_only"},
+                    "axes":dict.fromkeys(("boot_emulador","gameplay","fps_constante","audio"),True),
+                    "coverage":{axis:{"proof":"fixture","artifacts":[],"derived":{}}
+                                for axis in ("boot_emulador","gameplay","fps_constante","audio")}}
+            files["bundle"] = root / "bundle.json"
+            files["bundle"].write_text(json.dumps(bundle))
+            cons["bundle_sha256"] = sha256_file(files["bundle"])
+            files["consumption"] = root / "consumption.json"
+            files["consumption"].write_text(json.dumps(cons))
+            return root, rom, files, copy.deepcopy(cons)
 
-        root, rom, files = make_case("ok", b"ROM-ONE")
-        result = project(
-            root, current_rom=str(rom), out_dir=str(root / "out/evidence"),
-            **{k: str(v) for k, v in files.items()})
-        ev = json.loads((root / "out/evidence/evidence.json").read_text())
-        fps = json.loads((root / "out/evidence/fps.json").read_text())
-        assert ev["rom_sha256"] == result["rom_sha256"]
-        assert fps["rom_sha256"] == result["rom_sha256"]
-        assert (root / "out/evidence" / (
-            "audio_" + result["rom_sha256"][:8] + ".wav")).is_file()
+        def run(case, output=None):
+            root, rom, files, expected = case
+            # Sealing and consumer correctness have their own fixtures. This
+            # seam tests real QA contract validation and projection refusals.
+            with patch.object(module, "consume", return_value=expected), patch(
+                    "session_bridge.isolated.check_bundle", return_value=(True, "offline fixture")):
+                return project(root, current_rom=str(rom), out_dir=str(output or root/"projected"),
+                               **{key:str(value) for key,value in files.items()})
 
-        # Stale sources: current ROM is a different binary -> refuse, no writes.
-        other_sha = hashlib.sha256(b"ROM-TWO").hexdigest()
-        root2, rom2, files2 = make_case("stale", b"ROM-TWO",
-                                        source_sha=hashlib.sha256(
-                                            b"ROM-ONE").hexdigest())
+        good = make_case("positive")
+        result = run(good)
+        evidence = _load(Path(result["evidence"]))
+        assert evidence["gameplay"]["qa_runtime_cases"] == ["boot"]
+        assert evidence["rom_sha256"] == sha256_file(good[1])
+        assert result["audio_sha256"] == sha256_file(good[2]["wav"])
+        original = {p:p.read_bytes() for p in Path(result["evidence"]).parent.iterdir()}
         try:
-            project(root2, current_rom=str(rom2),
-                    out_dir=str(root2 / "out/evidence"),
-                    **{k: str(v) for k, v in files2.items()})
-        except ProjectionError as exc:
-            assert "nao e a ROM das fontes" in str(exc), exc
+            run(good)
+        except ProjectionError:
+            pass
         else:
-            raise AssertionError("fonte de outra ROM deveria recusar")
-        assert not (root2 / "out/evidence/evidence.json").exists()
-        assert not (root2 / "out/evidence/fps.json").exists()
-        assert other_sha  # keeps the fixture explicit
+            raise AssertionError("existing output overwritten")
+        assert all(p.read_bytes()==raw for p,raw in original.items())
 
-        # A stale boolean without the matching SHA cannot be projected.
-        root3, rom3, files3 = make_case("no-sha", b"ROM-THREE",
-                                        source_sha="")
-        try:
-            project(root3, current_rom=str(rom3),
-                    out_dir=str(root3 / "out/evidence"),
-                    **{k: str(v) for k, v in files3.items()})
-        except ProjectionError as exc:
-            assert "divergem" in str(exc) or "nao e a ROM" in str(exc), exc
-        else:
-            raise AssertionError("fontes sem SHA deveriam recusar")
-        assert not (root3 / "out/evidence/evidence.json").exists()
-    finally:
-        shutil.rmtree(base, ignore_errors=True)
-    print("[SELF-CHECK OK] axis_projection "
-          "(mesma ROM passa; ROM antiga/sem SHA recusa sem escrever)")
+        mutations = {
+            "empty_qa":lambda c: c[2]["qa_runtime"].write_text("{}"),
+            "failed_qa":lambda c: edit(c[2]["qa_runtime"], lambda d:d.update(status="blocked")),
+            "stale_request":lambda c: edit(c[2]["qa_visual"],lambda d:d["request"].update(sha256="0"*64)),
+            "wrong_qa_rom":lambda c: edit(c[2]["qa_runtime"].parent/"request.json",lambda d:d["rom"].update(sha256="0"*64)),
+            "wrong_lane":lambda c: c[2].update(qa_visual=c[2]["qa_runtime"]),
+            "missing_coverage":lambda c:edit(c[2]["qa_runtime"],lambda d:d.update(coverage=[])),
+            "defect_pass":lambda c:edit(c[2]["qa_visual"],lambda d:d.update(findings=[{"kind":"defect"}])),
+            "stale_rom":lambda c:c[1].write_bytes(b"other ROM"),
+            "missing_sha":lambda c:edit(c[2]["runtime_metrics"],lambda d:d.pop("rom_sha256")),
+            "wrong_consumer_bundle":lambda c:edit(c[2]["consumption"],lambda d:d.update(bundle_sha256="0"*64)),
+            "forged_coverage":lambda c:edit(c[2]["consumption"],lambda d:d.update(coverage={})),
+            "changed_wav":lambda c:c[2]["wav"].write_bytes(b"changed"),
+            "changed_metrics":lambda c:edit(c[2]["runtime_metrics"],lambda d:d.update(fps_janelas=[60,60,60])),
+        }
+        def edit(path, mutate):
+            data=_load(path);mutate(data);path.write_text(json.dumps(data))
+        for name, mutate in mutations.items():
+            case=make_case(name);mutate(case)
+            try:
+                run(case)
+            except ProjectionError:
+                pass
+            else:
+                raise AssertionError(name+" was accepted")
+            assert not (case[0]/"projected").exists(), name+" wrote output"
+        for kind in ("symlink", "hardlink", "broken_symlink"):
+            folder=good[0]/kind;folder.mkdir()
+            target=folder/"fps.json";source=good[2]["wav"]
+            if kind=="hardlink":target.hardlink_to(source)
+            else:target.symlink_to(source if kind=="symlink" else folder/"absent")
+            before=source.read_bytes()
+            try:run(good,folder)
+            except ProjectionError:pass
+            else:raise AssertionError(kind+" output accepted")
+            assert source.read_bytes()==before and not (folder/"evidence.json").exists()
+    print("[SELF-CHECK OK] axis_projection: QA/ROM/bundle/media bindings, 13 negative cases and immutable outputs; offline seams only")
     return 0
 
 
@@ -436,7 +491,7 @@ def main(argv=None) -> int:
             wav=args.wav,
             out_dir=args.out_dir,
         )
-    except ProjectionError as exc:
+    except (ProjectionError, OSError, TypeError, KeyError, AttributeError) as exc:
         print(f"[REFUSE] {exc}")
         return 2
     print(f"[OK] rom {result['rom_sha256']}")

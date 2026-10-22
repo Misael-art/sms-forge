@@ -1,0 +1,68 @@
+{
+ "schema": "openbor_sms_axis_evidence_projection_v1",
+ "artifact_kind": "axis_evidence_projection",
+ "generated_at": "2026-10-21",
+ "rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+ "rom_bytes": 131072,
+ "region": "NTSC",
+ "informative": true,
+ "boot": {
+  "proof": "framebuffer",
+  "canvas": [
+   256,
+   192
+  ],
+  "artifacts": [
+   "boot_png"
+  ]
+ },
+ "gameplay": {
+  "interaction_proven": true,
+  "proof": "input_ram_video",
+  "artifacts": [
+   "gameplay_observation",
+   "gameplay_video"
+  ],
+  "before": 50,
+  "after": 29,
+  "relation": "decrease",
+  "qa_runtime_cases": [
+   "boot_baseline",
+   "attack_contact"
+  ]
+ },
+ "sources": {
+  "bundle": {
+   "path": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/cap5/bundle.json",
+   "sha256": "2f69939a1a3f1d83ef46998da03e691f60ee1df8d472df242da12e67cf9fbd1a"
+  },
+  "consumption": {
+   "path": "out/evidence/o3_cap5_consumption_20261020.json",
+   "sha256": "e1af7fad1bf540bc5046655f070ca06df76c1bd8c804ca45e794700dc02af10a"
+  },
+  "runtime_mrp3": {
+   "path": "out/evidence/o3_cap5_consumer_20261020/artifacts/fps_metrics.json",
+   "sha256": "5f7f838f06c17fb11df0fbae5c1247a2ef85a53bacdb01c4523b2b1959226204",
+   "session_id": "43d33c39583040ef99f53e56d228145d"
+  },
+  "qa_runtime": {
+   "path": "out/evidence/o3_cap5_qa_20261020/runtime/run_1b8a3f28bb644e3e89f536bdd7acf42f/report.json",
+   "sha256": "5fe14599f50181ec2a4cf0cd482625ea7f4cda439ea02202ed3f5312cc83daa5"
+  },
+  "qa_visual": {
+   "path": "out/evidence/o3_cap5_qa_20261020/visual/run_fbbd7a45b82349bd8e2182b8f9184086/report.json",
+   "sha256": "a7662a8ba62cf7e31eadfabd9dc7f950393523743a710742f788567d5cf984df"
+  },
+  "audio": {
+   "path": "/home/misael/.cache/phasezero/agent-tmp/smsforge-curation-calibration-1fk3kh6l/cap5/artifacts/audio_signal.wav",
+   "sha256": "f16b48b81648b69aa40930afdca7d670139e83c4dc08b31d296daffaddf61439"
+  }
+ },
+ "claim_ceiling": "assigned_checks_only",
+ "limits": [
+  "projecao de evidencia aceita; nao e nova medicao",
+  "consumer: assigned_checks_only; sem aprovacao de entrega ou qualidade visual",
+  "PAL nao medido",
+  "achados QA preservados nas fontes; passed nao aprova contato visual ou delivery"
+ ]
+}
