@@ -96,3 +96,12 @@ pedido/ROM e saída exclusiva em `axis_projection.py`; selftest inclui
 projeção e silhueta. Recibo nativo e revisão perceptiva continuam humanos/
 coordenados. Continuidade por clone não promove evidência histórica a runtime.
 Registro: `doc/curation/2026-10-21_composicao_projecao_continuidade.json`.
+
+## Host vazio e continuidade (24/10/2026)
+
+Skill `skills/sms-host-continuity.md`; entrada operacional
+`doc/continuity/20261024-new-host.md`. `bootstrap_host.sh` instala cápsula
+ABI/venv/QA com hashes; `host_env.sh` ativa somente o checkout. Doctor e
+smoke-build não são emulação. `restore_handoff.py` restaura em destino novo
+e ativa só dados gerados por opção, sem herdar eixos ou sessões históricas.
+Diagnóstico e 55 pendências da engine em `20261024-agent-handoff.md`.

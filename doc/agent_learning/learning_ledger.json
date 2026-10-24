@@ -1209,6 +1209,26 @@
     "doc/curation/evidence/2026-10-21_composicao_projecao/calibration-restored.json"
    ],
    "dedup_key": "composicao_projecao_continuidade_20261021"
+  },
+  {
+   "ts": "2026-10-24",
+   "kind": "curation_application",
+   "summary": "Aplicação das lições existentes: Mugenesis→rev2, 55 pendências, prompt executável; diagnósticos composição/sola corrigidos e mantidos fora de gates globais. Skills e workflow revistos, sem ID novo nem promoção de jogo. Validação detalhada no pacote; EIO legado não é mascarado.",
+   "sources": [
+    "doc/curation/2026-10-24_mugenesis_rev2.json"
+   ],
+   "dedup_key": "mugenesis_rev2_application_20261024"
+  },
+  {
+   "ts": "2026-10-24",
+   "kind": "curation",
+   "summary": "Aplicadas L002/L036/L091/L097/L125/L137/L138 à migração: autoinstalação pinada em host vazio, venv e cápsula ABI, doctor de sandbox/áudio/ponte, smoke-build real e restauração confinada de dados com hashes sem herdar eixos. Diagnóstico PB/Mugenesis e backlog55 preservados; ferramentas limitadas não promovidas; nenhuma técnica/jogo aprovado.",
+   "sources": [
+    "doc/curation/2026-10-24_host_bootstrap_handoff.json",
+    "doc/continuity/20261024-new-host.md",
+    "doc/continuity/20261024-agent-handoff.md"
+   ],
+   "dedup_key": "host_bootstrap_handoff_20261024"
   }
  ]
 }

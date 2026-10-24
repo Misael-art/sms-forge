@@ -1,0 +1,94 @@
+{
+  "schema": "sms_host_doctor_v1",
+  "profile": "full",
+  "ok": false,
+  "checks": {
+    "git": "/usr/bin/git",
+    "zstd": "/usr/bin/zstd",
+    "java": "openjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-24.04.4-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-24.04.4-Ubuntu, mixed mode, sharing)\n",
+    "javac": "javac 21.0.12.1\n",
+    "Xvfb": "/usr/bin/Xvfb",
+    "xdpyinfo": "/usr/bin/xdpyinfo",
+    "bwrap": "/usr/bin/bwrap",
+    "ffmpeg": "/usr/bin/ffmpeg",
+    "ffprobe": "/usr/bin/ffprobe",
+    "pactl": "/usr/bin/pactl",
+    "pacat": "/usr/bin/pacat",
+    "sdk/sdcc-portable/lib/sdcc/x86_64-pc-linux-gnu/12.1.0/cc1": true,
+    "sdk/sdcc-portable/bin/sdcc": true,
+    "sdk/devkitSMS/SMSlib/SMSlib.h": true,
+    "sdk/devkitSMS/PSGlib/PSGlib.h": true,
+    "sdk/devkitSMS/crt0/crt0_sms.rel": true,
+    "sdk/devkitSMS/SMSlib/SMSlib.lib": true,
+    "sdk/devkitSMS/PSGlib/PSGlib.lib": true,
+    "sdk/devkitSMS/tools/makesms": true,
+    "tools/emuladores/emulicious/Emulicious.jar": true,
+    "tools/emuladores/emulicious/License.txt": true,
+    "venv": true,
+    "disk_free_bytes": 120742060032,
+    "blastem_pinned_runtime": true,
+    "private_xvfb": "started and closed own display :0",
+    "bridge_compiles": true
+  },
+  "problems": [
+    "sandbox unavailable: Command '['bwrap', '--unshare-user', '--unshare-pid', '--ro-bind', '/', '/', '--proc', '/proc', '--dev', '/dev', 'true']' returned non-zero exit status 1.",
+    "pulse unavailable: Command '['pactl', 'info']' returned non-zero exit status 1."
+  ],
+  "active_checks": true,
+  "claim_ceiling": "environment_readiness_only",
+  "limits": [
+    "No emulator/input/audio capture/FPS proof; run isolated acceptance next.",
+    "OS packages follow distro security updates; pinned SDK and Python do not pin kernel/JVM/audio stack."
+  ],
+  "smoke_build": {
+    "rom_sha256": "328ed6a5b6f1d24ca6712ebd3cee421ee48b79c14f85fddef0e4d243a87dc2ba",
+    "rom_bytes": 32768,
+    "commands": [
+      {
+        "command": [
+          "sdcc",
+          "-mz80",
+          "-c",
+          "/workspace/out/host-bootstrap/runs/20261024T120335Z_352d696b/smoke/smoke.c",
+          "-o",
+          "/workspace/out/host-bootstrap/runs/20261024T120335Z_352d696b/smoke/smoke.rel",
+          "-I/workspace/sdk/devkitSMS/SMSlib",
+          "-I/workspace/sdk/devkitSMS/PSGlib"
+        ],
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "sdcc",
+          "-mz80",
+          "--no-std-crt0",
+          "--data-loc",
+          "0xC000",
+          "-o",
+          "/workspace/out/host-bootstrap/runs/20261024T120335Z_352d696b/smoke/smoke.ihx",
+          "/workspace/sdk/devkitSMS/crt0/crt0_sms.rel",
+          "/workspace/out/host-bootstrap/runs/20261024T120335Z_352d696b/smoke/smoke.rel",
+          "/workspace/sdk/devkitSMS/SMSlib/SMSlib.lib",
+          "/workspace/sdk/devkitSMS/PSGlib/PSGlib.lib"
+        ],
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "makesms",
+          "/workspace/out/host-bootstrap/runs/20261024T120335Z_352d696b/smoke/smoke.ihx",
+          "/workspace/out/host-bootstrap/runs/20261024T120335Z_352d696b/smoke/smoke.sms"
+        ],
+        "stdout": "*** sverx's makesms converter ***\nInfo: 2245 bytes used/32768 total [6.85%] - size of output ROM is 32 KB\nInfo: [bank0 14155] [bank1 16368] bytes free\nInfo: SEGA header found, checksum updated\n",
+        "stderr": ""
+      }
+    ],
+    "limit": "compile/link/header only; not emulator or gameplay acceptance"
+  },
+  "run_id": "20261024T120335Z_352d696b",
+  "source_root": "/workspace",
+  "bootstrap_sha256": "69211ee0b17f87d48103cce83fb6ca4c85abe7f7ed2fca1ac4f97ac92e128cd9",
+  "requirements_sha256": "8aa0e72dd73c709cd4cbf8e3ce2a60403b9e33b997db6b1c0a1953c3a26d09e4"
+}

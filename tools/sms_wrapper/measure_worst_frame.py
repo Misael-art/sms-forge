@@ -18,7 +18,10 @@ na MESMA condição de vovf, era redundante por construção e comeu 16 B do ban
 (makesms "Bank 1 overflow"); removido do ROM e daqui. vovf é o único contador.
 A ROM mede 3000 frames contínuos de MODO ATRAÇÃO (CPU x CPU: especiais,
 projéteis, trocas de pose com stream, HUD e banners), depois sela vovf e o
-menor vline em RAM. O DAP só conecta DEPOIS do selo: pause()/cont() durante a
+menor vline em RAM. O campo selado para budget é `vline_min`. O campo `vline`
+das amostras brutas é o snapshot do instante da leitura, não o mínimo da
+janela: lê-lo como orçamento foi o erro que produziu "144" onde o selo dizia
+4. O DAP só conecta DEPOIS do selo: pause()/cont() durante a
 janela fazia o Z80 perder tempo de frame e contaminava a própria grandeza.
 3000 frames cobrem pelo menos 50 s a 60 Hz e 60 s a 50 Hz. Derrame não derruba
 fps: espreme o streaming de VRAM, então "fps 60" não absolve orçamento estourado.
@@ -98,6 +101,8 @@ PROBE_DEFAULT_WAIT_SECONDS = int(PROBE_WINDOW_FRAMES / 50.0 + 30.0)
 PROBE_MAX_WAIT_SECONDS = 1800
 PROBE_MAX_SECONDS = PROBE_WINDOW_FRAMES / 60.0
 VLIMIAR = 0xC0            # abaixo disso, o VDP ja voltou ao display ativo
+WORST_FRAME_SCHEMA = "smsforge.worst_frame/v2"
+SEALED_FIELD = "vline_min"
 GS = {0: "ROUND", 1: "FIGHT", 2: "KO", 3: "RESULT", 4: "TITLE"}
 
 
@@ -488,6 +493,11 @@ def profile_lines_with_vblank(raw, vblank_serials):
 
 
 # ---------------------------------------------------------------- logica pura
+def _mark_sample_result(result):
+    result["vline_kind"] = "sample_min"
+    return result
+
+
 def analyze(samples, vovf_inicio, vovf_fim, limiar=VLIMIAR):
     """Veredito do worst-frame a partir de amostras + delta do contador.
 
@@ -497,6 +507,9 @@ def analyze(samples, vovf_inicio, vovf_fim, limiar=VLIMIAR):
       (vovf conta exatamente esses frames fora do blank) — leitura sem lastro.
     - leitura None não conta como amostra; sem amostra nenhuma, sem
       veredito.
+
+    `vline_min` aqui é o mínimo das amostras. O relatório selado da ROM usa
+    `analyze_snapshot`; não confunda os dois com o `vline` bruto do snapshot.
     """
     vline_min = None
     validos = [s for s in samples if s.get("vline") is not None]
@@ -504,42 +517,69 @@ def analyze(samples, vovf_inicio, vovf_fim, limiar=VLIMIAR):
         if vline_min is None or s["vline"] < vline_min:
             vline_min = s["vline"]
     if vovf_inicio is None or vovf_fim is None:
-        return {"verdicto": "sem_lastro", "vline_min": vline_min,
-                "vovf_delta": None, "amostras": len(validos)}
+        return _mark_sample_result({"verdicto": "sem_lastro", "vline_min": vline_min,
+                "vovf_delta": None, "amostras": len(validos)})
     if not validos:
-        return {"verdicto": "sem_lastro", "vline_min": None,
-                "vovf_delta": vovf_fim - vovf_inicio, "amostras": 0}
+        return _mark_sample_result({"verdicto": "sem_lastro", "vline_min": None,
+                "vovf_delta": vovf_fim - vovf_inicio, "amostras": 0})
     delta = vovf_fim - vovf_inicio
     if delta > 0:
-        return {"verdicto": "derramou", "vline_min": vline_min,
-                "vovf_delta": delta, "amostras": len(validos)}
+        return _mark_sample_result({"verdicto": "derramou", "vline_min": vline_min,
+                "vovf_delta": delta, "amostras": len(validos)})
     if vline_min < limiar:
-        return {"verdicto": "sem_lastro", "vline_min": vline_min,
-                "vovf_delta": delta, "amostras": len(validos)}
-    return {"verdicto": "pass", "vline_min": vline_min,
-            "vovf_delta": 0, "amostras": len(validos)}
+        return _mark_sample_result({"verdicto": "sem_lastro", "vline_min": vline_min,
+                "vovf_delta": delta, "amostras": len(validos)})
+    return _mark_sample_result({"verdicto": "pass", "vline_min": vline_min,
+            "vovf_delta": 0, "amostras": len(validos)})
+
+
+def snapshot_sample(vline, vline_min, vovf, phase, state, frame, done):
+    """Amostra bruta do snapshot: `vline` NÃO é o mínimo selado."""
+    return {
+        "t": "snapshot",
+        "vline": vline,
+        "vline_kind": "snapshot",
+        "vline_min": vline_min,
+        "vline_sealed_min": vline_min,
+        "vovf": vovf,
+        "phase": phase,
+        "estado_snapshot": state,
+        "frame": frame,
+        "done": done,
+    }
+
+
+def _mark_snapshot_result(result):
+    result["schema"] = WORST_FRAME_SCHEMA
+    result["sealed_field"] = SEALED_FIELD
+    result["vline_kind"] = "sealed_min"
+    return result
 
 
 def analyze_snapshot(vline_min, vovf_total, done, frame, seconds=45.0):
-    """Julga o snapshot selado pela ROM depois de 3000 frames sem DAP."""
+    """Julga o snapshot selado pela ROM depois de 3000 frames sem DAP.
+
+    O campo que fecha o eixo é `vline_min` (selo da ROM). O `vline` bruto
+    do snapshot é registrado por `snapshot_sample` apenas como contexto.
+    """
     if not (0 < seconds <= PROBE_MAX_SECONDS):
-        return {"verdicto": "sem_lastro", "vline_min": vline_min,
+        return _mark_snapshot_result({"verdicto": "sem_lastro", "vline_min": vline_min,
                 "vovf_delta": None, "amostras": 0,
-                "motivo": "janela solicitada fora do limite 1..50 s"}
+                "motivo": "janela solicitada fora do limite 1..50 s"})
     if done != 1 or frame is None or frame < PROBE_WINDOW_FRAMES:
-        return {"verdicto": "sem_lastro", "vline_min": vline_min,
+        return _mark_snapshot_result({"verdicto": "sem_lastro", "vline_min": vline_min,
                 "vovf_delta": None, "amostras": 0,
-                "motivo": "janela worst-frame incompleta ou sem selo"}
+                "motivo": "janela worst-frame incompleta ou sem selo"})
     if vline_min is None or vovf_total is None:
-        return {"verdicto": "sem_lastro", "vline_min": vline_min,
+        return _mark_snapshot_result({"verdicto": "sem_lastro", "vline_min": vline_min,
                 "vovf_delta": None, "amostras": 0,
-                "motivo": "snapshot de worst-frame ilegivel"}
+                "motivo": "snapshot de worst-frame ilegivel"})
     r = analyze([{"vline": vline_min}], 0, vovf_total, VLIMIAR)
     r["frames_medidos"] = PROBE_WINDOW_FRAMES
     r["frames_rom_final"] = frame
     r["janela_s_min"] = PROBE_MAX_SECONDS
     r["janela_selada"] = bool(done)
-    return r
+    return _mark_snapshot_result(r)
 
 
 # ---------------------------------------------------------------- ambiente
@@ -570,6 +610,8 @@ def measure(rom, project, seconds=45.0, out_name="worst_frame",
         res = {"verdicto": "sem_contrato", "vline_min": None,
                "vovf_delta": None, "amostras": 0, "janela_s": seconds,
                "runner_wait_s": wait_s,
+               "schema": WORST_FRAME_SCHEMA, "sealed_field": SEALED_FIELD,
+               "vline_kind": "unmeasured",
                "motivo": "fonte da ROM nao declara: " + "; ".join(missing),
                "rom": os.path.abspath(rom),
                "rom_sha256": hashlib.sha256(open(rom, "rb").read()).hexdigest(),
@@ -658,6 +700,8 @@ def _session(dap, out_dir, out_name, seconds, rom, project, wait_seconds):
         res = {"verdicto": "sem_contrato", "vline_min": None,
                "vovf_delta": None, "amostras": 0, "janela_s": seconds,
                "runner_wait_s": wait_seconds,
+               "schema": WORST_FRAME_SCHEMA, "sealed_field": SEALED_FIELD,
+               "vline_kind": "unmeasured",
                "motivo": "probe SMRT/schema 1 ausente em 0x%04X "
                          "(lido=%s) — ROM sem instrumento válido"
                          % (PROBE_HEADER, header),
@@ -682,14 +726,14 @@ def _session(dap, out_dir, out_name, seconds, rom, project, wait_seconds):
     res["vovf_fim"] = vf
     res["rom"] = os.path.abspath(rom)
     res["rom_sha256"] = sha
+    res["schema"] = WORST_FRAME_SCHEMA
+    res["sealed_field"] = SEALED_FIELD
+    res["vline_snapshot"] = vl
     snapshot_state = state_label(project, st)
     res["estado_snapshot"] = snapshot_state
     res["estados_vistos"] = []  # janela selada não manteve série de estados
-    res["amostras_brutas"] = [{"t": "snapshot", "vline": vl,
-                               "vline_min": vmin, "vovf": vf,
-                               "phase": ph,
-                               "estado_snapshot": snapshot_state,
-                               "frame": frame, "done": done}]
+    res["amostras_brutas"] = [snapshot_sample(
+        vl, vmin, vf, ph, snapshot_state, frame, done)]
     profile_project = profile_source_project(project, rom)
     if profile_contract(profile_project) and not loop_profile_contract(profile_project):
         raw_profile = {name: dap.read_byte(addr)
@@ -766,6 +810,19 @@ def self_check():
     r = analyze_snapshot(0xD5, 0, 1, PROBE_WINDOW_FRAMES + 300, 45)
     ok.append(("snapshot completo sem derrame passa",
                r["verdicto"] == "pass" and r["frames_medidos"] == 3000))
+    ok.append(("snapshot declara vline_min como campo selado",
+               r["sealed_field"] == "vline_min"
+               and r["vline_kind"] == "sealed_min"
+               and r["schema"] == WORST_FRAME_SCHEMA))
+    sample = snapshot_sample(0x90, 0x04, 1740, 2, "ROUND", 4079, 1)
+    ok.append(("amostra bruta marca vline como snapshot, nao minimo",
+               sample["vline_kind"] == "snapshot"
+               and sample["vline"] == 0x90
+               and sample["vline_min"] == 0x04
+               and sample["vline_sealed_min"] == 0x04))
+    r = analyze([{"vline": 0xFF}], 0, 0)
+    ok.append(("analyze marca minimo amostral sem virar selo",
+               r["vline_kind"] == "sample_min" and "sealed_field" not in r))
     r = analyze_snapshot(0x50, 2, 1, PROBE_WINDOW_FRAMES + 300, 45)
     ok.append(("snapshot completo com derrame reprova",
                r["verdicto"] == "derramou" and r["vovf_delta"] == 2))

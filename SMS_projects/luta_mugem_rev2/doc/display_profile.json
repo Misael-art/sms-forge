@@ -1,0 +1,30 @@
+{
+  "schema": "mugen2sms.display_profile/v1",
+  "mode": "pose_budget",
+  "source": "cps2",
+  "target": "sms",
+  "declared_at": "project_definition",
+  "size_policy": "pose_budget_pair",
+  "within_8_ratio_is_not_a_gate": true,
+  "pose_near": 0.69,
+  "hardware_columns": 8,
+  "neutral_columns": 4,
+  "wide_vs_neutral_columns": [5, 3],
+  "fx_column_limit": 3,
+  "options_not_selected": ["framebuffer", "fighter_scale", "legacy_quarter", "off", "game_gear"],
+  "case_by_case": "SAT row acima de 4, ou 5 so quando o outro lado ja esta em 3; sem reautoria",
+  "characters": [
+    {
+      "id": "ken",
+      "zip": "data/source_mugen/ken/Ken_Majik_.zip",
+      "def": "ken8/ken8.def",
+      "fx_groups": [1001, 1002]
+    },
+    {
+      "id": "ryu",
+      "zip": "data/source_mugen/ryu/ryu.zip",
+      "def": "ryu/ryu.def",
+      "fx_groups": [1150, 1160, 1250, 1260, 3050, 8000, 8010, 8020, 8030, 8040, 8050, 8060, 8210, 8220, 8230, 8300, 8310, 8320, 8330, 8400, 8410]
+    }
+  ]
+}

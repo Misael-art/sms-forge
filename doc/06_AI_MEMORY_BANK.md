@@ -4,7 +4,36 @@
 > memory bank de CADA projeto (`SMS_projects/<proj>/doc/10-memory-bank.md`).
 
 ## Última atualização
-2026-09-07 — L055: tradução pixel na paleta mestra SMS (método FS/NEAREST; sem NES/SNES/PICO-8). L039 uinput e L053 sideswap já no cânone.
+2026-10-24 — curadoria Mugenesis → luta_mugem_rev2. As seções anteriores abaixo
+conservam seus estados históricos; não representam qualificação atual de todos
+os projetos.
+
+### Curadoria de 2026-10-24
+
+- Pedido humano autoriza curadoria de skills/ferramentas e análise comparativa.
+  Relatório: `doc/curation/2026-10-24_mugenesis_rev2.md`; backlog de 55 itens e
+  prompt de conclusão no mesmo diretório. Sem implementação da engine neste lote.
+- Doador M4 ainda parcial: 69 itens, 55 aceites abertos, principal sem vínculo
+  de fonte conhecido e 60fps não requalificados. Portar métodos/testes, nunca
+  APIs/limites/capacidades SGDK para SMS.
+- Corrigidos diagnósticos candidatos: composição mede sobreposição vertical
+  real com dy assinado; sola interpreta tRNS por índice e registra hashes.
+  Saídas existentes preservadas. Permanecem fora dos gates globais.
+- Skills source-semantics/runtime-optimization/psg-audio e workflow MUGEN
+  receberam aplicação delimitada de lições existentes; rotas e ledger
+  atualizados, registro continua L138. SMS_GLOBAL e `.agent` local preservados.
+- Duas sessões novas de Emulicious encerradas: produção 087df676 com fundo
+  repetido/P2 fragmentado; candidata 698e58ed com corpos completos em um quadro.
+  Sem FPS/áudio/gameplay novos. Build em cópia isolada passou, 851968 B,
+  SHA 6de8c451fa39ff49670d242f8a3f3946bf67fea1830566fa4fe901517493b983.
+- Blocker do jogo: composição completa e prazo de apresentação/streaming
+  com VBlank legal, preservando movimentos. Selo histórico da candidata
+  continua derramou; nenhum claim de entrega/AAA ou budget aprovado.
+- Validação do lote e limites: `doc/curation/evidence/2026-10-24_mugenesis/validation.json`.
+  EIO legado é falha global conhecida; não transformar escopo focado em verde global.
+  Selftest 130/130 base; 75 ferramentas com self-check; regressão focada 16/16;
+  learning capture PASS. Doc_sync conserva dez registros de falha no legado
+  (seis EIO e quatro ENOENT). Fechamento global da fábrica permanece bloqueado.
 
 ## Status dos eixos (vocabulário obrigatório)
 
@@ -132,3 +161,12 @@ AGENTS.md → SMS_GLOBAL.md → memory bank → PLANO_CONTINUACAO.md.
 ## Próximo passo declarado
 Fechar G4 (frame de VITORIA) com captura nativa do emulador; F1 (L006 sprite) via VRAMmemcpy.
 F1 (L006) segue CONTORNADO via BG (prova de jogo funcional).
+
+## Retomada em host vazio — 24/10/2026
+
+Entrada atual: `doc/continuity/20261024-new-host.md` e
+`20261024-agent-handoff.md`. Instalador pinado, venv local, doctor explícito,
+restore em destino novo e generated inputs por opção; credenciais e evidência
+ativa não são restauradas. Pacote PB/Mugenesis, backlog55 e mudanças de 23–24/10
+preservados nesta branch. Não promover composição/sola nem o jogo por instalação.
+Resultado final em `doc/curation/evidence/2026-10-24_host-bootstrap/summary.md`.

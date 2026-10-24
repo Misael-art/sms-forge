@@ -1,0 +1,81 @@
+{
+  "curation_id": "host_bootstrap_handoff_20261024",
+  "date": "2026-10-24",
+  "kind": "application_of_existing_lessons",
+  "authorization": "Pedido humano explícito: registrar diagnóstico, preparar autoinstalação/organização em host vazio e handoff; commit e PR.",
+  "scope": "Preservação do diagnóstico e alterações PB/Mugenesis existentes; instalador/doctor/restaurador e contexto central; sem nova implementação do combate.",
+  "new_lesson_ids": [],
+  "lessons": [],
+  "applied_lessons": [
+    "L002",
+    "L036",
+    "L091",
+    "L097",
+    "L125",
+    "L137",
+    "L138"
+  ],
+  "rule_section": "Aplicação de ambiente e custódia de L002/L125/L138, sem nova seção numerada ou ID.",
+  "entrypoints": [
+    "tools/sms_wrapper/.agent/skills/sms-host-continuity.md",
+    "doc/continuity/20261024-new-host.md",
+    "doc/continuity/20261024-agent-handoff.md"
+  ],
+  "tools": [
+    "host_bootstrap.py",
+    "restore_handoff.py",
+    "selftest.py",
+    "audit_learning_capture.py",
+    "audit_doc_sync.py"
+  ],
+  "changes": [
+    "Launcher Bash instala Python/pacotes SO explicitamente; perfis build/qa/full, venv/wheels com hashes, cápsula SDCC/libs fixada e Emulicious/BlastEm pinados.",
+    "Download confere tamanho/hash, extração confinada e limitada, executáveis transitivos preservados e divergências existentes recusadas. Não restaura ini pessoal.",
+    "Doctor separa ferramentas/pins de sandbox/Pulse/Xvfb/ponte e compile/link real; sem inferir gameplay ou FPS.",
+    "Source-only host_env não altera perfil global, limita threads e prioriza ferramentas do checkout; lock e prune exclusivos dos caches próprios.",
+    "Restauração em staging/destino novo verifica todos os arquivos; opção ativa somente generated inputs, sem evidência/eixos/sessões antigas.",
+    "Pacote Git de 3.917 arquivos (81.882.904 bytes), 7.876.889 bytes comprimidos; 205 arquivos de auth/caches omitidos explicitamente.",
+    "Diagnóstico anterior e 55 pendências preservados, instruções relocáveis e próximos blockers registrados. Ferramentas composição/sola continuam não promovidas."
+  ],
+  "archive": "doc/continuity/20261024-mugen-resume.json",
+  "source_custody": "doc/curation/evidence/2026-10-24_host-bootstrap/source-custody.json",
+  "prior_diagnostic": "doc/curation/2026-10-24_mugenesis_rev2.json",
+  "backlog": "doc/curation/2026-10-24_luta_mugem_rev2_backlog.json",
+  "validation_status": "build_install_restore_validated_native_qa_readiness_blocked_in_container",
+  "validation_evidence_directory": "doc/curation/evidence/2026-10-24_host-bootstrap/validation",
+  "runtime_or_art_promoted": false,
+  "limits": [
+    "No new emulator/hardware run by this migration. Historical sessions are preserved with original identity; sanitized archive is not a complete live-session replay.",
+    "Clean Ubuntu container installs/builds but native sandbox and Pulse server are blocked/absent; full QA readiness is refused. A real Linux user session still needs its own doctor and isolated acceptance.",
+    "Recipes for other Linux distros are not complete tested portability. OS/JVM/kernel versions are not pinned by wheel/SDK hashes.",
+    "MUGEN rebuild differs from nominal SHA; no cause assigned or visual/gameplay/60FPS/audio/delivery claim.",
+    "Original legacy EIO and 25 absent paths are not silently staged; publication worktree preserves last versioned bytes.",
+    "Auth for agents/GitHub is personal and not restored; initial Git clone and local sudo access are OS prerequisites."
+  ],
+  "dedup_key": "host_bootstrap_handoff_20261024",
+  "validation": {
+    "selftest": "134/134",
+    "measurement_tools": "75/75",
+    "focused_mugen": "63 passed, 1 skipped (historical display_fit fixture not active)",
+    "restored_pose_budget": "16 passed, no skips",
+    "doc_sync_publication": true,
+    "doc_sync_original": false,
+    "learning_capture": true,
+    "build_install_and_repeat": true,
+    "openbor_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+    "mugen_rebuild_sha256": "6de8c451fa39ff49670d242f8a3f3946bf67fea1830566fa4fe901517493b983",
+    "qa_full_ready": false,
+    "qa_blockers": [
+      "container namespaces unavailable",
+      "PulseAudio server absent"
+    ],
+    "private_xvfb_started_and_closed": true,
+    "bridge_compiles": true,
+    "blastem_pin_verified": true,
+    "restoration_hashes": true,
+    "cache_cleanup_preserves_venv": true,
+    "temporary_container_and_image_removed": true
+  },
+  "validation_report": "doc/curation/evidence/2026-10-24_host-bootstrap/validation.json",
+  "summary": "doc/curation/evidence/2026-10-24_host-bootstrap/summary.md"
+}

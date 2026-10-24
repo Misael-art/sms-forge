@@ -1,0 +1,26 @@
+{
+  "schema": "sms_host_doctor_v1",
+  "profile": "build",
+  "ok": true,
+  "checks": {
+    "git": "/usr/bin/git",
+    "zstd": "/usr/bin/zstd",
+    "sdk/sdcc-portable/bin/sdcc": true,
+    "sdk/devkitSMS/SMSlib/SMSlib.h": true,
+    "sdk/devkitSMS/PSGlib/PSGlib.h": true,
+    "sdk/devkitSMS/crt0/crt0_sms.rel": true,
+    "sdk/devkitSMS/SMSlib/SMSlib.lib": true,
+    "sdk/devkitSMS/PSGlib/PSGlib.lib": true,
+    "sdk/devkitSMS/tools/makesms": true,
+    "venv": true,
+    "disk_free_bytes": 124020424704
+  },
+  "problems": [],
+  "active_checks": false,
+  "claim_ceiling": "environment_readiness_only",
+  "limits": [
+    "No emulator/input/audio capture/FPS proof; run isolated acceptance next.",
+    "OS packages follow distro security updates; pinned SDK and Python do not pin kernel/JVM/audio stack."
+  ],
+  "next_command": "bash tools/sms_wrapper/bootstrap_host.sh --apply --system-packages --profile build"
+}

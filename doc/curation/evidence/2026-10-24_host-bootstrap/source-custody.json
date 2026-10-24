@@ -1,0 +1,347 @@
+{
+  "schema": "sms_handoff_source_custody_v1",
+  "date": "2026-10-24",
+  "source_head": "70f38931e5faa822e4388563913febbe6b187622",
+  "prior_curation_commit": "09a15dbdff4b6b01bb9cebfd8d39a5fe29a55219",
+  "source_workspace": "/mnt/sdcard/Projects/SMSForge",
+  "publication_worktree": "/home/misael/.local/share/smsforge/handoff-20261024",
+  "tracked_diagnostic_paths": [
+    "AGENTS.md",
+    "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+    "SMS_projects/luta_mugem_rev2/doc/11-gdd.md",
+    "doc/05_technical/mugen_engine_standard.md",
+    "doc/06_AI_MEMORY_BANK.md",
+    "doc/agent_learning/learning_ledger.json",
+    "doc/agent_learning/lesson_routes.json",
+    "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
+    "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+    "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
+    "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+    "tools/sms_wrapper/audit_sprite_line_sim.py",
+    "tools/sms_wrapper/measure_worst_frame.py",
+    "tools/sms_wrapper/mugen2sms/__main__.py",
+    "tools/sms_wrapper/mugen2sms/analysis/fidelity.py",
+    "tools/sms_wrapper/mugen2sms/generators/scene_cut.py",
+    "tools/sms_wrapper/mugen2sms/generators/smsdev.py",
+    "tools/sms_wrapper/mugen2sms/tests/test_cli_sms.py",
+    "tools/sms_wrapper/mugen2sms/tests/test_scene_cut_palette_binding.py",
+    "tools/sms_wrapper/mugen2sms/tests/test_sms_budget_synthetic.py",
+    "tools/sms_wrapper/selftest.py"
+  ],
+  "untracked_diagnostic_files": [
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/28-pose-budget-8.md",
+      "sha256": "c70d5cd2bf66ae8ffeb288a9e522f80ff2c84332dc197e6501dbe3dbc405ee82",
+      "bytes": 22081
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/29-prompt-pose-budget-cena-20261023.md",
+      "sha256": "6fa5039abcd0d7aeae567efaa76c56cbd038479275fcfd8b16e39224b45e73d4",
+      "bytes": 8837
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/30-prompt-par-residente-20261023.md",
+      "sha256": "42aa5f3159949f5c0abe12e19e7684b4771cba1cb0d6eaf8787987a4d9702804",
+      "bytes": 9944
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/continuity/config/ken_pose_budget.json",
+      "sha256": "f9ee90942e8de09e50066583005e8d4e01ea998c27dc76cdf39faa7898516b14",
+      "bytes": 2145
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/continuity/config/ryu_pose_budget.json",
+      "sha256": "f1e4b50b02721f524ec74796e4ef1414c0836b4bc11658dc19fbd5b255df2c2f",
+      "bytes": 2739
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/display_profile.json",
+      "sha256": "9cce8ebbc40871890b896cad1f0d89a529b6f3b6b2d830ad35cfd83e8dc2849b",
+      "bytes": 974
+    },
+    {
+      "path": "doc/curation/2026-10-23_pose_budget_aguardando_curador.json",
+      "sha256": "e488f755144511ed49cbc5a1381f08dfb80896f4f6c04c5a09396392a089c30d",
+      "bytes": 9574
+    },
+    {
+      "path": "doc/curation/2026-10-23_pose_budget_aguardando_curador.md",
+      "sha256": "51b1fe612c7f4a825ac3ddabfe959e165c2aa5997b77863f91946bae0dc34261",
+      "bytes": 24507
+    },
+    {
+      "path": "doc/curation/2026-10-23_pose_budget_fechamento_pb13_pb18.json",
+      "sha256": "9845c782ecad56b6ef46d9fbbf582f0ff78ba2bc5c9ba6097f6c6e79b3b3cfcc",
+      "bytes": 30612
+    },
+    {
+      "path": "doc/curation/2026-10-23_pose_budget_fechamento_pb13_pb18.md",
+      "sha256": "f6d158663f6db2173ca7a0510f38d9ed31344f4bb3fe151783474d9dbfdb73e6",
+      "bytes": 25859
+    },
+    {
+      "path": "doc/curation/2026-10-24_luta_mugem_rev2_backlog.json",
+      "sha256": "18299e557c4d68b0dc3de5c0aa601b46117257377ec8860bbc7bd8281a9c73af",
+      "bytes": 33624
+    },
+    {
+      "path": "doc/curation/2026-10-24_luta_mugem_rev2_pendencias.md",
+      "sha256": "8a7ff8eed9f8a723332868a723b2a1fd3929461978fce8aaff39e2c67658da5b",
+      "bytes": 8823
+    },
+    {
+      "path": "doc/curation/2026-10-24_mugenesis_rev2.json",
+      "sha256": "0c9fa884808d4279dbff80522c00fae60dd6966a73fa72fe3f484205478316f7",
+      "bytes": 2811
+    },
+    {
+      "path": "doc/curation/2026-10-24_mugenesis_rev2.md",
+      "sha256": "0d431bb77dda04c80386b7317ba6dc3b0367090b1675b28270b6f22e257b2d7c",
+      "bytes": 14161
+    },
+    {
+      "path": "doc/curation/2026-10-24_prompt_concluir_engine_sms.md",
+      "sha256": "9969e12043074dd1893ba56531e199375bef14b0c723516b18f59469b236b86f",
+      "bytes": 12825
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/audit_doc_sync_final.log",
+      "sha256": "f06e323fc4168e72fe6fa4af0b1576cc71a323c4a43b5781e2ffc5433a5f1e55",
+      "bytes": 1492
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/audit_learning_capture_final.log",
+      "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3",
+      "bytes": 74
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/curation_outputs.json",
+      "sha256": "8efbb8be898c1ba7ba29fa9b896b9f126b8f258045b2fba9532af8537e06c263",
+      "bytes": 3068
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/doc/agent_learning/curation_candidates_20261022_display_fit.json",
+      "sha256": "c6b76229f9f65f1c1323fcd4d4232e4a1f6d2647ed0fd9548f697939e864af24",
+      "bytes": 3214
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/doc/agent_learning/curation_candidates_engine_audio_m3_20261023.json",
+      "sha256": "00e30a05602a138ff30b06f402728edc53c30abf1d75b8d49b9df1f3a321db6f",
+      "bytes": 2309
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/doc/agent_learning/curation_candidates_engine_closure_m4_20261023.json",
+      "sha256": "51f2119deba5ced66873a1c5636a033fb709ce8a6b672bd6997ab511a14aad31",
+      "bytes": 8715
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/doc/engine_current_state.json",
+      "sha256": "c52279c50aaaf4d257aebb3dbce7362198e4471f237d76197422dd4c67ec34e1",
+      "bytes": 2262
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/inc/mg/mg_runtime.h",
+      "sha256": "0568f8c559c7a27623b41ad0b54474ea49a6017e42cb5107afbb862a05e7dfa3",
+      "bytes": 28884
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/inc/mg/mg_types.h",
+      "sha256": "c80885a613a2d5480679e5f5aeae9899249cfd9f6c8f72639229844f753bc344",
+      "bytes": 7997
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/out/reviews/engine_closure_m4_20261023/backlog.json",
+      "sha256": "6281e88b033f8f3d7c8e331ddcfdda1c8455bddcf166c8a19187ff83b4bb026a",
+      "bytes": 124876
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/src/mg/mg_char.c",
+      "sha256": "abbe6a7030f3f71d51c6bc243fafd4c4f8884f59be02483a620d5a1d55fc656a",
+      "bytes": 66782
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/src/mg/mg_fight.c",
+      "sha256": "31741bfec493d850001be91303c2d5bbdb0cbe9b94167588f5bff3653a6cff51",
+      "bytes": 131885
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/src/scenes/fight_pause.c",
+      "sha256": "fa94632924dfe732afefdc797bfc80caa6a27088cf617b0403d5cf1343af4227",
+      "bytes": 3148
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/src/system/audio.c",
+      "sha256": "c8f42b2aba55840056b87296ee26e5b49ded4f08dd375e8e055af22d7c31de50",
+      "bytes": 5669
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/donor/src/system/input.c",
+      "sha256": "0d199f7cad2db90d62e2d1a6052cf544e33b3c131f22d7dc1724fd4a1b396b58",
+      "bytes": 8769
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/emulator_review.json",
+      "sha256": "7b68eaa2a5c30807aeb2a5ea8b75db5f411f922958ba0093c272955570ff3c26",
+      "bytes": 9940
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/pb_rehash.json",
+      "sha256": "4085af09421f00b689ad100037bf2213649da3f1733f36548c83fa207531369b",
+      "bytes": 2194
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/.mddev/project.json",
+      "sha256": "13629554d4c32f76f596b8209f40b21c174ca7f01cad18a15f5bed3f04a2372a",
+      "bytes": 1067
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/doc/10-memory-bank.md",
+      "sha256": "c56e9d8b6a583616fd186689200a1913030449d7ab14b8404139252a14b6241a",
+      "bytes": 150068
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/doc/11-gdd.md",
+      "sha256": "d40b8a68ef61b5646bc1841807ecbea1ae9c6318b57cda91a561e9350cfb947b",
+      "bytes": 3143
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/doc/13-spec-cenas.md",
+      "sha256": "40ba90ccce202b751aa9303ef2bc740e1a4855b83433cb3e0e6e53ddfe5d552e",
+      "bytes": 2236
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/doc/15-tdd.md",
+      "sha256": "9ef17d7de388b34d82fad2e7271027ef9e6db2de0f9215dcb5989a190032efad",
+      "bytes": 7111
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/doc/engine_quality_contract.json",
+      "sha256": "4c592813ac6b875e16e6c899bd5fbb8bda710e4f29854fd4bc3d4a55691e1913",
+      "bytes": 13193
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/inc/rev2_diag.h",
+      "sha256": "5bd5f3a735729b4c3b0c1d4fca7910bdeb4e0b5e65b522cf1d2cec7f20385e2c",
+      "bytes": 3474
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/out/build_record.json",
+      "sha256": "66ec44002dd95092fd09da2fd05891f5470cb37c03c2badb7caf6c32ffd48e28",
+      "bytes": 691
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/out/generated/ryu_ken_cross/fight_runtime_data_manifest.json",
+      "sha256": "40446a9fd1f3ab4bb19f0226fef4495ca2163555b239db0ea1e59a2abcb76792",
+      "bytes": 19159
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/out/generated/ryu_ken_cross/versus_scene_manifest.json",
+      "sha256": "d2cdf2c7d8943c4696e30b67a9707dda3ab71d9f2070ec9bc50e534075b4f674",
+      "bytes": 93275
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/src/fight_input.c",
+      "sha256": "7964630077a26819a595dddf2bce05c462c08766e48ab5cd114345a47482efea",
+      "bytes": 9283
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/rev2/src/main.c",
+      "sha256": "042ba22e4a0763daaa4e402b90a0a5d0d40a7b5923c17575ed012b6a89773bfe",
+      "bytes": 61293
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/selftest_final.log",
+      "sha256": "a9a04802181b00d7faefb8192faeeb69d8be6553773cde73ae09437c0ab5d152",
+      "bytes": 13458
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/sessions/c41656ddb952494e8ecdf62d60740a9e/commands.jsonl",
+      "sha256": "7a7ea3bc2ca3a1a716311c763bf390e53490b684821e232ee58333f081ceccbb",
+      "bytes": 2091
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/sessions/c41656ddb952494e8ecdf62d60740a9e/review500.json",
+      "sha256": "4375e9508e57bbfcb2e0326f6eee2e6e64abe2d283fe028b95c6e93375917ef1",
+      "bytes": 1056
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/sessions/c41656ddb952494e8ecdf62d60740a9e/review500.png",
+      "sha256": "9f965eae793781f011d1a1878556c838fb3963e1ad1c4dba52eca7b9dc9a60a9",
+      "bytes": 1610
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/sessions/c41656ddb952494e8ecdf62d60740a9e/session.json",
+      "sha256": "3fb6f30cb85448cbff46f9d43a1d1a05c854dd00afdd51dbbf4b03017741d80b",
+      "bytes": 2061
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/sessions/e2dcd8e852cb46fab19e19b5bdc44ae5/commands.jsonl",
+      "sha256": "76508bb53681d608534e166bb1761878986465f4060b31977754cc2710f2bbb9",
+      "bytes": 2096
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/sessions/e2dcd8e852cb46fab19e19b5bdc44ae5/review500.json",
+      "sha256": "6f8c31bf7e8ba4231df07db10e38ca7d51fa95feafb6659abedb6c36f22073d8",
+      "bytes": 1057
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/sessions/e2dcd8e852cb46fab19e19b5bdc44ae5/review500.png",
+      "sha256": "c87aac90f4d501fc82366f0ee59a7761a42576d7b011349ff075eee86804970d",
+      "bytes": 2729
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/sessions/e2dcd8e852cb46fab19e19b5bdc44ae5/session.json",
+      "sha256": "63b03ff27e3a5942a77e43cc23cf96877ef7c76bb77ce0eb77c38ef15505492b",
+      "bytes": 2047
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/source_inventory.json",
+      "sha256": "6b096d0afc656ec4835f6fafebe21d2ce5cb044321778895323d15dfb0eeaf78",
+      "bytes": 9335
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/validate_measurement_tools_final.log",
+      "sha256": "7a9f2dbce024c61e0affb73d51d8f0c14a2fad448b3d8e52e7931226f44ce4ae",
+      "bytes": 59
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_mugenesis/validation.json",
+      "sha256": "6c73a7efed73ede1b5c69062a2653274cc972b69558ea0c9f2e31e04ae63efd2",
+      "bytes": 7426
+    },
+    {
+      "path": "tools/sms_wrapper/audit_composition_gate.py",
+      "sha256": "4baaefd7ec516a847e12dfe28e6fc53c76f5f7d01c6e3336bfc8aa6e053def70",
+      "bytes": 20265
+    },
+    {
+      "path": "tools/sms_wrapper/audit_sole_alignment.py",
+      "sha256": "50bef28743706b753506ddc26beeaa9295d5523e57a4c87314eb3972238a5a84",
+      "bytes": 23943
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/converters/display_fit.py",
+      "sha256": "2941a622a1ffc149ea5439f2b2c2e0f547c5b0ad103fc84c78b3a7d488e36f4c",
+      "bytes": 25563
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_display_fit.py",
+      "sha256": "3e7abc5a342337a7e1ddb81272a28b12dceb39467b37722404ddcf8b192728a7",
+      "bytes": 9780
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_measurement_gates_pose_budget.py",
+      "sha256": "d5119a9e0f77dea41e0ff31be71a47973e869355097625714aa985f7aabce0d0",
+      "bytes": 8106
+    }
+  ],
+  "excluded": [
+    "25 preexisting deleted/unreadable luta_mugen/doc paths",
+    "unrelated root out, legacy 3.3GB out, credentials and user profiles"
+  ],
+  "note": "Original workspace unchanged. Current diagnostic files and changes copied to isolated worktree; merge of learning ledger preserves both rounds. New installer/handoff edits have their own commit.",
+  "diagnostic_archive": {
+    "path": "doc/continuity/20261024-mugen-resume.tar.zst",
+    "sha256": "90b89f3a278711ef390289604eff4cce3063278cf5a158697e27e9ca744506da"
+  }
+}

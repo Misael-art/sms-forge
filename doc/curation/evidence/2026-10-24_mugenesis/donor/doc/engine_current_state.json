@@ -1,0 +1,42 @@
+{
+  "schema_version": "mugen_engine_current_state.v1",
+  "updated_at": "2026-10-24T01:42:06.790343+00:00",
+  "engine_complete": false,
+  "claim_ceiling": "technical_demo_partial",
+  "backlog": "out/reviews/engine_closure_m4_20261023/backlog.json",
+  "all_ids": 69,
+  "principal": {
+    "path": "out/rom.bin",
+    "sha256": "f225d28b3a31e652f25f296e6ca78a86d0a9a8bb7e8730919286336cc84dec96",
+    "source_binding": "unknown",
+    "scope": "preserved_v007_identity_only"
+  },
+  "candidate": {
+    "path": "out/profiling/engine_closure_m4_r4/rom.bin",
+    "sha256": "ddb75ae42f22171ab7667d7769ad75ff098a79ab4256d628aa232c994ce969e1",
+    "build_report": "out/reviews/engine_closure_m4_20261023/build_r4/linux_wine_build_report.json",
+    "source_status": "unchanged",
+    "source_verify": "out/reviews/engine_closure_m4_20261023/source_verify_final.json",
+    "state": "testado_em_emulador_scoped_not_validado_budget",
+    "evidence": "out/reviews/engine_closure_m4_20261023/r4_evidence_index.json"
+  },
+  "independent_consumer": "SGDK_projects/_agent_laboratory/MUGEN_REUSE_PROBE [VER.001] [SGDK 211] [GEN] [LAB] [FIGHTING]",
+  "performance": "not_requalified_60fps_unproven",
+  "audio": "M3 preserved; TTL and category policy host verified; perceptual audition pending",
+  "hygiene": "blocked_filesystem_io_backup_directory",
+  "canonical_agent_changed": false,
+  "commit_push": false,
+  "current_report": "out/reviews/engine_closure_m4_20261023/relatorio_marco_m4.md",
+  "qa": "out/reviews/engine_closure_m4_20261023/qa_emulator_report.json",
+  "additional_product_backlog": "doc/mugen/completion_backlog.json",
+  "package": {
+    "converter": "0.3.5",
+    "runtime": "0.4.0",
+    "data_abi": 1,
+    "wheel_sha256": "d705d7148eeeedce49d3d1e8a74b90377e4228ff5be8d362583fea4deea5acf9",
+    "review": "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/final_package_r2/review.json"
+  },
+  "tests": "950case full regression947pass/1failure/2skip; sole failed expectation corrected and22 targeted tests pass; no fabricated single frozen full green",
+  "learning": "11local candidates verified in ledger and compact index, not_applied",
+  "mastering": "mastering_needs_fix; header/checksum/size/range pass, broader default QA/closeout/budget not passed"
+}

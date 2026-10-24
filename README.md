@@ -1,3 +1,8 @@
+> **Host vazio / retomada atual (24/10/2026):** siga o
+> [instalador e runbook](doc/continuity/20261024-new-host.md) e o
+> [handoff do próximo agente](doc/continuity/20261024-agent-handoff.md).
+> Diagnóstico, dados gerados e backlog preservados; os jogos seguem em desenvolvimento.
+
 <div align="center">
 
 # SMSForge

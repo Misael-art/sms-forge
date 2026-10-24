@@ -75,3 +75,15 @@
 - Fechamento: selftest124/124, ferramentas73/73, learning capture e doc-sync
   da worktree PASS. No workspace original permanecem dez falhas documentais
   legadas; exclusões não incorporadas. Sem nova execução de emulador.
+
+## 24/10/2026 — host vazio e continuidade
+
+Autoinstalação e restauração seguem `skills/sms-host-continuity.md`,
+`host_bootstrap.py` e `restore_handoff.py`; arquivo+manifest único em
+`doc/continuity/20261024-mugen-resume.*`. Staging, hashes, saída nova e limpeza
+somente de caches próprios. Estado de ambiente não fecha jogo. Diagnóstico
+MUGEN 55 itens preservado, sem promover ferramentas limitadas nem engine.
+Fechamento:134/134 selftest,75 ferramentas,63+1skip focados e16/16 na fixture
+restaurada. Ubuntu vazio compila OpenBOR701379cc e MUGEN6de8c451; setup build
+e repetição passam. QA completa recusada por namespaces/Pulse no container.
+Xvfb/ponte/pin BlastEm provados no escopo; sem novo emulador ou jogo aprovado.

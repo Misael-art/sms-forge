@@ -2685,3 +2685,15 @@ recusa destinos existentes, inclusive aliases. `selftest.py` inclui
 as lições existentes, sem criar outro ID ou promover jogo. A pendência do
 cap5 descrita acima era o estado em 19/10; a nova coleta e projeção de 20/10
 constam no memory bank do OpenBOR. Apresentação, PAL e oráculo seguem abertos.
+
+### Aplicação de ambiente/custódia na migração de 24/10/2026 (L002/L125/L138)
+
+A instalação central usa `bootstrap_host.sh`/`host_bootstrap.py`, hashes dos
+assets e wheels, venv local e compile/link/header executados; o driver pode
+depender de outro executável fora de bin (caso cc1). `host_env.sh` seleciona
+compilador e libs do mesmo ABI. Nenhum desses passos prova boot ou jogo.
+O restaurador `restore_handoff.py` confere archive, conjunto de arquivos e
+hashes em destino novo; somente dados gerados podem ser ativados por opção.
+Sessões, mídias e eixos continuam históricos; a QA em host novo é recolhida.
+Cache próprio pode ser limpo sob lock, nunca fontes/evidência/SRAM alheia.
+Receita de distro não exercitada permanece receita, sem claim de paridade.

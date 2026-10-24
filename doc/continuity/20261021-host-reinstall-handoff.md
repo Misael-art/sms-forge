@@ -1,5 +1,8 @@
 # Continuidade — reinstalação do host (2026-10-21)
 
+> **Histórico:** para a migração atual leia `20261024-new-host.md` e
+> `20261024-agent-handoff.md`. A tag de 21/10 não contém o trabalho PB recente.
+
 > **Leia este arquivo primeiro em um host novo.**
 > Ele existe para que o SMSForge possa continuar a partir do GitHub depois de
 > formatar o computador, sem reconstruir contexto de memória.

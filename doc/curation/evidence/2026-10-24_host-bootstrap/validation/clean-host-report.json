@@ -1,0 +1,12 @@
+{
+  "ok": false,
+  "problems": [
+    "Command '['sdcc', '-mz80', '-c', '/workspace/out/host-bootstrap/runs/20261024T115141Z_c00fcecb/smoke/smoke.c', '-o', '/workspace/out/host-bootstrap/runs/20261024T115141Z_c00fcecb/smoke/smoke.rel', '-I/workspace/sdk/devkitSMS/SMSlib', '-I/workspace/sdk/devkitSMS/PSGlib']' returned non-zero exit status 1."
+  ],
+  "claim_ceiling": "environment_readiness_only",
+  "command_output": "sdcpp: fatal error: cannot execute 'cc1': posix_spawnp: No such file or directory\ncompilation terminated.\nat 6: warning 190: ISO C forbids an empty translation unit\nsubprocess error 256\n",
+  "run_id": "20261024T115141Z_c00fcecb",
+  "source_root": "/workspace",
+  "bootstrap_sha256": "7eacfdd5c40142a6153b6c0364cf3d8844b31bab2baeb90d971cf4d43c30ef43",
+  "requirements_sha256": "8aa0e72dd73c709cd4cbf8e3ce2a60403b9e33b997db6b1c0a1953c3a26d09e4"
+}

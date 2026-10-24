@@ -1,0 +1,276 @@
+{
+  "schema": "sms_mugen_engine_contract_v1",
+  "decision_date": "2026-10-15",
+  "authority": "Pedido explícito: novo consumidor SMS paralelo Ken/Ryu, engine completa, sem cenário",
+  "reference": "Raw Ken/Ryu do SGDK Mugenesis, matrizes e métodos; não transfere evidência MD",
+  "target": {
+    "console": "SMS",
+    "canvas": [
+      256,
+      192
+    ],
+    "combat_height_px": 160,
+    "fighter_height_ratio": [
+      0.45,
+      0.55
+    ],
+    "sprite_mode": "8x16",
+    "sat_entries": 64,
+    "sprites_per_line": 8,
+    "ram_bytes": 8192,
+    "vram_bytes": 16384,
+    "bank_bytes": 16384,
+    "mapper": "sega",
+    "rom_capacity_target_bytes": 1048576,
+    "note": "Metas de planejamento do padrão central, não orçamento validado nem decisão de backend; 1MiB deve ser provado no mapper se mantido."
+  },
+  "scale_policy": "uniform_per_character_scene_contract",
+  "legacy_profile_delivery_allowed": false,
+  "runtime_profile": "rev2_planned_renderer_pending_pilot",
+  "implementation_profiles": {
+    "diagnostic": {
+      "status": "observed",
+      "rom": "6f4a3cf5e336c20ff1dc0fb5225345270823350eada55d4d43655cdfca0b6e9a",
+      "claim_ceiling": "diagnostic_only",
+      "evidence": "out/logs/runs/20261018T171426Z_loteA_manifest_6f4a3cf5e336.json",
+      "note": "FSM 12 papeis sprite-only; protocolo causal reforcado (Lote A, doc/25). Baseline congelado; nao mede producao."
+    },
+    "production": {
+      "status": "in_progress",
+      "lote": "B.2a",
+      "rom_candidate": "a613ca974e2ca82fcb605c414de6199d6dfe9a9bdb636ebd429b50fab7f03dd9",
+      "evidence": "out/logs/runs/20261018T202627Z_loteB2a_manifest_a613ca974e2c.json",
+      "policy": {
+        "loop": "LUTA_PROFILE=1: logica/cache/metasprites no display ativo; commits VDP (upload + SAT) no slice de VBlank pedido",
+        "upload": "chunk de ate 8 pares/lado por VBlank (UPLOAD_CHUNK_PAIRS=8), servico garantido aos dois atores",
+        "fila": "supersede (LUTA_SERVE_INFLIGHT=0); no-evict como politica de producao (evict_events=0 medido); overflow registrado por lado",
+        "cadence_medida": "wait_pN = frames com imagem valida porem pose antiga (doc/25 §86)"
+      },
+      "worst_frame_evidence": {
+        "path": "out/evidence/sessions/05f87780b4f64e20a7918693549d9523/worst_frame/worst_frame.json",
+        "sha256": "b1bbb032cd883539551f6210e2408724f725dc36a64e5a78502d451295639611",
+        "verdicto": "derramou",
+        "vline_min": 0,
+        "vovf_delta": 2511,
+        "janela_medida": "3000 frames ROM medidos (frames_medidos=3000), estado FIGHT, sem leitura DAP na janela",
+        "nota": "derrame MEDIDO E REGISTRADO por desenho nesta escala: a fatia carrega uploads + SAT de 64 sprites e excede o VBlank; a janela de logica segue intacta (entrada constante) e a imagem apresentada e' a ultima pose COMPLETA (no-evict, sat_om_p1=0)"
+      },
+      "stage_lines_evidence": {
+        "rom_sha256": "d566d8148cb542819efab7effc08a0e9814fba57240a0f7c930926911c963ea9",
+        "session": "bec977bcdc0f4bb4a7824cb603a3a4f1",
+        "worst_frame_json": "out/evidence/sessions/bec977bcdc0f4bb4a7824cb603a3a4f1/worst_frame/worst_frame.json",
+        "worst_frame_sha256": "d349bcb5c459e97d8bbbe1f02cc709e24a9ebab14d22db06c66c87f702ddc3c0",
+        "linhas_por_etapa_max": {"upload": 200, "sat_copy": 31, "fatia_total": 221, "entrada_na_janela": 2},
+        "delta_declarado": "vs p1c8: somente o patch de instrumentacao (2 leituras extra de VCounter por frame)"
+      },
+      "note": "Loop de producao B.2a com politica vencedora por regra pre-registrada (cadence -> churn -> integridade -> vovf): chunk 8 supersede. Cadence medida por ator (wait_p1 3586 / wait_p2 3844; superseded 326; smrt 6025), overflow registrado por lado (198/291), pool no teto com recuperacao medida (free_pairs_min=0 sem evict). Isto NAO mede HUD/FX/audio; a qualidade visual das transicoes (video 256x192), o hibrido BG+dirty regions, o teto de SAT 64 sprites/cena e o mecanismo da omissao do modo serve seguem como itens declarados do B.2b (manifest B.2a, pendencias_b2b)."
+    },
+    "approved_budget": {
+      "status": "none",
+      "gate": "worst-frame com carga representativa, sem DAP, na ROM de producao, selado por SHA"
+    }
+  },
+  "rom": "out/rom/luta_mugem_rev2.sms",
+  "capabilities": [
+    {
+      "id": "data_only_character_swap",
+      "status": "planned",
+      "owner": "generators + runtime",
+      "acceptance": "Trocar dois pacotes/DEF com hashes diferentes muda arte, física, frame data e especial; hash de todo C do núcleo permanece igual."
+    },
+    {
+      "id": "fighter_scale",
+      "status": "planned",
+      "owner": "converters + direção de arte",
+      "acceptance": "Altura opaca do corpo idle em 1x ocupa 45–55% da área útil declarada; pivots, proporções e CLSN preservados; exceções por pose explícitas."
+    },
+    {
+      "id": "sprite_schedule",
+      "status": "planned",
+      "owner": "analysis + renderer",
+      "acceptance": "Todas poses/facings/alturas/FX e extremos de câmera; SAT emitida <=64, cada linha <=8; visibilidade temporal e prioridade documentadas."
+    },
+    {
+      "id": "rom_banking_capacity",
+      "status": "planned",
+      "owner": "generator + linker + mapper",
+      "acceptance": "ROM com capacidade alvo 1 MiB e acesso a dados distintos nos bancos-limite no emulador; patterns e metadata AIR/META/METAL têm residência/link explícitos, ponteiros válidos após troca, ownership restaurado após áudio/ISR e sem overflow do banco fixo."
+    },
+    {
+      "id": "ram_vram_layout",
+      "status": "planned",
+      "owner": "runtime + linker",
+      "acceptance": "Mapa de residência simultânea e stack, pools estáticos, sem sobreposição, sem malloc/float; sprite patterns endereçáveis e pares TALL válidos."
+    },
+    {
+      "id": "worst_frame",
+      "status": "planned",
+      "owner": "probe + wrapper",
+      "acceptance": "Pior coreografia com dois lutadores/FX/HUD/áudio; janela contínua sem DAP, zero overflow; cadência nominal NTSC/PAL dos perfis suportados."
+    },
+    {
+      "id": "combat_round_match",
+      "status": "planned",
+      "owner": "fight FSM + QA",
+      "acceptance": "Input, colisão, guard, hitstop, KO, timeout, empate, melhor de três, resultado e revanche; partida prolongada com estados rastreados."
+    },
+    {
+      "id": "input_latency_animation",
+      "status": "planned",
+      "owner": "input + stream",
+      "acceptance": "Medir ticks entre input/estado/pose visível; colisão acompanha pose apresentada; sem poses parciais, starvation nem alteração silenciosa do AIR."
+    },
+    {
+      "id": "stage_hud",
+      "status": "planned",
+      "owner": "scene + HUD",
+      "acceptance": "Todas telas com fundo sólido, HUD vida/power/timer/round/hits legível e owners/paletas restaurados nas transições; nenhum cenário solicitado."
+    },
+    {
+      "id": "psg_music_sfx",
+      "status": "planned",
+      "owner": "audio + tools",
+      "acceptance": "BGM musical audível, seis eventos identificáveis, prioridade e recuperação de canais; escuta e stream auditados, sem inferir qualidade de RMS."
+    },
+    {
+      "id": "visual_delivery",
+      "status": "planned",
+      "owner": "direção + revisão independente",
+      "acceptance": "Época delivery, escala/identidade/silhueta/contraste/movimento e game feel aceitos em vídeo de ROM; sete eixos simultâneos e memória atualizada."
+    },
+    {
+      "id": "source_fidelity",
+      "status": "planned",
+      "owner": "intake + IR",
+      "acceptance": "Proveniência, direitos, classes direct/approximate/manual/unsupported por recurso; nenhuma referência perdida ou decisão silenciosa."
+    }
+  ],
+  "techniques": [
+    {
+      "id": "bank_switching",
+      "decision": "baseline",
+      "proof": "Bancos de 16 KiB e ROM alvo medidos; validar dados e tabelas (AIR, META/METAL, PoseRef), limites, ponteiros após remapeamento e owner do slot.",
+      "fallback": "Sega mapper; Codemasters só por backend separado. Se o pacote de metadata exceder o banco fixo, manter as tabelas em bancos próprios com acesso bancado validado ou reduzir o escopo do corte; nunca omitir metadata em silêncio."
+    },
+    {
+      "id": "tall_metasprites",
+      "decision": "baseline",
+      "proof": "Ocupação esparsa por scanline, SAT, padrão par e silhueta em 1x.",
+      "fallback": "Repartir/reautorizar pose sem miniaturização automática."
+    },
+    {
+      "id": "intelligent_flicker",
+      "decision": "candidate",
+      "proof": "Scheduler antes do simulador; vídeo 50/60 Hz, duty cycle e máximo consecutivo omitido por parte, colisão invariante.",
+      "fallback": "Sem omissão do corpo/perigo no perfil base; reduzir adornos e reautorizar."
+    },
+    {
+      "id": "raster_palette",
+      "decision": "candidate",
+      "proof": "Faixas Y, ownership CRAM, tempo ISR e interseção vertical dos lutadores; restaurar no frame seguinte.",
+      "fallback": "Paleta de sprite compartilhada; não promete paletas independentes lado a lado."
+    },
+    {
+      "id": "hud_bg",
+      "decision": "baseline",
+      "proof": "Fila suja coalescida, bytes/ciclos por VBlank e sincronismo com dano.",
+      "fallback": "HUD simples autoral em BG."
+    },
+    {
+      "id": "psg_channel_priority",
+      "decision": "baseline",
+      "proof": "Tabela de prioridade/preempção, duração, restauração e captura com impactos concorrentes.",
+      "fallback": "PSGlib com canais declarados, sem percentual de CPU presumido."
+    },
+    {
+      "id": "hscroll_bands",
+      "decision": "candidate",
+      "proof": "Um BG, ownership de banda e sweep completo da câmera, ISR e coluna esquerda.",
+      "fallback": "Palco estático final."
+    },
+    {
+      "id": "display_window",
+      "decision": "candidate",
+      "proof": "Modo compatível e blanking explícito, scanlines/ciclos medidos; VCounter é leitura.",
+      "fallback": "Modo 192 linhas; não reduzir área útil para burlar a escala."
+    },
+    {
+      "id": "pcm_frozen",
+      "decision": "candidate",
+      "proof": "Loop assembly por clock/região, LUT de atenuação, áudio capturado, IRQ/NMI/bank/restauração.",
+      "fallback": "SFX PSG; PCM fora do combate ativo por padrão."
+    },
+    {
+      "id": "software_flip",
+      "decision": "candidate",
+      "proof": "Comparar LUT RAM/upload contra espelho offline: ROM, RAM, ciclos e latência.",
+      "fallback": "Espelhos pré-calculados; ganho não é metade da ROM inteira."
+    },
+    {
+      "id": "bg_fx",
+      "decision": "candidate",
+      "proof": "Custo de tilemap/pattern e restauração, oclusão, câmera e HUD de um único plano.",
+      "fallback": "FX de sprite compacto."
+    },
+    {
+      "id": "prefetch",
+      "decision": "candidate",
+      "proof": "Cache medido em RAM 8 KiB, acerto/miss, cancelamento de golpe e latência.",
+      "fallback": "Streaming contratado; bank switch não equivale a I/O de disco."
+    },
+    {
+      "id": "cross_actor_pattern_dedup",
+      "decision": "candidate",
+      "proof": "Deduplicar somente pares 8x16 byte-a-byte idênticos entre atores; remapear META/METAL para um índice VDP compartilhado e medir RAM/VRAM, upload, pivô e vídeo dinâmico.",
+      "fallback": "Pools independentes; se a soma exceder VRAM, reduzir escala/escopo por contrato ou rejeitar a combinação. Não presumir semelhança visual como igualdade de bytes."
+    },
+    {
+      "id": "fm_fallback",
+      "decision": "candidate",
+      "proof": "Detecção, arranjo FM/PSG próprio, waits de I/O e sessão com/sem FM.",
+      "fallback": "PSG obrigatório."
+    },
+    {
+      "id": "pcm_line_irq",
+      "decision": "candidate",
+      "proof": "Ciclos por scanline, jitter, concorrência com raster/VDP e worst-frame.",
+      "fallback": "Desativado no combate até passar; não pressupor baixo custo."
+    },
+    {
+      "id": "fm_custom_patch",
+      "decision": "candidate",
+      "proof": "Um patch custom compartilhado; vozes concorrentes e instantes de troca.",
+      "fallback": "Instrumentos ROM e arranjo PSG."
+    },
+    {
+      "id": "psg_arpeggio",
+      "decision": "candidate",
+      "proof": "Sequência/notas/envelope e audição PAL/NTSC; não equivale a polifonia física.",
+      "fallback": "Arranjo PSG sem arpejo."
+    },
+    {
+      "id": "palette_cycle",
+      "decision": "candidate",
+      "proof": "Escritas CRAM e contraste/slots afetados; custo de CPU medido.",
+      "fallback": "Cores estáticas."
+    },
+    {
+      "id": "tile_animation",
+      "decision": "candidate",
+      "proof": "Até 4/8 tiles é hipótese de lote; medir bytes, ciclos e residência.",
+      "fallback": "Tiles estáticos; arte continua autoral."
+    },
+    {
+      "id": "left_mask",
+      "decision": "baseline",
+      "proof": "Reg0 bit5 quando H-scroll ativo, viewport/câmera ajustados.",
+      "fallback": "Sem scroll horizontal."
+    },
+    {
+      "id": "raster_vertical_stretch",
+      "decision": "rejected_as_described",
+      "proof": "Y-scroll latched por frame no SMS; não aprovar pseudo Mode7 por escrita linha a linha.",
+      "fallback": "Perspectiva desenhada ou variantes de tiles medidas."
+    }
+  ]
+}

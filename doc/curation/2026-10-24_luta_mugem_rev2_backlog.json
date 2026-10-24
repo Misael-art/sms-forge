@@ -1,0 +1,813 @@
+{
+  "schema": "smsforge.engine_completion_backlog/v1",
+  "date": "2026-10-24",
+  "project": "SMS_projects/luta_mugem_rev2",
+  "scope": "Todas as pendências identificadas nesta análise dos contratos, código e evidências acessíveis; não é prova de ausência de defeitos latentes.",
+  "dominant_blocker": [
+    "R02",
+    "R03",
+    "R05",
+    "R09",
+    "R06"
+  ],
+  "engine_complete": false,
+  "game_scope": "Ken/Ryu, quatro pares, fundo sólido; extensibilidade autoral em consumidor separado",
+  "source_snapshot": "doc/curation/evidence/2026-10-24_mugenesis/source_inventory.json",
+  "count": 55,
+  "items": [
+    {
+      "id": "ID01",
+      "priority": "P0",
+      "area": "integracao",
+      "observed_status": "divergente",
+      "title": "Identidade de build e documentos",
+      "remaining_work": "Fixar principal e candidatas por caminho e SHA; conciliar build_record, manifesto, escala, contrato e TDD, preservando o histórico.",
+      "source_reference": "snapshot rev2: .mddev/project.json; doc/engine_quality_contract.json; out/build_record.json",
+      "acceptance": "Recibo do rebuild identifica exatamente o binário e os dados; os documentos descrevem o perfil selecionado.",
+      "depends_on": [],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "ID02",
+      "priority": "P1",
+      "area": "infra",
+      "observed_status": "risco observado",
+      "title": "Saúde de armazenamento e reprodução",
+      "remaining_work": "Preservar o diagnóstico EIO e remover dependências obrigatórias do projeto legado ilegível; verificar os destinos do runner.",
+      "source_reference": "doc/20-plano-implementacao.md; snapshot rev2/doc/10-memory-bank.md",
+      "acceptance": "Fontes obrigatórias legíveis e build/QA reproduzíveis; erro de armazenamento permanece reportado.",
+      "depends_on": [
+        "ID01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R01",
+      "priority": "P0",
+      "area": "render",
+      "observed_status": "defeito observado",
+      "title": "Fundo sólido e residência do tile de BG",
+      "remaining_work": "Investigar o fundo com padrão repetido na produção; conferir tile 255, pool de sprites, PNT e registradores em dump.",
+      "source_reference": "src/main.c:1144; emulator_review.json sessão e2dcd8e",
+      "acceptance": "Boot e ações mantêm fundo sólido; dumps demonstram ausência de sobreposição indevida.",
+      "depends_on": [
+        "ID01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R02",
+      "priority": "P0",
+      "area": "render",
+      "observed_status": "reprovado no corte",
+      "title": "Todas as composições reais",
+      "remaining_work": "Medir todas as combinações alcançáveis de poses, facings, alturas, distâncias, FX e HUD; dez pares já excedem o limite.",
+      "source_reference": "pacote PB ten_pairs; snapshot rev2/doc/10-memory-bank.md",
+      "acceptance": "Manifests e SAT viva respeitam 8 entradas por linha e 64 totais, com todos os papéis exigidos cobertos.",
+      "depends_on": [
+        "ID01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R03",
+      "priority": "P0",
+      "area": "render",
+      "observed_status": "diagnostico incompleto",
+      "title": "Recuperar os movimentos bloqueados",
+      "remaining_work": "Recuperar os dez papéis bloqueados pelo diagnóstico; implementar uma composição legal sem apagar ataques nem encolher o idle silenciosamente.",
+      "source_reference": "pacote PB composition_gate; snapshot rev2/doc/11-gdd.md",
+      "acceptance": "Normais, especial e KO exigidos executam integralmente; qualquer tradeoff tem decisão explícita.",
+      "depends_on": [
+        "R02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R04",
+      "priority": "P0",
+      "area": "render",
+      "observed_status": "parcial",
+      "title": "Facing e dados corretos em ambas as orientações",
+      "remaining_work": "Conferir payload, META/METAL, paleta e pivô nas duas faces; o consumidor declara espelhamento de origem com payload limitado.",
+      "source_reference": "src/main.c:486; inc/rev2_diag.h",
+      "acceptance": "Vídeo e comparação fonte/pattern/SAT cobrem faces, troca de lado e bordas sem deslocamento indevido.",
+      "depends_on": [
+        "R02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R05",
+      "priority": "P0",
+      "area": "render",
+      "observed_status": "parcial",
+      "title": "Streaming com deadlines e sem starvation",
+      "remaining_work": "Substituir o streaming que derrama por uma política com demanda exata, reúso, prefetch e deadlines por ação.",
+      "source_reference": "src/main.c:384; src/main.c:425; src/main.c:1295",
+      "acceptance": "Serviço aos dois lados, prazo máximo medido, sem publicação parcial, starvation ou perda de elementos de um tick.",
+      "depends_on": [
+        "R02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R06",
+      "priority": "P0",
+      "area": "render",
+      "observed_status": "nao requalificado",
+      "title": "Publicação coerente de pose e colisão",
+      "remaining_work": "Definir qual snapshot determina contato e apresentação; invalidar gerações canceladas e ordenar commits VRAM/SAT.",
+      "source_reference": "src/main.c:746; src/main.c:930; src/main.c:996",
+      "acceptance": "Trace e vídeo do mesmo frame explicam o contato visível; nenhuma pose futura causa dano invisível.",
+      "depends_on": [
+        "R05"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R07",
+      "priority": "P1",
+      "area": "dados",
+      "observed_status": "divida conhecida",
+      "title": "Slots e namespaces neutros",
+      "remaining_work": "Eliminar nomes fixos de personagens nos slots sem perder compatibilidade dos consumidores existentes.",
+      "source_reference": "snapshot rev2/doc/10-memory-bank.md; versus_scene_manifest.json",
+      "acceptance": "Os quatro pares são gerados por configuração, com fonte, símbolos e hashes corretos e núcleo C idêntico.",
+      "depends_on": [
+        "ID01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R08",
+      "priority": "P1",
+      "area": "render",
+      "observed_status": "parcial",
+      "title": "Paleta compartilhada e cor por material",
+      "remaining_work": "Fechar a paleta P1 compartilhada de corpos e FX, diferenciação P2 e contraste por material, com revisão nativa.",
+      "source_reference": "snapshot rev2/doc/10-memory-bank.md; scene_cut._palette_codebook",
+      "acceptance": "Readback da paleta confere com cada pool/META; cores e silhuetas permanecem legíveis em movimento.",
+      "depends_on": [
+        "R04"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R09",
+      "priority": "P0",
+      "area": "performance",
+      "observed_status": "reprovado",
+      "title": "Worst-frame com carga representativa",
+      "remaining_work": "Medir a carga completa; o selo histórico da candidata registra vline_min=4 e vovf_delta=1740.",
+      "source_reference": "pacote PB worst_frame; src/main.c:1295",
+      "acceptance": "Janela contínua completa sem DAP, done=1 e zero overflow, incluindo HUD, FX e PSG na mesma ROM.",
+      "depends_on": [
+        "R05"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R10",
+      "priority": "P0",
+      "area": "performance",
+      "observed_status": "sem prova atual",
+      "title": "Cadência e pacing regional",
+      "remaining_work": "Definir relógios e política regional; separar cadência da lógica, VDP, animação e execução em tempo real.",
+      "source_reference": "emulator_review.json; doc/13-spec-cenas.md",
+      "acceptance": "Duas janelas SMRT por região suportada, tolerância declarada e AIR/input/pose dentro dos prazos aceitos.",
+      "depends_on": [
+        "R09"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R11",
+      "priority": "P0",
+      "area": "memoria",
+      "observed_status": "pendente",
+      "title": "Mapa VRAM/PNT/SAT e backend",
+      "remaining_work": "Escolher o backend por medição e provar seu mapa VRAM, inclusive fundo, PNT, SAT, dirty regions e restauração.",
+      "source_reference": "doc/13-spec-cenas.md; doc/15-tdd.md; src/main.c:1144",
+      "acceptance": "Plano confere com dumps; nenhuma região se sobrepõe indevidamente; movimento e overlap funcionam.",
+      "depends_on": [
+        "R02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R12",
+      "priority": "P1",
+      "area": "memoria",
+      "observed_status": "parcial historico",
+      "title": "RAM, stack, probes e canários",
+      "remaining_work": "Repetir mapa pós-link, canários e high-water de stack com pools e PSG finais.",
+      "source_reference": "doc/15-tdd.md; src/main.c probes",
+      "acceptance": "Corredor válido e margem de stack medida sob stress, sem corrupção de sondas ou dados.",
+      "depends_on": [
+        "R11"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "R13",
+      "priority": "P1",
+      "area": "banking",
+      "observed_status": "meta planejada",
+      "title": "Capacidade e ownership do mapper",
+      "remaining_work": "Demonstrar a capacidade de ROM escolhida e a restauração do mapper, incluindo metadata e áudio/ISR.",
+      "source_reference": "engine_quality_contract.json; .mddev/project.json",
+      "acceptance": "Bancos-limite têm dados distintos acessíveis; referências permanecem válidas e não há overflow do banco fixo.",
+      "depends_on": [
+        "R11"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S01",
+      "priority": "P0",
+      "area": "semantica",
+      "observed_status": "bloqueado",
+      "title": "Dependências common e FightFX",
+      "remaining_work": "Resolver common1.cns e referências externas alcançáveis com fonte autorizada ou adaptação diferencial explícita.",
+      "source_reference": "doc/22-intake-doador.json; snapshot rev2/doc/10-memory-bank.md",
+      "acceptance": "Nenhuma dependência obrigatória é tratada como suporte por proxy não validado.",
+      "depends_on": [
+        "ID01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S02",
+      "priority": "P0",
+      "area": "semantica",
+      "observed_status": "parcial",
+      "title": "Matriz de alcance e capacidades",
+      "remaining_work": "Classificar controllers, triggers, campos e referências por alcance e fidelidade executada.",
+      "source_reference": "doc/20-plano-implementacao.md; fight_runtime_data_manifest.json",
+      "acceptance": "Matriz fonte/IR/gerado/consumidor/teste/ROM sem unsupported obrigatório oculto.",
+      "depends_on": [
+        "S01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S03",
+      "priority": "P0",
+      "area": "semantica",
+      "observed_status": "planejado",
+      "title": "Lowering CNS AOT para C/Z80",
+      "remaining_work": "Implementar o subconjunto CNS alcançável em C/Z80, preferindo lowering AOT; comparar VM compacta se o custo justificar.",
+      "source_reference": "doc/15-tdd.md; inc/rev2_diag.h",
+      "acceptance": "Um golpe completo executa predicado, estado, animação, contato e recovery por dados, sem hardcode de personagem.",
+      "depends_on": [
+        "S02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S04",
+      "priority": "P1",
+      "area": "semantica",
+      "observed_status": "parcial",
+      "title": "Ordem e temporalidade CNS/AIR",
+      "remaining_work": "Preservar ordem de triggers, persistência, hitpause e semântica AIR, inclusive hold, LoopStart e terminal.",
+      "source_reference": "sms-mugen-source-semantics.md; generators/fight_runtime_data.py",
+      "acceptance": "Positivos e negativos nos limiares; AIR com identidade em N+1 fronteiras e execução observada na ROM.",
+      "depends_on": [
+        "S03"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S05",
+      "priority": "P1",
+      "area": "combate",
+      "observed_status": "parcial",
+      "title": "HitDef e vulnerabilidade completos no perfil",
+      "remaining_work": "Completar os campos HitDef e vulnerabilidades realmente usados pela fonte, além do dano simplificado.",
+      "source_reference": "src/main.c:746; doc/20-plano-implementacao.md",
+      "acceptance": "Casos por campo demonstram dano, guarda, imunidade, juggle e repetição coerentes no perfil aceito.",
+      "depends_on": [
+        "S03"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S06",
+      "priority": "P1",
+      "area": "combate",
+      "observed_status": "nao demonstrado",
+      "title": "Hitstun, blockstun, queda, getup, win",
+      "remaining_work": "Implementar hitstun, blockstun, queda, getup e vitória, com transições e controle explícitos.",
+      "source_reference": "inc/rev2_diag.h; doc/11-gdd.md",
+      "acceptance": "Ciclos de dano, defesa, ar/chão e KO recuperam estados válidos e não deixam ataques ou controle presos.",
+      "depends_on": [
+        "S05"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S07",
+      "priority": "P1",
+      "area": "combate",
+      "observed_status": "parcial",
+      "title": "Hitstop, slowdowns e shake finitos",
+      "remaining_work": "Dimensionar hitstop, slowdown e shake como efeitos finitos, distintos de stall de upload.",
+      "source_reference": "src/main.c:746; doc/11-gdd.md",
+      "acceptance": "Duração observada em frames, encerramento correto em round/cena e ausência de congelamento residual.",
+      "depends_on": [
+        "S06"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S08",
+      "priority": "P1",
+      "area": "objetos",
+      "observed_status": "unsupported explicito",
+      "title": "Projéteis e especiais",
+      "remaining_work": "Ligar especiais a entidades de projétil; reconhecer o CMD sem rota não implementa o movimento.",
+      "source_reference": "src/fight_input.c:fight_command_role; fight_runtime_data_manifest.json",
+      "acceptance": "Spawn CNS, velocidade, lifetime, colisão, guarda, dano e despawn funcionam, incluindo concorrência medida.",
+      "depends_on": [
+        "S03",
+        "R02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S09",
+      "priority": "P1",
+      "area": "objetos",
+      "observed_status": "planejado",
+      "title": "Explod, spark e Helper alcançável",
+      "remaining_work": "Implementar Explods, sparks e Helpers alcançáveis em pools limitados; conservar a identidade dos seletores da fonte.",
+      "source_reference": "doc/11-gdd.md; doc/20-plano-implementacao.md",
+      "acceptance": "Eventos corretos, overflow explícito, expiração e reset seguros; custo incluído no orçamento.",
+      "depends_on": [
+        "S08"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S10",
+      "priority": "P1",
+      "area": "combate",
+      "observed_status": "planejado",
+      "title": "Power, supers, cancels e combos",
+      "remaining_work": "Implementar power, supers, cancels e combos requeridos, incluindo condições e variantes aéreas/proximidade.",
+      "source_reference": "doc/11-gdd.md; fight_runtime_data_manifest.json",
+      "acceptance": "Limiares de recurso e janelas passam em testes fonte/ROM, com efeitos e custos corretos.",
+      "depends_on": [
+        "S04",
+        "S05",
+        "S08"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S11",
+      "priority": "P1",
+      "area": "geometria",
+      "observed_status": "parcial",
+      "title": "CLSN e distância dinâmica",
+      "remaining_work": "Conservar CLSN, eixos, escala e distância; testar Default/override, defensor móvel, guarda, canto e cross-up.",
+      "source_reference": "src/main.c:685; src/main.c:713; tests/clsn_source_to_rom_diff.py",
+      "acceptance": "Comparação fonte/gerado/ROM nos dois lados dos limiares, sem caixas de pose futura ou ajuste cego da sola.",
+      "depends_on": [
+        "R06",
+        "S04"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "S12",
+      "priority": "P1",
+      "area": "fisica",
+      "observed_status": "parcial",
+      "title": "Física e limites numéricos Z80",
+      "remaining_work": "Verificar sinal, limites, arredondamento e overflow Q8.8 no C de 16 bits e nas transições aéreas.",
+      "source_reference": "src/main.c:566; inc/rev2_diag.h; memoria wave5a",
+      "acceptance": "Bordas, landing e push não causam teleporte, suspensão ou perda de pivô.",
+      "depends_on": [
+        "S03"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "IN01",
+      "priority": "P1",
+      "area": "input",
+      "observed_status": "decisao pendente",
+      "title": "Mapeamento de dois botões por personagem",
+      "remaining_work": "Decidir o mapa de dois botões por personagem e medir o limiar candidato de seis ticks.",
+      "source_reference": "doc/11-gdd.md; src/input_tier.c; memoria t4",
+      "acceptance": "Todos os movimentos exigidos são acessíveis ou têm tradeoff aceito; thresholds da fonte, gerador e C coincidem.",
+      "depends_on": [
+        "S02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "IN02",
+      "priority": "P1",
+      "area": "input",
+      "observed_status": "parcial",
+      "title": "CMD, prioridade e onepulse",
+      "remaining_work": "Completar CMD com charge, release, hold, acordes, alternativas, prioridade e consumo único.",
+      "source_reference": "src/input.c; src/fight_input.c",
+      "acceptance": "Testes diferenciais e de mutação cobrem buffers/soltura; acorde não mapeado não dispara normal indevido.",
+      "depends_on": [
+        "IN01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "IN03",
+      "priority": "P1",
+      "area": "input",
+      "observed_status": "parcial",
+      "title": "Humano×humano e seleção de modos",
+      "remaining_work": "Separar P1/P2 físicos e seleção de IA por modo, mantendo o mesmo caminho de comandos.",
+      "source_reference": "src/main.c:845; doc/11-gdd.md",
+      "acceptance": "Humano×humano, humano×IA e IA×IA funcionam nos quatro pares sem chamadas diretas de dano ou estado.",
+      "depends_on": [
+        "IN02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "IN04",
+      "priority": "P1",
+      "area": "ia",
+      "observed_status": "diagnostico",
+      "title": "IA responsiva e dificuldade",
+      "remaining_work": "Evoluir o roteiro cíclico de diagnóstico para IA de distância, estado e perigo com dificuldade selecionável.",
+      "source_reference": "src/fight_input.c:fight_input_ai_levels; doc/11-gdd.md",
+      "acceptance": "Mudança de dificuldade é observável; defesa, canto e projéteis não geram loops sem saída.",
+      "depends_on": [
+        "S08",
+        "IN03"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "IN05",
+      "priority": "P0",
+      "area": "latencia",
+      "observed_status": "sem prova final",
+      "title": "Input→ação→pose→contato",
+      "remaining_work": "Medir input, decisão, pose e contato nos relógios corretos, com baseline e controle negativo.",
+      "source_reference": "src/main.c probes; doc/13-spec-cenas.md",
+      "acceptance": "Prazos por ação são rederiváveis de trace e vídeo; ACK da ponte não é usado como prova de consumo.",
+      "depends_on": [
+        "R06",
+        "IN02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "G01",
+      "priority": "P1",
+      "area": "match",
+      "observed_status": "planejado",
+      "title": "Round, match, timeout e empate",
+      "remaining_work": "Implementar intro/fight, timer, rounds, empate, double KO, resultado e revanche.",
+      "source_reference": "doc/11-gdd.md; doc/12-roteiro.md",
+      "acceptance": "Todos os caminhos e bordas do timer funcionam com resets consistentes de HUD, áudio e objetos.",
+      "depends_on": [
+        "S06"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "G02",
+      "priority": "P1",
+      "area": "fluxo",
+      "observed_status": "planejado",
+      "title": "Pausa e transições com owners",
+      "remaining_work": "Definir ownership e teardown de pausa/NMI e transições, inclusive input mantido e caches.",
+      "source_reference": "doc/15-tdd.md; sms-state-transitions.md",
+      "acceptance": "Cada aresta é exercitada e repetida; retorno sem tecla presa, cache stale ou recurso abandonado.",
+      "depends_on": [
+        "G01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "G03",
+      "priority": "P1",
+      "area": "ui",
+      "observed_status": "planejado",
+      "title": "HUD e mensagens",
+      "remaining_work": "Integrar vida, power, timer, rounds, hits e mensagens, com desenho e custo limitados.",
+      "source_reference": "doc/11-gdd.md; doc/13-spec-cenas.md",
+      "acceptance": "HUD acompanha combate, recupera redraw após recusa e cabe no pior quadro com legibilidade nativa.",
+      "depends_on": [
+        "G01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "G04",
+      "priority": "P1",
+      "area": "ui",
+      "observed_status": "planejado",
+      "title": "Título, menus, seleção, VS e finais",
+      "remaining_work": "Implementar título, menus, seleção, VS, continue e final previstos, preservando fundo sólido.",
+      "source_reference": "doc/11-gdd.md; doc/12-roteiro.md",
+      "acceptance": "Matriz de entrada/retorno completa por input real; retratos e demais recursos rastreáveis.",
+      "depends_on": [
+        "G02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "G05",
+      "priority": "P1",
+      "area": "treino",
+      "observed_status": "planejado",
+      "title": "Ferramentas de treino",
+      "remaining_work": "Implementar dummy, defesa/IA, power infinito, reset, histórico e command list acessíveis com dois botões.",
+      "source_reference": "doc/11-gdd.md",
+      "acceptance": "Opções atuam na ROM e a lista usa os mesmos dados do matcher; reset limpa combate e objetos.",
+      "depends_on": [
+        "G04",
+        "IN02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "G06",
+      "priority": "P1",
+      "area": "options",
+      "observed_status": "planejado",
+      "title": "Configuração em RAM da sessão",
+      "remaining_work": "Integrar dificuldade, rounds, timer, controles e áudio com persistência na RAM da sessão.",
+      "source_reference": "doc/11-gdd.md",
+      "acceptance": "Configuração sobrevive à reentrada; captura/soltura não vaza para combate; categorias vazias são explícitas.",
+      "depends_on": [
+        "G04",
+        "A01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "A01",
+      "priority": "P1",
+      "area": "audio",
+      "observed_status": "inventariado",
+      "title": "Transcrição/autoria PSG",
+      "remaining_work": "Transformar o inventário SND em transcrição/autoria PSG com proveniência, canal e limitações.",
+      "source_reference": "memoria t5; doc/11-gdd.md; PSGlib.h",
+      "acceptance": "Cada evento integrado tem asset PSG, hash, canal e função identificada no perfil aceito.",
+      "depends_on": [
+        "S02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "A02",
+      "priority": "P1",
+      "area": "audio",
+      "observed_status": "ausente no consumidor ativo",
+      "title": "Driver e arbitragem integrada",
+      "remaining_work": "Integrar atualização PSG e arbitragem de BGM/SFX/cues sem conflito com ISR, probes ou mapper.",
+      "source_reference": "src/main.c; sms-psg-audio.md",
+      "acceptance": "Mix sob carga medido e ouvido; mute, pausa, stop e reentrada não deixam canal preso.",
+      "depends_on": [
+        "A01",
+        "R09"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "A03",
+      "priority": "P2",
+      "area": "audio",
+      "observed_status": "planejado",
+      "title": "Fila e catálogo de eventos",
+      "remaining_work": "Se houver fila, limitar tamanho e idade; preservar grupo/amostra por adaptador e catálogo real.",
+      "source_reference": "curadoria donor m3a/m4e; doc/11-gdd.md",
+      "acceptance": "Canal ocupado, wrap, mute, pausa e expiração testados; nenhuma classificação de voz universal indevida.",
+      "depends_on": [
+        "A02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "A04",
+      "priority": "P1",
+      "area": "audio",
+      "observed_status": "planejado",
+      "title": "Música e identidade auditiva",
+      "remaining_work": "Produzir e revisar música, cues e SFX; voz é opcional com alternativa declarada.",
+      "source_reference": "doc/11-gdd.md; sms-psg-composition.md",
+      "acceptance": "Captura privada alinhada, proveniência, gates de sinal/PSG e revisão auditiva; pico positivo sozinho não aprova música.",
+      "depends_on": [
+        "A02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "RE01",
+      "priority": "P1",
+      "area": "reuso",
+      "observed_status": "divergente do TDD proposto",
+      "title": "Core canônico compartilhado",
+      "remaining_work": "Extrair o núcleo do consumidor para a fábrica por módulos e receita verificável, evitando duas cópias divergentes.",
+      "source_reference": "doc/15-tdd.md; src/main.c",
+      "acceptance": "Mesmo core atende quatro pares e outro consumidor; mudanças de dados não exigem editar C do núcleo.",
+      "depends_on": [
+        "R05",
+        "S03"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "RE02",
+      "priority": "P1",
+      "area": "reuso",
+      "observed_status": "planejado",
+      "title": "Contrato intermediário neutro",
+      "remaining_work": "Definir contrato neutro de lutador, animação, estados, comandos, materiais e áudio com capacidades estáticas.",
+      "source_reference": "doc/15-tdd.md; inc/rev2_diag.h",
+      "acceptance": "Admissão antes do runtime rejeita contagens, índices e referências inválidos, sem truncamento ou malloc.",
+      "depends_on": [
+        "RE01"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "RE03",
+      "priority": "P1",
+      "area": "reuso",
+      "observed_status": "nao demonstrado",
+      "title": "Adaptador e consumidor autorais",
+      "remaining_work": "Criar adaptador de fonte autoral para o mesmo contrato e provar um consumidor independente.",
+      "source_reference": "pedido humano2026-10-24; doc/15-tdd.md",
+      "acceptance": "Interação jogável por dados sem editar o core; arte final tem proveniência e fixture de debug não vira entrega artística.",
+      "depends_on": [
+        "RE02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "RE04",
+      "priority": "P1",
+      "area": "reuso",
+      "observed_status": "parcial",
+      "title": "Schema, ABI, features e limites",
+      "remaining_work": "Versionar schema/ABI/features e validar os limites reais de Frame, Anim, poses, bancos e CLSN.",
+      "source_reference": "inc/rev2_diag.h; src/main.c:88; doador M4 A04",
+      "acceptance": "C compatível compila; ABI, feature ou contagem incompatíveis falham antes de publicar ou executar.",
+      "depends_on": [
+        "RE02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "RE05",
+      "priority": "P1",
+      "area": "pipeline",
+      "observed_status": "parcial",
+      "title": "Receita reproduzível e publicação",
+      "remaining_work": "Fechar receita de geração, transformação, imagens, dados, proveniência e recibos em staging recuperável.",
+      "source_reference": "snapshot rev2/doc/10-memory-bank.md; doador M4 A03/A05/C13",
+      "acceptance": "Rebuild limpo reproduz dados/ROM; on/off/repeat/recusa e falha injetada preservam a geração anterior.",
+      "depends_on": [
+        "RE04"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "RE06",
+      "priority": "P2",
+      "area": "distribuicao",
+      "observed_status": "planejado",
+      "title": "Instalação, upgrade e handoff",
+      "remaining_work": "Empacotar dependências e recursos; separar versões e planejar upgrade com ancestral instalado e conflitos explícitos.",
+      "source_reference": "doc/20-plano-implementacao.md M8; doador M4 A03/A06/Q07",
+      "acceptance": "Instalar fora do checkout, gerar/buildar/QA em consumidor limpo; upgrade e rollback preservam customizações.",
+      "depends_on": [
+        "RE05"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "Q01",
+      "priority": "P1",
+      "area": "tests",
+      "observed_status": "parcial",
+      "title": "Regressão independente do acervo legado",
+      "remaining_work": "Manter unit fixtures autocontidas e integrações com projeto/manifesto explícitos, sem mascarar EIO ou skip.",
+      "source_reference": "mugen2sms/tests/conftest.py; memoria M0",
+      "acceptance": "Contagem e escopo da suíte são publicados; dependência ilegível continua registrada e não qualifica rev2.",
+      "depends_on": [
+        "RE02"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "Q02",
+      "priority": "P1",
+      "area": "qa",
+      "observed_status": "parcial historico",
+      "title": "Matriz de pares, modos e bordas",
+      "remaining_work": "Exercitar pares, slots, faces, modos, cantos, ar, guarda e concorrência de objetos/FX.",
+      "source_reference": "doc/11-gdd.md; doc/20-plano-implementacao.md",
+      "acceptance": "Pedidos V2 nativos com baseline, ROM exata, mídia e cobertura do domínio suportado.",
+      "depends_on": [
+        "G01",
+        "IN03",
+        "S09"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "Q03",
+      "priority": "P1",
+      "area": "resiliencia",
+      "observed_status": "nao demonstrado",
+      "title": "Admissão e recuperação sob falha",
+      "remaining_work": "Testar pacotes incompletos, índices fora do limite, pools cheios, bancos e gerações canceladas.",
+      "source_reference": "doc/15-tdd.md; doador M4 C04/C05/P03/P08",
+      "acceptance": "Negativos rejeitados com diagnóstico e preservação do estado; recuperação sem omissão silenciosa.",
+      "depends_on": [
+        "RE05"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "Q04",
+      "priority": "P1",
+      "area": "resiliencia",
+      "observed_status": "nao demonstrado",
+      "title": "Soak e stress prolongados",
+      "remaining_work": "Rodar stress e soak com matches, pausas, retornos, seeds e wrap de contadores sob carga completa.",
+      "source_reference": "engine_quality_contract.json; doc/13-spec-cenas.md",
+      "acceptance": "Janelas registradas sem corrupção, deadlock, starvation ou glitch observado no domínio testado.",
+      "depends_on": [
+        "Q02",
+        "Q03",
+        "R12"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "Q05",
+      "priority": "P1",
+      "area": "qualidade",
+      "observed_status": "pendente",
+      "title": "Revisão visual, animação e gamefeel",
+      "remaining_work": "Revisar pixels, silhueta, materiais, rosto/contorno, animação, áudio e resposta no tamanho nativo.",
+      "source_reference": "sms-visual-excellence.md; doc/11-gdd.md",
+      "acceptance": "Review independente e conferência do coordenador em mídia fresca; decisão humana de arte e fidelidade.",
+      "depends_on": [
+        "Q02",
+        "A04"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "Q06",
+      "priority": "P0",
+      "area": "entrega",
+      "observed_status": "nao convergente",
+      "title": "Sete eixos e época delivery na mesma ROM",
+      "remaining_work": "Reunir build, validação, boot, gameplay, FPS, áudio e memória com época delivery na mesma SHA.",
+      "source_reference": "AGENTS.md; engine_quality_contract.json",
+      "acceptance": "Todos os gates aplicáveis passam, com vínculo asset→ROM, frescor e revisão; AAA não é veredito automático.",
+      "depends_on": [
+        "R10",
+        "Q04",
+        "Q05"
+      ],
+      "closed_by_this_curation": false
+    },
+    {
+      "id": "Q07",
+      "priority": "P1",
+      "area": "ferramentas",
+      "observed_status": "diagnostico limitado",
+      "title": "Limites dos instrumentos de medição",
+      "remaining_work": "Conservar os limites dos diagnósticos e qualificar parsers, identidades e seleção de ROM antes de promoção.",
+      "source_reference": "tools/sms_wrapper/audit_composition_gate.py; tools/sms_wrapper/audit_sole_alignment.py; reconcile_claims.py:_rom_sha",
+      "acceptance": "Self-checks negativos e calibração real; SHA explícito; nomes distintos e snapshot isolado não aprovam conteúdo ou mínimo.",
+      "depends_on": [
+        "ID01"
+      ],
+      "closed_by_this_curation": false
+    }
+  ],
+  "excluded_from_current_game": [
+    "cenário/stage/screenpack genérico",
+    "online",
+    "save/SRAM de progresso",
+    "personagens extras",
+    "FM obrigatório",
+    "compatibilidade MUGEN irrestrita",
+    "promessa AAA ou ausência universal de glitches"
+  ]
+}
