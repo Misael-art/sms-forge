@@ -20,3 +20,21 @@ coreografia → `audit_sprite_line_sim.py` (manifest sprite_scene_manifest_v1)
 ## Truque canônico
 Ordenar sprites na SAT para priorizar os importantes quando >8 ameaça uma linha
 (flicker controlado > corrupção).
+
+## Composição de dois atores (L137, §129)
+
+Reserve o orçamento compartilhado para ambos os atores e os FX/HUD que
+realmente coexistem. Revise ataque de P1 contra idle/pain de P2 **e o inverso**,
+com aproximação, sobreposição, espelhamento e extremos verticais do GDD.
+Priorizar SAT ou cortar células precisa preservar cabeça/tronco, identidade
+e leitura do golpe; trocar partes inteiras por FPS legal reprova apresentação.
+
+`audit_silhouette_integrity.py` lê as tabelas O3 e mede seu perfil de células
+críticas. Os pisos 2/linha e o cap5 são específicos desse layout OpenBOR; não
+são limites de anatomia, tamanho ou uma receita universal para MUGEN/SMS.
+Outro layout exige contrato próprio e simulador compatível. O limite físico
+continua 8 sprites/linha e 64 na SAT. Célula transparente também ocupa entrada.
+
+Depois da análise estática, QA em sessão privada confere SAT/ec e framebuffer
+no SHA atual: presença de células não prova pixels úteis ou contato. Veja
+`workflows/subagent-emulator-qa.md` e `product-quality-checkpoint.md`.

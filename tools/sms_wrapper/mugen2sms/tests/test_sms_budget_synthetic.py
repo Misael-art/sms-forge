@@ -70,6 +70,23 @@ def test_pose_larga_vira_downscale_aproximate():
     assert rep.by_id["anim:0.0"].motivo == "downscale1:4"
 
 
+def test_pose_budget_prescaled_names_the_fraction_and_skips_the_quarter_label():
+    pose = sprite(0, w=32, h=64)
+    ch = char_with([pose], dict([anim(0, [frame(5900, 0)])]))
+    label = "framebuffer x=2/3 y=6/7 extra=1/1"
+    rep = classify_character(ch, SmsLimits(), scale_label=label)
+    assert rep.by_id["anim:0.0"].classe == "approximate"
+    assert rep.by_id["anim:0.0"].motivo == label
+    assert "downscale1:4" not in rep.by_id["anim:0.0"].motivo
+    from mugen2sms.generators.smsdev import _worst_scene
+    scene = _worst_scene(ch, rep)
+    assert "(4x8 tiles)" in scene["pose_pior"]
+    historical = classify_character(ch, SmsLimits())
+    assert historical.by_id["anim:0.0"].motivo == "downscale1:4"
+    divided = _worst_scene(ch, historical)
+    assert "(1x2 tiles)" in divided["pose_pior"]
+
+
 def test_pose_que_nem_1_4_salva_vira_manual():
     pose = sprite(0, w=192, h=24)                      # 48 px pos-escala = 6 colunas > 4
     rep = classify_character(char_with([pose], dict([anim(0, [frame(5900, 0)])])), SmsLimits())

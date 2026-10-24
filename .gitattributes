@@ -1,0 +1,4 @@
+# Preserve raw terminal progress (CR) and upstream license bytes in this evidence lot.
+# These attributes affect whitespace lint only, never source-code validation.
+doc/curation/evidence/2026-10-24_host-bootstrap/validation/*.log whitespace=-trailing-space,-space-before-tab
+tools/sms_wrapper/vendor/devkitSMS-LICENSES.txt whitespace=-blank-at-eof

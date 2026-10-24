@@ -110,3 +110,25 @@ QA privada nativa por delta/regressão, worst-frame, FPS contínuo e áudio/visu
 afetados. Sessão não iniciada por EIO é blocked/not_run, nunca teste simulado.
 Memória guarda decisões rejeitadas e próximos experimentos com identidade exata;
 não copiar hipótese do diagnóstico como solução resolvida ou taxa segura SMS.
+
+## Diagnósticos de composição e residência (L006/L061/L086/L088/L090/L091)
+
+Curadoria: `doc/curation/2026-10-24_mugenesis_rev2.md`.
+`audit_composition_gate.py` e `audit_sole_alignment.py` continuam diagnósticos
+limitados, fora dos gates globais. Self-check precede leitura. O primeiro
+mede intervalos verticais 8×16 do META selecionado, com dy assinado; agrupar
+só dy iguais perde sobreposições. Seu default 4 é política por ator, não regra
+universal nem implementação de 5+3. O segundo mede última linha opaca + AXIS
+contra CLSN2; última linha pode ser equipamento ou pose aérea. Diferença
+geométrica não julga anatomia. PNG/frames.json/header têm hashes.
+
+Num sprite fragmentado, cotejar pose desejada/residente/submetida/apresentada,
+SAT e framebuffer do mesmo frame antes de atribuir ordem de tiles. Um quadro
+residente completo elimina a hipótese somente naquele caso. O simulador mede
+a composição fornecida; opt-in de nomes distintos não comprova identidade dos
+bytes e não deve reprovar duelos espelhados legítimos.
+
+Bloquear papéis largos protege um diagnóstico, mas deixa movimentos sem
+execução: manter a dívida no contrato de combate. VBlank usa o campo selado
+`vline_min`, não `vline` do snapshot (`measure_worst_frame.py`, v2).
+`done=0` permanece sem_lastro; menos bancos ou SAT legal não pagam throughput.

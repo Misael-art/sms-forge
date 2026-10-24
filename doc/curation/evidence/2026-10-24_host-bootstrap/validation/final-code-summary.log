@@ -1,0 +1,19 @@
+[SELF-CHECK OK] host bootstrap: confined archives, links/duplicates, hash refusal, blockers and local environment; offline only
+[SELF-CHECK OK] handoff: exact file set, hashes and confined manifest paths; offline only
+BUILD_INSTALL_EXIT=0
+FULL_PREFLIGHT_EXIT=2
+tools/emuladores/emulicious/Emulicious.jar
+tools/emuladores/emulicious/License.txt
+tools/emuladores/emulicious/Emulicious.ini
+RESTORE_EXIT=0
+BUILD_DOCTOR_EXIT=0
+No broken requirements found.
+{
+  "ok": true,
+  "removed": [
+    "downloads",
+    "pip-cache"
+  ],
+  "scope": "downloads and pip-cache only; venv/SDK/runs/evidence preserved"
+}
+VENV_PRESERVED_EXIT=0

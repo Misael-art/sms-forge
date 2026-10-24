@@ -619,3 +619,131 @@ Fontes: `doc/27-continuidade-reinstalacao-2026-10-21.md`; `doc/continuity/` (ass
 - **Assets**: `luta_mugem_rev2_full_20261021.tar.zst` (projeto completo, incl. `out/`), `loteB2_20261021.tar.zst` (custódia temp), `sdk_20261021.tar.zst`, `emulators_20261021.tar.zst`, `qa_toolchain_20261021.tar.zst` (bridge/BlastEm), `workspace_out_20261021.tar.zst` e `workspace_untracked_nonout_20261021.tar.zst`; hashes em `doc/continuity/RELEASE_ASSETS.sha256`.
 - **Limite**: a validação é build/reprodutibilidade, não emulador. Os eixos `boot_emulador`, `gameplay`, `fps_constante`, `audio` e `memory_bank_atualizado` continuam abertos; render/SAT/§129 do SHA novo exigem medição viva. Nenhum delivery.
 - **Próximo**: v044 com lista 5/3 pré-computada, seleção espacial contígua, selo 300 s + SAT/linha/§129/vídeo; aprovação humana da política 5/3 (e das demais pendências: híbrido/FX, 1 MB, guarda BlastEm+L139, doc/15, manifest/contrato, CRAM, D2/G, `vram_plan.py`). O irmão `luta_mugen` segue com EIO pré-existente e intocado; seu `out/` não está nesta release.
+
+## 2026-10-22 — encaixe de tamanho CPS2 para o Master System
+
+O motor `mugen2sms.converters.display_fit` exige, na definição do projeto, o framebuffer de origem. O alvo default é `sms` (256×192). CPS2 e CPS1 são 384×224, então o default aplica largura 2/3 e altura 6/7. Game Gear (160×144, 5/12 por 9/14) é alvo nomeado. Origem ou alvo desconhecido é recusado. Origem igual ao alvo fica identidade 1/1. Os modos `fighter_scale` e `legacy_quarter` continuam disponíveis e este comando não reescreve pixel por eles. `off` também não reescreve. Grupo 9000 fica de fora. Um marcador impede a segunda passada (exit 2). Tempos, flips e blend permanecem. Índice 0 continua transparente. `SMS_GLOBAL.md` não foi editado.
+
+Perfil: `doc/display_profile.json`, source `cps2`, target `sms`, Ken e Ryu. Saída: `out/display_fit/sms_default/`. ZIPs de origem conferidos de novo e iguais ao SHA do intake (`b244ec9a…` e `6db7e29d…`). Marcador dos dois: `display_fit: source=cps2 target=sms x=2/3 y=6/7`, SHA-256 `40bf9c9d70b4d2b9dda0db67c057cbd1f33250877c9c62cdf8f1015eff464fac`. Resumo `summary.json` SHA-256 `45f9b05829412a1843102701fa554f545d8a1f4c602e9ea40974e0412daeb9c2`.
+
+| Lutador | Sprites | Ajustados | Isentos | Quadros | Antes | Ajustado | Retrato | Slots de pixel |
+|---|---:|---:|---:|---:|---|---|---|---|
+| Ken | 201 | 199 | 2 | 411 | 135×140 | 96×112 | 120×140 | 1245763 → 786709 |
+| Ryu | 525 | 523 | 2 | 1309 | 232×240 | 160×208 | 120×140 | 3428516 → 2150181 |
+
+Durações preservadas nos dois. Retratos medidos no SFF: 25×25 e 120×140. O teto inclusivo do Ken continua 120×140 por causa do retrato. Ação 0, primeiro quadro: Ken `g0_0` 48×80, tempo 6, offset (2, 0); Ryu `g0_1` 48×80, tempo 5, offset (2, 0). A folha do Ken está em modo P e o canto é o índice 0. 80 px cai na banda histórica de 72–88. O `scale_pilot` não rodou.
+
+Colunas de 8 px nos sprites ajustados: Ken chega a 12 e tem 29 acima de 8; Ryu chega a 20 e tem 118 acima de 8. Um idle isolado ocupa 6 colunas. Essa contagem não é aprovação de `audit_sprite_line_sim`.
+
+Testes do host: `test_display_fit.py`, `test_sms_scale.py` e `test_cli_sms.py`, 23 passed. A ROM `out/rom/luta_mugem_rev2.sms` permanece com 851968 bytes e data 2026-10-20. Este lote não a recompilou e não a abriu no emulador. Nenhum claim de 60 fps, áudio ou entrega visual.
+
+Estudo de 2026-10-22, sem mudar o motor: pose = ação AIR do corpo, quadro mais largo; FX e grupo 9000 fora. A pose de 12 colunas é a ação 440 (chute baixo), `g440_1`, 96×48, nos dois. Porta de 70% das ações já em ≤8 colunas: Ken 71/100 abre; Ryu 107/154 (69,48%) não abre, falta 1 ação. Se a pose mais larga virasse a referência uniforme 2/3, o parado 48×80 (6 colunas) cairia para 32×53 (4) e o chute 96×48 para 64×32 (8). Prancha: `out/display_fit/sms_default/estudo_corpo_8/ken_ryu_corpo_8.png`. JSON: `estudo_corpo_8/resultado.json`.
+
+## 2026-10-23 — pose_budget vira o default e o piloto compila
+
+A condição aceita está em `doc/28-pose-budget-8.md` e no primeiro parágrafo de `doc/11-gdd.md`. O default de `mugen2sms.converters.display_fit` passou a `pose_budget`: primeiro o encaixe CPS2→SMS (2/3 por 6/7), depois a referência do corpo. Porta `open` em 70% e `near` entre 69% e 70%. Abaixo de 69% a escala extra não entra. `framebuffer`, `fighter_scale` e `legacy_quarter` continuam opções. `SMS_GLOBAL.md` não foi editado e nenhum id de lição foi alocado.
+
+Perfil: `doc/display_profile.json`. Saída da arte: `out/display_fit/pose_budget_8/`. Resumo SHA-256 `4ca2b8d76373297018b79bcc7e69e54ea9e88fcbd6ff4295b8b806cb9db4f4e4`. Segunda passada no mesmo diretório: exit 2.
+
+| Lutador | Porta | Ações do corpo em ≤8 | Extra | Caso a caso | Corpo acima de 8 depois | Marcador |
+|---|---|---:|---|---:|---:|---|
+| Ken | open | 71/100 (0,71) | 2/3 | 29 | 0 | `7fba0349e33853efb81f0ed7fb1f967c9055cbe5ab1e7bad1bebc59f1b878244` |
+| Ryu | near | 107/154 (0,6948) | 2/3 | 47 | 0 | `0ded20292cd3bc8525fa58de0f055485d8df936c9ab69e0e3fe4a4195ba80cf8` |
+
+A referência dos dois é a ação 440, 96×48 depois do framebuffer. Célula do chute `g440_1` na arte nova: 64×32, 8 colunas. Primeiro quadro do idle: 32×56, 4 colunas; o quadro mais alto do grupo 0 fica 32×64. Slots de pixel: Ken 1245763 → 402707; Ryu 3428516 → 1086817. Onze FX do Ryu seguem acima de 8 colunas (teto `g8400` 112×24, 14 colunas) e não estão nos papéis do piloto. Retratos do grupo 9000 continuam 120×140. Durações preservadas.
+
+O corte usa os mesmos 12 papéis e o mesmo pareamento histórico: P1 `ryu.zip`, P2 `Ken_Majik_.zip`. Os diretórios continuam `p1_ken` e `p2_ryu`. A ação 440 não é papel de runtime. Contagem de quadros e durações AIR iguais às da ROM anterior: 48 poses no Ryu e 45 no Ken. Na escala 40/49 havia 9 quadros acima de 8 colunas em cada um (teto 12 no Ryu, 13 no Ken). Neste corte o Ryu chega a 6 e o Ken a 8, no KO 64×32. Banks: 49 → 24. Imagem `versus_scene_banks_02.bin`: 802816 B (`3af7a307…`) → 393216 B (`468427efd8850a6323c7e4b99e216dea565e7e28e8f5fe23a6167edffe9bcba6`).
+
+| ROM | Bytes | SHA-256 | Banks |
+|---|---:|---|---:|
+| `out/rom/luta_mugem_rev2.sms` (2026-10-20, intacta) | 851968 | `087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65` | 49 |
+| `out/rom/pose_budget_20261023.sms` | 458752 | `9008505cb82232e42d1b57d3ecb852af70f566625995cfd3cb5b526b277b1eba` | 24 |
+
+Header anterior `19edb320…`. Header novo `3be5a775c1b0779af60a894f7a0f6970a4f3d85e248314b74b4b40c9a1678955`. Comparação: `out/logs/pose_budget_20261023_compare.json`. O `src/main.c` e o `.mddev/project.json` vivos não foram editados; o link dos 24 banks foi feito numa cópia temporária. Testes `test_display_fit.py`, `test_sms_scale.py`, `test_scene_cut_scale_order.py` e `test_cli_sms.py`: 32 passed. O Emulicious abriu a ROM nova e a captura da janela saiu preta, então o status é `buildado`. Sem boot aceito, sem FPS, sem áudio e sem entrega visual.
+
+Pacote de espera do curador, sem ID novo: `doc/curation/2026-10-23_pose_budget_aguardando_curador.md` e o JSON de mesmo nome, na raiz do SMSForge. Doze pontos PB-01–PB-12. Não entra no ledger nem em `SMS_GLOBAL.md`. O curador precisa reler `L083`, `L086`, `L088`, `L090` e `L091` antes de emitir lição. `issued_through` lido nesta data: `L138`.
+
+O dono aprovou `pose_budget` como padrão do motor no mesmo dia. O diagnóstico de glitch ficou em `doc/28-pose-budget-8.md`. A paleta de 7 cores deixava o preto opaco de fora (8ª cor nos dois; 34/39 quadros de papel do Ken e 13/40 do Ryu perdiam contraste). `scene_cut._palette_codebook` reserva a cor mais escura e a mais clara. `_write_png` grava transparência no índice 0. Buracos novos da amostragem (26 pixels no Ken, 44 no Ryu) não foram preenchidos.
+
+ROM da paleta reservada: `out/rom/palette_reserve_20261023.sms`, 458752 bytes, SHA-256 `f9ef0e27eef5e29d530b0fa4e5c8325bd8df84a1ab6e7d93e77873f40a2b76cb`, 24 banks, corte `out/generated/palette_reserve_20261023/`. Paleta na ROM: branco `3F` e preto opaco no slot visível de cada lado. A piloto `9008505c…` e a produção `087df676…` ficam nos caminhos antigos. `src/main.c` e `.mddev/project.json` vivos seguem em `ryu_ken_cross`. Log: `out/logs/palette_reserve_20261023_build.txt`. Comparação: `out/logs/palette_reserve_20261023_compare.json`. Status `buildado`. Sem captura de emulador, sem FPS e sem entrega visual. Sem ID de lição.
+
+O dono reportou que essa paleta perdeu acuidade e ficou mais escura. Medição nas paletas `ken1` e `ryu02`: média 110,2 no Ken e 137,5 no Ryu, contra 115,9 e 142,3 nas sete cores frequentes. O creme do Ken (4840 pixels) ia para o rosa. `scene_cut._palette_codebook` agora só cede um slot abaixo de luma 100, que não seja a cor mais usada, se o erro quadrático não sobe e a média de todos os pixels opacos não cai mais de 1. O empate de distância usa o brilho mais próximo. Nestes lutadores o livro é o da frequência. O preto opaco fica de fora.
+
+ROM da paleta de brilho: `out/rom/palette_luma_20261023.sms`, 458752 bytes, SHA-256 `6fb424a3ddf32002d5de9c27685c1387fa89d4205365b344ba64fe8c866cd873`, 24 banks, corte `out/generated/palette_luma_20261023/`. Paleta no offset 12311: `00 1A 1B 16 2A 05 2B 02 00 02 07 2B 0B 1B 2F 16`. Header do corte igual ao do piloto (`3be5a775…`). Banks `ec22ad12…`. As três ROMs anteriores permanecem. Fontes vivas continuam em `ryu_ken_cross`. Log: `out/logs/palette_luma_20261023_build.txt`. Comparação: `out/logs/palette_luma_20261023_compare.json`. O arquivo de luma em si não foi aberto. O parágrafo seguinte registra a captura de outro caminho com os mesmos bytes.
+
+## 2026-10-23 — orçamento do par em sprite puro
+
+A unidade do `pose_budget` deixou de ser a porta de cerca de 70% e a pose mais larga em 64 px. Essa porta fica como história do piloto da manhã, em `doc/28-pose-budget-8.md`. A condição vigente: pose neutra de cada lado em no máximo 4 colunas de SAT; golpe largo contra neutra em 5 e 3; o resto em `case_by_case`, sem reautoria e sem encolher o idle. `POSE_NEAR` 0,69 não abre nem fecha escala. Célula 8×16 transparente não conta. FX explícito acima de 3 colunas sai do corte. Grupo 9000 continua fora. `framebuffer`, `fighter_scale` e `legacy_quarter` continuam opções. `SMS_GLOBAL.md` não foi editado. Sem ID de lição.
+
+Antes da troca, o piloto `9008505c…` mostrou os dois idles no framebuffer 256×192: `out/evidence/pose_budget_20261023_idle_256x192.png`, 1667 bytes, SHA-256 `64f5b9451439b5c37e4644f9f067bd9f2c6c80e23a1564e3b19ebff0f7e98800`. Os sprites saem. O runtime não mudou. As listras do Ken continuam. Essa captura não promove o piloto a entrega.
+
+Fração aplicada no par: framebuffer `x=2/3` `y=6/7`, extra `2/3`, porta `idle_to_4`. O idle de boot fica 32×56, 4 colunas, 16 células. A maior célula neutra fica 32×64. `within_8_ratio` só no relatório: Ryu 0,8052, Ken 0,77. O motivo com `size_policy = pose_budget` e arte `pre_scaled` nomeia a fração; o corte não grava `downscale1:4`. `ratio.numerator/denominator` é a extra, não 40/49.
+
+Papéis incluídos, pico de SAT 4: os seis neutros dos dois, mais special 1000 e ko 170 do Ryu. Caso a caso nos doze papéis: Ken punch 250 (6), hp 450 (7), kick 200 (6), hk 220 (6), special 1000 (6), ko 5080 (8, 64×32); Ryu punch 260 (5), hp 280 (6), kick 200 (6), hk 240 (6). Listas completas: Ryu 77 incluídas e 77 caso a caso; Ken 59 e 41. Os golpes largos permanecem na ROM porque o runtime exige o papel. Chave `p1_ken` é o corte do Ryu; `p2_ryu` é o do Ken.
+
+FX fora do corte: Ryu 92 sprites (1150, 1160, 1250, 1260, 3050, 8010, 8020, 8030, 8050, 8060, 8210, 8220, 8230, 8300, 8310, 8330, 8400). `g8400` imagem 3: 112×24, SAT 12, padded 14. Ken: 4 sprites, grupos 1001 e 1002, SAT 4. Não foram para o plano de fundo.
+
+Eixo no primeiro quadro de idle e de soco. Padding duplo acima de 1 px em relação à sola: não ocorreu. Ken idle e Ken punch ficam em delta 0. Ryu punch move 1 px por causa do pad. Ryu idle muda 2 px (fonte +1, resultado −1) e o corte do pad repete −1: a causa é a amostragem, não o pad. Sampler, eixo e hurtbox não foram alterados. A hurt do Ryu idle passa de 0 para 2 px além da sola porque a linha de baixo não foi amostrada.
+
+Simulador, self-check antes da leitura, zero violações nos incluídos: idle/idle pico 8 (32 sprites); Ken idle + Ryu special pico 8 (30); Ryu special + Ryu ko pico 8 (30). Casos, sem reprovar o lote: Ken idle + Ken punch pico 10; Ken ko + Ryu idle pico 12. Log: `out/logs/pose_budget_pair_20261023/line_summary.json`.
+
+| ROM | Bytes | SHA-256 |
+|---|---:|---|
+| `out/rom/luta_mugem_rev2.sms` | 851968 | `087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65` |
+| `out/rom/pose_budget_20261023.sms` | 458752 | `9008505cb82232e42d1b57d3ecb852af70f566625995cfd3cb5b526b277b1eba` |
+| `out/rom/pose_budget_pair_20261023.sms` | 458752 | `6fb424a3ddf32002d5de9c27685c1387fa89d4205365b344ba64fe8c866cd873` |
+
+A terceira é byte a byte igual a `palette_luma_20261023.sms`. Esse arquivo de luma não foi sobrescrito e não foi o caminho da captura. A reservada `f9ef0e27…` permanece. Fontes vivas continuam em `ryu_ken_cross`. Corte: `out/generated/pose_budget_pair_20261023/`, 24 banks, imagem `ec22ad12…`.
+
+Framebuffer desta ROM: `out/evidence/pose_budget_pair_20261023_idle_256x192.png`, 1658 bytes, SHA-256 `50beed8b55d73ff60f90384f52d60008e12e9d58070f8683f96209430e7a992a`, sessão `387f8561097d44c4847e1f263523a81f` encerrada. Os dois idles aparecem. Status desse framebuffer: `testado_em_emulador`. `measure_worst_frame.py` na sonda `0xC800` devolveu `sem_lastro` (frame 2035, `done` 0). `validado_budget` proibido. Menos banks não é FPS. Sem 60 fps, áudio, gameplay ou entrega visual. Testes do motor no fechamento: 47 passed.
+
+## 2026-10-23 — parecer da captura do par
+
+Revisão independente das duas capturas 256×192 e do log de linha. Motor, ROM, `src/main.c`, `.mddev/project.json` e `SMS_GLOBAL.md` não foram alterados. Sem ID de lição. O bloco «Resultado medido» de `doc/28-pose-budget-8.md` descreve o piloto da manhã `9008505c…`. A condição viva é o parágrafo do par, no topo desse arquivo e no GDD.
+
+As duas capturas têm a mesma ocupação opaca. O diff é de 14 pixels, todos no Ken, de `(170,0,0)` para `(170,85,85)`. A paleta de brilho não desfez o desenho.
+
+| Lado | Ocupação | Leitura |
+|---|---|---|
+| Ryu, esquerda | x 70–99 (30 px), y 108–160 | Idle coerente: gi branco, faixa e luvas vermelhas, calça azul, contorno escuro |
+| Ken, direita | x 118–121 (4 px), vão, x 126–141 (16 px), vão, x 146–149 (4 px) | O vão total é 32 px, 4 colunas. O corpo não fecha. Gi, cabelo e silhueta não se leem |
+
+Veredito: há tinta dos dois lados. A imagem não melhorou. Status do framebuffer: `testado_em_emulador`. Entrega visual, não. A ROM do par é byte a byte `palette_luma_20261023.sms` (`6fb424a3…`). A produção `087df676…` permanece. O runtime não mudou; a causa das listras (stream no meio do upload, ou tile/ordem do P2) fica aberta até um quadro em que as duas poses já estejam residentes.
+
+O simulador em `out/logs/pose_budget_pair_20261023/line_summary.json` não mede a luta. Self-check passou antes da leitura.
+
+| Par | Incluído | Pico | Violações |
+|---|---|---:|---:|
+| idle / idle | sim | 8 | 0 |
+| Ken idle + Ryu special | sim | 8 | 0 |
+| Ryu special + Ryu ko | sim | 8 | 0 |
+| Ken idle + Ken punch | não | 10 | 5 |
+| Ken ko + Ryu idle | não | 12 | 5 |
+
+Os três zeros são dois parados, um especial que já cabe em 4 colunas, e o Ryu contra ele mesmo. O soco do Ken (pico 10) e o KO do Ken contra o idle do Ryu (pico 12) estão na ROM. `included_pair: false` não tira o papel do binário. A regra 5+3 está escrita e não foi o par que passou.
+
+Papéis que o runtime ainda exige acima de 4 colunas: Ken punch 250 (6), hp 450 (7), kick 200 (6), hk 220 (6), special 1000 (6), ko 5080 (8); Ryu punch 260 (5), hp 280 (6), kick 200 (6), hk 240 (6). Contra um idle de 4 colunas na mesma linha o pico é 9, 10, 11 ou 12.
+
+Pontos abertos, registrados para o próximo lote. Não são implementação deste parecer.
+
+1. Um framebuffer com as duas poses já residentes. É o que separa stream incompleto de defeito de tile ou ordem do P2.
+2. Medir cada composição que a ROM pode mostrar: os seis golpes largos do Ken contra o idle do Ryu, e os quatro normais largos do Ryu contra o idle do Ken. Pico acima de 8 reprova a composição.
+3. A regra 5+3 precisa ser célula emitida. O idle ficou em 4 e o golpe largo ficou em 5–8 no mesmo binário.
+4. A hurtbox do idle do Ryu passa 2 px da sola porque a linha de baixo não foi amostrada. Sampler, eixo e hurtbox não foram alterados.
+5. `measure_worst_frame.py` na sonda `0xC800` devolveu `sem_lastro` (frame 2035, `done` 0). `validado_budget` continua fechado. 24 banks medem tamanho, não velocidade.
+
+Não promover a lei da fábrica, não emitir ID de lição e não substituir `087df676…`. O mesmo parecer está em `doc/curation/2026-10-23_pose_budget_aguardando_curador.md`: PB-13 captura, PB-14 simulador, PB-15 golpe largo, PB-16 hurtbox, PB-17 VBlank, PB-18 sem promoção.
+
+## 2026-10-23 — fecho do par residente, composição legal e sola
+
+O parecer PB-13–PB-18 foi fechado com ROM de prova nova: `out/rom/pose_budget_settled_20261023.sms`, 458752 bytes, 24 banks, SHA-256 `698e58ed5a0e9256cf2497783b5b0a4343464c15138ce5783c5b9fd98879b13a`. A produção `087df676…`, a piloto `9008505c…`, a reservada `f9ef0e27…` e o par `6fb424a3…` permanecem intactos. O gate foi compilado em cópia temporária; diff em `out/logs/pose_budget_settled_20261023/composition_gate/main_c_composition_gate.patch`, header `versus_composition_gate.h` com SHA-256 `1da1e952…`. `src/main.c` e `.mddev/project.json` vivos continuam em `ryu_ken_cross`; sem commit e sem push.
+
+O binário `6fb424a3…` usa `LUTA_PROFILE 1` (pose residente). No frame 500 as duas poses pedidas estão residentes (`desired/resident/submit/present` 5/5/5/5 no P1 e 49/49/49/49 no P2), `_SpriteNextFree=32`, **16 células P1 + 16 P2**, x 69–100 e x 142–173. O Ken fecha o corpo; a listra anterior era pose não residente. PNG: `out/evidence/sessions/a40818afa1a5468da0ccbcf4735fede7/resident_gate_frame500.png`, SHA-256 `7281231d…`, frame 500. Status `testado_em_emulador`.
+
+O gate deriva do META emitido e recusa em `set_role()` todo papel cujo anim passe de 4 células 8×16 por linha: 25 de 93 poses; P1 anims 6–9 e P2 anims 6–11. A prova emulada no frame 500 registrou `dropped_from_composition=2`, `block_p1=1` (role 7, 6 células), `block_p2=1` (role 7, 7 células), sem omitir coluna e sem encolher o idle. Os dez pares golpe×idle medidos dão pico 9–12 e cinco violações cada; idle/idle fica em pico 8, 32 sprites. `dropped_from_composition`: P1 punch/hp/kick/hk e P2 punch/hp/kick/hk/special/ko, com pico e frame em `out/logs/pose_budget_settled_20261023/composition_gate/dropped_from_composition.json`. Ryu special 1000 e Ryu ko 170 seguem legais (máx. 4 células/linha).
+
+A medida da sola foi corrigida: o `AXIS` gerado já inclui `frame.y`. Com `AXIS_y + linha da sola`, Ryu idle F0 fica `-53+53=0`, hurt bottom 1, delta **+1**, não 2. Ryu punch F0 delta −3; Ken idle F0 delta −1; Ken punch F0 delta −2. Os quatro amostradores (`current`, `ceil`, `full`, `src_len`) não movem a sola do Ryu no pipeline real; `full` move o Ken em 1 px e não fecha o Ryu. Sampler, eixo e hurtbox ficam inalterados; a premissa de 2 px era erro de medida.
+
+Pior quadro na ROM final com gate: `derramou`, `vline_min=4`, `vovf_delta=1740`, `snapshot done=1`, frame 4079. Na pré-gate `c45dbd4a…`: `derramou`, `vline_min=2`, `vovf_delta=1770`, frame 3946. O 144 do resumo anterior era `vline` do snapshot, não `vline_min`. `validado_budget` continua proibido; o gate não comprou orçamento. Detalhe técnico em `doc/28-pose-budget-8.md`, seção «Fechamento». Sem ID de lição, sem terceira paleta, sem entrega visual, sem áudio/FPS/gameplay.
+
+Registro para curadoria futura: `doc/curation/2026-10-23_pose_budget_fechamento_pb13_pb18.md` e o JSON de mesmo nome. O pacote fecha PB-13–PB-18 como medição, lista os sete aprendizados candidatos C1–C7 sem emitir ID, implementa e testa as quatro ferramentas de medição (self-check + 8 testes) e separa o que é regra de projeto do que precisa de aprovação humana para virar lei da fábrica. `SMS_GLOBAL.md`, ledger, `lesson_routes.json` e `id_registry.json` continuam intocados em `L138`.

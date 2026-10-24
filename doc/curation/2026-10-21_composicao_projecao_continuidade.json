@@ -1,0 +1,119 @@
+{
+  "curation_id": "composicao_projecao_continuidade_20261021",
+  "date": "2026-10-21",
+  "kind": "application_of_existing_lessons",
+  "authorization": "Pedido explícito do dono: atuar como curador, curar o projeto e depois commit, PR e push; retirada HAMOOPIG previamente autorizada.",
+  "scope": "Skills/workflows, projeção de evidência, selftest e memória centrais; motores dos jogos e evidência primária preservados. HAMOOPIG removido do índice, com cópia original intacta.",
+  "new_lesson_ids": [],
+  "lessons": [],
+  "applied_lessons": [
+    "L013",
+    "L036",
+    "L091",
+    "L097",
+    "L125",
+    "L133",
+    "L137",
+    "L138"
+  ],
+  "rule_section": "SMS_GLOBAL §§128–130; adendo de aplicação em 21/10, sem renumerar seções ou emitir IDs.",
+  "inputs": [
+    {
+      "path": "doc/curation/2026-10-19_l137_silhouette_composicao.json",
+      "sha256": "375d813fd42832434520d978fc62d8a09acb5a1c2ab064bdab1efbb84efc3cdc",
+      "bytes": 5099
+    },
+    {
+      "path": "doc/curation/2026-10-19_l138_projecao_rom_sha.json",
+      "sha256": "d5876ddf763d28de7c92ff452c69452741022b7e26ed6f039cb38a1d73f800d2",
+      "bytes": 7256
+    },
+    {
+      "path": "SMS_projects/openbor_sms_rev1/doc/10-memory-bank.md",
+      "sha256": "ce7ef7591c727b756b05c92790fcb6d7441b9e9310ce33c16d1c653d1f1177c5",
+      "bytes": 58415
+    },
+    {
+      "path": "doc/continuity/20261021-reconciliation.md",
+      "sha256": "6561b52a1420f8297df99edebfd9cedebdc4776e7517e0e2554b0280888633af",
+      "bytes": 7032
+    },
+    {
+      "path": "SMS_projects/luta_mugem_rev2/doc/continuity/VALIDATION_RESULTS.md",
+      "sha256": "b66250d5d2ad4c8ac01d5f1a36a9033d2e4ce5df2922c80e5a4bae44749dac10",
+      "bytes": 3458
+    }
+  ],
+  "changes": [
+    "L137 aplicada às rotas usadas pelo agente: composição dos dois atores e ambos os sentidos; pisos O3 não viram lei SMS.",
+    "Contato lógico e visível separados; controle livre e pose final apresentada são terminais distintos. QA limitada não promove apresentação.",
+    "axis_projection revalida consumidor, vínculo consumo/bundle, métricas e WAV selados, QA/pedido/contexto/ROM/sessão/cleanup e cobertura; workers/sessões distintos; IDs reais da cobertura.",
+    "Criação exclusiva dos três outputs, pré-checagem de aliases e rollback de arquivos próprios em falha parcial; fontes não são sobrescritas.",
+    "selftest inclui os self-checks de projeção e silhueta; projeção possui casos positivos/negativos offline, sem alegação de executar ROM.",
+    "Clone/build/recursos bancados/+x e permissões de snapshots entram na rota de continuidade.",
+    "Retirada já autorizada de 108 arquivos HAMOOPIG reincluídos no snapshot; histórico e cópia original preservados."
+  ],
+  "applied_entrypoints": [
+    "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md",
+    "tools/sms_wrapper/.agent/skills/sms-observed-case-evidence.md",
+    "tools/sms_wrapper/.agent/workflows/subagent-emulator-qa.md",
+    "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
+    "tools/sms_wrapper/.agent/workflows/release-rom.md",
+    "tools/sms_wrapper/.agent/workflows/async-promotion-loop.md"
+  ],
+  "measuring_tools": [
+    "axis_projection.py",
+    "audit_silhouette_integrity.py",
+    "audit_subagent_session.py",
+    "reconcile_claims.py",
+    "selftest.py",
+    "openbor2sms/openbor2sms/evidence_consumer.py"
+  ],
+  "calibration": {
+    "initial": {
+      "path": "doc/curation/evidence/2026-10-21_composicao_projecao/calibration.json",
+      "sha256": "632a6340416c1b98f2573e50852969628e2badcbeeffde23812936b8f7c640d1",
+      "bytes": 640
+    },
+    "restored": {
+      "path": "doc/curation/evidence/2026-10-21_composicao_projecao/calibration-restored.json",
+      "sha256": "492c8eb55b6d778259e36f7faf08198263137fc7f61c6cf03f00619f2851b77b",
+      "bytes": 4543
+    },
+    "interpretation": "Originais 0777 recusados pela imutabilidade; cópias copy2 em filesystem POSIX tornadas read-only e revalidadas integralmente: M8 e cap5 aceitos. Fontes M8 no cap5 recusadas antes de escrita. Nenhuma evidência canônica do jogo substituída."
+  },
+  "validation_status": "passed_in_publication_worktree_legacy_workspace_issues_preserved",
+  "validation_evidence_directory": "doc/curation/evidence/2026-10-21_composicao_projecao/validation",
+  "runtime_or_art_promoted": false,
+  "limits": [
+    "Sem execução nova de emulador/hardware; calibração histórica não mede novamente FPS, áudio ou gameplay.",
+    "Permissões originais 0777 continuam problema de custódia no acervo original; cópias diagnósticas não substituem origem ou atestam instalação em novo host.",
+    "Validação de QA mede vínculos/cobertura, não autentica o recibo nativo nem julga apresentação.",
+    "OpenBOR contato/orientação, PAL e oráculo full-frame continuam abertos; nenhuma decisão estética/corte de MUGEN promovida.",
+    "Worktree de publicação separada do workspace com 25 documentos legados ausentes; nenhuma exclusão desses documentos staged."
+  ],
+  "dedup_key": "composicao_projecao_continuidade_20261021",
+  "validation": {
+    "selftest": "124/124; optional game build probe not run",
+    "measurement_tools": "73/73",
+    "doc_sync_publication_worktree": "pass",
+    "doc_sync_original_workspace": "fail: 10 preexisting luta_mugen issues, 25 deletions excluded",
+    "learning_capture": "pass",
+    "calibration": "M8/cap5 historical restored copies pass; originals 0777 refused; stale ROM refused",
+    "fresh_emulator_execution": false,
+    "results": "doc/curation/evidence/2026-10-21_composicao_projecao/validation/results.json",
+    "summary": "doc/curation/evidence/2026-10-21_composicao_projecao/summary.md"
+  },
+  "tool_snapshots": [
+    {
+      "path": "tools/sms_wrapper/openbor2sms/openbor2sms/axis_projection.py",
+      "sha256": "4872d6018f42a5affd342aa84b332d26a5c592517e0aa192d9aee23a4df12665",
+      "bytes": 22550
+    },
+    {
+      "path": "tools/sms_wrapper/selftest.py",
+      "sha256": "1842f1b318446fcd49e358ff92e786c205536557a302e5c938ea02b7c9e05f64",
+      "bytes": 23052
+    }
+  ]
+}

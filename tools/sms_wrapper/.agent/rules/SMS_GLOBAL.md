@@ -2670,3 +2670,30 @@ projeção é `assigned_checks_only` e nunca promove delivery. O build record do
 cap5 mantém `build`/`validation_report` verdadeiros e os demais eixos falsos até
 nova medição. O binding `doc/rom_asset_binding.json` prova source→res→símbolo→ROM
 por identidade, não por render independente.
+
+### Aplicação de L137/L138 revista em 21/10/2026
+
+O perfil de células críticas de §129 é O3; não é piso universal para MUGEN ou
+qualquer anatomia. QA observa ambos os atores e o sentido do contato. Controle
+liberado e pose final apresentada são terminais distintos (§128). Dano em RAM
+com golpe no lado oposto reprova apresentação, mesmo com runtime regular.
+
+A projeção de §130 agora revalida bundle/consumo, métricas e WAV selados e
+os relatórios QA contra pedidos, ROM atual, cobertura e sessões fechadas;
+recusa destinos existentes, inclusive aliases. `selftest.py` inclui
+`axis_projection.py` e `audit_silhouette_integrity.py`. Esse reforço aplica
+as lições existentes, sem criar outro ID ou promover jogo. A pendência do
+cap5 descrita acima era o estado em 19/10; a nova coleta e projeção de 20/10
+constam no memory bank do OpenBOR. Apresentação, PAL e oráculo seguem abertos.
+
+### Aplicação de ambiente/custódia na migração de 24/10/2026 (L002/L125/L138)
+
+A instalação central usa `bootstrap_host.sh`/`host_bootstrap.py`, hashes dos
+assets e wheels, venv local e compile/link/header executados; o driver pode
+depender de outro executável fora de bin (caso cc1). `host_env.sh` seleciona
+compilador e libs do mesmo ABI. Nenhum desses passos prova boot ou jogo.
+O restaurador `restore_handoff.py` confere archive, conjunto de arquivos e
+hashes em destino novo; somente dados gerados podem ser ativados por opção.
+Sessões, mídias e eixos continuam históricos; a QA em host novo é recolhida.
+Cache próprio pode ser limpo sob lock, nunca fontes/evidência/SRAM alheia.
+Receita de distro não exercitada permanece receita, sem claim de paridade.

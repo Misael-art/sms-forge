@@ -1,0 +1,206 @@
+{
+  "schema": "sms_host_handoff_validation_v1",
+  "fresh_emulator_execution": false,
+  "game_promotion": false,
+  "publication_worktree": "/home/misael/.local/share/smsforge/handoff-20261024",
+  "results": {
+    "selftest": "134/134",
+    "measurement_tools": "75/75",
+    "focused_mugen": "63 passed, 1 skipped (historical display_fit fixture not active)",
+    "restored_pose_budget": "16 passed, no skips",
+    "doc_sync_publication": true,
+    "doc_sync_original": false,
+    "learning_capture": true,
+    "build_install_and_repeat": true,
+    "openbor_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+    "mugen_rebuild_sha256": "6de8c451fa39ff49670d242f8a3f3946bf67fea1830566fa4fe901517493b983",
+    "qa_full_ready": false,
+    "qa_blockers": [
+      "container namespaces unavailable",
+      "PulseAudio server absent"
+    ],
+    "private_xvfb_started_and_closed": true,
+    "bridge_compiles": true,
+    "blastem_pin_verified": true,
+    "restoration_hashes": true,
+    "cache_cleanup_preserves_venv": true,
+    "temporary_container_and_image_removed": true
+  },
+  "artifacts": [
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-build-doctor-r2.json",
+      "sha256": "429f7ef88c94e0bd9b0081223ed4de56a91812c34191c2f3ae5d5c9f2a5c0644",
+      "bytes": 978
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-build-doctor.json",
+      "sha256": "1da704b9e00d0f00a99fcd0858ab03de6fbae2e91fa90a431e5a06a1ccd5b360",
+      "bytes": 907
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-idempotent-r2.log",
+      "sha256": "938484c8d53956364b4718c70a014e0df22f6022c98e5cf7b58a81184bba61b4",
+      "bytes": 459
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-idempotent-r3.log",
+      "sha256": "0ec87278cf50c875b4a681607bcb983c3f7d3f03be0e08300b86525356731a5d",
+      "bytes": 2927
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-idempotent.log",
+      "sha256": "75d8e2866d011fc23b865eb3162cca1487b8144372a8c8d711d5833dee28f887",
+      "bytes": 948
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-install-r2.log",
+      "sha256": "6ea5ede99a203fd0cacbff91cdd15d19c1c9110fa073a5487457dfa1a29a09ed",
+      "bytes": 173427
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-install-r3.log",
+      "sha256": "dba8003dff0e3b39c37cd583b42db5fef6ef24acb640dadc313db6eb38b59bd2",
+      "bytes": 185797
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-install.log",
+      "sha256": "6ed9a59a43e7336279d3cc421d1ffb5ca1b89f05096f546cdf88273086875a17",
+      "bytes": 173916
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-mugen-build-r3.log",
+      "sha256": "62b405f55e7fb080617201004ce7f9b09102bed7f68c65975e5039786cf7b529",
+      "bytes": 298
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-mugen-build.log",
+      "sha256": "62b405f55e7fb080617201004ce7f9b09102bed7f68c65975e5039786cf7b529",
+      "bytes": 298
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-openbor-build-r2.log",
+      "sha256": "98ebb26561b7a40a513d6500b7b0facd71528cf851ca76e3a01dfc075a75fd76",
+      "bytes": 179
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-openbor-build-r3.log",
+      "sha256": "98ebb26561b7a40a513d6500b7b0facd71528cf851ca76e3a01dfc075a75fd76",
+      "bytes": 179
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-openbor-build.log",
+      "sha256": "80607f0fe5df158f5b581d872b28e6d8e2b5a37d118d7a95758ac7360c3a4227",
+      "bytes": 112
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-report-r2.json",
+      "sha256": "a81942b74d7922a693721648bab94fea48efbc043bc4cbba24570ce39f33c972",
+      "bytes": 379
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-report-r3.json",
+      "sha256": "68ded42c54cd627432ed7ba5a2c8694bfd51cd6db1a4a149f986c0fbaf2e33e6",
+      "bytes": 3726
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-report.json",
+      "sha256": "15efd36f0dce70c1753b3fd7d6048555b02c44daed677cc3cdd75f3916f5cda3",
+      "bytes": 868
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-restore-r3.json",
+      "sha256": "a89d1aed8c43665c933c96241303df300c7d78b092a0cf52c4c0601d2199a960",
+      "bytes": 339
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-restore.json",
+      "sha256": "27398b5481229c427eecc5a05a89548f56eff222f6cd7f155ccdfe5ac05ea14c",
+      "bytes": 89
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-summary-r2.log",
+      "sha256": "cebf70a72f524aecb1b2aa197d2871f12868776a5c8065d6f27cdb4f8b3b44a2",
+      "bytes": 524
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-summary-r3.log",
+      "sha256": "3caae66ac26b448c3facb6463771199d1ca54892de96cd81703c40fc574d3c93",
+      "bytes": 504
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/clean-host-summary.log",
+      "sha256": "6e23dd2394de29bf384ce08d68353304b3616ba81b97171d9788f7f45ff77b89",
+      "bytes": 242
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/doc-sync.log",
+      "sha256": "6867943f29076df5b887dd0df23bd041ce83a8c9eef59b6748019c36309e49a4",
+      "bytes": 51
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/final-code-build-doctor.json",
+      "sha256": "a56fbe6766f735a671d5d9d64d9135924d4a4d7bb1e4ea24cba876d0d5496952",
+      "bytes": 978
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/final-code-full-report.json",
+      "sha256": "9e07f3fa8547b5f4cd462596bffef5fcefaff0454b639793847df91a0627fd92",
+      "bytes": 3819
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/final-code-install-build.log",
+      "sha256": "0de5d94236544e13c26e979acb074822d0f5711aacfffe993f56e8a292cb5c67",
+      "bytes": 2927
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/final-code-install-full.log",
+      "sha256": "6865010ff064c88e129525a694a0da372db1bcc17686da723ab3850039afa598",
+      "bytes": 3899
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/final-code-restored.json",
+      "sha256": "68804967d55b5d7608b14e0be08d2c674576a3138c18928bff9b62e9c81c84d7",
+      "bytes": 356
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/final-code-summary.log",
+      "sha256": "9f88cce95319a69a0a609c27b2cc803d404db1a44741a38dcca2bd9cf95ca443",
+      "bytes": 621
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/focused-mugen.log",
+      "sha256": "06972f9a747b1b3a7ed29ec342d090f9a60a015747ac68646e953b1d2438d84b",
+      "bytes": 110
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/learning.log",
+      "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3",
+      "bytes": 74
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/measurement.log",
+      "sha256": "7a9f2dbce024c61e0affb73d51d8f0c14a2fad448b3d8e52e7931226f44ce4ae",
+      "bytes": 59
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/original-workspace-doc-sync.log",
+      "sha256": "06228cc4423691bb450b3a3805788657031f38f81634f1b4bdfcbff87c7e955f",
+      "bytes": 895
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/pose-budget-restored-fixture.log",
+      "sha256": "0f38b705536b7f450c850253af3850d74369e157484dc645385b3da5c3d00d57",
+      "bytes": 99
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/restored-sanitized.json",
+      "sha256": "b5853a98c9debc59741e5a679ddd3abbd1fe4f18939e45a14d357d145a5b2fd9",
+      "bytes": 399
+    },
+    {
+      "path": "doc/curation/evidence/2026-10-24_host-bootstrap/validation/selftest.log",
+      "sha256": "85ac9994bdd1fd8548f94cea298bb31605e37fde73f1ab731f27f419886e7973",
+      "bytes": 13991
+    }
+  ]
+}

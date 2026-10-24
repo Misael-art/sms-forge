@@ -193,6 +193,37 @@ roteiro → storyboard (planta baixa em pixel) → coreografia → MEDIÇÃO →
 | Piloto de escala MUGEN | `mugen2sms/analysis/scale_pilot.py` | idle fora de 72–88 px, pivô espelhado fora da grade/metasprite divergente da máscara, índice/pool/meta de paleta P2 incompatível, current+next acima de VRAM ou stream maior que duração AIR; plano de slots idle não periódico entre voltas (L090); requer `--self-check` e vídeo fresco antes de promover escala |
 | Glitch de render | `audit_render_glitch.py` | quadro do framebuffer fora das imagens legais: sprite perdido, tile residual, par trocado, omissão permanente no modo flicker, captura stale (L091, §76) |
 
+## FERRAMENTAS EM CURADORIA (NÃO PROMOVIDAS)
+
+Esta seção existe para **visibilidade**, não para promover ferramentas. As
+ferramentas abaixo estão implementadas e com `--self-check`, mas **não entram
+na tabela de gates** e nenhum claim pode citá-las como lei da fábrica até
+homologação humana explícita.
+
+| Ferramenta | O que mede hoje | Estado | Evidência |
+|---|---|---|---|
+| `audit_composition_gate.py` | pico por scanline dos intervalos 8×16 do META selecionado; política por ator, sem aprovar o par | revisada em 2026-10-24; diagnóstico limitado, não promovida | `doc/curation/2026-10-24_mugenesis_rev2.md` e pacote PB-13–PB-18 |
+| `audit_sole_alignment.py` | `AXIS_y + última linha opaca` contra CLSN2, com hashes PNG/frames/header; não julga anatomia | revisada em 2026-10-24; diagnóstico limitado, não promovida | mesmo parecer de 2026-10-24 |
+
+O lote que as exercitou também fez mudanças **aditivas** em gates já
+existentes: `audit_sprite_line_sim.py` ganhou o opt-in
+`--require-distinct-fighters`, e `measure_worst_frame.py` passou a declarar
+`schema=v2` e `sealed_field=vline_min` (marcando `vline` como snapshot). Esses
+dois continuam na tabela de gates; apenas as duas ferramentas novas estão em
+curadoria.
+
+Regras desta seção:
+
+- uso permitido é **diagnóstico com `--self-check` antes da leitura**; o
+  resultado deve ser registrado no pacote de curadoria, com fonte e SHA;
+- o veredito dessas ferramentas **não** substitui gate, validação de orçamento,
+  evidência de emulador ou aprovação humana;
+- para homologar, o curador deve revisar contrato, testes e evidência,
+  decidir se a ferramenta vira gate global ou regra de projeto, e só então
+  movê-la para a tabela de gates e atualizar a memória;
+- enquanto estiver aqui, a ferramenta pode ser aperfeiçoada ou rejeitada;
+  remover a linha também é uma decisão válida de curadoria.
+
 ## MODO DE EXECUÇÃO: DESENVOLVIMENTO CONTÍNUO COM PROMOÇÃO ASSÍNCRONA
 
 Runbook: `tools/sms_wrapper/.agent/workflows/async-promotion-loop.md`.
@@ -239,3 +270,12 @@ Aplica-se aos projetos existentes sem sobrescrever suas `.agent` locais.
 Quando algo dá errado: lição vira JSON canônico em `doc/curation/` +
 seção numerada em `.agent/rules/SMS_GLOBAL.md` + ferramenta que mede.
 **Regra vira medição, nunca só prosa.** Ver workflow `curation-learning.md`.
+
+## HOST NOVO / RETOMADA (24/10/2026)
+
+Comece por `doc/continuity/20261024-new-host.md` e
+`doc/continuity/20261024-agent-handoff.md`. O wrapper de instalação é
+`tools/sms_wrapper/bootstrap_host.sh`; sem `--apply` só diagnostica.
+`host_env.sh` ativa Python/SDCC/libs do checkout, sem alterar perfil pessoal.
+A restauração de `restore_handoff.py` é separada e não ativa evidências.
+A regra de build/QA continua inteira; instalar ferramentas não promove jogo.

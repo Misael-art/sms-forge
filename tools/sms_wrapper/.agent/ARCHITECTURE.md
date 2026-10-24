@@ -86,3 +86,22 @@ Intake/semântica e alcance dos dados: `skills/sms-mugen-source-semantics.md`.
 Input/evidência/vídeo/áudio usam as skills atuais de sessão privada (§93),
 não roteiros históricos de desktop; `audit_learning_capture.py` detecta
 instruções explícitas supersedidas e encerramento global (§101).
+
+## Curadoria aplicada em 21/10/2026
+
+L137 chega às rotas de sprites, QA e checkpoint: dois atores, sentido do
+contato e terminal apresentado. O perfil O3 não vira piso universal SMS.
+L138 chega às rotas de release/produção: bundle revalidado, QA ligada ao
+pedido/ROM e saída exclusiva em `axis_projection.py`; selftest inclui
+projeção e silhueta. Recibo nativo e revisão perceptiva continuam humanos/
+coordenados. Continuidade por clone não promove evidência histórica a runtime.
+Registro: `doc/curation/2026-10-21_composicao_projecao_continuidade.json`.
+
+## Host vazio e continuidade (24/10/2026)
+
+Skill `skills/sms-host-continuity.md`; entrada operacional
+`doc/continuity/20261024-new-host.md`. `bootstrap_host.sh` instala cápsula
+ABI/venv/QA com hashes; `host_env.sh` ativa somente o checkout. Doctor e
+smoke-build não são emulação. `restore_handoff.py` restaura em destino novo
+e ativa só dados gerados por opção, sem herdar eixos ou sessões históricas.
+Diagnóstico e 55 pendências da engine em `20261024-agent-handoff.md`.

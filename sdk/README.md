@@ -1,11 +1,17 @@
 # sdk/ — Toolchain do SMSForge (procedimento oficial)
 
-**Instalação assistida (Linux, rootless):**
+**Host vazio:** siga [o runbook de 24/10](../doc/continuity/20261024-new-host.md).
+
 ```sh
-tools/sms_wrapper/ensure_toolchain.sh
+bash tools/sms_wrapper/bootstrap_host.sh --apply --system-packages --profile full
+source tools/sms_wrapper/host_env.sh
 ```
-Instala SDCC portátil + devkitSMS + makesms e PROVA com smoke-test real
-(compile→link→rom) antes de declarar OK. Idempotente. Windows: manual abaixo.
+
+`ensure_toolchain.sh` agora delega ao perfil build do instalador pinado; não
+instala pacotes do SO implicitamente. SDK e compilador usam a mesma cápsula
+ABI; o smoke-test prova compile/link/header, não execução no emulador.
+Instalações existentes divergentes são preservadas. Receitas manuais abaixo
+são referência; o caminho reproduzível usa o wrapper e seus hashes.
 
 **Autoridade de API = os headers abaixo. Nenhum agente inventa função.**
 
@@ -30,8 +36,8 @@ sdk/devkitSMS/
      - `SMSlib/src/SMSlib.h`, `SMSlib/SMSlib.lib` → `sdk/devkitSMS/SMSlib/`
      - `PSGlib/src/PSGlib.h`, `PSGlib/PSGlib.lib` → `sdk/devkitSMS/PSGlib/`
      - `crt0/crt0_sms.rel` → `sdk/devkitSMS/crt0/`
-3. **Emulador gate**: instalar **Emulicious** e/ou **openMSX** (headless p/ CI)
-   em `tools/emuladores/`. Registrar caminho em `tools/emuladores/emulators.json`.
+3. **Emulador gate**: instalar **Emulicious** (sessões privadas de produção/QA)
+   em `tools/emuladores/`. openMSX não suporta SMS; BlastEm é diagnóstico complementar. Registrar caminho em `tools/emuladores/emulators.json`.
 
 ## Comandos canônicos de compilação (fonte: README do devkitSMS)
 

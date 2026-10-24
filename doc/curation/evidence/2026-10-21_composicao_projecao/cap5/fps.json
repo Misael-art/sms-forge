@@ -1,0 +1,29 @@
+{
+ "schema": "openbor_sms_fps_evidence_projection_v1",
+ "artifact_kind": "axis_evidence_projection",
+ "generated_at": "2026-10-21",
+ "rom_sha256": "701379cc88e074f5874e161cd7e6307b04be48456c1b469172f84a58d79a6da9",
+ "region": "NTSC",
+ "constante_50_60": true,
+ "fps_constante": true,
+ "frame_advance_proved": true,
+ "fps_janelas": [
+  59.39,
+  59.44,
+  59.57
+ ],
+ "fps_spread": 0.17999999999999972,
+ "frames_delta_total": 1441,
+ "windows": 3,
+ "session_id": "43d33c39583040ef99f53e56d228145d",
+ "source": {
+  "path": "out/evidence/o3_cap5_consumer_20261020/artifacts/fps_metrics.json",
+  "sha256": "5f7f838f06c17fb11df0fbae5c1247a2ef85a53bacdb01c4523b2b1959226204",
+  "session_id": "43d33c39583040ef99f53e56d228145d"
+ },
+ "claim_ceiling": "assigned_checks_only",
+ "limits": [
+  "NTSC apenas; PAL nao medido",
+  "projecao do runtime_metrics_v1 do MRP3"
+ ]
+}

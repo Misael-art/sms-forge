@@ -59,3 +59,31 @@
   fixtureXfora dobyte corrigida e falhainicialpreservada. Registry27records/
   1176files/1122legacy,371arquivosrecentesindexadossemaprovação. Doc sync
   continua dez problemasMugen; probe opcional debuildnão rodado.
+
+## 2026-10-21 — aplicação de L137/L138 e custódia
+
+- Sem novo ID: propagados perfil O3, composição bilateral, contato orientado
+  e terminais de controle/apresentação às skills e workflows em uso.
+- Projeção revalida bundle/consumo, métricas/WAV e QA/pedido/sessão/ROM; casos
+  aprovados são derivados da cobertura. Saídas existentes e aliases recusados.
+- Continuidade exige clone/build com recursos e executáveis preservados;
+  snapshot/release não aprova jogo nem restauração em host não exercitado.
+- HAMOOPIG reincluído pelo snapshot volta a ser retirado do índice nesta
+  branch; cópia de trabalho original e lições históricas preservadas.
+- Resultados e limites: `doc/curation/2026-10-21_composicao_projecao_continuidade.json`
+  e `doc/curation/evidence/2026-10-21_composicao_projecao/summary.md`.
+- Fechamento: selftest124/124, ferramentas73/73, learning capture e doc-sync
+  da worktree PASS. No workspace original permanecem dez falhas documentais
+  legadas; exclusões não incorporadas. Sem nova execução de emulador.
+
+## 24/10/2026 — host vazio e continuidade
+
+Autoinstalação e restauração seguem `skills/sms-host-continuity.md`,
+`host_bootstrap.py` e `restore_handoff.py`; arquivo+manifest único em
+`doc/continuity/20261024-mugen-resume.*`. Staging, hashes, saída nova e limpeza
+somente de caches próprios. Estado de ambiente não fecha jogo. Diagnóstico
+MUGEN 55 itens preservado, sem promover ferramentas limitadas nem engine.
+Fechamento:134/134 selftest,75 ferramentas,63+1skip focados e16/16 na fixture
+restaurada. Ubuntu vazio compila OpenBOR701379cc e MUGEN6de8c451; setup build
+e repetição passam. QA completa recusada por namespaces/Pulse no container.
+Xvfb/ponte/pin BlastEm provados no escopo; sem novo emulador ou jogo aprovado.

@@ -1199,6 +1199,36 @@
     "tools/sms_wrapper/reconcile_claims.py"
    ],
    "dedup_key": "l138_projecao_rom_sha_20261019"
+  },
+  {
+   "ts": "2026-10-21",
+   "kind": "curation",
+   "summary": "Aplicação sem IDs novos de L137/L138 e custódia: composição bilateral, contato orientado e terminais; projeção com consumidor e QA revalidados, fontes vinculadas e outputs exclusivos; continuidade por clone e permissões. Calibração M8/cap5 histórica em cópias verificadas, originais 0777 recusados e preservados. HAMOOPIG retirado novamente do índice. Nenhum motor ou claim de entrega promovido.",
+   "sources": [
+    "doc/curation/2026-10-21_composicao_projecao_continuidade.json",
+    "doc/curation/evidence/2026-10-21_composicao_projecao/calibration-restored.json"
+   ],
+   "dedup_key": "composicao_projecao_continuidade_20261021"
+  },
+  {
+   "ts": "2026-10-24",
+   "kind": "curation_application",
+   "summary": "Aplicação das lições existentes: Mugenesis→rev2, 55 pendências, prompt executável; diagnósticos composição/sola corrigidos e mantidos fora de gates globais. Skills e workflow revistos, sem ID novo nem promoção de jogo. Validação detalhada no pacote; EIO legado não é mascarado.",
+   "sources": [
+    "doc/curation/2026-10-24_mugenesis_rev2.json"
+   ],
+   "dedup_key": "mugenesis_rev2_application_20261024"
+  },
+  {
+   "ts": "2026-10-24",
+   "kind": "curation",
+   "summary": "Aplicadas L002/L036/L091/L097/L125/L137/L138 à migração: autoinstalação pinada em host vazio, venv e cápsula ABI, doctor de sandbox/áudio/ponte, smoke-build real e restauração confinada de dados com hashes sem herdar eixos. Diagnóstico PB/Mugenesis e backlog55 preservados; ferramentas limitadas não promovidas; nenhuma técnica/jogo aprovado.",
+   "sources": [
+    "doc/curation/2026-10-24_host_bootstrap_handoff.json",
+    "doc/continuity/20261024-new-host.md",
+    "doc/continuity/20261024-agent-handoff.md"
+   ],
+   "dedup_key": "host_bootstrap_handoff_20261024"
   }
  ]
 }
