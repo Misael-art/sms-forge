@@ -1,0 +1,84 @@
+{
+  "schema": "smsforge.release_recovery_assets/v1",
+  "release": "continuity-20261024",
+  "assets": [
+    {
+      "name": "smsforge-devkitsms-source-20261024.tar.gz",
+      "bytes": 59735,
+      "sha256": "8e32a2e4a98d992e04f9427f89209c9daf3e1d0dc1af7bfac5faa3c1cb6241fc",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/smsforge-devkitsms-source-20261024.tar.gz"
+    },
+    {
+      "name": "smsforge-emulicious-20261024.tar.gz",
+      "bytes": 2816510,
+      "sha256": "0425abd7ccdb4b30bc8540b8a93711f366f48886bd65f7d22cbcc843923e7579",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/smsforge-emulicious-20261024.tar.gz"
+    },
+    {
+      "name": "rtk-x86_64-unknown-linux-musl.tar.gz",
+      "bytes": 6778173,
+      "sha256": "5b919c3bccb799b67a61866d0e617410a4fcdf173e2614440e59de2fa2003436",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/rtk-x86_64-unknown-linux-musl.tar.gz"
+    },
+    {
+      "name": "luta_mugem_rev2-runtime-20261024.tar.gz",
+      "bytes": 24791957,
+      "sha256": "5d1c8e6563a5f6855d4fd1aa3feed029a404c7b5f66f6d6bc3cf34955ab2c162",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/luta_mugem_rev2-runtime-20261024.tar.gz"
+    },
+    {
+      "name": "luta_mugem_rev2-runtime-20261024.json",
+      "bytes": 930930,
+      "sha256": "a0c0b5899b85acc766c3b012d29ad7645e967e614f996971de7b5b945b790260",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/luta_mugem_rev2-runtime-20261024.json"
+    },
+    {
+      "name": "SMSForge-rev2-continuity-20261024.tar.gz",
+      "bytes": 41403688,
+      "sha256": "3e9bded1869f138b69b2629e44a55db3a5c06bbfc370a302cbcf8a1c7d7eb8e2",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/SMSForge-rev2-continuity-20261024.tar.gz"
+    },
+    {
+      "name": "SMSForge-rev2-continuity-20261024.json",
+      "bytes": 1043173,
+      "sha256": "3a732e115f7ba1bb41a84c3f36118aff3f59c3546c4ae1536222371f9dbe545b",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/SMSForge-rev2-continuity-20261024.json"
+    },
+    {
+      "name": "SMSForge-recovery-parts-20261024.json",
+      "bytes": 1278,
+      "sha256": "76d1d95db1b1ed763d784d4c40f586ebad620121a090b8978c3947198d67d569",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/SMSForge-recovery-parts-20261024.json"
+    }
+  ],
+  "cloud_parts": [
+    {
+      "name": "SMSForge-rev2-continuity-20261024.tar.gz.part-001",
+      "bytes": 9437184,
+      "sha256": "f789a8a87021a3ab6043c3914cc697fff8cd5014f6e610029d60fbb602418e76"
+    },
+    {
+      "name": "SMSForge-rev2-continuity-20261024.tar.gz.part-002",
+      "bytes": 9437184,
+      "sha256": "f5fccd8c032683f2824b706fa91ac680571fb98d625244f213f83dcbf46336de"
+    },
+    {
+      "name": "SMSForge-rev2-continuity-20261024.tar.gz.part-003",
+      "bytes": 9437184,
+      "sha256": "3a9f033142202176b6ad7eadbdbe0335291b6c209855e3a46a5617d069f3aede"
+    },
+    {
+      "name": "SMSForge-rev2-continuity-20261024.tar.gz.part-004",
+      "bytes": 9437184,
+      "sha256": "dfa453805cfe7238eb62daf6c8bddee0b7dbafe34a47b961d36c972a7798e062"
+    },
+    {
+      "name": "SMSForge-rev2-continuity-20261024.tar.gz.part-005",
+      "bytes": 3654952,
+      "sha256": "9456b9d1a3d351465945bb68db45e0273ae3dc66cdec34de8ea436f7c128dc50"
+    }
+  ],
+  "cloud_page": "https://chatgpt.com/space/page_d9ac1918a4d4819195db59a18b76d316",
+  "scope": "rev2 and canonical wrapper; not entire disk",
+  "credentials_included": false
+}

@@ -27,6 +27,11 @@ arte, áudio PSG e um framework de agentes que trabalha com evidências do emula
 
 ## O que estamos construindo
 
+**Migrando de computador?** Comece pelo
+[guia de recuperação de 24/10/2026](doc/continuity/20261024-start-here.md).
+Ele reúne bootstrap para Ubuntu/WSL2, assets verificados e o ponto de entrada
+do próximo agente para o motor de luta.
+
 O SMSForge reúne o ambiente de desenvolvimento e os projetos usados para
 evoluí-lo: jogos de luta, ação, experiências musicais e laboratórios de hardware.
 O objetivo é produzir jogos com **visual marcante, som bem trabalhado,

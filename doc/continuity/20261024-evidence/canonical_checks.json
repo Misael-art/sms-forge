@@ -1,0 +1,48 @@
+[
+  {
+    "command": [
+      "python3",
+      "tools/sms_wrapper/audit_doc_sync.py"
+    ],
+    "rc": 1,
+    "seconds": 0.83,
+    "log": "out/migration/continuity-20261024/audit_doc_sync_migration.log",
+    "sha256": "f06e323fc4168e72fe6fa4af0b1576cc71a323c4a43b5781e2ffc5433a5f1e55",
+    "tail": "[FAIL] luta_mugen: 'doc/10-memory-bank.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/10-memory-bank.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/11-gdd.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/11-gdd.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/13-spec-cenas.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/13-spec-cenas.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/00-diretrizes-agente.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/00-diretrizes-agente.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/12-roteiro.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/12-roteiro.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/15-tdd.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/15-tdd.md') (hierarquia de verdade)\n[FAIL] luta_mugen: doc_authority aponta para 'doc/10-memory-bank.md' ausente (ENOENT)\n[FAIL] luta_mugen: doc_authority aponta para 'doc/11-gdd.md' ausente (ENOENT)\n[FAIL] luta_mugen: doc_authority aponta para 'doc/13-spec-cenas.md' ausente (ENOENT)\n[FAIL] luta_mugen: doc_authority aponta para 'doc/15-tdd.md' ausente (ENOENT)\n[FAIL] 10 deriva(s) doc<->repo. Documento que afirma estado falso e overclaim.\n"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/sms_wrapper/audit_learning_capture.py",
+      "--root",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 1.51,
+    "log": "out/migration/continuity-20261024/audit_learning_capture_migration.log",
+    "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3",
+    "tail": "[PASS] captura de licao sincronizada (JSON, furos, ferramentas, doutrina)\n"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/sms_wrapper/validate_measurement_tools.py"
+    ],
+    "rc": 0,
+    "seconds": 113.66,
+    "log": "out/migration/continuity-20261024/validate_measurement_tools_migration.log",
+    "sha256": "7a9f2dbce024c61e0affb73d51d8f0c14a2fad448b3d8e52e7931226f44ce4ae",
+    "tail": "[PASS] 75 ferramentas de medicao com --self-check passando\n"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/sms_wrapper/selftest.py"
+    ],
+    "rc": 0,
+    "seconds": 127.46,
+    "log": "out/migration/continuity-20261024/selftest_migration.log",
+    "sha256": "32775038614d83659757efe81df15f0e748f9f6c73a9dcdf4a2bdd7e7fc0585e",
+    "tail": " indice 0 opaco  ([FAIL] /home/misael/.cache/phasezero/agent-tmp/smsforge_selftest_cpgvwi2y/opaque_idx0_bg.p)\n  [OK ] sprite 16x16 aprovado  ([PASS] 1 PNG(s) dentro do contrato)\n  [OK ] gate reprovou sprite 12x12  ([FAIL] sprite 12x12 fora de {8x8,8x16,16x16})\n  [OK ] cena com 10 sprites dispersos aprovada  ([PASS] 10 sprites, pico 1/linha)\n  [OK ] gate reprovou 9 sprites numa scanline  ([FAIL] scanline 104: 9 entradas > 8; buffer cheio, overflow (status bit 6); visiveis desca)\n  [OK ] gate reprovou SAT >64  ([FAIL] SAT overflow: 65 sprites > 64)\n  [OK ] gate reprovou colisao com terminador 0xD0  ([FAIL] sprite em (40,209): Y armazenado colide com terminador 0xD0)\n  [OK ] y=207 grava 0xCE: nao colide com o terminador (L129)  ([PASS] 1 sprites, pico 0/linha)\n  [OK ] gate reprovou 8 sprites hidden + 1 visivel na linha (L129)  ([FAIL] scanline 54: 9 entradas > 8; buffer cheio, overflow (status bit 6); visiveis descar)\n  [OK ] Y 0xD0 em 224 linhas aprovado: sem terminador (L128)  ([PASS] 1 sprites, pico 1/linha)\n  [OK ] gate reprovou SAT truncada declarada em 224 linhas  ([FAIL] sat_terminated declarado em 224 linhas: 0xD0 so termina a SAT no modo 192; o VDP pe)\n  [OK ] gate reprovou screen_h fora de 192/224/240  ([FAIL] screen_h 200 fora dos modos do VDP (192, 224, 240); integer required)\n  [OK ] contraste branco/preto aprovado  ([PASS] contraste acima do piso)\n  [OK ] gate reprovou cinza sobre branco  ([FAIL] contraste dY=16 < piso 17 entre (85, 85, 0) e (0, 85, 85))\n  [OK ] MUGEN contrato válido planning  (})\n  [OK ] MUGEN probe não vira delivery  (})\n  [OK ] MUGEN número MD rejeitado no SMS  (})\n  [OK ] checklist artístico válido e hash-bound aprovado  ([PASS] review checklist complete; owner-approved)\n  [OK ] gate artístico reprova sprite sheet sem micro-eixos L107  ([FAIL] invalid checklist or failed artistic axes block promotion)\n  [OK ] gate artístico reprova tipo pixel_sprite desconhecido  ([FAIL] invalid checklist or failed artistic axes block promotion)\n== Fase 4: bootstrap materializa a hierarquia de verdade ==\n  [OK ] bootstrap materializa hierarquia de verdade  (10 arquivos, sem placeholder)\n== Fase 5: build honesto (ambiente sem toolchain) ==\n  [--] probe de projeto ausente (SMSFORGE_PROBE_PROJECT); pulado\n\nSELFTEST: 132/132 verdes (132 base + probe opcional nao rodado)\n[SELFTEST OK] todos os gates provados: aprovam o valido, reprovam o invalido.\n"
+  }
+]
