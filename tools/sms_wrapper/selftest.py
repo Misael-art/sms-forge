@@ -172,12 +172,48 @@ def main():
               "measure_worst_frame.py",
               "audit_header_claims.py", "audit_mugen_engine_contract.py",
               "audit_art_review_checklist.py",
+              "audit_composition_gate.py", "audit_sole_alignment.py",
+              "host_bootstrap.py",
+              "recovery_bundle.py",
               "mugen2sms/runtime/vram_plan.py",
               "mugen2sms/runtime/commit_budget.py"):
         results.append(run([os.path.join(HERE, g), "--self-check"], 0,
                            f"selfcheck:{g}"))
     print("== Fase 2: fixtures geradas ==")
     tmp = tempfile.mkdtemp(prefix="smsforge_selftest_")
+    # Candidate diagnostics remain unpromoted; test both valid and invalid
+    # inputs here so future curators can assess their actual contract.
+    import audit_composition_gate as composition
+    import audit_sole_alignment as sole
+    from pathlib import Path
+    candidate_root = Path(tmp) / "candidate_pose_tools"
+    candidate_root.mkdir()
+    source = candidate_root / "cut.h"
+    source.write_text(composition.SYNTHETIC_HEADER)
+    results.append(run(["audit_composition_gate.py", "--header", str(source),
+                        "--anim-count", "2"], 0, "candidate composition valid header"))
+    results.append(run(["audit_composition_gate.py", "--header", str(source),
+                        "--out-header", str(source)], 3, "candidate refuses input overwrite"))
+    results.append(source.read_text() == composition.SYNTHETIC_HEADER)
+    invalid = candidate_root / "invalid.h"
+    invalid.write_text(composition.SYNTHETIC_HEADER.replace("0x80 };", "0x00 };", 1))
+    results.append(run(["audit_composition_gate.py", "--header", str(invalid)],
+                       3, "candidate composition malformed rejected"))
+    overlap = composition.peak_scanline([(0, 0, 0)] * 3 + [(8, 8, 0)] * 3)
+    adjacent = composition.peak_scanline([(0, 0, 0)] * 3 + [(8, 16, 0)] * 3)
+    results.append(overlap == 6 and adjacent == 3)
+    print(f"  [{'OK ' if results[-1] else 'XX '}] candidate scanline overlap vs adjacent")
+    import struct
+    def alpha_chunk(values):
+        return b"\x89PNG\r\n\x1a\n" + struct.pack(">I", len(values)) + b"tRNS" + bytes(values) + b"\0" * 4
+    alpha_ok = sole.transparent_indices(alpha_chunk([0, 0, 255])) == {0, 1}
+    try:
+        sole.transparent_indices(alpha_chunk([0, 127, 255]))
+        alpha_rejected = False
+    except sole.SoleError:
+        alpha_rejected = True
+    results.append(alpha_ok and alpha_rejected)
+    print(f"  [{'OK ' if results[-1] else 'XX '}] candidate sole alpha indices / partial rejected")
     from artifact_registry import fixture as artifact_fixture, audit as audit_artifacts
     artifact_project = os.path.join(tmp, "artifact_game")
     registry = artifact_fixture(artifact_project)

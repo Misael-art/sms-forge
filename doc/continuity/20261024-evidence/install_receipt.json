@@ -1,0 +1,33 @@
+{
+  "schema": "smsforge.host_install/v1",
+  "root": "/workspace",
+  "platform": "Linux-6.18.49-1-MANJARO-x86_64-with-glibc2.39",
+  "sdk": {
+    "signature": {
+      "source_sha256": "8e32a2e4a98d992e04f9427f89209c9daf3e1d0dc1af7bfac5faa3c1cb6241fc",
+      "compiler_sha256": "b34caf6863460b150f2164d4842b2df6a71d27d1a66fe0a3b4a5f84d28315414"
+    },
+    "sdcc_version": "SDCC : mcs51/z80/z180/r2k/r2ka/r3ka/sm83/tlcs90/ez80_z80/z80n/ds390/TININative/ds400/hc08/s08/stm8/pdk13/pdk14/pdk15/mos6502 4.2.0 #13081 (Linux)",
+    "files": {
+      "sdk/devkitSMS/SMSlib/SMSlib.h": "a258e4df64dbc4bf4ae0ddf20e68796cbda02e4635cd2123a7d0b6ffda1d0c4a",
+      "sdk/devkitSMS/SMSlib/SMSlib.lib": "cc9b47499f0b116c4cee6e13aee7504ab84bee11e88217e8913395f2a929983e",
+      "sdk/devkitSMS/PSGlib/PSGlib.h": "89391c5e48b4d7ad5bc71fe840c531f9701ad705a0ba00252aacc382a75fa7f4",
+      "sdk/devkitSMS/PSGlib/PSGlib.lib": "763cb379898ae54e484cc63c04b2f1eb6978cda53dcaeb32fadd589144419361",
+      "sdk/devkitSMS/crt0/crt0_sms.rel": "a652979b91716663122090b9b468b48f707122ca3334451a8d83432fe0b48eff",
+      "sdk/devkitSMS/tools/makesms": "831d10d92d208763a374179cce25de0cc4a4e79bc28d2f24368c6859e69db9d3"
+    },
+    "smoke_rom_bytes": 16384,
+    "claim_ceiling": "build_toolchain_only"
+  },
+  "assets": {
+    "devkitsms_source": "8e32a2e4a98d992e04f9427f89209c9daf3e1d0dc1af7bfac5faa3c1cb6241fc",
+    "emulicious": "0425abd7ccdb4b30bc8540b8a93711f366f48886bd65f7d22cbcc843923e7579",
+    "rtk": "5b919c3bccb799b67a61866d0e617410a4fcdf173e2614440e59de2fa2003436",
+    "rev2_runtime": "5d1c8e6563a5f6855d4fd1aa3feed029a404c7b5f66f6d6bc3cf34955ab2c162",
+    "rev2_manifest": "a0c0b5899b85acc766c3b012d29ad7645e967e614f996971de7b5b945b790260"
+  },
+  "python": "Python 3.12.3",
+  "jobs": 2,
+  "installed_at": 1792850190.7595568,
+  "claim_ceiling": "host_dependencies_and_compile_smoke_only"
+}

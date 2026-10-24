@@ -1,0 +1,80 @@
+{
+  "schema": "smsforge.curation_application/v1",
+  "date": "2026-10-24",
+  "status": "applied_scoped_global_closeout_blocked_by_legacy_doc_sync",
+  "authority": "Pedido humano explícito nesta sessão: atuar como curador de skills e ferramentas canônicas",
+  "scope": "factory_and_docs_only; no engine implementation or game promotion",
+  "issues_lesson_id": false,
+  "registry_issued_through": "L138",
+  "dedup_key": "mugenesis_rev2_application_20261024",
+  "existing_lessons_applied": [
+    "L002",
+    "L006",
+    "L041",
+    "L058",
+    "L061",
+    "L083",
+    "L086",
+    "L088",
+    "L089",
+    "L090",
+    "L091",
+    "L093",
+    "L094",
+    "L095",
+    "L096",
+    "L097",
+    "L098",
+    "L099",
+    "L137",
+    "L138"
+  ],
+  "report": "doc/curation/2026-10-24_mugenesis_rev2.md",
+  "backlog": "doc/curation/2026-10-24_luta_mugem_rev2_backlog.json",
+  "prompt": "doc/curation/2026-10-24_prompt_concluir_engine_sms.md",
+  "evidence": "doc/curation/evidence/2026-10-24_mugenesis/source_inventory.json",
+  "validation": "doc/curation/evidence/2026-10-24_mugenesis/validation.json",
+  "candidate_decisions": [
+    {
+      "tool": "audit_composition_gate.py",
+      "decision": "retain_diagnostic_only_global_promotion_rejected",
+      "fixes": [
+        "real_vertical_overlap",
+        "signed_dy",
+        "restricted_meta_fields",
+        "literal_bytes",
+        "exclusive_outputs"
+      ],
+      "limit": "per_actor_metadata_not_pair_or_runtime_proof"
+    },
+    {
+      "tool": "audit_sole_alignment.py",
+      "decision": "retain_diagnostic_only_global_promotion_rejected",
+      "fixes": [
+        "alpha_values_to_indices",
+        "reject_partial_alpha",
+        "input_hashes",
+        "exclusive_report"
+      ],
+      "limit": "last_opaque_row_not_anatomy_or_pixel_binding"
+    }
+  ],
+  "skill_changes": {
+    "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md": "a41008298712df505fbe4467eb248c195695c815944e99e87deefdf42e136138",
+    "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+    "tools/sms_wrapper/.agent/skills/sms-psg-audio.md": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+    "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612"
+  },
+  "game_promoted": false,
+  "aaa_approved": false,
+  "validation_summary": {
+    "selftest": "130/130 base; optional probe not run",
+    "measurement_tools": "75 passed",
+    "focused_tests": "16 passed",
+    "learning_capture": "pass",
+    "doc_sync": "fail; 6 EIO + 4 ENOENT in luta_mugen legacy",
+    "build": "isolated snapshot passed; not promoted",
+    "private_sessions": "2 closed; static evidence only",
+    "engine_pending_items": 55
+  }
+}
