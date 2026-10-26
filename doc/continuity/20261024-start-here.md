@@ -158,3 +158,7 @@ Preserve inputs imutáveis, contratos, recibos, ROMs aprovadas/controle e mídia
 que sustenta claims. Caches e builds descartáveis podem ser removidos somente
 por caminho/owner conhecido e sem apagar a única cópia de fonte/evidência.
 Antes de deixar outro host, publique mudanças e confira os assets remotos.
+
+## Recuperação organizada — 2026-10-26
+
+Raiz única neste host: `/home/misael/Projects/SMSForge`, base `8dfb8ea7be950b91c0dc4e41af995865a7537775`. Arquivos/runtime do rev2 restaurados pelo bootstrap com recibo; Python 3.11 selecionado para manter o lock numpy 2.2.6 sem compilação incompatível no Python 3.14. SDCC 4.6.0 do pacote oficial Manjaro foi verificado por assinatura e instalado somente em `.runtime/sdcc/`, com launcher em `.runtime/bin/` e recibo de hash/origem. SMSlib/PSGlib recompiladas e smoke compile→link→ROM de 16 KiB passou. Não é prova de gameplay/FPS/áudio. O doctor ainda exige `javac`, não disponível no PATH atual; namespaces e áudio do ambiente passaram. Retomar pelos 55 itens preservados, sem novos clones/worktrees.
