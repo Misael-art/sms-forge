@@ -103,6 +103,12 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #ifndef LUTA_SPECULATIVE_PREFETCH
 #define LUTA_SPECULATIVE_PREFETCH 0
 #endif
+#ifndef LUTA_BG_ACTOR
+#define LUTA_BG_ACTOR 0
+#endif
+#ifndef LUTA_BG_CAMERA
+#define LUTA_BG_CAMERA 0
+#endif
 #if UPLOAD_CHUNK_PAIRS < 1 || UPLOAD_CHUNK_PAIRS > 8
 #error "quota candidata de upload deve estar entre 1 e 8 pares por lado"
 #endif
@@ -114,6 +120,18 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #endif
 #if LUTA_SPECULATIVE_PREFETCH && !LUTA_PROFILE
 #error "prefetch experimental exige perfil de producao"
+#endif
+#if LUTA_BG_ACTOR != 0 && LUTA_BG_ACTOR != 1
+#error "LUTA_BG_ACTOR deve ser 0 ou 1"
+#endif
+#if LUTA_BG_ACTOR && !LUTA_PROFILE
+#error "ator BG experimental exige perfil de producao"
+#endif
+#if LUTA_BG_CAMERA != 0 && LUTA_BG_CAMERA != 1
+#error "LUTA_BG_CAMERA deve ser 0 ou 1"
+#endif
+#if LUTA_BG_CAMERA && !LUTA_BG_ACTOR
+#error "camera experimental exige ator BG"
 #endif
 
 /* wave-5b: o classificador de tier do doador tem UM limiar (INPUT_TIER_T) e os
@@ -277,6 +295,14 @@ volatile unsigned int __at(0xC89A) probe_prefetch_discarded;
  * por tick. O leitor precisa limitar a janela para excluir wrap ambiguo. */
 volatile unsigned char __at(0xC89C) probe_upload_trace_seq;
 volatile unsigned char __at(0xC8A0) probe_upload_trace[32];
+volatile unsigned int __at(0xC8C0) probe_bg_invalid;
+volatile unsigned int __at(0xC8C2) probe_bg_map_updates;
+volatile unsigned int __at(0xC8C4) probe_bg_left_risk;
+volatile unsigned int __at(0xC8C6) probe_bg_scroll_late;
+volatile unsigned int __at(0xC8C8) probe_bg_map_late;
+volatile unsigned char __at(0xC8CA) probe_bg_camera_shift;
+volatile unsigned int __at(0xC8CB) probe_bg_camera_conflict;
+volatile unsigned int __at(0xC8CD) probe_bg_camera_applied;
 
 /* Contrato worst-frame do measure_worst_frame.py (L061), SMRT aditivo na
  * base 0xC800: probe_vline = VCounter lido APOS todo o trabalho do frame
@@ -353,6 +379,9 @@ typedef struct {
 static unsigned char fail_valid[2];
 static unsigned char fail_size[2];
 static CacheSlot current[2], pending[2];
+#if LUTA_BG_CAMERA
+static unsigned char bg_camera_x;
+#endif
 #if LUTA_DIAG_TELEMETRY
 static unsigned char line_diff[DIAG_FLOOR];
 #endif
@@ -767,6 +796,9 @@ static void emit_frame(unsigned char side, const Frame *frame) {
         origin_x = FIGHTER_MIRRORED_ORIGIN_X(
                        (unsigned char)(fighter[side].x >> 8), axis_x,
                        frame->width);
+#if LUTA_BG_CAMERA
+    origin_x += (signed int)bg_camera_x;
+#endif
     meta = (const signed char *)meta_data;
     while (meta[0] != (signed char)METASPRITE_END) {
         dx = meta[0];
@@ -809,6 +841,173 @@ static void emit_frame(unsigned char side, const Frame *frame) {
         meta += 3;
     }
 }
+
+#if LUTA_BG_ACTOR
+/* Experimento: um ator usa os MESMOS patterns do pool na PNT; o outro
+ * permanece na SAT. O fundo solido permite scroll global independente do
+ * ator da SAT, mas a mascara da primeira coluna e HUD ainda sao blockers. */
+#define BG_MAP_W 8u
+#define BG_MAP_H 10u
+static unsigned int bg_shadow[BG_MAP_W * BG_MAP_H];
+static const unsigned char *bg_previous_meta;
+static unsigned char bg_previous_base, bg_previous_pairs, bg_previous_full, bg_dirty, bg_valid;
+static unsigned char bg_scroll_x, bg_scroll_y;
+
+/* Nao recria pixels: referencia os dois patterns 8x8 ja residentes para
+ * cada celula TALL. Retorna falha antes de publicar uma tabela invalida. */
+static unsigned char build_bg_shadow(const unsigned char *meta, unsigned char n_pairs,
+                                     unsigned char base_pair, signed int origin_x,
+                                     signed int origin_y) {
+    unsigned char i, count;
+    signed int sx, sy;
+    unsigned int dx, dy, local_tile, tile, index;
+    if (!meta || n_pairs == 0u ||
+        (unsigned int)base_pair + n_pairs > POOL_PAIRS)
+        return 0u;
+    for (i = 0u; i < BG_MAP_W * BG_MAP_H; i++)
+        bg_shadow[i] = SOLID_BG_TILE;
+    for (count = 0u; count < 64u; count++) {
+        if (meta[0] == METASPRITE_END) return 1u;
+        dx = meta[0]; dy = meta[1]; local_tile = meta[2];
+        if (dx >= BG_MAP_W * 8u || dy >= BG_MAP_H * 8u ||
+            (dx & 7u) || (dy & 15u) || (local_tile & 1u) ||
+            local_tile >= (unsigned int)n_pairs * 2u)
+            return 0u;
+        sx = origin_x + (signed int)dx;
+        sy = origin_y + (signed int)dy;
+        if (sx >= 0 && sx < 256 && sy >= 0 && sy < 192) {
+            tile = (unsigned int)base_pair * 2u + local_tile;
+            index = (dy >> 3) * BG_MAP_W + (dx >> 3);
+            if (bg_shadow[index] != SOLID_BG_TILE ||
+                bg_shadow[index + BG_MAP_W] != SOLID_BG_TILE)
+                return 0u; /* PNT nao pode sobrepor duas celulas no mesmo lugar. */
+            bg_shadow[index] = tile | TILE_USE_SPRITE_PALETTE | TILE_PRIORITY;
+            bg_shadow[index + BG_MAP_W] = (tile + 1u) | TILE_USE_SPRITE_PALETTE | TILE_PRIORITY;
+        }
+        meta += 3;
+    }
+    return 0u;
+}
+
+static void clear_bg_shadow(void) {
+    unsigned char i;
+    for (i = 0u; i < BG_MAP_W * BG_MAP_H; i++)
+        bg_shadow[i] = SOLID_BG_TILE;
+    bg_previous_meta = 0;
+    bg_previous_full = 0u;
+    bg_valid = 0u;
+    bg_dirty = 1u;
+}
+
+#if LUTA_BG_CAMERA
+/* Preserva o extremo direito da bounding box se houver espaco para tirar
+ * ambos os atores da coluna mascarada. Conflito e medido, nao escondido. */
+static unsigned char bg_camera_adjust(signed int left, signed int right,
+                                      unsigned char *conflict) {
+    signed int needed;
+    *conflict = 0u;
+    if (left >= 8) return 0u;
+    needed = 8 - left;
+    if (needed > 64 || right + needed > 256) {
+        *conflict = 1u;
+        return 0u;
+    }
+    return (unsigned char)needed;
+}
+
+static signed int bg_camera_actor_origin(unsigned char side) {
+    const Frame *frame = current[side].frame;
+    signed int axis_x = (signed int)((unsigned int)frame->axis[0] |
+                                    ((unsigned int)frame->axis[1] << 8));
+    if (!current[side].face)
+        return (signed int)(fighter[side].x >> 8) + axis_x;
+    return FIGHTER_MIRRORED_ORIGIN_X((unsigned char)(fighter[side].x >> 8),
+                                     axis_x, frame->width);
+}
+
+static void plan_bg_camera(void) {
+    const Frame *a = current[0].frame;
+    const Frame *b = current[1].frame;
+    signed int x0, x1, left, right0, right1, right;
+    unsigned char conflict;
+    bg_camera_x = 0u;
+    if (!a || !b || !a->axis || !b->axis) {
+        probe_bg_camera_shift = 0u;
+        probe_bg_camera_conflict++;
+        return;
+    }
+    x0 = bg_camera_actor_origin(0u);
+    x1 = bg_camera_actor_origin(1u);
+    left = x0 < x1 ? x0 : x1;
+    right0 = x0 + (signed int)(((unsigned int)a->width + 7u) & 0xFFF8u);
+    right1 = x1 + (signed int)(((unsigned int)b->width + 7u) & 0xFFF8u);
+    right = right0 > right1 ? right0 : right1;
+    bg_camera_x = bg_camera_adjust(left, right, &conflict);
+    probe_bg_camera_shift = bg_camera_x;
+    if (conflict) probe_bg_camera_conflict++;
+    if (bg_camera_x) probe_bg_camera_applied++;
+}
+#endif
+
+static unsigned char prepare_bg_actor(unsigned char side) {
+    const Frame *frame = current[side].frame;
+    const unsigned char *meta;
+    signed int axis_x, axis_y, origin_x, origin_y, y_scroll;
+    unsigned char full;
+    if (!frame) {
+        if (bg_valid) clear_bg_shadow();
+        return 0u;
+    }
+    if (!frame->axis) {
+        probe_bg_invalid++;
+        clear_bg_shadow();
+        return 0u;
+    }
+    meta = side ? (current[side].face ? frame->metal_p2 : frame->meta_p2)
+                : (current[side].face ? frame->metal : frame->meta);
+    axis_x = (signed int)((unsigned int)frame->axis[0] |
+                         ((unsigned int)frame->axis[1] << 8));
+    axis_y = (signed int)((unsigned int)frame->axis[2] |
+                         ((unsigned int)frame->axis[3] << 8));
+    origin_y = (signed int)DIAG_FLOOR - (signed int)(fighter[side].y >> 8) + axis_y;
+    if (!current[side].face)
+        origin_x = (signed int)(fighter[side].x >> 8) + axis_x;
+    else
+        origin_x = FIGHTER_MIRRORED_ORIGIN_X(
+                       (unsigned char)(fighter[side].x >> 8), axis_x, frame->width);
+#if LUTA_BG_CAMERA
+    origin_x += (signed int)bg_camera_x;
+#endif
+    if (origin_x < 8) probe_bg_left_risk++;
+    full = (unsigned char)(origin_x >= 8 && origin_x + 64 <= 256 &&
+                           origin_y >= 0 && origin_y + 80 <= 192);
+    if (!bg_valid || meta != bg_previous_meta ||
+        current[side].base_pair != bg_previous_base ||
+        current[side].n_pairs != bg_previous_pairs || !full || !bg_previous_full) {
+        if (!meta || frame->width > 64u || frame->height > 80u ||
+            !build_bg_shadow(meta, current[side].n_pairs,
+                             current[side].base_pair, origin_x, origin_y)) {
+            probe_bg_invalid++;
+            clear_bg_shadow();
+            return 0u;
+        }
+        bg_previous_meta = meta;
+        bg_previous_base = current[side].base_pair;
+        bg_previous_pairs = current[side].n_pairs;
+        bg_previous_full = full;
+        bg_valid = 1u;
+        bg_dirty = 1u;
+    }
+    /* A ancora da PNT e (8,8) tiles = (64,64) pixels. X usa o
+     * sinal do scroll do SMS; Y e reduzido ao anel de 224 linhas. */
+    bg_scroll_x = (unsigned char)(origin_x - 64);
+    y_scroll = 64 - origin_y;
+    while (y_scroll < 0) y_scroll += 224;
+    while (y_scroll >= 224) y_scroll -= 224;
+    bg_scroll_y = (unsigned char)y_scroll;
+    return 1u;
+}
+#endif
 
 /* ---------------- FSM de script (dados gerados, nao nomes) --------------- */
 /* Passo de posicao em Q8.8 SEM SINAL. Em Z80/SDCC `int` tem 16 bits: a borda
@@ -1338,6 +1537,9 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
 #endif
     probe_phase = 4u;       /* preparacao de metasprites em RAM */
     SMS_initSprites();
+#if LUTA_BG_CAMERA
+    plan_bg_camera();
+#endif
 #if LUTA_DIAG_TELEMETRY
     probe_reg_frame_edges += (unsigned char)(probe_vbl_tick - t0);
     t0 = probe_vbl_tick;
@@ -1357,6 +1559,11 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
         unsigned int om_before =
             (side == 0u) ? probe_sat_om_p1 : probe_sat_om_p2;
         unsigned int om_after;
+#if LUTA_BG_ACTOR
+        if (side == 0u) {
+            if (prepare_bg_actor(side)) submitted = current[side].pose_global;
+        } else
+#endif
         if (current[side].frame) {
             submitted = current[side].pose_global;
             emit_frame(side, current[side].frame);
@@ -1365,8 +1572,13 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
         if (side == 0u) {
             probe_submit_p1 = submitted;
             probe_submit_face_p1 = (submitted != 0xFFFFu) ? current[side].face : 0xFFu;
+#if LUTA_BG_ACTOR
+            /* A PNT preparada nao autentica apresentacao; framebuffer valida. */
+            probe_present_p1 = 0xFFFFu;
+#else
             probe_present_p1 = (submitted != 0xFFFFu && om_after == om_before)
                                    ? submitted : 0xFFFFu;
+#endif
         } else {
             probe_submit_p2 = submitted;
             probe_submit_face_p2 = (submitted != 0xFFFFu) ? current[side].face : 0xFFu;
@@ -1505,7 +1717,14 @@ void main(void) {
     /* Tile 255 mora em 0x1FE0, dentro do pool que o streaming sobrescreve.
      * Tile 256 foi zerado acima e fica na segunda metade da VRAM; a PNT
      * continua apontando para um pattern vazio mesmo quando os atores mudam. */
+#if LUTA_BG_ACTOR
+    /* Scroll Y em modo 192 percorre 28 linhas da PNT, inclusive as quatro
+     * normalmente ocultas; a escrita termina antes da SAT em 0x3F00. */
+    SMS_VRAMmemsetW(0x3800u, SOLID_BG_TILE, 1792u);
+    SMS_VDPturnOnFeature(VDPFEATURE_LEFTCOLBLANK);
+#else
     SMS_VRAMmemsetW(0x3800u, SOLID_BG_TILE, 1536u);
+#endif
 
     /* L009-L134: sondas __at nao sao inicializadas pelo crt0; sem zerar,
      * todo contador parte de lixo da RAM e a evidencia nasce ilegivel.
@@ -1542,6 +1761,14 @@ void main(void) {
     probe_prefetch_hit_p1 = 0u;
     probe_prefetch_hit_p2 = 0u;
     probe_prefetch_discarded = 0u;
+    probe_bg_invalid = 0u;
+    probe_bg_map_updates = 0u;
+    probe_bg_left_risk = 0u;
+    probe_bg_scroll_late = 0u;
+    probe_bg_map_late = 0u;
+    probe_bg_camera_shift = 0u;
+    probe_bg_camera_conflict = 0u;
+    probe_bg_camera_applied = 0u;
     /* atribuicao regional: __at nao e inicializado pelo crt0 (L009);
      * o hook da ISR so e instalado com as somas ja zeradas. */
 #if LUTA_DIAG_TELEMETRY
@@ -1568,6 +1795,14 @@ void main(void) {
     frames = 0u;
     pacing_step = 0u;
     pacing_remainder = 0u;
+#if LUTA_BG_ACTOR
+    bg_previous_meta = 0;
+    bg_previous_base = bg_previous_pairs = bg_previous_full = 0u;
+    bg_dirty = bg_valid = bg_scroll_x = bg_scroll_y = 0u;
+#endif
+#if LUTA_BG_CAMERA
+    bg_camera_x = 0u;
+#endif
     current[0].pose_global = 0xFFFFu;
     current[1].pose_global = 0xFFFFu;
     pending[0].pose_global = 0xFFFFu;
@@ -1669,6 +1904,20 @@ void main(void) {
          * candidato POR LADO por VBlank. Pedidos reais precedem especulacao. */
         probe_phase = 2u;
         probe_vbl_entry = SMS_VCounterPort;
+#if LUTA_BG_ACTOR
+        /* H-scroll e ao vivo em HBlank: atualizar ANTES dos uploads tenta
+         * evitar que uma transferencia longa mude o deslocamento no meio da tela.
+         * As sondas contam leituras fora de VBlank, nao excluem wrap completo. */
+        SMS_setBGScrollX(bg_scroll_x);
+        SMS_setBGScrollY(bg_scroll_y);
+        if (SMS_VCounterPort < 0xC0u) probe_bg_scroll_late++;
+        if (bg_dirty) {
+            SMS_loadTileMapArea(8, 8, bg_shadow, 8, 10);
+            bg_dirty = 0u;
+            probe_bg_map_updates++;
+            if (SMS_VCounterPort < 0xC0u) probe_bg_map_late++;
+        }
+#endif
         {
             unsigned int moved = stream_pending(0u, UPLOAD_CHUNK_PAIRS);
 #if LUTA_UPLOAD_TRACE
