@@ -1,5 +1,81 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — ator em BG e câmera (candidatos, não promovidos)
+
+A fonte `dd1a7cb532fe62c6dd0e0e244f87c2e84ddb407e8c59bd90ea7aefc5fcb86cf6`
+introduz `LUTA_BG_ACTOR` e `LUTA_BG_CAMERA`, ambos zero por padrão. O primeiro
+prepara P1 na PNT a partir dos patterns já residentes e deixa P2 na SAT; o
+segundo desloca ambos para evitar a primeira coluna mascarada quando as caixas
+cabem na tela. Em conflito, a câmera registra o caso e não se desloca: o
+corte continua possível. Não há fallback aprovado nem decisão de viewport.
+O TDD registra o mapa, as flags e os limites; candidatos e fontes por hash
+estão em `out/candidates/20261027_bg_*`.
+
+Na primeira ROM híbrida `30aeda41c7f6058e610b3c4d943e40821fcf4173630503a95898f72bf7a8a766`,
+uma captura de aproximação mostrou 14 linhas da pose deslocadas 2 pixels em
+relação às outras 39 (`out/evidence/20261027_bg_gameplay_actor/`); o scroll
+mudava após o início dos uploads. A ROM posterior
+`3c6df90533bdce7341c36ee8eeb6efc4758f3f74f7476c9182e43e39b799a071`
+executa scroll e cópia da PNT antes do streaming. Numa captura equivalente,
+as 53 linhas comparadas apresentaram deslocamento uniforme de 1 pixel em
+relação à RAM instantânea, sem a divisão anterior. Isto não prova timing
+framebuffer↔RAM nem ausência de outros rasgos. As sondas instantâneas de
+VCounter sem atraso nessas amostras não excluem uma volta completa do contador.
+
+A ROM com câmera e fonte final é
+`3be79abe6c5edd3d44616b53c357999d25591756492db328522edb873fc6af4a`.
+Em Emulicious privado `1749c7e0e7c34057a3dc222e40341fe4`, com P1 em x=16,
+deslocamento 7, uma pose de P1 e uma de P2 alinharam respectivamente 869/869
+e 738/738 pixels aos patterns esperados. A captura mostrava pose P1 anterior à
+submetida na RAM: alinhamento de pixel não prova apresentação pontual. No
+controle da mesma fonte sem câmera, sessão `02f8299d60184eb98633a57a7cfddd4e`,
+102 pixels esperados da pose foram ocultados pela primeira coluna preta;
+as trajetórias de IA diferiram. Em outro roteiro, botão 1 reduziu a vida de P2
+de 1000 para 888 (`330bb408ab9742bb954fce7419b79fe9`); a câmera não atuou
+nesse caso. Bundles e mídia estão em `out/evidence/20261027_bg_edge_camera*`
+e `20261027_bg_gameplay_camera/`; sessões encerradas. São amostras, não
+fidelidade integral, guarda, áudio ou gameplay completo.
+
+O modelo de poses na borda oposta encontrou conflito de câmera em 656 de 2160
+pares avaliados; em 322 desses pares a composição sprite-only também excedia
+oito por linha. Isso é geometria estática, sem prova de alcance. Em sessão
+privada com P1 à esquerda por 6000 frames VDP e IA normal
+`250316ff765741b4863348eee72c7465`, não houve conflito; P2 não passou de
+x=136. A tentativa de troca de lado com P1 à direita
+`b75d1e428f2b44209ce3b1ffee82a74b` não alcançou a troca, portanto não testa
+facing BG. O código da câmera permanece candidato, sem aprovação de fidelidade.
+
+O diagnóstico BlastEm auditado `blastem-sms-a946f0ebe4214b2b8f0f34eadc16e3c6`
+observou 30 fronteiras: 60 poses residentes e 17 prefixos pendentes conferiram
+com a ROM, sem sobreposição de slots; a SAT teve pico 4/linha. Em seis
+amostras de PNT efetivamente comparáveis, 184 tiles de pattern conferiram sem
+entradas inválidas. O plano de VRAM passou e os 30 snapshots de registradores
+confirmaram reg2/reg5=`FF`, reg6=`FB`; a PNT inferior não foi reclamada como
+sobra com scroll Y. Isso não prova apresentação, timing ou hardware físico.
+Relatórios em `out/evidence/20261027_bg_blastem_camera/`.
+
+O ritmo da câmera foi 26,05/24,20 atualizações/s em duas janelas NTSC de 8 s
+e o selo de pior quadro teve 1759 derrames, `vline_min=2`, em 3000 iterações
+(`184646d8e29241f98e1a65ed06e06d30`), com 24 iniciais por stepping e sem
+HUD/FX/PSG. Ambos reprovam. O controle final da mesma fonte, sem BG nem câmera,
+é `8968b847cdb825ba346ae9a5687838c58a9b17bdf8d2b11e7d0741df4b11d309`;
+o roteiro de ataque em sessão `7e5eb184dfb64c438fbf0f1dfcd7ff0a` observou
+vida 1000→888 e sondas BG zeradas. Suas janelas NTSC foram 26,70/25,69 e
+também reprovam (`b6d9908acf474493971dd77faecb38c2`). O selo dessa build
+registrou 1749 derrames e `vline_min=7` em 3000 iterações, com 25 iniciais
+por stepping (`a590764435e84817a94ef432be9973b3`). Bundles conferidos e
+sessões encerradas. Nenhum ID foi fechado; falta carga representativa,
+coerência entre contato e imagem, deadline e validação da composição inteira.
+Fechamento técnico: 275 testes `rev2` passaram, 150 foram deselecionados;
+marcadores, scroll H/Y, limites de tilemap, documentação, constantes e
+captura de lições passaram. O contrato MUGEN passou apenas como planejamento;
+revisão artística independente e aprovação de entrega não foram executadas.
+O código do lote é `c64a6fe`; a cópia de recuperação local
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-bg-hybrid.tar.gz` tem SHA
+`b75f22cf9027acfa20d64bf8601de4cc4fde293876920a2263432fc882ca3f39`;
+o manifesto correspondente verificou 22537 arquivos. A cópia e o owner ficam
+no mesmo disco, sem nova proteção externa.
+
 ## 2026-10-27 — relógio de pacing sequencial
 
 O laço agora mantém quociente e resto incrementais da janela de 150 ticks,

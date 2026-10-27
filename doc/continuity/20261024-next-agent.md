@@ -32,6 +32,31 @@ pose residente precisam ser qualificados; fundo sólido é escopo; P1 de sprites
 é compartilhada; os 7 eixos e época visual delivery devem convergir na mesma
 ROM. Primeiro feche runtime e qualidade mensuráveis; ambição AAA não é selo.
 
+## 2026-10-27 — candidato híbrido, estado mais recente
+
+A fonte `dd1a7cb532fe62c6dd0e0e244f87c2e84ddb407e8c59bd90ea7aefc5fcb86cf6`
+inclui as opções `LUTA_BG_ACTOR` e `LUTA_BG_CAMERA` apenas para diagnóstico;
+ambas são zero por padrão. Câmera e ator BG não foram aprovados: o limite de
+scroll deixa uma coluna mascarada, há conflitos de enquadramento no modelo,
+a troca de facing não foi alcançada e não há HUD/FX/PSG. A variante com câmera
+`3be79abe6c5edd3d44616b53c357999d25591756492db328522edb873fc6af4a`
+preservou duas poses em uma captura de borda e teve pico SAT 4 por linha nas
+30 fronteiras observadas; reprovou FPS 26,05/24,20 e pior quadro com 1759
+derrames. O mapa de VRAM passou no escopo registrado. A build da mesma fonte
+com opções desligadas é `8968b847cdb825ba346ae9a5687838c58a9b17bdf8d2b11e7d0741df4b11d309`;
+ataque foi observado, FPS 26,70/25,69 reprovou. Sessões e limites completos
+constam no memory bank do consumidor. Os 55 IDs continuam abertos.
+Código `c64a6fe`; 275 testes `rev2` passaram no host. A cópia local
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-bg-hybrid.tar.gz` tem SHA
+`b75f22cf9027acfa20d64bf8601de4cc4fde293876920a2263432fc882ca3f39` e
+verificou 22537 arquivos pelo manifesto associado; está no mesmo disco do
+owner e não substitui backup externo.
+
+Próximo ramo seguro: integrar uma carga PSG diagnóstica rastreável aos eventos
+reais de combate, sem promovê-la a identidade sonora, e medir na mesma ROM.
+Continuam indispensáveis consistência contato/apresentação, facing BG,
+prazo sob carga completa e decisão humana para eventual mudança de viewport.
+
 ## 2026-10-27 — avaliação e melhoria da capacidade produtiva
 
 Lote de fábrica `f5d3dcb777554b7bceb309abe45e1bb98856ecb0` na branch

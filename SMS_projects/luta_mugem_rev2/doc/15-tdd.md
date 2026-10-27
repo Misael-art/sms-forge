@@ -2,6 +2,24 @@
 
 ## Seleção e limites atuais — 2026-10-27
 
+O renderer híbrido é uma experiência isolada, desligada por padrão
+(`LUTA_BG_ACTOR=0`, `LUTA_BG_CAMERA=0`). Com BG habilitado, P1 referencia na
+PNT os mesmos patterns de sua pose residente, com a paleta P1 e prioridade
+de BG; P2 continua na SAT. Uma sombra de 8×10 tiles é atualizada antes do
+streaming em VBlank. A PNT usa as 28 linhas do modo 192, o scroll Y é reduzido
+em 224 e a primeira coluna fica mascarada pela exigência de scroll horizontal.
+Não se reivindicam sobras da PNT inferior ou da SAT. O plano e os registradores
+amostrados estão no memory bank; não incluem HUD, FX ou a composição completa.
+
+A câmera experimental aplica o mesmo deslocamento horizontal aos dois
+atores quando suas caixas residentes cabem fora da coluna mascarada. Quando
+não cabem, registra conflito e mantém deslocamento zero; isso pode cortar
+pixels. A escolha da câmera não foi aprovada para produto. Tampouco foram
+qualificados facing, sobreposição, restauração, deadline ou HUD. A sonda de
+apresentação de P1 fica sem valor afirmativo em BG: preparar a PNT não prova
+o framebuffer. O teto de cor, as flags de prioridade/paleta e o orçamento de
+VRAM são os do VDP/SMSlib, sem uma paleta independente por lutador.
+
 O GDD vigente declara `pose_budget`: encaixe do framebuffer X 2/3 e Y 6/7,
 escala extra 2/3 uniforme e idle de até quatro colunas de 8 px. A faixa
 histórica de 72–88 px é outra opção, não o requisito deste consumidor. O
