@@ -1,5 +1,105 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — faces e alias de bancos (em desenvolvimento)
+
+Após o checkpoint `56834d8`, a ROM sem padding de potência de dois
+`5e79efa2c995f3dce23bc758e8478a367e6e498d7178b0808ce84f69a0fe3196`
+recebeu seleção de face por cache. Em Emulicious privado, segurar direita
+cruzou os atores: na sessão `dca7b42423e54488a76d484bd78b2d02`, os probes
+de face lógica, residente e submetida convergiram para `[1, 0]` no VDP 920.
+O emissor C usa os metadados e a origem da face residente; teste host cobre
+quatro combinações de ator/face, troca durante upload, retorno e fronteira de
+banco. Esses probes não autenticam a apresentação na SAT física nem o contato.
+
+Diagnóstico de mapper, com fonte e sequência idênticas: `5e79efa…` tem
+458752 B (28 bancos); `ad0e148c3b1f12a2981f17b02a8d9fa9f42642137e734d9bb9bcc0422e6a3eea`
+tem 524288 B (32 bancos) com `makesms -pp`. Os primeiros 458752 B são
+idênticos. No BlastEm privado, o mesmo roteiro capturou sete fronteiras: na
+ROM menor, 9 de 14 spans residentes divergiram; os payloads divergentes
+correspondiam ao mesmo offset quatro bancos antes. Na ROM preenchida, 14 de 14
+spans coincidiram com os bytes esperados, sem sobreposição dos quatro slots
+nessas fronteiras. Sessões `blastem-sms-cc1bc86deb08442c876b6fc57e2cf17c` e
+`blastem-sms-c646913e95f84f7194ad9c57bee59b45` passaram o auditor de bundle e
+foram limpas. O problema também ocorreu na ROM pré-agrupamento `9654406b…`,
+portanto não foi introduzido pelo lote de 192 B. É evidência de alias no
+BlastEm para estas imagens; não é aprovação de mapper físico ou de todas as
+ações. Os extratores diagnósticos foram reexecutados após `--self-check`, em
+`out/evidence/20261027_blastem_facing/` e `20261027_blastem_power2/`.
+O mesmo mecanismo já tinha sido identificado em 20/10 para uma ROM de 52
+bancos, com L139 proposta e evidências em
+`out/evidence/loteB2b_20261019/b2b3_blastem_bankmask/`; o lote atual
+revalidou o efeito na imagem de 28 bancos e formalizou a lição autorizada.
+
+O manifesto nominal agora seleciona o corte `pose_budget_facing_20261027` de
+24 bancos, coerente com o GDD, e solicita `-pp`; a ROM nominal histórica foi
+mantida intacta. A seleção anterior de 49 bancos foi buildada isoladamente
+como `b3dfaa131fc7779f575777c2141e9d5b81c0c87009abaf433143bc3feb189dcc`;
+a sessão `e0614c0bcc114d0c90b78b7d670af006` mostrou P2 fragmentado. Seu header
+antigo usa P2-direita e não declara o novo contrato P1-direita/P2-esquerda; o
+runtime atual recusou esse header no pré-processamento SDCC de um candidato
+isolado, sem publicar recibo. Não editar gerados para
+contornar a recusa. O wrapper aceita uma única política `-pm` ou `-pp` e
+rejeita saída não potência de dois quando `-pp` é solicitado, antes do recibo
+candidato. O header de tamanho do cartucho e o hardware real ainda não foram
+qualificados por este experimento.
+
+O corte nominal foi gerado de novo pelo `versus_scene_cut` a partir dos ZIPs
+e configurações `ryu_pose_budget.json`/`ken_pose_budget.json`; o pacote
+anterior e o regenerado têm os mesmos bancos SHA `ec22ad12…` e o mesmo
+`fight_runtime_data.h` SHA `7caabed2…`. O header novo SHA `b63069e7…` difere
+apenas no define de contrato. A build candidata do manifesto atual em
+`out/candidates/20261027_default_facing_power2/` é byte a byte igual à ROM
+`ad0e148c…`; o recibo registra os insumos atuais. Restaurar esse diretório
+gerado pelo comando no handoff, sem sobrescrever um diretório já existente.
+Após essa build, as sessões privadas `2356fa5f361a40e5a6c4cd767d839a4e`
+(travessia) e `40373da4946f47dcbb1e7b1f58ab64d7` (botão e vida) repetiram os
+casos com bundles verificados e cleanup. O selo e as janelas registrados abaixo
+pertencem à cópia anterior da mesma ROM, não são um selo fresco para o novo
+caminho de build. O BlastEm `blastem-sms-bb0c5d18f66749c89039c5e6a9863ea9`
+repetiu 14/14 spans residentes corretos em sete fronteiras na build nominal;
+`measure_vram_map.py` cruzou o plano e os registradores dessas fronteiras e
+passou para pool `0x0000..0x1FFF`, tile de fundo `0x2000`, PNT e SAT. O
+plano não prova que outras ações ou cargas não corrompem VRAM.
+
+O comentário de instrumentação foi corrigido depois daquela build; a candidata
+`out/candidates/20261027_integrated_current/` vincula o fonte atual SHA
+`68f8b9546554037c72df14c630d4a022a39684b09dc9d9b9142daa7ed58c7802` e
+produziu novamente a ROM idêntica `ad0e148c…`. Após ela, as sessões privadas
+`429c1288cf364e4e943571ec37d2dbc4` (ataque e vida) e
+`8be80e10f8f64ce5a974502b42e7b1f6` (travessia e orientação) registraram
+vídeos e probes, com bundles verificados e sessões encerradas. O estado de
+build permanece candidato; ainda não há sete eixos ou qualidade de entrega.
+Na mesma ROM, `blastem-sms-9b744eb07d6c4bef8668b4307153caf5` registrou 30
+fronteiras durante aproximação, botão 1 e recovery. A leitura da SAT pelo
+simulador de scanline encontrou 13 fronteiras de VDP 900 a 960 com pico 9 ou
+10 e 27–32 linhas acima de 8; o bundle foi auditado e os processos fechados.
+Esse roteiro já reprova a composição observada, mas não cobre todas as ações,
+não identifica automaticamente o ator omitido e não prova ausência de
+glitches nos intervalos. Artefatos em `out/evidence/20261027_attack_sat/`.
+
+Uma segunda regeneração com o gerador atual preservou byte a byte os 24
+bancos e os headers; o manifesto é idêntico após normalizar o caminho de
+saída. A candidata `out/candidates/20261027_integrated_final/` usou o builder
+SHA `32fbfe14…`, vinculou o mesmo fonte e produziu a mesma ROM `ad0e148c…`.
+Depois da build, Emulicious privado repetiu o golpe (sessão
+`ea1c3a68547f4a4995695fb6e6f60c28`, vida P2 1000→888) e a travessia
+(`3d3f42be0ec64ad68ae3905a7be101cd`, faces convergentes). Ambos os bundles
+foram conferidos e as sessões encerradas; os vídeos são por stepping e não
+medem FPS. A suíte rev2 passou 265 testes; 150 do consumidor histórico foram
+deselecionados, não aprovados.
+
+Na ROM `ad0e148c…`, Emulicious sessão `9a601005deb94504bf73e837035ae0f5`
+repetiu a travessia e convergência das faces, com vídeo; a sessão
+`fca78a6192914797a047d3d6574a623b` repetiu botão 1 com vida de P2 1000→888.
+As sessões foram fechadas e bundles conferidos. Em duas janelas NTSC de 8 s,
+sessão `a4a4cc7739714eca9b67968b16f76de0`, a mesma ROM mediu 22,87/19,88
+atualizações/s e reprovou a meta. A carga não inclui HUD/FX/PSG, o stepping
+não mede throughput e não há prova de guarda, timing do contato, áudio ou
+limite de scanline nessas sessões. Na sessão `dca463d5ea5549239855584d4c3f67a5`, o selo de
+3000 iterações também derramou (`vline_min=7`, `vovf_delta=1749`); 21
+iterações ocorreram no stepping de boot e a carga não é representativa. R04,
+R05, R06, R09 e R13 permanecem abertos.
+
 ## 2026-10-27 — identidade, fundo e cancelamento de pose (em desenvolvimento)
 
 Nenhum dos 55 IDs foi encerrado. A ROM nominal e o recibo históricos foram

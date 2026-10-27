@@ -91,3 +91,56 @@ do upload, reproduzir a troca real por input, registrar imagem/SAT/estado e
 medir o custo. Continuam sem solução a coerência entre contato e pose
 apresentada, limite por scanline, starvation, VBlank sob carga real e AIR
 N+1 em ROM. Não chame uma pose residente ou uma captura isolada de entrega.
+
+## 2026-10-27 — complemento: face, mapper e receita atual
+
+O diagnóstico seguinte encontrou alias de bancos na imagem de 28 bancos;
+em BlastEm, a cópia preenchida para 32 bancos corrigiu os 14 spans observados.
+O manifesto atual seleciona o pacote `pose_budget_facing_20261027`, exigido
+pelo GDD, e `-pp`. O gerador declara o contrato de faces e o runtime recusa
+headers antigos sem ele. O candidato do manifesto atual tem ROM SHA
+`ad0e148c3b1f12a2981f17b02a8d9fa9f42642137e734d9bb9bcc0422e6a3eea`;
+travessia e ataque foram novamente observados em sessões privadas após a build.
+O selo anterior da mesma ROM reprovou VBlank (`vline_min=7`, `vovf_delta=1749`)
+e FPS (22,87/19,88); não é evidência fresca para um rebuild posterior. O
+histórico de 49 bancos e a ROM nominal anterior não foram sobrescritos.
+
+A build final isolada é `out/candidates/20261027_integrated_final/`; seu
+recibo vincula fonte, dados e builder atuais, com a mesma SHA acima. A
+regeneração repetida com o gerador atual preservou os bancos e headers;
+somente os caminhos de saída mudaram no manifesto. Emulicious privado repetiu
+golpe (vida P2 1000→888, sessão `ea1c3a68547f4a4995695fb6e6f60c28`) e
+travessia (`3d3f42be0ec64ad68ae3905a7be101cd`), com bundles verificados e
+cleanup. No BlastEm, a SAT viva do mesmo binário excedeu 8 entradas por linha
+em 13 das 30 fronteiras amostradas no roteiro de ataque; consulte
+`out/evidence/20261027_attack_sat/`. A suíte rev2 passou 265 testes com 150
+deselecionados; selftest 135/135, 75 ferramentas de medição, sincronismo
+documental, constantes, aprendizado e corredor passaram. O contrato do GDD
+passou apenas como planejamento. Esses resultados não aprovam o gameplay.
+Os dados e evidências deste lote foram empacotados e verificados em
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-facing-mapper.tar.gz`
+(SHA `e9cebc77881f34362ba563e060fe68ec9dfcde2548c9b319d6dc1d6716ae1c12`,
+10392 arquivos); o manifesto tem o mesmo nome com extensão `.json`. Essa
+cópia e o `out` original residem no mesmo disco: não há backup externo novo.
+
+Se `SMS_projects/luta_mugem_rev2/out/generated/pose_budget_facing_20261027`
+não existir, regenere-o uma única vez, no checkout e ambiente oficiais, sem
+apagar nem substituir dados existentes:
+
+```sh
+rtk proxy tools/sms_wrapper/run_host.sh python -m mugen2sms.generators.versus_scene_cut \
+  --p1-source SMS_projects/luta_mugem_rev2/data/source_mugen/ryu/ryu.zip \
+  --p1-config SMS_projects/luta_mugem_rev2/doc/continuity/config/ryu_pose_budget.json \
+  --p2-source SMS_projects/luta_mugem_rev2/data/source_mugen/ken/Ken_Majik_.zip \
+  --p2-config SMS_projects/luta_mugem_rev2/doc/continuity/config/ken_pose_budget.json \
+  --out SMS_projects/luta_mugem_rev2/out/generated/pose_budget_facing_20261027
+```
+
+Os bancos esperados têm SHA `ec22ad12f88b8fa720e7bbcf9cb63f3072f359af019f53e80d924f7348375423`,
+o header `b63069e7cd28ebb053a4ad31fe1011591cf8094eb56e838d315864cb8c2de0c8`
+e `fight_runtime_data.h` `7caabed2f1e4c11a98614c5f99e81634f4637b54aca4ad2a938b9ac6ac9590d1`.
+Uma nova ferramenta, data SDSC, fonte ou configuração pode mudar o resultado;
+registre hashes e repita build/QA, sem promover evidência histórica. O
+próximo problema dominante é publicar poses/contato com deadline e composição
+legal sob carga representativa; essa correção não autorizou cortar golpes nem
+declara qualidade de jogo.

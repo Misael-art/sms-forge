@@ -8,15 +8,24 @@ histórica de 72–88 px é outra opção, não o requisito deste consumidor. O
 contrato de qualidade vincula esse perfil ao SHA do GDD; o auditor verifica
 estrutura e vínculo, não fidelidade de pixels ou aprovação de arte.
 
-O manifesto nominal seleciona os headers e bancos `ryu_ken_cross` (49 bancos);
-essa configuração não passou a ser o corte de 24 bancos. Builds de candidato
-podem selecionar manifesto próprio sob o mesmo projeto e gravam recibo/ROM em
-`out/candidates/`, sem tocar a baseline. O manifesto de diagnóstico de 24
-bancos está versionado em `.mddev/candidates/pose_budget_pair_20261027.json`.
-O corte `pose_budget_pair_20261023`
-foi exercitado como diagnóstico com o mesmo runtime, sem o bloqueio histórico
-dos dez papéis. Dois atores em um quadro não aprovam composição, comandos ou
-budget: os picos por scanline e o derrame documentados continuam blockers.
+O manifesto nominal agora seleciona `pose_budget_facing_20261027` (24 bancos),
+regenerado do corte já previsto no GDD; a seleção anterior `ryu_ken_cross` de
+49 bancos permanece como histórico. O header antigo de 49 bancos aponta P2
+para outra convenção de face e o runtime atual o rejeita na compilação. Builds
+de candidato gravam recibo/ROM em `out/candidates/` sem tocar a baseline. A
+receita histórica de 24 bancos está em
+`.mddev/candidates/pose_budget_pair_20261027.json`.
+O comparativo de padding anterior está em
+`.mddev/candidates/pose_budget_pair_power2_20261027.json`. Ambas as receitas
+históricas apontam para o header antigo sem o contrato de faces; o fonte atual
+as recusa e elas exigem o snapshot de fonte associado ao recibo histórico.
+
+O manifesto nominal pede `makesms -pp`: na comparação controlada em BlastEm,
+uma imagem de 28 bancos acessou dados de bancos diferentes e a mesma imagem
+preenchida a 32 eliminou a divergência nos 14 spans observados. Isso não prova
+mapper físico. O corte de 24 bancos foi exercitado com o mesmo runtime, sem o
+bloqueio histórico dos dez papéis. Dois atores em um quadro não aprovam
+composição, comandos ou budget: os picos por scanline e o derrame continuam.
 
 O tile vazio do fundo ocupa o pattern 256 em `0x2000`; o pool de sprites usa
 `0x0000..0x1FFF`. O cancelamento de uma pose em voo quando se volta à pose
@@ -30,6 +39,15 @@ contíguas agrupam no máximo três pares de 64 B por chamada da API de tamanho
 byte; o budget por lado e a promoção após completar a pose permanecem. A
 implementação e seu custo não aprovam o orçamento: os candidatos medidos
 continuam derramando e a carga de entrega não está presente.
+
+O cache agora distingue `(pose, face)`: P1 usa patterns/meta P1 direita ou
+esquerda e P2 usa patterns/meta P2 direita ou esquerda, sempre da paleta
+compartilhada. As duas faces adjacentes devem caber no mesmo banco de 16 KiB;
+descritor inválido cancela o upload pendente e é contado. A origem usa a face
+residente enquanto a nova face sobe; lógica/contato ainda podem estar adiante
+da imagem. Sondas de orientação desejada, residente e submetida não são prova
+de apresentação completa na SAT. Ao modelar filas em `commit_budget.py`, a
+chave fornecida precisa distinguir as duas faces.
 
 ## Arquitetura proposta, não implementada
 PacoteMUGEN imutável→parse→IRtipado→perfilcompat→loweringAOT/tabelas

@@ -1,10 +1,10 @@
 {
  "schema": "sms_lesson_routes_v1",
  "status": "canonical_application_routes",
- "lesson_count": 122,
+ "lesson_count": 124,
  "source_coverage_sha256": "f086039f2d42542470ad5747b1693767e8dcd0ffedfab0e737f8b66d0b528755",
  "registry_source": "doc/curation/id_registry.json",
- "registry_issued_through": "L138",
+ "registry_issued_through": "L140",
  "excluded_holes": [
   "L012",
   "L020",
@@ -3483,7 +3483,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     },
@@ -3591,7 +3591,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3634,7 +3634,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3693,7 +3693,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3752,7 +3752,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3811,7 +3811,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3870,7 +3870,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3929,7 +3929,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -4732,7 +4732,7 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "09b19f4a8d019ba8fb915a9386058c34eed232e0fa8485d00f3bf1175eb2e28e",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "domain_review; a integridade da escrita fora do VBlank é hipótese de VDP/mapper resolvida em segunda implementação — o workflow que decide quando usar BlastEm carrega o caso"
     },
@@ -4833,6 +4833,104 @@
      "ambiguous": false
     }
    ]
+  },
+  {
+   "lesson_id": "L139",
+   "sources": [
+    "doc/curation/2026-10-27_l139_mapper_image_alias.json"
+   ],
+   "rule_section": "SMS_GLOBAL §131",
+   "current_rule_status": "fechada_com_ferramenta_e_correcao",
+   "application_entrypoints": [
+    {
+     "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
+     "coverage": "existing_application_entrypoint",
+     "selection_basis": "private mapper diagnostics compare resident VRAM to the ROM and preserve the emulator/hardware claim boundary"
+    }
+   ],
+   "application_gap": null,
+   "historical_or_refuted": null,
+   "scope_or_open_limit": "Specific non-power-of-two mapper alias; size alone does not prove runtime mapping or hardware.",
+   "measuring_tools": [
+    {
+     "reference": "build_inner.py",
+     "matches": [
+      "build_inner.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "blastem_sms.py",
+     "matches": [
+      "blastem_sms.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "audit_blastem_sms.py",
+     "matches": [
+      "audit_blastem_sms.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    }
+   ]
+  },
+  {
+   "lesson_id": "L140",
+   "sources": [
+    "doc/curation/2026-10-27_l140_facing_cache_contract.json"
+   ],
+   "rule_section": "SMS_GLOBAL §132",
+   "current_rule_status": "fechada_com_ferramenta_e_correcao",
+   "application_entrypoints": [
+    {
+     "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
+     "coverage": "existing_application_entrypoint",
+     "selection_basis": "private diagnostics distinguish resident facing bytes from submitted and displayed state"
+    }
+   ],
+   "application_gap": null,
+   "historical_or_refuted": null,
+   "scope_or_open_limit": "Facing layout and resident cache identity; not full SAT, visible contact or delivery.",
+   "measuring_tools": [
+    {
+     "reference": "mugen2sms/generators/versus_scene_cut.py",
+     "matches": [
+      "mugen2sms/generators/versus_scene_cut.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "build_inner.py",
+     "matches": [
+      "build_inner.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "blastem_sms.py",
+     "matches": [
+      "blastem_sms.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "audit_blastem_sms.py",
+     "matches": [
+      "audit_blastem_sms.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    }
+   ]
   }
  ],
  "limits": [
@@ -4843,7 +4941,8 @@
   "Tool-reference parsing may include documented APIs whose filenames are omitted; manually review unresolved references.",
   "Domain labels are heuristic; many runtime lessons concern tooling, methods and art evidence.",
   "Entry-point selection is manually reviewed at domain level; route existence is not runtime execution, learner comprehension or full behavioral coverage.",
-  "Three application gaps deliberately remain empty until the coordinator teaches their missing application in canonical skills."
+  "Three application gaps deliberately remain empty until the coordinator teaches their missing application in canonical skills.",
+  "source_coverage_sha256 is the preserved historical coverage snapshot; L139–L140 were bound separately in this update."
  ],
  "application_records": [
   {

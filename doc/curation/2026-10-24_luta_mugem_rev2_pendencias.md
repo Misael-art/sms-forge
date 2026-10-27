@@ -11,6 +11,15 @@ conciliação da ROM nominal, identidade AIR em ROM, coerência de contato e
 budget com carga completa. Evidências e SHAs estão no
 memory bank do consumidor; a tabela abaixo preserva os critérios de 24/10.
 
+No lote seguinte, a seleção de faces foi exercitada em uma travessia real e o
+alias observado de 28 bancos foi eliminado nas fronteiras testadas ao preencher
+a imagem para 32 bancos. O manifesto nominal seleciona o corte de 24 bancos
+do GDD; o header antigo de 49 bancos é recusado pelo runtime atual.
+Nenhum ID foi encerrado: permanecem abertos mapper físico, composição, contato,
+cadência e pior quadro sob carga completa. No roteiro medido de ataque, 13 de
+30 fronteiras da SAT ultrapassaram 8 sprites por scanline; esse resultado não
+generaliza a todas as ações nem identifica por si só o ator omitido.
+
 P0: impede concluir o núcleo/entrega. P1: necessário ao escopo ou à robustez. P2: distribuição e ergonomia secundárias.
 
 | ID | Prioridade | Pendência | Critério de fechamento |

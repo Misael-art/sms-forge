@@ -2678,3 +2678,44 @@ projeção é `assigned_checks_only` e nunca promove delivery. O build record do
 cap5 mantém `build`/`validation_report` verdadeiros e os demais eixos falsos até
 nova medição. O binding `doc/rom_asset_binding.json` prova source→res→símbolo→ROM
 por identidade, não por render independente.
+
+## 131. Tamanho da imagem bancária e alias de mapper (L139)
+
+Uma tabela de offsets correta e bytes presentes no arquivo não garantem que o
+mapper do emulador exponha o banco esperado. No rev2, a ROM de 28 bancos
+`5e79efa…` e a ROM de 32 bancos `ad0e148c…` tinham os primeiros 458752 bytes
+idênticos. No mesmo roteiro BlastEm SMS, 9 de 14 spans residentes da primeira
+coincidiram com dados quatro bancos antes; os 14 spans da imagem preenchida
+coincidiram com suas referências. Emulicious observou a travessia na ROM de
+32 bancos. São observações dessas ROMs e emuladores, não lei de todos os
+mappers nem prova de hardware físico.
+
+Regra: para esse perfil do rev2, o manifesto pede `makesms -pp`; o build
+central rejeita saída que não seja potência de dois quando essa opção é
+declarada e recusa políticas `-pm`/`-pp` concorrentes no mesmo build. Testes
+negativos verificam falha antes do recibo e preservação da ROM nominal. A
+imagem antiga e seu recibo histórico permanecem identificados. Acessos aos
+bancos exigem QA por ROM/SHA, com estados e padrões efetivamente lidos; tamanho
+sozinho não prova mapper, orientação, fidelidade, scanline ou prazo. Ver
+`blastem-sms-diagnostics.md` para o experimento complementar.
+
+## 132. A face é parte da identidade do cache de poses (L140)
+
+No versus-cut, a mesma pose pode ter patterns e metadados diferentes para
+direita e esquerda, e P2 usa a sua faixa da paleta de sprites compartilhada.
+O pacote antigo de 49 bancos apontava o `PoseRef` de P2 para a face direita;
+outro corte apontava para a esquerda. Interpretar ambos com a mesma convenção
+sem contrato pode montar peças válidas com bytes da face errada.
+
+No perfil adjacente atual, o gerador só declara
+`VERSUS_FACE_LAYOUT_ADJACENT_P2_LEFT` após verificar as expressões P1-direita
+e P2-esquerda. O runtime recusa header sem esse contrato, valida os spans no
+banco e usa `(pose, face)` como chave de cache. Enquanto outra face sobe,
+patterns, metadata e origem usam a face residente; um retorno cancela a geração
+abandonada. A travessia do rev2 foi exercitada por input em Emulicious e os
+spans por BlastEm no SHA identificado. Regenerar pelo conversor, sem editar
+headers gerados à mão.
+
+Limite: face residente/submetida não prova SAT completa nem contato visível;
+troca de direção pode esperar upload. Geometria, todas as composições,
+starvation, prazo e sincronização com combate continuam exigindo QA própria.

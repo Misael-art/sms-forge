@@ -85,6 +85,15 @@ rtk proxy python3 tools/sms_wrapper/audit_blastem_sms.py \
 
 ## Ler telemetria corretamente
 
+- Mapper bancário (L139): compare o span efetivamente residente em VRAM com os
+  bytes da ROM e os descritores do mesmo SHA, em fronteiras auditadas. No rev2,
+  uma imagem de 28 bancos mostrou alias para quatro bancos antes; com `-pp`, a
+  imagem equivalente de 32 bancos coincidiu nos casos medidos. Reproduzir o
+  caso sob o mapper/alvo próprio; potência de dois não prova hardware nem
+  substitui um teste que realmente acesse os bancos.
+- Faces (L140): a chave de cache, o trecho de patterns e os metadados devem
+  apontar para a mesma orientação. A convenção de `PoseRef` vem do header
+  gerado; a confirmação de RAM/VRAM não substitui SAT, vídeo ou contato.
 - Snapshots: RAM Z80 `0xC000..0xDFFF` (8192 bytes), VRAM Mode4 (16384),
   registradores VDP 0–10, CRAM **interna** e frequência/volume PSG, mais PC/SP,
   AF/BC/DE/HL/IX/IY/IFF1 e contador de ciclos interno do emulador.

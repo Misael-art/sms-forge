@@ -1228,6 +1228,24 @@
    ],
    "dedup_key": "production_capability_review_20261027",
    "implementation_commit": "f5d3dcb777554b7bceb309abe45e1bb98856ecb0"
+  },
+  {
+   "ts": "2026-10-27",
+   "kind": "curation",
+   "summary": "L139 (§131): a ROM rev2 de 28 bancos mostrou alias de quatro bancos no BlastEm; a imagem idêntica preenchida a 32 bancos coincidiu com 14/14 spans observados. -pp passa a ser verificado no build; não é prova de mapper físico.",
+   "sources": [
+    "doc/curation/2026-10-27_l139_mapper_image_alias.json"
+   ],
+   "dedup_key": "l139_blastem_mapper_alias_non_power_two_image_20261027"
+  },
+  {
+   "ts": "2026-10-27",
+   "kind": "curation",
+   "summary": "L140 (§132): pose e face identificam o cache; o gerador declara a convenção P1-direita/P2-esquerda e o runtime rejeita header legado, valida spans e usa metadata da face residente. Travessia observada, sem aprovar contato, SAT completa ou prazo.",
+   "sources": [
+    "doc/curation/2026-10-27_l140_facing_cache_contract.json"
+   ],
+   "dedup_key": "l140_versus_adjacent_facing_identity_20261027"
   }
  ]
 }
