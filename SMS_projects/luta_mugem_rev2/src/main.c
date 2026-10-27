@@ -3,8 +3,8 @@
  * Proposito: medir na ROM a parede de streaming VRAM e a pressao de scanline
  * do renderer sprite-only com DOIS atores reais (pacote de dados selecionado
  * pelo manifesto). NAO e entrega de gameplay:
- * omissoes declaradas — sem HUD/audio, sem projetel/FX, sem hitstun com
- * animacao de dano, sem hibrido BG (design wave-4). Desde a wave-5b o papel
+ * omissoes declaradas — sem HUD/audio final, sem projetel/FX, sem hitstun com
+ * animacao de dano; BG e SFX diagnosticos sao candidatos opt-in. Desde a wave-5b o papel
  * de cada ator vem do PADEREIO (pad fisico no lado 0, IA no lado 1, ambos
  * pelo mesmo anel de input/tier/comandos), nao de um script: continua sendo
  * maquina de estados sobre dados gerados, nao interpretador CNS.
@@ -109,6 +109,9 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #ifndef LUTA_BG_CAMERA
 #define LUTA_BG_CAMERA 0
 #endif
+#ifndef LUTA_DIAG_PSG
+#define LUTA_DIAG_PSG 0
+#endif
 #if UPLOAD_CHUNK_PAIRS < 1 || UPLOAD_CHUNK_PAIRS > 8
 #error "quota candidata de upload deve estar entre 1 e 8 pares por lado"
 #endif
@@ -132,6 +135,17 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #endif
 #if LUTA_BG_CAMERA && !LUTA_BG_ACTOR
 #error "camera experimental exige ator BG"
+#endif
+#if LUTA_DIAG_PSG != 0 && LUTA_DIAG_PSG != 1
+#error "LUTA_DIAG_PSG deve ser 0 ou 1"
+#endif
+#if LUTA_DIAG_PSG && !LUTA_PROFILE
+#error "PSG diagnostico exige perfil de producao"
+#endif
+#if LUTA_DIAG_PSG
+#include "PSGlib.h"
+#include "sfx_hit.h"
+#include "sfx_hurt.h"
 #endif
 
 /* wave-5b: o classificador de tier do doador tem UM limiar (INPUT_TIER_T) e os
@@ -247,6 +261,7 @@ volatile unsigned char __at(0xC85A) probe_tier_t;            /* INPUT_TIER_T */
 volatile unsigned char __at(0xC85B) probe_ai_beat;           /* beat da IA */
 volatile unsigned int __at(0xC85C) probe_cmd_last_index_p1;
 volatile unsigned int __at(0xC85E) probe_cmd_last_index_p2;
+volatile unsigned int __at(0xC860) probe_audio_hit_queued;
 
 /* ---------------- Lote B.2: sondas da politica de producao ----------------
  * Corredor livre 0xC862..0xC8D1 (folga medida 1547 B; mapa f348df69). Quatro
@@ -294,6 +309,8 @@ volatile unsigned int __at(0xC89A) probe_prefetch_discarded;
  * publica a entrada DEPOIS de todos os bytes; so o candidato com trace grava
  * por tick. O leitor precisa limitar a janela para excluir wrap ambiguo. */
 volatile unsigned char __at(0xC89C) probe_upload_trace_seq;
+volatile unsigned int __at(0xC89D) probe_audio_guard_queued;
+volatile unsigned char __at(0xC89F) probe_audio_last_played;
 volatile unsigned char __at(0xC8A0) probe_upload_trace[32];
 volatile unsigned int __at(0xC8C0) probe_bg_invalid;
 volatile unsigned int __at(0xC8C2) probe_bg_map_updates;
@@ -303,6 +320,7 @@ volatile unsigned int __at(0xC8C8) probe_bg_map_late;
 volatile unsigned char __at(0xC8CA) probe_bg_camera_shift;
 volatile unsigned int __at(0xC8CB) probe_bg_camera_conflict;
 volatile unsigned int __at(0xC8CD) probe_bg_camera_applied;
+volatile unsigned char __at(0xC8CF) probe_audio_guard_dropped;
 
 /* Contrato worst-frame do measure_worst_frame.py (L061), SMRT aditivo na
  * base 0xC800: probe_vline = VCounter lido APOS todo o trabalho do frame
@@ -331,6 +349,11 @@ __sfr __at (0x7e) SMS_VCounterPort;
  * px=uploaded, py=role_p1, hp=step, score=max_line, boss/over=used/free. */
 volatile unsigned char __at(0xC8E0) probe_smrt_magic[4];    /* 'S','M','R','T' */
 volatile unsigned char __at(0xC8E4) probe_smrt_schema;      /* 1 */
+/* E5..E8 nao fazem parte do cabecalho SMRT de cinco bytes nem dos offsets do
+ * worst-frame. Primeiro tick SFX e contagem sao u16; a leitura exige janela
+ * limitada para excluir wrap ambiguo. D0..D6 permanecem para o medidor. */
+volatile unsigned int __at(0xC8E5) probe_audio_played;
+volatile unsigned int __at(0xC8E7) probe_audio_first_frame;
 volatile unsigned int __at(0xC8F0) probe_smrt_frame;        /* espelho de frames */
 volatile unsigned char __at(0xC8F2) probe_b_step;
 volatile unsigned char __at(0xC8F3) probe_b_maxline;
@@ -1195,6 +1218,53 @@ static unsigned char boxes_overlap(const Frame *fa, unsigned char sa,
     return 0u;
 }
 
+#if LUTA_DIAG_PSG
+/* Carga diagnostica: a mesma iteracao admite um evento; hit tem prioridade
+ * sobre guard. Um guard nao interrompe hit ainda ativo. Os contadores nao
+ * provam que o som foi audivel nem que corresponde a identidade MUGEN. */
+#define DIAG_SFX_NONE 0u
+#define DIAG_SFX_GUARD 1u
+#define DIAG_SFX_HIT 2u
+static unsigned char diag_sfx_pending, diag_sfx_active_priority;
+
+static void diag_sfx_queue(unsigned char event) {
+    if (event == DIAG_SFX_GUARD) {
+        probe_audio_guard_queued++;
+        if (diag_sfx_pending != DIAG_SFX_NONE) {
+            probe_audio_guard_dropped++;
+            return;
+        }
+    } else if (event == DIAG_SFX_HIT) {
+        probe_audio_hit_queued++;
+        if (diag_sfx_pending == DIAG_SFX_GUARD) probe_audio_guard_dropped++;
+    } else return;
+    if (event > diag_sfx_pending) diag_sfx_pending = event;
+}
+
+static void diag_sfx_tick(void) {
+    unsigned char status = PSGSFXGetStatus();
+    if (status != PSG_PLAYING) diag_sfx_active_priority = DIAG_SFX_NONE;
+    if (diag_sfx_pending != DIAG_SFX_NONE) {
+        if (diag_sfx_pending == DIAG_SFX_GUARD && status == PSG_PLAYING &&
+            diag_sfx_active_priority == DIAG_SFX_HIT) {
+            probe_audio_guard_dropped++;
+        } else {
+            if (status == PSG_PLAYING) PSGSFXStop();
+            if (diag_sfx_pending == DIAG_SFX_HIT)
+                PSGSFXPlay((void *)sfx_hit, SFX_CHANNELS2AND3);
+            else
+                PSGSFXPlay((void *)sfx_hurt, SFX_CHANNEL3);
+            diag_sfx_active_priority = diag_sfx_pending;
+            probe_audio_last_played = diag_sfx_pending;
+            if (probe_audio_played == 0u) probe_audio_first_frame = frames;
+            probe_audio_played++;
+        }
+        diag_sfx_pending = DIAG_SFX_NONE;
+    }
+    PSGSFXFrame();
+}
+#endif
+
 static void combat_step(const Frame *fn0, const Frame *fn1) {
     unsigned char a;
     for (a = 0u; a < 2u; a++) {
@@ -1216,10 +1286,16 @@ static void combat_step(const Frame *fn0, const Frame *fn1) {
         }
         if (characters[d].states[fighter[d].role].flags & S_BLOCKABLE) {
             probe_guard_events++;
+#if LUTA_DIAG_PSG
+            diag_sfx_queue(DIAG_SFX_GUARD);
+#endif
             push = cd->guard_push;
         } else {
             unsigned int taken;
             probe_hit_events++;
+#if LUTA_DIAG_PSG
+            diag_sfx_queue(DIAG_SFX_HIT);
+#endif
             taken = (unsigned int)st->dmg;
             if (taken > fighter[d].life) taken = fighter[d].life;
             fighter[d].life = (unsigned short)(fighter[d].life - taken);
@@ -1753,6 +1829,7 @@ void main(void) {
     probe_phase = 0u;
     probe_worst_done = 0u;
     probe_vline_min = 0xFFu;
+    probe_audio_first_frame = 0u;
     /* Referencias volateis conservam o corredor no mapa mesmo sem trace. */
     probe_upload_trace_seq = 0u;
     probe_upload_trace[0] = 0u;
@@ -1769,6 +1846,11 @@ void main(void) {
     probe_bg_camera_shift = 0u;
     probe_bg_camera_conflict = 0u;
     probe_bg_camera_applied = 0u;
+    probe_audio_hit_queued = 0u;
+    probe_audio_guard_queued = 0u;
+    probe_audio_last_played = 0u;
+    probe_audio_played = 0u;
+    probe_audio_guard_dropped = 0u;
     /* atribuicao regional: __at nao e inicializado pelo crt0 (L009);
      * o hook da ISR so e instalado com as somas ja zeradas. */
 #if LUTA_DIAG_TELEMETRY
@@ -1795,6 +1877,12 @@ void main(void) {
     frames = 0u;
     pacing_step = 0u;
     pacing_remainder = 0u;
+#if LUTA_DIAG_PSG
+    diag_sfx_pending = DIAG_SFX_NONE;
+    diag_sfx_active_priority = DIAG_SFX_NONE;
+    PSGSFXStop();
+    PSGSilenceChannels();
+#endif
 #if LUTA_BG_ACTOR
     bg_previous_meta = 0;
     bg_previous_base = bg_previous_pairs = bg_previous_full = 0u;
@@ -1937,6 +2025,9 @@ void main(void) {
                 probe_upload_maxvbl = moved;
         }
         SMS_copySpritestoSAT();
+#if LUTA_DIAG_PSG
+        diag_sfx_tick();
+#endif
         worst_sample();
     }
 #else
