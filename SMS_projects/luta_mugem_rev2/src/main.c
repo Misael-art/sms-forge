@@ -243,6 +243,7 @@ volatile unsigned char __at(0xC88C) probe_desired_face_p1;
 volatile unsigned char __at(0xC88D) probe_desired_face_p2;
 volatile unsigned char __at(0xC88E) probe_submit_face_p1;
 volatile unsigned char __at(0xC88F) probe_submit_face_p2;
+volatile unsigned int __at(0xC890) probe_push_invalid_geometry;
 
 /* Contrato worst-frame do measure_worst_frame.py (L061), SMRT aditivo na
  * base 0xC800: probe_vline = VCounter lido APOS todo o trabalho do frame
@@ -744,8 +745,9 @@ static void advance_actor(unsigned char side, unsigned int *out_pose_global,
  *  - HITSTUN com animacao de dano NAO implementado: o tempo do hitdef nao
  *    esta no pacote versus-cut e os estados de hit pertencem ao conjunto
  *    common1.cns bloqueado (fronteira registrada, nao inventado);
- *  - pusher usa apenas hurtbox x hurtbox (geometria do AIR); a taxa de
- *    1 px/frame e constante de engine (dados de player size nao existem).
+ *  - pusher no chao usa soma das larguras frontais convertidas do pacote;
+ *    sem Width/PlayerPush CNS, largura traseira ou push no ar, e uma
+ *    aproximacao registrada, nao equivalencia completa com a fonte.
  * Render: o versus-cut guarda as duas faces em patterns distintos. O cache
  * seleciona os bytes e metadados da face residente; enquanto outra face
  * esta pendente, a logica e o contato ainda podem estar adiante da imagem.
@@ -755,7 +757,6 @@ static void advance_actor(unsigned char side, unsigned int *out_pose_global,
  * Conversao a tela aqui; sem float, sem malloc (AGENTS.md). */
 
 #define CLSN_SENT     (-32767)
-#define PUSHER_PX_Q8  (256)          /* 1 px/frame por ator, separacao */
 
 typedef struct { signed int x1, y1, x2, y2; } MugenRect;
 typedef struct { signed int l, t, r, b; } ScreenRect;
@@ -893,17 +894,40 @@ static void facing_step(void) {
     }
 }
 
-static void pusher_step(const Frame *fn0, const Frame *fn1) {
-    if (fighter[0].y || fighter[1].y) return;   /* so no chao */
-    if (!boxes_overlap(fn0, 0u, 1u, fn1, 1u)) return;
-    probe_pusher_frames++;
-    if (fighter[0].x <= fighter[1].x) {
-        move_x(0u, -PUSHER_PX_Q8);
-        move_x(1u, PUSHER_PX_Q8);
-    } else {
-        move_x(0u, PUSHER_PX_Q8);
-        move_x(1u, -PUSHER_PX_Q8);
+/* Aproximacao limitada: no chao, a largura frontal convertida dos dois
+ * personagens define a separacao. A ordem foi registrada antes do movimento,
+ * portanto um passo que atravesse o outro ator nao inverte essa ordem. No ar
+ * nao ha push, permitindo cross-up. Width/PlayerPush CNS e largura traseira
+ * ainda nao sao executados; nao declarar equivalencia completa de MUGEN. */
+static void pusher_step(unsigned char left_side) {
+    unsigned char right_side;
+    unsigned int lx, rx, lw, rw, span, need, center, half, target;
+
+    if (fighter[0].y || fighter[1].y) return;
+    if (left_side > 1u) { probe_push_invalid_geometry++; return; }
+    right_side = (unsigned char)(left_side ^ 1u);
+    lx = fighter[left_side].x;
+    rx = fighter[right_side].x;
+    lw = characters[left_side].ground_front_q8;
+    rw = characters[right_side].ground_front_q8;
+    span = (unsigned int)(DIAG_X_MAX - DIAG_X_MIN);
+    if (lx < DIAG_X_MIN || lx > DIAG_X_MAX || rx < DIAG_X_MIN ||
+        rx > DIAG_X_MAX || !lw || !rw || lw > span || rw > span - lw) {
+        probe_push_invalid_geometry++;
+        return;
     }
+    need = (unsigned int)(lw + rw);
+    if (lx <= rx && rx - lx >= need) return;
+
+    /* floor((lx+rx)/2) sem soma de Q8.8 que transborde o int16 do Z80. */
+    center = (unsigned int)((lx >> 1) + (rx >> 1) + (lx & rx & 1u));
+    half = (unsigned int)(need >> 1);
+    target = center > half ? (unsigned int)(center - half) : 0u;
+    if (target < DIAG_X_MIN) target = DIAG_X_MIN;
+    if (target > DIAG_X_MAX - need) target = DIAG_X_MAX - need;
+    fighter[left_side].x = target;
+    fighter[right_side].x = (unsigned int)(target + need);
+    probe_pusher_frames++;
 }
 
 /* ---------------- wave-5b: estagio de input ---------------- */
@@ -1009,6 +1033,7 @@ static void vblank_account(void) {
  * wrap de stream (o stream virou passo explicito do laco). */
 static void logic_tick(const Frame *fn[2], unsigned int poses_req[2]) {
     unsigned char side;
+    unsigned char left_before = (fighter[0].x <= fighter[1].x) ? 0u : 1u;
 #if LUTA_DIAG_TELEMETRY
     unsigned char t0 = probe_vbl_tick;
 #endif
@@ -1059,7 +1084,7 @@ static void logic_tick(const Frame *fn[2], unsigned int poses_req[2]) {
      * os frames logicos deste frame (frames_now), que e o quadro
      * visivel quando probe_stall_frames == 0. */
     combat_step(fn[0], fn[1]);
-    pusher_step(fn[0], fn[1]);
+    pusher_step(left_before);
     for (side = 0; side < 2u; side++) {
         if (poses_req[side] != 0xFFFFu) {
             if (poses_req[side] < VERSUS_POSE_COUNT)
