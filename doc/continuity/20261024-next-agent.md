@@ -194,3 +194,36 @@ A cópia local do runtime e das evidências foi verificada em
 (SHA `90b4327fefff5a9b95ec3f0564dd088c7148efda78ad14d805d218fd3096dcd5`,
 13792 arquivos; manifesto com o mesmo nome e extensão `.json`). Tanto a cópia
 quanto o owner estão no mesmo disco; não há backup externo novo.
+
+## 2026-10-27 — quotas e medição por ator
+
+Em candidatos isolados, quotas de 1/2/4/8 pares por lado produziram
+respectivamente 21/2019/2787/1749 derrames no selo de 3000 iterações, todos
+reprovados, com 25–26 iterações iniciais em stepping e sem carga completa.
+No roteiro de 340 frames VDP, a espera de P1 foi 167/168, 157/164, 114/161 e
+54/158 ticks de input; a vida de P2 caiu somente na quota 8. Relógios e
+trajetórias diferem: não atribuir o resultado do golpe só à quota. Não
+promover o menor número de derrames como solução de apresentação.
+
+O builder aceita `toolchain.defines` numéricos somente em `--build-dir`;
+inclui as mesmas flags no SDCC de dependências e de compilação e as registra
+no recibo. Exemplos versionados:
+`.mddev/candidates/upload_trace_chunk4_20261027.json` e
+`.mddev/candidates/upload_trace_chunk8_20261027.json`. As candidatas
+correspondentes estão em `out/candidates/20261027_upload_trace{4,8}/`. O
+anel diagnóstico mede pares por ator/tick e adiciona trabalho ao VBlank;
+seus resultados e auditoria de janela estão em
+`out/evidence/20261027_upload_trace{4,8}_case/`. A ROM com trace desligado
+está em `out/candidates/20261027_trace_disabled/`, SHA `ec6fd175…`; seu FPS
+foi 26,48/25,23 e o selo derramou (min 7, delta 1749), ambos reprovados e
+sem carga completa. Seguir a análise de residência seletiva com os
+pares novos/tempo AIR e o serviço realmente observado, sem publicar uma
+pose especulativa antes do pedido ou desalojar um ator urgente.
+O fechamento passou 269 testes rev2 (150 deselecionados), 135 selftests
+(probe opcional não executado), 75 ferramentas de medição e os checks de
+documentação, hardware, aprendizado e corredor; o contrato é de planejamento.
+A cópia local da continuidade deste lote foi verificada em
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-upload-trace.tar.gz`
+(SHA `097ec3af5830c937d8ae5dfe1432916002b115c2c7770226ff4c5a228329540c`,
+15812 arquivos; manifesto com o mesmo nome e extensão `.json`). O pacote e o
+owner estão no mesmo disco, sem proteção externa nova.

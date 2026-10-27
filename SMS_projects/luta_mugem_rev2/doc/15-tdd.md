@@ -64,6 +64,14 @@ largura traseira ou push no ar. Geometria inválida é contada e não é
 substituída por constante. A cobertura da ROM é limitada aos roteiros do
 memory bank; pusher e facing não qualificam toda a física ou o combate.
 
+`LUTA_UPLOAD_TRACE=1` habilita somente em candidato o anel diagnóstico de
+8 registros com frame e pares efetivamente copiados por lado; o seq é
+publicado depois do registro. A leitura exige limite menor que o anel e
+auditoria aritmética do contador. Como as gravações ocorrem no VBlank, a ROM
+instrumentada não valida o budget da ROM sem sonda. Quotas de 1, 2 e 4 pares
+reprovaram no selo e aumentaram a espera de pose no roteiro observado; não
+foram promovidas. O valor nominal continua 8, também reprovado em VBlank.
+
 ## Arquitetura proposta, não implementada
 PacoteMUGEN imutável→parse→IRtipado→perfilcompat→loweringAOT/tabelas
 com predicados executáveis→runtimeC/Z80→ROMmedida. Reusar parsers/testes

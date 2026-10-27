@@ -45,6 +45,14 @@
       "status": "partial_not_delivery",
       "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
       "summary": "Travessia no chão reproduzida na baseline; candidata usa as larguras frontais já geradas e preservou ordem em roteiros amostrados nos dois emuladores, inclusive borda, com geometria inválida contada. A implementação é aproximação limitada e não qualifica push aéreo ou controllers fonte. A SAT dessa ROM excedeu 8/linha em 8 de 30 fronteiras de ataque; FPS e pior quadro reprovaram."
+    },
+    {
+      "date": "2026-10-27",
+      "ids": ["R05", "R06", "R09", "IN05"],
+      "closed_ids": [],
+      "status": "partial_not_delivery",
+      "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+      "summary": "Quotas de 1/2/4/8 pares reprovaram no pior quadro; quotas menores aumentaram espera de pose no roteiro e não produziram dano nele. Um anel diagnóstico mediu pares efetivamente copiados por ator/tick em ROMs instrumentadas de quota 4 e 8, com janela aritmética auditada e overhead de VBlank declarado. Nenhuma quota foi aprovada."
     }
   ],
   "count": 55,

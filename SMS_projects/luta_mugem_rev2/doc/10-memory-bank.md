@@ -1,5 +1,65 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — quota e trilha de uploads (diagnóstico)
+
+Com a geometria da candidata `b5c83830…`, foram buildadas ROMs isoladas que
+mudam apenas `UPLOAD_CHUNK_PAIRS` por lado: 1 (`93c928e1…`), 2 (`e19b3e3e…`)
+e 4 (`a4531e11…`); a baseline usa 8 (`b5c83830…`). Os fontes temporários e
+recibos estão nos diretórios de cada candidato e o fonte principal foi
+restaurado. No mesmo roteiro de 340 frames VDP, os deltas da espera de P1
+foram 167/168, 157/164, 114/161 e 54/158 ticks de input, respectivamente;
+P2 esperou 126, 104, 78 e 39. As leituras não são atômicas por tick e cada
+ROM produziu trajetória/relógio diferente. O botão foi reconhecido nos quatro
+casos, mas só a baseline reduziu a vida de P2 (1000→888). Isso não atribui a
+diferença de dano exclusivamente à fila nem aprova o contato visível.
+
+Os selos de 3000 iterações reprovaram: quota 1, `vovf_delta=21`/mínimo 0;
+quota 2, 2019/7; quota 4, 2787/2; quota 8, 1749/7. As primeiras 25–26
+iterações foram por stepping e não havia HUD/FX/PSG representativos. O menor
+derrame da quota 1 não torna o restante da janela aprovado: a sonda não
+separa os 21 eventos por etapa e a espera visual foi elevada. As sessões e
+bundles estão em `out/evidence/20261027_chunk{1,2,4,8}_gameplay/` e
+`20261027_chunk{1,2,4}_worst/`; a quota 8 está em
+`20261027_ground_push_worst/`.
+
+Para medir a divisão por ator sem sobrescrever fonte principal, o builder
+aceita `toolchain.defines` inteiros apenas em candidato isolado; rejeita nomes
+inválidos, valores fora de 0–65535 e defines em build nominal. As flags entram
+no SDCC de dependências e de compilação e ficam no recibo. Os manifestos
+`upload_trace_chunk{4,8}_20261027.json` ativam um anel diagnóstico de 8
+registros `[frame, pares P1, pares P2]`, publicado após o upload. O anel soma
+trabalho dentro do VBlank: estas ROMs não são prova do budget da ROM normal.
+Os dois bundles Emulicious foram conferidos e fechados. A quota 4 registrou
+161 ticks, com 442/302 pares P1/P2 e 38 ticks com ambos no máximo; a quota 8
+registrou 156 ticks, 406/299 pares e 10 ticks com ambos no máximo. O contador
+envolvente foi auditado em 86 janelas por sessão com limite declarado de até
+um tick em voo mais os frames VDP avançados; a auditoria prova apenas a
+aritmética sob esse limite, não sua autenticidade ou ausência de reset.
+As ROMs e trajetórias distintas não permitem atribuição causal isolada.
+
+Com trace desligado, a build atual isolada gerou ROM
+`ec6fd1758873627738b005c7b077478ed8b0b96a5443d035ef688e78e17c652f`;
+Emulicious privado repetiu o botão e vida 1000→888 na sessão
+`2fd15051d93d4fdfbcbac10631d2ba0e`. Na sessão
+`be858144661644ba967ae54910130832`, duas janelas NTSC registraram
+26,48/25,23 atualizações/s e reprovaram FPS. Os bundles foram conferidos e
+as sessões fechadas. O selo da mesma ROM na sessão
+`b2cacb3854cd4af6b3f443b48c596696` também derramou (`vline_min=7`,
+`vovf_delta=1749`), com 26 iterações iniciais por stepping e sem carga
+representativa; bundle conferido e sessão encerrada.
+O fechamento passou 269 testes rev2 (150 deselecionados), 135 selftests
+(probe opcional de projeto não executado), 75 ferramentas de medição, doc
+sync, hardware, aprendizado, corredor e contrato apenas de planejamento.
+
+O `scale_pilot` anterior, aplicado aos mesmos bancos reproduzidos, calcula
+demanda ideal de pares novos por transição com reuso exato hipotético. Nas
+transições P1-direita, 29/37 excedem 128 B/tick e 9/37 excedem 256; nas
+P2-esquerda, 32/34 e 5/34. Por exemplo, a ação P1 280 pede média mínima de
+192 B/tick na transição 0→1 e 272 na 1→2. O modelo supõe remapeamento e
+pré-carregamento perfeitos; não mede throughput nem os transfers discretos e
+não está implementado na ROM. Seleção/residência de dados precisa ser medida
+sem antecipar a apresentação ou desalojar poses necessárias.
+
 ## 2026-10-27 — separação de corpos no chão (candidato)
 
 A baseline `cac3d8fb…` repetiu o achado lateral de L098: sob direita contínua,
