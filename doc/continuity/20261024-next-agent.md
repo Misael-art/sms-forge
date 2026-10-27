@@ -258,3 +258,32 @@ Continuidade local: `.runtime/backups/luta_mugem_rev2-runtime-20261027-prefetch.
 SHA `7223ccb76799f5bcf3c61348dce6eb333c8fca6ac3214e62bce841ba40eeee35`,
 manifesto com mesmo nome e extensão `.json`, verificado em 17340 arquivos.
 Essa cópia e o owner estão no mesmo disco; não há nova proteção externa.
+
+## 2026-10-27 — pacing sequencial e investigação de BG
+
+O contador da janela de 150 ticks agora conserva quociente/resto sequenciais,
+sem as duas divisões por tick; o teste C percorreu duas voltas completas de
+16 bits. A ROM default `0ed9ce5a119374509defe53b836630690d01849f6713845be5a4ab586d11bfdd`
+observou a volta natural em sessão Emulicious `cb71abbda3d44c4a9cabade2d877c50d`,
+226 amostras estáveis nas fronteiras e saturação; houve uma primeira tentativa
+de cobertura incompleta por erro do roteiro, preservada separadamente.
+
+A mesma ROM reconheceu golpe e dano e voltou a responder à esquerda depois
+da recuperação (sessão `f17dc2ade956428794666f700428e9f3`, vídeo e bundle
+válidos). O FPS NTSC de 26,55/25,80 e o selo de 1749 derrames/mínimo 7
+continuam reprovados; não havia HUD/FX/PSG representativos. A candidata com
+antecipação também repetiu o golpe e reprovou FPS. Nenhum ID foi encerrado.
+A suíte passou 272 testes `rev2`, com 150 deselecionados.
+
+Próximo experimento: um ator no BG usando scroll global e o outro em sprites,
+com patterns já residentes. A análise estática encontrou pico isolado P1=6 e
+P2=8 por linha; o modelo também encontrou perda de pixels na coluna esquerda
+sob `LEFTCOLBLANK`. Isso é risco explícito, não solução ou decisão de mudar o
+viewport. Testar ROM, movimento sub-tile, bordas, prioridade/overlap, HUD/FX,
+PNT e deadline antes de qualquer promoção. Detalhes no memory bank.
+
+Cópia local de continuidade verificada:
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-pacing.tar.gz`, SHA
+`c12f81087eb2b953033c20d29e336ef455d6941246619e822d3623b7e7421d77`,
+manifesto com mesmo nome e extensão `.json`, 18273 arquivos. Continua no
+mesmo disco do owner; não é backup externo.

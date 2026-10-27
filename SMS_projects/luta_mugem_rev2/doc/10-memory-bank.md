@@ -1,5 +1,59 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — relógio de pacing sequencial
+
+O laço agora mantém quociente e resto incrementais da janela de 150 ticks,
+com reset explícito ao voltar de 65535 a zero. Ele substitui o módulo e a
+divisão de 16 bits executados por tick e a divisão no limite da janela, sem
+alterar os valores das sondas. O teste C compara todos os valores em duas
+voltas completas, inclusive saturação de `probe_b_step`; o assembly SDCC da
+nova candidata não contém as chamadas `__moduint`/`__divuint` antes presentes
+nesse caminho. Isso não prova, por si só, ganho de FPS.
+
+Fonte `08ca9d6d5d6552060cd56a12d977ec2862f42b20f134c1f56d18fdb0fac0028c`.
+ROM default `0ed9ce5a119374509defe53b836630690d01849f6713845be5a4ab586d11bfdd`;
+com antecipação experimental `0e7d293fb52cd1141e96b93b0acb5351d539731db58b3e6ec51d8f03982365f1`.
+Os recibos e fontes por hash estão em `out/candidates/20261027_pacing_*`.
+As folgas do corredor são 1531 B e 1527 B respectivamente, com 143 sondas.
+
+Na ROM default, 226 amostras estáveis em execução por stepping conferiram
+`probe_step` e `probe_b_step` em torno de 150, 300, 38250, 38400 e da volta
+natural observada 65534→0, após 153299 frames VDP; sessão
+`cb71abbda3d44c4a9cabade2d877c50d`, bundle válido e sessão encerrada. O
+primeiro roteiro pulou duas fronteiras por erro de controle do próprio
+instrumento; a falha e seu journal foram preservados em
+`out/evidence/20261027_pacing_wrap_default/`. O roteiro corrigido passou
+self-check e está em `out/evidence/20261027_pacing_wrap_probe.py`; sua
+segunda sessão não prova throughput real nem substitui cobertura de gameplay.
+
+Em Emulicious privado, a ROM default registrou botão reconhecido, vida de P2
+1000→888 e retorno a idle; após nova entrada para a esquerda P1 passou de
+x=135 a x=79 e voltou a idle (sessão `f17dc2ade956428794666f700428e9f3`,
+vídeo e bundle conferidos, sessão encerrada). Com antecipação habilitada,
+outro roteiro observou o mesmo dano (sessão `e4f7a4f7f0a04e0689cd3e734acf2d52`).
+Isso não prova guarda, contato visível ou o ciclo completo de combate.
+
+As janelas NTSC em tempo real para default foram 26,55/25,80 atualizações/s;
+a ROM anterior sem antecipação mediu 26,49/25,23 na comparação próxima.
+Com antecipação a nova ROM mediu 26,07/23,85. Todas reprovam; a diferença
+entre janelas não isola ganho causal. O selo da ROM default
+(`17123eff1be9416cbaeb32647d3785fe`) registrou 1749 derrames e `vline_min=7`
+em 3000 iterações, incluindo 26 iniciais por stepping e sem HUD, FX ou PSG.
+Os bundles dessas sessões foram conferidos e fechados; nenhum orçamento foi
+aprovado, nenhum ID do backlog foi encerrado. A suíte passou 272 testes
+`rev2`; 150 foram deselecionados.
+
+Próximo ramo: um único ator em BG com scroll global e o outro na SAT pode ser
+testado sem duplicar patterns. No META atual isolado, o simulador passou
+self-check e mediu pico 6 por linha para P1 e 8 para P2, sem HUD/FX. Um modelo
+de coordenadas com `LEFTCOLBLANK` comparou 96 variantes e 1056 posições,
+sem diferenças fora da máscara, mas registrou perda na coluna esquerda em
+195 casos (até 422 pixels); é modelo, não prova de VDP, prioridade ou custo.
+Relatórios `out/evidence/20261027_actor_scanline_report.json` e
+`20261027_bg_scroll_model_report.json`. A candidata deve preservar o problema
+de borda como bloqueio explícito e medir atualização de PNT, overlap e prazo;
+nenhuma alteração de viewport ou fidelidade está aprovada.
+
 ## 2026-10-27 — residência antecipada de uma pose (candidato)
 
 `LUTA_SPECULATIVE_PREFETCH=1` existe apenas em builds candidatas; o default

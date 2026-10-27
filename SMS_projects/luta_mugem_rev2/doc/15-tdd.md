@@ -55,6 +55,12 @@ acesso aleatório. Ao voltar de 65535 para 0, o cursor reinicia junto do frame.
 O teste C cobriu a volta completa; a medição da ROM candidata ainda reprova
 FPS e VBlank, conforme o memory bank.
 
+O relógio da janela de pacing também usa quociente/resto sequenciais em vez
+de divisão no caminho quente, inicializados no boot e reiniciados junto do
+frame u16. Em 150 ticks a sonda avança uma unidade; `probe_b_step` satura em
+255. A volta de 65535 foi testada no host e observada em ROM por stepping;
+os selos de FPS e VBlank seguem reprovados.
+
 `LUTA_SPECULATIVE_PREFETCH` é uma opção experimental desativada por padrão.
 Ela reserva a próxima pose AIR no `pending`, sem publicá-la até o pedido
 efetivo; pedidos urgentes têm prioridade de banda e podem recuperar reserva
