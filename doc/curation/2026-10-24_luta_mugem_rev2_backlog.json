@@ -37,6 +37,14 @@
       "status": "partial_not_delivery",
       "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
       "summary": "Cursor sequencial da IA preserva o plano em teste C exaustivo e foi exercitado em ROM; duas janelas NTSC e o selo de VBlank continuam reprovados. Snapshots unitários do ataque indicam coincidência de pedido/submissão antes do dano, sem provar o instante exato; watchpoints não dispararam nesse caminho."
+    },
+    {
+      "date": "2026-10-27",
+      "ids": ["R02", "R04", "R09", "S11", "S12"],
+      "closed_ids": [],
+      "status": "partial_not_delivery",
+      "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+      "summary": "Travessia no chão reproduzida na baseline; candidata usa as larguras frontais já geradas e preservou ordem em roteiros amostrados nos dois emuladores, inclusive borda, com geometria inválida contada. A implementação é aproximação limitada e não qualifica push aéreo ou controllers fonte. A SAT dessa ROM excedeu 8/linha em 8 de 30 fronteiras de ataque; FPS e pior quadro reprovaram."
     }
   ],
   "count": 55,

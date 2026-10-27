@@ -169,3 +169,28 @@ scanline e o custo de VBlank. A cópia local deste lote foi verificada em
 `e70ac6112719abf7a1050e4817b25c09f4b9741880cf6286f8b59bbbad01c68f`,
 11562 arquivos); o manifesto correspondente termina em `.json`. As duas
 cópias continuam no mesmo disco, sem backup externo novo.
+
+## 2026-10-27 — pusher no chão, ainda candidato
+
+Na baseline `cac3d8fb…`, P1 atravessou P2 enquanto ambos estavam no chão;
+o caso foi reproduzido em RAM de BlastEm com o mesmo input. A candidata
+`out/candidates/20261027_ground_push/`, ROM
+`b5c83830392fae1bc1bc85784101e4126a7b74195a8d67bcc263ee6d6cfbc5b0`, usa
+as larguras frontais Q8.8 emitidas para os dois atores e preservou sua ordem
+nas fronteiras observadas nos dois emuladores, inclusive junto à borda. Um
+golpe ainda reduziu a vida de P2 de 1000 para 888. As sessões e limites estão
+no memory bank: `Width`/`PlayerPush`, costas e push aéreo permanecem fora da
+aproximação; não promovê-la como equivalência MUGEN completa.
+
+A SAT viva da candidata excedeu 8 sprites/linha em 8/30 fronteiras do ataque
+e os quadros de aproximação mostram sobreposição. FPS NTSC de duas janelas
+foi 26,48/25,24; o pior quadro selado derramou (mínimo 7, delta 1749; stepping
+inicial, sem HUD/FX/PSG). Os 55 IDs continuam abertos. Próximo trabalho deve
+atacar composição e orçamento sem esconder partes ou confundir uma largura
+de colisão válida com integridade visual. A suíte rev2 passou 267 testes,
+com 150 deselecionados.
+A cópia local do runtime e das evidências foi verificada em
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-ground-push.tar.gz`
+(SHA `90b4327fefff5a9b95ec3f0564dd088c7148efda78ad14d805d218fd3096dcd5`,
+13792 arquivos; manifesto com o mesmo nome e extensão `.json`). Tanto a cópia
+quanto o owner estão no mesmo disco; não há backup externo novo.

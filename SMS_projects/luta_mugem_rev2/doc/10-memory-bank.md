@@ -1,5 +1,58 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — separação de corpos no chão (candidato)
+
+A baseline `cac3d8fb…` repetiu o achado lateral de L098: sob direita contínua,
+na sessão BlastEm `blastem-sms-52545bf61dfa412197a97519dd36170a`, ambos os
+atores estavam no chão e P1 passou de x=156/P2=162 na fronteira VDP 830 para
+x=168/P2=165 na 840. O runtime anterior afastava apenas 1 px por ator quando
+as hurtboxes se sobrepunham. A extração dos atores usou o layout SDCC do
+linker da ROM, confirmou os probes de posição como referência e passou
+`--self-check`; snapshots podem cair entre estágios de um tick.
+
+O candidato usa as larguras frontais Q8.8 já geradas do pacote: 3072/1536
+(12/6 px), originadas de `ground.front` 18/9 e da escala declarada. Preserva
+a ordem registrada antes do movimento quando ambos estão no chão, calcula a
+separação sem somar coordenadas que transbordariam 16 bits e distribui o
+deslocamento com clamp de borda. Em caso de largura ausente, soma maior que a
+arena ou coordenada inválida, a sonda `probe_push_invalid_geometry` conta o
+caso e a rotina não inventa uma largura. É uma aproximação explícita:
+`Width`/`PlayerPush` de CNS, largura traseira e push aéreo não são executados;
+o caminho aéreo continua sem separação e ainda precisa QA na ROM.
+
+ROM candidata `b5c83830392fae1bc1bc85784101e4126a7b74195a8d67bcc263ee6d6cfbc5b0`,
+corredor 105 sondas/1534 B. No mesmo roteiro, a sessão BlastEm
+`blastem-sms-41bf694c22484c97815398be39fcd7d7` não mostrou travessia nem
+distância inferior a 18 px nas fronteiras amostradas; P2 chegou a x=240 e P1
+a x=222. Emulicious privado `e3f0ab10f3a2471ebba491acd58c15a7` repetiu a
+aproximação com vídeo e probes de RAM, mantendo 18 px nos snapshots
+de 780 a 1020 (o snapshot inicial em 740 tinha distância maior), sem
+geometria inválida. A sessão `de0027fb887f4fd2ab0af64b2f404ceb`
+repetiu botão e vida de P2 1000→888. Bundles conferidos, sessões encerradas.
+As amostras não cobrem todos os frames, input, costas, guarda ou colisão aérea.
+Na revisão manual dos quadros `approach_01/000020.png` e
+`approach_03/000020.png`, os atores se sobrepõem visualmente; a distância
+frontal não resolve a composição nem demonstra que todos os pixels da SAT
+aparecem. Esses quadros não aprovam a apresentação.
+Na sessão BlastEm auditada `blastem-sms-6310327f16904d5b9e470a3e6ec8e137`,
+o mesmo roteiro de ataque teve pico de 9 ou 10 sprites/linha em 8 das 30
+fronteiras amostradas (VDP 895–930); as 12–17 linhas excedentes por fronteira
+reprovam essa composição. A amostra não identifica automaticamente o ator
+afetado nem cobre todas as ações. Artefatos em
+`out/evidence/20261027_ground_push_attack_sat/`.
+
+Em duas janelas NTSC de 8 s, sessão `f02a147e2bb8455baaf7aa3e2b184047`, a
+candidata mediu 26,48/25,24 atualizações/s e reprovou FPS. As janelas do
+candidato anterior foram 23,35/20,63; a trajetória e a carga também mudaram,
+portanto o diferencial não isola o custo da separação. Sem PAL, HUD/FX/PSG
+representativos ou evidência de entrega. O selo de 3000 iterações na sessão
+`2567ca6359824f30b74697b83f951c86` derramou (`vline_min=7`,
+`vovf_delta=1749`), com stepping inicial e a mesma ausência de carga completa;
+bundle conferido e sessão encerrada.
+A suíte rev2 passou 267 testes; 150 do consumidor histórico foram
+deselecionados. O teste C da rotina cobre contato, ordem anterior, bordas,
+ar, geometria inválida e precisão Q8.8, sem inferir fidelidade de jogo.
+
 ## 2026-10-27 — relógio sequencial da IA (candidato)
 
 O caminho de input da IA calculava beat/subframe com três operações de

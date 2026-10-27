@@ -55,6 +55,15 @@ acesso aleatório. Ao voltar de 65535 para 0, o cursor reinicia junto do frame.
 O teste C cobriu a volta completa; a medição da ROM candidata ainda reprova
 FPS e VBlank, conforme o memory bank.
 
+O pusher no chão usa a soma das larguras `ground.front` convertidas nos dados
+de cada slot e preserva a ordem anterior ao movimento; não usa mais hurtbox
+com afastamento fixo de 1 px. `ground.front` e `ground.back` são campos de
+largura no [tutorial oficial MUGEN](https://elecbyte.com/mugendocs-11b1/tutorial3.html).
+A implementação é aproximação: ainda não executa `Width`/`PlayerPush`,
+largura traseira ou push no ar. Geometria inválida é contada e não é
+substituída por constante. A cobertura da ROM é limitada aos roteiros do
+memory bank; pusher e facing não qualificam toda a física ou o combate.
+
 ## Arquitetura proposta, não implementada
 PacoteMUGEN imutável→parse→IRtipado→perfilcompat→loweringAOT/tabelas
 com predicados executáveis→runtimeC/Z80→ROMmedida. Reusar parsers/testes
