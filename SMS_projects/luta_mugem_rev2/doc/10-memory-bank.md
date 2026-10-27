@@ -1,5 +1,81 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — PSG em eventos de combate (carga diagnóstica)
+
+`LUTA_DIAG_PSG` permanece zero por padrão. Quando habilitado, acerto e guarda
+do `combat_step` enfileiram efeitos genéricos autorais, com prioridade e
+coalescência descritas no TDD; o serviço PSG participa do trabalho antes do
+selo. Não há música, recuperação de música, lifecycle de round/KO/pause,
+identidade sonora MUGEN ou aprovação auditiva. Esses streams são uma carga
+representativa parcial, não assets finais aprovados.
+
+O gerador canônico `make_psg_assets.py` (`5f30d29ea08f50368453a86bf104ce1852cbf8ac01bf8a62c77792b914aa918a`)
+agora aceita `--only` e `--role`, preservando entradas não selecionadas do
+manifesto. Repetição da geração seletiva e rejeição de papel inválido foram
+testadas. `sfx_hit.psg` tem SHA
+`6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3`
+e `sfx_hurt.psg` tem SHA
+`5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e`;
+procedência e canais estão em `doc/audio_provenance_manifest.json`. Na ROM
+`a89a38972e1b65ef9395db7e51118abd607f27959190c7f36e546f6356560dfb`,
+os dois blobs conferiram byte a byte com os símbolos na ROM fixa, via
+`out/evidence/20261027_diag_psg_window_binding.json`. Fonte do runtime
+`2c04013962615edc4dcfc1a51cff54822eb0ec12b13c34dbdfa1bcdbc6c71739`;
+receitas, recibos e snapshots estão em `out/candidates/20261027_diag_psg_window*`.
+
+Na sessão Emulicious privada `edb0096ba1314cf7b7fb0d4484e71aab`, controles
+normais produziram dois acertos e uma guarda na janela, vidas 1000→932 e
+1000→888, três reproduções solicitadas à PSGlib e nenhuma guarda descartada. A
+captura isolada do PID registrou pico 2084 e 7% de atividade em 6,687 s,
+passando o piso de 5% para SFX esparso; SHA do WAV
+`a9c250b51e8a9eae3927292d6815b676dbac749ca5afea4b8f7062a97873e932`.
+Eventos e sinal pertencem à mesma janela, mas não foram alinhados contato a
+contato com o framebuffer. Em outro roteiro da mesma fonte com PSG desligado,
+ROM `70c03939306d0fe1d624d08e08734b9cb2d2b2b11251b2e2f56932613684de4f`,
+sessão `2c0f20bbf97d4950a308448ab10dd196`, os mesmos totais de combate foram
+observados com sondas de som zeradas e captura silenciosa. As sessões e
+bundles foram conferidos e fechados; áudios, diários e roteiros estão em
+`out/evidence/20261027_diag_psg_gameplay_window*`.
+
+A primeira captura desta investigação foi silenciosa porque o roteiro não
+retomou a execução após comandos de input, que pausam a ponte; nenhum acerto
+foi observado. A tentativa e o journal foram preservados em
+`out/evidence/20261027_diag_psg_gameplay/`; o roteiro corrigido verifica e
+retoma o estado após cada mudança. Uma candidata intermediária também colocou
+sondas em bytes reservados ao perfil do worst-frame. A colisão foi identificada
+antes da medição de prazo; a candidata intermediária não qualifica orçamento.
+As sondas finais foram movidas e um teste compara seus endereços aos contratos
+dos medidores. O corredor final passou com 157 sondas e folga de 1479 B na
+ROM com PSG, 1531 B no controle; `volatile` e os gates de áudio passaram.
+
+Sem contatos na atração, as duas janelas NTSC da ROM PSG foram 26,58/25,72
+atualizações/s (`d22355ed1b904a34b2530803e1b19ab5`); no controle, 26,70/25,70
+(`ce0d6468bfcb493d8b003649685a3ebc`). Ambas reprovam e só medem o serviço
+ocioso em trajetórias próprias, sem HUD, FX ou música. Diferenças entre
+janelas não isolam custo causal. Nenhum ID do backlog foi fechado.
+
+No selo com P1 mantendo direita e IA normal, sessão
+`74b83e966343464a8eeec6643e62b8ab`, a ROM PSG registrou 863 derrames e
+`vline_min=7` nas primeiras 3000 iterações, incluindo 26 iniciais por
+stepping. O primeiro SFX foi solicitado no tick 174, dentro do selo; 14
+solicitações foram contadas até o tick 4702, depois do selo. O limite declarado
+de um SFX por iteração e uma iteração por VBlank, frente aos 10904 frames VDP
+desde o boot, exclui wrap do contador nessa leitura; `audit_counter_window`
+conferiu apenas a aritmética, não autenticou essa premissa. O roteiro difere
+dos selos anteriores, logo 863 não mede efeito causal do PSG. Continuam sem
+carga HUD/FX/música, sem prazo aprovado e sem revisão auditiva.
+Fechamento técnico: 278 testes `rev2` passaram, 150 foram deselecionados;
+procedência, canais, tamanho, marcadores, documentação e constantes passaram.
+O gate PSG aceitou os dois eventos, com ressalva de que o efeito multicanal
+não teve decaimento individual dos canais nem silêncio do mix comprovados.
+O contrato MUGEN passou somente em modo de planejamento; revisão independente
+e teste auditivo permanecem pendentes.
+Código `579bf46`; a cópia local
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-diag-psg.tar.gz` tem SHA
+`eb52e60c63a2d304badb9540becc8416181bee706c5a764e29d2bcac200f761a`;
+o manifesto correspondente verificou 22776 arquivos. A cópia e o owner ficam
+no mesmo disco, sem nova proteção externa.
+
 ## 2026-10-27 — ator em BG e câmera (candidatos, não promovidos)
 
 A fonte `dd1a7cb532fe62c6dd0e0e244f87c2e84ddb407e8c59bd90ea7aefc5fcb86cf6`

@@ -2,6 +2,22 @@
 
 ## Seleção e limites atuais — 2026-10-27
 
+`LUTA_DIAG_PSG=1` é uma carga de teste, desligada por padrão. Contato e
+guarda reais enfileiram streams autorais genéricos (`sfx_hit`, canais 2+3;
+`sfx_hurt`, canal 3); não são adaptação ou identidade sonora MUGEN. No mesmo
+tick, acerto prevalece sobre guarda; guarda não interrompe acerto ainda ativo,
+e acerto pode interromper o SFX em curso. Eventos excedentes são coalescidos;
+guardas descartadas são contadas em u8. `PSGSFXFrame` roda uma vez por tick,
+após SAT e antes do selo de VBlank. Não existe música, retomada de canal de
+música, pause de jogo, KO ou transição sonora qualificada nessa opção.
+
+As sondas de quantidade e primeiro tick de reprodução são u16 e exigem limite
+de janela para excluir wrap; a entrada no PSG não prova som audível. Elas usam
+`C8E5..C8E8`, fora do cabeçalho SMRT de cinco bytes e dos offsets do worst-frame;
+`C8D0..C8D6` continuam reservados ao contrato de medição. Um teste compara os
+endereços de áudio com os offsets publicados dos medidores. O teste de sinal,
+a instrumentação e seus custos/limites por ROM estão no memory bank.
+
 O renderer híbrido é uma experiência isolada, desligada por padrão
 (`LUTA_BG_ACTOR=0`, `LUTA_BG_CAMERA=0`). Com BG habilitado, P1 referencia na
 PNT os mesmos patterns de sua pose residente, com a paleta P1 e prioridade

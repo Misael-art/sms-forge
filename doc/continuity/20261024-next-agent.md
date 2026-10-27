@@ -32,7 +32,34 @@ pose residente precisam ser qualificados; fundo sólido é escopo; P1 de sprites
 é compartilhada; os 7 eixos e época visual delivery devem convergir na mesma
 ROM. Primeiro feche runtime e qualidade mensuráveis; ambição AAA não é selo.
 
-## 2026-10-27 — candidato híbrido, estado mais recente
+## 2026-10-27 — carga PSG diagnóstica, estado mais recente
+
+`LUTA_DIAG_PSG=1` é opção diagnóstica, zero por padrão; acerto e guarda
+acionam dois streams autorais genéricos, sem reivindicar identidade MUGEN ou
+áudio final. A fonte é
+`2c04013962615edc4dcfc1a51cff54822eb0ec12b13c34dbdfa1bcdbc6c71739`;
+a ROM com PSG é `a89a38972e1b65ef9395db7e51118abd607f27959190c7f36e546f6356560dfb`
+e o controle da mesma fonte é
+`70c03939306d0fe1d624d08e08734b9cb2d2b2b11251b2e2f56932613684de4f`.
+Em sessão privada, dois acertos e uma guarda produziram três pedidos à PSGlib
+e sinal isolado; o controle repetiu os totais de combate e ficou silencioso.
+As janelas sem eventos sonoros foram 26,58/25,72 e 26,70/25,70 atualizações/s,
+respectivamente: ambas reprovam. Com P1 mantendo direita, o selo de 3000
+iterações registrou 863 derrames, mínimo 7, e ao menos um SFX dentro da janela;
+sem HUD/FX/música, não aprova prazo. Ver memory bank para sessão, falha do primeiro
+roteiro, colisão intermediária de sondas e limites. Música, escuta e sincronia
+áudio/imagem continuam abertas; nenhum dos 55 IDs foi encerrado.
+Código `579bf46`; 278 testes `rev2` passaram. A cópia local
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-diag-psg.tar.gz` tem SHA
+`eb52e60c63a2d304badb9540becc8416181bee706c5a764e29d2bcac200f761a` e
+verificou 22776 arquivos com o manifesto associado; permanece no mesmo disco
+do owner e não substitui proteção externa.
+
+O próximo blocker permanece R06: medir contato versus pose efetivamente
+submetida/apresentada em fronteiras do golpe antes de mudar a política de
+colisão. Continue também HUD/FX/música como carga representativa e prazo real.
+
+## 2026-10-27 — candidato híbrido
 
 A fonte `dd1a7cb532fe62c6dd0e0e244f87c2e84ddb407e8c59bd90ea7aefc5fcb86cf6`
 inclui as opções `LUTA_BG_ACTOR` e `LUTA_BG_CAMERA` apenas para diagnóstico;
