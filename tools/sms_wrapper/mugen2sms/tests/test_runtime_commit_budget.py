@@ -167,6 +167,19 @@ def test_perfil_atual_cancela_pose_abandonada_e_serve_os_dois():
     assert result.timeline == [(0, 16), (1, 16)]
 
 
+def test_chaves_distintas_por_face_nao_reutilizam_residencia_oposta():
+    sim = Simulator(Policy.rev2_b2_cancel_v1())
+    # id AIR 10: chave 20 = direita, chave 21 = esquerda.
+    sim.boot_preload(0, 20, 16)
+    sim.request(0, 21, 16)
+    sim.stream(0)
+    assert sim.cur[0].pose == 20 and sim.pend[0].pose == 21
+    assert sim.pend[0].loaded_pairs == 8
+    sim.request(0, 20, 16)
+    assert sim.cur[0].pose == 20 and not sim.pend[0].live
+    assert sim.stats["superseded_pending"] == 1
+
+
 def test_cli_identifica_modelo_atual_e_rejeita_override_ambiguo(tmp_path, capsys):
     events = tmp_path / "events.json"
     report = tmp_path / "report.json"

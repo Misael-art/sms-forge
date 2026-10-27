@@ -85,8 +85,12 @@ def test_candidate_inputs_hash_include_and_banked_data(tmp_path, monkeypatch):
     assert before["generated data/bank.bin"] == hashlib.sha256(bank.read_bytes()).hexdigest()
     bank.write_bytes(b"changed bank")
     assert before != BUILD.candidate_inputs(str(project), manifest, tc, [str(src)])
+    padded = {"toolchain": {"makesms_extra": ["-pp", "-mbank", "generated data/bank.bin:0:1:2"]}}
+    assert BUILD.candidate_inputs(str(project), padded, tc, [str(src)])["generated data/bank.bin"] == \
+           hashlib.sha256(bank.read_bytes()).hexdigest()
     for unsupported in ({"link_extra": ["unknown.lib"]},
                         {"makesms_extra": ["-unknown"]},
+                        {"makesms_extra": ["-pm", "-pp"]},
                         {"makesms_extra": ["-mbank"]}):
         with pytest.raises(ValueError):
             BUILD.candidate_inputs(str(project), {"toolchain": unsupported}, tc, [str(src)])
@@ -168,3 +172,35 @@ def test_changed_manifest_between_parse_and_snapshot_never_builds(tmp_path, monk
     assert BUILD.main() == 1
     assert not (candidate / "build_record.json").exists()
     assert not (candidate / "rom").exists()
+
+
+def test_failed_power_of_two_padding_never_publishes_candidate_receipt(tmp_path, monkeypatch):
+    project = tmp_path / "game"
+    for folder in (".mddev", "src", "out/rom"):
+        (project / folder).mkdir(parents=True)
+    manifest = project / ".mddev/project.json"
+    manifest.write_text(json.dumps({"name": "game", "toolchain": {"makesms_extra": ["-pp"]}}))
+    (project / "src/main.c").write_text("void main(void) {}")
+    nominal = project / "out/rom/game.sms"
+    nominal.write_bytes(b"original")
+    tc = {"sdcc": "sdcc", "makesms": "makesms", "inc": [], "peep": "",
+          "crt0_sms.rel": "crt0", "SMSlib.lib": "sms", "PSGlib.lib": "psg"}
+    monkeypatch.setattr(BUILD, "pre_gates", lambda p: [])
+    monkeypatch.setattr(BUILD, "find_toolchain", lambda: (tc, ""))
+    manifest_hash = hashlib.sha256(manifest.read_bytes()).hexdigest()
+    monkeypatch.setattr(BUILD, "candidate_inputs", lambda *a: {".mddev/project.json": manifest_hash})
+
+    def run(command, cwd=None, **kwargs):
+        if command[0] == "sdcc":
+            (Path(cwd) / command[command.index("-o") + 1]).write_bytes(b"linked")
+        else:
+            (Path(cwd) / command[-1]).write_bytes(b"not a power of two")
+        return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+    monkeypatch.setattr(BUILD.subprocess, "run", run)
+    candidate = project / "out/candidates/bad-padding"
+    monkeypatch.setattr(BUILD.sys, "argv", ["build_inner.py", "--project", str(project),
+                                            "--build-dir", str(candidate)])
+    assert BUILD.main() == 1
+    assert not (candidate / "build_record.json").exists()
+    assert nominal.read_bytes() == b"original"

@@ -44,6 +44,18 @@ def resource_kind_for_path(project, path):
         return "sheet"
     return "sprite" if size in SMS_SINGLE_SPRITE_GEOMETRIES else "sheet"
 
+def makesms_padding_policy(options):
+    selected = [option for option in options if option in ("-pm", "-pp")]
+    if len(selected) > 1:
+        raise ValueError("declare apenas uma politica de padding makesms")
+    return selected[0] if selected else None
+
+def validate_makesms_padding(size, policy):
+    if type(size) is not int or size < 0:
+        raise ValueError("tamanho de ROM invalido")
+    if policy == "-pp" and (not size or size & (size - 1)):
+        raise ValueError("makesms -pp produziu ROM sem tamanho potencia de dois; build nao registrado")
+
 def self_check_resource_routing():
     """Valid single sprites/sheets route correctly; an off-grid sheet fails."""
     import tempfile, shutil
@@ -71,7 +83,22 @@ def self_check_resource_routing():
             else:
                 assert any("grid 8x8 violado" in e for e in errors), \
                     f"{name} off-grid deveria reprovar: {errors}"
-        print("[SELF-CHECK OK] build resource routing: 8x8/8x16/16x16 sprites, 80x80 sheet and off-grid rejection")
+        assert makesms_padding_policy(["-pp"]) == "-pp"
+        validate_makesms_padding(512 * 1024, "-pp")
+        for size in (0, 28 * 16384):
+            try:
+                validate_makesms_padding(size, "-pp")
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("invalid power-of-two padding accepted")
+        try:
+            makesms_padding_policy(["-pm", "-pp"])
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("conflicting padding accepted")
+        print("[SELF-CHECK OK] build resource routing and power-of-two padding rejection")
         return 0
     finally:
         shutil.rmtree(root, ignore_errors=True)
@@ -293,6 +320,7 @@ def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
         for dependency in shlex.split(dependencies):
             files.add(os.path.join(project, dependency))
     extra = list(toolchain_config.get("makesms_extra") or [])
+    makesms_padding_policy(extra)
     i = 0
     while i < len(extra):
         option = extra[i]
@@ -304,7 +332,7 @@ def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
                 raise ValueError("-mbank deve identificar arquivo e tres campos")
             files.add(os.path.join(project, bank_spec[0]))
             i += 2
-        elif option == "-pm":
+        elif option in ("-pm", "-pp"):
             i += 1
         else:
             raise ValueError("opcao makesms sem custodia de entradas: " + str(option))
@@ -511,6 +539,10 @@ def main():
     os.makedirs(rom_dir, exist_ok=True)
     rom = os.path.join(rom_dir, name + ".sms")
     ms_extra = list(manifest.get("toolchain", {}).get("makesms_extra") or [])
+    try:
+        padding = makesms_padding_policy(ms_extra)
+    except ValueError as e:
+        return fail(str(e), 1)
     makesms_cmd = ([tc["makesms"]] + ms_extra +
                    [ihx, os.path.relpath(rom, project)])
     r = subprocess.run(makesms_cmd, cwd=project, capture_output=True, text=True)
@@ -521,6 +553,10 @@ def main():
         detail = makesms_output.strip() or "sem diagnóstico"
         return fail(f"makesms falhou: {detail[:200]} (log: {log_path})", 1)
     size = os.path.getsize(rom)
+    try:
+        validate_makesms_padding(size, padding)
+    except ValueError as e:
+        return fail(str(e), 1)
     record["steps"]["rom"] = f"{rom} ({size} bytes)"
 
     # higiene: artefatos de compilacao (asm/lst/sym) vazam para a raiz do projeto;

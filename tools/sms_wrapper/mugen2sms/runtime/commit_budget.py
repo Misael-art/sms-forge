@@ -14,6 +14,9 @@ Fatos com fonte:
 - O perfil explicito ``rev2_b2_cancel_v1`` modela oito pares por lado, ambos
   servidos no tick, sem desalojar o oponente, e cancela pedido em voo quando
   a pose desejada volta a ser a residente. A ROM precisa de prova propria.
+- Com faces distintas no runtime, o campo ``pose`` do modelo representa uma
+  CHAVE de cache que inclui a orientacao (por exemplo ``2 * id_air + face``);
+  o modelo nao extrai essa chave nem valida a equivalencia dos assets.
 - Alocador first-fit por extensoes: candidatos {0} U {fim de cada slot vivo}
   (main.c:276-310).
 

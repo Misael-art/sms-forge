@@ -189,8 +189,27 @@ def _prefix_header(text: str, prefix: str) -> tuple[str, list[str]]:
     return text, rows
 
 
+def _adjacent_facing_rows(p1_rows: list[str], p2_rows: list[str]) -> bool:
+    """Check the generated P1-right/P2-left PoseRef expressions.
+
+    This checks structure, not the bank contents or the rendered image.
+    """
+    symbol = r"(?P<stem>[A-Za-z_]\w*)"
+    right = re.compile(r"\{\s*" + symbol + r"_TILES_BANK\s*,\s*"
+                       r"(?P=stem)_TILES_OFF\s*,\s*(?P=stem)_FACE_SIZE\s*\}")
+    left = re.compile(r"\{\s*" + symbol + r"_TILES_BANK\s*,\s*"
+                      r"(?P=stem)_TILES_OFF\s*\+\s*(?P=stem)_FACE_SIZE\s*,\s*"
+                      r"(?P=stem)_FACE_SIZE\s*\}")
+    right_matches = [right.fullmatch(row) for row in p1_rows]
+    left_matches = [left.fullmatch(row) for row in p2_rows]
+    return bool(p1_rows and p2_rows and
+                all(m and not m.group("stem").endswith("_P2") for m in right_matches) and
+                all(m and m.group("stem").endswith("_P2") for m in left_matches))
+
+
 def merge_headers(p1_text: str, p2_text: str,
-                  p1_poses: int, p2_poses: int) -> str:
+                  p1_poses: int, p2_poses: int,
+                  require_facing_contract: bool = False) -> str:
     p1_palette, p2_palette = _palette(p1_text), _palette(p2_text)
     # Stable slot symbols let the C consumer remain unchanged when a .def is
     # replaced. Character/source names stay in provenance manifests only.
@@ -203,6 +222,9 @@ def merge_headers(p1_text: str, p2_text: str,
     palette[1:8] = p1_palette[1:8]
     palette[9:16] = p2_palette[9:16]
     all_poses = p1_rows[:p1_poses] + p2_rows[p2_poses:]
+    facing_contract = _adjacent_facing_rows(p1_rows[:p1_poses], p2_rows[p2_poses:])
+    if require_facing_contract and not facing_contract:
+        raise ValueError("facing layout differs from adjacent P1-right/P2-left contract")
     lines = [
         "#ifndef VERSUS_SCENE_RUNTIME_H",
         "#define VERSUS_SCENE_RUNTIME_H",
@@ -212,6 +234,7 @@ def merge_headers(p1_text: str, p2_text: str,
         f"#define VERSUS_POSE_COUNT {p1_poses + p2_poses}",
         "#define P1_POSE_BASE 0",
         f"#define P2_POSE_BASE {p1_poses}",
+        *(["#define VERSUS_FACE_LAYOUT_ADJACENT_P2_LEFT 1"] if facing_contract else []),
         "static const PoseRef versus_poses[VERSUS_POSE_COUNT] = {",
         *["    " + row + "," for row in all_poses],
         "};",
@@ -380,7 +403,8 @@ def generate(p1_source: Path, p1_config: Path, p2_source: Path,
     p2_header = _remap_bank_macros(p2_header, bank_maps["p2_ryu"], "P2")
     merged = merge_headers(p1_header, p2_header,
                            int(p1["pose_count_per_fighter"]),
-                           int(p2["pose_count_per_fighter"]))
+                           int(p2["pose_count_per_fighter"]),
+                           require_facing_contract=True)
     out_dir.mkdir(parents=True, exist_ok=True)
     header_path = out_dir / "versus_scene_runtime.h"
     header_path.write_text(merged, encoding="ascii")
@@ -456,6 +480,10 @@ def _self_check() -> None:
     assert "P1 uses entries 1-7" in PALETTE_POLICY
     assert "P2 uses entries 9-15" in PALETTE_POLICY
     assert "index 0 transparent" in PALETTE_POLICY
+    right = "{ A_TILES_BANK, A_TILES_OFF, A_FACE_SIZE }"
+    left = "{ B_P2_TILES_BANK, B_P2_TILES_OFF + B_P2_FACE_SIZE, B_P2_FACE_SIZE }"
+    assert _adjacent_facing_rows([right], [left])
+    assert not _adjacent_facing_rows([right], [left.replace(" + B_P2_FACE_SIZE", "")])
 
     p1 = """#ifndef ken_scene_runtime_H
 #define ken_scene_runtime_H

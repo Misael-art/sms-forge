@@ -10,12 +10,12 @@
  * maquina de estados sobre dados gerados, nao interpretador CNS.
  *
  * Medicoes (probes __at em 0xC800, schema probe 1):
- *   1. boot: P1 idle 4224 B + P2 idle 4224 B = 8448 B > 8192 B da regiao de
- *      patterns de sprite; probe_boot_p2_fit registra o resultado real.
- *   2. streaming: teto de 1 par TALL (64 B) por VBlank; stall/evict medem a
- *      latencia de pose sob transicoes AIR reais (insumo do scheduler wave-4).
- *   3. scanline: probe_max_line e probe_over8_events com dois atores em poses
- *      de pico validam na maquina o limite inferior estatico medido pelo t3.
+ *   1. boot: probe_boot_p2_fit registra se os dois idles do pacote selecionado
+ *      couberam; o antigo exemplo de 4224 B por lado nao vale para todo corte.
+ *   2. streaming: ate 8 pares TALL (64 B) por lado no perfil atual; stall e
+ *      evict sao contadores, nao prova de deadline ou ausencia de starvation.
+ *   3. scanline: probe_max_line e probe_over8_events so sao atualizados com
+ *      LUTA_DIAG_TELEMETRY ligado; sem isso nao provam composicao.
  *   4. Lote B.2: politica de producao = chunk orcado de upload por lado +
  *      exibicao da pose RESIDENTE (imagem valida nunca e' omitida; a espera e'
  *      contada) + nenhum desalojamento do oponente + janela de VBlank com
@@ -32,6 +32,13 @@
 #include "input_tier.h"      /* INPUT_TIER_T: o limiar que as guardas de abaixo comparam */
 #include "versus_scene_runtime.h"
 #include "fight_runtime_data.h"
+
+/* A versao anterior do pacote apontava P2 para a face direita. Usar aquele
+ * header com este runtime confundiria bytes e metadata, inclusive quando o
+ * offset parecesse caber. Exigir o contrato emitido pelo gerador atual. */
+#if !defined(VERSUS_FACE_LAYOUT_ADJACENT_P2_LEFT) || VERSUS_FACE_LAYOUT_ADJACENT_P2_LEFT != 1
+#error "versus-cut sem contrato de faces adjacentes P1-direita/P2-esquerda; regenere os dados"
+#endif
 
 /* Pacote cruzado: tabelas const dos 2 lutadores levam a imagem não-bancada a
  * ~19,6 KB — dentro do teto documentado de 32 KB (sdk/README, skill
@@ -229,6 +236,13 @@ volatile unsigned int __at(0xC882) probe_backlog_max;      /* pico de pares pend
 volatile unsigned int __at(0xC884) probe_upload_maxvbl;    /* pico de pares por VBlank */
 volatile unsigned char __at(0xC886) probe_vbl_entry;       /* VCounter ao entrar no work */
 volatile unsigned char __at(0xC887) probe_vbl_exit_max;    /* pior saida sem wrap */
+volatile unsigned int __at(0xC888) probe_bad_pose_ref;     /* descritor recusado */
+volatile unsigned char __at(0xC88A) probe_resident_face_p1;
+volatile unsigned char __at(0xC88B) probe_resident_face_p2;
+volatile unsigned char __at(0xC88C) probe_desired_face_p1;
+volatile unsigned char __at(0xC88D) probe_desired_face_p2;
+volatile unsigned char __at(0xC88E) probe_submit_face_p1;
+volatile unsigned char __at(0xC88F) probe_submit_face_p2;
 
 /* Contrato worst-frame do measure_worst_frame.py (L061), SMRT aditivo na
  * base 0xC800: probe_vline = VCounter lido APOS todo o trabalho do frame
@@ -293,6 +307,7 @@ typedef struct {
     unsigned char n_pairs;
     unsigned char loaded_pairs;
     const Frame *frame;          /* Lote B.2: frame residente (imagem valida) */
+    unsigned char face;          /* orientacao dos bytes e metadados residentes */
 } CacheSlot;
 
 /* O conjunto vivo e derivado dos 4 slots (corrente/pendente x 2 lados).
@@ -376,6 +391,26 @@ static unsigned char used_pairs(void) {
     return n;
 }
 
+/* O versus-cut guarda duas faces adjacentes de mesmo tamanho. A referencia
+ * P1 aponta para direita; a P2 aponta para esquerda (com sua propria faixa
+ * de indices da paleta compartilhada). Recusar qualquer descritor cujo par
+ * de faces nao caiba inteiro na pagina de 16 KiB antes de tocar a VRAM. */
+static unsigned char pose_facing_offset(const PoseRef *ref, unsigned char side,
+                                        unsigned char face, unsigned int *offset) {
+    unsigned int size = ref->size;
+    if (side > 1u || face > 1u || ref->bank < 2u || size == 0u ||
+        size > 8192u || (size & 63u))
+        return 0u;
+    if (side == 0u) {
+        if (ref->off > 16384u - (size << 1)) return 0u;
+        *offset = ref->off + (face ? size : 0u);
+    } else {
+        if (ref->off < size || ref->off > 16384u - size) return 0u;
+        *offset = ref->off - (face ? 0u : size);
+    }
+    return 1u;
+}
+
 /* Sobe ate `budget` pares (64 B cada) do pending; budget==0xFF sobe o pose
  * inteiro (usado apenas no boot, com display ainda OFF). Lote B.2: o laco de
  * producao chama com UPLOAD_CHUNK_PAIRS por lado (orcamento medido), com
@@ -384,13 +419,18 @@ static unsigned char used_pairs(void) {
 static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     const PoseRef *ref;
     const unsigned char *source;
-    unsigned int vram;
+    unsigned int vram, pose_offset;
     unsigned char moved, batch;
 
     if (pending[side].pose_global == 0xFFFFu ||
         pending[side].loaded_pairs >= pending[side].n_pairs)
         return 0u;
     ref = &versus_poses[pending[side].pose_global];
+    if (!pose_facing_offset(ref, side, pending[side].face, &pose_offset)) {
+        cache_invalidate(&pending[side]);
+        probe_bad_pose_ref++;
+        return 0u;
+    }
     moved = 0u;
     SMS_saveROMBank();
     SMS_mapROMBank(ref->bank);
@@ -403,7 +443,7 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
         if (batch > 3u) batch = 3u;
         vram = (unsigned int)(pending[side].base_pair +
                               pending[side].loaded_pairs) * 64u;
-        source = (const unsigned char *)(0x8000u + ref->off +
+        source = (const unsigned char *)(0x8000u + pose_offset +
                               (unsigned int)pending[side].loaded_pairs * 64u);
         SMS_VRAMmemcpy_brief(vram, source, (unsigned char)(batch << 6));
         pending[side].loaded_pairs = (unsigned char)(pending[side].loaded_pairs + batch);
@@ -429,9 +469,20 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
  * alocacao mantem as duas imagens e conta overflow (o pedido espera o proximo
  * evento de fila — completude/supersessao invalida o memo de falha). */
 static void request_pose(unsigned char side, unsigned int pose_global,
-                         unsigned char n_pairs, const Frame *frame) {
+                         unsigned char n_pairs, const Frame *frame,
+                         unsigned char face) {
     unsigned char base;
-    if (current[side].pose_global == pose_global) {
+    unsigned int checked_offset;
+    if (side > 1u) {
+        probe_bad_pose_ref++;
+        return;
+    }
+    if (face > 1u || pose_global >= VERSUS_POSE_COUNT) {
+        cache_invalidate(&pending[side]);
+        probe_bad_pose_ref++;
+        return;
+    }
+    if (current[side].pose_global == pose_global && current[side].face == face) {
         /* Uma solicitacao pode voltar a imagem residente enquanto outra
          * ainda e carregada. Cancelar essa geracao impede sua promocao
          * posterior; a mesma imagem pode ter metadata AIR diferente. */
@@ -443,10 +494,16 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         current[side].frame = frame;
         return;
     }
-    if (pending[side].pose_global == pose_global) {
+    if (pending[side].pose_global == pose_global && pending[side].face == face) {
         /* A imagem ainda em voo pode ser reutilizada por outro elemento AIR;
          * conservar os bytes, mas publicar a metadata do elemento atual. */
         pending[side].frame = frame;
+        return;
+    }
+    if (!pose_facing_offset(&versus_poses[pose_global], side, face, &checked_offset) ||
+        (versus_poses[pose_global].size >> 6) != n_pairs) {
+        cache_invalidate(&pending[side]);
+        probe_bad_pose_ref++;
         return;
     }
     /* Com o pool inalterado, falha de mesmo tamanho permanece impossivel.
@@ -469,6 +526,7 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         pending[side].n_pairs = n_pairs;
         pending[side].loaded_pairs = 0;
         pending[side].frame = frame;
+        pending[side].face = face;
         return;
     }
 #if LUTA_PROFILE
@@ -483,6 +541,7 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         pending[side].n_pairs = n_pairs;
         pending[side].loaded_pairs = 0;
         pending[side].frame = frame;
+        pending[side].face = face;
         return;
     }
     if (current[side ^ 1u].pose_global != 0xFFFFu) {
@@ -494,6 +553,7 @@ static void request_pose(unsigned char side, unsigned int pose_global,
             pending[side].n_pairs = n_pairs;
             pending[side].loaded_pairs = 0;
             pending[side].frame = frame;
+            pending[side].face = face;
             return;
         }
     }
@@ -515,19 +575,18 @@ static void emit_frame(unsigned char side, const Frame *frame) {
     unsigned char tile_base, tile;
     signed int add;
 
-    /* lado 0 usa o payload P1, lado 1 o payload P2 (subpaleta do contrato).
-     * Atencao: P2 NAO e uma face assada — o versus-cut tem uma face por pose
-     * (o wrapper declara que SMS nao tem flip de sprite). O espelho aplicado
-     * aqui e o da ORIGEM da caixa, guiado pelo facing derivado; os tiles
-     * permanecem os da face direita ate o conversor emitir a face esquerda
-     * (fronteira de curadoria, nao feito). */
-    meta_data = side ? frame->metal_p2 : frame->meta;
+    /* Metadados, origem e indices devem pertencer a MESMA face residente;
+     * a face logica pode mudar enquanto os novos patterns ainda sobem. */
+    if (side)
+        meta_data = current[side].face ? frame->metal_p2 : frame->meta_p2;
+    else
+        meta_data = current[side].face ? frame->metal : frame->meta;
     if (!meta_data)
         return;
     tile_base = (unsigned char)(current[side].base_pair * 2u);
     origin_y = (signed int)DIAG_FLOOR -
                (signed int)(fighter[side].y >> 8) + axis_y;
-    if (!fighter[side].face)
+    if (!current[side].face)
         origin_x = (signed int)(fighter[side].x >> 8) + axis_x;
     else
         origin_x = FIGHTER_MIRRORED_ORIGIN_X(
@@ -687,11 +746,9 @@ static void advance_actor(unsigned char side, unsigned int *out_pose_global,
  *    common1.cns bloqueado (fronteira registrada, nao inventado);
  *  - pusher usa apenas hurtbox x hurtbox (geometria do AIR); a taxa de
  *    1 px/frame e constante de engine (dados de player size nao existem).
- * Render: o pacote versus-cut ASSA UMA face por pose (o wrapper declara que
- * SMS nao tem flip de sprite: o espelho e outro padrao em VRAM). O runtime
- * espelha a ORIGEM da pose pelo facing, mas os tiles permanecem os da face
- * direita; a face esquerda assada exige mudanca no conversor (curadoria,
- * aprovacao humana) e esta registrada como fronteira, nao como feito.
+ * Render: o versus-cut guarda as duas faces em patterns distintos. O cache
+ * seleciona os bytes e metadados da face residente; enquanto outra face
+ * esta pendente, a logica e o contato ainda podem estar adiante da imagem.
  * Coordenadas MUGEN cruas: x positivo = para frente (na direcao do facing),
  * y negativo = para cima (convencao do AIR no pacote), origem nos pes do
  * ator (NAO o AXIS do sprite; AXIS e so deslocamento de desenho).
@@ -1001,11 +1058,18 @@ static void logic_tick(const Frame *fn[2], unsigned int poses_req[2]) {
      * visivel quando probe_stall_frames == 0. */
     combat_step(fn[0], fn[1]);
     pusher_step(fn[0], fn[1]);
-    for (side = 0; side < 2u; side++)
-        if (poses_req[side] != 0xFFFFu)
-            request_pose(side, poses_req[side],
-                         (unsigned char)(versus_poses[poses_req[side]].size >> 6),
-                         fn[side]);
+    for (side = 0; side < 2u; side++) {
+        if (poses_req[side] != 0xFFFFu) {
+            if (poses_req[side] < VERSUS_POSE_COUNT)
+                request_pose(side, poses_req[side],
+                             (unsigned char)(versus_poses[poses_req[side]].size >> 6),
+                             fn[side], fighter[side].face);
+            else {
+                cache_invalidate(&pending[side]);
+                probe_bad_pose_ref++;
+            }
+        }
+    }
 #if LUTA_DIAG_TELEMETRY
     probe_reg_logic_edges += (unsigned char)(probe_vbl_tick - t0);
 #endif
@@ -1048,14 +1112,17 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
         om_after = (side == 0u) ? probe_sat_om_p1 : probe_sat_om_p2;
         if (side == 0u) {
             probe_submit_p1 = submitted;
+            probe_submit_face_p1 = (submitted != 0xFFFFu) ? current[side].face : 0xFFu;
             probe_present_p1 = (submitted != 0xFFFFu && om_after == om_before)
                                    ? submitted : 0xFFFFu;
         } else {
             probe_submit_p2 = submitted;
+            probe_submit_face_p2 = (submitted != 0xFFFFu) ? current[side].face : 0xFFu;
             probe_present_p2 = (submitted != 0xFFFFu && om_after == om_before)
                                    ? submitted : 0xFFFFu;
         }
-        if (current[side].pose_global != poses_req[side]) {
+        if (current[side].pose_global != poses_req[side] ||
+            current[side].face != fighter[side].face) {
             probe_stall_frames++;   /* pedida != residente: espera medida */
             if (side == 0u) probe_wait_p1++;
             else            probe_wait_p2++;
@@ -1063,7 +1130,8 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
 #else
         /* Diagnostico (controle): gate historico — so desenha quando exibida ==
          * pedida; caso contrario o ator inteiro e' omitido (stall). */
-        if (current[side].pose_global == poses_req[side])
+        if (current[side].pose_global == poses_req[side] &&
+            current[side].face == fighter[side].face)
             emit_frame(side, fn[side]);
         else
             probe_stall_frames++;   /* pedida != exibida neste frame */
@@ -1076,6 +1144,10 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
     probe_desired_p2 = poses_req[1];
     probe_resident_p1 = current[0].pose_global;
     probe_resident_p2 = current[1].pose_global;
+    probe_desired_face_p1 = fighter[0].face;
+    probe_desired_face_p2 = fighter[1].face;
+    probe_resident_face_p1 = current[0].frame ? current[0].face : 0xFFu;
+    probe_resident_face_p2 = current[1].frame ? current[1].face : 0xFFu;
 #endif
 #if LUTA_DIAG_TELEMETRY
     probe_reg_frame_edges += (unsigned char)(probe_vbl_tick - t0);
@@ -1167,6 +1239,8 @@ void main(void) {
     const Frame *frames_now[2];
     unsigned int poses_req[2];
     unsigned int pose_g;
+    unsigned int boot_p1_size = 0u;
+    unsigned int checked_offset;
     unsigned char i;
 
     SMS_displayOff();
@@ -1264,31 +1338,42 @@ void main(void) {
      * orfaos no bitmap e dispensava o upload do boot. */
     boot_frame = &characters[0].anims[characters[0].states[ST_IDLE].anim].frames[0];
     pose_g = (unsigned int)characters[0].pose_base + boot_frame->pose;
-    i = (unsigned char)(versus_poses[pose_g].size >> 6);
-    if (alloc_contiguous(i, &pending[0].base_pair)) {
-        pending[0].pose_global = pose_g;
-        pending[0].n_pairs = i;
-        pending[0].loaded_pairs = 0;
-        pending[0].frame = boot_frame;
-        stream_pending(0, 0xFFu);
+    if (pose_g >= VERSUS_POSE_COUNT ||
+        !pose_facing_offset(&versus_poses[pose_g], 0u, fighter[0].face, &checked_offset)) {
+        probe_bad_pose_ref++;
+    } else {
+        boot_p1_size = versus_poses[pose_g].size;
+        i = (unsigned char)(boot_p1_size >> 6);
+        if (alloc_contiguous(i, &pending[0].base_pair)) {
+            pending[0].pose_global = pose_g;
+            pending[0].n_pairs = i;
+            pending[0].loaded_pairs = 0;
+            pending[0].frame = boot_frame;
+            pending[0].face = fighter[0].face;
+            stream_pending(0, 0xFFu);
+        }
     }
     boot_frame = &characters[1].anims[characters[1].states[ST_IDLE].anim].frames[0];
     pose_g = (unsigned int)characters[1].pose_base + boot_frame->pose;
-    i = (unsigned char)(versus_poses[pose_g].size >> 6);
-    if (alloc_contiguous(i, &pending[1].base_pair)) {
-        pending[1].pose_global = pose_g;
-        pending[1].n_pairs = i;
-        pending[1].loaded_pairs = 0;
-        pending[1].frame = boot_frame;
-        stream_pending(1, 0xFFu);
-        probe_boot_p2_fit = 1u;
-    } else {
+    if (pose_g >= VERSUS_POSE_COUNT ||
+        !pose_facing_offset(&versus_poses[pose_g], 1u, fighter[1].face, &checked_offset)) {
+        probe_bad_pose_ref++;
         probe_boot_p2_fit = 0u;
-        probe_boot_overflow_b =
-            (unsigned int)versus_poses[(unsigned int)characters[0].pose_base +
-                characters[0].anims[characters[0].states[ST_IDLE].anim]
-                    .frames[0].pose].size +
-            (unsigned int)versus_poses[pose_g].size - 8192u;
+    } else {
+        i = (unsigned char)(versus_poses[pose_g].size >> 6);
+        if (alloc_contiguous(i, &pending[1].base_pair)) {
+            pending[1].pose_global = pose_g;
+            pending[1].n_pairs = i;
+            pending[1].loaded_pairs = 0;
+            pending[1].frame = boot_frame;
+            pending[1].face = fighter[1].face;
+            stream_pending(1, 0xFFu);
+            probe_boot_p2_fit = (current[1].pose_global == pose_g);
+        } else {
+            unsigned int total = boot_p1_size + versus_poses[pose_g].size;
+            probe_boot_p2_fit = 0u;
+            probe_boot_overflow_b = total > 8192u ? total - 8192u : 0u;
+        }
     }
     probe_used_pairs_max = used_pairs();
     probe_free_pairs_min = (unsigned int)(POOL_PAIRS - probe_used_pairs_max);
