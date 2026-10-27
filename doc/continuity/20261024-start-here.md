@@ -71,6 +71,13 @@ por ID/SHA, com mute/rota confirmada e cleanup, conforme os workflows centrais.
 Se o kernel/sandbox recusar Bubblewrap, a QA fica `FAIL_AMBIENTE`. O wrapper
 não muda políticas globais de segurança nem faz fallback para o desktop.
 
+Conferência de recuperação em 27/10/2026 no host Manjaro: doctor pronto e
+snapshot nominal aberto no Emulicious por sessão privada, com captura ligada
+ao SHA da ROM e encerramento confirmado. A imagem mantém problemas visuais;
+essa prova de boot não aprova gameplay nem substitui os gates do motor.
+O cache regenerável `out/session_bridge/` (classes/JAR/chave de conteúdo)
+fica fora do Git; a fonte continua em `tools/sms_wrapper/session_bridge/`.
+
 ## 3. O que recuperar e como conferir
 
 Release de recuperação:
