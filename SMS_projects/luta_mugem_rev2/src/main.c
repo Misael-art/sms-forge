@@ -54,6 +54,9 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #define POOL_PAIRS          128u          /* 8192 B / 64 B por par TALL */
 #define SOLID_BG_TILE       256u          /* 0x2000: fora do pool de sprites */
 #define SCRIPT_STEP_FRAMES  150u          /* janela de pacing/SMRT (wave-4) */
+#if SCRIPT_STEP_FRAMES < 1u || SCRIPT_STEP_FRAMES > 256u
+#error "relogio de pacing exige janela em 1..256"
+#endif
 
 /* wave-4l: chave LOCAL do projeto (build_inner.py nao aceita -D por projeto;
  * curadoria de wrapper exigira aprovacao humana). 1 = ROM diagnostica com a
@@ -354,6 +357,22 @@ static CacheSlot current[2], pending[2];
 static unsigned char line_diff[DIAG_FLOOR];
 #endif
 static unsigned int frames;
+static unsigned int pacing_step;
+static unsigned char pacing_remainder;
+
+/* Equivalente a frames/150 e frames%150 em cada iteracao, inclusive apos o
+ * wrap u16. So o avanco sequencial do loop pode chamar este relogio. */
+static void advance_pacing_clock(void) {
+    if (frames == 0u) {
+        pacing_step = 0u;
+        pacing_remainder = 0u;
+    } else if (pacing_remainder == SCRIPT_STEP_FRAMES - 1u) {
+        pacing_remainder = 0u;
+        pacing_step++;
+    } else {
+        pacing_remainder++;
+    }
+}
 
 static void cache_invalidate(CacheSlot *s) {
     if (s->pose_global != 0xFFFFu) {
@@ -450,9 +469,9 @@ static unsigned char pose_facing_offset(const PoseRef *ref, unsigned char side,
 
 /* Sobe ate `budget` pares (64 B cada) do pending; budget==0xFF sobe o pose
  * inteiro (usado apenas no boot, com display ainda OFF). Lote B.2: o laco de
- * producao chama com UPLOAD_CHUNK_PAIRS por lado (orcamento medido), com
- * servico garantido a cada lado por VBlank; retorna os pares subidos para o
- * registro do pico por VBlank (probe_upload_maxvbl). */
+ * producao chama com UPLOAD_CHUNK_PAIRS por lado (orcamento ainda nao
+ * aprovado). Trabalho especulativo pode pausar para priorizar pedido real;
+ * retorna os pares subidos para o pico por VBlank (probe_upload_maxvbl). */
 #if LUTA_SPECULATIVE_PREFETCH
 /* Publicar so um pending completo que ja tenha sido pedido pela logica. */
 static void promote_pending(unsigned char side) {
@@ -1238,7 +1257,7 @@ static void logic_tick(const Frame *fn[2], unsigned int poses_req[2]) {
     unsigned char t0 = probe_vbl_tick;
 #endif
     probe_phase = 1u;   /* CPU/logica do frame (avanco de atores) */
-    if ((frames % SCRIPT_STEP_FRAMES) == 0u) {
+    if (pacing_remainder == 0u) {
         /* wave-4e mediu step em 0 flancos em 864 iteracoes; na 4f o
          * slot DA-DB foi reocupado por atores+pose e o step nao e mais
          * instrumentado.
@@ -1246,8 +1265,7 @@ static void logic_tick(const Frame *fn[2], unsigned int poses_req[2]) {
          * é o estágio de input (pad + IA pelo mesmo anel). O `step` e
          * mantido só como janela de pacing/SMRT (a mesma divisão de 150
          * frames dos selos 4e..5a), sem nenhum set_role. */
-        unsigned int step = frames / SCRIPT_STEP_FRAMES;
-        probe_step = step;
+        probe_step = pacing_step;
         /* Snapshot SMRT nos limites de passo: 5 leituras u16 por 150
          * frames, nao por VBlank. */
         probe_b_maxline = CLAMP255(probe_max_line);
@@ -1427,7 +1445,7 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
                 probe_backlog_max = backlog;
         }
         probe_smrt_frame = frames;
-        probe_b_step = CLAMP255(frames / SCRIPT_STEP_FRAMES);
+        probe_b_step = CLAMP255(pacing_step);
         probe_b_used = used;
         probe_b_free = (unsigned char)(POOL_PAIRS - used);
         /* wave-5a: geometria atual dos atores em px (cotejo com o
@@ -1547,6 +1565,9 @@ void main(void) {
     probe_vbl_prev_iter = probe_vbl_prev_iter;
     probe_vbl_per_iter_max = probe_vbl_per_iter_max;
 #endif
+    frames = 0u;
+    pacing_step = 0u;
+    pacing_remainder = 0u;
     current[0].pose_global = 0xFFFFu;
     current[1].pose_global = 0xFFFFu;
     pending[0].pose_global = 0xFFFFu;
@@ -1635,6 +1656,7 @@ void main(void) {
      * pipeline de 1 frame (declarada no TDD). */
     for (;;) {
         frames++;
+        advance_pacing_clock();
         probe_frame = frames;
         logic_tick(frames_now, poses_req);
         sprites_build(frames_now, poses_req);
@@ -1643,8 +1665,8 @@ void main(void) {
         SMS_waitForVBlank();
         vblank_account();
         /* Lote B.2: janela registrada (comeco = VCounter ao entrar no work;
-         * fim = probe_vline/probe_vbl_exit_max em worst_sample) e chunk
-         * orcado POR LADO por VBlank (servico garantido a cada ator). */
+         * fim = probe_vline/probe_vbl_exit_max em worst_sample) e teto
+         * candidato POR LADO por VBlank. Pedidos reais precedem especulacao. */
         probe_phase = 2u;
         probe_vbl_entry = SMS_VCounterPort;
         {
@@ -1675,6 +1697,7 @@ void main(void) {
     for (;;) {
         SMS_waitForVBlank();
         frames++;
+        advance_pacing_clock();
         probe_frame = frames;
         vblank_account();
         /* controle: teto historico de 1 par de 64 B por VBlank, round-robin. */
