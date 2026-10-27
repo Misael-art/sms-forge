@@ -206,5 +206,5 @@ def test_sheet_marks_index_zero_transparent(tmp_path):
     image = Image.open(path)
     assert image.mode == "P"
     assert image.info["transparency"] == 0
-    assert list(image.get_flattened_data()) == [0, 1]
+    assert list(image.getdata()) == [0, 1]
     assert image.getpalette()[:3] == [255, 0, 255]

@@ -295,11 +295,10 @@ typedef struct {
     const Frame *frame;          /* Lote B.2: frame residente (imagem valida) */
 } CacheSlot;
 
-/* wave-4i: sem par_bitmap. O conjunto vivo e derivado dos 4 slots
- * (corrente/pendente x 2 lados); o alocador prova extensoes, nao varre
- * 128 pares. pool_epoch (memo wave-4h) e mantido nos mesmos pontos. */
-static unsigned char pool_epoch;
-static unsigned char fail_epoch[2];
+/* O conjunto vivo e derivado dos 4 slots (corrente/pendente x 2 lados).
+ * Uma falha de alocacao so pode ser memorizada ate a proxima mudanca do
+ * conjunto; flags invalidas nao podem dar a volta como uma epoca de 8 bits. */
+static unsigned char fail_valid[2];
 static unsigned char fail_size[2];
 static CacheSlot current[2], pending[2];
 #if LUTA_DIAG_TELEMETRY
@@ -309,7 +308,7 @@ static unsigned int frames;
 
 static void cache_invalidate(CacheSlot *s) {
     if (s->pose_global != 0xFFFFu) {
-        pool_epoch++;
+        fail_valid[0] = fail_valid[1] = 0u;
         s->n_pairs = 0;
     }
     s->pose_global = 0xFFFFu;
@@ -359,7 +358,7 @@ static unsigned char alloc_contiguous(unsigned char n, unsigned char *out_base) 
     if (best == 0xFFu)
         return 0;
     *out_base = best;
-    pool_epoch++;
+    fail_valid[0] = fail_valid[1] = 0u;
     return 1;
 }
 
@@ -386,7 +385,7 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     const PoseRef *ref;
     const unsigned char *source;
     unsigned int vram;
-    unsigned char moved;
+    unsigned char moved, batch;
 
     if (pending[side].pose_global == 0xFFFFu ||
         pending[side].loaded_pairs >= pending[side].n_pairs)
@@ -396,15 +395,21 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     SMS_saveROMBank();
     SMS_mapROMBank(ref->bank);
     while (budget && pending[side].loaded_pairs < pending[side].n_pairs) {
+        /* A API brief recebe size em byte: 4 pares seriam 256 e
+         * truncariam para zero. Tres pares consecutivos cabem em 192 B e
+         * preservam a mesma ordem e janela de patterns da pose. */
+        batch = (unsigned char)(pending[side].n_pairs - pending[side].loaded_pairs);
+        if (batch > budget) batch = budget;
+        if (batch > 3u) batch = 3u;
         vram = (unsigned int)(pending[side].base_pair +
                               pending[side].loaded_pairs) * 64u;
         source = (const unsigned char *)(0x8000u + ref->off +
                               (unsigned int)pending[side].loaded_pairs * 64u);
-        SMS_VRAMmemcpy_brief(vram, source, 64u);
-        pending[side].loaded_pairs++;
-        probe_uploaded_pairs++;
-        budget--;
-        moved++;
+        SMS_VRAMmemcpy_brief(vram, source, (unsigned char)(batch << 6));
+        pending[side].loaded_pairs = (unsigned char)(pending[side].loaded_pairs + batch);
+        probe_uploaded_pairs += batch;
+        budget = (unsigned char)(budget - batch);
+        moved = (unsigned char)(moved + batch);
     }
     SMS_restoreROMBank();
     if (pending[side].loaded_pairs >= pending[side].n_pairs) {
@@ -422,7 +427,7 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
  * adversario; ainda sem espaco, EVICTA o current adversario (omissao visivel
  * medida). Producao (PROFILE=1): NENHUM desalojamento do oponente; falha de
  * alocacao mantem as duas imagens e conta overflow (o pedido espera o proximo
- * evento de fila — completude/supersessao libera pares via pool_epoch). */
+ * evento de fila — completude/supersessao invalida o memo de falha). */
 static void request_pose(unsigned char side, unsigned int pose_global,
                          unsigned char n_pairs, const Frame *frame) {
     unsigned char base;
@@ -444,9 +449,9 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         pending[side].frame = frame;
         return;
     }
-    /* wave-4h: falhou no bitmap atual, nao ha o que tentar de novo ate o
-     * bitmap mudar (epoch). Stall continua contado no frame memo. */
-    if (fail_epoch[side] == pool_epoch && fail_size[side] == n_pairs) {
+    /* Com o pool inalterado, falha de mesmo tamanho permanece impossivel.
+     * Qualquer alocacao ou liberacao invalida o memo dos dois lados. */
+    if (fail_valid[side] && fail_size[side] == n_pairs) {
         probe_stall_frames++;
         return;
     }
@@ -493,7 +498,7 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         }
     }
 #endif
-    fail_epoch[side] = pool_epoch;
+    fail_valid[side] = 1u;
     fail_size[side] = n_pairs;
     probe_stall_frames++;
 }
@@ -632,31 +637,31 @@ static void advance_actor(unsigned char side, unsigned int *out_pose_global,
         fighter[side].y = (unsigned int)ny;
     }
 
-    /* duracao AIR: em MUGEN 1.0 (velocidade normal) 1 tick = 1/60 s, nao
-     * 1/100 s (unidade do OpenBOR, nao deste motor). `dur` e tratado como
-     * frames da ROM a 60 Hz — aproximacao declarada; PAL (politica regional
-     * pendente) e elemento de duracao 1 (a FSM avanca antes da emissao;
-     * primeira exposicao exige prova) seguem para o eixo M3. */
-    if (frame->dur != 255u) {
-        fighter[side].tick++;
-        if (fighter[side].tick >= frame->dur) {
-            fighter[side].tick = 0;
-            if (fighter[side].fidx + 1u < anim->n_frames)
-                fighter[side].fidx++;
-            else if (anim->loop_start != 255u)
-                fighter[side].fidx = anim->loop_start;
-            else
-                fighter[side].done = 1u;
-            /* one-shot terminado: mantem o ultimo frame (KO/jump hold) e avisa
-             * a camada de input (wave-5b); sem dados de cancel no pacote,
-             * expirar e a unica saida de um papel de golpe. */
-        }
+    /* tick conta quantas vezes o elemento atual ja foi entregue a logica.
+     * Transitar ANTES da proxima entrega preserva elementos de duracao 1 e
+     * mantem fidx no elemento visivel durante hitstop. O gerador deste corte
+     * emite duracoes 1..254 ou 255 para hold; PAL e fidelidade de holds
+     * continuam sujeitos aos contratos e provas especificos. */
+    if (frame->dur != 255u && fighter[side].tick >= frame->dur) {
+        fighter[side].tick = 0u;
+        if (fighter[side].fidx + 1u < anim->n_frames)
+            fighter[side].fidx++;
+        else if (anim->loop_start != 255u)
+            fighter[side].fidx = anim->loop_start;
+        else
+            fighter[side].tick = frame->dur; /* terminal: nao reiniciar */
         frame = &anim->frames[fighter[side].fidx];
-    } else if (fighter[side].fidx + 1u >= anim->n_frames) {
-        fighter[side].done = 1u;  /* ultimo frame com duracao infinita */
     }
     *out_pose_global = (unsigned int)cd->pose_base + frame->pose;
     *out_frame = frame;
+    if (frame->dur != 255u) {
+        if (fighter[side].tick < frame->dur) fighter[side].tick++;
+        if (fighter[side].tick >= frame->dur &&
+            fighter[side].fidx + 1u >= anim->n_frames && anim->loop_start == 255u)
+            fighter[side].done = 1u;
+    } else if (fighter[side].fidx + 1u >= anim->n_frames) {
+        fighter[side].done = 1u;  /* politica historica de hold terminal */
+    }
 }
 
 /* ---------------- M2 (wave-5a): colisao/guarda/dano/hitstop/pusher --------

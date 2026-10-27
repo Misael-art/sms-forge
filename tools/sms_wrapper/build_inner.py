@@ -14,7 +14,7 @@ Pipeline:
 
 Exit: 0 build | 1 reprovação (gate ou compilador) | 2 ambiente ausente
 """
-import sys, os, json, glob, shutil, subprocess, argparse, shlex, tempfile
+import sys, os, json, glob, shutil, subprocess, argparse, shlex, tempfile, hashlib
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -377,10 +377,16 @@ def main():
     if not os.path.exists(os.path.join(project, ".mddev", "project.json")):
         return fail(f"{project} nao e um projeto (falta .mddev/project.json)", 1)
     nominal_manifest_path = os.path.join(project, ".mddev", "project.json")
-    nominal_manifest = json.load(open(nominal_manifest_path))
+    try:
+        with open(nominal_manifest_path, "rb") as f:
+            nominal_manifest_bytes = f.read()
+        nominal_manifest = json.loads(nominal_manifest_bytes)
+    except (OSError, ValueError) as e:
+        return fail("manifesto nominal invalido: " + str(e), 1)
     if not isinstance(nominal_manifest, dict):
         return fail("manifesto nominal deve ser um objeto", 1)
     manifest_path = nominal_manifest_path
+    manifest_bytes = nominal_manifest_bytes
     if args.manifest:
         if not args.build_dir:
             return fail("--manifest exige --build-dir", 1)
@@ -388,7 +394,9 @@ def main():
         if os.path.commonpath((os.path.realpath(project), manifest_path)) != os.path.realpath(project):
             return fail("manifesto candidato deve ficar dentro do projeto", 1)
         try:
-            manifest = json.load(open(manifest_path))
+            with open(manifest_path, "rb") as f:
+                manifest_bytes = f.read()
+            manifest = json.loads(manifest_bytes)
         except (OSError, ValueError) as e:
             return fail("manifesto candidato invalido: " + str(e), 1)
         if not isinstance(manifest, dict) or manifest.get("name") != nominal_manifest.get("name"):
@@ -455,6 +463,11 @@ def main():
             inputs_before = candidate_inputs(project, manifest, tc, srcs, manifest_path)
         except (OSError, ValueError) as e:
             return fail("identidade das entradas: " + str(e), 1)
+        for path, content in ((nominal_manifest_path, nominal_manifest_bytes),
+                              (manifest_path, manifest_bytes)):
+            key = os.path.relpath(os.path.realpath(path), project)
+            if inputs_before.get(key) != hashlib.sha256(content).hexdigest():
+                return fail("manifesto mudou durante preparacao; candidato nao registrado", 1)
     objs, logs = [], []
     for src_abs in srcs:
         base = os.path.splitext(os.path.basename(src_abs))[0]

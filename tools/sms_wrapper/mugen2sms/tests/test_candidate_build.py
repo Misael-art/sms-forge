@@ -111,8 +111,10 @@ def test_candidate_build_never_publishes_nominal_or_stale_record(tmp_path, monke
           "crt0_sms.rel": "crt0", "SMSlib.lib": "sms", "PSGlib.lib": "psg"}
     monkeypatch.setattr(BUILD, "pre_gates", lambda p: [])
     monkeypatch.setattr(BUILD, "find_toolchain", lambda: (tc, ""))
-    snapshots = iter([{"src/main.c": "before"},
-                      {"src/main.c": "after" if changed else "before"}])
+    manifest_hash = hashlib.sha256((project / ".mddev/project.json").read_bytes()).hexdigest()
+    snapshots = iter([{"src/main.c": "before", ".mddev/project.json": manifest_hash},
+                      {"src/main.c": "after" if changed else "before",
+                       ".mddev/project.json": manifest_hash}])
     monkeypatch.setattr(BUILD, "candidate_inputs", lambda *a: next(snapshots))
 
     def run(command, cwd=None, **kwargs):
@@ -141,3 +143,28 @@ def test_candidate_build_never_publishes_nominal_or_stale_record(tmp_path, monke
     assert nominal_rom.read_bytes() == b"original"
     assert nominal_record.read_text() == "original record"
     assert not list((project / "changelog/roms").iterdir())
+
+
+def test_changed_manifest_between_parse_and_snapshot_never_builds(tmp_path, monkeypatch):
+    project = tmp_path / "game"
+    (project / ".mddev").mkdir(parents=True)
+    (project / "src").mkdir()
+    manifest = project / ".mddev/project.json"
+    manifest.write_text(json.dumps({"name": "game"}))
+    (project / "src/main.c").write_text("void main(void) {}")
+    monkeypatch.setattr(BUILD, "pre_gates", lambda p: [])
+
+    def change_manifest():
+        manifest.write_text(json.dumps({"name": "game", "toolchain": {"optimization": "code_size"}}))
+        return ({"sdcc": "fake"}, "")
+
+    monkeypatch.setattr(BUILD, "find_toolchain", change_manifest)
+    monkeypatch.setattr(BUILD, "candidate_inputs", lambda *a: {
+        ".mddev/project.json": hashlib.sha256(manifest.read_bytes()).hexdigest()})
+    monkeypatch.setattr(BUILD.subprocess, "run", lambda *a, **kw: pytest.fail("must not compile"))
+    candidate = project / "out/candidates/changed"
+    monkeypatch.setattr(BUILD.sys, "argv", ["build_inner.py", "--project", str(project),
+                                            "--build-dir", str(candidate)])
+    assert BUILD.main() == 1
+    assert not (candidate / "build_record.json").exists()
+    assert not (candidate / "rom").exists()

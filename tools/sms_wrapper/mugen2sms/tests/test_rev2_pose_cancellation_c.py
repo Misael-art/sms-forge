@@ -38,7 +38,7 @@ typedef struct {
     unsigned char base_pair, n_pairs, loaded_pairs;
     const Frame *frame;
 } CacheSlot;
-static unsigned char pool_epoch, fail_epoch[2], fail_size[2];
+static unsigned char fail_valid[2], fail_size[2];
 static CacheSlot current[2], pending[2];
 static PoseRef versus_poses[8];
 static unsigned int probe_uploaded_pairs, probe_stall_frames;
@@ -65,7 +65,7 @@ static void reset_slots(void) {
     memset(current, 0, sizeof(current)); memset(pending, 0, sizeof(pending));
     current[0].pose_global = current[1].pose_global = 0xFFFFu;
     pending[0].pose_global = pending[1].pose_global = 0xFFFFu;
-    pool_epoch = 1; fail_epoch[0] = fail_epoch[1] = 0;
+    fail_valid[0] = fail_valid[1] = 0;
     copies = copied_bytes = probe_superseded_p1 = probe_superseded_p2 = 0;
     memset(fake_vram, 0, sizeof(fake_vram));
     for (unsigned i = 0; i < sizeof(fake_rom); i++) fake_rom[i] = (unsigned char)(i * 37u + 11u);
@@ -118,6 +118,26 @@ int main(void) {
             "allocation failure displaced a resident fighter");
     REQUIRE(pending[0].pose_global == 0xFFFFu && probe_overflow_p1 == 1,
             "allocation failure was not recorded");
+    request_pose(0, 2, 16, &b);
+    REQUIRE(probe_overflow_p1 == 1, "unchanged pool ignored failed-allocation memo");
+
+    /* A failed memo must expire on every pool change, including after 256
+     * changes on an 8-bit target. Otherwise an old generation aliases. */
+    cache_invalidate(&current[1]);
+    for (unsigned i = 0; i < 127u; i++) {
+        unsigned char base;
+        REQUIRE(alloc_contiguous(4, &base), "cannot create temporary pool entry");
+        pending[1] = (CacheSlot){4, base, 4, 0, &opponent};
+        cache_invalidate(&pending[1]);
+    }
+    {
+        unsigned char base;
+        REQUIRE(alloc_contiguous(4, &base), "cannot create last pool entry");
+        pending[1] = (CacheSlot){4, base, 4, 0, &opponent};
+    }
+    request_pose(0, 2, 16, &b);
+    REQUIRE(pending[0].pose_global == 2,
+            "old allocation failure survived 256 pool changes");
     return 0;
 }
 '''

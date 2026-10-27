@@ -24,11 +24,18 @@ e executável fixados por SHA-256. Não instala/atualiza Flatpak, não depende d
 workspace SGDK e conserva os arquivos de licença/distribuição. Instale uma vez:
 
 ```bash
+export SMSFORGE_BLASTEM_RUNTIME="$PWD/.runtime/host_tools/blastem/1.0.0"
 rtk proxy python3 tools/sms_wrapper/blastem_sms.py install
 rtk proxy python3 tools/sms_wrapper/blastem_sms.py status
 rtk proxy python3 tools/sms_wrapper/blastem_sms.py --self-check
 rtk proxy python3 tools/sms_wrapper/audit_blastem_sms.py --self-check
 ```
+
+A variável seleciona explicitamente o diretório da instalação em todas as
+chamadas do wrapper e da manutenção, mantendo download temporário e recibo em
+`.runtime/`. Sem ela, o caminho histórico `out/host_tools/blastem/1.0.0`
+permanece o padrão para instalações já qualificadas; um caminho não promove
+automaticamente o outro. O pin e os checks de conteúdo são os mesmos.
 
 `run` é limitado e síncrono; cada chamada cria ID, Xvfb com cookie, configuração,
 ROM `.sms`, SRAM, PTY e sandbox próprios, e encerra os processos no `finally`.
