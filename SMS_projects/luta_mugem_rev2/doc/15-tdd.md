@@ -49,6 +49,12 @@ da imagem. Sondas de orientação desejada, residente e submetida não são prov
 de apresentação completa na SAT. Ao modelar filas em `commit_budget.py`, a
 chave fornecida precisa distinguir as duas faces.
 
+O input da IA usa cursor sequencial de beat/subframe, inicializado no boot e
+avançado uma vez por tick da ROM; a consulta pura por frame continua para
+acesso aleatório. Ao voltar de 65535 para 0, o cursor reinicia junto do frame.
+O teste C cobriu a volta completa; a medição da ROM candidata ainda reprova
+FPS e VBlank, conforme o memory bank.
+
 ## Arquitetura proposta, não implementada
 PacoteMUGEN imutável→parse→IRtipado→perfilcompat→loweringAOT/tabelas
 com predicados executáveis→runtimeC/Z80→ROMmedida. Reusar parsers/testes

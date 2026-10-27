@@ -144,3 +144,28 @@ registre hashes e repita build/QA, sem promover evidência histórica. O
 próximo problema dominante é publicar poses/contato com deadline e composição
 legal sob carga representativa; essa correção não autorizou cortar golpes nem
 declara qualidade de jogo.
+
+## 2026-10-27 — cursor de IA e limite do watchpoint
+
+O candidato `out/candidates/20261027_ai_clock/` usa um cursor sequencial em
+lugar das divisões de 16 bits por tick da IA. A consulta pura permanece para
+acesso aleatório e o teste C cobriu todas as fases nas duas faces e no wrap.
+ROM `cac3d8fba8634fb5db7a35f5b4f7799169972c5ce607ad35dc280fbd67878985`;
+o movimento e um ataque foram vistos em Emulicious privado. O FPS em duas
+janelas foi 23,35/20,63 e o selo de 3000 iterações derramou (min 7, delta
+1749), sem carga completa e com stepping inicial: nem deadline nem entrega
+foram pagos. Veja o memory bank para sessões, baseline e cobertura. A suíte
+rev2 passou 266 testes, 150 foram deselecionados.
+
+A sequência de ataque anterior ganhou snapshots VDP unitários na sessão
+`blastem-sms-bb9133dc24964708a94c8795ea33467a`: a submissão coincidia com
+o pedido na fronteira 899 e o dano já aparecia na 900. Os watchpoints sobre
+life/hit não dispararam apesar da mudança nos dumps; não alegar timing exato
+de contato ou funcionamento da sonda para essas instruções. Continuar pela
+identidade da pose efetivamente comprometida, colisão e composição, com
+instrumentação que associe causa e frame; preservar também a reprovação de
+scanline e o custo de VBlank. A cópia local deste lote foi verificada em
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-ai-clock.tar.gz` (SHA
+`e70ac6112719abf7a1050e4817b25c09f4b9741880cf6286f8b59bbbad01c68f`,
+11562 arquivos); o manifesto correspondente termina em `.json`. As duas
+cópias continuam no mesmo disco, sem backup externo novo.

@@ -1,5 +1,45 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — relógio sequencial da IA (candidato)
+
+O caminho de input da IA calculava beat/subframe com três operações de
+divisão/módulo de 16 bits por tick. O candidato usa um relógio de dois bytes,
+inicializado no boot e avançado uma vez por frame; o wrap em 65535→0 reinicia
+a fase porque 65536 não é múltiplo do ciclo de 300. A consulta pura original
+permanece disponível para acesso aleatório. Teste C comparou níveis e beats
+dos dois caminhos em todos os 65536 valores, em duas voltas e faces, incluindo
+marcos independentes de direção e botão. A montagem SDCC confirma que as
+três chamadas de divisão continuam apenas na consulta aleatória, fora do
+caminho sequencial da ROM.
+
+O candidato isolado `out/candidates/20261027_ai_clock/`, ROM SHA
+`cac3d8fba8634fb5db7a35f5b4f7799169972c5ce607ad35dc280fbd67878985`, foi
+buildado e o corredor passou (104 sondas, folga 1534 B). Emulicious privado
+repetiu movimento, botão e vida de P2 1000→888 na sessão
+`ae4964c1eaa2454993653e6c02d90d54`, com vídeo e bundle verificado. No mesmo
+host, duas janelas de 8 s da baseline `ad0e148c…` mediram 22,88/19,82
+atualizações/s (sessão `1ea97d1e5fd94b2db742a409f05ea1f8`); o candidato
+mediu 23,35/20,63 (sessão `4b344cbd25ed4dbfb78e514df72eea14`). São amostras
+curtas em atração, não prova de ganho geral ou de FPS constante; ambas
+reprovaram. O selo do candidato, sessão `c939eb2e8a844cb1bc2b90b733af27a8`,
+também derramou em 3000 iterações (`vline_min=7`, `vovf_delta=1749`), com
+21 iterações iniciais por stepping e sem HUD/FX/PSG representativos. As sessões
+foram fechadas. A suíte rev2 passou 266 testes, com 150 deselecionados.
+
+Em outra sessão BlastEm da baseline `ad0e148c…`,
+`blastem-sms-bb9133dc24964708a94c8795ea33467a`, capturas a cada fronteira VDP
+no roteiro de ataque mostraram, na fronteira 899, as poses desejadas e
+submetidas iguais; na 900 a vida de P2 já era 888. Há outras fronteiras com
+pose desejada diferente da submetida, mas essa amostra não determina a pose
+no instante exato do contato. Os dois watchpoints de escrita de life/hit não
+registraram eventos apesar de os dumps mostrarem a mudança; não usar essa
+rota como prova do instante ou da instrução. Bundle auditado e processos
+encerrados em `out/evidence/20261027_attack_watch/`.
+
+Nenhum ID foi encerrado. Continuam prioritários composição ≤8 por linha,
+deadline real, identidade AIR apresentada e coerência de contato; o cursor da
+IA não decide esses problemas nem aprova o slice completo.
+
 ## 2026-10-27 — faces e alias de bancos (em desenvolvimento)
 
 Após o checkpoint `56834d8`, a ROM sem padding de potência de dois
