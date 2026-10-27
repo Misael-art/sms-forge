@@ -97,11 +97,20 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #ifndef LUTA_UPLOAD_TRACE
 #define LUTA_UPLOAD_TRACE 0
 #endif
+#ifndef LUTA_SPECULATIVE_PREFETCH
+#define LUTA_SPECULATIVE_PREFETCH 0
+#endif
 #if UPLOAD_CHUNK_PAIRS < 1 || UPLOAD_CHUNK_PAIRS > 8
 #error "quota candidata de upload deve estar entre 1 e 8 pares por lado"
 #endif
 #if LUTA_UPLOAD_TRACE != 0 && LUTA_UPLOAD_TRACE != 1
 #error "LUTA_UPLOAD_TRACE deve ser 0 ou 1"
+#endif
+#if LUTA_SPECULATIVE_PREFETCH != 0 && LUTA_SPECULATIVE_PREFETCH != 1
+#error "LUTA_SPECULATIVE_PREFETCH deve ser 0 ou 1"
+#endif
+#if LUTA_SPECULATIVE_PREFETCH && !LUTA_PROFILE
+#error "prefetch experimental exige perfil de producao"
 #endif
 
 /* wave-5b: o classificador de tier do doador tem UM limiar (INPUT_TIER_T) e os
@@ -255,6 +264,11 @@ volatile unsigned char __at(0xC88D) probe_desired_face_p2;
 volatile unsigned char __at(0xC88E) probe_submit_face_p1;
 volatile unsigned char __at(0xC88F) probe_submit_face_p2;
 volatile unsigned int __at(0xC890) probe_push_invalid_geometry;
+volatile unsigned int __at(0xC892) probe_prefetch_reserved_p1;
+volatile unsigned int __at(0xC894) probe_prefetch_reserved_p2;
+volatile unsigned int __at(0xC896) probe_prefetch_hit_p1;
+volatile unsigned int __at(0xC898) probe_prefetch_hit_p2;
+volatile unsigned int __at(0xC89A) probe_prefetch_discarded;
 /* Anel de diagnostico: 8 registros [frame LE, pares P1, pares P2]. O seq
  * publica a entrada DEPOIS de todos os bytes; so o candidato com trace grava
  * por tick. O leitor precisa limitar a janela para excluir wrap ambiguo. */
@@ -325,6 +339,9 @@ typedef struct {
     unsigned char loaded_pairs;
     const Frame *frame;          /* Lote B.2: frame residente (imagem valida) */
     unsigned char face;          /* orientacao dos bytes e metadados residentes */
+#if LUTA_SPECULATIVE_PREFETCH
+    unsigned char speculative;   /* completo mas nao publicavel ate pedido real */
+#endif
 } CacheSlot;
 
 /* O conjunto vivo e derivado dos 4 slots (corrente/pendente x 2 lados).
@@ -346,6 +363,9 @@ static void cache_invalidate(CacheSlot *s) {
     s->pose_global = 0xFFFFu;
     s->loaded_pairs = 0;
     s->frame = 0;            /* Lote B.2: sem frame residente, sem imagem */
+#if LUTA_SPECULATIVE_PREFETCH
+    s->speculative = 0u;
+#endif
 }
 
 /* wave-4i: first-fit POR EXTENSOES, equivalente por construcao ao scan de
@@ -433,6 +453,17 @@ static unsigned char pose_facing_offset(const PoseRef *ref, unsigned char side,
  * producao chama com UPLOAD_CHUNK_PAIRS por lado (orcamento medido), com
  * servico garantido a cada lado por VBlank; retorna os pares subidos para o
  * registro do pico por VBlank (probe_upload_maxvbl). */
+#if LUTA_SPECULATIVE_PREFETCH
+/* Publicar so um pending completo que ja tenha sido pedido pela logica. */
+static void promote_pending(unsigned char side) {
+    cache_invalidate(&current[side]);
+    current[side] = pending[side];
+    pending[side].pose_global = 0xFFFFu;
+    pending[side].frame = 0;
+    pending[side].speculative = 0u;
+}
+#endif
+
 static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     const PoseRef *ref;
     const unsigned char *source;
@@ -442,8 +473,18 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     if (pending[side].pose_global == 0xFFFFu ||
         pending[side].loaded_pairs >= pending[side].n_pairs)
         return 0u;
+#if LUTA_SPECULATIVE_PREFETCH
+    /* Um upload real do oponente tem prioridade sobre trabalho especulativo. */
+    if (pending[side].speculative &&
+        pending[side ^ 1u].pose_global != 0xFFFFu &&
+        !pending[side ^ 1u].speculative)
+        return 0u;
+#endif
     ref = &versus_poses[pending[side].pose_global];
     if (!pose_facing_offset(ref, side, pending[side].face, &pose_offset)) {
+#if LUTA_SPECULATIVE_PREFETCH
+        if (pending[side].speculative) probe_prefetch_discarded++;
+#endif
         cache_invalidate(&pending[side]);
         probe_bad_pose_ref++;
         return 0u;
@@ -470,13 +511,27 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     }
     SMS_restoreROMBank();
     if (pending[side].loaded_pairs >= pending[side].n_pairs) {
+#if LUTA_SPECULATIVE_PREFETCH
+        if (!pending[side].speculative)
+            promote_pending(side);
+#else
         cache_invalidate(&current[side]);
         current[side] = pending[side];
         pending[side].pose_global = 0xFFFFu;
         pending[side].frame = 0;
+#endif
     }
     return moved;
 }
+
+#if LUTA_SPECULATIVE_PREFETCH
+static void cancel_prefetch(unsigned char side) {
+    if (pending[side].pose_global != 0xFFFFu && pending[side].speculative) {
+        cache_invalidate(&pending[side]);
+        probe_prefetch_discarded++;
+    }
+}
+#endif
 
 /* Pede o pose para o lado, com o frame que o representa (Lote B.2: o frame
  * residente passa a ser guardado no slot para que a exibicao mantenha imagem
@@ -495,6 +550,9 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         return;
     }
     if (face > 1u || pose_global >= VERSUS_POSE_COUNT) {
+#if LUTA_SPECULATIVE_PREFETCH
+        cancel_prefetch(side);
+#endif
         cache_invalidate(&pending[side]);
         probe_bad_pose_ref++;
         return;
@@ -503,7 +561,11 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         /* Uma solicitacao pode voltar a imagem residente enquanto outra
          * ainda e carregada. Cancelar essa geracao impede sua promocao
          * posterior; a mesma imagem pode ter metadata AIR diferente. */
-        if (pending[side].pose_global != 0xFFFFu) {
+        if (pending[side].pose_global != 0xFFFFu
+#if LUTA_SPECULATIVE_PREFETCH
+            && !pending[side].speculative
+#endif
+           ) {
             if (side == 0u) probe_superseded_p1++;
             else            probe_superseded_p2++;
             cache_invalidate(&pending[side]);
@@ -515,10 +577,23 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         /* A imagem ainda em voo pode ser reutilizada por outro elemento AIR;
          * conservar os bytes, mas publicar a metadata do elemento atual. */
         pending[side].frame = frame;
+#if LUTA_SPECULATIVE_PREFETCH
+        if (pending[side].speculative) {
+            pending[side].speculative = 0u;
+            if (pending[side].loaded_pairs >= pending[side].n_pairs) {
+                if (side == 0u) probe_prefetch_hit_p1++;
+                else            probe_prefetch_hit_p2++;
+                promote_pending(side);
+            }
+        }
+#endif
         return;
     }
     if (!pose_facing_offset(&versus_poses[pose_global], side, face, &checked_offset) ||
         (versus_poses[pose_global].size >> 6) != n_pairs) {
+#if LUTA_SPECULATIVE_PREFETCH
+        cancel_prefetch(side);
+#endif
         cache_invalidate(&pending[side]);
         probe_bad_pose_ref++;
         return;
@@ -533,17 +608,39 @@ static void request_pose(unsigned char side, unsigned int pose_global,
      * segura (o span alocado e' liberado por cache_invalidate; o upload sempre
      * esteve indexado ao slot, nunca a um pedido global). */
     if (pending[side].pose_global != 0xFFFFu) {
+#if LUTA_SPECULATIVE_PREFETCH
+        if (pending[side].speculative) cancel_prefetch(side);
+        else {
+#endif
         if (side == 0u) probe_superseded_p1++;
         else            probe_superseded_p2++;
+#if LUTA_SPECULATIVE_PREFETCH
+        }
+#endif
     }
     cache_invalidate(&pending[side]);
+#if LUTA_SPECULATIVE_PREFETCH
+    if (!alloc_contiguous(n_pairs, &base)) {
+        base = 0xFFu;
+        if (pending[side ^ 1u].pose_global != 0xFFFFu &&
+            pending[side ^ 1u].speculative) {
+            cancel_prefetch((unsigned char)(side ^ 1u));
+            if (!alloc_contiguous(n_pairs, &base)) base = 0xFFu;
+        }
+    }
+    if (base != 0xFFu) {
+#else
     if (alloc_contiguous(n_pairs, &base)) {
+#endif
         pending[side].pose_global = pose_global;
         pending[side].base_pair = base;
         pending[side].n_pairs = n_pairs;
         pending[side].loaded_pairs = 0;
         pending[side].frame = frame;
         pending[side].face = face;
+#if LUTA_SPECULATIVE_PREFETCH
+        pending[side].speculative = 0u;
+#endif
         return;
     }
 #if LUTA_PROFILE
@@ -579,6 +676,48 @@ static void request_pose(unsigned char side, unsigned int pose_global,
     fail_size[side] = n_pairs;
     probe_stall_frames++;
 }
+
+#if LUTA_SPECULATIVE_PREFETCH
+/* Reserva especulativa nunca substitui o pedido urgente nem um current. */
+static void stage_prefetch(unsigned char side, unsigned int pose_global,
+                           unsigned char n_pairs, const Frame *frame,
+                           unsigned char face) {
+    unsigned char base;
+    unsigned int checked_offset;
+    if (side > 1u) { probe_bad_pose_ref++; return; }
+    if (pending[side].pose_global != 0xFFFFu && !pending[side].speculative)
+        return;
+    if (pose_global >= VERSUS_POSE_COUNT || face > 1u ||
+        !pose_facing_offset(&versus_poses[pose_global], side, face, &checked_offset) ||
+        (versus_poses[pose_global].size >> 6) != n_pairs) {
+        cancel_prefetch(side);
+        probe_bad_pose_ref++;
+        return;
+    }
+    if (current[side].pose_global == pose_global && current[side].face == face) {
+        cancel_prefetch(side);
+        return;
+    }
+    if (pending[side].pose_global == pose_global && pending[side].face == face) {
+        pending[side].frame = frame;
+        return;
+    }
+    cancel_prefetch(side);
+    if (pending[side ^ 1u].pose_global != 0xFFFFu &&
+        !pending[side ^ 1u].speculative)
+        return;
+    if (!alloc_contiguous(n_pairs, &base)) return;
+    pending[side].pose_global = pose_global;
+    pending[side].base_pair = base;
+    pending[side].n_pairs = n_pairs;
+    pending[side].loaded_pairs = 0u;
+    pending[side].frame = frame;
+    pending[side].face = face;
+    pending[side].speculative = 1u;
+    if (side == 0u) probe_prefetch_reserved_p1++;
+    else            probe_prefetch_reserved_p2++;
+}
+#endif
 
 /* ---------------- metasprite -> SAT + contagem por scanline -------------- */
 static void emit_frame(unsigned char side, const Frame *frame) {
@@ -1044,6 +1183,51 @@ static void vblank_account(void) {
 #define vblank_account() ((void)0)
 #endif
 
+#if LUTA_SPECULATIVE_PREFETCH
+/* Preve somente a proxima entrada AIR da animacao ainda ativa. Um role novo,
+ * terminal, hold ou face divergente cancela a previsao, sem tocar o current. */
+static void prefetch_next(unsigned char side, const Frame *frame,
+                          unsigned int requested_pose) {
+    const CharacterData *cd;
+    const Anim *anim;
+    const Frame *next;
+    unsigned char next_index;
+    unsigned int pose;
+    if (side > 1u) { probe_bad_pose_ref++; return; }
+    if (!frame || !current[side].frame ||
+        current[side].pose_global != requested_pose ||
+        current[side].face != fighter[side].face || fighter[side].done ||
+        frame->dur == 255u) {
+        cancel_prefetch(side);
+        return;
+    }
+    cd = &characters[side];
+    anim = &cd->anims[fighter[side].anim];
+    if (fighter[side].fidx >= anim->n_frames ||
+        frame != &anim->frames[fighter[side].fidx]) {
+        cancel_prefetch(side);
+        return;
+    }
+    if (fighter[side].fidx + 1u < anim->n_frames)
+        next_index = (unsigned char)(fighter[side].fidx + 1u);
+    else if (anim->loop_start < anim->n_frames)
+        next_index = anim->loop_start;
+    else {
+        cancel_prefetch(side);
+        return;
+    }
+    next = &anim->frames[next_index];
+    pose = (unsigned int)cd->pose_base + next->pose;
+    if (pose >= VERSUS_POSE_COUNT) {
+        cancel_prefetch(side);
+        probe_bad_pose_ref++;
+        return;
+    }
+    stage_prefetch(side, pose, (unsigned char)(versus_poses[pose].size >> 6),
+                   next, fighter[side].face);
+}
+#endif
+
 /* Uma passada de logica: face -> input/papel -> atores -> combate -> pusher ->
  * request_pose. Mesma sequencia da wave-5b (v031), so reancorada fora do
  * wrap de stream (o stream virou passo explicito do laco). */
@@ -1108,11 +1292,18 @@ static void logic_tick(const Frame *fn[2], unsigned int poses_req[2]) {
                              (unsigned char)(versus_poses[poses_req[side]].size >> 6),
                              fn[side], fighter[side].face);
             else {
+#if LUTA_SPECULATIVE_PREFETCH
+                cancel_prefetch(side);
+#endif
                 cache_invalidate(&pending[side]);
                 probe_bad_pose_ref++;
             }
         }
     }
+#if LUTA_SPECULATIVE_PREFETCH
+    for (side = 0u; side < 2u; side++)
+        prefetch_next(side, fn[side], poses_req[side]);
+#endif
 #if LUTA_DIAG_TELEMETRY
     probe_reg_logic_edges += (unsigned char)(probe_vbl_tick - t0);
 #endif
@@ -1328,6 +1519,11 @@ void main(void) {
     /* Referencias volateis conservam o corredor no mapa mesmo sem trace. */
     probe_upload_trace_seq = 0u;
     probe_upload_trace[0] = 0u;
+    probe_prefetch_reserved_p1 = 0u;
+    probe_prefetch_reserved_p2 = 0u;
+    probe_prefetch_hit_p1 = 0u;
+    probe_prefetch_hit_p2 = 0u;
+    probe_prefetch_discarded = 0u;
     /* atribuicao regional: __at nao e inicializado pelo crt0 (L009);
      * o hook da ISR so e instalado com as somas ja zeradas. */
 #if LUTA_DIAG_TELEMETRY
@@ -1355,6 +1551,10 @@ void main(void) {
     current[1].pose_global = 0xFFFFu;
     pending[0].pose_global = 0xFFFFu;
     pending[1].pose_global = 0xFFFFu;
+#if LUTA_SPECULATIVE_PREFETCH
+    current[0].speculative = current[1].speculative = 0u;
+    pending[0].speculative = pending[1].speculative = 0u;
+#endif
     fighter[0].x = 96u * 256u;
     fighter[1].x = 160u * 256u;
     fighter[0].face = 0u;   /* layout inicial: p1 a esquerda, aponta p/ direita */

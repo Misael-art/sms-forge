@@ -1,0 +1,51 @@
+{
+  "name": "luta_mugem_rev2",
+  "platform": "sega_master_system",
+  "region_target": [
+    "NTSC",
+    "PAL"
+  ],
+  "toolchain": {
+    "compiler": "sdcc>=4.2",
+    "sdk": "devkitSMS",
+    "libs": [
+      "SMSlib",
+      "PSGlib"
+    ],
+    "include_dirs": [
+      "out/generated/pose_budget_facing_20261027"
+    ],
+    "makesms_extra": [
+      "-pp",
+      "-mbank",
+      "out/generated/pose_budget_facing_20261027/versus_scene_banks_02.bin:0:24:2"
+    ],
+    "defines": {
+      "LUTA_SPECULATIVE_PREFETCH": 1,
+      "UPLOAD_CHUNK_PAIRS": 4
+    }
+  },
+  "skeleton_version": 1,
+  "doc_authority": [
+    "doc/10-memory-bank.md",
+    "doc/11-gdd.md",
+    "doc/13-spec-cenas.md",
+    "doc/15-tdd.md"
+  ],
+  "gates": [
+    "build",
+    "resources",
+    "sprite_scanline",
+    "luma_floor",
+    "provenance",
+    "evidence",
+    "claims"
+  ],
+  "specialization": "fighting_1v1_mugen_import",
+  "context_type": "engine_consumer_planning",
+  "delivery_claim_ceiling": "documentado",
+  "engine": "tools/sms_wrapper/mugen2sms",
+  "source_project": "SGDK Mugenesis raw Ken/Ryu packages; freeze intake before generating",
+  "stage_policy": "solid_color_only_all_screens",
+  "legacy_project": "luta_mugen historical reference only; no required path dependency"
+}
