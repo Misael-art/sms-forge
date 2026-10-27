@@ -227,3 +227,34 @@ A cópia local da continuidade deste lote foi verificada em
 (SHA `097ec3af5830c937d8ae5dfe1432916002b115c2c7770226ff4c5a228329540c`,
 15812 arquivos; manifesto com o mesmo nome e extensão `.json`). O pacote e o
 owner estão no mesmo disco, sem proteção externa nova.
+
+## 2026-10-27 — antecipação de pose sem promoção (candidato)
+
+O runtime ganhou antecipação opcional da próxima entrada AIR, desativada por
+padrão e selecionável apenas por manifesto de candidato. Uma pose ainda não
+pedida permanece no `pending`; requisições reais têm prioridade e podem
+recuperar espaço especulativo sem expulsar as imagens residentes. As ROMs
+quota 8 (`61efabeed3e6bb75d5ef460b9b2cea648cf66df9ef1c9730e684ca7ef9ea0bb4`),
+quota 4 (`6ee09b24292b511f254b6044814b9e6d16b4d09076260b1cb8e3d88d94050873`)
+e default desligado (`3414a2c959d137977b0fe31de8eabc7b6ac43c4e06380df19fc0a2a7f72f1829`)
+estão em `out/candidates/20261027_prefetch_*`, com recibos e fonte por hash.
+
+No roteiro Emulicious, as três causaram dano com input; quota 8 com
+antecipação teve menos espera observada, mas as trajetórias e números de
+ticks diferem. Na sessão BlastEm auditada `59aa76f50f7c4623a510777926e64e09`,
+os 60 residentes e 40 pendentes carregados amostrados bateram com a ROM; a SAT
+excedeu oito sprites por linha em 14/30 fronteiras. Na mesma ROM quota 8, as
+duas janelas NTSC deram 25,88/23,49 atualizações/s e o selo derramou em 1871
+de 3000 iterações, mínimo 7, sem HUD/FX/PSG. Todas as sessões foram fechadas.
+Esses resultados não aprovam composição, contato, prazo ou gameplay completo.
+O memory bank registra método, limites, contadores e caminhos dos artefatos.
+
+O lote passou 271 testes rev2 (150 deselecionados), checks de marcadores e do
+corredor. Nenhum ID do backlog foi encerrado. O próximo ramo causal é reduzir
+as divisões de 16 bits no relógio de pacing e verificar inclusive o wrap de
+65535→0, com nova ROM, sem supor ganho ou mudança de comportamento.
+
+Continuidade local: `.runtime/backups/luta_mugem_rev2-runtime-20261027-prefetch.tar.gz`,
+SHA `7223ccb76799f5bcf3c61348dce6eb333c8fca6ac3214e62bce841ba40eeee35`,
+manifesto com mesmo nome e extensão `.json`, verificado em 17340 arquivos.
+Essa cópia e o owner estão no mesmo disco; não há nova proteção externa.

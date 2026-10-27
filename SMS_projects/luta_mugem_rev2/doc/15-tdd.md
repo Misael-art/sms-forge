@@ -55,6 +55,15 @@ acesso aleatório. Ao voltar de 65535 para 0, o cursor reinicia junto do frame.
 O teste C cobriu a volta completa; a medição da ROM candidata ainda reprova
 FPS e VBlank, conforme o memory bank.
 
+`LUTA_SPECULATIVE_PREFETCH` é uma opção experimental desativada por padrão.
+Ela reserva a próxima pose AIR no `pending`, sem publicá-la até o pedido
+efetivo; pedidos urgentes têm prioridade de banda e podem recuperar reserva
+especulativa do outro lado, sem evicção dos residentes. O recurso só prevê a
+próxima entrada da animação corrente e não impede contato com pose visual
+antiga. As sondas u16 de reserva, acerto completo e descarte são diagnósticas
+e envolvem em 65536; não qualificam orçamento. As medições por SHA e as
+falhas de FPS, VBlank e scanline estão no memory bank.
+
 O pusher no chão usa a soma das larguras `ground.front` convertidas nos dados
 de cada slot e preserva a ordem anterior ao movimento; não usa mais hurtbox
 com afastamento fixo de 1 px. `ground.front` e `ground.back` são campos de

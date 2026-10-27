@@ -1,5 +1,62 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — residência antecipada de uma pose (candidato)
+
+`LUTA_SPECULATIVE_PREFETCH=1` existe apenas em builds candidatas; o default
+continua zero. O runtime reserva espaço para a próxima entrada da animação
+AIR ativa e só publica a pose completa quando ela é efetivamente pedida.
+Uma requisição real tem prioridade sobre o upload especulativo do outro lado
+e pode recuperar a sua reserva; nenhuma pose residente é desalojada para
+isso. Uma previsão parcial passa a ser urgente quando pedida. Mudança de
+papel, face, hold ou término invalida a previsão quando aplicável. As sondas
+contam reservas, acertos completamente preparados e descartes; acerto parcial
+não é contado como acerto completo. O teste C do cache cobre essas condições,
+o conteúdo copiado e a falta de publicação antecipada; outro testa sequência,
+loop, terminal, hold, frame obsoleto e limites do preditor.
+
+Fonte `520f150abd11c5d5a048f9ac4c94bbca45b44de1eb3f8bc0bd4c2be6ea287ed7`,
+builder `32cba228d133cded5a0fb3cc77459341b0f6a2503d452aee7812a45ac5993096`;
+recibos e snapshots ficam nos próprios destinos isolados. As ROMs de quota 8,
+quota 4 e recurso desligado são, respectivamente, `61efabeed3e6bb75d5ef460b9b2cea648cf66df9ef1c9730e684ca7ef9ea0bb4`,
+`6ee09b24292b511f254b6044814b9e6d16b4d09076260b1cb8e3d88d94050873` e
+`3414a2c959d137977b0fe31de8eabc7b6ac43c4e06380df19fc0a2a7f72f1829`.
+Corredor: 143 sondas, folga 1530 B nas candidatas e 1534 B com recurso
+desligado; gate de marcadores `volatile` passou.
+
+No roteiro Emulicious de aproximação, botão 1 e recuperação, as três ROMs
+registraram vida de P2 1000→888. Em 340 frames VDP por stepping, a quota 8
+com antecipação teve 145 ticks de input e espera de 11/15 ticks por lado,
+contra 158 ticks e espera 54/39 com recurso desligado. A quota 4 teve 155
+ticks e espera 67/63. As trajetórias e contagens de ticks diferem; essa
+comparação não isola causa ou prova responsividade real. Na quota 8, os
+contadores ao final somavam 73/39 acertos completos desde o boot (20/13 a
+mais durante a janela); as três sessões e bundles foram verificados e
+encerrados. Artefatos: `out/evidence/20261027_prefetch_gameplay_{chunk8,chunk4,disabled}/`
+e `20261027_prefetch_gameplay_comparison.json`.
+
+Na ROM `61efabee…`, BlastEm privado/auditado
+`59aa76f50f7c4623a510777926e64e09` amostrou 30 fronteiras: 60 poses
+residentes e 40 uploads pendentes com bytes carregados coincidiram com a ROM;
+39 destes pendentes eram especulativos. Nenhum dos quatro slots vivos se
+sobrepôs nas amostras. A SAT excedeu oito sprites por linha em 14/30
+fronteiras, pico 10. `resident.json` e `sat.json` estão em
+`out/evidence/20261027_prefetch_blastem_chunk8/`; diagnósticos de memória e
+SAT não provam correção de todos os quadros, composição completa ou hardware.
+
+Essa mesma ROM reprovou as duas janelas NTSC em tempo real (25,88/23,49
+atualizações/s; sessão `7abf3815d1454b4192a143e4c8281679`) e o selo de
+VBlank (`vovf_delta=1871`, `vline_min=7`, 3000 iterações; sessão
+`a1c6ae41347b424f8044e79cd91c25b1`). O selo incluiu 23 iterações iniciais
+por stepping e não havia HUD, FX ou PSG representativos. Os bundles foram
+verificados e as sessões fechadas. Antecipação não está aprovada: ainda há
+espera, divergência lógica/apresentação, limite por linha, derrame e falta de
+carga completa. Nenhum dos 55 IDs foi encerrado. Próximo ramo seguro: remover
+o custo de duas divisões de 16 bits por tick no relógio de pacing, preservando
+os limites e a volta de 65535 para zero; medir ROM nova antes de concluir efeito.
+Fechamento: 271 testes `rev2` passaram, 150 foram deselecionados; doc sync,
+constantes de hardware, captura de lição e mudança significativa passaram.
+O contrato de engine passou somente em modo planejamento.
+
 ## 2026-10-27 — quota e trilha de uploads (diagnóstico)
 
 Com a geometria da candidata `b5c83830…`, foram buildadas ROMs isoladas que
