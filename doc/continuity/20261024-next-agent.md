@@ -31,3 +31,20 @@ de especial sem entidade não implementa projétil; payload/facing e contato da
 pose residente precisam ser qualificados; fundo sólido é escopo; P1 de sprites
 é compartilhada; os 7 eixos e época visual delivery devem convergir na mesma
 ROM. Primeiro feche runtime e qualidade mensuráveis; ambição AAA não é selo.
+
+## 2026-10-27 — avaliação e melhoria da capacidade produtiva
+
+Lote de fábrica `f5d3dcb777554b7bceb309abe45e1bb98856ecb0` na branch
+`codex/host-bootstrap-continuity-20261024` (base `651284c`); parecer em `doc/curation/2026-10-27_production_capability_review.md`.
+Maestria agora exige custódia de artefatos; 32 claims de texto livre foram
+preservados em `legacy_claim` e reconciliados para `mapped` até reindexação.
+Não significa refutação das provas históricas. Pipeline incorpora slice e
+checkpoint conjunto; skills orientam design, câmera, teste humano e áudio PSG.
+Correção de compatibilidade Pillow no gate de poses, agora coberto no selftest.
+Validação no host: 135/135 selftests, 75/75 medidores e gates de maestria,
+documentação, aprendizado e hardware passaram. Consultar
+`doc/curation/evidence/2026-10-27_production_capability/validation.json`.
+Nenhuma ROM/asset foi alterada nem gameplay/qualidade de jogo requalificados.
+Próximo owner continua `luta_mugem_rev2`: ID01, R01/R02/R03/R05/R06/R09,
+R10/IN05 no backlog existente. Reindexar provas históricas separadamente de
+provar a build atual. Não ampliar elenco ou criar engine paralela.
