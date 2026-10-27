@@ -1,5 +1,183 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — identidade, fundo e cancelamento de pose (em desenvolvimento)
+
+Nenhum dos 55 IDs foi encerrado. A ROM nominal e o recibo históricos foram
+preservados: `out/rom/luta_mugem_rev2.sms` SHA
+`087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65`;
+`out/build_record.json` ainda aponta para `e697e906…` e outro host. Isso mantém
+ID01 aberto, mesmo com recibos de candidatos agora identificados. O rebuild do
+checkout original, em `out/candidates/20261027_host_baseline/`, SHA
+`06e575f1fa632e0742e594ea9db77b7ddd8dde44a397d782afbdc44f3b664e97`, passou
+`verify_canonical.py`: payload idêntico, diferenças apenas em `0x7FE6`/`0x7FFA`
+(data SDSC e checksum). A fonte anterior `042ba22e…` continua no Git.
+
+O build central aceita `--build-dir` em `out/candidates/` e, somente com esse
+destino, `--manifest` alternativo dentro do projeto. Não sobrescreve ROM,
+recibo ou changelog nominais. A saída só recebe recibo após compile/link,
+pre-gates e comparação das entradas; inclui SHA do ROM, fontes/headers efetivos,
+banco de patterns, manifestos e componentes SDCC. A comparação de hashes em
+duas leituras não é snapshot transacional. O candidato recusa `link_extra` e
+opções makesms ainda sem custódia. Os includes de dados são selecionados pelo
+manifesto, sem trocar o núcleo ou editar os headers gerados. O corte diagnóstico
+`out/candidate_configs/pose_budget_pair_20261027.json` referencia o pacote
+existente `pose_budget_pair_20261023` e sua imagem de 24 bancos; headers e banco
+foram conferidos contra o manifesto gerado. Os insumos desse pacote estão no
+asset de continuidade de 24/10 (manifesto `.runtime/downloads/`),
+enquanto os novos candidatos e mídias permanecem locais em `out/`.
+A receita idêntica foi preservada no Git em
+`.mddev/candidates/pose_budget_pair_20261027.json` (SHA `5236f208…`); ela é
+diagnóstica e não substitui o manifesto nominal nem aprova entrega.
+
+R01: Emulicious privado reproduziu fundo estampado e P2 fragmentado na ROM
+nominal, sessão `862959770d5344118789bb1c96910d98`, frame VDP 740. O código
+preenchia a PNT com o tile 255 (`0x1FE0`), dentro do pool de sprites
+`0x0000..0x1FFF`. O candidato `de2c51937a30f69a68610ecff7117b768f4a5094d0262cc745d861fa6185ac16`
+aponta a PNT para o tile 256 zerado em `0x2000`; na sessão
+`db31cb784774414b84d4988436ca9679`, o fundo ficou preto no quadro equivalente
+e nas 80 linhas superiores dos 52 frames registrados durante direita/botão;
+P1 foi de x=73 para x=91. Os bundles privados passaram `check-bundle` e as
+sessões foram encerradas. O diagnóstico complementar BlastEm da ROM `d8de0ad…`,
+sessão `blastem-sms-f7aed4ca5c7a4aa68193a13b029d77bd`, verificou em cinco
+fronteiras VDP (600, 630, 720, 820 e 940) a PNT em `0x3800` com 768 entradas
+`0x0100`, tile 256 zerado em `0x2000` e SAT em `0x3F00`. O bundle passou
+`audit_blastem_sms.py --require-current-tool`, com limpeza confirmada; roteiro,
+dumps e extração ficam em `out/evidence/20261027_blastem_vram_candidate/`.
+São cinco estados de uma sequência, não prova de todas as ações/telas, ausência
+de sobrescrita entre fronteiras ou correção de qualquer outra ROM; R01 continua
+aberto.
+
+O corte de 24 bancos sem gate de papéis, SHA
+`a11811f47ae51676b448b07a09e343152f1916c9b3ccfdae2449548ebf3db046`, mostrou
+ambos os atores na sessão `5d629c1598a14306b9bbfb0098389dfe`. Em 82 frames VDP
+de direita/botão/neutro, P1 avançou x=84→114, mas `cmd_hits_p1` permaneceu 0
+e ambas as vidas em 1000: não se provou ataque nem interação completa. No
+frame VDP 740, P2 pedia pose 69 com 54 residente; `present`/SAT não provam
+integridade visual em todos os quadros. Os dez pares históricos do corte
+excedendo 8 sprites/linha continuam dívidas de R02/R03, não foram bloqueados
+no candidato atual. O selo da sessão `d6599d1cb00b4d248d14f44ba3691b18`
+registrou `derramou`, `vline_min=2`, `vovf_delta=1770`, `done=1`; as primeiras
+20 iterações já ocorreram no boot por stepping da ponte, antes do runner de
+180 s, e a carga não inclui HUD/FX/PSG. Não é janela representativa de entrega.
+
+R05/R06: o pedido para voltar à pose já residente deixava outra pose pendente
+ser promovida. O teste C compilou as funções reais e primeiro falhou; a correção
+cancela a geração abandonada sem desalojar o oponente e atualiza o `Frame`
+associado quando o bitmap é reutilizado. Em sessão privada com pose 0 residente,
+direita e soltura antes do upload terminar, a ROM antiga `a118…` manteve pose 6
+pendente e a promoveu no VDP 821 enquanto a sonda de desejo indicava 0; a ROM
+corrigida `9654406b9891d562acc4f10c099911d7d2f28c229f02a426861f057b62dba0f0`
+cancelou a pendência no VDP 820 e incrementou `superseded`. Sessões
+`eca1fc566c1d4cfbb5d259e86061c185` e `2a06433a37d34219988c84565712abdc`,
+encerradas; traces e journals em `out/evidence/20261027_pose_cancel_case/`.
+Endereços de current/pending foram derivados dos `.rel`/`.sym` e conferidos
+contra o `.map` de cada ROM; leituras em fronteiras VDP podem interromper o
+loop e não são timestamps exatos de apresentação. Isso não prova contato
+visível, deadlines nem inexistência de starvation; R05 e R06 seguem abertos.
+
+O modelo `mugen2sms/runtime/commit_budget.py` preserva o default histórico
+v033 identificado no relatório e oferece `rev2_b2_cancel_v1` explícito:
+8 pares por lado, sem evictar oponente e com cancelamento. É modelo de fila,
+não medição VBlank ou garantia de imagem. Commit local anterior à experiência
+de agrupamento: `ca921dd` (código e testes); sem promoção de capacidade.
+
+Experiência de upload: `SMS_VRAMmemcpy_brief` aceita tamanho em byte; agrupar
+até três pares contíguos por chamada mantém o tamanho em 192 B ou menos. O
+teste C comparou endereços, bytes, budget e promoção apenas após completar a
+pose. O gerador prevê cada pose completa dentro de um banco de 16 KiB; a
+validação exaustiva dos descritores reais e bancos-limite permanece pendente.
+A ROM agrupada
+`635fc1d1dc97411de44fccf02e2079ee009dadc61df0f0f88905ae5b520fca23`
+repetiu o cancelamento observado na sessão `6f24a1b31b4144b29454ebab73738c34`.
+Comparação diagnóstica da mesma cena e limites de 8 pares por lado: antes
+`9654406b…`, sessão `60e7d6612c854f9c9b56ea82dfb0ae3e`, `vline_min=2`,
+`vovf_delta=1750`; agrupada `635fc1d1…`, sessão
+`69560ad3ba4b47e298e250f1f521b624`, `vline_min=13`, `vovf_delta=1720`.
+Ambas selaram 3000 iterações e derramaram. O runner de 180 s começou após 20
+e 23 iterações já executadas em stepping, respectivamente; a cena não inclui
+HUD, FX ou áudio. A diferença observada não é budget aprovado nem demonstra
+melhoria universal de fluidez. Snapshots das fontes exatas e recibos estão nos
+respectivos diretórios candidatos; a versão anterior consta no commit `ca921dd`.
+
+O contrato de escala agora declara `pose_budget` com os fatores do GDD e seu
+SHA, sem reapresentar 72–88 px como alvo deste projeto. O self-check do auditor
+testa GDD divergente e contratos inválidos; `contract_pass` continua apenas
+planejamento. A entrega ainda exige composição, contato visível, prazo e carga
+completa na mesma ROM, revisão independente e os sete eixos.
+
+Na ROM `635fc1d1…`, sessão privada `839665d33f694c8cb31ee161dbec68d9`, P1
+andou de x=84 a 139, segurou o botão 1 e soltou; `cmd_hits_p1` aumentou de 0
+para 1 e a vida de P2 caiu de 1000 para 888. O vídeo nativo da sequência e o
+journal estão em `out/evidence/20261027_batched_gameplay/`. O caso demonstra
+entrada reconhecida e consequência nessa configuração, não equivalência CNS,
+guarda, sincronização do contato, áudio ou interação vertical completa. A
+sonda SMRT em duas janelas NTSC de 8 s, sessão
+`b8474880e1f74ab3bd5a536cb0518d29`, mediu 23,38 e 21,02 atualizações/s,
+reprovando 60 e a dispersão; esta cena não tem HUD/FX/PSG representativos.
+
+S04: `advance_actor` entregava o elemento seguinte no tick que encerrava o
+atual, encurtando sua primeira exposição lógica e pulando duração 1. O teste
+C extrai e compila a função real, cobre sequência finita `[1,2,1]`, loop e
+hitstop na fronteira; falhou antes e passou após a correção. A ROM candidata
+`d8de0ad026b8c8a6dd7219e2b669a2fb68b56aad3170fae04f5b69c8a2f5ef00` foi
+buildada; sua QA e medição são registradas separadamente. A prova completa
+exige identidade AIR de fonte e ROM em N+1 fronteiras e terminal, além de
+framebuffer; o teste host não paga isso. O gerador ainda normaliza duração 0
+para 1 e o runtime trata hold terminal como `done`: não anunciar semântica
+AIR geral ou equivalência para esses casos.
+
+Na mesma ROM `d8de0ad…`, a sequência privada
+`66ef673349d741ae8914a08064cc0dcd` registrou P1 x=84→140, uma entrada de
+ataque reconhecida e vida de P2 1000→888; o vídeo por stepping não prova
+throughput, guarda, áudio nem contato coerente. Duas janelas SMRT NTSC de 8 s
+na sessão `e2103900f5bb47c3b1b8e1c8733ded31` mediram 23,50 e 20,64
+atualizações/s e reprovaram a meta regional. O selo de 3000 iterações da sessão
+`c6853d4cb3be434493689e2186cb8b49` teve `vline_min=13`, `vovf_delta=1719`:
+as primeiras 21 iterações ocorreram no stepping de boot, sem HUD/FX/PSG.
+
+Outra falha de cache foi reproduzida com as funções C reais: o contador de
+época de 8 bits podia voltar ao valor de uma falha após 256 alterações do
+pool, impedindo uma alocação que agora cabia. A implementação passou a invalidar
+explicitamente a memória de falha dos dois lados a cada alteração; o teste
+cobre o wrap, a repetição com pool inalterado e o cancelamento sem evictar o
+oponente. A ROM `20d0c6e0efdfaeffcc9ad11b0cfe729d8edf3c02df8215998e62411c8f222f99`
+repetiu a entrada e a consequência observadas em sessão privada
+`98bb1673d29c4dad9d1c1ec428355e87`, com bundle verificado e sessão encerrada.
+O caso de 256 mudanças foi exercitado no host C, ainda não como stress em ROM;
+essa reprodução não encerra R05 nem aprova prazo, starvation ou composição.
+O selo da mesma ROM, sessão `18ec08cf536842d6b9e13bb38273ed51`, apresentou
+`vline_min=13`, `vovf_delta=1719` em 3000 iterações; as primeiras 21 foram
+executadas durante o stepping de boot e a carga exclui HUD/FX/PSG. Também
+reprovou e não é janela representativa de entrega.
+Os 93 descritores do mesmo corte foram conferidos nas duas orientações contra
+os bancos gerados e os bytes da ROM: 186 trechos respeitam as fronteiras de
+16 KiB; a menor folga ao fim do banco é zero. Script e resultado em
+`out/evidence/20261027_facing_bank_audit/`. É comparação estática de bytes,
+não prova de seleção, imagem, mapper em execução ou orientação correta.
+
+Hipótese descartada: remover as divisões de 16 bits usadas apenas pelos probes
+de passo. O substituto foi comparado ao quociente/resto de referência por duas
+voltas completas de `frame` em teste C, e seu assembly não tinha mais as
+chamadas `__moduint`/`__divuint`. Na atração, janelas NTSC de 8 s da ROM
+`20d0c6e0…` mediram 23,48/20,64 atualizações/s (sessão
+`a5dd0b9985c749939b8f6f3b8790f405`), contra 23,38/21,25 da ROM experimental
+`c06c08749cb1db357349281b37a8eea6f574379bf781becb856d24b70925ac8b`
+(sessão `7bd86237e556496a9613f4e5771fe1d2`). Sem ganho demonstrável, o
+experimento foi revertido no fonte; candidato, fonte e bundles permanecem em
+`out/` como diagnóstico, não como aprovação de FPS ou medição sob carga completa.
+
+A suíte `mugen2sms/tests --project rev2` primeiro não coletou três módulos por
+f-strings incompatíveis com Python 3.11 em `inventory.py`; corrigida a sintaxe,
+uma segunda execução acusou a API Pillow ausente no teste de transparência.
+Após compatibilizar o teste com o Pillow instalado, a suíte passou: 260 testes,
+150 deselecionados por escopo. A deseleção não valida o consumidor legado nem
+o comportamento da ROM. Os 28 testes focados do lote também passaram, assim
+como 135/135 selftests centrais; o probe opcional de build do selftest não foi
+executado (a build candidata tem recibo próprio). As 75 ferramentas de medição,
+doc sync, hardware e corredor de sondas passaram. O audit de aprendizado primeiro
+acusou nove rotas stale após a edição do workflow BlastEm; os vínculos correntes
+foram atualizados e o audit passou, sem alterar artefatos históricos.
+
 ## 2026-10-24 — continuidade sem o disco do host anterior
 
 Pedido humano: preservar diagnóstico e trabalho pendente, preparar bootstrap

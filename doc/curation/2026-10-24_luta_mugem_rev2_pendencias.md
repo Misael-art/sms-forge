@@ -2,6 +2,15 @@
 
 55 itens identificados; nenhum fechado por esta análise. O detalhamento e as dependências estão no JSON de mesmo nome.
 
+Atualização de execução em 27/10: ID01, R01, R05, R06, R09 e S04 foram
+reexaminados; todos permanecem abertos. O rebuild isolado identifica seus
+insumos, foram corrigidos o tile de fundo e duas falhas do cache de pose, e a
+ordem lógica AIR passou em teste C. Dumps de PNT/VRAM/SAT cobrem cinco
+fronteiras de uma ROM diagnóstica, não todas as ações. Ainda faltam a
+conciliação da ROM nominal, identidade AIR em ROM, coerência de contato e
+budget com carga completa. Evidências e SHAs estão no
+memory bank do consumidor; a tabela abaixo preserva os critérios de 24/10.
+
 P0: impede concluir o núcleo/entrega. P1: necessário ao escopo ou à robustez. P2: distribuição e ergonomia secundárias.
 
 | ID | Prioridade | Pendência | Critério de fechamento |

@@ -13,6 +13,16 @@
   "engine_complete": false,
   "game_scope": "Ken/Ryu, quatro pares, fundo sólido; extensibilidade autoral em consumidor separado",
   "source_snapshot": "doc/curation/evidence/2026-10-24_mugenesis/source_inventory.json",
+  "execution_updates": [
+    {
+      "date": "2026-10-27",
+      "ids": ["ID01", "R01", "R05", "R06", "R09", "S04"],
+      "closed_ids": [],
+      "status": "partial_not_delivery",
+      "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+      "summary": "Baseline reproduzida; candidatos isolados identificados; fundo, cancelamento de pose e memo de falha do cache corrigidos; ordem lógica AIR corrigida e testada no host. PNT/VRAM/SAT foram observadas em cinco fronteiras de uma ROM diagnóstica; cobertura não é completa. Contato/pose e deadline não fechados; medições de VBlank e FPS reprovaram sem carga completa; identidade AIR em ROM permanece aberta."
+    }
+  ],
   "count": 55,
   "items": [
     {

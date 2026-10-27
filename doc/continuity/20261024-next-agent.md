@@ -48,3 +48,46 @@ Nenhuma ROM/asset foi alterada nem gameplay/qualidade de jogo requalificados.
 Próximo owner continua `luta_mugem_rev2`: ID01, R01/R02/R03/R05/R06/R09,
 R10/IN05 no backlog existente. Reindexar provas históricas separadamente de
 provar a build atual. Não ampliar elenco ou criar engine paralela.
+
+## 2026-10-27 — lote de identidade, cache e temporalidade
+
+Código nos commits `ca921dd` e `792cef6` da mesma branch. O manifesto nominal
+e a ROM histórica `087df676…` foram preservados; `build_record.json` nominal
+continua de outro SHA, portanto ID01 e os 55 IDs seguem abertos. A receita
+versionada de diagnóstico é
+`SMS_projects/luta_mugem_rev2/.mddev/candidates/pose_budget_pair_20261027.json`;
+os bancos gerados vêm do pacote de recuperação de 24/10, não do Git. O recibo
+do candidato inclui os hashes de entradas e ferramenta. A ROM do lote é
+`20d0c6e0efdfaeffcc9ad11b0cfe729d8edf3c02df8215998e62411c8f222f99`;
+seu fonte SHA `2a27905e…` está no Git e no snapshot do candidato.
+
+No Emulicious privado, a ROM aceitou movimento e botão 1, com vida de P2
+1000→888; isso não qualifica guarda, som, contato ou gameplay completo. A
+atração reprovou FPS (23,48/20,64 atualizações/s) e o selo de VBlank
+(`vline_min=13`, `vovf_delta=1719` em 3000 iterações; 21 vieram de stepping
+de boot e não há HUD/FX/PSG). Os bundles foram checados e as sessões fechadas.
+PNT/VRAM/SAT foram inspecionadas em cinco fronteiras da ROM anterior `d8de0ad…`;
+os 93 descritores do candidato `20d0c6e…` têm duas faces dentro dos bancos e
+186 trechos coincidem com a ROM. Esses fatos não aprovam a composição ou a
+seleção da face em runtime. Veja `SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md`
+para cada sessão, hipótese descartada e limites.
+
+O host passou 260 testes rev2 (150 deselecionados), 135 selftests e 75
+ferramentas de medição. Doc sync, hardware, corredor e aprendizado passaram;
+correções Python 3.11/Pillow e o reparo dos hashes das rotas foram registrados
+após as falhas. O contrato `pose_budget` passou como planejamento, sem aprovar
+arte nem entrega. ROMs e mídias do lote estão no `out` do owner e uma cópia
+local fica em `.runtime/backups/luta_mugem_rev2-runtime-20261027-engine-lot.tar.gz`
+(SHA `7a745b7e5e843381cab4b91c7264cd8c5b991e36ba8fc889e86c0c8581fc5cb3`),
+com manifesto `.runtime/backups/luta_mugem_rev2-runtime-20261027-engine-lot.json`.
+O `recovery_bundle.py` verificou 5693 arquivos; ambas as cópias dependem do
+mesmo disco.
+A release de 24/10 protege os insumos anteriores, não a mídia nova. Não
+publique assets ou evidência privada no repositório público.
+
+Próximo ramo: usar as faces já empacotadas por pose, com chave de cache que
+inclua orientação e metadados correspondentes; validar offsets e limites antes
+do upload, reproduzir a troca real por input, registrar imagem/SAT/estado e
+medir o custo. Continuam sem solução a coerência entre contato e pose
+apresentada, limite por scanline, starvation, VBlank sob carga real e AIR
+N+1 em ROM. Não chame uma pose residente ou uma captura isolada de entrega.

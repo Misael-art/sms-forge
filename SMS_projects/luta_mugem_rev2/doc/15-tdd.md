@@ -1,5 +1,36 @@
 # TDD — luta_mugem_rev2
 
+## Seleção e limites atuais — 2026-10-27
+
+O GDD vigente declara `pose_budget`: encaixe do framebuffer X 2/3 e Y 6/7,
+escala extra 2/3 uniforme e idle de até quatro colunas de 8 px. A faixa
+histórica de 72–88 px é outra opção, não o requisito deste consumidor. O
+contrato de qualidade vincula esse perfil ao SHA do GDD; o auditor verifica
+estrutura e vínculo, não fidelidade de pixels ou aprovação de arte.
+
+O manifesto nominal seleciona os headers e bancos `ryu_ken_cross` (49 bancos);
+essa configuração não passou a ser o corte de 24 bancos. Builds de candidato
+podem selecionar manifesto próprio sob o mesmo projeto e gravam recibo/ROM em
+`out/candidates/`, sem tocar a baseline. O manifesto de diagnóstico de 24
+bancos está versionado em `.mddev/candidates/pose_budget_pair_20261027.json`.
+O corte `pose_budget_pair_20261023`
+foi exercitado como diagnóstico com o mesmo runtime, sem o bloqueio histórico
+dos dez papéis. Dois atores em um quadro não aprovam composição, comandos ou
+budget: os picos por scanline e o derrame documentados continuam blockers.
+
+O tile vazio do fundo ocupa o pattern 256 em `0x2000`; o pool de sprites usa
+`0x0000..0x1FFF`. O cancelamento de uma pose em voo quando se volta à pose
+residente foi observado em uma transição na ROM `9654406b…`. A lógica de
+combate ainda calcula contato a partir do frame desejado antes da publicação;
+o cache corrigido não resolve a coerência pose/colisão. Escopo de medições,
+SHAs e lacunas estão no memory bank; seções abaixo preservam medições históricas.
+Cada alocação ou liberação do pool invalida explicitamente o memo de falha dos
+dois lados, sem contador de geração sujeito a wrap de 8 bits. Transferências
+contíguas agrupam no máximo três pares de 64 B por chamada da API de tamanho
+byte; o budget por lado e a promoção após completar a pose permanecem. A
+implementação e seu custo não aprovam o orçamento: os candidatos medidos
+continuam derramando e a carga de entrega não está presente.
+
 ## Arquitetura proposta, não implementada
 PacoteMUGEN imutável→parse→IRtipado→perfilcompat→loweringAOT/tabelas
 com predicados executáveis→runtimeC/Z80→ROMmedida. Reusar parsers/testes
