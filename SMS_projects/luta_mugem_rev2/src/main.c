@@ -919,6 +919,7 @@ static void pusher_step(const Frame *fn0, const Frame *fn1) {
  * diag_step_attr.py veio dai); serem estaticos mantem o acesso direto. */
 static FightView fi_view;
 static FightResult fi_res;
+static FightAIClock ai_clock;
 
 static void input_stage(void) {
     unsigned char side;
@@ -936,8 +937,9 @@ static void input_stage(void) {
              * RESET 0x1000, SLOT 0x2000 e os TH de light gun, que nao sao pad. */
             levels = (unsigned char)(keys & 0x3Fu);
         } else {
-            levels = fight_input_ai_levels((unsigned short)frames,
-                                           fighter[1u].face, &beat);
+            fight_ai_clock_advance(&ai_clock, (unsigned short)frames);
+            beat = ai_clock.beat;
+            levels = fight_input_ai_levels_clock(&ai_clock, fighter[1u].face);
             probe_ai_beat = beat;
         }
 
@@ -1324,6 +1326,7 @@ void main(void) {
      * input_init() a RAM nao inicializada dos buffers estaticos deixaria
      * amostras e contadores de pulso vivos no primeiro frame. */
     input_init();
+    fight_ai_clock_reset(&ai_clock);
     /* Contabilidade de rota derivada DOS DADOS (nenhum nome de lutador):
      * quantos padroes chegaram a tabela do runtime e quais codigos de golpe
      * ficaram sem rota neste pacote. */
