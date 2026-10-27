@@ -14,7 +14,7 @@ Pipeline:
 
 Exit: 0 build | 1 reprovação (gate ou compilador) | 2 ambiente ausente
 """
-import sys, os, json, glob, shutil, subprocess, argparse
+import sys, os, json, glob, shutil, subprocess, argparse, shlex, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -206,6 +206,116 @@ def uses_code_size_optimization(toolchain, source_relative):
     return source in wanted
 
 
+def reserve_candidate_dir(project, destination):
+    """Reserve a new build directory without touching the nominal output."""
+    root = os.path.realpath(os.path.join(project, "out", "candidates"))
+    target = os.path.realpath(os.path.abspath(destination))
+    if target == root or os.path.commonpath((root, target)) != root:
+        raise ValueError("build candidato deve ficar em out/candidates/<nome>")
+    if os.path.lexists(destination) or os.path.lexists(target):
+        raise ValueError("diretorio candidato ja existe; escolha outro destino")
+    os.makedirs(os.path.dirname(target), exist_ok=True)
+    os.mkdir(target)
+    return target
+
+
+def project_include_dirs(project, manifest):
+    """Resolve declared project include directories without leaving its root."""
+    project = os.path.realpath(project)
+    dirs = []
+    inc = os.path.join(project, "inc")
+    if os.path.isdir(inc):
+        dirs.append(inc)
+    values = manifest.get("toolchain", {}).get("include_dirs", [])
+    if not isinstance(values, list) or any(not isinstance(p, str) or not p for p in values):
+        raise ValueError("toolchain.include_dirs deve ser uma lista de caminhos")
+    for value in values:
+        path = os.path.realpath(os.path.join(project, value))
+        if os.path.isabs(value) or os.path.commonpath((project, path)) != project:
+            raise ValueError("include_dir deve ficar dentro do projeto")
+        if not os.path.isdir(path):
+            raise ValueError("include_dir ausente: " + value)
+        dirs.append(path)
+    return dirs
+
+
+def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
+    """Hash actual SDCC includes, linked libraries and explicit mapper banks.
+
+    SDCC's dependency output follows the preprocessor and includes generated
+    headers. The manifest's -mbank arguments are makesms inputs, not SDCC
+    includes. A second snapshot after linking detects a changed input; it is
+    not an atomic filesystem snapshot.
+    """
+    files = {os.path.join(project, ".mddev", "project.json"), __file__,
+             tc["sdcc"], tc["makesms"], tc["SMSlib.lib"], tc["PSGlib.lib"],
+             tc["crt0_sms.rel"]}
+    if manifest_path:
+        files.add(manifest_path)
+    if os.path.isfile(tc.get("peep", "")):
+        files.add(tc["peep"])
+    search = subprocess.run([tc["sdcc"], "-mz80", "--print-search-dirs"],
+                            cwd=project, capture_output=True, text=True)
+    if search.returncode:
+        raise ValueError("falha ao identificar componentes da toolchain SDCC")
+    sections = {"programs": [], "libdir": []}
+    current = None
+    for line in search.stdout.splitlines():
+        if line.endswith(":"):
+            current = line[:-1] if line[:-1] in sections else None
+        elif current and line.strip():
+            sections[current].append(line.strip())
+    for section, names in (("programs", ("sdcc", "sdcpp", "sdasz80", "sdldz80")),
+                           ("libdir", ("z80.lib",))):
+        for name in names:
+            path = next((os.path.join(d, name) for d in sections[section]
+                         if os.path.isfile(os.path.join(d, name))), None)
+            if path is None:
+                raise ValueError("componente SDCC nao identificado: " + name)
+            files.add(path)
+    toolchain_config = manifest.get("toolchain", {})
+    if toolchain_config.get("link_extra"):
+        raise ValueError("link_extra ainda nao possui custodia de entradas para candidato")
+    for src in srcs:
+        relative = os.path.relpath(src, project)
+        command = [tc["sdcc"], "-mz80", "-M"]
+        if uses_code_size_optimization(toolchain_config, relative):
+            command.append("--opt-code-size")
+        command += ["-I" + inc for inc in tc.get("inc", [])]
+        command += ["-I" + inc for inc in project_include_dirs(project, manifest)]
+        command.append(relative)
+        result = subprocess.run(command, cwd=project, capture_output=True, text=True)
+        if result.returncode:
+            raise ValueError("falha ao identificar includes SDCC: " + result.stderr.strip())
+        _, sep, dependencies = result.stdout.replace("\\\n", " ").partition(":")
+        if not sep:
+            raise ValueError("saida de dependencias SDCC invalida")
+        for dependency in shlex.split(dependencies):
+            files.add(os.path.join(project, dependency))
+    extra = list(toolchain_config.get("makesms_extra") or [])
+    i = 0
+    while i < len(extra):
+        option = extra[i]
+        if option == "-mbank":
+            if i + 1 >= len(extra):
+                raise ValueError("-mbank sem arquivo de entrada")
+            bank_spec = extra[i + 1].rsplit(":", 3)
+            if len(bank_spec) != 4 or not bank_spec[0]:
+                raise ValueError("-mbank deve identificar arquivo e tres campos")
+            files.add(os.path.join(project, bank_spec[0]))
+            i += 2
+        elif option == "-pm":
+            i += 1
+        else:
+            raise ValueError("opcao makesms sem custodia de entradas: " + str(option))
+    inputs = {}
+    for path in sorted(os.path.realpath(path) for path in files):
+        if not os.path.isfile(path):
+            raise ValueError("entrada de build ausente: " + path)
+        inputs[os.path.relpath(path, project)] = _sha256(path)
+    return inputs
+
+
 def demote_stale_axes(project, rom, axes, prev_sha=None):
     """Eixo de runtime so sobrevive a um build novo se a evidencia for POSTERIOR
     a ROM recem-linkada. Binario novo invalida prova de binario velho (§seal).
@@ -253,6 +363,10 @@ def main():
     ap.add_argument("--project", default=os.getcwd())
     ap.add_argument("--skip-pre-gates", action="store_true",
                     help="apenas para depurar o compilador; NUNCA em entrega")
+    ap.add_argument("--build-dir", help="novo diretorio sob PROJECT/out/candidates; "
+                    "preserva ROM, recibo e changelog nominais")
+    ap.add_argument("--manifest", help="manifesto alternativo dentro do projeto; "
+                    "somente com --build-dir")
     ap.add_argument("--self-check", action="store_true",
                     help="prova o roteamento sprite/sheet com casos válidos e inválidos")
     args = ap.parse_args()
@@ -262,10 +376,44 @@ def main():
 
     if not os.path.exists(os.path.join(project, ".mddev", "project.json")):
         return fail(f"{project} nao e um projeto (falta .mddev/project.json)", 1)
-    manifest = json.load(open(os.path.join(project, ".mddev", "project.json")))
+    nominal_manifest_path = os.path.join(project, ".mddev", "project.json")
+    nominal_manifest = json.load(open(nominal_manifest_path))
+    if not isinstance(nominal_manifest, dict):
+        return fail("manifesto nominal deve ser um objeto", 1)
+    manifest_path = nominal_manifest_path
+    if args.manifest:
+        if not args.build_dir:
+            return fail("--manifest exige --build-dir", 1)
+        manifest_path = os.path.realpath(os.path.abspath(args.manifest))
+        if os.path.commonpath((os.path.realpath(project), manifest_path)) != os.path.realpath(project):
+            return fail("manifesto candidato deve ficar dentro do projeto", 1)
+        try:
+            manifest = json.load(open(manifest_path))
+        except (OSError, ValueError) as e:
+            return fail("manifesto candidato invalido: " + str(e), 1)
+        if not isinstance(manifest, dict) or manifest.get("name") != nominal_manifest.get("name"):
+            return fail("manifesto candidato pertence a outro projeto", 1)
+    else:
+        manifest = nominal_manifest
+    if not isinstance(manifest.get("toolchain", {}), dict):
+        return fail("toolchain do manifesto deve ser um objeto", 1)
     name = manifest.get("name") or os.path.basename(project)
-
-    os.makedirs(os.path.join(project, "out", "obj"), exist_ok=True)
+    candidate = bool(args.build_dir)
+    if candidate and (os.path.basename(name) != name or name in (".", "..")):
+        return fail("nome de projeto invalido para build candidato", 1)
+    if candidate and os.environ.get("SMS_EVIDENCE") == "1":
+        return fail("SMS_EVIDENCE automatico nao seleciona ROM candidata; use --session", 1)
+    try:
+        project_includes = project_include_dirs(project, manifest)
+    except ValueError as e:
+        return fail(str(e), 1)
+    try:
+        build_dir = reserve_candidate_dir(project, args.build_dir) if candidate else os.path.join(project, "out")
+    except (OSError, ValueError) as e:
+        return fail(str(e), 1)
+    obj_dir = os.path.join(build_dir, "obj")
+    log_path = os.path.join(build_dir, "logs_build.txt")
+    os.makedirs(obj_dir, exist_ok=True)
     record = {"project": name, "date": "", "steps": {}, "axes": {}}
 
     # SMS_STRICT=1: checagens de WORKSPACE (caras, ~3s) — nao rodam a cada build.
@@ -302,10 +450,15 @@ def main():
     srcs = sorted(glob.glob(os.path.join(project, "src", "*.c")))
     if not srcs:
         return fail("nenhum .c em src/", 1)
+    if candidate:
+        try:
+            inputs_before = candidate_inputs(project, manifest, tc, srcs, manifest_path)
+        except (OSError, ValueError) as e:
+            return fail("identidade das entradas: " + str(e), 1)
     objs, logs = [], []
     for src_abs in srcs:
         base = os.path.splitext(os.path.basename(src_abs))[0]
-        obj_rel = os.path.join("out", "obj", base + ".rel")
+        obj_rel = os.path.relpath(os.path.join(obj_dir, base + ".rel"), project)
         cmd = [tc["sdcc"], "-c", "-mz80", "-o", obj_rel]
         # Projetos com ROM linear no teto podem declarar a troca de objetivo
         # do compilador no manifesto. O custo de fps continua sendo medido no
@@ -318,19 +471,17 @@ def main():
             cmd += ["--peep-file", tc["peep"]]
         for inc in tc.get("inc", []):
             cmd += ["-I" + inc]
-        proj_inc = os.path.join(project, "inc")
-        if os.path.isdir(proj_inc):
-            cmd += ["-I" + proj_inc]
+        cmd += ["-I" + inc for inc in project_includes]
         cmd.append(os.path.relpath(src_abs, project))
         r = subprocess.run(cmd, cwd=project, capture_output=True, text=True)
         logs.append(f"$ {' '.join(cmd)}\n{r.stdout}{r.stderr}")
         if r.returncode != 0:
-            open(os.path.join(project, "out", "logs_build.txt"), "w").write("\n".join(logs))
-            return fail(f"compilacao de {src_abs} falhou (log: out/logs_build.txt)", 1)
+            open(log_path, "w").write("\n".join(logs))
+            return fail(f"compilacao de {src_abs} falhou (log: {log_path})", 1)
         objs.append(obj_rel)
     record["steps"]["compile"] = f"{len(objs)} objeto(s)"
 
-    ihx = os.path.join("out", "obj", name + ".ihx")
+    ihx = os.path.relpath(os.path.join(obj_dir, name + ".ihx"), project)
     link_extra = list(manifest.get("toolchain", {}).get("link_extra") or [])
     link_cmd = ([tc["sdcc"], "-o", ihx, "-mz80", "--no-std-crt0", "--data-loc", "0xC000"]
                 + link_extra +
@@ -339,11 +490,11 @@ def main():
                 [tc["SMSlib.lib"], tc["PSGlib.lib"]])
     r = subprocess.run(link_cmd, cwd=project, capture_output=True, text=True)
     logs.append("$ " + " ".join(link_cmd) + f"\n{r.stdout}{r.stderr}")
-    open(os.path.join(project, "out", "logs_build.txt"), "w").write("\n".join(logs))
+    open(log_path, "w").write("\n".join(logs))
     if r.returncode != 0 or not os.path.exists(os.path.join(project, ihx)):
-        return fail(f"link falhou (log: out/logs_build.txt)", 1)
+        return fail(f"link falhou (log: {log_path})", 1)
 
-    rom_dir = os.path.join(project, "out", "rom")
+    rom_dir = os.path.join(build_dir, "rom")
     os.makedirs(rom_dir, exist_ok=True)
     rom = os.path.join(rom_dir, name + ".sms")
     ms_extra = list(manifest.get("toolchain", {}).get("makesms_extra") or [])
@@ -352,19 +503,59 @@ def main():
     r = subprocess.run(makesms_cmd, cwd=project, capture_output=True, text=True)
     makesms_output = r.stdout + r.stderr
     logs.append("$ " + " ".join(makesms_cmd) + f"\n{makesms_output}")
-    open(os.path.join(project, "out", "logs_build.txt"), "w").write("\n".join(logs))
+    open(log_path, "w").write("\n".join(logs))
     if r.returncode != 0 or not os.path.exists(rom):
         detail = makesms_output.strip() or "sem diagnóstico"
-        return fail(f"makesms falhou: {detail[:200]} (log: out/logs_build.txt)", 1)
+        return fail(f"makesms falhou: {detail[:200]} (log: {log_path})", 1)
     size = os.path.getsize(rom)
     record["steps"]["rom"] = f"{rom} ({size} bytes)"
 
     # higiene: artefatos de compilacao (asm/lst/sym) vazam para a raiz do projeto;
     # move-os para out/obj para nao poluir o arvore.
-    for ext in (".asm", ".lst", ".sym"):
-        leak = os.path.join(project, name + ext)
-        if os.path.exists(leak):
-            shutil.move(leak, os.path.join(project, "out", "obj", name + ext))
+    if not candidate:
+        for ext in (".asm", ".lst", ".sym"):
+            leak = os.path.join(project, name + ext)
+            if os.path.exists(leak):
+                shutil.move(leak, os.path.join(obj_dir, name + ext))
+
+    if candidate:
+        if srcs != sorted(glob.glob(os.path.join(project, "src", "*.c"))):
+            return fail("lista de fontes mudou durante o build; candidato nao registrado", 1)
+        try:
+            inputs_after = candidate_inputs(project, manifest, tc, srcs, manifest_path)
+        except (OSError, ValueError) as e:
+            return fail("identidade das entradas apos build: " + str(e), 1)
+        if inputs_before != inputs_after:
+            return fail("entradas mudaram durante o build; candidato nao registrado", 1)
+        version = subprocess.run([tc["sdcc"], "--version"], capture_output=True, text=True)
+        record.update({
+            "schema": "smsforge.candidate_build/v1",
+            "profile": "candidate_unpromoted",
+            "input_sha256": inputs_before,
+            "sdcc_version": version.stdout.strip(),
+            "rom_sha256": _sha256(rom),
+            "rom_mtime": os.path.getmtime(rom),
+            "axes": {"build": True, "validation_report": record["steps"].get("pre_gates") == "pass",
+                     "boot_emulador": False, "gameplay": False, "fps_constante": False,
+                     "audio": False, "memory_bank_atualizado": False},
+        })
+        tmp_path = None
+        try:
+            with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=build_dir,
+                                             prefix=".build_record_", delete=False) as f:
+                tmp_path = f.name
+                json.dump(record, f, indent=2)
+                f.flush()
+                os.fsync(f.fileno())
+            # No replacement: an unexpected existing record must be preserved.
+            os.link(tmp_path, os.path.join(build_dir, "build_record.json"))
+        except OSError as e:
+            return fail("publicacao do recibo candidato: " + str(e), 1)
+        finally:
+            if tmp_path and os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+        print(f"[BUILD CANDIDATE OK] {rom} ({size}B) | eixos de runtime nao avaliados")
+        return 0
 
     n = 1
     chg = os.path.join(project, "changelog", "roms")

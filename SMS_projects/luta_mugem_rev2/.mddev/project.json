@@ -12,6 +12,9 @@
       "SMSlib",
       "PSGlib"
     ],
+    "include_dirs": [
+      "out/generated/ryu_ken_cross"
+    ],
     "makesms_extra": [
       "-pm",
       "-mbank",

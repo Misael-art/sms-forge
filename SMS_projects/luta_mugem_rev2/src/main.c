@@ -1,8 +1,8 @@
 /* main.c — luta_mugem_rev2 ROM diagnostica M1 (instrumento de telemetria).
  *
  * Proposito: medir na ROM a parede de streaming VRAM e a pressao de scanline
- * do renderer sprite-only com DOIS atores reais (pacote de dados comutavel;
- * estado atual: out/generated/ryu_ken_cross, M4). NAO e entrega de gameplay:
+ * do renderer sprite-only com DOIS atores reais (pacote de dados selecionado
+ * pelo manifesto). NAO e entrega de gameplay:
  * omissoes declaradas — sem HUD/audio, sem projetel/FX, sem hitstun com
  * animacao de dano, sem hibrido BG (design wave-4). Desde a wave-5b o papel
  * de cada ator vem do PADEREIO (pad fisico no lado 0, IA no lado 1, ambos
@@ -30,8 +30,8 @@
 #include "rev2_diag.h"
 #include "fight_input.h"
 #include "input_tier.h"      /* INPUT_TIER_T: o limiar que as guardas de abaixo comparam */
-#include "../out/generated/ryu_ken_cross/versus_scene_runtime.h"
-#include "../out/generated/ryu_ken_cross/fight_runtime_data.h"
+#include "versus_scene_runtime.h"
+#include "fight_runtime_data.h"
 
 /* Pacote cruzado: tabelas const dos 2 lutadores levam a imagem não-bancada a
  * ~19,6 KB — dentro do teto documentado de 32 KB (sdk/README, skill
@@ -45,6 +45,7 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #define DIAG_X_MIN          (16u * 256u)  /* Q8.8 borda util */
 #define DIAG_X_MAX          (240u * 256u)
 #define POOL_PAIRS          128u          /* 8192 B / 64 B por par TALL */
+#define SOLID_BG_TILE       256u          /* 0x2000: fora do pool de sprites */
 #define SCRIPT_STEP_FRAMES  150u          /* janela de pacing/SMRT (wave-4) */
 
 /* wave-4l: chave LOCAL do projeto (build_inner.py nao aceita -D por projeto;
@@ -425,9 +426,24 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
 static void request_pose(unsigned char side, unsigned int pose_global,
                          unsigned char n_pairs, const Frame *frame) {
     unsigned char base;
-    if (current[side].pose_global == pose_global ||
-        pending[side].pose_global == pose_global)
+    if (current[side].pose_global == pose_global) {
+        /* Uma solicitacao pode voltar a imagem residente enquanto outra
+         * ainda e carregada. Cancelar essa geracao impede sua promocao
+         * posterior; a mesma imagem pode ter metadata AIR diferente. */
+        if (pending[side].pose_global != 0xFFFFu) {
+            if (side == 0u) probe_superseded_p1++;
+            else            probe_superseded_p2++;
+            cache_invalidate(&pending[side]);
+        }
+        current[side].frame = frame;
         return;
+    }
+    if (pending[side].pose_global == pose_global) {
+        /* A imagem ainda em voo pode ser reutilizada por outro elemento AIR;
+         * conservar os bytes, mas publicar a metadata do elemento atual. */
+        pending[side].frame = frame;
+        return;
+    }
     /* wave-4h: falhou no bitmap atual, nao ha o que tentar de novo ate o
      * bitmap mudar (epoch). Stall continua contado no frame memo. */
     if (fail_epoch[side] == pool_epoch && fail_size[side] == n_pairs) {
@@ -1155,7 +1171,10 @@ void main(void) {
     SMS_useFirstHalfTilesforSprites(1);
     SMS_setBGPaletteColor(0, 0x00);   /* fundo solido preto, sem cenario */
     SMS_loadSpritePalette(versus_sprite_palette);
-    SMS_VRAMmemsetW(0x3800u, 0x00ffu, 1536u);
+    /* Tile 255 mora em 0x1FE0, dentro do pool que o streaming sobrescreve.
+     * Tile 256 foi zerado acima e fica na segunda metade da VRAM; a PNT
+     * continua apontando para um pattern vazio mesmo quando os atores mudam. */
+    SMS_VRAMmemsetW(0x3800u, SOLID_BG_TILE, 1536u);
 
     /* L009-L134: sondas __at nao sao inicializadas pelo crt0; sem zerar,
      * todo contador parte de lixo da RAM e a evidencia nasce ilegivel.
