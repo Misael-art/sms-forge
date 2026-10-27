@@ -1,0 +1,744 @@
+{
+  "scope": "Inventario completo de entradas; leitura aprofundada por dominio e teste dos medidores, nao auditoria linha-a-linha de todo codigo. Hashes apos revisao.",
+  "framework": [
+    {
+      "path": "tools/sms_wrapper/.agent/ARCHITECTURE.md",
+      "bytes": 5790,
+      "sha256": "97a060f8ea9139001ecd06ada461d2f958d2379a9fad5a6b6b9648687d72704e"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/agents/sms-audio-engineer.md",
+      "bytes": 655,
+      "sha256": "9ab48fc051d73ff3b2f5106482c85a3219aa964fd43fee5d6c8b81b366aa06c0"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/agents/sms-game-director.md",
+      "bytes": 666,
+      "sha256": "0a45b56de4d9962dc2f53ed5b9a4978b0f5e1d0c6b52f9955b3fb63c04bac28d"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/agents/sms-hardware-budget-guardian.md",
+      "bytes": 751,
+      "sha256": "8be933411145578af576d8b1a6cf0f0b7c4acc6de7f8c9ab006bd2c9b3c487f3"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/agents/sms-pixel-engineer.md",
+      "bytes": 788,
+      "sha256": "13952aaa3fed7a79a8624c0170f779fe80801b9296d4dc74a3269557e58c01fc"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/agents/sms-qa-emulator-tester.md",
+      "bytes": 1477,
+      "sha256": "8492aa8d5bc88fbc7b5f9c02be0c48811aab8eaec72ea3a30a4c92ae0ce55e69"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/pipelines/aaa_scene_v1.json",
+      "bytes": 2170,
+      "sha256": "8e44a206197645e34b3374afecfcb24244348277c84f98ca93da4a5156ffe64f"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/pipelines/game_production_v1.json",
+      "bytes": 1162,
+      "sha256": "f238b51432021404b561a7aa1f896a4ff27a1ecd98db560926b1b1fe6cf18b2f"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/pipelines/mugen_fighting_v1.json",
+      "bytes": 4098,
+      "sha256": "91327395b371903532a60df5b147fe4267718af6c742ad583ecf5341c66abb95"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/pipelines/quality_review_v1.json",
+      "bytes": 1063,
+      "sha256": "97591e96c44d4cd7e1f8b06c379b2a4cdf1354341c34170371a0414af10a5e3f"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/pipelines/vibe_playable_loop_v1.json",
+      "bytes": 713,
+      "sha256": "97592c672a16df0cc6f547077f3fd4a9bf85da651dc4ad81b89d2eaf305030dc"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md",
+      "bytes": 172995,
+      "sha256": "c69a5c7361a14ce9b1af0035da6a551c168df656cf109866a520cf5151711659"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/evidence-protocol.md",
+      "bytes": 3096,
+      "sha256": "bf9ffa60286ea885e974179f082270442d3c6d8808fb8ed277c02a9b7851d546"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/game-design-core-loop.md",
+      "bytes": 4105,
+      "sha256": "d734320a5cc450479c123b19a1a2e7c6adf0dba9af4e7250369c148ae2995e72"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-asset-pipeline.md",
+      "bytes": 2311,
+      "sha256": "076c32e8c65695d0f89253567043f4e8801d55906c5667b859a88a9c270eef1c"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+      "bytes": 9804,
+      "sha256": "4a7d09f0197b74c475b7a9fb834765a3c53ead99557d47daa145275d76386265"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-banking-header.md",
+      "bytes": 813,
+      "sha256": "91c72324e4acb57ca7ca677f0f64f9aac1a789bd8054ee628293d20102aac5f9"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-emulator-diagnostics.md",
+      "bytes": 3347,
+      "sha256": "da1d932094004d9bacaa4988ef0a621a79a1c0a7ac84a50dbaf51e130dd28181"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
+      "bytes": 3758,
+      "sha256": "ca4bb10ae636c23671333a81c4af87d756a65e83377d2d9cf55b70ad85902e2f"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-gameplay-experience-review.md",
+      "bytes": 1648,
+      "sha256": "39c66c723c05c168ad01df83bf1e4dbc01d9b51b7ec137c3e87c52bc8b8acba9"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-harness-orchestration.md",
+      "bytes": 3126,
+      "sha256": "eb001a783e5e1d8e61dfeef9cd891970f84cd191af5ecdb5fc221d95bc3c404e"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-input-pause.md",
+      "bytes": 1550,
+      "sha256": "b991d58e8527d6e4f2202301d6bbabc94451ec88faebf2a14d3738b76cbc04a6"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
+      "bytes": 9665,
+      "sha256": "a41008298712df505fbe4467eb248c195695c815944e99e87deefdf42e136138"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-observed-case-evidence.md",
+      "bytes": 3921,
+      "sha256": "63e07ba064c8389feccf9a074d8171c570ea6927ccbcea5e3bc0ab763d2c1f39"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-palette-codes.md",
+      "bytes": 928,
+      "sha256": "15a078c9be2c652652023d495e44b0f4c47810d16f4fbcdb651c4088d58f2a1b"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-pixel-strict-rules.md",
+      "bytes": 1237,
+      "sha256": "350bd17e551e253f0e85a96c389b9728ba53658cf0d3b4e4b9d62f27af79a0d1"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md",
+      "bytes": 7254,
+      "sha256": "005c0a006f6f6940b822250c51b438a62be089e5d90e28adff4a0cba1a88ec75"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
+      "bytes": 2780,
+      "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
+      "bytes": 5195,
+      "sha256": "fdc55fcbba31cc67c11e18a15ffeb130d75ef4f10d89a362bd364081a4db5fc2"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-recipe-animacao-impacto.md",
+      "bytes": 6331,
+      "sha256": "4186be61648bf1c0c1a7119dcde44b4ad19cd399d8e872f5ad54c85b3fdc3348"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-recipe-asset-a-rom.md",
+      "bytes": 6930,
+      "sha256": "357924026ecaefa22c27c6d50dfd042ea9574ca396f28899c59ac11c65ee4b5f"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-recipe-combate-1v1.md",
+      "bytes": 6124,
+      "sha256": "3ba6478944c4b6365f6e6b536538dd4cf0fb452e54cd90ddb64d2ea133200df9"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-region-timing.md",
+      "bytes": 681,
+      "sha256": "a33306adbb2b207ccd7365b9a9110c22e8c97b42680f4ee3b68597fb6bed26b4"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
+      "bytes": 8257,
+      "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-score-banking.md",
+      "bytes": 786,
+      "sha256": "dcce02f12da7f7a07ce27cdbc4ff92ef92f5df56c66a5d66dca9996c5bd8e33b"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md",
+      "bytes": 5112,
+      "sha256": "99f0543f52c23a3c56bd19e3ff8d82fff6f83ccd024e281f0c3f7853211605f4"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-sprite-geometry-modes.md",
+      "bytes": 2857,
+      "sha256": "139f8c23e918c74f47f2e16e6065b78af128d7adab86d0f0e9910ac2137bfd9c"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-sprites-metasprite.md",
+      "bytes": 1239,
+      "sha256": "5d9f19675def73b94faad4d348947dfe268645a4b5b68ccce3ec53e1224e5cd4"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-state-transitions.md",
+      "bytes": 3370,
+      "sha256": "e6b8b71f2cc259558c740d58dfae38285a65e90ed6ea22679d4318d407d1da17"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-tile-occupancy.md",
+      "bytes": 1035,
+      "sha256": "a59ce116d1d247f7c3aec8ba327601fbcc461d81c63a535e7b2b8690f4390e3c"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-vdp-budget-analyst.md",
+      "bytes": 1264,
+      "sha256": "99008588ef5c5e6620766aff0f08126d71bff63dc6216df10a137ef72d4ad50d"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-vdp-tiles.md",
+      "bytes": 1300,
+      "sha256": "4ba307e6af7371eea997584c1e003c505deb3ef7b0e797ae88e30ad7cca7269e"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-video-evidence.md",
+      "bytes": 3853,
+      "sha256": "1401531b590b99645c0b3a91bef3a93b975445e6557e64d4b881846c09cbfc01"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
+      "bytes": 9998,
+      "sha256": "f6174f20a0a2ff9c65e87287f3284f04f6490c63c049f4226dfe3aade57e7846"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-vram-vblank-budget.md",
+      "bytes": 4365,
+      "sha256": "c7e8a9269dbefbb38def024105851c4bd2484fac7b9ce05e13964f60e1753f31"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/skills/sms-z80-sdcc-gotchas.md",
+      "bytes": 2121,
+      "sha256": "b6f7d8eacf7cad0de569af9cb17347fa52d67bedbe5ee51c3902980cf1a72f8d"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/agent-session-bootstrap.md",
+      "bytes": 2045,
+      "sha256": "4b6e182dac46e7ed43c1e4cc5476c7898c4780ac218017be9c51521a2c9dbc83"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/analyze-existing-project.md",
+      "bytes": 1612,
+      "sha256": "764a534dd9030b72714172cac5520240030f2b1d069e4c89ac3bfbe2f82419fe"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/art-review.md",
+      "bytes": 16381,
+      "sha256": "580a7dcdef56dadab3ab47b5d1b7352e1f55e846f6f18bd950ac5e9010102065"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/artifact-organization.md",
+      "bytes": 8142,
+      "sha256": "1d30a870492be3470832f44fe1993c2022306e3b40a551c748a30abe513aecf5"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
+      "bytes": 8525,
+      "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/async-promotion-loop.md",
+      "bytes": 3603,
+      "sha256": "b686e9e87bb1444e9979a8faf18f15e69893306ead17afae8b97e8abad637f58"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "bytes": 15365,
+      "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/causal-persistence-loop.md",
+      "bytes": 2544,
+      "sha256": "fc0490786362e9c4d76cf690fd7ca21d35320135ac4b581eb33c6496e0c54923"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/curation-learning.md",
+      "bytes": 3338,
+      "sha256": "0e45cb30d8ee7f6f59de5244034867309d7c6c479c7d11c93f9cb7b9fd1d453d"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/curation-mode.md",
+      "bytes": 1701,
+      "sha256": "da5f9ee0a28efb1a2267ed6404ce4b698a2027b0a1021e112b04b8d2f794577c"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md",
+      "bytes": 3561,
+      "sha256": "7218ac0bee50f8a346fe20788be9a5cde817818a38b7de934d3c62f18fd0a333"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/first-playable-slice.md",
+      "bytes": 4505,
+      "sha256": "e1b7ec7d3d116056537666862550431e2a622b96cc03c10489136d1a46672c3b"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/independent-quality-review.md",
+      "bytes": 1928,
+      "sha256": "a633e365072819f9f623a012b7efc912dc9024a2b8aaa04e73f20555a12cf004"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/laboratory-mode.md",
+      "bytes": 1836,
+      "sha256": "995f2e4a043ed9c11de02e0b6249968a0480510ef216164159e99b00138ae75f"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
+      "bytes": 9913,
+      "sha256": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
+      "bytes": 1625,
+      "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/new-project.md",
+      "bytes": 1102,
+      "sha256": "808fda45f22493e06318856bd81a49d93c1aa51e6fbc431405e1da0d4e6ae6be"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/new-scene.md",
+      "bytes": 1219,
+      "sha256": "d676f0b934e7f58c4abe63a478394d6ee0fa583a27cef1766244a9f50bfc0c52"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
+      "bytes": 9167,
+      "sha256": "f36f16cdaedf4d22306e6d32d0f8aee22da44b0aba0101b2ad510d4645f04780"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/original-artwork.md",
+      "bytes": 11163,
+      "sha256": "e3c3af1b107f6b3ff2a6095d0e9802dcca90cf3d0bd62e928a335615cf4611d2"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/perspective-switch-gate.md",
+      "bytes": 402,
+      "sha256": "5cad66b5d2ccd5ba60f8476e8dfaa52fef9f5a12b02f9702ce1655c014fb4e19"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
+      "bytes": 5287,
+      "sha256": "82974879685b44ffa476b76961fc5f05b9a8e0e0d30b1511dba25d84135bb97e"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/production-loop.md",
+      "bytes": 3718,
+      "sha256": "86fa20de47f7c60ed45d191e1d4ea3f2e619eace942dd28bba523681ed520a93"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/release-rom.md",
+      "bytes": 3310,
+      "sha256": "ae177ad06efd49cde2014de5025baae6814d9e24bbceae5a4415c03fd62e61ba"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/subagent-emulator-qa.md",
+      "bytes": 9885,
+      "sha256": "7c6eb6ac34cff97b74dabdcae5a2ac257ce29a81d01ffe5f56361646321a2cb9"
+    },
+    {
+      "path": "tools/sms_wrapper/.agent/workflows/train-agent.md",
+      "bytes": 1447,
+      "sha256": "4e4a368c03784cabc393dfb8a8a1ae430d533e60b7ac5467332efbe7471877ef"
+    }
+  ],
+  "measurement_tools": [
+    "artifact_registry.py",
+    "audit_animation_contract.py",
+    "audit_animation_semantics.py",
+    "audit_art_review_checklist.py",
+    "audit_asset_proof_sheet.py",
+    "audit_audio.py",
+    "audit_audio_provenance.py",
+    "audit_blastem_sms.py",
+    "audit_causal_persistence.py",
+    "audit_claims.py",
+    "audit_composition_gate.py",
+    "audit_counter_window.py",
+    "audit_debug_markers.py",
+    "audit_deterministic_boot.py",
+    "audit_doc_sync.py",
+    "audit_hardware_constants.py",
+    "audit_header_claims.py",
+    "audit_hscroll_blank.py",
+    "audit_import_semantics.py",
+    "audit_learning_capture.py",
+    "audit_luma_floor.py",
+    "audit_mastery_registry.py",
+    "audit_meaningful_change.py",
+    "audit_mugen_engine_contract.py",
+    "audit_observed_cases.py",
+    "audit_placeholder_quarantine.py",
+    "audit_probe_corridor.py",
+    "audit_provenance.py",
+    "audit_psg_channel_binding.py",
+    "audit_psg_quality.py",
+    "audit_psg_redundancy.py",
+    "audit_reference_boundary.py",
+    "audit_render_fidelity.py",
+    "audit_render_glitch.py",
+    "audit_rom_asset_binding.py",
+    "audit_roster_harmony.py",
+    "audit_silhouette_integrity.py",
+    "audit_sole_alignment.py",
+    "audit_source_raster.py",
+    "audit_specialization.py",
+    "audit_sprite_cutout.py",
+    "audit_sprite_line_sim.py",
+    "audit_sprite_mode.py",
+    "audit_stage_attribution.py",
+    "audit_subagent_session.py",
+    "audit_symbol_size_sync.py",
+    "audit_tilemap_bounds.py",
+    "audit_tilemap_mirror.py",
+    "audit_validate_resources.py",
+    "audit_visual_delivery.py",
+    "audit_vscroll_wrap.py",
+    "blastem_diagnostics.py",
+    "blastem_dump_diff.py",
+    "blastem_maintenance.py",
+    "blastem_sms.py",
+    "canonical_fixture_gate.py",
+    "capture_audio.py",
+    "capture_evidence.py",
+    "capture_video.py",
+    "emulator_input.py",
+    "harness_orchestration.py",
+    "measure_fps.py",
+    "measure_frame_advance.py",
+    "measure_runtime_probe.py",
+    "measure_vram_map.py",
+    "measure_worst_frame.py",
+    "mugen2sms/analysis/scale_pilot.py",
+    "mugen2sms/analysis/trace_compare.py",
+    "mugen2sms/runtime/commit_budget.py",
+    "mugen2sms/runtime/vram_plan.py",
+    "prepare_sms_pixel_art.py",
+    "quality_review_router.py",
+    "reconcile_claims.py",
+    "screenshot_semantic_gate.py",
+    "seal_fresh_evidence_bundle.py"
+  ],
+  "measurement_sources": [
+    {
+      "path": "tools/sms_wrapper/artifact_registry.py",
+      "sha256": "69b74cdd842863a64e99dc47e16450769a08631ee3d2f0d3dea8323f8e812991"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_animation_contract.py",
+      "sha256": "160a7030bbd75f1325ff69422847f6d23fdcb098c8d8d87d195a240325d6ca1c"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_animation_semantics.py",
+      "sha256": "7c41ef5ed9e0a7f6687c1ee8ce9cdb8a5b77f4859fc2fa3bd624757c4ed61e5d"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_art_review_checklist.py",
+      "sha256": "1566cb7a613a745daefb66d88e416ff5ece35e046cd092283ee266bba0707c7d"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_asset_proof_sheet.py",
+      "sha256": "74160d85b47bd7c3323c4aeb98b3813bb1620674acd7cd4643d03b7a282dd027"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_audio.py",
+      "sha256": "9a246f8e77c0d05e56f9ae05a65c888b4cf4eed5f675b5dfe81472adcac3ae26"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_audio_provenance.py",
+      "sha256": "55cd5ff536e6ab12e6e41fce389ab3dc18b23de17c53c4613a6986b9bbd36be9"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_blastem_sms.py",
+      "sha256": "eb1be91be884d837547d67ba8b423157901df0f090d2905a2b553b16f24bcee8"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_causal_persistence.py",
+      "sha256": "30a9d225aefd96ebba040b6a09b56c93b222d2086a1e42ba21fc9d417e8fd39d"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_claims.py",
+      "sha256": "f3d1e81552975e4c6c705d95103cdb766ccef0a56107b2f3140d6a851a31faf0"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_composition_gate.py",
+      "sha256": "4baaefd7ec516a847e12dfe28e6fc53c76f5f7d01c6e3336bfc8aa6e053def70"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_counter_window.py",
+      "sha256": "306689dad0b60eaf62b9e58b0170e8f93ac7d4d29185e57343b3c58d92083061"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_debug_markers.py",
+      "sha256": "8e3cd9a9f8de68a2267349629b2f3010763c9c9da3adba800fc750a895bfcf60"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_deterministic_boot.py",
+      "sha256": "cc5414feea3cc8252b159f49e7e99206ddb823a445cacfefaa8f43ed94e1c6fc"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_doc_sync.py",
+      "sha256": "07bc09e5c94e07f7f8acc811dd1b136e8ad35e1f19a63e4fe40f233d4f3e2641"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_hardware_constants.py",
+      "sha256": "968f7e2b144b453fb3f055930aa82c9a52a14b180f16579c4e3ded81f8ef151a"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_header_claims.py",
+      "sha256": "9a78bbcd65ef9a5c1e956a065044ac0d80ae97f7bdccf40ab33ba1b94be6c880"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_hscroll_blank.py",
+      "sha256": "dc5d3f7d9f646b19990cc4ca348b3b27df71935078a3e9227bb8b7df20b69843"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_import_semantics.py",
+      "sha256": "b51c044b4ade00cd37a204237482af792e2119aab46bc554de5e22e93d517232"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_learning_capture.py",
+      "sha256": "18cb0e5d377c9493cbbf0e7d79144d3bdbf6108a918df4cd361064378de46726"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_luma_floor.py",
+      "sha256": "38380fe4dd0c58ed13a1eb21c8a5f307fec58e77be4e320685d71c85126858d9"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_mastery_registry.py",
+      "sha256": "4a7ea387c654bfa655833ebd3be22391bd14e107ed4c6c233682f2092af3229f"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_meaningful_change.py",
+      "sha256": "8d4fbba9e055b2d90a0d851fb67ffd51ee765f9d70e47a8bb8030cf9d6746d01"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_mugen_engine_contract.py",
+      "sha256": "814b9fa4db46b2516f1ccce35f0dc9231f7acc86b2fa5a71e3cab817ba1226a9"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_observed_cases.py",
+      "sha256": "8da7759e7d45eb9e39adcef2d33f30677d3b8527eb7e13fd8f65390167ae17bf"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_placeholder_quarantine.py",
+      "sha256": "43c0fb75ae95da2a46b6d57adc98145119a893e4700538c4bd50542d6f3ba47a"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_probe_corridor.py",
+      "sha256": "0615daceace862bf47934c1cd9a29174c848b03459bbb23c3bac73b91a8b936a"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_provenance.py",
+      "sha256": "f19400b38c6673f6d9cf066fb72e4f6c3d9f0298e5ced3d50c0a0a6553fd5073"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_psg_channel_binding.py",
+      "sha256": "8debb4a0e0f722277a4db7e7e01df5c83f474cf336884b3688b018bd855f9d64"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_psg_quality.py",
+      "sha256": "e017278a551ae49b5c249d9aeb42fad831748e885bcba06b7b20439d2db2e509"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_psg_redundancy.py",
+      "sha256": "e96049b9eca507176f3eea9739946413a7d87557006fee01477554b0c6c310e1"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_reference_boundary.py",
+      "sha256": "4b03fb31286615ffa9f8f61dc3f500cc443b71e3186d1274cff1ab6e261afaee"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_render_fidelity.py",
+      "sha256": "06b6533a89332b0105965115e1a77c28a6278e8f12b279177435857951796d7d"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_render_glitch.py",
+      "sha256": "b5b175b9b1b8d5e39a0c2b85f5a0f480fef77ea369ea428a47eb00cb9164b24f"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_rom_asset_binding.py",
+      "sha256": "1eb111c20713d8029f6e68cf552a42bd309112e5ad91ae1b19749f2cc5b3b3f2"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_roster_harmony.py",
+      "sha256": "ad063e37d681af39993f77bbbd50ee176c3a19696a8e696703685eb878ff4ad3"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_silhouette_integrity.py",
+      "sha256": "96c04782f1fd75a4c8ebf41d19fd10ce92fcb8c0952f0f111eeaeef117a192a3"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_sole_alignment.py",
+      "sha256": "50bef28743706b753506ddc26beeaa9295d5523e57a4c87314eb3972238a5a84"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_source_raster.py",
+      "sha256": "4b6dead11d4538b68c9f8bbdf760ee007210076db26ba07a33c3c176d4853b40"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_specialization.py",
+      "sha256": "5414d8a547354680546eb6f2ccd83bf28bea93512f12904c407a11de42e0a490"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_sprite_cutout.py",
+      "sha256": "5ec221fb93d946858ca0dedbf34cf4765df7190448ce814d83480a06f3472d47"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_sprite_line_sim.py",
+      "sha256": "8d5efc42a61807a3e795e02091dc3382f53b0f6f160a3962a89b626d3daee849"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_sprite_mode.py",
+      "sha256": "5f52c9c75a15291f9ce88dbdeffc42fe493fa9cac6d5da2f39a93137982d4a53"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_stage_attribution.py",
+      "sha256": "d9cfacb7c5a9f6aa3f90af59b0f3f1ad021e2690d2891ce49dd13dcdaa073081"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_subagent_session.py",
+      "sha256": "9406183fa4f3b4ad5d74496004b7521be0c54208ecbc4b08c3833a36f0b48f90"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_symbol_size_sync.py",
+      "sha256": "6add76c0e56fce59aedec9f2cabaa859437265161e64ae7e21f15cfa6e209cfc"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_tilemap_bounds.py",
+      "sha256": "cd721017579dbedfd28bbf7c86670443f2ed5adf64b132d7be4a00f976e6a2ed"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_tilemap_mirror.py",
+      "sha256": "3411c636d080956f9d6f5081c59b391bf9a6e0201c369775e6a744f70a90fd00"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_validate_resources.py",
+      "sha256": "7599b2d6af267a2908b8c2fbe446363272af8bb41b501c988b094c958e701d7e"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_visual_delivery.py",
+      "sha256": "6932d80a81fb6366fb13a28c9a6c3ad2e562cc88a619e4656d733ed2efe94ad8"
+    },
+    {
+      "path": "tools/sms_wrapper/audit_vscroll_wrap.py",
+      "sha256": "931aa38ea4c46394f7bdbb8cb8986d521866447005cd37d0788329ee9f9be5eb"
+    },
+    {
+      "path": "tools/sms_wrapper/blastem_diagnostics.py",
+      "sha256": "deb18eaf921167d7b9bbb84bf48b90d739b00b5053bf6c7f51e2cb43086712d9"
+    },
+    {
+      "path": "tools/sms_wrapper/blastem_dump_diff.py",
+      "sha256": "9ccbb88c641c5e8161da98850771960289872af2fb47c4360701d4d9865f0bd7"
+    },
+    {
+      "path": "tools/sms_wrapper/blastem_maintenance.py",
+      "sha256": "2410f096accf3f9d12b43e521d697311c826aa766d730315554791829df7f7b1"
+    },
+    {
+      "path": "tools/sms_wrapper/blastem_sms.py",
+      "sha256": "805ab5e1997ffb3a2ba0921c4e479cd4e79c4bcdb73ff26fbff834a4b257af84"
+    },
+    {
+      "path": "tools/sms_wrapper/canonical_fixture_gate.py",
+      "sha256": "ff5c98e3b7a65a6f178db256ab6a2ad7f456dcac2142fcf076e358209a048ae0"
+    },
+    {
+      "path": "tools/sms_wrapper/capture_audio.py",
+      "sha256": "263e65753642b150bc1a6cf866400a3894b7f650c027db0fc4e2df2abe83b742"
+    },
+    {
+      "path": "tools/sms_wrapper/capture_evidence.py",
+      "sha256": "f61821926f66e50cad66bacb5a6cfff4fcd08e19b6b28ae85764c3c67d534ad4"
+    },
+    {
+      "path": "tools/sms_wrapper/capture_video.py",
+      "sha256": "063ce6dcb7cb3a62817ea4aa3663e02e29155088d222b8c9e5edd2092590afab"
+    },
+    {
+      "path": "tools/sms_wrapper/emulator_input.py",
+      "sha256": "40e16f3273f00ebca8594fdc6c932e00e791aec94bba12964612f1df4ae8a797"
+    },
+    {
+      "path": "tools/sms_wrapper/harness_orchestration.py",
+      "sha256": "f34ba8f4f24599b671d5010f9e78e1696a2185550f3b4d32cb4f5728285cf426"
+    },
+    {
+      "path": "tools/sms_wrapper/measure_fps.py",
+      "sha256": "0781a76bddcff0e4119193e72171bb039e0684c27969d149833b372ec0a79961"
+    },
+    {
+      "path": "tools/sms_wrapper/measure_frame_advance.py",
+      "sha256": "4ffd4c11409e57c9542225b22bdcf055423e9fea558cb979f49ec12fefdf6142"
+    },
+    {
+      "path": "tools/sms_wrapper/measure_runtime_probe.py",
+      "sha256": "40c6c4a8f64bbab4a211f3c03f4fe866338611d1459eaf6b57e5bb782245f3f8"
+    },
+    {
+      "path": "tools/sms_wrapper/measure_vram_map.py",
+      "sha256": "2518f35c432b8cf8832fa28efc708ccc8074a0e75568f5114dd5ecbca032d971"
+    },
+    {
+      "path": "tools/sms_wrapper/measure_worst_frame.py",
+      "sha256": "968bb70a6bf54ec09bdda5b0132974274dd674df25cf026b4baf5ea06fac5be4"
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/analysis/scale_pilot.py",
+      "sha256": "bff9a0ca8b0804bd7c823da09b62fa2173464db1493ccc3a85a49ca5b5123e7e"
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/analysis/trace_compare.py",
+      "sha256": "e350d7c31338b87df4c9cd24d6c682b139d23be380bf6da596d59926d27f67c4"
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/runtime/commit_budget.py",
+      "sha256": "bba5a3f2e2bd567b0213de0dbc680e1941e686b7f421a020bc27a5cd6390a9bf"
+    },
+    {
+      "path": "tools/sms_wrapper/mugen2sms/runtime/vram_plan.py",
+      "sha256": "f9dfaff3e0f37b996c5f6ac6f18b6de37b6997fa351330b375b5acc9d6e566a2"
+    },
+    {
+      "path": "tools/sms_wrapper/prepare_sms_pixel_art.py",
+      "sha256": "e534eae397d4fc58b428e1d0a00eda3cab52794be4791525eb8c00fb8906e463"
+    },
+    {
+      "path": "tools/sms_wrapper/quality_review_router.py",
+      "sha256": "b07ce19cd7b307616f48f0432ebbaeb0445e69aa13bc12896507344af6445421"
+    },
+    {
+      "path": "tools/sms_wrapper/reconcile_claims.py",
+      "sha256": "282cf3806e95709b97778be8160f3ec7e471ff4516d4c1a311b9a568fa457e4d"
+    },
+    {
+      "path": "tools/sms_wrapper/screenshot_semantic_gate.py",
+      "sha256": "36bcde7c4924869b925f05a66096f155cfb38ab89f6a3d3365c75f841081a2b2"
+    },
+    {
+      "path": "tools/sms_wrapper/seal_fresh_evidence_bundle.py",
+      "sha256": "70a8f0b136372ebad5d68904ee4d13ecccc222264e244ffd52f36425f7f16a74"
+    }
+  ]
+}

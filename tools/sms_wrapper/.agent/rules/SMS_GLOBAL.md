@@ -212,6 +212,14 @@ números como NOTA DURA e nenhum gate lia o `.md`. Fato afirmado na leitura
 humana sem entrada no registry é claim invisível.
 Gate: `audit_mastery_registry.cross_check`.
 
+Aplicação 2026-10-27 (L003/L138): a matriz também não pode promover por
+texto livre em `evidence`. `audit_mastery_registry.py` confere arquivos por
+SHA e papel; níveis de emulador exigem ROM, mídia e relatório associado a
+ROM/sessão. Contrato em `doc/05_technical/00_matriz_maestria_sms.md`.
+Custódia consistente não autentica execução nem julga a técnica; o revisor
+confere o conteúdo. Declarações antigas sem custódia ficam em `legacy_claim`,
+com nível `mapped` até reindexação, sem apagar a prova histórica.
+
 ## 24. Deterministic boot
 Boot determinístico obrigatório: mesmo estado inicial toda execução; RNG semeado
 por input/frame counter documentado. Evidência comparável exige boot estável.

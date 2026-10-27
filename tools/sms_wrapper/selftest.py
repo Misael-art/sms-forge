@@ -122,7 +122,7 @@ def main():
               "capture_evidence.py",
               "audit_meaningful_change.py", "audit_placeholder_quarantine.py",
               "audit_deterministic_boot.py", "canonical_fixture_gate.py",
-              "audit_mastery_registry.py",
+              "audit_mastery_registry.py", "audit_asset_proof_sheet.py",
               "audit_specialization.py",
               "audit_audio.py",
               "measure_fps.py",
@@ -181,6 +181,24 @@ def main():
                            f"selfcheck:{g}"))
     print("== Fase 2: fixtures geradas ==")
     tmp = tempfile.mkdtemp(prefix="smsforge_selftest_")
+    # Registry CLI must reject prose and bind real files, not merely truthy evidence.
+    mastery_path = os.path.join(tmp, "mastery.json")
+    refs = []
+    for kind in ("source", "build"):
+        path = os.path.join(tmp, kind)
+        with open(path, "wb") as stream:
+            stream.write(("synthetic " + kind).encode())
+        refs.append({"path": kind, "kind": kind,
+                     "sha256": hashlib.sha256(open(path, "rb").read()).hexdigest()})
+    record = {"tracks": {"tiles": {"V01": {"level": "incorporada",
+              "evidence": {"scope": "custody fixture only", "artifacts": refs}}}}}
+    with open(mastery_path, "w") as stream: json.dump(record, stream)
+    results.append(run(["audit_mastery_registry.py", "--registry", mastery_path,
+                        "--root", tmp], 0, "mastery accepts hash-bound files"))
+    record["tracks"]["tiles"]["V01"]["evidence"] = "gate passou"
+    with open(mastery_path, "w") as stream: json.dump(record, stream)
+    results.append(run(["audit_mastery_registry.py", "--registry", mastery_path,
+                        "--root", tmp], 1, "mastery refuses prose promotion"))
     # Candidate diagnostics remain unpromoted; test both valid and invalid
     # inputs here so future curators can assess their actual contract.
     import audit_composition_gate as composition

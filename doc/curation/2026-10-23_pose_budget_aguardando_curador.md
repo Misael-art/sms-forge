@@ -128,7 +128,7 @@ Limite: ler `downscale1:4` neste corte como “a arte foi reduzida a um quarto�
 
 Fato aritmético, sem `audit_sprite_line_sim`: uma célula de 64 px ocupa 8 sprites na scanline que ela cobre. O KO do Ken no corte chega a 8. O teto incluído do Ryu chega a 6. Os idles incluídos ocupam 4 cada. Duas poses largas na mesma linha somam as colunas.
 
-Propósito: o alvo de 8 é o limite de um lutador, que era o estouro visto na escala 72–88. A curadoria `L090` já registrou que zero flicker nessa faixa ficou bloqueado por um piso de 9–10 sprites por linha.
+Propósito: o alvo de 8 é o limite de um lutador, que era o estouro visto na escala 72–88. A curadoria `L090` já registrou que zero flicker nessa faixa ficou bloqueado: a demanda antes dos cortes era de 9–10 sprites por linha, acima da capacidade do VDP.
 
 Limite: esta aritmética não é aprovação de simulador nem de framebuffer. Dois lutadores no mesmo Y continuam podendo passar de 8. A SAT de uma célula 64×32 em modo tall é 16 entradas; duas células dessa ordem cabem nas 64 entradas e mesmo assim estouram a linha. Coluna não substitui `audit_sprite_line_sim.py`.
 
