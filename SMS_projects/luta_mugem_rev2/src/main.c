@@ -91,7 +91,18 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
  * unico delta = este define. O orcamento real de VBlank e' medido, nao
  * presumido: 1 par = 64 B de OUTI em VBlank + a copia da SAT, com o teto
  * fechado registrado por probe_vbl_entry/probe_vbl_exit_max. */
+#ifndef UPLOAD_CHUNK_PAIRS
 #define UPLOAD_CHUNK_PAIRS 8u
+#endif
+#ifndef LUTA_UPLOAD_TRACE
+#define LUTA_UPLOAD_TRACE 0
+#endif
+#if UPLOAD_CHUNK_PAIRS < 1 || UPLOAD_CHUNK_PAIRS > 8
+#error "quota candidata de upload deve estar entre 1 e 8 pares por lado"
+#endif
+#if LUTA_UPLOAD_TRACE != 0 && LUTA_UPLOAD_TRACE != 1
+#error "LUTA_UPLOAD_TRACE deve ser 0 ou 1"
+#endif
 
 /* wave-5b: o classificador de tier do doador tem UM limiar (INPUT_TIER_T) e os
  * blobs CMD emitidos trazem o tier 1/2 por familia; a maquina so e fiel se o
@@ -244,6 +255,11 @@ volatile unsigned char __at(0xC88D) probe_desired_face_p2;
 volatile unsigned char __at(0xC88E) probe_submit_face_p1;
 volatile unsigned char __at(0xC88F) probe_submit_face_p2;
 volatile unsigned int __at(0xC890) probe_push_invalid_geometry;
+/* Anel de diagnostico: 8 registros [frame LE, pares P1, pares P2]. O seq
+ * publica a entrada DEPOIS de todos os bytes; so o candidato com trace grava
+ * por tick. O leitor precisa limitar a janela para excluir wrap ambiguo. */
+volatile unsigned char __at(0xC89C) probe_upload_trace_seq;
+volatile unsigned char __at(0xC8A0) probe_upload_trace[32];
 
 /* Contrato worst-frame do measure_worst_frame.py (L061), SMRT aditivo na
  * base 0xC800: probe_vline = VCounter lido APOS todo o trabalho do frame
@@ -1309,6 +1325,9 @@ void main(void) {
     probe_phase = 0u;
     probe_worst_done = 0u;
     probe_vline_min = 0xFFu;
+    /* Referencias volateis conservam o corredor no mapa mesmo sem trace. */
+    probe_upload_trace_seq = 0u;
+    probe_upload_trace[0] = 0u;
     /* atribuicao regional: __at nao e inicializado pelo crt0 (L009);
      * o hook da ISR so e instalado com as somas ja zeradas. */
 #if LUTA_DIAG_TELEMETRY
@@ -1430,7 +1449,19 @@ void main(void) {
         probe_vbl_entry = SMS_VCounterPort;
         {
             unsigned int moved = stream_pending(0u, UPLOAD_CHUNK_PAIRS);
+#if LUTA_UPLOAD_TRACE
+            unsigned char moved_p1 = (unsigned char)moved;
+            unsigned char trace_index;
+#endif
             moved += stream_pending(1u, UPLOAD_CHUNK_PAIRS);
+#if LUTA_UPLOAD_TRACE
+            trace_index = (unsigned char)((probe_upload_trace_seq & 7u) << 2);
+            probe_upload_trace[trace_index] = (unsigned char)frames;
+            probe_upload_trace[trace_index + 1u] = (unsigned char)(frames >> 8);
+            probe_upload_trace[trace_index + 2u] = moved_p1;
+            probe_upload_trace[trace_index + 3u] = (unsigned char)(moved - moved_p1);
+            probe_upload_trace_seq++;
+#endif
             if (moved > probe_upload_maxvbl)
                 probe_upload_maxvbl = moved;
         }

@@ -19,6 +19,29 @@ BUILD = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(BUILD)
 
 
+def test_candidate_integer_defines_are_deterministic_and_reject_unsafe_values():
+    flags = BUILD.candidate_compiler_defines({"defines": {
+        "UPLOAD_CHUNK_PAIRS": 4, "LUTA_UPLOAD_TRACE": 1}})
+    assert flags == ["-DLUTA_UPLOAD_TRACE=1", "-DUPLOAD_CHUNK_PAIRS=4"]
+    for invalid in ({"defines": []}, {"defines": {"": 1}}, {"defines": {1: 1, "X": 1}},
+                    {"defines": {"A B": 1}}, {"defines": {"X=1": 2}},
+                    {"defines": {"X": "$(echo BAD)"}}, {"defines": {"X": True}},
+                    {"defines": {"X": -1}}, {"defines": {"X": 65536}}):
+        with pytest.raises(ValueError):
+            BUILD.candidate_compiler_defines(invalid)
+
+
+def test_defines_cannot_change_nominal_build(tmp_path, monkeypatch):
+    project = tmp_path / "game"
+    (project / ".mddev").mkdir(parents=True)
+    (project / ".mddev/project.json").write_text(json.dumps(
+        {"name": "game", "toolchain": {"defines": {"LUTA_UPLOAD_TRACE": 1}}}))
+    monkeypatch.setattr(BUILD, "pre_gates", lambda *_: pytest.fail("must reject before gates"))
+    monkeypatch.setattr(BUILD.sys, "argv", ["build_inner.py", "--project", str(project)])
+    assert BUILD.main() == 1
+    assert not (project / "out").exists()
+
+
 def test_candidate_directory_is_new_and_cannot_escape(tmp_path):
     project = tmp_path / "game"
     root = project / "out/candidates"
@@ -71,7 +94,10 @@ def test_candidate_inputs_hash_include_and_banked_data(tmp_path, monkeypatch):
     for name in ("sdcpp", "sdasz80", "sdldz80", "z80.lib"):
         (tmp_path / name).write_bytes(name.encode())
 
+    seen_commands = []
+
     def sdcc_output(command, **kwargs):
+        seen_commands.append(command)
         if "--print-search-dirs" in command:
             output = f"programs:\n{tmp_path}\nlibdir:\n{tmp_path}\n"
         else:
@@ -83,6 +109,11 @@ def test_candidate_inputs_hash_include_and_banked_data(tmp_path, monkeypatch):
     before = BUILD.candidate_inputs(str(project), manifest, tc, [str(src)])
     assert before["generated data/pose.h"] == hashlib.sha256(header.read_bytes()).hexdigest()
     assert before["generated data/bank.bin"] == hashlib.sha256(bank.read_bytes()).hexdigest()
+    with_defines = {"toolchain": {"defines": {"LUTA_UPLOAD_TRACE": 1},
+                                  "makesms_extra": ["-mbank", "generated data/bank.bin:0:1:2"]}}
+    BUILD.candidate_inputs(str(project), with_defines, tc, [str(src)])
+    assert any("-M" in command and "-DLUTA_UPLOAD_TRACE=1" in command
+               for command in seen_commands)
     bank.write_bytes(b"changed bank")
     assert before != BUILD.candidate_inputs(str(project), manifest, tc, [str(src)])
     padded = {"toolchain": {"makesms_extra": ["-pp", "-mbank", "generated data/bank.bin:0:1:2"]}}
@@ -104,7 +135,8 @@ def test_candidate_build_never_publishes_nominal_or_stale_record(tmp_path, monke
     project = tmp_path / "game"
     for folder in (".mddev", "src", "out/rom", "changelog/roms"):
         (project / folder).mkdir(parents=True)
-    (project / ".mddev/project.json").write_text(json.dumps({"name": "game"}))
+    (project / ".mddev/project.json").write_text(json.dumps(
+        {"name": "game", "toolchain": {"defines": {"LUTA_UPLOAD_TRACE": 1}}}))
     (project / "src/main.c").write_text("void main(void) {}")
     nominal_rom = project / "out/rom/game.sms"
     nominal_rom.write_bytes(b"original")
@@ -121,7 +153,10 @@ def test_candidate_build_never_publishes_nominal_or_stale_record(tmp_path, monke
                        ".mddev/project.json": manifest_hash}])
     monkeypatch.setattr(BUILD, "candidate_inputs", lambda *a: next(snapshots))
 
+    seen_commands = []
+
     def run(command, cwd=None, **kwargs):
+        seen_commands.append(command)
         if "--version" in command:
             return SimpleNamespace(returncode=0, stdout="SDCC fake", stderr="")
         if command[0] == "sdcc":
@@ -136,6 +171,8 @@ def test_candidate_build_never_publishes_nominal_or_stale_record(tmp_path, monke
     monkeypatch.setattr(BUILD.sys, "argv", ["build_inner.py", "--project", str(project),
                                             "--build-dir", str(candidate)])
     assert BUILD.main() == (1 if changed else 0)
+    assert any("-c" in command and "-DLUTA_UPLOAD_TRACE=1" in command
+               for command in seen_commands)
     record = candidate / "build_record.json"
     if changed:
         assert not record.exists()
@@ -144,6 +181,7 @@ def test_candidate_build_never_publishes_nominal_or_stale_record(tmp_path, monke
         assert doc["rom_sha256"] == hashlib.sha256(b"candidate ROM").hexdigest()
         assert doc["axes"]["build"] and not doc["axes"]["boot_emulador"]
         assert doc["profile"] == "candidate_unpromoted"
+        assert doc["compiler_defines"] == ["-DLUTA_UPLOAD_TRACE=1"]
     assert nominal_rom.read_bytes() == b"original"
     assert nominal_record.read_text() == "original record"
     assert not list((project / "changelog/roms").iterdir())

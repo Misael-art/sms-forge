@@ -14,12 +14,23 @@ Pipeline:
 
 Exit: 0 build | 1 reprovação (gate ou compilador) | 2 ambiente ausente
 """
-import sys, os, json, glob, shutil, subprocess, argparse, shlex, tempfile, hashlib
+import sys, os, json, glob, shutil, subprocess, argparse, shlex, tempfile, hashlib, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 SMS_SINGLE_SPRITE_GEOMETRIES = {(8, 8), (8, 16), (16, 16)}
+
+def candidate_compiler_defines(toolchain):
+    """Integer-only preprocessor switches for isolated candidates."""
+    values = toolchain.get("defines", {})
+    if not isinstance(values, dict) or len(values) > 32:
+        raise ValueError("defines candidato deve ser objeto com ate 32 entradas")
+    for name, value in values.items():
+        if (not isinstance(name, str) or not re.fullmatch(r"[A-Z_][A-Z0-9_]*", name) or
+                type(value) is not int or not 0 <= value <= 65535):
+            raise ValueError("define candidato exige nome C maiusculo e inteiro 0..65535")
+    return [f"-D{name}={values[name]}" for name in sorted(values)]
 
 def fail(msg, code):
     print(f"[BUILD {('FAIL_AMBIENTE' if code == 2 else 'FAIL')}] {msg}")
@@ -98,6 +109,13 @@ def self_check_resource_routing():
             pass
         else:
             raise AssertionError("conflicting padding accepted")
+        assert candidate_compiler_defines({"defines": {"B": 2, "A": 1}}) == ["-DA=1", "-DB=2"]
+        try:
+            candidate_compiler_defines({"defines": {"A=1": "unsafe"}})
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("invalid candidate define accepted")
         print("[SELF-CHECK OK] build resource routing and power-of-two padding rejection")
         return 0
     finally:
@@ -303,9 +321,11 @@ def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
     toolchain_config = manifest.get("toolchain", {})
     if toolchain_config.get("link_extra"):
         raise ValueError("link_extra ainda nao possui custodia de entradas para candidato")
+    define_flags = candidate_compiler_defines(toolchain_config)
     for src in srcs:
         relative = os.path.relpath(src, project)
         command = [tc["sdcc"], "-mz80", "-M"]
+        command += define_flags
         if uses_code_size_optimization(toolchain_config, relative):
             command.append("--opt-code-size")
         command += ["-I" + inc for inc in tc.get("inc", [])]
@@ -435,6 +455,12 @@ def main():
         return fail("toolchain do manifesto deve ser um objeto", 1)
     name = manifest.get("name") or os.path.basename(project)
     candidate = bool(args.build_dir)
+    try:
+        define_flags = candidate_compiler_defines(manifest.get("toolchain", {}))
+    except ValueError as e:
+        return fail(str(e), 1)
+    if define_flags and not candidate:
+        return fail("defines so sao aceitos em builds candidatos isolados", 1)
     if candidate and (os.path.basename(name) != name or name in (".", "..")):
         return fail("nome de projeto invalido para build candidato", 1)
     if candidate and os.environ.get("SMS_EVIDENCE") == "1":
@@ -501,6 +527,7 @@ def main():
         base = os.path.splitext(os.path.basename(src_abs))[0]
         obj_rel = os.path.relpath(os.path.join(obj_dir, base + ".rel"), project)
         cmd = [tc["sdcc"], "-c", "-mz80", "-o", obj_rel]
+        cmd += define_flags
         # Projetos com ROM linear no teto podem declarar a troca de objetivo
         # do compilador no manifesto. O custo de fps continua sendo medido no
         # emulador; esta flag nunca substitui o gate de worst-frame.
@@ -581,6 +608,7 @@ def main():
             "schema": "smsforge.candidate_build/v1",
             "profile": "candidate_unpromoted",
             "input_sha256": inputs_before,
+            "compiler_defines": define_flags,
             "sdcc_version": version.stdout.strip(),
             "rom_sha256": _sha256(rom),
             "rom_mtime": os.path.getmtime(rom),
