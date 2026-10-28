@@ -39,7 +39,9 @@ sombra da SAT do mesmo frame (`LUTA_PRESENT_HIT`). A candidata
 `5c5c6144ffd5b76f6e0f53bbcdf29785832238a0d3aeb0a51f6109ee99574991` registrou,
 em stepping, uma guarda coerente na pose 34 e um acerto de 76 em P1 com as
 poses 36/77 iguais no cursor, na residência, na submissão e na apresentação.
-Isso não fecha R06: falta o framebuffer do próprio frame, scanline, prazo e
+A guarda foi recapturada com o framebuffer no mesmo tick 84
+(`guard.png`, sessão `656ccc85…`). Isso não fecha R06: o acerto de 76 não
+tem o framebuffer do próprio tick, e seguem abertos scanline, prazo e
 hitstun. ID01 e os 55 IDs seguem abertos. A nominal não foi sobrescrita.
 Detalhe e sessão no memory bank do consumidor.
 

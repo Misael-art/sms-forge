@@ -22,11 +22,18 @@ throughput. No tick 84 houve guarda: política 2, poses lógica/residente/
 submetida/apresentada 34 e 69, vida inalterada, um SFX. No tick 176 houve
 acerto do lado 2: as quatro leituras da pose ficaram em 36 e 77, dano 76
 (HP do pacote de P2), vida de P1 1000→924, segundo SFX. A captura
-`hit2.png` é o framebuffer pausado no frame 201 da ROM, depois do acerto;
-não é o quadro do contato. Bundle verificado em
-`out/evidence/20261027_present_hit/5e25aae6750e4702b6fe82b1884b2128`.
-Fundo preto e os dois lutadores aparecem nessa imagem. Scanline, VBlank,
-FPS real e hitstun não foram medidos nesta sessão. Nenhum dos 55 IDs fecha.
+`hit2.png` dessa sessão é o frame 201, depois do acerto. Bundle verificado
+em `out/evidence/20261027_present_hit/5e25aae6750e4702b6fe82b1884b2128`.
+
+A mesma ROM, na sessão `656ccc85b4a24876a85d4f4ad7c9e905`, repetiu a guarda
+com o framebuffer pausado no próprio tick: frame da ROM 84, tick do trace 84,
+atacante 0, política 2, poses 34 e 69 nas quatro leituras, vidas 1000/1000.
+A imagem `out/evidence/20261027_present_hit_frames/guard.png` (SHA
+`bda8add900ef5db3e51348a437d6acde238235665710591e9fb26a2ac35f3867`) mostra
+os dois lutadores no fundo preto, com o chute de P1 e P2 agachado. O acerto
+de 76 não se repetiu até o frame 159 nesse roteiro, só com neutro depois da
+guarda. Scanline, VBlank, FPS real e hitstun não foram medidos. Nenhum dos
+55 IDs fecha.
 
 ## 2026-10-27 — contato, residência e cópia da SAT (candidatos)
 
