@@ -32,6 +32,22 @@ pose residente precisam ser qualificados; fundo sólido é escopo; P1 de sprites
 é compartilhada; os 7 eixos e época visual delivery devem convergir na mesma
 ROM. Primeiro feche runtime e qualidade mensuráveis; ambição AAA não é selo.
 
+## 2026-10-27 — guarda e acerto na mesma candidata
+
+A ROM `7f530db3…` agora tem os dois eventos em stepping, sem rebuild.
+Sessão `b615f99a…`: HP de Ryu, 112 de dano, recover 21 depois do pause
+16. Sessão `ff3ce3ecc6da4ff3af5ca0786fd6d0c8`: a mesma pose 34 contra
+P2 agachado (pose 69), kind 1, vidas 1000/1000, recover 21, impulso de
+guarda de 5 px. O botão 1 foi segurado seis frames de lógica só depois
+do beat 3. A duração não separa guarda e acerto neste HitDef; kind e
+vida separam. Os dois framebuffers mostram dois lutadores no fundo
+preto. Não houve troca de lado, HUD nem prazo. R06 e os 55 IDs seguem
+abertos. Detalhe no memory bank.
+
+O próximo ramo é a composição real das poses já vistas (34 com 60 e 34
+com 69) e o prazo com HUD e áudio como carga, ainda nesta linha de
+candidata. Não reconstruir `20261027_present_hit` nem a nominal.
+
 ## 2026-10-27 — recover medido; guarda desta ROM ainda aberta
 
 A candidata `7f530db3357bffd170286e332bdfd55e4bd0504d08ac28382859c583831d79dc`
@@ -47,9 +63,9 @@ medição de prazo. O tick do trace é 52 e o `probe_frame` da amostra é
 53: topo do laço seguinte, pause ainda cheio. R06 e os 55 IDs seguem
 abertos. A nominal não foi sobrescrita. Detalhe no memory bank.
 
-O próximo passo nesta mesma ROM é uma guarda distinguível: atrasar o
-botão 1 até o beat 3 ou 4 da IA, com P2 agachado ou em guarda. Não
-reconstruir `20261027_present_hit` nem regenerar o corte de facing.
+Esse parágrafo era o plano seguinte. A sessão `ff3ce3ec…`, acima,
+executou a guarda. Não reconstruir `20261027_present_hit` nem regenerar
+o corte de facing.
 
 ## 2026-10-27 — acerto pela pose submetida
 

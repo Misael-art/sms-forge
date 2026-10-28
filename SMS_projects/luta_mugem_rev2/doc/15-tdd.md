@@ -32,8 +32,10 @@ personagem. Na ROM `7f530db3…` o pause 16 e o recover 21 do HP de Ryu
 foram contados em stepping; a amostra do framebuffer é o topo do laço
 seguinte (`probe_frame` 53, tick 52, pause ainda 16). Nesse HitDef
 `guardtime` e `hittime` valem ambos 21, então a duração não separa
-guarda e acerto. A guarda dessa ROM não foi capturada. Ver memory bank.
-Isso não fecha R06.
+guarda e acerto. A guarda dessa ROM foi capturada depois, na sessão
+`ff3ce3ec…`: kind 1, vidas inalteradas, recover 21, impulso único de
+`guard_push` 5 px. A duração continua igual à do acerto; kind e vida
+separam os eventos. Ver memory bank. Isso não fecha R06.
 
 Duas políticas são candidatas, ambas zero por padrão e incompatíveis entre si.
 `LUTA_CONTACT_GUARD` recusa e conta uma interseção lógica se os frames,

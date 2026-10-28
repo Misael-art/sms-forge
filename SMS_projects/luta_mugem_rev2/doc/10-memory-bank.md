@@ -1,5 +1,53 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — guarda na mesma ROM do recover
+
+A mesma candidata `7f530db3…` foi reaberta sem rebuild. O botão 1 só
+foi segurado depois que a IA já estava no beat 3 e P2 no papel 4
+(agachar). Do probe 76 ao 81 a máscara foi 16; no 82 o papel de P1
+virou 7. Não houve carga no beat 2.
+
+Sessão privada `ff3ce3ecc6da4ff3af5ca0786fd6d0c8`, stepping, 259 passos
+VDP, 105 frames de lógica registrados. `check_bundle` verdadeiro, sem
+aprovação de gameplay, áudio ou FPS. A captura `guard.png` (SHA
+`f1c2523b3084f152b84ded8b8a31ee95faf2d82ef344918f823c6cee607f3195`,
+256×192, variância de luma 524,5) é o frame VDP 315. Mostra dois
+lutadores distintos no fundo preto, juntos no lado direito, sem HUD.
+Não prova scanline nem que a cópia da SAT dessa iteração já tinha
+ocorrido.
+
+Nesse frame o `probe_frame` e o tick do trace são ambos 93. A leitura
+anterior do mesmo probe (VDP 313) ainda tinha tick 0, pause 0 e vida
+1000/1000. A de VDP 315 já tem kind 1, atacante 0, política 2, guardas
+1, acertos 0, dano 0, vidas 1000/1000. Papéis 7 e 4, os dois no chão.
+Poses lógica, submetida e apresentada 34 e 69. Pause 16/16, recover de
+P2 21. `probe_present_hits` conta o contato aceito, inclusive guarda.
+Faces 0/1, `face_flips` 0. O SFX diagnóstico de guarda estava
+enfileirado e ainda não contado como tocado; no probe 94 `audio_played`
+é 1 e `audio_last` é 1. Não é identidade MUGEN.
+
+O pause desce de 16 a 0 entre os probes 93 e 110 (`hitstop_frames`
+termina em 32). O recover fica 21 até o probe 110 e chega a 0 no 130.
+A soma das quedas do log é 21. x de P2 passa de 195 para 200 no frame
+seguinte ao contato e permanece 200 durante o pause: um impulso, o
+`guard_push` de 5 px do atacante, aplicado em `combat_step`. O pusher
+de corpo não corre com pause diferente de zero.
+
+P2 ficou no papel 4 enquanto a IA passou ao beat 4 (probe 100) e ao
+beat 5 (probe 125). O pulo da IA só afirma cima nos três primeiros
+ticks do beat (125–127), todos com recover ainda acima de zero; o pulso
+foi descartado. No probe 132, já com recover 0, o papel virou idle.
+P1 deixou o HP no probe 128, com recover de P2 ainda em 3. Nos probes
+132 e 133 P1 andou +3 px (177→180→183). As amostras seguintes misturam
+o pusher. Não houve troca de lado.
+
+A duração deste recover é a mesma do acerto de 112, porque neste HitDef
+`guardtime` e `hittime` valem 21. O que separa os dois eventos é o kind
+e a vida. Log em `out/evidence/20261027_hit_recover/guard_watch.jsonl`,
+SHA `ac011ff093585b75f2d31d01196d7bc5bc4864a3467a72c98564717928fbc026`.
+R06, ID01 e os 55 IDs seguem abertos. Scanline, prazo, HUD e facing
+continuam sem medição nesta ROM.
+
 ## 2026-10-27 — recover do golpe submetido (candidato, stepping)
 
 O schema 7 está na candidata
@@ -70,10 +118,10 @@ velocidade 768 em Q8.8). O `walk_seen` de `observation.json` (x 100 no
 probe 95) é um passo de máscara a mais, com o contador de lógica parado
 e +1 px; a série por frame é o jsonl.
 
-Não houve guarda, troca de lado, HUD nem prazo medido. R06, ID01 e os
-55 IDs seguem abertos. A próxima captura nesta mesma ROM é atrasar o
-botão 1 até o beat 3 ou 4, com P2 já agachado ou em guarda e a distância
-já curta. Carregar no beat 2 foi o que produziu este acerto.
+Nesta sessão não houve guarda, troca de lado, HUD nem prazo medido.
+R06, ID01 e os 55 IDs seguem abertos. A guarda foi medida depois, na
+sessão `ff3ce3ec…`, segurando o botão 1 só a partir do beat 3. Carregar
+no beat 2 foi o que produziu este acerto.
 
 ## 2026-10-27 — acerto pela pose submetida
 
