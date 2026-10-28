@@ -1553,6 +1553,15 @@ static unsigned char contact_sat_ready(unsigned char side) {
 
 static void combat_step(const Frame *fn0, const Frame *fn1) {
     unsigned char a;
+#if FIGHT_RUNTIME_DATA_SCHEMA >= 7
+    /* Capturar a elegibilidade antes de aplicar qualquer evento permite que
+     * dois golpes nao letais ja ativos se acertem no mesmo tick. Uma vitima
+     * atingida nao pode voltar a atacar durante pause/recover. */
+    unsigned char eligible[2];
+    for (a = 0u; a < 2u; a++)
+        eligible[a] = (unsigned char)(fighter[a].life && !fighter[a].hit_done &&
+                                      !fighter[a].stop && !fighter[a].recover);
+#endif
     for (a = 0u; a < 2u; a++) {
         unsigned char d = (unsigned char)(1u - a);
         const CharacterData *cd = &characters[a];
@@ -1560,7 +1569,11 @@ static void combat_step(const Frame *fn0, const Frame *fn1) {
         const Frame *fa = a ? fn1 : fn0;
         const Frame *fd = a ? fn0 : fn1;
         unsigned char push;
+#if FIGHT_RUNTIME_DATA_SCHEMA >= 7
+        if (!eligible[a] || !fighter[a].life) continue;
+#else
         if (fighter[a].hit_done) continue;
+#endif
         if (!(st->flags & S_HIT)) continue;
         if (fighter[d].life == 0u) continue;
 #if LUTA_CONTACT_SAT
@@ -1614,8 +1627,10 @@ static void combat_step(const Frame *fn0, const Frame *fn1) {
         probe_present_hits++;
 #endif
 #if FIGHT_RUNTIME_DATA_SCHEMA >= 7
-        fighter[a].stop = st->stop_a;
-        fighter[d].stop = st->stop_d;
+        /* Numa troca simultanea, conservar a maior pausa solicitada para
+         * cada ator; a ordem dos dois contatos nao pode encurta-la. */
+        if (fighter[a].stop < st->stop_a) fighter[a].stop = st->stop_a;
+        if (fighter[d].stop < st->stop_d) fighter[d].stop = st->stop_d;
 #else
         if (cd->hitstop) {
             fighter[a].stop = cd->hitstop;
@@ -1634,6 +1649,11 @@ static void combat_step(const Frame *fn0, const Frame *fn1) {
         } else {
             unsigned int taken;
             probe_hit_events++;
+#if FIGHT_RUNTIME_DATA_SCHEMA >= 7
+            /* Sem common gethit, o papel visual pode permanecer. Invalidar
+             * sua instancia de ataque evita um acerto fantasma posterior. */
+            fighter[d].hit_done = 1u;
+#endif
 #if LUTA_DIAG_PSG
             diag_sfx_queue(DIAG_SFX_HIT);
 #endif

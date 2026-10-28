@@ -21,6 +21,82 @@ def extract(source: str, name: str) -> str:
     return match.group()
 
 
+def test_allocator_matches_bitmap_first_fit_with_fragmentation(tmp_path):
+    """Compare the real allocator with a bitmap oracle, including unordered slots."""
+    allocator = extract(SOURCE.read_text(encoding="utf-8"), "alloc_contiguous")
+    code = r'''
+#include <stdio.h>
+#include <string.h>
+#define POOL_PAIRS 128u
+typedef struct { unsigned int pose_global; unsigned char base_pair, n_pairs; } CacheSlot;
+static CacheSlot current[2], pending[2];
+static unsigned char fail_valid[2];
+''' + allocator + r'''
+static unsigned long rng = 0x2748u;
+static unsigned random_value(void) {
+    rng = (rng * 1664525ul + 1013904223ul) & 0xfffffffful;
+    return (unsigned)(rng >> 16);
+}
+int main(void) {
+    CacheSlot *slots[4] = {&current[0], &current[1], &pending[0], &pending[1]};
+    unsigned trial;
+    {
+        unsigned i; unsigned char base = 0xab;
+        for (i = 0; i < 4; ++i) slots[i]->pose_global = 0xffffu;
+        if (!alloc_contiguous(128u, &base) || base != 0u) return 2;
+        slots[2]->pose_global = 1u; slots[2]->base_pair = 0u; slots[2]->n_pairs = 128u;
+        base = 0xab;
+        if (alloc_contiguous(1u, &base) || base != 0xab) return 3;
+    }
+    for (trial = 0; trial < 100000u; ++trial) {
+        unsigned char bitmap[POOL_PAIRS] = {0};
+        unsigned order[4] = {0, 1, 2, 3};
+        unsigned pos = 0, i, n, expect = 255u;
+        unsigned char actual = 0xabu, ok;
+        for (i = 0; i < 4; ++i) slots[i]->pose_global = 0xffffu;
+        for (i = 3; i > 0; --i) {
+            unsigned j = random_value() % (i + 1u), tmp = order[i];
+            order[i] = order[j]; order[j] = tmp;
+        }
+        for (i = 0; i < 4 && pos < POOL_PAIRS; ++i) {
+            unsigned size, j;
+            pos += random_value() % 13u;
+            if (pos >= POOL_PAIRS) break;
+            size = 1u + random_value() % 45u;
+            if (size > POOL_PAIRS - pos) size = POOL_PAIRS - pos;
+            slots[order[i]]->pose_global = i;
+            slots[order[i]]->base_pair = (unsigned char)pos;
+            slots[order[i]]->n_pairs = (unsigned char)size;
+            for (j = pos; j < pos + size; ++j) bitmap[j] = 1;
+            pos += size;
+        }
+        n = 1u + random_value() % POOL_PAIRS;
+        for (i = 0; i + n <= POOL_PAIRS; ++i) {
+            unsigned j;
+            for (j = i; j < i + n && !bitmap[j]; ++j) {}
+            if (j == i + n) { expect = i; break; }
+        }
+        fail_valid[0] = fail_valid[1] = 1u;
+        ok = alloc_contiguous((unsigned char)n, &actual);
+        if ((expect != 255u) != !!ok ||
+            (ok && (actual != expect || fail_valid[0] || fail_valid[1])) ||
+            (!ok && (actual != 0xabu || !fail_valid[0] || !fail_valid[1]))) {
+            printf("trial %u size %u expected %u got %u ok %u\n", trial, n, expect, actual, ok);
+            return 1;
+        }
+    }
+    return 0;
+}
+'''
+    program = tmp_path / "allocator_oracle.c"
+    program.write_text(code, encoding="utf-8")
+    exe = tmp_path / "allocator_oracle"
+    subprocess.run(["cc", "-std=c99", str(program), "-o", str(exe)],
+                   check=True, capture_output=True, text=True)
+    result = subprocess.run([str(exe)], capture_output=True, text=True)
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
 def test_abandoned_upload_cannot_replace_current_pose(tmp_path):
     source = SOURCE.read_text(encoding="utf-8")
     functions = "\n".join(extract(source, name) for name in

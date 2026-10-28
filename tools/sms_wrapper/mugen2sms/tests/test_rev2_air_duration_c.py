@@ -71,6 +71,19 @@ int main(void) {
     advance_actor(0, &pose, &frame);
     REQUIRE(fighter[0].fidx == before_index && fighter[0].tick == before_tick,
             "hitstop advanced animation");
+    memset(fighter, 0, sizeof(fighter));
+    states[0].flags = S_CONTROL;
+    fighter[0].life = 1000; fighter[0].stop = 2; fighter[0].recover = 3;
+    advance_actor(0, &pose, &frame);
+    REQUIRE(fighter[0].stop == 1 && fighter[0].recover == 3, "recover advanced during pause");
+    advance_actor(0, &pose, &frame);
+    REQUIRE(fighter[0].stop == 0 && fighter[0].recover == 3, "last pause tick consumed recover");
+    advance_actor(0, &pose, &frame);
+    REQUIRE(fighter[0].recover == 2, "first recover tick missing");
+    advance_actor(0, &pose, &frame);
+    REQUIRE(fighter[0].recover == 1, "second recover tick missing");
+    advance_actor(0, &pose, &frame);
+    REQUIRE(fighter[0].recover == 0, "recover did not terminate");
     return 0;
 }
 '''
