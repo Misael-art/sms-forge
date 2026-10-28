@@ -1,5 +1,91 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-28 — streaming de poses e faixa incremental da PNT
+
+A variante `LUTA_BG_DIFF_MAP=1` atualiza a união vertical das linhas do ator
+BG anterior e atual, em chamadas de largura total; primeira publicação e
+invalidação ainda escrevem o mapa inteiro. Na comparação de uma pose/fase
+pareada, controle e candidata produziram imagem idêntica (0 pixels diferentes,
+`probe_frame=450`, pose P2 68). Isso valida só aquele checkpoint. A ROM
+`14f60441337953e21ac5c9b69c4931d50946fa028f36eb1331b441c03ccd49d1` marcou
+1759 derrames/3000 e `vline_min=2`; não houve redução mensurável de prazo.
+
+O candidato instrumentado para atribuição por estágio (`c243b60e…`, fonte
+`9606b15c…`, sessão `331fdebe61f145d698786f709933d72d`) registrou a fronteira
+ativa em 0/1759 quadros antes do mapa, 0 após o mapa, 1731 após streaming e
+1759 após SAT/PSG. A amostragem é um booleano de `SMS_VCounterPort < 0xC0`,
+não ciclos nem duração; a instrumentação também custa tempo. A evidência está
+em `out/evidence/20261028_bg_diff_map_vblank_stages/stage_attribution.json`
+(SHA `c99959bd4a99e44fb95358e3d132617307af3d123b6272146d8f69f92e6a3b23`),
+com `budget_passed=false`.
+
+O prefetch (`5b11b871…`, sessão `6e757992efeb49ff95a00ec7e2e77019`) marcou
+1871 derrames/3000, `vline_min=7`; contra 1759 no controle de uma sessão, a
+variação observada foi +112, sem atribuição causal por haver só uma execução
+por ROM. A cópia word (`SMS_VRAMmemcpy`, conferida no header oficial
+`SMSlib.h`) também não ajudou: controle `c243b60e…` e variante
+`274b5ec15ee067e7fb50fa17cb25ac23b6dfe4bfb4ac120e98af72b67979c08e` ficaram
+em 1759/3000; o estágio streaming marcou 1731 e 1729, respectivamente. Não há
+orçamento aprovado; `LUTA_SPECULATIVE_PREFETCH` e
+`LUTA_STREAM_WIDE_COPY` ficam desligados. O agregador de quota continua
+desligado e as quotas 1/2/4/8 anteriores seguem reprovadas ou com espera.
+
+O A/B visual da cópia word está registrado em
+`out/evidence/20261028_vblank_streaming/wide_copy_visual_ab.json` (SHA
+`5a156a0f0be65d5f6a783ab41e5064ebc9fb531da03586700dfda0222695a326`). Os
+bundles das duas sessões passaram a checagem estrutural; apesar de
+`probe_frame=433` e poses submetidas 4/66, os VDP frames foram 1141/1122 e as
+posições dos atores diferiram. O diff de 1191 pixels não é prova pareada de
+paridade ou diferença visual causada pela API.
+
+O `scale_pilot.py --self-check` passou antes da leitura do manifest atual. O
+relatório estático `out/evidence/20261028_streaming_scale_pilot/current_profile.json`
+(SHA `365288438cd1bf1428e6b9618c85d4887d32857c62f9f7dd7d2dd2214b48a158`)
+marca `blocked`: o pior quadro P2 kick tem 20 pares novos (1280 B) em 2 ticks
+AIR, sem reúso; timing AIR exato no runtime não foi provado. O requisito
+uniforme calculado é 640 B/VDP por tick, acima dos 512 B da quota atual de
+8 pares. A análise byte a byte dos 93 `PoseRef`/186 facings encontrou 390
+slots repetidos (24.960 B teóricos entre as paletas/poses), sem duplicata
+interna a um facing e sem correspondência P1↔P2 no pool selecionado. É
+deduplicação de dados, não redução de upload: precisa de alocador VRAM e
+remapeamento META; o pior par segue sem padrão reutilizável. Os detalhes e
+hashes de entrada estão em `out/evidence/20261028_vblank_streaming/pose_pair_reuse_analysis.json`
+(SHA `e075beb78363cc89ea59092ee48e3962cb0d79fe972231675eb723571a0a49ad`).
+
+Próximo ramo mensurável: usar o planejador existente de cache/remapeamento do
+`scale_pilot` em uma transição do perfil `p1_ken` com reúso (ação 240/HK,
+frames 2→3, 9 pares reutilizados) e manter o pior P2 kick como caso negativo
+obrigatório. Só uma ROM com alocação, deadline, RAM/VRAM e imagem do mesmo
+estado pode avaliar a hipótese. Nenhuma destas experiências aprova o
+renderer, VBlank, gameplay ou delivery; os IDs do backlog permanecem abertos.
+
+Fechamento técnico deste lote: fonte `src/main.c` SHA
+`9047930f93eb2f141bd4324e3da42c46c74ff815acf862756b7dd9500273f34a` compilada
+sem defines opt-in em `out/candidates/20261028_vblank_streaming_default/`.
+A ROM candidata é `d367abd19cfc9b221db3b069785d44fdda784b5a94a23c77dfb0b8df1e1684e5`
+(524288 B); o recibo SHA `899e5e4f58fdf58f57090e7f2244470caf61662d631f0fcda831e2789208bd22`
+marca build/validation pass e boot, gameplay, FPS, áudio e memory bank pendentes.
+A sessão privada Emulicious `55225b8a22274a64a7aef72ebbb1d1ec` capturou o
+frame 420 em 256×192 (PNG SHA
+`41dbc4305b17ba4fe3c000b0c081462ad268563d0782fc7d2bbae14e3972947d`); o
+bundle passou `check-bundle` e o PID foi encerrado. A captura mostra os dois
+atores no fundo preto, mas não prova interação, qualidade visual, áudio ou FPS.
+
+Validação host: 17 testes focados passaram; a suíte `--project rev2` passou
+300 testes. `audit_doc_sync`, `audit_hardware_constants`,
+`audit_debug_markers`, `audit_probe_corridor` (159 sondas, folga 1486 B),
+`audit_vscroll_wrap`, `audit_causal_persistence` e
+`audit_meaningful_change` passaram/avançou. `audit_tilemap_bounds` não achou
+escrita ilegal, mas deixou uma altura variável não provada. A build nominal
+continua intacta; nenhum dos 55 IDs foi fechado.
+
+Proteção local dos artefatos ignorados: `.runtime/backups/luta_mugem_rev2-runtime-20261028-vblank-streaming.tar.gz`,
+98.413.975 bytes, SHA `6812b8e5a23b05034c27670afed5e1a7c4dd00b4687a0738ffc76674fde2b585`;
+manifesto SHA `18bfb0452419754e4c458455b0f186f9e900ea85c34de8f0b1b4e4817d68a6e8`,
+27.544 entradas/484.824.066 bytes, `recovery_bundle.py verify` passou. Inclui
+ROM, captura e sidecars deste lote. É cópia local no mesmo disco, sem alegação
+de backup externo ou promoção de runtime.
+
 ## 2026-10-28 — SAT no roteiro de aproximação
 
 Na ROM `7523bd0c…`, o BlastEm SMS2 privado

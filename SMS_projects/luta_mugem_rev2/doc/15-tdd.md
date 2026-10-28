@@ -212,7 +212,63 @@ publicado depois do registro. A leitura exige limite menor que o anel e
 auditoria aritmética do contador. Como as gravações ocorrem no VBlank, a ROM
 instrumentada não valida o budget da ROM sem sonda. Quotas de 1, 2 e 4 pares
 reprovaram no selo e aumentaram a espera de pose no roteiro observado; não
-foram promovidas. O valor nominal continua 8, também reprovado em VBlank.
+foram promovidas. O arranjo histórico de 8 pares por lado também reprovou em
+VBlank.
+
+`LUTA_UPLOAD_AGGREGATE=1` habilita a experiência de 2026-10-28; o padrão 0
+mantém `UPLOAD_CHUNK_PAIRS` como quota por lado. No modo agregado, o define
+limita o total dos dois lados por VBlank. `stream_pending_budget` dá o teto ao
+primeiro lado e repassa a sobra ao segundo; `frames & 1` alterna a prioridade
+a cada frame. Assim um lado sozinho ainda pode usar os 8 pares, enquanto dois
+pending compartilham o mesmo teto. O trace continua separando P1/P2.
+
+A candidata opt-in repetiu 2086 derrames/3000 e `vline_min=5` em duas sessões,
+com pico agregado selado 8; a baseline por lado repetiu 1759/3000 e `vline_min=2`,
+com pico 16. Fonte, dados e demais defines coincidem. A amostra reprova o
+experimento e não aprova orçamento; a política permanece desligada por padrão.
+O teste C focal cobre soma máxima, redistribuição, alternância e ordem dos
+campos do trace. A espera de pose, gameplay, SAT, carga completa e interação
+continuam critérios separados.
+
+## Experimentos de estágio e redução de streaming (2026-10-28)
+
+`LUTA_BG_DIFF_MAP=1` é opt-in e requer `LUTA_BG_ACTOR=1`. Mantém o shadow
+completo, mas publica apenas a faixa de linhas que cobre o ator anterior e o
+atual; inicialização/invalidação escreve as dez linhas. O teste C verifica a
+geometria da faixa e o primeiro mapa completo. No checkpoint pareado, a imagem
+foi pixel a pixel igual ao controle; a ROM marcou 1759 derrames/3000 e
+`vline_min=2`, sem melhoria de prazo.
+
+`LUTA_DIAG_VBLANK_STAGES=1` habilita quatro contadores em RAM normal alocada
+pelo linker, incompatíveis com `LUTA_UPLOAD_TRACE`. Cada estágio conta quando
+`SMS_VCounterPort < 0xC0`, no intervalo selado. Uma ROM instrumentada mediu
+0/1759 após entrada, 0 após mapa, 1731 após streaming e 1759 após SAT/PSG.
+Essa sonda identifica em qual fronteira o display ativo já começou; não mede
+ciclos ou duração e altera o custo observado. Não usar para aprovar budget.
+
+`LUTA_STREAM_WIDE_COPY=1` escolhe `SMS_VRAMmemcpy` (tamanho word), API
+confirmada em `sdk/devkitSMS/SMSlib/SMSlib.h`; o padrão usa
+`SMS_VRAMmemcpy_brief` e limita o lote a três pares por chamada por causa do
+comprimento byte. A candidata wide enviou o teto de oito pares em uma chamada,
+mas controle e candidata marcaram 1759 derrames/3000; os cruzamentos após
+stream foram 1731 e 1729. Sem ganho medido, continua desligada.
+
+O prefetch opt-in marcou 1871 derrames/3000 (`vline_min=7`) contra 1759 do
+controle em uma rodada por variante; rejeitado como otimização de VBlank.
+Todos os defines novos (`LUTA_BG_DIFF_MAP`, `LUTA_DIAG_VBLANK_STAGES`,
+`LUTA_STREAM_WIDE_COPY`) têm default 0. Os resultados, ROMs, sessões e limites
+estão no memory bank e nos JSONs com hashes em `out/evidence/20261028_vblank_streaming/`.
+
+O `scale_pilot.py --self-check` e a leitura do manifest atual identificam 390
+slots de pares byte a byte repetidos entre os 93 poses/186 facings, equivalentes
+a 24.960 B de deduplicação teórica no armazenamento. Não há pares idênticos
+entre os pools selecionados de Ken P1 e Ryu P2. No pior P2 kick, 20 pares são
+novos (1280 B) em 2 ticks AIR e o planejador não encontra reúso; os 640 B/tick
+são uma estimativa de fonte, não timing executado. Reaproveitar em VRAM exigiria
+alocação e remapeamento de META e ainda precisa de ROM/QA. Próximo teste
+instrumentado: uma transição com reúso do perfil `p1_ken` (ação 240/HK,
+frames 2→3, nove pares) mais o pior P2 kick como controle negativo. Não elevar
+essa evidência a budget, fidelidade ou delivery.
 
 ## Arquitetura proposta, não implementada
 PacoteMUGEN imutável→parse→IRtipado→perfilcompat→loweringAOT/tabelas

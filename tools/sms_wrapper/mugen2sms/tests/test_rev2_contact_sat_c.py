@@ -213,6 +213,8 @@ static unsigned char alloc_contiguous(unsigned char n,unsigned char *base) {(voi
 #define SMS_mapROMBank(n) ((void)(n))
 #define SMS_restoreROMBank() ((void)0)
 #define SMS_VRAMmemcpy_brief(dst,src,size) ((void)(dst),(void)(src),(void)(size))
+#define STREAM_UPLOAD_PAIRS(dst,src,pairs) \
+    SMS_VRAMmemcpy_brief((dst),(src),(unsigned char)((pairs)<<6))
 ''' + extract(source, "cache_invalidate") + "\n" + extract(source, "stream_pending", "unsigned char") + "\n" + extract(source, "request_pose") + r'''
 #define CHECK(c,msg) do { if (!(c)) {puts(msg);return 1;} } while(0)
 int main(void) {

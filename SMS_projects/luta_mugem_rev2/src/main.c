@@ -14,15 +14,14 @@
  * Medicoes (probes __at em 0xC800, schema probe 1):
  *   1. boot: probe_boot_p2_fit registra se os dois idles do pacote selecionado
  *      couberam; o antigo exemplo de 4224 B por lado nao vale para todo corte.
- *   2. streaming: ate 8 pares TALL (64 B) por lado no perfil atual; stall e
- *      evict sao contadores, nao prova de deadline ou ausencia de starvation.
+ *   2. streaming: quota historica padrao de 8 pares TALL (64 B) por lado;
+ *      a quota agregada candidata e opt-in. Stall/evict nao provam deadline.
  *   3. scanline: probe_max_line e probe_over8_events so sao atualizados com
  *      LUTA_DIAG_TELEMETRY ligado; sem isso nao provam composicao.
- *   4. Lote B.2: politica de producao = chunk orcado de upload por lado +
- *      exibicao da pose RESIDENTE (imagem valida nunca e' omitida; a espera e'
- *      contada) + nenhum desalojamento do oponente + janela de VBlank com
- *      inicio/fim registrados. Sondas desejada/residente/submetida/apresentada
- *      sao distintas (o disp sozinho nao prova emissao, Lote B doc/25 §88).
+ *   4. Lote B.2: padrao = quota por lado + pose RESIDENTE + nenhum
+ *      desalojamento do oponente; LUTA_UPLOAD_AGGREGATE testa teto total e
+ *      LUTA_BG_DIFF_MAP retangulo BG incremental, ambos opt-in. Sondas
+ *      desejada/residente/submetida/apresentada sao distintas (§88).
  *
  * Autoridades: sdk/devkitSMS/SMSlib/SMSlib.h (API), fight_runtime_data.py
  * schema 5 (layout dos dados). Restricoes: sem float, sem malloc, VRAM apenas
@@ -89,18 +88,23 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
  * v031 permanece a referencia diagnostica arquivada. */
 #define LUTA_PROFILE 1
 
-/* Lote B.2: teto de pares TALL por VBlank POR LADO no perfil de producao.
- * O valor e' candidato declarado e a medida que o elege e' o par
- * (probe_upload_pairs_maxvbl, probe_vline/probe_vovf) nas sessoes de
- * worst-frame: cada candidato (2/4/8) e' uma ROM com SHA proprio, mesma carga,
- * unico delta = este define. O orcamento real de VBlank e' medido, nao
- * presumido: 1 par = 64 B de OUTI em VBlank + a copia da SAT, com o teto
- * fechado registrado por probe_vbl_entry/probe_vbl_exit_max. */
+/* Lote B.2: quota historica por lado, ate oito pares TALL de 64 B. A
+ * politica agregada alternativa usa UPLOAD_CHUNK_PAIRS como teto total e
+ * alterna a prioridade. Nenhuma das duas variantes tem budget aprovado. */
 #ifndef UPLOAD_CHUNK_PAIRS
 #define UPLOAD_CHUNK_PAIRS 8u
 #endif
+#ifndef LUTA_UPLOAD_AGGREGATE
+#define LUTA_UPLOAD_AGGREGATE 0
+#endif
 #ifndef LUTA_UPLOAD_TRACE
 #define LUTA_UPLOAD_TRACE 0
+#endif
+#ifndef LUTA_DIAG_VBLANK_STAGES
+#define LUTA_DIAG_VBLANK_STAGES 0
+#endif
+#ifndef LUTA_STREAM_WIDE_COPY
+#define LUTA_STREAM_WIDE_COPY 0
 #endif
 #ifndef LUTA_SPECULATIVE_PREFETCH
 #define LUTA_SPECULATIVE_PREFETCH 0
@@ -110,6 +114,9 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #endif
 #ifndef LUTA_BG_CAMERA
 #define LUTA_BG_CAMERA 0
+#endif
+#ifndef LUTA_BG_DIFF_MAP
+#define LUTA_BG_DIFF_MAP 0
 #endif
 #ifndef LUTA_DIAG_PSG
 #define LUTA_DIAG_PSG 0
@@ -137,10 +144,22 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #endif
 #define LUTA_CONTACT_STAMPS (LUTA_CONTACT_GUARD || LUTA_CONTACT_SAT || LUTA_PRESENT_HIT)
 #if UPLOAD_CHUNK_PAIRS < 1 || UPLOAD_CHUNK_PAIRS > 8
-#error "quota candidata de upload deve estar entre 1 e 8 pares por lado"
+#error "quota candidata deve estar entre 1 e 8 pares"
+#endif
+#if LUTA_UPLOAD_AGGREGATE != 0 && LUTA_UPLOAD_AGGREGATE != 1
+#error "LUTA_UPLOAD_AGGREGATE deve ser 0 ou 1"
 #endif
 #if LUTA_UPLOAD_TRACE != 0 && LUTA_UPLOAD_TRACE != 1
 #error "LUTA_UPLOAD_TRACE deve ser 0 ou 1"
+#endif
+#if LUTA_DIAG_VBLANK_STAGES != 0 && LUTA_DIAG_VBLANK_STAGES != 1
+#error "LUTA_DIAG_VBLANK_STAGES deve ser 0 ou 1"
+#endif
+#if LUTA_STREAM_WIDE_COPY != 0 && LUTA_STREAM_WIDE_COPY != 1
+#error "LUTA_STREAM_WIDE_COPY deve ser 0 ou 1"
+#endif
+#if LUTA_DIAG_VBLANK_STAGES && LUTA_UPLOAD_TRACE
+#error "estagios VBlank e trace de upload compartilham a regiao de probes"
 #endif
 #if LUTA_SPECULATIVE_PREFETCH != 0 && LUTA_SPECULATIVE_PREFETCH != 1
 #error "LUTA_SPECULATIVE_PREFETCH deve ser 0 ou 1"
@@ -159,6 +178,12 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #endif
 #if LUTA_BG_CAMERA && !LUTA_BG_ACTOR
 #error "camera experimental exige ator BG"
+#endif
+#if LUTA_BG_DIFF_MAP != 0 && LUTA_BG_DIFF_MAP != 1
+#error "LUTA_BG_DIFF_MAP deve ser 0 ou 1"
+#endif
+#if LUTA_BG_DIFF_MAP && !LUTA_BG_ACTOR
+#error "mapa BG incremental exige ator BG"
 #endif
 #if LUTA_DIAG_PSG != 0 && LUTA_DIAG_PSG != 1
 #error "LUTA_DIAG_PSG deve ser 0 ou 1"
@@ -191,6 +216,16 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #include "PSGlib.h"
 #include "sfx_hit.h"
 #include "sfx_hurt.h"
+#endif
+
+/* A API brief aceita tamanho em byte; a variante experimental usa a API
+ * oficial de tamanho word para enviar até oito pares em uma chamada. */
+#if LUTA_STREAM_WIDE_COPY
+#define STREAM_UPLOAD_PAIRS(dst, src, pairs) \
+    SMS_VRAMmemcpy((dst), (src), (unsigned int)(pairs) << 6)
+#else
+#define STREAM_UPLOAD_PAIRS(dst, src, pairs) \
+    SMS_VRAMmemcpy_brief((dst), (src), (unsigned char)((pairs) << 6))
 #endif
 
 /* wave-5b: o classificador de tier do doador tem UM limiar (INPUT_TIER_T) e os
@@ -357,11 +392,22 @@ volatile unsigned char __at(0xC89C) probe_upload_trace_seq;
 volatile unsigned int __at(0xC89D) probe_audio_guard_queued;
 volatile unsigned char __at(0xC89F) probe_audio_last_played;
 volatile unsigned char __at(0xC8A0) probe_upload_trace[32];
+#if LUTA_DIAG_VBLANK_STAGES
+/* Perfil diagnóstico: contagens em RAM alocada pelo linker para não se
+ * sobrepor ao anel fixo de trace. As leituras acrescentam custo; não são
+ * budget de produção. */
+volatile unsigned int probe_vblank_stage_before_map;
+volatile unsigned int probe_vblank_stage_after_map;
+volatile unsigned int probe_vblank_stage_after_stream;
+volatile unsigned int probe_vblank_stage_after_sat;
+#endif
 volatile unsigned int __at(0xC8C0) probe_bg_invalid;
 volatile unsigned int __at(0xC8C2) probe_bg_map_updates;
 volatile unsigned int __at(0xC8C4) probe_bg_left_risk;
 volatile unsigned int __at(0xC8C6) probe_bg_scroll_late;
 volatile unsigned int __at(0xC8C8) probe_bg_map_late;
+volatile unsigned int __at(0xC8D4) probe_bg_map_cells_plan_lo;
+volatile unsigned char __at(0xC8D6) probe_bg_map_cells_plan_hi;
 volatile unsigned char __at(0xC8CA) probe_bg_camera_shift;
 volatile unsigned int __at(0xC8CB) probe_bg_camera_conflict;
 volatile unsigned int __at(0xC8CD) probe_bg_camera_applied;
@@ -617,10 +663,8 @@ static unsigned char pose_facing_offset(const PoseRef *ref, unsigned char side,
 }
 
 /* Sobe ate `budget` pares (64 B cada) do pending; budget==0xFF sobe o pose
- * inteiro (usado apenas no boot, com display ainda OFF). Lote B.2: o laco de
- * producao chama com UPLOAD_CHUNK_PAIRS por lado (orcamento ainda nao
- * aprovado). Trabalho especulativo pode pausar para priorizar pedido real;
- * retorna os pares subidos para o pico por VBlank (probe_upload_maxvbl). */
+ * inteiro (usado apenas no boot, com display ainda OFF). Trabalho especulativo
+ * pode pausar para priorizar pedido real; retorna os pares subidos. */
 #if LUTA_SPECULATIVE_PREFETCH
 /* Publicar so um pending completo que ja tenha sido pedido pela logica. */
 static void promote_pending(unsigned char side) {
@@ -664,17 +708,19 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     SMS_saveROMBank();
     SMS_mapROMBank(ref->bank);
     while (budget && pending[side].loaded_pairs < pending[side].n_pairs) {
-        /* A API brief recebe size em byte: 4 pares seriam 256 e
-         * truncariam para zero. Tres pares consecutivos cabem em 192 B e
-         * preservam a mesma ordem e janela de patterns da pose. */
+        /* A API brief recebe size em byte: quatro pares seriam 256 e
+         * truncariam para zero. A variante word remove esse limite; continua
+         * sendo candidata de prazo, não uma autorização de budget. */
         batch = (unsigned char)(pending[side].n_pairs - pending[side].loaded_pairs);
         if (batch > budget) batch = budget;
+#if !LUTA_STREAM_WIDE_COPY
         if (batch > 3u) batch = 3u;
+#endif
         vram = (unsigned int)(pending[side].base_pair +
                               pending[side].loaded_pairs) * 64u;
         source = (const unsigned char *)(0x8000u + pose_offset +
                               (unsigned int)pending[side].loaded_pairs * 64u);
-        SMS_VRAMmemcpy_brief(vram, source, (unsigned char)(batch << 6));
+        STREAM_UPLOAD_PAIRS(vram, source, batch);
         pending[side].loaded_pairs = (unsigned char)(pending[side].loaded_pairs + batch);
         probe_uploaded_pairs += batch;
         budget = (unsigned char)(budget - batch);
@@ -697,6 +743,37 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     }
     return moved;
 }
+
+/* Distribui um orcamento agregado entre os dois pending. A primeira chamada
+ * recebe o teto; qualquer sobra vai ao outro lado. O chamador alterna
+ * first_side a cada frame para impedir prioridade permanente. */
+#if LUTA_UPLOAD_AGGREGATE
+static unsigned char stream_pending_budget(unsigned char first_side,
+                                           unsigned char budget,
+                                           unsigned char *moved_p1,
+                                           unsigned char *moved_p2) {
+    unsigned char first_moved, second_moved;
+
+    *moved_p1 = 0u;
+    *moved_p2 = 0u;
+    if (first_side > 1u || budget == 0u) return 0u;
+
+    first_moved = stream_pending(first_side, budget);
+    second_moved = 0u;
+    if (first_moved < budget)
+        second_moved = stream_pending((unsigned char)(first_side ^ 1u),
+                                      (unsigned char)(budget - first_moved));
+
+    if (first_side == 0u) {
+        *moved_p1 = first_moved;
+        *moved_p2 = second_moved;
+    } else {
+        *moved_p1 = second_moved;
+        *moved_p2 = first_moved;
+    }
+    return (unsigned char)(first_moved + second_moved);
+}
+#endif
 
 #if LUTA_SPECULATIVE_PREFETCH
 static void cancel_prefetch(unsigned char side) {
@@ -1012,6 +1089,56 @@ static unsigned int bg_shadow[BG_MAP_W * BG_MAP_H];
 static const unsigned char *bg_previous_meta;
 static unsigned char bg_previous_base, bg_previous_pairs, bg_previous_full, bg_dirty, bg_valid;
 static unsigned char bg_scroll_x, bg_scroll_y;
+#if LUTA_BG_DIFF_MAP
+static unsigned char bg_previous_map_valid;
+static unsigned char bg_map_top, bg_map_height;
+static unsigned char bg_map_rect_valid;
+static unsigned char bg_actor_map_valid;
+static unsigned char bg_actor_top, bg_actor_height;
+
+/* O construtor do shadow une as linhas do ator anterior e do atual. A PNT
+ * grava linhas inteiras da sombra, sem varredura de diff nem copia de patch. */
+static void reset_bg_map_rect(unsigned char full) {
+    bg_map_rect_valid = full;
+    if (full) {
+        bg_map_top = 0u;
+        bg_map_height = BG_MAP_H;
+    } else {
+        bg_map_top = bg_map_height = 0u;
+    }
+}
+
+static void include_bg_map_rows(unsigned char top, unsigned char height) {
+    unsigned char bottom, current_bottom;
+    if (!height || top >= BG_MAP_H) return;
+    if ((unsigned int)top + height > BG_MAP_H)
+        height = (unsigned char)(BG_MAP_H - top);
+    bottom = (unsigned char)(top + height - 1u);
+    if (!bg_map_rect_valid) {
+        bg_map_top = top;
+        bg_map_height = height;
+        bg_map_rect_valid = 1u;
+        return;
+    }
+    current_bottom = (unsigned char)(bg_map_top + bg_map_height - 1u);
+    if (top < bg_map_top) bg_map_top = top;
+    if (bottom > current_bottom) current_bottom = bottom;
+    bg_map_height = (unsigned char)(current_bottom - bg_map_top + 1u);
+}
+
+static unsigned char bg_map_rect_cells(void) {
+    return (unsigned char)(BG_MAP_W * bg_map_height);
+}
+
+static void commit_bg_map_rect(const unsigned int *shadow,
+                               unsigned char top,
+                               unsigned char height) {
+    if (!height) return;
+    SMS_loadTileMapArea(8u, 8u + top,
+                        shadow + (unsigned int)top * BG_MAP_W,
+                        (unsigned char)BG_MAP_W, height);
+}
+#endif
 
 /* Nao recria pixels: referencia os dois patterns 8x8 ja residentes para
  * cada celula TALL. Retorna falha antes de publicar uma tabela invalida. */
@@ -1021,13 +1148,39 @@ static unsigned char build_bg_shadow(const unsigned char *meta, unsigned char n_
     unsigned char i, count;
     signed int sx, sy;
     unsigned int dx, dy, local_tile, tile, index;
+#if LUTA_BG_DIFF_MAP
+    unsigned char map_y, actor_valid, actor_top, actor_bottom;
+#endif
     if (!meta || n_pairs == 0u ||
         (unsigned int)base_pair + n_pairs > POOL_PAIRS)
         return 0u;
+#if LUTA_BG_DIFF_MAP
+    actor_valid = 0u;
+    actor_top = BG_MAP_H;
+    actor_bottom = 0u;
+    reset_bg_map_rect((unsigned char)!bg_previous_map_valid);
+    if (bg_previous_map_valid && bg_actor_map_valid)
+        include_bg_map_rows(bg_actor_top, bg_actor_height);
     for (i = 0u; i < BG_MAP_W * BG_MAP_H; i++)
         bg_shadow[i] = SOLID_BG_TILE;
+#else
+    for (i = 0u; i < BG_MAP_W * BG_MAP_H; i++)
+        bg_shadow[i] = SOLID_BG_TILE;
+#endif
     for (count = 0u; count < 64u; count++) {
-        if (meta[0] == METASPRITE_END) return 1u;
+        if (meta[0] == METASPRITE_END) {
+#if LUTA_BG_DIFF_MAP
+            bg_actor_map_valid = actor_valid;
+            if (actor_valid) {
+                bg_actor_top = actor_top;
+                bg_actor_height = (unsigned char)(actor_bottom - actor_top + 1u);
+                include_bg_map_rows(bg_actor_top, bg_actor_height);
+            } else {
+                bg_actor_top = bg_actor_height = 0u;
+            }
+#endif
+            return 1u;
+        }
         dx = meta[0]; dy = meta[1]; local_tile = meta[2];
         if (dx >= BG_MAP_W * 8u || dy >= BG_MAP_H * 8u ||
             (dx & 7u) || (dy & 15u) || (local_tile & 1u) ||
@@ -1043,6 +1196,18 @@ static unsigned char build_bg_shadow(const unsigned char *meta, unsigned char n_
                 return 0u; /* PNT nao pode sobrepor duas celulas no mesmo lugar. */
             bg_shadow[index] = tile | TILE_USE_SPRITE_PALETTE | TILE_PRIORITY;
             bg_shadow[index + BG_MAP_W] = (tile + 1u) | TILE_USE_SPRITE_PALETTE | TILE_PRIORITY;
+#if LUTA_BG_DIFF_MAP
+            map_y = (unsigned char)(dy >> 3);
+            if (!actor_valid) {
+                actor_top = map_y;
+                actor_bottom = (unsigned char)(map_y + 1u);
+                actor_valid = 1u;
+            } else {
+                if (map_y < actor_top) actor_top = map_y;
+                if ((unsigned char)(map_y + 1u) > actor_bottom)
+                    actor_bottom = (unsigned char)(map_y + 1u);
+            }
+#endif
         }
         meta += 3;
     }
@@ -1053,6 +1218,11 @@ static void clear_bg_shadow(void) {
     unsigned char i;
     for (i = 0u; i < BG_MAP_W * BG_MAP_H; i++)
         bg_shadow[i] = SOLID_BG_TILE;
+#if LUTA_BG_DIFF_MAP
+    reset_bg_map_rect(1u);
+    bg_actor_map_valid = 0u;
+    bg_actor_top = bg_actor_height = 0u;
+#endif
     bg_previous_meta = 0;
     bg_previous_full = 0u;
     bg_valid = 0u;
@@ -2177,6 +2347,15 @@ static void worst_sample(void) {
     }
 }
 
+#if LUTA_DIAG_VBLANK_STAGES
+/* Um incremento por frame se a fronteira já alcançou o display ativo.
+ * O diagnóstico lê o delta cumulativo no DAP somente após o selo. */
+static void vblank_stage_sample(volatile unsigned int *counter) {
+    if (probe_frame <= WORST_FRAME_WINDOW && SMS_VCounterPort < 0xC0u)
+        (*counter)++;
+}
+#endif
+
 void main(void) {
     const Frame *boot_frame;
     const Frame *frames_now[2];
@@ -2235,7 +2414,14 @@ void main(void) {
     probe_audio_first_frame = 0u;
     /* Referencias volateis conservam o corredor no mapa mesmo sem trace. */
     probe_upload_trace_seq = 0u;
+#if LUTA_DIAG_VBLANK_STAGES
+    probe_vblank_stage_before_map = 0u;
+    probe_vblank_stage_after_map = 0u;
+    probe_vblank_stage_after_stream = 0u;
+    probe_vblank_stage_after_sat = 0u;
+#else
     probe_upload_trace[0] = 0u;
+#endif
     probe_prefetch_reserved_p1 = 0u;
     probe_prefetch_reserved_p2 = 0u;
     probe_prefetch_hit_p1 = 0u;
@@ -2243,6 +2429,10 @@ void main(void) {
     probe_prefetch_discarded = 0u;
     probe_bg_invalid = 0u;
     probe_bg_map_updates = 0u;
+#if LUTA_BG_DIFF_MAP
+    probe_bg_map_cells_plan_lo = 0u;
+    probe_bg_map_cells_plan_hi = 0u;
+#endif
     probe_bg_left_risk = 0u;
     probe_bg_scroll_late = 0u;
     probe_bg_map_late = 0u;
@@ -2313,6 +2503,13 @@ void main(void) {
     bg_previous_meta = 0;
     bg_previous_base = bg_previous_pairs = bg_previous_full = 0u;
     bg_dirty = bg_valid = bg_scroll_x = bg_scroll_y = 0u;
+#endif
+#if LUTA_BG_DIFF_MAP
+    bg_previous_map_valid = 0u;
+    bg_map_top = bg_map_height = 0u;
+    bg_map_rect_valid = 0u;
+    bg_actor_map_valid = 0u;
+    bg_actor_top = bg_actor_height = 0u;
 #endif
 #if LUTA_BG_CAMERA
     bg_camera_x = 0u;
@@ -2415,6 +2612,19 @@ void main(void) {
         probe_frame = frames;
         logic_tick(frames_now, poses_req);
         sprites_build(frames_now, poses_req);
+#if LUTA_BG_DIFF_MAP
+        {
+            unsigned char area;
+            unsigned int old_cells;
+            if (bg_dirty) {
+                area = bg_map_rect_cells();
+                old_cells = probe_bg_map_cells_plan_lo;
+                probe_bg_map_cells_plan_lo = (unsigned int)(old_cells + area);
+                if (probe_bg_map_cells_plan_lo < old_cells)
+                    probe_bg_map_cells_plan_hi++;
+            }
+        }
+#endif
 #if LUTA_PRESENT_HIT
         /* Dano e guarda usam o quadro que esta na sombra da SAT agora.
          * O push de corpo fica depois, com a ordem de x anterior ao passo. */
@@ -2426,10 +2636,13 @@ void main(void) {
         SMS_waitForVBlank();
         vblank_account();
         /* Lote B.2: janela registrada (comeco = VCounter ao entrar no work;
-         * fim = probe_vline/probe_vbl_exit_max em worst_sample) e teto
-         * candidato POR LADO por VBlank. Pedidos reais precedem especulacao. */
+         * fim = probe_vline/probe_vbl_exit_max em worst_sample). Pedido real
+         * precede especulacao; a politica de quota depende do define candidato. */
         probe_phase = 2u;
         probe_vbl_entry = SMS_VCounterPort;
+#if LUTA_DIAG_VBLANK_STAGES
+        vblank_stage_sample(&probe_vblank_stage_before_map);
+#endif
 #if LUTA_BG_ACTOR
         /* H-scroll e ao vivo em HBlank: atualizar ANTES dos uploads tenta
          * evitar que uma transferencia longa mude o deslocamento no meio da tela.
@@ -2438,30 +2651,50 @@ void main(void) {
         SMS_setBGScrollY(bg_scroll_y);
         if (SMS_VCounterPort < 0xC0u) probe_bg_scroll_late++;
         if (bg_dirty) {
+#if LUTA_BG_DIFF_MAP
+            commit_bg_map_rect(bg_shadow, bg_map_top, bg_map_height);
+            bg_previous_map_valid = 1u;
+#else
             SMS_loadTileMapArea(8, 8, bg_shadow, 8, 10);
+#endif
             bg_dirty = 0u;
             probe_bg_map_updates++;
             if (SMS_VCounterPort < 0xC0u) probe_bg_map_late++;
         }
 #endif
+#if LUTA_DIAG_VBLANK_STAGES
+        vblank_stage_sample(&probe_vblank_stage_after_map);
+#endif
         {
-            unsigned int moved = stream_pending(0u, UPLOAD_CHUNK_PAIRS);
+            unsigned char moved_p1, moved_p2;
 #if LUTA_UPLOAD_TRACE
-            unsigned char moved_p1 = (unsigned char)moved;
             unsigned char trace_index;
 #endif
+            unsigned int moved;
+#if LUTA_UPLOAD_AGGREGATE
+            moved = stream_pending_budget((unsigned char)(frames & 1u),
+                                          UPLOAD_CHUNK_PAIRS,
+                                          &moved_p1, &moved_p2);
+#else
+            moved = stream_pending(0u, UPLOAD_CHUNK_PAIRS);
+            moved_p1 = (unsigned char)moved;
             moved += stream_pending(1u, UPLOAD_CHUNK_PAIRS);
+            moved_p2 = (unsigned char)(moved - moved_p1);
+#endif
 #if LUTA_UPLOAD_TRACE
             trace_index = (unsigned char)((probe_upload_trace_seq & 7u) << 2);
             probe_upload_trace[trace_index] = (unsigned char)frames;
             probe_upload_trace[trace_index + 1u] = (unsigned char)(frames >> 8);
             probe_upload_trace[trace_index + 2u] = moved_p1;
-            probe_upload_trace[trace_index + 3u] = (unsigned char)(moved - moved_p1);
+            probe_upload_trace[trace_index + 3u] = moved_p2;
             probe_upload_trace_seq++;
 #endif
             if (moved > probe_upload_maxvbl)
                 probe_upload_maxvbl = moved;
         }
+#if LUTA_DIAG_VBLANK_STAGES
+        vblank_stage_sample(&probe_vblank_stage_after_stream);
+#endif
         SMS_copySpritestoSAT();
 #if LUTA_CONTACT_STAMPS
         contact_committed[0] = contact_prepared[0];
@@ -2469,6 +2702,9 @@ void main(void) {
 #endif
 #if LUTA_DIAG_PSG
         diag_sfx_tick();
+#endif
+#if LUTA_DIAG_VBLANK_STAGES
+        vblank_stage_sample(&probe_vblank_stage_after_sat);
 #endif
         worst_sample();
     }

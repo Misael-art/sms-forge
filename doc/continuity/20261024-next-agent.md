@@ -470,3 +470,70 @@ revisão visual do BG-only. A sobreposição depende de decisão humana entre
 margem visual e fidelidade do pusher. Manter os 55 IDs abertos; este lote não
 promove câmera, composição, deadline, vínculo asset→ROM ou delivery. Não
 iniciar compilação ou sessão simultânea às medições.
+
+## Continuidade 2026-10-28 — streaming de poses
+
+O lote seguinte experimentou três ramos opt-in sobre o caminho híbrido: faixa
+incremental da PNT, prefetch especulativo e cópia word pela API oficial
+`SMS_VRAMmemcpy`. A faixa do BG preservou pixel a pixel o checkpoint pareado,
+mas a ROM ainda marcou 1759/3000 derrames (`vline_min=2`). O contador de
+estágios viu 1731 quadros já em display ativo após streaming e 1759 após SAT;
+é observação booleana com custo de diagnóstico, não medição de ciclos. Prefetch
+marcou 1871/3000; a cópia word manteve 1759/3000. Todos os resultados reprovam
+orçamento e as opções ficam desligadas.
+
+O comparativo visual da cópia word não é pareado: ambos os bundles passaram
+checagem, mas os VDP frames foram 1141 e 1122, embora o probe lógico marcasse
+433; as posições diferiram e o diff de 1191 pixels não valida paridade. Ver
+`out/evidence/20261028_vblank_streaming/wide_copy_visual_ab.json` SHA
+`5a156a0f0be65d5f6a783ab41e5064ebc9fb531da03586700dfda0222695a326`.
+
+O relatório atual do `scale_pilot` passou `--self-check`, continua `blocked` e
+aponta como pior caso P2 kick: 20 pares novos/1280 B em 2 ticks AIR, sem reúso
+exato; 640 B por tick é cálculo de fonte e não prova de timing. Uma análise dos
+93 poses/186 facings encontrou 390 slots duplicados (24.960 B teóricos de
+dados), todos dentro de cada paleta e sem duplicata interna ao mesmo facing;
+o matchup selecionado não tem padrões byte a byte compartilhados entre atores.
+Isso não reduz uploads sem um alocador de padrões VRAM e remapeamento META.
+
+Artefatos locais: relatório `out/evidence/20261028_streaming_scale_pilot/current_profile.json`
+SHA `365288438cd1bf1428e6b9618c85d4887d32857c62f9f7dd7d2dd2214b48a158`;
+contagens/regras `out/evidence/20261028_vblank_streaming/pose_pair_reuse_analysis.json`
+SHA `e075beb78363cc89ea59092ee48e3962cb0d79fe972231675eb723571a0a49ad`.
+Sessões Emulicious usadas nesta etapa foram encerradas; não há emulador ou
+build deste owner em execução. Próximo experimento: usar o plano oficial de
+slots/remapeamento do `scale_pilot` numa transição com reúso do perfil
+`p1_ken` (ação 240/HK, frames 2→3, nove pares) e manter o pior P2 kick como
+controle negativo, medindo deadline, capacidade e imagem no mesmo estado antes
+de promover qualquer caminho.
+Manter todos os 55 IDs abertos e a build nominal intacta.
+
+Fechamento desta etapa: `src/main.c` SHA
+`9047930f93eb2f141bd4324e3da42c46c74ff815acf862756b7dd9500273f34a` gerou a
+ROM candidata default `out/candidates/20261028_vblank_streaming_default/rom/luta_mugem_rev2.sms`,
+SHA `d367abd19cfc9b221db3b069785d44fdda784b5a94a23c77dfb0b8df1e1684e5`
+(524288 B), sem defines opt-in. `build_record.json` SHA
+`899e5e4f58fdf58f57090e7f2244470caf61662d631f0fcda831e2789208bd22` registra
+build e validation_report pass; os outros cinco eixos seguem falsos. QA
+Emulicious privada `55225b8a22274a64a7aef72ebbb1d1ec`, frame 420, PNG SHA
+`41dbc4305b17ba4fe3c000b0c081462ad268563d0782fc7d2bbae14e3972947d`, canvas
+256×192; bundle passou e PID foi confirmado ausente. É boot/captura técnica,
+sem claim de gameplay, qualidade visual, FPS ou áudio.
+
+Focal: 17 testes passaram; suíte `--project rev2`: 300 passaram. Build routing
+self-check, debug markers, probe corridor (159 sondas/1486 B de folga),
+tilemap bounds (nenhuma escrita ilegal; altura variável não provada), vscroll,
+doc sync e hardware constants foram executados; causal persistence avançou e
+meaningful change passou para os eixos `fps_constante`/
+`memory_bank_atualizado`. A build nominal não foi sobrescrita. O estado causal
+JSON local tem SHA `e076762152a25ffb3d3c2571e5fe946eb142b2d1e71ea501363ea536301d1877`.
+Não fechar IDs nem declarar entrega. O passo seguinte continua sendo um plano
+de cache/remapeamento testado em runtime, partindo do perfil `p1_ken`, ação
+240/HK frames 2→3 (9 pares reutilizados) e do pior P2 kick como caso negativo.
+
+Proteção runtime local: `.runtime/backups/luta_mugem_rev2-runtime-20261028-vblank-streaming.tar.gz`
+(98.413.975 B, SHA `6812b8e5a23b05034c27670afed5e1a7c4dd00b4687a0738ffc76674fde2b585`),
+manifesto SHA `18bfb0452419754e4c458455b0f186f9e900ea85c34de8f0b1b4e4817d68a6e8`;
+27.544 arquivos e 484.824.066 B. `recovery_bundle.py verify` passou e
+confirmou a ROM candidata, screenshot e sidecars; a cópia fica no mesmo disco,
+sem substituição por backup externo.

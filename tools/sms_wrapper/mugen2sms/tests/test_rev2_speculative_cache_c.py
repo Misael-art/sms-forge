@@ -63,6 +63,8 @@ static void fake_copy(unsigned int dst, const void *src, unsigned char size) {
 #define SMS_mapROMBank(n) ((void)(n))
 #define SMS_restoreROMBank() ((void)0)
 #define SMS_VRAMmemcpy_brief(dst, src, size) fake_copy(dst, src, size)
+#define STREAM_UPLOAD_PAIRS(dst, src, pairs) \
+    SMS_VRAMmemcpy_brief((dst), (src), (unsigned char)((pairs) << 6))
 ''' + functions + r'''
 #define REQUIRE(c, msg) do { if (!(c)) { puts(msg); return 1; } } while (0)
 static void reset_slots(void) {
