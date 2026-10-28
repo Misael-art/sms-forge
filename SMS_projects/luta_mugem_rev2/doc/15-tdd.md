@@ -91,13 +91,23 @@ Não se reivindicam sobras da PNT inferior ou da SAT. O plano e os registradores
 amostrados estão no memory bank; não incluem HUD, FX ou a composição completa.
 
 A câmera experimental aplica o mesmo deslocamento horizontal aos dois
-atores quando suas caixas residentes cabem fora da coluna mascarada. Quando
-não cabem, registra conflito e mantém deslocamento zero; isso pode cortar
-pixels. A escolha da câmera não foi aprovada para produto. Tampouco foram
-qualificados facing, sobreposição, restauração, deadline ou HUD. A sonda de
-apresentação de P1 fica sem valor afirmativo em BG: preparar a PNT não prova
-o framebuffer. O teto de cor, as flags de prioridade/paleta e o orçamento de
-VRAM são os do VDP/SMSlib, sem uma paleta independente por lutador.
+atores. Escolhe o inteiro assinado mais próximo de zero, entre −64 e +64,
+que mantém a união das caixas residentes em x=8..256, fora da coluna
+mascarada. Sem solução, registra conflito e usa deslocamento zero. A sonda
+`probe_bg_camera_shift` guarda esse valor em complemento de dois; uma amostra
+à direita registrou −7 px contra zero no controle anterior. Com a mesma lista
+de 49 fronteiras VDP, os builds BG-only e BG+câmera tiveram pico máximo 7/linha
+e 10–16 entradas SAT; sprite-only teve pico 10 em 46 fronteiras. Isso mede
+somente essas ROMs e snapshots: poses não pareadas, sem revisão visual do
+BG-only. O vídeo encadeado do BG+câmera reprovou por sobreposição corporal,
+portanto o ramo negativo não resolve a composição. A câmera continua não
+aprovada e desligada por padrão. Tampouco foram qualificados facing,
+restauração, deadline ou HUD. A sonda de apresentação de P1 fica sem valor
+afirmativo em BG: preparar a PNT não prova o framebuffer. Com
+`LUTA_BG_ACTOR=1`, o código também força `LUTA_PRESENT_HIT=0`; o experimento
+não demonstra contato no frame publicado. O teto de cor, as flags de
+prioridade/paleta e o orçamento de VRAM são os do VDP/SMSlib, sem uma paleta
+independente por lutador.
 
 O GDD vigente declara `pose_budget`: encaixe do framebuffer X 2/3 e Y 6/7,
 escala extra 2/3 uniforme e idle de até quatro colunas de 8 px. A faixa
@@ -175,6 +185,26 @@ A implementação é aproximação: ainda não executa `Width`/`PlayerPush`,
 largura traseira ou push no ar. Geometria inválida é contada e não é
 substituída por constante. A cobertura da ROM é limitada aos roteiros do
 memory bank; pusher e facing não qualificam toda a física ou o combate.
+
+No frame visual reprovado VDP 348 da ROM `671ba646…`, uma sessão privada
+Emulicious repetida leu P1 no chão em x=222 e P2 no chão em x=240; os probes
+registraram 84 frames corrigidos pelo pusher, sem hitstop, hit ou dano. A
+folga é a soma de `ground.front` da fonte: 18+9 unidades MUGEN, convertidas
+pela escala 2/3 em 12+6=18 px. Os sprites idle têm 32 px de largura runtime,
+então os contornos visíveis se sobrepõem além das caixas de empurrão. Em VDP
+481, P2 estava no role de salto, y=53,3 px, enquanto ambos tinham x=240; isso
+é uma amostra do cruzamento permitido durante a suspensão aérea do pusher. A
+captura confirma um problema visual da composição, mas não autoriza alargar a
+colisão: isso mudaria o espaçamento derivado da fonte. A correção exige uma
+decisão de design ou contrato de margem visual, seguida por nova QA. A
+revisão visual permanece reprovada e nenhum eixo é promovido.
+
+As duas variantes híbridas também foram medidas em sessões independentes de
+3000 quadros selados: BG+câmera teve 1759 derrames (`vline_min=2`), BG-only
+1773 (`vline_min=2`). O build record vincula as mesmas fontes, gerados e
+toolchain; a diferença é o define `LUTA_BG_CAMERA` no manifesto/ROM. Uma
+amostra por build não atribui a diferença pequena à câmera; ambas reprovam
+VBlank e não fecham deadline.
 
 `LUTA_UPLOAD_TRACE=1` habilita somente em candidato o anel diagnóstico de
 8 registros com frame e pares efetivamente copiados por lado; o seq é

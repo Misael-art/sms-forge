@@ -413,3 +413,60 @@ Cópia local de continuidade verificada:
 `c12f81087eb2b953033c20d29e336ef455d6941246619e822d3623b7e7421d77`,
 manifesto com mesmo nome e extensão `.json`, 18273 arquivos. Continua no
 mesmo disco do owner; não é backup externo.
+
+## Retomada 2026-10-28 — câmera de borda e composição
+
+Raiz única `/home/misael/Projects/SMSForge`, branch
+`codex/host-bootstrap-continuity-20261024`, base `69824ce4f43892db65fc0a607ccbd5846206ac42`.
+A fonte atual `SMS_projects/luta_mugem_rev2/src/main.c` tem SHA-256
+`05c5de7ab3cf990fb5a434e0019b5f09c2b13b38e9986d44d08573824b3088fc`.
+O lote altera fonte, teste C host, memory bank, TDD, backlog e este handoff;
+revisar e publicar somente esses seis arquivos.
+
+A suíte rev2 terminou com **292 passed, 150 deselected** e o teste focal da
+câmera com 2 casos aprovados. `audit_debug_markers.py` e
+`audit_probe_corridor.py` passaram na fonte/candidata. Os gates documentais
+`audit_doc_sync.py` e `audit_hardware_constants.py` passaram após esta revisão
+do handoff. `measure_worst_frame.py --self-check` passou. A
+chamada de `audit_rom_asset_binding.py` sem manifesto só confirmou que ausência
+é permitida; não há prova asset→ROM neste lote.
+
+A câmera é experimental e desligada por padrão. A ROM BG+câmera
+`671ba6468ac5fa28d7e59c6f70e96adca740b38caf5dce62e9562dde525ffaac`
+registrou shift −7 px, 32 aplicações e zero conflito na captura de borda; o
+controle anterior `0180d1b5…` ficou em zero. A revisão visual válida da sessão
+`e8ea26dce3de427d8ae422daa5c0099b` reprovou por sobreposição. Em roteiro
+BlastEm de 49 fronteiras, sprite-only `7523bd0c…` excedeu oito sprites/linha
+em 46 amostras (pico 10; SAT até 33); BG+câmera e BG-only
+`dfe5a9c7a7de8372e50562d1a551a52e01a5d29c8eb9100d88add776339c8d1f` ficaram
+em no máximo sete por linha e SAT até 16. A trajetória foi igual, mas as poses
+não foram pareadas; BG-only ainda não tem revisão visual. Com BG ativo,
+`LUTA_PRESENT_HIT=0`.
+
+O frame de vídeo 228/VDP 348 foi reproduzido em duas sessões Emulicious
+privadas, com PNG SHA
+`5cc562b10a224d1a3b104f7aa8aa0cc3153b3c9748d11dea97b59230d7f1914a`.
+RAM confirmou P1/P2 no chão em x=222/240, gap 18 px, pusher=84 e sem hitstop,
+hit ou dano. `ground.front` da fonte (18+9 na escala 2/3 = 12+6 px) deixa
+os contornos idle de 32 px sobrepostos. VDP 481 observou P2 no ar e
+cruzamento permitido, em estado separado. Os bundles privados
+`out/evidence/20261028_pusher_geometry/` passaram `check-bundle`; sessões
+`3e3b6f2097e34666964aa5438d74fc2f` e
+`8d3fd83a13024d85bc106323e1c8900f` foram encerradas. Não alargar colisão sem
+contrato de margem visual ou decisão de design: isso altera o espaçamento
+derivado da fonte.
+
+Worst-frame selou 3000 quadros em 180 s por build: BG+câmera, sessão
+`9908ac359b794dc09fd2a1adbc086e3c`, `vovf_delta=1759`, `vline_min=2`; BG-only,
+sessão `60d5e84e7e764c8cabe2463d767f0fd7`, `vovf_delta=1773`, `vline_min=2`.
+Fonte, gerados, toolchain e demais defines coincidem; apenas
+`LUTA_BG_CAMERA` e o manifesto correspondente diferem. Uma rodada por variante
+não prova que a diferença de 14 seja efeito da câmera. Ambas reprovam VBlank;
+as sessões foram encerradas.
+
+Próximo passo seguro: investigar e reduzir o derrame de VBlank por uma
+hipótese mensurável, preservando baseline e orçamento. Em paralelo, obter
+revisão visual do BG-only. A sobreposição depende de decisão humana entre
+margem visual e fidelidade do pusher. Manter os 55 IDs abertos; este lote não
+promove câmera, composição, deadline, vínculo asset→ROM ou delivery. Não
+iniciar compilação ou sessão simultânea às medições.

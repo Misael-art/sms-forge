@@ -454,7 +454,7 @@ static unsigned char fail_valid[2];
 static unsigned char fail_size[2];
 static CacheSlot current[2], pending[2];
 #if LUTA_BG_CAMERA
-static unsigned char bg_camera_x;
+static signed int bg_camera_x;
 #endif
 #if LUTA_DIAG_TELEMETRY
 static unsigned char line_diff[DIAG_FLOOR];
@@ -1060,19 +1060,21 @@ static void clear_bg_shadow(void) {
 }
 
 #if LUTA_BG_CAMERA
-/* Preserva o extremo direito da bounding box se houver espaco para tirar
- * ambos os atores da coluna mascarada. Conflito e medido, nao escondido. */
-static unsigned char bg_camera_adjust(signed int left, signed int right,
-                                      unsigned char *conflict) {
-    signed int needed;
+/* A translação mais próxima de zero deve acomodar as duas bounding boxes
+ * entre x=8 (coluna mascarada) e x=256, limitada a 64 px por direção.
+ * Se não existe solução, manter a câmera e registrar o conflito. */
+static signed int bg_camera_adjust(signed int left, signed int right,
+                                   unsigned char *conflict) {
+    signed int min_shift = 8 - left;
+    signed int max_shift = 256 - right;
     *conflict = 0u;
-    if (left >= 8) return 0u;
-    needed = 8 - left;
-    if (needed > 64 || right + needed > 256) {
+    if (left > right || min_shift > max_shift || min_shift > 64 || max_shift < -64) {
         *conflict = 1u;
-        return 0u;
+        return 0;
     }
-    return (unsigned char)needed;
+    if (min_shift > 0) return min_shift;
+    if (max_shift < 0) return max_shift;
+    return 0;
 }
 
 static signed int bg_camera_actor_origin(unsigned char side) {
@@ -1090,7 +1092,7 @@ static void plan_bg_camera(void) {
     const Frame *b = current[1].frame;
     signed int x0, x1, left, right0, right1, right;
     unsigned char conflict;
-    bg_camera_x = 0u;
+    bg_camera_x = 0;
     if (!a || !b || !a->axis || !b->axis) {
         probe_bg_camera_shift = 0u;
         probe_bg_camera_conflict++;
@@ -1103,7 +1105,8 @@ static void plan_bg_camera(void) {
     right1 = x1 + (signed int)(((unsigned int)b->width + 7u) & 0xFFF8u);
     right = right0 > right1 ? right0 : right1;
     bg_camera_x = bg_camera_adjust(left, right, &conflict);
-    probe_bg_camera_shift = bg_camera_x;
+    /* Byte em complemento de dois; a sonda nao mede posicao ou pixels. */
+    probe_bg_camera_shift = (unsigned char)bg_camera_x;
     if (conflict) probe_bg_camera_conflict++;
     if (bg_camera_x) probe_bg_camera_applied++;
 }

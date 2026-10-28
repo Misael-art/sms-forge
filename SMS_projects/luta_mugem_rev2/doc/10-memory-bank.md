@@ -1,5 +1,104 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-28 — SAT no roteiro de aproximação
+
+Na ROM `7523bd0c…`, o BlastEm SMS2 privado
+`blastem-sms-d7f0598518844c2bb3b8935672e8d548` amostrou a SAT em 49
+fronteiras VDP de um roteiro de aproximação e ataque. Os picos foram 8 em 3
+amostras, 9 em 14 e 10 em 32; portanto 46/49 excederam oito entradas/linha.
+O maior número de linhas excedidas numa amostra foi 32. Na fronteira VDP 488,
+26 entradas, pico 9 e 17 linhas excedidas; o simulador lista uma entrada
+descartada nas primeiras cinco linhas reportadas. Auditoria BlastEm passou
+como consistência de registros; sessão encerrada. `inspect_sat.py` e o
+simulador passaram `--self-check` antes da leitura. O JSON em
+`out/evidence/20261028_interrupt_sat/sat_observations.json` tem SHA
+`6858c5b6b3f2f1d601be4ef3f9c1758241bbfcd866b630edceb0e8259f84a6c5`;
+receita `out/candidate_configs/blastem_interrupt_20261028.json` tem SHA
+`3fd3afc282fee4087668a2b2dcb616825f92e59ce0eec129a6f99703e36db69e`.
+São snapshots de outra sessão e outro emulador, não correspondência automática
+com o framebuffer Emulicious de número igual nem cobertura de todos os golpes.
+Não aprovam timing, áudio, gameplay ou hardware físico.
+
+## 2026-10-28 — câmera com deslocamento para a borda oposta (candidata)
+
+A implementação `src/main.c` de SHA `05c5de7a…` calcula o deslocamento
+horizontal assinado mais próximo de zero que mantém a união das caixas dos
+dois lutadores entre x=8 e x=256, limitado a 64 px por direção. A ROM híbrida
+`out/candidates/20261028_bg_camera_both_edges/rom/luta_mugem_rev2.sms`
+(`671ba646…`, `LUTA_BG_ACTOR=1`, `LUTA_BG_CAMERA=1`, quota 8) foi comparada
+com o controle `0180d1b5…`, compilado do código anterior com a mesma receita.
+Na captura privada do roteiro para a direita, ambos registraram x=240 no
+probe do frame VDP 481. A candidata registrou shift `0xF9` (−7 px), 32
+aplicações e zero conflitos; o controle registrou shift/aplicações/conflitos
+zero. São snapshots após input stepped, não sincronismo de scanout nem prova
+de que todo frame preserva o contorno.
+
+A sessão nativa `c794b07554e540a7825a348b36c8fc60` e a do controle
+`46cb58a8e40242aba657918c6c72a174` foram encerradas. A revisão visual
+encadeada da candidata, sessão `e8ea26dce3de427d8ae422daa5c0099b`, foi
+auditada como pacote válido com `tests_passed=false`: encontrou sobreposição
+forte dos corpos na ida à direita (frames de vídeo 96 e 228) e na volta
+(24 e 36). Não atribui a causa à câmera nem prova alinhamento por pixel.
+O shift negativo corrige a direção da translação no caso medido; não corrige
+a composição e permanece opt-in, com `LUTA_BG_ACTOR=0` e `LUTA_BG_CAMERA=0`
+na build default.
+
+Composição continua blocker separado: a ROM sprite-only `7523bd0c…` excedeu
+8 entradas/linha em 46/49 snapshots do roteiro de aproximação/ataque, com
+pico 10 em 32 snapshots. O mesmo arquivo de roteiro, com a mesma lista de
+fronteiras VDP, foi executado no candidato híbrido `671ba646…` em BlastEm SMS2
+privado `blastem-sms-8af9911524f6467a8b73c87b30f29995`; a auditoria passou e a
+sessão encerrou. Dos 49 snapshots híbridos, 37 tiveram pico 4 e 12 pico 7;
+nenhum excedeu oito. A SAT teve 10–16 entradas. O JSON tem SHA
+`8cea0523541f7139428356d761de09d3ed731b25e79248c0f0fb5636c157ac2f` e a
+auditoria `f5e815b0fd36a9a847ae2309bee9813ec456207cef45477f1d4725e75f2c1636`.
+É um resultado promissor para essa trajetória, mas os estados/poses internos
+entre ROMs não foram pareados; BG e câmera estavam ambos ligados. Não prova
+conteúdo BG íntegro, camada/prioridade correta, ausência de sobreposição,
+HUD/FX, nem prazo. O build BG-only, com a mesma fonte `05c5de7a…` e apenas
+`LUTA_BG_CAMERA=0`, gerou ROM `dfe5a9c7…`. No BlastEm privado
+`blastem-sms-50d2360fe9c44762863b050d257659bf`, a auditoria passou e o mesmo
+roteiro produziu pico 4 em 45 snapshots e 7 em 4; nenhum >8, SAT entre 10 e
+16 entradas. O JSON tem SHA
+`8b36bbb3db93046441da4190fcb1a20a07372f83dc87bb4fd159c931f8a99719`; a lista
+de fronteiras VDP coincide com as outras duas ROMs. A variante BG+câmera teve
+37 picos 4 e 12 picos 7; as duas mantiveram limite máximo 7. Isso isola a
+configuração da câmera, não o estado AIR por fronteira: os picos coincidiram
+em 39/49 e a contagem SAT em 30/49 entre as duas candidatas. Não há leitura de
+poses pareadas nem revisão visual do BG-only. `LUTA_PRESENT_HIT=0` é forçado
+com BG habilitado, então nenhum ganho de SAT prova contato coerente. O vídeo
+visual do BG+câmera ainda reprova por sobreposição. Duas sessões privadas
+Emulicious reproduziram o frame de vídeo 228 (VDP 348), com o mesmo PNG
+`5cc562b1…` e ROM `671ba646…`; os bundles em
+`out/evidence/20261028_pusher_geometry/` passaram `check-bundle` e foram
+encerrados. No estado RAM de VDP 348, P1 estava no chão em x=222 (role 1,
+walk-forward), P2 no chão em x=240 (role 5, guarda), `hitstop=0`, dano e
+eventos de hit zero, geometria inválida zero, e `probe_pusher_frames=84`.
+Logo, a sobreposição observada nesse frame é no chão, com gap lógico exato de
+18 px. O `ground.front` dos CNS de origem é 18 para P1
+(`data/derived/ryu/ryu/ryu.cns`) e 9 para P2
+(`data/derived/ken/ken8/ken.cns`); na escala extra 2/3 isso vira 12+6=18 px.
+Os dois frames idle têm 32 px de largura runtime. A evidência identifica a
+diferença entre contorno desenhado e largura frontal da fonte; aumentar o
+pusher sem decisão de design alteraria o espaçamento derivado do MUGEN.
+
+Na mesma sequência, VDP 481 registrou x=240/240, P2 no role de salto com
+y=53,3 px e velocidade vertical −6,47 px/frame; isso confirma que o pusher
+pode ser suspenso no ar e permite cruzamento. Esse estado não é a causa do
+frame visual 228, que foi amostrado no chão. A causa visual não foi atribuída
+à câmera. A revisão continua `tests_passed=false`; não aprova composição,
+fidelidade, contato ou entrega. BG-only continua sem revisão visual, `LUTA_BG_ACTOR`
+mantém `LUTA_PRESENT_HIT=0`, e nenhum ID foi fechado.
+
+O worst-frame medido em duas sessões privadas selou 3000 quadros com 180 s de
+execução autônoma. BG+câmera (`671ba646…`, sessão
+`9908ac359b794dc09fd2a1adbc086e3c`) teve 1759 derrames e `vline_min=2`;
+BG-only (`dfe5a9c7…`, sessão `60d5e84e7e764c8cabe2463d767f0fd7`) teve 1773
+e `vline_min=2`. Ambos reprovam VBlank. Fonte, gerados, toolchain e demais
+defines coincidem; só `LUTA_BG_CAMERA=1` e o manifesto correspondente mudam.
+A diferença de 14 derrames em uma execução por variante não prova ganho da
+câmera, e nenhum dos resultados fecha deadline ou orçamento.
+
 ## 2026-10-27 — interrupção de ataque (candidata)
 
 O combate do schema 7 agora invalida a instância de ataque da vítima ao

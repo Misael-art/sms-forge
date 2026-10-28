@@ -93,6 +93,14 @@
       "status": "partial_not_delivery",
       "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
       "summary": "Schema 7 invalida ataque da vítima atingida e conserva a maior pausa em troca não letal; testes host cobrem lados, guarda e pausas assimétricas. Uma sessão observou parcialmente a interrupção de P1 em ROM, sem provar o caso espelhado ou caixas futuras. QA nativa viu dano 112 mas reprovou sobreposição visual. NTSC e pior quadro reprovaram; composição, deadline e KO simultâneo continuam abertos."
+    },
+    {
+      "date": "2026-10-28",
+      "ids": ["ID01", "R02", "R03", "R06", "R09"],
+      "closed_ids": [],
+      "status": "partial_not_delivery",
+      "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+      "summary": "A câmera assinada aplicou −7 px na borda direita, contra shift 0 no controle; a revisão visual reprovou. No roteiro BlastEm, BG-only e BG+câmera ficaram em pico SAT máximo 7/linha; sprite-only excedeu em 46/49 e chegou a 10. No frame Emulicious VDP 348, RAM confirmou ambos no chão em x=222/240, gap 18 px = ground.front MUGEN 18+9 na escala 2/3 (12+6); idle desenha 32 px. A sobreposição visual decorre da arte além da largura frontal; não ampliar colisão sem contrato de design. VDP 481 confirmou P2 no ar, com cruzamento permitido. Worst-frame reprovou ambas as variantes: 1759/1773 derrames em 3000, vline_min=2. A suíte rev2 passou 292 testes, 150 deselecionados. BG força LUTA_PRESENT_HIT=0. Visual continua falho; BG-only segue sem revisão, nenhum ID fechado."
     }
   ],
   "count": 55,

@@ -13,23 +13,47 @@ pytestmark=[pytest.mark.rev2,pytest.mark.skipif(shutil.which('cc') is None,reaso
 
 def test_camera_shift_is_bounded_and_reports_infeasible_extents(tmp_path):
     source=SOURCE.read_text(encoding='utf-8')
-    m=re.search(r'^static unsigned char bg_camera_adjust\([^\n]*\n?.*?^}',source,re.M|re.S)
+    m=re.search(r'^static signed int bg_camera_adjust\([^\n]*\n?.*?^}',source,re.M|re.S)
     assert m,'camera bounds function missing'
     c=r'''
 #include <stdio.h>
 ''' + m.group() + r'''
 #define CHECK(left,right,want,conflict) do { unsigned char bad=99u; \
-    unsigned char got=bg_camera_adjust(left,right,&bad); \
+    signed int got=bg_camera_adjust(left,right,&bad); \
     if (got!=(want) || bad!=(conflict)) { \
-      printf("bounds %d %d got %u/%u expected %u/%u\n",left,right,got,bad,want,conflict);return 1; } \
+      printf("bounds %d %d got %d/%u expected %d/%u\n",left,right,got,bad,want,conflict);return 1; } \
   } while(0)
 int main(void) {
-    CHECK(1, 176, 7u, 0u);
-    CHECK(8, 256, 0u, 0u);
-    CHECK(-4, 244, 12u, 0u);
-    CHECK(-4, 248, 0u, 1u);
-    CHECK(0, 255, 0u, 1u);
-    CHECK(-80, 100, 0u, 1u);
+    CHECK(1, 176, 7, 0u);
+    CHECK(8, 256, 0, 0u);
+    CHECK(-4, 244, 12, 0u);
+    CHECK(-4, 248, 0, 1u);
+    CHECK(0, 255, 0, 1u);
+    CHECK(-80, 100, 0, 1u);
+    CHECK(-56, 192, 64, 0u);
+    CHECK(-57, 191, 0, 1u);
+    CHECK(195, 271, -15, 0u);
+    CHECK(72, 320, -64, 0u);
+    CHECK(73, 321, 0, 1u);
+    CHECK(0, 260, 0, 1u);
+    CHECK(100, 99, 0, 1u);
+    /* Independent bounded search: find the feasible offset nearest zero. */
+    for (int left=-72;left<=260;left+=4) {
+        for (int right=left;right<=340;right+=4) {
+            int found=0, expected=0, distance=1000;
+            for (int shift=-64;shift<=64;shift++) {
+                int magnitude=shift < 0 ? -shift : shift;
+                if (left+shift>=8 && right+shift<=256 && magnitude<distance) {
+                    found=1;expected=shift;distance=magnitude;
+                }
+            }
+            unsigned char bad=99; int got=bg_camera_adjust(left,right,&bad);
+            if (bad!=!found || (found && got!=expected) || (!found && got!=0)) {
+                printf("search mismatch %d %d => %d/%u expected %d/%d\n",
+                       left,right,got,bad,expected,!found); return 1;
+            }
+        }
+    }
     return 0;
 }
 '''
@@ -43,7 +67,7 @@ int main(void) {
 def test_camera_plan_uses_both_resident_extents_and_counts_conflicts(tmp_path):
     source=SOURCE.read_text(encoding='utf-8')
     functions=[]
-    for name,kind in [('bg_camera_adjust','unsigned char'),
+    for name,kind in [('bg_camera_adjust','signed int'),
                       ('bg_camera_actor_origin','signed int'),
                       ('plan_bg_camera','void')]:
         m=re.search(r'^static '+kind+' '+name+r'\([^\n]*\n?.*?^}',source,re.M|re.S)
@@ -57,7 +81,8 @@ typedef struct { unsigned int x; } Actor;
 typedef struct { const Frame *frame; unsigned char face; } Slot;
 static Actor fighter[2];
 static Slot current[2];
-static unsigned char bg_camera_x,probe_bg_camera_shift;
+static signed int bg_camera_x;
+static unsigned char probe_bg_camera_shift;
 static unsigned int probe_bg_camera_conflict,probe_bg_camera_applied;
 '''+'\n'.join(functions)+r'''
 #define REQUIRE(cond,msg) do { if (!(cond)) { puts(msg);return 1; } } while(0)
@@ -75,6 +100,11 @@ int main(void) {
     plan_bg_camera();
     REQUIRE(bg_camera_x==0u && probe_bg_camera_shift==0u &&
             probe_bg_camera_conflict==1u,"opposite-edge conflict was hidden");
+    fighter[0].x=200u*256u;
+    plan_bg_camera();
+    REQUIRE(bg_camera_x==-16 && probe_bg_camera_shift==240u &&
+            probe_bg_camera_applied==2u && probe_bg_camera_conflict==1u,
+            "right-edge plan or encoded probe is wrong");
     current[1].frame=0;plan_bg_camera();
     REQUIRE(bg_camera_x==0u && probe_bg_camera_conflict==2u,
             "missing resident extent was not counted");
