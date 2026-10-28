@@ -32,6 +32,25 @@ pose residente precisam ser qualificados; fundo sólido é escopo; P1 de sprites
 é compartilhada; os 7 eixos e época visual delivery devem convergir na mesma
 ROM. Primeiro feche runtime e qualidade mensuráveis; ambição AAA não é selo.
 
+## 2026-10-27 — recover medido; guarda desta ROM ainda aberta
+
+A candidata `7f530db3357bffd170286e332bdfd55e4bd0504d08ac28382859c583831d79dc`
+(`out/candidates/20261027_hit_recover/`) aplica o schema 7: pause do
+HitDef e recover do defensor depois do pause. Na sessão privada
+`b615f99a3d864c8d9aaf9fad72fa10b2`, stepping, o HP de Ryu (atacante P1,
+pose 34) tirou 112 de P2 (vida 1000→888) com a pose submetida igual à
+lógica. Pause 16/16 e recover 21; a soma dos degraus do log é 21. P2
+ignorou o agachar da IA até o recover chegar a 0 e P1 voltou a andar a
+3 px por frame de lógica. O framebuffer `hit.png` mostra os dois
+lutadores no fundo preto. Não houve guarda, troca de lado, HUD nem
+medição de prazo. O tick do trace é 52 e o `probe_frame` da amostra é
+53: topo do laço seguinte, pause ainda cheio. R06 e os 55 IDs seguem
+abertos. A nominal não foi sobrescrita. Detalhe no memory bank.
+
+O próximo passo nesta mesma ROM é uma guarda distinguível: atrasar o
+botão 1 até o beat 3 ou 4 da IA, com P2 agachado ou em guarda. Não
+reconstruir `20261027_present_hit` nem regenerar o corte de facing.
+
 ## 2026-10-27 — acerto pela pose submetida
 
 O caminho de produção agora resolve guarda e dano pela pose submetida na

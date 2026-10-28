@@ -1,5 +1,80 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — recover do golpe submetido (candidato, stepping)
+
+O schema 7 está na candidata
+`7f530db3357bffd170286e332bdfd55e4bd0504d08ac28382859c583831d79dc`
+(524288 bytes,
+`out/candidates/20261027_hit_recover/rom/luta_mugem_rev2.sms`).
+Receita `.mddev/candidates/hit_recover_20261027.json`: o header gerado
+`out/generated/pose_budget_recovery_20261027` vem antes do corte de facing
+`pose_budget_facing_20261027`. Os bancos continuam os 24 do corte de facing.
+Defines: `LUTA_PRESENT_HIT`, `LUTA_CONTACT_TRACE`, `LUTA_DIAG_PSG`.
+A nominal `087df676…` e a candidata `5c5c6144…` não foram regravadas.
+Neste `.map`, `_probe_recover_p1` é `0xC0DE`, `_probe_recover_p2` é
+`0xC0DF`, `_contact_trace` é `0xC130`, `_probe_present_hits` é `0xC187`.
+Esses endereços não servem para a ROM anterior.
+
+P1 é Ryu (`ryu/ryu.def`). O SHA do corte de cena é
+`6db7e29d82fff1034e8c2ddab600e500fe8377ebdeef9b626fd6b580b812300d`;
+o pacote lido para o tempo do HitDef é
+`57c8fc2eff5389066ce08bf30f69d64b8ad74f1219958ef5762dabd336d9657c`.
+P2 é Ken (`ken8/ken8.def`): corte
+`b244ec9a105fa0131b37c075dc06b032a87cf0f839f46ec7054ac60d9bd6f14c`,
+tempo
+`9193f1cb5ae94a9e7ded195530b5ca735e10ca262fbc2e982a50e2f602bd5c97`.
+As colunas de dano não foram regeneradas e seguem os HitDefs derivados
+(Ryu HP 112, soco 42). Classe de fidelidade: aproximação. common1,
+gethit e knockdown continuam fora. No HP de Ryu, `guardtime` e `hittime`
+são ambos 21; a duração sozinha não separa guarda e acerto.
+
+Sessão privada Emulicious `b615f99a3d864c8d9aaf9fad72fa10b2`, stepping,
+não throughput. `check_bundle` verdadeiro: framebuffer informativo preso
+à sessão, sem aprovação de gameplay, áudio ou FPS. A captura
+`hit.png` (SHA
+`0580301b66c4812e0d0bf81fa7c736c156714c8450d67dd63c6c059764a9fa3e`,
+256×192, variância de luma 529,6) mostra dois lutadores distintos no
+fundo preto, sem HUD. Não prova orçamento de scanline nem que os pixels
+da pose 34 sejam os que o VDP varreu.
+
+A primeira amostra depois do dano é o frame VDP 207, `probe_frame` 53,
+tick do trace 52, sequência par. A amostra anterior (VDP 205, probe 52)
+ainda tinha vida 1000 e pause 0. O 53 é o topo do laço seguinte: o
+combate do frame 52 já aplicou dano, pause e recover, e a cópia da SAT
+dessa iteração já ocorreu; `advance_actor` do frame 53 ainda não
+decrementou o pause. Por isso o pause aparece 16/16 nessa borda.
+Kind 2, atacante 0, política 2, acertos 1, guardas 0. Vida de P2
+1000→888, dano 112. Papéis 7 (HP) e 2 (andar para trás, sem guarda).
+Os dois no chão. Poses lógica, submetida e apresentada 34 e 60 nessa
+amostra; o trace é escrito uma vez, então leituras posteriores de 34/60
+são o retrato do contato, não a pose viva. Faces 0/1, `face_flips` 0.
+Beat da IA 2. SFX diagnóstico: um pedido de acerto enfileirado e tocado.
+Não é identidade MUGEN nem mix.
+
+O pause dos dois desce de 16 a 0 entre os probes 53 e 69
+(`hitstop_frames` termina em 32). `recover_p2` fica 21 até o probe 69 e
+passa a 20 no 70. A soma dos degraus registrados de 21 até 0 é 21.
+Pares −2/0 no log são o passo VDP que às vezes avança dois frames de
+lógica; o relógio da ROM não pulou valor. O log está em
+`out/evidence/20261027_hit_recover/watch.jsonl`, SHA
+`24671087c0773ef74eb783f585fe8828855adfd7055dd09c6d92dbd380ce10bd`.
+
+P2 permaneceu no papel 2 enquanto a IA já pedia agachar (beat 3 no
+probe 75, recover ainda 14). Só no probe 91, com recover 0, o papel
+virou 4 e `role_changes_p2` foi de 2 a 3. O comando da IA durante o
+travamento foi consumido e não ficou bufferizado. P1 saiu do HP para
+idle no probe 86, com recover de P2 ainda em 4: fim da animação de
+ataque, não o recover da vítima. Do probe 91 ao 95 P1 andou para a
+frente, papel 1, x 87, 90, 93, 96, 99 (+3 px por frame de lógica, a
+velocidade 768 em Q8.8). O `walk_seen` de `observation.json` (x 100 no
+probe 95) é um passo de máscara a mais, com o contador de lógica parado
+e +1 px; a série por frame é o jsonl.
+
+Não houve guarda, troca de lado, HUD nem prazo medido. R06, ID01 e os
+55 IDs seguem abertos. A próxima captura nesta mesma ROM é atrasar o
+botão 1 até o beat 3 ou 4, com P2 já agachado ou em guarda e a distância
+já curta. Carregar no beat 2 foi o que produziu este acerto.
+
 ## 2026-10-27 — acerto pela pose submetida
 
 `LUTA_PRESENT_HIT` passa a ser o caminho de produção. O combate roda depois

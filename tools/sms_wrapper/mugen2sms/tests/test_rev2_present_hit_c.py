@@ -72,13 +72,14 @@ def test_future_logical_frame_cannot_deal_damage(tmp_path):
 typedef struct { unsigned char pose; } Frame;
 typedef struct { unsigned char flags,dmg; } StateDef;
 typedef struct { const StateDef *states; unsigned char pose_base,hitstop,hit_push,guard_push; } CharacterData;
-typedef struct { unsigned int x,y,life; unsigned char face,role,stop,hit_done; } Fighter;
+typedef struct { unsigned int x,y,life; unsigned char face,role,stop,hit_done,recover; } Fighter;
 typedef struct { const Frame *frame; unsigned char face,base_pair,x,y,role; } ContactStamp;
 static CharacterData characters[2];static Fighter fighter[2];
 static ContactStamp contact_prepared[2];
 static unsigned int probe_present_unready,probe_present_hits;
 static unsigned int probe_clsn_checks,probe_guard_events,probe_hit_events,probe_damage_p1,probe_damage_p2;
 static unsigned int probe_ko_events,probe_life_p1,probe_life_p2;
+static unsigned char probe_recover_p1,probe_recover_p2;
 static const Frame *observed0,*observed1,*attack,*hurt;
 static unsigned char boxes_overlap(const Frame *a,unsigned char sa,unsigned char sec,const Frame *b,unsigned char sb) {
     (void)sa;(void)sec;(void)sb;observed0=a;observed1=b;return a==attack && b==hurt;

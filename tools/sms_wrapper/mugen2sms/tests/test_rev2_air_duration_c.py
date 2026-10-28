@@ -21,15 +21,19 @@ def test_air_elements_are_exposed_for_their_declared_ticks(tmp_path):
     harness = r'''
 #include <stdio.h>
 #include <string.h>
+#define S_CONTROL 1u
+#define ST_IDLE 0u
 typedef struct { unsigned char dur, pose; } Frame;
 typedef struct { unsigned char n_frames, loop_start; const Frame *frames; } Anim;
-typedef struct { signed int vel; } StateDef;
+typedef struct { unsigned char flags; signed int vel; } StateDef;
 typedef struct { const Anim *anims; const StateDef *states; unsigned int pose_base; signed int gravity; } CharacterData;
-typedef struct { unsigned char anim, fidx, tick, role, done, stop, face; unsigned int y; signed int vy; } Actor;
+typedef struct { unsigned char anim, fidx, tick, role, done, stop, face, recover;
+                 unsigned int y; unsigned short life; signed int vy; } Actor;
 static Actor fighter[2];
 static CharacterData characters[2];
 static unsigned int probe_hitstop_frames;
 static void move_x(unsigned char side, signed int delta) { (void)side; (void)delta; }
+static void set_role(unsigned char side, unsigned char role) { (void)side; (void)role; }
 ''' + match.group() + r'''
 #define REQUIRE(c, message) do { if (!(c)) { puts(message); return 1; } } while (0)
 int main(void) {

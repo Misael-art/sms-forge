@@ -376,17 +376,70 @@ def _q8(value: str | int | float) -> int:
     return int(Decimal(str(value)) * 256)
 
 
-def _hitdef_value(ch, state_id: int, name: str, default: int) -> int:
+def _hitdef_const(ch, state_id: int, name: str):
+    """First compiled HitDef constant, or None when the parameter is absent."""
     state = ch.states.get(state_id)
     if state is None:
-        return default
+        return None
     for controller in state.controllers:
         if controller.source_type != "hitdef":
             continue
         for param in controller.params:
-            if param.name == name and param.const is not None:
-                return int(param.const)
-    return default
+            if param.name == name:
+                return param.const
+    return None
+
+
+def _hitdef_value(ch, state_id: int, name: str, default: int) -> int:
+    raw = _hitdef_const(ch, state_id, name)
+    if raw is None:
+        return default
+    return int(raw)
+
+
+def hit_recovery(ch, state_id: int) -> dict:
+    """Hit pause and control-lock times from the first HitDef of one state.
+
+    guard.hittime omitted in the HitDef copies ground.hittime (the default
+    recorded on the Ken source and in the HitDef schema). air.hittime omitted
+    in the source is compiled as the schema default 20. Later HitDefs in the
+    same state are not read. This does not supply a common1 hit animation or
+    a knockdown.
+    """
+    if _hitdef_count(ch, state_id) < 1:
+        raise ValueError(f"state {state_id} has no HitDef")
+
+    def uint8(name: str, default: int) -> int:
+        raw = _hitdef_const(ch, state_id, name)
+        value = default if raw is None else raw
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError(f"state {state_id} {name} is not numeric")
+        if float(value) != int(value):
+            raise ValueError(f"state {state_id} {name} is not an integer")
+        value = int(value)
+        if not 0 <= value <= 255:
+            raise ValueError(f"state {state_id} {name} outside uint8")
+        return value
+
+    stop_a = uint8("pausetime[0]", 0)
+    stop_d = uint8("pausetime[1]", stop_a)
+    hittime = uint8("ground.hittime[0]", 0)
+    guard_raw = _hitdef_const(ch, state_id, "guard.hittime[0]")
+    if guard_raw is None:
+        guardtime = hittime
+        guard_source = "ground.hittime"
+    else:
+        guardtime = uint8("guard.hittime[0]", 0)
+        guard_source = "hitdef"
+    return {
+        "stop_a": stop_a,
+        "stop_d": stop_d,
+        "hittime": hittime,
+        "guardtime": guardtime,
+        "airtime": uint8("air.hittime[0]", 20),
+        "guardtime_source": guard_source,
+        "fidelity": "approximate",
+    }
 
 
 def _hitdef_count(ch, state_id: int) -> int:
@@ -1422,6 +1475,11 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
                                     "sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
     header_path = out_dir / "ken_scene_runtime.h"
     generated["asset_sha256"][header_path.name] = hashlib.sha256(header_path.read_bytes()).hexdigest()
+    generated["hit_timing"] = {
+        item["role"]: hit_recovery(ch, int(item["source_state"]))
+        for item in generated["damage_models"]
+        if item.get("source_state") is not None
+    }
     manifest_path = out_dir / "ken_scene_manifest.json"
     manifest_path.write_text(json.dumps(generated, ensure_ascii=False, indent=2), encoding="utf-8")
     active_bank_files = {entry["file"] for entry in generated["banks"]}

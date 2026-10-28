@@ -360,6 +360,40 @@ def _scaled_source_q8(value: int, ratio: dict, label: str) -> int:
     return scaled
 
 
+_RECOVERY_KEYS = ("stop_a", "stop_d", "hittime", "guardtime", "airtime")
+
+
+def _parse_hit_timing(manifest_path: Path, raw) -> dict | None:
+    if raw is None:
+        return None
+    if not isinstance(raw, dict):
+        raise ValueError(f"{manifest_path}: hit_timing must be an object")
+    parsed = {}
+    for role, row in raw.items():
+        if not isinstance(role, str) or not isinstance(row, dict):
+            raise ValueError(f"{manifest_path}: hit_timing entries must be objects")
+        if role in parsed:
+            raise ValueError(f"{manifest_path}: duplicate hit_timing {role}")
+        values = {}
+        for key in _RECOVERY_KEYS:
+            value = row.get(key, 0)
+            if type(value) is not int or not 0 <= value <= 255:
+                raise ValueError(
+                    f"{manifest_path}: hit_timing.{role}.{key} must be a uint8")
+            values[key] = value
+        values["guardtime_source"] = row.get("guardtime_source")
+        values["fidelity"] = row.get("fidelity", "approximate")
+        parsed[role] = values
+    return parsed
+
+
+def _recovery_suffix(hit_timing: dict | None, role: str) -> str:
+    if hit_timing is None:
+        return ""
+    row = hit_timing.get(role, {})
+    return ", " + ", ".join(str(int(row.get(key, 0))) for key in _RECOVERY_KEYS)
+
+
 def _slot_rows(manifest_path: Path, header: str,
                prefix: str) -> tuple[list[str], list[str], dict]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -418,6 +452,7 @@ def _slot_rows(manifest_path: Path, header: str,
         if model["role"] in damage_models:
             raise ValueError(f"{manifest_path}: duplicate damage model {model['role']}")
         damage_models[model["role"]] = model
+    hit_timing = _parse_hit_timing(manifest_path, manifest.get("hit_timing"))
     macros = {name: _macro_role(header, prefix, name) for name in REQUIRED_ROLES}
     meta_capacity = _meta_capacity(header, prefix)
     # source_state_id, animation index, semantic flags, velocity Q8.8, damage
@@ -448,7 +483,9 @@ def _slot_rows(manifest_path: Path, header: str,
             raise ValueError(f"{manifest_path}: {name} velocity outside int16")
         if not 0 <= dmg <= 255:
             raise ValueError(f"{manifest_path}: {name} damage outside uint8")
-        rows.append(f"    {{ {_state_id(row)}, {macros[name]}, {flags}, {vel}, {dmg} }},")
+        rows.append(
+            f"    {{ {_state_id(row)}, {macros[name]}, {flags}, {vel}, {dmg}"
+            f"{_recovery_suffix(hit_timing, name)} }},")
         state_coverage[name] = {
             "available": True,
             "source_action": int(row["action"]),
@@ -492,7 +529,9 @@ def _slot_rows(manifest_path: Path, header: str,
         if row is None:
             if rule is not None:
                 raise ValueError(f"{manifest_path}: close rule {name} has no source role")
-            close_rows.append(f"    {{ 65535, {macros[base_role]}, 0, 0, 0 }},")
+            close_rows.append(
+                f"    {{ 65535, {macros[base_role]}, 0, 0, 0"
+                f"{_recovery_suffix(hit_timing, name)} }},")
             close_role_coverage[name] = {
                 "available": False,
                 "runtime_state_id": 0xFFFF,
@@ -525,7 +564,8 @@ def _slot_rows(manifest_path: Path, header: str,
             raise ValueError(f"{manifest_path}: close role {name} has no damage model")
         role_macro = _macro_role(header, prefix, name)
         close_rows.append(
-            f"    {{ {_state_id(row)}, {role_macro}, S_HIT, 0, {damage} }},")
+            f"    {{ {_state_id(row)}, {role_macro}, S_HIT, 0, {damage}"
+            f"{_recovery_suffix(hit_timing, name)} }},")
         source_command = rule.get("source_command")
         source_condition = rule.get("source_condition")
         if not isinstance(source_command, str) or not isinstance(source_condition, str):
@@ -592,7 +632,9 @@ def _slot_rows(manifest_path: Path, header: str,
         if row is None:
             if rule is not None:
                 raise ValueError(f"{manifest_path}: far rule {name} has no source role")
-            far_rows.append(f"    {{ 65535, {macros[base_role]}, 0, 0, 0 }},")
+            far_rows.append(
+                f"    {{ 65535, {macros[base_role]}, 0, 0, 0"
+                f"{_recovery_suffix(hit_timing, name)} }},")
             far_role_coverage[name] = {
                 "available": False, "runtime_state_id": 0xFFFF,
                 "runtime_flags": "0", "runtime_damage": 0,
@@ -620,7 +662,8 @@ def _slot_rows(manifest_path: Path, header: str,
             raise ValueError(f"{manifest_path}: far role {name} has no damage model")
         role_macro = _macro_role(header, prefix, name)
         far_rows.append(
-            f"    {{ {_state_id(row)}, {role_macro}, S_HIT, 0, {damage} }},")
+            f"    {{ {_state_id(row)}, {role_macro}, S_HIT, 0, {damage}"
+            f"{_recovery_suffix(hit_timing, name)} }},")
         source_command = rule.get("source_command")
         source_condition = rule.get("source_condition")
         if not isinstance(source_command, str) or not isinstance(source_condition, str):
@@ -724,6 +767,7 @@ def _slot_rows(manifest_path: Path, header: str,
     if any(not 2 <= value <= 255 for value in thresholds.values()):
         raise ValueError(f"{manifest_path}: input thresholds must be in 2..255")
     return rows, command_rows, {"character_initializer": row_text,
+                  "hit_timing": hit_timing,
                   "meta_max_bytes": meta_capacity,
                   "source_sha256": manifest.get("source_sha256"),
                   "source_def": manifest.get("source_def"),
@@ -786,11 +830,15 @@ def render(manifest_paths: tuple[Path, Path], runtime_header: Path) -> tuple[str
             meta["ground_front_runtime_q8"] <= 0 for meta in (p1_meta, p2_meta)):
         raise ValueError(
             "distance variants require scaled ground.front geometry for both runtime slots")
+    timed = [meta["hit_timing"] is not None for meta in (p1_meta, p2_meta)]
+    if timed[0] != timed[1]:
+        raise ValueError("hit timing must be present on both runtime slots or neither")
+    schema_number = 7 if timed[0] else 5
     result = "\n".join([
         "/* Generated from the two scene-cut manifests; do not hand-edit. */",
         "#ifndef FIGHT_RUNTIME_DATA_H",
         "#define FIGHT_RUNTIME_DATA_H",
-        "#define FIGHT_RUNTIME_DATA_SCHEMA 5",
+        f"#define FIGHT_RUNTIME_DATA_SCHEMA {schema_number}",
         f"#define P1_CUT_META_MAX_BYTES {p1_meta['meta_max_bytes']}",
         f"#define P2_CUT_META_MAX_BYTES {p2_meta['meta_max_bytes']}",
         "static const CommandDef p1_commands[] = {",
@@ -834,7 +882,14 @@ def render(manifest_paths: tuple[Path, Path], runtime_header: Path) -> tuple[str
         "",
     ])
     report = {
-        "schema": "sms_fight_runtime_data_v5",
+        "schema": f"sms_fight_runtime_data_v{schema_number}",
+        "hit_recovery_contract": {
+            "fields": list(_RECOVERY_KEYS),
+            "when": "schema 7; schema 5 leaves the fields zero and keeps character-wide hitstop",
+            "clock": "defender pausetime freezes both actors; hittime, guardtime or airtime then counts down with control locked",
+            "animation": "common1 gethit and knockdown are not in this profile; the current pose is held, then a non-control role returns to idle",
+            "fidelity": "approximate",
+        },
         "source_slots": [p1_meta, p2_meta],
         "role_policy": list(STATE_ROLE_ORDER),
         "unsupported_runtime_roles": {
@@ -898,3 +953,69 @@ def generate(manifest_paths: tuple[Path, Path], runtime_header: Path,
         report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n",
                                encoding="utf-8")
     return report
+
+
+def annotate_hit_timing(manifest_path: Path, source_dir: Path, def_name: str,
+                        dest: Path) -> dict:
+    """Copy one scene manifest and attach HitDef recovery times from its CNS."""
+    from ..character import load
+    from ..source import Source
+    from .scene_cut import hit_recovery
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    character = load(Source(source_dir), def_name)
+    timing = {}
+    for item in manifest.get("damage_models", []):
+        if not isinstance(item, dict) or not isinstance(item.get("role"), str):
+            raise ValueError(f"{manifest_path}: damage model requires a role")
+        state = item.get("source_state")
+        if state is None:
+            continue
+        timing[item["role"]] = hit_recovery(character, int(state))
+    manifest["hit_timing"] = timing
+    manifest["hit_timing_source"] = {
+        "source_dir": str(source_dir),
+        "def_name": def_name,
+        "source_sha256": character.source_sha256,
+    }
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8")
+    return manifest
+
+
+def main(argv: list[str] | None = None) -> int:
+    import argparse
+    parser = argparse.ArgumentParser(
+        description="Attach HitDef recovery times and regenerate fight_runtime_data.h")
+    parser.add_argument("--p1-manifest", type=Path, required=True)
+    parser.add_argument("--p1-source", type=Path, required=True)
+    parser.add_argument("--p1-def", required=True)
+    parser.add_argument("--p2-manifest", type=Path, required=True)
+    parser.add_argument("--p2-source", type=Path, required=True)
+    parser.add_argument("--p2-def", required=True)
+    parser.add_argument("--scene-header", type=Path, required=True)
+    parser.add_argument("--out-dir", type=Path, required=True)
+    args = parser.parse_args(argv)
+    out = args.out_dir
+    p1 = annotate_hit_timing(args.p1_manifest, args.p1_source, args.p1_def,
+                             out / "p1_scene_manifest.json")
+    p2 = annotate_hit_timing(args.p2_manifest, args.p2_source, args.p2_def,
+                             out / "p2_scene_manifest.json")
+    report = generate(
+        (out / "p1_scene_manifest.json", out / "p2_scene_manifest.json"),
+        args.scene_header, out / "fight_runtime_data.h",
+        out / "fight_runtime_data_manifest.json")
+    if report["schema"] != "sms_fight_runtime_data_v7":
+        raise SystemExit("recovery header was not schema 7")
+    print(json.dumps({
+        "schema": report["schema"],
+        "p1_hp": p1["hit_timing"].get("hp"),
+        "p2_hp": p2["hit_timing"].get("hp"),
+        "header": str(out / "fight_runtime_data.h"),
+    }, ensure_ascii=False))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -3,8 +3,10 @@
  * Proposito: medir na ROM a parede de streaming VRAM e a pressao de scanline
  * do renderer sprite-only com DOIS atores reais (pacote de dados selecionado
  * pelo manifesto). NAO e entrega de gameplay:
- * omissoes declaradas — sem HUD/audio final, sem projetel/FX, sem hitstun com
- * animacao de dano; BG e SFX diagnosticos sao candidatos opt-in. Desde a wave-5b o papel
+ * omissoes declaradas — sem HUD/audio final, sem projetel/FX, sem animacao
+ * de dano do common1 (o perfil nao traz esses estados). No schema 7 o
+ * HitDef trava o controle pelo ground.hittime/guard.hittime/air.hittime
+ * depois do pausetime; BG e SFX diagnosticos sao candidatos opt-in. Desde a wave-5b o papel
  * de cada ator vem do PADEREIO (pad fisico no lado 0, IA no lado 1, ambos
  * pelo mesmo anel de input/tier/comandos), nao de um script: continua sendo
  * maquina de estados sobre dados gerados, nao interpretador CNS.
@@ -420,9 +422,12 @@ typedef struct {
     unsigned char done;          /* wave-5b: one-shot do papel expirou */
     unsigned short life;         /* M2: dados — inicia em max_life */
     unsigned char hit_done;      /* M2: golpe ja registrado nesta entrada de estado */
-    unsigned char stop;          /* M2: hitstop restante em frames deste ator */
+    unsigned char stop;          /* M2: hitpause restante em frames deste ator */
+    unsigned char recover;       /* schema 7: frames sem papel novo, apos o pause */
     unsigned char face;          /* M2: 0 = para a direita, 1 = para a esquerda */
 } DiagActor;
+
+volatile unsigned char probe_recover_p1, probe_recover_p2;
 
 static DiagActor fighter[2];
 
@@ -1202,6 +1207,7 @@ static void set_role(unsigned char side, unsigned char role) {
     fighter[side].tick = 0;
     fighter[side].done = 0u;     /* wave-5b: nova instancia de papel */
     fighter[side].hit_done = 0u;   /* M2: nova instancia de golpe */
+    fighter[side].recover = 0u;
     if ((cd->states[role].flags & S_AIR) && fighter[side].y == 0)
         fighter[side].vy = cd->jump_vy;
 }
@@ -1213,8 +1219,9 @@ static void advance_actor(unsigned char side, unsigned int *out_pose_global,
     const Frame *frame = &anim->frames[fighter[side].fidx];
     signed int vel;
 
-    /* M2: hitstop congela o avanco deste ator (sem movimento, gravidade ou
-     * tick de animacao); o frame e a pose permanecem os atuais. */
+    /* Hitpause congela o avanco deste ator (sem movimento, gravidade ou
+     * tick de animacao); o frame e a pose permanecem os atuais. O tempo
+     * de recover nao conta durante o pause. */
     if (fighter[side].stop) {
         fighter[side].stop--;
         probe_hitstop_frames++;
@@ -1223,9 +1230,24 @@ static void advance_actor(unsigned char side, unsigned int *out_pose_global,
         return;
     }
 
-    vel = cd->states[fighter[side].role].vel;
-    if (vel && fighter[side].y == 0)
-        move_x(side, fighter[side].face ? -vel : vel);
+    /* Depois do pause, recover impede andar e, no ultimo tick, devolve
+     * um papel sem S_CONTROL ao idle. Papel controlavel permanece, sem
+     * velocidade neste frame. Gravidade continua abaixo. */
+    if (fighter[side].recover) {
+        fighter[side].recover--;
+        /* No ar o papel de chao nao substitui a fisica. Quem nao tem
+         * controle volta ao idle so ao tocar o chao neste tick. */
+        if (!fighter[side].recover && fighter[side].life &&
+            fighter[side].y == 0 &&
+            !(cd->states[fighter[side].role].flags & S_CONTROL))
+            set_role(side, ST_IDLE);
+        anim = &cd->anims[fighter[side].anim];
+        frame = &anim->frames[fighter[side].fidx];
+    } else {
+        vel = cd->states[fighter[side].role].vel;
+        if (vel && fighter[side].y == 0)
+            move_x(side, fighter[side].face ? -vel : vel);
+    }
     if (fighter[side].y || fighter[side].vy) {
         signed int ny = (signed int)fighter[side].y + fighter[side].vy;
         fighter[side].vy -= cd->gravity;
@@ -1277,10 +1299,13 @@ static void advance_actor(unsigned char side, unsigned int *out_pose_global,
  *  - guarda = estado defensor S_BLOCKABLE, sem teste de crossup por botao;
  *  - push aplicado uma vez por evento, em px (cd->hit_push/cd->guard_push),
  *    na direcao de afastamento do defensor em relacao ao atacante;
- *  - hitstop (cd->hitstop) congela o avanco dos dois atores;
- *  - HITSTUN com animacao de dano NAO implementado: o tempo do hitdef nao
- *    esta no pacote versus-cut e os estados de hit pertencem ao conjunto
- *    common1.cns bloqueado (fronteira registrada, nao inventado);
+ *  - schema 5: hitstop unico do personagem (pausetime do soco) congela os dois;
+ *  - schema 7: pausetime[0]/[1] do HitDef do golpe; em seguida o defensor
+ *    fica sem papel novo por ground.hittime, guard.hittime ou air.hittime.
+ *    O countdown do recover comeca quando o pause do defensor acaba.
+ *    Nao ha animacao de dano: common1.cns esta fora do perfil, entao a pose
+ *    atual permanece e um papel sem controle volta ao idle no fim.
+ *    Queda/trip nao vira knockdown. Durante o pause o pusher de corpo nao corre;
  *  - pusher no chao usa soma das larguras frontais convertidas do pacote;
  *    sem Width/PlayerPush CNS, largura traseira ou push no ar, e uma
  *    aproximacao registrada, nao equivalencia completa com a fonte.
@@ -1588,14 +1613,22 @@ static void combat_step(const Frame *fn0, const Frame *fn1) {
 #if LUTA_PRESENT_HIT
         probe_present_hits++;
 #endif
+#if FIGHT_RUNTIME_DATA_SCHEMA >= 7
+        fighter[a].stop = st->stop_a;
+        fighter[d].stop = st->stop_d;
+#else
         if (cd->hitstop) {
             fighter[a].stop = cd->hitstop;
             fighter[d].stop = cd->hitstop;
         }
+#endif
         if (characters[d].states[fighter[d].role].flags & S_BLOCKABLE) {
             probe_guard_events++;
 #if LUTA_DIAG_PSG
             diag_sfx_queue(DIAG_SFX_GUARD);
+#endif
+#if FIGHT_RUNTIME_DATA_SCHEMA >= 7
+            fighter[d].recover = st->guardtime;
 #endif
             push = cd->guard_push;
         } else {
@@ -1617,6 +1650,10 @@ static void combat_step(const Frame *fn0, const Frame *fn1) {
                  * terminal e acorde o ator no frame seguinte. */
                 input_flush(d);
             }
+#if FIGHT_RUNTIME_DATA_SCHEMA >= 7
+            else
+                fighter[d].recover = fighter[d].y ? st->airtime : st->hittime;
+#endif
             push = cd->hit_push;
         }
         {
@@ -1629,6 +1666,8 @@ static void combat_step(const Frame *fn0, const Frame *fn1) {
     }
     probe_life_p1 = fighter[0].life;
     probe_life_p2 = fighter[1].life;
+    probe_recover_p1 = fighter[0].recover;
+    probe_recover_p2 = fighter[1].recover;
 }
 
 /* Facing por frame, na ordem do chao: quem esta a esquerda aponta para a
@@ -1657,6 +1696,11 @@ static void facing_step(void) {
  * nao ha push, permitindo cross-up. Width/PlayerPush CNS e largura traseira
  * ainda nao sao executados; nao declarar equivalencia completa de MUGEN. */
 static void pusher_step(unsigned char left_side) {
+#if FIGHT_RUNTIME_DATA_SCHEMA >= 7
+    /* O impulso do HitDef ja foi aplicado uma vez. O pusher de corpo
+     * nao anda durante o hitpause; volta quando os dois pauses acabam. */
+    if (fighter[0].stop || fighter[1].stop) return;
+#endif
     unsigned char right_side;
     unsigned int lx, rx, lw, rw, span, need, center, half, target;
 
@@ -1753,6 +1797,13 @@ static void input_stage(void) {
                 else                 probe_cmd_hits_p2++;
             }
         }
+
+        /* Pause e recover nao aceitam papel novo. O anel ainda registra
+         * o pad; um comando que case neste intervalo e consumido e nao
+         * fica guardado para o fim do recover. */
+        if ((fighter[side].stop || fighter[side].recover) &&
+            fi_res.role != FI_ROLE_NONE)
+            fi_res.role = FI_ROLE_NONE;
 
         if (fi_res.role != FI_ROLE_NONE) {
             set_role(side, fi_res.role);

@@ -51,7 +51,12 @@ typedef struct { const unsigned char *pattern; unsigned char command; } CommandD
 typedef struct { unsigned short id;
                  unsigned char anim, flags;
                  signed int vel;
-                 unsigned char dmg; } StateDef;
+                 unsigned char dmg;
+                 /* Schema 7: pausetime e tempos de controle do primeiro HitDef.
+                  * Schema 5 deixa estes bytes em zero; o hitstop segue o
+                  * valor único do personagem. */
+                 unsigned char stop_a, stop_d, hittime, guardtime, airtime;
+               } StateDef;
 
 /* Ordem = REQUIRED_ROLES + close + far (fight_runtime_data.py STATE_ROLE_ORDER). */
 enum { ST_IDLE, ST_WALK_F, ST_WALK_B, ST_JUMP, ST_CROUCH, ST_GUARD,

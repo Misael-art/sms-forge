@@ -18,6 +18,23 @@ não prova scanout, limite de scanline nem que o quadro ativo chegou a tempo.
 atacantes pulados porque a submissão ou o papel não conferiam.
 `LUTA_CONTACT_GUARD`, `LUTA_CONTACT_SAT` e o ator BG desligam esse caminho.
 
+No schema 7 de `fight_runtime_data.h`, cada golpe carrega `pausetime` dos
+dois lados e os tempos `ground.hittime`, `guard.hittime` e `air.hittime`
+do primeiro HitDef do estado fonte. O pause congela os dois atores e
+segura o pusher de corpo. O recover do defensor só conta depois do pause
+dele: sem papel novo e sem velocidade de andar; a gravidade continua.
+`guard.hittime` ausente copia `ground.hittime`. Não há sprite de dano nem
+knockdown: common1 está fora do perfil, a pose atual permanece, e um papel
+sem controle volta ao idle no chão ao fim do recover. Trip/fall da fonte
+não vira queda. Um comando que casa durante o pause ou o recover é
+consumido e não fica bufferizado. Schema 5 mantém o hitstop único do
+personagem. Na ROM `7f530db3…` o pause 16 e o recover 21 do HP de Ryu
+foram contados em stepping; a amostra do framebuffer é o topo do laço
+seguinte (`probe_frame` 53, tick 52, pause ainda 16). Nesse HitDef
+`guardtime` e `hittime` valem ambos 21, então a duração não separa
+guarda e acerto. A guarda dessa ROM não foi capturada. Ver memory bank.
+Isso não fecha R06.
+
 Duas políticas são candidatas, ambas zero por padrão e incompatíveis entre si.
 `LUTA_CONTACT_GUARD` recusa e conta uma interseção lógica se os frames,
 facing, patterns e posições não correspondem à última preparação cuja cópia

@@ -70,7 +70,7 @@ def test_candidate_uses_committed_frames_and_rejects_stale_snapshots(tmp_path):
 typedef struct { unsigned char pose; } Frame;
 typedef struct { unsigned char flags,dmg; } StateDef;
 typedef struct { const StateDef *states; unsigned char pose_base,hitstop,hit_push,guard_push; } CharacterData;
-typedef struct { unsigned int x,y,life; unsigned char face,role,stop,hit_done; } Fighter;
+typedef struct { unsigned int x,y,life; unsigned char face,role,stop,hit_done,recover; } Fighter;
 typedef struct { const Frame *frame; unsigned int pose_global; unsigned char face,base_pair,role_fresh; } Slot;
 typedef struct { const Frame *frame; unsigned char face,base_pair,x,y,role; } ContactStamp;
 static CharacterData characters[2];static Fighter fighter[2];static Slot current[2];
@@ -78,6 +78,7 @@ static ContactStamp contact_committed[2];
 static unsigned int contact_sat_unready,contact_sat_overlaps;
 static unsigned int probe_clsn_checks,probe_guard_events,probe_hit_events,probe_damage_p1,probe_damage_p2;
 static unsigned int probe_ko_events,probe_life_p1,probe_life_p2;
+static unsigned char probe_recover_p1,probe_recover_p2;
 static const Frame *expected0,*expected1,*observed0,*observed1,*logical0,*logical1;
 static unsigned char boxes_overlap(const Frame *a,unsigned char sa,unsigned char sec,const Frame *b,unsigned char sb) {
     (void)sa;(void)sec;(void)sb;observed0=a;observed1=b;return a==expected0 && b==expected1;
@@ -126,7 +127,7 @@ def test_role_change_invalidates_previous_sat_snapshot(tmp_path):
 #define S_AIR 2u
 typedef struct { unsigned char anim,flags; } StateDef;
 typedef struct { const StateDef *states; int jump_vy; } CharacterData;
-typedef struct { unsigned int y; int vy; unsigned char role,anim,fidx,tick,done,hit_done; } Fighter;
+typedef struct { unsigned int y; int vy; unsigned char role,anim,fidx,tick,done,hit_done,recover; } Fighter;
 typedef struct { const void *frame; } Stamp;
 typedef struct { unsigned char role_fresh; } Slot;
 static CharacterData characters[2];static Fighter fighter[2];
