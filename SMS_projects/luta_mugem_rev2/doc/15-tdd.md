@@ -2,6 +2,34 @@
 
 ## Seleção e limites atuais — 2026-10-27
 
+`LUTA_CONTACT_TRACE=1` registra no instante do contato, em um buffer `DATA`
+identificado pelo `.map`, os frames lógicos e usados, poses residentes,
+última submissão, facing e coordenadas. A sequência de publicação é par
+quando completa e ímpar durante escrita; o leitor deve limitar a janela para
+excluir wrap e tratar eventos múltiplos como ambíguos. A instrumentação custa
+CPU e seus resultados não qualificam prazo nem provam o framebuffer.
+
+No perfil de produção, `LUTA_PRESENT_HIT` fica ligado. O combate roda depois
+de montar a sombra da SAT e só aceita o quadro submetido por inteiro, com a
+âncora e a face dessa sombra, se o papel ainda for o atual. O cursor lógico
+pode estar adiante e não aplica dano. Isso elimina pose futura invisível;
+não prova scanout, limite de scanline nem que o quadro ativo chegou a tempo.
+`probe_present_hits` conta contatos aceitos; `probe_present_unready` conta
+atacantes pulados porque a submissão ou o papel não conferiam.
+`LUTA_CONTACT_GUARD`, `LUTA_CONTACT_SAT` e o ator BG desligam esse caminho.
+
+Duas políticas são candidatas, ambas zero por padrão e incompatíveis entre si.
+`LUTA_CONTACT_GUARD` recusa e conta uma interseção lógica se os frames,
+facing, patterns e posições não correspondem à última preparação cuja cópia
+da SAT retornou. A lógica continua avançando, portanto o contato pode ser
+perdido. `LUTA_CONTACT_SAT` compara caixas e coordenadas dessa última cópia,
+desde que o residente continue vinculado à instância atual do papel; isso
+altera o instante e, possivelmente, as caixas em relação à fonte. Mudança de
+papel invalida o vínculo e novas requisições/publicações o restabelecem.
+Ambas exigem trace e renderer sprite-only, recusam células cortadas ou
+rejeitadas e não provam scanout nem ausência de perda por scanline. Não são
+soluções aprovadas: os casos medidos e perdas ficam no memory bank.
+
 `LUTA_DIAG_PSG=1` é uma carga de teste, desligada por padrão. Contato e
 guarda reais enfileiram streams autorais genéricos (`sfx_hit`, canais 2+3;
 `sfx_hurt`, canal 3); não são adaptação ou identidade sonora MUGEN. No mesmo

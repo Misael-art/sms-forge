@@ -1,5 +1,84 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — acerto pela pose submetida
+
+`LUTA_PRESENT_HIT` passa a ser o caminho de produção. O combate roda depois
+da sombra da SAT e só aplica guarda ou dano com o quadro submetido por
+inteiro nesse frame. O cursor lógico pode estar adiante; nesses ticks o
+atacante é contado em `probe_present_unready` e não há dano. Guarda estrita,
+`LUTA_CONTACT_SAT` e ator BG continuam a desligar esse caminho. Não prova
+scanout, scanline, prazo nem hitstun.
+
+A ROM candidata é `5c5c6144ffd5b76f6e0f53bbcdf29785832238a0d3aeb0a51f6109ee99574991`,
+em `out/candidates/20261027_present_hit/`, com `LUTA_PRESENT_HIT`,
+`LUTA_CONTACT_TRACE` e `LUTA_DIAG_PSG`. Fonte `src/main.c`
+`50d7c3323efa79f574061115db39f89cc6017fda447604dde521e9c7aacf056f`.
+A baseline nominal não foi substituída. Pre-gates do build passaram.
+Dez testes de contato no host passaram, incluindo o caso em que o quadro
+lógico futuro não aplica dano.
+
+Sessão privada Emulicious `5e25aae6750e4702b6fe82b1884b2128`, stepping, não
+throughput. No tick 84 houve guarda: política 2, poses lógica/residente/
+submetida/apresentada 34 e 69, vida inalterada, um SFX. No tick 176 houve
+acerto do lado 2: as quatro leituras da pose ficaram em 36 e 77, dano 76
+(HP do pacote de P2), vida de P1 1000→924, segundo SFX. A captura
+`hit2.png` é o framebuffer pausado no frame 201 da ROM, depois do acerto;
+não é o quadro do contato. Bundle verificado em
+`out/evidence/20261027_present_hit/5e25aae6750e4702b6fe82b1884b2128`.
+Fundo preto e os dois lutadores aparecem nessa imagem. Scanline, VBlank,
+FPS real e hitstun não foram medidos nesta sessão. Nenhum dos 55 IDs fecha.
+
+## 2026-10-27 — contato, residência e cópia da SAT (candidatos)
+
+O bloqueio de R06 foi reproduzido com input normal. Na ROM de áudio
+`a89a3897…`, o aumento do dano foi visto entre duas fronteiras VDP, mas a
+leitura caiu no meio de `combat_step`: o contador de dano já mudara e o
+espelho de vida ainda não. Como sondas de pose são atualizadas mais tarde,
+essa amostra não identifica sozinha as caixas usadas. O caso está em
+`out/evidence/20261027_contact_alignment_psg/`.
+
+Uma ROM instrumentada `75624df9bc015ed2214331204bbc3cf4597936f8b72f065d4674bfcdb28c6247`
+registrou as entradas de `boxes_overlap` antes de aplicar dano, sem escrita
+externa de RAM: sessão privada `94ed963bc2c04130a1b36ea37773b2d7`, tick 352.
+P1 usou o frame lógico de pose 34 enquanto a residente e a última submissão
+eram 33; P2 tinha pose lógica/residente 60 e última submissão 58. A vida de
+P2 caiu 1000→888 após 12 frames VDP. A decodificação dos bytes da própria ROM
+(`out/evidence/20261027_exact_contact_trace/boxes.json`) encontrou uma caixa
+de ataque na pose 34, que intersectou a hurtbox lógica de P2; a pose 33 não
+tinha caixa de ataque. O controle posterior da mesma fonte usada para a
+primeira alternativa, ROM `cbe1bf38…`, reproduziu o mesmo conflito e dano
+em `1ab9cd8a01144af3920d6433989088f3`. A sonda de submissão não prova que
+todos os pixels chegaram ao framebuffer; são casos instrumentados, não uma
+afirmação universal sobre todos os golpes.
+
+`LUTA_CONTACT_GUARD=1` testou a alternativa estrita, desativada por padrão:
+só resolve o contato lógico quando ambos os frames, faces, posições e bases
+correspondem à última cópia de SAT elegível. A candidata
+`1d21fb24517f663de7c5cfc9a1eedc6d4fcf5ba7100ca6f0fbff27a9ff45cff1`
+contou nove interseções recusadas e nenhuma aceita; P2 permaneceu com 1000,
+o input de P1 avançou de 307 a 368 ticks e P1 voltou a idle na sessão
+`4552fc6ccc7f49d1a6c1d8a010da5c3e`. O golpe foi perdido nesse roteiro.
+As trajetórias diferiram do controle e não há comparação causal de desempenho.
+Suas janelas NTSC de atração foram 25,19/21,67 atualizações/s; o controle
+instrumentado da época mediu 26,36/25,49. Ambas reprovam e não havia HUD,
+FX ou música. Essa alternativa não está promovida.
+
+Outra opção, `LUTA_CONTACT_SAT=1`, usa a geometria e posições da última cópia
+elegível da SAT, em vez das caixas lógicas atuais. Uma primeira versão
+`9f92b170…` permitiu um frame de P2 herdado de estado anterior; o erro e a
+sessão `b06408f9485b431e8ae2a26739ae6d5a` foram preservados. A versão seguinte
+invalida metadados do cache ao mudar de instância de papel e só os renova a
+partir de uma requisição válida. Na ROM
+`42ebea72f930bf77bd66ae6d6b64124997306da871a1d4c1b5bdd75f0a074891`,
+sessão `7a3012feab154373879e81c89d0c02db`, um golpe causou 112 de dano com
+P1 lógico/residente/submetido 34 e ambas as associações de instância válidas.
+P2 usou frame submetido 53 contra lógico 48, ambos do mesmo estado e com a
+mesma hurtbox nesse caso; o trace aponta as diferenças de frame e posição.
+A decodificação ROM em `out/evidence/20261027_contact_instance_sat/boxes.json`
+confirma a interseção das caixas usadas. Isso é aproximação temporal e não
+prova equivalência com MUGEN, fidelidade de todos os contatos, ausência de
+perda por scanline ou scanout. A política permanece desativada.
+
 ## 2026-10-27 — PSG em eventos de combate (carga diagnóstica)
 
 `LUTA_DIAG_PSG` permanece zero por padrão. Quando habilitado, acerto e guarda

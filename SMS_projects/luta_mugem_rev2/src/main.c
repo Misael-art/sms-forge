@@ -112,6 +112,28 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #ifndef LUTA_DIAG_PSG
 #define LUTA_DIAG_PSG 0
 #endif
+#ifndef LUTA_CONTACT_TRACE
+#define LUTA_CONTACT_TRACE 0
+#endif
+#ifndef LUTA_CONTACT_GUARD
+#define LUTA_CONTACT_GUARD 0
+#endif
+#ifndef LUTA_CONTACT_SAT
+#define LUTA_CONTACT_SAT 0
+#endif
+/* Producao: o golpe usa o quadro submetido neste frame, nao o cursor logico.
+ * As politicas candidatas de guarda/SAT e o ator BG desligam este caminho. */
+#ifndef LUTA_PRESENT_HIT
+#define LUTA_PRESENT_HIT 1
+#endif
+#if LUTA_PRESENT_HIT != 0 && LUTA_PRESENT_HIT != 1
+#error "LUTA_PRESENT_HIT deve ser 0 ou 1"
+#endif
+#if LUTA_PRESENT_HIT && (LUTA_CONTACT_GUARD || LUTA_CONTACT_SAT || LUTA_BG_ACTOR || !LUTA_PROFILE)
+#undef LUTA_PRESENT_HIT
+#define LUTA_PRESENT_HIT 0
+#endif
+#define LUTA_CONTACT_STAMPS (LUTA_CONTACT_GUARD || LUTA_CONTACT_SAT || LUTA_PRESENT_HIT)
 #if UPLOAD_CHUNK_PAIRS < 1 || UPLOAD_CHUNK_PAIRS > 8
 #error "quota candidata de upload deve estar entre 1 e 8 pares por lado"
 #endif
@@ -141,6 +163,27 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #endif
 #if LUTA_DIAG_PSG && !LUTA_PROFILE
 #error "PSG diagnostico exige perfil de producao"
+#endif
+#if LUTA_CONTACT_TRACE != 0 && LUTA_CONTACT_TRACE != 1
+#error "LUTA_CONTACT_TRACE deve ser 0 ou 1"
+#endif
+#if LUTA_CONTACT_TRACE && !LUTA_PROFILE
+#error "trace de contato exige perfil de producao"
+#endif
+#if LUTA_CONTACT_GUARD != 0 && LUTA_CONTACT_GUARD != 1
+#error "LUTA_CONTACT_GUARD deve ser 0 ou 1"
+#endif
+#if LUTA_CONTACT_GUARD && (!LUTA_CONTACT_TRACE || LUTA_BG_ACTOR)
+#error "guarda de contato candidata exige trace e renderer sprite-only"
+#endif
+#if LUTA_CONTACT_SAT != 0 && LUTA_CONTACT_SAT != 1
+#error "LUTA_CONTACT_SAT deve ser 0 ou 1"
+#endif
+#if LUTA_CONTACT_SAT && (!LUTA_CONTACT_TRACE || LUTA_BG_ACTOR || LUTA_CONTACT_GUARD)
+#error "colisao SAT candidata exige trace, sprite-only e guarda estrita desligada"
+#endif
+#if LUTA_PRESENT_HIT && LUTA_CONTACT_TRACE && !LUTA_PROFILE
+#error "trace com acerto pela pose submetida exige perfil de producao"
 #endif
 #if LUTA_DIAG_PSG
 #include "PSGlib.h"
@@ -391,6 +434,9 @@ typedef struct {
     unsigned char loaded_pairs;
     const Frame *frame;          /* Lote B.2: frame residente (imagem valida) */
     unsigned char face;          /* orientacao dos bytes e metadados residentes */
+#if LUTA_CONTACT_STAMPS
+    unsigned char role_fresh;    /* metadata associada a instancia atual de papel */
+#endif
 #if LUTA_SPECULATIVE_PREFETCH
     unsigned char speculative;   /* completo mas nao publicavel ate pedido real */
 #endif
@@ -411,6 +457,49 @@ static unsigned char line_diff[DIAG_FLOOR];
 static unsigned int frames;
 static unsigned int pacing_step;
 static unsigned char pacing_remainder;
+#if LUTA_PRESENT_HIT
+/* Ordem de x antes do movimento deste tick; o pusher roda depois do combate
+ * que usa a sombra da SAT, ainda no mesmo frame. */
+static unsigned char present_left_before;
+#endif
+
+#if LUTA_CONTACT_TRACE
+/* Um registro em DATA normal, identificado no .map; nao ocupa o corredor
+ * __at dos medidores. Seq impar = escrita em andamento; par = publicado.
+ * Bytes LE, ultimo contato apenas; custo instrumentado nao qualifica budget. */
+enum { CT_SEQ = 0, CT_ATTACKER = 1, CT_KIND = 2, CT_TICK = 3,
+       CT_FRAME_P1 = 5, CT_FRAME_P2 = 7, CT_LOGICAL_P1 = 9, CT_LOGICAL_P2 = 11,
+       CT_RESIDENT_P1 = 13, CT_RESIDENT_P2 = 15, CT_SUBMITTED_P1 = 17,
+       CT_SUBMITTED_P2 = 19, CT_PRESENT_P1 = 21, CT_PRESENT_P2 = 23,
+       CT_FACE_P1 = 25, CT_FACE_P2 = 26, CT_RESIDENT_FACE_P1 = 27,
+       CT_RESIDENT_FACE_P2 = 28, CT_X_P1 = 29, CT_X_P2 = 31,
+       CT_Y_P1 = 33, CT_Y_P2 = 35, CT_ROLE_P1 = 37, CT_ROLE_P2 = 38,
+       CT_REASON = 39, CT_USED_FRAME_P1 = 40, CT_USED_FRAME_P2 = 42,
+       CT_USED_X_P1 = 44, CT_USED_X_P2 = 45, CT_USED_Y_P1 = 46, CT_USED_Y_P2 = 47,
+       CT_USED_FACE_P1 = 48, CT_USED_FACE_P2 = 49, CT_POLICY = 50,
+       CT_ROLE_FRESH_P1 = 51, CT_ROLE_FRESH_P2 = 52, CT_BYTES = 53 };
+volatile unsigned char contact_trace[CT_BYTES];
+#endif
+
+#if LUTA_CONTACT_STAMPS
+/* Somente candidato: associa o quadro/face/posicao preparados ao retorno da
+ * copia da SAT. Nao autentica scanout, prioridade nem o limite de 8/linha. */
+typedef struct {
+    const Frame *frame;
+    unsigned char face, base_pair, x, y, role;
+} ContactStamp;
+static ContactStamp contact_prepared[2], contact_committed[2];
+static unsigned char contact_draw_count[2], contact_draw_invalid[2];
+#if LUTA_CONTACT_GUARD
+volatile unsigned int contact_guard_rejected, contact_guard_accepted;
+#endif
+#if LUTA_CONTACT_SAT
+volatile unsigned int contact_sat_unready, contact_sat_overlaps;
+#endif
+#if LUTA_PRESENT_HIT
+volatile unsigned int probe_present_unready, probe_present_hits;
+#endif
+#endif
 
 /* Equivalente a frames/150 e frames%150 em cada iteracao, inclusive apos o
  * wrap u16. So o avanco sequencial do loop pode chamar este relogio. */
@@ -434,6 +523,9 @@ static void cache_invalidate(CacheSlot *s) {
     s->pose_global = 0xFFFFu;
     s->loaded_pairs = 0;
     s->frame = 0;            /* Lote B.2: sem frame residente, sem imagem */
+#if LUTA_CONTACT_STAMPS
+    s->role_fresh = 0u;
+#endif
 #if LUTA_SPECULATIVE_PREFETCH
     s->speculative = 0u;
 #endif
@@ -531,6 +623,9 @@ static void promote_pending(unsigned char side) {
     current[side] = pending[side];
     pending[side].pose_global = 0xFFFFu;
     pending[side].frame = 0;
+#if LUTA_CONTACT_STAMPS
+    pending[side].role_fresh = 0u;
+#endif
     pending[side].speculative = 0u;
 }
 #endif
@@ -590,6 +685,9 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
         current[side] = pending[side];
         pending[side].pose_global = 0xFFFFu;
         pending[side].frame = 0;
+#if LUTA_CONTACT_STAMPS
+        pending[side].role_fresh = 0u;
+#endif
 #endif
     }
     return moved;
@@ -642,12 +740,18 @@ static void request_pose(unsigned char side, unsigned int pose_global,
             cache_invalidate(&pending[side]);
         }
         current[side].frame = frame;
+#if LUTA_CONTACT_STAMPS
+        current[side].role_fresh = 1u;
+#endif
         return;
     }
     if (pending[side].pose_global == pose_global && pending[side].face == face) {
         /* A imagem ainda em voo pode ser reutilizada por outro elemento AIR;
          * conservar os bytes, mas publicar a metadata do elemento atual. */
         pending[side].frame = frame;
+#if LUTA_CONTACT_STAMPS
+        pending[side].role_fresh = 1u;
+#endif
 #if LUTA_SPECULATIVE_PREFETCH
         if (pending[side].speculative) {
             pending[side].speculative = 0u;
@@ -709,6 +813,9 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         pending[side].loaded_pairs = 0;
         pending[side].frame = frame;
         pending[side].face = face;
+#if LUTA_CONTACT_STAMPS
+        pending[side].role_fresh = 1u;
+#endif
 #if LUTA_SPECULATIVE_PREFETCH
         pending[side].speculative = 0u;
 #endif
@@ -771,6 +878,9 @@ static void stage_prefetch(unsigned char side, unsigned int pose_global,
     }
     if (pending[side].pose_global == pose_global && pending[side].face == face) {
         pending[side].frame = frame;
+#if LUTA_CONTACT_STAMPS
+        pending[side].role_fresh = 1u;
+#endif
         return;
     }
     cancel_prefetch(side);
@@ -784,6 +894,9 @@ static void stage_prefetch(unsigned char side, unsigned int pose_global,
     pending[side].loaded_pairs = 0u;
     pending[side].frame = frame;
     pending[side].face = face;
+#if LUTA_CONTACT_STAMPS
+    pending[side].role_fresh = 1u;
+#endif
     pending[side].speculative = 1u;
     if (side == 0u) probe_prefetch_reserved_p1++;
     else            probe_prefetch_reserved_p2++;
@@ -808,8 +921,12 @@ static void emit_frame(unsigned char side, const Frame *frame) {
         meta_data = current[side].face ? frame->metal_p2 : frame->meta_p2;
     else
         meta_data = current[side].face ? frame->metal : frame->meta;
-    if (!meta_data)
+    if (!meta_data) {
+#if LUTA_CONTACT_STAMPS
+        contact_draw_invalid[side] = 1u;
+#endif
         return;
+    }
     tile_base = (unsigned char)(current[side].base_pair * 2u);
     origin_y = (signed int)DIAG_FLOOR -
                (signed int)(fighter[side].y >> 8) + axis_y;
@@ -830,6 +947,10 @@ static void emit_frame(unsigned char side, const Frame *frame) {
         sx = origin_x + dx;
         sy = origin_y + dy;
         if (sx >= 0 && sx < 256 && sy >= 0 && sy < 192) {
+#if LUTA_CONTACT_STAMPS
+            /* O ponto inicial cabe, mas o sprite TALL pode sair pela borda. */
+            if (sx > 248 || sy > 176) contact_draw_invalid[side] = 1u;
+#endif
 #if LUTA_DIAG_CLIP_PLAIN
             /* wave-4m (gate b'): SMS_addSprite e o macro do header (SMSlib.h:189)
              * que expandse SMS_addSprite_f (asm naked). Sem NO_SPRITE_CHECKS o
@@ -845,9 +966,15 @@ static void emit_frame(unsigned char side, const Frame *frame) {
                 probe_omitted_sat++;
                 if (side == 0u) probe_sat_om_p1++;
                 else            probe_sat_om_p2++;
-            }
+#if LUTA_CONTACT_STAMPS
+                contact_draw_invalid[side] = 1u;
+#endif
+            } else {
+#if LUTA_CONTACT_STAMPS
+                contact_draw_count[side]++;
+#endif
 #if LUTA_DIAG_TELEMETRY
-            else if (sy < (signed int)DIAG_FLOOR) {
+                if (sy < (signed int)DIAG_FLOOR) {
                 /* wave-4c: array de diferencas no lugar do loop de 16 linhas
                  * por sprite (2.67 flancos/iter na fase 3). Duas escritas por
                  * sprite; a varredura unary ocorre uma vez por frame no loop
@@ -858,7 +985,12 @@ static void emit_frame(unsigned char side, const Frame *frame) {
                 line_diff[(unsigned char)sy]++;
                 if ((sy + 16) < (signed int)DIAG_FLOOR)
                     line_diff[(unsigned char)(sy + 16)]--;
+                }
+#endif
             }
+        } else {
+#if LUTA_CONTACT_STAMPS
+            contact_draw_invalid[side] = 1u;
 #endif
         }
         meta += 3;
@@ -1056,6 +1188,14 @@ static void move_x(unsigned char side, signed int delta) {
 
 static void set_role(unsigned char side, unsigned char role) {
     const CharacterData *cd = &characters[side];
+#if LUTA_CONTACT_STAMPS
+    /* Uma nova instancia de papel nao pode reutilizar uma SAT anterior,
+     * mesmo se o papel e o ponteiro do primeiro frame se repetirem. */
+    contact_prepared[side].frame = 0;
+    contact_committed[side].frame = 0;
+    current[side].role_fresh = 0u;
+    pending[side].role_fresh = 0u;
+#endif
     fighter[side].role = role;
     fighter[side].anim = cd->states[role].anim;
     fighter[side].fidx = 0;
@@ -1186,9 +1326,21 @@ static unsigned char clsn_box_at(const unsigned char *c, unsigned char k,
     }
 }
 static void mugen_to_screen(const MugenRect *m, unsigned char s, ScreenRect *o) {
+#if LUTA_CONTACT_SAT
+    signed int fx = (signed int)contact_committed[s].x;
+    signed int fy = (signed int)DIAG_FLOOR - (signed int)contact_committed[s].y;
+    unsigned char face = contact_committed[s].face;
+#elif LUTA_PRESENT_HIT
+    /* Mesma ancora que emit_frame gravou na sombra da SAT neste frame. */
+    signed int fx = (signed int)contact_prepared[s].x;
+    signed int fy = (signed int)DIAG_FLOOR - (signed int)contact_prepared[s].y;
+    unsigned char face = contact_prepared[s].face;
+#else
     signed int fx = (signed int)(fighter[s].x >> 8);
     signed int fy = (signed int)DIAG_FLOOR - (signed int)(fighter[s].y >> 8);
-    if (!fighter[s].face) { o->l = fx + m->x1; o->r = fx + m->x2; }
+    unsigned char face = fighter[s].face;
+#endif
+    if (!face) { o->l = fx + m->x1; o->r = fx + m->x2; }
     else                  { o->l = fx - m->x2; o->r = fx - m->x1; }
     o->t = fy + m->y1;   /* y do AIR e negativo para cima: y1 e o topo */
     o->b = fy + m->y2;
@@ -1265,6 +1417,115 @@ static void diag_sfx_tick(void) {
 }
 #endif
 
+#if LUTA_CONTACT_TRACE
+static void contact_trace_word(unsigned char offset, unsigned int value) {
+    contact_trace[offset] = (unsigned char)value;
+    contact_trace[offset + 1u] = (unsigned char)(value >> 8);
+}
+
+/* Captura as entradas de boxes_overlap na sua fronteira real, antes de
+ * aplicar hit/guard. Campos submetidos sao a ultima preparacao anterior,
+ * nao prova de SAT no VDP ou framebuffer. Duas escritas de seq delimitam
+ * o registro para que leitor pausado recuse um snapshot incompleto. */
+static void trace_contact(unsigned char attacker, unsigned char kind,
+                          const Frame *f0, const Frame *f1, unsigned char reason) {
+    contact_trace[CT_SEQ]++;
+    contact_trace[CT_ATTACKER] = attacker;
+    contact_trace[CT_KIND] = kind; /* 1 guarda, 2 acerto, 3 bloqueado */
+    contact_trace_word(CT_TICK, frames);
+    contact_trace_word(CT_FRAME_P1, (unsigned int)f0);
+    contact_trace_word(CT_FRAME_P2, (unsigned int)f1);
+    contact_trace_word(CT_LOGICAL_P1, (unsigned int)characters[0].pose_base + f0->pose);
+    contact_trace_word(CT_LOGICAL_P2, (unsigned int)characters[1].pose_base + f1->pose);
+    contact_trace_word(CT_RESIDENT_P1, current[0].pose_global);
+    contact_trace_word(CT_RESIDENT_P2, current[1].pose_global);
+    contact_trace_word(CT_SUBMITTED_P1, probe_submit_p1);
+    contact_trace_word(CT_SUBMITTED_P2, probe_submit_p2);
+    contact_trace_word(CT_PRESENT_P1, probe_present_p1);
+    contact_trace_word(CT_PRESENT_P2, probe_present_p2);
+    contact_trace[CT_FACE_P1] = fighter[0].face;
+    contact_trace[CT_FACE_P2] = fighter[1].face;
+    contact_trace[CT_RESIDENT_FACE_P1] = current[0].face;
+    contact_trace[CT_RESIDENT_FACE_P2] = current[1].face;
+    contact_trace_word(CT_X_P1, fighter[0].x);
+    contact_trace_word(CT_X_P2, fighter[1].x);
+    contact_trace_word(CT_Y_P1, fighter[0].y);
+    contact_trace_word(CT_Y_P2, fighter[1].y);
+    contact_trace[CT_ROLE_P1] = fighter[0].role;
+    contact_trace[CT_ROLE_P2] = fighter[1].role;
+    contact_trace[CT_REASON] = reason; /* bit0 P1, bit1 P2 nao aderente */
+#if LUTA_CONTACT_SAT
+    contact_trace_word(CT_USED_FRAME_P1, (unsigned int)contact_committed[0].frame);
+    contact_trace_word(CT_USED_FRAME_P2, (unsigned int)contact_committed[1].frame);
+    contact_trace[CT_USED_X_P1] = contact_committed[0].x;
+    contact_trace[CT_USED_X_P2] = contact_committed[1].x;
+    contact_trace[CT_USED_Y_P1] = contact_committed[0].y;
+    contact_trace[CT_USED_Y_P2] = contact_committed[1].y;
+    contact_trace[CT_USED_FACE_P1] = contact_committed[0].face;
+    contact_trace[CT_USED_FACE_P2] = contact_committed[1].face;
+    contact_trace[CT_POLICY] = 1u;
+#elif LUTA_PRESENT_HIT
+    contact_trace_word(CT_USED_FRAME_P1, (unsigned int)contact_prepared[0].frame);
+    contact_trace_word(CT_USED_FRAME_P2, (unsigned int)contact_prepared[1].frame);
+    contact_trace[CT_USED_X_P1] = contact_prepared[0].x;
+    contact_trace[CT_USED_X_P2] = contact_prepared[1].x;
+    contact_trace[CT_USED_Y_P1] = contact_prepared[0].y;
+    contact_trace[CT_USED_Y_P2] = contact_prepared[1].y;
+    contact_trace[CT_USED_FACE_P1] = contact_prepared[0].face;
+    contact_trace[CT_USED_FACE_P2] = contact_prepared[1].face;
+    contact_trace[CT_POLICY] = 2u;
+#else
+    contact_trace_word(CT_USED_FRAME_P1, (unsigned int)f0);
+    contact_trace_word(CT_USED_FRAME_P2, (unsigned int)f1);
+    contact_trace[CT_USED_X_P1] = (unsigned char)(fighter[0].x >> 8);
+    contact_trace[CT_USED_X_P2] = (unsigned char)(fighter[1].x >> 8);
+    contact_trace[CT_USED_Y_P1] = (unsigned char)(fighter[0].y >> 8);
+    contact_trace[CT_USED_Y_P2] = (unsigned char)(fighter[1].y >> 8);
+    contact_trace[CT_USED_FACE_P1] = fighter[0].face;
+    contact_trace[CT_USED_FACE_P2] = fighter[1].face;
+    contact_trace[CT_POLICY] = 0u;
+#endif
+#if LUTA_CONTACT_STAMPS
+    contact_trace[CT_ROLE_FRESH_P1] = current[0].role_fresh;
+    contact_trace[CT_ROLE_FRESH_P2] = current[1].role_fresh;
+#else
+    contact_trace[CT_ROLE_FRESH_P1] = 0xFFu;
+    contact_trace[CT_ROLE_FRESH_P2] = 0xFFu;
+#endif
+    contact_trace[CT_SEQ]++;
+}
+#endif
+
+#if LUTA_CONTACT_GUARD
+static unsigned char contact_side_ready(unsigned char side, const Frame *frame) {
+    const ContactStamp *stamp;
+    if (side > 1u || !frame) return 0u;
+    stamp = &contact_committed[side];
+    return (unsigned char)(current[side].role_fresh && current[side].frame == frame && stamp->frame == frame &&
+        current[side].pose_global == (unsigned int)characters[side].pose_base + frame->pose &&
+        current[side].face == fighter[side].face && stamp->face == fighter[side].face &&
+        stamp->role == fighter[side].role &&
+        stamp->base_pair == current[side].base_pair &&
+        stamp->x == (unsigned char)(fighter[side].x >> 8) &&
+        stamp->y == (unsigned char)(fighter[side].y >> 8));
+}
+#endif
+
+#if LUTA_CONTACT_SAT
+static unsigned char contact_sat_ready(unsigned char side) {
+    const ContactStamp *stamp;
+    const Frame *frame;
+    if (side > 1u) return 0u;
+    stamp = &contact_committed[side];
+    frame = stamp->frame;
+    if (!frame) return 0u;
+    return (unsigned char)(current[side].role_fresh && current[side].frame == frame &&
+        current[side].pose_global == (unsigned int)characters[side].pose_base + frame->pose &&
+        stamp->role == fighter[side].role && stamp->face == fighter[side].face &&
+        current[side].face == stamp->face && current[side].base_pair == stamp->base_pair);
+}
+#endif
+
 static void combat_step(const Frame *fn0, const Frame *fn1) {
     unsigned char a;
     for (a = 0u; a < 2u; a++) {
@@ -1277,9 +1538,56 @@ static void combat_step(const Frame *fn0, const Frame *fn1) {
         if (fighter[a].hit_done) continue;
         if (!(st->flags & S_HIT)) continue;
         if (fighter[d].life == 0u) continue;
+#if LUTA_CONTACT_SAT
+        /* Candidato: geometria e posicoes da ultima copia de SAT, desde que
+         * ainda pertençam ao papel, face e resident atual. E uma aproximacao
+         * temporal: nao e equivalencia CNS nem prova de scanout. */
+        if (!contact_sat_ready(a) || !contact_sat_ready(d)) {
+            contact_sat_unready++;
+            continue;
+        }
+        fa = contact_committed[a].frame;
+        fd = contact_committed[d].frame;
+#endif
+#if LUTA_PRESENT_HIT
+        /* So ha dano se os dois corpos foram submetidos por inteiro neste
+         * frame e ainda pertencem ao papel atual. O cursor logico pode
+         * estar adiante; as caixas usadas sao as da sombra da SAT. */
+        if (!contact_prepared[a].frame || !contact_prepared[d].frame ||
+            contact_prepared[a].role != fighter[a].role ||
+            contact_prepared[d].role != fighter[d].role) {
+            probe_present_unready++;
+            continue;
+        }
+        fa = contact_prepared[a].frame;
+        fd = contact_prepared[d].frame;
+#endif
         probe_clsn_checks++;
         if (!boxes_overlap(fa, a, 0u, fd, d)) continue;
+#if LUTA_CONTACT_SAT
+        contact_sat_overlaps++;
+#endif
+#if LUTA_CONTACT_GUARD
+        {
+            unsigned char reason = 0u;
+            if (!contact_side_ready(0u, fn0)) reason |= 1u;
+            if (!contact_side_ready(1u, fn1)) reason |= 2u;
+            if (reason) {
+                contact_guard_rejected++;
+                trace_contact(a, 3u, fn0, fn1, reason);
+                continue;
+            }
+            contact_guard_accepted++;
+        }
+#endif
+#if LUTA_CONTACT_TRACE
+        trace_contact(a, (characters[d].states[fighter[d].role].flags & S_BLOCKABLE)
+                          ? 1u : 2u, fn0, fn1, 0u);
+#endif
         fighter[a].hit_done = 1u;
+#if LUTA_PRESENT_HIT
+        probe_present_hits++;
+#endif
         if (cd->hitstop) {
             fighter[a].stop = cd->hitstop;
             fighter[d].stop = cd->hitstop;
@@ -1528,6 +1836,9 @@ static void prefetch_next(unsigned char side, const Frame *frame,
 static void logic_tick(const Frame *fn[2], unsigned int poses_req[2]) {
     unsigned char side;
     unsigned char left_before = (fighter[0].x <= fighter[1].x) ? 0u : 1u;
+#if LUTA_PRESENT_HIT
+    present_left_before = left_before;
+#endif
 #if LUTA_DIAG_TELEMETRY
     unsigned char t0 = probe_vbl_tick;
 #endif
@@ -1573,11 +1884,13 @@ static void logic_tick(const Frame *fn[2], unsigned int poses_req[2]) {
             advance_actor(side, &poses_req[side], &fn[side]);
 #endif
     }
-    /* M2 (wave-5a): resolucao de combate e separacao de corpos sobre
-     * os frames logicos deste frame (frames_now), que e o quadro
-     * visivel quando probe_stall_frames == 0. */
+    /* M2 (wave-5a): resolucao de combate e separacao de corpos. Com
+     * LUTA_PRESENT_HIT o combate espera a sombra da SAT do mesmo frame
+     * e roda depois de sprites_build; o cursor logico nao aplica dano. */
+#if !LUTA_PRESENT_HIT
     combat_step(fn[0], fn[1]);
     pusher_step(left_before);
+#endif
     for (side = 0; side < 2u; side++) {
         if (poses_req[side] != 0xFFFFu) {
             if (poses_req[side] < VERSUS_POSE_COUNT)
@@ -1635,6 +1948,11 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
         unsigned int om_before =
             (side == 0u) ? probe_sat_om_p1 : probe_sat_om_p2;
         unsigned int om_after;
+#if LUTA_CONTACT_STAMPS
+        contact_draw_count[side] = 0u;
+        contact_draw_invalid[side] = 0u;
+        contact_prepared[side].frame = 0;
+#endif
 #if LUTA_BG_ACTOR
         if (side == 0u) {
             if (prepare_bg_actor(side)) submitted = current[side].pose_global;
@@ -1661,6 +1979,17 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
             probe_present_p2 = (submitted != 0xFFFFu && om_after == om_before)
                                    ? submitted : 0xFFFFu;
         }
+#if LUTA_CONTACT_STAMPS
+        if (submitted != 0xFFFFu && current[side].role_fresh && om_after == om_before &&
+            contact_draw_count[side] != 0u && !contact_draw_invalid[side]) {
+            contact_prepared[side].frame = current[side].frame;
+            contact_prepared[side].face = current[side].face;
+            contact_prepared[side].base_pair = current[side].base_pair;
+            contact_prepared[side].x = (unsigned char)(fighter[side].x >> 8);
+            contact_prepared[side].y = (unsigned char)(fighter[side].y >> 8);
+            contact_prepared[side].role = fighter[side].role;
+        }
+#endif
         if (current[side].pose_global != poses_req[side] ||
             current[side].face != fighter[side].face) {
             probe_stall_frames++;   /* pedida != residente: espera medida */
@@ -1877,6 +2206,29 @@ void main(void) {
     frames = 0u;
     pacing_step = 0u;
     pacing_remainder = 0u;
+#if LUTA_CONTACT_TRACE
+    for (i = 0u; i < CT_BYTES; i++) contact_trace[i] = 0u;
+#endif
+#if LUTA_CONTACT_STAMPS
+    for (i = 0u; i < 2u; i++) {
+        contact_prepared[i].frame = 0;
+        contact_committed[i].frame = 0;
+        contact_draw_count[i] = 0u;
+        contact_draw_invalid[i] = 0u;
+    }
+#endif
+#if LUTA_CONTACT_GUARD
+    contact_guard_rejected = 0u;
+    contact_guard_accepted = 0u;
+#endif
+#if LUTA_CONTACT_SAT
+    contact_sat_unready = 0u;
+    contact_sat_overlaps = 0u;
+#endif
+#if LUTA_PRESENT_HIT
+    probe_present_unready = 0u;
+    probe_present_hits = 0u;
+#endif
 #if LUTA_DIAG_PSG
     diag_sfx_pending = DIAG_SFX_NONE;
     diag_sfx_active_priority = DIAG_SFX_NONE;
@@ -1941,6 +2293,9 @@ void main(void) {
             pending[0].loaded_pairs = 0;
             pending[0].frame = boot_frame;
             pending[0].face = fighter[0].face;
+#if LUTA_CONTACT_STAMPS
+            pending[0].role_fresh = 1u;
+#endif
             stream_pending(0, 0xFFu);
         }
     }
@@ -1958,6 +2313,9 @@ void main(void) {
             pending[1].loaded_pairs = 0;
             pending[1].frame = boot_frame;
             pending[1].face = fighter[1].face;
+#if LUTA_CONTACT_STAMPS
+            pending[1].role_fresh = 1u;
+#endif
             stream_pending(1, 0xFFu);
             probe_boot_p2_fit = (current[1].pose_global == pose_g);
         } else {
@@ -1983,6 +2341,12 @@ void main(void) {
         probe_frame = frames;
         logic_tick(frames_now, poses_req);
         sprites_build(frames_now, poses_req);
+#if LUTA_PRESENT_HIT
+        /* Dano e guarda usam o quadro que esta na sombra da SAT agora.
+         * O push de corpo fica depois, com a ordem de x anterior ao passo. */
+        combat_step(frames_now[0], frames_now[1]);
+        pusher_step(present_left_before);
+#endif
 
         /* Commits VDP do frame, so aqui, dentro do VBlank pedido. */
         SMS_waitForVBlank();
@@ -2025,6 +2389,10 @@ void main(void) {
                 probe_upload_maxvbl = moved;
         }
         SMS_copySpritestoSAT();
+#if LUTA_CONTACT_STAMPS
+        contact_committed[0] = contact_prepared[0];
+        contact_committed[1] = contact_prepared[1];
+#endif
 #if LUTA_DIAG_PSG
         diag_sfx_tick();
 #endif
