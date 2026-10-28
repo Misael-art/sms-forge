@@ -289,11 +289,28 @@ def _compact_facing_pose(tiles: bytes, metadata: bytes,
     return bytes(compact), bytes(rewritten)
 
 
+def _pair_content_hashes(compact_pairs: bytes) -> list[int]:
+    """Emit CRC-8/ATM filters; runtime must verify matching hashes bytewise."""
+    if len(compact_pairs) % 64:
+        raise ValueError("compact pair payload is not a multiple of 64 bytes")
+    result = []
+    for offset in range(0, len(compact_pairs), 64):
+        pair = compact_pairs[offset:offset + 64]
+        crc = 0
+        for byte in pair:
+            crc ^= byte
+            for _ in range(8):
+                crc = ((crc << 1) ^ 0x07) & 0xFF if crc & 0x80 else (crc << 1) & 0xFF
+        result.append(crc)
+    return result
+
+
 def _runtime_table(roles: list[dict], role_frames: dict[str, list[dict]],
                    pose_count: int, artifacts: list[smsdev.Artifact],
                    bank_map: dict[str, tuple[int, int]], palette: list[int],
                    runtime: dict[str, int],
-                   facing_sizes: dict[str, int] | None = None) -> str:
+                   facing_sizes: dict[str, int] | None = None,
+                   pair_hashes_by_stem: dict[str, dict[str, list[int]]] | None = None) -> str:
     symbols = {artifact.symbol for artifact in artifacts}
     lines = ["", "/* Runtime tables: generated from AIR/SFF/ACT/CNS/CMD. */",
              f"#define CUT_POSE_COUNT {pose_count}", "",
@@ -316,8 +333,35 @@ def _runtime_table(roles: list[dict], role_frames: dict[str, list[dict]],
              f"#define CUT_STREAM_CHUNK_BYTES {STREAM_CHUNK_BYTES}", ""]
     for index, role in enumerate(roles):
         lines.append(f"#define CUT_ANIM_{role['role'].upper()} {index}")
-    lines += ["",
-             "/* FACE_SIZE is one facing's length in the adjacent R/L payload. */"]
+    pair_hashes_by_stem = pair_hashes_by_stem or {}
+    max_pairs = 0
+    lines.append("#if defined(LUTA_PAIR_SLOT_REUSE) && LUTA_PAIR_SLOT_REUSE")
+    for role in roles:
+        for frame in role_frames[role["role"]]:
+            stem = frame["stem"]
+            faces = pair_hashes_by_stem.get(stem)
+            if not faces or set(faces) != {"right", "left", "p2_right", "p2_left"}:
+                raise ValueError(f"missing palette/facing pair hashes for {stem}")
+            max_pairs = max(max_pairs, *(len(values) for values in faces.values()))
+            for key, suffix in (("right", "_RIGHT_PAIR_HASHES"),
+                                 ("left", "_LEFT_PAIR_HASHES"),
+                                 ("p2_right", "_P2_RIGHT_PAIR_HASHES"),
+                                 ("p2_left", "_P2_LEFT_PAIR_HASHES")):
+                values = faces[key]
+                if not values:
+                    raise ValueError(f"empty compact facing pair hashes: {stem}{suffix}")
+                lines.append(f"static const unsigned char {stem}{suffix}[{len(values)}] = {{")
+                lines.append("    " + ", ".join(str(value) for value in values) + ",")
+                lines.append("};")
+    lines += ["#endif",
+              "#if defined(LUTA_PAIR_SLOT_REUSE) && LUTA_PAIR_SLOT_REUSE",
+              "#define CUT_PAIR_HASH_POINTERS(right, left) right, left",
+              "#else",
+              "#define CUT_PAIR_HASH_POINTERS(right, left) 0, 0",
+              "#endif",
+              "", "#define CUT_PAIR_CONTENT_HASHES_VERSION 1",
+              f"#define CUT_MAX_POSE_PAIRS {max_pairs}",
+              "", "/* FACE_SIZE is one facing's length in the adjacent R/L payload. */"]
     facing_sizes = facing_sizes or {}
     for role in roles:
         for frame in role_frames[role["role"]]:
@@ -328,6 +372,13 @@ def _runtime_table(roles: list[dict], role_frames: dict[str, list[dict]],
                     p1_face_size % 64 or p2_face_size % 64):
                 raise ValueError(f"invalid compact facing size for {stem}: "
                                  f"P1={p1_face_size}, P2={p2_face_size}")
+            faces = pair_hashes_by_stem[stem]
+            expected = {"right": p1_face_size // 64,
+                        "left": p1_face_size // 64,
+                        "p2_right": p2_face_size // 64,
+                        "p2_left": p2_face_size // 64}
+            if {key: len(value) for key, value in faces.items()} != expected:
+                raise ValueError(f"pair hash count disagrees with compact face size for {stem}")
             lines.append(f"#define {stem}_FACE_SIZE {p1_face_size}")
             lines.append(f"#define {stem}_P2_FACE_SIZE {p2_face_size}")
     lines += ["", "static const PoseRef poses_all[CUT_POSE_COUNT * 2] = {"]
@@ -339,14 +390,19 @@ def _runtime_table(roles: list[dict], role_frames: dict[str, list[dict]],
                 face_size_symbol = stem + suffix + "_FACE_SIZE"
                 if tile_symbol not in bank_map:
                     raise ValueError(f"missing bank entry for {tile_symbol}")
-                # side 1 draws with Frame.metal_p2, whose compact pair ids
+                # side 1 draws with Frame.metal_p2, whose compact pair indices
                 # address the LEFT facing. The combined payload is
                 # right.ljust(face_size) + left.ljust(face_size), so the P2
                 # PoseRef must start at OFF + FACE_SIZE. Pointing it at the
                 # right face makes every P2 cell read a valid but wrong pair
                 # (the body splits at the tile seams).
                 face_offset = (" + " + face_size_symbol) if suffix else ""
-                lines.append(f"    {{ {tile_symbol}_BANK, {tile_symbol}_OFF{face_offset}, {face_size_symbol} }},")
+                pair_suffix = "_P2" if suffix else ""
+                lines.append(
+                    f"    {{ {tile_symbol}_BANK, {tile_symbol}_OFF{face_offset}, "
+                    f"{face_size_symbol}, CUT_PAIR_HASH_POINTERS("
+                    f"{stem}{pair_suffix}_RIGHT_PAIR_HASHES, "
+                    f"{stem}{pair_suffix}_LEFT_PAIR_HASHES) }},")
     lines += ["};", "", "static const Frame frames_all[CUT_POSE_COUNT] = {"]
     pose_index = 0
     for role in roles:
@@ -1188,6 +1244,8 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
         final: list[smsdev.Artifact] = []
         compact_sizes: dict[str, int] = {}
         compact_face_sizes: dict[str, int] = {}
+        pair_payload_sets: dict[str, set[bytes]] = {"p1": set(), "p2": set()}
+        pair_hashes_by_stem: dict[str, dict[str, list[int]]] = {}
         for symbol in required:
             stem = symbol[:-6]
             p1_tiles = p1_by_symbol[symbol]
@@ -1204,6 +1262,20 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
                 p2_blob, p2_by_symbol[stem + "_META"].data, stem + " P2 right")
             p2_left, p2_metal = _compact_facing_pose(
                 p2_blob, p2_by_symbol[stem + "_METAL"].data, stem + " P2 left")
+            pair_payload_sets["p1"].update(
+                p1_right[index:index + 64] for index in range(0, len(p1_right), 64))
+            pair_payload_sets["p1"].update(
+                p1_left[index:index + 64] for index in range(0, len(p1_left), 64))
+            pair_payload_sets["p2"].update(
+                p2_right[index:index + 64] for index in range(0, len(p2_right), 64))
+            pair_payload_sets["p2"].update(
+                p2_left[index:index + 64] for index in range(0, len(p2_left), 64))
+            pair_hashes_by_stem[stem] = {
+                "right": _pair_content_hashes(p1_right),
+                "left": _pair_content_hashes(p1_left),
+                "p2_right": _pair_content_hashes(p2_right),
+                "p2_left": _pair_content_hashes(p2_left),
+            }
             p1_face_size = max(len(p1_right), len(p1_left))
             p2_face_size = max(len(p2_right), len(p2_left))
             p1_combined = (p1_right.ljust(p1_face_size, b"\0") +
@@ -1406,7 +1478,8 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
         close_attack_rules = _close_attack_rules(ch, roles, commands)
         far_attack_rules = _far_attack_rules(ch, roles, commands)
         header += _runtime_table(roles, pose_frames, len(required), final, bank_map,
-                                 palette_words, runtime, compact_face_sizes)
+                                 palette_words, runtime, compact_face_sizes,
+                                 pair_hashes_by_stem)
         header += guard_end
         (out_dir / "ken_scene_runtime.h").write_text(header, encoding="ascii")
 
@@ -1415,6 +1488,13 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
                  "palette_p1_act": p1_name, "palette_p2_act": p2_name,
                  "palette_p1_words": p1_codebook, "palette_p2_words": p2_codebook,
                  "palette_index_shift_p2": 8,
+                 "pair_content_hashes": {
+                     "schema": 1,
+                     "algorithm": "crc8_atm_candidate_then_exact_64_byte_compare",
+                     "p1_unique_pairs": len(pair_payload_sets["p1"]),
+                     "p2_unique_pairs": len(pair_payload_sets["p2"]),
+                     "cross_palette_reuse": False,
+                 },
                  "runtime_constants": runtime,
                  "close_attack_rules": close_attack_rules,
                  "far_attack_rules": far_attack_rules,

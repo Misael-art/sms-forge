@@ -537,3 +537,98 @@ manifesto SHA `18bfb0452419754e4c458455b0f186f9e900ea85c34de8f0b1b4e4817d68a6e8`
 27.544 arquivos e 484.824.066 B. `recovery_bundle.py verify` passou e
 confirmou a ROM candidata, screenshot e sidecars; a cópia fica no mesmo disco,
 sem substituição por backup externo.
+
+## Continuidade 2026-10-28 — reúso exato de pares VRAM
+
+Lote autorizado: alocação de slots físicos por par de tiles exatamente igual,
+com CRC-8/ATM apenas como filtro e comparação dos 64 bytes antes de reutilizar.
+O padrão `LUTA_PAIR_SLOT_REUSE` continua 0. Fonte atual durante a medição:
+`SMS_projects/luta_mugem_rev2/src/main.c` SHA
+`86d4b928ea7dba24d72a32f058a8ff7d4a2b0326c8d50876bf1e68e0935e92f3`,
+`inc/rev2_diag.h` SHA
+`6770d7c2734a940525681f3a81fc7fc4f4f2e69ea77afa49d37c6614658d8f47`.
+Gerador: `scene_cut.py` SHA
+`8d1475c3e74187591271aa5a369b538bb51a5e17a70c48878a10cf3f0dbec41a`;
+`versus_scene_cut.py` SHA
+`6d5647b456276039c133ad63087a50a853c8b4120edc87dabd2008e95134cd1b`.
+
+A primeira medição v2 revelou colisão no mapa de sondas:
+`probe_pair_reused_p2@0xC8D2` era `probe_vline_min`; esse resultado P2 não é
+válido. Mantidos todos os artefatos, as quatro sondas foram realocadas para
+`0xC900..0xC903` e declaradas/init também no controle. `audit_probe_corridor`
+passou nos mapas v3 (163 sondas; folga 1486 B controle e 1318 B candidata).
+No v6, o controle é byte a byte idêntico ao v3/v5; o mapa candidato passou
+com 163 sondas e 1018 B de folga. A ROM candidata v6
+`db5ef9190f9e4643b7d293824874db1be3fb299dd0dae144249e0d0e2c06fe1f` tem
+`_CODE=31425` B a partir de `0x0200` (351 B até `0x8000`) e `_DATA=1024` B.
+As builds isoladas são controle
+`75d662357d2a4d0d2aedcd0cd670721118c040499b0c4841c63483c8fdb83dd6` e
+candidata `01c204a9f0fdeed94c134f3286edf90add06f7b486761faf1c319432f1d8e464`;
+`_CODE` candidato = 31202 B a partir de `0x0200`, margem 1054 B até
+`0x8000`, `_DATA=725` B. O define só existe nos manifests de candidato v3;
+nenhum destino/build nominal foi substituído.
+
+QA privada v3 em
+`SMS_projects/luta_mugem_rev2/out/evidence/pair_slot_reuse_qa_20261028/aligned_resident43_ab_v2/observations.json`:
+controle e candidato começaram em `probe_frame=60`; key2 foi consumido no 67.
+Na transição P1 HK da pose 40 para 43, a candidata residente/submetida/
+apresentada em 86 (19 frames, espera +8), controle em 89 (22 frames, espera
++10). Contagens: candidata 9 reutilizados/8 uploads; controle 0/0. Ambas
+`sat_om_p1=0`; captura 256×192 idêntica, SHA
+`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`;
+os dois bundles passaram `check-bundle`. Isso prova só essa transição. O
+comparador v1 preservado marcou falha por exigir igualdade de `wait`; o v2
+corrigiu a propriedade para pose apresentada e contagem de espera menor.
+
+A QA privada v6 repetiu a mesma transição com `all_expected=true`: candidata
+apresentada em 19 frames/espera +8, 9 pares reutilizados/8 uploads; controle
+22 frames/espera +10, 0/0. Ambos sem omissão SAT, captura idêntica
+`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e` e bundles
+válidos. Sessões `422b9e2bdbac4ea7b9d83459cd5000f2` e
+`c5a4933ec2d54b62863a846169bce339`; relatório em
+`out/evidence/pair_slot_reuse_qa_20261028/aligned_resident43_ab_v6/observations.json`.
+
+Tentativas de custo: v4 cacheou a contagem de pares usados, v5 tornou monotônica
+a busca de slots livres, v6 indexou hashes CRC dos pares residentes em tabela
+fixa, mantendo comparação exata. Runtime probe privado (4×3 s, NTSC): v4
+candidata `[11.18,10.19,14.80,14.80]`, controle
+`[23.35,25.97,21.70,18.42]`; v5 `[15.13,16.76,19.41,15.13]` vs
+`[23.35,25.97,21.60,18.41]`. Duas A/B v6 deram candidata
+`[16.11,18.75,19.73,16.11]` e `[16.11,18.74,19.73,16.12]`, controles
+`[23.03,25.98,21.70,18.75]` e `[22.99,25.99,21.70,18.73]`. Todas as ROMs
+falham no critério de 60 FPS; v6 candidata ficou abaixo em cada janela
+pareada. Duas sessões não provam estabilidade ou causa exclusiva. Relatórios
+externos v6 em `out/evidence/pair_slot_reuse_qa_20261028/runtime_probe_ab_v6/`
+e `runtime_probe_ab_v6_named/observations.json`. O define fica desligado.
+
+`run_worst_frame_ab_v3.py` concluiu as duas sessões privadas, mas só o controle
+selou: 1749 derrames/3000, `vline_min=14`, sessão
+`d7c16084d5e4480790f632a3e792d6e5`. A primeira candidata em
+`a9bd4639693b450498a82e48c1414270` chegou a 2608 frames após 240 s sem selo;
+`sem_lastro`, não budget. A repetição de 360 s
+(`e3da1f50112c4bdf8d554f4e645feb5e`) selou 3000 frames, 1740 derrames e
+`vline_min=4`; diferença de nove sem atribuição causal, pior mínimo de linha.
+A candidata v6 (`db5ef919…`, sessão
+`a2bc12f4a97a4a0396351a8abd47899a`) selou 3000 frames com 1740 derrames e
+`vline_min=4`, veredito `derramou`; igualou o contador do retry v3 e manteve
+margem de linha baixa. Relatório em
+`out/evidence/pair_slot_reuse_qa_20261028/worst_frame_enabled_v6/observations.json`.
+Não iniciar outra sessão. Testes focados passaram 21/21; a suíte rev2 final
+passou 305 testes (150 fora do filtro). A primeira execução integral encontrou
+dois harnesses que não extraíam `promote_pending`; foram corrigidos antes da
+execução final. Passaram `audit_debug_markers`, `audit_probe_corridor`
+(163 sondas; 1486 B controle/1018 B candidata), `audit_symbol_size_sync`,
+`audit_hardware_constants`, `audit_doc_sync`, `audit_meaningful_change` nos
+blockers FPS/memory bank e `audit_causal_persistence` (advance). Estado causal
+SHA `59a01d5dd79cce30cafce6f33fae1409fbde00b7f74eb7eb3779752f17100371`.
+Recovery local `.runtime/backups/luta_mugem_rev2-runtime-20261028-pair-slot-reuse.tar.gz`
+(107.771.561 B, SHA `c65ba3d40a911c890ec4aab404df91b176377eecf352c494d03f9f7a01797517`),
+manifest SHA `0a2ff38736dffbf31545fdeaefe5293f265fe95f48b2c289f9192c6850ddf534`;
+`verify` passou com 28.464 arquivos. Cópia local no mesmo disco, não externa.
+Self-checks de `measure_runtime_probe.py` e `measure_worst_frame.py` passaram.
+Próximos passos deste lote: diff final, stage explícito, um commit e um push;
+depois conferir SHA remoto/PR/checks. Limites: gameplay/dano,
+FPS estável, áudio, qualidade/delivery e budget continuam não aprovados; manter
+IDs abertos.
+Branch `codex/host-bootstrap-continuity-20261024`, PR #4 continua draft; falta
+revisão final e um único push do lote, sem merge/release.

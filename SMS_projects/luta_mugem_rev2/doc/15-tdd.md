@@ -270,6 +270,85 @@ instrumentado: uma transição com reúso do perfil `p1_ken` (ação 240/HK,
 frames 2→3, nove pares) mais o pior P2 kick como controle negativo. Não elevar
 essa evidência a budget, fidelidade ou delivery.
 
+## Reúso exato de pares físicos — candidato opt-in (2026-10-28)
+
+`LUTA_PAIR_SLOT_REUSE=1` troca a alocação contígua por um mapa de pares
+compactos para slots físicos arbitrários do pool de sprites. O `versus-cut`
+gera CRC-8/ATM por bloco de 64 bytes como filtro; só igualdade byte a byte dos
+64 bytes originais, lidos após mapear cada banco ROM, autoriza compartilhar um
+slot. A colisão de CRC não é equivalência. A busca compara a pose residente do
+mesmo lado; P1 e P2 mantêm payload/paleta próprios e nunca emprestam slots um
+ao outro. META remapeia o índice para o slot efetivamente residente. Pares
+novos ocupam slots livres e são enviados em VBlank; o quadro antigo permanece
+visível até todo o pending estar completo e promovido. `LUTA_BG_ACTOR` e
+`LUTA_SPECULATIVE_PREFETCH` são combinações recusadas em compilação.
+
+O padrão continua desligado. Os builds pareados v3 usam o mesmo conjunto de
+dados gerados; apenas `LUTA_PAIR_SLOT_REUSE` difere. O candidato compilou
+`_CODE=31202` bytes a partir de `0x0200`, deixando 1054 bytes até `0x8000`, e
+`_DATA=725` bytes; margem ainda estreita para ativação nominal. No caso
+`p1_ken`, comando key2/HK alinhado no `probe_frame=67` levou à pose 43 residente,
+submetida e apresentada em `probe_frame=86` no candidato (19 frames após o
+comando, 8 frames contados em espera) e em `probe_frame=89` no controle (22 e
+10). A candidata marcou 9 pares reutilizados/8 uploads; o controle manteve
+0/0. Ambas registraram zero omissões SAT e a mesma captura framebuffer
+(`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`). É um
+único caso de transição, sem claim de ganho geral, FPS, pior VBlank, gameplay
+ou delivery; ver SHAs, sessões e recibos no memory bank.
+
+O teste C mantém o P2 kick extremo como negativo: estado anterior com 17 pares,
+pedido com 20 (1280 B), zero pares exatos compartilhados; um CRC igual com
+bytes diferentes também força a comparação exata. O mapa resulta em
+0 reutilizados/20 uploads e preserva o conteúdo final. O harness também cobre
+colisão de hash em cadeia e reconstrução do índice depois de uma promoção.
+Isso valida o algoritmo isolado, não prova essa ação no runtime nem o prazo da
+ROM.
+
+As quatro sondas de contagem ficam em `0xC900..0xC903`, declaradas também no
+controle e inicializadas a zero para manter mapas comparáveis. A faixa
+`0xC8D0..0xC8D6` continua reservada aos medidores; `probe_vline_min` usa
+`0xC8D2`. Uma versão anterior pôs o contador P2 reutilizado nesse mesmo byte,
+invalidando aquela leitura. Esses artefatos foram preservados; o build v3
+corrige o endereço e passa `audit_probe_corridor`. No worst-frame v3, o
+controle selou 3000 frames com 1749 derrames e `vline_min=14`. A primeira
+sessão candidata esperou 240 s, chegou somente a `probe_frame=2608` com
+`done=0` e retornou `sem_lastro`; seus 1507 derrames parciais não são janela
+válida. A repetição fresca de 360 s selou 3000 frames, 1740 derrames e
+`vline_min=4`. A diferença de nove derrames não tem atribuição causal com uma
+amostra por ROM, e o menor `vline_min` candidato foi pior; ambos reprovam o
+budget.
+
+Depois do v3, v4 armazenou a contagem de slots ocupados e invalidou o cache na
+liberação; v5 passou a encontrar slots livres com cursor monotônico; v6
+indexou os pares residentes por CRC em tabela fixa, manteve cadeias de colisão
+e comparação exata dos 64 bytes. Builds usam os mesmos dados gerados. O
+controle v6 é byte a byte idêntico ao controle anterior
+(`75d662357d2a4d0d2aedcd0cd670721118c040499b0c4841c63483c8fdb83dd6`); a ROM
+candidata v6 é
+`db5ef9190f9e4643b7d293824874db1be3fb299dd0dae144249e0d0e2c06fe1f`.
+Seu `_CODE=31425` B a partir de `0x0200`, com só 351 B até `0x8000`, e
+`_DATA=1024` B. `audit_probe_corridor` passou em 163 sondas: controle com
+1486 B de folga, candidata com 1018 B. A margem de ROM não permite ativação
+nominal sem nova redução medida.
+
+A sessão privada v6 repetiu a transição HK: pose 43 residente/submetida/
+apresentada em 19 frames após o comando, espera +8, 9 pares reutilizados/8
+uploads; o controle levou 22 frames, espera +10, contadores 0/0. Ambos tiveram
+zero omissões SAT, captura 256×192 idêntica
+(`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`) e
+bundles aprovados. Isso continua restrito àquela transição.
+
+Em duas A/B do runtime probe v6, cada uma com quatro janelas NTSC de 3 s, a
+candidata mediu `[16.11,18.75,19.73,16.11]` e `[16.11,18.74,19.73,16.12]`
+FPS; o controle `[23.03,25.98,21.70,18.75]` e
+`[22.99,25.99,21.70,18.73]`. Ambas falharam o critério de 60 FPS, e a
+candidata ficou abaixo do controle em todas as janelas pareadas. São duas
+execuções por ROM, sem claim de pacing por quadro. O define segue desligado.
+Essa medida é taxa do loop/bridge, não gameplay, áudio ou delivery. Worst-frame
+v6 selou 3000 frames com 1740 derrames e `vline_min=4`; o controle v3/v6 teve
+1749/3000 e `vline_min=14`. A candidata permanece reprovada em budget e o
+resultado não atribui causalidade aos nove derrames a menos.
+
 ## Arquitetura proposta, não implementada
 PacoteMUGEN imutável→parse→IRtipado→perfilcompat→loweringAOT/tabelas
 com predicados executáveis→runtimeC/Z80→ROMmedida. Reusar parsers/testes

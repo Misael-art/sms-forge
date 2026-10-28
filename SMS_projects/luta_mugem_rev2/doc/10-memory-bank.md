@@ -1,5 +1,126 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-28 — cache de pares físicos por conteúdo exato
+
+O candidato `LUTA_PAIR_SLOT_REUSE=1` associa cada par de tiles compacto a um
+slot VRAM físico. O `versus-cut` emite CRC-8/ATM como filtro; runtime compara
+os 64 bytes mapeados antes de reutilizar. A busca só reaproveita a pose
+residente do mesmo lado, preservando o contrato de paleta de P1/P2. Os pares
+novos usam slots livres e apenas eles entram no streaming; META usa o mapa
+físico. O pending só promove depois de completo. O padrão segue desligado,
+assim como prefetch e BG permanecem perfis incompatíveis.
+
+Falha e correção de sonda: o candidato v2 sobrepôs
+`probe_pair_reused_p2@0xC8D2` com `probe_vline_min`. `audit_probe_corridor`
+reprovou a colisão; leituras P2 e qualquer selo associado àquela ROM não são
+aceitação válida e seus artefatos foram preservados. Em v3, os quatro bytes
+`probe_pair_reused_p1`, `probe_pair_uploads_p1`, `probe_pair_reused_p2` e
+`probe_pair_uploads_p2` estão em `0xC900..0xC903`, declarados e inicializados
+também no controle. A região `0xC8D0..0xC8D6` fica intacta; em especial,
+`0xC8D2` permanece o mínimo selado de VBlank. `audit_probe_corridor.py`
+passou para controle e candidato com base `0xC800`, 163 sondas e folga de
+1486 B/1318 B, respectivamente.
+
+QA A/B em sessões privadas Emulicious, com input alinhado no `probe_frame=60`
+e key2 reconhecido no 67. Para a transição `p1_ken` HK, frame 2→3, o
+candidato ROM `01c204a9f0fdeed94c134f3286edf90add06f7b486761faf1c319432f1d8e464`
+(sessão `77fad887d0e247759f73b66cbd173090`) chegou à pose 43 residente,
+submetida e apresentada em `probe_frame=86`; marcou 9 pares reutilizados/8
+uploads e `probe_wait_p1` avançou 8. O controle
+`75d662357d2a4d0d2aedcd0cd670721118c040499b0c4841c63483c8fdb83dd6`
+(sessão `0fa2367e13bc45fd9459cfeaca4dafcb`) chegou à mesma pose em
+`probe_frame=89`, com contadores 0/0 e espera +10. Em ambos: `sat_om_p1=0`,
+`submit_p1=present_p1=43`; PNGs 256×192 idênticos, SHA
+`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`, e
+bundles passaram `check-bundle`. Resultado limitado a essa transição; não
+prova dano, qualidade visual, ganho geral de prazo, FPS, áudio ou delivery.
+O relatório que passou todos os comparadores está em
+`out/evidence/pair_slot_reuse_qa_20261028/aligned_resident43_ab_v2/observations.json`.
+O primeiro comparador v1 ficou `all_expected=false` porque exigia igualdade
+do contador `wait`, embora a candidata devesse esperar menos; esse relatório
+foi preservado e a v2 compara identidade de pose apresentada e ausência de
+omissão SAT.
+
+O negativo do P2 kick extremo está no teste C do algoritmo: 17 pares antigos,
+pedido de 20 pares novos (1280 B), sem igualdade de conteúdo. Um par recebe
+CRC igual ao de um slot corrente, mas bytes diferentes; runtime de teste rejeita
+o falso candidato e termina em 0 reutilizados/20 uploads, com bytes corretos.
+Isso não demonstra que a ação esteja alcançável pela ROM nem mede seu prazo.
+
+O teste foi ampliado para colisão de CRC em cadeia e para reconstrução do índice
+depois da promoção de um segundo pending; a colisão continua sendo filtrada
+pela comparação exata. O P2 kick extremo segue no teste C como negativo: 17
+pares anteriores, 20 novos, 0 reutilizados/20 uploads, incluindo um falso
+candidato com hash igual e bytes diferentes.
+
+Fonte v6 `src/main.c` SHA
+`86d4b928ea7dba24d72a32f058a8ff7d4a2b0326c8d50876bf1e68e0935e92f3`, header
+`inc/rev2_diag.h` SHA
+`6770d7c2734a940525681f3a81fc7fc4f4f2e69ea77afa49d37c6614658d8f47`.
+As tentativas de custo foram: v4 cache da contagem ocupada; v5 cursor
+monotônico na busca de slot livre; v6 tabela CRC fixa com comparação exata de
+64 bytes nas colisões. O controle v6 é idêntico ao controle v3/v5
+(`75d662357d2a4d0d2aedcd0cd670721118c040499b0c4841c63483c8fdb83dd6`); a ROM
+v6 habilitada é
+`db5ef9190f9e4643b7d293824874db1be3fb299dd0dae144249e0d0e2c06fe1f`.
+Mapeia `_CODE=31425` B desde `0x0200` (351 B até `0x8000`) e `_DATA=1024` B.
+`audit_probe_corridor` passou com 163 sondas e folgas de 1486 B no controle e
+1018 B na candidata.
+
+Runtime probe privado, quatro janelas NTSC de 3 s por sessão; todas as
+execuções falharam o critério FPS. v4 candidata `[11.18,10.19,14.80,14.80]`,
+controle `[23.35,25.97,21.70,18.42]`; v5 candidata
+`[15.13,16.76,19.41,15.13]`, controle `[23.35,25.97,21.60,18.41]`. Duas
+sessões v6 confirmaram candidata `[16.11,18.75,19.73,16.11]` e
+`[16.11,18.74,19.73,16.12]`, controles `[23.03,25.98,21.70,18.75]` e
+`[22.99,25.99,21.70,18.73]`; candidata abaixo em todas as janelas pareadas.
+Sem claim de estabilidade, pacing por quadro ou causa exclusiva. Relatórios
+v6 em `out/evidence/pair_slot_reuse_qa_20261028/runtime_probe_ab_v6/` e
+`runtime_probe_ab_v6_named/observations.json`.
+
+QA v6 da transição privada `p1_ken` HK, frames 2→3, sessão candidata
+`422b9e2bdbac4ea7b9d83459cd5000f2`, ROM SHA acima: pose 43 residente,
+submetida e apresentada 19 frames após o comando, espera +8, 9 pares
+reutilizados/8 uploads. Controle `75d662…`, sessão
+`c5a4933ec2d54b62863a846169bce339`, chegou em 22 frames/espera +10 e contadores
+0/0. Ambos `sat_om_p1=0`, framebuffer 256×192 idêntico, SHA
+`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`, bundles
+válidos. Relatório `out/evidence/pair_slot_reuse_qa_20261028/aligned_resident43_ab_v6/observations.json`;
+isso valida só a transição ensaiada.
+
+Worst-frame v3: controle (sessão `d7c16084d5e4480790f632a3e792d6e5`)
+selou 3000 frames, 1749 derrames e `vline_min=14`. A primeira candidata
+(`a9bd4639693b450498a82e48c1414270`) chegou a 2608 com `done=0` após 240 s,
+`vovf=1507`, `vline_min=4`; foi `sem_lastro`, contador parcial. A repetição
+fresca (`e3da1f50112c4bdf8d554f4e645feb5e`) selou 3000 frames, 1740 derrames,
+`vline_min=4`; diferença de nove sem atribuição causal, e a margem de linha
+foi pior. Candidata v6 (`db5ef919…`, sessão
+`a2bc12f4a97a4a0396351a8abd47899a`) selou 3000 frames, 1740 derrames e
+`vline_min=4`; resultado `derramou`, igual no número de derrames ao retry v3.
+O controle ROM é byte a byte o mesmo SHA. Relatório
+`out/evidence/pair_slot_reuse_qa_20261028/worst_frame_enabled_v6/observations.json`.
+Nenhum budget, FPS ou promoção foi declarado e nenhum ID do backlog foi
+encerrado.
+
+Fechamento no host: os testes focados passaram (21); a primeira suíte rev2
+encontrou 2 harnesses antigos que extraíam `stream_pending` sem seu novo helper
+`promote_pending`. Os harnesses foram atualizados e a execução final passou
+305 testes, com 150 fora do filtro. Passaram também `audit_debug_markers`,
+`audit_probe_corridor` (163 sondas; 1486 B controle/1018 B candidata),
+`audit_symbol_size_sync`, `audit_hardware_constants`, `audit_doc_sync`,
+`audit_meaningful_change` para `fps_constante`/`memory_bank_atualizado` e
+`audit_causal_persistence` (`advance`, delta registrado). Estado causal SHA
+`59a01d5dd79cce30cafce6f33fae1409fbde00b7f74eb7eb3779752f17100371`.
+Self-checks de `measure_runtime_probe.py` e `measure_worst_frame.py` passaram.
+Recovery local em `.runtime/backups/luta_mugem_rev2-runtime-20261028-pair-slot-reuse.tar.gz`
+(107.771.561 B, SHA `c65ba3d40a911c890ec4aab404df91b176377eecf352c494d03f9f7a01797517`),
+manifest SHA `0a2ff38736dffbf31545fdeaefe5293f265fe95f48b2c289f9192c6850ddf534`;
+`verify` passou com 28.464 arquivos. É proteção local no mesmo disco, não
+backup externo.
+A build nominal e o define default permanecem intactos/desligados; os 55 IDs
+seguem abertos. Gameplay/dano, 60 FPS, áudio, visual delivery e worst-frame
+pass continuam sem aprovação.
+
 ## 2026-10-28 — streaming de poses e faixa incremental da PNT
 
 A variante `LUTA_BG_DIFF_MAP=1` atualiza a união vertical das linhas do ator

@@ -150,6 +150,7 @@ def _prefix_header(text: str, prefix: str) -> tuple[str, list[str]]:
     text = text[:match.start()] + text[match.end():]
     role = prefix.upper()
     text = re.sub(r"\bCUT_", role + "_CUT_", text)
+    rows = [re.sub(r"\bCUT_", role + "_CUT_", row) for row in rows]
     text = re.sub(r"\bframes_all\b", prefix + "_frames_all", text)
     text = re.sub(r"\banims\b", prefix + "_anims", text)
     text = re.sub(r"\bcut_sprite_palette\b", prefix + "_cut_sprite_palette", text)
@@ -161,7 +162,9 @@ def _prefix_header(text: str, prefix: str) -> tuple[str, list[str]]:
     # namespaced above and do not use the source action/frame naming scheme.
     declarations = set(re.findall(r"^#define\s+([A-Za-z_]\w*)\b", text, re.M))
     declarations.update(re.findall(
-        r"^\s*const\s+unsigned\s+char\s+([A-Za-z_]\w*)\s*\[", text, re.M))
+        r"^\s*(?:static\s+)?const\s+unsigned\s+(?:char|int)\s+"
+        r"([A-Za-z_]\w*)\s*\[",
+        text, re.M))
     source_symbols = sorted(
         (name for name in declarations if re.search(r"_A\d+F\d+_", name)),
         key=len,
@@ -195,11 +198,17 @@ def _adjacent_facing_rows(p1_rows: list[str], p2_rows: list[str]) -> bool:
     This checks structure, not the bank contents or the rendered image.
     """
     symbol = r"(?P<stem>[A-Za-z_]\w*)"
+    pair_hash_fields = (
+        r"(?:\s*,\s*(?:[A-Za-z_]\w*\s*,\s*[A-Za-z_]\w*|"
+        r"[A-Za-z_]\w*\s*\(\s*[A-Za-z_]\w*\s*,\s*"
+        r"[A-Za-z_]\w*\s*\)))?"
+    )
     right = re.compile(r"\{\s*" + symbol + r"_TILES_BANK\s*,\s*"
-                       r"(?P=stem)_TILES_OFF\s*,\s*(?P=stem)_FACE_SIZE\s*\}")
+                       r"(?P=stem)_TILES_OFF\s*,\s*(?P=stem)_FACE_SIZE"
+                       + pair_hash_fields + r"\s*\}")
     left = re.compile(r"\{\s*" + symbol + r"_TILES_BANK\s*,\s*"
                       r"(?P=stem)_TILES_OFF\s*\+\s*(?P=stem)_FACE_SIZE\s*,\s*"
-                      r"(?P=stem)_FACE_SIZE\s*\}")
+                      r"(?P=stem)_FACE_SIZE" + pair_hash_fields + r"\s*\}")
     right_matches = [right.fullmatch(row) for row in p1_rows]
     left_matches = [left.fullmatch(row) for row in p2_rows]
     return bool(p1_rows and p2_rows and
@@ -211,6 +220,12 @@ def merge_headers(p1_text: str, p2_text: str,
                   p1_poses: int, p2_poses: int,
                   require_facing_contract: bool = False) -> str:
     p1_palette, p2_palette = _palette(p1_text), _palette(p2_text)
+    pair_hashes_contract = all(
+        re.search(r"^#define\s+CUT_PAIR_CONTENT_HASHES_VERSION\s+1\s*$", text, re.M)
+        and re.search(r"^#define\s+CUT_MAX_POSE_PAIRS\s+\d+\s*$", text, re.M)
+        and re.search(r"^\s*static\s+const\s+unsigned\s+char\s+\w+_RIGHT_PAIR_HASHES\s*\[",
+                      text, re.M)
+        for text in (p1_text, p2_text))
     # Stable slot symbols let the C consumer remain unchanged when a .def is
     # replaced. Character/source names stay in provenance manifests only.
     p1_text, p1_rows = _prefix_header(p1_text, "p1")
@@ -222,6 +237,11 @@ def merge_headers(p1_text: str, p2_text: str,
     palette[1:8] = p1_palette[1:8]
     palette[9:16] = p2_palette[9:16]
     all_poses = p1_rows[:p1_poses] + p2_rows[p2_poses:]
+    def max_pose_pairs(text: str) -> int:
+        match = re.search(r"^#define\s+(?:P[12]_)?CUT_MAX_POSE_PAIRS\s+(\d+)\s*$",
+                          text, re.M)
+        return int(match.group(1)) if match else 0
+
     facing_contract = _adjacent_facing_rows(p1_rows[:p1_poses], p2_rows[p2_poses:])
     if require_facing_contract and not facing_contract:
         raise ValueError("facing layout differs from adjacent P1-right/P2-left contract")
@@ -234,6 +254,9 @@ def merge_headers(p1_text: str, p2_text: str,
         f"#define VERSUS_POSE_COUNT {p1_poses + p2_poses}",
         "#define P1_POSE_BASE 0",
         f"#define P2_POSE_BASE {p1_poses}",
+        *( ["#define VERSUS_PAIR_CONTENT_HASHES_VERSION 1",
+            f"#define VERSUS_MAX_POSE_PAIRS {max(max_pose_pairs(p1_text), max_pose_pairs(p2_text))}"]
+           if pair_hashes_contract else []),
         *(["#define VERSUS_FACE_LAYOUT_ADJACENT_P2_LEFT 1"] if facing_contract else []),
         "static const PoseRef versus_poses[VERSUS_POSE_COUNT] = {",
         *["    " + row + "," for row in all_poses],

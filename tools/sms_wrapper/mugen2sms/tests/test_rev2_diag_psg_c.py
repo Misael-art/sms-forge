@@ -31,6 +31,7 @@ def test_audio_probes_do_not_overlap_measurement_contract(monkeypatch):
     reserved = {0xC800 + offset for offset in worst.OFFSETS.values()}
     reserved.update(0xC800 + offset for offset in runtime.OFFSETS.values())
     reserved.update(range(0xC8D0, 0xC8D7))
+    reserved.update(range(0xC900, 0xC904))
     reserved.update(range(0xC8E0, 0xC8E5))
     reserved.update((0xC8EC, 0xC8F1))  # second bytes of worst-frame words
     assert not used.intersection(reserved)

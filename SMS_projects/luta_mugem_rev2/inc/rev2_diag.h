@@ -18,7 +18,10 @@
 /* Um pose/facing no banco de tiles: pagina do slot 2, offset e tamanho. */
 typedef struct { unsigned char bank;
                  unsigned int off;
-                 unsigned int size; } PoseRef;
+                 unsigned int size;
+                 const unsigned char *right_pair_hashes;
+                 const unsigned char *left_pair_hashes;
+               } PoseRef;
 
 /* Frame/Anim espelham exatamente o initializer emitido em
  * versus_scene_runtime.h: dur, pose, meta, metal, clsn, axis, width, height,

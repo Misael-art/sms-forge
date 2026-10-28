@@ -106,6 +106,9 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #ifndef LUTA_STREAM_WIDE_COPY
 #define LUTA_STREAM_WIDE_COPY 0
 #endif
+#ifndef LUTA_PAIR_SLOT_REUSE
+#define LUTA_PAIR_SLOT_REUSE 0
+#endif
 #ifndef LUTA_SPECULATIVE_PREFETCH
 #define LUTA_SPECULATIVE_PREFETCH 0
 #endif
@@ -157,6 +160,23 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #endif
 #if LUTA_STREAM_WIDE_COPY != 0 && LUTA_STREAM_WIDE_COPY != 1
 #error "LUTA_STREAM_WIDE_COPY deve ser 0 ou 1"
+#endif
+#if LUTA_PAIR_SLOT_REUSE != 0 && LUTA_PAIR_SLOT_REUSE != 1
+#error "LUTA_PAIR_SLOT_REUSE deve ser 0 ou 1"
+#endif
+#if LUTA_PAIR_SLOT_REUSE && (!defined(VERSUS_PAIR_CONTENT_HASHES_VERSION) || \
+                             VERSUS_PAIR_CONTENT_HASHES_VERSION != 1)
+#error "reúso exige hashes de candidatos e payloads gerados pelo versus-cut"
+#endif
+#if LUTA_PAIR_SLOT_REUSE && \
+    (!defined(VERSUS_MAX_POSE_PAIRS) || VERSUS_MAX_POSE_PAIRS > POOL_PAIRS)
+#error "máximo de pares gerados não cabe na tabela de patterns SMS"
+#endif
+#if LUTA_PAIR_SLOT_REUSE && LUTA_SPECULATIVE_PREFETCH
+#error "reúso de slots e prefetch especulativo são perfis experimentais separados"
+#endif
+#if LUTA_PAIR_SLOT_REUSE && LUTA_BG_ACTOR
+#error "reúso de slots deve ser medido separado do ator BG"
 #endif
 #if LUTA_DIAG_VBLANK_STAGES && LUTA_UPLOAD_TRACE
 #error "estagios VBlank e trace de upload compartilham a regiao de probes"
@@ -392,6 +412,12 @@ volatile unsigned char __at(0xC89C) probe_upload_trace_seq;
 volatile unsigned int __at(0xC89D) probe_audio_guard_queued;
 volatile unsigned char __at(0xC89F) probe_audio_last_played;
 volatile unsigned char __at(0xC8A0) probe_upload_trace[32];
+/* Contadores do candidato de reuse. Permanecem declarados também no controle
+ * para que o mapa de sondas seja idêntico; C8D2 pertence a probe_vline_min. */
+volatile unsigned char __at(0xC900) probe_pair_reused_p1;
+volatile unsigned char __at(0xC901) probe_pair_uploads_p1;
+volatile unsigned char __at(0xC902) probe_pair_reused_p2;
+volatile unsigned char __at(0xC903) probe_pair_uploads_p2;
 #if LUTA_DIAG_VBLANK_STAGES
 /* Perfil diagnóstico: contagens em RAM alocada pelo linker para não se
  * sobrepor ao anel fixo de trace. As leituras acrescentam custo; não são
@@ -491,6 +517,9 @@ typedef struct {
 #if LUTA_SPECULATIVE_PREFETCH
     unsigned char speculative;   /* completo mas nao publicavel ate pedido real */
 #endif
+#if LUTA_PAIR_SLOT_REUSE
+    unsigned char pair_slot[VERSUS_MAX_POSE_PAIRS]; /* compact ID -> pattern VRAM */
+#endif
 } CacheSlot;
 
 /* O conjunto vivo e derivado dos 4 slots (corrente/pendente x 2 lados).
@@ -498,6 +527,20 @@ typedef struct {
  * conjunto; flags invalidas nao podem dar a volta como uma epoca de 8 bits. */
 static unsigned char fail_valid[2];
 static unsigned char fail_size[2];
+#if LUTA_PAIR_SLOT_REUSE
+static unsigned int fail_pose[2];
+static unsigned char fail_face[2];
+static unsigned char used_pair_count_cached;
+static unsigned char used_pair_count_dirty = 1u;
+static unsigned char pair_hash_head[256];
+static unsigned char pair_hash_next[VERSUS_MAX_POSE_PAIRS];
+static unsigned char pair_hash_touched[VERSUS_MAX_POSE_PAIRS];
+static unsigned char pair_hash_touched_count;
+static unsigned char pair_hash_index_valid;
+static unsigned char pending_pair_upload_count[2];
+static unsigned char pending_pair_upload_source[2][VERSUS_MAX_POSE_PAIRS];
+static unsigned char pending_pair_upload_target[2][VERSUS_MAX_POSE_PAIRS];
+#endif
 static CacheSlot current[2], pending[2];
 #if LUTA_BG_CAMERA
 static signed int bg_camera_x;
@@ -569,6 +612,9 @@ static void advance_pacing_clock(void) {
 static void cache_invalidate(CacheSlot *s) {
     if (s->pose_global != 0xFFFFu) {
         fail_valid[0] = fail_valid[1] = 0u;
+#if LUTA_PAIR_SLOT_REUSE
+        used_pair_count_dirty = 1u;
+#endif
         s->n_pairs = 0;
     }
     s->pose_global = 0xFFFFu;
@@ -588,6 +634,7 @@ static void cache_invalidate(CacheSlot *s) {
  * bloco termina exatamente em x*. Logo basta testar {0} U {fim de cada um
  * dos 4 slots vivos} e tomar o menor candidato sem sobreposicao — a base
  * escolhida e identica a do scan anterior, sem caminhar 128 pares. */
+#if !LUTA_PAIR_SLOT_REUSE
 static unsigned char alloc_contiguous(unsigned char n, unsigned char *out_base) {
     const CacheSlot *all[4];
     unsigned char cand, best, i, j, fits;
@@ -627,8 +674,33 @@ static unsigned char alloc_contiguous(unsigned char n, unsigned char *out_base) 
     fail_valid[0] = fail_valid[1] = 0u;
     return 1;
 }
+#endif
 
 static unsigned char used_pairs(void) {
+#if LUTA_PAIR_SLOT_REUSE
+    const CacheSlot *all[4];
+    unsigned char used[POOL_PAIRS / 8u];
+    unsigned char i, j, slot, count = 0u;
+
+    if (!used_pair_count_dirty)
+        return used_pair_count_cached;
+    for (i = 0u; i < (POOL_PAIRS / 8u); i++) used[i] = 0u;
+    all[0] = &current[0]; all[1] = &current[1];
+    all[2] = &pending[0]; all[3] = &pending[1];
+    for (i = 0u; i < 4u; i++) {
+        if (all[i]->pose_global == 0xFFFFu) continue;
+        for (j = 0u; j < all[i]->n_pairs; j++) {
+            slot = all[i]->pair_slot[j];
+            if (slot < POOL_PAIRS)
+                used[slot >> 3] |= (unsigned char)(1u << (slot & 7u));
+        }
+    }
+    for (i = 0u; i < POOL_PAIRS; i++)
+        if (used[i >> 3] & (unsigned char)(1u << (i & 7u))) count++;
+    used_pair_count_cached = count;
+    used_pair_count_dirty = 0u;
+    return used_pair_count_cached;
+#else
     const CacheSlot *all[4];
     unsigned char i, n = 0;
 
@@ -640,6 +712,7 @@ static unsigned char used_pairs(void) {
         if (all[i]->pose_global != 0xFFFFu)
             n = (unsigned char)(n + all[i]->n_pairs);
     return n;
+#endif
 }
 
 /* O versus-cut guarda duas faces adjacentes de mesmo tamanho. A referencia
@@ -652,6 +725,11 @@ static unsigned char pose_facing_offset(const PoseRef *ref, unsigned char side,
     if (side > 1u || face > 1u || ref->bank < 2u || size == 0u ||
         size > 8192u || (size & 63u))
         return 0u;
+#if LUTA_PAIR_SLOT_REUSE
+    if ((size >> 6) > VERSUS_MAX_POSE_PAIRS ||
+        !(face ? ref->left_pair_hashes : ref->right_pair_hashes))
+        return 0u;
+#endif
     if (side == 0u) {
         if (ref->off > 16384u - (size << 1)) return 0u;
         *offset = ref->off + (face ? size : 0u);
@@ -662,20 +740,200 @@ static unsigned char pose_facing_offset(const PoseRef *ref, unsigned char side,
     return 1u;
 }
 
+#if LUTA_PAIR_SLOT_REUSE
+static const unsigned char *pose_pair_hashes(const PoseRef *ref,
+                                              unsigned char face) {
+    if (!ref || face > 1u) return 0;
+    return face ? ref->left_pair_hashes : ref->right_pair_hashes;
+}
+
+static unsigned char read_mapped_rom_byte(unsigned int offset) {
+    return *((volatile const unsigned char *)(0x8000u + offset));
+}
+
+/* Hash matches are only candidates. Verify the original 64-byte patterns
+ * across mapper pages before allowing a slot to survive the pose change. */
+static unsigned char pair_bytes_equal(unsigned char side,
+                                      unsigned int pose_a,
+                                      unsigned char face_a,
+                                      unsigned char pair_a,
+                                      unsigned int pose_b,
+                                      unsigned char face_b,
+                                      unsigned char pair_b) {
+    const PoseRef *ref_a = &versus_poses[pose_a];
+    const PoseRef *ref_b = &versus_poses[pose_b];
+    unsigned char pair_bytes[64], i;
+    unsigned int offset_a, offset_b;
+
+    if (!pose_facing_offset(ref_a, side, face_a, &offset_a) ||
+        !pose_facing_offset(ref_b, side, face_b, &offset_b) ||
+        pair_a >= (ref_a->size >> 6) || pair_b >= (ref_b->size >> 6))
+        return 0u;
+    SMS_saveROMBank();
+    SMS_mapROMBank(ref_a->bank);
+    for (i = 0u; i < 64u; i++)
+        pair_bytes[i] = read_mapped_rom_byte(offset_a +
+                                             (unsigned int)pair_a * 64u + i);
+    SMS_mapROMBank(ref_b->bank);
+    for (i = 0u; i < 64u; i++) {
+        if (pair_bytes[i] != read_mapped_rom_byte(offset_b +
+                                                  (unsigned int)pair_b * 64u + i)) {
+            SMS_restoreROMBank();
+            return 0u;
+        }
+    }
+    SMS_restoreROMBank();
+    return 1u;
+}
+
+/* Pair signatures are palette-local; only the same side can lend slots. */
+static unsigned char prepare_pair_mapping(unsigned char side,
+                                          unsigned int pose_global,
+                                          unsigned char face,
+                                          unsigned char n_pairs) {
+    const CacheSlot *all[4];
+    const unsigned char *next_hashes, *current_hashes = 0;
+    unsigned char used[POOL_PAIRS / 8u];
+    unsigned int k;
+    unsigned char i, j, slot, free_cursor = 0u, count = 0u;
+    unsigned char reused = 0u, uploads = 0u;
+
+    if (side > 1u || face > 1u || n_pairs == 0u ||
+        n_pairs > VERSUS_MAX_POSE_PAIRS)
+        return 0u;
+    next_hashes = pose_pair_hashes(&versus_poses[pose_global], face);
+    if (!next_hashes) return 0u;
+    if (current[side].pose_global != 0xFFFFu) {
+        current_hashes = pose_pair_hashes(&versus_poses[current[side].pose_global],
+                                          current[side].face);
+        if (!current_hashes || current[side].n_pairs > VERSUS_MAX_POSE_PAIRS)
+            return 0u;
+    }
+
+    if (!pair_hash_index_valid) {
+        for (k = 0u; k < 256u; k++) pair_hash_head[k] = 0xFFu;
+        pair_hash_index_valid = 1u;
+    } else {
+        for (i = 0u; i < pair_hash_touched_count; i++)
+            pair_hash_head[pair_hash_touched[i]] = 0xFFu;
+    }
+    pair_hash_touched_count = 0u;
+    if (current_hashes) {
+        for (j = 0u; j < current[side].n_pairs; j++) {
+            unsigned char hash = current_hashes[j];
+            if (pair_hash_head[hash] == 0xFFu)
+                pair_hash_touched[pair_hash_touched_count++] = hash;
+            pair_hash_next[j] = pair_hash_head[hash];
+            pair_hash_head[hash] = j;
+        }
+    }
+
+    for (i = 0u; i < (POOL_PAIRS / 8u); i++) used[i] = 0u;
+    all[0] = &current[0]; all[1] = &current[1];
+    all[2] = &pending[0]; all[3] = &pending[1];
+    for (i = 0u; i < 4u; i++) {
+        if (all[i]->pose_global == 0xFFFFu) continue;
+        for (j = 0u; j < all[i]->n_pairs; j++) {
+            slot = all[i]->pair_slot[j];
+            if (slot < POOL_PAIRS &&
+                !(used[slot >> 3] & (unsigned char)(1u << (slot & 7u)))) {
+                used[slot >> 3] |= (unsigned char)(1u << (slot & 7u));
+                count++;
+            }
+        }
+    }
+
+    for (i = 0u; i < n_pairs; i++) {
+        slot = 0xFFu;
+        if (current_hashes) {
+            j = pair_hash_head[next_hashes[i]];
+            while (j != 0xFFu) {
+                if (pair_bytes_equal(side, current[side].pose_global,
+                                     current[side].face, j, pose_global,
+                                     face, i)) {
+                    slot = current[side].pair_slot[j];
+                    reused++;
+                    break;
+                }
+                j = pair_hash_next[j];
+            }
+        }
+        if (slot == 0xFFu) {
+            while (free_cursor < POOL_PAIRS &&
+                   (used[free_cursor >> 3] &
+                    (unsigned char)(1u << (free_cursor & 7u))))
+                free_cursor++;
+            if (free_cursor < POOL_PAIRS) {
+                slot = free_cursor;
+                used[slot >> 3] |= (unsigned char)(1u << (slot & 7u));
+                free_cursor++;
+                count++;
+                pending_pair_upload_source[side][uploads] = i;
+                pending_pair_upload_target[side][uploads] = slot;
+                uploads++;
+            }
+        }
+        if (slot == 0xFFu) return 0u;
+        pending[side].pair_slot[i] = slot;
+    }
+    pending[side].base_pair = pending[side].pair_slot[0];
+    pending_pair_upload_count[side] = uploads;
+    used_pair_count_cached = count;
+    used_pair_count_dirty = 0u;
+    if (side == 0u) {
+        probe_pair_reused_p1 = reused;
+        probe_pair_uploads_p1 = uploads;
+    } else {
+        probe_pair_reused_p2 = reused;
+        probe_pair_uploads_p2 = uploads;
+    }
+    fail_valid[0] = fail_valid[1] = 0u;
+    return 1u;
+}
+#endif
+
 /* Sobe ate `budget` pares (64 B cada) do pending; budget==0xFF sobe o pose
  * inteiro (usado apenas no boot, com display ainda OFF). Trabalho especulativo
  * pode pausar para priorizar pedido real; retorna os pares subidos. */
-#if LUTA_SPECULATIVE_PREFETCH
 /* Publicar so um pending completo que ja tenha sido pedido pela logica. */
 static void promote_pending(unsigned char side) {
     cache_invalidate(&current[side]);
     current[side] = pending[side];
     pending[side].pose_global = 0xFFFFu;
+    pending[side].n_pairs = 0u;
+    pending[side].loaded_pairs = 0u;
     pending[side].frame = 0;
 #if LUTA_CONTACT_STAMPS
     pending[side].role_fresh = 0u;
 #endif
+#if LUTA_SPECULATIVE_PREFETCH
     pending[side].speculative = 0u;
+#endif
+#if LUTA_PAIR_SLOT_REUSE
+    pending_pair_upload_count[side] = 0u;
+#endif
+}
+
+#if LUTA_PAIR_SLOT_REUSE
+static unsigned char prepare_pair_request(unsigned char side,
+                                          unsigned int pose_global,
+                                          unsigned char n_pairs,
+                                          const Frame *frame,
+                                          unsigned char face) {
+    pending_pair_upload_count[side] = 0u;
+    if (!prepare_pair_mapping(side, pose_global, face, n_pairs))
+        return 0u;
+    pending[side].pose_global = pose_global;
+    pending[side].n_pairs = n_pairs;
+    pending[side].loaded_pairs = 0u;
+    pending[side].frame = frame;
+    pending[side].face = face;
+#if LUTA_CONTACT_STAMPS
+    pending[side].role_fresh = 1u;
+#endif
+    if (!pending_pair_upload_count[side])
+        promote_pending(side);
+    return 1u;
 }
 #endif
 
@@ -685,9 +943,15 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     unsigned int vram, pose_offset;
     unsigned char moved, batch;
 
-    if (pending[side].pose_global == 0xFFFFu ||
-        pending[side].loaded_pairs >= pending[side].n_pairs)
+    if (pending[side].pose_global == 0xFFFFu)
         return 0u;
+#if LUTA_PAIR_SLOT_REUSE
+    if (pending[side].loaded_pairs >= pending_pair_upload_count[side])
+        return 0u;
+#else
+    if (pending[side].loaded_pairs >= pending[side].n_pairs)
+        return 0u;
+#endif
 #if LUTA_SPECULATIVE_PREFETCH
     /* Um upload real do oponente tem prioridade sobre trabalho especulativo. */
     if (pending[side].speculative &&
@@ -707,6 +971,34 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
     moved = 0u;
     SMS_saveROMBank();
     SMS_mapROMBank(ref->bank);
+#if LUTA_PAIR_SLOT_REUSE
+    while (budget && pending[side].loaded_pairs < pending_pair_upload_count[side]) {
+        unsigned char index, source_pair, target_pair;
+        index = pending[side].loaded_pairs;
+        source_pair = pending_pair_upload_source[side][index];
+        target_pair = pending_pair_upload_target[side][index];
+        batch = 1u;
+        while (batch < budget &&
+               (unsigned char)(index + batch) < pending_pair_upload_count[side] &&
+               pending_pair_upload_source[side][index + batch] ==
+                   (unsigned char)(source_pair + batch) &&
+               pending_pair_upload_target[side][index + batch] ==
+                   (unsigned char)(target_pair + batch))
+            batch++;
+#if !LUTA_STREAM_WIDE_COPY
+        if (batch > 3u) batch = 3u;
+#endif
+        vram = (unsigned int)target_pair * 64u;
+        source = (const unsigned char *)(0x8000u + pose_offset +
+                                         (unsigned int)source_pair * 64u);
+        STREAM_UPLOAD_PAIRS(vram, source, batch);
+        pending[side].loaded_pairs =
+            (unsigned char)(pending[side].loaded_pairs + batch);
+        probe_uploaded_pairs += batch;
+        budget = (unsigned char)(budget - batch);
+        moved = (unsigned char)(moved + batch);
+    }
+#else
     while (budget && pending[side].loaded_pairs < pending[side].n_pairs) {
         /* A API brief recebe size em byte: quatro pares seriam 256 e
          * truncariam para zero. A variante word remove esse limite; continua
@@ -726,19 +1018,20 @@ static unsigned char stream_pending(unsigned char side, unsigned char budget) {
         budget = (unsigned char)(budget - batch);
         moved = (unsigned char)(moved + batch);
     }
+#endif
     SMS_restoreROMBank();
-    if (pending[side].loaded_pairs >= pending[side].n_pairs) {
+    if (pending[side].loaded_pairs >=
+#if LUTA_PAIR_SLOT_REUSE
+        pending_pair_upload_count[side]
+#else
+        pending[side].n_pairs
+#endif
+       ) {
 #if LUTA_SPECULATIVE_PREFETCH
         if (!pending[side].speculative)
             promote_pending(side);
 #else
-        cache_invalidate(&current[side]);
-        current[side] = pending[side];
-        pending[side].pose_global = 0xFFFFu;
-        pending[side].frame = 0;
-#if LUTA_CONTACT_STAMPS
-        pending[side].role_fresh = 0u;
-#endif
+        promote_pending(side);
 #endif
     }
     return moved;
@@ -794,7 +1087,9 @@ static void cancel_prefetch(unsigned char side) {
 static void request_pose(unsigned char side, unsigned int pose_global,
                          unsigned char n_pairs, const Frame *frame,
                          unsigned char face) {
+#if !LUTA_PAIR_SLOT_REUSE
     unsigned char base;
+#endif
     unsigned int checked_offset;
     if (side > 1u) {
         probe_bad_pose_ref++;
@@ -857,7 +1152,12 @@ static void request_pose(unsigned char side, unsigned int pose_global,
     }
     /* Com o pool inalterado, falha de mesmo tamanho permanece impossivel.
      * Qualquer alocacao ou liberacao invalida o memo dos dois lados. */
+#if LUTA_PAIR_SLOT_REUSE
+    if (fail_valid[side] && fail_pose[side] == pose_global &&
+        fail_face[side] == face) {
+#else
     if (fail_valid[side] && fail_size[side] == n_pairs) {
+#endif
         probe_stall_frames++;
         return;
     }
@@ -876,6 +1176,10 @@ static void request_pose(unsigned char side, unsigned int pose_global,
 #endif
     }
     cache_invalidate(&pending[side]);
+#if LUTA_PAIR_SLOT_REUSE
+    if (prepare_pair_request(side, pose_global, n_pairs, frame, face))
+        return;
+#else
 #if LUTA_SPECULATIVE_PREFETCH
     if (!alloc_contiguous(n_pairs, &base)) {
         base = 0xFFu;
@@ -903,10 +1207,22 @@ static void request_pose(unsigned char side, unsigned int pose_global,
 #endif
         return;
     }
+#endif
 #if LUTA_PROFILE
     /* Producao: nao desaloja o oponente (nem pending, nem current). */
     if (side == 0u) probe_overflow_p1++;
     else            probe_overflow_p2++;
+#else
+#if LUTA_PAIR_SLOT_REUSE
+    cache_invalidate(&pending[side ^ 1u]);
+    if (prepare_pair_request(side, pose_global, n_pairs, frame, face))
+        return;
+    if (current[side ^ 1u].pose_global != 0xFFFFu) {
+        cache_invalidate(&current[side ^ 1u]);
+        probe_evict_events++;
+        if (prepare_pair_request(side, pose_global, n_pairs, frame, face))
+            return;
+    }
 #else
     cache_invalidate(&pending[side ^ 1u]);
     if (alloc_contiguous(n_pairs, &base)) {
@@ -932,8 +1248,13 @@ static void request_pose(unsigned char side, unsigned int pose_global,
         }
     }
 #endif
+#endif
     fail_valid[side] = 1u;
     fail_size[side] = n_pairs;
+#if LUTA_PAIR_SLOT_REUSE
+    fail_pose[side] = pose_global;
+    fail_face[side] = face;
+#endif
     probe_stall_frames++;
 }
 
@@ -994,7 +1315,10 @@ static void emit_frame(unsigned char side, const Frame *frame) {
     const unsigned char *meta_data;
     const signed char *meta;
     signed int origin_x, origin_y, dx, dy, sx, sy;
-    unsigned char tile_base, tile;
+    unsigned char tile;
+#if !LUTA_PAIR_SLOT_REUSE
+    unsigned char tile_base;
+#endif
     signed int add;
 
     /* Metadados, origem e indices devem pertencer a MESMA face residente;
@@ -1009,7 +1333,9 @@ static void emit_frame(unsigned char side, const Frame *frame) {
 #endif
         return;
     }
+#if !LUTA_PAIR_SLOT_REUSE
     tile_base = (unsigned char)(current[side].base_pair * 2u);
+#endif
     origin_y = (signed int)DIAG_FLOOR -
                (signed int)(fighter[side].y >> 8) + axis_y;
     if (!current[side].face)
@@ -1025,7 +1351,12 @@ static void emit_frame(unsigned char side, const Frame *frame) {
     while (meta[0] != (signed char)METASPRITE_END) {
         dx = meta[0];
         dy = meta[1];
+#if LUTA_PAIR_SLOT_REUSE
+        tile = (unsigned char)(current[side].pair_slot[(unsigned char)meta[2] >> 1] * 2u +
+                               ((unsigned char)meta[2] & 1u));
+#else
         tile = (unsigned char)meta[2] + tile_base;
+#endif
         sx = origin_x + dx;
         sy = origin_y + dy;
         if (sx >= 0 && sx < 256 && sy >= 0 && sy < 192) {
@@ -2389,8 +2720,8 @@ void main(void) {
      * wave-5b: o corredor baixo crescia ate 0xC85F (48 palavras) — o limite
      * era a extensao real do bloco, nao um numero redondo. Lote B.2: o bloco
      * cresceu com as sondas da politica (ate 0xC885); zerar ate 0xC8D1 cobre
-     * o corredor declarado sem tocar nos bytes 0xC8D2+ (inicializados
-     * individualmente abaixo). */
+     * o corredor declarado sem tocar nos bytes C8D2+ nem nas sondas opcionais
+     * de C900..C903, todos inicializados individualmente abaixo. */
     {
         volatile unsigned int *p = (volatile unsigned int *)0xC800u;
         unsigned char z;
@@ -2411,6 +2742,10 @@ void main(void) {
     probe_phase = 0u;
     probe_worst_done = 0u;
     probe_vline_min = 0xFFu;
+    probe_pair_reused_p1 = 0u;
+    probe_pair_uploads_p1 = 0u;
+    probe_pair_reused_p2 = 0u;
+    probe_pair_uploads_p2 = 0u;
     probe_audio_first_frame = 0u;
     /* Referencias volateis conservam o corredor no mapa mesmo sem trace. */
     probe_upload_trace_seq = 0u;
@@ -2558,6 +2893,10 @@ void main(void) {
     } else {
         boot_p1_size = versus_poses[pose_g].size;
         i = (unsigned char)(boot_p1_size >> 6);
+#if LUTA_PAIR_SLOT_REUSE
+        if (prepare_pair_request(0u, pose_g, i, boot_frame, fighter[0].face))
+            stream_pending(0u, 0xFFu);
+#else
         if (alloc_contiguous(i, &pending[0].base_pair)) {
             pending[0].pose_global = pose_g;
             pending[0].n_pairs = i;
@@ -2569,6 +2908,7 @@ void main(void) {
 #endif
             stream_pending(0, 0xFFu);
         }
+#endif
     }
     boot_frame = &characters[1].anims[characters[1].states[ST_IDLE].anim].frames[0];
     pose_g = (unsigned int)characters[1].pose_base + boot_frame->pose;
@@ -2578,6 +2918,16 @@ void main(void) {
         probe_boot_p2_fit = 0u;
     } else {
         i = (unsigned char)(versus_poses[pose_g].size >> 6);
+#if LUTA_PAIR_SLOT_REUSE
+        if (prepare_pair_request(1u, pose_g, i, boot_frame, fighter[1].face)) {
+            stream_pending(1u, 0xFFu);
+            probe_boot_p2_fit = (current[1].pose_global == pose_g);
+        } else {
+            unsigned int total = boot_p1_size + versus_poses[pose_g].size;
+            probe_boot_p2_fit = 0u;
+            probe_boot_overflow_b = total > 8192u ? total - 8192u : 0u;
+        }
+#else
         if (alloc_contiguous(i, &pending[1].base_pair)) {
             pending[1].pose_global = pose_g;
             pending[1].n_pairs = i;
@@ -2594,6 +2944,7 @@ void main(void) {
             probe_boot_p2_fit = 0u;
             probe_boot_overflow_b = total > 8192u ? total - 8192u : 0u;
         }
+#endif
     }
     probe_used_pairs_max = used_pairs();
     probe_free_pairs_min = (unsigned int)(POOL_PAIRS - probe_used_pairs_max);

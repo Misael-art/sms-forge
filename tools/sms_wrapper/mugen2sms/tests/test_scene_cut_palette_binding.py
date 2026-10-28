@@ -5,7 +5,7 @@ import pytest
 
 from mugen2sms.generators.runtime_format import _encode_indices, decode_indices
 from mugen2sms.generators.scene_cut import (
-    _compact_facing_pose, _palette_codebook, _palette_metas, _remap_blob,
+    _compact_facing_pose, _pair_content_hashes, _palette_codebook, _palette_metas, _remap_blob,
     _runtime_table)
 from mugen2sms.generators.smsdev import Artifact
 
@@ -49,6 +49,19 @@ def test_facing_compaction_preserves_bytes_positions_and_pair_references():
     assert rewritten == bytes((3, 4, 0, 5, 6, 2, 7, 8, 2, 0x80))
 
 
+def test_pair_content_hashes_repeat_for_exact_compact_pairs():
+    first, second, third = bytes([0x11]) * 64, bytes([0x22]) * 64, bytes([0x33]) * 64
+    hashes = _pair_content_hashes(first + second + first)
+    assert hashes[0] != hashes[1]
+    assert hashes[0] == hashes[2]
+    assert _pair_content_hashes(second + third)[0] == hashes[1]
+
+
+def test_pair_content_hashes_reject_partial_pair_bytes():
+    with pytest.raises(ValueError, match="multiple of 64"):
+        _pair_content_hashes(bytes(65))
+
+
 def test_facing_compaction_rejects_odd_tall_sprite_id():
     with pytest.raises(ValueError, match="odd 8x16 pattern id"):
         _compact_facing_pose(bytes(64), bytes((0, 0, 1, 0x80)), "F_A0F0")
@@ -73,7 +86,9 @@ def test_runtime_frame_selects_both_palette_metadata_pairs():
         [{"role": "idle", "action": 0, "loop_start": 0}], role_frames, 1,
         artifacts,
         {stem + "_TILES": (2, 0), stem + "_P2_TILES": (2, 64)},
-        [0] * 16, runtime, {stem: 64, stem + "_P2": 128})
+        [0] * 16, runtime, {stem: 64, stem + "_P2": 128},
+        {stem: {"right": [10], "left": [11],
+                "p2_right": [12, 13], "p2_left": [14, 15]}})
 
     assert f"{stem}_META, {stem}_METAL, 0, {stem}_AXIS, 16, 16, " \
            f"{stem}_P2_META, {stem}_P2_METAL" in header
@@ -81,9 +96,15 @@ def test_runtime_frame_selects_both_palette_metadata_pairs():
     assert f"{stem}_FACE_SIZE 64" in header
     assert f"{stem}_P2_FACE_SIZE 128" in header
     # Frame.metal_p2 addresses the left face; the P2 PoseRef must stage it.
-    assert f"{{ {stem}_TILES_BANK, {stem}_TILES_OFF, {stem}_FACE_SIZE }}" in header
+    assert (f"{{ {stem}_TILES_BANK, {stem}_TILES_OFF, {stem}_FACE_SIZE, "
+            f"CUT_PAIR_HASH_POINTERS({stem}_RIGHT_PAIR_HASHES, "
+            f"{stem}_LEFT_PAIR_HASHES) }}") in header
     assert (f"{{ {stem}_P2_TILES_BANK, {stem}_P2_TILES_OFF + "
-            f"{stem}_P2_FACE_SIZE, {stem}_P2_FACE_SIZE }}") in header
+            f"{stem}_P2_FACE_SIZE, {stem}_P2_FACE_SIZE, "
+            f"CUT_PAIR_HASH_POINTERS({stem}_P2_RIGHT_PAIR_HASHES, "
+            f"{stem}_P2_LEFT_PAIR_HASHES) }}") in header
+    assert f"{stem}_RIGHT_PAIR_HASHES[1] = {{" in header
+    assert "CUT_PAIR_CONTENT_HASHES_VERSION 1" in header
     assert "CUT_INPUT_THRESHOLD_KEY1 0" in header
 
 

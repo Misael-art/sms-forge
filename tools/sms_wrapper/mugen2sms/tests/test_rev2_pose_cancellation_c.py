@@ -101,7 +101,7 @@ def test_abandoned_upload_cannot_replace_current_pose(tmp_path):
     source = SOURCE.read_text(encoding="utf-8")
     functions = "\n".join(extract(source, name) for name in
                           ("cache_invalidate", "alloc_contiguous", "pose_facing_offset",
-                           "stream_pending", "request_pose"))
+                           "promote_pending", "stream_pending", "request_pose"))
     harness = r'''
 #include <stdio.h>
 #include <stdint.h>
