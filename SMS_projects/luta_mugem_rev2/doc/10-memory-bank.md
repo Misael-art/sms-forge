@@ -1,5 +1,96 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-27 — interrupção de ataque (candidata)
+
+O combate do schema 7 agora invalida a instância de ataque da vítima ao
+receber um acerto, inclusive quando a pose anterior permanece visível durante
+o recover. A elegibilidade de ambos é capturada antes dos contatos, permitindo
+troca não letal no mesmo tick; quando duas pausas coexistem, cada ator mantém
+a maior. Guarda permanece distinta. O host reproduziu antes o dano tardio e
+testou os dois lados com os contadores zerados pelo harness, guarda e pausas
+assimétricas. A rotina real `advance_actor` também foi testada separadamente
+no sequenciamento pause→recover. São testes C do host, não evidência da
+interrupção específica em Z80. KO simultâneo e empate continuam abertos.
+
+ROM isolada `out/candidates/20261027_attack_interrupt_v2/rom/luta_mugem_rev2.sms`,
+SHA `7523bd0c3976263b6187681a536ea29f9faedaa72b24b94027a671e907749054`,
+524288 bytes. O recibo identifica fonte, gerados e toolchain; a nominal não
+foi sobrescrita. A QA nativa do worker `01a18057-f5a1-7631-b50e-fa4a369405c4`
+na sessão privada `e625162d074a4522ad5635cdceb18c29` observou, na sequência
+encadeada de input, vida P2 1000→888 e dano 112. O vídeo foi reprovado por
+forte sobreposição dos corpos; o coordenador conferiu um quadro nativo. O
+relatório e o bundle em `out/evidence/20261027_attack_interrupt_v2_qa/` foram
+auditados (`ok`, `tests_passed=false`), e a sessão foi encerrada. O caso não
+identifica um golpe interrompido nem aprova gameplay. A primeira versão da
+correção, SHA `3727d28a…`, e a revisão que descobriu a sobrescrita de pausas
+permanecem em `out/evidence/20261027_attack_interrupt_qa/`.
+
+Em NTSC, a sessão privada `efe672327bbe492bbb32b2add6a8df52` mediu 21,57 e
+24,48 atualizações/s em duas janelas de 8 s; reprovou meta e dispersão, com
+carga do host registrada. O bundle foi verificado e a sessão encerrada.
+Não mede deadline por frame, PAL, gameplay completo ou carga com HUD/FX e
+música. Na baseline `7f530db3…`, nas mesmas janelas e em sessão própria,
+foram 21,68/24,21. Uma tentativa isolada de encurtar a busca first-fit
+(`eab4dee6…`) produziu 21,75/24,38 e foi descartada: esses números não provam
+ganho sob a carga concorrente. Um novo teste compara 100 mil layouts de pool
+com um oráculo bitmap independente, incluindo pool vazio e cheio.
+
+O pior quadro da mesma ROM, em sessão privada `a234bcb995854aa388be698a2193f520`,
+selou 3000 iterações com `vline_min=2` e `vovf_delta=1759`: `derramou`.
+A leitura inicial estava no frame lógico 20, após a preparação da ponte por
+stepping; o restante correu 240 s em tempo real sem leituras. Essa mistura
+e a ausência de HUD, FX e música não qualificam uma janela contínua completa
+de entrega. Resultado em `out/evidence/sessions/a234bcb995854aa388be698a2193f520/worst_frame/`;
+bundle verificado e sessão encerrada.
+
+Nenhum dos 55 IDs foi fechado. Continuar por composição e deadline, e por um
+caso de interrupção com entradas naturais, ROM/SHA, frames e sondas; não
+atribuir o vídeo de aproximação ao instante do acerto nem tratar ACK como
+consumo. O artefato visual reprovado não resolve a causa entre overlap,
+limite de scanline e prazo de pose. A revisão também aponta KO simultâneo e
+retorno temporal por estado como trabalho pendente.
+
+Primeira tentativa natural de interrupção: sessão privada
+`762b551675c74f18acc09efab0df825a`, a mesma ROM, 478 passos VDP, direção e
+botão no pad P1; bundle verificado e sessão fechada. No início do botão,
+tick lógico 142, P1 estava em x=121 e P2 em x=199; ambas vidas permaneceram
+1000. A tentativa não alcançou contato. Sequência, leituras e receita estão em
+`out/evidence/20261027_interrupt_natural_case/`; não é teste aprovado de
+interrupção. O próximo roteiro mantém a aproximação até o início do ataque.
+
+No roteiro ajustado, sessão `af855f977cfc45738024f771877145ca`, ambos estavam
+no papel 7 e o `hit_done` de P1 era 0 no frame VDP 485; no 486 passou a 1,
+com pause 12 e recover 15. No 487 a vida espelhada de P1 apareceu 924, ante
+1000; a de P2 permaneceu 1000 até o tick 210 e P1 voltou ao idle após o
+recover. As leituras de probe e atores são duas solicitações separadas e
+podem cair dentro do laço, portanto 486→487 não é timestamp exato do contato.
+O caso associa input natural, estados observados e consequência limitada;
+não prova que uma caixa do ataque interrompido teria atingido P2 mais tarde.
+Receita e journal em `out/evidence/20261027_interrupt_natural_near_case/`;
+bundle verificado e sessão encerrada. O caso espelhado na ROM continua aberto.
+
+A repetição `10d4435879a14b6c96a96428774dc45d` capturou o framebuffer no
+frame VDP 488, quando a vida espelhada de P1 já era 924; no 487 ainda era
+1000, embora stop/recover e `hit_done` já tivessem mudado. PNG SHA
+`38fbfa7042b722335ca6eec10919484cd975355217911279baf2083c65b39b64` em
+`out/evidence/20261027_interrupt_natural_contact_case/first_damage.png`.
+O coordenador viu corpos sobrepostos junto à borda direita: a captura não
+permite reconhecer ambos nem autentica scanout da pose que causou o dano.
+O bundle final foi verificado e a sessão fechada. O log de frames, receita e
+snapshot anterior/posterior permanecem no mesmo diretório.
+
+Validação do lote no host: `pytest --project rev2` passou 292 testes e
+deselecionou 150 do consumidor legado; seleção não é aprovação dos casos
+omitidos. Selftest 135/135 (probe de projeto opcional não executado), 75
+ferramentas de medição, marcadores, corredor da candidata (folga 1381 B),
+documentação, constantes e captura de lições passaram. O contrato MUGEN passou
+somente como planejamento. Nada disso fecha composição, prazo ou entrega.
+A recuperação local `.runtime/backups/luta_mugem_rev2-runtime-20261028-attack-interrupt.tar.gz`,
+relativa à raiz e com SHA
+`6cbe8fec90572d8adb9537dcaa979a6204f9a0b375e6bfb8bf83963c0b18d891`,
+foi verificada com o manifesto homônimo em 24167 arquivos. A cópia e o owner
+estão no mesmo disco; não há nova proteção externa.
+
 ## 2026-10-27 — guarda na mesma ROM do recover
 
 A mesma candidata `7f530db3…` foi reaberta sem rebuild. O botão 1 só

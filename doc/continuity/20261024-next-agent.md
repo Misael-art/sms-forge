@@ -32,6 +32,32 @@ pose residente precisam ser qualificados; fundo sólido é escopo; P1 de sprites
 é compartilhada; os 7 eixos e época visual delivery devem convergir na mesma
 ROM. Primeiro feche runtime e qualidade mensuráveis; ambição AAA não é selo.
 
+## 2026-10-28 — interrupção de ataque, composição ainda reprovada
+
+A candidata `out/candidates/20261027_attack_interrupt_v2/`, ROM SHA
+`7523bd0c3976263b6187681a536ea29f9faedaa72b24b94027a671e907749054`,
+invalida no schema 7 o ataque da vítima atingida e preserva a maior pausa em
+troca não letal. A QA nativa observou dano 112 mas reprovou a sobreposição
+visual; uma sessão adicional com input natural observou P1 atingido durante
+ataque, `hit_done` 0→1 e recover. O framebuffer próximo ao evento não permite
+identificar os dois corpos; o caso espelhado e o efeito contrafactual de caixas
+continuam sem prova. KO simultâneo continua aberto. Detalhes e evidências no
+memory bank do consumidor.
+
+O ritmo NTSC medido foi 21,57/24,48 atualizações/s; o selo de pior quadro
+registrou 1759 derrames, mínimo 2, com preparação em stepping e sem HUD/FX/
+música. São reprovações, não orçamento de entrega. O host passou 292 testes
+rev2 (150 deselecionados), selftest 135/135 e 75 medidores. Nenhum ID dos 55
+foi fechado. Próximo blocker: distinguir o custo e a legalidade da composição
+real da latência de publicação e integrar uma alternativa que preserve ambos
+os lutadores e o contato, com carga representativa.
+
+Recuperação local verificada em 24167 arquivos:
+`.runtime/backups/luta_mugem_rev2-runtime-20261028-attack-interrupt.tar.gz`,
+SHA `6cbe8fec90572d8adb9537dcaa979a6204f9a0b375e6bfb8bf83963c0b18d891`,
+com manifesto `.json` homônimo. A cópia compartilha o disco do owner e não
+constitui proteção externa.
+
 ## 2026-10-27 — guarda e acerto na mesma candidata
 
 A ROM `7f530db3…` agora tem os dois eventos em stepping, sem rebuild.

@@ -28,7 +28,23 @@ knockdown: common1 está fora do perfil, a pose atual permanece, e um papel
 sem controle volta ao idle no chão ao fim do recover. Trip/fall da fonte
 não vira queda. Um comando que casa durante o pause ou o recover é
 consumido e não fica bufferizado. Schema 5 mantém o hitstop único do
-personagem. Na ROM `7f530db3…` o pause 16 e o recover 21 do HP de Ryu
+personagem.
+
+No schema 7, um acerto invalida a instância de ataque da vítima mesmo que a
+pose anterior permaneça visível; uma nova instância exige mudança de papel.
+O combate captura elegibilidade dos dois atores antes de resolver os contatos,
+permitindo troca não letal no mesmo tick quando ambas as interseções são
+encontradas. No caminho de pose submetida, as âncoras usadas são as da mesma
+sombra da SAT; outros perfis não têm essa garantia. Para pausas concorrentes,
+cada ator conserva o maior tempo solicitado. O loop ainda resolve P1 antes
+de P2 e um KO impede o segundo contato: KO simultâneo e empate continuam sem
+implementação qualificada. Essa política é aproximação, não equivalência CNS ou prova de que
+as duas poses chegaram ao scanout. Os testes host cobrem interrupção após
+pause/recover, ambos os lados e pausas assimétricas. Na ROM observou-se P1
+atingido enquanto atacava, com a instância invalidada e recover; o caso
+espelhado, as caixas futuras e a apresentação do contato continuam pendentes.
+
+Na ROM histórica `7f530db3…` o pause 16 e o recover 21 do HP de Ryu
 foram contados em stepping; a amostra do framebuffer é o topo do laço
 seguinte (`probe_frame` 53, tick 52, pause ainda 16). Nesse HitDef
 `guardtime` e `hittime` valem ambos 21, então a duração não separa
