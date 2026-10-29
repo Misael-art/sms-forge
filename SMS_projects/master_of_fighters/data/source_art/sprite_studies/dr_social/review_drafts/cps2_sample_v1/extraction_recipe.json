@@ -1,0 +1,131 @@
+{
+  "source": "jab_cutout.png",
+  "source_sha256": "705a96293fc116d4d4530611c8558539a3ddaf374aa23de55f90d26db8ead6d4",
+  "raw_size": [
+    1536,
+    1024
+  ],
+  "scale": [
+    104,
+    474
+  ],
+  "alpha_threshold": 128,
+  "canvas": [
+    128,
+    128
+  ],
+  "pivot": [
+    64,
+    116
+  ],
+  "source_colors": 32,
+  "notes": [
+    "Raw is not exact logical pixel grid; this extraction does not certify art quality",
+    "J04 glove crosses nominal column boundary by ~5 raw pixels; explicit windows recover it and exclude it from J05",
+    "One scale across six drawings. Row pivots register row baselines; pose variation is retained."
+  ],
+  "frames": [
+    {
+      "id": "J01",
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "cell_origin": [
+        0,
+        0
+      ],
+      "raw_pivot": [
+        256,
+        493
+      ]
+    },
+    {
+      "id": "J02",
+      "rect": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "cell_origin": [
+        512,
+        0
+      ],
+      "raw_pivot": [
+        256,
+        493
+      ]
+    },
+    {
+      "id": "J03",
+      "rect": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "cell_origin": [
+        1024,
+        0
+      ],
+      "raw_pivot": [
+        256,
+        493
+      ]
+    },
+    {
+      "id": "J04",
+      "rect": [
+        0,
+        512,
+        540,
+        1024
+      ],
+      "cell_origin": [
+        0,
+        512
+      ],
+      "raw_pivot": [
+        256,
+        483
+      ]
+    },
+    {
+      "id": "J05",
+      "rect": [
+        540,
+        512,
+        1024,
+        1024
+      ],
+      "cell_origin": [
+        512,
+        512
+      ],
+      "raw_pivot": [
+        256,
+        483
+      ]
+    },
+    {
+      "id": "J06",
+      "rect": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "cell_origin": [
+        1024,
+        512
+      ],
+      "raw_pivot": [
+        256,
+        483
+      ]
+    }
+  ]
+}
