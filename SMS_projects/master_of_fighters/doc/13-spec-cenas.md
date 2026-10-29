@@ -82,6 +82,18 @@ zero derrames/mínimo207. Degrau128B medido em outra ROM SHA `a5c013a8…`,
 zero derrames/mínimo217. Arte/contato/produção permanecem abertos; esses
 números não pagam a Cena01 abaixo, cenário/HUD ou gameplay.
 
+## Trecho diagnóstico contato v8 — 2026-10-29
+
+Fonte/receita no handoff, ROM452cd565…/32.768B. Pelo conversor e sete manifestos
+SAT:220padrões/7.040B,31SAT nas poses exceto J04=34, pico8 emtodos os pares.
+GradeJ04(3,9)px compensada: controle idêntico nos oito PNGs mediu33SAT/pico9 e
+foi reprovado sem build. O custo maior de SAT/patterns está incluído.
+Performance: duas janelas8s59,62/59,74fpsNTSC; selo3000frames0derrame/mínimo207;
+degrau128B,outra ROM7ce342bc…,0derrame/mínimo217. Quatro sessões encerradas;
+120framebuffers independentes e21da linha temporal exatos. Esses números pagam
+somente o diagnóstico residente; cenário/HUD/gameplay, PAL e produção da Cena01
+continuam abertos. Não inferir orçamento pelo screenshot nem milissegundosCPU.
+
 ## Cena 01 — _(nome)_
 ### Layout de VRAM declarado
 | Região | Faixa | Tiles | Uso |

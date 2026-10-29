@@ -5,6 +5,42 @@
 > não substitui este arquivo.
 
 ## Última atualização
+2026-10-29 — Novo lote da mesma amostra: candidata de sequência v8, SHA
+`877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41`.
+Montagem indexada sem alterar pixels: cinco quadros da v5 e J04 reto da v6;
+idle continua sendo o J01/v5 exato. Revisão integral da fonte/contato concluída no parecer v8,
+sem herdar o PASS facial da v5 como aprovação automática. O adaptador oficial ganhou
+fase explícita da grade tall por pose: padding transparente compensado no META,
+sem mudar PNG/pivô/escala. J04 `[3,9]`: pico do par9→8, SAT33→34, PNG idêntico
+à conversão da v6 antes reprovada; pool conjunto220 padrões/7.040B. Os outros
+seis PNGs e Ken são idênticos à v5; defaults da v5 refazem header/PNGs idênticos.
+Self-check reconstruiu pixels nas128fases; nove testes passaram, incluindo
+largura realmente impossível e recusa de offsets negativos neste emissor unsigned.
+Replay com o guard final refaz header/PNGs idênticos aos ligados na ROM.
+ROM32.768B, SHA `452cd56594db3764da4b3d1c61e8e5f2e9d66714907b2edd3fbc453da3be240f`.
+Parecer independente v8 passou os13eixos da fonte e chaves estáticas, inclusive
+J04/rosto/equipamento. Não certifica percepção temporal nem aceite do dono.
+QA nativa120/120 framebuffers exatos e7checks de fidelidade; sessão
+`80cebe97316e468bbbcc2eec8ddac9fd` encerrada. Braço/punho/luva do J04 e Ken
+inteiros, recuperação sem resíduos. SMRT:59,62/59,74fps em duas janelas8s;
+selo3000frames0derrame/mínimo207, sessão `b3bc1620274a4f1faf3752275b533299`.
+Degrau128B:0derrame/mínimo217, SHA `7ce342bc…`, sessão
+`8905b516d2f445f8a8f15bd8adb30848`. Ambas encerradas.
+Rastreio manual em sessão própria `b80042e52b4847d8a678693a7eee819e`, encerrada:
+13casos RAM/journal passaram, ordem/holds2/1/1/1/1/3,21framebuffers exatos e
+lag1VDP entre pose submetida/apresentada. Idle/J01 iguais emRGB dependem também
+do probe. A coleta anterior após performance, com teclas0 na amostra de2VDP,
+foi preservada como cobertura falha; nova linha lê cacheSDK e probe a cadaVDP.
+Não houve correção de SDK/ABI: ROM e input funcionaram no traço controlado.
+As quatro sessões foram encerradas; sem herdar evidência das ROMs anteriores.
+Os microdetalhes SMS e o julgamento de playback contínuo permanecem para aceite
+humano; checklist revisado bloqueia promoção. A fonte61poses v08.2 continua
+aprovada separadamente. Relatório histórico v5 ausente ainda bloqueia auditoria
+global do registro; não há relatório fabricado. Publicação/recuperação do lote
+ficam em `contact_grid_v8/publication_receipt.json` e `archive_receipt.json`.
+Sem ampliar desenhos/timing, atlas, personagens ou movimentos. Fonte e prova
+em `jab_revision_v8/` e `out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/`.
+
 2026-10-29 — Continuidade da amostra: fonte **v5** selecionada como candidata
 para diagnóstico, SHA `44ae0342e9db909d467907c1c21633165f5ee8dd1034b90d596d38498abd9c05`.
 A revisão independente v5 passou **somente o reparo facial**: aro/lente de latão

@@ -1,5 +1,18 @@
 # 15-tdd — master_of_fighters
 
+## Grade compensada da amostra v8 — 2026-10-29
+
+`MOF_CPS2_SAMPLE=8` seleciona o novo header;5e1 preservam as baselines.
+`packing_phase_px=[3,9]` somente no J04 muda a grade tall e compensa no META.
+Controle commesmos oito PNGs: pico9→8/SAT33→34/pool218→220padrões. Nenhum
+pixel/escala/pivô é alterado. Defaults[0,0] geram os dados antigos idênticos.
+Neste emissor, offsets negativos são recusados: Y deSMS_addSprite é16bit,
+não wrap automático. Fonte/receita/replay e nove testes ficam no handoff.
+ROM v8 SHA452cd565…,32.768B;120framebuffers independentes exatos;13casosRAM
+confirmam ordem/holds2/1/1/1/1/3, lag1VDP na apresentação. FPS8s59,62/59,74;
+selo3000frames0derrame/mínimo207,+128B0derrame/mínimo217. Quatro sessões
+encerradas. Só diagnóstico NTSC, sem aprovação de playback/arteSMS/dono/produção.
+
 ## Diagnóstico facial v5 — 2026-10-29
 
 `MOF_CPS2_SAMPLE=5` seleciona o novo header no mesmo consumidor; valor1 conserva

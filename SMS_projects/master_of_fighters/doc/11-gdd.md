@@ -1,5 +1,13 @@
 # 11-gdd — master_of_fighters
 
+## Continuidade da amostra v8 — 2026-10-29
+
+Somente idle + social_light_jab em seis desenhos: cinco quadros v5 e contato
+reto J04 já autorado na v6, montados sem editar pixels. Fonte/chaves estáticas
+passaram na revisão integral; fluxo temporal, simplificação SMS e dono seguem
+em checkpoint humano. Sem novos personagens, estados, golpes ou atlas.
+`dr_social_cps2_sample_v1.md` conserva fontes, receita selecionada e limites.
+
 ## Continuidade de 2026-10-29
 
 O dono aprovou o método e seu encaminhamento à curadoria futura. A candidata

@@ -81,8 +81,11 @@
       "sha256": "d56ea2bb4f378fc950f0238fb691ae5524c1222a036f717ca6b90f0904ff345d"
     },
     {
-      "path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
-      "sha256": "61340d8f552ce4557b7d8d6396d49c06d4e76b060f0a227fc0e1001958e0756a"
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/historical_approved_method_adapter_ba706e8.py",
+      "sha256": "61340d8f552ce4557b7d8d6396d49c06d4e76b060f0a227fc0e1001958e0756a",
+      "origin_path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "source_commit": "ba706e806e43bc94bafab15ca63b4ef78599d65b",
+      "role": "Historical exact approved-method evidence only; not another active converter."
     },
     {
       "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v2.json",
@@ -148,5 +151,75 @@
     "contact_attempt_v6": "J04 peak9 rejected by existing converter; no ROM",
     "contact_attempt_v7": "Not selected; folded contact still not convincing in producer source inspection",
     "remaining": "Human temporal judgment of compact v5 and target-size simplification; no atlas growth."
+  },
+  "followup_compensated_grid_v8": {
+    "status": "project_diagnostic_evidence_pending_future_curation_not_new_owner_approval",
+    "source_sha256": "877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41",
+    "cause": "Tall-grid interval overlap, not necessarily an opaque-row hardware lower bound.",
+    "change": "Explicit per-pose transparent padding compensated in META through existing encoder; no pixel/scale/pivot editing.",
+    "control": {
+      "record": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/phase_comparison.json",
+      "sha256": "4dd75eb8b4c8cee82f0cb929d88158b8671072be762ebbc5a64d2f43932594ec",
+      "all8PNGs_identical": true,
+      "peak_before": 9,
+      "peak_after": 8,
+      "sat_before": 33,
+      "sat_after": 34,
+      "patterns_before": 218,
+      "patterns_after": 220
+    },
+    "implementation": {
+      "path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "sha256": "30dc607ebfdd0d11cae79ad05c73a4579494b912a92831d69f6bd6d3bf1e1553",
+      "default_runtime_data_unchanged": true,
+      "all128phase_pixel_reconstruction_selfcheck_passed": true,
+      "unit_tests": 9,
+      "consumer_constraint": "Reject signed relative offsets for this unsigned sample emitter; SDK Y is16bit."
+    },
+    "art_review": {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v8.json",
+      "sha256": "3f67ceadf65ef3d7b33a19c87aadf920e9f58828d7a0e724ab0a0518c359107b",
+      "scope": "13source/static-key axes passed; continuous motion/SMS/owner separate"
+    },
+    "ROM": {
+      "sha256": "452cd56594db3764da4b3d1c61e8e5f2e9d66714907b2edd3fbc453da3be240f",
+      "fps_8s_windows": [
+        59.62,
+        59.74
+      ],
+      "worst_min": 207,
+      "worst_spills": 0,
+      "next_step_bytes": 128,
+      "next_step_min": 217,
+      "next_step_spills": 0
+    },
+    "native_QA": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/independent_qa/run_fd39fc88eedc423fa155b9442bad5e23/report.json",
+      "sha256": "1476d83f3f60a1fed7fb8fb3f49d1b3c36d1c8dc611c423802a5b089f67ec685",
+      "cases_passed": 1,
+      "exact_framebuffers": 120
+    },
+    "timing": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/timing_observed_input/observed_cases_report_v2.json",
+      "sha256": "7ebe2a4209dc15dea912aed1bf984fceaf0ca94fe390a9ad8fab90bddaf31f42",
+      "RAM_cases_passed": 13,
+      "exact_framebuffers": 21,
+      "submitted_holds": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        3
+      ],
+      "framebuffer_lag_vdp": 1,
+      "initial_failed_sample_retained": true
+    },
+    "future_curation_limits": [
+      "One authored sample and one packing phase are not a universal SMS recipe.",
+      "No global doctrine/gate/lesson ID promoted. Apply existing L001/L006/L035/L057/L090/L091/§93/§94/§128 rather than duplicating them.",
+      "More SAT/patterns and renderer coordinate semantics are part of the tradeoff.",
+      "Pixel identity and exact holds do not certify art, input latency, perceived fluidity, audio/PAL/gameplay or production."
+    ]
   }
 }

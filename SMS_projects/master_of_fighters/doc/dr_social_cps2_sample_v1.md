@@ -316,3 +316,124 @@ nominal/lenta: `jab_source_v5_60hz.apng` e `jab_source_v5_slow.apng`.
 Próximo checkpoint: julgamento temporal do contato compacto na mídia nova e
 aceite explícito das simplificações do rosto/roupa na escala SMS, antes de
 ampliar conteúdo ou promover. A v08.2 segue aprovada no seu próprio escopo.
+
+## Amostra v8 — contato legível e grade compensada, 2026-10-29
+
+**Estado corrente da amostra: v8, seis quadros.** A fonte61poses v08.2 aprovada
+continua intacta e em outro papel. A v8 não foi escolhida por número/data:
+resolve uma causa específica do bloqueio do contato, sem nova geração artística.
+
+Fonte `jab_revision_v8/jab_source.png`, SHA
+`877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41`.
+`assembly_recipe.json` prova a montagem indexada sem transformar pixels:
+J01/J02/J03/J05/J06 são cópias exatas da v5; J04 é a cópia exata do contato reto
+já autorado na v6. Paleta, alpha, escala e pivôs não mudam. Idle permanece o
+J01/v5, idêntico ao J01/v8. Os prompts/originais de Imagegen continuam nos pais
+v5/v6; não houve Imagegen novo, pintura por código ou novo movimento neste lote.
+
+### Causa e implementação
+
+A grade8×16 original une partes de linhas opacas diferentes dentro dos mesmos
+intervalos SAT e mede5células no J04, mais4do Ken. Um deslocamento da **grade**
+por(3,9)px, compensado no META, muda esses intervalos, conservando cada pixel.
+O adaptador oficial ganhou `packing_phase_px` opcional por pose, default[0,0].
+Ele acrescenta só transparência antes de chamar `to_sms_pose`, `pack_tiles_tall`,
+`build_frames` e o compactor existentes, e retira o mesmo deslocamento da
+posição META. Não há outro conversor, consumidor ou redução de corpo/ataque.
+
+O controle `.mddev/dr_social_cps2_sample_v8_grid0_control.json` usa as mesmas
+fontes, escala, pivôs e paleta da configuração ativa, mudando apenas essa grade.
+**Todos os oito PNGs SMS são byte-idênticos entre controle e candidata.**
+J04: pico9→8, SAT33→34; pool218→220padrões. Controle reprovado e não buildado;
+fontes v6/v7 e ROMs antigas continuam intactas. `phase_comparison.json` conserva
+esses controles. A troca custa mais SAT/patterns totais, não oculta esse custo.
+
+O emissor da amostra soma offsets unsigned antes de `SMS_addSprite`. O header
+SDK declara Y de16bits com checks; -4 codificado como252 somaria324, não68.
+O adaptador recusa fases que exijam offsets relativos negativos/incompatíveis;
+a v8 usa só offsets não negativos. Não se alterou o emissor medido. Self-check
+decodifica os pixels em128fases do packer; nove testes cobrem preto opaco,
+reprodução exata, defaults idênticos, largura realmente impossível e essa
+recusa. Defaults da v5 reproduzem o header e PNGs antigos byte a byte. Replay
+com o guard final também refaz todos os dados v8 ligados no build sem diferença.
+
+### Fonte e referência
+
+O parecer `dr_social_cps2_sample_independent_review_v8.json` passou os13eixos
+integrais da fonte/chaves estáticas: J03 dobrado, J04 estendido inequívoco e
+J05 recolhido; identidade, óculos, biotipo, materiais, bengala e apoios coesos.
+Isso não é aprovação de playback contínuo, SMS pelo dono ou produção/AAA.
+O checklist de entrada v8 permanece congelado. O resumo posterior
+`dr_social_cps2_sample_art_checklist_v8_reviewed.json` referencia esse parecer,
+com aceites temporal/SMS e dono pendentes, bloqueando promoção.
+
+Receita de referência continua a escolhida em `luta_mugem_rev2/doc/28-pose-budget-8.md`:
+fontes Ken `ken8/ken.sff` e Ryu `ryu/ryu.sff`, ACTs `ken1`/`Ryu02`, idles
+exportados66×94 neste comparativo. Social tem corpo~104px em célula128×128,
+com postura mais ereta/esguia. Mesma direção de contorno/plano de materiais;
+identidade/pixels não são copiados. SMS: framebuffer x2/3,y6/7 e extra corporal
+4/6=2/3 derivada só do idle. `comparison_identity.png` mostra modelv4, Ken/Ryu,
+fonte e SMS, em nativo/nearest. Hashes e papéis em `reference_comparison.json`.
+Essas comparações privadas não são publicadas no Git.
+
+### Nova ROM e observação
+
+Seleção `MOF_CPS2_SAMPLE=8` no mesmo consumidor;5e1 preservam dados anteriores.
+Receita `.mddev/dr_social_cps2_sample_v8.json`; manifestos de build
+`dr_social_cps2_contact_v8_build.json` e `dr_social_cps2_contact_v8_stress_build.json`.
+ROM `out/candidates/dr_social_cps2_contact_v8/rom/master_of_fighters.sms`,32.768B,
+SHA `452cd56594db3764da4b3d1c61e8e5f2e9d66714907b2edd3fbc453da3be240f`.
+220padrões/7.040B residentes;31SAT nas outras poses e34no J04, pico8 em todos
+os sete pares. Mesma P1 de15cores, layoutVRAM e setup com display desligado;
+somente SAT por tick na ROM base. Binding atual cobre Social e referência Ken.
+
+QA nativa `/root/social_runtime_qa`, sessão `80cebe97316e468bbbcc2eec8ddac9fd`,
+encerrada:1/1caso,120/120framebuffers exatos e sete checks individuais, incluindo
+Ken na composição do contato. Braço/punho/luvaJ04 íntegros e recuperação sem
+resíduos. Vídeo real `independent_qa/run_fd39fc88eedc423fa155b9442bad5e23/case_0.mp4`.
+`transition_with_reference.png` mostra a transição; relatórios/gate preservados.
+
+Sessão performance `b3bc1620274a4f1faf3752275b533299`,encerrada: SMRT em8s,
+59,62/59,74fpsNTSC; janela autônoma3000frames0derrame, mínimo207. Stress128B,
+ROM SHA `7ce342bcd35bc8d89d75d6583fcf9bee6cacfea023683d0085769d7135a188ea`,
+sessão `8905b516d2f445f8a8f15bd8adb30848`,encerrada:0derrame, mínimo217.
+Não há claim de capacidade máxima, duraçãoCPU, jitter, PAL, áudio ou gameplay.
+
+### Timing observado, separado da percepção
+
+A primeira coleta de input após performance encontrou `probe_keys=0` no ponto
+de2VDP, apesar do ACK32, e foi preservada como cobertura falha em `timing/` e
+`performance_sessions.json`. Não se corrigiu SDK/ABI por hipótese: a ROM viva
+retorna KeysStatus emDE e o ISR atualiza o cache. A sessão controlada seguinte
+lê o cache e o probe a cadaVDP e demonstra consumo; não se afirma causa exclusiva
+para a amostra anterior nem se transforma espera extra em prazo de gameplay.
+
+Sessão `b80042e52b4847d8a678693a7eee819e`,encerrada: traço/provas em
+`timing_observed_input/`. Após controle explícito de autoplay e baseline idle,
+uma pressão de Button1 produz J01..J06 e recuperação. 13casos de RAM/journal
+passaram em `audit_observed_cases.py` com anchors reais de input. O registrov1
+foi recusado por usar deadline entre reads; o registrov2 corrige apenas a forma
+do contrato da ferramenta, sem mudar bytes, sessão ou expectativas do golpe.
+Ambos ficam preservados; nenhum gate foi modificado ou afrouxado.
+
+Ordem submetida observada:1h0,1h1,2h0,3h0,4h0,5h0,6h0,6h1,6h2,0h0.
+Assim, os holds2/1/1/1/1/3 ocorrem na ROM. Os21framebuffers conferem com os
+PNGs e mostram lag1VDP da submissão à apresentação. J02–J06 têm exposição
+RGB1/1/1/1/3; idle/J01 iguais dependem também do probe, não distinguem IDs por
+cor. Pontos nativos, ACKs e controles permitem rederivação; stepping não mede
+FPS nem certifica fluidez percebida. Todas as quatro sessões do lote fecharam.
+
+### Entrega revisável
+
+Em `contact_grid_v8/`: `comparison_identity.png`, `comparison_jab.png`,
+`contact_before_after.png`, `jab_isolated_9ticks.apng`,
+`jab_runtime_cycle_30ticks.apng` (21idle+9ação), `jab_slow.apng`, conversão,
+ROMs/recibos via paths do build, QA e probes. As durações APNG emms arredondam;
+a prova de prazo vem da ROM, não do arquivo animado.
+Óculos/rosto e lapela/colete simplificam no tamanho SMS. A revisão independente
+considerou isso oportunidade de julgamento na escala real, não defeito fonte
+bloqueante. Permanecem aceite humano temporal/SMS e promoção por etapa; não
+expandir atlas/moveset antes do checkpoint. Não houve certificaçãoAAA ou
+integração de produção. Fontes/receitas entram no Git; pacote e recibo local de
+recuperação são identificados em `archive_receipt.json`, sem promessa de backup
+em outro host ou release de produto.

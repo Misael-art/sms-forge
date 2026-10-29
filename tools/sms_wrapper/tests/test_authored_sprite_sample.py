@@ -8,7 +8,8 @@ from PIL import Image
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from prepare_authored_sprite_sample import load_pose, convert_poses, prepare, extract_native
+from prepare_authored_sprite_sample import (load_pose, convert_poses, prepare,
+                                           extract_native, phase_self_check)
 
 
 def fixture(tmp_path, opaque=1):
@@ -125,3 +126,44 @@ def test_wide_pair_is_rejected_without_omitting_cells(tmp_path):
     report = json.loads((tmp_path / 'converted/conversion.json').read_text())
     assert next(c for c in report['compositions'] if c['id'] == 'J04')['peak'] > 8
     assert not (tmp_path / 'converted/sample_data.h').read_text().endswith('sample_durations[7] = {0,2,1,1,1,1,3};\n')
+    # Grid phase does not grant an exemption for genuinely wide opaque rows.
+    cfg['poses'][4]['packing_phase_px'] = [0, 8]
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='composition'):
+        prepare(path, tmp_path / 'wide_phased')
+
+
+def test_all_grid_phases_preserve_pixels_and_opaque_black():
+    phase_self_check()
+
+
+def test_default_and_explicit_zero_phase_have_identical_runtime_data(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v1',
+           'poses': [dict(spec, id=name) for name in
+                     ['idle', 'J01', 'J02', 'J03', 'J04', 'J05', 'J06']],
+           'durations': [2, 1, 1, 1, 1, 3],
+           'reference': dict(spec, extra_scale=[2, 3])}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    prepare(path, tmp_path / 'implicit')
+    for p in cfg['poses'] + [cfg['reference']]:
+        p['packing_phase_px'] = [0, 0]
+    path.write_text(json.dumps(cfg))
+    prepare(path, tmp_path / 'explicit')
+    for name in ['sample_data.h', 'idle.png', 'J04.png', 'reference.png']:
+        assert (tmp_path / 'implicit' / name).read_bytes() == (tmp_path / 'explicit' / name).read_bytes()
+
+
+def test_reject_phase_requiring_unsigned_y_wrap(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v1',
+           'poses': [dict(spec, id=name, packing_phase_px=[0, 8]) for name in
+                     ['idle', 'J01', 'J02', 'J03', 'J04', 'J05', 'J06']],
+           'durations': [2, 1, 1, 1, 1, 3],
+           'reference': dict(spec, extra_scale=[2, 3])}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='signed offsets'):
+        prepare(path, tmp_path / 'invalid_for_emitter')
+    assert not (tmp_path / 'invalid_for_emitter/sample_data.h').exists()

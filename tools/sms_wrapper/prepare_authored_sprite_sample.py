@@ -145,6 +145,37 @@ def convert_poses(sprites: list[Sprite], extra: tuple[int, int] | None = None):
                     'neutral_columns_after_extra': sat_row_peak(fitted[0])}
 
 
+def pack_registered_sprite(sprite: Sprite, codebook: list[int], name: str,
+                           phase=(0, 0)):
+    """Move the hardware grid, never the visible bitmap or its source pivot.
+
+    Transparent left/top padding selects the 8x16 cell phase. The caller must
+    subtract that padding from META placement. The canonical tall encoder,
+    palette mapper and nonblank-cell policy remain responsible for all bytes.
+    This can reduce interval overlap, but cannot legalize truly wide pixels.
+    """
+    if (not isinstance(phase, (list, tuple)) or len(phase) != 2 or
+            any(type(v) is not int for v in phase) or
+            not 0 <= phase[0] < 8 or not 0 <= phase[1] < 16):
+        raise ValueError('packing_phase_px must contain x=0..7, y=0..15 integers')
+    px, py = phase
+    if px or py:
+        width = sprite.width + px
+        pixels = bytearray(width * (sprite.height + py))
+        for y in range(sprite.height):
+            offset = (y + py) * width + px
+            pixels[offset:offset + sprite.width] = sprite.pixels[y * sprite.width:(y + 1) * sprite.width]
+        sprite = replace(sprite, width=width, height=sprite.height + py,
+                         pixels=bytes(pixels), axis_x=sprite.axis_x + px,
+                         axis_y=sprite.axis_y + py)
+    pose = to_sms_pose(sprite)
+    blob, _ = pack_tiles_tall(pose)
+    blob = _remap_blob(blob, bytes(pose.palette), codebook, 0)
+    metadata = build_frames(pose, omit_blank_cells=True)
+    blob, metadata = _compact_facing_pose(blob, metadata, name)
+    return blob, metadata, (-px, -py)
+
+
 def prepare(config_path: Path, output: Path) -> dict:
     cfg = json.loads(config_path.read_text())
     if cfg.get('schema') != 'sms_authored_sprite_sample_v1':
@@ -203,7 +234,8 @@ def prepare(config_path: Path, output: Path) -> dict:
     pivot = (24, 72)
     output.mkdir(parents=True)
     paths, frames, encoded = [], [], []
-    for name, sprite in zip([p['id'] for p in specs] + ['reference'], all_sprites):
+    for spec, sprite in zip(specs + [dict(ref, id='reference')], all_sprites):
+        name = spec['id']
         indices = bytes(0 if i == 0 else
                         1 + _assign_index(_nearest_word(sprite.palette[i]), codebook)
                         for i in sprite.pixels)
@@ -228,12 +260,16 @@ def prepare(config_path: Path, output: Path) -> dict:
         # cell at unaligned margins and differs from the reference recipe.
         sms_sprite = replace(sprite, pixels=indices, palette=rgb_palette +
                              [(0, 0, 0)] * (256 - len(rgb_palette)))
-        sms_pose = to_sms_pose(sms_sprite)
-        blob, _ = pack_tiles_tall(sms_pose)
-        blob = _remap_blob(blob, bytes(sms_pose.palette), codebook, 0)
-        metadata = build_frames(sms_pose, omit_blank_cells=True)
-        blob, metadata = _compact_facing_pose(blob, metadata, name)
-        encoded.append((name, blob, metadata, left, top))
+        phase = spec.get('packing_phase_px', [0, 0])
+        blob, metadata, (dx, dy) = pack_registered_sprite(sms_sprite, codebook, name, phase)
+        rows = [metadata[n + 1] + dy for n in range(0, len(metadata) - 1, 3)]
+        if not rows:
+            raise ValueError(f'{name}: conversion has no occupied sprite cells')
+        frames[-1].update(packing_phase_px=list(phase),
+                         source_grid_peak_tall=frames[-1]['peak_tall'],
+                         peak_tall=max(sum(y <= line < y + 16 for y in rows)
+                                       for line in range(min(rows), max(rows) + 16)))
+        encoded.append((name, blob, metadata, left + dx, top + dy))
     # All eight poses remain resident, no streaming or deadline proxy. Reuse
     # the canonical tall pair encoder/compactor; this is just static residency.
     capacity = safe_sprite_pattern_capacity(0, 0x0000, 0x3800)
@@ -250,6 +286,12 @@ def prepare(config_path: Path, output: Path) -> dict:
                 pair_ids[pair] = len(pool) // 32
                 pool.extend(pair)
             x, y, tile = left + meta[n], top + meta[n + 1], pair_ids[pair]
+            # This sample emitter adds unsigned offsets before SMS_addSprite.
+            # The SDK's checked Y argument is 16-bit: encoding -4 as252 would
+            # submit324 rather than68 at origin72. Reject that representation
+            # instead of claiming byte wrap or changing the measured emitter.
+            if not (0 <= x < 128 and 0 <= y < 128):
+                raise ValueError('packing phase requires signed offsets unsupported by sample emitter')
             rewritten.extend([x, y, tile])
             objects.append({'x': x, 'y': y, 'tile': tile})
         if len(objects) > 64:
@@ -282,6 +324,7 @@ def prepare(config_path: Path, output: Path) -> dict:
               'palette_codes': [0] + codebook,
               'palette_policy': ('explicit shared material palette' if 'shared_palette_codes' in cfg else
                                  'one shared P1; both actors influence frequency codebook'),
+              'packing_phase_policy': 'explicit transparent padding compensated in META; PNG, scale and pivot unchanged',
               'canvas': [width, height], 'pivot': list(pivot), 'positions': positions,
               'frames': frames, 'compositions': compositions,
               'patterns': packed['loaded_patterns'], 'vram_pattern_bytes': len(packed['tile_bytes']),
@@ -300,7 +343,48 @@ def prepare(config_path: Path, output: Path) -> dict:
     return report
 
 
+def phase_self_check():
+    """Decode emitted pairs independently of the source registration math."""
+    from mugen2sms.generators.runtime_format import decode_indices
+    width, height = 40, 16
+    pixels = bytes((1 + (x + y) % 3) if (x < 24 if y < 8 else x >= 16) else 0
+                   for y in range(height) for x in range(width))
+    palette = [(0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 0, 0)]
+    sprite = Sprite(0, 0, 20, 16, width, height, pixels,
+                    palette + [(0, 0, 0)] * 252, False, None, 0)
+    codebook = [0, 63, 3]
+    expected = {(x, y): codebook[pixels[y * width + x] - 1]
+                for y in range(height) for x in range(width) if pixels[y * width + x]}
+    peaks = {}
+    for px in range(8):
+        for py in range(16):
+            blob, meta, (dx, dy) = pack_registered_sprite(sprite, codebook, 'fixture', [px, py])
+            actual, rows = {}, []
+            for n in range(0, len(meta) - 1, 3):
+                x, y, tile = meta[n] + dx, meta[n + 1] + dy, meta[n + 2]
+                rows.append(y)
+                pair = blob[tile * 32:tile * 32 + 64]
+                decoded = decode_indices(pair[:32]) + decode_indices(pair[32:])
+                for offset, index in enumerate(decoded):
+                    if index:
+                        point = (x + offset % 8, y + offset // 8)
+                        assert point not in actual  # no opaque overlap/duplication
+                        actual[point] = codebook[index - 1]
+            assert actual == expected  # includes every opaque black pixel
+            peaks[px, py] = max(sum(y <= line < y + 16 for y in rows)
+                                for line in range(min(rows), max(rows) + 16))
+    assert peaks[0, 0] == 5 and peaks[0, 8] == 3
+    for bad in ([8, 0], [0, 16], [-1, 0], [True, 0], [0], None):
+        try:
+            pack_registered_sprite(sprite, codebook, 'fixture', bad)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError('invalid grid phase accepted')
+
+
 def self_check() -> int:
+    phase_self_check()
     sp = Sprite(0, 0, 12, 64, 24, 64, bytes([1]) * (24 * 64),
                 [(0, 0, 0)] * 256, False, None, 0)
     fitted, report = convert_poses([sp])
@@ -321,7 +405,7 @@ def self_check() -> int:
         pass
     else:
         raise AssertionError('invalid extra scale was accepted')
-    print('[SELF-CHECK OK] authored source adapter: opaque black, tall pairs, capacity, scale rejection')
+    print('[SELF-CHECK OK] authored source adapter: all128grid phases render exact, opaque black, capacity, scale rejection')
     return 0
 
 

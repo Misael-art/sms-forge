@@ -1230,11 +1230,11 @@
       "kind": "animation_source",
       "variant": "cps2-light-jab",
       "revision": 5,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v03"
       ],
-      "reason": "Same face/glasses defect: use exact native v3 enlarged4x as edit target with grid-aligned1/4 extraction, rather than resampling a 474px illustration to104px body; no choreography or scale change.",
+      "reason": "Same face/glasses defect: use exact native v3 enlarged4x as edit target with grid-aligned1/4 extraction, rather than resampling a 474px illustration to104px body; no choreography or scale change. Preserved facial/ROM baseline; v8 sequence replaces only J04 and retains other five drawings.",
       "files": [
         {
           "role": "raw",
@@ -1547,6 +1547,144 @@
           "sha256": "3339a3800d88a22456f86cbd43908adf7c195c2ab4957b0255e4e477ff27463b"
         }
       ]
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v08",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "revision": 8,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v05",
+        "dr-social-cps2-light-jab-v06"
+      ],
+      "reason": "Lossless sequence assembly: keep five v5 drawings and replace only J04 with authored v6 straight contact. New explicit compensated tall-grid phase addresses physical interval overlap; no source pixels painted/rescaled/recolored.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/jab_source.png",
+          "sha256": "877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/assembly_recipe.json",
+          "sha256": "8f16e30d182d1df8d927f0f4f1a0b1267c0c77da34956e2cf632076f84a92a62"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/jab_metadata.json",
+          "sha256": "468d30463390f38fe0cb4b0003aa98ff6490064c548e7d501a54c5f21a63fb13"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J01.png",
+          "sha256": "db9a9de09cd474db2d7d32a6295fdadf0094d30294b90b16acc3999bba40aef5"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J02.png",
+          "sha256": "c08a0159a7146f314a5e70950ff241bb4264904de5db8efdc5a574e47bed0f88"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J03.png",
+          "sha256": "81ce9ff2877044eba5f0e5a806565dd3a22dd66726447fc320d284ad9857b7db"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J04.png",
+          "sha256": "dd34b0dcf044900dc8a5c9e9b3ba2ac498b5c156170e74ae739229c60cf2cda8"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J05.png",
+          "sha256": "834b07427973835b77ddd22ce748ace2df8b7c2dbfdf1557a720a823d03c24ac"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J06.png",
+          "sha256": "c7b5a79177c53d3ce9a8a0e0c25ac56554d76d1fe671ac098098550e28234b68"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-source-review-v08",
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-sample",
+      "revision": 8,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v08"
+      ],
+      "reason": "Independent full source/key-contact checkpoint for lossless v5+v6 assembly, separate owner/ROM decisions.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/dr_social_cps2_sample_independent_review_v8.json",
+          "sha256": "3f67ceadf65ef3d7b33a19c87aadf920e9f58828d7a0e724ab0a0518c359107b"
+        },
+        {
+          "role": "checklist",
+          "path": "doc/dr_social_cps2_sample_art_checklist_v8.json",
+          "sha256": "da3ad6c871e917c9c14f69e10d1643d1c4b77a1b99cc890fe3798b430782a3db"
+        },
+        {
+          "role": "request",
+          "path": "doc/dr_social_cps2_sample_review_request_v8.json",
+          "sha256": "5520187f77dd989ec71107fcc0e91dbd9218ec943555d2bc2e14ba659d859d64"
+        },
+        {
+          "role": "reviewed_checklist",
+          "path": "doc/dr_social_cps2_sample_art_checklist_v8_reviewed.json",
+          "sha256": "3e3cba3bc2beb1e72ddeb4c841e3d6b6278deea6814c128c5b388347e58702ca"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-contact-v08-diagnostic",
+      "asset_id": "dr_social",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-contact-v8",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v08"
+      ],
+      "reason": "Explicit compensated grid phase; report and header, not ROM/art approval.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/conversion.json",
+          "sha256": "fdfd6484fc9462c8120041103d979ee5a005a536ec0043714fd32d843f824881"
+        },
+        {
+          "role": "header",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/sample_data.h",
+          "sha256": "9d616d31160acf52b8149ca954aa641a65dabd9d6eda5c506e82778d99decaba"
+        },
+        {
+          "role": "qa_request",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/independent_qa/request.json",
+          "sha256": "bf89ac460acd2858413c56c2928697c25cd0c28c600f8c1fa688c183360c3140"
+        },
+        {
+          "role": "qa_report",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/independent_qa/run_fd39fc88eedc423fa155b9442bad5e23/report.json",
+          "sha256": "1476d83f3f60a1fed7fb8fb3f49d1b3c36d1c8dc611c423802a5b089f67ec685"
+        },
+        {
+          "role": "timing_record",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/timing_observed_input/observed_cases_v2.json",
+          "sha256": "c91bdd2ec3b13f981bf5fff8c94d0b69bec699939b6cf862bfec7a332e7ec0b6"
+        },
+        {
+          "role": "timing_report",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/timing_observed_input/observed_cases_report_v2.json",
+          "sha256": "7ebe2a4209dc15dea912aed1bf984fceaf0ca94fe390a9ad8fab90bddaf31f42"
+        }
+      ]
     }
   ],
   "heads": [
@@ -1673,7 +1811,7 @@
       "asset_id": "dr_social",
       "kind": "animation_source",
       "variant": "cps2-light-jab",
-      "candidate": "dr-social-cps2-light-jab-v05",
+      "candidate": "dr-social-cps2-light-jab-v08",
       "approved": null
     },
     {
@@ -1687,7 +1825,7 @@
       "asset_id": "dr_social",
       "kind": "art_review",
       "variant": "cps2-sample",
-      "candidate": "dr-social-cps2-source-review-v02",
+      "candidate": "dr-social-cps2-source-review-v08",
       "approved": null
     },
     {
@@ -1702,6 +1840,13 @@
       "kind": "diagnostic_conversion",
       "variant": "cps2-face-v5",
       "candidate": "dr-social-cps2-face-v05-diagnostic",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-contact-v8",
+      "candidate": "dr-social-cps2-contact-v08-diagnostic",
       "approved": null
     }
   ],
