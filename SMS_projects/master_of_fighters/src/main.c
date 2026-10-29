@@ -9,15 +9,34 @@
 
 #include "SMSlib.h"
 
-#if defined(MOF_CPS2_SAMPLE) && MOF_CPS2_SAMPLE
+#if (defined(MOF_CPS2_SAMPLE) && MOF_CPS2_SAMPLE) || defined(MOF_HAYATO_SAMPLE)
 /* Diagnostic selection within the existing consumer. Candidate source assets
  * remain outside res/; the default production skeleton is unchanged. */
-#if MOF_CPS2_SAMPLE == 8
+#if defined(MOF_HAYATO_SAMPLE)
+#if MOF_HAYATO_SAMPLE == 1
+#include "../out/diagnostics/hayato_cps2_sample_v1/guard_v2_left_baseline_v3/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 2
+#include "../out/diagnostics/hayato_cps2_sample_v1/guard_v2_right_baseline_v3/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 3
+#include "../out/diagnostics/hayato_cps2_sample_v1/social_jab_left_baseline_v3/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 4
+#include "../out/diagnostics/hayato_cps2_sample_v1/social_jab_right_baseline_v3_mirrorphase/sample_data.h"
+#else
+#error Unknown Hayato diagnostic composition
+#endif
+#elif MOF_CPS2_SAMPLE == 8
 #include "../out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/sample_data.h"
 #elif MOF_CPS2_SAMPLE == 5
 #include "../out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/converted/sample_data.h"
 #else
 #include "../out/diagnostics/dr_social_cps2_sample_v1/converted_tall_v5/sample_data.h"
+#endif
+#ifndef SAMPLE_POSE_COUNT
+#define SAMPLE_POSE_COUNT 7u
+#define SAMPLE_ACTOR_X 40u
+#define SAMPLE_ACTOR_Y 72u
+#define SAMPLE_REFERENCE_X 152u
+#define SAMPLE_REFERENCE_Y 72u
 #endif
 #ifndef MOF_SAMPLE_STRESS_BYTES
 #define MOF_SAMPLE_STRESS_BYTES 0
@@ -92,6 +111,7 @@ void main(void) {
         keys = SMS_getKeysStatus();
         if ((keys & PORT_A_KEY_2) && !(old_keys & PORT_A_KEY_2))
             autoplay ^= 1u;
+#if SAMPLE_POSE_COUNT > 1
         if (pose == 0u) {
             if ((keys & PORT_A_KEY_1) && !(old_keys & PORT_A_KEY_1)) {
                 pose = 1u;
@@ -101,11 +121,12 @@ void main(void) {
                 elapsed = 0u;
             }
         }
+#endif
         old_keys = keys;
         probe_phase = 4u;
         SMS_initSprites();
-        emit_pose(sample_poses[pose], 40u, 72u);
-        emit_pose(sample_reference_meta, 152u, 72u);
+        emit_pose(sample_poses[pose], SAMPLE_ACTOR_X, SAMPLE_ACTOR_Y);
+        emit_pose(sample_reference_meta, SAMPLE_REFERENCE_X, SAMPLE_REFERENCE_Y);
         SMS_finalizeSprites();
         SMS_waitForVBlank();
         probe_phase = 2u;
@@ -129,10 +150,11 @@ void main(void) {
         } else {
             probe_worst_done = 1u;
         }
+#if SAMPLE_POSE_COUNT > 1
         if (pose != 0u) {
             if (++elapsed >= sample_durations[pose]) {
                 elapsed = 0u;
-                if (++pose == 7u) {
+                if (++pose == SAMPLE_POSE_COUNT) {
                     pose = 0u;
                     idle_ticks = 21u;
                 }
@@ -140,6 +162,7 @@ void main(void) {
         } else if (idle_ticks != 0u) {
             --idle_ticks;
         }
+#endif
     }
 }
 #else

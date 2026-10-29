@@ -1,0 +1,195 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_animation",
+  "producer": "/root",
+  "reviewer": "/root/hayato_art_review",
+  "domains": [
+    "art"
+  ],
+  "execution_mode": "read_only_source_art_review",
+  "status": "passed",
+  "request_id": "hayato-cps2-idle-v2-source-and-pair",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_cps2_idle_review_request_v2.json",
+    "sha256": "e989776839200077d87c911800581b8916133604ac5e9708e2a7d70806281fa2"
+  },
+  "approval_scope": "Independent static source-art and common-source-roster review of Hayato guard v2 only. No SMS art acceptance, animation, ROM, owner, production or delivery approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+      "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+      "observed_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J01.png",
+      "sha256": "db9a9de09cd474db2d7d32a6295fdadf0094d30294b90b16acc3999bba40aef5",
+      "observed_sha256": "db9a9de09cd474db2d7d32a6295fdadf0094d30294b90b16acc3999bba40aef5"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "observed_sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/decisions/hayato-concept-v02_owner_approval.json",
+      "sha256": "66c2525055ef061da089a8d1338b391949e41ba1f03dd190743711e181f483b4",
+      "observed_sha256": "66c2525055ef061da089a8d1338b391949e41ba1f03dd190743711e181f483b4"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/pair_source_sms_v2.png",
+      "sha256": "d87dc0013b74a18503d6119088b98a82617dc8cbb2d13111065ad77449220fa7",
+      "observed_sha256": "d87dc0013b74a18503d6119088b98a82617dc8cbb2d13111065ad77449220fa7"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/idle_pair_v2/conversion.json",
+      "sha256": "92ad92b485e1abc59e99da213a634e6dec86b155807c146e6d47dd2f7a4c0689",
+      "observed_sha256": "92ad92b485e1abc59e99da213a634e6dec86b155807c146e6d47dd2f7a4c0689"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_cps2_sample_v1.md",
+      "sha256": "960d30d7898365206a273b6b3eba1a5f5d18b5b293c12b974c8d8224ec97b1da",
+      "observed_sha256": "960d30d7898365206a273b6b3eba1a5f5d18b5b293c12b974c8d8224ec97b1da"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/idle_source.png",
+      "sha256": "af65b1f714b7da0ea7ed47eb735169603e81d9eb82f2cb6428a14ad4487d2560",
+      "observed_sha256": "af65b1f714b7da0ea7ed47eb735169603e81d9eb82f2cb6428a14ad4487d2560",
+      "role": "parent diagonal guard compared at native and baseline-registered4x"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/idle_source_v2_4x.png",
+      "sha256": "3aa13146e5f32f1f17b2949b09a90d0d6ccff296b95e0b2962b5c9654dd6e35c",
+      "observed_sha256": "3aa13146e5f32f1f17b2949b09a90d0d6ccff296b95e0b2962b5c9654dd6e35c",
+      "role": "nearest-neighbor4x inspected"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/idle_pair_v2/idle.png",
+      "sha256": "4c4dbac59da3f8fb7d20b23e53eb49793bbe4ff03b148f872fd5287a4ca33ad8",
+      "observed_sha256": "4c4dbac59da3f8fb7d20b23e53eb49793bbe4ff03b148f872fd5287a4ca33ad8",
+      "role": "preliminary SMS Hayato native PNG inspected"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/idle_pair_v2/reference.png",
+      "sha256": "3b0ba59e59bc453833c2913165ea83fff11125887716b2d444bf47b4b4d64291",
+      "observed_sha256": "3b0ba59e59bc453833c2913165ea83fff11125887716b2d444bf47b4b4d64291",
+      "role": "preliminary common-P1 Social native PNG inspected"
+    }
+  ],
+  "review_axes": {
+    "pixel_clusters": {
+      "status": "pass",
+      "note": "Os planos de quimono e hakama são grupos legíveis de base/sombra/luz, com diagonais escalonadas. Não observei dithering ou textura decorativa nova na fonte. Há detalhes de1pixel em olho, metal e crest, apropriados à escala, sem tratá-los como um gate de qualidade."
+    },
+    "face_detail_readability": {
+      "status": "pass",
+      "note": "O rosto jovem adulto, franja escura, laço vermelho e olho voltado à direita continuam reconhecíveis em1x. A segunda inspeção ampliada confirmou pequeno claro do olho junto ao escuro da pálpebra/pupila; não é uma face vazia. A expressão é deliberadamente mínima na fonte, e a derivada SMS precisa de julgamento separado."
+    },
+    "outline_and_cutout": {
+      "status": "pass",
+      "note": "Inspecionei fonte sobre fundo escuro e claro, nativo e NN. Contorno de cabelo/laço, manga, hakama, bainha e sandálias permanece contínuo, sem corte visível de lâmina ou terminal. Não identifiquei componente solto bloqueante. Isto é observação visual, não auditoria automática de componentes."
+    },
+    "material_shading": {
+      "status": "pass",
+      "note": "Quimono branco/cinza, pele quente, faixa vermelha, hakama laranja-vermelho, cabelo escuro, lâmina clara e bainha escura se separam. O pequeno metal da guarda/ferragens mantém leitura de equipamento; o tamanho não comporta os detalhes do concept."
+    },
+    "material_shadow_flow_coherence": {
+      "status": "pass",
+      "note": "Grandes sombras do quimono explicam o volume da manga/cotovelo, e as sombras vermelhas do hakama acompanham dobras da cintura às pernas. Não observei inversão de iluminação ou alternância granular que contradiga a luz superior/esquerda."
+    },
+    "semantic_palette_role_confinement": {
+      "status": "pass",
+      "note": "Branco permanece em quimono, faixa de canela/tabi e lâmina, e vermelho em laço, lapela/forro/crest/faixa/hakama e tiras da sandália. Escuros quentes do cabelo não o transformam em roupa ou efeito. Não identifiquei vazamento de acento visualmente bloqueante."
+    },
+    "hand_weapon_attachment": {
+      "status": "pass",
+      "note": "A manga do braço que atravessa a cintura leva a antebraço, punho e mão inferior; a manga do lado da espada leva ao punho/mão superior. As duas mãos estão sobre o mesmo cabo, com separação de massa suficiente na chave estática. A guarda se interpõe entre pega e lâmina; não vi mão flutuante ou braço extra."
+    },
+    "equipment_geometry": {
+      "status": "pass",
+      "note": "A katana foi rodada para cima: cabo, guarda, lâmina e ponta permanecem presentes, com comprimento aparente próximo ao da diagonal v1. A ponta está além da cabeça sem cruzar rosto. Bainha continua presa à faixa e termina antes dos pés, sem atravessar joelho/solo. Não certifiquei comprimento físico por uma máscara semântica."
+    },
+    "frame_pose_integrity": {
+      "status": "pass",
+      "note": "A única pose revisada lê como guarda de katana já desembainhada, distinta de um golpe de contato. Esta avaliação não cobre preparação, execução, recuperação, ciclo ou continuidade entre quadros ainda inexistentes."
+    },
+    "native_size_readability": {
+      "status": "pass",
+      "note": "Em1x a figura ainda lê como jovem samurai de branco e laranja-vermelho com katana, e os apoios se separam. Comparação nativa/NN mantém forma geral sem depender de rótulo para identificação. A saída SMS perde expressividade facial, separadamente pendente."
+    },
+    "morphology_and_biotype": {
+      "status": "pass",
+      "note": "Hayato mantém cabeça adulta, tronco esguio e membros sem hipertrofia. A largura do hakama e do quimono é roupa e não produz leitura de lutador pesado. A postura é mais aberta que a do Social; isso preserva diferença de identidade sem exigir igualar bbox de armas/roupa."
+    },
+    "pose_anatomy_and_joint_continuity": {
+      "status": "pass",
+      "note": "A segunda passagem sobre os dois braços não encontrou quebra em ombro-manga-cotovelo-antebraço-punho. A torção mínima dos punhos sustenta a nova direção da espada, sem deslocar visualmente os ombros ou trocar o lado da pega."
+    },
+    "support_and_pivot": {
+      "status": "pass",
+      "note": "As duas sandálias estão apoiadas, com joelhos relaxados e canelas saindo coerentemente do hakama. A comparação de baseline usa os pivôs registrados, sem normalização individual de altura. Não se infere estabilidade dinâmica de centro de massa desta pose."
+    },
+    "roster_harmony": {
+      "status": "pass",
+      "note": "Na comparação comum, Hayato e Social têm estatura corporal aparente próxima e desenho adulto/esguio. Contorno escuro, planos de cel shading e densidade de clusters convivem. Katana aumenta altura total da silhueta; ela não foi confundida com altura anatômica. Não se pediu redução da figura para igualar a extensão de equipamento."
+    },
+    "sms_derivative_art_acceptance": {
+      "status": "pending",
+      "note": "A derivada preliminar mantém branco/laranja e contraste geral, mas cabelo/face/mãos e pequenos metais comprimem-se em poucos pixels. Alguns claros quentes no cabelo leem mais alaranjados que a fonte; conferir mapeamento P1 e a imagem nativa na futura ROM antes de aceitar acabamento compartilhado. Isso não é defeito bloqueante da fonte nem autorização para recoloração automática."
+    },
+    "continuous_motion": {
+      "status": "not_applicable",
+      "note": "Pedido atribuído é uma guarda estática; não há sequência de ação ou reprodução temporal nesta revisão."
+    }
+  },
+  "findings": [
+    {
+      "priority": 1,
+      "domain": "art",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "preliminary common-P1 SMS derivative and future native framebuffer",
+      "axes": [
+        "face_detail_readability",
+        "native_size_readability",
+        "semantic_palette_role_confinement"
+      ],
+      "note": "Na prévia SMS, face/olho, pega/metal e alguns claros do cabelo ficam reduzidos e mais quentes que na fonte. A identidade geral continua legível, porém esta revisão da fonte não aceita artisticamente o mapeamento compartilhado nem substitui inspeção no novo framebuffer.",
+      "required_delta": "Quando a conversão final estiver fixada, mostrar ambos os atores em1x e NN na ROM por SHA e revisar esses detalhes; preservar o PNG Social original e declarar o efeito da nova P1 sobre os dois. Não usar recoloração sucessiva para obter indicador verde."
+    }
+  ],
+  "full_source_conclusion": {
+    "static_guard_source": "passed",
+    "source_blockers": [],
+    "source_roster_harmony": "passed_for_visual_comparison_only",
+    "katana_complete": "observed_complete",
+    "source_not_pixel_identical_to_parent": true,
+    "note": "A v2 preserva visualmente a identidade, estatura e apoios, mas é uma edição generativa com pequenas variações de clusters além do giro da arma; não pode ser descrita como transformação pixel-exata da v1.",
+    "continuous_motion": "not_observed",
+    "sms_art_acceptance": "pending",
+    "owner_approval": false,
+    "source_promoted": false
+  },
+  "inspection_evidence": [
+    "Todos os sete inputs congelados coincidiram com os hashes esperados no início e imediatamente antes da escrita deste parecer.",
+    "Fonte Hayato144x144 e Social128x128 vistas nativamente; fonte Hayato também4x NN, comparação conjunta fonte/SMS e detalhes de face, ambos os braços/pega/guarda, bainha e pés vistos em ampliações NN sobre fundo claro.",
+    "Painéis de inspeção foram compostos apenas em memória, sem escrever crops ou alterar fontes. Único output persistente desta tarefa é o parecer autorizado.",
+    "Guardas v1 e v2 comparadas em4x com sole baseline registrada; a katana v2 continua de comprimento aparente similar, com orientação mais vertical, não uma lâmina cortada.",
+    "Bbox opaca observada v1(26,26,122,129), v2(26,11,106,127); a altura externa da v2 inclui a espada. Esses números não substituem altura anatômica ou julgamento de proporção."
+  ],
+  "provided_hardware_scope": {
+    "default_grid_pair_scanline": 9,
+    "assessment": "Leitura do relatório congelado; não executei packer/simulador ou medição. O coordenador informou depois do freeze que fase[0,1] consegue pico4 por Hayato nas duas orientações; isso não foi transformado em aprovação técnica independente nem usado para decidir estética."
+  },
+  "next_checkpoint_priorities": [
+    "Manter esta guarda como candidata e obter a decisão exigida para a ação curta antes de tratar moveset/tempos como aprovados.",
+    "Revisar a futura sequência completa, incluindo cadeia de empunhadura e comprimento/terminais da katana, além da chave estática.",
+    "Revisar a conversão comum dos dois atores na ROM real identificada; aceites SMS, temporal e owner continuam abertos."
+  ],
+  "limits": [
+    "Não observei ação, playback contínuo, FPS, VBlank, áudio, hitboxes ou gameplay. Não há claim de ROM, hardware ou limpeza de sessão, pois não iniciei emulador.",
+    "Parecer de qualidade artística é julgamento perceptivo de artefatos inspecionados; não é certificação AAA nem resultado de gate automático.",
+    "Nenhuma fonte, pedido, registro, memória, asset, build ou operação Git foi alterada. Não houve geração, delegação ou correção de pixels por este revisor.",
+    "O passed cobre somente a fonte estática e a comparação de linguagem/escala; o eixo SMS permanece pending e a ausência de aprovação do dono bloqueia promoção."
+  ]
+}

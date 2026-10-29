@@ -1,5 +1,22 @@
 # 11-gdd — master_of_fighters
 
+## Recorte corrente Hayato — 2026-10-29
+
+Pedido do dono: repetir a amostra CPS2 em Hayato, comparando com Dr. Social,
+sem ampliar atlas/elenco/cenários/sistemas. Guarda nativa v2 e conversão do par
+completas para revisão, sem promoção. Concept v2 aprovado continua identidade;
+classe de combate não define tamanho/massa. Katana inteira, roupa branca e
+laranja-vermelha, cabelo preso e corpo jovem esguio preservados.
+A ação curta proposta (corte de katana; alternativa desembainhar/retornar)
+aguarda escolha do dono; não há contrato/frames/dano/hitboxes competitivos novos.
+O Social v8 é referência preservada; aceitar método/artes anteriores não
+aprova esta fonte de Hayato. Guarda estática não demonstra animação.
+Mesma transformação do diagnóstico Social nos dois; não se normaliza cada
+corpo/arma. Relações de elenco próximas foram revisadas; faixa absolutaSMS
+68–72px legada não é declarada atingida por este diagnóstico~58–60px corporal.
+Estado, decisões e evidência atuais: memorybank e índice
+`out/diagnostics/hayato_cps2_sample_v1/result.json`.
+
 ## Continuidade da amostra v8 — 2026-10-29
 
 Somente idle + social_light_jab em seis desenhos: cinco quadros v5 e contato

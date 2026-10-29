@@ -5,6 +5,11 @@ This adapter draws no character pixels and builds no ROM. It accepts explicit,
 hash-bound native PNGs, crops only transparent margins, applies display_fit,
 uses sms_tiles' common subpalette and the reference runtime's tall-pair format.
 The real consumer is built separately by build_inner.py, with its pre-gates.
+
+v1 freezes Social's six-pose diagnostic contract. v2 accepts explicit action
+IDs/durations, a common roster scale, layout/facing and optional source-index
+material codes. Material overrides are scoped by PNG SHA/config, never by a
+character name; shared indices must be reviewed in every affected material.
 """
 from __future__ import annotations
 
@@ -13,6 +18,7 @@ from dataclasses import replace
 import hashlib
 import json
 from pathlib import Path
+import re
 import sys
 
 from PIL import Image
@@ -78,7 +84,12 @@ def extract_native(recipe_path: Path, output: Path) -> dict:
     # Pillow requires a 256-entry palette; repeat a real color for unused slots.
     palette_ref.putpalette(source_palette + source_palette[:3] * (256 - len(source_palette) // 3))
     output.mkdir(parents=True, exist_ok=True)
-    sheet = Image.new('P', (recipe['canvas'][0] * 3, recipe['canvas'][1] * 2))
+    columns = recipe.get('sheet_columns', 3)
+    if type(columns) is not int or not 1 <= columns <= 16:
+        raise ValueError('sheet_columns must be an integer in 1..16')
+    rows = max(2 if 'sheet_columns' not in recipe else 1,
+               (len(native) + columns - 1) // columns)
+    sheet = Image.new('P', (recipe['canvas'][0] * columns, recipe['canvas'][1] * rows))
     final_palette = [0, 0, 0] + source_palette
     final_palette += [0] * (768 - len(final_palette))
     sheet.putpalette(final_palette)
@@ -93,9 +104,12 @@ def extract_native(recipe_path: Path, output: Path) -> dict:
         result = Image.frombytes('P', im.size, indices)
         result.putpalette(final_palette)
         result.save(path, transparency=0, bits=8)
-        sheet.paste(result, ((n % 3) * im.width, (n // 3) * im.height))
+        sheet.paste(result, ((n % columns) * im.width, (n // columns) * im.height))
         records.append({'id': spec['id'], 'path': str(path), 'sha256': sha(path)})
-    sheet_path = output.parent / 'jab_source.png'
+    filename = recipe.get('sheet_filename', 'jab_source.png')
+    if Path(filename).name != filename or not filename.endswith('.png'):
+        raise ValueError('sheet_filename must be a local PNG filename')
+    sheet_path = output.parent / filename
     if sheet_path.exists():
         raise FileExistsError('preserving existing native sheet')
     sheet.save(sheet_path, transparency=0, bits=8)
@@ -176,29 +190,73 @@ def pack_registered_sprite(sprite: Sprite, codebook: list[int], name: str,
     return blob, metadata, (-px, -py)
 
 
+def map_source_indices(sprite: Sprite, codebook: list[int], overrides: dict | None = None):
+    """Map original indexed colors once into the shared P1.
+
+    Explicit source-index roles resolve measured hue drift near SMS rounding
+    boundaries. They never edit the source PNG, alpha, geometry or reduced
+    output. A shared source index still needs review in every material using it.
+    """
+    from mugen2sms.generators.scene_cut import _nearest_word, _assign_index
+    overrides = {} if overrides is None else overrides
+    if not isinstance(overrides, dict):
+        raise ValueError('palette_index_codes must be an object')
+    targets = {}
+    for key, word in overrides.items():
+        if (not isinstance(key, str) or not key.isdecimal() or str(int(key)) != key
+                or not 1 <= int(key) < len(sprite.palette)
+                or type(word) is not int or word not in codebook):
+            raise ValueError('palette_index_codes requires opaque source indices and exact shared P1 codes')
+        targets[int(key)] = codebook.index(word)
+    return bytes(0 if index == 0 else 1 + (targets[index] if index in targets else
+                 _assign_index(_nearest_word(sprite.palette[index]), codebook))
+                 for index in sprite.pixels)
+
+
 def prepare(config_path: Path, output: Path) -> dict:
     cfg = json.loads(config_path.read_text())
-    if cfg.get('schema') != 'sms_authored_sprite_sample_v1':
-        raise ValueError('expected sms_authored_sprite_sample_v1')
+    version = cfg.get('schema')
+    if version not in ('sms_authored_sprite_sample_v1', 'sms_authored_sprite_sample_v2'):
+        raise ValueError('expected sms_authored_sprite_sample_v1 or v2')
     if output.exists():
         raise FileExistsError('preserving sealed output; choose a new candidate destination')
     root = (config_path.parent / cfg.get('project_root', '.')).resolve()
     if not config_path.resolve().is_relative_to(root):
         raise ValueError('config must stay inside declared project root')
     specs = cfg['poses']
-    if ([p['id'] for p in specs] != ['idle', 'J01', 'J02', 'J03', 'J04', 'J05', 'J06']
+    if version.endswith('v1') and (
+            [p['id'] for p in specs] != ['idle', 'J01', 'J02', 'J03', 'J04', 'J05', 'J06']
             or cfg['durations'] != [2, 1, 1, 1, 1, 3]):
         raise ValueError('sample must preserve the six approved jab IDs and proposed timing')
+    if version.endswith('v2'):
+        ids = [p['id'] for p in specs]
+        durations = cfg['durations']
+        if (not 1 <= len(ids) <= 32 or ids[0] != 'idle' or len(set(ids)) != len(ids)
+                or any(not re.fullmatch(r'[A-Za-z_][A-Za-z_0-9]*', name)
+                       or name == 'reference' for name in ids)
+                or len(durations) != len(ids) - 1
+                or any(type(n) is not int or not 1 <= n <= 255 for n in durations)):
+            raise ValueError('v2 requires idle, unique C identifiers and one 1..255 duration per action pose')
+        if 'extra_scale' not in cfg:
+            raise ValueError('v2 requires explicit common roster extra_scale')
     sources = [load_pose(root, sp) for sp in specs]
-    fitted, fit_report = convert_poses(sources)
+    fitted, fit_report = convert_poses(sources, tuple(cfg['extra_scale']) if
+                                     version.endswith('v2') else None)
     ref = cfg['reference']
     reference = load_pose(root, ref)
     refs, ref_fit = convert_poses([reference], tuple(ref['extra_scale']))
-    # The reference faces the candidate. Flip indices before packing, not in Z80.
-    sp = refs[0]
-    rows = [sp.pixels[y * sp.width:(y + 1) * sp.width][::-1]
-            for y in range(sp.height)]
-    reference = replace(sp, pixels=b''.join(rows), axis_x=sp.width - 1 - sp.axis_x)
+    # Flip original indexed source before packing; no recoloring of SMS output.
+    def facing(sprite, flip):
+        if type(flip) is not bool:
+            raise ValueError('flip flags must be booleans')
+        if not flip:
+            return sprite
+        rows = [sprite.pixels[y * sprite.width:(y + 1) * sprite.width][::-1]
+                for y in range(sprite.height)]
+        return replace(sprite, pixels=b''.join(rows),
+                       axis_x=sprite.width - 1 - sprite.axis_x)
+    fitted = [facing(sp, cfg.get('flip_actor', False)) for sp in fitted]
+    reference = facing(refs[0], cfg.get('flip_reference', True))
     all_sprites = fitted + [reference]
     # sms_tiles owns the mapping. Balance each actor's contribution, so six
     # source drawings cannot silently consume the reference actor's colors.
@@ -223,22 +281,26 @@ def prepare(config_path: Path, output: Path) -> dict:
     words, _ = _subpalette(palette_sprite)
     # Feed the same palette contract back into the existing mapper by making
     # each sample contain the same codebook colors. No filter or cleanup pass.
-    from mugen2sms.generators.scene_cut import _nearest_word, _assign_index
     codebook = cfg.get('shared_palette_codes', words[1:])
     if (not codebook or len(codebook) > 15 or len(set(codebook)) != len(codebook)
             or any(type(word) is not int or not 0 <= word <= 63 for word in codebook)):
         raise ValueError('shared P1 must contain 1..15 distinct SMS codes')
     rgb_palette = [(0, 0, 0)] + [((v & 3) * 85, ((v >> 2) & 3) * 85,
                                 ((v >> 4) & 3) * 85) for v in codebook]
-    width, height = 64, 80
-    pivot = (24, 72)
+    width, height = cfg.get('canvas_px', [64, 80]) if version.endswith('v2') else (64, 80)
+    pivot = tuple(cfg.get('pivot_px', [24, 72])) if version.endswith('v2') else (24, 72)
+    positions_cfg = cfg.get('positions', [[40, 72], [152, 72]]) if version.endswith('v2') else [[40, 72], [152, 72]]
+    if (any(type(n) is not int or n < 8 or n > 128 or n % 8 for n in (width, height))
+            or len(pivot) != 2 or any(type(n) is not int for n in pivot)
+            or not 0 <= pivot[0] < width or not 0 <= pivot[1] <= height
+            or len(positions_cfg) != 2 or any(len(p) != 2 for p in positions_cfg)
+            or any(type(n) is not int or not 0 <= n < 192 for p in positions_cfg for n in p)):
+        raise ValueError('invalid tile-aligned canvas, pivot or actor positions')
     output.mkdir(parents=True)
     paths, frames, encoded = [], [], []
     for spec, sprite in zip(specs + [dict(ref, id='reference')], all_sprites):
         name = spec['id']
-        indices = bytes(0 if i == 0 else
-                        1 + _assign_index(_nearest_word(sprite.palette[i]), codebook)
-                        for i in sprite.pixels)
+        indices = map_source_indices(sprite, codebook, spec.get('palette_index_codes'))
         left, top = pivot[0] - sprite.axis_x, pivot[1] - sprite.axis_y
         if min(left, top) < 0 or left + sprite.width > width or top + sprite.height > height:
             raise ValueError(f'{name}: converted canvas would crop equipment or body')
@@ -255,6 +317,8 @@ def prepare(config_path: Path, output: Path) -> dict:
                        'dimensions_before_canvas': [sprite.width, sprite.height],
                        'pivot_before_canvas': [sprite.axis_x, sprite.axis_y],
                        'placement': [left, top], 'peak_tall': sat_row_peak(sprite)})
+        if spec.get('palette_index_codes'):
+            frames[-1]['palette_index_codes'] = spec['palette_index_codes']
         # Keep each cropped pose's hardware grid, then translate its metadata
         # to the common pivot. Padding the bitmap before packing adds a fifth
         # cell at unaligned margins and differs from the reference recipe.
@@ -302,21 +366,23 @@ def prepare(config_path: Path, output: Path) -> dict:
               'palette_codes': ([0] + codebook + [0] * 16)[:16], 'poses': packed_poses}
     header = output / 'sample_data.h'
     header.write_text(header_text(packed, 'sample'))
-    positions = [(40, 72)] * len(fitted) + [(152, 72)]
+    positions = [tuple(positions_cfg[0])] * len(fitted) + [tuple(positions_cfg[1])]
     reference_objects = packed['poses'][-1]['objects']
     compositions = []
     for pose in packed['poses'][:-1]:
-        objects = ([{'x': 40 + o['x'], 'y': 72 + o['y'], 'tile': o['tile']}
+        objects = ([{'x': positions[0][0] + o['x'], 'y': positions[0][1] + o['y'], 'tile': o['tile']}
                     for o in pose['objects']] +
-                   [{'x': 152 + o['x'], 'y': 72 + o['y'], 'tile': o['tile']}
+                   [{'x': positions[-1][0] + o['x'], 'y': positions[-1][1] + o['y'], 'tile': o['tile']}
                     for o in reference_objects])
         scene = {'schema': 'sprite_scene_manifest_v1', 'sprite_size': '8x16',
                  'zoomed': False, 'screen_h': 192, 'sprites': objects}
         scene_path = output / f'scene_{pose["name"]}.json'
         scene_path.write_text(json.dumps(scene, indent=2) + '\n')
         peak = max(sum(o['y'] <= line < o['y'] + 16 for o in objects) for line in range(192))
+        visible = all(0 <= o['x'] <= 248 and 0 <= o['y'] <= 176 and o['y'] != 0xD0
+                      for o in objects)
         compositions.append({'id': pose['name'], 'sat': len(objects), 'peak': peak,
-                             'scene': str(scene_path), 'legal': peak <= 8 and len(objects) <= 64})
+                             'scene': str(scene_path), 'legal': peak <= 8 and len(objects) <= 64 and visible})
     report = {'schema': 'sms_authored_sprite_sample_conversion_v1', 'status': 'converted_candidate',
               'config_sha256': sha(config_path), 'source_specs': specs,
               'scale': fit_report, 'reference_scale': ref_fit,
@@ -335,9 +401,14 @@ def prepare(config_path: Path, output: Path) -> dict:
     if not all(c['legal'] for c in compositions):
         raise ValueError('pair composition exceeds physical limits; see preserved conversion.json; do not build this pair')
     with header.open('a') as stream:
-        stream.write('\nconst unsigned char * const sample_poses[7] = {' +
+        stream.write(f'\nconst unsigned char * const sample_poses[{len(specs)}] = {{' +
                      ','.join(f'sample_{s["id"]}_meta' for s in specs) + '};\n')
-        stream.write('const unsigned char sample_durations[7] = {0,2,1,1,1,1,3};\n')
+        stream.write(f'const unsigned char sample_durations[{len(specs)}] = {{0' +
+                     ''.join(f',{n}' for n in cfg['durations']) + '};\n')
+        if version.endswith('v2'):
+            stream.write(f'#define SAMPLE_POSE_COUNT {len(specs)}u\n')
+            for name, point in zip(('ACTOR', 'REFERENCE'), positions_cfg):
+                stream.write(f'#define SAMPLE_{name}_X {point[0]}u\n#define SAMPLE_{name}_Y {point[1]}u\n')
     report['header_sha256'] = sha(header)
     (output / 'conversion.json').write_text(json.dumps(report, indent=2) + '\n')
     return report
@@ -385,6 +456,11 @@ def phase_self_check():
 
 def self_check() -> int:
     phase_self_check()
+    material = Sprite(0, 0, 0, 1, 3, 1, bytes([0, 1, 2]),
+                      [(0, 0, 0), (223, 216, 212), (43, 25, 33)] + [(0, 0, 0)] * 253,
+                      False, None, 0)
+    assert map_source_indices(material, [0, 21, 42, 47, 1]) == bytes([0, 4, 5])
+    assert map_source_indices(material, [0, 21, 42, 47, 1], {'1': 42, '2': 0}) == bytes([0, 3, 1])
     sp = Sprite(0, 0, 12, 64, 24, 64, bytes([1]) * (24 * 64),
                 [(0, 0, 0)] * 256, False, None, 0)
     fitted, report = convert_poses([sp])
@@ -405,7 +481,7 @@ def self_check() -> int:
         pass
     else:
         raise AssertionError('invalid extra scale was accepted')
-    print('[SELF-CHECK OK] authored source adapter: all128grid phases render exact, opaque black, capacity, scale rejection')
+    print('[SELF-CHECK OK] authored source adapter: all128grid phases render exact, source material mapping, opaque black, capacity, scale rejection')
     return 0
 
 

@@ -1,5 +1,82 @@
 # 10-memory-bank — master_of_fighters
 
+## Continuidade corrente — Hayato, 2026-10-29
+
+**Checkpoint da guarda concluído; ação própria pendente de escolha do dono.**
+O pedido novo autoriza testar a repetibilidade no segundo personagem, não
+promove automaticamente Hayato ou o Social. Concept Hayato v2 aprovado
+`a8dc1478…`; fonte nova `hayato-cps2-idle-v02`, SHA
+`0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1`.
+Uma guarda estática,144×144,32RGBs salvos incluindo transparente, corpo~102px
+incluindo cabelo,116px incluindo katana. Identidade jovem/esguia, quimono
+branco, faixa vermelha, hakama laranja-vermelho e katana/bainha completas.
+Duas gerações registradas: guarda diagonal v1 e edição v2 mais vertical;
+não reutilizou estudo antigo como resultado novo. A fonte v2 passou14eixos
+estáticos independentes; não houve pintura de personagem por código.
+
+O teste cedo reprovou a diagonal:5sprites/linha+4Social=9 nas128fases dos dois
+sentidos. Guarda v2 usa fase[0,1], mesma escala global nos dois atores, sem
+encurtar espada/corpo ou omitir células. A P1 é exatamente a do Socialv8,
+com15códigos, mapeada diretamente dos dois originais. O review da primeira
+ROM achou branco amarelado e contorno de lâmina bordô: correção explícita no
+adaptador oficial dos índices-fonte5→42,13→21,26→0;71pixelsSMS,0Social.
+Índice13 também existe no pescoço/cabelo: review v2 aprovou a regressão focada,
+sem aprová-lo para poses futuras. Fonte,alpha e geometria permaneceram intactos.
+
+Registro final usa pivô-fonte Hayato(68,127), a sola realmente salva; o nominal
+128 arredondava para um pixel acima do chãoSMS. Só translação(0,+1) na derivada;
+os dois atores terminam emy143(boundary144). SocialJ04 espelhado usa fase[5,9]
+medida, pois copiar[3,9] após esse ajuste gerava9; PNGSocial intacto. Parecer
+v3 passou o adendo de alinhamento/recorte/material. Fonte/model/61posesv08.2
+aprovadas do Social preservadas. Default do conversor reproduz seu header e
+8PNGs v8 byte a byte; na nova P1 suas cores/pixels/PLTE também são idênticos,
+compensados pivô e reflexão.
+
+Ativos: `.mddev/hayato_cps2_guard_{left,right}_baseline_v3.json`,
+`hayato_pair_social_jab_left_baseline_v3.json` e
+`hayato_pair_social_jab_right_baseline_v3_mirrorphase.json`.
+Manifestos `*_build.json` selecionam1..4 no mesmo consumidor por
+MOF_HAYATO_SAMPLE; default e seleçõesSocial1/5/8 mantidos. Dados atuais em
+`out/diagnostics/hayato_cps2_sample_v1/*baseline_v3*/`; configurações anteriores
+são controles congelados históricos, não outras candidatas ativas.
+Guardas:66patterns/2112B,32SAT, pico8. Socialjab contra guardaHayato:
+222patterns/7104B, máximo35SAT e pico8 nos dois lados. Todas as poses residentes;
+CRAM/patterns carregados com displayoff, somente SAT por tick na base.
+
+QA nativa atual4/4casos,18checks exact-indexed;2/2capturas por guarda e
+118/118framebuffers do jabSocial em cada lado. Últimaopaca143 confirmada.
+Manual Button2/1 observado em vídeo; idle/J01 iguais emRGB não identificam IDs
+por pixels. Não há jab nem outra ação de Hayato. Performance atual ROM direita
+`035060f99e7763f898354238f81f5d6a9c588f03e7ff6d505538318c95011116`:
+59,67/59,81fps em duas janelas8s; selo3000frames,0derrame,mínimo207.
+Degrau128B, ROM `3540539e…`:0derrame,mínimo218. Sessões finais
+442f14c70b3549a5bb3e8abaf0bf2147 e eca166b6c62a424b8775104fdf86d067,
+encerradas/bundles válidos. Todos os12workersessions e6rootsessions deste lote
+foram encerrados; as evidências anteriores ficaram históricas com seus SHAs.
+Não transportar medições de variantes anteriores para estes binários.
+
+Síntese/índice: `out/diagnostics/hayato_cps2_sample_v1/result.json`,
+`comparison_guard_baseline_v3.png`, QA e pacote/recibo no mesmo diretório.
+`doc/hayato_cps2_sample_v1.md` é o brief congelado de entrada do review; não
+reescrever seus fatos iniciais como se fossem resultados finais. Pareceres
+`hayato_cps2_idle_independent_review_v2.json` e
+`hayato_cps2_pair_derivative_review_v{1,2,3}.json` preservam falha e correções.
+Checklist:14eixos estáticos pass, ação/animação/owner pending, bloqueia promoção.
+Registro global ainda falha pelo relatório histórico Socialv5 ausente; não
+foi fabricado. Receita específica anotada no candidato existente de curadoria,
+sem doutrina global/gate/ID novo. A escala absoluta legada68–72pxSMS não é
+reclamada: este diagnóstico preserva a transformação do Social e corpos
+aparentes~58–60px; equipamentos são medidos separadamente.
+
+Próxima dependência irredutível: dono escolher corte curto de katana (proposta)
+ou desembainhar/retornar à guarda. Pergunta já enviada, sem resposta recebida.
+Depois contratar poses/durações como amostra artística diagnóstica, sem
+aprovar dano/hitbox/frame-data competitiva, converter chave de execução cedo
+junto ao idle, produzir/revisar sequência e renovar ROM/evidência. Não ampliar
+atlas, elenco, cenários ou sistemas. Sem ação/continuidade animada não se
+responde positivamente à repetibilidade completa. Sem áudio/PAL/gameplay,
+owner ou entrega/AAA. Commit/SHA remoto e recuperação final no recibo do lote.
+
 > ESTADO OPERACIONAL REAL. **Autoridade #1** — vence qualquer outra fonte.
 > Registre o que FOI OBSERVADO, nunca o que se pretende. Estado de sessão
 > não substitui este arquivo.

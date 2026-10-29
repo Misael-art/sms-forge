@@ -9,7 +9,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from prepare_authored_sprite_sample import (load_pose, convert_poses, prepare,
-                                           extract_native, phase_self_check)
+                                           extract_native, phase_self_check, map_source_indices)
 
 
 def fixture(tmp_path, opaque=1):
@@ -167,3 +167,68 @@ def test_reject_phase_requiring_unsigned_y_wrap(tmp_path):
     with pytest.raises(ValueError, match='signed offsets'):
         prepare(path, tmp_path / 'invalid_for_emitter')
     assert not (tmp_path / 'invalid_for_emitter/sample_data.h').exists()
+
+
+def test_v2_character_timing_and_both_sides_keep_common_scale(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v2',
+           'poses': [dict(spec, id=name) for name in ['idle', 'prepare', 'cut', 'recover']],
+           'durations': [3, 2, 5], 'extra_scale': [2, 3],
+           'reference': dict(spec, extra_scale=[2, 3]),
+           'positions': [[144, 72], [32, 72]],
+           'flip_actor': True, 'flip_reference': False}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    report = prepare(path, tmp_path / 'v2')
+    assert report['scale']['extra'] == report['reference_scale']['extra'] == [2, 3]
+    header = (tmp_path / 'v2/sample_data.h').read_text()
+    assert 'sample_durations[4] = {0,3,2,5};' in header
+    assert '#define SAMPLE_ACTOR_X 144u' in header
+    assert '#define SAMPLE_REFERENCE_X 32u' in header
+    assert all(c['legal'] for c in report['compositions'])
+    with Image.open(tmp_path / 'v2/idle.png') as actor, Image.open(tmp_path / 'v2/reference.png') as ref:
+        # Both are converted directly from the asymmetric indexed source.
+        # Compare around their shared pivot, including its mirrored offset.
+        a, b = actor.convert('RGBA'), ref.convert('RGBA')
+        points_a = {(x - 24, y - 72): a.getpixel((x, y)) for y in range(80)
+                    for x in range(64) if a.getpixel((x, y))[3]}
+        points_b = {(-(x - 24), y - 72): b.getpixel((x, y)) for y in range(80)
+                    for x in range(64) if b.getpixel((x, y))[3]}
+        assert points_a == points_b
+
+
+@pytest.mark.parametrize('change', [
+    {'durations': [3, 0, 5]}, {'durations': [3, True, 5]},
+    {'durations': [3, 2]}, {'extra_scale': None},
+    {'poses': [{'id': 'idle'}, {'id': '../cut'}]},
+])
+def test_v2_rejects_ambiguous_or_invalid_action_contract(tmp_path, change):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v2',
+           'poses': [dict(spec, id=name) for name in ['idle', 'prepare', 'cut', 'recover']],
+           'durations': [3, 2, 5], 'extra_scale': [2, 3],
+           'reference': dict(spec, extra_scale=[2, 3])}
+    cfg.update(change)
+    if cfg.get('extra_scale') is None:
+        cfg.pop('extra_scale')
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='v2 requires'):
+        prepare(path, tmp_path / 'invalid')
+
+
+def test_explicit_source_material_codes_preserve_alpha_and_other_indices(tmp_path):
+    from dataclasses import replace
+    sp = load_pose(tmp_path, fixture(tmp_path))
+    sp = replace(sp, pixels=bytes([0, 1, 2]), width=3, height=1,
+                 palette=[(0, 0, 0), (223, 216, 212), (43, 25, 33)] + [(0, 0, 0)] * 253)
+    codebook = [0, 21, 42, 47, 1]
+    default = map_source_indices(sp, codebook)
+    fixed = map_source_indices(sp, codebook, {'1': 42, '2': 0})
+    assert default == bytes([0, 4, 5])  # actual neutral rounding drift
+    assert fixed == bytes([0, 3, 1])  # opaque black remains visible index1
+    assert sp.pixels == bytes([0, 1, 2])  # original indices never mutated
+    assert map_source_indices(sp, codebook, {'1': 42})[2] == default[2]
+    for bad in ({'0': 0}, {'01': 42}, {'256': 42}, {'1': True}, {'1': 63}, []):
+        with pytest.raises(ValueError, match='palette_index_codes'):
+            map_source_indices(sp, codebook, bad)

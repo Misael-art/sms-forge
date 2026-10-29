@@ -1685,6 +1685,345 @@
           "sha256": "7ebe2a4209dc15dea912aed1bf984fceaf0ca94fe390a9ad8fab90bddaf31f42"
         }
       ]
+    },
+    {
+      "id": "hayato-cps2-idle-v01",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "revision": 1,
+      "status": "superseded",
+      "parents": [
+        "hayato-concept-v02"
+      ],
+      "reason": "New native CPS2 guard; repeat Social method with Hayato identity, compare common source/SMS scale before action expansion. Historical studies are references only.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/idle_source.png",
+          "sha256": "af65b1f714b7da0ea7ed47eb735169603e81d9eb82f2cb6428a14ad4487d2560"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/idle_generated_raw.png",
+          "sha256": "b29d7f69ba94dcdfa3d8ca7b06b38406b8014a8681c6ecfe8fa8109d82c95433"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/idle_prompt.txt",
+          "sha256": "11b2bd1be6d7e412939477b22ea01895815c6d397684d1ca6a534b0245ba1e68"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/idle_extraction_recipe.json",
+          "sha256": "b6d02a0aa4a93f33da33be1925ed2580468ca5d231193c36d587eec98943301f"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/idle_metadata.json",
+          "sha256": "9fe9a7ce2a4d0ffaccffffdf9e6bc6eab42a9a9f2f4760b0d5bc269b0e6111f3"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/native_idle/idle.png",
+          "sha256": "af65b1f714b7da0ea7ed47eb735169603e81d9eb82f2cb6428a14ad4487d2560"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-idle-v02",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "revision": 2,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-idle-v01"
+      ],
+      "reason": "Measured all128grid phases both orientations: full-length diagonal sword guard still5cells +Social4=9. Change guard weapon angle only toward vertical, preserve body/feet/length and face; no silent scale or equipment cut.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+          "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_generated_raw.png",
+          "sha256": "53f19da25188847d564132a464fad07425e7a0d63c349b6be5f1c95478a2b065"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_prompt.txt",
+          "sha256": "487cfe985729a999ac14f5253b79d4cf6393671ddd7b5a56943d37e7327a16b0"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_extraction_recipe.json",
+          "sha256": "effcba92d167c118b2a5153ebc3930d8d418f4ce8577702738f36f05a6bf8f9e"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_metadata.json",
+          "sha256": "21e06a1baf5765f37fe4fa63b1bc88e4b61ad070667a91957ce3abb1ab809798"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/native_idle/idle.png",
+          "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1"
+        },
+        {
+          "role": "conversion_registration",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/native_registration_v3.json",
+          "sha256": "0c06ffd7423bd250362ad20ea248d9916cde1e1186945e66d45c446b21d0b965"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-derivative-review-v02",
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "cps2-pair-derivative",
+      "revision": 2,
+      "status": "superseded",
+      "parents": [
+        "hayato-cps2-idle-v02",
+        "hayato-cps2-derivative-review-v01"
+      ],
+      "reason": "Correct only measured source-index material drift; independent face/skin/whole-pair regression required.",
+      "files": [
+        {
+          "role": "request",
+          "path": "doc/hayato_cps2_pair_derivative_review_request_v2.json",
+          "sha256": "bf94e955cdd79b342f3be7bf24f1f02376d247249b06d77f4b1d5a239779bd95"
+        },
+        {
+          "role": "report",
+          "path": "doc/hayato_cps2_pair_derivative_review_v2.json",
+          "sha256": "2d93d237ed08fb7233d5f1d0bcb281f8d35013c4cd92364fe73da93f9a858d50"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-derivative-review-v03",
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "cps2-pair-derivative",
+      "revision": 3,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-idle-v02",
+        "hayato-cps2-derivative-review-v02"
+      ],
+      "reason": "Onepx sole registration and measured mirrored-grid correction; no source artistic edits.",
+      "files": [
+        {
+          "role": "request",
+          "path": "doc/hayato_cps2_pair_derivative_review_request_v3.json",
+          "sha256": "04f39f47fd942ea2f81ddd90b2d73c0528ba9718c649312ba8fe1a5d0dde6b8e"
+        },
+        {
+          "role": "report",
+          "path": "doc/hayato_cps2_pair_derivative_review_v3.json",
+          "sha256": "323f4136e8734028ef036ec0a47186fec121fe99c51a76a2955fa493e962add0"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-idle-source-review-v02",
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "cps2-idle-source",
+      "revision": 2,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Native independent static source/harmony review, no action approval.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/hayato_cps2_idle_independent_review_v2.json",
+          "sha256": "8aeb62d570f9241ef4c8cae81676c0d8fdc148199663903c41da10426ec516c4"
+        },
+        {
+          "role": "request",
+          "path": "doc/hayato_cps2_idle_review_request_v2.json",
+          "sha256": "e989776839200077d87c911800581b8916133604ac5e9708e2a7d70806281fa2"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-derivative-review-v01",
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "cps2-pair-derivative",
+      "revision": 1,
+      "status": "superseded",
+      "parents": [
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Preserved negative material hue review; not overwritten by later fixes.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/hayato_cps2_pair_derivative_review_v1.json",
+          "sha256": "2eeed6c2eac076f6bea0e88f77cd92c92d136ed08e577a663c9570b29e98a145"
+        },
+        {
+          "role": "request",
+          "path": "doc/hayato_cps2_pair_derivative_review_request_v1.json",
+          "sha256": "ea4afe7342ea4d22d88503157336bac6e597c896a260a0d78e023a1c1267766d"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-repeatability-brief-v01",
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "cps2-repeatability",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Frozen pre-animation brief used by immutable source review; current results in memory/result.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/hayato_cps2_sample_v1.md",
+          "sha256": "960d30d7898365206a273b6b3eba1a5f5d18b5b293c12b974c8d8224ec97b1da"
+        },
+        {
+          "role": "checklist",
+          "path": "doc/hayato_cps2_sample_art_checklist_v1.json",
+          "sha256": "be2468dfe5e864e1a6afae144660626cdda5219da8b24f0b8311dbf5401ae1fd"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-pair-diagnostic-v03",
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-pair",
+      "revision": 3,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Final source guard2/materialmap2/sole registration3;4private-ROM cases. Hayato action and owner approval pending.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/result.json",
+          "sha256": "38f90c91231faa1afb25fa05db65ced57a3105e0c6c1d4a25f3fda6a7b0f7c79"
+        },
+        {
+          "role": "conversion_guard_v2_left_baseline_v3",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/guard_v2_left_baseline_v3/conversion.json",
+          "sha256": "e2dc78a051b752292351c8223137f7a2f4f0ee8b4ab624da9593a312c8e46a36"
+        },
+        {
+          "role": "header_guard_v2_left_baseline_v3",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/guard_v2_left_baseline_v3/sample_data.h",
+          "sha256": "8891c641c455a1da2e68941c2153a69aea233f36e40c07e2d3ca7755f7a81bcf"
+        },
+        {
+          "role": "binding_guard_left",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/guard_left_baseline_v3_rom_asset_binding.json",
+          "sha256": "ef27e5fadedd2dcdf7e64648194c0b92d2191ca04ec43d47df017a1e63937f53"
+        },
+        {
+          "role": "qa_request_guard_left",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/independent_qa_baseline_v3/guard_left/request.json",
+          "sha256": "b87130ed745f7aa0bfdea3489904e0e65226ec0305a9dd35b26fc9072086d381"
+        },
+        {
+          "role": "qa_report_guard_left",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/independent_qa_baseline_v3/guard_left/run_9c10b3dc5b7b402f86860f4fd6e1960f/report.json",
+          "sha256": "567a2d01c5a058cc0d461fe5e25bbf07017847a3ad9028cfc1bce32f62add918"
+        },
+        {
+          "role": "conversion_guard_v2_right_baseline_v3",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/guard_v2_right_baseline_v3/conversion.json",
+          "sha256": "2c3e75ccc2fafc03254bbfb0084f8867877808792633ad6625e4a0c2233e45c2"
+        },
+        {
+          "role": "header_guard_v2_right_baseline_v3",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/guard_v2_right_baseline_v3/sample_data.h",
+          "sha256": "dd85e5e02e9a2fd23487ba264beb55e1039761c4a8c46604de2cea293e768adb"
+        },
+        {
+          "role": "binding_guard_right",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/guard_right_baseline_v3_rom_asset_binding.json",
+          "sha256": "e0cf0a3f13ded79956607190e345bfee69f8ceef2136417230467e4aeec797de"
+        },
+        {
+          "role": "qa_request_guard_right",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/independent_qa_baseline_v3/guard_right/request.json",
+          "sha256": "17a5bd63d281dc50ca11d3f0537bcf1badf5675b2fea400b3a7b5a99ab4303c6"
+        },
+        {
+          "role": "qa_report_guard_right",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/independent_qa_baseline_v3/guard_right/run_f5ea133344e64304b4d4a8ea702741e1/report.json",
+          "sha256": "c31f979a9c8ab23d9eae35bf0f386707276a33a9c37fb95c1a4bbbfe33c459f4"
+        },
+        {
+          "role": "conversion_social_jab_left_baseline_v3",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/social_jab_left_baseline_v3/conversion.json",
+          "sha256": "1785a45e8ca215b2bd9ffd67f7de4a533d1e1e6c752dcc51be99b786c439b8f6"
+        },
+        {
+          "role": "header_social_jab_left_baseline_v3",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/social_jab_left_baseline_v3/sample_data.h",
+          "sha256": "a3a6322372bfe92edbc5ec154900d22f0e36956e59f453a4ab7963deb0198329"
+        },
+        {
+          "role": "binding_social_jab_left",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/social_jab_left_baseline_v3_rom_asset_binding.json",
+          "sha256": "966591d1a87fcb07c630068d8811e687cf85d923ada6626cd503d5a839823be6"
+        },
+        {
+          "role": "qa_request_social_jab_left",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/independent_qa_baseline_v3/social_jab_left/request.json",
+          "sha256": "c5f9711bb08567632ad864bfca405626f219a4485f21f11f072f14456499e5d5"
+        },
+        {
+          "role": "qa_report_social_jab_left",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/independent_qa_baseline_v3/social_jab_left/run_77dcdb21276c41a5b2001a655597e342/report.json",
+          "sha256": "5cec508784ac7b66047be8da864ec6e386f539b5721d18ccc87ad766d7896a3c"
+        },
+        {
+          "role": "conversion_social_jab_right_baseline_v3_mirrorphase",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/social_jab_right_baseline_v3_mirrorphase/conversion.json",
+          "sha256": "33b2258f5c5720caedfa4fe323019e03b174c773fadf5d759c8a37f21f8a5202"
+        },
+        {
+          "role": "header_social_jab_right_baseline_v3_mirrorphase",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/social_jab_right_baseline_v3_mirrorphase/sample_data.h",
+          "sha256": "79f56985b10843cd02214b2d2a52e32ff7d5118c8452f508dd9b512b027addd4"
+        },
+        {
+          "role": "binding_social_jab_right",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/social_jab_right_baseline_v3_rom_asset_binding.json",
+          "sha256": "ae362c86aa5d68bcf70f241916edbba18bee12d1815cb69e309346bab976a72e"
+        },
+        {
+          "role": "qa_request_social_jab_right",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/independent_qa_baseline_v3/social_jab_right/request.json",
+          "sha256": "f0f5e5c606854520e2b5e1b271f863e414645f73d081fd55a77357ee3334191f"
+        },
+        {
+          "role": "qa_report_social_jab_right",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/independent_qa_baseline_v3/social_jab_right/run_0326ed80b43a49d895d925d4534245fc/report.json",
+          "sha256": "98b88232f534f19662b927b0659e7317de0d17a128d55c78118cd32dce547ed0"
+        },
+        {
+          "role": "performance",
+          "path": "out/diagnostics/hayato_cps2_sample_v1/performance_sessions_baseline_v3.json",
+          "sha256": "1a7dc5f5a96e22e9e33b0af10c2773ef259f284564e3ef30260ba2b3f42de3db"
+        }
+      ]
     }
   ],
   "heads": [
@@ -1847,6 +2186,41 @@
       "kind": "diagnostic_conversion",
       "variant": "cps2-contact-v8",
       "candidate": "dr-social-cps2-contact-v08-diagnostic",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "approved": null,
+      "candidate": "hayato-cps2-idle-v02"
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "cps2-idle-source",
+      "candidate": "hayato-cps2-idle-source-review-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "cps2-pair-derivative",
+      "candidate": "hayato-cps2-derivative-review-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-pair",
+      "candidate": "hayato-cps2-pair-diagnostic-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "cps2-repeatability",
+      "candidate": "hayato-cps2-repeatability-brief-v01",
       "approved": null
     }
   ],

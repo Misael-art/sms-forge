@@ -1,5 +1,25 @@
 # 13-spec-cenas — master_of_fighters
 
+## Par diagnóstico Hayato + Dr. Social — 2026-10-29
+
+GuardaHayato v2,source0b72e603…,materialmap2,registrobaseline3. Quatro pares:
+guardas em ambos os lados e Socialjab contra guardaHayato nos dois sentidos.
+Canvas porPNG80×80;pivôSMS(32,72);origens(32,72)/(144,72),trocadas noespelho;
+solasvisíveisy143,boundary144. P1comum15códigos doSocialv8, P0fundo0x15.
+Arma não entra na altura anatômica; source144×144 não é canvas obrigatório
+para futuros movimentos. Mesma transformação de elenco; não normalizar altura
+por bbox de equipamento. CorposSMS~58–60px no diagnóstico, sem claim de fechar
+faixa absoluta68–72px da produção.
+
+Guardas66patterns/2112B,32SAT,pico8; Social6poses contra guardaHayato
+222patterns/7104B,35SAT máximo,pico8. Todasresidentes; baseSATsomenteVBlank.
+Baseline3 inclui faseSocialJ04espelhado[5,9], medida após corrigir1px nos pés.
+0derrame em3000frames,mínimo207; degrau+128B0derrame,mínimo218. FPSmédioNTSC
+59,67/59,81 em8s. Não há prazo/streaming/dano/hitbox/açãoHayato aprovados.
+Controle, revisão, SHAs, sessões privadas encerradas e índices no memorybank
+atual e out/diagnostics/hayato_cps2_sample_v1/result.json. É checkpoint estático,
+não cena de combate/entrega; ação própria depende da escolha já solicitada.
+
 > Budget REAL por cena. **Autoridade #3.**
 > Regra: **"estimado" é proibido neste arquivo.** Todo número aqui é medido,
 > com o método da medição citado. Folga não medida é timidez (§18).

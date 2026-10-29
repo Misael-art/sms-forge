@@ -169,12 +169,15 @@
       "patterns_after": 220
     },
     "implementation": {
-      "path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/build_inputs/approved_method_adapter_social_v8_70b0e7a.py",
       "sha256": "30dc607ebfdd0d11cae79ad05c73a4579494b912a92831d69f6bd6d3bf1e1553",
       "default_runtime_data_unchanged": true,
       "all128phase_pixel_reconstruction_selfcheck_passed": true,
       "unit_tests": 9,
-      "consumer_constraint": "Reject signed relative offsets for this unsigned sample emitter; SDK Y is16bit."
+      "consumer_constraint": "Reject signed relative offsets for this unsigned sample emitter; SDK Y is16bit.",
+      "origin_path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "source_commit": "70b0e7abbaa1e559562e9986eb0af4c2e94c5218",
+      "role": "historical implementation snapshot only; never active converter"
     },
     "art_review": {
       "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v8.json",
@@ -221,5 +224,53 @@
       "More SAT/patterns and renderer coordinate semantics are part of the tradeoff.",
       "Pixel identity and exact holds do not certify art, input latency, perceived fluidity, audio/PAL/gameplay or production."
     ]
+  },
+  "followup_hayato_guard_repeatability": {
+    "status": "partial_guard_checkpoint_not_full_action_repeatability_or_global_promotion",
+    "request": "2026-10-29: repeat authored CPS2 source-to-SMS method on Hayato, preserve Social, prepare short action proposal if indispensable moveset decision absent.",
+    "source_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+    "generation_count_recorded_this_lot": 2,
+    "source_pipeline_reused": [
+      "approved identity concept bySHA",
+      "registered nearest extraction without artistic pixel painting",
+      "same official adapter/core packer",
+      "common source/SMS baseline",
+      "private Emulicious native QA and exact framebuffer",
+      "sealed VBlank and real ROM frame windows"
+    ],
+    "adaptations": [
+      "Hayato costume/katana/biotype and source dimensions measured, not copied",
+      "full-length katana guard rotated after all128phase tests failed at9scanline",
+      "measured phase[0,1] legal both sides",
+      "v2 action-neutral adapter interface; Socialv1 defaults unchanged",
+      "explicit original palette indices5->42,13->21,26->0 after independent derivative material failure; mixed index13 skin/neck reviewed separately",
+      "Check actual sole AFTER nearest rounding, not nominal anchor; shifting guard onepx exposed mirror-grid dependency. Re-measure final pair rather than assuming phase transfers."
+    ],
+    "guard_source_review": "SMS_projects/master_of_fighters/doc/hayato_cps2_idle_independent_review_v2.json",
+    "derivative_review": "SMS_projects/master_of_fighters/doc/hayato_cps2_pair_derivative_review_v2.json",
+    "result": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/result.json",
+    "limits": [
+      "No Hayato action produced while owner choice pending; action/timing/continuous motion repeatability unproved.",
+      "Index13 mapping is specific to this source PNG and shared material uses, not transferable approval for future poses.",
+      "No measured historical time comparison or economic savings claimed.",
+      "Source/derivative review and physical budget do not imply owner, production, PAL, audio, gameplay or AAA approval.",
+      "No new global gate, doctrine, skill or lesson ID promoted."
+    ],
+    "final_conversion_registration": [
+      68,
+      127
+    ],
+    "SMS_sole_boundary": 144,
+    "reflected_social_contact_phase": [
+      5,
+      9
+    ],
+    "final_derivative_review": "SMS_projects/master_of_fighters/doc/hayato_cps2_pair_derivative_review_v3.json",
+    "final_handoff": "SMS_projects/master_of_fighters/doc/10-memory-bank.md",
+    "current_implementation": {
+      "path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "sha256": "eeded0e63a72ebce948e01f02ee9644d2d0bfa2d943b2ac0498e9c76be683b6c",
+      "scope": "Project opt-in v2 interface,16tests passed; historical Social implementations stay pinned separately, no new global homologation."
+    }
   }
 }

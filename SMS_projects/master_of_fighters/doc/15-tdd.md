@@ -1,5 +1,43 @@
 # 15-tdd — master_of_fighters
 
+## Hayato — adaptador v2 e diagnóstico do par, 2026-10-29
+
+Estendeu-se `tools/sms_wrapper/prepare_authored_sprite_sample.py`, sem segundo
+pipeline/consumidor. Schema v1 mantém IDs/tempos do Social e header/8PNGs reais
+byte-idênticos. V2 aceita IDs/durações explícitos, extra_scale obrigatório para
+escala comum, canvas/pivô, posições/reflexão e mapa opcional dos índices de
+paleta ORIGINAIS para códigos exatos da P1. O packer/core canônicos continuam
+responsáveis pelos bytes. Índice0transparente nunca pode receber override;
+preto opaco continua em índice visível. Nenhum remapeamento da saídaSMS pronta.
+
+Hayato fonte v2 SHA0b72e603… permanece sem edição. Material map5→42,13→21,26→0
+corrige71RGBsSMS; o índice13 é misto e foi revisto em pele/pescoço/cabelo nesta
+pose apenas. Guardas16bitsY preservam guard de offsets não negativos.
+Pivô final(68,127) pela sola observada;1px abaixo da derivada anterior, sem
+alterar fonte/escala. FaseHayato[0,1] nos2sentidos; SocialJ04 direita[3,9],
+espelhado[5,9], medidas na composição final. Não copiar fases para outros frames.
+SAMPLE_POSE_COUNT/layout emitidos pelo v2 tornam o runtime genérico; com1pose
+não se dispara índice inexistente. V1 usa defaults7poses/(40,72)/(152,72).
+MOF_HAYATO_SAMPLE1..4 seleciona os quatro pares diagnósticos no mesmo main.
+
+Dados atuais *baseline_v3*: guardas66patterns/2112B/32SAT e parSocialjab
+222patterns/7104B/35SAT máximo, pico8 em todas as composições. Janela física
+0x0000..1FFF256patterns, PNT3800, SAT3F00, tall8×16. P1 idênticaSocialv8,
+15códigos; source original→mesmo código, source/alpha/metadata registrados.
+Tudo residente carregado com displayoff; base escreve SAT porVBlank, não
+streaming de poses. Degrau128B reenvia prefixo correto residente, não arte nova.
+SMRT/worst probes C7D2..C7F9,14sondas,folga1784B nos mapas medidos.
+
+ROM base direita035060f9…:59,67/59,81fpsNTSC,janelas8s;0derrame/3000,mínimo207.
+Stress3540539e…:0derrame,mínimo218. Isso não mede duraçãoCPU, máximo de carga,
+PAL, áudio, gameplay ou fluidez percebida. Bindings porcaso usam --map explícito
+em out/diagnostics/hayato_cps2_sample_v1/*baseline_v3_rom_asset_binding.json;
+o binding global históricoSocial não foi reatribuído silenciosamente.
+QA4/4,236framesde vídeo+capturasguardas exatos,18checks, cleanup. Guarda tem
+somente endpointRAM(frame>0,pose0), não duas janelas de contagem. Fonte/material
+review pass, owner/ação/animação pending. Contrato legado68–72px não é promovido
+por esta escala diagnóstica. Ver memorybank/result.json e receitas .mddev.
+
 ## Grade compensada da amostra v8 — 2026-10-29
 
 `MOF_CPS2_SAMPLE=8` seleciona o novo header;5e1 preservam as baselines.
