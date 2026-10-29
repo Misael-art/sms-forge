@@ -71,6 +71,17 @@ e `out/evidence/sessions/`, com quatro sessões encerradas e QA visual nativa
 independente1/1. Não se transporta o resultado para produção, gameplay ou
 outros conteúdos. O orçamento integrado da Cena01 abaixo continua aberto.
 
+## Trecho diagnóstico facial v5 — 2026-10-29
+
+ROM `fc46d77b…`,32.768B: fonte v5 e receita SMS identificadas no handoff.
+216 padrões/6.912B;31SAT em idle/J01/J02/J03/J05/J06 e32SAT em J04, pico8 em
+todos os sete pares pelo conversor tall/simulador. Fonte larga v6 reprovou
+J04/pico9 e não foi buildada. Layout/CRAM/transferências iguais à baseline,
+com os novos patterns residentes. FPS8s59,62/59,79NTSC; selo3000frames,
+zero derrames/mínimo207. Degrau128B medido em outra ROM SHA `a5c013a8…`,
+zero derrames/mínimo217. Arte/contato/produção permanecem abertos; esses
+números não pagam a Cena01 abaixo, cenário/HUD ou gameplay.
+
 ## Cena 01 — _(nome)_
 ### Layout de VRAM declarado
 | Região | Faixa | Tiles | Uso |

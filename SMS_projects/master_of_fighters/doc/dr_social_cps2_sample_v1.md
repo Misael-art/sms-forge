@@ -227,3 +227,92 @@ originais é opcional para replay e usa `--extract-config` com a receita da
 revisão correspondente; não reexecutar sobre fonte selada. Um rebuild em
 outro SDK/host exige identificação e QA próprias. O áudio da amostra é
 intencionalmente silencioso, sem aprovação do eixo musical.
+
+## Aprovação do método e encaminhamento — 2026-10-29
+
+O proprietário declarou: “APROVADO O METODO REGISTRE PARA CURADORIA FUTURA E
+VAMOS PARA O PROXIMO PASSO”. O registro canônico deste encaminhamento é
+`curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`:
+contém receita, evidências com hashes, medidas e questões para o curador.
+O método está aprovado para continuidade do projeto; a curadoria global é
+futura. Não há novo ID, regra ou gate promovido neste registro.
+
+A aprovação tem escopo de método. O parecer artístico v2 e o checklist v3
+continuam íntegros; o próximo passo operacional é corrigir localmente a
+assinatura dos óculos e a leitura de contato J04, com fonte e revisão próprias.
+Nenhum PNG, ROM ou evidência da amostra selada foi sobrescrito por este registro.
+
+## Próximo passo executado — reparo facial v5 e nova ROM, 2026-10-29
+
+A aprovação do método está no registro de curadoria futura acima. A amostra
+atual para revisão é **v5**, sem ampliação de atlas, estados ou frame-data.
+Fonte: `jab_revision_v5/jab_source.png`, SHA
+`44ae0342e9db909d467907c1c21633165f5ee8dd1034b90d596d38498abd9c05`.
+Idle é a cópia exata de J01 em `idle_source_v5.png`.
+
+| Tentativa | Delta e resultado |
+|---|---|
+| v4 | Reparo facial solicitado no raster grande; óculos não fecharam no nativo. Parecer v4 `revise_before_growth`; não selecionada. |
+| v5 | Entrada: matriz nativa v3 ampliada4× por nearest, extração1/4 alinhada. Parecer v5 passou o reparo facial nos seis rostos, sem regressão corporal material; não aprova a sequência inteira. |
+| v6 | Tentou alinhar o contato J04, mas alongou o alcance. Conversor reprovou J04 com33SAT/pico9; não foi buildada. |
+| v7 | Tentativa compacta preservada, ainda com articulação de contato insuficiente na inspeção do produtor; não selecionada. |
+
+Os quatro originais e prompts foram produzidos com `imagegen` integrado e
+preservados em `jab_revision_v4/` a `jab_revision_v7/`. A geração não preservou
+pixels estritamente fora da face: deltas por quadro registram as mudanças.
+Não chamar a passagem de edição pixel-local nem a extração de polimento final.
+Os checklists v4/v5 são inputs congelados anteriores aos pareceres; seus hashes
+continuam exatos nos pedidos. O resultado independente facial v5 está no parecer
+separado `dr_social_cps2_sample_independent_review_v5.json`.
+
+A v5 usa a mesma paleta-fonte30, grade384×256, células128×128, seis poses e
+2/1/1/1/1/3ticks propostos. Conversão: `.mddev/dr_social_cps2_sample_v5.json`
+→ `face_revision_v5/converted/` no diagnóstico. Mesma receita SMS, extra4/6
+escolhida pelo idle;216 padrões/6.912B,31SAT salvo J04=32, pico8 nos sete pares.
+Corpo não foi encolhido para caber em J04; a tentativa larga foi reprovada.
+
+No consumidor existente, `MOF_CPS2_SAMPLE=5` seleciona somente o header novo;
+valor1 preserva a baseline anterior. Não há outro consumidor ou lógica de build
+no projeto. Manifestos de build: `.mddev/dr_social_cps2_face_v5_build.json` e
+`dr_social_cps2_face_v5_stress_build.json`; gerar por `build_inner.py` em destino
+novo. A receita de extração v5 é1/4 do nativo ampliado, diferente de104/474 usado
+na v3. Ela é tentativa observada neste caso, não regra global homologada.
+
+ROM v5: `out/candidates/dr_social_cps2_face_v5/rom/master_of_fighters.sms`,
+32.768B, SHA
+`fc46d77b9fea6ffd63c262aa085de3e1e623409c1db3e706e163d9d2439cf24b`.
+Stress128: `out/candidates/dr_social_cps2_face_v5_stress128/rom/master_of_fighters.sms`,
+SHA `a5c013a83d9d4e8678fa71d832d9fcedffed6a9cd77937389328f849a00edde7`.
+Binding canônico atualizado para v5; a baseline v3 e seus recibos permanecem
+intactos, com código original no commit `ba706e8`.
+
+QA nativa `/root/social_runtime_qa`, sessão `b2f3d33e89d84c9f8c68e089eacb6059`,
+encerrada:1/1 caso e120/120 framebuffers exatos; seis checks de fidelidade.
+Pedido/relatório/vídeo em `face_revision_v5/independent_qa/`; vídeo real
+`run_3b757b7927b247dcb2f70a2a73894c39/case_0.mp4`. Seis desenhos e Ken íntegro
+observados, mas sem afirmar fluidez percebida. Óculos se comprimem num pequeno
+agrupamento latão/escuro; lapela/colete ainda perdem definição. Não exigir dois
+aros completos em perfil nem tratar perda de detalhe como automaticamente aceita.
+
+Sessão performance `93578b87ccbe4375931aec912dc9cd8d`: duas janelas8s,
+59,62/59,79fps NTSC; janela autônoma3000frames sem derrame, `vline_min=207`.
+Sessão stress `c3161d84042a4bda9367fa521597b810`: mesmo tamanho de janela,
+zero derrames, `vline_min=217`, transferindo128B adicionais por VBlank. Ambas
+encerradas; bundles verificados. `performance_sessions.json` conserva números,
+ROMs, carga do host e cleanup. FPS paga somente médias das janelas, não jitter,
+latência, game feel ou PAL. Os outros campos do layout genérico SMRT não são
+semântica de combate desta ROM; foram usados magic/schema/contador de frames.
+
+Self-checks passaram antes das leituras; seis testes do adaptador e gates de
+recursos, sete composições, debug, corredor, sprite mode, tilemap, semântica,
+contrato, binding e QA passaram. Checklist v5 retorna pending(código2), com
+cobertura íntegra, sem aprovação do dono; não é FAIL técnico nem promoção.
+Auditoria global do registro continua bloqueada pelo relatório histórico v5
+ausente, já identificado. Não foi preenchido retroativamente.
+
+Comparação de fonte/SMS em1× e nearest: `face_revision_v5/source_sms_comparison.png`.
+Comparação facial com baseline: `source_and_faces_comparison.png`. Animação
+nominal/lenta: `jab_source_v5_60hz.apng` e `jab_source_v5_slow.apng`.
+Próximo checkpoint: julgamento temporal do contato compacto na mídia nova e
+aceite explícito das simplificações do rosto/roupa na escala SMS, antes de
+ampliar conteúdo ou promover. A v08.2 segue aprovada no seu próprio escopo.

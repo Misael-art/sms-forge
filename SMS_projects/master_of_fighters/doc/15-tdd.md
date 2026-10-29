@@ -1,5 +1,18 @@
 # 15-tdd — master_of_fighters
 
+## Diagnóstico facial v5 — 2026-10-29
+
+`MOF_CPS2_SAMPLE=5` seleciona o novo header no mesmo consumidor; valor1 conserva
+os dados anteriores. Manifestos/receita estão no handoff `dr_social_cps2_sample_v1.md`.
+Fonte v5 parte do nativo v3 ampliado4× e extraído1/4, sem mudar escala corporal.
+216 padrões/6.912B residentes, pico8;31SAT salvo J04=32. As tentativas de braço
+v6/v7 não foram selecionadas; v6 reprovou composição de J04 com pico9, sem build.
+ROM v5 SHA `fc46d77b…`: QA independente120/120 framebuffers exatos; FPS em duas
+janelas8s59,62/59,79. Selo3000frames:zero derrames, mínimo207; stress+128B,
+SHA `a5c013a8…`,zero derrames, mínimo217. Três sessões encerradas, bindings e
+probes próprios. Sem herdar evidência da v3 ou aprovar arte/gameplay/PAL/áudio.
+As seções seguintes descrevem a baseline v3 quando explicitamente indicadas.
+
 ## Amostra CPS2 autoral — diagnóstico opt-in de 2026-10-28
 
 O consumidor existente seleciona a amostra com `MOF_CPS2_SAMPLE=1`, somente

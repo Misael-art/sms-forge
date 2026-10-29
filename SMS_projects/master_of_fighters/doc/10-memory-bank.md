@@ -5,6 +5,44 @@
 > não substitui este arquivo.
 
 ## Última atualização
+2026-10-29 — Continuidade da amostra: fonte **v5** selecionada como candidata
+para diagnóstico, SHA `44ae0342e9db909d467907c1c21633165f5ee8dd1034b90d596d38498abd9c05`.
+A revisão independente v5 passou **somente o reparo facial**: aro/lente de latão
+reconhecíveis nos seis rostos, sem regressão corporal material observada. Não é
+aceite artístico completo, animação, SMS, ROM ou aprovação do dono. A v4 não
+fechou o rosto; v6 alongou J04 e o conversor reprovou o par; v7 permaneceu com
+articulação de contato insuficiente e não foi selecionada. Tentativas preservadas.
+O ramo seguinte usa v5 na ROM para conferir sobrevivência facial e registrar o
+gesto compacto para julgamento temporal, sem mais gerações genéricas do braço.
+Conversão v5: 216 padrões/6.912 B, SAT31 nas poses salvo J04=32, pico8 em todos
+os sete pares. Seleção diagnóstica `MOF_CPS2_SAMPLE=5`; valor1 preserva os dados
+anteriores. Build v5:32.768 B, SHA `fc46d77b9fea6ffd63c262aa085de3e1e623409c1db3e706e163d9d2439cf24b`.
+QA nativa independente:1/1 caso,120/120 framebuffers exatos e seis checks de
+fidelidade, sessão `b2f3d33e89d84c9f8c68e089eacb6059` encerrada. A assinatura dos
+óculos ainda se comprime em poucos pixels e lapela/colete perdem definição no
+SMS; review técnico não os aprova artisticamente. Performance própria:
+`93578b87ccbe4375931aec912dc9cd8d`,59,62/59,79fps em janelas8s, selo3000frames
+sem derrame (`vline_min=207`). Stress+128B, SHA `a5c013a8…`, sessão
+`c3161d84042a4bda9367fa521597b810`,sem derrame (`vline_min=217`). As três sessões
+foram encerradas e bundles conferidos. Seis testes do adaptador e gates de
+recurso/scanline/semântica/contrato/corredor/vínculo/QA passaram; checklist
+artístico permanece pending/bloqueia promoção. Não transportar estes PASS para
+outras ROMs, gameplay, áudio, PAL ou produção. Contato J04 requer julgamento
+temporal da mídia nova; óculos na escala SMS e aceite do dono continuam abertos.
+Handoff e mídias: `doc/dr_social_cps2_sample_v1.md`, seção de2026-10-29, e
+`out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/`. Publicação/commit
+final são registrados no `publication_receipt.json` desse diagnóstico.
+
+2026-10-29 — O dono aprovou explicitamente **o método** da amostra CPS2 e
+pediu registro para curadoria futura e avanço ao próximo passo. Decisão, receita,
+fontes/ROM/pacote por SHA, resultados e limites registrados em
+`doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`.
+Método aprovado para continuidade; homologação global permanece futura, sem
+novo ID de lição, mudança de doutrina ou promoção de arte inferida. A revisão
+v2 continua `revise_before_growth`: próximo delta é rosto/óculos e clareza do
+contato J04, mantendo o mesmo escopo idle + jab. A v08.2 permanece aprovada
+separadamente. Os números abaixo são da ROM v3 já medida, não de arte futura.
+
 2026-10-28 — Amostra autoral CPS2 v3 produzida como candidata: uma pose idle
 (cópia de J01) e `social_light_jab` J01–J06, sem expansão do atlas. Fonte
 384×256/30 cores, seis células 128×128, corpo ~104 px, alpha binário; SHA

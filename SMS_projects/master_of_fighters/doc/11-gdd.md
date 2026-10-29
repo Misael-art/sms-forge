@@ -1,5 +1,13 @@
 # 11-gdd — master_of_fighters
 
+## Continuidade de 2026-10-29
+
+O dono aprovou o método e seu encaminhamento à curadoria futura. A candidata
+corrente é v5, com reparo facial aprovado em review independente no escopo da
+fonte. Isso não aprova o contato J04, a simplificação SMS ou a arte completa;
+o escopo continua uma pose idle + jab, sem novos movimentos ou atlas.
+Detalhes, fonte/ROM e limites: `dr_social_cps2_sample_v1.md`.
+
 ## Recorte autoral CPS2 em revisão — 2026-10-28
 
 O pedido atual autoriza somente uma pose idle e `social_light_jab` J01–J06,

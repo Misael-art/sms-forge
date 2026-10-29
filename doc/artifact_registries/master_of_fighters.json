@@ -1027,12 +1027,12 @@
       "kind": "animation_source",
       "variant": "cps2-light-jab",
       "revision": 3,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v02"
       ],
       "supersedes": "dr-social-cps2-light-jab-v02",
-      "reason": "Focused source correction of J03 half-extension and J04 compact reach; v2 material/tail improvements retained, no body scaling.",
+      "reason": "Focused source correction of J03 half-extension and J04 compact reach; v2 material/tail improvements retained, no body scaling. Remains exact observed-ROM baseline; v5 now separately submitted face candidate, no approval inherited.",
       "files": [
         {
           "role": "raw",
@@ -1116,7 +1116,7 @@
       "kind": "animation_source",
       "variant": "cps2-idle",
       "revision": 3,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v03"
       ],
@@ -1152,6 +1152,399 @@
           "role": "report",
           "path": "doc/dr_social_cps2_sample_independent_review_v2.json",
           "sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v04",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "revision": 4,
+      "status": "historical",
+      "parents": [
+        "dr-social-cps2-light-jab-v03"
+      ],
+      "reason": "Next authorized focused correction: stabilize round brass glasses and native face identity only; keep compact jab choreography/body/cane/timing unchanged. Method approved 2026-10-29; source art approval not inferred. Actual native inspection did not close spectacles defect; global drawing drift measured. Retained as attempt, does not supersede observed v3.",
+      "files": [
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_generated_raw.png",
+          "sha256": "5d1b6a5fc5dda69a0104a44980083072e58146217d7a98d241030fcd3ff1bdb6"
+        },
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_source.png",
+          "sha256": "edc9de375cfb12e036c3bb037c9bdefaf2fffabe267df43374c51b69d817bfc5"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_prompt.txt",
+          "sha256": "cfec1bdd95a290f5ac0660808d6575885e81b125c9d5924d2fe1fd5d189c0a3f"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_metadata.json",
+          "sha256": "a1101b5b48a4a07042e0bd04f88e959f23a21020dafdc9c2f61841ff46a2d8fd"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/extraction_recipe.json",
+          "sha256": "d13a99ee7430f5055a58d28fc0054e90adfe798d56ae9c9d8d4097b73974f963"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/native/J01.png",
+          "sha256": "30e98671b947d601640be661c4cfef9a1a251edce2a86d61f90dd4f8be3a1fdf"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/native/J02.png",
+          "sha256": "c871d72cb703e810d3d391dd427fb1d49cd53d61a2b3b2a8d7e13300497e1980"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/native/J03.png",
+          "sha256": "817f089e9be47190e9f504adfdd08edca611ed982a597ba176cc993ccc19ef33"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/native/J04.png",
+          "sha256": "d2470ec112ee9e2a301e693c5d6be67263182ca6155f37907c8e0c8f97dd3d78"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/native/J05.png",
+          "sha256": "ccc96f3bc95bce56db9defb71abc48e5ce1756d1b6292a08cdbba4e1be218e29"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/native/J06.png",
+          "sha256": "614151a2ac1931c06a698f6d28d2344f721b7e5900cea0af182b00b7e0185147"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v05",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "revision": 5,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v03"
+      ],
+      "reason": "Same face/glasses defect: use exact native v3 enlarged4x as edit target with grid-aligned1/4 extraction, rather than resampling a 474px illustration to104px body; no choreography or scale change.",
+      "files": [
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/jab_generated_raw.png",
+          "sha256": "2a892d347af77fab943736403234540755269ae34377af525e02b733e625f1d1"
+        },
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/jab_source.png",
+          "sha256": "44ae0342e9db909d467907c1c21633165f5ee8dd1034b90d596d38498abd9c05"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/jab_prompt.txt",
+          "sha256": "294d86a2adc4136617d8fc6553d5d93025529a433a000bb2fca0eec69fec23ab"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/jab_metadata.json",
+          "sha256": "a1b13faaa3f15a6e0bf78126dc1f5e2b5bdf108b4c70f03c2e33eac6f55ab06c"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/extraction_recipe.json",
+          "sha256": "a13689f460b12467a4d7b3bfdc7e356b0932123bea6c3951231340fa4631cc9b"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/native/J01.png",
+          "sha256": "db9a9de09cd474db2d7d32a6295fdadf0094d30294b90b16acc3999bba40aef5"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/native/J02.png",
+          "sha256": "c08a0159a7146f314a5e70950ff241bb4264904de5db8efdc5a574e47bed0f88"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/native/J03.png",
+          "sha256": "81ce9ff2877044eba5f0e5a806565dd3a22dd66726447fc320d284ad9857b7db"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/native/J04.png",
+          "sha256": "e5146879cef5172854140dfc8af3cb33ad43b7dcce52867a09731ead5b14a603"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/native/J05.png",
+          "sha256": "834b07427973835b77ddd22ce748ace2df8b7c2dbfdf1557a720a823d03c24ac"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/native/J06.png",
+          "sha256": "c7b5a79177c53d3ce9a8a0e0c25ac56554d76d1fe671ac098098550e28234b68"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-face-review-v04",
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-face-correction",
+      "revision": 1,
+      "status": "historical",
+      "parents": [
+        "dr-social-cps2-light-jab-v04"
+      ],
+      "reason": "Independent source-only checkpoint for attempted face correction, no production or ROM approval.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/dr_social_cps2_sample_independent_review_v4.json",
+          "sha256": "c435f8143a5f74aa1d5a0d365a93c5d575e80b80dc67b5704d23215299f75830"
+        },
+        {
+          "role": "checklist",
+          "path": "doc/dr_social_cps2_sample_art_checklist_v4.json",
+          "sha256": "fffe2adde1d33df4639296866bdcba135a09a700128a0139f726e0f57cb3791c"
+        },
+        {
+          "role": "request",
+          "path": "doc/dr_social_cps2_sample_review_request_v4.json",
+          "sha256": "6bacf8538bf486f2e898b13f16c0a3cedc5afbe88e12c59cdfc8afc2f333b3ca"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-face-review-v05",
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-face-correction",
+      "revision": 2,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v05"
+      ],
+      "reason": "Independent native-grid face correction checkpoint; prior ROM approval not inherited.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/dr_social_cps2_sample_independent_review_v5.json",
+          "sha256": "3966c06213c7df56fc4e7c7b6b30af02f944542ddacf4c93fb5389b3dc7ff3b5"
+        },
+        {
+          "role": "checklist",
+          "path": "doc/dr_social_cps2_sample_art_checklist_v5.json",
+          "sha256": "3c6b49f48490ef5adb865438af2e154a21cbd28a35a5655fb644b6599f8de8b5"
+        },
+        {
+          "role": "request",
+          "path": "doc/dr_social_cps2_sample_review_request_v5.json",
+          "sha256": "00766f73d8abec8a938902b4f687c84d04bc0e16eb10e15037eef5705059d866"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-idle-v05",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "revision": 5,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v05"
+      ],
+      "reason": "Current face-repair candidate J01 is idle keypose, no extra drawing/cycle.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_source_v5.png",
+          "sha256": "db9a9de09cd474db2d7d32a6295fdadf0094d30294b90b16acc3999bba40aef5"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_metadata_v5.json",
+          "sha256": "8d60a35a9aa42880291cb858561027cb2bb39db92a46b0aed3e4e3e7adbb2ebe"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v06",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "revision": 6,
+      "status": "historical",
+      "parents": [
+        "dr-social-cps2-light-jab-v05"
+      ],
+      "reason": "Next independent priority after usable v5 native face: clarify sole contact J04 by coherent shoulder/elbow/forearm alignment within same compact reach; keep all six faces/other poses/body scale and timing. Actual output extended reach; diagnostic existing converter rejects pair, no ROM build.",
+      "files": [
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/jab_generated_raw.png",
+          "sha256": "81d2eff965131ad34defb24da085ed7b64dbff06a0692015fc5ec265acb52321"
+        },
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/jab_source.png",
+          "sha256": "f7e9e7dcf2ef1d10a2807c65f8e63f0875032153eaad840e436257537aeafcff"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/jab_prompt.txt",
+          "sha256": "a74bbfcff4471ff0c5b87f8944dd69311a732cc8dc548eacb1cd8142a5a076e4"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/jab_metadata.json",
+          "sha256": "2d5b5201dec12c3088d35164d194d6f94cf929f1c39f36e6fed339bc8bfcb31d"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/extraction_recipe.json",
+          "sha256": "c511a1aadf8aa9ad931e3a7ed40378555d73923abc079d7fc81bd0e895250f6e"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/native/J01.png",
+          "sha256": "7a5ed480aefbb0a26bd09872959961217c422a4a1fdd7f91f6f2bc024fe4efb9"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/native/J02.png",
+          "sha256": "2239a9604651e95800f91f0fb3595c842ea4ad7793801fc49d83bd863f2536a5"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/native/J03.png",
+          "sha256": "99fc5c4bd4fe84fc8e9b679683828160542c3430a2319516595a2d505d6f3c73"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/native/J04.png",
+          "sha256": "dd34b0dcf044900dc8a5c9e9b3ba2ac498b5c156170e74ae739229c60cf2cda8"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/native/J05.png",
+          "sha256": "dfa25ba813e03281a53018d88407cf44ec32a8b8fbda36766d85af5490d4d43d"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v6/native/J06.png",
+          "sha256": "2ec788f78c7c7013e4cdbac753a4cfce9c674e5db07a328962ec457ee7df4813"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v07",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "revision": 7,
+      "status": "historical",
+      "parents": [
+        "dr-social-cps2-light-jab-v05",
+        "dr-social-cps2-light-jab-v06"
+      ],
+      "reason": "Correct v6 excessive reach using explicit native glove position while preserving v5 face/body, six poses and proposed timing. No pose/body scaling, no omissions. Source compact but did not deliver requested straight contact; not selected over v5. Keep for evidence, no promotion.",
+      "files": [
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/jab_generated_raw.png",
+          "sha256": "e6a7aa1c610f16c8035af0fc4d765736c40457233221a282d5f3c5653c761072"
+        },
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/jab_source.png",
+          "sha256": "37ac0162a957124c7b2fa234aaa09315ac8749b85e895622c2e3c8bcbe80a5a3"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/jab_prompt.txt",
+          "sha256": "05c85aad535d0328af465ecd89b4b2b8f2ef592eedbb449ba5ed842029cdb260"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/jab_metadata.json",
+          "sha256": "c4d1e1af3983d1a0bf8e966b0279393fa80f332de2a6847fe53b79411d6f3fbe"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/extraction_recipe.json",
+          "sha256": "0e0eda5d7f85ad72448c39a68fcef8caa9f6331c6e330f6913d0bbf67feb6958"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/native/J01.png",
+          "sha256": "c6e4b5f51e4b1a6879f53ef6333ba1e5245617c1feee3a29d817d6f2dc2ecd7c"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/native/J02.png",
+          "sha256": "0a32330cfdb537c3a0960dffc5429ac9d21ce90e2c01270ea36aefc54e37267f"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/native/J03.png",
+          "sha256": "028e0f1b4444e65c4e104261488b0518574848e76232dc8b7b3a475a73985eba"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/native/J04.png",
+          "sha256": "02fb88863a04928af8665baef09fb7c60fb16548c0bab3c2b30f2e70ae6b2ec7"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/native/J05.png",
+          "sha256": "b79efce29f65fa1099fecffc80abdac082d9b2a7fb073037b9cc4e31d7a25821"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v7/native/J06.png",
+          "sha256": "de213d4697cf51ffb5d9950f9a2c266da65d4c4e3cc4ec43a05e1572bd50b6f7"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-face-v05-diagnostic",
+      "asset_id": "dr_social",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-face-v5",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v05"
+      ],
+      "reason": "Identified v5 source/header/ROM and native120frame QA; diagnostic only, no art/owner/production approval.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/converted/conversion.json",
+          "sha256": "67c0bbf006a612bb673efa149646488b93110fc58c4b134caddc38d61d26fb08"
+        },
+        {
+          "role": "header",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/converted/sample_data.h",
+          "sha256": "46ea7c7f006e4d5bb176097e5b96d9853204c1964e7331986a2fc211d341558b"
+        },
+        {
+          "role": "qa_request",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/independent_qa/request.json",
+          "sha256": "9368869555c9dbe1d461d1c0b39234303e75e5a8ca670ef961d4ae65c9773709"
+        },
+        {
+          "role": "qa_report",
+          "path": "out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/independent_qa/run_3b757b7927b247dcb2f70a2a73894c39/report.json",
+          "sha256": "3339a3800d88a22456f86cbd43908adf7c195c2ab4957b0255e4e477ff27463b"
         }
       ]
     }
@@ -1273,14 +1666,14 @@
       "asset_id": "dr_social",
       "kind": "animation_source",
       "variant": "cps2-idle",
-      "candidate": "dr-social-cps2-idle-v03",
+      "candidate": "dr-social-cps2-idle-v05",
       "approved": null
     },
     {
       "asset_id": "dr_social",
       "kind": "animation_source",
       "variant": "cps2-light-jab",
-      "candidate": "dr-social-cps2-light-jab-v03",
+      "candidate": "dr-social-cps2-light-jab-v05",
       "approved": null
     },
     {
@@ -1295,6 +1688,20 @@
       "kind": "art_review",
       "variant": "cps2-sample",
       "candidate": "dr-social-cps2-source-review-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-face-correction",
+      "candidate": "dr-social-cps2-face-review-v05",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-face-v5",
+      "candidate": "dr-social-cps2-face-v05-diagnostic",
       "approved": null
     }
   ],

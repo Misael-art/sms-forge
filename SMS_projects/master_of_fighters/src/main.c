@@ -12,7 +12,11 @@
 #if defined(MOF_CPS2_SAMPLE) && MOF_CPS2_SAMPLE
 /* Diagnostic selection within the existing consumer. Candidate source assets
  * remain outside res/; the default production skeleton is unchanged. */
+#if MOF_CPS2_SAMPLE == 5
+#include "../out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/converted/sample_data.h"
+#else
 #include "../out/diagnostics/dr_social_cps2_sample_v1/converted_tall_v5/sample_data.h"
+#endif
 #ifndef MOF_SAMPLE_STRESS_BYTES
 #define MOF_SAMPLE_STRESS_BYTES 0
 #endif
