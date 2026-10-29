@@ -1,0 +1,79 @@
+{
+  "checks": [
+    {
+      "check": "focused_final",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tools/sms_wrapper/tests/test_art_temporal_review.py",
+        "tools/sms_wrapper/tests/test_authored_sprite_sample.py"
+      ],
+      "exit_code": 0,
+      "seconds": 20.63,
+      "log": "doc/curation/evidence/2026-10-29_art_method/focused_final.log"
+    },
+    {
+      "check": "art_selfcheck_final",
+      "command": [
+        "python",
+        "tools/sms_wrapper/audit_art_review_checklist.py",
+        "--self-check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.15,
+      "log": "doc/curation/evidence/2026-10-29_art_method/art_selfcheck_final.log"
+    },
+    {
+      "check": "selftest_final",
+      "command": [
+        "python",
+        "tools/sms_wrapper/selftest.py"
+      ],
+      "exit_code": 0,
+      "seconds": 11.53,
+      "log": "doc/curation/evidence/2026-10-29_art_method/selftest_final.log"
+    },
+    {
+      "check": "measurement_tools_final",
+      "command": [
+        "python",
+        "tools/sms_wrapper/validate_measurement_tools.py"
+      ],
+      "exit_code": 0,
+      "seconds": 9.0,
+      "log": "doc/curation/evidence/2026-10-29_art_method/measurement_tools_final.log"
+    },
+    {
+      "check": "doc_sync_final",
+      "command": [
+        "python",
+        "tools/sms_wrapper/audit_doc_sync.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "log": "doc/curation/evidence/2026-10-29_art_method/doc_sync_final.log"
+    },
+    {
+      "check": "learning_final",
+      "command": [
+        "python",
+        "tools/sms_wrapper/audit_learning_capture.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.2,
+      "log": "doc/curation/evidence/2026-10-29_art_method/learning_final.log"
+    }
+  ],
+  "tested_code_sha256": {
+    "tools/sms_wrapper/audit_art_review_checklist.py": "c210dee44ad3fb753b82151896184c29a669c2115b93771d01070abfdcc58f1b",
+    "tools/sms_wrapper/selftest.py": "9c65a183bf40867203874041809ac2ed161be40ce45d139a8ce193535d38f428",
+    "tools/sms_wrapper/tests/test_art_temporal_review.py": "b7d4d5de7b9ef02ff1f0553db811336bacc7d70b472775cc80d8be9b65725b30"
+  },
+  "prior_checks": "validation.json",
+  "runtime_changed": false,
+  "fresh_emulator_QA": "not_run: review validation only; unchanged converter data replays exact"
+}

@@ -244,3 +244,73 @@ contorno acrescentados. Registrar ordem de mudanças, recomputação, desempate,
 limite de iterações e critério de parada se houver cleanup iterativo. Ponto
 fixo/zero ilhas não prova luz, anatomia ou qualidade; revisar em 1× e NN ampliado.
 Parecer independente declarado precisa apontar seu relatório preservado por SHA.
+
+## Checkpoint estático e temporal (aplicação L113/L123/L127)
+
+Direção julga identidade/linguagem; animação julga atuação; conversão adapta a
+representação; runtime a apresenta. O revisor declara exatamente o que observou.
+
+| Eixo | Método que pode sustentá-lo | Limite |
+|---|---|---|
+| `image_inspection` | `still` ou `framewise` | Anatomia/material no quadro; não movimento |
+| `frame_analysis` | `framewise` | Transições discretas; não sensação contínua |
+| `order_exposure` | `timeline` | Ordem, exposições e terminal; não ritmo convincente |
+| `continuous_motion` | `continuous` | Playback normal realmente percebido; lenta auxilia |
+| `rom_presentation` | `rom_framewise` ou `rom_continuous` | Só ROM/SHA/sessão e janela declarados |
+| `owner_acceptance` | `owner_decision` | Decisão explícita no hash/papel, independente das anteriores |
+
+Formalizar em `sms_art_temporal_review_v1`, aceito pelo gate existente
+`audit_art_review_checklist.py --manifest <checkpoint> --project-root <raiz>
+--verify-hashes`. O schema temporal sempre verifica hashes; a flag preserva a
+convenção da CLI estática. Rodar `--self-check` antes. Código 0: declarações completas;
+2: pendência honesta; 1: contrato inválido ou reprovação. Não é detector de
+beleza, força, anatomia, percepção verdadeira ou AAA.
+
+Contrato:
+- `producer`; `subjects.source` e, quando existentes, `subjects.sms` e
+  `subjects.rom`, cada um `{path, sha256}`. Paths relativos à raiz informada.
+- `sequence`: `expected_ids`, `actual_ids` na ordem contratada,
+  `duration_ticks` positivos por elemento, `tick_definition`, `expected_terminal`
+  e `terminal`. IDs/imagens repetidos e holds finitos são legítimos. Hold
+  infinito exige outro perfil/contrato de observação, não inventar duração.
+  `registration` opcional tem uma linha por elemento com `id`, `scale:[num,den]`,
+  `offset:[x,y]` e `rationale`; escala comum não significa offset imóvel.
+  É consistência declarada, não medição de pixels nem detecção de anatomia.
+- `observations`: `id`, `target` (`source`, `sms` ou `rom`), `subject_sha256`,
+  `method`, `reviewer`, `report:{path,sha256}` e `media:{path,sha256}`. Pareceres
+  históricos ficam intactos; o checkpoint cita seu escopo, sem reemitir aceite.
+  `continuous` exige `normal_speed_perceived:true` e `capture_mode` igual a
+  `authored_preview` ou `realtime`; alvo ROM só aceita `realtime`. Métodos ROM
+  exigem alvo `rom`, `rom_sha256` e `session_id`. `owner_decision` dispensa mídia,
+  exige `decision:accepted|rejected`, reviewer diferente do produtor e arquivo
+  da decisão. Gate valida custódia/declarações, não autentica autoria/percepção.
+- `axes`: exatamente os seis eixos da tabela, cada um com `status`
+  (`pass`, `fail`, `needs_evidence`), `note` e `observation_ids`. PASS/FAIL
+  precisam do método próprio; FPS/framebuffer match não aprovam arte.
+- `next_decision`: `keep_control` enquanto pendente; `keep` após fechamento;
+  `adjust_exposures` ou `repair_pose` exigem `observed_defect` concreto.
+- Para edição indexada restrita, `edit_boundary:{before:{path,sha256},
+  after:{path,sha256},rectangles:[[x0,y0,x1,y1]]}` verifica índices fora das
+  regiões semiabertas, dimensões, PLTE e transparência exatas. O gate mede o
+  delta autorizado, não se o reparo ficou bom; remapeamento de material usa
+  contrato próprio e revisão de todas as regiões afetadas, sem essa invariância.
+
+Com `--verify-hashes`, relatórios JSON precisam ligar a mídia em `artifacts`
+(lista de `{path,sha256}`) ou `media_sha256`; decisão liga o alvo em `artifacts`
+ou `subject_sha256`. Campos explícitos de identidade e negação de percepção
+são confrontados com a observação. Ausência de binding não é preenchida com
+aprovação inferida; preservar relatório original e pendência.
+
+Checklists estáticos v1 permanecem compatíveis. Ligá-los por
+`temporal_checkpoint:{path,sha256}` ao promover animação; PASS nos eixos
+`continuous_motion`, `normal_speed_reading`, `temporal_quality` ou
+`perceived_motion` exige esse vínculo. Sem ele o PASS antigo não vira
+qualificação temporal. O vínculo precisa incluir o hash do asset revisado.
+
+Sem percepção contínua, conservar os PASS estáticos no seu escopo e marcar
+`needs_evidence`; disponibilizar fonte/ROM normal e lenta identificadas, com
+intervalos e perguntas concretas. Não repetir gerações, builds ou reviews
+equivalentes. O próximo observador decide manter, ajustar exposições (ritmo) ou
+corrigir pose (trajetória/apoio/pega); não esconder construção ruim com holds.
+Oclusão legítima não é equipamento ausente; salto/agachamento não é mudança de
+escala. Exigir contratos e observação antes de classificar defeito.

@@ -96,6 +96,27 @@ arte-fonte; texto deve caber em cada cartão sem tocar a borda.
 
 ## 4. Gerar incrementalmente e preservar proveniência
 
+Para fonte de sprite em linguagem CPS2, separar quatro representações:
+concept/model sheet (identidade), fonte autoral (desenho/atuação), saída SMS
+(tradução limitada) e framebuffer (apresentação). CPS2 descreve a direção
+visual escolhida; não certifica anatomia, resolução ou paleta do arquivo.
+Definir simplificações intencionais de olhos/rosto, dedos/pega, dobras e
+equipamento antes da geração. Contorno, clusters e planos sombra/base/luz têm
+papéis por material; preservar o preto opaco quando outra entrada é transparente.
+
+Comparar a amostra com referências aprovadas em escala comum, sem normalizar
+cada personagem pela própria bbox. Medir corpo sem cabelo/arma e equipamento
+separadamente. Registrar escala, canvas, pivôs, paleta e duração como parâmetros
+do personagem/cena; conferir os valores atuais no GDD/decisões, não em receitas
+históricas. Converter uma amostra cedo e revisar quais detalhes sobrevivem.
+Para golpes, seguir `skills/sms-sprite-animation.md` antes do acabamento.
+
+Uma iteração registra causa observada, delta pretendido e invariantes; depois
+confere delta real e reinspeciona a pose inteira. Edição de lâmina pode alterar
+braço/rosto fora do pedido. Se o contrato limita ROI, comparar pixels fora da
+região contra a fonte congelada, além da revisão visual. Não atribuir economia
+ao método sem contagem de tentativas/custo comparável e mais de um caso completo.
+
 1. Gere uma imagem para o estilo escolhido e revise antes de seguir. Para cada
    estilo, use prompt próprio, com a referência aprovada para identidade e as
    características de estilo separadas. Declare qual obra/peça e qual papel do

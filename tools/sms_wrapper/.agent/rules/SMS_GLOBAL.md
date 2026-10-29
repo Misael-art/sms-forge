@@ -1863,6 +1863,17 @@ propostas de luta têm campos/fonte separados. O guide pesquisado tem divergênc
 de nomes de armas primárias, portanto manual/ROM devem confirmar esses detalhes
 antes de convertê-los em cânone.
 
+Aplicação L113/L123/L127, curadoria Social/Hayato: coreografia/gesto e teste
+temporal precedem acabamento; preservar identidade não congela atuação.
+`audit_art_review_checklist.py` aceita `sms_art_temporal_review_v1` e mede
+custódia/escopo de seis eixos conforme `workflows/art-review.md`: imagens,
+quadros, ordem/exposição, percepção contínua, apresentação ROM e aceite do dono.
+PASS técnico não migra para arte. Sem percepção contínua, `needs_evidence`
+preserva resultados estáticos e controle; não repetir geração/review equivalente.
+O gate rejeita método incompatível, SHA stale, stepping como realtime,
+sequência incompleta e escala declarada divergente; não autentica percepção
+nem julga beleza. Contagens de princípios não classificam qualidade.
+
 ## 110. BlastEm avançado: qualificar recurso por CPU, captura e versão (L114–L120)
 
 Aplicar `sms-emulator-diagnostics.md` e a matriz de decisão de

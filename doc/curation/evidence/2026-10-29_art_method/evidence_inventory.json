@@ -1,0 +1,343 @@
+{
+  "sources": [
+    {
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json",
+      "sha256": "420a9328a2a5c3e2b5b315a7d1052512292b6f5e284ac3bd03c2eeb8b5a16ca8"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/10-memory-bank.md",
+      "sha256": "5c16fb7b0ec3fd4a4e75d0928f919f283b548da826bb345651db293e872d6e03"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+      "sha256": "be66064346e82009e1a41d774dea8985fd643de3efc59d4037f1a948da91886f"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/15-tdd.md",
+      "sha256": "53533a2c19a921c2988a004c9fd56967d31b6cf9c972037935156d7236f12999"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/final_review_v4/owner_checkpoint.json",
+      "sha256": "6896ef2e07b23b47ae6367aaaf28ef7a950d2dada2140c6bf0292a1a28e6344d"
+    },
+    {
+      "path": "doc/artifact_registries/master_of_fighters.json",
+      "sha256": "0653cd06b4b8618c2aa74bf660a2b5f2d4fee585ed1049420979617a996a1fd3"
+    }
+  ],
+  "candidate_refs": [
+    {
+      "record": "$.evidence[0]",
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_source.png",
+      "expected_sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872",
+      "actual_sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872",
+      "matches": true
+    },
+    {
+      "record": "$.evidence[1]",
+      "path": "SMS_projects/master_of_fighters/.mddev/dr_social_cps2_sample_v3.json",
+      "expected_sha256": "d56ea2bb4f378fc950f0238fb691ae5524c1222a036f717ca6b90f0904ff345d",
+      "actual_sha256": "d56ea2bb4f378fc950f0238fb691ae5524c1222a036f717ca6b90f0904ff345d",
+      "matches": true
+    },
+    {
+      "record": "$.evidence[2]",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/historical_approved_method_adapter_ba706e8.py",
+      "expected_sha256": "61340d8f552ce4557b7d8d6396d49c06d4e76b060f0a227fc0e1001958e0756a",
+      "actual_sha256": "61340d8f552ce4557b7d8d6396d49c06d4e76b060f0a227fc0e1001958e0756a",
+      "matches": true
+    },
+    {
+      "record": "$.evidence[3]",
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v2.json",
+      "expected_sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42",
+      "actual_sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42",
+      "matches": true
+    },
+    {
+      "record": "$.evidence[4]",
+      "path": "SMS_projects/master_of_fighters/out/candidates/dr_social_cps2_sample_v1/rom/master_of_fighters.sms",
+      "expected_sha256": "f5d54b1545aa20ec41ec7da0290b2c948aeec393c025d71c2401254b58458b8d",
+      "actual_sha256": "f5d54b1545aa20ec41ec7da0290b2c948aeec393c025d71c2401254b58458b8d",
+      "matches": true
+    },
+    {
+      "record": "$.evidence[5]",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/dr_social_cps2_sample_review.zip",
+      "expected_sha256": "9536b5a5d1ac82dc8588730f8d07f94edf55d9657c8bb86ed7ce791b833470ba",
+      "actual_sha256": "9536b5a5d1ac82dc8588730f8d07f94edf55d9657c8bb86ed7ce791b833470ba",
+      "matches": true
+    },
+    {
+      "record": "$.followup_after_method_decision.art_review",
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v5.json",
+      "expected_sha256": "3966c06213c7df56fc4e7c7b6b30af02f944542ddacf4c93fb5389b3dc7ff3b5",
+      "actual_sha256": "3966c06213c7df56fc4e7c7b6b30af02f944542ddacf4c93fb5389b3dc7ff3b5",
+      "matches": true
+    },
+    {
+      "record": "$.followup_after_method_decision.native_qa",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/independent_qa/run_3b757b7927b247dcb2f70a2a73894c39/report.json",
+      "expected_sha256": "3339a3800d88a22456f86cbd43908adf7c195c2ab4957b0255e4e477ff27463b",
+      "actual_sha256": "3339a3800d88a22456f86cbd43908adf7c195c2ab4957b0255e4e477ff27463b",
+      "matches": true
+    },
+    {
+      "record": "$.followup_compensated_grid_v8.implementation",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/build_inputs/approved_method_adapter_social_v8_70b0e7a.py",
+      "expected_sha256": "30dc607ebfdd0d11cae79ad05c73a4579494b912a92831d69f6bd6d3bf1e1553",
+      "actual_sha256": "30dc607ebfdd0d11cae79ad05c73a4579494b912a92831d69f6bd6d3bf1e1553",
+      "matches": true
+    },
+    {
+      "record": "$.followup_compensated_grid_v8.art_review",
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v8.json",
+      "expected_sha256": "3f67ceadf65ef3d7b33a19c87aadf920e9f58828d7a0e724ab0a0518c359107b",
+      "actual_sha256": "3f67ceadf65ef3d7b33a19c87aadf920e9f58828d7a0e724ab0a0518c359107b",
+      "matches": true
+    },
+    {
+      "record": "$.followup_compensated_grid_v8.native_QA",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/independent_qa/run_fd39fc88eedc423fa155b9442bad5e23/report.json",
+      "expected_sha256": "1476d83f3f60a1fed7fb8fb3f49d1b3c36d1c8dc611c423802a5b089f67ec685",
+      "actual_sha256": "1476d83f3f60a1fed7fb8fb3f49d1b3c36d1c8dc611c423802a5b089f67ec685",
+      "matches": true
+    },
+    {
+      "record": "$.followup_compensated_grid_v8.timing",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/timing_observed_input/observed_cases_report_v2.json",
+      "expected_sha256": "7ebe2a4209dc15dea912aed1bf984fceaf0ca94fe390a9ad8fab90bddaf31f42",
+      "actual_sha256": "7ebe2a4209dc15dea912aed1bf984fceaf0ca94fe390a9ad8fab90bddaf31f42",
+      "matches": true
+    },
+    {
+      "record": "$.followup_hayato_guard_repeatability.current_implementation",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/build_inputs/historical_guard_adapter_284b15b.py",
+      "expected_sha256": "eeded0e63a72ebce948e01f02ee9644d2d0bfa2d943b2ac0498e9c76be683b6c",
+      "actual_sha256": "eeded0e63a72ebce948e01f02ee9644d2d0bfa2d943b2ac0498e9c76be683b6c",
+      "matches": true
+    },
+    {
+      "record": "$.followup_hayato_short_cut_choreography.final_source",
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+      "expected_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+      "actual_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+      "matches": true
+    }
+  ],
+  "candidate_refs_passed": 14,
+  "candidate_refs_total": 14,
+  "selected_registry_heads": [
+    {
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "light-jab",
+      "candidate": "dr-social-jab-v04",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "light-jab-alpha-attempt",
+      "candidate": null,
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "main",
+      "candidate": null,
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "concept-model-sheet-cps2-alpha-cel",
+      "candidate": "dr-social-model-sheet-cps2-alpha-cel-v04-review-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "concept",
+      "variant": "main",
+      "candidate": null,
+      "approved": "dr-social-concept-direction-v03"
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "conversion_proof",
+      "variant": "main",
+      "candidate": "dr-social-conversion-proof-v04",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "diagnostic_conversion",
+      "variant": "main",
+      "candidate": null,
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "model_sheet",
+      "variant": "gouache-fantasy",
+      "candidate": "dr-social-model-sheet-14-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "model_sheet",
+      "variant": "main",
+      "candidate": null,
+      "approved": "dr-social-model-sheet-cps2-alpha-cel-v04-candidate"
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "concept",
+      "variant": "main",
+      "candidate": null,
+      "approved": "hayato-concept-v02"
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "candidate": "dr-social-cps2-idle-v05",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "candidate": "dr-social-cps2-light-jab-v08",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "main",
+      "candidate": null,
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-sample",
+      "candidate": "dr-social-cps2-source-review-v08",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-face-correction",
+      "candidate": "dr-social-cps2-face-review-v05",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-face-v5",
+      "candidate": "dr-social-cps2-face-v05-diagnostic",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-contact-v8",
+      "candidate": "dr-social-cps2-contact-v08-diagnostic",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "approved": null,
+      "candidate": "hayato-cps2-idle-v02"
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "cps2-idle-source",
+      "candidate": "hayato-cps2-idle-source-review-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "cps2-pair-derivative",
+      "candidate": "hayato-cps2-derivative-review-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "cps2-pair",
+      "candidate": "hayato-cps2-pair-diagnostic-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "cps2-repeatability",
+      "candidate": "hayato-cps2-repeatability-brief-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-key",
+      "candidate": "hayato-cps2-short-cut-key-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut",
+      "candidate": "hayato-cps2-short-cut-v04",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "short-cut-direction",
+      "candidate": "hayato-short-cut-direction-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "short-cut-rough",
+      "candidate": "hayato-short-cut-rough-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-body-key",
+      "candidate": "hayato-cps2-short-cut-body-key-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "short-cut-review-records",
+      "candidate": "hayato-short-cut-review-records-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "short-cut-contract-records",
+      "candidate": "hayato-short-cut-contract-records-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "short-cut-runtime-evidence",
+      "candidate": "hayato-short-cut-runtime-evidence-v01",
+      "approved": null
+    }
+  ],
+  "scope": "Custody replay only; current heads do not confer artistic or temporal approval."
+}

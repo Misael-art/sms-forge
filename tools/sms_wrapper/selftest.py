@@ -402,6 +402,19 @@ def main():
     results.append(run(args, 1, "MUGEN número MD rejeitado no SMS"))
 
     art_gate = os.path.join(HERE, "audit_art_review_checklist.py")
+    from tests.test_art_temporal_review import temporal_fixture
+    from pathlib import Path
+    temporal_root = Path(tmp) / "temporal_review"
+    temporal_root.mkdir()
+    temporal = temporal_fixture(temporal_root)
+    temporal_path = temporal_root / "checkpoint.json"
+    temporal_path.write_text(json.dumps(temporal))
+    temporal_args = [art_gate, "--manifest", str(temporal_path),
+                     "--project-root", str(temporal_root), "--verify-hashes"]
+    results.append(run(temporal_args, 0, "temporal: declarações válidas com seis eixos"))
+    temporal["observations"][3]["method"] = "framewise"
+    temporal_path.write_text(json.dumps(temporal))
+    results.append(run(temporal_args, 1, "temporal: inspeção estática não aprova percepção"))
     art_valid_root = os.path.join(tmp, "art_review_valid")
     art_valid = _art_review_manifest(art_valid_root)
     results.append(run([art_gate, "--manifest", art_valid,

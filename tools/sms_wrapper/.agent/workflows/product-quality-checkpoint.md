@@ -46,6 +46,12 @@ pose/evento e consequência; relate atraso sem escolher um número universal de
 "controle bom". Hitstop intencional do GDD não se confunde com stall de upload.
 Vídeo/probe/trilha precisam identificar a mesma ROM, janela e ação.
 
+O checkpoint temporal de `art-review.md` mantém seis eixos separados e é
+validado por `audit_art_review_checklist.py`. FPS/framebuffer corretos não
+aprovam força, ritmo ou continuidade percebida. Sem playback percebido,
+preservar candidata e `needs_evidence`; apresentar os intervalos ao dono sem
+regeneração ou revisão equivalente. O produto continua sem aceite nesse eixo.
+
 Ao interpretar um caso, usar `skills/sms-observed-case-evidence.md` e
 `audit_observed_cases.py` quando houver journal compatível. O assert deve
 reprovar direção errada, dano durante guarda, borda não atingida e ausência de

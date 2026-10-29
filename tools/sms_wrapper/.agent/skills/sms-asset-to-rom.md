@@ -91,10 +91,31 @@ simulator. `--reserve-blank` assigns the declared base tile as an all-zero
 pattern. Only use that slot as a blank BG tile if the scene's name table also
 references it; otherwise initialize the table with the actual stage map.
 
-The generated metasprites use 8×8 objects in `SPRITEMODE_NORMAL`. They are
-not a converter for the hardware 8×16 mode. If the project selects a different
-geometry or tile base, update the runtime contract and use matching generated
-geometry/manifests; never infer hardware geometry from the artist's canvas.
+The CLI example above emits 8×8 objects in `SPRITEMODE_NORMAL`. For authored
+samples, `prepare_authored_sprite_sample.py` uses the existing tall encoder by
+default and this canonical normal packer through explicit v2 `sprite_size`.
+Match runtime mode, tile base, generated geometry and scene manifests; never
+infer hardware geometry from the artist's canvas.
+
+Choose geometry from the whole pair in both orientations: 8×16 can reduce SAT
+while increasing resident patterns or scanline overlap. Transparent packing
+phase compensated in META can change interval overlap without changing PNGs;
+it is not permission to omit cells, narrow the blade or resize the wide pose.
+Measure SAT, scanlines and residency again after registration or reflection.
+Check actual opaque sole after nearest rounding (`expected_opaque_bottom_px`
+where applicable), not only nominal pivot. Airborne/authored travel needs its
+own registration contract; do not force all poses to a single foot location.
+
+Bind material-index remaps to the exact source SHA and shared P1. Inspect every
+region using the index: an entry shared by cloth and skin affects both. Record
+affected indices/materials and reinspect all affected poses. Neither palette
+membership nor pixel-exact framebuffer proves material placement.
+
+A failed conversion may preserve diagnostic PNGs, a partial header and a
+report. Only a successful invocation with complete pose/duration tables and
+all legal compositions is a candidate. Do not build from leftover files merely
+because they exist. Tests in `tests/test_authored_sprite_sample.py` exercise
+scale preservation, material remaps, grid compensation and both orientations.
 
 ## 3. Initialize the display and measure hardware use
 
