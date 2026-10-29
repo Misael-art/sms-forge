@@ -1,5 +1,46 @@
 # 10-memory-bank — master_of_fighters
 
+## Checkpoint temporal do proprietário — v4 preservada
+
+Pedido atual: decidir este corte antes de ampliar conteúdo. Controle no commit
+`e67360735f7438091893eb38522211d32d091eea`; fontes, ROMs, exposições e evidências
+preservadas. Conferência de identidade: 26 referências do parecer/manifesto,
+três ROMs e SHA do RGB nativo coincidem. Índice com hashes e intervalos em
+`out/diagnostics/hayato_short_cut_v2/final_review_v4/owner_checkpoint.json`.
+Não houve build, captura, geração ou nova revisão equivalente neste checkpoint.
+
+Mídias para assistir, distinguindo sua origem:
+
+- Framebuffer real, velocidade normal: `out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.mp4` (256×192; Hayato à direita).
+- Mesmo framebuffer, reprodução lenta 4×: `rom_slow.apng` no mesmo diretório. É um derivado da gravação existente, não outra execução da ROM.
+- Comparação da fonte anterior/atual: `out/diagnostics/hayato_short_cut_v2/final_review_v4/before_after_normal.apng` e `before_after_slow.apng`. Mostram arte-fonte, não framebuffer.
+- Poses convertidas identificadas, ambos os sentidos: `out/diagnostics/hayato_short_cut_v2/sms_v4_review.png`. É prancha estática da conversão.
+
+Exposições apresentadas em frames: R01 preparação 4, R02 liberação 1,
+R03 execução 2, R04 absorção 3, R05 retorno 1, R06 recuperação 3 e guarda 21
+entre ações. No primeiro ciclo completo do MP4, R03 ocupa quadros 38–39,
+R04 40–42, R05 43, R06 44–46 e guarda 47–67 (índices começando em 0).
+Tempos aproximados: absorção 0,634–0,718 s; retorno 0,668–0,784 s. São posições
+no arquivo, não medição de pacing por frame.
+
+| Questão | Observado em quadros | Hipótese a julgar continuamente | Menor intervenção se o dono identificar falha |
+|---|---|---|---|
+| A: R03→R04 | R04 é mais baixa e tem 3 ticks após 2 de R03 | Absorção/desaceleração pode ler como repetição | Testar holds com desenhos atuais somente se for exposição; corrigir a pose responsável se for trajetória/postura |
+| B: R04→R05→R06→guarda | Retorno cruzado de 1 tick, recuperação alta de 3 ticks e guarda original presentes | Retorno pode parecer outro movimento de espada | Isolar a transição apontada; holds se ritmo, pose responsável se trajetória |
+| C: apoios, peso, arma e preparação | Equipamento inteiro e chão comum; R01 difere da guarda | Contato, transferência de peso, continuidade e anúncio de um único corte ainda exigem playback | Corrigir apenas pose responsável se houver apoio/arma incorretos; não esconder construção com duração |
+
+Recomendação atual: **manter v4 como controle, sem delta artístico ou de timing**.
+Isto preserva a candidata; não é aceite temporal. Nenhum defeito concreto em
+movimento foi observado por este agente, cuja interface não oferece percepção
+contínua. O parecer independente existente continua `needs_evidence`, sem novo
+defeito estático identificado. Igualdade de framebuffer/FPS não fecha A/B/C.
+
+Única solicitação ao proprietário: assistir às mídias exatas e responder A
+absorve/repete, B recupera/parece outro corte e C apoios/arma/preparação
+convincentes ou não, citando a transição que falhar. Só depois escolher manter,
+ajustar exposições ou corrigir pose específica. Não regenerar, acrescentar
+quadros/efeitos ou convocar revisões equivalentes para preencher esta limitação.
+
 ## Lote corrente — corte corporal, fonte v4 e ROMs novas
 
 Fonte atual: `data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png`. Seis poses R01–R06,14ticks provisórios
