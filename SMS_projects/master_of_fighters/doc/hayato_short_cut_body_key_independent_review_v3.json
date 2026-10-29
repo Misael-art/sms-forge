@@ -1,0 +1,313 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "requested_stage": "diagnostic_action_key_and_static_SMS",
+  "producer": "/root",
+  "reviewer": "/root/hayato_cut_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_source_art_and_static_conversion_review",
+  "status": "revise_before_growth",
+  "request_id": "hayato-body-short-cut-key-v3",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_key_review_request_v3.json",
+    "sha256": "7b907ab0138116798d8870615c8308ce9bd79bbeb92090cb207afe1044b08aad"
+  },
+  "reviewed_at_utc": "2026-10-29T20:39:48.389874+00:00",
+  "approval_scope": "SourceR03v3passes static art, previous rear-support horizontal blocker closed; exact supplied convertedPNG materials pass limited static review. One new vertical registration blocker in both converted orientations prevents passing the complete source+SMScheckpoint. No complete animation or runtime approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+      "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+      "observed_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v3/native/R03.png",
+      "sha256": "c42b2cef98fa87f235941bc0e12dbb0055b21013d849f4068e4b9fcaa6cb28bf",
+      "observed_sha256": "c42b2cef98fa87f235941bc0e12dbb0055b21013d849f4068e4b9fcaa6cb28bf"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_source_comparison.png",
+      "sha256": "089e7ffafb5102746d28e871d75e525375460e6cb8b35e6fc24c029caae3b0d1",
+      "observed_sha256": "089e7ffafb5102746d28e871d75e525375460e6cb8b35e6fc24c029caae3b0d1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_left/pair_preview4x.png",
+      "sha256": "30cc9125a5b88766231d7e748fc32d6259cc88f2d9264d3b11fac1c538a6f358",
+      "observed_sha256": "30cc9125a5b88766231d7e748fc32d6259cc88f2d9264d3b11fac1c538a6f358"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_right/pair_preview4x.png",
+      "sha256": "441220906d8a842b930979948cfca50d5ba931850b48f2a41127a747070ab02e",
+      "observed_sha256": "441220906d8a842b930979948cfca50d5ba931850b48f2a41127a747070ab02e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_left/conversion.json",
+      "sha256": "4dfa3975b3d9cba389e43625883f85c2a3cf098424c23c6d7621ff2ef5fd484a",
+      "observed_sha256": "4dfa3975b3d9cba389e43625883f85c2a3cf098424c23c6d7621ff2ef5fd484a"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_right/conversion.json",
+      "sha256": "93bc774d6246eaec354f0a4a343223d384afd65f05f49c7e2023df02618ff4a3",
+      "observed_sha256": "93bc774d6246eaec354f0a4a343223d384afd65f05f49c7e2023df02618ff4a3"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_key_independent_review_v2.json",
+      "sha256": "a4b69869d2778ab3a7b79b36ed1edbd61f30400246909f51d741119c980aa81e",
+      "observed_sha256": "a4b69869d2778ab3a7b79b36ed1edbd61f30400246909f51d741119c980aa81e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v3/strike_extraction_recipe.json",
+      "sha256": "7fcaec860b2701c4c9defe7466b41f97e9319b4e2a367720721669fcc6fdff71",
+      "observed_sha256": "7fcaec860b2701c4c9defe7466b41f97e9319b4e2a367720721669fcc6fdff71"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_left/idle.png",
+      "sha256": "aea87b8c3deda88cb51619869530cc2e1955c3b90699379be355efb6b1c98bd1",
+      "observed_sha256": "aea87b8c3deda88cb51619869530cc2e1955c3b90699379be355efb6b1c98bd1",
+      "role": "Frozen conversion-linked nativePNG inspected independently"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_left/R03.png",
+      "sha256": "2ca8e4ea34237bcbe0ff763f9d379aac3bfa3d15d5035993d5de1274c1a89a3a",
+      "observed_sha256": "2ca8e4ea34237bcbe0ff763f9d379aac3bfa3d15d5035993d5de1274c1a89a3a",
+      "role": "Frozen conversion-linked nativePNG inspected independently"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_left/reference.png",
+      "sha256": "ce956fe51fe159afeef292655a024dd473bfa6009612268fb948d231947be432",
+      "observed_sha256": "ce956fe51fe159afeef292655a024dd473bfa6009612268fb948d231947be432",
+      "role": "Frozen conversion-linked nativePNG inspected independently"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_right/idle.png",
+      "sha256": "9ec30e51ab2165e7677ee826a947210083f7397a6185ad56883cd972931cc426",
+      "observed_sha256": "9ec30e51ab2165e7677ee826a947210083f7397a6185ad56883cd972931cc426",
+      "role": "Frozen conversion-linked nativePNG inspected independently"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_right/R03.png",
+      "sha256": "2d0881025c071f167aac7a0c4512c392c5e61d1ed7396a1d8073ed7c193bc4fc",
+      "observed_sha256": "2d0881025c071f167aac7a0c4512c392c5e61d1ed7396a1d8073ed7c193bc4fc",
+      "role": "Frozen conversion-linked nativePNG inspected independently"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/key_v3_right/reference.png",
+      "sha256": "9ae6af2a4900fd8e613c81792f66d98b319bc634aa9cd8ffe63f94b7d43fddbd",
+      "observed_sha256": "9ae6af2a4900fd8e613c81792f66d98b319bc634aa9cd8ffe63f94b7d43fddbd",
+      "role": "Frozen conversion-linked nativePNG inspected independently"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v3/strike_generated_raw.png",
+      "sha256": "d0554535f31e17054e524b98b2777a19ea30acb17febcaafbb7d8e0255943f41",
+      "observed_sha256": "d0554535f31e17054e524b98b2777a19ea30acb17febcaafbb7d8e0255943f41",
+      "role": "Recipe-bound creation image for full equipment and arm-chain inspection"
+    }
+  ],
+  "review_axes": {
+    "identity_and_face": {
+      "status": "pass",
+      "note": "Face, youthful slender body, tied dark hair/red ribbon, white kimono/orange-red hakama and concentrated gaze remain Hayato of the guard. Head lowering follows deliberate crouch/lean, not a smaller individual body fit."
+    },
+    "morphology_and_segment_scale": {
+      "status": "pass",
+      "note": "Head/arm/shin apparent scale remains coherent with originalguard and prior key. Knees and pelvis compress and trunk inclines; no gross resizing identified. Same1/10recipe is corroborating process information, not the reason for visual pass."
+    },
+    "pose_anatomy_and_joint_continuity": {
+      "status": "pass",
+      "note": "Both shoulder–elbow–forearm–wrist chains remain connected after hand/angle revision. Kimono overlaps explain the arm crossings. Bent legs and exposed ankles support the crouched waist without extra joints or broken limbs."
+    },
+    "body_driven_gesture": {
+      "status": "pass_limited",
+      "note": "Lower compressed waist, tilted shoulders/trunk, forward/down head and flexed knees remain active, unlike upright guard. Steeper katana did not revert the figure to sword-only movement. Temporal hip-leading and force not observed."
+    },
+    "rear_support_continuity_source": {
+      "status": "pass_limited",
+      "note": "Previous horizontal deviation corrected: sole sampling rows123–125rear guard[26,123,41,126], v3[27,123,39,126], centers33.5→33.0px. Sandal narrows/turns but no remaining whole-foot outward slide visible statically; neighboring shin/knee and full pose inspected too. Not a pixel-identity requirement or playback proof."
+    },
+    "grounding_source": {
+      "status": "pass_limited",
+      "note": "Pose isolated remains grounded and anatomically plausible. Rear lastsole row125matches guardrear; v3front lastrow125versus guardfront126. That one-row terminal difference survives conversion and needs explicit optical registration, see B01. Nominal pivot alone does not approve baseline."
+    },
+    "pixel_clusters": {
+      "status": "pass",
+      "note": "Hard-edged cloth planes and contour retain established source finish. No new blur/dither or stray marks identified as blocker in the delivered native sprite."
+    },
+    "face_detail_readability": {
+      "status": "pass_limited",
+      "note": "Source1xandNNretain gaze/face/fringe. SMSface/expression simplify into few pixels; still recognizable, no new facial mark judged blocking in these exact frames."
+    },
+    "outline_and_cutout": {
+      "status": "pass",
+      "note": "Source light/dark native/NNand both converted PNGs preserve full hair, blade point, scabbard cap and feet. No crop truncation or intentionally omitted terminal identified."
+    },
+    "material_shading": {
+      "status": "pass",
+      "note": "Source and staticSMSretain warm skin, white-gray kimono, orange-red hakama/sash distinction, dark hair/scabbard, neutral blade and metal accents."
+    },
+    "material_shadow_flow_coherence": {
+      "status": "pass",
+      "note": "Sleeve planes follow changed arm position and hakama planes follow knee/waist compression; coherent clothing volumes and shared lighting remain."
+    },
+    "semantic_palette_role_confinement": {
+      "status": "pass_for_exact_PNGs",
+      "note": "Reviewed mappings5→42,13→21,26→0on exact left/right derivatives. White remains neutral, steel/outline remain distinct. Index13has mixed source shadow use in neck/hair/cloth: inspected its upper-body locations and resulting native/NNappearance. No blocking gray skin/neck/hair contamination seen; no universal approval for upcoming poses."
+    },
+    "hand_weapon_attachment": {
+      "status": "pass",
+      "note": "Native/raw/NNinspection traces two distinct hands on one grip behind the guard, then the continuous blade. Raised/reoriented hands remain supported by arms. NativeSMScompresses separation but does not show new floating hand or attachment break."
+    },
+    "equipment_geometry": {
+      "status": "pass_limited",
+      "note": "Source blade and point remain complete and rigid-looking, steeper rather than visibly chopped; no unequivocal shortening identified in visual comparison to guard and previous key. Scabbard has complete attachment/body/cap. This is projected visual continuity, not physical length certification from bbox or prompt."
+    },
+    "frame_pose_integrity": {
+      "status": "pass_limited",
+      "note": "R03remains a downward diagonal execution with body compression, not cloned guard. Single key cannot establish cut trajectory or recovery continuity."
+    },
+    "native_size_readability": {
+      "status": "pass_for_static_silhouette_materials",
+      "note": "Source144x144and exact converted80x80PNGviewed natively and NN; costume, direction, silhouette and complete equipment read. Thin blade highlights and grip/face details simplify and require full-motion/nativeROMjudgement later."
+    },
+    "roster_harmony_static": {
+      "status": "pass_limited",
+      "note": "Hayato/Social pairing remains coherent in line/material treatment and common conversion scale. Socialreference hashes remain the established exact left/right PNGs; no hardware or new runtime inferred."
+    },
+    "SMS_vertical_registration": {
+      "status": "fail",
+      "note": "Both R03converted masks end at y70(last opaque), versus idle/reference y71. With declared same scene originY72, R03terminates one pixel above common floor. See B01; body/palette aesthetics do not close this."
+    },
+    "continuous_motion": {
+      "status": "pending",
+      "note": "Remaining5poses not present, no new complete normal/slow playback perceived. No approval of rhythm, force, recovery, planted-foot motion or temporal mixed-material flicker."
+    },
+    "ROM_PAL_FPS_owner": {
+      "status": "pending",
+      "note": "No emulator/video/newROM, PALtiming, FPS/VBlank, owner approval, competitive frame data or promotion reviewed."
+    }
+  },
+  "closed_defects": [
+    {
+      "prior_report": {
+        "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_key_independent_review_v2.json",
+        "sha256": "a4b69869d2778ab3a7b79b36ed1edbd61f30400246909f51d741119c980aa81e"
+      },
+      "id": "B01_v2",
+      "axis": "rear_support_horizontal_continuity",
+      "status": "closed_for_v3_static_source",
+      "note": "Rear sole returns to canonical support area and center within0.5sourcepixel by declaredROI, with plausible leg/foot orientation. Prior negative report intact. This does not close the separate vertical-conversion finding below."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B01",
+      "priority": 1,
+      "domain": "art",
+      "kind": "defect",
+      "severity": "blocker",
+      "scope": "R03staticSMSvertical registration, both orientations",
+      "axes": [
+        "SMS_vertical_registration"
+      ],
+      "summary": "R03bottom is one SMS pixel above guard/Social at the same scene origin.",
+      "evidence": "Leftidle alpha bbox[14,6,49,72], R03[14,22,54,71], reference[19,13,48,72]; rightidle[16,6,51,72], R03[11,22,51,71], reference[17,13,46,72], exclusive coordinates. Therefore R03lastopaque70versus71. Origins allY72in frozen conversion: R03worldlast142versus commonlast143. Native sourceR03last125andguardlast126explain the projection; current previews retain the difference.",
+      "consequence": "Static actor appears a pixel above the pair baseline and changing guard→R03would introduce a one-pixel optical lift beyond the intentional body crouch. Hardware legality cannot fix or certify contact.",
+      "required_delta": "Use the official declared per-pose optical registration/pivot mechanism to align this terminal baseline, preserving source pixels, scale, complete blade and body articulation. Recheck original rear contact, frontsole and whole pair after the1pxcompensation. If source rather than registration is changed, freeze a new source and re-review; do not silently repaint/fit or relabel these hashes.",
+      "closure": "New immutable corrected conversion/preview hashes for both orientations, exact terminal comparison and visual whole-pair/native/NNreview. Later motion still requires observation."
+    },
+    {
+      "priority": 2,
+      "domain": "animation",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "Upcoming complete sequence nativeSMS",
+      "summary": "Thin blade highlight, face and grip lose microdetail after reduction.",
+      "required_delta": "Preserve body/equipment silhouette and inspect native complete motion for broken-looking blade or material flicker. Source clarity, legal cell count and steadyFPScannot substitute for perceived continuity."
+    }
+  ],
+  "observed_geometry": {
+    "coordinate_policy": "Native image coordinates, bboxexclusive; descriptive pixel inspection only, not an anatomy or pressure measurement",
+    "source_soles_roi_y": [
+      123,
+      126
+    ],
+    "guard": {
+      "rear": [
+        26,
+        123,
+        41,
+        126
+      ],
+      "front": [
+        87,
+        123,
+        106,
+        127
+      ]
+    },
+    "R03v3": {
+      "rear": [
+        27,
+        123,
+        39,
+        126
+      ],
+      "front": [
+        86,
+        123,
+        106,
+        126
+      ]
+    },
+    "source_pivot": [
+      68,
+      127
+    ],
+    "SMS_pivot": [
+      32,
+      72
+    ],
+    "source_terminal_note": "Rear horizontal correction is good; front terminal one row higher than original guard, cannot infer commonbaseline from pivot alone."
+  },
+  "provided_hardware_scope": {
+    "reported_by_frozen_conversion": {
+      "R03_pair_peak_both": 8,
+      "R03_pair_SAT": 30,
+      "guard_pair_peak": 7,
+      "guard_pair_SAT": 32,
+      "resident_patterns": 96
+    },
+    "independently_measured_by_reviewer": false,
+    "note": "Read frozen conversion metadata only; no packer/simulator/self-check measurement or ROM run performed by reviewer. These numbers did not determine artistic pass/fail."
+  },
+  "full_source_conclusion": {
+    "source_art_static": "passed",
+    "rear_horizontal_B01_v2": "closed",
+    "static_SMS_materials_silhouette_equipment": "passed_for_exact_supplied_PNGs",
+    "static_SMS_common_baseline": "revise_one_pixel_before_expanding",
+    "source_promoted": false,
+    "owner_approval": false,
+    "continuous_motion": "not_observed",
+    "ROM": "not_observed"
+  },
+  "inspection_evidence": [
+    "All9frozen inputs matched hashes at start and immediately before writing.",
+    "Native source and source4xcomparison viewed; source light/dark board and creationrawused for face, both arm/grip chains, blade/scabbard and support.",
+    "All6conversion-linked idle/R03/reference nativePNGs opened individually; both pair4xpreviews and light-backgroundR03NN4pair inspected.",
+    "Actual palette entries5/13/26read; index13upper-body locations examined with final native/NNvisual result, not accepted merely because map was declared.",
+    "Read-only sole/bbox comparisons identified the1pxdifference without changing inputs. One attempted in-memory larger panel failed to render; smaller NN4panel was displayed successfully; no persistent panel file created."
+  ],
+  "limits": [
+    "Only this report is written. No source, metadata, conversion, Git, memory, generation, build or emulator change.",
+    "No continuous playback, final fullsequence, AAA, owner, production, PAL/FPS/VBlank, competitive or delivery claim.",
+    "No approving newly corrected conversion by reusing these hashes; request fresh immutable references after registration fix."
+  ],
+  "next_checkpoint_priorities": [
+    "Correct1pxoptical terminal registration through existing official mechanism and inspect both fixed pairs.",
+    "Retain passed body-driven source and full equipment; remaining5poses must be individually reviewed, with their own mixed13material uses.",
+    "Observe complete normal/slow motion and freshROMseparately before any sequence/runtime promotion."
+  ]
+}

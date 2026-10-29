@@ -1,0 +1,113 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "hayato-cps2-short-cut-v04",
+  "producer": "/root",
+  "asset": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+    "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/source_assembly.json",
+    "sha256": "930538caa8fb8c6402b17a7acacc03e68bfda9046947d1ecec4c5aea297c99c3"
+  },
+  "required_characters": [
+    "hayato"
+  ],
+  "required_axes": [
+    "equipment_geometry",
+    "face_detail_readability",
+    "frame_pose_integrity",
+    "hand_weapon_attachment",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "native_size_readability",
+    "outline_and_cutout",
+    "pixel_clusters",
+    "semantic_palette_role_confinement",
+    "choreography_static_progression",
+    "continuous_motion_normal_speed",
+    "timing_spacing_perception"
+  ],
+  "characters": [
+    {
+      "id": "hayato",
+      "references": [
+        {
+          "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+          "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+        }
+      ],
+      "observed_defects": [],
+      "revision_notes": [
+        "R02 complete slender blade, optical sole registration; R03 authored local hair delta. Prior attempts and negative reviews preserved."
+      ],
+      "review_axes": {
+        "equipment_geometry": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "face_detail_readability": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "frame_pose_integrity": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "hand_weapon_attachment": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "material_shading": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "native_size_readability": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "outline_and_cutout": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "pixel_clusters": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "choreography_static_progression": {
+          "status": "pass",
+          "note": "Independent full-source v3 and source/SMS v4 addendum; static inspection only, see hash-bound reports."
+        },
+        "continuous_motion_normal_speed": {
+          "status": "pending",
+          "note": "Real-time ROM video exists; continuous perceived force, rhythm and normal-speed reading require explicit observation. Exact frames and FPS do not close this axis."
+        },
+        "timing_spacing_perception": {
+          "status": "pending",
+          "note": "Real-time ROM video exists; continuous perceived force, rhythm and normal-speed reading require explicit observation. Exact frames and FPS do not close this axis."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "passed",
+    "reviewer": "/root/hayato_cut_art_review",
+    "report": {
+      "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+      "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+    }
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "approval_scope": "Static candidate; final movement/owner promotion pending"
+}

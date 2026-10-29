@@ -8,7 +8,8 @@ The real consumer is built separately by build_inner.py, with its pre-gates.
 
 v1 freezes Social's six-pose diagnostic contract. v2 accepts explicit action
 IDs/durations, a common roster scale, layout/facing and optional source-index
-material codes. Material overrides are scoped by PNG SHA/config, never by a
+material codes. Explicit v2 sprite_size=8x8 uses the existing normal packer;
+defaults remain tall and byte-stable. Overrides are scoped by PNG SHA/config, never by a
 character name; shared indices must be reviewed in every affected material.
 """
 from __future__ import annotations
@@ -32,7 +33,9 @@ from mugen2sms.converters.sms_tiles import to_sms_pose  # noqa: E402
 from mugen2sms.generators.runtime_format import pack_tiles_tall, build_frames  # noqa: E402
 from mugen2sms.generators.scene_cut import _remap_blob, _compact_facing_pose  # noqa: E402
 from mugen2sms.parsers.sff import Sprite  # noqa: E402
-from pack_sms_metasprite import header_text, safe_sprite_pattern_capacity  # noqa: E402
+from pack_sms_metasprite import (  # noqa: E402
+    header_text, safe_sprite_pattern_capacity, pack_poses,
+)
 
 
 def sha(path: Path) -> str:
@@ -213,11 +216,93 @@ def map_source_indices(sprite: Sprite, codebook: list[int], overrides: dict | No
                  for index in sprite.pixels)
 
 
+def pack_registered_eight(paths, phases, output: Path, capacity: int):
+    """Use the existing 8x8 packer; translate its grid, never visible pixels.
+
+    Packing PNGs are explicit intermediates. The public converted PNGs retain
+    their original canvas/pivot. Only transparent margins are omitted here.
+    """
+    if not paths or len(paths) != len(phases):
+        raise ValueError('8x8 packing needs one phase per pose')
+    images = []
+    for (name, path), phase in zip(paths, phases):
+        if (not isinstance(phase, (list, tuple)) or len(phase) != 2 or
+                any(type(n) is not int or not 0 <= n < 8 for n in phase)):
+            raise ValueError('8x8 packing_phase_px needs x/y=0..7 integers')
+        with Image.open(path) as original:
+            image = original.copy()
+        bbox = image.getbbox()  # indexed zero alone is transparent
+        if not bbox:
+            raise ValueError('8x8 packing cannot consume an empty pose')
+        images.append((name, image, bbox, phase))
+    width = max((bbox[2] + phase[0] + 7) // 8 * 8
+                for _, _, bbox, phase in images)
+    height = max((bbox[3] + phase[1] + 7) // 8 * 8
+                 for _, _, bbox, phase in images)
+    if width > 128 or height > 128:
+        raise ValueError('8x8 packing canvas exceeds unsigned sample offsets')
+    packing_dir = output / 'packing_8x8'
+    packing_dir.mkdir()
+    packing_paths = []
+    for name, image, bbox, (px, py) in images:
+        padded = Image.new('P', (width, height))
+        padded.putpalette(image.getpalette())
+        padded.paste(image.crop(bbox), (bbox[0] + px, bbox[1] + py))
+        path = packing_dir / f'{name}.png'
+        padded.save(path, transparency=0, bits=8)
+        packing_paths.append((name, path))
+    packed = pack_poses(packing_paths, reserve_blank=True, max_patterns=capacity)
+    for pose, (_, _, _, (px, py)) in zip(packed['poses'], images):
+        meta = []
+        for obj in pose['objects']:
+            obj['x'] -= px
+            obj['y'] -= py
+            if not (0 <= obj['x'] < 128 and 0 <= obj['y'] < 128):
+                raise ValueError('packing phase requires signed offsets unsupported by sample emitter')
+            meta.extend((obj['x'], obj['y'], obj['tile']))
+        pose['meta'] = meta + [128]
+        pose['counts'] = [sum(obj['y'] <= line < obj['y'] + 8
+                              for obj in pose['objects']) for line in range(192)]
+        pose['peak_scanline'] = max(pose['counts'])
+    return packed
+
+
+def pack_resident_tall(encoded, codebook, capacity):
+    """Unchanged tall-pair residency policy shared by v1/v2 defaults."""
+    pool = bytearray(64)
+    pair_ids = {bytes(64): 0}
+    packed_poses = []
+    for name, blob, meta, left, top in encoded:
+        rewritten, objects = [], []
+        for n in range(0, len(meta) - 1, 3):
+            pair = blob[meta[n + 2] * 32:meta[n + 2] * 32 + 64]
+            if pair not in pair_ids:
+                if len(pool) + 64 > capacity * 32:
+                    raise ValueError('resident tall pairs exceed the physical sprite window')
+                pair_ids[pair] = len(pool) // 32
+                pool.extend(pair)
+            x, y, tile = left + meta[n], top + meta[n + 1], pair_ids[pair]
+            if not (0 <= x < 128 and 0 <= y < 128):
+                raise ValueError('packing phase requires signed offsets unsupported by sample emitter')
+            rewritten.extend([x, y, tile])
+            objects.append({'x': x, 'y': y, 'tile': tile})
+        if len(objects) > 64:
+            raise ValueError('tall pose exceeds SAT capacity')
+        packed_poses.append({'name': name, 'meta': rewritten + [128], 'objects': objects,
+                             'tile_map': [o['tile'] for o in objects]})
+    return {'tile_base': 0, 'loaded_patterns': len(pool) // 32, 'tile_bytes': bytes(pool),
+            'palette_codes': ([0] + codebook + [0] * 16)[:16], 'poses': packed_poses}
+
+
 def prepare(config_path: Path, output: Path) -> dict:
     cfg = json.loads(config_path.read_text())
     version = cfg.get('schema')
     if version not in ('sms_authored_sprite_sample_v1', 'sms_authored_sprite_sample_v2'):
         raise ValueError('expected sms_authored_sprite_sample_v1 or v2')
+    sprite_size = cfg.get('sprite_size', '8x16')
+    if sprite_size not in ('8x16', '8x8') or (version.endswith('v1') and sprite_size != '8x16'):
+        raise ValueError('sprite_size must be 8x16, or explicit v2 opt-in 8x8')
+    sprite_height = 8 if sprite_size == '8x8' else 16
     if output.exists():
         raise FileExistsError('preserving sealed output; choose a new candidate destination')
     root = (config_path.parent / cfg.get('project_root', '.')).resolve()
@@ -310,6 +395,13 @@ def prepare(config_path: Path, output: Path) -> dict:
         small = Image.frombytes('P', (sprite.width, sprite.height), indices)
         small.putpalette(im.getpalette())
         im.paste(small, (left, top))
+        expected_bottom = spec.get('expected_opaque_bottom_px')
+        if expected_bottom is not None:
+            if (type(expected_bottom) is not int or not 1 <= expected_bottom <= height):
+                raise ValueError(f'{name}: expected_opaque_bottom_px must be inside the canvas')
+            actual_bottom = im.getbbox()[3]
+            if actual_bottom != expected_bottom:
+                raise ValueError(f'{name}: opaque bottom {actual_bottom} != expected {expected_bottom}; recheck source registration')
         path = output / f'{name}.png'
         im.save(path, transparency=0, bits=8)
         paths.append((name, path))
@@ -319,6 +411,8 @@ def prepare(config_path: Path, output: Path) -> dict:
                        'placement': [left, top], 'peak_tall': sat_row_peak(sprite)})
         if spec.get('palette_index_codes'):
             frames[-1]['palette_index_codes'] = spec['palette_index_codes']
+        if sprite_height == 8:
+            continue
         # Keep each cropped pose's hardware grid, then translate its metadata
         # to the common pivot. Padding the bitmap before packing adds a fifth
         # cell at unaligned margins and differs from the reference recipe.
@@ -337,33 +431,14 @@ def prepare(config_path: Path, output: Path) -> dict:
     # All eight poses remain resident, no streaming or deadline proxy. Reuse
     # the canonical tall pair encoder/compactor; this is just static residency.
     capacity = safe_sprite_pattern_capacity(0, 0x0000, 0x3800)
-    pool = bytearray(64)
-    pair_ids = {bytes(64): 0}
-    packed_poses = []
-    for name, blob, meta, left, top in encoded:
-        rewritten, objects = [], []
-        for n in range(0, len(meta) - 1, 3):
-            pair = blob[meta[n + 2] * 32:meta[n + 2] * 32 + 64]
-            if pair not in pair_ids:
-                if len(pool) + 64 > capacity * 32:
-                    raise ValueError('resident tall pairs exceed the physical sprite window')
-                pair_ids[pair] = len(pool) // 32
-                pool.extend(pair)
-            x, y, tile = left + meta[n], top + meta[n + 1], pair_ids[pair]
-            # This sample emitter adds unsigned offsets before SMS_addSprite.
-            # The SDK's checked Y argument is 16-bit: encoding -4 as252 would
-            # submit324 rather than68 at origin72. Reject that representation
-            # instead of claiming byte wrap or changing the measured emitter.
-            if not (0 <= x < 128 and 0 <= y < 128):
-                raise ValueError('packing phase requires signed offsets unsupported by sample emitter')
-            rewritten.extend([x, y, tile])
-            objects.append({'x': x, 'y': y, 'tile': tile})
-        if len(objects) > 64:
-            raise ValueError('tall pose exceeds SAT capacity')
-        packed_poses.append({'name': name, 'meta': rewritten + [128], 'objects': objects,
-                             'tile_map': [o['tile'] for o in objects]})
-    packed = {'tile_base': 0, 'loaded_patterns': len(pool) // 32, 'tile_bytes': bytes(pool),
-              'palette_codes': ([0] + codebook + [0] * 16)[:16], 'poses': packed_poses}
+    if sprite_height == 8:
+        phases = [s.get('packing_phase_px', [0, 0]) for s in specs + [ref]]
+        packed = pack_registered_eight(paths, phases, output, capacity)
+        for frame, pose, phase in zip(frames, packed['poses'], phases):
+            frame['source_grid_peak_tall'] = frame.pop('peak_tall')
+            frame.update(packing_phase_px=list(phase), peak_8x8=pose['peak_scanline'])
+    else:
+        packed = pack_resident_tall(encoded, codebook, capacity)
     header = output / 'sample_data.h'
     header.write_text(header_text(packed, 'sample'))
     positions = [tuple(positions_cfg[0])] * len(fitted) + [tuple(positions_cfg[1])]
@@ -374,12 +449,12 @@ def prepare(config_path: Path, output: Path) -> dict:
                     for o in pose['objects']] +
                    [{'x': positions[-1][0] + o['x'], 'y': positions[-1][1] + o['y'], 'tile': o['tile']}
                     for o in reference_objects])
-        scene = {'schema': 'sprite_scene_manifest_v1', 'sprite_size': '8x16',
+        scene = {'schema': 'sprite_scene_manifest_v1', 'sprite_size': sprite_size,
                  'zoomed': False, 'screen_h': 192, 'sprites': objects}
         scene_path = output / f'scene_{pose["name"]}.json'
         scene_path.write_text(json.dumps(scene, indent=2) + '\n')
-        peak = max(sum(o['y'] <= line < o['y'] + 16 for o in objects) for line in range(192))
-        visible = all(0 <= o['x'] <= 248 and 0 <= o['y'] <= 176 and o['y'] != 0xD0
+        peak = max(sum(o['y'] <= line < o['y'] + sprite_height for o in objects) for line in range(192))
+        visible = all(0 <= o['x'] <= 248 and 0 <= o['y'] <= 192 - sprite_height and o['y'] != 0xD0
                       for o in objects)
         compositions.append({'id': pose['name'], 'sat': len(objects), 'peak': peak,
                              'scene': str(scene_path), 'legal': peak <= 8 and len(objects) <= 64 and visible})
@@ -397,6 +472,11 @@ def prepare(config_path: Path, output: Path) -> dict:
               'resident_window': '0x0000..0x1FFF (256 patterns, blank pair included); PNT 0x3800; SAT 0x3F00; BG blank tile 0 shared',
               'header': str(header), 'header_sha256': sha(header),
               'art_approval': 'pending', 'runtime_timing': 'unmeasured', 'worst_vblank': 'unmeasured'}
+    if sprite_height == 8:
+        report.update(sprite_size=sprite_size,
+                      source_to_sms='display_fit.scale_sprite + sms_tiles shared P1 + pack_sms_metasprite.pack_poses (8x8)',
+                      resident_window='0x0000..0x1FFF (256 patterns, one blank tile included); PNT 0x3800; SAT 0x3F00; BG blank tile 0 shared',
+                      packing_input_canvas=[packed['width'], packed['height']])
     (output / 'conversion.json').write_text(json.dumps(report, indent=2) + '\n')
     if not all(c['legal'] for c in compositions):
         raise ValueError('pair composition exceeds physical limits; see preserved conversion.json; do not build this pair')
@@ -407,6 +487,8 @@ def prepare(config_path: Path, output: Path) -> dict:
                      ''.join(f',{n}' for n in cfg['durations']) + '};\n')
         if version.endswith('v2'):
             stream.write(f'#define SAMPLE_POSE_COUNT {len(specs)}u\n')
+            if sprite_height == 8:
+                stream.write('#define SAMPLE_SPRITE_HEIGHT 8u\n')
             for name, point in zip(('ACTOR', 'REFERENCE'), positions_cfg):
                 stream.write(f'#define SAMPLE_{name}_X {point[0]}u\n#define SAMPLE_{name}_Y {point[1]}u\n')
     report['header_sha256'] = sha(header)
@@ -454,8 +536,50 @@ def phase_self_check():
             raise AssertionError('invalid grid phase accepted')
 
 
+def eight_self_check():
+    """Reconstruct all 64 grids from emitted planar data, opaque black too."""
+    import tempfile
+    from mugen2sms.generators.runtime_format import decode_indices
+    with tempfile.TemporaryDirectory(prefix='sms-authored-eight-') as tmp:
+        root = Path(tmp)
+        image = Image.new('P', (32, 32))
+        image.putpalette([0, 0, 0, 0, 0, 0, 255, 255, 255] + [0] * 759)
+        for y in range(11, 27):
+            for x in range(10, 24):
+                if (x + y) % 5:
+                    image.putpixel((x, y), 1 if x < 17 else 2)
+        path = root / 'fixture.png'
+        image.save(path, transparency=0)
+        expected = image.tobytes()
+        for px in range(8):
+            for py in range(8):
+                output = root / f'p{px}_{py}'
+                output.mkdir()
+                packed = pack_registered_eight([('fixture', path)], [[px, py]], output, 256)
+                actual = bytearray(32 * 32)
+                for obj in packed['poses'][0]['objects']:
+                    tile = obj['tile']
+                    pixels = decode_indices(packed['tile_bytes'][tile * 32:tile * 32 + 32])
+                    for offset, index in enumerate(pixels):
+                        if index:
+                            point = (obj['y'] + offset // 8) * 32 + obj['x'] + offset % 8
+                            assert not actual[point]
+                            actual[point] = index
+                assert bytes(actual) == expected
+                assert packed['palette_codes'][1] == 0  # opaque black, not omitted
+        output = root / 'capacity'
+        output.mkdir()
+        try:
+            pack_registered_eight([('fixture', path)], [[0, 0]], output, 1)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError('8x8 physical pattern limit not enforced')
+
+
 def self_check() -> int:
     phase_self_check()
+    eight_self_check()
     material = Sprite(0, 0, 0, 1, 3, 1, bytes([0, 1, 2]),
                       [(0, 0, 0), (223, 216, 212), (43, 25, 33)] + [(0, 0, 0)] * 253,
                       False, None, 0)
@@ -481,7 +605,7 @@ def self_check() -> int:
         pass
     else:
         raise AssertionError('invalid extra scale was accepted')
-    print('[SELF-CHECK OK] authored source adapter: all128grid phases render exact, source material mapping, opaque black, capacity, scale rejection')
+    print('[SELF-CHECK OK] authored source adapter: 128tall+64normal grids render exact, canonical8x8 packer, source material mapping, opaque black, capacity, scale rejection')
     return 0
 
 

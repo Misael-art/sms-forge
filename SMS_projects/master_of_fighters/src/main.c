@@ -21,6 +21,18 @@
 #include "../out/diagnostics/hayato_cps2_sample_v1/social_jab_left_baseline_v3/sample_data.h"
 #elif MOF_HAYATO_SAMPLE == 4
 #include "../out/diagnostics/hayato_cps2_sample_v1/social_jab_right_baseline_v3_mirrorphase/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 5
+#include "../out/diagnostics/hayato_short_cut_v1/registered_left/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 6
+#include "../out/diagnostics/hayato_short_cut_v1/registered_right/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 7
+#include "../out/diagnostics/hayato_short_cut_v2/converted_v3_left/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 8
+#include "../out/diagnostics/hayato_short_cut_v2/converted_v3_right/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 9
+#include "../out/diagnostics/hayato_short_cut_v2/converted_v4_left/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 10
+#include "../out/diagnostics/hayato_short_cut_v2/converted_v4_right/sample_data.h"
 #else
 #error Unknown Hayato diagnostic composition
 #endif
@@ -38,6 +50,9 @@
 #define SAMPLE_REFERENCE_X 152u
 #define SAMPLE_REFERENCE_Y 72u
 #endif
+#ifndef SAMPLE_SPRITE_HEIGHT
+#define SAMPLE_SPRITE_HEIGHT 16u
+#endif
 #ifndef MOF_SAMPLE_STRESS_BYTES
 #define MOF_SAMPLE_STRESS_BYTES 0
 #endif
@@ -45,8 +60,13 @@
 #error Stress upload exceeds the resident source data
 #endif
 SMS_EMBED_SEGA_ROM_HEADER(0, 0);
+#if defined(MOF_HAYATO_SAMPLE) && MOF_HAYATO_SAMPLE >= 5
+SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "Hayato cut sample",
+                              "Candidate guard and short cut, not gameplay");
+#else
 SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "Social CPS2 sample",
                               "Candidate idle and jab, not gameplay");
+#endif
 
 /* SMRT/worst-frame contracts; __at storage must be volatile and initialized.
  * The linker map is checked against this corridor before emulator readings. */
@@ -79,7 +99,11 @@ void main(void) {
     unsigned int keys;
     unsigned char vcnt;
     SMS_displayOff();
+#if SAMPLE_SPRITE_HEIGHT == 8
+    SMS_setSpriteMode(SPRITEMODE_NORMAL);
+#else
     SMS_setSpriteMode(SPRITEMODE_TALL);
+#endif
     SMS_useFirstHalfTilesforSprites(1);
     SMS_setBGPaletteColor(0, 0x15u);
     SMS_loadSpritePalette(sample_palette);

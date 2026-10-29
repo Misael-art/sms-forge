@@ -1,5 +1,54 @@
 # 15-tdd — master_of_fighters
 
+## Implementação corrente — fonte v4, sprite normal 8×8
+
+`prepare_authored_sprite_sample.py` mantém defaults v1/v2 tall. Opt-in v2
+`sprite_size=8x8` registra PNGs intermediários com padding transparente,
+chama `pack_sms_metasprite.pack_poses`, compensa fase no META e mantém PNGs
+públicos/pivôs/escala/P1. Um blanktile reservado; janela física256padrões.
+Source/PNGs não são redesenhados pelo código.20testes e self-check128tall+64normal
+conferem reconstrução exata inclusive preto opaco, limite e rejeições.
+Controle tall antigo reproduz header e3PNGs byte a byte; snapshot histórico
+284b15b preservado em out, sem tornar-se implementação concorrente.
+
+Main recebe seletores9/10 com headers converted_v4_left/right, macro de altura8
+para `SMS_setSpriteMode(SPRITEMODE_NORMAL=0)`; fallback16 continua tall1.
+Mesmo FSM/probes/input/SATemitter, poses7incluindoidle,14ticks.219padrões/7008B,
+max53SAT/pico8. Dados todos residentes com displayoff; rotina normal atualizaSAT,
+stress128 reenvia prefixo residente correto. Perfil atual medido: 3.000 frames
+selados em cada ROM, zero derrame, mínimo213 base e223 stress128; FPS base
+59,78/59,67 em duas janelas8s. Os números não são herdados do perfil anterior.
+`expected_opaque_bottom_px=80` rejeita registro stale antes de publicar header.
+
+Captura privada opt-in `capture_video.py --session ID --realtime --seconds 8`:
+callback RGB24 nativo de DisplayWindow durante run livre, sem stepping. O bridge
+bloqueia leitura/input/step enquanto grava; stop pausa/fecha/flush, confere bytes
+contra contagem nativa, codifica lossless e preserva bruto. Emulicious.jar original
+permanece intacto. Nesta ROM:480quadros/70.778.880B em8,0187s, todos coincidem com
+os sete PNGs legais; decode do MP4 tem o SHA do RGB bruto. Capture overhead e
+timebase nominal não certificam FPS; sonda em duas janelas separadas o mede.
+7 testes de custódia/erro da captura e20do adaptador passaram. Sem hitbox/dano/áudio.
+
+## Histórico: corte curto diagnóstico — Hayato, 2026-10-29
+
+Mesmo adaptador oficial v2 e runtime genérico. Nenhum conversor novo, nenhuma
+mudança no FSM de input ou renderer; apenas seleções5/6 e dados4poses+idle,
+SAMPLE_POSE_COUNT5 e durações0,3,2,2,5. Memória/probes continuam no corredor
+C7D2..C7F9,14sondas,folga1784B. ROMs32KiB,202patterns/6464B residentes no
+window0..1FFF,PNT3800,SAT3F00,tall8×16. PaletaP1 e bitmapSocial preservados.
+Fases conjuntas de grade foram planejadas para todos osframes em ambos os
+sentidos; max33SAT/pico8. Registro da sola-fonte e registro óptico de projeção
+foram conferidos antes de ROM: C01/C04 perderiam uma linha esparsa no nearest,
+por isso usam sourceanchorY126 sem mudar sourcepixels/scale. C03também126;
+guard/C02127. Referências/receitas/raws/assembly expõem uniform2/9raster das3
+poses de apoio e C02 original byte-idêntica, sem normalização individual.
+
+Configsativas .mddev/hayato_short_cut_sequence_v1_registered_{left,right}.json;
+manifestos hayato_short_cut_v1_{left,right,right_stress128}_build.json.
+Build/gates de recursos não aprovam timeline, throughput, VBlank ou qualidade.
+Medição será fresh no SHA escolhido; sem palco, áudio, hitboxes ou gameplay.
+A escala absoluta legada68–72px não é reclamada por este perfil diagnóstico.
+
 ## Hayato — adaptador v2 e diagnóstico do par, 2026-10-29
 
 Estendeu-se `tools/sms_wrapper/prepare_authored_sprite_sample.py`, sem segundo

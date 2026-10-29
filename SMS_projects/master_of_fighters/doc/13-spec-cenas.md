@@ -1,5 +1,30 @@
 # 13-spec-cenas — master_of_fighters
 
+## Composição corrente — corte corporal, fonte v4
+
+Mesmo par Hayato/Social sem cenário/HUD/áudio novos. P1 idêntica ao Socialv8,
+15códigos úteis, uma única escala comum. Perfil8×8 explícito no adaptador
+canônico:219padrões/7008B residentes em0..1FFF, PNT3800,SAT3F00, até53objetos
+naSAT e8/scanline nas14composições. QA de ambas as orientações apresenta236quadros
+exatos; vídeo nativo atual acrescenta480quadros exatos. VBlank selado3000frames:
+zero derrame, mínimo213 base/223 stress128; FPS59,78/59,67 no perfil base.
+Contagens estáticas, reprodução correta e throughput não aprovam expressividade.
+Canvas88×88/pivô40,80, origens24/136,64 mantêm pixels na mesma tela/solo144.
+Fases por pose e orientação estão nas receitas, sem omitir células visíveis.
+Não aplicar budget histórico8×16 ou aprovação da guarda a esta sequência.
+
+## Histórico: Hayato corte curto × guarda Social — diagnóstico 2026-10-29
+
+Fonte4poses, mesma transformação x2/3,y6/7+extra2/3 e P1 da guarda anterior.
+PGcanvas80×80,pivôSMS32,72;origens32,72 e144,72 invertidas noespelho.
+Âncoras ópticas C01/C03/C04y126,guard/C02y127; todos osPNGs terminam72,
+portanto últimaopaca143 no runtime.202patterns/6464B,33SAT máximo,pico8;
+estas são contagens do emissor estático, não orçamento de VBlank observado.
+Todos osframesresidentes, base atualiza sóSAT. Próximo degrau128B prefixo
+residente correto, sem mudança visual. ROM e entrada/holds precisam de QA nova.
+Não herdar FPS/VBlank do checkpoint estático. Fonte/previews e controles em
+out/diagnostics/hayato_short_cut_v1/, próximo aceite no memorybank atual.
+
 ## Par diagnóstico Hayato + Dr. Social — 2026-10-29
 
 GuardaHayato v2,source0b72e603…,materialmap2,registrobaseline3. Quatro pares:

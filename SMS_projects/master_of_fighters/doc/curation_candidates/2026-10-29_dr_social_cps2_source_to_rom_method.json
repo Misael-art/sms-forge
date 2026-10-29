@@ -268,9 +268,86 @@
     "final_derivative_review": "SMS_projects/master_of_fighters/doc/hayato_cps2_pair_derivative_review_v3.json",
     "final_handoff": "SMS_projects/master_of_fighters/doc/10-memory-bank.md",
     "current_implementation": {
-      "path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/build_inputs/historical_guard_adapter_284b15b.py",
       "sha256": "eeded0e63a72ebce948e01f02ee9644d2d0bfa2d943b2ac0498e9c76be683b6c",
-      "scope": "Project opt-in v2 interface,16tests passed; historical Social implementations stay pinned separately, no new global homologation."
+      "scope": "Project opt-in v2 interface,16tests passed; historical Social implementations stay pinned separately, no new global homologation.",
+      "origin_path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "source_commit": "284b15be9bf1898219518973a366d3930deed2f2",
+      "role": "Historical guard implementation only; active adapter extends opt-in8x8, never import this snapshot as pipeline."
     }
+  },
+  "followup_hayato_short_cut_choreography": {
+    "status": "reformulated_candidate_source_SMS_and_ROM_measured_perceived_motion_pending",
+    "owner_direction": "Attachment c749b358-f4d3-4ad5-8bec-96f966493362,2026-10-29",
+    "preserved_attempt": {
+      "source": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/cut_source.png",
+      "sha256": "8c2d5032066cae86ae5a4cc2a32108e43606b05848a74f3ba56b31080077c6dc",
+      "prompt_sha256": "dd2ac4c94ac18a86589ec73bc91e7831c845821936e410027df748e014a27c7e"
+    },
+    "causal_restrictions": [
+      "Prompt fixed head/hair/feet/hakama/scabbard, wrists only1–2logicalpixels and recoil~3pixels. Preserving identity became freezing acting.",
+      "Frozen static C02 was treated as obligatory key; follow-through retained almost same body.",
+      "Ten principles covered and differing holds do not certify visible acceleration/expressivity; original reviewer explicitly limited judgment to static progression."
+    ],
+    "correction_under_test": [
+      "Motion brief and code-drawn joint study only as schematic, before final authored pixels.",
+      "Preserve body segment lengths/material identity while allowing head/pelvis/knees/shoulder pose travel; no per-pose size fitting.",
+      "Independent rough critique found unrotating pelvis and return gap; vary pelvis orientation and add one recovery transition for concrete need.",
+      "Examine spacing and exposure separately, and issue static/choreography/temporal/SMS/ROM conclusions with observed limits."
+    ],
+    "not_yet_proved": [
+      "Continuous perceived force/rhythm/normal-speed clarity",
+      "Owner artistic acceptance",
+      "Audio/PAL/full gameplay/physical hardware/production"
+    ],
+    "future_curation": "Record in existing candidate only. No central skill/SMS_GLOBAL/gate/lesson promotion. Compare with L113 and art-review coverage versus observed-result distinction.",
+    "final_source": {
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+      "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+    },
+    "source_poses": 6,
+    "duration_ticks": [
+      4,
+      1,
+      2,
+      3,
+      1,
+      3
+    ],
+    "source_generation_calls_this_reformulation": 12,
+    "selected_drawings": "Five from reformulation; R06 reuses old C04 recovery in same role; original guard exact.",
+    "corrections_observed": [
+      "Gesture-first study made hip/shoulder opposition and high/low body keys explicit; static critique corrected pelvis and return gap.",
+      "Early whole-pair conversion rejected wide key and tall residency; existing canonical8x8 packer opt-in fits219patterns/53SAT/8line without cutting blade or shrinking an actor.",
+      "Source R02 blade repair required whole-pose re-review; generation modified more than the nominal weapon delta.",
+      "Source changes can stale optical sole pivot; expected_opaque_bottom_px now rejects before header. Both mirrored grids verified.",
+      "Authored local hair patch changes8source pixels inside ROI only; one detached SMS pixel removed per facing; outside source ROI exact.",
+      "Native recorder callback captures real-time RGB without stepping; lossless decoded RGB equals native stream. Capture overhead/nominal timebase are not FPS measurement."
+    ],
+    "measured": {
+      "native_QA_cases": 2,
+      "exact_manual_framebuffers": 236,
+      "realtime_frames_exact": 480,
+      "fps_windows": [
+        59.78,
+        59.67
+      ],
+      "worst": [
+        {
+          "rom_sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 213
+        },
+        {
+          "rom_sha256": "4f7b340a19075183542c318352457ab1d5adca78d09037af9060f991bffd497a",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 223
+        }
+      ],
+      "artifact_root": "out/diagnostics/hayato_short_cut_v2"
+    },
+    "preservation": "Prior source, prompts, negative reviews, conversions and previous ROM evidence retained. No economic/time-savings claim."
   }
 }

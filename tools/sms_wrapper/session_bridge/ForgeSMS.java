@@ -32,6 +32,8 @@ public final class ForgeSMS {
     static DisplayWindow display;
     static volatile boolean closed;
     static volatile boolean audioEnabled;
+    static boolean realtimeRecording;
+    static long recordingStartNanos, recordingStartFrame;
     static void prepareSilentAudio() throws Exception {
         // -muted prevents every ROM sample from reaching the host during boot.
         // Prime the already-open line with zeros so host routing can see it.
@@ -131,6 +133,7 @@ public final class ForgeSMS {
             + ",\"emulator_input\":" + system.getInputState()
             + ",\"nominal_hz\":" + ((double)system.getCyclesPerSecond()/system.getCyclesPerFrame())
             + ",\"audio_enabled\":" + audioEnabled
+            + ",\"recording_realtime\":" + realtimeRecording
             + ",\"running\":" + Emulicious.isRunning();
     }
     static int mask(String s, int max) throws IOException {
@@ -146,6 +149,9 @@ public final class ForgeSMS {
         if (closed || seq <= sequence) throw new IOException("stale or closed command");
         sequence = seq;
         String extra = "";
+        if (realtimeRecording && !a[3].equals("status") &&
+                !a[3].equals("record-stop") && !a[3].equals("close"))
+            throw new IOException("realtime capture active; stop before pausing or stepping");
         switch (a[3]) {
         case "status": if (a.length != 4) throw new IOException("arity"); break;
         case "pause": pause(); break;
@@ -214,7 +220,39 @@ public final class ForgeSMS {
                 }
             } finally {p1=p2=console=0;}
             extra=",\"first_frame\":"+first+",\"recorded_frames\":"+count;break;
-        case "close": pause(); p1=p2=console=0; closed=true; break;
+        case "record-start":
+            if(a.length!=5 || !a[4].matches("[A-Za-z0-9_-]{1,64}"))
+                throw new IOException("realtime recording name");
+            pause();
+            // Native DisplayWindow callback writes cropped RGB24 before any
+            // compositor/scale. Buffered output avoids one syscall per byte.
+            OutputStream stream = new BufferedOutputStream(Files.newOutputStream(
+                root.resolve("evidence").resolve(a[4]+".rgb"),
+                StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE), 1024*1024);
+            display.setScreenRecorderStream(stream,true);
+            recordingStartFrame=frames;
+            recordingStartNanos=System.nanoTime();
+            realtimeRecording=true;
+            try { start.invoke(null); }
+            catch(Exception failure) {
+                display.setScreenRecorderStream(null,true);
+                realtimeRecording=false;
+                throw failure;
+            }
+            extra=",\"first_frame\":"+recordingStartFrame;break;
+        case "record-stop":
+            if(a.length!=4 || !realtimeRecording) throw new IOException("no realtime recording active");
+            pause();
+            long elapsedNanos=System.nanoTime()-recordingStartNanos;
+            display.setScreenRecorderStream(null,true);
+            realtimeRecording=false;
+            extra=",\"first_frame\":"+recordingStartFrame+
+                  ",\"recorded_frames\":"+display.getRecordedScreens()+
+                  ",\"capture_elapsed_ns\":"+elapsedNanos;break;
+        case "close":
+            pause();
+            if(realtimeRecording) { display.setScreenRecorderStream(null,true); realtimeRecording=false; }
+            p1=p2=console=0; closed=true; break;
         default: throw new IOException("unknown command");
         }
         return "{\"ok\":true,\"session_id\":\""+session+"\",\"seq\":"+seq+","+status()+extra+"}";

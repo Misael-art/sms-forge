@@ -2024,6 +2024,1279 @@
           "sha256": "1a7dc5f5a96e22e9e33b0af10c2773ef259f284564e3ef30260ba2b3f42de3db"
         }
       ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-key-v01",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-key",
+      "revision": 1,
+      "status": "superseded",
+      "parents": [
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Owner selected diagnostic short katana cut. Prove guard+execution source and shared-P1 pair before expanding preparation/recovery.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_source.png",
+          "sha256": "a6eac666190508089fac6168fb083abdb478c90e7cd1b337782e38969ef096c9"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_generated_raw.png",
+          "sha256": "0ab05df167fe2494315acd372b9b850c47363c95732fd6cbc661e2214f94140e"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_prompt.txt",
+          "sha256": "e90d039b5de87f035ccd4757d65f97176799c28967b98bdf72cd27e4bebd9e55"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_extraction_recipe.json",
+          "sha256": "d93739111af2d88d0997da9ec3254b9ecab26c6e47ccb36ac7ed9f5cc6f21cc2"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_metadata.json",
+          "sha256": "560616c9898fad0a2ba9a1209aa71edebf5c873894df183f5a95504bd9f2af69"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/native_execution/C02.png",
+          "sha256": "a6eac666190508089fac6168fb083abdb478c90e7cd1b337782e38969ef096c9"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-key-v02",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-key",
+      "revision": 2,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-short-cut-key-v01",
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Correct measured pose layer: keep guard body/feet/head, restore original blade length and steeper descending angle. V1 exceeded pair limit in all256phase/facing cases; no conversion geometry shrink.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/key_revision_v2/execution_source.png",
+          "sha256": "4460eb09fa7aa5b19f94e7e3838e9e99230d44e4724e72438646aa6f22ecd887"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/key_revision_v2/execution_generated_raw.png",
+          "sha256": "0340a10ca395bd843e369958b3d14b653c968b419fe06d5fad950c6128252741"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/key_revision_v2/execution_prompt.txt",
+          "sha256": "d147b741d916746c6a4452776a1843a2cf8a776e586869fbd0933045ae6bf7cd"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/key_revision_v2/execution_extraction_recipe.json",
+          "sha256": "d1eb26a33aab82ce645cd733aac3004a28495ca4204b34a60d19a42d3dd0d7f1"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/key_revision_v2/execution_metadata.json",
+          "sha256": "a51ddcfd0a217d49d339a47f36627ae35667ce788d14e238bb58277c202f4fd6"
+        },
+        {
+          "role": "native_pose",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/key_revision_v2/native_execution/C02.png",
+          "sha256": "4460eb09fa7aa5b19f94e7e3838e9e99230d44e4724e72438646aa6f22ecd887"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-v01",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut",
+      "revision": 1,
+      "status": "superseded",
+      "parents": [
+        "hayato-cps2-short-cut-key-v02",
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "After legal guard+execution proof bothfacings, generate only preparation/follow-through/recovery; preserve frozen C02 exactly and original guard separately. Working4pose3/2/2/5diagnostic timing, no competitive approval.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/cut_source.png",
+          "sha256": "8c2d5032066cae86ae5a4cc2a32108e43606b05848a74f3ba56b31080077c6dc"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/support_poses_generated_raw.png",
+          "sha256": "ee88c74453e25c83d1437f6c37a4194da185df15c0a5a491e558fb22e0c4ada7"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/sequence_prompt.txt",
+          "sha256": "dd2ac4c94ac18a86589ec73bc91e7831c845821936e410027df748e014a27c7e"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/support_extraction_recipe.json",
+          "sha256": "76fef9474a57bfcecd2b8021cb3f960ffa51bf715f54d47275a2a436c6fcf173"
+        },
+        {
+          "role": "support_sheet",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/support_poses_source.png",
+          "sha256": "08b56719fb2196b4842069c4e946a2791736cf3e7f1968539792f3a1657936ce"
+        },
+        {
+          "role": "assembly",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/source_assembly.json",
+          "sha256": "0072304ba3334fb7e14261363af8aba837e9b6a518868a4ef99055d83398d2ca"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/sequence_metadata.json",
+          "sha256": "05b2ebe4ef64326c319ce207ba1526beed12e939841a4321942efd0eca33b6a6"
+        },
+        {
+          "role": "C01",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/native/C01.png",
+          "sha256": "a3a0ba6d7fa355f0a48e32f06766048a806d65cf827e0aa67c5b1ee69899e1ef"
+        },
+        {
+          "role": "C02",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/native/C02.png",
+          "sha256": "4460eb09fa7aa5b19f94e7e3838e9e99230d44e4724e72438646aa6f22ecd887"
+        },
+        {
+          "role": "C03",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/native/C03.png",
+          "sha256": "2fe4ab24fe2273954f1b11e92642678eb80c7164e81f2021048b3f9a5ee69a39"
+        },
+        {
+          "role": "C04",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/native/C04.png",
+          "sha256": "203738c1d6a05ed50f0e29691fc24f54257bfbfe296c8a4738727ec8e35e0d57"
+        },
+        {
+          "role": "support_C01",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/support_native/C01.png",
+          "sha256": "a3a0ba6d7fa355f0a48e32f06766048a806d65cf827e0aa67c5b1ee69899e1ef"
+        },
+        {
+          "role": "support_C03",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/support_native/C03.png",
+          "sha256": "2fe4ab24fe2273954f1b11e92642678eb80c7164e81f2021048b3f9a5ee69a39"
+        },
+        {
+          "role": "support_C04",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/support_native/C04.png",
+          "sha256": "203738c1d6a05ed50f0e29691fc24f54257bfbfe296c8a4738727ec8e35e0d57"
+        },
+        {
+          "role": "registration",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/pose_registration.json",
+          "sha256": "7355ef1ca4443b997f0f32384e552f2a92ef2abc891a6bb02cf269985696dd3f"
+        },
+        {
+          "role": "runtime_registration",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/runtime_registration.json",
+          "sha256": "147fbdf7fb561ca23450413e598283eae4551a7a90dbc7ae110204e8fe7bdcba"
+        }
+      ]
+    },
+    {
+      "id": "hayato-short-cut-direction-v02",
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "short-cut-direction",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-short-cut-v01"
+      ],
+      "reason": "Owner requests body-driven short-cut choreography; rough study before finished pixels, no production promotion.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/hayato_short_cut_choreography_v2.json",
+          "sha256": "18c8cb346cef1b68e073fd759d42b3c9826ab1318febc76242a384f01f201729"
+        }
+      ]
+    },
+    {
+      "id": "hayato-short-cut-rough-v02",
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "short-cut-rough",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-short-cut-v01"
+      ],
+      "reason": "Owner requests body-driven short-cut choreography; rough study before finished pixels, no production promotion.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/hayato_short_cut_v2/rough/manifest.json",
+          "sha256": "3735d723e27a6533e90c65f67a1c7dd761aae1c1e91fec51dab57b429a1d80c9"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-body-key-v01",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-body-key",
+      "revision": 1,
+      "status": "superseded",
+      "parents": [
+        "hayato-cps2-short-cut-v01",
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Body-driven replacement R03 key after gestural study. Measure guard+most occupied pose before remaining finished drawings; preserve all original attempts.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v1/strike_source.png",
+          "sha256": "b49cb113dad30f136254442335a4db9c95fd43bbb393e69a3eed214aa07a1c3a"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v1/strike_generated_raw.png",
+          "sha256": "44d76a693eb023c22975bd1ad0f1dfe5d9977fabc5f0c530ea3501f89169c008"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v1/strike_prompt.txt",
+          "sha256": "e437fa0094ec678a7d307bedd6ead51f49be1154bdfd8e6ecb1c1141e8650450"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v1/strike_extraction_recipe.json",
+          "sha256": "5ac3771a012561679126a42d06f4f2de19dccd0fdda4cc0bd344449385391852"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-body-key-v02",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-body-key",
+      "revision": 2,
+      "status": "superseded",
+      "parents": [
+        "hayato-cps2-short-cut-body-key-v01",
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Targeted rear foot/stance continuity repair only: v1 body acting improved but rear contact slid outward~13logicalpx. Preserve turn and knee absorption, restore planted rear contact; never shrink sprite.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v2/strike_source.png",
+          "sha256": "eb93aee5bd2c0c336136b04e68b7d43b54c24d16d4c6216f44a01f5f0528058e"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v2/strike_generated_raw.png",
+          "sha256": "2e786a0b570f2e32617d5f4942c2a2f81be4e784f7675fc32cee746a0e629874"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v2/strike_prompt.txt",
+          "sha256": "c9e91e109373192c489913f780b001939cc04432ce9ee615837a7ce26e685691"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v2/strike_extraction_recipe.json",
+          "sha256": "82a46a47a6ff588c1b64990e2861a58da375d2688abaf65ce313acb965cbec11"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-body-key-v03",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-body-key",
+      "revision": 3,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-short-cut-body-key-v02",
+        "hayato-cps2-idle-v02"
+      ],
+      "reason": "Measured key2minimum9scanline bothfacings:6Hayato lowerband+3Social. Raise joined grip and steepen full rigid blade to consolidate lowerband, preserving force/scale/body. Correct remaining rear contact offset; no cell omission/weapon crop.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v3/strike_source.png",
+          "sha256": "c42b2cef98fa87f235941bc0e12dbb0055b21013d849f4068e4b9fcaa6cb28bf"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v3/strike_generated_raw.png",
+          "sha256": "d0554535f31e17054e524b98b2777a19ea30acb17febcaafbb7d8e0255943f41"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v3/strike_prompt.txt",
+          "sha256": "6fdf50d1ad441aa0ff78967c857cd6f432252fbfddf1015574d8df3c04f9cb4e"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v3/strike_extraction_recipe.json",
+          "sha256": "7fcaec860b2701c4c9defe7466b41f97e9319b4e2a367720721669fcc6fdff71"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-v02",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut",
+      "revision": 2,
+      "status": "superseded",
+      "parents": [
+        "hayato-cps2-short-cut-v01",
+        "hayato-cps2-short-cut-body-key-v03",
+        "hayato-short-cut-rough-v02"
+      ],
+      "reason": "After independently reviewed gestural study and finishedR03source plus legal early pair, produce five remaining body-driven poses. No freeze of old C02, no per-body fit, preserve priorattempts. R03copiedexactly fromkey3.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/cut_source.png",
+          "sha256": "a457e111a6a3d393e2cbb822b6b613fe391d5bd021dce31de8783eec2cb5b04c"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/support_poses_generated_raw.png",
+          "sha256": "531129b427f0a6a9ecbc446f79a98251c3dc6d4962fa2d4dbf5599ccd494f84e"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/sequence_prompt.txt",
+          "sha256": "7854d8d6b3abd1ddefdb12facc65bfb037b7f95da2be64e99733d33042b3a762"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/support_extraction_recipe.json",
+          "sha256": "bb4988be1646bfe8150f9144b0fb2ccd2fa8e9ddf166c550bbcaf3f17c595a88"
+        },
+        {
+          "role": "assembly",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/source_assembly.json",
+          "sha256": "834a55acee2b29d455a4f9d2d5df7d3ac044f0472448c17c10012e3594ed0cd9"
+        },
+        {
+          "role": "source_detail_2",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/edit_targets/R01_8x.png",
+          "sha256": "57a3827f7bcb4a94675ca62af7ff9067911538beef0c14942c40c3bd510c2344"
+        },
+        {
+          "role": "source_detail_3",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/edit_targets/R02_8x.png",
+          "sha256": "e243b744218847b2f2aed4552d0438f89ac23318147b33589ce721d22a492d39"
+        },
+        {
+          "role": "source_detail_4",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/edit_targets/R03_registered_8x.png",
+          "sha256": "3c56bdf5eccb5f3fdcec344f87530391ce97b39172280e52aa1b8ef924d5a72e"
+        },
+        {
+          "role": "source_detail_5",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/edit_targets/R04_8x.png",
+          "sha256": "aa14b8b1bae039f03d268bf81610b016c8c5809559c9f26f4d37e36780023965"
+        },
+        {
+          "role": "source_detail_6",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/edit_targets/R05_8x.png",
+          "sha256": "c860df88b11efd8a5194da98c7f9b2b4e6b2bbd9a18f2ef18cc031493e3af3db"
+        },
+        {
+          "role": "source_detail_7",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/edit_targets/R06_8x.png",
+          "sha256": "ad9fce5f5feddb318fc96143a44eae92e3ca8f834c4d94e7efab1e7e01d0225c"
+        },
+        {
+          "role": "source_detail_8",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/edit_targets/guard_registered_8x.png",
+          "sha256": "2050103eb93d007fdf6e35c5c188c442a365452cc5383a4cd0b2f09746946280"
+        },
+        {
+          "role": "source_detail_10",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R01.png",
+          "sha256": "03ff409b97f21eff5593874a7610ced5af33a8a7fce92ac8fe659b886eb49759"
+        },
+        {
+          "role": "source_detail_11",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R02.png",
+          "sha256": "215afb8681a65778fd8e96277af9abb5db874bb739ab82346160f939f41323ea"
+        },
+        {
+          "role": "source_detail_12",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R03.png",
+          "sha256": "014b40d8a58eb05196a82c5b6cf59805d9e3c8f74bb6e4174ae3d13c9b0fdae1"
+        },
+        {
+          "role": "source_detail_13",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R04.png",
+          "sha256": "c42b2cef98fa87f235941bc0e12dbb0055b21013d849f4068e4b9fcaa6cb28bf"
+        },
+        {
+          "role": "source_detail_14",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R05.png",
+          "sha256": "7e0598ccc744612069e7f346d6ff4206aadcc5efdc8b8fe5eb7888d74510aa8e"
+        },
+        {
+          "role": "source_detail_15",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R06.png",
+          "sha256": "203738c1d6a05ed50f0e29691fc24f54257bfbfe296c8a4738727ec8e35e0d57"
+        },
+        {
+          "role": "source_detail_18",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R01_v1/extraction_recipe.json",
+          "sha256": "40c6cf26713df06f699d4b3705596c9cb35845ff4891c5d044bdcbd20cac287e"
+        },
+        {
+          "role": "source_detail_19",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R01_v1/generated_raw.png",
+          "sha256": "64138d435482c3886f3aa4930a76ddbce91785054915a24e0e79434540504ac4"
+        },
+        {
+          "role": "source_detail_21",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R01_v1/native/R01.png",
+          "sha256": "03ff409b97f21eff5593874a7610ced5af33a8a7fce92ac8fe659b886eb49759"
+        },
+        {
+          "role": "source_detail_22",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R01_v1/pose_source.png",
+          "sha256": "03ff409b97f21eff5593874a7610ced5af33a8a7fce92ac8fe659b886eb49759"
+        },
+        {
+          "role": "source_detail_23",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R01_v1/prompt.txt",
+          "sha256": "d25ed8b1757fdb5b05008c72a02608fac1fbfa0e98bd65e8a3625b784715ee64"
+        },
+        {
+          "role": "source_detail_25",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v1/extraction_recipe.json",
+          "sha256": "620d89461e770d0bba107601110e377aebf66800411a6f2343ed20e9680c43c9"
+        },
+        {
+          "role": "source_detail_26",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v1/generated_raw.png",
+          "sha256": "dd6b0226de3955ee0c83de2cacb48f194379b87fe3f5b89d837ac4e73ead41a3"
+        },
+        {
+          "role": "source_detail_28",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v1/native/R02.png",
+          "sha256": "c820605f145a177bf26de3702bae0540f29d538fec335fcb9638e75cc974bea8"
+        },
+        {
+          "role": "source_detail_29",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v1/pose_source.png",
+          "sha256": "c820605f145a177bf26de3702bae0540f29d538fec335fcb9638e75cc974bea8"
+        },
+        {
+          "role": "source_detail_30",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v1/prompt.txt",
+          "sha256": "5c86fabfa1cb42a290812d338b8d78535dbf189416851dbe434c092f2108a412"
+        },
+        {
+          "role": "source_detail_32",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v2/extraction_recipe.json",
+          "sha256": "a08557322f8d8b7281b5761a99a9a8d859f0425303dfd5eaa57071d0b897329c"
+        },
+        {
+          "role": "source_detail_33",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v2/generated_raw.png",
+          "sha256": "3c8dd0ed6b5784e677ebf87338a7407248e21a5d30813947b310064c8258cb81"
+        },
+        {
+          "role": "source_detail_35",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v2/native/R02.png",
+          "sha256": "215afb8681a65778fd8e96277af9abb5db874bb739ab82346160f939f41323ea"
+        },
+        {
+          "role": "source_detail_36",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v2/pose_source.png",
+          "sha256": "215afb8681a65778fd8e96277af9abb5db874bb739ab82346160f939f41323ea"
+        },
+        {
+          "role": "source_detail_37",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R02_v2/prompt.txt",
+          "sha256": "b032fb93d333927fc7f04706d2bc6bddb8f5c0051a367597b242f1696fee33d4"
+        },
+        {
+          "role": "source_detail_39",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R04_v1/extraction_recipe.json",
+          "sha256": "75d2173ba84aad09cbf6ab711a1d269a0558879a08912ef6d4656e6cbef640c9"
+        },
+        {
+          "role": "source_detail_40",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R04_v1/generated_raw.png",
+          "sha256": "9847b3c9a3a36cd79203ebf8877ef414f24614718dc2ab4a3ed4307783bc4608"
+        },
+        {
+          "role": "source_detail_42",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R04_v1/native/R04.png",
+          "sha256": "014b40d8a58eb05196a82c5b6cf59805d9e3c8f74bb6e4174ae3d13c9b0fdae1"
+        },
+        {
+          "role": "source_detail_43",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R04_v1/pose_source.png",
+          "sha256": "014b40d8a58eb05196a82c5b6cf59805d9e3c8f74bb6e4174ae3d13c9b0fdae1"
+        },
+        {
+          "role": "source_detail_44",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R04_v1/prompt.txt",
+          "sha256": "3605028a7cc77c8d69c024750e79cdeb6145029a1160b10c3538f77f348fd58b"
+        },
+        {
+          "role": "source_detail_46",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v1/extraction_recipe.json",
+          "sha256": "50e4ed5d4fb14c7771f5bffee2cfe62dc4f5f43531fd9002c55668c0829141cd"
+        },
+        {
+          "role": "source_detail_47",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v1/generated_raw.png",
+          "sha256": "30e86666352f8374e0e1b34f7e205b5363b12280aea6c60ebf71efe0c237261c"
+        },
+        {
+          "role": "source_detail_49",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v1/native/R05.png",
+          "sha256": "1e29245d18a3af8fccd7294577f05f152d70357abde4a0504fc40238c8dd3ec9"
+        },
+        {
+          "role": "source_detail_50",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v1/pose_source.png",
+          "sha256": "1e29245d18a3af8fccd7294577f05f152d70357abde4a0504fc40238c8dd3ec9"
+        },
+        {
+          "role": "source_detail_51",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v1/prompt.txt",
+          "sha256": "72dbd20c210311dcaf2c9efe024403d3ef8685ea3de59c0401ae18247830b434"
+        },
+        {
+          "role": "source_detail_53",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v2/extraction_recipe.json",
+          "sha256": "c52f07397aa4f7ade799d3563d51303c265d2b4a679d89abb6e07204940014b3"
+        },
+        {
+          "role": "source_detail_54",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v2/generated_raw.png",
+          "sha256": "b2fdcc245e49350ed75b528ed8d8d695b3aac247a5ca8765fed7842e00c3cdb4"
+        },
+        {
+          "role": "source_detail_56",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v2/native/R05.png",
+          "sha256": "7e0598ccc744612069e7f346d6ff4206aadcc5efdc8b8fe5eb7888d74510aa8e"
+        },
+        {
+          "role": "source_detail_57",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v2/pose_source.png",
+          "sha256": "7e0598ccc744612069e7f346d6ff4206aadcc5efdc8b8fe5eb7888d74510aa8e"
+        },
+        {
+          "role": "source_detail_58",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/refinements/R05_v2/prompt.txt",
+          "sha256": "50bb6d18a9cee2529a90abc9c3c2ddce39f576992408359961b9919a2ae9556a"
+        },
+        {
+          "role": "source_detail_64",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/working_drafts/R01.png",
+          "sha256": "b695054304f05ec150331be5e72b2dd1c1ecd7eb19c83cfbefa6cf9e14a9b772"
+        },
+        {
+          "role": "source_detail_65",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/working_drafts/R02.png",
+          "sha256": "e905ebc9164ec45b6c4309a4e3413a9e9fae35e547c60c442a00287adb926669"
+        },
+        {
+          "role": "source_detail_66",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/working_drafts/R04.png",
+          "sha256": "93f92cb338cb3d4ea419293f88f4fe86bd80fc7f295b4ee33d99180be0f23deb"
+        },
+        {
+          "role": "source_detail_67",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/working_drafts/R05.png",
+          "sha256": "3d643a85d10990e0548c12fb2ae5584c8eccdca0d370db3788f0da6fd3d6e647"
+        },
+        {
+          "role": "source_detail_68",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/working_drafts/R06.png",
+          "sha256": "352acf5007f485598931b6afc76892f2e1db385eabed19172336272b753d94df"
+        },
+        {
+          "role": "source_detail_69",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/working_extraction_recipe.json",
+          "sha256": "bffabdb69f2a58c7f13f1883fa89d44f0dc1493ec6fce0ef0f3711b31669be3e"
+        },
+        {
+          "role": "source_detail_70",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/working_source_draft.png",
+          "sha256": "6470fc01f6b71d0e73973c39f24e4b62be020f833301572d35a2e128c0898e40"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-v03",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut",
+      "revision": 3,
+      "status": "superseded",
+      "parents": [
+        "hayato-cps2-short-cut-v02"
+      ],
+      "reason": "Independent source review identified R02blade short/broad versus neighboring keys. Correct only that authored pose weapon in newsource, preserveallfiveothers andv2review; no foreshortening excuse or whole-sheetregeneration.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/cut_source.png",
+          "sha256": "1c41d6cd5b87ec1cf77dbea8e11a17252ee70089a568b59050b800e7e722b432"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/R02_delta/generated_raw.png",
+          "sha256": "856fbb1ed25122671027eb187fac5f0206890c6507eda0e98fa8791ae9b01d9f"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/R02_delta/prompt.txt",
+          "sha256": "7e61ccc8f1d9341f7a438888a460b990ceea1e34ba094a57ecf4ed2ea471daca"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/R02_delta/extraction_recipe.json",
+          "sha256": "bb5d421d8aaab4f665074ab9da1453121405ee817d1bd785ff133220aa635107"
+        },
+        {
+          "role": "assembly",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/source_assembly.json",
+          "sha256": "348fa298238b0c96b0d59fbbe087119913c4c4c39760eb7aeb8dcaced2e389b4"
+        },
+        {
+          "role": "delta_detail_4",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/R02_delta/native/R02.png",
+          "sha256": "320e2e6e1bad4542433731171add31a84c439b8a24ee0d2e2a14de72af436a2a"
+        },
+        {
+          "role": "delta_detail_5",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/R02_delta/pose_source.png",
+          "sha256": "320e2e6e1bad4542433731171add31a84c439b8a24ee0d2e2a14de72af436a2a"
+        }
+      ]
+    },
+    {
+      "id": "hayato-cps2-short-cut-v04",
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut",
+      "revision": 4,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-short-cut-v03"
+      ],
+      "reason": "IndependentSMSreviewfound detached1pxhairpoint inR03afternearest. ImageGenlocalizedhairpatch, mechanicallycomposedonlyinsourceROI; allbody/face/equipmentoutsideROIandfiveotherposespreserved. No codedpainting or convertedPNGcleanup.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+          "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/generated_raw.png",
+          "sha256": "4259a80dc934dc87983c20561246ba81dfbbe563c8c4ef4b48148aabe61b435b"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/prompt.txt",
+          "sha256": "19db5c162dfe00387d76ea6ef5fb101b0b0503a98b6c229841b3502d33ef9d4c"
+        },
+        {
+          "role": "recipe",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/extraction_recipe.json",
+          "sha256": "78bd144ed1426801af222bfe55326556bcb7c7d32c280f636d38ad6ab24d1eb2"
+        },
+        {
+          "role": "assembly",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/source_assembly.json",
+          "sha256": "930538caa8fb8c6402b17a7acacc03e68bfda9046947d1ecec4c5aea297c99c3"
+        },
+        {
+          "role": "hair_delta_detail_3",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/head_patch.png",
+          "sha256": "fd07f74431a75b560e2bb8ddee02d9fc88073f64e0decf2f7d9492b4534432d9"
+        },
+        {
+          "role": "hair_delta_detail_5",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/native/R03.png",
+          "sha256": "88c56708453130d1af7a0205defb2124d547f8db009331f2dcd78a63363edf63"
+        },
+        {
+          "role": "hair_delta_detail_7",
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/patch_native/head.png",
+          "sha256": "fd07f74431a75b560e2bb8ddee02d9fc88073f64e0decf2f7d9492b4534432d9"
+        }
+      ]
+    },
+    {
+      "id": "hayato-short-cut-review-records-v01",
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "short-cut-review-records",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-short-cut-v04"
+      ],
+      "reason": "Late adoption of actual completed project records; no prior reservation is asserted. Diagnostic candidate only; independent static reviews do not promote temporal/owner approval.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/hayato_short_cut_body_SMS_independent_review_v3.json",
+          "sha256": "91fc0ea1411cd926069866f1eb8c9ac5821c53d7e65fd69a50f5754209ca01ec"
+        },
+        {
+          "role": "attachment_001",
+          "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+          "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+        },
+        {
+          "role": "attachment_002",
+          "path": "doc/hayato_short_cut_body_SMS_review_request_v3.json",
+          "sha256": "98d32c47b04876ee0f2a14efda5b99fa86b70db2c972cd309e39dd63b671f6fd"
+        },
+        {
+          "role": "attachment_003",
+          "path": "doc/hayato_short_cut_body_SMS_review_request_v4.json",
+          "sha256": "71dd7f52338a8c630e359d12df889b4443dc406203bb1534d04ffca4fa5fc5df"
+        },
+        {
+          "role": "attachment_004",
+          "path": "doc/hayato_short_cut_body_key_independent_review_v2.json",
+          "sha256": "a4b69869d2778ab3a7b79b36ed1edbd61f30400246909f51d741119c980aa81e"
+        },
+        {
+          "role": "attachment_005",
+          "path": "doc/hayato_short_cut_body_key_independent_review_v3.json",
+          "sha256": "4e27321d90439e773dec93f33402983e9acc4cfb1654c7c321fcfd5405eea0f5"
+        },
+        {
+          "role": "attachment_006",
+          "path": "doc/hayato_short_cut_body_key_registration_review_v3.json",
+          "sha256": "b989c90825919139d8bee68e3bb8bb6709cdefcb86e991287d1eb3782de4918c"
+        },
+        {
+          "role": "attachment_007",
+          "path": "doc/hayato_short_cut_body_key_review_request_v2.json",
+          "sha256": "33370f6fee710f9daf033d7bbfcbf3add88d96c09b57728e1b072ffd01058e05"
+        },
+        {
+          "role": "attachment_008",
+          "path": "doc/hayato_short_cut_body_key_review_request_v3.json",
+          "sha256": "7b907ab0138116798d8870615c8308ce9bd79bbeb92090cb207afe1044b08aad"
+        },
+        {
+          "role": "attachment_009",
+          "path": "doc/hayato_short_cut_body_sequence_independent_review_v2.json",
+          "sha256": "cbfd6b2d3c7759b19f9394798591d0b6228c9c82a51f6400b538ac50ff71a8d9"
+        },
+        {
+          "role": "attachment_010",
+          "path": "doc/hayato_short_cut_body_sequence_independent_review_v3.json",
+          "sha256": "534430fc3754a08c0c5908e5074c6f77b19f14a5f3cb61380023ed5d24940c1a"
+        },
+        {
+          "role": "attachment_011",
+          "path": "doc/hayato_short_cut_body_sequence_review_request_v2.json",
+          "sha256": "dd955aac6cf2b996b75d7f02fb4fc7bb025a83c4d6eb777da3f8b325c0897566"
+        },
+        {
+          "role": "attachment_012",
+          "path": "doc/hayato_short_cut_body_sequence_review_request_v3.json",
+          "sha256": "6fb227baca861d505282ebe86a0cf44332731545b625ff39dde28f63d870e72f"
+        },
+        {
+          "role": "attachment_013",
+          "path": "doc/hayato_short_cut_body_temporal_independent_review_v4.json",
+          "sha256": "ee56b52a44ec1eea6696e3b90ca534bc85fa037608aa4ef7bd274088dae778a8"
+        },
+        {
+          "role": "attachment_014",
+          "path": "doc/hayato_short_cut_body_temporal_review_request_v4.json",
+          "sha256": "25653d6ee2b9104b34fa2e4ac48cad469af38b3a978007662082d2eb45ab4e04"
+        },
+        {
+          "role": "attachment_015",
+          "path": "doc/hayato_short_cut_key_review_request_v1.json",
+          "sha256": "db49156dfb9187f2e83bdfb12f58e702e44c53955cc72402e44ad80ff8fc4b15"
+        },
+        {
+          "role": "attachment_016",
+          "path": "doc/hayato_short_cut_key_review_request_v2.json",
+          "sha256": "9eac7fcc71a94a2306594c27ffa2c6456e6d425ed2531d9332b994096e4a2228"
+        },
+        {
+          "role": "attachment_017",
+          "path": "doc/hayato_short_cut_key_review_v1.json",
+          "sha256": "a2628d7a546e266fad6ee3174d8ef06ac473485d56512b55e4cd50db6ee16066"
+        },
+        {
+          "role": "attachment_018",
+          "path": "doc/hayato_short_cut_key_review_v2.json",
+          "sha256": "cbecef4d7aa0a5c8d5ba97992d7fcc53ed20d3f935722a4f15fa32acb68236a6"
+        },
+        {
+          "role": "attachment_019",
+          "path": "doc/hayato_short_cut_sequence_independent_review_v1.json",
+          "sha256": "6be2b571c23b0fe806bf3c3857560f9e86122ec925bd5b9499d940c7219117b6"
+        },
+        {
+          "role": "attachment_020",
+          "path": "doc/hayato_short_cut_sequence_review_request_v1.json",
+          "sha256": "2f1a454e88b77e0487970e62bb3ccf5689259ca4cf30470ddeee161f85fffeb7"
+        }
+      ]
+    },
+    {
+      "id": "hayato-short-cut-contract-records-v01",
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "short-cut-contract-records",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-short-cut-v04"
+      ],
+      "reason": "Late adoption of actual completed project records; no prior reservation is asserted. Diagnostic candidate only; independent static reviews do not promote temporal/owner approval.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/hayato_animation_contract_v1.json",
+          "sha256": "e97920eb1d68b3df247de0f4ce04c8ca3c8a41c2a7cbe35d9c5e28f74494ec9e"
+        },
+        {
+          "role": "attachment_001",
+          "path": "doc/hayato_animation_contract_v2.json",
+          "sha256": "136ebc2bb5ca8f7b38fcd7d11eb36506c9d80e538006d817b60799b6691969fa"
+        },
+        {
+          "role": "attachment_002",
+          "path": "doc/hayato_short_cut_body_art_checklist_v4.json",
+          "sha256": "2ee6826458f7279562b89772c34f12b050c1b1bed6621c393e454e9b6f820074"
+        }
+      ]
+    },
+    {
+      "id": "hayato-short-cut-runtime-evidence-v01",
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "short-cut-runtime-evidence",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "hayato-cps2-short-cut-v04"
+      ],
+      "reason": "Late adoption of actual completed project records; no prior reservation is asserted. Diagnostic candidate only; independent static reviews do not promote temporal/owner approval.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/hayato_short_cut_v2/adapter_default_regression.json",
+          "sha256": "53c0af45a2e8b40061a2850f1b9983d44bad6293e5d5274b467f219ceaba9a2a"
+        },
+        {
+          "role": "attachment_001",
+          "path": "out/diagnostics/hayato_short_cut_v2/build_inputs/animation_contract_v2_rough_frozen.json",
+          "sha256": "c4e398450413bc0fb20b4b06acb2569a525ec74df8a3fc92359ffa409d7af025"
+        },
+        {
+          "role": "attachment_002",
+          "path": "out/diagnostics/hayato_short_cut_v2/checks/final_unit_tests.json",
+          "sha256": "e9718345427892ffbb7d82920cc12ed0e0aad16244db89e57deebbb8545a77e3"
+        },
+        {
+          "role": "attachment_003",
+          "path": "out/diagnostics/hayato_short_cut_v2/checks/focused_v4.json",
+          "sha256": "f0507c3efdddf1a1bf7291cc160d60fcb6ffe1ae753e4daa2255efbfbfbb976b"
+        },
+        {
+          "role": "attachment_004",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/R01.png",
+          "sha256": "a7dda4933ac6b70fdaf86e4c18aa588d7bff8c8c23f560d4f6ee67f562329fa2"
+        },
+        {
+          "role": "attachment_005",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/R02.png",
+          "sha256": "c3e18395bef54317364f172a9eb606857698e83b12915a0fe63c847842e5131b"
+        },
+        {
+          "role": "attachment_006",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/R03.png",
+          "sha256": "5aa65e7e1d0a2e5b2e47d02c4e3b8177175356904175ad884f898dd3db07bdb1"
+        },
+        {
+          "role": "attachment_007",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/R04.png",
+          "sha256": "170e3990c8ba5b0d8dafab08c2a92a33f86f72514632b306620e97535b528255"
+        },
+        {
+          "role": "attachment_008",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/R05.png",
+          "sha256": "b97f5abea8784f759143600ef567e8f3f16502499f84b4a51d322c04e50e3a8e"
+        },
+        {
+          "role": "attachment_009",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/R06.png",
+          "sha256": "c846d2b53123ebbe09e41a1e6ce412de5769b36571a9aa3c8ec80e21267f8d0e"
+        },
+        {
+          "role": "attachment_010",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/conversion.json",
+          "sha256": "a400d163f98f723ecf2be9b648ba12bd7ff7b84e2d6b4f4307df4fd3c92cda2b"
+        },
+        {
+          "role": "attachment_011",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/idle.png",
+          "sha256": "b34e97ea6585939ebe5f867098b69163dc62a2c26c5b33ef7e2d011231a6e1ee"
+        },
+        {
+          "role": "attachment_012",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/reference.png",
+          "sha256": "24d4f438faff9fccc289b5a15393bb43ca74f2b3439a64cc3a23f091d9488c56"
+        },
+        {
+          "role": "attachment_013",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/sample_data.h",
+          "sha256": "5f94fe81474496933b7cf7404bbf4171500f3d16105e49ca2d7a7fd777436349"
+        },
+        {
+          "role": "attachment_014",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/scene_R01.json",
+          "sha256": "1deee0be458673f410ef6649243702952d1084fa66898179da836a5f04b77944"
+        },
+        {
+          "role": "attachment_015",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/scene_R02.json",
+          "sha256": "eaadea897602321049a37d9309e2bbd8d72d2391ce212ab6e3fc656ba0cbec0c"
+        },
+        {
+          "role": "attachment_016",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/scene_R03.json",
+          "sha256": "3dde5f74f064ce8ba1c41bb86a0ae5e09e2979c2ca40fb561e6b7f4ad5757801"
+        },
+        {
+          "role": "attachment_017",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/scene_R04.json",
+          "sha256": "0572cbaf16230feed2c140a3f73e21bfae0005a2ead265eecd02848aa6d27ae0"
+        },
+        {
+          "role": "attachment_018",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/scene_R05.json",
+          "sha256": "a754ee87392ecf8b3413937875884752ef4b7649ddaa3ab2ff1676ffe9d858e2"
+        },
+        {
+          "role": "attachment_019",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/scene_R06.json",
+          "sha256": "00752cb555645469a562e41d6a4c910d797a97b9f0e0191a77b35e3a668726bb"
+        },
+        {
+          "role": "attachment_020",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/scene_idle.json",
+          "sha256": "dfcd23dcbbeebc3b0e5e5f13400f9deaca067e08028888e9778e05374aa31602"
+        },
+        {
+          "role": "attachment_021",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/R01.png",
+          "sha256": "da69dddedd7b0fd590826f328c5c9b17a38f6ac9f752019c89e85df0a9e9a732"
+        },
+        {
+          "role": "attachment_022",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/R02.png",
+          "sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa"
+        },
+        {
+          "role": "attachment_023",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/R03.png",
+          "sha256": "d9c684f446e97dd781f7bb93fe3fcc061fa9de5e8aa6cd3d5a22963b274fc885"
+        },
+        {
+          "role": "attachment_024",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/R04.png",
+          "sha256": "2b30982d972700a43c5113d27ed85c7b657e98a130d794b74fa6f7b179f496b2"
+        },
+        {
+          "role": "attachment_025",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/R05.png",
+          "sha256": "7c0e6127bed939673c2d9d2898ae9c5d8e13d6899d817a05deb36d4cea8fa85c"
+        },
+        {
+          "role": "attachment_026",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/R06.png",
+          "sha256": "9c2682373635b09f6a18b81e2fc9820b4028a4d6ebb68acb84aee3af6e6fcb0d"
+        },
+        {
+          "role": "attachment_027",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/conversion.json",
+          "sha256": "a66e4499141fa74eddb7211451e95f5fd6687bf69f35116f6e4858949a551dca"
+        },
+        {
+          "role": "attachment_028",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/idle.png",
+          "sha256": "360c7c880128fd54006a8fd2dd510ab173a5b2f1cfa7d698e51c23ad80926647"
+        },
+        {
+          "role": "attachment_029",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/reference.png",
+          "sha256": "76c366bf055aa31d8c0fc7211a8e9ee04436da687eacd020b9e7bd982278319b"
+        },
+        {
+          "role": "attachment_030",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/sample_data.h",
+          "sha256": "b20b546612acd30713f5dc0fbf1304ffda1dbc16afc9bd14274b94f37c281071"
+        },
+        {
+          "role": "attachment_031",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/scene_R01.json",
+          "sha256": "aebd16f9e4a8652a85eccbab155175583e11c72d99728340ecadeafe8635281e"
+        },
+        {
+          "role": "attachment_032",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/scene_R02.json",
+          "sha256": "280813496d0349acd2ced05320c6639a3b5026a2ebb3a4a85559c9532413dcf5"
+        },
+        {
+          "role": "attachment_033",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/scene_R03.json",
+          "sha256": "e7d13677a8174f3f62884e940989b9493f05b5058a84fa1c9c4994582d9776b1"
+        },
+        {
+          "role": "attachment_034",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/scene_R04.json",
+          "sha256": "c4116cc9eb9c2ba599ccd0fe465ea802d87b460aa52739e9fdf731ae5083c859"
+        },
+        {
+          "role": "attachment_035",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/scene_R05.json",
+          "sha256": "5de70afc27dd4a398439ba369636c2aa3cf956dfa299a2c9194a08e9054a58d7"
+        },
+        {
+          "role": "attachment_036",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/scene_R06.json",
+          "sha256": "3dea8fa017ccc64ddd9d984cb697b60f1a294b091143e0435b92e9db30c26d76"
+        },
+        {
+          "role": "attachment_037",
+          "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/scene_idle.json",
+          "sha256": "e19629c2399ad188a9afc91172deab288afef3a4203471e59e5be4e08c6801ac"
+        },
+        {
+          "role": "attachment_038",
+          "path": "out/diagnostics/hayato_short_cut_v2/final_review_v4/animation_contract_audit.json",
+          "sha256": "f7ccf510f83e79e9a3bd25f28ba6e8a26a50681c9ace2536f80026eb26fff2f5"
+        },
+        {
+          "role": "attachment_039",
+          "path": "out/diagnostics/hayato_short_cut_v2/final_review_v4/animation_semantics.json",
+          "sha256": "ed112306b38a7eeacc721f34135fefa74135049a2d569e77928c6ee4641a4792"
+        },
+        {
+          "role": "attachment_040",
+          "path": "out/diagnostics/hayato_short_cut_v2/final_review_v4/animation_semantics_manifest.json",
+          "sha256": "ac7124b1026116a2e9d2e5afbb58083d09429a682ea80dde1e1248513d7bea7b"
+        },
+        {
+          "role": "attachment_041",
+          "path": "out/diagnostics/hayato_short_cut_v2/final_review_v4/art_checklist_audit.json",
+          "sha256": "4e76dfe58aaaac5604b0682c0586f7e13a24218708e1d4c422c25470f6b2f692"
+        },
+        {
+          "role": "attachment_042",
+          "path": "out/diagnostics/hayato_short_cut_v2/final_review_v4/before_after_normal.apng",
+          "sha256": "741aa3e360f0ffc7d13dc341a78592e1f1f686fcf65a2b60c19eac3d6041d3dd"
+        },
+        {
+          "role": "attachment_043",
+          "path": "out/diagnostics/hayato_short_cut_v2/final_review_v4/before_after_slow.apng",
+          "sha256": "eef19e796caf1d2beed8b19920c2b5c37a90899eb858dcacc4a8f3ca72c6f82b"
+        },
+        {
+          "role": "attachment_044",
+          "path": "out/diagnostics/hayato_short_cut_v2/final_review_v4/manifest.json",
+          "sha256": "cdb004355757b5a7552452ef211ddf5883a401d2c3fe7502e890d1f1e81e06a6"
+        },
+        {
+          "role": "attachment_045",
+          "path": "out/diagnostics/hayato_short_cut_v2/final_review_v4/source_raster.json",
+          "sha256": "106990d58bb06f9798d98b30c3e929a3fbdf3acaf18ebfaa64b8751073996c6e"
+        },
+        {
+          "role": "attachment_046",
+          "path": "out/diagnostics/hayato_short_cut_v2/independent_qa/left/request.json",
+          "sha256": "ef2cb1071f2d14b672926f90d046abf6abb5ca45ae12ba13098bc72a0238b847"
+        },
+        {
+          "role": "attachment_047",
+          "path": "out/diagnostics/hayato_short_cut_v2/independent_qa/left/run_3f9d4ad9fa124797b7e40f3747c65482/closed_session.json",
+          "sha256": "d76e6437257047928db8a7f91d8f41f394e9db1bcce6d3f8c3d10df19149b030"
+        },
+        {
+          "role": "attachment_048",
+          "path": "out/diagnostics/hayato_short_cut_v2/independent_qa/left/run_3f9d4ad9fa124797b7e40f3747c65482/report.json",
+          "sha256": "f068fe671e1c2d86fe5c3360f2cd53c28d7494b076120397054146910491d107"
+        },
+        {
+          "role": "attachment_049",
+          "path": "out/diagnostics/hayato_short_cut_v2/independent_qa/right/request.json",
+          "sha256": "3904357cf5641b2249670068eb085f99862b610806dd2ac233e199daff41f0aa"
+        },
+        {
+          "role": "attachment_050",
+          "path": "out/diagnostics/hayato_short_cut_v2/independent_qa/right/run_e7a05d73d60749f3b63964c75c5f1eda/closed_session.json",
+          "sha256": "ea254d877e2da05138821a01785efc4b0f15cd402d06844d5dba213545505889"
+        },
+        {
+          "role": "attachment_051",
+          "path": "out/diagnostics/hayato_short_cut_v2/independent_qa/right/run_e7a05d73d60749f3b63964c75c5f1eda/report.json",
+          "sha256": "b995122cbdc112e56db451ea552dee995760bafc54d8a920c4a6c26a70bf7196"
+        },
+        {
+          "role": "attachment_052",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/bundle/1b1f33e71f704e05bd064e688d3378cf/capture.json",
+          "sha256": "56951197e9ebb3af46d2d6d4487be2575629989c8b670c04270238aaab095bfa"
+        },
+        {
+          "role": "attachment_053",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/bundle/1b1f33e71f704e05bd064e688d3378cf/commands.jsonl",
+          "sha256": "9e8cdbc847ea4ad81b6036e2711094a2061ab14ee068a35db1134ad94672aad7"
+        },
+        {
+          "role": "attachment_054",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/bundle/1b1f33e71f704e05bd064e688d3378cf/session.json",
+          "sha256": "c81ec11bbeb16f74a71293986fe06d831c646cff76e902a89c5955a43dddcea4"
+        },
+        {
+          "role": "attachment_055",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/closed_commands.jsonl",
+          "sha256": "3a0dd9ac769dc94d9505b7d92c8e4c6bc6ba94c8eefb1a4598dec6c412efd5e3"
+        },
+        {
+          "role": "attachment_056",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/closed_session.json",
+          "sha256": "baeb01b8326201d26aa192a0e14b4fa4e8155db5417c23feb9700578c905dba6"
+        },
+        {
+          "role": "attachment_057",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.json",
+          "sha256": "49f70724a05393f2f25c48279fb1293872d66de098e3481d02829f42f424d9a2"
+        },
+        {
+          "role": "attachment_058",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.mp4",
+          "sha256": "e64715e8d2a5acff44cd328a9d533098545c003eb5725c01460f01907b26cbc7"
+        },
+        {
+          "role": "attachment_059",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/pixel_timeline_analysis.json",
+          "sha256": "e79cf86febe002568fc21f2317ddb2c68a8333986b4236da96cf2815365d0877"
+        },
+        {
+          "role": "attachment_060",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/result.json",
+          "sha256": "02a52ad5d9b6a819ec9b7a0dd4e97fe1cc14bc699e15b9786602c7014a51a8bd"
+        },
+        {
+          "role": "attachment_061",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/rom_normal.apng",
+          "sha256": "942ab8d5313d94c68644eceb5ff37694b5aaea5f987bb692a10e14da1c920f23"
+        },
+        {
+          "role": "attachment_062",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/rom_slow.apng",
+          "sha256": "98d7414cf399d285cd31c1303096aa0b0fce48fc1cacae9013a2532f01579122"
+        },
+        {
+          "role": "attachment_063",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/runtime_probe.json",
+          "sha256": "3c7db76053a92142dd86c8cf2b77e98bed5a878312e4873f0a300ec479e1ddf0"
+        },
+        {
+          "role": "attachment_064",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/video_copy_receipt.json",
+          "sha256": "070a5bc18a370d3ab9fceca5d5827489878db2158f04d5622982354396af6c57"
+        },
+        {
+          "role": "attachment_065",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/worst.json",
+          "sha256": "34242568693b595c5f099a7400c08beccb1be73975750fe0c4312b4dcb93bd13"
+        },
+        {
+          "role": "attachment_066",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/30406ea2f3a9418493c66f6d60ffeddd/bundle/30406ea2f3a9418493c66f6d60ffeddd/capture.json",
+          "sha256": "28d25150f5e88a94f4e674dc38e0f1235dd4d9a81c509c16d678a2579d5bf5d6"
+        },
+        {
+          "role": "attachment_067",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/30406ea2f3a9418493c66f6d60ffeddd/bundle/30406ea2f3a9418493c66f6d60ffeddd/commands.jsonl",
+          "sha256": "d5ac37f40bb4e36c2e128092f6514e92c9b9b94fd464c86fc8dffa81983808fd"
+        },
+        {
+          "role": "attachment_068",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/30406ea2f3a9418493c66f6d60ffeddd/bundle/30406ea2f3a9418493c66f6d60ffeddd/session.json",
+          "sha256": "cbb1b89bda68af5f40bff5f621c438b5f8413e5c9cdf75abe18fa88b6e086fb6"
+        },
+        {
+          "role": "attachment_069",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/30406ea2f3a9418493c66f6d60ffeddd/closed_commands.jsonl",
+          "sha256": "f65aa98263b41675a4e9222334dfc1acf8a3f790caad78ea8d2d3df4b4007883"
+        },
+        {
+          "role": "attachment_070",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/30406ea2f3a9418493c66f6d60ffeddd/closed_session.json",
+          "sha256": "7b1eee30d0963aad2d56f050b05d5c213c700942c017b8ef425ba08784d33b6a"
+        },
+        {
+          "role": "attachment_071",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/30406ea2f3a9418493c66f6d60ffeddd/result.json",
+          "sha256": "95e41f449a810cf91aecc99a3b77bdf378b82b6e6e278e839f1e47079c83d56a"
+        },
+        {
+          "role": "attachment_072",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/30406ea2f3a9418493c66f6d60ffeddd/worst.json",
+          "sha256": "19533dc758647f7963291e0794755f06c65ae4cbd6291460136f588fb3a06855"
+        },
+        {
+          "role": "attachment_073",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/cleanup_verified.json",
+          "sha256": "a6329e5b2d123bf457cf4e31f63b9136f8ab81b52679b4f42c6e976a0e0760bc"
+        },
+        {
+          "role": "attachment_074",
+          "path": "out/diagnostics/hayato_short_cut_v2/performance_v4/result.json",
+          "sha256": "5eeb5127a0043757adc75de02f9e8d33062aec500034e0e812b21de67fd9ad71"
+        },
+        {
+          "role": "attachment_075",
+          "path": "out/diagnostics/hayato_short_cut_v2/rough/independent_review.json",
+          "sha256": "92c7fad417ca4f87ade661f2590f2202435d16e44738fd985f5fcae68b2aa5d6"
+        },
+        {
+          "role": "attachment_076",
+          "path": "out/diagnostics/hayato_short_cut_v2/rough/independent_review_v2.json",
+          "sha256": "19bcb146aae846494011c31657da5aaf1692d66c975e0bb38d31b043cf1623bf"
+        },
+        {
+          "role": "attachment_077",
+          "path": "out/diagnostics/hayato_short_cut_v2/sms_cutout_components_v4.json",
+          "sha256": "c5e47d8b28609f7640facfc3015ee7432ee981217c5c5a811e9832f7bbf0bbe5"
+        }
+      ]
     }
   ],
   "heads": [
@@ -2221,6 +3494,62 @@
       "kind": "planning_sheet",
       "variant": "cps2-repeatability",
       "candidate": "hayato-cps2-repeatability-brief-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-key",
+      "candidate": "hayato-cps2-short-cut-key-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut",
+      "candidate": "hayato-cps2-short-cut-v04",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "short-cut-direction",
+      "candidate": "hayato-short-cut-direction-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "short-cut-rough",
+      "candidate": "hayato-short-cut-rough-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "animation_source",
+      "variant": "cps2-short-cut-body-key",
+      "candidate": "hayato-cps2-short-cut-body-key-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "art_review",
+      "variant": "short-cut-review-records",
+      "candidate": "hayato-short-cut-review-records-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "short-cut-contract-records",
+      "candidate": "hayato-short-cut-contract-records-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "short-cut-runtime-evidence",
+      "candidate": "hayato-short-cut-runtime-evidence-v01",
       "approved": null
     }
   ],

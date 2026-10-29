@@ -1,5 +1,36 @@
 # 11-gdd — master_of_fighters
 
+## Perfil corrente da reformulação — fonte v4
+
+Corte curto continua o único escopo. R01carga alta, R02liberação, R03corte,
+R04absorção mais baixa, R05retorno cruzado, R06recuperação alta e guarda.
+Seis desenhos, tempos diagnósticos4/1/2/3/1/3 apresentados na ROM, sem dado competitivo. Cabeça,
+ombros, quadril e joelhos participam; proporção não significa silhueta congelada.
+Fonte192px fornece margem para arcos; fontes144px existentes preservadas.
+Perfil diagnóstico8×8 usa a mesma escala comum e P1, sem novo consumidor.
+Review da fonte estática v3 e adendo fonte/SMS v4 passaram; execução da ROM,
+ordem e exposições verificadas. Julgamento de força/ritmo/leitura contínua e
+aceite do dono continuam separados e pendentes. Não ampliar antes desse checkpoint.
+
+## Histórico: reformulação autorizada do corte — 2026-10-29
+
+Prioridade atual: corrigir coreografia e continuidade corporal do corte já
+escolhido, preservando identidade/acabamento. Contrato diagnóstico atual v2:
+cinco desenhos propostos, tempos4/1/2/3/3 revisáveis pelo estudo; v1 é tentativa
+histórica. Referências externas orientam movimento, nunca identidade/paleta.
+Sem dano, hitboxes, frame-data competitiva, elenco ou sistemas adicionais.
+Aceite temporal/SMS/ROM/owner fica separado do parecer estático anterior.
+
+## Corte curto de Hayato — recorte diagnóstico, 2026-10-29
+
+O dono direcionou completar o teste com corte curto de katana, primeiro
+comparando guarda+execução convertidas. A ação é amostra artística, sem dano,
+hitboxes, cancels ou frame-data competitiva aprovados. Quatro poses C01–C04,
+working3/2/2/5ticks, retornam à guarda preservada; não amplia elenco, atlas,
+cenário ou sistemas. Contrato em hayato_animation_contract_v1.json.
+Fonte completa gerada e buildada; qualidade, animação e ROM ainda seguem seus
+reviews/gates próprios. Aceite positivo da guarda não é aprovação da ação.
+
 ## Recorte corrente Hayato — 2026-10-29
 
 Pedido do dono: repetir a amostra CPS2 em Hayato, comparando com Dr. Social,

@@ -1,5 +1,135 @@
 # 10-memory-bank — master_of_fighters
 
+## Lote corrente — corte corporal, fonte v4 e ROMs novas
+
+Fonte atual: `data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png`. Seis poses R01–R06,14ticks provisórios
+4/1/2/3/1/3 e guarda original. R03novo antecede R04absorção mais baixa; R06reusa
+C04antiga no mesmo papel de recuperação. Cinco desenhos do conjunto pertencem
+à nova coreografia.192px é margem transparente; originais144px preservados.
+Não há fit individual do corpo/arma. Onze gerações de reformulação e um patch
+local de franja foram preservados com prompts/receitas; não alegar economia.
+
+Fonte v3 passou estática após reparo de R02katana curta/larga. Adendo v4 passou
+fonte/SMS: R02transladada exatamente(0,+1); R03recebe8pixels ImageGen somente
+no ROI[109,77,114,82], foraROI/face/corpo/equip exatos; derivada remove1ponto
+solto da franja.16PNGs terminam79/boundary80; gatecomponentes(min4,c8)passou,
+regiões materiais automatizadas ainda pending e materiais têm review separado.
+Percepção contínua/timing percebido/dono/produção continuam pendentes.
+
+Adaptador oficial v2 opt-in8×8 chama packer existente, sem segundo consumidor.
+219padrões/7008B residentes, max53SAT/pico8;14composições. Defaults tall: header/
+3PNGs reais byte-idênticos.20testes do adaptador e selfcheck128tall+64normal;
+7testes puros da captura realtime. Novo campo expected_opaque_bottom_px=80
+bloqueia pivô stale antes de publicar header. CanvasSMS88/pivô40,80, origens
+24/136,64 mantêm posições mundiais/solo144. Social902pixels/índices/RGBA/PLTE
+preservados nos2sentidos.8×16 completo reprovou residência; não reduzir atores.
+
+Configsativas `hayato_short_cut_body_sequence_v4_{left,right}.json`, headers
+`out/diagnostics/hayato_short_cut_v2/converted_v4_{left,right}`, seletores9/10.
+7/8 preservam controle negativo v3;5/6 preservam tentativa antiga. ROMs32KiB:
+left3019e59281b0ca9638f8ab47375e47703b5314e50107ed05495b9802946fe2a7;
+rightf531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517;
+stress1284f7b340a19075183542c318352457ab1d5adca78d09037af9060f991bffd497a.
+Builds passaram. QA independente atual: duas sessões fechadas, 236/236 quadros
+exatos, 20 checks; entrada manual apresenta 4/1/2/3/1/3 e guarda terminal.
+Vídeo nativo em run livre: 480/480 quadros exatos em 8,0187 s, sete apresentações;
+ordem e holds completos conferidos, MP4 lossless decodifica no mesmo SHA RGB.
+O callback usa DisplayWindow original, sem stepping nem compositor. Sessão
+1b1f33e71f704e05bd064e688d3378cf: FPS 59,78/59,67 em duas janelas de 8 s;
+VBlank selado em 3.000 frames, zero derrame, mínimo 213. Stress128 sessão
+30406ea2f3a9418493c66f6d60ffeddd: 3.000 frames, zero derrame, mínimo 223.
+As quatro sessões deste fechamento estão encerradas; PIDs/start_ticks próprios
+ausentes. Métricas qualificam este par diagnóstico, não cada frame ou game feel.
+
+Evidências: `out/diagnostics/hayato_short_cut_v2/performance_v4/`, QA em
+`independent_qa/`, comparação final normal/lenta e fonte em `final_review_v4/`.
+27 testes focados passaram (20 adaptador + 7 captura); 28 checks de recursos,
+14 composições, corredor e vínculos passaram; raster, semântica e contrato
+atuais passaram. Checklist artístico bloqueia promoção por percepção contínua
+e aceite do dono pendentes. Próximo checkpoint: observar o vídeo real em tamanho
+SMS e a comparação normal/lenta; julgar intenção, força, trajetória e recuperação.
+Não pedir novamente qual ação produzir. Registro do método atualizado no candidato
+existente para curadoria futura; nenhuma skill, doutrina ou gate global promovido.
+Parecer final `hayato_short_cut_body_temporal_independent_review_v4.json`:
+`needs_evidence`. O revisor verificou todos os480quadros,13ações completas e12
+ciclos com pausa integral; não percebeu playback contínuo. Sem novo defeito
+estático/render identificado; absorção R03→R04, retorno R05→R06→guarda e apoios
+são os intervalos prioritários para observação contínua, não defeitos provados.
+Auditoria em memória do recorte Hayato+ancestrais:23artefatos/260arquivos passou;
+auditoria global segue falhando no relatório Social61v5 histórico ausente.
+Pacote privado `out/diagnostics/hayato_short_cut_v2/hayato_body_cut_v4_review.zip`
+e recibo `doc/hayato_short_cut_body_retention_v4.json` preservam os insumos e
+evidências com manifesto interno. Cópia de recuperação é local no mesmo disco.
+Branch `codex/host-bootstrap-continuity-20261024`, base284b15be9bf1898219518973a366d3930deed2f2,
+PR4 reutilizado; SHA final/testes/estado remoto em `out/diagnostics/hayato_short_cut_v2/publication.json`.
+Sem hitboxes/dano/áudio/PAL/gameplay/AAA aprovados. Seções abaixo são históricas.
+
+## Histórico da reformulação de coreografia — 2026-10-29
+
+O dono aprovou identidade/acabamento, mas rejeitou a força e construção temporal
+do corte v1. A escolha continua corte curto; C01–C04 e3/2/2/5 podem ser revistos.
+Causa no prompt preservado: cabeça/pés/hakama fixos, punhos1–2px/recuo3px;
+identidade foi traduzida incorretamente em corpo congelado. Parecer estático
+pass não prova movimento. Nenhuma fonte, ROM ou evidência anterior foi apagada.
+Contrato atual em `hayato_animation_contract_v2.json`, direção/defeitos/estudo de
+referências em `hayato_short_cut_choreography_v2.json`. Diagrama gestual em
+`out/diagnostics/hayato_short_cut_v2/rough/`:6desenhos,4/1/2/3/1/3 provisórios,
+transferência de peso sem deslocamento da raiz. Esquema não é arte final.
+Revisão independente do gesto2 sem blocker estático; percepção temporal pending.
+Primeira chave acabada R03 em revisão; ainda não há sequência acabada ou ROMv2.
+APNG iniciado no navegador e observado por snapshots; sem alegar percepção
+contínua. Nenhuma leitura de contrato/FPS certifica coreografia/AAA.
+
+O fechamento técnico da tentativa anterior existe: QA2/2,236framebuffers exatos,
+10checks por orientação, holds apresentados3/2/2/5. Base27da9585…: janelas8s
+59,69/59,82fps; selo3000frames,0derrame,mínimo207. Degrau128B63f72cfe…:
+3000frames,0derrame,mínimo217. Sessões137aba3e… e66263eef… encerradas.
+Esses dados qualificam somente aqueles pixels/tempos, não a nova ação.
+O snapshot “Lote em andamento” abaixo é histórico e foi superado por esta seção.
+
+## Lote em andamento — corte curto escolhido, 2026-10-29
+
+O dono escolheu o corte curto como amostra artística e pediu prova antecipada
+com guarda+execução. Direção textual em decisions/hayato-short-cut-diagnostic_owner_direction.json;
+não é dano/hitboxes/frame-data, produção ou nova QA executada pelo dono.
+Contrato diagnóstico hayato_animation_contract_v1.json: C01preparação,
+C02execução,C03acompanhamento,C04recuperação, tempos provisórios3/2/2/5.
+A escolha deixou de ser blocker; não perguntar de novo.
+
+Primeira C02 foi preservada: coroa/apoio alterados e par mínimo10 nas128fases
+por sentido com grade de referência fixa. Não foi buildada. Parecer independente
+v1reprovou continuidade. A v2 restaurou apoios/estatura, passou revisão da chave
+e materiais SMS e a prova guarda+execução nos dois sentidos (98patterns,pico8).
+Foi necessário medir fases dos DOIS atores, sem mudar pixels/P1 do Social.
+
+Fonte completa candidata em data/source_art/sprite_studies/hayato/review_drafts/
+cps2_short_cut_v1/sequence_v1/cut_source.png:4poses144×144. C02 copiada byte-idêntica
+à chavev2; só3poses de apoio foram geradas na terceira chamada deste lote.
+Folha bruta1254×1254 traduzida num único2/9nearest para todas as3poses de apoio,
+sem fit individual; originalguard/C02 preservados. Os shifts/pivôs são declarados,
+não pintura/recorte da arma. Revisão integral de corpo/volume/arma/movimento e
+materiais está pendente em hayato_short_cut_sequence_review_request_v1.json.
+
+Configs ativas hayato_short_cut_sequence_v1_registered_{left,right}.json,
+saídas out/diagnostics/hayato_short_cut_v1/registered_{left,right}/.
+Todos os12PNGs têm última opacay71(boundary72), portanto tela143(boundary144).
+C01/C04 precisaram inputanchorY126 antes de build: o nearest eliminava a última
+linha esparsa de sola na projeção; C03 usa126 por sua sola-fonte,guard/C02usam127.
+Uma única escala de corpo no par; não houve redução de alcance/omissão de células.
+202patterns/6464B, máximo33SAT,pico8 nas10composições, tudo residente.
+
+Três ROMs buildadas32KiB, ainda sem QA nesta atualização:
+left a9e6ef0077e551af2652d42e332c66683fdd610ed3a1aafa9357249c0cdfa5aa;
+right 27da9585d5ebd9f73b6969259213994d1faf85f5e62036cf116c90dbd6e0bc51;
+stress128 63f72cfead2be96c0f35da41c0943b3b957da7d646c20d7c0538c0d0da59bb33.
+Mesmo main e FSM, seleções MOF_HAYATO_SAMPLE5/6;3/2/2/5nos dados, não hitbox.
+Corredor14sondas,C7D2..C7F9,folga1784B passou nos mapas atuais.
+Previews normais/lentos em cut_cycle_nominal_4x.apng,cut_cycle_slow_4x.apng,
+pair_cycle_nominal.apng; não são evidência do emulador nem fluidez certificada.
+Próximo: terminar revisão integral, QAprivada nos2sentidos, ler holds reais,
+FPS/VBlank e degrau128B neste SHA, preservar evidências/curadoria/commit/pacote.
+Estado abaixo descreve o checkpoint estático anterior, sem herdar seus PASS.
+
 ## Continuidade corrente — Hayato, 2026-10-29
 
 **Checkpoint da guarda concluído; ação própria pendente de escolha do dono.**

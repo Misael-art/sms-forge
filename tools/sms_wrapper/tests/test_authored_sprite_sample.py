@@ -9,7 +9,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from prepare_authored_sprite_sample import (load_pose, convert_poses, prepare,
-                                           extract_native, phase_self_check, map_source_indices)
+                                           extract_native, phase_self_check, map_source_indices,
+                                           eight_self_check, pack_registered_eight)
 
 
 def fixture(tmp_path, opaque=1):
@@ -135,6 +136,66 @@ def test_wide_pair_is_rejected_without_omitting_cells(tmp_path):
 
 def test_all_grid_phases_preserve_pixels_and_opaque_black():
     phase_self_check()
+
+
+def test_eight_pixel_grids_reconstruct_every_index_and_enforce_capacity():
+    eight_self_check()
+
+
+def test_v2_normal_mode_changes_packing_not_source_conversion(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v2',
+           'poses': [dict(spec, id=name, packing_phase_px=[3, 5])
+                     for name in ['idle', 'cut']],
+           'durations': [2], 'extra_scale': [2, 3],
+           'reference': dict(spec, extra_scale=[2, 3], packing_phase_px=[2, 4])}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    tall = prepare(path, tmp_path / 'tall')
+    cfg['sprite_size'] = '8x8'
+    path.write_text(json.dumps(cfg))
+    normal = prepare(path, tmp_path / 'normal')
+    assert normal['sprite_size'] == '8x8'
+    assert normal['scale'] == tall['scale']
+    assert normal['palette_codes'] == tall['palette_codes']
+    for name in ['idle', 'cut', 'reference']:
+        assert (tmp_path / 'normal' / f'{name}.png').read_bytes() == (tmp_path / 'tall' / f'{name}.png').read_bytes()
+    assert all(scene['legal'] for scene in normal['compositions'])
+    assert json.loads((tmp_path / 'normal/scene_cut.json').read_text())['sprite_size'] == '8x8'
+    assert '#define SAMPLE_SPRITE_HEIGHT 8u' in (tmp_path / 'normal/sample_data.h').read_text()
+    # A normal-mode phase must never silently accept the tall mode's y=8..15.
+    cfg['poses'][1]['packing_phase_px'] = [0, 8]
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='x/y=0..7'):
+        prepare(path, tmp_path / 'bad_phase')
+    assert not (tmp_path / 'bad_phase/sample_data.h').exists()
+
+
+def test_normal_mode_is_explicit_v2_opt_in_and_requires_matching_phases(tmp_path):
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps({'schema': 'sms_authored_sprite_sample_v1', 'sprite_size': '8x8'}))
+    with pytest.raises(ValueError, match='explicit v2 opt-in'):
+        prepare(path, tmp_path / 'invalid')
+    with pytest.raises(ValueError, match='one phase per pose'):
+        pack_registered_eight([('missing', tmp_path / 'absent.png')], [], tmp_path, 256)
+
+
+def test_declared_opaque_ground_boundary_blocks_stale_registration(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v2', 'sprite_size': '8x8',
+           'poses': [dict(spec, id=name, expected_opaque_bottom_px=72)
+                     for name in ['idle', 'cut']],
+           'durations': [2], 'extra_scale': [2, 3],
+           'reference': dict(spec, extra_scale=[2, 3], expected_opaque_bottom_px=72)}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    prepare(path, tmp_path / 'registered')
+    # A changed source/pivot must fail before it can publish a renderable header.
+    cfg['poses'][1]['pivot'] = [spec['pivot'][0], spec['pivot'][1] - 4]
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='cut: opaque bottom .* recheck source registration'):
+        prepare(path, tmp_path / 'stale')
+    assert not (tmp_path / 'stale/sample_data.h').exists()
 
 
 def test_default_and_explicit_zero_phase_have_identical_runtime_data(tmp_path):
