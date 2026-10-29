@@ -5,6 +5,49 @@
 > não substitui este arquivo.
 
 ## Última atualização
+2026-10-28 — Amostra autoral CPS2 v3 produzida como candidata: uma pose idle
+(cópia de J01) e `social_light_jab` J01–J06, sem expansão do atlas. Fonte
+384×256/30 cores, seis células 128×128, corpo ~104 px, alpha binário; SHA
+`04d21085…`. Receitas, prompts, originais e tentativas preservados no Git;
+implementação/arte em `ba706e8`. Relatório/handoff: `doc/dr_social_cps2_sample_v1.md`.
+ROM diagnóstica 32.768 B, SHA `f5d54b15…`, observada no Emulicious: par
+Social/Ken íntegro, 31 SAT/pico8, pool212 padrões. Fontes→SMS→header→ROM ligados
+por hashes; dados buildados conferem com o fonte/header atuais. QA nativa
+independente `/root/social_runtime_qa`: 1/1 caso passou, 120 framebuffers
+exatos, sessão encerrada. J02–J06 apresentam holds1/1/1/1/3; J01/idle têm
+pixels iguais e seus IDs dependem também da sonda, com latência observada de
+um frame entre submissão SAT e framebuffer. FPS em janelas8s:59,43/59,56;
+janelas curtas anteriores58,8/59,23 falharam. Worst-frame autônomo3000frames
+passou, zero derrames, `vline_min=207`; degrau+128B passou, mínimo217.
+As quatro sessões do lote foram encerradas. Seis testes do adaptador e gates
+de recurso, scanline, semântica/contrato, fonte raster, vínculo, tilemap,
+debug/corredor passaram após self-checks. Isso paga apenas o trecho diagnóstico
+NTSC; sem gameplay, cenário/HUD, áudio novo ou entrega de produção.
+
+Revisão artística v2: `revise_before_growth`. Cabelo cinza/abas/J03 melhoraram,
+mas óculos variam entre poses, contato J04 precisa leitura mais inequívoca e a
+conversão enfraquece rosto/lapela/colete. Checklist bloqueia promoção; dono
+ainda não aprovou esta fonte CPS2. Próximo delta: rosto/óculos e contato,
+revisão hash-bound antes de qualquer ampliação. Comparativos/animação/ROM e
+evidência estão em `out/diagnostics/dr_social_cps2_sample_v1/` e `out/candidates/`.
+
+Pacote de revisão `dr_social_cps2_sample_review.zip` no diagnóstico: 263 arquivos
+verificados pelo manifest interno, SHA `9536b5a5…`, 3.165.950 B. Cópia local de
+recuperação idêntica e recibo em
+`/home/misael/.local/share/project-recovery/SMSForge/artifacts/dr_social_cps2_sample_v1.zip`.
+Fontes/receitas ficam no Git; esse arquivo protege os gerados fora de `out/`,
+mas não é backup em outro host nem release de produto.
+
+Foi conferida a decisão artística v08.2 existente e o PNG aprovado em
+`res/approved_art/dr_social/`, SHA `4e557095…`. As afirmações históricas abaixo
+de aprovação pendente estão superadas somente nesse escopo. A aprovação foi
+preservada sem inferir conversão/runtime/budget; identidade segue no model v4.
+Variantes `cps2-idle`/`cps2-light-jab` são candidatas distintas. Bloqueio
+organizacional preexistente: relatório histórico v5 ausente impede PASS global
+do registro. Seu kind também não representa no head genérico a fonte artística
+aprovada em res/; a decisão/hash exatos permanecem na reconciliação. Nenhuma
+aprovação ou relatório histórico foi fabricado.
+
 2026-10-12 — Diretriz v08.2 executada como candidata determinística. A reclassificação autorizada atravessou fronteiras de materiais/contorno, preservando alpha e grade; o casaco foi limitado aos índices 5/6. Uma auditoria independente por célula encontrou zero singletons e zero componentes sem bloco sólido 2×2 em cabelo, casaco e pele. Permanecem 11 cores úteis, zero vazamentos semânticos, 85 pixels de óculos dourados, haste branca de 1.245 pixels e zero pixels não cinza na máscara do cabelo em 61/61 poses. Foram adicionados 863 pixels ao contorno por voto de vizinhança, sem modificar nenhum pixel do contorno original. A candidata ainda aguarda revisão visual do dono; não foi promovida, integrada em `res/` nem compilada em ROM. Amostras, relatório, máscaras e log estão em `data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/`; contrato, diretriz e registro de curadoria estão em `doc/dr_social_sprite_mask_contract_v08_2.json`, `doc/dr_social_sprite_rebuild_directive_v08_2.md` e `doc/curation_candidates/2026-10-12_dr_social_v08_2_cluster_consolidation.json`. A matriz v07 permanece congelada como geometria; model sheet CPS2-Alpha-Cel v4 continua a referência aprovada de identidade.
 
 2026-10-12 — Diretriz v08.1 e candidata de cor: o dono autorizou os óculos de latão na zona amarela e confirmou a preservação de 85 pixels faciais. O passe determinístico classificou os 36 resíduos da auditoria v08, zerou vazamentos branco/amarelo/bordô/cinza e deixou 1.245 pixels da haste da bengala brancos e uniformes; alpha, grade 8×9, 61 poses e paleta indexada foram preservados. A inspeção também localizou e corrigiu a sombra avermelhada da franja: 1.014 pixels avermelhados foram recuperados como cabelo cinza e há zero pixels não cinza dentro das máscaras de cabelo em 61/61 poses. A limpeza 2×2 ainda falha: restam 73 singletons de cabelo, 96 do casaco e 341 da pele (102/139/553 componentes abaixo de 2×2). A candidata não foi promovida, integrada em `res/` nem compilada em ROM. Arquivos: `doc/dr_social_sprite_mask_contract_v08_1.json`, `doc/dr_social_sprite_rebuild_directive_v08_1.md` e `doc/curation_candidates/2026-10-12_dr_social_v08_1_cluster_consolidation.json`; amostras e relatório estão em `data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/`. A matriz v07 segue congelada como geometria; model sheet CPS2-Alpha-Cel v4 segue como única referência de identidade.

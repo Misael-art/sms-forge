@@ -47,6 +47,30 @@ material, anatomia, identidade visual do terminal da bengala e review artístico
 seguem pendentes. A alocação de paleta runtime está em
 `doc/palette_runtime_contract_v1.json`; não há 14 paletas de sprite separadas.
 
+## Trecho diagnóstico CPS2 idle/jab — 2026-10-28
+
+Owner e fonte: `dr_social_cps2_sample_v1.md`. ROM base SHA `f5d54b15…`,
+32.768 B. Medição do pool e dos sete manifestos `scene_*.json` pelo pipeline
+tall e `audit_sprite_line_sim.py`: 212 padrões/6.784 B residentes, 31 SAT e
+pico8 por scanline em idle e J01–J06, zero overflow. Uma P1 comum de15 cores
+úteis com o Ken autorizado. Sprites na janela0x0000..0x1FFF; tile0 vazio
+compartilhado com fundo diagnóstico, PNT0x3800, SAT0x3F00. Não há cenário,
+HUD, projéteis ou áudio neste inventário.
+
+No setup, padrões/CRAM são carregados com display desligado. Em cada tick de
+animação, somente SAT é copiada ao VDP; os desenhos ficam todos residentes.
+Selo autônomo3.000frames no Emulicious: `vovf_delta=0`, `vline_min=207`.
+Degrau medido de+128B de padrões corretos por VBlank: também zero derrames,
+`vline_min=217`, em outra ROM/sessão identificada no relatório do lote.
+Não há conversão desses valores em milissegundos CPU ou teto máximo.
+
+SMRT em duas janelas8s:59,43/59,56fps; alvo NTSC passou no instrumento.
+Janelas curtas anteriores falharam e permanecem registradas. Sem qualificação
+PAL. Todos os números vêm de JSONs em `out/diagnostics/dr_social_cps2_sample_v1/`
+e `out/evidence/sessions/`, com quatro sessões encerradas e QA visual nativa
+independente1/1. Não se transporta o resultado para produção, gameplay ou
+outros conteúdos. O orçamento integrado da Cena01 abaixo continua aberto.
+
 ## Cena 01 — _(nome)_
 ### Layout de VRAM declarado
 | Região | Faixa | Tiles | Uso |

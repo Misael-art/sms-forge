@@ -1,5 +1,21 @@
 # 11-gdd — master_of_fighters
 
+## Recorte autoral CPS2 em revisão — 2026-10-28
+
+O pedido atual autoriza somente uma pose idle e `social_light_jab` J01–J06,
+com fonte em escala CPS2 e conversão posterior. O canvas 80×80 descrito no
+histórico abaixo não limita a nova fonte: a candidata usa células 128×128,
+corpo de aproximadamente 104 px e paleta-fonte própria. J01–J06 mantêm os
+tempos propostos 2/1/1/1/1/3 ticks; balanceamento continua não aprovado.
+
+A identidade permanece no model sheet v4, com decisões posteriores de cabelo
+cinza e óculos de latão. A aprovação artística v08.2 de 61 poses existe e foi
+conferida pelo SHA `4e557095…`; notas históricas de aprovação pendente estão
+superadas nesse escopo. A nova variante não substitui a fonte aprovada.
+Fontes, receita, revisão e limites estão em `dr_social_cps2_sample_v1.md`.
+Conversão e ROM desta amostra são diagnósticas, sem promoção ao elenco,
+gameplay, cenário/HUD ou entrega visual de produção.
+
 > Design e escopo. **Autoridade #2 — "se não está no GDD, não entra."**
 > **REGISTRO INICIAL (2026-10-02)** — nome provisório: **Master of Fighters**.
 > GDD em construção; revisão humana pendente (workflow new-project passo 2).

@@ -1,5 +1,50 @@
 # 15-tdd — master_of_fighters
 
+## Amostra CPS2 autoral — diagnóstico opt-in de 2026-10-28
+
+O consumidor existente seleciona a amostra com `MOF_CPS2_SAMPLE=1`, somente
+via manifesto candidato e `build_inner.py --build-dir`. O esqueleto nominal
+continua separado pelo preprocessor, sem outro projeto/consumidor. Fontes
+candidatas vivem em `data/source_art/`; PNGs SMS, header e ROM ficam em `out/`.
+
+O adaptador `tools/sms_wrapper/prepare_authored_sprite_sample.py` não desenha
+personagens nem implementa outro conversor: faz registro explícito do raster,
+carrega PNG indexado em `sff.Sprite`, aplica `display_fit.scale_sprite`,
+`sms_tiles`, `runtime_format.pack_tiles_tall/build_frames` e a compactação/
+paleta de `scene_cut`. O pool estático compartilha pares idênticos entre as
+poses. A fonte usa 30 tons por material, fora da restrição de CRAM; a saída
+usa 15 cores úteis numa única P1 compartilhada com o Ken de referência.
+
+Receita final da candidata v3: recorte transparente justo, framebuffer
+x=2/3 e y=6/7, escala corporal extra 4/6 derivada apenas do idle; cada pose
+mantém seu pivô/sola registrados antes da conversão. Fonte, SHA, paleta,
+parâmetros e transformações constam no JSON de configuração e na receita de
+extração. J01 é também a pose idle; não se declara ciclo de idle animado.
+
+O pool medido tem 212 padrões, 6.784 bytes; sprites tall 8×16 na primeira
+metade da VRAM, índices pares, limite físico de 256 padrões. O par vazio
+reservado também fornece o tile 0 do fundo diagnóstico. PNT em 0x3800 e SAT
+em 0x3F00. Todos os quadros do par Social/Ken medem 31 SAT e pico 8 por linha.
+Fundo sólido de diagnóstico não paga orçamento de cenário/HUD de produção.
+Uploads dos padrões/CRAM ocorrem no setup com display desligado. Na animação,
+somente SAT é escrita no VBlank; não há streaming para estender as durações.
+`MOF_SAMPLE_STRESS_BYTES=128` reenvia um prefixo correto dos mesmos padrões
+para medir o degrau seguinte sem alterar pixels ou residência.
+
+A ROM expõe SMRT e selo worst-frame de 3.000 frames em 0xC7D2..0xC7F9,
+inicializados e voláteis. Corredor: 1.784 bytes de separação no mapa candidato.
+`probe_state` em 0xC7F6 registra a pose submetida após a cópia SAT; o traço
+observou framebuffer correspondente no frame seguinte. Não interpretar a
+leitura da sonda como apresentação instantânea. Input 1 dispara o jab;
+input 2 alterna autoplay; o boot mantém idle estável antes da primeira ação.
+Autoplay insere 21 ticks de idle entre jabs; a ação conserva nove ticks.
+Sem colisão, dano, física de combate ou áudio novo neste diagnóstico.
+
+ROM base observada: 32.768 bytes, SHA
+`f5d54b1545aa20ec41ec7da0290b2c948aeec393c025d71c2401254b58458b8d`.
+O estado de FPS/VBlank e a revisão final ficam no relatório do lote;
+compilação, inventário e boot não os aprovam por inferência.
+
 > Arquitetura técnica. Autoridade #7.
 > A API definitiva é o header (`sdk/devkitSMS/SMSlib/SMSlib.h`, autoridade #8) —
 > este documento NUNCA inventa assinatura. Em dúvida: leia o header.

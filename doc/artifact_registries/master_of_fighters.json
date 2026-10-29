@@ -810,6 +810,350 @@
           "sha256": "7934bdad25ec4d9df23a0f4c5db50231bd00b64a7e011610306b8190b8c7e77e"
         }
       ]
+    },
+    {
+      "id": "dr-social-cps2-idle-v01",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "revision": 1,
+      "status": "historical",
+      "parents": [
+        "dr-social-model-sheet-cps2-alpha-cel-v04-candidate"
+      ],
+      "reason": "First standalone generated idle preserved; native extraction lost glasses and differed from jab drawing. Replaced by the sequence guard as source keypose.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_source.png",
+          "sha256": "5efb3827e6b5822be1c1728286d52aa6d95c212def47a20b77fe1c7d33a8e3f1"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_generated_raw.png",
+          "sha256": "818a3bf3a00872ff7fc719b33dd20cbcf763568f4035302b6d5a53ddbde1b197"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_prompt.txt",
+          "sha256": "5d8cfef353b8c61c59405caa265a8a83462da711dc327ba14ae65f25f7d438c3"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_metadata.json",
+          "sha256": "4599429dd80eb10a6c5a04365ecfe44db35968d135d218adc07419d0e767edf1"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v01",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "revision": 1,
+      "status": "superseded",
+      "parents": [
+        "dr-social-model-sheet-cps2-alpha-cel-v04-candidate"
+      ],
+      "reason": "New CPS2-native candidate authorized in current request; independent of approved 61-pose v08.2. Source scale precedes SMS conversion.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_source.png",
+          "sha256": "88d94909ad4f10946144d29009fe42d83a6d1098ae0829a27ae7695cec097c3d"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_generated_raw.png",
+          "sha256": "9158de66f9b6cc5391ccfe7bf8ce29ac58253ef630f98363b34651e36d63d539"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_prompt.txt",
+          "sha256": "501b0ce4110bb88d64b739ee6ea1f8df5e60f4e4230b103c1e76bea919dd3586"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_metadata.json",
+          "sha256": "38decd863e821b853daa09dc5ea25970c885971389cd2d190b2e6f73297c5f3d"
+        },
+        {
+          "role": "cutout",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_cutout.png",
+          "sha256": "705a96293fc116d4d4530611c8558539a3ddaf374aa23de55f90d26db8ead6d4"
+        },
+        {
+          "role": "frame_J01",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/native/J01.png",
+          "sha256": "229241794837878eadec08537ce8f7982fd451364790e43d5616872d921d699f"
+        },
+        {
+          "role": "frame_J02",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/native/J02.png",
+          "sha256": "ac425789c8c7651f3e3c3555cde75bf9ac0ed665a9c47034a3471e151967d83b"
+        },
+        {
+          "role": "frame_J03",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/native/J03.png",
+          "sha256": "85fa1f85eae86216c8e403d0a66dd94180d53dacd3b20fac0067345f3945c8df"
+        },
+        {
+          "role": "frame_J04",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/native/J04.png",
+          "sha256": "0c327220bc648bf017d41087ef0f09205349f84fb9a378f5cfc244943a22f03c"
+        },
+        {
+          "role": "frame_J05",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/native/J05.png",
+          "sha256": "19880243a7c188438204e04625c1a578ca4275a392e96a8eb17d9c90baaa9f14"
+        },
+        {
+          "role": "frame_J06",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/native/J06.png",
+          "sha256": "0ef779cf9a04a6e3a0f49d004fce8e297f5ac59db72348244592e8357de03e43"
+        },
+        {
+          "role": "extraction_recipe",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/extraction_recipe.json",
+          "sha256": "5652ac1ca1d080535c709d20bd6f84bc26951cefd1aed5bd7cd35a56162a8579"
+        },
+        {
+          "role": "cutout_prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_cutout_prompt.txt",
+          "sha256": "9786747258b46c442a87092e387d65cdc0066dc03e300f9ea2eb83e5a9ae53a3"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-idle-v02",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "revision": 2,
+      "status": "superseded",
+      "parents": [
+        "dr-social-model-sheet-cps2-alpha-cel-v04-candidate",
+        "dr-social-cps2-idle-v01"
+      ],
+      "reason": "Use the actual J01 guard as idle keypose so anatomy/material drawing agrees with the sequence; no new pose or atlas expansion.",
+      "supersedes": "dr-social-cps2-idle-v01",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_source_v2.png",
+          "sha256": "229241794837878eadec08537ce8f7982fd451364790e43d5616872d921d699f"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_metadata_v2.json",
+          "sha256": "684892b9f1ecfda552f3d0a01de6b31b83cfd2096a892a3c2c249db8333108fa"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v02",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "revision": 2,
+      "status": "superseded",
+      "parents": [
+        "dr-social-cps2-light-jab-v01",
+        "dr-social-model-sheet-cps2-alpha-cel-v04-candidate"
+      ],
+      "supersedes": "dr-social-cps2-light-jab-v01",
+      "reason": "Artistic correction: v1 raw jab exceeds intended compact reach, flared tails widen recovery and grayscale hair/face readability need improvement. Preserve source body scale and do not recolor for metrics.",
+      "files": [
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/jab_generated_raw.png",
+          "sha256": "20513ee6f39d4a14bd42e69978a47cf4efe601539c6f5bfc08fbc7a783d69b17"
+        },
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/jab_source.png",
+          "sha256": "b8f897f69a2fee85b5c5aefaadaf7431bfd4c333f20f17b9b13bd1ba5834e3f7"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/jab_prompt.txt",
+          "sha256": "0703be8001c54b9ac1cc933f1dec76f15f30f972a085e7300c5752568622abc6"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/jab_metadata.json",
+          "sha256": "ba456c0969de96fa9ed21aee4e121ff00a422b20efa2c54ac962d3844062bd1d"
+        },
+        {
+          "role": "extraction_recipe",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/extraction_recipe.json",
+          "sha256": "61cc3630177b02a7a197ee4a7ed016246c5b33ea291000af28451bd30e40fcbc"
+        },
+        {
+          "role": "frame_J01",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/native/J01.png",
+          "sha256": "1e45b20cd1a900ab9e4a059a58214aae6c08bcd29deacccce267bd5754ee396b"
+        },
+        {
+          "role": "frame_J02",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/native/J02.png",
+          "sha256": "ee3bb2ca92a5f50bfc1a40631509569c9dd188de43a407d0802b2df94cc8256d"
+        },
+        {
+          "role": "frame_J03",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/native/J03.png",
+          "sha256": "1044d03136f33dd1b2bda64b42bdb9cb3305244a5dec8d75279e0e26cd936a57"
+        },
+        {
+          "role": "frame_J04",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/native/J04.png",
+          "sha256": "a6b1d1a2adf4bc1c730432da72766e24b5955120fb8e601623e205fa163f84da"
+        },
+        {
+          "role": "frame_J05",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/native/J05.png",
+          "sha256": "97a1e191aabc9c1228756fad4bfe6b78319be670c52a985323147f9b077a1954"
+        },
+        {
+          "role": "frame_J06",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v2/native/J06.png",
+          "sha256": "349c27b540a8890cc2a25a9b1ed600b965e99260789615e7ad358a29a674139e"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v03",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "revision": 3,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v02"
+      ],
+      "supersedes": "dr-social-cps2-light-jab-v02",
+      "reason": "Focused source correction of J03 half-extension and J04 compact reach; v2 material/tail improvements retained, no body scaling.",
+      "files": [
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_generated_raw.png",
+          "sha256": "23f209f307374f94b509e44e24650f75640e3c1e1261edf3423ee7e698271286"
+        },
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_source.png",
+          "sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_prompt.txt",
+          "sha256": "6a2566662a0729a3e7a6268b9e778cbfeea1b0462f2d9a1c81730d857f485866"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_metadata.json",
+          "sha256": "89735674469168ac619fef1cbdca8fba1359b20bca1975e6cc5ad20ca31013b0"
+        },
+        {
+          "role": "extraction_recipe",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/extraction_recipe.json",
+          "sha256": "df77d76233d73466331e4caae97759919419e1d9a4872d54007d0e6698db829a"
+        },
+        {
+          "role": "frame_J01",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/native/J01.png",
+          "sha256": "5e0398890e6481a9a300c7659fe8b9005120c84f5067d4ec34fcfa2a3ec82ae0"
+        },
+        {
+          "role": "frame_J02",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/native/J02.png",
+          "sha256": "75a18463f70e1c829d0c2b23ad87a76b6ef3bf266436b82c949852ded27c20a9"
+        },
+        {
+          "role": "frame_J03",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/native/J03.png",
+          "sha256": "7c507e7a4d2dfade79df630dbd7ab3a1b5d5966d746bc00885fe93343b13c756"
+        },
+        {
+          "role": "frame_J04",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/native/J04.png",
+          "sha256": "f19c9da50f5356ad9ef51a2ae4bb8964c001ab9e365c91911b9337188b83566c"
+        },
+        {
+          "role": "frame_J05",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/native/J05.png",
+          "sha256": "a07f8109f12cd8dbf76f45c763dfde83c5cb89303f9d5d35f411761a7d360470"
+        },
+        {
+          "role": "frame_J06",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/native/J06.png",
+          "sha256": "389201cebff79ac81e12b358c3eb187d7e07dd896c6b4928669ada1f72afe160"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-source-review-v01",
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-sample",
+      "revision": 1,
+      "status": "historical",
+      "parents": [
+        "dr-social-cps2-light-jab-v01"
+      ],
+      "reason": "Real native read-only art review of source v1; no ROM QA or owner approval.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/dr_social_cps2_sample_independent_review_v1.json",
+          "sha256": "bdcba847dfb207958d62866ccca6712c89a30ad8db44f5e1c62d712c324d21be"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-idle-v03",
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "revision": 3,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v03"
+      ],
+      "supersedes": "dr-social-cps2-idle-v02",
+      "reason": "Exact current-sequence J01 guard as idle; no separately repainted body.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_source_v3.png",
+          "sha256": "5e0398890e6481a9a300c7659fe8b9005120c84f5067d4ec34fcfa2a3ec82ae0"
+        },
+        {
+          "role": "metadata",
+          "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_metadata_v3.json",
+          "sha256": "026c58058a1806bb227a3c7c03a54082df9bc643c660144fe21e47fc7dd70935"
+        }
+      ]
+    },
+    {
+      "id": "dr-social-cps2-source-review-v02",
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-sample",
+      "revision": 2,
+      "status": "candidate",
+      "parents": [
+        "dr-social-cps2-light-jab-v03",
+        "dr-social-cps2-source-review-v01"
+      ],
+      "reason": "Independent revision review of corrected source v3; no promotion",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/dr_social_cps2_sample_independent_review_v2.json",
+          "sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42"
+        }
+      ]
     }
   ],
   "heads": [
@@ -824,13 +1168,6 @@
       "asset_id": "dr_social",
       "kind": "animation_source",
       "variant": "light-jab-alpha-attempt",
-      "candidate": null,
-      "approved": null
-    },
-    {
-      "asset_id": "dr_social",
-      "kind": "animation_source",
-      "variant": "main",
       "candidate": null,
       "approved": null
     },
@@ -931,6 +1268,34 @@
       "variant": "main",
       "candidate": null,
       "approved": "landau-concept-v01"
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-idle",
+      "candidate": "dr-social-cps2-idle-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "cps2-light-jab",
+      "candidate": "dr-social-cps2-light-jab-v03",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "animation_source",
+      "variant": "main",
+      "candidate": null,
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "art_review",
+      "variant": "cps2-sample",
+      "candidate": "dr-social-cps2-source-review-v02",
+      "approved": null
     }
   ],
   "legacy_inventory": [
@@ -5834,6 +6199,16 @@
       "scope": "Freeze existing unregistered files discovered by managed-area scan; declared source decision remains reconciliation record; no integration claim",
       "prior_failed_scan": "doc/curation/evidence/2026-10-13_quality_cohesion/closure/artifact_registry.json",
       "limitation": "Indexing preserves history but does not retroactively validate production reservation or execution"
+    },
+    "reconciliation_2026_10_28": {
+      "status": "exact_existing_owner_approval_verified_new_cps2_candidates_separate",
+      "approved_source_sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+      "decision": "doc/decisions/dr-social-animation-source-v08_2_owner_approval.json",
+      "limits": [
+        "Generic animation_source/main head does not represent this res/approved_art path under current kind location contract; exact owner decision in 2026_10_13 reconciliation remains authority",
+        "Historical v5 conversion report absent; global registry check remains blocked",
+        "No new owner decision or runtime promotion synthesized"
+      ]
     }
   }
 }

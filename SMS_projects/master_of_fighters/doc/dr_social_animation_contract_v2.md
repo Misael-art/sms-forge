@@ -1,5 +1,13 @@
 # Contrato de animação — Dr. Ferdinand Social
 
+Atualização operacional de 2026-10-28: a fonte artística v08.2 de 61 poses
+possui decisão explícita aprovada pelo SHA `4e557095…`; os trechos abaixo
+sobre v02 bloqueada e canvas 80×80 são históricos. O pedido atual autoriza
+uma candidata CPS2 separada (idle e J01–J06), fonte 128×128 por célula, antes
+da conversão SMS. Identidade v4, cabelo cinza, óculos de latão e tempos
+2/1/1/1/1/3 permanecem. Detalhes: `dr_social_cps2_sample_v1.md`. Nenhuma
+aprovação artística ou de runtime foi transportada entre essas fontes.
+
 **Versão:** 2  
 **Estado:** direção do moveset aprovada pelo dono (2026-10-10); arte dos golpes,
 balanceamento e hardware ainda pendentes.  
