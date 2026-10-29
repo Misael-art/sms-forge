@@ -1,5 +1,79 @@
 # 10-memory-bank — master_of_fighters
 
+## Lote corrente — feedback temporal do dono, candidata v6
+
+O proprietário assistiu à comparação: considera satisfatórias a arte e as
+poses completas, mas identifica preparação e final baixo breves demais para
+ler armar→executar→retornar. Solicitou tempos contextuais e squash/stretch na
+espada durante a maior velocidade. Decisão em
+`decisions/hayato-short-cut-v4_owner-motion-feedback.json`; controle v4 intacto.
+Isto substitui a espera por observação do checkpoint abaixo; não é aceite da
+nova candidata ou promoção a produção.
+
+Contrato v3 propõe R01–R06 em 8/1/2/7/2/5 ticks (25 no total). R01 e R04 têm
+mais exposição; R02/R03 continuam rápidos, retorno R05/R06 distinto. Somente
+R02 recebe deformação gráfica transitória de lâmina ao longo do arco, voltando
+à katana normal em R03. Corpo, pega, bainha e cinco desenhos restantes são
+invariantes por pixel. Fonte v5 reservada no registro canônico; autoria do delta
+por ImageGen, composição mecânica delimitada, sem pintura de personagem por código.
+V5 passou revisão de fonte; SMS revelou componente solto de 2 pixels na ponta.
+V6 corrige apenas esse trecho por segundo patch ImageGen, preservando as
+tentativas e os cinco outros desenhos. Configs v6 e seletores 13/14 são atuais;
+11/12 guardam v5 como controle negativo não elegível para ROM de entrega.
+Retângulo explícito `sample_rect_px` fixa a amostragem quando muda o extremo
+da arma; sem ele, a conversão detectou sola uma linha abaixo e foi preservada
+como falha. Com o retângulo [50,53,169,159], sete PNGs por face são byte-exatos
+à v4 e R02 muda somente 110 pixels de lâmina. Ambos os pares medem 220 padrões,
+7.040B, máximo 53 SAT/pico8; componentes dos 16 PNGs passam. Revisão da ponta e
+saída SMS nova passou no parecer independente v6. Builds de 32 KiB pelo wrapper:
+left `76792bb8e9c48c6efdf402eb4d470f171bc76c9283416cebb33dddfaba2ab122`,
+right `c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e`,
+stress128 `4c796502ad3590db5564d70a2beaae56222a315aabfeec320b5ddc3e0d6f83d8`.
+QA independente v6 passou 2/2 casos, 20 checks e 260/260 quadros RGB exatos.
+Manual: R01 quadros80–87, R02 88, R03 89–90, R04 91–97, R05 98–99,
+R06 100–104, guarda105–129: 8/1/2/7/2/5 apresentados. Espada transitória
+em R02 por um quadro e katana normal restaurada em R03. Social902/PLTE,
+corpo/pega/equipamento/solaY143 preservados. Sessões b946f452… e61b3bbb4…
+encerradas, quatro processos próprios de cada uma ausentes por PID/start_ticks.
+
+Gravação real da ROM direita: sessão99efc557f6c3483ba5bfb8b74d048f4d,
+480/480 quadros exatos em8,0194s,10ações completas e9ciclos com pausa integral.
+MP4 lossless decodifica no SHA do RGB nativo; frames/holds não provam efeito
+percebido. FPS em duas janelas8s:59,74/59,42, alvo regional NTSC passou com
+tolerância explícita1FPS; não é promessa de zero variação por frame.
+VBlank base e stress128:3.000frames cada,0derrame,mínimos213/223. Stress
+sessãoaa8c9d6f382d45f69bd9a63c910f9d39 encerrada. Cleanup verificado para
+todos os processos próprios.26testes do adaptador e30checks focados passaram;
+raster, semântica, vínculo e contrato atuais passaram no seu escopo.
+
+Resultado e mídias em `out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/`:
+`comparison_source_normal.apng` e `comparison_source_slow.apng` mostram três
+colunas: controle v4, somente novos tempos, novos tempos+espada. São previews
+de fonte, não framebuffer. A trilha v4 recebe11ticks extras de guarda terminal
+para alinhar o loop de comparação, sem retimar seu golpe. `performance_v6/99efc557f6c3483ba5bfb8b74d048f4d/hayato_cut_realtime.mp4`
+é o framebuffer real256×192; `rom_slow.apng` no mesmo diretório é sua derivada4×lenta.
+`source_sequence_v6.png` e `SMS_both_facings.png` são pranchas estáticas.
+
+Contrato atual `hayato_animation_contract_v3.json`; checkpoint formal
+`hayato_short_cut_body_temporal_checkpoint_v6.json` e checklistv6 marcam
+continuous_motion/owner_acceptance pendentes, sem erro de custódia. A avaliação
+do dono da v4 autoriza estas correções e valida a base artística; não é aceite
+antecipado do novo ritmo/efeito. Próximo checkpoint: dono assistir à candidata
+e decidir se preparação, final baixo e impressão de velocidade resolvem seu
+feedback. Não convocar revisão temporal equivalente nem gerar novas poses
+sem outro defeito observado. Áudio/PAL/hitboxes/dano/combate completo e produção
+continuam fora desta amostra. V4, falha inicial de amostragem e ponta v5 estão
+preservadas; nenhuma skill/doutrina/gate global foi promovido.
+Implementação deste lote no commit `583da6186d2e8ec67483ecb088502659c68c870e`; documentação
+e recibos fecham em commit separado, um push do lote. PR4 reutilizado na branch
+de continuidade. Publicação final em `out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/publication.json`.
+Pacote `hayato_timing_stretch_v6_review.zip` no mesmo diretório, recibo em
+`doc/hayato_short_cut_body_retention_v6.json`, manifesto interno por arquivo e
+cópia local verificada no destino de recuperação existente. É retenção no mesmo
+disco, sem release ou backup remoto novo. Registro canônico: recorte em memória
+Hayato+ancestrais passou (28artefatos/362arquivos); global continua reprovado pelo
+relatório histórico Social61v5 ausente. Não confundir os dois escopos.
+
 ## Checkpoint temporal do proprietário — v4 preservada
 
 Pedido atual: decidir este corte antes de ampliar conteúdo. Controle no commit

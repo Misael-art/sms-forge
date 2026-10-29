@@ -1,5 +1,25 @@
 # 15-tdd — master_of_fighters
 
+## Lote corrente — candidata v6 com tempos e lâmina transitória
+
+Mesma FSM, emissor, P1, escala comum e empacotador normal 8×8 da v4. Contrato
+v3: 8/1/2/7/2/5 ticks. R02 admite delta de lâmina autorado, composto apenas em
+regiões declaradas; índice/PLTE/alpha fora delas exatos. Cinco outras poses,
+Social e guardas permanecem controles por hash. Residência, SAT e scanline
+devem ser recalculados para o novo desenho nos dois sentidos, com nova ROM,
+gravação real, duração apresentada, FPS e VBlank. O opt-in `sample_rect_px`
+declara um recorte-fonte contendo toda a opacidade e margem transparente;
+rejeita limites inválidos/corte/bool. Evita mudar a grade de redução do corpo
+quando o extremo da arma altera a bbox. Defaults reproduzem header e 8 PNGs
+v4 byte a byte. 26 testes do adaptador passaram, inclusive 6 casos de recorte
+e amostragem estável. Conversão v6:220 padrões/7.040B,max53SAT,pico8; seletores
+13/14. Sete PNGs por face idênticos à v4; somente lâmina de R02 muda. Provas
+novas de ROM completas: QA260quadros exatos, holds8/1/2/7/2/5 apresentados,
+480quadros exatos em gravação nativa sem stepping; decode MP4 lossless confere
+com RGB bruto. FPS59,74/59,42 em janelas8s. Base/stress128:3.000frames selados
+cada,0derrame,mínimos213/223. Sessões fechadas e PIDs exatos ausentes.
+Força/ritmo/efeito de velocidade e aceite da candidata continuam pendentes.
+
 ## Implementação corrente — fonte v4, sprite normal 8×8
 
 `prepare_authored_sprite_sample.py` mantém defaults v1/v2 tall. Opt-in v2

@@ -1,5 +1,21 @@
 # 13-spec-cenas — master_of_fighters
 
+## Composição candidata corrente — fonte v6, tempo contextual e espada
+
+Mesma cena diagnóstica, escala, P1, poses e posições da v4. Conversões
+`converted_v6_left/right`: 220 padrões/7.040 bytes residentes, máximo 53
+entradas SAT e pico de 8 sprites por linha nas 14 composições medidas pelo
+adaptador normal 8×8. Sete PNGs por sentido são byte-idênticos à v4; somente
+R02 tem delta de 110 pixels na região da lâmina. Social, corpo, sola e demais
+poses preservados. Retângulo de amostragem [50,53,169,159] mantém a grade da
+fonte sem mudar pixels. Componente solto da tentativa v5 foi reparado por patch
+autorado da ponta, não pela remoção de pixels SMS. Todos os 16 PNGs passam
+componentes min4/c8; materiais seguem revisão visual independente separada.
+QA nova:260quadros exatos nos dois sentidos e480quadros de gravação real na
+ROM direita. VBlank selado3.000frames por ROM:0derrame,mínimo213 base/223
+stress128. FPS base59,74/59,42 em duas janelas8s. Esses números pertencem aos
+SHAs v6 do memorybank; não aprovam qualidade temporal/percepção ou combate completo.
+
 ## Composição corrente — corte corporal, fonte v4
 
 Mesmo par Hayato/Social sem cenário/HUD/áudio novos. P1 idêntica ao Socialv8,

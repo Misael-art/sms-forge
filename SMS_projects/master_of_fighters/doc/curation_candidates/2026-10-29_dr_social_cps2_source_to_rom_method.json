@@ -348,6 +348,82 @@
       ],
       "artifact_root": "out/diagnostics/hayato_short_cut_v2"
     },
-    "preservation": "Prior source, prompts, negative reviews, conversions and previous ROM evidence retained. No economic/time-savings claim."
+    "preservation": "Prior source, prompts, negative reviews, conversions and previous ROM evidence retained. No economic/time-savings claim.",
+    "owner_motion_feedback_followup": {
+      "status": "new_source_SMS_ROM_measured_owner_motion_acceptance_pending",
+      "owner_decision": "doc/decisions/hayato-short-cut-v4_owner-motion-feedback.json",
+      "accepted_scope": "Existing v4 art/complete body poses satisfactory; owner identifies preparation and terminal timing as defect, requests transient weapon squash/stretch.",
+      "durations_control": [
+        4,
+        1,
+        2,
+        3,
+        1,
+        3
+      ],
+      "durations_candidate": [
+        8,
+        1,
+        2,
+        7,
+        2,
+        5
+      ],
+      "source_generations": 2,
+      "source_deltas": [
+        "v5 ImageGen blade stretch within2source rectangles;436indices, allbody/grip/fiveotherposes exact.",
+        "v5 source staticpass did notclose SMS cutout:2px tipisland caught before ROM.",
+        "v6 secondImageGen32px tipcontext repair:29indices changed onlyROI[152,89,171,109]; 16SMScomponentchecks pass."
+      ],
+      "sampling_cause": "Changing weapon top changed opaque bbox y53→63 and therefore nearest sampling phase; merely adjusting sole pivot would not prove body pixels stable.",
+      "sampling_fix": "Existing adapter optional sample_rect_px containing all opaque content. Declared[50,53,169,159] retains source lattice without painting/resizing. Invalid/out-of-bounds/content-cropping rectangle rejected.",
+      "regression": "26 adapter tests pass; existing v4 header+8PNGs default byte-exact. Newv6 bothfacings:7PNGs nonR02 eachside byteexactv4;R02delta110pixels sword only.",
+      "budget": {
+        "patterns": 220,
+        "bytes": 7040,
+        "max_SAT": 53,
+        "max_scanline": 8
+      },
+      "review": "doc/hayato_short_cut_body_blade_SMS_independent_review_v6.json",
+      "limits": [
+        "Static source/SMS approval does not imply perceived effect or owner acceptance of new timing.",
+        "No global doctrine/skill/tool/gate/lesson promotion; opt-in field is tested project feature pendingfuturecuration.",
+        "No competitive mechanics, extra drawing/effect, roster or atlas expansion.",
+        "No economic savings or physical air/impact simulation claimed."
+      ],
+      "result": {
+        "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/result.json",
+        "sha256": "4d5b8ed633cdbdea1776ace5b7af867fc62125df87373bc6b7be46d0b64709da"
+      },
+      "actual_ROM_sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e",
+      "actual_holds": [
+        8,
+        1,
+        2,
+        7,
+        2,
+        5
+      ],
+      "actual_realtime_exact_frames": 480,
+      "native_QA_frames": 260,
+      "fps_windows": [
+        59.74,
+        59.42
+      ],
+      "worst": [
+        {
+          "rom_sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 213
+        },
+        {
+          "rom_sha256": "4c796502ad3590db5564d70a2beaae56222a315aabfeec320b5ddc3e0d6f83d8",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 223
+        }
+      ]
+    }
   }
 }

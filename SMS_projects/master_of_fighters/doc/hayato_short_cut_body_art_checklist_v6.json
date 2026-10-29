@@ -1,0 +1,106 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "hayato-cps2-short-cut-v06",
+  "producer": "/root",
+  "asset": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/cut_source.png",
+    "sha256": "8666bad0795fe5b1a3272189d5be9c4cae7d946d4f8f3bd21719a17150ba7191",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/source_assembly.json",
+    "sha256": "3b834c3cb73fbecdb91de127696da8f8f75d6d21d446542cf21c3c2ed2e0c853"
+  },
+  "required_characters": [
+    "hayato"
+  ],
+  "required_axes": [
+    "equipment_geometry",
+    "face_detail_readability",
+    "frame_pose_integrity",
+    "hand_weapon_attachment",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "native_size_readability",
+    "outline_and_cutout",
+    "pixel_clusters",
+    "semantic_palette_role_confinement",
+    "continuous_motion"
+  ],
+  "characters": [
+    {
+      "id": "hayato",
+      "references": [
+        {
+          "path": "doc/hayato_short_cut_body_blade_SMS_independent_review_v6.json",
+          "sha256": "516d2421dab71a1a4de6794266fab3ee6409d6a43c6de54a2cfb19fe8f8b4405"
+        }
+      ],
+      "observed_defects": [],
+      "revision_notes": [
+        "Context-dependent holds and authored transient sword deformation; tip repaired at source after negative SMS component check."
+      ],
+      "review_axes": {
+        "equipment_geometry": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "face_detail_readability": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "frame_pose_integrity": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "hand_weapon_attachment": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "material_shading": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "native_size_readability": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "outline_and_cutout": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "pixel_clusters": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pass",
+          "note": "Independent source/SMS v6 review; five other source poses and seven non-R02 PNGs per facing match v4; transient blade is owner-authorized."
+        },
+        "continuous_motion": {
+          "status": "needs_evidence",
+          "note": "Current exact realtime video provided; perceived rhythm/force/effect and owner acceptance pending."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "passed",
+    "reviewer": "/root/hayato_cut_art_review",
+    "report": {
+      "path": "doc/hayato_short_cut_body_blade_SMS_independent_review_v6.json",
+      "sha256": "516d2421dab71a1a4de6794266fab3ee6409d6a43c6de54a2cfb19fe8f8b4405"
+    }
+  },
+  "owner_approval": {
+    "approved": false
+  },
+  "temporal_checkpoint": {
+    "path": "doc/hayato_short_cut_body_temporal_checkpoint_v6.json",
+    "sha256": "23d89534c9b3585d65f3163f6ca08e4e0452a000e46cc45e3dfbb439a55a1f70"
+  }
+}

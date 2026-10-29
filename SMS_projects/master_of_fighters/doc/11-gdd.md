@@ -1,5 +1,18 @@
 # 11-gdd — master_of_fighters
 
+## Revisão corrente — tempo e deformação de espada, fonte v6
+
+Feedback do dono confirma a base artística v4 e pede mais leitura na preparação
+e no final baixo. Mantêm-se seis poses e um corte; proposta 8/1/2/7/2/5 ticks.
+Squash/stretch gráfico autorizado na lâmina de R02, a passagem mais rápida,
+com pega/corpo intactos e forma canônica restaurada em R03. Nenhum contato,
+impacto, dano, hitbox, efeito independente ou movimento novo é inferido.
+Controle v4 preservado; novos pixels/tempos requerem conversão e ROM próprias.
+V6 fecha a ponta do smear que se soltava em SMS. Conversão/ROM novas apresentam
+8/1/2/7/2/5 e lâmina transitória de 1 tick, com corpo, pega e cinco outras poses preservados.
+O novo ritmo e impressão de velocidade aguardam avaliação do proprietário;
+nenhuma ampliação de conteúdo enquanto isso.
+
 ## Perfil corrente da reformulação — fonte v4
 
 Corte curto continua o único escopo. R01carga alta, R02liberação, R03corte,

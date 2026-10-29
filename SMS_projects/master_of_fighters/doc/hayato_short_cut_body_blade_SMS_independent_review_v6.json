@@ -1,0 +1,531 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "producer": "/root",
+  "reviewer": "/root/hayato_cut_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_new_tip_source_and_SMS_delta_review",
+  "status": "passed",
+  "request_id": "hayato-v6-tip-and-native-SMS",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_blade_SMS_review_request_v6.json",
+    "sha256": "fa105c399f4c0310d0e573547993d3a2386632dc9a68de6ee32410820f3f71c7"
+  },
+  "reviewed_at_utc": "2026-10-29T23:39:53.233111+00:00",
+  "approval_scope": "Exact v6 local source tip repair and new R02 native SMS in both orientations, with unchanged source/body/palette/other-pose invariants. Static candidate only. No equivalent temporal review rerun, no continuous perception, fresh ROM or owner approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/cut_source.png",
+      "sha256": "8666bad0795fe5b1a3272189d5be9c4cae7d946d4f8f3bd21719a17150ba7191",
+      "observed_sha256": "8666bad0795fe5b1a3272189d5be9c4cae7d946d4f8f3bd21719a17150ba7191"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/source_assembly.json",
+      "sha256": "3b834c3cb73fbecdb91de127696da8f8f75d6d21d446542cf21c3c2ed2e0c853",
+      "observed_sha256": "3b834c3cb73fbecdb91de127696da8f8f75d6d21d446542cf21c3c2ed2e0c853"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/native/R02.png",
+      "sha256": "28ae28678ebf4ceb17cc6212fdd3ee364817c5d1102286a2f6fb99bf615ff8d0",
+      "observed_sha256": "28ae28678ebf4ceb17cc6212fdd3ee364817c5d1102286a2f6fb99bf615ff8d0"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/generated_raw.png",
+      "sha256": "125dd193a62014c8da3a97151ab951a05fccae62ef53e4a38b78ada6899e526a",
+      "observed_sha256": "125dd193a62014c8da3a97151ab951a05fccae62ef53e4a38b78ada6899e526a"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/prompt.txt",
+      "sha256": "64247d0985be7bc5dd3f7555838aa2b67f2c25cdc1bd08c0c5b965cde35609ca",
+      "observed_sha256": "64247d0985be7bc5dd3f7555838aa2b67f2c25cdc1bd08c0c5b965cde35609ca"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/SMS_preservation.json",
+      "sha256": "9b6bdf4ea3959c51ff5f6731cf5a44680d4d342c99fe0d2241671427ebdef991",
+      "observed_sha256": "9b6bdf4ea3959c51ff5f6731cf5a44680d4d342c99fe0d2241671427ebdef991"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/SMS_both_facings.png",
+      "sha256": "af91e232b01b257d76f2f33960bd4e32103c86c7dbfd1d800be0d37aec7367c0",
+      "observed_sha256": "af91e232b01b257d76f2f33960bd4e32103c86c7dbfd1d800be0d37aec7367c0"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/cutout_components.json",
+      "sha256": "cbddcdd85b4ac2221d0c8e6612095bab85168988e6ee7040c1d443f02aef9b1b",
+      "observed_sha256": "cbddcdd85b4ac2221d0c8e6612095bab85168988e6ee7040c1d443f02aef9b1b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_blade_independent_review_v5.json",
+      "sha256": "065b9319bfc106cb7ba9032cd1705575ac6724825f3159a034727746479a231b",
+      "observed_sha256": "065b9319bfc106cb7ba9032cd1705575ac6724825f3159a034727746479a231b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/idle.png",
+      "sha256": "b34e97ea6585939ebe5f867098b69163dc62a2c26c5b33ef7e2d011231a6e1ee",
+      "observed_sha256": "b34e97ea6585939ebe5f867098b69163dc62a2c26c5b33ef7e2d011231a6e1ee"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/R01.png",
+      "sha256": "a7dda4933ac6b70fdaf86e4c18aa588d7bff8c8c23f560d4f6ee67f562329fa2",
+      "observed_sha256": "a7dda4933ac6b70fdaf86e4c18aa588d7bff8c8c23f560d4f6ee67f562329fa2"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/R02.png",
+      "sha256": "6bb9984bcd537ef196cea7658466567f228a1d29f1c253d05880b762685bd402",
+      "observed_sha256": "6bb9984bcd537ef196cea7658466567f228a1d29f1c253d05880b762685bd402"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/R03.png",
+      "sha256": "5aa65e7e1d0a2e5b2e47d02c4e3b8177175356904175ad884f898dd3db07bdb1",
+      "observed_sha256": "5aa65e7e1d0a2e5b2e47d02c4e3b8177175356904175ad884f898dd3db07bdb1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/R04.png",
+      "sha256": "170e3990c8ba5b0d8dafab08c2a92a33f86f72514632b306620e97535b528255",
+      "observed_sha256": "170e3990c8ba5b0d8dafab08c2a92a33f86f72514632b306620e97535b528255"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/R05.png",
+      "sha256": "b97f5abea8784f759143600ef567e8f3f16502499f84b4a51d322c04e50e3a8e",
+      "observed_sha256": "b97f5abea8784f759143600ef567e8f3f16502499f84b4a51d322c04e50e3a8e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/R06.png",
+      "sha256": "c846d2b53123ebbe09e41a1e6ce412de5769b36571a9aa3c8ec80e21267f8d0e",
+      "observed_sha256": "c846d2b53123ebbe09e41a1e6ce412de5769b36571a9aa3c8ec80e21267f8d0e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/reference.png",
+      "sha256": "24d4f438faff9fccc289b5a15393bb43ca74f2b3439a64cc3a23f091d9488c56",
+      "observed_sha256": "24d4f438faff9fccc289b5a15393bb43ca74f2b3439a64cc3a23f091d9488c56"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_left/conversion.json",
+      "sha256": "9ced70b6f28446fcec4a4209bfcc365d76632157502c01ed93814c4fd5ffb7b9",
+      "observed_sha256": "9ced70b6f28446fcec4a4209bfcc365d76632157502c01ed93814c4fd5ffb7b9"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/idle.png",
+      "sha256": "360c7c880128fd54006a8fd2dd510ab173a5b2f1cfa7d698e51c23ad80926647",
+      "observed_sha256": "360c7c880128fd54006a8fd2dd510ab173a5b2f1cfa7d698e51c23ad80926647"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/R01.png",
+      "sha256": "da69dddedd7b0fd590826f328c5c9b17a38f6ac9f752019c89e85df0a9e9a732",
+      "observed_sha256": "da69dddedd7b0fd590826f328c5c9b17a38f6ac9f752019c89e85df0a9e9a732"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/R02.png",
+      "sha256": "7f5add662ad2ac59e994ce332e6e75bb5cd44c1b0af873f8a99ffb42ed754a9c",
+      "observed_sha256": "7f5add662ad2ac59e994ce332e6e75bb5cd44c1b0af873f8a99ffb42ed754a9c"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/R03.png",
+      "sha256": "d9c684f446e97dd781f7bb93fe3fcc061fa9de5e8aa6cd3d5a22963b274fc885",
+      "observed_sha256": "d9c684f446e97dd781f7bb93fe3fcc061fa9de5e8aa6cd3d5a22963b274fc885"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/R04.png",
+      "sha256": "2b30982d972700a43c5113d27ed85c7b657e98a130d794b74fa6f7b179f496b2",
+      "observed_sha256": "2b30982d972700a43c5113d27ed85c7b657e98a130d794b74fa6f7b179f496b2"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/R05.png",
+      "sha256": "7c0e6127bed939673c2d9d2898ae9c5d8e13d6899d817a05deb36d4cea8fa85c",
+      "observed_sha256": "7c0e6127bed939673c2d9d2898ae9c5d8e13d6899d817a05deb36d4cea8fa85c"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/R06.png",
+      "sha256": "9c2682373635b09f6a18b81e2fc9820b4028a4d6ebb68acb84aee3af6e6fcb0d",
+      "observed_sha256": "9c2682373635b09f6a18b81e2fc9820b4028a4d6ebb68acb84aee3af6e6fcb0d"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/reference.png",
+      "sha256": "76c366bf055aa31d8c0fc7211a8e9ee04436da687eacd020b9e7bd982278319b",
+      "observed_sha256": "76c366bf055aa31d8c0fc7211a8e9ee04436da687eacd020b9e7bd982278319b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v6_right/conversion.json",
+      "sha256": "4057e44d1602a0340900e8310264b8f132a72b52c12c8f374a403d741afbcecf",
+      "observed_sha256": "4057e44d1602a0340900e8310264b8f132a72b52c12c8f374a403d741afbcecf"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v5/blade_delta/native/R02.png",
+      "sha256": "072905e9d40b7c940d7217a102486d1d250c00235f799581246b9437d4fc75ca",
+      "observed_sha256": "072905e9d40b7c940d7217a102486d1d250c00235f799581246b9437d4fc75ca",
+      "role": "Approved v5 source for exact tip-only comparison"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/R02.png",
+      "sha256": "c3e18395bef54317364f172a9eb606857698e83b12915a0fe63c847842e5131b",
+      "observed_sha256": "c3e18395bef54317364f172a9eb606857698e83b12915a0fe63c847842e5131b",
+      "role": "Accepted v4 SMS body/palette preservation baseline"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R02.png",
+      "sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa",
+      "observed_sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa",
+      "role": "Accepted v4 SMS body/palette preservation baseline"
+    }
+  ],
+  "conclusion": "No concrete static blocker identified. Repaired source tip remains a single tapered continuation of the authorized curved sword smear. Native SMS blade and point are connected in both directions, with neutral light steel/dark contour and no detached terminal pixels. The body/grip are stable, five other source drawings are unchanged, seven non-R02 PNGs per side are byte-exact to accepted v4, and all current terminals remain row79. This closes the new local source/derivative checkpoint only; the one-tick effect and longer holds still need a new bound motion demonstration.",
+  "review_axes": {
+    "identity_and_face": {
+      "status": "pass_unchanged",
+      "note": "Source changes confined to remote blade tip; face, tied hair, body and costume untouched. R02 SMS differences versus v4 confined to exposed steel region; no facial/body pixel drift identified."
+    },
+    "pose_anatomy_and_joint_continuity": {
+      "status": "pass_unchanged",
+      "note": "Protected shoulders, sleeves, elbows, wrists, grip and both legs remain exact at source; static full R02 rechecked in native SMS both ways without new anatomy/stance regression."
+    },
+    "hand_weapon_attachment": {
+      "status": "pass_static",
+      "note": "Hand→grip→guard→curved blade remains continuously attached. Tip-only source edit does not alter blade base or hands, and native SMS whole-object inspection shows no extra grip or floating weapon."
+    },
+    "equipment_geometry": {
+      "status": "pass_authorized_transient_only",
+      "note": "One curved, elongated/tapered metal band terminates in a compact connected cap, with no second weapon, cropped point or detached speed line. Complete scabbard remains. This is owner-authorized R02 deformation only; R03 normal steel is unchanged."
+    },
+    "pixel_clusters": {
+      "status": "pass_static",
+      "note": "Repaired tip is opaque and attached in native source and SMS. Each current R02 SMS mask has one 8-connected component of1023opaque pixels. Visual taper inspection, not component size alone, supports pass; no stray terminal speck identified."
+    },
+    "face_detail_readability": {
+      "status": "pass_unchanged_limited",
+      "note": "No source face changes and no SMS body/face shift. Reduced expression/finger microdetail remains sparse at native size and is not invented in this judgement."
+    },
+    "outline_and_cutout": {
+      "status": "pass_static",
+      "note": "Full blade edge/tip visible in source and both SMS orientations. Source opaque bbox[50,63,169,159] is wholly inside declared sample rectangle[50,53,169,159], so the stabilization window does not cut off new tip. No content touches the192source or88SMS outer edge."
+    },
+    "material_shading": {
+      "status": "pass_for_exact_source_SMS",
+      "note": "Source white/light-gray steel and dark contour remain coherent after tip repair. Both native SMS outputs read as neutral light metal with dark edge; no blocking yellow, burgundy or skin-color band appears in new tip. Protected body materials retain exact accepted colors."
+    },
+    "material_shadow_flow_coherence": {
+      "status": "pass_static",
+      "note": "Light interior and dark edge continue along the curve and close into the thicker final cap rather than breaking into terminal dots. No garment shadow changes."
+    },
+    "semantic_palette_role_confinement": {
+      "status": "pass_for_exact_new_R02",
+      "note": "Source full PLTE/transparency unchanged; SMS PLTE matches v4. Existing overrides5/13/26 applied in frozen conversion. New blade shades and mixed13 mapped appearance inspected natively/NN4; no material leakage identified. Face/neck/hair and other five poses remain exact."
+    },
+    "frame_pose_integrity": {
+      "status": "pass_static_context",
+      "note": "R02 remains a transient down-right curved sweep between high R01 and unchanged normal R03, with unchanged absorption/return drawings. Supplied full both-facing board inspected; no new sequence role or permanent sword redesign inferred."
+    },
+    "native_size_readability": {
+      "status": "pass_static_limited",
+      "note": "At88x88native SMS, base-to-point direction and connected curved band remain readable in both facings. Final cap is slightly stout to survive reduction but remains tapered rather than a detached dot or large blunt fan. Temporal effectiveness is not inferred."
+    },
+    "protected_pixel_PLTE_alpha_invariants": {
+      "status": "pass",
+      "note": "29source index differences versus v5, bbox[152,93,169,106], with10alpha changes, all inside allowed[152,89,171,109]. Outside ROI indices/alpha, source PLTE/transparency and size unchanged. Five other selected source paths/hashes exact."
+    },
+    "SMS_lattice_body_preservation": {
+      "status": "pass_for_exact_outputs",
+      "note": "Declared sample_rect[50,53,169,159] stabilizes the lattice while blade bbox top changes. Independently checked110index differences versus v4 R02 only in exposed sword area: left[50,20,74,50], right[7,20,31,50]. All other R02 body/grip/foot pixels and PLTE remain exact; seven other PNGs per side byte-identical. This output comparison does not audit all adapter implementation behavior."
+    },
+    "grounding_and_optical_registration": {
+      "status": "pass_static",
+      "note": "All16currentPNGs end lastopaque79/boundary80. ExistingR02opticalpivot/registration retained; no new floor pop introduced by tip/window change."
+    },
+    "continuous_perception_new_holds": {
+      "status": "pending_not_repeated",
+      "note": "No equivalent temporal perception review performed. Owner proposal8/1/2/7/2/5 and one-tick transient effectiveness are not observed in this assignment. Prior video is a different source/timing epoch."
+    },
+    "new_ROM_hardware_owner": {
+      "status": "pending",
+      "note": "No emulator/build/packer/line-gate run or implementation audit by reviewer. Metadata currently reports220patterns,max53SAT,peak8; not an independently measured claim here. No fresh ROM, FPS/PAL/VBlank, owner or production approval."
+    }
+  },
+  "pixel_evidence": {
+    "source_v5_to_v6_changed_indices": 29,
+    "source_changed_bbox_exclusive": [
+      152,
+      93,
+      169,
+      106
+    ],
+    "source_allowed_ROI_exclusive": [
+      152,
+      89,
+      171,
+      109
+    ],
+    "source_changed_alpha_pixels": 10,
+    "source_changes_outside_ROI": 0,
+    "source_outside_ROI_indices_alpha_exact": true,
+    "source_PLTE_transparency_exact": true,
+    "five_other_sources_exact": true,
+    "SMS_comparisons": [
+      {
+        "side": "left",
+        "R02_changed_indices_vs_v4": 110,
+        "changed_bbox_exclusive": [
+          50,
+          20,
+          74,
+          50
+        ],
+        "full_PLTE_equal": true,
+        "seven_non_R02_files_byte_exact": true,
+        "R02_opaque8_component_sizes": [
+          1023
+        ]
+      },
+      {
+        "side": "right",
+        "R02_changed_indices_vs_v4": 110,
+        "changed_bbox_exclusive": [
+          7,
+          20,
+          31,
+          50
+        ],
+        "full_PLTE_equal": true,
+        "seven_non_R02_files_byte_exact": true,
+        "R02_opaque8_component_sizes": [
+          1023
+        ]
+      }
+    ],
+    "all16_actual_bottom_boundaries": 80
+  },
+  "geometry": [
+    {
+      "side": "left",
+      "id": "idle",
+      "bbox_exclusive": [
+        22,
+        14,
+        57,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "left",
+      "id": "R01",
+      "bbox_exclusive": [
+        23,
+        10,
+        61,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "left",
+      "id": "R02",
+      "bbox_exclusive": [
+        21,
+        26,
+        74,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "left",
+      "id": "R03",
+      "bbox_exclusive": [
+        21,
+        27,
+        65,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "left",
+      "id": "R04",
+      "bbox_exclusive": [
+        22,
+        31,
+        62,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "left",
+      "id": "R05",
+      "bbox_exclusive": [
+        22,
+        28,
+        68,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "left",
+      "id": "R06",
+      "bbox_exclusive": [
+        21,
+        15,
+        56,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "left",
+      "id": "reference",
+      "bbox_exclusive": [
+        27,
+        21,
+        56,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "right",
+      "id": "idle",
+      "bbox_exclusive": [
+        24,
+        14,
+        59,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "right",
+      "id": "R01",
+      "bbox_exclusive": [
+        20,
+        10,
+        58,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "right",
+      "id": "R02",
+      "bbox_exclusive": [
+        7,
+        26,
+        60,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "right",
+      "id": "R03",
+      "bbox_exclusive": [
+        16,
+        27,
+        60,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "right",
+      "id": "R04",
+      "bbox_exclusive": [
+        19,
+        31,
+        59,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "right",
+      "id": "R05",
+      "bbox_exclusive": [
+        13,
+        28,
+        59,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "right",
+      "id": "R06",
+      "bbox_exclusive": [
+        25,
+        15,
+        60,
+        80
+      ],
+      "last_opaque_y": 79
+    },
+    {
+      "side": "right",
+      "id": "reference",
+      "bbox_exclusive": [
+        25,
+        21,
+        54,
+        80
+      ],
+      "last_opaque_y": 79
+    }
+  ],
+  "provided_hardware_scope": {
+    "records": [
+      {
+        "side": "left",
+        "reported_patterns": 220,
+        "reported_maxSAT": 53,
+        "reported_pair_peak": 8
+      },
+      {
+        "side": "right",
+        "reported_patterns": 220,
+        "reported_maxSAT": 53,
+        "reported_pair_peak": 8
+      }
+    ],
+    "independently_measured_by_reviewer": false,
+    "note": "Read frozen conversion records and supplied component report only. Gate pass checks topology/limits, not taper meaning or perceived animation."
+  },
+  "findings": [
+    {
+      "priority": 2,
+      "domain": "animation",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "New R02 curved blade and revised hold proposal",
+      "summary": "Static tip and SMS connection are resolved; motion effect remains a new demonstration task.",
+      "required_delta": "Bind these exact sources/derivatives and8/1/2/7/2/5proposal to a fresh ROM/clip. Present native normal/slow playback for owner judgement of smear, high load and low absorption. Do not reuse v4 video or repeat an equivalent framewise review as temporal progress."
+    }
+  ],
+  "inspection_evidence": [
+    "All27frozenrequestinputs verified before inspection and before writing. Additional approved v5 source and v4 R02derivative baselines hash-bound for reproducibility.",
+    "Viewed new full native source, both native SMSR02, authored tip raw, full both-facing board and fresh NN4whole-source/nativeSMS panel over light/dark backgrounds.",
+    "Compared source v5/v6 pixel indices, alpha and PLTE:29differences and10alpha changes inside source tip ROI only. Five other source paths/hashes exact and actual source files verified.",
+    "Compared every non-R02PNG to v4:sevenperface byte-identical. R02diff110indices per side confined to blade; protected body/grip/content and fullPLTE preserved.",
+    "Read actual terminal for all16PNGs, all79. Read current sample rectangle and confirmed it includes whole source opaque bbox.",
+    "Inspected connected taper rather than accepting component gate as semantic proof; current R02masks form one component each.",
+    "Only this report written; no source/runtime/build/emulator/Git/memory changes."
+  ],
+  "full_conclusion": {
+    "local_source_tip_candidate": "passed",
+    "native_SMS_new_R02_both_facings": "passed_static",
+    "protected_invariants": "passed",
+    "concrete_static_blockers": [],
+    "new_timings_and_perceived_smear": "pending",
+    "fresh_ROM": "not_reviewed",
+    "owner_approval_of_v6": false,
+    "production_promoted": false
+  },
+  "next_checkpoint": "Fresh bound ROM proof for these exact v6 assets and proposed holds, followed by new native normal/slow motion presentation. Keep static source/derivative pass, technical run measurements and owner perception as separate decisions.",
+  "limits": [
+    "Static local source and derivative review only; no claimed continuous playback or equivalent temporal review rerun.",
+    "Owner authorized the experiment, not automatic acceptance of this resulting frame or timing.",
+    "No AAA, production, competitive mechanics, independent hardware/FPS/PAL/VBlank, audio or delivery approval."
+  ]
+}
