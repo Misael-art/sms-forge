@@ -33,6 +33,14 @@
 #include "../out/diagnostics/hayato_short_cut_v2/converted_v4_left/sample_data.h"
 #elif MOF_HAYATO_SAMPLE == 10
 #include "../out/diagnostics/hayato_short_cut_v2/converted_v4_right/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 11
+#include "../out/diagnostics/hayato_short_cut_v2/converted_v5_left/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 12
+#include "../out/diagnostics/hayato_short_cut_v2/converted_v5_right/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 13
+#include "../out/diagnostics/hayato_short_cut_v2/converted_v6_left/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 14
+#include "../out/diagnostics/hayato_short_cut_v2/converted_v6_right/sample_data.h"
 #else
 #error Unknown Hayato diagnostic composition
 #endif

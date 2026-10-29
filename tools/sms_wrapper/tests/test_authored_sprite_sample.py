@@ -37,6 +37,40 @@ def test_hash_and_crop_preserve_indices_and_pivot(tmp_path):
         load_pose(tmp_path, spec)
 
 
+def test_explicit_sampling_rect_preserves_body_when_prop_extreme_disappears(tmp_path):
+    spec = fixture(tmp_path)
+    image = Image.open(tmp_path / 'source.png')
+    for y in range(7, 11):
+        for x in range(48, 52):
+            image.putpixel((x, y), 2)  # Prop survives both nearest passes.
+    image.save(tmp_path / 'source.png', transparency=0)
+    spec.update(sha256=hashlib.sha256((tmp_path / 'source.png').read_bytes()).hexdigest(),
+                sample_rect_px=[48, 7, 72, 96])
+    before = load_pose(tmp_path, spec)
+    for y in range(7, 11):
+        for x in range(48, 52):
+            image.putpixel((x, y), 0)
+    image.save(tmp_path / 'source.png', transparency=0)
+    spec['sha256'] = hashlib.sha256((tmp_path / 'source.png').read_bytes()).hexdigest()
+    after = load_pose(tmp_path, spec)
+    assert (before.width, before.height, before.axis_x, before.axis_y) == (
+        after.width, after.height, after.axis_x, after.axis_y)
+    scaled, _ = convert_poses([before, after], (2, 3))
+    a, b = scaled
+    assert (a.width, a.height, a.axis_x, a.axis_y) == (b.width, b.height, b.axis_x, b.axis_y)
+    assert a.pixels[12 * a.width:] == b.pixels[12 * b.width:]
+    assert a.pixels != b.pixels
+
+
+@pytest.mark.parametrize('rect', [[48, 17, 72, 96], [-1, 0, 128, 128],
+                                  [48, 16, 129, 96], [True, 0, 128, 128], [0, 0]])
+def test_sampling_rect_rejects_crop_out_of_canvas_and_ambiguous_coordinates(tmp_path, rect):
+    spec = fixture(tmp_path)
+    spec['sample_rect_px'] = rect
+    with pytest.raises(ValueError, match='sample_rect_px'):
+        load_pose(tmp_path, spec)
+
+
 def test_reject_truecolor_and_external_path(tmp_path):
     spec = fixture(tmp_path)
     Image.new('RGBA', (8, 8)).save(tmp_path / 'source.png')

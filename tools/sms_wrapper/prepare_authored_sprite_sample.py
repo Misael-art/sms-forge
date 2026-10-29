@@ -135,6 +135,21 @@ def load_pose(root: Path, spec: dict) -> Sprite:
         bbox = original.convert('RGBA').getbbox()
         if not bbox:
             raise ValueError('empty source pose')
+        sample_rect = spec.get('sample_rect_px')
+        if sample_rect is not None:
+            # A changed prop silhouette must not silently change the source
+            # sampling lattice for an otherwise identical body. Explicit
+            # transparent margins preserve that lattice; never crop content.
+            if (not isinstance(sample_rect, list) or len(sample_rect) != 4 or
+                    any(type(n) is not int for n in sample_rect)):
+                raise ValueError('sample_rect_px needs four integer source coordinates')
+            x0, y0, x1, y1 = sample_rect
+            if not (0 <= x0 < x1 <= original.width and
+                    0 <= y0 < y1 <= original.height and
+                    x0 <= bbox[0] and y0 <= bbox[1] and
+                    x1 >= bbox[2] and y1 >= bbox[3]):
+                raise ValueError('sample_rect_px must be in canvas and contain all opaque pixels')
+            bbox = tuple(sample_rect)
         image = original.crop(bbox)
         flat = image.getpalette()
         palette = [tuple(flat[i:i + 3]) for i in range(0, len(flat), 3)]
