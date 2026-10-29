@@ -632,3 +632,30 @@ FPS estável, áudio, qualidade/delivery e budget continuam não aprovados; mant
 IDs abertos.
 Branch `codex/host-bootstrap-continuity-20261024`, PR #4 continua draft; falta
 revisão final e um único push do lote, sem merge/release.
+
+## 2026-10-29 — curadoria do método autoral Social/Hayato
+
+Implementação `de3a7fd71338a5954a2b292c634515574bc411cb`; ramo `codex/host-bootstrap-continuity-20261024`, PR4.
+Registro canônico: `doc/curation/2026-10-29_art_method_social_hayato.json`.
+Entradas: `original-artwork.md` (direção), `sms-sprite-animation.md` (gesto e
+coreografia), `sms-asset-to-rom.md` (conversão), `art-review.md` (schema temporal
+e seis modalidades), `artwork-to-rom-lifecycle.md` (transições), todos centrais.
+L113/L123/L124/L127 reaplicadas; sem novo ID, nova skill ou alteração de assets,
+conversor, runtime, ROM e parecer histórico. Alterações de outra tarefa no
+rev2 e neste handoff foram preservadas e excluídas do incremento.
+
+Validação no host: 25 testes focados; selftest137/137;75/75 measurement
+self-checks; doc_sync, learning_capture e hardware passaram. Reprodução real de
+Socialv8 e Hayatov4 nos dois sentidos:24PNGs+3headers byte-idênticos. Custódia
+14/14 refs do candidato; ROI indexada da franja conferida. Evidência/receita em
+`doc/curation/evidence/2026-10-29_art_method/`; fixtures são testes de contrato,
+não julgamento artístico. Nenhum build/emulador novo era necessário para esta
+mudança no validador de revisão; evidência histórica não foi requalificada.
+
+Bloqueios preservados: percepção contínua/aceite do dono de Hayatov4; rota
+curta repetível não demonstrada (11gerações+patch); registro global reprova
+`out/diagnostics/dr_social_61_pose_review_v5/conversion_report_61_pose_v5.json`
+ausente. Sem homologação completa. Próximo passo: observar mídias já seladas
+do owner_checkpoint de Hayato e responder A absorção, B retorno e C apoios/arma;
+manter controle, ajustar exposições ou corrigir pose somente por defeito
+observado. Recuperar o relatório histórico apenas por fonte legítima.
