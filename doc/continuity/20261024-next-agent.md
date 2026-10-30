@@ -659,3 +659,26 @@ ausente. Sem homologação completa. Próximo passo: observar mídias já selada
 do owner_checkpoint de Hayato e responder A absorção, B retorno e C apoios/arma;
 manter controle, ajustar exposições ou corrigir pose somente por defeito
 observado. Recuperar o relatório histórico apenas por fonte legítima.
+
+## 2026-10-30 — nova curadoria: aceite, equipamento e derivados
+
+Implementação `463333d9e04c7f2785f3e5cb0ea723041e43f247`, branch de continuidade, PR4. Registro:
+`doc/curation/2026-10-30_owner_scope_equipment_derivatives.json`. Amplia
+L113/L123/L124/L127 sem novo ID. Gate artístico confere decisão/ator/timing
+no próprio aceite; fechamento do dono é independente da percepção do agente.
+Hayato v7: fonte original e8/1/2/7/2/5 aprovados, julgamento humano do preview
+registrado; J.J. v6: aceite fechado, continuous_motion ainda needs_evidence.
+Não reabrir as decisões. Replays verificaram ambos os checkpoints reais e
+rejeitaram alteração de timing. Doutrina incorpora autoridade específica da
+arma, separação personagem/FX, preservação dos índices ativos da P1 e reuso
+de runtime apenas com insumos consumidos idênticos demonstrados.
+
+Host:32testes focados(6temporais+26adaptador),137/137selftest,75/75tools,
+doc_sync/hardware/learning passaram. Registro de aprendizado corrigiu campo
+lessons para applications; falha inicial e recheck preservados. Auditoria
+global continua bloqueada pelo relatório histórico Social61v5 ausente.
+Não houve mudança de runtime/conversão/assets nem nova QA ROM.
+Fontes, pareceres e alterações alheias no rev2/handoff preservados.
+Próximo: recuperar relatório original pelo mecanismo manual já solicitado;
+avaliar previsibilidade artística com custos comparáveis. Terceiro personagem
+repete a rota técnica, mas seis gerações e correções não provam passagem única.

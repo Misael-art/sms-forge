@@ -73,5 +73,16 @@
     ],
     "exit_code": 1,
     "seconds": 0.08
+  },
+  {
+    "check": "learning_corrected",
+    "args": [
+      "tools/sms_wrapper/audit_learning_capture.py",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "log": "learning_corrected.log",
+    "correction": "applications field distinguishes reuse from new lesson declarations"
   }
 ]
