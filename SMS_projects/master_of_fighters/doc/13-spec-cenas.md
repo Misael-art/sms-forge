@@ -1,6 +1,19 @@
 # 13-spec-cenas — master_of_fighters
 
-## Composição candidata corrente — fonte v6, tempo contextual e espada
+## Seleção atual — fonte v4, somente tempos no perfil v7
+
+Oito PNGs por lado e sete manifestos de cena por lado são byte-idênticos à v4.
+O header inteiro difere somente na tabela8/1/2/7/2/5. Recursos e geometria são
+reutilizados pela identidade dos arquivos; conversão oficial do perfil confirma
+219padrões/7.008B,max53SAT,pico8. Não há distorção de lâmina, mudança de escala,
+P1, posição ou equipamento. Aceite do dono: preview fonte com esses tempos.
+QA nova passou260quadros nos dois sentidos, incluindo R02original e guarda.
+Gravação nova480quadros exatos. FPS base59,71/59,46 em duas janelas8s;
+VBlank3.000frames por ROM,0derrame,mínimo213 base/223 stress128, sessões fechadas.
+SHAs v7 no memorybank; números v6 abaixo são históricos. O aceite humano da
+fonte/tempos e a prova técnica desta amostra não aprovam combate completo.
+
+## Histórico — fonte v6 rejeitada, tempo contextual e espada
 
 Mesma cena diagnóstica, escala, P1, poses e posições da v4. Conversões
 `converted_v6_left/right`: 220 padrões/7.040 bytes residentes, máximo 53

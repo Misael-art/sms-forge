@@ -277,7 +277,7 @@
     }
   },
   "followup_hayato_short_cut_choreography": {
-    "status": "reformulated_candidate_source_SMS_and_ROM_measured_perceived_motion_pending",
+    "status": "owner_approved_timing_only_original_art_integrated_runtime_v7_tested",
     "owner_direction": "Attachment c749b358-f4d3-4ad5-8bec-96f966493362,2026-10-29",
     "preserved_attempt": {
       "source": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/cut_source.png",
@@ -419,6 +419,50 @@
         },
         {
           "rom_sha256": "4c796502ad3590db5564d70a2beaae56222a315aabfeec320b5ddc3e0d6f83d8",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 223
+        }
+      ]
+    },
+    "owner_final_selection": {
+      "decision": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+      "accepted": "Original v4 source, timing8/1/2/7/2/5; middle column",
+      "rejected": "Deformed v6 blade gave perceived different trajectory and worsened movement, according to owner",
+      "contextual_learning": "In this cut, exposure changes resolved the owner preference without weapon deformation. Static validity and legal hardware budget of a smear did not make it artistically successful in motion. This is not a global ban on squash/stretch.",
+      "source_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+      "new_drawings": 0,
+      "identity_proof": "All16PNGs and14scene manifests byteexactv4; wholeheader onlysample_durations changed.",
+      "production_release_approved": false,
+      "global_promotion": false,
+      "result": {
+        "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/result.json",
+        "sha256": "12fe27e891d1c0affb62def5f2c8c8289d7bbc92237a5985955b4a34c6a1be44"
+      },
+      "ROM_sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022",
+      "actual_holds": [
+        8,
+        1,
+        2,
+        7,
+        2,
+        5
+      ],
+      "native_QA_exact_frames": 260,
+      "native_realtime_exact_frames": 480,
+      "fps_8s_windows": [
+        59.71,
+        59.46
+      ],
+      "worst": [
+        {
+          "rom_sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 213
+        },
+        {
+          "rom_sha256": "dd8e79cb282a267aee3822d5120a1fe99c8c5d6da991657ce104b52c0cd51ae0",
           "frames": 3000,
           "spill": 0,
           "vline_min": 223

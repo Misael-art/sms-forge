@@ -1,6 +1,20 @@
 # 15-tdd — master_of_fighters
 
-## Lote corrente — candidata v6 com tempos e lâmina transitória
+## Perfil atual — somente tempos v7, fonte v4 reutilizada
+
+Seletores15/16 consomem `out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_{left,right}/sample_data.h`.
+Mesma FSM, modo normal8×8, escala, P1, pivôs e fases da v4. Somente
+`sample_durations` troca4/1/2/3/1/3 por8/1/2/7/2/5. Exigir igualdade dos oito
+PNGs por lado e header inteiro exceto essa tabela. Fonte v4 reaproveitada sem
+`sample_rect_px`; nenhum pixel é novo. Três builds32KiB e QA nova passaram;
+260quadros exatos e8/1/2/7/2/5 comprovados nos dois sentidos. Vídeo real480quadros
+exatos; FPS59,71/59,46 em8s. Base e stress128:3.000frames cada,0derrame,
+mínimos213/223; sessões encerradas. Aceite humano pertence ao preview fonte
+escolhido; a equivalência de conteúdo e exposição qualifica a apresentação
+técnica da ROM, sem atribuir ao dono uma nova sessão observada.
+V6 é controle rejeitado e não deve ser tratado como seleção.
+
+## Histórico — candidata v6 com tempos e lâmina transitória
 
 Mesma FSM, emissor, P1, escala comum e empacotador normal 8×8 da v4. Contrato
 v3: 8/1/2/7/2/5 ticks. R02 admite delta de lâmina autorado, composto apenas em

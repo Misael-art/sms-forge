@@ -1,0 +1,192 @@
+{
+  "schema": "sms_art_temporal_review_v1",
+  "producer": "/root",
+  "subjects": {
+    "source": {
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+      "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+    },
+    "sms": {
+      "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R02.png",
+      "sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa"
+    },
+    "rom": {
+      "path": "out/candidates/hayato_short_cut_timing_only_v7_right/rom/master_of_fighters.sms",
+      "sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022"
+    }
+  },
+  "sequence": {
+    "expected_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06"
+    ],
+    "actual_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06"
+    ],
+    "duration_ticks": [
+      8,
+      1,
+      2,
+      7,
+      2,
+      5
+    ],
+    "tick_definition": "NTSC VDP presentation, nominal60Hz",
+    "expected_terminal": "original_guard",
+    "terminal": "original_guard"
+  },
+  "observations": [
+    {
+      "id": "unchanged_source",
+      "target": "source",
+      "subject_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+      "method": "framewise",
+      "reviewer": "/root/hayato_cut_art_review",
+      "report": {
+        "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+        "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+      },
+      "media": {
+        "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+        "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+      },
+      "scope": "Reuse unchanged pixels by SHA from independent v4 static review; no new artistic review claimed."
+    },
+    {
+      "id": "unchanged_SMS",
+      "target": "sms",
+      "subject_sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa",
+      "method": "framewise",
+      "reviewer": "/root/hayato_cut_art_review",
+      "report": {
+        "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+        "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+      },
+      "media": {
+        "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R02.png",
+        "sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa"
+      },
+      "scope": "Reuse unchanged pixels by SHA from independent v4 static review; no new artistic review claimed."
+    },
+    {
+      "id": "owner_preview_motion",
+      "target": "source",
+      "subject_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+      "method": "continuous",
+      "reviewer": "project_owner",
+      "report": {
+        "path": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+        "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0"
+      },
+      "media": {
+        "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/comparison_source_normal.apng",
+        "sha256": "459351a4a36c4aeb54d4f7c8e400b6d24d7209ed8ec719b60608bc6f0cbe04d9"
+      },
+      "normal_speed_perceived": true,
+      "capture_mode": "authored_preview",
+      "selection": "middle_column_timing_only",
+      "scope": "Direct owner movement/timing judgment on the supplied normal source comparison. This is owner feedback, not agent playback perception or observation of the new ROM."
+    },
+    {
+      "id": "owner_accepts_selected_cut",
+      "target": "source",
+      "subject_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+      "method": "owner_decision",
+      "reviewer": "project_owner",
+      "report": {
+        "path": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+        "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0"
+      },
+      "decision": "accepted"
+    },
+    {
+      "id": "actual_exposures",
+      "target": "rom",
+      "subject_sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022",
+      "method": "timeline",
+      "reviewer": "/root",
+      "report": {
+        "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/pixel_timeline_analysis.json",
+        "sha256": "b10099c9ae021ae84be5b1d877c4afcf5dc72c78081e38bf801c8b081fc05953"
+      },
+      "media": {
+        "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/hayato_cut_realtime.mp4",
+        "sha256": "2ef761100855f5fbebcba533515ae443af9e65a2484a378714aa6086b11b1204"
+      },
+      "rom_sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022",
+      "session_id": "b346785d4d914ba299e5325b67419b4a"
+    },
+    {
+      "id": "actual_ROM_pixels",
+      "target": "rom",
+      "subject_sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022",
+      "method": "rom_framewise",
+      "reviewer": "/root",
+      "report": {
+        "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/pixel_timeline_analysis.json",
+        "sha256": "b10099c9ae021ae84be5b1d877c4afcf5dc72c78081e38bf801c8b081fc05953"
+      },
+      "media": {
+        "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/hayato_cut_realtime.mp4",
+        "sha256": "2ef761100855f5fbebcba533515ae443af9e65a2484a378714aa6086b11b1204"
+      },
+      "rom_sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022",
+      "session_id": "b346785d4d914ba299e5325b67419b4a"
+    }
+  ],
+  "axes": {
+    "image_inspection": {
+      "status": "pass",
+      "note": "Accepted original source unchanged; prior independent static review reused by identical SHA.",
+      "observation_ids": [
+        "unchanged_source"
+      ]
+    },
+    "frame_analysis": {
+      "status": "pass",
+      "note": "All16SMSPNGs exactly match v4, including original R02; no warp retained.",
+      "observation_ids": [
+        "unchanged_SMS"
+      ]
+    },
+    "order_exposure": {
+      "status": "pass",
+      "note": "Both manual cases and fresh recording present8/1/2/7/2/5 and original guard.",
+      "observation_ids": [
+        "actual_exposures"
+      ]
+    },
+    "continuous_motion": {
+      "status": "pass",
+      "note": "Owner chose the timing-only source preview as best and rejected changed trajectory from blade deformation. No agent continuous perception or new-ROM human-viewing claim.",
+      "observation_ids": [
+        "owner_preview_motion"
+      ]
+    },
+    "rom_presentation": {
+      "status": "pass",
+      "note": "Fresh ROM recording and independent QA exactly reproduce original pixels with selected timing. Framewise presentation only.",
+      "observation_ids": [
+        "actual_ROM_pixels"
+      ]
+    },
+    "owner_acceptance": {
+      "status": "pass",
+      "note": "Explicit acceptance of v4 source plus8/1/2/7/2/5 authored timing; excludes the deformed blade and any product/release approval.",
+      "observation_ids": [
+        "owner_accepts_selected_cut"
+      ]
+    }
+  },
+  "next_decision": "keep",
+  "scope": "Owner accepted source-preview art/timing; independent static review and fresh technical ROM presentation. Does not imply owner watched this new ROM, full gameplay, audio, PAL or release."
+}

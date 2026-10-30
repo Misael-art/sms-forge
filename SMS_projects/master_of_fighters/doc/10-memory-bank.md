@@ -1,6 +1,60 @@
 # 10-memory-bank — master_of_fighters
 
-## Lote corrente — feedback temporal do dono, candidata v6
+## Escolha aprovada — somente tempos, perfil v7
+
+O dono aprovou a coluna **somente tempos 8/1/2/7/2/5**. Rejeitou a distorção
+da lâmina por perceber outra trajetória e piora do movimento. Decisão atual em
+`decisions/hayato-short-cut-timing-only_owner_approval.json`: aceite artístico
+e temporal do preview escolhido, sem inferir que o dono assistiu a uma ROM nova.
+Não pedir novamente a mesma escolha ou outro aceite desse preview.
+
+Reutilizar a fonte v4, hash9302a78a…, com katana original em todas as poses.
+Nenhuma geração, pintura ou folha duplicada. Fonte v4 aprovada no registro;
+v6 rejeitada pelo dono e preservada com sua evidência. V5 continua histórica.
+Perfil de runtime v7 usa configs `hayato_short_cut_timing_only_v7_{left,right}.json`
+e seletores15/16 no mesmo consumidor. Somente as seis exposições mudam em
+relação à v4:8/1/2/7/2/5. A opção de amostragem da experiência de distorção não
+é necessária nesta seleção; o adaptador permanece com sua função opt-in testada.
+16 PNGs e14manifestos de cena são byte-exatos à v4; o header inteiro só difere
+na tabela de exposições. Recursos/geometria anteriores são reutilizados por
+identidade de conteúdo, sem repetir auditoria artística. Perfil219patterns,
+7.008B,max53SAT,pico8. Builds32KiB passaram: left67ed85a8db15aca6cdf65771044fc23e3eb09f6984d4103b74ce6d0d3b66997e;
+right2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022;
+stress128dd8e79cb282a267aee3822d5120a1fe99c8c5d6da991657ce104b52c0cd51ae0.
+QA v7 passou2/2casos,20checks,260/260quadros exatos; R01–R06 apresentados em
+8/1/2/7/2/5, guarda original105–129, R02sempreoriginal. Sessões6a127439…
+e00af693d… encerradas com PIDs/start_ticks próprios ausentes.
+Gravação real da ROM direita:480/480quadros exatos em8,0195s,10cortes completos,
+decode lossless igual ao RGB nativo. Sessãob346785d4d914ba299e5325b67419b4a:
+FPS59,71/59,46 em duas janelas8s; VBlank3.000frames,0derrame,mínimo213.
+Stress128 sessãodaec1cf5b1b94705a0e6ae7a24ae1741:3.000frames,0derrame,mínimo223.
+Ambas encerradas; quatro processos próprios de cada sessão ausentes por identidade.
+Onze checks focados passaram, incluindo reutilização de recursos/geometria por
+hash; nenhuma suíte de conversor inalterado ou revisão artística equivalente foi repetida.
+
+Contrato atual `hayato_animation_contract_v4.json`; checkpoint
+`hayato_short_cut_timing_only_v7_checkpoint.json` e checklistv7 passaram no
+escopo declarado: aceite humano do preview fonte escolhido, revisão estática
+inalterada e reprodução técnica da nova ROM. Isso não afirma que o dono viu
+a nova ROM nem aprova entrega de produto, áudio, PAL ou combate completo.
+O julgamento artístico/temporal pedido está fechado por sua decisão explícita.
+
+Mídias atuais em `out/diagnostics/hayato_short_cut_v2/timing_only_v7/`:
+`approved_source_normal.apng`/`approved_source_slow.apng` são extrações exatas
+da coluna aprovada, sem novo desenho ou retiming. Vídeo novo em
+`performance/b346785d4d914ba299e5325b67419b4a/hayato_cut_realtime.mp4`; APNGs
+normal/lenta no mesmo diretório derivam do framebuffer gravado. Resultado em
+`result.json`, identidade em `identity_to_v4.json`. V6 e seus pareceres técnicos
+continuam preservados como tentativa rejeitada; não usar deformação neste corte.
+Próximo passo operacional: partir deste corte aceito quando houver novo lote
+definido, sem reabrir sua aprovação nem ampliar conteúdo por conta própria.
+Implementação do perfil selecionado: `8ed21d7e593fb8111c6a314fe125ccc12d21a8bf`. Documentação/recibos em commit separado e um push do lote; PR4 reutilizado.
+Retenção: `out/diagnostics/hayato_short_cut_v2/timing_only_v7/hayato_timing_only_v7_approved_review.zip`, recibo `doc/hayato_short_cut_timing_only_v7_retention.json`, manifesto por arquivo e cópia local verificada no destino existente.
+SHA final e confirmação remota em `out/diagnostics/hayato_short_cut_v2/timing_only_v7/publication.json`. Retenção no mesmo disco; sem release ou backup remoto novo.
+Registro: recorte Hayato+ancestrais30artefatos/437arquivos passou; global segue falhando no relatório histórico Social61v5 ausente.
+As seções abaixo são históricas.
+
+## Histórico — feedback temporal do dono, candidata v6 rejeitada
 
 O proprietário assistiu à comparação: considera satisfatórias a arte e as
 poses completas, mas identifica preparação e final baixo breves demais para

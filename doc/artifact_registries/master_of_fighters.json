@@ -2698,7 +2698,7 @@
       "kind": "animation_source",
       "variant": "cps2-short-cut",
       "revision": 4,
-      "status": "superseded",
+      "status": "approved",
       "parents": [
         "hayato-cps2-short-cut-v03"
       ],
@@ -2744,7 +2744,11 @@
           "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/patch_native/head.png",
           "sha256": "fd07f74431a75b560e2bb8ddee02d9fc88073f64e0decf2f7d9492b4534432d9"
         }
-      ]
+      ],
+      "decision": {
+        "path": "doc/decisions/hayato-short-cut-v4_source_owner_approval.json",
+        "sha256": "e10fe7d8c315068d79cd6ece30781ac5bdf410ff434f4655541c4f445cce3065"
+      }
     },
     {
       "id": "hayato-short-cut-review-records-v01",
@@ -3369,7 +3373,7 @@
       "kind": "animation_source",
       "variant": "cps2-short-cut",
       "revision": 6,
-      "status": "candidate",
+      "status": "rejected",
       "parents": [
         "hayato-cps2-short-cut-v05"
       ],
@@ -3421,7 +3425,11 @@
           "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/generation_metadata.json",
           "sha256": "9cf2ae8598868478075d1e7074e0856de9b67ab84367a5497d66946eea699938"
         }
-      ]
+      ],
+      "decision": {
+        "path": "doc/decisions/hayato-short-cut-v6_source_owner_rejection.json",
+        "sha256": "93b0b577f0eae7eac6e477b06c8c43728799b2bcab88742d327f80b9bb967108"
+      }
     },
     {
       "id": "hayato-short-cut-blade-reviews-v01",
@@ -3463,7 +3471,7 @@
       "kind": "planning_sheet",
       "variant": "short-cut-owner-timing-plan",
       "revision": 1,
-      "status": "candidate",
+      "status": "superseded",
       "parents": [
         "hayato-cps2-short-cut-v06"
       ],
@@ -3879,6 +3887,412 @@
           "sha256": "a9dbb4089ddeabc5854df5b9660b2343e3b4ebb628971c6c1a89e341ca49869d"
         }
       ]
+    },
+    {
+      "id": "hayato-short-cut-owner-timing-plan-v02",
+      "asset_id": "hayato",
+      "kind": "planning_sheet",
+      "variant": "short-cut-owner-timing-plan",
+      "revision": 2,
+      "status": "candidate",
+      "parents": [
+        "hayato-short-cut-owner-timing-plan-v01",
+        "hayato-cps2-short-cut-v04"
+      ],
+      "supersedes": "hayato-short-cut-owner-timing-plan-v01",
+      "reason": "Owner selects originalv4art and8/1/2/7/2/5, rejects blade deformation. Records adopted after actual choice; not product/release approval.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+          "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0"
+        },
+        {
+          "role": "attachment_1",
+          "path": "doc/decisions/hayato-short-cut-v4_source_owner_approval.json",
+          "sha256": "e10fe7d8c315068d79cd6ece30781ac5bdf410ff434f4655541c4f445cce3065"
+        },
+        {
+          "role": "attachment_2",
+          "path": "doc/decisions/hayato-short-cut-v6_source_owner_rejection.json",
+          "sha256": "93b0b577f0eae7eac6e477b06c8c43728799b2bcab88742d327f80b9bb967108"
+        },
+        {
+          "role": "attachment_3",
+          "path": "doc/hayato_animation_contract_v4.json",
+          "sha256": "fc54e2068f71a6c63c8acef0909fa8148aa99dc8e1eb2a016e3eb6445e6542ec"
+        },
+        {
+          "role": "attachment_4",
+          "path": "doc/hayato_short_cut_timing_only_v7_art_checklist.json",
+          "sha256": "e6156e7ee7b8f8f9c53ece3ac654f120b69c4253849377eadea5db035622e09d"
+        },
+        {
+          "role": "attachment_5",
+          "path": "doc/hayato_short_cut_timing_only_v7_checkpoint.json",
+          "sha256": "a5202da26e30e549e8e19054624cd53a6561a9f9ae818fcc85ebadf584dd52b5"
+        }
+      ]
+    },
+    {
+      "id": "hayato-short-cut-timing-only-runtime-v01",
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "short-cut-timing-only-runtime",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "hayato-short-cut-owner-timing-plan-v02",
+        "hayato-cps2-short-cut-v04"
+      ],
+      "reason": "Actual timing-only ROM proof adopted after collection. Source preview accepted by owner; ROM technical presentation, not observed owner gameplay session.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/animation_contract_audit.json",
+          "sha256": "f7ccf510f83e79e9a3bd25f28ba6e8a26a50681c9ace2536f80026eb26fff2f5"
+        },
+        {
+          "role": "attachment_1",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/approved_preview_extraction.json",
+          "sha256": "61b31ba6aa9b0a3fea32ffb1d1affb12b6c4cc00e78c2c4d47767de311b7907c"
+        },
+        {
+          "role": "attachment_2",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/approved_source_normal.apng",
+          "sha256": "ce35c3797fe2b81f691c737bbb61b4fe39eb0ea04cd562a421914cb9ee72af1d"
+        },
+        {
+          "role": "attachment_3",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/approved_source_slow.apng",
+          "sha256": "0e6fb00a90e3ad0fe928148a54bf5f65b31aca30b50318253f684fa8f28fb74f"
+        },
+        {
+          "role": "attachment_4",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/art_checklist_audit.json",
+          "sha256": "0bb69cc5ef0a426f95601f44a43b0e52bd57214d69fbe7516b86c446e7b77de0"
+        },
+        {
+          "role": "attachment_5",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/checks/build_results.json",
+          "sha256": "0c42d136bb7ccb6f2c74daaed062c0a05886c85aa37069da520053fccc793841"
+        },
+        {
+          "role": "attachment_6",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/checks/focused.json",
+          "sha256": "0f8529697e24018809f2c2c80dcdf41ee12722c707e50033fd3d477705863cf5"
+        },
+        {
+          "role": "attachment_7",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/R01.png",
+          "sha256": "a7dda4933ac6b70fdaf86e4c18aa588d7bff8c8c23f560d4f6ee67f562329fa2"
+        },
+        {
+          "role": "attachment_8",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/R02.png",
+          "sha256": "c3e18395bef54317364f172a9eb606857698e83b12915a0fe63c847842e5131b"
+        },
+        {
+          "role": "attachment_9",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/R03.png",
+          "sha256": "5aa65e7e1d0a2e5b2e47d02c4e3b8177175356904175ad884f898dd3db07bdb1"
+        },
+        {
+          "role": "attachment_10",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/R04.png",
+          "sha256": "170e3990c8ba5b0d8dafab08c2a92a33f86f72514632b306620e97535b528255"
+        },
+        {
+          "role": "attachment_11",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/R05.png",
+          "sha256": "b97f5abea8784f759143600ef567e8f3f16502499f84b4a51d322c04e50e3a8e"
+        },
+        {
+          "role": "attachment_12",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/R06.png",
+          "sha256": "c846d2b53123ebbe09e41a1e6ce412de5769b36571a9aa3c8ec80e21267f8d0e"
+        },
+        {
+          "role": "attachment_13",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/conversion.json",
+          "sha256": "36c61031c59d8b8c2eda695b5580703733c653b32bcf46a6b60361ff9881d3a1"
+        },
+        {
+          "role": "attachment_14",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/idle.png",
+          "sha256": "b34e97ea6585939ebe5f867098b69163dc62a2c26c5b33ef7e2d011231a6e1ee"
+        },
+        {
+          "role": "attachment_15",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/reference.png",
+          "sha256": "24d4f438faff9fccc289b5a15393bb43ca74f2b3439a64cc3a23f091d9488c56"
+        },
+        {
+          "role": "attachment_16",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/sample_data.h",
+          "sha256": "eefd18a267f5802efef4d8dcb1d0fa1936d138a0c0c080b1262bf1f6041f7e9f"
+        },
+        {
+          "role": "attachment_17",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/scene_R01.json",
+          "sha256": "1deee0be458673f410ef6649243702952d1084fa66898179da836a5f04b77944"
+        },
+        {
+          "role": "attachment_18",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/scene_R02.json",
+          "sha256": "eaadea897602321049a37d9309e2bbd8d72d2391ce212ab6e3fc656ba0cbec0c"
+        },
+        {
+          "role": "attachment_19",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/scene_R03.json",
+          "sha256": "3dde5f74f064ce8ba1c41bb86a0ae5e09e2979c2ca40fb561e6b7f4ad5757801"
+        },
+        {
+          "role": "attachment_20",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/scene_R04.json",
+          "sha256": "0572cbaf16230feed2c140a3f73e21bfae0005a2ead265eecd02848aa6d27ae0"
+        },
+        {
+          "role": "attachment_21",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/scene_R05.json",
+          "sha256": "a754ee87392ecf8b3413937875884752ef4b7649ddaa3ab2ff1676ffe9d858e2"
+        },
+        {
+          "role": "attachment_22",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/scene_R06.json",
+          "sha256": "00752cb555645469a562e41d6a4c910d797a97b9f0e0191a77b35e3a668726bb"
+        },
+        {
+          "role": "attachment_23",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/scene_idle.json",
+          "sha256": "dfcd23dcbbeebc3b0e5e5f13400f9deaca067e08028888e9778e05374aa31602"
+        },
+        {
+          "role": "attachment_24",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R01.png",
+          "sha256": "da69dddedd7b0fd590826f328c5c9b17a38f6ac9f752019c89e85df0a9e9a732"
+        },
+        {
+          "role": "attachment_25",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R02.png",
+          "sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa"
+        },
+        {
+          "role": "attachment_26",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R03.png",
+          "sha256": "d9c684f446e97dd781f7bb93fe3fcc061fa9de5e8aa6cd3d5a22963b274fc885"
+        },
+        {
+          "role": "attachment_27",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R04.png",
+          "sha256": "2b30982d972700a43c5113d27ed85c7b657e98a130d794b74fa6f7b179f496b2"
+        },
+        {
+          "role": "attachment_28",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R05.png",
+          "sha256": "7c0e6127bed939673c2d9d2898ae9c5d8e13d6899d817a05deb36d4cea8fa85c"
+        },
+        {
+          "role": "attachment_29",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R06.png",
+          "sha256": "9c2682373635b09f6a18b81e2fc9820b4028a4d6ebb68acb84aee3af6e6fcb0d"
+        },
+        {
+          "role": "attachment_30",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/conversion.json",
+          "sha256": "b9e24dd956516d47290e7e52f4c0d5a134b7a4fc185b36de7ff75500a975a8fb"
+        },
+        {
+          "role": "attachment_31",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/idle.png",
+          "sha256": "360c7c880128fd54006a8fd2dd510ab173a5b2f1cfa7d698e51c23ad80926647"
+        },
+        {
+          "role": "attachment_32",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/reference.png",
+          "sha256": "76c366bf055aa31d8c0fc7211a8e9ee04436da687eacd020b9e7bd982278319b"
+        },
+        {
+          "role": "attachment_33",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/sample_data.h",
+          "sha256": "200787590a11c9ae0168fbe502bd31e09e3faa52fc549ba8adc75f10234449a1"
+        },
+        {
+          "role": "attachment_34",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/scene_R01.json",
+          "sha256": "aebd16f9e4a8652a85eccbab155175583e11c72d99728340ecadeafe8635281e"
+        },
+        {
+          "role": "attachment_35",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/scene_R02.json",
+          "sha256": "280813496d0349acd2ced05320c6639a3b5026a2ebb3a4a85559c9532413dcf5"
+        },
+        {
+          "role": "attachment_36",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/scene_R03.json",
+          "sha256": "e7d13677a8174f3f62884e940989b9493f05b5058a84fa1c9c4994582d9776b1"
+        },
+        {
+          "role": "attachment_37",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/scene_R04.json",
+          "sha256": "c4116cc9eb9c2ba599ccd0fe465ea802d87b460aa52739e9fdf731ae5083c859"
+        },
+        {
+          "role": "attachment_38",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/scene_R05.json",
+          "sha256": "5de70afc27dd4a398439ba369636c2aa3cf956dfa299a2c9194a08e9054a58d7"
+        },
+        {
+          "role": "attachment_39",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/scene_R06.json",
+          "sha256": "3dea8fa017ccc64ddd9d984cb697b60f1a294b091143e0435b92e9db30c26d76"
+        },
+        {
+          "role": "attachment_40",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/scene_idle.json",
+          "sha256": "e19629c2399ad188a9afc91172deab288afef3a4203471e59e5be4e08c6801ac"
+        },
+        {
+          "role": "attachment_41",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/identity_to_v4.json",
+          "sha256": "412af5fb252946b211c6922ca7dac7b6c4da4b8f9a576dc77108f1aafed0e24c"
+        },
+        {
+          "role": "attachment_42",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/independent_qa/left/request.json",
+          "sha256": "20cfc96b67660f501e9bd88df81cd3c741e9dd35866fdd132050259b3f3dccaf"
+        },
+        {
+          "role": "attachment_43",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/independent_qa/left/run_583fed2113bc4a25b7ee0a7ac24a7a2d/closed_session.json",
+          "sha256": "12e434023ec335e804c9bb462ed580c6b8c8cd3b64de8314429f39361bc77718"
+        },
+        {
+          "role": "attachment_44",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/independent_qa/left/run_583fed2113bc4a25b7ee0a7ac24a7a2d/report.json",
+          "sha256": "004ca5d0ee29e8b1adeee16012df4a2499feefc79073466000326a0b9dc1f7a5"
+        },
+        {
+          "role": "attachment_45",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/independent_qa/right/request.json",
+          "sha256": "e0154f8d6e74c85e1c485e6eefa4bec2367f195a2894cd6c053520225fe244b5"
+        },
+        {
+          "role": "attachment_46",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/independent_qa/right/run_08bea61d3c6c4b88a5e3310baea6db1d/closed_session.json",
+          "sha256": "4f1258cd13c48fc5cbee115930f7dd585ba61b96c8488bc85f9a716a3b2e9c22"
+        },
+        {
+          "role": "attachment_47",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/independent_qa/right/run_08bea61d3c6c4b88a5e3310baea6db1d/report.json",
+          "sha256": "d27eb0f63a396d9c40bafbb8bd8ce2f14c2062cdda46eae8e1ec6f2025959400"
+        },
+        {
+          "role": "attachment_48",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/bundle/b346785d4d914ba299e5325b67419b4a/capture.json",
+          "sha256": "7e80ae30bbfa0b56655f50c34162f925ec86e7664430b3b898ab2c55c1bfe679"
+        },
+        {
+          "role": "attachment_49",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/bundle/b346785d4d914ba299e5325b67419b4a/session.json",
+          "sha256": "c3fb02b0cb73cb1471aea7d53c4726fe057d3fc2341deec0c45f967baa630c8d"
+        },
+        {
+          "role": "attachment_50",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/closed_session.json",
+          "sha256": "27a38242512b21d254b27d61b1770892b24b259bb98ce86b605728ac4eb76d0a"
+        },
+        {
+          "role": "attachment_51",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/hayato_cut_realtime.json",
+          "sha256": "3a21c2d53ae998c0ae4b0c981771115a25b7b316b359a711f40b86026c27216b"
+        },
+        {
+          "role": "attachment_52",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/hayato_cut_realtime.mp4",
+          "sha256": "2ef761100855f5fbebcba533515ae443af9e65a2484a378714aa6086b11b1204"
+        },
+        {
+          "role": "attachment_53",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/pixel_timeline_analysis.json",
+          "sha256": "b10099c9ae021ae84be5b1d877c4afcf5dc72c78081e38bf801c8b081fc05953"
+        },
+        {
+          "role": "attachment_54",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/result.json",
+          "sha256": "44bf0c95acd40d1fcc35da47bc26a993c9b5972f983eb0e254ee7e7cae51d005"
+        },
+        {
+          "role": "attachment_55",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/rom_normal.apng",
+          "sha256": "927732bbeeac75b675cd22443bb0e429bf6fd3fab4a2eae753138a5586cb96f9"
+        },
+        {
+          "role": "attachment_56",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/rom_slow.apng",
+          "sha256": "c1a5b5a32b7e6fb20f0e840faa08ee3a53dc821b31e194804fc5ab62d25034c0"
+        },
+        {
+          "role": "attachment_57",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/runtime_probe.json",
+          "sha256": "09055d23bd94ec076d2ff643efa3fe07a1112528ce9933326648b45421f6ef9e"
+        },
+        {
+          "role": "attachment_58",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/video_copy_receipt.json",
+          "sha256": "de34455b30f9e72d1012a025c622998ced2b6fa52affe51562383f8295d112f0"
+        },
+        {
+          "role": "attachment_59",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/worst.json",
+          "sha256": "c4d2cb31cc347e05da0c91511afd7de84e74afa52bd0365c1269611f71b32871"
+        },
+        {
+          "role": "attachment_60",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/cleanup_verified.json",
+          "sha256": "ef1f0e0d88161cacf9a78ce75ab043da77ec64d37170e56ddb7ca4cb0fe7464d"
+        },
+        {
+          "role": "attachment_61",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/daec1cf5b1b94705a0e6ae7a24ae1741/bundle/daec1cf5b1b94705a0e6ae7a24ae1741/capture.json",
+          "sha256": "ef3613fd96506e0362e0b6bfb63a74a0316f67253b1e5ed4f1db883b54b3175a"
+        },
+        {
+          "role": "attachment_62",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/daec1cf5b1b94705a0e6ae7a24ae1741/bundle/daec1cf5b1b94705a0e6ae7a24ae1741/session.json",
+          "sha256": "04ec6fcde64411c1f8c7f1f6c824b49305cf4ba95c503bb0ca78077e4ec75c62"
+        },
+        {
+          "role": "attachment_63",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/daec1cf5b1b94705a0e6ae7a24ae1741/closed_session.json",
+          "sha256": "306711056e43f3bdc2ad81c194021fcb0e99ac6842716bb05191b4e34385a157"
+        },
+        {
+          "role": "attachment_64",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/daec1cf5b1b94705a0e6ae7a24ae1741/result.json",
+          "sha256": "ecd092373b7ebfe5ce826dcd7678b9e85fa3d429155999c0631b3b6f88d20333"
+        },
+        {
+          "role": "attachment_65",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/daec1cf5b1b94705a0e6ae7a24ae1741/worst.json",
+          "sha256": "d2e6797a724a707c3fde10d4e77b995f4b932e9ba2a7bdb4f588da27f7edd45b"
+        },
+        {
+          "role": "attachment_66",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/result.json",
+          "sha256": "135c97e3f772e5b63f30cba1468dbb3881605e18e818a551939d6fdd7a87d461"
+        },
+        {
+          "role": "attachment_67",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/result.json",
+          "sha256": "12fe27e891d1c0affb62def5f2c8c8289d7bbc92237a5985955b4a34c6a1be44"
+        },
+        {
+          "role": "attachment_68",
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/temporal_checkpoint_audit.json",
+          "sha256": "b3202d1f558e5033e131c60a8793848f577ef561c05c56c4b278df048c286f94"
+        }
+      ]
     }
   ],
   "heads": [
@@ -4089,8 +4503,8 @@
       "asset_id": "hayato",
       "kind": "animation_source",
       "variant": "cps2-short-cut",
-      "candidate": "hayato-cps2-short-cut-v06",
-      "approved": null
+      "candidate": "hayato-cps2-short-cut-v04",
+      "approved": "hayato-cps2-short-cut-v04"
     },
     {
       "asset_id": "hayato",
@@ -4145,7 +4559,7 @@
       "asset_id": "hayato",
       "kind": "planning_sheet",
       "variant": "short-cut-owner-timing-plan",
-      "candidate": "hayato-short-cut-owner-timing-plan-v01",
+      "candidate": "hayato-short-cut-owner-timing-plan-v02",
       "approved": null
     },
     {
@@ -4153,6 +4567,13 @@
       "kind": "diagnostic_conversion",
       "variant": "short-cut-blade-runtime",
       "candidate": "hayato-short-cut-blade-runtime-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "hayato",
+      "kind": "diagnostic_conversion",
+      "variant": "short-cut-timing-only-runtime",
+      "candidate": "hayato-short-cut-timing-only-runtime-v01",
       "approved": null
     }
   ],

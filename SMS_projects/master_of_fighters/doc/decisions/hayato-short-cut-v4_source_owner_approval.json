@@ -1,0 +1,52 @@
+{
+  "schema": "sms_artifact_decision_v1",
+  "artifact_id": "hayato-cps2-short-cut-v04",
+  "scope": "animation_source",
+  "decision": "approved",
+  "actor_role": "owner",
+  "actor": "project_owner",
+  "source_note": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json: direct owner selection of timing-only and rejection of blade distortion.",
+  "approval_scope": "Final six-pose source sheet, used with8/1/2/7/2/5 only. Auxiliary raw/patch files are bound lineage evidence, not separate aesthetic approval; no production resource or release.",
+  "files": [
+    {
+      "role": "image",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+      "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+    },
+    {
+      "role": "raw",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/generated_raw.png",
+      "sha256": "4259a80dc934dc87983c20561246ba81dfbbe563c8c4ef4b48148aabe61b435b"
+    },
+    {
+      "role": "prompt",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/prompt.txt",
+      "sha256": "19db5c162dfe00387d76ea6ef5fb101b0b0503a98b6c229841b3502d33ef9d4c"
+    },
+    {
+      "role": "recipe",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/extraction_recipe.json",
+      "sha256": "78bd144ed1426801af222bfe55326556bcb7c7d32c280f636d38ad6ab24d1eb2"
+    },
+    {
+      "role": "assembly",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/source_assembly.json",
+      "sha256": "930538caa8fb8c6402b17a7acacc03e68bfda9046947d1ecec4c5aea297c99c3"
+    },
+    {
+      "role": "hair_delta_detail_3",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/head_patch.png",
+      "sha256": "fd07f74431a75b560e2bb8ddee02d9fc88073f64e0decf2f7d9492b4534432d9"
+    },
+    {
+      "role": "hair_delta_detail_5",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/native/R03.png",
+      "sha256": "88c56708453130d1af7a0205defb2124d547f8db009331f2dcd78a63363edf63"
+    },
+    {
+      "role": "hair_delta_detail_7",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/patch_native/head.png",
+      "sha256": "fd07f74431a75b560e2bb8ddee02d9fc88073f64e0decf2f7d9492b4534432d9"
+    }
+  ]
+}

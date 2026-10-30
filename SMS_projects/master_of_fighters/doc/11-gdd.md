@@ -1,6 +1,15 @@
 # 11-gdd — master_of_fighters
 
-## Revisão corrente — tempo e deformação de espada, fonte v6
+## Seleção aprovada — corte sem distorção, tempos 8/1/2/7/2/5
+
+O proprietário escolheu os desenhos v4 com novos tempos. A katana conserva
+sua trajetória e forma originais; a deformação v6 foi rejeitada por mudar a
+leitura do golpe. Esta é a opção artística/temporal aceita para este corte.
+Contrato atual `hayato_animation_contract_v4.json`; não ampliar conteúdo neste
+lote. Aceite do preview não implica áudio, dano/hitboxes, PAL, hardware físico,
+qualidade global ou release. A integração do mesmo corte segue no perfil v7.
+
+## Histórico — tempo e deformação de espada, fonte v6 rejeitada
 
 Feedback do dono confirma a base artística v4 e pede mais leitura na preparação
 e no final baixo. Mantêm-se seis poses e um corte; proposta 8/1/2/7/2/5 ticks.
