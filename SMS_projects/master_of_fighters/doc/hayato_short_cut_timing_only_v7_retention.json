@@ -1,0 +1,26 @@
+{
+  "schema": "hayato_timing_only_retention_v7",
+  "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/timing_only_v7/hayato_timing_only_v7_approved_review.zip",
+  "recovery_path": "/home/misael/.local/share/project-recovery/SMSForge/artifacts/hayato_timing_only_v7_approved_review.zip",
+  "sha256": "f8cd3ac5e8cda1dc9bb97fa6a82c5423d1fea42cecf0ec9d79d14019187aae17",
+  "bytes": 3811438,
+  "payload_files": 517,
+  "payload_bytes": 78144345,
+  "every_payload_internal_manifest_verified": true,
+  "implementation_commit": "8ed21d7e593fb8111c6a314fe125ccc12d21a8bf",
+  "parent_bundles": [
+    {
+      "path": "/home/misael/.local/share/project-recovery/SMSForge/artifacts/hayato_body_cut_v4_review.zip",
+      "sha256": "42699dfc960aa0729d6c9036d44cbe474680c6fb14c5dae12136a937bd3a2ac4",
+      "verified": true
+    },
+    {
+      "path": "/home/misael/.local/share/project-recovery/SMSForge/artifacts/hayato_timing_stretch_v6_review.zip",
+      "sha256": "8f9d7aa556e6eeef7775202af8bfa4f154fa34c562655f7b03525f0f97d7618b",
+      "verified": true
+    }
+  ],
+  "approval_scope": "Owner-selected unchanged sourcev4 and8/1/2/7/2/5 authored preview; fresh technical ROM proof. No asserted owner viewing of new ROM or product/release approval.",
+  "retention_scope": "Two local copies on same disk, no offhost backup or release. SDK/original emulator JAR/credentials excluded.",
+  "receipt_exclusion": "External receipt avoids self-hash recursion."
+}

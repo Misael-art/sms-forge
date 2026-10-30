@@ -22,7 +22,10 @@ na matriz de maestria sobe de nível aqui, ou não sobe.
    "Inconclusivo" é resultado legítimo; inconclusivo travestido de confirmado é
    overclaim e contamina toda técnica que dependa dele.
 6. Fato pago → sobe a técnica na matriz (`01_registry_maestria_sms.json`, com
-   `evidence` citada — `audit_mastery_registry.py` reprova nível sem evidência).
+   `evidence` estruturada conforme `doc/05_technical/00_matriz_maestria_sms.md`:
+   fonte/build/ROM/mídia/relatório com hashes, escopo e sessão). Executar
+   `audit_mastery_registry.py --self-check` antes de auditar. Prosa e nome de
+   gate não são evidência de execução. PASS verifica custódia, não domínio.
    Fato refutado → vira lição via `curation-learning.md`.
 
 **Probe não vira jogo.** Código de laboratório não migra para projeto sem passar

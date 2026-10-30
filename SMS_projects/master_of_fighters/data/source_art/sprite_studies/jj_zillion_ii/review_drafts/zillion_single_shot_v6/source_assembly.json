@@ -1,0 +1,33 @@
+{
+  "schema": "sms_source_single_sample_repair_v1",
+  "parent_source": "jj-zillion-single-shot-source-v05",
+  "producer": "root",
+  "new_ImageGen_calls": 0,
+  "raw_generated": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/raw_generated.png",
+    "sha256": "bd751d55b7c633d37ce3ad841e17e3f3b2028a4db17e2b2272ba7a921a30fc51"
+  },
+  "source_pixel": [
+    105,
+    99
+  ],
+  "generated_resized_sample": [
+    78,
+    74
+  ],
+  "generated_sample_alpha": 0,
+  "before_index": 2,
+  "after_index": 0,
+  "changed_source_indices": 1,
+  "all_other_source_indices_palette_canvas_exact": true,
+  "other5native_poses": "reuse parentv5 exactpaths",
+  "sheet": {
+    "path": "shot_source.png",
+    "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+  },
+  "idle": {
+    "path": "native/I00.png",
+    "sha256": "0c5df990c1d35949dbd4256f848a9782d94050355939903f85a1538c68451f70"
+  },
+  "scope": "Only orphan caught by independent sourcecutout. No new body/weapon pixels, pose/timing/effects changes."
+}

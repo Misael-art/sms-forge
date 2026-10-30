@@ -1,0 +1,226 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_animation",
+  "producer": "/root",
+  "reviewer": "/root/hayato_cut_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_source_art_review",
+  "status": "revise_before_growth",
+  "request_id": "hayato-short-cut-key-v1",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_key_review_request_v1.json",
+    "sha256": "db49156dfb9187f2e83bdfb12f58e702e44c53955cc72402e44ad80ff8fc4b15"
+  },
+  "approval_scope": "Independent static source-art comparison of executionC02 v1 against frozen Hayato guard and approved identity concept only. No sequence, SMS, ROM, timing, owner, production or delivery approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_source.png",
+      "sha256": "a6eac666190508089fac6168fb083abdb478c90e7cd1b337782e38969ef096c9",
+      "observed_sha256": "a6eac666190508089fac6168fb083abdb478c90e7cd1b337782e38969ef096c9"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_metadata.json",
+      "sha256": "560616c9898fad0a2ba9a1209aa71edebf5c873894df183f5a95504bd9f2af69",
+      "observed_sha256": "560616c9898fad0a2ba9a1209aa71edebf5c873894df183f5a95504bd9f2af69"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_extraction_recipe.json",
+      "sha256": "d93739111af2d88d0997da9ec3254b9ecab26c6e47ccb36ac7ed9f5cc6f21cc2",
+      "observed_sha256": "d93739111af2d88d0997da9ec3254b9ecab26c6e47ccb36ac7ed9f5cc6f21cc2"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+      "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+      "observed_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "observed_sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v1/execution_v1_4x.png",
+      "sha256": "9f648d4cae1118710d7cd4f91fe02eeddd9c5cc64711444664e6dcb10683ecc2",
+      "observed_sha256": "9f648d4cae1118710d7cd4f91fe02eeddd9c5cc64711444664e6dcb10683ecc2"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v1/review_context/animation_contract_initial.json",
+      "sha256": "e97920eb1d68b3df247de0f4ce04c8ca3c8a41c2a7cbe35d9c5e28f74494ec9e",
+      "observed_sha256": "e97920eb1d68b3df247de0f4ce04c8ca3c8a41c2a7cbe35d9c5e28f74494ec9e"
+    }
+  ],
+  "review_axes": {
+    "identity_and_face": {
+      "status": "pass",
+      "note": "Em 1x e NN, rosto jovem adulto, franja/cabelo preso, laço vermelho e figurino identificam o mesmo Hayato. A pose não acrescenta idade, massa muscular, armadura ou equipamento novo."
+    },
+    "pixel_clusters": {
+      "status": "pass",
+      "note": "A fonte mantém planos conectados no quimono e hakama, contorno escalonado e detalhes econômicos. Não observei textura ou dithering novo usado para esconder construção."
+    },
+    "face_detail_readability": {
+      "status": "pass",
+      "note": "O perfil focado e a orientação do olhar continuam legíveis na fonte nativa. Isso não aceita a futura perda facial na redução SMS."
+    },
+    "outline_and_cutout": {
+      "status": "pass",
+      "note": "Inspeção em fundo escuro e claro não mostrou corte de ponta, sandálias ou bainha. Há contorno contínuo na silhueta principal; não identifiquei componente solto bloqueante nesta fonte."
+    },
+    "material_shading": {
+      "status": "pass",
+      "note": "Quimono branco/cinza, pele quente, faixa vermelha, hakama laranja-vermelho, cabelo escuro, metal claro e bainha escura permanecem separados."
+    },
+    "material_shadow_flow_coherence": {
+      "status": "pass",
+      "note": "Sombras maiores explicam mangas e dobras da cintura às pernas, compatíveis com a luz superior/esquerda. Não observei inversão de iluminação na chave estática."
+    },
+    "semantic_palette_role_confinement": {
+      "status": "pass",
+      "note": "Claros permanecem associados principalmente a tecido/faixas/lâmina, vermelho ao figurino/laço e ouro às ferragens. A fonte ainda deve receber inspeção própria da derivada SMS; não herdo os overrides da guarda como aprovação para C02."
+    },
+    "hand_weapon_attachment": {
+      "status": "pass",
+      "note": "É possível seguir a manga do braço que cruza o tronco até antebraço/punho/mão e a manga oposta até a mão junto à guarda. Ambas envolvem o mesmo cabo; a guarda separa mãos e lâmina. Não observei braço extra ou mão flutuante."
+    },
+    "pose_anatomy_and_joint_continuity": {
+      "status": "pass",
+      "note": "A pose isolada tem ombros e cotovelos plausíveis sob as mangas, punhos conectados e pernas saindo coerentemente do hakama. O problema de continuidade entre as chaves está separado do desenho anatômico isolado."
+    },
+    "equipment_geometry": {
+      "status": "pass",
+      "note": "Lâmina inteira, ponta, guarda, cabo e terminal da bainha estão presentes. A espada termina acima do solo e não atravessa os pés. A pega permanece atrás da guarda. O comprimento aparente entre as duas orientações é uma cautela separada, não uma certificação por bbox."
+    },
+    "frame_pose_integrity": {
+      "status": "pass",
+      "note": "C02 lê como fim de corte descendente, distinto da guarda e sem parecer uma estocada. Um único desenho não prova trajetória, execução temporal, preparação ou recuperação."
+    },
+    "native_size_readability": {
+      "status": "pass",
+      "note": "A leitura de samurai e do corte sobrevive em 1x da fonte; as ampliações NN confirmam a construção. A legibilidade em SMS não foi aprovada neste pedido."
+    },
+    "morphology_and_biotype": {
+      "status": "pass",
+      "note": "A figura permanece jovem, adulta e esguia, sem leitura de lutador pesado. Preservar o biotipo geral não resolve o drift de escala corporal entre as duas chaves."
+    },
+    "grounding_static": {
+      "status": "pass",
+      "note": "Os pés estão apoiados na chave isolada; as duas poses usam a mesma boundary inferior127 no pé direito. Não existe validação dinâmica de centro de massa."
+    },
+    "body_and_support_continuity": {
+      "status": "fail",
+      "note": "Na mesma matriz e baseline, a execução abre o pé esquerdo para fora e apresenta a figura mais alta/alongada que a guarda. O ROI de cabelo x40..84 começa em y24 na guarda e y19 em C02. Nas linhas de sola y120..127, os pixels do pé esquerdo passam de x26..40 para x21..36; o direito passa de x87..105 para x88..106. A coroa de cabelo não é medida anatômica, mas a comparação visual de rosto, cintura e apoios também mostra mudança corporal além da rotação dos braços. O contrato inicial prevê base sem deslocamento e o prompt pede pés preservados; não há preparação planejada que explique essa abertura."
+    },
+    "weapon_scale_continuity": {
+      "status": "pending",
+      "note": "A lâmina diagonal parece mais longa e dominante que a lâmina quase vertical da guarda. Rotação/perspectiva podem alterar a projeção, portanto não declaro um comprimento físico exato nem reprovo por bbox. Fixar os mesmos terminais/proporções de cabo/guarda/lâmina na revisão e reexaminar lado a lado; não encurtar apenas para satisfazer scanline."
+    },
+    "continuous_motion": {
+      "status": "not_applicable",
+      "note": "Existe somente a chave C02. Não observei reprodução contínua ou sequência completa e não avalio fluidez por esta imagem."
+    },
+    "sms_derivative_art_acceptance": {
+      "status": "pending",
+      "note": "Não revisei uma conversão final ou framebuffer desta ação. Mapeamento de material, pegada, ponta da lâmina e rosto precisam de revisão no novo SHA quando o produtor fechar a geometria."
+    }
+  },
+  "findings": [
+    {
+      "priority": 1,
+      "domain": "art",
+      "kind": "defect",
+      "severity": "blocker",
+      "scope": "C02 versus frozen guard, source matrices144x144, common pivot/baseline",
+      "axes": [
+        "body_and_support_continuity"
+      ],
+      "note": "A chave isolada é atraente e anatômica, porém não preserva a construção/apoios contratados para a unidade curta: a figura lê mais alta e o pé esquerdo abre cerca5px sem deslocamento previsto. Expandir as demais poses em torno dessa chave consolidaria um drift ainda não resolvido.",
+      "evidence_native_px": {
+        "hair_ROI": [
+          40,
+          0,
+          85,
+          48
+        ],
+        "guard_ROI_first_opaque_y": 24,
+        "C02_ROI_first_opaque_y": 19,
+        "sole_ROI_y": [
+          120,
+          128
+        ],
+        "guard_left_sole_bbox_exclusive": [
+          26,
+          120,
+          41,
+          126
+        ],
+        "C02_left_sole_bbox_exclusive": [
+          21,
+          120,
+          37,
+          126
+        ],
+        "guard_right_sole_bbox_exclusive": [
+          87,
+          120,
+          106,
+          127
+        ],
+        "C02_right_sole_bbox_exclusive": [
+          88,
+          120,
+          107,
+          127
+        ]
+      },
+      "required_delta": "Reconduzir volume/estatura aparente e apoios à guarda preservada na revisão da fonte, sem normalização individual de altura. Se a direção escolher abrir a base de propósito, registrar a trajetória/contatos em C01 antes de expandir a folha e revisar essa coreografia; não declarar os pés inalterados."
+    },
+    {
+      "priority": 2,
+      "domain": "art",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "Apparent blade projection and continuity",
+      "axes": [
+        "weapon_scale_continuity"
+      ],
+      "note": "O alcance diagonal aparente da lâmina é maior. A arma está completa, mas a perspectiva e o comprimento visual precisam ser cotejados com a guarda na próxima chave; não há prova de comprimento físico neste parecer.",
+      "required_delta": "Usar a katana da guarda como referência específica de comprimento/pega/guarda e terminais; resolver ângulo/pose na camada de desenho, sem cortar a lâmina para obter um orçamento verde."
+    }
+  ],
+  "full_source_conclusion": {
+    "identity_and_static_construction": "passed_with_continuity_blocker",
+    "source_blockers": [
+      "body_and_support_continuity"
+    ],
+    "source_promoted": false,
+    "owner_approval": false,
+    "continuous_motion": "not_observed",
+    "sms_art_acceptance": "pending"
+  },
+  "provided_hardware_scope": {
+    "coordinator_reported_minimum_pair_scanline": 10,
+    "coordinator_reported_search": "128phases in each facing",
+    "independently_executed_by_reviewer": false,
+    "note": "Informação recebida do coordenador. Não executei packer, simulador ou ROM e não usei o valor físico para decidir a verdade artística."
+  },
+  "inspection_evidence": [
+    "Os sete inputs congelados coincidiram com seus hashes no início e imediatamente antes da escrita deste parecer.",
+    "Fonte C02 e guarda144x144 vistas nativamente e em ampliações nearest-neighbor, sobre fundo escuro e claro; concept aprovado inspecionado por identidade.",
+    "Comparação de duas fontes na mesma escala4x e mesma baseline, além de crops NN8x de rosto, duas mangas/antebraços, punhos, cabo e guarda. Painéis de inspeção compostos somente em memória, sem persistir ou alterar PNGs.",
+    "Os bboxes de sola são leituras dos pixels opacos em ROIs explicitados, não classificadores automáticos de anatomia ou prova de centro de massa. A coroa de cabelo foi separada de altura anatômica e a cautela sobre a lâmina não usa bbox como comprimento físico."
+  ],
+  "next_checkpoint_priorities": [
+    "Resolver a continuidade corporal/apoios da chave de execução antes de gerar preparação/recuperação.",
+    "Cotejar comprimento e junção da katana com a guarda ao corrigir o ângulo e a geometria.",
+    "Após chave coerente e conversão legal, revisar todas as poses e a reprodução temporal, com material/rosto/pega na saída SMS e ROM própria."
+  ],
+  "limits": [
+    "Sem geração, edição de pixels, compilação, sessão de emulador, Git ou alterações de memória/contrato/registro. Único arquivo persistente escrito é este parecer.",
+    "Não aprova AAA, dono, produção, dano/hitboxes, frame-data competitiva, FPS/VBlank ou fluidez de uma sequência ainda não produzida.",
+    "As observações são julgamento visual independente de artefatos inspecionados; medidas de slots, hashes e hardware não substituem esse julgamento."
+  ]
+}

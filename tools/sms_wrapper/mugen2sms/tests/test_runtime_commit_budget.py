@@ -137,6 +137,66 @@ def test_policy_de_chunk_maior_sobe_mais_por_turno():
     assert Policy(alternate_sides=False).upload_sides(3) == [0, 1]
 
 
+def test_perfil_atual_preserva_oponente_quando_nao_cabe():
+    sim = Simulator(Policy.rev2_b2_cancel_v1())
+    sim.boot_preload(0, 10, 60)
+    sim.boot_preload(1, 11, 60)
+    sim.request(0, 12, 16)
+    assert sim.cur[0].pose == 10 and sim.cur[1].pose == 11
+    assert not sim.pend[0].live
+    assert sim.stats["alloc_fail"] == 1 and sim.stats["evictions"] == 0
+
+
+def test_perfil_atual_cancela_pose_abandonada_e_serve_os_dois():
+    policy = Policy.rev2_b2_cancel_v1()
+    sim = Simulator(policy)
+    sim.boot_preload(0, 1, 16)
+    sim.boot_preload(1, 2, 16)
+    sim.request(0, 3, 16)
+    sim.stream(0)
+    assert sim.pend[0].loaded_pairs == 8
+    sim.request(0, 1, 16)
+    assert not sim.pend[0].live and sim.cur[0].pose == 1
+    assert sim.stats["superseded_pending"] == 1
+    sim.stream(1)
+    assert sim.cur[0].pose == 1 and sim.cur[1].pose == 2
+
+    result = simulate([{"frame": 0, "side": 0, "pose": 3, "pairs": 16},
+                       {"frame": 0, "side": 1, "pose": 4, "pairs": 16}], policy)
+    assert result.completions == [(1, 0, 3), (1, 1, 4)]
+    assert result.timeline == [(0, 16), (1, 16)]
+
+
+def test_chaves_distintas_por_face_nao_reutilizam_residencia_oposta():
+    sim = Simulator(Policy.rev2_b2_cancel_v1())
+    # id AIR 10: chave 20 = direita, chave 21 = esquerda.
+    sim.boot_preload(0, 20, 16)
+    sim.request(0, 21, 16)
+    sim.stream(0)
+    assert sim.cur[0].pose == 20 and sim.pend[0].pose == 21
+    assert sim.pend[0].loaded_pairs == 8
+    sim.request(0, 20, 16)
+    assert sim.cur[0].pose == 20 and not sim.pend[0].live
+    assert sim.stats["superseded_pending"] == 1
+
+
+def test_cli_identifica_modelo_atual_e_rejeita_override_ambiguo(tmp_path, capsys):
+    events = tmp_path / "events.json"
+    report = tmp_path / "report.json"
+    events.write_text(json.dumps({"policy": {"profile": "rev2_b2_cancel_v1"}, "events": []}))
+    assert main(["--events", str(events), "--json", str(report)]) == 0
+    doc = json.loads(report.read_text())
+    assert doc["policy"]["profile"] == "rev2_b2_cancel_v1"
+    assert doc["scope"] == "queue_model_only_not_rom_or_vblank_timing"
+    events.write_text(json.dumps({"policy": {"profile": "rev2_b2_cancel_v1",
+                                             "pairs_per_upload": 2}, "events": []}))
+    assert main(["--events", str(events)]) == 1
+    assert "overrides silenciosos" in capsys.readouterr().out
+    events.write_text(json.dumps({"policy": {"alternate_sides": "false"}, "events": []}))
+    assert main(["--events", str(events)]) == 1
+    assert "true/false" in capsys.readouterr().out
+
+
 def test_preload_acima_do_pool_e_contrato_violado():
     with pytest.raises(ValueError):
         simulate([], preloads=[{"side": 0, "pose": 1, "pairs": 64},

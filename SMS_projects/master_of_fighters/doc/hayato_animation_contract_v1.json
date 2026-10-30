@@ -1,0 +1,292 @@
+{
+  "schema": "sms_animation_contract_v1",
+  "project": "master_of_fighters",
+  "character_id": "hayato",
+  "document_version": 1,
+  "status": "diagnostic_action_selected_animation_candidate",
+  "design_authority": {
+    "owner_direction": "doc/decisions/hayato-short-cut-diagnostic_owner_direction.json",
+    "GDD": "doc/11-gdd.md",
+    "guard": "hayato-cps2-idle-v02",
+    "competitive_moveset_approved": false
+  },
+  "principles_catalog": [
+    {
+      "id": "squash_and_stretch",
+      "name": "Esmagamento e Estiramento"
+    },
+    {
+      "id": "anticipation",
+      "name": "Antecipação"
+    },
+    {
+      "id": "staging",
+      "name": "Encenação"
+    },
+    {
+      "id": "straight_ahead_pose_to_pose",
+      "name": "Ação Direta e Pose a Pose"
+    },
+    {
+      "id": "follow_through_overlap",
+      "name": "Acompanhamento e Ação Sobreposta"
+    },
+    {
+      "id": "slow_in_slow_out",
+      "name": "Entrada e Saída Lenta"
+    },
+    {
+      "id": "arcs",
+      "name": "Arcos"
+    },
+    {
+      "id": "secondary_action",
+      "name": "Ação Secundária"
+    },
+    {
+      "id": "timing",
+      "name": "Temporização"
+    },
+    {
+      "id": "exaggeration",
+      "name": "Exagero"
+    },
+    {
+      "id": "solid_drawing",
+      "name": "Desenho Sólido"
+    },
+    {
+      "id": "appeal",
+      "name": "Atração"
+    }
+  ],
+  "required_sequence_ids": [
+    "hayato_short_cut"
+  ],
+  "sequences": [
+    {
+      "id": "hayato_short_cut",
+      "title": "Corte curto de katana — amostra diagnóstica",
+      "category": "diagnostic_art_action",
+      "status": "selected_action_art_timing_and_hardware_pending",
+      "motion_contract": "Two-handed compact descending cut with no root displacement. Existing neutral guard entersC01load,C02execution,C03follow-through,C04recovery then originalguard. No damage, hitboxes or competitive moveset added.",
+      "frame_ids": [
+        "C01",
+        "C02",
+        "C03",
+        "C04"
+      ],
+      "source_pose_count": 4,
+      "source_pose_count_status": "proposal",
+      "timing_status": "proposal_unmeasured",
+      "duration_ticks": [
+        3,
+        2,
+        2,
+        5
+      ],
+      "initial_state": "guard_loaded",
+      "final_state": "guard_recovered_then_existing_idle",
+      "loop": false,
+      "entities": [
+        {
+          "id": "hayato",
+          "kind": "character",
+          "source_pose_count": 4,
+          "initial_state": "loaded_guard",
+          "final_state": "recover_to_guard",
+          "track": [
+            "loaded_guard",
+            "descending_cut_execution",
+            "cut_follow_through",
+            "recover_to_guard"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 12
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        },
+        {
+          "id": "katana",
+          "kind": "object",
+          "source_pose_count": 4,
+          "initial_state": "full_blade_up_ready",
+          "final_state": "full_blade_back_to_ready",
+          "track": [
+            "full_blade_up_ready",
+            "full_blade_down_right",
+            "full_blade_down_settling",
+            "full_blade_back_to_ready"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 12
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        },
+        {
+          "id": "scabbard",
+          "kind": "object",
+          "source_pose_count": 1,
+          "initial_state": "fixed_left_sash_attachment",
+          "final_state": "fixed_left_sash_attachment",
+          "track": [
+            "fixed_left_sash_attachment",
+            "fixed_left_sash_attachment",
+            "fixed_left_sash_attachment",
+            "fixed_left_sash_attachment"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 12
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        }
+      ],
+      "principles_applied": [
+        {
+          "id": "anticipation",
+          "frame_ids": [
+            "C01"
+          ],
+          "planned_visual_cue": "Load hips subtly before arms cut; no foot slide."
+        },
+        {
+          "id": "staging",
+          "frame_ids": [
+            "C02"
+          ],
+          "planned_visual_cue": "Steep full down-right blade and clear grip/face, no effect covering drawing."
+        },
+        {
+          "id": "straight_ahead_pose_to_pose",
+          "frame_ids": [
+            "C01",
+            "C02",
+            "C03",
+            "C04"
+          ],
+          "planned_visual_cue": "Freeze guard and execution first, bridge preparation/recovery without body-height normalization."
+        },
+        {
+          "id": "follow_through_overlap",
+          "frame_ids": [
+            "C03",
+            "C04"
+          ],
+          "planned_visual_cue": "Sash/hakama settle after sword slows; preserve volume."
+        },
+        {
+          "id": "slow_in_slow_out",
+          "frame_ids": [
+            "C01",
+            "C04"
+          ],
+          "planned_visual_cue": "3tick load and5tick recovery contrast with2tick execution."
+        },
+        {
+          "id": "arcs",
+          "frame_ids": [
+            "C01",
+            "C02",
+            "C03",
+            "C04"
+          ],
+          "planned_visual_cue": "Trace attached grip and full-length blade down and back."
+        },
+        {
+          "id": "secondary_action",
+          "frame_ids": [
+            "C03",
+            "C04"
+          ],
+          "planned_visual_cue": "Restrained hair-tie/sash lag; no effects or silhouette noise."
+        },
+        {
+          "id": "timing",
+          "frame_ids": [
+            "C01",
+            "C02",
+            "C03",
+            "C04"
+          ],
+          "planned_visual_cue": "Working3/2/2/5ticks; measure actual ROM submission/display timeline."
+        },
+        {
+          "id": "solid_drawing",
+          "frame_ids": [
+            "C01",
+            "C02",
+            "C03",
+            "C04"
+          ],
+          "planned_visual_cue": "Stable lean body, both arm chains, two hands on grip, complete katana/scabbard."
+        },
+        {
+          "id": "appeal",
+          "frame_ids": [
+            "C01",
+            "C02",
+            "C03",
+            "C04"
+          ],
+          "planned_visual_cue": "Focused youthful face and distinctive white/orange lean samurai, coherent light/materials."
+        }
+      ],
+      "principles_not_applied": [
+        {
+          "id": "squash_and_stretch",
+          "reason": "Solid adult anatomy and blade length invariants; no elastic metal/body."
+        },
+        {
+          "id": "exaggeration",
+          "reason": "First test uses compact canonical cut; no amplified reach/body or decorative smear."
+        }
+      ],
+      "competitive_frame_data": {
+        "approved": false,
+        "damage": null,
+        "hitboxes": null,
+        "cancel_windows": null
+      },
+      "equipment_invariants": [
+        "Complete normal-length blade and grip",
+        "Two hands on same grip behind guard",
+        "Complete scabbard fixed at left sash",
+        "No projectile/effect lifetime"
+      ],
+      "root_motion_px": [
+        0,
+        0
+      ],
+      "hardware_sprite_objects": {
+        "status": "pending",
+        "count": null
+      },
+      "unique_tile_count": {
+        "status": "pending",
+        "count": null
+      },
+      "palette_and_vblank_status": "pending"
+    }
+  ],
+  "timing_and_hardware": {
+    "tick_definition": "One working animationtick per NTSC VDPframe;12ticks is proposal until ROM observation. PAL/perceived fluidity and competitive timing unapproved.",
+    "max_frames_status": "pending_measurement",
+    "max_frames_per_sheet": null,
+    "resident_patterns": "pending",
+    "sprites_per_line": "pending both orientations",
+    "worst_vblank": "pending new SHA"
+  },
+  "production_approval": false
+}

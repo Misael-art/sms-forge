@@ -77,3 +77,11 @@ SMS_Engines/smslib/
 
 # Projeto aposentado em 2026-10-18; copia local preservada fora do versionamento.
 /SMS_projects/hamoopig/
+
+# Managed dependencies and recovery archives (release assets, not Git inputs).
+/.venv/
+/.runtime/
+/out/migration/
+# Cache regenerável da ponte de sessões privadas do Emulicious.
+/out/session_bridge/
+/.pytest_cache/

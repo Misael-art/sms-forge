@@ -1,5 +1,8 @@
 # AGENTS.md — SMSForge
 
+Convenção de shell portátil: leia `tools/sms_wrapper/RTK.md`. Em host novo,
+comece por `doc/continuity/20261024-start-here.md` e pelo bootstrap ali indicado.
+
 > **Ponto de entrada obrigatório para qualquer agente de IA neste workspace.**
 > Diga `[Contexto SMS Carregado]` antes de propor qualquer ação.
 
@@ -193,6 +196,37 @@ roteiro → storyboard (planta baixa em pixel) → coreografia → MEDIÇÃO →
 | Piloto de escala MUGEN | `mugen2sms/analysis/scale_pilot.py` | idle fora de 72–88 px, pivô espelhado fora da grade/metasprite divergente da máscara, índice/pool/meta de paleta P2 incompatível, current+next acima de VRAM ou stream maior que duração AIR; plano de slots idle não periódico entre voltas (L090); requer `--self-check` e vídeo fresco antes de promover escala |
 | Glitch de render | `audit_render_glitch.py` | quadro do framebuffer fora das imagens legais: sprite perdido, tile residual, par trocado, omissão permanente no modo flicker, captura stale (L091, §76) |
 
+## FERRAMENTAS EM CURADORIA (NÃO PROMOVIDAS)
+
+Esta seção existe para **visibilidade**, não para promover ferramentas. As
+ferramentas abaixo estão implementadas e com `--self-check`, mas **não entram
+na tabela de gates** e nenhum claim pode citá-las como lei da fábrica até
+homologação humana explícita.
+
+| Ferramenta | O que mede hoje | Estado | Evidência |
+|---|---|---|---|
+| `audit_composition_gate.py` | pico por scanline dos intervalos 8×16 do META selecionado; política por ator, sem aprovar o par | revisada em 2026-10-24; diagnóstico limitado, não promovida | `doc/curation/2026-10-24_mugenesis_rev2.md` e pacote PB-13–PB-18 |
+| `audit_sole_alignment.py` | `AXIS_y + última linha opaca` contra CLSN2, com hashes PNG/frames/header; não julga anatomia | revisada em 2026-10-24; diagnóstico limitado, não promovida | mesmo parecer de 2026-10-24 |
+
+O lote que as exercitou também fez mudanças **aditivas** em gates já
+existentes: `audit_sprite_line_sim.py` ganhou o opt-in
+`--require-distinct-fighters`, e `measure_worst_frame.py` passou a declarar
+`schema=v2` e `sealed_field=vline_min` (marcando `vline` como snapshot). Esses
+dois continuam na tabela de gates; apenas as duas ferramentas novas estão em
+curadoria.
+
+Regras desta seção:
+
+- uso permitido é **diagnóstico com `--self-check` antes da leitura**; o
+  resultado deve ser registrado no pacote de curadoria, com fonte e SHA;
+- o veredito dessas ferramentas **não** substitui gate, validação de orçamento,
+  evidência de emulador ou aprovação humana;
+- para homologar, o curador deve revisar contrato, testes e evidência,
+  decidir se a ferramenta vira gate global ou regra de projeto, e só então
+  movê-la para a tabela de gates e atualizar a memória;
+- enquanto estiver aqui, a ferramenta pode ser aperfeiçoada ou rejeitada;
+  remover a linha também é uma decisão válida de curadoria.
+
 ## MODO DE EXECUÇÃO: DESENVOLVIMENTO CONTÍNUO COM PROMOÇÃO ASSÍNCRONA
 
 Runbook: `tools/sms_wrapper/.agent/workflows/async-promotion-loop.md`.
@@ -239,3 +273,17 @@ Aplica-se aos projetos existentes sem sobrescrever suas `.agent` locais.
 Quando algo dá errado: lição vira JSON canônico em `doc/curation/` +
 seção numerada em `.agent/rules/SMS_GLOBAL.md` + ferramenta que mede.
 **Regra vira medição, nunca só prosa.** Ver workflow `curation-learning.md`.
+
+## Coleção Projects: continuidade e organização
+
+- Política comum: [../AGENTS.md](../AGENTS.md), especialmente autonomia, testes, GitHub e recursos (§§5–10); raiz/branch em [registro central](../.workspace/projects.json). A orientação atual de raiz única substitui recomendações históricas de criar worktrees/clones por tarefa; os contratos técnicos e gates deste projeto permanecem obrigatórios. Em outro host, preserve este mesmo método em um único checkout registrado, sem recriar caminhos antigos.
+- Antes de implementar, leia `doc/continuity/20261024-start-here.md`, memória/GDD/TDD do consumidor e backlog do lote, identifique causa, owner, dependências e aceite. Procure a solução oficial existente e integre nela; não introduza soluções concorrentes, aliases ambíguos ou refatorações fora do pedido. Neste host, a única raiz é `/home/misael/Projects/SMSForge`.
+- Execute o lote até implementar, testar, revisar e preservar a continuidade. Resolva decisões reversíveis pelo contexto; não pare em planos nem peça confirmação para editar/testar o que já está autorizado. Comunique descobertas, bloqueios e entrega, sem narrar cada comando ou pequeno avanço.
+- Antes de operações pesadas, confira espaço do destino, RAM e carga; estime saídas e retenção. Reutilize ferramentas/ambientes compatíveis, limite jobs e encerre somente processos temporários próprios. Não mate trabalhos alheios, limpe caches compartilhados ou apague evidência para obter um gate verde.
+- Use `tools/sms_wrapper/run_host.sh`; Python em `.venv`, downloads/recibos em `.runtime`, SDK em `sdk`, evidência no `out` do owner. Preserve a referência compartilhada do JDK. Uma compilação/suíte/sessão de emulador por vez; comece com um job, aumentando só com medição.
+- Faça os checks pertinentes a toda alteração; para documentos, revise diff, referências e coerência. Para código, cubra comportamento/regressão e execute os gates aplicáveis, sem desativá-los. Toda mudança de runtime/assets precisa de ROM identificada e QA do trecho afetado no emulador oficial em sessão privada deste host; registre SHA, entrada observada e limpeza da sessão. Compilar ou dar boot não aprova gameplay, VBlank, scanline, áudio, FPS ou qualidade. Não replique consumidores para fugir dos gates.
+- Reutilize a autenticação válida e os helpers existentes. Nunca peça senha/token no chat, copie sessões ou grave credenciais em código/log. Se faltar acesso indispensável, solicite uma única ação pelo fluxo oficial, preserve o estado e avance no trabalho independente; não repita permissões já concedidas.
+- Confira remoto, PRs e checks do SHA antes do lote e ao publicar; reutilize o PR da mesma branch/objetivo. Revise arquivos explícitos, segredos e tamanho, faça commit/push do incremento autorizado e confirme o SHA remoto. Sem stage global de resgates, push forçado, merge de pesquisas ou publicação de dados privados. Não faça polling contínuo de CI.
+- PR cabe ao incremento revisável; release somente a marco elegível com versão/artefatos/notas e gates completos, dentro da autorização de publicação vigente. Não gerar release por manutenção destas regras. Preserve limites de merge/deploy e falhas preexistentes; acesso autenticado não amplia autorização.
+- Fontes e receitas ficam no Git; bancos, ROMs, assets privados, SDKs, builds, caches e pacotes de resgate seguem owner/destino próprios e recuperação verificável. `.gitignore` não é backup. Novo arquivo acima de 10 MiB exige revisão; downloads acima de 70 MB são manuais, inclusive o pacote dividido, com origem/tamanho/hash/destino preparados.
+- Ao fechar, mantenha apenas os gerados necessários e atualize o handoff existente com SHA, testes no host, limites de validação, bloqueio e próximo passo. Não declare produto pronto quando faltar evidência do alvo real, nem deixe um único exemplar de trabalho útil sem proteção identificada.

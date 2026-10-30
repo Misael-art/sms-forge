@@ -1199,6 +1199,73 @@
     "tools/sms_wrapper/reconcile_claims.py"
    ],
    "dedup_key": "l138_projecao_rom_sha_20261019"
+  },
+  {
+   "ts": "2026-10-24",
+   "kind": "curation_application",
+   "summary": "Aplicação das lições existentes: Mugenesis→rev2, 55 pendências, prompt executável; diagnósticos composição/sola corrigidos e mantidos fora de gates globais. Skills e workflow revistos, sem ID novo nem promoção de jogo. Validação detalhada no pacote; EIO legado não é mascarado.",
+   "sources": [
+    "doc/curation/2026-10-24_mugenesis_rev2.json"
+   ],
+   "dedup_key": "mugenesis_rev2_application_20261024"
+  },
+  {
+   "ts": "2026-10-24",
+   "kind": "curation_application",
+   "summary": "Continuidade para novo host: bootstrap Ubuntu/WSL2 isolado, dependências fixadas, reconstrução ABI do SDK, restauração com hashes e conflitos explícitos, guia e prompt de retomada. Aplicação de L004/L083/L093/L138 e prática de recuperação; sem ID novo, sem promoção de ROM. Validação e links remotos no pacote de continuidade.",
+   "sources": [
+    "doc/continuity/20261024-start-here.md",
+    "doc/continuity/20261024-validation.json"
+   ],
+   "dedup_key": "clean_host_bootstrap_recovery_20261024"
+  },
+  {
+   "ts": "2026-10-27",
+   "kind": "curation_application",
+   "summary": "Avaliacao de capacidade produtiva; aplicacao L003/L138 na custodia da maestria, reconciliacao de 32 claims legados, rotas por tarefa, slice/checkpoint no pipeline e orientacao de design/audio adaptada ao SMS. Nenhuma tecnica/ROM promovida.",
+   "sources": [
+    "doc/curation/2026-10-27_production_capability_review.json"
+   ],
+   "dedup_key": "production_capability_review_20261027",
+   "implementation_commit": "f5d3dcb777554b7bceb309abe45e1bb98856ecb0"
+  },
+  {
+   "ts": "2026-10-27",
+   "kind": "curation",
+   "summary": "L139 (§131): a ROM rev2 de 28 bancos mostrou alias de quatro bancos no BlastEm; a imagem idêntica preenchida a 32 bancos coincidiu com 14/14 spans observados. -pp passa a ser verificado no build; não é prova de mapper físico.",
+   "sources": [
+    "doc/curation/2026-10-27_l139_mapper_image_alias.json"
+   ],
+   "dedup_key": "l139_blastem_mapper_alias_non_power_two_image_20261027"
+  },
+  {
+   "ts": "2026-10-27",
+   "kind": "curation",
+   "summary": "L140 (§132): pose e face identificam o cache; o gerador declara a convenção P1-direita/P2-esquerda e o runtime rejeita header legado, valida spans e usa metadata da face residente. Travessia observada, sem aprovar contato, SAT completa ou prazo.",
+   "sources": [
+    "doc/curation/2026-10-27_l140_facing_cache_contract.json"
+   ],
+   "dedup_key": "l140_versus_adjacent_facing_identity_20261027"
+  },
+  {
+   "ts": "2026-10-29",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "art_method_social_hayato_20261029",
+   "summary": "L113/L123/L124/L127: direção artística, gesto corporal antes do acabamento e checkpoint de seis modalidades no gate existente; replay Social/Hayato sem mudar conversão/runtime. Aceite temporal, rota curta repetível e relatório histórico ausente continuam abertos.",
+   "sources": [
+    "doc/curation/2026-10-29_art_method_social_hayato.json"
+   ],
+   "implementation_commit": "de3a7fd71338a5954a2b292c634515574bc411cb"
+  },
+  {
+   "ts": "2026-10-30",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "owner_scope_equipment_derivative_curation_20261030",
+   "summary": "L113/L123/L124/L127: owner acceptance closes its scope independently of agent playback; decision contents and timing checked; equipment authority, preserved shared palette and zero-runtime-delta reuse integrated.",
+   "sources": [
+    "doc/curation/2026-10-30_owner_scope_equipment_derivatives.json"
+   ],
+   "implementation_commit": "463333d9e04c7f2785f3e5cb0ea723041e43f247"
   }
  ]
 }

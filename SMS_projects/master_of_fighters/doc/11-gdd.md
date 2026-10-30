@@ -1,5 +1,157 @@
 # 11-gdd — master_of_fighters
 
+## J.J. — seleção aprovada pelo proprietário
+
+A resposta “aprovado” fecha o conceptv5/fontev6, a proporção da Zillion,
+os seis desenhos sem FX e o retorno apresentado com7/4/2/3/6. Preservar arte,
+tempos e ROMs; decisão em `decisions/jj-zillion-character_owner_approval.json`.
+Checkpointv7 registra o aceite sem inventar percepção contínua ou nova sessão.
+As pendências de aceite nas seções anteriores são históricas. Objetos/FX,
+combate completo, produção e homologação global continuam fora deste aceite.
+
+## Histórico técnico anterior ao aceite
+
+## J.J. — amostra de personagem fiel, seis quadros, sem efeitos
+
+Fonte v6 e concept v5 candidatos corrigem somente forma/proporção da Zillion e
+pega. I00/S01–S05 e poses preservados; tiro, bala, sparks e FX foram excluídos
+por instrução do dono. Objeto/emissão serão separados em lote posterior, com
+orçamento próprio. Tempos propostos 7/4/2/3/6 não foram reescritos para resolver
+budget. QA técnica nas duas faces e vídeo real passaram; qualidade temporal e
+aceite humano permanecem pendentes no checkpoint v6. Planejamento congelado em
+`jj_zillion_single_shot_route_v5.json`; fonte6 corrige um ponto sem mudar SMS.
+
+## Direção vigente do dono — proporção da Zillion, seis poses, sem FX
+
+O proprietário corrigiu explicitamente o escopo: a Zillion está grande demais
+em relação a J.J.; corrigir a proporção no concept/model sheet mantendo a forma.
+**Preservar os seis quadros e as poses. Não incluir bala, tiro, sparks, flash,
+FX ou objetos na folha do personagem; esses elementos serão separados depois.**
+A experiência de três poses e pulso composto v4 fica histórica/supersedida,
+sem ROM ou aprovação. Fonte corporal para preservar: seis poses v3. Atual:
+`jj_zillion_single_shot_route_v5.json`, contrato de animação v5, equipamento v2
+e `decisions/jj-zillion-proportion-and-no-fx_owner-feedback.json`. Corrigir
+somente arma/encaixe da pega por ROIs, sem regenerar atuação, rosto ou figurino.
+Concept individual v4 aprovado permanece intacto como controle histórico;
+a correção candidata v5 terá review/aceite próprios. Nenhuma ROM de J.J. foi
+construída até esta direção. Hayato permanece aprovado e intacto.
+
+## J.J. — autoridade específica da Zillion reconciliada
+
+O feedback do dono e a prancha Waku Waku7 já aprovada prevalecem sobre a arma
+compacta do concept individual v4: usar Zillion longa, baixa, angular, navy/cyan,
+com encaixe/pega contínuos e cano inteiro. A referência atual é a mesma de08/10;
+ver `jj_zillion_weapon_identity_contract_v1.json` e
+`decisions/jj-zillion-weapon_owner-feedback.json`. O concept v4 conserva corpo
+e figurino; não autoriza reutilizar o blaster branco/azul. Plano/contrato v2
+substituem o planejamento v1 deste teste. Nenhum sprite novo está aprovado.
+
+## Novo lote autorizado — J.J., disparo único de Zillion
+
+O proprietário pediu um terceiro personagem e uma ação curta para testar repetibilidade. Selecionado J.J. do elenco aprovado, com o concept v4 preservado. O manual de Zillion II confirma o laser; a encenação de tiro único é adaptação autoral diagnóstica. Plano e pesquisa em `jj_zillion_single_shot_route_v1.json` e `jj_zillion_single_shot_research_v1.json`; contrato em `jj_zillion_single_shot_animation_contract_v1.json`. Não sela moveset competitivo nem substitui o corte aprovado de Hayato.
+
+## Seleção aprovada — corte sem distorção, tempos 8/1/2/7/2/5
+
+O proprietário escolheu os desenhos v4 com novos tempos. A katana conserva
+sua trajetória e forma originais; a deformação v6 foi rejeitada por mudar a
+leitura do golpe. Esta é a opção artística/temporal aceita para este corte.
+Contrato atual `hayato_animation_contract_v4.json`; não ampliar conteúdo neste
+lote. Aceite do preview não implica áudio, dano/hitboxes, PAL, hardware físico,
+qualidade global ou release. A integração do mesmo corte segue no perfil v7.
+
+## Histórico — tempo e deformação de espada, fonte v6 rejeitada
+
+Feedback do dono confirma a base artística v4 e pede mais leitura na preparação
+e no final baixo. Mantêm-se seis poses e um corte; proposta 8/1/2/7/2/5 ticks.
+Squash/stretch gráfico autorizado na lâmina de R02, a passagem mais rápida,
+com pega/corpo intactos e forma canônica restaurada em R03. Nenhum contato,
+impacto, dano, hitbox, efeito independente ou movimento novo é inferido.
+Controle v4 preservado; novos pixels/tempos requerem conversão e ROM próprias.
+V6 fecha a ponta do smear que se soltava em SMS. Conversão/ROM novas apresentam
+8/1/2/7/2/5 e lâmina transitória de 1 tick, com corpo, pega e cinco outras poses preservados.
+O novo ritmo e impressão de velocidade aguardam avaliação do proprietário;
+nenhuma ampliação de conteúdo enquanto isso.
+
+## Perfil corrente da reformulação — fonte v4
+
+Corte curto continua o único escopo. R01carga alta, R02liberação, R03corte,
+R04absorção mais baixa, R05retorno cruzado, R06recuperação alta e guarda.
+Seis desenhos, tempos diagnósticos4/1/2/3/1/3 apresentados na ROM, sem dado competitivo. Cabeça,
+ombros, quadril e joelhos participam; proporção não significa silhueta congelada.
+Fonte192px fornece margem para arcos; fontes144px existentes preservadas.
+Perfil diagnóstico8×8 usa a mesma escala comum e P1, sem novo consumidor.
+Review da fonte estática v3 e adendo fonte/SMS v4 passaram; execução da ROM,
+ordem e exposições verificadas. Julgamento de força/ritmo/leitura contínua e
+aceite do dono continuam separados e pendentes. Não ampliar antes desse checkpoint.
+
+## Histórico: reformulação autorizada do corte — 2026-10-29
+
+Prioridade atual: corrigir coreografia e continuidade corporal do corte já
+escolhido, preservando identidade/acabamento. Contrato diagnóstico atual v2:
+cinco desenhos propostos, tempos4/1/2/3/3 revisáveis pelo estudo; v1 é tentativa
+histórica. Referências externas orientam movimento, nunca identidade/paleta.
+Sem dano, hitboxes, frame-data competitiva, elenco ou sistemas adicionais.
+Aceite temporal/SMS/ROM/owner fica separado do parecer estático anterior.
+
+## Corte curto de Hayato — recorte diagnóstico, 2026-10-29
+
+O dono direcionou completar o teste com corte curto de katana, primeiro
+comparando guarda+execução convertidas. A ação é amostra artística, sem dano,
+hitboxes, cancels ou frame-data competitiva aprovados. Quatro poses C01–C04,
+working3/2/2/5ticks, retornam à guarda preservada; não amplia elenco, atlas,
+cenário ou sistemas. Contrato em hayato_animation_contract_v1.json.
+Fonte completa gerada e buildada; qualidade, animação e ROM ainda seguem seus
+reviews/gates próprios. Aceite positivo da guarda não é aprovação da ação.
+
+## Recorte corrente Hayato — 2026-10-29
+
+Pedido do dono: repetir a amostra CPS2 em Hayato, comparando com Dr. Social,
+sem ampliar atlas/elenco/cenários/sistemas. Guarda nativa v2 e conversão do par
+completas para revisão, sem promoção. Concept v2 aprovado continua identidade;
+classe de combate não define tamanho/massa. Katana inteira, roupa branca e
+laranja-vermelha, cabelo preso e corpo jovem esguio preservados.
+A ação curta proposta (corte de katana; alternativa desembainhar/retornar)
+aguarda escolha do dono; não há contrato/frames/dano/hitboxes competitivos novos.
+O Social v8 é referência preservada; aceitar método/artes anteriores não
+aprova esta fonte de Hayato. Guarda estática não demonstra animação.
+Mesma transformação do diagnóstico Social nos dois; não se normaliza cada
+corpo/arma. Relações de elenco próximas foram revisadas; faixa absolutaSMS
+68–72px legada não é declarada atingida por este diagnóstico~58–60px corporal.
+Estado, decisões e evidência atuais: memorybank e índice
+`out/diagnostics/hayato_cps2_sample_v1/result.json`.
+
+## Continuidade da amostra v8 — 2026-10-29
+
+Somente idle + social_light_jab em seis desenhos: cinco quadros v5 e contato
+reto J04 já autorado na v6, montados sem editar pixels. Fonte/chaves estáticas
+passaram na revisão integral; fluxo temporal, simplificação SMS e dono seguem
+em checkpoint humano. Sem novos personagens, estados, golpes ou atlas.
+`dr_social_cps2_sample_v1.md` conserva fontes, receita selecionada e limites.
+
+## Continuidade de 2026-10-29
+
+O dono aprovou o método e seu encaminhamento à curadoria futura. A candidata
+corrente é v5, com reparo facial aprovado em review independente no escopo da
+fonte. Isso não aprova o contato J04, a simplificação SMS ou a arte completa;
+o escopo continua uma pose idle + jab, sem novos movimentos ou atlas.
+Detalhes, fonte/ROM e limites: `dr_social_cps2_sample_v1.md`.
+
+## Recorte autoral CPS2 em revisão — 2026-10-28
+
+O pedido atual autoriza somente uma pose idle e `social_light_jab` J01–J06,
+com fonte em escala CPS2 e conversão posterior. O canvas 80×80 descrito no
+histórico abaixo não limita a nova fonte: a candidata usa células 128×128,
+corpo de aproximadamente 104 px e paleta-fonte própria. J01–J06 mantêm os
+tempos propostos 2/1/1/1/1/3 ticks; balanceamento continua não aprovado.
+
+A identidade permanece no model sheet v4, com decisões posteriores de cabelo
+cinza e óculos de latão. A aprovação artística v08.2 de 61 poses existe e foi
+conferida pelo SHA `4e557095…`; notas históricas de aprovação pendente estão
+superadas nesse escopo. A nova variante não substitui a fonte aprovada.
+Fontes, receita, revisão e limites estão em `dr_social_cps2_sample_v1.md`.
+Conversão e ROM desta amostra são diagnósticas, sem promoção ao elenco,
+gameplay, cenário/HUD ou entrega visual de produção.
+
 > Design e escopo. **Autoridade #2 — "se não está no GDD, não entra."**
 > **REGISTRO INICIAL (2026-10-02)** — nome provisório: **Master of Fighters**.
 > GDD em construção; revisão humana pendente (workflow new-project passo 2).

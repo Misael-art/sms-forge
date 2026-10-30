@@ -1,0 +1,232 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "requested_stage": "diagnostic_action_key",
+  "producer": "/root",
+  "reviewer": "/root/hayato_cut_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_source_art_review",
+  "status": "revise_before_growth",
+  "request_id": "hayato-body-short-cut-key-v2",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_key_review_request_v2.json",
+    "sha256": "33370f6fee710f9daf033d7bbfcbf3add88d96c09b57728e1b072ffd01058e05"
+  },
+  "reviewed_at_utc": "2026-10-29T20:35:29.856839+00:00",
+  "approval_scope": "Exact finished source R03v2 and static comparison to canonical guard/concept/approved rough only. One local support-continuity correction before expanding remaining poses. No converted pixels or runtime approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v2/strike_source.png",
+      "sha256": "eb93aee5bd2c0c336136b04e68b7d43b54c24d16d4c6216f44a01f5f0528058e",
+      "observed_sha256": "eb93aee5bd2c0c336136b04e68b7d43b54c24d16d4c6216f44a01f5f0528058e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v2/strike_generated_raw.png",
+      "sha256": "2e786a0b570f2e32617d5f4942c2a2f81be4e784f7675fc32cee746a0e629874",
+      "observed_sha256": "2e786a0b570f2e32617d5f4942c2a2f81be4e784f7675fc32cee746a0e629874"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v2/strike_extraction_recipe.json",
+      "sha256": "82a46a47a6ff588c1b64990e2861a58da375d2688abaf65ce313acb965cbec11",
+      "observed_sha256": "82a46a47a6ff588c1b64990e2861a58da375d2688abaf65ce313acb965cbec11"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+      "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+      "observed_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "observed_sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/rough/independent_review_v2.json",
+      "sha256": "19bcb146aae846494011c31657da5aaf1692d66c975e0bb38d31b043cf1623bf",
+      "observed_sha256": "19bcb146aae846494011c31657da5aaf1692d66c975e0bb38d31b043cf1623bf"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_choreography_v2.json",
+      "sha256": "18c8cb346cef1b68e073fd759d42b3c9826ab1318febc76242a384f01f201729",
+      "observed_sha256": "18c8cb346cef1b68e073fd759d42b3c9826ab1318febc76242a384f01f201729"
+    }
+  ],
+  "review_axes": {
+    "identity_and_face": {
+      "status": "pass",
+      "note": "Young adult slim Hayato, tied dark hair/red ribbon, white kimono/orange-red hakama and focused forward gaze retained. Lower head follows crouch/lean; hair height is not mistaken for body scale."
+    },
+    "morphology_and_body_segment_scale": {
+      "status": "pass",
+      "note": "Visible head, torso, arms and exposed shins retain guard-scale slender morphology. Lower apparent figure height is explained by knee flexion, pelvis compression and forward trunk inclination, not uniform individual body fitting. Same1/10recipe alone did not determine this visual judgement."
+    },
+    "pose_anatomy_and_joint_continuity": {
+      "status": "pass",
+      "note": "Both shoulders seat under sleeves. Near arm crosses down from shoulder through elbow/forearm to rear hand; far sleeve/elbow leads to front wrist near guard. Knees flex under divided hakama volumes and shins connect to sandals. No extra limb, broken wrist or unsupported arm identified."
+    },
+    "body_driven_gesture": {
+      "status": "pass_limited",
+      "note": "Bent front knee, compressed/angled waist, inclined torso, lowered forward head and two arms produce a compact low-forward key. It changes the whole body more clearly than v1, not just sword orientation. A single execution key cannot prove pelvis leads the timed release."
+    },
+    "grounding_isolated": {
+      "status": "pass",
+      "note": "Both sandals visibly meet the ground; rear terminaly125 and front126 match the guard terminal rows. Figure is anatomically plausible in isolation, with blade ending above floor and away from feet."
+    },
+    "body_support_pivot_continuity": {
+      "status": "fail",
+      "note": "Rear support still shifts left relative to originalguard while front support is almost fixed. Nominal pivot68,127 and equal terminal rows do not close planted-foot continuity. See B01; whole pose/foot orientation inspected, not only bbox."
+    },
+    "pixel_clusters": {
+      "status": "pass",
+      "note": "Native source and NN4retain deliberate cloth planes and stepped outline without new decorative dithering or floating noise masking joints."
+    },
+    "face_detail_readability": {
+      "status": "pass",
+      "note": "Native source preserves face direction, eye/fringe and youthful expression. Tiny face detail will require new SMS judgement; raw enlargement was not substituted for native legibility."
+    },
+    "outline_and_cutout": {
+      "status": "pass",
+      "note": "Viewed light/dark native and NN. Complete hair, feet, ribbon, blade tip and scabbard terminal with transparent margin; no source crop damage or isolated mark identified as blocker."
+    },
+    "material_shading": {
+      "status": "pass",
+      "note": "Warm skin, dark hair/scabbard, white-gray cloth, orange-red hakama, red sash and neutral steel/gold fittings remain separate in source."
+    },
+    "material_shadow_flow_coherence": {
+      "status": "pass",
+      "note": "Sleeve shadows follow bent arms; hakama planes follow flexed legs/waist. Volumes remain coherent with upper lighting rather than flat color substitution."
+    },
+    "semantic_palette_role_confinement": {
+      "status": "pass_source_only",
+      "note": "Source accents match cloth/skin/metal roles; no blocking spill seen. This source-index judgement does not approve future sharedP1or index13mapping after SMS conversion."
+    },
+    "hand_weapon_attachment": {
+      "status": "pass",
+      "note": "Raw and nativeNNinspection allow both arm chains to reach distinct hands on one grip, behind guard, then full blade. Grip has no floating hand/extra forearm. Small native separation remains delicate but readable."
+    },
+    "equipment_geometry": {
+      "status": "pass_limited",
+      "note": "Katana guard, grip, straight continuous blade and complete point remain visible. Scabbard attaches at sash and extends behind/down-left with complete cap. Apparent projected blade length is not certified physical length by bbox; no unequivocal shortening/bending identified visually."
+    },
+    "frame_pose_integrity": {
+      "status": "pass_limited",
+      "note": "R03is a compact descending-cut execution key, unlike the upright guard; artwork expresses the rough action while keeping identity. No claim that source coordinates must copy the stick diagram."
+    },
+    "native_size_readability": {
+      "status": "pass_source_only",
+      "note": "At native144x144source, crouch/lean, two-hand cut and distinct costume/equipment read. No new native SMSderivative is part of this request."
+    },
+    "roster_harmony": {
+      "status": "pass_source_reference_only",
+      "note": "Rendering, edge weight and material grouping remain in the established guard language. No fresh Social pair or runtime inspected."
+    },
+    "continuous_motion": {
+      "status": "pending",
+      "note": "Other5new poses not produced. No normal/slow full new sequence observed; force, timing, recovery and planted-foot transition remain unapproved."
+    },
+    "sms_conversion_hardware_emulator_owner": {
+      "status": "pending",
+      "note": "No convertedPNG, packer/simulator or emulator inspected. Coordinator reports defaultpeak10then joint-phase minimum9; those failures are not independently certified here and do not determine source-art judgement. No owner/promotion approval."
+    }
+  },
+  "findings": [
+    {
+      "id": "B01",
+      "priority": 1,
+      "domain": "art",
+      "kind": "defect",
+      "severity": "blocker",
+      "scope": "Guard→R03v2rear-foot support under no-step/root0choreography",
+      "axes": [
+        "body_support_pivot_continuity"
+      ],
+      "summary": "Rear foot remains shifted outward and differently oriented; exact nominal pivot does not preserve the promised planted contact.",
+      "evidence": "In sole rows123–125, guardrear footprint bbox exclusive[26,123,41,126], R03[23,123,35,126], centers33.5→29.0px. Row124guard26..37versusR03 23..34; row125guard27..35versusR03 23..34. Frontsole bbox[87,123,106,127]versus[87,123,107,127]. Visually rear sandal also turns more toward viewer. This is not a gross anatomical failure or sole-height error: it is unresolved continuity against fixed contacts.",
+      "consequence": "Building all other poses from this key would bake an unplanned rear-foot contact displacement into an action whose rough keeps both supports fixed, risking a foot slide or step when returning to guard.",
+      "required_delta": "Correct/register rear ankle/foot locally to the canonical planted support while retaining convincing knee bend, shin length, sandal perspective and full body-driven pose. Approximately5sourcepixels is a producer target, not an acceptance metric; inspect the resulting foot and neighboring leg, then compare whole key/guard. Do not shift/resize the whole figure to repair a local contact.",
+      "closure": "New immutable corrected source, native/NNcomparison of rear contact+shin+knee and whole figure; later actual transition playback must confirm absence of sliding. Preserve this v2and its negative note."
+    },
+    {
+      "priority": 2,
+      "domain": "animation",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "Finished sequence and early SMSproof",
+      "summary": "Retain body compression and two-hand clarity during any hardware-driven revision.",
+      "required_delta": "If steepening blade or raising hands for the pair budget, recheck both shoulder–elbow–wrist chains, waist/hip relation, full rigid blade/scabbard and supports; do not assume this key review transfers to changed pixels. Review new converted materials and both orientations separately."
+    }
+  ],
+  "observed_source_ROIs": {
+    "coordinate_system": "Native144x144, rectangles exclusive; read-only diagnostic pixel description, not anatomy/pressure classification",
+    "sole_sampling_y": [
+      123,
+      126
+    ],
+    "guard": {
+      "rear": [
+        26,
+        123,
+        41,
+        126
+      ],
+      "front": [
+        87,
+        123,
+        106,
+        127
+      ]
+    },
+    "R03v2": {
+      "rear": [
+        23,
+        123,
+        35,
+        126
+      ],
+      "front": [
+        87,
+        123,
+        107,
+        127
+      ]
+    },
+    "nominal_recipe_pivot": [
+      68,
+      127
+    ],
+    "judgement_limit": "Equal soleYand pivot metadata preserve vertical registration only. Width/center changes must be interpreted with actual foot orientation and fixed-support contract."
+  },
+  "inspection_evidence": [
+    "All7frozen request artifacts verified at start and before writing.",
+    "Native source/guard opened individually; NN3light/dark and NN4light comparison composed only in memory.",
+    "Full raw creation inspected for two arms, hands, grip/guard, complete blade, costume folds and repaired rear leg. Raw does not override native legibility.",
+    "Accepted concept, approved rough report and choreography read; deliberate crouch/lean separated from accidental scaling."
+  ],
+  "full_source_conclusion": {
+    "identity_finish_anatomy_isolated": "passed",
+    "body_driven_key": "passed_static_only",
+    "support_continuity": "revise_before_remaining_poses",
+    "source_blockers": [
+      "B01"
+    ],
+    "complete_motion": "not_observed",
+    "SMSconversion": "not_reviewed",
+    "actual_ROM": "not_observed",
+    "owner_approval": false,
+    "source_promoted": false
+  },
+  "limits": [
+    "Only this report is written. No source edits, generation, build, emulator, Git, memory or contract mutation.",
+    "No AAA, owner, production, competitive hitboxes/frame-data, FPS/VBlank/SAT/scanline or perceived playback approval.",
+    "Coordinator hardware report is separate; its planned key3will need its own hash-bound art check and conversion evidence."
+  ],
+  "next_checkpoint_priorities": [
+    "Local rear-support correction without losing current body articulation/finish.",
+    "Recheck entire corrected key, both arm chains and canonical full weapon after any hand-angle revision.",
+    "Convert early with frozenSocial/common scale; only then expand remaining poses and review the complete normal/slow movement before freshROMvalidation."
+  ]
+}

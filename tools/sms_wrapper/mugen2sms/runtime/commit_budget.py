@@ -1,4 +1,4 @@
-"""Modelo da politica de commit do stream de patterns (espelho do main.c v033).
+"""Modelo de filas de patterns; nao mede tempo de VBlank nem apresenta sprites.
 
 O runtime autoritativo continua NA ROM; este modulo e' o modelo de fila que
 permite pre-validar tamanho de chunk, residencia e pico de pool ANTES de
@@ -9,14 +9,14 @@ Fatos com fonte:
   (main.c:42 ``#define POOL_PAIRS 128u`` com o comentario "8192 B / 64 B por
   par TALL"; o stream endereca ``(base_pair + loaded_pairs) * 64``,
   main.c:340-358).
-- Producao sobe NO MAXIMO 1 par por frame, alternando lados
-  (``stream_pending((unsigned char)(frames & 1u), 0)``, laco LUTA_PROFILE=1);
-  o boot sobe a pose inteira com o display OFF (``upload_all``).
-- ``request_pose`` (main.c:368-411): cache hit se current/pending ja tem o
-  pose; memo de falha por epoch (``fail_epoch``/``fail_size``); falha de
-  alocacao descarta o pending do adversario; persistindo, EVICTA o current do
-  adversario ("omissao visivel medida, nunca pixel corrompido"); persistindo,
-  stall.
+- O default conserva o modelo historico v033: um par por turno alternado e
+  descarte/eviccao do adversario. Nao representa o perfil atual do rev2.
+- O perfil explicito ``rev2_b2_cancel_v1`` modela oito pares por lado, ambos
+  servidos no tick, sem desalojar o oponente, e cancela pedido em voo quando
+  a pose desejada volta a ser a residente. A ROM precisa de prova propria.
+- Com faces distintas no runtime, o campo ``pose`` do modelo representa uma
+  CHAVE de cache que inclui a orientacao (por exemplo ``2 * id_air + face``);
+  o modelo nao extrai essa chave nem valida a equivalencia dos assets.
 - Alocador first-fit por extensoes: candidatos {0} U {fim de cada slot vivo}
   (main.c:276-310).
 
@@ -46,7 +46,14 @@ SIDES = 2
 @dataclass(frozen=True)
 class Policy:
     pairs_per_upload: int = 1      # stream_pending nao-boot sobe 1 par
-    alternate_sides: bool = True   # producao: stream_pending(frames & 1)
+    alternate_sides: bool = True   # historico v033: stream_pending(frames & 1)
+    preserve_opponent: bool = False
+    cancel_on_resident: bool = False
+
+    @classmethod
+    def rev2_b2_cancel_v1(cls) -> "Policy":
+        return cls(pairs_per_upload=8, alternate_sides=False,
+                   preserve_opponent=True, cancel_on_resident=True)
 
     def upload_sides(self, frame: int) -> list[int]:
         if self.alternate_sides:
@@ -89,7 +96,7 @@ def check_pose_fit(n_pairs: int, pool_pairs: int = POOL_PAIRS) -> tuple[list, li
     elif n_pairs * 2 > pool_pairs:
         warnings.append(
             "pose de %d pares nao coexiste com uma segunda do mesmo tamanho "
-            "(%d*2 > %d): o confronto espelhado vai evictar"
+            "(%d*2 > %d): a consequencia depende da politica de cache"
             % (n_pairs, n_pairs, pool_pairs))
     return errors, warnings
 
@@ -105,6 +112,32 @@ def resident_frames(n_pairs: int, policy: Policy = Policy()) -> int:
     return turns * 2 if policy.alternate_sides else turns
 
 
+def parse_policy(raw: dict) -> tuple[Policy, str]:
+    if not isinstance(raw, dict):
+        raise ValueError("policy deve ser um objeto")
+    allowed = {"profile", "pairs_per_upload", "alternate_sides",
+               "preserve_opponent", "cancel_on_resident"}
+    if set(raw) - allowed:
+        raise ValueError("campos de policy desconhecidos")
+    profile = raw.get("profile")
+    if profile == "rev2_b2_cancel_v1":
+        if set(raw) != {"profile"}:
+            raise ValueError("perfil nomeado nao aceita overrides silenciosos")
+        return Policy.rev2_b2_cancel_v1(), profile
+    if profile is not None:
+        raise ValueError("perfil de politica desconhecido")
+    pairs = raw.get("pairs_per_upload", 1)
+    if isinstance(pairs, bool) or not isinstance(pairs, int) or pairs < 1 or pairs > POOL_PAIRS:
+        raise ValueError("pairs_per_upload deve ser inteiro entre 1 e 128")
+    bools = {name: raw.get(name, default) for name, default in
+             (("alternate_sides", True), ("preserve_opponent", False),
+              ("cancel_on_resident", False))}
+    if any(not isinstance(value, bool) for value in bools.values()):
+        raise ValueError("opcoes booleanas da politica devem ser true/false")
+    policy = Policy(pairs_per_upload=pairs, **bools)
+    return policy, "legacy_v033" if policy == Policy() else "custom_unbound"
+
+
 class Simulator:
     def __init__(self, policy: Policy | None = None):
         self.policy = policy or Policy()
@@ -117,6 +150,7 @@ class Simulator:
             "requests": 0, "cache_hits": 0, "uploaded_pairs": 0,
             "boot_pairs": 0, "stalls": 0, "memo_stalls": 0,
             "evictions": 0, "dropped_pending": 0, "alloc_fail": 0,
+            "superseded_pending": 0,
         }
         self.completions: list = []
         self.timeline: list = []
@@ -171,7 +205,13 @@ class Simulator:
         self.stats["requests"] += 1
         if not (0 < n_pairs <= POOL_PAIRS):
             raise ValueError("n_pairs %d fora de 1..%d" % (n_pairs, POOL_PAIRS))
-        if self.cur[side].pose == pose or self.pend[side].pose == pose:
+        if self.cur[side].pose == pose:
+            if self.policy.cancel_on_resident and self.pend[side].live:
+                self._invalidate(self.pend[side])
+                self.stats["superseded_pending"] += 1
+            self.stats["cache_hits"] += 1
+            return
+        if self.pend[side].pose == pose:
             self.stats["cache_hits"] += 1
             return
         if (self.fail_epoch[side] == self.pool_epoch
@@ -179,12 +219,19 @@ class Simulator:
             self.stats["stalls"] += 1
             self.stats["memo_stalls"] += 1
             return
+        if self.pend[side].live:
+            self.stats["superseded_pending"] += 1
         self._invalidate(self.pend[side])
         base = self._alloc(n_pairs)
         if base is not None:
             self._place(side, pose, base, n_pairs)
             return
         self.stats["alloc_fail"] += 1
+        if self.policy.preserve_opponent:
+            self.fail_epoch[side] = self.pool_epoch
+            self.fail_size[side] = n_pairs
+            self.stats["stalls"] += 1
+            return
         if self.pend[side ^ 1].live:
             self._invalidate(self.pend[side ^ 1])
             self.stats["dropped_pending"] += 1
@@ -402,6 +449,20 @@ def self_check() -> int:
     sim.request(1, 13, 16)
     ok &= sim.used_pairs() == 84 and sim.peak_used == 128
 
+    # Atual: voltar a current cancela somente o proprio upload; overflow nao
+    # sacrifica a imagem do adversario. E modelo, nao leitura de ROM/VDP.
+    sim = Simulator(Policy.rev2_b2_cancel_v1())
+    sim.boot_preload(0, 1, 40)
+    sim.boot_preload(1, 2, 40)
+    sim.request(0, 3, 16)
+    sim.stream(0)
+    sim.request(0, 1, 40)
+    ok &= not sim.pend[0].live and sim.cur[0].pose == 1
+    ok &= sim.cur[1].pose == 2 and sim.stats["superseded_pending"] == 1
+    sim.request(0, 4, 64)
+    ok &= sim.cur[1].pose == 2 and sim.stats["evictions"] == 0
+    ok &= sim.stats["alloc_fail"] == 1
+
     print("self-check commit_budget:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 
@@ -417,11 +478,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.events is None:
         ap.error("informe --events eventos.json ou use --self-check")
     payload = json.loads(args.events.read_text(encoding="utf-8"))
-    policy_raw = payload.get("policy", {})
-    policy = Policy(pairs_per_upload=int(policy_raw.get("pairs_per_upload", 1)),
-                    alternate_sides=bool(policy_raw.get("alternate_sides", True)))
     problems = plan_problems(payload)
+    policy = Policy()
+    profile = "invalid"
     try:
+        policy, profile = parse_policy(payload.get("policy", {}))
         result = simulate(payload.get("events", []), policy,
                           payload.get("preloads", []))
     except ValueError as exc:
@@ -435,8 +496,11 @@ def main(argv: list[str] | None = None) -> int:
     report = {
         "schema": "mugen2sms.commit-budget/v1",
         "ok": not problems,
-        "policy": {"pairs_per_upload": policy.pairs_per_upload,
-                   "alternate_sides": policy.alternate_sides},
+        "scope": "queue_model_only_not_rom_or_vblank_timing",
+        "policy": {"profile": profile, "pairs_per_upload": policy.pairs_per_upload,
+                   "alternate_sides": policy.alternate_sides,
+                   "preserve_opponent": policy.preserve_opponent,
+                   "cancel_on_resident": policy.cancel_on_resident},
         "problems": problems,
         "totals": result.totals,
         "completions": result.completions,

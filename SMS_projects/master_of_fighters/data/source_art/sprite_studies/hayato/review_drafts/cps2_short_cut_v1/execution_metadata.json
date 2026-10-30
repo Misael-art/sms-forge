@@ -1,0 +1,35 @@
+{
+  "schema": "sms_authored_source_candidate_v1",
+  "character": "hayato",
+  "pose_id": "C02",
+  "status": "candidate",
+  "source_sha256": "a6eac666190508089fac6168fb083abdb478c90e7cd1b337782e38969ef096c9",
+  "native_canvas": [
+    144,
+    144
+  ],
+  "conversion_pivot": [
+    68,
+    127
+  ],
+  "extraction": "one fixed1/10nearest, same guard source palette32; no body normalization or creative pixel painting",
+  "raw_sha256": "0ab05df167fe2494315acd372b9b850c47363c95732fd6cbc661e2214f94140e",
+  "observed_bbox": [
+    21,
+    19,
+    125,
+    127
+  ],
+  "observed_deltas_to_guard": [
+    "haircrown is about6px higher",
+    "leftfoot extends about5px fartherleft",
+    "katana angled down-right; tool used shallower slope than requested"
+  ],
+  "requires_review": [
+    "source body/anatomy/footstep continuity rather than claiming invariants preserved from prompt",
+    "twohand grip, fullblade/scabbard, contact not thrust",
+    "fixed material-index mapping per new source, no inherited approval",
+    "both orientation physical phase search before animation expansion"
+  ],
+  "frame_data_approval": false
+}

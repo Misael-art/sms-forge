@@ -1,5 +1,1332 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-10-28 — cache de pares físicos por conteúdo exato
+
+O candidato `LUTA_PAIR_SLOT_REUSE=1` associa cada par de tiles compacto a um
+slot VRAM físico. O `versus-cut` emite CRC-8/ATM como filtro; runtime compara
+os 64 bytes mapeados antes de reutilizar. A busca só reaproveita a pose
+residente do mesmo lado, preservando o contrato de paleta de P1/P2. Os pares
+novos usam slots livres e apenas eles entram no streaming; META usa o mapa
+físico. O pending só promove depois de completo. O padrão segue desligado,
+assim como prefetch e BG permanecem perfis incompatíveis.
+
+Falha e correção de sonda: o candidato v2 sobrepôs
+`probe_pair_reused_p2@0xC8D2` com `probe_vline_min`. `audit_probe_corridor`
+reprovou a colisão; leituras P2 e qualquer selo associado àquela ROM não são
+aceitação válida e seus artefatos foram preservados. Em v3, os quatro bytes
+`probe_pair_reused_p1`, `probe_pair_uploads_p1`, `probe_pair_reused_p2` e
+`probe_pair_uploads_p2` estão em `0xC900..0xC903`, declarados e inicializados
+também no controle. A região `0xC8D0..0xC8D6` fica intacta; em especial,
+`0xC8D2` permanece o mínimo selado de VBlank. `audit_probe_corridor.py`
+passou para controle e candidato com base `0xC800`, 163 sondas e folga de
+1486 B/1318 B, respectivamente.
+
+QA A/B em sessões privadas Emulicious, com input alinhado no `probe_frame=60`
+e key2 reconhecido no 67. Para a transição `p1_ken` HK, frame 2→3, o
+candidato ROM `01c204a9f0fdeed94c134f3286edf90add06f7b486761faf1c319432f1d8e464`
+(sessão `77fad887d0e247759f73b66cbd173090`) chegou à pose 43 residente,
+submetida e apresentada em `probe_frame=86`; marcou 9 pares reutilizados/8
+uploads e `probe_wait_p1` avançou 8. O controle
+`75d662357d2a4d0d2aedcd0cd670721118c040499b0c4841c63483c8fdb83dd6`
+(sessão `0fa2367e13bc45fd9459cfeaca4dafcb`) chegou à mesma pose em
+`probe_frame=89`, com contadores 0/0 e espera +10. Em ambos: `sat_om_p1=0`,
+`submit_p1=present_p1=43`; PNGs 256×192 idênticos, SHA
+`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`, e
+bundles passaram `check-bundle`. Resultado limitado a essa transição; não
+prova dano, qualidade visual, ganho geral de prazo, FPS, áudio ou delivery.
+O relatório que passou todos os comparadores está em
+`out/evidence/pair_slot_reuse_qa_20261028/aligned_resident43_ab_v2/observations.json`.
+O primeiro comparador v1 ficou `all_expected=false` porque exigia igualdade
+do contador `wait`, embora a candidata devesse esperar menos; esse relatório
+foi preservado e a v2 compara identidade de pose apresentada e ausência de
+omissão SAT.
+
+O negativo do P2 kick extremo está no teste C do algoritmo: 17 pares antigos,
+pedido de 20 pares novos (1280 B), sem igualdade de conteúdo. Um par recebe
+CRC igual ao de um slot corrente, mas bytes diferentes; runtime de teste rejeita
+o falso candidato e termina em 0 reutilizados/20 uploads, com bytes corretos.
+Isso não demonstra que a ação esteja alcançável pela ROM nem mede seu prazo.
+
+O teste foi ampliado para colisão de CRC em cadeia e para reconstrução do índice
+depois da promoção de um segundo pending; a colisão continua sendo filtrada
+pela comparação exata. O P2 kick extremo segue no teste C como negativo: 17
+pares anteriores, 20 novos, 0 reutilizados/20 uploads, incluindo um falso
+candidato com hash igual e bytes diferentes.
+
+Fonte v6 `src/main.c` SHA
+`86d4b928ea7dba24d72a32f058a8ff7d4a2b0326c8d50876bf1e68e0935e92f3`, header
+`inc/rev2_diag.h` SHA
+`6770d7c2734a940525681f3a81fc7fc4f4f2e69ea77afa49d37c6614658d8f47`.
+As tentativas de custo foram: v4 cache da contagem ocupada; v5 cursor
+monotônico na busca de slot livre; v6 tabela CRC fixa com comparação exata de
+64 bytes nas colisões. O controle v6 é idêntico ao controle v3/v5
+(`75d662357d2a4d0d2aedcd0cd670721118c040499b0c4841c63483c8fdb83dd6`); a ROM
+v6 habilitada é
+`db5ef9190f9e4643b7d293824874db1be3fb299dd0dae144249e0d0e2c06fe1f`.
+Mapeia `_CODE=31425` B desde `0x0200` (351 B até `0x8000`) e `_DATA=1024` B.
+`audit_probe_corridor` passou com 163 sondas e folgas de 1486 B no controle e
+1018 B na candidata.
+
+Runtime probe privado, quatro janelas NTSC de 3 s por sessão; todas as
+execuções falharam o critério FPS. v4 candidata `[11.18,10.19,14.80,14.80]`,
+controle `[23.35,25.97,21.70,18.42]`; v5 candidata
+`[15.13,16.76,19.41,15.13]`, controle `[23.35,25.97,21.60,18.41]`. Duas
+sessões v6 confirmaram candidata `[16.11,18.75,19.73,16.11]` e
+`[16.11,18.74,19.73,16.12]`, controles `[23.03,25.98,21.70,18.75]` e
+`[22.99,25.99,21.70,18.73]`; candidata abaixo em todas as janelas pareadas.
+Sem claim de estabilidade, pacing por quadro ou causa exclusiva. Relatórios
+v6 em `out/evidence/pair_slot_reuse_qa_20261028/runtime_probe_ab_v6/` e
+`runtime_probe_ab_v6_named/observations.json`.
+
+QA v6 da transição privada `p1_ken` HK, frames 2→3, sessão candidata
+`422b9e2bdbac4ea7b9d83459cd5000f2`, ROM SHA acima: pose 43 residente,
+submetida e apresentada 19 frames após o comando, espera +8, 9 pares
+reutilizados/8 uploads. Controle `75d662…`, sessão
+`c5a4933ec2d54b62863a846169bce339`, chegou em 22 frames/espera +10 e contadores
+0/0. Ambos `sat_om_p1=0`, framebuffer 256×192 idêntico, SHA
+`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`, bundles
+válidos. Relatório `out/evidence/pair_slot_reuse_qa_20261028/aligned_resident43_ab_v6/observations.json`;
+isso valida só a transição ensaiada.
+
+Worst-frame v3: controle (sessão `d7c16084d5e4480790f632a3e792d6e5`)
+selou 3000 frames, 1749 derrames e `vline_min=14`. A primeira candidata
+(`a9bd4639693b450498a82e48c1414270`) chegou a 2608 com `done=0` após 240 s,
+`vovf=1507`, `vline_min=4`; foi `sem_lastro`, contador parcial. A repetição
+fresca (`e3da1f50112c4bdf8d554f4e645feb5e`) selou 3000 frames, 1740 derrames,
+`vline_min=4`; diferença de nove sem atribuição causal, e a margem de linha
+foi pior. Candidata v6 (`db5ef919…`, sessão
+`a2bc12f4a97a4a0396351a8abd47899a`) selou 3000 frames, 1740 derrames e
+`vline_min=4`; resultado `derramou`, igual no número de derrames ao retry v3.
+O controle ROM é byte a byte o mesmo SHA. Relatório
+`out/evidence/pair_slot_reuse_qa_20261028/worst_frame_enabled_v6/observations.json`.
+Nenhum budget, FPS ou promoção foi declarado e nenhum ID do backlog foi
+encerrado.
+
+Fechamento no host: os testes focados passaram (21); a primeira suíte rev2
+encontrou 2 harnesses antigos que extraíam `stream_pending` sem seu novo helper
+`promote_pending`. Os harnesses foram atualizados e a execução final passou
+305 testes, com 150 fora do filtro. Passaram também `audit_debug_markers`,
+`audit_probe_corridor` (163 sondas; 1486 B controle/1018 B candidata),
+`audit_symbol_size_sync`, `audit_hardware_constants`, `audit_doc_sync`,
+`audit_meaningful_change` para `fps_constante`/`memory_bank_atualizado` e
+`audit_causal_persistence` (`advance`, delta registrado). Estado causal SHA
+`59a01d5dd79cce30cafce6f33fae1409fbde00b7f74eb7eb3779752f17100371`.
+Self-checks de `measure_runtime_probe.py` e `measure_worst_frame.py` passaram.
+Recovery local em `.runtime/backups/luta_mugem_rev2-runtime-20261028-pair-slot-reuse.tar.gz`
+(107.771.561 B, SHA `c65ba3d40a911c890ec4aab404df91b176377eecf352c494d03f9f7a01797517`),
+manifest SHA `0a2ff38736dffbf31545fdeaefe5293f265fe95f48b2c289f9192c6850ddf534`;
+`verify` passou com 28.464 arquivos. É proteção local no mesmo disco, não
+backup externo.
+A build nominal e o define default permanecem intactos/desligados; os 55 IDs
+seguem abertos. Gameplay/dano, 60 FPS, áudio, visual delivery e worst-frame
+pass continuam sem aprovação.
+
+## 2026-10-28 — streaming de poses e faixa incremental da PNT
+
+A variante `LUTA_BG_DIFF_MAP=1` atualiza a união vertical das linhas do ator
+BG anterior e atual, em chamadas de largura total; primeira publicação e
+invalidação ainda escrevem o mapa inteiro. Na comparação de uma pose/fase
+pareada, controle e candidata produziram imagem idêntica (0 pixels diferentes,
+`probe_frame=450`, pose P2 68). Isso valida só aquele checkpoint. A ROM
+`14f60441337953e21ac5c9b69c4931d50946fa028f36eb1331b441c03ccd49d1` marcou
+1759 derrames/3000 e `vline_min=2`; não houve redução mensurável de prazo.
+
+O candidato instrumentado para atribuição por estágio (`c243b60e…`, fonte
+`9606b15c…`, sessão `331fdebe61f145d698786f709933d72d`) registrou a fronteira
+ativa em 0/1759 quadros antes do mapa, 0 após o mapa, 1731 após streaming e
+1759 após SAT/PSG. A amostragem é um booleano de `SMS_VCounterPort < 0xC0`,
+não ciclos nem duração; a instrumentação também custa tempo. A evidência está
+em `out/evidence/20261028_bg_diff_map_vblank_stages/stage_attribution.json`
+(SHA `c99959bd4a99e44fb95358e3d132617307af3d123b6272146d8f69f92e6a3b23`),
+com `budget_passed=false`.
+
+O prefetch (`5b11b871…`, sessão `6e757992efeb49ff95a00ec7e2e77019`) marcou
+1871 derrames/3000, `vline_min=7`; contra 1759 no controle de uma sessão, a
+variação observada foi +112, sem atribuição causal por haver só uma execução
+por ROM. A cópia word (`SMS_VRAMmemcpy`, conferida no header oficial
+`SMSlib.h`) também não ajudou: controle `c243b60e…` e variante
+`274b5ec15ee067e7fb50fa17cb25ac23b6dfe4bfb4ac120e98af72b67979c08e` ficaram
+em 1759/3000; o estágio streaming marcou 1731 e 1729, respectivamente. Não há
+orçamento aprovado; `LUTA_SPECULATIVE_PREFETCH` e
+`LUTA_STREAM_WIDE_COPY` ficam desligados. O agregador de quota continua
+desligado e as quotas 1/2/4/8 anteriores seguem reprovadas ou com espera.
+
+O A/B visual da cópia word está registrado em
+`out/evidence/20261028_vblank_streaming/wide_copy_visual_ab.json` (SHA
+`5a156a0f0be65d5f6a783ab41e5064ebc9fb531da03586700dfda0222695a326`). Os
+bundles das duas sessões passaram a checagem estrutural; apesar de
+`probe_frame=433` e poses submetidas 4/66, os VDP frames foram 1141/1122 e as
+posições dos atores diferiram. O diff de 1191 pixels não é prova pareada de
+paridade ou diferença visual causada pela API.
+
+O `scale_pilot.py --self-check` passou antes da leitura do manifest atual. O
+relatório estático `out/evidence/20261028_streaming_scale_pilot/current_profile.json`
+(SHA `365288438cd1bf1428e6b9618c85d4887d32857c62f9f7dd7d2dd2214b48a158`)
+marca `blocked`: o pior quadro P2 kick tem 20 pares novos (1280 B) em 2 ticks
+AIR, sem reúso; timing AIR exato no runtime não foi provado. O requisito
+uniforme calculado é 640 B/VDP por tick, acima dos 512 B da quota atual de
+8 pares. A análise byte a byte dos 93 `PoseRef`/186 facings encontrou 390
+slots repetidos (24.960 B teóricos entre as paletas/poses), sem duplicata
+interna a um facing e sem correspondência P1↔P2 no pool selecionado. É
+deduplicação de dados, não redução de upload: precisa de alocador VRAM e
+remapeamento META; o pior par segue sem padrão reutilizável. Os detalhes e
+hashes de entrada estão em `out/evidence/20261028_vblank_streaming/pose_pair_reuse_analysis.json`
+(SHA `e075beb78363cc89ea59092ee48e3962cb0d79fe972231675eb723571a0a49ad`).
+
+Próximo ramo mensurável: usar o planejador existente de cache/remapeamento do
+`scale_pilot` em uma transição do perfil `p1_ken` com reúso (ação 240/HK,
+frames 2→3, 9 pares reutilizados) e manter o pior P2 kick como caso negativo
+obrigatório. Só uma ROM com alocação, deadline, RAM/VRAM e imagem do mesmo
+estado pode avaliar a hipótese. Nenhuma destas experiências aprova o
+renderer, VBlank, gameplay ou delivery; os IDs do backlog permanecem abertos.
+
+Fechamento técnico deste lote: fonte `src/main.c` SHA
+`9047930f93eb2f141bd4324e3da42c46c74ff815acf862756b7dd9500273f34a` compilada
+sem defines opt-in em `out/candidates/20261028_vblank_streaming_default/`.
+A ROM candidata é `d367abd19cfc9b221db3b069785d44fdda784b5a94a23c77dfb0b8df1e1684e5`
+(524288 B); o recibo SHA `899e5e4f58fdf58f57090e7f2244470caf61662d631f0fcda831e2789208bd22`
+marca build/validation pass e boot, gameplay, FPS, áudio e memory bank pendentes.
+A sessão privada Emulicious `55225b8a22274a64a7aef72ebbb1d1ec` capturou o
+frame 420 em 256×192 (PNG SHA
+`41dbc4305b17ba4fe3c000b0c081462ad268563d0782fc7d2bbae14e3972947d`); o
+bundle passou `check-bundle` e o PID foi encerrado. A captura mostra os dois
+atores no fundo preto, mas não prova interação, qualidade visual, áudio ou FPS.
+
+Validação host: 17 testes focados passaram; a suíte `--project rev2` passou
+300 testes. `audit_doc_sync`, `audit_hardware_constants`,
+`audit_debug_markers`, `audit_probe_corridor` (159 sondas, folga 1486 B),
+`audit_vscroll_wrap`, `audit_causal_persistence` e
+`audit_meaningful_change` passaram/avançou. `audit_tilemap_bounds` não achou
+escrita ilegal, mas deixou uma altura variável não provada. A build nominal
+continua intacta; nenhum dos 55 IDs foi fechado.
+
+Proteção local dos artefatos ignorados: `.runtime/backups/luta_mugem_rev2-runtime-20261028-vblank-streaming.tar.gz`,
+98.413.975 bytes, SHA `6812b8e5a23b05034c27670afed5e1a7c4dd00b4687a0738ffc76674fde2b585`;
+manifesto SHA `18bfb0452419754e4c458455b0f186f9e900ea85c34de8f0b1b4e4817d68a6e8`,
+27.544 entradas/484.824.066 bytes, `recovery_bundle.py verify` passou. Inclui
+ROM, captura e sidecars deste lote. É cópia local no mesmo disco, sem alegação
+de backup externo ou promoção de runtime.
+
+## 2026-10-28 — SAT no roteiro de aproximação
+
+Na ROM `7523bd0c…`, o BlastEm SMS2 privado
+`blastem-sms-d7f0598518844c2bb3b8935672e8d548` amostrou a SAT em 49
+fronteiras VDP de um roteiro de aproximação e ataque. Os picos foram 8 em 3
+amostras, 9 em 14 e 10 em 32; portanto 46/49 excederam oito entradas/linha.
+O maior número de linhas excedidas numa amostra foi 32. Na fronteira VDP 488,
+26 entradas, pico 9 e 17 linhas excedidas; o simulador lista uma entrada
+descartada nas primeiras cinco linhas reportadas. Auditoria BlastEm passou
+como consistência de registros; sessão encerrada. `inspect_sat.py` e o
+simulador passaram `--self-check` antes da leitura. O JSON em
+`out/evidence/20261028_interrupt_sat/sat_observations.json` tem SHA
+`6858c5b6b3f2f1d601be4ef3f9c1758241bbfcd866b630edceb0e8259f84a6c5`;
+receita `out/candidate_configs/blastem_interrupt_20261028.json` tem SHA
+`3fd3afc282fee4087668a2b2dcb616825f92e59ce0eec129a6f99703e36db69e`.
+São snapshots de outra sessão e outro emulador, não correspondência automática
+com o framebuffer Emulicious de número igual nem cobertura de todos os golpes.
+Não aprovam timing, áudio, gameplay ou hardware físico.
+
+## 2026-10-28 — câmera com deslocamento para a borda oposta (candidata)
+
+A implementação `src/main.c` de SHA `05c5de7a…` calcula o deslocamento
+horizontal assinado mais próximo de zero que mantém a união das caixas dos
+dois lutadores entre x=8 e x=256, limitado a 64 px por direção. A ROM híbrida
+`out/candidates/20261028_bg_camera_both_edges/rom/luta_mugem_rev2.sms`
+(`671ba646…`, `LUTA_BG_ACTOR=1`, `LUTA_BG_CAMERA=1`, quota 8) foi comparada
+com o controle `0180d1b5…`, compilado do código anterior com a mesma receita.
+Na captura privada do roteiro para a direita, ambos registraram x=240 no
+probe do frame VDP 481. A candidata registrou shift `0xF9` (−7 px), 32
+aplicações e zero conflitos; o controle registrou shift/aplicações/conflitos
+zero. São snapshots após input stepped, não sincronismo de scanout nem prova
+de que todo frame preserva o contorno.
+
+A sessão nativa `c794b07554e540a7825a348b36c8fc60` e a do controle
+`46cb58a8e40242aba657918c6c72a174` foram encerradas. A revisão visual
+encadeada da candidata, sessão `e8ea26dce3de427d8ae422daa5c0099b`, foi
+auditada como pacote válido com `tests_passed=false`: encontrou sobreposição
+forte dos corpos na ida à direita (frames de vídeo 96 e 228) e na volta
+(24 e 36). Não atribui a causa à câmera nem prova alinhamento por pixel.
+O shift negativo corrige a direção da translação no caso medido; não corrige
+a composição e permanece opt-in, com `LUTA_BG_ACTOR=0` e `LUTA_BG_CAMERA=0`
+na build default.
+
+Composição continua blocker separado: a ROM sprite-only `7523bd0c…` excedeu
+8 entradas/linha em 46/49 snapshots do roteiro de aproximação/ataque, com
+pico 10 em 32 snapshots. O mesmo arquivo de roteiro, com a mesma lista de
+fronteiras VDP, foi executado no candidato híbrido `671ba646…` em BlastEm SMS2
+privado `blastem-sms-8af9911524f6467a8b73c87b30f29995`; a auditoria passou e a
+sessão encerrou. Dos 49 snapshots híbridos, 37 tiveram pico 4 e 12 pico 7;
+nenhum excedeu oito. A SAT teve 10–16 entradas. O JSON tem SHA
+`8cea0523541f7139428356d761de09d3ed731b25e79248c0f0fb5636c157ac2f` e a
+auditoria `f5e815b0fd36a9a847ae2309bee9813ec456207cef45477f1d4725e75f2c1636`.
+É um resultado promissor para essa trajetória, mas os estados/poses internos
+entre ROMs não foram pareados; BG e câmera estavam ambos ligados. Não prova
+conteúdo BG íntegro, camada/prioridade correta, ausência de sobreposição,
+HUD/FX, nem prazo. O build BG-only, com a mesma fonte `05c5de7a…` e apenas
+`LUTA_BG_CAMERA=0`, gerou ROM `dfe5a9c7…`. No BlastEm privado
+`blastem-sms-50d2360fe9c44762863b050d257659bf`, a auditoria passou e o mesmo
+roteiro produziu pico 4 em 45 snapshots e 7 em 4; nenhum >8, SAT entre 10 e
+16 entradas. O JSON tem SHA
+`8b36bbb3db93046441da4190fcb1a20a07372f83dc87bb4fd159c931f8a99719`; a lista
+de fronteiras VDP coincide com as outras duas ROMs. A variante BG+câmera teve
+37 picos 4 e 12 picos 7; as duas mantiveram limite máximo 7. Isso isola a
+configuração da câmera, não o estado AIR por fronteira: os picos coincidiram
+em 39/49 e a contagem SAT em 30/49 entre as duas candidatas. Não há leitura de
+poses pareadas nem revisão visual do BG-only. `LUTA_PRESENT_HIT=0` é forçado
+com BG habilitado, então nenhum ganho de SAT prova contato coerente. O vídeo
+visual do BG+câmera ainda reprova por sobreposição. Duas sessões privadas
+Emulicious reproduziram o frame de vídeo 228 (VDP 348), com o mesmo PNG
+`5cc562b1…` e ROM `671ba646…`; os bundles em
+`out/evidence/20261028_pusher_geometry/` passaram `check-bundle` e foram
+encerrados. No estado RAM de VDP 348, P1 estava no chão em x=222 (role 1,
+walk-forward), P2 no chão em x=240 (role 5, guarda), `hitstop=0`, dano e
+eventos de hit zero, geometria inválida zero, e `probe_pusher_frames=84`.
+Logo, a sobreposição observada nesse frame é no chão, com gap lógico exato de
+18 px. O `ground.front` dos CNS de origem é 18 para P1
+(`data/derived/ryu/ryu/ryu.cns`) e 9 para P2
+(`data/derived/ken/ken8/ken.cns`); na escala extra 2/3 isso vira 12+6=18 px.
+Os dois frames idle têm 32 px de largura runtime. A evidência identifica a
+diferença entre contorno desenhado e largura frontal da fonte; aumentar o
+pusher sem decisão de design alteraria o espaçamento derivado do MUGEN.
+
+Na mesma sequência, VDP 481 registrou x=240/240, P2 no role de salto com
+y=53,3 px e velocidade vertical −6,47 px/frame; isso confirma que o pusher
+pode ser suspenso no ar e permite cruzamento. Esse estado não é a causa do
+frame visual 228, que foi amostrado no chão. A causa visual não foi atribuída
+à câmera. A revisão continua `tests_passed=false`; não aprova composição,
+fidelidade, contato ou entrega. BG-only continua sem revisão visual, `LUTA_BG_ACTOR`
+mantém `LUTA_PRESENT_HIT=0`, e nenhum ID foi fechado.
+
+O worst-frame medido em duas sessões privadas selou 3000 quadros com 180 s de
+execução autônoma. BG+câmera (`671ba646…`, sessão
+`9908ac359b794dc09fd2a1adbc086e3c`) teve 1759 derrames e `vline_min=2`;
+BG-only (`dfe5a9c7…`, sessão `60d5e84e7e764c8cabe2463d767f0fd7`) teve 1773
+e `vline_min=2`. Ambos reprovam VBlank. Fonte, gerados, toolchain e demais
+defines coincidem; só `LUTA_BG_CAMERA=1` e o manifesto correspondente mudam.
+A diferença de 14 derrames em uma execução por variante não prova ganho da
+câmera, e nenhum dos resultados fecha deadline ou orçamento.
+
+## 2026-10-27 — interrupção de ataque (candidata)
+
+O combate do schema 7 agora invalida a instância de ataque da vítima ao
+receber um acerto, inclusive quando a pose anterior permanece visível durante
+o recover. A elegibilidade de ambos é capturada antes dos contatos, permitindo
+troca não letal no mesmo tick; quando duas pausas coexistem, cada ator mantém
+a maior. Guarda permanece distinta. O host reproduziu antes o dano tardio e
+testou os dois lados com os contadores zerados pelo harness, guarda e pausas
+assimétricas. A rotina real `advance_actor` também foi testada separadamente
+no sequenciamento pause→recover. São testes C do host, não evidência da
+interrupção específica em Z80. KO simultâneo e empate continuam abertos.
+
+ROM isolada `out/candidates/20261027_attack_interrupt_v2/rom/luta_mugem_rev2.sms`,
+SHA `7523bd0c3976263b6187681a536ea29f9faedaa72b24b94027a671e907749054`,
+524288 bytes. O recibo identifica fonte, gerados e toolchain; a nominal não
+foi sobrescrita. A QA nativa do worker `01a18057-f5a1-7631-b50e-fa4a369405c4`
+na sessão privada `e625162d074a4522ad5635cdceb18c29` observou, na sequência
+encadeada de input, vida P2 1000→888 e dano 112. O vídeo foi reprovado por
+forte sobreposição dos corpos; o coordenador conferiu um quadro nativo. O
+relatório e o bundle em `out/evidence/20261027_attack_interrupt_v2_qa/` foram
+auditados (`ok`, `tests_passed=false`), e a sessão foi encerrada. O caso não
+identifica um golpe interrompido nem aprova gameplay. A primeira versão da
+correção, SHA `3727d28a…`, e a revisão que descobriu a sobrescrita de pausas
+permanecem em `out/evidence/20261027_attack_interrupt_qa/`.
+
+Em NTSC, a sessão privada `efe672327bbe492bbb32b2add6a8df52` mediu 21,57 e
+24,48 atualizações/s em duas janelas de 8 s; reprovou meta e dispersão, com
+carga do host registrada. O bundle foi verificado e a sessão encerrada.
+Não mede deadline por frame, PAL, gameplay completo ou carga com HUD/FX e
+música. Na baseline `7f530db3…`, nas mesmas janelas e em sessão própria,
+foram 21,68/24,21. Uma tentativa isolada de encurtar a busca first-fit
+(`eab4dee6…`) produziu 21,75/24,38 e foi descartada: esses números não provam
+ganho sob a carga concorrente. Um novo teste compara 100 mil layouts de pool
+com um oráculo bitmap independente, incluindo pool vazio e cheio.
+
+O pior quadro da mesma ROM, em sessão privada `a234bcb995854aa388be698a2193f520`,
+selou 3000 iterações com `vline_min=2` e `vovf_delta=1759`: `derramou`.
+A leitura inicial estava no frame lógico 20, após a preparação da ponte por
+stepping; o restante correu 240 s em tempo real sem leituras. Essa mistura
+e a ausência de HUD, FX e música não qualificam uma janela contínua completa
+de entrega. Resultado em `out/evidence/sessions/a234bcb995854aa388be698a2193f520/worst_frame/`;
+bundle verificado e sessão encerrada.
+
+Nenhum dos 55 IDs foi fechado. Continuar por composição e deadline, e por um
+caso de interrupção com entradas naturais, ROM/SHA, frames e sondas; não
+atribuir o vídeo de aproximação ao instante do acerto nem tratar ACK como
+consumo. O artefato visual reprovado não resolve a causa entre overlap,
+limite de scanline e prazo de pose. A revisão também aponta KO simultâneo e
+retorno temporal por estado como trabalho pendente.
+
+Primeira tentativa natural de interrupção: sessão privada
+`762b551675c74f18acc09efab0df825a`, a mesma ROM, 478 passos VDP, direção e
+botão no pad P1; bundle verificado e sessão fechada. No início do botão,
+tick lógico 142, P1 estava em x=121 e P2 em x=199; ambas vidas permaneceram
+1000. A tentativa não alcançou contato. Sequência, leituras e receita estão em
+`out/evidence/20261027_interrupt_natural_case/`; não é teste aprovado de
+interrupção. O próximo roteiro mantém a aproximação até o início do ataque.
+
+No roteiro ajustado, sessão `af855f977cfc45738024f771877145ca`, ambos estavam
+no papel 7 e o `hit_done` de P1 era 0 no frame VDP 485; no 486 passou a 1,
+com pause 12 e recover 15. No 487 a vida espelhada de P1 apareceu 924, ante
+1000; a de P2 permaneceu 1000 até o tick 210 e P1 voltou ao idle após o
+recover. As leituras de probe e atores são duas solicitações separadas e
+podem cair dentro do laço, portanto 486→487 não é timestamp exato do contato.
+O caso associa input natural, estados observados e consequência limitada;
+não prova que uma caixa do ataque interrompido teria atingido P2 mais tarde.
+Receita e journal em `out/evidence/20261027_interrupt_natural_near_case/`;
+bundle verificado e sessão encerrada. O caso espelhado na ROM continua aberto.
+
+A repetição `10d4435879a14b6c96a96428774dc45d` capturou o framebuffer no
+frame VDP 488, quando a vida espelhada de P1 já era 924; no 487 ainda era
+1000, embora stop/recover e `hit_done` já tivessem mudado. PNG SHA
+`38fbfa7042b722335ca6eec10919484cd975355217911279baf2083c65b39b64` em
+`out/evidence/20261027_interrupt_natural_contact_case/first_damage.png`.
+O coordenador viu corpos sobrepostos junto à borda direita: a captura não
+permite reconhecer ambos nem autentica scanout da pose que causou o dano.
+O bundle final foi verificado e a sessão fechada. O log de frames, receita e
+snapshot anterior/posterior permanecem no mesmo diretório.
+
+Validação do lote no host: `pytest --project rev2` passou 292 testes e
+deselecionou 150 do consumidor legado; seleção não é aprovação dos casos
+omitidos. Selftest 135/135 (probe de projeto opcional não executado), 75
+ferramentas de medição, marcadores, corredor da candidata (folga 1381 B),
+documentação, constantes e captura de lições passaram. O contrato MUGEN passou
+somente como planejamento. Nada disso fecha composição, prazo ou entrega.
+A recuperação local `.runtime/backups/luta_mugem_rev2-runtime-20261028-attack-interrupt.tar.gz`,
+relativa à raiz e com SHA
+`6cbe8fec90572d8adb9537dcaa979a6204f9a0b375e6bfb8bf83963c0b18d891`,
+foi verificada com o manifesto homônimo em 24167 arquivos. A cópia e o owner
+estão no mesmo disco; não há nova proteção externa.
+
+## 2026-10-27 — guarda na mesma ROM do recover
+
+A mesma candidata `7f530db3…` foi reaberta sem rebuild. O botão 1 só
+foi segurado depois que a IA já estava no beat 3 e P2 no papel 4
+(agachar). Do probe 76 ao 81 a máscara foi 16; no 82 o papel de P1
+virou 7. Não houve carga no beat 2.
+
+Sessão privada `ff3ce3ecc6da4ff3af5ca0786fd6d0c8`, stepping, 259 passos
+VDP, 105 frames de lógica registrados. `check_bundle` verdadeiro, sem
+aprovação de gameplay, áudio ou FPS. A captura `guard.png` (SHA
+`f1c2523b3084f152b84ded8b8a31ee95faf2d82ef344918f823c6cee607f3195`,
+256×192, variância de luma 524,5) é o frame VDP 315. Mostra dois
+lutadores distintos no fundo preto, juntos no lado direito, sem HUD.
+Não prova scanline nem que a cópia da SAT dessa iteração já tinha
+ocorrido.
+
+Nesse frame o `probe_frame` e o tick do trace são ambos 93. A leitura
+anterior do mesmo probe (VDP 313) ainda tinha tick 0, pause 0 e vida
+1000/1000. A de VDP 315 já tem kind 1, atacante 0, política 2, guardas
+1, acertos 0, dano 0, vidas 1000/1000. Papéis 7 e 4, os dois no chão.
+Poses lógica, submetida e apresentada 34 e 69. Pause 16/16, recover de
+P2 21. `probe_present_hits` conta o contato aceito, inclusive guarda.
+Faces 0/1, `face_flips` 0. O SFX diagnóstico de guarda estava
+enfileirado e ainda não contado como tocado; no probe 94 `audio_played`
+é 1 e `audio_last` é 1. Não é identidade MUGEN.
+
+O pause desce de 16 a 0 entre os probes 93 e 110 (`hitstop_frames`
+termina em 32). O recover fica 21 até o probe 110 e chega a 0 no 130.
+A soma das quedas do log é 21. x de P2 passa de 195 para 200 no frame
+seguinte ao contato e permanece 200 durante o pause: um impulso, o
+`guard_push` de 5 px do atacante, aplicado em `combat_step`. O pusher
+de corpo não corre com pause diferente de zero.
+
+P2 ficou no papel 4 enquanto a IA passou ao beat 4 (probe 100) e ao
+beat 5 (probe 125). O pulo da IA só afirma cima nos três primeiros
+ticks do beat (125–127), todos com recover ainda acima de zero; o pulso
+foi descartado. No probe 132, já com recover 0, o papel virou idle.
+P1 deixou o HP no probe 128, com recover de P2 ainda em 3. Nos probes
+132 e 133 P1 andou +3 px (177→180→183). As amostras seguintes misturam
+o pusher. Não houve troca de lado.
+
+A duração deste recover é a mesma do acerto de 112, porque neste HitDef
+`guardtime` e `hittime` valem 21. O que separa os dois eventos é o kind
+e a vida. Log em `out/evidence/20261027_hit_recover/guard_watch.jsonl`,
+SHA `ac011ff093585b75f2d31d01196d7bc5bc4864a3467a72c98564717928fbc026`.
+R06, ID01 e os 55 IDs seguem abertos. Scanline, prazo, HUD e facing
+continuam sem medição nesta ROM.
+
+## 2026-10-27 — recover do golpe submetido (candidato, stepping)
+
+O schema 7 está na candidata
+`7f530db3357bffd170286e332bdfd55e4bd0504d08ac28382859c583831d79dc`
+(524288 bytes,
+`out/candidates/20261027_hit_recover/rom/luta_mugem_rev2.sms`).
+Receita `.mddev/candidates/hit_recover_20261027.json`: o header gerado
+`out/generated/pose_budget_recovery_20261027` vem antes do corte de facing
+`pose_budget_facing_20261027`. Os bancos continuam os 24 do corte de facing.
+Defines: `LUTA_PRESENT_HIT`, `LUTA_CONTACT_TRACE`, `LUTA_DIAG_PSG`.
+A nominal `087df676…` e a candidata `5c5c6144…` não foram regravadas.
+Neste `.map`, `_probe_recover_p1` é `0xC0DE`, `_probe_recover_p2` é
+`0xC0DF`, `_contact_trace` é `0xC130`, `_probe_present_hits` é `0xC187`.
+Esses endereços não servem para a ROM anterior.
+
+P1 é Ryu (`ryu/ryu.def`). O SHA do corte de cena é
+`6db7e29d82fff1034e8c2ddab600e500fe8377ebdeef9b626fd6b580b812300d`;
+o pacote lido para o tempo do HitDef é
+`57c8fc2eff5389066ce08bf30f69d64b8ad74f1219958ef5762dabd336d9657c`.
+P2 é Ken (`ken8/ken8.def`): corte
+`b244ec9a105fa0131b37c075dc06b032a87cf0f839f46ec7054ac60d9bd6f14c`,
+tempo
+`9193f1cb5ae94a9e7ded195530b5ca735e10ca262fbc2e982a50e2f602bd5c97`.
+As colunas de dano não foram regeneradas e seguem os HitDefs derivados
+(Ryu HP 112, soco 42). Classe de fidelidade: aproximação. common1,
+gethit e knockdown continuam fora. No HP de Ryu, `guardtime` e `hittime`
+são ambos 21; a duração sozinha não separa guarda e acerto.
+
+Sessão privada Emulicious `b615f99a3d864c8d9aaf9fad72fa10b2`, stepping,
+não throughput. `check_bundle` verdadeiro: framebuffer informativo preso
+à sessão, sem aprovação de gameplay, áudio ou FPS. A captura
+`hit.png` (SHA
+`0580301b66c4812e0d0bf81fa7c736c156714c8450d67dd63c6c059764a9fa3e`,
+256×192, variância de luma 529,6) mostra dois lutadores distintos no
+fundo preto, sem HUD. Não prova orçamento de scanline nem que os pixels
+da pose 34 sejam os que o VDP varreu.
+
+A primeira amostra depois do dano é o frame VDP 207, `probe_frame` 53,
+tick do trace 52, sequência par. A amostra anterior (VDP 205, probe 52)
+ainda tinha vida 1000 e pause 0. O 53 é o topo do laço seguinte: o
+combate do frame 52 já aplicou dano, pause e recover, e a cópia da SAT
+dessa iteração já ocorreu; `advance_actor` do frame 53 ainda não
+decrementou o pause. Por isso o pause aparece 16/16 nessa borda.
+Kind 2, atacante 0, política 2, acertos 1, guardas 0. Vida de P2
+1000→888, dano 112. Papéis 7 (HP) e 2 (andar para trás, sem guarda).
+Os dois no chão. Poses lógica, submetida e apresentada 34 e 60 nessa
+amostra; o trace é escrito uma vez, então leituras posteriores de 34/60
+são o retrato do contato, não a pose viva. Faces 0/1, `face_flips` 0.
+Beat da IA 2. SFX diagnóstico: um pedido de acerto enfileirado e tocado.
+Não é identidade MUGEN nem mix.
+
+O pause dos dois desce de 16 a 0 entre os probes 53 e 69
+(`hitstop_frames` termina em 32). `recover_p2` fica 21 até o probe 69 e
+passa a 20 no 70. A soma dos degraus registrados de 21 até 0 é 21.
+Pares −2/0 no log são o passo VDP que às vezes avança dois frames de
+lógica; o relógio da ROM não pulou valor. O log está em
+`out/evidence/20261027_hit_recover/watch.jsonl`, SHA
+`24671087c0773ef74eb783f585fe8828855adfd7055dd09c6d92dbd380ce10bd`.
+
+P2 permaneceu no papel 2 enquanto a IA já pedia agachar (beat 3 no
+probe 75, recover ainda 14). Só no probe 91, com recover 0, o papel
+virou 4 e `role_changes_p2` foi de 2 a 3. O comando da IA durante o
+travamento foi consumido e não ficou bufferizado. P1 saiu do HP para
+idle no probe 86, com recover de P2 ainda em 4: fim da animação de
+ataque, não o recover da vítima. Do probe 91 ao 95 P1 andou para a
+frente, papel 1, x 87, 90, 93, 96, 99 (+3 px por frame de lógica, a
+velocidade 768 em Q8.8). O `walk_seen` de `observation.json` (x 100 no
+probe 95) é um passo de máscara a mais, com o contador de lógica parado
+e +1 px; a série por frame é o jsonl.
+
+Nesta sessão não houve guarda, troca de lado, HUD nem prazo medido.
+R06, ID01 e os 55 IDs seguem abertos. A guarda foi medida depois, na
+sessão `ff3ce3ec…`, segurando o botão 1 só a partir do beat 3. Carregar
+no beat 2 foi o que produziu este acerto.
+
+## 2026-10-27 — acerto pela pose submetida
+
+`LUTA_PRESENT_HIT` passa a ser o caminho de produção. O combate roda depois
+da sombra da SAT e só aplica guarda ou dano com o quadro submetido por
+inteiro nesse frame. O cursor lógico pode estar adiante; nesses ticks o
+atacante é contado em `probe_present_unready` e não há dano. Guarda estrita,
+`LUTA_CONTACT_SAT` e ator BG continuam a desligar esse caminho. Não prova
+scanout, scanline, prazo nem hitstun.
+
+A ROM candidata é `5c5c6144ffd5b76f6e0f53bbcdf29785832238a0d3aeb0a51f6109ee99574991`,
+em `out/candidates/20261027_present_hit/`, com `LUTA_PRESENT_HIT`,
+`LUTA_CONTACT_TRACE` e `LUTA_DIAG_PSG`. Fonte `src/main.c`
+`50d7c3323efa79f574061115db39f89cc6017fda447604dde521e9c7aacf056f`.
+A baseline nominal não foi substituída. Pre-gates do build passaram.
+Dez testes de contato no host passaram, incluindo o caso em que o quadro
+lógico futuro não aplica dano.
+
+Sessão privada Emulicious `5e25aae6750e4702b6fe82b1884b2128`, stepping, não
+throughput. No tick 84 houve guarda: política 2, poses lógica/residente/
+submetida/apresentada 34 e 69, vida inalterada, um SFX. No tick 176 houve
+acerto do lado 2: as quatro leituras da pose ficaram em 36 e 77, dano 76
+(HP do pacote de P2), vida de P1 1000→924, segundo SFX. A captura
+`hit2.png` dessa sessão é o frame 201, depois do acerto. Bundle verificado
+em `out/evidence/20261027_present_hit/5e25aae6750e4702b6fe82b1884b2128`.
+
+A mesma ROM, na sessão `656ccc85b4a24876a85d4f4ad7c9e905`, repetiu a guarda
+com o framebuffer pausado no próprio tick: frame da ROM 84, tick do trace 84,
+atacante 0, política 2, poses 34 e 69 nas quatro leituras, vidas 1000/1000.
+A imagem `out/evidence/20261027_present_hit_frames/guard.png` (SHA
+`bda8add900ef5db3e51348a437d6acde238235665710591e9fb26a2ac35f3867`) mostra
+os dois lutadores no fundo preto, com o chute de P1 e P2 agachado. O acerto
+de 76 não se repetiu até o frame 159 nesse roteiro, só com neutro depois da
+guarda. Scanline, VBlank, FPS real e hitstun não foram medidos. Nenhum dos
+55 IDs fecha.
+
+## 2026-10-27 — contato, residência e cópia da SAT (candidatos)
+
+O bloqueio de R06 foi reproduzido com input normal. Na ROM de áudio
+`a89a3897…`, o aumento do dano foi visto entre duas fronteiras VDP, mas a
+leitura caiu no meio de `combat_step`: o contador de dano já mudara e o
+espelho de vida ainda não. Como sondas de pose são atualizadas mais tarde,
+essa amostra não identifica sozinha as caixas usadas. O caso está em
+`out/evidence/20261027_contact_alignment_psg/`.
+
+Uma ROM instrumentada `75624df9bc015ed2214331204bbc3cf4597936f8b72f065d4674bfcdb28c6247`
+registrou as entradas de `boxes_overlap` antes de aplicar dano, sem escrita
+externa de RAM: sessão privada `94ed963bc2c04130a1b36ea37773b2d7`, tick 352.
+P1 usou o frame lógico de pose 34 enquanto a residente e a última submissão
+eram 33; P2 tinha pose lógica/residente 60 e última submissão 58. A vida de
+P2 caiu 1000→888 após 12 frames VDP. A decodificação dos bytes da própria ROM
+(`out/evidence/20261027_exact_contact_trace/boxes.json`) encontrou uma caixa
+de ataque na pose 34, que intersectou a hurtbox lógica de P2; a pose 33 não
+tinha caixa de ataque. O controle posterior da mesma fonte usada para a
+primeira alternativa, ROM `cbe1bf38…`, reproduziu o mesmo conflito e dano
+em `1ab9cd8a01144af3920d6433989088f3`. A sonda de submissão não prova que
+todos os pixels chegaram ao framebuffer; são casos instrumentados, não uma
+afirmação universal sobre todos os golpes.
+
+`LUTA_CONTACT_GUARD=1` testou a alternativa estrita, desativada por padrão:
+só resolve o contato lógico quando ambos os frames, faces, posições e bases
+correspondem à última cópia de SAT elegível. A candidata
+`1d21fb24517f663de7c5cfc9a1eedc6d4fcf5ba7100ca6f0fbff27a9ff45cff1`
+contou nove interseções recusadas e nenhuma aceita; P2 permaneceu com 1000,
+o input de P1 avançou de 307 a 368 ticks e P1 voltou a idle na sessão
+`4552fc6ccc7f49d1a6c1d8a010da5c3e`. O golpe foi perdido nesse roteiro.
+As trajetórias diferiram do controle e não há comparação causal de desempenho.
+Suas janelas NTSC de atração foram 25,19/21,67 atualizações/s; o controle
+instrumentado da época mediu 26,36/25,49. Ambas reprovam e não havia HUD,
+FX ou música. Essa alternativa não está promovida.
+
+Outra opção, `LUTA_CONTACT_SAT=1`, usa a geometria e posições da última cópia
+elegível da SAT, em vez das caixas lógicas atuais. Uma primeira versão
+`9f92b170…` permitiu um frame de P2 herdado de estado anterior; o erro e a
+sessão `b06408f9485b431e8ae2a26739ae6d5a` foram preservados. A versão seguinte
+invalida metadados do cache ao mudar de instância de papel e só os renova a
+partir de uma requisição válida. Na ROM
+`42ebea72f930bf77bd66ae6d6b64124997306da871a1d4c1b5bdd75f0a074891`,
+sessão `7a3012feab154373879e81c89d0c02db`, um golpe causou 112 de dano com
+P1 lógico/residente/submetido 34 e ambas as associações de instância válidas.
+P2 usou frame submetido 53 contra lógico 48, ambos do mesmo estado e com a
+mesma hurtbox nesse caso; o trace aponta as diferenças de frame e posição.
+A decodificação ROM em `out/evidence/20261027_contact_instance_sat/boxes.json`
+confirma a interseção das caixas usadas. Isso é aproximação temporal e não
+prova equivalência com MUGEN, fidelidade de todos os contatos, ausência de
+perda por scanline ou scanout. A política permanece desativada.
+
+## 2026-10-27 — PSG em eventos de combate (carga diagnóstica)
+
+`LUTA_DIAG_PSG` permanece zero por padrão. Quando habilitado, acerto e guarda
+do `combat_step` enfileiram efeitos genéricos autorais, com prioridade e
+coalescência descritas no TDD; o serviço PSG participa do trabalho antes do
+selo. Não há música, recuperação de música, lifecycle de round/KO/pause,
+identidade sonora MUGEN ou aprovação auditiva. Esses streams são uma carga
+representativa parcial, não assets finais aprovados.
+
+O gerador canônico `make_psg_assets.py` (`5f30d29ea08f50368453a86bf104ce1852cbf8ac01bf8a62c77792b914aa918a`)
+agora aceita `--only` e `--role`, preservando entradas não selecionadas do
+manifesto. Repetição da geração seletiva e rejeição de papel inválido foram
+testadas. `sfx_hit.psg` tem SHA
+`6bd00533ab544c1c574fab8bce3e8bc932f4999695c818ae3a363a415721d9d3`
+e `sfx_hurt.psg` tem SHA
+`5af5fc1cc9a6d146e7afbcd072e2579945b2cf6e93276f534ad4b09206aefb2e`;
+procedência e canais estão em `doc/audio_provenance_manifest.json`. Na ROM
+`a89a38972e1b65ef9395db7e51118abd607f27959190c7f36e546f6356560dfb`,
+os dois blobs conferiram byte a byte com os símbolos na ROM fixa, via
+`out/evidence/20261027_diag_psg_window_binding.json`. Fonte do runtime
+`2c04013962615edc4dcfc1a51cff54822eb0ec12b13c34dbdfa1bcdbc6c71739`;
+receitas, recibos e snapshots estão em `out/candidates/20261027_diag_psg_window*`.
+
+Na sessão Emulicious privada `edb0096ba1314cf7b7fb0d4484e71aab`, controles
+normais produziram dois acertos e uma guarda na janela, vidas 1000→932 e
+1000→888, três reproduções solicitadas à PSGlib e nenhuma guarda descartada. A
+captura isolada do PID registrou pico 2084 e 7% de atividade em 6,687 s,
+passando o piso de 5% para SFX esparso; SHA do WAV
+`a9c250b51e8a9eae3927292d6815b676dbac749ca5afea4b8f7062a97873e932`.
+Eventos e sinal pertencem à mesma janela, mas não foram alinhados contato a
+contato com o framebuffer. Em outro roteiro da mesma fonte com PSG desligado,
+ROM `70c03939306d0fe1d624d08e08734b9cb2d2b2b11251b2e2f56932613684de4f`,
+sessão `2c0f20bbf97d4950a308448ab10dd196`, os mesmos totais de combate foram
+observados com sondas de som zeradas e captura silenciosa. As sessões e
+bundles foram conferidos e fechados; áudios, diários e roteiros estão em
+`out/evidence/20261027_diag_psg_gameplay_window*`.
+
+A primeira captura desta investigação foi silenciosa porque o roteiro não
+retomou a execução após comandos de input, que pausam a ponte; nenhum acerto
+foi observado. A tentativa e o journal foram preservados em
+`out/evidence/20261027_diag_psg_gameplay/`; o roteiro corrigido verifica e
+retoma o estado após cada mudança. Uma candidata intermediária também colocou
+sondas em bytes reservados ao perfil do worst-frame. A colisão foi identificada
+antes da medição de prazo; a candidata intermediária não qualifica orçamento.
+As sondas finais foram movidas e um teste compara seus endereços aos contratos
+dos medidores. O corredor final passou com 157 sondas e folga de 1479 B na
+ROM com PSG, 1531 B no controle; `volatile` e os gates de áudio passaram.
+
+Sem contatos na atração, as duas janelas NTSC da ROM PSG foram 26,58/25,72
+atualizações/s (`d22355ed1b904a34b2530803e1b19ab5`); no controle, 26,70/25,70
+(`ce0d6468bfcb493d8b003649685a3ebc`). Ambas reprovam e só medem o serviço
+ocioso em trajetórias próprias, sem HUD, FX ou música. Diferenças entre
+janelas não isolam custo causal. Nenhum ID do backlog foi fechado.
+
+No selo com P1 mantendo direita e IA normal, sessão
+`74b83e966343464a8eeec6643e62b8ab`, a ROM PSG registrou 863 derrames e
+`vline_min=7` nas primeiras 3000 iterações, incluindo 26 iniciais por
+stepping. O primeiro SFX foi solicitado no tick 174, dentro do selo; 14
+solicitações foram contadas até o tick 4702, depois do selo. O limite declarado
+de um SFX por iteração e uma iteração por VBlank, frente aos 10904 frames VDP
+desde o boot, exclui wrap do contador nessa leitura; `audit_counter_window`
+conferiu apenas a aritmética, não autenticou essa premissa. O roteiro difere
+dos selos anteriores, logo 863 não mede efeito causal do PSG. Continuam sem
+carga HUD/FX/música, sem prazo aprovado e sem revisão auditiva.
+Fechamento técnico: 278 testes `rev2` passaram, 150 foram deselecionados;
+procedência, canais, tamanho, marcadores, documentação e constantes passaram.
+O gate PSG aceitou os dois eventos, com ressalva de que o efeito multicanal
+não teve decaimento individual dos canais nem silêncio do mix comprovados.
+O contrato MUGEN passou somente em modo de planejamento; revisão independente
+e teste auditivo permanecem pendentes.
+Código `579bf46`; a cópia local
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-diag-psg.tar.gz` tem SHA
+`eb52e60c63a2d304badb9540becc8416181bee706c5a764e29d2bcac200f761a`;
+o manifesto correspondente verificou 22776 arquivos. A cópia e o owner ficam
+no mesmo disco, sem nova proteção externa.
+
+## 2026-10-27 — ator em BG e câmera (candidatos, não promovidos)
+
+A fonte `dd1a7cb532fe62c6dd0e0e244f87c2e84ddb407e8c59bd90ea7aefc5fcb86cf6`
+introduz `LUTA_BG_ACTOR` e `LUTA_BG_CAMERA`, ambos zero por padrão. O primeiro
+prepara P1 na PNT a partir dos patterns já residentes e deixa P2 na SAT; o
+segundo desloca ambos para evitar a primeira coluna mascarada quando as caixas
+cabem na tela. Em conflito, a câmera registra o caso e não se desloca: o
+corte continua possível. Não há fallback aprovado nem decisão de viewport.
+O TDD registra o mapa, as flags e os limites; candidatos e fontes por hash
+estão em `out/candidates/20261027_bg_*`.
+
+Na primeira ROM híbrida `30aeda41c7f6058e610b3c4d943e40821fcf4173630503a95898f72bf7a8a766`,
+uma captura de aproximação mostrou 14 linhas da pose deslocadas 2 pixels em
+relação às outras 39 (`out/evidence/20261027_bg_gameplay_actor/`); o scroll
+mudava após o início dos uploads. A ROM posterior
+`3c6df90533bdce7341c36ee8eeb6efc4758f3f74f7476c9182e43e39b799a071`
+executa scroll e cópia da PNT antes do streaming. Numa captura equivalente,
+as 53 linhas comparadas apresentaram deslocamento uniforme de 1 pixel em
+relação à RAM instantânea, sem a divisão anterior. Isto não prova timing
+framebuffer↔RAM nem ausência de outros rasgos. As sondas instantâneas de
+VCounter sem atraso nessas amostras não excluem uma volta completa do contador.
+
+A ROM com câmera e fonte final é
+`3be79abe6c5edd3d44616b53c357999d25591756492db328522edb873fc6af4a`.
+Em Emulicious privado `1749c7e0e7c34057a3dc222e40341fe4`, com P1 em x=16,
+deslocamento 7, uma pose de P1 e uma de P2 alinharam respectivamente 869/869
+e 738/738 pixels aos patterns esperados. A captura mostrava pose P1 anterior à
+submetida na RAM: alinhamento de pixel não prova apresentação pontual. No
+controle da mesma fonte sem câmera, sessão `02f8299d60184eb98633a57a7cfddd4e`,
+102 pixels esperados da pose foram ocultados pela primeira coluna preta;
+as trajetórias de IA diferiram. Em outro roteiro, botão 1 reduziu a vida de P2
+de 1000 para 888 (`330bb408ab9742bb954fce7419b79fe9`); a câmera não atuou
+nesse caso. Bundles e mídia estão em `out/evidence/20261027_bg_edge_camera*`
+e `20261027_bg_gameplay_camera/`; sessões encerradas. São amostras, não
+fidelidade integral, guarda, áudio ou gameplay completo.
+
+O modelo de poses na borda oposta encontrou conflito de câmera em 656 de 2160
+pares avaliados; em 322 desses pares a composição sprite-only também excedia
+oito por linha. Isso é geometria estática, sem prova de alcance. Em sessão
+privada com P1 à esquerda por 6000 frames VDP e IA normal
+`250316ff765741b4863348eee72c7465`, não houve conflito; P2 não passou de
+x=136. A tentativa de troca de lado com P1 à direita
+`b75d1e428f2b44209ce3b1ffee82a74b` não alcançou a troca, portanto não testa
+facing BG. O código da câmera permanece candidato, sem aprovação de fidelidade.
+
+O diagnóstico BlastEm auditado `blastem-sms-a946f0ebe4214b2b8f0f34eadc16e3c6`
+observou 30 fronteiras: 60 poses residentes e 17 prefixos pendentes conferiram
+com a ROM, sem sobreposição de slots; a SAT teve pico 4/linha. Em seis
+amostras de PNT efetivamente comparáveis, 184 tiles de pattern conferiram sem
+entradas inválidas. O plano de VRAM passou e os 30 snapshots de registradores
+confirmaram reg2/reg5=`FF`, reg6=`FB`; a PNT inferior não foi reclamada como
+sobra com scroll Y. Isso não prova apresentação, timing ou hardware físico.
+Relatórios em `out/evidence/20261027_bg_blastem_camera/`.
+
+O ritmo da câmera foi 26,05/24,20 atualizações/s em duas janelas NTSC de 8 s
+e o selo de pior quadro teve 1759 derrames, `vline_min=2`, em 3000 iterações
+(`184646d8e29241f98e1a65ed06e06d30`), com 24 iniciais por stepping e sem
+HUD/FX/PSG. Ambos reprovam. O controle final da mesma fonte, sem BG nem câmera,
+é `8968b847cdb825ba346ae9a5687838c58a9b17bdf8d2b11e7d0741df4b11d309`;
+o roteiro de ataque em sessão `7e5eb184dfb64c438fbf0f1dfcd7ff0a` observou
+vida 1000→888 e sondas BG zeradas. Suas janelas NTSC foram 26,70/25,69 e
+também reprovam (`b6d9908acf474493971dd77faecb38c2`). O selo dessa build
+registrou 1749 derrames e `vline_min=7` em 3000 iterações, com 25 iniciais
+por stepping (`a590764435e84817a94ef432be9973b3`). Bundles conferidos e
+sessões encerradas. Nenhum ID foi fechado; falta carga representativa,
+coerência entre contato e imagem, deadline e validação da composição inteira.
+Fechamento técnico: 275 testes `rev2` passaram, 150 foram deselecionados;
+marcadores, scroll H/Y, limites de tilemap, documentação, constantes e
+captura de lições passaram. O contrato MUGEN passou apenas como planejamento;
+revisão artística independente e aprovação de entrega não foram executadas.
+O código do lote é `c64a6fe`; a cópia de recuperação local
+`.runtime/backups/luta_mugem_rev2-runtime-20261027-bg-hybrid.tar.gz` tem SHA
+`b75f22cf9027acfa20d64bf8601de4cc4fde293876920a2263432fc882ca3f39`;
+o manifesto correspondente verificou 22537 arquivos. A cópia e o owner ficam
+no mesmo disco, sem nova proteção externa.
+
+## 2026-10-27 — relógio de pacing sequencial
+
+O laço agora mantém quociente e resto incrementais da janela de 150 ticks,
+com reset explícito ao voltar de 65535 a zero. Ele substitui o módulo e a
+divisão de 16 bits executados por tick e a divisão no limite da janela, sem
+alterar os valores das sondas. O teste C compara todos os valores em duas
+voltas completas, inclusive saturação de `probe_b_step`; o assembly SDCC da
+nova candidata não contém as chamadas `__moduint`/`__divuint` antes presentes
+nesse caminho. Isso não prova, por si só, ganho de FPS.
+
+Fonte `08ca9d6d5d6552060cd56a12d977ec2862f42b20f134c1f56d18fdb0fac0028c`.
+ROM default `0ed9ce5a119374509defe53b836630690d01849f6713845be5a4ab586d11bfdd`;
+com antecipação experimental `0e7d293fb52cd1141e96b93b0acb5351d539731db58b3e6ec51d8f03982365f1`.
+Os recibos e fontes por hash estão em `out/candidates/20261027_pacing_*`.
+As folgas do corredor são 1531 B e 1527 B respectivamente, com 143 sondas.
+
+Na ROM default, 226 amostras estáveis em execução por stepping conferiram
+`probe_step` e `probe_b_step` em torno de 150, 300, 38250, 38400 e da volta
+natural observada 65534→0, após 153299 frames VDP; sessão
+`cb71abbda3d44c4a9cabade2d877c50d`, bundle válido e sessão encerrada. O
+primeiro roteiro pulou duas fronteiras por erro de controle do próprio
+instrumento; a falha e seu journal foram preservados em
+`out/evidence/20261027_pacing_wrap_default/`. O roteiro corrigido passou
+self-check e está em `out/evidence/20261027_pacing_wrap_probe.py`; sua
+segunda sessão não prova throughput real nem substitui cobertura de gameplay.
+
+Em Emulicious privado, a ROM default registrou botão reconhecido, vida de P2
+1000→888 e retorno a idle; após nova entrada para a esquerda P1 passou de
+x=135 a x=79 e voltou a idle (sessão `f17dc2ade956428794666f700428e9f3`,
+vídeo e bundle conferidos, sessão encerrada). Com antecipação habilitada,
+outro roteiro observou o mesmo dano (sessão `e4f7a4f7f0a04e0689cd3e734acf2d52`).
+Isso não prova guarda, contato visível ou o ciclo completo de combate.
+
+As janelas NTSC em tempo real para default foram 26,55/25,80 atualizações/s;
+a ROM anterior sem antecipação mediu 26,49/25,23 na comparação próxima.
+Com antecipação a nova ROM mediu 26,07/23,85. Todas reprovam; a diferença
+entre janelas não isola ganho causal. O selo da ROM default
+(`17123eff1be9416cbaeb32647d3785fe`) registrou 1749 derrames e `vline_min=7`
+em 3000 iterações, incluindo 26 iniciais por stepping e sem HUD, FX ou PSG.
+Os bundles dessas sessões foram conferidos e fechados; nenhum orçamento foi
+aprovado, nenhum ID do backlog foi encerrado. A suíte passou 272 testes
+`rev2`; 150 foram deselecionados.
+
+Próximo ramo: um único ator em BG com scroll global e o outro na SAT pode ser
+testado sem duplicar patterns. No META atual isolado, o simulador passou
+self-check e mediu pico 6 por linha para P1 e 8 para P2, sem HUD/FX. Um modelo
+de coordenadas com `LEFTCOLBLANK` comparou 96 variantes e 1056 posições,
+sem diferenças fora da máscara, mas registrou perda na coluna esquerda em
+195 casos (até 422 pixels); é modelo, não prova de VDP, prioridade ou custo.
+Relatórios `out/evidence/20261027_actor_scanline_report.json` e
+`20261027_bg_scroll_model_report.json`. A candidata deve preservar o problema
+de borda como bloqueio explícito e medir atualização de PNT, overlap e prazo;
+nenhuma alteração de viewport ou fidelidade está aprovada.
+
+## 2026-10-27 — residência antecipada de uma pose (candidato)
+
+`LUTA_SPECULATIVE_PREFETCH=1` existe apenas em builds candidatas; o default
+continua zero. O runtime reserva espaço para a próxima entrada da animação
+AIR ativa e só publica a pose completa quando ela é efetivamente pedida.
+Uma requisição real tem prioridade sobre o upload especulativo do outro lado
+e pode recuperar a sua reserva; nenhuma pose residente é desalojada para
+isso. Uma previsão parcial passa a ser urgente quando pedida. Mudança de
+papel, face, hold ou término invalida a previsão quando aplicável. As sondas
+contam reservas, acertos completamente preparados e descartes; acerto parcial
+não é contado como acerto completo. O teste C do cache cobre essas condições,
+o conteúdo copiado e a falta de publicação antecipada; outro testa sequência,
+loop, terminal, hold, frame obsoleto e limites do preditor.
+
+Fonte `520f150abd11c5d5a048f9ac4c94bbca45b44de1eb3f8bc0bd4c2be6ea287ed7`,
+builder `32cba228d133cded5a0fb3cc77459341b0f6a2503d452aee7812a45ac5993096`;
+recibos e snapshots ficam nos próprios destinos isolados. As ROMs de quota 8,
+quota 4 e recurso desligado são, respectivamente, `61efabeed3e6bb75d5ef460b9b2cea648cf66df9ef1c9730e684ca7ef9ea0bb4`,
+`6ee09b24292b511f254b6044814b9e6d16b4d09076260b1cb8e3d88d94050873` e
+`3414a2c959d137977b0fe31de8eabc7b6ac43c4e06380df19fc0a2a7f72f1829`.
+Corredor: 143 sondas, folga 1530 B nas candidatas e 1534 B com recurso
+desligado; gate de marcadores `volatile` passou.
+
+No roteiro Emulicious de aproximação, botão 1 e recuperação, as três ROMs
+registraram vida de P2 1000→888. Em 340 frames VDP por stepping, a quota 8
+com antecipação teve 145 ticks de input e espera de 11/15 ticks por lado,
+contra 158 ticks e espera 54/39 com recurso desligado. A quota 4 teve 155
+ticks e espera 67/63. As trajetórias e contagens de ticks diferem; essa
+comparação não isola causa ou prova responsividade real. Na quota 8, os
+contadores ao final somavam 73/39 acertos completos desde o boot (20/13 a
+mais durante a janela); as três sessões e bundles foram verificados e
+encerrados. Artefatos: `out/evidence/20261027_prefetch_gameplay_{chunk8,chunk4,disabled}/`
+e `20261027_prefetch_gameplay_comparison.json`.
+
+Na ROM `61efabee…`, BlastEm privado/auditado
+`59aa76f50f7c4623a510777926e64e09` amostrou 30 fronteiras: 60 poses
+residentes e 40 uploads pendentes com bytes carregados coincidiram com a ROM;
+39 destes pendentes eram especulativos. Nenhum dos quatro slots vivos se
+sobrepôs nas amostras. A SAT excedeu oito sprites por linha em 14/30
+fronteiras, pico 10. `resident.json` e `sat.json` estão em
+`out/evidence/20261027_prefetch_blastem_chunk8/`; diagnósticos de memória e
+SAT não provam correção de todos os quadros, composição completa ou hardware.
+
+Essa mesma ROM reprovou as duas janelas NTSC em tempo real (25,88/23,49
+atualizações/s; sessão `7abf3815d1454b4192a143e4c8281679`) e o selo de
+VBlank (`vovf_delta=1871`, `vline_min=7`, 3000 iterações; sessão
+`a1c6ae41347b424f8044e79cd91c25b1`). O selo incluiu 23 iterações iniciais
+por stepping e não havia HUD, FX ou PSG representativos. Os bundles foram
+verificados e as sessões fechadas. Antecipação não está aprovada: ainda há
+espera, divergência lógica/apresentação, limite por linha, derrame e falta de
+carga completa. Nenhum dos 55 IDs foi encerrado. Próximo ramo seguro: remover
+o custo de duas divisões de 16 bits por tick no relógio de pacing, preservando
+os limites e a volta de 65535 para zero; medir ROM nova antes de concluir efeito.
+Fechamento: 271 testes `rev2` passaram, 150 foram deselecionados; doc sync,
+constantes de hardware, captura de lição e mudança significativa passaram.
+O contrato de engine passou somente em modo planejamento.
+
+## 2026-10-27 — quota e trilha de uploads (diagnóstico)
+
+Com a geometria da candidata `b5c83830…`, foram buildadas ROMs isoladas que
+mudam apenas `UPLOAD_CHUNK_PAIRS` por lado: 1 (`93c928e1…`), 2 (`e19b3e3e…`)
+e 4 (`a4531e11…`); a baseline usa 8 (`b5c83830…`). Os fontes temporários e
+recibos estão nos diretórios de cada candidato e o fonte principal foi
+restaurado. No mesmo roteiro de 340 frames VDP, os deltas da espera de P1
+foram 167/168, 157/164, 114/161 e 54/158 ticks de input, respectivamente;
+P2 esperou 126, 104, 78 e 39. As leituras não são atômicas por tick e cada
+ROM produziu trajetória/relógio diferente. O botão foi reconhecido nos quatro
+casos, mas só a baseline reduziu a vida de P2 (1000→888). Isso não atribui a
+diferença de dano exclusivamente à fila nem aprova o contato visível.
+
+Os selos de 3000 iterações reprovaram: quota 1, `vovf_delta=21`/mínimo 0;
+quota 2, 2019/7; quota 4, 2787/2; quota 8, 1749/7. As primeiras 25–26
+iterações foram por stepping e não havia HUD/FX/PSG representativos. O menor
+derrame da quota 1 não torna o restante da janela aprovado: a sonda não
+separa os 21 eventos por etapa e a espera visual foi elevada. As sessões e
+bundles estão em `out/evidence/20261027_chunk{1,2,4,8}_gameplay/` e
+`20261027_chunk{1,2,4}_worst/`; a quota 8 está em
+`20261027_ground_push_worst/`.
+
+Para medir a divisão por ator sem sobrescrever fonte principal, o builder
+aceita `toolchain.defines` inteiros apenas em candidato isolado; rejeita nomes
+inválidos, valores fora de 0–65535 e defines em build nominal. As flags entram
+no SDCC de dependências e de compilação e ficam no recibo. Os manifestos
+`upload_trace_chunk{4,8}_20261027.json` ativam um anel diagnóstico de 8
+registros `[frame, pares P1, pares P2]`, publicado após o upload. O anel soma
+trabalho dentro do VBlank: estas ROMs não são prova do budget da ROM normal.
+Os dois bundles Emulicious foram conferidos e fechados. A quota 4 registrou
+161 ticks, com 442/302 pares P1/P2 e 38 ticks com ambos no máximo; a quota 8
+registrou 156 ticks, 406/299 pares e 10 ticks com ambos no máximo. O contador
+envolvente foi auditado em 86 janelas por sessão com limite declarado de até
+um tick em voo mais os frames VDP avançados; a auditoria prova apenas a
+aritmética sob esse limite, não sua autenticidade ou ausência de reset.
+As ROMs e trajetórias distintas não permitem atribuição causal isolada.
+
+Com trace desligado, a build atual isolada gerou ROM
+`ec6fd1758873627738b005c7b077478ed8b0b96a5443d035ef688e78e17c652f`;
+Emulicious privado repetiu o botão e vida 1000→888 na sessão
+`2fd15051d93d4fdfbcbac10631d2ba0e`. Na sessão
+`be858144661644ba967ae54910130832`, duas janelas NTSC registraram
+26,48/25,23 atualizações/s e reprovaram FPS. Os bundles foram conferidos e
+as sessões fechadas. O selo da mesma ROM na sessão
+`b2cacb3854cd4af6b3f443b48c596696` também derramou (`vline_min=7`,
+`vovf_delta=1749`), com 26 iterações iniciais por stepping e sem carga
+representativa; bundle conferido e sessão encerrada.
+O fechamento passou 269 testes rev2 (150 deselecionados), 135 selftests
+(probe opcional de projeto não executado), 75 ferramentas de medição, doc
+sync, hardware, aprendizado, corredor e contrato apenas de planejamento.
+
+O `scale_pilot` anterior, aplicado aos mesmos bancos reproduzidos, calcula
+demanda ideal de pares novos por transição com reuso exato hipotético. Nas
+transições P1-direita, 29/37 excedem 128 B/tick e 9/37 excedem 256; nas
+P2-esquerda, 32/34 e 5/34. Por exemplo, a ação P1 280 pede média mínima de
+192 B/tick na transição 0→1 e 272 na 1→2. O modelo supõe remapeamento e
+pré-carregamento perfeitos; não mede throughput nem os transfers discretos e
+não está implementado na ROM. Seleção/residência de dados precisa ser medida
+sem antecipar a apresentação ou desalojar poses necessárias.
+
+## 2026-10-27 — separação de corpos no chão (candidato)
+
+A baseline `cac3d8fb…` repetiu o achado lateral de L098: sob direita contínua,
+na sessão BlastEm `blastem-sms-52545bf61dfa412197a97519dd36170a`, ambos os
+atores estavam no chão e P1 passou de x=156/P2=162 na fronteira VDP 830 para
+x=168/P2=165 na 840. O runtime anterior afastava apenas 1 px por ator quando
+as hurtboxes se sobrepunham. A extração dos atores usou o layout SDCC do
+linker da ROM, confirmou os probes de posição como referência e passou
+`--self-check`; snapshots podem cair entre estágios de um tick.
+
+O candidato usa as larguras frontais Q8.8 já geradas do pacote: 3072/1536
+(12/6 px), originadas de `ground.front` 18/9 e da escala declarada. Preserva
+a ordem registrada antes do movimento quando ambos estão no chão, calcula a
+separação sem somar coordenadas que transbordariam 16 bits e distribui o
+deslocamento com clamp de borda. Em caso de largura ausente, soma maior que a
+arena ou coordenada inválida, a sonda `probe_push_invalid_geometry` conta o
+caso e a rotina não inventa uma largura. É uma aproximação explícita:
+`Width`/`PlayerPush` de CNS, largura traseira e push aéreo não são executados;
+o caminho aéreo continua sem separação e ainda precisa QA na ROM.
+
+ROM candidata `b5c83830392fae1bc1bc85784101e4126a7b74195a8d67bcc263ee6d6cfbc5b0`,
+corredor 105 sondas/1534 B. No mesmo roteiro, a sessão BlastEm
+`blastem-sms-41bf694c22484c97815398be39fcd7d7` não mostrou travessia nem
+distância inferior a 18 px nas fronteiras amostradas; P2 chegou a x=240 e P1
+a x=222. Emulicious privado `e3f0ab10f3a2471ebba491acd58c15a7` repetiu a
+aproximação com vídeo e probes de RAM, mantendo 18 px nos snapshots
+de 780 a 1020 (o snapshot inicial em 740 tinha distância maior), sem
+geometria inválida. A sessão `de0027fb887f4fd2ab0af64b2f404ceb`
+repetiu botão e vida de P2 1000→888. Bundles conferidos, sessões encerradas.
+As amostras não cobrem todos os frames, input, costas, guarda ou colisão aérea.
+Na revisão manual dos quadros `approach_01/000020.png` e
+`approach_03/000020.png`, os atores se sobrepõem visualmente; a distância
+frontal não resolve a composição nem demonstra que todos os pixels da SAT
+aparecem. Esses quadros não aprovam a apresentação.
+Na sessão BlastEm auditada `blastem-sms-6310327f16904d5b9e470a3e6ec8e137`,
+o mesmo roteiro de ataque teve pico de 9 ou 10 sprites/linha em 8 das 30
+fronteiras amostradas (VDP 895–930); as 12–17 linhas excedentes por fronteira
+reprovam essa composição. A amostra não identifica automaticamente o ator
+afetado nem cobre todas as ações. Artefatos em
+`out/evidence/20261027_ground_push_attack_sat/`.
+
+Em duas janelas NTSC de 8 s, sessão `f02a147e2bb8455baaf7aa3e2b184047`, a
+candidata mediu 26,48/25,24 atualizações/s e reprovou FPS. As janelas do
+candidato anterior foram 23,35/20,63; a trajetória e a carga também mudaram,
+portanto o diferencial não isola o custo da separação. Sem PAL, HUD/FX/PSG
+representativos ou evidência de entrega. O selo de 3000 iterações na sessão
+`2567ca6359824f30b74697b83f951c86` derramou (`vline_min=7`,
+`vovf_delta=1749`), com stepping inicial e a mesma ausência de carga completa;
+bundle conferido e sessão encerrada.
+A suíte rev2 passou 267 testes; 150 do consumidor histórico foram
+deselecionados. O teste C da rotina cobre contato, ordem anterior, bordas,
+ar, geometria inválida e precisão Q8.8, sem inferir fidelidade de jogo.
+
+## 2026-10-27 — relógio sequencial da IA (candidato)
+
+O caminho de input da IA calculava beat/subframe com três operações de
+divisão/módulo de 16 bits por tick. O candidato usa um relógio de dois bytes,
+inicializado no boot e avançado uma vez por frame; o wrap em 65535→0 reinicia
+a fase porque 65536 não é múltiplo do ciclo de 300. A consulta pura original
+permanece disponível para acesso aleatório. Teste C comparou níveis e beats
+dos dois caminhos em todos os 65536 valores, em duas voltas e faces, incluindo
+marcos independentes de direção e botão. A montagem SDCC confirma que as
+três chamadas de divisão continuam apenas na consulta aleatória, fora do
+caminho sequencial da ROM.
+
+O candidato isolado `out/candidates/20261027_ai_clock/`, ROM SHA
+`cac3d8fba8634fb5db7a35f5b4f7799169972c5ce607ad35dc280fbd67878985`, foi
+buildado e o corredor passou (104 sondas, folga 1534 B). Emulicious privado
+repetiu movimento, botão e vida de P2 1000→888 na sessão
+`ae4964c1eaa2454993653e6c02d90d54`, com vídeo e bundle verificado. No mesmo
+host, duas janelas de 8 s da baseline `ad0e148c…` mediram 22,88/19,82
+atualizações/s (sessão `1ea97d1e5fd94b2db742a409f05ea1f8`); o candidato
+mediu 23,35/20,63 (sessão `4b344cbd25ed4dbfb78e514df72eea14`). São amostras
+curtas em atração, não prova de ganho geral ou de FPS constante; ambas
+reprovaram. O selo do candidato, sessão `c939eb2e8a844cb1bc2b90b733af27a8`,
+também derramou em 3000 iterações (`vline_min=7`, `vovf_delta=1749`), com
+21 iterações iniciais por stepping e sem HUD/FX/PSG representativos. As sessões
+foram fechadas. A suíte rev2 passou 266 testes, com 150 deselecionados.
+
+Em outra sessão BlastEm da baseline `ad0e148c…`,
+`blastem-sms-bb9133dc24964708a94c8795ea33467a`, capturas a cada fronteira VDP
+no roteiro de ataque mostraram, na fronteira 899, as poses desejadas e
+submetidas iguais; na 900 a vida de P2 já era 888. Há outras fronteiras com
+pose desejada diferente da submetida, mas essa amostra não determina a pose
+no instante exato do contato. Os dois watchpoints de escrita de life/hit não
+registraram eventos apesar de os dumps mostrarem a mudança; não usar essa
+rota como prova do instante ou da instrução. Bundle auditado e processos
+encerrados em `out/evidence/20261027_attack_watch/`.
+
+Nenhum ID foi encerrado. Continuam prioritários composição ≤8 por linha,
+deadline real, identidade AIR apresentada e coerência de contato; o cursor da
+IA não decide esses problemas nem aprova o slice completo.
+
+## 2026-10-27 — faces e alias de bancos (em desenvolvimento)
+
+Após o checkpoint `56834d8`, a ROM sem padding de potência de dois
+`5e79efa2c995f3dce23bc758e8478a367e6e498d7178b0808ce84f69a0fe3196`
+recebeu seleção de face por cache. Em Emulicious privado, segurar direita
+cruzou os atores: na sessão `dca7b42423e54488a76d484bd78b2d02`, os probes
+de face lógica, residente e submetida convergiram para `[1, 0]` no VDP 920.
+O emissor C usa os metadados e a origem da face residente; teste host cobre
+quatro combinações de ator/face, troca durante upload, retorno e fronteira de
+banco. Esses probes não autenticam a apresentação na SAT física nem o contato.
+
+Diagnóstico de mapper, com fonte e sequência idênticas: `5e79efa…` tem
+458752 B (28 bancos); `ad0e148c3b1f12a2981f17b02a8d9fa9f42642137e734d9bb9bcc0422e6a3eea`
+tem 524288 B (32 bancos) com `makesms -pp`. Os primeiros 458752 B são
+idênticos. No BlastEm privado, o mesmo roteiro capturou sete fronteiras: na
+ROM menor, 9 de 14 spans residentes divergiram; os payloads divergentes
+correspondiam ao mesmo offset quatro bancos antes. Na ROM preenchida, 14 de 14
+spans coincidiram com os bytes esperados, sem sobreposição dos quatro slots
+nessas fronteiras. Sessões `blastem-sms-cc1bc86deb08442c876b6fc57e2cf17c` e
+`blastem-sms-c646913e95f84f7194ad9c57bee59b45` passaram o auditor de bundle e
+foram limpas. O problema também ocorreu na ROM pré-agrupamento `9654406b…`,
+portanto não foi introduzido pelo lote de 192 B. É evidência de alias no
+BlastEm para estas imagens; não é aprovação de mapper físico ou de todas as
+ações. Os extratores diagnósticos foram reexecutados após `--self-check`, em
+`out/evidence/20261027_blastem_facing/` e `20261027_blastem_power2/`.
+O mesmo mecanismo já tinha sido identificado em 20/10 para uma ROM de 52
+bancos, com L139 proposta e evidências em
+`out/evidence/loteB2b_20261019/b2b3_blastem_bankmask/`; o lote atual
+revalidou o efeito na imagem de 28 bancos e formalizou a lição autorizada.
+
+O manifesto nominal agora seleciona o corte `pose_budget_facing_20261027` de
+24 bancos, coerente com o GDD, e solicita `-pp`; a ROM nominal histórica foi
+mantida intacta. A seleção anterior de 49 bancos foi buildada isoladamente
+como `b3dfaa131fc7779f575777c2141e9d5b81c0c87009abaf433143bc3feb189dcc`;
+a sessão `e0614c0bcc114d0c90b78b7d670af006` mostrou P2 fragmentado. Seu header
+antigo usa P2-direita e não declara o novo contrato P1-direita/P2-esquerda; o
+runtime atual recusou esse header no pré-processamento SDCC de um candidato
+isolado, sem publicar recibo. Não editar gerados para
+contornar a recusa. O wrapper aceita uma única política `-pm` ou `-pp` e
+rejeita saída não potência de dois quando `-pp` é solicitado, antes do recibo
+candidato. O header de tamanho do cartucho e o hardware real ainda não foram
+qualificados por este experimento.
+
+O corte nominal foi gerado de novo pelo `versus_scene_cut` a partir dos ZIPs
+e configurações `ryu_pose_budget.json`/`ken_pose_budget.json`; o pacote
+anterior e o regenerado têm os mesmos bancos SHA `ec22ad12…` e o mesmo
+`fight_runtime_data.h` SHA `7caabed2…`. O header novo SHA `b63069e7…` difere
+apenas no define de contrato. A build candidata do manifesto atual em
+`out/candidates/20261027_default_facing_power2/` é byte a byte igual à ROM
+`ad0e148c…`; o recibo registra os insumos atuais. Restaurar esse diretório
+gerado pelo comando no handoff, sem sobrescrever um diretório já existente.
+Após essa build, as sessões privadas `2356fa5f361a40e5a6c4cd767d839a4e`
+(travessia) e `40373da4946f47dcbb1e7b1f58ab64d7` (botão e vida) repetiram os
+casos com bundles verificados e cleanup. O selo e as janelas registrados abaixo
+pertencem à cópia anterior da mesma ROM, não são um selo fresco para o novo
+caminho de build. O BlastEm `blastem-sms-bb0c5d18f66749c89039c5e6a9863ea9`
+repetiu 14/14 spans residentes corretos em sete fronteiras na build nominal;
+`measure_vram_map.py` cruzou o plano e os registradores dessas fronteiras e
+passou para pool `0x0000..0x1FFF`, tile de fundo `0x2000`, PNT e SAT. O
+plano não prova que outras ações ou cargas não corrompem VRAM.
+
+O comentário de instrumentação foi corrigido depois daquela build; a candidata
+`out/candidates/20261027_integrated_current/` vincula o fonte atual SHA
+`68f8b9546554037c72df14c630d4a022a39684b09dc9d9b9142daa7ed58c7802` e
+produziu novamente a ROM idêntica `ad0e148c…`. Após ela, as sessões privadas
+`429c1288cf364e4e943571ec37d2dbc4` (ataque e vida) e
+`8be80e10f8f64ce5a974502b42e7b1f6` (travessia e orientação) registraram
+vídeos e probes, com bundles verificados e sessões encerradas. O estado de
+build permanece candidato; ainda não há sete eixos ou qualidade de entrega.
+Na mesma ROM, `blastem-sms-9b744eb07d6c4bef8668b4307153caf5` registrou 30
+fronteiras durante aproximação, botão 1 e recovery. A leitura da SAT pelo
+simulador de scanline encontrou 13 fronteiras de VDP 900 a 960 com pico 9 ou
+10 e 27–32 linhas acima de 8; o bundle foi auditado e os processos fechados.
+Esse roteiro já reprova a composição observada, mas não cobre todas as ações,
+não identifica automaticamente o ator omitido e não prova ausência de
+glitches nos intervalos. Artefatos em `out/evidence/20261027_attack_sat/`.
+
+Uma segunda regeneração com o gerador atual preservou byte a byte os 24
+bancos e os headers; o manifesto é idêntico após normalizar o caminho de
+saída. A candidata `out/candidates/20261027_integrated_final/` usou o builder
+SHA `32fbfe14…`, vinculou o mesmo fonte e produziu a mesma ROM `ad0e148c…`.
+Depois da build, Emulicious privado repetiu o golpe (sessão
+`ea1c3a68547f4a4995695fb6e6f60c28`, vida P2 1000→888) e a travessia
+(`3d3f42be0ec64ad68ae3905a7be101cd`, faces convergentes). Ambos os bundles
+foram conferidos e as sessões encerradas; os vídeos são por stepping e não
+medem FPS. A suíte rev2 passou 265 testes; 150 do consumidor histórico foram
+deselecionados, não aprovados.
+
+Na ROM `ad0e148c…`, Emulicious sessão `9a601005deb94504bf73e837035ae0f5`
+repetiu a travessia e convergência das faces, com vídeo; a sessão
+`fca78a6192914797a047d3d6574a623b` repetiu botão 1 com vida de P2 1000→888.
+As sessões foram fechadas e bundles conferidos. Em duas janelas NTSC de 8 s,
+sessão `a4a4cc7739714eca9b67968b16f76de0`, a mesma ROM mediu 22,87/19,88
+atualizações/s e reprovou a meta. A carga não inclui HUD/FX/PSG, o stepping
+não mede throughput e não há prova de guarda, timing do contato, áudio ou
+limite de scanline nessas sessões. Na sessão `dca463d5ea5549239855584d4c3f67a5`, o selo de
+3000 iterações também derramou (`vline_min=7`, `vovf_delta=1749`); 21
+iterações ocorreram no stepping de boot e a carga não é representativa. R04,
+R05, R06, R09 e R13 permanecem abertos.
+
+## 2026-10-27 — identidade, fundo e cancelamento de pose (em desenvolvimento)
+
+Nenhum dos 55 IDs foi encerrado. A ROM nominal e o recibo históricos foram
+preservados: `out/rom/luta_mugem_rev2.sms` SHA
+`087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65`;
+`out/build_record.json` ainda aponta para `e697e906…` e outro host. Isso mantém
+ID01 aberto, mesmo com recibos de candidatos agora identificados. O rebuild do
+checkout original, em `out/candidates/20261027_host_baseline/`, SHA
+`06e575f1fa632e0742e594ea9db77b7ddd8dde44a397d782afbdc44f3b664e97`, passou
+`verify_canonical.py`: payload idêntico, diferenças apenas em `0x7FE6`/`0x7FFA`
+(data SDSC e checksum). A fonte anterior `042ba22e…` continua no Git.
+
+O build central aceita `--build-dir` em `out/candidates/` e, somente com esse
+destino, `--manifest` alternativo dentro do projeto. Não sobrescreve ROM,
+recibo ou changelog nominais. A saída só recebe recibo após compile/link,
+pre-gates e comparação das entradas; inclui SHA do ROM, fontes/headers efetivos,
+banco de patterns, manifestos e componentes SDCC. A comparação de hashes em
+duas leituras não é snapshot transacional. O candidato recusa `link_extra` e
+opções makesms ainda sem custódia. Os includes de dados são selecionados pelo
+manifesto, sem trocar o núcleo ou editar os headers gerados. O corte diagnóstico
+`out/candidate_configs/pose_budget_pair_20261027.json` referencia o pacote
+existente `pose_budget_pair_20261023` e sua imagem de 24 bancos; headers e banco
+foram conferidos contra o manifesto gerado. Os insumos desse pacote estão no
+asset de continuidade de 24/10 (manifesto `.runtime/downloads/`),
+enquanto os novos candidatos e mídias permanecem locais em `out/`.
+A receita idêntica foi preservada no Git em
+`.mddev/candidates/pose_budget_pair_20261027.json` (SHA `5236f208…`); ela é
+diagnóstica e não substitui o manifesto nominal nem aprova entrega.
+
+R01: Emulicious privado reproduziu fundo estampado e P2 fragmentado na ROM
+nominal, sessão `862959770d5344118789bb1c96910d98`, frame VDP 740. O código
+preenchia a PNT com o tile 255 (`0x1FE0`), dentro do pool de sprites
+`0x0000..0x1FFF`. O candidato `de2c51937a30f69a68610ecff7117b768f4a5094d0262cc745d861fa6185ac16`
+aponta a PNT para o tile 256 zerado em `0x2000`; na sessão
+`db31cb784774414b84d4988436ca9679`, o fundo ficou preto no quadro equivalente
+e nas 80 linhas superiores dos 52 frames registrados durante direita/botão;
+P1 foi de x=73 para x=91. Os bundles privados passaram `check-bundle` e as
+sessões foram encerradas. O diagnóstico complementar BlastEm da ROM `d8de0ad…`,
+sessão `blastem-sms-f7aed4ca5c7a4aa68193a13b029d77bd`, verificou em cinco
+fronteiras VDP (600, 630, 720, 820 e 940) a PNT em `0x3800` com 768 entradas
+`0x0100`, tile 256 zerado em `0x2000` e SAT em `0x3F00`. O bundle passou
+`audit_blastem_sms.py --require-current-tool`, com limpeza confirmada; roteiro,
+dumps e extração ficam em `out/evidence/20261027_blastem_vram_candidate/`.
+São cinco estados de uma sequência, não prova de todas as ações/telas, ausência
+de sobrescrita entre fronteiras ou correção de qualquer outra ROM; R01 continua
+aberto.
+
+O corte de 24 bancos sem gate de papéis, SHA
+`a11811f47ae51676b448b07a09e343152f1916c9b3ccfdae2449548ebf3db046`, mostrou
+ambos os atores na sessão `5d629c1598a14306b9bbfb0098389dfe`. Em 82 frames VDP
+de direita/botão/neutro, P1 avançou x=84→114, mas `cmd_hits_p1` permaneceu 0
+e ambas as vidas em 1000: não se provou ataque nem interação completa. No
+frame VDP 740, P2 pedia pose 69 com 54 residente; `present`/SAT não provam
+integridade visual em todos os quadros. Os dez pares históricos do corte
+excedendo 8 sprites/linha continuam dívidas de R02/R03, não foram bloqueados
+no candidato atual. O selo da sessão `d6599d1cb00b4d248d14f44ba3691b18`
+registrou `derramou`, `vline_min=2`, `vovf_delta=1770`, `done=1`; as primeiras
+20 iterações já ocorreram no boot por stepping da ponte, antes do runner de
+180 s, e a carga não inclui HUD/FX/PSG. Não é janela representativa de entrega.
+
+R05/R06: o pedido para voltar à pose já residente deixava outra pose pendente
+ser promovida. O teste C compilou as funções reais e primeiro falhou; a correção
+cancela a geração abandonada sem desalojar o oponente e atualiza o `Frame`
+associado quando o bitmap é reutilizado. Em sessão privada com pose 0 residente,
+direita e soltura antes do upload terminar, a ROM antiga `a118…` manteve pose 6
+pendente e a promoveu no VDP 821 enquanto a sonda de desejo indicava 0; a ROM
+corrigida `9654406b9891d562acc4f10c099911d7d2f28c229f02a426861f057b62dba0f0`
+cancelou a pendência no VDP 820 e incrementou `superseded`. Sessões
+`eca1fc566c1d4cfbb5d259e86061c185` e `2a06433a37d34219988c84565712abdc`,
+encerradas; traces e journals em `out/evidence/20261027_pose_cancel_case/`.
+Endereços de current/pending foram derivados dos `.rel`/`.sym` e conferidos
+contra o `.map` de cada ROM; leituras em fronteiras VDP podem interromper o
+loop e não são timestamps exatos de apresentação. Isso não prova contato
+visível, deadlines nem inexistência de starvation; R05 e R06 seguem abertos.
+
+O modelo `mugen2sms/runtime/commit_budget.py` preserva o default histórico
+v033 identificado no relatório e oferece `rev2_b2_cancel_v1` explícito:
+8 pares por lado, sem evictar oponente e com cancelamento. É modelo de fila,
+não medição VBlank ou garantia de imagem. Commit local anterior à experiência
+de agrupamento: `ca921dd` (código e testes); sem promoção de capacidade.
+
+Experiência de upload: `SMS_VRAMmemcpy_brief` aceita tamanho em byte; agrupar
+até três pares contíguos por chamada mantém o tamanho em 192 B ou menos. O
+teste C comparou endereços, bytes, budget e promoção apenas após completar a
+pose. O gerador prevê cada pose completa dentro de um banco de 16 KiB; a
+validação exaustiva dos descritores reais e bancos-limite permanece pendente.
+A ROM agrupada
+`635fc1d1dc97411de44fccf02e2079ee009dadc61df0f0f88905ae5b520fca23`
+repetiu o cancelamento observado na sessão `6f24a1b31b4144b29454ebab73738c34`.
+Comparação diagnóstica da mesma cena e limites de 8 pares por lado: antes
+`9654406b…`, sessão `60e7d6612c854f9c9b56ea82dfb0ae3e`, `vline_min=2`,
+`vovf_delta=1750`; agrupada `635fc1d1…`, sessão
+`69560ad3ba4b47e298e250f1f521b624`, `vline_min=13`, `vovf_delta=1720`.
+Ambas selaram 3000 iterações e derramaram. O runner de 180 s começou após 20
+e 23 iterações já executadas em stepping, respectivamente; a cena não inclui
+HUD, FX ou áudio. A diferença observada não é budget aprovado nem demonstra
+melhoria universal de fluidez. Snapshots das fontes exatas e recibos estão nos
+respectivos diretórios candidatos; a versão anterior consta no commit `ca921dd`.
+
+O contrato de escala agora declara `pose_budget` com os fatores do GDD e seu
+SHA, sem reapresentar 72–88 px como alvo deste projeto. O self-check do auditor
+testa GDD divergente e contratos inválidos; `contract_pass` continua apenas
+planejamento. A entrega ainda exige composição, contato visível, prazo e carga
+completa na mesma ROM, revisão independente e os sete eixos.
+
+Na ROM `635fc1d1…`, sessão privada `839665d33f694c8cb31ee161dbec68d9`, P1
+andou de x=84 a 139, segurou o botão 1 e soltou; `cmd_hits_p1` aumentou de 0
+para 1 e a vida de P2 caiu de 1000 para 888. O vídeo nativo da sequência e o
+journal estão em `out/evidence/20261027_batched_gameplay/`. O caso demonstra
+entrada reconhecida e consequência nessa configuração, não equivalência CNS,
+guarda, sincronização do contato, áudio ou interação vertical completa. A
+sonda SMRT em duas janelas NTSC de 8 s, sessão
+`b8474880e1f74ab3bd5a536cb0518d29`, mediu 23,38 e 21,02 atualizações/s,
+reprovando 60 e a dispersão; esta cena não tem HUD/FX/PSG representativos.
+
+S04: `advance_actor` entregava o elemento seguinte no tick que encerrava o
+atual, encurtando sua primeira exposição lógica e pulando duração 1. O teste
+C extrai e compila a função real, cobre sequência finita `[1,2,1]`, loop e
+hitstop na fronteira; falhou antes e passou após a correção. A ROM candidata
+`d8de0ad026b8c8a6dd7219e2b669a2fb68b56aad3170fae04f5b69c8a2f5ef00` foi
+buildada; sua QA e medição são registradas separadamente. A prova completa
+exige identidade AIR de fonte e ROM em N+1 fronteiras e terminal, além de
+framebuffer; o teste host não paga isso. O gerador ainda normaliza duração 0
+para 1 e o runtime trata hold terminal como `done`: não anunciar semântica
+AIR geral ou equivalência para esses casos.
+
+Na mesma ROM `d8de0ad…`, a sequência privada
+`66ef673349d741ae8914a08064cc0dcd` registrou P1 x=84→140, uma entrada de
+ataque reconhecida e vida de P2 1000→888; o vídeo por stepping não prova
+throughput, guarda, áudio nem contato coerente. Duas janelas SMRT NTSC de 8 s
+na sessão `e2103900f5bb47c3b1b8e1c8733ded31` mediram 23,50 e 20,64
+atualizações/s e reprovaram a meta regional. O selo de 3000 iterações da sessão
+`c6853d4cb3be434493689e2186cb8b49` teve `vline_min=13`, `vovf_delta=1719`:
+as primeiras 21 iterações ocorreram no stepping de boot, sem HUD/FX/PSG.
+
+Outra falha de cache foi reproduzida com as funções C reais: o contador de
+época de 8 bits podia voltar ao valor de uma falha após 256 alterações do
+pool, impedindo uma alocação que agora cabia. A implementação passou a invalidar
+explicitamente a memória de falha dos dois lados a cada alteração; o teste
+cobre o wrap, a repetição com pool inalterado e o cancelamento sem evictar o
+oponente. A ROM `20d0c6e0efdfaeffcc9ad11b0cfe729d8edf3c02df8215998e62411c8f222f99`
+repetiu a entrada e a consequência observadas em sessão privada
+`98bb1673d29c4dad9d1c1ec428355e87`, com bundle verificado e sessão encerrada.
+O caso de 256 mudanças foi exercitado no host C, ainda não como stress em ROM;
+essa reprodução não encerra R05 nem aprova prazo, starvation ou composição.
+O selo da mesma ROM, sessão `18ec08cf536842d6b9e13bb38273ed51`, apresentou
+`vline_min=13`, `vovf_delta=1719` em 3000 iterações; as primeiras 21 foram
+executadas durante o stepping de boot e a carga exclui HUD/FX/PSG. Também
+reprovou e não é janela representativa de entrega.
+Os 93 descritores do mesmo corte foram conferidos nas duas orientações contra
+os bancos gerados e os bytes da ROM: 186 trechos respeitam as fronteiras de
+16 KiB; a menor folga ao fim do banco é zero. Script e resultado em
+`out/evidence/20261027_facing_bank_audit/`. É comparação estática de bytes,
+não prova de seleção, imagem, mapper em execução ou orientação correta.
+
+Hipótese descartada: remover as divisões de 16 bits usadas apenas pelos probes
+de passo. O substituto foi comparado ao quociente/resto de referência por duas
+voltas completas de `frame` em teste C, e seu assembly não tinha mais as
+chamadas `__moduint`/`__divuint`. Na atração, janelas NTSC de 8 s da ROM
+`20d0c6e0…` mediram 23,48/20,64 atualizações/s (sessão
+`a5dd0b9985c749939b8f6f3b8790f405`), contra 23,38/21,25 da ROM experimental
+`c06c08749cb1db357349281b37a8eea6f574379bf781becb856d24b70925ac8b`
+(sessão `7bd86237e556496a9613f4e5771fe1d2`). Sem ganho demonstrável, o
+experimento foi revertido no fonte; candidato, fonte e bundles permanecem em
+`out/` como diagnóstico, não como aprovação de FPS ou medição sob carga completa.
+
+A suíte `mugen2sms/tests --project rev2` primeiro não coletou três módulos por
+f-strings incompatíveis com Python 3.11 em `inventory.py`; corrigida a sintaxe,
+uma segunda execução acusou a API Pillow ausente no teste de transparência.
+Após compatibilizar o teste com o Pillow instalado, a suíte passou: 260 testes,
+150 deselecionados por escopo. A deseleção não valida o consumidor legado nem
+o comportamento da ROM. Os 28 testes focados do lote também passaram, assim
+como 135/135 selftests centrais; o probe opcional de build do selftest não foi
+executado (a build candidata tem recibo próprio). As 75 ferramentas de medição,
+doc sync, hardware e corredor de sondas passaram. O audit de aprendizado primeiro
+acusou nove rotas stale após a edição do workflow BlastEm; os vínculos correntes
+foram atualizados e o audit passou, sem alterar artefatos históricos.
+
+## 2026-10-24 — continuidade sem o disco do host anterior
+
+Pedido humano: preservar diagnóstico e trabalho pendente, preparar bootstrap
+de host limpo, commit/PR e cópias recuperáveis. Isto altera infraestrutura e
+documentação; não implementa os 55 itens abertos nem promove a engine.
+
+Ponto de entrada: `doc/continuity/20261024-start-here.md` na raiz do workspace;
+handoff do agente: `doc/continuity/20261024-next-agent.md`. O diagnóstico,
+backlog e prompt estão em `doc/curation/2026-10-24_*`. Ler os registros de
+validação da migração antes de afirmar que o ambiente novo está qualificado.
+
+Bootstrap Ubuntu 24.04 x86_64/WSL2: Python em `.venv`, SDK reconstruído com
+SDCC nativo >=4.2, emulador/licença e arquivos de runtime por SHA. Estado em
+`.runtime`, sem dependência de `/home/misael` ou instalação pip global.
+Preservar baselines 087df676 e 698e58ed; builds em host/toolchain novos exigem
+nova evidência. A restauração inicial não reaplica snapshot sobre desenvolvimento.
+
+Branch de continuidade: `codex/host-bootstrap-continuity-20261024`; release de
+assets: `continuity-20261024`, no repositório `Misael-art/sms-forge`. A Page
+privada de recuperação e os manifestos são apontados no guia. Credenciais e
+configurações pessoais não fazem parte da migração. O EIO do `luta_mugen`
+legado não foi reparado; o Git conserva suas versões já commitadas.
+
+Próximo lote: identidade da build/documentos + R01/R02/R03/R05/R06/R09,
+apresentação completa, streaming com prazo e orçamento VBlank. Não tratar
+restauração, build ou dois idles completos como conclusão de gameplay/AAA.
+
 ## 2026-10-15b — M0 fechamento do esqueleto + wave-1 (t2 concluído)
 Esqueleto do bootstrap compilado pelo build central com toolchain portável
 (`sdk/sdcc-portable/bin` no PATH; sdcc 4.6.0 ausente do PATH do host).
@@ -619,3 +1946,131 @@ Fontes: `doc/27-continuidade-reinstalacao-2026-10-21.md`; `doc/continuity/` (ass
 - **Assets**: `luta_mugem_rev2_full_20261021.tar.zst` (projeto completo, incl. `out/`), `loteB2_20261021.tar.zst` (custódia temp), `sdk_20261021.tar.zst`, `emulators_20261021.tar.zst`, `qa_toolchain_20261021.tar.zst` (bridge/BlastEm), `workspace_out_20261021.tar.zst` e `workspace_untracked_nonout_20261021.tar.zst`; hashes em `doc/continuity/RELEASE_ASSETS.sha256`.
 - **Limite**: a validação é build/reprodutibilidade, não emulador. Os eixos `boot_emulador`, `gameplay`, `fps_constante`, `audio` e `memory_bank_atualizado` continuam abertos; render/SAT/§129 do SHA novo exigem medição viva. Nenhum delivery.
 - **Próximo**: v044 com lista 5/3 pré-computada, seleção espacial contígua, selo 300 s + SAT/linha/§129/vídeo; aprovação humana da política 5/3 (e das demais pendências: híbrido/FX, 1 MB, guarda BlastEm+L139, doc/15, manifest/contrato, CRAM, D2/G, `vram_plan.py`). O irmão `luta_mugen` segue com EIO pré-existente e intocado; seu `out/` não está nesta release.
+
+## 2026-10-22 — encaixe de tamanho CPS2 para o Master System
+
+O motor `mugen2sms.converters.display_fit` exige, na definição do projeto, o framebuffer de origem. O alvo default é `sms` (256×192). CPS2 e CPS1 são 384×224, então o default aplica largura 2/3 e altura 6/7. Game Gear (160×144, 5/12 por 9/14) é alvo nomeado. Origem ou alvo desconhecido é recusado. Origem igual ao alvo fica identidade 1/1. Os modos `fighter_scale` e `legacy_quarter` continuam disponíveis e este comando não reescreve pixel por eles. `off` também não reescreve. Grupo 9000 fica de fora. Um marcador impede a segunda passada (exit 2). Tempos, flips e blend permanecem. Índice 0 continua transparente. `SMS_GLOBAL.md` não foi editado.
+
+Perfil: `doc/display_profile.json`, source `cps2`, target `sms`, Ken e Ryu. Saída: `out/display_fit/sms_default/`. ZIPs de origem conferidos de novo e iguais ao SHA do intake (`b244ec9a…` e `6db7e29d…`). Marcador dos dois: `display_fit: source=cps2 target=sms x=2/3 y=6/7`, SHA-256 `40bf9c9d70b4d2b9dda0db67c057cbd1f33250877c9c62cdf8f1015eff464fac`. Resumo `summary.json` SHA-256 `45f9b05829412a1843102701fa554f545d8a1f4c602e9ea40974e0412daeb9c2`.
+
+| Lutador | Sprites | Ajustados | Isentos | Quadros | Antes | Ajustado | Retrato | Slots de pixel |
+|---|---:|---:|---:|---:|---|---|---|---|
+| Ken | 201 | 199 | 2 | 411 | 135×140 | 96×112 | 120×140 | 1245763 → 786709 |
+| Ryu | 525 | 523 | 2 | 1309 | 232×240 | 160×208 | 120×140 | 3428516 → 2150181 |
+
+Durações preservadas nos dois. Retratos medidos no SFF: 25×25 e 120×140. O teto inclusivo do Ken continua 120×140 por causa do retrato. Ação 0, primeiro quadro: Ken `g0_0` 48×80, tempo 6, offset (2, 0); Ryu `g0_1` 48×80, tempo 5, offset (2, 0). A folha do Ken está em modo P e o canto é o índice 0. 80 px cai na banda histórica de 72–88. O `scale_pilot` não rodou.
+
+Colunas de 8 px nos sprites ajustados: Ken chega a 12 e tem 29 acima de 8; Ryu chega a 20 e tem 118 acima de 8. Um idle isolado ocupa 6 colunas. Essa contagem não é aprovação de `audit_sprite_line_sim`.
+
+Testes do host: `test_display_fit.py`, `test_sms_scale.py` e `test_cli_sms.py`, 23 passed. A ROM `out/rom/luta_mugem_rev2.sms` permanece com 851968 bytes e data 2026-10-20. Este lote não a recompilou e não a abriu no emulador. Nenhum claim de 60 fps, áudio ou entrega visual.
+
+Estudo de 2026-10-22, sem mudar o motor: pose = ação AIR do corpo, quadro mais largo; FX e grupo 9000 fora. A pose de 12 colunas é a ação 440 (chute baixo), `g440_1`, 96×48, nos dois. Porta de 70% das ações já em ≤8 colunas: Ken 71/100 abre; Ryu 107/154 (69,48%) não abre, falta 1 ação. Se a pose mais larga virasse a referência uniforme 2/3, o parado 48×80 (6 colunas) cairia para 32×53 (4) e o chute 96×48 para 64×32 (8). Prancha: `out/display_fit/sms_default/estudo_corpo_8/ken_ryu_corpo_8.png`. JSON: `estudo_corpo_8/resultado.json`.
+
+## 2026-10-23 — pose_budget vira o default e o piloto compila
+
+A condição aceita está em `doc/28-pose-budget-8.md` e no primeiro parágrafo de `doc/11-gdd.md`. O default de `mugen2sms.converters.display_fit` passou a `pose_budget`: primeiro o encaixe CPS2→SMS (2/3 por 6/7), depois a referência do corpo. Porta `open` em 70% e `near` entre 69% e 70%. Abaixo de 69% a escala extra não entra. `framebuffer`, `fighter_scale` e `legacy_quarter` continuam opções. `SMS_GLOBAL.md` não foi editado e nenhum id de lição foi alocado.
+
+Perfil: `doc/display_profile.json`. Saída da arte: `out/display_fit/pose_budget_8/`. Resumo SHA-256 `4ca2b8d76373297018b79bcc7e69e54ea9e88fcbd6ff4295b8b806cb9db4f4e4`. Segunda passada no mesmo diretório: exit 2.
+
+| Lutador | Porta | Ações do corpo em ≤8 | Extra | Caso a caso | Corpo acima de 8 depois | Marcador |
+|---|---|---:|---|---:|---:|---|
+| Ken | open | 71/100 (0,71) | 2/3 | 29 | 0 | `7fba0349e33853efb81f0ed7fb1f967c9055cbe5ab1e7bad1bebc59f1b878244` |
+| Ryu | near | 107/154 (0,6948) | 2/3 | 47 | 0 | `0ded20292cd3bc8525fa58de0f055485d8df936c9ab69e0e3fe4a4195ba80cf8` |
+
+A referência dos dois é a ação 440, 96×48 depois do framebuffer. Célula do chute `g440_1` na arte nova: 64×32, 8 colunas. Primeiro quadro do idle: 32×56, 4 colunas; o quadro mais alto do grupo 0 fica 32×64. Slots de pixel: Ken 1245763 → 402707; Ryu 3428516 → 1086817. Onze FX do Ryu seguem acima de 8 colunas (teto `g8400` 112×24, 14 colunas) e não estão nos papéis do piloto. Retratos do grupo 9000 continuam 120×140. Durações preservadas.
+
+O corte usa os mesmos 12 papéis e o mesmo pareamento histórico: P1 `ryu.zip`, P2 `Ken_Majik_.zip`. Os diretórios continuam `p1_ken` e `p2_ryu`. A ação 440 não é papel de runtime. Contagem de quadros e durações AIR iguais às da ROM anterior: 48 poses no Ryu e 45 no Ken. Na escala 40/49 havia 9 quadros acima de 8 colunas em cada um (teto 12 no Ryu, 13 no Ken). Neste corte o Ryu chega a 6 e o Ken a 8, no KO 64×32. Banks: 49 → 24. Imagem `versus_scene_banks_02.bin`: 802816 B (`3af7a307…`) → 393216 B (`468427efd8850a6323c7e4b99e216dea565e7e28e8f5fe23a6167edffe9bcba6`).
+
+| ROM | Bytes | SHA-256 | Banks |
+|---|---:|---|---:|
+| `out/rom/luta_mugem_rev2.sms` (2026-10-20, intacta) | 851968 | `087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65` | 49 |
+| `out/rom/pose_budget_20261023.sms` | 458752 | `9008505cb82232e42d1b57d3ecb852af70f566625995cfd3cb5b526b277b1eba` | 24 |
+
+Header anterior `19edb320…`. Header novo `3be5a775c1b0779af60a894f7a0f6970a4f3d85e248314b74b4b40c9a1678955`. Comparação: `out/logs/pose_budget_20261023_compare.json`. O `src/main.c` e o `.mddev/project.json` vivos não foram editados; o link dos 24 banks foi feito numa cópia temporária. Testes `test_display_fit.py`, `test_sms_scale.py`, `test_scene_cut_scale_order.py` e `test_cli_sms.py`: 32 passed. O Emulicious abriu a ROM nova e a captura da janela saiu preta, então o status é `buildado`. Sem boot aceito, sem FPS, sem áudio e sem entrega visual.
+
+Pacote de espera do curador, sem ID novo: `doc/curation/2026-10-23_pose_budget_aguardando_curador.md` e o JSON de mesmo nome, na raiz do SMSForge. Doze pontos PB-01–PB-12. Não entra no ledger nem em `SMS_GLOBAL.md`. O curador precisa reler `L083`, `L086`, `L088`, `L090` e `L091` antes de emitir lição. `issued_through` lido nesta data: `L138`.
+
+O dono aprovou `pose_budget` como padrão do motor no mesmo dia. O diagnóstico de glitch ficou em `doc/28-pose-budget-8.md`. A paleta de 7 cores deixava o preto opaco de fora (8ª cor nos dois; 34/39 quadros de papel do Ken e 13/40 do Ryu perdiam contraste). `scene_cut._palette_codebook` reserva a cor mais escura e a mais clara. `_write_png` grava transparência no índice 0. Buracos novos da amostragem (26 pixels no Ken, 44 no Ryu) não foram preenchidos.
+
+ROM da paleta reservada: `out/rom/palette_reserve_20261023.sms`, 458752 bytes, SHA-256 `f9ef0e27eef5e29d530b0fa4e5c8325bd8df84a1ab6e7d93e77873f40a2b76cb`, 24 banks, corte `out/generated/palette_reserve_20261023/`. Paleta na ROM: branco `3F` e preto opaco no slot visível de cada lado. A piloto `9008505c…` e a produção `087df676…` ficam nos caminhos antigos. `src/main.c` e `.mddev/project.json` vivos seguem em `ryu_ken_cross`. Log: `out/logs/palette_reserve_20261023_build.txt`. Comparação: `out/logs/palette_reserve_20261023_compare.json`. Status `buildado`. Sem captura de emulador, sem FPS e sem entrega visual. Sem ID de lição.
+
+O dono reportou que essa paleta perdeu acuidade e ficou mais escura. Medição nas paletas `ken1` e `ryu02`: média 110,2 no Ken e 137,5 no Ryu, contra 115,9 e 142,3 nas sete cores frequentes. O creme do Ken (4840 pixels) ia para o rosa. `scene_cut._palette_codebook` agora só cede um slot abaixo de luma 100, que não seja a cor mais usada, se o erro quadrático não sobe e a média de todos os pixels opacos não cai mais de 1. O empate de distância usa o brilho mais próximo. Nestes lutadores o livro é o da frequência. O preto opaco fica de fora.
+
+ROM da paleta de brilho: `out/rom/palette_luma_20261023.sms`, 458752 bytes, SHA-256 `6fb424a3ddf32002d5de9c27685c1387fa89d4205365b344ba64fe8c866cd873`, 24 banks, corte `out/generated/palette_luma_20261023/`. Paleta no offset 12311: `00 1A 1B 16 2A 05 2B 02 00 02 07 2B 0B 1B 2F 16`. Header do corte igual ao do piloto (`3be5a775…`). Banks `ec22ad12…`. As três ROMs anteriores permanecem. Fontes vivas continuam em `ryu_ken_cross`. Log: `out/logs/palette_luma_20261023_build.txt`. Comparação: `out/logs/palette_luma_20261023_compare.json`. O arquivo de luma em si não foi aberto. O parágrafo seguinte registra a captura de outro caminho com os mesmos bytes.
+
+## 2026-10-23 — orçamento do par em sprite puro
+
+A unidade do `pose_budget` deixou de ser a porta de cerca de 70% e a pose mais larga em 64 px. Essa porta fica como história do piloto da manhã, em `doc/28-pose-budget-8.md`. A condição vigente: pose neutra de cada lado em no máximo 4 colunas de SAT; golpe largo contra neutra em 5 e 3; o resto em `case_by_case`, sem reautoria e sem encolher o idle. `POSE_NEAR` 0,69 não abre nem fecha escala. Célula 8×16 transparente não conta. FX explícito acima de 3 colunas sai do corte. Grupo 9000 continua fora. `framebuffer`, `fighter_scale` e `legacy_quarter` continuam opções. `SMS_GLOBAL.md` não foi editado. Sem ID de lição.
+
+Antes da troca, o piloto `9008505c…` mostrou os dois idles no framebuffer 256×192: `out/evidence/pose_budget_20261023_idle_256x192.png`, 1667 bytes, SHA-256 `64f5b9451439b5c37e4644f9f067bd9f2c6c80e23a1564e3b19ebff0f7e98800`. Os sprites saem. O runtime não mudou. As listras do Ken continuam. Essa captura não promove o piloto a entrega.
+
+Fração aplicada no par: framebuffer `x=2/3` `y=6/7`, extra `2/3`, porta `idle_to_4`. O idle de boot fica 32×56, 4 colunas, 16 células. A maior célula neutra fica 32×64. `within_8_ratio` só no relatório: Ryu 0,8052, Ken 0,77. O motivo com `size_policy = pose_budget` e arte `pre_scaled` nomeia a fração; o corte não grava `downscale1:4`. `ratio.numerator/denominator` é a extra, não 40/49.
+
+Papéis incluídos, pico de SAT 4: os seis neutros dos dois, mais special 1000 e ko 170 do Ryu. Caso a caso nos doze papéis: Ken punch 250 (6), hp 450 (7), kick 200 (6), hk 220 (6), special 1000 (6), ko 5080 (8, 64×32); Ryu punch 260 (5), hp 280 (6), kick 200 (6), hk 240 (6). Listas completas: Ryu 77 incluídas e 77 caso a caso; Ken 59 e 41. Os golpes largos permanecem na ROM porque o runtime exige o papel. Chave `p1_ken` é o corte do Ryu; `p2_ryu` é o do Ken.
+
+FX fora do corte: Ryu 92 sprites (1150, 1160, 1250, 1260, 3050, 8010, 8020, 8030, 8050, 8060, 8210, 8220, 8230, 8300, 8310, 8330, 8400). `g8400` imagem 3: 112×24, SAT 12, padded 14. Ken: 4 sprites, grupos 1001 e 1002, SAT 4. Não foram para o plano de fundo.
+
+Eixo no primeiro quadro de idle e de soco. Padding duplo acima de 1 px em relação à sola: não ocorreu. Ken idle e Ken punch ficam em delta 0. Ryu punch move 1 px por causa do pad. Ryu idle muda 2 px (fonte +1, resultado −1) e o corte do pad repete −1: a causa é a amostragem, não o pad. Sampler, eixo e hurtbox não foram alterados. A hurt do Ryu idle passa de 0 para 2 px além da sola porque a linha de baixo não foi amostrada.
+
+Simulador, self-check antes da leitura, zero violações nos incluídos: idle/idle pico 8 (32 sprites); Ken idle + Ryu special pico 8 (30); Ryu special + Ryu ko pico 8 (30). Casos, sem reprovar o lote: Ken idle + Ken punch pico 10; Ken ko + Ryu idle pico 12. Log: `out/logs/pose_budget_pair_20261023/line_summary.json`.
+
+| ROM | Bytes | SHA-256 |
+|---|---:|---|
+| `out/rom/luta_mugem_rev2.sms` | 851968 | `087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65` |
+| `out/rom/pose_budget_20261023.sms` | 458752 | `9008505cb82232e42d1b57d3ecb852af70f566625995cfd3cb5b526b277b1eba` |
+| `out/rom/pose_budget_pair_20261023.sms` | 458752 | `6fb424a3ddf32002d5de9c27685c1387fa89d4205365b344ba64fe8c866cd873` |
+
+A terceira é byte a byte igual a `palette_luma_20261023.sms`. Esse arquivo de luma não foi sobrescrito e não foi o caminho da captura. A reservada `f9ef0e27…` permanece. Fontes vivas continuam em `ryu_ken_cross`. Corte: `out/generated/pose_budget_pair_20261023/`, 24 banks, imagem `ec22ad12…`.
+
+Framebuffer desta ROM: `out/evidence/pose_budget_pair_20261023_idle_256x192.png`, 1658 bytes, SHA-256 `50beed8b55d73ff60f90384f52d60008e12e9d58070f8683f96209430e7a992a`, sessão `387f8561097d44c4847e1f263523a81f` encerrada. Os dois idles aparecem. Status desse framebuffer: `testado_em_emulador`. `measure_worst_frame.py` na sonda `0xC800` devolveu `sem_lastro` (frame 2035, `done` 0). `validado_budget` proibido. Menos banks não é FPS. Sem 60 fps, áudio, gameplay ou entrega visual. Testes do motor no fechamento: 47 passed.
+
+## 2026-10-23 — parecer da captura do par
+
+Revisão independente das duas capturas 256×192 e do log de linha. Motor, ROM, `src/main.c`, `.mddev/project.json` e `SMS_GLOBAL.md` não foram alterados. Sem ID de lição. O bloco «Resultado medido» de `doc/28-pose-budget-8.md` descreve o piloto da manhã `9008505c…`. A condição viva é o parágrafo do par, no topo desse arquivo e no GDD.
+
+As duas capturas têm a mesma ocupação opaca. O diff é de 14 pixels, todos no Ken, de `(170,0,0)` para `(170,85,85)`. A paleta de brilho não desfez o desenho.
+
+| Lado | Ocupação | Leitura |
+|---|---|---|
+| Ryu, esquerda | x 70–99 (30 px), y 108–160 | Idle coerente: gi branco, faixa e luvas vermelhas, calça azul, contorno escuro |
+| Ken, direita | x 118–121 (4 px), vão, x 126–141 (16 px), vão, x 146–149 (4 px) | O vão total é 32 px, 4 colunas. O corpo não fecha. Gi, cabelo e silhueta não se leem |
+
+Veredito: há tinta dos dois lados. A imagem não melhorou. Status do framebuffer: `testado_em_emulador`. Entrega visual, não. A ROM do par é byte a byte `palette_luma_20261023.sms` (`6fb424a3…`). A produção `087df676…` permanece. O runtime não mudou; a causa das listras (stream no meio do upload, ou tile/ordem do P2) fica aberta até um quadro em que as duas poses já estejam residentes.
+
+O simulador em `out/logs/pose_budget_pair_20261023/line_summary.json` não mede a luta. Self-check passou antes da leitura.
+
+| Par | Incluído | Pico | Violações |
+|---|---|---:|---:|
+| idle / idle | sim | 8 | 0 |
+| Ken idle + Ryu special | sim | 8 | 0 |
+| Ryu special + Ryu ko | sim | 8 | 0 |
+| Ken idle + Ken punch | não | 10 | 5 |
+| Ken ko + Ryu idle | não | 12 | 5 |
+
+Os três zeros são dois parados, um especial que já cabe em 4 colunas, e o Ryu contra ele mesmo. O soco do Ken (pico 10) e o KO do Ken contra o idle do Ryu (pico 12) estão na ROM. `included_pair: false` não tira o papel do binário. A regra 5+3 está escrita e não foi o par que passou.
+
+Papéis que o runtime ainda exige acima de 4 colunas: Ken punch 250 (6), hp 450 (7), kick 200 (6), hk 220 (6), special 1000 (6), ko 5080 (8); Ryu punch 260 (5), hp 280 (6), kick 200 (6), hk 240 (6). Contra um idle de 4 colunas na mesma linha o pico é 9, 10, 11 ou 12.
+
+Pontos abertos, registrados para o próximo lote. Não são implementação deste parecer.
+
+1. Um framebuffer com as duas poses já residentes. É o que separa stream incompleto de defeito de tile ou ordem do P2.
+2. Medir cada composição que a ROM pode mostrar: os seis golpes largos do Ken contra o idle do Ryu, e os quatro normais largos do Ryu contra o idle do Ken. Pico acima de 8 reprova a composição.
+3. A regra 5+3 precisa ser célula emitida. O idle ficou em 4 e o golpe largo ficou em 5–8 no mesmo binário.
+4. A hurtbox do idle do Ryu passa 2 px da sola porque a linha de baixo não foi amostrada. Sampler, eixo e hurtbox não foram alterados.
+5. `measure_worst_frame.py` na sonda `0xC800` devolveu `sem_lastro` (frame 2035, `done` 0). `validado_budget` continua fechado. 24 banks medem tamanho, não velocidade.
+
+Não promover a lei da fábrica, não emitir ID de lição e não substituir `087df676…`. O mesmo parecer está em `doc/curation/2026-10-23_pose_budget_aguardando_curador.md`: PB-13 captura, PB-14 simulador, PB-15 golpe largo, PB-16 hurtbox, PB-17 VBlank, PB-18 sem promoção.
+
+## 2026-10-23 — fecho do par residente, composição legal e sola
+
+O parecer PB-13–PB-18 foi fechado com ROM de prova nova: `out/rom/pose_budget_settled_20261023.sms`, 458752 bytes, 24 banks, SHA-256 `698e58ed5a0e9256cf2497783b5b0a4343464c15138ce5783c5b9fd98879b13a`. A produção `087df676…`, a piloto `9008505c…`, a reservada `f9ef0e27…` e o par `6fb424a3…` permanecem intactos. O gate foi compilado em cópia temporária; diff em `out/logs/pose_budget_settled_20261023/composition_gate/main_c_composition_gate.patch`, header `versus_composition_gate.h` com SHA-256 `1da1e952…`. `src/main.c` e `.mddev/project.json` vivos continuam em `ryu_ken_cross`; sem commit e sem push.
+
+O binário `6fb424a3…` usa `LUTA_PROFILE 1` (pose residente). No frame 500 as duas poses pedidas estão residentes (`desired/resident/submit/present` 5/5/5/5 no P1 e 49/49/49/49 no P2), `_SpriteNextFree=32`, **16 células P1 + 16 P2**, x 69–100 e x 142–173. O Ken fecha o corpo; a listra anterior era pose não residente. PNG: `out/evidence/sessions/a40818afa1a5468da0ccbcf4735fede7/resident_gate_frame500.png`, SHA-256 `7281231d…`, frame 500. Status `testado_em_emulador`.
+
+O gate deriva do META emitido e recusa em `set_role()` todo papel cujo anim passe de 4 células 8×16 por linha: 25 de 93 poses; P1 anims 6–9 e P2 anims 6–11. A prova emulada no frame 500 registrou `dropped_from_composition=2`, `block_p1=1` (role 7, 6 células), `block_p2=1` (role 7, 7 células), sem omitir coluna e sem encolher o idle. Os dez pares golpe×idle medidos dão pico 9–12 e cinco violações cada; idle/idle fica em pico 8, 32 sprites. `dropped_from_composition`: P1 punch/hp/kick/hk e P2 punch/hp/kick/hk/special/ko, com pico e frame em `out/logs/pose_budget_settled_20261023/composition_gate/dropped_from_composition.json`. Ryu special 1000 e Ryu ko 170 seguem legais (máx. 4 células/linha).
+
+A medida da sola foi corrigida: o `AXIS` gerado já inclui `frame.y`. Com `AXIS_y + linha da sola`, Ryu idle F0 fica `-53+53=0`, hurt bottom 1, delta **+1**, não 2. Ryu punch F0 delta −3; Ken idle F0 delta −1; Ken punch F0 delta −2. Os quatro amostradores (`current`, `ceil`, `full`, `src_len`) não movem a sola do Ryu no pipeline real; `full` move o Ken em 1 px e não fecha o Ryu. Sampler, eixo e hurtbox ficam inalterados; a premissa de 2 px era erro de medida.
+
+Pior quadro na ROM final com gate: `derramou`, `vline_min=4`, `vovf_delta=1740`, `snapshot done=1`, frame 4079. Na pré-gate `c45dbd4a…`: `derramou`, `vline_min=2`, `vovf_delta=1770`, frame 3946. O 144 do resumo anterior era `vline` do snapshot, não `vline_min`. `validado_budget` continua proibido; o gate não comprou orçamento. Detalhe técnico em `doc/28-pose-budget-8.md`, seção «Fechamento». Sem ID de lição, sem terceira paleta, sem entrega visual, sem áudio/FPS/gameplay.
+
+Registro para curadoria futura: `doc/curation/2026-10-23_pose_budget_fechamento_pb13_pb18.md` e o JSON de mesmo nome. O pacote fecha PB-13–PB-18 como medição, lista os sete aprendizados candidatos C1–C7 sem emitir ID, implementa e testa as quatro ferramentas de medição (self-check + 8 testes) e separa o que é regra de projeto do que precisa de aprovação humana para virar lei da fábrica. `SMS_GLOBAL.md`, ledger, `lesson_routes.json` e `id_registry.json` continuam intocados em `L138`.

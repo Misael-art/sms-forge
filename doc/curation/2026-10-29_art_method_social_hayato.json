@@ -1,0 +1,149 @@
+{
+  "curation_id": "art_method_social_hayato_20261029",
+  "date": "2026-10-29",
+  "kind": "application_of_existing_lessons",
+  "scope": "Canonical skills/workflows and art-review contract; no runtime, converter, assets, ROMs or historical opinions changed",
+  "lesson_ids_applied": [
+    "L113",
+    "L123",
+    "L124",
+    "L127",
+    "L102",
+    "L105",
+    "L121",
+    "L125"
+  ],
+  "new_lesson_ids": [],
+  "rule_section": "SMS_GLOBAL §109 application; §§113/114/117 unchanged authority",
+  "tools": [
+    "audit_art_review_checklist.py",
+    "prepare_authored_sprite_sample.py",
+    "artifact_registry.py",
+    "selftest.py"
+  ],
+  "source_candidate": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json",
+  "evidence": [
+    "doc/curation/evidence/2026-10-29_art_method/transfer.json",
+    "doc/curation/evidence/2026-10-29_art_method/hayato_checkpoint.json",
+    "doc/curation/evidence/2026-10-29_art_method/social_checkpoint.json",
+    "doc/curation/evidence/2026-10-29_art_method/route_review.json",
+    "doc/curation/evidence/2026-10-29_art_method/evidence_inventory.json"
+  ],
+  "classification": {
+    "observed_scope": [
+      "Same unchanged adapter reproduces 24 PNGs and three headers byte-exact: Social v8 and Hayato v4 both orientations",
+      "Hayato local indexed repair conforms to declared ROI, palette, transparency and dimensions",
+      "Archived exact-hash reviews support static observations while continuous perception remains pending"
+    ],
+    "editorial_procedure": [
+      "Common-scale comparison, separate body/equipment, explicit material simplification and early conversion",
+      "Intent, reference study, choreography, gesture, preliminary temporal review, finish, conversion and ROM",
+      "Preserve proportions while allowing body acting; diagnose spacing separately from exposures"
+    ],
+    "hypothesis": [
+      "Gesture-first review may reduce late revisions; cost reduction has not been measured"
+    ],
+    "opportunity": [
+      "Measure complete accepted cycles, generation count and elapsed effort before claiming a shorter repeatable route"
+    ],
+    "open_dependency": [
+      "Hayato v4 continuous motion and owner acceptance",
+      "Global artifact registry blocked by missing historical Social 61-pose v5 report",
+      "Method is not universal roster mastery or automatic AAA certification"
+    ]
+  },
+  "validation": {
+    "status": "scoped_factory_checks_passed_global_artifact_audit_blocked",
+    "summary": "doc/curation/evidence/2026-10-29_art_method/validation_final.json",
+    "focused": "25 passed (5 temporal review tests with negative cases + 20 adapter regression tests)",
+    "selftest": "137/137; optional game build not run",
+    "measurement_tools": "75/75 self-checks",
+    "doc_sync": "passed",
+    "learning_capture": "passed",
+    "hardware": "passed",
+    "global_artifact_registry": {
+      "exit_code": 1,
+      "preexisting_blocker": "out/diagnostics/dr_social_61_pose_review_v5/conversion_report_61_pose_v5.json missing/stale; historical record preserved"
+    },
+    "new_ROM_validation": "not_run; no conversion algorithm, runtime or assets changed"
+  },
+  "promotion": "Scoped implementation of existing lessons; no art, animation, ROM or complete factory homologation inferred",
+  "next_owner": "Project owner: view preserved Hayato v4 normal/slow media and decide keep, exposure adjustment or specific pose repair",
+  "learning_transfer": [
+    {
+      "fact": "Fonte e prova têm papéis separados; revisão v3 do método não é aceite das fontes posteriores.",
+      "classification": "comprovado_no_escopo_observado",
+      "evidence": "candidate.owner_decision + 14/14 path/SHA refs verified",
+      "application": "original-artwork / asset-pipeline / lifecycle; resolve role and exact hash first",
+      "remaining": "Artistic decisions and owner acceptance remain scoped"
+    },
+    {
+      "fact": "Social: contato reto pôde ser preservado com fase de grade compensada; 9→8 intervalos por linha, 218→220 patterns e 33→34 SAT no registro histórico.",
+      "classification": "comprovado_no_escopo_observado",
+      "evidence": "candidate.followup_compensated_grid_v8; replay 8PNG+header exact",
+      "application": "asset-to-rom: measure pair/phase tradeoff, no per-pose shrinking or hidden cells",
+      "remaining": "Not a universal packing phase or scene budget"
+    },
+    {
+      "fact": "Hayato: guarda/material e corte usam mesma rota com parâmetros próprios, normal8x8 em lugar de tall8x16; replays left/right exact.",
+      "classification": "comprovado_no_escopo_observado",
+      "evidence": "transfer.json; config refs preserve all palette-index and registration choices",
+      "application": "asset-to-rom: common scale, shared-index material review, optical sole after rounding, both facings",
+      "remaining": "53SAT/219patterns/8line apply only to this diagnostic pair"
+    },
+    {
+      "fact": "Congelar cabeça/quadril/roupa/apoios limitou atuação do corte anterior. Estudo gestual torna oposição quadril/ombros e recuperação explícitas.",
+      "classification": "procedimento_editorial_e_julgamento_artistico",
+      "evidence": "candidate.followup_hayato_short_cut_choreography and preserved independent reviews",
+      "application": "sms-sprite-animation gesture-first procedure; recipe single-frame examples scoped",
+      "remaining": "Continuous force/rhythm not accepted; 11 reformulation generations + one local hair patch, candidate records12calls"
+    },
+    {
+      "fact": "Reparo da lâmina afetou a pose; patch da franja requer delta foraROI exato.",
+      "classification": "comprovado_no_escopo_observado",
+      "evidence": "Hayato v4 source_assembly hair_delta; edit_boundary gate replay",
+      "application": "art-review indexed boundary check plus whole-pose re-review",
+      "remaining": "Pixel isolation does not decide if hair/material/anatomy is good"
+    },
+    {
+      "fact": "Revisor de Hayato conferiu480quadros e exposições, mas não percebeu playback contínuo.",
+      "classification": "dependencia_ainda_aberta",
+      "evidence": "hayato_checkpoint.json + owner_checkpoint exact SHA; report final_temporal_approval false",
+      "application": "six explicit observation axes, needs_evidence, keep_control without equivalent reviews",
+      "remaining": "Owner A/B/C decision required, not another generation"
+    },
+    {
+      "fact": "Método mais curto pode reduzir iterações, mas não há amostra de custo/tempo comparável e ciclos completos aceitos.",
+      "classification": "hipotese_e_oportunidade",
+      "evidence": "preserved generation counts and pending temporal acceptance",
+      "application": "record attempts/reject cause/delta/elapsed effort for next authorized sample",
+      "remaining": "No savings or universal repeatability claim"
+    }
+  ],
+  "variable_parameters": [
+    "body/equipment dimensions",
+    "source and SMS canvas",
+    "palette/material-index mapping by source SHA",
+    "pose IDs/count/exposures/terminal",
+    "registration and authored displacement",
+    "packing phase for each facing",
+    "8x8 versus8x16",
+    "pair residency/SAT/scanline and scene worst-frame"
+  ],
+  "unchanged_hardware_contract": "Use canonical SMS gates and real scene budget; source CPS2 palette/canvas is not an SMS hardware limit.",
+  "entrypoints": {
+    "direction": "tools/sms_wrapper/.agent/workflows/original-artwork.md",
+    "animation": "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md",
+    "conversion": "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
+    "review_and_schema": "tools/sms_wrapper/.agent/workflows/art-review.md",
+    "orchestration": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
+    "replay": "doc/curation/evidence/2026-10-29_art_method/replay.py"
+  },
+  "continuity": {
+    "branch": "codex/host-bootstrap-continuity-20261024",
+    "base_sha": "db73b95763ed42b3006e5e004bfe1885adeb038b",
+    "pr": "https://github.com/Misael-art/sms-forge/pull/4",
+    "other_task_changes": "luta_mugem_rev2 and existing next-agent edits preserved, excluded from this increment",
+    "implementation_commit": "de3a7fd71338a5954a2b292c634515574bc411cb"
+  }
+}

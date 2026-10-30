@@ -1,0 +1,56 @@
+{
+  "schema": "mof_lore_research_v1",
+  "character": "jj_zillion_ii",
+  "checked_at": "2026-10-30T08:20:52.786775+00:00",
+  "game_authority": "Zillion II: The Tri Formation (Master System)",
+  "approved_concept": "jj-zillion-ii-concept-v04",
+  "sources": [
+    {
+      "url": "https://www.smspower.org/Scans/ZillionII-SMS-US-Manual",
+      "role": "Scans of original SEGA manual; primary game authority"
+    },
+    {
+      "url": "https://gamesurge.com/strategies/Gamegear/Manuals/Zillion%202-tri%20Formation.shtml",
+      "role": "Transcription of original SEGA manual, Taking Control, Button 2, corroborates Zillion Laser; consulted online",
+      "local_evidence": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v1/manual_transcription.html",
+        "sha256": "9cd14dd338c6f3d49cfcc22d1f2622ed35d70d076115482937eaf057960c2848",
+        "bytes": 21060
+      }
+    }
+  ],
+  "verified_facts": [
+    "J.J. is a White Knight rescuing Apple and Champ from the Norsa fortress.",
+    "Button 2 fires the Zillion Laser.",
+    "The game has on-foot sections as well as Turbo Cycle/Armorater sections."
+  ],
+  "fan_game_adaptation": [
+    "Grounded one-shot fighting pose, two-hand aim and five action exposures are authored proposals, not historical frame data or a canonical named special.",
+    "Pulse lifespan is a finite diagnostic portrayal, no collision/damage, beam length or competitive range claim."
+  ],
+  "reference_boundaries": {
+    "identity_palette_behavior": "SMS game and approved v4 concept",
+    "anime": "Existing approved costume clarification only; not a new lore/moveset source",
+    "hayato_and_social": "Finish, body-scale and integration controls only; do not transfer character identity or timing automatically"
+  },
+  "weapon_reconciliation": {
+    "game_lore": "Zillion II SMS; manual confirms laser, not detailed geometry from13x40standing sprite",
+    "body_costume": {
+      "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "scope": "Face/hair/build/suit/armor/harness/holster only; older compactgun is not current authority"
+    },
+    "weapon": {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/reference_inputs/zillion_pistol_user_reference_20261008.png",
+      "sha256": "7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49",
+      "scope": "Owner-supplied side-profile geometry and navy/cyan material appearance; exact same input already used in approved harmony"
+    },
+    "approved_harmony": {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+      "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+      "decision": "doc/decisions/roster_harmony_waku_waku_7_v01_owner_approval.json",
+      "scope": "Corrected weapon silhouette and roster comparison, not automatic approval of new sprite pixels"
+    }
+  },
+  "finding": "Gamelaser existence confirmed, but geometry was incorrectly inherited from olderconcept. Approvedharmony and byte-identical ownerreference already resolve long navy/cyan weapon; no need to invent new canonical variant."
+}

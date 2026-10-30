@@ -1,10 +1,671 @@
 # 10-memory-bank — master_of_fighters
 
+## Aceite do proprietário — J.J. fechado neste recorte
+
+O proprietário respondeu **“aprovado”** à entrega6677d5d, que apresentou o
+conceptv5, as seis poses da fontev6 sem FX e o vídeo real da ROM direita,
+e perguntou sobre proporção corrigida e retorno à guarda. Decisão em
+`decisions/jj-zillion-character_owner_approval.json`: correção e amostra
+aprovadas com tempos existentes7/4/2/3/6. Conceptv5 e fontev6 passam a
+aprovados no registro; conceptv4 permanece histórico/supersedido, intacto.
+Não pedir novamente este aceite nem ampliar conteúdo por inferência.
+
+Checkpoint atual `jj_zillion_character_checkpoint_v7.json` preserva v6 imutável
+e registra owner_acceptance pass. Continuous_motion segue needs_evidence
+quanto à percepção contínua verificável: “aprovado” não descreve uma sessão
+assistida. Isso não reabre a decisão do dono, que encerra este recorte.
+Não gerar arte, mudar tempos ou repetir build/captura/review sem defeito novo.
+Fonte,14PNGs,headers,trêsROMs,vídeo e QA são os mesmos do lote anterior.
+
+A rota curta com terceiro personagem agora tem aceite do dono e evidência
+técnica preservada; não foi passagem artística única, conforme histórico de
+seis gerações. Curadoria global continua não homologada e bloqueada pelo
+relatório históricoSocial61v5 ausente. Próximo passo: recuperar os bytes
+originais pelo pacote manual já solicitado e encaminhar o material existente
+para futura curadoria, sem ampliar elenco, movimentos, objetos ou sistemas.
+Commit/PR deste aceite: recibo separado em
+`out/diagnostics/jj_zillion_owner_acceptance_v1/publication.json`.
+
+## Histórico anterior ao aceite de J.J.
+
+## Estado atual J.J. — fidelidade corrigida, execução comprovada, aceite pendente
+
+Concept candidato v5 e fonte candidata v6 reduzem a Zillion mantendo forma
+navy/cyan, pega e os seis desenhos I00/S01–S05. Nenhuma bala, tiro, spark,
+flash, FX ou objeto foi incorporado. Corpo/poses v3 ficam preservados fora das
+ROIs de arma/pega, com uma única limpeza adicional de ponto órfão em I00
+(105,99). Review v5 + adendo v6 fecham o escopo estático independente. Não há
+aceite humano da correção nem percepção contínua estabelecida nesta interface.
+
+Fonte6: `0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b`.
+Concept5: `e81e0f9cc81b1552ff2ace0e046ecb5c36be00119e6b6f5d60d17a7b17f518e9`.
+O reparo fonte6 não muda nenhum índice SMS: 14 PNGs, 12 cenas e dois headers
+v5 reutilizados por identidade; não houve conversão/build repetidos por isso.
+Par normal8×8:180padrões/5.760B,max50SAT,pico8,canvas104×88,pivô48,80,
+origens16/128,64 e última sola visívelY143. P1 única15cores úteis;902pixels
+opacos/índices/RGBA de Social exatos em ambas as faces. Apenas slots PLTE não
+usados por Social11/14/15 mudam. Sem folga presumida para futuros FX.
+
+Três ROMs de32KiB buildadas pelo wrapper, com gates pertinentes e vínculos:
+
+- esquerda: `57b0d4e9b8c0acb005814f2c841baff07b75dbc4138ab97a62353d647dc87cc1`;
+- direita: `aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4`;
+- direita stress128: `fc036bd50c000a403e1cf7ac08d30319f5e1f764260e137ee09d8b1936464699`.
+
+QA independente2/2casos,260/260RGBexatos: S01–S05 manuais em80–86/87–90/
+91–92/93–95/96–101, guarda102–129; tempos propostos7/4/2/3/6. Autoplay
+inicial0–21, guarda22–79. O still `case_0_frame.png` foi obtido antes do vídeo;
+o terminal foi conferido no RAW129. Sessõesa038803d…/b8888ff2… encerradas.
+Vídeo real da ROM direita tem480/480quadros exatos em8,023643s,11ações completas,
+10com guarda integral, decodeMP4lossless igual ao RGB. Não é avaliação de força,
+fluidez ou aceite temporal. Mídias em `out/diagnostics/jj_zillion_single_shot_v5/
+performance/5f94496d541d4b8ea7656756cd63acd8/`: `jj_character_realtime.mp4`,
+`rom_normal.apng` e `rom_slow.apng`. Fonte6 separada em seu `poses_and_times.png`
+e comparações `source_normal.apng`/`source_slow.apng`; a coluna anterior v3
+conserva o pulso histórico, a coluna atual não tem efeitos. `SMS_review.png` é
+preview convertido, não captura da ROM. Concept5 permanece fonte RGBA truecolor,
+sem se aplicar o teto de15cores de recurso runtime.
+
+VBlank base3.000frames,0derrame,mínimo213; stress1283.000frames,0derrame,mínimo224.
+Primeira janelaFPS8s falhou59,32/58,36; mantida. Uma confirmação20s passou
+59,79/59,84 no mesmo SHA, sem alterar critério. Causa da oscilação não isolada;
+não declarar pacing constante por frame. Sessões root5f94496d…/7137a0f1…/
+a03f5ed2… encerradas. Na leitura imediata da primeira o supervisor ainda saía;
+`cleanup_confirmation.json` confirma todos os PID/start_ticks próprios ausentes.
+
+Checkpoint `doc/jj_zillion_character_checkpoint_v6.json`: quatro eixos técnicos/
+estáticos pass; continuous_motion e owner_acceptance needs_evidence. Próximo:
+o proprietário julgar proporção/forma no concept e seis poses e assistir o vídeo
+normal para aceitar a correção/retorno. Preservar controle até defeito concreto.
+Não gerar arte adicional para suprir a ausência de percepção contínua.
+
+Histórico completo no campo `followup_jj_zillion_short_route` do candidato de
+curadoria existente `curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`.
+Custos reais:6ImageGen(2concept/4sprites),6variantesfonte,6conversões oficiais
+(4falhas/2pass),3builds,5sessões novas(2QA/3performance). As buscas de fase
+v2–v4 não são conversões oficiais; v4/três poses foi descartada por direção do
+dono. O plano v5 ficou congelado antes da QA; resultados posteriores estão
+separados em `runtime_evidence.json`. Rota técnica reutilizada demonstrada,
+previsibilidade artística em passagem única não demonstrada.
+
+Registro limitado J.J.+ancestrais:26artefatos/161arquivos pass;73arquivos novos
+de fonte sob ownership canônico, sem arquivo solto. Auditoria global continua
+falhando no relatório históricoSocial61v5 ausente. Pacote72355032bytes solicitado
+para download manual pela regra>70MB, ainda não recebido; não inventar relatório.
+Nada em res/, sem projétil, gameplay, áudio, PAL, produção ou curadoria global
+homologada. Hayato permanece fechado/aprovado e intacto. Retenção verificada:777arquivos/102.900.955bytes no ZIP28.128.259bytes, SHA
+`937b886f83cc50f71987b14f38adf3941aacc80837ed9b8b432865bd7825557a`,
+com cópia no destino local de recuperação. Recibo
+`jj_zillion_character_retention_v6.json`; SHA de publicação no
+`out/diagnostics/jj_zillion_single_shot_v5/publication.json`.
+
+## Histórico do lote J.J. — decisões anteriores preservadas
+
+## Direção vigente do dono — proporção da Zillion, seis poses, sem FX
+
+O proprietário corrigiu explicitamente o escopo: a Zillion está grande demais
+em relação a J.J.; corrigir a proporção no concept/model sheet mantendo a forma.
+**Preservar os seis quadros e as poses. Não incluir bala, tiro, sparks, flash,
+FX ou objetos na folha do personagem; esses elementos serão separados depois.**
+A experiência de três poses e pulso composto v4 fica histórica/supersedida,
+sem ROM ou aprovação. Fonte corporal para preservar: seis poses v3. Atual:
+`jj_zillion_single_shot_route_v5.json`, contrato de animação v5, equipamento v2
+e `decisions/jj-zillion-proportion-and-no-fx_owner-feedback.json`. Corrigir
+somente arma/encaixe da pega por ROIs, sem regenerar atuação, rosto ou figurino.
+Concept individual v4 aprovado permanece intacto como controle histórico;
+a correção candidata v5 terá review/aceite próprios. Nenhuma ROM de J.J. foi
+construída até esta direção. Hayato permanece aprovado e intacto.
+
+## Lote J.J. — correção de autoridade da arma antes de continuar
+
+O proprietário pediu outro personagem e uma ação curta repetível para futura
+curadoria canônica, além da recuperação do relatório histórico Social61v5.
+Selecionado J.J. / tiro único Zillion. Primeiro resultado v1 tem arma errada:
+blaster compacto branco/azul herdado do concept individual v4. O dono apontou
+explicitamente a diferença. A referência anexada é byte-idêntica à de08/10
+(`7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49`),
+e a prancha WakuWaku7 aprovada já corrigia a pistola longa navy/cyan. Falha do
+coordenador: não conciliar correção específica de equipamento ao retomar pelo
+concept mais antigo. Preservar a aprovação histórica e não reutilizar sua arma
+como autoridade atual.
+
+Contrato atual `jj_zillion_weapon_identity_contract_v1.json`: conceptv4 rege
+corpo/figurino, prancha aprovada e referência do dono regem a Zillion. Plano
+atual `jj_zillion_single_shot_route_v2.json`, contrato de animação v2; v1 fonte,
+configurações e conversões falhas preservadas. Uma geração, quatro conversões,
+zero builds/ROMs/sessões de J.J. até esta reconciliação. O gate de sola detectou
+79vs80 antes de build; após pivô medido, o par ainda excede scanline na pose do
+pulso avançado. Nenhum resultado ilegal foi integrado. A fonte v2 corrigirá
+arma e encenação compacta; pulso curto somente na emissão, sem trajetória lenta
+ou sistema de projéteis. Review independente estático v1 é evidência histórica,
+não aceite de arma ou movimento. Hayato permanece fechado/aprovado e intacto.
+
+Relatório ausente: SHA esperado `f288f3f113d33ed9c898acfb92476f28f858292e8f403c2c410c8fc2f0403bac`.
+Solicitado download manual de `smsforge-generated-other-20261021.tar.zst`
+(72.355.032bytes; SHA85750979…) conforme regra acima de70MB. Não recriar relatório
+histórico para obter registro verde. Prosseguir com o lote independente e
+preservar a pendência se o pacote não chegar.
+
+## Aceite final do proprietário — corte de Hayato fechado
+
+Após o fechamento publicado em `15305168ff9c46a9ea1f373354c988ba9c099abd`,
+o proprietário respondeu literalmente **“aprovado”**. Registrar este aceite
+como confirmação final do corte apresentado: arte original da v4, lâmina sem
+distorção e exposições **8/1/2/7/2/5** no perfil de runtime v7.
+A entrega à qual respondeu incluía o vídeo real
+`out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/hayato_cut_realtime.mp4`
+(SHA-256 `2ef761100855f5fbebcba533515ae443af9e65a2484a378714aa6086b11b1204`),
+da ROM direita `2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022`.
+O aceite não descreve uma sessão assistida nem acrescenta observações de
+movimento; os registros técnicos e a decisão detalhada anterior permanecem
+inalterados. O checkpoint formal abaixo conserva o escopo da seleção anterior
+do preview; esta seção registra a confirmação posterior à entrega.
+
+**Estado: revisão deste corte encerrada e aprovada pelo proprietário.**
+Manter a seleção e preservar a tentativa com distorção no histórico rejeitado.
+Nenhuma mudança de pixels, tempos, ROM ou evidência neste fechamento; não há
+motivo novo para build, captura ou revisão equivalente. Próximo lote depende
+de um novo objetivo; não ampliar movimentos, elenco ou sistemas a partir deste
+aceite, nem interpretá-lo como autorização de merge, release ou entrega completa.
+
+## Escolha aprovada — somente tempos, perfil v7
+
+O dono aprovou a coluna **somente tempos 8/1/2/7/2/5**. Rejeitou a distorção
+da lâmina por perceber outra trajetória e piora do movimento. Decisão atual em
+`decisions/hayato-short-cut-timing-only_owner_approval.json`: aceite artístico
+e temporal do preview escolhido, sem inferir que o dono assistiu a uma ROM nova.
+Não pedir novamente a mesma escolha ou outro aceite desse preview.
+
+Reutilizar a fonte v4, hash9302a78a…, com katana original em todas as poses.
+Nenhuma geração, pintura ou folha duplicada. Fonte v4 aprovada no registro;
+v6 rejeitada pelo dono e preservada com sua evidência. V5 continua histórica.
+Perfil de runtime v7 usa configs `hayato_short_cut_timing_only_v7_{left,right}.json`
+e seletores15/16 no mesmo consumidor. Somente as seis exposições mudam em
+relação à v4:8/1/2/7/2/5. A opção de amostragem da experiência de distorção não
+é necessária nesta seleção; o adaptador permanece com sua função opt-in testada.
+16 PNGs e14manifestos de cena são byte-exatos à v4; o header inteiro só difere
+na tabela de exposições. Recursos/geometria anteriores são reutilizados por
+identidade de conteúdo, sem repetir auditoria artística. Perfil219patterns,
+7.008B,max53SAT,pico8. Builds32KiB passaram: left67ed85a8db15aca6cdf65771044fc23e3eb09f6984d4103b74ce6d0d3b66997e;
+right2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022;
+stress128dd8e79cb282a267aee3822d5120a1fe99c8c5d6da991657ce104b52c0cd51ae0.
+QA v7 passou2/2casos,20checks,260/260quadros exatos; R01–R06 apresentados em
+8/1/2/7/2/5, guarda original105–129, R02sempreoriginal. Sessões6a127439…
+e00af693d… encerradas com PIDs/start_ticks próprios ausentes.
+Gravação real da ROM direita:480/480quadros exatos em8,0195s,10cortes completos,
+decode lossless igual ao RGB nativo. Sessãob346785d4d914ba299e5325b67419b4a:
+FPS59,71/59,46 em duas janelas8s; VBlank3.000frames,0derrame,mínimo213.
+Stress128 sessãodaec1cf5b1b94705a0e6ae7a24ae1741:3.000frames,0derrame,mínimo223.
+Ambas encerradas; quatro processos próprios de cada sessão ausentes por identidade.
+Onze checks focados passaram, incluindo reutilização de recursos/geometria por
+hash; nenhuma suíte de conversor inalterado ou revisão artística equivalente foi repetida.
+
+Contrato atual `hayato_animation_contract_v4.json`; checkpoint
+`hayato_short_cut_timing_only_v7_checkpoint.json` e checklistv7 passaram no
+escopo declarado: aceite humano do preview fonte escolhido, revisão estática
+inalterada e reprodução técnica da nova ROM. Isso não afirma que o dono viu
+a nova ROM nem aprova entrega de produto, áudio, PAL ou combate completo.
+O julgamento artístico/temporal pedido está fechado por sua decisão explícita.
+
+Mídias atuais em `out/diagnostics/hayato_short_cut_v2/timing_only_v7/`:
+`approved_source_normal.apng`/`approved_source_slow.apng` são extrações exatas
+da coluna aprovada, sem novo desenho ou retiming. Vídeo novo em
+`performance/b346785d4d914ba299e5325b67419b4a/hayato_cut_realtime.mp4`; APNGs
+normal/lenta no mesmo diretório derivam do framebuffer gravado. Resultado em
+`result.json`, identidade em `identity_to_v4.json`. V6 e seus pareceres técnicos
+continuam preservados como tentativa rejeitada; não usar deformação neste corte.
+Próximo passo operacional: partir deste corte aceito quando houver novo lote
+definido, sem reabrir sua aprovação nem ampliar conteúdo por conta própria.
+Implementação do perfil selecionado: `8ed21d7e593fb8111c6a314fe125ccc12d21a8bf`. Documentação/recibos em commit separado e um push do lote; PR4 reutilizado.
+Retenção: `out/diagnostics/hayato_short_cut_v2/timing_only_v7/hayato_timing_only_v7_approved_review.zip`, recibo `doc/hayato_short_cut_timing_only_v7_retention.json`, manifesto por arquivo e cópia local verificada no destino existente.
+SHA final e confirmação remota em `out/diagnostics/hayato_short_cut_v2/timing_only_v7/publication.json`. Retenção no mesmo disco; sem release ou backup remoto novo.
+Registro: recorte Hayato+ancestrais30artefatos/437arquivos passou; global segue falhando no relatório histórico Social61v5 ausente.
+As seções abaixo são históricas.
+
+## Histórico — feedback temporal do dono, candidata v6 rejeitada
+
+O proprietário assistiu à comparação: considera satisfatórias a arte e as
+poses completas, mas identifica preparação e final baixo breves demais para
+ler armar→executar→retornar. Solicitou tempos contextuais e squash/stretch na
+espada durante a maior velocidade. Decisão em
+`decisions/hayato-short-cut-v4_owner-motion-feedback.json`; controle v4 intacto.
+Isto substitui a espera por observação do checkpoint abaixo; não é aceite da
+nova candidata ou promoção a produção.
+
+Contrato v3 propõe R01–R06 em 8/1/2/7/2/5 ticks (25 no total). R01 e R04 têm
+mais exposição; R02/R03 continuam rápidos, retorno R05/R06 distinto. Somente
+R02 recebe deformação gráfica transitória de lâmina ao longo do arco, voltando
+à katana normal em R03. Corpo, pega, bainha e cinco desenhos restantes são
+invariantes por pixel. Fonte v5 reservada no registro canônico; autoria do delta
+por ImageGen, composição mecânica delimitada, sem pintura de personagem por código.
+V5 passou revisão de fonte; SMS revelou componente solto de 2 pixels na ponta.
+V6 corrige apenas esse trecho por segundo patch ImageGen, preservando as
+tentativas e os cinco outros desenhos. Configs v6 e seletores 13/14 são atuais;
+11/12 guardam v5 como controle negativo não elegível para ROM de entrega.
+Retângulo explícito `sample_rect_px` fixa a amostragem quando muda o extremo
+da arma; sem ele, a conversão detectou sola uma linha abaixo e foi preservada
+como falha. Com o retângulo [50,53,169,159], sete PNGs por face são byte-exatos
+à v4 e R02 muda somente 110 pixels de lâmina. Ambos os pares medem 220 padrões,
+7.040B, máximo 53 SAT/pico8; componentes dos 16 PNGs passam. Revisão da ponta e
+saída SMS nova passou no parecer independente v6. Builds de 32 KiB pelo wrapper:
+left `76792bb8e9c48c6efdf402eb4d470f171bc76c9283416cebb33dddfaba2ab122`,
+right `c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e`,
+stress128 `4c796502ad3590db5564d70a2beaae56222a315aabfeec320b5ddc3e0d6f83d8`.
+QA independente v6 passou 2/2 casos, 20 checks e 260/260 quadros RGB exatos.
+Manual: R01 quadros80–87, R02 88, R03 89–90, R04 91–97, R05 98–99,
+R06 100–104, guarda105–129: 8/1/2/7/2/5 apresentados. Espada transitória
+em R02 por um quadro e katana normal restaurada em R03. Social902/PLTE,
+corpo/pega/equipamento/solaY143 preservados. Sessões b946f452… e61b3bbb4…
+encerradas, quatro processos próprios de cada uma ausentes por PID/start_ticks.
+
+Gravação real da ROM direita: sessão99efc557f6c3483ba5bfb8b74d048f4d,
+480/480 quadros exatos em8,0194s,10ações completas e9ciclos com pausa integral.
+MP4 lossless decodifica no SHA do RGB nativo; frames/holds não provam efeito
+percebido. FPS em duas janelas8s:59,74/59,42, alvo regional NTSC passou com
+tolerância explícita1FPS; não é promessa de zero variação por frame.
+VBlank base e stress128:3.000frames cada,0derrame,mínimos213/223. Stress
+sessãoaa8c9d6f382d45f69bd9a63c910f9d39 encerrada. Cleanup verificado para
+todos os processos próprios.26testes do adaptador e30checks focados passaram;
+raster, semântica, vínculo e contrato atuais passaram no seu escopo.
+
+Resultado e mídias em `out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/`:
+`comparison_source_normal.apng` e `comparison_source_slow.apng` mostram três
+colunas: controle v4, somente novos tempos, novos tempos+espada. São previews
+de fonte, não framebuffer. A trilha v4 recebe11ticks extras de guarda terminal
+para alinhar o loop de comparação, sem retimar seu golpe. `performance_v6/99efc557f6c3483ba5bfb8b74d048f4d/hayato_cut_realtime.mp4`
+é o framebuffer real256×192; `rom_slow.apng` no mesmo diretório é sua derivada4×lenta.
+`source_sequence_v6.png` e `SMS_both_facings.png` são pranchas estáticas.
+
+Contrato atual `hayato_animation_contract_v3.json`; checkpoint formal
+`hayato_short_cut_body_temporal_checkpoint_v6.json` e checklistv6 marcam
+continuous_motion/owner_acceptance pendentes, sem erro de custódia. A avaliação
+do dono da v4 autoriza estas correções e valida a base artística; não é aceite
+antecipado do novo ritmo/efeito. Próximo checkpoint: dono assistir à candidata
+e decidir se preparação, final baixo e impressão de velocidade resolvem seu
+feedback. Não convocar revisão temporal equivalente nem gerar novas poses
+sem outro defeito observado. Áudio/PAL/hitboxes/dano/combate completo e produção
+continuam fora desta amostra. V4, falha inicial de amostragem e ponta v5 estão
+preservadas; nenhuma skill/doutrina/gate global foi promovido.
+Implementação deste lote no commit `583da6186d2e8ec67483ecb088502659c68c870e`; documentação
+e recibos fecham em commit separado, um push do lote. PR4 reutilizado na branch
+de continuidade. Publicação final em `out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/publication.json`.
+Pacote `hayato_timing_stretch_v6_review.zip` no mesmo diretório, recibo em
+`doc/hayato_short_cut_body_retention_v6.json`, manifesto interno por arquivo e
+cópia local verificada no destino de recuperação existente. É retenção no mesmo
+disco, sem release ou backup remoto novo. Registro canônico: recorte em memória
+Hayato+ancestrais passou (28artefatos/362arquivos); global continua reprovado pelo
+relatório histórico Social61v5 ausente. Não confundir os dois escopos.
+
+## Checkpoint temporal do proprietário — v4 preservada
+
+Pedido atual: decidir este corte antes de ampliar conteúdo. Controle no commit
+`e67360735f7438091893eb38522211d32d091eea`; fontes, ROMs, exposições e evidências
+preservadas. Conferência de identidade: 26 referências do parecer/manifesto,
+três ROMs e SHA do RGB nativo coincidem. Índice com hashes e intervalos em
+`out/diagnostics/hayato_short_cut_v2/final_review_v4/owner_checkpoint.json`.
+Não houve build, captura, geração ou nova revisão equivalente neste checkpoint.
+
+Mídias para assistir, distinguindo sua origem:
+
+- Framebuffer real, velocidade normal: `out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.mp4` (256×192; Hayato à direita).
+- Mesmo framebuffer, reprodução lenta 4×: `rom_slow.apng` no mesmo diretório. É um derivado da gravação existente, não outra execução da ROM.
+- Comparação da fonte anterior/atual: `out/diagnostics/hayato_short_cut_v2/final_review_v4/before_after_normal.apng` e `before_after_slow.apng`. Mostram arte-fonte, não framebuffer.
+- Poses convertidas identificadas, ambos os sentidos: `out/diagnostics/hayato_short_cut_v2/sms_v4_review.png`. É prancha estática da conversão.
+
+Exposições apresentadas em frames: R01 preparação 4, R02 liberação 1,
+R03 execução 2, R04 absorção 3, R05 retorno 1, R06 recuperação 3 e guarda 21
+entre ações. No primeiro ciclo completo do MP4, R03 ocupa quadros 38–39,
+R04 40–42, R05 43, R06 44–46 e guarda 47–67 (índices começando em 0).
+Tempos aproximados: absorção 0,634–0,718 s; retorno 0,668–0,784 s. São posições
+no arquivo, não medição de pacing por frame.
+
+| Questão | Observado em quadros | Hipótese a julgar continuamente | Menor intervenção se o dono identificar falha |
+|---|---|---|---|
+| A: R03→R04 | R04 é mais baixa e tem 3 ticks após 2 de R03 | Absorção/desaceleração pode ler como repetição | Testar holds com desenhos atuais somente se for exposição; corrigir a pose responsável se for trajetória/postura |
+| B: R04→R05→R06→guarda | Retorno cruzado de 1 tick, recuperação alta de 3 ticks e guarda original presentes | Retorno pode parecer outro movimento de espada | Isolar a transição apontada; holds se ritmo, pose responsável se trajetória |
+| C: apoios, peso, arma e preparação | Equipamento inteiro e chão comum; R01 difere da guarda | Contato, transferência de peso, continuidade e anúncio de um único corte ainda exigem playback | Corrigir apenas pose responsável se houver apoio/arma incorretos; não esconder construção com duração |
+
+Recomendação atual: **manter v4 como controle, sem delta artístico ou de timing**.
+Isto preserva a candidata; não é aceite temporal. Nenhum defeito concreto em
+movimento foi observado por este agente, cuja interface não oferece percepção
+contínua. O parecer independente existente continua `needs_evidence`, sem novo
+defeito estático identificado. Igualdade de framebuffer/FPS não fecha A/B/C.
+
+Única solicitação ao proprietário: assistir às mídias exatas e responder A
+absorve/repete, B recupera/parece outro corte e C apoios/arma/preparação
+convincentes ou não, citando a transição que falhar. Só depois escolher manter,
+ajustar exposições ou corrigir pose específica. Não regenerar, acrescentar
+quadros/efeitos ou convocar revisões equivalentes para preencher esta limitação.
+
+## Lote corrente — corte corporal, fonte v4 e ROMs novas
+
+Fonte atual: `data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png`. Seis poses R01–R06,14ticks provisórios
+4/1/2/3/1/3 e guarda original. R03novo antecede R04absorção mais baixa; R06reusa
+C04antiga no mesmo papel de recuperação. Cinco desenhos do conjunto pertencem
+à nova coreografia.192px é margem transparente; originais144px preservados.
+Não há fit individual do corpo/arma. Onze gerações de reformulação e um patch
+local de franja foram preservados com prompts/receitas; não alegar economia.
+
+Fonte v3 passou estática após reparo de R02katana curta/larga. Adendo v4 passou
+fonte/SMS: R02transladada exatamente(0,+1); R03recebe8pixels ImageGen somente
+no ROI[109,77,114,82], foraROI/face/corpo/equip exatos; derivada remove1ponto
+solto da franja.16PNGs terminam79/boundary80; gatecomponentes(min4,c8)passou,
+regiões materiais automatizadas ainda pending e materiais têm review separado.
+Percepção contínua/timing percebido/dono/produção continuam pendentes.
+
+Adaptador oficial v2 opt-in8×8 chama packer existente, sem segundo consumidor.
+219padrões/7008B residentes, max53SAT/pico8;14composições. Defaults tall: header/
+3PNGs reais byte-idênticos.20testes do adaptador e selfcheck128tall+64normal;
+7testes puros da captura realtime. Novo campo expected_opaque_bottom_px=80
+bloqueia pivô stale antes de publicar header. CanvasSMS88/pivô40,80, origens
+24/136,64 mantêm posições mundiais/solo144. Social902pixels/índices/RGBA/PLTE
+preservados nos2sentidos.8×16 completo reprovou residência; não reduzir atores.
+
+Configsativas `hayato_short_cut_body_sequence_v4_{left,right}.json`, headers
+`out/diagnostics/hayato_short_cut_v2/converted_v4_{left,right}`, seletores9/10.
+7/8 preservam controle negativo v3;5/6 preservam tentativa antiga. ROMs32KiB:
+left3019e59281b0ca9638f8ab47375e47703b5314e50107ed05495b9802946fe2a7;
+rightf531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517;
+stress1284f7b340a19075183542c318352457ab1d5adca78d09037af9060f991bffd497a.
+Builds passaram. QA independente atual: duas sessões fechadas, 236/236 quadros
+exatos, 20 checks; entrada manual apresenta 4/1/2/3/1/3 e guarda terminal.
+Vídeo nativo em run livre: 480/480 quadros exatos em 8,0187 s, sete apresentações;
+ordem e holds completos conferidos, MP4 lossless decodifica no mesmo SHA RGB.
+O callback usa DisplayWindow original, sem stepping nem compositor. Sessão
+1b1f33e71f704e05bd064e688d3378cf: FPS 59,78/59,67 em duas janelas de 8 s;
+VBlank selado em 3.000 frames, zero derrame, mínimo 213. Stress128 sessão
+30406ea2f3a9418493c66f6d60ffeddd: 3.000 frames, zero derrame, mínimo 223.
+As quatro sessões deste fechamento estão encerradas; PIDs/start_ticks próprios
+ausentes. Métricas qualificam este par diagnóstico, não cada frame ou game feel.
+
+Evidências: `out/diagnostics/hayato_short_cut_v2/performance_v4/`, QA em
+`independent_qa/`, comparação final normal/lenta e fonte em `final_review_v4/`.
+27 testes focados passaram (20 adaptador + 7 captura); 28 checks de recursos,
+14 composições, corredor e vínculos passaram; raster, semântica e contrato
+atuais passaram. Checklist artístico bloqueia promoção por percepção contínua
+e aceite do dono pendentes. Próximo checkpoint: observar o vídeo real em tamanho
+SMS e a comparação normal/lenta; julgar intenção, força, trajetória e recuperação.
+Não pedir novamente qual ação produzir. Registro do método atualizado no candidato
+existente para curadoria futura; nenhuma skill, doutrina ou gate global promovido.
+Parecer final `hayato_short_cut_body_temporal_independent_review_v4.json`:
+`needs_evidence`. O revisor verificou todos os480quadros,13ações completas e12
+ciclos com pausa integral; não percebeu playback contínuo. Sem novo defeito
+estático/render identificado; absorção R03→R04, retorno R05→R06→guarda e apoios
+são os intervalos prioritários para observação contínua, não defeitos provados.
+Auditoria em memória do recorte Hayato+ancestrais:23artefatos/260arquivos passou;
+auditoria global segue falhando no relatório Social61v5 histórico ausente.
+Pacote privado `out/diagnostics/hayato_short_cut_v2/hayato_body_cut_v4_review.zip`
+e recibo `doc/hayato_short_cut_body_retention_v4.json` preservam os insumos e
+evidências com manifesto interno. Cópia de recuperação é local no mesmo disco.
+Branch `codex/host-bootstrap-continuity-20261024`, base284b15be9bf1898219518973a366d3930deed2f2,
+PR4 reutilizado; SHA final/testes/estado remoto em `out/diagnostics/hayato_short_cut_v2/publication.json`.
+Sem hitboxes/dano/áudio/PAL/gameplay/AAA aprovados. Seções abaixo são históricas.
+
+## Histórico da reformulação de coreografia — 2026-10-29
+
+O dono aprovou identidade/acabamento, mas rejeitou a força e construção temporal
+do corte v1. A escolha continua corte curto; C01–C04 e3/2/2/5 podem ser revistos.
+Causa no prompt preservado: cabeça/pés/hakama fixos, punhos1–2px/recuo3px;
+identidade foi traduzida incorretamente em corpo congelado. Parecer estático
+pass não prova movimento. Nenhuma fonte, ROM ou evidência anterior foi apagada.
+Contrato atual em `hayato_animation_contract_v2.json`, direção/defeitos/estudo de
+referências em `hayato_short_cut_choreography_v2.json`. Diagrama gestual em
+`out/diagnostics/hayato_short_cut_v2/rough/`:6desenhos,4/1/2/3/1/3 provisórios,
+transferência de peso sem deslocamento da raiz. Esquema não é arte final.
+Revisão independente do gesto2 sem blocker estático; percepção temporal pending.
+Primeira chave acabada R03 em revisão; ainda não há sequência acabada ou ROMv2.
+APNG iniciado no navegador e observado por snapshots; sem alegar percepção
+contínua. Nenhuma leitura de contrato/FPS certifica coreografia/AAA.
+
+O fechamento técnico da tentativa anterior existe: QA2/2,236framebuffers exatos,
+10checks por orientação, holds apresentados3/2/2/5. Base27da9585…: janelas8s
+59,69/59,82fps; selo3000frames,0derrame,mínimo207. Degrau128B63f72cfe…:
+3000frames,0derrame,mínimo217. Sessões137aba3e… e66263eef… encerradas.
+Esses dados qualificam somente aqueles pixels/tempos, não a nova ação.
+O snapshot “Lote em andamento” abaixo é histórico e foi superado por esta seção.
+
+## Lote em andamento — corte curto escolhido, 2026-10-29
+
+O dono escolheu o corte curto como amostra artística e pediu prova antecipada
+com guarda+execução. Direção textual em decisions/hayato-short-cut-diagnostic_owner_direction.json;
+não é dano/hitboxes/frame-data, produção ou nova QA executada pelo dono.
+Contrato diagnóstico hayato_animation_contract_v1.json: C01preparação,
+C02execução,C03acompanhamento,C04recuperação, tempos provisórios3/2/2/5.
+A escolha deixou de ser blocker; não perguntar de novo.
+
+Primeira C02 foi preservada: coroa/apoio alterados e par mínimo10 nas128fases
+por sentido com grade de referência fixa. Não foi buildada. Parecer independente
+v1reprovou continuidade. A v2 restaurou apoios/estatura, passou revisão da chave
+e materiais SMS e a prova guarda+execução nos dois sentidos (98patterns,pico8).
+Foi necessário medir fases dos DOIS atores, sem mudar pixels/P1 do Social.
+
+Fonte completa candidata em data/source_art/sprite_studies/hayato/review_drafts/
+cps2_short_cut_v1/sequence_v1/cut_source.png:4poses144×144. C02 copiada byte-idêntica
+à chavev2; só3poses de apoio foram geradas na terceira chamada deste lote.
+Folha bruta1254×1254 traduzida num único2/9nearest para todas as3poses de apoio,
+sem fit individual; originalguard/C02 preservados. Os shifts/pivôs são declarados,
+não pintura/recorte da arma. Revisão integral de corpo/volume/arma/movimento e
+materiais está pendente em hayato_short_cut_sequence_review_request_v1.json.
+
+Configs ativas hayato_short_cut_sequence_v1_registered_{left,right}.json,
+saídas out/diagnostics/hayato_short_cut_v1/registered_{left,right}/.
+Todos os12PNGs têm última opacay71(boundary72), portanto tela143(boundary144).
+C01/C04 precisaram inputanchorY126 antes de build: o nearest eliminava a última
+linha esparsa de sola na projeção; C03 usa126 por sua sola-fonte,guard/C02usam127.
+Uma única escala de corpo no par; não houve redução de alcance/omissão de células.
+202patterns/6464B, máximo33SAT,pico8 nas10composições, tudo residente.
+
+Três ROMs buildadas32KiB, ainda sem QA nesta atualização:
+left a9e6ef0077e551af2652d42e332c66683fdd610ed3a1aafa9357249c0cdfa5aa;
+right 27da9585d5ebd9f73b6969259213994d1faf85f5e62036cf116c90dbd6e0bc51;
+stress128 63f72cfead2be96c0f35da41c0943b3b957da7d646c20d7c0538c0d0da59bb33.
+Mesmo main e FSM, seleções MOF_HAYATO_SAMPLE5/6;3/2/2/5nos dados, não hitbox.
+Corredor14sondas,C7D2..C7F9,folga1784B passou nos mapas atuais.
+Previews normais/lentos em cut_cycle_nominal_4x.apng,cut_cycle_slow_4x.apng,
+pair_cycle_nominal.apng; não são evidência do emulador nem fluidez certificada.
+Próximo: terminar revisão integral, QAprivada nos2sentidos, ler holds reais,
+FPS/VBlank e degrau128B neste SHA, preservar evidências/curadoria/commit/pacote.
+Estado abaixo descreve o checkpoint estático anterior, sem herdar seus PASS.
+
+## Continuidade corrente — Hayato, 2026-10-29
+
+**Checkpoint da guarda concluído; ação própria pendente de escolha do dono.**
+O pedido novo autoriza testar a repetibilidade no segundo personagem, não
+promove automaticamente Hayato ou o Social. Concept Hayato v2 aprovado
+`a8dc1478…`; fonte nova `hayato-cps2-idle-v02`, SHA
+`0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1`.
+Uma guarda estática,144×144,32RGBs salvos incluindo transparente, corpo~102px
+incluindo cabelo,116px incluindo katana. Identidade jovem/esguia, quimono
+branco, faixa vermelha, hakama laranja-vermelho e katana/bainha completas.
+Duas gerações registradas: guarda diagonal v1 e edição v2 mais vertical;
+não reutilizou estudo antigo como resultado novo. A fonte v2 passou14eixos
+estáticos independentes; não houve pintura de personagem por código.
+
+O teste cedo reprovou a diagonal:5sprites/linha+4Social=9 nas128fases dos dois
+sentidos. Guarda v2 usa fase[0,1], mesma escala global nos dois atores, sem
+encurtar espada/corpo ou omitir células. A P1 é exatamente a do Socialv8,
+com15códigos, mapeada diretamente dos dois originais. O review da primeira
+ROM achou branco amarelado e contorno de lâmina bordô: correção explícita no
+adaptador oficial dos índices-fonte5→42,13→21,26→0;71pixelsSMS,0Social.
+Índice13 também existe no pescoço/cabelo: review v2 aprovou a regressão focada,
+sem aprová-lo para poses futuras. Fonte,alpha e geometria permaneceram intactos.
+
+Registro final usa pivô-fonte Hayato(68,127), a sola realmente salva; o nominal
+128 arredondava para um pixel acima do chãoSMS. Só translação(0,+1) na derivada;
+os dois atores terminam emy143(boundary144). SocialJ04 espelhado usa fase[5,9]
+medida, pois copiar[3,9] após esse ajuste gerava9; PNGSocial intacto. Parecer
+v3 passou o adendo de alinhamento/recorte/material. Fonte/model/61posesv08.2
+aprovadas do Social preservadas. Default do conversor reproduz seu header e
+8PNGs v8 byte a byte; na nova P1 suas cores/pixels/PLTE também são idênticos,
+compensados pivô e reflexão.
+
+Ativos: `.mddev/hayato_cps2_guard_{left,right}_baseline_v3.json`,
+`hayato_pair_social_jab_left_baseline_v3.json` e
+`hayato_pair_social_jab_right_baseline_v3_mirrorphase.json`.
+Manifestos `*_build.json` selecionam1..4 no mesmo consumidor por
+MOF_HAYATO_SAMPLE; default e seleçõesSocial1/5/8 mantidos. Dados atuais em
+`out/diagnostics/hayato_cps2_sample_v1/*baseline_v3*/`; configurações anteriores
+são controles congelados históricos, não outras candidatas ativas.
+Guardas:66patterns/2112B,32SAT, pico8. Socialjab contra guardaHayato:
+222patterns/7104B, máximo35SAT e pico8 nos dois lados. Todas as poses residentes;
+CRAM/patterns carregados com displayoff, somente SAT por tick na base.
+
+QA nativa atual4/4casos,18checks exact-indexed;2/2capturas por guarda e
+118/118framebuffers do jabSocial em cada lado. Últimaopaca143 confirmada.
+Manual Button2/1 observado em vídeo; idle/J01 iguais emRGB não identificam IDs
+por pixels. Não há jab nem outra ação de Hayato. Performance atual ROM direita
+`035060f99e7763f898354238f81f5d6a9c588f03e7ff6d505538318c95011116`:
+59,67/59,81fps em duas janelas8s; selo3000frames,0derrame,mínimo207.
+Degrau128B, ROM `3540539e…`:0derrame,mínimo218. Sessões finais
+442f14c70b3549a5bb3e8abaf0bf2147 e eca166b6c62a424b8775104fdf86d067,
+encerradas/bundles válidos. Todos os12workersessions e6rootsessions deste lote
+foram encerrados; as evidências anteriores ficaram históricas com seus SHAs.
+Não transportar medições de variantes anteriores para estes binários.
+
+Síntese/índice: `out/diagnostics/hayato_cps2_sample_v1/result.json`,
+`comparison_guard_baseline_v3.png`, QA e pacote/recibo no mesmo diretório.
+`doc/hayato_cps2_sample_v1.md` é o brief congelado de entrada do review; não
+reescrever seus fatos iniciais como se fossem resultados finais. Pareceres
+`hayato_cps2_idle_independent_review_v2.json` e
+`hayato_cps2_pair_derivative_review_v{1,2,3}.json` preservam falha e correções.
+Checklist:14eixos estáticos pass, ação/animação/owner pending, bloqueia promoção.
+Registro global ainda falha pelo relatório histórico Socialv5 ausente; não
+foi fabricado. Receita específica anotada no candidato existente de curadoria,
+sem doutrina global/gate/ID novo. A escala absoluta legada68–72pxSMS não é
+reclamada: este diagnóstico preserva a transformação do Social e corpos
+aparentes~58–60px; equipamentos são medidos separadamente.
+
+Próxima dependência irredutível: dono escolher corte curto de katana (proposta)
+ou desembainhar/retornar à guarda. Pergunta já enviada, sem resposta recebida.
+Depois contratar poses/durações como amostra artística diagnóstica, sem
+aprovar dano/hitbox/frame-data competitiva, converter chave de execução cedo
+junto ao idle, produzir/revisar sequência e renovar ROM/evidência. Não ampliar
+atlas, elenco, cenários ou sistemas. Sem ação/continuidade animada não se
+responde positivamente à repetibilidade completa. Sem áudio/PAL/gameplay,
+owner ou entrega/AAA. Commit/SHA remoto e recuperação final no recibo do lote.
+
 > ESTADO OPERACIONAL REAL. **Autoridade #1** — vence qualquer outra fonte.
 > Registre o que FOI OBSERVADO, nunca o que se pretende. Estado de sessão
 > não substitui este arquivo.
 
 ## Última atualização
+2026-10-29 — Novo lote da mesma amostra: candidata de sequência v8, SHA
+`877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41`.
+Montagem indexada sem alterar pixels: cinco quadros da v5 e J04 reto da v6;
+idle continua sendo o J01/v5 exato. Revisão integral da fonte/contato concluída no parecer v8,
+sem herdar o PASS facial da v5 como aprovação automática. O adaptador oficial ganhou
+fase explícita da grade tall por pose: padding transparente compensado no META,
+sem mudar PNG/pivô/escala. J04 `[3,9]`: pico do par9→8, SAT33→34, PNG idêntico
+à conversão da v6 antes reprovada; pool conjunto220 padrões/7.040B. Os outros
+seis PNGs e Ken são idênticos à v5; defaults da v5 refazem header/PNGs idênticos.
+Self-check reconstruiu pixels nas128fases; nove testes passaram, incluindo
+largura realmente impossível e recusa de offsets negativos neste emissor unsigned.
+Replay com o guard final refaz header/PNGs idênticos aos ligados na ROM.
+ROM32.768B, SHA `452cd56594db3764da4b3d1c61e8e5f2e9d66714907b2edd3fbc453da3be240f`.
+Parecer independente v8 passou os13eixos da fonte e chaves estáticas, inclusive
+J04/rosto/equipamento. Não certifica percepção temporal nem aceite do dono.
+QA nativa120/120 framebuffers exatos e7checks de fidelidade; sessão
+`80cebe97316e468bbbcc2eec8ddac9fd` encerrada. Braço/punho/luva do J04 e Ken
+inteiros, recuperação sem resíduos. SMRT:59,62/59,74fps em duas janelas8s;
+selo3000frames0derrame/mínimo207, sessão `b3bc1620274a4f1faf3752275b533299`.
+Degrau128B:0derrame/mínimo217, SHA `7ce342bc…`, sessão
+`8905b516d2f445f8a8f15bd8adb30848`. Ambas encerradas.
+Rastreio manual em sessão própria `b80042e52b4847d8a678693a7eee819e`, encerrada:
+13casos RAM/journal passaram, ordem/holds2/1/1/1/1/3,21framebuffers exatos e
+lag1VDP entre pose submetida/apresentada. Idle/J01 iguais emRGB dependem também
+do probe. A coleta anterior após performance, com teclas0 na amostra de2VDP,
+foi preservada como cobertura falha; nova linha lê cacheSDK e probe a cadaVDP.
+Não houve correção de SDK/ABI: ROM e input funcionaram no traço controlado.
+As quatro sessões foram encerradas; sem herdar evidência das ROMs anteriores.
+Os microdetalhes SMS e o julgamento de playback contínuo permanecem para aceite
+humano; checklist revisado bloqueia promoção. A fonte61poses v08.2 continua
+aprovada separadamente. Relatório histórico v5 ausente ainda bloqueia auditoria
+global do registro; não há relatório fabricado. Publicação/recuperação do lote
+ficam em `contact_grid_v8/publication_receipt.json` e `archive_receipt.json`.
+Sem ampliar desenhos/timing, atlas, personagens ou movimentos. Fonte e prova
+em `jab_revision_v8/` e `out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/`.
+
+2026-10-29 — Continuidade da amostra: fonte **v5** selecionada como candidata
+para diagnóstico, SHA `44ae0342e9db909d467907c1c21633165f5ee8dd1034b90d596d38498abd9c05`.
+A revisão independente v5 passou **somente o reparo facial**: aro/lente de latão
+reconhecíveis nos seis rostos, sem regressão corporal material observada. Não é
+aceite artístico completo, animação, SMS, ROM ou aprovação do dono. A v4 não
+fechou o rosto; v6 alongou J04 e o conversor reprovou o par; v7 permaneceu com
+articulação de contato insuficiente e não foi selecionada. Tentativas preservadas.
+O ramo seguinte usa v5 na ROM para conferir sobrevivência facial e registrar o
+gesto compacto para julgamento temporal, sem mais gerações genéricas do braço.
+Conversão v5: 216 padrões/6.912 B, SAT31 nas poses salvo J04=32, pico8 em todos
+os sete pares. Seleção diagnóstica `MOF_CPS2_SAMPLE=5`; valor1 preserva os dados
+anteriores. Build v5:32.768 B, SHA `fc46d77b9fea6ffd63c262aa085de3e1e623409c1db3e706e163d9d2439cf24b`.
+QA nativa independente:1/1 caso,120/120 framebuffers exatos e seis checks de
+fidelidade, sessão `b2f3d33e89d84c9f8c68e089eacb6059` encerrada. A assinatura dos
+óculos ainda se comprime em poucos pixels e lapela/colete perdem definição no
+SMS; review técnico não os aprova artisticamente. Performance própria:
+`93578b87ccbe4375931aec912dc9cd8d`,59,62/59,79fps em janelas8s, selo3000frames
+sem derrame (`vline_min=207`). Stress+128B, SHA `a5c013a8…`, sessão
+`c3161d84042a4bda9367fa521597b810`,sem derrame (`vline_min=217`). As três sessões
+foram encerradas e bundles conferidos. Seis testes do adaptador e gates de
+recurso/scanline/semântica/contrato/corredor/vínculo/QA passaram; checklist
+artístico permanece pending/bloqueia promoção. Não transportar estes PASS para
+outras ROMs, gameplay, áudio, PAL ou produção. Contato J04 requer julgamento
+temporal da mídia nova; óculos na escala SMS e aceite do dono continuam abertos.
+Handoff e mídias: `doc/dr_social_cps2_sample_v1.md`, seção de2026-10-29, e
+`out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/`. Publicação/commit
+final são registrados no `publication_receipt.json` desse diagnóstico.
+
+2026-10-29 — O dono aprovou explicitamente **o método** da amostra CPS2 e
+pediu registro para curadoria futura e avanço ao próximo passo. Decisão, receita,
+fontes/ROM/pacote por SHA, resultados e limites registrados em
+`doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`.
+Método aprovado para continuidade; homologação global permanece futura, sem
+novo ID de lição, mudança de doutrina ou promoção de arte inferida. A revisão
+v2 continua `revise_before_growth`: próximo delta é rosto/óculos e clareza do
+contato J04, mantendo o mesmo escopo idle + jab. A v08.2 permanece aprovada
+separadamente. Os números abaixo são da ROM v3 já medida, não de arte futura.
+
+2026-10-28 — Amostra autoral CPS2 v3 produzida como candidata: uma pose idle
+(cópia de J01) e `social_light_jab` J01–J06, sem expansão do atlas. Fonte
+384×256/30 cores, seis células 128×128, corpo ~104 px, alpha binário; SHA
+`04d21085…`. Receitas, prompts, originais e tentativas preservados no Git;
+implementação/arte em `ba706e8`. Relatório/handoff: `doc/dr_social_cps2_sample_v1.md`.
+ROM diagnóstica 32.768 B, SHA `f5d54b15…`, observada no Emulicious: par
+Social/Ken íntegro, 31 SAT/pico8, pool212 padrões. Fontes→SMS→header→ROM ligados
+por hashes; dados buildados conferem com o fonte/header atuais. QA nativa
+independente `/root/social_runtime_qa`: 1/1 caso passou, 120 framebuffers
+exatos, sessão encerrada. J02–J06 apresentam holds1/1/1/1/3; J01/idle têm
+pixels iguais e seus IDs dependem também da sonda, com latência observada de
+um frame entre submissão SAT e framebuffer. FPS em janelas8s:59,43/59,56;
+janelas curtas anteriores58,8/59,23 falharam. Worst-frame autônomo3000frames
+passou, zero derrames, `vline_min=207`; degrau+128B passou, mínimo217.
+As quatro sessões do lote foram encerradas. Seis testes do adaptador e gates
+de recurso, scanline, semântica/contrato, fonte raster, vínculo, tilemap,
+debug/corredor passaram após self-checks. Isso paga apenas o trecho diagnóstico
+NTSC; sem gameplay, cenário/HUD, áudio novo ou entrega de produção.
+
+Revisão artística v2: `revise_before_growth`. Cabelo cinza/abas/J03 melhoraram,
+mas óculos variam entre poses, contato J04 precisa leitura mais inequívoca e a
+conversão enfraquece rosto/lapela/colete. Checklist bloqueia promoção; dono
+ainda não aprovou esta fonte CPS2. Próximo delta: rosto/óculos e contato,
+revisão hash-bound antes de qualquer ampliação. Comparativos/animação/ROM e
+evidência estão em `out/diagnostics/dr_social_cps2_sample_v1/` e `out/candidates/`.
+
+Pacote de revisão `dr_social_cps2_sample_review.zip` no diagnóstico: 263 arquivos
+verificados pelo manifest interno, SHA `9536b5a5…`, 3.165.950 B. Cópia local de
+recuperação idêntica e recibo em
+`/home/misael/.local/share/project-recovery/SMSForge/artifacts/dr_social_cps2_sample_v1.zip`.
+Fontes/receitas ficam no Git; esse arquivo protege os gerados fora de `out/`,
+mas não é backup em outro host nem release de produto.
+
+Foi conferida a decisão artística v08.2 existente e o PNG aprovado em
+`res/approved_art/dr_social/`, SHA `4e557095…`. As afirmações históricas abaixo
+de aprovação pendente estão superadas somente nesse escopo. A aprovação foi
+preservada sem inferir conversão/runtime/budget; identidade segue no model v4.
+Variantes `cps2-idle`/`cps2-light-jab` são candidatas distintas. Bloqueio
+organizacional preexistente: relatório histórico v5 ausente impede PASS global
+do registro. Seu kind também não representa no head genérico a fonte artística
+aprovada em res/; a decisão/hash exatos permanecem na reconciliação. Nenhuma
+aprovação ou relatório histórico foi fabricado.
+
 2026-10-12 — Diretriz v08.2 executada como candidata determinística. A reclassificação autorizada atravessou fronteiras de materiais/contorno, preservando alpha e grade; o casaco foi limitado aos índices 5/6. Uma auditoria independente por célula encontrou zero singletons e zero componentes sem bloco sólido 2×2 em cabelo, casaco e pele. Permanecem 11 cores úteis, zero vazamentos semânticos, 85 pixels de óculos dourados, haste branca de 1.245 pixels e zero pixels não cinza na máscara do cabelo em 61/61 poses. Foram adicionados 863 pixels ao contorno por voto de vizinhança, sem modificar nenhum pixel do contorno original. A candidata ainda aguarda revisão visual do dono; não foi promovida, integrada em `res/` nem compilada em ROM. Amostras, relatório, máscaras e log estão em `data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_2_final_candidate/`; contrato, diretriz e registro de curadoria estão em `doc/dr_social_sprite_mask_contract_v08_2.json`, `doc/dr_social_sprite_rebuild_directive_v08_2.md` e `doc/curation_candidates/2026-10-12_dr_social_v08_2_cluster_consolidation.json`. A matriz v07 permanece congelada como geometria; model sheet CPS2-Alpha-Cel v4 continua a referência aprovada de identidade.
 
 2026-10-12 — Diretriz v08.1 e candidata de cor: o dono autorizou os óculos de latão na zona amarela e confirmou a preservação de 85 pixels faciais. O passe determinístico classificou os 36 resíduos da auditoria v08, zerou vazamentos branco/amarelo/bordô/cinza e deixou 1.245 pixels da haste da bengala brancos e uniformes; alpha, grade 8×9, 61 poses e paleta indexada foram preservados. A inspeção também localizou e corrigiu a sombra avermelhada da franja: 1.014 pixels avermelhados foram recuperados como cabelo cinza e há zero pixels não cinza dentro das máscaras de cabelo em 61/61 poses. A limpeza 2×2 ainda falha: restam 73 singletons de cabelo, 96 do casaco e 341 da pele (102/139/553 componentes abaixo de 2×2). A candidata não foi promovida, integrada em `res/` nem compilada em ROM. Arquivos: `doc/dr_social_sprite_mask_contract_v08_1.json`, `doc/dr_social_sprite_rebuild_directive_v08_1.md` e `doc/curation_candidates/2026-10-12_dr_social_v08_1_cluster_consolidation.json`; amostras e relatório estão em `data/source_art/sprite_studies/dr_social/review_drafts/basic_sequences_61f_candidate_v08_1_masks_candidate/`. A matriz v07 segue congelada como geometria; model sheet CPS2-Alpha-Cel v4 segue como única referência de identidade.

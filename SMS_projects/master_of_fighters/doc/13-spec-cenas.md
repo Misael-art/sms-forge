@@ -1,5 +1,106 @@
 # 13-spec-cenas — master_of_fighters
 
+## J.J. — seleção aprovada pelo proprietário
+
+A resposta “aprovado” fecha o conceptv5/fontev6, a proporção da Zillion,
+os seis desenhos sem FX e o retorno apresentado com7/4/2/3/6. Preservar arte,
+tempos e ROMs; decisão em `decisions/jj-zillion-character_owner_approval.json`.
+Checkpointv7 registra o aceite sem inventar percepção contínua ou nova sessão.
+As pendências de aceite nas seções anteriores são históricas. Objetos/FX,
+combate completo, produção e homologação global continuam fora deste aceite.
+
+## Histórico técnico anterior ao aceite
+
+## Par J.J./Social vigente — fonte v6, dados v5 sem FX
+
+Medição oficial das 12 composições (seis poses × duas faces): normal 8×8,
+180 padrões/5.760 bytes residentes, máximo de 50 entradas SAT, pico 8/linha.
+Canvas 104×88, pivô (48,80), origens X16/128 e Y64 mantêm chão visível Y143.
+P1 única compartilhada de 15 códigos úteis, com os 902 pixels/índices/RGBA de
+Social preservados. Sem efeito/projétil; não extrapolar esse pico para FX futuro.
+Três builds32KiB, gates e QA260frames passaram. VBlank3.000frames por ROM:
+base0derrame/mínimo213,stress1280derrame/mínimo224. FPS8s59,32/58,36 falhou;
+confirmação20s59,79/59,84 passou, sem provar pacing porframe. Recibos em `out/diagnostics/jj_zillion_single_shot_v5/`.
+A correção pontual da fonte6 tem zero delta SMS, com reuso explícito por hash.
+
+## Histórico J.J. v1 — pulso incorporado supersedido pela direção sem FX
+
+Amostra diagnóstica: guarda + cinco poses de disparo único, com pulso de laser finito em duas exposições, junto do Social preservado. Usar a mesma rota e escala comum do estudo anterior; paleta/material, registro de sola e grade nos dois sentidos entram no contrato desde o início. Tetos físicos 8/linha e 64 SAT; residência e pior VBlank do novo par ainda `pending`, incluindo degrau adicional. Contagens reais em `jj_zillion_single_shot_route_v1.json`; nada herdado do budget de Hayato.
+
+## Seleção atual — fonte v4, somente tempos no perfil v7
+
+Oito PNGs por lado e sete manifestos de cena por lado são byte-idênticos à v4.
+O header inteiro difere somente na tabela8/1/2/7/2/5. Recursos e geometria são
+reutilizados pela identidade dos arquivos; conversão oficial do perfil confirma
+219padrões/7.008B,max53SAT,pico8. Não há distorção de lâmina, mudança de escala,
+P1, posição ou equipamento. Aceite do dono: preview fonte com esses tempos.
+QA nova passou260quadros nos dois sentidos, incluindo R02original e guarda.
+Gravação nova480quadros exatos. FPS base59,71/59,46 em duas janelas8s;
+VBlank3.000frames por ROM,0derrame,mínimo213 base/223 stress128, sessões fechadas.
+SHAs v7 no memorybank; números v6 abaixo são históricos. O aceite humano da
+fonte/tempos e a prova técnica desta amostra não aprovam combate completo.
+
+## Histórico — fonte v6 rejeitada, tempo contextual e espada
+
+Mesma cena diagnóstica, escala, P1, poses e posições da v4. Conversões
+`converted_v6_left/right`: 220 padrões/7.040 bytes residentes, máximo 53
+entradas SAT e pico de 8 sprites por linha nas 14 composições medidas pelo
+adaptador normal 8×8. Sete PNGs por sentido são byte-idênticos à v4; somente
+R02 tem delta de 110 pixels na região da lâmina. Social, corpo, sola e demais
+poses preservados. Retângulo de amostragem [50,53,169,159] mantém a grade da
+fonte sem mudar pixels. Componente solto da tentativa v5 foi reparado por patch
+autorado da ponta, não pela remoção de pixels SMS. Todos os 16 PNGs passam
+componentes min4/c8; materiais seguem revisão visual independente separada.
+QA nova:260quadros exatos nos dois sentidos e480quadros de gravação real na
+ROM direita. VBlank selado3.000frames por ROM:0derrame,mínimo213 base/223
+stress128. FPS base59,74/59,42 em duas janelas8s. Esses números pertencem aos
+SHAs v6 do memorybank; não aprovam qualidade temporal/percepção ou combate completo.
+
+## Composição corrente — corte corporal, fonte v4
+
+Mesmo par Hayato/Social sem cenário/HUD/áudio novos. P1 idêntica ao Socialv8,
+15códigos úteis, uma única escala comum. Perfil8×8 explícito no adaptador
+canônico:219padrões/7008B residentes em0..1FFF, PNT3800,SAT3F00, até53objetos
+naSAT e8/scanline nas14composições. QA de ambas as orientações apresenta236quadros
+exatos; vídeo nativo atual acrescenta480quadros exatos. VBlank selado3000frames:
+zero derrame, mínimo213 base/223 stress128; FPS59,78/59,67 no perfil base.
+Contagens estáticas, reprodução correta e throughput não aprovam expressividade.
+Canvas88×88/pivô40,80, origens24/136,64 mantêm pixels na mesma tela/solo144.
+Fases por pose e orientação estão nas receitas, sem omitir células visíveis.
+Não aplicar budget histórico8×16 ou aprovação da guarda a esta sequência.
+
+## Histórico: Hayato corte curto × guarda Social — diagnóstico 2026-10-29
+
+Fonte4poses, mesma transformação x2/3,y6/7+extra2/3 e P1 da guarda anterior.
+PGcanvas80×80,pivôSMS32,72;origens32,72 e144,72 invertidas noespelho.
+Âncoras ópticas C01/C03/C04y126,guard/C02y127; todos osPNGs terminam72,
+portanto últimaopaca143 no runtime.202patterns/6464B,33SAT máximo,pico8;
+estas são contagens do emissor estático, não orçamento de VBlank observado.
+Todos osframesresidentes, base atualiza sóSAT. Próximo degrau128B prefixo
+residente correto, sem mudança visual. ROM e entrada/holds precisam de QA nova.
+Não herdar FPS/VBlank do checkpoint estático. Fonte/previews e controles em
+out/diagnostics/hayato_short_cut_v1/, próximo aceite no memorybank atual.
+
+## Par diagnóstico Hayato + Dr. Social — 2026-10-29
+
+GuardaHayato v2,source0b72e603…,materialmap2,registrobaseline3. Quatro pares:
+guardas em ambos os lados e Socialjab contra guardaHayato nos dois sentidos.
+Canvas porPNG80×80;pivôSMS(32,72);origens(32,72)/(144,72),trocadas noespelho;
+solasvisíveisy143,boundary144. P1comum15códigos doSocialv8, P0fundo0x15.
+Arma não entra na altura anatômica; source144×144 não é canvas obrigatório
+para futuros movimentos. Mesma transformação de elenco; não normalizar altura
+por bbox de equipamento. CorposSMS~58–60px no diagnóstico, sem claim de fechar
+faixa absoluta68–72px da produção.
+
+Guardas66patterns/2112B,32SAT,pico8; Social6poses contra guardaHayato
+222patterns/7104B,35SAT máximo,pico8. Todasresidentes; baseSATsomenteVBlank.
+Baseline3 inclui faseSocialJ04espelhado[5,9], medida após corrigir1px nos pés.
+0derrame em3000frames,mínimo207; degrau+128B0derrame,mínimo218. FPSmédioNTSC
+59,67/59,81 em8s. Não há prazo/streaming/dano/hitbox/açãoHayato aprovados.
+Controle, revisão, SHAs, sessões privadas encerradas e índices no memorybank
+atual e out/diagnostics/hayato_cps2_sample_v1/result.json. É checkpoint estático,
+não cena de combate/entrega; ação própria depende da escolha já solicitada.
+
 > Budget REAL por cena. **Autoridade #3.**
 > Regra: **"estimado" é proibido neste arquivo.** Todo número aqui é medido,
 > com o método da medição citado. Folga não medida é timidez (§18).
@@ -46,6 +147,53 @@ uma cena. O scan não encontrou ilhas opacas menores que 2 px; regiões por
 material, anatomia, identidade visual do terminal da bengala e review artístico
 seguem pendentes. A alocação de paleta runtime está em
 `doc/palette_runtime_contract_v1.json`; não há 14 paletas de sprite separadas.
+
+## Trecho diagnóstico CPS2 idle/jab — 2026-10-28
+
+Owner e fonte: `dr_social_cps2_sample_v1.md`. ROM base SHA `f5d54b15…`,
+32.768 B. Medição do pool e dos sete manifestos `scene_*.json` pelo pipeline
+tall e `audit_sprite_line_sim.py`: 212 padrões/6.784 B residentes, 31 SAT e
+pico8 por scanline em idle e J01–J06, zero overflow. Uma P1 comum de15 cores
+úteis com o Ken autorizado. Sprites na janela0x0000..0x1FFF; tile0 vazio
+compartilhado com fundo diagnóstico, PNT0x3800, SAT0x3F00. Não há cenário,
+HUD, projéteis ou áudio neste inventário.
+
+No setup, padrões/CRAM são carregados com display desligado. Em cada tick de
+animação, somente SAT é copiada ao VDP; os desenhos ficam todos residentes.
+Selo autônomo3.000frames no Emulicious: `vovf_delta=0`, `vline_min=207`.
+Degrau medido de+128B de padrões corretos por VBlank: também zero derrames,
+`vline_min=217`, em outra ROM/sessão identificada no relatório do lote.
+Não há conversão desses valores em milissegundos CPU ou teto máximo.
+
+SMRT em duas janelas8s:59,43/59,56fps; alvo NTSC passou no instrumento.
+Janelas curtas anteriores falharam e permanecem registradas. Sem qualificação
+PAL. Todos os números vêm de JSONs em `out/diagnostics/dr_social_cps2_sample_v1/`
+e `out/evidence/sessions/`, com quatro sessões encerradas e QA visual nativa
+independente1/1. Não se transporta o resultado para produção, gameplay ou
+outros conteúdos. O orçamento integrado da Cena01 abaixo continua aberto.
+
+## Trecho diagnóstico facial v5 — 2026-10-29
+
+ROM `fc46d77b…`,32.768B: fonte v5 e receita SMS identificadas no handoff.
+216 padrões/6.912B;31SAT em idle/J01/J02/J03/J05/J06 e32SAT em J04, pico8 em
+todos os sete pares pelo conversor tall/simulador. Fonte larga v6 reprovou
+J04/pico9 e não foi buildada. Layout/CRAM/transferências iguais à baseline,
+com os novos patterns residentes. FPS8s59,62/59,79NTSC; selo3000frames,
+zero derrames/mínimo207. Degrau128B medido em outra ROM SHA `a5c013a8…`,
+zero derrames/mínimo217. Arte/contato/produção permanecem abertos; esses
+números não pagam a Cena01 abaixo, cenário/HUD ou gameplay.
+
+## Trecho diagnóstico contato v8 — 2026-10-29
+
+Fonte/receita no handoff, ROM452cd565…/32.768B. Pelo conversor e sete manifestos
+SAT:220padrões/7.040B,31SAT nas poses exceto J04=34, pico8 emtodos os pares.
+GradeJ04(3,9)px compensada: controle idêntico nos oito PNGs mediu33SAT/pico9 e
+foi reprovado sem build. O custo maior de SAT/patterns está incluído.
+Performance: duas janelas8s59,62/59,74fpsNTSC; selo3000frames0derrame/mínimo207;
+degrau128B,outra ROM7ce342bc…,0derrame/mínimo217. Quatro sessões encerradas;
+120framebuffers independentes e21da linha temporal exatos. Esses números pagam
+somente o diagnóstico residente; cenário/HUD/gameplay, PAL e produção da Cena01
+continuam abertos. Não inferir orçamento pelo screenshot nem milissegundosCPU.
 
 ## Cena 01 — _(nome)_
 ### Layout de VRAM declarado

@@ -10,10 +10,18 @@
       192
     ],
     "combat_height_px": 160,
-    "fighter_height_ratio": [
-      0.45,
-      0.55
-    ],
+    "fighter_scale_profile": "pose_budget",
+    "fighter_height_ratio": null,
+    "pose_budget": {
+      "framebuffer_x": [2, 3],
+      "framebuffer_y": [6, 7],
+      "extra_scale": [2, 3],
+      "idle_max_columns": 4,
+      "gdd": {
+        "path": "doc/11-gdd.md",
+        "sha256": "d40b8a68ef61b5646bc1841807ecbea1ae9c6318b57cda91a561e9350cfb947b"
+      }
+    },
     "sprite_mode": "8x16",
     "sat_entries": 64,
     "sprites_per_line": 8,
@@ -26,7 +34,7 @@
   },
   "scale_policy": "uniform_per_character_scene_contract",
   "legacy_profile_delivery_allowed": false,
-  "runtime_profile": "rev2_planned_renderer_pending_pilot",
+  "runtime_profile": "rev2_diagnostic_sprite_streaming",
   "implementation_profiles": {
     "diagnostic": {
       "status": "observed",
@@ -82,7 +90,7 @@
       "id": "fighter_scale",
       "status": "planned",
       "owner": "converters + direção de arte",
-      "acceptance": "Altura opaca do corpo idle em 1x ocupa 45–55% da área útil declarada; pivots, proporções e CLSN preservados; exceções por pose explícitas."
+      "acceptance": "Escala uniforme do GDD por personagem/cena, idle em até quatro colunas de 8 px; pivôs, proporções e CLSN preservados e poses excepcionais explícitas. A geometria e a fidelidade exigem prova na ROM."
     },
     {
       "id": "sprite_schedule",

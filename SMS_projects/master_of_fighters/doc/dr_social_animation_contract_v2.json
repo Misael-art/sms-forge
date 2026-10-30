@@ -6357,13 +6357,12 @@
     },
     "balance_method": "Compare each move against the same baseline in hit, block and whiff states. Measure startup/active/recovery, damage as a fraction of approved life, pushback, hitstun, resource use and counterplay; tune only after ROM/emulator playtests."
   },
-  "approved_source_art": [
-    {
-      "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
-      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
-      "role": "sole approved visual identity, anatomy, costume, equipment and palette reference for the new basic animation source; do not use earlier sprite sheets"
-    }
-  ],
+  "approved_source_art": {
+    "path": "res/approved_art/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_v08_2_approved.png",
+    "sha256": "4e557095dcafd4f11a0369e6e993ad4fa99497ab529509dedd2445f83bcf89d8",
+    "decision": "doc/decisions/dr-social-animation-source-v08_2_owner_approval.json",
+    "scope": "Exact 61-pose artistic source; not continuous timing, composition, FPS, audio, gameplay or delivery."
+  },
   "art_generation_route": {
     "sequence_order": [
       "social_light_jab",
@@ -6411,17 +6410,15 @@
     }
   ],
   "current_animation_source_candidate": {
-    "artifact_id": "dr-social-animation-source-v02",
-    "path": "data/source_art/sprite_studies/dr_social/dr_social_basic_sequences_61f_cps2_alpha_cel_candidate_v2.png",
-    "sha256": "bc5c7fee6155669c5539cfa09629a627dcd14e9702c200fe9469cd7029d05670",
-    "status": "candidate_blocked_pending_review",
-    "sequence_scope": "The nine basic sequences and 61-pose total defined in GDD/TDD remain unchanged.",
-    "preflight": "Partial alpha, visible cyan/blue fringe, 208338 visible RGB values, and 1254x1254 dimensions that do not align to exact 8x8 cells; do not convert until corrected."
+    "variant": "cps2-light-jab",
+    "artifact_id": "dr-social-cps2-light-jab-v08",
+    "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/jab_source.png",
+    "sha256": "877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41",
+    "scope": "Six existing authored drawings assembled losslessly: five v5 + straight J04 v6. Independent native-source/static-key review passed; temporal/SMS acceptance and owner promotion remain separate."
   },
   "source_status_update": {
-    "date": "2026-10-11",
-    "scope": "visual source pointer only; move definitions, timing proposals and balance data unchanged",
-    "old_source_status": "superseded_as_active_source_archived",
-    "new_source_status": "generated_candidate_blocked_pending_owner_review"
+    "date": "2026-10-29",
+    "authority": "Method approval retained. V8 source/keypose review passed; new diagnostic ROM and timed RAM/pixel observation are separate evidence. v08.2 owner approval remains intact.",
+    "details": "doc/dr_social_cps2_sample_v1.md"
   }
 }

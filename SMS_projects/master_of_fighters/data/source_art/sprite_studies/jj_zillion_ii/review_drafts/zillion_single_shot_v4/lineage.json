@@ -1,0 +1,73 @@
+{
+  "schema": "sms_authored_animation_lineage_v1",
+  "character": "jj_zillion_ii",
+  "status": "candidate_minimum_complete_shot_not_owner_approved",
+  "parent": "jj-zillion-single-shot-source-v03",
+  "channel": "mechanical composition of existing ImageGen3body drawings and generated finiteemission",
+  "body_drawings_including_guard": 4,
+  "action_body_drawings": 3,
+  "source_frame_slots": 4,
+  "unique_effect_drawings": 1,
+  "new_ImageGen_calls": 0,
+  "body_weapon_pixels_changed": 0,
+  "source_refs": [
+    {
+      "path": "../zillion_single_shot_v3/native/I00.png",
+      "sha256": "d5d44be9f7f3e1d576b779d80ae4e031563603e258ec5b4474a49f1b9fdcacac"
+    },
+    {
+      "path": "../zillion_single_shot_v3/native/S01.png",
+      "sha256": "8fd453c8266905e9624d73ab229e23486abf1d4b283f8e8e56bae5555e9efea9"
+    },
+    {
+      "path": "../zillion_single_shot_v3/native/S03.png",
+      "sha256": "a78f181b0a70a418799a8bf4a258f7f9bcdcd873b041995221042289ef6430b6"
+    },
+    {
+      "path": "../zillion_single_shot_v3/native/S04.png",
+      "sha256": "881febef2f68acafc226fb02d438c20904b6e33663f7582957e332202f72c4a4"
+    },
+    {
+      "path": "../zillion_single_shot_v3/native/S05.png",
+      "sha256": "1be306623f394d19bcd978420437e96d4eee29ae7bd470ad3594b58d21a57d79"
+    }
+  ],
+  "assembly": {
+    "recipe_path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/assembly_recipe.json",
+    "recipe_sha256": "36904a27ab450d7015ebd5ff209ec4a508e2995f32b6fdd9612fdeda30080598",
+    "script_path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/assemble.py",
+    "script_sha256": "20ae8d9e099d326959e42bb9c2d151c74c960605ec81740e650fa368c9cdde72"
+  },
+  "equipment_authority": "doc/jj_zillion_weapon_identity_contract_v1.json",
+  "frames": [
+    {
+      "id": "I00",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/native/I00.png",
+      "sha256": "d5d44be9f7f3e1d576b779d80ae4e031563603e258ec5b4474a49f1b9fdcacac",
+      "source_body": "../zillion_single_shot_v3/native/I00.png"
+    },
+    {
+      "id": "A01",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/native/A01.png",
+      "sha256": "8fd453c8266905e9624d73ab229e23486abf1d4b283f8e8e56bae5555e9efea9",
+      "source_body": "../zillion_single_shot_v3/native/S01.png"
+    },
+    {
+      "id": "A02",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/native/A02.png",
+      "sha256": "e77b342524d247af5a65c5901d326350ffcde8f0fe059bad0ed647e2c5ec362f",
+      "source_body": "../zillion_single_shot_v3/native/S04.png"
+    },
+    {
+      "id": "A03",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/native/A03.png",
+      "sha256": "1be306623f394d19bcd978420437e96d4eee29ae7bd470ad3594b58d21a57d79",
+      "source_body": "../zillion_single_shot_v3/native/S05.png"
+    }
+  ],
+  "sheet": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/shot_source.png",
+    "sha256": "902a117d78b7b0a5dcfd27b336238f6d2e191846a48f5858118ad091bdad9ce9"
+  },
+  "scope": "Three actual body drawings of action, no separately claimed aim/absorption drawing or simulated projectile flight. New composed emission and target sampling require independent source/SMS and freshROM evidence."
+}

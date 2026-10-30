@@ -13,3 +13,11 @@
    `audit_psg_quality.py` aplica heurísticas declaradas; composição, balanço,
    clipping e adequação ao público precisam de audição/review independente.
    Preview sintetizado é controle offline, não captura do chip/emulador.
+7. Para identidade musical, definir motivo, frase, contraste e retorno do loop
+   antes de gerar streams; ouvir a emenda e a repetição em sessão de jogo.
+   Testar ação frequente, evento prioritário e dois SFX concorrentes: quais
+   notas podem ser interrompidas, qual efeito vence e como a música retoma.
+   Variação/adaptação são opções autorais por segmento/envelope, dentro do
+   driver e do budget; não pressupor stems, mixer DSP ou canal extra.
+   NTSC/PAL exigem conferir andamento e duração no alvo suportado. Metas LUFS
+   de engines modernas não são automaticamente contrato do PSG analógico.

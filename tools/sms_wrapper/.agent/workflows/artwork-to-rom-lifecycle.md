@@ -71,6 +71,9 @@ aprovação de um estágio para outro nem de um hash para outro.
    restante. `source_pose_count` é desenho, não objeto VDP. Valores não medidos
    ficam `pending`/proposta. Rodar `audit_animation_contract.py`; após PNGs,
    `audit_animation_semantics.py` e revisão do movimento.
+   Antes do acabamento, aplicar coreografia corporal e teste gestual temporal
+   de `sms-sprite-animation.md`. Separar sete aplicações planejadas de efeitos
+   observados; não congelar postura para preservar identidade.
 7. **Produzir a prova técnica conforme o padrão do projeto.** Duas poses
    distintas (idle e ação), paleta, escala, canvas tile-alinhado, equipamento
    inteiro e mapa de tiles em painel separado. Essa prova valida a rota de
@@ -103,6 +106,10 @@ aprovação de um estágio para outro nem de um hash para outro.
     frame-paced e revisão da timeline. ACK ou screenshot estático não provam
     movimento. Igualdade pixel a pixel prova renderização daquela ROM, não
     anatomia, estilo, timing, gameplay ou qualidade AAA.
+    Abrir o checkpoint de seis eixos em `art-review.md`, com o gate existente
+    `audit_art_review_checklist.py`. Stepping confere estados; captura em run
+    livre e percepção contínua têm escopos próprios. `needs_evidence` conserva
+    a candidata/controle sem fabricar revisão temporal ou autorizar produção.
 11. **Integrar somente após a aprovação da conversão.** Obter revisão
     independente e humana do que aparece no ROM. Mapear paleta por material
     para P1 compartilhada; medir coexistência de elenco, cenário/HUD, VRAM,

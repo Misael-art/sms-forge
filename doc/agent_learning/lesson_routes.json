@@ -1,10 +1,10 @@
 {
  "schema": "sms_lesson_routes_v1",
  "status": "canonical_application_routes",
- "lesson_count": 122,
+ "lesson_count": 124,
  "source_coverage_sha256": "f086039f2d42542470ad5747b1693767e8dcd0ffedfab0e737f8b66d0b528755",
  "registry_source": "doc/curation/id_registry.json",
- "registry_issued_through": "L138",
+ "registry_issued_through": "L140",
  "excluded_holes": [
   "L012",
   "L020",
@@ -118,7 +118,7 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/laboratory-mode.md",
-     "sha256": "1db01d7a8853a216ce5830378be1c581e67acecdac94b6a10a444e97a77a8ddd",
+     "sha256": "995f2e4a043ed9c11de02e0b6249968a0480510ef216164159e99b00138ae75f",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -437,8 +437,8 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
-     "sha256": "82974879685b44ffa476b76961fc5f05b9a8e0e0d30b1511dba25d84135bb97e",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a6715b3c9e2b99a78b320b3fe2ceb1c11e33872f4a96f9a180e3a941e9003d3f",
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-observed-case-evidence.md",
@@ -487,7 +487,7 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/laboratory-mode.md",
-     "sha256": "1db01d7a8853a216ce5830378be1c581e67acecdac94b6a10a444e97a77a8ddd",
+     "sha256": "995f2e4a043ed9c11de02e0b6249968a0480510ef216164159e99b00138ae75f",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     },
@@ -717,8 +717,8 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
-     "sha256": "82974879685b44ffa476b76961fc5f05b9a8e0e0d30b1511dba25d84135bb97e",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a6715b3c9e2b99a78b320b3fe2ceb1c11e33872f4a96f9a180e3a941e9003d3f",
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-observed-case-evidence.md",
@@ -826,9 +826,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md",
-     "sha256": "99f0543f52c23a3c56bd19e3ff8d82fff6f83ccd024e281f0c3f7853211605f4",
+     "sha256": "058ee119bb2ade7f7a9f2615ed1504a54855b86aff3c43dc9635a35e5b039b2b",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     }
    ],
    "application_gap": null,
@@ -968,9 +968,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
-     "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
@@ -980,7 +980,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
-     "sha256": "bdc1dd5e80371ac908ba2785fb0985909c6a0b86f36100f75f5d5a076634bf8e",
+     "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -1044,9 +1044,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -1099,9 +1099,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -1145,9 +1145,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -1200,9 +1200,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "f36f16cdaedf4d22306e6d32d0f8aee22da44b0aba0101b2ad510d4645f04780",
+     "sha256": "c2995c8a81cb7451ee310c956923e163ec22f1a71c1c5910d167da43192c34fb",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -1220,7 +1220,7 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/game-design-core-loop.md",
-     "sha256": "449b1260fc01231249b3c99d6dd2569747332b1276cd271047d2ede3055b8bd8",
+     "sha256": "d734320a5cc450479c123b19a1a2e7c6adf0dba9af4e7250369c148ae2995e72",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -1240,9 +1240,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
-     "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
@@ -1252,7 +1252,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
-     "sha256": "bdc1dd5e80371ac908ba2785fb0985909c6a0b86f36100f75f5d5a076634bf8e",
+     "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -1281,9 +1281,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-asset-pipeline.md",
-     "sha256": "076c32e8c65695d0f89253567043f4e8801d55906c5667b859a88a9c270eef1c",
+     "sha256": "457601f878dd4063c67a0623beb4d50539ed35eedefb9802e908c3eebb2b50a9",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -1377,9 +1377,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "f36f16cdaedf4d22306e6d32d0f8aee22da44b0aba0101b2ad510d4645f04780",
+     "sha256": "c2995c8a81cb7451ee310c956923e163ec22f1a71c1c5910d167da43192c34fb",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -1470,9 +1470,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
-     "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
@@ -1482,7 +1482,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
-     "sha256": "bdc1dd5e80371ac908ba2785fb0985909c6a0b86f36100f75f5d5a076634bf8e",
+     "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -1511,9 +1511,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
-     "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
@@ -1523,7 +1523,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
-     "sha256": "bdc1dd5e80371ac908ba2785fb0985909c6a0b86f36100f75f5d5a076634bf8e",
+     "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -1584,9 +1584,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2020,9 +2020,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-recipe-animacao-impacto.md",
-     "sha256": "4186be61648bf1c0c1a7119dcde44b4ad19cd399d8e872f5ad54c85b3fdc3348",
+     "sha256": "f3abfe7775be3d05f884078b3183f7a7cfb5c463a614ac5e50f679927bde528d",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -2095,9 +2095,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
-     "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
@@ -2107,14 +2107,14 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
-     "sha256": "bdc1dd5e80371ac908ba2785fb0985909c6a0b86f36100f75f5d5a076634bf8e",
+     "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
-     "sha256": "82974879685b44ffa476b76961fc5f05b9a8e0e0d30b1511dba25d84135bb97e",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a6715b3c9e2b99a78b320b3fe2ceb1c11e33872f4a96f9a180e3a941e9003d3f",
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -2141,9 +2141,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
-     "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
@@ -2153,14 +2153,14 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
-     "sha256": "bdc1dd5e80371ac908ba2785fb0985909c6a0b86f36100f75f5d5a076634bf8e",
+     "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
-     "sha256": "82974879685b44ffa476b76961fc5f05b9a8e0e0d30b1511dba25d84135bb97e",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a6715b3c9e2b99a78b320b3fe2ceb1c11e33872f4a96f9a180e3a941e9003d3f",
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -2187,9 +2187,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
-     "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
@@ -2199,7 +2199,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
-     "sha256": "bdc1dd5e80371ac908ba2785fb0985909c6a0b86f36100f75f5d5a076634bf8e",
+     "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -2228,9 +2228,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-audio.md",
-     "sha256": "446c7ff413a78f421f50f8c55b939ddf7820dcdc8d190f0b72614145345f50f4",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "64ff98c8fdeade9fe07a9ebdd04ee3af2971ec8cf1721eae2685d269c6feec4f",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-psg-composition.md",
@@ -2240,7 +2240,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-audio.md",
-     "sha256": "bdc1dd5e80371ac908ba2785fb0985909c6a0b86f36100f75f5d5a076634bf8e",
+     "sha256": "59defadd00fe94836e26d4349ba8c81428c1caac47699b11bed1143768367999",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -2275,9 +2275,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2304,15 +2304,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
-     "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2339,15 +2339,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
-     "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2409,15 +2409,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
-     "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2487,15 +2487,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
-     "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2536,9 +2536,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2565,15 +2565,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
-     "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2608,15 +2608,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
-     "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2643,15 +2643,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md",
-     "sha256": "6d4ea34e36334965f446dc8a222c37f3dcab15c7c060e0f14b7d31e29c79bf3b",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "sha256": "fec8af5f1a86bebe436964952164338f1516fb41ffff08f3e400d4372a87c612",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ],
    "application_gap": null,
@@ -2678,9 +2678,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
-     "sha256": "5197f6dfb97c1d363b1ee8cb6316f324d18c9af678236fb56cab129aad46712f",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a41008298712df505fbe4467eb248c195695c815944e99e87deefdf42e136138",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
@@ -2713,9 +2713,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
-     "sha256": "5197f6dfb97c1d363b1ee8cb6316f324d18c9af678236fb56cab129aad46712f",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a41008298712df505fbe4467eb248c195695c815944e99e87deefdf42e136138",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
@@ -2756,9 +2756,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
-     "sha256": "5197f6dfb97c1d363b1ee8cb6316f324d18c9af678236fb56cab129aad46712f",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a41008298712df505fbe4467eb248c195695c815944e99e87deefdf42e136138",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-fight-input-proof.md",
@@ -2799,9 +2799,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
-     "coverage": "gap_resolved_this_curation",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope.",
-     "sha256": "5197f6dfb97c1d363b1ee8cb6316f324d18c9af678236fb56cab129aad46712f"
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD.",
+     "sha256": "a41008298712df505fbe4467eb248c195695c815944e99e87deefdf42e136138"
     }
    ],
    "application_gap": null,
@@ -2842,9 +2842,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-observed-case-evidence.md",
@@ -2883,15 +2883,15 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
-     "sha256": "82974879685b44ffa476b76961fc5f05b9a8e0e0d30b1511dba25d84135bb97e",
+     "sha256": "a6715b3c9e2b99a78b320b3fe2ceb1c11e33872f4a96f9a180e3a941e9003d3f",
      "coverage": "application_strengthened_20261018",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -2932,9 +2932,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/first-playable-slice.md",
@@ -2973,9 +2973,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "f36f16cdaedf4d22306e6d32d0f8aee22da44b0aba0101b2ad510d4645f04780",
+     "sha256": "c2995c8a81cb7451ee310c956923e163ec22f1a71c1c5910d167da43192c34fb",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -3016,9 +3016,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "f36f16cdaedf4d22306e6d32d0f8aee22da44b0aba0101b2ad510d4645f04780",
+     "sha256": "c2995c8a81cb7451ee310c956923e163ec22f1a71c1c5910d167da43192c34fb",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -3053,15 +3053,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md",
-     "sha256": "99f0543f52c23a3c56bd19e3ff8d82fff6f83ccd024e281f0c3f7853211605f4",
+     "sha256": "058ee119bb2ade7f7a9f2615ed1504a54855b86aff3c43dc9635a35e5b039b2b",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "f36f16cdaedf4d22306e6d32d0f8aee22da44b0aba0101b2ad510d4645f04780",
+     "sha256": "c2995c8a81cb7451ee310c956923e163ec22f1a71c1c5910d167da43192c34fb",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -3088,9 +3088,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/original-artwork.md",
-     "sha256": "e3c3af1b107f6b3ff2a6095d0e9802dcca90cf3d0bd62e928a335615cf4611d2",
+     "sha256": "6e723da0adbceff96d1b9b69548856a0e088d77df6765272e9bed5cf1dfb5411",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/curation-learning.md",
@@ -3131,9 +3131,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/art-review.md",
-     "sha256": "580a7dcdef56dadab3ab47b5d1b7352e1f55e846f6f18bd950ac5e9010102065",
+     "sha256": "cd5a01623e56cabe359affa66f6a341553426829f87e6ab49033f13c80310405",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
@@ -3182,9 +3182,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/art-review.md",
-     "sha256": "580a7dcdef56dadab3ab47b5d1b7352e1f55e846f6f18bd950ac5e9010102065",
+     "sha256": "cd5a01623e56cabe359affa66f6a341553426829f87e6ab49033f13c80310405",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
@@ -3241,9 +3241,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/art-review.md",
-     "sha256": "580a7dcdef56dadab3ab47b5d1b7352e1f55e846f6f18bd950ac5e9010102065",
+     "sha256": "cd5a01623e56cabe359affa66f6a341553426829f87e6ab49033f13c80310405",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
@@ -3276,9 +3276,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/art-review.md",
-     "sha256": "580a7dcdef56dadab3ab47b5d1b7352e1f55e846f6f18bd950ac5e9010102065",
+     "sha256": "cd5a01623e56cabe359affa66f6a341553426829f87e6ab49033f13c80310405",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-visual-excellence.md",
@@ -3311,9 +3311,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/original-artwork.md",
-     "sha256": "e3c3af1b107f6b3ff2a6095d0e9802dcca90cf3d0bd62e928a335615cf4611d2",
+     "sha256": "6e723da0adbceff96d1b9b69548856a0e088d77df6765272e9bed5cf1dfb5411",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     }
    ],
    "application_gap": null,
@@ -3348,15 +3348,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
-     "sha256": "4a7d09f0197b74c475b7a9fb834765a3c53ead99557d47daa145275d76386265",
+     "sha256": "c2d0013c1da36c9723b14a64c5bac29d3557aeb22769b98866c0fb2f37b40d71",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
-     "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+     "sha256": "4539b2dc6fbf7a12ded3f0ade0813e444412b7eea46e2b08dc91b1a9b8c78c40",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -3399,15 +3399,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
-     "sha256": "4a7d09f0197b74c475b7a9fb834765a3c53ead99557d47daa145275d76386265",
+     "sha256": "c2d0013c1da36c9723b14a64c5bac29d3557aeb22769b98866c0fb2f37b40d71",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
-     "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+     "sha256": "4539b2dc6fbf7a12ded3f0ade0813e444412b7eea46e2b08dc91b1a9b8c78c40",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -3434,15 +3434,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
-     "sha256": "4a7d09f0197b74c475b7a9fb834765a3c53ead99557d47daa145275d76386265",
+     "sha256": "c2d0013c1da36c9723b14a64c5bac29d3557aeb22769b98866c0fb2f37b40d71",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
-     "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+     "sha256": "4539b2dc6fbf7a12ded3f0ade0813e444412b7eea46e2b08dc91b1a9b8c78c40",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -3483,7 +3483,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     },
@@ -3542,20 +3542,20 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-sprite-animation.md",
-     "sha256": "99f0543f52c23a3c56bd19e3ff8d82fff6f83ccd024e281f0c3f7853211605f4",
+     "sha256": "058ee119bb2ade7f7a9f2615ed1504a54855b86aff3c43dc9635a35e5b039b2b",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
-     "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+     "sha256": "4539b2dc6fbf7a12ded3f0ade0813e444412b7eea46e2b08dc91b1a9b8c78c40",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
    "historical_or_refuted": null,
-   "scope_or_open_limit": "Animation exercise proposed/not rendered; gate checks structural coverage only.",
+   "scope_or_open_limit": "2026-10-29 application: Social/Hayato data replay and observation-scope checks; Hayato continuous perception and owner acceptance pending; no universal quality/repeatability claim. Original historical scope preserved in source curation.",
    "measuring_tools": [
     {
      "reference": "audit_animation_contract.py",
@@ -3591,7 +3591,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3634,7 +3634,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3693,7 +3693,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3752,7 +3752,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3811,7 +3811,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3870,7 +3870,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3929,7 +3929,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
     }
@@ -3998,15 +3998,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
-     "sha256": "4a7d09f0197b74c475b7a9fb834765a3c53ead99557d47daa145275d76386265",
+     "sha256": "c2d0013c1da36c9723b14a64c5bac29d3557aeb22769b98866c0fb2f37b40d71",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
-     "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+     "sha256": "4539b2dc6fbf7a12ded3f0ade0813e444412b7eea46e2b08dc91b1a9b8c78c40",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -4097,15 +4097,15 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-asset-to-rom.md",
-     "sha256": "4a7d09f0197b74c475b7a9fb834765a3c53ead99557d47daa145275d76386265",
+     "sha256": "c2d0013c1da36c9723b14a64c5bac29d3557aeb22769b98866c0fb2f37b40d71",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
-     "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+     "sha256": "4539b2dc6fbf7a12ded3f0ade0813e444412b7eea46e2b08dc91b1a9b8c78c40",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
@@ -4181,19 +4181,19 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
-     "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
+     "sha256": "4539b2dc6fbf7a12ded3f0ade0813e444412b7eea46e2b08dc91b1a9b8c78c40",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/product-quality-checkpoint.md",
-     "sha256": "82974879685b44ffa476b76961fc5f05b9a8e0e0d30b1511dba25d84135bb97e",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a6715b3c9e2b99a78b320b3fe2ceb1c11e33872f4a96f9a180e3a941e9003d3f",
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ],
    "application_gap": null,
    "historical_or_refuted": null,
-   "scope_or_open_limit": null,
+   "scope_or_open_limit": "2026-10-29 application: Social/Hayato data replay and observation-scope checks; Hayato continuous perception and owner acceptance pending; no universal quality/repeatability claim. Original historical scope preserved in source curation.",
    "measuring_tools": [
     {
      "reference": "audit_animation_contract.py",
@@ -4343,9 +4343,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/art-review.md",
-     "sha256": "580a7dcdef56dadab3ab47b5d1b7352e1f55e846f6f18bd950ac5e9010102065",
+     "sha256": "cd5a01623e56cabe359affa66f6a341553426829f87e6ab49033f13c80310405",
      "coverage": "existing_application_entrypoint",
-     "selection_basis": "semantic_domain_review; lexical evidence is link support, not proof of understanding"
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-pixel-translate.md",
@@ -4475,13 +4475,13 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-asset-pipeline.md",
-     "sha256": "076c32e8c65695d0f89253567043f4e8801d55906c5667b859a88a9c270eef1c",
-     "selection_basis": "workflow integration and independent forward/review tests, within declared scope"
+     "sha256": "457601f878dd4063c67a0623beb4d50539ed35eedefb9802e908c3eebb2b50a9",
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/artwork-to-rom-lifecycle.md",
-     "sha256": "27b6941cfd32d5724a7695b30789d6762917c21e4fedef87c555ad4f7814dc91",
-     "selection_basis": "workflow integration and independent forward/review tests, within declared scope"
+     "sha256": "4539b2dc6fbf7a12ded3f0ade0813e444412b7eea46e2b08dc91b1a9b8c78c40",
+     "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
    ]
   },
@@ -4495,13 +4495,13 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/original-artwork.md",
-     "sha256": "e3c3af1b107f6b3ff2a6095d0e9802dcca90cf3d0bd62e928a335615cf4611d2",
-     "selection_basis": "workflow integration for revision delta, independent double-check, scope-bound approval and historical organization"
+     "sha256": "6e723da0adbceff96d1b9b69548856a0e088d77df6765272e9bed5cf1dfb5411",
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/art-review.md",
-     "sha256": "580a7dcdef56dadab3ab47b5d1b7352e1f55e846f6f18bd950ac5e9010102065",
-     "selection_basis": "workflow integration for revision delta, independent double-check, scope-bound approval and historical organization"
+     "sha256": "cd5a01623e56cabe359affa66f6a341553426829f87e6ab49033f13c80310405",
+     "selection_basis": "2026-10-30 content review: explicit owner closure, equipment authority, shared palette and exact derivative reuse; no inferred playback."
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/artifact-organization.md",
@@ -4511,7 +4511,7 @@
    ],
    "application_gap": null,
    "historical_or_refuted": null,
-   "scope_or_open_limit": "Applies to concept/model sheet production and promotion. Registry/checklist hashes measure declared consistency; visual truth still requires independent review and owner decision. Approval does not extend to derived sprites or ROM.",
+   "scope_or_open_limit": "2026-10-29 application: Social/Hayato data replay and observation-scope checks; Hayato continuous perception and owner acceptance pending; no universal quality/repeatability claim. Original historical scope preserved in source curation.",
    "measuring_tools": [
     {
      "reference": "audit_art_review_checklist.py",
@@ -4634,9 +4634,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ]
   },
@@ -4656,9 +4656,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-mugen-source-semantics.md",
-     "sha256": "5197f6dfb97c1d363b1ee8cb6316f324d18c9af678236fb56cab129aad46712f",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "a41008298712df505fbe4467eb248c195695c815944e99e87deefdf42e136138",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ]
   },
@@ -4678,9 +4678,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "application_strengthened_20261018",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ]
   },
@@ -4700,9 +4700,9 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ]
   },
@@ -4716,9 +4716,9 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/skills/sms-runtime-optimization.md",
-     "sha256": "8a4305d5667b7c28ca11d590dc3456be8972eaa220e867ad76f64b0292bad603",
-     "coverage": "existing_application_entrypoint",
-     "selection_basis": "Existing domain route re-read; 2026-10-18 adds observed assertions, timing/presentation/custody limits without replacing prior scope."
+     "sha256": "021254147ed80eccceb59b528bb23bdc807abe4742f9b9dd7dddcb941ae8851d",
+     "coverage": "application_reviewed_20261024",
+     "selection_basis": "Entrypoint relido; mantém contrato anterior e aplica curadoria Mugenesis com limites, sem importar hardware ou claims MD."
     }
    ]
   },
@@ -4732,7 +4732,7 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
-     "sha256": "22e1f15b4104f7327c090bfdc0f1f3b70112a11c68ef750b5e2188c2496c5140",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "domain_review; a integridade da escrita fora do VBlank é hipótese de VDP/mapper resolvida em segunda implementação — o workflow que decide quando usar BlastEm carrega o caso"
     },
@@ -4833,6 +4833,104 @@
      "ambiguous": false
     }
    ]
+  },
+  {
+   "lesson_id": "L139",
+   "sources": [
+    "doc/curation/2026-10-27_l139_mapper_image_alias.json"
+   ],
+   "rule_section": "SMS_GLOBAL §131",
+   "current_rule_status": "fechada_com_ferramenta_e_correcao",
+   "application_entrypoints": [
+    {
+     "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
+     "coverage": "existing_application_entrypoint",
+     "selection_basis": "private mapper diagnostics compare resident VRAM to the ROM and preserve the emulator/hardware claim boundary"
+    }
+   ],
+   "application_gap": null,
+   "historical_or_refuted": null,
+   "scope_or_open_limit": "Specific non-power-of-two mapper alias; size alone does not prove runtime mapping or hardware.",
+   "measuring_tools": [
+    {
+     "reference": "build_inner.py",
+     "matches": [
+      "build_inner.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "blastem_sms.py",
+     "matches": [
+      "blastem_sms.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "audit_blastem_sms.py",
+     "matches": [
+      "audit_blastem_sms.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    }
+   ]
+  },
+  {
+   "lesson_id": "L140",
+   "sources": [
+    "doc/curation/2026-10-27_l140_facing_cache_contract.json"
+   ],
+   "rule_section": "SMS_GLOBAL §132",
+   "current_rule_status": "fechada_com_ferramenta_e_correcao",
+   "application_entrypoints": [
+    {
+     "path": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+     "sha256": "32cebbe522c18985751616148592183a26dcbc00b68b6f8ecfae38edcf9a8163",
+     "coverage": "existing_application_entrypoint",
+     "selection_basis": "private diagnostics distinguish resident facing bytes from submitted and displayed state"
+    }
+   ],
+   "application_gap": null,
+   "historical_or_refuted": null,
+   "scope_or_open_limit": "Facing layout and resident cache identity; not full SAT, visible contact or delivery.",
+   "measuring_tools": [
+    {
+     "reference": "mugen2sms/generators/versus_scene_cut.py",
+     "matches": [
+      "mugen2sms/generators/versus_scene_cut.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "build_inner.py",
+     "matches": [
+      "build_inner.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "blastem_sms.py",
+     "matches": [
+      "blastem_sms.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    },
+    {
+     "reference": "audit_blastem_sms.py",
+     "matches": [
+      "audit_blastem_sms.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    }
+   ]
   }
  ],
  "limits": [
@@ -4843,7 +4941,8 @@
   "Tool-reference parsing may include documented APIs whose filenames are omitted; manually review unresolved references.",
   "Domain labels are heuristic; many runtime lessons concern tooling, methods and art evidence.",
   "Entry-point selection is manually reviewed at domain level; route existence is not runtime execution, learner comprehension or full behavioral coverage.",
-  "Three application gaps deliberately remain empty until the coordinator teaches their missing application in canonical skills."
+  "Three application gaps deliberately remain empty until the coordinator teaches their missing application in canonical skills.",
+  "source_coverage_sha256 is the preserved historical coverage snapshot; L139–L140 were bound separately in this update."
  ],
  "application_records": [
   {

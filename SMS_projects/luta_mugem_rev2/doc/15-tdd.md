@@ -1,5 +1,354 @@
 # TDD — luta_mugem_rev2
 
+## Seleção e limites atuais — 2026-10-27
+
+`LUTA_CONTACT_TRACE=1` registra no instante do contato, em um buffer `DATA`
+identificado pelo `.map`, os frames lógicos e usados, poses residentes,
+última submissão, facing e coordenadas. A sequência de publicação é par
+quando completa e ímpar durante escrita; o leitor deve limitar a janela para
+excluir wrap e tratar eventos múltiplos como ambíguos. A instrumentação custa
+CPU e seus resultados não qualificam prazo nem provam o framebuffer.
+
+No perfil de produção, `LUTA_PRESENT_HIT` fica ligado. O combate roda depois
+de montar a sombra da SAT e só aceita o quadro submetido por inteiro, com a
+âncora e a face dessa sombra, se o papel ainda for o atual. O cursor lógico
+pode estar adiante e não aplica dano. Isso elimina pose futura invisível;
+não prova scanout, limite de scanline nem que o quadro ativo chegou a tempo.
+`probe_present_hits` conta contatos aceitos; `probe_present_unready` conta
+atacantes pulados porque a submissão ou o papel não conferiam.
+`LUTA_CONTACT_GUARD`, `LUTA_CONTACT_SAT` e o ator BG desligam esse caminho.
+
+No schema 7 de `fight_runtime_data.h`, cada golpe carrega `pausetime` dos
+dois lados e os tempos `ground.hittime`, `guard.hittime` e `air.hittime`
+do primeiro HitDef do estado fonte. O pause congela os dois atores e
+segura o pusher de corpo. O recover do defensor só conta depois do pause
+dele: sem papel novo e sem velocidade de andar; a gravidade continua.
+`guard.hittime` ausente copia `ground.hittime`. Não há sprite de dano nem
+knockdown: common1 está fora do perfil, a pose atual permanece, e um papel
+sem controle volta ao idle no chão ao fim do recover. Trip/fall da fonte
+não vira queda. Um comando que casa durante o pause ou o recover é
+consumido e não fica bufferizado. Schema 5 mantém o hitstop único do
+personagem.
+
+No schema 7, um acerto invalida a instância de ataque da vítima mesmo que a
+pose anterior permaneça visível; uma nova instância exige mudança de papel.
+O combate captura elegibilidade dos dois atores antes de resolver os contatos,
+permitindo troca não letal no mesmo tick quando ambas as interseções são
+encontradas. No caminho de pose submetida, as âncoras usadas são as da mesma
+sombra da SAT; outros perfis não têm essa garantia. Para pausas concorrentes,
+cada ator conserva o maior tempo solicitado. O loop ainda resolve P1 antes
+de P2 e um KO impede o segundo contato: KO simultâneo e empate continuam sem
+implementação qualificada. Essa política é aproximação, não equivalência CNS ou prova de que
+as duas poses chegaram ao scanout. Os testes host cobrem interrupção após
+pause/recover, ambos os lados e pausas assimétricas. Na ROM observou-se P1
+atingido enquanto atacava, com a instância invalidada e recover; o caso
+espelhado, as caixas futuras e a apresentação do contato continuam pendentes.
+
+Na ROM histórica `7f530db3…` o pause 16 e o recover 21 do HP de Ryu
+foram contados em stepping; a amostra do framebuffer é o topo do laço
+seguinte (`probe_frame` 53, tick 52, pause ainda 16). Nesse HitDef
+`guardtime` e `hittime` valem ambos 21, então a duração não separa
+guarda e acerto. A guarda dessa ROM foi capturada depois, na sessão
+`ff3ce3ec…`: kind 1, vidas inalteradas, recover 21, impulso único de
+`guard_push` 5 px. A duração continua igual à do acerto; kind e vida
+separam os eventos. Ver memory bank. Isso não fecha R06.
+
+Duas políticas são candidatas, ambas zero por padrão e incompatíveis entre si.
+`LUTA_CONTACT_GUARD` recusa e conta uma interseção lógica se os frames,
+facing, patterns e posições não correspondem à última preparação cuja cópia
+da SAT retornou. A lógica continua avançando, portanto o contato pode ser
+perdido. `LUTA_CONTACT_SAT` compara caixas e coordenadas dessa última cópia,
+desde que o residente continue vinculado à instância atual do papel; isso
+altera o instante e, possivelmente, as caixas em relação à fonte. Mudança de
+papel invalida o vínculo e novas requisições/publicações o restabelecem.
+Ambas exigem trace e renderer sprite-only, recusam células cortadas ou
+rejeitadas e não provam scanout nem ausência de perda por scanline. Não são
+soluções aprovadas: os casos medidos e perdas ficam no memory bank.
+
+`LUTA_DIAG_PSG=1` é uma carga de teste, desligada por padrão. Contato e
+guarda reais enfileiram streams autorais genéricos (`sfx_hit`, canais 2+3;
+`sfx_hurt`, canal 3); não são adaptação ou identidade sonora MUGEN. No mesmo
+tick, acerto prevalece sobre guarda; guarda não interrompe acerto ainda ativo,
+e acerto pode interromper o SFX em curso. Eventos excedentes são coalescidos;
+guardas descartadas são contadas em u8. `PSGSFXFrame` roda uma vez por tick,
+após SAT e antes do selo de VBlank. Não existe música, retomada de canal de
+música, pause de jogo, KO ou transição sonora qualificada nessa opção.
+
+As sondas de quantidade e primeiro tick de reprodução são u16 e exigem limite
+de janela para excluir wrap; a entrada no PSG não prova som audível. Elas usam
+`C8E5..C8E8`, fora do cabeçalho SMRT de cinco bytes e dos offsets do worst-frame;
+`C8D0..C8D6` continuam reservados ao contrato de medição. Um teste compara os
+endereços de áudio com os offsets publicados dos medidores. O teste de sinal,
+a instrumentação e seus custos/limites por ROM estão no memory bank.
+
+O renderer híbrido é uma experiência isolada, desligada por padrão
+(`LUTA_BG_ACTOR=0`, `LUTA_BG_CAMERA=0`). Com BG habilitado, P1 referencia na
+PNT os mesmos patterns de sua pose residente, com a paleta P1 e prioridade
+de BG; P2 continua na SAT. Uma sombra de 8×10 tiles é atualizada antes do
+streaming em VBlank. A PNT usa as 28 linhas do modo 192, o scroll Y é reduzido
+em 224 e a primeira coluna fica mascarada pela exigência de scroll horizontal.
+Não se reivindicam sobras da PNT inferior ou da SAT. O plano e os registradores
+amostrados estão no memory bank; não incluem HUD, FX ou a composição completa.
+
+A câmera experimental aplica o mesmo deslocamento horizontal aos dois
+atores. Escolhe o inteiro assinado mais próximo de zero, entre −64 e +64,
+que mantém a união das caixas residentes em x=8..256, fora da coluna
+mascarada. Sem solução, registra conflito e usa deslocamento zero. A sonda
+`probe_bg_camera_shift` guarda esse valor em complemento de dois; uma amostra
+à direita registrou −7 px contra zero no controle anterior. Com a mesma lista
+de 49 fronteiras VDP, os builds BG-only e BG+câmera tiveram pico máximo 7/linha
+e 10–16 entradas SAT; sprite-only teve pico 10 em 46 fronteiras. Isso mede
+somente essas ROMs e snapshots: poses não pareadas, sem revisão visual do
+BG-only. O vídeo encadeado do BG+câmera reprovou por sobreposição corporal,
+portanto o ramo negativo não resolve a composição. A câmera continua não
+aprovada e desligada por padrão. Tampouco foram qualificados facing,
+restauração, deadline ou HUD. A sonda de apresentação de P1 fica sem valor
+afirmativo em BG: preparar a PNT não prova o framebuffer. Com
+`LUTA_BG_ACTOR=1`, o código também força `LUTA_PRESENT_HIT=0`; o experimento
+não demonstra contato no frame publicado. O teto de cor, as flags de
+prioridade/paleta e o orçamento de VRAM são os do VDP/SMSlib, sem uma paleta
+independente por lutador.
+
+O GDD vigente declara `pose_budget`: encaixe do framebuffer X 2/3 e Y 6/7,
+escala extra 2/3 uniforme e idle de até quatro colunas de 8 px. A faixa
+histórica de 72–88 px é outra opção, não o requisito deste consumidor. O
+contrato de qualidade vincula esse perfil ao SHA do GDD; o auditor verifica
+estrutura e vínculo, não fidelidade de pixels ou aprovação de arte.
+
+O manifesto nominal agora seleciona `pose_budget_facing_20261027` (24 bancos),
+regenerado do corte já previsto no GDD; a seleção anterior `ryu_ken_cross` de
+49 bancos permanece como histórico. O header antigo de 49 bancos aponta P2
+para outra convenção de face e o runtime atual o rejeita na compilação. Builds
+de candidato gravam recibo/ROM em `out/candidates/` sem tocar a baseline. A
+receita histórica de 24 bancos está em
+`.mddev/candidates/pose_budget_pair_20261027.json`.
+O comparativo de padding anterior está em
+`.mddev/candidates/pose_budget_pair_power2_20261027.json`. Ambas as receitas
+históricas apontam para o header antigo sem o contrato de faces; o fonte atual
+as recusa e elas exigem o snapshot de fonte associado ao recibo histórico.
+
+O manifesto nominal pede `makesms -pp`: na comparação controlada em BlastEm,
+uma imagem de 28 bancos acessou dados de bancos diferentes e a mesma imagem
+preenchida a 32 eliminou a divergência nos 14 spans observados. Isso não prova
+mapper físico. O corte de 24 bancos foi exercitado com o mesmo runtime, sem o
+bloqueio histórico dos dez papéis. Dois atores em um quadro não aprovam
+composição, comandos ou budget: os picos por scanline e o derrame continuam.
+
+O tile vazio do fundo ocupa o pattern 256 em `0x2000`; o pool de sprites usa
+`0x0000..0x1FFF`. O cancelamento de uma pose em voo quando se volta à pose
+residente foi observado em uma transição na ROM `9654406b…`. A lógica de
+combate ainda calcula contato a partir do frame desejado antes da publicação;
+o cache corrigido não resolve a coerência pose/colisão. Escopo de medições,
+SHAs e lacunas estão no memory bank; seções abaixo preservam medições históricas.
+Cada alocação ou liberação do pool invalida explicitamente o memo de falha dos
+dois lados, sem contador de geração sujeito a wrap de 8 bits. Transferências
+contíguas agrupam no máximo três pares de 64 B por chamada da API de tamanho
+byte; o budget por lado e a promoção após completar a pose permanecem. A
+implementação e seu custo não aprovam o orçamento: os candidatos medidos
+continuam derramando e a carga de entrega não está presente.
+
+O cache agora distingue `(pose, face)`: P1 usa patterns/meta P1 direita ou
+esquerda e P2 usa patterns/meta P2 direita ou esquerda, sempre da paleta
+compartilhada. As duas faces adjacentes devem caber no mesmo banco de 16 KiB;
+descritor inválido cancela o upload pendente e é contado. A origem usa a face
+residente enquanto a nova face sobe; lógica/contato ainda podem estar adiante
+da imagem. Sondas de orientação desejada, residente e submetida não são prova
+de apresentação completa na SAT. Ao modelar filas em `commit_budget.py`, a
+chave fornecida precisa distinguir as duas faces.
+
+O input da IA usa cursor sequencial de beat/subframe, inicializado no boot e
+avançado uma vez por tick da ROM; a consulta pura por frame continua para
+acesso aleatório. Ao voltar de 65535 para 0, o cursor reinicia junto do frame.
+O teste C cobriu a volta completa; a medição da ROM candidata ainda reprova
+FPS e VBlank, conforme o memory bank.
+
+O relógio da janela de pacing também usa quociente/resto sequenciais em vez
+de divisão no caminho quente, inicializados no boot e reiniciados junto do
+frame u16. Em 150 ticks a sonda avança uma unidade; `probe_b_step` satura em
+255. A volta de 65535 foi testada no host e observada em ROM por stepping;
+os selos de FPS e VBlank seguem reprovados.
+
+`LUTA_SPECULATIVE_PREFETCH` é uma opção experimental desativada por padrão.
+Ela reserva a próxima pose AIR no `pending`, sem publicá-la até o pedido
+efetivo; pedidos urgentes têm prioridade de banda e podem recuperar reserva
+especulativa do outro lado, sem evicção dos residentes. O recurso só prevê a
+próxima entrada da animação corrente e não impede contato com pose visual
+antiga. As sondas u16 de reserva, acerto completo e descarte são diagnósticas
+e envolvem em 65536; não qualificam orçamento. As medições por SHA e as
+falhas de FPS, VBlank e scanline estão no memory bank.
+
+O pusher no chão usa a soma das larguras `ground.front` convertidas nos dados
+de cada slot e preserva a ordem anterior ao movimento; não usa mais hurtbox
+com afastamento fixo de 1 px. `ground.front` e `ground.back` são campos de
+largura no [tutorial oficial MUGEN](https://elecbyte.com/mugendocs-11b1/tutorial3.html).
+A implementação é aproximação: ainda não executa `Width`/`PlayerPush`,
+largura traseira ou push no ar. Geometria inválida é contada e não é
+substituída por constante. A cobertura da ROM é limitada aos roteiros do
+memory bank; pusher e facing não qualificam toda a física ou o combate.
+
+No frame visual reprovado VDP 348 da ROM `671ba646…`, uma sessão privada
+Emulicious repetida leu P1 no chão em x=222 e P2 no chão em x=240; os probes
+registraram 84 frames corrigidos pelo pusher, sem hitstop, hit ou dano. A
+folga é a soma de `ground.front` da fonte: 18+9 unidades MUGEN, convertidas
+pela escala 2/3 em 12+6=18 px. Os sprites idle têm 32 px de largura runtime,
+então os contornos visíveis se sobrepõem além das caixas de empurrão. Em VDP
+481, P2 estava no role de salto, y=53,3 px, enquanto ambos tinham x=240; isso
+é uma amostra do cruzamento permitido durante a suspensão aérea do pusher. A
+captura confirma um problema visual da composição, mas não autoriza alargar a
+colisão: isso mudaria o espaçamento derivado da fonte. A correção exige uma
+decisão de design ou contrato de margem visual, seguida por nova QA. A
+revisão visual permanece reprovada e nenhum eixo é promovido.
+
+As duas variantes híbridas também foram medidas em sessões independentes de
+3000 quadros selados: BG+câmera teve 1759 derrames (`vline_min=2`), BG-only
+1773 (`vline_min=2`). O build record vincula as mesmas fontes, gerados e
+toolchain; a diferença é o define `LUTA_BG_CAMERA` no manifesto/ROM. Uma
+amostra por build não atribui a diferença pequena à câmera; ambas reprovam
+VBlank e não fecham deadline.
+
+`LUTA_UPLOAD_TRACE=1` habilita somente em candidato o anel diagnóstico de
+8 registros com frame e pares efetivamente copiados por lado; o seq é
+publicado depois do registro. A leitura exige limite menor que o anel e
+auditoria aritmética do contador. Como as gravações ocorrem no VBlank, a ROM
+instrumentada não valida o budget da ROM sem sonda. Quotas de 1, 2 e 4 pares
+reprovaram no selo e aumentaram a espera de pose no roteiro observado; não
+foram promovidas. O arranjo histórico de 8 pares por lado também reprovou em
+VBlank.
+
+`LUTA_UPLOAD_AGGREGATE=1` habilita a experiência de 2026-10-28; o padrão 0
+mantém `UPLOAD_CHUNK_PAIRS` como quota por lado. No modo agregado, o define
+limita o total dos dois lados por VBlank. `stream_pending_budget` dá o teto ao
+primeiro lado e repassa a sobra ao segundo; `frames & 1` alterna a prioridade
+a cada frame. Assim um lado sozinho ainda pode usar os 8 pares, enquanto dois
+pending compartilham o mesmo teto. O trace continua separando P1/P2.
+
+A candidata opt-in repetiu 2086 derrames/3000 e `vline_min=5` em duas sessões,
+com pico agregado selado 8; a baseline por lado repetiu 1759/3000 e `vline_min=2`,
+com pico 16. Fonte, dados e demais defines coincidem. A amostra reprova o
+experimento e não aprova orçamento; a política permanece desligada por padrão.
+O teste C focal cobre soma máxima, redistribuição, alternância e ordem dos
+campos do trace. A espera de pose, gameplay, SAT, carga completa e interação
+continuam critérios separados.
+
+## Experimentos de estágio e redução de streaming (2026-10-28)
+
+`LUTA_BG_DIFF_MAP=1` é opt-in e requer `LUTA_BG_ACTOR=1`. Mantém o shadow
+completo, mas publica apenas a faixa de linhas que cobre o ator anterior e o
+atual; inicialização/invalidação escreve as dez linhas. O teste C verifica a
+geometria da faixa e o primeiro mapa completo. No checkpoint pareado, a imagem
+foi pixel a pixel igual ao controle; a ROM marcou 1759 derrames/3000 e
+`vline_min=2`, sem melhoria de prazo.
+
+`LUTA_DIAG_VBLANK_STAGES=1` habilita quatro contadores em RAM normal alocada
+pelo linker, incompatíveis com `LUTA_UPLOAD_TRACE`. Cada estágio conta quando
+`SMS_VCounterPort < 0xC0`, no intervalo selado. Uma ROM instrumentada mediu
+0/1759 após entrada, 0 após mapa, 1731 após streaming e 1759 após SAT/PSG.
+Essa sonda identifica em qual fronteira o display ativo já começou; não mede
+ciclos ou duração e altera o custo observado. Não usar para aprovar budget.
+
+`LUTA_STREAM_WIDE_COPY=1` escolhe `SMS_VRAMmemcpy` (tamanho word), API
+confirmada em `sdk/devkitSMS/SMSlib/SMSlib.h`; o padrão usa
+`SMS_VRAMmemcpy_brief` e limita o lote a três pares por chamada por causa do
+comprimento byte. A candidata wide enviou o teto de oito pares em uma chamada,
+mas controle e candidata marcaram 1759 derrames/3000; os cruzamentos após
+stream foram 1731 e 1729. Sem ganho medido, continua desligada.
+
+O prefetch opt-in marcou 1871 derrames/3000 (`vline_min=7`) contra 1759 do
+controle em uma rodada por variante; rejeitado como otimização de VBlank.
+Todos os defines novos (`LUTA_BG_DIFF_MAP`, `LUTA_DIAG_VBLANK_STAGES`,
+`LUTA_STREAM_WIDE_COPY`) têm default 0. Os resultados, ROMs, sessões e limites
+estão no memory bank e nos JSONs com hashes em `out/evidence/20261028_vblank_streaming/`.
+
+O `scale_pilot.py --self-check` e a leitura do manifest atual identificam 390
+slots de pares byte a byte repetidos entre os 93 poses/186 facings, equivalentes
+a 24.960 B de deduplicação teórica no armazenamento. Não há pares idênticos
+entre os pools selecionados de Ken P1 e Ryu P2. No pior P2 kick, 20 pares são
+novos (1280 B) em 2 ticks AIR e o planejador não encontra reúso; os 640 B/tick
+são uma estimativa de fonte, não timing executado. Reaproveitar em VRAM exigiria
+alocação e remapeamento de META e ainda precisa de ROM/QA. Próximo teste
+instrumentado: uma transição com reúso do perfil `p1_ken` (ação 240/HK,
+frames 2→3, nove pares) mais o pior P2 kick como controle negativo. Não elevar
+essa evidência a budget, fidelidade ou delivery.
+
+## Reúso exato de pares físicos — candidato opt-in (2026-10-28)
+
+`LUTA_PAIR_SLOT_REUSE=1` troca a alocação contígua por um mapa de pares
+compactos para slots físicos arbitrários do pool de sprites. O `versus-cut`
+gera CRC-8/ATM por bloco de 64 bytes como filtro; só igualdade byte a byte dos
+64 bytes originais, lidos após mapear cada banco ROM, autoriza compartilhar um
+slot. A colisão de CRC não é equivalência. A busca compara a pose residente do
+mesmo lado; P1 e P2 mantêm payload/paleta próprios e nunca emprestam slots um
+ao outro. META remapeia o índice para o slot efetivamente residente. Pares
+novos ocupam slots livres e são enviados em VBlank; o quadro antigo permanece
+visível até todo o pending estar completo e promovido. `LUTA_BG_ACTOR` e
+`LUTA_SPECULATIVE_PREFETCH` são combinações recusadas em compilação.
+
+O padrão continua desligado. Os builds pareados v3 usam o mesmo conjunto de
+dados gerados; apenas `LUTA_PAIR_SLOT_REUSE` difere. O candidato compilou
+`_CODE=31202` bytes a partir de `0x0200`, deixando 1054 bytes até `0x8000`, e
+`_DATA=725` bytes; margem ainda estreita para ativação nominal. No caso
+`p1_ken`, comando key2/HK alinhado no `probe_frame=67` levou à pose 43 residente,
+submetida e apresentada em `probe_frame=86` no candidato (19 frames após o
+comando, 8 frames contados em espera) e em `probe_frame=89` no controle (22 e
+10). A candidata marcou 9 pares reutilizados/8 uploads; o controle manteve
+0/0. Ambas registraram zero omissões SAT e a mesma captura framebuffer
+(`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`). É um
+único caso de transição, sem claim de ganho geral, FPS, pior VBlank, gameplay
+ou delivery; ver SHAs, sessões e recibos no memory bank.
+
+O teste C mantém o P2 kick extremo como negativo: estado anterior com 17 pares,
+pedido com 20 (1280 B), zero pares exatos compartilhados; um CRC igual com
+bytes diferentes também força a comparação exata. O mapa resulta em
+0 reutilizados/20 uploads e preserva o conteúdo final. O harness também cobre
+colisão de hash em cadeia e reconstrução do índice depois de uma promoção.
+Isso valida o algoritmo isolado, não prova essa ação no runtime nem o prazo da
+ROM.
+
+As quatro sondas de contagem ficam em `0xC900..0xC903`, declaradas também no
+controle e inicializadas a zero para manter mapas comparáveis. A faixa
+`0xC8D0..0xC8D6` continua reservada aos medidores; `probe_vline_min` usa
+`0xC8D2`. Uma versão anterior pôs o contador P2 reutilizado nesse mesmo byte,
+invalidando aquela leitura. Esses artefatos foram preservados; o build v3
+corrige o endereço e passa `audit_probe_corridor`. No worst-frame v3, o
+controle selou 3000 frames com 1749 derrames e `vline_min=14`. A primeira
+sessão candidata esperou 240 s, chegou somente a `probe_frame=2608` com
+`done=0` e retornou `sem_lastro`; seus 1507 derrames parciais não são janela
+válida. A repetição fresca de 360 s selou 3000 frames, 1740 derrames e
+`vline_min=4`. A diferença de nove derrames não tem atribuição causal com uma
+amostra por ROM, e o menor `vline_min` candidato foi pior; ambos reprovam o
+budget.
+
+Depois do v3, v4 armazenou a contagem de slots ocupados e invalidou o cache na
+liberação; v5 passou a encontrar slots livres com cursor monotônico; v6
+indexou os pares residentes por CRC em tabela fixa, manteve cadeias de colisão
+e comparação exata dos 64 bytes. Builds usam os mesmos dados gerados. O
+controle v6 é byte a byte idêntico ao controle anterior
+(`75d662357d2a4d0d2aedcd0cd670721118c040499b0c4841c63483c8fdb83dd6`); a ROM
+candidata v6 é
+`db5ef9190f9e4643b7d293824874db1be3fb299dd0dae144249e0d0e2c06fe1f`.
+Seu `_CODE=31425` B a partir de `0x0200`, com só 351 B até `0x8000`, e
+`_DATA=1024` B. `audit_probe_corridor` passou em 163 sondas: controle com
+1486 B de folga, candidata com 1018 B. A margem de ROM não permite ativação
+nominal sem nova redução medida.
+
+A sessão privada v6 repetiu a transição HK: pose 43 residente/submetida/
+apresentada em 19 frames após o comando, espera +8, 9 pares reutilizados/8
+uploads; o controle levou 22 frames, espera +10, contadores 0/0. Ambos tiveram
+zero omissões SAT, captura 256×192 idêntica
+(`68936743d6b5c3fcc18d195c352b63af7e83347529f8ff63a3dd52b7b624121e`) e
+bundles aprovados. Isso continua restrito àquela transição.
+
+Em duas A/B do runtime probe v6, cada uma com quatro janelas NTSC de 3 s, a
+candidata mediu `[16.11,18.75,19.73,16.11]` e `[16.11,18.74,19.73,16.12]`
+FPS; o controle `[23.03,25.98,21.70,18.75]` e
+`[22.99,25.99,21.70,18.73]`. Ambas falharam o critério de 60 FPS, e a
+candidata ficou abaixo do controle em todas as janelas pareadas. São duas
+execuções por ROM, sem claim de pacing por quadro. O define segue desligado.
+Essa medida é taxa do loop/bridge, não gameplay, áudio ou delivery. Worst-frame
+v6 selou 3000 frames com 1740 derrames e `vline_min=4`; o controle v3/v6 teve
+1749/3000 e `vline_min=14`. A candidata permanece reprovada em budget e o
+resultado não atribui causalidade aos nove derrames a menos.
+
 ## Arquitetura proposta, não implementada
 PacoteMUGEN imutável→parse→IRtipado→perfilcompat→loweringAOT/tabelas
 com predicados executáveis→runtimeC/Z80→ROMmedida. Reusar parsers/testes

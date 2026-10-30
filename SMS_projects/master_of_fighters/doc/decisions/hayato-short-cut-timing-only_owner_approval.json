@@ -1,0 +1,42 @@
+{
+  "schema": "hayato_owner_timing_only_selection_v1",
+  "actor": "project_owner",
+  "actor_role": "owner",
+  "source_note": "Direct owner message selecting the middle timing-only column from the provided comparison.",
+  "verbatim": "a op;'ao so tempos 8/1/2/7/2/5 ficou melhor de todas. Neste caso a mudann;a de distorn;'ao da lamina deu a impress'ao de outra tragetoria do golpe e modificou negativamente o movimento\n\naprovado o so tempos 8/1/2/7/2/5 n'ao foi necess[ario usar a distor;'ao de lamina",
+  "decision": "accepted",
+  "subject_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+  "artifacts": [
+    {
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+      "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+    },
+    {
+      "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/comparison_source_normal.apng",
+      "sha256": "459351a4a36c4aeb54d4f7c8e400b6d24d7209ed8ec719b60608bc6f0cbe04d9"
+    },
+    {
+      "path": ".mddev/hayato_short_cut_timing_only_v7_left.json",
+      "sha256": "2e529689db00bfe354b748d167506091efb9e075bdbd7edff64b10b2035a2205"
+    },
+    {
+      "path": ".mddev/hayato_short_cut_timing_only_v7_right.json",
+      "sha256": "ece109eca6035c165688ef171790545fd6011746fc009d749f22830f5b037165"
+    }
+  ],
+  "selection": "middle_column_timing_only",
+  "duration_ticks": [
+    8,
+    1,
+    2,
+    7,
+    2,
+    5
+  ],
+  "approved_scope": "Existing v4 six-pose art plus8/1/2/7/2/5 authored preview timing; no deformed blade. Owner judgment of supplied preview, not claimed viewing of a newly built ROM.",
+  "rejected_alternative": {
+    "source_sha256": "8666bad0795fe5b1a3272189d5be9c4cae7d946d4f8f3bd21719a17150ba7191",
+    "reason": "Owner perceived another sword trajectory and negative effect on movement."
+  },
+  "production_release_approved": false
+}

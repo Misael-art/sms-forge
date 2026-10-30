@@ -1,0 +1,160 @@
+{
+  "schema": "sms_art_temporal_review_v1",
+  "producer": "/root",
+  "subjects": {
+    "source": {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+      "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+    },
+    "rom": {
+      "path": "out/candidates/jj_zillion_single_shot_v5_right/rom/master_of_fighters.sms",
+      "sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4"
+    }
+  },
+  "sequence": {
+    "expected_ids": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05"
+    ],
+    "actual_ids": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05"
+    ],
+    "duration_ticks": [
+      7,
+      4,
+      2,
+      3,
+      6
+    ],
+    "tick_definition": "NTSC VDP presentations, nominal60Hz; owner-accepted sample holds, not competitive frame-data.",
+    "expected_terminal": "original_guard_I00",
+    "terminal": "original_guard_I00"
+  },
+  "observations": [
+    {
+      "id": "static_source",
+      "target": "source",
+      "subject_sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b",
+      "method": "framewise",
+      "reviewer": "/root/jj_shot_art_review",
+      "report": {
+        "path": "doc/jj_zillion_proportion_no_fx_independent_addendum_v6.json",
+        "sha256": "8678d6ccf58288dcac9e842e0a04c3fd1dc617c1c8fe987db7830c74f5e9bbeb"
+      },
+      "media": {
+        "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+        "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+      },
+      "scope": "v6 single-point addendum plus unchanged v5 static judgments; no playback perception."
+    },
+    {
+      "id": "measured_exposures",
+      "target": "rom",
+      "subject_sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4",
+      "method": "timeline",
+      "reviewer": "/root",
+      "report": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/pixel_timeline_analysis.json",
+        "sha256": "24d26afc0ff220a3c373bdac5a8e65d5f9a658b7edad968a8d7ed299059f4197"
+      },
+      "media": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/jj_character_realtime.mp4",
+        "sha256": "4dec4b3ec93b463a004029790067271934ca783a60b62c5439187089b6ee1505"
+      },
+      "rom_sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4",
+      "session_id": "5f94496d541d4b8ea7656756cd63acd8",
+      "scope": "480 exact native RGB frames, order/exposures/guard only; no continuous perception claim."
+    },
+    {
+      "id": "ROM_pixels",
+      "target": "rom",
+      "subject_sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4",
+      "method": "rom_framewise",
+      "reviewer": "/root",
+      "report": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/pixel_timeline_analysis.json",
+        "sha256": "24d26afc0ff220a3c373bdac5a8e65d5f9a658b7edad968a8d7ed299059f4197"
+      },
+      "media": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/jj_character_realtime.mp4",
+        "sha256": "4dec4b3ec93b463a004029790067271934ca783a60b62c5439187089b6ee1505"
+      },
+      "rom_sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4",
+      "session_id": "5f94496d541d4b8ea7656756cd63acd8",
+      "scope": "480 exact native RGB frames, order/exposures/guard only; no continuous perception claim."
+    },
+    {
+      "id": "owner_acceptance",
+      "target": "source",
+      "subject_sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b",
+      "method": "owner_decision",
+      "reviewer": "project_owner",
+      "report": {
+        "path": "doc/decisions/jj-zillion-character_owner_approval.json",
+        "sha256": "6909b7de5c7e3d5c8e31cd07eb46de9539553724a0fdea2a46e6c8302a7b7c21"
+      },
+      "decision": "accepted",
+      "scope": "Corrected Zillion shape/proportion, conceptv5, sourcev6 allsixposes without projectile/FX, and presented return to guard with existing7/4/2/3/6 holds. Closes owner decision for this character-only sample."
+    }
+  ],
+  "axes": {
+    "image_inspection": {
+      "status": "pass",
+      "note": "Independent source5 static review and source6 single-point repair addendum.",
+      "observation_ids": [
+        "static_source"
+      ]
+    },
+    "frame_analysis": {
+      "status": "pass",
+      "note": "Six poses preserved; one orphan removed. Static continuity only.",
+      "observation_ids": [
+        "static_source"
+      ]
+    },
+    "order_exposure": {
+      "status": "pass",
+      "note": "Native realtime480frames and independent260frames prove order and proposed holds.",
+      "observation_ids": [
+        "measured_exposures"
+      ]
+    },
+    "continuous_motion": {
+      "status": "needs_evidence",
+      "note": "Agent playback perception remains unestablished. Owner accepted presented result; do not reopen owner decision or fabricate a viewed session.",
+      "observation_ids": []
+    },
+    "rom_presentation": {
+      "status": "pass",
+      "note": "Exact native frames in current rightROM; left/right independentQA also pass.",
+      "observation_ids": [
+        "ROM_pixels"
+      ]
+    },
+    "owner_acceptance": {
+      "status": "pass",
+      "note": "Direct owner approval of corrected presentation and return to guard.",
+      "observation_ids": [
+        "owner_acceptance"
+      ]
+    }
+  },
+  "continuous_playback_perceived_by_this_agent": false,
+  "observed_defect": null,
+  "next_decision": "keep_control",
+  "owner_request": null,
+  "scope": "Character only, no projectile/FX/combat/audio/PAL/production or global curation approval.",
+  "prior_checkpoint": {
+    "path": "doc/jj_zillion_character_checkpoint_v6.json",
+    "sha256": "4d92b3d4d435e6347f1cc74cfc0f743a734ab53b5eaed5dd669816da77fecf3d"
+  },
+  "owner_decision_closed": true,
+  "closure_scope": "Owner-approved sample preserved. The remaining continuous_motion evidence axis does not negate or reopen this explicit owner decision."
+}

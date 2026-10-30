@@ -1,0 +1,81 @@
+{
+  "schema": "mof_hayato_choreography_v2",
+  "status": "rough_proposal",
+  "brief": "Body-driven short descending diagonal cut. Rear-leg load, hips and shoulder coil; pressure transfers to flexed front knee, torso inclines, both hands accelerate a rigid katana; overshoot settles below execution; recover along controlled arc to original guard. Feet remain planted; no scene/root translation.",
+  "intent": "A compact deliberate two-handed descending cut threatening upper torso through waist, not a footward idle sword swing. No new hitboxes/damage.",
+  "root_translation_px": [
+    0,
+    0
+  ],
+  "support": "Same two floor contacts, heel/toe and knee action allowed; pelvis and head move through space while segment lengths remain stable.",
+  "revision_table": [
+    {
+      "defect": "C01 almost guard; prompt wrists1–2px/head/feet/hakama fixed",
+      "delta": "Raise and recoil joined hands; rear-weight knee compression and opposing hip/shoulder lines",
+      "closure": "Guard versus R01 gesture at native SMS scale, temporal review"
+    },
+    {
+      "defect": "C02/C03 share body with sword angle changed",
+      "delta": "R02 hips lead, R03 torso/head travel forward, R04 lower absorb distinct from execution",
+      "closure": "Whole chain and blade arc in normal/slow playback"
+    },
+    {
+      "defect": "C04 abrupt raised sword recovery",
+      "delta": "R05 returns via forward arc as hips uncoil; guard is terminal, not new held load",
+      "closure": "R04→R05→guard continuity"
+    },
+    {
+      "defect": "10declared principles treated as progress but motion unobserved",
+      "delta": "Planned cue separate observed result; static/temporal/SMS/ROM axes independent",
+      "closure": "Read-only independent motion report; unavailable perception remains pending"
+    }
+  ],
+  "old_attempt": {
+    "source": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/cut_source.png",
+    "durations": [
+      3,
+      2,
+      2,
+      5
+    ],
+    "independent_review": "doc/hayato_short_cut_sequence_independent_review_v1.json",
+    "scope": "Static progression approved; playback not observed. Technical QA and performance do not close choreography."
+  },
+  "planned_drawings": 6,
+  "proposed_ticks": [
+    4,
+    1,
+    2,
+    3,
+    1,
+    3
+  ],
+  "reference_scope": "Motion observation only, no reference pixels/color/identity/lore in Hayato source; two studies to be recorded after inspection.",
+  "rough_medium": "Code-drawn joint diagram permitted solely as schematic study; forbidden as final character asset. All finished pixels ImageGen authored.",
+  "references": [
+    {
+      "game": "Street Fighter III: Third Strike",
+      "character": "Makoto",
+      "action": "Airborne forward punch overshoot illustrated in Cartwright slide14; input/name not specified in primary slide, not labeled Hayate.",
+      "source": "https://media.gdcvault.com/GDC2014/Presentations/Cartwright_Muriel_Animation_Bootcamp_Fluid.pdf",
+      "pages_1based": [
+        14
+      ],
+      "file_sha256": "bdff8cc47d76c4d51dd50ef95b680e5ed959d599b123238c068d9048e5bd06e6",
+      "observed": "Three drawings: compact raised-knee preparation, extended shoulder/fist high, lower settled key; yellow headband trails displacement. Punch direction shared, whole torso/knee relationship changes. Only static slide inspected, no native timings inferred.",
+      "application": "Keep R03→R04 hand/blade endpoint distinct while knees/pelvis absorb. No jumping or reference costume copied."
+    },
+    {
+      "game": "Silver Samurai Capcom sprite family: X-Men Children of the Atom / Marvel vs Capcom2; GIF exact build unverified",
+      "character": "Silver Samurai",
+      "action": "Rising/multislash weapon animation in archived silversamurai-slsh.gif, button/name unverified.",
+      "source": "https://www.fightersgeneration.com/characters3/silversamurai-a.html",
+      "media_url": "https://www.fightersgeneration.com/characters3/silversamurai-slsh.gif",
+      "file_sha256": "f390bed63707b023cdae8f8965dea988eb1bfa63e1f28f7cf21ad75cac117141",
+      "observed": "15GIFentries, all90ms in archive, not engine frame data. Entries1–2 lowered torso load,3low crossing blade,4rising silhouette,5–12 held sweep/effect,13–14turn. Sword does not animate independently of crouch/rise/turn. GIF stars/effect not canonical Hayato equipment.",
+      "application": "Use body compression→rotation→absorption, preserve katana as one rigid attachment, discard multislash/effect/spin and do not copy drawing/pose pixels."
+    }
+  ],
+  "observation_limit": "Old and rough APNGs loaded in browser at normal and6xslow, screenshots sample running playback. This interface has no continuous video vision; sampling plus ordered frames is NOT a claim of perceived continuous fluidity. Independent temporal judgment must state same limit.",
+  "rough_revision": "Independent reviewer found pelvis line unchanging and R04→R05→guard weapon jump. Rotate pelvis opposite shoulder load, then forward release; add R06high return, R05crossing1tick. Source blade guide rigid52px."
+}

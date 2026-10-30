@@ -1,0 +1,32 @@
+{
+  "schema": "sms_authored_animation_candidate_v1",
+  "character": "hayato",
+  "action": "hayato_short_cut",
+  "frame_ids": [
+    "C01",
+    "C02",
+    "C03",
+    "C04"
+  ],
+  "working_duration_ticks": [
+    3,
+    2,
+    2,
+    5
+  ],
+  "source_pose_count": 4,
+  "source_sha256": "8c2d5032066cae86ae5a4cc2a32108e43606b05848a74f3ba56b31080077c6dc",
+  "source_canvas_per_frame": [
+    144,
+    144
+  ],
+  "nominal_pivot": [
+    68,
+    127
+  ],
+  "source_extraction_policy": "One uniform2/9raster translation for3support poses, same32color source palette; no independent pose scaling, no hardware-driven shrink. Frozen C02 from prior1/10raw extraction. Both actual raster sizes/pivots disclosed.",
+  "body_scale": "Compare source joint1x/NN before acceptance; source bitmap not normalized per pose.",
+  "palette_map": "Declared5->42,13->21,26->0 into commonP1, mixed13 must be reviewed in every newpose.",
+  "animation_approval": false,
+  "owner_approval": false
+}

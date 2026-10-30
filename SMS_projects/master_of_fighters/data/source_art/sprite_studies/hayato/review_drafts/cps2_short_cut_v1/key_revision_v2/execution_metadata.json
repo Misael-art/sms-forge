@@ -1,0 +1,58 @@
+{
+  "schema": "sms_authored_source_candidate_v1",
+  "character": "hayato",
+  "pose_id": "C02",
+  "source_sha256": "4460eb09fa7aa5b19f94e7e3838e9e99230d44e4724e72438646aa6f22ecd887",
+  "raw_sha256": "0340a10ca395bd843e369958b3d14b653c968b419fe06d5fad950c6128252741",
+  "conversion_pivot": [
+    68,
+    127
+  ],
+  "source_palette": "exact guard32palette, material roles declared and native index overrides5->42,13->21,26->0 require per-pose review",
+  "body_and_support_facts": {
+    "guard": {
+      "hair_ROI_bbox": [
+        5,
+        24,
+        44,
+        50
+      ],
+      "left_sole_ROI_bbox": [
+        26,
+        0,
+        41,
+        6
+      ],
+      "right_sole_ROI_bbox": [
+        19,
+        0,
+        38,
+        7
+      ]
+    },
+    "C02": {
+      "hair_ROI_bbox": [
+        5,
+        24,
+        36,
+        50
+      ],
+      "left_sole_ROI_bbox": [
+        26,
+        0,
+        41,
+        6
+      ],
+      "right_sole_ROI_bbox": [
+        19,
+        0,
+        38,
+        7
+      ]
+    }
+  },
+  "source_pixel_edits": [],
+  "status": "candidate_pending_art_and_pair_proof",
+  "revision_delta": "Use guard body/head/feet, restore original weapon length and steeper down-cut angle; no converted pixel manipulation or body normalization",
+  "competitive_frame_data_approval": false
+}

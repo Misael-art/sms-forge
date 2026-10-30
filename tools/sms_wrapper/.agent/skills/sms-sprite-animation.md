@@ -3,6 +3,51 @@
 Use quando houver idle, walk, golpe, hit, KO ou qualquer ciclo de frames.
 Metasprite e SAT: `sms-sprites-metasprite.md`. Esta skill é **semântica**.
 
+## Atuação antes do acabamento
+
+Intenção do golpe → estudo curto de referências autorizadas → coreografia
+corporal → poses gestuais → teste temporal preliminar → revisão do movimento
+→ acabamento → conversão e ROM. Referência tem papel e SHA: não extrair
+identidade, equipamento ou moveset de uma fonte autorizada apenas para ritmo.
+
+No brief, definir função, personalidade, alvo e contrajogo; desenhar linha de
+ação e silhueta de preparação, execução, acompanhamento e recuperação. Traçar
+apoio/transferência de peso, quadril–tronco–ombros, cadeias dos membros,
+empunhadura e arco da arma. Corpo apoiado pode girar, comprimir e inclinar;
+preservar comprimentos e identidade não significa fixar cabeça, quadril, pés
+e roupa no mesmo pixel. Arma rígida não exige corpo rígido. Cabelo, tecido e
+acessórios respondem à ação com atraso coerente, sem movimento ornamental
+obrigatório. Diagrama de juntas é estudo esquemático, nunca pixel final.
+
+Antes de acabamento, reproduzir o gesto na duração proposta. Comparar
+deslocamento entre poses (espaçamento) e tempo de exposição (timing)
+separadamente: holds diferentes não demonstram aceleração. Acrescentar desenho
+somente para fechar uma lacuna identificada de trajetória, leitura ou retorno.
+Mais desenhos e sete princípios declarados não são pontuação de qualidade.
+Registrar por princípio efeito planejado, efeito observado e pendência; a
+contagem exigida pelo contrato continua uma verificação de cobertura.
+
+Testar cedo a sobrevivência de rosto/mãos/arma na escala SMS e a composição do
+par, antes de expandir atlas. A amostra é definida pela ação e pelo projeto;
+seis poses de Hayato ou Social não são mínimo/preset universal. Converter não
+autoriza redesenhar atuação ou reduzir individualmente a pose larga.
+
+## Decisão temporal
+
+Aplicar o checkpoint de `workflows/art-review.md`: imagens, análise quadro a
+quadro, ordem/exposição, percepção contínua, apresentação ROM e aceite do dono
+são eixos separados. Uma interface que só entrega stills deixa percepção em
+`needs_evidence`. Preparar mídias exatas normal/lenta e intervalos a observar,
+preservar controle e encerrar a repetição de revisões equivalentes. Não gerar
+ou buildar para preencher uma limitação de percepção. Após observação real,
+decidir manter, ajustar exposições ou corrigir a pose responsável.
+
+Após decisão explícita do dono, conservar o aceite por arte **e timing**,
+conforme `art-review.md`. Um timing alternativo pode resolver a percepção sem
+novo desenho (Hayato); deformar arma pode sugerir outra trajetória e piorar
+o golpe. Testar a causa observada antes de adicionar smear/poses. Percepção
+não estabelecida do agente permanece declarada sem reabrir a decisão humana.
+
 ## Princípios (ênfase SMS)
 
 Considere os 12: squash/stretch, anticipation, staging, straight ahead/pose to

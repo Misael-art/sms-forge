@@ -1,0 +1,184 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "hayato-social-material-map-derivative-v2",
+  "stage": "diagnostic_conversion",
+  "producer": "/root",
+  "domains": [
+    "art"
+  ],
+  "scope": "Re-review only the measured material hue defect from v1 plus whole-static-pair nonregression. Same original Hayato source PNG,32color palette,scale,pivot,alpha,geometry and fixed sharedP1 unchanged. Adapter now maps ORIGINAL source indices5(light warmgray)->code42 neutralgray,13(shared gray/brown shade)->21 neutraldarkgray,26(warm dark contour)->0 opaque black, before converting source to SMS; no post-conversion recolor/alpha edit. Delta71 visible Hayatopixels,0Socialpixels. Verify blade tip/middle and whitekimono/sleeve points from v1; because index13 is shared with neck/hair, inspect face/skin/grip/hair/scabbard especially and report if neutralization harms them. Inspect fresh nativeROM captures both sides and finalPNG/PLTE; independently judge silhouette/readability/rosterharmony too. Preserve negative v1 and source-static pass separately. Write only doc/hayato_cps2_pair_derivative_review_v2.json. Inputsimmutable. No sources/Git/memory/registry/build/emulator writes or generation. No Hayato action/motion/FPS/VBlank/gameplay/AAA/owner/promotion claim.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_cps2_pair_derivative_review_v1.json",
+      "sha256": "2eeed6c2eac076f6bea0e88f77cd92c92d136ed08e577a663c9570b29e98a145"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_cps2_idle_independent_review_v2.json",
+      "sha256": "8aeb62d570f9241ef4c8cae81676c0d8fdc148199663903c41da10426ec516c4"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+      "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/material_delta_idle.json",
+      "sha256": "8b022fb77d6cc58ee695f7f74276e1ab0a017e949fdc3b6172722ff2e2404d90"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/material_delta_reference.json",
+      "sha256": "c4cf92edee1c19b1a1e8937f5e05fd84e7858189ca1c773bc404683776357d8d"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/material_mapping_before_after.png",
+      "sha256": "124fc26e7d3a890c6598108652cff7a55abb69faec178da33b7f2b2c90c76964"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa_material_v2/guard_left/run_ab42207c024c4f42ae2019ec67cd8fd9/case_0_frame.png",
+      "sha256": "96e5942772adabd4b3dee7b848fda698596b0f87fb699c01341577602640a898"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa_material_v2/guard_left/run_ab42207c024c4f42ae2019ec67cd8fd9/case_0_frame.json",
+      "sha256": "512e4ec617c8a7b1b67188988453f48cbb78d163ccf3ce97d582177a11d0f3d7"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_left_material_v2/conversion.json",
+      "sha256": "0a669347014c8a1b52e7a43d1c7cafbe90caba1d11b2dfd481c63365f412e4d9"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/.mddev/hayato_cps2_guard_left_material_v2.json",
+      "sha256": "d11c94b994158bc27d31e222dcdf4787907c490f938129e8a5ab49053d705a19"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_left_material_v2/idle.png",
+      "sha256": "def4d4a840d004e48caa0a61d583c68ac98e3c75523bbbb362fc4650f6daec2b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_left_material_v2/reference.png",
+      "sha256": "ce956fe51fe159afeef292655a024dd473bfa6009612268fb948d231947be432"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa_material_v2/guard_right/run_795fd3bd18a94d6985d7ac7f84d657a0/case_0_frame.png",
+      "sha256": "c0d08f157fada4880765586af8feec0dfe715d71542543142e39d23a9e4a4a77"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa_material_v2/guard_right/run_795fd3bd18a94d6985d7ac7f84d657a0/case_0_frame.json",
+      "sha256": "f1a2bd39472fecd1bd1dae849dfcc5647d81551f4b6d57addea34e195cc24de3"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_right_material_v2/conversion.json",
+      "sha256": "2740a81e6ff89d95a869cbb409497061a95740abbce39cc5b76e906c7b675878"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/.mddev/hayato_cps2_guard_right_material_v2.json",
+      "sha256": "d7e897a7d259507502d39d7bf79fd221995af1684e4b7bf74b595b21a565ef99"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_right_material_v2/idle.png",
+      "sha256": "6ebc2c13b9964bbd6372cf563bd0a3e5bd54dc8c4b7f29b1757c13cfffbd30e6"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_right_material_v2/reference.png",
+      "sha256": "9ae6af2a4900fd8e613c81792f66d98b319bc634aa9cd8ffe63f94b7d43fddbd"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa_material_v2/social_jab_left/run_eae30e1d303a4de68bb1b8dd2a801e4f/case_0_frame.png",
+      "sha256": "c0d08f157fada4880765586af8feec0dfe715d71542543142e39d23a9e4a4a77"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa_material_v2/social_jab_left/run_eae30e1d303a4de68bb1b8dd2a801e4f/case_0_frame.json",
+      "sha256": "7cfa3d0aa894d3edcbdac6bfd23a2ca39c891c7dfc845dbdeda88f6b3b9148a5"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/conversion.json",
+      "sha256": "71cf0db089337de9eccbd50926e92209e6b046d452bd5bb454a017e204df634a"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/.mddev/hayato_pair_social_jab_left_material_v2.json",
+      "sha256": "3ab563aa2f53e4a4b67c78ca65c9fab58c9dddde91e043747d459254ecc66279"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/idle.png",
+      "sha256": "9ae6af2a4900fd8e613c81792f66d98b319bc634aa9cd8ffe63f94b7d43fddbd"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/J01.png",
+      "sha256": "9ae6af2a4900fd8e613c81792f66d98b319bc634aa9cd8ffe63f94b7d43fddbd"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/J02.png",
+      "sha256": "14a8eea8dbe6605d354f41ceb85025477eb46c7ebc24c74224ce6440e3f68951"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/J03.png",
+      "sha256": "3038c038c0ac9ab12eca168a9057076c798524553913736786235ece8bbf226e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/J04.png",
+      "sha256": "92706ce803166013c747b31f15aa16b2985847f92e3ff2fb773b4bf6de5ba75e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/J05.png",
+      "sha256": "01d8bc4908fe1bcfb06ae4fc59777428d69915adc07a0a998f4c9a1fad17eba4"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/J06.png",
+      "sha256": "d4580a3cbaf91b4f97872c91d081f533edf558a79a12de75c11e7e9bf08a2c3b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_left_material_v2/reference.png",
+      "sha256": "6ebc2c13b9964bbd6372cf563bd0a3e5bd54dc8c4b7f29b1757c13cfffbd30e6"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa_material_v2/social_jab_right/run_82147bbd29a84bfaac2251b2301bfc36/case_0_frame.png",
+      "sha256": "96e5942772adabd4b3dee7b848fda698596b0f87fb699c01341577602640a898"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa_material_v2/social_jab_right/run_82147bbd29a84bfaac2251b2301bfc36/case_0_frame.json",
+      "sha256": "356ef975902b593481f3ef620c04691f52b49c000d938d38ec11b47884ecba05"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/conversion.json",
+      "sha256": "10a4b635f7671420e3036367d65323e8300e1c36c66f7b525e87ed48a766d2bb"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/.mddev/hayato_pair_social_jab_right_material_v2.json",
+      "sha256": "30b68df4771c05e77b6eb612e891d88304975aeee32a6e1c48f1673ed23f3d88"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/idle.png",
+      "sha256": "ce956fe51fe159afeef292655a024dd473bfa6009612268fb948d231947be432"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/J01.png",
+      "sha256": "ce956fe51fe159afeef292655a024dd473bfa6009612268fb948d231947be432"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/J02.png",
+      "sha256": "13b6fb49c90d36f5f8f72d8bb14236d0dcc2e9da1a36a1874cb7341d588885f0"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/J03.png",
+      "sha256": "d4e1a87316aee27b35e3d612ac54bebc4b558e974b58ea7f1f7dbbdc57c8c24c"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/J04.png",
+      "sha256": "1f07a7f914c7de541ce6b1c835447d3b676c3d91eadca4862e3404eb8640606b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/J05.png",
+      "sha256": "187f85fd1b2f04fca115e0ecf4620e992761220f812989f4f5ade3cd20a63813"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/J06.png",
+      "sha256": "4ec0cc180fae3be02074c9f026c613a6fa78dd41bed96e31f799b13beab6775c"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/social_jab_right_material_v2/reference.png",
+      "sha256": "def4d4a840d004e48caa0a61d583c68ac98e3c75523bbbb362fc4650f6daec2b"
+    }
+  ]
+}

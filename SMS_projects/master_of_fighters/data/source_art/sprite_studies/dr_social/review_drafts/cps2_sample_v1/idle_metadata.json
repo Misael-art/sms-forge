@@ -1,0 +1,43 @@
+{
+  "schema": "authored_native_sprite_extraction_v1",
+  "status": "candidate_art_review_pending",
+  "tool": "built-in image_gen.imagegen",
+  "raw_sha256": "818a3bf3a00872ff7fc719b33dd20cbcf763568f4035302b6d5a53ddbde1b197",
+  "raw_size": [
+    1254,
+    1254
+  ],
+  "raw_partial_alpha_pixels": 456981,
+  "raw_binary_grid_contract": "failed; 1254x1254 with partial alpha, no exact promised 8x grid",
+  "extraction": {
+    "alpha_threshold": 128,
+    "bbox": [
+      225,
+      74,
+      992,
+      1181
+    ],
+    "nearest_size": [
+      72,
+      104
+    ],
+    "placement": [
+      28,
+      12
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "palette": "24 source RGB colors, median cut, no dither; NOT SMS",
+    "pivot": [
+      64,
+      116
+    ]
+  },
+  "artistic_changes": [],
+  "limitations": [
+    "Native extraction requires visual polish review; reduction/quantization is not approval",
+    "rapier/boomerang attachment unreadable in generated idle; inspect before claiming complete equipment"
+  ]
+}
