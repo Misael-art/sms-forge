@@ -1,5 +1,123 @@
 # 10-memory-bank — master_of_fighters
 
+## Estado atual J.J. — fidelidade corrigida, execução comprovada, aceite pendente
+
+Concept candidato v5 e fonte candidata v6 reduzem a Zillion mantendo forma
+navy/cyan, pega e os seis desenhos I00/S01–S05. Nenhuma bala, tiro, spark,
+flash, FX ou objeto foi incorporado. Corpo/poses v3 ficam preservados fora das
+ROIs de arma/pega, com uma única limpeza adicional de ponto órfão em I00
+(105,99). Review v5 + adendo v6 fecham o escopo estático independente. Não há
+aceite humano da correção nem percepção contínua estabelecida nesta interface.
+
+Fonte6: `0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b`.
+Concept5: `e81e0f9cc81b1552ff2ace0e046ecb5c36be00119e6b6f5d60d17a7b17f518e9`.
+O reparo fonte6 não muda nenhum índice SMS: 14 PNGs, 12 cenas e dois headers
+v5 reutilizados por identidade; não houve conversão/build repetidos por isso.
+Par normal8×8:180padrões/5.760B,max50SAT,pico8,canvas104×88,pivô48,80,
+origens16/128,64 e última sola visívelY143. P1 única15cores úteis;902pixels
+opacos/índices/RGBA de Social exatos em ambas as faces. Apenas slots PLTE não
+usados por Social11/14/15 mudam. Sem folga presumida para futuros FX.
+
+Três ROMs de32KiB buildadas pelo wrapper, com gates pertinentes e vínculos:
+
+- esquerda: `57b0d4e9b8c0acb005814f2c841baff07b75dbc4138ab97a62353d647dc87cc1`;
+- direita: `aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4`;
+- direita stress128: `fc036bd50c000a403e1cf7ac08d30319f5e1f764260e137ee09d8b1936464699`.
+
+QA independente2/2casos,260/260RGBexatos: S01–S05 manuais em80–86/87–90/
+91–92/93–95/96–101, guarda102–129; tempos propostos7/4/2/3/6. Autoplay
+inicial0–21, guarda22–79. O still `case_0_frame.png` foi obtido antes do vídeo;
+o terminal foi conferido no RAW129. Sessõesa038803d…/b8888ff2… encerradas.
+Vídeo real da ROM direita tem480/480quadros exatos em8,023643s,11ações completas,
+10com guarda integral, decodeMP4lossless igual ao RGB. Não é avaliação de força,
+fluidez ou aceite temporal. Mídias em `out/diagnostics/jj_zillion_single_shot_v5/
+performance/5f94496d541d4b8ea7656756cd63acd8/`: `jj_character_realtime.mp4`,
+`rom_normal.apng` e `rom_slow.apng`. Fonte6 separada em seu `poses_and_times.png`
+e comparações `source_normal.apng`/`source_slow.apng`; a coluna anterior v3
+conserva o pulso histórico, a coluna atual não tem efeitos. `SMS_review.png` é
+preview convertido, não captura da ROM. Concept5 permanece fonte RGBA truecolor,
+sem se aplicar o teto de15cores de recurso runtime.
+
+VBlank base3.000frames,0derrame,mínimo213; stress1283.000frames,0derrame,mínimo224.
+Primeira janelaFPS8s falhou59,32/58,36; mantida. Uma confirmação20s passou
+59,79/59,84 no mesmo SHA, sem alterar critério. Causa da oscilação não isolada;
+não declarar pacing constante por frame. Sessões root5f94496d…/7137a0f1…/
+a03f5ed2… encerradas. Na leitura imediata da primeira o supervisor ainda saía;
+`cleanup_confirmation.json` confirma todos os PID/start_ticks próprios ausentes.
+
+Checkpoint `doc/jj_zillion_character_checkpoint_v6.json`: quatro eixos técnicos/
+estáticos pass; continuous_motion e owner_acceptance needs_evidence. Próximo:
+o proprietário julgar proporção/forma no concept e seis poses e assistir o vídeo
+normal para aceitar a correção/retorno. Preservar controle até defeito concreto.
+Não gerar arte adicional para suprir a ausência de percepção contínua.
+
+Histórico completo no campo `followup_jj_zillion_short_route` do candidato de
+curadoria existente `curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`.
+Custos reais:6ImageGen(2concept/4sprites),6variantesfonte,6conversões oficiais
+(4falhas/2pass),3builds,5sessões novas(2QA/3performance). As buscas de fase
+v2–v4 não são conversões oficiais; v4/três poses foi descartada por direção do
+dono. O plano v5 ficou congelado antes da QA; resultados posteriores estão
+separados em `runtime_evidence.json`. Rota técnica reutilizada demonstrada,
+previsibilidade artística em passagem única não demonstrada.
+
+Registro limitado J.J.+ancestrais:26artefatos/161arquivos pass;73arquivos novos
+de fonte sob ownership canônico, sem arquivo solto. Auditoria global continua
+falhando no relatório históricoSocial61v5 ausente. Pacote72355032bytes solicitado
+para download manual pela regra>70MB, ainda não recebido; não inventar relatório.
+Nada em res/, sem projétil, gameplay, áudio, PAL, produção ou curadoria global
+homologada. Hayato permanece fechado/aprovado e intacto. Retenção verificada:777arquivos/102.900.955bytes no ZIP28.128.259bytes, SHA
+`937b886f83cc50f71987b14f38adf3941aacc80837ed9b8b432865bd7825557a`,
+com cópia no destino local de recuperação. Recibo
+`jj_zillion_character_retention_v6.json`; SHA de publicação no
+`out/diagnostics/jj_zillion_single_shot_v5/publication.json`.
+
+## Histórico do lote J.J. — decisões anteriores preservadas
+
+## Direção vigente do dono — proporção da Zillion, seis poses, sem FX
+
+O proprietário corrigiu explicitamente o escopo: a Zillion está grande demais
+em relação a J.J.; corrigir a proporção no concept/model sheet mantendo a forma.
+**Preservar os seis quadros e as poses. Não incluir bala, tiro, sparks, flash,
+FX ou objetos na folha do personagem; esses elementos serão separados depois.**
+A experiência de três poses e pulso composto v4 fica histórica/supersedida,
+sem ROM ou aprovação. Fonte corporal para preservar: seis poses v3. Atual:
+`jj_zillion_single_shot_route_v5.json`, contrato de animação v5, equipamento v2
+e `decisions/jj-zillion-proportion-and-no-fx_owner-feedback.json`. Corrigir
+somente arma/encaixe da pega por ROIs, sem regenerar atuação, rosto ou figurino.
+Concept individual v4 aprovado permanece intacto como controle histórico;
+a correção candidata v5 terá review/aceite próprios. Nenhuma ROM de J.J. foi
+construída até esta direção. Hayato permanece aprovado e intacto.
+
+## Lote J.J. — correção de autoridade da arma antes de continuar
+
+O proprietário pediu outro personagem e uma ação curta repetível para futura
+curadoria canônica, além da recuperação do relatório histórico Social61v5.
+Selecionado J.J. / tiro único Zillion. Primeiro resultado v1 tem arma errada:
+blaster compacto branco/azul herdado do concept individual v4. O dono apontou
+explicitamente a diferença. A referência anexada é byte-idêntica à de08/10
+(`7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49`),
+e a prancha WakuWaku7 aprovada já corrigia a pistola longa navy/cyan. Falha do
+coordenador: não conciliar correção específica de equipamento ao retomar pelo
+concept mais antigo. Preservar a aprovação histórica e não reutilizar sua arma
+como autoridade atual.
+
+Contrato atual `jj_zillion_weapon_identity_contract_v1.json`: conceptv4 rege
+corpo/figurino, prancha aprovada e referência do dono regem a Zillion. Plano
+atual `jj_zillion_single_shot_route_v2.json`, contrato de animação v2; v1 fonte,
+configurações e conversões falhas preservadas. Uma geração, quatro conversões,
+zero builds/ROMs/sessões de J.J. até esta reconciliação. O gate de sola detectou
+79vs80 antes de build; após pivô medido, o par ainda excede scanline na pose do
+pulso avançado. Nenhum resultado ilegal foi integrado. A fonte v2 corrigirá
+arma e encenação compacta; pulso curto somente na emissão, sem trajetória lenta
+ou sistema de projéteis. Review independente estático v1 é evidência histórica,
+não aceite de arma ou movimento. Hayato permanece fechado/aprovado e intacto.
+
+Relatório ausente: SHA esperado `f288f3f113d33ed9c898acfb92476f28f858292e8f403c2c410c8fc2f0403bac`.
+Solicitado download manual de `smsforge-generated-other-20261021.tar.zst`
+(72.355.032bytes; SHA85750979…) conforme regra acima de70MB. Não recriar relatório
+histórico para obter registro verde. Prosseguir com o lote independente e
+preservar a pendência se o pacote não chegar.
+
 ## Aceite final do proprietário — corte de Hayato fechado
 
 Após o fechamento publicado em `15305168ff9c46a9ea1f373354c988ba9c099abd`,

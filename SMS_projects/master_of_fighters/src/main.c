@@ -9,10 +9,18 @@
 
 #include "SMSlib.h"
 
-#if (defined(MOF_CPS2_SAMPLE) && MOF_CPS2_SAMPLE) || defined(MOF_HAYATO_SAMPLE)
+#if (defined(MOF_CPS2_SAMPLE) && MOF_CPS2_SAMPLE) || defined(MOF_HAYATO_SAMPLE) || defined(MOF_JJ_SAMPLE)
 /* Diagnostic selection within the existing consumer. Candidate source assets
  * remain outside res/; the default production skeleton is unchanged. */
-#if defined(MOF_HAYATO_SAMPLE)
+#if defined(MOF_JJ_SAMPLE)
+#if MOF_JJ_SAMPLE == 1
+#include "../out/diagnostics/jj_zillion_single_shot_v5/converted_left/sample_data.h"
+#elif MOF_JJ_SAMPLE == 2
+#include "../out/diagnostics/jj_zillion_single_shot_v5/converted_right/sample_data.h"
+#else
+#error Unknown J.J. diagnostic composition
+#endif
+#elif defined(MOF_HAYATO_SAMPLE)
 #if MOF_HAYATO_SAMPLE == 1
 #include "../out/diagnostics/hayato_cps2_sample_v1/guard_v2_left_baseline_v3/sample_data.h"
 #elif MOF_HAYATO_SAMPLE == 2
@@ -72,7 +80,10 @@
 #error Stress upload exceeds the resident source data
 #endif
 SMS_EMBED_SEGA_ROM_HEADER(0, 0);
-#if defined(MOF_HAYATO_SAMPLE) && MOF_HAYATO_SAMPLE >= 5
+#if defined(MOF_JJ_SAMPLE)
+SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "J.J. pose sample",
+                              "Character poses only, no shot/FX or gameplay");
+#elif defined(MOF_HAYATO_SAMPLE) && MOF_HAYATO_SAMPLE >= 5
 SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "Hayato cut sample",
                               "Candidate guard and short cut, not gameplay");
 #else

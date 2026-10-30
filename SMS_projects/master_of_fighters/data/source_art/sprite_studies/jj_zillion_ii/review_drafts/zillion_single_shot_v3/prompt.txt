@@ -1,0 +1,20 @@
+Use case: precise-object-edit
+Asset type: six-drawing original J.J. Zillion pixel animation sheet, bounded revision3.
+Input1 EDIT TARGET: previous six complete J.J. drawings. Preserve the same character identity, hair, youthful athletic body, fitted magenta suit, white armor, harness/holster/boots, pixel finish, six-cell action roles and body scale. Correct only gun construction and compact aiming arm choreography as necessary.
+Input2 PRIMARY WEAPON CONSTRUCTION REFERENCE: already mirrored so muzzle points RIGHT. Copy its design faithfully in original pixel-art drawing, not pasted source pixels.
+IMPORTANT observed errors to fix:
+1. The target's largest cyan panel is near the FRONT/right muzzle. In the reference, the LARGE RECTANGULAR CYAN PANEL is on the REAR/LEFT part of the upper body, above/behind the trigger grip. The long forward/right barrel is mostly dark navy with only thin slashes/small inset accents. Preserve that front/rear construction in EVERY pose. Do not reverse the whole gun or shift the large panel toward the muzzle.
+2. In S01 the gun became short/wedge-like. The same complete elongated rigid Zillion must be obvious in all six drawings, including preparation. Do not shorten barrel or hide it in depth. Its whole upper body is long and very low, with rear rectangular receiver, long tapering forward barrel and angular pointed muzzle.
+3. High stretched aim makes the composition too wide. Keep the COMPLETE canonical weapon length, and CHANGE ELBOW/SHOULDER STAGING: two hands and trigger grip CLOSE TO STERNUM, elbows folded DOWN, upper arms close to ribs, aim at UPPER-CHEST HEIGHT BELOW THE CHIN. Hands must NOT stretch out toward the front. This is a compact close-held Zillion shot, not a fully outstretched handgun pose.
+The grip in the horizontal aim cells should be near local x=240, rear gun end near x=160, muzzle near x=405. Character head is around x=225; gun axis at local y=185, below the jaw, not covering the eyes or face. This keeps a long barrel without shrinking the character. No muzzle beyond x=425. Right trigger hand naturally holds grip; left hand supports right hand/base of grip, no detached wrists or extra fingers.
+
+Output exactly1536x1024, 3columns x2rows, virtual512x512cells, SIX full-body drawings only, facingRIGHT:
+I00(top-left) grounded low-ready guard, complete gun lowered diagonally in front of torso, no pulse.
+S01(top-middle) rear-weight preparation, raise complete gun with full length visible at a slight upward angle, hands close to chest, no foreshortened short gun, no pulse.
+S02(top-right) compact two-hand aim as described, horizontal complete long navyZillion at chest height, elbows folded, no pulse.
+S03(bottom-left) ONE emission from same compact chest-height aim, tiny shoulder response, ONE short white-core/cyan-edged pulse 4underlyingpixels long just beyond muzzle, no starburst or glow.
+S04(bottom-middle) gentle shoulder/elbow settling from that shot, same complete gun, NO pulse or flash.
+S05(bottom-right) return long gun smoothly down to original lowguard, support hand releases naturally, NO pulse.
+Next is originalI00. Single shot only. Both boots remain planted, consistent leg/foot silhouette and root/stance width, weight transfer through knees/hips without whole-body jumps.
+Body crown-to-sole about425imagepixels in every cell, floor y=468, root x=224; preserve complete head, hands, boots and long gun with transparent margin. Underlying128pixel logical cell4x nearest-neighbor style: deliberate clean square clusters, flat2-3tone materials, no antialiasing, glow, grain or stray pixels. Same upper-left light. True transparent background, no checkerboard/opaque background, no grid/text/labels/shadows.
+No changes to identity, armor shapes, costume palette or number of poses. No generic blaster, white receiver/orange window, stock/rifle attachments or shortened weapon. New source drawings will be reviewed at native size.

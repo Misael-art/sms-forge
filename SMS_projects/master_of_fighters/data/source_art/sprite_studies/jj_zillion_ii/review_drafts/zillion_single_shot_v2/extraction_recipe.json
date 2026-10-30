@@ -1,0 +1,409 @@
+{
+  "source": "raw.png",
+  "source_sha256": "618ef9c1140bdfb8d7f9c4944f719b692674938fec975c76a44cd66cdf771b28",
+  "raw_size": [
+    1536,
+    1024
+  ],
+  "scale": [
+    1,
+    4
+  ],
+  "alpha_threshold": 128,
+  "canvas": [
+    160,
+    160
+  ],
+  "pivot": [
+    72,
+    132
+  ],
+  "source_colors": 18,
+  "source_palette_rgb": [
+    [
+      10,
+      8,
+      24
+    ],
+    [
+      0,
+      0,
+      68
+    ],
+    [
+      125,
+      0,
+      45
+    ],
+    [
+      180,
+      0,
+      65
+    ],
+    [
+      245,
+      0,
+      90
+    ],
+    [
+      255,
+      75,
+      135
+    ],
+    [
+      15,
+      15,
+      125
+    ],
+    [
+      20,
+      35,
+      220
+    ],
+    [
+      105,
+      125,
+      250
+    ],
+    [
+      250,
+      250,
+      255
+    ],
+    [
+      170,
+      175,
+      205
+    ],
+    [
+      90,
+      95,
+      150
+    ],
+    [
+      255,
+      190,
+      150
+    ],
+    [
+      250,
+      150,
+      100
+    ],
+    [
+      160,
+      80,
+      60
+    ],
+    [
+      255,
+      100,
+      15
+    ],
+    [
+      170,
+      85,
+      0
+    ],
+    [
+      0,
+      220,
+      255
+    ]
+  ],
+  "sheet_columns": 3,
+  "sheet_filename": "shot_source.png",
+  "frames": [
+    {
+      "id": "I00",
+      "rect": [
+        58,
+        36,
+        409,
+        463
+      ],
+      "cell_origin": [
+        0,
+        0
+      ],
+      "raw_pivot": [
+        244,
+        463
+      ]
+    },
+    {
+      "id": "S01",
+      "rect": [
+        595,
+        36,
+        939,
+        463
+      ],
+      "cell_origin": [
+        512,
+        0
+      ],
+      "raw_pivot": [
+        244,
+        463
+      ]
+    },
+    {
+      "id": "S02",
+      "rect": [
+        1069,
+        57,
+        1499,
+        463
+      ],
+      "cell_origin": [
+        1024,
+        0
+      ],
+      "raw_pivot": [
+        244,
+        463
+      ]
+    },
+    {
+      "id": "S03",
+      "rect": [
+        82,
+        544,
+        563,
+        955
+      ],
+      "cell_origin": [
+        0,
+        512
+      ],
+      "raw_pivot": [
+        244,
+        443
+      ]
+    },
+    {
+      "id": "S04",
+      "rect": [
+        581,
+        544,
+        1009,
+        955
+      ],
+      "cell_origin": [
+        512,
+        512
+      ],
+      "raw_pivot": [
+        244,
+        443
+      ]
+    },
+    {
+      "id": "S05",
+      "rect": [
+        1069,
+        535,
+        1427,
+        955
+      ],
+      "cell_origin": [
+        1024,
+        512
+      ],
+      "raw_pivot": [
+        244,
+        443
+      ]
+    }
+  ],
+  "notes": [
+    "Common1/4nearest sampling for all6drawings; no per-pose fit. Body approx102-107sourcepx, equipment extends beyond anatomy.",
+    "160transparent sourcecanvas and later104SMSwidth chosen for complete longZillion and shortemission; framing is not body scale.",
+    "Raw generation did not obey cellfloor/muzzle constraints; explicit rowfloors463/955 and crops include complete associated pixels. S03pulse crosses nominal raw512cell, no neighbor overlap.",
+    "A single raw1pxalpha128component nearS04gun is retained if sampled; no cleanup deletion bycode. Component/material review must inspect output.",
+    "18materialcolors and alpha128 inherited with explicit palette mapping; gun noorange/white identity. Navy/blue/cyan ramp owns weapon."
+  ],
+  "material_palette": [
+    {
+      "source_index": 1,
+      "role": "deep_contour",
+      "source_rgb": [
+        10,
+        8,
+        24
+      ],
+      "sms_code": 0
+    },
+    {
+      "source_index": 2,
+      "role": "navy_contour_harness",
+      "source_rgb": [
+        0,
+        0,
+        68
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 3,
+      "role": "cloth_dark",
+      "source_rgb": [
+        125,
+        0,
+        45
+      ],
+      "sms_code": 1
+    },
+    {
+      "source_index": 4,
+      "role": "cloth_shadow",
+      "source_rgb": [
+        180,
+        0,
+        65
+      ],
+      "sms_code": 18
+    },
+    {
+      "source_index": 5,
+      "role": "cloth_base",
+      "source_rgb": [
+        245,
+        0,
+        90
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 6,
+      "role": "cloth_light",
+      "source_rgb": [
+        255,
+        75,
+        135
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 7,
+      "role": "hair_dark",
+      "source_rgb": [
+        15,
+        15,
+        125
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 8,
+      "role": "hair_blue",
+      "source_rgb": [
+        20,
+        35,
+        220
+      ],
+      "sms_code": 48
+    },
+    {
+      "source_index": 9,
+      "role": "hair_highlight",
+      "source_rgb": [
+        105,
+        125,
+        250
+      ],
+      "sms_code": 56
+    },
+    {
+      "source_index": 10,
+      "role": "armor_white",
+      "source_rgb": [
+        250,
+        250,
+        255
+      ],
+      "sms_code": 63
+    },
+    {
+      "source_index": 11,
+      "role": "armor_shadow",
+      "source_rgb": [
+        170,
+        175,
+        205
+      ],
+      "sms_code": 42
+    },
+    {
+      "source_index": 12,
+      "role": "armor_deep",
+      "source_rgb": [
+        90,
+        95,
+        150
+      ],
+      "sms_code": 21
+    },
+    {
+      "source_index": 13,
+      "role": "skin_light",
+      "source_rgb": [
+        255,
+        190,
+        150
+      ],
+      "sms_code": 47
+    },
+    {
+      "source_index": 14,
+      "role": "skin_base",
+      "source_rgb": [
+        250,
+        150,
+        100
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 15,
+      "role": "skin_shadow",
+      "source_rgb": [
+        160,
+        80,
+        60
+      ],
+      "sms_code": 22
+    },
+    {
+      "source_index": 16,
+      "role": "pistol_orange_inset",
+      "source_rgb": [
+        255,
+        100,
+        15
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 17,
+      "role": "pistol_dark_orange",
+      "source_rgb": [
+        170,
+        85,
+        0
+      ],
+      "sms_code": 11
+    },
+    {
+      "source_index": 18,
+      "role": "laser_cyan",
+      "source_rgb": [
+        0,
+        220,
+        255
+      ],
+      "sms_code": 56
+    }
+  ]
+}

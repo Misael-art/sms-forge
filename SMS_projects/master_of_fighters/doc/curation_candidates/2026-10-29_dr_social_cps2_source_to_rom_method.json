@@ -469,5 +469,197 @@
         }
       ]
     }
+  },
+  "followup_jj_zillion_short_route": {
+    "status": "technical_route_demonstrated_corrected_art_and_motion_pending_owner_not_globally_curated",
+    "scope": "Third character: J.J. from approved roster, character-only guard plus5actionposes. No shot/FX baked into character; emission/object deferred by explicit owner feedback.",
+    "reason_for_selection": "Young agile sci-fi laser user contrasts with Social Victorian cane and Hayato samurai katana, while remaining in approved roster/art language.",
+    "research": {
+      "path": "SMS_projects/master_of_fighters/doc/jj_zillion_single_shot_research_v1.json",
+      "sha256": "42eb49b3e4c406ca8763199706df12c80e6eb45efe89f51ccb9495e5f5829751"
+    },
+    "equipment_authority": {
+      "path": "SMS_projects/master_of_fighters/doc/jj_zillion_weapon_identity_contract_v2.json",
+      "sha256": "5eaada48bcbfbaf7e4488d6db146c7089944e9404593665f6f4666e0bf1d73f1"
+    },
+    "source": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+      "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+    },
+    "concept": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/concept_source.png",
+      "sha256": "e81e0f9cc81b1552ff2ace0e046ecb5c36be00119e6b6f5d60d17a7b17f518e9"
+    },
+    "frozen_pre_QA_plan": {
+      "path": "SMS_projects/master_of_fighters/doc/jj_zillion_single_shot_route_v5.json",
+      "sha256": "51470af57e5cfaa38c671adf0ae23e09da261a963cf079cb01dfeb76f6341a05"
+    },
+    "checkpoint": {
+      "path": "SMS_projects/master_of_fighters/doc/jj_zillion_character_checkpoint_v6.json",
+      "sha256": "4d92b3d4d435e6347f1cc74cfc0f743a734ab53b5eaed5dd669816da77fecf3d"
+    },
+    "runtime_evidence": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/runtime_evidence.json",
+      "sha256": "e68f7b51ec86eca87151e3f90f46c8f96df0de7b30d733baa4b7b66adf21eca7"
+    },
+    "observed": {
+      "six_states": [
+        "I00",
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05"
+      ],
+      "holds_proposed": [
+        7,
+        4,
+        2,
+        3,
+        6
+      ],
+      "patterns_including_blank": 180,
+      "resident_bytes": 5760,
+      "SAT_peak": 50,
+      "scanline_peak": 8,
+      "canvas": [
+        104,
+        88
+      ],
+      "pivot": [
+        48,
+        80
+      ],
+      "sole_screen_last_y": 143,
+      "Social_visible_pixels_exact_both_faces": 902,
+      "shared_useful_P1_colors": 15,
+      "independent_cases": 2,
+      "independent_exact_frames": 260,
+      "realtime_exact_frames": 480,
+      "realtime_elapsed_s": 8.023643057,
+      "complete_actions": 11,
+      "complete_actions_plus_full_idle": 10,
+      "FPS_20s_windows": [
+        59.79,
+        59.84
+      ],
+      "first_8s_FPS_windows_FAILED_preserved": [
+        59.32,
+        58.36
+      ],
+      "base_sealed_frames": 3000,
+      "base_vovf_delta": 0,
+      "base_vline_min": 213,
+      "next_step_bytes": 128,
+      "next_step_sealed_frames": 3000,
+      "next_step_vovf_delta": 0,
+      "next_step_vline_min": 224,
+      "new_emulator_sessions_closed": 5,
+      "no_ongoing_owned_process": true
+    },
+    "cost": {
+      "imagegen_calls": 6,
+      "concept_imagegen_calls": 2,
+      "sprite_imagegen_calls": 4,
+      "source_variants": 6,
+      "official_converter_calls": 6,
+      "converter_failures": 4,
+      "converter_successes": 2,
+      "builds": 3,
+      "native_QA_sessions": 2,
+      "root_performance_sessions": 3,
+      "total_new_emulator_sessions": 5,
+      "performance_failed_FPS_windows_preserved": 1
+    },
+    "history": [
+      {
+        "version": "sprite sourcev1",
+        "outcome": "not selected; generic white/bluegun copied from stale equipment concept; sole/pair failures before build",
+        "cost": "1ImageGen,4actual officialconvertercalls:2sole failures then2pairbudget failures;0builds"
+      },
+      {
+        "version": "sprite sourcev2",
+        "outcome": "longnavy/cyan family restored but panelposition and proportion wrong; modelgrid still>=9/line",
+        "cost": "1ImageGen,0officialconvertercalls,0builds"
+      },
+      {
+        "version": "sprite sourcev3",
+        "outcome": "canonicalweapon shape clearer, still oversized; sixbodyposes become frozen control per owner",
+        "cost": "1ImageGen,0officialconvertercalls,0builds"
+      },
+      {
+        "version": "sprite sourcev4",
+        "outcome": "mechanical3bodypose/pulse proposal superseded by owner requirement to retain all6drawings and noFX",
+        "cost": "0ImageGen,0officialconvertercalls,0builds"
+      },
+      {
+        "version": "conceptv5",
+        "outcome": "gun-only boundedROI edit of original2bodyposes; secondcall refines rightgun20percent smaller; keeptruecolor navy/cyan",
+        "cost": "2ImageGen;14colorindexedintermediate rejected,not runtime"
+      },
+      {
+        "version": "sprite sourcev5 / runtimeprofilev5",
+        "outcome": "boundedgun/gripROI edit, sixv3bodyposes preserved, oldpulse removed, proportionalweapon; commonP1/registration/grid passbothfaces",
+        "cost": "1ImageGen,2successful officialconversions,3builds"
+      },
+      {
+        "version": "sprite sourcev6",
+        "outcome": "independentreview isolated I00point105,99; copy existingImageGentransparent sample; only index2to0; all14SMSPNGs/12scenes/2wholeheaders unchanged",
+        "cost": "0ImageGen,0newfullconversions,0newbuilds;source-onlyaddendum"
+      },
+      {
+        "version": "runtime evidence",
+        "outcome": "2nativeQA sessions pass260/260; realtime480exact; baseVBlankpass; firstFPSfailed,one20sconfirmationpass;firststress128pass",
+        "cost": "3rootperformance sessions;firstfailure preserved;5totalnew emulator sessions"
+      }
+    ],
+    "causes_and_minimal_recipe": [
+      "Reconcile equipment-specific owner decisions with older body/costume approvals before prompting. Direct owner weapon reference overrides ambiguous cyanpanel placement in harmony sheet.",
+      "Declare weapon/body/hand proportional envelopes before art; long gun does not mean unbounded size. Anime references here inform equipment only, not costume/palette/lore replacement.",
+      "Separate character from projectile/emission/sparks at contract stage; never bake extra game objects into character to prove an action.",
+      "Preserve all pose IDs/body artwork; no pose deletion, per-pose scaling or hold changes to hide fidelity/budget defects.",
+      "Measure actual sole and horizontal support registration before composing; test sprite grid independently after mirroring. These are declared per-drawing transforms, not hidden retouching.",
+      "Freeze source-index-to-P1 mapping of existing actor before adding colors to unused slots. Nearest-color remapping changed34Socialpixels perface initially; final explicit map preserves902.",
+      "Inspect source as well as SMS for disconnected pixels. The single orphan survived in source but disappeared at reduction; source6 repairs only that proven point.",
+      "Recompute affected official transform then reuse artifacts by exact identity when pixels/headers do not change. Do not repeat builds/art reviews for zeroSMSdelta.",
+      "Reuse official extractor/adapter/packer/consumer/build/isolation tools; runtime delta is selector/title only. Cconsumer FSM,input,render andprobe unchanged.",
+      "Preserve negative attempts and performance failures. Longer FPS windows passing do not erase firstfailure or establish its cause or per-framepacing."
+    ],
+    "what_is_repeated": "Authoredsource -> commonmaterialmapping/pivots -> officialconversion -> pairedbothfacings -> existingROMconsumer -> nativeprivateQA -> realtime/FPS/sealedVBlank -> retention/history. Technical route reproduced; artistic predictability not yet owner accepted.",
+    "limits": [
+      "No owner/artistic temporal acceptance",
+      "No continuous perception established by this interface",
+      "No projectile, muzzleflash, sparks, effects, gameplay, audio, PAL or production",
+      "Global registry remains blocked by missing historical Social61v5 report; no historical report fabricated",
+      "SixImageGencalls and repeatedowner corrections mean this was not a one-pass predictable artistic route.",
+      "Materialregion automatedcontract remains pending; componentcheck passes, actual materialquality reviewed separately by independentstaticreview.",
+      "Reference PLTE changes unusedslots11/14/15; visibleindices/RGBA preserved, not wholePLTEidentity.",
+      "ManualQA case_0_frame.png is a pre-video still, not terminal; guard confirmed in rawframe129 and timeline102..129.",
+      "FutureFX will need independent art/budget/ROM proof; no headroom inferred at peak8."
+    ],
+    "global_historical_block": {
+      "status": "missing_unchanged_not_fabricated",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/conversion_report_61_pose_v5.json",
+      "expected_sha256": "f288f3f113d33ed9c898acfb92476f28f858292e8f403c2c410c8fc2f0403bac",
+      "audit": {
+        "path": "SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/registry_global_final.json",
+        "sha256": "08d92d541aeec00b5b70fc8a55c2bd1974a6491de20bf6751dd7a6b042961d9d"
+      },
+      "possible_recovery_archive": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261021/smsforge-generated-other-20261021.tar.zst",
+      "archive_bytes": 72355032,
+      "archive_sha256": "85750979253f45ba67b7c0c53aeec5399d788ed72b82f9747f9de4fecb28ed28",
+      "pending_action": "One manual download already requested, required by Projects/AGENTS.md >70MB rule. Archive absent in workspace/downloads at closure. Verifyfullarchivehash then selectively recover onlyexpectedhash files; global audit may reveal furthermissing records."
+    },
+    "next_step": "Owner reviews exact conceptv5,sourcev6 and realROMnormalvideo. Keepcurrent control until concrete feedback; no furthergeneration or contentgrowth. Afterownerdecision and historicalrecovery, curator can assess promotion with existing doctrine/tests.",
+    "promotion": "queued_not_homologated; no global rule, lesson ID, skill or gate changed",
+    "retention": {
+      "receipt": {
+        "path": "SMS_projects/master_of_fighters/doc/jj_zillion_character_retention_v6.json",
+        "sha256": "e5a075ed57005c6d3c45ffa3e746cc8b9085784d7fe4d78a7e09838979951c8a"
+      },
+      "archive_sha256": "937b886f83cc50f71987b14f38adf3941aacc80837ed9b8b432865bd7825557a",
+      "payload_files": 777,
+      "scope": "Local recovery copy verified; package freezes evidence before external receipt/publication. Final receipt and followup retention field are separately versioned in Git; no recursive archive hash."
+    }
   }
 }

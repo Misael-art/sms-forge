@@ -1,0 +1,36 @@
+{
+  "schema": "mof_lore_research_v1",
+  "character": "jj_zillion_ii",
+  "checked_at": "2026-10-30T02:05:17.745906+00:00",
+  "game_authority": "Zillion II: The Tri Formation (Master System)",
+  "approved_concept": "jj-zillion-ii-concept-v04",
+  "sources": [
+    {
+      "url": "https://www.smspower.org/Scans/ZillionII-SMS-US-Manual",
+      "role": "Scans of original SEGA manual; primary game authority"
+    },
+    {
+      "url": "https://gamesurge.com/strategies/Gamegear/Manuals/Zillion%202-tri%20Formation.shtml",
+      "role": "Transcription of original SEGA manual, Taking Control, Button 2, corroborates Zillion Laser; consulted online",
+      "local_evidence": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v1/manual_transcription.html",
+        "sha256": "9cd14dd338c6f3d49cfcc22d1f2622ed35d70d076115482937eaf057960c2848",
+        "bytes": 21060
+      }
+    }
+  ],
+  "verified_facts": [
+    "J.J. is a White Knight rescuing Apple and Champ from the Norsa fortress.",
+    "Button 2 fires the Zillion Laser.",
+    "The game has on-foot sections as well as Turbo Cycle/Armorater sections."
+  ],
+  "fan_game_adaptation": [
+    "Grounded one-shot fighting pose, two-hand aim and five action exposures are authored proposals, not historical frame data or a canonical named special.",
+    "Pulse lifespan is a finite diagnostic portrayal, no collision/damage, beam length or competitive range claim."
+  ],
+  "reference_boundaries": {
+    "identity_palette_behavior": "SMS game and approved v4 concept",
+    "anime": "Existing approved costume clarification only; not a new lore/moveset source",
+    "hayato_and_social": "Finish, body-scale and integration controls only; do not transfer character identity or timing automatically"
+  }
+}

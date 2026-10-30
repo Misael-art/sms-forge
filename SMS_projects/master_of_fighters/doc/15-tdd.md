@@ -1,5 +1,28 @@
 # 15-tdd — master_of_fighters
 
+## Integração diagnóstica J.J. — mesma rota e consumidor
+
+`MOF_JJ_SAMPLE=1/2` seleciona os headers v5 nos dois sentidos no consumidor já
+existente; nenhuma nova lógica de animação, projétil, render, input ou probe.
+A fonte6 remove um ponto de I00 que não sobrevivia à redução: funções oficiais
+recalculam o idle e comprovam igualdade de índices nos dois sentidos; 14 PNGs,
+12 cenas e dois headers continuam idênticos. Fontes de ação v5 e conceito v5
+mantêm as poses e corrigem só arma/pega, sem efeitos. Material-index→P1 de
+Social congelado evita a regressão de 34 pixels constatada na tentativa inicial.
+
+Canvas 104×88/pivô48,80/posições16/128,64; packing de fases medido em ambas as
+faces. Pool180×32 B no primeiro meio de VRAM, PNT0x3800/SAT0x3F00, modo normal
+8×8. Builds base esquerda/direita e direita stress128 têm 32 KiB; vínculos e
+corredores passaram. QA2casos/260RGB e vídeo real480RGB exatos; FPS20s
+59,79/59,84 após falha8s preservada. VBlank3.000frames0derrame, mínimo213
+base/224stress128. Cinco sessões novas fechadas; revisão contínua/aceite humano
+ainda pendentes.
+O perfil só mostra poses de personagem e não implementa dano ou objetos/FX.
+
+## Histórico J.J. v1 — proposta com pulso supersedida, não implementada
+
+Novo estudo de tiro único reutiliza `prepare_authored_sprite_sample.py`, o empacotador oficial e o consumidor diagnóstico em `src/main.c`. Fonte autoral e pulso finito incorporados às poses; sem sistema novo de projéteis, colisão ou dano. Perfil normal 8×8, escala única e pivôs/solas/grades explícitos; selecionar apenas após medir o par nas duas faces. ROM, vínculo, QA, FPS e VBlank próprios permanecem pendentes até a execução. Rastreio em `jj_zillion_single_shot_route_v1.json`.
+
 ## Perfil atual — somente tempos v7, fonte v4 reutilizada
 
 Seletores15/16 consomem `out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_{left,right}/sample_data.h`.

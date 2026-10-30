@@ -1,0 +1,264 @@
+{
+  "schema": "sms_authored_animation_lineage_v1",
+  "character": "jj_zillion_ii",
+  "status": "candidate_equipment_corrected_not_owner_approved",
+  "input_concept": {
+    "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+    "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+    "role": "Retained body/face/costume only; older compactgun superseded by approvedharmony and ownerweaponreference"
+  },
+  "input_style": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+    "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+    "role": "Source scale and pixel finishing reference only, no identity/pose/timing copied"
+  },
+  "prompt": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/prompt.txt",
+    "sha256": "9ae1dd8f31bdfa5b9871c170059b1e68c881f494580b578cfecf57e2b85a30ed",
+    "channel": "saved_full_prompt"
+  },
+  "raw": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/raw.png",
+    "sha256": "618ef9c1140bdfb8d7f9c4944f719b692674938fec975c76a44cd66cdf771b28",
+    "channel": "built_in_image_gen"
+  },
+  "extraction": {
+    "tool": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+    "tool_sha256": "f151440cdc32673d9f377c8f6c9ef4de4b0fa2fe67abb7d90cdb27082eb03dab",
+    "recipe": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/extraction_recipe.json",
+    "recipe_sha256": "4d77cd851b289283e33684f028179c9828ad7bed5cce2f8f81dbacc6ee0f4de2",
+    "scope": "Common nearest1/4, alpha128, same18declared source-materialcolors;160transparentcanvas preserves complete longweapon and finitepulse; no pixel painting/erasing bycode"
+  },
+  "frames": [
+    {
+      "id": "I00",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/I00.png",
+      "sha256": "7bc5c78bc117753ba1f5d148447cfc510e2b81629dda5005ebc93fecec0972b9"
+    },
+    {
+      "id": "S01",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S01.png",
+      "sha256": "af21fb1873b3721a50b45a33f59cfa02eff20468c18c9afa03ed43526fa4cf90"
+    },
+    {
+      "id": "S02",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S02.png",
+      "sha256": "2083ea978a800558b23acd2be07c4fb9a79dfe28dc5dcc49ce06ab477d17ac3e"
+    },
+    {
+      "id": "S03",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S03.png",
+      "sha256": "e61f12e1a141a403180ee38b55abd82f92ef3e9c764c7c98203f896d993f6196"
+    },
+    {
+      "id": "S04",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S04.png",
+      "sha256": "97ff4b635af02760e3b528cba88883d41a6e33fd86749475881496a003e36d07"
+    },
+    {
+      "id": "S05",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S05.png",
+      "sha256": "9de032df66551204027c164c602aef61ff4d1ae5f95581fd0467599d0efe8b5c"
+    }
+  ],
+  "source_sheet": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/shot_source.png",
+    "sha256": "2f0bbf2b8e0e91ded32805459e2bd6714c4772ce4f26cdfaf7ac43c0051eeec9"
+  },
+  "material_palette": [
+    {
+      "source_index": 1,
+      "role": "deep_contour",
+      "source_rgb": [
+        10,
+        8,
+        24
+      ],
+      "sms_code": 0
+    },
+    {
+      "source_index": 2,
+      "role": "navy_contour_harness",
+      "source_rgb": [
+        0,
+        0,
+        68
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 3,
+      "role": "cloth_dark",
+      "source_rgb": [
+        125,
+        0,
+        45
+      ],
+      "sms_code": 1
+    },
+    {
+      "source_index": 4,
+      "role": "cloth_shadow",
+      "source_rgb": [
+        180,
+        0,
+        65
+      ],
+      "sms_code": 18
+    },
+    {
+      "source_index": 5,
+      "role": "cloth_base",
+      "source_rgb": [
+        245,
+        0,
+        90
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 6,
+      "role": "cloth_light",
+      "source_rgb": [
+        255,
+        75,
+        135
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 7,
+      "role": "hair_dark",
+      "source_rgb": [
+        15,
+        15,
+        125
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 8,
+      "role": "hair_blue",
+      "source_rgb": [
+        20,
+        35,
+        220
+      ],
+      "sms_code": 48
+    },
+    {
+      "source_index": 9,
+      "role": "hair_highlight",
+      "source_rgb": [
+        105,
+        125,
+        250
+      ],
+      "sms_code": 56
+    },
+    {
+      "source_index": 10,
+      "role": "armor_white",
+      "source_rgb": [
+        250,
+        250,
+        255
+      ],
+      "sms_code": 63
+    },
+    {
+      "source_index": 11,
+      "role": "armor_shadow",
+      "source_rgb": [
+        170,
+        175,
+        205
+      ],
+      "sms_code": 42
+    },
+    {
+      "source_index": 12,
+      "role": "armor_deep",
+      "source_rgb": [
+        90,
+        95,
+        150
+      ],
+      "sms_code": 21
+    },
+    {
+      "source_index": 13,
+      "role": "skin_light",
+      "source_rgb": [
+        255,
+        190,
+        150
+      ],
+      "sms_code": 47
+    },
+    {
+      "source_index": 14,
+      "role": "skin_base",
+      "source_rgb": [
+        250,
+        150,
+        100
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 15,
+      "role": "skin_shadow",
+      "source_rgb": [
+        160,
+        80,
+        60
+      ],
+      "sms_code": 22
+    },
+    {
+      "source_index": 16,
+      "role": "pistol_orange_inset",
+      "source_rgb": [
+        255,
+        100,
+        15
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 17,
+      "role": "pistol_dark_orange",
+      "source_rgb": [
+        170,
+        85,
+        0
+      ],
+      "sms_code": 11
+    },
+    {
+      "source_index": 18,
+      "role": "laser_cyan",
+      "source_rgb": [
+        0,
+        220,
+        255
+      ],
+      "sms_code": 56
+    }
+  ],
+  "equipment_track": "Corrected long navy/cyan Zillion allposes, intentional finite pulseS03only, absentS04. Any additional orphan is not intentional.",
+  "approval_scope": "None; owner requested producing experiment, not advance approval of these pixels or new timing.",
+  "parent": "jj-zillion-single-shot-source-v01",
+  "input_weapon": {
+    "path": "data/source_art/roster_harmony_review/waku_waku_7/reference_inputs/zillion_pistol_user_reference_20261008.png",
+    "sha256": "7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49",
+    "role": "Long navy/cyan Zillion geometry explicitly reconfirmed by owner; no external pixels/poses copied"
+  },
+  "input_harmony": {
+    "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+    "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+    "role": "Alreadyapproved corrected gun in character context; othercharacters not copied"
+  },
+  "pixel_invariance": "No exact body invariance claimed for regeneratedsheet; all anatomy/material/pose axes require review."
+}

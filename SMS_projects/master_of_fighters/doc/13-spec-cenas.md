@@ -1,5 +1,21 @@
 # 13-spec-cenas — master_of_fighters
 
+## Par J.J./Social vigente — fonte v6, dados v5 sem FX
+
+Medição oficial das 12 composições (seis poses × duas faces): normal 8×8,
+180 padrões/5.760 bytes residentes, máximo de 50 entradas SAT, pico 8/linha.
+Canvas 104×88, pivô (48,80), origens X16/128 e Y64 mantêm chão visível Y143.
+P1 única compartilhada de 15 códigos úteis, com os 902 pixels/índices/RGBA de
+Social preservados. Sem efeito/projétil; não extrapolar esse pico para FX futuro.
+Três builds32KiB, gates e QA260frames passaram. VBlank3.000frames por ROM:
+base0derrame/mínimo213,stress1280derrame/mínimo224. FPS8s59,32/58,36 falhou;
+confirmação20s59,79/59,84 passou, sem provar pacing porframe. Recibos em `out/diagnostics/jj_zillion_single_shot_v5/`.
+A correção pontual da fonte6 tem zero delta SMS, com reuso explícito por hash.
+
+## Histórico J.J. v1 — pulso incorporado supersedido pela direção sem FX
+
+Amostra diagnóstica: guarda + cinco poses de disparo único, com pulso de laser finito em duas exposições, junto do Social preservado. Usar a mesma rota e escala comum do estudo anterior; paleta/material, registro de sola e grade nos dois sentidos entram no contrato desde o início. Tetos físicos 8/linha e 64 SAT; residência e pior VBlank do novo par ainda `pending`, incluindo degrau adicional. Contagens reais em `jj_zillion_single_shot_route_v1.json`; nada herdado do budget de Hayato.
+
 ## Seleção atual — fonte v4, somente tempos no perfil v7
 
 Oito PNGs por lado e sete manifestos de cena por lado são byte-idênticos à v4.

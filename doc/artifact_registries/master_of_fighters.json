@@ -4293,6 +4293,1146 @@
           "sha256": "b3202d1f558e5033e131c60a8793848f577ef561c05c56c4b278df048c286f94"
         }
       ]
+    },
+    {
+      "id": "jj-zillion-single-shot-plan-v01",
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-single-shot-route",
+      "revision": 1,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-ii-concept-v04"
+      ],
+      "reason": "Owner requests a maximally different registered character, lore-valid short action and complete repeatability history for future canonical curation. Diagnostic sample, no competitive moveset or global promotion.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/jj_zillion_single_shot_route_v1.json",
+          "sha256": "0e7b4929b747ab344248670bc109ed3193e78082aa4695b39bddae92c2dffb4c"
+        },
+        {
+          "role": "contract",
+          "path": "doc/jj_zillion_single_shot_animation_contract_v1.json",
+          "sha256": "595d5aaf6deb410fb647ae2f16426158ce3fc8c76d9863de93ab5e4e8701bace"
+        },
+        {
+          "role": "research",
+          "path": "doc/jj_zillion_single_shot_research_v1.json",
+          "sha256": "42eb49b3e4c406ca8763199706df12c80e6eb45efe89f51ccb9495e5f5829751"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-source-v01",
+      "asset_id": "jj_zillion_ii",
+      "kind": "animation_source",
+      "variant": "zillion-single-shot",
+      "revision": 1,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-ii-concept-v04",
+        "jj-zillion-single-shot-plan-v01"
+      ],
+      "reason": "One compact six-drawing shot; original body/weapon art, explicit material roles, common registration and contextual holds from first pass. Includes idle and five action drawings, not a production spritesheet.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/shot_source.png",
+          "sha256": "1210b32e811a0b9b3d905ac05d01b4e941b2ab186bb69b515d536994581e3fb8"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/raw.png",
+          "sha256": "d981445915513bf78b214415c148d116dab52143ed2e23e960d4a80339ea2fd5"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/prompt.txt",
+          "sha256": "3913c893ac7f5300da2f6d95172875e78af95f234dfc08595082a9bcb3a30d15"
+        },
+        {
+          "role": "extraction_recipe",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/extraction_recipe.json",
+          "sha256": "7f698bdfff10f8917ad0ad8ae48b9639dd761677e8adf43f5e305559dfb39970"
+        },
+        {
+          "role": "lineage",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/lineage.json",
+          "sha256": "6a78ccb86c2fb739209ca01a9128f2b824a8d646a1477299895514ed0b33e504"
+        },
+        {
+          "role": "pose_I00",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/I00.png",
+          "sha256": "1486de25d28b3201d7c0e5f2136e99844c6d4aec0dca51347197306fed3a967d"
+        },
+        {
+          "role": "pose_S01",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S01.png",
+          "sha256": "c74b47e2adeafb39aa8188be326d853db2f467d44c56525fe27f1bc1edbe1476"
+        },
+        {
+          "role": "pose_S02",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S02.png",
+          "sha256": "c0d348f9fcf635e4198a02ef7e3987bc9ef46e4c1d1b969179bd51c4c10e9b63"
+        },
+        {
+          "role": "pose_S03",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S03.png",
+          "sha256": "3add2aa73b606ff7b8a9ba297d0b9708448ddaf0961c8473253c25939dda7e37"
+        },
+        {
+          "role": "pose_S04",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S04.png",
+          "sha256": "54aad21e90c7d7ca4f18370902973b28703e8f1a50b6f6bc35ab439c8f9cc0f9"
+        },
+        {
+          "role": "pose_S05",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S05.png",
+          "sha256": "bbf1f1d70f31f5bf095c5dddafa76313bf033f0e866a51db64b5c9aac7d265f7"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-art-review-v01",
+      "asset_id": "jj_zillion_ii",
+      "kind": "art_review",
+      "variant": "zillion-single-shot",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v01"
+      ],
+      "reason": "Independent anatomy, identity, materials, grip/equipment and native SMS static review; continuous perception kept separate.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/jj_zillion_single_shot_independent_review_v1.json",
+          "sha256": "7b63355ec2016c384f66b3c0a2aa84e3b593d3af25b0c7d3576e9c4e99ed6aca"
+        },
+        {
+          "role": "request",
+          "path": "doc/jj_zillion_single_shot_review_request_v1.json",
+          "sha256": "b42446f2f5abd2dc9c99d78103e05b58bb1ee7f04f4698486bb1d556a8caaac7"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-weapon-reconciliation-v01",
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-weapon-identity",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-ii-concept-v04",
+        "master-of-fighters-harmony-waku-waku-7-v01"
+      ],
+      "reason": "Owner flags wrong compact white/blue gun. Existing approved harmony sheet already corrects elongated navy/cyan Zillion; current user image is byte-identical to08Oct archived input. Reconcile roles before new sprite generation.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/decisions/jj-zillion-weapon_owner-feedback.json",
+          "sha256": "487c9cb30dfba8e1ee9c9c49fb3d59af2015f25d11f2423a645ba8f3313fd578"
+        },
+        {
+          "role": "contract",
+          "path": "doc/jj_zillion_weapon_identity_contract_v1.json",
+          "sha256": "d8c8424d3df3a30dc4a42b1762fd464bc938743d1b0eeb515bd178546c963b05"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-plan-v02",
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-single-shot-route",
+      "revision": 2,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-single-shot-plan-v01",
+        "jj-zillion-weapon-reconciliation-v01"
+      ],
+      "supersedes": "jj-zillion-single-shot-plan-v01",
+      "reason": "Correct mistaken equipment authority and record failed registrations/compositions before another source generation. Sourcev1preserved, no build from illegal pair.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/jj_zillion_single_shot_route_v2.json",
+          "sha256": "e92a8908b5727ccf738937edf0020c08aac41eb7d59ab858cf3cb6dc047fd825"
+        },
+        {
+          "role": "contract",
+          "path": "doc/jj_zillion_single_shot_animation_contract_v2.json",
+          "sha256": "98b64e52d188fce498222f48df71b0b260b1fa85872e26cbebefcc39735751b4"
+        },
+        {
+          "role": "research",
+          "path": "doc/jj_zillion_single_shot_research_v2.json",
+          "sha256": "ac8376aa883dbdd41966eebb4e0188860bc2581319619b74453dc6214b2bc5f1"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-source-v02",
+      "asset_id": "jj_zillion_ii",
+      "kind": "animation_source",
+      "variant": "zillion-single-shot",
+      "revision": 2,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-single-shot-source-v01",
+        "jj-zillion-single-shot-plan-v02",
+        "master-of-fighters-harmony-waku-waku-7-v01"
+      ],
+      "supersedes": "jj-zillion-single-shot-source-v01",
+      "reason": "Equipment correction only by scope: elongated dark navy/cyan Zillion as already approved/user-reconfirmed. Compact folded elbows preserve weapon length and narrow staging. Single pulse on emission only; remove long-lived in-flight pulse causing nine objects/line, no masks/omitted character cells. Body construction rechecked after generation, no pixel-invariance claim.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/shot_source.png",
+          "sha256": "2f0bbf2b8e0e91ded32805459e2bd6714c4772ce4f26cdfaf7ac43c0051eeec9"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/raw.png",
+          "sha256": "618ef9c1140bdfb8d7f9c4944f719b692674938fec975c76a44cd66cdf771b28"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/prompt.txt",
+          "sha256": "9ae1dd8f31bdfa5b9871c170059b1e68c881f494580b578cfecf57e2b85a30ed"
+        },
+        {
+          "role": "extraction_recipe",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/extraction_recipe.json",
+          "sha256": "4d77cd851b289283e33684f028179c9828ad7bed5cce2f8f81dbacc6ee0f4de2"
+        },
+        {
+          "role": "lineage",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/lineage.json",
+          "sha256": "17f64dfc4b27f1c1295068d7a9f3567adfd3b5894b17de6ffb9f1449fa1ab979"
+        },
+        {
+          "role": "pose_I00",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/I00.png",
+          "sha256": "7bc5c78bc117753ba1f5d148447cfc510e2b81629dda5005ebc93fecec0972b9"
+        },
+        {
+          "role": "pose_S01",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S01.png",
+          "sha256": "af21fb1873b3721a50b45a33f59cfa02eff20468c18c9afa03ed43526fa4cf90"
+        },
+        {
+          "role": "pose_S02",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S02.png",
+          "sha256": "2083ea978a800558b23acd2be07c4fb9a79dfe28dc5dcc49ce06ab477d17ac3e"
+        },
+        {
+          "role": "pose_S03",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S03.png",
+          "sha256": "e61f12e1a141a403180ee38b55abd82f92ef3e9c764c7c98203f896d993f6196"
+        },
+        {
+          "role": "pose_S04",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S04.png",
+          "sha256": "97ff4b635af02760e3b528cba88883d41a6e33fd86749475881496a003e36d07"
+        },
+        {
+          "role": "pose_S05",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S05.png",
+          "sha256": "9de032df66551204027c164c602aef61ff4d1ae5f95581fd0467599d0efe8b5c"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-source-review-v02",
+      "asset_id": "jj_zillion_ii",
+      "kind": "art_review",
+      "variant": "zillion-weapon-source",
+      "revision": 2,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v02",
+        "jj-zillion-weapon-reconciliation-v01"
+      ],
+      "reason": "New weapon evidence and actual regenerated source; source-level canon/grip/body review, not another equivalent temporal review.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/jj_zillion_weapon_source_independent_review_v2.json",
+          "sha256": "1710297c6fe2adad26bcce4756a57bc500a17699d4423b73f280ced40a6e3954"
+        },
+        {
+          "role": "request",
+          "path": "doc/jj_zillion_weapon_source_review_request_v2.json",
+          "sha256": "83ae20ac0238b5037ce79551e3c3ff87818e741fbd91a4b45a00210f486d8c7f"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-plan-v03",
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-single-shot-route",
+      "revision": 3,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-single-shot-plan-v02",
+        "jj-zillion-single-shot-source-review-v02"
+      ],
+      "supersedes": "jj-zillion-single-shot-plan-v02",
+      "reason": "Close observed weapon panel placement/rigid preparation and measured9perline with folded-arm chest-height staging, preserving complete weapon and common scale.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/jj_zillion_single_shot_route_v3.json",
+          "sha256": "50da5beb8f1120be631ac731ecd9197020fb1e91f64debde22ce44b0c49834ab"
+        },
+        {
+          "role": "contract",
+          "path": "doc/jj_zillion_single_shot_animation_contract_v3.json",
+          "sha256": "577771f523149a091db98163359aee558470ffe975b3746200549fc51a737e81"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-source-v03",
+      "asset_id": "jj_zillion_ii",
+      "kind": "animation_source",
+      "variant": "zillion-single-shot",
+      "revision": 3,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-single-shot-source-v02",
+        "jj-zillion-single-shot-plan-v03",
+        "jj-zillion-weapon-reconciliation-v01"
+      ],
+      "supersedes": "jj-zillion-single-shot-source-v02",
+      "reason": "Keep long Zillion, place large cyan panel behind/above grip not muzzle, preserve rigid length in preparation; fold elbows and bring grip near sternum with aim below chin. New actual pixels require fresh source/SMS review.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/shot_source.png",
+          "sha256": "d13950da87344596c366e0a145aae24f1674b5fdd199fb4b9de8b6f8558ce6a0"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/raw.png",
+          "sha256": "01fb01322267cf8a1bc70e12081c07e119ec890903a1e55aea4bb7bd4d69319a"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/prompt.txt",
+          "sha256": "f24b475f16b58d69eeb8ae985a93e38c5fb597365ef6bc5b27f3f2c329112c3a"
+        },
+        {
+          "role": "extraction_recipe",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/extraction_recipe.json",
+          "sha256": "aac49a9751025d98849f4b19ae8c81e1887c3f2117fd0766570a985b263c1bd0"
+        },
+        {
+          "role": "lineage",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/lineage.json",
+          "sha256": "db3fe00b1728da74e0ae1d94406bf9aa7ae9ac15e4a3a445acc238f80b185aa4"
+        },
+        {
+          "role": "mirrored_reference",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/weapon_reference_right.png",
+          "sha256": "80fa4f2600d611f1487d7d2d816f10622d65ef3aa4e79efcc31f8c7a0bf30301"
+        },
+        {
+          "role": "pose_I00",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/I00.png",
+          "sha256": "d5d44be9f7f3e1d576b779d80ae4e031563603e258ec5b4474a49f1b9fdcacac"
+        },
+        {
+          "role": "pose_S01",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S01.png",
+          "sha256": "8fd453c8266905e9624d73ab229e23486abf1d4b283f8e8e56bae5555e9efea9"
+        },
+        {
+          "role": "pose_S02",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S02.png",
+          "sha256": "63dc64a287739d9d186c20bfa3b6adde06bb6be35799d520c5d3e4e81e6424f7"
+        },
+        {
+          "role": "pose_S03",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S03.png",
+          "sha256": "a78f181b0a70a418799a8bf4a258f7f9bcdcd873b041995221042289ef6430b6"
+        },
+        {
+          "role": "pose_S04",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S04.png",
+          "sha256": "881febef2f68acafc226fb02d438c20904b6e33663f7582957e332202f72c4a4"
+        },
+        {
+          "role": "pose_S05",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S05.png",
+          "sha256": "1be306623f394d19bcd978420437e96d4eee29ae7bd470ad3594b58d21a57d79"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-plan-v04",
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-single-shot-route",
+      "revision": 4,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-single-shot-plan-v03"
+      ],
+      "supersedes": "jj-zillion-single-shot-plan-v03",
+      "reason": "Minimum complete single shot from existing complete body drawings and one generated emission element, without additional ImageGen call.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/jj_zillion_single_shot_route_v4.json",
+          "sha256": "c323116ce3e601f29ea0a7b9c8abf72b861421fed41d5c104ae3b82f68fe94f0"
+        },
+        {
+          "role": "contract",
+          "path": "doc/jj_zillion_single_shot_animation_contract_v4.json",
+          "sha256": "0dd56969b44a88b453aafd9d8ce1c41221245b61b460b52a430bcf36d686b412"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-source-v04",
+      "asset_id": "jj_zillion_ii",
+      "kind": "animation_source",
+      "variant": "zillion-single-shot",
+      "revision": 4,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-single-shot-source-v03",
+        "jj-zillion-single-shot-plan-v04"
+      ],
+      "supersedes": "jj-zillion-single-shot-source-v03",
+      "reason": "Mechanical composition of existing ImageGen-authored I00/S01/S04/S05 and emission glyph fromv3. Three distinct body action drawings plusguard. No body/weaponpixel creation, deletion or shrinking.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/shot_source.png",
+          "sha256": "902a117d78b7b0a5dcfd27b336238f6d2e191846a48f5858118ad091bdad9ce9"
+        },
+        {
+          "role": "assembly",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/assembly_recipe.json",
+          "sha256": "36904a27ab450d7015ebd5ff209ec4a508e2995f32b6fdd9612fdeda30080598"
+        },
+        {
+          "role": "assembly_script",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/assemble.py",
+          "sha256": "20ae8d9e099d326959e42bb9c2d151c74c960605ec81740e650fa368c9cdde72"
+        },
+        {
+          "role": "lineage",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/lineage.json",
+          "sha256": "4c3ea2d0e295dcb8806bfe36f08c657b92b82971561baf2003ad4158c16f7adc"
+        },
+        {
+          "role": "pose_I00",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/native/I00.png",
+          "sha256": "d5d44be9f7f3e1d576b779d80ae4e031563603e258ec5b4474a49f1b9fdcacac"
+        },
+        {
+          "role": "pose_A01",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/native/A01.png",
+          "sha256": "8fd453c8266905e9624d73ab229e23486abf1d4b283f8e8e56bae5555e9efea9"
+        },
+        {
+          "role": "pose_A02",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/native/A02.png",
+          "sha256": "e77b342524d247af5a65c5901d326350ffcde8f0fe059bad0ed647e2c5ec362f"
+        },
+        {
+          "role": "pose_A03",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v4/native/A03.png",
+          "sha256": "1be306623f394d19bcd978420437e96d4eee29ae7bd470ad3594b58d21a57d79"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-plan-v05",
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-single-shot-route",
+      "revision": 5,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-plan-v04",
+        "jj-zillion-single-shot-source-v03"
+      ],
+      "supersedes": "jj-zillion-single-shot-plan-v04",
+      "reason": "Owner explicitly requires fidelity-only correction: proportional Zillion, all6poses preserved, effects excluded from character.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/jj_zillion_single_shot_route_v5.json",
+          "sha256": "51470af57e5cfaa38c671adf0ae23e09da261a963cf079cb01dfeb76f6341a05"
+        },
+        {
+          "role": "contract",
+          "path": "doc/jj_zillion_single_shot_animation_contract_v5.json",
+          "sha256": "ac82e3f457a5c5f839100c1cfbb7e1e67b0678b647e3d497f3faadb206d4dd39"
+        },
+        {
+          "role": "equipment_contract",
+          "path": "doc/jj_zillion_weapon_identity_contract_v2.json",
+          "sha256": "5eaada48bcbfbaf7e4488d6db146c7089944e9404593665f6f4666e0bf1d73f1"
+        },
+        {
+          "role": "owner_feedback",
+          "path": "doc/decisions/jj-zillion-proportion-and-no-fx_owner-feedback.json",
+          "sha256": "b4064ca0e671e7b23f6e4ddb3133247a30460fc32399614b7630f7a0344a5553"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-ii-concept-v05",
+      "asset_id": "jj_zillion_ii",
+      "kind": "concept",
+      "variant": "main",
+      "revision": 5,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-ii-concept-v04",
+        "jj-zillion-weapon-reconciliation-v01",
+        "jj-zillion-single-shot-plan-v05"
+      ],
+      "supersedes": "jj-zillion-ii-concept-v04",
+      "reason": "Proportion-correct longnavy/cyanZillion in same2conceptbodyposes, ownerref human scale, no new costume/identity/pose; priorv4approval preserved until review.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/concept_source.png",
+          "sha256": "e81e0f9cc81b1552ff2ace0e046ecb5c36be00119e6b6f5d60d17a7b17f518e9"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/raw_generated.png",
+          "sha256": "2cdde7bea1779770b3011f87f8d58dff6801f5c378fc28bc62f37afa57de47d1"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/prompt.txt",
+          "sha256": "b1e7af55004959b49e0f714de1cb999774326b099d4f68d385a13aed9a691d5d"
+        },
+        {
+          "role": "lineage",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/lineage.json",
+          "sha256": "11c5a794e0fa8c6934460a496fb32b0943534a95e0c0aed7c55c04ec040ca236"
+        },
+        {
+          "role": "assembly_recipe",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/assembly_recipe.json",
+          "sha256": "5ff9a9507e67ccb73fb96cc760e2a5e12d1baeac96803e11c42ed3152152db9f"
+        },
+        {
+          "role": "assembly_script",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/assemble.py",
+          "sha256": "133294d70e3122cf8b8537cf55015c33145fbaafa8a9acb78aa3fc6c3d0699de"
+        },
+        {
+          "role": "owner_reference_01",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_01.png",
+          "sha256": "68d6ef2d62c381091a2e428d2bb293d9f877ce023079f360023f42678acb83a6"
+        },
+        {
+          "role": "owner_reference_02",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_02.png",
+          "sha256": "16225561ec85ad3ff06a3b7304f97f574c7c6bb67f28385af25f8035aa6a7e5c"
+        },
+        {
+          "role": "owner_reference_03",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_03.png",
+          "sha256": "40515a5db2f57cabdbf488eaf15e31f2631872ff0ed5a4ffe4e3174cccb9a6f4"
+        },
+        {
+          "role": "owner_reference_04",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_04.png",
+          "sha256": "e5c30ae185d82a8faaded3d80eede6a864146135fb20574c48a50411ac0de150"
+        },
+        {
+          "role": "raw_refinement",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/raw_refinement.png",
+          "sha256": "036b257c078a01fa47f26fa5bac414eec6eeba978a75ff68ce7620ff11193cf6"
+        },
+        {
+          "role": "refinement_prompt",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/prompt_refinement.txt",
+          "sha256": "f2ae82defb4977803694ff2be8a6858c1ec9c2db0efed3c69753e8964ea089eb"
+        },
+        {
+          "role": "indexed_intermediate",
+          "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/indexed_intermediate.png",
+          "sha256": "1ce301e3a03fd5bbc2140d6993bea305a3a586f2f658774c30822774d620b611"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-source-v05",
+      "asset_id": "jj_zillion_ii",
+      "kind": "animation_source",
+      "variant": "zillion-single-shot",
+      "revision": 5,
+      "status": "superseded",
+      "parents": [
+        "jj-zillion-single-shot-source-v03",
+        "jj-zillion-ii-concept-v05",
+        "jj-zillion-single-shot-plan-v05"
+      ],
+      "supersedes": "jj-zillion-single-shot-source-v04",
+      "reason": "Preserve ALL6sourcev3bodyposes and frameIDs. Bounded weapon/grip edit only, scale gun proportion to J.J., no pulse/shot/FX. No pose reduction/timing workaround.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/shot_source.png",
+          "sha256": "e969279a03b18f4adfcf94c104e5b0bd1f6bae7540cfe3900347523533d5a9a7"
+        },
+        {
+          "role": "raw",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/raw_generated.png",
+          "sha256": "bd751d55b7c633d37ce3ad841e17e3f3b2028a4db17e2b2272ba7a921a30fc51"
+        },
+        {
+          "role": "registered_raw",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/raw_registered.png",
+          "sha256": "ab22e000063a481c17ded8da52e17d69b989c5073e8a09801edb80c6ce1e4f93"
+        },
+        {
+          "role": "prompt",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/prompt.txt",
+          "sha256": "e74510ce8ebe53ef6771c7484045ca1565b2507263569046820e8ca6dcb5d9cb"
+        },
+        {
+          "role": "extraction_recipe",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/extraction_recipe.json",
+          "sha256": "5a2f7018a3146df996d7d7c7b514521b8f9593d5215692f2acab651a1085a375"
+        },
+        {
+          "role": "assembly_recipe",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/assembly_recipe.json",
+          "sha256": "3b436ba004796758c6805979517ae8d6de59c98b0c791556a1c1ef513cefa5aa"
+        },
+        {
+          "role": "assembly_script",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/assemble.py",
+          "sha256": "c24303fd6bc7fda9bc49a7940efc62ff06d252b2a3617f23d0a2d3cfce3e9c9b"
+        },
+        {
+          "role": "lineage",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/lineage.json",
+          "sha256": "9d1f22ce6737ff9e6b5066bb41786d7bf587c7dd86c7deb247f970ec9e45e9c8"
+        },
+        {
+          "role": "pose_I00",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/I00.png",
+          "sha256": "2c7702b67ee116819c58b1bea1223801c26c7d3f0024278bf7e6cfcb6e2c6117"
+        },
+        {
+          "role": "pose_S01",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S01.png",
+          "sha256": "b02cf76f671809bde71e3274fda5f0a41cb1fd6345f686a12601cf6f9a15b56c"
+        },
+        {
+          "role": "pose_S02",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S02.png",
+          "sha256": "81e3802f9492e7d0b0eda49042188c6fd4652aefb3cac7f86dc5ebae414f3c1f"
+        },
+        {
+          "role": "pose_S03",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S03.png",
+          "sha256": "055c78053aaf2d3d25f5947171570ef6d44d676622d2b6b5d65236d4a7275426"
+        },
+        {
+          "role": "pose_S04",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S04.png",
+          "sha256": "68bd4ee3ea1743ab1858ea0cfd6297e087cf0ace4c96ab38d866ebfa26b26654"
+        },
+        {
+          "role": "pose_S05",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S05.png",
+          "sha256": "083b8ac6aa11dee39569d729c18ec04735cb32a69b752efa2394dad370f3fded"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-diagnostic-v05",
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-single-shot-runtime",
+      "revision": 5,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v05",
+        "jj-zillion-single-shot-plan-v05"
+      ],
+      "reason": "Both complete pairs with unchangedSocial source/materialindexmap, all6poses and noFX. Model8peak only; reserve officialconverter artifacts before execution, no ROMclaim.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/conversion.json",
+          "sha256": "4eae9261f73c630b7e37470731ceed4ed10e6d95b6fc518e24d43bc288b88521"
+        },
+        {
+          "role": "left_header",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/sample_data.h",
+          "sha256": "68f9dee62318e3c02383a5291b44b2685ae2db618cb206eecbbfaeac57abe1df"
+        },
+        {
+          "role": "left_png_idle",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/idle.png",
+          "sha256": "20fced105ca07966403021713d165327c7a7890f65228a83a5535d7824d6c6ba"
+        },
+        {
+          "role": "left_packing_idle",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/packing_8x8/idle.png",
+          "sha256": "3e43b1c5311b75a9786e3e57719f6fb06fb150aea11a194faf2cfb888a848963"
+        },
+        {
+          "role": "left_png_S01",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/S01.png",
+          "sha256": "0e118a6dcb0858243ec6f76075bfd65475f921bec4cf97b3fbe32599a1d94381"
+        },
+        {
+          "role": "left_packing_S01",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/packing_8x8/S01.png",
+          "sha256": "7a057c9c8a2994802c7785171426c25f68a7c4154820df4fb326d286eee0462a"
+        },
+        {
+          "role": "left_png_S02",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/S02.png",
+          "sha256": "f977c142c2ffced7f9345a109d6007ca9fd680c72b4f6fba855feadcc78b139a"
+        },
+        {
+          "role": "left_packing_S02",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/packing_8x8/S02.png",
+          "sha256": "121c63c4b98903ba5c3027a02efadb8dc970a10d995140d29fd8e43274157e42"
+        },
+        {
+          "role": "left_png_S03",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/S03.png",
+          "sha256": "f7126c3e24cc7f2637b186808ee25b3badd2a1d5bbf74fa259b2f3ad059cae5e"
+        },
+        {
+          "role": "left_packing_S03",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/packing_8x8/S03.png",
+          "sha256": "28575d955c2e7d9205854153fc15d19b3a81af97e52334add8481f7e9b614083"
+        },
+        {
+          "role": "left_png_S04",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/S04.png",
+          "sha256": "ba6a7cdd5f2b8994623ece82041a184e3e2bb667bf029b8dcac0a50e78e22d61"
+        },
+        {
+          "role": "left_packing_S04",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/packing_8x8/S04.png",
+          "sha256": "c28097ecbf0561fd8098778a9a81885302472d033b77d364821c0b846abe7b4f"
+        },
+        {
+          "role": "left_png_S05",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/S05.png",
+          "sha256": "16b00f081eb1f675355333e3085fc94373f6d7fa2a032ec20393385e3510ad61"
+        },
+        {
+          "role": "left_packing_S05",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/packing_8x8/S05.png",
+          "sha256": "ae703271a851183758cde067e3493e8a8e562bcccbb8daf073da537cfadd734b"
+        },
+        {
+          "role": "left_png_reference",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/reference.png",
+          "sha256": "eb6f7628f2a8e741afaf5c68ea15887d0a1f298ae642d34df8e7f4237d0d1de4"
+        },
+        {
+          "role": "left_packing_reference",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/packing_8x8/reference.png",
+          "sha256": "e5dc421bf50eb75a5c53a03b99c9756d5c92d8c090b5ddde8835a1935a7db1b9"
+        },
+        {
+          "role": "left_scene_idle",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/scene_idle.json",
+          "sha256": "f1e8c55efd5b6bffcbe445aad50946610fd546f07a77330320f53349cc7936fa"
+        },
+        {
+          "role": "left_scene_S01",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/scene_S01.json",
+          "sha256": "ff77f790daddd49c05b3f402889061c4cbaec5dd8cdf10d3a57afb71a3d54d11"
+        },
+        {
+          "role": "left_scene_S02",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/scene_S02.json",
+          "sha256": "2218831430f31bbe0d18405c0e96fd0462d52af1bd3d3c65048e605a5d316791"
+        },
+        {
+          "role": "left_scene_S03",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/scene_S03.json",
+          "sha256": "2418b1020d750ae3f332276b91ac2c7b9592e1ee184effeba7da6df0fc8689a3"
+        },
+        {
+          "role": "left_scene_S04",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/scene_S04.json",
+          "sha256": "dd4c18875b63c38f8a221b87ec80f83eb86a666922a926594943645d0b18a02a"
+        },
+        {
+          "role": "left_scene_S05",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_left/scene_S05.json",
+          "sha256": "3a7e5a913b1f579bfcd2cca11c316e4ba61adcd5d5632cb6f5cc6d7ec0dd779e"
+        },
+        {
+          "role": "right_report",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/conversion.json",
+          "sha256": "df624f22dc1878d52d3262d0559c8d6b1d2706638365446aa903da4be1da03bd"
+        },
+        {
+          "role": "right_header",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/sample_data.h",
+          "sha256": "5ef3b093f5a92814e37d825853794f74a86a603fbb25f4a306ae9200c6a9d27f"
+        },
+        {
+          "role": "right_png_idle",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/idle.png",
+          "sha256": "c86382aa225d742285d1b4ba3ba46926f27fe65979b97ff487a855d3f5b0d39a"
+        },
+        {
+          "role": "right_packing_idle",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/packing_8x8/idle.png",
+          "sha256": "056061ec0bb7c2a2cd9a9cabcc6fbcc664f59667fcacd254719f6eec12f42faa"
+        },
+        {
+          "role": "right_png_S01",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/S01.png",
+          "sha256": "fbc8a89b0ea411580f9eac75307f70ada988d438644197da34887f07599f570f"
+        },
+        {
+          "role": "right_packing_S01",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/packing_8x8/S01.png",
+          "sha256": "95e44f68763a96e198d27d686618c062d35ea6d7742d5c26667eca818f0c8097"
+        },
+        {
+          "role": "right_png_S02",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/S02.png",
+          "sha256": "8b6d0616ddf15a456757cb0e14ce7b43156c45176024259cba710ee034c9b48b"
+        },
+        {
+          "role": "right_packing_S02",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/packing_8x8/S02.png",
+          "sha256": "c048287a2c1ee5b17c65c50721733702203cc59f6d9e2d356bd8bd00dc2e757d"
+        },
+        {
+          "role": "right_png_S03",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/S03.png",
+          "sha256": "580ef96865306397090a4a2d0bcdb5819781add1dca6bad8154ade2cb356f4f5"
+        },
+        {
+          "role": "right_packing_S03",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/packing_8x8/S03.png",
+          "sha256": "62cf031e179f0504aeb531babfac8b38ab71e6b3f0c3a93eb35c9b7eca5cf8b2"
+        },
+        {
+          "role": "right_png_S04",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/S04.png",
+          "sha256": "bf48620b7d7fdff6b6bd4e4147dcb244c49baf4ba74a2333060e4043f403777b"
+        },
+        {
+          "role": "right_packing_S04",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/packing_8x8/S04.png",
+          "sha256": "261f7dffdfd483597ac277711f7a453288d805037d85433e629a29e4ba578711"
+        },
+        {
+          "role": "right_png_S05",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/S05.png",
+          "sha256": "46f99aa4cc16e2ee9f9bfecc0423ac4dded4cb17be2ef5bfa712a8d0010f2155"
+        },
+        {
+          "role": "right_packing_S05",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/packing_8x8/S05.png",
+          "sha256": "b44aca795fd5bc9bb8215576d929cb48b715bd492d662cb567becc03f9dee655"
+        },
+        {
+          "role": "right_png_reference",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/reference.png",
+          "sha256": "bc006a2d1ac6ab4482388d07d79faceca6780068b19cde30512dc477a8e2c888"
+        },
+        {
+          "role": "right_packing_reference",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/packing_8x8/reference.png",
+          "sha256": "a8bec59e9e3cb2e78e4caa0a200a6b08dba2a29f19c68fd00fac528266d6f275"
+        },
+        {
+          "role": "right_scene_idle",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/scene_idle.json",
+          "sha256": "1e5c7a6cc9c49fd7758d7c362d5df4a1c635ecdf86376e13fcbf47487409305a"
+        },
+        {
+          "role": "right_scene_S01",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/scene_S01.json",
+          "sha256": "b73035ae414572ecc0b1ef639556b21e4a6831e749274f1526bb8422251f31d0"
+        },
+        {
+          "role": "right_scene_S02",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/scene_S02.json",
+          "sha256": "4c9a5a62a00f7341821b746a15232b84a73242c313ee794a1f1f6409cb46aa3e"
+        },
+        {
+          "role": "right_scene_S03",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/scene_S03.json",
+          "sha256": "fe0ec7a4667bd21c3ca748fc8e4b987fecc2222bf0b8bfb2f9336f7bc25549ee"
+        },
+        {
+          "role": "right_scene_S04",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/scene_S04.json",
+          "sha256": "370aabc78120c729ac121180f4a7bf3aa9fb95cf56a76519c3e91237057b4ff2"
+        },
+        {
+          "role": "right_scene_S05",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/converted_right/scene_S05.json",
+          "sha256": "a28a4d13d9c4edebedff54483725afb4d13028fc4b4146926f4fa158f99c40f8"
+        },
+        {
+          "role": "source_review",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/source_review.png",
+          "sha256": "4afa6d3088fffb2e6f1f96f9d45dcdf854cfad525a12be6012109ac9585bdec7"
+        },
+        {
+          "role": "SMS_review",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/SMS_review.png",
+          "sha256": "f79164ef7935085a4ddfc6ef4f895fb06bbfa87df2e173d2759482daf76a1f46"
+        },
+        {
+          "role": "source_normal",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/source_normal.apng",
+          "sha256": "87cb6d60431084238c932670d2f842f838d3feeda487a85da5b16ea0e68de762"
+        },
+        {
+          "role": "source_slow",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/source_slow.apng",
+          "sha256": "2983f40ebd684757e6482205273048372892334125cab36f67254263047bcb0d"
+        },
+        {
+          "role": "poses_and_times",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/poses_and_times.png",
+          "sha256": "4afa6d3088fffb2e6f1f96f9d45dcdf854cfad525a12be6012109ac9585bdec7"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-fidelity-art-review-v05",
+      "asset_id": "jj_zillion_ii",
+      "kind": "art_review",
+      "variant": "zillion-proportion-no-fx",
+      "revision": 5,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-ii-concept-v05",
+        "jj-zillion-single-shot-source-v05"
+      ],
+      "reason": "Independent review ofmodel/source/SMS equipment-only fidelitydelta and unchanged6bodyposes; noFX, no temporalownerclaim.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/jj_zillion_proportion_no_fx_independent_review_v5.json",
+          "sha256": "07748eebe4bb42a9cd9c4737ceabd4ac74ae8dc55631b50b5e04d3ae52234144"
+        },
+        {
+          "role": "request",
+          "path": "doc/jj_zillion_proportion_no_fx_review_request_v5.json",
+          "sha256": "2d79eb56fba8bc2914c65ffccc9b589a31267f66698e1a5b99c68bba7158935f"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-single-shot-source-v06",
+      "asset_id": "jj_zillion_ii",
+      "kind": "animation_source",
+      "variant": "zillion-single-shot",
+      "revision": 6,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v05",
+        "jj-zillion-single-shot-plan-v05"
+      ],
+      "supersedes": "jj-zillion-single-shot-source-v05",
+      "reason": "One source-only orphan inI00at105,99 identified by independentreview. Copy transparent sample already present in existingImageGenedit, rest exactlyv5; no additionalgeneration, bodypose/timing/weaponchange. Other5nativePNGs reused fromparent, not duplicated.",
+      "files": [
+        {
+          "role": "image",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+          "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+        },
+        {
+          "role": "idle_pose",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/native/I00.png",
+          "sha256": "0c5df990c1d35949dbd4256f848a9782d94050355939903f85a1538c68451f70"
+        },
+        {
+          "role": "assembly",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/source_assembly.json",
+          "sha256": "fb22604e9aa621fd8edbaa7c28baf67a5e6b6f81d51fed8f267f8cb3fe2ab66b"
+        },
+        {
+          "role": "script",
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/assemble.py",
+          "sha256": "4c138b3c72f4258f2178993e697a4fcf4dc2a0e48520f8e3d65c836094da2b94"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-source-patch-review-v06",
+      "asset_id": "jj_zillion_ii",
+      "kind": "art_review",
+      "variant": "zillion-proportion-no-fx-addendum",
+      "revision": 6,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v06",
+        "jj-zillion-fidelity-art-review-v05"
+      ],
+      "reason": "Single-point source cleanup addendum, no repeated artistic or equivalent temporal review.",
+      "files": [
+        {
+          "role": "report",
+          "path": "doc/jj_zillion_proportion_no_fx_independent_addendum_v6.json",
+          "sha256": "8678d6ccf58288dcac9e842e0a04c3fd1dc617c1c8fe987db7830c74f5e9bbeb"
+        },
+        {
+          "role": "request",
+          "path": "doc/jj_zillion_proportion_no_fx_addendum_request_v6.json",
+          "sha256": "af453375bb4019622e29a2562e7dda75478d33dc18ede1cab92a144bcc4718c9"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-source-identity-reuse-v06",
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-source-delta-identity",
+      "revision": 6,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v06",
+        "jj-zillion-single-shot-diagnostic-v05"
+      ],
+      "reason": "Adopted after exact source-only delta check, no duplicate conversion or artreview. CurrentROMprofile remainsv5 because all14SMSPNGs/12scene manifests/2wholeheaders unchanged.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/jj_zillion_single_shot_v6/identity_to_v5.json",
+          "sha256": "64212a29d6239d1605edabab7acd2bcb10c6cd0f1226f9e3a6956d238840381b"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-owner-media-v06",
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-current-owner-media",
+      "revision": 6,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v06",
+        "jj-zillion-source-patch-review-v06"
+      ],
+      "reason": "Current source-only correction requires sourcepreviewownhashes. NativeSMSimagesunchangedbyidentity; no duplicateROMcapture until firstcurrentbuild/QA.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/jj_zillion_single_shot_v6/source_preview_manifest.json",
+          "sha256": "3084a885a60e9614fabc48d64563b1e92599c337f53fd7dee869e414b0e32194"
+        },
+        {
+          "role": "source_review",
+          "path": "out/diagnostics/jj_zillion_single_shot_v6/source_review.png",
+          "sha256": "0e9826e10e32500af51c1c4b32d0b41901bb19e99011353f78c30ac3dd55a023"
+        },
+        {
+          "role": "source_normal",
+          "path": "out/diagnostics/jj_zillion_single_shot_v6/source_normal.apng",
+          "sha256": "b9b86fdb0c9c4b26d5b1cc9b84ef2ba31bd44a1ff929a77581b3a32a936dda0f"
+        },
+        {
+          "role": "source_slow",
+          "path": "out/diagnostics/jj_zillion_single_shot_v6/source_slow.apng",
+          "sha256": "3041b95dbe8a270a92253f12c12d34a00134a9625c8c708ac4f96f994a8532d2"
+        },
+        {
+          "role": "poses_and_times",
+          "path": "out/diagnostics/jj_zillion_single_shot_v6/poses_and_times.png",
+          "sha256": "0e9826e10e32500af51c1c4b32d0b41901bb19e99011353f78c30ac3dd55a023"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-static-review-media-v01",
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-initial-review-media",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v01"
+      ],
+      "reason": "Correct destination ownership after actual boundedregistry diagnosis; preexisting media unchanged.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/jj_zillion_single_shot_v1/review_media_manifest.json",
+          "sha256": "59edf2523da76ce0abf2caff61ce67549ed4301fc9892f19d047670cbd9f4450"
+        },
+        {
+          "role": "source_contact",
+          "path": "out/diagnostics/jj_zillion_single_shot_v1/source_review.png",
+          "sha256": "91196796d242635c8a994f9b50cd9df8f2ea0e112b44a87106dba7f8d46d10a8"
+        },
+        {
+          "role": "sms_contact",
+          "path": "out/diagnostics/jj_zillion_single_shot_v1/SMS_review.png",
+          "sha256": "20206b6bec48b40a7de0bd337b694ceaf00d86d8daa61d105d7d3c81485f8490"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-character-checkpoint-v06",
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-character-checkpoint",
+      "revision": 6,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-source-v06",
+        "jj-zillion-source-patch-review-v06"
+      ],
+      "reason": "Current six-pose character-only checkpoint, technical execution separated from pending owner and continuous-motion judgment.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/jj_zillion_character_checkpoint_v6.json",
+          "sha256": "4d92b3d4d435e6347f1cc74cfc0f743a734ab53b5eaed5dd669816da77fecf3d"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-runtime-evidence-v05",
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-runtime-evidence",
+      "revision": 5,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-single-shot-diagnostic-v05",
+        "jj-zillion-source-identity-reuse-v06"
+      ],
+      "reason": "Current six-pose character-only checkpoint, technical execution separated from pending owner and continuous-motion judgment.",
+      "files": [
+        {
+          "role": "report",
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/runtime_evidence.json",
+          "sha256": "e68f7b51ec86eca87151e3f90f46c8f96df0de7b30d733baa4b7b66adf21eca7"
+        }
+      ]
     }
   ],
   "heads": [
@@ -4398,7 +5538,7 @@
       "asset_id": "jj_zillion_ii",
       "kind": "concept",
       "variant": "main",
-      "candidate": null,
+      "candidate": "jj-zillion-ii-concept-v05",
       "approved": "jj-zillion-ii-concept-v04"
     },
     {
@@ -4574,6 +5714,97 @@
       "kind": "diagnostic_conversion",
       "variant": "short-cut-timing-only-runtime",
       "candidate": "hayato-short-cut-timing-only-runtime-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-single-shot-route",
+      "candidate": "jj-zillion-single-shot-plan-v05",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "animation_source",
+      "variant": "zillion-single-shot",
+      "candidate": "jj-zillion-single-shot-source-v06",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "art_review",
+      "variant": "zillion-single-shot",
+      "candidate": "jj-zillion-single-shot-art-review-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-weapon-identity",
+      "candidate": "jj-zillion-weapon-reconciliation-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "art_review",
+      "variant": "zillion-weapon-source",
+      "candidate": "jj-zillion-single-shot-source-review-v02",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-single-shot-runtime",
+      "candidate": "jj-zillion-single-shot-diagnostic-v05",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "art_review",
+      "variant": "zillion-proportion-no-fx",
+      "candidate": "jj-zillion-fidelity-art-review-v05",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "art_review",
+      "variant": "zillion-proportion-no-fx-addendum",
+      "candidate": "jj-zillion-source-patch-review-v06",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-source-delta-identity",
+      "candidate": "jj-zillion-source-identity-reuse-v06",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-current-owner-media",
+      "candidate": "jj-zillion-owner-media-v06",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-initial-review-media",
+      "candidate": "jj-zillion-static-review-media-v01",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-character-checkpoint",
+      "candidate": "jj-zillion-character-checkpoint-v06",
+      "approved": null
+    },
+    {
+      "asset_id": "jj_zillion_ii",
+      "kind": "diagnostic_conversion",
+      "variant": "zillion-runtime-evidence",
+      "candidate": "jj-zillion-runtime-evidence-v05",
       "approved": null
     }
   ],

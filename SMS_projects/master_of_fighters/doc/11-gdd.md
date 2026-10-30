@@ -1,5 +1,44 @@
 # 11-gdd — master_of_fighters
 
+## J.J. — amostra de personagem fiel, seis quadros, sem efeitos
+
+Fonte v6 e concept v5 candidatos corrigem somente forma/proporção da Zillion e
+pega. I00/S01–S05 e poses preservados; tiro, bala, sparks e FX foram excluídos
+por instrução do dono. Objeto/emissão serão separados em lote posterior, com
+orçamento próprio. Tempos propostos 7/4/2/3/6 não foram reescritos para resolver
+budget. QA técnica nas duas faces e vídeo real passaram; qualidade temporal e
+aceite humano permanecem pendentes no checkpoint v6. Planejamento congelado em
+`jj_zillion_single_shot_route_v5.json`; fonte6 corrige um ponto sem mudar SMS.
+
+## Direção vigente do dono — proporção da Zillion, seis poses, sem FX
+
+O proprietário corrigiu explicitamente o escopo: a Zillion está grande demais
+em relação a J.J.; corrigir a proporção no concept/model sheet mantendo a forma.
+**Preservar os seis quadros e as poses. Não incluir bala, tiro, sparks, flash,
+FX ou objetos na folha do personagem; esses elementos serão separados depois.**
+A experiência de três poses e pulso composto v4 fica histórica/supersedida,
+sem ROM ou aprovação. Fonte corporal para preservar: seis poses v3. Atual:
+`jj_zillion_single_shot_route_v5.json`, contrato de animação v5, equipamento v2
+e `decisions/jj-zillion-proportion-and-no-fx_owner-feedback.json`. Corrigir
+somente arma/encaixe da pega por ROIs, sem regenerar atuação, rosto ou figurino.
+Concept individual v4 aprovado permanece intacto como controle histórico;
+a correção candidata v5 terá review/aceite próprios. Nenhuma ROM de J.J. foi
+construída até esta direção. Hayato permanece aprovado e intacto.
+
+## J.J. — autoridade específica da Zillion reconciliada
+
+O feedback do dono e a prancha Waku Waku7 já aprovada prevalecem sobre a arma
+compacta do concept individual v4: usar Zillion longa, baixa, angular, navy/cyan,
+com encaixe/pega contínuos e cano inteiro. A referência atual é a mesma de08/10;
+ver `jj_zillion_weapon_identity_contract_v1.json` e
+`decisions/jj-zillion-weapon_owner-feedback.json`. O concept v4 conserva corpo
+e figurino; não autoriza reutilizar o blaster branco/azul. Plano/contrato v2
+substituem o planejamento v1 deste teste. Nenhum sprite novo está aprovado.
+
+## Novo lote autorizado — J.J., disparo único de Zillion
+
+O proprietário pediu um terceiro personagem e uma ação curta para testar repetibilidade. Selecionado J.J. do elenco aprovado, com o concept v4 preservado. O manual de Zillion II confirma o laser; a encenação de tiro único é adaptação autoral diagnóstica. Plano e pesquisa em `jj_zillion_single_shot_route_v1.json` e `jj_zillion_single_shot_research_v1.json`; contrato em `jj_zillion_single_shot_animation_contract_v1.json`. Não sela moveset competitivo nem substitui o corte aprovado de Hayato.
+
 ## Seleção aprovada — corte sem distorção, tempos 8/1/2/7/2/5
 
 O proprietário escolheu os desenhos v4 com novos tempos. A katana conserva
