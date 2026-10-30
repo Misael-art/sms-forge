@@ -1,5 +1,33 @@
 # 10-memory-bank — master_of_fighters
 
+## Aceite do proprietário — J.J. fechado neste recorte
+
+O proprietário respondeu **“aprovado”** à entrega6677d5d, que apresentou o
+conceptv5, as seis poses da fontev6 sem FX e o vídeo real da ROM direita,
+e perguntou sobre proporção corrigida e retorno à guarda. Decisão em
+`decisions/jj-zillion-character_owner_approval.json`: correção e amostra
+aprovadas com tempos existentes7/4/2/3/6. Conceptv5 e fontev6 passam a
+aprovados no registro; conceptv4 permanece histórico/supersedido, intacto.
+Não pedir novamente este aceite nem ampliar conteúdo por inferência.
+
+Checkpoint atual `jj_zillion_character_checkpoint_v7.json` preserva v6 imutável
+e registra owner_acceptance pass. Continuous_motion segue needs_evidence
+quanto à percepção contínua verificável: “aprovado” não descreve uma sessão
+assistida. Isso não reabre a decisão do dono, que encerra este recorte.
+Não gerar arte, mudar tempos ou repetir build/captura/review sem defeito novo.
+Fonte,14PNGs,headers,trêsROMs,vídeo e QA são os mesmos do lote anterior.
+
+A rota curta com terceiro personagem agora tem aceite do dono e evidência
+técnica preservada; não foi passagem artística única, conforme histórico de
+seis gerações. Curadoria global continua não homologada e bloqueada pelo
+relatório históricoSocial61v5 ausente. Próximo passo: recuperar os bytes
+originais pelo pacote manual já solicitado e encaminhar o material existente
+para futura curadoria, sem ampliar elenco, movimentos, objetos ou sistemas.
+Commit/PR deste aceite: recibo separado em
+`out/diagnostics/jj_zillion_owner_acceptance_v1/publication.json`.
+
+## Histórico anterior ao aceite de J.J.
+
 ## Estado atual J.J. — fidelidade corrigida, execução comprovada, aceite pendente
 
 Concept candidato v5 e fonte candidata v6 reduzem a Zillion mantendo forma

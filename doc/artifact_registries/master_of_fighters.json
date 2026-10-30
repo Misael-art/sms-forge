@@ -511,7 +511,7 @@
       "kind": "concept",
       "variant": "main",
       "revision": 4,
-      "status": "approved",
+      "status": "superseded",
       "parents": [],
       "reason": "Existing owner-approved concept lineage retained as the canonical visible reference for this character.",
       "files": [
@@ -4796,7 +4796,7 @@
       "kind": "concept",
       "variant": "main",
       "revision": 5,
-      "status": "candidate",
+      "status": "approved",
       "parents": [
         "jj-zillion-ii-concept-v04",
         "jj-zillion-weapon-reconciliation-v01",
@@ -4870,7 +4870,12 @@
           "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/indexed_intermediate.png",
           "sha256": "1ce301e3a03fd5bbc2140d6993bea305a3a586f2f658774c30822774d620b611"
         }
-      ]
+      ],
+      "approval_scope": "Selected final artwork only, bound to all files for lineage consistency. Raw generations, recipes, discarded intermediate and references are provenance, not independent aesthetic approval. Six-pose source selection uses existing7/4/2/3/6; no effects/objects or production/release.",
+      "decision": {
+        "path": "doc/decisions/jj-zillion-concept-v05_owner_approval.json",
+        "sha256": "8565dcf9c2153e6b5bb67210676a490420c417926e2376c5af69ec27d057465d"
+      }
     },
     {
       "id": "jj-zillion-single-shot-source-v05",
@@ -5250,7 +5255,7 @@
       "kind": "animation_source",
       "variant": "zillion-single-shot",
       "revision": 6,
-      "status": "candidate",
+      "status": "approved",
       "parents": [
         "jj-zillion-single-shot-source-v05",
         "jj-zillion-single-shot-plan-v05"
@@ -5278,7 +5283,12 @@
           "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/assemble.py",
           "sha256": "4c138b3c72f4258f2178993e697a4fcf4dc2a0e48520f8e3d65c836094da2b94"
         }
-      ]
+      ],
+      "approval_scope": "Selected final artwork only, bound to all files for lineage consistency. Raw generations, recipes, discarded intermediate and references are provenance, not independent aesthetic approval. Six-pose source selection uses existing7/4/2/3/6; no effects/objects or production/release.",
+      "decision": {
+        "path": "doc/decisions/jj-zillion-source-v06_owner_approval.json",
+        "sha256": "ed07ffb490cf1bd1f07fb46dd035653da13d32d834d18828d6b154dfa70e0322"
+      }
     },
     {
       "id": "jj-zillion-source-patch-review-v06",
@@ -5400,7 +5410,7 @@
       "kind": "planning_sheet",
       "variant": "zillion-character-checkpoint",
       "revision": 6,
-      "status": "candidate",
+      "status": "superseded",
       "parents": [
         "jj-zillion-single-shot-source-v06",
         "jj-zillion-source-patch-review-v06"
@@ -5431,6 +5441,33 @@
           "role": "report",
           "path": "out/diagnostics/jj_zillion_single_shot_v5/runtime_evidence.json",
           "sha256": "e68f7b51ec86eca87151e3f90f46c8f96df0de7b30d733baa4b7b66adf21eca7"
+        }
+      ]
+    },
+    {
+      "id": "jj-zillion-character-checkpoint-v07",
+      "asset_id": "jj_zillion_ii",
+      "kind": "planning_sheet",
+      "variant": "zillion-character-checkpoint",
+      "revision": 7,
+      "status": "candidate",
+      "parents": [
+        "jj-zillion-character-checkpoint-v06",
+        "jj-zillion-ii-concept-v05",
+        "jj-zillion-single-shot-source-v06"
+      ],
+      "supersedes": "jj-zillion-character-checkpoint-v06",
+      "reason": "Owner acceptance addendum; preserve frozen pre-acceptance checkpoint and all source/ROM evidence. No asserted playback perception.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/jj_zillion_character_checkpoint_v7.json",
+          "sha256": "97cf86b1e9685f9ea5b331fae5ff2ee0d7650e4ffabb07f4e785aa1d7463198d"
+        },
+        {
+          "role": "owner_decision",
+          "path": "doc/decisions/jj-zillion-character_owner_approval.json",
+          "sha256": "6909b7de5c7e3d5c8e31cd07eb46de9539553724a0fdea2a46e6c8302a7b7c21"
         }
       ]
     }
@@ -5539,7 +5576,7 @@
       "kind": "concept",
       "variant": "main",
       "candidate": "jj-zillion-ii-concept-v05",
-      "approved": "jj-zillion-ii-concept-v04"
+      "approved": "jj-zillion-ii-concept-v05"
     },
     {
       "asset_id": "landau",
@@ -5728,7 +5765,7 @@
       "kind": "animation_source",
       "variant": "zillion-single-shot",
       "candidate": "jj-zillion-single-shot-source-v06",
-      "approved": null
+      "approved": "jj-zillion-single-shot-source-v06"
     },
     {
       "asset_id": "jj_zillion_ii",
@@ -5797,7 +5834,7 @@
       "asset_id": "jj_zillion_ii",
       "kind": "planning_sheet",
       "variant": "zillion-character-checkpoint",
-      "candidate": "jj-zillion-character-checkpoint-v06",
+      "candidate": "jj-zillion-character-checkpoint-v07",
       "approved": null
     },
     {

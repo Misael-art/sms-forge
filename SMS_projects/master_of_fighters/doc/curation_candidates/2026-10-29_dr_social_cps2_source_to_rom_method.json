@@ -471,7 +471,7 @@
     }
   },
   "followup_jj_zillion_short_route": {
-    "status": "technical_route_demonstrated_corrected_art_and_motion_pending_owner_not_globally_curated",
+    "status": "technical_route_demonstrated_owner_accepted_pending_future_global_curation",
     "scope": "Third character: J.J. from approved roster, character-only guard plus5actionposes. No shot/FX baked into character; emission/object deferred by explicit owner feedback.",
     "reason_for_selection": "Young agile sci-fi laser user contrasts with Social Victorian cane and Hayato samurai katana, while remaining in approved roster/art language.",
     "research": {
@@ -626,17 +626,6 @@
       "Preserve negative attempts and performance failures. Longer FPS windows passing do not erase firstfailure or establish its cause or per-framepacing."
     ],
     "what_is_repeated": "Authoredsource -> commonmaterialmapping/pivots -> officialconversion -> pairedbothfacings -> existingROMconsumer -> nativeprivateQA -> realtime/FPS/sealedVBlank -> retention/history. Technical route reproduced; artistic predictability not yet owner accepted.",
-    "limits": [
-      "No owner/artistic temporal acceptance",
-      "No continuous perception established by this interface",
-      "No projectile, muzzleflash, sparks, effects, gameplay, audio, PAL or production",
-      "Global registry remains blocked by missing historical Social61v5 report; no historical report fabricated",
-      "SixImageGencalls and repeatedowner corrections mean this was not a one-pass predictable artistic route.",
-      "Materialregion automatedcontract remains pending; componentcheck passes, actual materialquality reviewed separately by independentstaticreview.",
-      "Reference PLTE changes unusedslots11/14/15; visibleindices/RGBA preserved, not wholePLTEidentity.",
-      "ManualQA case_0_frame.png is a pre-video still, not terminal; guard confirmed in rawframe129 and timeline102..129.",
-      "FutureFX will need independent art/budget/ROM proof; no headroom inferred at peak8."
-    ],
     "global_historical_block": {
       "status": "missing_unchanged_not_fabricated",
       "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/conversion_report_61_pose_v5.json",
@@ -650,7 +639,7 @@
       "archive_sha256": "85750979253f45ba67b7c0c53aeec5399d788ed72b82f9747f9de4fecb28ed28",
       "pending_action": "One manual download already requested, required by Projects/AGENTS.md >70MB rule. Archive absent in workspace/downloads at closure. Verifyfullarchivehash then selectively recover onlyexpectedhash files; global audit may reveal furthermissing records."
     },
-    "next_step": "Owner reviews exact conceptv5,sourcev6 and realROMnormalvideo. Keepcurrent control until concrete feedback; no furthergeneration or contentgrowth. Afterownerdecision and historicalrecovery, curator can assess promotion with existing doctrine/tests.",
+    "next_step": "Owner decision closed; preserve chosen character-only sample. Recover original historical Social61v5 report from already requested manual archive, then futurecuration can assess promotion. No new content or repeat owner approval.",
     "promotion": "queued_not_homologated; no global rule, lesson ID, skill or gate changed",
     "retention": {
       "receipt": {
@@ -660,6 +649,35 @@
       "archive_sha256": "937b886f83cc50f71987b14f38adf3941aacc80837ed9b8b432865bd7825557a",
       "payload_files": 777,
       "scope": "Local recovery copy verified; package freezes evidence before external receipt/publication. Final receipt and followup retention field are separately versioned in Git; no recursive archive hash."
-    }
+    },
+    "owner_acceptance": {
+      "path": "doc/decisions/jj-zillion-character_owner_approval.json",
+      "sha256": "6909b7de5c7e3d5c8e31cd07eb46de9539553724a0fdea2a46e6c8302a7b7c21",
+      "checkpoint": {
+        "path": "doc/jj_zillion_character_checkpoint_v7.json",
+        "sha256": "97cf86b1e9685f9ea5b331fae5ff2ee0d7650e4ffabb07f4e785aa1d7463198d"
+      },
+      "verbatim": "aprovado",
+      "scope": "Corrected Zillion shape/proportion, conceptv5, sourcev6 allsixposes without projectile/FX, and presented return to guard with existing7/4/2/3/6 holds. Closes owner decision for this character-only sample.",
+      "observation_limit": "Owner gave approval only; no description or explicit statement of watching continuous playback. This records acceptance, not an invented playback session or agent perception."
+    },
+    "limits_before_owner_acceptance": [
+      "No owner/artistic temporal acceptance",
+      "No continuous perception established by this interface",
+      "No projectile, muzzleflash, sparks, effects, gameplay, audio, PAL or production",
+      "Global registry remains blocked by missing historical Social61v5 report; no historical report fabricated",
+      "SixImageGencalls and repeatedowner corrections mean this was not a one-pass predictable artistic route.",
+      "Materialregion automatedcontract remains pending; componentcheck passes, actual materialquality reviewed separately by independentstaticreview.",
+      "Reference PLTE changes unusedslots11/14/15; visibleindices/RGBA preserved, not wholePLTEidentity.",
+      "ManualQA case_0_frame.png is a pre-video still, not terminal; guard confirmed in rawframe129 and timeline102..129.",
+      "FutureFX will need independent art/budget/ROM proof; no headroom inferred at peak8."
+    ],
+    "current_limits": [
+      "Historical missing report still blocks global registry",
+      "No global curation/production/release approval",
+      "No projectile/FX/gameplay/audio/PAL",
+      "Owner approval gives no explicit observed-playback narrative; agent perception unestablished",
+      "SixImageGencalls and owner corrections remain in history; no one-pass artisticpredictability claim"
+    ]
   }
 }

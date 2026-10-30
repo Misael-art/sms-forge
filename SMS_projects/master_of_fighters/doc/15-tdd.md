@@ -1,5 +1,16 @@
 # 15-tdd — master_of_fighters
 
+## J.J. — seleção aprovada pelo proprietário
+
+A resposta “aprovado” fecha o conceptv5/fontev6, a proporção da Zillion,
+os seis desenhos sem FX e o retorno apresentado com7/4/2/3/6. Preservar arte,
+tempos e ROMs; decisão em `decisions/jj-zillion-character_owner_approval.json`.
+Checkpointv7 registra o aceite sem inventar percepção contínua ou nova sessão.
+As pendências de aceite nas seções anteriores são históricas. Objetos/FX,
+combate completo, produção e homologação global continuam fora deste aceite.
+
+## Histórico técnico anterior ao aceite
+
 ## Integração diagnóstica J.J. — mesma rota e consumidor
 
 `MOF_JJ_SAMPLE=1/2` seleciona os headers v5 nos dois sentidos no consumidor já

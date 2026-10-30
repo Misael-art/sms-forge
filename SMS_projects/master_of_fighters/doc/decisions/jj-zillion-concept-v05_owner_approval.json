@@ -1,0 +1,77 @@
+{
+  "schema": "sms_artifact_decision_v1",
+  "artifact_id": "jj-zillion-ii-concept-v05",
+  "scope": "concept",
+  "decision": "approved",
+  "actor_role": "owner",
+  "actor": "project_owner",
+  "source_note": "Direct owner message aprovado; see doc/decisions/jj-zillion-character_owner_approval.json.",
+  "approval_scope": "Selected final artwork only, bound to all files for lineage consistency. Raw generations, recipes, discarded intermediate and references are provenance, not independent aesthetic approval. Six-pose source selection uses existing7/4/2/3/6; no effects/objects or production/release.",
+  "files": [
+    {
+      "role": "image",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/concept_source.png",
+      "sha256": "e81e0f9cc81b1552ff2ace0e046ecb5c36be00119e6b6f5d60d17a7b17f518e9"
+    },
+    {
+      "role": "raw",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/raw_generated.png",
+      "sha256": "2cdde7bea1779770b3011f87f8d58dff6801f5c378fc28bc62f37afa57de47d1"
+    },
+    {
+      "role": "prompt",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/prompt.txt",
+      "sha256": "b1e7af55004959b49e0f714de1cb999774326b099d4f68d385a13aed9a691d5d"
+    },
+    {
+      "role": "lineage",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/lineage.json",
+      "sha256": "11c5a794e0fa8c6934460a496fb32b0943534a95e0c0aed7c55c04ec040ca236"
+    },
+    {
+      "role": "assembly_recipe",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/assembly_recipe.json",
+      "sha256": "5ff9a9507e67ccb73fb96cc760e2a5e12d1baeac96803e11c42ed3152152db9f"
+    },
+    {
+      "role": "assembly_script",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/assemble.py",
+      "sha256": "133294d70e3122cf8b8537cf55015c33145fbaafa8a9acb78aa3fc6c3d0699de"
+    },
+    {
+      "role": "owner_reference_01",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_01.png",
+      "sha256": "68d6ef2d62c381091a2e428d2bb293d9f877ce023079f360023f42678acb83a6"
+    },
+    {
+      "role": "owner_reference_02",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_02.png",
+      "sha256": "16225561ec85ad3ff06a3b7304f97f574c7c6bb67f28385af25f8035aa6a7e5c"
+    },
+    {
+      "role": "owner_reference_03",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_03.png",
+      "sha256": "40515a5db2f57cabdbf488eaf15e31f2631872ff0ed5a4ffe4e3174cccb9a6f4"
+    },
+    {
+      "role": "owner_reference_04",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_04.png",
+      "sha256": "e5c30ae185d82a8faaded3d80eede6a864146135fb20574c48a50411ac0de150"
+    },
+    {
+      "role": "raw_refinement",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/raw_refinement.png",
+      "sha256": "036b257c078a01fa47f26fa5bac414eec6eeba978a75ff68ce7620ff11193cf6"
+    },
+    {
+      "role": "refinement_prompt",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/prompt_refinement.txt",
+      "sha256": "f2ae82defb4977803694ff2be8a6858c1ec9c2db0efed3c69753e8964ea089eb"
+    },
+    {
+      "role": "indexed_intermediate",
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/indexed_intermediate.png",
+      "sha256": "1ce301e3a03fd5bbc2140d6993bea305a3a586f2f658774c30822774d620b611"
+    }
+  ]
+}
