@@ -1,5 +1,27 @@
 # 10-memory-bank — master_of_fighters
 
+## Aceite final do proprietário — corte de Hayato fechado
+
+Após o fechamento publicado em `15305168ff9c46a9ea1f373354c988ba9c099abd`,
+o proprietário respondeu literalmente **“aprovado”**. Registrar este aceite
+como confirmação final do corte apresentado: arte original da v4, lâmina sem
+distorção e exposições **8/1/2/7/2/5** no perfil de runtime v7.
+A entrega à qual respondeu incluía o vídeo real
+`out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/hayato_cut_realtime.mp4`
+(SHA-256 `2ef761100855f5fbebcba533515ae443af9e65a2484a378714aa6086b11b1204`),
+da ROM direita `2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022`.
+O aceite não descreve uma sessão assistida nem acrescenta observações de
+movimento; os registros técnicos e a decisão detalhada anterior permanecem
+inalterados. O checkpoint formal abaixo conserva o escopo da seleção anterior
+do preview; esta seção registra a confirmação posterior à entrega.
+
+**Estado: revisão deste corte encerrada e aprovada pelo proprietário.**
+Manter a seleção e preservar a tentativa com distorção no histórico rejeitado.
+Nenhuma mudança de pixels, tempos, ROM ou evidência neste fechamento; não há
+motivo novo para build, captura ou revisão equivalente. Próximo lote depende
+de um novo objetivo; não ampliar movimentos, elenco ou sistemas a partir deste
+aceite, nem interpretá-lo como autorização de merge, release ou entrega completa.
+
 ## Escolha aprovada — somente tempos, perfil v7
 
 O dono aprovou a coluna **somente tempos 8/1/2/7/2/5**. Rejeitou a distorção
