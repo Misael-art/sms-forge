@@ -41,6 +41,10 @@
 #include "../out/diagnostics/hayato_short_cut_v2/converted_v6_left/sample_data.h"
 #elif MOF_HAYATO_SAMPLE == 14
 #include "../out/diagnostics/hayato_short_cut_v2/converted_v6_right/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 15
+#include "../out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_left/sample_data.h"
+#elif MOF_HAYATO_SAMPLE == 16
+#include "../out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/sample_data.h"
 #else
 #error Unknown Hayato diagnostic composition
 #endif
