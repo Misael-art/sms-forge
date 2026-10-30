@@ -223,6 +223,13 @@ def audit_temporal(manifest, project_root=".", verify_hashes=False):
                     document = json.load(stream)
                 if not isinstance(document, dict):
                     raise ValueError("report must be an object")
+                if method == "owner_decision":
+                    if (document.get("actor_role") != "owner" or
+                            document.get("decision") != obs.get("decision")):
+                        problems.append(f"{oid}: owner report decision/role contradicts observation")
+                    if ("duration_ticks" in document and
+                            document["duration_ticks"] != sequence.get("duration_ticks")):
+                        problems.append(f"{oid}: owner-approved timing differs from sequence")
                 for key in ("subject_sha256", "rom_sha256"):
                     if key in document and document[key] != obs.get(key):
                         problems.append(f"{oid}: report {key} conflicts with observation")
@@ -293,10 +300,20 @@ def audit_temporal(manifest, project_root=".", verify_hashes=False):
         problems.append("artistic change needs an observed defect")
     if decision == "keep" and (failed or pending):
         problems.append("pending/failed review can keep_control, not accept keep")
+    closed = manifest.get("owner_decision_closed", False)
+    if not isinstance(closed, bool):
+        problems.append("owner_decision_closed must be boolean")
+    if closed:
+        owner_axis = axes.get("owner_acceptance", {})
+        if not isinstance(owner_axis, dict) or owner_axis.get("status") != "pass":
+            problems.append("owner closure requires supported owner_acceptance pass")
+        if manifest.get("owner_request"):
+            problems.append("closed owner decision cannot request the same approval again")
     status, code = ("fail", 1) if problems or failed else (("pending", 2) if pending else ("pass", 0))
     return {"schema": "sms_art_temporal_review_report_v1", "status": status,
             "exit_code": code, "problems": problems, "failed_axes": failed,
             "pending_axes": pending, "next_decision": decision,
+            "owner_decision_closed": closed and not problems and "owner_acceptance" not in failed,
             "claim_ceiling": "declared_observation_scope_and_custody_only; not perception_authentication_or_artistic_quality"}
 
 
@@ -511,12 +528,14 @@ def _self_check():
     from tests.test_art_temporal_review import (
         temporal_fixture, check_temporal_cases,
         test_report_contents_cannot_contradict_declared_observation,
-        test_indexed_edit_boundary_preserves_non_roi_pixels_and_palette)
+        test_indexed_edit_boundary_preserves_non_roi_pixels_and_palette,
+        test_owner_closure_preserves_perception_pending_and_checks_real_decision)
     with tempfile.TemporaryDirectory(prefix="sms_temporal_") as temporal_root:
         from pathlib import Path
         check_temporal_cases(temporal_fixture(Path(temporal_root)), temporal_root)
         test_report_contents_cannot_contradict_declared_observation(Path(temporal_root))
         test_indexed_edit_boundary_preserves_non_roi_pixels_and_palette(Path(temporal_root))
+        test_owner_closure_preserves_perception_pending_and_checks_real_decision(Path(temporal_root))
     axes = sorted(PIXEL_SPRITE_REQUIRED_AXES) + ["hands", "equipment"]
     characters = ["alpha", "beta"]
     with tempfile.TemporaryDirectory(prefix="sms_art_review_") as root:

@@ -15,7 +15,8 @@ def temporal_fixture(root):
         path.write_text('synthetic custody fixture: ' + name)
         return {'path': name, 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
     source, rom, media, report = (ref(n) for n in ['source.png', 'rom.sms', 'movie.mp4', 'review.json'])
-    (root / 'review.json').write_text(json.dumps({'artifacts': [source, rom, media]}))
+    (root / 'review.json').write_text(json.dumps({'artifacts': [source, rom, media],
+                                                'actor_role': 'owner', 'decision': 'accepted'}))
     report['sha256'] = hashlib.sha256((root / 'review.json').read_bytes()).hexdigest()
     observations, axes = [], {}
     for axis, method in zip(TEMPORAL_METHODS,
@@ -113,6 +114,30 @@ def test_report_contents_cannot_contradict_declared_observation(tmp_path):
         ref = base['observations'][0]['report']
         ref['sha256'] = hashlib.sha256((tmp_path / 'review.json').read_bytes()).hexdigest()
         assert audit(base, tmp_path, True)['exit_code'] == 1
+
+
+def test_owner_closure_preserves_perception_pending_and_checks_real_decision(tmp_path):
+    base = temporal_fixture(tmp_path)
+    base['observations'] = [o for o in base['observations'] if o['method'] != 'continuous']
+    base['axes']['continuous_motion'].update(status='needs_evidence', observation_ids=[])
+    base.update(next_decision='keep_control', owner_decision_closed=True, owner_request=None)
+    r = audit(base, tmp_path, True)
+    assert r['exit_code'] == 2 and r['owner_decision_closed'] is True, r
+    original = json.loads((tmp_path / 'review.json').read_text())
+    for change in [{'decision': 'rejected'}, {'actor_role': 'producer'},
+                   {'duration_ticks': [8, 1, 2]}]:
+        (tmp_path / 'review.json').write_text(json.dumps(dict(original, **change)))
+        for obs in base['observations']:
+            obs['report']['sha256'] = hashlib.sha256((tmp_path / 'review.json').read_bytes()).hexdigest()
+        assert audit(base, tmp_path, True)['exit_code'] == 1
+    (tmp_path / 'review.json').write_text(json.dumps(original))
+    for obs in base['observations']:
+        obs['report']['sha256'] = hashlib.sha256((tmp_path / 'review.json').read_bytes()).hexdigest()
+    base['owner_request'] = 'approve again'
+    assert audit(base, tmp_path, True)['exit_code'] == 1
+    base['owner_request'] = None
+    base['axes']['owner_acceptance'].update(status='needs_evidence', observation_ids=[])
+    assert audit(base, tmp_path, True)['exit_code'] == 1
 
 
 def test_indexed_edit_boundary_preserves_non_roi_pixels_and_palette(tmp_path):

@@ -314,3 +314,21 @@ equivalentes. O próximo observador decide manter, ajustar exposições (ritmo) 
 corrigir pose (trajetória/apoio/pega); não esconder construção ruim com holds.
 Oclusão legítima não é equipamento ausente; salto/agachamento não é mudança de
 escala. Exigir contratos e observação antes de classificar defeito.
+
+### Encerramento do aceite e alcance da percepção
+
+Aplicação Social/Hayato/J.J., 2026-10-30: aprovação explícita do dono encerra
+seu recorte mesmo quando a interface do agente não percebe playback. Registrar
+`owner_decision_closed:true`, `owner_acceptance:pass`, `owner_request:null` e
+`keep_control` quando outro eixo continuar pendente. Não pedir esse aceite
+novamente, regenerar ou repetir QA sem defeito/objetivo novo. O relatório ainda
+retorna pendência de evidência, com `owner_decision_closed:true`; isso não
+revoga a decisão do dono nem autoriza promoção global.
+
+O gate confronta o JSON da decisão: `actor_role:owner`, `decision` igual à
+observação e, se presentes, `duration_ticks` iguais à sequência. SHA da arte
+igual não transfere aceite para outro timing. A decisão precisa ter seu
+próprio papel/hash; aprovação não é relato de sessão assistida. Hayato aprovou
+o ajuste de tempos com lâmina original e rejeitou a deformação; J.J. aprovou
+a amostra corrigida sem projétil/FX. São decisões específicas, não receitas
+universais de timing, smear ou tamanho de arma.

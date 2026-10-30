@@ -1874,6 +1874,14 @@ O gate rejeita método incompatível, SHA stale, stepping como realtime,
 sequência incompleta e escala declarada divergente; não autentica percepção
 nem julga beleza. Contagens de princípios não classificam qualidade.
 
+Aplicação de 2026-10-30: decisão do dono fecha seu recorte mesmo com percepção
+do agente pendente. O gate artístico confere `actor_role`, decisão e timing
+declarados no arquivo de aceite; `owner_decision_closed` não fecha os demais
+eixos e impede repetir a mesma solicitação. Referência de equipamento, paleta
+compartilhada e identidade de derivados seguem `original-artwork.md` e
+`sms-asset-to-rom.md` (L123/L124/L127). Fonte corrigida exige sua revisão;
+runtime idêntico exige prova dos insumos consumidos para reutilizar evidência.
+
 ## 110. BlastEm avançado: qualificar recurso por CPU, captura e versão (L114–L120)
 
 Aplicar `sms-emulator-diagnostics.md` e a matriz de decisão de

@@ -111,6 +111,13 @@ region using the index: an entry shared by cloth and skin affects both. Record
 affected indices/materials and reinspect all affected poses. Neither palette
 membership nor pixel-exact framebuffer proves material placement.
 
+When adding an actor to shared P1, freeze the existing actor's index-to-code
+mapping first. Recomputing nearest colors can recolor the preserved actor.
+Inspect all used indices/RGBA in both facings; unused PLTE slots may change
+under an explicit allocation contract without changing visible pixels. Whole
+PLTE equality and visible identity are different assertions. J.J./Social is
+one measured example, not a universal free-slot allocation or spare FX budget.
+
 A failed conversion may preserve diagnostic PNGs, a partial header and a
 report. Only a successful invocation with complete pose/duration tables and
 all legal compositions is a candidate. Do not build from leftover files merely

@@ -42,6 +42,12 @@ preservar controle e encerrar a repetição de revisões equivalentes. Não gera
 ou buildar para preencher uma limitação de percepção. Após observação real,
 decidir manter, ajustar exposições ou corrigir a pose responsável.
 
+Após decisão explícita do dono, conservar o aceite por arte **e timing**,
+conforme `art-review.md`. Um timing alternativo pode resolver a percepção sem
+novo desenho (Hayato); deformar arma pode sugerir outra trajetória e piorar
+o golpe. Testar a causa observada antes de adicionar smear/poses. Percepção
+não estabelecida do agente permanece declarada sem reabrir a decisão humana.
+
 ## Princípios (ênfase SMS)
 
 Considere os 12: squash/stretch, anticipation, staging, straight ahead/pose to

@@ -162,6 +162,22 @@ ao método sem contagem de tentativas/custo comparável e mais de um caso comple
 
 ## 5. Revisar e marcar status com precisão
 
+Antes de novo prompt, resolver decisões específicas de equipamento além da
+concept corporal: no caso J.J., referência de arma mais específica corrigiu
+painel/proporção que uma prancha antiga deixava ambíguos. Registrar envelope
+arma/corpo/mão e papel da referência; preservar traje/biotipo/identidade.
+Personagem e projétil/emissão/FX têm contratos próprios: não incorporar efeitos
+à folha corporal para provar ação. Fonte de concept truecolor não recebe o
+teto de cores do recurso SMS por conveniência do editor.
+
+Se a correção precisa preservar corpo/poses, delimitar ROIs de arma/pega e
+conferir foraROI. Pixel perdido na redução ainda pode ser defeito na fonte.
+Recomputar o transform afetado e comparar as saídas; igualdade de PNGs,
+metasprites/headers e configuração de build permite reutilizar a mesma ROM e
+sua evidência **no escopo runtime inalterado**. Revisão do hash-fonte corrigido
+continua própria. Não atualizar vínculo fonte→ROM por inferência: conservar
+linhagem, receita e prova de identidade de todos os insumos consumidos.
+
 Use `workflows/art-review.md` para cada concept/model sheet. Inclua e verifique
 os eixos de escopo/atribuição artística, assinatura visual distinta,
 continuidade anatômica das articulações, coesão visual e `document_and_layout`
