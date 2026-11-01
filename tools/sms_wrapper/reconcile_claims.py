@@ -14,7 +14,8 @@ Mapa eixo -> lastro exigido:
   boot_emulador      evidence.json informative=true E rom_sha256 == ROM atual
   gameplay           evidence.json.interaction_proven=true E rom_sha256 == ROM atual
                      OU input_memory.json (input_provado + canal vivo + SHA da ROM)
-  fps_constante      fps.json constante_50_60=true E rom_sha256 == ROM atual
+  fps_constante      fps.json com alvo60/piso58 FPS da ROM e avancando,
+                     veredito rederivado E rom_sha256 == ROM atual
   audio              arquivo de audio capturado (audit_audio.py e quem julga)
   validation_report  build_record.steps.pre_gates == pass
   memory_bank_atualizado   doc/10-memory-bank.md existe
@@ -23,6 +24,7 @@ Uso: reconcile_claims.py --project <dir> [--json <saida>] [--self-check]
 Exit: 0 coerente | 1 eixo sem lastro | 3 uso
 """
 import sys, os, json, glob, argparse
+from measure_runtime_probe import runtime_fps_verdict
 
 def _load(path):
     try:
@@ -115,10 +117,11 @@ def axis_support(project, rec=None):
             "input_memory.json (input_provado + canal vivo + SHA da ROM) "
             "sustentam o eixo"),
         "fps_constante": (
-            bool(fps.get("constante_50_60")) and bool(sha)
+            runtime_fps_verdict(fps)["passed"] and bool(sha)
             and fps.get("rom_sha256") == sha,
-            "fps.json nao tem constante_50_60=true para a ROM atual "
-            "(rom_sha256 ausente ou de outro binario)"),
+            "fps.json nao prova pelo menos duas janelas da ROM com alvo60/piso58 FPS "
+            "sem arredondar, com avanco, para a ROM atual; booleano legado "
+            "constante_50_60/titulo/PAL50 nao fecha o eixo"),
         "audio": (
             _audio_supported(project),
             "nao ha captura de audio (.wav) POSTERIOR a ROM e COM SINAL em "
@@ -194,10 +197,14 @@ def _self_check():
                     "gameplay": True, "fps_constante": True, "audio": True,
                     "memory_bank_atualizado": True}
 
+        good_fps = {"region": "NTSC", "fps_constante": True,
+                    "fps_janelas": [60.0, 60.0], "frames_delta_total": 960,
+                    "frame_advance_proved": True}
+
         # COERENTE: todo eixo true com lastro
         ok = build(all_true,
                    ev={"informative": True, "gameplay": {"interaction_proven": True}},
-                   fps={"constante_50_60": True})
+                   fps=good_fps)
         p, r = reconcile(ok)
         assert not p, f"projeto coerente nao deveria reprovar: {p}"
         assert r["coherent"]
@@ -205,14 +212,14 @@ def _self_check():
         # REPROVA: gameplay=true com interaction_proven=false (caso real do lab)
         bad = build(all_true,
                     ev={"informative": True, "gameplay": {"interaction_proven": False}},
-                    fps={"constante_50_60": True})
+                    fps=good_fps)
         p, _ = reconcile(bad)
         assert any("gameplay" in x for x in p), f"faltou pegar gameplay sem lastro: {p}"
 
         # PASS: pixels falham, mas input_memory.json prova RAM com SHA da ROM
         ram = build(all_true,
                     ev={"informative": True, "gameplay": {"interaction_proven": False}},
-                    fps={"constante_50_60": True})
+                    fps=good_fps)
         romp = glob.glob(os.path.join(ram, "out", "rom", "*.sms"))[0]
         import hashlib as _hh
         sha = _hh.sha256(open(romp, "rb").read()).hexdigest()
@@ -239,7 +246,7 @@ def _self_check():
         stale_ev = build(all_true,
                          ev={"informative": True, "rom_sha256": "deadbeef",
                              "gameplay": {"interaction_proven": True}},
-                         fps={"constante_50_60": True})
+                         fps=good_fps)
         p, _ = reconcile(stale_ev)
         assert any("'boot_emulador'" in x for x in p), \
             f"evidence de outra ROM deveria reprovar boot: {p}"
@@ -250,8 +257,7 @@ def _self_check():
         stale_fps = build(all_true,
                           ev={"informative": True,
                               "gameplay": {"interaction_proven": True}},
-                          fps={"constante_50_60": True,
-                               "rom_sha256": "deadbeef"})
+                          fps=dict(good_fps, rom_sha256="deadbeef"))
         p, _ = reconcile(stale_fps)
         assert any("'fps_constante'" in x for x in p), \
             f"fps de outra ROM deveria reprovar: {p}"
@@ -265,7 +271,7 @@ def _self_check():
         # REPROVA: audio=true com wav novo porem SILENCIOSO
         mudo = build(all_true, ev={"informative": True,
                                    "gameplay": {"interaction_proven": True}},
-                     fps={"constante_50_60": True})
+                     fps=good_fps)
         import wave as _w2
         _wp = glob.glob(os.path.join(mudo, "out", "evidence", "*.wav"))[0]
         with _w2.open(_wp, "wb") as _f:
@@ -277,7 +283,7 @@ def _self_check():
         # REPROVA: audio=true com wav ANTERIOR a ROM (prova de outro binario)
         stale = build(all_true, ev={"informative": True,
                                     "gameplay": {"interaction_proven": True}},
-                      fps={"constante_50_60": True})
+                      fps=good_fps)
         import time as _t
         _rom = glob.glob(os.path.join(stale, "out", "rom", "*.sms"))[0]
         _wav = glob.glob(os.path.join(stale, "out", "evidence", "*.wav"))[0]
@@ -289,9 +295,18 @@ def _self_check():
         p, _ = reconcile(build(all_true,
                                ev={"informative": True,
                                    "gameplay": {"interaction_proven": True}},
-                               fps={"constante_50_60": True}, rom=False, wav=False))
+                               fps=good_fps, rom=False, wav=False))
         assert any("'build'" in x for x in p), "faltou pegar build sem ROM"
         assert any("'audio'" in x for x in p), "faltou pegar audio sem wav"
+
+        # Same-ROM legacy booleans and sub-58 windows must not qualify.
+        for bad_metrics in ({"constante_50_60": True},
+                            dict(good_fps, fps_janelas=[57.999, 59.0]),
+                            dict(good_fps, region="PAL", fps_janelas=[50.0, 50.0]),
+                            dict(good_fps, frame_advance_proved=False)):
+            case = build(all_true, fps=bad_metrics)
+            problems, _ = reconcile(case)
+            assert any("'fps_constante'" in row for row in problems), bad_metrics
 
         # NAO reprova eixo declarado FALSE sem lastro (honestidade nao e erro)
         p, _ = reconcile(build({"gameplay": False}, ev={"informative": False}))

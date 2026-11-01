@@ -32,6 +32,7 @@ import json
 import shutil
 import tempfile
 from pathlib import Path
+from measure_runtime_probe import runtime_fps_verdict
 
 DEFAULT_SOURCES = {
     "bundle": "out/evidence/m8/bundle_a7f02b84/bundle.json",
@@ -162,8 +163,9 @@ def project(
                                 "fps_constante", "audio") if not axes.get(a)]
     if missing_axes:
         raise ProjectionError(f"consumption sem eixos: {missing_axes}")
-    if mrp3.get("fps_constante") is not True or not mrp3.get("frame_advance_proved"):
-        raise ProjectionError("runtime_metrics sem fps_constante/frame_advance_proved")
+    fps_check = runtime_fps_verdict(mrp3)
+    if not fps_check["passed"]:
+        raise ProjectionError("runtime_metrics nao prova alvo60/piso58 FPS da ROM sem arredondar")
     janelas = mrp3.get("fps_janelas") or []
     if mrp3.get("region") != "NTSC" or len(janelas) != 3:
         raise ProjectionError(
@@ -256,7 +258,7 @@ def project(
         "generated_at": generated_at,
         "rom_sha256": current_sha,
         "region": mrp3.get("region"),
-        "constante_50_60": True,
+        "fps_acceptance": fps_check,
         "fps_constante": mrp3.get("fps_constante"),
         "frame_advance_proved": mrp3.get("frame_advance_proved"),
         "fps_janelas": janelas,
@@ -350,7 +352,7 @@ def _self_check() -> int:
                 "fps_constante": True,
                 "frame_advance_proved": True,
                 "region": "NTSC",
-                "fps_janelas": [59.6, 59.7, 59.8],
+                "fps_janelas": [60.0, 60.1, 60.2],
                 "fps_spread": 0.2,
                 "frames_delta_total": 100,
             }
@@ -374,6 +376,21 @@ def _self_check() -> int:
         assert fps["rom_sha256"] == result["rom_sha256"]
         assert (root / "out/evidence" / (
             "audio_" + result["rom_sha256"][:8] + ".wav")).is_file()
+
+        # The same SHA and a claimed PASS cannot hide a sub-floor window.
+        root_bad, rom_bad, files_bad = make_case("sub58", b"ROM-SLOW")
+        bad = _load(files_bad["runtime_metrics"])
+        bad["fps_janelas"] = [57.999999, 60.0, 60.1]
+        files_bad["runtime_metrics"].write_text(json.dumps(bad))
+        try:
+            project(root_bad, current_rom=str(rom_bad),
+                    **{k: str(v) for k, v in files_bad.items()})
+        except ProjectionError as exc:
+            assert "piso58" in str(exc), exc
+        else:
+            raise AssertionError("janela abaixo58 nao pode projetar PASS")
+        assert not (root_bad / "out/evidence/fps.json").exists()
+        assert not (root_bad / "out/evidence/evidence.json").exists()
 
         # Stale sources: current ROM is a different binary -> refuse, no writes.
         other_sha = hashlib.sha256(b"ROM-TWO").hexdigest()

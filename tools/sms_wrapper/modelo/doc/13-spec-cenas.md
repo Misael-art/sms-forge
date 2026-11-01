@@ -47,4 +47,6 @@ cross-check de reg5/reg6 citados aqui (L133, §124).
 _(rodar `audit_sprite_line_sim.py` sobre o manifesto da cena e citar o pico real)_
 
 ### fps observado
-_(rodar `measure_fps.py`; ≥5 amostras, todas 50–60. Citar o JSON.)_
+_(rodar `measure_runtime_probe.py --session ID`; ≥2 janelas, objetivo60/piso58,
+dispersão≤2, sem arredondar para atingir o piso, conforme SMS_GLOBAL §133.
+Título do emulador não fecha o eixo. Citar JSON/SHA e casos funcionais.)_

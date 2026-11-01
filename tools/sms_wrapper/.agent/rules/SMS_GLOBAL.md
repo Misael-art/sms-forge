@@ -2287,8 +2287,9 @@ Parecer de agente não é playtest com público nem valida aceitação comercial
 Mais efeitos/tamanho ou nomes AAA não provam qualidade; técnica avançada precisa
 de ganho observável, budget medido e fallback dentro do escopo.
 
-`measure_runtime_probe.py --session` exige NTSC60/PAL50 em pelo menos duas
-janelas completas, tolerância explícita até1FPS e dispersão até1FPS. Janelas
+`measure_runtime_probe.py --session` usa o contrato vigente da §133: alvo60,
+piso58FPS sem arredondamento, pelo menos duas janelas e dispersão até2FPS.
+NTSC60/PAL50 continuam identidades regionais, não exceções de aceite. Janelas
 NTSC55 ouNTSC50 reprovam alvo60. `emulicious_dap.fps_constant` não descarta
 amostra ausente nem aceita janela única. Taxa média regional não prova deadline
 por frame, reação da lógica ou pose apresentada: contador ISR pode avançar sem
@@ -2738,3 +2739,40 @@ headers gerados à mão.
 Limite: face residente/submetida não prova SAT completa nem contato visível;
 troca de direção pode esperar upload. Geometria, todas as composições,
 starvation, prazo e sincronização com combate continuam exigindo QA própria.
+
+## 133. Aceite funcional: objetivo 60 FPS, piso 58 autorizado pelo dono
+
+Decisão explícita do proprietário em 2026-11-01: toda implementação precisa
+entregar 60 FPS funcionais como objetivo; admite-se flexibilidade de até2FPS
+abaixo do alvo. **58 FPS é aceito; qualquer janela abaixo58 reprova.** Esta
+decisão substitui, para aceite atual, a faixa histórica50–60 e a tolerância
+inferior de1FPS, inclusive em `.agent` locais antigas. PAL50 pode ser medido
+como diagnóstico regional, mas não serve como exceção para cumprir este piso.
+
+`measure_runtime_probe.py` mede taxas não arredondadas do contador da ROM em
+pelo menos duas janelas completas e exige piso58, dispersão até2 e limite
+superior61. `runtime_fps_verdict` rederiva esse componente de `fps_janelas`,
+avanço real declarado e total de frames; booleano legado `constante_50_60`,
+título do emulador ou uma média que esconda janela lenta não sustentam o eixo.
+`reconcile_claims.py`, `axis_projection.py` e o consumidor de evidência
+OpenBOR aplicam o mesmo contrato antes de aceitar/projetar eixos. Não arredondar
+57,999 para58, acelerar emulação ou trocar o relógio para obter PASS.
+
+Piso numérico não prova sozinho implementação funcional: o mesmo SHA precisa
+mostrar input, lógica, apresentação e consequência coerentes sob a carga real
+do trecho, com pior frame medido. Contador em ISR, boot/probe, fixture reduzida,
+vídeo por stepping ou média de janela não comprovam prazos por frame ou gameplay.
+Não aceitar stalls da ação, ator omitido, atualização parcial ou lógica removida
+porque o relógio do VDP avançou. Aplicar `product-quality-checkpoint.md`.
+
+Se o teste reprovar, investigar causa e continuar a otimização/correção no escopo
+autorizado até pagar o contrato. Proibido tratar relatório ou milestone como
+implementação aceita, baixar piso, descartar amostras válidas lentas, ocultar
+falha, remover conteúdo/qualidade sem decisão ou editar evidência para passar.
+Ambiente/instrumento sem prova deixa aceite pendente; não presume aprovação.
+
+Histórico permanece imutável: PASS antigo não é reescrito nem herdado como
+aceite atual. Self-checks cobrem58,60,57,999, média enganosa, PAL50, booleanos
+sem amostras, contador parado, SHA divergente e projeção recusada sem saída.
+Registro: `doc/curation/2026-11-01_aceite_fps_60_piso_58.json`; aplica L013,
+L035 e L138 sem duplicar IDs. Nenhuma nova ROM/jogo é aprovada por esta curadoria.

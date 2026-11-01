@@ -11,7 +11,19 @@ comece por `doc/continuity/20261024-start-here.md` e pelo bootstrap ali indicado
 ## REGRA FINAL DE FERRO
 
 **"Se não foi visto rodando no emulador, não existe."**
-Intenção não é validação. ROM de Master System rodando a 60fps (NTSC) / 50fps (PAL) constantes, sim.
+Intenção não é validação. ROM de Master System em execução funcional medida, sim.
+
+**Regra obrigatória de aceite (dono, 2026-11-01): objetivo de 60 FPS, com
+flexibilidade máxima de 2 FPS abaixo do alvo: 58 FPS é aceito; abaixo de 58 FPS
+a implementação é reprovada.** Comparar cada janela válida da ROM sem arredondar
+para atingir o piso; média, título do emulador ou contador em ISR sozinho não
+aprovam. O trecho precisa funcionar com input, lógica e apresentação coerentes,
+carga real e pior frame medido. Investigar e corrigir os desafios até cumprir
+o contrato, sem reduzir silenciosamente escopo/qualidade, acelerar o emulador,
+ocultar stalls ou afrouxar testes. Sem prova suficiente, aceite pendente.
+PAL50 pode ser medido como diagnóstico regional, mas não paga este aceite.
+Esta decisão prevalece sobre as antigas faixas 50–60/tolerâncias dos agentes
+locais; aplicar SMS_GLOBAL §133 e `product-quality-checkpoint.md`.
 
 ---
 
@@ -160,9 +172,9 @@ roteiro → storyboard (planta baixa em pixel) → coreografia → MEDIÇÃO →
 | Áudio (captura) | `capture_audio.py` | grava o áudio **isolado** do emulador (sink dedicado); repete se vier silêncio adiantado |
 | Áudio (mix) | `audit_audio.py` | captura de áudio silenciosa/sem sinal; para ROM só-SFX declarar `--active-floor 5` (piso do M8); o default 90% é piso de música e reprova SFX esparso |
 | Qualidade musical PSG | `audit_psg_quality.py` | "música" que é metralhadora de 16 Hz: uníssono total, volume estático, ruído periódico como percussão, loop < 2,5 s (L078, L079) |
-| FPS (emulador) | `measure_fps.py` | <5 amostras ou fps fora de 50–60 — mede a velocidade de **emulação** relatada no título |
+| FPS (emulador) | `measure_fps.py` | diagnóstico do título; nunca aprova FPS funcional da ROM (§133) |
 | FPS (loop da ROM) | `measure_frame_advance.py` | contador de frames da própria ROM parado ou em ritmo irregular; o título diria 60fps numa ROM travada (L013) |
-| Runtime da ROM (memória) | `measure_runtime_probe.py` | probe sem magic/schema, frame parado, fps fora de 50–60 ou janelas divergentes — lê o estado na RAM via DAP, sem pixels nem foco de janela (L035, §37) |
+| Runtime da ROM (memória) | `measure_runtime_probe.py` | alvo60/piso58 em cada janela sem arredondar, ≥2 janelas, dispersão ≤2; sem magic/schema/avanço reprova; não substitui gameplay/pacing (§133) |
 | Limites e valor da name table | `audit_tilemap_bounds.py` | escrita em linha fora das 24 renderizadas (invisível) ou além da PNT, na SAT (L011); entrada de tilemap com bits 13–15 armados sem `--allow-tilemap-flags "<motivo>"` declarado no TDD (L132, §123) |
 | Espelhamento de tilemap SMS1 | `audit_tilemap_mirror.py` | escrita ao reg2 com bit0=0 (mirror invisível no alvo SMS2/PC), sem exceção `--allow-sms1-mirror` motivada; valor não-literal nunca aprovado (L130, §121) |
 | Wrap do scroll Y | `audit_vscroll_wrap.py --screen-h` | acumulador/literal de `SMS_setBGScrollY` sem wrap em 224 no modo 192 (tilemap de 224 px; >223 trata como 0..31); modo 224/240 validado contra 256; função/expressão = não provado, nunca aprovado (L131, §122) |
@@ -248,7 +260,7 @@ documentado ≠ implementado ≠ buildado ≠ testado_em_emulador ≠ validado_b
 ```
 
 Gate final de entrega exige os 7 eixos simultâneos: build, validation_report,
-boot no emulador, gameplay, 60/50 fps, áudio, memory bank atualizado — **e**
+boot no emulador, gameplay, alvo60/piso58 FPS funcional (§133), áudio, memory bank atualizado — **e**
 época visual `delivery` com vínculo asset→ROM pago. Boot sozinho classifica
 `runtime_probe_passed_visual_epoch_failed`. Relatórios são transições de
 produção, não entregas finais (`causal-persistence-loop.md`).

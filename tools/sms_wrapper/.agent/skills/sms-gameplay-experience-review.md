@@ -20,7 +20,8 @@ Métrica sem sensação observável não prova game feel.
 Sensação sem ROM/trace fica `needs_evidence`.
 FPS estável não prova controle bom.
 Para revisar gráficos/áudio/IA/HUD juntos e decidir crescimento, aplicar
-`workflows/product-quality-checkpoint.md`. Alvo NTSC60/PAL50 é regional;
+`workflows/product-quality-checkpoint.md`. Aceite exige objetivo60/piso58FPS
+em todas as janelas da ROM (SMS_GLOBAL §133); PAL50 só é diagnóstico regional;
 registre atraso entrada→reação→impacto/resultado separadamente de taxa média.
 Um contador de ISR não prova que a lógica/render terminou a cada deadline.
 Parecer de agente não é playtest com público nem valida aceitação de mercado.

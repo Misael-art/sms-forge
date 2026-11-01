@@ -35,9 +35,12 @@ do host. Relate carga e incerteza de transporte ao interpretar FPS.
 
 `measure_fps.py` relata velocidade do emulador; `measure_frame_advance.py` e
 `measure_runtime_probe.py` usam o contador da ROM. Sessão privada do probe exige
-alvo regional: NTSC60 ou PAL50, pelo menos duas janelas, tolerância explícita
-de até 1FPS e dispersão de até 1FPS. 55FPS constantes em NTSC reprovam esse alvo.
-O resultado é taxa média regional das janelas, não promessa de zero quedas.
+objetivo60FPS com piso58 autorizado pelo dono em2026-11-01 (SMS_GLOBAL §133).
+Exigir pelo menos duas janelas completas, todas >=58 sem arredondar para atingir
+o piso, dispersão <=2FPS e limite superior61 contra aceleração indevida.
+PAL50 permanece diagnóstico regional e não fecha este aceite. `reconcile_claims.py`
+rederiva o resultado dos números da ROM atual; `constante_50_60` sozinho reprova.
+O resultado é taxa das janelas, não promessa de ausência de stalls por frame.
 
 Para pacing, instrumente o deadline por frame na ROM e meça o worst-frame com
 as fontes reais; um contador em ISR pode avançar mesmo quando o gameplay não
@@ -79,3 +82,8 @@ integrais no fechamento. Uma técnica avançada entra se melhorar a experiência
 com budget medido e fallback; tamanho maior, mais cores/efeitos ou PCM não são
 ganho automático. Atualize memory bank com ROM/SHA, casos, métricas, pareceres,
 limites e próxima ação. Release segue `release-rom.md` e todos os eixos atuais.
+
+Resultado abaixo58FPS bloqueia aceite da implementação: identificar causa e
+continuar a correção/otimização no escopo autorizado. Não chamar diagnóstico,
+build ou avanço parcial de entrega aceita. Não compensar um trecho lento pela
+média de outro rápido nem mascarar o problema removendo lógica, arte ou casos.

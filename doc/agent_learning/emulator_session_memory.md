@@ -268,3 +268,21 @@ Curadoria: `doc/curation/2026-10-05_l057_sessoes_privadas_emulicious.json`.
 - Matriz de consumidores atualizada. Lições/medições históricas preservadas;
   nenhuma ROM, build ou aceitação de emulador foi reexecutada nesta remoção.
 - Registro de escopo e recuperação: `doc/retired-projects.md`.
+
+## 2026-11-01 — objetivo60FPS com piso58 autorizado
+
+- Política atual de aceite em AGENTS.md/SMS_GLOBAL §133: toda janela >=58FPS,
+  objetivo60, mínimo duas janelas, dispersão≤2, sem arredondamento para atingir
+  o piso. PAL50 é diagnóstico regional; título não prova o loop da ROM.
+- Probe, conciliação e projeção rederivam o piso; booleanos históricos não
+  aprovam um novo build. Input/lógica/apresentação/carga/pior frame na mesma
+  ROM continuam obrigatórios; contador em ISR ou média não prova funcionalidade.
+- Autorização: emenda explícita do dono de2026-11-01. Curadoria/validação:
+  `doc/curation/2026-11-01_aceite_fps_60_piso_58.json`. Nenhuma ROM foi alterada
+  ou aprovada por esta mudança; preservar medições históricas.
+- Fechamento do lote:60 testes focados passaram; selftest137/137;75 ferramentas
+  com self-check; doc-sync e learning-capture verdes. Calibração numérica
+  preservada confirma59,78/59,67 aceitos e16..26FPS rejeitados. Não foi feita
+  nova QA de jogo; o escopo altera política/gates, não runtime/assets.
+- Base4b602bcf8a9b9995711203322e0991c7f327fd3d, branch
+  `codex/host-bootstrap-continuity-20261024`; incremento revisável no PR4.
