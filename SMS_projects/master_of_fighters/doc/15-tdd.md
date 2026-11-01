@@ -1,5 +1,146 @@
 # 15-tdd — master_of_fighters
 
+## Campanha, apresentação e progressão — contrato futuro, 2026-11-01
+
+[Direção no GDD](11-gdd.md#direção-de-fã-e-campanha--proprietário-2026-11-01),
+[roteiro](12-roteiro.md) e [composição/aceite](13-spec-cenas.md#cenas-da-direção-de-fã--2026-11-01).
+**Documentado; sem implementação, build ou teste novo de runtime neste lote.**
+Propostas abaixo definem responsabilidades e invariantes; nomes de estados
+não alegam módulos existentes. Usar consumidor e motor oficiais; não abrir
+um motor de cutscene concorrente ou ramificação jogável para fugir do budget.
+
+### Estados, comando e continuidade
+
+Proposta de fluxo: `abertura → título → modo → seleção → nó de história →
+apresentação → round → resultado → recompensa/conversa → próximo nó/final`.
+Versus passa de seleção/apresentação a round/resultado sem progressão Alis;
+Arcade depende FC02. Separar ID da cena, fase da apresentação, modo da partida,
+resultado e estado dos combatentes. Trocar sprite não muda modo ou dano.
+
+Encenação reaproveita renderer, poses e integração do motor, com direção de
+atores explicitamente roteirizada. Não injetar input de jogador sem marcador
+para fingir IA/combate real. Hits narrativos têm resultado de roteiro e trilha
+própria; dano competitivo não vaza para o primeiro round. Golpe do visitante
+precisa ter contrato de luta aprovado antes de ser apresentado como seu super;
+se ainda não existe, storyboard permanece pendente, não criar mecânica pela cutscene.
+
+Cada trecho registra estado inicial/final, falante/texto, ações por ator,
+objetos/FX, câmera/paleta, áudio, condições de avanço e skip. Uma saída central
+encerra hitboxes, objetos, tracks/áudio e comandos transitórios; aplica endpoint
+uma vez. Skip no meio de carregamento não libera luta com VRAM parcial.
+Entrada mantida é tratada pelo adaptador oficial conforme GD01; verificar que
+o primeiro comando intencional depois de liberar controle é recebido.
+
+Na cena 07, retrato/caixa não podem consumir padrões ainda usados pelo palco.
+Definir residência e recarga sem presumir dupla name table livre. Fonte/glyphs
+portugueses, comprimento máximo real e paginação precisam prova no framebuffer;
+texto transbordado não deve ser “resolvido” cortando fala essencial. Selecionar
+variante contextual por dados autorizados de arena/par/nó, com fallback de
+entrada-base contratada, não improvisar moto/cameo para qualquer condição.
+
+### Alis: dados, isolamento e transação
+
+Separar perfil competitivo fixo e estado da campanha. Proposta de dados
+estáticos e limitados: nível, pontos livres, investimento por atributo,
+identificador do encontro recompensado e etapa/resultado; limites, tipos e
+custo RAM/ROM precisam medição. Inteiros/fixed point conforme necessidade,
+sem float/malloc, sem overflow ao somar bônus/múltiplos níveis. Recalcular
+stats a partir de base+tabelas aprovadas, não acumular multiplicações em cada
+reentrada. Tetos de atributos/vida/dano e ordem de redução de dano são parte
+do contrato de balanceamento, ainda abertos.
+
+Resultado único cria recompensa pendente; painel cria prévia separada;
+confirmar valida saldo/tetos e aplica uma vez, só então avança. Repetição de
+evento, botão mantido, replay do resultado, continue e retorno ao painel não
+podem pagar de novo. Identificador de encontro e política de retries precisam
+considerar reinício de campanha; um único booleano global não basta. Se o
+modo permitir adiar escolha, preservar saldo e oferecer destino aprovado.
+Não presumir SRAM/save: memória volátil, persistência e reset são decisão FC01/02.
+
+HUD lê o valor lógico e distingue HP atual/máximo, LV e Super. Vida máxima
+maior não pode ser uma barra idêntica que engana sobre dano relativo; decidir
+representação/feedback e testar. Defesa com escudo exige variante coerente
+entre corpo, guarda, hitboxes e efeito; aparência não concede invulnerabilidade.
+Conflito entre escudo já aprovado e desbloqueio visual está em FC01: nenhuma
+remoção/substituição automática da concept. Magia precisa efeito funcional
+do kit decidido; não criar atributo que só altera texto.
+
+Antes de selecionar números, simular/prototipar configurações de início,
+meio e fim; build pura de cada atributo, mistura e tetos combinados. Confirmar
+que erro continua punível, guarda não gera bloqueio eterno, vida+defesa não
+multiplicam resistência sem teto e ataque/magia não produzem derrotas sem
+resposta. Comparar ganhos por diferentes estilos/níveis de habilidade, retry
+sem farm e duração total do percurso. Simulação ajuda a escolher candidatos;
+resultado competitivo só se fecha com duelo completo no emulador e playtest.
+Versus deve produzir exatamente o mesmo perfil com ou sem campanha evoluída.
+
+### Shinobi: três magias e voz digitalizada
+
+As três magias são direção autorizada; a ficha futura de cada uma ainda exige
+comando/custo, preparação visível, direção/área/alcance, resposta adversária,
+acerto/guarda/erro, interrupção e recuperação. O rótulo original não é contrato
+de hitbox. Não preencher as três com o mesmo ataque renomeado; variantes de
+um super só valem se a escolha e a diferença forem perceptíveis e aprovadas.
+Propostas de papel no GDD não equivalem a moveset/frame-data aprovados.
+
+PCM via PSG é hipótese técnica compatível com pesquisa de sample playback,
+não garantia de fidelidade de fala. Consultar o padrão local
+[contrato de engine](../../../doc/05_technical/mugen_engine_standard.md) e registrar fonte
+SMS, cue, duração original, trecho editado, taxa/formato/bytes, conversão,
+hashes e perdas. [Referência técnica de sample playback](https://www.smspower.org/Development/SamplePlayback)
+informa pesquisa; uso externo não substitui headers nem custo medido no alvo.
+Não baixar/usar voz arcade/MD por conveniência; fala exata ainda não foi ouvida
+neste lote. Fonte de áudio, autorização/proveniência e manifesto antes de `res/`.
+
+Proposta de freeze de super: preparo → estado dramático simétrico com duração
+finita declarada → execução/resolução → recuperação. Congelar timer/animação
+de combate só onde o design mandar; gerenciar input/buffer e Pause/NMI
+explicitamente. A fala acompanha pista visual equivalente, nunca exige som
+para defender. Medir resposta após fim, ambos os lados, última unidade de
+recurso, fim de round, interrupção, reset/Pause e duas chamadas próximas.
+
+Ocupação do Z80, instruções/intervalos PSG, banking, interrupções e restauração
+de áudio precisam piloto. `DI` não bloqueia NMI; não prometer que silenciar
+IRQ torna toda sequência segura. Estado dos canais de música/SFX deve retornar
+sem nota presa, ruído, estalo excessivo ou ritmo quebrado. A música pode ser
+interrompida/atenuada por prioridade definida, não porque um registrador ficou
+sem restauração. Qualidade avaliada por escuta e captura isolada, além de
+integridade do stream; maior taxa sem ganho audível não é automaticamente melhor.
+
+**Aceite obrigatório:** freeze não exclui janelas ruins nem valida apenas ISR.
+Se reprodução bloqueante impede o scheduler/input e derruba o avanço funcional
+abaixo de 58, a implementação reprova mesmo que a tela parada seja intencional.
+Investigar reprodução cooperativa/trecho/formato e orçamento, mantendo direção
+do dono; qualquer perda relevante de frase, identidade ou qualidade exige
+tradeoff registrado. Não substituir silenciosamente voz por ruído PSG nem
+acelerar emulador. Medir transição e retomada, além da janela PCM, com relógios
+funcionais que distingam progresso programado de stall. Nenhuma dessas rotas
+está comprovada nesta ROM.
+
+### Orçamento e evidência por incremento
+
+Planejar timeline de residência por fase antes de contratar veículo, monstro,
+retratos e grandes FX. Plano deve cobrir palco, corpos, HUD, objetos, texto e
+áudio realmente simultâneos; paletas compartilhadas e pico de scanline valem
+em cenas não interativas também. Para lanternas/vento, comparar técnica BG,
+reuso de padrões e atualização escalonada, sem pintar corpos acidentalmente
+ou tirar pista de luta. Pior quadro inclui a troca de fase e o efeito mais caro.
+
+Pilotar uma cadeia pequena e completa após o combate funcional: apresentação
+→ conversa → round com resultado → vitória/Alis → próximo nó. Abrir outros
+mundos depois da prova desse percurso; o conteúdo autorizado continua no GDD,
+com dependências explícitas. PCM e cenário animado precisam medições próprias
+e depois integradas; folga de um teste isolado não paga soma de cargas.
+
+Cada pacote registra ROM/SHA, sessão privada/cleanup, versão de regras/assets,
+inputs/precondições, vídeo framebuffer, rastreio de estados/resultado/recompensa,
+áudio isolado e métricas de recursos/FPS/worst-frame. Alvo60/piso58 por janela
+sem arredondar permanece obrigatório. Repetir skip, extremos e retorno em
+ambas as orientações. Registrar preferência estética, defeito observado e
+hipótese separadamente. Evidência antiga de seis poses de J.J. não paga estas
+cenas, balanceamento, diálogo, voz ou evolução. Checklists documentais não
+transformam nenhum desses eixos em PASS.
+
 ## Interface de execução do design — 2026-11-01
 
 **Documentado, implementação pendente.** [GDD](11-gdd.md#contrato-de-experiência--revisão-de-design-de-2026-11-01),

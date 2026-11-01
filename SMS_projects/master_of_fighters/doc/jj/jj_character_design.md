@@ -26,6 +26,17 @@ alcance, dano, trajetória de objeto ou Armorater. O moveset conceitual continua
 pendente de discussão individual; não transformar o nome “disparo” em prova
 de um projétil funcional. Não pedir novamente a aprovação dos seis desenhos.
 
+## Direção de apresentação — proprietário, 2026-11-01
+
+Entrada cênica com moto, drift e desembarque autorizada como direção futura,
+condicionada ao cenário; entradas/vitórias devem expressar carisma e relação
+com adversário. Ver [roteiro](../12-roteiro.md#atuação-por-personagem--propostas-para-discussão-individual)
+e [decisão](../decisions/fan-campaign-and-character-expression_owner_direction_20261101.json).
+Modelo do veículo, coreografia e fonte específica precisam contrato antes da
+arte. Isso não autoriza Armorater como golpe, não muda a arma nem reabre os
+seis desenhos sem FX aceitos. Veículo sai/é encerrado antes do round e não
+causa dano ou iniciativa. Quantidade de variantes e falas seguem pendentes.
+
 ## Histórico da concept art v4
 
 A folha `data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png` apresenta duas poses completas: guarda móvel com a pistola baixa e avanço lateral com disparo. O dono aprovou a concept art v4 em 2026-10-04. Ela usa o pool de cores SMS do jogo e tem fundo transparente; as referências do anime só ajudaram na construção do figurino, conforme pedido do dono, sem cópia de pixels, poses ou composição.

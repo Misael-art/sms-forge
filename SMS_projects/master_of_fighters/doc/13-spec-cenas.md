@@ -1,10 +1,193 @@
 # 13-spec-cenas — master_of_fighters
 
+## Cenas da direção de fã — 2026-11-01
+
+Vínculo: [GDD](11-gdd.md#direção-de-fã-e-campanha--proprietário-2026-11-01),
+[roteiro](12-roteiro.md) e [TDD](15-tdd.md#campanha-apresentação-e-progressão--contrato-futuro-2026-11-01).
+**Contratos documentados; implementação, orçamento e aceite em emulador
+pendentes em todos os itens desta seção.** IDs 01/02/03 preservados; 04–09
+são novas cenas autorizadas pela direção, não telas que já existem.
+
+### Regras comuns de composição e transição
+
+Informação principal de cada fase deve poder ser compreendida em 256×192,
+em escala nativa e em vídeo contínuo. Fonte legível, contraste, ordem de
+leitura e foco não dependem apenas de cor ou áudio. Repetição não deve tornar
+as apresentações um obstáculo: skip/avanço convergem a endpoints limpos;
+botão mantido não atravessa páginas e começa um golpe sem intenção.
+
+Nenhum budget numérico novo é presumido. Para cada fase, engenharia deve
+preencher RAM/ROM, tiles BG, tiles de atores atuais/próximos, PNT, SAT/pico
+por scanline, cores P0/P1, uploads e pior VBlank, ciclos/áudio e janelas FPS
+no SHA do teste. Medir transições além do estado estável. Enquanto a medição
+não existe, o valor é **pendente**, nunca zero ou “cabe porque é cutscene”.
+Palco encenado com três atores, retratos e efeito não herda budget de duelo
+com dois. Roteiro permite escalonar aparições, mas mudança de função/qualidade
+é tradeoff registrado, não corte silencioso.
+
+### Cena 04 — abertura
+
+- **Finalidade/informação:** apresentar elenco e ruptura com empolgação; logo
+  conclui a montagem. Beats A1–A5 no roteiro são proposta executável a revisar.
+- **Entrada/saída:** boot válido → sequência; término ou skip → 05 título.
+  Replay e política de exibição inicial dependem FC02. Reset volta ao boot
+  determinístico, sem estado parcial da montagem.
+- **Ações/feedback:** avanço/skip com comando definido em GD01/FC02; feedback
+  discreto e inequívoco, sem consumir a confirmação também no título.
+- **Hierarquia/simultâneos:** uma composição focal por beat; retratos/corpos,
+  ambiente, ruptura e música conforme timeline; logo substitui o foco anterior.
+  Mostrar nove heróis ao longo da sequência, não exigir nove sprites juntos.
+  Sem HUD de combate. Elenco/cena que não estiver residente precisa carga selada.
+- **Extremos/falhas:** skip durante upload, logo, efeito e música; som desligado;
+  repetição; botão mantido. Fonte ausente ou quadro corrompido bloqueia build,
+  não vira tela preta longa chamada “suspense”.
+- **Aceite:** reconhecer elenco, ameaça e nome; ritmo funciona sem áudio;
+  montagem tem preparação, contraste e encerramento. Vídeo completo/skip,
+  memória/VDP/FPS e áudio integrado na mesma ROM. Não aprovar só screenshot do logo.
+
+### Cena 05 — título e acesso
+
+- **Finalidade/informação:** identidade do jogo e próximo passo claro.
+- **Entrada/saída:** de 04 ou retorno de percurso; início abre escolha de modo;
+  História/Versus → 01 seleção; opções → 06; disponibilidade de Arcade depende
+  FC02. Repetir abertura é proposta, não opção obrigatória ainda.
+- **Ações/feedback:** foco legível, navegar, confirmar, voltar conforme contrato
+  de dois botões. Sugestão “APERTE 1 OU 2”; não depender de botão Start ausente
+  no controle SMS. Não usar Pause do console como substituto obrigatório.
+- **Hierarquia/simultâneos:** logo, convite/menu e fundo autoral; eventual movimento
+  não compete com foco. Música de título/cursor/confirmação com prioridade definida;
+  sem HUD nem lutadores de combate simultâneos por inferência.
+- **Extremos/falhas:** seleção mantida, extremos da lista, modo não implementado,
+  retorno de opções e repetição. Protótipo pode sinalizar indisponibilidade;
+  entrega não pode apresentar modos prometidos como links vazios.
+- **Aceite:** jogador identifica modo escolhido e entra uma vez; foco e opção
+  correspondem; logo permanece íntegro; teste inclui todos os retornos.
+
+### Cena 06 — opções
+
+- **Finalidade/informação:** ajustar comportamento real com estado atual visível.
+- **Entrada/saída:** 05 → 06 → mesmo foco em 05. Lista exata pendente FC02;
+  sugestões para discutir: volume/música/SFX, dificuldade e velocidade de texto.
+  Nenhuma sugestão autoriza menu sem efeito ou mudar velocidade do emulador.
+- **Ações/feedback:** selecionar item, modificar, comparar valor, voltar; política
+  aplicar/cancelar/resetar precisa decisão. Texto explica efeito concreto.
+- **Hierarquia/simultâneos:** nomes/valores/foco/instrução; fundo discreto, sem
+  atores necessários. Prévia sonora não pode sobrepor canais ou continuar ao sair.
+- **Extremos/falhas:** mínimos/máximos, mudo, repetição de input, saída/reentrada,
+  reinício. Persistência explicitada; não prometer save sem solução implementada.
+- **Aceite:** cada opção altera algo verificável; estado mostrado corresponde
+  ao estado aplicado; player consegue restaurar/recuar sem ficar preso.
+
+### Cena 07 — narrativa no palco e diálogos
+
+- **Finalidade/informação:** compreender quem chegou, por que lutam e o que muda
+  após o duelo. H1–H7 e cameo têm contratos distintos no roteiro.
+- **Entrada/saída:** nó da campanha → setup de palco → encenação/diálogo → estado
+  competitivo inicial da 02; após resultado → conversa/03/próximo nó ou 09.
+  No cameo, entrada da 02 → sequência → mesmo estado inicial sem dano.
+- **Ações/feedback:** avançar página, completar texto se revelação gradual for
+  escolhida, skip para endpoint definido. Corpo indica reação enquanto retrato,
+  nome e caixa identificam falante. Comando exato pendente; não adivinhar texto
+  a partir de balão fora da tela.
+- **Hierarquia/simultâneos:** no diálogo, fala/rosto/falante são foco e palco
+  contextual permanece claro; em ação, retirar caixa que oculta ameaça. Piloto
+  prevê Hayato+monstro, chegada do visitante com presença potencial dos três,
+  portal/raios, depois retrato/caixa; cada combinação exige budget próprio.
+  Cameo prevê rival+meteoro, rival+Alex+balão, fumaça/transição, rival+Shinobi;
+  não manter Alex e Shinobi residentes sem justificar custo. Música, SFX e voz
+  são trilhas com prioridades, não promessa de tocar tudo simultaneamente.
+- **Extremos/falhas:** texto longo/acento/nome, páginas repetidas, skip no impacto,
+  mudança de falante, input mantido, rival com guarda diferente, borda, som mudo.
+  Monstro/cameo não participa de placar, IA competitiva ou seleção por acidente.
+- **Aceite:** entender motivação sem explicação externa; super encenado atinge
+  monstro e não o futuro rival; sequência e skip resultam em mesmos lutadores,
+  posições, recursos e controle. Ver ação → consequência → conversa → round
+  → resultado → conversa, com todos os resíduos eliminados.
+
+### Cena 08 — vitória e evolução de Alis
+
+- **Finalidade/informação:** celebrar desempenho e decidir crescimento de forma
+  rápida e informada, sem quebrar a personalidade da heroína.
+- **Entrada/saída:** duelo vencido na História e resultado único → pose/cue →
+  ganho de nível/pontos → prévia de atributos → confirmar → destino da campanha.
+  Versus e outros personagens não entram aqui. Derrota/continue dependem FC01.
+- **Ações/feedback:** navegar quatro atributos; acrescentar/reverter proposta;
+  conferir antes/depois; confirmar uma vez. Sugerir saída com pontos guardados
+  somente se regra for aprovada; até lá skip nunca descarta/gasta pontos em
+  silêncio. Teto, pontos disponíveis e efeito precisam leitura inequívoca.
+- **Hierarquia/simultâneos:** primeiro vitória/Alis; depois nível/pontos e opções;
+  pose pode permanecer em repouso legível. Não exigir rival animado atrás do
+  painel. Retrato/ícones só se necessários e orçados. Cue Phantasy Star tem
+  proveniência/versão pendentes; animação, texto e sinal sonoro concordam.
+- **Extremos/falhas:** zero pontos, todos os tetos, múltiplos níveis, 1–2 versus
+  1–3 em testes de balanceamento, confirmação repetida, retry, último chefe,
+  reset, texto de ganho e valores máximos. Se não houver outro combate após
+  o chefe final, decidir recompensa/epílogo em vez de forçar escolha sem efeito.
+- **Aceite:** jogador sabe o que ganhou e como a próxima luta muda; prévia não
+  altera stats antes de confirmar; prêmio nunca duplicado. Testar início/meio/
+  fim, builds puras e mistas, habilidade variada e ausência de influência no Versus.
+
+### Cena 09 — encerramento
+
+- **Finalidade/informação:** resolver ameaça e recompensar o percurso com epílogo
+  coerente com o herói, retomando motivo da abertura.
+- **Entrada/saída:** último confronto resolvido → desfecho FC04 → epílogo →
+  retorno a 05/01 conforme FC02. Nenhum chefe extra por suposição.
+- **Ações/feedback:** avanço/skip preserva resultado/desbloqueio único e destino;
+  sinal claro de conclusão. Replay/créditos são propostas a fechar, não sistemas
+  já aprovados automaticamente.
+- **Hierarquia/simultâneos:** resultado, consequência no mundo, gesto do herói e
+  mensagem final em sequência; texto, quadro/atores e música por beat, sem HUD
+  competitivo esquecido nem todos os personagens obrigatoriamente em cena.
+- **Extremos/falhas:** vitória final com recompensa Alis pendente, skip/reset,
+  replay, derrota final/continue conforme GD04, dados de epílogo ausentes.
+- **Aceite:** reconhecer o que foi resolvido e o destino do herói; partida termina
+  e pode ser reiniciada sem objetos/comandos/save indevidos. Final não é só KO.
+
+### Cena 02 — arena Kenseiden e fases de apresentação
+
+**Direção do dono:** ambiente japonês escuro e belo, colunas, templo/castelo ao
+fundo, possível estátua budista; Alex Kidd incorporado à pedra como easter egg;
+papéis/fitas/selos ao vento, lanternas com luz perceptível e folhas ocasionais.
+Estátua, desenho dos selos e arquitetura precisam referência identificada:
+não tratar todos os símbolos religiosos como ornamentos intercambiáveis.
+O rosto na pedra precisa confronto com captura da referência Kenseiden antes
+da arte; memória do local exato não é prova. A presença desejada já é direção
+válida do proprietário, independente dessa verificação histórica pendente.
+
+**Composição e leitura:** chão e faixa de combate primeiro; colunas enquadram
+sem cortar silhuetas, fundo dá profundidade por desenho/contraste. Easter egg
+na faixa observável, sem placa/pisca/seta; reconhecível em tamanho nativo ao
+observar, secundário durante troca de golpes. Não acrescenta colisão/recompensa.
+Lanterna propõe luz local em BG; não alterar paleta compartilhada dos corpos
+para fingir iluminação. Papéis têm peso/ponto de fixação e vento coerentes;
+folhas não parecem projéteis, não cobrem rostos nem mascaram preparação.
+
+**Simultaneidade a medir:** par de lutadores + HUD + objetos reais de combate
++ efeito autorizado + cenário animado + música/SFX; durante H1–H5, usar
+composição narrativa própria. Sugerir alternância de detalhes ambientais,
+sem assumir que todos animam continuamente. Se orçamento apertar, comparar
+soluções BG/stream/residência antes de eliminar função; registrar resultado
+visual, custo medido e decisão. Artista não recebe limite inventado de poses.
+
+**Entrada/saída e extremos:** setup completo → apresentação contextual →
+round → vitória/derrota → conversa/resultado. Repetir round não repete toda
+cutscene por acidente. Testar ambos os lados, cantos, poses máximas, contraste
+nos fundos claros/escuros, sobreposição dos efeitos, golpe durante fase mais
+carregada da animação ambiente e saída para painel de Alis. Modo mudo mantém
+ameaça compreensível; nenhum detalhe de cenário interfere com regra de combate.
+
+**Aceite:** vídeo demonstra atmosfera viva, reconhecimento do easter egg sem
+destaque artificial e leitura de luta preservada; revisão humana para anatomia,
+composição e fidelidade; medições de recursos/scanline/VBlank/FPS no pior caso.
+Screenshot estático não prova vento/luz/folha nem retorno de uma apresentação.
+
 ## Contratos de experiência das cenas — 2026-11-01
 
 Vínculo: [GDD vigente](11-gdd.md#contrato-de-experiência--revisão-de-design-de-2026-11-01)
 e [roteiro de interação](12-roteiro.md). Estas cláusulas são intenção e
-critérios de teste; **não são budgets medidos nem autorização de novos sistemas**.
+critérios de teste; **não são budgets medidos**. Sistemas adicionais autorizados na direção de fã
+acima seguem seus próprios contratos; este recorte anterior não os implementa.
 Seleção = 01, duelo = 02, arcade = 03. D01 identifica somente a placa de
 leitura do duelo cujo nome técnico histórico é `cena01_duel_read`.
 As telas completas ainda não existem no consumidor; sem ROM, critérios ficam
@@ -114,7 +297,8 @@ diagnósticos abaixo não pagam aproximação, contato, HUD dinâmico ou rounds.
 **Finalidade/informação principal:** entender o resultado do duelo, o próximo
 desafio e qualquer desbloqueio realmente conquistado. Hall→chefes/dificuldade
 crescente pertence ao loop do GDD; ordem, critérios de liberação e persistência
-ainda precisam GD04. Não inventar campanha, cutscene, história ou final canônico.
+ainda precisam GD04. Campanha, cutscenes e encerramento agora seguem a direção de fã acima;
+não inventar suas escolhas ainda pendentes nem duplicar Arcade/História sem FC02.
 
 **Entrada, saída e ações:** entrar com resultado único da cena 02; apresentar
 resultado/próximo oponente e aguardar confirmação ou avanço conforme política
@@ -188,7 +372,8 @@ Primeiro negociar técnica de packing/residência e prioridade de informação,
 preservando arte e comportamento aprovados. Toda alternativa tem controle,
 delta, custo medido, efeito na experiência e estado de aceite. Os budgets
 históricos são diagnósticos vinculados a seus SHAs; o budget integrado das
-cenas 01/02/03 segue pendente. Não ampliar conteúdo a partir deste documento.
+cenas 01–09 segue pendente. Conteúdo segue o GDD vigente; este documento
+não fecha as decisões ainda abertas nem autoriza extensões além dele.
 
 ## J.J. — seleção aprovada pelo proprietário
 

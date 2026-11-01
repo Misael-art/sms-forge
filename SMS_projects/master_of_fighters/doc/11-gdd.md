@@ -1,7 +1,194 @@
 # 11-gdd — master_of_fighters
 
+## Direção de fã e campanha — proprietário, 2026-11-01
+
+**Estado: direção documentada para desenvolvimento futuro; não implementada.**
+[Decisão e limites](decisions/fan-campaign-and-character-expression_owner_direction_20261101.json).
+Este pedido amplia o design anterior: História, Versus, abertura/título/opções,
+progressão de Alis, apresentações contextuais, cenário de Kenseiden, três
+magias de Shadow Dancer SMS e participações de Alex Kidd. As restrições antigas
+de não inventar essas telas/conteúdos não impedem o escopo agora solicitado.
+Não se reabrem pixels/tempos das amostras aprovadas nem se promove runtime.
+
+O alvo do dono é um jogo de fã excepcional, com ambição **AAA no Master
+System**: atuação memorável, combate legível, cenários vivos, áudio reconhecível
+e transições cuidadas. É objetivo de qualidade, não certificação. Cada efeito
+deve servir à identidade, à narrativa ou à leitura; cada promessa ainda precisa
+de orçamento e prova no SMS. “Carinho” se manifesta também na derrota, no
+skip, no retorno ao controle e na segunda partida, não apenas na primeira intro.
+
+### Modos e continuidade
+
+| Modo | Direção vigente | Proposta do designer / ponto a fechar |
+|---|---|---|
+| História | Ruptura entre universos, encontros com diálogo, viagens por mundos, chefes/subchefes e encerramento; Alis evolui durante a campanha. | Campanha por personagem, com encontro inicial específico e nós posteriores compartilhados. Ordem, extensão, antagonista, continue/save e elenco de subchefes ficam pendentes; não criar elenco novo por inferência. |
+| Versus | Duelo sem ganho de níveis durante a partida; Alis deve chegar equilibrada. | Usar configuração competitiva fixa de Alis, independente do save da História, com equipamento/guardas definidos para esse perfil. Não escolher arbitrariamente um nível intermediário como garantia de equilíbrio. Multiplayer local e fluxo de duas confirmações precisam contrato próprio; não implica online/link. |
+| Arcade existente | Fluxo 03 preservado no histórico. | Decidir se será percurso rápido separado ou apresentação reduzida da História. Até essa decisão, não manter duas campanhas duplicadas nem aplicar níveis ao Arcade por inferência. |
+
+IDs 01 seleção, 02 duelo, 03 progressão permanecem. Novos contratos:
+04 abertura, 05 título, 06 opções, 07 cena narrativa, 08 vitória/evolução de
+Alis e 09 encerramento. O cenário Kenseiden pertence à 02; apresentações e
+vitórias são fases das cenas, não modos novos. D01 continua diagnóstico.
+
+### Alis — evolução que expressa Phantasy Star
+
+**Pedido do dono:** nível visível perto de vida ou especial; crescimento ligado
+à performance; após vencer uma luta, pose de vitória e música de Phantasy Star
+acompanham escolha rápida entre Vida, Defesa, Ataque e Magia. Melhorias devem
+ser perceptíveis; Defesa pode mudar o sprite de guarda com escudo, Ataque pode
+enriquecer a leitura do corte. Ganhar 1–2 ou 1–3 níveis é alternativa aberta,
+não regra aprovada. Fragilidade inicial foi apresentada como possibilidade;
+o dono também exige equilíbrio inicial e final.
+
+**Recomendação do designer, ainda hipótese:** testar 1–2 níveis por vitória de
+duelo, não por round. Ganho-base por vitória e bônus de performance limitado
+por encontro; reduzir vantagem cumulativa de quem já venceu com folga. Não
+usar apenas dano recebido, tempo ou perfect: isso pode recompensar fuga,
+farm ou excluir estilos defensivos. Examinar decisões ofensivas/defensivas
+reais, sem incentivar repetir a mesma ação para pontuar. Fórmula, limites,
+recompensa de derrota/continue e pontos por nível continuam abertos.
+
+Alis começa funcional contra todo o elenco. Ser esguia não prova fragilidade
+canônica nem impõe HP menor; uma menor tolerância a erros, se escolhida pelo
+dono, exige vantagens de alcance, mobilidade ou flexibilidade medidas. O jogador
+não deve precisar sobreviver a uma personagem ruim para finalmente poder jogar.
+
+| Atributo | Intenção e proposta de efeito | Manifestação e limite a testar |
+|---|---|---|
+| Vida | Aumentar vida máxima da configuração de campanha. | Vida total e ganho explicitados na escolha; definir como a barra representa a nova capacidade. Não conceder cura de round duplicada ou vantagem no Versus. |
+| Defesa | Tornar a defesa bem executada mais forte. Recomendo redução limitada de chip/empurrão ao bloquear, antes de redução passiva de todo dano. | Guarda com escudo ganha atuação/feedback próprios no marco aprovado; nunca autoblock, imunidade ou eliminação do contrajogo baixo/agarrão por padrão. Regra exata de mitigação ainda depende do dono. |
+| Ataque | Aumentar recompensa de golpes confirmados, com teto. | Corte pode ganhar acento visual autoral; efeito não aumenta alcance/hitbox ou cria onda/projétil sem contrato específico. Não acelerar startup silenciosamente. |
+| Magia | Desenvolver a faceta mágica de Alis, sem copiar o kit de outro herói. | Escolher qual magia autorizada melhora e se altera dano, custo ou utilidade. “Magia +1” não pode ser escolha sem efeito; lista de feitiços e interação com Super ainda pendentes. |
+
+**Escudo e arte aprovada:** concept v4 já inclui escudo leve. Está em discussão
+se o marco de Defesa melhora a guarda com o equipamento existente (recomendado)
+ou libera seu uso apenas depois. Até a escolha, preservar concept/poses e
+registrar a variante de guarda como futura; não apagar escudo, alterar roupa
+ou gerar duas versões completas. Marcos não significam um novo atlas por nível.
+
+**Equilíbrio e persistência propostos:** tetos por atributo e por campanha,
+ganhos moderados, sem crescimento multiplicativo irrestrito entre Vida e
+Defesa. Comparar especializações puras, distribuição equilibrada e combinações
+extremas em começo/meio/fim, inclusive desempenho mínimo e máximo. Não compensar
+excesso escondendo escalonamento de inimigos. Uma mesma vitória não paga duas
+vezes; continue/repetição precisa política antifarm explícita. Persistência
+entre rounds, encontros, nova campanha e desligamento são decisões diferentes.
+
+HUD recomendado: `LV` junto ao nome/vida, afastado do medidor de Super para não
+parecer recurso consumível. Ao vencer: resultado → pose/cue musical → painel
+curto com pontos e prévia antes/depois → confirmar → continuar. O painel pode
+ser rápido sem timeout que gaste pontos sozinho. Cancelar desfaz a prévia;
+confirmar aplica uma única transação. Com zero pontos ou atributos no teto,
+mostrar estado claro e saída. Esses comportamentos são proposta de UX a testar.
+
+O [manual de Phantasy Star SMS](https://www.smspower.org/Manuals/PhantasyStar-SMS-US)
+documenta nível/experiência, ataque, defesa, HP/MP e equipamento. Distribuição
+manual de pontos e progressão em fighting são adaptações autorais deste jogo,
+não sistemas atribuídos ao original. O cue exato de vitória/ganho de nível
+precisa identificação e escuta; não selecionar música de remake por nome.
+
+### Shinobi — fonte definida e três magias
+
+O dono fixa **Shadow Dancer para Master System** como fonte do personagem.
+Isso resolve a dúvida de versão; não usar movimentos/vozes de Mega Drive,
+arcade ou outro Shinobi como equivalentes. Preservar ID técnico
+`joe_musashi` para não quebrar referências. Nome exibido ainda precisa decisão:
+“Shinobi” é o rótulo usado no pedido; o material SMS consultado chama o herói
+de Takashi. Não afirmar genealogia ou rebatizar arquivos automaticamente.
+
+**Autorizadas como direção:** três magias do original adaptadas a especiais,
+com chamada vocal digitalizada investigada na melhor qualidade viável. A regra
+antiga de dois especiais deixa de ser teto obrigatório deste personagem;
+não descartar uma das três. Organizar como três comandos ou variantes de um
+Super é proposta de mapeamento ainda não decidida, sem ampliar o kit de Social.
+
+Pesquisa preliminar identifica Tatsumaki (tornado), Fire Dog (fogo) e Butsuzo
+(Buda) em [review de época de Shadow Dancer SMS](https://www.smspower.org/Reviews/ShadowDancer-SMS-SegaForce).
+Nomes, execução e conteúdo exato da voz precisam confronto com fonte SMS e
+captura identificada antes da arte/áudio; este texto não transcreve uma fala
+inaudita. A adaptação não herda “atingir tudo” ou “não funciona em chefes” como
+regra de luta, nem usa quantidade de vidas como comando competitivo.
+
+| Magia de referência | Hipótese de função distinta | Contrajogo e contrato pendente |
+|---|---|---|
+| Tatsumaki | Pressão espacial por deslocamento do vento, com pista de direção. | Delimitar zona/trajetória e resposta possível; não tornar ataque inevitável de tela inteira. Objetos/multi-hit/alcance por medir. |
+| Fire Dog | Compromisso ofensivo frontal reconhecível pelo fogo. | Preparação e recuperação puníveis; guarda/evasão/dano ainda a definir. Nome não autoriza um novo companheiro controlável. |
+| Butsuzo | Grande momento de invocação, com silhueta e impacto distintos dos outros dois. | Definir área e janela de resposta antes de prometer cobertura; escala visual não determina hitbox. Ícone religioso/fonte e áudio precisam revisão. |
+
+A voz não pode ser condição secreta de acerto: preparação visual equivalente
+permanece com som desligado. Freeze dramático é estado explícito, finito,
+simétrico e com retorno definido. A técnica PCM é hipótese de engenharia,
+não permissão para parar a lógica arbitrariamente ou alegar 60 FPS por ISR.
+Ver contrato de áudio e prova no TDD; nenhuma qualidade de voz está garantida.
+
+### Carisma, participações e fronteiras
+
+Entradas, provocações e finais precisam de intenção, atuação corporal,
+reação do oponente e término. Base obrigatória de direção: cada lutador tem
+uma apresentação reconhecível e um fechamento coerente; variantes contextuais
+dependem de cenário/oponente e não exigem animação exclusiva para todo par.
+SNK/Fatal Fury/KOF/Darkstalkers são referências de expressividade e ritmo;
+Guilty Gear/SVC orientam interlocução/retrato, sem copiar pixels, falas ou lore.
+
+J.J. pode chegar de moto, derrapar e saltar para a arena em cenário compatível;
+equipamento/veículo são ativos de apresentação separados. Esta autorização não
+transforma Armorater em golpe nem insere moto na folha aprovada sem FX. O anime
+de J.J. continua limitado ao figurino: referências de atuação do desenho só
+entram quando identificadas e autorizadas por aspecto, sem importar poderes.
+
+Alex Kidd está autorizado **como easter egg em pedra de Kenseiden e cameo
+encenado de Alex Kidd in Shinobi World**, não como lutador selecionável. Cameo:
+meteoro/bola de fogo aproxima → adversário defende → ricocheteia → fumaça revela
+Alex → reclama em balão → desaparece → Shinobi assume e começa a luta. Não
+causa dano, gasta Super ou altera iniciativa. As falas são rascunhos do roteiro.
+Psycho Fox continua fora; participação não autoriza expansão do roster.
+
+### Cenário Kenseiden e narrativa do crossover
+
+Arena noturna japonesa: colunas/arquitetura de templo, castelo ao fundo,
+possível estátua budista, fitas/papéis/selos movidos pelo vento, lanternas com
+luz percebida e folhas ocasionais. Alex gravado na pedra deve ser descobrível
+no tamanho nativo, integrado ao material, sem seta, brilho de pickup ou colisão.
+Pesquisa localiza relatos do rosto em parede de Kenseiden; posição/forma
+originais ainda precisam captura antes da recriação autoral. Iconografia dos
+selos, ornamentos e estátua deve ser pesquisada, sem tratar todo papel japonês
+como o mesmo objeto ritual. Não exigir que tudo se mova simultaneamente.
+
+A ruptura causada por uma ação maligna, heróis deslocados, desentendimento,
+alianças e travessia até chefes/subchefes formam a **continuidade autoral de
+Master of Fighters**. Respeitar identidades originais não torna o crossover
+canônico das franquias. Vilão causador, motivo e encarnação final ficam abertos;
+não resolver automaticamente a dúvida de Dark Force/PSII nem inventar poderes
+canônicos dos antagonistas para justificar o portal.
+
+O encontro Hayato/chefe encenado/herói recém-chegado é a cena-piloto solicitada,
+com combate coreografado no cenário real, ruptura, chegada, golpe que derrota
+o monstro, diálogo e então luta em rounds. A cena precisa mostrar por que
+Hayato desconfia e por que o visitante aceita lutar, sem fazê-los ignorar
+gratuitamente a ameaça comum. Encenação não ensina que aquele Super derrota
+qualquer chefe competitivo em um golpe. Roteiro propõe causa e desfecho.
+
+### Decisões abertas e ordem de execução
+
+| ID | Questão / responsável | Próximo resultado verificável |
+|---|---|---|
+| FC01 | Design/dono: Alis, 1–2 versus 1–3 níveis, tetos, pontos, efeitos e escudo | Regra selada e comparação de builds de personagem em início/meio/fim; sem números herdados. |
+| FC02 | Design/dono: Versus fixo, controles e relação História/Arcade | Perfis separados e reentrada sem importar atributos da campanha. |
+| FC03 | Pesquisa/dono: nome Shinobi/Takashi, três magias e frase SMS exata | Fontes/capturas/áudio identificados, contrato individual e comandos. |
+| FC04 | Roteiro/dono: antagonista, visitante e chefe encenado, destinos/finais | Beat sheet aprovado; novos atores não viram jogáveis. |
+| FC05 | Arte/engenharia: cenário, intro, retrato, cameo e abertura | Storyboard/pose-chave → simultaneidade medida → contrato de asset → ROM, sem teto arbitrário de desenhos. |
+| FC06 | Áudio/engenharia: cue Phantasy Star e PCM de Shinobi | Fonte/hash, arranjo/conversão, escuta e teste freeze→voz→retomada; fallback requer decisão, não remoção silenciosa. |
+
+Começar pela cena-piloto e por um protótipo mínimo da escolha de Alis sobre
+combate funcional; validar antes de multiplicar rotas e variantes. O pedido
+atual é de documentação/direção futura, não fabricação imediata de conteúdo.
+Aceite: compreensão, consequência, recuperação, áudio e pior frame na ROM;
+alvo60/piso58 permanece, inclusive transições. As hipóteses acima não recebem
+aprovação do dono apenas por terem sido sugeridas pelo designer.
+
 ## Contrato de experiência — revisão de design de 2026-11-01
 
+**Histórico do primeiro recorte, anterior à direção de campanha acima.**
 **Estado: documentado; interação de combate pendente.** Este recorte organiza
 o design existente para artista e desenvolvedor. Não autoriza novos golpes,
 personagens, arsenal, sistemas ou alteração dos desenhos/tempos já aceitos.
@@ -46,7 +233,7 @@ roster abaixo; classe de peso não redefine biotipo.
 |---|---|---|---|
 | Guerreiro de Golden Axe | Jovem aventureiro ágil, esguio; elmo com chifres, torso descoberto e capa de pelo azul da concept v2. Atuação proposta: coragem com compromisso de corpo inteiro, sem virar brutamontes. | Golden Axe Warrior SMS e [decisão v2](decisions/ga-warrior-concept-v02-sms-palette_owner_approval.json): espada e escudo. O nome Golden Axe não autoriza trocar espada por machado, cavalo ou magia. | Classe pesada do histórico é separada de massa visual. Hipótese: compromisso de espada/escudo para ganhar espaço. Moveset não aprovado. |
 | Hayato | Jovem esguio; samurai, quimono branco, faixa vermelha, hakama laranja-vermelho, cabelo preso. Atuação aceita no corte: carregar, liberar, absorver e recompor a guarda com participação do corpo. | Kenseiden SMS; [concept v2](decisions/hayato-concept-v02_owner_approval.json). Katana e pergaminhos constam do GDD; magia específica não está selada. [Escolha do corte](decisions/hayato-short-cut-timing-only_owner_approval.json) preserva lâmina/traçado original. Referências de coreografia não definem roupa ou arma. | A katana descreve um arco corporal, diferente da estocada linear de Social. Só corte diagnóstico aprovado; não declarar anti-aéreo, overhead, dash ou especial. |
-| Joe Musashi | Ninja de proporção humana esguia, massa de membros usada como referência morfológica. Disciplina/economia de gesto são hipóteses de atuação. | Roster cita Shinobi; decisão visual posterior aceita Joe/Takashi de Shadow Dancer SMS com acentos amarelos, registrada no memory bank e no lineage do conceito. Isso não resolve sozinho nome/continuidade de combate. Traje clássico de Shinobi é alterno registrado. Cão, clones, substituição invulnerável e shuriken do draft não são moveset autorizado. | Hipótese de mobilidade/engano distinta de arma laser. Dono precisa conciliar nome/fonte do personagem antes de fechar ações; preservar imagem aprovada. |
+| Joe Musashi | Ninja de proporção humana esguia, massa de membros usada como referência morfológica. Disciplina/economia de gesto são hipóteses de atuação. | Roster cita Shinobi; decisão visual posterior aceita Joe/Takashi de Shadow Dancer SMS com acentos amarelos, registrada no memory bank e no lineage do conceito. A direção de campanha de 01/11 fixa Shadow Dancer SMS; nome exibido e continuidade de combate ainda precisam fechamento. Traje clássico de Shinobi é alterno registrado. Cão, clones, substituição invulnerável e shuriken do draft não são moveset autorizado. | Hipótese de mobilidade/engano distinta de arma laser. Fonte agora fixada: Shadow Dancer SMS; três magias autorizadas como direção na seção inicial. Nome exibido e contratos competitivos pendentes; preservar imagem aprovada. |
 | Dr. Ferdinand Social | Humano, psicólogo investigativo; adulto esguio, grisalho, óculos de latão, casaco azul/ciano. Metódico e preciso, sem transformação vampírica ou controle mental. | Master of Darkness SMS + [model sheet v4](decisions/dr_social_model_sheet_cps2_alpha_cel_v04_owner_approval.json). Bengala romba, rapieira e bumerangue de aço formam o kit aprovado; violeta só no bumerangue. Armas listadas no original não autorizam novos golpes. | Duelista de alcance médio que pune erro de distância. Bengala é assinatura; luva/bota são suporte; rapieira e bumerangue os dois especiais; Laudo Final é contra-leitura. Direção aprovada em 10/10; contratos abaixo. |
 | Karateca de Black Belt | Artista marcial; nome próprio e biotipo final não decididos. Hipótese: atuação direta, base e transferência de peso claras, sem imitar o jab investigativo de Social como identidade inteira. | Black Belt SMS conforme roster. Versão japonesa não autoriza importar identidade/lore por associação. Sem concept aprovada localizada para este personagem; armas e energia projetada não autorizadas. | Papel de curta distância a discutir. Nenhum dos quatro golpes do draft, inclusive multi-hit, está fechado. |
 | Bruxa de Psychic World | Artes marciais e capacidades psíquicas no GDD; personalidade, nome e morfologia final pendentes. Hipótese: concentração legível antes de liberar poder, em vez de gestos idênticos aos espadachins. | Psychic World SMS. Não há concept aprovada localizada. O rótulo “bruxa” e o draft não autorizam varinha, teleporte, magia específica ou traje novo. | Papel psíquico a discutir com fonte e dono; sem dois especiais fechados. Não encomendar orbe/teleporte como se já aprovados. |
@@ -107,7 +294,7 @@ pendente**. Não transformar seus tempos herdados em números de combate.
 |---|---|---|
 | GD01 | Dono + design: comandos de dois botões, precedência, buffer/cancel e guarda alta/baixa | Decisão individual registrada; testar execução e neutralização nos dois lados, comando incompleto e input mantido. Botões 1/2 do viewer não são layout competitivo. |
 | GD02 | Dono + design: escala de vida, dano/chip, vantagem, hitstop e economia do Super | Aprovar regras; medir hit/block/whiff, interrupção e retorno na mesma ROM, inclusive sem barra e barra cheia. Não converter exposições diagnósticas em frame-data. |
-| GD03 | Dono: movesets individuais e conflito de identidade Joe/Dark Force | Registrar fonte e limite de cada decisão; só então roteiro/coreografia e budget de cada nova ação. |
+| GD03 | Dono: movesets individuais, nome exibido de Shinobi e encarnação de Dark Force | Registrar fonte e limite de cada decisão; só então roteiro/coreografia e budget de cada nova ação. |
 | GD04 | Dono + design: empate, time-over empatado, continue, ordem de arcade e desbloqueio | Decidir destinos exatos; testar último round/último oponente, derrota e retorno à seleção, sem prêmio duplicado. |
 | GD05 | Engenharia: ligação do consumidor ao motor e ao estado de combate | Provar entrada → comando → ação → contato/guarda/erro → estado/vida → recuperação, com IDs e frames. Contrato de integração no TDD; não substituir pela demo de poses. |
 | GD06 | Arte + engenharia: composição em contato e carga simultânea | Medir ambos os atores em todas as distâncias/poses necessárias, HUD/objeto autorizado/PSG e pior frame. A posição fixa com pico 8 não prova aproximação. Preservar função do golpe; negociar mudança que afete alcance/identidade. |
@@ -303,7 +490,7 @@ escolher de novo com roster e oponentes mais duros.
 |---|------|------------------|-----------------|
 | 01 | Guerreiro de Golden Axe | Golden Axe Warrior (SMS) | **versão estilizada** — jovem aventureiro ágil, elmo com chifres e capa; sem proporção de brutamontes/tanque. Classe de jogo pesada permanece separada da morfologia visual. |
 | 02 | Hayato | Kenseiden | samurai; katana + magias de pergaminho |
-| 03 | Joe Musashi | Shinobi | ninja; traje clássico do 1º Shinobi como **alterno desbloqueável** |
+| 03 | Shinobi (ID `joe_musashi`; nome exibido pendente) | Shadow Dancer SMS — decisão de 01/11 | três magias como direção; traje clássico do 1º Shinobi permanece alterno registrado, sem importar seu moveset |
 | 04 | Dr. Ferdinand Social | Master of Darkness (US: Demon Sword) | psicólogo vitoriano caça-vampiros; NÃO se transforma em vampiro (correção do dono 2026-10-03) — arsenal do original: bengala, rapier, faca, machado + pistola, bombas, boomerang |
 | 05 | Karateca de Black Belt | Black Belt (JP: Geki Shitou) | sem nome oficial — o projeto pode batizá-lo |
 | 06 | Bruxa de Psychic World | Psychic World | artes marciais + magia psíquica |
@@ -322,8 +509,9 @@ O dono adicionou J.J. à escalação em 2026-10-04 e especificou **Zillion II pa
 | B4 | Dark Force (Dark Falz) | Phantasy Star II | a confirmar: Dark Falz é o chefe final de **PS2**, não de PS1 |
 
 ## Personagens explicitamente NÃO registrados (fora até nova decisão)
-- Alex Kidd e Psycho Fox: sugeridos no brainstorming de 2026-10-02, **não
-  entraram** na escalação registrada pelo dono — não adicionar sem decisão nova.
+- Alex Kidd continua fora do elenco jogável. A direção de 01/11 autoriza somente
+  o cameo de Shinobi World e o easter egg no cenário Kenseiden. Psycho Fox
+  permanece fora; participação não implica seleção ou novos movimentos jogáveis.
 
 ## Eixos de fighting (lastro de gênero — `audit_specialization.py`)
 - **hitboxes**: ataque e corpo definidos por retângulos em dados (tabelas
@@ -335,10 +523,11 @@ O dono adicionou J.J. à escalação em 2026-10-04 e especificou **Zillion II pa
 - **hitstop**: congelamento curto em frames na confirmação de hit (parâmetro
   por tipo de golpe na tabela; valor inicial a medir no lote de pilotagem —
   nada é fechado sem medir o degrau seguinte).
-- **specials**: cada personagem do hall tem 2 especiais registrados no GDD
-  completo (ex.: arsenal ocultista do Dr. Social — boomerang/rapier, magia de pergaminho de Hayato,
-  psíquico da bruxa); especiais viram comandos nas tabelas, com orçamento de
-  sprite/scanline aprovado pelo simulador.
+- **specials**: meta histórica de 2 especiais por personagem, sujeitos a aceite
+  individual. Shinobi tem exceção explícita de três magias na direção de 01/11.
+  Rapieira/bumerangue de Social seguem seu contrato; capacidades de Hayato e
+  Psychic World ainda exigem discussão própria. Especiais recebem comandos
+  e orçamento de sprite/scanline medido, sem promover sugestões a moveset.
 - **guard**: defesa alta/baixa com bloqueio visível (faísca de guard),
   dano de chip-documentado; Ninja Master e demais chefes usam guard IA para
   pressão legível.
@@ -755,7 +944,13 @@ VBlank, áudio e aceitação de release continuam pendentes.
 |---|------|-------------------|--------|
 | 01 | tela de seleção | grid 9 heróis + 4 chefes desbloqueáveis | documentado |
 | 02 | duelo 1v1 | round com HUD de vida/timer sobre tables do motor | documentado |
-| 03 | rolagem de arcade | hall → chefes em sequência, dificuldade crescente | documentado |
+| 03 | progressão do percurso | hall → chefes; relação Arcade/História em FC02 | documentado; não implementado |
+| 04 | abertura | elenco, ruptura, perigo e logo | direção documentada; budget pendente |
+| 05 | título | identidade, início e acesso aos modos/opções | direção documentada; budget pendente |
+| 06 | opções | ajustes com efeito e retorno claros | conteúdo de opções pendente |
+| 07 | cena narrativa | diálogo/retratos, encenação no palco e transição ao duelo | direção documentada; budget pendente |
+| 08 | vitória/evolução de Alis | resultado, nível e distribuição de atributos | regras FC01 pendentes |
+| 09 | encerramento | resolução, epílogo e retorno | roteiro final FC04 pendente |
 
 ## Fora de escopo (explícito)
 - Paridade com MUGEN real — o teto é "motor de luta MUGEN→SMS dirigida por dados".

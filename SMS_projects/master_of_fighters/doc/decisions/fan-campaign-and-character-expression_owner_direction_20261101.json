@@ -1,0 +1,205 @@
+{
+  "schema": "sms_owner_design_direction_v1",
+  "actor": "project_owner",
+  "actor_role": "owner",
+  "recorded_date": "2026-11-01",
+  "decision": "direction_recorded_for_future_development",
+  "source_note": "Pedido direto do proprietário nesta conversa: discutir e documentar caprichos de campanha, evolução, carisma, cenário e abertura para artistas e desenvolvedores futuros. Itens parafraseados; alternativas e propostas não recebem aceite implícito.",
+  "owner_intent": "Jogo de fã com cuidado e ambição de qualidade AAA no Master System; objetivo, não avaliação atingida.",
+  "approved_directions": [
+    {
+      "id": "FD01",
+      "subject": "Alis",
+      "scope": "Explorar progressão de nível na História ligada à performance, LV perto da vida/especial, vitória/pose/música Phantasy Star e escolha Vida/Defesa/Ataque/Magia; crescimento perceptível e equilíbrio inicial/final. Versus sem ganho durante duelo, com perfil equilibrado.",
+      "open": [
+        "1–2 ou 1–3 níveis",
+        "fórmula e tetos",
+        "fragilidade inicial é possibilidade",
+        "escudo/limiar e efeito dos atributos",
+        "persistência e relação Arcade/História"
+      ]
+    },
+    {
+      "id": "FD02",
+      "subject": "Carisma do elenco",
+      "scope": "Entradas e vitórias expressivas, contextuais ao cenário/oponente, referências aos jogos autorizados; JJ com moto/drift/desembarque em cenário compatível.",
+      "limits": [
+        "não reabre fonte v6 sem FX aprovada",
+        "veículo cênico não aprova Armorater como golpe",
+        "anime de JJ continua limitado a figurino",
+        "quantidade de variantes/atuação específica requer contrato"
+      ]
+    },
+    {
+      "id": "FD03",
+      "subject": "Kenseiden",
+      "scope": "Arena japonesa escura e bela, colunas/templo/castelo, Alex Kidd perceptível porém sutil na pedra; animação ambiental por papéis/fitas/selos, lanternas/luz e folhas; estátua budista é possibilidade.",
+      "open": [
+        "fonte visual exata do easter egg",
+        "iconografia/arquitetura",
+        "composição e orçamento simultâneo"
+      ]
+    },
+    {
+      "id": "FD04",
+      "subject": "Shinobi",
+      "scope": "Shadow Dancer SMS fixado como fonte; adaptar três magias como especiais e investigar voz digitalizada de melhor qualidade viável durante momento dramático.",
+      "limits": [
+        "nome exibido pendente, ID joe_musashi preservado",
+        "não importar áudio/mecânica de outra versão",
+        "não aprova hitbox/dano/comando nem elimina teste FPS",
+        "exceção à meta anterior de dois especiais somente deste personagem"
+      ]
+    },
+    {
+      "id": "FD05",
+      "subject": "Campanha",
+      "scope": "Ação maligna rompe universos; heróis chegam a outros mundos, conversam com retratos/caixas, entram em conflito e percorrem mundos até subchefes/chefes/final. Piloto Hayato combate monstro encenado no palco real; ruptura traz herói que elimina monstro com especial; desentendimento leva ao duelo.",
+      "open": [
+        "vilão causador",
+        "visitante",
+        "monstro encenado",
+        "roteiro exato/ordem/finais",
+        "elenco novo não inferido"
+      ]
+    },
+    {
+      "id": "FD06",
+      "subject": "Alex Kidd em Shinobi World",
+      "scope": "Cameo de entrada: meteoro frontal, bloqueio/ricochete, fumaça revela Alex e balão de reclamação; desaparece, Shinobi surge e inicia luta.",
+      "limits": [
+        "não jogável",
+        "não adiciona golpe ao ninja",
+        "sem dano/vantagem no round",
+        "frase do proprietário é sugestão; copy final pendente"
+      ]
+    },
+    {
+      "id": "FD07",
+      "subject": "Abertura e acesso",
+      "scope": "Cutscenes dinâmicas com sensação de montagem PC Engine, elenco e perigo, entrada marcante do logo, título e opções.",
+      "limits": [
+        "referência de linguagem, não hardware/pixels",
+        "lista de opções e comandos precisa fechamento",
+        "não promete FMV"
+      ]
+    }
+  ],
+  "owner_alternatives_pending": [
+    {
+      "id": "FC01",
+      "owner": "proprietário + design",
+      "topic": "Alis: ganho 1–2/1–3, efeitos/tetos, fragilidade, escudo e persistência",
+      "status": "pending",
+      "shield_question": "Pergunta enviada sobre guarda evoluída com escudo já aprovado versus liberar escudo depois; sem resposta registrada neste documento."
+    },
+    {
+      "id": "FC02",
+      "owner": "proprietário + design",
+      "topic": "História/Arcade/Versus, opções, replay/skip, retorno e persistência",
+      "status": "pending"
+    },
+    {
+      "id": "FC03",
+      "owner": "proprietário + design + áudio",
+      "topic": "Nome exibido Shinobi, fonte exata das magias/fala, comando/custo/contrajogo",
+      "status": "pending"
+    },
+    {
+      "id": "FC04",
+      "owner": "proprietário + roteiro",
+      "topic": "Causador/visitante/monstro/finais e motivação de cada confronto",
+      "status": "pending"
+    },
+    {
+      "id": "FC05",
+      "owner": "arte + engenharia + proprietário nos tradeoffs",
+      "topic": "Composição do palco, iconografia, timeline e orçamento de cena",
+      "status": "pending"
+    },
+    {
+      "id": "FC06",
+      "owner": "áudio + engenharia + proprietário nos tradeoffs",
+      "topic": "Cue Phantasy Star identificado, voz SMS, qualidade/PSG/PCM e retomada",
+      "status": "pending"
+    }
+  ],
+  "designer_proposals_not_owner_approved": [
+    "Testar 1–2 níveis por duelo vencido, ganho-base mais bônus limitado, sem farm e sem depender só de perfect/tempo.",
+    "Baseline funcional para Alis; especialização com tetos. Vida aumenta máximo; Defesa privilegia eficácia de guarda; Ataque e Magia dependem dos golpes aprovados.",
+    "LV perto de nome/vida, distante do Super; prévia/confirmar transação única sem timeout que gasta pontos.",
+    "Perfil fixo do Versus independente do save; regras exatas pendentes.",
+    "Monstro previamente enfraquecido por Hayato para preservar competência dos dois heróis.",
+    "JJ como possível visitante do piloto, sem escolha definitiva.",
+    "Entradas-base mais variantes contextuais, sem exigir matriz exclusiva 9x9.",
+    "Falas, gestos, montagem A1–A5 e motivações H1–H7 em 12-roteiro são rascunhos.",
+    "APERTE 1 OU 2 como copy para o controle SMS; conteúdo de opções ainda aberto.",
+    "Papeis distintos sugeridos para Tatsumaki/Fire Dog/Butsuzo ainda sem contrato de movimento final."
+  ],
+  "references_consulted": [
+    {
+      "url": "https://www.smspower.org/Manuals/PhantasyStar-SMS-US",
+      "role": "manual SMS",
+      "finding": "Nível/experiência, HP/MP, ataque/defesa e equipamento; alocação manual no fighting é adaptação autoral.",
+      "limit": "Não valida fórmula, balanceamento, fragilidade nem cue musical."
+    },
+    {
+      "url": "https://www.smspower.org/Games/ShadowDancer-SMS",
+      "role": "identificação da versão e texto de embalagem",
+      "finding": "Material SMS identifica Takashi; direção usa nome Shinobi.",
+      "limit": "Não migrar IDs ou inventar genealogia; nome exibido depende dono."
+    },
+    {
+      "url": "https://www.smspower.org/Reviews/ShadowDancer-SMS-SegaForce",
+      "role": "review de época, referência preliminar das três magias",
+      "finding": "Tatsumaki, Fire Dog e Butsuzo.",
+      "limit": "Precisa captura da fonte SMS para desenho/execução/fala; nomes não aprovam regras competitivas."
+    },
+    {
+      "url": "https://www.smspower.org/Development/SamplePlayback",
+      "role": "pesquisa técnica PCM/PSG",
+      "finding": "Playback de samples demanda alimentação pelo CPU; qualidade/custo precisam prova.",
+      "limit": "Não mede implementação deste projeto nem substitui headers e emulador."
+    },
+    {
+      "url": "https://www.smspower.org/Cheats/Kenseiden-SMS",
+      "role": "contexto de referência Kenseiden",
+      "finding": "Material menciona estátua em segredo; não confirma nesta consulta a forma/local do Alex Kidd.",
+      "limit": "Easter egg segue direção do dono, com captura histórica pendente; não afirmar posição exata."
+    }
+  ],
+  "reference_policy": "Links de pesquisa não são assets nem aprovação para copiar pixels. Antes de produção: referência identificada, escopo/hash em manifest e revisão artística. SNK/Fatal Fury/KOF/Darkstalkers = atuação/ritmo; Guilty Gear/SNK vs Capcom = diálogo; PC Engine = montagem; não identidade/mecânicas emprestadas.",
+  "supersedes_in_scope": [
+    "proibição anterior de inventar campanha/abertura/título: direção agora autoriza escopo descrito",
+    "dúvida da versão de Shinobi: Shadow Dancer SMS fixado, nome exibido ainda aberto",
+    "Alex Kidd fora de toda participação: cameo/easter egg autorizados, roster jogável inalterado",
+    "meta de dois especiais: exceção de três magias para Shinobi"
+  ],
+  "preserves": [
+    "conceitos e amostras aprovadas",
+    "movesets pendentes não aprovados pelo pedido de carisma",
+    "arsenal de Social",
+    "identidade de JJ e fronteira anime",
+    "encarnação Dark Force pendente",
+    "alvo60/piso58 e demais gates",
+    "runtime e assets existentes"
+  ],
+  "documents": [
+    "doc/11-gdd.md",
+    "doc/12-roteiro.md",
+    "doc/13-spec-cenas.md",
+    "doc/15-tdd.md",
+    "doc/jj/jj_character_design.md",
+    "doc/10-memory-bank.md"
+  ],
+  "validation": {
+    "documentation_review": "passed_json_links_diff_and_scope_review",
+    "implemented": false,
+    "new_rom_built": false,
+    "tested_in_emulator": false,
+    "budget_validated": false,
+    "production_release_approved": false,
+    "global_curation_approved": false,
+    "note": "Lote documental; QA anterior de poses não cobre esta direção. Nenhum movimento/cena novo é declarado pronto."
+  }
+}

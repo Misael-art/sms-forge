@@ -1,5 +1,51 @@
 # 10-memory-bank — master_of_fighters
 
+## Direção de fã, campanha e carisma — proprietário, 2026-11-01
+
+**Estado: documentado para desenvolvimento futuro; implementação e interação
+prevista explicitamente pendentes.** Pedido do dono amplia o design com
+História/Versus, evolução de Alis, entradas/vitórias contextuais, arena Kenseiden,
+três magias/voz de Shadow Dancer SMS, cameo de Alex Kidd, abertura/título/opções
+e encerramento. Ambição AAA permanece objetivo; não se declara qualidade atingida.
+Registro de autoridade e alternativas:
+[decisão FD01–FD07 / FC01–FC06](decisions/fan-campaign-and-character-expression_owner_direction_20261101.json).
+
+- GDD separa direção do dono, alternativas em discussão e propostas do designer;
+  Alis não recebe números ou fragilidade definitiva por inferência de biotipo.
+  Escudo já aprovado versus desbloqueio posterior permanece questão aberta.
+- Roteiro contém beats de abertura, piloto Hayato/visitante, cameo e intenção
+  de entrada/vitória/derrota para os 13 integrantes registrados. Falas são
+  rascunhos; visitante/monstro/causador e finais não foram escolhidos.
+- Spec mantém IDs 01–03 e contrata 04 abertura, 05 título, 06 opções, 07 narrativa,
+  08 evolução de Alis, 09 final, além da arena Kenseiden/fases da 02. Budgets
+  de todas as novas composições ficam pendentes, sem números fictícios.
+- TDD define invariantes propostas de modo/skip/endpoint, transação de pontos,
+  isolamento do Versus, residência de cena e investigação PCM com retorno e
+  FPS funcional. Tela parada não aprova CPU bloqueado nem contador ISR.
+- Ficha J.J. recebe moto como apresentação contextual futura; seis desenhos
+  sem FX, arma e aceite anteriores continuam intactos. Alex é cameo/easter egg,
+  não décimo personagem. Três magias de Shinobi não aprovam o draft inteiro.
+
+Pesquisa textual: manual Phantasy Star SMS, material Shadow Dancer SMS/review
+de época e sample playback; URLs/limites na decisão. Não foram baixados assets
+ou ouvidos cues novos. Fonte exata de voz/música e captura do easter egg ainda
+faltam; links não são proveniência de arte pronta.
+
+**Verificação do lote:** revisão de diferenças, JSON/referências locais e
+coerência de autoridade/estado. Sem alteração de C/assets, build ou sessão de
+emulador nova; evidência antiga `90ea0f98…` não valida nenhum item novo. Registro
+local do lote em `out/diagnostics/fan_direction_20261101/`; base Git
+`082e52ad3acc6143ffcdd6e4a7d1ff2db6310f6b`. Commit de fechamento identifica o
+incremento; recibo de publicação no mesmo diretório. Alterações preexistentes
+da placa/consumidor e de luta_mugem_rev2 não pertencem a este lote.
+
+**Próximo passo:** fechar FC01/FC03/FC04 com as propostas concretas no GDD;
+continuar a integração funcional GD01/GD02/GD05 antes de prometer campanha
+jogável. Depois pilotar encenação → conversa → duelo → resultado/evolução →
+próximo nó, com vídeo/input/áudio/estados e medições do mesmo SHA. Nome/fonte do
+ninja: versão já resolvida como Shadow Dancer SMS; nome exibido ainda pendente.
+Não pedir aprovação novamente da direção explícita para registrar estes contratos.
+
 ## Revisão de game design — 2026-11-01
 
 **Estado: contratos documentados; aceite de combate e experiência completa
