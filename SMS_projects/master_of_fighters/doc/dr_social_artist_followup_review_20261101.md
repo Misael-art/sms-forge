@@ -1,5 +1,117 @@
 # Dr. Social — revisão da produção inicial e prompt de continuação
 
+## Atualização após o retorno de escala e portraits — direcionamento vigente
+
+O retorno recebido agora é o do artista. Ele distingue corretamente estudos,
+conversão, limites do controle Ken, fontes rejeitadas e ausência de ROM. A
+frase “duas escalas que o adaptador emite” é tecnicamente incorreta: o schema
+v2 aceita `extra_scale=[numerador,denominador]`, com 0 < razão ≤ 1, comum às
+poses. `convert_poses` aplica primeiro o encaixe CPS2→SMS e depois essa razão.
+1/1 e 4/6 são dois casos testados, não o domínio da ferramenta. O estudo
+isotrópico 35/52 direto não equivale a colocar 35/52 como segundo passe.
+
+### Verificação adicional do coordenador
+
+Self-checks do adaptador e simulador passaram antes da leitura. Sem editar
+ferramenta, pixels ou GDD, foram usadas as mesmas fontes, paleta, pivôs,
+posições e referência da receita `dr_social_cps2_keys_measure_v1_extra46b.json`.
+Apenas `extra_scale` mudou nos dois controles principais:
+
+| Extra | Altura opaca da guarda | Pico guarda / BC04 | SAT guarda / BC04 | Resultado |
+|---|---:|---|---|---|
+| 7/9, modo 8×16 | 69 px | 9 / 10 | 36 / 38 | Ambos reprovados |
+| 4/5, modo 8×16 | 71 px | 9 / 10 | 40 / 42 | Ambos reprovados |
+| 7/9, modo 8×8, mesma fonte | 69 px, mesma escala | 10 / 10 | 58 / 60 | Ambos reprovados |
+| 7/9, modo 8×16, fase (3,9) nas duas poses do ator | 69 px, mesma escala | 9 / 10 | 36 / 37 | Ambos reprovados |
+
+Altura é bbox opaca da guarda; nessa fonte os extremos coincidem com coroa e
+sola, sem arma mais alta/baixa. Não aplicar essa equivalência a qualquer pose.
+As duas saídas principais têm 34 px de largura opaca total. Os testes mudam
+parâmetros de representação, não constituem aprovação artística da transformação.
+O adaptador terminou com erro por composição ilegal e preservou `conversion.json`;
+o simulador oficial confirmou as reprovações. Nenhum gate foi contornado e
+nenhum desses pares deve ser buildado como candidato de aceite.
+
+Receitas, logs e relatórios estão em
+`out/diagnostics/social_scale_review_20261101/`: `summary.json`,
+`packing_checks.json`, `config_*.json`, `adapter_*.log`, `conversion.json` e
+`audit_*.txt` por variante. A exploração é limitada: não varre todas as fases,
+não troca Ken pelo elenco, não testa outras faces/cantos, não mede FPS/VBlank
+nem mostra descarte numa ROM. Um pico do simulador não deve ser narrado como
+observação de sprites caindo no emulador.
+
+**Conclusão:** o adaptador alcança a faixa GDD; as composições testadas não
+cabem. Não demonstram inviabilidade universal de 66–72 px. Tampouco justificam
+aceitar 60 px, onde a bengala já falha. Recomenda-se manter o alvo vigente
+até comparar alternativas concretas de atuação/composição, sem fechar o
+tradeoff pelo proprietário. O próximo ramo não é refazer a mesma medição.
+
+### Portraits observados
+
+As duas pranchas de conversa foram inspecionadas: texto fora do rosto, nome
+separado, expressão de fala com boca aberta e área reservada ao palco. Isso é
+avanço de layout. O palco vazio não testa contraste/concorrência do cenário.
+Rosto/texto têm suavização de estudo; origem truecolor e Liberation Sans não
+são defeito automático de concept, mas não pagam acabamento/glyphs/paleta SMS.
+Atentar para consistência de idade/rosto entre busto, model sheet e sprite;
+parecer ainda estático, sem aprovação de animação labial ou cena completa.
+
+### Prompt atual de continuação — copiar esta seção
+
+Continue a produção completa do Dr. Social conforme o prompt inicial e o
+contrato v2. Preserve o que produziu, as reprovações e os hashes. O designer
+verificou seu retorno; não há aprovação de redução do GDD para 60 px.
+
+1. Corrija o registro da capacidade do adaptador: ele aceita razões adicionais
+   configuráveis. Use os resultados do coordenador de 69/71 px; não repita
+   1/1, 4/6 ou essas variantes idênticas como novo progresso. A faixa de altura
+   é alcançável; o par testado falha na composição. Não confundir o passe
+   uniforme extra com a escala direta 35/52 nem alterar o encaixe silenciosamente.
+2. Trate o gargalo em termos de largura por faixa corporal, células emitidas,
+   grade e simultaneidade com o adversário. Reutilize a rota oficial. Compare
+   cobertura opaca com intervalos físicos para distinguir limite da arte de
+   desperdício de representação. Outras fases só justificam teste se houver
+   hipótese concreta; exigir reconstrução exata dos pixels e relato do ganho.
+   Uma fase histórica de J04 não é solução universal para outra pose.
+3. Prepare propostas gestuais curtas de guarda/toque que preservem corpo,
+   bengala, pegada, terminal e intenção de controle frontal. Explore apoio,
+   rotação e perfil corporal antes de rigidez ou corte de arma. São propostas
+   de atuação para revisão, não autorização de mudar alcance, altura lógica do
+   golpe ou identidade. Compare chaves no par real do projeto quando disponíveis;
+   Ken continua controle técnico, não aprovação do elenco. Não feche intervalos
+   de uma pose ainda ilegal. Não gaste outra rodada repetindo a instrução de
+   ponta alta que já trocou a identidade da arma duas vezes.
+4. Se persistir conflito, entregue um comparativo concreto: função preservada,
+   mudança proposta, fontes/poses, escala, alcance visível, par, pico/SAT e
+   impacto estético. O dono decide mudanças de alvo/alcance/identidade. Separar
+   arma em objeto, esconder células, apertar largura isoladamente ou adotar
+   flicker não são soluções automaticamente autorizadas. Não atribuir a arte
+   antiga de curadoria a causa sem demonstrar a ligação.
+5. Não interrompa o pacote independente: complete estados cuja composição possa
+   ser provada e avance portraits. Antes de multiplicar quatro expressões,
+   traduza atenção/fala pelo pipeline de BG/paleta/glyphs adequado à cena,
+   com comparação 1×/4×. Reutilize o layout candidato, testando texto mais longo,
+   acentos e contraste com palco representativo. Preserve rosto/idade e não
+   traga suavização/ruído da redução para arte final. Use caracteres reais da
+   interface; rasterizar Liberation Sans no mockup não prova o texto runtime.
+6. Continue até o personagem completo; este checkpoint não substitui o objetivo.
+   Faça uma ação completa assim que chaves/representação estiverem viáveis;
+   falta de solução da bengala não cancela atuação, portraits e estados
+   independentes. Marque cada dependência com resultado concreto esperado.
+7. Preserve matrizes e receitas, complete proveniência e proteja o trabalho útil
+   pelo fluxo Git/recuperação vigente, com seleção explícita dos próprios arquivos.
+   Não deixar fontes únicas sem proteção nem incluir alterações de outras tarefas.
+   Não publique referências privadas. Quando houver ROM legal, faça QA privada
+   por SHA, input→sequência→terminal→reentrada, ambas as faces/cantos, métricas e
+   cleanup. Até lá, “simulado” e “observado no emulador” continuam distintos.
+
+Entregue ao coordenador evidências e pendências sem autoaprovação; outro
+personagem continua condicionado à revisão e à decisão do proprietário.
+
+---
+
+## Histórico da primeira revisão
+
 Data: 2026-11-01. Escopo: inspeção documental e visual estática das chaves,
 sem nova animação, conversão, build ou emulador. Não é aprovação artística final.
 O anexo recebido nesta solicitação contém MT5X/Super ATR, não o relato do

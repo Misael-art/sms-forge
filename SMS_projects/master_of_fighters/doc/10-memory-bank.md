@@ -1,5 +1,19 @@
 # 10-memory-bank — master_of_fighters
 
+## Revisão do retorno: faixa GDD alcançável, par reprovado — 2026-11-01
+
+O retorno do artista foi conferido. O adaptador v2 aceita razões configuráveis,
+não só 1/1 e 4/6. Testes do coordenador, self-checks prévios OK, sem mudança de
+fonte/ferramenta: extra 7/9 gera guarda de 69 px e 4/5 gera 71 px; no mesmo
+par Ken, picos 9 guarda / 10 bengala nas duas. Modo 8×8 a 69 px deu 10/10;
+fase tall (3,9) deu 9/10. Todos reprovados pelo adaptador/simulador, sem ROM.
+Não é prova de inviabilidade universal da faixa, nem aprovação de 60 px.
+[Revisão e prompt de continuação vigentes](dr_social_artist_followup_review_20261101.md)
+registram próxima investigação de atuação/composição e progresso independente.
+Receitas/relatórios em `out/diagnostics/social_scale_review_20261101/`.
+Portraits atenção/fala foram vistos como estudos de layout, não paleta/arte SMS
+ou cena implementada. GDD e fontes permanecem intactos; aceite pendente.
+
 ## Revisão das primeiras chaves e novo direcionamento — 2026-11-01
 
 O proprietário pediu conferir a compreensão do artista e possíveis referências
