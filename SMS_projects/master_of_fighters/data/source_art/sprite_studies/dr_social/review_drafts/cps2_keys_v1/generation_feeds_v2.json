@@ -1,0 +1,102 @@
+{
+  "note": "Imagens realmente passadas ao gerador. A folha de 61 poses não entra. O gerador não emite recibo além do JPEG da sessão; a cópia em originals/ é byte a byte, sem reencode.",
+  "feeds": [
+    {
+      "output_id": "versus_neutral_bust_attempt1",
+      "output": "originals/bust_neutral_attempt1_younger.jpg",
+      "output_sha256": "c397e8afc9ca442f9b4054608190341a244be407787f0e4d17f0ee6c40479b16",
+      "prompt": "prompts/bust_neutral_attempt1.txt",
+      "role_of_input": "identidade do busto, recorte do model sheet v4, sem o painel de inventário",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/ref/model_bust_crop_tight_v1.png",
+      "sha256": "8d243e4838ebb803638e2ab72809cfd94332287a6b123dfdccadd3041ff0a2bd",
+      "result": "rejeitado: rosto mais jovem que o model sheet",
+      "consulted_not_fed": [
+        {
+          "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+          "role": "folha de identidade; não foi a entrada do gerador porque inclui o inventário proibido"
+        }
+      ]
+    },
+    {
+      "output_id": "versus_neutral_bust_attempt2",
+      "output": "originals/bust_neutral_attempt2.jpg",
+      "output_sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55",
+      "prompt": "prompts/bust_neutral_attempt2.txt",
+      "role_of_input": "segunda tentativa, a partir do busto rejeitado, para recuperar a idade",
+      "path": "originals/bust_neutral_attempt1_younger.jpg",
+      "sha256": "c397e8afc9ca442f9b4054608190341a244be407787f0e4d17f0ee6c40479b16",
+      "result": "candidato de atenção/neutro, não aprovado"
+    },
+    {
+      "output_id": "conversation_speech_attempt1",
+      "output": "originals/bust_speech_attempt1.jpg",
+      "output_sha256": "86aa181bd11bfab4c40d657e9cc18f0daecd5521a630459df43099d01ddda1e1",
+      "prompt": "prompts/bust_speech_attempt1.txt",
+      "role_of_input": "o busto neutro candidato; só a boca devia mudar",
+      "path": "originals/bust_neutral_attempt2.jpg",
+      "sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55",
+      "result": "candidato de fala. A boca aberta ainda se lê no retângulo 88×112. Não aprovado."
+    },
+    {
+      "output_id": "BC_hightip_attempt1",
+      "output": "originals/BC_hightip_attempt1_gold_staff.jpg",
+      "output_sha256": "07471ee65bff8b14fb47f9e4ef270c9eed995f56759e61fb68de48ab25a94c0c",
+      "prompt": "prompts/BC_hightip_attempt1.txt",
+      "role_of_input": "construção e grade da amostra v8, célula J01 ampliada 4× nearest",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/ref/J01_4x.png",
+      "sha256": "4084295606bb4f4082718fe1282dc59efb7df6bba14b175043b7787149af6a3b",
+      "result": "rejeitado: o corpo inclina e o calcanhar sobe, mas a arma virou bastão dourado de duas mãos. Não medir alcance com este desenho."
+    },
+    {
+      "output_id": "BC_hightip_attempt2",
+      "output": "originals/BC_hightip_attempt2_crook_at_tip.jpg",
+      "output_sha256": "c993c5a8d9b269ea58da765cc2692aa46ad7161369a5e934bee6168668795db3",
+      "prompt": "prompts/BC_hightip_attempt2.txt",
+      "role_of_input": "o desenho rejeitado do bastão, para trocar só a arma",
+      "path": "originals/BC_hightip_attempt1_gold_staff.jpg",
+      "sha256": "07471ee65bff8b14fb47f9e4ef270c9eed995f56759e61fb68de48ab25a94c0c",
+      "result": "rejeitado: a inclinação permanece e o cabo foi parar na ponta. Duas falhas de identidade da arma encerram este experimento. Não mede scanline."
+    },
+    {
+      "output_id": "GQ01_attempt1",
+      "output": "originals/GQ01_three_quarter_guard.jpg",
+      "output_sha256": "95648b1bf5894d734e842467c52f77f83a73c72a9c7ebeda7589fd2b63542f88",
+      "prompt": "prompts/GQ01_three_quarter_guard.txt",
+      "role_of_input": "construção e grade da amostra v8, célula J01 ampliada 4× nearest",
+      "path": "ref/J01_4x.png",
+      "sha256": "4084295606bb4f4082718fe1282dc59efb7df6bba14b175043b7787149af6a3b",
+      "result": "hipótese não desenhada: cauda aberta e mão abaixo do cabo. Não medir."
+    },
+    {
+      "output_id": "GQ01_attempt2",
+      "output": "originals/GQ01_attempt2.jpg",
+      "output_sha256": "69bedbff99dee51bf6645cda9f3452634017f9207fda9a7fd7753fd9ce430871",
+      "prompt": "prompts/GQ01_attempt2.txt",
+      "role_of_input": "a primeira guarda rejeitada, para fechar a cauda e assentar o cabo",
+      "path": "originals/GQ01_three_quarter_guard.jpg",
+      "sha256": "95648b1bf5894d734e842467c52f77f83a73c72a9c7ebeda7589fd2b63542f88",
+      "result": "a mão chega ao cabo, a cauda continua aberta. Experimento fechado. Não medir."
+    },
+    {
+      "output_id": "versus_win_attempt1",
+      "output": "originals/bust_versus_win_attempt1.jpg",
+      "output_sha256": "fe9d1afa993292480da022a691440cd161ac6cf7bc0975ab0ed4ad962860997d",
+      "prompt": "prompts/bust_versus_win_attempt1.txt",
+      "role_of_input": "busto de atenção candidato; o sorriso é a mudança",
+      "path": "originals/bust_neutral_attempt2.jpg",
+      "sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55",
+      "result": "candidato. Idade, óculos, casaco e plastrão permanecem. Não é ciclo nem aprovação."
+    },
+    {
+      "output_id": "versus_loss_attempt1",
+      "output": "originals/bust_versus_loss_attempt1.jpg",
+      "output_sha256": "983280d4bd857a5f2bdae618381cc1e28be049843c2f06a971e1d2d98cc41af0",
+      "prompt": "prompts/bust_versus_loss_attempt1.txt",
+      "role_of_input": "busto de atenção candidato; testa e boca fechada são a mudança",
+      "path": "originals/bust_neutral_attempt2.jpg",
+      "sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55",
+      "result": "candidato. No 4× a diferença para o neutro é pequena. Não é ciclo nem aprovação."
+    }
+  ]
+}

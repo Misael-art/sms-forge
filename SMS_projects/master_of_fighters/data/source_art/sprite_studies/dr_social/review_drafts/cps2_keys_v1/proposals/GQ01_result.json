@@ -1,0 +1,21 @@
+{
+  "id": "GQ01_three_quarter_guard",
+  "status": "closed_hypothesis_not_drawn",
+  "not_measured": true,
+  "not_an_approval": true,
+  "attempts": [
+    {
+      "file": "originals/GQ01_three_quarter_guard.jpg",
+      "sha256": "95648b1bf5894d734e842467c52f77f83a73c72a9c7ebeda7589fd2b63542f88",
+      "defect": "O corpo vira e o punho sobe, mas a cauda do casaco continua atrás da bota e a mão segura a haste abaixo do cabo."
+    },
+    {
+      "file": "originals/GQ01_attempt2.jpg",
+      "sha256": "69bedbff99dee51bf6645cda9f3452634017f9207fda9a7fd7753fd9ce430871",
+      "prompt": "prompts/GQ01_attempt2.txt",
+      "defect": "A mão passa ao cabo curvo e a haste continua vertical com ponta de latão, mas a cauda do casaco segue atrás. A hipótese de empilhar a barra com as botas não foi desenhada."
+    }
+  ],
+  "why_not_measured": "Duas tentativas não produziram a silhueta da hipótese. Medir a cauda aberta não testa a largura de 32 px e não autoriza alcance novo.",
+  "dependency": "Uma guarda em que cada linha opaca caiba em 32 px na escala extra 7/9, com o cabo dentro da luva como em J01, antes de qualquer intervalo."
+}

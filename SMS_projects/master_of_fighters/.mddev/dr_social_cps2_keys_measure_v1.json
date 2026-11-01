@@ -1,0 +1,42 @@
+{
+  "schema": "sms_authored_sprite_sample_v2",
+  "project_root": "..",
+  "sprite_size": "8x16",
+  "extra_scale": [1, 1],
+  "canvas_px": [128, 128],
+  "pivot_px": [64, 112],
+  "positions": [[16, 40], [136, 40]],
+  "shared_palette_codes": [0, 16, 21, 42, 63, 22, 27, 47, 20, 56, 57, 1, 11, 3, 7],
+  "measurement_note": "Estudo de composição. extra_scale 1/1 deixa só o encaixe de framebuffer CPS2→SMS do adaptador. Não aprova 35/52 nem a paleta.",
+  "poses": [
+    {
+      "id": "idle",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J01.png",
+      "sha256": "db9a9de09cd474db2d7d32a6295fdadf0094d30294b90b16acc3999bba40aef5",
+      "pivot": [64, 116],
+      "sample_rect_px": [0, 0, 128, 128]
+    },
+    {
+      "id": "BC04",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/indexed_study/BC04.png",
+      "sha256": "ec2aab98d509e019eff796b67bdd414c80f3bf967d025df61354ba2d965ff164",
+      "pivot": [64, 116],
+      "sample_rect_px": [0, 0, 128, 128]
+    },
+    {
+      "id": "K04",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/indexed_study/K04.png",
+      "sha256": "c483acd5a6ee5cd9d19d67b4884692b74a35df598f65e053a23685ec9d41db26",
+      "pivot": [64, 116],
+      "sample_rect_px": [0, 0, 128, 128]
+    }
+  ],
+  "durations": [2, 2],
+  "reference": {
+    "path": "out/diagnostics/dr_social_cps2_sample_v1/ken_a0_g0_i0.png",
+    "sha256": "12544d97e09170385fb772154cfc9995ac7895ed30c54167155eecea6488ec91",
+    "pivot": [33, 94],
+    "extra_scale": [2, 3],
+    "role": "authorized Ken idle construction/composition reference only"
+  }
+}

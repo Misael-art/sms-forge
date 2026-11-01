@@ -27,6 +27,44 @@
       "scope": "Aprova direção e escopo do moveset; não aprova pixels, frame data, balanceamento, hitboxes ou budget SMS."
     }
   },
+  "production_2026_11_01": {
+    "status": "keys_started_package_incomplete",
+    "not_an_approval": true,
+    "route": "Amostra CPS2 v8 é a âncora de construção atual. A folha de 61 poses permanece referência histórica aprovada, sem substituir essa rota.",
+    "scale_note": "Corpo em pé da fonte J01 mede 104 px, coroa–sola. Transformação comum 35/52 leva esse corpo a 70 px. O derivado SMS já existente da amostra mede 59 px de bbox e não fecha o alvo 66–72.",
+    "matrix": "doc/dr_social_coverage_matrix_v1.json",
+    "visual_response_gaps": [
+      {
+        "id": "hit_high",
+        "role": "resposta visual a golpe alto; não é ataque, invulnerabilidade, parry ou comando"
+      },
+      {
+        "id": "hit_low",
+        "role": "resposta visual a golpe baixo"
+      },
+      {
+        "id": "hit_air",
+        "role": "resposta visual a golpe no ar"
+      },
+      {
+        "id": "guard_impact",
+        "role": "impacto de guarda em pé"
+      },
+      {
+        "id": "guard_low",
+        "role": "guarda baixa"
+      },
+      {
+        "id": "ko_rest",
+        "role": "repouso de KO, distinto de derrota por tempo"
+      },
+      {
+        "id": "ko_getup",
+        "role": "retorno depois do KO"
+      }
+    ],
+    "portrait_crop": "A cena 07 não contrata retângulo em pixels. Há busto candidato de atenção, busto de fala e placas de tiles da conversa. A placa versus é outro papel e também é candidata. Nenhuma é ROM, texto de runtime ou aprovação."
+  },
   "source_research": [
     {
       "id": "gamefaqs_sms_guide",

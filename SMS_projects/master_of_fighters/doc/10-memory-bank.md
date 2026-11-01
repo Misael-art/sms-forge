@@ -14,6 +14,39 @@ Receitas/relatórios em `out/diagnostics/social_scale_review_20261101/`.
 Portraits atenção/fala foram vistos como estudos de layout, não paleta/arte SMS
 ou cena implementada. GDD e fontes permanecem intactos; aceite pendente.
 
+## Medição do par e retrato da conversa — 2026-11-01
+
+A seção acima é a conferência do coordenador. O que segue é o que este
+produtor fez depois dela. A bengala não ganhou intervalos. O adaptador aceita qualquer razão extra
+entre 0 e 1, depois do encaixe CPS2→SMS. 1/1 e 4/6 foram dois casos, não
+o limite da ferramenta. 35/52 direto não é essa razão aplicada por cima
+do encaixe.
+
+O coordenador mediu a faixa do GDD sem que este produtor repetisse o
+teste: extra 7/9 dá 69 px e extra 4/5 dá 71 px; guarda e toque falham no
+par com o Ken de construção (picos 9/10). Modo 8×8 e fase (3,9) também
+falham. Isso não torna 66–72 impossível e não aceita baixar o corpo para
+60 px. Na leitura dos pixels de 7/9, a sola da guarda tem três linhas de
+33–34 px e a bengala chega a 39 px; nenhuma fase coloca todas as linhas
+em quatro colunas. O Ken ocupa quatro nas mesmas faixas. Pico de
+simulador não é sprite visto caindo no emulador. Não há ROM.
+
+A proposta de guarda em três quartos foi desenhada duas vezes e fechada:
+o corpo vira, mas a cauda do casaco continua aberta. Não foi medida.
+As placas de tiles da conversa estão em `preview/conversa07_sms_attention_256.png`
+(`62a084cd…`) e na fala (`7b6e1d80…`), com glifos de 8×8, ç/ã/í e sonda
+de palco. Não provam texto de runtime. BC04, K04 e RL05 permanecem chaves.
+
+O comparativo do par está em `proposals/pair_conflict_comparative_v1.json`:
+a função de guarda e o alcance da bengala ficam como estão; a guarda em três
+quartos não empilhou a cauda e não foi medida. O dono decide alvo, alcance e
+identidade. A placa versus neutra é `preview/versus_neutral_sms_256.png`
+(`48c1ff4f…`), 182 tiles, 5824 bytes se cada um for 4bpp, sem ROM. Vitória
+(`d089c087…`) e derrota (`357f1c39…`) usam o mesmo layout e o mesmo vão vazio.
+O sorriso ainda se lê no 4×. A derrota fica mais fechada que o neutro e não é
+sequência. Seleção e as quatro expressões de conversa que faltam continuam
+por fazer.
+
 ## Revisão das primeiras chaves e novo direcionamento — 2026-11-01
 
 O proprietário pediu conferir a compreensão do artista e possíveis referências
@@ -52,14 +85,21 @@ reúne autoridades, três fontes com hashes conferidos, método CPS2 aprovado em
 portraits de conversa. Distingue fonte ~104 px do alvo corporal SMS 66–72 px;
 proíbe encolher poses largas, promover fonte histórica por nome ou autoaprovar.
 
-O pedido autoriza preparar a produção candidata integral de um personagem;
-não é aceite de pixels, moveset novo ou promoção a produção. O futuro artista
-segue incrementalmente e entrega ao coordenador; ainda não foi iniciado nesta
-tarefa. Não houve nova geração, conversão, ROM ou QA. Conferidos caminhos,
-workflows, hashes das três imagens, cobertura dos 28 IDs e diff documental.
-Próximo passo: executar o prompt em tarefa de artista, depois revisar pacote,
-composição, animação e provas antes de iniciar outro personagem. Base desta
-incumbência: `7aa7d1a`; commit documental de fechamento registra o prompt.
+O pedido autoriza a produção candidata integral de um personagem; não é aceite
+de pixels, orçamento, balanceamento ou personagem pronto. Em 2026-11-01 a
+produção começou e não terminou. Três fontes conferidas pelo SHA do prompt.
+J01–J06 v8 não foram refeitos. Chaves novas, ainda sem intervalos e sem ROM:
+toque de bengala `BC04` (`ee6d3259…`), checagem de bota `K04` (`98d72ee5…`) e
+estocada `RL05` (`14944cc0…`), em
+`data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/`.
+A primeira tentativa da bengala, com o cabo na ponta, está preservada e
+rejeitada. Corpo da fonte J01: 104 px. A razão comum 35/52 põe a guarda, o
+toque e a bota em 70 px de coroa a sola, sola em Y77. O derivado SMS antigo da
+amostra continua em 59 px e não fecha o alvo. Na mesma razão, a estocada
+sozinha marcava 15 colunas exploratórias; o toque 7 e a bota 5, cada um
+sem adversário. Essa contagem não é o simulador. A medição oficial posterior
+está na seção do topo. Não houve ROM nem FPS. Outro personagem espera o
+coordenador e o dono.
 
 ## Direção de fã, campanha e carisma — proprietário, 2026-11-01
 
