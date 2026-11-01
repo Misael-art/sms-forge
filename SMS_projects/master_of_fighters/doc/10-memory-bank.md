@@ -1,5 +1,94 @@
 # 10-memory-bank — master_of_fighters
 
+## Revisão de game design — 2026-11-01
+
+**Estado: contratos documentados; aceite de combate e experiência completa
+pendente.** Pedido atual: atuar como game designer no consumidor existente,
+preservando decisões do dono. Resultado nos documentos canônicos:
+
+- GDD: identidade/fonte/arsenal/papel dos nove heróis e quatro chefes;
+  separação de decisões, hipóteses e evidência; seis ações de Social e duas
+  amostras diagnósticas, sem promover os 44 golpes do draft.
+- Proposta individual de Social: intenção, ameaça, trajetória, resposta,
+  vulnerabilidade, hit/block/whiff e retorno de cada ação; Super mantém três
+  ramos e não cria terceiro especial; estados comuns ligados às transições.
+- Roteiro: escolha → preparação → decisão/consequência → encerramento.
+- Spec: contratos de seleção 01, duelo 02, arcade 03 e diagnóstico D01,
+  incluindo extremos, simultaneidade, informação e critérios de legibilidade.
+- TDD: interface entre pose/regra/resultado e ownership/transições a integrar.
+- Ficha J.J.: corrigidas precedências de arma, fonte e escala histórica;
+  concept v5/fonte v6 sem FX e tempos aceitos permanecem preservados.
+
+Não há alteração de C, arte, dados de runtime ou ROM neste lote. Mudanças
+locais preexistentes da placa e do motor rev2 foram preservadas e não fazem
+parte do incremento de design. `cena01_duel_read`/`MOF_CENA01` é o nome
+técnico histórico de D01, uma amostra de **duelo 02**, não seleção 01.
+Históricos abaixo permanecem com seus aceites e limites; esta seção é a
+consulta atual do trabalho de design, sem reescrever evidência antiga.
+
+### Interação realmente experimentada
+
+ROM existente `90ea0f98febf4e047e6ca4637af1c454dd9ac7971e5b0bd00fec058c5ebf2405`
+(32 KiB), perfil J.J. à direita/Social à esquerda com placa. QA nativa
+`/root/design_runtime_qa`, pedido `2d7e9e80c82345da8f030fa1dd7bf5a4`, sessão
+`d4d91c97840f45d1b46f85dab83e6db6`: **2/2 casos diagnósticos passaram**,
+174/174 framebuffers iguais às seis composições legais. Input2 desativa
+autoplay; duas novas pressões de input1 apresentam S01–S05 e retornam à guarda.
+No vídeo zero-based: primeira ação 80–101, guarda 102–131; segunda 132–153,
+guarda 154–173. Exposições 7/4/2/3/6 preservadas. Primeiro ciclo automático
+nos índices 1–22 está registrado separado e não foi contado como input manual.
+
+Input aplicado na ponte em VDP198/250, preparação apresentada em VDP201/253:
+três avanços ponte→imagem, sem timestamp de aceite interno; não é latência
+competitiva ou tempo de parede. Terminal VDP294 confirma pose0/keys0/hold0;
+C7F7 não integra esse contrato e foi ignorado. Social, nomes, barras e chão
+continuam estáticos e sem FX. Conferência do coordenador incluiu relatório,
+timeline e quadro nativo de ação; sem alegar percepção de playback contínuo.
+
+Self-checks de captura/corredor/auditor passaram; corredor tem 14 sondas e
+folga 1.784 B no map da ROM. Auditoria do relatório, incluindo `--require-passed`
+e `--current-rom`, passou. Sessão fechada, quatro processos próprios ausentes
+por PID/start_ticks. Não houve build repetida nem medição FPS/VBlank/áudio.
+
+Evidência primária em
+`out/diagnostics/game_design_contracts_20261101/qa/run_8bd9c1a8e4064222ad58f195847c3033/`:
+`report.json`, `case_0.mp4`/frames, `frame_comparison.json`, `commands.jsonl`,
+`case_1_probe.json`, `audit_report.json` e `cleanup_confirmation.json`.
+Índice durável, hashes, retenção e limites em
+`doc/game_design_contracts_review_v1.json`. Vídeo stepped prova sequência,
+não FPS, pacing ou compreensão humana. Essa QA não aprova a placa como arte
+final nem reabre os aceites existentes de Hayato/J.J.
+
+### Blocker e handoff deste recorte
+
+Defeitos documentais corrigidos: numeração ambígua de cena, ficha de J.J.
+com arma/escala superadas e falta de ligação entre ação, consequência e retorno.
+Nenhum defeito de ROM foi encontrado contra os dois casos atribuídos. Barras
+estáticas e rival sem resposta são **limitações diagnósticas**, não evidência
+de gameplay nem nova regressão. Não foi registrado gosto estético como defeito.
+
+O principal limite da experiência é a ausência do ciclo de combate neste
+consumidor. Próximo passo: dono/design resolvem GD01/GD02 (comandos, regras de
+contato/recuperação e valores ainda abertos) para o kit já aprovado de Social;
+engenharia fecha GD05 na integração oficial e mede GD06 antes de arte extra.
+Não implementar o disparo de J.J. ou outro moveset por inferência deste pedido.
+GD03 mantém decisões individuais/identidade; GD04 fecha resultado/arcade;
+GD07 exige teste com público. Responsáveis, condições e casos estão no GDD.
+
+Não experimentados: seleção/arcade, deslocamento/guarda, hit/block/whiff,
+objetos, rounds, economia de Super e playtest de compreensão. Aceite funcional
+alvo60/piso58, pior frame integrado, áudio e época visual delivery continuam
+pendentes; números históricos de pares não se transferem para esta ROM.
+Não ampliar elenco, golpes, cenários ou sistemas para contornar essa ausência.
+
+Continuidade: branch `codex/host-bootstrap-continuity-20261024`, base
+`d7f1eff952f48a7705c4e7b765addb13df783df6`, PR4 existente. SHA final,
+verificações documentais e confirmação remota ficam no recibo
+`out/diagnostics/game_design_contracts_20261101/publication.json`.
+Retenção privada local usa o destino de recuperação existente; não é release
+nem backup fora deste host. Relatório histórico Social61v5 ausente permanece
+pendência preexistente da curadoria, sem relatório fabricado neste lote.
+
 ## Aceite do proprietário — J.J. fechado neste recorte
 
 O proprietário respondeu **“aprovado”** à entrega6677d5d, que apresentou o

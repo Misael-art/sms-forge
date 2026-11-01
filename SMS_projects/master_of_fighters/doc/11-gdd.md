@@ -1,5 +1,128 @@
 # 11-gdd — master_of_fighters
 
+## Contrato de experiência — revisão de design de 2026-11-01
+
+**Estado: documentado; interação de combate pendente.** Este recorte organiza
+o design existente para artista e desenvolvedor. Não autoriza novos golpes,
+personagens, arsenal, sistemas ou alteração dos desenhos/tempos já aceitos.
+Decisões específicas do dono prevalecem sobre propostas antigas abaixo.
+`movesets_draft.json` é histórico não aprovado; seus números não são defaults.
+
+O jogador deve reconhecer quem ameaça, escolher uma resposta, perceber o
+resultado e saber quando recuperou o controle. Público de trabalho: jogador
+de luta 1v1 com controle SMS de dois botões; familiaridade e compreensão ainda
+precisam de playtest. Não há evidência de diversão, acessibilidade dos comandos
+ou balanceamento com público. O caminho de experiência está no
+[roteiro](12-roteiro.md) e os contratos completos de telas estão na
+[especificação de cenas](13-spec-cenas.md#contratos-de-experiência-das-cenas--2026-11-01).
+
+### Vocabulário de contrato e autoridade
+
+- **Decisão registrada:** escolha do proprietário, com fonte indicada. Não
+  reabrir o mesmo aceite; qualidade de produção continua com gates próprios.
+- **Hipótese de design:** comportamento proposto para discussão/teste; não
+  vira tabela de runtime, hitbox ou pedido de arte final automaticamente.
+- **Observação:** entrada/estado/framebuffer de ROM identificada; vale somente
+  para a interação e o SHA observados. Preferência estética fica separada.
+- **Pendente:** decisão, capacidade ou evidência ausente, com responsável e
+  condição de fechamento. Nunca preencher com os números de outra ROM.
+
+IDs de cenas do GDD permanecem **01 seleção, 02 duelo, 03 arcade**. O nome
+histórico `cena01_duel_read`/`MOF_CENA01` identifica uma **amostra diagnóstica
+da cena 02**, aqui chamada D01. Não renomear arquivos nem interpretar essa
+placa como seleção implementada. Chefes estão registrados; se/quando ficam
+jogáveis e como desbloquear continuam decisões abertas, apesar da antiga frase
+“4 chefes desbloqueáveis” na tabela histórica.
+
+### Identidade por personagem
+
+“Papel a discutir” e sugestões de atuação nesta tabela são hipóteses de design,
+não novas biografias canônicas. Para todos, fonte externa informa somente o
+papel autorizado; pixels/poses não são copiados. Concepts aprovadas liberam
+referência visual, não moveset. Escalas individuais são as do contrato de
+roster abaixo; classe de peso não redefine biotipo.
+
+| Personagem | Identidade, biotipo e atuação | Equipamento/capacidades e fronteira de referência | Papel e distinção; situação |
+|---|---|---|---|
+| Guerreiro de Golden Axe | Jovem aventureiro ágil, esguio; elmo com chifres, torso descoberto e capa de pelo azul da concept v2. Atuação proposta: coragem com compromisso de corpo inteiro, sem virar brutamontes. | Golden Axe Warrior SMS e [decisão v2](decisions/ga-warrior-concept-v02-sms-palette_owner_approval.json): espada e escudo. O nome Golden Axe não autoriza trocar espada por machado, cavalo ou magia. | Classe pesada do histórico é separada de massa visual. Hipótese: compromisso de espada/escudo para ganhar espaço. Moveset não aprovado. |
+| Hayato | Jovem esguio; samurai, quimono branco, faixa vermelha, hakama laranja-vermelho, cabelo preso. Atuação aceita no corte: carregar, liberar, absorver e recompor a guarda com participação do corpo. | Kenseiden SMS; [concept v2](decisions/hayato-concept-v02_owner_approval.json). Katana e pergaminhos constam do GDD; magia específica não está selada. [Escolha do corte](decisions/hayato-short-cut-timing-only_owner_approval.json) preserva lâmina/traçado original. Referências de coreografia não definem roupa ou arma. | A katana descreve um arco corporal, diferente da estocada linear de Social. Só corte diagnóstico aprovado; não declarar anti-aéreo, overhead, dash ou especial. |
+| Joe Musashi | Ninja de proporção humana esguia, massa de membros usada como referência morfológica. Disciplina/economia de gesto são hipóteses de atuação. | Roster cita Shinobi; decisão visual posterior aceita Joe/Takashi de Shadow Dancer SMS com acentos amarelos, registrada no memory bank e no lineage do conceito. Isso não resolve sozinho nome/continuidade de combate. Traje clássico de Shinobi é alterno registrado. Cão, clones, substituição invulnerável e shuriken do draft não são moveset autorizado. | Hipótese de mobilidade/engano distinta de arma laser. Dono precisa conciliar nome/fonte do personagem antes de fechar ações; preservar imagem aprovada. |
+| Dr. Ferdinand Social | Humano, psicólogo investigativo; adulto esguio, grisalho, óculos de latão, casaco azul/ciano. Metódico e preciso, sem transformação vampírica ou controle mental. | Master of Darkness SMS + [model sheet v4](decisions/dr_social_model_sheet_cps2_alpha_cel_v04_owner_approval.json). Bengala romba, rapieira e bumerangue de aço formam o kit aprovado; violeta só no bumerangue. Armas listadas no original não autorizam novos golpes. | Duelista de alcance médio que pune erro de distância. Bengala é assinatura; luva/bota são suporte; rapieira e bumerangue os dois especiais; Laudo Final é contra-leitura. Direção aprovada em 10/10; contratos abaixo. |
+| Karateca de Black Belt | Artista marcial; nome próprio e biotipo final não decididos. Hipótese: atuação direta, base e transferência de peso claras, sem imitar o jab investigativo de Social como identidade inteira. | Black Belt SMS conforme roster. Versão japonesa não autoriza importar identidade/lore por associação. Sem concept aprovada localizada para este personagem; armas e energia projetada não autorizadas. | Papel de curta distância a discutir. Nenhum dos quatro golpes do draft, inclusive multi-hit, está fechado. |
+| Bruxa de Psychic World | Artes marciais e capacidades psíquicas no GDD; personalidade, nome e morfologia final pendentes. Hipótese: concentração legível antes de liberar poder, em vez de gestos idênticos aos espadachins. | Psychic World SMS. Não há concept aprovada localizada. O rótulo “bruxa” e o draft não autorizam varinha, teleporte, magia específica ou traje novo. | Papel psíquico a discutir com fonte e dono; sem dois especiais fechados. Não encomendar orbe/teleporte como se já aprovados. |
+| Alis Landale | Jovem heroína, proporções humanas sem leitura chibi. Atuação proposta: determinação e guarda com escudo, não comportamento de tanque. | Phantasy Star SMS, [concept v4](decisions/alis-landale-concept-v04_owner_approval.json): família magenta/índigo/marfim, cabelo castanho-dourado, espada curta e escudo leve registrados. Referência cromática não aprova magia ou rolamento invulnerável. | Hipótese: alternar proteção e tomada de espaço próxima, distinguindo-se do compromisso pesado do Guerreiro. Moveset e personalidade detalhada ainda não selados. |
+| Landau | Jovem adulto do norte, sem barba/bigode; túnica verde, couro e calça azul. Hipótese de atuação: firmeza e atenção à distância, sem envelhecer/engrossar o corpo por classe pesada. | Lord of the Sword SMS/manual US conforme [concept v1](decisions/landau-concept-v01_owner_approval.json) e memory bank: espada, arco e aljava. Sprite lateral é referência; pose de luta precisa autoria. Escudo, coroa e raio solar do draft não estão aprovados. | Distinção potencial: decisão de distância entre espada e arco, sem atribuir munição ou novos golpes. Papel/moveset pendentes. |
+| J.J. | Jovem esguio e ágil, uniforme vermelho/magenta e proteções claras, cabelo azul. Atuação aceita da amostra: preparar a arma, executar uma ação e recolher à guarda. | Zillion II SMS rege identidade/cores/mecânicas; anime só esclarece figurino. [Aceite atual](decisions/jj-zillion-character_owner_approval.json): concept v5/fonte v6, Zillion longa, baixa, angular navy/cyan proporcional ao corpo; seis desenhos sem FX. Prancha Waku Waku 7 aprovada rege a correção específica da arma, não mecânicas. | Mobilidade/laser de médio alcance são proposta. Amostra aceita não emite projétil e não causa dano. Armorater, coronhada e demais ações continuam pendentes na [ficha](jj/jj_character_design.md). |
+| Ninja Master | Chefe de Shinobi registrado; personalidade, biotipo e forma de atuação ainda não contratados. Hipótese: testar leitura do ninja com ameaças reconhecíveis. | Shinobi é fonte declarada; sem concept/arsenal de luta aprovado identificado. Clones, nuvem de shurikens e agarrão do draft não são autorização. | Papel de chefe precisa padrões, pista e saída testáveis. Dificuldade não pode decorrer de hitbox falsa invisível. Moveset/jogabilidade pendentes. |
+| Count Dracula | Antagonista de Master of Darkness; não transferir sua identidade ao Social. Morfologia e atuação de luta ainda pendentes. Hipótese de presença ameaçadora com oportunidades claras de aproximação. | Master of Darkness, distinto do protagonista. Transformação, morcegos, bruma, cura e invulnerabilidade do draft não têm aceite individual. | Chefe a discutir; nenhum padrão ou fase aprovado. Definir limites de recuperação antes de contratar poderes. |
+| Luter | Chefe de Phantasy Star registrado; nome, aparência final, personalidade de combate e equipamento requerem ficha específica. | Phantasy Star conforme roster. Draft de barreira, raio e segunda forma não aprova capacidade nem aceleração por vida baixa. | Hipótese: pressão por padrões aprendíveis. Fases, papel e desbloqueio pendentes. |
+| Dark Force / Dark Falz | Entrada de chefe com identidade/fonte ainda explicitamente em aberto. Não fixar biotipo, personalidade, tentáculos ou escala antes da decisão. | GDD registra dúvida sobre encarnação/origem PSII e escopo SMS. Preservar a dúvida; não resolver por nome semelhante ou importar arte de outro console. | Sem papel ou golpes executáveis. Dono decide encarnação/fonte antes de qualquer contrato de arte, transformação, agarrão ou ataque de tela inteira. |
+
+As diferenças de papel dos personagens sem moveset aprovado são perguntas de
+design para a construção individual, não expansão autorizada. Cada futuro
+golpe deve justificar **por que este corpo e este equipamento realizam esta
+ação**, e demonstrar uma decisão que não se resuma a trocar a aparência de
+um soco/projétil comum.
+
+### Contratos dos movimentos com escopo atual
+
+Social tem seis ações de combate aprovadas como direção: jab, bengala, chute
+baixo, rapieira, bumerangue e Super com três ramos. Intenção, preparação,
+trajetória, resposta, risco, hit/block/whiff e retorno estão em
+[contratos de experiência do moveset](dr_social_combat_design_proposal_v1.md#contratos-de-experiência-por-movimento--2026-11-01).
+O contrato de animação `dr_social_animation_contract_v2.json` continua sendo
+a fonte dos IDs/tracks. `cane_riposte` não é um sétimo ataque nem terceiro
+especial; os quatro IDs antigos do draft não competem com os atuais.
+
+| Ação diagnóstica | Intenção, preparação e trajetória | Resposta/risco/consequência | Recuperação e aceite |
+|---|---|---|---|
+| Hayato — corte curto R01–R06 | Ler um único corte de katana: carga alta → liberação → corte → absorção baixa → retorno cruzado → recuperação alta. Corpo, apoio e arma trabalham juntos; artista preserva os desenhos v4 aceitos, sem smear rejeitado. Alcance competitivo e altura de ataque não definidos. | Há demonstração de arma em arco, não ameaça com colisão. Hipótese para futuro combate: o rival reconhece carga, administra distância e pune comprometimento no erro. Acertar/bloquear/errar ainda não existem nesta amostra; não atribuir dano, prioridade ou invulnerabilidade. | Volta à guarda original. Exposições aceitas 8/1/2/7/2/5 são timing artístico do perfil v7, não startup/active/recovery competitivo. Aceite artístico permanece fechado; contrajogo/contato dependem de decisão e ROM de luta. |
+| J.J. — amostra de disparo I00/S01–S05 | Preparação reconhecível da Zillion, ação única e recolha; arma inteira ligada à pega. Seis desenhos e proporção da fonte v6 preservados. Não desenhar emissão, bala, sparks ou flash neste asset. | Nesta ROM o oponente permanece em guarda e nada recebe hit. Hipótese futura: alinhar a arma comunica ameaça linear e recolher comunica compromisso; alcance, altura, resposta do rival e distinção raio/projétil dependem da decisão individual. Não alegar que o tiro atual pode ser bloqueado ou evitado. | I00 → S01–S05 → I00; 7/4/2/3/6 aceitos. Testar acionamento, retorno e nova entrada na amostra; hit/block/whiff ficam pendentes no futuro contrato de objeto/combate. |
+
+### Fronteira dos movimentos ainda não aprovados
+
+O draft de 44 ações permanece preservado para rastreio. Cada grupo abaixo
+tem a mesma disposição: **não executar como moveset; discussão individual
+pendente**. Não transformar seus tempos herdados em números de combate.
+
+| Personagem | IDs do draft a resolver com o dono; causa |
+|---|---|
+| Guerreiro | `axe_swipe`, `shield_bash`, `wave_of_death`, `mount_charge`: machado/cavalo/magia não derivam da espada/escudo aprovados. |
+| Landau | `royal_slash`, `shield_push`, `solar_beam`, `royal_justice`: nomenclatura real/escudo/raio e overhead não aprovados para espada/arco. |
+| Hayato | `katana_cut`, `diagonal_slash`, `scroll_fire`, `iai_dash`: corte diagnóstico não sela esses IDs nem suas propriedades. |
+| Joe | `quick_punch`, `low_lunge`, `shuriken`, `wood_body`: conciliar fonte/identidade e decidir kit, especialmente invulnerabilidade. |
+| Social | `cane_jab`, `rapier_thrust`, `occult_boomerang`, `duel_pistol`: proposta antiga superada pela direção individual de 10/10; não criar aliases automáticos. |
+| Karateca | `jab`, `cross`, `flying_kick`, `lightning_kick`: derivar atuação própria; multi-hit permanece aberto. |
+| Psychic World | `wand_swing`, `sweep`, `psychic_orb`, `teleport_backhit`: equipamento e poderes não selados. |
+| Alis | `dagger`, `kick`, `energy_wave`, `dodge_counter`: reconciliar espada/escudo; energia e invulnerabilidade não aprovadas. |
+| Ninja Master | `clone_dash`, `shuriken_cloud`, `shadow_grab`: pistas, instâncias, captura e multi-hit pendentes. |
+| Dracula | `bats`, `mist_tp`, `life_drain`: capacidades, recursos e contrajogo pendentes. |
+| Luter | `barrier`, `dark_bolt`, `second_form`: fase e mudança de cadência não aprovadas. |
+| Dark Force | `energy_orbs`, `tentacle`, `nova`: identidade anterior ao moveset; tela inteira/multi-hit sem orçamento. |
+| J.J. (arquivo separado) | `zillion_laser`, `armorater_shift` e direções de soco/chute/coronhada em `jj_moveset_concept_v1.json`: somente a amostra corporal foi aceita; nenhum especial de combate selado. |
+
+### Decisões e hipóteses abertas para execução
+
+| ID | Responsável e questão | Como fechar / evidência necessária |
+|---|---|---|
+| GD01 | Dono + design: comandos de dois botões, precedência, buffer/cancel e guarda alta/baixa | Decisão individual registrada; testar execução e neutralização nos dois lados, comando incompleto e input mantido. Botões 1/2 do viewer não são layout competitivo. |
+| GD02 | Dono + design: escala de vida, dano/chip, vantagem, hitstop e economia do Super | Aprovar regras; medir hit/block/whiff, interrupção e retorno na mesma ROM, inclusive sem barra e barra cheia. Não converter exposições diagnósticas em frame-data. |
+| GD03 | Dono: movesets individuais e conflito de identidade Joe/Dark Force | Registrar fonte e limite de cada decisão; só então roteiro/coreografia e budget de cada nova ação. |
+| GD04 | Dono + design: empate, time-over empatado, continue, ordem de arcade e desbloqueio | Decidir destinos exatos; testar último round/último oponente, derrota e retorno à seleção, sem prêmio duplicado. |
+| GD05 | Engenharia: ligação do consumidor ao motor e ao estado de combate | Provar entrada → comando → ação → contato/guarda/erro → estado/vida → recuperação, com IDs e frames. Contrato de integração no TDD; não substituir pela demo de poses. |
+| GD06 | Arte + engenharia: composição em contato e carga simultânea | Medir ambos os atores em todas as distâncias/poses necessárias, HUD/objeto autorizado/PSG e pior frame. A posição fixa com pico 8 não prova aproximação. Preservar função do golpe; negociar mudança que afete alcance/identidade. |
+| GD07 | Design + QA: clareza e controle percebidos | Playtest com tarefa sem ensinar resposta, ROM/SHA, tentativas, relato literal, frames e distinção observação/interpretação. Parecer de agente não é teste com público. |
+
+Aceite futuro de cada movimento: preparação aparece antes da consequência;
+alcance desenhado e contato concordam; defesa/erro recebem respostas distintas;
+há contrajogo executável; retorno permite nova ação sem estado preso. Conferir
+ambas as faces, perto/longe, borda, input mantido/solto/repetido e transição de
+round. Nenhum teste sem implementação vira PASS por contrato. Áudio deve
+reforçar a leitura visual sem ser sua única pista. Alvo 60 FPS, piso 58 em
+cada janela válida sem arredondamento, lógica/apresentação coerentes e pior
+frame medido na carga real; PAL50 não paga aceite. Resultado desta revisão e
+pendências constam no memory bank, sem promoção de produção.
+
 ## J.J. — seleção aprovada pelo proprietário
 
 A resposta “aprovado” fecha o conceptv5/fontev6, a proporção da Zillion,

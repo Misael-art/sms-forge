@@ -1,5 +1,77 @@
 # 15-tdd — master_of_fighters
 
+## Interface de execução do design — 2026-11-01
+
+**Documentado, implementação pendente.** [GDD](11-gdd.md#contrato-de-experiência--revisão-de-design-de-2026-11-01),
+[roteiro](12-roteiro.md) e [cenas](13-spec-cenas.md#contratos-de-experiência-das-cenas--2026-11-01)
+definem o que precisa ser percebido e testado. Este lote não modifica C,
+dados de runtime, assets ou ROM. Reutilizar o consumidor e o pipeline oficial;
+não criar outro motor/viewer para fazer os contratos parecerem implementados.
+
+### Movimento: separar apresentação, regra e resultado
+
+O contrato executável futuro deve associar ID de movimento, gatilho/comando,
+estado inicial, fases lógicas, ID da pose apresentada, orientação/pivô,
+deslocamento, caixas, elegibilidade de contato, custo, interrupção/cancel e
+endpoints hit/block/whiff. `pose_duration` artístico não é `active`; `hitstop`
+é evento lógico finito com saída, não atraso de upload. Não copiar números de
+`movesets_draft.json` ou MSSF2T para preencher campos abertos.
+
+Na ROM atual, `probe_state` (C7F6) é pose submetida, `probe_keys` (C7F8) é
+input observado no loop e `probe_hold` (C7F9) é exposição; não são FSM de luta,
+hit confirmation ou vida. SMRT C7E0/C7F0 e selo VBlank são instrumentos
+diagnósticos. Para contato, engenharia deve expor IDs/frames e resultado do
+oponente sem sobrepor DATA; o protocolo concreto e o budget dessa
+instrumentação ficam pendentes, com corredor auditado antes de leitura.
+
+Traço futuro precisa distinguir: aplicação na ponte, aceite na ROM, primeira
+reação visual, contato/guard/erro, alteração do rival/HUD e primeiro retorno
+controlável. Captura manual da placa mediu somente ponte→imagem e terminal.
+Não converter três avanços VDP observados em promessa universal de latência.
+
+### Ownership e transições propostas
+
+Owners lógicos propostos: FSM global é dona de cena/round/resultado;
+adaptador de input é dono dos comandos/edges; FSM do lutador é dona da ação/
+movimento/controle; resolução de combate é dona de contato/vida; pool de
+objetos é dono do bumerangue autorizado; apresentação é dona de SAT/padrões/
+PNT/paletas/scroll; áudio é dono dos canais e sua restauração. São
+responsabilidades para integrar na implementação oficial, não novos módulos
+obrigatórios nem prova de memória alocada. HUD lê o resultado lógico e não
+altera vida por animação.
+
+| Aresta/gatilho | Saída e entrada | Persistência, input e recuperação |
+|---|---|---|
+| 01→02, escolha confirmada | Encerrar foco/feedback de seleção; configurar lutadores, apresentação, chão/HUD e round. Trabalho VDP em setup com display off; bytes reais pendentes. | Transportar IDs escolhidos; política de vida/timer/Super depende GD02. Consumir confirmação e neutralizar edges antes de liberar luta, conforme GD01. Não iniciar round com carga incompleta. |
+| Preparação→luta, liberação do round | Apresentações terminam; relógios/controle recebem estado explícito. | Regra de skip/entrada mantida pendente; repetir transição não inicia dois relógios ou ataques. |
+| Luta→resultado de round, KO/time-over | Encerrar hitboxes, objetos, hitstop e eventos ofensivos; fixar resultado lógico e apresentá-lo uma vez. | Placar permanece; evento simultâneo/empate depende GD04. Desligar ameaça lógica antes de apagar só a imagem. |
+| Resultado→preparação, próximo round | Limpar objetos e controles transitórios; reposicionar atores e reconstruir HUD coerente. | Placar da partida permanece; vida/timer e persistência do Super precisam GD02. Nenhum comando antigo ou projétil reaparece. |
+| 02→03, duelo resolvido | Encerrar owners transitórios de luta/áudio e mostrar resultado/etapa. | Transportar vencedor e progresso; desbloqueio é evento único condicionado a GD04. |
+| 03→02, próximo oponente | Encerrar resultado; inicializar duelo com o próximo ID aprovado. | Confirmar uma vez; fim de lista não gera ID inválido. Ordem/dificuldade dependem GD04. |
+| 03→01, conclusão/retorno | Encerrar percurso e restaurar seleção válida. | Desbloqueios/persistência, derrota/continue e cancel dependem GD04; não presumir SRAM ou novas telas. |
+
+Nenhuma dessas transições foi exercitada na ROM da placa. Reset/pausa e falhas
+de carga precisam política explícita quando integrados; não criar novos modos
+de jogo por checklist. Cada aresta exige vídeo + estado/SHA, repetição de
+saída/reentrada e medição do pior frame de carga, sem herdar throughput do
+estado estável.
+
+### Orçamento antes de arte adicional
+
+Para a cena 02, medir distâncias/contatos, ambas as faces e simultaneidade
+real antes de derivar teto de asset. A placa usa pool de sprite já medido em
+posição fixa, P0 de chão/HUD e carga de BG anterior ao loop; não demonstra
+aproximação, objeto, HUD dinâmico ou PSG. Tabela P1 única não é permissão para
+trocar paleta individual em luta. Valores concretos por SHA ficam na spec.
+
+Tradeoff técnico pode alterar packing/residência sem mudar o comportamento
+se a equivalência for demonstrada. Alterar alcance, preparação aceita,
+recuperação, silhueta/escala, arma ou remover pista exige decisão registrada.
+Preservar controle e tentativa reprovada. Engenharia deve medir próximo degrau
+e carga completa; piso58 por janela, input/lógica/apresentação e worst-frame
+continuam pendentes nesta ROM diagnóstica. Implementação de combate depende
+GD01/GD02/GD05, não de mais conteúdo ou de outra folha.
+
 ## J.J. — seleção aprovada pelo proprietário
 
 A resposta “aprovado” fecha o conceptv5/fontev6, a proporção da Zillion,

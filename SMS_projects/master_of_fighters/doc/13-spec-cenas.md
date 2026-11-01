@@ -1,5 +1,195 @@
 # 13-spec-cenas — master_of_fighters
 
+## Contratos de experiência das cenas — 2026-11-01
+
+Vínculo: [GDD vigente](11-gdd.md#contrato-de-experiência--revisão-de-design-de-2026-11-01)
+e [roteiro de interação](12-roteiro.md). Estas cláusulas são intenção e
+critérios de teste; **não são budgets medidos nem autorização de novos sistemas**.
+Seleção = 01, duelo = 02, arcade = 03. D01 identifica somente a placa de
+leitura do duelo cujo nome técnico histórico é `cena01_duel_read`.
+As telas completas ainda não existem no consumidor; sem ROM, critérios ficam
+pendentes. Nenhum valor de RAM, VRAM, áudio ou timing é deduzido destas tabelas.
+
+### Cena 01 — seleção
+
+**Finalidade/informação principal:** escolher uma identidade de luta e entender
+quem está disponível. O roster registrado é nove heróis e quatro chefes;
+disponibilidade/jogabilidade dos chefes aguarda decisão GD04. Não apresentar
+uma célula de chefe como selecionável antes dessa decisão.
+
+**Entrada, saída e transições:** entrada pelo começo do fluxo e retorno de
+duelo/arcade conforme GD04. Inicialização mostra foco, identidade e estado
+disponível/bloqueado coerentes. Confirmar uma escolha válida prepara a cena 02;
+trocar foco não inicia carga de round nem muda seleção confirmada por engano.
+Cancelar/reselecionar, comportamento nas bordas e repetição do direcional
+precisam de comando e política selados em GD01. Não criar uma tela de título
+ou opções não previstas só para resolver esse destino.
+
+**Ações/feedback propostos:** navegar, inspecionar nome/identidade, confirmar e
+corrigir escolha antes da luta. Foco visível e confirmação visual/sonora são
+distintos; escolha indisponível informa o estado e mantém navegação possível.
+O jogador não depende só de cor ou som para saber qual personagem escolheu.
+
+**Hierarquia e simultaneidade:** primeiro foco/nome/disponibilidade, depois
+imagem de identidade, depois contexto. Grid, marca de foco, nomes e imagem
+selecionada disputam BG/P0/P1; não assumir treze lutadores animados simultâneos.
+Não exige HUD de vida/timer/Super aqui. Música de seleção e SFX de navegação/
+confirmação são funções propostas; composição e canais ainda não contratados.
+
+| Situação | Resultado esperado e critério observável |
+|---|---|
+| Normal | Foco e nome correspondem ao mesmo ID; confirmação leva ao lutador escolhido no lado correto da cena 02. |
+| Bordas/segurar/reentrada | Não há foco perdido, escolha dupla ou input de confirmação reaproveitado como ataque. Wrap/repeat aguardam GD01. |
+| Célula indisponível | Estado visual inequívoco; não inicia luta vazia, sem depender de um som de erro. |
+| Identidade/asset não disponível | Bloquear promoção da build; não exibir outro lutador, arte provisória ou seleção falsa como substituto. |
+| Retorno de arcade/derrota | Foco, desbloqueios e seleção seguem a política aprovada; nenhuma persistência é inferida. |
+
+**Qualidade/aceite:** testar seleção e correção sem instrução verbal,
+legibilidade a 256×192 e correspondência seleção→round. Fonte de identidade
+deve continuar reconhecível no retrato e no lutador. Não há budget nem prova
+de seleção nesta revisão; responsável engenharia/UI + arte, decisão GD01/GD04.
+
+### Cena 02 — duelo 1v1
+
+**Finalidade/informação principal:** administrar distância, ameaça e resposta,
+entender a consequência e vencer melhor-de-três rounds. A leitura começa
+antes do primeiro golpe e termina só depois de um resultado compreensível.
+
+**Entrada e preparação:** receber IDs confirmados, carregar composição válida
+com display desligado conforme TDD, estabelecer chão/posições/vida/estado de
+round. Apresentações já contratadas não são gameplay. Distinguir visualmente
+“preparando” de “controle liberado”; duração e skip dependem de decisão, sem
+criar contagem falsa. Primeiro input de combate não pode vir de uma confirmação
+mantida na seleção. Regras de reset de vida, posições e Super ficam explícitas
+antes de implementar; barra entre rounds é GD02.
+
+**Interação:** movimentos/guarda/especiais seguem somente os kits aprovados e
+comandos futuros GD01. Para cada ação, observar input → preparação → ameaça →
+hit/block/whiff → recuperação. Golpe do rival deve ter pista antes do contato;
+IA não pode esconder a preparação para parecer mais difícil. Nível de reação,
+frequência e padrões são hipóteses a testar, não vantagem por acesso ao input.
+
+**Consequência/encerramento:** hit e guard produzem reação corporal/visual e
+SFX distintos; whiff preserva o vazio do contato. Vida, timer e marcadores de
+round devem representar estado real. Ao resolver o round, impedir dano/objeto
+residual, mostrar vencedor/derrota e preparar próximo round ou cena 03.
+Empate, double-KO, time-over, prioridade entre eventos simultâneos e retorno
+após derrota ficam pendentes em GD04; não escolher vencedor pela ordem dos
+atores no código.
+
+**Hierarquia visual:** lutadores/arma ativa/ameaça primeiro; separação do chão
+e apoio sustentam distância; nomes/vida/timer/round/Super informam estado real;
+cenário apoia sem encobrir rosto, punho, ponta da arma ou leitura da guarda.
+Não trocar identidade por silhuetas encolhidas nem congelar atuação para
+acomodar HUD. Efeitos só comunicam eventos existentes e devem deixar contato
+legível. Não usar brilho de cenário como falso hit ou ameaça.
+
+**Simultaneidade contratável:** dois lutadores completos, BG/chão, nomes/vida/
+timer/estado de round e Super quando implementado; objeto/efeito somente se
+autorizado no movimento. Bumerangue de Social é uma instância ativa; a amostra
+J.J. não autoriza projétil. Música, SFX de ataque/impacto/guarda e conclusão
+competem nos canais PSG. Proposta de prioridade sem alocação de canais:
+resultado/contato relevante acima de decoração; som interrompido deve restaurar
+música sem nota presa. Nenhum asset ou canal novo foi produzido aqui.
+
+| Situação | Teste de experiência e evidência necessária |
+|---|---|
+| Neutro e aproximação | Identificar quem controla, orientação, chão e distância; deslocamento corresponde ao input e à animação. |
+| Hit / block / whiff | Mesmo golpe e distância controlada; ligar caixas, pose, vida/guard do rival, feedback e retorno; erro não acerta invisivelmente. |
+| Face trocada/bordas/sobreposição | Preservar corpo, arma e identificação; colisão não depende da ordem de SAT nem sacrifica permanentemente um lutador. |
+| Input mantido/solto/repetido | Sem ação automática não prevista, estado preso ou cancel involuntário; registrar primeiro quadro que aceita nova ação. |
+| Duas ações/objeto/HUD/PSG simultâneos | Simular composição real e observar SAT/framebuffer/pior frame. Espaço livre na SAT total não garante linha livre. |
+| Queda, guarda, Super e interrupção | Estado tem saída; golpe não captura baixo/projétil fora da regra; física aérea continua após hit. |
+| KO/time-over/empate/último round | Resultado único e visível, nenhum ataque residual; destino correto e regras GD04 exercitadas. |
+| Pose ainda não residente/asset inválido | Deadline perdido é defeito, não hitstop; não manter caixa ativa sobre pose velha nem aprovar ator omitido. Bloquear aceite e corrigir causa. |
+
+**Qualidade/aceite:** ação compreensível e coerente com personagem, feedback
+distinto, consequência correspondente ao contato, recuperação observável e
+fim de round funcional. Exige a carga inteira e alvo60/piso58 por janela
+válida (§133), pacing/worst-frame e áudio reais do mesmo SHA. Os pares
+diagnósticos abaixo não pagam aproximação, contato, HUD dinâmico ou rounds.
+
+### Cena 03 — progressão de arcade e retorno
+
+**Finalidade/informação principal:** entender o resultado do duelo, o próximo
+desafio e qualquer desbloqueio realmente conquistado. Hall→chefes/dificuldade
+crescente pertence ao loop do GDD; ordem, critérios de liberação e persistência
+ainda precisam GD04. Não inventar campanha, cutscene, história ou final canônico.
+
+**Entrada, saída e ações:** entrar com resultado único da cena 02; apresentar
+resultado/próximo oponente e aguardar confirmação ou avanço conforme política
+a decidir. Vitória não final prepara próximo duelo; conclusão retorna à
+seleção conforme loop. Derrota/continue, cancel e recomeço aguardam decisão;
+devem sempre conduzir a um estado conhecido, sem repetir concessão de prêmio.
+Prévia de ameaça/identidade do oponente pode usar os retratos já previstos,
+sem criar nova mecânica de scouting ou tela versus adicional.
+
+**Feedback/hierarquia:** resultado primeiro, destino/próximo adversário depois,
+recompensa só se efetivamente aplicada. Vitória/derrota não podem compartilhar
+texto ou pose contraditórios. Personagens/retratos, nomes, indicador de etapa
+e eventual marca de desbloqueio formam a composição; não exigir todos os
+combatentes animados. HUD de luta deve ser encerrado, não congelado como se a
+luta continuasse. Áudio de conclusão/transição dá respiro e prepara a próxima
+entrada; duração, faixa e canais pendentes.
+
+| Situação | Critério observável |
+|---|---|
+| Vitória intermediária | Resultado e próximo ID corretos; confirmação inicia o próximo duelo uma vez. |
+| Último oponente | Encerramento legível e retorno à seleção; sem ID inexistente nem retorno infinito ao chefe. |
+| Derrota/empate | Mensagem, pose e destino coerentes com GD04; não anunciar vitória por ausência de regra. |
+| Input mantido/reentrada | Não saltar resultado sem política nem duplicar avanço/desbloqueio. |
+| Recompensa já obtida | Estado permanece consistente; persistência e reinício definidos pelo dono, não presumir SRAM. |
+| Dados incompletos | Não inventar adversário/prêmio para prosseguir; falha de contrato bloqueia promoção da build. |
+
+**Qualidade/aceite:** o jogador consegue dizer o que ocorreu e como continuar;
+dificuldade crescente é demonstrada por decisões/padrões legíveis, não apenas
+HP aumentado. Testar um caminho completo seleção→duelo→resultado→reentrada
+e os extremos antes de expandir conteúdo. Budget e implementação pendentes.
+
+### D01 — amostra diagnóstica da leitura do duelo
+
+**Propósito:** inspecionar o par Social/J.J., chão, nomes e medidores estáticos,
+com entrada manual na animação aceita e retorno. É parte da preparação visual
+da cena 02; não oferece a luta nem encerra um round.
+
+Entrada: boot do perfil `MOF_CENA01=1, MOF_JJ_SAMPLE=2`; autoplay é ferramenta
+diagnóstica. Botão 2 alterna autoplay, botão 1 solicita ação quando em guarda;
+soltar/reapertar permite nova ação. Direcional não desloca os atores; não há
+seleção, defesa, contato, perda de vida, timer ou transição arcade. Saída é
+encerramento da sessão privada. Texto/medidores permanecem estáticos; não
+apresentá-los ao jogador como HUD funcional.
+
+Pior composição **conhecida**: par fixo em doze composições mediu pico 8 por
+scanline; um objeto novo na mesma linha pode ultrapassar o limite. A placa P0
+adiciona 12 padrões/384 B antes do loop; não acrescenta sprite. Não calcular
+“folga para laser” de 64 menos 50 SAT: esse total não resolve scanline ou
+transferência. Detalhes e fonte dos números estão na seção histórica da placa
+abaixo. Aproximação/ataques simultâneos ainda não foram medidos.
+
+QA desta revisão: ROM `90ea0f98febf4e047e6ca4637af1c454dd9ac7971e5b0bd00fec058c5ebf2405`,
+sessão privada `d4d91c97840f45d1b46f85dab83e6db6`, encerrada. Duas ações
+manuais e retorno/reentrada: 174/174 quadros conferidos; holds 7/4/2/3/6
+preservados, guarda nos índices 102–131 e 154–173. Índices são zero-based
+no vídeo stepped, não frames competitivos. Botão aplicado VDP198/250 e
+preparação visível VDP201/253; intervalo ponte→imagem de três avanços, sem
+medir o instante de aceite interno. Relatório/limites vinculados no memory
+bank. FPS, VBlank, áudio, percepção contínua e combate permanecem pendentes.
+
+### Passagem para arte e engenharia
+
+Artista recebe intenção, fonte de identidade, ação inicial/final e critérios
+de leitura; propõe atuação corporal e poses. Engenharia mede layout, pares
+por pose/distância, P1/P0, tiles residentes/próximos, SAT/linha, RAM/ROM e
+VBlank; devolve custo e causa concreta. Antes de mudar alcance, trajetória,
+arma, escala relativa ou identidade para caber, registrar alternativa e
+obter decisão do dono. Não reduzir silenciosamente desenhos ou função do golpe.
+
+Primeiro negociar técnica de packing/residência e prioridade de informação,
+preservando arte e comportamento aprovados. Toda alternativa tem controle,
+delta, custo medido, efeito na experiência e estado de aceite. Os budgets
+históricos são diagnósticos vinculados a seus SHAs; o budget integrado das
+cenas 01/02/03 segue pendente. Não ampliar conteúdo a partir deste documento.
+
 ## J.J. — seleção aprovada pelo proprietário
 
 A resposta “aprovado” fecha o conceptv5/fontev6, a proporção da Zillion,

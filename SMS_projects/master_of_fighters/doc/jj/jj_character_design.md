@@ -1,6 +1,6 @@
 # J.J. — ficha de personagem
 
-**Estado:** concept art v4 aprovada visualmente pelo dono em 2026-10-04; folha idle v5 refinada em 12 quadros é estudo candidato, aguardando revisão própria.  
+**Estado vigente (consulta 2026-11-01):** concept v5/fonte v6 e amostra de seis desenhos sem FX aprovadas pelo dono; ver [decisão](../decisions/jj-zillion-character_owner_approval.json). Concept v4 e idle v5 de 12 quadros abaixo são históricos, não fonte ativa de equipamento/movimento.
 **Origem escolhida:** *Zillion II: The Tri Formation* (Sega Master System).  
 **Fronteira de fontes:** o jogo Master System ancora identidade, cores e mecânicas. Por pedido do dono em 2026-10-04, o model sheet e uma arte colorida do anime foram consultados apenas para corrigir o figurino; não definem paleta SMS, movimentos, poses copiadas ou lore do fan game.
 
@@ -9,10 +9,24 @@
 - **Nome no jogo:** J.J. (também apresentado como J.J. na página de sprites).
 - **Equipe:** o nome White Knights pertence à continuidade do anime; não é requisito de jogo adotado para o projeto.
 - **Função no fan game:** lutador móvel de alcance médio/curto com arma laser. Esta é uma leitura de design, ainda não validada em combate.
-- **Classe proposta:** leve, com alvo de 72–76 px de altura idle segundo a janela do GDD. A classe descreve mobilidade de jogo; escala e dano continuam abertos.
+- **Classe proposta:** leve; alvo corporal vigente do GDD 68–72 px, relação J.J.≈Hayato. A amostra diagnóstica usa escala comum e não fecha essa faixa de produção. Classe descreve mobilidade, não massa visual; dano continua aberto.
 - **Idade:** não fixada nesta ficha. Os materiais consultados não sustentam aqui uma idade canônica.
 
-## Concept art aprovada como referência visual
+## Referência vigente e limites
+
+Concept v5 corrige a proporção da Zillion; fonte v6 preserva seis desenhos
+I00/S01–S05 e exposições 7/4/2/3/6. Arma longa, baixa, angular navy/cyan, pega
+contínua e cano inteiro conforme a referência específica do dono e a prancha
+Waku Waku 7 aprovada. O blaster compacto branco/azul da concept v4 foi
+superado. Nenhum projétil, bala, flash, spark ou FX faz parte da folha aceita.
+Contrato de experiência da amostra no [GDD](../11-gdd.md#contratos-dos-movimentos-com-escopo-atual).
+
+Aceite artístico/temporal não fecha `zillion_laser` como especial, hitbox,
+alcance, dano, trajetória de objeto ou Armorater. O moveset conceitual continua
+pendente de discussão individual; não transformar o nome “disparo” em prova
+de um projétil funcional. Não pedir novamente a aprovação dos seis desenhos.
+
+## Histórico da concept art v4
 
 A folha `data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png` apresenta duas poses completas: guarda móvel com a pistola baixa e avanço lateral com disparo. O dono aprovou a concept art v4 em 2026-10-04. Ela usa o pool de cores SMS do jogo e tem fundo transparente; as referências do anime só ajudaram na construção do figurino, conforme pedido do dono, sem cópia de pixels, poses ou composição.
 
@@ -26,7 +40,7 @@ Direção da concept art:
 - cabelo e família cromática azul-violeta continuam ancorados no sprite SMS; detalhes do corte permanecem sujeitos à revisão do dono;
 - uniforme White Knights vermelho-magenta justo, gola protetora alta, ombreiras arredondadas claras, arnês diagonal com dispositivo octogonal no peito, cinto, coldre na coxa, proteções nos antebraços/joelhos e botas altas;
 - azul-violeta fica concentrado no cabelo, arnês, detalhes de equipamento e sombras das proteções; os acentos laranja da paleta do jogo são pequenos, nunca placas grandes nos joelhos;
-- pistola laser compacta ligada à arma Zillion do jogo;
+- pistola compacta da v4: referência histórica superada pela Zillion proporcional longa navy/cyan da v5; não reutilizar como identidade atual;
 - duas poses humanas de corpo inteiro: guarda pronta com a pistola baixa e avanço lateral com disparo controlado;
 - sem moto, veículo ou armadura transformada no model sheet. Tri-Formation/Armorater fica documentado como referência mecânica separada, não como peça permanente da roupa;
 - arte original de luta anos 90, contorno limpo, cel shading duro e três tons por material, sem ruído ou dithering.
@@ -55,7 +69,7 @@ J.J. pressiona a média distância com disparos únicos e busca ângulo com pass
 
 Não há startup/active/recovery, dano ou hitstop fechados. O arquivo é uma proposta para revisão do dono, não FSM nem contrato de asset.
 
-## Documentos e gates
+## Documentos e gates históricos da v4/idle v5
 
 - Fontes visuais, limites de uso, dimensões e hashes: `data/source_art/concept_art/jj_zillion_ii/review_drafts/reference_notes/jj_reference_notes_v2.md`.
 - Prompts de revisão: `data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_prompt_v3.txt` e `data/source_art/concept_art/jj_zillion_ii/review_drafts/prompts/jj_concept_cleanup_prompt_v4.txt`.
