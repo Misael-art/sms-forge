@@ -1,0 +1,37 @@
+{
+  "schema": "dr_social_two_button_proposal_v1",
+  "date": "2026-11-01",
+  "status": "proposal_not_approved",
+  "deciders": ["designer", "owner"],
+  "blocks": ["GD01", "GD02"],
+  "does_not": [
+    "aprovar comando",
+    "copiar quatro botões ou alavanca de Neo Geo",
+    "promover botão de debug do viewer",
+    "preencher a cena 10 com um golpe ensinável",
+    "definir dano, vantagem, buffer ou custo do Super"
+  ],
+  "normals_proposed_without_motion": {
+    "why": "As três funções já estão na lista aprovada em design. Direção mais um botão basta para distinguí-las e não inventa quarto de lua.",
+    "button_1": "social_light_jab",
+    "down_plus_button_1": "social_low_boot_check",
+    "button_2": "basic_cane_tap",
+    "unchosen": "Qual botão é o leve e qual é a bengala. A tabela acima é uma leitura, não a decisão."
+  },
+  "specials_motion_not_chosen": {
+    "actions": ["rapier_lunge", "boomerang_throw"],
+    "alternative_a": "frente, frente, botão. Dois toques e um botão, sem quarto de lua.",
+    "alternative_b": "baixo, baixo-frente, frente, botão. Quarto de lua, só se o reconhecedor e o dono aceitarem a janela.",
+    "open": "Qual especial fica no botão 1 e qual fica no botão 2."
+  },
+  "super_not_chosen": {
+    "action": "social_read_super",
+    "requires": "Barra cheia do medidor comum, ainda sem número em GD02.",
+    "must": "Uma sequência que não dispare um normal nem um especial quando incompleta. Attempt, hit e whiff são ramos da mesma ação, não três comandos.",
+    "alternatives_not_chosen": [
+      "os dois botões juntos com a barra cheia",
+      "a mesma direção do especial mais longo, com a barra como condição"
+    ]
+  },
+  "scene_10_until_decision": "A revisão mostra o texto comando em definição e não ensina execução."
+}

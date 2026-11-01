@@ -6,7 +6,7 @@
   "do_not_treat_as_approval": true,
   "package_status": "incomplete",
   "distinctions": {
-    "produced": "Três chaves de luta, bustos de atenção, fala, vitória e derrota, placas de tiles da conversa e do versus, e duas tentativas de guarda em três quartos que não cumpriram a hipótese. Intervalos de luta não desenhados.",
+    "produced": "Três chaves de luta, bustos de atenção, fala, vitória e derrota, placas de tiles da conversa e do versus, duas tentativas GQ01 que não fecharam a cauda, e a guarda GQ02 medida no par. Intervalos de luta não desenhados.",
     "converted": false,
     "diagnostic_adapter": "prepare_authored_sprite_sample.py gravou derivados e conversion.json em out/diagnostics. Sem ROM e sem promoção a res/.",
     "observed_in_emulator": false,
@@ -84,7 +84,22 @@
       "art_approval": "pending",
       "rom": false
     },
-    "owner_tradeoff": "O alvo 66–72 permanece. Redução para 60 px não foi aceita. GQ01 não desenhou a silhueta de 32 px por linha e não foi medida. Mudança de alcance ou de identidade fica com o dono. Outro objeto não aumenta o limite da linha."
+    "owner_tradeoff": "O alvo 66–72 permanece. Redução para 60 px não foi aceita. GQ01 não desenhou a silhueta fechada. GQ02 fecha a sola e passa o par; o toque de bengala continua ilegal. Mudança de alcance ou de identidade fica com o dono. Outro objeto não aumenta o limite da linha.",
+    "gq02_pair_2026_11_01": {
+      "source": "logical/GQ02_stacked_guard.png",
+      "sha256": "499a39323279b0efef90341b746fd4a7ac6d58a0aa01f6cbdb731d710aad57a1",
+      "extra": "7/9",
+      "opaque_height_px": 69,
+      "opaque_width_px": 27,
+      "neutral_columns_after_extra": 4,
+      "ken_control": "out/diagnostics/dr_social_cps2_sample_v1/ken_a0_g0_i0.png",
+      "line_sim": "35 sprites, pico 8, overflow 0, PASS",
+      "adapter_self_check": "pass",
+      "line_sim_self_check": "pass",
+      "rom": false,
+      "art_approval": "pending",
+      "limit": "Uma face, um canto, Ken de construção. A escada do shear da cauda pede revisão. Não mede BC04, K04 nem RL05."
+    }
   },
   "rows": [
     {
@@ -185,7 +200,10 @@
     },
     {
       "id": "guard",
-      "status": "not_started"
+      "status": "stacked_candidate_pair_passed_art_pending",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/GQ02_stacked_guard.png",
+      "sha256": "499a39323279b0efef90341b746fd4a7ac6d58a0aa01f6cbdb731d710aad57a1",
+      "purpose": "Guarda derivada de J01: cauda e bota de trás dobram para a haste; ponta de latão recomposta. Extra 7/9, corpo 69 px, par com Ken pico 8. Escada do shear ainda pede revisão. Não é intervalo, não é ROM e não aprova o toque."
     },
     {
       "id": "knockdown_fall",
@@ -255,7 +273,10 @@
       "sha256": "983280d4bd857a5f2bdae618381cc1e28be049843c2f06a971e1d2d98cc41af0",
       "sms_plate": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/versus_loss_sms_256.png",
       "sms_plate_sha256": "357f1c39cff12761a434df33ee05c5eb99939d8164846211fc2fcd43da9b488f",
-      "purpose": "Boca fechada e testa mais baixa. No 4× fica perto do neutro. Não é sequência nem aprovação."
+      "purpose": "Boca fechada e testa mais baixa. No 4× fica perto do neutro. Não é sequência nem aprovação.",
+      "refined_plate": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/versus_loss_refined_256.png",
+      "refined_sha256": "2e5610cbb381e752798fc14266e6e140d91eb1f838d71fff187b0de67baa0223",
+      "refined_note": "Dez pontos de casaco limpos e sete pixels de franzir sobre pele. Crop e óculos no mesmo lugar. Não é animação nem aprovação."
     },
     {
       "id": "hit_high",

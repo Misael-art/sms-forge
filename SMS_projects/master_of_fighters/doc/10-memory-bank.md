@@ -1,5 +1,22 @@
 # 10-memory-bank — master_of_fighters
 
+## Guarda GQ02 medida e cena 10 ainda sem comando — 2026-11-01
+
+A causa da guarda não era a altura. No extra 7/9 só o bloco da sola tinha
+cinco colunas. GQ02 dobra a cauda e a bota de trás para a haste, a partir de
+J01, e recua a bota da frente o mínimo da ponta. Corpo 69 px, largura 27.
+Self-check do adaptador e do simulador passaram. Par com o Ken de construção:
+35 sprites, pico 8, sem overflow. Receita e resultado em
+`cps2_keys_v1/proposals/GQ02_pair_result.json`. A borda da cauda ficou em
+escada. Não há ROM, não há intervalo de bengala e o alvo 66–72 não mudou.
+
+Derrota versus ganhou franzir de sete pixels e as três placas perderam o sal
+do casaco; os originais continuam no Git. A cena 10 tem storyboard 256×192,
+`preview/cena10_storyboard_v1.png`, com o texto “comando em definição”,
+direcional à esquerda e botões 1/2. A proposta de controles está em
+`doc/dr_social_two_button_proposal_v1.json` e não está aprovada. GD01/GD02
+seguem abertos. Toque, bota, estocada e o restante do pacote continuam por fazer.
+
 ## Avaliação do pacote e padrão de apresentação de golpes — 2026-11-01
 
 Avaliado incremento `d7a3a2d`: Social segue incompleto. Matriz mantém jab como
