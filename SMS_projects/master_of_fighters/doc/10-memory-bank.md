@@ -1,5 +1,26 @@
 # 10-memory-bank — master_of_fighters
 
+## Incumbência artística de personagem completo — 2026-11-01
+
+Pedido do proprietário: preparar contexto e prompt para um agente artista novo
+produzir um personagem completo, seguido de revisão pelo designer antes de
+novas tarefas de elenco. Escolhido Dr. Ferdinand Social: lista de três normais,
+dois especiais e Super aprovada em design; balanceamento/arte completa pendentes.
+[Prompt autossuficiente](dr_social_complete_character_artist_prompt_v1.md)
+reúne autoridades, três fontes com hashes conferidos, método CPS2 aprovado em
+29/10, reparo v8, 28 IDs obrigatórios, respostas visuais, objetos/FX, atuação e
+portraits de conversa. Distingue fonte ~104 px do alvo corporal SMS 66–72 px;
+proíbe encolher poses largas, promover fonte histórica por nome ou autoaprovar.
+
+O pedido autoriza preparar a produção candidata integral de um personagem;
+não é aceite de pixels, moveset novo ou promoção a produção. O futuro artista
+segue incrementalmente e entrega ao coordenador; ainda não foi iniciado nesta
+tarefa. Não houve nova geração, conversão, ROM ou QA. Conferidos caminhos,
+workflows, hashes das três imagens, cobertura dos 28 IDs e diff documental.
+Próximo passo: executar o prompt em tarefa de artista, depois revisar pacote,
+composição, animação e provas antes de iniciar outro personagem. Base desta
+incumbência: `7aa7d1a`; commit documental de fechamento registra o prompt.
+
 ## Direção de fã, campanha e carisma — proprietário, 2026-11-01
 
 **Estado: documentado para desenvolvimento futuro; implementação e interação
