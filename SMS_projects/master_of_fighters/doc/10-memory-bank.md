@@ -1,5 +1,31 @@
 # 10-memory-bank — master_of_fighters
 
+## Revisão das primeiras chaves e novo direcionamento — 2026-11-01
+
+O proprietário pediu conferir a compreensão do artista e possíveis referências
+fracas herdadas da curadoria. O anexo recebido nesta solicitação é MT5X/Super
+ATR, não o relato artístico; avaliação feita sobre os artefatos locais,
+sem atribuir aquele texto ao artista. Parecer e prompt de continuação:
+[revisão da produção inicial](dr_social_artist_followup_review_20261101.md).
+
+Matriz, lineage, prompts e hashes de jab/BC04/K04/RL05 conferidos; model sheet,
+prancha ampliada e fontes BC04/RL05 inspecionados. J01 v8 é a âncora registrada;
+não há evidência nesses registros de substituir a rota atual por folha antiga.
+Compreensão de kit/escopo/status demonstrada; pacote ainda incompleto, como
+admitido pelo próprio produtor. Falta atuação contínua: prompts que limitam
+movimento à arma/pernas não devem reger a sequência inteira. Os picos 7/5/15
+são declarações do produtor sem recibo oficial localizado neste pacote; medir
+par/packing antes de derivar intervalos da estocada. Outro objeto não remove
+o limite por scanline. Escala 35/52 e previews ainda são estudos.
+
+Próximo passo: ação de bengala completa com composição comprovada, resolver
+estocada sem mutilar arte/afrouxar gates, seguir estados/retratos independentes
+até o pacote integral. Completar receita/proveniência, distinguir papéis de
+portraits e corrigir o cabeçalho duplicado do prompt original. Nenhuma imagem
+foi alterada nem aprovada nesta revisão; sem nova ROM/emulador ou medição FPS.
+Mudanças e artefatos do produtor permanecem no checkout, fora deste commit
+documental. Designer/proprietário revisam antes de novo personagem.
+
 ## Incumbência artística de personagem completo — 2026-11-01
 
 Pedido do proprietário: preparar contexto e prompt para um agente artista novo
