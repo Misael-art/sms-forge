@@ -1,5 +1,25 @@
 # 10-memory-bank — master_of_fighters
 
+## Revisão do designer sobre 4f86572 — 2026-11-01
+
+Social continua incompleto. Self-checks do adaptador/simulador passaram nesta
+revisão; simulador reexecutado no manifest GQ02 confirmou 35 sprites/pico 8/
+zero overflow. PNG convertido tem bbox 27×69. Não houve reconversão ou ROM.
+A leitura dos scripts revelou deformação por linha de pernas/cauda e expressão
+de derrota pintada por coordenadas. Permanecem estudos diagnósticos; não
+satisfazem autoria visual final. Não substituir J01/jab nem alimentar a produção
+com anatomia procedural. Nova candidata autoral exige nova medição.
+
+[Parecer, avaliação dos controles e prompt vigente](character_move_showcase_standard_v1.md)
+substituem os checkpoints anteriores. Matriz registra 21 estados não iniciados;
+cena 10 é planta sem ator, GD01/GD02 continuam propostas. Próximo resultado:
+guarda/toque autorais com composição medida e uma ação completa, avançando
+estados e portraits independentes até o pacote revisável. Não basta aceitar o
+contorno em escada nem declarar o alcance causa única sem discriminar as células.
+Revisão documental/visual e simulação; sem aceite de gameplay, animação, áudio,
+FPS ou AAA. Recibo: `out/diagnostics/social_gq02_review_20261101/`.
+
+
 ## Guarda GQ02 medida e cena 10 ainda sem comando — 2026-11-01
 
 A causa da guarda não era a altura. No extra 7/9 só o bloco da sola tinha

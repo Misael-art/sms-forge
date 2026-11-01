@@ -6,7 +6,68 @@ Fighters, não uma técnica homologada globalmente no SMSForge. Ver
 [registro de direção](decisions/character-move-showcase_owner_direction_20261101.json),
 [GDD](11-gdd.md), [roteiro](12-roteiro.md), [cenas](13-spec-cenas.md) e [TDD](15-tdd.md).
 
-## Avaliação do incremento d7a3a2d
+## Revisão vigente — incremento 4f86572, 2026-11-01
+
+**Dr. Social segue incompleto. GQ02 é estudo geométrico medido, não guarda
+artística aprovada.** Esta seção e o prompt ao fim substituem os direcionamentos
+de checkpoint anteriores; os registros abaixo permanecem históricos.
+
+O agente compreendeu a faixa GDD, a diferença entre simulação e ROM e a
+necessidade de não inventar comandos. Preservou o jab e os originais. Porém,
+a continuação desviou do método autoral: `author_gq02_stacked_guard.py`
+desloca segmentos de cada linha de J01, empilha pixels e repõe a haste;
+`refine_versus_plates_v1.py` pinta a expressão de derrota por sete coordenadas.
+Não se trata apenas de converter paleta, recortar ou empacotar arte pronta:
+esses scripts decidem nova anatomia/atuação. São estudos diagnósticos úteis,
+mas não podem ser promovidos a personagem final sob AGENTS/SMS_GLOBAL §15.
+O problema está demonstrado nesses derivados; não há motivo para atribuí-lo
+a uma suposta referência antiga ruim nem descartar o model sheet aprovado.
+
+| Peça | Conferência desta revisão | Consequência |
+|---|---|---|
+| GQ02 | Fonte `499a3932…`; 471 pixels deslocados, 64 sobrepostos segundo a receita. Derivado `08362e94…`: bbox 27×69 px. Self-checks do adaptador e simulador passaram; nova execução do simulador no manifest existente confirmou 35 sprites, pico 8, zero overflow. | Evidência limitada de composição naquele Ken/posição/face. Não refiz a conversão nem uma ROM. Pico 8 deixa zero folga nas linhas saturadas; requer par/FX/estados reais. |
+| Atuação da guarda | Prancha J01/GQ02 inspecionada. A mudança comprime apoio e espaço entre pernas, cria quebras na região dos tornozelos e escada interna na cauda. | Parecer visual desfavorável à promoção dessa deformação como arte final. Redesenhar uma candidata autoral com sustentação anatômica e revalidar; não pedir ao dono que aceite a escada como condição de progresso. |
+| Jab v8 | Fonte preservada; o início J01 é a guarda larga anterior. | A legalidade de GQ02 não se transfere a J01–J06. Revisar conexão entre guarda, preparo e retorno, sem substituir a fonte aprovada silenciosamente. |
+| Portraits versus | Prancha tripla inspecionada. Limpeza de pontos não resolve por si só volume/crop; o franzir procedural não fecha atuação nem animação. | Preservar originais; dirigir expressão por olhos, sobrancelha, boca e postura coerentes, pelo método autoral. |
+| Cena 10 | Storyboard 256×192, D-pad/1/2 identificáveis, texto pendente, palco sem atores. | Planta de layout, não UI final nem prova de escala/alcance/legibilidade em composição. |
+| Pacote | Matriz registra 21 `not_started` e sete lacunas visuais, além de chaves/placas candidatas. | Não existe arranjo novo compilado de todos os assets; nenhuma animação nova foi validada nesta revisão. |
+
+### Controles: avaliação da proposta, sem aprovação de GD01/GD02
+
+`dr_social_two_button_proposal_v1.json` é um começo útil: 1 → jab,
+baixo+1 → checagem baixa, 2 → toque. A frase “qual botão é leve” ainda deixa
+até essa tabela condicional. O artista não deve escolher o restante sozinho.
+Como hipótese de design para apresentar ao proprietário, preferir uma tabela
+única candidata e avaliar quarto de lua para os especiais antes de duplo toque,
+pois `dash_run` já faz parte do contrato. Isso **não aprova** quarto de lua,
+qual especial ocupa 1/2, guarda, cancelamentos ou janelas numéricas.
+
+A proposta precisa explicar, com casos observáveis: diagonal baixa e postura;
+frente/trás nos dois lados; guarda versus movimento; ataque durante dash;
+ordem de prioridade normal/especial/Super; press versus hold; comando expirado;
+inputs simultâneos com pequena diferença temporal; ausência de barra e replay.
+Para Super 1+2, declarar se o primeiro botão espera ou pode gerar normal,
+a tolerância e o resultado sem barra. “Comando incompleto nunca gera normal”
+não é promessa gratuita: pode exigir espera perceptível e afetar o jab.
+Registrar a alternativa escolhida, seu custo de resposta e o teste necessário.
+Attempt/hit/whiff continuam ramos do mesmo Super. Números permanecem hipóteses
+até experimento; animações diagnósticas não são frame-data competitivo.
+
+### Próximo resultado necessário
+
+Uma pose autoral que preserve a função e a escala, seguida de composição medida
+e de uma sequência completa com retorno. A função do toque é alcance frontal
+rombo: não encurtar arma/alcance, mudar altura lógica ou esconder pixels para
+passar. “Alcance” ainda é hipótese causal: no BC04 medido também há contribuição
+da sola. Localizar linhas, células e materiais que somam o excesso antes de
+escolher a solução. Guarda legal isolada não prova que o ataque cabe.
+
+Arte independente continua enquanto GD01/GD02 aguardam decisão. O padrão
+abaixo permanece: nome/controle/comando reais, animação na velocidade da luta,
+manifesto por ação e integração gradual no consumidor. Galeria diagnóstica
+parcial é válida como diagnóstico; não é tutorial funcional ou personagem pronto.
+
+## Histórico — avaliação do incremento d7a3a2d
 
 Inspecionados memória, matriz de cobertura, contrato v2, comparativo de conflito,
 manifestos de placas e imagens de conversa/versus. O lote preservou fontes,
@@ -167,68 +228,126 @@ não requisito imediato nem permissão para ampliar conteúdo por inferência.
 
 ## Prompt de continuidade — copiar daqui até o fim
 
-Atue como artista de personagem em colaboração com a integração oficial de
-Master of Fighters. Diga [Contexto SMS Carregado]. Trabalhe no checkout único
-`/home/misael/Projects/SMSForge`, consumidor `SMS_projects/master_of_fighters`.
-Leia AGENTS/continuidade, memória/GDD/roteiro/spec/TDD vigentes, o prompt
-`doc/dr_social_complete_character_artist_prompt_v1.md`, o direcionamento
-`doc/dr_social_artist_followup_review_20261101.md`, a matriz de cobertura, o
-contrato v2 e este padrão. Use RTK/run_host; preserve o trabalho alheio.
+Atue como artista responsável por completar o Dr. Ferdinand Social em Master
+of Fighters, integrado ao SMSForge. Diga [Contexto SMS Carregado]. Trabalhe
+na raiz única `/home/misael/Projects/SMSForge`, consumidor
+`SMS_projects/master_of_fighters`. Não comece outro personagem. O objetivo é
+um pacote completo e revisável; a revisão do designer e do proprietário vem
+antes de sua aprovação e das próximas tarefas de elenco.
 
-O objetivo continua ser **Dr. Social completo e revisável**. O último commit
-inspecionado, d7a3a2d, não o concluiu: bengala/bota/rapieira são chaves, estados
-e especiais faltam, portraits são candidatos e não existe ROM integral desse
-pacote. Não trate os estudos como aprovação nem abra ROM antiga para representar
-conteúdo que ela não contém. Confira novas evidências, se houver, por fonte/SHA.
+**Contexto obrigatório.** Leia AGENTS da coleção e da raiz, continuidade,
+`doc/10-memory-bank.md`, GDD, roteiro, spec e TDD do consumidor. Leia também:
 
-1. Faça inventário curto do que realmente está pronto, faltando e bloqueado.
-   Preserve o jab v8 e as decisões de identidade/armas. Não recomece gerações nem
-   repita as escalas/fases já reprovadas. O GDD permanece 66–72 px: não foi
-   autorizada redução para 60, corte de arma ou ocultação de células.
-2. Retome a causa dominante. A hipótese de guarda em três quartos não foi
-   materializada nos dois desenhos; isso não é prova técnica de que ela falha.
-   Proponha atuação que efetivamente responda à largura, respeitando corpo,
-   casaco, pega e movimento; meça a proposta válida com par e representação
-   oficiais. Não transforme o estudo de 32 px por faixa em anatomia artificial
-   ou limite global arbitrário para todo golpe. Se precisar mudar alcance,
-   identidade ou alvo, apresente alternativa concreta ao dono e prossiga nas
-   peças independentes. Não gere intervalos caros de uma chave ainda ilegal.
-3. Refine os portraits existentes antes de multiplicar saídas: limpar pontos
-   dispersos, reconstruir volumes/contorno e alinhar âncoras faciais/crop entre
-   expressões; diferenciar derrota do neutro. Conferir 1×/4× e paleta final.
-   Atenção/fala e versus não são a mesma página; uma mudança de boca não fecha
-   sozinha animação de fala ou os ciclos versus contratados. Complete seleção,
-   demais expressões e estados previstos sem inventar arsenal ou lore.
-4. Prepare storyboard e contrato visual da cena 10: nome do golpe, lutador
-   executando, controle SMS 1/2 e direções/etapas legíveis. Mantenha referência
-   Neo Geo como linguagem de demonstração, sem copiar arte nem quatro botões.
-   Desenhe candidatos autorais de UI pelo método aprovado; texto/glyphs e
-   composição precisam prova de tamanho nativo. Não é preciso um portrait grande
-   no palco para cada golpe. Quantidade/residência deriva do budget medido.
-5. Antes de mostrar comando, confira sua decisão e implementação. GD01/GD02
-   permanecem pendentes: não atribua combinações por conta própria. Se faltar
-   mapeamento, registre “comando em definição” na revisão e leve ao designer uma
-   proposta explícita de controles, sem aprová-la. Nenhum botão de debug do
-   viewer vira comando competitivo automaticamente.
-6. Integre uma fatia funcional assim que arte/composição/comando permitirem,
-   usando o consumidor, renderer, dados de animação e reconhecedor oficiais.
-   Comece pequeno, prove nome/input/execução/retorno e continue até cobrir o
-   personagem. Não monte outro motor ou editor. Se só houver piloto de animação,
-   marque seu limite: ele não ensina comandos nem valida o pacote completo.
-7. Use exatamente a velocidade normal da luta; mantenha UI de leitura separada
-   dos tempos do golpe. Slow motion/step são revisão identificada, não substituto
-   de observação contínua. Medir consumo de input, estado, framebuffer e retorno,
-   incluindo ambos os lados, replay, erro, recurso insuficiente e troca de ação.
-8. Entregue ROM identificada com catálogo de assets/ações efetivamente integrados,
-   fonte→derivado→símbolo→ROM por hashes, vídeo normal/lento identificado,
-   evidência de comandos e orçamento/pior frame. Sem composição legal ou motor
-   funcional, declare a pendência exata e conclua o trabalho independente; não
-   apresente galeria isolada como prova de combate completo.
-9. Atualize matriz/lineage/memória e preserve fontes/evidência pelo fluxo vigente.
-   Commit/push apenas de mudanças próprias revisadas; não publique referência
-   privada ou tome alterações alheias. Não promova curadoria global, não implemente
-   desbloqueio futuro nem comece outro personagem. Designer e dono validam primeiro.
+- `doc/dr_social_complete_character_artist_prompt_v1.md`;
+- `doc/dr_social_animation_contract_v2.json` e `doc/dr_social_coverage_matrix_v1.json`;
+- `doc/dr_social_combat_design_proposal_v1.md`;
+- `doc/dr_social_cps2_sample_v1.md`, revisão v8 e decisão do método em
+  `doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`;
+- este padrão `doc/character_move_showcase_standard_v1.md`, especialmente a
+  revisão vigente de 4f86572; checkpoints mais antigos são históricos;
+- `doc/dr_social_two_button_proposal_v1.json`, proposta ainda não aprovada.
 
-Não encerre com outra coleção de poses sem explicar a causa que permanece e
-sem executar o próximo ramo viável. O objetivo é pacote integrado e qualidade
-observável, com diferenças entre desenho, animação, compilação e aceite claras.
+**Identidade e referências.** Social é humano, investigador/psicólogo, esguio,
+cabelo grisalho, óculos de latão, casaco azul/ciano, colete separado, gravata
+vinho, luvas claras e botas marrons. Preserve o model sheet aprovado
+`data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png`
+e sua decisão por hash; preserve integralmente a fonte do jab v8 em
+`data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/`.
+Model sheet define identidade; jab v8 orienta atuação/qualidade; estudos técnicos
+não viram referências de anatomia. Registre quais imagens entram na geração
+e o papel de cada uma; não alimente o processo com todo o histórico de testes.
+Bengala é romba, rapieira é lâmina rígida de estocada, bumerangue é de aço
+com rastro violeta. Sem poderes mentais, vampirismo ou arsenal adicional.
+
+**Estado real.** GQ02 coube no controle Ken a 69 px, 35 sprites e pico 8,
+mas foi deformada por script. É prova geométrica limitada, não arte final.
+A bengala, a bota e a rapieira continuam chaves isoladas. A matriz tem 21
+estados não iniciados. Portraits são candidatos; cena 10 é um storyboard sem
+ator nem comando decidido. Não há ROM nova do personagem completo.
+
+1. **Retome o método aprovado.** Preserve GQ02 e os scripts como diagnóstico
+   com proveniência explícita. Não os use para produzir anatomia, expressão ou
+   intervalos finais. Produza o desenho por autoria visual e derive a versão
+   SMS com a receita oficial. Código pode converter, medir, organizar e montar
+   pranchas; não deve inventar tornozelos, deformar cauda por linha ou pintar
+   expressão para simular trabalho artístico. Não altere a fábrica nem promova
+   curadoria global. Se a ferramenta autoral estiver indisponível, registre a
+   limitação concreta e avance contratos/medição/integração reaproveitável.
+2. **Desenhe uma guarda candidata convincente.** Use a descoberta de apoio mais
+   compacto; deixe quadril, joelhos, tornozelos e dobras participarem da pose.
+   Preserve idade, proporções, pegada e equipamento. Não congele cabeça/tronco
+   só porque o estudo os manteve. O critério é sustentação corporal, leitura e
+   composição, sem meta arbitrária de mover poucos pixels. Não peça aprovação
+   da escada procedural como única saída. Mantenha 66–72 px de corpo em pé,
+   mesma transformação por pose, sem baixar para 60 px ou comprimir só um eixo.
+   GQ02 usou encaixe oficial 2/3×6/7 seguido de extra 7/9; estudo 35/52 direto
+   é outra transformação. Registre a receita efetivamente usada, sem misturá-las.
+3. **Valide antes de multiplicar intervalos.** Confira fonte e saída SMS em
+   1× e nearest ampliado. Depois meça a nova guarda e as chaves críticas pelo
+   adaptador e simulador oficiais, com self-check prévio. Registrar par, face,
+   posição, SAT, pico, linhas excedidas e hashes. Ken é controle de construção,
+   não substitui elenco. Não declare folga com pico 8. Verifique ambas as faces,
+   cantos, deslocamentos pertinentes à grade, contato e FX simultâneos. Toda
+   alteração de pixels invalida a contagem anterior para aquele novo candidato.
+4. **Resolva o toque pela função.** Use as linhas/células excedidas para separar
+   contribuição dos pés, corpo, braço, haste e rival. Explore gesto, apoio e
+   organização corporal preservando controle frontal, ponta romba, alcance e
+   altura lógica. Não simplesmente eleve a arma, encurte-a, apague células,
+   oculte rival ou divida em objeto supondo ganhar limite por linha. Uma nova
+   chave é candidata até medida. Mudança de função/alcance/identidade exige
+   alternativa concreta e decisão registrada do dono; continue peças independentes.
+5. **Feche uma ação inteira assim que viável.** Preparação → ameaça/contato →
+   consequência → recolha → retorno à guarda, com pivô estável, peso e equipamento
+   contínuos. Meça também os intervalos. Preserve J01–J06 do jab v8; GQ02 não
+   aprova automaticamente esse ciclo. Se a nova guarda não conecta com o jab,
+   apresente transição candidata e seu custo, sem substituir os quadros aprovados
+   ou acrescentar atraso competitivo oculto. Hipóteses de duração ficam rotuladas;
+   exposição de estudo não define startup, hitstop ou recuperação de combate.
+6. **Continue até cobrir o personagem.** Siga os IDs e lacunas da matriz v2:
+   locomoção, guarda/respostas a impacto, queda/levantar, entradas, provocações,
+   vitórias, derrota/empate, três normais, dois especiais e Laudo Final com
+   attempt/hit/whiff. Complete tracks de corpo/arma/projétil/FX e os portraits
+   de seleção, versus e conversa previstos. Não crie terceiro especial. Priorize
+   uma ação completa em vez de outra coleção de contatos isolados; bloqueio da
+   bengala não impede estados independentes.
+7. **Refine portraits com atuação.** Reutilize fontes autorais e enquadramento
+   coerente; alinhe âncoras faciais e idade, dê volume ao casaco e clareza a olhos,
+   sobrancelhas, boca e postura. Não trocar expressão por sete pixels pintados
+   por script. Complete suspeita, determinação, surpresa e alívio além de atenção/
+   fala, conferindo o contrato vigente. Boca aberta isolada não é animação de
+   fala. Texto fica fora do rosto, com acentos e leitura em 256×192 após paleta.
+8. **Prepare a cena 10 de forma verificável.** Use o storyboard como planta,
+   coloque candidatos reais do personagem, rival e golpe de maior envelope para
+   testar espaço. Nome, controle SMS com D-pad/1/2, sequência e feedback devem
+   ter acabamento coerente; o controle físico não se espelha ao trocar o lutador
+   de lado. Pressionar/manter/soltar/simultaneidade devem coincidir com a receita.
+   UI autoral, sem promover retângulos diagnósticos a acabamento final. O artista
+   não decide GD01/GD02: entregue ao designer proposta única e conflitos de
+   dash, guarda, precedência, diagonais, barra e tolerância entre botões. Até
+   decisão, mostre “comando em definição”; nunca ensine um comando inventado.
+9. **Integre pela rota oficial.** Coordene as necessidades de engenharia no
+   consumidor existente. Construa catálogo navegável dos assets realmente prontos,
+   carregados por demanda, sem motor paralelo. Piloto parcial deve indicar sua
+   cobertura. Demonstração funcional usa reconhecedor, poses e tempos da luta;
+   leitura antes/depois é UI, não lentidão adicionada ao golpe. Quando houver
+   comandos aprovados, mostrar input consumido → ação → resultado → retorno,
+   incluindo erro, block/whiff e Super sem recurso. Velocidade normal é a real;
+   lento/step servem somente à revisão identificada. Desbloqueável futuro fica
+   registrado, sem implementar economia/save/recompensas agora.
+10. **Entregue evidência e continuidade.** ROM por SHA, vínculo fonte→derivado→
+    símbolo→ROM, rota de revisão por ação, vídeo do ciclo em velocidade normal,
+    orçamento real, pior frame, áudio e input em sessão privada do emulador.
+    Alvo60/piso58 FPS funcional por janela válida, sem arredondar; boot ou contador
+    isolado não aprovam. Preserve matriz/lineage, fontes/receitas e pendências com
+    próxima ação concreta. Sem ROM, declare exatamente quais desenhos/sequências
+    existem e o bloqueio; nunca alegue personagem completo ou AAA. Não autoaprove.
+
+Use RTK/run_host e revise somente arquivos próprios ao commitar. Preserve WIP
+alheio. Antes do push confira registro e remoto; use o nome completo da branch
+registrada, não um alias `HEAD` se o gancho exige a referência ou SHA. Não
+contorne o gancho, crie outra branch ou mude o registro para publicar. Confirme
+SHA remoto uma vez. O bloqueio de publicação não substitui a conclusão artística.
+
+Não encerre o objetivo ao conseguir outra pose estática. Prossiga pelos ramos
+viáveis até o pacote revisável; decisões ainda não experimentadas permanecem
+explicitamente pendentes, com experimento e responsável definidos.

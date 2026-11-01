@@ -1,6 +1,13 @@
 # Dr. Social — revisão da produção inicial e prompt de continuação
 
-## Atualização após o retorno de escala e portraits — direcionamento vigente
+> **Direcionamento vigente:** ver a revisão de `4f86572` e o prompt ao fim de
+> [Apresentação de golpes](character_move_showcase_standard_v1.md).
+> GQ02 passou no par de controle, mas é deformação procedural diagnóstica;
+> precisa de candidata autoral e nova validação. O texto abaixo preserva os
+> checkpoints anteriores e não deve ser copiado como o próximo prompt.
+
+
+## Histórico — retorno de escala e portraits
 
 O retorno recebido agora é o do artista. Ele distingue corretamente estudos,
 conversão, limites do controle Ken, fontes rejeitadas e ausência de ROM. A
@@ -56,7 +63,7 @@ são defeito automático de concept, mas não pagam acabamento/glyphs/paleta SMS
 Atentar para consistência de idade/rosto entre busto, model sheet e sprite;
 parecer ainda estático, sem aprovação de animação labial ou cena completa.
 
-### Prompt atual de continuação — copiar esta seção
+### Prompt histórico — substituído pelo padrão de apresentação
 
 Continue a produção completa do Dr. Social conforme o prompt inicial e o
 contrato v2. Preserve o que produziu, as reprovações e os hashes. O designer
