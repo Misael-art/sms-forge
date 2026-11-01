@@ -1,0 +1,55 @@
+{
+  "id": "GQ03_authored_guard",
+  "role": "candidata autoral de guarda. N\u00e3o \u00e9 aprova\u00e7\u00e3o e n\u00e3o substitui J01.",
+  "authored_original": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/originals/GQ03_authored_guard.jpg",
+  "authored_sha256": "e168fc42d821f2918b814bd3b91a8c032efc5b0f9e5de5703ff7f3ef039cc2ed",
+  "prompt": "prompts/GQ03_authored_guard.txt",
+  "references_fed": [
+    "J01 nativo do jab v8, ampliado 8\u00d7 em nearest, como refer\u00eancia da edi\u00e7\u00e3o"
+  ],
+  "not_fed": [
+    "model sheet inteiro",
+    "GQ02",
+    "author_gq02_stacked_guard.py"
+  ],
+  "registration": {
+    "magenta_key": "R>200, B>200, G<100; o campo dentro da caixa tamb\u00e9m fica transparente",
+    "source_bbox": [
+      310,
+      94,
+      698,
+      930
+    ],
+    "isotropic_nearest_to_opaque_height": 104,
+    "placed": {
+      "size": [
+        48,
+        104
+      ],
+      "origin": [
+        40,
+        12
+      ],
+      "sole_y": 116,
+      "bbox_center_x": 64
+    },
+    "palette": "paleta indexada existente de J01, sem dither",
+    "index_0_opaque_reassigned_to_outline": 0,
+    "anatomy_edits": []
+  },
+  "sms_scale_not_mixed": "encaixe oficial 2/3\u00d76/7 e depois extra 7/9. N\u00e3o \u00e9 35/52.",
+  "local_preview_extra_7_9": {
+    "sat_row_peak": 4,
+    "opaque_height": 69,
+    "opaque_top": 9,
+    "opaque_bottom": 77,
+    "max_span": 24,
+    "sprite_wh": [
+      72,
+      88
+    ]
+  },
+  "output": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/GQ03_authored_guard.png",
+  "output_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+  "not_an_approval": true
+}

@@ -20,6 +20,21 @@ Revisão documental/visual e simulação; sem aceite de gameplay, animação, á
 FPS ou AAA. Recibo: `out/diagnostics/social_gq02_review_20261101/`.
 
 
+## Guarda autoral GQ03 medida — 2026-11-01
+
+GQ03 é desenho de edição sobre J01, assentado a 104 px e convertido com
+2/3×6/7 e depois extra 7/9. Corpo SMS 69×25. Self-checks passaram antes da
+leitura. Par com o Ken de construção: 32 sprites, pico 8, zero overflow.
+Oito fases de posição, os dois cantos, a face espelhada e as packing phases
+x=1, 4 e 7 continuam em pico 8. Não há folga. Não liga ao jab v8: a transição
+pede um quadro intermediário, sem substituir J01–J06. GQ02 fica diagnóstico.
+O toque de BC04, na mesma escala, tem seis colunas na faixa da haste — casaco
+à esquerda e latão/contorno à direita — e cinco na sola, bota nas duas pontas.
+Uma tentativa de toque atravessou o corpo e não foi medida. Sem ROM, sem FPS,
+sem comando aprovado. Proposta única de botões, ainda não decidida:
+`doc/dr_social_two_button_proposal_v2.json`. A cena 10 segue com comando em
+definição.
+
 ## Guarda GQ02 medida e cena 10 ainda sem comando — 2026-11-01
 
 A causa da guarda não era a altura. No extra 7/9 só o bloco da sola tinha

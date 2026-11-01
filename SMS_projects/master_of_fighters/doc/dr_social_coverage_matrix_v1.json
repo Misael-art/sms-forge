@@ -6,7 +6,7 @@
   "do_not_treat_as_approval": true,
   "package_status": "incomplete",
   "distinctions": {
-    "produced": "Três chaves de luta, bustos de atenção, fala, vitória e derrota, placas de tiles da conversa e do versus, duas tentativas GQ01 que não fecharam a cauda, e a guarda GQ02 medida no par. Intervalos de luta não desenhados.",
+    "produced": "Três chaves de luta, bustos de atenção, fala, vitória e derrota, placas de tiles da conversa e do versus, GQ01 sem cauda fechada, GQ02 como shear diagnóstico e a guarda autoral GQ03 medida no par. Intervalos de luta não desenhados.",
     "converted": false,
     "diagnostic_adapter": "prepare_authored_sprite_sample.py gravou derivados e conversion.json em out/diagnostics. Sem ROM e sem promoção a res/.",
     "observed_in_emulator": false,
@@ -84,7 +84,7 @@
       "art_approval": "pending",
       "rom": false
     },
-    "owner_tradeoff": "O alvo 66–72 permanece. Redução para 60 px não foi aceita. GQ01 não desenhou a silhueta fechada. GQ02 fecha a sola e passa o par; o toque de bengala continua ilegal. Mudança de alcance ou de identidade fica com o dono. Outro objeto não aumenta o limite da linha.",
+    "owner_tradeoff": "O alvo 66–72 permanece. Redução para 60 px não foi aceita. GQ02 é diagnóstico de shear, não a guarda a promover. GQ03 é a candidata autoral medida: 69 px, par legal, pico 8 sem folga. O toque continua ilegal. A faixa da bengala tem casaco na esquerda e haste na direita; a sola do toque também passa de quatro colunas. Mudança de alcance ou de identidade fica com o dono.",
     "gq02_pair_2026_11_01": {
       "source": "logical/GQ02_stacked_guard.png",
       "sha256": "499a39323279b0efef90341b746fd4a7ac6d58a0aa01f6cbdb731d710aad57a1",
@@ -98,7 +98,20 @@
       "line_sim_self_check": "pass",
       "rom": false,
       "art_approval": "pending",
-      "limit": "Uma face, um canto, Ken de construção. A escada do shear da cauda pede revisão. Não mede BC04, K04 nem RL05."
+      "limit": "Estudo geométrico. A escada do shear não é arte final e não pede aceite do dono. Não mede BC04, K04 nem RL05."
+    },
+    "gq03_pair_2026_11_01": {
+      "source": "logical/GQ03_authored_guard.png",
+      "sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "recipe": "encaixe 2/3×6/7 e depois extra 7/9, após assentar a fonte a 104 px",
+      "opaque_height_px": 69,
+      "opaque_width_px": 25,
+      "neutral_columns_after_extra": 4,
+      "line_sim": "32 sprites, pico 8, overflow 0",
+      "also_measured": "oito fases horizontais, dois cantos, face espelhada e packing x 1/4/7, todos pico 8",
+      "art_approval": "pending",
+      "rom": false,
+      "connects_to_jab_v8": false
     }
   },
   "rows": [
@@ -122,7 +135,7 @@
       "purpose": "Contato do toque: cabo na luva, haste para a frente, ponta romba dourada, punho de guarda alto.",
       "dimensions_pivot": "128×128. Estudo 35/52: coroa–sola 70, 7 colunas exploratórias sem adversário. Par oficial extra 1/1: corpo 89 px, pico 11, ilegal. Extra 4/6: corpo 60 px, pico 9, ilegal.",
       "duration_tracks": "Proposta do contrato: oito desenhos, 15 ticks. Só a guarda J01 e o contato BC04 existem. Carga, recolha e retorno não desenhados de propósito.",
-      "dependencies": "Tentativa 1 rejeitada e preservada. Ponta alta: duas armas erradas preservadas e o experimento fechado. Não multiplicar BC04 até haver composição legal ou decisão do dono."
+      "dependencies": "Tentativa 1 rejeitada e preservada. Ponta alta: duas armas erradas preservadas e o experimento fechado. Não multiplicar BC04 até haver composição legal ou decisão do dono. No extra 7/9 a faixa da haste ocupa 6 colunas, casaco à esquerda e haste à direita, e a sola ocupa 5, bota nas duas pontas. Ver proposals/BC04_overflow_materials_v1.json."
     },
     {
       "id": "social_low_boot_check",
@@ -200,10 +213,10 @@
     },
     {
       "id": "guard",
-      "status": "stacked_candidate_pair_passed_art_pending",
-      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/GQ02_stacked_guard.png",
-      "sha256": "499a39323279b0efef90341b746fd4a7ac6d58a0aa01f6cbdb731d710aad57a1",
-      "purpose": "Guarda derivada de J01: cauda e bota de trás dobram para a haste; ponta de latão recomposta. Extra 7/9, corpo 69 px, par com Ken pico 8. Escada do shear ainda pede revisão. Não é intervalo, não é ROM e não aprova o toque."
+      "status": "authored_candidate_pair_passed_art_pending",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/GQ03_authored_guard.png",
+      "sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "purpose": "Guarda autoral de apoio fechado, 69 px, par com Ken a pico 8 sem folga. Não liga ao jab v8. GQ02 permanece só como diagnóstico. Não é intervalo, não é ROM e não aprova o toque."
     },
     {
       "id": "knockdown_fall",

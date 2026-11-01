@@ -72,12 +72,41 @@
       "sha256": "69bedbff99dee51bf6645cda9f3452634017f9207fda9a7fd7753fd9ce430871",
       "prompt": "prompts/GQ01_attempt2.txt",
       "do_not_measure_reach": true
+    },
+    {
+      "id": "GQ03_attempt1_crossed",
+      "reason": "Perna cruzada e bengala que não planta. Descartada antes do assento.",
+      "original": "originals/GQ03_attempt1_crossed.jpg",
+      "prompt": "prompts/GQ03_authored_guard.txt"
+    },
+    {
+      "id": "GQ03_attempt2_wide",
+      "reason": "Apoio legível, mas a sola ficou tão larga quanto a de J01. Não foi a candidata medida.",
+      "original": "originals/GQ03_attempt2_wide.jpg",
+      "prompt": "prompts/GQ03_authored_guard.txt"
+    },
+    {
+      "id": "GQ03_tap_attempt1",
+      "reason": "A haste atravessa o corpo e a base abre de novo. Não assentada e não medida.",
+      "original": "originals/GQ03_tap_attempt1_rejected.jpg",
+      "prompt": "prompts/GQ03_tap_attempt1.txt"
     }
   ],
   "kept": [
     {
+      "id": "GQ03_authored_guard",
+      "role": "candidata autoral de guarda. Medida no par a 69 px e pico 8. Não é desenho aprovado, não substitui J01 e não abre o toque.",
+      "logical": "logical/GQ03_authored_guard.png",
+      "sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "original": "originals/GQ03_authored_guard.jpg",
+      "original_sha256": "e168fc42d821f2918b814bd3b91a8c032efc5b0f9e5de5703ff7f3ef039cc2ed",
+      "prompt": "prompts/GQ03_authored_guard.txt",
+      "recipe": "register_gq03_authored_guard.py",
+      "pair": "proposals/GQ03_pair_result.json"
+    },
+    {
       "id": "GQ02_stacked_guard",
-      "role": "candidata de guarda com a cauda e a bota de trás dobradas para a haste. Medida no par. Não é desenho aprovado e não abre intervalos da bengala.",
+      "role": "diagnóstico de shear por linha. O par passou e a escada não é arte final. Não usar este script para produzir anatomia.",
       "logical": "logical/GQ02_stacked_guard.png",
       "sha256": "499a39323279b0efef90341b746fd4a7ac6d58a0aa01f6cbdb731d710aad57a1",
       "derived_from": "cps2_sample_v1/jab_revision_v8/native/J01.png",

@@ -1,0 +1,46 @@
+{
+  "schema": "dr_social_two_button_proposal_v2",
+  "date": "2026-11-01",
+  "status": "proposal_not_approved",
+  "replaces_reading_of": "doc/dr_social_two_button_proposal_v1.json",
+  "deciders": ["designer", "owner"],
+  "blocks": ["GD01", "GD02"],
+  "does_not": [
+    "aprovar quarto de lua, guarda, cancelamento ou janela numérica",
+    "ensinar o comando na cena 10",
+    "copiar quatro botões ou alavanca de Neo Geo",
+    "definir dano, vantagem, hitstop ou tamanho da barra"
+  ],
+  "why_one_table": "A v1 deixava qual botão é o leve e qual movimento especial em aberto. Esta é uma única candidata para o designer avaliar. O quarto de lua vem antes do toque duplo porque dash_run já é frente, frente.",
+  "candidate_table": {
+    "button_1": "social_light_jab",
+    "down_or_down_forward_plus_button_1": "social_low_boot_check",
+    "button_2": "basic_cane_tap",
+    "quarter_circle_forward_plus_button_1": "rapier_lunge",
+    "quarter_circle_forward_plus_button_2": "boomerang_throw",
+    "button_1_and_button_2_same_poll_with_full_meter": "social_read_super"
+  },
+  "not_chosen": {
+    "double_tap_forward_plus_button": "Colide com dash_run, que já é frente, frente. Fica de fora desta candidata.",
+    "which_special_on_which_button": "A tabela acima é a candidata. Trocar 1 e 2 entre rapieira e bumerangue é a alternativa não escolhida."
+  },
+  "super_same_poll": {
+    "chosen": "O primeiro botão não espera. 1 sozinho sai como jab no mesmo instante de sempre. O Super só nasce se 1 e 2 estão os dois na mesma leitura e a barra está cheia. Um frame de diferença produz o normal do botão que chegou antes e não gasta barra.",
+    "response_cost": "O jab não ganha espera. O custo fica na execução: o Super pede os dois botões juntos, não uma janela longa.",
+    "without_meter": "1 e 2 na mesma leitura produzem o jab. O botão 2 dessa leitura é ignorado. Não há Super, flash nem gasto.",
+    "rejected_alternative": "Segurar o jab por N frames para ver se o 2 chega. Isso atrasaria todo jab. Não é a candidata.",
+    "test": "Na ROM, com reconhecedor ligado: mesma leitura com barra e sem barra; 1 e depois 2 com um frame de diferença; 2 e depois 1 com um frame. O ramo attempt/hit/whiff continua sendo o mesmo Super. O teste com barra cheia observa o ramo; não cria três comandos."
+  },
+  "cases": {
+    "low_diagonal": "Baixo-frente parado mais botão 1 é a checagem baixa. O quarto de lua só vale se a sequência baixo, baixo-frente, frente acontecer antes do botão. Segurar a diagonal não completa o especial.",
+    "both_sides": "Frente e trás são relativos à face do lutador. O desenho do controle não espelha os rótulos 1 e 2. A seta mostrada segue a tradução do reconhecedor.",
+    "guard_versus_walk": "Candidata: segurar trás é guarda; um toque curto de trás é a caminhada. O número de frames que separa os dois não está decidido. Sem esse número a guarda e o recuo se confundem.",
+    "attack_during_dash": "Botão durante dash_run sai o normal daquele botão e encerra a corrida. Não vira especial. Especial continua exigindo o quarto de lua completo.",
+    "priority": "Na mesma leitura, Super com barra vence o especial, e o especial com quarto de lua completo vence o normal daquele botão. Sem a sequência, o botão é normal.",
+    "press_versus_hold": "Normais e especiais são pressionamento. Segurar o botão não repete o golpe nesta candidata. Segurar a direção é postura, guarda ou caminhada.",
+    "expired_motion": "Se o frente do quarto de lua chega tarde, a sequência morre e o botão que vier depois é normal. A duração da janela é hipótese, não número de luta. O experimento é comparar 10, 15 e 20 frames a 60 Hz e registrar qual ainda parece intencional.",
+    "near_simultaneous": "1 e 2 com um ou dois frames de diferença não são Super, pela regra da mesma leitura. O normal do primeiro botão sai.",
+    "replay": "Repetir a demonstração restaura atores, relógios, barra e objetos. Esse reset não existe na luta."
+  },
+  "scene_10_until_decision": "A tela mostra comando em definição. Não desenha quarto de lua como lição."
+}
