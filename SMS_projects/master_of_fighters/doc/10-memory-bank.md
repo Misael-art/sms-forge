@@ -1,5 +1,30 @@
 # 10-memory-bank — master_of_fighters
 
+## Avaliação do pacote e padrão de apresentação de golpes — 2026-11-01
+
+Avaliado incremento `d7a3a2d`: Social segue incompleto. Matriz mantém jab como
+reuso, três chaves isoladas, estados/efeitos não iniciados, conversa atenção/
+fala e três placas versus candidatas. Não foi encontrada ROM do pacote novo;
+nenhuma animação completa nova foi validada nesta revisão. Inspeção estática
+das cinco placas aponta progresso de texto/expressão e pendências de clusters,
+volumes e estabilidade de rosto/crop. Não há aceite artístico integral.
+
+O proprietário propôs padrão com nome do golpe, representação gráfica do
+controle SMS, botões/direções/forma de executar e animação em velocidade correta;
+possível desbloqueável no futuro. [Padrão, avaliação e prompt](character_move_showcase_standard_v1.md)
+e [registro de direção](decisions/character-move-showcase_owner_direction_20261101.json)
+ligados a GDD, roteiro, spec cena 10 e TDD. Comandos/timing competitivos ainda
+precisam GD01/GD02; não converter atalhos do viewer em instruções de jogo.
+
+Próximo passo: continuar personagem completo, resolver composição sem repetir
+hipóteses reprovadas, refinar portraits e preparar a apresentação ligada aos
+dados reais. Piloto parcial não substitui pacote completo nem prova o duelo.
+Desbloqueio é ideia futura, sem sistema de recompensa autorizado neste lote.
+Mudanças deste recorte são somente documentação; sem C/assets/ROM/emulador
+novos. Revisados referências, autoridade, cobertura e diff. Base `d7a3a2d`,
+registro local em `out/diagnostics/move_showcase_design_20261101/`. Produção e
+placa preexistentes preservadas, fora do incremento documental.
+
 ## Revisão do retorno: faixa GDD alcançável, par reprovado — 2026-11-01
 
 O retorno do artista foi conferido. O adaptador v2 aceita razões configuráveis,

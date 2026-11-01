@@ -1,5 +1,34 @@
 # 13-spec-cenas — master_of_fighters
 
+## Cena 10 — apresentação de golpes
+
+Direção do dono em 2026-11-01; [contrato completo](character_move_showcase_standard_v1.md).
+**Documentado, sem implementação/budget/aceite.** Não altera IDs 01–09/D01.
+
+- Finalidade: reconhecer nome/função e aprender o comando real observando ação,
+  consequência e retorno. Entrada: acesso de revisão; acesso de produto/menu
+  ainda pendente. Saída: retorna ao chamador em estado conhecido, input limpo.
+- Ações propostas: selecionar, assistir/repetir, experimentar, voltar; comandos
+  de navegação aguardam GD01, sem competir com botões durante prática.
+- Hierarquia: nome/receita → atuação no palco → resultado → navegação. Controle
+  SMS com direcional/1/2, sequência e etapa ativa legíveis; forma acompanha cor.
+  Controle não espelha seus números; setas respeitam o lado lógico do lutador.
+- Simultâneos: ator, rival quando exigido, arma/objeto/FX do golpe, piso/fundo,
+  nome, sequência, controle, feedback e áudio pertinente. Retrato grande/HUD
+  completo não são obrigatórios. Medir simultaneidade de UI+golpe, não somar
+  aprovações isoladas. Planejar P0/P1, tiles/fontes, SAT/linha, RAM/ROM, VRAM,
+  transferências e pior frame; todos os valores integrados estão pendentes.
+- Extremos/falhas: nome/comando longo, acentos, etapas simultâneas, hold/release,
+  lado invertido, canto, resource vazio, input errado, replay/skip durante objeto,
+  troca de ação e retorno. Fonte/comando ausente não gera demonstração falsa.
+- Qualidade: controle autoral reconhecível, contraste e tipografia consistentes,
+  sem sobreposição a rosto/arma; playback normal não desacelerado para caber texto.
+  Legibilidade em 1× e movimento contínuo. Arte/clareza exigem revisão humana.
+- Aceite: comando da UI e reconhecedor iguais; entrada → ação → resultado →
+  recuperação na mesma ROM; vídeo+estado/input, orçamento, áudio e piso58 por
+  janela sem arredondamento. Modo lento/step explicitamente revisão. Catálogo
+  parcial não aprova o personagem completo. Desbloqueio futuro fora deste lote.
+
 ## Cenas da direção de fã — 2026-11-01
 
 Vínculo: [GDD](11-gdd.md#direção-de-fã-e-campanha--proprietário-2026-11-01),

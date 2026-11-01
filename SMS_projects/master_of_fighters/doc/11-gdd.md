@@ -1,5 +1,27 @@
 # 11-gdd — master_of_fighters
 
+## Apresentação de golpes — direção do proprietário, 2026-11-01
+
+Nova direção documentada: cena 10 apresenta nome do golpe, animação à velocidade
+correta, controle do Master System e sequência visual dos botões/direções, com
+acabamento gráfico coerente. Referência Neo Geo é de clareza/apresentação, sem
+copiar arte ou seu esquema de botões. [Padrão e prompt](character_move_showcase_standard_v1.md)
+e [decisão](decisions/character-move-showcase_owner_direction_20261101.json).
+
+É padrão de implementação/revisão do personagem proposto para este projeto,
+ainda não implementado ou validado. Assistir e experimentar são sugestões de
+fluxo; comandos competitivos continuam em GD01/GD02. Não inventar quarto de
+lua, carga ou associação a 1/2 para preencher a tela. Nomes finais e ícones
+seguem a mesma definição de ação/comando usada pela luta. Timing diagnóstico
+não vira frame-data e replay lento não aprova a velocidade normal.
+
+Cena 10 reutiliza assets e runtime reais; piloto parcial é identificado como
+diagnóstico. O pacote Dr. Social continua incompleto no incremento d7a3a2d:
+três chaves novas, jab reutilizado, portraits candidatos; sem ROM integral.
+A cena não autoriza ignorar composição do par, reduzir 66–72 px ou chamar uma
+galeria de sprites de combate pronto. Possível desbloqueável futuro permanece
+ideia aberta: gatilho, persistência e acesso pelo título/menu não decididos.
+
 ## Direção de fã e campanha — proprietário, 2026-11-01
 
 **Estado: direção documentada para desenvolvimento futuro; não implementada.**
@@ -951,6 +973,7 @@ VBlank, áudio e aceitação de release continuam pendentes.
 | 07 | cena narrativa | diálogo/retratos, encenação no palco e transição ao duelo | direção documentada; budget pendente |
 | 08 | vitória/evolução de Alis | resultado, nível e distribuição de atributos | regras FC01 pendentes |
 | 09 | encerramento | resolução, epílogo e retorno | roteiro final FC04 pendente |
+| 10 | apresentação de golpes | nome, controle SMS, comando real e execução na velocidade da luta | padrão documentado; implementação/validação pendentes |
 
 ## Fora de escopo (explícito)
 - Paridade com MUGEN real — o teto é "motor de luta MUGEN→SMS dirigida por dados".

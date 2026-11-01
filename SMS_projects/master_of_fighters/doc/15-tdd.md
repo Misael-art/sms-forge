@@ -1,5 +1,35 @@
 # 15-tdd — master_of_fighters
 
+## Padrão de apresentação de golpes — contrato futuro de integração
+
+[Padrão de projeto](character_move_showcase_standard_v1.md), cena 10. Não há
+implementação neste lote. Estender dados/FSM/renderer/loader oficiais, não
+criar outra engine de showcase ou tabela divergente de animação/comando.
+UI lê ID/nome/comando/condições da mesma definição que o reconhecedor e luta.
+Demonstração funcional envia a sequência de input por esse reconhecedor;
+prática lê input consumido e resultado. Injetar pose diretamente só serve à
+revisão artística identificada, nunca prova de execução de golpe.
+
+Relógios separados: pausa de leitura/replay da UI e timeline real de movimento.
+Na execução normal, mesmos IDs/holds, objetos/hitstop/recuperação da luta;
+nenhum ajuste de velocidade no emulador ou duração paralela. Trace identifica
+input observado, comando aceito, estado/pose submetida/apresentada, contato e
+primeiro retorno controlável. Slow/step são facilidades diagnósticas rotuladas.
+
+Reset por demonstração é explícito: posição, adversário, recurso, relógios e
+objetos, sem vazar comportamento para partida normal. Super de counter usa
+ataque adversário elegível e resolver normal; não forçar ramo hit. Troca de
+página/saída consome navegação e limpa estados transitórios antes de liberar
+controle. Preservar regras de orientação/precedência/buffer do jogo.
+
+Catálogo compilado lista asset→ação/página→símbolo→ROM e permite carga por
+demanda conforme banking existente; não exigir todos os assets residentes.
+Exibir conteúdo implementado e rotular pendências em revisão; produto não
+ensina comando inexistente. Critérios de aceite e extremos na spec/padrão.
+Reuso futuro como desbloqueável separa elegibilidade/acesso do conteúdo, sem
+implementar save/economia/recompensa antes de decisão. Alvo60/piso58, medição
+integrada de UI+combate, VBlank e sessão privada continuam obrigatórios.
+
 ## Campanha, apresentação e progressão — contrato futuro, 2026-11-01
 
 [Direção no GDD](11-gdd.md#direção-de-fã-e-campanha--proprietário-2026-11-01),

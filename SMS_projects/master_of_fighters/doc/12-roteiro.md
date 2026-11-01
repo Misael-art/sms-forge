@@ -1,5 +1,22 @@
 # 12-roteiro — master_of_fighters
 
+## Cena 10 — demonstração de golpes, direção de 2026-11-01
+
+[Padrão vigente](character_move_showcase_standard_v1.md). Proposta de ritmo:
+selecionar ação → nome e comando legíveis → preparação da demonstração →
+execução em velocidade real → consequência → recuperação → repetir/praticar
+ou voltar. A pausa de leitura fica antes/depois do golpe, não altera sua ação.
+Texto curto explica função/condição; ícones mostram a ordem e o controle destaca
+entrada reconhecida. Nenhuma fala de personagem ou locução nova é exigida.
+
+O destaque do botão não pode antecipar ficticiamente o aceite do motor nem
+comemorar input errado. Preparação, contato e retorno mantêm o ritmo da luta.
+Laudo Final exige a situação elegível de counter; ramos são consequências da
+mesma ação, não três golpes diferentes. Sem comandos selados, apresentação é
+amostra de animação identificada, com ensino de execução pendente. A intenção
+é elegância e compreensão no tamanho SMS; não uma tela de depuração como arte
+final. Reuso como prêmio desbloqueável depende decisão futura do proprietário.
+
 > Roteiro e diálogos. Autoridade #6.
 > Primeiro degrau da ordem de trabalho de cena: **roteiro vem antes do
 > storyboard, que vem antes da arte cara.**
