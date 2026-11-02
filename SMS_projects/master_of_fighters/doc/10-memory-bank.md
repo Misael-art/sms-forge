@@ -1,5 +1,28 @@
 # 10-memory-bank — master_of_fighters
 
+## Revisão do designer sobre GQ03 / 07e4bce — 2026-11-01
+
+GQ03 corrigiu o shear: script de registro inspecionado só recorta/escala/
+quantiza; autoria permanece no original de edição de imagem. Self-checks do
+adaptador/simulador passaram. Cinco manifests reavaliados: base/espelho 32
+sprites, packing x=1/4/7 34; todos pico 8 e zero overflow. Sem reconversão,
+ROM ou emulador nesta revisão. Translação X não muda orçamento por linha;
+cantos, FX e elenco continuam sem aceite real. Recibo em
+`out/diagnostics/social_gq03_review_20261101/simulation_review.json`.
+
+[Parecer e prompt vigentes](character_move_showcase_standard_v1.md) pedem
+comparação de identidade GQ03/J01 antes de animar: quadro intermediário não
+corrige deriva de cabelo/colete/proporção. Não há aprovação de substituição do
+jab. Próximo resultado é ciclo completo de toque ou estado independente previsto,
+com retorno; evitar outro checkpoint apenas de guarda estática.
+
+Controles v2 permanecem proposta. Corrigir baixo-trás, bordas/hold do Super,
+precedência quarto de lua+1+2 sem barra, hipótese de cancelamento do dash e
+recuo/guarda temporal. Frente-frente para dash não foi localizado como decisão
+aprovada nesses contratos. Recomendações de design não aprovam GD01/GD02.
+Sem aceite de arte final, gameplay, animação, áudio, FPS ou personagem completo.
+
+
 ## Revisão do designer sobre 4f86572 — 2026-11-01
 
 Social continua incompleto. Self-checks do adaptador/simulador passaram nesta

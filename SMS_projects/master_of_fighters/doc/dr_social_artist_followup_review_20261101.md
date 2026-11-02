@@ -1,9 +1,9 @@
 # Dr. Social — revisão da produção inicial e prompt de continuação
 
-> **Direcionamento vigente:** ver a revisão de `4f86572` e o prompt ao fim de
+> **Direcionamento vigente:** ver a revisão de `07e4bce` e o prompt ao fim de
 > [Apresentação de golpes](character_move_showcase_standard_v1.md).
-> GQ02 passou no par de controle, mas é deformação procedural diagnóstica;
-> precisa de candidata autoral e nova validação. O texto abaixo preserva os
+> GQ03 é candidata autoral medida, ainda sem aceite de continuidade visual ou
+> animação. GQ02 permanece diagnóstico. O texto abaixo preserva os
 > checkpoints anteriores e não deve ser copiado como o próximo prompt.
 
 

@@ -6,11 +6,104 @@ Fighters, não uma técnica homologada globalmente no SMSForge. Ver
 [registro de direção](decisions/character-move-showcase_owner_direction_20261101.json),
 [GDD](11-gdd.md), [roteiro](12-roteiro.md), [cenas](13-spec-cenas.md) e [TDD](15-tdd.md).
 
-## Revisão vigente — incremento 4f86572, 2026-11-01
+## Revisão vigente — incremento 07e4bce, 2026-11-01
+
+**GQ03 corrigiu a autoria da guarda, mas não concluiu o personagem.** O agente
+respondeu ao diagnóstico anterior: voltou à edição de imagem referenciada em
+J01, preservou GQ02 como estudo e discriminou materiais do excesso em BC04.
+O script de GQ03 foi inspecionado: recorte por chave, redução nearest, encaixe
+e quantização; não contém o shear anatômico de GQ02. Isso corrige aquele desvio,
+sem aprovar automaticamente o desenho ou a tradução SMS.
+
+Fonte lógica `44c64bc9…`, derivado SMS `279d65f5…`; receita registra o original
+`e168fc42…` e J01 como referência. Inspecionados fonte ampliada, saída SMS e
+J01. GQ03 apresenta uma base compacta desenhada, mas a saída SMS ainda funde
+as botas em parte da região inferior e simplifica rosto/materiais. Preservar
+esse resultado para comparação, sem chamar quantização de acabamento aprovado.
+O próprio produtor relata diferenças de cabelo/colete/base: verificar identidade
+contra model sheet e jab. **Um intervalo resolve deslocamento/pose, não mudança
+de figurino, cabelo ou proporção.** Não aprovar um morph entre versões distintas
+do personagem, nem determinar por texto que basta exatamente um novo quadro.
+
+### Conferência técnica e seus limites
+
+Self-checks do adaptador e simulador passaram nesta revisão. Reexecutei o
+simulador nos cinco manifests existentes, sem reconversão, edição de pixels,
+build ou sessão de emulador:
+
+| Manifest | SAT | Pico/overflow |
+|---|---:|---|
+| GQ03 base | 32 | 8 / zero |
+| GQ03 espelhada | 32 | 8 / zero |
+| Packing x=1, x=4 e x=7 | 34 cada | 8 / zero |
+
+Recibo: `out/diagnostics/social_gq03_review_20261101/simulation_review.json`.
+São testes do mesmo Ken de construção. Transladar todo um metasprite em X
+preservando seus intervalos Y não muda a contagem por scanline; oito posições
+não são oito novos orçamentos. Posição nos cantos ainda precisa prova de clipping,
+wrap e integridade do corpo/arma no runtime. Packing distinto e face espelhada
+são casos diferentes e foram conferidos como tal. Pico 8 significa zero folga
+**nas linhas saturadas** para sprites adicionais. Não prova impossibilidade de
+qualquer FX, nem serve ao elenco inteiro: BG/FX e novo par exigem budget próprio.
+
+O diagnóstico de materiais do BC04 é exploratório: classifica cores próximas
+da paleta e colunas, não identifica semanticamente toda a anatomia nem substitui
+o simulador dos intervalos 8×16. Serve para orientar atuação: casaco/corpo,
+haste e botas contribuem em faixas distintas. Preservar a intenção e alcance
+do toque; não tornar “as duas solas no chão” ou “casaco atrás da haste” leis
+universais de animação. Apoio e ação secundária precisam ser naturais.
+
+### Parecer de design sobre controles v2 — proposta ainda não aprovada
+
+A v2 é mais concreta, mas **não está pronta para virar GD01/GD02**:
+
+- 1 jab, 2 toque e direção baixa+1 checagem formam uma candidata compreensível.
+  Falta baixo-trás: definir se mantém guarda baixa e qual ataque resulta. Minha
+  recomendação de design é avaliar a checagem a partir das três direções baixas,
+  com prioridade explícita dos comandos completos; não está aprovada.
+- Quarto de lua+1/2 pode ser candidato dos especiais. `dash_run` existe no
+  contrato, mas não encontrei nesses documentos aprovação de “frente, frente”
+  como seu comando. Tratar isso como hipótese de conflito, não decisão existente.
+- Super exigindo duas bordas na mesma leitura privilegia precisão de um frame.
+  Rejeito sua promoção sem experimento de controle real. Especificar bordas de
+  pressão, botões já mantidos, lockout e reentrada: “ambos estão apertados” não
+  equivale a “ambos começaram nesta leitura”. Comparar tolerância curta sem
+  atrasar normais e, se isso exigir cancelamento novo, explicitar a regra para
+  decisão; alternativa é propor um comando direcional com um botão. Nenhuma
+  alternativa ou quantidade de frames fica aprovada aqui.
+- Separar caminhada/guarda pelo tempo segurando trás adiciona uma distinção
+  temporal ainda sem justificativa de experiência. Recomendo estudar recuo com
+  trás e defesa contextual diante de ameaça elegível, incluindo guarda baixa,
+  sem esperar N frames para a intenção defensiva. Hipótese para decisão e teste.
+- Há conflito entre “sem barra 1+2 sai jab” e “especial completo vence normal”.
+  Resolver explicitamente quarto de lua+1+2 sem barra, duas bordas desencontradas,
+  direções baixas, ataque durante dash e estados nos quais não se pode agir.
+  A regra de “encerra corrida com normal” também é proposta de cancelamento,
+  não mero detalhe gráfico.
+
+Janelas de 10/15/20 frames são hipóteses do produtor para comparar, não números
+validados. Sem reconhecedor/ROM e teste de resposta, não aprovar facilidade de
+execução nem mostrar a receita como lição na cena 10. O artista entrega as
+necessidades de representação; designer/engenharia resolvem as regras e o
+proprietário registra a decisão. Isso não bloqueia os desenhos independentes.
+
+### Direção do próximo lote
+
+Consolidar identidade da candidata sem recomeçar toda a guarda; se houver
+deriva, corrigir a fonte autoral antes de gerar intervalos. Em seguida, chave
+viável do toque e ciclo completo, conferindo todas as poses/retorno. Preservar
+jab v8. A ligação com ele permanece pendente de continuidade visual e budget;
+não inserir espera oculta no ataque. Se o toque continuar bloqueado, escolher
+um estado já previsto e independente para fechar uma sequência observável.
+O próximo checkpoint precisa mostrar progresso temporal, não somente outra
+guarda legal. Galeria parcial pode demonstrar o que existe, claramente rotulada;
+continua sem aprovar combate, comandos, FPS ou o pacote completo.
+
+## Histórico — revisão do incremento 4f86572, 2026-11-01
 
 **Dr. Social segue incompleto. GQ02 é estudo geométrico medido, não guarda
-artística aprovada.** Esta seção e o prompt ao fim substituem os direcionamentos
-de checkpoint anteriores; os registros abaixo permanecem históricos.
+artística aprovada.** Esta foi a revisão de 4f86572; a revisão de 07e4bce acima e o prompt ao fim
+são o direcionamento vigente.
 
 O agente compreendeu a faixa GDD, a diferença entre simulação e ROM e a
 necessidade de não inventar comandos. Preservou o jab e os originais. Porém,
@@ -244,8 +337,8 @@ antes de sua aprovação e das próximas tarefas de elenco.
 - `doc/dr_social_cps2_sample_v1.md`, revisão v8 e decisão do método em
   `doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`;
 - este padrão `doc/character_move_showcase_standard_v1.md`, especialmente a
-  revisão vigente de 4f86572; checkpoints mais antigos são históricos;
-- `doc/dr_social_two_button_proposal_v1.json`, proposta ainda não aprovada.
+  revisão vigente de 07e4bce; checkpoints mais antigos são históricos;
+- `doc/dr_social_two_button_proposal_v2.json`, proposta ainda não aprovada.
 
 **Identidade e referências.** Social é humano, investigador/psicólogo, esguio,
 cabelo grisalho, óculos de latão, casaco azul/ciano, colete separado, gravata
@@ -259,13 +352,16 @@ e o papel de cada uma; não alimente o processo com todo o histórico de testes.
 Bengala é romba, rapieira é lâmina rígida de estocada, bumerangue é de aço
 com rastro violeta. Sem poderes mentais, vampirismo ou arsenal adicional.
 
-**Estado real.** GQ02 coube no controle Ken a 69 px, 35 sprites e pico 8,
-mas foi deformada por script. É prova geométrica limitada, não arte final.
-A bengala, a bota e a rapieira continuam chaves isoladas. A matriz tem 21
-estados não iniciados. Portraits são candidatos; cena 10 é um storyboard sem
-ator nem comando decidido. Não há ROM nova do personagem completo.
+**Estado real.** GQ03 é candidata autoral de guarda; no mesmo Ken, 69×25 px,
+32 sprites e pico 8. Fonte: `cps2_keys_v1/logical/GQ03_authored_guard.png`,
+SHA `44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b`.
+Fonte, prompts, receita e medição estão sob
+`data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/`.
+Base, espelho e packing x=1/4/7 passaram no simulador; não há aceite artístico
+ou ROM. GQ02 permanece estudo procedural. Bengala, bota e rapieira continuam
+chaves; portraits são candidatos; cena 10 não ensina um comando decidido.
 
-1. **Retome o método aprovado.** Preserve GQ02 e os scripts como diagnóstico
+1. **Mantenha o método aprovado.** Preserve GQ02 e os scripts como diagnóstico
    com proveniência explícita. Não os use para produzir anatomia, expressão ou
    intervalos finais. Produza o desenho por autoria visual e derive a versão
    SMS com a receita oficial. Código pode converter, medir, organizar e montar
@@ -273,37 +369,43 @@ ator nem comando decidido. Não há ROM nova do personagem completo.
    expressão para simular trabalho artístico. Não altere a fábrica nem promova
    curadoria global. Se a ferramenta autoral estiver indisponível, registre a
    limitação concreta e avance contratos/medição/integração reaproveitável.
-2. **Desenhe uma guarda candidata convincente.** Use a descoberta de apoio mais
-   compacto; deixe quadril, joelhos, tornozelos e dobras participarem da pose.
-   Preserve idade, proporções, pegada e equipamento. Não congele cabeça/tronco
-   só porque o estudo os manteve. O critério é sustentação corporal, leitura e
-   composição, sem meta arbitrária de mover poucos pixels. Não peça aprovação
-   da escada procedural como única saída. Mantenha 66–72 px de corpo em pé,
-   mesma transformação por pose, sem baixar para 60 px ou comprimir só um eixo.
-   GQ02 usou encaixe oficial 2/3×6/7 seguido de extra 7/9; estudo 35/52 direto
-   é outra transformação. Registre a receita efetivamente usada, sem misturá-las.
-3. **Valide antes de multiplicar intervalos.** Confira fonte e saída SMS em
-   1× e nearest ampliado. Depois meça a nova guarda e as chaves críticas pelo
-   adaptador e simulador oficiais, com self-check prévio. Registrar par, face,
-   posição, SAT, pico, linhas excedidas e hashes. Ken é controle de construção,
-   não substitui elenco. Não declare folga com pico 8. Verifique ambas as faces,
-   cantos, deslocamentos pertinentes à grade, contato e FX simultâneos. Toda
-   alteração de pixels invalida a contagem anterior para aquele novo candidato.
+2. **Consolide GQ03 antes de animar a partir dela.** Compare em mesma escala
+   com J01 e referências aprovadas: cabelo/rosto/idade, colete/fechos, comprimentos,
+   proporções e equipamento. Use recortes identificados de identidade se o model
+   sheet inteiro trouxer inventário que não pertence à cena. Não transforme
+   diferenças de identidade em morph com um quadro intermediário. Se forem
+   diferenças gestuais legítimas, demonstre continuidade; se forem deriva de
+   geração, corrija a fonte autoral. Preserve J01–J06. Não recomece o pacote nem
+   faça outra guarda apenas por variação estética. Corrija a leitura das botas
+   e materiais na saída SMS pelo método autorizado, sem deformação procedural.
+   Mantenha 66–72 px de corpo em pé e a receita oficial declarada, comum às poses:
+   encaixe 2/3×6/7 seguido de extra 7/9 neste candidato. O estudo 35/52 é distinto.
+3. **Use as medições existentes e valide o que mudar.** Não repita translações
+   horizontais como novos orçamentos: os intervalos Y permanecem iguais. Retenha
+   os controles base/espelho/packing; reexecute nos pixels/poses novos. Conferir
+   1× e nearest ampliado, self-check prévio, hashes, par/face/posição, SAT, pico
+   e linhas excedidas. Pico 8 não oferece folga nas linhas saturadas; efeitos,
+   rival real e contato mudam o orçamento. Cantos precisam de prova de clipping,
+   wrap e corpo/arma completos no runtime. Ken continua controle de construção.
 4. **Resolva o toque pela função.** Use as linhas/células excedidas para separar
    contribuição dos pés, corpo, braço, haste e rival. Explore gesto, apoio e
    organização corporal preservando controle frontal, ponta romba, alcance e
-   altura lógica. Não simplesmente eleve a arma, encurte-a, apague células,
+   altura lógica. Duas solas plantadas e casaco atrás da haste são hipóteses de
+   pose, não exigências de todos os quadros: permita peso e ação secundária.
+   Não simplesmente eleve a arma, encurte-a, apague células,
    oculte rival ou divida em objeto supondo ganhar limite por linha. Uma nova
    chave é candidata até medida. Mudança de função/alcance/identidade exige
    alternativa concreta e decisão registrada do dono; continue peças independentes.
 5. **Feche uma ação inteira assim que viável.** Preparação → ameaça/contato →
    consequência → recolha → retorno à guarda, com pivô estável, peso e equipamento
-   contínuos. Meça também os intervalos. Preserve J01–J06 do jab v8; GQ02 não
+   contínuos. Meça também os intervalos. Preserve J01–J06 do jab v8; GQ03 não
    aprova automaticamente esse ciclo. Se a nova guarda não conecta com o jab,
-   apresente transição candidata e seu custo, sem substituir os quadros aprovados
-   ou acrescentar atraso competitivo oculto. Hipóteses de duração ficam rotuladas;
+   resolva primeiro identidade/figurino; só então apresente a transição gestual
+   necessária e seu custo. Não fixe um único quadro como solução antes de ver o
+   ciclo, não substitua os aprovados nem acrescente atraso competitivo oculto.
+   Hipóteses de duração ficam rotuladas;
    exposição de estudo não define startup, hitstop ou recuperação de combate.
-6. **Continue até cobrir o personagem.** Siga os IDs e lacunas da matriz v2:
+6. **Continue até cobrir o personagem.** Siga os IDs do contrato v2 e as lacunas da matriz:
    locomoção, guarda/respostas a impacto, queda/levantar, entradas, provocações,
    vitórias, derrota/empate, três normais, dois especiais e Laudo Final com
    attempt/hit/whiff. Complete tracks de corpo/arma/projétil/FX e os portraits
@@ -322,9 +424,11 @@ ator nem comando decidido. Não há ROM nova do personagem completo.
    ter acabamento coerente; o controle físico não se espelha ao trocar o lutador
    de lado. Pressionar/manter/soltar/simultaneidade devem coincidir com a receita.
    UI autoral, sem promover retângulos diagnósticos a acabamento final. O artista
-   não decide GD01/GD02: entregue ao designer proposta única e conflitos de
-   dash, guarda, precedência, diagonais, barra e tolerância entre botões. Até
-   decisão, mostre “comando em definição”; nunca ensine um comando inventado.
+   não decide GD01/GD02: entregue ao designer a v2 e os conflitos apontados na
+   revisão vigente: baixo-trás, guarda temporal,
+   Super de uma leitura, bordas versus hold, cancelamento de dash e quarto de
+   lua+1+2 sem barra. Frente-frente para dash é hipótese, não decisão registrada.
+   Não trate a ausência de resposta como aprovação. Até decisão, mostre “comando em definição”; nunca ensine um comando inventado.
 9. **Integre pela rota oficial.** Coordene as necessidades de engenharia no
    consumidor existente. Construa catálogo navegável dos assets realmente prontos,
    carregados por demanda, sem motor paralelo. Piloto parcial deve indicar sua
@@ -348,6 +452,9 @@ registrada, não um alias `HEAD` se o gancho exige a referência ou SHA. Não
 contorne o gancho, crie outra branch ou mude o registro para publicar. Confirme
 SHA remoto uma vez. O bloqueio de publicação não substitui a conclusão artística.
 
-Não encerre o objetivo ao conseguir outra pose estática. Prossiga pelos ramos
+Próximo checkpoint: uma ação/estado previsto com ciclo completo e retorno,
+medido e observado temporalmente. Se o toque seguir bloqueado, conclua uma
+sequência independente já prevista, mantendo o objetivo integral. Não encerre
+o objetivo ao conseguir outra pose estática. Prossiga pelos ramos
 viáveis até o pacote revisável; decisões ainda não experimentadas permanecem
 explicitamente pendentes, com experimento e responsável definidos.
