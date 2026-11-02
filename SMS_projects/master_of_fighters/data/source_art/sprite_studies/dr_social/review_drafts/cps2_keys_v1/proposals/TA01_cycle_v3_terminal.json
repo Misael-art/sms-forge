@@ -1,0 +1,346 @@
+{
+  "schema": "social_taunt_terminal_review_v1",
+  "date": "2026-11-02",
+  "not_an_approval": true,
+  "new_pose": false,
+  "rom_sha256": "47ab46634198563cdf8788187c5472475c39cc5c310b37dbcdabdcb7cb52bd07",
+  "video_sha256": "66a98981cd85f175586613d3ee444e798dfa57937f087d7cc4b7e11c712f31f4",
+  "video_frames": 360,
+  "encoded_seconds": 6.007736,
+  "capture_elapsed_seconds": 6.019422882,
+  "board": "preview/TA01_cycle_v3_terminal_sms_8x.png",
+  "board_sha256": "e1dd5b72e115877ff61778b0b0fdb6f402448c732950e7928698d1776da4829e",
+  "board_order": [
+    "TA06",
+    "TA07",
+    "TA08",
+    "GQ03"
+  ],
+  "board_note": "Faixa de cima em 1×, faixa de baixo em 8× nearest, solas alinhadas. Só o lutador da esquerda do framebuffer. A TA07 antiga não entra.",
+  "poses": {
+    "TA06": {
+      "video_frame": 48,
+      "screen_box": [
+        66,
+        80,
+        94,
+        152
+      ],
+      "opaque_wh": [
+        28,
+        72
+      ],
+      "crown_y": 80,
+      "sole_y": 151,
+      "white_right_first": [
+        {
+          "n": 5,
+          "cx": 77.0,
+          "cy": 121.0,
+          "from_crown": 41.0,
+          "from_sole": 30.0,
+          "box": [
+            77,
+            119,
+            77,
+            123
+          ]
+        },
+        {
+          "n": 20,
+          "cx": 77.0,
+          "cy": 136.5,
+          "from_crown": 56.5,
+          "from_sole": 14.5,
+          "box": [
+            77,
+            127,
+            77,
+            146
+          ]
+        },
+        {
+          "n": 12,
+          "cx": 76.9,
+          "cy": 111.5,
+          "from_crown": 31.5,
+          "from_sole": 39.5,
+          "box": [
+            75,
+            110,
+            79,
+            114
+          ]
+        }
+      ],
+      "torso_sms_codes": {
+        "56": 151,
+        "20": 133,
+        "(0, 0, 0)": 101,
+        "(170, 85, 85)": 35,
+        "(85, 0, 0)": 32,
+        "(0, 0, 85)": 28
+      },
+      "source": {
+        "body_h": 876,
+        "crown_y": 54,
+        "sole_y": 929,
+        "width_ratios": {
+          "10": 0.2123,
+          "15": 0.2466,
+          "25": 0.3413,
+          "35": 0.4315,
+          "50": 0.2489,
+          "70": 0.4247,
+          "100": 0.3767
+        }
+      }
+    },
+    "TA07": {
+      "video_frame": 58,
+      "screen_box": [
+        66,
+        81,
+        94,
+        152
+      ],
+      "opaque_wh": [
+        28,
+        71
+      ],
+      "crown_y": 81,
+      "sole_y": 151,
+      "white_right_first": [
+        {
+          "n": 4,
+          "cx": 85.5,
+          "cy": 112.0,
+          "from_crown": 31.0,
+          "from_sole": 39.0,
+          "box": [
+            85,
+            111,
+            86,
+            113
+          ]
+        },
+        {
+          "n": 13,
+          "cx": 73.2,
+          "cy": 111.5,
+          "from_crown": 30.5,
+          "from_sole": 39.5,
+          "box": [
+            72,
+            110,
+            75,
+            114
+          ]
+        },
+        {
+          "n": 19,
+          "cx": 73.0,
+          "cy": 136.0,
+          "from_crown": 55.0,
+          "from_sole": 15.0,
+          "box": [
+            73,
+            127,
+            73,
+            145
+          ]
+        }
+      ],
+      "torso_sms_codes": {
+        "57": 136,
+        "20": 116,
+        "(0, 0, 0)": 66,
+        "(0, 0, 85)": 61,
+        "56": 33,
+        "(85, 0, 0)": 30
+      },
+      "source": {
+        "body_h": 877,
+        "crown_y": 53,
+        "sole_y": 929,
+        "width_ratios": {
+          "10": 0.2132,
+          "15": 0.2486,
+          "25": 0.2577,
+          "35": 0.374,
+          "50": 0.268,
+          "70": 0.3774,
+          "100": 0.4002
+        }
+      }
+    },
+    "TA08": {
+      "video_frame": 70,
+      "screen_box": [
+        66,
+        81,
+        94,
+        152
+      ],
+      "opaque_wh": [
+        28,
+        71
+      ],
+      "crown_y": 81,
+      "sole_y": 151,
+      "white_right_first": [
+        {
+          "n": 10,
+          "cx": 85.7,
+          "cy": 101.8,
+          "from_crown": 20.8,
+          "from_sole": 49.2,
+          "box": [
+            84,
+            100,
+            87,
+            103
+          ]
+        },
+        {
+          "n": 13,
+          "cx": 73.2,
+          "cy": 111.5,
+          "from_crown": 30.5,
+          "from_sole": 39.5,
+          "box": [
+            72,
+            110,
+            75,
+            114
+          ]
+        },
+        {
+          "n": 19,
+          "cx": 73.0,
+          "cy": 136.0,
+          "from_crown": 55.0,
+          "from_sole": 15.0,
+          "box": [
+            73,
+            127,
+            73,
+            145
+          ]
+        }
+      ],
+      "torso_sms_codes": {
+        "20": 120,
+        "57": 95,
+        "56": 72,
+        "(0, 0, 85)": 69,
+        "(0, 0, 0)": 53,
+        "(85, 0, 0)": 35
+      },
+      "source": {
+        "body_h": 877,
+        "crown_y": 53,
+        "sole_y": 929,
+        "width_ratios": {
+          "10": 0.2144,
+          "15": 0.2497,
+          "25": 0.2577,
+          "35": 0.4025,
+          "50": 0.26,
+          "70": 0.3774,
+          "100": 0.4162
+        }
+      }
+    },
+    "GQ03": {
+      "video_frame": 78,
+      "screen_box": [
+        68,
+        83,
+        93,
+        152
+      ],
+      "opaque_wh": [
+        25,
+        69
+      ],
+      "crown_y": 83,
+      "sole_y": 151,
+      "white_right_first": [
+        {
+          "n": 5,
+          "cx": 88.2,
+          "cy": 98.8,
+          "from_crown": 15.8,
+          "from_sole": 52.2,
+          "box": [
+            87,
+            98,
+            89,
+            100
+          ]
+        },
+        {
+          "n": 13,
+          "cx": 76.4,
+          "cy": 111.8,
+          "from_crown": 28.8,
+          "from_sole": 39.2,
+          "box": [
+            75,
+            110,
+            78,
+            114
+          ]
+        },
+        {
+          "n": 8,
+          "cx": 76.0,
+          "cy": 121.5,
+          "from_crown": 38.5,
+          "from_sole": 29.5,
+          "box": [
+            76,
+            118,
+            76,
+            125
+          ]
+        }
+      ],
+      "torso_sms_codes": {
+        "56": 204,
+        "20": 106,
+        "(0, 0, 0)": 67,
+        "(170, 85, 85)": 51,
+        "(255, 255, 255)": 33,
+        "(0, 0, 85)": 20
+      },
+      "source": {
+        "body_h": 834,
+        "crown_y": 95,
+        "sole_y": 928,
+        "width_ratios": {
+          "10": 0.2146,
+          "15": 0.1751,
+          "25": 0.3933,
+          "35": 0.4353,
+          "50": 0.2866,
+          "70": 0.4436,
+          "100": 0.4029
+        }
+      }
+    }
+  },
+  "hand_free": {
+    "rule": "Grupo branco de maior x, com RGB mínimo 200. Em TA07, TA08 e na guarda esse grupo fica à direita do centro do sprite: é a luva livre. A haste clara da bengala fica mais à esquerda e mais baixa.",
+    "TA07_cy": 112.0,
+    "TA08_cy": 101.8,
+    "GQ03_cy": 98.8,
+    "rise_px": 10.2,
+    "final_step_up_px": 3.0,
+    "final_step_right_px": 2.5
+  },
+  "guard_body_h_strict_magenta": 836,
+  "guard_body_h_note": "A chave de canto desta medição leu 834 px na guarda. O registro oficial continua 836, pelo magenta estrito. A diferença é o limiar, não uma pose nova.",
+  "decision": "A subida da cintura até o peito está desenhada: o centro da luva livre vai de y=112 a y=101,8. O último passo até a guarda é 3 px para cima e 2,5 px para o rival; as caixas se tocam em y=100. A coroa desce 2 px. A 10% da altura a largura relativa é 0,21 nas quatro fontes. A 15% as três chaves geradas medem cerca de 0,25 e a guarda 0,18; isso já está na TA06 e na TA07. Não houve pose nova."
+}

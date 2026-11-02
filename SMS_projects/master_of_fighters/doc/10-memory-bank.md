@@ -1,5 +1,29 @@
 # 10-memory-bank — master_of_fighters
 
+## Provocação 1, terminal medido, candidata sem pose nova — 2026-11-02
+
+A passagem TA08→guarda foi lida no vídeo da ROM v3
+`47ab46634198563cdf8788187c5472475c39cc5c310b37dbcdabdcb7cb52bd07`,
+quadros 58, 70 e 78. As solas encostam em y=151. A luva livre sobe de y=112
+na TA07 para y=101,8 na TA08. Até a guarda faltam 3 px para cima e 2,5 px
+em direção ao rival; as caixas se tocam em y=100. A luva da bengala fica
+em y=111 nos dois quadros. A coroa da TA08 está em y=81 e a da guarda em
+y=83. A 10% da altura da fonte a largura relativa é 0,21 nas quatro poses.
+A 15% as chaves geradas medem cerca de 0,25 e a guarda 0,18; TA06 e TA07
+já têm essa largura, então corrigir só a TA08 mudaria o corte de lugar.
+O corpo novo continua 877 px. A guarda oficial permanece 836 px no magenta
+estrito; a chave de canto desta leitura deu 834.
+
+No tronco do framebuffer a TA08 mistura o código 20 (120 px), o 57 (95) e
+o 56 (72). A guarda concentra o 56 (204) e o 20 (106). O claro 57 volta ao
+56. O colapso antigo, sem nenhum 56, não voltou. Não desenhei outro quadro
+e não recompilei. A hipótese segue 8/8/10/20/10/12/8. O VBlank selado desta
+ROM, medido pelo designer, continua 3000 frames, vline_min 207, derrame
+zero. As janelas 59,64763127522857 e 59,62493848380926 permanecem. Arte,
+GQ03, jab, comando, áudio, pacing e pacote aguardam o proprietário.
+Prancha 1× e 8×: `cps2_keys_v1/preview/TA01_cycle_v3_terminal_sms_8x.png`.
+Recibo: `cps2_keys_v1/proposals/TA01_cycle_v3_terminal.json`.
+
 ## Revisão dab0181: VBlank selado medido e terminal em revisão — 2026-11-02
 
 ROM v3 `47ab4663…` e vídeo conferidos; direção ao rival e retirada do azul escuro

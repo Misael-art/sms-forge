@@ -74,9 +74,19 @@
       "host_load": [8.53955078125, 8.41650390625, 10.125],
       "frame_advance": true,
       "magic": "SMRT",
-      "worst_frame_measured": false,
-      "note": "As duas janelas desta ROM passaram o piso 58. As falhas da ROM v2 continuam registradas. Isto não aprova pior quadro, pacing, áudio nem o personagem."
+      "worst_frame_measured": true,
+      "designer_worst_frame": {
+        "session_id": "dddf8c438ced42aba3f83c1434664419",
+        "sealed_frames": 3000,
+        "vline_min": 207,
+        "vovf_delta": 0,
+        "same_rom": true,
+        "rerun_here": false,
+        "note": "Medição do designer em 2026-11-02, sem rebuild. O rótulo TITLE do relatório é o estado 0, a guarda neste viewer."
+      },
+      "note": "As duas janelas do produtor passaram o piso 58 e não foram repetidas. O VBlank selado desta ROM é o do designer. As falhas da ROM v2 continuam. Isto não aprova pacing, áudio, arte nem o personagem."
     },
-    "audio": "O viewer diagnóstico não chama o PSG. O silêncio desta ROM não aprova o áudio do personagem."
+    "audio": "O viewer diagnóstico não chama o PSG. O silêncio desta ROM não aprova o áudio do personagem.",
+    "terminal": "proposals/TA01_cycle_v3_terminal.json"
   }
 }

@@ -137,11 +137,12 @@
     },
     {
       "id": "taunt_01_cycle_v3",
-      "role": "assentamento com olhar para o rival e ciano de volta, mais a subida da mão. O assentamento v1 permanece no disco e saiu do ciclo. Não é arte aprovada, não liga ao jab e não decide o comando.",
+      "role": "assentamento com olhar para o rival e ciano de volta, mais a subida da mão. O terminal TA08→guarda foi medido no framebuffer e não ganhou pose nova. O assentamento v1 permanece no disco e saiu do ciclo. Não é arte aprovada, não liga ao jab e não decide o comando.",
       "logical_guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
       "cycle": "proposals/TA01_cycle_v3.json",
+      "terminal": "proposals/TA01_cycle_v3_terminal.json",
       "recipe": "register_taunt_cycle_v3.py",
-      "board": "preview/TA01_cycle_v3_return_4x.png"
+      "board": "preview/TA01_cycle_v3_terminal_sms_8x.png"
     },
     {
       "id": "GQ02_stacked_guard",
