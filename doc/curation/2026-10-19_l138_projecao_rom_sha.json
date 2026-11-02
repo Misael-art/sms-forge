@@ -117,7 +117,8 @@
     "related_lesson_ids": [
       "L013",
       "L035",
-      "L138"
+      "L138",
+      "L089"
     ],
     "implemented": [
       "ROM selecionada pelo recibo e SHA calculado; legado nominal pelo manifesto; candidata explicita sem promocao nominal",
@@ -145,6 +146,20 @@
       "Recibos historicos inconsistentes agora reprovam sem serem alterados; nao rehashar evidencia.",
       "Baseline do rev2 reprovou26.62/22.72FPS; sem audio, HUD/FX ou gameplay aprovado.",
       "Relatorio Social61v5 continua ausente; viewers Master of Fighters e seus aceites preservados."
-    ]
+    ],
+    "probe_parser_follow_up": {
+      "finding": "Array __at dimension expression omitted silently; initial report164probes/C800..C9F1 did not measure CA00..D1FF and is invalid for the full recorder.",
+      "fix": "unknown __at declarations fail closed; explicit SDK non-RAM whitelist proves full object spans including16/32KiB headers; comments/strings ignored; zero dimensions rejected",
+      "focused_tests": "16 parser regressions; closing56 identity+parser, selftest137/137, measurement75/75 passed",
+      "tool": "measure_worst_frame.py declared_probes; audit_probe_corridor.py",
+      "evidence_owner": "SMS_projects/luta_mugem_rev2/out/evidence/20261102_identity_baseline",
+      "limits": "No historical report rewritten; new source/ROM/corridor required before using trace.",
+      "independent_review": "/root/identity_review read-only; type order, cross-window arrays and16KiB compatibility findings corrected; no remaining material finding",
+      "compiled_corridor": {
+        "probes": 2212,
+        "range": "C800..D1FF",
+        "data_gap_bytes": 1411
+      }
+    }
   }
 }

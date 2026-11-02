@@ -1050,6 +1050,13 @@ self-check cobre limites da espera e janela incompleta. Medir o tempo real da
 ROM antes de aumentar a espera; não extrapolar aprovação de budget de um probe
 parcial.
 
+Aplicação 2026-11-02 (L089): uma declaração `__at` não reconhecida pelo parser
+não pode desaparecer da medição. `measure_worst_frame.declared_probes` recusa
+endereço/dimensão fora do contrato suportado e arrays de tamanho zero; literal,
+espaçamento e sufixo unsigned são calibrados. Para o TRC3, usar2048 literal com
+guarda de tamanho em compilação e fonte pré-processada no mesmo perfil. Um
+PASS antigo que omitiu o array em expressão não é evidência do corredor completo.
+
 ## 75. Plano de slots de animação em loop precisa ser periódico (L090)
 
 Uma passada gulosa de alocação (reusar pares iguais, novos nos slots livres)

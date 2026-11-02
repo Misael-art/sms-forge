@@ -52,6 +52,7 @@ Exit:
   3  uso (argumentos)
 """
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -177,8 +178,66 @@ def apply_probe_block(block):
 
 
 PROBE_DECL_RX = re.compile(
-    r"unsigned\s+(char|int)\s+__at\(0x([0-9A-Fa-f]{4})\)\s+"
-    r"([A-Za-z_][A-Za-z0-9_]*)(?:\[(\d+)\])?\s*;")
+    r"unsigned\s+(char|int)\s+__at\s*\(\s*0[xX]([0-9A-Fa-f]{4})\s*\)\s+"
+    r"([A-Za-z_][A-Za-z0-9_]*)(?:\s*\[\s*(\d+)[uU]?\s*\])?\s*;")
+
+
+def _non_ram_at(text, offset):
+    """Recognize I/O ports and the SDK's explicit non-RAM declarations.
+
+    devkitSMS also declares mapper registers, SRAM and ROM/SDSC headers with
+    __at. This whitelist proves the whole SDK object interval, not merely its
+    starting address. Unknown declarations remain errors, regardless of type
+    spelling or qualifier order. This is not a general C evaluator.
+    """
+    prefix = text[:offset]
+    if re.search(r"\b__sfr\s*$", prefix):
+        return True
+    tail = text[offset:]
+    mapper = re.match(
+        r"__at\s*\(\s*(0[xX][0-9a-fA-F]+)\s*\)\s+unsigned\s+char\s+"
+        r"(ROM_bank_to_be_mapped_on_slot[012]|SRAM_bank_to_be_mapped_on_slot2)\s*;", tail)
+    mapper_addresses = {"ROM_bank_to_be_mapped_on_slot0": 0xFFFD,
+                        "ROM_bank_to_be_mapped_on_slot1": 0xFFFE,
+                        "ROM_bank_to_be_mapped_on_slot2": 0xFFFF,
+                        "SRAM_bank_to_be_mapped_on_slot2": 0xFFFC}
+    if mapper and int(mapper[1], 16) == mapper_addresses[mapper[2]]:
+        return True
+    if re.match(r"__at\s*\(\s*0[xX]8000\s*\)\s+unsigned\s+char\s+"
+                r"SMS_SRAM\s*\[\s*16384\s*\]\s*;", tail):
+        return True  # 8000..BFFF, outside system RAM in its entirety.
+    signature = re.match(
+        r"__at\s*\(\s*(0[xX][0-9a-fA-F]+)\s*\)\s+(?:unsigned\s+)?char\s+"
+        r"(__SMS__SEGA_signature|__SMS__SDSC_signature)\s*\[\s*16\s*\]\s*=", tail)
+    if signature and re.search(r"\bconst\s*$", prefix):
+        return int(signature[1], 16) in {
+            "__SMS__SEGA_signature": (0x7FF0, 0x3FF0),
+            "__SMS__SDSC_signature": (0x7FE0, 0x3FE0)}[signature[2]]
+    string_literal = r'"(?:[^"\\]|\\.)*"'
+    sdk_string = rf'(?:{string_literal}|\(\s*{string_literal}\s*\))'
+    header = re.match(
+        r'__at\s*\(\s*(0[xX][0-9a-fA-F]+)'
+        rf'((?:\s*-\s*sizeof\s*\(\s*{sdk_string}\s*\))+)'
+        r'\s*\)', tail)
+    if not header:
+        return False
+    definition = re.match(
+        r'\s+char\s+__SMS__SDSC_(?:author|name|descr)\s*\[\s*\]\s*'
+        rf'=\s*({sdk_string})\s*;', tail[header.end():])
+    if not definition or not re.search(r"\bconst\s*$", prefix):
+        return False
+    address = int(header[1], 16)
+    for value in re.findall(r'"(?:[^"\\]|\\.)*"', header[2]):
+        try:
+            address -= len(ast.literal_eval(value).encode("ascii")) + 1
+        except (ValueError, SyntaxError, UnicodeError):
+            return False
+    try:
+        value = re.search(string_literal, definition[1])[0]
+        size = len(ast.literal_eval(value).encode("ascii")) + 1
+    except (ValueError, SyntaxError, UnicodeError):
+        return False
+    return 0 <= address and address + size <= 0xC000
 
 
 def declared_probes(path):
@@ -199,10 +258,29 @@ def declared_probes(path):
     out, seen = [], {}
     for f in files:
         with open(f, errors="replace") as fh:
-            for m in PROBE_DECL_RX.finditer(fh.read()):
+            text = fh.read()
+            # Preserve quoted strings for the SDK sizeof expression, while
+            # ignoring declaration examples in comments/string literals.
+            quoted = r'''"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*' '''.rstrip()
+            text = re.sub(quoted + r'|/\*.*?\*/|//[^\n]*',
+                          lambda m: re.sub(r'[^\n]', ' ', m[0])
+                          if m[0].startswith(('/*', '//')) else m[0],
+                          text, flags=re.DOTALL)
+            code = re.sub(quoted, lambda m: ' ' * len(m[0]), text)
+            declarations = list(PROBE_DECL_RX.finditer(code))
+            for candidate in re.finditer(r"\b__at\s*\(", code):
+                recognized = any(m.start() <= candidate.start() < m.end()
+                                 for m in declarations)
+                if not recognized and not _non_ram_at(text, candidate.start()):
+                    line = text.count("\n", 0, candidate.start()) + 1
+                    raise ValueError(f"{f}:{line}: declaracao __at nao suportada; "
+                                     "use endereco/array literal e formato reconhecido, ou pre-processe a fonte")
+            for m in declarations:
                 kind, addr, name, count = (m.group(1), int(m.group(2), 16),
                                            m.group(3), m.group(4))
                 width = 1 if kind == "char" else 2
+                if count is not None and int(count) == 0:
+                    raise ValueError(f"{f}: dimensao zero de sonda: {name}")
                 for i in range(int(count) if count else 1):
                     a = addr + i * width
                     for b in range(a, a + width):
@@ -1123,6 +1201,16 @@ def self_check():
     if not all(b for _, b in ok):
         print("[SELF-CHECK FAIL] worst-frame")
         return 1
+    with tempfile.TemporaryDirectory() as td:
+        declaration = os.path.join(td, "unsupported_array.c")
+        with open(declaration, "w") as stream:
+            stream.write("volatile unsigned char __at(0xCA00) trace[(8u+340u*6u)];\n")
+        try:
+            declared_probes(declaration)
+        except ValueError as exc:
+            assert "nao suportada" in str(exc)
+        else:
+            raise AssertionError("unsupported array was silently omitted from corridor")
     print("[SELF-CHECK OK] measure_worst_frame")
     return 0
 
