@@ -6,7 +6,80 @@ Fighters, não uma técnica homologada globalmente no SMSForge. Ver
 [registro de direção](decisions/character-move-showcase_owner_direction_20261101.json),
 [GDD](11-gdd.md), [roteiro](12-roteiro.md), [cenas](13-spec-cenas.md) e [TDD](15-tdd.md).
 
-## Revisão vigente — incremento 2075484, 2026-11-01
+## Revisão vigente — incremento f4c5043 e QA do designer, 2026-11-01
+
+**A provocação chegou ao viewer; a arte e o pacote continuam sem aceite.**
+O agente cumpriu a etapa de integração e distinguiu corretamente diagnóstico
+de comando competitivo. Minha recomendação não é abrir outra ação como prioridade:
+resolver a continuidade visual desta provocação e completar o aceite do trecho.
+Portraits independentes podem avançar durante dependência real de engenharia.
+
+### Evidência conferida e nova observação
+
+ROM preservada, 32768 bytes, SHA
+`8f7687b85d68db923f9f3e36f4e1363c9be7136bc5438f880be7e0562e4f3f5d`.
+Conferidos hashes da ROM/vídeo, recibo v2, receita de registro, inclusão do header
+no viewer e fontes. Inspecionadas pranchas e quadros ordenados extraídos da captura.
+Não alterei pixels, código ou ROM. O hash do vídeo confere com o do produtor.
+
+**Correção de interpretação do vídeo:** ffprobe identifica 228 quadros em
+3,804899 s de reprodução. O recibo da captura registra 5,157165914 s de coleta,
+com codificação a aproximadamente 59,9227 Hz. É apresentação nominal dos quadros
+capturados; não comprova que o usuário viu a ação nessa velocidade de relógio.
+Não houve prova de emulador acelerado ou fraude: é uma distinção entre coleta e
+reprodução. Preservar os dois tempos e as falhas de FPS, sem rebatizar esse vídeo
+como prova de cinco segundos de fluidez em tempo real.
+
+Como a carga havia diminuído, abri uma sessão privada própria, sem outra JVM de
+emulador privado ativa, **com a mesma ROM**. Self-check do medidor passou.
+
+| Sessão / condições | Janelas de FPS sem arredondamento | Escopo |
+|---|---|---|
+| Produtor f23c4ec… | 58.58830865506254 / 44.267676665832944 | Falhou; preservado. |
+| Produtor ccc69901… | 49.33468997130153 / 45.14083899479978 | Falhou; preservado. |
+| Designer e6c6db7a… | 59.652563933294665 / 59.67934459451107 | Passou o componente de taxa nas duas janelas de 8 s, mesma ROM. |
+
+Carga registrada na sessão nova: 2.0244 / 8.6714 / 18.6270 (1/5/15 min), contra
+cerca de 34 na primeira anterior. Isso sustenta investigar influência do ambiente;
+não demonstra causalidade exclusiva nem permite descartar amostras lentas.
+Não há justificativa para remover arte ou alterar os tempos para “consertar FPS”
+com base apenas nos resultados anteriores. Pior frame, pacing, áudio e composição
+de combate continuam pendentes; estas janelas não aprovam o personagem.
+
+Na mesma sessão, sequências atômicas oficiais com pressões de seis frames
+confirmaram `keys=16`, estados 0→1→4→0 e uma segunda execução 0→1→0. Isso prova
+acionamento de revisão e retorno, não latência competitiva. Uma tentativa anterior
+com input/step separados e pressão de um frame não estabeleceu a precondição
+esperada; foi preservada, não transformada em aprovação de entrada de um frame.
+Framebuffers publicados, bundle verificado e sessão encerrada. Recibo completo:
+`out/diagnostics/social_taunt01_cycle_v2_review_20261101/review_receipt.json`.
+FPS em `out/evidence/sessions/e6c6db7a8d0d4708adf4e5ee41e64116/runtime/taunt_designer_review.json`.
+
+### Defeitos visuais que orientam o próximo lote
+
+1. **TA07 muda direção e aparência.** O rosto olha para o lado oposto ao rival
+   deste arranjo; a saída SMS escurece amplamente casaco/corpo, depois volta ao
+   ciano da guarda. Ambos aparecem na captura. Não é apenas preferência por uma
+   pose: há quebra de continuidade de orientação e luz/material. Corrigir a
+   fonte/atribuição de cores pelo método autoral, sem repintura procedural.
+2. **Altura/identidade precisam de causa.** TA05/TA06 têm 72 px e TA07 73,
+   contra 69 da guarda. A razão comum na conversão evita a antiga normalização
+   por pose, mas não garante escala coerente entre imagens geradas. Verificar
+   crânio, ombros, tronco e proporções: separar extensão corporal legítima de
+   crescimento/deriva de geração. Não esmagar TA07 nem conceder exceção ao GDD.
+3. **Retorno ainda precisa leitura temporal.** TA07 põe o punho na cintura e a
+   guarda o traz de volta ao peito. Conferir trajetória e continuidade da cabeça/
+   mão/tecido no ciclo; não impor “um quadro a mais” antes de demonstrar o problema.
+   TA05 separa melhor o exame do ajuste, mas essa melhora não paga os demais eixos.
+
+Os 68 ticks são uma hipótese diagnóstica completa. São cerca de 1,13 s a 60 Hz,
+sem incluir espera da UI; não substituem os 22 ticks propostos no contrato e não
+são frame-data competitivo. O gesto deve parecer uma avaliação confiante do
+adversário, com assentamento corporal, não troca de modelo/iluminação no final.
+O problema dominante agora é essa continuidade, com validação técnica ainda
+incompleta. A nova medição não converte GQ03 ou os controles em aprovados.
+
+## Histórico — revisão do incremento 2075484, 2026-11-01
 
 **A provocação 1 tem chaves candidatas e um percurso de retorno; ainda não tem
 animação completa validada.** O agente avançou além de outra guarda e manteve
@@ -408,7 +481,7 @@ antes de sua aprovação e das próximas tarefas de elenco.
 - `doc/dr_social_cps2_sample_v1.md`, revisão v8 e decisão do método em
   `doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`;
 - este padrão `doc/character_move_showcase_standard_v1.md`, especialmente a
-  revisão vigente de 2075484; checkpoints mais antigos são históricos;
+  revisão vigente de f4c5043 e a QA do designer; checkpoints anteriores são históricos;
 - `doc/dr_social_two_button_proposal_v2.json`, proposta ainda não aprovada.
 
 **Identidade e referências.** Social é humano, investigador/psicólogo, esguio,
@@ -423,90 +496,81 @@ e o papel de cada uma; não alimente o processo com todo o histórico de testes.
 Bengala é romba, rapieira é lâmina rígida de estocada, bumerangue é de aço
 com rastro violeta. Sem poderes mentais, vampirismo ou arsenal adicional.
 
-**Estado real e prioridade imediata.** O commit 2075484 contém quatro poses
-novas de `taunt_01`, o ajuste dos óculos. Guarda inicial/final usa GQ03;
-TA02 inclina, TA03 aproxima a mão, TA04 ajusta, TA05 ainda não comunica claramente
-o olhar por cima. TA06 não existe; TA07 repete TA05; a volta reutiliza poses
-invertidas. Há pranchas e 15 composições medidas com Ken, mas não timeline
-completa observada nem ROM desse ciclo. O objetivo do próximo checkpoint é
-**concluir esta provocação e demonstrá-la em movimento no emulador oficial**.
-Isso é uma etapa do personagem completo, não autorização de encerrá-lo.
+**Estado real.** A provocação v2 está integrada em `MOF_CPS2_SAMPLE=9`,
+com ROM de 32 KiB, SHA
+`8f7687b85d68db923f9f3e36f4e1363c9be7136bc5438f880be7e0562e4f3f5d`.
+O designer repetiu a QA nesse mesmo binário: duas janelas 59.652563933294665 /
+59.67934459451107 FPS, acionamento de revisão e retorno observados. As duas
+sessões anteriores falharam e continuam registradas. Sem aceite de pior frame,
+áudio, arte, GQ03, comandos competitivos ou pacote. **Não abrir outra ação como
+prioridade: corrigir a continuidade da provocação e fechar sua validação.**
 
-Fontes/receitas estão em
-`data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/`:
-`proposals/TA01_cycle_v1.json`, `proposals/TA01_adapter_config.json`,
-`logical/TA02_lean.png`, `TA03_reach.png`, `TA04_glasses.png`, `TA05_look.png`,
-originais, prompts, lineage e geração. Confira hashes antes de reutilizar.
-GQ03 continua candidata: `logical/GQ03_authored_guard.png`, SHA
-`44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b`.
-GQ02 é diagnóstico procedural; r2/tuck são estudos que não fecharam a composição.
-Não refaça outra guarda agora para evitar a provocação; não promova GQ03 por
-ela ser a que passou. Preserve o jab v8 e sua pendência de conexão com GQ03.
+Consulte `proposals/TA01_cycle_v2.json`, configs de conversão e registro, originais,
+lineage e prompts sob
+`data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/`.
+Build oficial: `.mddev/dr_social_taunt01_cycle_v2_build.json`.
+A evidência nova está em `out/diagnostics/social_taunt01_cycle_v2_review_20261101/`.
+Use esses dados para avançar; não refaça o que já foi observado sem necessidade.
 
-1. **Use o método autoral e preserve identidade.** Reutilize fontes aprovadas e
-   chaves aproveitáveis, registrando o papel das referências. Não gere anatomia,
-   expressões ou intervalos por pintura/cisalhamento procedural. Scripts ficam
-   em recorte, conversão, organização e medição. Não herde deriva de cabelo,
-   colete ou proporção como nova identidade. Faça comparação e mantenha pendências
-   de fidelidade explícitas; uma ROM diagnóstica não as aprova automaticamente.
-2. **Feche a atuação de TA05.** O público deve perceber: Social ajusta os óculos
-   e examina o oponente com confiança. Dirija cabeça, olhar, mão e pose para essa
-   leitura em tamanho SMS. Deixe o artista propor o gesto dentro da função
-   contratada; não imponha contagem de pixels alterados ou só um detalhe de olho.
-   Compare TA04/TA05 em 1× e ampliado, mas valide a distinção também em sequência.
-3. **Complete ação secundária e recuperação.** Retire a exigência de congelar a
-   barra do casaco em todos os prompts. Preserve sustentação e pegada sem tornar
-   o corpo rígido. Desenhe o atraso/assentamento previsto em TA06, com amplitude
-   coerente; meça a proposta em vez de presumir que vai estourar. Sustente o
-   momento avaliativo e mostre soltar/recolher a mão. Reaproveite poses onde a
-   volta funcionar; desenhe o que faltar se houver leitura de rebobinar ou salto.
-   Voltar aos bytes da guarda é um terminal, não prova de recuperação completa.
-4. **Declare uma timeline integral.** Cada entrada tem pose/track, exposição,
-   intenção e saída, incluindo início, sustentação e retorno. Distinga poses
-   únicas, holds e reuso. 2/2/2/3 cobre apenas TA02–TA05; não basta para o ciclo.
-   Os 22 ticks/8 funções do contrato são proposta, não velocidade aprovada.
-   Experimente uma hipótese completa de timing diagnóstico; ajuste pela leitura
-   do gesto, registrando o resultado. Não altere frame-data competitivo nem invente
-   efeitos de gameplay. Não desacelere o emulador para aparentar fluidez.
-5. **Preserve escala e continuidade.** Use transformação comum, pivô/solo e
-   receita reproduzível por quadro. A altura GDD 66–72 px é referência em pé;
-   cabeça inclinada não deve ser reampliada para obrigar toda pose a 69 px.
-   Confira âncoras, tamanho do corpo, óculos, bengala e pés no ciclo. Uma eventual
-   correção exige nova medição. Nada de normalização independente que faça o
-   personagem crescer/encolher; não confunda célula fixa com anatomia estável.
-6. **Meça as poses novas e a composição temporal.** Self-check antes da leitura;
-   adaptador oficial, fontes/receita/hashes, ambos os lados e par identificado.
-   Os 15 manifests atuais já passaram: não repita o mesmo teste como novo ganho.
-   Meça mudanças, transições, SAT/paleta/VRAM e pior frame pertinente à integração.
-   Pico 8 é ausência de folga nas linhas saturadas. Ken é controle de construção;
-   clipping/cantos/elenco permanecem pendentes até evidência própria. Não remover
-   material/arma/rival nem introduzir flicker para passar.
-7. **Integre e observe o ciclo pelo caminho oficial.** Use o viewer/consumidor e
-   o pipeline existentes, sem motor paralelo ou lógica de build dentro do jogo.
-   A revisão pode ter um acionador de diagnóstico e replay claramente indicados;
-   isso não decide o comando competitivo da provocação. GD01/GD02 não bloqueiam
-   esse teste. Nomeie como provocação, não ataque com dano ou tutorial funcional.
-   Registre entrada de revisão → ciclo completo → guarda → nova execução, com
-   tempo normal e captura do framebuffer ligada ao SHA. Stepping/lento são
-   recursos de inspeção identificados; não substituem assistir em tempo normal.
-8. **Entregue um checkpoint verificável.** ROM e catálogo parcial por hashes,
-   timeline completa, vídeo normal, comparação fonte/saída, medições aplicáveis,
-   input consumido e sessão privada encerrada. Para aceite funcional, alvo60/
-   piso58 por janela válida, pior frame e demais eixos do projeto; não atribuir
-   gameplay completo a um viewer. Sem ROM, registrar bloqueio técnico preciso,
-   comando tentado/resultado e o próximo passo de integração; “não há comando
-   aprovado” e “o retorno precisa ser PNG exato” não explicam ausência de playback.
-   Não parar num relatório se houver caminho seguro executável para observar.
-9. **Mantenha o restante em continuidade.** Atualize matriz/lineage/memória sem
-   chamar chaves de ação concluída. Os conflitos GD01 já foram recebidos em
-   `doc/dr_social_gd01_open_conflicts_for_designer_v1.json`; não resolvê-los como
-   artista nem reenviar a mesma lista como novo avanço. O designer/engenharia e
-   o proprietário decidem as regras. Cena 10 continua “comando em definição”.
-   Após fechar este experimento, retome as demais ações/portraits do contrato,
-   sem abrir outro personagem nem implementar desbloqueáveis agora.
+1. **Preserve baselines e método.** Mantenha fontes, tentativas rejeitadas,
+   recibos e ROM v2 intactos. Reutilize GQ03/TA02–TA04 como candidatos do teste,
+   sem promovê-los; jab v8 permanece preservado. Novos desenhos seguem a autoria
+   visual aprovada. Código recorta/converte/mede; não cria anatomia, expressões
+   ou poses. Diferenças de identidade não se resolvem com morph/interpolação.
+2. **Corrija TA07 com uma intenção clara.** Social continua atento ao adversário
+   do mesmo lado, solta/recolhe a mão e recompõe a guarda. O rosto não deve virar
+   para o lado oposto por ambiguidade de “três quartos”. Preserve a luz e os
+   materiais do casaco/rosto; não escurecer todo o personagem durante assentamento.
+   Compare fonte, materiais e PNG SMS para localizar onde nasce a mudança de cor.
+   Corrija na etapa responsável e reavalie 1×/ampliado. Não disfarce o salto com
+   flash, corte de cena, hold longo ou efeitos novos.
+3. **Verifique escala anatômica, não só bbox.** TA07 tem 73 px; não a esprema
+   para 69 nem trate o excesso como aprovado. Use solo e âncoras de crânio,
+   ombro/quadril para distinguir extensão legítima de deriva entre gerações.
+   A razão de redução comum não corrige automaticamente imagens geradas em
+   escalas corporais diferentes. Preserve a faixa de referência GDD 66–72 px,
+   proporções e identidade; registre a causa e a correção observáveis.
+4. **Revise a recuperação completa.** Veja TA05→TA06→TA07→GQ03 continuamente:
+   direção do olhar, mão ativa, bengala, tecido e apoio. Preserve a melhora do
+   exame e a ação secundária; desenhe só os intervalos necessários à continuidade.
+   Não congele o corpo para satisfazer uma contagem de células nem abra outra
+   provocação. Manter o terminal igual à guarda não dispensa a qualidade do trajeto.
+5. **Mantenha timing como hipótese explícita.** O teste usa 8/8/10/20/10/12,
+   68 ticks, separados das esperas da UI. Não os transforme em frame-data nem
+   altere o contrato de 22 ticks como se tivesse aprovação. Teste a leitura e
+   registre se percepção, ajuste, exame, pausa e retorno são compreendidos.
+   Não alongue exposição para esconder falta de desenho; não acelere o emulador.
+6. **Trate desempenho com evidência.** A mesma ROM já passou nas duas janelas
+   da revisão; não reduzir conteúdo ou tempos com base numa hipótese não isolada
+   de gargalo. Preserve as falhas anteriores e a carga do host. Ao integrar arte
+   nova, refaça os checks pertinentes no novo SHA, com self-check, par, scanline,
+   paleta/VRAM, input e pior frame efetivamente medido. Uma sessão por vez, sem
+   encerrar tarefas alheias. Se houver regressão, comparar ao binário v2 sob
+   condições registradas; corrigir causa, nunca baixar o piso58 nem escolher
+   apenas janelas favoráveis. Janelas aprovadas não pagam pacing/pior frame.
+7. **Distinga os relógios da captura.** O MP4 v2 reproduz 228 quadros em 3,804899 s;
+   a coleta durou 5,157165914 s. Identifique essa reprodução nominal. Preserve
+   timestamps/contagem e FPS funcional separadamente; vídeo nominal não prova
+   fluidez em tempo real. Nova captura deve apontar o SHA novo, conter ciclo e
+   retorno e declarar claramente o que seu relógio demonstra. Não editar ou
+   sobrescrever a evidência antiga para parecer mais rápida/estável.
+8. **Valide o trecho no viewer oficial.** Botões 1/2 seguem acionadores de revisão,
+   não comandos de combate. Confirmar input consumido → início → exame → retorno
+   → nova execução, além de lados/cantos pertinentes e integridade do personagem.
+   Registrar máscaras, duração das pressões e frames observados; não inferir
+   latência competitiva de uma pressão longa. Usar sessões privadas, captures
+   vinculadas a ROM, áudio conforme escopo e cleanup. Se silêncio é intencional
+   no viewer, declarar; isso não aprova o áudio do personagem ou da luta.
+9. **Entregue um incremento fechado e honesto.** Fonte corrigida, receita,
+   timeline, ROM por SHA, vídeo/capturas, medição aplicável e revisão de TA07→
+   guarda. Separar taxa de janelas, pior frame, arte, input diagnóstico e aceite
+   do pacote. GD01/GD02 seguem com designer/engenharia/proprietário; não reenviar
+   a mesma lista de conflitos como trabalho novo nem usar isso para bloquear o
+   viewer. Enquanto aguarda dependência concreta, portraits previstos podem
+   avançar, mas outra ação não substitui a correção dominante deste trecho.
 
-Trabalhe no checkout único, com RTK/run_host; leia os workflows centrais de
-sessão isolada antes de QA. Preserve fontes, reprovações e trabalho alheio.
-Commit/push apenas dos arquivos próprios revisados, pela branch registrada,
-sem contornar hooks; confirme SHA remoto. Não se autoaprove. Informe separadamente
-o que foi desenhado, simulado, compilado, visto em movimento e aceito.
+Atualize matriz/lineage/memória; não declare provocação, GQ03, conexão ao jab ou
+personagem aprovados por inferência. Não abrir outro personagem ou desbloqueáveis.
+Use RTK/run_host, checkout único e pipeline oficial, sem motor paralelo. Preserve
+WIP alheio. Faça commit/push só dos arquivos próprios revisados na branch
+registrada, confirme SHA remoto e encerre apenas sua sessão temporária.

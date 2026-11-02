@@ -1,9 +1,9 @@
 # Dr. Social — revisão da produção inicial e prompt de continuação
 
-> **Direcionamento vigente:** ver a revisão de `2075484` e o prompt ao fim de
+> **Direcionamento vigente:** ver a revisão de `f4c5043` e a QA do designer e o prompt ao fim de
 > [Apresentação de golpes](character_move_showcase_standard_v1.md).
-> Prioridade: completar TA05/TA06, recuperação e timeline da provocação 1,
-> e observá-la no emulador. O texto abaixo preserva os
+> Prioridade: corrigir orientação/material de TA07 e continuidade do retorno;
+> mesma ROM passou nas novas janelas, demais eixos pendentes. O texto abaixo preserva os
 > checkpoints anteriores e não deve ser copiado como o próximo prompt.
 
 

@@ -1,5 +1,31 @@
 # 10-memory-bank — master_of_fighters
 
+## Revisão f4c5043: nova QA da mesma ROM e correção de TA07 — 2026-11-01
+
+Provocação v2 integrada no viewer; ROM SHA `8f7687b8…` conferido, sem rebuild ou
+mudança de pixels/código nesta revisão. Sessão própria do designer
+`e6c6db7a8d0d4708adf4e5ee41e64116`, encerrada: medidor com self-check passou
+59.652563933294665 / 59.67934459451107 FPS em duas janelas de 8 s. Carga 1 min
+2.0244, contra cerca de 34 nas medições antigas. Falhas anteriores preservadas;
+isso não identifica causa exclusiva nem aprova pior frame, pacing ou gameplay.
+Sequências atômicas com pressões de seis frames observaram keys=16, 0→1→4→0 e
+segunda execução 0→1→0. Não é teste de comando/latência competitiva. Bundle passou.
+Uma tentativa inicial de pressão de um frame não estabeleceu a precondição;
+registro preservado, sem claim de resposta de um frame. Recibo em
+`out/diagnostics/social_taunt01_cycle_v2_review_20261101/review_receipt.json`.
+
+[Parecer e prompt vigentes](character_move_showcase_standard_v1.md): prioridade
+TA07 olha para o lado oposto ao rival e escurece amplamente corpo/casaco no SMS,
+visível em quadros da captura. Resolver continuidade de fonte/cor e recuperação
+antes de outra ação. TA07 73 px exige diagnóstico de proporção/pose, sem esmagar
+nem aprovar exceção ao GDD. Vídeo anterior: 228 quadros, 3.804899 s codificados,
+5.157165914 s de coleta; apresentação nominal não é prova de fluidez real.
+68 ticks são hipótese diagnóstica, não substituem o contrato de 22 ticks.
+GQ03, arte, pior frame, áudio, comandos e pacote seguem sem aceite. Portraits
+independentes podem avançar durante dependência concreta; não substituem este
+fechamento. Não há motivo demonstrado para reduzir conteúdo devido ao FPS antigo.
+
+
 ## Provocação 1 vista em movimento — 2026-11-01
 
 O exame, o atraso curto do casaco e o assentamento rodaram no viewer
