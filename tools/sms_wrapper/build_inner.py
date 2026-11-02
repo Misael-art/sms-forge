@@ -131,10 +131,10 @@ def find_toolchain():
                       "/sdcc-portable/bin | Rode tools/sms_wrapper/ensure_toolchain.sh")
     ver_out = subprocess.run([sdcc, "--version"], capture_output=True, text=True).stdout
     import re
-    m = re.search(r"(\d+)\.\d+\.\d+", ver_out)
-    major = int(m.group(1)) if m else 0
-    if major < 4:
-        return None, f"sdcc {major}.x < 4.2 requerido ({ver_out.splitlines()[0][:60]})"
+    m = re.search(r"\b(\d+)\.(\d+)\.(\d+)\b", ver_out)
+    version = tuple(map(int, m.groups())) if m else None
+    if version is None or version < (4, 2, 0):
+        return None, f"sdcc >=4.2 requerido; versao ausente ou abaixo do minimo ({ver_out[:60].strip()})"
     root = os.environ.get("SMS_DEVKITSMS") or os.path.normpath(os.path.join(
         HERE, "..", "..", "sdk", "devkitSMS"))
     need = {
@@ -193,6 +193,30 @@ def pre_gates(project):
         errors += [f"name table: {os.path.relpath(p, project)}:{ln} {mc} — {why}"
                    for p, ln, mc, why in f]
     return errors
+
+
+def pre_gate_inputs(project):
+    """Exact current inputs of pre_gates, including asset membership/absence.
+
+    Recomputing this map detects added/deleted PNGs, provenance entries and
+    sources; compiler dependency hashes alone do not bind resource validation.
+    """
+    from pathlib import Path
+    root = Path(project).resolve()
+    paths = set(root.glob("res/**/*.png")) | set(root.glob("src/*.c")) | set(root.glob("probes/*.c"))
+    paths.update(Path(HERE) / name for name in (
+        "build_inner.py", "audit_validate_resources.py", "audit_provenance.py",
+        "audit_sprite_mode.py", "audit_debug_markers.py", "audit_tilemap_bounds.py", "png_io.py"))
+    manifest = root / "doc/asset_provenance_manifest.json"
+    if manifest.exists():
+        paths.add(manifest)
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+        for asset in data.get("assets", []):
+            target = root / asset["file"]
+            if target.exists():
+                paths.add(target)
+                paths.add(root / asset.get("origin", ""))
+    return {os.path.relpath(path, root): _sha256(path) for path in sorted(paths)}
 
 # Eixo de runtime -> artefato que o sustenta (relativo ao projeto).
 # `None` = qualquer .wav em out/evidence (audit_audio.py e quem julga o conteudo).
@@ -495,14 +519,6 @@ def main():
                 return fail(f"modo estrito: {label} reprovou", 1)
         print("[STRICT] ferramentas de medicao provadas + doc sincronizada")
 
-    if not args.skip_pre_gates:
-        errs = pre_gates(project)
-        if errs:
-            for e in errs:
-                print(f"[FAIL] {e}")
-            return 1
-        record["steps"]["pre_gates"] = "pass"
-
     tc, why = find_toolchain()
     if tc is None:
         return fail(why + " | Instale seguindo sdk/README.md. "
@@ -512,16 +528,28 @@ def main():
     srcs = sorted(glob.glob(os.path.join(project, "src", "*.c")))
     if not srcs:
         return fail("nenhum .c em src/", 1)
-    if candidate:
+    try:
+        inputs_before = candidate_inputs(project, manifest, tc, srcs, manifest_path)
+    except (OSError, ValueError) as e:
+        return fail("identidade das entradas: " + str(e), 1)
+    for path, content in ((nominal_manifest_path, nominal_manifest_bytes),
+                          (manifest_path, manifest_bytes)):
+        key = os.path.relpath(os.path.realpath(path), project)
+        if inputs_before.get(key) != hashlib.sha256(content).hexdigest():
+            return fail("manifesto mudou durante preparacao; candidato nao registrado", 1)
+    validation_before = None
+    if not args.skip_pre_gates:
         try:
-            inputs_before = candidate_inputs(project, manifest, tc, srcs, manifest_path)
-        except (OSError, ValueError) as e:
-            return fail("identidade das entradas: " + str(e), 1)
-        for path, content in ((nominal_manifest_path, nominal_manifest_bytes),
-                              (manifest_path, manifest_bytes)):
-            key = os.path.relpath(os.path.realpath(path), project)
-            if inputs_before.get(key) != hashlib.sha256(content).hexdigest():
-                return fail("manifesto mudou durante preparacao; candidato nao registrado", 1)
+            validation_before = pre_gate_inputs(project)
+        except (OSError, ValueError, KeyError, TypeError) as e:
+            return fail("entradas dos pre-gates: " + str(e), 1)
+        errs = pre_gates(project)
+        if errs:
+            for e in errs:
+                print(f"[FAIL] {e}")
+            return 1
+        record["steps"]["pre_gates"] = "pass"
+
     objs, logs = [], []
     for src_abs in srcs:
         base = os.path.splitext(os.path.basename(src_abs))[0]
@@ -594,15 +622,26 @@ def main():
             if os.path.exists(leak):
                 shutil.move(leak, os.path.join(obj_dir, name + ext))
 
-    if candidate:
-        if srcs != sorted(glob.glob(os.path.join(project, "src", "*.c"))):
-            return fail("lista de fontes mudou durante o build; candidato nao registrado", 1)
+    if srcs != sorted(glob.glob(os.path.join(project, "src", "*.c"))):
+        return fail("lista de fontes mudou durante o build; candidato nao registrado", 1)
+    try:
+        inputs_after = candidate_inputs(project, manifest, tc, srcs, manifest_path)
+    except (OSError, ValueError) as e:
+        return fail("identidade das entradas apos build: " + str(e), 1)
+    if inputs_before != inputs_after:
+        return fail("entradas mudaram durante o build; candidato nao registrado", 1)
+    if validation_before is not None:
         try:
-            inputs_after = candidate_inputs(project, manifest, tc, srcs, manifest_path)
-        except (OSError, ValueError) as e:
-            return fail("identidade das entradas apos build: " + str(e), 1)
-        if inputs_before != inputs_after:
-            return fail("entradas mudaram durante o build; candidato nao registrado", 1)
+            if validation_before != pre_gate_inputs(project):
+                return fail("entradas dos pre-gates mudaram durante o build; recibo nao publicado", 1)
+        except (OSError, ValueError, KeyError, TypeError) as e:
+            return fail("entradas dos pre-gates apos build: " + str(e), 1)
+        record["pre_gate_input_sha256"] = validation_before
+    record.update({"rom_path": os.path.relpath(rom, project), "rom_bytes": size,
+                   "rom_sha256": _sha256(rom), "rom_mtime": os.path.getmtime(rom),
+                   "input_sha256": inputs_before,
+                   "validation_scope": "pre_gates_only"})
+    if candidate:
         version = subprocess.run([tc["sdcc"], "--version"], capture_output=True, text=True)
         record.update({
             "schema": "smsforge.candidate_build/v1",

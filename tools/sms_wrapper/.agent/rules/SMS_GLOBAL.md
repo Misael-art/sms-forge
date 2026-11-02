@@ -2699,6 +2699,24 @@ cap5 mantém `build`/`validation_report` verdadeiros e os demais eixos falsos at
 nova medição. O binding `doc/rom_asset_binding.json` prova source→res→símbolo→ROM
 por identidade, não por render independente.
 
+Aplicação 2026-11-02 (L138): seleção atual exige ROM exata e SHA calculado
+igual ao recibo. `rom_path` identifica o arquivo; recibos legados nominais usam
+`project.json.name` e candidatos v1 usam o caminho exato em `steps.rom`.
+Nunca escolher `.sms` por mtime nem substituir SHA ausente pelo de uma prova.
+`reconcile_claims.py --build-record ... --current-rom ...` verifica candidata
+sem publicação nominal; `--session ID` consome explicitamente o bundle e os
+sidecars privados produzidos pelas ferramentas oficiais. Projeção OpenBOR
+reconsome o bundle e valida pedidos/pareceres antes de escrever; fontes mudadas
+na preparação são recusadas. Data e pico positivo de WAV não são identidade:
+exigir ROM/sessão, hash do WAV, PCM íntegro, duração e rota do PID; aplicar
+`audit_audio` no escopo declarado (`--active-floor 5` somente SFX).
+`validation_report` significa **pre_gates_only**, com hashes/conjunto das
+entradas realmente auditadas; não aprova gameplay/budget. Memória significa
+somente documento legível/fresco citando o SHA completo, não revisão semântica
+ou entrega. Recibos históricos sem esse lastro permanecem históricos e não
+recebem validade atual. Fixtures temporárias calibram positivos/negativos;
+nenhuma evidência histórica é editada ou rehashada para pagar o gate.
+
 ## 131. Tamanho da imagem bancária e alias de mapper (L139)
 
 Uma tabela de offsets correta e bytes presentes no arquivo não garantem que o

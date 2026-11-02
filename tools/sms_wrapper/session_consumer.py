@@ -80,12 +80,14 @@ def private_session(rom, **kw):
         root = I.start(rom, **kw)
     except Exception as e:                                # sem fallback silencioso ao desktop
         raise SessionUnavailable(f"sessao privada indisponivel: {e}") from e
-    s = Session(root)
+    s = None
     try:
+        s = Session(root)
         yield s
     finally:
         try:
-            s.release()
+            if s is not None:
+                s.release()
         except Exception:
             pass
         I.close_session(root)

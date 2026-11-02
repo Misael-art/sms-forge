@@ -2,17 +2,65 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "rom_build_record_v1",
   "type": "object",
-  "required": ["project", "steps", "axes"],
+  "required": [
+    "project",
+    "steps",
+    "axes"
+  ],
   "properties": {
-    "project": {"type": "string"},
-    "date": {"type": "string"},
-    "steps": {"type": "object"},
-    "changelog": {"type": "string"},
+    "project": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "steps": {
+      "type": "object"
+    },
+    "changelog": {
+      "type": "string"
+    },
     "axes": {
       "type": "object",
-      "required": ["build", "validation_report", "boot_emulador", "gameplay",
-                    "fps_constante", "audio", "memory_bank_atualizado"],
-      "additionalProperties": {"type": "boolean"}
+      "required": [
+        "build",
+        "validation_report",
+        "boot_emulador",
+        "gameplay",
+        "fps_constante",
+        "audio",
+        "memory_bank_atualizado"
+      ],
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "rom_path": {
+      "type": "string",
+      "description": "Caminho exato relativo ao projeto; recibo legado nominal usa manifesto.name, nunca mtime."
+    },
+    "rom_sha256": {
+      "type": "string"
+    },
+    "rom_bytes": {
+      "type": "integer"
+    },
+    "input_sha256": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "pre_gate_input_sha256": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "validation_scope": {
+      "enum": [
+        "pre_gates_only"
+      ]
     }
   }
 }

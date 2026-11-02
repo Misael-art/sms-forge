@@ -140,7 +140,8 @@ def environment(root, jobs=2):
     env = os.environ.copy()
     paths = [root / '.venv/bin', root / '.runtime/bin', root / 'sdk/sdcc-portable/bin']
     env['PATH'] = os.pathsep.join(map(str, paths)) + os.pathsep + env.get('PATH', '')
-    env['PYTHONPATH'] = str(root / 'tools/sms_wrapper')
+    env['PYTHONPATH'] = os.pathsep.join(map(str, (root / 'tools/sms_wrapper',
+                                                  root / 'tools/sms_wrapper/openbor2sms')))
     env['SMS_DEVKITSMS'] = str(root / 'sdk/devkitSMS')
     env['PIP_CACHE_DIR'] = str(root / '.runtime/cache/pip')
     env['PYTHONPYCACHEPREFIX'] = str(root / '.runtime/cache/pycache')
