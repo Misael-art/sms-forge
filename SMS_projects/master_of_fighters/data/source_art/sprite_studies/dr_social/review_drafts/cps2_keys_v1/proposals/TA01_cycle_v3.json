@@ -1,0 +1,82 @@
+{
+  "schema": "social_taunt_cycle_v3",
+  "not_an_approval": true,
+  "not_gameplay": true,
+  "connects_to_jab_v8": false,
+  "gq03_approved": false,
+  "command": "em definição",
+  "replaces": "proposals/TA01_cycle_v2.json permanece. A ROM v2 não foi apagada.",
+  "cause": {
+    "gaze": "O JPEG TA07_settle.jpg já olha para a esquerda da tela. A quantização não virou o rosto.",
+    "color": "O casaco desse JPEG é um azul mais escuro. O índice 13 da paleta de J01 cai no código SMS 20, o verde-azulado. A guarda e TA06 usam o índice 14, que cai no ciano 56.",
+    "height": "O corpo da v1 media 886 px contra 836 da guarda. Ombro, quadril e sola guardam a mesma razão. Foi deriva uniforme de geração, não extensão. Não foi esmagada. A v2 mede 877 px de corpo e 72 px no SMS, dentro de 66–72, sola em y=77."
+  },
+  "timeline": [
+    {"pose": 0, "id": "idle", "source": "logical/GQ03_authored_guard.png", "exposure": "espera de UI, 60 no arranque e 21 na volta", "intent": "guarda terminal", "reuse": "GQ03"},
+    {"pose": 1, "id": "TA02_lean", "exposure": 8, "intent": "preparo", "reuse": "chave v1"},
+    {"pose": 2, "id": "TA03_reach", "exposure": 8, "intent": "a mão sobe", "reuse": "chave v1"},
+    {"pose": 3, "id": "TA04_glasses", "exposure": 10, "intent": "ajusta os óculos", "reuse": "chave v1"},
+    {"pose": 4, "id": "TA05_examine", "exposure": 20, "intent": "exame, hold de uma pose só", "reuse": "chave v2"},
+    {"pose": 5, "id": "TA06_coat_lag", "exposure": 10, "intent": "punho no peito, olhar sustentado, atraso curto do casaco", "reuse": "chave v2"},
+    {"pose": 6, "id": "TA07_settle_v2", "exposure": 12, "intent": "punho na cintura, olhar para o rival, casaco ciano", "reuse": "desenho novo; o TA07 v1 saiu do ciclo"},
+    {"pose": 7, "id": "TA08_hand_rise", "exposure": 8, "intent": "a mão volta ao peito antes da guarda", "reuse": "desenho novo"}
+  ],
+  "timing": {
+    "status": "hypothesis_not_combat_frame_data",
+    "header_durations": [0, 8, 8, 10, 20, 10, 12, 8],
+    "move_ticks": 76,
+    "contract_proposal_ticks": 22,
+    "note": "76 ticks são cerca de 1,27 s a 60 Hz, sem a espera da UI. Não substituem o contrato."
+  },
+  "pair": {
+    "self_check": "authored source adapter e sprite_line_sim passaram antes da leitura",
+    "new_pose_line_sim": {
+      "converted": {"TA07_settle_v2": [34, 8], "TA08_hand_rise": [34, 8]},
+      "flip": {"TA07_settle_v2": [34, 8], "TA08_hand_rise": [34, 8]},
+      "packx4": {"TA07_settle_v2": [32, 8], "TA08_hand_rise": [32, 8]},
+      "overflow": 0
+    },
+    "reused_poses_note": "GQ03 e TA02–TA06 voltaram a pico 8 no conjunto residente. Não é ganho novo.",
+    "slack": "Pico 8 é zero folga nas linhas saturadas. Ken não é o elenco."
+  },
+  "playback": {
+    "status": "observed_diagnostic_not_approved",
+    "viewer": "MOF_CPS2_SAMPLE 10",
+    "rom": "out/candidates/dr_social_taunt01_cycle_v3_src/rom/master_of_fighters.sms",
+    "rom_bytes": 32768,
+    "rom_sha256": "47ab46634198563cdf8788187c5472475c39cc5c310b37dbcdabdcb7cb52bd07",
+    "session_id": "909ac83e4a4e476e91d6676aba3be58c",
+    "session_closed": true,
+    "video": {
+      "path": "out/diagnostics/social_taunt01_cycle_v3_20261101/emulator/taunt_v3_normal.mp4",
+      "sha256": "66a98981cd85f175586613d3ee444e798dfa57937f087d7cc4b7e11c712f31f4",
+      "frames": 360,
+      "encoded_seconds": 6.007736,
+      "capture_elapsed_seconds": 6.019422882,
+      "nominal_hz": 59.92274340431231,
+      "note": "360 quadros apresentados a taxa nominal. A coleta durou 6,019 s. Isso não prova fluidez percebida. O vídeo v2 permanece: 228 quadros, 3,804899 s codificados, 5,157165914 s de coleta."
+    },
+    "review_trigger": {
+      "button_2_frames": 6,
+      "button_1_frames": 6,
+      "after_autoplay_off_state": 0,
+      "first_press_state": 4,
+      "first_press_hold": 8,
+      "after_return_state": 0,
+      "second_press_state": 4,
+      "second_press_hold": 14,
+      "note": "Estado 4 é o exame. Pressão de seis frames. Não é latência competitiva nem o comando da cena 10."
+    },
+    "fps": {
+      "accepted_rate_windows": true,
+      "windows": [59.64763127522857, 59.62493848380926],
+      "spread": 0.0226927914193098,
+      "host_load": [8.53955078125, 8.41650390625, 10.125],
+      "frame_advance": true,
+      "magic": "SMRT",
+      "worst_frame_measured": false,
+      "note": "As duas janelas desta ROM passaram o piso 58. As falhas da ROM v2 continuam registradas. Isto não aprova pior quadro, pacing, áudio nem o personagem."
+    },
+    "audio": "O viewer diagnóstico não chama o PSG. O silêncio desta ROM não aprova o áudio do personagem."
+  }
+}

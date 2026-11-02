@@ -150,8 +150,12 @@ def scaled(image: Image.Image) -> Sprite:
     image = as_indexed(image)
     palette_raw = image.getpalette()
     palette = [tuple(palette_raw[i:i + 3]) for i in range(0, 768, 3)]
+    # Pillow 11.3 retirou get_flattened_data. tobytes() no modo P é o
+    # mesmo buffer de índices: a guarda continua 69 px, topo 9, base 77.
+    flat = getattr(image, "get_flattened_data", None)
+    pixels = bytes(flat()) if flat is not None else image.tobytes()
     sprite = Sprite(0, 0, 64, 116, image.width, image.height,
-                    bytes(image.get_flattened_data()), palette, False, None, 0)
+                    pixels, palette, False, None, 0)
     fit = resolve_display_fit("pose_budget", "cps2", "sms")
     first, _ = scale_sprite(sprite, fit)
     second_fit = replace(fit, scale_num_x=7, scale_den_x=9,

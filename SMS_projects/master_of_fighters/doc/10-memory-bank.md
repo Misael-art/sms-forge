@@ -1,5 +1,30 @@
 # 10-memory-bank — master_of_fighters
 
+## Provocação 1, continuidade do assentamento — 2026-11-01
+
+O assentamento v1 olhava para o lado oposto já no JPEG, e o azul escuro
+caía no código SMS 20. A altura 73 vinha de um corpo gerado 6% maior, com
+as mesmas razões de ombro, quadril e sola. Não foi esmagado. O ciclo v3
+troca esse quadro por um punho na cintura, olhar para o rival e casaco
+ciano, e acrescenta a subida da mão até o peito. A guarda continua a GQ03.
+A hipótese de tempo passou a 8/8/10/20/10/12/8. Não é frame-data.
+
+ROM `47ab46634198563cdf8788187c5472475c39cc5c310b37dbcdabdcb7cb52bd07`,
+32 KiB, viewer `MOF_CPS2_SAMPLE 10`. Sessão
+`909ac83e4a4e476e91d6676aba3be58c` fechada. Vídeo de 360 quadros, SHA
+`66a98981cd85f175586613d3ee444e798dfa57937f087d7cc4b7e11c712f31f4`,
+6,007736 s codificados e 6,019422882 s de coleta. O vídeo v2 permanece com
+os dois relógios antigos. Pressão de seis frames: o botão 2 devolveu o
+estado a 0; o botão 1 chegou ao estado 4, voltou a 0 e um segundo toque
+chegou de novo ao estado 4. São acionadores de revisão.
+
+As poses novas ficaram em pico 8 e overflow zero, na face normal, no
+espelho e no packing x=4. As janelas desta ROM foram 59,65 e 59,62, com
+carga do host em torno de 8,5. As falhas da ROM v2 continuam no recibo
+antigo. Não há aceite de pior quadro, de áudio, de arte, de GQ03, do jab
+nem do pacote. O viewer não chama o PSG. Recibo:
+`cps2_keys_v1/proposals/TA01_cycle_v3.json`.
+
 ## Revisão f4c5043: nova QA da mesma ROM e correção de TA07 — 2026-11-01
 
 Provocação v2 integrada no viewer; ROM SHA `8f7687b8…` conferido, sem rebuild ou

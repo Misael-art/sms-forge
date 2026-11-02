@@ -243,6 +243,47 @@
       "path": "originals/TA06_coat_lag.jpg",
       "sha256": "3bf2d24c222669ca0fe3620f2ba47df75a5b96f8783c253e735e54bfaafda807",
       "result": "chave TA07. Altura SMS 73, sola alinhada, par a pico 8. Não aprovada."
+    },
+    {
+      "output_id": "TA07_settle_v2",
+      "output": "originals/TA07_settle_v2.jpg",
+      "output_sha256": "3c9ebdc4c47441197c3a4a39b6faabda2ee4cda7ac5aef9961004e718892ef27",
+      "prompt": "prompts/TA07_settle_v2.txt",
+      "role_of_input": "assentamento escuro com o punho na cintura; só a luz do casaco e a direção do rosto deviam voltar ao rival",
+      "path": "originals/TA07_attempt_waist_dark.jpg",
+      "sha256": "75d38a3cf6115220d7e40c3cf76cab6ff020b5db814786319c871a5102e86037",
+      "result": "entrou no ciclo v3. Olhar à direita, punho na cintura, altura SMS 72. Não aprovado."
+    },
+    {
+      "output_id": "TA08_hand_rise",
+      "output": "originals/TA08_hand_rise.jpg",
+      "output_sha256": "4709a7b8187f9b1f7f50ef57182e381067502bfb8f21c1d17c0fa22e23665274",
+      "prompt": "prompts/TA08_hand_rise.txt",
+      "role_of_input": "o assentamento v2; a mão sobe do cinto em direção ao peito",
+      "path": "originals/TA07_settle_v2.jpg",
+      "sha256": "3c9ebdc4c47441197c3a4a39b6faabda2ee4cda7ac5aef9961004e718892ef27",
+      "result": "entrou no ciclo v3 como retorno da mão. A luva ficou no peito alto, olhar à direita, altura 72. Não aprovado."
+    },
+    {
+      "output_id": "TA07_attempt_hand_up",
+      "output": "originals/TA07_attempt_hand_up.jpg",
+      "output_sha256": "7ed68397e908ec124c886d69d660ec93ae0547d6bd71813fcd37ffb98a2b4351",
+      "prompt_note": "tentativa medida e não usada no ciclo",
+      "result": "a mão não desceu; ficou fora do ciclo"
+    },
+    {
+      "output_id": "TA07_attempt_from_bright",
+      "output": "originals/TA07_attempt_from_bright.jpg",
+      "output_sha256": "53dca72fd87357d896ecdcb8a7afde8562f65b5a793992f48d1db5f349fdbcfa",
+      "prompt_note": "tentativa medida e não usada no ciclo",
+      "result": "o punho desceu, mas o casaco continuou no azul que vira código 20; ficou fora"
+    },
+    {
+      "output_id": "TA07_attempt_halo",
+      "output": "originals/TA07_attempt_halo.jpg",
+      "output_sha256": "e19be8d6d04898b9152c6109ca3a7fad214352532a9cbb51675215453bb3f8cd",
+      "prompt_note": "tentativa medida e não usada no ciclo",
+      "result": "auréola, pico local 5 e a mão ainda alta; ficou fora"
     }
   ]
 }
