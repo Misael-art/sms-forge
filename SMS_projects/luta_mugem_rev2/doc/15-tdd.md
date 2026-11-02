@@ -1,5 +1,25 @@
 # TDD — luta_mugem_rev2
 
+## Diagnóstico AIR por tick completo — 2026-11-02
+
+`LUTA_DIAG_AIR_TRACE=1` reutiliza o formato TRC3 do decoder central: cabeçalho8,
+340 registros de6 bytes (actionLE16+element8 de cada ator), buffer absoluto
+`0xCA00..0xD1FF`. `probe_air_trace_start_frame` em `0xC9F0` vincula o índice ao
+frame lógico inicial; done publica1 somente após os340 registros e depois congela.
+A escrita ocorre depois de worst_sample no fim do tick, nunca na ISR. Inicialização
+é explícita; o flag default0 elimina o custo na ROM limpa. O corredor/mapa deve
+aprovar esse perfil; os3568B teóricos até SP inicialDFF0 não são high-water medido.
+
+IDs vêm de `characters[side].anims[fighter[side].anim].id` e do fidx real, sem
+reconstruí-los por RGB ou pedidos da ponte. O relógio inclui hitpause: não remover
+pausas para forçar igualdade com durações AIR. A leitura deve conferir done/count
+antes/depois e preservar todos os chunks256B; `trace_air_identity.decode_buffer`
+exige exatamente2048B/340 ticks. Fonte/export/ROM e N+1 fronteiras são eixos
+separados; `audit_import_semantics --require-air-identity` não autentica pixels.
+O trace de contato existente mantém53B em DATA, com endereço derivado do mapa.
+Esse instrumento não aprova FPS/VBlank nem implementa controllers CNS/AOT.
+
+
 ## Seleção e limites atuais — 2026-10-27
 
 `LUTA_CONTACT_TRACE=1` registra no instante do contato, em um buffer `DATA`

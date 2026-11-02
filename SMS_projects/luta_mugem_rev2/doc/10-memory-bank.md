@@ -1,5 +1,61 @@
 # Memory bank — luta_mugem_rev2
 
+## Fechamento do lote medido — 2026-11-02 (aceite pendente)
+
+Commits locais de ferramentas/documentação: `7c73d6b` e `2585f54`; os deltas
+iniciais de input/M1 e de Master of Fighters continuam separados. A ROM medida
+inclui o WIP anterior: não atribuir o seu SHA a um checkout limpo desses commits.
+Fonte completo atual main.c SHA-256 `1b418a2d265403d686f064ae73098f6d236db8821bbbe81df1a3a3fdcc9490f0`.
+
+Apenas o acúmulo local de stamps ficou no runtime limpo (default M0); ganho
+ABBA +1,90768%, todas as janelas abaixo58 e917/3000 derrames. Duas alternativas
+foram medidas e retiradas do fonte: cópia rápida oficial UNSAFE (+3,75909%,
+919/3000 derrames,vline_min6) e retenção SAT no M1 (+1,7219%, ainda abaixo58,
+sem qualificação de pior quadro). Não adotar ABI privada da biblioteca pelo
+pequeno ganho. Fontes/receitas/testes/ROMs rejeitados estão preservados em
+`rejected_stream_fast/` e `rejected_sat_retain/` no pacote deste lote. As fontes
+intermediárias foram reconstruídas e conferidas contra hashes dos recibos;
+isso não é custódia original nem rehash de evidência. A primeira janela incompleta
+da retenção falhou pela rota de áudio e permanece registrada, fora do ABBA válido.
+
+O recorder opt-in TRC3 (default0) produziu a ROM524288B SHA-256
+`f6ac6f1f000b6c19019de246806d69e9b17bfc0c8704150cd0d5faf37da31f4e`.
+Candidata final `20261102_air_contact_trace_closure`; não é ROM de FPS/budget.
+Revisão nativa `/root/runtime_visual_qa`, pedido65448c87cf8146e0aca7de0b1fa9334d,
+sessão696c010460ad4faca5fd3a3f791947e8:13 casos,12 passes limitados e visual
+reprovado por sobreposição. Report7ef7d13b… e audit_subagent_session ok=true,
+tests_passed=false. Trace340 ticks, HP280 uma vez, cinco elementos+terminal;
+fronteiras lógicas47/52/56/77/84/90 e durações **5/4/21/7/6**, contra AIR
+**5/4/9/7/6**. Gate estrito recusou; não subtrair hitpause para forçar PASS.
+Fonte Ryu ZIP6db7e29d… e AIR15285766… conferidos pela QA independente.
+
+Coleta complementar da mesma ROM: sessão346c634a75264757861820b39dbd69aa,
+328 pares RAM/framebuffer nos VDP121..448. Primeiro dano112/vidaP2=888 e
+contact seq2 no VDP209, tick59 ainda em progresso (TRC3 completou58); poses
+lógica/residente/submetida/apresentada34/61 iguais. Quadros208..210 são idênticos:
+não isolam visualmente o instante do dano. O contador de hitstop subiu24
+ator-frames em12 ticks60..71; não é correção do gate AIR bruto. Reentrada24VDP
+com mask4 mudou x129→107 e role0→2; finalVDP448 voltou a role0/x105.
+Parecer complementar aa7abfa5… conferiu hashes/ACKs dos328 pares. Ambas as
+sessões foram fechadas, sem seus processos vivos. Vídeo/stepping não pagam FPS.
+
+O parser de sondas omitia arrays __at com dimensão em expressão. O relatório
+inicial164probes/C800..C9F1 é inválido para o recorder completo e foi preservado.
+Agora declarações desconhecidas e tamanho zero reprovam; exceções SDK são
+explícitas e cobrem intervalos inteiros, incluindo headers16/32KiB. Corredor
+com fonte compilada:2212 sondas,C800..D1FF,1411B de folga; stack high-water não
+foi medido. Regressores16/16, fechamento identidade+parser56/56,
+selftest137/137, medidores75/75 e suíte rev2 **307 passes/150 deselected**.
+Revisão independente de ferramentas terminou sem achado material aberto.
+
+Owner das provas: `out/evidence/20261102_identity_baseline/`; ver
+`batch_summary.json`, `qa_air_native/`, `vdp_contact_timeline/` e `closing_checks/`.
+Recuperação local: `.runtime/backups/luta_mugem_rev2-20261102-identity-trace.tar.gz`
+e manifesto homônimo JSON (fora do Git, mesmo disco; não é cópia externa).
+Social61v5 continua ausente. Nenhum dos55 IDs foi fechado, nem CNS/AOT ampliado.
+Próximo ramo: composição legal e apresentação com prazo; a margem visual do
+pusher depende da decisão do dono, enquanto a colisão fonte fica preservada.
+
 ## 2026-11-02 — identidade e baseline atual (aceite pendente)
 
 A conciliação nominal agora recusa a divergência histórica entre o recibo

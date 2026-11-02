@@ -124,6 +124,9 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #ifndef LUTA_DIAG_PSG
 #define LUTA_DIAG_PSG 0
 #endif
+#ifndef LUTA_DIAG_AIR_TRACE
+#define LUTA_DIAG_AIR_TRACE 0
+#endif
 #ifndef LUTA_CONTACT_TRACE
 #define LUTA_CONTACT_TRACE 0
 #endif
@@ -146,6 +149,9 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "luta_mugem_rev2",
 #define LUTA_PRESENT_HIT 0
 #endif
 #define LUTA_CONTACT_STAMPS (LUTA_CONTACT_GUARD || LUTA_CONTACT_SAT || LUTA_PRESENT_HIT)
+#if LUTA_DIAG_AIR_TRACE != 0 && LUTA_DIAG_AIR_TRACE != 1
+#error "LUTA_DIAG_AIR_TRACE deve ser 0 ou 1"
+#endif
 #if UPLOAD_CHUNK_PAIRS < 1 || UPLOAD_CHUNK_PAIRS > 8
 #error "quota candidata deve estar entre 1 e 8 pares"
 #endif
@@ -551,6 +557,47 @@ static unsigned char line_diff[DIAG_FLOOR];
 static unsigned int frames;
 static unsigned int pacing_step;
 static unsigned char pacing_remainder;
+#if LUTA_DIAG_AIR_TRACE
+/* Existing TRC3 contract: header8 +340 rows of two(actionLE16,element8).
+ * Fixed diagnostic buffer CA00..D1FF, below the DFF0 stack. The linker/probe
+ * corridor and source ABI must be audited; this instrument never pays FPS.
+ * It records completed logical ticks, not VDP samples or an ISR counter. */
+#define AIR_TRACE_TICKS 340u
+#define AIR_TRACE_BYTES (8u + AIR_TRACE_TICKS * 6u)
+volatile unsigned char __at(0xCA00) probe_air_trace[2048];
+typedef char air_trace_size_guard[(AIR_TRACE_BYTES == 2048u) ? 1 : -1];
+volatile unsigned int __at(0xC9F0) probe_air_trace_start_frame;
+static unsigned int air_trace_count;
+
+static void init_air_trace(void) {
+    air_trace_count = 0u;
+    probe_air_trace_start_frame = 0u;
+    probe_air_trace[0] = 'T'; probe_air_trace[1] = 'R';
+    probe_air_trace[2] = 'C'; probe_air_trace[3] = '3';
+    probe_air_trace[4] = 0u; probe_air_trace[5] = 0u;
+    probe_air_trace[6] = 0u; probe_air_trace[7] = 6u;
+}
+
+static void record_air_trace(void) {
+    volatile unsigned char *row;
+    unsigned char side;
+    unsigned int action;
+    if (air_trace_count >= AIR_TRACE_TICKS) return;
+    if (!air_trace_count) probe_air_trace_start_frame = frames;
+    row = &probe_air_trace[8u + air_trace_count * 6u];
+    for (side = 0u; side < 2u; side++) {
+        action = characters[side].anims[fighter[side].anim].id;
+        *row++ = (unsigned char)action;
+        *row++ = (unsigned char)(action >> 8);
+        *row++ = fighter[side].fidx;
+    }
+    air_trace_count++;
+    probe_air_trace[5] = (unsigned char)air_trace_count;
+    probe_air_trace[6] = (unsigned char)(air_trace_count >> 8);
+    if (air_trace_count == AIR_TRACE_TICKS) probe_air_trace[4] = 1u;
+}
+#endif
+
 #if LUTA_PRESENT_HIT
 /* Ordem de x antes do movimento deste tick; o pusher roda depois do combate
  * que usa a sombra da SAT, ainda no mesmo frame. */
@@ -1320,6 +1367,11 @@ static void emit_frame(unsigned char side, const Frame *frame) {
     unsigned char tile_base;
 #endif
     signed int add;
+#if LUTA_CONTACT_STAMPS
+    /* No reader observes these stamps until emit_frame returns. Accumulate
+     * locally so the fallback does not index two actor arrays per cell. */
+    unsigned char drawn = 0u, draw_invalid = 0u;
+#endif
 
     /* Metadados, origem e indices devem pertencer a MESMA face residente;
      * a face logica pode mudar enquanto os novos patterns ainda sobem. */
@@ -1362,7 +1414,7 @@ static void emit_frame(unsigned char side, const Frame *frame) {
         if (sx >= 0 && sx < 256 && sy >= 0 && sy < 192) {
 #if LUTA_CONTACT_STAMPS
             /* O ponto inicial cabe, mas o sprite TALL pode sair pela borda. */
-            if (sx > 248 || sy > 176) contact_draw_invalid[side] = 1u;
+            if (sx > 248 || sy > 176) draw_invalid = 1u;
 #endif
 #if LUTA_DIAG_CLIP_PLAIN
             /* wave-4m (gate b'): SMS_addSprite e o macro do header (SMSlib.h:189)
@@ -1380,11 +1432,11 @@ static void emit_frame(unsigned char side, const Frame *frame) {
                 if (side == 0u) probe_sat_om_p1++;
                 else            probe_sat_om_p2++;
 #if LUTA_CONTACT_STAMPS
-                contact_draw_invalid[side] = 1u;
+                draw_invalid = 1u;
 #endif
             } else {
 #if LUTA_CONTACT_STAMPS
-                contact_draw_count[side]++;
+                drawn++;
 #endif
 #if LUTA_DIAG_TELEMETRY
                 if (sy < (signed int)DIAG_FLOOR) {
@@ -1403,11 +1455,15 @@ static void emit_frame(unsigned char side, const Frame *frame) {
             }
         } else {
 #if LUTA_CONTACT_STAMPS
-            contact_draw_invalid[side] = 1u;
+            draw_invalid = 1u;
 #endif
         }
         meta += 3;
     }
+#if LUTA_CONTACT_STAMPS
+    contact_draw_count[side] = (unsigned char)(contact_draw_count[side] + drawn);
+    if (draw_invalid) contact_draw_invalid[side] = 1u;
+#endif
 }
 
 #if LUTA_BG_ACTOR
@@ -2741,6 +2797,9 @@ void main(void) {
     probe_vline = 0u;
     probe_phase = 0u;
     probe_worst_done = 0u;
+#if LUTA_DIAG_AIR_TRACE
+    init_air_trace();
+#endif
     probe_vline_min = 0xFFu;
     probe_pair_reused_p1 = 0u;
     probe_pair_uploads_p1 = 0u;
@@ -3058,6 +3117,9 @@ void main(void) {
         vblank_stage_sample(&probe_vblank_stage_after_sat);
 #endif
         worst_sample();
+#if LUTA_DIAG_AIR_TRACE
+        record_air_trace();
+#endif
     }
 #else
     /* DIAGNOSTICO (congelado, v031): ordem historica do baseline — upload e
@@ -3076,6 +3138,9 @@ void main(void) {
         sprites_build(frames_now, poses_req);
         SMS_copySpritestoSAT();
         worst_sample();
+#if LUTA_DIAG_AIR_TRACE
+        record_air_trace();
+#endif
     }
 #endif
 }

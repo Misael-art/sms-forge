@@ -1,5 +1,34 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## Fechamento 2026-11-02 — provas, limites e recuperação
+
+Ferramentas: seleção ROM/recibo/sessão explícitos, áudio hash-bound, SDCC≥4.2,
+CLI OpenBOR canônica, parser de __at que recusa omissões. Testes finais:
+identidade+parser56, rev2 307 (150 deselected), selftest137/137 e75 self-checks.
+Commits iniciais próprios7c73d6b/2585f54; WIP anterior permanece separado.
+A memória do consumidor contém SHA completo do fonte/ROM e limites de cada eixo.
+
+Só stamps locais ficaram na ROM limpa: +1,91%, ainda26,63FPS médios e
+917/3000 derrames. Cópia rápida e retenção SAT foram rejeitadas e retiradas;
+artefatos/fonte recuperada por hash mantidos. TRC3f6ac6f1f… cobriu HP280,
+contato112 e terminal; durações brutas5/4/21/7/6 reprovam AIR5/4/9/7/6.
+QA nativa13 casos:12 passes restritos, visual fail. Pares328RAM/framebuffer
+vinculam dano ao VDP209/tick59 em progresso; imagens208..210 iguais impedem
+isolar visualmente o contato. Contador confirma24ator-frames de stop em12ticks,
+sem alterar gate estrito. Reentrada P1x129→107 por controle observada.
+
+Provas em `SMS_projects/luta_mugem_rev2/out/evidence/20261102_identity_baseline/`;
+`batch_summary.json` e `vdp_contact_timeline/analysis.json` orientam a retomada.
+Recuperação: `.runtime/backups/luta_mugem_rev2-20261102-identity-trace.tar.gz`
+e manifesto JSON; validar pelo recovery_bundle.py. Cópia no mesmo disco,
+sem SDK/credenciais; insumos ignorados rev2 e WIP completo estão no escopo.
+Não transferir métricas dessa árvore com WIP para um checkout limpo por SHA Git.
+
+Próximo trabalho: apresentação/composição e custo dominante de emissão. A decisão
+sobre margem visual do pusher permanece pendente; não alargar colisão/arte por
+suposição. FPS<58, derrames, sobreposição e paridade temporal AIR impedem aceite.
+Manter55 IDs abertos, Social61v5 ausente e Master of Fighters preservado.
+
 ## Retomada 2026-11-02 — builds/evidência e emissão
 
 Base Git conferida: a987301, branch canônica, PR4 aberto draft. Os13 arquivos
