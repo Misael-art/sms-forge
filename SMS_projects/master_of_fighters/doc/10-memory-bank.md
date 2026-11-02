@@ -1,5 +1,26 @@
 # 10-memory-bank — master_of_fighters
 
+## Provocação 1 em chaves — 2026-11-01
+
+O toque segue sem chave legal. A correção r2 da guarda abriu o vão das solas
+e engrossou os óculos, mas a faixa da sola ficou em cinco colunas e o par foi
+recusado. O encaixe do pé da frente continuou em cinco colunas. As duas ficam
+como estudo. A guarda medida continua a GQ03, com a sola SMS fundida nas
+linhas 107–109.
+
+A provocação prevista tem quatro desenhos novos. A cabeça inclina, o punho
+sobe à bochecha, a luva segura a armação e uma variação ainda se lê como a
+mesma mão na armação. O retorno é o PNG exato da GQ03, passando de novo pelos
+mesmos desenhos. Corpo 69 px. Par com o Ken de construção, espelho e packing
+x=4: pico 8, overflow zero, SAT 32–35. Não há folga nas linhas saturadas.
+TA06, a cauda, não foi desenhada. As durações são a proposta do contrato, não
+frame-data. Sem ROM, sem emulador e sem comando. Jab v8 intacto. Recibo:
+`cps2_keys_v1/proposals/TA01_cycle_v1.json`.
+
+Os conflitos de GD01 estão listados para o designer, sem decisão, em
+`doc/dr_social_gd01_open_conflicts_for_designer_v1.json`. A cena 10 continua
+com comando em definição.
+
 ## Revisão do designer sobre GQ03 / 07e4bce — 2026-11-01
 
 GQ03 corrigiu o shear: script de registro inspecionado só recorta/escala/

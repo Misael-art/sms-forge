@@ -97,6 +97,66 @@
       "path": "originals/bust_neutral_attempt2.jpg",
       "sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55",
       "result": "candidato. No 4× a diferença para o neutro é pequena. Não é ciclo nem aprovação."
+    },
+    {
+      "output_id": "GQ03_r2_identity",
+      "output": "originals/GQ03_r2_identity.jpg",
+      "output_sha256": "c28be7d759d4f4215a5dd32081d39836eda1c2b9d3ec49a2c98c18a5c6015aae",
+      "prompt": "prompts/GQ03_r2_identity.txt",
+      "role_of_input": "GQ03 indexada ampliada 8× em nearest, para engrossar os óculos e abrir o vão das solas",
+      "path": "ref/GQ03_logical_8x_magenta.png",
+      "sha256": "8cac5fbb37e62b6a8213c96b4e51738d47e5e97e634c0f23f8fb97ae5d173c74",
+      "result": "estudo. Pico local 5. Par recusado. Não é a guarda."
+    },
+    {
+      "output_id": "GQ03_tuck_study",
+      "output": "originals/GQ03_tuck_study.jpg",
+      "output_sha256": "c9bd497f7fcf7b27ca98b58ed7c90e7ee47e93792923b06ce0c6011cba377a56",
+      "prompt": "prompts/GQ03_tuck_study.txt",
+      "role_of_input": "o estudo r2, para recolher o pé da frente",
+      "path": "originals/GQ03_r2_identity.jpg",
+      "sha256": "c28be7d759d4f4215a5dd32081d39836eda1c2b9d3ec49a2c98c18a5c6015aae",
+      "result": "estudo. Pico local 5. Não assentado como célula de luta."
+    },
+    {
+      "output_id": "TA02_lean",
+      "output": "originals/TA02_lean.jpg",
+      "output_sha256": "01bef44fda0fe583e2463e8fa19feba91624708417d82ecef739ec46e18a0e22",
+      "prompt": "prompts/TA02_lean.txt",
+      "role_of_input": "a guarda GQ03 ampliada, só a inclinação da cabeça",
+      "path": "ref/GQ03_logical_8x_magenta.png",
+      "sha256": "8cac5fbb37e62b6a8213c96b4e51738d47e5e97e634c0f23f8fb97ae5d173c74",
+      "result": "chave TA02. Par legal a pico 8. Não aprovada."
+    },
+    {
+      "output_id": "TA04_glasses",
+      "output": "originals/TA04_glasses.jpg",
+      "output_sha256": "840977e88604e7aeff1ff654c6e59531f76cfd6e824dd520bc0d15027cf327b4",
+      "prompt": "prompts/TA04_glasses.txt",
+      "role_of_input": "a guarda GQ03 ampliada, a luva do punho sobe à armação",
+      "path": "ref/GQ03_logical_8x_magenta.png",
+      "sha256": "8cac5fbb37e62b6a8213c96b4e51738d47e5e97e634c0f23f8fb97ae5d173c74",
+      "result": "chave TA04. Par legal a pico 8. Não aprovada."
+    },
+    {
+      "output_id": "TA05_look",
+      "output": "originals/TA05_look.jpg",
+      "output_sha256": "9a2f8405e284a7afe25fe58577f415bb1edde788b5e6b37e62c9921a601e7d1d",
+      "prompt": "prompts/TA05_look.txt",
+      "role_of_input": "o ajuste TA04, para inclinar a armação e olhar por cima",
+      "path": "originals/TA04_glasses.jpg",
+      "sha256": "840977e88604e7aeff1ff654c6e59531f76cfd6e824dd520bc0d15027cf327b4",
+      "result": "variação de 415 pixels. Na prancha ainda se lê como a mão na armação. Par legal."
+    },
+    {
+      "output_id": "TA03_reach",
+      "output": "originals/TA03_reach.jpg",
+      "output_sha256": "e966520f96b591917dd09dad66a14cc25d5cb1cd5e1dda24e9710c249c700fa7",
+      "prompt": "prompts/TA03_reach.txt",
+      "role_of_input": "a inclinação TA02, o punho sobe até a bochecha",
+      "path": "originals/TA02_lean.jpg",
+      "sha256": "01bef44fda0fe583e2463e8fa19feba91624708417d82ecef739ec46e18a0e22",
+      "result": "chave TA03. Par legal a pico 8. Não aprovada."
     }
   ]
 }

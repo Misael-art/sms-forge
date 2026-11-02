@@ -90,6 +90,22 @@
       "reason": "A haste atravessa o corpo e a base abre de novo. Não assentada e não medida.",
       "original": "originals/GQ03_tap_attempt1_rejected.jpg",
       "prompt": "prompts/GQ03_tap_attempt1.txt"
+    },
+    {
+      "id": "GQ03_r2_identity",
+      "reason": "Óculos mais grossos e vão entre as solas, mas a faixa da sola ficou em cinco colunas. O par oficial recusou. Não é a guarda.",
+      "original": "originals/GQ03_r2_identity.jpg",
+      "sha256": "c28be7d759d4f4215a5dd32081d39836eda1c2b9d3ec49a2c98c18a5c6015aae",
+      "logical": "logical/GQ03_r2_identity.png",
+      "logical_sha256": "45e8abc59d514ff5ffe4985413f0eeff966a35dadb9e5209e48a9d1e7970aec4",
+      "prompt": "prompts/GQ03_r2_identity.txt"
+    },
+    {
+      "id": "GQ03_tuck_study",
+      "reason": "O pé da frente continuou fora da barra. Pico local 5. Não assentado como célula lógica e não medido no par.",
+      "original": "originals/GQ03_tuck_study.jpg",
+      "sha256": "c9bd497f7fcf7b27ca98b58ed7c90e7ee47e93792923b06ce0c6011cba377a56",
+      "prompt": "prompts/GQ03_tuck_study.txt"
     }
   ],
   "kept": [
@@ -103,6 +119,13 @@
       "prompt": "prompts/GQ03_authored_guard.txt",
       "recipe": "register_gq03_authored_guard.py",
       "pair": "proposals/GQ03_pair_result.json"
+    },
+    {
+      "id": "taunt_01_glasses_keys",
+      "role": "chaves da provocação 1 sobre a GQ03. Par legal a pico 8. Não é arte aprovada, não liga ao jab e não fecha TA06.",
+      "logical_guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "cycle": "proposals/TA01_cycle_v1.json",
+      "board": "preview/TA01_cycle_logical_2x.png"
     },
     {
       "id": "GQ02_stacked_guard",
