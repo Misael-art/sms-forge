@@ -42,6 +42,11 @@ no trecho deabertura; cuePSG ou alternativa previamente declarada se não couber
 Música de fonte/autoria registrada e reviewauditivo; importarSND não criaBGM.
 
 ## Aceitação e exclusões
+Aceite vigente desde 2026-11-01: objetivo60/piso58 em cada janela válida, sem
+arredondar, pelo menos duas janelas, dispersão≤2 e teto61. PAL50 permanece
+diagnóstico regional. Esse contrato supersede a antiga faixa regional de aceite;
+exige também input/lógica/apresentação/consequência e pior frame sob carga real.
+
 MesmoCcore serveKen/Ken,Ryu/Ryu,Ken/Ryu eRyu/Ken, paletaP2 distinguível,
 IAxIA/humanoxIA/humanoxhumano; trocar.def sem editar núcleo. Entrega requer
 fontes→dados→símbolo→ROM/SHA, gameplay/vídeo/inputtrace, alvoFPSregional,

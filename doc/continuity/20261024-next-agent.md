@@ -1,5 +1,30 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## Retomada 2026-11-02 — builds/evidência e emissão
+
+Base Git conferida: a987301, branch canônica, PR4 aberto draft. Os13 arquivos
+modificados/quatro entradas não rastreadas iniciais foram preservados; Master of
+Fighters não foi alterado por este lote. Curadoria L138 agora exige recibo/ROM
+exatos, sessão/artefato de áudio e escopos limitados de validação/memória; SDCC≥4.2
+real e CLI OpenBOR oficial. Focal48+selftest137/137+75self-checks verdes; revisão
+read-only independente fechada. Nenhum gate foi afrouxado.
+
+Baseline M0 duplicada byte a byte: b1f7974ce1b9195b132f9748755caa42ca34c98cbe40f32b7fc8718cd16e9919.
+Candidata emissão ec1b6574ded1abaa9e89d457eb892269c0d4af53ecf4573595be93f8959de9b2
+acumula stamps localmente; ABBA26,13→26,63FPS (+1,91%), um hit/112 de dano por
+sessão. Worst-frame sob input real:917/3000 derrames,vline_min14. Tudo reprovado
+em piso58/budget, sem HUD/FX/PSG. Não transferir os números para entrega.
+Artefatos em `SMS_projects/luta_mugem_rev2/out/evidence/20261102_identity_baseline/`;
+memória do consumidor detalha falhas de instrumento, sessões e cleanup. Nominal
+histórica preservada; seus recibos divergentes agora reprovam sem serem editados.
+
+Próximo ramo: validar imagem/terminal da mudança e atacar streaming/emissão com
+comparação causal. A decisão sobre margem visual do pusher foi perguntada ao dono;
+sem resposta, preservar colisão de fonte. Manter55 IDs abertos; Social61v5 ausente
+não foi sintetizado e viewers/aceites Master of Fighters continuam independentes.
+
+
+
 Abra este repositório no Codex do novo host. Leia primeiro
 `doc/continuity/20261024-start-here.md`; execute o bootstrap e o doctor antes
 de iniciar produção. O contexto canônico está no Git, não no histórico do chat

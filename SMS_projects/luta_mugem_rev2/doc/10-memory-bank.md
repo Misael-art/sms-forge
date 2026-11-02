@@ -1,5 +1,63 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-11-02 — identidade e baseline atual (aceite pendente)
+
+A conciliação nominal agora recusa a divergência histórica entre o recibo
+`e697e906…` e a ROM `087df676…`, sem selecionar a auxiliar `698e58ed…` por
+mtime nem alterar esses arquivos. Ferramentas oficiais selecionam ROM/recibo
+exatos; candidata e sessão são explícitas. WAV solto não sustenta áudio;
+validation_report limita-se a pré-gates com entradas atuais por hash/conjunto;
+memória limita-se a documento legível/fresco com SHA completo. Registro de
+curadoria: `doc/curation/2026-10-19_l138_projecao_rom_sha.json`, follow-up20261102.
+SDCC4.1 é recusado;4.2/4.6/5 passam a comparação. CLI OpenBOR usa o pacote
+oficial no ambiente canônico. Focal48, selftest137/137 e medidores75/75 passaram;
+21 testes focados adicionais cobriram a limpeza completa da sessão e a projeção.
+Revisão independente `/root/identity_review` terminou sem achados materiais
+abertos. É revisão de ferramentas, sem promoção de runtime.
+
+Duas builds candidatas, `20261102_identity_baseline_m0` e
+`20261102_identity_repeat_m0`, produziram a mesma ROM524288B SHA-256
+`b1f7974ce1b9195b132f9748755caa42ca34c98cbe40f32b7fc8718cd16e9919`, com os
+mesmos24 hashes de compilação e12 de pré-gates. Reprodução byte a byte foi
+observada neste host/dia; SDSC AUTO_DATE impede presumir igualdade entre datas.
+Perfil: LUTA_PROFILE1, M0, sem pares reutilizados/prefetch/BG/PSG/probes de
+estágio. Dados `pose_budget_facing_20261027`,24 bancos preenchidos para32;
+P1_RYU vem de `ryu/ryu.def` e P2_KEN8 de `ken8/ken8.def`, apesar dos nomes
+históricos `p1_ken`/`p2_ryu` do manifesto. Schema consumido5, não CNS/AOT amplo.
+Corredor compilado passou:163 sondas,1466B de folga. A primeira leitura do fonte
+sem pré-processar reprovou por sondas condicionais ausentes; relatório preservado.
+
+Sessão `adfba50f86f34d1399b0cbd742e102f7`, privada e encerrada: bundle válido,
+input24 observado, P1x82→240 e comando reconhecido; janelas de **4 segundos**
+26,623616385157067/22,72050763330597 FPS, sem dano nesse roteiro com120VDP internos+120VDP neutros adicionais. Não aprova gameplay/FPS. Duas falhas iniciais do driver (read260 fora do
+limite256; diretório runtime criado antes de publicar o bundle) foram preservadas
+com scripts/saídas; a coleta corrigida publicou antes de medir. Nenhuma mídia
+histórica foi rehashada. Pacote: `out/evidence/20261102_identity_baseline/`.
+
+Experimento de emissão em andamento: o fallback acumula contagem/invalidade de
+contato localmente e publica ao retornar; não muda células, clipping ou SAT.
+Teste C de10000 casos de fronteira passou; o primeiro harness expôs a diferença
+int32 do host versus int16 do SDCC na leitura de AXIS e foi corrigido no teste.
+Candidata `20261102_emit_local_stamps_m0`, SHA-256
+`ec1b6574ded1abaa9e89d457eb892269c0d4af53ecf4573595be93f8959de9b2`.
+ABBA limpo com120VDP internos+40VDP neutros adicionais, P1direita+botão1/P2IA e2×8s por sessão: controle
+26,128064098789135→candidata26,626503567011923 FPS médios (+1,90768%); todos
+os quatro pares melhoraram, mas nenhuma janela atingiu58. Cada sessão observou
+um comando,um hit e112 de dano. Os snapshots do controle antigo são explícitos;
+a validação de entradas **atuais** dele fica falsa após mudar fonte/ferramentas.
+Não editar recibo para esconder a diferença.
+
+Worst-frame independente da candidata com o mesmo input: sessão
+`69690c9501c34290a25ee462649e6cc0`,3000 iterações seladas,917 derrames e
+vline_min14; reprovado. Não comparar causalmente917 com1749 de roteiros antigos.
+O primeiro check viu supervisor saindo; recheck confirmou todos os PIDs ausentes,
+e close_session passou a aguardar/reapear seu próprio supervisor. Mídia e JSONs
+em `emit_stamps_worst/` e `emit_local_stamps_abba.json`. Falta paridade visual,
+revisão nativa, composição legal, prazo/carga completa e interação com terminal.
+A implementação permanece em desenvolvimento; os55 IDs continuam abertos.
+
+
+
 ## 2026-10-28 — cache de pares físicos por conteúdo exato
 
 O candidato `LUTA_PAIR_SLOT_REUSE=1` associa cada par de tiles compacto a um

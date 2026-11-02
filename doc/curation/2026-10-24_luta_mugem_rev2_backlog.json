@@ -180,6 +180,21 @@
       "status": "partial_not_delivery",
       "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
       "summary": "A PNT incremental e a cópia SMS_VRAMmemcpy não reduziram os 1759 derrames/3000; prefetch marcou 1871. Uma sonda de fronteira viu 1731 quadros já no display ativo após streaming e 1759 após SAT, sem medir ciclos. O scale_pilot estático aponta P2 kick com 20 pares novos/1280 B em 2 ticks AIR, sem reúso; 390 pares repetidos no banco são 24.960 B teóricos de dedup e não reduzem upload sem remap META/alocação VRAM. O A/B visual wide não alinhou VDP frames/posições e fica inconclusivo. Tudo opt-in permanece desligado; orçamento não aprovado e nenhum ID fechado. Build default isolado: ROM d367abd19cfc9b221db3b069785d44fdda784b5a94a23c77dfb0b8df1e1684e5, bundle Emulicious da sessão 55225b8a22274a64a7aef72ebbb1d1ec verificado e PID ausente; captura é boot técnico. Suíte rev2: 300 passaram; build/validation pass, outros eixos pendentes. Nenhum dos 55 IDs foi fechado. Recuperação local de 27.544 arquivos verificada: archive SHA 6812b8e5a23b05034c27670afed5e1a7c4dd00b4687a0738ffc76674fde2b585; permanece no mesmo disco."
+    },
+    {
+      "date": "2026-11-02",
+      "ids": [
+        "ID01",
+        "Q07",
+        "RE05",
+        "R09",
+        "R06",
+        "IN05"
+      ],
+      "closed_ids": [],
+      "status": "partial_not_delivery",
+      "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+      "summary": "L138 aplicado a recibo/ROM/sessao/midia e validade atual de pre-gates; baseline candidata duplicada byte-identica e positiva de boot privado. Emissor M0 acumula stamps localmente: 10000 casos C e ABBA +1.91%, mas26.63FPS e917/3000 derrames. QA nativa confirmou um hit/112 de dano e retorno idle, reprovou sobreposicao; contato/AIR/SAT em timeline e carga completa continuam abertos. Nenhum ID fechado."
     }
   ],
   "count": 55,

@@ -4,6 +4,17 @@
 > memory bank de CADA projeto (`SMS_projects/<proj>/doc/10-memory-bank.md`).
 
 ## Última atualização
+2026-11-02 — identidade de builds/evidências endurecida no reconciliador e
+produtores/consumidores oficiais; aplicação de L013/L035/L138, sem ID novo.
+Recibo e ROM divergentes reprovam, inclusive com todos os eixos falsos.
+Candidata usa destino isolado/recibo explícito; WAV exige sessão/hash/PCM/rota;
+pré-gates e memória têm escopos limitados declarados. SDCC≥4.2 e CLI OpenBOR
+corrigidos. Focal48, selftest137/137 e medidores75/75 passaram. Positivo de boot
+privado em rev2 SHA b1f7974c…; FPS26,62/22,72 reprovados. Nenhuma entrega ou
+homologação artística; lacuna Social61v5 preservada. Registro e limites em
+`doc/curation/2026-10-19_l138_projecao_rom_sha.json`, follow-up20261102.
+
+### Estado histórico de 24/10
 2026-10-24 — curadoria Mugenesis → luta_mugem_rev2. As seções anteriores abaixo
 conservam seus estados históricos; não representam qualificação atual de todos
 os projetos.
