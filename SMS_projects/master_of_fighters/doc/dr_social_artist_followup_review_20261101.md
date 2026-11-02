@@ -1,9 +1,9 @@
 # Dr. Social — revisão da produção inicial e prompt de continuação
 
-> **Direcionamento vigente:** ver a revisão de `f4c5043` e a QA do designer e o prompt ao fim de
+> **Direcionamento vigente:** ver a revisão de `dab0181` e o pior frame medido pelo designer e o prompt ao fim de
 > [Apresentação de golpes](character_move_showcase_standard_v1.md).
-> Prioridade: corrigir orientação/material de TA07 e continuidade do retorno;
-> mesma ROM passou nas novas janelas, demais eixos pendentes. O texto abaixo preserva os
+> Orientação/azul escuro corrigidos; VBlank selado da v3 passou. Prioridade:
+> revisão localizada TA08→guarda e candidata artística. O texto abaixo preserva os
 > checkpoints anteriores e não deve ser copiado como o próximo prompt.
 
 

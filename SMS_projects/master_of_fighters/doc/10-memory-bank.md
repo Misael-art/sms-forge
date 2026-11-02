@@ -1,5 +1,31 @@
 # 10-memory-bank — master_of_fighters
 
+## Revisão dab0181: VBlank selado medido e terminal em revisão — 2026-11-02
+
+ROM v3 `47ab4663…` e vídeo conferidos; direção ao rival e retirada do azul escuro
+constatadas em fontes/quadros capturados. TA08 acrescenta recolha. Não aprova
+arte, GQ03, ligação com jab, comandos ou pacote. Prioridade agora é revisão
+localizada TA08→GQ03, não outra rodada inteira de poses. Altura 72 px dentro
+da faixa não prova constância anatômica: fonte 877 px vs 836 da guarda exige
+comparação de âncoras, sem esmagar poses ou inventar limite por quadro.
+
+Nova sessão própria `dddf8c438ced42aba3f83c1434664419`, encerrada. Mesma ROM,
+sem rebuild ou alteração de pixels/código. Self-checks passaram; fonte do commit
+confere com input do build, mapa correspondente passou corredor de sondas
+(folga 1784 bytes). `measure_worst_frame.py`: 90 s sem leituras, selo 3000 frames,
+PASS, vline_min=207, vovf_delta=0, done=1. Não aprova streaming/duelo/CPU inteira.
+O rótulo genérico TITLE do snapshot é estado 0, guarda neste viewer, sem série
+individual de poses. Bundle passou. As duas janelas FPS do produtor nesta ROM
+foram conferidas, não repetidas. Áudio e pacing percebido continuam pendentes.
+
+[Revisão e prompt vigentes](character_move_showcase_standard_v1.md).
+Recibo: `out/diagnostics/social_taunt01_cycle_v3_review_20261102/review_receipt.json`;
+relatório: `out/evidence/sessions/dddf8c438ced42aba3f83c1434664419/worst_frame/taunt_v3_designer_worst.json`.
+Não repetir testes sem mudança nem adicionar quadros por rotina: identificar
+defeito terminal concreto e corrigir o delta, ou apresentar candidata para
+julgamento artístico. Resultados de v3 não são herdados por nova ROM.
+
+
 ## Provocação 1, continuidade do assentamento — 2026-11-01
 
 O assentamento v1 olhava para o lado oposto já no JPEG, e o azul escuro

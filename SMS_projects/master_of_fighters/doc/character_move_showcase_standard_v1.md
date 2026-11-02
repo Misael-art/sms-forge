@@ -6,7 +6,80 @@ Fighters, não uma técnica homologada globalmente no SMSForge. Ver
 [registro de direção](decisions/character-move-showcase_owner_direction_20261101.json),
 [GDD](11-gdd.md), [roteiro](12-roteiro.md), [cenas](13-spec-cenas.md) e [TDD](15-tdd.md).
 
-## Revisão vigente — incremento f4c5043 e QA do designer, 2026-11-01
+## Revisão vigente — incremento dab0181 e pior frame medido, 2026-11-02
+
+**As correções de orientação e azul escuro foram atendidas nas imagens
+inspecionadas. A provocação continua candidata; seu passe técnico agora inclui
+o VBlank selado deste viewer.** Não tratar tudo como não realizado: separar
+esses resultados do aceite artístico, do comando e do personagem completo.
+
+Conferidos SHA da ROM v3 e vídeo, registro de conversão, diff e fonte do build.
+ROM `47ab46634198563cdf8788187c5472475c39cc5c310b37dbcdabdcb7cb52bd07`,
+32768 bytes. Inspecionei a prancha de retorno e quadros ordenados extraídos do
+framebuffer, inclusive o trecho final. TA07 nova olha para o rival e retorna à
+família ciano; a TA07 antiga escura/virada permanece apenas no comparativo.
+Não confundir a presença da antiga na prancha com sua participação na ROM v3.
+TA08 acrescenta uma etapa de recolha da mão, sem ainda aprovar o encaixe final.
+
+### Pendência técnica que esta revisão resolveu
+
+Nova sessão privada do designer `dddf8c438ced42aba3f83c1434664419`, mesma ROM
+v3, sem rebuild, sem edição de pixels/código. Self-checks do medidor de pior
+frame e do auditor de corredor passaram. O snapshot da fonte em `dab0181`
+coincide com o hash registrado no build; o mapa desse candidato passou no
+corredor `0xC7D2..0xC7F9`, com folga de 1784 bytes.
+
+`measure_worst_frame.py` rodou 90 s em tempo real sem leituras intermediárias.
+Resultado: **PASS**, selo de **3000 frames**, `vline_min=207`, `vovf_delta=0`.
+A leitura pós-selo encontrou `done=1` e frame 5424. O único snapshot lê um mínimo
+acumulado pela ROM; não significa que só um frame foi medido. Mede o fim do
+trabalho VDP instrumentado neste viewer residente; não aprova streaming futuro,
+duelo completo, input competitivo ou toda a CPU por frame.
+
+Bundle de framebuffer verificado e sessão encerrada. Recibo:
+`out/diagnostics/social_taunt01_cycle_v3_review_20261102/review_receipt.json`.
+Relatório:
+`out/evidence/sessions/dddf8c438ced42aba3f83c1434664419/worst_frame/taunt_v3_designer_worst.json`.
+O rótulo genérico `TITLE` do relatório corresponde ao estado numérico 0; neste
+viewer é a guarda. O relatório não contém uma série de estados, e não deve ser
+citado como prova de que houve tela de título ou de cobertura individual de poses.
+
+As janelas de taxa do produtor, ligadas a esta ROM, são
+59.64763127522857 / 59.62493848380926; conferidas, não repetidas nesta revisão.
+Os dois relógios do vídeo estão corretamente separados: 360 quadros, 6.007736 s
+codificados, 6.019422882 s de coleta. Não há motivo novo para retestar todas as
+janelas ou reabrir o desempenho enquanto não houver mudança/regressão relevante.
+Falhas históricas da v2 permanecem. Áudio, pacing percebido e arte seguem separados.
+
+### Próximo julgamento artístico: o terminal, não outra rodada inteira
+
+Nos quadros finais, a passagem TA08→GQ03 ainda troca a configuração de mão,
+cabeça e corpo. Verificar a continuidade em tamanho nativo e reprodução normal
+antes de pedir outro desenho. Não concluir que falta obrigatoriamente mais um
+quadro: pode ser a pose terminal da recolha, sua trajetória, proporção ou exposição.
+Aproximar uma dessas causas não autoriza mudar a guarda/jab aprovados por escopo.
+
+A entrada de TA07/TA08 na faixa 72 px resolve a ultrapassagem declarada de 73;
+**não demonstra sozinha a constância anatômica entre poses**. O novo original
+continua com corpo de 877 px contra 836 da guarda (cerca de 4,9%); a explicação
+anterior de deriva uniforme não passa a ser resolvida só por ficar dentro da
+faixa. Registrar âncoras comparáveis e distinguir escala/ângulo/postura. Mesma
+sola não prova mesma anatomia. Não esmagar poses nem inventar novo limite de
+altura por quadro para eliminar movimentos naturais.
+
+Códigos 56/57 pertencem à família de cor usada, mas pertencimento à mesma família
+não é aceite automático de luz/material. A mudança grave de azul escuro foi
+corrigida; avaliar apenas se resta uma troca perceptível de material no terminal,
+sem impor que toda dobra ou área iluminada tenha o mesmo índice. O acabamento
+precisa permanecer fiel ao método/model sheet e ser legível no SMS.
+
+Recomendação: fechar essa comparação localizada e apresentar a provocação como
+candidata para julgamento artístico com o proprietário. Se não houver defeito
+observável no trecho, não gerar frames adicionais por rotina. Se houver, corrigir
+só a causa, medir o delta e recapturar no novo SHA. O pacote continua incompleto;
+portraits independentes podem avançar sem chamar este checkpoint de aprovação.
+
+## Histórico — revisão do incremento f4c5043 e QA do designer, 2026-11-01
 
 **A provocação chegou ao viewer; a arte e o pacote continuam sem aceite.**
 O agente cumpriu a etapa de integração e distinguiu corretamente diagnóstico
@@ -481,7 +554,7 @@ antes de sua aprovação e das próximas tarefas de elenco.
 - `doc/dr_social_cps2_sample_v1.md`, revisão v8 e decisão do método em
   `doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`;
 - este padrão `doc/character_move_showcase_standard_v1.md`, especialmente a
-  revisão vigente de f4c5043 e a QA do designer; checkpoints anteriores são históricos;
+  revisão vigente de dab0181 e o pior frame medido pelo designer; históricos abaixo;
 - `doc/dr_social_two_button_proposal_v2.json`, proposta ainda não aprovada.
 
 **Identidade e referências.** Social é humano, investigador/psicólogo, esguio,
@@ -496,81 +569,82 @@ e o papel de cada uma; não alimente o processo com todo o histórico de testes.
 Bengala é romba, rapieira é lâmina rígida de estocada, bumerangue é de aço
 com rastro violeta. Sem poderes mentais, vampirismo ou arsenal adicional.
 
-**Estado real.** A provocação v2 está integrada em `MOF_CPS2_SAMPLE=9`,
-com ROM de 32 KiB, SHA
-`8f7687b85d68db923f9f3e36f4e1363c9be7136bc5438f880be7e0562e4f3f5d`.
-O designer repetiu a QA nesse mesmo binário: duas janelas 59.652563933294665 /
-59.67934459451107 FPS, acionamento de revisão e retorno observados. As duas
-sessões anteriores falharam e continuam registradas. Sem aceite de pior frame,
-áudio, arte, GQ03, comandos competitivos ou pacote. **Não abrir outra ação como
-prioridade: corrigir a continuidade da provocação e fechar sua validação.**
+**Estado atual.** A provocação v3 está no slot 10 do viewer, ROM
+`47ab46634198563cdf8788187c5472475c39cc5c310b37dbcdabdcb7cb52bd07`.
+TA07_settle_v2 corrigiu direção do rosto e azul escuro; TA08_hand_rise acrescentou
+recolha até o peito. O produtor observou execução/reentrada e duas janelas acima
+de 58. O designer conferiu os artefatos e mediu o VBlank selado: 3000 frames,
+zero derrame, `vline_min=207`; corredor de sondas também passou. Esses resultados
+valem para esse SHA e esse viewer, não para o personagem completo. Arte, GQ03,
+ligação com jab, comando competitivo, áudio e pacing continuam sem aceite.
 
-Consulte `proposals/TA01_cycle_v2.json`, configs de conversão e registro, originais,
-lineage e prompts sob
+Leia `proposals/TA01_cycle_v3.json`, configs de conversão/registro, originais,
+lineage e prompts em
 `data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/`.
-Build oficial: `.mddev/dr_social_taunt01_cycle_v2_build.json`.
-A evidência nova está em `out/diagnostics/social_taunt01_cycle_v2_review_20261101/`.
-Use esses dados para avançar; não refaça o que já foi observado sem necessidade.
+Build: `.mddev/dr_social_taunt01_cycle_v3_build.json`.
+Recibo do designer: `out/diagnostics/social_taunt01_cycle_v3_review_20261102/review_receipt.json`.
+ROMs v2/v3 e tentativas rejeitadas permanecem preservadas.
 
-1. **Preserve baselines e método.** Mantenha fontes, tentativas rejeitadas,
-   recibos e ROM v2 intactos. Reutilize GQ03/TA02–TA04 como candidatos do teste,
-   sem promovê-los; jab v8 permanece preservado. Novos desenhos seguem a autoria
-   visual aprovada. Código recorta/converte/mede; não cria anatomia, expressões
-   ou poses. Diferenças de identidade não se resolvem com morph/interpolação.
-2. **Corrija TA07 com uma intenção clara.** Social continua atento ao adversário
-   do mesmo lado, solta/recolhe a mão e recompõe a guarda. O rosto não deve virar
-   para o lado oposto por ambiguidade de “três quartos”. Preserve a luz e os
-   materiais do casaco/rosto; não escurecer todo o personagem durante assentamento.
-   Compare fonte, materiais e PNG SMS para localizar onde nasce a mudança de cor.
-   Corrija na etapa responsável e reavalie 1×/ampliado. Não disfarce o salto com
-   flash, corte de cena, hold longo ou efeitos novos.
-3. **Verifique escala anatômica, não só bbox.** TA07 tem 73 px; não a esprema
-   para 69 nem trate o excesso como aprovado. Use solo e âncoras de crânio,
-   ombro/quadril para distinguir extensão legítima de deriva entre gerações.
-   A razão de redução comum não corrige automaticamente imagens geradas em
-   escalas corporais diferentes. Preserve a faixa de referência GDD 66–72 px,
-   proporções e identidade; registre a causa e a correção observáveis.
-4. **Revise a recuperação completa.** Veja TA05→TA06→TA07→GQ03 continuamente:
-   direção do olhar, mão ativa, bengala, tecido e apoio. Preserve a melhora do
-   exame e a ação secundária; desenhe só os intervalos necessários à continuidade.
-   Não congele o corpo para satisfazer uma contagem de células nem abra outra
-   provocação. Manter o terminal igual à guarda não dispensa a qualidade do trajeto.
-5. **Mantenha timing como hipótese explícita.** O teste usa 8/8/10/20/10/12,
-   68 ticks, separados das esperas da UI. Não os transforme em frame-data nem
-   altere o contrato de 22 ticks como se tivesse aprovação. Teste a leitura e
-   registre se percepção, ajuste, exame, pausa e retorno são compreendidos.
-   Não alongue exposição para esconder falta de desenho; não acelere o emulador.
-6. **Trate desempenho com evidência.** A mesma ROM já passou nas duas janelas
-   da revisão; não reduzir conteúdo ou tempos com base numa hipótese não isolada
-   de gargalo. Preserve as falhas anteriores e a carga do host. Ao integrar arte
-   nova, refaça os checks pertinentes no novo SHA, com self-check, par, scanline,
-   paleta/VRAM, input e pior frame efetivamente medido. Uma sessão por vez, sem
-   encerrar tarefas alheias. Se houver regressão, comparar ao binário v2 sob
-   condições registradas; corrigir causa, nunca baixar o piso58 nem escolher
-   apenas janelas favoráveis. Janelas aprovadas não pagam pacing/pior frame.
-7. **Distinga os relógios da captura.** O MP4 v2 reproduz 228 quadros em 3,804899 s;
-   a coleta durou 5,157165914 s. Identifique essa reprodução nominal. Preserve
-   timestamps/contagem e FPS funcional separadamente; vídeo nominal não prova
-   fluidez em tempo real. Nova captura deve apontar o SHA novo, conter ciclo e
-   retorno e declarar claramente o que seu relógio demonstra. Não editar ou
-   sobrescrever a evidência antiga para parecer mais rápida/estável.
-8. **Valide o trecho no viewer oficial.** Botões 1/2 seguem acionadores de revisão,
-   não comandos de combate. Confirmar input consumido → início → exame → retorno
-   → nova execução, além de lados/cantos pertinentes e integridade do personagem.
-   Registrar máscaras, duração das pressões e frames observados; não inferir
-   latência competitiva de uma pressão longa. Usar sessões privadas, captures
-   vinculadas a ROM, áudio conforme escopo e cleanup. Se silêncio é intencional
-   no viewer, declarar; isso não aprova o áudio do personagem ou da luta.
-9. **Entregue um incremento fechado e honesto.** Fonte corrigida, receita,
-   timeline, ROM por SHA, vídeo/capturas, medição aplicável e revisão de TA07→
-   guarda. Separar taxa de janelas, pior frame, arte, input diagnóstico e aceite
-   do pacote. GD01/GD02 seguem com designer/engenharia/proprietário; não reenviar
-   a mesma lista de conflitos como trabalho novo nem usar isso para bloquear o
-   viewer. Enquanto aguarda dependência concreta, portraits previstos podem
-   avançar, mas outra ação não substitui a correção dominante deste trecho.
+**Objetivo imediato: fechar a revisão localizada de TA08→guarda e entregar a
+provocação candidata para julgamento artístico. Não recomeçar o ciclo inteiro.**
 
-Atualize matriz/lineage/memória; não declare provocação, GQ03, conexão ao jab ou
-personagem aprovados por inferência. Não abrir outro personagem ou desbloqueáveis.
-Use RTK/run_host, checkout único e pipeline oficial, sem motor paralelo. Preserve
-WIP alheio. Faça commit/push só dos arquivos próprios revisados na branch
-registrada, confirme SHA remoto e encerre apenas sua sessão temporária.
+1. **Preserve o que foi resolvido.** Não refazer TA07 por ela continuar candidata:
+   orientação ao rival e abandono do azul escuro foram constatados. Não trocar
+   a mão da bengala, reabrir a guarda ou redesenhar o jab. Preserve fontes e
+   método autoral; código só recorta, converte, organiza e mede. Não promover
+   desenhos/controles por conta própria nem solicitar aprovação de um defeito
+   que ainda pode corrigir dentro da identidade autorizada.
+2. **Isole o terminal.** Observe TA06→TA07→TA08→GQ03 em tamanho nativo e velocidade
+   normal; use step/ampliação como apoio identificado. A mão precisa terminar
+   na posição da guarda com trajetória plausível, cabeça/roupa não podem trocar
+   de modelo e o tecido deve assentar. Registre o instante e a causa de qualquer
+   salto visível. Não adicione outro quadro automaticamente: avaliar pose,
+   proporção, trajetória e exposição antes de escolher a menor correção.
+3. **Demonstre coerência anatômica.** Compare âncoras de cabeça, ombros, quadril,
+   mão/pegada e solo com os quadros reutilizados. A fonte nova de 877 px continua
+   maior que os 836 px de GQ03; 72 e 69 estarem ambos na faixa não prova mesma
+   escala. Separar extensão/ângulo legítimos de deriva da geração, sem comprimir
+   o corpo para caber num número. Registrar coordenadas/recortes comparáveis,
+   não apenas a frase “mesmas proporções”. Corrigir fonte autoral somente onde
+   a deriva estiver demonstrada, sem deformação procedural.
+4. **Confira os materiais no retorno.** A causa do azul escuro estava na fonte;
+   preserve a correção. Compare ciano 56/57 no contexto real e a distribuição
+   de luz/dobras. Diferença de código não é defeito automático, mas troca de
+   material aparente precisa correção na etapa responsável. Mapeamento técnico
+   de paleta é permitido; não pintar nova anatomia ou expressão por script.
+5. **Feche a hipótese temporal com experiência.** 8/8/10/20/10/12/8 = 76 ticks
+   (cerca de 1,27 s a 60 Hz), fora das esperas da UI. Continua hipótese de atuação,
+   sem aprovar a exposição competitiva ou substituir os 22 ticks propostos no
+   contrato. O gesto deve ler como ajuste seguido de avaliação confiante e
+   retorno. Não inserir espera para esconder falha gráfica nem tratar desacelerar
+   o emulador como ajuste de animação. Se o ciclo já comunica a intenção, não
+   multiplicar frames só para igualar contagens do contrato.
+6. **Valide apenas o delta necessário.** Mesma ROM sem mudança não exige repetir
+   o mesmo conjunto de janelas e scanlines como novo progresso. Havendo arte,
+   timing ou código novos, converter/buildar pela rota oficial e executar os
+   checks afetados: fonte→derivado→ROM, composição/par, paleta/residência,
+   input de revisão, retorno/reentrada e desempenho/pior frame no novo SHA.
+   Self-check primeiro, sessão privada e fechamento garantido. Não remover
+   conteúdo ou baixar piso58. Os resultados de v3 não são herdados por outra ROM.
+7. **Entregue uma apresentação revisável.** ROM identificada e vídeo normal
+   contendo ciclo e retorno, com quadros-chave em tamanho nativo/nearest,
+   timeline, resultado do terminal e critérios ainda pendentes. Declarar tempos
+   de coleta/reprodução separadamente. Não confundir a prancha que contém TA07
+   antiga para comparação com os quadros realmente integrados. O alvo é uma
+   candidata artística compreensível; não exigir arquivo novo quando a evidência
+   atual já prova o ponto e nenhuma mudança ocorreu.
+8. **Separe aceites e continuidade.** Liste correções observadas, taxa por janela,
+   VBlank selado, input diagnóstico, arte e pacote em campos distintos. Viewer
+   sem chamadas PSG tem silêncio intencional a declarar; isso não aprova áudio
+   de luta nem exige inventar uma trilha agora. Botões 1/2 são acionadores de
+   revisão; GD01/GD02 e cena 10 continuam com comando em definição. Sem defeito
+   observável remanescente, entregar a candidata para revisão do designer/dono;
+   com defeito, corrigir a causa e prosseguir. Portraits previstos podem avançar
+   durante dependências reais, sem abrir outro personagem ou desbloqueáveis.
+
+Use RTK/run_host, checkout único e pipeline oficial. Preserve WIP da Cena 01 e
+luta_mugem_rev2. Atualize matriz/lineage/memória com evidências e limites reais,
+sem “nada existe” para resultados já demonstrados nem “personagem pronto” para
+um viewer parcial. Commit/push somente do incremento próprio revisado, branch
+registrada, SHA remoto conferido. A aprovação artística do proprietário continua
+necessária; não substituir seu julgamento por números de sprites ou FPS.
