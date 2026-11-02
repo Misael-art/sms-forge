@@ -6,7 +6,78 @@ Fighters, não uma técnica homologada globalmente no SMSForge. Ver
 [registro de direção](decisions/character-move-showcase_owner_direction_20261101.json),
 [GDD](11-gdd.md), [roteiro](12-roteiro.md), [cenas](13-spec-cenas.md) e [TDD](15-tdd.md).
 
-## Revisão vigente — incremento 07e4bce, 2026-11-01
+## Revisão vigente — incremento 2075484, 2026-11-01
+
+**A provocação 1 tem chaves candidatas e um percurso de retorno; ainda não tem
+animação completa validada.** O agente avançou além de outra guarda e manteve
+proveniência, jab e limites de claim. GQ03 r2/tuck não resolveram a composição;
+continuam estudos, sem tornar a GQ03 original aprovada por exclusão.
+
+Inspecionei as duas pranchas lógica/SMS, prompts, receita, adaptador e contrato
+v2. Self-checks passaram; os 15 manifests existentes — cinco poses em base,
+espelho e packing x=4 — foram reavaliados, todos pico 8/zero overflow, SAT de
+32 a 35. Os hashes das quatro fontes novas conferem. Sem reconversão, ROM,
+playback observado, FPS ou sessão de emulador nesta revisão. Recibo:
+`out/diagnostics/social_taunt01_review_20261101/review_receipt.json`.
+
+### Leitura artística e aderência ao contrato
+
+- TA02–TA04 comunicam aproximação da mão e ajuste dos óculos na prancha lógica.
+  No SMS a redução comprime a informação facial. TA05 continua semelhante ao
+  ajuste; a diferença de 415 pixels não prova o olhar avaliativo para o rival.
+- O significado a preservar é uma provocação perspicaz: percebe o adversário,
+  ajusta os óculos, examina-o com confiança e recompõe a guarda. Cabeça, direção
+  do olhar, separação mão/rosto e pausa legível devem trabalhar juntos. Não
+  exigir que um detalhe minúsculo dos olhos carregue sozinho a atuação.
+- Todos os prompts novos mandam manter pés, bengala e barra do casaco exatamente
+  iguais. Isso explica uma restrição de produção que conflita com a ação
+  secundária planejada; não prova impossibilidade de movimento no hardware.
+  Pés podem servir de apoio e a bengala pode permanecer plantada sem congelar
+  quadril, ombros, tecido e mão ativa. Não exigir deslocamento onde não ajuda.
+- TA06 (`casaco_lag`) não foi desenhada nem medida; TA07 reutiliza TA05. O retorno
+  passa por TA04→TA03→TA02→GQ03. Reuso e holds são legítimos se a sequência tiver
+  continuidade e intenção; não é obrigatório redesenhar todos. Porém, reprodução
+  invertida não prova recuperação natural, atraso do tecido ou sustentação do
+  olhar. TA08 igual à guarda prova o terminal, não o percurso.
+- O contrato v2 propõe oito funções e exposições 2/2/2/2/3/2/5/4 (22 ticks).
+  O adapter de chaves leva apenas 2/2/2/3 para TA02–TA05; o percurso de revisão
+  tem nove entradas sem duração completa declarada. Não existe ainda uma timeline
+  integral para avaliar velocidade. Contagem de desenhos e ticks são propostas;
+  reuso deve ser declarado, sem fabricar poses distintas para fechar números.
+
+### Direção de design para este gesto — sem alterar moveset
+
+Concluir a intenção já prevista: preparar → alcançar/ajustar → olhar avaliativo
+legível → sustentar → soltar/recolher → assentamento/guarda. O tecido responde
+à ação do corpo e termina depois dela, com amplitude subordinada ao gesto.
+TA06 não precisa de cauda espetacular fora da silhueta: desenhar atuação plausível
+e medir, sem presumir overflow. Tampouco remover essa função sem registrar a
+proposta e o impacto na atuação. Não adicionar invulnerabilidade, ganho de barra,
+dano, fala ou equipamento como recompensa pelo trabalho artístico.
+
+A faixa 66–72 px descreve a altura anatômica de referência em pé. Não normalizar
+cada inclinação para a mesma altura opaca: isso pode anular o movimento ou fazer
+o corpo mudar de tamanho. Conferir escala comum e âncoras no ciclo; mesma célula
+ou mesmo pivô, sozinhos, não demonstram estabilidade anatômica. É critério de
+verificação, não afirmação de que o ciclo atual já apresentou esse defeito.
+
+### Próximo checkpoint e responsabilidade dos controles
+
+**Fechar esta provocação e vê-la rodando**, antes de outra ação nova. Reutilizar
+chaves aproveitáveis; resolver TA05, ação secundária, recuperação e timing total.
+GD01/GD02 não bloqueiam reprodução diagnóstica em viewer oficial. Um acionador
+de revisão deve estar identificado como tal, sem ensinar comando competitivo.
+A galeria parcial pode usar estes candidatos com seus limites declarados;
+compilar/observar não os promove a arte final nem aprova GQ03 ou o elenco.
+
+O handoff `dr_social_gd01_open_conflicts_for_designer_v1.json` foi recebido.
+Mantém a lista de conflitos já apontada; não é nova decisão nem implementação.
+Designer/engenharia/proprietário continuam responsáveis pelos comandos; o
+artista não precisa reenviar a mesma lista nem aguardar para finalizar este
+experimento temporal. Cena 10 continua “comando em definição”. Depois desse
+checkpoint, retomar o pacote completo com os bloqueios restantes explícitos.
+
+## Histórico — revisão do incremento 07e4bce, 2026-11-01
 
 **GQ03 corrigiu a autoria da guarda, mas não concluiu o personagem.** O agente
 respondeu ao diagnóstico anterior: voltou à edição de imagem referenciada em
@@ -103,7 +174,7 @@ continua sem aprovar combate, comandos, FPS ou o pacote completo.
 
 **Dr. Social segue incompleto. GQ02 é estudo geométrico medido, não guarda
 artística aprovada.** Esta foi a revisão de 4f86572; a revisão de 07e4bce acima e o prompt ao fim
-são o direcionamento vigente.
+foram o direcionamento daquele checkpoint; ver a revisão vigente de 2075484.
 
 O agente compreendeu a faixa GDD, a diferença entre simulação e ROM e a
 necessidade de não inventar comandos. Preservou o jab e os originais. Porém,
@@ -337,7 +408,7 @@ antes de sua aprovação e das próximas tarefas de elenco.
 - `doc/dr_social_cps2_sample_v1.md`, revisão v8 e decisão do método em
   `doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`;
 - este padrão `doc/character_move_showcase_standard_v1.md`, especialmente a
-  revisão vigente de 07e4bce; checkpoints mais antigos são históricos;
+  revisão vigente de 2075484; checkpoints mais antigos são históricos;
 - `doc/dr_social_two_button_proposal_v2.json`, proposta ainda não aprovada.
 
 **Identidade e referências.** Social é humano, investigador/psicólogo, esguio,
@@ -352,109 +423,90 @@ e o papel de cada uma; não alimente o processo com todo o histórico de testes.
 Bengala é romba, rapieira é lâmina rígida de estocada, bumerangue é de aço
 com rastro violeta. Sem poderes mentais, vampirismo ou arsenal adicional.
 
-**Estado real.** GQ03 é candidata autoral de guarda; no mesmo Ken, 69×25 px,
-32 sprites e pico 8. Fonte: `cps2_keys_v1/logical/GQ03_authored_guard.png`,
-SHA `44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b`.
-Fonte, prompts, receita e medição estão sob
-`data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/`.
-Base, espelho e packing x=1/4/7 passaram no simulador; não há aceite artístico
-ou ROM. GQ02 permanece estudo procedural. Bengala, bota e rapieira continuam
-chaves; portraits são candidatos; cena 10 não ensina um comando decidido.
+**Estado real e prioridade imediata.** O commit 2075484 contém quatro poses
+novas de `taunt_01`, o ajuste dos óculos. Guarda inicial/final usa GQ03;
+TA02 inclina, TA03 aproxima a mão, TA04 ajusta, TA05 ainda não comunica claramente
+o olhar por cima. TA06 não existe; TA07 repete TA05; a volta reutiliza poses
+invertidas. Há pranchas e 15 composições medidas com Ken, mas não timeline
+completa observada nem ROM desse ciclo. O objetivo do próximo checkpoint é
+**concluir esta provocação e demonstrá-la em movimento no emulador oficial**.
+Isso é uma etapa do personagem completo, não autorização de encerrá-lo.
 
-1. **Mantenha o método aprovado.** Preserve GQ02 e os scripts como diagnóstico
-   com proveniência explícita. Não os use para produzir anatomia, expressão ou
-   intervalos finais. Produza o desenho por autoria visual e derive a versão
-   SMS com a receita oficial. Código pode converter, medir, organizar e montar
-   pranchas; não deve inventar tornozelos, deformar cauda por linha ou pintar
-   expressão para simular trabalho artístico. Não altere a fábrica nem promova
-   curadoria global. Se a ferramenta autoral estiver indisponível, registre a
-   limitação concreta e avance contratos/medição/integração reaproveitável.
-2. **Consolide GQ03 antes de animar a partir dela.** Compare em mesma escala
-   com J01 e referências aprovadas: cabelo/rosto/idade, colete/fechos, comprimentos,
-   proporções e equipamento. Use recortes identificados de identidade se o model
-   sheet inteiro trouxer inventário que não pertence à cena. Não transforme
-   diferenças de identidade em morph com um quadro intermediário. Se forem
-   diferenças gestuais legítimas, demonstre continuidade; se forem deriva de
-   geração, corrija a fonte autoral. Preserve J01–J06. Não recomece o pacote nem
-   faça outra guarda apenas por variação estética. Corrija a leitura das botas
-   e materiais na saída SMS pelo método autorizado, sem deformação procedural.
-   Mantenha 66–72 px de corpo em pé e a receita oficial declarada, comum às poses:
-   encaixe 2/3×6/7 seguido de extra 7/9 neste candidato. O estudo 35/52 é distinto.
-3. **Use as medições existentes e valide o que mudar.** Não repita translações
-   horizontais como novos orçamentos: os intervalos Y permanecem iguais. Retenha
-   os controles base/espelho/packing; reexecute nos pixels/poses novos. Conferir
-   1× e nearest ampliado, self-check prévio, hashes, par/face/posição, SAT, pico
-   e linhas excedidas. Pico 8 não oferece folga nas linhas saturadas; efeitos,
-   rival real e contato mudam o orçamento. Cantos precisam de prova de clipping,
-   wrap e corpo/arma completos no runtime. Ken continua controle de construção.
-4. **Resolva o toque pela função.** Use as linhas/células excedidas para separar
-   contribuição dos pés, corpo, braço, haste e rival. Explore gesto, apoio e
-   organização corporal preservando controle frontal, ponta romba, alcance e
-   altura lógica. Duas solas plantadas e casaco atrás da haste são hipóteses de
-   pose, não exigências de todos os quadros: permita peso e ação secundária.
-   Não simplesmente eleve a arma, encurte-a, apague células,
-   oculte rival ou divida em objeto supondo ganhar limite por linha. Uma nova
-   chave é candidata até medida. Mudança de função/alcance/identidade exige
-   alternativa concreta e decisão registrada do dono; continue peças independentes.
-5. **Feche uma ação inteira assim que viável.** Preparação → ameaça/contato →
-   consequência → recolha → retorno à guarda, com pivô estável, peso e equipamento
-   contínuos. Meça também os intervalos. Preserve J01–J06 do jab v8; GQ03 não
-   aprova automaticamente esse ciclo. Se a nova guarda não conecta com o jab,
-   resolva primeiro identidade/figurino; só então apresente a transição gestual
-   necessária e seu custo. Não fixe um único quadro como solução antes de ver o
-   ciclo, não substitua os aprovados nem acrescente atraso competitivo oculto.
-   Hipóteses de duração ficam rotuladas;
-   exposição de estudo não define startup, hitstop ou recuperação de combate.
-6. **Continue até cobrir o personagem.** Siga os IDs do contrato v2 e as lacunas da matriz:
-   locomoção, guarda/respostas a impacto, queda/levantar, entradas, provocações,
-   vitórias, derrota/empate, três normais, dois especiais e Laudo Final com
-   attempt/hit/whiff. Complete tracks de corpo/arma/projétil/FX e os portraits
-   de seleção, versus e conversa previstos. Não crie terceiro especial. Priorize
-   uma ação completa em vez de outra coleção de contatos isolados; bloqueio da
-   bengala não impede estados independentes.
-7. **Refine portraits com atuação.** Reutilize fontes autorais e enquadramento
-   coerente; alinhe âncoras faciais e idade, dê volume ao casaco e clareza a olhos,
-   sobrancelhas, boca e postura. Não trocar expressão por sete pixels pintados
-   por script. Complete suspeita, determinação, surpresa e alívio além de atenção/
-   fala, conferindo o contrato vigente. Boca aberta isolada não é animação de
-   fala. Texto fica fora do rosto, com acentos e leitura em 256×192 após paleta.
-8. **Prepare a cena 10 de forma verificável.** Use o storyboard como planta,
-   coloque candidatos reais do personagem, rival e golpe de maior envelope para
-   testar espaço. Nome, controle SMS com D-pad/1/2, sequência e feedback devem
-   ter acabamento coerente; o controle físico não se espelha ao trocar o lutador
-   de lado. Pressionar/manter/soltar/simultaneidade devem coincidir com a receita.
-   UI autoral, sem promover retângulos diagnósticos a acabamento final. O artista
-   não decide GD01/GD02: entregue ao designer a v2 e os conflitos apontados na
-   revisão vigente: baixo-trás, guarda temporal,
-   Super de uma leitura, bordas versus hold, cancelamento de dash e quarto de
-   lua+1+2 sem barra. Frente-frente para dash é hipótese, não decisão registrada.
-   Não trate a ausência de resposta como aprovação. Até decisão, mostre “comando em definição”; nunca ensine um comando inventado.
-9. **Integre pela rota oficial.** Coordene as necessidades de engenharia no
-   consumidor existente. Construa catálogo navegável dos assets realmente prontos,
-   carregados por demanda, sem motor paralelo. Piloto parcial deve indicar sua
-   cobertura. Demonstração funcional usa reconhecedor, poses e tempos da luta;
-   leitura antes/depois é UI, não lentidão adicionada ao golpe. Quando houver
-   comandos aprovados, mostrar input consumido → ação → resultado → retorno,
-   incluindo erro, block/whiff e Super sem recurso. Velocidade normal é a real;
-   lento/step servem somente à revisão identificada. Desbloqueável futuro fica
-   registrado, sem implementar economia/save/recompensas agora.
-10. **Entregue evidência e continuidade.** ROM por SHA, vínculo fonte→derivado→
-    símbolo→ROM, rota de revisão por ação, vídeo do ciclo em velocidade normal,
-    orçamento real, pior frame, áudio e input em sessão privada do emulador.
-    Alvo60/piso58 FPS funcional por janela válida, sem arredondar; boot ou contador
-    isolado não aprovam. Preserve matriz/lineage, fontes/receitas e pendências com
-    próxima ação concreta. Sem ROM, declare exatamente quais desenhos/sequências
-    existem e o bloqueio; nunca alegue personagem completo ou AAA. Não autoaprove.
+Fontes/receitas estão em
+`data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/`:
+`proposals/TA01_cycle_v1.json`, `proposals/TA01_adapter_config.json`,
+`logical/TA02_lean.png`, `TA03_reach.png`, `TA04_glasses.png`, `TA05_look.png`,
+originais, prompts, lineage e geração. Confira hashes antes de reutilizar.
+GQ03 continua candidata: `logical/GQ03_authored_guard.png`, SHA
+`44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b`.
+GQ02 é diagnóstico procedural; r2/tuck são estudos que não fecharam a composição.
+Não refaça outra guarda agora para evitar a provocação; não promova GQ03 por
+ela ser a que passou. Preserve o jab v8 e sua pendência de conexão com GQ03.
 
-Use RTK/run_host e revise somente arquivos próprios ao commitar. Preserve WIP
-alheio. Antes do push confira registro e remoto; use o nome completo da branch
-registrada, não um alias `HEAD` se o gancho exige a referência ou SHA. Não
-contorne o gancho, crie outra branch ou mude o registro para publicar. Confirme
-SHA remoto uma vez. O bloqueio de publicação não substitui a conclusão artística.
+1. **Use o método autoral e preserve identidade.** Reutilize fontes aprovadas e
+   chaves aproveitáveis, registrando o papel das referências. Não gere anatomia,
+   expressões ou intervalos por pintura/cisalhamento procedural. Scripts ficam
+   em recorte, conversão, organização e medição. Não herde deriva de cabelo,
+   colete ou proporção como nova identidade. Faça comparação e mantenha pendências
+   de fidelidade explícitas; uma ROM diagnóstica não as aprova automaticamente.
+2. **Feche a atuação de TA05.** O público deve perceber: Social ajusta os óculos
+   e examina o oponente com confiança. Dirija cabeça, olhar, mão e pose para essa
+   leitura em tamanho SMS. Deixe o artista propor o gesto dentro da função
+   contratada; não imponha contagem de pixels alterados ou só um detalhe de olho.
+   Compare TA04/TA05 em 1× e ampliado, mas valide a distinção também em sequência.
+3. **Complete ação secundária e recuperação.** Retire a exigência de congelar a
+   barra do casaco em todos os prompts. Preserve sustentação e pegada sem tornar
+   o corpo rígido. Desenhe o atraso/assentamento previsto em TA06, com amplitude
+   coerente; meça a proposta em vez de presumir que vai estourar. Sustente o
+   momento avaliativo e mostre soltar/recolher a mão. Reaproveite poses onde a
+   volta funcionar; desenhe o que faltar se houver leitura de rebobinar ou salto.
+   Voltar aos bytes da guarda é um terminal, não prova de recuperação completa.
+4. **Declare uma timeline integral.** Cada entrada tem pose/track, exposição,
+   intenção e saída, incluindo início, sustentação e retorno. Distinga poses
+   únicas, holds e reuso. 2/2/2/3 cobre apenas TA02–TA05; não basta para o ciclo.
+   Os 22 ticks/8 funções do contrato são proposta, não velocidade aprovada.
+   Experimente uma hipótese completa de timing diagnóstico; ajuste pela leitura
+   do gesto, registrando o resultado. Não altere frame-data competitivo nem invente
+   efeitos de gameplay. Não desacelere o emulador para aparentar fluidez.
+5. **Preserve escala e continuidade.** Use transformação comum, pivô/solo e
+   receita reproduzível por quadro. A altura GDD 66–72 px é referência em pé;
+   cabeça inclinada não deve ser reampliada para obrigar toda pose a 69 px.
+   Confira âncoras, tamanho do corpo, óculos, bengala e pés no ciclo. Uma eventual
+   correção exige nova medição. Nada de normalização independente que faça o
+   personagem crescer/encolher; não confunda célula fixa com anatomia estável.
+6. **Meça as poses novas e a composição temporal.** Self-check antes da leitura;
+   adaptador oficial, fontes/receita/hashes, ambos os lados e par identificado.
+   Os 15 manifests atuais já passaram: não repita o mesmo teste como novo ganho.
+   Meça mudanças, transições, SAT/paleta/VRAM e pior frame pertinente à integração.
+   Pico 8 é ausência de folga nas linhas saturadas. Ken é controle de construção;
+   clipping/cantos/elenco permanecem pendentes até evidência própria. Não remover
+   material/arma/rival nem introduzir flicker para passar.
+7. **Integre e observe o ciclo pelo caminho oficial.** Use o viewer/consumidor e
+   o pipeline existentes, sem motor paralelo ou lógica de build dentro do jogo.
+   A revisão pode ter um acionador de diagnóstico e replay claramente indicados;
+   isso não decide o comando competitivo da provocação. GD01/GD02 não bloqueiam
+   esse teste. Nomeie como provocação, não ataque com dano ou tutorial funcional.
+   Registre entrada de revisão → ciclo completo → guarda → nova execução, com
+   tempo normal e captura do framebuffer ligada ao SHA. Stepping/lento são
+   recursos de inspeção identificados; não substituem assistir em tempo normal.
+8. **Entregue um checkpoint verificável.** ROM e catálogo parcial por hashes,
+   timeline completa, vídeo normal, comparação fonte/saída, medições aplicáveis,
+   input consumido e sessão privada encerrada. Para aceite funcional, alvo60/
+   piso58 por janela válida, pior frame e demais eixos do projeto; não atribuir
+   gameplay completo a um viewer. Sem ROM, registrar bloqueio técnico preciso,
+   comando tentado/resultado e o próximo passo de integração; “não há comando
+   aprovado” e “o retorno precisa ser PNG exato” não explicam ausência de playback.
+   Não parar num relatório se houver caminho seguro executável para observar.
+9. **Mantenha o restante em continuidade.** Atualize matriz/lineage/memória sem
+   chamar chaves de ação concluída. Os conflitos GD01 já foram recebidos em
+   `doc/dr_social_gd01_open_conflicts_for_designer_v1.json`; não resolvê-los como
+   artista nem reenviar a mesma lista como novo avanço. O designer/engenharia e
+   o proprietário decidem as regras. Cena 10 continua “comando em definição”.
+   Após fechar este experimento, retome as demais ações/portraits do contrato,
+   sem abrir outro personagem nem implementar desbloqueáveis agora.
 
-Próximo checkpoint: uma ação/estado previsto com ciclo completo e retorno,
-medido e observado temporalmente. Se o toque seguir bloqueado, conclua uma
-sequência independente já prevista, mantendo o objetivo integral. Não encerre
-o objetivo ao conseguir outra pose estática. Prossiga pelos ramos
-viáveis até o pacote revisável; decisões ainda não experimentadas permanecem
-explicitamente pendentes, com experimento e responsável definidos.
+Trabalhe no checkout único, com RTK/run_host; leia os workflows centrais de
+sessão isolada antes de QA. Preserve fontes, reprovações e trabalho alheio.
+Commit/push apenas dos arquivos próprios revisados, pela branch registrada,
+sem contornar hooks; confirme SHA remoto. Não se autoaprove. Informe separadamente
+o que foi desenhado, simulado, compilado, visto em movimento e aceito.

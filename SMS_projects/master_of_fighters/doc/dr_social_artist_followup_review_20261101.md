@@ -1,9 +1,9 @@
 # Dr. Social — revisão da produção inicial e prompt de continuação
 
-> **Direcionamento vigente:** ver a revisão de `07e4bce` e o prompt ao fim de
+> **Direcionamento vigente:** ver a revisão de `2075484` e o prompt ao fim de
 > [Apresentação de golpes](character_move_showcase_standard_v1.md).
-> GQ03 é candidata autoral medida, ainda sem aceite de continuidade visual ou
-> animação. GQ02 permanece diagnóstico. O texto abaixo preserva os
+> Prioridade: completar TA05/TA06, recuperação e timeline da provocação 1,
+> e observá-la no emulador. O texto abaixo preserva os
 > checkpoints anteriores e não deve ser copiado como o próximo prompt.
 
 

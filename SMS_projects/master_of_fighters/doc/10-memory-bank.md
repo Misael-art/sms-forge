@@ -1,5 +1,29 @@
 # 10-memory-bank — master_of_fighters
 
+## Revisão do designer: concluir provocação 1 — 2075484, 2026-11-01
+
+Quatro chaves TA02–TA05 e retorno por reuso são avanço, ainda sem animação
+completa observada. Pranchas lógica/SMS inspecionadas; TA05 não separa bem o
+olhar avaliativo do ajuste, TA06 não foi desenhada, TA07 repete TA05. Prompts
+congelam a barra do casaco; remover essa restrição para permitir a ação secundária
+contratada. Retorno ao PNG GQ03 não prova recuperação natural. Exposições do
+adapter 2/2/2/3 cobrem só quatro poses, não a timeline de nove entradas.
+
+Self-checks do adaptador/simulador passaram; reavaliados 15 manifests (base,
+espelho, packing x=4), todos pico 8, overflow zero, SAT 32–35. Quatro hashes
+lógicos conferidos. Sem reconversão, build, vídeo, sessão de emulador ou aceite
+artístico/funcional nesta revisão. Recibo em
+`out/diagnostics/social_taunt01_review_20261101/review_receipt.json`.
+
+[Parecer e prompt vigentes](character_move_showcase_standard_v1.md): concluir
+esta provocação e demonstrar o ciclo no viewer oficial antes de nova ação.
+Comando de revisão identificado não decide GD01/GD02, mas permite observar
+animação. Handoff de conflitos recebido; não é decisão nem motivo para bloquear
+playback diagnóstico. Não normalizar inclinações para altura constante; verificar
+escala/âncoras comuns. GQ03 permanece candidata, jab preservado, personagem
+incompleto. Depois deste checkpoint, continuar o pacote e suas pendências.
+
+
 ## Provocação 1 em chaves — 2026-11-01
 
 O toque segue sem chave legal. A correção r2 da guarda abriu o vão das solas
