@@ -157,6 +157,92 @@
       "path": "originals/TA02_lean.jpg",
       "sha256": "01bef44fda0fe583e2463e8fa19feba91624708417d82ecef739ec46e18a0e22",
       "result": "chave TA03. Par legal a pico 8. Não aprovada."
+    },
+    {
+      "output_id": "TA05_attempt_pinch",
+      "output": "originals/TA05_attempt_pinch.jpg",
+      "output_sha256": "c9225bff8d93f839fec46b73d03e340b016b4eb6bfb65eb928933920da62dec3",
+      "prompt": "prompts/TA05_examine.txt",
+      "prompt_note": "Este JPEG é a tentativa anterior, com a mão ainda na armação. O texto de TA05_examine descreve a estratégia que só fechou no exame seguinte.",
+      "role_of_input": "o ajuste TA04, para tentar o olhar por cima",
+      "path": "originals/TA04_glasses.jpg",
+      "sha256": "840977e88604e7aeff1ff654c6e59531f76cfd6e824dd520bc0d15027cf327b4",
+      "result": "rejeitado: a mão continua na armação"
+    },
+    {
+      "output_id": "TA05_attempt_over_rims",
+      "output": "originals/TA05_attempt_over_rims.jpg",
+      "output_sha256": "727a1a0c07c90affd18328b81db47c5ea291a58c9dba9cfce24e3628f7be19b7",
+      "prompt": "prompts/TA05_examine.txt",
+      "prompt_note": "Segunda tentativa da mesma estratégia. O prompt exato da ferramenta não foi o arquivo; o arquivo registra a direção.",
+      "role_of_input": "a tentativa anterior, ainda com a mão na armação",
+      "path": "originals/TA05_attempt_pinch.jpg",
+      "sha256": "c9225bff8d93f839fec46b73d03e340b016b4eb6bfb65eb928933920da62dec3",
+      "result": "rejeitado: o olhar continua preso aos óculos"
+    },
+    {
+      "output_id": "TA05_examine",
+      "output": "originals/TA05_examine.jpg",
+      "output_sha256": "f8d984f61d596b512cd6c39710721429b2259e3599f18390d606427a25313da9",
+      "prompt": "prompts/TA05_examine.txt",
+      "prompt_note": "O arquivo resume a direção usada na sessão. A mão sai da armação e vai à bochecha.",
+      "role_of_input": "a segunda tentativa rejeitada, para baixar a mão e abrir o rosto",
+      "path": "originals/TA05_attempt_over_rims.jpg",
+      "sha256": "727a1a0c07c90affd18328b81db47c5ea291a58c9dba9cfce24e3628f7be19b7",
+      "result": "chave do exame. Altura SMS 72, sola alinhada, pico local 4. Não aprovada."
+    },
+    {
+      "output_id": "TA06_coat_wide_study",
+      "output": "originals/TA06_coat_wide_study.jpg",
+      "output_sha256": "8a2a8e5b79f0ebd01bb8e7dd4fc2b342ecd2cd8d847f78773899fe1a817ccde6",
+      "prompt": "prompts/TA06_coat_lag.txt",
+      "prompt_note": "A direção pedia cauda larga. O arquivo TA06_coat_lag.txt é o passo curto que ficou.",
+      "role_of_input": "o exame TA05, para soltar a mão e atrasar o casaco",
+      "path": "originals/TA05_examine.jpg",
+      "sha256": "f8d984f61d596b512cd6c39710721429b2259e3599f18390d606427a25313da9",
+      "result": "medido e não usado: pico local 5, altura SMS 74"
+    },
+    {
+      "output_id": "TA06_coat_lag",
+      "output": "originals/TA06_coat_lag.jpg",
+      "output_sha256": "3bf2d24c222669ca0fe3620f2ba47df75a5b96f8783c253e735e54bfaafda807",
+      "prompt": "prompts/TA06_coat_lag.txt",
+      "role_of_input": "o exame TA05, com atraso curto do casaco e o punho descendo ao peito",
+      "path": "originals/TA05_examine.jpg",
+      "sha256": "f8d984f61d596b512cd6c39710721429b2259e3599f18390d606427a25313da9",
+      "result": "chave TA06. Altura SMS 72, pico local 4, par a pico 8. Não aprovada."
+    },
+    {
+      "output_id": "TA07_settle_wide_study",
+      "output": "originals/TA07_settle_wide_study.jpg",
+      "output_sha256": "7cc643d3334e1603c3910bde28a5821405a714c64a685d3cdc157b86ff6c64c4",
+      "prompt": "prompts/TA07_settle.txt",
+      "prompt_note": "Primeira direção de assentamento, a partir de TA06. A cauda abriu demais.",
+      "role_of_input": "TA06, para voltar a cabeça e descer o punho",
+      "path": "originals/TA06_coat_lag.jpg",
+      "sha256": "3bf2d24c222669ca0fe3620f2ba47df75a5b96f8783c253e735e54bfaafda807",
+      "result": "medido e não usado: pico local 5"
+    },
+    {
+      "output_id": "TA07_handswap_study",
+      "output": "originals/TA07_handswap_study.jpg",
+      "output_sha256": "25c203cf9250487b3134b16b255a1a32cd18666ffa35718caafecf110ef907ee",
+      "prompt": "prompts/TA07_settle.txt",
+      "prompt_note": "Tentativa de encolher a cauda. A bengala trocou de mão.",
+      "role_of_input": "TA06, segunda tentativa de assentamento",
+      "path": "originals/TA06_coat_lag.jpg",
+      "sha256": "3bf2d24c222669ca0fe3620f2ba47df75a5b96f8783c253e735e54bfaafda807",
+      "result": "não usado: mãos trocadas e altura SMS 75"
+    },
+    {
+      "output_id": "TA07_settle",
+      "output": "originals/TA07_settle.jpg",
+      "output_sha256": "1adac7321b7457132c06f55cce3717a0a6efe2fbb1258e86c63e372c66221544",
+      "prompt": "prompts/TA07_settle.txt",
+      "role_of_input": "TA06, bengala permanece na luva da esquerda da imagem e o outro punho desce pela frente direita",
+      "path": "originals/TA06_coat_lag.jpg",
+      "sha256": "3bf2d24c222669ca0fe3620f2ba47df75a5b96f8783c253e735e54bfaafda807",
+      "result": "chave TA07. Altura SMS 73, sola alinhada, par a pico 8. Não aprovada."
     }
   ]
 }

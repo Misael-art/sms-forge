@@ -56,6 +56,8 @@
 #else
 #error Unknown Hayato diagnostic composition
 #endif
+#elif MOF_CPS2_SAMPLE == 9
+#include "../out/diagnostics/social_taunt01_cycle_v2_20261101/converted/sample_data.h"
 #elif MOF_CPS2_SAMPLE == 8
 #include "../out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/sample_data.h"
 #elif MOF_CPS2_SAMPLE == 5
@@ -86,6 +88,9 @@ SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "J.J. pose sample",
 #elif defined(MOF_HAYATO_SAMPLE) && MOF_HAYATO_SAMPLE >= 5
 SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "Hayato cut sample",
                               "Candidate guard and short cut, not gameplay");
+#elif defined(MOF_CPS2_SAMPLE) && MOF_CPS2_SAMPLE == 9
+SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "Social taunt diagnostic",
+                              "Glasses taunt playback; command undefined");
 #else
 SMS_EMBED_SDSC_HEADER_AUTO_DATE(0, 1, "SMSForge", "Social CPS2 sample",
                               "Candidate idle and jab, not gameplay");

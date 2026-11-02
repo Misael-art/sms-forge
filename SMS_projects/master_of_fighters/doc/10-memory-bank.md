@@ -1,5 +1,31 @@
 # 10-memory-bank — master_of_fighters
 
+## Provocação 1 vista em movimento — 2026-11-01
+
+O exame, o atraso curto do casaco e o assentamento rodaram no viewer
+diagnóstico `MOF_CPS2_SAMPLE 9`. A guarda continua a GQ03. TA02, TA03 e TA04
+foram reaproveitadas. O olhar antigo, com a mão na armação, ficou fora do
+ciclo. A hipótese de tempo é 8/8/10/20/10/12. Não é frame-data e não substitui
+os 22 ticks do contrato.
+
+ROM `8f7687b85d68db923f9f3e36f4e1363c9be7136bc5438f880be7e0562e4f3f5d`, 32 KiB.
+Sessão `f23c4ec169354eef89472e9500461029` fechada. O vídeo normal tem 228
+quadros, SHA `b91b26a18c4717ea619f3c670d67d3d5ebf45c5b1f75da1f8ed0fb318f6fdec1`,
+ligado a essa ROM. O botão 2 desligou a repetição e o estado voltou a 0. O
+botão 1 abriu o ciclo, o estado passou por 2, voltou a 0 e um segundo toque
+chegou ao estado 4, o exame. São acionadores de revisão. A cena 10 continua
+com comando em definição.
+
+O par das poses novas ficou em pico 8 e overflow zero, na face normal, no
+espelho e no packing x=4. A cauda larga mediu pico local 5 e altura 74 e não
+entrou. TA07 mede 73 px, um acima da faixa 66–72, com a sola no mesmo y=112
+da guarda. Não foi esmagada de volta a 69.
+
+Duas leituras de FPS ficaram abaixo do piso em alguma janela: 58,59/44,27 e
+49,33/45,14. A carga do host estava em torno de 34. Magic SMRT e avanço de
+frame passaram. Não há aceite de FPS, de pior quadro, de arte, de GQ03, do
+jab nem do pacote. Recibo: `cps2_keys_v1/proposals/TA01_cycle_v2.json`.
+
 ## Revisão do designer: concluir provocação 1 — 2075484, 2026-11-01
 
 Quatro chaves TA02–TA05 e retorno por reuso são avanço, ainda sem animação

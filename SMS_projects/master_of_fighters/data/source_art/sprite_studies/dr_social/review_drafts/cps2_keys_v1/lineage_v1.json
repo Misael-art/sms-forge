@@ -122,10 +122,18 @@
     },
     {
       "id": "taunt_01_glasses_keys",
-      "role": "chaves da provocação 1 sobre a GQ03. Par legal a pico 8. Não é arte aprovada, não liga ao jab e não fecha TA06.",
+      "role": "chaves da provocação 1 sobre a GQ03. Par legal a pico 8. Não é arte aprovada, não liga ao jab. O olhar TA05_look foi substituído no ciclo v2 e o arquivo permanece.",
       "logical_guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
       "cycle": "proposals/TA01_cycle_v1.json",
       "board": "preview/TA01_cycle_logical_2x.png"
+    },
+    {
+      "id": "taunt_01_cycle_v2",
+      "role": "ciclo diagnóstico da provocação: exame, atraso curto do casaco e assentamento. Par das poses novas a pico 8. Não é arte aprovada, não liga ao jab e não decide o comando.",
+      "logical_guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "cycle": "proposals/TA01_cycle_v2.json",
+      "recipe": "register_taunt_cycle_v2.py",
+      "board": "preview/TA01_cycle_v2_logical_4x.png"
     },
     {
       "id": "GQ02_stacked_guard",

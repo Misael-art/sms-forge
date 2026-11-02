@@ -1,0 +1,176 @@
+{
+  "schema": "social_taunt01_cycle_v2",
+  "date": "2026-11-01",
+  "action_id": "taunt_01",
+  "display_name": "provocação",
+  "command": "em definição",
+  "command_note": "O viewer usa o botão 2 para ligar ou desligar a repetição automática e o botão 1 para disparar o ciclo a partir da guarda. São acionadores de revisão já existentes. Não ensinam o comando competitivo e não decidem GD01/GD02.",
+  "not_an_approval": true,
+  "not_gameplay": true,
+  "connects_to_jab_v8": false,
+  "gq03_approved": false,
+  "guard_logical_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+  "replaced_look_sha256": "dd9184cd4506a7c09689530a23d3049cd4fff667277fef6a70662dee5e7be71a",
+  "replaced_look_note": "TA05_look.png permanece no disco. Continua parecida com o ajuste. Não entra neste ciclo.",
+  "scale": {
+    "rule": "Altura de célula = corpo_jpg * 104 / 836, arredondamento inteiro, sola em y=116. A guarda mede 836 px no JPEG e 69 px no SMS. Pose mais alta não volta a 69.",
+    "guard_sms_bbox": [52, 43, 77, 112],
+    "guard_sms_height": 69,
+    "sole_y_sms": 112,
+    "poses": {
+      "TA05_examine": {"sms_bbox": [52, 40, 77, 112], "height": 72, "local_peak": 4},
+      "TA06_coat_lag": {"sms_bbox": [50, 40, 78, 112], "height": 72, "local_peak": 4},
+      "TA07_settle": {"sms_bbox": [52, 39, 77, 112], "height": 73, "local_peak": 4}
+    },
+    "ta07_band_note": "TA07 mede 73 px de coroa a sola, um pixel acima da faixa 66–72. O solo continua em y=112. Não foi esmagada de volta a 69."
+  },
+  "timing": {
+    "id": "diagnostic_timing_hypothesis_v1",
+    "status": "hypothesis_not_combat_frame_data",
+    "contract_proposal_ticks": [2, 2, 2, 2, 3, 2, 5, 4],
+    "contract_note": "Os 22 ticks e as oito funções do contrato continuam proposta. Esta hipótese não os substitui e não é frame-data.",
+    "viewer_lead_in_ticks": 60,
+    "between_plays_ticks": 21,
+    "lead_in_note": "A espera na guarda é a UI do viewer. Não é o preparo do gesto e não altera o relógio de combate.",
+    "move_ticks": 68
+  },
+  "entries": [
+    {
+      "order": 0,
+      "pose": "idle",
+      "track": "GQ03_authored_guard",
+      "kind": "terminal_and_start",
+      "exposure_ticks": "60 na primeira vez e 21 entre repetições, fora do gesto",
+      "intent": "guarda de partida e terminal",
+      "exit": "botão 1 de revisão, ou a repetição automática se estiver ligada"
+    },
+    {
+      "order": 1,
+      "pose": "TA02_lean",
+      "kind": "reused_unique",
+      "exposure_ticks": 8,
+      "intent": "percebe o adversário e prepara",
+      "exit": "TA03_reach"
+    },
+    {
+      "order": 2,
+      "pose": "TA03_reach",
+      "kind": "reused_unique",
+      "exposure_ticks": 8,
+      "intent": "a mão livre sobe",
+      "exit": "TA04_glasses"
+    },
+    {
+      "order": 3,
+      "pose": "TA04_glasses",
+      "kind": "reused_unique",
+      "exposure_ticks": 10,
+      "intent": "ajusta os óculos",
+      "exit": "TA05_examine"
+    },
+    {
+      "order": 4,
+      "pose": "TA05_examine",
+      "kind": "unique_hold",
+      "exposure_ticks": 20,
+      "intent": "examina o adversário. A pausa é a duração desta pose, não um segundo desenho.",
+      "exit": "TA06_coat_lag"
+    },
+    {
+      "order": 5,
+      "pose": "TA06_coat_lag",
+      "kind": "unique",
+      "exposure_ticks": 10,
+      "intent": "a mão desce ao peito, o olhar continua, o casaco atrasa um passo curto",
+      "exit": "TA07_settle"
+    },
+    {
+      "order": 6,
+      "pose": "TA07_settle",
+      "kind": "unique",
+      "exposure_ticks": 12,
+      "intent": "a cabeça volta, o punho desce à cintura e o casaco ainda fica um passo atrás",
+      "exit": "idle, o PNG da guarda"
+    }
+  ],
+  "reuse_note": "TA02, TA03, TA04 e a GQ03 são as chaves já medidas. O retorno invertido TA04→TA03→TA02 saiu deste ciclo: rebobinar não mostrava recuperação. Voltar aos bytes da guarda é o terminal, depois de TA07.",
+  "studies_not_in_cycle": [
+    {
+      "id": "TA05_attempt_pinch",
+      "sha256": "c9225bff8d93f839fec46b73d03e340b016b4eb6bfb65eb928933920da62dec3",
+      "why": "A mão continuou na armação. Mesma leitura do TA05 antigo."
+    },
+    {
+      "id": "TA05_attempt_over_rims",
+      "sha256": "727a1a0c07c90affd18328b81db47c5ea291a58c9dba9cfce24e3628f7be19b7",
+      "why": "Segunda tentativa com a mão na armação. Não separou o olhar."
+    },
+    {
+      "id": "TA06_coat_wide",
+      "sha256": "8a2a8e5b79f0ebd01bb8e7dd4fc2b342ecd2cd8d847f78773899fe1a817ccde6",
+      "why": "Cauda larga medida: pico local 5 e altura 74. Não entrou. A função ficou, com amplitude menor."
+    },
+    {
+      "id": "TA07_settle_wide",
+      "sha256": "7cc643d3334e1603c3910bde28a5821405a714c64a685d3cdc157b86ff6c64c4",
+      "why": "Assentamento com cauda larga: pico local 5. Não entrou."
+    },
+    {
+      "id": "TA07_handswap",
+      "sha256": "25c203cf9250487b3134b16b255a1a32cd18666ffa35718caafecf110ef907ee",
+      "why": "A bengala trocou de mão e a altura SMS foi 75. Não entrou."
+    }
+  ],
+  "pair": {
+    "opponent": "Ken de construção ken_a0_g0_i0.png",
+    "opponent_sha256": "12544d97e09170385fb772154cfc9995ac7895ed30c54167155eecea6488ec91",
+    "self_check": "authored source adapter e sprite_line_sim passaram antes da leitura",
+    "new_pose_line_sim": {
+      "converted": {"TA05_examine": [32, 8], "TA06_coat_lag": [34, 8], "TA07_settle": [33, 8]},
+      "flip": {"TA05_examine": [32, 8], "TA06_coat_lag": [34, 8], "TA07_settle": [33, 8]},
+      "packx4": {"TA05_examine": [34, 8], "TA06_coat_lag": [34, 8], "TA07_settle": [33, 8]},
+      "overflow": 0
+    },
+    "reused_poses_note": "GQ03, TA02, TA03 e TA04 voltaram a pico 8 no conjunto residente. Isso confirma a medida anterior. Não é um novo ganho.",
+    "slack": "Pico 8 é zero folga nas linhas saturadas. Ken não é o elenco. Cantos e clipping seguem pendentes."
+  },
+  "playback": {
+    "status": "observed_diagnostic_not_approved",
+    "viewer": "MOF_CPS2_SAMPLE 9",
+    "header_durations": [0, 8, 8, 10, 20, 10, 12],
+    "rom": "out/candidates/dr_social_taunt01_cycle_v2/rom/master_of_fighters.sms",
+    "rom_bytes": 32768,
+    "rom_sha256": "8f7687b85d68db923f9f3e36f4e1363c9be7136bc5438f880be7e0562e4f3f5d",
+    "session_id": "f23c4ec169354eef89472e9500461029",
+    "session_closed": true,
+    "video": {
+      "path": "out/diagnostics/social_taunt01_cycle_v2_20261101/emulator/taunt_normal.mp4",
+      "sha256": "b91b26a18c4717ea619f3c670d67d3d5ebf45c5b1f75da1f8ed0fb318f6fdec1",
+      "frames": 228,
+      "seconds": 5,
+      "nominal_hz": 59.92274340431231,
+      "note": "Captura do framebuffer em tempo real, ligada ao SHA da ROM. Não mede o piso de FPS."
+    },
+    "review_trigger": {
+      "button_2_mask": 32,
+      "button_1_mask": 16,
+      "autoplay_off_then_guard_state": 0,
+      "first_press_state": 2,
+      "first_press_hold": 7,
+      "after_return_state": 0,
+      "second_press_state": 4,
+      "second_press_hold": 3,
+      "note": "Estado 4 é TA05_examine. O disparo é revisão. Não é o comando da cena 10."
+    },
+    "fps": {
+      "accepted": false,
+      "windows_first_session": [58.58830865506254, 44.267676665832944],
+      "windows_second_session": [49.33468997130153, 45.14083899479978],
+      "second_session_id": "ccc69901efaa469ab84aeff1deda2f44",
+      "host_load_about": 34,
+      "frame_advance": true,
+      "magic": "SMRT",
+      "note": "Nenhuma das duas sessões ficou inteira em 58 ou mais. A carga do host estava alta. O piso não foi aceito."
+    }
+  }
+}

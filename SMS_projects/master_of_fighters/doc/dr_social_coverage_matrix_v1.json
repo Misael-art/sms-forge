@@ -8,7 +8,7 @@
   "distinctions": {
     "produced": "Três chaves de luta, bustos de atenção, fala, vitória e derrota, placas de tiles da conversa e do versus, GQ01 sem cauda fechada, GQ02 como shear diagnóstico, a guarda autoral GQ03 medida no par e as chaves da provocação 1. Intervalos de luta não desenhados. A provocação não é combate nem comando.",
     "converted": false,
-    "diagnostic_adapter": "prepare_authored_sprite_sample.py gravou derivados e conversion.json em out/diagnostics. Sem ROM e sem promoção a res/.",
+    "diagnostic_adapter": "prepare_authored_sprite_sample.py gravou derivados e conversion.json em out/diagnostics. O viewer da provocação 1 tem uma ROM diagnóstica própria. Ela não promove assets a res/ e não observa o pacote.",
     "observed_in_emulator": false,
     "approved": false
   },
@@ -237,10 +237,10 @@
     },
     {
       "id": "taunt_01",
-      "status": "authored_keys_pair_passed_cycle_incomplete",
-      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/proposals/TA01_cycle_v1.json",
+      "status": "diagnostic_cycle_observed_not_approved",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/proposals/TA01_cycle_v2.json",
       "guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
-      "purpose": "Chaves de inclinar, levar a mão, ajustar a lente e uma variação ainda pouco separada. Retorno é a GQ03 exata. Par com Ken a pico 8, sem folga. TA06 não desenhada. Durações são proposta. Sem ROM e sem aprovação."
+      "purpose": "Ciclo diagnóstico visto no viewer: preparo, ajuste, exame, atraso curto do casaco e assentamento, com terminal na GQ03. O botão 1 de revisão dispara e o botão 2 corta a repetição. Não é comando, não aprova GQ03, não liga ao jab e não cumpre o piso de FPS."
     },
     {
       "id": "taunt_02",
