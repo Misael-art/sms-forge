@@ -1,5 +1,23 @@
 # Memory bank — luta_mugem_rev2
 
+## Recibo final local — 2026-11-02
+
+HEAD do incremento de runtime: `14c9ca9`; correção de sondas: `9a791ec`.
+Recuperação oficial concluída e verificada:32575 entradas,714845873B brutos,
+arquivo144534539B SHA-256
+`dc054e4ff9a2c6c1213029fd43b8e008d7d0a0cbb72605d70c8d8f3e607cf88f`.
+Destino `.runtime/backups/luta_mugem_rev2-20261102-identity-trace.tar.gz` e
+manifesto `.runtime/backups/luta_mugem_rev2-20261102-identity-trace.json`.
+O pack conferiu SHA, conjunto de membros e bytes/hash de cada entrada.
+Cópia local no mesmo disco, escopo explícito de recovery_bundle.py; não contém
+Git/SDK/credenciais nem os gerados de outros consumidores. Recibo detalhado em
+`SMS_projects/luta_mugem_rev2/out/evidence/20261102_identity_baseline/recovery_verification.json`.
+Somente este fechamento documental é posterior ao pacote; runtime/provas estão
+congelados nele. Os13 modificados/quatro não rastreados iniciais permanecem;
+quatro fontes/headers de input conferem byte a byte com o snapshot inicial.
+Publicação remota não foi efetuada; PR4 permanece draft no SHA remotoa987301.
+Produto/motor continuam sem aceite (FPS, VBlank, composição e AIR pendentes).
+
 ## Fechamento do lote medido — 2026-11-02 (aceite pendente)
 
 Commits locais de ferramentas/documentação: `7c73d6b` e `2585f54`; os deltas

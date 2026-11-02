@@ -4,6 +4,17 @@
 > memory bank de CADA projeto (`SMS_projects/<proj>/doc/10-memory-bank.md`).
 
 ## Última atualização
+Fechamento2026-11-02: `declared_probes` recusa arrays/declarações __at omitidos,
+com exceções SDK por intervalo completo e compatibilidade16/32KiB. L089 aplicada
+no follow-upL138, sem ID novo. Parser16, identidade+parser56, rev2 307,
+selftest137/137, medidores75/75; revisões nativas sem autoaprovação. Runtime
+TRC3f6ac6f1f… observou contato112/terminal, mas AIR bruto5/4/21/7/6 reprovou
+fonte5/4/9/7/6; imagem continua sobreposta. FPS e VBlank permanecem reprovados.
+Recuperação local oficial32.575 entradas,144.534.539B, SHA dc054e4f… verificado;
+mesmo disco, sem cópia externa nova. Memória rev2/handoff contêm SHA completo,
+WIP preservado e limites. Commits próprios7c73d6b/2585f54/9a791ec/14c9ca9 locais;
+nenhum push/merge/release deste lote. Os55 IDs continuam abertos.
+
 2026-11-02 — identidade de builds/evidências endurecida no reconciliador e
 produtores/consumidores oficiais; aplicação de L013/L035/L138, sem ID novo.
 Recibo e ROM divergentes reprovam, inclusive com todos os eixos falsos.
