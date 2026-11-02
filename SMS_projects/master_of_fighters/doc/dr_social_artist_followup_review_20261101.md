@@ -1,11 +1,10 @@
 # Dr. Social — revisão da produção inicial e prompt de continuação
 
-> **Direcionamento vigente:** ver a revisão de `dab0181` e o pior frame medido pelo designer e o prompt ao fim de
-> [Apresentação de golpes](character_move_showcase_standard_v1.md).
-> Orientação/azul escuro corrigidos; VBlank selado da v3 passou. Prioridade:
-> revisão localizada TA08→guarda e candidata artística. O texto abaixo preserva os
-> checkpoints anteriores e não deve ser copiado como o próximo prompt.
-
+> **Direcionamento vigente para o agente substituto:** copiar da seção Prompt
+> até o fim do [prompt integral atualizado](dr_social_complete_character_artist_prompt_v1.md).
+> O [parecer mais recente](character_move_showcase_standard_v1.md) reavalia
+> `587763c`: terminal medido, sem nova pose/ROM, candidata para julgamento
+> artístico. O restante desta página é histórico, não o próximo prompt.
 
 ## Histórico — retorno de escala e portraits
 

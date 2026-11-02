@@ -6,7 +6,64 @@ Fighters, não uma técnica homologada globalmente no SMSForge. Ver
 [registro de direção](decisions/character-move-showcase_owner_direction_20261101.json),
 [GDD](11-gdd.md), [roteiro](12-roteiro.md), [cenas](13-spec-cenas.md) e [TDD](15-tdd.md).
 
-## Revisão vigente — incremento dab0181 e pior frame medido, 2026-11-02
+## Parecer vigente — terminal 587763c e troca de agente, 2026-11-02
+
+**Provocação v3: candidata tecnicamente demonstrada no viewer, disponível para
+julgamento artístico; personagem completo ainda distante de encerramento.**
+O commit `587763cf1e192ada7bfbed4510d27fde240017b5`, posterior ao último parecer,
+acrescentou medição/prancha do terminal, sem pose nova, build ou mudança da ROM.
+HEAD e remoto conferidos nesta revisão. O sucessor não precisa acessar a conversa
+ou a sessão do produtor para retomar o pacote.
+
+Inspecionei a prancha 1×/8× atual e o recibo terminal, matriz e continuidade.
+Conferi hashes da prancha, ROM, vídeo, model sheet e jab v8. Os passes já
+registrados de taxa e VBlank da ROM v3 continuam no seu escopo; não executei
+outra sessão ou repeti medições porque não houve alteração do binário.
+
+### Parecer de game design e arte
+
+- **Correções atendidas:** TA07 olha para o rival, o colapso para azul escuro
+  foi removido e há uma pose de subida da mão. Preservar esses resultados.
+- **Mão livre:** o recibo descreve o último deslocamento de 3 px para cima e
+  2,5 px para o rival; caixas se tocam. Isso não obriga outro desenho. Também
+  não é um critério universal de fluidez: exposição, arco e corpo participam.
+- **Continuidade global:** ainda há diferença visível de configuração de cabeça,
+  largura e iluminação entre TA06–TA08 e GQ03. Avaliar o bloco na sequência e
+  em tamanho nativo; corrigir apenas TA08 pode deslocar a descontinuidade.
+  O quadro final isolado não deve ditar uma nova identidade para o personagem.
+- **Limite das medidas:** o recibo usa limiar de branco, caixas e larguras por
+  porcentagem da altura. Não equivale a medição de articulações/perspectiva nem
+  gate artístico homologado. A luva da bengala quase mantém Y, mas o próprio
+  recibo mostra mudança em X; não chamar de âncora totalmente imóvel.
+- **Decisão de continuidade:** não encomendar mais frames por rotina. Apresentar
+  a candidata atual para julgamento artístico, indicando a diferença de corpo/
+  material. Se houver correção necessária, harmonizar só o conjunto afetado,
+  respeitando fontes de identidade. Não declarar aprovação do dono por inferência.
+
+O pacote mantém 20 linhas `not_started` e sete lacunas visuais na matriz.
+Bengala/bota/rapieira permanecem chaves; GQ03 candidata; portraits incompletos;
+comandos competitivos em aberto. Os resultados da provocação não aprovam o jab,
+a relação entre guardas, a cena 10 ou o duelo. Há produção independente autorizada
+para o sucessor continuar enquanto aguarda decisão específica.
+
+### Handoff integral consolidado
+
+O documento [Prompt integral do Dr. Social](dr_social_complete_character_artist_prompt_v1.md)
+foi atualizado para substituir o contexto disperso dos prompts de checkpoint.
+Contém missão, autoridade, identidade, referências por hash e papel, método,
+matriz/ações completas, baseline ROM/vídeo, testes pagos, falhas históricas,
+controles pendentes, cena 10, receitas e proteção do WIP.
+
+Há uma dependência real a tratar na retomada: scripts de registro citam imagens
+na sessão pessoal `.grok` do produtor. Os originais estão preservados; o agente
+novo deve usar esses arquivos/hash e tornar a ingestão reproduzível no helper
+existente se necessário. Não depender dos créditos/conta do anterior, criar um
+conversor concorrente ou usar geração procedural de anatomia como substituto.
+
+Recibo desta revisão documental/visual:
+`out/diagnostics/social_new_agent_handoff_20261102/review_receipt.json`.
+
+## Histórico — revisão dab0181 e pior frame medido, 2026-11-02
 
 **As correções de orientação e azul escuro foram atendidas nas imagens
 inspecionadas. A provocação continua candidata; seu passe técnico agora inclui
@@ -536,115 +593,9 @@ entrada/condição separado dos movimentos. Não implementar moeda, save,
 conquista ou esconder instruções essenciais sem decisão do dono. É possibilidade,
 não requisito imediato nem permissão para ampliar conteúdo por inferência.
 
-## Prompt de continuidade — copiar daqui até o fim
+## Prompt vigente para agente substituto
 
-Atue como artista responsável por completar o Dr. Ferdinand Social em Master
-of Fighters, integrado ao SMSForge. Diga [Contexto SMS Carregado]. Trabalhe
-na raiz única `/home/misael/Projects/SMSForge`, consumidor
-`SMS_projects/master_of_fighters`. Não comece outro personagem. O objetivo é
-um pacote completo e revisável; a revisão do designer e do proprietário vem
-antes de sua aprovação e das próximas tarefas de elenco.
-
-**Contexto obrigatório.** Leia AGENTS da coleção e da raiz, continuidade,
-`doc/10-memory-bank.md`, GDD, roteiro, spec e TDD do consumidor. Leia também:
-
-- `doc/dr_social_complete_character_artist_prompt_v1.md`;
-- `doc/dr_social_animation_contract_v2.json` e `doc/dr_social_coverage_matrix_v1.json`;
-- `doc/dr_social_combat_design_proposal_v1.md`;
-- `doc/dr_social_cps2_sample_v1.md`, revisão v8 e decisão do método em
-  `doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json`;
-- este padrão `doc/character_move_showcase_standard_v1.md`, especialmente a
-  revisão vigente de dab0181 e o pior frame medido pelo designer; históricos abaixo;
-- `doc/dr_social_two_button_proposal_v2.json`, proposta ainda não aprovada.
-
-**Identidade e referências.** Social é humano, investigador/psicólogo, esguio,
-cabelo grisalho, óculos de latão, casaco azul/ciano, colete separado, gravata
-vinho, luvas claras e botas marrons. Preserve o model sheet aprovado
-`data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png`
-e sua decisão por hash; preserve integralmente a fonte do jab v8 em
-`data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/`.
-Model sheet define identidade; jab v8 orienta atuação/qualidade; estudos técnicos
-não viram referências de anatomia. Registre quais imagens entram na geração
-e o papel de cada uma; não alimente o processo com todo o histórico de testes.
-Bengala é romba, rapieira é lâmina rígida de estocada, bumerangue é de aço
-com rastro violeta. Sem poderes mentais, vampirismo ou arsenal adicional.
-
-**Estado atual.** A provocação v3 está no slot 10 do viewer, ROM
-`47ab46634198563cdf8788187c5472475c39cc5c310b37dbcdabdcb7cb52bd07`.
-TA07_settle_v2 corrigiu direção do rosto e azul escuro; TA08_hand_rise acrescentou
-recolha até o peito. O produtor observou execução/reentrada e duas janelas acima
-de 58. O designer conferiu os artefatos e mediu o VBlank selado: 3000 frames,
-zero derrame, `vline_min=207`; corredor de sondas também passou. Esses resultados
-valem para esse SHA e esse viewer, não para o personagem completo. Arte, GQ03,
-ligação com jab, comando competitivo, áudio e pacing continuam sem aceite.
-
-Leia `proposals/TA01_cycle_v3.json`, configs de conversão/registro, originais,
-lineage e prompts em
-`data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/`.
-Build: `.mddev/dr_social_taunt01_cycle_v3_build.json`.
-Recibo do designer: `out/diagnostics/social_taunt01_cycle_v3_review_20261102/review_receipt.json`.
-ROMs v2/v3 e tentativas rejeitadas permanecem preservadas.
-
-**Objetivo imediato: fechar a revisão localizada de TA08→guarda e entregar a
-provocação candidata para julgamento artístico. Não recomeçar o ciclo inteiro.**
-
-1. **Preserve o que foi resolvido.** Não refazer TA07 por ela continuar candidata:
-   orientação ao rival e abandono do azul escuro foram constatados. Não trocar
-   a mão da bengala, reabrir a guarda ou redesenhar o jab. Preserve fontes e
-   método autoral; código só recorta, converte, organiza e mede. Não promover
-   desenhos/controles por conta própria nem solicitar aprovação de um defeito
-   que ainda pode corrigir dentro da identidade autorizada.
-2. **Isole o terminal.** Observe TA06→TA07→TA08→GQ03 em tamanho nativo e velocidade
-   normal; use step/ampliação como apoio identificado. A mão precisa terminar
-   na posição da guarda com trajetória plausível, cabeça/roupa não podem trocar
-   de modelo e o tecido deve assentar. Registre o instante e a causa de qualquer
-   salto visível. Não adicione outro quadro automaticamente: avaliar pose,
-   proporção, trajetória e exposição antes de escolher a menor correção.
-3. **Demonstre coerência anatômica.** Compare âncoras de cabeça, ombros, quadril,
-   mão/pegada e solo com os quadros reutilizados. A fonte nova de 877 px continua
-   maior que os 836 px de GQ03; 72 e 69 estarem ambos na faixa não prova mesma
-   escala. Separar extensão/ângulo legítimos de deriva da geração, sem comprimir
-   o corpo para caber num número. Registrar coordenadas/recortes comparáveis,
-   não apenas a frase “mesmas proporções”. Corrigir fonte autoral somente onde
-   a deriva estiver demonstrada, sem deformação procedural.
-4. **Confira os materiais no retorno.** A causa do azul escuro estava na fonte;
-   preserve a correção. Compare ciano 56/57 no contexto real e a distribuição
-   de luz/dobras. Diferença de código não é defeito automático, mas troca de
-   material aparente precisa correção na etapa responsável. Mapeamento técnico
-   de paleta é permitido; não pintar nova anatomia ou expressão por script.
-5. **Feche a hipótese temporal com experiência.** 8/8/10/20/10/12/8 = 76 ticks
-   (cerca de 1,27 s a 60 Hz), fora das esperas da UI. Continua hipótese de atuação,
-   sem aprovar a exposição competitiva ou substituir os 22 ticks propostos no
-   contrato. O gesto deve ler como ajuste seguido de avaliação confiante e
-   retorno. Não inserir espera para esconder falha gráfica nem tratar desacelerar
-   o emulador como ajuste de animação. Se o ciclo já comunica a intenção, não
-   multiplicar frames só para igualar contagens do contrato.
-6. **Valide apenas o delta necessário.** Mesma ROM sem mudança não exige repetir
-   o mesmo conjunto de janelas e scanlines como novo progresso. Havendo arte,
-   timing ou código novos, converter/buildar pela rota oficial e executar os
-   checks afetados: fonte→derivado→ROM, composição/par, paleta/residência,
-   input de revisão, retorno/reentrada e desempenho/pior frame no novo SHA.
-   Self-check primeiro, sessão privada e fechamento garantido. Não remover
-   conteúdo ou baixar piso58. Os resultados de v3 não são herdados por outra ROM.
-7. **Entregue uma apresentação revisável.** ROM identificada e vídeo normal
-   contendo ciclo e retorno, com quadros-chave em tamanho nativo/nearest,
-   timeline, resultado do terminal e critérios ainda pendentes. Declarar tempos
-   de coleta/reprodução separadamente. Não confundir a prancha que contém TA07
-   antiga para comparação com os quadros realmente integrados. O alvo é uma
-   candidata artística compreensível; não exigir arquivo novo quando a evidência
-   atual já prova o ponto e nenhuma mudança ocorreu.
-8. **Separe aceites e continuidade.** Liste correções observadas, taxa por janela,
-   VBlank selado, input diagnóstico, arte e pacote em campos distintos. Viewer
-   sem chamadas PSG tem silêncio intencional a declarar; isso não aprova áudio
-   de luta nem exige inventar uma trilha agora. Botões 1/2 são acionadores de
-   revisão; GD01/GD02 e cena 10 continuam com comando em definição. Sem defeito
-   observável remanescente, entregar a candidata para revisão do designer/dono;
-   com defeito, corrigir a causa e prosseguir. Portraits previstos podem avançar
-   durante dependências reais, sem abrir outro personagem ou desbloqueáveis.
-
-Use RTK/run_host, checkout único e pipeline oficial. Preserve WIP da Cena 01 e
-luta_mugem_rev2. Atualize matriz/lineage/memória com evidências e limites reais,
-sem “nada existe” para resultados já demonstrados nem “personagem pronto” para
-um viewer parcial. Commit/push somente do incremento próprio revisado, branch
-registrada, SHA remoto conferido. A aprovação artística do proprietário continua
-necessária; não substituir seu julgamento por números de sprites ou FPS.
+Use o [prompt integral atualizado](dr_social_complete_character_artist_prompt_v1.md),
+da seção **Prompt** até o fim. Ele reúne o contexto necessário para um agente
+novo e substitui os prompts incrementais desta página. O contrato da cena 10
+acima continua vigente; os pareceres anteriores ficam como histórico e evidência.

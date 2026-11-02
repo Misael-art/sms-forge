@@ -1,5 +1,33 @@
 # 10-memory-bank — master_of_fighters
 
+## Parecer atualizado e contexto integral para agente substituto — 2026-11-02
+
+Reavaliado `587763cf1e192ada7bfbed4510d27fde240017b5`: terminal da provocação
+medido, sem novos pixels/build/ROM. Prancha 1×/8× inspecionada; hashes de prancha,
+ROM, vídeo, model sheet e jab conferidos. Nenhuma nova sessão nesta revisão,
+pois a ROM v3 permanece a mesma e os testes anteriores conservam seu escopo.
+
+[Prompt integral vigente para outro agente](dr_social_complete_character_artist_prompt_v1.md)
+agora reúne missão/identidade/método, fontes aprovadas por hash, arte histórica,
+receitas, baseline e evidências, cobertura completa, controles/cena 10, próximas
+ações e proteção do WIP. [Parecer atual](character_move_showcase_standard_v1.md).
+Prompts de checkpoint históricos deixam de ser a entrada para o sucessor.
+
+Parecer: não há justificativa demonstrada para adicionar quadro apenas para
+os 3 px/2,5 px da mão. Apresentar candidata v3 para julgamento artístico;
+a continuidade global de cabeça/corpo/material entre bloco final e GQ03 segue
+pendente. Medidas de grupos brancos/larguras não aprovam anatomia ou fluidez.
+Se houver correção, tratar o conjunto afetado, não deslocar o salto entre poses.
+Personagem ainda incompleto: 20 not_started e sete lacunas, além dos candidatos.
+Produção independente autorizada continua enquanto houver decisão específica.
+
+Scripts de registro contêm caminhos pessoais da sessão do produtor; originais
+estão preservados no projeto. Sucessor deve usar fontes/hash locais e reparar
+só ingestão/reprodutibilidade necessária, sem depender dos créditos anteriores
+ou inventar outro pipeline. Recibo desta revisão:
+`out/diagnostics/social_new_agent_handoff_20261102/review_receipt.json`.
+
+
 ## Provocação 1, terminal medido, candidata sem pose nova — 2026-11-02
 
 A passagem TA08→guarda foi lida no vídeo da ROM v3
