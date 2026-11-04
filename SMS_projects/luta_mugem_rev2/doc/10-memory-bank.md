@@ -1,5 +1,44 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-11-04 — reúso de vetores CRC no banco fixo
+
+Com o WIP atual, o perfil opt-in de reúso reprova `Bank 1 overflow`
+nas flags originais. Trocar a comparação de patterns por bloco, isolada
+com flags iguais de tamanho de código, ganhou 2,87% em ABBA e aumentou
+o `_CODE` de 32.053 para 32.083 B. As janelas da variante ficaram em
+20,818142336337036–22,472315594280243 FPS. As quatro sessões observaram
+76 de dano em P1. A variante saiu da árvore ativa, preservada em
+`out/evidence/20261104_pair_compare/`.
+
+O `versus-cut` agora compartilha somente vetores CRC byte a byte iguais.
+O gerador refez Ryu/Ken8 com 40 aliases e 632 B economizados, preservando
+bancos, dados de combate e perfil de input byte a byte. Os CRCs continuam
+sendo filtro. A confirmação exata do pattern continua no runtime.
+A candidata `out/candidates/20261104_pair_hash_dedup`, SHA-256
+`e94524edc80ae9f2ca9a81632f21ed73ee722eacde60fea3ab1f7fa15c46f688`,
+voltou a compilar com as flags originais. `_CODE` caiu de 32.228 para
+31.596 B e o corredor passou com 998 B. Receita no README.
+
+Na sessão privada `611fcef7642a4b6ab18de9e21aa64158`, o botão 2 foi
+consumido no HK e a pose 43 foi observada no tick 86, com nove pares
+reutilizados, oito enviados, zero refs inválidas e zero omissões da
+contagem SAT da ROM nesse ponto. O estado controlável voltou no tick 124. O bundle
+e vídeo de recuperação estão em `out/evidence/20261104_pair_compare/dedup_hk/`.
+A sessão de FPS `9a80ac6a3d49484f8d62e463d4039c88` mediu 20,182141353192577
+e 21,90624841793441 FPS, com input e dano observados. Ambas as sessões
+foram encerradas. O relatório bruto de FPS herdou o rótulo
+`code_size_diagnostic`; o recibo identifica as flags originais.
+O selo da mesma ROM mediu 3.000 iterações, 917 derrames, mínimo 3,
+sessão `2502e421fb854d3ca8f845b8fffc17ff` encerrada. O perfil permanece
+opt-in, com cadência e budget reprovados.
+
+A cópia `.runtime/backups/luta_mugem_rev2-20261104-seal-pair-hashes.tar.gz`
+foi restaurada em staging. A verificação recompôs 33.310 arquivos e
+conferiu os insumos e as ROMs do perfil opt-in e da correção do selo,
+o journal da volta e o vídeo HK. O staging foi limpo. Manifesto
+homônimo e recibo `out/evidence/20261104_pair_compare/recovery_restore_current_host.json`.
+Escopo local no mesmo disco, fechado antes da atualização final dos docs.
+
 ## 2026-11-04 — selo VBlank persistente e replay do perfil HitDef
 
 Candidata `out/candidates/20261104_worst_seal_wrap_m0`, SHA-256

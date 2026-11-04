@@ -1,5 +1,35 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-04 — perfil de reúso volta a caber no banco fixo
+
+Etapa B, R05/R09/R10. O manifesto opcional
+`.mddev/candidates/pair_hash_dedup_20261104.json` do rev2 usa 40 aliases
+de CRC idêntico, com 632 B economizados e bytes de patterns preservados.
+ROM `e94524edc80ae9f2ca9a81632f21ed73ee722eacde60fea3ab1f7fa15c46f688`
+observou HK, nove pares reutilizados, oito uploads e retorno controlável.
+Medição NTSC 20,182141353192577 / 21,90624841793441 FPS e selo de
+917 derrames/3.000, mínimo 3. Sessões encerradas. O perfil M0
+`73cf4ed6…` segue como referência operacional. No reteste da mesma
+ROM M0 foram medidos 25,097216658224397 / 27,822259177643474 FPS,
+com input e avanço de P1. O comparador em bloco
+foi preservado fora da árvore ativa. Artefatos e limites no memory bank.
+
+Base remota antes deste lote `aa81a0868bcedf5b148395c6efd26dad3d55d53c`,
+PR #4 draft. Implementação `06dfb43`, suíte rev2 308 passes e 150
+desselecionados. A restauração local de 33.310 arquivos verificou as
+duas ROMs e seus insumos, o journal da volta e o vídeo de HK.
+Pacote `.runtime/backups/luta_mugem_rev2-20261104-seal-pair-hashes.tar.gz`
+com manifesto homônimo, 152.152.559 B, SHA-256
+`1b7087e52f3c970828acba580c0dbc5947adaf814b1975e7e2bfea22814b4b62`.
+Recibo `out/evidence/20261104_pair_compare/recovery_restore_current_host.json`
+do rev2. O pacote cobre o rev2 e o wrapper no mesmo disco. A destinação
+externa continua pendente. A margem de sobreposição, a aprovação artística e as
+decisões de controle do Social continuam pendentes. O próximo ramo de
+runtime deve atacar o trabalho de emissão e a concorrência entre
+transferência de patterns e apresentação dentro do VBlank. O reúso de
+patterns ainda perde cadência para o M0 no roteiro medido. Nenhum dos
+55 IDs foi fechado e os arquivos de WIP anteriores seguem separados.
+
 ## 2026-11-04 — fechamento do selo e recuperação do perfil HitDef
 
 O lote de saneamento está publicado em `aa70a08`, [PR #4](https://github.com/Misael-art/sms-forge/pull/4).

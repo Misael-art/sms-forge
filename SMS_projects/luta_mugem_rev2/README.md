@@ -40,3 +40,28 @@ O perfil diagnóstico HitDef pode ser refeito com
 `rtk proxy tools/sms_wrapper/run_host.sh python -m mugen2sms.generators.fight_runtime_data --help`.
 O CLI requer `--out-dir` novo e publica somente o conjunto completo validado
 como schema 7. O manifesto padrão acima seleciona schema 5.
+
+## Diagnóstico de reúso de patterns
+
+A receita abaixo regenera o pacote opcional de CRCs compartilhados. Use
+os ZIPs restaurados do rev2 e mantenha o destino histórico preservado.
+
+```sh
+generated="$project/out/generated/pair_hash_dedup_20261104"
+cfg="$project/doc/continuity/config"
+if [ ! -e "$generated" ]; then
+  rtk proxy "$host" python -m mugen2sms.generators.versus_scene_cut \
+    --p1-source "$project/data/source_mugen/ryu/ryu.zip" --p1-config "$cfg/ryu_pose_budget.json" \
+    --p2-source "$project/data/source_mugen/ken/Ken_Majik_.zip" --p2-config "$cfg/ken_pose_budget.json" \
+    --out "$generated"
+fi
+rtk proxy "$host" python "$wrapper/build_inner.py" --project "$project" \
+  --manifest "$project/.mddev/candidates/pair_hash_dedup_20261104.json" \
+  --build-dir "$project/out/candidates/rebuild_pair_hash_dedup"
+```
+
+O manifesto opcional recupera espaço no banco fixo para testar reúso.
+O SHA-256 do header `versus_scene_runtime.h` medido é
+`ca12e2a2e056c5b2a530cbf329fbba4a0336d9cd0fd7756ce7f3da8919a54133`.
+O perfil de trabalho M0 segue separado. Cadência e orçamento do perfil
+opcional permanecem reprovados.
