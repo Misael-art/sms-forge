@@ -1,5 +1,29 @@
 # 10-memory-bank — master_of_fighters
 
+## 2026-11-03 — reprodução local do viewer da provocação v3
+
+Os registros v2/v3 verificam os JPEGs locais, a guarda e a paleta pelo
+histórico versionado. Staging reproduziu cinco PNGs lógicos e dois
+intermediários byte a byte. Originais ausentes/adulterados e derivados
+preexistentes divergentes foram recusados sem sobrescrita. A execução do
+adaptador em staging reproduziu o header, nove PNGs e oito manifests de cena.
+Pico oito no par fixo de construção.
+
+A candidata `out/candidates/20261103_operational_social_taunt_v3`, SHA-256
+`1fa0dfed9df315760362a4cef562150b85e0021791cfc4111caac9cef95c869d`,
+conciliou com o recibo da árvore atual. Só o dia SDSC e o byte alto do
+checksum SEGA mudaram em relação à ROM v3 histórica. Corredor 1784 B.
+Na sessão privada `7489ee568a9f49c7a37c214f9e3a431b`, o botão 1 foi
+consumido, a ROM entrou na pose 1 e voltou à guarda de framebuffer
+idêntico. O vídeo por stepping tem 88 quadros nativos e oito imagens
+distintas. Bundle válido e processos próprios encerrados. Provas em
+`out/evidence/20261103_operational_social_taunt_v3_replay/`; a primeira
+coleta, que encontrou a animação automática em curso no baseline, fica em
+`out/evidence/20261103_operational_social_taunt_v3/`.
+
+O gesto é o controle diagnóstico do viewer. FPS e VBlank da ROM nova
+seguem sem medição. Decisões de arte, comandos e Social61v5 seguem abertas.
+
 ## Parecer atualizado e contexto integral para agente substituto — 2026-11-02
 
 Reavaliado `587763cf1e192ada7bfbed4510d27fde240017b5`: terminal da provocação

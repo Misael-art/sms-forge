@@ -160,13 +160,11 @@ para reproduzi-lo. Novo build deve preservar WIP, usar manifesto/flags oficiais,
 comparar recibo de entradas e manter o binário anterior imutável.
 
 Os originais/prompts/derivados úteis estão no repositório; consulte seus hashes.
-Scripts `register_taunt_cycle_v2.py`/`v3.py` conservam referências ao diretório
-pessoal `.grok/sessions/.../images` do produtor. **Não depender dessa sessão ou
-desses créditos.** Antes de reexecutar, usar os originais preservados e verificar
-se a receita é reproduzível sem essa origem temporária. Se necessário, corrigir
-somente a dependência de ingestão/validação do helper existente, sem criar outro
-conversor ou alterar pixels por código. Confirme byte a byte os derivados que
-não deveriam mudar. Se uma fonte faltar, procurar Git/recibos antes de regenerar.
+Scripts `register_taunt_cycle_v2.py`/`v3.py` usam os JPEGs preservados e
+verificam os hashes dos recibos históricos, da guarda e da paleta de J01.
+Reproduzem os derivados e recusam divergência antes de recolocar arquivos
+ausentes. Os recibos de registro ficam preservados. Siga o
+[README do consumidor](../README.md) para gerar o header e compilar o viewer.
 
 Use a ferramenta de autoria visual autorizada disponível à nova sessão,
 lendo sua skill. A continuidade exige o método e fidelidade, não acesso à conta

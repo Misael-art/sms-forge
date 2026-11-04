@@ -1,5 +1,36 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-03 — saneamento operacional e início de apresentação
+
+Etapa A, ID01/R10. O rev2 usa a candidata
+`out/candidates/20261103_operational_baseline_m0` do consumidor, ROM
+`6dff700f83e3113c84ea3e6358df0d8b94306465060b37237d78008204cd792f`.
+Pré-gates e recibo conciliados com a árvore que inclui o WIP anterior.
+A nominal histórica e o trace `f6ac6f1f…` ficam separados. O M0 no
+Emulicious recebeu direita+botão 1, observou 76 de dano em P1 e mediu
+24,84773809142409 / 27,946487591521702 FPS. Sessão
+`43b7414ea52d4f5583862a31f258f4b6` fechada, bundle conferido.
+Composição, AIR, FPS, VBlank e carga completa seguem sem aceite.
+
+Social v2/v3 tem ingestão local verificada e sete derivados reproduzidos.
+O adaptador reproduziu o header `2613029c…` e os PNGs/manifestos por
+identidade. O viewer recompilado `1fa0dfed…` executou a provocação por
+botão 1 e retornou à guarda na sessão privada `7489ee568a9f49c7a37c214f9e3a431b`,
+encerrada com bundle válido e vídeo em `out/evidence/20261103_operational_social_taunt_v3_replay/`
+no Master of Fighters. Arte, comandos e WIP de Cena 01 conservam os owners e decisões
+anteriores. A restauração em staging do pacote rev2 de 144.534.539 B
+conferiu 32.575 arquivos, entradas locais do trace e ROM. Recibo em
+`out/evidence/20261102_identity_baseline/recovery_restore_current_host.json`
+no rev2. O pacote é local, no mesmo disco. Social61v5 continua aguardando o
+arquivo histórico do [pacote de recuperação já solicitado](../../SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json).
+
+Branch `codex/host-bootstrap-continuity-20261024`, [PR #4](https://github.com/Misael-art/sms-forge/pull/4).
+Implementação `5199cf0`, base remota verificada antes do lote `e4d5244`. Os 21 arquivos de WIP
+preexistente ficam fora do lote, com stage seletivo nas memórias e handoff.
+Próximo ramo B em R02/R05/R06/R09/R10: reduzir custo de emissão sob a mesma
+carga e verificar paridade por input, pose, contato e imagem. Pusher e
+GD01/GD02/GD05 continuam sob decisão do proprietário.
+
 ## Execução contínua — roteiro vigente de 2026-11-03
 
 O proprietário pediu concluir os problemas da auditoria em sequência, com

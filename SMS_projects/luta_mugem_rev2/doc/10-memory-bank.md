@@ -1,5 +1,32 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-11-03 — baseline operacional M0
+
+`out/candidates/20261103_operational_baseline_m0` compila o manifesto
+atual com o WIP de input/perfil existente. O recibo liga compilação,
+pré-gates e dados ao SHA-256
+`6dff700f83e3113c84ea3e6358df0d8b94306465060b37237d78008204cd792f`.
+Schema 5, 24 bancos de dados preenchidos até 32, Ryu P1 e Ken8 P2, fundo
+sólido e perfil 1/M0. A comparação integral com `ec1b6574…` encontrou
+somente o dia SDSC e o byte alto do checksum SEGA diferentes. A nominal
+`087df676…` continua histórica, com o recibo divergente preservado.
+
+Sessão privada `43b7414ea52d4f5583862a31f258f4b6`, corredor compilado
+com 1466 B de folga, bundle informativo e conciliação válidos. Após 160
+frames VDP iniciais, P1 direita+botão 1 foi consumido, P1 foi de x82 a
+x240, houve um hit com 76 de dano em P1. As duas janelas contínuas de 8 s
+mediram 24,84773809142409 e 27,946487591521702 FPS, reprovadas. Os três
+processos próprios foram encerrados. Registro em
+`out/evidence/20261102_identity_baseline/operational_baseline_current_host/`.
+Este roteiro cobre input e consequência limitados. Composição, AIR,
+VBlank, cadência e carga completa continuam pendentes ou reprovados.
+
+O recovery oficial restaurou em staging os 32.575 arquivos do pacote
+`luta_mugem_rev2-20261102-identity-trace`. Foram conferidos os arquivos
+locais de entrada do trace e seu SHA de ROM `f6ac6f1f…` após extração.
+O staging foi limpo. Recibo `out/evidence/20261102_identity_baseline/recovery_restore_current_host.json`.
+A cópia é local no mesmo disco e o pacote antecede esta baseline.
+
 ## Recibo final local — 2026-11-02
 
 HEAD do incremento de runtime: `14c9ca9`; correção de sondas: `9a791ec`.
