@@ -1,5 +1,58 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-11-04 — selo VBlank persistente e replay do perfil HitDef
+
+Candidata `out/candidates/20261104_worst_seal_wrap_m0`, SHA-256
+`73cf4ed6405969e34aee5d2caae682b8bbb8f1da9c7f52b5669c0fdee5bb10ba`.
+O selo e os contadores por estágio agora congelam com `done=1`, mesmo
+depois de `probe_frame` voltar a zero. O regressor C reproduz a falha
+anterior e cobre o caminho de estágio opcional.
+
+Em Emulicious privado `87e72f1ef10c4723a19d882e99673382`, input 24 e
+112 de dano em P2 observados. O selo de 3.000 iterações reprovou o budget
+com 919 derrames e mínimo 14. Após o selo, stepping atravessou a volta
+64.984→333. Todas as 71 leituras conservaram mínimo 14, máximo 254,
+último VCounter 54, 919 derrames e `done=1`. Sessão encerrada.
+
+Registro em `out/evidence/20261104_worst_seal_wrap/wrap_verification.json`
+com os primários copiados intactos. A publicação do bundle no diretório
+padrão foi recusada porque o medidor já o ocupava. O verificador rederivou
+o máximo de saída em 0xC887, corrigindo o offset no relatório bruto.
+O medidor mantém o requisito conservador de frame final ≥3.000 para
+emitir um veredito. O ensaio após a volta prova preservação do selo,
+com escopo de stepping e sem medição de FPS nessa ROM.
+
+O CLI oficial de recuperação HitDef requer um destino novo, gera em
+staging e publica o diretório somente após validar schema 7. A receita
+reproduziu os cinco arquivos históricos byte a byte, preservou saída
+existente e descartou o estágio com P2 ausente. Recibo
+`out/evidence/20261104_worst_seal_wrap/schema7_replay.json`. O M0 continua
+consumindo schema 5. O schema 7 reproduzido conserva as aproximações e a
+ausência de common1 original.
+
+## 2026-11-03 — recorte por faixa preservado como experimento
+
+No experimento `LUTA_CLIP_SPAN`, dois intervalos por ator substituíram
+as comparações signed de 16 bits por célula. O teste C verificou 10.000
+casos em cada rota, com recorte, SAT cheia e posições fora da tela.
+Em ABBA NTSC alinhado no tick lógico 94, P1 segurou direita+botão 1,
+P2 usou IA e cada sessão observou 76 de dano em P1. O controle
+`6dff700f…` mediu 24,765559071792243 / 28,046186737228062 e
+24,787374578784792 / 28,083837619939843 FPS. A candidata
+`4c7c3c84496da03309052628d6cdf64256911191db71b9c8786654a35d34c286`
+mediu 26,066836106281556 / 28,58477625934115 e
+26,10711065317821 / 28,706878619658124 FPS. Ganho médio 3,58%.
+Todas as janelas reprovaram o piso 58, com carga parcial.
+
+O teste privado de reentrada encontrou estados de sonda iguais nos nove
+checkpoints e oito framebuffers pixel a pixel iguais. No tick 278, três
+pixels em uma linha divergem e os corpos estão sobrepostos nas duas ROMs.
+O pior quadro da candidata selou 3.000 iterações com 919 derrames e
+`vline_min=14` na sessão `66235734f34841d397f05b15f7ee4e39`. As sessões
+do lote foram encerradas. A implementação experimental saiu da árvore
+ativa. Fontes, manifesto e QA em `out/evidence/20261103_clip_span/`, selo
+em `out/evidence/20261102_identity_baseline/clip_span_worst/`.
+
 ## 2026-11-03 — baseline operacional M0
 
 `out/candidates/20261103_operational_baseline_m0` compila o manifesto

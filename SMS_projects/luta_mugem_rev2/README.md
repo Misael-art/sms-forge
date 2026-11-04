@@ -27,11 +27,16 @@ capturar o framebuffer e fechar a sessão. Para conciliar evidência de runtime,
 passe também `--session ID` com o bundle correspondente. Veja o
 [workflow de sessão privada](../../tools/sms_wrapper/.agent/workflows/emulator-isolated-session.md).
 
-A candidata de trabalho de 03/11 está em
-`out/candidates/20261103_operational_baseline_m0`, SHA-256
-`6dff700f83e3113c84ea3e6358df0d8b94306465060b37237d78008204cd792f`.
+A candidata de trabalho de 04/11 está em
+`out/candidates/20261104_worst_seal_wrap_m0`, SHA-256
+`73cf4ed6405969e34aee5d2caae682b8bbb8f1da9c7f52b5669c0fdee5bb10ba`.
 Seu recibo inclui insumos locais em andamento. O SDSC usa a data do build.
 `./run.sh` abre manualmente a nominal histórica em `out/rom/`; seu recibo
 divergente permanece preservado. Use o [memory bank](doc/10-memory-bank.md)
 para os limites medidos e o [handoff](../../doc/continuity/20261024-next-agent.md)
 para a seleção atual.
+
+O perfil diagnóstico HitDef pode ser refeito com
+`rtk proxy tools/sms_wrapper/run_host.sh python -m mugen2sms.generators.fight_runtime_data --help`.
+O CLI requer `--out-dir` novo e publica somente o conjunto completo validado
+como schema 7. O manifesto padrão acima seleciona schema 5.

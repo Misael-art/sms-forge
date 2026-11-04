@@ -1,5 +1,29 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-04 — fechamento do selo e recuperação do perfil HitDef
+
+O lote de saneamento está publicado em `aa70a08`, [PR #4](https://github.com/Misael-art/sms-forge/pull/4).
+Os checks CodeRabbit/Sourcery desse SHA ficaram skipped. O recorte por
+faixa ganhou 3,58% em ABBA, mas manteve todas as janelas abaixo de 58,
+919 derrames em 3.000 e sobreposição na reentrada. O código experimental
+foi retirado após preservar fontes, ROM e provas em
+`SMS_projects/luta_mugem_rev2/out/evidence/20261103_clip_span/`.
+
+O delta próprio em `src/main.c` e a regressão C tratam o selo reaberto
+na volta do contador. Build `20261104_worst_seal_wrap_m0`, SHA
+`73cf4ed6405969e34aee5d2caae682b8bbb8f1da9c7f52b5669c0fdee5bb10ba`.
+Sessão privada `87e72f1ef10c4723a19d882e99673382` encerrada após
+observar 64.984→333, com selo intacto em 71 leituras. O pior quadro
+permanece reprovado. O bundle padrão colidiu com o diretório do
+medidor; os primários e a correção da leitura do máximo estão em
+`out/evidence/20261104_worst_seal_wrap/wrap_verification.json` do rev2.
+O CLI HitDef preservou saídas e reproduziu os cinco arquivos schema 7
+em staging. Suíte rev2 308 passes e 150 deselecionados. Implementações
+`ae1caa0` e `d6336bf`, sem incluir hunks anteriores do WIP. A candidata
+M0 ainda usa schema 5. A próxima frente causal
+é o custo de comparar pares de patterns exatos entre bancos, sem
+promover o reúso antes de medir prazo, cadência e imagem.
+
 ## 2026-11-03 — saneamento operacional e início de apresentação
 
 Etapa A, ID01/R10. O rev2 usa a candidata

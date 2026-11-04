@@ -15,6 +15,22 @@
   "source_snapshot": "doc/curation/evidence/2026-10-24_mugenesis/source_inventory.json",
   "execution_updates": [
     {
+      "date": "2026-11-04",
+      "ids": ["R09", "Q04"],
+      "closed_ids": [],
+      "status": "partial_not_delivery",
+      "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+      "summary": "ROM M0 73cf4ed6… conserva o selo após a volta de 16 bits, 64.984→333 em sessão privada, 71 leituras estáveis. Budget ainda reprovado com 919 derrames e mínimo 14. CLI de recuperação HitDef validou schema 7 em staging e preservou saídas anteriores diante de falha."
+    },
+    {
+      "date": "2026-11-03",
+      "ids": ["R02", "R05", "R06", "R09", "R10"],
+      "closed_ids": [],
+      "status": "partial_not_delivery",
+      "record": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+      "summary": "Recorte por faixa 4c7c3c84… ganhou 3,58% médio no ABBA, com todas as janelas abaixo de 58. Selo: 919 derrames em 3000 iterações, mínimo 14. Oito de nove checkpoints de framebuffer iguais; reentrada com sobreposição e três pixels divergentes. Experimento preservado fora do caminho ativo."
+    },
+    {
       "date": "2026-11-03",
       "ids": ["ID01", "R10"],
       "closed_ids": [],
