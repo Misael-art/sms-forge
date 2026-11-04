@@ -11,6 +11,21 @@ realizado; não reabrir esses aceites. O motor e trabalhos independentes
 autorizados podem continuar. Nenhum pixel, ROM ou runtime mudou neste lote.
 [Registro vigente](../../SMS_projects/master_of_fighters/doc/dr_social_ingame_freeze_20261104.md).
 
+## 2026-11-04 — identidade AIR, recuperação e publicação
+
+Etapas C/G, S04/Q07. A rota `air-source-identity` passou a rejeitar
+linhas ignoradas pelo parser na ação selecionada e a ler `LoopStart`
+do próprio resultado do parser. A ação Ryu 280 preservou a identidade
+e os bytes do exportador anterior. Suíte rev2 318 passes e 150
+deselecionados. A reprovação AIR em ROM segue registrada.
+
+A restauração do lote CLSN `1340f96` conferiu 34.167 arquivos no
+mesmo disco. Escopo, SHA e recibo no [memory bank do rev2](../../SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md).
+O primeiro push de `1340f96` foi recusado por falta de autenticação do
+GitHub CLI. A branch remota do PR #4 ainda apontava para `6d91608`
+na conferência após a recusa. Confirmar o SHA remoto após autenticar e
+publicar os lotes revisados pelo refspec completo.
+
 ## 2026-11-04 — limite CLSN e fronteiras do streaming
 
 Etapas B/G, R09/RE04/Q03. O gerador recusa 64 caixas ou mais por

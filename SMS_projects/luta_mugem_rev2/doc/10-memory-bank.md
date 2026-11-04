@@ -1,5 +1,22 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-11-04 — identidade AIR exige leitura completa da ação
+
+O exportador `air-source-identity` passava uma ação por finita quando
+o parser descartava um elemento inválido entre dois válidos. Também
+reconhecia `LoopStart` por uma segunda leitura com outra regra de
+cabeçalho. A identidade agora usa as linhas recusadas e a presença de
+`LoopStart` da mesma ação parseada. A recusa é por ação e aponta a linha
+ignorada. O importador geral mantém seus avisos e sua leitura tolerante.
+
+A ação 280 de Ryu foi exportada de `ryu.zip` com durações 5/4/9/7/6.
+O JSON do exportador é byte a byte igual ao produzido antes da
+correção. A prova local `out/evidence/20261104_air_source_admission/replay.json`
+registra o SHA e as seis fronteiras, inclusive o terminal. É uma
+prova de fonte. O resultado histórico 5/4/21/7/6 observado na ROM segue
+reprovado. Self-checks de exportação e auditoria aprovados, 318 testes
+passaram na suíte rev2 e 150 foram deselecionados por escopo.
+
 ## 2026-11-04 — admissão de CLSN e medição dos commits VDP
 
 O exportador agora recusa mais de 63 caixas CLSN no total por frame e
@@ -30,6 +47,13 @@ fim da captura. O roteiro acima reaplicou o input e conferiu a leitura da
 ROM. A build `139f241c…` coincidiu com uma edição concorrente e foi
 excluída da comparação. A edição experimental própria foi revertida e o
 WIP concorrente de admissão de uploads foi preservado no consumidor.
+
+A restauração local do lote conferiu 34.167 entradas, incluindo a ROM
+instrumentada, os insumos regenerados, o recibo e o vídeo. Pacote
+`.runtime/backups/luta_mugem_rev2-20261104-clsn-stage.tar.gz`, 156.546.319 B,
+SHA-256 `e41c6992f11241eefcf898246f6322e3ad7938dd1d7f2f2fad08fda18420d90d`.
+Recibo `out/evidence/20261104_sat_first/recovery_restore.json`.
+A proteção é local, no mesmo disco.
 
 ## 2026-11-04 — reúso de vetores CRC no banco fixo
 

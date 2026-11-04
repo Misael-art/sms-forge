@@ -20,19 +20,6 @@ from ..parsers import air, ini
 from ..source import Source
 
 SCHEMA = "mugen2sms.air-source-identity/v1"
-_ACTION = re.compile(r"^\[\s*begin\s+action\s+(-?\d+)\s*\]$", re.I)
-
-
-def _has_explicit_loopstart(text: str, action_id: int) -> bool:
-    current: int | None = None
-    for raw in text.splitlines():
-        line = ini.strip_comment(raw).strip()
-        match = _ACTION.match(line)
-        if match:
-            current = int(match.group(1))
-        elif current == action_id and line.lower().startswith("loopstart"):
-            return True
-    return False
 
 
 def compile_action_record(action_id: int, action: air.Action, *,
@@ -42,9 +29,12 @@ def compile_action_record(action_id: int, action: air.Action, *,
     """Build an immutable source manifest for a single finite non-loop action."""
     if action.number != action_id:
         raise ValueError(f"action key {action_id} differs from parsed action {action.number}")
+    if action.unparsed_lines:
+        lines = ", ".join(str(line) for line in action.unparsed_lines)
+        raise ValueError(f"AIR action {action_id} has unparsed content on line(s) {lines}")
     if not action.frames:
         raise ValueError(f"AIR action {action_id} has no elements")
-    if explicit_loopstart:
+    if explicit_loopstart or action.explicit_loopstart:
         raise ValueError(f"AIR action {action_id} has loopstart; terminal boundary is not reachable in one pass")
 
     durations = [frame.time for frame in action.frames]
@@ -124,7 +114,6 @@ def load_action(package: Path, action_id: int, def_name: str | None = None) -> d
     if air_path is None:
         raise ValueError(f"{parsed_character.def_path}: AIR reference cannot be resolved: {anim_ref}")
     air_bytes = src.read(air_path)
-    air_text = ini.decode(air_bytes)
     return compile_action_record(
         action_id, action,
         package_name=package.name,
@@ -132,7 +121,6 @@ def load_action(package: Path, action_id: int, def_name: str | None = None) -> d
         def_path=parsed_character.def_path,
         air_path=air_path,
         air_sha256=hashlib.sha256(air_bytes).hexdigest(),
-        explicit_loopstart=_has_explicit_loopstart(air_text, action_id),
     )
 
 
