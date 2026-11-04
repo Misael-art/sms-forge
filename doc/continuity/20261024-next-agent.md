@@ -11,6 +11,23 @@ realizado; não reabrir esses aceites. O motor e trabalhos independentes
 autorizados podem continuar. Nenhum pixel, ROM ou runtime mudou neste lote.
 [Registro vigente](../../SMS_projects/master_of_fighters/doc/dr_social_ingame_freeze_20261104.md).
 
+## 2026-11-04 — limite CLSN e fronteiras do streaming
+
+Etapas B/G, R09/RE04/Q03. O gerador recusa 64 caixas ou mais por
+frame, somando hit e hurt, e recusa o valor reservado `-32767` em
+coordenadas. O `versus-cut` refez os quatro insumos do Ryu/Ken8 byte a
+byte em staging. A suíte rev2 passou com 313 testes e 150 deselecionados
+por escopo. A sincronização da documentação passou. Registro no
+[memory bank do rev2](../../SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md).
+
+Na ROM diagnóstica `4b51fb55ffae4f1f503b91af2013ead345e044906f408f9ecdbf375a1b68432c`,
+com direita+B1 observados, o streaming terminou em área ativa em
+917/3.000 iterações. Após a SAT foram 927/3.000. A sessão privada foi
+encerrada com bundle válido. A evidência de fronteiras usa stepping.
+Preservar o WIP concorrente de admissão de uploads em `src/main.c`
+e o controle limpo `73cf4ed6…`. O ensaio de reordenação que coincidiu
+com esse WIP fica excluído. Nenhum ID foi fechado.
+
 ## 2026-11-04 — perfil de reúso volta a caber no banco fixo
 
 Etapa B, R05/R09/R10. O manifesto opcional

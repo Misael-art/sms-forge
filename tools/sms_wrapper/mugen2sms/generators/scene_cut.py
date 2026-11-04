@@ -25,6 +25,7 @@ from mugen2sms import character as character_loader
 from mugen2sms.analysis.fidelity import classify_character
 from mugen2sms.analysis.sms_budget import SmsLimits
 from mugen2sms.converters import sms_cmd, sms_scale as scale
+from mugen2sms.converters.sms_clsn import CLSN_SENTINEL
 from mugen2sms.converters.sms_controls import ControlMap, DEFAULT_MAP
 from mugen2sms.generators import smsdev
 from mugen2sms.generators.runtime_format import decode_indices
@@ -222,7 +223,7 @@ def _correct_frame_metadata(artifacts: list[smsdev.Artifact], ch, actions: dict,
             if clsn:
                 values = [struct.unpack_from("<h", clsn.data, pos)[0]
                           for pos in range(0, len(clsn.data), 2)]
-                scaled = [value if value == -32767 else _scale_signed(value, divisor)
+                scaled = [value if value == CLSN_SENTINEL else _scale_signed(value, divisor)
                           for value in values]
                 clsn.data = b"".join(struct.pack("<h", value) for value in scaled)
 

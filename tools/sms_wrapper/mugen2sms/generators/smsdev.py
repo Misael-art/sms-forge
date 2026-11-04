@@ -32,7 +32,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from ..converters.sms_tiles import to_sms_pose
-from ..converters.sms_clsn import to_clsn_tables
+from ..converters.sms_clsn import CLSN_SENTINEL, to_clsn_tables
 from ..converters.sms_cmd import serialize_pattern, to_patterns
 from ..converters import sms_scale as SC
 from .runtime_format import build_frames, pack_tiles_tall
@@ -126,9 +126,9 @@ def generate(ch, fidelity, out_dir: Path, banked: bool = False,
                 # hurt (clsn2) depois. Com uma so sentinela o runtime nao
                 # distingue caixa de golpe de hurtbox — colisao exige isso.
                 data = b"".join(struct.pack("<h", v) for v in hit) \
-                    + struct.pack("<h", -32767) \
+                    + struct.pack("<h", CLSN_SENTINEL) \
                     + b"".join(struct.pack("<h", v) for v in hurt) \
-                    + struct.pack("<h", -32767)
+                    + struct.pack("<h", CLSN_SENTINEL)
                 artifacts.append(Artifact(f"{stem}_CLSN", data, "air"))
 
     patterns, skipped = to_patterns(ch.commands, controls)

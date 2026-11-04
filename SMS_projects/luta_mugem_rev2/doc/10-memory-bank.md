@@ -1,5 +1,36 @@
 # Memory bank — luta_mugem_rev2
 
+## 2026-11-04 — admissão de CLSN e medição dos commits VDP
+
+O exportador agora recusa mais de 63 caixas CLSN no total por frame e
+coordenadas iguais a `-32767`, o terminador de seção. Cada caixa ocupa
+quatro palavras e hit e hurt têm um terminador cada. Com 64 caixas, o
+cursor de oito bits do leitor dá a volta. A recusa identifica a ação e o
+elemento AIR e preserva a saída anterior do gerador de personagem.
+O `versus-cut` refez o par Ryu/Ken8 em
+`out/generated/clsn_admission_20261104/`. Os bancos, header de cena,
+dados de combate e perfil de input coincidem byte a byte com
+`pair_hash_dedup_20261104`. A seleção de runtime segue a mesma.
+
+O controle instrumentado `out/candidates/20261104_sat_first_control_stage`,
+ROM `4b51fb55ffae4f1f503b91af2013ead345e044906f408f9ecdbf375a1b68432c`,
+usou o fonte M0 congelado e `LUTA_DIAG_VBLANK_STAGES=1`.
+Na sessão privada `20969e555fdf4e96b0c39e9ef7128b1c`, a ROM leu
+direita+B1 e registrou 112 de dano em P2. Em 3.000 iterações foram
+observadas zero leituras em área ativa antes/depois do mapa, 917 após o
+streaming e 927 após a SAT. O selo ficou em 927 derrames e mínimo 2.
+Corredor de 163 sondas com 1.458 B de folga, vídeo nativo de 180 frames,
+bundle válido e processos encerrados. O ensaio avançou o VDP em passos e
+mede leituras de fronteira. O orçamento em execução contínua, FPS e
+composição continuam com os vereditos do M0 limpo.
+
+Recibos, fontes congeladas, vídeo e controle de soltura em
+`out/evidence/20261104_sat_first/`. O primeiro vídeo soltava o controle ao
+fim da captura. O roteiro acima reaplicou o input e conferiu a leitura da
+ROM. A build `139f241c…` coincidiu com uma edição concorrente e foi
+excluída da comparação. A edição experimental própria foi revertida e o
+WIP concorrente de admissão de uploads foi preservado no consumidor.
+
 ## 2026-11-04 — reúso de vetores CRC no banco fixo
 
 Com o WIP atual, o perfil opt-in de reúso reprova `Bank 1 overflow`
