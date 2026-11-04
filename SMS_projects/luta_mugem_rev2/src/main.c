@@ -2721,6 +2721,8 @@ static void sprites_build(const Frame *fn[2], const unsigned int poses_req[2]) {
 static void worst_sample(void) {
     unsigned char vcnt = SMS_VCounterPort;
     probe_phase = 3u;
+    /* probe_frame wraps at 16 bits. Only a new boot can reopen the window. */
+    if (probe_worst_done != 0u) return;
     if (probe_frame <= WORST_FRAME_WINDOW) {
         probe_vline = vcnt;
         if (vcnt < 0xC0u)
@@ -2729,7 +2731,7 @@ static void worst_sample(void) {
             probe_vbl_exit_max = vcnt;  /* pior saida AINDA no VBlank */
         if (vcnt < probe_vline_min)
             probe_vline_min = vcnt;
-    } else if (probe_worst_done == 0u) {
+    } else {
         probe_worst_done = 1u;
     }
 }
@@ -2738,7 +2740,8 @@ static void worst_sample(void) {
 /* Um incremento por frame se a fronteira já alcançou o display ativo.
  * O diagnóstico lê o delta cumulativo no DAP somente após o selo. */
 static void vblank_stage_sample(volatile unsigned int *counter) {
-    if (probe_frame <= WORST_FRAME_WINDOW && SMS_VCounterPort < 0xC0u)
+    if (probe_worst_done == 0u && probe_frame <= WORST_FRAME_WINDOW &&
+        SMS_VCounterPort < 0xC0u)
         (*counter)++;
 }
 #endif
