@@ -11,6 +11,7 @@ import json
 import hashlib
 import re
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from ..converters.sms_cmd import (
     BLOB_FMT_VERSION, DIAGONALS, DIR_BITS, route_command_symbol,
@@ -995,19 +996,27 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--p2-source", type=Path, required=True)
     parser.add_argument("--p2-def", required=True)
     parser.add_argument("--scene-header", type=Path, required=True)
-    parser.add_argument("--out-dir", type=Path, required=True)
+    parser.add_argument("--out-dir", type=Path, required=True,
+                        help="new directory for the validated recovery profile")
     args = parser.parse_args(argv)
     out = args.out_dir
-    p1 = annotate_hit_timing(args.p1_manifest, args.p1_source, args.p1_def,
-                             out / "p1_scene_manifest.json")
-    p2 = annotate_hit_timing(args.p2_manifest, args.p2_source, args.p2_def,
-                             out / "p2_scene_manifest.json")
-    report = generate(
-        (out / "p1_scene_manifest.json", out / "p2_scene_manifest.json"),
-        args.scene_header, out / "fight_runtime_data.h",
-        out / "fight_runtime_data_manifest.json")
-    if report["schema"] != "sms_fight_runtime_data_v7":
-        raise SystemExit("recovery header was not schema 7")
+    if out.exists() or out.is_symlink():
+        parser.error("--out-dir already exists; choose a new output")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(prefix=".hit-timing-", dir=out.parent) as tmp:
+        staged = Path(tmp) / "profile"
+        p1_path = staged / "p1_scene_manifest.json"
+        p2_path = staged / "p2_scene_manifest.json"
+        p1 = annotate_hit_timing(args.p1_manifest, args.p1_source, args.p1_def, p1_path)
+        p2 = annotate_hit_timing(args.p2_manifest, args.p2_source, args.p2_def, p2_path)
+        report = generate(
+            (p1_path, p2_path), args.scene_header, staged / "fight_runtime_data.h",
+            staged / "fight_runtime_data_manifest.json")
+        if report["schema"] != "sms_fight_runtime_data_v7":
+            raise SystemExit("recovery header was not schema 7")
+        if out.exists() or out.is_symlink():
+            parser.error("--out-dir appeared during generation; choose a new output")
+        staged.rename(out)
     print(json.dumps({
         "schema": report["schema"],
         "p1_hp": p1["hit_timing"].get("hp"),

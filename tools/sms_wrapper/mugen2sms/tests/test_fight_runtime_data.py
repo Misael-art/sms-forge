@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from mugen2sms.converters.sms_cmd import route_command_symbol
+from mugen2sms.generators import fight_runtime_data
 from mugen2sms.generators.fight_runtime_data import render
 
 
@@ -37,6 +38,42 @@ def _manifest(path: Path, delta: int = 0):
                          "lk": "a", "hk": "c"},
             "runtime_constants": dict(CONSTANTS, life=1000 + delta)}
     path.write_text(json.dumps(data), encoding="utf-8")
+
+
+def test_recovery_cli_preserves_existing_output_and_discards_partial_results(tmp_path, monkeypatch):
+    out = tmp_path / "recovery"
+    out.mkdir()
+    existing = out / "p1_scene_manifest.json"
+    existing.write_bytes(b"previous profile")
+    p1 = tmp_path / "p1.json"
+    p2 = tmp_path / "p2.json"
+    args = [
+        "--p1-manifest", str(p1), "--p1-source", "source1", "--p1-def", "p1.def",
+        "--p2-manifest", str(p2), "--p2-source", "source2", "--p2-def", "p2.def",
+        "--scene-header", "scene.h", "--out-dir", str(out),
+    ]
+    staged = []
+
+    def annotate(manifest, _source, _def_name, dest):
+        if manifest == p2:
+            raise ValueError("second slot rejected")
+        dest.parent.mkdir()
+        dest.write_bytes(b"first slot staged")
+        staged.append(dest)
+
+    monkeypatch.setattr(fight_runtime_data, "annotate_hit_timing", annotate)
+    with pytest.raises(SystemExit, match="2"):
+        fight_runtime_data.main(args)
+    assert existing.read_bytes() == b"previous profile"
+    assert not staged
+
+    existing.unlink()
+    out.rmdir()
+    with pytest.raises(ValueError, match="second slot rejected"):
+        fight_runtime_data.main(args)
+    assert len(staged) == 1 and not staged[0].exists()
+    assert not out.exists()
+    assert not list(tmp_path.glob(".hit-timing-*"))
 
 
 def _shared_source_routes():
