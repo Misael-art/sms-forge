@@ -1,5 +1,27 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## Execução contínua — roteiro vigente de 2026-11-03
+
+O proprietário pediu concluir os problemas da auditoria em sequência, com
+qualidade, preservação do WIP, raiz única, uso comedido de recursos e
+commit/push/PR por lote revisável. O ponto de entrada integral atualizado é
+[Prompt de saneamento e integração](../curation/2026-10-24_prompt_concluir_engine_sms.md).
+Ele substitui instruções antigas de host/baseline desse prompt, preservando
+os contratos atuais e as decisões do proprietário. Reutilizar PR#4; sem merge,
+deploy, release de produto ou publicação de insumos privados por inferência.
+
+A auditoria de 03/11 verificou HEAD ebe0df2, remoto a987301 (cinco commits
+locais), 21 arquivos locais preservados por hash, 67 testes focados aprovados,
+89 vínculos de hash da QA íntegros e arquivo/manifesto de recuperação rev2
+conferidos. Reproduziu falha de identidade nominal rev2, ausência de nominal
+MoF e ausência Social61v5. Trace f6ac6f1f… conciliou identidade/pré-gates;
+FPS/composição/AIR/áudio/produto continuam pendentes ou reprovados. Nenhuma ROM
+ou sessão nova nesta auditoria. Os recibos de 02/11 abaixo conservam seus limites.
+
+Este incremento atualiza o roteiro e a passagem, não implementa as etapas.
+Ao retomar, conferir Git/remoto vivos e continuar pela etapa A; não presumir
+que esta fotografia ainda descreve o HEAD, nem substituir evidência histórica.
+
 ## Recibo final local — 2026-11-02
 
 HEAD do incremento de runtime: `14c9ca9`; correção de sondas: `9a791ec`.
