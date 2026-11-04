@@ -38,7 +38,7 @@ def test_adjacent_facing_contract_is_emitted_only_for_matching_rows():
 
 
 def test_pair_hash_tables_are_namespaced_and_contract_is_merged():
-    def with_pair_hashes(header, stem, maximum):
+    def with_pair_hashes(header, stem, maximum, p2_left=10):
         marker = "static const PoseRef poses_all[2] = {"
         declarations = (
             f"#define CUT_PAIR_CONTENT_HASHES_VERSION 1\n"
@@ -46,7 +46,7 @@ def test_pair_hash_tables_are_namespaced_and_contract_is_merged():
             f"static const unsigned char {stem}_A0F0_RIGHT_PAIR_HASHES[1] = {{ 7 }};\n"
             f"static const unsigned char {stem}_A0F0_LEFT_PAIR_HASHES[1] = {{ 8 }};\n"
             f"static const unsigned char {stem}_A0F0_P2_RIGHT_PAIR_HASHES[1] = {{ 9 }};\n"
-            f"static const unsigned char {stem}_A0F0_P2_LEFT_PAIR_HASHES[1] = {{ 10 }};\n"
+            f"static const unsigned char {stem}_A0F0_P2_LEFT_PAIR_HASHES[1] = {{ {p2_left} }};\n"
         )
         header = header.replace(marker, declarations + marker)
         header = header.replace(
@@ -63,10 +63,12 @@ def test_pair_hash_tables_are_namespaced_and_contract_is_merged():
         return header
 
     merged = merge_headers(with_pair_hashes(scene("ONE"), "ONE", 12),
-                           with_pair_hashes(scene("TWO"), "TWO", 18), 1, 1,
+                           with_pair_hashes(scene("TWO"), "TWO", 18, p2_left=11), 1, 1,
                            require_facing_contract=True)
     assert "static const unsigned char P1_ONE_A0F0_RIGHT_PAIR_HASHES[1]" in merged
-    assert "static const unsigned char P2_TWO_A0F0_P2_LEFT_PAIR_HASHES[1]" in merged
+    assert "static const unsigned char P2_TWO_A0F0_P2_LEFT_PAIR_HASHES[1] = { 11 };" in merged
+    assert ("#define P2_TWO_A0F0_P2_RIGHT_PAIR_HASHES "
+            "P1_ONE_A0F0_P2_RIGHT_PAIR_HASHES" in merged)
     assert "static const unsigned char ONE_A0F0_RIGHT_PAIR_HASHES[1]" not in merged
     assert "#define VERSUS_PAIR_CONTENT_HASHES_VERSION 1" in merged
     assert "#define VERSUS_MAX_POSE_PAIRS 18" in merged

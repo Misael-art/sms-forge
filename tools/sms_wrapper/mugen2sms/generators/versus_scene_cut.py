@@ -35,9 +35,10 @@ _BYTE_VALUE = re.compile(r"0x[0-9A-Fa-f]+|\b\d+\b")
 
 
 def _deduplicate_metasprite_arrays(header: str) -> tuple[str, dict]:
-    """Alias exact metadata and command arrays while retaining public symbols."""
+    """Alias exact metadata, command and pair-filter arrays."""
     canonical_by_bytes: dict[tuple[str, bytes], str] = {}
     aliases: dict[str, str] = {}
+    pair_hash_sizes: dict[str, int] = {}
 
     def replace(match: re.Match[str]) -> str:
         symbol = match.group("symbol")
@@ -45,6 +46,8 @@ def _deduplicate_metasprite_arrays(header: str) -> tuple[str, dict]:
             array_kind = "metadata"
         elif "_CUT_CMD_" in symbol:
             array_kind = "command"
+        elif symbol.endswith("_PAIR_HASHES"):
+            array_kind = "pair_hash"
         else:
             return match.group("decl")
         body = match.group("body")
@@ -59,6 +62,8 @@ def _deduplicate_metasprite_arrays(header: str) -> tuple[str, dict]:
         if any(value > 0xFF for value in numbers):
             raise ValueError(f"{symbol} contains a value outside unsigned char")
         payload = bytes(numbers)
+        if array_kind == "pair_hash":
+            pair_hash_sizes[symbol] = size
         dedup_key = (array_kind, payload)
         canonical = canonical_by_bytes.get(dedup_key)
         if canonical is None:
@@ -72,8 +77,8 @@ def _deduplicate_metasprite_arrays(header: str) -> tuple[str, dict]:
         r"^#define\s+(\w+_SIZE)\s+(\d+)\s*$", output, re.M)}
     bytes_saved = 0
     for symbol, canonical in aliases.items():
-        size = size_macros.get(symbol + "_SIZE")
-        canonical_size = size_macros.get(canonical + "_SIZE")
+        size = pair_hash_sizes.get(symbol, size_macros.get(symbol + "_SIZE"))
+        canonical_size = pair_hash_sizes.get(canonical, size_macros.get(canonical + "_SIZE"))
         if size is None or size != canonical_size:
             raise ValueError(f"alias size mismatch: {symbol} -> {canonical}")
         bytes_saved += size
@@ -91,6 +96,12 @@ def _metadata_dedup_summary(header: str) -> dict:
     command_aliases = {name: target for name, target in re.findall(
         r"^#define\s+([A-Za-z_]\w*_CUT_CMD_[A-Za-z0-9_]+)\s+"
         r"([A-Za-z_]\w*_CUT_CMD_[A-Za-z0-9_]+)\s*$", header, re.M)}
+    pair_hash_aliases = dict(re.findall(
+        r"^#define\s+([A-Za-z_]\w*_PAIR_HASHES)\s+"
+        r"([A-Za-z_]\w*_PAIR_HASHES)\s*$", header, re.M))
+    pair_hash_sizes = {match.group("symbol"): int(match.group("size"))
+                       for match in _BYTE_ARRAY.finditer(header)
+                       if match.group("symbol").endswith("_PAIR_HASHES")}
     return {"alias_count": len(aliases),
             "bytes_saved": sum(sizes[name + "_SIZE"] for name in aliases),
             "aliases": aliases,
@@ -98,7 +109,11 @@ def _metadata_dedup_summary(header: str) -> dict:
             "command_pattern_alias_count": len(command_aliases),
             "command_pattern_bytes_saved": sum(
                 sizes[name + "_SIZE"] for name in command_aliases),
-            "command_pattern_aliases": command_aliases}
+            "command_pattern_aliases": command_aliases,
+            "pair_hash_alias_count": len(pair_hash_aliases),
+            "pair_hash_bytes_saved": sum(pair_hash_sizes[target]
+                                         for target in pair_hash_aliases.values()),
+            "pair_hash_aliases": pair_hash_aliases}
 
 
 def _pose_rows(text: str) -> tuple[list[str], re.Match[str]]:
@@ -598,6 +613,20 @@ static const unsigned char cut_sprite_palette[16] = {
     command_summary = _metadata_dedup_summary(command_dedup)
     assert command_summary["command_pattern_alias_count"] == 2
     assert command_summary["command_pattern_bytes_saved"] == 6
+
+    pair_fixture = (
+        "static const unsigned char P1_LEFT_PAIR_HASHES[3] = { 1, 2, 3 };\n"
+        "static const unsigned char P2_RIGHT_PAIR_HASHES[3] = { 1, 2, 3 };\n"
+        "static const unsigned char P2_LEFT_PAIR_HASHES[3] = { 1, 2, 4 };\n"
+        + command_fixture)
+    pair_dedup, _ = _deduplicate_metasprite_arrays(pair_fixture)
+    pair_summary = _metadata_dedup_summary(pair_dedup)
+    assert pair_summary["pair_hash_aliases"] == {
+        "P2_RIGHT_PAIR_HASHES": "P1_LEFT_PAIR_HASHES"}
+    assert pair_summary["pair_hash_bytes_saved"] == 3
+    assert "const unsigned char P1_CUT_CMD_LP[3]" in pair_dedup
+    assert "const unsigned char P2_LEFT_PAIR_HASHES[3]" in pair_dedup
+    assert _deduplicate_metasprite_arrays(pair_dedup)[0] == pair_dedup
 
     route_fixture = (
         "#define P1_CUT_CMD_ROUTE_RISING_TACKLE_X_0_SIZE 13\n"
