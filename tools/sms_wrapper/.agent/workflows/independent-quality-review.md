@@ -32,3 +32,11 @@ do dono.
 
 `defect`/`risk` demonstrado → `revise_before_growth`.
 `opportunity`/`taste` não bloqueia. Mudança de escopo abre decisão humana.
+
+Para animação, aplicar o checkpoint de seis eixos de `art-review.md` e validar
+`sms_art_temporal_review_v1` com `audit_art_review_checklist.py`. Preparar mídia
+exata e perguntar primeiro quais modalidades o revisor consegue observar.
+Quadros decodificados/ordem/exposição podem passar com percepção contínua em
+`needs_evidence`. Abrir um player não comprova percepção. Não convocar outra
+revisão equivalente para preencher a mesma limitação; preservar parecer e
+encaminhar os intervalos ao observador/dono capaz de decidir.

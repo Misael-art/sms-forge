@@ -1,0 +1,27 @@
+{
+  "schema": "smsforge.host_doctor/v1",
+  "tools": {
+    "git": "/usr/bin/git",
+    "cc": "/usr/bin/cc",
+    "make": "/usr/bin/make",
+    "sdcc": "/usr/bin/sdcc",
+    "java": "/usr/bin/java",
+    "javac": "/usr/bin/javac",
+    "bwrap": "/usr/bin/bwrap",
+    "Xvfb": "/usr/bin/Xvfb",
+    "ffmpeg": "/usr/bin/ffmpeg",
+    "ffprobe": "/usr/bin/ffprobe",
+    "pactl": "/usr/bin/pactl",
+    "rtk": "/workspace/.runtime/bin/rtk"
+  },
+  "audio_server_or_private_daemon": true,
+  "disk_free_bytes": 79839444992,
+  "loadavg": [
+    12.7265625,
+    12.9775390625,
+    11.51220703125
+  ],
+  "user_namespace": false,
+  "namespace_error": "bwrap: No permissions to create new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\n",
+  "claim_ceiling": "environment_only_not_game_quality"
+}

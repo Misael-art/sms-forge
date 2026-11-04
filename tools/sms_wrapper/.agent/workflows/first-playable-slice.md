@@ -57,8 +57,8 @@ diagnóstico registra os estados durante o próprio loop e sela a captura depois
 
 - `measure_fps.py` mede velocidade de emulação; `measure_frame_advance.py`
   mede o relógio da ROM. Não trocar um pelo outro.
-  Probe privado exige o alvo regional NTSC60/PAL50; 55FPS em NTSC não passam
-  só por pertencer à faixa 50–60. Taxa média das janelas não prova pacing ou
+  Probe privado exige objetivo60/piso58FPS em todas as janelas (SMS_GLOBAL §133);
+  PAL50 e a faixa histórica50–60 não aprovam. Taxa das janelas não prova pacing ou
   reação da lógica; aplicar `product-quality-checkpoint.md`.
 - Medir resposta da entrada, tempo até feedback/pose e consequência da mecânica
   com instrumentação adequada ao projeto. Para combate, conferir pose, hitbox,

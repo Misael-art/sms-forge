@@ -1,5 +1,486 @@
 # 15-tdd — master_of_fighters
 
+> **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
+> Os sprites e animações atuais do Dr. Social não devem ser continuados,
+> retocados, convertidos, integrados ou promovidos. Retomada futura: novo desenho
+> do zero, a partir do concept/model sheet e das referências de tamanho mantidos.
+> A cena D01 fica experimental. J.J. e Hayato/Kenseiden permanecem validados no
+> recorte realizado. [Registro do congelamento](dr_social_ingame_freeze_20261104.md).
+> As orientações anteriores para produzir o Social ficam históricas/suspensas.
+
+A integração de uma nova arte do Social depende de nova direção do dono e
+fonte desenhada do zero. Ferramentas e arquitetura oficiais podem ser reusadas;
+as amostras históricas não qualificam uma nova fonte ou ROM.
+
+## Padrão de apresentação de golpes — contrato futuro de integração
+
+[Padrão de projeto](character_move_showcase_standard_v1.md), cena 10. Não há
+implementação neste lote. Estender dados/FSM/renderer/loader oficiais, não
+criar outra engine de showcase ou tabela divergente de animação/comando.
+UI lê ID/nome/comando/condições da mesma definição que o reconhecedor e luta.
+Demonstração funcional envia a sequência de input por esse reconhecedor;
+prática lê input consumido e resultado. Injetar pose diretamente só serve à
+revisão artística identificada, nunca prova de execução de golpe.
+
+Relógios separados: pausa de leitura/replay da UI e timeline real de movimento.
+Na execução normal, mesmos IDs/holds, objetos/hitstop/recuperação da luta;
+nenhum ajuste de velocidade no emulador ou duração paralela. Trace identifica
+input observado, comando aceito, estado/pose submetida/apresentada, contato e
+primeiro retorno controlável. Slow/step são facilidades diagnósticas rotuladas.
+
+Reset por demonstração é explícito: posição, adversário, recurso, relógios e
+objetos, sem vazar comportamento para partida normal. Super de counter usa
+ataque adversário elegível e resolver normal; não forçar ramo hit. Troca de
+página/saída consome navegação e limpa estados transitórios antes de liberar
+controle. Preservar regras de orientação/precedência/buffer do jogo.
+
+Catálogo compilado lista asset→ação/página→símbolo→ROM e permite carga por
+demanda conforme banking existente; não exigir todos os assets residentes.
+Exibir conteúdo implementado e rotular pendências em revisão; produto não
+ensina comando inexistente. Critérios de aceite e extremos na spec/padrão.
+Reuso futuro como desbloqueável separa elegibilidade/acesso do conteúdo, sem
+implementar save/economia/recompensa antes de decisão. Alvo60/piso58, medição
+integrada de UI+combate, VBlank e sessão privada continuam obrigatórios.
+
+## Campanha, apresentação e progressão — contrato futuro, 2026-11-01
+
+[Direção no GDD](11-gdd.md#direção-de-fã-e-campanha--proprietário-2026-11-01),
+[roteiro](12-roteiro.md) e [composição/aceite](13-spec-cenas.md#cenas-da-direção-de-fã--2026-11-01).
+**Documentado; sem implementação, build ou teste novo de runtime neste lote.**
+Propostas abaixo definem responsabilidades e invariantes; nomes de estados
+não alegam módulos existentes. Usar consumidor e motor oficiais; não abrir
+um motor de cutscene concorrente ou ramificação jogável para fugir do budget.
+
+### Estados, comando e continuidade
+
+Proposta de fluxo: `abertura → título → modo → seleção → nó de história →
+apresentação → round → resultado → recompensa/conversa → próximo nó/final`.
+Versus passa de seleção/apresentação a round/resultado sem progressão Alis;
+Arcade depende FC02. Separar ID da cena, fase da apresentação, modo da partida,
+resultado e estado dos combatentes. Trocar sprite não muda modo ou dano.
+
+Encenação reaproveita renderer, poses e integração do motor, com direção de
+atores explicitamente roteirizada. Não injetar input de jogador sem marcador
+para fingir IA/combate real. Hits narrativos têm resultado de roteiro e trilha
+própria; dano competitivo não vaza para o primeiro round. Golpe do visitante
+precisa ter contrato de luta aprovado antes de ser apresentado como seu super;
+se ainda não existe, storyboard permanece pendente, não criar mecânica pela cutscene.
+
+Cada trecho registra estado inicial/final, falante/texto, ações por ator,
+objetos/FX, câmera/paleta, áudio, condições de avanço e skip. Uma saída central
+encerra hitboxes, objetos, tracks/áudio e comandos transitórios; aplica endpoint
+uma vez. Skip no meio de carregamento não libera luta com VRAM parcial.
+Entrada mantida é tratada pelo adaptador oficial conforme GD01; verificar que
+o primeiro comando intencional depois de liberar controle é recebido.
+
+Na cena 07, retrato/caixa não podem consumir padrões ainda usados pelo palco.
+Definir residência e recarga sem presumir dupla name table livre. Fonte/glyphs
+portugueses, comprimento máximo real e paginação precisam prova no framebuffer;
+texto transbordado não deve ser “resolvido” cortando fala essencial. Selecionar
+variante contextual por dados autorizados de arena/par/nó, com fallback de
+entrada-base contratada, não improvisar moto/cameo para qualquer condição.
+
+### Alis: dados, isolamento e transação
+
+Separar perfil competitivo fixo e estado da campanha. Proposta de dados
+estáticos e limitados: nível, pontos livres, investimento por atributo,
+identificador do encontro recompensado e etapa/resultado; limites, tipos e
+custo RAM/ROM precisam medição. Inteiros/fixed point conforme necessidade,
+sem float/malloc, sem overflow ao somar bônus/múltiplos níveis. Recalcular
+stats a partir de base+tabelas aprovadas, não acumular multiplicações em cada
+reentrada. Tetos de atributos/vida/dano e ordem de redução de dano são parte
+do contrato de balanceamento, ainda abertos.
+
+Resultado único cria recompensa pendente; painel cria prévia separada;
+confirmar valida saldo/tetos e aplica uma vez, só então avança. Repetição de
+evento, botão mantido, replay do resultado, continue e retorno ao painel não
+podem pagar de novo. Identificador de encontro e política de retries precisam
+considerar reinício de campanha; um único booleano global não basta. Se o
+modo permitir adiar escolha, preservar saldo e oferecer destino aprovado.
+Não presumir SRAM/save: memória volátil, persistência e reset são decisão FC01/02.
+
+HUD lê o valor lógico e distingue HP atual/máximo, LV e Super. Vida máxima
+maior não pode ser uma barra idêntica que engana sobre dano relativo; decidir
+representação/feedback e testar. Defesa com escudo exige variante coerente
+entre corpo, guarda, hitboxes e efeito; aparência não concede invulnerabilidade.
+Conflito entre escudo já aprovado e desbloqueio visual está em FC01: nenhuma
+remoção/substituição automática da concept. Magia precisa efeito funcional
+do kit decidido; não criar atributo que só altera texto.
+
+Antes de selecionar números, simular/prototipar configurações de início,
+meio e fim; build pura de cada atributo, mistura e tetos combinados. Confirmar
+que erro continua punível, guarda não gera bloqueio eterno, vida+defesa não
+multiplicam resistência sem teto e ataque/magia não produzem derrotas sem
+resposta. Comparar ganhos por diferentes estilos/níveis de habilidade, retry
+sem farm e duração total do percurso. Simulação ajuda a escolher candidatos;
+resultado competitivo só se fecha com duelo completo no emulador e playtest.
+Versus deve produzir exatamente o mesmo perfil com ou sem campanha evoluída.
+
+### Shinobi: três magias e voz digitalizada
+
+As três magias são direção autorizada; a ficha futura de cada uma ainda exige
+comando/custo, preparação visível, direção/área/alcance, resposta adversária,
+acerto/guarda/erro, interrupção e recuperação. O rótulo original não é contrato
+de hitbox. Não preencher as três com o mesmo ataque renomeado; variantes de
+um super só valem se a escolha e a diferença forem perceptíveis e aprovadas.
+Propostas de papel no GDD não equivalem a moveset/frame-data aprovados.
+
+PCM via PSG é hipótese técnica compatível com pesquisa de sample playback,
+não garantia de fidelidade de fala. Consultar o padrão local
+[contrato de engine](../../../doc/05_technical/mugen_engine_standard.md) e registrar fonte
+SMS, cue, duração original, trecho editado, taxa/formato/bytes, conversão,
+hashes e perdas. [Referência técnica de sample playback](https://www.smspower.org/Development/SamplePlayback)
+informa pesquisa; uso externo não substitui headers nem custo medido no alvo.
+Não baixar/usar voz arcade/MD por conveniência; fala exata ainda não foi ouvida
+neste lote. Fonte de áudio, autorização/proveniência e manifesto antes de `res/`.
+
+Proposta de freeze de super: preparo → estado dramático simétrico com duração
+finita declarada → execução/resolução → recuperação. Congelar timer/animação
+de combate só onde o design mandar; gerenciar input/buffer e Pause/NMI
+explicitamente. A fala acompanha pista visual equivalente, nunca exige som
+para defender. Medir resposta após fim, ambos os lados, última unidade de
+recurso, fim de round, interrupção, reset/Pause e duas chamadas próximas.
+
+Ocupação do Z80, instruções/intervalos PSG, banking, interrupções e restauração
+de áudio precisam piloto. `DI` não bloqueia NMI; não prometer que silenciar
+IRQ torna toda sequência segura. Estado dos canais de música/SFX deve retornar
+sem nota presa, ruído, estalo excessivo ou ritmo quebrado. A música pode ser
+interrompida/atenuada por prioridade definida, não porque um registrador ficou
+sem restauração. Qualidade avaliada por escuta e captura isolada, além de
+integridade do stream; maior taxa sem ganho audível não é automaticamente melhor.
+
+**Aceite obrigatório:** freeze não exclui janelas ruins nem valida apenas ISR.
+Se reprodução bloqueante impede o scheduler/input e derruba o avanço funcional
+abaixo de 58, a implementação reprova mesmo que a tela parada seja intencional.
+Investigar reprodução cooperativa/trecho/formato e orçamento, mantendo direção
+do dono; qualquer perda relevante de frase, identidade ou qualidade exige
+tradeoff registrado. Não substituir silenciosamente voz por ruído PSG nem
+acelerar emulador. Medir transição e retomada, além da janela PCM, com relógios
+funcionais que distingam progresso programado de stall. Nenhuma dessas rotas
+está comprovada nesta ROM.
+
+### Orçamento e evidência por incremento
+
+Planejar timeline de residência por fase antes de contratar veículo, monstro,
+retratos e grandes FX. Plano deve cobrir palco, corpos, HUD, objetos, texto e
+áudio realmente simultâneos; paletas compartilhadas e pico de scanline valem
+em cenas não interativas também. Para lanternas/vento, comparar técnica BG,
+reuso de padrões e atualização escalonada, sem pintar corpos acidentalmente
+ou tirar pista de luta. Pior quadro inclui a troca de fase e o efeito mais caro.
+
+Pilotar uma cadeia pequena e completa após o combate funcional: apresentação
+→ conversa → round com resultado → vitória/Alis → próximo nó. Abrir outros
+mundos depois da prova desse percurso; o conteúdo autorizado continua no GDD,
+com dependências explícitas. PCM e cenário animado precisam medições próprias
+e depois integradas; folga de um teste isolado não paga soma de cargas.
+
+Cada pacote registra ROM/SHA, sessão privada/cleanup, versão de regras/assets,
+inputs/precondições, vídeo framebuffer, rastreio de estados/resultado/recompensa,
+áudio isolado e métricas de recursos/FPS/worst-frame. Alvo60/piso58 por janela
+sem arredondar permanece obrigatório. Repetir skip, extremos e retorno em
+ambas as orientações. Registrar preferência estética, defeito observado e
+hipótese separadamente. Evidência antiga de seis poses de J.J. não paga estas
+cenas, balanceamento, diálogo, voz ou evolução. Checklists documentais não
+transformam nenhum desses eixos em PASS.
+
+## Interface de execução do design — 2026-11-01
+
+**Documentado, implementação pendente.** [GDD](11-gdd.md#contrato-de-experiência--revisão-de-design-de-2026-11-01),
+[roteiro](12-roteiro.md) e [cenas](13-spec-cenas.md#contratos-de-experiência-das-cenas--2026-11-01)
+definem o que precisa ser percebido e testado. Este lote não modifica C,
+dados de runtime, assets ou ROM. Reutilizar o consumidor e o pipeline oficial;
+não criar outro motor/viewer para fazer os contratos parecerem implementados.
+
+### Movimento: separar apresentação, regra e resultado
+
+O contrato executável futuro deve associar ID de movimento, gatilho/comando,
+estado inicial, fases lógicas, ID da pose apresentada, orientação/pivô,
+deslocamento, caixas, elegibilidade de contato, custo, interrupção/cancel e
+endpoints hit/block/whiff. `pose_duration` artístico não é `active`; `hitstop`
+é evento lógico finito com saída, não atraso de upload. Não copiar números de
+`movesets_draft.json` ou MSSF2T para preencher campos abertos.
+
+Na ROM atual, `probe_state` (C7F6) é pose submetida, `probe_keys` (C7F8) é
+input observado no loop e `probe_hold` (C7F9) é exposição; não são FSM de luta,
+hit confirmation ou vida. SMRT C7E0/C7F0 e selo VBlank são instrumentos
+diagnósticos. Para contato, engenharia deve expor IDs/frames e resultado do
+oponente sem sobrepor DATA; o protocolo concreto e o budget dessa
+instrumentação ficam pendentes, com corredor auditado antes de leitura.
+
+Traço futuro precisa distinguir: aplicação na ponte, aceite na ROM, primeira
+reação visual, contato/guard/erro, alteração do rival/HUD e primeiro retorno
+controlável. Captura manual da placa mediu somente ponte→imagem e terminal.
+Não converter três avanços VDP observados em promessa universal de latência.
+
+### Ownership e transições propostas
+
+Owners lógicos propostos: FSM global é dona de cena/round/resultado;
+adaptador de input é dono dos comandos/edges; FSM do lutador é dona da ação/
+movimento/controle; resolução de combate é dona de contato/vida; pool de
+objetos é dono do bumerangue autorizado; apresentação é dona de SAT/padrões/
+PNT/paletas/scroll; áudio é dono dos canais e sua restauração. São
+responsabilidades para integrar na implementação oficial, não novos módulos
+obrigatórios nem prova de memória alocada. HUD lê o resultado lógico e não
+altera vida por animação.
+
+| Aresta/gatilho | Saída e entrada | Persistência, input e recuperação |
+|---|---|---|
+| 01→02, escolha confirmada | Encerrar foco/feedback de seleção; configurar lutadores, apresentação, chão/HUD e round. Trabalho VDP em setup com display off; bytes reais pendentes. | Transportar IDs escolhidos; política de vida/timer/Super depende GD02. Consumir confirmação e neutralizar edges antes de liberar luta, conforme GD01. Não iniciar round com carga incompleta. |
+| Preparação→luta, liberação do round | Apresentações terminam; relógios/controle recebem estado explícito. | Regra de skip/entrada mantida pendente; repetir transição não inicia dois relógios ou ataques. |
+| Luta→resultado de round, KO/time-over | Encerrar hitboxes, objetos, hitstop e eventos ofensivos; fixar resultado lógico e apresentá-lo uma vez. | Placar permanece; evento simultâneo/empate depende GD04. Desligar ameaça lógica antes de apagar só a imagem. |
+| Resultado→preparação, próximo round | Limpar objetos e controles transitórios; reposicionar atores e reconstruir HUD coerente. | Placar da partida permanece; vida/timer e persistência do Super precisam GD02. Nenhum comando antigo ou projétil reaparece. |
+| 02→03, duelo resolvido | Encerrar owners transitórios de luta/áudio e mostrar resultado/etapa. | Transportar vencedor e progresso; desbloqueio é evento único condicionado a GD04. |
+| 03→02, próximo oponente | Encerrar resultado; inicializar duelo com o próximo ID aprovado. | Confirmar uma vez; fim de lista não gera ID inválido. Ordem/dificuldade dependem GD04. |
+| 03→01, conclusão/retorno | Encerrar percurso e restaurar seleção válida. | Desbloqueios/persistência, derrota/continue e cancel dependem GD04; não presumir SRAM ou novas telas. |
+
+Nenhuma dessas transições foi exercitada na ROM da placa. Reset/pausa e falhas
+de carga precisam política explícita quando integrados; não criar novos modos
+de jogo por checklist. Cada aresta exige vídeo + estado/SHA, repetição de
+saída/reentrada e medição do pior frame de carga, sem herdar throughput do
+estado estável.
+
+### Orçamento antes de arte adicional
+
+Para a cena 02, medir distâncias/contatos, ambas as faces e simultaneidade
+real antes de derivar teto de asset. A placa usa pool de sprite já medido em
+posição fixa, P0 de chão/HUD e carga de BG anterior ao loop; não demonstra
+aproximação, objeto, HUD dinâmico ou PSG. Tabela P1 única não é permissão para
+trocar paleta individual em luta. Valores concretos por SHA ficam na spec.
+
+Tradeoff técnico pode alterar packing/residência sem mudar o comportamento
+se a equivalência for demonstrada. Alterar alcance, preparação aceita,
+recuperação, silhueta/escala, arma ou remover pista exige decisão registrada.
+Preservar controle e tentativa reprovada. Engenharia deve medir próximo degrau
+e carga completa; piso58 por janela, input/lógica/apresentação e worst-frame
+continuam pendentes nesta ROM diagnóstica. Implementação de combate depende
+GD01/GD02/GD05, não de mais conteúdo ou de outra folha.
+
+## J.J. — seleção aprovada pelo proprietário
+
+A resposta “aprovado” fecha o conceptv5/fontev6, a proporção da Zillion,
+os seis desenhos sem FX e o retorno apresentado com7/4/2/3/6. Preservar arte,
+tempos e ROMs; decisão em `decisions/jj-zillion-character_owner_approval.json`.
+Checkpointv7 registra o aceite sem inventar percepção contínua ou nova sessão.
+As pendências de aceite nas seções anteriores são históricas. Objetos/FX,
+combate completo, produção e homologação global continuam fora deste aceite.
+
+## Histórico técnico anterior ao aceite
+
+## Integração diagnóstica J.J. — mesma rota e consumidor
+
+`MOF_JJ_SAMPLE=1/2` seleciona os headers v5 nos dois sentidos no consumidor já
+existente; nenhuma nova lógica de animação, projétil, render, input ou probe.
+A fonte6 remove um ponto de I00 que não sobrevivia à redução: funções oficiais
+recalculam o idle e comprovam igualdade de índices nos dois sentidos; 14 PNGs,
+12 cenas e dois headers continuam idênticos. Fontes de ação v5 e conceito v5
+mantêm as poses e corrigem só arma/pega, sem efeitos. Material-index→P1 de
+Social congelado evita a regressão de 34 pixels constatada na tentativa inicial.
+
+Canvas 104×88/pivô48,80/posições16/128,64; packing de fases medido em ambas as
+faces. Pool180×32 B no primeiro meio de VRAM, PNT0x3800/SAT0x3F00, modo normal
+8×8. Builds base esquerda/direita e direita stress128 têm 32 KiB; vínculos e
+corredores passaram. QA2casos/260RGB e vídeo real480RGB exatos; FPS20s
+59,79/59,84 após falha8s preservada. VBlank3.000frames0derrame, mínimo213
+base/224stress128. Cinco sessões novas fechadas; revisão contínua/aceite humano
+ainda pendentes.
+O perfil só mostra poses de personagem e não implementa dano ou objetos/FX.
+
+## Histórico J.J. v1 — proposta com pulso supersedida, não implementada
+
+Novo estudo de tiro único reutiliza `prepare_authored_sprite_sample.py`, o empacotador oficial e o consumidor diagnóstico em `src/main.c`. Fonte autoral e pulso finito incorporados às poses; sem sistema novo de projéteis, colisão ou dano. Perfil normal 8×8, escala única e pivôs/solas/grades explícitos; selecionar apenas após medir o par nas duas faces. ROM, vínculo, QA, FPS e VBlank próprios permanecem pendentes até a execução. Rastreio em `jj_zillion_single_shot_route_v1.json`.
+
+## Perfil atual — somente tempos v7, fonte v4 reutilizada
+
+Seletores15/16 consomem `out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_{left,right}/sample_data.h`.
+Mesma FSM, modo normal8×8, escala, P1, pivôs e fases da v4. Somente
+`sample_durations` troca4/1/2/3/1/3 por8/1/2/7/2/5. Exigir igualdade dos oito
+PNGs por lado e header inteiro exceto essa tabela. Fonte v4 reaproveitada sem
+`sample_rect_px`; nenhum pixel é novo. Três builds32KiB e QA nova passaram;
+260quadros exatos e8/1/2/7/2/5 comprovados nos dois sentidos. Vídeo real480quadros
+exatos; FPS59,71/59,46 em8s. Base e stress128:3.000frames cada,0derrame,
+mínimos213/223; sessões encerradas. Aceite humano pertence ao preview fonte
+escolhido; a equivalência de conteúdo e exposição qualifica a apresentação
+técnica da ROM, sem atribuir ao dono uma nova sessão observada.
+V6 é controle rejeitado e não deve ser tratado como seleção.
+
+## Histórico — candidata v6 com tempos e lâmina transitória
+
+Mesma FSM, emissor, P1, escala comum e empacotador normal 8×8 da v4. Contrato
+v3: 8/1/2/7/2/5 ticks. R02 admite delta de lâmina autorado, composto apenas em
+regiões declaradas; índice/PLTE/alpha fora delas exatos. Cinco outras poses,
+Social e guardas permanecem controles por hash. Residência, SAT e scanline
+devem ser recalculados para o novo desenho nos dois sentidos, com nova ROM,
+gravação real, duração apresentada, FPS e VBlank. O opt-in `sample_rect_px`
+declara um recorte-fonte contendo toda a opacidade e margem transparente;
+rejeita limites inválidos/corte/bool. Evita mudar a grade de redução do corpo
+quando o extremo da arma altera a bbox. Defaults reproduzem header e 8 PNGs
+v4 byte a byte. 26 testes do adaptador passaram, inclusive 6 casos de recorte
+e amostragem estável. Conversão v6:220 padrões/7.040B,max53SAT,pico8; seletores
+13/14. Sete PNGs por face idênticos à v4; somente lâmina de R02 muda. Provas
+novas de ROM completas: QA260quadros exatos, holds8/1/2/7/2/5 apresentados,
+480quadros exatos em gravação nativa sem stepping; decode MP4 lossless confere
+com RGB bruto. FPS59,74/59,42 em janelas8s. Base/stress128:3.000frames selados
+cada,0derrame,mínimos213/223. Sessões fechadas e PIDs exatos ausentes.
+Força/ritmo/efeito de velocidade e aceite da candidata continuam pendentes.
+
+## Implementação corrente — fonte v4, sprite normal 8×8
+
+`prepare_authored_sprite_sample.py` mantém defaults v1/v2 tall. Opt-in v2
+`sprite_size=8x8` registra PNGs intermediários com padding transparente,
+chama `pack_sms_metasprite.pack_poses`, compensa fase no META e mantém PNGs
+públicos/pivôs/escala/P1. Um blanktile reservado; janela física256padrões.
+Source/PNGs não são redesenhados pelo código.20testes e self-check128tall+64normal
+conferem reconstrução exata inclusive preto opaco, limite e rejeições.
+Controle tall antigo reproduz header e3PNGs byte a byte; snapshot histórico
+284b15b preservado em out, sem tornar-se implementação concorrente.
+
+Main recebe seletores9/10 com headers converted_v4_left/right, macro de altura8
+para `SMS_setSpriteMode(SPRITEMODE_NORMAL=0)`; fallback16 continua tall1.
+Mesmo FSM/probes/input/SATemitter, poses7incluindoidle,14ticks.219padrões/7008B,
+max53SAT/pico8. Dados todos residentes com displayoff; rotina normal atualizaSAT,
+stress128 reenvia prefixo residente correto. Perfil atual medido: 3.000 frames
+selados em cada ROM, zero derrame, mínimo213 base e223 stress128; FPS base
+59,78/59,67 em duas janelas8s. Os números não são herdados do perfil anterior.
+`expected_opaque_bottom_px=80` rejeita registro stale antes de publicar header.
+
+Captura privada opt-in `capture_video.py --session ID --realtime --seconds 8`:
+callback RGB24 nativo de DisplayWindow durante run livre, sem stepping. O bridge
+bloqueia leitura/input/step enquanto grava; stop pausa/fecha/flush, confere bytes
+contra contagem nativa, codifica lossless e preserva bruto. Emulicious.jar original
+permanece intacto. Nesta ROM:480quadros/70.778.880B em8,0187s, todos coincidem com
+os sete PNGs legais; decode do MP4 tem o SHA do RGB bruto. Capture overhead e
+timebase nominal não certificam FPS; sonda em duas janelas separadas o mede.
+7 testes de custódia/erro da captura e20do adaptador passaram. Sem hitbox/dano/áudio.
+
+## Histórico: corte curto diagnóstico — Hayato, 2026-10-29
+
+Mesmo adaptador oficial v2 e runtime genérico. Nenhum conversor novo, nenhuma
+mudança no FSM de input ou renderer; apenas seleções5/6 e dados4poses+idle,
+SAMPLE_POSE_COUNT5 e durações0,3,2,2,5. Memória/probes continuam no corredor
+C7D2..C7F9,14sondas,folga1784B. ROMs32KiB,202patterns/6464B residentes no
+window0..1FFF,PNT3800,SAT3F00,tall8×16. PaletaP1 e bitmapSocial preservados.
+Fases conjuntas de grade foram planejadas para todos osframes em ambos os
+sentidos; max33SAT/pico8. Registro da sola-fonte e registro óptico de projeção
+foram conferidos antes de ROM: C01/C04 perderiam uma linha esparsa no nearest,
+por isso usam sourceanchorY126 sem mudar sourcepixels/scale. C03também126;
+guard/C02127. Referências/receitas/raws/assembly expõem uniform2/9raster das3
+poses de apoio e C02 original byte-idêntica, sem normalização individual.
+
+Configsativas .mddev/hayato_short_cut_sequence_v1_registered_{left,right}.json;
+manifestos hayato_short_cut_v1_{left,right,right_stress128}_build.json.
+Build/gates de recursos não aprovam timeline, throughput, VBlank ou qualidade.
+Medição será fresh no SHA escolhido; sem palco, áudio, hitboxes ou gameplay.
+A escala absoluta legada68–72px não é reclamada por este perfil diagnóstico.
+
+## Hayato — adaptador v2 e diagnóstico do par, 2026-10-29
+
+Estendeu-se `tools/sms_wrapper/prepare_authored_sprite_sample.py`, sem segundo
+pipeline/consumidor. Schema v1 mantém IDs/tempos do Social e header/8PNGs reais
+byte-idênticos. V2 aceita IDs/durações explícitos, extra_scale obrigatório para
+escala comum, canvas/pivô, posições/reflexão e mapa opcional dos índices de
+paleta ORIGINAIS para códigos exatos da P1. O packer/core canônicos continuam
+responsáveis pelos bytes. Índice0transparente nunca pode receber override;
+preto opaco continua em índice visível. Nenhum remapeamento da saídaSMS pronta.
+
+Hayato fonte v2 SHA0b72e603… permanece sem edição. Material map5→42,13→21,26→0
+corrige71RGBsSMS; o índice13 é misto e foi revisto em pele/pescoço/cabelo nesta
+pose apenas. Guardas16bitsY preservam guard de offsets não negativos.
+Pivô final(68,127) pela sola observada;1px abaixo da derivada anterior, sem
+alterar fonte/escala. FaseHayato[0,1] nos2sentidos; SocialJ04 direita[3,9],
+espelhado[5,9], medidas na composição final. Não copiar fases para outros frames.
+SAMPLE_POSE_COUNT/layout emitidos pelo v2 tornam o runtime genérico; com1pose
+não se dispara índice inexistente. V1 usa defaults7poses/(40,72)/(152,72).
+MOF_HAYATO_SAMPLE1..4 seleciona os quatro pares diagnósticos no mesmo main.
+
+Dados atuais *baseline_v3*: guardas66patterns/2112B/32SAT e parSocialjab
+222patterns/7104B/35SAT máximo, pico8 em todas as composições. Janela física
+0x0000..1FFF256patterns, PNT3800, SAT3F00, tall8×16. P1 idênticaSocialv8,
+15códigos; source original→mesmo código, source/alpha/metadata registrados.
+Tudo residente carregado com displayoff; base escreve SAT porVBlank, não
+streaming de poses. Degrau128B reenvia prefixo correto residente, não arte nova.
+SMRT/worst probes C7D2..C7F9,14sondas,folga1784B nos mapas medidos.
+
+ROM base direita035060f9…:59,67/59,81fpsNTSC,janelas8s;0derrame/3000,mínimo207.
+Stress3540539e…:0derrame,mínimo218. Isso não mede duraçãoCPU, máximo de carga,
+PAL, áudio, gameplay ou fluidez percebida. Bindings porcaso usam --map explícito
+em out/diagnostics/hayato_cps2_sample_v1/*baseline_v3_rom_asset_binding.json;
+o binding global históricoSocial não foi reatribuído silenciosamente.
+QA4/4,236framesde vídeo+capturasguardas exatos,18checks, cleanup. Guarda tem
+somente endpointRAM(frame>0,pose0), não duas janelas de contagem. Fonte/material
+review pass, owner/ação/animação pending. Contrato legado68–72px não é promovido
+por esta escala diagnóstica. Ver memorybank/result.json e receitas .mddev.
+
+## Grade compensada da amostra v8 — 2026-10-29
+
+`MOF_CPS2_SAMPLE=8` seleciona o novo header;5e1 preservam as baselines.
+`packing_phase_px=[3,9]` somente no J04 muda a grade tall e compensa no META.
+Controle commesmos oito PNGs: pico9→8/SAT33→34/pool218→220padrões. Nenhum
+pixel/escala/pivô é alterado. Defaults[0,0] geram os dados antigos idênticos.
+Neste emissor, offsets negativos são recusados: Y deSMS_addSprite é16bit,
+não wrap automático. Fonte/receita/replay e nove testes ficam no handoff.
+ROM v8 SHA452cd565…,32.768B;120framebuffers independentes exatos;13casosRAM
+confirmam ordem/holds2/1/1/1/1/3, lag1VDP na apresentação. FPS8s59,62/59,74;
+selo3000frames0derrame/mínimo207,+128B0derrame/mínimo217. Quatro sessões
+encerradas. Só diagnóstico NTSC, sem aprovação de playback/arteSMS/dono/produção.
+
+## Diagnóstico facial v5 — 2026-10-29
+
+`MOF_CPS2_SAMPLE=5` seleciona o novo header no mesmo consumidor; valor1 conserva
+os dados anteriores. Manifestos/receita estão no handoff `dr_social_cps2_sample_v1.md`.
+Fonte v5 parte do nativo v3 ampliado4× e extraído1/4, sem mudar escala corporal.
+216 padrões/6.912B residentes, pico8;31SAT salvo J04=32. As tentativas de braço
+v6/v7 não foram selecionadas; v6 reprovou composição de J04 com pico9, sem build.
+ROM v5 SHA `fc46d77b…`: QA independente120/120 framebuffers exatos; FPS em duas
+janelas8s59,62/59,79. Selo3000frames:zero derrames, mínimo207; stress+128B,
+SHA `a5c013a8…`,zero derrames, mínimo217. Três sessões encerradas, bindings e
+probes próprios. Sem herdar evidência da v3 ou aprovar arte/gameplay/PAL/áudio.
+As seções seguintes descrevem a baseline v3 quando explicitamente indicadas.
+
+## Amostra CPS2 autoral — diagnóstico opt-in de 2026-10-28
+
+O consumidor existente seleciona a amostra com `MOF_CPS2_SAMPLE=1`, somente
+via manifesto candidato e `build_inner.py --build-dir`. O esqueleto nominal
+continua separado pelo preprocessor, sem outro projeto/consumidor. Fontes
+candidatas vivem em `data/source_art/`; PNGs SMS, header e ROM ficam em `out/`.
+
+O adaptador `tools/sms_wrapper/prepare_authored_sprite_sample.py` não desenha
+personagens nem implementa outro conversor: faz registro explícito do raster,
+carrega PNG indexado em `sff.Sprite`, aplica `display_fit.scale_sprite`,
+`sms_tiles`, `runtime_format.pack_tiles_tall/build_frames` e a compactação/
+paleta de `scene_cut`. O pool estático compartilha pares idênticos entre as
+poses. A fonte usa 30 tons por material, fora da restrição de CRAM; a saída
+usa 15 cores úteis numa única P1 compartilhada com o Ken de referência.
+
+Receita final da candidata v3: recorte transparente justo, framebuffer
+x=2/3 e y=6/7, escala corporal extra 4/6 derivada apenas do idle; cada pose
+mantém seu pivô/sola registrados antes da conversão. Fonte, SHA, paleta,
+parâmetros e transformações constam no JSON de configuração e na receita de
+extração. J01 é também a pose idle; não se declara ciclo de idle animado.
+
+O pool medido tem 212 padrões, 6.784 bytes; sprites tall 8×16 na primeira
+metade da VRAM, índices pares, limite físico de 256 padrões. O par vazio
+reservado também fornece o tile 0 do fundo diagnóstico. PNT em 0x3800 e SAT
+em 0x3F00. Todos os quadros do par Social/Ken medem 31 SAT e pico 8 por linha.
+Fundo sólido de diagnóstico não paga orçamento de cenário/HUD de produção.
+Uploads dos padrões/CRAM ocorrem no setup com display desligado. Na animação,
+somente SAT é escrita no VBlank; não há streaming para estender as durações.
+`MOF_SAMPLE_STRESS_BYTES=128` reenvia um prefixo correto dos mesmos padrões
+para medir o degrau seguinte sem alterar pixels ou residência.
+
+A ROM expõe SMRT e selo worst-frame de 3.000 frames em 0xC7D2..0xC7F9,
+inicializados e voláteis. Corredor: 1.784 bytes de separação no mapa candidato.
+`probe_state` em 0xC7F6 registra a pose submetida após a cópia SAT; o traço
+observou framebuffer correspondente no frame seguinte. Não interpretar a
+leitura da sonda como apresentação instantânea. Input 1 dispara o jab;
+input 2 alterna autoplay; o boot mantém idle estável antes da primeira ação.
+Autoplay insere 21 ticks de idle entre jabs; a ação conserva nove ticks.
+Sem colisão, dano, física de combate ou áudio novo neste diagnóstico.
+
+ROM base observada: 32.768 bytes, SHA
+`f5d54b1545aa20ec41ec7da0290b2c948aeec393c025d71c2401254b58458b8d`.
+O estado de FPS/VBlank e a revisão final ficam no relatório do lote;
+compilação, inventário e boot não os aprovam por inferência.
+
 > Arquitetura técnica. Autoridade #7.
 > A API definitiva é o header (`sdk/devkitSMS/SMSlib/SMSlib.h`, autoridade #8) —
 > este documento NUNCA inventa assinatura. Em dúvida: leia o header.

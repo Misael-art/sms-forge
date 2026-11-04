@@ -1,0 +1,683 @@
+{
+  "schema": "smsforge_art_curation_candidate_v1",
+  "id": "dr_social_cps2_source_to_rom_method_2026-10-29",
+  "status": "method_owner_approved_pending_future_curation",
+  "dedup_key": "mof-authored-cps2-source-existing-sms-pipeline-diagnostic-proof",
+  "owner_decision": {
+    "date": "2026-10-29",
+    "actor": "project_owner",
+    "verbatim": "APROVADO O METODO REGISTRE PARA CURADORIA FUTURA E VAMOS PARA O PROXIMO PASSO",
+    "decision": "approved",
+    "scope": "method",
+    "interpretation": "Aprova o método aplicado à amostra autoral. Não registra, por inferência, aprovação artística da fonte v3, promoção a recurso de produção ou homologação global da fábrica."
+  },
+  "owner_project": "SMS_projects/master_of_fighters",
+  "source_implementation_commit": "ba706e806e43bc94bafab15ca63b4ef78599d65b",
+  "evidence_handoff_commit": "7f584b8fe8ea6d1e697a6d9de11b15fc3593995e",
+  "method": [
+    {
+      "stage": "authority_and_reference",
+      "practice": "Conferir decisões/hash da identidade e preservar fontes aprovadas; selecionar receita Ken/Ryu confrontando artefatos e doc/28-pose-budget-8.md, não pelo nome ou data."
+    },
+    {
+      "stage": "source_art",
+      "practice": "Produzir arte autoral na escala corporal da fonte CPS2; contrato próprio de contorno, luz, materiais, pivôs, equipamentos e timing, sem impor antecipadamente a paleta/canvas SMS."
+    },
+    {
+      "stage": "small_sample",
+      "practice": "Estabilizar uma pose idle e seis poses de social_light_jab; registrar defeito/delta/invariantes de cada revisão, conservar prompts e originais."
+    },
+    {
+      "stage": "native_matrix",
+      "practice": "Conferir propriedades reais, alpha, paleta e grade. Uma escala comum e pivô por desenho registram a folha; redução/quantização não certificam acabamento de pixel art."
+    },
+    {
+      "stage": "existing_conversion",
+      "practice": "Usar o adaptador oficial prepare_authored_sprite_sample.py sobre display_fit/SMS tiles/metasprite existentes; paleta P1 comum, crop transparente e modo tall 8x16 com composição integral. Reprovar overflow sem omitir células ou reduzir só a pose larga."
+    },
+    {
+      "stage": "rom_proof",
+      "practice": "Build pelo wrapper; ligação fonte→SMS→header→ROM por hashes; Emulicious privado no SHA exato. Separar framebuffer, sequência/timing, FPS real e pior VBlank, medir degrau adicional e encerrar sessões próprias."
+    },
+    {
+      "stage": "review_and_retention",
+      "practice": "Comparativos nativos/ampliados, animação e evidência bruta; QA/revisão independentes e aceite humano por etapa; fontes/receitas no Git e pacote de evidência com hash/recuperação."
+    }
+  ],
+  "observed_sample": {
+    "scope": "diagnostic idle + social_light_jab with authorized Ken reference, NTSC only",
+    "source_cell_px": [
+      128,
+      128
+    ],
+    "source_body_height_px_approx": 104,
+    "source_opaque_rgb_colors": 30,
+    "sms_palette_useful_colors": 15,
+    "resident_patterns": 212,
+    "resident_bytes": 6784,
+    "sat_entries": 31,
+    "sprites_per_scanline_peak": 8,
+    "fps_8s_windows": [
+      59.43,
+      59.56
+    ],
+    "worst_window_frames": 3000,
+    "baseline_vovf_delta": 0,
+    "baseline_vline_min": 207,
+    "next_step_pattern_bytes": 128,
+    "next_step_vovf_delta": 0,
+    "next_step_vline_min": 217,
+    "independent_exact_framebuffers": 120,
+    "adapter_tests_passed": 6,
+    "sessions_closed": 4
+  },
+  "evidence": [
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_source.png",
+      "sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/.mddev/dr_social_cps2_sample_v3.json",
+      "sha256": "d56ea2bb4f378fc950f0238fb691ae5524c1222a036f717ca6b90f0904ff345d"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/historical_approved_method_adapter_ba706e8.py",
+      "sha256": "61340d8f552ce4557b7d8d6396d49c06d4e76b060f0a227fc0e1001958e0756a",
+      "origin_path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "source_commit": "ba706e806e43bc94bafab15ca63b4ef78599d65b",
+      "role": "Historical exact approved-method evidence only; not another active converter."
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v2.json",
+      "sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/candidates/dr_social_cps2_sample_v1/rom/master_of_fighters.sms",
+      "sha256": "f5d54b1545aa20ec41ec7da0290b2c948aeec393c025d71c2401254b58458b8d"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/dr_social_cps2_sample_review.zip",
+      "sha256": "9536b5a5d1ac82dc8588730f8d07f94edf55d9657c8bb86ed7ce791b833470ba"
+    }
+  ],
+  "limits": [
+    "Aprovação do método não apaga revise_before_growth da revisão artística v2 nem muda o checklist v3; óculos/assinatura facial, contato J04 e simplificações SMS permanecem abertos.",
+    "Idle é uma pose estática idêntica a J01; seus dois ticks dependem também da sonda. Submissão SAT e captura apresentaram latência de um frame VDP.",
+    "Vídeo por stepping não prova fluidez percebida/FPS. Janelas curtas de FPS falharam e foram preservadas antes das janelas de oito segundos.",
+    "Residência e VBlank pagos apenas para esse trecho; sem gameplay, colisão, dano, áudio, cenário/HUD, PAL ou hardware físico.",
+    "v08.2 continua aprovada no seu próprio escopo. Relatório histórico v5 ausente continua bloqueando auditoria global do registro.",
+    "Pacote de recuperação é local, não backup em outro host nem release."
+  ],
+  "future_curation": {
+    "status": "queued_not_homologated",
+    "existing_doctrine": [
+      "L123 / SMS_GLOBAL §113",
+      "L124 / SMS_GLOBAL §114",
+      "L127 / SMS_GLOBAL §117"
+    ],
+    "dedup_instruction": "Confrontar com as lições existentes; não emitir novo ID para repetir lifecycle, revisão por delta ou fronteiras de aprovação.",
+    "review_questions": [
+      "Qual parte da interface autoral e do empacotamento tall é reutilizável em outros consumidores?",
+      "Reproduzir em um segundo caso antes de generalizar receita, paleta, escala ou orçamento.",
+      "Separar conferência executável de hashes/recursos/ROM de julgamento artístico humano."
+    ],
+    "promotion_requirements": "Homologação futura explícita, contrato e testes pertinentes, gates de curadoria completos e memória/rotas atualizadas. Este registro não altera SMS_GLOBAL, ledger, skills ou gates."
+  },
+  "next_step": {
+    "owner": "master_of_fighters",
+    "dependency": "current independent art review v2",
+    "action": "Refinar localmente rosto/óculos e clareza do contato J04 na mesma amostra antes de ampliar atlas, salvo decisão artística explícita posterior do dono.",
+    "acceptance": [
+      "Fonte nova imutável e delta verificável, preservando v3 e v08.2.",
+      "Inspeção nativa/ampliada e temporal com revisão independente hash-bound.",
+      "Se convertida/integrada, gates pertinentes e ROM nova com QA privada no próprio SHA."
+    ]
+  },
+  "followup_after_method_decision": {
+    "source_v5_sha256": "44ae0342e9db909d467907c1c21633165f5ee8dd1034b90d596d38498abd9c05",
+    "scope": "Subsequent application, not extra owner approval or global curation. Native-grid input helped face construction in this single case; follow-up results do not change frozen v3 evidence above.",
+    "art_review": {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v5.json",
+      "sha256": "3966c06213c7df56fc4e7c7b6b30af02f944542ddacf4c93fb5389b3dc7ff3b5",
+      "passed_scope": "native source facial repair only"
+    },
+    "native_qa": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/independent_qa/run_3b757b7927b247dcb2f70a2a73894c39/report.json",
+      "sha256": "3339a3800d88a22456f86cbd43908adf7c195c2ab4957b0255e4e477ff27463b",
+      "passed_cases": 1,
+      "exact_framebuffers": 120
+    },
+    "current_diagnostic_rom_sha256": "fc46d77b9fea6ffd63c262aa085de3e1e623409c1db3e706e163d9d2439cf24b",
+    "contact_attempt_v6": "J04 peak9 rejected by existing converter; no ROM",
+    "contact_attempt_v7": "Not selected; folded contact still not convincing in producer source inspection",
+    "remaining": "Human temporal judgment of compact v5 and target-size simplification; no atlas growth."
+  },
+  "followup_compensated_grid_v8": {
+    "status": "project_diagnostic_evidence_pending_future_curation_not_new_owner_approval",
+    "source_sha256": "877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41",
+    "cause": "Tall-grid interval overlap, not necessarily an opaque-row hardware lower bound.",
+    "change": "Explicit per-pose transparent padding compensated in META through existing encoder; no pixel/scale/pivot editing.",
+    "control": {
+      "record": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/phase_comparison.json",
+      "sha256": "4dd75eb8b4c8cee82f0cb929d88158b8671072be762ebbc5a64d2f43932594ec",
+      "all8PNGs_identical": true,
+      "peak_before": 9,
+      "peak_after": 8,
+      "sat_before": 33,
+      "sat_after": 34,
+      "patterns_before": 218,
+      "patterns_after": 220
+    },
+    "implementation": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/build_inputs/approved_method_adapter_social_v8_70b0e7a.py",
+      "sha256": "30dc607ebfdd0d11cae79ad05c73a4579494b912a92831d69f6bd6d3bf1e1553",
+      "default_runtime_data_unchanged": true,
+      "all128phase_pixel_reconstruction_selfcheck_passed": true,
+      "unit_tests": 9,
+      "consumer_constraint": "Reject signed relative offsets for this unsigned sample emitter; SDK Y is16bit.",
+      "origin_path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "source_commit": "70b0e7abbaa1e559562e9986eb0af4c2e94c5218",
+      "role": "historical implementation snapshot only; never active converter"
+    },
+    "art_review": {
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v8.json",
+      "sha256": "3f67ceadf65ef3d7b33a19c87aadf920e9f58828d7a0e724ab0a0518c359107b",
+      "scope": "13source/static-key axes passed; continuous motion/SMS/owner separate"
+    },
+    "ROM": {
+      "sha256": "452cd56594db3764da4b3d1c61e8e5f2e9d66714907b2edd3fbc453da3be240f",
+      "fps_8s_windows": [
+        59.62,
+        59.74
+      ],
+      "worst_min": 207,
+      "worst_spills": 0,
+      "next_step_bytes": 128,
+      "next_step_min": 217,
+      "next_step_spills": 0
+    },
+    "native_QA": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/independent_qa/run_fd39fc88eedc423fa155b9442bad5e23/report.json",
+      "sha256": "1476d83f3f60a1fed7fb8fb3f49d1b3c36d1c8dc611c423802a5b089f67ec685",
+      "cases_passed": 1,
+      "exact_framebuffers": 120
+    },
+    "timing": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/timing_observed_input/observed_cases_report_v2.json",
+      "sha256": "7ebe2a4209dc15dea912aed1bf984fceaf0ca94fe390a9ad8fab90bddaf31f42",
+      "RAM_cases_passed": 13,
+      "exact_framebuffers": 21,
+      "submitted_holds": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        3
+      ],
+      "framebuffer_lag_vdp": 1,
+      "initial_failed_sample_retained": true
+    },
+    "future_curation_limits": [
+      "One authored sample and one packing phase are not a universal SMS recipe.",
+      "No global doctrine/gate/lesson ID promoted. Apply existing L001/L006/L035/L057/L090/L091/§93/§94/§128 rather than duplicating them.",
+      "More SAT/patterns and renderer coordinate semantics are part of the tradeoff.",
+      "Pixel identity and exact holds do not certify art, input latency, perceived fluidity, audio/PAL/gameplay or production."
+    ]
+  },
+  "followup_hayato_guard_repeatability": {
+    "status": "partial_guard_checkpoint_not_full_action_repeatability_or_global_promotion",
+    "request": "2026-10-29: repeat authored CPS2 source-to-SMS method on Hayato, preserve Social, prepare short action proposal if indispensable moveset decision absent.",
+    "source_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+    "generation_count_recorded_this_lot": 2,
+    "source_pipeline_reused": [
+      "approved identity concept bySHA",
+      "registered nearest extraction without artistic pixel painting",
+      "same official adapter/core packer",
+      "common source/SMS baseline",
+      "private Emulicious native QA and exact framebuffer",
+      "sealed VBlank and real ROM frame windows"
+    ],
+    "adaptations": [
+      "Hayato costume/katana/biotype and source dimensions measured, not copied",
+      "full-length katana guard rotated after all128phase tests failed at9scanline",
+      "measured phase[0,1] legal both sides",
+      "v2 action-neutral adapter interface; Socialv1 defaults unchanged",
+      "explicit original palette indices5->42,13->21,26->0 after independent derivative material failure; mixed index13 skin/neck reviewed separately",
+      "Check actual sole AFTER nearest rounding, not nominal anchor; shifting guard onepx exposed mirror-grid dependency. Re-measure final pair rather than assuming phase transfers."
+    ],
+    "guard_source_review": "SMS_projects/master_of_fighters/doc/hayato_cps2_idle_independent_review_v2.json",
+    "derivative_review": "SMS_projects/master_of_fighters/doc/hayato_cps2_pair_derivative_review_v2.json",
+    "result": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/result.json",
+    "limits": [
+      "No Hayato action produced while owner choice pending; action/timing/continuous motion repeatability unproved.",
+      "Index13 mapping is specific to this source PNG and shared material uses, not transferable approval for future poses.",
+      "No measured historical time comparison or economic savings claimed.",
+      "Source/derivative review and physical budget do not imply owner, production, PAL, audio, gameplay or AAA approval.",
+      "No new global gate, doctrine, skill or lesson ID promoted."
+    ],
+    "final_conversion_registration": [
+      68,
+      127
+    ],
+    "SMS_sole_boundary": 144,
+    "reflected_social_contact_phase": [
+      5,
+      9
+    ],
+    "final_derivative_review": "SMS_projects/master_of_fighters/doc/hayato_cps2_pair_derivative_review_v3.json",
+    "final_handoff": "SMS_projects/master_of_fighters/doc/10-memory-bank.md",
+    "current_implementation": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/build_inputs/historical_guard_adapter_284b15b.py",
+      "sha256": "eeded0e63a72ebce948e01f02ee9644d2d0bfa2d943b2ac0498e9c76be683b6c",
+      "scope": "Project opt-in v2 interface,16tests passed; historical Social implementations stay pinned separately, no new global homologation.",
+      "origin_path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+      "source_commit": "284b15be9bf1898219518973a366d3930deed2f2",
+      "role": "Historical guard implementation only; active adapter extends opt-in8x8, never import this snapshot as pipeline."
+    }
+  },
+  "followup_hayato_short_cut_choreography": {
+    "status": "owner_approved_timing_only_original_art_integrated_runtime_v7_tested",
+    "owner_direction": "Attachment c749b358-f4d3-4ad5-8bec-96f966493362,2026-10-29",
+    "preserved_attempt": {
+      "source": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/cut_source.png",
+      "sha256": "8c2d5032066cae86ae5a4cc2a32108e43606b05848a74f3ba56b31080077c6dc",
+      "prompt_sha256": "dd2ac4c94ac18a86589ec73bc91e7831c845821936e410027df748e014a27c7e"
+    },
+    "causal_restrictions": [
+      "Prompt fixed head/hair/feet/hakama/scabbard, wrists only1–2logicalpixels and recoil~3pixels. Preserving identity became freezing acting.",
+      "Frozen static C02 was treated as obligatory key; follow-through retained almost same body.",
+      "Ten principles covered and differing holds do not certify visible acceleration/expressivity; original reviewer explicitly limited judgment to static progression."
+    ],
+    "correction_under_test": [
+      "Motion brief and code-drawn joint study only as schematic, before final authored pixels.",
+      "Preserve body segment lengths/material identity while allowing head/pelvis/knees/shoulder pose travel; no per-pose size fitting.",
+      "Independent rough critique found unrotating pelvis and return gap; vary pelvis orientation and add one recovery transition for concrete need.",
+      "Examine spacing and exposure separately, and issue static/choreography/temporal/SMS/ROM conclusions with observed limits."
+    ],
+    "not_yet_proved": [
+      "Continuous perceived force/rhythm/normal-speed clarity",
+      "Owner artistic acceptance",
+      "Audio/PAL/full gameplay/physical hardware/production"
+    ],
+    "future_curation": "Record in existing candidate only. No central skill/SMS_GLOBAL/gate/lesson promotion. Compare with L113 and art-review coverage versus observed-result distinction.",
+    "final_source": {
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+      "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+    },
+    "source_poses": 6,
+    "duration_ticks": [
+      4,
+      1,
+      2,
+      3,
+      1,
+      3
+    ],
+    "source_generation_calls_this_reformulation": 12,
+    "selected_drawings": "Five from reformulation; R06 reuses old C04 recovery in same role; original guard exact.",
+    "corrections_observed": [
+      "Gesture-first study made hip/shoulder opposition and high/low body keys explicit; static critique corrected pelvis and return gap.",
+      "Early whole-pair conversion rejected wide key and tall residency; existing canonical8x8 packer opt-in fits219patterns/53SAT/8line without cutting blade or shrinking an actor.",
+      "Source R02 blade repair required whole-pose re-review; generation modified more than the nominal weapon delta.",
+      "Source changes can stale optical sole pivot; expected_opaque_bottom_px now rejects before header. Both mirrored grids verified.",
+      "Authored local hair patch changes8source pixels inside ROI only; one detached SMS pixel removed per facing; outside source ROI exact.",
+      "Native recorder callback captures real-time RGB without stepping; lossless decoded RGB equals native stream. Capture overhead/nominal timebase are not FPS measurement."
+    ],
+    "measured": {
+      "native_QA_cases": 2,
+      "exact_manual_framebuffers": 236,
+      "realtime_frames_exact": 480,
+      "fps_windows": [
+        59.78,
+        59.67
+      ],
+      "worst": [
+        {
+          "rom_sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 213
+        },
+        {
+          "rom_sha256": "4f7b340a19075183542c318352457ab1d5adca78d09037af9060f991bffd497a",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 223
+        }
+      ],
+      "artifact_root": "out/diagnostics/hayato_short_cut_v2"
+    },
+    "preservation": "Prior source, prompts, negative reviews, conversions and previous ROM evidence retained. No economic/time-savings claim.",
+    "owner_motion_feedback_followup": {
+      "status": "new_source_SMS_ROM_measured_owner_motion_acceptance_pending",
+      "owner_decision": "doc/decisions/hayato-short-cut-v4_owner-motion-feedback.json",
+      "accepted_scope": "Existing v4 art/complete body poses satisfactory; owner identifies preparation and terminal timing as defect, requests transient weapon squash/stretch.",
+      "durations_control": [
+        4,
+        1,
+        2,
+        3,
+        1,
+        3
+      ],
+      "durations_candidate": [
+        8,
+        1,
+        2,
+        7,
+        2,
+        5
+      ],
+      "source_generations": 2,
+      "source_deltas": [
+        "v5 ImageGen blade stretch within2source rectangles;436indices, allbody/grip/fiveotherposes exact.",
+        "v5 source staticpass did notclose SMS cutout:2px tipisland caught before ROM.",
+        "v6 secondImageGen32px tipcontext repair:29indices changed onlyROI[152,89,171,109]; 16SMScomponentchecks pass."
+      ],
+      "sampling_cause": "Changing weapon top changed opaque bbox y53→63 and therefore nearest sampling phase; merely adjusting sole pivot would not prove body pixels stable.",
+      "sampling_fix": "Existing adapter optional sample_rect_px containing all opaque content. Declared[50,53,169,159] retains source lattice without painting/resizing. Invalid/out-of-bounds/content-cropping rectangle rejected.",
+      "regression": "26 adapter tests pass; existing v4 header+8PNGs default byte-exact. Newv6 bothfacings:7PNGs nonR02 eachside byteexactv4;R02delta110pixels sword only.",
+      "budget": {
+        "patterns": 220,
+        "bytes": 7040,
+        "max_SAT": 53,
+        "max_scanline": 8
+      },
+      "review": "doc/hayato_short_cut_body_blade_SMS_independent_review_v6.json",
+      "limits": [
+        "Static source/SMS approval does not imply perceived effect or owner acceptance of new timing.",
+        "No global doctrine/skill/tool/gate/lesson promotion; opt-in field is tested project feature pendingfuturecuration.",
+        "No competitive mechanics, extra drawing/effect, roster or atlas expansion.",
+        "No economic savings or physical air/impact simulation claimed."
+      ],
+      "result": {
+        "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/result.json",
+        "sha256": "4d5b8ed633cdbdea1776ace5b7af867fc62125df87373bc6b7be46d0b64709da"
+      },
+      "actual_ROM_sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e",
+      "actual_holds": [
+        8,
+        1,
+        2,
+        7,
+        2,
+        5
+      ],
+      "actual_realtime_exact_frames": 480,
+      "native_QA_frames": 260,
+      "fps_windows": [
+        59.74,
+        59.42
+      ],
+      "worst": [
+        {
+          "rom_sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 213
+        },
+        {
+          "rom_sha256": "4c796502ad3590db5564d70a2beaae56222a315aabfeec320b5ddc3e0d6f83d8",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 223
+        }
+      ]
+    },
+    "owner_final_selection": {
+      "decision": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+      "accepted": "Original v4 source, timing8/1/2/7/2/5; middle column",
+      "rejected": "Deformed v6 blade gave perceived different trajectory and worsened movement, according to owner",
+      "contextual_learning": "In this cut, exposure changes resolved the owner preference without weapon deformation. Static validity and legal hardware budget of a smear did not make it artistically successful in motion. This is not a global ban on squash/stretch.",
+      "source_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+      "new_drawings": 0,
+      "identity_proof": "All16PNGs and14scene manifests byteexactv4; wholeheader onlysample_durations changed.",
+      "production_release_approved": false,
+      "global_promotion": false,
+      "result": {
+        "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/result.json",
+        "sha256": "12fe27e891d1c0affb62def5f2c8c8289d7bbc92237a5985955b4a34c6a1be44"
+      },
+      "ROM_sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022",
+      "actual_holds": [
+        8,
+        1,
+        2,
+        7,
+        2,
+        5
+      ],
+      "native_QA_exact_frames": 260,
+      "native_realtime_exact_frames": 480,
+      "fps_8s_windows": [
+        59.71,
+        59.46
+      ],
+      "worst": [
+        {
+          "rom_sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 213
+        },
+        {
+          "rom_sha256": "dd8e79cb282a267aee3822d5120a1fe99c8c5d6da991657ce104b52c0cd51ae0",
+          "frames": 3000,
+          "spill": 0,
+          "vline_min": 223
+        }
+      ]
+    }
+  },
+  "followup_jj_zillion_short_route": {
+    "status": "technical_route_demonstrated_owner_accepted_pending_future_global_curation",
+    "scope": "Third character: J.J. from approved roster, character-only guard plus5actionposes. No shot/FX baked into character; emission/object deferred by explicit owner feedback.",
+    "reason_for_selection": "Young agile sci-fi laser user contrasts with Social Victorian cane and Hayato samurai katana, while remaining in approved roster/art language.",
+    "research": {
+      "path": "SMS_projects/master_of_fighters/doc/jj_zillion_single_shot_research_v1.json",
+      "sha256": "42eb49b3e4c406ca8763199706df12c80e6eb45efe89f51ccb9495e5f5829751"
+    },
+    "equipment_authority": {
+      "path": "SMS_projects/master_of_fighters/doc/jj_zillion_weapon_identity_contract_v2.json",
+      "sha256": "5eaada48bcbfbaf7e4488d6db146c7089944e9404593665f6f4666e0bf1d73f1"
+    },
+    "source": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+      "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+    },
+    "concept": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/concept_source.png",
+      "sha256": "e81e0f9cc81b1552ff2ace0e046ecb5c36be00119e6b6f5d60d17a7b17f518e9"
+    },
+    "frozen_pre_QA_plan": {
+      "path": "SMS_projects/master_of_fighters/doc/jj_zillion_single_shot_route_v5.json",
+      "sha256": "51470af57e5cfaa38c671adf0ae23e09da261a963cf079cb01dfeb76f6341a05"
+    },
+    "checkpoint": {
+      "path": "SMS_projects/master_of_fighters/doc/jj_zillion_character_checkpoint_v6.json",
+      "sha256": "4d92b3d4d435e6347f1cc74cfc0f743a734ab53b5eaed5dd669816da77fecf3d"
+    },
+    "runtime_evidence": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/runtime_evidence.json",
+      "sha256": "e68f7b51ec86eca87151e3f90f46c8f96df0de7b30d733baa4b7b66adf21eca7"
+    },
+    "observed": {
+      "six_states": [
+        "I00",
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05"
+      ],
+      "holds_proposed": [
+        7,
+        4,
+        2,
+        3,
+        6
+      ],
+      "patterns_including_blank": 180,
+      "resident_bytes": 5760,
+      "SAT_peak": 50,
+      "scanline_peak": 8,
+      "canvas": [
+        104,
+        88
+      ],
+      "pivot": [
+        48,
+        80
+      ],
+      "sole_screen_last_y": 143,
+      "Social_visible_pixels_exact_both_faces": 902,
+      "shared_useful_P1_colors": 15,
+      "independent_cases": 2,
+      "independent_exact_frames": 260,
+      "realtime_exact_frames": 480,
+      "realtime_elapsed_s": 8.023643057,
+      "complete_actions": 11,
+      "complete_actions_plus_full_idle": 10,
+      "FPS_20s_windows": [
+        59.79,
+        59.84
+      ],
+      "first_8s_FPS_windows_FAILED_preserved": [
+        59.32,
+        58.36
+      ],
+      "base_sealed_frames": 3000,
+      "base_vovf_delta": 0,
+      "base_vline_min": 213,
+      "next_step_bytes": 128,
+      "next_step_sealed_frames": 3000,
+      "next_step_vovf_delta": 0,
+      "next_step_vline_min": 224,
+      "new_emulator_sessions_closed": 5,
+      "no_ongoing_owned_process": true
+    },
+    "cost": {
+      "imagegen_calls": 6,
+      "concept_imagegen_calls": 2,
+      "sprite_imagegen_calls": 4,
+      "source_variants": 6,
+      "official_converter_calls": 6,
+      "converter_failures": 4,
+      "converter_successes": 2,
+      "builds": 3,
+      "native_QA_sessions": 2,
+      "root_performance_sessions": 3,
+      "total_new_emulator_sessions": 5,
+      "performance_failed_FPS_windows_preserved": 1
+    },
+    "history": [
+      {
+        "version": "sprite sourcev1",
+        "outcome": "not selected; generic white/bluegun copied from stale equipment concept; sole/pair failures before build",
+        "cost": "1ImageGen,4actual officialconvertercalls:2sole failures then2pairbudget failures;0builds"
+      },
+      {
+        "version": "sprite sourcev2",
+        "outcome": "longnavy/cyan family restored but panelposition and proportion wrong; modelgrid still>=9/line",
+        "cost": "1ImageGen,0officialconvertercalls,0builds"
+      },
+      {
+        "version": "sprite sourcev3",
+        "outcome": "canonicalweapon shape clearer, still oversized; sixbodyposes become frozen control per owner",
+        "cost": "1ImageGen,0officialconvertercalls,0builds"
+      },
+      {
+        "version": "sprite sourcev4",
+        "outcome": "mechanical3bodypose/pulse proposal superseded by owner requirement to retain all6drawings and noFX",
+        "cost": "0ImageGen,0officialconvertercalls,0builds"
+      },
+      {
+        "version": "conceptv5",
+        "outcome": "gun-only boundedROI edit of original2bodyposes; secondcall refines rightgun20percent smaller; keeptruecolor navy/cyan",
+        "cost": "2ImageGen;14colorindexedintermediate rejected,not runtime"
+      },
+      {
+        "version": "sprite sourcev5 / runtimeprofilev5",
+        "outcome": "boundedgun/gripROI edit, sixv3bodyposes preserved, oldpulse removed, proportionalweapon; commonP1/registration/grid passbothfaces",
+        "cost": "1ImageGen,2successful officialconversions,3builds"
+      },
+      {
+        "version": "sprite sourcev6",
+        "outcome": "independentreview isolated I00point105,99; copy existingImageGentransparent sample; only index2to0; all14SMSPNGs/12scenes/2wholeheaders unchanged",
+        "cost": "0ImageGen,0newfullconversions,0newbuilds;source-onlyaddendum"
+      },
+      {
+        "version": "runtime evidence",
+        "outcome": "2nativeQA sessions pass260/260; realtime480exact; baseVBlankpass; firstFPSfailed,one20sconfirmationpass;firststress128pass",
+        "cost": "3rootperformance sessions;firstfailure preserved;5totalnew emulator sessions"
+      }
+    ],
+    "causes_and_minimal_recipe": [
+      "Reconcile equipment-specific owner decisions with older body/costume approvals before prompting. Direct owner weapon reference overrides ambiguous cyanpanel placement in harmony sheet.",
+      "Declare weapon/body/hand proportional envelopes before art; long gun does not mean unbounded size. Anime references here inform equipment only, not costume/palette/lore replacement.",
+      "Separate character from projectile/emission/sparks at contract stage; never bake extra game objects into character to prove an action.",
+      "Preserve all pose IDs/body artwork; no pose deletion, per-pose scaling or hold changes to hide fidelity/budget defects.",
+      "Measure actual sole and horizontal support registration before composing; test sprite grid independently after mirroring. These are declared per-drawing transforms, not hidden retouching.",
+      "Freeze source-index-to-P1 mapping of existing actor before adding colors to unused slots. Nearest-color remapping changed34Socialpixels perface initially; final explicit map preserves902.",
+      "Inspect source as well as SMS for disconnected pixels. The single orphan survived in source but disappeared at reduction; source6 repairs only that proven point.",
+      "Recompute affected official transform then reuse artifacts by exact identity when pixels/headers do not change. Do not repeat builds/art reviews for zeroSMSdelta.",
+      "Reuse official extractor/adapter/packer/consumer/build/isolation tools; runtime delta is selector/title only. Cconsumer FSM,input,render andprobe unchanged.",
+      "Preserve negative attempts and performance failures. Longer FPS windows passing do not erase firstfailure or establish its cause or per-framepacing."
+    ],
+    "what_is_repeated": "Authoredsource -> commonmaterialmapping/pivots -> officialconversion -> pairedbothfacings -> existingROMconsumer -> nativeprivateQA -> realtime/FPS/sealedVBlank -> retention/history. Technical route reproduced; artistic predictability not yet owner accepted.",
+    "global_historical_block": {
+      "status": "missing_unchanged_not_fabricated",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_61_pose_review_v5/conversion_report_61_pose_v5.json",
+      "expected_sha256": "f288f3f113d33ed9c898acfb92476f28f858292e8f403c2c410c8fc2f0403bac",
+      "audit": {
+        "path": "SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/registry_global_final.json",
+        "sha256": "08d92d541aeec00b5b70fc8a55c2bd1974a6491de20bf6751dd7a6b042961d9d"
+      },
+      "possible_recovery_archive": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261021/smsforge-generated-other-20261021.tar.zst",
+      "archive_bytes": 72355032,
+      "archive_sha256": "85750979253f45ba67b7c0c53aeec5399d788ed72b82f9747f9de4fecb28ed28",
+      "pending_action": "One manual download already requested, required by Projects/AGENTS.md >70MB rule. Archive absent in workspace/downloads at closure. Verifyfullarchivehash then selectively recover onlyexpectedhash files; global audit may reveal furthermissing records."
+    },
+    "next_step": "Owner decision closed; preserve chosen character-only sample. Recover original historical Social61v5 report from already requested manual archive, then futurecuration can assess promotion. No new content or repeat owner approval.",
+    "promotion": "queued_not_homologated; no global rule, lesson ID, skill or gate changed",
+    "retention": {
+      "receipt": {
+        "path": "SMS_projects/master_of_fighters/doc/jj_zillion_character_retention_v6.json",
+        "sha256": "e5a075ed57005c6d3c45ffa3e746cc8b9085784d7fe4d78a7e09838979951c8a"
+      },
+      "archive_sha256": "937b886f83cc50f71987b14f38adf3941aacc80837ed9b8b432865bd7825557a",
+      "payload_files": 777,
+      "scope": "Local recovery copy verified; package freezes evidence before external receipt/publication. Final receipt and followup retention field are separately versioned in Git; no recursive archive hash."
+    },
+    "owner_acceptance": {
+      "path": "doc/decisions/jj-zillion-character_owner_approval.json",
+      "sha256": "6909b7de5c7e3d5c8e31cd07eb46de9539553724a0fdea2a46e6c8302a7b7c21",
+      "checkpoint": {
+        "path": "doc/jj_zillion_character_checkpoint_v7.json",
+        "sha256": "97cf86b1e9685f9ea5b331fae5ff2ee0d7650e4ffabb07f4e785aa1d7463198d"
+      },
+      "verbatim": "aprovado",
+      "scope": "Corrected Zillion shape/proportion, conceptv5, sourcev6 allsixposes without projectile/FX, and presented return to guard with existing7/4/2/3/6 holds. Closes owner decision for this character-only sample.",
+      "observation_limit": "Owner gave approval only; no description or explicit statement of watching continuous playback. This records acceptance, not an invented playback session or agent perception."
+    },
+    "limits_before_owner_acceptance": [
+      "No owner/artistic temporal acceptance",
+      "No continuous perception established by this interface",
+      "No projectile, muzzleflash, sparks, effects, gameplay, audio, PAL or production",
+      "Global registry remains blocked by missing historical Social61v5 report; no historical report fabricated",
+      "SixImageGencalls and repeatedowner corrections mean this was not a one-pass predictable artistic route.",
+      "Materialregion automatedcontract remains pending; componentcheck passes, actual materialquality reviewed separately by independentstaticreview.",
+      "Reference PLTE changes unusedslots11/14/15; visibleindices/RGBA preserved, not wholePLTEidentity.",
+      "ManualQA case_0_frame.png is a pre-video still, not terminal; guard confirmed in rawframe129 and timeline102..129.",
+      "FutureFX will need independent art/budget/ROM proof; no headroom inferred at peak8."
+    ],
+    "current_limits": [
+      "Historical missing report still blocks global registry",
+      "No global curation/production/release approval",
+      "No projectile/FX/gameplay/audio/PAL",
+      "Owner approval gives no explicit observed-playback narrative; agent perception unestablished",
+      "SixImageGencalls and owner corrections remain in history; no one-pass artisticpredictability claim"
+    ]
+  }
+}

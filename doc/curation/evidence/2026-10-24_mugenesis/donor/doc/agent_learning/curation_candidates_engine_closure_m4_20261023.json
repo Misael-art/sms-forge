@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0.0",
+  "scope": "project_local_candidates",
+  "canonical_promotion_performed": false,
+  "candidates": [
+    {
+      "id": "m4e_001",
+      "title": "Preserve transform identity across generation and postprocess",
+      "owner": "tools/sgdk_wrapper/.agent/skills/code/sgdk-runtime-coder/SKILL.md",
+      "observation": "Geracao com fit nao deixava marcador compartilhado; postprocess podia aplicar escala novamente.",
+      "heuristic": "Persistir estado pending/applied e hashes; fresh-source regeneration e postprocess sao caminhos diferentes; provar on/off/repeat e falha parcial.",
+      "required_validation": "Positive/negative host fixtures; ROM when visual; exact hashes and declared scope.",
+      "evidence": "out/reviews/engine_closure_m4_20261023; tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_002",
+      "title": "Compile the generated translation unit to test ABI guards",
+      "owner": "tools/sgdk_wrapper/.agent/skills/code/sgdk-runtime-coder/SKILL.md",
+      "observation": "Guarda emitida so no header nao protegia C gerado que nao o incluia.",
+      "heuristic": "Gerado inclui seu proprio header; testar preprocessamento real com ABI errada e feature ausente.",
+      "required_validation": "Positive/negative host fixtures; ROM when visual; exact hashes and declared scope.",
+      "evidence": "out/reviews/engine_closure_m4_20261023; tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_003",
+      "title": "Transactional publication includes provenance and additive reports",
+      "owner": "tools/sgdk_wrapper/.agent/skills/operation/sgdk-build-wrapper-operator/SKILL.md",
+      "observation": "Escrever PNG/C primeiro e proveniencia depois deixava arvore hibrida; snapshot incompleto rejeitava repeticoes.",
+      "heuristic": "Stage de todos owners, esperado porhash, journal e rollback; recibos aditivos entram no snapshot esperado; leitorbuild congelado.",
+      "required_validation": "Positive/negative host fixtures; ROM when visual; exact hashes and declared scope.",
+      "evidence": "out/reviews/engine_closure_m4_20261023; tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_004",
+      "title": "Clock queued audio by age and preserve consumer classification",
+      "owner": "tools/sgdk_wrapper/.agent/skills/code/sgdk-runtime-coder/SKILL.md",
+      "observation": "Eventos antigos aguardavam canal indefinidamente; grupo0voz era regra universal indevida.",
+      "heuristic": "Expirar antesplay/admissao em VInts, contador separado; hook generico e adapter explicito; testar pause/wrap/mute.",
+      "required_validation": "Positive/negative host fixtures; ROM when visual; exact hashes and declared scope.",
+      "evidence": "out/reviews/engine_closure_m4_20261023; tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_005",
+      "title": "Validate integration hunks against the customized consumer",
+      "owner": "tools/sgdk_wrapper/.agent/skills/code/sgdk-code-reviewer/SKILL.md",
+      "observation": "Patch transposto por comentario nao inseriu macroTTL no header personalizado.",
+      "heuristic": "Compilar fixture com os dois runtimes reais e adapters; nao confiar em patch aplicado nem sobrescrever fork.",
+      "required_validation": "Positive/negative host fixtures; ROM when visual; exact hashes and declared scope.",
+      "evidence": "out/reviews/engine_closure_m4_20261023; tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_006",
+      "title": "Inspect pause readability in the emulator",
+      "owner": "tools/sgdk_wrapper/.agent/skills/operation/emulator-vdp-evidence-curator/SKILL.md",
+      "observation": "Textos em prioridade alta ainda se misturavam a roupa dos atores na pausa.",
+      "heuristic": "Hide de apresentacao invalida cache sem simular/liberar; provar restauro de todos owners; mensagensHUD tem owner separado.",
+      "required_validation": "Positive/negative host fixtures; ROM when visual; exact hashes and declared scope.",
+      "evidence": "out/reviews/engine_closure_m4_20261023; tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_007",
+      "title": "Inspect installed package identity outside checkout",
+      "owner": "tools/sgdk_wrapper/.agent/skills/operation/sgdk-build-wrapper-operator/SKILL.md",
+      "observation": "Wheel continha runtime mas inventario de toolchain procurava diretorio de sourcecheckout.",
+      "heuristic": "Testar install/verify/convert/recipe fora cwd semPillowbase e exigir hashes de todos C/h runtime no recibo instalado.",
+      "required_validation": "Positive/negative host fixtures; ROM when visual; exact hashes and declared scope.",
+      "evidence": "out/reviews/engine_closure_m4_20261023; tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_008",
+      "title": "Refused transform is an error before writes",
+      "owner": "tools/sgdk_wrapper/.agent/skills/architecture/scene-state-architect/SKILL.md",
+      "observation": "Recipe ignorava status refused do fit e publicava roster prepared sem escala pedida.",
+      "heuristic": "Validar decisao no contratoentrada antes instalar; negativos devem preservar arvore completa, nao so mensagemerro.",
+      "required_validation": "Positive/negative host fixtures; ROM when visual; exact hashes and declared scope.",
+      "evidence": "out/reviews/engine_closure_m4_20261023; tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_009",
+      "title": "Exercise real indexed asset branches in the installed package",
+      "owner": "tools/sgdk_wrapper/.agent/skills/operation/sgdk-build-wrapper-operator/SKILL.md",
+      "observation": "Wheel sintetico aprovado nao acionou autoria de retrato indexado; pacote real revelou dependencia de caminho do checkout.",
+      "heuristic": "Rodar pacote real fora do checkout, incluindo paleta local/embedded e retrato; distribuir oraculo canonico exato com hash e self-check, sem duplicar matematica.",
+      "required_validation": "Installed wheel negative missing/tampered resource, source distribution rebuild, actual package recipe and exact ROM build.",
+      "evidence": "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/final_package_r2/review.json; out/reviews/engine_closure_m4_20261023/backlog.json",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_010",
+      "title": "Calibrate logical controls against game state before attributing a regression",
+      "owner": "tools/sgdk_wrapper/.agent/skills/operation/emulator-vdp-evidence-curator/SKILL.md",
+      "observation": "Transporte SDL confirmou dispositivo1, mas RAM mostrava joyState[1] e P1zerado; a tela de confronto so responde aP1.",
+      "heuristic": "Calibrar ambos dispositivos com ROM/simbolos/hash exatos e estado observado; conservar controle negativo e nao mudar produto por ACKdo transporte.",
+      "required_validation": "Same ROM/source hash, positive/negative native state readings and observed screenshots.",
+      "evidence": "out/reviews/engine_closure_m4_20261023/native_input/readings.json; native_input/device2_reading.json",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m4e_011",
+      "title": "Make a final neutral interval an explicit scheduled input step",
+      "owner": "tools/sgdk_wrapper/.agent/skills/operation/emulator-vdp-evidence-curator/SKILL.md",
+      "observation": "seq so aguarda o ultimo evento; wait do ultimo item nao vira evento. Captura aposultimo release podia pegar transicao/redraw.",
+      "heuristic": "Adicionar sentinel neutro depois da janela de espera, registrar framesaplicados e conferir estado estavel antes de promover uma captura.",
+      "required_validation": "Same ROM/source hash, positive/negative native state readings and observed screenshots.",
+      "evidence": "out/reviews/engine_closure_m4_20261023/r4_timing_plan_evidence.json",
+      "status": "not_applied",
+      "canonical_promotion": false
+    }
+  ]
+}

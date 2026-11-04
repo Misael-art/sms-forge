@@ -1,0 +1,139 @@
+{
+  "schema": "sms_art_temporal_review_v1",
+  "producer": "/root",
+  "subjects": {
+    "source": {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+      "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+    },
+    "rom": {
+      "path": "out/candidates/jj_zillion_single_shot_v5_right/rom/master_of_fighters.sms",
+      "sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4"
+    }
+  },
+  "sequence": {
+    "expected_ids": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05"
+    ],
+    "actual_ids": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05"
+    ],
+    "duration_ticks": [
+      7,
+      4,
+      2,
+      3,
+      6
+    ],
+    "tick_definition": "NTSC VDP presentations, nominal60Hz; proposed holds, not accepted frame-data.",
+    "expected_terminal": "original_guard_I00",
+    "terminal": "original_guard_I00"
+  },
+  "observations": [
+    {
+      "id": "static_source",
+      "target": "source",
+      "subject_sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b",
+      "method": "framewise",
+      "reviewer": "/root/jj_shot_art_review",
+      "report": {
+        "path": "doc/jj_zillion_proportion_no_fx_independent_addendum_v6.json",
+        "sha256": "8678d6ccf58288dcac9e842e0a04c3fd1dc617c1c8fe987db7830c74f5e9bbeb"
+      },
+      "media": {
+        "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+        "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+      },
+      "scope": "v6 single-point addendum plus unchanged v5 static judgments; no playback perception."
+    },
+    {
+      "id": "measured_exposures",
+      "target": "rom",
+      "subject_sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4",
+      "method": "timeline",
+      "reviewer": "/root",
+      "report": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/pixel_timeline_analysis.json",
+        "sha256": "24d26afc0ff220a3c373bdac5a8e65d5f9a658b7edad968a8d7ed299059f4197"
+      },
+      "media": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/jj_character_realtime.mp4",
+        "sha256": "4dec4b3ec93b463a004029790067271934ca783a60b62c5439187089b6ee1505"
+      },
+      "rom_sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4",
+      "session_id": "5f94496d541d4b8ea7656756cd63acd8",
+      "scope": "480 exact native RGB frames, order/exposures/guard only; no continuous perception claim."
+    },
+    {
+      "id": "ROM_pixels",
+      "target": "rom",
+      "subject_sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4",
+      "method": "rom_framewise",
+      "reviewer": "/root",
+      "report": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/pixel_timeline_analysis.json",
+        "sha256": "24d26afc0ff220a3c373bdac5a8e65d5f9a658b7edad968a8d7ed299059f4197"
+      },
+      "media": {
+        "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/jj_character_realtime.mp4",
+        "sha256": "4dec4b3ec93b463a004029790067271934ca783a60b62c5439187089b6ee1505"
+      },
+      "rom_sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4",
+      "session_id": "5f94496d541d4b8ea7656756cd63acd8",
+      "scope": "480 exact native RGB frames, order/exposures/guard only; no continuous perception claim."
+    }
+  ],
+  "axes": {
+    "image_inspection": {
+      "status": "pass",
+      "note": "Independent source5 static review and source6 single-point repair addendum.",
+      "observation_ids": [
+        "static_source"
+      ]
+    },
+    "frame_analysis": {
+      "status": "pass",
+      "note": "Six poses preserved; one orphan removed. Static continuity only.",
+      "observation_ids": [
+        "static_source"
+      ]
+    },
+    "order_exposure": {
+      "status": "pass",
+      "note": "Native realtime480frames and independent260frames prove order and proposed holds.",
+      "observation_ids": [
+        "measured_exposures"
+      ]
+    },
+    "continuous_motion": {
+      "status": "needs_evidence",
+      "note": "This interface does not establish perceived continuous playback; owner checkpoint supplied.",
+      "observation_ids": []
+    },
+    "rom_presentation": {
+      "status": "pass",
+      "note": "Exact native frames in current rightROM; left/right independentQA also pass.",
+      "observation_ids": [
+        "ROM_pixels"
+      ]
+    },
+    "owner_acceptance": {
+      "status": "needs_evidence",
+      "note": "No owner approval of corrected concept/source or motion yet.",
+      "observation_ids": []
+    }
+  },
+  "continuous_playback_perceived_by_this_agent": false,
+  "observed_defect": null,
+  "next_decision": "keep_control",
+  "owner_request": "Conferir proporção/forma da Zillion no concept e nas seis poses; assistir vídeo real normal e informar se aceita a correção e o retorno à guarda.",
+  "scope": "Character only, no projectile/FX/combat/audio/PAL/production or global curation approval."
+}

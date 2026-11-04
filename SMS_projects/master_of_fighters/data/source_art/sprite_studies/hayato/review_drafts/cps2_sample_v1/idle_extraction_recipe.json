@@ -1,0 +1,46 @@
+{
+  "source": "idle_generated_raw.png",
+  "source_sha256": "b29d7f69ba94dcdfa3d8ca7b06b38406b8014a8681c6ecfe8fa8109d82c95433",
+  "raw_size": [
+    1254,
+    1254
+  ],
+  "scale": [
+    1,
+    10
+  ],
+  "alpha_threshold": 128,
+  "canvas": [
+    144,
+    144
+  ],
+  "pivot": [
+    68,
+    128
+  ],
+  "source_colors": 32,
+  "sheet_columns": 1,
+  "sheet_filename": "idle_source.png",
+  "frames": [
+    {
+      "id": "idle",
+      "rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "cell_origin": [
+        0,
+        0
+      ],
+      "raw_pivot": [
+        627,
+        1177
+      ]
+    }
+  ],
+  "notes": [
+    "Actual tool returned1254square instead of requested1152; dimensions measured before extraction. Single nearest1/10 raster translation, source body not normalized to target height. Threshold128 is declared mechanical alpha binarization, not contour repair. Native raster and source palette still require visual review."
+  ]
+}

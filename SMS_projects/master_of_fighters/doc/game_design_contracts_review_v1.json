@@ -1,0 +1,176 @@
+{
+  "schema": "mof_game_design_contract_review_v1",
+  "date": "2026-11-01",
+  "status": "documented_with_explicit_pending_interactions",
+  "scope": "Character identity, authorized movement experience, existing scenes; no runtime/art/moveset promotion.",
+  "authority": {
+    "memory": "doc/10-memory-bank.md",
+    "design": "doc/11-gdd.md",
+    "scene_contracts": "doc/13-spec-cenas.md",
+    "script": "doc/12-roteiro.md",
+    "technical_interface": "doc/15-tdd.md",
+    "social_moves": "doc/dr_social_combat_design_proposal_v1.md",
+    "jj": "doc/jj/jj_character_design.md"
+  },
+  "rom": {
+    "path": "out/diagnostics/game_design_contracts_20261101/qa/rom.sms",
+    "sha256": "90ea0f98febf4e047e6ca4637af1c454dd9ac7971e5b0bd00fec058c5ebf2405",
+    "bytes": 32768
+  },
+  "native_dispatch": {
+    "path": "out/diagnostics/game_design_contracts_20261101/native_dispatch.json",
+    "sha256": "216ab1a4e8b77d90f35ebe0b64e0bcb7069445d1760c29d2e1c8da113d598658",
+    "bytes": 501
+  },
+  "session_id": "d4d91c97840f45d1b46f85dab83e6db6",
+  "session_closed": true,
+  "qa_report": {
+    "path": "out/diagnostics/game_design_contracts_20261101/qa/run_8bd9c1a8e4064222ad58f195847c3033/report.json",
+    "sha256": "e1b8187ca1c0ee39547dafc6d6f583fb718699f7a8d89736c2f9a7981dd75e81",
+    "bytes": 9949
+  },
+  "frame_comparison": {
+    "path": "out/diagnostics/game_design_contracts_20261101/qa/run_8bd9c1a8e4064222ad58f195847c3033/frame_comparison.json",
+    "sha256": "2140fed85a05179a68f53653922b621662c72bd188c16ed5949462927307acc9",
+    "bytes": 5217
+  },
+  "input_journal": {
+    "path": "out/diagnostics/game_design_contracts_20261101/qa/run_8bd9c1a8e4064222ad58f195847c3033/commands.jsonl",
+    "sha256": "bda6e85717e59ee203fcabedfeb7e5822ea62853d1679b5a0a1334c52ea3500e",
+    "bytes": 127802
+  },
+  "video": {
+    "path": "out/diagnostics/game_design_contracts_20261101/qa/run_8bd9c1a8e4064222ad58f195847c3033/case_0.mp4",
+    "sha256": "293de288b722bbd205af41d27f60786d4589db5f3bdc763bd1787e41c0361975",
+    "bytes": 38624
+  },
+  "terminal": {
+    "path": "out/diagnostics/game_design_contracts_20261101/qa/run_8bd9c1a8e4064222ad58f195847c3033/case_1_probe.json",
+    "sha256": "c53a0d9e6a07e01d5e974368cf9af5870ff4016d3d32e4a3c60caf987f01102f",
+    "bytes": 667
+  },
+  "cleanup": {
+    "path": "out/diagnostics/game_design_contracts_20261101/qa/run_8bd9c1a8e4064222ad58f195847c3033/cleanup_confirmation.json",
+    "sha256": "a9aeba9e5bd03aeab507fe6f813b8213703bcb6ec7bcef2ea531fb071af445a3",
+    "bytes": 566
+  },
+  "audit": {
+    "path": "out/diagnostics/game_design_contracts_20261101/qa/run_8bd9c1a8e4064222ad58f195847c3033/audit_report.json",
+    "sha256": "f207bb01798c64e779c73047203babd26d559d38a491f50efb2b779987fed292",
+    "bytes": 635
+  },
+  "documentation_validation": {
+    "path": "out/diagnostics/game_design_contracts_20261101/document_validation.json",
+    "sha256": "b7ac472a81270f3d5233c5b3b09444ed3daf625d0dec9dc60178f9cf614a4c79",
+    "bytes": 276
+  },
+  "observed": {
+    "cases_passed": 2,
+    "native_rgb_frames_exact": 174,
+    "manual_actions": 2,
+    "pose_holds": [
+      7,
+      4,
+      2,
+      3,
+      6
+    ],
+    "guard_video_intervals_inclusive_zero_based": [
+      [
+        102,
+        131
+      ],
+      [
+        154,
+        173
+      ]
+    ],
+    "input_bridge_vdp_frames": [
+      198,
+      250
+    ],
+    "first_visible_preparation_vdp_frames": [
+      201,
+      253
+    ],
+    "latency_limit": "Three bridge-to-image VDP advances, not accepted-ROM-input latency or wall time.",
+    "initial_autoplay": "indices 1..22 preserved separately; no manual claim"
+  },
+  "classification": {
+    "document_defects_fixed": [
+      "scene numbering ambiguity",
+      "JJ stale weapon/body-scale authority",
+      "missing experience contracts"
+    ],
+    "observed_runtime_defects_in_assigned_cases": [],
+    "risks": [
+      "static life bars and idle opponent cannot demonstrate combat consequence",
+      "fixed-position peak8/line provides no measured margin for projectile/contact",
+      "unapproved draft moves conflict with approved equipment"
+    ],
+    "taste_findings": []
+  },
+  "pending": [
+    {
+      "id": "GD01",
+      "owner": "owner+design",
+      "question": "two-button layout, guard, cancel/buffer/edges"
+    },
+    {
+      "id": "GD02",
+      "owner": "owner+design+engineering",
+      "question": "life/damage/chip/hitstop/recovery and Super economy; hit/block/whiff measurement"
+    },
+    {
+      "id": "GD03",
+      "owner": "owner",
+      "question": "individual movesets, Joe identity/source, Dark Force incarnation/source"
+    },
+    {
+      "id": "GD04",
+      "owner": "owner+design",
+      "question": "draw/time-over/continue/progression/unlock and persistence"
+    },
+    {
+      "id": "GD05",
+      "owner": "engineering",
+      "question": "official consumer combat integration and opponent consequence"
+    },
+    {
+      "id": "GD06",
+      "owner": "art+engineering",
+      "question": "simultaneous pair/contact/HUD/object/PSG budget and worst-frame"
+    },
+    {
+      "id": "GD07",
+      "owner": "design+QA",
+      "question": "human understanding and response playtest"
+    }
+  ],
+  "not_validated": [
+    "selection",
+    "movement and collision",
+    "hit/block/whiff",
+    "rounds and arcade",
+    "Super",
+    "continuous playback perception",
+    "FPS floor58 on current ROM",
+    "worst-frame on current ROM",
+    "audio",
+    "production visual delivery",
+    "market acceptance"
+  ],
+  "owner_approvals": "Existing Hayato/JJ decisions preserved; no new acceptance inferred. Social combat direction approved separately from art/balance.",
+  "retention": {
+    "path": "out/diagnostics/game_design_contracts_20261101/game_design_contracts_20261101_evidence.zip",
+    "sha256": "9e66c6650d076e9e059e27173330c1679bd4b29f76ff5ed11969412f85144eb4",
+    "bytes": 760470,
+    "payload_files": 234,
+    "payload_bytes": 1520829,
+    "manifest_verified": true,
+    "recovery_location": "existing local project-recovery/SMSForge/artifacts/game_design_contracts_20261101_evidence.zip",
+    "copy_sha256_verified": true,
+    "scope": "Two copies on the same host/disk. Not offhost backup, public assets or release."
+  },
+  "publication_receipt": "out/diagnostics/game_design_contracts_20261101/publication.json"
+}

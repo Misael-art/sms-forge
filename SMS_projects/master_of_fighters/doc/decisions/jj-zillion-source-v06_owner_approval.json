@@ -1,0 +1,32 @@
+{
+  "schema": "sms_artifact_decision_v1",
+  "artifact_id": "jj-zillion-single-shot-source-v06",
+  "scope": "animation_source",
+  "decision": "approved",
+  "actor_role": "owner",
+  "actor": "project_owner",
+  "source_note": "Direct owner message aprovado; see doc/decisions/jj-zillion-character_owner_approval.json.",
+  "approval_scope": "Selected final artwork only, bound to all files for lineage consistency. Raw generations, recipes, discarded intermediate and references are provenance, not independent aesthetic approval. Six-pose source selection uses existing7/4/2/3/6; no effects/objects or production/release.",
+  "files": [
+    {
+      "role": "image",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+      "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+    },
+    {
+      "role": "idle_pose",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/native/I00.png",
+      "sha256": "0c5df990c1d35949dbd4256f848a9782d94050355939903f85a1538c68451f70"
+    },
+    {
+      "role": "assembly",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/source_assembly.json",
+      "sha256": "fb22604e9aa621fd8edbaa7c28baf67a5e6b6f81d51fed8f267f8cb3fe2ab66b"
+    },
+    {
+      "role": "script",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/assemble.py",
+      "sha256": "4c138b3c72f4258f2178993e697a4fcf4dc2a0e48520f8e3d65c836094da2b94"
+    }
+  ]
+}

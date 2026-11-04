@@ -1,0 +1,45 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "dr-social-cps2-v4-face-delta",
+  "stage": "pre_growth",
+  "producer": "/root",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "scope": "Independent review of v4 attempted face-only repair against v3: native spectacle improvement, and unintended drawing changes/invariants. V4 extracted with inherited104/474 registration; pixel/alpha delta measured outside a geometric head screen, not semantic mask. Inspect all6frames at native and nearest magnification. Producer did NOT select v4 over observed v3. Distinguish actual facial defects from taste. J04 contact deliberately unchanged. No conversion/ROM/playback/FPS or AAA claims; max3 concrete priorities. A v5 aligned-native input experiment is in progress but NOT part of this request.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_source.png",
+      "sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_source.png",
+      "sha256": "edc9de375cfb12e036c3bb037c9bdefaf2fffabe267df43374c51b69d817bfc5"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_metadata.json",
+      "sha256": "a1101b5b48a4a07042e0bd04f88e959f23a21020dafdc9c2f61841ff46a2d8fd"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v4/source_delta.json",
+      "sha256": "18853d711d8e51b30525479b6c9597af6855e22c89e12d805507e865ebfc17a0"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v4/source_and_faces_comparison.png",
+      "sha256": "8aa6712c4303b030cd9d12a06a5b0cedd9124d62a3d0855b29d3c8eb1f836835"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_art_checklist_v4.json",
+      "sha256": "fffe2adde1d33df4639296866bdcba135a09a700128a0139f726e0f57cb3791c"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v2.json",
+      "sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+    }
+  ]
+}

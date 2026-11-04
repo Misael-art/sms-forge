@@ -1,0 +1,240 @@
+{
+  "schema": "sms_authored_source_assembly_v1",
+  "parent_source_id": "jj-zillion-single-shot-source-v03",
+  "frame_ids": [
+    "I00",
+    "A01",
+    "A02",
+    "A03"
+  ],
+  "inputs": [
+    {
+      "path": "../zillion_single_shot_v3/native/I00.png",
+      "sha256": "d5d44be9f7f3e1d576b779d80ae4e031563603e258ec5b4474a49f1b9fdcacac"
+    },
+    {
+      "path": "../zillion_single_shot_v3/native/S01.png",
+      "sha256": "8fd453c8266905e9624d73ab229e23486abf1d4b283f8e8e56bae5555e9efea9"
+    },
+    {
+      "path": "../zillion_single_shot_v3/native/S03.png",
+      "sha256": "a78f181b0a70a418799a8bf4a258f7f9bcdcd873b041995221042289ef6430b6"
+    },
+    {
+      "path": "../zillion_single_shot_v3/native/S04.png",
+      "sha256": "881febef2f68acafc226fb02d438c20904b6e33663f7582957e332202f72c4a4"
+    },
+    {
+      "path": "../zillion_single_shot_v3/native/S05.png",
+      "sha256": "1be306623f394d19bcd978420437e96d4eee29ae7bd470ad3594b58d21a57d79"
+    }
+  ],
+  "body_inputs": {
+    "I00": "../zillion_single_shot_v3/native/I00.png",
+    "A01": "../zillion_single_shot_v3/native/S01.png",
+    "A02": "../zillion_single_shot_v3/native/S04.png",
+    "A03": "../zillion_single_shot_v3/native/S05.png"
+  },
+  "emission": {
+    "source": "../zillion_single_shot_v3/native/S03.png",
+    "rect_px": [
+      135,
+      51,
+      146,
+      55
+    ],
+    "size_px": [
+      4,
+      3
+    ],
+    "position_px": [
+      134,
+      50
+    ],
+    "lifetime": "A02only3ticks proposed",
+    "rationale": "Separate finite emission element. Muzzleedge atx132,y50..52; pulse startsx134,y50. No overwrite of completegun/body. Sourcecomponent11x4is mechanically reduced4x3 to declared emitter size, not projectile flight or weapon deformation."
+  },
+  "material_palette": [
+    {
+      "source_index": 1,
+      "role": "deep_contour",
+      "source_rgb": [
+        10,
+        8,
+        24
+      ],
+      "sms_code": 0
+    },
+    {
+      "source_index": 2,
+      "role": "navy_contour_harness",
+      "source_rgb": [
+        0,
+        0,
+        68
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 3,
+      "role": "cloth_dark",
+      "source_rgb": [
+        125,
+        0,
+        45
+      ],
+      "sms_code": 1
+    },
+    {
+      "source_index": 4,
+      "role": "cloth_shadow",
+      "source_rgb": [
+        180,
+        0,
+        65
+      ],
+      "sms_code": 18
+    },
+    {
+      "source_index": 5,
+      "role": "cloth_base",
+      "source_rgb": [
+        245,
+        0,
+        90
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 6,
+      "role": "cloth_light",
+      "source_rgb": [
+        255,
+        75,
+        135
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 7,
+      "role": "hair_dark",
+      "source_rgb": [
+        15,
+        15,
+        125
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 8,
+      "role": "hair_blue",
+      "source_rgb": [
+        20,
+        35,
+        220
+      ],
+      "sms_code": 48
+    },
+    {
+      "source_index": 9,
+      "role": "hair_highlight",
+      "source_rgb": [
+        105,
+        125,
+        250
+      ],
+      "sms_code": 56
+    },
+    {
+      "source_index": 10,
+      "role": "armor_white",
+      "source_rgb": [
+        250,
+        250,
+        255
+      ],
+      "sms_code": 63
+    },
+    {
+      "source_index": 11,
+      "role": "armor_shadow",
+      "source_rgb": [
+        170,
+        175,
+        205
+      ],
+      "sms_code": 42
+    },
+    {
+      "source_index": 12,
+      "role": "armor_deep",
+      "source_rgb": [
+        90,
+        95,
+        150
+      ],
+      "sms_code": 21
+    },
+    {
+      "source_index": 13,
+      "role": "skin_light",
+      "source_rgb": [
+        255,
+        190,
+        150
+      ],
+      "sms_code": 47
+    },
+    {
+      "source_index": 14,
+      "role": "skin_base",
+      "source_rgb": [
+        250,
+        150,
+        100
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 15,
+      "role": "skin_shadow",
+      "source_rgb": [
+        160,
+        80,
+        60
+      ],
+      "sms_code": 22
+    },
+    {
+      "source_index": 16,
+      "role": "pistol_orange_inset",
+      "source_rgb": [
+        255,
+        100,
+        15
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 17,
+      "role": "pistol_dark_orange",
+      "source_rgb": [
+        170,
+        85,
+        0
+      ],
+      "sms_code": 11
+    },
+    {
+      "source_index": 18,
+      "role": "laser_cyan",
+      "source_rgb": [
+        0,
+        220,
+        255
+      ],
+      "sms_code": 56
+    }
+  ],
+  "scope": "Mechanical source composition of ImageGen-authored elements, body/weapon matrices unchanged. No novel pixel color/shape painted by code; source art still requires independent and owner review."
+}

@@ -1,0 +1,194 @@
+[
+  {
+    "track": "vdp_tiles",
+    "technique": "V01 grid_8x8",
+    "previous_level": "default_senior",
+    "previous_evidence": "provena em toda cena (grid 8x8)"
+  },
+  {
+    "track": "vdp_tiles",
+    "technique": "V02 metatile_16x16",
+    "previous_level": "incorporada",
+    "previous_evidence": "cena02 bloco 2x2 via tiles"
+  },
+  {
+    "track": "vdp_tiles",
+    "technique": "V03 scroll_xy",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "cena04 scroll BG horizontal"
+  },
+  {
+    "track": "vdp_tiles",
+    "technique": "V06 backdrop_fade",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "cena02 fade do backdrop"
+  },
+  {
+    "track": "vdp_tiles",
+    "technique": "V08 pnt_entrada_16bit_flags",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "probe SMS_projects/_laboratorio/pnt_16bit (L069): ROM eaa8e8305086b06b, framebuffer 256x192 pnt_capture2.mp4 2542169750c4dc3b; flipX/flipY/sprite-palette/tile-300 PASS em 4/4 frames (out/evidence/pnt_16bit_verdict.json)"
+  },
+  {
+    "track": "sprites",
+    "technique": "S01 sat_64_terminador",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "probe L006 + cena04"
+  },
+  {
+    "track": "sprites",
+    "technique": "S02 max_8_por_scanline",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "gate audit_sprite_line_sim.py"
+  },
+  {
+    "track": "sprites",
+    "technique": "S03 tamanho_8x8_16x16",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "SPRITEMODE_NORMAL 8x8 (L006); 16x16 via metasprite"
+  },
+  {
+    "track": "sprites",
+    "technique": "S04 metasprite",
+    "previous_level": "incorporada",
+    "previous_evidence": "hero_tiles 16x16 em cena02"
+  },
+  {
+    "track": "sprites",
+    "technique": "S05 x_sem_offset_32",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "probe _laboratorio/early_clock (2026-09-01): X=0 e X=16 VISIVEIS na borda esquerda, X=100 aparece 1:1 (shift_off.png). REFUTA a hipotese 'X armazenado = X+32 / X<32 esconde' — era heranca do Mega Drive (L001)"
+  },
+  {
+    "track": "sprites",
+    "technique": "S06 shift_sprites_8px",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "probe _laboratorio/early_clock (2026-09-01): VDPFEATURE_SHIFTSPRITES (reg0 bit3) desloca 8px a esquerda — marcador medido 114->106; o de X=0 sai da tela (shift_on.png). REFUTA a hipotese '32px'"
+  },
+  {
+    "track": "paleta",
+    "technique": "P01 duas_subpaletas",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "paleta BG+sprite carregada"
+  },
+  {
+    "track": "paleta",
+    "technique": "P02 codigo_6bit",
+    "previous_level": "default_senior",
+    "previous_evidence": "paleta mestra fixa; gate"
+  },
+  {
+    "track": "paleta",
+    "technique": "P03 contraste_luma",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "gate audit_luma_floor.py"
+  },
+  {
+    "track": "paleta",
+    "technique": "P05 cycle_paleta_vblank",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "fade do backdrop"
+  },
+  {
+    "track": "vram_vblank",
+    "technique": "M01 escritas_no_vblank",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "todas escritas dentro do VBlank; fps 59.3"
+  },
+  {
+    "track": "vram_vblank",
+    "technique": "M02 orcamento_worstframe",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "42B medido cena02"
+  },
+  {
+    "track": "vram_vblank",
+    "technique": "M03 layout_vram_fixo",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "tiles 128-132 fixos"
+  },
+  {
+    "track": "z80_sdcc",
+    "technique": "Z01 int_16bit",
+    "previous_level": "default_senior",
+    "previous_evidence": "gotchas SMS"
+  },
+  {
+    "track": "z80_sdcc",
+    "technique": "Z02 mult_div_caras",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "movimento 1 cel/frame"
+  },
+  {
+    "track": "z80_sdcc",
+    "technique": "Z03 float_proibido",
+    "previous_level": "default_senior",
+    "previous_evidence": "regra SMS_GLOBAL"
+  },
+  {
+    "track": "z80_sdcc",
+    "technique": "Z04 sem_malloc",
+    "previous_level": "default_senior",
+    "previous_evidence": "buffers fixos; RAM 8KB"
+  },
+  {
+    "track": "z80_sdcc",
+    "technique": "Z05 fastcall_callee",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "limits de args do SDCC"
+  },
+  {
+    "track": "z80_sdcc",
+    "technique": "Z07 isr_nmi_curta",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "pause via NMI"
+  },
+  {
+    "track": "banking",
+    "technique": "B01 48kb_linear",
+    "previous_level": "default_senior",
+    "previous_evidence": "ROM 16KB atual"
+  },
+  {
+    "track": "banking",
+    "technique": "B03 header_sega",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "TMR SEGA @0x3ff0"
+  },
+  {
+    "track": "audio",
+    "technique": "A01 psg_3tone_noise",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "audio_psg.wav 100%"
+  },
+  {
+    "track": "audio",
+    "technique": "A02 arbitracao_canais",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "musica battle 4 canais"
+  },
+  {
+    "track": "audio",
+    "technique": "A05 update_audio_frame",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "PSGFrame por vblank"
+  },
+  {
+    "track": "input_timing",
+    "technique": "I01 joypad_dc_dd",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "d-pad move sprite"
+  },
+  {
+    "track": "input_timing",
+    "technique": "I02 pause_nmi",
+    "previous_level": "reproduzivel",
+    "previous_evidence": "KEY_1 reinicia"
+  },
+  {
+    "track": "input_timing",
+    "technique": "I04 frame_counter",
+    "previous_level": "emulador_provado",
+    "previous_evidence": "F:xxxx na tela; fps 59.3"
+  }
+]

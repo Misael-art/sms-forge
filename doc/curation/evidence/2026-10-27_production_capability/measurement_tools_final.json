@@ -1,0 +1,381 @@
+{
+  "tools": [
+    {
+      "tool": "artifact_registry.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_animation_contract.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_animation_semantics.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_art_review_checklist.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_asset_proof_sheet.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_audio.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_audio_provenance.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_blastem_sms.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_causal_persistence.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_claims.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_composition_gate.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_counter_window.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_debug_markers.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_deterministic_boot.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_doc_sync.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_hardware_constants.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_header_claims.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_hscroll_blank.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_import_semantics.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_learning_capture.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_luma_floor.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_mastery_registry.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_meaningful_change.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_mugen_engine_contract.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_observed_cases.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_placeholder_quarantine.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_probe_corridor.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_provenance.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_psg_channel_binding.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_psg_quality.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_psg_redundancy.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_reference_boundary.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_render_fidelity.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_render_glitch.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_rom_asset_binding.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_roster_harmony.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_silhouette_integrity.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_sole_alignment.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_source_raster.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_specialization.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_sprite_cutout.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_sprite_line_sim.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_sprite_mode.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_stage_attribution.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_subagent_session.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_symbol_size_sync.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_tilemap_bounds.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_tilemap_mirror.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_validate_resources.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_visual_delivery.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "audit_vscroll_wrap.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "blastem_diagnostics.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "blastem_dump_diff.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "blastem_maintenance.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "blastem_sms.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "canonical_fixture_gate.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "capture_audio.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "capture_evidence.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "capture_video.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "emulator_input.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "harness_orchestration.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "measure_fps.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "measure_frame_advance.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "measure_runtime_probe.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "measure_vram_map.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "measure_worst_frame.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "mugen2sms/analysis/scale_pilot.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "mugen2sms/analysis/trace_compare.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "mugen2sms/runtime/commit_budget.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "mugen2sms/runtime/vram_plan.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "prepare_sms_pixel_art.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "quality_review_router.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "reconcile_claims.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "screenshot_semantic_gate.py",
+      "declares_self_check": true,
+      "passes": true
+    },
+    {
+      "tool": "seal_fresh_evidence_bundle.py",
+      "declares_self_check": true,
+      "passes": true
+    }
+  ],
+  "problems": [],
+  "all_proven": true
+}

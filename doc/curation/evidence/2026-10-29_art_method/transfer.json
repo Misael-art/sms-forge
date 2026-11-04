@@ -1,0 +1,197 @@
+{
+  "scope": "archived custody + deterministic data replay, not fresh ROM QA or new art acceptance",
+  "adapter": {
+    "path": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+    "sha256": "c4a9a6059b9fea46709e7901c509f28c212411c59a0a97f0b75d780867972610"
+  },
+  "cases": [
+    {
+      "case": "social",
+      "config": {
+        "path": "SMS_projects/master_of_fighters/.mddev/dr_social_cps2_sample_v8.json",
+        "sha256": "15b836e264411a92f22667a1603798c67b7ffb17a2c726dccd11a8571da2f5f9"
+      },
+      "exact_outputs": [
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/J01.png",
+          "sha256": "98cb888a808b865e384a058a6f1c740827fd9759dd5af393a7253ba6912d0360"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/J02.png",
+          "sha256": "208c0c943772a291a09ca575dc5f0927c3e3136af9c7543a161936f8f3fe2621"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/J03.png",
+          "sha256": "9e3e156d3aa5db6955796ac369e70b67e43d0f66cc2daaf8fcc379c6dc9ea065"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/J04.png",
+          "sha256": "7c1d02f9fc40a4949ce29e96cd25874cfd15883cf58db05e06928a370bf78506"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/J05.png",
+          "sha256": "da3a2ae7ff572794799a35990eb6673c87c4b3f3066c15e1ccc2474baff83153"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/J06.png",
+          "sha256": "1bb4ebdd3d431a69d6199fe4aacfcbb13d73638885701e8c9f12173414bdd191"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/idle.png",
+          "sha256": "98cb888a808b865e384a058a6f1c740827fd9759dd5af393a7253ba6912d0360"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/reference.png",
+          "sha256": "0d92d7daed0a374ee11e81d272459e002b7a3b2d6630f293d549729e57be2d59"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/sample_data.h",
+          "sha256": "9d616d31160acf52b8149ca954aa641a65dabd9d6eda5c506e82778d99decaba"
+        }
+      ],
+      "patterns": 220,
+      "max_sat": 34,
+      "max_scanline": 8
+    },
+    {
+      "case": "hayato_left",
+      "config": {
+        "path": "SMS_projects/master_of_fighters/.mddev/hayato_short_cut_body_sequence_v4_left.json",
+        "sha256": "91faa3a55eeebc92b1890cc8d5caae152d13aba91f19caa1f6df330bc730775c"
+      },
+      "exact_outputs": [
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/R01.png",
+          "sha256": "a7dda4933ac6b70fdaf86e4c18aa588d7bff8c8c23f560d4f6ee67f562329fa2"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/R02.png",
+          "sha256": "c3e18395bef54317364f172a9eb606857698e83b12915a0fe63c847842e5131b"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/R03.png",
+          "sha256": "5aa65e7e1d0a2e5b2e47d02c4e3b8177175356904175ad884f898dd3db07bdb1"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/R04.png",
+          "sha256": "170e3990c8ba5b0d8dafab08c2a92a33f86f72514632b306620e97535b528255"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/R05.png",
+          "sha256": "b97f5abea8784f759143600ef567e8f3f16502499f84b4a51d322c04e50e3a8e"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/R06.png",
+          "sha256": "c846d2b53123ebbe09e41a1e6ce412de5769b36571a9aa3c8ec80e21267f8d0e"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/idle.png",
+          "sha256": "b34e97ea6585939ebe5f867098b69163dc62a2c26c5b33ef7e2d011231a6e1ee"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/reference.png",
+          "sha256": "24d4f438faff9fccc289b5a15393bb43ca74f2b3439a64cc3a23f091d9488c56"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_left/sample_data.h",
+          "sha256": "5f94fe81474496933b7cf7404bbf4171500f3d16105e49ca2d7a7fd777436349"
+        }
+      ],
+      "patterns": 219,
+      "max_sat": 53,
+      "max_scanline": 8
+    },
+    {
+      "case": "hayato_right",
+      "config": {
+        "path": "SMS_projects/master_of_fighters/.mddev/hayato_short_cut_body_sequence_v4_right.json",
+        "sha256": "3505574860a79c111ca9d831eb48b202bd6eb2ef3b7a0afc1637cc49f1be9125"
+      },
+      "exact_outputs": [
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R01.png",
+          "sha256": "da69dddedd7b0fd590826f328c5c9b17a38f6ac9f752019c89e85df0a9e9a732"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R02.png",
+          "sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R03.png",
+          "sha256": "d9c684f446e97dd781f7bb93fe3fcc061fa9de5e8aa6cd3d5a22963b274fc885"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R04.png",
+          "sha256": "2b30982d972700a43c5113d27ed85c7b657e98a130d794b74fa6f7b179f496b2"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R05.png",
+          "sha256": "7c0e6127bed939673c2d9d2898ae9c5d8e13d6899d817a05deb36d4cea8fa85c"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R06.png",
+          "sha256": "9c2682373635b09f6a18b81e2fc9820b4028a4d6ebb68acb84aee3af6e6fcb0d"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/idle.png",
+          "sha256": "360c7c880128fd54006a8fd2dd510ab173a5b2f1cfa7d698e51c23ad80926647"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/reference.png",
+          "sha256": "76c366bf055aa31d8c0fc7211a8e9ee04436da687eacd020b9e7bd982278319b"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/sample_data.h",
+          "sha256": "b20b546612acd30713f5dc0fbf1304ffda1dbc16afc9bd14274b94f37c281071"
+        }
+      ],
+      "patterns": 219,
+      "max_sat": 53,
+      "max_scanline": 8
+    },
+    {
+      "case": "hayato_static_as_temporal_negative",
+      "problems": [
+        "continuous_motion: observation method cannot support this verdict"
+      ],
+      "control_type": "mutated declaration only; actual review unchanged"
+    },
+    {
+      "case": "social_static_as_temporal_negative",
+      "problems": [
+        "continuous_motion: observation method cannot support this verdict"
+      ],
+      "control_type": "mutated declaration only; actual review unchanged"
+    }
+  ],
+  "checkpoints": {
+    "hayato": {
+      "schema": "sms_art_temporal_review_report_v1",
+      "status": "pending",
+      "exit_code": 2,
+      "problems": [],
+      "failed_axes": [],
+      "pending_axes": [
+        "continuous_motion",
+        "owner_acceptance"
+      ],
+      "next_decision": "keep_control",
+      "claim_ceiling": "declared_observation_scope_and_custody_only; not perception_authentication_or_artistic_quality"
+    },
+    "social": {
+      "schema": "sms_art_temporal_review_report_v1",
+      "status": "pending",
+      "exit_code": 2,
+      "problems": [],
+      "failed_axes": [],
+      "pending_axes": [
+        "order_exposure",
+        "continuous_motion",
+        "rom_presentation",
+        "owner_acceptance"
+      ],
+      "next_decision": "keep_control",
+      "claim_ceiling": "declared_observation_scope_and_custody_only; not perception_authentication_or_artistic_quality"
+    }
+  }
+}

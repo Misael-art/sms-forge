@@ -1,0 +1,46 @@
+{
+  "schema": "hayato_source_recipe_index_v2",
+  "working_reference_recipe": "working_extraction_recipe.json",
+  "selected_refinement_recipes": [
+    "refinements/R01_v1/extraction_recipe.json",
+    "refinements/R02_v2/extraction_recipe.json",
+    "refinements/R04_v1/extraction_recipe.json",
+    "refinements/R05_v2/extraction_recipe.json"
+  ],
+  "fixed_sources": [
+    {
+      "id": "R04",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R04.png",
+      "sha256": "c42b2cef98fa87f235941bc0e12dbb0055b21013d849f4068e4b9fcaa6cb28bf",
+      "source": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/key_v3/native/R03.png",
+      "source_sha256": "c42b2cef98fa87f235941bc0e12dbb0055b21013d849f4068e4b9fcaa6cb28bf",
+      "sheet_translation": [
+        24,
+        33
+      ],
+      "source_pixels_copied_exactly": true,
+      "canvas": [
+        144,
+        144
+      ]
+    },
+    {
+      "id": "R06",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R06.png",
+      "sha256": "203738c1d6a05ed50f0e29691fc24f54257bfbfe296c8a4738727ec8e35e0d57",
+      "source": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/sequence_v1/native/C04.png",
+      "source_sha256": "203738c1d6a05ed50f0e29691fc24f54257bfbfe296c8a4738727ec8e35e0d57",
+      "sheet_translation": [
+        24,
+        32
+      ],
+      "source_pixels_copied_exactly": true,
+      "canvas": [
+        144,
+        144
+      ]
+    }
+  ],
+  "assembly": "source_assembly.json",
+  "policy": "No sourcepixelpainting/perposebodyfit. ImageGen authored eachrevision; officialextractandmechanicalcopy/translationonly."
+}

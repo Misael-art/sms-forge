@@ -1,12 +1,40 @@
 {
   "pipeline_id": "game_production_v1",
-  "description": "Macro-fase de producao: GDD travado -> TDD -> cenas (aaa_scene_v1) -> integracao -> release.",
+  "description": "GDD -> TDD -> slice jogavel -> qualidade conjunta -> cenas -> integracao -> release. Roteiro declarativo; nao executa gates por si.",
   "phases": [
-    {"id": "P0", "label": "GDD escopo travado (11-gdd.md)", "human_gate": true},
-    {"id": "P1", "label": "TDD: VRAM layout, pools, FSM, orcamento global", "human_gate": true},
-    {"id": "P2", "label": "Cenas via aaa_scene_v1 (uma por vez, evidencia por cena)"},
-    {"id": "P3", "label": "Integracao: build_all + 7 eixos por projeto"},
-    {"id": "P4", "label": "Release via workflow release-rom", "human_gate": true}
+    {
+      "id": "P0",
+      "label": "GDD escopo travado (11-gdd.md)",
+      "human_gate": true
+    },
+    {
+      "id": "P1",
+      "label": "TDD: VRAM layout, pools, FSM, orcamento global",
+      "human_gate": true
+    },
+    {
+      "id": "P1_slice",
+      "label": "Interacao completa na ROM antes de ampliar conteudo",
+      "workflow": "workflows/first-playable-slice.md"
+    },
+    {
+      "id": "P1_quality",
+      "label": "Controle, arte, audio, IA/HUD e worst-frame na mesma cena",
+      "workflow": "workflows/product-quality-checkpoint.md"
+    },
+    {
+      "id": "P2",
+      "label": "Cenas via aaa_scene_v1 (uma por vez, evidencia por cena)"
+    },
+    {
+      "id": "P3",
+      "label": "Integracao: build_all + 7 eixos por projeto"
+    },
+    {
+      "id": "P4",
+      "label": "Release via workflow release-rom",
+      "human_gate": true
+    }
   ],
   "hard_rule": "Fase seguinte so com gate anterior pago. 'Quase la' nao e status."
 }

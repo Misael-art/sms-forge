@@ -883,6 +883,7 @@ def main(argv=None):
     ap.add_argument("--rom")
     ap.add_argument("--session",help="private session: record framebuffers by VDP frame, without audio")
     ap.add_argument("--ticks",type=int,default=120,help="VDP frames for private session recording")
+    ap.add_argument("--realtime",action="store_true",help="private session: native framebuffer stream during unpaused run, duration from --seconds")
     ap.add_argument("--seconds", type=float, default=8.0)
     ap.add_argument("--out", default="video")
     ap.add_argument("--press", help="roteiro de input: 'Right=400,Left=400'")
@@ -895,17 +896,20 @@ def main(argv=None):
     if a.self_check:
         return _self_check()
     if a.session:
-        from session_bridge.isolated import video,load,sha
+        from session_bridge.isolated import video,realtime_video,load,sha
         try:
             if a.rom and sha(a.rom)!=load(a.session)[1]["rom_sha256"]:raise ValueError("ROM/session mismatch")
             if a.press:raise ValueError("--press milliseconds incompatible with private frame-paced input")
-            record=video(a.session,a.ticks,a.out)
+            record=(realtime_video(a.session,a.seconds,a.out) if a.realtime else
+                    video(a.session,a.ticks,a.out))
             record["motion_timeline"]=timeline_motion(record["path"])
             from session_bridge.isolated import atomic
             atomic(Path(record["path"]).with_suffix('.json'),record)
             print(json.dumps(record,indent=2));return 0
         except (OSError,RuntimeError,ValueError) as e:
             print("[FAIL] "+str(e));return 2
+    if a.realtime:
+        ap.error("--realtime requires an isolated --session")
     if a.probe_shortcut:
         return _probe_shortcut()
     if not (a.project and a.rom):

@@ -32,15 +32,16 @@ herança de uma etapa anterior.
    Em folha de animação, declarar geometria por quadro (canvas, bbox visível,
    baseline e pivô), comparando cada ação com a escala do model sheet aprovado;
    uma célula igual não prova tamanho ou pés alinhados (L102).
-   Em Master of Fighters, derivar escala corporal do GDD: Fatal Fury Special
-   (Game Gear) é projetado de 160×144 para SMS 256×192; a faixa de trabalho é
-   66–72 px, alvo 70 px. É direção visual, não limite físico. Canvas é escolhido
+   Derivar escala corporal do GDD e da decisão vigente por papel/hash. A faixa
+   histórica de 66–72 px em Master of Fighters não é preset atual/universal;
+   amostras CPS2 e contratos posteriores precisam ser resolvidos na memória.
+   Corpo e equipamento são medidas separadas. Canvas é escolhido
    por pose, múltiplo de 8, com ao menos 1 px transparente em cada borda;
    arma/equipamento cortados reprovam a prova (L110).
    Antes da folha animada, produzir somente duas poses-chave separadas (idle e
    ação), conforme o GDD e o padrão de prova técnica v4 do projeto. Isso não é
    uma animação de dois quadros; não exibir a sequência completa nessa prova.
-   Depois da aprovação da prova e antes de desenhar a folha, selar um contrato
+   Antes de desenhar a folha, selar um contrato
    de sequência por ação com estado inicial/final, loop/transição, IDs e
    contagem de poses-fonte, duração por pose, trilha do personagem e de cada
    objeto/efeito animado, física/hitbox quando aplicável e revisão dos 12
@@ -50,6 +51,9 @@ herança de uma etapa anterior.
    ator. Gate: `audit_animation_contract.py`. Separar essa
    contagem de poses do número de objetos físicos 8×8/8×16, tiles, SAT e VBlank;
    contagens hardware não medidas ficam `pending`.
+   Fazer coreografia/gesto e teste temporal preliminar conforme
+   `sms-sprite-animation.md`; a prova técnica pode iterar cedo para testar
+   legibilidade e composição, sem herdar aprovação artística do concept.
    Em elenco de jogo, consultar também o contrato de harmonia do roster:
    confrontar a pose-fonte com concepts aceitas em uma prancha com baseline
    comum, medir altura/largura e relações declaradas com

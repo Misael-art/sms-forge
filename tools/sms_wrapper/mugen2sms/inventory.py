@@ -183,7 +183,7 @@ def self_check() -> int:
         s = summarize(entries)
         e = entries[0]
         if s.get("archives") != 1:
-            fails.append(f"archives != 1: {s.get("archives")}")
+            fails.append(f"archives != 1: {s.get('archives')}")
         if s.get("archives_with_errors") != 0:
             fails.append(f"archives_with_errors != 0: {e['errors']}")
         if e["defs"] != [{"file": "mini.def", "kind": "character",
@@ -194,7 +194,7 @@ def self_check() -> int:
         if not e["license_candidates"]:
             fails.append("readme nao virou license candidate")
         if s.get("ext_counts") != {".def": 1, ".sff": 1, ".txt": 1}:
-            fails.append(f"ext_counts divergem: {s.get("ext_counts")}")
+            fails.append(f"ext_counts divergem: {s.get('ext_counts')}")
         # determinismo: mesma entrada, mesma saida serializada
         again = summarize([inspect_archive(p, root) for p in archives])
         if json.dumps(s, sort_keys=True) != json.dumps(again, sort_keys=True):

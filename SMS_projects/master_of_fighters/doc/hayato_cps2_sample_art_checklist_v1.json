@@ -1,0 +1,128 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "producer": "/root",
+  "asset": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+    "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+    "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+  },
+  "required_characters": [
+    "hayato"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "semantic_palette_role_confinement",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "morphology_and_biotype",
+    "pose_anatomy_and_joint_continuity",
+    "support_and_pivot",
+    "roster_harmony",
+    "action_contract",
+    "animation"
+  ],
+  "characters": [
+    {
+      "id": "hayato",
+      "references": [
+        {
+          "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+          "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+          "role": "approved identity only; no action or sprite promotion"
+        }
+      ],
+      "observed_defects": [],
+      "revision_notes": [
+        "Steeper full-length katana guard, actual common roster transform; source unchanged during material-mapping correction."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "pass",
+          "note": "Os planos de quimono e hakama s\u00e3o grupos leg\u00edveis de base/sombra/luz, com diagonais escalonadas. N\u00e3o observei dithering ou textura decorativa nova na fonte. H\u00e1 detalhes de1pixel em olho, metal e crest, apropriados \u00e0 escala, sem trat\u00e1-los como um gate de qualidade."
+        },
+        "face_detail_readability": {
+          "status": "pass",
+          "note": "O rosto jovem adulto, franja escura, la\u00e7o vermelho e olho voltado \u00e0 direita continuam reconhec\u00edveis em1x. A segunda inspe\u00e7\u00e3o ampliada confirmou pequeno claro do olho junto ao escuro da p\u00e1lpebra/pupila; n\u00e3o \u00e9 uma face vazia. A express\u00e3o \u00e9 deliberadamente m\u00ednima na fonte, e a derivada SMS precisa de julgamento separado."
+        },
+        "outline_and_cutout": {
+          "status": "pass",
+          "note": "Inspecionei fonte sobre fundo escuro e claro, nativo e NN. Contorno de cabelo/la\u00e7o, manga, hakama, bainha e sand\u00e1lias permanece cont\u00ednuo, sem corte vis\u00edvel de l\u00e2mina ou terminal. N\u00e3o identifiquei componente solto bloqueante. Isto \u00e9 observa\u00e7\u00e3o visual, n\u00e3o auditoria autom\u00e1tica de componentes."
+        },
+        "material_shading": {
+          "status": "pass",
+          "note": "Quimono branco/cinza, pele quente, faixa vermelha, hakama laranja-vermelho, cabelo escuro, l\u00e2mina clara e bainha escura se separam. O pequeno metal da guarda/ferragens mant\u00e9m leitura de equipamento; o tamanho n\u00e3o comporta os detalhes do concept."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pass",
+          "note": "Grandes sombras do quimono explicam o volume da manga/cotovelo, e as sombras vermelhas do hakama acompanham dobras da cintura \u00e0s pernas. N\u00e3o observei invers\u00e3o de ilumina\u00e7\u00e3o ou altern\u00e2ncia granular que contradiga a luz superior/esquerda."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pass",
+          "note": "Branco permanece em quimono, faixa de canela/tabi e l\u00e2mina, e vermelho em la\u00e7o, lapela/forro/crest/faixa/hakama e tiras da sand\u00e1lia. Escuros quentes do cabelo n\u00e3o o transformam em roupa ou efeito. N\u00e3o identifiquei vazamento de acento visualmente bloqueante."
+        },
+        "hand_weapon_attachment": {
+          "status": "pass",
+          "note": "A manga do bra\u00e7o que atravessa a cintura leva a antebra\u00e7o, punho e m\u00e3o inferior; a manga do lado da espada leva ao punho/m\u00e3o superior. As duas m\u00e3os est\u00e3o sobre o mesmo cabo, com separa\u00e7\u00e3o de massa suficiente na chave est\u00e1tica. A guarda se interp\u00f5e entre pega e l\u00e2mina; n\u00e3o vi m\u00e3o flutuante ou bra\u00e7o extra."
+        },
+        "equipment_geometry": {
+          "status": "pass",
+          "note": "A katana foi rodada para cima: cabo, guarda, l\u00e2mina e ponta permanecem presentes, com comprimento aparente pr\u00f3ximo ao da diagonal v1. A ponta est\u00e1 al\u00e9m da cabe\u00e7a sem cruzar rosto. Bainha continua presa \u00e0 faixa e termina antes dos p\u00e9s, sem atravessar joelho/solo. N\u00e3o certifiquei comprimento f\u00edsico por uma m\u00e1scara sem\u00e2ntica."
+        },
+        "frame_pose_integrity": {
+          "status": "pass",
+          "note": "A \u00fanica pose revisada l\u00ea como guarda de katana j\u00e1 desembainhada, distinta de um golpe de contato. Esta avalia\u00e7\u00e3o n\u00e3o cobre prepara\u00e7\u00e3o, execu\u00e7\u00e3o, recupera\u00e7\u00e3o, ciclo ou continuidade entre quadros ainda inexistentes."
+        },
+        "native_size_readability": {
+          "status": "pass",
+          "note": "Em1x a figura ainda l\u00ea como jovem samurai de branco e laranja-vermelho com katana, e os apoios se separam. Compara\u00e7\u00e3o nativa/NN mant\u00e9m forma geral sem depender de r\u00f3tulo para identifica\u00e7\u00e3o. A sa\u00edda SMS perde expressividade facial, separadamente pendente."
+        },
+        "morphology_and_biotype": {
+          "status": "pass",
+          "note": "Hayato mant\u00e9m cabe\u00e7a adulta, tronco esguio e membros sem hipertrofia. A largura do hakama e do quimono \u00e9 roupa e n\u00e3o produz leitura de lutador pesado. A postura \u00e9 mais aberta que a do Social; isso preserva diferen\u00e7a de identidade sem exigir igualar bbox de armas/roupa."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pass",
+          "note": "A segunda passagem sobre os dois bra\u00e7os n\u00e3o encontrou quebra em ombro-manga-cotovelo-antebra\u00e7o-punho. A tor\u00e7\u00e3o m\u00ednima dos punhos sustenta a nova dire\u00e7\u00e3o da espada, sem deslocar visualmente os ombros ou trocar o lado da pega."
+        },
+        "support_and_pivot": {
+          "status": "pass",
+          "note": "As duas sand\u00e1lias est\u00e3o apoiadas, com joelhos relaxados e canelas saindo coerentemente do hakama. A compara\u00e7\u00e3o de baseline usa os piv\u00f4s registrados, sem normaliza\u00e7\u00e3o individual de altura. N\u00e3o se infere estabilidade din\u00e2mica de centro de massa desta pose."
+        },
+        "roster_harmony": {
+          "status": "pass",
+          "note": "Na compara\u00e7\u00e3o comum, Hayato e Social t\u00eam estatura corporal aparente pr\u00f3xima e desenho adulto/esguio. Contorno escuro, planos de cel shading e densidade de clusters convivem. Katana aumenta altura total da silhueta; ela n\u00e3o foi confundida com altura anat\u00f4mica. N\u00e3o se pediu redu\u00e7\u00e3o da figura para igualar a extens\u00e3o de equipamento."
+        },
+        "action_contract": {
+          "status": "pending",
+          "note": "Choice of short katana action sent to owner; not yet answered. No new Hayato action source or frame data approved."
+        },
+        "animation": {
+          "status": "pending",
+          "note": "Only static Hayato guard exists. No motion or action continuity claim."
+        }
+      }
+    }
+  ],
+  "owner_approval": {
+    "approved": false
+  },
+  "independent_review": {
+    "status": "passed",
+    "reviewer": "/root/hayato_art_review",
+    "report": {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_cps2_idle_independent_review_v2.json",
+      "sha256": "8aeb62d570f9241ef4c8cae81676c0d8fdc148199663903c41da10426ec516c4"
+    }
+  },
+  "scope": "Source static guard post-review summary; action/animation/owner pending. Final derivative reviewed separately by exact PNG and ROM SHA."
+}

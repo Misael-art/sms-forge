@@ -1,0 +1,78 @@
+[
+  {
+    "source": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/runtime_probe.json",
+    "sha256": "3c7db76053a92142dd86c8cf2b77e98bed5a878312e4873f0a300ec479e1ddf0",
+    "record": "root",
+    "fps_janelas": [
+      59.78,
+      59.67
+    ],
+    "original_axis": true,
+    "current_policy": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 2.0,
+      "acceptance_policy": "owner_target60_floor58_20261101",
+      "minimum_accepted_fps": 58.0,
+      "regional_diagnostic_passed": true,
+      "max_spread_fps": 2.0,
+      "sample_count": 2,
+      "spread_fps": 0.10999999999999943,
+      "passed": true,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "scope": "Reevaluation of preserved numbers only; no new emulator run."
+  },
+  {
+    "source": "SMS_projects/luta_mugem_rev2/out/evidence/pair_slot_reuse_qa_20261028/runtime_probe_ab_v6_named/observations.json",
+    "sha256": "0e250682690780a5e8c411c0e4380bc52fdb5f351272b7c9aaf142e5f2e5d8f9",
+    "record": "root.runs[0].report",
+    "fps_janelas": [
+      16.11,
+      18.74,
+      19.73,
+      16.12
+    ],
+    "original_axis": false,
+    "current_policy": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 2.0,
+      "acceptance_policy": "owner_target60_floor58_20261101",
+      "minimum_accepted_fps": 58.0,
+      "regional_diagnostic_passed": false,
+      "max_spread_fps": 2.0,
+      "sample_count": 4,
+      "spread_fps": 3.620000000000001,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "scope": "Reevaluation of preserved numbers only; no new emulator run."
+  },
+  {
+    "source": "SMS_projects/luta_mugem_rev2/out/evidence/pair_slot_reuse_qa_20261028/runtime_probe_ab_v6_named/observations.json",
+    "sha256": "0e250682690780a5e8c411c0e4380bc52fdb5f351272b7c9aaf142e5f2e5d8f9",
+    "record": "root.runs[1].report",
+    "fps_janelas": [
+      22.99,
+      25.99,
+      21.7,
+      18.73
+    ],
+    "original_axis": false,
+    "current_policy": {
+      "region": "NTSC",
+      "target_fps": 60.0,
+      "tolerance_fps": 2.0,
+      "acceptance_policy": "owner_target60_floor58_20261101",
+      "minimum_accepted_fps": 58.0,
+      "regional_diagnostic_passed": false,
+      "max_spread_fps": 2.0,
+      "sample_count": 4,
+      "spread_fps": 7.259999999999998,
+      "passed": false,
+      "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"
+    },
+    "scope": "Reevaluation of preserved numbers only; no new emulator run."
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "schema": "dr_social_pair_conflict_comparative_v1",
+  "date": "2026-11-01",
+  "not_an_approval": true,
+  "proposal_id": "GQ02_stacked_guard",
+  "proposal_result": "measured_pair_legal_art_pending",
+  "function_preserved": "Guarda em pé, bengala com cabo na luva e ponta de latão recomposta por cima do pé. Corpo 69 px, dentro de 66–72. Cabeça, punho e pega de J01 não foram redesenhados.",
+  "proposed_change": "A cauda e a bota de trás dobram em rampa para junto da haste. A bota da frente recua nove pixels na fonte, o mínimo que tira a ponta da quinta coluna. Não é corte de arma, não esconde célula de uma pose larga e não vale como limite para os outros golpes.",
+  "source": {
+    "file": "logical/GQ02_stacked_guard.png",
+    "sha256": "499a39323279b0efef90341b746fd4a7ac6d58a0aa01f6cbdb731d710aad57a1",
+    "derived_from": "cps2_sample_v1/jab_revision_v8/native/J01.png",
+    "pixels_relocated": 471,
+    "pixels_stacked_on_existing": 64
+  },
+  "scale": "extra 7/9 depois do encaixe CPS2 2/3 por 6/7. Altura opaca 69. Largura opaca 27. Colunas neutras depois do extra: 4.",
+  "pair": {
+    "opponent": "Ken de construção, sha256 12544d97e09170385fb772154cfc9995ac7895ed30c54167155eecea6488ec91",
+    "placement": "Social (16,40), Ken (136,40), o mesmo da revisão extra 7/9",
+    "adapter_self_check": "pass",
+    "line_sim_self_check": "pass",
+    "sprites": 35,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "legal": true,
+    "scene": "out/diagnostics/social_gq02_20261101/scene_idle.json",
+    "audit": "out/diagnostics/social_gq02_20261101/audit_idle.txt"
+  },
+  "aesthetic_impact": "O pé de trás entra atrás da haste e a cauda acompanha. A haste e a ponta continuam visíveis. O shear por linha deixa a borda interna da cauda em escada. Isso pede revisão de contorno antes de virar a guarda de produção.",
+  "what_remains_blocked": "Toque de bengala, bota e estocada continuam sem intervalo e sem par legal. Uma face e um canto apenas. Sem ROM, sem FPS, sem comando. GQ01 permanece fechada como hipótese não desenhada.",
+  "owner_decides": ["aceite do contorno em escada", "alcance da bengala", "se esta guarda substitui J01 na luta"]
+}

@@ -1,0 +1,275 @@
+{
+  "schema": "sms_authored_animation_lineage_v1",
+  "character": "jj_zillion_ii",
+  "status": "candidate_equipment_corrected_not_owner_approved",
+  "input_concept": {
+    "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+    "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+    "role": "Retained body/face/costume only; older compactgun superseded by approvedharmony and ownerweaponreference"
+  },
+  "input_style": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+    "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+    "role": "Source scale and pixel finishing reference only, no identity/pose/timing copied"
+  },
+  "prompt": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/prompt.txt",
+    "sha256": "f24b475f16b58d69eeb8ae985a93e38c5fb597365ef6bc5b27f3f2c329112c3a",
+    "channel": "saved_full_prompt"
+  },
+  "raw": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/raw.png",
+    "sha256": "01fb01322267cf8a1bc70e12081c07e119ec890903a1e55aea4bb7bd4d69319a",
+    "channel": "built_in_image_gen"
+  },
+  "extraction": {
+    "tool": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+    "tool_sha256": "f151440cdc32673d9f377c8f6c9ef4de4b0fa2fe67abb7d90cdb27082eb03dab",
+    "recipe": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/extraction_recipe.json",
+    "recipe_sha256": "aac49a9751025d98849f4b19ae8c81e1887c3f2117fd0766570a985b263c1bd0",
+    "scope": "Common7/30nearest raw-registration, alpha128,18sourcecolors,160transparentcanvas; no perpose bodyfit or pixelpainting."
+  },
+  "frames": [
+    {
+      "id": "I00",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/I00.png",
+      "sha256": "d5d44be9f7f3e1d576b779d80ae4e031563603e258ec5b4474a49f1b9fdcacac"
+    },
+    {
+      "id": "S01",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S01.png",
+      "sha256": "8fd453c8266905e9624d73ab229e23486abf1d4b283f8e8e56bae5555e9efea9"
+    },
+    {
+      "id": "S02",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S02.png",
+      "sha256": "63dc64a287739d9d186c20bfa3b6adde06bb6be35799d520c5d3e4e81e6424f7"
+    },
+    {
+      "id": "S03",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S03.png",
+      "sha256": "a78f181b0a70a418799a8bf4a258f7f9bcdcd873b041995221042289ef6430b6"
+    },
+    {
+      "id": "S04",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S04.png",
+      "sha256": "881febef2f68acafc226fb02d438c20904b6e33663f7582957e332202f72c4a4"
+    },
+    {
+      "id": "S05",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/native/S05.png",
+      "sha256": "1be306623f394d19bcd978420437e96d4eee29ae7bd470ad3594b58d21a57d79"
+    }
+  ],
+  "source_sheet": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/shot_source.png",
+    "sha256": "d13950da87344596c366e0a145aae24f1674b5fdd199fb4b9de8b6f8558ce6a0"
+  },
+  "material_palette": [
+    {
+      "source_index": 1,
+      "role": "deep_contour",
+      "source_rgb": [
+        10,
+        8,
+        24
+      ],
+      "sms_code": 0
+    },
+    {
+      "source_index": 2,
+      "role": "navy_contour_harness",
+      "source_rgb": [
+        0,
+        0,
+        68
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 3,
+      "role": "cloth_dark",
+      "source_rgb": [
+        125,
+        0,
+        45
+      ],
+      "sms_code": 1
+    },
+    {
+      "source_index": 4,
+      "role": "cloth_shadow",
+      "source_rgb": [
+        180,
+        0,
+        65
+      ],
+      "sms_code": 18
+    },
+    {
+      "source_index": 5,
+      "role": "cloth_base",
+      "source_rgb": [
+        245,
+        0,
+        90
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 6,
+      "role": "cloth_light",
+      "source_rgb": [
+        255,
+        75,
+        135
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 7,
+      "role": "hair_dark",
+      "source_rgb": [
+        15,
+        15,
+        125
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 8,
+      "role": "hair_blue",
+      "source_rgb": [
+        20,
+        35,
+        220
+      ],
+      "sms_code": 48
+    },
+    {
+      "source_index": 9,
+      "role": "hair_highlight",
+      "source_rgb": [
+        105,
+        125,
+        250
+      ],
+      "sms_code": 56
+    },
+    {
+      "source_index": 10,
+      "role": "armor_white",
+      "source_rgb": [
+        250,
+        250,
+        255
+      ],
+      "sms_code": 63
+    },
+    {
+      "source_index": 11,
+      "role": "armor_shadow",
+      "source_rgb": [
+        170,
+        175,
+        205
+      ],
+      "sms_code": 42
+    },
+    {
+      "source_index": 12,
+      "role": "armor_deep",
+      "source_rgb": [
+        90,
+        95,
+        150
+      ],
+      "sms_code": 21
+    },
+    {
+      "source_index": 13,
+      "role": "skin_light",
+      "source_rgb": [
+        255,
+        190,
+        150
+      ],
+      "sms_code": 47
+    },
+    {
+      "source_index": 14,
+      "role": "skin_base",
+      "source_rgb": [
+        250,
+        150,
+        100
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 15,
+      "role": "skin_shadow",
+      "source_rgb": [
+        160,
+        80,
+        60
+      ],
+      "sms_code": 22
+    },
+    {
+      "source_index": 16,
+      "role": "pistol_orange_inset",
+      "source_rgb": [
+        255,
+        100,
+        15
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 17,
+      "role": "pistol_dark_orange",
+      "source_rgb": [
+        170,
+        85,
+        0
+      ],
+      "sms_code": 11
+    },
+    {
+      "source_index": 18,
+      "role": "laser_cyan",
+      "source_rgb": [
+        0,
+        220,
+        255
+      ],
+      "sms_code": 56
+    }
+  ],
+  "equipment_track": "Corrected long navy/cyan Zillion allposes, intentional finite pulseS03only, absentS04. Any additional orphan is not intentional.",
+  "approval_scope": "None; owner requested producing experiment, not advance approval of these pixels or new timing.",
+  "parent": "jj-zillion-single-shot-source-v02",
+  "input_weapon": {
+    "path": "data/source_art/roster_harmony_review/waku_waku_7/reference_inputs/zillion_pistol_user_reference_20261008.png",
+    "sha256": "7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49",
+    "role": "Long navy/cyan Zillion geometry explicitly reconfirmed by owner; no external pixels/poses copied"
+  },
+  "input_harmony": {
+    "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+    "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+    "role": "Historical approved context only; direct ownerreference has precedence for panel front/rear placement, previousharmony also misplacedpanel"
+  },
+  "pixel_invariance": "No exact body invariance claimed for regeneratedsheet; all anatomy/material/pose axes require review.",
+  "source_revision": 3,
+  "input_weapon_right_view": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v3/weapon_reference_right.png",
+    "sha256": "80fa4f2600d611f1487d7d2d816f10622d65ef3aa4e79efcc31f8c7a0bf30301",
+    "transform": "lossless horizontal mirror of existing ownerreference only; no pixels copied into artwork"
+  },
+  "bounded_changes_requested": [
+    "Largecyanrearpanel neargrip, forwardbarrel thinaccents",
+    "Rigid fullZillion atpreparation",
+    "Fold elbows and cheststaging to reduce completeweapon horizontal envelope"
+  ]
+}

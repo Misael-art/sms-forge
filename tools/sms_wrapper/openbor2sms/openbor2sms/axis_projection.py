@@ -32,6 +32,7 @@ import json
 import shutil
 import tempfile
 from pathlib import Path
+from measure_runtime_probe import runtime_fps_verdict
 
 DEFAULT_SOURCES = {
     "bundle": "out/evidence/m8/bundle_a7f02b84/bundle.json",
@@ -90,19 +91,25 @@ def _relative(project: Path, path: Path) -> str:
         return str(path)
 
 
-def _current_rom(project: Path, explicit: str | None) -> Path:
-    if explicit:
-        return _resolve(project, explicit, "ROM atual")
-    roms = sorted((project / "out" / "rom").glob("*.sms"))
-    if not roms:
-        raise ProjectionError("nao ha ROM em out/rom/ para ancorar a projecao")
-    return max(roms, key=lambda p: p.stat().st_mtime).resolve()
+def _current_rom(project: Path, explicit: str | None, build_record: str | None = None) -> Path:
+    from reconcile_claims import select_rom
+    receipt = Path(build_record) if build_record else project / "out/build_record.json"
+    if not build_record and explicit:
+        selected = (project / explicit).resolve()
+        if selected.is_relative_to(project / "out/candidates"):
+            receipt = selected.parent.parent / "build_record.json"
+    try:
+        rec = _load(receipt)
+        return select_rom(project, rec, explicit)[0]
+    except (OSError, ValueError) as exc:
+        raise ProjectionError(str(exc)) from exc
 
 
 def project(
     project: str | Path,
     *,
     current_rom: str | None = None,
+    build_record: str | None = None,
     bundle: str | None = None,
     consumption: str | None = None,
     runtime_metrics: str | None = None,
@@ -117,7 +124,7 @@ def project(
     incoherent. Returns a small summary with the written paths and hashes.
     """
     root = Path(project).resolve()
-    rom = _current_rom(root, current_rom)
+    rom = _current_rom(root, current_rom, build_record)
     current_sha = sha256_file(rom)
 
     paths = {
@@ -133,11 +140,29 @@ def project(
             root, qa_visual or DEFAULT_SOURCES["qa_visual"], "qa_visual"),
         "wav": _resolve(root, wav or DEFAULT_SOURCES["wav"], "wav"),
     }
+    before = {key: sha256_file(path) for key, path in paths.items()}
     bundle_doc = _load(paths["bundle"])
     cons = _load(paths["consumption"])
     mrp3 = _load(paths["runtime_metrics"])
-    _load(paths["qa_runtime"])
-    _load(paths["qa_visual"])
+    for role in ("qa_runtime", "qa_visual"):
+        report = _load(paths[role])
+        request_ref = report.get("request", {})
+        request_path = Path(request_ref.get("path", ""))
+        if not request_path.is_absolute():
+            request_path = paths[role].parent / request_path
+        if not request_path.is_file() or sha256_file(request_path) != request_ref.get("sha256"):
+            raise ProjectionError(f"{role}: pedido ausente ou SHA divergente")
+        request = _load(request_path)
+        if request.get("rom", {}).get("sha256") != current_sha:
+            raise ProjectionError(f"{role}: QA de outra ROM")
+        from audit_subagent_session import validate_report
+        checked = validate_report(report, request)
+        if not checked["tests_passed"]:
+            raise ProjectionError(f"{role}: QA nao aprovada: {checked['problems']}")
+    from .evidence_consumer import consume
+    checked_bundle = consume(paths["bundle"], rom)
+    if not checked_bundle["eligible"]:
+        raise ProjectionError(f"bundle inelegivel: {checked_bundle['problems']}")
 
     source_sha = ((bundle_doc.get("rom") or {}).get("sha256") or "").lower()
     cons_sha = (cons.get("rom_sha256") or "").lower()
@@ -157,13 +182,16 @@ def project(
         raise ProjectionError(
             f"consumption inelegivel: eligible={cons.get('eligible')!r} "
             f"problems={cons.get('problems')!r}")
-    axes = cons.get("axes") or {}
+    if cons.get("bundle_sha256") != before["bundle"] or cons.get("coverage") != checked_bundle.get("coverage"):
+        raise ProjectionError("consumption nao corresponde ao bundle revalidado")
+    axes = checked_bundle.get("axes") or {}
     missing_axes = [a for a in ("boot_emulador", "gameplay",
                                 "fps_constante", "audio") if not axes.get(a)]
     if missing_axes:
         raise ProjectionError(f"consumption sem eixos: {missing_axes}")
-    if mrp3.get("fps_constante") is not True or not mrp3.get("frame_advance_proved"):
-        raise ProjectionError("runtime_metrics sem fps_constante/frame_advance_proved")
+    fps_check = runtime_fps_verdict(mrp3)
+    if not fps_check["passed"]:
+        raise ProjectionError("runtime_metrics nao prova alvo60/piso58 FPS da ROM sem arredondar")
     janelas = mrp3.get("fps_janelas") or []
     if mrp3.get("region") != "NTSC" or len(janelas) != 3:
         raise ProjectionError(
@@ -256,7 +284,7 @@ def project(
         "generated_at": generated_at,
         "rom_sha256": current_sha,
         "region": mrp3.get("region"),
-        "constante_50_60": True,
+        "fps_acceptance": fps_check,
         "fps_constante": mrp3.get("fps_constante"),
         "frame_advance_proved": mrp3.get("frame_advance_proved"),
         "fps_janelas": janelas,
@@ -272,7 +300,13 @@ def project(
         ],
     }
 
-    destination = Path(out_dir).resolve() if out_dir else root / "out" / "evidence"
+    if before != {key: sha256_file(path) for key, path in paths.items()} or current_sha != sha256_file(rom):
+        raise ProjectionError("fontes ou ROM mudaram durante preparacao")
+    candidate_root = root / "out/candidates"
+    default_out = rom.parent.parent / "evidence" if rom.is_relative_to(candidate_root) else root / "out/evidence"
+    destination = Path(out_dir).resolve() if out_dir else default_out
+    if rom.is_relative_to(candidate_root) and not destination.is_relative_to(rom.parent.parent):
+        raise ProjectionError("projecao candidata deve permanecer no destino candidato")
     destination.mkdir(parents=True, exist_ok=True)
     evidence_path = destination / "evidence.json"
     fps_path = destination / "fps.json"
@@ -297,118 +331,11 @@ def project(
 
 
 def _self_check() -> int:
-    base = Path(tempfile.mkdtemp(prefix="smspoj_"))
-    try:
-        def make_case(name: str, rom_bytes: bytes, source_sha: str | None = None):
-            root = base / name
-            (root / "out" / "rom").mkdir(parents=True)
-            (root / "out" / "evidence").mkdir(parents=True)
-            rom = root / "out" / "rom" / "a.sms"
-            rom.write_bytes(rom_bytes)
-            rom_sha = sha256_file(rom)
-            wav = root / "sources" / "audio_signal.wav"
-            wav.parent.mkdir(parents=True)
-            wav.write_bytes(b"RIFF" + b"\x00" * 60)
-            wav_sha = sha256_file(wav)
-            qa = root / "sources" / "qa.json"
-            qa.write_text("{}", encoding="utf-8")
-            sha = rom_sha if source_sha is None else source_sha
-            bundle = {
-                "rom": {"sha256": sha, "bytes": len(rom_bytes)},
-                "artifacts": [{
-                    "id": "audio_signal",
-                    "kind": "wav",
-                    "file": {"path": "artifacts/audio_signal.wav",
-                             "sha256": wav_sha, "bytes": wav.stat().st_size},
-                }],
-            }
-            cons = {
-                "rom_sha256": sha,
-                "eligible": True,
-                "problems": [],
-                "axes": {"boot_emulador": True, "gameplay": True,
-                         "fps_constante": True, "audio": True},
-                "coverage": {
-                    "boot_emulador": {"proof": "framebuffer",
-                                      "artifacts": ["boot_png"],
-                                      "derived": {"canvas": [256, 192]}},
-                    "gameplay": {"proof": "input_ram_video",
-                                 "artifacts": ["gameplay_observation"],
-                                 "derived": {"before": 50, "after": 29,
-                                             "relation": "decrease"}},
-                    "fps_constante": {"proof": "regional_runtime_windows",
-                                      "artifacts": ["fps_metrics"],
-                                      "derived": {"region": "NTSC"}},
-                    "audio": {"proof": "audio_signal",
-                              "artifacts": ["audio_signal"],
-                              "derived": {"peak": 1}},
-                },
-            }
-            mrp3 = {
-                "rom_sha256": sha,
-                "session_id": "self-check",
-                "fps_constante": True,
-                "frame_advance_proved": True,
-                "region": "NTSC",
-                "fps_janelas": [59.6, 59.7, 59.8],
-                "fps_spread": 0.2,
-                "frames_delta_total": 100,
-            }
-            files = {}
-            for key, doc in (("bundle", bundle), ("consumption", cons),
-                             ("runtime_metrics", mrp3)):
-                files[key] = root / "sources" / f"{key}.json"
-                files[key].write_text(json.dumps(doc), encoding="utf-8")
-            files["qa_runtime"] = qa
-            files["qa_visual"] = qa
-            files["wav"] = wav
-            return root, rom, files
-
-        root, rom, files = make_case("ok", b"ROM-ONE")
-        result = project(
-            root, current_rom=str(rom), out_dir=str(root / "out/evidence"),
-            **{k: str(v) for k, v in files.items()})
-        ev = json.loads((root / "out/evidence/evidence.json").read_text())
-        fps = json.loads((root / "out/evidence/fps.json").read_text())
-        assert ev["rom_sha256"] == result["rom_sha256"]
-        assert fps["rom_sha256"] == result["rom_sha256"]
-        assert (root / "out/evidence" / (
-            "audio_" + result["rom_sha256"][:8] + ".wav")).is_file()
-
-        # Stale sources: current ROM is a different binary -> refuse, no writes.
-        other_sha = hashlib.sha256(b"ROM-TWO").hexdigest()
-        root2, rom2, files2 = make_case("stale", b"ROM-TWO",
-                                        source_sha=hashlib.sha256(
-                                            b"ROM-ONE").hexdigest())
-        try:
-            project(root2, current_rom=str(rom2),
-                    out_dir=str(root2 / "out/evidence"),
-                    **{k: str(v) for k, v in files2.items()})
-        except ProjectionError as exc:
-            assert "nao e a ROM das fontes" in str(exc), exc
-        else:
-            raise AssertionError("fonte de outra ROM deveria recusar")
-        assert not (root2 / "out/evidence/evidence.json").exists()
-        assert not (root2 / "out/evidence/fps.json").exists()
-        assert other_sha  # keeps the fixture explicit
-
-        # A stale boolean without the matching SHA cannot be projected.
-        root3, rom3, files3 = make_case("no-sha", b"ROM-THREE",
-                                        source_sha="")
-        try:
-            project(root3, current_rom=str(rom3),
-                    out_dir=str(root3 / "out/evidence"),
-                    **{k: str(v) for k, v in files3.items()})
-        except ProjectionError as exc:
-            assert "divergem" in str(exc) or "nao e a ROM" in str(exc), exc
-        else:
-            raise AssertionError("fontes sem SHA deveriam recusar")
-        assert not (root3 / "out/evidence/evidence.json").exists()
-    finally:
-        shutil.rmtree(base, ignore_errors=True)
-    print("[SELF-CHECK OK] axis_projection "
-          "(mesma ROM passa; ROM antiga/sem SHA recusa sem escrever)")
-    return 0
+    import unittest
+    suite = unittest.defaultTestLoader.discover(str(Path(__file__).parents[1] / "tests"),
+                                               pattern="test_axis_projection.py")
+    result = unittest.TextTestRunner(verbosity=1).run(suite)
+    return 0 if result.wasSuccessful() and not result.skipped and suite.countTestCases() else 1
 
 
 def main(argv=None) -> int:
@@ -417,6 +344,7 @@ def main(argv=None) -> int:
                     "exigindo o SHA da ROM atual.")
     ap.add_argument("--project", default=".")
     ap.add_argument("--current-rom")
+    ap.add_argument("--build-record", help="recibo exato; candidata usa o recibo no proprio destino")
     for key in DEFAULT_SOURCES:
         ap.add_argument("--" + key.replace("_", "-"), dest=key)
     ap.add_argument("--out-dir")
@@ -428,6 +356,7 @@ def main(argv=None) -> int:
         result = project(
             args.project,
             current_rom=args.current_rom,
+            build_record=args.build_record,
             bundle=args.bundle,
             consumption=args.consumption,
             runtime_metrics=args.runtime_metrics,

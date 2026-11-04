@@ -1,0 +1,48 @@
+{
+  "schema": "mof_equipment_identity_contract_v1",
+  "character": "jj_zillion_ii",
+  "equipment": "Zillion laser pistol",
+  "authorities": {
+    "game_lore": "Zillion II SMS; manual confirms laser, not detailed geometry from13x40standing sprite",
+    "body_costume": {
+      "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "scope": "Face/hair/build/suit/armor/harness/holster only; older compactgun is not current authority"
+    },
+    "weapon": {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/reference_inputs/zillion_pistol_user_reference_20261008.png",
+      "sha256": "7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49",
+      "scope": "Owner-supplied side-profile geometry and navy/cyan material appearance; exact same input already used in approved harmony"
+    },
+    "approved_harmony": {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+      "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+      "decision": "doc/decisions/roster_harmony_waku_waku_7_v01_owner_approval.json",
+      "scope": "Corrected weapon silhouette and roster comparison, not automatic approval of new sprite pixels"
+    }
+  },
+  "mandatory_signature": [
+    "Long low horizontal upper body/barrel, several hand widths long; never a short square toy blaster",
+    "Distinct angular wedge/sloping nose and continuous barrel profile",
+    "Dark navy main mass with narrow cyan/blue inset panels; no predominantly white receiver or orange window",
+    "Rear/underslung dark pistol grip connected coherently to trigger hand; weapon body extends forward well beyond hand",
+    "Consistent complete barrel length/hand junction across guard, raise, aim, emission and return",
+    "Opaque contiguous silhouette; no generic pistol substituted because gun is small at SMS size"
+  ],
+  "forbidden_regressions": [
+    "Short white/blue compact blaster from individualconceptv4/sourcev1",
+    "Changing gun trajectory/silhouette to hide SAT overflow",
+    "Truncating barrel, shortening only action frame, dropping character sprites or shrinking wide pose individually"
+  ],
+  "authoring_implications": [
+    "Keep elbow folded and grip closer to torso to stage a long barrel within a narrow horizontal envelope",
+    "A short one-emission pulse may leave view between sampled drawings; no invented projectile lifespan required",
+    "Freeze weapon authority before source and conversion; inspect terminal and grip at native target size"
+  ],
+  "validation": [
+    "Inspect shape against exact user reference and approved harmony; ratio alone is not semantic fidelity",
+    "Re-measure complete pair in both faces after changed pixels",
+    "Independent source/SMS review and owner judgment remain distinct from byte/palette gates"
+  ],
+  "status": "owner_reconfirmed_reference_contract_new_pixels_pending"
+}

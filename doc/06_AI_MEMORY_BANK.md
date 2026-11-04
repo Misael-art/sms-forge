@@ -4,7 +4,65 @@
 > memory bank de CADA projeto (`SMS_projects/<proj>/doc/10-memory-bank.md`).
 
 ## Última atualização
-2026-09-07 — L055: tradução pixel na paleta mestra SMS (método FS/NEAREST; sem NES/SNES/PICO-8). L039 uinput e L053 sideswap já no cânone.
+Fechamento2026-11-02: `declared_probes` recusa arrays/declarações __at omitidos,
+com exceções SDK por intervalo completo e compatibilidade16/32KiB. L089 aplicada
+no follow-upL138, sem ID novo. Parser16, identidade+parser56, rev2 307,
+selftest137/137, medidores75/75; revisões nativas sem autoaprovação. Runtime
+TRC3f6ac6f1f… observou contato112/terminal, mas AIR bruto5/4/21/7/6 reprovou
+fonte5/4/9/7/6; imagem continua sobreposta. FPS e VBlank permanecem reprovados.
+Recuperação local oficial32.575 entradas,144.534.539B, SHA dc054e4f… verificado;
+mesmo disco, sem cópia externa nova. Memória rev2/handoff contêm SHA completo,
+WIP preservado e limites. Commits próprios7c73d6b/2585f54/9a791ec/14c9ca9 locais;
+nenhum push/merge/release deste lote. Os55 IDs continuam abertos.
+
+2026-11-02 — identidade de builds/evidências endurecida no reconciliador e
+produtores/consumidores oficiais; aplicação de L013/L035/L138, sem ID novo.
+Recibo e ROM divergentes reprovam, inclusive com todos os eixos falsos.
+Candidata usa destino isolado/recibo explícito; WAV exige sessão/hash/PCM/rota;
+pré-gates e memória têm escopos limitados declarados. SDCC≥4.2 e CLI OpenBOR
+corrigidos. Focal48, selftest137/137 e medidores75/75 passaram. Positivo de boot
+privado em rev2 SHA b1f7974c…; FPS26,62/22,72 reprovados. Nenhuma entrega ou
+homologação artística; lacuna Social61v5 preservada. Registro e limites em
+`doc/curation/2026-10-19_l138_projecao_rom_sha.json`, follow-up20261102.
+
+### Estado histórico de 24/10
+2026-10-24 — curadoria Mugenesis → luta_mugem_rev2. As seções anteriores abaixo
+conservam seus estados históricos; não representam qualificação atual de todos
+os projetos.
+
+### Curadoria de 2026-10-24
+
+Continuidade do host: `doc/continuity/20261024-start-here.md` é a entrada
+atual para clone limpo; `20261024-next-agent.md` fornece o pedido de retomada.
+Bootstrap isolado, SDK por fonte/hash, restauração sem sobrescrita e manifesto
+de assets foram preparados a pedido do dono. Resultados reais e limites da
+migração em `doc/continuity/20261024-validation.json`; recuperar arquivos não
+qualifica a ROM nem substitui os sete eixos. Segredos pessoais não migrados.
+
+- Pedido humano autoriza curadoria de skills/ferramentas e análise comparativa.
+  Relatório: `doc/curation/2026-10-24_mugenesis_rev2.md`; backlog de 55 itens e
+  prompt de conclusão no mesmo diretório. Sem implementação da engine neste lote.
+- Doador M4 ainda parcial: 69 itens, 55 aceites abertos, principal sem vínculo
+  de fonte conhecido e 60fps não requalificados. Portar métodos/testes, nunca
+  APIs/limites/capacidades SGDK para SMS.
+- Corrigidos diagnósticos candidatos: composição mede sobreposição vertical
+  real com dy assinado; sola interpreta tRNS por índice e registra hashes.
+  Saídas existentes preservadas. Permanecem fora dos gates globais.
+- Skills source-semantics/runtime-optimization/psg-audio e workflow MUGEN
+  receberam aplicação delimitada de lições existentes; rotas e ledger
+  atualizados, registro continua L138. SMS_GLOBAL e `.agent` local preservados.
+- Duas sessões novas de Emulicious encerradas: produção 087df676 com fundo
+  repetido/P2 fragmentado; candidata 698e58ed com corpos completos em um quadro.
+  Sem FPS/áudio/gameplay novos. Build em cópia isolada passou, 851968 B,
+  SHA 6de8c451fa39ff49670d242f8a3f3946bf67fea1830566fa4fe901517493b983.
+- Blocker do jogo: composição completa e prazo de apresentação/streaming
+  com VBlank legal, preservando movimentos. Selo histórico da candidata
+  continua derramou; nenhum claim de entrega/AAA ou budget aprovado.
+- Validação do lote e limites: `doc/curation/evidence/2026-10-24_mugenesis/validation.json`.
+  EIO legado é falha global conhecida; não transformar escopo focado em verde global.
+  Selftest 130/130 base; 75 ferramentas com self-check; regressão focada 16/16;
+  learning capture PASS. Doc_sync conserva dez registros de falha no legado
+  (seis EIO e quatro ENOENT). Fechamento global da fábrica permanece bloqueado.
 
 ## Status dos eixos (vocabulário obrigatório)
 

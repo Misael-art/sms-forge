@@ -1,0 +1,29 @@
+{
+  "id": "GQ01_three_quarter_guard",
+  "status": "proposal_not_a_sequence",
+  "not_an_approval": true,
+  "preserves": [
+    "corpo esguio",
+    "cabelo cinza",
+    "óculos de latão",
+    "casaco ciano",
+    "plastrão borgonha",
+    "cabo na luva",
+    "haste quase vertical",
+    "ponta de latão junto à bota da frente",
+    "punho fechado na outra mão"
+  ],
+  "does_not_authorize": [
+    "mudar alcance do toque",
+    "mudar a altura lógica do golpe",
+    "trocar a identidade da bengala",
+    "fechar intervalos"
+  ],
+  "hypothesis": "Empilhar a barra do casaco e as botas com o torso pode fazer cada linha opaca caber em 32 px na escala extra 7/9, onde a guarda atual falha por 33–34 px na sola. Só medir se a bengala continuar sendo a bengala.",
+  "feed": {
+    "role": "construção e grade da amostra v8",
+    "path": "ref/J01_4x.png",
+    "sha256": "4084295606bb4f4082718fe1282dc59efb7df6bba14b175043b7787149af6a3b"
+  },
+  "prompt": "prompts/GQ01_three_quarter_guard.txt"
+}

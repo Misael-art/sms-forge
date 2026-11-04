@@ -4,7 +4,175 @@
 **Escopo:** decisão de design para revisão; não é moveset selado, frame data medida, sprite sheet nem autorização para integração em `res/` ou ROM.  
 **Referências locais:** `11-gdd.md`, `dr_social_animation_contract_v1.md/.json` e a fonte aprovada das 61 poses básicas.
 
-## Parecer de maturidade
+## Consulta vigente
+
+Consulta atual: [GDD — contrato de experiência](11-gdd.md#contrato-de-experiência--revisão-de-design-de-2026-11-01).
+O estado da arte/ROM segue o memory bank; menções abaixo à primeira fonte de
+61 poses e conversão v10 são históricas, não seleção atual. A direção de
+combate aprovada em 10/10 é preservada; detalhamento de consequências a seguir
+é **hipótese de design para testar**, sem novos golpes, números ou cancels
+aprovados. `cane_riposte` continua absorvido pelo Super.
+
+## Contratos de experiência por movimento — 2026-11-01
+
+Fonte de identidade: model sheet CPS2-Alpha-Cel v4, correções de grisalho/óculos
+e direção individual registrada no GDD. Fonte dos IDs/tracks: contrato de
+animação v2. O artista pode propor atuação e distribuição de poses preservando
+essa identidade; não fixar cabeça, quadril, pés ou deslocamentos mínimos para
+“caber no SMS”. Medir a composição antes de encomendar a folha completa.
+Desenhos e exposições já aceitos não se reabrem por hipótese de balanceamento.
+
+### `social_light_jab` — aproximação curta
+
+- **Intenção/uso:** verificar um rival que entrou perto e criar confirmação
+  curta. O punho é apoio ao duelista, não sua principal ferramenta de alcance.
+- **Preparação/ameaça:** pequeno carregamento corporal legível e foco do olhar;
+  luva sai da guarda pela cadeia ombro–cotovelo–punho. A bengala mantém sua
+  identidade e não ganha hitbox só por estar desenhada.
+- **Direção/alcance/trajetória:** direto frontal curto; extensão do punho
+  delimita o contato proposto. Não alongar braço/caixa para alcançar o rival.
+- **Resposta/contrajogo:** rival administra distância ou defende; fora da
+  extensão, o jab erra. Social se expõe ao comprometer a mão; janela de punição
+  e classificação alto/médio ainda precisam teste, não são vantagem garantida.
+- **Acerto/bloqueio/erro:** hipótese de reação curta e confirmação no acerto;
+  bloqueio com pose/som distintos e sem confirmação de hit; no erro não há
+  reação, spark nem perda de vida. Combo com bengala continua proposta,
+  dependente de cancel/advantage medidos.
+- **Recuperação:** recolher a mão e recuperar a guarda antes de nova ação,
+  salvo cancel explicitamente aprovado. Testar apertar, manter, soltar e
+  apertar novamente. Os 2/1/1/1/1/3 da amostra não definem frame-data.
+- **Aceite:** jogador distingue alcance curto, contato e retorno; prova futura
+  registra input, pose, caixas, estado do rival e vida. Hoje a ROM de poses
+  comprova apresentação limitada, não hit/block/whiff.
+
+### `basic_cane_tap` — assinatura de distância média
+
+- **Intenção/uso:** ocupar o espaço diante do corpo e punir aproximação/erro.
+- **Preparação/ameaça:** mão e bengala se organizam à frente do torso; ponta
+  romba e empunhadura permanecem distintas da rapieira.
+- **Direção/alcance/trajetória:** toque frontal com arco de preparação/recolha,
+  sem varrer a tela; contato limitado à arma visível. Alcance absoluto pendente.
+- **Resposta/contrajogo:** defender ou ficar fora da ponta; Social compromete
+  o braço e pode ser punido durante recolha no erro. Não declarar segurança
+  universal por pushback nem rastreamento automático do alvo.
+- **Acerto/bloqueio/erro:** hipótese de pequeno afastamento que restaura a
+  distância de bengala; bloqueio informa defesa, sem liberar automaticamente
+  a estocada; erro mostra extensão vazia e recolha. Dano/chip/empurrão em aberto.
+- **Recuperação:** recompor pegada e guarda, sem arma atravessar o corpo.
+  A rota bengala→rapieira só é candidata em hit confirmado; testar separadamente
+  hit, block e whiff antes de selar qualquer cancel.
+- **Aceite:** reconhecível como golpe de bengala em ambas as faces, com ponta,
+  ameaça e exposição visíveis no par. Arte, colisão e runtime pendentes.
+
+### `social_low_boot_check` — interrupção baixa próxima
+
+- **Intenção/uso:** contestar avanço próximo pela linha baixa, sem lançar o rival.
+- **Preparação/ameaça:** transferência de peso e joelho anunciam a bota; torso
+  e bengala equilibram o apoio sem esconder a perna atacante.
+- **Direção/alcance/trajetória:** arco curto baixo, à frente; não cobre distância
+  de bengala nem vira rasteira de tela inteira.
+- **Resposta/contrajogo:** guarda baixa é a resposta proposta; permanecer fora
+  do alcance ou punir a recolha. Guarda alta deve perder para baixo conforme a
+  regra do GDD. Duração/possibilidade real dessa punição aguardam medição.
+- **Acerto/bloqueio/erro:** hipótese de interrupção baixa curta no hit, sem
+  knockdown automático; no block o rival conserva oportunidade de responder;
+  whiff não reage no adversário. Sem vantagem/dano numéricos aprovados.
+- **Recuperação:** recolher e plantar o pé, regressar à guarda com apoio
+  coerente. Não permitir deslizar ou responder ainda suspenso sem regra.
+- **Aceite:** a ameaça baixa pode ser distinguida antes do contato e a guarda
+  correta altera a consequência. Comparar baixo/alto e alcance limite na ROM.
+
+### `rapier_lunge` — punição linear de compromisso maior
+
+- **Intenção/uso:** converter leitura de distância/erro em estocada precisa.
+- **Preparação/ameaça:** organizar arma, apoio e linha do ombro; a lâmina deve
+  ler como rapieira, sem virar bengala afiada ou feixe mágico.
+- **Direção/alcance/trajetória:** avanço e extensão frontais em linha, alcance
+  na ponta visível; deslocamento contínuo. Não prometer alcance maior por
+  hitbox invisível nem perseguir mudança de lado durante a ação.
+- **Resposta/contrajogo:** defender, evitar pela distância ou saltar se a
+  geometria aprovada permitir. Sem invulnerabilidade; erro deixa a extensão
+  comprometida. Não classificar como anti-aéreo ou overhead por conveniência.
+- **Acerto/bloqueio/erro:** hipótese de recompensa de punição mais clara que
+  jab; guard deve ter leitura e recuperação próprias; whiff mostra estocada
+  vazia com oportunidade de resposta. Valores/knockback/chip pendentes.
+- **Recuperação:** recolher lâmina e corpo, recuperar base e guarda; ataque
+  interrompido precisa finalizar seus objetos/caixas sem teleporte de arma.
+- **Aceite:** testar em perto/médio/fora do alcance e nas bordas, com hit,
+  block e whiff. Recovery competitivo não deriva das doze poses propostas.
+
+### `boomerang_throw` — escolha de aproximação à distância
+
+- **Intenção/uso:** exigir decisão espacial do rival, dando a Social uma
+  escolha de avanço/recuo; não sustentar projéteis sem risco.
+- **Preparação/ameaça:** carga do braço e objeto de aço legível antes da
+  soltura. Violeta, quando autorizado como efeito, não substitui o objeto.
+- **Direção/alcance/trajetória:** arco determinístico de ida; retorno em erro,
+  uma instância ativa por vez, sem mira automática. Dimensões, velocidade,
+  alcance, colisão no retorno e regra após hit/block continuam pendentes.
+- **Resposta/contrajogo:** escolher avanço, guarda ou salto compatível com o
+  arco; pressionar a abertura do lançador. Não atribuir invulnerabilidade à
+  preparação nem afirmar vantagem enquanto o objeto retorna.
+- **Acerto/bloqueio/erro:** hit tem feedback no ponto de contato; block é
+  reconhecível e não se confunde com hit; whiff mantém arco/retorno legíveis.
+  Destino do objeto em hit/block e eventual segundo acerto precisam de decisão
+  explícita antes de implementar; não resolver multi-hit implicitamente.
+- **Recuperação:** distinguir liberação do controle corporal de disponibilidade
+  do objeto; segundo arremesso só quando a instância anterior terminou segundo
+  regra selada. Recepção/desaparecimento/interrupção exigem endpoint visível.
+- **Aceite:** nenhuma instância duplicada, acerto repetido indevido ou projétil
+  órfão após round; testar ida, erro, retorno, canto e interrupção com ambos os
+  lutadores/HUD/PSG. Arte/objeto/runtime e budget conjunto pendentes.
+
+### `social_read_super` — Laudo Final, três ramos de uma ação
+
+- **Intenção/uso:** arriscar uma leitura de ataque físico alto/médio e gastar
+  uma barra cheia própria do medidor comum. Não é resposta universal.
+- **Preparação/ameaça (`attempt`, LC):** guarda de bengala deliberadamente
+  armada e janela curta reconhecível; rival percebe que pode atrasar/fintar.
+  Sem transformação, aura vampírica, teleporte ou violeta de bumerangue.
+- **Direção/alcance/trajetória (`hit`, LCH):** captura elegível → desvio de
+  bengala → pivô/saque → estocada de rapieira → recolha. Distância e geometria
+  da captura pendentes; não puxar rival distante através da tela para encaixar
+  a coreografia. Clarão comum é proposta sujeita a budget, não objeto liberado.
+- **Resposta/contrajogo:** baixo, agarrão, projétil, atraso e finta vencem a
+  contra-leitura. A janela não autoriza ignorar dano ou agarrões fora dessa
+  condição. Regra exata de disputa simultânea/interrupção precisa decisão.
+- **Acerto/bloqueio/erro:** sucesso apenas após captura física válida; falta de
+  alvo/janela expirada vai a `whiff` LCW, com recuperação vulnerável. Se a
+  estocada posterior pode ser bloqueada ou é consequência garantida da captura
+  permanece pendente; não inventar ramo de block no runtime. Dano, devolução
+  de barra e momento exato do débito também não estão aprovados.
+- **Recuperação:** sucesso termina com armas/guarda recompostas; erro mostra
+  bengala sem contato e retorno exposto. Todos os ramos devem terminar e
+  liberar controle; nenhum cancel universal vem desta decisão.
+- **Aceite:** matriz de elegíveis e negativos (alto/médio, baixo, projétil,
+  agarrão, atraso, ausência de ataque), barra vazia/cheia, interrupção e round
+  encerrado. Evidência identifica qual ramo ocorreu e o estado do rival.
+  Conceito aprovado; produção e balanceamento dos três ramos pendentes.
+
+### Movimentos e estados comuns já documentados
+
+O contrato de animação v2 também prevê estados que sustentam a experiência.
+As descrições abaixo orientam revisão, sem aprovar valores ou acrescentar ações.
+
+| Estado | Intenção, preparação/direção e risco | Consequência, recuperação e critério |
+|---|---|---|
+| Idle/guarda neutra | Observar e tornar prontidão reconhecível; não ameaçar dano sem input. | Soltar direção termina deslocamento conforme regra futura; não disparar ação sozinho no jogo. Autoplay é exclusivo do diagnóstico. |
+| Avanço/recuo | Escolher distância de bengala; passos com apoio e orientação para o rival. Aproximar expõe ao ataque, recuar cede espaço. | Deslocamento e apoio precisam concordar; borda limita posição sem atravessar rival ou trocar lado sem regra. Guard/ataque após soltar testados. |
+| Pulo/aterrissagem | Comprometer trajetória aérea para mudar distância/evitar ameaça compatível; impulso antes do voo. | Sem invulnerabilidade presumida. Hit no ar deve continuar física de queda; pouso recompõe apoio/controle. Trajetória e vulnerabilidade pendentes. |
+| Abaixar/defesa | Sinalizar mudança de altura e guarda; não sumir em um frame nem mascarar baixa/alta. | Hit/block distintos, vida/chip coerentes e saída para neutro; defesa não prova cancel ou parry. |
+| Dash | Reposicionamento comprometido previsto no exercício; impulso e chegada legíveis. | Sem teleporte/invulnerabilidade automática; distância, cancel e recuperação dependem de decisão/teste. |
+| Queda/rolagem/levantada | Mostrar perda de controle e recuperação, com corpo e arma conectados. | Sem escolha de direção ou invulnerabilidade presumidas. Definir janela de retorno; testar borda, interrupção e ausência de estado preso. |
+| Apresentações/provocações | Expressar frieza, investigação e confiança por olhar/atuação; não atribuir buff ou captura. | Entrada, duração/skip e exposição das provocações pendentes; não consumir input de início como golpe. |
+| Vitórias/derrota por tempo/empate/retratos versus | Dar encerramento coerente ao resultado do round/duelo; postura corresponde ao desfecho. | Sem hitbox residual ou repetição de prêmio. Duas vitórias/duas apresentações etc. permanecem no contrato existente; não exigem novas telas. |
+
+Para os estados sem ataque, hit/block/whiff não são resultados próprios:
+avaliar **receber ataque, interromper, sair e retomar**. Cada ação competitiva
+aguarda layout de dois botões, colisões e budget no consumidor. Não usar o
+viewer de 61 poses como prova dessa interação.
+
+## Parecer de maturidade da direção aprovada
 
 A direção narrativa foi organizada como duelista metódico que observa,
 controla a distância e pune erros com armas precisas. A aprovação do dono

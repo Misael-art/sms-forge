@@ -14,6 +14,7 @@ COMMANDS = {
     "quality-check": "audit_mugen_engine_contract",
     "runtime-vram-plan": "mugen2sms.runtime.vram_plan",
     "runtime-commit-budget": "mugen2sms.runtime.commit_budget",
+    "display-fit": "mugen2sms.converters.display_fit",
 }
 
 def main(argv=None):

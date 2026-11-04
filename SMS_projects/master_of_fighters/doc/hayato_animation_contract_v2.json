@@ -1,0 +1,384 @@
+{
+  "schema": "sms_animation_contract_v1",
+  "project": "master_of_fighters",
+  "character_id": "hayato",
+  "document_version": 2,
+  "status": "candidate_source_and_ROM_measured_continuous_perception_pending",
+  "design_authority": {
+    "owner_direction": "doc/decisions/hayato-short-cut-diagnostic_owner_direction.json",
+    "GDD": "doc/11-gdd.md",
+    "guard": "hayato-cps2-idle-v02",
+    "competitive_moveset_approved": false,
+    "owner_revision": "User attachment c749b358-f4d3-4ad5-8bec-96f966493362; revise C01-C04 and3/2/2/5 freely for diagnostic cut, preserve identity/art finish."
+  },
+  "principles_catalog": [
+    {
+      "id": "squash_and_stretch",
+      "name": "Esmagamento e Estiramento"
+    },
+    {
+      "id": "anticipation",
+      "name": "Antecipação"
+    },
+    {
+      "id": "staging",
+      "name": "Encenação"
+    },
+    {
+      "id": "straight_ahead_pose_to_pose",
+      "name": "Ação Direta e Pose a Pose"
+    },
+    {
+      "id": "follow_through_overlap",
+      "name": "Acompanhamento e Ação Sobreposta"
+    },
+    {
+      "id": "slow_in_slow_out",
+      "name": "Entrada e Saída Lenta"
+    },
+    {
+      "id": "arcs",
+      "name": "Arcos"
+    },
+    {
+      "id": "secondary_action",
+      "name": "Ação Secundária"
+    },
+    {
+      "id": "timing",
+      "name": "Temporização"
+    },
+    {
+      "id": "exaggeration",
+      "name": "Exagero"
+    },
+    {
+      "id": "solid_drawing",
+      "name": "Desenho Sólido"
+    },
+    {
+      "id": "appeal",
+      "name": "Atração"
+    }
+  ],
+  "required_sequence_ids": [
+    "hayato_short_cut"
+  ],
+  "sequences": [
+    {
+      "id": "hayato_short_cut",
+      "title": "Corte curto de katana — amostra diagnóstica",
+      "category": "diagnostic_art_action",
+      "status": "diagnostic_candidate_not_owner_approved",
+      "motion_contract": "Body-driven short descending diagonal cut. Rear-leg load, hips and shoulder coil; pressure transfers to flexed front knee, torso inclines, both hands accelerate a rigid katana; overshoot settles below execution; recover along controlled arc to original guard. Feet remain planted; no scene/root translation.",
+      "frame_ids": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06"
+      ],
+      "source_pose_count": 6,
+      "source_pose_count_status": "measured",
+      "timing_status": "measured",
+      "duration_ticks": [
+        4,
+        1,
+        2,
+        3,
+        1,
+        3
+      ],
+      "initial_state": "original_guard",
+      "final_state": "original_guard",
+      "loop": false,
+      "entities": [
+        {
+          "id": "hayato",
+          "kind": "character",
+          "source_pose_count": 6,
+          "initial_state": "rear_leg_load_coil",
+          "final_state": "return_to_original_guard",
+          "track": [
+            "rear_leg_load_coil",
+            "hips_lead_shoulders_release",
+            "front_weight_cut",
+            "absorb_settle",
+            "uncoil_return",
+            "return_to_original_guard"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 14
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        },
+        {
+          "id": "katana",
+          "kind": "object",
+          "source_pose_count": 6,
+          "initial_state": "high_coiled",
+          "final_state": "raised_return_to_ready",
+          "track": [
+            "high_coiled",
+            "crossing_high_arc",
+            "descending_terminal",
+            "lower_overshoot",
+            "return_forward_arc",
+            "raised_return_to_ready"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 14
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        },
+        {
+          "id": "scabbard",
+          "kind": "object",
+          "source_pose_count": 6,
+          "initial_state": "attached_rotated_with_pelvis",
+          "final_state": "attached_rotated_with_pelvis",
+          "track": [
+            "attached_rotated_with_pelvis",
+            "attached_rotated_with_pelvis",
+            "attached_rotated_with_pelvis",
+            "attached_rotated_with_pelvis",
+            "attached_rotated_with_pelvis",
+            "attached_rotated_with_pelvis"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 14
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        }
+      ],
+      "principles_applied": [
+        {
+          "id": "squash_and_stretch",
+          "frame_ids": [
+            "R01",
+            "R03",
+            "R04"
+          ],
+          "planned_visual_cue": "Knee/hip compression then diagonal torso extension; preserve segment lengths, rigid steel. Not elastic scaling.",
+          "observed_result": "Static R01 versus R03/R04 knee/torso change reviewed; no elastic steel. Continuous weight/force pending."
+        },
+        {
+          "id": "anticipation",
+          "frame_ids": [
+            "R01"
+          ],
+          "planned_visual_cue": "Rear-weight visible hip retreat and opposing shoulder line; raised joined hands unlike guard.",
+          "observed_result": "R01 high coiled silhouette differs from original guard; four presented ticks verified. Perceived anticipation pending."
+        },
+        {
+          "id": "staging",
+          "frame_ids": [
+            "R01",
+            "R03"
+          ],
+          "planned_visual_cue": "Clear high load versus low-forward cut silhouette; blade outside face/legs.",
+          "observed_result": "Static source and SMS high load/low cut silhouettes passed independent review; normal-speed reading pending."
+        },
+        {
+          "id": "straight_ahead_pose_to_pose",
+          "frame_ids": [
+            "R01",
+            "R02",
+            "R03",
+            "R04",
+            "R05",
+            "R06"
+          ],
+          "planned_visual_cue": "Approve gesture sequence and temporal study before finish; construction references not frozen poses.",
+          "observed_result": "Rough critique revised pelvis and return before finish; five new selected drawings plus reused same-role recovery. Rough continuous playback was not perceived."
+        },
+        {
+          "id": "follow_through_overlap",
+          "frame_ids": [
+            "R03",
+            "R04"
+          ],
+          "planned_visual_cue": "Sword goes beyond main key while front knee and torso absorb; sash/hair lag one drawing.",
+          "observed_result": "R04 lower absorption differs from R03 execution in static progression; perceived overshoot and cloth/hair lag pending."
+        },
+        {
+          "id": "slow_in_slow_out",
+          "frame_ids": [
+            "R01",
+            "R02",
+            "R03",
+            "R04",
+            "R05",
+            "R06"
+          ],
+          "planned_visual_cue": "Large cut sweep R02 at1tick; R05return crossing at1tick; lower absorbR04 and high settleR06at3ticks. Check distances as well as holds.",
+          "observed_result": "Large pose gaps and unequal exposures exist; neither alone proves acceleration/deceleration. Perceived speed profile pending."
+        },
+        {
+          "id": "arcs",
+          "frame_ids": [
+            "R01",
+            "R02",
+            "R03",
+            "R04",
+            "R05",
+            "R06"
+          ],
+          "planned_visual_cue": "Hand path anchored by two connected arm chains; blade rigid length, arc changes shoulder/elbow coordinates.",
+          "observed_result": "Connected hands and whole blade passed static sequence review; continuous apparent arc pending."
+        },
+        {
+          "id": "secondary_action",
+          "frame_ids": [
+            "R03",
+            "R04",
+            "R05",
+            "R06"
+          ],
+          "planned_visual_cue": "Sash/hair and sleeve hems lag torso direction and settle, no independent effect.",
+          "observed_result": "Hair/cloth attachments and volumes passed static review; independently timed secondary motion not established."
+        },
+        {
+          "id": "timing",
+          "frame_ids": [
+            "R01",
+            "R02",
+            "R03",
+            "R04",
+            "R05",
+            "R06"
+          ],
+          "planned_visual_cue": "Working4/1/2/3/1/3 ticks; one drawing added for identified R04→guard return gap, not decorative tween count.",
+          "observed_result": "Manual both sides and native video present 4/1/2/3/1/3; continuous rhythm/force judgment pending."
+        },
+        {
+          "id": "exaggeration",
+          "frame_ids": [
+            "R01",
+            "R03"
+          ],
+          "planned_visual_cue": "Compress rear load and forward diagonal reach visibly without resizing anatomy or gaining scene displacement.",
+          "observed_result": "Greater high-load/low-cut separation and body orientation change than C01-C04; expressive strength pending playback judgment."
+        },
+        {
+          "id": "solid_drawing",
+          "frame_ids": [
+            "R01",
+            "R02",
+            "R03",
+            "R04",
+            "R05",
+            "R06"
+          ],
+          "planned_visual_cue": "Trace limb lengths and attachments; posture/foreshortening varies intentionally, body never locked to one silhouette.",
+          "observed_result": "Source and SMS anatomy/equipment static reviews passed; source-local fringe repair preserved all pixels outside ROI."
+        },
+        {
+          "id": "appeal",
+          "frame_ids": [
+            "R01",
+            "R03",
+            "R05",
+            "R06"
+          ],
+          "planned_visual_cue": "Hayato deliberate youthful sword discipline; gaze ahead, controlled recovery not flailing weapon.",
+          "observed_result": "Identity preserved under static independent review; personality/convincing action in continuous motion pending."
+        }
+      ],
+      "principles_not_applied": [],
+      "competitive_frame_data": {
+        "approved": false,
+        "damage": null,
+        "hitboxes": null,
+        "cancel_windows": null
+      },
+      "equipment_invariants": [
+        "Complete normal-length blade and grip",
+        "Two hands on same grip behind guard",
+        "Complete scabbard fixed at left sash",
+        "No projectile/effect lifetime"
+      ],
+      "root_motion_px": [
+        0,
+        0
+      ],
+      "hardware_sprite_objects": {
+        "status": "pending",
+        "count": null
+      },
+      "unique_tile_count": {
+        "status": "pending",
+        "count": null
+      },
+      "palette_and_vblank_status": "measured",
+      "source": {
+        "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+        "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+      },
+      "whole_pair_budget": {
+        "status": "measured",
+        "resident_patterns_including_one_blank": 219,
+        "bytes": 7008,
+        "max_sat": 53,
+        "max_scanline": 8,
+        "sprite_size": "8x8",
+        "scope": "Hayato current seven poses plus fixed Social; both facings; not separate body/weapon counts",
+        "evidence": [
+          {
+            "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_left/conversion.json",
+            "sha256": "a400d163f98f723ecf2be9b648ba12bd7ff7b84e2d6b4f4307df4fd3c92cda2b"
+          },
+          {
+            "path": "out/diagnostics/hayato_short_cut_v2/converted_v4_right/conversion.json",
+            "sha256": "a66e4499141fa74eddb7211451e95f5fd6687bf69f35116f6e4858949a551dca"
+          }
+        ]
+      },
+      "timing_observation": "presented_4_1_2_3_1_3_in_two_manual_cases_and_native_realtime_video",
+      "palette_and_vblank_observation": "shared_P1_preserved; current_ROM_sealed_3000_frames_zero_spill_baseline_and_stress128"
+    }
+  ],
+  "timing_and_hardware": {
+    "tick_definition": "One NTSC VDP tick nominally1/60s; prototype only. PAL and competitive frame data unapproved.",
+    "max_frames_status": "measured_current_sheet_only_not_global_limit",
+    "max_frames_per_sheet": 6,
+    "resident_patterns": "219 physical 8x8 patterns including one blank, whole pair; 7008 bytes",
+    "sprites_per_line": "peak8 both facings, max53 SAT",
+    "worst_vblank": [
+      {
+        "rom_sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517",
+        "frames": 3000,
+        "spill": 0,
+        "vline_min": 213
+      },
+      {
+        "rom_sha256": "4f7b340a19075183542c318352457ab1d5adca78d09037af9060f991bffd497a",
+        "frames": 3000,
+        "spill": 0,
+        "vline_min": 223
+      }
+    ],
+    "fps_8s_windows": [
+      59.78,
+      59.67
+    ]
+  },
+  "production_approval": false,
+  "historical_rough_contract": {
+    "path": "out/diagnostics/hayato_short_cut_v2/build_inputs/animation_contract_v2_rough_frozen.json",
+    "sha256": "c4e398450413bc0fb20b4b06acb2569a525ec74df8a3fc92359ffa409d7af025"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "producer": "/root",
+  "asset": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/jab_source.png",
+    "sha256": "877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+  },
+  "required_characters": [
+    "dr_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "semantic_palette_role_confinement",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "morphology_and_biotype",
+    "pose_anatomy_and_joint_continuity",
+    "support_and_pivot"
+  ],
+  "characters": [
+    {
+      "id": "dr_social",
+      "references": [
+        {
+          "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+          "role": "approved identity model, later neutral-gray hair and brass glasses override brown-gray text"
+        }
+      ],
+      "observed_defects": [
+        "Full source contact and sequence need new independent judgment; v5 face-only review does not approve new J04."
+      ],
+      "revision_notes": [
+        "Five v5 authored frames copied byte-for-byte; J04 copied byte-for-byte from v6.",
+        "No new imagegen pass, resize/recolor or creative pixel drawing.",
+        "Physical META grid phase solves previously rejected v6 J04 interval overlap without changing any converted pixel."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "face_detail_readability": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "outline_and_cutout": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "equipment_geometry": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        },
+        "support_and_pivot": {
+          "status": "pending",
+          "note": "Full native source v8 sequence and selected conversion need independent visual inspection; no owner approval inherited."
+        }
+      }
+    }
+  ],
+  "owner_approval": {
+    "approved": false
+  },
+  "independent_review": {
+    "status": "pending",
+    "reviewer": "/root/social_art_review"
+  }
+}

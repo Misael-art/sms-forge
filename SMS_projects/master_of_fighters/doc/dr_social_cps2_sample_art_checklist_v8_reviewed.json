@@ -1,0 +1,127 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "producer": "/root",
+  "asset": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/jab_source.png",
+    "sha256": "877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+  },
+  "required_characters": [
+    "dr_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "semantic_palette_role_confinement",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "morphology_and_biotype",
+    "pose_anatomy_and_joint_continuity",
+    "support_and_pivot",
+    "temporal_motion_readability",
+    "sms_derivative_acceptance"
+  ],
+  "characters": [
+    {
+      "id": "dr_social",
+      "references": [
+        {
+          "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+          "role": "approved identity model, later neutral-gray hair and brass glasses override brown-gray text"
+        }
+      ],
+      "observed_defects": [
+        "Full source contact and sequence need new independent judgment; v5 face-only review does not approve new J04."
+      ],
+      "revision_notes": [
+        "Five v5 authored frames copied byte-for-byte; J04 copied byte-for-byte from v6.",
+        "No new imagegen pass, resize/recolor or creative pixel drawing.",
+        "Physical META grid phase solves previously rejected v6 J04 interval overlap without changing any converted pixel."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "pass",
+          "note": "Nos seis desenhos inspecionados, tecido e cabelo conservam grupos de cor legíveis e planos maiores. O novo braço J04 continua essa construção sem introduzir textura ou ruído que concorra com a mão."
+        },
+        "face_detail_readability": {
+          "status": "pass",
+          "note": "A assinatura de óculos de latão, rosto humano e cabelo cinza é reconhecível em toda a fonte, incluindo J04. Pequenas diferenças de rotação/oclusão não me pareceram mudança de identidade."
+        },
+        "outline_and_cutout": {
+          "status": "pass",
+          "note": "Contorno corporal e negativo entre braço/torso, pernas e bengala mantêm leitura limpa. Não observei recorte de mão, botas, cabelo ou terminal da bengala nas imagens nativas/ampliadas."
+        },
+        "material_shading": {
+          "status": "pass",
+          "note": "Casaco azul/ciano, colete escuro, cravat bordô, pele, cabelo cinza, luvas claras, couro e latão continuam separados visualmente, sem mudança material abrupta no J04."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pass",
+          "note": "Planos de sombra/base/luz acompanham a roupa e a manga estendida do J04; não identifiquei inversão de luz ou mancha nova que contradiga os quadros vizinhos."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pass",
+          "note": "Na inspeção visual, branco permanece associado sobretudo a luvas/gola/haste e latão aos óculos, botões e bengala. Cabelo lê como cinza. Isto é parecer perceptivo, não prova automática por paleta ou máscara."
+        },
+        "hand_weapon_attachment": {
+          "status": "pass",
+          "note": "A mão de apoio continua envolvendo a curva da bengala; pulso/luva/haste permanecem conectados. O braço que golpeia é independente e não troca a bengala de mão."
+        },
+        "equipment_geometry": {
+          "status": "pass",
+          "note": "Curva da bengala, haste clara e terminal inferior aparecem completos nos seis quadros, sem corte ou transformação em lâmina. Não foi identificado equipamento novo nesta composição."
+        },
+        "frame_pose_integrity": {
+          "status": "pass",
+          "note": "As seis chaves leem como guarda, carga curta, extensão intermediária, extensão de contato, recolha e guarda recuperada. J04 agora é inequívoco como chave estendida, sem clonar J03/J05."
+        },
+        "native_size_readability": {
+          "status": "pass",
+          "note": "Em 1×, a silhueta esguia, traje, bengala e direção do jab permanecem legíveis. As ampliações nearest reforçam a continuidade dos membros. A saída SMS tem a simplificação facial separadamente registrada."
+        },
+        "morphology_and_biotype": {
+          "status": "pass",
+          "note": "A composição mantém um adulto humano esguio; não observei engrossamento de tronco/membros, alteração de idade ou mudança para as massas musculares dos personagens de referência."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pass",
+          "note": "No J04, ombro, manga, cotovelo quase estendido, antebraço, punho e luva formam uma cadeia contínua e alinhada com o golpe. A mão ativa não parece solta; o apoio da bengala permanece coerente."
+        },
+        "support_and_pivot": {
+          "status": "pass",
+          "note": "Os pés continuam apoiados na linha comum e a extensão do braço não exige passo/lunge desenhado. Há variação de roupa/rotação de tronco compatível com a ação. Isso não é prova física de COM nem medição de estabilidade dinâmica."
+        },
+        "temporal_motion_readability": {
+          "status": "pending",
+          "note": "Actual pose holds/framebuffers are measured separately; perceived continuous motion awaits human judgment of the video."
+        },
+        "sms_derivative_acceptance": {
+          "status": "pending",
+          "note": "Target-size glasses/face and lapel/vest simplify; no automatic artistic acceptance from exact render or legal SAT."
+        }
+      }
+    }
+  ],
+  "owner_approval": {
+    "approved": false
+  },
+  "independent_review": {
+    "status": "passed",
+    "reviewer": "/root/social_art_review",
+    "report": {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v8.json",
+      "sha256": "3f67ceadf65ef3d7b33a19c87aadf920e9f58828d7a0e724ab0a0518c359107b"
+    }
+  },
+  "scope": "Post-review source summary; original producer checklist remains immutable in the review request."
+}

@@ -10,7 +10,7 @@
     "validation_report": {"type": "boolean"},
     "boot_emulador": {"type": "boolean", "description": "so com evidencia de capture_evidence"},
     "gameplay": {"type": "boolean"},
-    "fps_constante": {"type": "boolean", "description": "60 NTSC / 50 PAL medidos, nao estimados"},
+    "fps_constante": {"type": "boolean", "description": "Objetivo60FPS/piso58 autorizado em todas as janelas da ROM, sem arredondar para atingir o piso; PAL50 apenas diagnostico. Nao prova sozinho gameplay/pacing."},
     "audio": {"type": "boolean"},
     "memory_bank_atualizado": {"type": "boolean"}
   },

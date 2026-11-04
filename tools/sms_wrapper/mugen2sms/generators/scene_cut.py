@@ -63,7 +63,101 @@ def _distance(a: int, b: int) -> int:
     return (ar - br) ** 2 + (ag - bg) ** 2 + (ab - bb) ** 2
 
 
+def _luma_word(word: int) -> float:
+    red, green, blue = _word_rgb(word)
+    return 0.30 * red + 0.59 * green + 0.11 * blue
+
+
+# One Master System channel step is 85 in contract RGB. 7225 is that step squared.
+_CHANNEL_STEP = 85
+# Skin, gi and highlights on Ken/Ryu sit above this. A darker outline may not
+# spend one of those steps: the pixels would fall into a neighbor and the
+# picture would lose a shade.
+_BODY_COLOR_LUMA = 100.0
+# Mean contract-RGB brightness of every opaque pixel. The reserved book dropped
+# Ken by 4.6 and Ryu by 4.8 against the frequency book.
+_MEAN_LUMA_DROP_LIMIT = 1.0
+
+
+def _assign_index(word: int, codebook: list[int]) -> int:
+    """Nearest color. An exact distance tie keeps the closer brightness."""
+    return min(range(len(codebook)), key=lambda n: (
+        _distance(word, codebook[n]),
+        abs(_luma_word(word) - _luma_word(codebook[n])),
+        n,
+    ))
+
+
+def _weighted_error(counts: Counter[int], codebook: list[int]) -> int:
+    return sum(_distance(word, codebook[_assign_index(word, codebook)]) * count
+               for word, count in counts.items())
+
+
+def _mean_luma(counts: Counter[int], codebook: list[int]) -> float:
+    total = sum(counts.values())
+    if not total:
+        return 0.0
+    return sum(_luma_word(codebook[_assign_index(word, codebook)]) * count
+               for word, count in counts.items()) / total
+
+
+def _choose_codebook(counts: Counter[int]) -> list[int]:
+    """Frequency first. An outside anchor replaces a slot only when the swap
+    keeps the squared error and the mean brightness, and the slot is not a
+    body shade or the most used color.
+    """
+    ranked = [word for word, _count in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))]
+    chosen = ranked[:PALETTE_COLORS_PER_SIDE]
+    if len(chosen) < 2:
+        return chosen
+    darkest = min(ranked, key=lambda word: (_luma_word(word), -counts[word], word))
+    lightest = max(ranked, key=lambda word: (_luma_word(word), counts[word], -word))
+    protected: set[int] = set()
+    for anchor in (darkest, lightest):
+        if anchor in chosen:
+            protected.add(anchor)
+            continue
+        if anchor == lightest and any(
+            _distance(anchor, word) <= _CHANNEL_STEP ** 2
+            and _luma_word(word) >= _luma_word(anchor) - 20
+            for word in chosen
+        ):
+            continue
+        base_error = _weighted_error(counts, chosen)
+        base_mean = _mean_luma(counts, chosen)
+        best = None
+        for victim in chosen:
+            if victim in protected or victim == ranked[0]:
+                continue
+            if _luma_word(victim) >= _BODY_COLOR_LUMA:
+                continue
+            if anchor == lightest and _luma_word(victim) + 40 < _luma_word(anchor):
+                continue
+            trial = [anchor if word == victim else word for word in chosen]
+            error = _weighted_error(counts, trial)
+            mean = _mean_luma(counts, trial)
+            if error > base_error or mean + _MEAN_LUMA_DROP_LIMIT < base_mean:
+                continue
+            candidate = (error - base_error, -mean, counts[victim], victim)
+            if best is None or candidate < best:
+                best = candidate
+        if best is None:
+            continue
+        victim = best[3]
+        chosen = [anchor if word == victim else word for word in chosen]
+        protected.add(anchor)
+    return chosen
+
+
 def _palette_codebook(entries: list[smsdev.Artifact], by_symbol: dict[str, smsdev.Artifact]) -> list[int]:
+    """Seven shared colors. Transparency is palette index 0, not CRAM word 0.
+
+    Word 0 is opaque black and remains eligible. Frequency fills the slots.
+    A missing outline may replace one darker, less used slot when that swap
+    does not raise the squared RGB error and does not drop the mean brightness
+    of all opaque pixels by more than one contract-RGB unit. A body shade at
+    luma 100 or above stays. A highlight one channel from white stays too.
+    """
     counts: Counter[int] = Counter()
     for entry in entries:
         if not entry.symbol.endswith("_TILES"):
@@ -74,8 +168,7 @@ def _palette_codebook(entries: list[smsdev.Artifact], by_symbol: dict[str, smsde
             for index in decode_indices(blob[offset:offset + 32]):
                 if index:
                     counts[palette[index]] += 1
-    return [word for word, _ in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
-            if word != 0][:PALETTE_COLORS_PER_SIDE]
+    return _choose_codebook(counts)
 
 
 def _remap_blob(blob: bytes, palette: bytes, codebook: list[int], offset: int) -> bytes:
@@ -87,7 +180,7 @@ def _remap_blob(blob: bytes, palette: bytes, codebook: list[int], offset: int) -
         word = palette[index]
         # Index 0 in CRAM is transparent; opaque black is kept in an available
         # codebook slot when present, never mapped to transparency.
-        slot = min(range(len(codebook)), key=lambda n: (_distance(word, codebook[n]), n))
+        slot = _assign_index(word, codebook)
         index_map[index] = slot + 1 + offset
     out = bytearray()
     for pos in range(0, len(blob), 32):
@@ -196,11 +289,28 @@ def _compact_facing_pose(tiles: bytes, metadata: bytes,
     return bytes(compact), bytes(rewritten)
 
 
+def _pair_content_hashes(compact_pairs: bytes) -> list[int]:
+    """Emit CRC-8/ATM filters; runtime must verify matching hashes bytewise."""
+    if len(compact_pairs) % 64:
+        raise ValueError("compact pair payload is not a multiple of 64 bytes")
+    result = []
+    for offset in range(0, len(compact_pairs), 64):
+        pair = compact_pairs[offset:offset + 64]
+        crc = 0
+        for byte in pair:
+            crc ^= byte
+            for _ in range(8):
+                crc = ((crc << 1) ^ 0x07) & 0xFF if crc & 0x80 else (crc << 1) & 0xFF
+        result.append(crc)
+    return result
+
+
 def _runtime_table(roles: list[dict], role_frames: dict[str, list[dict]],
                    pose_count: int, artifacts: list[smsdev.Artifact],
                    bank_map: dict[str, tuple[int, int]], palette: list[int],
                    runtime: dict[str, int],
-                   facing_sizes: dict[str, int] | None = None) -> str:
+                   facing_sizes: dict[str, int] | None = None,
+                   pair_hashes_by_stem: dict[str, dict[str, list[int]]] | None = None) -> str:
     symbols = {artifact.symbol for artifact in artifacts}
     lines = ["", "/* Runtime tables: generated from AIR/SFF/ACT/CNS/CMD. */",
              f"#define CUT_POSE_COUNT {pose_count}", "",
@@ -223,8 +333,35 @@ def _runtime_table(roles: list[dict], role_frames: dict[str, list[dict]],
              f"#define CUT_STREAM_CHUNK_BYTES {STREAM_CHUNK_BYTES}", ""]
     for index, role in enumerate(roles):
         lines.append(f"#define CUT_ANIM_{role['role'].upper()} {index}")
-    lines += ["",
-             "/* FACE_SIZE is one facing's length in the adjacent R/L payload. */"]
+    pair_hashes_by_stem = pair_hashes_by_stem or {}
+    max_pairs = 0
+    lines.append("#if defined(LUTA_PAIR_SLOT_REUSE) && LUTA_PAIR_SLOT_REUSE")
+    for role in roles:
+        for frame in role_frames[role["role"]]:
+            stem = frame["stem"]
+            faces = pair_hashes_by_stem.get(stem)
+            if not faces or set(faces) != {"right", "left", "p2_right", "p2_left"}:
+                raise ValueError(f"missing palette/facing pair hashes for {stem}")
+            max_pairs = max(max_pairs, *(len(values) for values in faces.values()))
+            for key, suffix in (("right", "_RIGHT_PAIR_HASHES"),
+                                 ("left", "_LEFT_PAIR_HASHES"),
+                                 ("p2_right", "_P2_RIGHT_PAIR_HASHES"),
+                                 ("p2_left", "_P2_LEFT_PAIR_HASHES")):
+                values = faces[key]
+                if not values:
+                    raise ValueError(f"empty compact facing pair hashes: {stem}{suffix}")
+                lines.append(f"static const unsigned char {stem}{suffix}[{len(values)}] = {{")
+                lines.append("    " + ", ".join(str(value) for value in values) + ",")
+                lines.append("};")
+    lines += ["#endif",
+              "#if defined(LUTA_PAIR_SLOT_REUSE) && LUTA_PAIR_SLOT_REUSE",
+              "#define CUT_PAIR_HASH_POINTERS(right, left) right, left",
+              "#else",
+              "#define CUT_PAIR_HASH_POINTERS(right, left) 0, 0",
+              "#endif",
+              "", "#define CUT_PAIR_CONTENT_HASHES_VERSION 1",
+              f"#define CUT_MAX_POSE_PAIRS {max_pairs}",
+              "", "/* FACE_SIZE is one facing's length in the adjacent R/L payload. */"]
     facing_sizes = facing_sizes or {}
     for role in roles:
         for frame in role_frames[role["role"]]:
@@ -235,6 +372,13 @@ def _runtime_table(roles: list[dict], role_frames: dict[str, list[dict]],
                     p1_face_size % 64 or p2_face_size % 64):
                 raise ValueError(f"invalid compact facing size for {stem}: "
                                  f"P1={p1_face_size}, P2={p2_face_size}")
+            faces = pair_hashes_by_stem[stem]
+            expected = {"right": p1_face_size // 64,
+                        "left": p1_face_size // 64,
+                        "p2_right": p2_face_size // 64,
+                        "p2_left": p2_face_size // 64}
+            if {key: len(value) for key, value in faces.items()} != expected:
+                raise ValueError(f"pair hash count disagrees with compact face size for {stem}")
             lines.append(f"#define {stem}_FACE_SIZE {p1_face_size}")
             lines.append(f"#define {stem}_P2_FACE_SIZE {p2_face_size}")
     lines += ["", "static const PoseRef poses_all[CUT_POSE_COUNT * 2] = {"]
@@ -246,7 +390,19 @@ def _runtime_table(roles: list[dict], role_frames: dict[str, list[dict]],
                 face_size_symbol = stem + suffix + "_FACE_SIZE"
                 if tile_symbol not in bank_map:
                     raise ValueError(f"missing bank entry for {tile_symbol}")
-                lines.append(f"    {{ {tile_symbol}_BANK, {tile_symbol}_OFF, {face_size_symbol} }},")
+                # side 1 draws with Frame.metal_p2, whose compact pair indices
+                # address the LEFT facing. The combined payload is
+                # right.ljust(face_size) + left.ljust(face_size), so the P2
+                # PoseRef must start at OFF + FACE_SIZE. Pointing it at the
+                # right face makes every P2 cell read a valid but wrong pair
+                # (the body splits at the tile seams).
+                face_offset = (" + " + face_size_symbol) if suffix else ""
+                pair_suffix = "_P2" if suffix else ""
+                lines.append(
+                    f"    {{ {tile_symbol}_BANK, {tile_symbol}_OFF{face_offset}, "
+                    f"{face_size_symbol}, CUT_PAIR_HASH_POINTERS("
+                    f"{stem}{pair_suffix}_RIGHT_PAIR_HASHES, "
+                    f"{stem}{pair_suffix}_LEFT_PAIR_HASHES) }},")
     lines += ["};", "", "static const Frame frames_all[CUT_POSE_COUNT] = {"]
     pose_index = 0
     for role in roles:
@@ -276,17 +432,70 @@ def _q8(value: str | int | float) -> int:
     return int(Decimal(str(value)) * 256)
 
 
-def _hitdef_value(ch, state_id: int, name: str, default: int) -> int:
+def _hitdef_const(ch, state_id: int, name: str):
+    """First compiled HitDef constant, or None when the parameter is absent."""
     state = ch.states.get(state_id)
     if state is None:
-        return default
+        return None
     for controller in state.controllers:
         if controller.source_type != "hitdef":
             continue
         for param in controller.params:
-            if param.name == name and param.const is not None:
-                return int(param.const)
-    return default
+            if param.name == name:
+                return param.const
+    return None
+
+
+def _hitdef_value(ch, state_id: int, name: str, default: int) -> int:
+    raw = _hitdef_const(ch, state_id, name)
+    if raw is None:
+        return default
+    return int(raw)
+
+
+def hit_recovery(ch, state_id: int) -> dict:
+    """Hit pause and control-lock times from the first HitDef of one state.
+
+    guard.hittime omitted in the HitDef copies ground.hittime (the default
+    recorded on the Ken source and in the HitDef schema). air.hittime omitted
+    in the source is compiled as the schema default 20. Later HitDefs in the
+    same state are not read. This does not supply a common1 hit animation or
+    a knockdown.
+    """
+    if _hitdef_count(ch, state_id) < 1:
+        raise ValueError(f"state {state_id} has no HitDef")
+
+    def uint8(name: str, default: int) -> int:
+        raw = _hitdef_const(ch, state_id, name)
+        value = default if raw is None else raw
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError(f"state {state_id} {name} is not numeric")
+        if float(value) != int(value):
+            raise ValueError(f"state {state_id} {name} is not an integer")
+        value = int(value)
+        if not 0 <= value <= 255:
+            raise ValueError(f"state {state_id} {name} outside uint8")
+        return value
+
+    stop_a = uint8("pausetime[0]", 0)
+    stop_d = uint8("pausetime[1]", stop_a)
+    hittime = uint8("ground.hittime[0]", 0)
+    guard_raw = _hitdef_const(ch, state_id, "guard.hittime[0]")
+    if guard_raw is None:
+        guardtime = hittime
+        guard_source = "ground.hittime"
+    else:
+        guardtime = uint8("guard.hittime[0]", 0)
+        guard_source = "hitdef"
+    return {
+        "stop_a": stop_a,
+        "stop_d": stop_d,
+        "hittime": hittime,
+        "guardtime": guardtime,
+        "airtime": uint8("air.hittime[0]", 20),
+        "guardtime_source": guard_source,
+        "fidelity": "approximate",
+    }
 
 
 def _hitdef_count(ch, state_id: int) -> int:
@@ -787,7 +996,76 @@ def controls_from_config(config: dict) -> ControlMap:
     return DEFAULT_MAP if not declared else ControlMap.from_dict(declared)
 
 
-def _prepare_scene(ch, roles: list[dict], scale_profile: dict | None):
+def _prepare_pose_budget(ch, roles: list[dict], config: dict, source_sizes, selected_ids):
+    """Framebuffer fit, then an extra scale that keeps the neutral pose at 4 SAT columns."""
+    from mugen2sms.converters import display_fit as display
+
+    fit = display.resolve_display_fit("pose_budget", config.get("source"), config.get("target"))
+    if fit.status != "applied":
+        raise ValueError(fit.reason)
+    original_durations = {aid: [frame.time for frame in ch.anims[aid].frames] for aid in selected_ids}
+    original_counts = {aid: [len(frame.clsn1) + len(frame.clsn2) for frame in ch.anims[aid].frames]
+                       for aid in selected_ids}
+    fx_groups = config.get("fx_groups") or []
+    idle_action = next((int(role["action"]) for role in roles if role.get("role") == "idle"), 0)
+    scaled_ch, _changed, pose_report = display.scale_character(
+        ch, fit, fx_groups, idle_action)
+    selected = {aid: scaled_ch.anims[aid] for aid in selected_ids}
+    durations_preserved = all(
+        [frame.time for frame in scaled_ch.anims[aid].frames] == original_durations[aid]
+        for aid in selected_ids)
+    boxes_preserved = all(
+        [len(frame.clsn1) + len(frame.clsn2) for frame in scaled_ch.anims[aid].frames]
+        == original_counts[aid] for aid in selected_ids)
+    if not durations_preserved or not boxes_preserved:
+        raise ValueError("pose budget changed animation timing or CLSN box counts")
+    pose_report["source"] = config.get("source")
+    pose_report["target"] = config.get("target") or "sms"
+    pose_report["framebuffer_scale"] = {
+        "x": [fit.scale_num_x, fit.scale_den_x],
+        "y": [fit.scale_num_y, fit.scale_den_y],
+    }
+    pose_report["sampling"] = "nearest_neighbor_indexed_pixels"
+    pose_report["source_sizes_by_group_image"] = {
+        f"{group}:{image}": size for (group, image), size in source_sizes.items()}
+    # The scene manifest stores this under the historical key "ratio".
+    # numerator/denominator are the extra pose scale only. They are not the
+    # legacy 40/49 scale. The framebuffer fractions are siblings, not optional.
+    extra = list(pose_report.get("extra_scale") or [1, 1])
+    pose_report["ratio"] = {
+        "policy": pose_report.get("policy", "pose_budget_pair"),
+        "meaning": "numerator/denominator are the extra pose scale only, not legacy 40/49",
+        "framebuffer_x": [fit.scale_num_x, fit.scale_den_x],
+        "framebuffer_y": [fit.scale_num_y, fit.scale_den_y],
+        "pose_extra": extra,
+        "numerator": extra[0],
+        "denominator": extra[1],
+    }
+    if pose_report.get("neutral_columns_after", 0) > display.NEUTRAL_COLUMNS:
+        raise ValueError(
+            "neutral pose still occupies "
+            f"{pose_report['neutral_columns_after']} SAT columns after the body fraction")
+    excluded = {(item["group"], item["image"]) for item in pose_report.get("fx_excluded") or []}
+    for sprite in scaled_ch.sprites:
+        if sprite.group in display.EXEMPT_GROUPS:
+            excluded.add((sprite.group, sprite.image))
+    role_of = {int(role["action"]): role.get("role", role["action"]) for role in roles}
+    anims = dict(scaled_ch.anims)
+    for aid in list(selected):
+        action = selected[aid]
+        kept = [frame for frame in action.frames
+                if (frame.group, frame.image) not in excluded]
+        if not kept:
+            raise ValueError(f"{role_of.get(aid, aid)}: every frame is outside the fight cut")
+        if len(kept) != len(action.frames):
+            action = replace(action, frames=kept)
+            selected[aid] = action
+            anims[aid] = action
+    scaled_ch = replace(scaled_ch, anims=anims)
+    return scaled_ch, selected, pose_report
+
+
+def _prepare_scene(ch, roles: list[dict], scale_profile: dict | None, pose_config: dict | None = None):
     """Select actions and apply the declared uniform scale before fidelity checks.
 
     Source-size SAT overflow is expected for MUGEN art that is intentionally
@@ -807,6 +1085,11 @@ def _prepare_scene(ch, roles: list[dict], scale_profile: dict | None):
         if loop_start is not None and not 0 <= int(loop_start) < len(action.frames):
             raise ValueError(f"{role['role']}: loop_start {loop_start} is outside the AIR action")
         selected[action_id] = action
+
+    if pose_config and pose_config.get("size_policy") == "pose_budget":
+        scaled_ch, selected, pose_report = _prepare_pose_budget(
+            ch, roles, pose_config, source_sizes, set(selected))
+        return scaled_ch, selected, source_sizes, pose_report, True
 
     if scale_profile is None:
         return ch, selected, source_sizes, None, False
@@ -888,8 +1171,15 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
     source_routes = _compile_source_routes(
         ch, roles, config.get("source_routes"), controls_from_config(config))
     ch, selected, source_sizes, scale_report, uniformly_scaled = _prepare_scene(
-        ch, roles, config.get("fighter_scale"))
-    fidelity = classify_character(ch, SmsLimits())
+        ch, roles, config.get("fighter_scale"), config)
+    scale_label = None
+    if (uniformly_scaled and scale_report
+            and scale_report.get("policy") == "pose_budget_pair"):
+        fb = scale_report["framebuffer_scale"]
+        extra = scale_report.get("extra_scale") or [1, 1]
+        scale_label = (f"framebuffer x={fb['x'][0]}/{fb['x'][1]} "
+                       f"y={fb['y'][0]}/{fb['y'][1]} extra={extra[0]}/{extra[1]}")
+    fidelity = classify_character(ch, SmsLimits(), scale_label=scale_label)
     for role in roles:
         action_id = int(role["action"])
         action = selected[action_id]
@@ -954,6 +1244,8 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
         final: list[smsdev.Artifact] = []
         compact_sizes: dict[str, int] = {}
         compact_face_sizes: dict[str, int] = {}
+        pair_payload_sets: dict[str, set[bytes]] = {"p1": set(), "p2": set()}
+        pair_hashes_by_stem: dict[str, dict[str, list[int]]] = {}
         for symbol in required:
             stem = symbol[:-6]
             p1_tiles = p1_by_symbol[symbol]
@@ -970,6 +1262,20 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
                 p2_blob, p2_by_symbol[stem + "_META"].data, stem + " P2 right")
             p2_left, p2_metal = _compact_facing_pose(
                 p2_blob, p2_by_symbol[stem + "_METAL"].data, stem + " P2 left")
+            pair_payload_sets["p1"].update(
+                p1_right[index:index + 64] for index in range(0, len(p1_right), 64))
+            pair_payload_sets["p1"].update(
+                p1_left[index:index + 64] for index in range(0, len(p1_left), 64))
+            pair_payload_sets["p2"].update(
+                p2_right[index:index + 64] for index in range(0, len(p2_right), 64))
+            pair_payload_sets["p2"].update(
+                p2_left[index:index + 64] for index in range(0, len(p2_left), 64))
+            pair_hashes_by_stem[stem] = {
+                "right": _pair_content_hashes(p1_right),
+                "left": _pair_content_hashes(p1_left),
+                "p2_right": _pair_content_hashes(p2_right),
+                "p2_left": _pair_content_hashes(p2_left),
+            }
             p1_face_size = max(len(p1_right), len(p1_left))
             p2_face_size = max(len(p2_right), len(p2_left))
             p1_combined = (p1_right.ljust(p1_face_size, b"\0") +
@@ -1172,7 +1478,8 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
         close_attack_rules = _close_attack_rules(ch, roles, commands)
         far_attack_rules = _far_attack_rules(ch, roles, commands)
         header += _runtime_table(roles, pose_frames, len(required), final, bank_map,
-                                 palette_words, runtime, compact_face_sizes)
+                                 palette_words, runtime, compact_face_sizes,
+                                 pair_hashes_by_stem)
         header += guard_end
         (out_dir / "ken_scene_runtime.h").write_text(header, encoding="ascii")
 
@@ -1181,6 +1488,13 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
                  "palette_p1_act": p1_name, "palette_p2_act": p2_name,
                  "palette_p1_words": p1_codebook, "palette_p2_words": p2_codebook,
                  "palette_index_shift_p2": 8,
+                 "pair_content_hashes": {
+                     "schema": 1,
+                     "algorithm": "crc8_atm_candidate_then_exact_64_byte_compare",
+                     "p1_unique_pairs": len(pair_payload_sets["p1"]),
+                     "p2_unique_pairs": len(pair_payload_sets["p2"]),
+                     "cross_palette_reuse": False,
+                 },
                  "runtime_constants": runtime,
                  "close_attack_rules": close_attack_rules,
                  "far_attack_rules": far_attack_rules,
@@ -1241,6 +1555,11 @@ def generate(source_path: Path, config_path: Path, out_dir: Path,
                                     "sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
     header_path = out_dir / "ken_scene_runtime.h"
     generated["asset_sha256"][header_path.name] = hashlib.sha256(header_path.read_bytes()).hexdigest()
+    generated["hit_timing"] = {
+        item["role"]: hit_recovery(ch, int(item["source_state"]))
+        for item in generated["damage_models"]
+        if item.get("source_state") is not None
+    }
     manifest_path = out_dir / "ken_scene_manifest.json"
     manifest_path.write_text(json.dumps(generated, ensure_ascii=False, indent=2), encoding="utf-8")
     active_bank_files = {entry["file"] for entry in generated["banks"]}

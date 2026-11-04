@@ -9,311 +9,337 @@ a fabrica esta se contradizendo por escrito.
 
 Regra: eixo `true` no build_record EXIGE artefato que o sustente.
 
-Mapa eixo -> lastro exigido:
-  build              out/rom/*.sms existe
-  boot_emulador      evidence.json informative=true E rom_sha256 == ROM atual
-  gameplay           evidence.json.interaction_proven=true E rom_sha256 == ROM atual
-                     OU input_memory.json (input_provado + canal vivo + SHA da ROM)
-  fps_constante      fps.json constante_50_60=true E rom_sha256 == ROM atual
-  audio              arquivo de audio capturado (audit_audio.py e quem julga)
-  validation_report  build_record.steps.pre_gates == pass
-  memory_bank_atualizado   doc/10-memory-bank.md existe
+Identidade: ROM exata do recibo (ou nome nominal do manifesto em recibos
+legados), SHA calculado igual ao recibo, nunca arquivo mais recente. Candidata
+usa --build-record/--current-rom e evidencias/sessao explicitamente selecionadas.
+
+validation_report significa somente pre_gates_only com entradas atuais por
+hash/conjunto; nao e validacao de gameplay/budget. memory_bank_atualizado
+significa somente documento legivel/fresco citando o SHA completo. Midia exige
+ROM/sessao/artefato vinculados; projecoes reutilizam o consumidor OpenBOR.
+Coerencia nao autentica o produtor nem aprova entrega.
 
 Uso: reconcile_claims.py --project <dir> [--json <saida>] [--self-check]
 Exit: 0 coerente | 1 eixo sem lastro | 3 uso
 """
-import sys, os, json, glob, argparse
+import sys, os, json, argparse, hashlib, re, wave
+from pathlib import Path
+from measure_runtime_probe import runtime_fps_verdict
 
 def _load(path):
     try:
-        return json.load(open(path))
-    except (OSError, json.JSONDecodeError):
+        with open(path, encoding="utf-8") as source:
+            data = json.load(source)
+        return data if isinstance(data, dict) else None
+    except (OSError, ValueError, UnicodeError):
         return None
 
 
-def _rom_sha(project):
-    import hashlib
-    roms = glob.glob(os.path.join(project, "out", "rom", "*.sms"))
-    if not roms:
+def select_rom(project, rec=None, current_rom=None):
+    """One owning selector: receipt path, or explicit legacy nominal name.
+
+    Never choose by mtime. Legacy candidate receipts already contain the exact
+    path in steps.rom; legacy nominal receipts use the project manifest name.
+    An explicit ROM must still agree with the selected receipt's SHA and path.
+    """
+    root = Path(project).resolve()
+    rec = rec if rec is not None else _load(root / "out/build_record.json")
+    if not isinstance(rec, dict):
+        raise ValueError("recibo ausente ou ilegivel")
+    value = rec.get("rom_path")
+    if not value and rec.get("schema") == "smsforge.candidate_build/v1":
+        step = rec.get("steps", {}).get("rom", "")
+        match = re.fullmatch(r"(.+) \([0-9]+ bytes\)", step)
+        value = match.group(1) if match else None
+    if not value:
+        manifest = _load(root / ".mddev/project.json")
+        name = manifest.get("name") if isinstance(manifest, dict) else None
+        if not isinstance(name, str) or not name or Path(name).name != name or name in (".", ".."):
+            raise ValueError("manifesto sem nome nominal inequivoco; informe recibo com rom_path")
+        value = f"out/rom/{name}.sms"
+    rom = (root / value).resolve()
+    if not rom.is_relative_to(root / "out") or not rom.is_file():
+        raise ValueError("ROM do recibo ausente ou fora do out do consumidor")
+    if current_rom is not None:
+        explicit = (root / current_rom).resolve()
+        if explicit != rom:
+            raise ValueError("ROM explicita diverge do caminho do recibo")
+    digest = _sha256(rom)
+    if rec.get("rom_sha256") != digest:
+        raise ValueError("SHA calculado da ROM diverge do recibo")
+    if "rom_bytes" in rec and rec["rom_bytes"] != rom.stat().st_size:
+        raise ValueError("tamanho da ROM diverge do recibo")
+    return rom, digest
+
+
+def _sha256(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def _rom_sha(project, rec=None, current_rom=None):
+    try:
+        return select_rom(project, rec, current_rom)[1]
+    except (OSError, ValueError, TypeError, AttributeError):
         return None
-    newest = max(roms, key=os.path.getmtime)
-    h = hashlib.sha256()
-    with open(newest, "rb") as f:
-        for chunk in iter(lambda: f.read(65536), b""):
-            h.update(chunk)
-    return h.hexdigest()
 
 
-def _gameplay_supported(project, ev, rec):
-    """Pixels (L018) OU memoria com SHA da ROM (L035/L039). Pixel sozinho
-    neste host mentia (L038); RAM com canal morto tambem (L039). O booleano
-    `interaction_proven` so vale para a ROM que o proprio evidence.json cita:
-    um `true` herdado de outro binario nao prova o build atual."""
-    sha = _rom_sha(project) or rec.get("rom_sha256")
-    if bool((ev.get("gameplay") or {}).get("interaction_proven")):
-        return bool(sha) and ev.get("rom_sha256") == sha
-    mem = _load(os.path.join(project, "out", "evidence", "input_memory.json"))
-    if not mem:
+def _session_bound(doc, artifact, sha):
+    """Check the owning private session and its frozen ROM, including stale media.
+
+    This verifies identity/chronology only, never truth of gameplay assertions.
+    OpenBOR's sealed bundle consumer is used separately for its projections.
+    """
+    from session_bridge import isolated
+    sid = doc.get("session_id")
+    if not isinstance(sid, str) or not re.fullmatch(r"[0-9a-f]{32}", sid):
         return False
-    return bool(mem.get("input_provado")
-                and mem.get("canal_teclado_vivo")
-                and sha
-                and mem.get("rom_sha256") == sha)
-
-def _audio_supported(project):
-    """§26: wav ANTERIOR a ROM e prova de outro binario. O acervo costuma ter
-    .wav de builds antigas; existir nao basta, precisa ser desta ROM.
-
-    Fresco tambem NAO basta: um .wav novo e SILENCIOSO sustentava o eixo.
-    Aconteceu em 2026-09-01 — captura adiantada gerou wav com peak=0 e o eixo
-    passou. Exigir tambem SINAL (audit_audio e quem julga o mix)."""
-    wavs = glob.glob(os.path.join(project, "out", "evidence", "*.wav"))
-    roms = glob.glob(os.path.join(project, "out", "rom", "*.sms"))
-    if not (wavs and roms):
+    try:
+        root, meta = isolated.load(sid)
+        if doc.get("rom_sha256") != sha or meta.get("rom_sha256") != sha:
+            return False
+        if _sha256(root / "emulator/rom.sms") != sha:
+            return False
+        created = meta["created_at"]
+        captured = doc.get("captured_at", Path(artifact).stat().st_mtime)
+        if not created <= captured <= meta.get("closed_at", float("inf")):
+            return False
+        if Path(artifact).stat().st_mtime < created:
+            return False
+        return root, meta
+    except (OSError, ValueError, TypeError, KeyError):
         return False
-    newest_rom = max(os.path.getmtime(r) for r in roms)
+
+
+def _projection_support(project, ev, rom, fps):
+    """Reconsume the official sealed OpenBOR bundle, not its cached PASS."""
+    try:
+        from openbor2sms.evidence_consumer import consume
+        sha = _sha256(rom)
+        if ev.get("rom_sha256") != sha:
+            return {}
+        ref = ev["sources"]["bundle"]
+        bundle = Path(project) / ref["path"]
+        if _sha256(bundle) != ref["sha256"]:
+            return {}
+        result = consume(bundle, rom)
+        if not result["eligible"]:
+            return {}
+        axes = dict(result["axes"])
+        # A valid bundle does not authenticate arbitrary projected FPS values.
+        source = fps.get("source", {})
+        raw_path = Path(project) / source.get("path", "")
+        raw = _load(raw_path) or {}
+        if (_sha256(raw_path) != source.get("sha256") or raw.get("rom_sha256") != sha or
+            raw.get("session_id") != fps.get("session_id") or
+            any(raw.get(key) != fps.get(key) for key in (
+                "region", "fps_janelas", "frames_delta_total", "frame_advance_proved", "fps_constante"))):
+            axes["fps_constante"] = False
+        return axes
+    except (OSError, ValueError, KeyError, TypeError, ImportError):
+        return {}
+
+
+def _audio_supported(project, rom=None, sha=None, evidence_dir=None, expected_session=None):
+    """Native capture_audio sidecar + owning session + WAV hash + scoped signal.
+
+    Legacy loose WAVs remain historical, never an automatic current approval.
+    Default signal floor is music's 90%; SFX-only callers must explicitly use
+    the existing audit_audio contract with active_floor=5 in their sidecar.
+    """
     import audit_audio
-    for w in wavs:
-        if os.path.getmtime(w) <= newest_rom:
+    if rom is None:
+        try:
+            rom, sha = select_rom(project)
+        except (OSError, ValueError, TypeError):
+            return False
+    directory = Path(evidence_dir) if evidence_dir else Path(project) / "out/evidence"
+    for sidecar in sorted(directory.glob("*.audio.json")):
+        meta = _load(sidecar)
+        if not isinstance(meta, dict) or (expected_session is not None and meta.get("session_id") != expected_session):
             continue
-        st = audit_audio.read_wav_stats(w)
-        if st and st[1] > 0:              # peak > 0
-            return True
+        wav = sidecar.with_name(sidecar.name.removesuffix(".audio.json") + ".wav")
+        try:
+            bound = _session_bound(meta, wav, sha)
+            if not bound or meta.get("wav_sha256") != _sha256(wav):
+                continue
+            _, session = bound
+            from openbor2sms.evidence_consumer import _wav
+            validated = _wav(wav.read_bytes(), meta, {
+                "initial": session, "created": session["created_at"],
+                "closed": session.get("closed_at", float("inf"))})
+            floor = meta.get("active_floor", 90)
+            if type(floor) not in (int, float) or not 5 <= floor <= 100:
+                continue
+            problems, stats = audit_audio.audit(str(wav), project, floor)
+            if not problems and stats[0] == validated["samples"] and stats[1] == meta.get("peak"):
+                return True
+        except (OSError, ValueError, TypeError, KeyError, EOFError, wave.Error):
+            continue
     return False
 
 
-def axis_support(project, rec=None):
-    """FONTE UNICA da verdade sobre lastro: {eixo: (sustentado, porque_nao)}.
+def _inputs_current(project, rec):
+    inputs = rec.get("input_sha256")
+    if not isinstance(inputs, dict) or not inputs:
+        return False
+    try:
+        from build_inner import pre_gate_inputs
+        validation = rec.get("pre_gate_input_sha256")
+        return (isinstance(validation, dict) and validation == pre_gate_inputs(project)
+                and all(_sha256(Path(project) / path) == digest for path, digest in inputs.items()))
+    except (OSError, ValueError, TypeError, KeyError):
+        return False
 
-    Extraida de `reconcile` para que `build_inner.py` DERIVE os eixos daqui em
-    vez de herdar do registro anterior. Antes, nenhuma ferramenta promovia eixo
-    para true: o build inicializava tudo em false e so herdava, entao o primeiro
-    true de qualquer projeto so podia ter vindo de edicao a mao do
-    build_record.json — exatamente o que o runbook release-rom.md proibe. Com os
-    dois lados lendo esta funcao, o veredito nao pode divergir entre quem grava
-    e quem confere."""
-    rec = rec if rec is not None else (_load(os.path.join(
-        project, "out", "build_record.json")) or {})
-    ev = _load(os.path.join(project, "out", "evidence", "evidence.json")) or {}
-    fps = _load(os.path.join(project, "out", "evidence", "fps.json")) or {}
-    sha = _rom_sha(project) or rec.get("rom_sha256")
+
+def axis_support(project, rec=None, *, current_rom=None, evidence_dir=None, session=None):
+    """Scoped consistency predicates; no delivery or independent review approval."""
+    rec = rec if rec is not None else (_load(Path(project) / "out/build_record.json") or {})
+    try:
+        rom, sha = select_rom(project, rec, current_rom)
+        identity = True
+        reason = ""
+    except (OSError, ValueError, TypeError, AttributeError) as exc:
+        rom, sha, identity, reason = None, None, False, str(exc)
+    directory = Path(evidence_dir) if evidence_dir else Path(project) / "out/evidence"
+    ev = _load(directory / "evidence.json") or {}
+    fps_path = directory / "fps.json"
+    fps = _load(fps_path) or {}
+    projected = _projection_support(project, ev, rom, fps) if identity and ev.get("artifact_kind") == "axis_evidence_projection" else {}
+    if session:
+        projected = {}  # Explicit native session cannot inherit another session's projection.
+    selected_session = None
+    if session:
+        from session_bridge import isolated
+        try:
+            root, meta = isolated.load(session)
+            if identity and meta.get("rom_sha256") == sha and _sha256(root / "emulator/rom.sms") == sha:
+                selected_session = root, meta
+        except (OSError, ValueError, KeyError, TypeError):
+            pass
+    boot = False
+    if identity and ev.get("informative") is True and ev.get("rom_sha256") == sha:
+        if projected:
+            boot = projected.get("boot_emulador") is True
+        elif _session_bound(ev, directory / "evidence.json", sha):
+            from session_bridge import isolated
+            root, _ = isolated.load(ev["session_id"])
+            bundle = Path(ev.get("session_bundle", root / "nonexistent"))
+            if not bundle.is_absolute():
+                bundle = Path(project) / bundle
+            ok, _ = isolated.check_bundle(bundle)
+            capture = _load(bundle / "capture.json") or {}
+            boot = ok and capture.get("session_id") == ev["session_id"] and capture.get("rom_sha256") == sha
+            if boot:
+                boot = bool(_session_bound(capture, bundle / Path(capture["path"]).name, sha))
+    if session:
+        boot = False
+    if selected_session:
+        from session_bridge import isolated
+        root, meta = selected_session
+        bundle = meta.get("published")
+        if bundle:
+            boot = isolated.check_bundle(bundle)[0]
+            captured = _load(Path(bundle) / "capture.json") or {}
+            boot = boot and captured.get("session_id") == meta["session_id"] and captured.get("rom_sha256") == sha
+            if boot:
+                boot = bool(_session_bound(captured, Path(bundle) / Path(captured["path"]).name, sha))
+    mem_path = directory / "input_memory.json"
+    mem = _load(mem_path) or {}
+    gameplay = identity and ((projected.get("gameplay") is True) or
+        (mem.get("input_provado") is True and mem.get("canal_teclado_vivo") is True
+         and bool(_session_bound(mem, mem_path, sha))))
+    fps_bound = identity and (bool(_session_bound(fps, fps_path, sha)) or
+                              (projected.get("fps_constante") is True and fps.get("rom_sha256") == sha))
+    if session:
+        expected = selected_session[1]["session_id"] if selected_session else None
+        gameplay = gameplay and mem.get("session_id") == expected
+        fps_bound = fps_bound and fps.get("session_id") == expected
+    audio_directory = selected_session[0] if selected_session else directory
+    memory_ok = False
+    try:
+        memory = Path(project) / "doc/10-memory-bank.md"
+        text = memory.read_text(encoding="utf-8")
+        memory_ok = identity and bool(text.strip()) and sha in text and memory.stat().st_mtime >= rom.stat().st_mtime
+    except (OSError, UnicodeError):
+        pass
     return {
-        "build": (
-            bool(glob.glob(os.path.join(project, "out", "rom", "*.sms"))),
-            "nao ha ROM em out/rom/"),
-        "validation_report": (
-            (rec.get("steps", {}) or {}).get("pre_gates") == "pass",
-            "build_record.steps.pre_gates != 'pass'"),
-        "boot_emulador": (
-            bool(ev.get("informative")) and bool(sha)
-            and ev.get("rom_sha256") == sha,
-            "evidence.json nao tem informative=true para a ROM atual "
-            "(rom_sha256 ausente ou de outro binario)"),
-        "gameplay": (
-            _gameplay_supported(project, ev, rec),
-            "nem evidence.json.interaction_proven para a ROM atual nem "
-            "input_memory.json (input_provado + canal vivo + SHA da ROM) "
-            "sustentam o eixo"),
-        "fps_constante": (
-            bool(fps.get("constante_50_60")) and bool(sha)
-            and fps.get("rom_sha256") == sha,
-            "fps.json nao tem constante_50_60=true para a ROM atual "
-            "(rom_sha256 ausente ou de outro binario)"),
-        "audio": (
-            _audio_supported(project),
-            "nao ha captura de audio (.wav) POSTERIOR a ROM e COM SINAL em "
-            "out/evidence/ (wav antigo, ou novo porem silencioso, nao prova nada)"),
-        "memory_bank_atualizado": (
-            os.path.isfile(os.path.join(project, "doc", "10-memory-bank.md")),
-            "doc/10-memory-bank.md nao existe"),
+        "build": (identity, reason or "ROM/recibo sem identidade valida"),
+        "validation_report": (identity and rec.get("steps", {}).get("pre_gates") == "pass" and _inputs_current(project, rec),
+                              "pre-gates ausentes ou entradas atuais sem hashes correspondentes; escopo pre_gates_only"),
+        "boot_emulador": (boot, "framebuffer sem bundle valido da mesma ROM/sessao"),
+        "gameplay": (gameplay, "sem prova de input/consequencia vinculada a ROM/sessao"),
+        "fps_constante": (fps_bound and runtime_fps_verdict(fps)["passed"],
+                          "sem duas janelas vinculadas a ROM/sessao com alvo60/piso58 sem arredondar"),
+        "audio": (identity and (not session or selected_session is not None) and
+                  (projected.get("audio") is True or _audio_supported(project, rom, sha, audio_directory,
+                     selected_session[1]["session_id"] if selected_session else None)),
+                  "sem WAV/sidecar com SHA, sessao privada, duracao, rota e sinal no escopo declarado"),
+        "memory_bank_atualizado": (memory_ok, "memoria ausente/ilegivel/stale ou sem SHA completo da ROM; escopo readable_current_rom_reference_only"),
     }
 
 
-def reconcile(project):
-    """Retorna (problems, report)."""
+def reconcile(project, *, build_record=None, current_rom=None, evidence_dir=None, session=None):
+    """Return consistency problems, even when all axes are false on a bad receipt."""
+    record_path = Path(build_record) if build_record else Path(project) / "out/build_record.json"
+    report = {"project": str(project), "build_record": str(record_path), "axes": {},
+              "claim_ceiling": "record_consistency_only", "delivery_approved": False,
+              "axis_scope": {"validation_report": "pre_gates_only",
+                             "memory_bank_atualizado": "readable_current_rom_reference_only"}}
+    rec = _load(record_path)
+    if not isinstance(rec, dict):
+        return ["recibo ausente ou ilegivel — sem claims a conciliar"], report
     problems = []
-    report = {"project": project, "axes": {}}
-    rec = _load(os.path.join(project, "out", "build_record.json"))
-    if rec is None:
-        return ["out/build_record.json ausente ou ilegivel — sem claims a conciliar"], report
-
+    try:
+        rom, sha = select_rom(project, rec, current_rom)
+        report.update(rom=str(rom), rom_sha256=sha, identity_valid=True)
+    except (OSError, ValueError, TypeError, AttributeError) as exc:
+        problems.append("identidade: " + str(exc))
+        report["identity_valid"] = False
+    if session:
+        from session_bridge import isolated
+        try:
+            root, metadata = isolated.load(session)
+            if metadata.get("rom_sha256") != report.get("rom_sha256") or _sha256(root / "emulator/rom.sms") != report.get("rom_sha256"):
+                problems.append("identidade: sessao pertence a outra ROM")
+            report["session_id"] = metadata["session_id"]
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            problems.append("identidade: sessao ausente/ilegivel: " + str(exc))
     axes = rec.get("axes", {}) or {}
     report["axes_declared"] = axes
-
-    for axis, (supported, why) in axis_support(project, rec).items():
-        declared = bool(axes.get(axis))
-        report["axes"][axis] = {"declared": declared, "supported": supported}
+    for axis, (supported, why) in axis_support(project, rec, current_rom=current_rom, evidence_dir=evidence_dir, session=session).items():
+        declared = axes.get(axis) is True
+        report["axes"][axis] = {"declared": declared, "supported": bool(supported)}
         if declared and not supported:
             problems.append(f"eixo '{axis}' declarado TRUE mas {why}")
-
+    if session and not report.get("identity_valid"):
+        problems.append("sessao nao pode qualificar recibo/ROM divergentes")
     report["coherent"] = not problems
     return problems, report
 
+
 def _self_check():
-    import tempfile, shutil
-    d = tempfile.mkdtemp(prefix="smsrec_")
-    try:
-        def build(axes, ev=None, fps=None, rom=True, wav=True, mb=True):
-            p = tempfile.mkdtemp(dir=d)
-            os.makedirs(os.path.join(p, "out", "rom"))
-            os.makedirs(os.path.join(p, "out", "evidence"))
-            os.makedirs(os.path.join(p, "doc"))
-            if rom:
-                open(os.path.join(p, "out", "rom", "a.sms"), "wb").write(b"\0")
-            rom_sha = None
-            if rom:
-                import hashlib as _h
-                rom_sha = _h.sha256(
-                    open(os.path.join(p, "out", "rom", "a.sms"), "rb").read()
-                ).hexdigest()
-            if wav:
-                # WAV valido COM sinal (16-bit mono, amostras nao-zero)
-                import wave as _w, struct as _s
-                with _w.open(os.path.join(p, "out", "evidence", "a.wav"), "wb") as _f:
-                    _f.setnchannels(1); _f.setsampwidth(2); _f.setframerate(8000)
-                    _f.writeframes(b"".join(_s.pack("<h", 9000) for _ in range(800)))
-            if mb:
-                open(os.path.join(p, "doc", "10-memory-bank.md"), "w").write("x")
-            json.dump({"axes": axes, "steps": {"pre_gates": "pass"}},
-                      open(os.path.join(p, "out", "build_record.json"), "w"))
-            if ev is not None:
-                ev = dict(ev)
-                if rom_sha:
-                    ev.setdefault("rom_sha256", rom_sha)
-                json.dump(ev, open(os.path.join(p, "out", "evidence",
-                                                "evidence.json"), "w"))
-            if fps is not None:
-                fps = dict(fps)
-                if rom_sha:
-                    fps.setdefault("rom_sha256", rom_sha)
-                json.dump(fps, open(os.path.join(p, "out", "evidence",
-                                                 "fps.json"), "w"))
-            return p
-
-        all_true = {"build": True, "validation_report": True, "boot_emulador": True,
-                    "gameplay": True, "fps_constante": True, "audio": True,
-                    "memory_bank_atualizado": True}
-
-        # COERENTE: todo eixo true com lastro
-        ok = build(all_true,
-                   ev={"informative": True, "gameplay": {"interaction_proven": True}},
-                   fps={"constante_50_60": True})
-        p, r = reconcile(ok)
-        assert not p, f"projeto coerente nao deveria reprovar: {p}"
-        assert r["coherent"]
-
-        # REPROVA: gameplay=true com interaction_proven=false (caso real do lab)
-        bad = build(all_true,
-                    ev={"informative": True, "gameplay": {"interaction_proven": False}},
-                    fps={"constante_50_60": True})
-        p, _ = reconcile(bad)
-        assert any("gameplay" in x for x in p), f"faltou pegar gameplay sem lastro: {p}"
-
-        # PASS: pixels falham, mas input_memory.json prova RAM com SHA da ROM
-        ram = build(all_true,
-                    ev={"informative": True, "gameplay": {"interaction_proven": False}},
-                    fps={"constante_50_60": True})
-        romp = glob.glob(os.path.join(ram, "out", "rom", "*.sms"))[0]
-        import hashlib as _hh
-        sha = _hh.sha256(open(romp, "rb").read()).hexdigest()
-        json.dump({"axes": all_true, "steps": {"pre_gates": "pass"},
-                   "rom_sha256": sha},
-                  open(os.path.join(ram, "out", "build_record.json"), "w"))
-        json.dump({"input_provado": True, "canal_teclado_vivo": True,
-                   "rom_sha256": sha},
-                  open(os.path.join(ram, "out", "evidence",
-                                    "input_memory.json"), "w"))
-        p, _ = reconcile(ram)
-        assert not any("gameplay" in x for x in p), \
-            f"prova por memoria com SHA deveria fechar gameplay: {p}"
-
-        json.dump({"input_provado": True, "canal_teclado_vivo": True,
-                   "rom_sha256": "deadbeef"},
-                  open(os.path.join(ram, "out", "evidence",
-                                    "input_memory.json"), "w"))
-        p, _ = reconcile(ram)
-        assert any("gameplay" in x for x in p), \
-            f"input_memory de outra ROM deveria reprovar: {p}"
-
-        # REPROVA: evidence.json informative=true de OUTRA ROM (booleano sozinho)
-        stale_ev = build(all_true,
-                         ev={"informative": True, "rom_sha256": "deadbeef",
-                             "gameplay": {"interaction_proven": True}},
-                         fps={"constante_50_60": True})
-        p, _ = reconcile(stale_ev)
-        assert any("'boot_emulador'" in x for x in p), \
-            f"evidence de outra ROM deveria reprovar boot: {p}"
-        assert any("'gameplay'" in x for x in p), \
-            f"interaction_proven de outra ROM deveria reprovar gameplay: {p}"
-
-        # REPROVA: fps.json constante=true de OUTRA ROM (booleano sozinho)
-        stale_fps = build(all_true,
-                          ev={"informative": True,
-                              "gameplay": {"interaction_proven": True}},
-                          fps={"constante_50_60": True,
-                               "rom_sha256": "deadbeef"})
-        p, _ = reconcile(stale_fps)
-        assert any("'fps_constante'" in x for x in p), \
-            f"fps de outra ROM deveria reprovar: {p}"
-
-        # REPROVA: fps=true sem fps.json
-        p, _ = reconcile(build(all_true,
-                               ev={"informative": True,
-                                   "gameplay": {"interaction_proven": True}}))
-        assert any("fps_constante" in x for x in p), "faltou pegar fps sem lastro"
-
-        # REPROVA: audio=true com wav novo porem SILENCIOSO
-        mudo = build(all_true, ev={"informative": True,
-                                   "gameplay": {"interaction_proven": True}},
-                     fps={"constante_50_60": True})
-        import wave as _w2
-        _wp = glob.glob(os.path.join(mudo, "out", "evidence", "*.wav"))[0]
-        with _w2.open(_wp, "wb") as _f:
-            _f.setnchannels(1); _f.setsampwidth(2); _f.setframerate(8000)
-            _f.writeframes(b"\x00\x00" * 800)
-        p, _ = reconcile(mudo)
-        assert any("'audio'" in x for x in p), f"wav silencioso deveria reprovar: {p}"
-
-        # REPROVA: audio=true com wav ANTERIOR a ROM (prova de outro binario)
-        stale = build(all_true, ev={"informative": True,
-                                    "gameplay": {"interaction_proven": True}},
-                      fps={"constante_50_60": True})
-        import time as _t
-        _rom = glob.glob(os.path.join(stale, "out", "rom", "*.sms"))[0]
-        _wav = glob.glob(os.path.join(stale, "out", "evidence", "*.wav"))[0]
-        os.utime(_wav, (1000, 1000)); os.utime(_rom, (2000, 2000))
-        p, _ = reconcile(stale)
-        assert any("'audio'" in x for x in p), f"wav anterior a ROM deveria reprovar: {p}"
-
-        # REPROVA: build=true sem ROM; audio=true sem wav
-        p, _ = reconcile(build(all_true,
-                               ev={"informative": True,
-                                   "gameplay": {"interaction_proven": True}},
-                               fps={"constante_50_60": True}, rom=False, wav=False))
-        assert any("'build'" in x for x in p), "faltou pegar build sem ROM"
-        assert any("'audio'" in x for x in p), "faltou pegar audio sem wav"
-
-        # NAO reprova eixo declarado FALSE sem lastro (honestidade nao e erro)
-        p, _ = reconcile(build({"gameplay": False}, ev={"informative": False}))
-        assert not any("gameplay" in x for x in p), \
-            "eixo declarado false nao pode ser reprovado por falta de lastro"
-    finally:
-        shutil.rmtree(d, ignore_errors=True)
-    print("[SELF-CHECK OK] reconcile_claims (pega eixo TRUE sem lastro no "
-          "artefato; nao pune eixo declarado FALSE)")
-    return 0
+    import unittest
+    suite = unittest.defaultTestLoader.discover(str(Path(__file__).parent / "tests"),
+                                               pattern="test_build_evidence_identity.py")
+    result = unittest.TextTestRunner(verbosity=1).run(suite)
+    return 0 if result.wasSuccessful() and suite.countTestCases() and not result.skipped else 1
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--project", default=".")
     ap.add_argument("--json")
+    ap.add_argument("--build-record", help="recibo exato, inclusive candidato isolado")
+    ap.add_argument("--current-rom", help="ROM exata; precisa concordar com o recibo")
+    ap.add_argument("--session", help="sessao privada exata; consome bundle/sidecar dos produtores oficiais")
+    ap.add_argument("--evidence-dir", help="diretorio explicito de evidencia desta verificacao")
     ap.add_argument("--self-check", action="store_true")
     a = ap.parse_args()
 
     if a.self_check:
         return _self_check()
 
-    problems, report = reconcile(a.project)
+    problems, report = reconcile(a.project, build_record=a.build_record,
+                                 current_rom=a.current_rom, evidence_dir=a.evidence_dir, session=a.session)
     if a.json:
         json.dump({"problems": problems, **report}, open(a.json, "w"), indent=2)
     if problems:

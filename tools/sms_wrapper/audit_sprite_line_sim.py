@@ -10,6 +10,9 @@ Le um manifest JSON de cena (schema sprite_scene_manifest_v1) e reprova:
 - sprite com Y armazenado == 0xD0 no modo 192 linhas (colide com terminador da SAT)
 - screen_h fora de {192, 224, 240} (modo de tela inexistente no VDP)
 - sat_terminated declarado em 224/240: o terminador so existe no modo 192 (§118, L128)
+- opt-in `--require-distinct-fighters`: manifesto de duelo com `composition`
+  p1/p2 exige lutadores distintos; par do lutador contra ele mesmo nao
+  sustenta claim de personagens distintos (duelo espelhado e valido sem o opt-in).
 
 Fisica aplicada (fonte: docs smspower/devkitSMS; leis em .agent/rules/SMS_GLOBAL.md):
 - sprite_size global '8x8'|'8x16' (+ zoom opcional que DOBRA o footprint)
@@ -22,10 +25,10 @@ Fisica aplicada (fonte: docs smspower/devkitSMS; leis em .agent/rules/SMS_GLOBAL
 - terminador 0xD0 so vale em 192 linhas; em 224/240 e um Y comum e o VDP percorre
   as 64 entradas (corpus smspower Sprites, hasheado; SMS_GLOBAL §118).
 
-Uso: audit_sprite_line_sim.py <manifest.json> [--self-check]
+Uso: audit_sprite_line_sim.py <manifest.json> [--require-distinct-fighters] [--self-check]
 Exit: 0 | 1 reprova | 3 uso
 """
-import sys, json, argparse
+import sys, json, argparse, copy
 
 SPRITE_H = {"8x8": 8, "8x16": 16}
 SAT_MAX = 64
@@ -33,8 +36,49 @@ PER_LINE_MAX = 8
 TERMINATOR_Y = 0xD0
 TERMINATOR_SCREEN_H = 192
 SCREEN_H_MODES = (192, 224, 240)
+DUEL_SIDES = ("p1", "p2")
 
-def contract_errors(manifest):
+
+def duel_composition_errors(manifest):
+    """Contrato opcional de duelo: p1 e p2 devem ser lutadores distintos.
+
+    Um manifesto de cena pode exibir o mesmo lutador duas vezes (espelho
+    ou jogavel), mas isso nao sustenta um claim de personagens distintos. O opt-in e explicito:
+    sem `--require-distinct-fighters`, o campo `composition` e ignorado.
+    """
+    composition = manifest.get("composition")
+    if not isinstance(composition, list) or len(composition) != 2:
+        return ["duel composition: exatamente 2 entradas (p1/p2) sao obrigatorias"]
+    errors = []
+    fighters = {}
+    for index, entry in enumerate(composition):
+        if not isinstance(entry, dict):
+            errors.append(f"duel composition[{index}]: entrada deve ser objeto")
+            continue
+        side = entry.get("side")
+        fighter = entry.get("fighter")
+        if side not in DUEL_SIDES:
+            errors.append(f"duel composition[{index}]: side deve ser p1 ou p2")
+            continue
+        if side in fighters:
+            errors.append(f"duel composition[{index}]: lado {side} duplicado")
+            continue
+        if not isinstance(fighter, str) or not fighter.strip():
+            errors.append(f"duel composition[{index}]: fighter deve ser string nao vazia")
+            continue
+        fighters[side] = fighter.strip()
+    missing = [side for side in DUEL_SIDES if side not in fighters]
+    if missing:
+        errors.append("duel composition: faltam os lados " + ", ".join(missing))
+    elif fighters["p1"].casefold() == fighters["p2"].casefold():
+        errors.append(
+            "duel composition: mesmo lutador nos dois lados (%s); "
+            "o opt-in exige nomes de personagens distintos" % fighters["p1"]
+        )
+    return errors
+
+
+def contract_errors(manifest, require_distinct_fighters=False):
     """Validate declared entries before simulation; do not guess wrapped Y."""
     if not isinstance(manifest, dict):
         return ["manifest must be an object"]
@@ -63,11 +107,13 @@ def contract_errors(manifest):
                 errors.append(f"sprite {index}: {key} must be integer 0..255{suffix}")
         if "hidden" in sprite and type(sprite["hidden"]) is not bool:
             errors.append(f"sprite {index}: hidden must be boolean")
+    if require_distinct_fighters:
+        errors.extend(duel_composition_errors(manifest))
     return errors
 
 
-def simulate(manifest):
-    errors = contract_errors(manifest)
+def simulate(manifest, require_distinct_fighters=False):
+    errors = contract_errors(manifest, require_distinct_fighters)
     if errors:
         count = len(manifest.get("sprites", [])) if isinstance(manifest, dict) and isinstance(manifest.get("sprites", []), list) else 0
         return {"sprites": count, "peak_per_line": 0, "overflow_lines": 0,
@@ -117,6 +163,8 @@ def simulate(manifest):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("manifest", nargs="?")
+    ap.add_argument("--require-distinct-fighters", action="store_true",
+                    help="exige nomes distintos em composition p1/p2; nao usar em duelos espelhados")
     ap.add_argument("--self-check", action="store_true")
     args = ap.parse_args()
     if args.self_check:
@@ -166,7 +214,24 @@ def main():
         assert any("so entradas hidden" in v for v in r_hero_first["violations"]), r_hero_first
         # stored = y - 1: y = 0xCF grava 0xCE e nao colide com o terminador
         assert not r_old_d0["violations"], r_old_d0
-        import copy
+        duel_ok = copy.deepcopy(ok)
+        duel_ok["composition"] = [{"side": "p1", "fighter": "Ryu"},
+                                  {"side": "p2", "fighter": "Ken"}]
+        duel_same = copy.deepcopy(duel_ok)
+        duel_same["composition"][1]["fighter"] = "RYU"
+        duel_missing = copy.deepcopy(ok)
+        duel_missing["composition"] = [{"side": "p1", "fighter": "Ryu"}]
+        duel_dup = copy.deepcopy(ok)
+        duel_dup["composition"] = [{"side": "p1", "fighter": "Ryu"},
+                                   {"side": "p1", "fighter": "Ken"}]
+        assert not simulate(duel_ok, require_distinct_fighters=True)["violations"]
+        assert any("mesmo lutador" in v for v in simulate(
+            duel_same, require_distinct_fighters=True)["violations"])
+        assert not simulate(duel_same)["violations"]
+        assert any("exatamente 2" in v for v in simulate(
+            duel_missing, require_distinct_fighters=True)["violations"])
+        assert any("duplicado" in v for v in simulate(
+            duel_dup, require_distinct_fighters=True)["violations"])
         for malformed in (None, [], "bad", 1):
             assert simulate(malformed)["violations"], malformed
         for key, value in (("sprite_size", "16x16"), ("sprite_size", []),
@@ -188,7 +253,8 @@ def main():
         return 3
     try:
         with open(args.manifest, encoding="utf-8") as stream:
-            rep = simulate(json.load(stream))
+            rep = simulate(json.load(stream),
+                           require_distinct_fighters=args.require_distinct_fighters)
     except (OSError, ValueError, UnicodeError, RecursionError) as error:
         rep = {"sprites": 0, "peak_per_line": 0, "violations": [f"manifest unreadable: {error}"]}
     print(json.dumps(rep))

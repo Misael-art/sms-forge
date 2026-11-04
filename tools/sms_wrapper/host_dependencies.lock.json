@@ -1,0 +1,39 @@
+{
+  "schema": "smsforge.host_dependencies/v1",
+  "target": "Linux x86_64; Ubuntu 24.04 LTS / WSL2 Ubuntu",
+  "compiler_policy": "native SDCC>=4.2; rebuild both libraries with the selected compiler; new binaries require new evidence",
+  "assets": {
+    "devkitsms_source": {
+      "name": "smsforge-devkitsms-source-20261024.tar.gz",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/smsforge-devkitsms-source-20261024.tar.gz",
+      "sha256": "8e32a2e4a98d992e04f9427f89209c9daf3e1d0dc1af7bfac5faa3c1cb6241fc",
+      "bytes": 59735
+    },
+    "emulicious": {
+      "name": "smsforge-emulicious-20261024.tar.gz",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/smsforge-emulicious-20261024.tar.gz",
+      "sha256": "0425abd7ccdb4b30bc8540b8a93711f366f48886bd65f7d22cbcc843923e7579",
+      "bytes": 2816510
+    },
+    "rtk": {
+      "name": "rtk-x86_64-unknown-linux-musl.tar.gz",
+      "url": "https://github.com/rtk-ai/rtk/releases/download/v1.0.1/rtk-x86_64-unknown-linux-musl.tar.gz",
+      "sha256": "5b919c3bccb799b67a61866d0e617410a4fcdf173e2614440e59de2fa2003436",
+      "bytes": 6778173
+    },
+    "rev2_runtime": {
+      "name": "luta_mugem_rev2-runtime-20261024.tar.gz",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/luta_mugem_rev2-runtime-20261024.tar.gz",
+      "sha256": "5d1c8e6563a5f6855d4fd1aa3feed029a404c7b5f66f6d6bc3cf34955ab2c162",
+      "bytes": 24791957
+    },
+    "rev2_manifest": {
+      "name": "luta_mugem_rev2-runtime-20261024.json",
+      "url": "https://github.com/Misael-art/sms-forge/releases/download/continuity-20261024/luta_mugem_rev2-runtime-20261024.json",
+      "sha256": "a0c0b5899b85acc766c3b012d29ad7645e967e614f996971de7b5b945b790260",
+      "bytes": 930930
+    }
+  },
+  "devkitsms_upstream_commit": "b434941552d3c76b1d82460fc6a5ed435b8358be",
+  "source_scope": "Frozen local devkitSMS source archive; upstream commit is a reference, archive SHA identifies the exact consumed bytes."
+}

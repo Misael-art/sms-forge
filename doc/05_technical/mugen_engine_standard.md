@@ -6,6 +6,21 @@ do jogo. AAA é uma avaliação de resultado; quantidade de efeitos não a demon
 Contrato executável: `tools/sms_wrapper/mugen_engine_contract_v1.json`.
 Workflow: `tools/sms_wrapper/.agent/workflows/mugen-engine-quality.md`.
 
+## Decisão de 2026-10-23 — default de conversão
+
+O dono aprovou `pose_budget` como padrão do motor `mugen2sms`. A conversão
+default aplica o encaixe do framebuffer de origem. A unidade vigente, corrigida
+no mesmo dia pelo lote do par, mede a célula que a SAT recebe: pose neutra de
+cada lado em no máximo 4 colunas de 8 px, golpe largo contra neutra em 5 e 3,
+e o que passar disso em caso a caso. `POSE_NEAR` 0,69 não abre nem fecha a
+escala. Efeito explícito acima de 3 colunas fica fora do corte. A porta de
+cerca de 70% e a referência da pose mais larga em 64 px foram o piloto da
+manhã; não são mais o critério. `fighter_scale` (faixa 72–88), `framebuffer`
+só de tamanho e `legacy_quarter` (1:4) continuam selecionáveis. Flicker continua
+reprovado: esta política de tamanho não autoriza omissão de SAT para mascarar
+estouro. A decisão não abre seção em `SMS_GLOBAL.md` e não declara entrega
+visual.
+
 ## Referência e fatos
 
 O jogo de referência é **Samgukji III**, também chamado Sangokushi III, de luta
@@ -39,6 +54,8 @@ A API local definitiva continua em `sdk/devkitSMS/SMSlib/SMSlib.h` e
    AIR, duração e caixas. Não escolher divisor por tamanho de cada pose. Poses
    agachadas, aéreas e estendidas têm contratos específicos. O preset 1:4/48 px
    continua apenas como controle técnico histórico T10; não é teto do motor.
+   O default de conversão desde 2026-10-23 é `pose_budget`; a faixa 72–88
+   permanece a opção `fighter_scale`.
 4. Orçamento simultâneo de corpo+FX+HUD+arena+som: RAM/stack, VRAM residente,
    endereço dos patterns de sprite, SAT e linha, bytes e ciclos de upload,
    latência input→estado→pose, fila e starvation. Medir também o degrau seguinte.

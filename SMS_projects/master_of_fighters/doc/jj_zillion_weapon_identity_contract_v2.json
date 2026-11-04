@@ -1,0 +1,91 @@
+{
+  "schema": "mof_equipment_identity_contract_v2",
+  "character": "jj_zillion_ii",
+  "equipment": "Zillion laser pistol",
+  "authorities": {
+    "game_lore": "Zillion II SMS; manual confirms laser, not detailed geometry from13x40standing sprite",
+    "body_costume": {
+      "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "scope": "Face/hair/build/suit/armor/harness/holster only; older compactgun is not current authority"
+    },
+    "weapon": {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/reference_inputs/zillion_pistol_user_reference_20261008.png",
+      "sha256": "7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49",
+      "scope": "Owner-supplied side-profile geometry and navy/cyan material appearance; exact same input already used in approved harmony"
+    },
+    "approved_harmony": {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+      "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+      "decision": "doc/decisions/roster_harmony_waku_waku_7_v01_owner_approval.json",
+      "scope": "Corrected weapon silhouette and roster comparison, not automatic approval of new sprite pixels"
+    }
+  },
+  "mandatory_signature": [
+    "Long low horizontal upper body/barrel, several hand widths long; never a short square toy blaster",
+    "Distinct angular wedge/sloping nose and continuous barrel profile",
+    "Dark navy main mass with narrow cyan/blue inset panels; no predominantly white receiver or orange window",
+    "Rear/underslung dark pistol grip connected coherently to trigger hand; weapon body extends forward well beyond hand",
+    "Consistent complete barrel length/hand junction across guard, raise, aim, emission and return",
+    "Opaque contiguous silhouette; no generic pistol substituted because gun is small at SMS size"
+  ],
+  "forbidden_regressions": [
+    "Short white/blue compact blaster from individualconceptv4/sourcev1",
+    "Changing gun trajectory/silhouette to hide SAT overflow",
+    "Truncating barrel, shortening only action frame, dropping character sprites or shrinking wide pose individually"
+  ],
+  "authoring_implications": [
+    "Correct model proportion first; no oversizedrifle read",
+    "Preserve existingarm/hand/shoulder positions; newgun sits naturally in oldgrip",
+    "Same6drawings andproposedtimings; no3poseexperiment",
+    "Future FX/separateobjects haveindependent contract andbudget, not baked intocharacter"
+  ],
+  "validation": [
+    "Inspect shape against exact user reference and approved harmony; ratio alone is not semantic fidelity",
+    "Re-measure complete pair in both faces after changed pixels",
+    "Independent source/SMS review and owner judgment remain distinct from byte/palette gates"
+  ],
+  "status": "owner_directed_proportion_correction_new_pixels_pending",
+  "owner_revision": "doc/decisions/jj-zillion-proportion-and-no-fx_owner-feedback.json",
+  "proportion_reference_files": [
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_01.png",
+      "sha256": "68d6ef2d62c381091a2e428d2bb293d9f877ce023079f360023f42678acb83a6",
+      "role": "Owner-supplied gun-to-hand/forearm/body proportion and original context only. No costume/palette/moveset substitution or source pixels copied into art."
+    },
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_02.png",
+      "sha256": "16225561ec85ad3ff06a3b7304f97f574c7c6bb67f28385af25f8035aa6a7e5c",
+      "role": "Owner-supplied gun-to-hand/forearm/body proportion and original context only. No costume/palette/moveset substitution or source pixels copied into art."
+    },
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_03.png",
+      "sha256": "40515a5db2f57cabdbf488eaf15e31f2631872ff0ed5a4ffe4e3174cccb9a6f4",
+      "role": "Owner-supplied gun-to-hand/forearm/body proportion and original context only. No costume/palette/moveset substitution or source pixels copied into art."
+    },
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_04.png",
+      "sha256": "e5c30ae185d82a8faaded3d80eede6a864146135fb20574c48a50411ac0de150",
+      "role": "Owner-supplied gun-to-hand/forearm/body proportion and original context only. No costume/palette/moveset substitution or source pixels copied into art."
+    }
+  ],
+  "proportion_target": {
+    "status": "authoring_target_not_claimed_canonical_dimension",
+    "weapon_linear_scale_relative_to_oversized_sprite_v3": [
+      3,
+      5
+    ],
+    "weapon_length_to_body_height_working_range": [
+      0.22,
+      0.3
+    ],
+    "explanation": "Owner flags oversized equipment; compare gun against hand/forearm and samecharacterbody. About60%ofpriorv3gun length is a boundedproposal; final perspective and appearance require actualartifact review, not a ratio-onlypass."
+  },
+  "preservation": [
+    "All6existingv3spritebodyposes and theirorder",
+    "Conceptv4twofullbodyposes/face/hair/build/costume",
+    "Rigid gunshape and material family, consistent proportional scale acrosspose orientations",
+    "Only gun/grip contact ROIs may change; outside declared ROIs copy original pixels",
+    "No bullets, shots, sparks, muzzleflash, trails or detached objects on character sheet"
+  ]
+}

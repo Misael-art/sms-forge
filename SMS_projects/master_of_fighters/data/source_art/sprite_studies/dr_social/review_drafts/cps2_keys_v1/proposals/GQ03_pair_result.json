@@ -1,0 +1,50 @@
+{
+  "schema": "dr_social_pair_conflict_comparative_v1",
+  "date": "2026-11-01",
+  "not_an_approval": true,
+  "proposal_id": "GQ03_authored_guard",
+  "proposal_result": "measured_pair_legal_art_pending",
+  "function_preserved": "Guarda em pé, as duas solas na mesma linha de baixo, bengala com cabo na luva e ponta entre as botas. Corpo SMS 69 px, dentro de 66–72. Largura opaca 25.",
+  "how_it_was_drawn": "Edição de imagem sobre J01 ampliado 8×. O script register_gq03_authored_guard.py só recorta o magenta, reduz em nearest até 104 px de altura e quantiza na paleta de J01. Não desloca linhas.",
+  "source": {
+    "original": "originals/GQ03_authored_guard.jpg",
+    "original_sha256": "e168fc42d821f2918b814bd3b91a8c032efc5b0f9e5de5703ff7f3ef039cc2ed",
+    "logical": "logical/GQ03_authored_guard.png",
+    "logical_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+    "prompt": "prompts/GQ03_authored_guard.txt",
+    "recipe": "proposals/GQ03_recipe.json"
+  },
+  "scale": "Fonte assentada a 104 px de coroa–sola. Depois encaixe oficial 2/3×6/7 e extra 7/9. Não é o estudo 35/52. Colunas neutras antes do extra: 5. Depois: 4.",
+  "sms_idle": {
+    "file": "out/diagnostics/social_gq03_20261101/idle.png",
+    "sha256": "279d65f5036c7b443aa019f65fd6f3d0ef6d6bb361a6b0c1b5769f0990b810cc",
+    "bbox": [52, 43, 77, 112],
+    "opaque_wh": [25, 69]
+  },
+  "pair": {
+    "opponent": "Ken de construção, sha256 12544d97e09170385fb772154cfc9995ac7895ed30c54167155eecea6488ec91",
+    "placement": "Social (16,40), Ken (136,40)",
+    "adapter_self_check": "pass",
+    "line_sim_self_check": "pass",
+    "sprites": 32,
+    "peak_per_line": 8,
+    "overflow_lines": 0,
+    "legal": true,
+    "patterns": 66,
+    "peak_tall": 4,
+    "scene": "out/diagnostics/social_gq03_20261101/scene_idle.json",
+    "config_sha256": "1b3b44bc023a2b45f5dba0b1ef7d8f496b4df58dfd412e3511119b24184ebf66"
+  },
+  "same_packing_other_checks": {
+    "horizontal_phases_0_to_7": "pico 8, overflow 0, 32 sprites. Transladar o grupo não muda a contagem de células.",
+    "screen_corners": "sprite esquerdo em x=0 e direito em x=248: pico 8, overflow 0",
+    "flip_actor": "out/diagnostics/social_gq03_flip_20261101: 32 sprites, pico 8, overflow 0, peak_tall 4",
+    "packing_phase_x_1_4_7": "34 sprites, pico 8, overflow 0, peak_tall 4. A fase acrescenta entradas na SAT e não cria a nona sprite nesta pose."
+  },
+  "slack": "Pico 8 em todos esses casos. Não há folga para FX, contato ou outro lutador na mesma linha.",
+  "connects_to_jab_v8": false,
+  "transition_cost": "GQ03 mostra colete, cabelo e base fechada diferentes de J01. Usar as duas como quadros vizinhos troca o corpo no corte. A transição pede um desenho intermediário autoral. Não substitui J01–J06 e não acrescenta espera ao jab.",
+  "sole_reading": "Na idle SMS, as duas massas marrons chegam à última linha opaca, y=111, com um intervalo preto entre elas. Nas linhas 107–109 as botas se fundem. Isso é efeito da redução, não um shear de fonte.",
+  "what_remains_blocked": "Toque, bota e estocada seguem sem intervalo legal. Uma tentativa de toque a partir desta guarda atravessou o corpo e foi descartada sem medição. Sem ROM, sem FPS, sem comando.",
+  "not_owner_questions": ["não pedir aceite da escada de GQ02", "não tratar pico 8 como folga"]
+}

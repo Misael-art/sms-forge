@@ -3,16 +3,28 @@
   "tracks": {
     "vdp_tiles": {
       "V01 grid_8x8": {
-        "level": "default_senior",
-        "evidence": "provena em toda cena (grid 8x8)"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "default_senior",
+          "evidence": "provena em toda cena (grid 8x8)"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "V02 metatile_16x16": {
-        "level": "incorporada",
-        "evidence": "cena02 bloco 2x2 via tiles"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "incorporada",
+          "evidence": "cena02 bloco 2x2 via tiles"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "V03 scroll_xy": {
-        "level": "reproduzivel",
-        "evidence": "cena04 scroll BG horizontal"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "cena04 scroll BG horizontal"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "V04 line_interrupt": {
         "level": "mapped",
@@ -23,16 +35,24 @@
         "evidence": "candidata"
       },
       "V06 backdrop_fade": {
-        "level": "reproduzivel",
-        "evidence": "cena02 fade do backdrop"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "cena02 fade do backdrop"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "V07 tilemap_comprimido": {
         "level": "mapped",
         "evidence": "candidata"
       },
       "V08 pnt_entrada_16bit_flags": {
-        "level": "emulador_provado",
-        "evidence": "probe SMS_projects/_laboratorio/pnt_16bit (L069): ROM eaa8e8305086b06b, framebuffer 256x192 pnt_capture2.mp4 2542169750c4dc3b; flipX/flipY/sprite-palette/tile-300 PASS em 4/4 frames (out/evidence/pnt_16bit_verdict.json)"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "probe SMS_projects/_laboratorio/pnt_16bit (L069): ROM eaa8e8305086b06b, framebuffer 256x192 pnt_capture2.mp4 2542169750c4dc3b; flipX/flipY/sprite-palette/tile-300 PASS em 4/4 frames (out/evidence/pnt_16bit_verdict.json)"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "V09 tile_priority_flag": {
         "level": "mapped",
@@ -41,68 +61,120 @@
     },
     "sprites": {
       "S01 sat_64_terminador": {
-        "level": "emulador_provado",
-        "evidence": "probe L006 + cena04"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "probe L006 + cena04"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "S02 max_8_por_scanline": {
-        "level": "emulador_provado",
-        "evidence": "gate audit_sprite_line_sim.py"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "gate audit_sprite_line_sim.py"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "S03 tamanho_8x8_16x16": {
-        "level": "emulador_provado",
-        "evidence": "SPRITEMODE_NORMAL 8x8 (L006); 16x16 via metasprite"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "SPRITEMODE_NORMAL 8x8 (L006); 16x16 via metasprite"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "S04 metasprite": {
-        "level": "incorporada",
-        "evidence": "hero_tiles 16x16 em cena02"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "incorporada",
+          "evidence": "hero_tiles 16x16 em cena02"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "S07 rotacao_buffer": {
         "level": "mapped",
         "evidence": "candidata"
       },
       "S05 x_sem_offset_32": {
-        "level": "emulador_provado",
-        "evidence": "probe _laboratorio/early_clock (2026-09-01): X=0 e X=16 VISIVEIS na borda esquerda, X=100 aparece 1:1 (shift_off.png). REFUTA a hipotese 'X armazenado = X+32 / X<32 esconde' — era heranca do Mega Drive (L001)"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "probe _laboratorio/early_clock (2026-09-01): X=0 e X=16 VISIVEIS na borda esquerda, X=100 aparece 1:1 (shift_off.png). REFUTA a hipotese 'X armazenado = X+32 / X<32 esconde' — era heranca do Mega Drive (L001)"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "S06 shift_sprites_8px": {
-        "level": "emulador_provado",
-        "evidence": "probe _laboratorio/early_clock (2026-09-01): VDPFEATURE_SHIFTSPRITES (reg0 bit3) desloca 8px a esquerda — marcador medido 114->106; o de X=0 sai da tela (shift_on.png). REFUTA a hipotese '32px'"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "probe _laboratorio/early_clock (2026-09-01): VDPFEATURE_SHIFTSPRITES (reg0 bit3) desloca 8px a esquerda — marcador medido 114->106; o de X=0 sai da tela (shift_on.png). REFUTA a hipotese '32px'"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       }
     },
     "paleta": {
       "P01 duas_subpaletas": {
-        "level": "emulador_provado",
-        "evidence": "paleta BG+sprite carregada"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "paleta BG+sprite carregada"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "P02 codigo_6bit": {
-        "level": "default_senior",
-        "evidence": "paleta mestra fixa; gate"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "default_senior",
+          "evidence": "paleta mestra fixa; gate"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "P03 contraste_luma": {
-        "level": "emulador_provado",
-        "evidence": "gate audit_luma_floor.py"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "gate audit_luma_floor.py"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "P04 half_brightness_add_sub": {
         "level": "mapped",
         "evidence": "candidata"
       },
       "P05 cycle_paleta_vblank": {
-        "level": "reproduzivel",
-        "evidence": "fade do backdrop"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "fade do backdrop"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       }
     },
     "vram_vblank": {
       "M01 escritas_no_vblank": {
-        "level": "emulador_provado",
-        "evidence": "todas escritas dentro do VBlank; fps 59.3"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "todas escritas dentro do VBlank; fps 59.3"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "M02 orcamento_worstframe": {
-        "level": "emulador_provado",
-        "evidence": "42B medido cena02"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "42B medido cena02"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "M03 layout_vram_fixo": {
-        "level": "reproduzivel",
-        "evidence": "tiles 128-132 fixos"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "tiles 128-132 fixos"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "M04 streaming_tiles_cota": {
         "level": "mapped",
@@ -115,46 +187,78 @@
     },
     "z80_sdcc": {
       "Z01 int_16bit": {
-        "level": "default_senior",
-        "evidence": "gotchas SMS"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "default_senior",
+          "evidence": "gotchas SMS"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "Z02 mult_div_caras": {
-        "level": "emulador_provado",
-        "evidence": "movimento 1 cel/frame"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "movimento 1 cel/frame"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "Z03 float_proibido": {
-        "level": "default_senior",
-        "evidence": "regra SMS_GLOBAL"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "default_senior",
+          "evidence": "regra SMS_GLOBAL"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "Z04 sem_malloc": {
-        "level": "default_senior",
-        "evidence": "buffers fixos; RAM 8KB"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "default_senior",
+          "evidence": "buffers fixos; RAM 8KB"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "Z05 fastcall_callee": {
-        "level": "reproduzivel",
-        "evidence": "limits de args do SDCC"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "limits de args do SDCC"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "Z06 banked_code": {
         "level": "mapped",
         "evidence": "candidata"
       },
       "Z07 isr_nmi_curta": {
-        "level": "reproduzivel",
-        "evidence": "pause via NMI"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "pause via NMI"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       }
     },
     "banking": {
       "B01 48kb_linear": {
-        "level": "default_senior",
-        "evidence": "ROM 16KB atual"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "default_senior",
+          "evidence": "ROM 16KB atual"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "B02 mapper_sega": {
         "level": "mapped",
         "evidence": "candidata"
       },
       "B03 header_sega": {
-        "level": "emulador_provado",
-        "evidence": "TMR SEGA @0x3ff0"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "TMR SEGA @0x3ff0"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "B04 codigo_32kb": {
         "level": "mapped",
@@ -167,12 +271,20 @@
     },
     "audio": {
       "A01 psg_3tone_noise": {
-        "level": "emulador_provado",
-        "evidence": "audio_psg.wav 100%"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "audio_psg.wav 100%"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "A02 arbitracao_canais": {
-        "level": "reproduzivel",
-        "evidence": "musica battle 4 canais"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "musica battle 4 canais"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "A03 samples_psg": {
         "level": "mapped",
@@ -183,26 +295,42 @@
         "evidence": "candidata"
       },
       "A05 update_audio_frame": {
-        "level": "reproduzivel",
-        "evidence": "PSGFrame por vblank"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "PSGFrame por vblank"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       }
     },
     "input_timing": {
       "I01 joypad_dc_dd": {
-        "level": "emulador_provado",
-        "evidence": "d-pad move sprite"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "d-pad move sprite"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "I02 pause_nmi": {
-        "level": "reproduzivel",
-        "evidence": "KEY_1 reinicia"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "reproduzivel",
+          "evidence": "KEY_1 reinicia"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       },
       "I03 normalizacao_ntsc_pal": {
         "level": "mapped",
         "evidence": "candidata"
       },
       "I04 frame_counter": {
-        "level": "emulador_provado",
-        "evidence": "F:xxxx na tela; fps 59.3"
+        "level": "mapped",
+        "legacy_claim": {
+          "level": "emulador_provado",
+          "evidence": "F:xxxx na tela; fps 59.3"
+        },
+        "revalidation": "Reindexar artefatos históricos com SHA e escopo; sem promoção nesta avaliação de 2026-10-27."
       }
     },
     "raster_fx": {
@@ -219,5 +347,6 @@
         "evidence": "candidata"
       }
     }
-  }
+  },
+  "evidence_policy": "Paths relativos à raiz do checkout; contrato em 00_matriz_maestria_sms.md. mapped indica ausência de custódia indexada, não refutação da técnica."
 }

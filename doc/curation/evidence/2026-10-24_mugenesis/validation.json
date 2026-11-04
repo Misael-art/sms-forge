@@ -1,0 +1,69 @@
+{
+  "schema": "smsforge.curation_validation/v1",
+  "date": "2026-10-24T04:07:23.953840+00:00",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "tools/sms_wrapper/audit_doc_sync.py"
+      ],
+      "exit_code": 1,
+      "seconds": 1.0,
+      "log": "doc/curation/evidence/2026-10-24_mugenesis/audit_doc_sync_final.log",
+      "sha256": "f06e323fc4168e72fe6fa4af0b1576cc71a323c4a43b5781e2ffc5433a5f1e55",
+      "tail": "[FAIL] luta_mugen: 'doc/10-memory-bank.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/10-memory-bank.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/11-gdd.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/11-gdd.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/13-spec-cenas.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/13-spec-cenas.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/00-diretrizes-agente.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/00-diretrizes-agente.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/12-roteiro.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/12-roteiro.md') (hierarquia de verdade)\n[FAIL] luta_mugen: 'doc/15-tdd.md' ilegivel ([Errno 5] Input/output error: '/mnt/sdcard/Projects/SMSForge/SMS_projects/luta_mugen/doc/15-tdd.md') (hierarquia de verdade)\n[FAIL] luta_mugen: doc_authority aponta para 'doc/10-memory-bank.md' ausente (ENOENT)\n[FAIL] luta_mugen: doc_authority aponta para 'doc/11-gdd.md' ausente (ENOENT)\n[FAIL] luta_mugen: doc_authority aponta para 'doc/13-spec-cenas.md' ausente (ENOENT)\n[FAIL] luta_mugen: doc_authority aponta para 'doc/15-tdd.md' ausente (ENOENT)\n[FAIL] 10 deriva(s) doc<->repo. Documento que afirma estado falso e overclaim.\n"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/sms_wrapper/audit_learning_capture.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 1.7,
+      "log": "doc/curation/evidence/2026-10-24_mugenesis/audit_learning_capture_final.log",
+      "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3",
+      "tail": "[PASS] captura de licao sincronizada (JSON, furos, ferramentas, doutrina)\n"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/sms_wrapper/validate_measurement_tools.py"
+      ],
+      "exit_code": 0,
+      "seconds": 56.33,
+      "log": "doc/curation/evidence/2026-10-24_mugenesis/validate_measurement_tools_final.log",
+      "sha256": "7a9f2dbce024c61e0affb73d51d8f0c14a2fad448b3d8e52e7931226f44ce4ae",
+      "tail": "[PASS] 75 ferramentas de medicao com --self-check passando\n"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/sms_wrapper/selftest.py"
+      ],
+      "exit_code": 0,
+      "seconds": 63.49,
+      "log": "doc/curation/evidence/2026-10-24_mugenesis/selftest_final.log",
+      "sha256": "a9a04802181b00d7faefb8192faeeb69d8be6553773cde73ae09437c0ab5d152",
+      "tail": "ration-only record cannot prove AIR identity\n  [OK ] RAM assertions and input ACK deadline rederived from journal\n  [OK ] claimed whiff rejected when raw reads show damage\n[SELF-CHECK OK] exclusive JSON reports preserve existing inputs and aliases\n[SELF-CHECK OK] four report CLIs preserve inputs with both output aliases\n  [OK ] cyclic video with equal endpoints retains motion\n  [OK ] unchanged video has no motion proof\n  [OK ] sessao: bundle com vinculos validos  ([PASS] session-bound informative framebuffer; no gameplay/audio/FPS approval)\n  [OK ] sessao: ROM trocada rejeitada  ([FAIL] session/ROM/capture/config binding mismatch)\n  [OK ] sessao: captura preta rejeitada apesar dos hashes validos  ([FAIL] session/ROM/capture/config binding mismatch)\n== Fase 3: bateria valida/reprova ==\n  [OK ] bg valido aprovado  ([PASS] 1 PNG(s) dentro do contrato)\n  [OK ] gate reprovou grid fora de 8x8  ([FAIL] grid 8x8 violado: 250x100)\n  [OK ] gate reprovou cor fora dos codigos 6-bit  ([FAIL] /home/misael/.cache/phasezero/agent-tmp/smsforge_selftest_41h_nuf6/bad_color_bg.png)\n  [OK ] gate reprovou indice 0 opaco  ([FAIL] /home/misael/.cache/phasezero/agent-tmp/smsforge_selftest_41h_nuf6/opaque_idx0_bg.p)\n  [OK ] sprite 16x16 aprovado  ([PASS] 1 PNG(s) dentro do contrato)\n  [OK ] gate reprovou sprite 12x12  ([FAIL] sprite 12x12 fora de {8x8,8x16,16x16})\n  [OK ] cena com 10 sprites dispersos aprovada  ([PASS] 10 sprites, pico 1/linha)\n  [OK ] gate reprovou 9 sprites numa scanline  ([FAIL] scanline 104: 9 entradas > 8; buffer cheio, overflow (status bit 6); visiveis desca)\n  [OK ] gate reprovou SAT >64  ([FAIL] SAT overflow: 65 sprites > 64)\n  [OK ] gate reprovou colisao com terminador 0xD0  ([FAIL] sprite em (40,209): Y armazenado colide com terminador 0xD0)\n  [OK ] y=207 grava 0xCE: nao colide com o terminador (L129)  ([PASS] 1 sprites, pico 0/linha)\n  [OK ] gate reprovou 8 sprites hidden + 1 visivel na linha (L129)  ([FAIL] scanline 54: 9 entradas > 8; buffer cheio, overflow (status bit 6); visiveis descar)\n  [OK ] Y 0xD0 em 224 linhas aprovado: sem terminador (L128)  ([PASS] 1 sprites, pico 1/linha)\n  [OK ] gate reprovou SAT truncada declarada em 224 linhas  ([FAIL] sat_terminated declarado em 224 linhas: 0xD0 so termina a SAT no modo 192; o VDP pe)\n  [OK ] gate reprovou screen_h fora de 192/224/240  ([FAIL] screen_h 200 fora dos modos do VDP (192, 224, 240); integer required)\n  [OK ] contraste branco/preto aprovado  ([PASS] contraste acima do piso)\n  [OK ] gate reprovou cinza sobre branco  ([FAIL] contraste dY=16 < piso 17 entre (85, 85, 0) e (0, 85, 85))\n  [OK ] MUGEN contrato válido planning  (})\n  [OK ] MUGEN probe não vira delivery  (})\n  [OK ] MUGEN número MD rejeitado no SMS  (})\n  [OK ] checklist artístico válido e hash-bound aprovado  ([PASS] review checklist complete; owner-approved)\n  [OK ] gate artístico reprova sprite sheet sem micro-eixos L107  ([FAIL] invalid checklist or failed artistic axes block promotion)\n  [OK ] gate artístico reprova tipo pixel_sprite desconhecido  ([FAIL] invalid checklist or failed artistic axes block promotion)\n== Fase 4: bootstrap materializa a hierarquia de verdade ==\n  [OK ] bootstrap materializa hierarquia de verdade  (10 arquivos, sem placeholder)\n== Fase 5: build honesto (ambiente sem toolchain) ==\n  [--] probe de projeto ausente (SMSFORGE_PROBE_PROJECT); pulado\n\nSELFTEST: 130/130 verdes (130 base + probe opcional nao rodado)\n[SELFTEST OK] todos os gates provados: aprovam o valido, reprovam o invalido.\n"
+    }
+  ],
+  "focused_pytest": {
+    "command": "python3 -m pytest -q tools/sms_wrapper/mugen2sms/tests/test_measurement_gates_pose_budget.py --project rev2",
+    "exit_code": 0,
+    "passed": 16,
+    "skipped": 0,
+    "source": "executed terminal result in this session; 16 passed in 2.24s"
+  },
+  "build": {
+    "log": "out/curation/20261024_mugenesis/build_snapshot.log",
+    "exit_code": 0,
+    "rom_bytes": 851968,
+    "rom_sha256": "6de8c451fa39ff49670d242f8a3f3946bf67fea1830566fa4fe901517493b983",
+    "scope": "copied active source/data; no promotion or emulator proof for rebuilt ROM"
+  },
+  "emulator": "doc/curation/evidence/2026-10-24_mugenesis/emulator_review.json",
+  "global_green": false,
+  "engine_complete": false
+}

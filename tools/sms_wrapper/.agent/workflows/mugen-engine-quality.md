@@ -35,13 +35,12 @@ acomodar o primeiro backend.
     completa. Antes de investir num scheduler sprite-only para zero omissões,
     calcule o limite inferior de sprites de 8 px por scanline sobre os pixels
     opacos exatos do corte, já na escala e espaçamento pretendidos. No
-    `luta_mugen`, `integrada/tools/line_lower_bound.py --self-check` valida o
-    medidor atual; sua evidência do par Ken/Ryu encontrou linhas que exigem 9–10
+    histórico `luta_mugen`, a evidência do par Ken/Ryu encontrou linhas que exigem 9–10
     sprites quando o VDP só exibe 8. Se qualquer pose exceder 8, sprite-only
     sem omissões é impossível para aquela composição: pare a otimização do
     scheduler para esse objetivo e compare reautoria/escala/espaçamento com BG
     ou híbrido. Um limite ≤8 é apenas condição necessária, nunca aprovação. Rode
-    então a simulação real de scanline/SAT, confira a imagem quadro a quadro com
+    então a simulação real com `audit_sprite_line_sim.py` (self-check antes), confira a imagem quadro a quadro com
     `audit_render_glitch.py` e meça VRAM, VBlank/worst-frame e FPS na ROM. Essa
     prova é específica ao corte medido; não transfira o resultado para outro
     personagem, escala ou distância. A etapa aplica evidência já registrada com
@@ -127,4 +126,10 @@ prova com P2 parado não paga isso. Selos de etapa devem passar
 perfil não converte overflow em budget aprovado. Conserve fonte e observações
 hasheadas nos registros; o gate mede consistência, não compatibilidade CNS geral.
 Para qualidade: `PYTHONPATH=tools/sms_wrapper python3 -m mugen2sms quality-check
---project SMS_projects/luta_mugen [--delivery]` (em uma linha).
+--project <projeto> [--delivery]` (em uma linha).
+
+Curadoria de reuso: `doc/curation/2026-10-24_mugenesis_rev2.md` e as receitas
+atuais em `sms-mugen-source-semantics.md`, `sms-runtime-optimization.md` e
+`sms-psg-audio.md`. Não depender de scripts sob o projeto legado com EIO para
+preparar um consumidor novo. Os diagnósticos de composição/sola permanecem
+fora dos gates globais; não autorizam cortar movimentos nem promover budget.

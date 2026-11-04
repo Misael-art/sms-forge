@@ -1,0 +1,253 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "producer": "/root",
+  "reviewer": "/root/hayato_cut_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_new_authored_blade_delta_review",
+  "status": "passed",
+  "request_id": "hayato-v5-authored-blade-stretch",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_blade_review_request_v5.json",
+    "sha256": "3f3266f7563b9874b953372c25d9357137fa63d755e28f9174565ad13d8feae6"
+  },
+  "reviewed_at_utc": "2026-10-29T23:30:19.701594+00:00",
+  "approval_scope": "Exact new R02 v5 source deformation and static R01→R02→R03/full-sequence context only. Owner explicitly authorized transient sword squash/stretch. No new timing, continuous playback, SMS conversion, ROM, owner approval of this candidate or production promotion.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v5/cut_source.png",
+      "sha256": "e0044806adb9aa0cd085cf582f2c0942a784d20a441f57f0aff9c2b0fa513ecf",
+      "observed_sha256": "e0044806adb9aa0cd085cf582f2c0942a784d20a441f57f0aff9c2b0fa513ecf"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v5/source_assembly.json",
+      "sha256": "a174b55a905c9fd8c2641451ba8cf58d3fa663d683a2e943cc393ab982db0dcf",
+      "observed_sha256": "a174b55a905c9fd8c2641451ba8cf58d3fa663d683a2e943cc393ab982db0dcf"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v5/blade_delta/native/R02.png",
+      "sha256": "072905e9d40b7c940d7217a102486d1d250c00235f799581246b9437d4fc75ca",
+      "observed_sha256": "072905e9d40b7c940d7217a102486d1d250c00235f799581246b9437d4fc75ca"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v5/blade_delta/generated_raw.png",
+      "sha256": "f72bade214c76bbe195c205e9236a66d30596045f436fc1039c3fcaa8ea5d472",
+      "observed_sha256": "f72bade214c76bbe195c205e9236a66d30596045f436fc1039c3fcaa8ea5d472"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v5/blade_delta/prompt.txt",
+      "sha256": "ad8e9bae3f0563c9ab10f8ae46a4261672dffaa3a979b8bcf5cbb02498a093da",
+      "observed_sha256": "ad8e9bae3f0563c9ab10f8ae46a4261672dffaa3a979b8bcf5cbb02498a093da"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/decisions/hayato-short-cut-v4_owner-motion-feedback.json",
+      "sha256": "974573942646347e4804ac8ec0d95d6be0e6f5d296206922eef55f28c8648bff",
+      "observed_sha256": "974573942646347e4804ac8ec0d95d6be0e6f5d296206922eef55f28c8648bff"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_animation_contract_v3.json",
+      "sha256": "fec4c401727546683ad013870a329e0a850f5aaf2b216211e22007f58b8e729f",
+      "observed_sha256": "fec4c401727546683ad013870a329e0a850f5aaf2b216211e22007f58b8e729f"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/sword_stretch_v5/R02_candidate_4x.png",
+      "sha256": "28fcaf9ef70a45c8abbf45f211a6f677d5f943fdb0c1078c58f37d7f053cd378",
+      "observed_sha256": "28fcaf9ef70a45c8abbf45f211a6f677d5f943fdb0c1078c58f37d7f053cd378"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/R02_delta/native/R02.png",
+      "sha256": "320e2e6e1bad4542433731171add31a84c439b8a24ee0d2e2a14de72af436a2a",
+      "observed_sha256": "320e2e6e1bad4542433731171add31a84c439b8a24ee0d2e2a14de72af436a2a"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R01.png",
+      "sha256": "03ff409b97f21eff5593874a7610ced5af33a8a7fce92ac8fe659b886eb49759",
+      "observed_sha256": "03ff409b97f21eff5593874a7610ced5af33a8a7fce92ac8fe659b886eb49759"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/native/R03.png",
+      "sha256": "88c56708453130d1af7a0205defb2124d547f8db009331f2dcd78a63363edf63",
+      "observed_sha256": "88c56708453130d1af7a0205defb2124d547f8db009331f2dcd78a63363edf63"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R04.png",
+      "sha256": "c42b2cef98fa87f235941bc0e12dbb0055b21013d849f4068e4b9fcaa6cb28bf",
+      "observed_sha256": "c42b2cef98fa87f235941bc0e12dbb0055b21013d849f4068e4b9fcaa6cb28bf"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R05.png",
+      "sha256": "7e0598ccc744612069e7f346d6ff4206aadcc5efdc8b8fe5eb7888d74510aa8e",
+      "observed_sha256": "7e0598ccc744612069e7f346d6ff4206aadcc5efdc8b8fe5eb7888d74510aa8e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R06.png",
+      "sha256": "203738c1d6a05ed50f0e29691fc24f54257bfbfe296c8a4738727ec8e35e0d57",
+      "observed_sha256": "203738c1d6a05ed50f0e29691fc24f54257bfbfe296c8a4738727ec8e35e0d57"
+    }
+  ],
+  "conclusion": "No concrete static blocker identified in the new authored blade delta. One connected, elongated curved/tapered metallic shape advances down-right from the unchanged guard; no second weapon, detached speed line or crop is visible. In ordered context R01 is high, R02 provides the new swept intermediate, and exact R03 restores normal steel. Protected body/grip and five other sources are unchanged. The intended one-tick transient reading and proposed longer preparation/low hold still need a new motion test; this report does not repeat or close the prior temporal evidence gap.",
+  "authorization_interpretation": {
+    "owner_feedback_ref": "doc/decisions/hayato-short-cut-v4_owner-motion-feedback.json",
+    "accepted_base_scope": "Owner finds v4 artistic construction satisfactory; this is not approval of new v5 pixels.",
+    "new_exception": "R02 only may graphically squash/stretch the sword in the fast interval, restoring canonical blade on R03. The explicit v3 equipment invariant governs this local exception; previous rigid-steel rules are not misapplied as a ban on the authorized deformation.",
+    "timing_proposal": [
+      8,
+      1,
+      2,
+      7,
+      2,
+      5
+    ],
+    "timing_observed": false
+  },
+  "review_axes": {
+    "identity_and_face": {
+      "status": "pass_unchanged",
+      "note": "Head, face, hair, body, costume and scabbard content outside the two exposed-blade rectangles is exact to the accepted control. Whole character visually rechecked; no identity regression introduced."
+    },
+    "pose_anatomy_and_joint_continuity": {
+      "status": "pass_unchanged",
+      "note": "Shoulder/sleeve/elbow/wrist/grip remain exact to control. New blade does not cover the body, face or another limb; no new hand/arm junction problem identified."
+    },
+    "hand_weapon_attachment": {
+      "status": "pass_static",
+      "note": "Hand→grip→orange guard→bright blade is visually continuous at native and NN4, including authored raw junction inspection. The new band originates at the existing blade base, with no visible gap or extra handle."
+    },
+    "equipment_geometry": {
+      "status": "pass_authorized_transient_only",
+      "note": "One continuous curved and tapering blade has a full sharp terminal in empty space right of the hands; no residual old blade/second sword remains. Curvature and stretch are the explicitly authorized fast-frame exception, not a permanent weapon redesign. R03 and later canonical steel remain exact."
+    },
+    "static_sweep_progression": {
+      "status": "pass_candidate_only",
+      "note": "R01 high/up-right blade, R02 new down-right curved projection and R03 lower normal blade form a legible clockwise discrete path. In this ordered context the source construction supports a transient sweep. Whether it is perceived as transient deformation at one tick is unobserved."
+    },
+    "pixel_clusters": {
+      "status": "pass_static",
+      "note": "New band has hard-edged white/light-gray interior and dark contour tapering to a point. No blur, detached trail or huge opaque fan is used. Full-source opaque mask is one 8-connected component; that descriptive check supports, not substitutes for, visual attachment judgement."
+    },
+    "face_detail_readability": {
+      "status": "pass_unchanged",
+      "note": "No face or hair pixels changed under this delta. Existing native source face occlusion by raised arms remains; no added detail claimed."
+    },
+    "outline_and_cutout": {
+      "status": "pass_static",
+      "note": "Blade point fully inside192canvas, new alpha bbox[50,63,169,159]. No content touches right/top/bottom image edge or crosses the shared floor. New whole-source mask has no separate opaque speck or second object."
+    },
+    "material_shading": {
+      "status": "pass_source_only",
+      "note": "White/light-gray metal band, neutral-gray planes and dark warm contour remain within existing source palette. Blade brightness follows the swept band. No unplanned yellow/blue glow or effect added. Future shared-P1 mapping still requires checking these exact new blade pixels."
+    },
+    "material_shadow_flow_coherence": {
+      "status": "pass_static",
+      "note": "Broad light region narrows with the curved terminal and darker edge follows its taper. This produces a coherent stretched metal/smear construction rather than unrelated gray patches. Protected garment shading is exact."
+    },
+    "semantic_palette_role_confinement": {
+      "status": "pass_source_only",
+      "note": "Full PLTE and transparency index remain exact. Changed target indices belong to existing whites/grays/dark contour or transparency; mixed13/dark contour use in the new steel must be reviewed after SMS mapping rather than assumed safe from earlier derivative passes. No body/skin/costume color changed."
+    },
+    "frame_pose_integrity": {
+      "status": "pass_static_context",
+      "note": "R02 remains the high-hand release pose with one intentional swept blade. Five other drawings and their roles are unchanged; normal equipment is restored on R03. Full sequence source board inspected, not just the edit crop."
+    },
+    "native_size_readability": {
+      "status": "pass_source_only",
+      "note": "At native192source size, single blade origin, extended down-right sweep and pointed end remain readable. No new native SMS or emulator image is supplied for this delta."
+    },
+    "protected_pixel_PLTE_alpha_invariants": {
+      "status": "pass",
+      "note": "436 changed source indices and430 alpha changes all lie inside the two allowed rectangles. Outside regions, indexed pixels/alpha are exact; image size192x192, full PLTE and transparency0 are exact. Blade alpha is intentionally different inside the allowed sweep region."
+    },
+    "squash_and_stretch_static_cue": {
+      "status": "pass_candidate",
+      "note": "Visible change is an elongated curved/tapered steel projection with broader middle relative to the former straight narrow R02. It is a genuine new graphical cue, not merely a duration or contract declaration. Effectiveness during motion is not inferred from this still."
+    },
+    "continuous_perception_and_new_timing": {
+      "status": "pending_not_observed",
+      "note": "No continuous playback or actual presentation of8/1/2/7/2/5 observed. This assignment reviews a new source delta only; prior framewise temporal report is preserved and is not rerun as an equivalent static exercise."
+    },
+    "SMS_hardware_ROM_owner": {
+      "status": "pending",
+      "note": "No new converted PNG, packer/scanline/SAT/pattern/VBlank measurement, ROM, FPS/PAL or owner approval of v5 reviewed. Earlier v4 evidence cannot approve the new blade or durations."
+    }
+  },
+  "pixel_delta_evidence": {
+    "old_source_sha256": "320e2e6e1bad4542433731171add31a84c439b8a24ee0d2e2a14de72af436a2a",
+    "new_source_sha256": "072905e9d40b7c940d7217a102486d1d250c00235f799581246b9437d4fc75ca",
+    "allowed_rectangles_exclusive": [
+      [
+        115,
+        35,
+        182,
+        81
+      ],
+      [
+        119,
+        81,
+        182,
+        120
+      ]
+    ],
+    "changed_indices": 436,
+    "changed_bbox_exclusive": [
+      115,
+      53,
+      169,
+      106
+    ],
+    "changed_indices_outside_rectangles": 0,
+    "changed_alpha_pixels": 430,
+    "alpha_added": 249,
+    "alpha_removed": 181,
+    "changed_alpha_outside_rectangles": 0,
+    "protected_pixels_alpha_exact": true,
+    "full_PLTE_exact": true,
+    "transparency_old_new": [
+      0,
+      0
+    ],
+    "five_other_source_paths_hashes_exact": true,
+    "new_opaque8_component_sizes": [
+      4050
+    ],
+    "scope": "Read-only pixel descriptions and visual source review, not hardware, animation or general authorship certification."
+  },
+  "findings": [
+    {
+      "priority": 2,
+      "domain": "animation",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "New swept steel after SMS conversion and at one-tick exposure",
+      "summary": "Static shape is coherent; its perceived speed/deformation reading is still untested.",
+      "required_delta": "Convert early with the same approved common scale and palette, inspect both orientations and metal/contour mapping, then record the new timings in a fresh bound clip. Judge whether this reads as a fast transient and restores normal steel cleanly; do not assume source pass or1tick makes it effective."
+    }
+  ],
+  "inspection_evidence": [
+    "All14frozen inputs verified at start and before writing.",
+    "Viewed new nativeR02, provided4xsource candidate and full six-pose sheet; created fresh NN4whole-character light/dark panels in memory and inspected authored raw blade/grip patch.",
+    "Compared exact old/new indexed images and alpha masks;436index changes and430alpha changes confined to authorized two rectangles. PLTE/transparency/size exact.",
+    "Verified other five selected source paths/hashes against v4assembly and checked actual files through frozen request hashes.",
+    "Read explicit owner feedback, local prompt and v3 equipment invariants; authorization interpreted as R02-only transient exception, not universal permission or evidence of execution.",
+    "No generation, edit, build, emulator, Git, code, memory or contract change performed; only this report written."
+  ],
+  "full_conclusion": {
+    "new_blade_static_candidate": "passed",
+    "protected_source_invariants": "passed",
+    "concrete_static_blockers": [],
+    "perceived_transient_effectiveness": "pending",
+    "proposed_timing": "not_observed",
+    "new_SMS_ROM": "not_reviewed",
+    "owner_approval_of_new_candidate": false,
+    "production_promoted": false
+  },
+  "next_checkpoint": "Early conversion of exact newR02 in both orientations under the existing common transform and palette, then fresh native recording of proposed exposures. Review new converted blade/materials/contacts and observe its one-tick effect with honest perception limits; do not repeat an equivalent frozen-v4 temporal review.",
+  "limits": [
+    "Static new authored delta only; no continuous temporal approval or claimed live playback.",
+    "Owner accepted base art and authorized the experiment; this report does not grant owner approval to the result.",
+    "No AAA, production, competitive gameplay/frame-data, hardware budget, FPS/PAL/VBlank, audio or delivery claim."
+  ]
+}

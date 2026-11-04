@@ -1,0 +1,21 @@
+{
+  "schema": "hayato_owner_motion_feedback_v1",
+  "actor": "project_owner",
+  "control_source_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+  "control_video_sha256": "e64715e8d2a5acff44cd328a9d533098545c003eb5725c01460f01907b26cbc7",
+  "art_scope": "Owner reports significant evolution and satisfactory artistic construction/complete poses. Not production or global gate promotion.",
+  "observed_defect": "Preparation lifting sword and low terminal are too brief compared with middle of cut; owner requests more exposure to perceive arm, execute, return.",
+  "authorized_deltas": [
+    "Increase context-dependent per-pose holds",
+    "Apply squash/stretch graphical sword deformation to fastest interval, restore canonical blade afterward"
+  ],
+  "verbatim_excerpts": [
+    "Basicamente quanto artísticos está tudo ok.",
+    "o primeiro sprite dele levantando a espada [...] não deveria estar tão veloz quanto o meio do golpe.",
+    "o último, quando ele chega com a espada ao final, na parte de baixo [...] deveria durar um pouquinho mais de tempo, assim como o primeiro.",
+    "Squash and Stretch na espada que e o item que se move mais rapido"
+  ],
+  "next_decision": "adjust_exposures_and_repair_fast_sword_pose",
+  "control_preserved": true,
+  "competitive_mechanics_approved": false
+}

@@ -72,4 +72,18 @@ void fight_input_step(unsigned char side, const CharacterData *cd,
 unsigned char fight_input_ai_levels(unsigned short frame, unsigned char face,
                                     unsigned char *out_beat);
 
+/* Cursor equivalente para chamadas consecutivas a cada tick de 16 bits.
+ * Reset corresponde a frame 0; avance uma vez para cada frame seguinte,
+ * inclusive frame 0 na volta de 65535. Saltos exigem reinicialização/seek
+ * externo: esta API não interpreta frames omitidos. */
+typedef struct {
+    unsigned char beat;
+    unsigned char sub;
+} FightAIClock;
+
+void fight_ai_clock_reset(FightAIClock *clock);
+void fight_ai_clock_advance(FightAIClock *clock, unsigned short frame);
+unsigned char fight_input_ai_levels_clock(const FightAIClock *clock,
+                                          unsigned char face);
+
 #endif /* FIGHT_INPUT_H */

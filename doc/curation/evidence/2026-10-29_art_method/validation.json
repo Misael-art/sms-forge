@@ -1,0 +1,108 @@
+{
+  "checks": [
+    {
+      "check": "focused",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tools/sms_wrapper/tests/test_art_temporal_review.py",
+        "tools/sms_wrapper/tests/test_authored_sprite_sample.py"
+      ],
+      "exit_code": 0,
+      "seconds": 19.29,
+      "log": "doc/curation/evidence/2026-10-29_art_method/focused.log"
+    },
+    {
+      "check": "art_selfcheck",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "tools/sms_wrapper/audit_art_review_checklist.py",
+        "--self-check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.16,
+      "log": "doc/curation/evidence/2026-10-29_art_method/art_selfcheck.log"
+    },
+    {
+      "check": "registry_selfcheck",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "tools/sms_wrapper/artifact_registry.py",
+        "--self-check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "log": "doc/curation/evidence/2026-10-29_art_method/registry_selfcheck.log"
+    },
+    {
+      "check": "selftest",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "tools/sms_wrapper/selftest.py"
+      ],
+      "exit_code": 0,
+      "seconds": 10.97,
+      "log": "doc/curation/evidence/2026-10-29_art_method/selftest.log"
+    },
+    {
+      "check": "measurement_tools",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "tools/sms_wrapper/validate_measurement_tools.py"
+      ],
+      "exit_code": 0,
+      "seconds": 8.3,
+      "log": "doc/curation/evidence/2026-10-29_art_method/measurement_tools.log"
+    },
+    {
+      "check": "doc_sync",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "tools/sms_wrapper/audit_doc_sync.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "log": "doc/curation/evidence/2026-10-29_art_method/doc_sync.log"
+    },
+    {
+      "check": "learning",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "tools/sms_wrapper/audit_learning_capture.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.19,
+      "log": "doc/curation/evidence/2026-10-29_art_method/learning.log"
+    },
+    {
+      "check": "hardware",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "tools/sms_wrapper/audit_hardware_constants.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.52,
+      "log": "doc/curation/evidence/2026-10-29_art_method/hardware.log"
+    },
+    {
+      "check": "registry_global",
+      "command": [
+        "/home/misael/Projects/SMSForge/.venv/bin/python",
+        "tools/sms_wrapper/artifact_registry.py",
+        "check",
+        "--project",
+        "SMS_projects/master_of_fighters",
+        "--scan"
+      ],
+      "exit_code": 1,
+      "seconds": 0.09,
+      "log": "doc/curation/evidence/2026-10-29_art_method/registry_global.log"
+    }
+  ],
+  "runtime_changed": false,
+  "fresh_emulator_QA": "not_run: code changes confined to review validation"
+}

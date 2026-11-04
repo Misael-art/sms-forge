@@ -16,7 +16,7 @@ rascunho/<original> (com sha256 registrado)
   → PNG indexado 8-bit sem perda, grid 8×8, índice 0 transparente, ≤15 úteis
   → gates: validate_resources + luma_floor + provenance
   → conversor adequado ao tipo: png_to_sms_tiles (tile) ou
-    pack_sms_metasprite (pose composta por objetos 8×8)
+    pack_sms_metasprite (pose composta, geometria explícita)
   → ROM diagnóstica + comparação do framebuffer + binding por SHA
   → revisão humana, paleta/budget por cena e integração em res/ROM de produção
 ```
@@ -41,3 +41,12 @@ produção nem fecha paleta global ou budget da cena.
 `#define FOO_SIZE` e `foo[N]` (e o mesmo define em dois headers) coincidem.
 Header-índice escrito à mão diverge da folha e o streamer lê além do array
 (L052). Gere o header; rode `--check`. Gate: `audit_symbol_size_sync.py`.
+
+## Fonte autoral e amostra controlada
+
+`prepare_authored_sprite_sample.py` é o adaptador oficial para amostra indexada
+autoral: v2 aceita IDs/durações e modo 8×8 opt-in; o padrão histórico é 8×16.
+Reutiliza conversão/packers existentes. Não iniciar outro conversor por
+personagem. Direção e atuação pertencem a `original-artwork.md` e
+`sms-sprite-animation.md`; escolha técnica/composição a `sms-asset-to-rom.md`.
+Defaults v1 são compatibilidade com uma amostra Social, não receita universal.

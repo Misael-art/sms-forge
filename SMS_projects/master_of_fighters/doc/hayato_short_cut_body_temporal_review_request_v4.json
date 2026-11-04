@@ -1,0 +1,57 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "hayato-body-cut-final-motion-v4",
+  "stage": "pre_growth",
+  "producer": "/root",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "scope": "Review final full action and separate static quality, choreography, continuity, timing-spacing, normal-speed reading, native SMS. Native realtime video from exact current ROM is provided, plus normal/slow comparisons. Inspect whole ordered sequence/transitions; if only frames/metadata are accessible, explicitly retain perceived continuous motion pending. Do not equate FPS, exact RGB or metadata with expressive animation. Identify concrete remaining defects or opportunities, never invent continuous perception. No emulator, build, code/Git or owner approval. Write only doc/hayato_short_cut_body_temporal_independent_review_v4.json and validate with quality_review_router. Inputs frozen.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/final_review_v4/before_after_normal.apng",
+      "sha256": "741aa3e360f0ffc7d13dc341a78592e1f1f686fcf65a2b60c19eac3d6041d3dd"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/final_review_v4/before_after_slow.apng",
+      "sha256": "eef19e796caf1d2beed8b19920c2b5c37a90899eb858dcacc4a8f3ca72c6f82b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/final_review_v4/source_sequence.png",
+      "sha256": "f3dbde5a55c65c3f452dd6a8d5124bdb13d2b88098a8020e54e009c67688a1f8"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/sms_v4_review.png",
+      "sha256": "5da7224cbe01f332adb6248c76575ae47f18c35731f5c9f70da37987ad9f2f30"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.mp4",
+      "sha256": "e64715e8d2a5acff44cd328a9d533098545c003eb5725c01460f01907b26cbc7"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.json",
+      "sha256": "49f70724a05393f2f25c48279fb1293872d66de098e3481d02829f42f424d9a2"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/pixel_timeline_analysis.json",
+      "sha256": "e79cf86febe002568fc21f2317ddb2c68a8333986b4236da96cf2815365d0877"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/runtime_probe.json",
+      "sha256": "3c7db76053a92142dd86c8cf2b77e98bed5a878312e4873f0a300ec479e1ddf0"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/worst.json",
+      "sha256": "34242568693b595c5f099a7400c08beccb1be73975750fe0c4312b4dcb93bd13"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/closed_session.json",
+      "sha256": "baeb01b8326201d26aa192a0e14b4fa4e8155db5417c23feb9700578c905dba6"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+      "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+    }
+  ]
+}

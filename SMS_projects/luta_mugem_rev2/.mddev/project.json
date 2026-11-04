@@ -12,10 +12,13 @@
       "SMSlib",
       "PSGlib"
     ],
+    "include_dirs": [
+      "out/generated/pose_budget_facing_20261027"
+    ],
     "makesms_extra": [
-      "-pm",
+      "-pp",
       "-mbank",
-      "out/generated/ryu_ken_cross/versus_scene_banks_02.bin:0:49:2"
+      "out/generated/pose_budget_facing_20261027/versus_scene_banks_02.bin:0:24:2"
     ]
   },
   "skeleton_version": 1,

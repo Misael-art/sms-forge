@@ -1,0 +1,27 @@
+{
+  "schema": "sms_authored_pose_registration_v1",
+  "pivots": {
+    "idle": [
+      68,
+      127
+    ],
+    "C01": [
+      68,
+      127
+    ],
+    "C02": [
+      68,
+      127
+    ],
+    "C03": [
+      68,
+      126
+    ],
+    "C04": [
+      68,
+      127
+    ]
+  },
+  "reason": "Use actual saved sole boundary per source pose;C03nearest extraction ended126,others127. Same uniform2/9raster scale for all support poses; no per-pose height normalization.",
+  "source_pixels_moved": false
+}

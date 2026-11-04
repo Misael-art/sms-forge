@@ -48,6 +48,7 @@ import re
 import struct
 import subprocess
 import wave
+from measure_runtime_probe import target_fps_verdict
 
 
 SCHEMA = "sms_openbor_evidence_v2"
@@ -362,9 +363,8 @@ def _runtime(metrics, windows, session, region):
         rates.append(delta / elapsed)
         total += delta
         last = row["after_seq"]
-    target = 60 if region == "NTSC" else 50
-    _need(all(abs(rate - target) <= 1 for rate in rates) and max(rates) - min(rates) <= 1,
-          "regional runtime means outside tolerance")
+    _need(target_fps_verdict(rates, region)["passed"],
+          "runtime windows must meet owner target60/floor58FPS without rounding")
     reported = metrics.get("fps_janelas")
     _need(isinstance(reported, list) and len(reported) == len(rates)
           and all(abs(_number(a, "fps window") - b) <= .011 for a, b in zip(reported, rates))

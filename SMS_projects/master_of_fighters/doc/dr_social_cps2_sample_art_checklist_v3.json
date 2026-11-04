@@ -1,0 +1,115 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "producer": "/root",
+  "asset": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_source.png",
+    "sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+  },
+  "required_characters": [
+    "dr_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "semantic_palette_role_confinement",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "morphology_and_biotype",
+    "pose_anatomy_and_joint_continuity",
+    "support_and_pivot"
+  ],
+  "characters": [
+    {
+      "id": "dr_social",
+      "references": [
+        {
+          "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+          "role": "approved identity model, later neutral-gray hair and brass glasses override brown-gray text"
+        }
+      ],
+      "observed_defects": [
+        "v1 had brown-gray hair, weak glasses, noisy clusters and near-full J03. v3 changed hair/tails and J03/J04 reach; source-native review still required."
+      ],
+      "revision_notes": [
+        "One constant source scale, explicit sole/pivot annotations, 30 authored source colors; no SMS palette constraint at source",
+        "Six diagrams and proposed timing preserved; no extra drawings"
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        },
+        "face_detail_readability": {
+          "status": "fail",
+          "note": "Independent review v2: rim/lens construction changes between poses; partial profile does not require both lenses, but the visible identity must remain stable."
+        },
+        "outline_and_cutout": {
+          "status": "pass",
+          "note": "Native sheet preflight: binary alpha, no partial-alpha pixels, source fully inside slots; artistic contour polish remains a separate cluster axis."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        },
+        "equipment_geometry": {
+          "status": "pass",
+          "note": "Cane handle/shaft/rounded ferrule remain whole in native source, clear of canvas borders. Scope is the cane used in this normal."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "J03 elbow is now bent and all drawings/times exist; independent review still finds J04 contact too close to J03. This is a readability risk, not a proven playback failure."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        },
+        "support_and_pivot": {
+          "status": "pending",
+          "note": "Producer submitted current native v3 source for independent visual judgment; no owner approval."
+        }
+      }
+    }
+  ],
+  "owner_approval": {
+    "approved": false
+  },
+  "independent_review": {
+    "status": "revise_before_growth",
+    "reviewer": "/root/social_art_review",
+    "report": {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v2.json",
+      "sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "sms_artifact_decision_v1",
+  "artifact_id": "hayato-cps2-short-cut-v06",
+  "scope": "animation_source",
+  "decision": "rejected",
+  "actor_role": "owner",
+  "actor": "project_owner",
+  "source_note": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json: direct owner selection of timing-only and rejection of blade distortion.",
+  "approval_scope": "Owner rejects transient deformed blade for this cut because it changes the perceived trajectory; preserve source and evidence as rejected control.",
+  "files": [
+    {
+      "role": "image",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/cut_source.png",
+      "sha256": "8666bad0795fe5b1a3272189d5be9c4cae7d946d4f8f3bd21719a17150ba7191"
+    },
+    {
+      "role": "raw",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/generated_raw.png",
+      "sha256": "125dd193a62014c8da3a97151ab951a05fccae62ef53e4a38b78ada6899e526a"
+    },
+    {
+      "role": "pose",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/native/R02.png",
+      "sha256": "28ae28678ebf4ceb17cc6212fdd3ee364817c5d1102286a2f6fb99bf615ff8d0"
+    },
+    {
+      "role": "assembly",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/source_assembly.json",
+      "sha256": "3b834c3cb73fbecdb91de127696da8f8f75d6d21d446542cf21c3c2ed2e0c853"
+    },
+    {
+      "role": "tip_detail_3",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/extraction_recipe.json",
+      "sha256": "98c7052d8148b05a2a4a563260f26a8f2c0396d32a8f839504e0817cefe5cbf4"
+    },
+    {
+      "role": "tip_detail_8",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/patch_native/tip.png",
+      "sha256": "35807d4dca909a1052ecfc7669e256d830505447e5950a62f147ba20dd209cb3"
+    },
+    {
+      "role": "tip_detail_9",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/prompt.txt",
+      "sha256": "64247d0985be7bc5dd3f7555838aa2b67f2c25cdc1bd08c0c5b965cde35609ca"
+    },
+    {
+      "role": "tip_detail_10",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/tip_patch.png",
+      "sha256": "35807d4dca909a1052ecfc7669e256d830505447e5950a62f147ba20dd209cb3"
+    },
+    {
+      "role": "generation_metadata",
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/generation_metadata.json",
+      "sha256": "9cf2ae8598868478075d1e7074e0856de9b67ab84367a5497d66946eea699938"
+    }
+  ]
+}

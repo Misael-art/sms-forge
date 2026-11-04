@@ -1,0 +1,43 @@
+{
+  "schema": "sms_owner_art_motion_acceptance_v1",
+  "actor": "project_owner",
+  "actor_role": "owner",
+  "decision": "accepted",
+  "verbatim": "aprovado",
+  "recorded_at": "2026-10-30T15:30:05.941141+00:00",
+  "source_note": "Direct owner reply to presentation at commit6677d5d and question: A proporção corrigida e o retorno à guarda agora atendem à sua intenção?",
+  "subject_sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b",
+  "artifacts": [
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/concept_source.png",
+      "sha256": "e81e0f9cc81b1552ff2ace0e046ecb5c36be00119e6b6f5d60d17a7b17f518e9"
+    },
+    {
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+      "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+    },
+    {
+      "path": "out/diagnostics/jj_zillion_single_shot_v6/poses_and_times.png",
+      "sha256": "0e9826e10e32500af51c1c4b32d0b41901bb19e99011353f78c30ac3dd55a023"
+    },
+    {
+      "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/jj_character_realtime.mp4",
+      "sha256": "4dec4b3ec93b463a004029790067271934ca783a60b62c5439187089b6ee1505"
+    },
+    {
+      "path": "out/candidates/jj_zillion_single_shot_v5_right/rom/master_of_fighters.sms",
+      "sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4"
+    }
+  ],
+  "approval_scope": "Corrected Zillion shape/proportion, conceptv5, sourcev6 allsixposes without projectile/FX, and presented return to guard with existing7/4/2/3/6 holds. Closes owner decision for this character-only sample.",
+  "duration_ticks": [
+    7,
+    4,
+    2,
+    3,
+    6
+  ],
+  "observation_limit": "Owner gave approval only; no description or explicit statement of watching continuous playback. This records acceptance, not an invented playback session or agent perception.",
+  "global_curation_approved": false,
+  "production_release_approved": false
+}

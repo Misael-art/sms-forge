@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "scope": "project_local_candidates",
+  "canonical_promotion_performed": false,
+  "candidates": [
+    {
+      "id": "m3a_001",
+      "title": "Comandos de audio assincronos exigem ACK de estado",
+      "owner": "tools/sgdk_wrapper/.agent/skills/code/xgm2-audio-director/SKILL.md",
+      "observation": "XGM2_resume enfileira comando; isPlaying pode continuar falso. O polling antigo podia reiniciar a musica antes da retomada.",
+      "heuristic": "Manter intent separado do ACK; nunca transformar status transitorio em novo play. Fixture precisa atrasar ACK de play/resume e cobrir fim natural.",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m3a_002",
+      "title": "Sound test precisa enumerar biblioteca e manter identidade",
+      "owner": "tools/sgdk_wrapper/.agent/skills/code/sgdk-runtime-coder/SKILL.md",
+      "observation": "Teste de primeira amostra escondia47outros sons e dependia do personagem escolhido para combate.",
+      "heuristic": "Catalogo por dados, origem/filtro/indice, com grupo/sample de origem. Enumerar nsounds e provar bordas, mute e canal ocupado.",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m3a_003",
+      "title": "Categoria vazia deve ser representada sem falso conteudo",
+      "owner": "tools/sgdk_wrapper/.agent/skills/architecture/scene-state-architect/SKILL.md",
+      "observation": "Perfil stage-free tem uma musica e nenhum SFX de cenario; ter menu nao cria recursos.",
+      "heuristic": "Exibir vazio seguro e capacidade conhecida. Distinguir extensibilidade do browser de conteudo integrado e de importacao automatica.",
+      "status": "not_applied",
+      "canonical_promotion": false
+    },
+    {
+      "id": "m3a_004",
+      "title": "Noise PSG tem canal de envelope proprio",
+      "owner": "tools/sgdk_wrapper/.agent/skills/code/xgm2-audio-director/SKILL.md",
+      "observation": "POUSO configurava noise mas abria envelope2; stop omitia canal3. Fixture generica de chamada nao detectava semantica de canal.",
+      "heuristic": "Conferir header/implementacao do SDK; testar mapa de canais e silencio no stop; evitar cue PSG concorrendo com BGM.",
+      "status": "not_applied",
+      "canonical_promotion": false
+    }
+  ]
+}

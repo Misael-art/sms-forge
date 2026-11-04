@@ -1,0 +1,153 @@
+{
+  "schema": "conversa07_layout_candidate_v1",
+  "status": "candidato_reversivel",
+  "not_an_approval": true,
+  "role": "prova de crop da conversa, cena 07; distinto de versus e de seleção",
+  "source_bust": {
+    "path": "originals/bust_neutral_attempt2.jpg",
+    "sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55",
+    "size": [
+      672,
+      1536
+    ],
+    "note": "JPEG recebido do gerador, copiado sem reencode. Não é paleta SMS."
+  },
+  "crop": {
+    "path": "logical/bust_neutral_crop_v1.png",
+    "sha256": "3a1dd847c2da867144930d015f206c0c65b99332c1e79945603c473bba960b28",
+    "box_px": [
+      0,
+      316,
+      672,
+      1277
+    ],
+    "size": [
+      672,
+      961
+    ],
+    "background_rgb": [
+      236,
+      228,
+      209
+    ],
+    "distance": 36,
+    "resample_into_window": "LANCZOS, proporção preservada, sem esticar um eixo"
+  },
+  "screen_px": [
+    256,
+    192
+  ],
+  "tile_px": 8,
+  "rects_px_half_open": {
+    "portrait": [
+      8,
+      8,
+      96,
+      120
+    ],
+    "name": [
+      104,
+      8,
+      248,
+      24
+    ],
+    "stage_placeholder": [
+      104,
+      32,
+      248,
+      120
+    ],
+    "speech": [
+      8,
+      128,
+      248,
+      184
+    ]
+  },
+  "rects_tiles_half_open": {
+    "portrait": [
+      1,
+      1,
+      12,
+      15
+    ],
+    "name": [
+      13,
+      1,
+      31,
+      3
+    ],
+    "stage_placeholder": [
+      13,
+      4,
+      31,
+      15
+    ],
+    "speech": [
+      1,
+      16,
+      31,
+      23
+    ]
+  },
+  "colors_rgb": {
+    "backdrop": [
+      0,
+      0,
+      85
+    ],
+    "name_and_frame": [
+      170,
+      170,
+      0
+    ],
+    "stage_placeholder": [
+      0,
+      85,
+      85
+    ],
+    "speech_fill": [
+      0,
+      0,
+      0
+    ],
+    "speech_text": [
+      255,
+      255,
+      255
+    ]
+  },
+  "cram_candidate_chrome_only": {
+    "backdrop_0x10": "RGB 0,0,85",
+    "gold_0x2A": "RGB 170,170,0",
+    "teal_0x30": "RGB 0,85,85",
+    "white_0x3F": "RGB 255,255,255",
+    "black_visible_needs_nonzero_bg_index": "RGB 0,0,0"
+  },
+  "text": {
+    "name": "DR. SOCIAL",
+    "line": "Ainda falta uma peça.",
+    "font_bold": "/usr/share/fonts/liberation/LiberationSans-Bold.ttf",
+    "font_regular": "/usr/share/fonts/liberation/LiberationSans-Regular.ttf",
+    "drawn_by": "PIL, fora dos pixels do retrato",
+    "not_baked_into_bust": true
+  },
+  "portrait_paste_origin": [
+    13,
+    9
+  ],
+  "portrait_fitted_size": [
+    77,
+    110
+  ],
+  "stage_note": "Retângulo teal é marcador de palco. Não há cenário desenhado.",
+  "tile_count": "Não medido. O busto continua ilustração; o cromado não foi convertido em tiles.",
+  "plates": {
+    "native": "preview/conversa07_layout_candidate_256.png",
+    "nearest_4x": "preview/conversa07_layout_candidate_4x.png"
+  },
+  "plates_sha256": {
+    "native": "85f4a9048157f72bd53d04c4bc445430510aba35857ee24ae17cce5fd56846f5",
+    "nearest_4x": "eaa80251a31098689ff19032154f5a3f06600c9521832622cc38b78441dcca4e"
+  }
+}

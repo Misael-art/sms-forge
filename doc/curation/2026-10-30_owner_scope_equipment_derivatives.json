@@ -1,0 +1,80 @@
+{
+  "curation_id": "owner_scope_equipment_derivatives_20261030",
+  "date": "2026-10-30",
+  "kind": "application_of_existing_lessons",
+  "lesson_ids_applied": [
+    "L113",
+    "L123",
+    "L124",
+    "L127",
+    "L125"
+  ],
+  "new_lesson_ids": [],
+  "rule_section": "SMS_GLOBAL §109 application",
+  "tools": [
+    "audit_art_review_checklist.py",
+    "artifact_registry.py"
+  ],
+  "scope": "Factory knowledge and art-review validator; no game runtime/assets/converter changes",
+  "supersedes_current_status_only": "Prior 2026-10-29 pending-owner conclusions: Hayato timing-only and JJ corrected sample now accepted; historical records preserved",
+  "sources": [
+    "SMS_projects/master_of_fighters/doc/curation_candidates/2026-10-29_dr_social_cps2_source_to_rom_method.json",
+    "SMS_projects/master_of_fighters/doc/10-memory-bank.md",
+    "SMS_projects/master_of_fighters/doc/jj_zillion_character_checkpoint_v7.json",
+    "SMS_projects/master_of_fighters/doc/hayato_short_cut_timing_only_v7_checkpoint.json"
+  ],
+  "evidence": [
+    "doc/curation/evidence/2026-10-30_owner_decision_curation/replay.json"
+  ],
+  "calibration": "Replay first assumed both checkpoints pending; corrected to existing scope: Hayato0 owner source-preview judgment, JJ2 pending agent continuous axis. No historical checkpoint changed.",
+  "validation": {
+    "status": "scoped_factory_checks_passed_global_registry_blocked",
+    "focused": "32 passed (6 temporal +26 adapter)",
+    "selftest": "137/137; optional project probe not run",
+    "measurement_tools": "75/75",
+    "doc_sync": "passed",
+    "hardware": "passed",
+    "registry_global": "preexisting missing Social61v5 original report",
+    "fresh_ROM_QA": "not_run: runtime, conversion and assets unchanged",
+    "initial_learning_record_error": "lessons field interpreted as new lesson declarations without IDs; renamed applications, preserving dedup and existing IDs",
+    "learning_capture": "passed after record schema correction"
+  },
+  "remaining": [
+    "Global artifact registry still lacks historical Social61v5 report; restore only original expected-hash bytes from legitimate source",
+    "No gameplay/audio/PAL/production/AAA homologation from this curation",
+    "No source-generation cost or elapsed-time benchmark across comparable accepted cases"
+  ],
+  "base_sha": "b101cb04e4a8694cb935954097164cfa24c554d6",
+  "applications": [
+    {
+      "classification": "observed_scoped",
+      "fact": "Hayato owner chose original blade with8/1/2/7/2/5; rejected deformation because it suggested a different trajectory. Human source-preview motion judgment supports that checkpoint; no agent or new-ROM continuous perception inferred.",
+      "application": "animation skill: try causal exposure adjustment before extra drawings/smear; no universal timing preset"
+    },
+    {
+      "classification": "observed_scoped",
+      "fact": "JJ owner accepted corrected weapon proportion and six-pose sample7/4/2/3/6 without FX. Its continuous_motion axis still needs evidence; explicit acceptance stays closed.",
+      "application": "art-review validator: decision role/content/timing and closure checked separately"
+    },
+    {
+      "classification": "editorial_procedure",
+      "fact": "Equipment-specific decisions can supersede ambiguous older harmony/body references within the authorized role.",
+      "application": "original-artwork: resolve weapon reference, proportional envelope and body/ROI invariants first"
+    },
+    {
+      "classification": "observed_scoped",
+      "fact": "JJ addition initially recolored34Socialpixels perface; explicit old-index mapping preserved902visiblepixels. Unused PLTE changes are separate from visible identity.",
+      "application": "asset-to-rom shared palette allocation; no spare FX budget inferred"
+    },
+    {
+      "classification": "observed_scoped",
+      "fact": "JJ source6 repaired an orphan absent after reduction;14SMSPNGs/12scenes/2headers unchanged, no new build needed for identical runtime inputs.",
+      "application": "original-artwork: prove all consumed input identity and retain source-specific review/binding"
+    },
+    {
+      "classification": "open_limit",
+      "fact": "Technical route transferred to third character; six ImageGen calls and owner corrections prevent one-pass artistic predictability or measured savings claims."
+    }
+  ],
+  "implementation_commit": "463333d9e04c7f2785f3e5cb0ea723041e43f247"
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "dr_social_cps2_jab_candidate_v1",
+  "status": "candidate_not_approved",
+  "tool": "built-in image_gen.imagegen",
+  "source_sha256": "9158de66f9b6cc5391ccfe7bf8ce29ac58253ef630f98363b34651e36d63d539",
+  "cutout_sha256": "705a96293fc116d4d4530611c8558539a3ddaf374aa23de55f90d26db8ead6d4",
+  "native_sheet_sha256": "88d94909ad4f10946144d29009fe42d83a6d1098ae0829a27ae7695cec097c3d",
+  "recipe_sha256": "5652ac1ca1d080535c709d20bd6f84bc26951cefd1aed5bd7cd35a56162a8579",
+  "frame_ids": [
+    "J01",
+    "J02",
+    "J03",
+    "J04",
+    "J05",
+    "J06"
+  ],
+  "duration_ticks": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    3
+  ],
+  "source_size": [
+    384,
+    256
+  ],
+  "cell_size": [
+    128,
+    128
+  ],
+  "palette_colors": 32,
+  "timing_status": "proposal_unmeasured_in_runtime",
+  "reference_roles": {
+    "model_sheet": "identity only",
+    "Ken/Ryu": "construction and quality only, no pixel copying",
+    "idle_generated_raw": "direct construction parent"
+  },
+  "known_limits": [
+    "Raw generator failed binary alpha and exact pixel grid; one explicit extraction is candidate, not polish approval",
+    "J04 raw glove crosses nominal grid; recipe recovers full glove using documented windows",
+    "sheathed rapier/boomerang attachment not readable; review required",
+    "gray-purple hair source tones require comparison to later neutral-gray decision"
+  ]
+}

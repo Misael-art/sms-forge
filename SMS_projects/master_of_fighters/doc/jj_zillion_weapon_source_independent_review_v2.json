@@ -1,0 +1,375 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "requested_stage": "new_source_equipment_identity_reconciliation",
+  "request_id": "jj-zillion-corrected-weapon-source-v2",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/jj_zillion_weapon_source_review_request_v2.json",
+    "sha256": "83ae20ac0238b5037ce79551e3c3ff87818e741fbd91a4b45a00210f486d8c7f"
+  },
+  "producer": "/root",
+  "reviewer": "/root/jj_shot_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_static_source_equipment_identity_reconciliation",
+  "status": "revise_before_growth",
+  "reviewed_at_utc": "2026-10-30T08:32:10.951707+00:00",
+  "approval_scope": "Exact new source-v2 pixels only, viewed native and nearest4x on dark/light with weapon/grip nearest8x crops. No SMS conversion, framebuffer, hardware, perceived continuous playback, owner or production approval. Broad Zillion family is restored but full equipment fidelity is not closed.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/shot_source.png",
+      "sha256": "2f0bbf2b8e0e91ded32805459e2bd6714c4772ce4f26cdfaf7ac43c0051eeec9",
+      "observed_sha256": "2f0bbf2b8e0e91ded32805459e2bd6714c4772ce4f26cdfaf7ac43c0051eeec9"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/waku_waku_7/reference_inputs/zillion_pistol_user_reference_20261008.png",
+      "sha256": "7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49",
+      "observed_sha256": "7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+      "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+      "observed_sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+      "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+      "observed_sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/jj_zillion_weapon_identity_contract_v1.json",
+      "sha256": "d8c8424d3df3a30dc4a42b1762fd464bc938743d1b0eeb515bd178546c963b05",
+      "observed_sha256": "d8c8424d3df3a30dc4a42b1762fd464bc938743d1b0eeb515bd178546c963b05"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/decisions/jj-zillion-weapon_owner-feedback.json",
+      "sha256": "487c9cb30dfba8e1ee9c9c49fb3d59af2015f25d11f2423a645ba8f3313fd578",
+      "observed_sha256": "487c9cb30dfba8e1ee9c9c49fb3d59af2015f25d11f2423a645ba8f3313fd578"
+    }
+  ],
+  "conclusion": "New source replaces the wrong short white/orange blaster with a recognizably long navy/cyan Zillion. Character construction is a suitable control to preserve. Do not close exact weapon identity solely from that broad improvement: large cyan panel placement differs from the supplied current reference, and S01 barrel appears markedly shorter in projection than the horizontal poses without an unambiguous depth cue. Correct/reconcile only the responsible weapon details, then inspect target-size conversion separately.",
+  "authority_reconciliation": {
+    "prior_review": {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/jj_zillion_single_shot_independent_review_v1.json",
+      "sha256": "7b63355ec2016c384f66b3c0a2aa84e3b593d3af25b0c7d3576e9c4e99ed6aca",
+      "preserved_unchanged": true
+    },
+    "prior_scope_correction": "The v1 report accepted equipment correspondence to individual concept v4, whose compact blaster predates the corrected harmony weapon. It did not compare that gun against the already-preserved08Octreference. Its identity/equipment pass is incomplete for canonical Zillion and must not authorize v1 progression. The report itself is retained historically, not rewritten.",
+    "current_weapon_authority": "Owner supplied reference SHA7f994afdab1c2e9912c024f4c81b72f3f40327f849aa92d50873a290f859dc49 and explicit current feedback. The11Octapproved harmony confirms the long dark weapon family; old individual concept owns body/costume only.",
+    "harmony_approval": {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/decisions/roster_harmony_waku_waku_7_v01_owner_approval.json",
+      "sha256": "5ee0da205aa70379d2a85f395222903795259070784616e58ed2ca328b09a117",
+      "scope": "Owner-approved comparison sheet and corrected weapon direction; not new source/SMS/animation approval."
+    },
+    "important_remaining_difference": "Harmony and newsourcev2 both put the conspicuous cyan panel toward the forward/right tip; the supplied side-profile reference, mirrored for rightward comparison, puts the large rectangular cyan panel at the rear/left above the grip, with smaller angled/linear accents toward the rightward nose. Harmony likeness is not by itself exact reference fidelity.",
+    "not_a_variant_question": "Existing/current authority is sufficient; this is a local source fidelity issue, not a request to choose a new gun variant."
+  },
+  "review_axes": {
+    "identity_and_face": {
+      "status": "pass",
+      "note": "Retains blue-haired youthful J.J., magenta suit/scarf, white caps/forearms/knees/boots, navy harness/clasp/holster and focused gaze. No unrelated character/costume redesign observed."
+    },
+    "canonical_equipment_identity": {
+      "status": "fail",
+      "note": "Long navy/cyan weapon family restored, but distinctive panel placement is not exact to current supplied side-profile reference. See B01. V1 compact white/orange blaster is not an active authority."
+    },
+    "pose_anatomy_and_joint_continuity": {
+      "status": "pass",
+      "note": "Shoulders, upper arms, folded elbows, forearm armor, wrists and hands are connected. Compact aiming arm organization visibly differs from v1. No need for whole-body regeneration observed."
+    },
+    "hand_weapon_attachment": {
+      "status": "pass",
+      "note": "Gun/grip contacts trigger-hand mass, with small overlapping support-hand shapes in S01-S04. Rightward muzzle and S03 pulse are coherent. Guard/recovery long weapon crosses diagonally in front of thigh without a visible floor/boot penetration. Finger detail remains small."
+    },
+    "equipment_geometry": {
+      "status": "pending",
+      "note": "Horizontal S02-S04 show complete low long upper body and front angular terminal. S01 reads shorter/wedge-like in projection; angle alone does not make a shortened barrel identical. An intentional depth cue or a bounded S01 correction is needed before asserting length continuity. See B02."
+    },
+    "pixel_clusters": {
+      "status": "pass",
+      "note": "Native indexed source uses clear contiguous cloth/armor/hair masses. Highlights have coherent small clusters; no broad dither/grain or observed detached character debris warrants a whole-sheet rerender. This is visual inspection, not quantitative cluster/resource auditing."
+    },
+    "face_detail_readability": {
+      "status": "pass",
+      "note": "Source eyes, hair mass and gaze are readable at its native size; this does not predict target SMS face readability."
+    },
+    "outline_and_cutout": {
+      "status": "pass",
+      "note": "Dark/light inspection shows complete body, equipment and free margins. Only S03 has a separated pulse; other apparent cyan accents belong to the gun. No unintended loose source character component was identified visually."
+    },
+    "material_shading": {
+      "status": "pass",
+      "note": "Magenta cloth, neutral armor, warm hands/face, blue hair/harness and dark gun remain distinct. No white/orange receiver returns. Gun cyan-panel placement is a separate fidelity failure, not a palette-membership pass."
+    },
+    "material_shadow_flow_coherence": {
+      "status": "pass",
+      "note": "Armor shading follows caps/cuffs/boots; cloth shadows follow side planes/folds. The dark gun silhouette and thin highlights remain coherent as a material, while their precise component placement still differs from reference."
+    },
+    "semantic_palette_role_confinement": {
+      "status": "pass",
+      "note": "Warm colors are on skin; neutral white/gray on armor; dark blue/cyan on the weapon; magenta on suit/scarf. No observed accidental white/orange gun substitution. This does not close the reference-specific panel geometry issue."
+    },
+    "frame_pose_integrity": {
+      "status": "pending",
+      "note": "All6source bottoms are132 but horizontal sole/root positions vary. Both supports move substantially together; coordinator plans pivot registration. This review neither approves planted-feet continuity nor requires redraw before registration is tested."
+    },
+    "native_size_readability": {
+      "status": "pass",
+      "note": "At SOURCE native size the long dark equipment clearly differs from v1 short blaster; horizontal vs lowered gun states and the single pulse are distinct. SMS-scale survival is not reviewed."
+    },
+    "continuous_motion": {
+      "status": "needs_evidence",
+      "note": "No continuous playback perceived. Single-shot force, S01 barrel continuity in motion, settling, support jitter, return and pulse visibility remain unjudged."
+    },
+    "SMS_ROM_hardware_owner": {
+      "status": "pending",
+      "note": "No new SMS/ROM/packing/scanline/SAT/FPS/VBlank/owner or production approval. The earlier Social mapping failure is outside this new source-only scope and is not closed by this report."
+    }
+  },
+  "findings": [
+    {
+      "id": "B01",
+      "priority": 1,
+      "domain": "art",
+      "kind": "defect",
+      "severity": "blocking_weapon_fidelity",
+      "scope": "Pistol inset arrangement, especially horizontal S02/S03/S04",
+      "summary": "Large cyan-panel location follows the harmony drawing but differs from the supplied side-profile reference.",
+      "observed": "Reference pointing right after a comparison-only mirror: large rectangular cyan block is on rear/left above grip; smaller angled marks and a thin strip occupy the long forward/right portion toward angular nose. V2 has its dominant long cyan block at forward/right tip.",
+      "impact": "The owner specifically identified Zillion as a distinctive identity item; a generic long dark gun or correspondence to an older derivative does not fully close fidelity.",
+      "smallest_intervention": "Keep body, hands, grip/barrel axis and overall long silhouette. Reconcile/revise only gun inset placement from the exact reference across all posed orientations; retain small forward accents rather than the dominant forward panel. Do not mirror the entire gun: its present emission side is already rightward."
+    },
+    {
+      "id": "B02",
+      "priority": 2,
+      "domain": "art",
+      "kind": "risk",
+      "severity": "equipment_continuity_needs_resolution",
+      "scope": "S01 preparation compared with S02-S04 aiming/emission",
+      "summary": "The raised gun reads shorter/wedge-like, whereas horizontal poses show a much longer low body.",
+      "observed": "S01 upper gun is projected on an up-right diagonal with a compact triangular body; S02-S04 have a clearly long horizontal slab. Static image shows a size/projection difference without an unambiguous front-end depth view explaining it.",
+      "impact": "May read as changing gun length during preparation rather than carrying one rigid weapon. This is a static projection concern, not perceived continuous deformation.",
+      "smallest_intervention": "Check rigid gun construction in S01 against the same reference, documenting any intended out-of-plane perspective. If the length is actually shortened, revise only its weapon drawing while preserving body/hand attachment and complete barrel; holds cannot repair this geometry."
+    },
+    {
+      "id": "B03",
+      "priority": 2,
+      "domain": "animation",
+      "kind": "risk",
+      "severity": "registration_pending",
+      "scope": "All source contacts",
+      "summary": "Common source floor is established but root/foot X registration remains open.",
+      "observed": "Last3source rows: I00[26..42]/[89..113], S01[32..47]/[93..117], S02[22..38]/[88..112], S03[32..48]/[96..120], S04[28..43]/[92..116], S05[22..38]/[87..111].",
+      "impact": "A fixed X pivot would carry lateral contact changes into the target; stills do not establish foot sliding perception.",
+      "smallest_intervention": "Measure the two support contacts and register per-pose X root before deciding whether any stance needs artistic repair. Preserve source pixels and common scale."
+    },
+    {
+      "id": "N01",
+      "priority": 2,
+      "domain": "animation",
+      "kind": "opportunity",
+      "severity": "document_consistency",
+      "scope": "Animation contract v2 cues",
+      "summary": "The contract durations propose2ticks for S03 while inherited cue text still says one-tick emission and7/4/1/3/6.",
+      "observed": "duration_ticks is7/4/2/3/6 and lifetime2; slow_in_slow_out/timing cue prose still references old timing.",
+      "smallest_intervention": "Coordinator should reconcile cue text before using it as future timing evidence; no source pixel change follows from this documentation issue."
+    }
+  ],
+  "per_pose_static_review": [
+    {
+      "id": "I00",
+      "note": "Long diagonal navy/cyan gun held down-right, warm trigger hand/white cuff coherent; free hand near front hip. Weapon does not cross floor; costume and face preserved."
+    },
+    {
+      "id": "S01",
+      "note": "Compact two-hand raise, stock/grip connected; shorter wedge-like projected gun needs construction reconciliation. Source costume/body remains acceptable."
+    },
+    {
+      "id": "S02",
+      "note": "Horizontal long gun, rear near collar/face and front well beyond hands; elbow folds keep hands close to torso. Rightward nose complete. Cyan-panel fidelity issue visible."
+    },
+    {
+      "id": "S03",
+      "note": "Same long horizontal family with one pulse beyond rightward muzzle. Pulse and body separate cleanly. Root contact offset persists; no continuous recoil/force claim."
+    },
+    {
+      "id": "S04",
+      "note": "Long gun still aimed right, no separated pulse. This closes the source presence of the advanced S04 pulse from v1; it does not establish legal hardware costs."
+    },
+    {
+      "id": "S05",
+      "note": "Returns toward diagonal lowered guard, complete long gun and attached hands. Source is a new drawing; stance registration and continuous return still pending."
+    }
+  ],
+  "source_geometry": [
+    {
+      "id": "I00",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/I00.png",
+      "sha256": "7bc5c78bc117753ba1f5d148447cfc510e2b81629dda5005ebc93fecec0972b9",
+      "bbox_exclusive": [
+        26,
+        25,
+        114,
+        132
+      ],
+      "sole_x_intervals_last_three_rows": [
+        [
+          26,
+          42
+        ],
+        [
+          89,
+          113
+        ]
+      ],
+      "opaque_bottom_exclusive": 132
+    },
+    {
+      "id": "S01",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S01.png",
+      "sha256": "af21fb1873b3721a50b45a33f59cfa02eff20468c18c9afa03ed43526fa4cf90",
+      "bbox_exclusive": [
+        32,
+        25,
+        118,
+        132
+      ],
+      "sole_x_intervals_last_three_rows": [
+        [
+          32,
+          47
+        ],
+        [
+          93,
+          117
+        ]
+      ],
+      "opaque_bottom_exclusive": 132
+    },
+    {
+      "id": "S02",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S02.png",
+      "sha256": "2083ea978a800558b23acd2be07c4fb9a79dfe28dc5dcc49ce06ab477d17ac3e",
+      "bbox_exclusive": [
+        22,
+        30,
+        130,
+        132
+      ],
+      "sole_x_intervals_last_three_rows": [
+        [
+          22,
+          38
+        ],
+        [
+          88,
+          112
+        ]
+      ],
+      "opaque_bottom_exclusive": 132
+    },
+    {
+      "id": "S03",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S03.png",
+      "sha256": "e61f12e1a141a403180ee38b55abd82f92ef3e9c764c7c98203f896d993f6196",
+      "bbox_exclusive": [
+        32,
+        29,
+        152,
+        132
+      ],
+      "sole_x_intervals_last_three_rows": [
+        [
+          32,
+          48
+        ],
+        [
+          96,
+          120
+        ]
+      ],
+      "opaque_bottom_exclusive": 132
+    },
+    {
+      "id": "S04",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S04.png",
+      "sha256": "97ff4b635af02760e3b528cba88883d41a6e33fd86749475881496a003e36d07",
+      "bbox_exclusive": [
+        28,
+        29,
+        135,
+        132
+      ],
+      "sole_x_intervals_last_three_rows": [
+        [
+          28,
+          43
+        ],
+        [
+          92,
+          116
+        ]
+      ],
+      "opaque_bottom_exclusive": 132
+    },
+    {
+      "id": "S05",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v2/native/S05.png",
+      "sha256": "9de032df66551204027c164c602aef61ff4d1ae5f95581fd0467599d0efe8b5c",
+      "bbox_exclusive": [
+        22,
+        27,
+        112,
+        132
+      ],
+      "sole_x_intervals_last_three_rows": [
+        [
+          22,
+          38
+        ],
+        [
+          87,
+          111
+        ]
+      ],
+      "opaque_bottom_exclusive": 132
+    }
+  ],
+  "closed_previous_source_issue": {
+    "v1_compact_white_orange_blaster": "Broad family defect corrected in v2, exact equipment details stillopenB01/B02",
+    "v1_advanced_S04_pulse": "SourceS04nowhasno detached pulse; source-only closure, no budget inheritance",
+    "v1_Social_P1_regression": "Not evaluated or closed; no new SMS included in this request"
+  },
+  "inspection_evidence": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v2/independent_art_inspection/all_weapon_grips8x.png",
+      "sha256": "fd72cdcce22c1554e13a430a00f048503f779ab98393717c428c252ca0e1199d",
+      "role": "Temporary nearest/comparison crop only, not new source art or runtime evidence"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v2/independent_art_inspection/reference_mirrored_for_rightward_comparison.png",
+      "sha256": "80fa4f2600d611f1487d7d2d816f10622d65ef3aa4e79efcc31f8c7a0bf30301",
+      "role": "Temporary nearest/comparison crop only, not new source art or runtime evidence"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v2/independent_art_inspection/source4x_dark.png",
+      "sha256": "a939d32d1063c3b0101047ee8e63de2a1d02eb4ea8b492d3d36003aa443930d7",
+      "role": "Temporary nearest/comparison crop only, not new source art or runtime evidence"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v2/independent_art_inspection/source4x_light.png",
+      "sha256": "0362a59b5c3cd10784e386eb8b077676ec2e820b6088541e658d23c809279a49",
+      "role": "Temporary nearest/comparison crop only, not new source art or runtime evidence"
+    }
+  ],
+  "limits": [
+    "Source-only static review, not continuous perception, conversion, framebuffer, hardware or owner acceptance.",
+    "Broad weapon family likeness is distinct from exact source fidelity; old individual concept is not the current weapon authority.",
+    "Prior v1 report retained byte-identical; this addendum corrects its insufficient equipment-authority scope.",
+    "Only assigned report and temporary inspection crops written; no source/config/GDD/memory/ROM/Git changes.",
+    "No exact targetSMSreadability/SAT/scanline/residency/FPS/VBlank/audio/PAL/production claim."
+  ]
+}

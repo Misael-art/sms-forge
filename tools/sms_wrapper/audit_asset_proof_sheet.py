@@ -468,7 +468,7 @@ def validate(manifest_path: Path, root: Path) -> tuple[list[str], dict]:
             if transparent != 0 or info_transparent != transparent:
                 errors.append(f"{role}: palette index 0 must be the PNG transparent index")
             palette = indexed_palette(source)
-            used = set(source.get_flattened_data()) - {transparent}
+            used = set(source.getdata()) - {transparent}
             if len(used) > 15:
                 errors.append(f"{role}: {len(used)} useful colors exceed the 15-color SMS sprite palette")
             used_rgb = [palette[i] for i in used if i < len(palette)]
@@ -483,7 +483,7 @@ def validate(manifest_path: Path, root: Path) -> tuple[list[str], dict]:
                 errors.append(f"{role}: inspection background must be pure magenta, green, or blue")
             if key_rgb in used_rgb:
                 errors.append(f"{role}: inspection background collides with an opaque asset color")
-            alpha_values = set(source.convert("RGBA").getchannel("A").get_flattened_data())
+            alpha_values = set(source.convert("RGBA").getchannel("A").getdata())
             if alpha_values - {0, 255}:
                 errors.append(f"{role}: alpha must be binary; antialiased edges are forbidden")
             metrics = pose_metrics(source, transparent, 8)
@@ -535,7 +535,7 @@ def validate(manifest_path: Path, root: Path) -> tuple[list[str], dict]:
             errors.append("parent source sheet must remain indexed mode P")
         else:
             transparent = manifest.get("sms_hardware", {}).get("transparent_index", 0)
-            parent_used = set(parent.get_flattened_data()) - {transparent}
+            parent_used = set(parent.getdata()) - {transparent}
             if palette_info.get("useful_colors_in_parent_sheet") != len(parent_used):
                 errors.append("palette useful-color count does not match the parent indexed PNG")
             declared_entries = {

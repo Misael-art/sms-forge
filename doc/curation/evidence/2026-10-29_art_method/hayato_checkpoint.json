@@ -1,0 +1,153 @@
+{
+  "schema": "sms_art_temporal_review_v1",
+  "producer": "/root",
+  "subjects": {
+    "source": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+      "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+    },
+    "rom": {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/bundle/1b1f33e71f704e05bd064e688d3378cf/rom.sms",
+      "sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517"
+    }
+  },
+  "sequence": {
+    "expected_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06"
+    ],
+    "actual_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06"
+    ],
+    "duration_ticks": [
+      4,
+      1,
+      2,
+      3,
+      1,
+      3
+    ],
+    "tick_definition": "diagnostic NTSC presentation ticks; no competitive frame data",
+    "expected_terminal": "guard",
+    "terminal": "guard"
+  },
+  "observations": [
+    {
+      "id": "static",
+      "method": "framewise",
+      "target": "source",
+      "subject_sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+      "report": {
+        "path": "SMS_projects/master_of_fighters/doc/hayato_short_cut_body_temporal_independent_review_v4.json",
+        "sha256": "ee56b52a44ec1eea6696e3b90ca534bc85fa037608aa4ef7bd274088dae778a8"
+      },
+      "media": {
+        "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/final_review_v4/source_sequence.png",
+        "sha256": "f3dbde5a55c65c3f452dd6a8d5124bdb13d2b88098a8020e54e009c67688a1f8"
+      },
+      "reviewer": "/root/hayato_cut_art_review"
+    },
+    {
+      "id": "timeline",
+      "method": "timeline",
+      "target": "rom",
+      "subject_sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517",
+      "report": {
+        "path": "SMS_projects/master_of_fighters/doc/hayato_short_cut_body_temporal_independent_review_v4.json",
+        "sha256": "ee56b52a44ec1eea6696e3b90ca534bc85fa037608aa4ef7bd274088dae778a8"
+      },
+      "media": {
+        "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.mp4",
+        "sha256": "e64715e8d2a5acff44cd328a9d533098545c003eb5725c01460f01907b26cbc7"
+      },
+      "reviewer": "/root/hayato_cut_art_review",
+      "rom_sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517",
+      "session_id": "1b1f33e71f704e05bd064e688d3378cf"
+    },
+    {
+      "id": "rom",
+      "method": "rom_framewise",
+      "target": "rom",
+      "subject_sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517",
+      "report": {
+        "path": "SMS_projects/master_of_fighters/doc/hayato_short_cut_body_temporal_independent_review_v4.json",
+        "sha256": "ee56b52a44ec1eea6696e3b90ca534bc85fa037608aa4ef7bd274088dae778a8"
+      },
+      "media": {
+        "path": "SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.mp4",
+        "sha256": "e64715e8d2a5acff44cd328a9d533098545c003eb5725c01460f01907b26cbc7"
+      },
+      "reviewer": "/root/hayato_cut_art_review",
+      "rom_sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517",
+      "session_id": "1b1f33e71f704e05bd064e688d3378cf"
+    }
+  ],
+  "axes": {
+    "image_inspection": {
+      "status": "pass",
+      "note": "Preserved independent review scope; no new perceptual review.",
+      "observation_ids": [
+        "static"
+      ]
+    },
+    "frame_analysis": {
+      "status": "pass",
+      "note": "Preserved independent review scope; no new perceptual review.",
+      "observation_ids": [
+        "static"
+      ]
+    },
+    "order_exposure": {
+      "status": "pass",
+      "note": "Preserved independent review scope; no new perceptual review.",
+      "observation_ids": [
+        "timeline"
+      ]
+    },
+    "continuous_motion": {
+      "status": "needs_evidence",
+      "note": "Preserved independent review scope; no new perceptual review.",
+      "observation_ids": []
+    },
+    "rom_presentation": {
+      "status": "pass",
+      "note": "Preserved independent review scope; no new perceptual review.",
+      "observation_ids": [
+        "rom"
+      ]
+    },
+    "owner_acceptance": {
+      "status": "needs_evidence",
+      "note": "Preserved independent review scope; no new perceptual review.",
+      "observation_ids": []
+    }
+  },
+  "next_decision": "keep_control",
+  "edit_boundary": {
+    "before": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v2/native/R03.png",
+      "sha256": "014b40d8a58eb05196a82c5b6cf59805d9e3c8f74bb6e4174ae3d13c9b0fdae1"
+    },
+    "after": {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/R03_hair_delta/native/R03.png",
+      "sha256": "88c56708453130d1af7a0205defb2124d547f8db009331f2dcd78a63363edf63"
+    },
+    "rectangles": [
+      [
+        109,
+        77,
+        114,
+        82
+      ]
+    ]
+  }
+}

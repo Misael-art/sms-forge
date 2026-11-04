@@ -1,0 +1,41 @@
+{
+  "artifact_kind": "quality_review_request",
+  "request_id": "hayato-short-cut-key-v1",
+  "stage": "pre_animation",
+  "producer": "/root",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "scope": "Review just the candidate short-cut executionC02 versus frozen guard+approvedidentity, before preparation/recovery expansion. Judge entire character1x/NN: head/torso/limb volumes and identity, two shoulder-elbow-wrist chains, twohands on single grip/guard/blade, full katana length and scabbard/terminals, material light/clusters/edge and support. Native C02haircrown about6pxhigher and leftfoot5pxleft vs guard: decide if unacceptable shape/foot drift instead of assuming prompt preserved them. Sword down-right angle shallower than requested; do not call this a final fluid action from onepose. At most3 concrete blockers. Use exactpixel coordinates/crops ifpossible. No source mutation, build, emulator, Git or memory writes. Write ONLY doc/hayato_short_cut_key_review_v1.json. No owner/AAA/frame-data/hardware/motion claim.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_source.png",
+      "sha256": "a6eac666190508089fac6168fb083abdb478c90e7cd1b337782e38969ef096c9"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_metadata.json",
+      "sha256": "560616c9898fad0a2ba9a1209aa71edebf5c873894df183f5a95504bd9f2af69"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v1/execution_extraction_recipe.json",
+      "sha256": "d93739111af2d88d0997da9ec3254b9ecab26c6e47ccb36ac7ed9f5cc6f21cc2"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+      "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v1/execution_v1_4x.png",
+      "sha256": "9f648d4cae1118710d7cd4f91fe02eeddd9c5cc64711444664e6dcb10683ecc2"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v1/review_context/animation_contract_initial.json",
+      "sha256": "e97920eb1d68b3df247de0f4ce04c8ca3c8a41c2a7cbe35d9c5e28f74494ec9e"
+    }
+  ]
+}
