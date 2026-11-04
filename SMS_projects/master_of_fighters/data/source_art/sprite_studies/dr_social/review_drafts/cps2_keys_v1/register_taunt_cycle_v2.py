@@ -1,7 +1,7 @@
 """Assenta as chaves novas da provocação 1 na célula de 128 px.
 
 Não desenha anatomia, expressão nem intervalos. A autoria está nos JPEG.
-Este arquivo copia o original, recorta o campo pela cor do canto, reduz em
+Este arquivo confere o original local, recorta o campo pela cor do canto, reduz em
 nearest com a mesma razão da guarda GQ03 e quantiza na paleta de J01.
 
 A altura 104 da célula vale para o corpo de 836 px da guarda. Uma pose
@@ -13,9 +13,10 @@ from __future__ import annotations
 
 import hashlib
 import json
-import shutil
+import os
 import sys
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from PIL import Image
 
@@ -23,32 +24,11 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import register_gq03_authored_guard as reg  # noqa: E402
 
-SESSION = Path(
-    "/home/misael/.grok/sessions/"
-    "%2Fhome%2Fmisael%2FProjects%2FSMSForge/"
-    "01a1993f-25fb-7522-9c39-97119c72c1dc/images"
-)
 GUARD_JPG = HERE / "originals" / "GQ03_authored_guard.jpg"
 GUARD_BODY_H = 836
 CELL_H = 104
 SOLE_Y = 116
 CORNER_LIMIT = 45
-
-# Só as três chaves que a medição local deixou em quatro colunas.
-KEPT = (
-    ("13.jpg", "TA05_examine.jpg", "logical/TA05_examine.png"),
-    ("15.jpg", "TA06_coat_lag.jpg", "logical/TA06_coat_lag.png"),
-    ("18.jpg", "TA07_settle.jpg", "logical/TA07_settle.png"),
-)
-# Estudos medidos e não usados. A cópia preserva o byte; não entra no ciclo.
-STUDIES = (
-    ("11.jpg", "TA05_attempt_pinch.jpg"),
-    ("12.jpg", "TA05_attempt_over_rims.jpg"),
-    ("14.jpg", "TA06_coat_wide_study.jpg"),
-    ("16.jpg", "TA07_settle_wide_study.jpg"),
-    ("17.jpg", "TA07_handswap_study.jpg"),
-)
-
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -100,7 +80,7 @@ def corner_box(image: Image.Image) -> tuple[tuple[int, int, int, int], tuple[int
     return box, corner
 
 
-def register_one(source: Path, dest: Path) -> dict:
+def register_one(source: Path, dest: Path, logical_rel: str) -> dict:
     image = Image.open(source).convert("RGB")
     box, corner = corner_box(image)
     body_w = box[2] - box[0]
@@ -146,7 +126,7 @@ def register_one(source: Path, dest: Path) -> dict:
     report = reg.band_report(canvas)
     report.update({
         "source": source.name,
-        "dest": str(dest.relative_to(HERE)),
+        "dest": logical_rel,
         "sha256": sha256(dest),
         "box": list(box),
         "body_wh": [body_w, body_h],
@@ -158,59 +138,82 @@ def register_one(source: Path, dest: Path) -> dict:
     return report
 
 
-def copy_bytes(session_name: str, dest_name: str) -> str:
-    dest = HERE / "originals" / dest_name
-    if dest.exists():
-        return sha256(dest)
-    source = SESSION / session_name
-    shutil.copyfile(source, dest)
-    if sha256(dest) != sha256(source):
-        raise SystemExit(f"cópia divergente: {dest_name}")
-    return sha256(dest)
+def verify_file(path: Path, expected: str) -> None:
+    if not path.is_file():
+        raise SystemExit(f"insumo ausente: {path}; restaure a cópia registrada no Git")
+    if sha256(path) != expected:
+        raise SystemExit(f"SHA-256 divergente: {path}")
 
 
-def main() -> None:
+def replay_path(relative: str, directory: str) -> Path:
+    path = Path(relative)
+    if len(path.parts) != 2 or path.parent != Path(directory) or path.name == "..":
+        raise SystemExit(f"caminho inválido no recibo: {relative}")
+    result = HERE / path
+    if result.parent.is_symlink() or result.is_symlink():
+        raise SystemExit(f"link recusado no replay: {relative}")
+    return result
+
+
+def replay(version: int, clean_border=None) -> None:
+    receipt_path = HERE / "proposals" / f"TA01_cycle_v{version}_registration.json"
+    receipt = json.loads(receipt_path.read_text())
+    if receipt["schema"] != f"social_taunt_cycle_v{version}_registration":
+        raise SystemExit(f"schema de registro divergente: {receipt_path}")
+
+    lineage = json.loads((HERE / "lineage_v1.json").read_text())
+    guard = next(entry for entry in lineage["kept"] if entry["id"] == "GQ03_authored_guard")
+    verify_file(GUARD_JPG, guard["original_sha256"])
+    verify_file(HERE / guard["logical"], guard["sha256"])
+    palette_receipt = json.loads((reg.J01.parents[2] / "idle_metadata_v5.json").read_text())
+    verify_file(reg.J01, palette_receipt["sha256"])
+
+    for study in receipt["studies_not_registered"]:
+        verify_file(replay_path(study["file"], "originals"), study["sha256"])
+    for frame in receipt["kept"]:
+        verify_file(replay_path(frame["original"], "originals"), frame["original_sha256"])
     measured = guard_body_height()
     if measured != GUARD_BODY_H:
         raise SystemExit(f"altura da guarda mudou: {measured} != {GUARD_BODY_H}")
-    studies = []
-    for session_name, dest_name in STUDIES:
-        studies.append({
-            "file": f"originals/{dest_name}",
-            "sha256": copy_bytes(session_name, dest_name),
-            "session_name": session_name,
-            "registered": False,
-        })
-    kept = []
-    for session_name, original_name, logical_rel in KEPT:
-        original_sha = copy_bytes(session_name, original_name)
-        report = register_one(HERE / "originals" / original_name,
-                              HERE / logical_rel)
-        report["original"] = f"originals/{original_name}"
-        report["original_sha256"] = original_sha
-        kept.append(report)
-        print(logical_rel, report["sat_row_peak"], report["opaque_height"],
-              report["opaque_top"], report["opaque_bottom"], report["sha256"][:12])
-    guard = reg.band_report(Image.open(HERE / "logical" / "GQ03_authored_guard.png"))
-    receipt = {
-        "schema": "social_taunt_cycle_v2_registration",
-        "scale": {
-            "guard_jpg_body_h": GUARD_BODY_H,
-            "cell_h_for_that_body": CELL_H,
-            "sole_y": SOLE_Y,
-            "corner_distance_limit": CORNER_LIMIT,
-            "note": "Razão comum com a guarda. Pose mais alta não volta a 104.",
-        },
-        "guard_scaled_band": guard,
-        "kept": kept,
-        "studies_not_registered": studies,
-        "not_an_approval": True,
-    }
-    out = HERE / "proposals" / "TA01_cycle_v2_registration.json"
-    out.write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + "\n")
-    print("guard", guard["sat_row_peak"], guard["opaque_height"],
-          guard["opaque_top"], guard["opaque_bottom"])
+
+    with TemporaryDirectory(prefix=".taunt-replay-", dir=HERE) as tmp:
+        staging = Path(tmp)
+        outputs = []
+        for frame in receipt["kept"]:
+            source = HERE / frame["original"]
+            measured_frame = {
+                "original": frame["original"],
+                "original_sha256": frame["original_sha256"],
+            }
+            if clean_border is not None:
+                with Image.open(source) as original:
+                    image = original.convert("RGB")
+                measured_frame["border_specks_set_to_corner"] = clean_border(image)
+                keyed = replay_path(frame["keyed_png"], "originals")
+                source = staging / keyed.name
+                image.save(source)
+                outputs.append((source, keyed))
+                measured_frame["keyed_png"] = frame["keyed_png"]
+            logical_rel = frame["dest"]
+            dest = replay_path(logical_rel, "logical")
+            staged = staging / dest.name
+            measured_frame.update(register_one(source, staged, logical_rel))
+            if measured_frame != frame:
+                raise SystemExit(f"derivado divergente do recibo: {logical_rel}")
+            outputs.append((staged, dest))
+
+        # Confira todos os derivados antes de repor qualquer arquivo ausente.
+        for staged, dest in outputs:
+            if dest.exists() or dest.is_symlink():
+                verify_file(dest, sha256(staged))
+        for staged, dest in outputs:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            try:
+                os.link(staged, dest)
+            except FileExistsError:
+                verify_file(dest, sha256(staged))
+            print(f"[OK] {dest.relative_to(HERE)} {sha256(staged)}")
 
 
 if __name__ == "__main__":
-    main()
+    replay(2)
