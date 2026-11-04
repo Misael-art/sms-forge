@@ -1,5 +1,16 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-04 — decisão artística: Social in-game congelado
+
+O proprietário suspendeu os sprites e animações do Dr. Social e determinou
+que o desenho in-game seja recomeçado do zero em uma retomada futura, após
+nova orientação. Manter concept/model sheet, referências de tamanho e cena
+experimental; preservar o restante como histórico, sem deletar ou reutilizar
+como base artística. J.J. e Hayato/Kenseiden estão reafirmados até o recorte
+realizado; não reabrir esses aceites. O motor e trabalhos independentes
+autorizados podem continuar. Nenhum pixel, ROM ou runtime mudou neste lote.
+[Registro vigente](../../SMS_projects/master_of_fighters/doc/dr_social_ingame_freeze_20261104.md).
+
 ## 2026-11-04 — perfil de reúso volta a caber no banco fixo
 
 Etapa B, R05/R09/R10. O manifesto opcional

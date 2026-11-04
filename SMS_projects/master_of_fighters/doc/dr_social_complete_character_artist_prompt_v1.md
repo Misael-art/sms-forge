@@ -1,5 +1,17 @@
 # Prompt de produção artística — Dr. Ferdinand Social completo
 
+> **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
+> Os sprites e animações atuais do Dr. Social não devem ser continuados,
+> retocados, convertidos, integrados ou promovidos. Retomada futura: novo desenho
+> do zero, a partir do concept/model sheet e das referências de tamanho mantidos.
+> A cena D01 fica experimental. J.J. e Hayato/Kenseiden permanecem validados no
+> recorte realizado. [Registro do congelamento](dr_social_ingame_freeze_20261104.md).
+> As orientações anteriores para produzir o Social ficam históricas/suspensas.
+
+**PROMPT SUSPENSO. Não executar a missão abaixo.** Ela permanece somente
+como registro do trabalho anterior; a autorização antiga de produção do Social
+foi substituída pelo congelamento. Nova produção não está autorizada neste lote.
+
 Atualizado em **2026-11-02**, após reavaliação do commit
 `587763cf1e192ada7bfbed4510d27fde240017b5`. Este é o **prompt integral vigente
 para um agente substituto**, sem necessidade de acesso à conversa anterior.
@@ -8,6 +20,8 @@ artefatos, trabalho pendente e aceite. O nome v1 identifica esta incumbência;
 o histórico anterior permanece no Git. Não é aprovação artística ou de produto.
 
 ## Prompt
+
+> **NÃO EXECUTAR: produção do Social congelada em 04/11/2026; consulte o registro vigente acima.**
 
 Você é o artista de personagens e animador de **Master of Fighters**, jogo de
 luta autoral de fã para Sega Master System, dentro do SMSForge. Sua missão é

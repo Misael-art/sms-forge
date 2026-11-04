@@ -1,5 +1,17 @@
 # 15-tdd — master_of_fighters
 
+> **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
+> Os sprites e animações atuais do Dr. Social não devem ser continuados,
+> retocados, convertidos, integrados ou promovidos. Retomada futura: novo desenho
+> do zero, a partir do concept/model sheet e das referências de tamanho mantidos.
+> A cena D01 fica experimental. J.J. e Hayato/Kenseiden permanecem validados no
+> recorte realizado. [Registro do congelamento](dr_social_ingame_freeze_20261104.md).
+> As orientações anteriores para produzir o Social ficam históricas/suspensas.
+
+A integração de uma nova arte do Social depende de nova direção do dono e
+fonte desenhada do zero. Ferramentas e arquitetura oficiais podem ser reusadas;
+as amostras históricas não qualificam uma nova fonte ou ROM.
+
 ## Padrão de apresentação de golpes — contrato futuro de integração
 
 [Padrão de projeto](character_move_showcase_standard_v1.md), cena 10. Não há

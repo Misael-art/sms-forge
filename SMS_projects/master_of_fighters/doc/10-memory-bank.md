@@ -1,5 +1,25 @@
 # 10-memory-bank — master_of_fighters
 
+## 2026-11-04 — decisão do proprietário: congelar Social e recomeçar o sprite do zero
+
+> **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
+> Os sprites e animações atuais do Dr. Social não devem ser continuados,
+> retocados, convertidos, integrados ou promovidos. Retomada futura: novo desenho
+> do zero, a partir do concept/model sheet e das referências de tamanho mantidos.
+> A cena D01 fica experimental. J.J. e Hayato/Kenseiden permanecem validados no
+> recorte realizado. [Registro do congelamento](dr_social_ingame_freeze_20261104.md).
+> As orientações anteriores para produzir o Social ficam históricas/suspensas.
+
+Estado operacional: `frozen`. A referência de identidade mantida é o model sheet
+CPS2 v4; imagens de tamanho e a cena experimental estão listadas por hash na
+[decisão original](decisions/dr-social-ingame-freeze_owner_direction_20261104.json).
+Fontes e derivados anteriores ficam preservados como histórico; seus ponteiros
+ativos de produção são retirados do catálogo. Não apagar/mover imagens.
+A matriz antiga é uma fotografia do pacote congelado, não um backlog autorizado.
+J.J.: fonte v6 e tempos 7/4/2/3/6. Hayato: fonte v4, perfil de tempos v7
+8/1/2/7/2/5, sem deformação de lâmina. Ambos reafirmados no recorte existente.
+Nenhum runtime/ROM/asset foi modificado e nenhuma medição foi refeita.
+
 ## 2026-11-03 — reprodução local do viewer da provocação v3
 
 Os registros v2/v3 verificam os JPEGs locais, a guarda e a paleta pelo

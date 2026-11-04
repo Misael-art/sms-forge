@@ -1,0 +1,180 @@
+{
+  "schema": "mof_owner_sprite_freeze_v1",
+  "date": "2026-11-04",
+  "recorded_at": "2026-11-04T14:51:49.119459+00:00",
+  "actor": "project_owner",
+  "actor_role": "owner",
+  "source_kind": "direct_user_message",
+  "verbatim": "Os resultados da criação de sprites do Doutor Social claramente ficam depreciados à medida que foi evoluindo. Congele eles, gere aí um documento registrando que o Doutor Social está congelado. Mantenha apenas a imagem concept model sheet e as outras imagens de referência de tamanho. Deixe também a imagem da cena, no sentido de experimental, para depois aprimorá-la. Mas a imagem de sprite do personagem in-game, essa você congela e deixa isso registrado. Ou seja, em um outro momento, quando formos trabalhar, vamos ter que começar do zero essa imagem. A do JJ e a do Kenseiden estão validadas, até onde foi feito, está validado.",
+  "character": "dr_ferdinand_social",
+  "decision": "freeze_existing_ingame_art_restart_from_zero_on_future_owner_direction",
+  "production_state": "frozen",
+  "new_generation_authorized": false,
+  "resume_requires": "new_explicit_owner_direction",
+  "restart_policy": "new ingame drawing source from retained concept/model sheet and size references; no old sprite pixels, edits, tracing or image-to-image base",
+  "active_reference_allowlist": [
+    {
+      "path": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "purpose": "identity_primary_concept_model_sheet"
+    },
+    {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_01.png",
+      "sha256": "b48e9e5b894751a3a2dfd332977703de9a456155457f474a94428f16a7c1f8ba",
+      "purpose": "roster_size_reference_only"
+    },
+    {
+      "path": "data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png",
+      "sha256": "602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce",
+      "purpose": "roster_size_reference_only"
+    },
+    {
+      "path": "data/source_art/roster_harmony_review/review_drafts/historical_comparison_candidates/harmony_sprites_proportion_comparison_v2.png",
+      "sha256": "3a444c91dcba39b72eec0a8c9affb68c0239285cc3b06f1b0669b791c112b236",
+      "purpose": "historical_size_comparison_only_no_sprite_reuse"
+    },
+    {
+      "path": "data/source_art/scenes/cena01_duel_read/cena01_plate_v1.png",
+      "sha256": "be41497a29f8c9870a5d5f4b84e0d79a56423d0db94e968f2e69c19ac98bc44d",
+      "purpose": "experimental_scene_layout_only"
+    },
+    {
+      "path": "out/diagnostics/cena01_duel_read_v1b/rom_read.png",
+      "sha256": "9126950ea7c10a5563b6a42890ecc08066b18b4240d429223b285414f831c2cb",
+      "purpose": "experimental_scene_capture_frozen_social_visible_not_reusable"
+    }
+  ],
+  "frozen_scope_patterns": [
+    "data/source_art/sprite_studies/dr_social/**",
+    "data/source_art/asset_conversion_proofs/dr_social/**",
+    "out/diagnostics/dr_social_*",
+    "out/diagnostics/social_*",
+    "out/candidates/dr_social_*",
+    "out/candidates/*social*",
+    "res/**/dr_social*"
+  ],
+  "history_policy": "Preserve bytes, paths, original approvals and historical evidence; archive active registry selections without deleting or changing image files. Historical viewer consultation is allowed and does not authorize production reuse.",
+  "scene_policy": "Retain D01 as experimental layout/HUD/floor study for later improvement; visible Social sprite is frozen historical content.",
+  "other_studies_policy": "Portraits and other Social studies are not promoted or approved by this decision.",
+  "superseded_instructions": [
+    "doc/dr_social_complete_character_artist_prompt_v1.md",
+    "doc/dr_social_artist_followup_review_20261101.md",
+    "Social production portions of doc/character_move_showcase_standard_v1.md"
+  ],
+  "registry_actions": [
+    {
+      "id": "dr-social-concept-direction-v03",
+      "previous_status": "approved",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-model-sheet-14-v03",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-conversion-proof-v04",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-jab-v04",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-model-sheet-cps2-alpha-cel-v04-review-v01",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-cps2-source-review-v02",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-cps2-face-review-v05",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-cps2-idle-v05",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-cps2-face-v05-diagnostic",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-cps2-light-jab-v08",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-cps2-source-review-v08",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    },
+    {
+      "id": "dr-social-cps2-contact-v08-diagnostic",
+      "previous_status": "candidate",
+      "new_status": "historical"
+    }
+  ],
+  "retained_model_sheet_artifact": "dr-social-model-sheet-cps2-alpha-cel-v04-candidate",
+  "validated_samples": [
+    {
+      "character": "jj_zillion_ii",
+      "status": "owner_validation_reaffirmed_existing_scope",
+      "source": {
+        "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+        "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b",
+        "purpose": "existing_validated_source"
+      },
+      "existing_decision": {
+        "path": "doc/decisions/jj-zillion-character_owner_approval.json",
+        "sha256": "6909b7de5c7e3d5c8e31cd07eb46de9539553724a0fdea2a46e6c8302a7b7c21",
+        "purpose": "existing_approval_unchanged"
+      },
+      "duration_ticks": [
+        7,
+        4,
+        2,
+        3,
+        6
+      ],
+      "scope": "Concept v5, source v6 six-pose sample without FX and demonstrated return to guard; no new runtime or full product approval."
+    },
+    {
+      "character": "hayato",
+      "source_game": "Kenseiden",
+      "status": "owner_validation_reaffirmed_existing_scope",
+      "source": {
+        "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+        "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+        "purpose": "existing_validated_source"
+      },
+      "existing_decision": {
+        "path": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+        "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0",
+        "purpose": "existing_approval_unchanged"
+      },
+      "duration_ticks": [
+        8,
+        1,
+        2,
+        7,
+        2,
+        5
+      ],
+      "scope": "Source v4 and timing-only v7; rejected blade deformation remains excluded; no new runtime or full product approval."
+    }
+  ],
+  "limits": [
+    "No asset pixels, runtime, ROM or emulator evidence changed.",
+    "No fabricated playback session, FPS measurement, global curation or product approval.",
+    "Independent authorized work on engine and other characters may continue."
+  ]
+}

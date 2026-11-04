@@ -1,5 +1,10 @@
 # Master of Fighters
 
+> **Dr. Social in-game congelado pelo proprietário em 04/11/2026.**
+> Leia [o registro vigente](doc/dr_social_ingame_freeze_20261104.md) antes de atuar.
+> Model sheet/referências de tamanho e cena experimental preservados; J.J. e
+> Hayato/Kenseiden seguem validados no recorte já realizado.
+
 Jogo de luta autoral em desenvolvimento. O manifesto padrão compila o
 esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 

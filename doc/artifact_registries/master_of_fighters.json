@@ -154,7 +154,7 @@
       "kind": "concept",
       "variant": "main",
       "revision": 3,
-      "status": "approved",
+      "status": "historical",
       "parents": [],
       "reason": "Owner explicitly approved this exact concept reference in the 2026-10-11 organization instruction; scope remains visual identity reference only.",
       "files": [
@@ -168,6 +168,15 @@
       "decision": {
         "path": "doc/decisions/dr_social_concept_v03_owner_approval.json",
         "sha256": "f75442f7a4dc1abd269aac3b6608a25a105e836971c160b8465a3f7dd6efe7e4"
+      },
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "approved",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
       }
     },
     {
@@ -176,7 +185,7 @@
       "kind": "model_sheet",
       "variant": "gouache-fantasy",
       "revision": 3,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-concept-direction-v03"
       ],
@@ -187,7 +196,16 @@
           "path": "data/source_art/concept_art/dr_social/review_drafts/style_series/style_14_gouache_fantasy/dr_social_model_sheet_14_gouache_fantasy_v3.png",
           "sha256": "b584fd87ec2fe1560e5a5d77373198ba87d0fd63a714302982c8f35ab34177aa"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-conversion-proof-v04",
@@ -195,7 +213,7 @@
       "kind": "conversion_proof",
       "variant": "main",
       "revision": 4,
-      "status": "candidate",
+      "status": "historical",
       "parents": [],
       "reason": "Two-pose technical proof, distinct from the complete 61-pose source",
       "files": [
@@ -209,7 +227,16 @@
           "path": "data/source_art/asset_conversion_proofs/dr_social/dr_social_sms_keypose_proof_v4.json",
           "sha256": "e88f6a4766033fdeee1f0159e6b0e1def75d7452168c27f8ad3f1e932a49f682"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-diagnostic-v05",
@@ -304,7 +331,7 @@
       "kind": "animation_source",
       "variant": "light-jab",
       "revision": 4,
-      "status": "candidate",
+      "status": "historical",
       "parents": [],
       "reason": "Blocked visual candidate retained; only minimal opaque-key preflight passes, not artistic acceptance",
       "files": [
@@ -313,7 +340,16 @@
           "path": "data/source_art/sprite_studies/dr_social/review_drafts/2026-10-10_social_light_jab_v4/social_light_jab_candidate_v4.png",
           "sha256": "22ca69b14ef0b9e60e643228353b2bdcff3b45c3c8253de1e348bfa067f20db9"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-jab-alpha-v05",
@@ -596,7 +632,7 @@
       "kind": "art_review",
       "variant": "concept-model-sheet-cps2-alpha-cel",
       "revision": 2,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-model-sheet-cps2-alpha-cel-v03-review-v01",
         "dr-social-model-sheet-cps2-alpha-cel-v04-candidate"
@@ -614,7 +650,16 @@
           "path": "doc/dr_social_model_sheet_cps2_alpha_cel_v4_independent_review_v1.json",
           "sha256": "f05e195b0de66ba2c7b3780678fa5095f76e2b80ed7d211390e805da12e19497"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-animation-source-v02",
@@ -1141,7 +1186,7 @@
       "kind": "art_review",
       "variant": "cps2-sample",
       "revision": 2,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v03",
         "dr-social-cps2-source-review-v01"
@@ -1153,7 +1198,16 @@
           "path": "doc/dr_social_cps2_sample_independent_review_v2.json",
           "sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-cps2-light-jab-v04",
@@ -1328,7 +1382,7 @@
       "kind": "art_review",
       "variant": "cps2-face-correction",
       "revision": 2,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v05"
       ],
@@ -1349,7 +1403,16 @@
           "path": "doc/dr_social_cps2_sample_review_request_v5.json",
           "sha256": "00766f73d8abec8a938902b4f687c84d04bc0e16eb10e15037eef5705059d866"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-cps2-idle-v05",
@@ -1357,7 +1420,7 @@
       "kind": "animation_source",
       "variant": "cps2-idle",
       "revision": 5,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v05"
       ],
@@ -1373,7 +1436,16 @@
           "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/idle_metadata_v5.json",
           "sha256": "8d60a35a9aa42880291cb858561027cb2bb39db92a46b0aed3e4e3e7adbb2ebe"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-cps2-light-jab-v06",
@@ -1520,7 +1592,7 @@
       "kind": "diagnostic_conversion",
       "variant": "cps2-face-v5",
       "revision": 1,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v05"
       ],
@@ -1546,7 +1618,16 @@
           "path": "out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/independent_qa/run_3b757b7927b247dcb2f70a2a73894c39/report.json",
           "sha256": "3339a3800d88a22456f86cbd43908adf7c195c2ab4957b0255e4e477ff27463b"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-cps2-light-jab-v08",
@@ -1554,7 +1635,7 @@
       "kind": "animation_source",
       "variant": "cps2-light-jab",
       "revision": 8,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v05",
         "dr-social-cps2-light-jab-v06"
@@ -1606,7 +1687,16 @@
           "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J06.png",
           "sha256": "c7b5a79177c53d3ce9a8a0e0c25ac56554d76d1fe671ac098098550e28234b68"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-cps2-source-review-v08",
@@ -1614,7 +1704,7 @@
       "kind": "art_review",
       "variant": "cps2-sample",
       "revision": 8,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v08"
       ],
@@ -1640,7 +1730,16 @@
           "path": "doc/dr_social_cps2_sample_art_checklist_v8_reviewed.json",
           "sha256": "3e3cba3bc2beb1e72ddeb4c841e3d6b6278deea6814c128c5b388347e58702ca"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "dr-social-cps2-contact-v08-diagnostic",
@@ -1648,7 +1747,7 @@
       "kind": "diagnostic_conversion",
       "variant": "cps2-contact-v8",
       "revision": 1,
-      "status": "candidate",
+      "status": "historical",
       "parents": [
         "dr-social-cps2-light-jab-v08"
       ],
@@ -1684,7 +1783,16 @@
           "path": "out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/timing_observed_input/observed_cases_report_v2.json",
           "sha256": "7ebe2a4209dc15dea912aed1bf984fceaf0ca94fe390a9ad8fab90bddaf31f42"
         }
-      ]
+      ],
+      "production_freeze": {
+        "date": "2026-11-04",
+        "previous_status": "candidate",
+        "decision": {
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        },
+        "resume": "new_source_from_zero_after_owner_direction"
+      }
     },
     {
       "id": "hayato-cps2-idle-v01",
@@ -5470,6 +5578,42 @@
           "sha256": "6909b7de5c7e3d5c8e31cd07eb46de9539553724a0fdea2a46e6c8302a7b7c21"
         }
       ]
+    },
+    {
+      "id": "dr-social-owner-production-freeze-v01",
+      "asset_id": "dr_social",
+      "kind": "planning_sheet",
+      "variant": "owner-production-freeze",
+      "revision": 1,
+      "status": "candidate",
+      "parents": [
+        "dr-social-model-sheet-cps2-alpha-cel-v04-candidate",
+        "dr-social-concept-direction-v03",
+        "dr-social-model-sheet-14-v03",
+        "dr-social-conversion-proof-v04",
+        "dr-social-jab-v04",
+        "dr-social-model-sheet-cps2-alpha-cel-v04-review-v01",
+        "dr-social-cps2-source-review-v02",
+        "dr-social-cps2-face-review-v05",
+        "dr-social-cps2-idle-v05",
+        "dr-social-cps2-face-v05-diagnostic",
+        "dr-social-cps2-light-jab-v08",
+        "dr-social-cps2-source-review-v08",
+        "dr-social-cps2-contact-v08-diagnostic"
+      ],
+      "reason": "Direct owner freeze of Social ingame art, future redraw from zero, retain named references/experimental scene; reaffirm J.J./Hayato samples. Organizational record, not new art or runtime approval.",
+      "files": [
+        {
+          "role": "document",
+          "path": "doc/dr_social_ingame_freeze_20261104.md",
+          "sha256": "4aa84fd24910f411da76a01f8d91b5d1c929fc48e44a51d10562a58541f82d72"
+        },
+        {
+          "role": "owner_direction",
+          "path": "doc/decisions/dr-social-ingame-freeze_owner_direction_20261104.json",
+          "sha256": "197f10007aa5b26c9e14929c9c1c8d844533b766b3c590496871285ca354ab8f"
+        }
+      ]
     }
   ],
   "heads": [
@@ -5477,7 +5621,7 @@
       "asset_id": "dr_social",
       "kind": "animation_source",
       "variant": "light-jab",
-      "candidate": "dr-social-jab-v04",
+      "candidate": null,
       "approved": null
     },
     {
@@ -5498,7 +5642,7 @@
       "asset_id": "dr_social",
       "kind": "art_review",
       "variant": "concept-model-sheet-cps2-alpha-cel",
-      "candidate": "dr-social-model-sheet-cps2-alpha-cel-v04-review-v01",
+      "candidate": null,
       "approved": null
     },
     {
@@ -5506,13 +5650,13 @@
       "kind": "concept",
       "variant": "main",
       "candidate": null,
-      "approved": "dr-social-concept-direction-v03"
+      "approved": null
     },
     {
       "asset_id": "dr_social",
       "kind": "conversion_proof",
       "variant": "main",
-      "candidate": "dr-social-conversion-proof-v04",
+      "candidate": null,
       "approved": null
     },
     {
@@ -5526,7 +5670,7 @@
       "asset_id": "dr_social",
       "kind": "model_sheet",
       "variant": "gouache-fantasy",
-      "candidate": "dr-social-model-sheet-14-v03",
+      "candidate": null,
       "approved": null
     },
     {
@@ -5589,14 +5733,14 @@
       "asset_id": "dr_social",
       "kind": "animation_source",
       "variant": "cps2-idle",
-      "candidate": "dr-social-cps2-idle-v05",
+      "candidate": null,
       "approved": null
     },
     {
       "asset_id": "dr_social",
       "kind": "animation_source",
       "variant": "cps2-light-jab",
-      "candidate": "dr-social-cps2-light-jab-v08",
+      "candidate": null,
       "approved": null
     },
     {
@@ -5610,28 +5754,28 @@
       "asset_id": "dr_social",
       "kind": "art_review",
       "variant": "cps2-sample",
-      "candidate": "dr-social-cps2-source-review-v08",
+      "candidate": null,
       "approved": null
     },
     {
       "asset_id": "dr_social",
       "kind": "art_review",
       "variant": "cps2-face-correction",
-      "candidate": "dr-social-cps2-face-review-v05",
+      "candidate": null,
       "approved": null
     },
     {
       "asset_id": "dr_social",
       "kind": "diagnostic_conversion",
       "variant": "cps2-face-v5",
-      "candidate": "dr-social-cps2-face-v05-diagnostic",
+      "candidate": null,
       "approved": null
     },
     {
       "asset_id": "dr_social",
       "kind": "diagnostic_conversion",
       "variant": "cps2-contact-v8",
-      "candidate": "dr-social-cps2-contact-v08-diagnostic",
+      "candidate": null,
       "approved": null
     },
     {
@@ -5842,6 +5986,13 @@
       "kind": "diagnostic_conversion",
       "variant": "zillion-runtime-evidence",
       "candidate": "jj-zillion-runtime-evidence-v05",
+      "approved": null
+    },
+    {
+      "asset_id": "dr_social",
+      "kind": "planning_sheet",
+      "variant": "owner-production-freeze",
+      "candidate": "dr-social-owner-production-freeze-v01",
       "approved": null
     }
   ],
