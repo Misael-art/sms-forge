@@ -1,5 +1,9 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## Master of Fighters · revisão do piloto Hayato × Alis
+
+Leia o [parecer com o corte histórico em vídeo, a inspeção artística e a reprodução dos ensaios](../curation/2026-11-19_mof_hayato_alis.md). O lote de 19/11 deixou a Cena 02 pendente de ROM e de combate. Para retomar, entregue ao executor o [prompt de fechamento do piloto Hayato × Alis](20261119-prompt-fechar-piloto-hayato-alis.md).
+
 ## 2026-11-19 — Metodologia de lutadores para o executor
 
 Para iniciar o trabalho no Master of Fighters, use o [prompt do executor — dos model sheets aprovados ao duelo validado na ROM](20261119-prompt-master-of-fighters-duelo.md).
