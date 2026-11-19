@@ -2,6 +2,8 @@
 
 ## 2026-11-19 — Metodologia de lutadores para o executor
 
+Para iniciar o trabalho no Master of Fighters, use o [prompt do executor — dos model sheets aprovados ao duelo validado na ROM](20261119-prompt-master-of-fighters-duelo.md).
+
 Entrada: [produzir um lutador do concept ao duelo](../../tools/sms_wrapper/.agent/workflows/playable-fighter.md).
 O exercício de leitura no Master of Fighters cobriu 11 contratos e 62
 sequências. Hayato e J.J. permitem reproduzir a folha de exposição; Alis
