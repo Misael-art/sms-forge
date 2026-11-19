@@ -8,12 +8,11 @@ from __future__ import annotations
 
 import argparse
 import contextlib
-import fcntl
 import hashlib
 import importlib.metadata
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import platform
 import re
 import shutil
@@ -136,13 +135,18 @@ def dependency_assets(dependencies, skip_project_restore=False):
             if not (skip_project_restore and name in ('rev2_runtime', 'rev2_manifest'))}
 
 
-def environment(root, jobs=2):
+def environment(root, jobs=1):
+    if jobs not in (1, 2):
+        raise HostError('host jobs must be 1 or 2')
     env = os.environ.copy()
-    paths = [root / '.venv/bin', root / '.runtime/bin', root / 'sdk/sdcc-portable/bin']
+    if os.name == 'nt':
+        paths = [root / 'sdk/sdcc-portable/bin']
+    else:
+        paths = [root / '.venv/bin', root / '.runtime/bin', root / 'sdk/sdcc-portable/bin']
     env['PATH'] = os.pathsep.join(map(str, paths)) + os.pathsep + env.get('PATH', '')
     env['PYTHONPATH'] = os.pathsep.join(map(str, (root / 'tools/sms_wrapper',
                                                   root / 'tools/sms_wrapper/openbor2sms')))
-    env['SMS_DEVKITSMS'] = str(root / 'sdk/devkitSMS')
+    env['SMS_DEVKITSMS'] = str(root / ('.runtime/windows/devkitSMS' if os.name == 'nt' else 'sdk/devkitSMS'))
     env['PIP_CACHE_DIR'] = str(root / '.runtime/cache/pip')
     env['PYTHONPYCACHEPREFIX'] = str(root / '.runtime/cache/pycache')
     env['MAKEFLAGS'] = f'-j{jobs}'
@@ -150,9 +154,17 @@ def environment(root, jobs=2):
     return env
 
 
+def private_temp(root, env):
+    temp = root / '.runtime/tmp'
+    temp.mkdir(parents=True, exist_ok=True, mode=0o700)
+    for key in ('TMPDIR', 'TEMP', 'TMP'):
+        env[key] = str(temp)
+
+
 @contextlib.contextmanager
 def audio_environment(root, env):
     """Reuse reachable audio, or start only an owned, idle-expiring server."""
+    import fcntl
     probe = subprocess.run(['pactl', 'info'], env=env, capture_output=True, timeout=10)
     if probe.returncode == 0:
         yield env
@@ -204,8 +216,12 @@ def python_ready(python, requirements, env):
 
 
 def sdk_install(root, source_archive, env):
-    canon = root / 'sdk/devkitSMS'
-    receipt = root / '.runtime/sdk_receipt.json'
+    windows = os.name == 'nt'
+    canon = Path(env['SMS_DEVKITSMS'])
+    receipt = root / ('.runtime/windows/sdk_receipt.json' if windows else '.runtime/sdk_receipt.json')
+    make = (shutil.which('mingw32-make', path=env['PATH']) if windows else None) or 'make'
+    cc = 'gcc' if windows else 'cc'
+    packer = 'makesms.exe' if windows else 'makesms'
     sdcc = shutil.which('sdcc', path=env['PATH'])
     if not sdcc:
         raise HostError('SDCC absent; use --install-system or install SDCC >=4.2')
@@ -229,7 +245,7 @@ def sdk_install(root, source_archive, env):
         for library in ['SMSlib', 'PSGlib']:
             # Compile the required target from a fresh source extraction.
             # Do not reuse objects built by the compiler of a different host.
-            command(['make', library + '.lib'], cwd=source / library / 'src', env=env)
+            command([make, library + '.lib'], cwd=source / library / 'src', env=env)
         staged = temp / 'canonical'
         for folder in ['SMSlib', 'PSGlib', 'crt0', 'tools']:
             (staged / folder).mkdir(parents=True)
@@ -239,7 +255,7 @@ def sdk_install(root, source_archive, env):
         shutil.copy2(source / 'crt0/crt0_sms.rel', staged / 'crt0')
         if (source / 'peep-rules.txt').is_file():
             shutil.copy2(source / 'peep-rules.txt', staged)
-        command(['cc', '-O2', '-o', staged / 'tools/makesms', source / 'makesms/src/makesms.c'], env=env)
+        command([cc, '-O2', '-o', staged / 'tools' / packer, source / 'makesms/src/makesms.c'], env=env)
         # Do not publish until the compiler/linker/makesms chain actually works.
         smoke = temp / 'smoke'
         smoke.mkdir()
@@ -248,7 +264,7 @@ def sdk_install(root, source_archive, env):
                  '-I' + str(staged / 'PSGlib'), 'main.c'], cwd=smoke, env=env)
         command([sdcc, '-o', 'smoke.ihx', '-mz80', '--no-std-crt0', '--data-loc', '0xC000',
                  staged / 'crt0/crt0_sms.rel', 'main.rel', staged / 'SMSlib/SMSlib.lib', staged / 'PSGlib/PSGlib.lib'], cwd=smoke, env=env)
-        command([staged / 'tools/makesms', 'smoke.ihx', 'smoke.sms'], cwd=smoke, env=env)
+        command([staged / 'tools' / packer, 'smoke.ihx', 'smoke.sms'], cwd=smoke, env=env)
         size = (smoke / 'smoke.sms').stat().st_size
         if not size or size % 16384:
             raise HostError('invalid smoke ROM size')
@@ -275,18 +291,80 @@ def sdk_install(root, source_archive, env):
         return record
 
 
+def prepare_windows_compiler(root, env, spec, offline):
+    if shutil.which('sdcc.exe', path=env['PATH']):
+        return
+    if platform.machine().lower() not in ('amd64', 'x86_64'):
+        raise HostError('pinned Windows compiler requires x64')
+    target = root / 'sdk/sdcc-portable'
+    if target.exists():
+        raise HostError(f'preserve existing {target}; select a native SDCC via PATH')
+    seven = shutil.which('7z.exe') or Path(os.environ.get('ProgramFiles', '')) / '7-Zip/7z.exe'
+    if not Path(seven).is_file():
+        raise HostError('7-Zip required to unpack the verified SDCC without installing globally')
+    archive = download(spec, root / '.runtime/downloads', offline)
+    tools = ['bin/' + name + '.exe' for name in ('sdcc', 'sdcpp', 'sdasz80', 'sdldz80', 'sdar',
+                                                 'sdnm', 'sdranlib')]
+    with tempfile.TemporaryDirectory(dir=root / '.runtime/windows') as stage:
+        package = Path(stage) / 'compiler'
+        command([seven, 'x', '-bd', '-y', '-o' + str(package), archive,
+                 *tools, 'bin/*.dll', 'include', 'lib/z80'], capture=True)
+        required = [*tools, 'include/stdint.h', 'lib/z80/z80.lib']
+        if not all((package / path).is_file() for path in required):
+            raise HostError('incomplete Windows Z80 compiler archive layout')
+        command([package / 'bin/sdcc.exe', '--version'], capture=True)
+        target.parent.mkdir(exist_ok=True)
+        package.rename(target)
+
+
+def install_windows_sdk(args):
+    if os.name != 'nt':
+        raise HostError('--windows-sdk requires native Windows')
+    if args.install_system or args.skip_project_restore:
+        raise HostError('--windows-sdk prepares only the workspace build SDK')
+    import msvcrt
+    root = args.root.resolve()
+    env = environment(root, args.jobs)
+    if not shutil.which('gcc.exe', path=env['PATH']):
+        raise HostError('missing gcc.exe; see doc/continuity/20261024-start-here.md')
+    if not any(shutil.which(tool, path=env['PATH']) for tool in ('mingw32-make.exe', 'make.exe')):
+        raise HostError('missing mingw32-make or make')
+    if shutil.disk_usage(root).free <= 10 * 1024**3:
+        raise HostError('installation would consume the 10 GiB disk reserve')
+    private_temp(root, env)
+    dest = root / '.runtime/windows'
+    dest.mkdir(exist_ok=True)
+    with (dest / 'sdk.lock').open('a+b') as lock:
+        lock.seek(0)
+        msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+        config = json.loads((HERE / 'host_dependencies.lock.json').read_text())
+        prepare_windows_compiler(root, env, config['windows_sdcc_x64'], args.offline_dir)
+        spec = config['assets']['devkitsms_source']
+        # Dedicated cache also keeps Windows and Linux installs independently lockable.
+        offline = args.offline_dir
+        shared_cache = root / '.runtime/downloads'
+        if offline is None and (shared_cache / spec['name']).is_file():
+            offline = shared_cache
+        source = download(spec, dest / 'downloads', offline)
+        record = sdk_install(root, source, env)
+    print(json.dumps(record, indent=2))
+    return 0
+
+
 def install(args):
     root = args.root.resolve()
-    (root / '.runtime').mkdir(parents=True, exist_ok=True)
     if platform.system() != 'Linux' or platform.machine() not in ('x86_64', 'amd64'):
         raise HostError('qualified installer target: Linux x86_64 (Ubuntu 24.04 or WSL2 Ubuntu)')
-    if shutil.disk_usage(root).free < 2 * 1024**3:
-        raise HostError('at least 2 GiB free needed before installation')
+    import fcntl
+    if shutil.disk_usage(root).free <= 10 * 1024**3:
+        raise HostError('installation would consume the 10 GiB disk reserve')
+    (root / '.runtime').mkdir(parents=True, exist_ok=True)
     with (root / '.runtime/bootstrap.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         if args.install_system:
             system_install()
         env = environment(root, args.jobs)
+        private_temp(root, env)
         for tool in ['git', 'cc', 'make', 'sdcc', 'java', 'bwrap', 'Xvfb', 'ffmpeg', 'pactl']:
             if not shutil.which(tool, path=env['PATH']):
                 raise HostError(f'missing {tool}; run bootstrap_host.sh --install-system')
@@ -350,6 +428,17 @@ def install(args):
 
 
 def doctor(root):
+    if platform.system() == 'Windows':
+        from build_inner import find_toolchain
+        tc, issue = find_toolchain(root / 'sdk')
+        record = {'schema': 'smsforge.windows_doctor/v1', 'platform': 'Windows',
+                  'native_toolchain_paths': tc, 'toolchain_issue': issue,
+                  'wsl_launcher': shutil.which('wsl.exe'),
+                  'private_emulator_backend': 'requires qualified Linux environment',
+                  'claim_ceiling': 'inventory_only'}
+        write_json(root / '.runtime/doctor-windows.json', record)
+        print(json.dumps(record, indent=2))
+        return 2
     env = environment(root)
     checks = {tool: shutil.which(tool, path=env['PATH']) for tool in
               ['git', 'cc', 'make', 'sdcc', 'java', 'javac', 'bwrap', 'Xvfb', 'ffmpeg', 'ffprobe', 'pactl', 'rtk']}
@@ -367,6 +456,13 @@ def doctor(root):
     return 0 if all(checks.values()) and record['user_namespace'] and audio_ready else 2
 
 
+def wsl_run_argv(distribution, root, command_args):
+    if not distribution or distribution.startswith('-') or not root or not PurePosixPath(root).is_absolute():
+        raise HostError('provide --wsl-distro and the absolute --wsl-root of the registered checkout')
+    return ['wsl.exe', '--distribution', distribution, '--cd', root, '--exec',
+            '/bin/bash', 'tools/sms_wrapper/run_host.sh', *command_args]
+
+
 def main(argv=None):
     if argv == ['--self-check'] or (argv is None and sys.argv[1:] == ['--self-check']):
         return self_check()
@@ -375,15 +471,36 @@ def main(argv=None):
     sub = parser.add_subparsers(dest='operation', required=True)
     setup = sub.add_parser('install')
     setup.add_argument('--install-system', action='store_true')
+    setup.add_argument('--windows-sdk', action='store_true', help='build private native SDK and run ROM smoke')
     setup.add_argument('--offline-dir', type=Path)
     setup.add_argument('--skip-project-restore', action='store_true', help='host dependencies only; preserve active project')
-    setup.add_argument('--jobs', type=int, choices=range(1, 5), default=2)
+    setup.add_argument('--jobs', type=int, choices=(1, 2), default=1)
     sub.add_parser('doctor')
+    resources = sub.add_parser('resources', help='sample the current host as JSON lines')
+    resources.add_argument('--samples', type=int, default=1, metavar='1..240')
+    resources.add_argument('--interval', type=int, choices=range(15, 31), default=20)
+    resources.add_argument('--temp', type=Path, help='existing staging directory')
+    resources.add_argument('--processes', action='store_true', help='include private full command lines')
+    resources.add_argument('--peak-mib', type=int, help='additional peak working memory')
+    resources.add_argument('--output-mib', type=int, help='additional destination bytes in MiB')
+    resources.add_argument('--staging-mib', type=int, help='additional temporary bytes in MiB')
     run = sub.add_parser('run')
+    run.add_argument('--wsl-distro', help='on Windows, explicitly run in this distribution')
+    run.add_argument('--wsl-root', help='absolute Linux path to the registered checkout')
     run.add_argument('args', nargs=argparse.REMAINDER)
     args = parser.parse_args(argv)
     try:
+        if args.operation == 'resources':
+            from host_resources import monitor
+            estimates = (args.peak_mib, args.output_mib, args.staging_mib)
+            if not 1 <= args.samples <= 240:
+                parser.error('--samples must be 1..240')
+            if any(v is not None for v in estimates) and not all(v is not None and v >= 0 for v in estimates):
+                parser.error('supply all three nonnegative estimates')
+            return monitor(args.root, args)
         if args.operation == 'install':
+            if args.windows_sdk:
+                return install_windows_sdk(args)
             install(args)
             return 0
         if args.operation == 'doctor':
@@ -391,7 +508,14 @@ def main(argv=None):
         cmd = args.args[1:] if args.args[:1] == ['--'] else args.args
         if not cmd:
             raise HostError('run requires a command')
+        if args.wsl_distro or args.wsl_root:
+            if platform.system() != 'Windows':
+                raise HostError('WSL delegation requires Windows')
+            return subprocess.call(wsl_run_argv(args.wsl_distro, args.wsl_root, cmd))
+        if platform.system() != 'Linux':
+            raise HostError('run on Windows requires --wsl-distro and --wsl-root; use resources or doctor for native diagnostics')
         env = environment(args.root.resolve())
+        private_temp(args.root.resolve(), env)
         with audio_environment(args.root.resolve(), env) as env:
             return subprocess.call(cmd, cwd=args.root, env=env)
     except (HostError, OSError, subprocess.TimeoutExpired) as error:
@@ -401,6 +525,26 @@ def main(argv=None):
 
 def self_check():
     import io
+    from host_resources import check_budget
+    gib = 1024**3
+    volume = dict(free_bytes=12*gib, device=1, filesystem='btrfs')
+    sample = dict(total_bytes=16*gib, available_bytes=5*gib,
+                  volumes={'destination': volume, 'temp': dict(volume)})
+    assert check_budget(sample, 1024, 1024, 1024)['within_reserves']
+    assert not check_budget(sample, 1025, 1024, 1024)['within_reserves']
+    assert not check_budget(sample, 1024, 1024, 1025)['within_reserves']
+    command_args = ['rtk', 'proxy', 'printf', 'a b', '$HOME']
+    assert wsl_run_argv('Ubuntu', '/workspace/a b', command_args)[-5:] == command_args
+    try:
+        wsl_run_argv('Ubuntu', 'relative', command_args)
+    except HostError:
+        pass
+    else:
+        raise AssertionError('relative WSL root accepted')
+    sample['volumes']['temp']['device'] = 2
+    assert check_budget(sample, 1024, 1024, 1025)['within_reserves']
+    sample['volumes']['temp']['filesystem'] = 'tmpfs'
+    assert not check_budget(sample, 1024, 1024, 1025)['within_reserves']
     with tempfile.TemporaryDirectory() as temp:
         root = Path(temp)
         for name, kind in [('ok/file', 'file'), ('../escape', 'file'),
@@ -436,8 +580,9 @@ def self_check():
             raise AssertionError('tampered cache accepted')
         assert target.read_bytes() == b'changed'
         env = environment(root, 2)
+        assert environment(root)['MAKEFLAGS'] == '-j1'
         assert env['MAKEFLAGS'] == '-j2' and env['OPENBLAS_NUM_THREADS'] == '2'
-        assert str(root / '.venv/bin') in env['PATH']
+        assert str(root / 'sdk/sdcc-portable/bin') in env['PATH']
         requirements = root / 'requirements.txt'
         requirements.write_text('missing_smsforge_fixture_package==1.0\n')
         # A matching marker cannot authenticate a recreated/empty environment.

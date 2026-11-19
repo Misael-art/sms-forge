@@ -2,6 +2,12 @@
   "schema": "smsforge.host_dependencies/v1",
   "target": "Linux x86_64; Ubuntu 24.04 LTS / WSL2 Ubuntu",
   "compiler_policy": "native SDCC>=4.2; rebuild both libraries with the selected compiler; new binaries require new evidence",
+  "windows_sdcc_x64": {
+    "name": "sdcc-4.5.0-x64-setup.exe",
+    "url": "https://netix.dl.sourceforge.net/project/sdcc/sdcc-win64/4.5.0/sdcc-4.5.0-x64-setup.exe",
+    "sha256": "f459effe986f4c09f0efa64877a753d44d3b78355c36b5055854a032f543aec5",
+    "bytes": 9398041
+  },
   "assets": {
     "devkitsms_source": {
       "name": "smsforge-devkitsms-source-20261024.tar.gz",

@@ -15,6 +15,7 @@ Pipeline:
 Exit: 0 build | 1 reprovação (gate ou compilador) | 2 ambiente ausente
 """
 import sys, os, json, glob, shutil, subprocess, argparse, shlex, tempfile, hashlib, re
+import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -110,6 +111,16 @@ def self_check_resource_routing():
         else:
             raise AssertionError("conflicting padding accepted")
         assert candidate_compiler_defines({"defines": {"B": 2, "A": 1}}) == ["-DA=1", "-DB=2"]
+        assert sdcc_dependencies(r"E:\obj\main.rel: src\main.c C:\Program\ Files\SDCC\inc.h", True) == [
+            r"src\main.c", r"C:\Program Files\SDCC\inc.h"]
+        assert sdcc_dependencies("main.rel: src/main.c \\\n dir/file\\ name.h", False) == [
+            "src/main.c", "dir/file name.h"]
+        timings, logs = {}, []
+        for status in (0, 1):
+            result = run_build_stage("fixture", [sys.executable, "-c", f"raise SystemExit({status})"],
+                                     root, timings, logs)
+            assert result.returncode == status and f"exit={status}" in logs[-1]
+        assert timings["fixture"] > 0
         try:
             candidate_compiler_defines({"defines": {"A=1": "unsafe"}})
         except ValueError:
@@ -121,22 +132,29 @@ def self_check_resource_routing():
     finally:
         shutil.rmtree(root, ignore_errors=True)
 
-def find_toolchain():
+def find_toolchain(sdk=None):
     """Retorna dict com caminhos ou None com motivo."""
     import shutil as sh
-    sdk = os.path.normpath(os.path.join(HERE, "..", "..", "sdk"))
-    sdcc = sh.which("sdcc") or os.path.join(sdk, "sdcc-portable", "bin", "sdcc")
-    if not os.path.exists(sdcc):
-        return None, ("sdcc nao encontrado no PATH nem em " + sdk +
-                      "/sdcc-portable/bin | Rode tools/sms_wrapper/ensure_toolchain.sh")
-    ver_out = subprocess.run([sdcc, "--version"], capture_output=True, text=True).stdout
+    sdk = os.path.normpath(sdk or os.path.join(HERE, "..", "..", "sdk"))
+    suffix = ".exe" if os.name == "nt" else ""
+    sdcc = sh.which("sdcc" + suffix) or os.path.join(sdk, "sdcc-portable", "bin", "sdcc" + suffix)
+    if not os.path.isfile(sdcc):
+        return None, f"sdcc nao encontrado no PATH nem em {sdk}/sdcc-portable/bin"
+    try:
+        probe = subprocess.run([sdcc, "--version"], capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        return None, f"sdcc indisponivel: {error}"
+    if probe.returncode:
+        return None, f"sdcc --version falhou ({probe.returncode})"
+    ver_out = probe.stdout
     import re
     m = re.search(r"\b(\d+)\.(\d+)\.(\d+)\b", ver_out)
     version = tuple(map(int, m.groups())) if m else None
     if version is None or version < (4, 2, 0):
         return None, f"sdcc >=4.2 requerido; versao ausente ou abaixo do minimo ({ver_out[:60].strip()})"
-    root = os.environ.get("SMS_DEVKITSMS") or os.path.normpath(os.path.join(
-        HERE, "..", "..", "sdk", "devkitSMS"))
+    native = os.path.normpath(os.path.join(sdk, "..", ".runtime", "windows", "devkitSMS"))
+    default_kit = native if os.name == "nt" and os.path.isdir(native) else os.path.join(sdk, "devkitSMS")
+    root = os.environ.get("SMS_DEVKITSMS") or default_kit
     need = {
         "SMSlib.h": os.path.join(root, "SMSlib", "SMSlib.h"),
         "SMSlib.lib": os.path.join(root, "SMSlib", "SMSlib.lib"),
@@ -149,10 +167,10 @@ def find_toolchain():
         return None, ("devkitSMS incompleto em " + root +
                       "; faltam: " + ", ".join(missing) +
                       ". Siga sdk/README.md")
-    makesms = sh.which("makesms")
+    makesms = sh.which("makesms" + suffix)
     if not makesms:
-        cand = os.path.join(root, "tools", "makesms")
-        if os.path.exists(cand):
+        cand = os.path.join(root, "tools", "makesms" + suffix)
+        if os.path.isfile(cand):
             makesms = cand
         else:
             return None, "makesms nao encontrado (rode ensure_toolchain.sh)"
@@ -308,6 +326,29 @@ def project_include_dirs(project, manifest):
     return dirs
 
 
+def sdcc_dependencies(output, windows):
+    joined = output.replace("\\\n", " ")
+    rule = re.search(r":(?=\s)", joined)
+    if not rule:
+        raise ValueError("saida de dependencias SDCC invalida")
+    prerequisites = joined[rule.end():].strip()
+    if not windows:
+        return shlex.split(prerequisites)
+    # Make escapes spaces even on Windows. Ordinary backslashes separate paths.
+    tokens = re.findall(r'(?:\\[ \t#]|[^\s])+', prerequisites)
+    return [re.sub(r'\\([ \t#])', r'\1', token) for token in tokens]
+
+
+def run_build_stage(stage, cmd, project, timings, logs):
+    started = time.perf_counter()
+    result = subprocess.run(cmd, cwd=project, capture_output=True, text=True)
+    elapsed = time.perf_counter() - started
+    timings[stage] = timings.get(stage, 0.0) + elapsed
+    logs.append(f"$ {' '.join(cmd)}\n{result.stdout}{result.stderr}\n"
+                f"[host] {stage} {elapsed:.3f} s exit={result.returncode}")
+    return result
+
+
 def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
     """Hash actual SDCC includes, linked libraries and explicit mapper banks.
 
@@ -337,6 +378,8 @@ def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
     for section, names in (("programs", ("sdcc", "sdcpp", "sdasz80", "sdldz80")),
                            ("libdir", ("z80.lib",))):
         for name in names:
+            if os.name == "nt" and section == "programs":
+                name += ".exe"
             path = next((os.path.join(d, name) for d in sections[section]
                          if os.path.isfile(os.path.join(d, name))), None)
             if path is None:
@@ -358,10 +401,7 @@ def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
         result = subprocess.run(command, cwd=project, capture_output=True, text=True)
         if result.returncode:
             raise ValueError("falha ao identificar includes SDCC: " + result.stderr.strip())
-        _, sep, dependencies = result.stdout.replace("\\\n", " ").partition(":")
-        if not sep:
-            raise ValueError("saida de dependencias SDCC invalida")
-        for dependency in shlex.split(dependencies):
+        for dependency in sdcc_dependencies(result.stdout, os.name == "nt"):
             files.add(os.path.join(project, dependency))
     extra = list(toolchain_config.get("makesms_extra") or [])
     makesms_padding_policy(extra)
@@ -384,7 +424,11 @@ def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
     for path in sorted(os.path.realpath(path) for path in files):
         if not os.path.isfile(path):
             raise ValueError("entrada de build ausente: " + path)
-        inputs[os.path.relpath(path, project)] = _sha256(path)
+        if os.path.normcase(os.path.splitdrive(path)[0]) == os.path.normcase(os.path.splitdrive(project)[0]):
+            key = os.path.relpath(path, project)
+        else:
+            key = path  # A native SDK may be installed on another Windows volume.
+        inputs[key] = _sha256(path)
     return inputs
 
 
@@ -551,6 +595,8 @@ def main():
         record["steps"]["pre_gates"] = "pass"
 
     objs, logs = [], []
+    timings = {}
+    record["host_stage_elapsed_seconds"] = timings
     for src_abs in srcs:
         base = os.path.splitext(os.path.basename(src_abs))[0]
         obj_rel = os.path.relpath(os.path.join(obj_dir, base + ".rel"), project)
@@ -569,8 +615,7 @@ def main():
             cmd += ["-I" + inc]
         cmd += ["-I" + inc for inc in project_includes]
         cmd.append(os.path.relpath(src_abs, project))
-        r = subprocess.run(cmd, cwd=project, capture_output=True, text=True)
-        logs.append(f"$ {' '.join(cmd)}\n{r.stdout}{r.stderr}")
+        r = run_build_stage("compile", cmd, project, timings, logs)
         if r.returncode != 0:
             open(log_path, "w").write("\n".join(logs))
             return fail(f"compilacao de {src_abs} falhou (log: {log_path})", 1)
@@ -584,8 +629,7 @@ def main():
                 [tc["crt0_sms.rel"]] +
                 objs +
                 [tc["SMSlib.lib"], tc["PSGlib.lib"]])
-    r = subprocess.run(link_cmd, cwd=project, capture_output=True, text=True)
-    logs.append("$ " + " ".join(link_cmd) + f"\n{r.stdout}{r.stderr}")
+    r = run_build_stage("link", link_cmd, project, timings, logs)
     open(log_path, "w").write("\n".join(logs))
     if r.returncode != 0 or not os.path.exists(os.path.join(project, ihx)):
         return fail(f"link falhou (log: {log_path})", 1)
@@ -600,9 +644,8 @@ def main():
         return fail(str(e), 1)
     makesms_cmd = ([tc["makesms"]] + ms_extra +
                    [ihx, os.path.relpath(rom, project)])
-    r = subprocess.run(makesms_cmd, cwd=project, capture_output=True, text=True)
+    r = run_build_stage("makesms", makesms_cmd, project, timings, logs)
     makesms_output = r.stdout + r.stderr
-    logs.append("$ " + " ".join(makesms_cmd) + f"\n{makesms_output}")
     open(log_path, "w").write("\n".join(logs))
     if r.returncode != 0 or not os.path.exists(rom):
         detail = makesms_output.strip() or "sem diagnóstico"

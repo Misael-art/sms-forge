@@ -1,5 +1,12 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-19 — Host Windows e construção
+
+O [registro de curadoria](../curation/2026-11-19_host_windows.md) identifica
+o checkout, as séries de recursos, os testes portáveis e as pendências de
+smoke nativo, bateria Linux e sessão privada. O [guia de entrada](20261024-start-here.md)
+contém os comandos para retomar.
+
 ## 2026-11-04 — decisão artística: Social in-game congelado
 
 O proprietário suspendeu os sprites e animações do Dr. Social e determinou

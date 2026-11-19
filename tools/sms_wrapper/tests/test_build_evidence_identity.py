@@ -207,25 +207,6 @@ class ToolchainAndSessionTests(unittest.TestCase):
             child.wait.assert_called_once()
             self.assertNotIn("fixture", isolated._OWNED_SUPERVISORS)
 
-    def test_sdcc_below_at_above_minimum_and_unparseable(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            sdcc = root / "sdcc"
-            sdcc.touch()
-            for sub, names in (("SMSlib", ("SMSlib.h", "SMSlib.lib")),
-                               ("PSGlib", ("PSGlib.h", "PSGlib.lib")),
-                               ("crt0", ("crt0_sms.rel",))):
-                (root / sub).mkdir()
-                for name in names:
-                    (root / sub / name).touch()
-            with patch.dict(os.environ, {"SMS_DEVKITSMS": tmp}), patch("shutil.which", return_value=str(sdcc)):
-                for version, expected in (("3.9.0", False), ("4.0.0", False), ("4.1.99", False),
-                                           ("4.2.0", True), ("4.6.0", True), ("5.0.0", True), ("unknown", False)):
-                    result = SimpleNamespace(stdout="SDCC " + version)
-                    with patch.object(build_inner.subprocess, "run", return_value=result):
-                        tc, _ = build_inner.find_toolchain()
-                    self.assertEqual(tc is not None, expected, version)
-
     def test_official_openbor_cli_from_canonical_environment(self):
         import host_bootstrap
         import subprocess

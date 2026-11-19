@@ -11,8 +11,57 @@ Alvo preparado: **Ubuntu 24.04 LTS x86_64**, nativo ou Ubuntu em WSL2 no
 Windows. Outro Linux pode usar o diagnóstico, mas instalação de pacotes e QA
 precisam de qualificação própria. A arquitetura ARM/macOS não foi qualificada.
 
-No Windows, instale WSL2/Ubuntu e mantenha o clone no filesystem Linux
-(`~/Projects`), evitando cartão SD e `/mnt/c` como diretório de build. Instale
+No Windows, o diagnóstico nativo funciona em PowerShell com Python 3, antes
+de iniciar WSL. Na raiz existente, execute:
+
+```powershell
+python -B tools/sms_wrapper/host_bootstrap.py --self-check
+python -B tools/sms_wrapper/host_bootstrap.py resources
+python -B tools/sms_wrapper/host_bootstrap.py doctor
+```
+
+O primeiro comando verifica os cálculos. O segundo mostra uma amostra do
+Windows. O terceiro consulta a toolchain nativa e guarda o inventário em
+`.runtime/doctor-windows.json`. A saída 2 indica que o fluxo completo de QA
+depende do ambiente Linux qualificado. A skill central
+[`host-build-monitoring`](../../tools/sms_wrapper/.agent/skills/host-build-monitoring.md)
+mostra como acompanhar uma operação e interpretar dados ausentes.
+
+Após verificar recursos e identificar a distribuição e a raiz Linux já
+preparada, o PowerShell pode encaminhar argumentos ao `run_host.sh` oficial.
+Substitua os dois valores pelo cadastro deste host:
+
+```powershell
+python -B tools/sms_wrapper/host_bootstrap.py run --wsl-distro "Ubuntu-24.04" --wsl-root "/home/usuario/Projects/SMSForge" -- rtk --version
+```
+
+O encaminhamento inicia a distribuição selecionada se estiver parada e
+devolve o código de saída do processo. Para diagnosticar uma distribuição
+ainda sem dependências, rode ali `python3 tools/sms_wrapper/host_bootstrap.py doctor`
+diretamente da raiz. No Linux, os filhos do wrapper usam `.runtime/tmp` como
+temporário privado. Passe esse caminho a `resources --temp` quando existir.
+
+**Construção nativa experimental.** Com `gcc.exe` e GNU make disponíveis, execute
+`python -B tools/sms_wrapper/host_bootstrap.py install --windows-sdk`
+após a verificação de capacidade. O bootstrap reutiliza `sdcc.exe` (≥4.2)
+em PATH ou em `sdk/sdcc-portable/bin`. Se ausente, usa o 7-Zip para
+extrair o subconjunto Z80 do pacote x64 verificado em `sdk/sdcc-portable`.
+Uma pasta portátil já existente é preservada. Essa opção usa o arquivo devkitSMS do
+lock, recompila as duas bibliotecas e o empacotador e verifica o cabeçalho
+SEGA de uma ROM smoke antes de gravar `.runtime/windows/sdk_receipt.json`.
+O SDK nativo fica em `.runtime/windows/devkitSMS`. `build.bat` e
+`build_inner.py` detectam esse SDK. Uma variável `SMS_DEVKITSMS` explícita
+continua tendo precedência. A sessão privada de QA segue no Linux.
+
+Uma distribuição reproduzível para preparar SDCC localmente é a 4.5.0 x64
+(aproximadamente 9,4 MB). SHA-256 do instalador:
+`f459effe986f4c09f0efa64877a753d44d3b78355c36b5055854a032f543aec5`.
+[Arquivo do projeto SDCC](https://sourceforge.net/projects/sdcc/files/sdcc-win64/4.5.0/)
+e [manifesto do WinGet](https://github.com/microsoft/winget-pkgs/blob/master/manifests/s/SDCC/SDCC/4.5.0/SDCC.SDCC.installer.yaml).
+
+Em host novo que usará WSL2/Ubuntu para construir e validar, mantenha a raiz
+única no filesystem Linux (`~/Projects`). Em checkout já registrado, confira
+a raiz e o filesystem antes de aplicar a receita de clone inicial. Instale
 o Codex no novo computador e autentique novamente suas contas. Nenhum token,
 chave SSH, cookie, banco pessoal do agente ou configuração secreta foi migrado.
 
@@ -56,11 +105,11 @@ instala Python via pip global, não copia configurações pessoais de emulador e
 não altera hooks globais do agente. Use-o também para builds, testes e QA.
 RTK faz parte da convenção portátil em `tools/sms_wrapper/RTK.md`.
 
-CPU: padrão de dois jobs e dois threads NumPy/OpenBLAS; instalação aceita
-`--jobs 1..4`. Downloads/cache ficam em `.runtime/`; dependências Python em
-`.venv/`; SDK em `sdk/`; logs/ROMs/capturas nos `out/` do owner. O instalador
-recusa iniciar com menos de 2 GiB livres. Esse piso não é estimativa do espaço
-total necessário aos demais projetos ou à retenção de vídeos.
+O bootstrap começa com um job e uma thread NumPy/OpenBLAS. Use `--jobs 2`
+somente com margem medida. Downloads/cache ficam em `.runtime/`, dependências
+Python em `.venv/`, SDK em `sdk/` e logs/ROMs/capturas nos `out/` do owner.
+O instalador recusa iniciar com 10 GiB livres ou menos na raiz. Estime também
+os bytes de saída e staging e confira os temporários antes da operação.
 
 Áudio usa o servidor do usuário quando acessível. Se não existir, o wrapper
 inicia um servidor privado do workspace com expiração após 60 s de inatividade.

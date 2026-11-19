@@ -11,6 +11,8 @@
 ## Como usar
 1. AGENTS.md da raiz é o contrato de entrada; SMS_GLOBAL.md é a lei.
 2. Antes de trabalhar num domínio, leia a skill correspondente.
+   Para preparar a construção, investigar pressão do host ou usar Windows,
+   consulte `skills/host-build-monitoring.md`.
 3. Siga o workflow do tipo de tarefa; pipelines definem gates obrigatórios.
    Antes de produzir ou retomar arte, `workflows/artifact-organization.md`
    resolve um registro por projeto, separa candidata/aprovada e reserva saídas
