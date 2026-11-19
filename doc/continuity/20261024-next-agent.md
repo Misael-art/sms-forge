@@ -1,5 +1,9 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## Master of Fighters · repertório completo de Alis e Hayato
+
+O [registro dos dois lutadores](../../SMS_projects/master_of_fighters/doc/repertorio_alis_hayato.md) reúne golpes, mobilidade, defesa no solo e no salto, cenas e provocação contextual. O [prompt do executor](20261119-prompt-repertorio-alis-hayato.md) parte da comparação das duas ROMs e leva cada ação aprovada até um round completo com comandos e vídeo.
+
 ## Master of Fighters · revisão do piloto Hayato × Alis
 
 Leia o [parecer com o corte histórico em vídeo, a inspeção artística e a reprodução dos ensaios](../curation/2026-11-19_mof_hayato_alis.md). O lote de 19/11 deixou a Cena 02 pendente de ROM e de combate. Para retomar, entregue ao executor o [prompt de fechamento do piloto Hayato × Alis](20261119-prompt-fechar-piloto-hayato-alis.md).

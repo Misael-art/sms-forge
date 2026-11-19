@@ -567,6 +567,8 @@ O dono adicionou J.J. à escalação em 2026-10-04 e especificou **Zillion II pa
   pressão legível.
 
 ### Movesets — status
+
+O [registro individual de golpes e ações de Alis e Hayato](repertorio_alis_hayato.md) reúne as decisões do piloto, as propostas para GD01–GD03, a matriz defensiva e a cobertura exigida por personagem.
 Proposta temporária em `doc/movesets_draft.json` (12 entradas da escalação
 anterior — 8 heróis e 4 chefes —, 44 golpes; não contém o J.J. adicionado em
 2026-10-04). Seu arquivo de personagem terá uma proposta separada sem frame
