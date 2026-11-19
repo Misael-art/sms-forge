@@ -155,7 +155,7 @@ def main():
               "audit_stage_attribution.py",
               "audit_import_semantics.py",
               "quality_review_router.py",
-              "audit_animation_semantics.py",
+              "audit_animation_semantics.py", "audit_animation_contract.py",
               "audit_learning_capture.py",
               "audit_psg_channel_binding.py",
               "audit_hscroll_blank.py",
@@ -181,6 +181,14 @@ def main():
                            f"selfcheck:{g}"))
     print("== Fase 2: fixtures geradas ==")
     tmp = tempfile.mkdtemp(prefix="smsforge_selftest_")
+    from audit_animation_contract import _minimal_valid as animation_fixture
+    animation_path = os.path.join(tmp, "animation.json")
+    with open(animation_path, "w", encoding="utf-8") as stream:
+        json.dump(animation_fixture(), stream)
+    exposure = [os.path.join(HERE, "audit_animation_contract.py"), "--manifest",
+                animation_path, "--exposure-sheet", "demo", "--active-window"]
+    results.append(run(exposure + ["1", "3"], 0, "exposição cobre fronteira entre poses"))
+    results.append(run(exposure + ["3", "5"], 1, "janela além da última pose reprovada"))
     # Registry CLI must reject prose and bind real files, not merely truthy evidence.
     mastery_path = os.path.join(tmp, "mastery.json")
     refs = []

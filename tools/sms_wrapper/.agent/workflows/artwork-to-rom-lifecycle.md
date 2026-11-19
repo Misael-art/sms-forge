@@ -6,6 +6,9 @@ System. Este runbook coordena `original-artwork.md`, `art-review.md`,
 substitui os contratos técnicos ou os documentos do projeto.
 Organização/retomada segue `artifact-organization.md`: um registro por projeto,
 heads por papel e revisão, decisões ligadas ao hash e reservas antes da escrita.
+Para um lutador, execute o recorte por personagem, ação e adversário em
+[`playable-fighter.md`](playable-fighter.md). A mesma fonte de arte alimenta
+a revisão do gesto e a medição do contato no duelo.
 
 ## Estados de promoção
 
@@ -116,8 +119,9 @@ aprovação de um estágio para outro nem de um hash para outro.
     RAM, ROM/banking, SAT/scanline e pior VBlank da cena real. ROM diagnóstica
     fica fora de `res/` e não é entrega.
 12. **Fechar produção com evidência atual.** Validar gameplay/interação,
-    animação, FPS apropriado (50/60), áudio, memória e budgets conforme
-    GDD/TDD/spec. Mudança/relink da ROM exige evidência fresca. Declarar apenas
+    animação, alvo de 60 FPS com piso de 58 por janela válida (SMS_GLOBAL §133),
+    áudio, memória e budgets conforme GDD/TDD/spec. PAL50 é diagnóstico
+    regional. Mudança/relink da ROM exige evidência fresca. Declarar apenas
     eixos pagos e dentro do teto de claims aprovado.
 
 ## Curadoria

@@ -2,6 +2,10 @@
 
 Use quando houver idle, walk, golpe, hit, KO ou qualquer ciclo de frames.
 Metasprite e SAT: `sms-sprites-metasprite.md`. Esta skill é **semântica**.
+Em jogos de luta, usar a [direção do lutador](sms-fighter-direction.md) para
+derivar locomoção, assinatura corporal e contrajogo do sheet e do GDD.
+O [fluxo do par em combate](../workflows/playable-fighter.md) acompanha a
+mesma ação até a reação observada do adversário.
 
 ## Atuação antes do acabamento
 
@@ -94,11 +98,20 @@ Gate de contrato: `audit_animation_contract.py --manifest <json>` e
 executar também `audit_animation_semantics.py`; os dois gates medem coisas
 diferentes.
 
-## Moveset mínimo (quando o GDD for fighting / action)
+Para montar a folha de exposição, acrescente `--exposure-sheet ID` ao gate
+do contrato. Ela liga os ticks de cada pose às trilhas do corpo e dos objetos.
+Na revisão, marque o apoio, o ponto condutor e a silhueta da ameaça no
+rascunho. Compare o último tick de uma exposição e o primeiro da seguinte.
+Na ROM, procure as mesmas fronteiras no frame apresentado e no estado lógico.
 
-idle, walk/advance, retreat, crouch, jump, landing, guard, hit, knockdown,
-get-up, light, medium, heavy, special, throw, victory, defeat — mais ações
-específicas do GDD. Não invente frame fora do GDD.
+## Cobertura do moveset autorizado (fighting / action)
+
+Cruze os estados do GDD com a lista de conferência: idle, walk/advance, retreat,
+crouch, jump, landing, guard, hit, knockdown, get-up, ataques de cada função,
+special, throw, victory e defeat. Para o conjunto autorizado, cubra entrada,
+permanência, interrupção e saída para o próximo estado. Funções ausentes do
+design ficam identificadas como fora de escopo. Em dois botões, use o mapa
+autorizado pelo designer para distinguir toque, combinação ou carga.
 
 Não colapse estados que têm gatilhos/leituras diferentes (ex.: derrota por
 tempo e empate; queda e recuperação; retratos versus neutro/vitória/derrota).

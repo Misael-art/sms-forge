@@ -1,5 +1,18 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-19 — Metodologia de lutadores para o executor
+
+Entrada: [produzir um lutador do concept ao duelo](../../tools/sms_wrapper/.agent/workflows/playable-fighter.md).
+O exercício de leitura no Master of Fighters cobriu 11 contratos e 62
+sequências. Hayato e J.J. permitem reproduzir a folha de exposição; Alis
+exemplifica a diferença entre alcance geométrico e reação no duelo. A direção
+do personagem e a matriz de contrajogo ficam na
+[skill de direção e balanceamento](../../tools/sms_wrapper/.agent/skills/sms-fighter-direction.md).
+O trabalho desta etapa foi na fábrica. O self-check da projeção passou no
+Windows e no Python do Debian/WSL. Sincronia documental e captura de lições
+passaram. A bateria integral e a auditoria integral dos medidores retornaram
+`FAIL_AMBIENTE` no wrapper do Debian por ausência de `pactl` antes das suítes.
+
 ## 2026-11-19 — Host Windows e construção
 
 O [registro de curadoria](../curation/2026-11-19_host_windows.md) identifica

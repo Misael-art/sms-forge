@@ -9,6 +9,7 @@ that a proposal is balanced in a running game.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -36,6 +37,8 @@ def _nonempty(value):
 
 def audit(manifest):
     problems = []
+    if not isinstance(manifest, dict):
+        return ["manifest: esperado objeto JSON"]
     if manifest.get("schema") != "sms_animation_contract_v1":
         problems.append("schema: esperado sms_animation_contract_v1")
     if not _nonempty(manifest.get("project")) or not _nonempty(manifest.get("character_id")):
@@ -55,7 +58,10 @@ def audit(manifest):
 
     by_id = {}
     for seq in sequences:
-        sid = seq.get("id", "?") if isinstance(seq, dict) else "?"
+        sid = seq.get("id") if isinstance(seq, dict) else None
+        if not _nonempty(sid):
+            problems.append("sequence: id textual ausente ou inválido")
+            continue
         if sid in by_id:
             problems.append(f"duplicate_sequence_id: {sid}")
         by_id[sid] = seq
@@ -86,8 +92,8 @@ def audit(manifest):
         if seq.get("timing_status") not in {"proposal_unmeasured", "measured"}:
             problems.append(f"{sid}: timing_status inválido")
         durations = seq.get("duration_ticks")
-        if not isinstance(durations, list) or len(durations) != len(frame_ids) or any(
-                not isinstance(tick, int) or tick < 1 for tick in (durations or [])):
+        valid_ticks = isinstance(durations, list) and all(type(tick) is int and tick > 0 for tick in durations)
+        if not valid_ticks or len(durations) != len(frame_ids):
             problems.append(f"{sid}: duration_ticks deve ter um inteiro positivo por pose")
         if not _nonempty(seq.get("initial_state")):
             problems.append(f"{sid}: initial_state ausente")
@@ -105,7 +111,10 @@ def audit(manifest):
             if not isinstance(entity, dict):
                 problems.append(f"{sid}: entidade precisa ser objeto")
                 continue
-            eid = entity.get("id", "?")
+            eid = entity.get("id")
+            if not _nonempty(eid):
+                problems.append(f"{sid}: id da entidade ausente ou inválido")
+                continue
             if eid in entity_ids:
                 problems.append(f"{sid}: entidade duplicada {eid}")
             entity_ids.add(eid)
@@ -131,7 +140,7 @@ def audit(manifest):
                     "sequence_frames", "independent_projectile", "event_effect"}:
                 problems.append(f"{sid}/{eid}: time_contract/mode ausente ou inválido")
             elif timing.get("mode") == "sequence_frames":
-                if timing.get("duration_ticks") != sum(durations or []):
+                if valid_ticks and timing.get("duration_ticks") != sum(durations):
                     problems.append(f"{sid}/{eid}: duração da entidade deve fechar com a timeline da sequência")
             else:
                 lifetime = timing.get("total_lifetime_ticks")
@@ -293,9 +302,53 @@ def _minimal_valid():
     }
 
 
+def exposure_sheet(manifest, sequence_id, windows):
+    """Project a validated contract onto one pass of the actor's authored clock."""
+    seq = next((s for s in manifest["sequences"] if s["id"] == sequence_id), None)
+    if seq is None:
+        raise ValueError(f"sequência ausente: {sequence_id}")
+    total = sum(seq["duration_ticks"])
+    for start, stop in windows:
+        if not 0 <= start < stop <= total:
+            raise ValueError(f"janela [{start}, {stop}) fora da sequência de {total} ticks ou vazia")
+    rows = []
+    start = 0
+    for i, (pose, duration) in enumerate(zip(seq["frame_ids"], seq["duration_ticks"])):
+        stop = start + duration
+        row = {"pose": pose, "start": start, "stop": stop, "duration": duration,
+               "tracks": {e["id"]: e["track"][i] for e in seq["entities"]}}
+        if windows:
+            row["active_intersections"] = [[max(start, a), min(stop, b)] for a, b in windows
+                                           if max(start, a) < min(stop, b)]
+        rows.append(row)
+        start = stop
+    return {"schema": "sms_exposure_sheet_v1", "scope": "authored_timeline_only",
+            "project": manifest["project"], "character": manifest["character_id"], "sequence": sequence_id,
+            "tick_definition": manifest["timing_and_hardware"]["tick_definition"],
+            "timing_status_in_source": seq["timing_status"], "interval": "[start,stop)",
+            "initial_state": seq["initial_state"], "final_state": seq["final_state"], "loop": seq["loop"],
+            "duration_ticks": total, "caller_proposed_active_windows": windows or None,
+            "entity_clocks": {e["id"]: e["time_contract"] for e in seq["entities"]}, "rows": rows}
+
+
 def self_check():
     good = _minimal_valid()
     assert audit(good) == [], audit(good)
+    sheet = exposure_sheet(good, "demo", [(1, 3)])
+    assert [row["active_intersections"] for row in sheet["rows"]] == [[[1, 2]], [[2, 3]]]
+    assert sheet["rows"][-1]["stop"] == sheet["duration_ticks"] == 4
+    assert "active_intersections" not in exposure_sheet(good, "demo", [])["rows"][0]
+    for sid, windows in (("absent", []), ("demo", [(1, 1)]), ("demo", [(3, 5)])):
+        try:
+            exposure_sheet(good, sid, windows)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("consulta temporal inválida aceita")
+    for duration in (True, "2", 0):
+        bad = json.loads(json.dumps(good))
+        bad["sequences"][0]["duration_ticks"][0] = duration
+        assert any("duration_ticks" in p for p in audit(bad))
     bad = json.loads(json.dumps(good))
     bad["sequences"][0]["principles_applied"] = bad["sequences"][0]["principles_applied"][:6]
     result = audit(bad)
@@ -320,6 +373,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest")
     parser.add_argument("--self-check", action="store_true")
+    parser.add_argument("--exposure-sheet", metavar="SEQUENCE_ID", help="emitir a folha de exposição em JSON")
+    parser.add_argument("--active-window", type=int, nargs=2, action="append", default=[],
+                        metavar=("START", "STOP"), help="hipótese em ticks do ator [START,STOP), repetível")
     args = parser.parse_args()
     if args.self_check:
         return self_check()
@@ -327,9 +383,12 @@ def main():
         print("uso: audit_animation_contract.py --manifest <json> | --self-check",
               file=sys.stderr)
         return 3
+    if args.active_window and not args.exposure_sheet:
+        parser.error("--active-window requer --exposure-sheet")
     try:
-        manifest = json.loads(Path(args.manifest).read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+        source = Path(args.manifest).read_bytes()
+        manifest = json.loads(source.decode("utf-8-sig"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         print(f"[FAIL] manifest ilegível: {exc}", file=sys.stderr)
         return 1
     problems = audit(manifest)
@@ -337,6 +396,15 @@ def main():
         for problem in problems:
             print(f"[FAIL] {problem}")
         return 1
+    if args.exposure_sheet:
+        try:
+            sheet = exposure_sheet(manifest, args.exposure_sheet, args.active_window)
+        except ValueError as exc:
+            print(f"[FAIL] {exc}", file=sys.stderr)
+            return 1
+        sheet["manifest_sha256"] = hashlib.sha256(source).hexdigest()
+        print(json.dumps(sheet, indent=2))
+        return 0
     print(f"[OK] animation_contract: {len(manifest['sequences'])} sequências, "
           f"{sum(s['source_pose_count'] for s in manifest['sequences'])} poses propostas; "
           "contagens metasprite/runtime continuam separadas")

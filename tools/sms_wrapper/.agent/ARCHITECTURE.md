@@ -24,6 +24,10 @@
    Use `workflows/artwork-to-rom-lifecycle.md` para os estados e limites de
    promoção entre concept, harmonia do elenco, animação, prova, ROM diagnóstica
    e produção.
+   Para construir um lutador jogável, comece em
+   [`workflows/playable-fighter.md`](workflows/playable-fighter.md). Ele reúne
+   a ficha parametrizada, a folha de exposição e a verificação de movimento,
+   reação e balanceamento no duelo.
 4. Erro vira lição via workflow `curation-learning.md`.
 
 ## Princípios (herdados do SGDKForge)
