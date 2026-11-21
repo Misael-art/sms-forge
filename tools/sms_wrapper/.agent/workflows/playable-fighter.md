@@ -122,6 +122,33 @@ e [decisão sobre o Dr. Social](../../../../SMS_projects/master_of_fighters/doc/
 Esses caminhos são exemplos da fábrica central. Em projeto materializado,
 consultar a raiz central do SMSForge para abrir o exercício.
 
+## Ensaio de uma troca completa
+
+Direção escolhe um ataque do GDD e especifica o que o jogador deve perceber
+ao acertar, bloquear ou errar. O executor registra comando, face, distância e
+primeiro tick livre de cada lado. Arte, áudio e QA usam os mesmos três casos.
+Para cada linha aplicável abaixo, anote na ficha do golpe a decisão vigente,
+o responsável, o controle que deve passar e a variação que deve falhar.
+Uma mecânica em estudo volta à direção antes de entrar no orçamento da cena.
+
+| Decisão do recorte | Exercício e critério de revisão |
+|---|---|
+| Comando e conflitos | No reconhecedor do modo, exercitar pressão e soltura em n−1/n/n+1, acorde, virada, L+R e U+D. Registrar máscara recebida, candidatos, comando consumido e decisão do resolvedor inclusive em contato simultâneo. |
+| Fases e caixas | Na tabela usada pelo combate, observar antes, primeiro e último tick ativo e primeiro livre. Testar último pixel dentro, primeiro fora, canto e espelho. Um overlay de treino autorizado lê a mesma caixa consumida pelo resolvedor. |
+| Contato e relógios | No tick que altera vida ou guarda, juntar posição, caixa, reação e pose solicitada/residente/submetida ao framebuffer. Para hitstop autorizado, escrever quais relógios avançam durante a pausa e testar o primeiro input livre. A receita de impacto abaixo inclui um caso de dano com pose atrasada. |
+| Reação, queda e retomada | No mudo e a 1×, verificar se a postura distingue hit, block e whiff. Se houver tremor, manter a caixa física no lugar previsto. Para queda autorizada, seguir lançamento, chão e primeiro tick vulnerável. Exercitar erro sem faísca e tentativa de atingir durante a levantada. |
+| Âncora e materiais | Comparar pé de apoio, ponta da arma, caixa e cor por material antes, durante e após o golpe nas duas faces. Na composição que divide o ator entre BG e sprites, conferir P0 e P1 sobre o pior fundo com o HUD visível. |
+| Câmera e cenário | Levar os dois atores do centro ao canto. Quando houver reação ambiental, verificar gatilho, oclusão, fim e reset ao trocar de round. Medir SAT, pico por linha e pior VBlank na composição mais cara. |
+| Recurso, defesa e abuso | Registrar saldo antes/depois de hit, guarda, erro e reset. Testar custo exato, insuficiente, saturação e evento repetido. Para combo ou juggle aprovado, demonstrar a saída defensiva e a fronteira que encerra a sequência. |
+| Áudio | Repetir hit/guarda/erro com música e SFX disputando canal. Capturar início, prioridade e restauração na interrupção, pausa e fim do round. Conferir se a reação visual ainda comunica o resultado com o som desligado. |
+| HUD, rematch e treino | Aplicar o menor dano autorizado perto de uma fronteira da barra. Confrontar vida, barra e feedback transitório. No rematch, verificar limpeza de input e primeira ação legal. Se houver dummy, o replay passa pelo reconhecedor do jogo. |
+| CPU | Partir da mesma posição, estado visível e semente, variar só o input oculto do rival. Comparar decisão e tick de reação até o primeiro estímulo perceptível. Repetir por dificuldade autorizada. |
+| Repetição e restauração | Repetir a entrada por tick a partir da mesma configuração e comparar o estado autoritativo a cada tick. Localizar o primeiro campo divergente. Se o GDD pedir restauração, exercitar salvar, avançar, restaurar e reexecutar, incluindo parser, timers e objetos. |
+
+Os exercícios vieram da [auditoria dos 35 aspectos e seus controles](../../../../SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_impacto_sistemas_pipeline.md).
+Para executar o caso de regressão dos recibos, siga a
+[receita de impacto](../skills/sms-recipe-animacao-impacto.md#comparar-os-contatos-de-duas-gravações).
+
 ## Fechamento e passagem ao próximo agente
 
 Entregar uma linha por caso com **esperado, observado, veredito, ROM SHA,

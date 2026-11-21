@@ -137,6 +137,7 @@ def main():
               "audit_hardware_constants.py",
               "audit_debug_markers.py",
               "audit_observed_cases.py",
+              "audit_duel_contacts.py",
               "audit_tilemap_bounds.py",
               "audit_tilemap_mirror.py",
               "audit_vscroll_wrap.py",
@@ -181,6 +182,19 @@ def main():
                            f"selfcheck:{g}"))
     print("== Fase 2: fixtures geradas ==")
     tmp = tempfile.mkdtemp(prefix="smsforge_selftest_")
+    from audit_duel_contacts import fixture as contact_fixture
+    stepped, replay, rom_sha = contact_fixture()
+    stepped_path = os.path.join(tmp, "stepped.json")
+    replay_path = os.path.join(tmp, "continuous.json")
+    with open(stepped_path, "w", encoding="utf-8") as stream:
+        json.dump(stepped, stream)
+    command = [os.path.join(HERE, "audit_duel_contacts.py"), "--stepped", stepped_path,
+               "--continuous", replay_path, "--rom-sha256", rom_sha]
+    for pose, status in ((8, 0), (7, 1)):
+        replay["actual_contacts"][0]["presented"] = pose
+        with open(replay_path, "w", encoding="utf-8") as stream:
+            json.dump(replay, stream)
+        results.append(run(command, status, f"contact receipts: requested 8, presented {pose}"))
     from audit_animation_contract import _minimal_valid as animation_fixture
     animation_path = os.path.join(tmp, "animation.json")
     with open(animation_path, "w", encoding="utf-8") as stream:

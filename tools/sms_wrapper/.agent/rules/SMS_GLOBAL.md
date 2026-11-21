@@ -2801,3 +2801,10 @@ aceite atual. Self-checks cobrem58,60,57,999, média enganosa, PAL50, booleanos
 sem amostras, contador parado, SHA divergente e projeção recusada sem saída.
 Registro: `doc/curation/2026-11-01_aceite_fps_60_piso_58.json`; aplica L013,
 L035 e L138 sem duplicar IDs. Nenhuma nova ROM/jogo é aprovada por esta curadoria.
+
+Aplicação ao duelo (§133, L060/L098/L138). Para os recibos MFD1 de round
+passo a passo e replay contínuo, `audit_duel_contacts.py` compara a ordem de
+atacante, pose pedida e vida do defensor, e localiza divergência de pose
+publicada no contato de cada gravação. É diagnóstico de consistência dos
+recibos. A revisão de framebuffer, o teste de volta ao controle e a medição
+contínua continuam a cargo do trecho exercitado em `playable-fighter.md`.

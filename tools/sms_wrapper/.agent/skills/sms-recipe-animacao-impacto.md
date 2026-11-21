@@ -119,6 +119,42 @@ em `probe_hitstop`, facing virando após troca de lado no ar (kage/MSSF2T:
 - Gate de animação com frames reordenados ou ação clonada com outro nome —
   `audit_animation_semantics.py` reprova (L037, §42).
 
+### Comparar os contatos de duas gravações
+
+Para os recibos MFD1 do gravador de round e de seu replay contínuo, execute
+da raiz da fábrica, com o SHA do binário ensaiado. O exemplo usa a b11-r2
+preservada no acervo do Master of Fighters.
+
+```sh
+base=SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119
+tool=tools/sms_wrapper/audit_duel_contacts.py
+rtk proxy tools/sms_wrapper/run_host.sh python "$tool" --self-check
+rtk proxy tools/sms_wrapper/run_host.sh python "$tool" \
+  --rom-sha256 f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7 \
+  --stepped "$base/scene02-actions-qa6-b11-r2/6-round/round-completo.json" \
+  --continuous "$base/scene02-actions-continuous6-b11-r2-v2/6-continuous/round-continuo.json"
+```
+
+O controle é o primeiro soco, pose 8 e vida de Alis 100→94. A reprodução
+completa deve sair com código 1. No nono contato a ordem e o dano conferem,
+mas no VDP 674 o probe indica pose pedida 46 e publicada 45. No contínuo,
+consulte a imagem 552, tick 472, que registra 46/46. Use os hashes dos
+recibos para cotejar a auditoria. A ferramenta lê identificadores publicados
+e compara contatos com dano relatados por duas sessões ligadas à mesma ROM.
+Guarda, whiff, integridade dos pixels de P0/P1, duração do hitstop, FPS e
+determinismo por tick exigem observações próprias. Para hitstop, fixe o
+evento inicial, o avanço dos relógios de input, lógica, apresentação e som,
+e o primeiro comando que volta a produzir ação.
+
+Confira ainda de onde o gravador tira cada ID. No Saque desta build,
+`pose_used_for_contact=2` é a segunda exposição do golpe. O primeiro
+desenho no repertório é 45, logo a exposição corresponde a 45 + 2 − 1 = 46.
+Comparar diretamente 2 com 46 criaria um segundo defeito fictício. Há também
+um perfil da Cena 02 sem repertório que copia o mesmo valor para pedida,
+residente e apresentada. Para esse perfil, verificar a publicação exige
+observar SAT/PNT e o framebuffer. Antes de reutilizar a receita em outra
+build, conferir o produtor da sonda, o perfil compilado e a unidade do ID.
+
 ## 5. Vídeo nativo
 
 `SMS_projects/MSSF2T/out/evidence/recipe_combate.mp4` (mesma captura da

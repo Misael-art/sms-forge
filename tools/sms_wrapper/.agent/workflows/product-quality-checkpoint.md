@@ -69,6 +69,13 @@ ampliar o elenco, o slice de produção fecha essa relação com um ciclo comple
 
 ## Revisão e decisão de crescimento
 
+Em um duelo, use o [ensaio de uma troca completa](playable-fighter.md#ensaio-de-uma-troca-completa)
+para escolher o primeiro elo que precisa de correção. Exemplo de HUD:
+compare a vida antes/depois do dano mínimo e o que o jogador vê a 1×.
+Se 100 e 94 ocupam o mesmo número de segmentos, verifique se existe outra
+resposta visível à perda no prazo de leitura decidido para a cena. Preserve
+o quadro do contato e o de retorno ao controle, com áudio e pose identificados.
+
 Revisor independente inspeciona os casos e relata defeito, risco, oportunidade
 ou gosto, com cena/frame/input, impacto e reteste. Use
 `quality_review_router.py` e os gates específicos; produtor não se autoaprova.
