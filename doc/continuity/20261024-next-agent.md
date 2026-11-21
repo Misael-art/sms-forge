@@ -1,5 +1,17 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-21 · Início de projeto e transferência entre gêneros
+
+O [registro da revisão](../curation/2026-11-21_roteiro_primeiro_trecho.json)
+documenta o que o criador de projetos materializa e os limites da verificação.
+Implementação `5de51e8f9cd40950c89797434dfa8ef5036a8f5f`. No Linux passaram 143/143
+testes de base, 76 medidores e os checks de constantes, documentação e memória.
+O modelo novo solicita beat, caso negativo e retomada antes de storyboard e
+arte. Cada família adiada retorna no planejamento da cena que a utiliza.
+A produção continua no Master of Fighters. Aplicar os casos de golpe e volta
+ao controle na Cena 02 e preservar o primeiro quadro divergente já registrado
+abaixo. Arte, gameplay e FPS exigem provas atuais do consumidor.
+
 ## 2026-11-21 · Rever o contato do Saque na Cena 02
 
 A [curadoria dos 11 achados](../curation/2026-11-21_mof_impacto_sistemas_pipeline.json)
