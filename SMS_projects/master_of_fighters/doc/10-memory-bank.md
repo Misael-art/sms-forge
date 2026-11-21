@@ -1,5 +1,9 @@
 # 10-memory-bank — master_of_fighters
 
+## Cena 02 · auditoria de impacto, sistemas e pipeline
+
+A [auditoria dos pilares V–VIII](curation_candidates/2026-11-21_auditoria_impacto_sistemas_pipeline.md) separa o impacto intencional, o hitstun e os atrasos de publicação, e cruza comandos, recursos, áudio, interface, IA e dados com o consumidor da b11-r2. Antes de expandir, a proposta é provar contato, comando e pose no mesmo trecho e fechar as decisões de GD01/GD02 que o piloto ainda não resolve. A [fila de curadoria](curation_candidates/2026-11-21_auditoria_impacto_sistemas_pipeline.json) registra os casos positivos/negativos e os responsáveis.
+
 ## Campanha · varredura de narrativa e cenas
 
 A [auditoria de narrativa](curation_candidates/2026-11-21_auditoria_narrativa_e_cenas.md) cobre os quatro pontos do arco, seis técnicas de cena e sete grupos de referência do anexo. Há direção de campanha, roteiro e contratos de transição. A D01 e a b11-r2 provam recortes de composição e duelo. A passagem de apresentação à guarda e ao primeiro comando, incluindo skip, ainda precisa de prova própria. A [candidatura de curadoria](curation_candidates/2026-11-21_auditoria_narrativa_e_cenas.json) registra as decisões pendentes e os casos de validação.
