@@ -1,5 +1,9 @@
 # 10-memory-bank — master_of_fighters
 
+## Cena 02 · auditoria da direção de personagens
+
+A revisão identificou lacunas entre as decisões de design, o briefing que gera as poses e os artefatos que o build admite em modo de ensaio. Para o próximo recorte de produção, a proposta é fechar comando e categoria, função no duelo, identidade visual por pose e uma prova do contato com resposta do rival. A [auditoria em quatro pilares](curation_candidates/2026-11-21_auditoria_direcao_personagens.md) e a [fila de curadoria](curation_candidates/2026-11-21_auditoria_direcao_personagens.json) registram prioridades, responsáveis e exercícios de validação. A homologação canônica está pendente. O piso de 58 permanece reprovado no ensaio b11-r2.
+
 ## Cena 02 · correção da categoria dos normais
 
 Em pé, toque em 1 é soco fraco, segurar 1 é soco forte, toque em 2 é chute fraco e segurar 2 é chute forte. Alis expressa `pe_1_longo` com uma espadada direta. A prova desse normal usa somente o botão 1 sustentado. O registro de `#45–50` continua como evidência do ensaio direcional da b11-r2. Corrigir o vínculo entre comando, ação e arte antes da próxima rodada de poses. [Decisão do proprietário](decisions/scene02-normais-dois-botoes_owner_20261121.json).
