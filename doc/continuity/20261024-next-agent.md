@@ -1,5 +1,17 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-21 · Concluir Alis contra Alis
+
+O [prompt do executor](20261121-prompt-concluir-alis-espelho.md) parte da
+[curadoria da b32](../curation/2026-11-21_alis_espelho.json), commit
+`655984e75a5512a957f8d5165cf57ffcaadc96e8`. Oito recibos arquivados foram
+conferidos contra a ROM e suas duas sessões. No Linux passaram 143/143 casos
+de base, 76 medidores, sincronia documental e captura de lições.
+O salto e a espadada possuem controle com Hayato. As duas janelas da b32
+ficaram abaixo de 58. No consumidor, começar por separar o estado das
+jogadoras e preparar o espelho, depois fechar os doze normais, a reação da
+vítima e o agarrão no mesmo binário. A curadoria não produziu ROM nova.
+
 ## 2026-11-21 · Início de projeto e transferência entre gêneros
 
 O [registro da revisão](../curation/2026-11-21_roteiro_primeiro_trecho.json)
