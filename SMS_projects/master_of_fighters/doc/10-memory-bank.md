@@ -1,5 +1,9 @@
 # 10-memory-bank — master_of_fighters
 
+## Campanha · varredura de narrativa e cenas
+
+A [auditoria de narrativa](curation_candidates/2026-11-21_auditoria_narrativa_e_cenas.md) cobre os quatro pontos do arco, seis técnicas de cena e sete grupos de referência do anexo. Há direção de campanha, roteiro e contratos de transição. A D01 e a b11-r2 provam recortes de composição e duelo. A passagem de apresentação à guarda e ao primeiro comando, incluindo skip, ainda precisa de prova própria. A [candidatura de curadoria](curation_candidates/2026-11-21_auditoria_narrativa_e_cenas.json) registra as decisões pendentes e os casos de validação.
+
 ## Cena 02 · auditoria da pose de guarda
 
 O neutro inicial da b11-r2 manteve 21 imagens RGB iguais, com `#00/#16`, pivôs e hurtboxes estáveis. A guarda já serve como referência de identidade. Respiração, variantes e saídas em cada fase ainda precisam de ficha e prova em ROM. A [auditoria do idle](curation_candidates/2026-11-21_auditoria_idle_stance.md) e a [candidatura de curadoria](curation_candidates/2026-11-21_auditoria_idle_stance.json) priorizam a guarda em pé e seu vínculo com marcha, defesa e golpe, sem reabrir os controles aceitos do par.
