@@ -149,6 +149,30 @@ Os exercícios vieram da [auditoria dos 35 aspectos e seus controles](../../../.
 Para executar o caso de regressão dos recibos, siga a
 [receita de impacto](../skills/sms-recipe-animacao-impacto.md#comparar-os-contatos-de-duas-gravações).
 
+## Completar o repertório quando o mesmo personagem ocupa os dois controles
+
+Parta da lista de ações autorizada pelo GDD. Abra uma linha por postura,
+botão e força, mais uma por reação exigida da vítima. Registre a versão
+em que cada linha teve arte, entrada e resultado observados. Ao passar
+de um golpe-piloto para o repertório, mantenha as linhas ainda vazias
+visíveis até a revisão final. Um chute já demonstrado vira controle de
+regressão. Uma guarda que evita dano ainda precisa mostrar o impacto.
+
+No duelo espelhado, o ID do personagem pode se repetir. Separe os estados
+por jogador. Teste entrada simultânea, troca de lado e inversão de papéis.
+Confira ambos os trajes no mesmo framebuffer com a paleta compartilhada.
+No agarrão, use uma folha de exposição com duas trilhas no mesmo relógio.
+Marque o ponto de pega, o quadro de soltura, a queda e o primeiro comando
+aceito de cada ator. Reproduza também o erro por distância.
+
+Compare o primeiro uso após boot com o golpe repetido e com uma sequência
+de movimento. Para cada divergência, localize entrada consumida, lógica,
+pose pedida, residente e submetida, pivô e pixels de ambos os atores.
+Compare gravação contínua e avanço por quadros no mesmo SHA. O recorte de
+áudio editado precisa identificar o original e o deslocamento aplicado.
+Revalide a matriz na ROM candidata e registre qualquer linha aberta.
+Veja a [aplicação em Alis](../../../../doc/curation/2026-11-21_alis_espelho.json).
+
 ## Fechamento e passagem ao próximo agente
 
 Entregar uma linha por caso com **esperado, observado, veredito, ROM SHA,
