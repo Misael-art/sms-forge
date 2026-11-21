@@ -65,6 +65,7 @@ NEG_DMA = ("sem dma", "nao existe dma", "não existe dma", "nao ha dma",
 def _docs(root):
     pats = [os.path.join(root, "doc", "**", "*.md"),
             os.path.join(root, "tools", "sms_wrapper", ".agent", "**", "*.md"),
+            os.path.join(root, "tools", "sms_wrapper", "modelo", "**", "*.md"),
             os.path.join(root, "AGENTS.md"),
             os.path.join(root, "tools", "sms_wrapper", "mugen2sms", "**", "*.py")]
     out = []
@@ -245,6 +246,13 @@ def _self_check():
     assert check_text("| Subpaletas | 2 × 16 (índice 0 transparente nas duas) |")
     assert check_text("Duas subpaletas de 16 com índice 0 transparente.")
     assert not check_text("BG índice 0 visível; P1 sprite índice 0 transparente.")
+    with tempfile.TemporaryDirectory() as root:
+        template = Path(root, "tools/sms_wrapper/modelo/doc/13-spec-cenas.md")
+        template.parent.mkdir(parents=True)
+        template.write_text("| Subpaletas | 2 × 16 (índice 0 transparente nas duas) |", encoding="utf-8")
+        assert audit(root), "modelo precisa participar da varredura"
+        template.write_text("BG índice 0 visível; P1 sprite índice 0 transparente.", encoding="utf-8")
+        assert not audit(root)
     assert not check_text("Corrigido: dizia índice 0 transparente nas duas paletas.")
     assert not check_text("Cena usa 30 cores por contrato, com slots livres reservados.")
     assert not check_text("Antes dos cortes, o pior par chega a 17 sprites/linha.")

@@ -12,8 +12,8 @@
 | RAM | 8 KB |
 | Sprites por scanline | 8 |
 | Sprites na SAT | 64 |
-| Subpaletas | 2 × 16 (índice 0 transparente nas duas) |
-| Cores úteis simultâneas | 30 |
+| Subpaletas | 2 × 16 entradas. No BG, o índice 0 é visível. Nos sprites, o índice 0 de P1 é transparente. |
+| Cores da cena | Registrar a ocupação de P0/P1 por cenário, atores, HUD e efeitos na composição real. |
 | Janela VBlank | ~4.5 ms (NTSC) — **não existe DMA** |
 | ROM sem mapper | 48 KB |
 

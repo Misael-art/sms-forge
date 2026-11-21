@@ -11,6 +11,11 @@ roteiro → storyboard (grid 8×8) → coreografia → **simulador de sprites** 
 orçamento (`scene_budget_v1`) → contrato de asset → model sheet → assets
 (gates de recursos/luma/procedência) → runtime (build gate) → evidência.
 
+Identifique no storyboard o beat e o caso do roteiro que esta cena realiza.
+Para uma nova família de ações ou transição, use os [ensaios por família](first-playable-slice.md#do-beat-ao-caso-observável)
+ao planejar a coreografia e repita esses casos na ROM. Uma família adiada no
+primeiro trecho volta ao planejamento quando chegar a sua cena.
+
 No simulador e no pior quadro, somar todos os atores, HUD, projéteis e efeitos
 que aparecem juntos, incluindo a pose de maior largura e os pontos de contato;
 um idle isolado não representa a cena completa. Se a tela não usa sprites,

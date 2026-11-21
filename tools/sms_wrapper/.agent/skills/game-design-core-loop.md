@@ -46,8 +46,12 @@ aumentar HP sozinho não demonstra IA melhor. Repetição máxima, invulnerabili
 e contra-ataque são escolhas do jogo, não regras universais importadas de bosses 3D.
 
 ## Game feel no SMS
-hitstop curto (frames), knockback fixo, screen shake = offset de scroll global.
-Tudo medido em frames — nunca "um tiquinho".
+Escolha o sinal pelo evento e pela ação seguinte que o jogador precisa tomar.
+Em plataforma pode ser o pé firmando no pouso; em puzzle, a peça que volta
+ao cursor após uma jogada inválida. Hitstop, recuo e tremor exigem função
+definida no GDD. Se usados, meça duração, deslocamento e volta ao controle.
+Os [ensaios por família](../workflows/first-playable-slice.md#do-beat-ao-caso-observável)
+ligam cada escolha ao roteiro e ao caso negativo.
 
 Construir uma hierarquia de feedback por evento: ação comum, impacto relevante,
 conclusão. Escolher o menor conjunto que comunica a consequência. Partículas,

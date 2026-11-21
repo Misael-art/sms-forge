@@ -23,6 +23,7 @@ mkdir -p "$DEST/rascunho" "$DEST/data" "$DEST/inc" "$DEST/res" "$DEST/out" "$DES
 cat > "$DEST/.agent/README.md" <<EOF
 .agent local de $NAME — MATERIALIZACAO.
 Fonte canonica: tools/sms_wrapper/.agent/ (regras sempre ativas).
+Entrada de produção: [novo projeto](../../../tools/sms_wrapper/.agent/workflows/new-project.md).
 Politica: arquivo local existente NAO e sobrescrito pelo bootstrap.
 EOF
 
@@ -59,4 +60,6 @@ fi
 
 echo "[OK] projeto instanciado: $DEST"
 echo "     hierarquia de verdade materializada (${#REQUIRED[@]} arquivos)"
-echo "proximo passo: preencher $DEST/doc/11-gdd.md e rodar $NAME/build.sh"
+echo "próximo passo: seguir tools/sms_wrapper/.agent/workflows/new-project.md"
+echo "fechar escopo no GDD e beats/casos em doc/12-roteiro.md; conferir o plano da raiz:"
+echo "  tools/sms_wrapper/run_host.sh python tools/sms_wrapper/audit_specialization.py --project SMS_projects/$NAME --slice-plan"

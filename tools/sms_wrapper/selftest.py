@@ -30,17 +30,18 @@ BOOTSTRAP_REQUIRED = (
 
 def _check_bootstrap():
     """Cria um projeto descartavel e prova que a hierarquia de verdade materializa."""
-    name = "_selftest_bootstrap_tmp"
+    from uuid import uuid4
+    name = "_selftest_bootstrap_" + uuid4().hex
     dest = os.path.normpath(os.path.join(HERE, "..", "..", "SMS_projects", name))
     script = os.path.join(HERE, "new_project.sh")
-    if os.path.exists(dest):
-        shutil.rmtree(dest, ignore_errors=True)
+    created = False
     try:
         r = subprocess.run(["bash", script, name], capture_output=True, text=True)
         if r.returncode != 0:
             tail = (r.stdout + r.stderr).strip().splitlines()
             print(f"  [XX ] bootstrap new_project.sh falhou  ({tail[-1][:80] if tail else ''})")
             return False
+        created = True
         # ausente OU vazio conta como nao materializado
         bad = [f for f in BOOTSTRAP_REQUIRED
                if not (os.path.isfile(os.path.join(dest, f))
@@ -59,11 +60,39 @@ def _check_bootstrap():
         if leftover.returncode == 0:
             print("  [XX ] bootstrap deixou placeholder __PROJECT_NAME__ sem substituir")
             return False
+        from pathlib import Path
+        memory = Path(dest, "doc/10-memory-bank.md").read_text(encoding="utf-8")
+        fps_rows = [row.lower() for row in memory.splitlines() if row.startswith("|") and "fps" in row.lower()]
+        if len(fps_rows) != 1 or not all(part in fps_rows[0] for part in ("ntsc", "60", "58", "não iniciado")):
+            print("  [XX ] memory bank inicial perdeu o alvo, piso ou estado pendente de FPS")
+            return False
+        check = [os.path.join(HERE, "audit_specialization.py"), "--project", dest, "--slice-plan"]
+        if not run(check, 1, "roteiro recém-materializado ainda não pode avançar"):
+            return False
+        script = Path(dest, "doc/12-roteiro.md")
+        text = script.read_text(encoding="utf-8").replace(
+            "_(gesto ou gatilho, estado inicial e consequência no mundo)_",
+            "Ao soltar a direção, o personagem para no chão.")
+        text = text.replace("| pendente | — | — | — | — |",
+                            "| fora | Recorte de parada em piso plano | — | — | — |")
+        for family in ("Ciclo central", "Repouso", "Locomoção"):
+            text = text.replace(f"| {family} | fora | Recorte de parada em piso plano | — | — | — |",
+                                f"| {family} | agora | B01 | Pé estabiliza | Sem deriva em neutro | Volta a andar |")
+        script.write_text(text, encoding="utf-8")
+        if not run(check, 0, "roteiro de plataforma liga parada, repouso e retomada ao beat"):
+            return False
+        script.write_text(text.replace("Sem deriva em neutro", "—"), encoding="utf-8")
+        if not run(check, 1, "caso sem controle negativo reprovado"):
+            return False
+        if "new-project.md" not in r.stdout or "--slice-plan" not in r.stdout:
+            print("  [XX ] bootstrap omitiu a entrada de produção ou a verificação do roteiro")
+            return False
         print(f"  [OK ] bootstrap materializa hierarquia de verdade  "
               f"({len(BOOTSTRAP_REQUIRED)} arquivos, sem placeholder)")
         return True
     finally:
-        shutil.rmtree(dest, ignore_errors=True)
+        if created:
+            shutil.rmtree(dest)
 
 def _art_review_manifest(root, asset_kind="concept", required_axes=None):
     """Create a hash-bound, structurally complete art-review fixture."""

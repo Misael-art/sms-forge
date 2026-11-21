@@ -16,6 +16,13 @@ evidência de diversão ou aceitação de mercado.
 
 ## Casos que coexistem na cena real
 
+Antes de ampliar o trecho, confronte o roteiro com os resultados dos casos:
+para cada beat e família marcada `agora`, identifique a ROM, a sessão, a
+variação negativa, a consequência visível e a retomada. Um mesmo vídeo pode
+conter vários beats; indique o intervalo próprio de cada um. Se faltar prova,
+mantenha esse caso pendente na memória. Na inclusão de uma família adiada,
+planeje e exercite a cena correspondente antes de promovê-la.
+
 | Eixo | Caso e evidência | Gate e limite |
 |---|---|---|
 | Controle | Entrada aceita → ação → feedback → consequência; neutralização/reentrada e bordas relevantes | `sms-gameplay-experience-review.md`, `audit_subagent_session.py`; ACK não prova ação |

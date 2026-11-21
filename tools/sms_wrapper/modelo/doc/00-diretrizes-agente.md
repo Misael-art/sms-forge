@@ -10,6 +10,11 @@
 3. `doc/10-memory-bank.md` (este projeto — estado real)
 4. este arquivo
 
+Para tirar o jogo do zero, siga `tools/sms_wrapper/.agent/workflows/new-project.md`
+na raiz da fábrica. A primeira cena nasce do roteiro e dos casos exercitáveis
+do projeto. O fluxo comum é `first-playable-slice.md`; para duelo de luta,
+abra também `playable-fighter.md` antes de encomendar poses ou ampliar elenco.
+
 ## Regra de ferro
 **"Se não foi visto rodando no emulador, não existe."**
 Vocabulário obrigatório: `documentado ≠ implementado ≠ buildado ≠

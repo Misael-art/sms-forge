@@ -2808,3 +2808,15 @@ atacante, pose pedida e vida do defensor, e localiza divergência de pose
 publicada no contato de cada gravação. É diagnóstico de consistência dos
 recibos. A revisão de framebuffer, o teste de volta ao controle e a medição
 contínua continuam a cargo do trecho exercitado em `playable-fighter.md`.
+
+## 134. Do roteiro à primeira interação de qualquer gênero
+
+No projeto novo, antes de storyboard e arte, cada beat do primeiro trecho
+jogável tem caso exercitável no próprio roteiro. A direção decide por família
+o que entra agora, fica para depois ou sai do escopo. O ciclo central inclui
+resposta, variação negativa e retomada. `audit_specialization.py --slice-plan`
+confere essa cobertura documental. A leitura dos movimentos e a verdade do
+escopo dependem da revisão do GDD e da execução prevista em
+`first-playable-slice.md` e `product-quality-checkpoint.md`.
+Um duelo acrescenta `playable-fighter.md`; o perfil MFD1 é próprio dos
+consumidores compatíveis. Aplicação de §§8/16/42/133 aos projetos nascentes.

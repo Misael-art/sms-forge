@@ -3,7 +3,7 @@
   "description": "Jornada canonica de cena visual: roteiro -> storyboard pixel -> coreografia -> MEDICAO -> orcamento -> contrato -> model sheet -> assets -> runtime -> evidencia.",
   "steps": [
     {"id": "S0_scope", "kind": "human", "label": "Escopo e spec",
-     "inputs": ["doc/11-gdd.md", "doc/13-spec-cenas.md"],
+     "inputs": ["doc/11-gdd.md", "doc/12-roteiro.md", "doc/13-spec-cenas.md"],
      "outputs": ["briefing da cena aceito"]},
     {"id": "S1_storyboard", "kind": "agent", "label": "Storyboard planta-baixa em pixel",
      "skill_path": "skills/sms-vdp-tiles.md",
