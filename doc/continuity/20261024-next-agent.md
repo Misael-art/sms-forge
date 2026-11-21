@@ -1,5 +1,18 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-21 · Rever o contato do Saque na Cena 02
+
+A [curadoria dos 11 achados](../curation/2026-11-21_mof_impacto_sistemas_pipeline.json)
+liga os 35 aspectos do parecer ao [ensaio de uma troca completa](../../tools/sms_wrapper/.agent/workflows/playable-fighter.md#ensaio-de-uma-troca-completa).
+Método e diagnóstico no commit `db574e69b9f5bf5b23ca6cc906da4c2fad5f4aa2`. No Linux, passaram
+143/143 casos de base, 76/76 medidores, sincronia documental e captura de lições.
+O lote reanalisou as gravações existentes. Na b11-r2 o nono contato coincide
+em ordem e dano. No VDP 674, tick 480, a sonda ainda indica pose publicada 45
+para a pose pedida 46. No contínuo, a imagem 552 registra 46/46. A cadência
+segue abaixo do piso 58. Retomar no consumidor pelo primeiro quadro divergente
+de P0/P1, comparar caixa, arma e HUD na mesma troca e repetir nas duas faces.
+Prioridade de comandos e hitstop dependem das decisões GD01/GD02.
+
 ## Master of Fighters · repertório completo de Alis e Hayato
 
 O [registro dos dois lutadores](../../SMS_projects/master_of_fighters/doc/repertorio_alis_hayato.md) reúne golpes, mobilidade, defesa no solo e no salto, cenas e provocação contextual. O [prompt do executor](20261119-prompt-repertorio-alis-hayato.md) parte da comparação das duas ROMs e leva cada ação aprovada até um round completo com comandos e vídeo.
