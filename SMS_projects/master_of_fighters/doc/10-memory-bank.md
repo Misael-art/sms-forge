@@ -1,5 +1,9 @@
 # 10-memory-bank — master_of_fighters
 
+## Cena 02 · correção da categoria dos normais
+
+Em pé, toque em 1 é soco fraco, segurar 1 é soco forte, toque em 2 é chute fraco e segurar 2 é chute forte. Alis expressa `pe_1_longo` com uma espadada direta. A prova desse normal usa somente o botão 1 sustentado. O registro de `#45–50` continua como evidência do ensaio direcional da b11-r2. Corrigir o vínculo entre comando, ação e arte antes da próxima rodada de poses. [Decisão do proprietário](decisions/scene02-normais-dois-botoes_owner_20261121.json).
+
 ## Cena 02 · revisão de identidade por pose da b11-r2
 
 O comparativo do framebuffer, dos sprites e das fontes localizou deriva de cabelo, roupa e leitura da katana em Hayato, compressão horizontal na marcha e perda de magenta na marcha de Alis. A pose `#46` do Saque ficou atrasada no stepping e apareceu no vídeo contínuo do mesmo SHA. A [matriz por pose e proposta de curadoria](curation_candidates/2026-11-21_scene02_identidade_por_pose.md) indexa os mosaicos e os controles. Próximo lote de correção por eixo: provar a rampa de Alis em `#38/#42/#43`, revisar a marcha de Hayato com escala uniforme e reproduzir o contato `#45→46→47` com posição publicada e framebuffer na mesma fronteira. O piso de 58 permanece reprovado.

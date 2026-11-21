@@ -1,0 +1,40 @@
+{
+  "schema": "mof_scene02_normal_input_direction_v1",
+  "date": "2026-11-21",
+  "scene": "02",
+  "status": "owner_design_correction",
+  "scope": "Família de normais em pé com dois botões e classificação da espadada direta de Alis. A decisão registra a direção de design para produção.",
+  "normals": [
+    {"id": "pe_1_curto", "button": 1, "press": "tap", "category": "normal", "family": "soco fraco"},
+    {"id": "pe_1_longo", "button": 1, "press": "hold", "category": "normal", "family": "soco forte"},
+    {"id": "pe_2_curto", "button": 2, "press": "tap", "category": "normal", "family": "chute fraco"},
+    {"id": "pe_2_longo", "button": 2, "press": "hold", "category": "normal", "family": "chute forte"}
+  ],
+  "alis_standing_button_1_hold": {
+    "action_id": "alis_landale/pe_1_longo",
+    "articulation": "espadada direta",
+    "pilot_name": "Estocada forte",
+    "b11_r2_pose_ids": [17, 18, 19],
+    "design_rule": "A família é definida pela entrada e ação lógica. A atuação usa a espada curta de Alis na vaga do soco forte. A ameaça, o contato da lâmina e a recuperação pertencem à ficha desse normal."
+  },
+  "historical_directional_trial": {
+    "decision": "scene02-first-specials_owner-trial_20261119.json",
+    "input": "baixo, depois frente relativa + nova pressão de 1",
+    "rom_sha256": "f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7",
+    "actions": [
+      {"actor": "Hayato", "name": "Saque em passada", "pose_ids": [45, 46, 47]},
+      {"actor": "Alis", "name": "Passo de escudo", "pose_ids": [48, 49, 50]}
+    ],
+    "disposition": "Manter nome, IDs e provas como rastreio do ensaio arquivado. A espadada direta de produção é verificada pelo 1 longo. Qualquer reaproveitamento de pose, alcance ou frame data do ensaio requer vínculo e prova sob o comando do normal."
+  },
+  "acceptance": [
+    "Começar com os lutadores livres em pé. Soltar cada botão antes do limiar deve acionar uma vez o fraco correspondente. Sustentar até o limiar deve acionar uma vez o forte correspondente. Soltar depois do forte deve rearmar o botão.",
+    "Para Alis, sustentar só o botão 1 e observar o comando consumido, o ID do normal, a espadada apresentada, o contato no alcance declarado, defesa, erro e recuperação. Repetir a entrada nas duas faces.",
+    "Usar 6 e 8 leituras conforme a build comparada. A decisão estabelece duração de pressão e categoria. A calibração de limiar, caixas e tempos continua no piloto e no GD01/GD02."
+  ],
+  "sources": {
+    "owner_statement": "Correção do proprietário na tarefa de 21/11/2026. O que foi chamado especial no lugar do soco forte pertence ao normal forte. Alis executa uma espadada direta.",
+    "reference_attachment_sha256": "f5a1abab107b7ddb994220ce837861390c872a8f812468ad7c35ba4bf822011e",
+    "reference_role": "Vocabulário de famílias de golpes. As propriedades e mecânicas dos jogos citados são exemplos do gênero."
+  }
+}

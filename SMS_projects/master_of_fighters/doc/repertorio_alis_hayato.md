@@ -6,7 +6,7 @@
 
 ## Controle com dois botões
 
-Frente e trás acompanham o adversário. Para ler as tabelas, **1 curto** e **2 curto** são toques; **1 longo** e **2 longo** são pressões sustentadas. Em pé, o 1 longo conserva o golpe do piloto. Em cada postura, 1 curto conserva a família de soco fraco, 2 curto a de chute fraco e 2 longo a de chute forte. A atuação de mãos e pés deve continuar identificável apesar das armas. O marco de 6 ou 8 leituras é a decisão comparativa daqueles pilotos. Medir a adequação antes de estender o limiar aos demais golpes.
+Frente e trás acompanham o adversário. **1 curto** é soco fraco, **1 longo** é soco forte, **2 curto** é chute fraco e **2 longo** é chute forte. Curto é toque e longo é pressão sustentada. Em pé, o normal forte de Alis é uma espadada direta na vaga `alis_landale/pe_1_longo`. A classificação orienta comando e lógica. O gesto e o equipamento caracterizam o lutador. O marco de 6 ou 8 leituras pertence à comparação dos pilotos. [Decisão do proprietário](decisions/scene02-normais-dois-botoes_owner_20261121.json).
 
 | Entrada proposta | Reconhecimento e consequência |
 |---|---|
@@ -44,6 +44,8 @@ Cada linha representa um golpe de **cada** lutador (12 por personagem). Os nomes
 **Chave do registro.** Use a identidade do lutador mais a chave da entrada da tabela, por exemplo `hayato/pe_1_longo` e `alis_landale/ar_2_curto`. Essas chaves organizam o inventário no documento; a ficha aponta para os IDs de origem já existentes no contrato, na animação e no motor. A provocação e os dois lutadores usam a mesma gramática. A atuação e os estados de cada lutador têm referências próprias.
 
 ## Especiais, Super e agarrão para decisão individual
+
+O comando baixo → frente + 1 da primeira linha pertence ao ensaio direcional da b11-r2. Os resultados desse ensaio documentam Saque em passada e Passo de escudo. A prova da espadada direta de Alis pertence à linha do normal em pé com 1 longo. [Delimitação do ensaio](decisions/scene02-normais-dois-botoes_owner_20261121.json).
 
 Estas seis ações de assinatura e os dois agarrões completam a **proposta** de repertório ofensivo. Para cada especial, coreografar antes de fixar janelas de comando, custos e frame data. “Baixo → frente” abaixo significa sequência direcional concluída, com tolerância de diagonal a definir no leitor. O botão confirma uma única ação; a gramática precisa distinguir sequência longa e curta. O GDD deixa poderes de pergaminho e magia em aberto. As propostas físicas abaixo permitem avaliar o conjunto sem fechar antecipadamente a magia de nenhum dos dois.
 

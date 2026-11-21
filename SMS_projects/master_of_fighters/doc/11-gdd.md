@@ -334,6 +334,13 @@ pendente**. Não transformar seus tempos herdados em números de combate.
 | GD06 | Arte + engenharia: composição em contato e carga simultânea | Medir ambos os atores em todas as distâncias/poses necessárias, HUD/objeto autorizado/PSG e pior frame. A posição fixa com pico 8 não prova aproximação. Preservar função do golpe; negociar mudança que afete alcance/identidade. |
 | GD07 | Design + QA: clareza e controle percebidos | Playtest com tarefa sem ensinar resposta, ROM/SHA, tentativas, relato literal, frames e distinção observação/interpretação. Parecer de agente não é teste com público. |
 
+**Direção do proprietário, 21/11/2026.** Em pé, toque no botão 1 aciona o soco
+fraco, segurar 1 aciona o soco forte, toque em 2 aciona o chute fraco e segurar
+2 aciona o chute forte. Em Alis, o soco forte (`alis_landale/pe_1_longo`) é
+uma espadada direta. O botão e a duração definem o normal. A arma e a atuação
+expressam a identidade da lutadora. O comando baixo → frente + 1 e suas
+poses pertencem ao ensaio direcional da b11-r2. [Decisão e critérios de prova](decisions/scene02-normais-dois-botoes_owner_20261121.json).
+
 Aceite futuro de cada movimento: preparação aparece antes da consequência;
 alcance desenhado e contato concordam; defesa/erro recebem respostas distintas;
 há contrajogo executável; retorno permite nova ação sem estado preso. Conferir

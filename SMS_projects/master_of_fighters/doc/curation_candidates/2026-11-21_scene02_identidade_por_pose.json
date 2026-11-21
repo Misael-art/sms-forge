@@ -38,6 +38,13 @@
   },
   "observed_failures": [
     {
+      "id": "normal_category_and_input",
+      "pose_ids": [17, 18, 19, 45, 46, 47, 48, 49, 50],
+      "observation": "O proprietário identificou que o golpe no espaço de soco forte foi tratado como especial. Em Alis, segurar 1 deve chamar a espadada direta como normal forte. Na ROM observada, #17–19 pertencem ao 1 longo e #45–50 pertencem ao ensaio direcional de Saque em passada e Passo de escudo.",
+      "owner_decision_path": "SMS_projects/master_of_fighters/doc/decisions/scene02-normais-dois-botoes_owner_20261121.json",
+      "correction_to_test": "Fixar entrada, ID e categoria antes de atribuir função e coreografia. Fazer o designer e o agente de arte cotejarem a ficha com o mapa de comandos. Exigir uma única espadada via botão 1 sustentado e verificar o ciclo de ataque e resposta pelo ID de normal da ROM."
+    },
+    {
       "id": "hayato_source_identity",
       "pose_ids": [
         7,
@@ -211,6 +218,7 @@
       "sms-video-evidence.md"
     ],
     "future_validation": [
+      "Classificar a espadada de Alis pelo comando do normal forte. Reprovar ficha, catálogo ou teste que use a sequência direcional do ensaio como prova da vaga de 1 longo.",
       "O gate verifica cobertura por pose e vínculo do controle no checklist existente. Revisão independente decide identidade, atuação e material na leitura real.",
       "Uma fixture positiva com os controles históricos e casos negativos de escala não declarada, perda de rampa, pose residente porém atrasada e índice de vídeo variável errado.",
       "Casos em ROM com o par e ambas as faces. Exercitar acerto, defesa, erro, punição, pior frame e por sessão o aceite das janelas contínuas conforme §133."
