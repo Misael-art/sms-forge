@@ -1,5 +1,9 @@
 # 10-memory-bank — master_of_fighters
 
+## Cena 02 · auditoria da pose de guarda
+
+O neutro inicial da b11-r2 manteve 21 imagens RGB iguais, com `#00/#16`, pivôs e hurtboxes estáveis. A guarda já serve como referência de identidade. Respiração, variantes e saídas em cada fase ainda precisam de ficha e prova em ROM. A [auditoria do idle](curation_candidates/2026-11-21_auditoria_idle_stance.md) e a [candidatura de curadoria](curation_candidates/2026-11-21_auditoria_idle_stance.json) priorizam a guarda em pé e seu vínculo com marcha, defesa e golpe, sem reabrir os controles aceitos do par.
+
 ## Cena 02 · auditoria da direção de personagens
 
 A revisão identificou lacunas entre as decisões de design, o briefing que gera as poses e os artefatos que o build admite em modo de ensaio. Para o próximo recorte de produção, a proposta é fechar comando e categoria, função no duelo, identidade visual por pose e uma prova do contato com resposta do rival. A [auditoria em quatro pilares](curation_candidates/2026-11-21_auditoria_direcao_personagens.md) e a [fila de curadoria](curation_candidates/2026-11-21_auditoria_direcao_personagens.json) registram prioridades, responsáveis e exercícios de validação. A homologação canônica está pendente. O piso de 58 permanece reprovado no ensaio b11-r2.

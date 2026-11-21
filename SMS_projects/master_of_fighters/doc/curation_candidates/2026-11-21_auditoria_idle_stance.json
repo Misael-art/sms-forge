@@ -1,0 +1,250 @@
+{
+  "schema": "smsforge_game_design_curation_candidate_v1",
+  "id": "mof_auditoria_idle_stance_2026-11-21",
+  "dedup_key": "mof-idle-vitrine-loop-hurtbox-transicoes",
+  "status": "observed_in_archived_rom_pending_curation",
+  "owner_project": "SMS_projects/master_of_fighters",
+  "review_path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_idle_stance.md",
+  "scope": {
+    "review_attachment_sha256": "b8aec9b117fbc34fd73c58dc05be030cd6a7c0f97ecc60ca54cb2d751bc45da5",
+    "parent_candidate": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_direcao_personagens.json",
+    "scene": "02",
+    "variant": "b11-r2 de seis leituras",
+    "rom_sha256": "f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7",
+    "session_id": "734bb99e3d0647bf8081588578a37133",
+    "method": "Revisão do código ligado à ROM, sonda arquivada e decodificação RGB dos frames do neutro inicial. Orientação padrão do duelo. Comparativo de pixels sem as posições onde as duas máscaras se intersectam."
+  },
+  "opening_observation": {
+    "trace_vdp_inclusive": [
+      120,
+      141
+    ],
+    "trace_logic_ticks_inclusive": [
+      51,
+      72
+    ],
+    "neutral_trace_samples": 22,
+    "decoded_video_vdp_inclusive": [
+      121,
+      141
+    ],
+    "decoded_video_frames": 21,
+    "distinct_rgb_frames": 1,
+    "frame_rgb_sha256": "7e724bbc8a3b9eef10ed366126c563cb61c015895a130da0baa7ca5a39d6aef0",
+    "projected_mask_overlap_pixels": 57,
+    "actors": [
+      {
+        "id": "hayato",
+        "pose_id": 0,
+        "pivot": [
+          111,
+          144
+        ],
+        "hurtbox_ltrb": [
+          100,
+          87,
+          123,
+          140
+        ],
+        "unoccluded_rgb_matches": 879,
+        "unoccluded_rgb_comparable": 879
+      },
+      {
+        "id": "alis_landale",
+        "pose_id": 16,
+        "pivot": [
+          144,
+          144
+        ],
+        "hurtbox_ltrb": [
+          131,
+          91,
+          155,
+          141
+        ],
+        "unoccluded_rgb_matches": 782,
+        "unoccluded_rgb_comparable": 782
+      }
+    ],
+    "trace_facing_changes": 0,
+    "alis_idle_ready_samples_at_life_21_or_9": 60
+  },
+  "state_coverage": [
+    {
+      "id": "standing_idle",
+      "status": "static_diagnostic_guard",
+      "gap": "Faltam ciclo de atuação, emenda e saídas verificadas em todas as fases."
+    },
+    {
+      "id": "crouching_idle",
+      "status": "bench_and_design_only_in_scope",
+      "gap": "Faltam transições visíveis e distinção entre postura baixa, defesa baixa e ataque baixo no mesmo SHA."
+    },
+    {
+      "id": "danger_idle",
+      "status": "no_visual_variant_in_observed_candidate",
+      "gap": "Decidir modo, limiar, precedência e ausência ou consequência mecânica."
+    },
+    {
+      "id": "turn_around",
+      "status": "initial_orientation_and_static_atlases",
+      "gap": "Exercitar cruzamento, face lógica, orientação publicada, apoio, pega e direção relativa."
+    },
+    {
+      "id": "fidget",
+      "status": "candidate_decision_pending",
+      "gap": "Definir presença, relógio, precedência e interrupção. Provocação por comando tem ficha própria."
+    }
+  ],
+  "findings": [
+    {
+      "id": "idle-as-character-reference",
+      "owner": "Direção de jogo + arte",
+      "priority": "bloqueante antes da folha",
+      "gap": "A guarda nativa dá a identidade, mas a postura da arma divergiu no brief dos golpes de Hayato e a zona de mãos, escudo e espada precisa de revisão com o rival em Alis.",
+      "exercise_pass": "Chave em 1× e 4×, referência por SHA, apoio, empunhadura, transição e retorno legíveis nas duas faces. Conservar controles do Corte curto e Estocada forte.",
+      "exercise_fail": "O brief do soco muda a katana erguida para embainhada sem transição nem decisão ou a arma de Alis se confunde com o escudo na leitura a 1×."
+    },
+    {
+      "id": "idle-motion-and-seam",
+      "owner": "Animação + revisão artística",
+      "priority": "bloqueante para aprovar o loop",
+      "gap": "Uma única pose publicada no neutro deixa ritmo, respiração, atraso entre partes e emenda sem prova.",
+      "exercise_pass": "Provar dois ciclos periódicos montados com exposições declaradas, apoio firme, continuidade do material e término compatível com o reinício.",
+      "exercise_fail": "Só o HUD muda ou todo o corpo oscila rigidamente com as solas deslizando sobre o chão."
+    },
+    {
+      "id": "hurtbox-and-exit",
+      "owner": "Design de combate + QA",
+      "priority": "bloqueante para integração",
+      "gap": "A base da hurtbox foi estável na abertura, porém as fases de idle animado ainda não têm contrato de saída, vulnerabilidade e cobertura das bordas.",
+      "exercise_pass": "Pivô e alcance coerentes em cada fase e face, com teste no limite e um pixel além. Marcha, guarda e o normal legal saem sem espera adicional causada pelo idle. Os relógios do input e da primeira apresentação ficam observados.",
+      "exercise_fail": "No mesmo alcance e estado, o balanço da guarda muda hit para whiff ou um fidget retém a guarda após um comando legal."
+    },
+    {
+      "id": "idle-variants-and-precedence",
+      "owner": "Proprietário + direção de jogo + QA",
+      "priority": "alta, conforme escopo de cada situação",
+      "gap": "As cinco situações têm níveis distintos de prova. Falta mapa por postura, vida, face e ociosidade, com entrada, retorno e precedência em relação a ação, defesa, dano e fim de round.",
+      "exercise_pass": "A ficha marca cada situação como contratada, em ensaio, adiada ou fora de escopo. Se autorizada, cada variante publica pose coerente sem roubar input nem alterar estado competitivo por acidente.",
+      "exercise_fail": "KO herda idle por fallback em cenário de produção, a virada mostra a arma no lado errado ou vida baixa muda a caixa sem decisão."
+    },
+    {
+      "id": "neutral-and-action-under-load",
+      "owner": "Engenharia VDP + QA",
+      "priority": "bloqueante para aceite em ROM",
+      "gap": "A SAT de abertura mediu 47 objetos e pico de 7 por linha em outro trecho do mesmo SHA. Falta medir a dupla animada em neutro e durante suas saídas na pior combinação de fases.",
+      "exercise_pass": "Confirmar o par em fases e distâncias de maior custo, com oclusão, SAT/PNT, padrões residentes, scanline, VBlank e pior frame. Duas janelas contínuas atendem ao piso 58 sem arredondamento.",
+      "exercise_fail": "Um idle isolado ou um boot de baixa carga passa, mas o contato ou a troca de pose com dois lutadores perde publicação ou cadência."
+    }
+  ],
+  "future_curation": {
+    "status": "queued_not_homologated",
+    "workflow_targets": [
+      "playable-fighter.md",
+      "art-review.md",
+      "product-quality-checkpoint.md"
+    ],
+    "agent_targets": [
+      "sms-game-director.md",
+      "sms-pixel-engineer.md",
+      "sms-hardware-budget-guardian.md",
+      "sms-qa-emulator-tester.md"
+    ],
+    "skill_targets": [
+      "sms-fighter-direction.md",
+      "sms-sprite-animation.md",
+      "sms-video-evidence.md",
+      "sms-fight-input-proof.md"
+    ],
+    "existing_checks": [
+      "audit_animation_contract.py",
+      "audit_animation_semantics.py",
+      "audit_observed_cases.py",
+      "audit_sprite_line_sim.py",
+      "measure_worst_frame.py",
+      "measure_runtime_probe.py"
+    ],
+    "method": "Estender a candidatura de direção de personagens com o piloto de idle em pé e suas saídas. Reusar contratos existentes. Medição verifica cobertura, identidade do artefato, temporalidade e orçamento. Parecer independente verifica atuação e legibilidade."
+  },
+  "evidence": [
+    {
+      "id": "motion_direction",
+      "path": "SMS_projects/master_of_fighters/doc/repertorio_alis_hayato.md",
+      "sha256": "3974a733a29c56978d1d69ca57a7269b39fe46b9a7bd3db9b8e6862daecc3ad0",
+      "role": "Guarda, movimento, respiração, virada e retomada"
+    },
+    {
+      "id": "normal_direction",
+      "path": "SMS_projects/master_of_fighters/doc/decisions/scene02-normais-dois-botoes_owner_20261121.json",
+      "sha256": "9702c7b060fc4a239b5b9db0a1084b0db12867178ac752ae4f08f481100cdfa8",
+      "role": "Semântica de toque e pressão sustentada"
+    },
+    {
+      "id": "archived_trace",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-qa6-b11-r2/6-round/round-trace.json",
+      "sha256": "a3ec97efd0eb0e833e48bd4f7388e85f25cdefab83ed3b936a0b670145f1afc0",
+      "role": "Intervalos de neutro, faces, poses, vida e hurtbox"
+    },
+    {
+      "id": "archived_receipt",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-qa6-b11-r2/6-round/round-completo.json",
+      "sha256": "7ee88c251f966c7163e4bdd5beb947cbe5db487a9998e8271d30ad0e89f93df3",
+      "role": "Ordem das imagens, identidade e SHA do vídeo"
+    },
+    {
+      "id": "archived_rgb_video",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-qa6-b11-r2/6-round/round-completo.mp4",
+      "sha256": "0b4c9ce97a85430af3c0e726871ee77582c589394f7d38b33fd7056ea870eab2",
+      "role": "Framebuffer RGB da sessão arquivada"
+    },
+    {
+      "id": "archived_close",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-qa6-b11-r2/6-closed-session.json",
+      "sha256": "17510d9636ce84ca25b5ddff16042aefab2a8c533a782c1a14dbe23aebeea718",
+      "role": "Fechamento da sessão de origem"
+    },
+    {
+      "id": "native_frame",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/revisao_visual_b11_r2_20261121/idle-b11-r2-vdp121.png",
+      "sha256": "fdd07fc3f495dfba109c637d96049ee913c1794c6d9fd131d4f8ad43fa490f6a",
+      "role": "VDP 121 extraído em tamanho nativo; derivado diagnóstico local"
+    },
+    {
+      "id": "pose_plan",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-plan-v2.json",
+      "sha256": "1feab3854ae916b040390c8f70f8c0219239fdcf7ba1a6f03a71ace6d6094e92",
+      "role": "Poses basais e pixels esperados nas faces padrão"
+    },
+    {
+      "id": "boot_sat",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-continuous6-b11-r2-v2/6-continuous/boot-sat.json",
+      "sha256": "1d51e532bfa344453dbd36245f02d1772578c3e9a0c9c5a64723349661f469a2",
+      "role": "SAT de abertura na sessão contínua do mesmo SHA"
+    },
+    {
+      "id": "dynamics",
+      "path": "SMS_projects/master_of_fighters/src/duel_rules.c",
+      "sha256": "72b6a3638e19b7c813f11c20bed8a71374e060cb8c1005e4f27d52b8df15d0e6",
+      "role": "Transformação e estabilidade das caixas em posição e face"
+    },
+    {
+      "id": "scene_pose_selection",
+      "path": "SMS_projects/master_of_fighters/src/duel_scene02.c",
+      "sha256": "da9a599a1568c413c3522065d1a8bad5329abce241087b120b1c63039036f4f4",
+      "role": "Seleção de poses e declinação do perfil em pé"
+    },
+    {
+      "id": "jj_historical_study",
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/jj_idle_asset_contract_v5.json",
+      "sha256": "1ba776e4471dd1e921be6519e503e8fa09ae25099fe093e9b9b3f8f49b39264f",
+      "role": "Contrato histórico de guarda com 12 chaves, sem transferência de aceite"
+    },
+    {
+      "id": "social_freeze",
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_ingame_freeze_20261104.md",
+      "sha256": "4aa84fd24910f411da76a01f8d91b5d1c929fc48e44a51d10562a58541f82d72",
+      "role": "Limite de consulta das guardas históricas"
+    }
+  ]
+}
