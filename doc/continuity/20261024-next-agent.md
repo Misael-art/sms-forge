@@ -1,5 +1,20 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-21 · Alis após a revisão de proporção da b49
+
+O [prompt atualizado](20261121-prompt-concluir-alis-espelho.md) retoma a
+[calibração b39–b49](../curation/2026-11-21_alis_espelho_revisao.json),
+commit `b38ca7ae22bd69bb10f87169bcf7f49b8153234f`. Cinco cenários foram reconstituídos dos
+recibos arquivados, com sessão, SHA e integridade das mídias. O diagnóstico
+da b47 identifica a primeira reação aérea divergente no tick 162.
+Na b49, o ensaio curto de arte mostra as cinco poses e reproduz quatro
+contatos. Recompilar integralmente e repetir o duelo aéreo sob carga, com
+ambas as reações e o piso de 58 por janela. Conservar a regressão do
+lançador com foco interno e distinguir o aceite físico do Deck.
+No Linux, 145/145 testes de base, 76 medidores, sincronia documental e
+captura de lições passaram. Checks em série com limite de 25% de um
+núcleo e 384 MiB durante o backup do host. Sem nova ROM nesta curadoria.
+
 ## 2026-11-21 · Concluir Alis contra Alis
 
 O [prompt do executor](20261121-prompt-concluir-alis-espelho.md) parte da
