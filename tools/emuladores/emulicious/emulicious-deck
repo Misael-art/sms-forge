@@ -1,0 +1,170 @@
+#!/usr/bin/python3
+"""Launch the local Emulicious with a session-scoped Master System pad."""
+
+import ctypes
+import fcntl
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+
+from evdev import AbsInfo, UInput, ecodes
+
+
+HERE = Path(__file__).resolve().parent
+JAR = HERE / 'Emulicious.jar'
+PAD_NAME = 'SMSForge Steam Deck P1'
+BUTTONS = {0: ecodes.BTN_SOUTH, 1: ecodes.BTN_EAST, 4: ecodes.BTN_SELECT, 6: ecodes.BTN_START}
+AXES = ((ecodes.ABS_X, 13, 14), (ecodes.ABS_Y, 11, 12))
+ATTACK_AXES = {0: ecodes.ABS_RX, 1: ecodes.ABS_RY}
+SDL_GAMECONTROLLER = 0x2000
+# The bundled Linux JInput reports stick events from the private pad.
+# Its face-button EV_KEY events do not reach SMSJoypad. Expose attacks as
+# digital states on the two spare axes so each press and release is visible.
+# SMSJoypad port A reads logical controls 8–13 in this order.
+SMS_PAD_A = {'Gamepad0Key8': 20, 'Gamepad0Key9': 21, 'Gamepad0Key10': 16,
+             'Gamepad0Key11': 17, 'Gamepad0Key12': 25, 'Gamepad0Key13': 29}
+
+
+def pad_capabilities():
+    axes = [code for code, _, _ in AXES] + list(ATTACK_AXES.values())
+    return {ecodes.EV_KEY: list(BUTTONS.values()),
+            ecodes.EV_ABS: [(code, AbsInfo(0, -32768, 32767, 0, 4096, 0)) for code in axes]}
+
+
+def gamepad_arguments():
+    # The private device belongs to this session. Swing can move focus to a
+    # child component while the game is visible, which otherwise drops input.
+    settings = {
+        'SMSGamepadA': 0,
+        'SMSGamepadAKeyboard': 'true',
+        'SMSbuttonsGamepad': 0,
+        'SMSbuttonsGamepadKeyboard': 'true',
+        'KeyboardRequireWindowFocus': 'false',
+        **SMS_PAD_A,
+    }
+    return [argument for key, value in settings.items() for argument in ('-set', f'{key}={value}')]
+
+
+def open_deck(sdl):
+    sdl.SDL_JoystickGetDeviceVendor.restype = ctypes.c_uint16
+    sdl.SDL_JoystickGetDeviceProduct.restype = ctypes.c_uint16
+    sdl.SDL_GameControllerPathForIndex.restype = ctypes.c_char_p
+    sdl.SDL_GameControllerOpen.restype = ctypes.c_void_p
+    sdl.SDL_GameControllerGetAttached.argtypes = [ctypes.c_void_p]
+    sdl.SDL_GameControllerGetButton.argtypes = [ctypes.c_void_p, ctypes.c_int]
+    sdl.SDL_GameControllerGetButton.restype = ctypes.c_uint8
+    sdl.SDL_GameControllerGetAxis.argtypes = [ctypes.c_void_p, ctypes.c_int]
+    sdl.SDL_GameControllerGetAxis.restype = ctypes.c_int16
+    sdl.SDL_GameControllerClose.argtypes = [ctypes.c_void_p]
+    sdl.SDL_GetError.restype = ctypes.c_char_p
+    if sdl.SDL_Init(SDL_GAMECONTROLLER) != 0:
+        raise RuntimeError(sdl.SDL_GetError().decode(errors='replace'))
+    candidates = []
+    for index in range(sdl.SDL_NumJoysticks()):
+        path = sdl.SDL_GameControllerPathForIndex(index) or b''
+        ids = sdl.SDL_JoystickGetDeviceVendor(index), sdl.SDL_JoystickGetDeviceProduct(index)
+        if ids == (0x28DE, 0x1205) and path.startswith(b'/dev/hidraw'):
+            candidates.append(index)
+    if len(candidates) != 1:
+        raise RuntimeError('Steam Deck HID indisponível ou ambíguo')
+    deck = sdl.SDL_GameControllerOpen(candidates[0])
+    if not deck:
+        raise RuntimeError(sdl.SDL_GetError().decode(errors='replace'))
+    return deck
+
+
+def route(sdl, deck, pad, process):
+    previous = {}
+    while process.poll() is None:
+        sdl.SDL_GameControllerUpdate()
+        connected = sdl.SDL_GameControllerGetAttached(deck)
+        buttons = [sdl.SDL_GameControllerGetButton(deck, i) if connected else 0 for i in range(15)]
+        values = {(ecodes.EV_KEY, code): buttons[index] for index, code in BUTTONS.items()}
+        values.update({(ecodes.EV_ABS, code): 32767 * buttons[index] for index, code in ATTACK_AXES.items()})
+        for index, (code, negative, positive) in enumerate(AXES):
+            stick = sdl.SDL_GameControllerGetAxis(deck, index) if connected else 0
+            direction = buttons[positive] - buttons[negative]
+            values[ecodes.EV_ABS, code] = direction * 32767 if buttons[negative] or buttons[positive] else stick
+        if values != previous:
+            for (kind, code), value in values.items():
+                if value != previous.get((kind, code)):
+                    pad.write(kind, code, value)
+            pad.syn()
+            previous = values
+        if not connected:
+            print('Emulicious: Steam Deck desconectado. O teclado continua disponível.', file=sys.stderr)
+            return
+        time.sleep(0.008)
+
+
+def play(command, arguments, bwrap):
+    # SDL handles the Deck firmware and its desktop-mode watchdog. The hints
+    # are local to this process and enable HID only for the integrated Deck.
+    sdl = ctypes.CDLL('libSDL2-2.0.so.0')
+    sdl.SDL_SetHintWithPriority.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]
+    for key, value in {
+        b'SDL_JOYSTICK_HIDAPI': b'0',
+        b'SDL_JOYSTICK_HIDAPI_STEAMDECK': b'1',
+        b'SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS': b'1',
+        b'SDL_GAMECONTROLLER_IGNORE_DEVICES_EXCEPT': b'0x28de/0x1205',
+    }.items():
+        sdl.SDL_SetHintWithPriority(key, value, 2)
+    deck = None
+    process = None
+    try:
+        with UInput(pad_capabilities(), name=PAD_NAME, bustype=ecodes.BUS_USB) as pad:
+            event = pad.device.path
+            deck = open_deck(sdl)
+            # JInput only sees the session pad, so the configured index stays
+            # zero even with another gamepad plugged in during startup.
+            process = subprocess.Popen([
+                bwrap, '--die-with-parent', '--bind', '/', '/', '--tmpfs', '/dev/input',
+                '--dev-bind', event, '/dev/input/event0', '--', *command, *gamepad_arguments(), *arguments,
+            ])
+            try:
+                route(sdl, deck, pad, process)
+            except (OSError, RuntimeError) as exc:
+                print(f'Emulicious: controle encerrado ({exc}). O teclado continua disponível.', file=sys.stderr)
+    finally:
+        if deck:
+            sdl.SDL_GameControllerClose(deck)
+        sdl.SDL_Quit()
+    return process.wait()
+
+
+def main():
+    if not JAR.is_file():
+        raise RuntimeError(f'JAR ausente: {JAR}')
+    java = HERE.parent.parent.parent / '.runtime/bin/java'
+    java = str(java) if os.access(java, os.X_OK) else 'java'
+    command = [java, '-jar', str(JAR), '-set', 'Update=0']
+    arguments = sys.argv[1:]
+    runtime = Path(os.environ.get('XDG_RUNTIME_DIR', f'/run/user/{os.getuid()}'))
+    bwrap = shutil.which('bwrap')
+    with (runtime / 'smsforge-emulicious-deck.lock').open('a') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise RuntimeError('já existe uma sessão de Emulicious com controle neste usuário') from None
+        # The kernel pad is withdrawn by an existing Deck HID client. Leave
+        # that owner's mode alone when Steam or another frontend has it open.
+        native_deck = any(p.read_text().strip() == 'Steam Deck'
+                          for p in Path('/sys/class/input').glob('js*/device/name'))
+        if bwrap and native_deck:
+            try:
+                return play(command, arguments, bwrap)
+            except (OSError, RuntimeError) as exc:
+                print(f'Emulicious: controle indisponível ({exc}). Abrindo com teclado.', file=sys.stderr)
+        else:
+            print('Emulicious: Deck HID ocupado/ausente ou bwrap indisponível. Abrindo com teclado.', file=sys.stderr)
+        return subprocess.call([*command, *arguments])
+
+
+if __name__ == '__main__':
+    try:
+        sys.exit(main())
+    except (OSError, RuntimeError) as error:
+        sys.exit(f'Emulicious: {error}')
