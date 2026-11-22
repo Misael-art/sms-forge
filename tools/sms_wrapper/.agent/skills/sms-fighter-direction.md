@@ -23,6 +23,21 @@ volte ao contrato correspondente.
 
 ## Do concept ao sprite que aguenta movimento
 
+Quando a personagem parece encolher, compare a guarda, o ataque em voo,
+a queda diagonal, o repouso e a levantada à mesma escala. Marque quadril,
+cabeça, mão que empunha e linha do chão. Meça corpo e equipamento também
+depois da conversão. Se a largura máxima de um quadro comprimir toda a
+anatomia, ajuste a composição do metasprite e volte a medir o par na
+scanline mais carregada. Reavalie o alcance da caixa após mover a lâmina.
+
+Se o traje clarear ou a mão sumir, localize a primeira divergência entre
+arte autoral, imagem indexada, padrões empacotados e pixels no emulador.
+Amostre as regiões de tecido, pele, bracelete e metal em cada traje e face.
+Uma paleta física idêntica ainda permite quantizar tecido no índice branco
+do metal. Preserve o contorno pintado ao reduzir a imagem e reveja a mão
+no tick ativo. Compare a cabeça apoiada no chão, a primeira elevação e
+o apoio do joelho em sequência, com o mesmo referencial de chão.
+
 1. Recorte a vista de referência autorizada e fixe o fator de escala para a
    sequência inteira. Na grade de trabalho, desenhe chão e eixo local. Reserve
    margem para a maior extensão e guarde as guias em camada separada.

@@ -224,6 +224,16 @@ def main():
         with open(replay_path, "w", encoding="utf-8") as stream:
             json.dump(replay, stream)
         results.append(run(command, status, f"contact receipts: requested 8, presented {pose}"))
+    matrix_path = os.path.join(tmp, "actor-matrix.json")
+    matrix_command = [os.path.join(HERE, "audit_duel_contacts.py"), "--actor-matrix", matrix_path,
+                      "--scenario", "air", "--rom-sha256", rom_sha]
+    for victim, status in ((63, 0), (9, 1)):
+        event = {"case": "air-block", "actor": "p2", "vdp_frame": 12, "logic_tick": 6,
+                 "attacker_pose": [43, 43, 43], "victim_pose": [63, victim]}
+        with open(matrix_path, "w", encoding="utf-8") as stream:
+            json.dump({"rom_sha256": rom_sha, "scenarios": [
+                {"folder": "air", "session_id": "stepped", "contacts": [event]}]}, stream)
+        results.append(run(matrix_command, status, f"actor matrix: victim requested 63, presented {victim}"))
     from audit_animation_contract import _minimal_valid as animation_fixture
     animation_path = os.path.join(tmp, "animation.json")
     with open(animation_path, "w", encoding="utf-8") as stream:

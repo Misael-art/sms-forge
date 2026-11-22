@@ -1,0 +1,339 @@
+{
+  "kind": "application_of_existing_lessons",
+  "dedup_key": "mof-espelho-exposicao-dupla-entrada-material-escala",
+  "existing_lesson_ids": [
+    "L060",
+    "L075",
+    "L098",
+    "L104",
+    "L105",
+    "L113",
+    "L138"
+  ],
+  "owner": "SMS_projects/master_of_fighters",
+  "diagnostics": "out/diagnostics/alis_mirror_20261121",
+  "source_candidates": [
+    {
+      "path": "doc/curation_candidates/2026-11-21_alis_espelho_producao.json",
+      "sha256": "207f7de93a55648a3a5810f4558793ff7e5088f5305b558963462e7fe97f7b6e"
+    },
+    {
+      "path": "doc/curation_candidates/2026-11-21_alis_golpes_aereos_e_chao.json",
+      "sha256": "9d11463a4621b7f16ed7f373db7964b8cf624656ceb810c460ad094f3c467304"
+    },
+    {
+      "path": "doc/curation_candidates/2026-11-21_alis_punho_tecido_contorno.json",
+      "sha256": "8c942f7afb54e029bd94767c98b7887a886aaea3fd9da9ec1a5e5fa8f41aa07e"
+    }
+  ],
+  "applications": [
+    "Espelho e agarrão. Compartilhar geometria somente após conferir a distribuição dos pacotes entre bancos de trajes. Preservar pivô anatômico, caixas, comandos e prioridade de publicação por atriz. Repetir pega, soltura, queda, retomada, tentativa fora do alcance e alvo no ar com os dois papéis. O encaixe da mão e a proporção da vítima exigem revisão visual.",
+    "Contato e guarda. Medir exposição da atacante e da vítima separadamente. Na troca simultânea conservar os dois gestos no impacto e observar a reação prevista no tick seguinte. Conferir por quadros e depois em tempo contínuo no mesmo SHA.",
+    "Entrada aérea. Na compressão, reter a nova pressão até o voo. Mostrar preparação comum no primeiro toque, classificar a força conforme o contrato e encerrar a caixa ativa ao pousar. Quatro leituras no ar e seis em solo pertencem ao perfil de Alis.",
+    "Controle. Comparar dispositivo, lançador, JInput, porta virtual e ação consumida. O ensaio registrou 0x10, 0x20, 0x22 e 0x21 para B1, B2, baixo+B2 e cima+B2. A operação física no Deck permanece para validação humana.",
+    "Punho e materiais. Localizar o primeiro branco indevido nos padrões antes do VDP. Na b48 foi preservada a paleta física. Classificar o tecido antes da quantização, manter metais e pele, restaurar o traço dentro da máscara e revisar a empunhadura nas duas faces e nos dois trajes.",
+    "Queda e proporção. Comparar o corpo à guarda na mesma escala. Separar queda, cabeça apoiada, primeira elevação e apoio do joelho. O teto de largura da b48 reduzia toda a queda. Na b49 o desenho passou de 32 × 27 para 42 × 36 px. Conferir separadamente chão, pivô, alcance e orçamento do par.",
+    "Cadência, áudio e versão. Medir preparação, lógica, VBlank e apresentação sob carga do par. Preservar vídeo e PSG brutos e avaliar escudo e espada em contexto. O som de referência continua como direção artística. Registrar a relincagem de arte com SHA de base e delta; conferir build integral e janelas válidas antes do aceite.",
+    "Outros gêneros. Aplique a medição dos dois papéis ao projétil e inimigo, o percurso da entrada ao salto e a escala anatômica à queda do personagem. Use o relógio e as posturas definidos pelo jogo."
+  ],
+  "calibration": [
+    {
+      "rom": "out/candidates/scene02_alis_mirror_b39/rom/master_of_fighters.sms",
+      "matrix": "matriz-b39.json",
+      "matrix_sha256": "0e02ea38c9c7ceccf2409941b7fef372747e716f737e7312e6ea1ded4ac464e1",
+      "rom_sha256": "f978da58124869d303b384c6cb711fad552335e73d86c2a740205d4a421bb325",
+      "scenario": "qa-b39-air",
+      "stepped_session": "4b1784e068f7422d8041c852413f055e",
+      "continuous_session": "ddc12b3d2f3e4533b149e2db516a7ae5",
+      "contact_count": 5,
+      "divergences": [],
+      "ntsc_windows": [
+        38.627884177986445,
+        32.45815267733583
+      ],
+      "runtime": {
+        "overruns": 0,
+        "fault": 0,
+        "worst_vdp_gap": 4,
+        "peak_sat": 42,
+        "peak_scanline": 8
+      }
+    },
+    {
+      "rom": "out/candidates/scene02_alis_mirror_b43/rom/master_of_fighters.sms",
+      "matrix": "matriz-b43.json",
+      "matrix_sha256": "b18b8af8b8e2b42a83273bae2671cb187f0815af1dde7288ca84985f76a5af04",
+      "rom_sha256": "fbf9d94dce222317c65a51cfbf9a9d40c9cb702910827615960bb7f985150591",
+      "scenario": "qa-b43-air-r2",
+      "stepped_session": "97c73d91c47b46aab7f1d8c3cea7f03e",
+      "continuous_session": "150aa28b6c9746bb9158418a2a04b511",
+      "contact_count": 5,
+      "divergences": [
+        {
+          "actor": "p1",
+          "role": "attacker",
+          "case": "air_recovery_0",
+          "logic_tick": 94,
+          "vdp_frame": 183,
+          "poses": [
+            43,
+            255,
+            42
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "victim",
+          "case": "air_button_1",
+          "logic_tick": 162,
+          "vdp_frame": 284,
+          "poses": [
+            63,
+            14
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "attacker",
+          "case": "air_recovery_2",
+          "logic_tick": 234,
+          "vdp_frame": 388,
+          "poses": [
+            49,
+            255,
+            48
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "victim",
+          "case": "air_recovery_2",
+          "logic_tick": 234,
+          "vdp_frame": 388,
+          "poses": [
+            63,
+            14
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "attacker",
+          "case": "air_button_3",
+          "logic_tick": 302,
+          "vdp_frame": 490,
+          "poses": [
+            52,
+            255,
+            48
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "victim",
+          "case": "air_button_3",
+          "logic_tick": 302,
+          "vdp_frame": 490,
+          "poses": [
+            68,
+            14
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "attacker",
+          "case": "air_block_contact",
+          "logic_tick": 396,
+          "vdp_frame": 647,
+          "poses": [
+            43,
+            255,
+            42
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "victim",
+          "case": "air_block_contact",
+          "logic_tick": 396,
+          "vdp_frame": 647,
+          "poses": [
+            67,
+            17
+          ]
+        }
+      ],
+      "ntsc_windows": [
+        38.627884177986445,
+        33.95622126244364
+      ],
+      "runtime": {
+        "overruns": 0,
+        "fault": 0,
+        "worst_vdp_gap": 3,
+        "peak_sat": 42,
+        "peak_scanline": 8
+      }
+    },
+    {
+      "rom": "out/candidates/scene02_alis_mirror_b47/rom/master_of_fighters.sms",
+      "matrix": "matriz-b47.json",
+      "matrix_sha256": "d6c2c50cd44bf3a0930d0e8bb5dca91968b744c0b0cc1d5c3646b76529de1119",
+      "rom_sha256": "baca9cde8fa4edf93cd823a6c649c39c16234379af71823fdc5217817179d45a",
+      "scenario": "qa-b47-air",
+      "stepped_session": "5c0750d493e148199c99499c8d98fd17",
+      "continuous_session": "508c774d31784e028a58b77bc4226c1b",
+      "contact_count": 5,
+      "divergences": [
+        {
+          "actor": "p1",
+          "role": "victim",
+          "case": "air_button_1",
+          "logic_tick": 162,
+          "vdp_frame": 286,
+          "poses": [
+            63,
+            9
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "victim",
+          "case": "air_recovery_2",
+          "logic_tick": 234,
+          "vdp_frame": 391,
+          "poses": [
+            63,
+            9
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "victim",
+          "case": "air_button_3",
+          "logic_tick": 302,
+          "vdp_frame": 494,
+          "poses": [
+            68,
+            9
+          ]
+        },
+        {
+          "actor": "p1",
+          "role": "victim",
+          "case": "air_block_contact",
+          "logic_tick": 396,
+          "vdp_frame": 653,
+          "poses": [
+            67,
+            0
+          ]
+        }
+      ],
+      "ntsc_windows": [
+        38.311262176527535,
+        33.73801519402458
+      ],
+      "runtime": {
+        "overruns": 0,
+        "fault": 0,
+        "worst_vdp_gap": 3,
+        "peak_sat": 42,
+        "peak_scanline": 8
+      }
+    },
+    {
+      "rom": "out/candidates/scene02_alis_mirror_b48/rom/master_of_fighters.sms",
+      "matrix": "matriz-b48.json",
+      "matrix_sha256": "e75c6202c9a6550a7c50cda7c5e14f73902783195f773b52cf371dc11d8d9857",
+      "rom_sha256": "90c77cf2e3cfe1c680ccf2c2399dcea4db2320c729a9c4f1000c60db41221772",
+      "scenario": "qa-b48-materials",
+      "stepped_session": "033ff754ddfa4b0087f0d71e2be48e58",
+      "continuous_session": "611c26bcc53b471fb52a1ee2785c58cb",
+      "contact_count": 4,
+      "divergences": [],
+      "ntsc_windows": [],
+      "runtime": {
+        "overruns": 0,
+        "fault": 0,
+        "worst_vdp_gap": 4,
+        "peak_sat": 44,
+        "peak_scanline": 8
+      }
+    },
+    {
+      "rom": "out/candidates/scene02_alis_mirror_b49/rom/master_of_fighters.sms",
+      "matrix": "matriz-b49.json",
+      "matrix_sha256": "d1d8ba143391dac9108899c1824ae2a90ea22606c8b729dc888677e14ca1ef3c",
+      "rom_sha256": "2458fdecfccce8a33f29b7843860886893b6c205d8f2eda4bb6028a8c556e9da",
+      "scenario": "qa-b49-proportions",
+      "stepped_session": "e9bc9fe671914f09babbbc51941b6a50",
+      "continuous_session": "0a37499962ae494cb4e99eb17764a695",
+      "contact_count": 4,
+      "divergences": [],
+      "ntsc_windows": [],
+      "runtime": {
+        "overruns": 0,
+        "fault": 0,
+        "worst_vdp_gap": 4,
+        "peak_sat": 44,
+        "peak_scanline": 8
+      }
+    }
+  ],
+  "mixed_b39": {
+    "receipt": "qa-b39-mixed/continuous/round-continuo.json",
+    "sha256": "88dad8d84925ee97598187242ca74e8eeeb46d87c9dc4c0f64cf1b92028a020c",
+    "expected": 14,
+    "reported_continuous": 13,
+    "missing_ordinal": 11,
+    "event": [
+      "p1",
+      31,
+      49
+    ],
+    "scope": "O recibo contínuo omitiu a assinatura. O efeito visível nesse instante exige inspeção do vídeo bruto."
+  },
+  "open": [
+    "Build integral da candidata e regressão completa no SHA resultante",
+    "Reação aérea em quatro contatos e primeira exposição de guarda em recuo e de reinício",
+    "Âncora de pega e revisão artística das cinco proporções",
+    "Piso funcional de 58 FPS em cada janela válida e sincronismo de áudio",
+    "Validação do controle físico no Deck"
+  ],
+  "evidence_sources": {
+    "out/diagnostics/alis_mirror_20261121/b48-art/material-check.json": "bd98530f6d97c88d200b5b3e204b01992946bc7f4d58eed17ade267a0aaae605",
+    "out/diagnostics/alis_mirror_20261121/staged-b49/proportion-check.json": "25a33da553690a2eec7981845e3c0272adcfa5d01d17bc4d098ce78cf2532ae4",
+    "out/diagnostics/alis_mirror_20261121/qa-b49-proportions/pose-frames.json": "f7a437d6730c7fe1af3e8451e0a4293c9250b16d449b16f9ecf75eea2a0c8bdb",
+    "out/candidates/scene02_alis_mirror_b49/asset-relink.json": "25f87843a57f1fe424338f120cd3fa7224f910111fc230e5c3d3cd8757f2a8e1",
+    "out/diagnostics/alis_mirror_20261121/complete-b40/deck-jinput.txt": "ec64cc8f3141ae585e92cda82cbc5ea8dbee3735d747787a19ecd5de15ea9a4e",
+    "out/diagnostics/alis_mirror_20261121/deck-launch-b49/baseline.json": "50f7d4caf2080f48e3482e12de039ff3e45fcd8977db9fce61ca14709a99d00b",
+    "out/diagnostics/alis_mirror_20261121/deck-launch-b49/launcher.json": "4fd3be08f2de237b4aee8b8979cd6455106cefccc94afd8d188d65ba14b0ff4d",
+    "out/diagnostics/alis_mirror_20261121/staged-b49/proportion-comparison.png": "29b5d85e2cc9f4d0e7261ee22eb69bff2db11f1fe6d3976baef53fbf8703a0c1",
+    "out/diagnostics/alis_mirror_20261121/qa-b49-proportions/proportion-framebuffer.png": "16edbf30ffe8e70a12119866a38eae02a02fe59007893f880c04de720df993a3"
+  },
+  "launcher_b49": {
+    "same_rom": true,
+    "virtual_pad_child_focus": {
+      "baseline": false,
+      "launcher": true
+    },
+    "keyboard_s_child_focus": {
+      "baseline": true,
+      "launcher": true
+    },
+    "verified_kick_ids": [
+      2,
+      3,
+      6,
+      7,
+      10,
+      11
+    ],
+    "scope": "Sessão privada via lançador de jogo. O filtro de foco foi ajustado no perfil virtual dedicado. Os dois testes de foco localizam a diferença no percurso do controle, antes da ROM. A operação do Deck físico continua pendente."
+  },
+  "visual_review_b49": {
+    "comparison": "staged-b49/proportion-comparison.png",
+    "framebuffer_montage": "qa-b49-proportions/proportion-framebuffer.png",
+    "observation": "Na prancha à mesma escala, a mudança mais evidente é a extensão do corpo na queda diagonal. Na composição em jogo é possível distinguir a cabeça apoiada e a elevação seguinte. A prova de poses não cobre o encaixe da mão no agarrão nem os quatro impactos com as duas atrizes no ar."
+  }
+}

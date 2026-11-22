@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare damaging contacts in the stepped round and its continuous MFD1 replay."""
+"""Compare MFD1 recordings or examine reported poses of both actors at contact."""
 import argparse
 import hashlib
 import json
@@ -99,6 +99,39 @@ def compare(stepped, replay, rom_sha):
     }
 
 
+def compare_actor_poses(matrix, scenario, rom_sha):
+    if not re.fullmatch(r"[0-9a-f]{64}", rom_sha) or matrix["rom_sha256"] != rom_sha:
+        raise ValueError("invalid ROM identity or matrix from another ROM")
+    matches = [row for row in matrix["scenarios"] if row["folder"] == scenario]
+    if len(matches) != 1:
+        raise ValueError("expected exactly one matching scenario")
+    run = matches[0]
+    if not isinstance(run["session_id"], str) or not run["session_id"].strip():
+        raise ValueError("missing stepped session")
+    if not isinstance(run["contacts"], list) or not run["contacts"]:
+        raise ValueError("expected a non-empty list of contacts")
+    divergences = []
+    seen = set()
+    for event in run["contacts"]:
+        identity = (number(event, "vdp_frame"), event["actor"])
+        if identity[1] not in ("p1", "p2") or identity in seen:
+            raise ValueError("invalid or duplicate actor at frame")
+        seen.add(identity)
+        tick = number(event, "logic_tick")
+        for role, length in (("attacker", 3), ("victim", 2)):
+            poses = event[role + "_pose"]
+            if (not isinstance(poses, list) or len(poses) != length or
+                    any(type(p) is not int or not 0 <= p <= 255 for p in poses) or poses[0] == 255):
+                raise ValueError(f"invalid {role} pose tuple")
+            if any(p != poses[0] for p in poses[1:]):
+                divergences.append({"actor": event["actor"], "role": role, "case": event["case"],
+                                    "logic_tick": tick, "vdp_frame": identity[0], "poses": poses})
+    return {"ok": not divergences, "rom_sha256": rom_sha, "session_id": run["session_id"],
+            "scenario": scenario, "contacts": len(seen), "pose_divergences": divergences,
+            "scope": "Reported pose IDs at contact only, attacker requested/resident/presented, "
+                     "victim requested/presented. No framebuffer, completeness or timing verdict."}
+
+
 def fixture():
     sha = "a" * 64
     stepped = {"rom_sha256": sha, "session_id": "one", "first_vdp_frame": 100,
@@ -128,7 +161,14 @@ def self_check():
         except ValueError:
             continue
         raise AssertionError(field)
-    print("[SELF-CHECK OK] MFD1 paired contact receipts")
+    event = {"actor": "p1", "case": "air", "logic_tick": 2, "vdp_frame": 3,
+             "attacker_pose": [46, 46, 46], "victim_pose": [63, 63]}
+    matrix = {"rom_sha256": sha, "scenarios": [{"folder": "test", "session_id": "one",
+                                                "contacts": [event]}]}
+    assert compare_actor_poses(matrix, "test", sha)["ok"]
+    event["victim_pose"][1] = 9
+    assert compare_actor_poses(matrix, "test", sha)["pose_divergences"][0]["role"] == "victim"
+    print("[SELF-CHECK OK] MFD1 paired receipts and actor pose matrix")
 
 
 def load_receipt(path):
@@ -141,18 +181,28 @@ def main():
     parser.add_argument("--self-check", action="store_true")
     parser.add_argument("--stepped", type=Path)
     parser.add_argument("--continuous", type=Path)
+    parser.add_argument("--actor-matrix", type=Path, help="Scene 02 report_alis_mirror matrix")
+    parser.add_argument("--scenario", help="exact folder name in actor matrix")
     parser.add_argument("--rom-sha256")
     args = parser.parse_args()
     if args.self_check:
         self_check()
         return 0
-    if not all((args.stepped, args.continuous, args.rom_sha256)):
+    if args.actor_matrix or args.scenario:
+        if not all((args.actor_matrix, args.scenario, args.rom_sha256)) or args.stepped or args.continuous:
+            parser.error("matrix mode requires --actor-matrix, --scenario and --rom-sha256 only")
+    elif not all((args.stepped, args.continuous, args.rom_sha256)):
         parser.error("--stepped, --continuous and --rom-sha256 required")
     try:
-        stepped, stepped_sha = load_receipt(args.stepped)
-        replay, replay_sha = load_receipt(args.continuous)
-        result = compare(stepped, replay, args.rom_sha256)
-        result["receipt_sha256"] = {"stepped": stepped_sha, "continuous": replay_sha}
+        if args.actor_matrix:
+            matrix, matrix_sha = load_receipt(args.actor_matrix)
+            result = compare_actor_poses(matrix, args.scenario, args.rom_sha256)
+            result["receipt_sha256"] = {"actor_matrix": matrix_sha}
+        else:
+            stepped, stepped_sha = load_receipt(args.stepped)
+            replay, replay_sha = load_receipt(args.continuous)
+            result = compare(stepped, replay, args.rom_sha256)
+            result["receipt_sha256"] = {"stepped": stepped_sha, "continuous": replay_sha}
     except (OSError, KeyError, TypeError, ValueError) as exc:
         result = {"ok": False, "invalid_input": str(exc)}
     print(json.dumps(result, indent=2))

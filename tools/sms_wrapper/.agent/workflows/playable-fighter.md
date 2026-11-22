@@ -175,6 +175,30 @@ Veja a [aplicação em Alis](../../../../doc/curation/2026-11-21_alis_espelho.js
 
 ## Fechamento e passagem ao próximo agente
 
+Na matriz por contato do espelho, confira as duas atrizes. Para os recibos
+de `report_alis_mirror.py`, execute `audit_duel_contacts.py --actor-matrix
+MATRIZ --scenario CENARIO --rom-sha256 SHA`. O diagnóstico lista por tick
+as diferenças entre pose pedida, residente e publicada da atacante e entre
+pedida e publicada da vítima. Comprove no framebuffer a pose prevista pelo
+roteiro, inclusive quando todos os IDs coincidem. Numa troca simultânea,
+confira as duas fases ofensivas no contato e as reações no tick contratado.
+Em um bloqueio, confira o impacto do escudo mesmo com a vida intacta.
+
+Quando o jogador relata que um botão falha, acompanhe o mesmo gesto do
+lançador à porta do emulador e da porta até a ação da ROM. Teste botão
+isolado e acordes com cima e baixo. Abra o jogo pelo atalho de uso normal,
+troque o foco para um componente interno e repita com o controle e a tecla
+equivalente. Ajustes do filtro de foco pertencem ao perfil dedicado do
+lançador. Registre separadamente injeção direta,
+dispositivo virtual e teste físico. Para salto com ataque, observe pressão
+na compressão, primeira preparação visível no voo, escolha de intensidade
+e fim da caixa ativa no pouso. Fixe os tempos pelo GDD do consumidor.
+
+O [estudo b39–b49](../../../../doc/curation/2026-11-21_alis_espelho_revisao.json)
+mostra como reproduzir os contrastes. Uma relincagem de arte permite rever
+o delta no binário identificado. Recompile pelo wrapper e repita o roteiro
+sob carga com janelas válidas antes de atribuir aceite à candidata final.
+
 Entregar uma linha por caso com **esperado, observado, veredito, ROM SHA,
 sessão, caminho da mídia/trace e pendência**. Uma captura em stepping decide
 ordem e composição; a prova de cadência usa execução contínua. Para o aceite

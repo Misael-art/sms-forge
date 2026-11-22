@@ -4,15 +4,15 @@ Você é responsável pela implementação, arte, integração e revisão de **A
 
 ## 1. Comece do que já funciona
 
-Leia o AGENTS.md, a memória, GDD, roteiro, especificação da cena, TDD, comandos e repertório do consumidor. Registre nos documentos donos a decisão atual de usar o espelho, os doze normais e o agarrão. Preserve as fontes e o ensaio com Hayato para comparação. Confira se há candidata posterior à b32 e identifique seu SHA antes de editar. Use a [curadoria da b32](../curation/2026-11-21_alis_espelho.json) e o [replay e matriz da Cena 02](../../SMS_projects/master_of_fighters/doc/scene02_hayato_alis_qa.md) para localizar o primeiro elo ainda sem prova.
+Leia o AGENTS.md, a memória, GDD, roteiro, especificação da cena, TDD, comandos e repertório do consumidor. O espelho está implementado. Comece pela candidata mais recente e confirme seu SHA. A [revisão b39–b49](../curation/2026-11-21_alis_espelho_revisao.json) e a [matriz do espelho](../../SMS_projects/master_of_fighters/doc/scene02_alis_espelho_qa.md) registram as provas por revisão. Preserve a b32 com Hayato como controle. A b49 é uma relincagem de arte. Faça o build integral pelo wrapper e confirme as cinco poses corrigidas na ROM resultante. Repita o roteiro com as duas Alis no ar, sobretudo a reação no tick 162 da b47 (pedido 63, publicado 9), os outros três impactos e o bloqueio. Meça o piso funcional sob essa carga. Use como controle o ensaio da b49 pelo lançador de jogo, inclusive botão 2 e tecla S com foco interno. Mantenha a avaliação física do botão 2 no Deck e a revisão da âncora do agarrão visíveis no handoff.
 
 Mantenha a identidade do concept autorizado e a física do salto aprovada pelo dono. Na b32 o ápice é de 78 px, o voo dura 20 ticks e a nova pressão de salto durante a recuperação pode preparar a próxima decolagem. Preserve marcha com transferência de peso, proporções, material do escudo, som distinto de espada, cruzamento e guarda por fase. Abra no repertório existente uma linha por ação e reação. Registre nesta ordem comando, postura, função tática, resposta do adversário, poses, caixas, som, caso de teste e prova da ROM final.
 
 ## 2. Faça o espelho funcionar desde a entrada normal da cena
 
-Instancie Alis duas vezes com controles independentes. Revise a inicialização que deriva o rival de P1, a física e os buffers específicos de uma única Alis, os bancos, os endereços temporários, a ordem da SAT e as partes da espada compostas no fundo. Compartilhe arte imutável quando possível. Mantenha posição, face, vida, relógio, entrada, comando retido, estado de reação e propriedade dos efeitos por jogador. Pressione comandos diferentes no mesmo tick. Cruze, troque os lados, cause dano a apenas uma jogadora e reinicie o round.
+Revalide as duas instâncias e os controles independentes já existentes. Revise a inicialização, a física e os buffers por jogadora, os bancos, os endereços temporários, a ordem da SAT e as partes da espada compostas no fundo. Compartilhe arte imutável quando possível. Mantenha posição, face, vida, relógio, entrada, comando retido, estado de reação e propriedade dos efeitos por jogador. Pressione comandos diferentes no mesmo tick. Cruze, troque os lados, cause dano a apenas uma jogadora e reinicie o round.
 
-Produza traje 1 para P1 e traje 2 para P2. A paleta física de sprites é compartilhada, com até 15 cores opacas e índice 0 transparente. Planeje duas combinações de índices dentro desse orçamento. Preserve leitura da pele, cabelo, lâmina e escudo. Mostre as duas Alis simultaneamente em tamanho nativo, juntas, separadas e após cruzarem. Teste se cada traje segue o controle e se mover uma espada recompõe corretamente o cenário da outra.
+Preserve o traje rosa de P1 e o verde de P2. A paleta física de sprites é compartilhada, com até 15 cores opacas e índice 0 transparente. Planeje duas combinações de índices dentro desse orçamento. Preserve leitura da pele, cabelo, lâmina e escudo. Mostre as duas Alis simultaneamente em tamanho nativo, juntas, separadas e após cruzarem. Teste se cada traje segue o controle e se mover uma espada recompõe corretamente o cenário da outra.
 
 ## 3. Complete os doze normais
 
@@ -22,7 +22,7 @@ Produza traje 1 para P1 e traje 2 para P2. A paleta física de sprites é compar
 | Abaixada | Soco rente ao escudo | Estocada ascendente | Chute baixo curto | Rasteira lateral |
 | No ar | Soco aéreo de encontro | Estocada em descida | Chute de interceptação | Chute em mergulho |
 
-Os nomes e a coreografia de partida vêm do repertório do projeto. A linha em pé já tem controles históricos. Implemente as oito entradas baixas e aéreas e revalide as quatro em pé. Registre qual limiar a ROM usa. Teste um tick antes, exatamente no limiar e um depois, soltura, botão mantido até o pouso e rearme. Resolva e documente a postura que vale quando o botão atravessa a decolagem ou o pouso. Verifique que o agarrão e o especial direcional preservam o acesso aos normais.
+Os nomes e a coreografia de partida vêm do repertório do projeto. Os doze normais já têm registros nos dois controles. Revalide o repertório completo na candidata integral e corrija cada linha que divergir. Registre qual limiar a ROM usa. Teste um tick antes, exatamente no limiar e um depois, soltura, botão mantido até o pouso e rearme. Resolva e documente a postura que vale quando o botão atravessa a decolagem ou o pouso. Verifique que o agarrão e o especial direcional preservam o acesso aos normais.
 
 Para cada golpe desenhe preparação, fase ativa e recuperação com atuação que mostre direção, alcance e compromisso. Use os pivôs da ficha e marque por quadro caixa ofensiva, áreas vulneráveis, caixa de corpo e zona atingida. Diferencie fraco e forte na silhueta, tempo, alcance e risco. Registre dano e primeiro tick livre de cada atriz. Confira acerto, defesa compatível, erro no limite +1 px e oportunidade de resposta. No ar, exercite subida ou descida conforme o golpe, mudança de lado e pouso durante a recuperação. Cada golpe simples aplica dano uma vez por execução.
 
@@ -41,7 +41,7 @@ Defina como o árbitro escolhe cabeça ou abdômen quando uma caixa alcança as 
 
 ## 5. Faça o agarrão como uma ação de duas personagens
 
-Use o **Giro com o escudo** e o comando proposto **frente + 1 + 2** como ponto de partida. Registre a janela de simultaneidade, precedência, alcance, estado elegível e consequência no vazio. Preserve a origem dessa escolha no GDD e nos comandos.
+Revalide o **Giro com o escudo** com o comando autorizado **frente + 1 + 2**. Confira a pega a 32 px e o erro a 33 px nas duas faces. Registre a janela de simultaneidade, precedência, alcance, estado elegível e consequência no vazio. Preserve a origem dessa escolha no GDD e nos comandos.
 
 Faça uma folha de exposição com duas linhas sincronizadas. A atacante alcança, firma a pega, gira, solta e recupera o apoio. A vítima é capturada, perde o apoio, acompanha a pega, separa-se na soltura, cai, fica deitada e levanta conforme a regra. Marque a âncora da mão e o ponto correspondente no corpo da vítima, o último quadro preso, o primeiro livre e o evento único de dano. Desenhe sprites próprios para as fases em que a atuação muda. Mantenha legíveis rosto, equipamento e juntas durante a sobreposição.
 
