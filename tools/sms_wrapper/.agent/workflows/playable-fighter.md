@@ -194,6 +194,23 @@ dispositivo virtual e teste físico. Para salto com ataque, observe pressão
 na compressão, primeira preparação visível no voo, escolha de intensidade
 e fim da caixa ativa no pouso. Fixe os tempos pelo GDD do consumidor.
 
+Se o jogador relata perda de resposta, meça a última leitura no ar, a
+primeira no chão, o estado da caixa e o primeiro comando consumido. Teste
+o botão anterior mantido, solto e rearmado, e um botão diferente pressionado
+exatamente no pouso. Distinga o tick da pressão do tick em que o golpe por
+soltura começa. Refaça o caso com os dois controles. Em plataforma, aplique
+o mesmo ensaio ao pouso seguido do próximo salto ou disparo previsto.
+
+Para um golpe que conecta, escreva o destino da vítima no roteiro: impacto
+com recuo, bloqueio ou queda, duração, deslocamento e primeiro tick livre.
+Um teste que só lê o dano deixa passar uma queda indevida. No agarrão,
+registre o lado, o apoio dos pés, a pega, o impacto, o comportamento junto
+à parede e a última pose **das duas atrizes**. Compare a recuperação da
+atacante com o quadro da vítima já no chão. Em poses móveis compostas
+por sprites e fundo, registre o custo de reposicionar o fundo a cada passo.
+Com cadência baixa e envio nulo em parte dos intervalos atrasados, meça
+lógica e preparação antes de atribuir a perda ao VBlank.
+
 O [estudo b39–b49](../../../../doc/curation/2026-11-21_alis_espelho_revisao.json)
 mostra como reproduzir os contrastes. Uma relincagem de arte permite rever
 o delta no binário identificado. Recompile pelo wrapper e repita o roteiro

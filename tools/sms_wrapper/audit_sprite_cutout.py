@@ -9,6 +9,7 @@ Usage: audit_sprite_cutout.py --image sheet.png --contract asset_contract.json
        audit_sprite_cutout.py --self-check
 """
 import argparse
+from collections import Counter
 import json
 import os
 import sys
@@ -112,7 +113,18 @@ def check_image(image_path, contract):
                     not all(isinstance(v, int) for v in offset + size) or
                     size[0] <= 0 or size[1] <= 0 or not colors):
                 raise ValueError("região requer anchor visible_bbox_top, offset/size válidos e allowed_rgb")
-            parsed_regions.append((region["name"], offset, size, colors))
+            floors = region.get("minimum_pixels_by_rgb", {})
+            if not isinstance(floors, dict):
+                raise ValueError("minimum_pixels_by_rgb requer um mapa RGB → contagem")
+            required = {}
+            for key, count in floors.items():
+                rgb = _hex_rgb(key)
+                if rgb not in colors or rgb in required or type(count) is not int or count < 1:
+                    raise ValueError("mínimo por RGB exige cor permitida única e contagem positiva")
+                required[rgb] = count
+            if sum(required.values()) > size[0] * size[1]:
+                raise ValueError("mínimos por RGB excedem a área da região")
+            parsed_regions.append((region["name"], offset, size, colors, required))
         except (KeyError, TypeError, ValueError) as exc:
             errors.append(f"pixel_cleanup_regions inválida: {exc}")
 
@@ -132,11 +144,12 @@ def check_image(image_path, contract):
                 for component_size in _components(mask, fw, fh, connectivity):
                     if component_size < minimum:
                         errors.append(f"frame {cell:02d}: componente opaco de {component_size}px < {minimum}px")
-            for name, (ox, oy), (rw, rh), allowed in parsed_regions:
+            for name, (ox, oy), (rw, rh), allowed, required in parsed_regions:
                 rx0, ry0 = ox, top + oy
                 if rx0 < 0 or ry0 < 0 or rx0 + rw > fw or ry0 + rh > fh:
                     errors.append(f"frame {cell:02d} região {name}: fora do canvas")
                     continue
+                counts = Counter()
                 for ry in range(ry0, ry0 + rh):
                     for rx in range(rx0, rx0 + rw):
                         index = pixels[y0 + ry][x0 + rx]
@@ -146,10 +159,16 @@ def check_image(image_path, contract):
                             errors.append(f"frame {cell:02d} região {name}: índice {index} sem cor de paleta")
                             continue
                         rgb = tuple(palette[index])
+                        if rgb in required:
+                            counts[rgb] += 1
                         if rgb not in allowed:
                             errors.append(
                                 f"frame {cell:02d} região {name}: RGB #{rgb[0]:02X}{rgb[1]:02X}{rgb[2]:02X} "
                                 f"fora do contrato em ({rx},{ry})")
+                for rgb, floor in required.items():
+                    if counts[rgb] < floor:
+                        errors.append(f"frame {cell:02d} região {name}: RGB #{bytes(rgb).hex().upper()} "
+                                      f"tem {counts[rgb]} pixels opacos, mínimo {floor}")
     return errors
 
 
@@ -183,6 +202,12 @@ def self_check():
         }
     }
     good = check_image(good_path, contract)
+    region = contract["pixel_cleanup_profile"]["regions"][0]
+    region["minimum_pixels_by_rgb"] = {"#000055": 16}
+    assert not check_image(good_path, contract)
+    region["minimum_pixels_by_rgb"]["#000055"] = 17
+    assert any("16 pixels opacos" in error for error in check_image(good_path, contract))
+    del region["minimum_pixels_by_rgb"]
     bad_region = check_image(bad_region_path, contract)
     bad_island = check_image(bad_island_path, contract)
     assert not good, f"self-check: folha limpa reprovada: {good}"

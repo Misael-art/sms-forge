@@ -1,0 +1,127 @@
+{
+  "kind": "application_of_existing_lessons",
+  "dedup_key": "mof-pouso-puxada-consequencia-e-material",
+  "existing_lesson_ids": [
+    "L060",
+    "L098",
+    "L104",
+    "L105",
+    "L113",
+    "L138"
+  ],
+  "owner": "SMS_projects/master_of_fighters",
+  "applications": [
+    "Contratar o destino do golpe até o primeiro tick livre. A b49 derrubava com o chute aéreo forte. A b52 distingue impacto leve de 8 ticks, forte de 12 e recuo de até 7 px no alvo em pé. Exercitar alvo em voo, guarda e retomada.",
+    "Puxada com Escudo substitui o giro. A distância encurta de 32 a 24 px com pés apoiados e lado preservado. Conferir a pega, o escudo no dano único, dois passos para trás e a queda, no centro e na parede. Fechar as duas trilhas com o recolhimento próprio da atacante enquanto a rival permanece no chão.",
+    "Identidade: vincular a pose ao SHA do concept v4; a referência de coreografia da b50 já continha faixa ciano indevida. Comparar cabeça, tronco, pernas e pivô dos dois papéis com a guarda. Separar arma, anatomia e exceção de flexão.",
+    "Compor os sprites com os pixels do fundo antes da revisão por região. A b53 corrigiu tecido, pele e bracelete sem retirar o cinza autorizado das ombreiras. Um pixel do punho vinha do fundo. Reexaminar o custo de reposicionar partes largas no fundo quando os pés se deslocam.",
+    "Calibrar as duas posturas baixas contra a guarda. Agachamento e guarda baixa passaram de 34 e 36 para 33 e 34 px, com sola em Y143. A b53 registra 40 variantes alteradas e 268 idênticas à b52.",
+    "No pouso testar primeira leitura no chão, botão mantido, rearme e botão diferente no mesmo tick. Conferir caixa, disponibilidade, consumo e ação na soltura. Em plataforma aplicar ao próximo salto ou tiro previsto no roteiro.",
+    "Diagnosticar cadência por etapa. Na b52 houve 12 intervalos atrasados com carga de envio zerada. Na b53 verificar o PSG isolado na mesma ROM antes do aceite de áudio. O vídeo contínuo desta revisão tem somente imagem."
+  ],
+  "calibration": {
+    "tool": "audit_sprite_cutout.py",
+    "pose": "air_2_1",
+    "input": "Raster composto de background_pixels e sprite_cells, X espelhado no pivô, janela x=-8..6 e y=topo+12..25. Executado em PNG indexado com as 64 cores SMS permitidas e depois com piso opcional de 9 pixels #000055.",
+    "b49": "4 pixels em cada uma das quatro variantes. Passa somente por cores permitidas e reprova com piso. O recibo histórico da b49 não registra SHA de concept.",
+    "b52": "17 pixels nas quatro variantes; as duas verificações passam.",
+    "scope": "O piso pertence ao peitoral desta pose. A geometria da lâmina e a legibilidade do agarre exigem outras verificações."
+  },
+  "landing": {
+    "b52_lockout_each_player": [
+      5,
+      10,
+      6,
+      10
+    ],
+    "b53_lockout_each_player": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "new_button1_while_button2_held": [
+      {
+        "player": "p1",
+        "landing_tick": 402,
+        "fresh_button_consumed_tick": 402,
+        "released_tick": 405,
+        "new_action": 4
+      },
+      {
+        "player": "p2",
+        "landing_tick": 771,
+        "fresh_button_consumed_tick": 771,
+        "released_tick": 774,
+        "new_action": 4
+      }
+    ]
+  },
+  "rom_sha256": {
+    "49": "2458fdecfccce8a33f29b7843860886893b6c205d8f2eda4bb6028a8c556e9da",
+    "52": "47c0a4027d39b1d45bfe48a53ec819fb6ac3d046243c702fa848b3edd3ca8fe9",
+    "53": "a15313589a6d196553e3c1ba16548db948818e8639ac5b85f7fbe4c720ce6753"
+  },
+  "runtime": {
+    "52": {
+      "stepped_session": "1da67b76e4e74e82acb75b04c72e08ab",
+      "continuous_session": "7f46bdd73c51466aac260ec404c379f8",
+      "exposures": 16,
+      "contacts": 8,
+      "guards": 1,
+      "nominal_windows": [
+        33.675591334654854,
+        39.78064478101405
+      ],
+      "audio": "PCM isolado arquivado"
+    },
+    "53": {
+      "stepped_session": "8887c2a67f6f4dc69b074c8065eaafca",
+      "continuous_session": "5205b9a7eba44ec4a73ace7363ae83f0",
+      "exposures": 18,
+      "contacts": 10,
+      "guards": 1,
+      "nominal_windows": [
+        33.675591334654854,
+        40.284197246596506
+      ],
+      "audio": "silent_in_two_sessions"
+    }
+  },
+  "open": [
+    "Piso funcional de 58 FPS em cada janela",
+    "PCM isolado audível e sincronismo na ROM candidata",
+    "Repetição dos quatro casos aéreos específicos que atrasaram a vítima na b47",
+    "Controle físico do Deck e parecer artístico do dono"
+  ],
+  "evidence_sha256": {
+    "out/candidates/scene02_alis_mirror_b49/rom/master_of_fighters.sms": "2458fdecfccce8a33f29b7843860886893b6c205d8f2eda4bb6028a8c556e9da",
+    "out/candidates/scene02_alis_mirror_b52/rom/master_of_fighters.sms": "47c0a4027d39b1d45bfe48a53ec819fb6ac3d046243c702fa848b3edd3ca8fe9",
+    "out/candidates/scene02_alis_mirror_b52/build_record.json": "2c0f85ea218e463f2138be347f4b659217b70f7a0991b238b37cab4655c21989",
+    "out/candidates/scene02_alis_mirror_b53/rom/master_of_fighters.sms": "a15313589a6d196553e3c1ba16548db948818e8639ac5b85f7fbe4c720ce6753",
+    "out/candidates/scene02_alis_mirror_b53/build_record.json": "fe0d60ea8a41f42eb52539742b025abcc7b0be6ba51735cdc7dba99ba8876ca8",
+    "doc/curation_candidates/2026-11-22_alis_impacto_puxada_model_sheet.json": "35f1425ed4a47ff642869159b068a0fa288a3a0ccc5e131c6c971c65056541d5",
+    "doc/curation_candidates/2026-11-22_alis_pouso_materiais_recolhimento.json": "b28b29b087e9f2c11bd1a832e23ccf6ff533084c721901d47f873d5677ad9852",
+    "out/diagnostics/alis_mirror_20261122/art-b49/audit.json": "6710c3c7f2994f7dfd7d0fe52f5d36e6327850c79835b7a9c877341af8f35b06",
+    "out/diagnostics/alis_mirror_20261121/staged-b49/repertoire-pages.json": "c58696a0cd168d1817bb125593654bdf62842995255f2900aa3808fe36f61a7f",
+    "out/diagnostics/alis_mirror_20261122/art-b52-final/audit.json": "6cee442daf2bb1080d562dda66401ef1d5e10fd855e2577d042ff0e1334c51d0",
+    "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+    "out/diagnostics/alis_mirror_20261122/staged-b52-final/repertoire-pages.json": "b16fc6b787cb189ffe1bf98b1a529e0dcb27c9fb9638ddf17fafee2dbb85c952",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/identity-final/audit.json": "97a5f0432b52ed00979e938a84973713bad962dd42c62cb377fd7404ec1a7778",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/staged-b53-final/repertoire-pages.json": "b1353916bfbec0d2a377463d2d7f5ff1f6e461778948b5b2c71682c7cdde4520",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/pouso-leitura-por-leitura.json": "a5117ecdf104c75c7db11112b4226bd21c5e50a82fce836da923c3c335c7b5d1",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b52-pouso-r2/input.json": "520cf241a4266715c4bb57ad08311e67a8a05f1e8fe3f1305b584782b4bab44d",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b52-pouso-r2/stepped-closed.json": "cebff1e2868f8b9a84b1f6c27f406ffa7eedbe0974718b187c2f4f0622833738",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b53-pouso-r2/input.json": "550de66395b40ca277e334c7f6d0c1878edd72aa02628202df4c8740aac1218e",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b53-pouso-r2/stepped-closed.json": "28359147527fa5089695b19c724f1ed15be131f9960a591249122c64af42ab4a",
+    "out/diagnostics/alis_mirror_20261122/qa-b52-shield-shove/shove-phases.json": "165e0e55c7de03a1cf1272cba1fd27917facd03fb4ef07b0ab41fe595c49f33f",
+    "out/diagnostics/alis_mirror_20261122/qa-b52-shield-shove/stepped-closed.json": "f7658ad4cc9392ab64a1bee960d4b0dfc268e48561d7ccb6f3b3688c073d34bd",
+    "out/diagnostics/alis_mirror_20261122/qa-b52-shield-shove/continuous/round-continuo.json": "b8b4df0233a1911d2f0dc3de00d8557db30fbef074e622c68eb4c16bf99a0228",
+    "out/diagnostics/alis_mirror_20261122/qa-b52-shield-shove/continuous-closed.json": "6dc62b3f0a3e507db7a0461bffae2c4b2ef03d6b07132bc86ae8628bae5d6bc2",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b53-escudo-chutes/shove-phases.json": "fbe26c4e5092598de3041576c371c81cb621a13fb740074b6c6a0e849f6b6260",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b53-escudo-chutes/stepped-closed.json": "305c4fdcefa04c89380c9c87e9e8797e4c251a1672e4b3d84052a8a28ec5966f",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b53-escudo-chutes/replay-visual-b53.json": "e0d30c8394a17abd8ffd19b82602f7558dae79210c30972fd23b33979b218aa7",
+    "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b53-escudo-chutes/continuous-closed.json": "63a94a7b582de8a40568cb2e2a801e994ca4b1b029bd7df91918e4e6236e787d",
+    "out/diagnostics/alis_mirror_20261122/matriz-b52.json": "905348cce159aa829dd4f4f926ed0d1aacbce41dd5dd3f6fd809c2b29cb39138"
+  }
+}

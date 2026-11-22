@@ -211,6 +211,8 @@ def main():
                            f"selfcheck:{g}"))
     print("== Fase 2: fixtures geradas ==")
     tmp = tempfile.mkdtemp(prefix="smsforge_selftest_")
+    results.append(run([os.path.join(HERE, "audit_sprite_cutout.py"), "--self-check"],
+                       0, "recorte: região com e sem o mínimo de pixels da cor do material"))
     from audit_duel_contacts import fixture as contact_fixture
     stepped, replay, rom_sha = contact_fixture()
     stepped_path = os.path.join(tmp, "stepped.json")

@@ -1,5 +1,20 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-22 · Retomar a Puxada com Escudo e o pouso da b53
+
+O [prompt de Alis](20261121-prompt-concluir-alis-espelho.md) parte do
+[registro b49–b53](../curation/2026-11-22_alis_pouso_e_puxada.json).
+A b53 tem build integral e SHA
+`a15313589a6d196553e3c1ba16548db948818e8639ac5b85f7fbe4c720ce6753`.
+Preservar o controle livre no pouso, a consequência do chute forte e o
+recolhimento da atacante. O replay confirma dez contatos e uma guarda.
+Recapturar o PSG isolado e localizar os atrasos de lógica ou preparação
+sob a mesma carga. Repetir os impactos aéreos específicos que atrasavam
+a vítima. No host Linux passaram 146/146 testes de base, 76 medidores e
+as auditorias documental e de memória. Curadoria por recibos e imagens
+arquivados, sem nova sessão de emulador. As fontes de arte e as ROMs
+permanecem no consumidor.
+
 ## 2026-11-21 · Alis após a revisão de proporção da b49
 
 O [prompt atualizado](20261121-prompt-concluir-alis-espelho.md) retoma a

@@ -38,6 +38,19 @@ do metal. Preserve o contorno pintado ao reduzir a imagem e reveja a mão
 no tick ativo. Compare a cabeça apoiada no chão, a primeira elevação e
 o apoio do joelho em sequência, com o mesmo referencial de chão.
 
+Antes de reutilizar um desenho, associe o hash do model sheet aprovado
+à pose e registre o papel da referência intermediária. Para confirmar a
+presença de um material, delimite uma região na pose e calibre o piso com
+um exemplo correto e outro com o defeito. Em `audit_sprite_cutout.py`,
+uma região pode declarar `"minimum_pixels_by_rgb": {"#000055": 9}` além
+de `allowed_rgb`. O exemplo do peitoral de Alis usa índigo e uma janela
+registrada no tronco. Aplique um contrato por pose ou grupo com a mesma
+janela anatômica. O teste conta pixels opacos da cor declarada no PNG
+indexado. Quando parte do punho ou equipamento vier do fundo, faça a medida
+na imagem composta com os sprites. Confira a separação da arma, a anatomia
+e o recolhimento a 1× no framebuffer. O caso de calibração e o limite
+da medição estão na [curadoria de pouso e materiais](../../../../doc/curation/2026-11-22_alis_pouso_e_puxada.json).
+
 1. Recorte a vista de referência autorizada e fixe o fator de escala para a
    sequência inteira. Na grade de trabalho, desenhe chão e eixo local. Reserve
    margem para a maior extensão e guarde as guias em camada separada.
