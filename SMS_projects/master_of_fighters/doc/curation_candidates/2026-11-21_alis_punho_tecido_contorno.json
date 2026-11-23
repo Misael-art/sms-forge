@@ -1,0 +1,46 @@
+{
+  "status": "candidate_for_future_curation",
+  "scope": "Master of Fighters / Cena 02 / material, punho e repouso",
+  "baseline_rom_sha256": "baca9cde8fa4edf93cd823a6c649c39c16234379af71823fdc5217817179d45a",
+  "revision_rom_sha256": "90c77cf2e3cfe1c680ccf2c2399dcea4db2320c729a9c4f1000c60db41221772",
+  "entries": [
+    {
+      "topic": "Punho e empunhadura na fase ativa",
+      "diagnosis": "O detalhe do punho se perdia junto ao branco do bracelete no soco em pé. Os contatos aéreos da b47 também tinham pequenos grupos de pixels no ponto de pega do escudo e da lâmina.",
+      "action": "Restaurar o ouro do bracelete sem alterar a máscara do soco em pé. Retocar a anatomia da mão e o encaixe dos dois equipamentos nas fontes aéreas em escala de corpo inteiro.",
+      "verification": "A montagem restaurou seis pixels do bracelete em cada combinação de controle e face. Os contatos aéreos de escudo e espada têm 49 e 50 pixels de altura na b48."
+    },
+    {
+      "topic": "Paleta e contorno por material",
+      "diagnosis": "Os brancos reportados já aparecem nos dados dos sprites da b47. O ajuste de material era feito por distância RGB global e a amostragem de redução atravessava partes do traço da borda.",
+      "action": "Classificar o tecido rosado antes da quantização e recuperar o contorno já pintado dentro da máscara opaca. Conservar os brancos de meia e metal e a associação rosa de P1 e verde de P2.",
+      "verification": "A paleta física de 16 entradas é idêntica à anterior. Na face direita de P1, as bordas muito claras caíram de 35 para 9 pixels no contato de escudo e de 42 para 10 no contato de espada."
+    },
+    {
+      "topic": "Repouso no chão",
+      "diagnosis": "O corpo já estava deitado na b47, mas o tecido e o recorte pouco contrastados dificultavam identificar cintura, escudo e apoio da cabeça.",
+      "action": "Retocar o repouso em decúbito, reforçar a leitura de materiais e manter a ordem de repouso, cabeça erguendo e apoio do joelho na mesma linha do chão.",
+      "verification": "O repouso conserva 58 × 10 pixels. A primeira levantada tem 17 pixels de altura e a seguinte 42. As três terminam no mesmo Y=143. A ordem aparece no framebuffer por leitura e no replay contínuo do mesmo SHA."
+    }
+  ],
+  "proof": "../scene02_alis_espelho_qa.md#b48--punho-tecido-contorno-e-repouso",
+  "follow_up": {
+    "candidate": "b49",
+    "rom_sha256": "2458fdecfccce8a33f29b7843860886893b6c205d8f2eda4bb6028a8c556e9da",
+    "diagnosis": "O dono observou escala ainda menor nos dois contatos aéreos, na queda, no repouso e na primeira levantada. A queda tinha um teto de largura de 32 px que reduzia toda a anatomia.",
+    "action": "Ajustar a escala das cinco poses em relação à guarda e ao plano do chão. Empacotar a queda diagonal sem o teto de largura do quadro anterior e calibrar a amostragem da levantada.",
+    "proportions_px": {
+      "escudo_no_ar": [[31, 49], [34, 53]],
+      "espada_no_ar": [[26, 50], [28, 53]],
+      "queda": [[32, 27], [42, 36]],
+      "repouso": [[58, 10], [63, 11]],
+      "cabeca_sobe": [[52, 17], [56, 18]]
+    },
+    "verification": "As cinco poses passaram pela verificação em pixels no Emulicious. Os quatro contatos do roteiro se repetiram no vídeo contínuo. O pico observado foi de 44 sprites e oito por linha, com zero fins de envio fora do VBlank.",
+    "proof": "../scene02_alis_espelho_qa.md#b49--escala-das-cinco-poses"
+  },
+  "pending": [
+    "Recompilação integral com o wrapper para promover a candidata incremental.",
+    "Aceite de 58 FPS funcionais por janela NTSC."
+  ]
+}

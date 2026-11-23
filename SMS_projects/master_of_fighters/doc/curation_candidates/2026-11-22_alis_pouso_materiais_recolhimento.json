@@ -1,0 +1,50 @@
+{
+  "scene": "Cena 02 — Alis × Alis",
+  "status": "candidato_a_curadoria",
+  "baseline": {
+    "candidate": "b52",
+    "rom_sha256": "47c0a4027d39b1d45bfe48a53ec819fb6ac3d046243c702fa848b3edd3ca8fe9"
+  },
+  "revision": {
+    "candidate": "b53",
+    "rom_sha256": "a15313589a6d196553e3c1ba16548db948818e8639ac5b85f7fbe4c720ce6753",
+    "baseline_replay": "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b52-pouso-r2/input.json",
+    "landing_proof": "out/diagnostics/alis_mirror_20261122/followup-b53/pouso-leitura-por-leitura.json",
+    "art_proof": "out/diagnostics/alis_mirror_20261122/followup-b53/identity-final/audit.json",
+    "framebuffer": "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b53-escudo-chutes/shove-phases.json",
+    "continuous_visual": "out/diagnostics/alis_mirror_20261122/followup-b53/qa-b53-escudo-chutes/replay-visual-b53.json",
+    "ntsc_fps": [33.675591334654854, 40.284197246596506],
+    "pending": ["Piso funcional de 58 FPS", "Captura PCM isolada"]
+  },
+  "entries": [
+    {
+      "topic": "Material do chute forte",
+      "diagnosis": "Pixels cinza do material vizinho continuavam na saia e no braço. Um pixel do punho do chute forte em pé vinha do plano de fundo, fora dos padrões de sprite.",
+      "action": "Aplicar as regiões da saia, pele e bracelete nas fases fortes em pé e no ar e na preparação compartilhada. Conferir tanto padrões quanto plano de fundo. Preservar o contorno, a silhueta e as ombreiras.",
+      "acceptance": "Comparar os pixels da b52 e da candidata por região, face e traje. Todo delta de cor do chute corresponde a uma região de material declarada."
+    },
+    {
+      "topic": "Escala das duas posturas baixas",
+      "diagnosis": "O agachamento e a guarda baixa mediam 34 e 36 px na b52. A leitura lado a lado com a guarda revelou volume demais na base.",
+      "action": "Converter de novo as células autorais com escala uniforme, preservar a sola em Y=143 e conferir ambas as posturas junto da flexão.",
+      "acceptance": "Medir 33 px no agachamento e 34 px na guarda baixa nas duas faces e nos dois trajes."
+    },
+    {
+      "topic": "Recolhimento após o empurrão",
+      "diagnosis": "O quadro final reutilizava uma pose da vítima em pé. A troca de detalhe era visível assim que o tropeço da rival terminava.",
+      "action": "Desenhar recuperação própria a partir do concept e do quadro de impacto, com peso centrado, escudo recolhido e lâmina separada.",
+      "acceptance": "Expor a recuperação com a rival no chão, em P1 e P2, e conferir a passagem do impacto à guarda no framebuffer."
+    },
+    {
+      "topic": "Controle bloqueado após o golpe aéreo",
+      "diagnosis": "Encerrar a caixa ativa no pouso preservava a duração terrestre de ATTACK. O leitor descartava novos comandos enquanto o relógio do golpe terminava.",
+      "action": "Prever a mesma transição de pouso na disponibilidade do controle e encerrar o estado aéreo antes de ler a postura em solo. Manter a flexão de pouso e a exigência de soltura do botão antigo.",
+      "acceptance": "Medir a primeira leitura em Y=144 nos quatro normais aéreos por jogador. Testar a mesma tecla após soltura e uma tecla diferente na leitura exata do pouso."
+    }
+  ],
+  "handoff": [
+    "Testar as fronteiras entre golpe, solo e próximo comando com input em leitura exata. Um caso com pausa longa após o pouso esconde esse tipo de bloqueio.",
+    "Inspecionar as regiões de material no resultado composto pela SAT e pelo plano de fundo. A ombreira conserva seu cinza enquanto pele, tecido e bracelete usam suas próprias rampas.",
+    "Incluir o último quadro da atacante no storyboard, em escala nativa e no instante em que a rival já está no chão. Conferir a retomada de guarda e a continuidade de identidade."
+  ]
+}

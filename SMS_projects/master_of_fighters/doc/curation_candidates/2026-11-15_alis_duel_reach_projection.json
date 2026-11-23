@@ -1,0 +1,277 @@
+{
+  "schema": "smsforge_art_curation_candidate_v1",
+  "id": "alis_duel_reach_projection_2026-11-15",
+  "status": "observed_static_review_pending_runtime_and_future_curation",
+  "dedup_key": "mof-lateral-plane-body-equipment-reach-reference",
+  "owner_project": "SMS_projects/master_of_fighters",
+  "owner_feedback": {
+    "decision": "rejected_v1_scale",
+    "scope": "A régua v1 usou a pose em perspectiva de Alis contra uma guarda mais lateral de Hayato. O pé no primeiro plano exagerou a leitura de tamanho. O proprietário pediu referência à escala relativa do elenco e conferência independente de armas e acessórios.",
+    "followup": "O proprietário autorizou a primeira rodada de sprites, comando forte no botão 1, ROM com rival e provas para revisão."
+  },
+  "observed_failures": [
+    {
+      "finding": "A sola mais baixa da concept em três-quartos foi usada como referência no plano lateral. A comparação misturou pontos de apoio em profundidade com a guarda flexionada do rival.",
+      "effect": "Diferença de projeção tratada como largura e altura do lutador. A normalização pelo contorno inteiro também mascarou a contribuição de equipamento e postura.",
+      "correction": "A régua v2 usa as duas páginas aprovadas do elenco à mesma escala. Alis e Hayato têm 75 U de referência corporal. Os 68 px em pé são calibração do estudo SMS."
+    },
+    {
+      "finding": "A meta de 36 px da v1 saiu de uma comparação com escala e projeção incompatíveis. A soma distinguia avanço e extensão, mas os dois valores ainda careciam de pose lateral.",
+      "effect": "O número poderia dirigir a arte antes de existir prova lateral ou uma comparação válida da espada curta com a katana.",
+      "correction": "Retirar a meta da v1. Medir apoio, pivô, mão, ponta, altura e alvo por pose. Comparar armas no mesmo ângulo e escala antes de fechar o alcance."
+    }
+  ],
+  "observed_successes": [
+    {
+      "finding": "O manifesto aprovado do elenco fornece 75 U e 600 px inclusivos cabeça–sola para os dois. Os hashes das duas páginas e os cálculos da v2 foram conferidos.",
+      "limit": "A relação em pé não iguala a altura das poses em guarda."
+    },
+    {
+      "finding": "As vistas da Alis dão projeção aproximada de 23 e 27 px para a lâmina e 11 × 20 e 6 × 18 px para o escudo na calibração de 68 px. Esses deltas tornam a perspectiva verificável.",
+      "limit": "Estimativas por pontos visuais na ficha. A vista de luta e as dimensões finais dos objetos estão pendentes."
+    },
+    {
+      "finding": "Hayato oferece controle de escala, ritmo e trajetória no material v7. Na guarda, 58 px até o cabelo e 66 px com a katana. No corte, R02 alcança +29 px a h=59–60 e R03 +24 px a h=3.",
+      "limit": "Medidas de pixels visíveis. A leitura do alcance de Alis depende da nova ROM."
+    },
+    {
+      "finding": "Na revisão anterior de Hayato, a opção de timing sem deformar a lâmina teve aceite. A deformação foi recusada porque mudou a trajetória percebida.",
+      "limit": "Referência para diagnosticar se o problema está na trajetória, no espaçamento ou na exposição. Os tempos de Hayato pertencem ao golpe de Hayato."
+    }
+  ],
+  "practices_for_developer_skill": [
+    "Calibrar a estatura em referência neutra do elenco. Em vistas compatíveis, comparar coroa, ombro, quadril, joelho, tornozelo e contato com o chão antes de medir alcance.",
+    "Manter escala corporal e pontos de fixação entre poses. Registrar a contribuição de armas, escudo e outros acessórios para o contorno equipado.",
+    "Medir o alcance por fase com avanço do pivô, extensão local e altura. Comparar a mesma altura no rival. Registrar medidas visuais, contato diagnóstico e colisão de gameplay com seus escopos.",
+    "Rever primeiro guarda, pose de execução e retorno em tamanho nativo e reprodução à velocidade normal. Alterar timing e desenho separadamente quando for preciso identificar a causa de uma falha.",
+    "Ligar fonte, conversão, comando, ROM e mídia pelo SHA. Registrar inputs limítrofes, retorno, reentrada, cada distância, os dois lados, pior frame e FPS funcional com o par na tela."
+  ],
+  "evidence": [
+    {
+      "path": "SMS_projects/master_of_fighters/doc/duel_reach_reference_v1.png",
+      "sha256": "b8bc74778cb025d07920d6aa927ea06309b42dc15e5bc2793d8eee87c6d67852",
+      "role": "Histórico da comparação rejeitada"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/duel_reach_reference_v2.md",
+      "sha256": "ca654e6aa0e3f6390dc43c6fe61deb77ad42d8b3488e29a78f0a6731c7aa42ae",
+      "role": "Receita e salvaguardas para a comparação refeita"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/duel_reach_reference_v2.png",
+      "sha256": "80d8e8a3ef99c4d49999e600a1062ba2149c77bf2ddffc332bd5e95292a04dec",
+      "role": "Prancha estática atual"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+      "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0",
+      "role": "Decisão de referência sobre exposição e trajetória"
+    }
+  ],
+  "future_curation": {
+    "status": "queued_not_homologated",
+    "existing_doctrine": [
+      "L105 / SMS_GLOBAL §90 — harmonia e geometria do elenco",
+      "L106–L107 / SMS_GLOBAL §§91–92 — revisão artística e equipamento",
+      "SMS_GLOBAL §133 — desempenho funcional do trecho"
+    ],
+    "next_evidence": "Ligar o retorno da rodada 1 à ROM e aos comparativos. Registrar falha observada, tentativa, delta, efeito visual ou temporal e resultado de teste antes de propor alteração da skill."
+  },
+  "round1_review": {
+    "status": "exploratory_studies_reviewed_implementation_pending",
+    "review_path": "SMS_projects/master_of_fighters/doc/alis_strong_thrust_round1_coordinator_review.md",
+    "studies": [
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/study_01.png",
+        "sha256": "aaae93f8bf5b14425329c99115f3c9c4385cd86398a723d0ffc273236d4bb755",
+        "alpha_levels": 256,
+        "semitransparent_pixels": 433843,
+        "fully_opaque_pixels": 153
+      },
+      {
+        "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/study_02.png",
+        "sha256": "ab889dac61fca9a5da3bb52977d133cb622e1f35cc47ea4056f3fa06328d02a3",
+        "alpha_levels": 256,
+        "semitransparent_pixels": 402259,
+        "fully_opaque_pixels": 649
+      }
+    ],
+    "retain": "Silhueta reconhecível da extensão, linha de ataque e transferência sugerida pelo joelho dianteiro. Preservar as duas tentativas e seus prompts.",
+    "delta": "A revisão da folha removeu a linha de chão aparente. As franjas de cor persistiram, assim como a falta de calibração lateral e de registro de pivôs. A segunda folha continua estudo.",
+    "skill_candidate": "Validar duas poses-chave limpas, guarda e extensão, com os mesmos apoios, âncoras, escala e dimensões de equipamento, antes de gerar ou finalizar uma folha inteira. Medir alfa e inspecionar contorno em fundo claro e escuro. Antes do acabamento, testar o gesto temporizado e separar falha de timing de falha de pose.",
+    "runtime": "A tarefa encerrou depois dos estudos. Sem build, ROM ou QA da Alis entregues.",
+    "continuation_review": {
+      "status": "four_new_stills_reviewed_implementation_pending",
+      "artifacts": [
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/keyposes_01.png",
+          "sha256": "fb1ddcaf94154bcd9a01a1807d6b07c21ae989187ab37e3ad6979162277cf28b",
+          "alpha_levels": 256,
+          "semitransparent_pixels": 322388
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/keyposes_02_shield.png",
+          "sha256": "d9a3fcafe3fbd03f05e4722704b3944b5581062efd956557087cb595757f91cc",
+          "alpha_levels": 256,
+          "semitransparent_pixels": 348197
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/sequence_01.png",
+          "sha256": "afddbb42ac9358606d46780032a997e15e392182aa71e675fe6967029e782eb2",
+          "alpha_levels": 256,
+          "semitransparent_pixels": 433213
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/sequence_02_shield.png",
+          "sha256": "c70ef27f35d682e652d9d2e2db6a8fb9810bbfc1713560843db054d3efa54df3",
+          "alpha_levels": 256,
+          "semitransparent_pixels": 442130
+        }
+      ],
+      "diff_method": {
+        "background_rgb_hex": "#a6a6a6",
+        "threshold": "Diferença absoluta maior que 16 em qualquer canal RGB após composição com alfa e sem registro de pivô.",
+        "keypose_x_boundaries": [0, 750, 1774],
+        "keypose_changed_pixels": [48724, 76667],
+        "sequence_x_boundaries": [0, 367, 758, 1360, 1761, 2172],
+        "sequence_changed_pixels": [44995, 60498, 59869, 72175, 47836],
+        "limit": "Detecta variação na área, inclusive deslocamento. Para julgar preservação na próxima edição, comparar pelo pivô e pela máscara da região solicitada."
+      },
+      "implementation_and_art": {
+        "worked": "As chaves deram uma leitura mais lateral e mantiveram a direção da estocada. A pega do escudo ficou legível com a edição. O produtor preservou originais e hashes, declarou os resultados parciais e protegeu o host de carga concorrente.",
+        "did_not_close": "A solução da pega mudou a apresentação e o material do escudo, atingiu a área da guarda e a sequência continuou com franjas. Faltaram cotejo em escala nativa com Hayato, apoios, trilha da lâmina, sequência temporizada, comando e ROM.",
+        "practice_to_test": "Fixar construção do equipamento em uma vista de apoio. Corrigir localmente duas chaves com referência de chão e escala, testar movimento em esboço temporizado e só então finalizar as poses que sustentam o gesto. Ao repetir um defeito, trocar o método. Desenvolver a entrada como frente leve independente da conversão.",
+        "next_observations": "Registrar tentativas por correção fechada, chaves reaproveitadas e delta por região. Em 1× e à velocidade normal, verificar expressão e identidade, transferência de peso, nitidez da saída, trajetória da lâmina e assentamento na guarda. Conferir input, par e desempenho na ROM candidata."
+      },
+      "coordination_audit_and_verification": {
+        "direction_gap": "A instrução de tornar a fixação legível não explicitou oclusão, materiais protegidos e vista de construção. A ordem das etapas não amarrou a expansão da folha à evidência das duas chaves. O comando não distinguiu trabalho leve de entrada e roteiro de QA das dependências pesadas de build e emulação.",
+        "review_gap": "A avaliação anterior levantou perspectiva e recorte, mas não definiu uma prova de preservação para a edição nem indicou como o peso e o retorno seriam julgados em movimento.",
+        "next_method": "Declarar na revisão o defeito, a área autorizada, as invariantes e a prova para seguir. Medir deltas em poses registradas e conferir visualmente os materiais. Avaliar velocidade normal, usar playback lento para diagnóstico e repetir a observação no framebuffer do SHA da candidata. Usar escopos distintos para julgamento artístico e gates técnicos.",
+        "future_curation": "Confrontar as duas trilhas com art-review.md e sms-sprite-animation.md. Promover uma melhoria só com evidência da sua aplicação e do efeito na rodada seguinte."
+      }
+    },
+    "third_review": {
+      "status": "input_host_logic_checked_spatial_preview_failed_rom_pending",
+      "artifacts": [
+        {
+          "path": "SMS_projects/master_of_fighters/src/main.c",
+          "sha256": "79150c7d5694af072e6b5ed8523fc2cdfcf5398c6f860cc9df927061fb145843",
+          "role": "C usado no teste independente de bancada"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/doc/alis_strong_thrust_round1_qa.md",
+          "sha256": "bd4078718f3df106dce072dc5059964a2d7620c335421f9e7b0a0b064775852e",
+          "role": "Roteiro do produtor, anterior à revisão das sondas"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/keyposes_local_cleanup_01.png",
+          "sha256": "837facb1246620c1f1632370913abc17d6eab3dff7ffdacb93cbd5c35877caca",
+          "role": "Edição rejeitada. A franja persistiu e áreas internas mudaram."
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/shield_construction_study.png",
+          "sha256": "385a888b5c54f1b91ef2e166893f88f7a53b2587814671139ee324f14e8e8ec0",
+          "role": "Estudo de face e borda, com interior e tira hipotéticos"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/sequence_01_sketch_normal.mp4",
+          "sha256": "8c55c866dba820b052adb3c62b096d4353049c297e845bf1efb4c30d4b8127f0",
+          "role": "Esboço montado, 144 quadros, usado em análise quadro a quadro"
+        },
+        {
+          "path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/sequence_01_sketch_slow.mp4",
+          "sha256": "b453a39b38c297007edd5eeac55db9ea846c8c8f01f88589fb71d14a3c5efc3e",
+          "role": "Reprodução lenta do esboço, 575 quadros"
+        }
+      ],
+      "input_host_check": {
+        "method": "Extração do ramo MOF_ALIS_STRONG_HOLD e da atualização de poses do mesmo main.c, compilados em C99 no host. Durações de fixture [0,7,3,6,12].",
+        "passed": ["repouso", "toque", "11/12/13 leituras", "pressão longa", "soltura e novo disparo", "limiar durante recuperação", "limiar na última leitura da recuperação", "volta de 255 para zero"],
+        "audit_finding": "O código descarta o limiar que chega antes de a pose voltar a zero. C7F9 troca tempo da pose por contagem de pressão no piloto. Guardar ambas as grandezas e medir latências na candidata.",
+        "limits": "Teste de lógica com fixture. Sem compilação alvo, mapa de memória, input físico, render, desempenho ou ROM."
+      },
+      "preview_check": {
+        "method": "Quadros do MP4 normal decodificados em RGB, extremos X na banda inferior Y=145..153, canal máximo >=64. Transições detectadas por diferença absoluta média acima de 1.",
+        "frame_numbers": [0, 8, 15, 18, 24],
+        "durations_frames": [8, 7, 3, 6, 12],
+        "lower_band_edges_x": [[40, 112], [38, 115], [11, 101], [27, 100], [36, 109]],
+        "finding": "Da preparação à extensão, os extremos inferiores andam -27/-14 px na montagem e a pose ataca para a direita. A guarda final também difere de posição da inicial.",
+        "limits": "Variação de enquadramento em recortes sem pivô. Medida do esboço, sem avaliação perceptual contínua ou conclusão sobre o movimento do sprite."
+      },
+      "implementation_lesson": "O input independente rendeu progresso verificável. A edição por texto repetiu a alteração fora da região. Trocar para máscara verificável ou redesenho autoral delimitado. Registrar pivôs, apoios e deslocamento antes de remontar a prévia.",
+      "coordination_lesson": "O comando anterior deixou implícitos o mecanismo de preservação e o registro do vídeo pelo pivô. Pedir essas provas no ponto de decisão. Distinguir pressão, disparo, primeira pose visível e extensão. A auditoria confere primeiro a mídia e as sondas, e então julga o gesto."
+    },
+    "fourth_review": {
+      "status": "mask_and_anchor_diagnostics_checked_native_art_and_rom_pending",
+      "artifacts": [
+        {"path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/keyposes_guard_masked_01.png", "sha256": "2d358b12a0956f5b4f7e05ede25c9babe1a1a6116ccc1798b2f915d1404d0ef4", "role": "Fonte exploratória com alteração local de alpha; revisão artística pendente"},
+        {"path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis/strong_thrust_round1/keyposes_guard_mask_01.png", "sha256": "4570273c1a4bfc9ea5f1dfd840b0492792333b7a6bb0baa940aa48f7dd80ea1b", "role": "Máscara da edição local"},
+        {"path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/duel_keyposes_provisional_1x.png", "sha256": "ff91fea0a341c957d74dae87b13b43782c2e204ec629b11f6ea993089f7be35e", "role": "Comparação no chão; fator Alis experimental, não calibrado"},
+        {"path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/sequence_01_pivot_sketch_normal.mp4", "sha256": "75c1a78e945a516840ad4beeba3f6531366e02501faf18ec356cf2cee4b179dd", "role": "Esboço registrado por apoio estimado; não é framebuffer"}
+      ],
+      "mask_review": {
+        "changed_pixels": 2224,
+        "outside_mask": 0,
+        "alpha_thresholds_equal": [25, 64, 128, 224],
+        "method": "Comparação dos canais alpha da fonte original e edição binarizados no limiar. Composição RGB sobre preto, #a6a6a6 e branco e contagem de diferença >16 por canal.",
+        "composite_changed_gt16_black_gray_white": [0, 0, 10],
+        "finding": "A preservação fora da máscara foi observada, mas a limpeza não altera a máscara binária em limiares iguais ou superiores a 25. Seu efeito no material convertido ainda não foi demonstrado."
+      },
+      "motion_review": {
+        "anchor": "Centro estimado do apoio traseiro; avanço adicional declarado zero; mesma guarda para abertura e fechamento.",
+        "durations_frames": [8, 7, 3, 6, 12],
+        "lower_band_edges_x": [[16, 89], [17, 93], [16, 105], [16, 90], [16, 89]],
+        "finding": "Preparação para extensão mudou de -27/-14 para -1/+12 pixels nos extremos da prévia.",
+        "limits": "Estabilização de enquadramento por apoio estimado; não prova pivô anatômico, plantio, fluidez ou avanço na ROM."
+      },
+      "implementation": "Calibrar por segmentos em referência corporal 68 px, corrigir e revisar ambas as chaves e a saída convertida, registrar apoio/pivô/avanço, avaliar atuação contínua e integrar fontes nativas ao consumidor. Medir sondas e caso de último tick na candidata e testar alcance, recursos e desempenho no alvo.",
+      "coordination_and_audit": "Exigir não só preservação externa como efeito observado após o processo de conversão. Distinguir estabilização de enquadramento de qualidade do movimento. Não deixar a carga concorrente interromper trabalho leve independente; preservar a VM e tratar separadamente a falha de áudio.",
+      "limits": "Sem ROM, compilação SDCC, map, avaliação de playback contínuo ou sessão Emulicious nesta auditoria. Hipóteses locais, não doutrina homologada."
+    },
+    "fifth_implementation_observation": {
+      "status": "experimental_static_only_independent_review_and_rom_pending",
+      "converted_mask": "Extração autoral no limiar 128 produziu guarda e extensão indexadas idênticas antes e depois da máscara: sem melhora demonstrada no resultado convertido.",
+      "resource_attempts": "A correção de aspecto expôs pico 10 em sprites por linha; abaixar a lâmina falhou com pico 11 e mínimo 10 na busca de fases. A divisão experimental de fragmentos para BG passou em 24 cenas estáticas com máximo 53 na SAT e 8 por linha; não é prova de hardware.",
+      "evidence": {
+        "static_report": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/grounded_faces_assets_probe/static_check.json",
+        "static_report_sha256": "d9f8a5c8a146d36beb0bfe8f969c4655d68df32b4dc0a1e0f824b3fc87b11c70",
+        "generated_header_sha256": "c93fc4ebcd4a11b86e521758058394796aa76b6e46a9f35520ad346dc0e17a46",
+        "preview_4x_sha256": "d637bb5d7ca5ca57799d8dbbf6d5060e3c267428c444bcb6cec3f2b300502e2a"
+      },
+      "implementation_opportunity": "Conferir a ordem de BG e rival no framebuffer, inclusive 25 e 2 pixels de sobreposição nas distâncias perto e limite. Fechar escala neutra, recorte e gesto usando as chaves corretas antes de promover a arte.",
+      "coordination_opportunity": "Exigir que análise por fases e máximo estático sejam apresentados junto de prioridade visual e custo de escrita em VBlank; uma solução que caiba na SAT pode mudar a oclusão e continuar sem prova no alvo.",
+      "limits": "Preparação do produtor, sem revisão independente, playback contínuo, compilação SDCC, ROM, sessão Emulicious, pior frame ou FPS. Preservar todas as tentativas."
+    },
+    "fifth_independent_review": {
+      "date": "2026-11-16",
+      "status": "redraw_and_integration_reviewed_rom_pending",
+      "artifacts": [
+        {"path": "SMS_projects/master_of_fighters/src/main.c", "sha256": "5a201fb806bc9b5e1737f2d94010712b282ba684ccc850490b6efb9031c65fd1", "role": "Vínculo do consumidor à sequência exploratória e ordem de SAT, PNT e sondas"},
+        {"path": "SMS_projects/master_of_fighters/.mddev/alis_strong_round1_diagnostic_build.json", "sha256": "25ea4ff87bc484a11238743105327075780644efe68afd41d54470e55b7efd3b", "role": "Manifesto da build diagnóstica ainda sem ROM"},
+        {"path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/grounded_faces_assets_probe/both_faces_assets.h", "sha256": "c93fc4ebcd4a11b86e521758058394796aa76b6e46a9f35520ad346dc0e17a46", "role": "Cabeçalho ligado ao piloto"},
+        {"path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/redraw_comparison_01/dark_4x.png", "sha256": "7b297fe5a56820aed94b7ae8a2bde69d38ee8afaeea3c3db9b908719621e1e7f", "role": "Redesenho convertido com chão e referência comuns"},
+        {"path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/redraw_reach_preview_01/reach.json", "sha256": "4ea343d5e03d456e52a01ec54d59be64e6611740ad60f6326bc5ca6ad700a046", "role": "Posições e geometria do redesenho. A face oposta é espelho offline."},
+        {"path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/redraw_blade_bg_probe_01/split_probe.json", "sha256": "672b8c7d1999ace01305974c35cf202ea5d00fbbcf52beae4e8648359c917c68", "role": "Reconstrução por índices do split e ocupação estática"},
+        {"path": "SMS_projects/master_of_fighters/out/diagnostics/alis_strong_thrust_round1/fringe_converted_comparison_01/comparison.json", "sha256": "66baf3b794ac6c88fe39dd8388f6ebb2b4857e22129cdac2a3ebe32b7f5f6569", "role": "Delta de um pixel na guarda com paleta fixa"}
+      ],
+      "art_review": {
+        "observed": "Melhora de expressão, apoio legível, escudo reconhecível e linha da estocada clara no redesenho. Escala corporal ainda pequena na comparação visual e revisão contínua indisponível porque o redesenho tem apenas guarda e extensão.",
+        "visible_heights_px": {"alis_guard": 51, "alis_thrust": 46, "hayato_equipped_guard": 66, "hayato_guard_crown": 58},
+        "limits": "Alturas visíveis de poses, sem inferência de estatura neutra. Segmentos e lâmina do estudo anterior pertencem a sequence_01. O delta de limpeza pertence a keyposes_01."
+      },
+      "checks": {
+        "static_pilot": {"scenes": 24, "max_sat": 53, "peak_per_line": 8},
+        "redraw_all_sprites": {"sat": 51, "peak_per_line": 9, "overflow_lines": 8},
+        "redraw_split_one_scene": {"sat": 50, "peak_per_line": 8, "overflow_lines": 0, "moved_pixels": 12},
+        "model_blade_tip_x_facing_right": {"pilot_full": 119, "pilot_bg_behind_target_near_limit_outside": [116, 118, 119], "redraw_full": 115, "redraw_bg_behind_target_near_limit_outside": [111, 114, 115]},
+        "model_method": "Ler a linha 44/45 do sprite e do fragmento BG à direita. Aplicar os offsets de cena. Suprimir cada pixel do fragmento BG onde a referência tem alfa positivo. Comparar o extremo X inteiro com o extremo visível. Não executa VDP.",
+        "prep_to_thrust_map_writes_with_hud": 13,
+        "input_test_scope": "Coletor com ponte simulada, offsets, amostras inválidas, ordem, soltura e interrupção.",
+        "limits": "Sem build alvo, mapa de sondas, playback contínuo do redesenho, ROM, FPS, pior frame ou colisão."
+      },
+      "implementation_lesson": "Preservar controle de paleta para isolar efeitos de correção. Fechar calibração e sequência da mesma fonte. Guiar redução de sprites pelas linhas que descartam conteúdo e testar se a preservação visual continua válida quando um elemento ofensivo muda de camada.",
+      "coordination_lesson": "Pedir uma cadeia explícita da fonte à ROM no briefing e no roteiro de QA. Condicionar mudança de camada à apresentação da arma e do rival na janela ativa. Manter experiências separadas da rota que será compilada.",
+      "audit_lesson": "Verificar identidade do cabeçalho antes de transferir aceites. Derivar separadamente contorno geométrico e imagem visível quando as camadas se cruzam. A simulação de ocupação e reconstrução de índices requer confirmação dinâmica no VDP e medida de pior quadro."
+    }
+  }
+}

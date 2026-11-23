@@ -1,0 +1,30 @@
+{
+  "schema": "mof_scene02_first_family_direction_v1",
+  "date": "2026-11-19",
+  "scene": "02",
+  "mode": "fixed_versus",
+  "fighters": ["hayato", "alis_landale"],
+  "input": {
+    "tap": "release_before_threshold",
+    "buffer_ticks": 0,
+    "cancel": false,
+    "pilot_b1_comparison": [6, 8],
+    "taunt": "compare_strict_and_one_poll_without_promotion"
+  },
+  "defense_trial": {
+    "standing_loses_to": "low",
+    "crouching_loses_to": "overhead",
+    "airborne_loses_to": "ground_anti_air",
+    "life_and_reactions": "retain_pilot_common_parameters"
+  },
+  "approved_production_scope": {
+    "standing_normal_ids_per_fighter": ["pe_1_curto", "pe_1_longo", "pe_2_curto", "pe_2_longo"],
+    "remaining_attack_families": "deferred_until_first_duel_is_reviewed"
+  },
+  "owner_wording": {
+    "gd01": "Toque na soltura, sem buffer nem cancelamento",
+    "gd02": "Aprovar teste de três guardas",
+    "gd03": "Aprovar só os normais de pé agora"
+  },
+  "promotion": "A decisão autoriza a produção do recorte. Caixas, tempos, arte, opção de sensibilidade e aprovação na ROM dependem de prova."
+}

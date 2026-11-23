@@ -1,0 +1,19 @@
+{
+  "schema": "mof_independent_review_request_v1",
+  "subject": "cena_01_duel_read",
+  "requested_from": "independent_reviewer_and_owner",
+  "producer_verdict": null,
+  "do_not_treat_as_approval": true,
+  "checkpoint": "doc/cena01_duel_read_checkpoint_v1.json",
+  "look_at": [
+    "out/diagnostics/cena01_duel_read_v1b/rom_read.png",
+    "data/source_art/scenes/cena01_duel_read/cena01_plate_v1.png",
+    "data/source_art/scenes/cena01_duel_read/cena01_plate_v1_4x.png"
+  ],
+  "questions": [
+    "Os nomes DR e JJ e os medidores se leem a 256×192?",
+    "Os pés encontram o chão sem flutuar e sem cortar a sola?",
+    "O fundo separa os dois lutadores sem competir com eles?",
+    "A placa preserva rosto, roupa e armas já aceitos?"
+  ]
+}

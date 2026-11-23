@@ -1,0 +1,48 @@
+{
+  "status": "candidate_for_future_curation",
+  "scope": "Master of Fighters / Cena 02 / Alis × Alis",
+  "prior_record": "2026-11-21_alis_salto_comandos_montagem.json",
+  "comparison": {
+    "revision": "b32",
+    "rom_sha256": "201757c38220c8890bd1bb09b00f6b1fad2a0ace4e5b92184578fe3cfb57e03e",
+    "physics": {"apex_px": 78, "air_ticks": 20, "free_diagonal_px_per_tick": 6}
+  },
+  "qa": "../scene02_alis_espelho_qa.md",
+  "production_checkpoint": {
+    "revision": "b39",
+    "rom_sha256": "f978da58124869d303b384c6cb711fad552335e73d86c2a740205d4a421bb325",
+    "native_mixed_contacts_verified": 14,
+    "native_trade_contacts_verified": 4,
+    "native_aerial_attack_and_guard_contacts_verified": 5,
+    "paired_throw_capture_and_release_verified": 3,
+    "compatible_defenses_with_native_exposure": 12,
+    "nominal_mixed_windows": [37.637425609320125, 39.94849560287487],
+    "pending": ["58 FPS em ambas as janelas", "Primeira exposição da guarda alta ao recuar", "Pose da vítima no primeiro quadro do reinício", "Âncora da pega e proporção da vítima"]
+  },
+  "entries": [
+    {
+      "topic": "Montagem de um espelho em uma paleta física",
+      "diagnosis": "Ao duplicar o personagem da b32, a atribuição por complemento deixava apenas uma Alis e o pivô deslocado para o lado do quadril misturava as duas silhuetas na separação mínima.",
+      "action": "Instanciar as duas atrizes explicitamente, manter os comandos e o movimento por controle e registrar os desenhos e caixas no pivô de quadril. Fazer a troca de traje por índice da paleta compartilhada, com reserva transparente e metais, pele e cabelo em comum.",
+      "verification": "Confrontar o boot e os quadros separados e cruzados com os mesmos controles. Comparar ao mesmo tempo os dois trajes, pivôs, SAT e pixels inéditos da composição."
+    },
+    {
+      "topic": "Contato de gameplay e pose exposta",
+      "diagnosis": "O primeiro acerto da b33-r3 atrasou a reação alta. Na b34, os primeiros contatos de espada de cada controle ainda mostraram a preparação. A troca simultânea da b35 resolveu ambos os danos e substituiu as duas silhuetas ofensivas pelas reações antes da publicação.",
+      "action": "Antecipar a pose ativa enquanto o comando amadurece, selecionar a reação provável no contexto e manter as poses futuras residentes. Publicar a ação ativa dos dois lados no tick da troca e a reação no tick seguinte.",
+      "verification": "Rastrear pedido, residência, publicação e framebuffer no mesmo SHA. Reproduzir exposição fria, ambas as faces e troca no mesmo tick. Manter o efeito de combate vinculado à pose real."
+    },
+    {
+      "topic": "Agarrão com estados de duas atrizes",
+      "diagnosis": "A b34 aplicou dano no momento pretendido, mas o foreground e o P0 perderam momentos da trilha de giro e soltura. Na b35 a soltura central de P1 saiu no tick e a de P2 ficou com a pose anterior. Em um teste a pose deitada da vítima do P2 ficou ausente durante todo o estado.",
+      "action": "Separar as linhas de exposição e manter a pose pendente mais urgente no buffer de fundo. Antecipar a pose de chão durante a descida e alternar a prioridade entre controles.",
+      "verification": "Conferir alcance de 32 px e erro a 33 px, alvo aéreo, bloqueio, as duas orientações, ambos os papéis, parede, dano único, pose de chão e novo comando. Comparar a mão de pega e o ponto de contato na vítima."
+    },
+    {
+      "topic": "Cadência, comunicação visual do peso e timbres",
+      "diagnosis": "A b35 mediu 36,646967040653806 e 36,95235843265925 FPS nominais no roteiro misto, com zero fins em área ativa. Um número baixo de derrames de VBlank ainda pode coexistir com uma sessão lenta.",
+      "action": "Medir separadamente lógica, preparação, envio e apresentação sob as duas personagens. Conservar transferência de peso na marcha, compressão do salto e efeitos de escudo e espada em canais autorados. Preservar gravação bruta do PSG e o vínculo ao vídeo.",
+      "verification": "Alvo 60, piso 58 em cada janela NTSC válida, inclusive pior trecho. Comparar instrumentos por material com captura isolada. A direção sonora da espada de Phantasy Star permanece registrada para curadoria."
+    }
+  ]
+}

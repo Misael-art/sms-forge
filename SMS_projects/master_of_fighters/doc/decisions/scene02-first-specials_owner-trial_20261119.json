@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-19",
+  "scene": "02",
+  "decision": "owner_approved_for_trial",
+  "source": "Resposta do dono ao comparativo de especiais: Aprovar os dois para ensaio",
+  "input": {
+    "sequence": "baixo puro, depois frente relativa + nova pressão de 1",
+    "window_readings": 8,
+    "priority": "um especial legal consome 1 antes do normal; mantém o botão consumido até soltar"
+  },
+  "actions": [
+    {"actor": "hayato", "name": "Saque em passada", "role": "corte horizontal de aproximação com recuperação punível no erro"},
+    {"actor": "alis", "name": "Passo de escudo", "role": "pancada curta de aproximação com distância de resposta após o bloqueio"}
+  ],
+  "status": "aprovação de ensaio; sincronização, alcance, dano, recuperação e aceite visual dependem de QA no binário"
+}
