@@ -1,5 +1,22 @@
 # 11-gdd — master_of_fighters
 
+## Cena 02 · Alis contra Alis
+
+O dono autorizou o duelo local de Alis contra Alis com trajes próprios
+para P1 e P2, os quatro normais em cada uma das três posturas e a Puxada
+com Escudo em frente + 1 + 2. Cada lado pode atacar, defender, agarrar,
+sofrer impacto localizado, cair e retomar o controle. O arco de 78 px e
+20 ticks da b32 permanece como referência. Hayato × Alis fica como
+controle de regressão. A cena usa o perfil competitivo fixo da personagem.
+O roteiro da História e as propostas de magia e Super têm seus próprios aceites.
+[Curadoria de origem](../../../doc/curation/2026-11-21_alis_espelho.json).
+
+Na revisão de 22/11, o chute aéreo forte mantém a rival em reação de
+impacto e recuo. A rasteira e o golpe final do round continuam com
+queda. A Puxada com Escudo explora apoio e transferência de peso. Alis
+puxa a rival pelo braço, projeta o escudo e provoca passos involuntários
+para trás antes da queda. As duas mantêm seu lado durante a ação.
+
 > **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
 > Os sprites e animações atuais do Dr. Social não devem ser continuados,
 > retocados, convertidos, integrados ou promovidos. Retomada futura: novo desenho
@@ -341,6 +358,12 @@ uma espadada direta. O botão e a duração definem o normal. A arma e a atuaç�
 expressam a identidade da lutadora. O comando baixo → frente + 1 e suas
 poses pertencem ao ensaio direcional da b11-r2. [Decisão e critérios de prova](decisions/scene02-normais-dois-botoes_owner_20261121.json).
 
+A [régua de duelo](duel_reach_reference_v2.md) calibra Alis e Hayato pela
+prancha aprovada do elenco e registra a direção de toque e pressão para
+os dois botões. A estocada de Alis é o normal forte do botão 1. Medir o
+alcance após a revisão da pose lateral e do equipamento. O limiar e a
+precedência dos comandos seguem em GD01.
+
 Aceite futuro de cada movimento: preparação aparece antes da consequência;
 alcance desenhado e contato concordam; defesa/erro recebem respostas distintas;
 há contrajogo executável; retorno permite nova ação sem estado preso. Conferir
@@ -523,6 +546,9 @@ e paletas CRAM compartilhadas por sprites, cenário e HUD conforme o contrato
 Escolher personagem → duelo 1v1 melhor-de-3-rounds → punzir/bloquear/esquivar
 conforme o padrão de IA do oponente → vencer → desbloquear chefe/alterno →
 escolher de novo com roster e oponentes mais duros.
+
+Cena 01 é a leitura desse duelo: dois lutadores, chão e HUD de nomes e vida.
+Não é cenário ilustrado final nem round jogável.
 
 ## Escalação registrada (2026-10-02; expansão aprovada pelo dono em 2026-10-04)
 

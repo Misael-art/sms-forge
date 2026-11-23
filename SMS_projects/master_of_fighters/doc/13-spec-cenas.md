@@ -275,6 +275,14 @@ de seleção nesta revisão; responsável engenharia/UI + arte, decisão GD01/GD
 
 ### Cena 02 — duelo 1v1
 
+O lote do espelho usa Alis em ambos os controles na arena da Cena 02.
+O P1 inicia à esquerda. Cada traje segue o controle também após a
+virada. A mesma paleta P1 atende toda a SAT. As duas lâminas podem
+requerer composição P0 no mesmo tick. Orçar a sobreposição das duas
+atrizes, inclusive queda, agarrão, HUD e PSG, com limite de oito
+sprites por linha, 64 na SAT e 58 FPS funcionais em cada janela válida.
+O recorte b32 de Hayato × Alis permanece como controle de comparação.
+
 **Finalidade/informação principal:** administrar distância, ameaça e resposta,
 entender a consequência e vencer melhor-de-três rounds. A leitura começa
 antes do primeiro golpe e termina só depois de um resultado compreensível.
@@ -611,27 +619,40 @@ degrau128B,outra ROM7ce342bc…,0derrame/mínimo217. Quatro sessões encerradas;
 somente o diagnóstico residente; cenário/HUD/gameplay, PAL e produção da Cena01
 continuam abertos. Não inferir orçamento pelo screenshot nem milissegundosCPU.
 
-## Cena 01 — _(nome)_
+## Cena 01 — leitura do duelo
+
+Finalidade no GDD: o jogador lê quem luta, a vida cheia e o chão antes da
+ação. Esta placa usa o par já aprovado J.J. à direita e Dr. Social à esquerda
+(`MOF_JJ_SAMPLE=2`), sem cenário ilustrado e sem timer falso.
+
+Placa `cena01_plate_v1.png`, SHA-256
+`be41497a29f8c9870a5d5f4b84e0d79a56423d0db94e968f2e69c19ac98bc44d`.
+12 padrões de 32 B em tile 256 (`0x2000`), 384 B. PNT `0x3800`, 32×24, sem
+bits 13–15. P0: backdrop `0x10`, chão `0x14`, aresta `0x2A`, contato/HUD
+`0x00`, fio `0x0A`, texto `0x3F`, vida `0x08`. Sprites continuam no pool de
+180 padrões / 5.760 B, máximo 50 SAT, pico 8/linha já medido no par. A placa
+não adiciona sprite.
+
+Contato: linha preta em Y143. No quadro 150 da ROM
+`90ea0f98…`, as colunas de apoio dos dois lutadores têm pixel opaco nessa
+linha ou na linha imediatamente acima, sem faixa de backdrop entre sola e
+chão. A ROM `3a4a83ea…` fica preservada como a tentativa com a linha em Y144.
+
 ### Layout de VRAM declarado
 | Região | Faixa | Tiles | Uso |
 |--------|-------|-------|-----|
-| patterns BG | — | — | — |
-| patterns sprite | — | — | — |
-| name table | — | — | — |
-| SAT | — | — | — |
+| patterns sprite | `0x0000` | 180 | par J.J./Social, inalterado |
+| patterns BG | `0x2000` | 12 | HUD e chão |
+| name table | `0x3800` | 32×24 | placa |
+| SAT | `0x3F00` | até 50 | mesmo par |
 
-### Orçamento worst-frame (MEDIDO)
-| Item | Bytes/frame | Método da medição |
-|------|-------------|-------------------|
-| — | — | — |
+### Orçamento worst-frame
+A placa entra na VRAM antes do loop. O pior quadro do loop não foi medido
+de novo nesta ROM. O número histórico do par sem placa não paga este SHA.
 
-- **Total worst-frame**: _(medido)_ bytes
-- **Headroom**: _(medido)_ %
-- **Método**: _(como foi contado — contagem instrumentada, não estimativa)_
-- **Degrau seguinte medido**: _(§18: qual o próximo incremento e ele cabe?)_
-
-### Sprites por scanline (pico)
-_(rodar `audit_sprite_line_sim.py` sobre o manifesto da cena e citar o pico real)_
+### Sprites por scanline
+Pico 8 e máximo 50 na SAT, herdados das 12 composições do par v5. A placa
+não soma objeto de sprite.
 
 ### fps observado
-_(rodar `measure_fps.py`; ≥5 amostras, todas 50–60. Citar o JSON.)_
+Não medido nesta ROM. O alvo continua 60, com piso 58.

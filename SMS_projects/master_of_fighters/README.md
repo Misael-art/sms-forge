@@ -8,6 +8,46 @@
 Jogo de luta autoral em desenvolvimento. O manifesto padrão compila o
 esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 
+## Jogar Alis × Alis
+
+Abra a [candidata b53 do espelho](out/candidates/scene02_alis_mirror_b53/rom/master_of_fighters.sms)
+com **Emulicious (SMSForge)**. A ROM abre no duelo local com dois controles. P1 veste
+rosa e P2 veste verde. Cada lado tem os mesmos comandos para os doze
+normais, as guardas e a Puxada com Escudo.
+[Comandos dos dois controles](doc/scene02-comandos.md#perfil-alis--alis) ·
+[Matriz e estado de aceite](doc/scene02_alis_espelho_qa.md).
+
+Para jogar com o controle integrado do Steam Deck, abra a ROM pelo
+lançador do projeto. **A** usa escudo e espada. **B** usa chutes. A intensidade
+depende de tocar e soltar ou sustentar o botão. No teclado do P1, use
+as setas, **A** para escudo e espada e **S** para chutes.
+
+```sh
+rtk proxy SMS_projects/master_of_fighters/run.sh \
+  SMS_projects/master_of_fighters/out/candidates/scene02_alis_mirror_b53/rom/master_of_fighters.sms
+```
+
+## Comparação histórica com Hayato
+
+Abra a [candidata b32](out/candidates/scene02_alis_jump_mix_b32/rom/master_of_fighters.sms)
+no **Emulicious (SMSForge)**. No Steam Deck, o controle integrado usa P1.
+Alis começa à esquerda e Hayato usa P2. Mova o direcional à esquerda para
+recuar e à direita para avançar. Toque e solte **1** para o soco de guarda,
+ou sustente **1** para a espadada. Alis transfere o peso a cada passo em
+avanço e recuo. O escudo responde ao apoio e a espada gira em torno da mão.
+Os dois golpes do botão 1 têm sons próprios de preparação e impacto.
+Para Alis, **↓** abaixa, **↑** salta e **↑ + esquerda/direita** salta na
+diagonal. **↑ + frente** perto de Hayato permite atravessar por cima e
+pousar do outro lado. **Trás** defende em pé ou no ar e **↓ + trás** defende abaixada.
+[Comandos do duelo](doc/scene02-comandos.md)
+
+Também é possível abrir a candidata da raiz do SMSForge:
+
+```sh
+rtk proxy SMS_projects/master_of_fighters/run.sh \
+  SMS_projects/master_of_fighters/out/candidates/scene02_alis_jump_mix_b32/rom/master_of_fighters.sms
+```
+
 ## Reproduzir o viewer da provocação de Dr. Social
 
 Execute da raiz do SMSForge com o ambiente do [guia de continuidade](../../doc/continuity/20261024-start-here.md).

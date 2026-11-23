@@ -4,6 +4,103 @@
 
 **Como ler o registro.** “Piloto” indica os dois golpes presentes nas candidatas de 6 e 8 leituras. O aceite de combate no emulador permanece pendente na matriz atual. Os demais nomes, comandos novos, alturas, propriedades e valores de ensaio abaixo são **propostas de design**. A direção já documentada de toque/pressão continua vigente. O dono fecha GD01/GD02 e o repertório individual GD03. O executor atualiza cada linha com a decisão e o vínculo com arte, código e evidência. [GDD](11-gdd.md) · [Régua dos dois personagens e botões](duel_reach_reference_v2.md) · [Decisão das duas variantes](decisions/hayato-alis-scene02_owner-comparison_20261119.json) · [Matriz inicial e ROMs](scene02_hayato_alis_qa.md).
 
+**Decisão da primeira família.** Produzir os quatro normais em pé por
+lutador. O toque sai na soltura antes do limiar, sem buffer ou
+cancelamento. Ensaiar as três guardas da tabela defensiva. O ensaio
+do acorde compara simultaneidade estrita e uma leitura de tolerância.
+Abaixados, ataques aéreos, especiais, Super e agarrão continuam no
+inventário de propostas. [Decisão do dono](decisions/alis-hayato-standing-normals_owner_20261119.json)
+· [Lista e índice de provas da primeira família](repertorio_alis_hayato_provas.md).
+
+## Produção do espelho de Alis
+
+A autorização atual cobre os doze normais de Alis e a Puxada com Escudo
+no duelo local de dois controles. A tabela prevalece para Alis onde o
+inventário histórico ainda marca uma proposta. O ensaio com Hayato
+continua como referência das quatro entradas em pé. O limiar do espelho
+é de seis leituras no chão e quatro no ar. No ar, a preparação comum a
+cada botão começa no toque. Uma pressão nova junto ao salto é carregada
+durante a compressão. O leve se define na soltura anterior ao limiar e
+o forte ao completá-lo. Uma pressão mantida durante o pouso exige
+soltura para rearmar.
+
+| Comando | Postura | Ação e função | Resposta | Poses e caixa ativa | Som | Caso a provar |
+|---|---|---|---|---|---|---|
+| 1 toque | Em pé | Soco de guarda, interrompe aproximação | Guarda ou ficar fora do escudo | Recolhe, projeta, volta. Médio, ticks 4–5, dano 6, livre 14. | Escudo | P1 e P2, acerto e erro no limite |
+| 1 forte | Em pé | Estocada forte de espada, pune à distância | Guarda, saída do alcance ou punição na volta | Prepara, estende, recupera. Médio, 5–6, dano 10, livre 18. | Espada | Primeiro acerto após boot e lâminas nas duas faces |
+| 2 toque | Em pé | Chute de distância, sonda o recuo | Guarda ou recuo | Carrega, toca, recolhe. Médio, 5–6, dano 8, livre 17. | Impacto corporal | Primeiro pixel fora da bota |
+| 2 forte | Em pé | Chute de avanço, compromete o corpo no médio alcance | Bloquear e responder na longa recuperação | Apoia, estende, assenta. Médio, 10–11, dano 12, livre 27. | Impacto corporal | Figura inteira e punição no erro |
+| 1 toque | Abaixada | Soco rente ao escudo, curto e rápido | Defender médio ou sair da mão | Escudo recolhido, projeção baixa, volta. Médio, 4–5, dano 5, livre 14. | Escudo | Alvo em pé e abaixado |
+| 1 forte | Abaixada | Estocada ascendente, intercepta a aproximação aérea | Sair da faixa ascendente ou punir o vazio | Recolhe, lâmina sobe, volta à base. Médio antiaéreo, 7–8, dano 11, livre 22. | Espada | Alvo no ar e erro de frente |
+| 2 toque | Abaixada | Chute baixo curto, testa a guarda alta | Baixo + trás | Joelho apoia, bota toca baixo, recolhe. Baixo, 4–5, dano 6, livre 15. | Impacto corporal | Acerto contra guarda em pé e defesa baixa |
+| 2 forte | Abaixada | Rasteira lateral, derruba no alcance baixo | Baixo + trás ou sair do alcance | Carga lateral, varredura, volta. Baixo, 8–10, dano 10, livre 25. | Impacto corporal | Queda, chão e comando após levantar |
+| 1 toque | No ar | Soco aéreo de encontro, intercepta | Guarda aérea ou afastar-se | Prepara o ombro, projeta o escudo, recolhe. Alto, ticks 2–3 do golpe, dano 5, livre 11. | Escudo | Encontro no ar |
+| 1 forte | No ar | Estocada em descida, abre defesa baixa | Guarda em pé ou no ar | Prepara a mão, desce a lâmina à frente, recolhe. Alto, 2–4 do golpe, dano 11, livre 15. | Espada | Descida contra um tronco em pé, pouso e botão mantido |
+| 2 toque | No ar | Chute de interceptação, impede aproximação no ar | Guarda aérea ou variar a altura | Joelho recolhido, bota horizontal, recolhe. Alto, 2–4 do golpe, dano 7, livre 12. | Impacto corporal | Duas jogadoras no ar, com troca de lado |
+| 2 forte | No ar | Chute em mergulho, força recuo no impacto | Guarda alta ou sair da trajetória | Dobra, projeta para baixo, recompõe. Alto, 2–4 do golpe, dano 12, livre 15. | Impacto corporal | Reação de 12 ticks e recuo de até 7 px, com queda reservada ao KO |
+
+O teste da **Puxada com Escudo** usa frente + novas pressões de 1 e 2
+na mesma leitura. O acorde vem antes dos normais. A pega é tentada no
+tick 8 em alvo terrestre livre ou bloqueando, entre a separação mínima
+e 32 pixels. O escudo aplica 16 de dano uma vez no tick 22. A
+atacante volta a agir no tick 42. A rival cambaleia por 10 ticks antes
+de cair, fica no chão por 18 ticks e levanta ao longo de 7. A parede
+limita o recuo. A tentativa inelegível compromete a atacante até a
+mesma retomada.
+
+| Ticks da atacante | Trilha da atacante | Trilha da vítima |
+|---|---|---|
+| 0–9 | Estende a mão e fecha a pega no tick 8 | Braço alcançado no tick 8 |
+| 10–16 | Flexiona os joelhos e puxa com o braço livre | Aproxima o apoio, ainda no chão |
+| 17–21 | Coloca o escudo à frente e firma a base | Inclina-se perto da atacante |
+| 22–27 | Projeta o escudo e transfere o peso para a frente | Recebe o impacto e começa o primeiro passo para trás |
+| 28–41 | Recolhe o escudo e volta à guarda | Segundo passo, desequilíbrio, queda e repouso |
+
+As linhas de reação do espelho são cabeça, abdômen, base baixa,
+impacto de guarda em pé, impacto baixo, impacto aéreo, queda, chão
+e levantada. Se a interseção alcançar a linha acima do pescoço,
+prevalece a zona da cabeça. Um alvo abaixado usa a reação baixa.
+O bloqueio conserva a vida e guarda a postura do escudo no impacto.
+O aceite final exige repetir essas linhas na mesma ROM do espelho.
+
+### Geometria do espelho em pixels
+
+Os intervalos são semiabertos. A tabela usa a face direita e o pivô
+em Y144 no chão. A outra face reflete o eixo horizontal. No ar, cada
+atriz soma seu próprio deslocamento vertical. A caixa ofensiva só existe
+nos ticks ativos de cada linha acima e termina no pouso. Preparação e recuperação mantêm
+áreas vulneráveis e separação física.
+
+| Ação | X da caixa de ataque | Y da caixa de ataque |
+|---|---|---|
+| Soco de guarda | [-3, 18) | [-40, -25) |
+| Estocada forte | [5, 43) | [-37, -34) |
+| Chute de distância | [-1, 23) | [-30, -16) |
+| Chute de avanço | [-1, 27) | [-46, -31) |
+| Soco rente | [-3, 19) | [-31, -18) |
+| Estocada ascendente | [3, 29) | [-51, -15) |
+| Chute baixo curto | [-1, 24) | [-20, -5) |
+| Rasteira lateral | [-3, 28) | [-14, -2) |
+| Soco aéreo | [10, 19) | [-45, -31) |
+| Estocada em descida | [7, 19) | [-28, -17) |
+| Chute de interceptação | [8, 22) | [-30, -22) |
+| Chute em mergulho | [6, 19) | [-16, 0) |
+
+O perfil vulnerável em pé usa X[-11, 13) e Y[-53, -3). Na flexão
+de transição usa X[-13, 11) e Y[-40, -2). A base baixa usa X[-11, 11)
+e Y[-33, -2). No ar usa X[-12, 11) e Y[-46, -4), com a borda inferior
+recolhida a -15 na guarda ou no bloqueio. A separação da base é de
+24 px e a margem atual da arena é de 43 px. A passagem pelo ar usa a
+folga vertical relativa e a área de pouso entre as paredes.
+
+Na pega, a atacante mantém o pivô, e a vítima acompanha a interpolação
+entre o gap de captura e o ponto de soltura. Em cada tick preso a
+vítima sobe um pixel. O tick 27 é o último preso. O 28 define o novo
+arco, o dano e a coordenada de saída a 24 px da atacante. Quando a
+parede impede a troca, a saída fica do lado original. A correspondência
+pixel a pixel entre a mão de pega e o tronco da vítima em cada quadro
+segue como uma linha de revisão do par de sprites.
+
 ## Controle com dois botões
 
 Frente e trás acompanham o adversário. **1 curto** é soco fraco, **1 longo** é soco forte, **2 curto** é chute fraco e **2 longo** é chute forte. Curto é toque e longo é pressão sustentada. Em pé, o normal forte de Alis é uma espadada direta na vaga `alis_landale/pe_1_longo`. A classificação orienta comando e lógica. O gesto e o equipamento caracterizam o lutador. O marco de 6 ou 8 leituras pertence à comparação dos pilotos. [Decisão do proprietário](decisions/scene02-normais-dois-botoes_owner_20261121.json).
@@ -58,6 +155,17 @@ Estas seis ações de assinatura e os dois agarrões completam a **proposta** de
 
 **Rastreio do rascunho histórico.** Revisar individualmente os oito IDs do [draft](movesets_draft.json). Para Hayato, comparar `katana_cut` com o corte do piloto e `diagonal_slash` com os cortes propostos; decidir se há função própria ou duplicação. `iai_dash` é antecedente para discutir o saque, separado do dash universal. `scroll_fire` exige decisão sobre o pergaminho, custo, objeto e contrajogo. Para Alis, `dagger` conflita com a espada curta do sheet; `kick` é genérico e precisa ser conciliado com os chutes desta tabela. `energy_wave` e `dodge_counter` requerem decisão específica sobre magia e esquiva. Se o dono preferir um poder, registrar que especial ele substitui e o seu comportamento. O histórico e seu frame data ficam fora dos valores de produção até a decisão.
 
+| Personagem e ID histórico | Destino no recorte aprovado |
+|---|---|
+| Hayato `katana_cut` | Referência histórica para `hayato/pe_1_longo`. O corte v4/v7 do piloto rege atuação e dados. |
+| Hayato `diagonal_slash` | Adiado. Candidato a ancestral de `hayato/baixo_1_longo` se o corte ascendente for aprovado; a função terrestre antiaérea precisa de prova própria. |
+| Hayato `scroll_fire` | Adiado, sem sucessor aprovado. A decisão de pergaminho, recurso, objeto e contrajogo permanece aberta. |
+| Hayato `iai_dash` | Adiado para a decisão sobre o saque em passada. Mantido fora da implementação do dash de locomoção. |
+| Alis `dagger` | Substituído pela família da espada curta. Para o forte de arma em pé, o vínculo passa a `alis_landale/pe_1_longo`. Preservar o escudo e a estocada do piloto. |
+| Alis `kick` | Entrada genérica substituída por chutes individuais; neste recorte, `alis_landale/pe_2_curto` é a referência de sondagem e `alis_landale/pe_2_longo` a de avanço comprometido. |
+| Alis `energy_wave` | Adiado, sem sucessor aprovado. Magia e projétil aguardam decisão e ficha. |
+| Alis `dodge_counter` | Adiado. A resposta de escudo é alternativa de design para o futuro, com janela definida e sem herdar invulnerabilidade. |
+
 ## Movimento, agilidade e defesa
 
 | Estado/ação | Controle, desenho e prova no duelo |
@@ -97,3 +205,75 @@ Dar a cada ação um ID estável no contrato individual e referenciá-lo na list
 **Matriz de encerramento.** Por normal/especial, testar acerto próximo, no último pixel e erro um pixel além; guarda correta e incorreta, recuperação, punição, canto e lados invertidos. Incluir golpes simultâneos, virada no ar, aterrissagem no tick ativo, reação interrompendo provocação e contato entre as poses de maior custo com cenário/HUD/áudio. Para Super/agarrão testar também falta de recurso/alvo inelegível. Para locomoção e atuação testar entrada, manutenção, interrupção, soltura e retorno. A decisão artística sobre a cena de posição, a provocação e os golpes precisa de vídeo real e revisão com o par em quadro.
 
 O registro fica completo quando as **24 entradas de normais**, os **quatro especiais, dois Supers e dois agarrões propostos**, os **oito IDs históricos** e as ações de movimento, defesa e atuação tiverem destino explícito por personagem. Toda ação aprovada deve ter prova de execução; uma substituição aponta para o ID sucessor. [Prompt de produção para o agente](../../../doc/continuity/20261119-prompt-repertorio-alis-hayato.md).
+
+## Alis · decisões vigentes e cobertura de produção
+
+A matriz abaixo usa o [aceite dos normais em pé de 19/11](decisions/alis-hayato-standing-normals_owner_20261119.json), a [correção de 21/11](decisions/scene02-normais-dois-botoes_owner_20261121.json), o [ensaio dos especiais de 19/11](decisions/scene02-first-specials_owner-trial_20261119.json) e o [índice do round de controle](repertorio_alis_hayato_provas.md#round-contínuo-b11-r2). B11-r2 significa a candidata de seis leituras com SHA `f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7`. O termo aprovado na coluna de design se refere ao escopo autorizado pelo dono. A coluna de prova registra a cobertura observada.
+
+| Ação de Alis | Design e fonte | Produção e prova |
+|---|---|---|
+| `pe_1_curto` Soco de guarda | Aprovado em 19/11, confirmado em 21/11 | IDs 20–22. B21 recompõe rosto, torso e escudo pela guarda. #21 conferida no framebuffer, com dano 6 no vídeo quando alcança. Guarda, borda, espelho ao vivo e cadência seguem abertos. |
+| `pe_1_longo` Estocada forte | Aprovado em 19/11. Espadada direta de botão 1 sustentado em 21/11 | IDs 17–19. B21 registra o rosto nas poses originais e preserva a ponta da espada. #18 conferida no framebuffer, com dano 10 no vídeo. Borda e guarda com resposta passaram no stepping. Espelho ao vivo e cadência seguem abertos. |
+| `pe_2_curto` Chute de distância | Aprovado em 19/11, confirmado em 21/11 | IDs 23–25. B17, acerto no contato 6, #24 submetida e 8 de dano. Casos de limite e retomada pendentes. |
+| `pe_2_longo` Chute de avanço | Aprovado em 19/11, confirmado em 21/11 | IDs 26–28. B17, acerto no contato 8, #27 submetida e 12 de dano. Punição no erro, canto e retomada pendentes. |
+| `baixo_1_curto` Soco rente ao escudo | Decisão necessária em GD03. Proposta deste registro | Ficha de ideia. Sem ação correspondente na b11-r2. |
+| `baixo_1_longo` Estocada ascendente | Decisão necessária em GD02/GD03, inclusive antiaéreo | Ficha de ideia. Sem prova de interceptação ou erro. |
+| `baixo_2_curto` Chute baixo curto | Decisão necessária em GD02/GD03, inclusive classe baixa | Ficha de ideia. Sem prova de alcance ou guarda. |
+| `baixo_2_longo` Rasteira lateral | Decisão necessária em GD02/GD03, inclusive queda | Ficha de ideia. Sem prova de queda ou recuperação. |
+| `ar_1_curto` Soco aéreo de encontro | Decisão necessária em GD03. Proposta deste registro | Ficha de ideia. Sem prova ar–ar. |
+| `ar_1_longo` Estocada em descida | Decisão necessária em GD02/GD03, inclusive ataque por cima | Ficha de ideia. Sem regra de pouso provada. |
+| `ar_2_curto` Chute de interceptação | Decisão necessária em GD03. Proposta deste registro | Ficha de ideia. Sem prova de cruzamento. |
+| `ar_2_longo` Chute em mergulho | Decisão necessária em GD02/GD03, inclusive ataque por cima | Ficha de ideia. Sem prova de pouso ou contato único. |
+| Passo de escudo | Em ensaio desde 19/11, delimitado em 21/11 | B11-r2, IDs 48–50 no comando direcional, contato 10. Uso em produção depende de decisão e prova própria. |
+| Resposta de escudo | Decisão necessária em GD03. Proposta de guarda seguida de resposta elegível | Ficha de ideia. Janela, reação no vazio e contrajogo pendentes. |
+| `energy_wave` | Decisão necessária. Adiado no rastreio do rascunho e no GDD, sem sucessor aprovado | Sem objeto, custo, trajetória ou colisão de produção. |
+| Super Investida de Palma | Decisão necessária em GD01–GD03 | Proposta de sequência dupla + 1. Medidor, consumo, fallback e arte pendentes. |
+| Agarrão Giro com o escudo | Decisão necessária em GD01–GD03 | Proposta de frente + 1+2. Captura, coreografia do par e posição após queda pendentes. |
+| `dodge_counter` | Decisão necessária. Adiado no rastreio do rascunho | Sem esquiva invulnerável na b11-r2. |
+| `dagger` | Aprovado o sucessor `pe_1_longo`, conforme decisão de 21/11 e concept v4 | O ID antigo é histórico. A prova pertence à espadada direta. |
+| `kick` | Aprovados os sucessores em pé `pe_2_curto` e `pe_2_longo` em 19/11 | O ID genérico é histórico. As provas pertencem aos chutes individuais. |
+| Guarda ociosa | Em ensaio na Cena 02. Identidade segue concept v4 | B11-r2 publicou #16 estática no neutro. A respiração precisa de revisão temporal. |
+| Assentar na guarda | Em ensaio na Cena 02 | O retorno ao quadro #16 existe. A emenda entre marcha, postura e repouso precisa de prova visual. |
+| Sair do repouso | Em ensaio na Cena 02 | A b12 aceita a marcha ou botão 1. Nas retomadas observadas, a pose de movimento pode chegar depois do pivô. |
+| Virada | Em ensaio na Cena 02 | Variante de lado de boot prevista no piloto. Virada em luta ativa precisa de prova de cruzamento. |
+| Andar à frente | Em ensaio no comparativo da Cena 02 | B11-r2 percorreu 32 px com quatro poses. Revisão da rampa magenta e retomada ainda abertas. |
+| Recuar | Em ensaio no comparativo da Cena 02 | B11-r2 percorreu 32 px com quatro poses. Medir a saída para guarda e para ataque. |
+| Abaixar | Solicitado pelo dono para Alis em 21/11 | B26 confirmou pivô X fixo, pose #52 e hurtbox mais baixa. |
+| Levantar do agachamento | Integra a saída do agachamento | B26 aplicou a flexão #51 e voltou à guarda na soltura. |
+| Salto neutro | Solicitado pelo dono para Alis em 21/11 | B29 confirmou dois ticks de compressão, subida de 78 px e 20 ticks no ar com X fixo. |
+| Salto à frente | Diagonal e cruzamento solicitados pelo dono para Alis em 21/11 | B29 cruzou Hayato nos dois sentidos, virou junto ao rival e pousou fora da faixa de colisão. |
+| Salto para trás | Diagonal solicitada pelo dono para Alis em 21/11 | B29 conserva o vetor de 6 px/tick da decolagem até o pouso e respeita a borda. |
+| Pouso | Integra o retorno ao chão das três trajetórias | B26 confirmou retorno ao Y144 e a flexão de aterrissagem. |
+| Dash | Decisão necessária em GD01/GD02. Janelas de duplo toque de 8 e 10 são propostas | Módulo de movimento em bancada. Distância e saída sem prova em ROM. |
+| Corrida | Decisão necessária em GD01/GD02. Proposta deste registro | Módulo de movimento em bancada. Transição do dash e deslocamento sem prova em ROM. |
+| Freio da corrida | Decisão necessária em GD02. Proposta deste registro | Módulo de movimento em bancada. Leitura do apoio e primeiro comando livre sem prova em ROM. |
+| Recuo rápido | Decisão necessária em GD01/GD02. Proposta deste registro | Módulo de movimento em bancada. Distância, vulnerabilidade e resposta sem prova em ROM. |
+| Guarda em pé | Solicitada pelo dono para Alis em 21/11 | B26 bloqueou o soco de Hayato com #54 e vida preservada. |
+| Guarda abaixada | Solicitada pelo dono para Alis em 21/11 | B26 bloqueou o chute de sondagem com #53, pose e consequência conferidas. |
+| Guarda aérea | Solicitada pelo dono para Alis em 21/11 | B26 verificou entrada, soltura e reaplicação no mesmo voo. A pose #59 bloqueou o soco de Hayato quando houve interseção com a hurtbox. |
+| Reação em pé a acerto | Em ensaio com tempos comuns de 19/11 | O piloto registra vida, recuo, estado e retorno. Falta atuação distinta. |
+| Reação em pé ao bloquear | Em ensaio com tempos comuns de 19/11 | Sem pose de bloqueio distinguível na b12. Falta prova em velocidade normal. |
+| Reação abaixada a acerto | Decisão necessária em GD02. Proposta deste registro | Faltam pose, altura vulnerável e saída em ROM. |
+| Reação abaixada ao bloquear | Em ensaio pela matriz das três guardas. Resposta visual e regra final pendentes em GD02 | Sem estado visual próprio em ROM. |
+| Reação aérea a acerto | Decisão necessária em GD02. Proposta deste registro | Sem prova de trajetória, pose ou pouso após impacto. |
+| Reação aérea ao bloquear | Em ensaio pela matriz das três guardas. Resposta visual e regra final pendentes em GD02 | Sem prova de bloqueio no ápice e na descida. |
+| Queda | Decisão necessária em GD02. Proposta ligada à rasteira e ao agarrão | Faltam regra de vulnerabilidade, pose e relógio de lançamento. |
+| Estado no chão | Decisão necessária em GD02. Proposta deste registro | Faltam pose, interação com ataques e limite de duração. |
+| Levantada após queda | Decisão necessária em GD02. Proposta deste registro | Faltam pose, instante vulnerável e teste de primeiro comando. |
+| Provocação base | Em ensaio de comando somente, conforme 19/11 | Acorde estrito/uma leitura existe em bancada. Sem provocação integrada na ROM do round. |
+| Provocação contextual | Decisão necessária em GD01/GD03. Proposta após a defesa de um forte | Sem regra da marca ou atuação em ROM. |
+| Entrada em cena | Direção aprovada para produção em 01/11. Atuação específica aguarda ficha de cena | Enquadramento inicial existe. Falta encenação até a tomada de posição. |
+| Tomada de posição | Em ensaio na Cena 02 | B11-r2 começa com os lutadores voltados um para o outro. Falta a transição animada desde a entrada. |
+| Entrega do controle e skip | Direção aprovada em 01/11. Gatilho de skip depende de GD01/FC02 | Falta prova da sequência completa, com botão mantido e input novo. |
+| Vitória | Direção aprovada no GDD. Pose e anúncio de Alis pendentes | Knockout do adversário não tem encenação de vitória aprovada em ROM. |
+| Derrota | Direção aprovada no GDD. Pose de derrota pendente | KO de Alis observado na b11-r2. Falta atuação própria. |
+| Transição após Versus | Decisão necessária em GD04 para timeout, desempate e destino | Falta prova de anúncio, reinício e retorno. |
+| Cena 04, abertura | Direção aprovada em [01/11](decisions/fan-campaign-and-character-expression_owner_direction_20261101.json). Beats individuais aguardam ficha | Sem prova da aparição de Alis na montagem completa. |
+| Cena 07, diálogo e duelo | Direção aprovada em 01/11. Atuação do visitante e prioridade de skip aguardam ficha | Sem trecho narrativo de Alis ligado ao primeiro comando da Cena 02. |
+| Cena 08, vitória e evolução | Direção aprovada em 01/11. Níveis, pontos e efeitos dependem de FC01 | Sem prova de pose, cue ou escolha de atributos na ROM. |
+| Cena 09, encerramento | Direção aprovada em 01/11. Epílogo individual depende de FC04 | Sem sequência de Alis e retorno observados. |
+| Cena 10, consulta de comandos | Direção aprovada em [01/11](decisions/character-move-showcase_owner_direction_20261101.json). Navegação e acesso de produto pendentes | A [lista fora da ROM](scene02-comandos.md) cobre a b11-r2. Interface e demonstração na própria ROM pendentes. |
+
+Na documentação vigente, nenhum item aberto deste quadro foi excluído explicitamente pelo dono. Adiamentos e substituições têm destino próprio nas decisões e no rastreio histórico.
+
+Os ensaios de identidade visual, marcha e golpes do botão 1 estão na [matriz da b21](scene02_hayato_alis_qa.md#b21--revisão-dos-pontos-relatados).

@@ -1,5 +1,208 @@
 # 15-tdd — master_of_fighters
 
+## Cena 02 · propriedade no espelho
+
+O mesmo personagem pode aparecer nos dois índices da luta. MofDuel
+armazena o estado de movimento de Alis por jogador. O perfil do espelho
+passa o par de personagens explicitamente, usa a resolução comum do duelo
+e seleciona os comandos no estado local de cada controle. A matriz de
+altura e o estado de reação vêm da interseção confirmada no tick.
+
+O salto comprime por dois ticks. Uma borda de ataque lida nesse intervalo
+fica associada ao voo. A preparação começa na primeira leitura em que a
+atriz está no ar. A classificação usa quatro leituras durante o voo e seis
+no chão. A projeção do contato com o chão encerra o normal aéreo em
+andamento antes da leitura de agachamento e dos novos comandos. A
+flexão visual continua por três leituras. Um botão que atravessou o
+pouso permanece consumido até ser solto.
+
+O empacotador conserva os pacotes de tiles, coordenadas e máscaras P0
+do repertório. A tabela física de desenhos tem uma face por posição
+lógica e um traje por controle. Cada jogadora possui quatro
+regiões de 32 padrões. Uma região visível fica protegida até a troca
+da SAT. As sobras P0 usam duas páginas para preparar padrões de ambas
+as lâminas antes de substituir a composição publicada.
+
+Desde a b47, os trajes compartilham uma tabela de geometria e usam duas
+regiões de bancos com a mesma distribuição de pacotes. O empacotamento
+confere endereços relativos, contagens e coordenadas antes da compilação.
+No ar, a fase ativa de um ataque já preparado recebe prioridade de carga.
+
+Nas revisões b38 em diante, o lote de envio de padrões admite até oito
+tiles com a SAT e até 14 na janela dedicada a carregar padrões.
+A troca de PNT conserva as entradas anteriores até que a página
+seguinte esteja pronta. O envio de PNT com a SAT reserva carga para
+restaurar o fundo, publicar as duas figuras e manter o HUD. A previsão
+guarda a fase ativa provável enquanto os botões amadurecem e prepara
+a primeira reação da vítima. As exposições verificadas e os limites
+medidos por SHA estão na [matriz do espelho](scene02_alis_espelho_qa.md).
+
+A paleta física usa 15 entradas opacas. Os matizes 19 e 35 do traje
+principal dão lugar a 24 e 44 no traje secundário. As cores de cabelo,
+pele, metais e botas compartilham o mesmo registro de materiais. Os
+matizes 3 e 7 da referência foram consolidados em 6 e 11, respectivamente,
+para abrir as duas entradas. O confronto b32 conserva sua ROM e seus bancos.
+
+Na Puxada com Escudo, a captura mantém Y=144 e o lado inicial da rival.
+A aproximação usa passos de até 2 px em direção à separação mínima.
+No tick 22, o escudo aplica o dano e inicia 10 ticks de desequilíbrio.
+A rival recua até 14 px, limitada pela parede, e expõe a queda por
+cinco ticks antes do repouso. Os cinco quadros de captura e tropeço
+usam sprites em toda a silhueta para acompanhar X sem reconstruir
+o fundo a cada passo. O quadro do escudo pode preparar suas células
+P0 enquanto a atacante permanece plantada.
+
+O chute aéreo forte aplica 12 ticks de reação e deslocamento de até
+7 px. O leve usa oito ticks e até 4 px. A rasteira mantém a queda.
+`audit_alis_shove_art.py` mede a escala contra a guarda neutra e
+confere índigo no peitoral e ciano da lâmina fora dessa região nas
+duas faces e nos dois trajes. O roteiro `shield_shove` lê a reação e
+confronta a arte com o framebuffer do mesmo binário.
+
+## Cena 02 — candidatas comparativas de Hayato × Alis
+
+O candidato ativa `MOF_DUEL_PILOT` e fixa `MOF_DUEL_HOLD` em 6 ou 8.
+`duel_rules.c` consome inputs por controle, resolve os dois contatos a partir
+do mesmo estado anterior à reação e publica os estados para o renderizador.
+As fases ativas têm relógio próprio. A exposição v7 de Hayato conserva
+8/1/2/7/2/5. Os estados sem ação usam a guarda diagnóstica nesta revisão.
+
+O atlas é carregado por orientação com display desligado. Hayato vai primeiro
+na SAT em qualquer atribuição de controle. Os padrões de Alis alternados
+são exclusivos da pose que os pede. O código restaura as células antigas
+da lâmina no BG e usa a variante correspondente à fração X do pivô.
+A transferência teórica máxima de padrões numa troca é 448 bytes
+(7 de sprite e 7 de BG), mais PNT, HUD e cópia da SAT. Pior VBlank precisa
+ser medido no emulador.
+
+MFD1 em `0xC770` tem 74 bytes com publicação marcada por contador par,
+tick lógico e dois registros por controle. Distingue pose usada para
+contato e as três etapas de publicação. As caixas são semiabertas em
+coordenadas de tela. `free_since` registra a entrada no estado livre.
+SMRT permanece no corredor `0xC7E0` a `0xC7F1`. O build e as pendências
+estão na [matriz comparativa](scene02_hayato_alis_qa.md).
+
+### Repertório com bancos · recorte da b12
+
+Para `alis_landale/pe_1_longo`, a pose local 2 é a pose global #18. A caixa
+ativa direita é `[17,55) × [-37,-34)` relativa ao pivô de chão Y=144 e é
+espelhada em X. Com a hurtbox de Hayato neste recorte, o último gap válido é
+66 px e o primeiro inválido é 67 px. As exposições, dano e tempos de reação
+seguem o piloto. A silhueta do torso de Hayato ainda fica atrás do limite
+lógico da hurtbox na altura do golpe.
+
+O HUD usa os padrões de fundo 256/261 e sete padrões parciais 272–278.
+Os parciais são construídos com a mesma paleta e padrões base antes de ligar
+o display. Durante o duelo só as células cujo preenchimento mudou são
+escritas. A janela P0 dinâmica do repertório começa no padrão 288.
+
+No repertório revisto da b21, a arena usa pivôs entre X32 e X223. O plano
+considera toda a largura de cada entrada SAT e os pixels do BG nas duas
+faces. A margem cobre a extensão para trás e a extensão para frente menos
+a separação mínima de 24 px. Esse cálculo pressupõe o duelo em pé com os
+lutadores sempre voltados um para o outro e sem cruzamento de pivôs. O
+cruzamento estático cobre as distâncias de 24 a 191 px. Os ensaios de canto
+e recuo estão na [matriz b21](scene02_hayato_alis_qa.md#b21--revisão-dos-pontos-relatados).
+
+As quatro chaves de marcha de Alis usam deslocamentos de altura de
+0, +2, −2 e 0 px. A conversão registra os rasters autorais entre o quadril
+móvel e a linha de sola Y143, com correção horizontal do pé de apoio entre
+compressão e passagem para a exposição de quatro pixels percorridos.
+A espada se move em torno da pega e o escudo segue uma trajetória separada.
+As caixas e o pivô lógico continuam no referencial do chão.
+
+Na Cena 02 do repertório, `duel_sfx.h` contém os efeitos originais tocados
+com PSGlib. O tom no canal 2 dá corpo ao escudo e brilho à espada. O ruído
+no canal 3 dá o ataque dos impactos e a passagem das armas. O escudo no
+vazio usa apenas o canal 3. Dano tem prioridade sobre guarda, e guarda
+sobre o som de preparação. O movimento de Alis dispara duas leituras antes
+da janela ativa. Numa falha de alcance, o evento de impacto fica ausente.
+O playback avança junto ao relógio lógico e libera os canais ao terminar.
+O contrato atual reserva os canais 2 e 3 para esse duelo de efeitos.
+
+### Agachamento, salto e defesa de Alis
+
+A candidata de posturas reutiliza o movimento Q12.4 e a gramática defensiva
+do duelo. Baixo abaixa no mesmo pivô X. Cima inicia um salto por nova pressão.
+A diagonal escolhe o impulso no início, com velocidade de dois pixels por
+tick e limite de separação em relação a Hayato. O salto segue a curva mesmo
+durante um bloqueio. A decolagem tem dois ticks de compressão registrados
+no chão e o pouso volta à flexão por três ticks. O ataque em pé exige a postura
+compatível. Entradas do botão durante a fase aérea ou abaixada são consumidas
+sem acumular golpes em pé.
+
+O anteparo em pé é visível durante o bloqueio e quando a intenção de guarda
+coincide com o fim do recuo. Baixo e trás levantam o escudo na postura
+abaixada. Depois de decolar, trás relativo cobre o torso no ar. O ensaio
+autoriza a guarda aérea contra os golpes de botão 1 de Hayato quando houver
+interseção; os chutes conservam sua propriedade terrestre. O pivô e a
+hurtbox variam juntos no ar. As nove poses novas usam apenas sprites, com
+deslocamento Y aplicado ao trecho de Alis na SAT.
+
+Quando a página P0 de Hayato estiver em preparação, o renderizador pode
+atualizar a translação de Alis no ar com a pose de Hayato já publicada.
+A publicação conserva os sprites e a página do rival do mesmo estado.
+O aquecimento da próxima página continua dentro do limite de cinco
+padrões que acompanha a SAT. O contador de atraso inclui as publicações
+parciais que ainda diferem da composição requisitada.
+
+O salto usa extensão na subida, postura compacta no ápice e busca do chão
+na descida. A diagonal inclina o tronco e deixa o calcanhar traseiro
+acompanhar o impulso. A cobertura leva o escudo pelo braço e preserva a
+espada rente ao corpo. O contraste das poses, a antecipação, a arrematação
+do pouso, o arco, a ação secundária do escudo, a continuidade da silhueta
+e as exposições por fase orientam o estudo. [Prancha e procedência](../data/source_art/sprite_studies/scene02_alis_postures_20261121/source.md).
+
+### Cruzamento e tempo do salto de Alis
+
+O perfil b29 usa velocidade Y inicial de −234 e gravidade de +24 em Q12.4
+por tick. A atualização primeiro integra a posição e depois soma a
+gravidade à velocidade. Ao encontrar o chão, fixa o pivô em Y144 e
+seleciona a flexão de pouso. A diagonal conserva o impulso X de 6 px/tick.
+
+Alis pode entrar na faixa de separação horizontal ao alcançar 65 px de
+altura com espaço até a borda oposta. A simulação consulta a altura
+prevista oito ticks adiante para cobrir o tempo necessário para sair da
+faixa. A resolução aérea de X precede a coleta de caixas no tick de
+contato. O fim do golpe restitui a face relativa ao adversário para o
+lutador que mantinha a orientação da ação ao ser cruzado.
+
+Os dois lados usam um atlas de partida comum. A residência de um desenho
+considera pose e face, com IDs lógicos conservados no MFD1 e face
+submetida publicada separadamente. A SAT de uma translação com os mesmos
+desenhos pode atualizar só a faixa de Alis em Y ou X. Uma mudança de
+pose volta a publicar as duas faixas completas. A medição de cadência
+continua a ser feita na ROM com a transferência real.
+
+### Retomada após espadada e exposição das poses aéreas
+
+A leitura de ↑ compara o controle atual com o último controle consumido.
+Uma nova pressão guarda o vetor até a personagem ficar livre. Se o jogador
+soltar ↑ durante a recuperação, o vetor pode ser aceito nas três primeiras
+leituras de soltura. Baixo e fim de round cancelam o comando que ainda espera.
+Quando a flexão começa, o motor consome a fila e fixa o vetor de decolagem.
+Só o impulso confirmado passa como nova pressão à física compartilhada.
+Manter ↑ depois de pousar exige outra pressão para iniciar outro salto.
+
+A guarda aérea usa extensão na subida, recolhimento com o escudo e extensão
+na descida. A janela de guarda do combate segue a direção relativa ao rival
+e o estado de bloqueio. A pose segue a fase do arco, com previsão de retorno
+às chaves abertas se o comando de guarda for solto. Os bancos preservam
+escala, pivô e cores das poses autorais.
+
+O planejador antecipa a chave diagonal desde a flexão. Protege os padrões
+visíveis e as âncoras de virada antes de reservar as próximas chaves na ordem
+em que serão usadas. Durante o voo, a guarda em pé pode ceder seu espaço na
+VRAM. A prova verifica presença e ordem de cada fase no MFD1 e no framebuffer
+após alternar espadada, diagonais, cruzamentos e pressão de guarda.
+
+No perfil MFD1 do repertório, `pose_resident` compara a residência dos
+padrões P1. `pose_presented` registra o último envio do conjunto SAT/PNT
+para o ator. Tanto as células P0 quanto a varredura real do framebuffer
+devem ser conferidas ao comparar publicação e imagem. Para o Saque em
+passada, a pose local 2 mapeia para #46. O controle b11-r2 mostrou que
+os padrões P1 podiam estar prontos com o P0 e a imagem ainda atrasados.
+
 > **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
 > Os sprites e animações atuais do Dr. Social não devem ser continuados,
 > retocados, convertidos, integrados ou promovidos. Retomada futura: novo desenho
@@ -11,6 +214,26 @@
 A integração de uma nova arte do Social depende de nova direção do dono e
 fonte desenhada do zero. Ferramentas e arquitetura oficiais podem ser reusadas;
 as amostras históricas não qualificam uma nova fonte ou ROM.
+
+## Alis — piloto de estocada, implementação experimental sem build
+
+`MOF_ALIS_ROUND1` seleciona no consumidor existente o pacote gerado por
+`tools/alis_blade_bg_probe.py --both-faces --grounded` a partir da sequência
+exploratória e da guarda original de Hayato. O estado do trabalho e os
+controles/sondas estão em [alis_strong_thrust_round1_qa.md](alis_strong_thrust_round1_qa.md).
+O caminho ainda não foi compilado, executado nem aprovado; não substituir o
+diagnóstico por uma alegação de gameplay, qualidade ou alcance definitivo.
+
+O pacote experimental reserva 246 padrões de sprite em `0x0000..0x1FFF` e
+14 padrões BG mais um de indicador a partir de `0x2000`; a PNT começa em
+`0x3800`. P0 recebe o mesmo código de cores de P1. Parte da lâmina é transferida
+para o fundo nas poses de preparação/estocada para reduzir o pico de sprites;
+a versão com ambas as figuras inteiras em SAT foi reprovada. O empacotador
+oficial e uma conferência independente reconstruíram índices, e os 24
+manifestos de quatro poses × três distâncias × duas faces passaram na simulação
+estática. PNT, ocultação da lâmina pelo rival, tempo de transferência, pior
+frame, FPS e ausência de resíduos aguardam evidência da ROM. A aproximação
+visual de corpo ainda não comprova a calibração de 68 px.
 
 ## Padrão de apresentação de golpes — contrato futuro de integração
 
@@ -254,6 +477,14 @@ Preservar controle e tentativa reprovada. Engenharia deve medir próximo degrau
 e carga completa; piso58 por janela, input/lógica/apresentação e worst-frame
 continuam pendentes nesta ROM diagnóstica. Implementação de combate depende
 GD01/GD02/GD05, não de mais conteúdo ou de outra folha.
+
+## Cena 01 — placa carregada antes do loop
+
+`MOF_CENA01=1` junto de `MOF_JJ_SAMPLE=2` carrega 12 padrões em tile 256 e a
+name table 32×24 com o display ainda desligado. O loop de pose, input e probe
+não mudou. A ROM corrigida é
+`90ea0f98febf4e047e6ca4637af1c454dd9ac7971e5b0bd00fec058c5ebf2405`.
+FPS, VBlank e áudio dessa ROM seguem sem medição nova.
 
 ## J.J. — seleção aprovada pelo proprietário
 
@@ -508,6 +739,15 @@ Limites de hardware fixos para converter cada pose:
 | CRAM | 32 entradas: P0 para BG/HUD e P1 para todos os sprites; P1 índice 0 transparente; até 15 cores úteis compartilhadas em P1 |
 | RAM / ROM sem mapper | 8 KB / 48 KB |
 | Transferência | sem DMA; pior frame de VBlank precisa ser medido |
+
+### Calibração do corpo e do alcance
+
+Usar a [régua de duelo](duel_reach_reference_v2.md) para registrar o par de
+referência do elenco, a câmera lateral, a linha do chão e os apoios.
+Conferir proporção corporal e equipamento em revisões próprias. Registrar
+por pose pivô, ponto de pega, ponta e altura do alvo. Manter alcance
+pendente quando a perspectiva do desenho impedir medir essas âncoras no
+plano do duelo.
 
 ### Alocação de CRAM e gestão de cor de combate
 

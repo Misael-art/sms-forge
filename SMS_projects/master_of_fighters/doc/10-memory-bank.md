@@ -1,5 +1,256 @@
 # 10-memory-bank — master_of_fighters
 
+## Cena 02 · produção de Alis × Alis
+
+O espelho implementa dois controles com traje rosa e verde, doze
+normais, três alturas de guarda, reações de cabeça, abdômen e base
+baixa, Puxada com Escudo, queda, levantada, KO e reinício do duelo.
+Os comandos e os bancos da referência Hayato × Alis b32 permanecem
+disponíveis. O arco conserva 78 px de altura, 20 ticks no ar e 6
+px/tick de impulso diagonal livre.
+
+A [matriz do espelho](scene02_alis_espelho_qa.md) guarda a ROM de cada
+revisão, os quadros divergentes, as ações corretivas e os resultados.
+
+A [b53](../out/candidates/scene02_alis_mirror_b53/rom/master_of_fighters.sms),
+SHA-256 `a15313589a6d196553e3c1ba16548db948818e8639ac5b85f7fbe4c720ce6753`,
+libera o controle quando um normal aéreo toca o chão. Os oito casos
+da regressão responderam no próprio pouso e duas pressões novas na
+leitura de contato foram aceitas. A b52 prendia o controle por 5 a
+10 leituras. A b53 retoca saia, braços e braceletes dos chutes fortes,
+calibra as duas posturas baixas e usa arte própria no recolhimento do
+escudo. [QA](scene02_alis_espelho_qa.md#b53--pouso-paleta-e-recolhimento) ·
+[Curadoria](curation_candidates/2026-11-22_alis_pouso_materiais_recolhimento.json).
+
+A [b52](../out/candidates/scene02_alis_mirror_b52/rom/master_of_fighters.sms),
+SHA-256 `47c0a4027d39b1d45bfe48a53ec819fb6ac3d046243c702fa848b3edd3ca8fe9`,
+introduziu o chute aéreo forte com 12 ticks de reação e
+até 7 px de recuo. A puxada mantém os pés no chão e o lado de origem,
+aplica o escudo, faz a rival recuar em dois passos e só então cair.
+As novas poses seguem o concept v4 com lâmina ciano separada do
+peitoral índigo. O Emulicious confirmou os oito contatos da regressão
+e uma defesa no replay, com 16 capturas de fase. A cadência funcional
+ficou abaixo do piso de 58 FPS nas duas janelas.
+[QA e vídeo](scene02_alis_espelho_qa.md#b52--chute-forte-puxada-e-model-sheet) ·
+[Curadoria](curation_candidates/2026-11-22_alis_impacto_puxada_model_sheet.json).
+
+A [b49](../out/candidates/scene02_alis_mirror_b49/rom/master_of_fighters.sms),
+SHA-256 `2458fdecfccce8a33f29b7843860886893b6c205d8f2eda4bb6028a8c556e9da`,
+é a candidata para revisar as proporções das cinco poses. Os contatos
+aéreos de escudo e espada medem 53 px de altura. A queda cresceu de
+32 × 27 para 42 × 36 px. O repouso mede 63 × 11 px e a elevação da
+cabeça mede 56 × 18 px. As cinco poses foram vistas no framebuffer
+do Emulicious. Os quatro contatos do roteiro se repetiram no vídeo
+contínuo. O build integral e o aceite de cadência seguem pendentes.
+[Comparação e diagnóstico](scene02_alis_espelho_qa.md#b49--escala-das-cinco-poses) ·
+[Curadoria](curation_candidates/2026-11-21_alis_punho_tecido_contorno.json).
+
+A sessão de jogo da b49 reproduziu a perda do botão 2 com o foco em
+um componente interno do Emulicious. O lançador do Steam Deck mudou
+a configuração de foco do controle virtual. Foram verificados os seis
+chutes do P1 e o chute pela tecla **S**. O atalho local abre arquivos
+`.sms` com o lançador e o `run.sh` está executável. Resta repetir com
+o controle físico. [Diagnóstico e prova](scene02_alis_espelho_qa.md#b49--botão-de-chute-pelo-lançador).
+
+A [b48](../out/candidates/scene02_alis_mirror_b48/rom/master_of_fighters.sms),
+SHA-256 `90c77cf2e3cfe1c680ccf2c2399dcea4db2320c729a9c4f1000c60db41221772`,
+foi a revisão de punho, tecido, contorno e repouso. A
+conversão da b47 já produzia o branco que desbotava a túnica e o
+bracelete. A revisão reserva a rampa do tecido, preserva o traço escuro
+e distingue o punho do bracelete. A relincagem verificou o código da
+b47 byte a byte e incorporou somente a tabela de quadros e os bancos
+de arte revistos. A regressão no Emulicious confirmou os dois contatos
+aéreos, o soco em pé e a queda com a cabeça apoiada antes da levantada.
+Os quatro contatos se repetiram no vídeo contínuo. O build integral e
+o piso de cadência permanecem pendentes.
+[Quadros e diagnóstico](scene02_alis_espelho_qa.md#b48--punho-tecido-contorno-e-repouso) ·
+[Curadoria](curation_candidates/2026-11-21_alis_punho_tecido_contorno.json).
+
+A [b47](../out/candidates/scene02_alis_mirror_b47/rom/master_of_fighters.sms),
+SHA-256 `baca9cde8fa4edf93cd823a6c649c39c16234379af71823fdc5217817179d45a`,
+passou a compartilhar os descritores de geometria e manteve bancos
+próprios por traje. O duelo aéreo
+exibiu a fase ativa nos quatro acertos e no bloqueio, repetidos no vídeo.
+A espada iniciou na primeira leitura e atingiu a parte alta da rival em
+pé com os pés da atacante 21 px acima do chão em P1 e P2. Os seis chutes
+por controle, a rasteira, o repouso e os dois passos da levantada passaram
+no roteiro por leitura. Segurar o botão 2 através do pouso manteve uma
+única ação aérea. O lançador Linux confirmou a emissão de 2 e das
+combinações com ↓ e ↑ na porta A virtual.
+As janelas nominais do duelo aéreo ficaram em 38,311262176527535 e
+33,73801519402458 FPS. O piso de 58, o sincronismo de quatro reações
+aéreas e a validação humana do controle físico seguem em aberto.
+[Prova e diagnóstico](scene02_alis_espelho_qa.md#b47--fase-ativa-com-as-duas-alis-no-ar) ·
+[Curadoria](curation_candidates/2026-11-21_alis_golpes_aereos_e_chao.json).
+
+A [b43](../out/candidates/scene02_alis_mirror_b43/rom/master_of_fighters.sms),
+SHA-256 `fbf9d94dce222317c65a51cfbf9a9d40c9cb702910827615960bb7f985150591`,
+introduziu as poses revistas. A espadada em voo prepara no
+primeiro toque e acertou a altura Y=95–106 com os pés 21 px acima do
+chão. A queda exibe o corpo apoiado, a primeira elevação da cabeça e o
+apoio do joelho. O Emulicious confirmou os seis chutes do botão 2 nos
+dois controles. O lançador Linux foi corrigido para entregar o botão 2
+do controle virtual do Steam Deck, inclusive com ↓ e ↑.
+O ensaio contínuo de regressão mediu 52,43240047877327 e
+48,93690711352171 FPS funcionais. O aceite permanece pendente pelo piso
+de 58 FPS por janela. A correspondência com a pressão física no Deck
+permanece para a avaliação do dono.
+[Prova e diagnóstico](scene02_alis_espelho_qa.md#b43--acionamento-aéreo-queda-e-botão-2) ·
+[Curadoria](curation_candidates/2026-11-21_alis_golpes_aereos_e_chao.json).
+
+A [b37](../out/candidates/scene02_alis_mirror_b37/rom/master_of_fighters.sms),
+SHA-256 `309999840297e72fee8fb5c4e36b54f6feaee6fc461797ea9a330d1bdadfd482`,
+confirmou os 12 normais em ambos os controles por leitura. O misto
+repetiu os 14 contatos terrestres no vídeo contínuo. Os giros centrais
+de P1 e P2 e o giro no canto publicaram a soltura junto do dano.
+O misto ficou em 37,14219632498696 e 38,949783212803 FPS pelo VDP,
+com pico de 45 sprites, oito por linha e zero fins de envio em área
+ativa. A espadada simultânea, as reações imediatas às guardas alta e
+aérea e o piso de 58 FPS continuam critérios de aceite em aberto.
+
+A [b38](../out/candidates/scene02_alis_mirror_b38/rom/master_of_fighters.sms),
+SHA-256 `a062fcc0b5c363ce43adf83a6bbf6448b1ec2971caba5118332147260a6b1842`,
+registrou o giro nas duas faces. Confirmou a
+pega a 32 px, erro a 33 px, soltura dos dois controles e giro de P2
+junto à parede. A reação da vítima abaixada chegou no contato e a
+guarda aérea ganhou a pose de impacto um tick após bloquear. As
+janelas mistas foram de 37,14219632498696 e 39,449139407838935 FPS
+pelo VDP. O arco conservou a lógica aprovada e a cadência ainda
+alonga o movimento na tela.
+
+A [b39](../out/candidates/scene02_alis_mirror_b39/rom/master_of_fighters.sms),
+SHA-256 `f978da58124869d303b384c6cb711fad552335e73d86c2a740205d4a421bb325`,
+registrou no framebuffer os
+14 contatos terrestres do misto e os quatro ataques e bloqueio do
+roteiro aéreo. A espadada e o chute forte simultâneos exibiram as
+duas poses ativas no contato e as duas reações no tick seguinte. As
+janelas mistas foram de 37,637425609320125 e 39,94849560287487 FPS
+pelo VDP. A guarda em pé durante recuo ainda reage visualmente com
+dois ticks de atraso. A pose em pé de P2 volta três ticks após o
+reinício lógico. As sessões dos 14 roteiros da matriz foram encerradas.
+Os resultados incluem repetição dos saltos após espadada, 12 guardas compatíveis, limites
+de alcance, dois contra-ataques antes da retomada e três giros com
+pega e soltura sincronizadas. O encaixe artístico da pega e o piso
+de 58 FPS seguem abertos.
+[Comandos](scene02-comandos.md#perfil-alis--alis) ·
+[Repertório](repertorio_alis_hayato.md#produção-do-espelho-de-alis) ·
+[Curadoria futura](curation_candidates/2026-11-21_alis_espelho_producao.json).
+
+## Cena 02 · retomada de salto e montagem da espadada na b32
+
+O dono aprovou a física e a velocidade da b29 e relatou perda de salto e
+poses repetidas ao combinar diagonais, guarda e espadada. A b29 confirmou
+a perda da nova pressão de ↑ durante a recuperação, a guarda aérea fixa
+em #59 e a exposição diagonal #58 ausente numa travessia.
+
+A [ROM b32](../out/candidates/scene02_alis_jump_mix_b32/rom/master_of_fighters.sms),
+SHA `201757c38220c8890bd1bb09b00f6b1fad2a0ace4e5b92184578fe3cfb57e03e`,
+consome um salto por nova pressão e retoma a diagonal dois ticks após a
+recuperação da espadada. Mantém 78 px e 20 ticks de voo. Foram verificados
+os dois cruzamentos, a guarda com subida, recolhimento e descida e o
+segundo salto preparado antes do pouso. A primeira espadada voltou a
+exibir preparação, estocada e recuperação, com #18 presente no acerto.
+O Passo de Escudo #49 acertou após a sequência mista.
+
+O Emulicious conferiu 33 exposições no framebuffer e a faixa do HUD em
+269 quadros aéreos. As amostras da SAT chegaram a 48 sprites e oito por
+linha. O pior intervalo entre ticks foi quatro VDP, com zero falhas de
+renderização e zero términos de envio em área ativa na sequência medida.
+A cadência NTSC continua sendo o eixo de aceite pendente, com janelas
+nominais de 37,951070822731126 e 43,943345163162356 atualizações/s.
+A próxima avaliação de cadência deve conservar a primeira espadada
+após boot, as duas travessias e a alternância de guarda no ar. A
+recuperação visual do primeiro golpe ainda entrou um tick após o pedido.
+[Matriz, ROM e recibos](scene02_hayato_alis_qa.md#saltos-combinados-com-espadada-e-guarda) ·
+[Curadoria futura](curation_candidates/2026-11-21_alis_salto_comandos_montagem.json).
+
+## Cena 02 · salto alto com cruzamento de Alis na b29
+
+O dono relatou salto lento e baixo na b26. A [b29](../out/candidates/scene02_alis_crossing_b29/rom/master_of_fighters.sms), SHA `3f0ee085a36c0a6249098a21682b747ea65dc427971a34adc13ddd03fcd56757`, subiu de 26 para 78 px e reduziu a fase aérea de 28 para 20 ticks. Ela usa impulso inicial, gravidade e flexão de pouso. A diagonal mantém 6 px/tick e pode cruzar Hayato dentro da janela de altura com área de pouso livre.
+
+Em Emulicious, Alis passou de X111 a X216 e, na volta, de X174 a X68. As duas faces viraram no ápice com pixels conferidos. A diagonal iniciada longe terminou em X120, respeitando a separação na descida. O teste contínuo registrou o escudo depois de virar à esquerda e a espadada depois de voltar à direita. A fase aérea vertical ocupou 30 VDP na b29 ante 55 na primeira captura da b26. As travessias ocuparam 40 e 39 VDP. O limite de 58 FPS continua aberto. [Matriz](scene02_hayato_alis_qa.md#salto-alto-e-cruzamento-de-lado) · [Comparação temporal](../out/diagnostics/alis_20261121_salto/qa-b29/flight-comparison.json).
+
+## Cena 02 · posturas, salto e defesas de Alis na b26
+
+O pedido de 21/11 registrou as lições de paleta por material, sequenciamento,
+buffers, proporção, marcha e timbre. A espada de Phantasy Star ficou como
+direção explícita para a curadoria futura do som de Alis. [Candidatos a curadoria](curation_candidates/2026-11-21_alis_paleta_movimento_audio.json).
+
+A [b26](../out/candidates/scene02_alis_postures_b26/rom/master_of_fighters.sms),
+SHA `57be8e489786c65cd3092c1bed86f3fc90c5dd20e900bd3d3c59d662d2a68cda`,
+integra agachamento, salto vertical, diagonais e guardas em pé, baixa e
+aérea para Alis no P1. O salto tem dois ticks de preparação e 28 no ar.
+O ápice fica 26 px acima do chão e as diagonais percorrem 58 px livres.
+A pose aérea e o pivô de Alis podem avançar enquanto a próxima página do
+rival é preparada. O contraste com a b25 está no bloqueio #59, que saiu
+com 146 de 146 pixels visíveis no pivô correto da b26.
+
+No trecho contínuo, os três bloqueios preservaram vida e as três regressões
+de ataque repetiram escudo #21, espada #18 e Passo de Escudo #49. O pior
+intervalo foi quatro VDP, com zero fins de envio em área ativa. As janelas
+nominais ficaram em 37,951070822731126 e 42,94463277309048 atualizações/s.
+O aceite final de cadência segue aberto. [QA de posturas](scene02_hayato_alis_qa.md#posturas-e-salto-de-alis).
+
+A regressão do [round completo b26](../out/diagnostics/alis_20261121_posturas/b26-round-continuous/6-continuous/round-continuo.mp4) repetiu os 16 acertos, o Saque #46 com arte confirmada e o KO de Hayato. O áudio passou com 9,55% de atividade. As duas janelas nominais sob round foram 36,15173775632064 e 37,951070822731126 atualizações/s. O trabalho seguinte de cadência usa essa carga e a troca focal de posturas como controles.
+
+## Cena 02 · b23-r3 melhora a marcha e o som de Alis
+
+O dono observou pernas animadas sob um tronco rígido, equipamento imóvel e o mesmo impacto nos dois golpes do botão 1. A [b23-r3](../out/candidates/scene02_repertoire_walk_sfx_b23_r3/rom/master_of_fighters.sms), SHA `4b6a5b4847397cb7516850452e2fc0e47d67a379107093c14e91d188d64110c6`, usa quatro chaves por direção. O tronco cede 2 px na compressão e sobe 2 px na passagem. A espada gira junto à pega, o escudo oscila em fase própria e a sola fica em Y143. A revisão independente confirmou o balanço no vídeo da b23-r2 e a igualdade dos 15 quadros nativos entre versões. Na b23-r3, o teste no framebuffer cobriu Alis voltada para a direita. A arte empacotada da outra face passou a checagem de composição.
+
+O escudo usa impacto grave e curto. A espadada tem ataque mais agudo e cauda tonal em queda. Cada um tem som de preparação. A guarda tem um timbre próprio. A b23-r2 perdeu as duas leituras coerentes de contato na captura contínua. A b23-r3 conclui a publicação do registro antes do processamento do PSG no mesmo tick. A [troca contínua](../out/diagnostics/alis_20261121_marcha_e_sfx/b23_r3-runtime/continuous/round-continuo.mp4) registrou escudo #21 com 6 de dano e espadada #18 com 10 de dano, com ambas as poses já residentes e submetidas. O [recorte de áudio](../out/diagnostics/alis_20261121_marcha_e_sfx/b23_r3-runtime/continuous/golpes-escudo-e-espada.wav) teve 16% de atividade no piso de 5%. A trilha da troca inteira teve 2,85%.
+
+O pior intervalo da troca permaneceu em três VDP, sem fim de transferência em área ativa. As janelas da troca em execução contínua mediram 51,433688088701395 e 52,43240047877327 atualizações/s pelo relógio nominal, com 40,49230209081007 e 42,87143295565962 em tempo de parede. O piso de 58 continua aberto. [Matriz da candidata](scene02_hayato_alis_qa.md#marcha-com-transferência-de-peso-e-efeitos-dos-golpes).
+
+O [round completo](../out/diagnostics/alis_20261121_marcha_e_sfx/b23_r3-round-continuous/6-continuous/round-continuo.mp4) chegou a 16 contatos e ao KO de Hayato. O áudio passou com 8,73% de atividade. As janelas sob luta registraram 39,94849560287487 e 40,44785179791081 atualizações por segundo pelo relógio nominal, com pior intervalo de quatro VDP. O [traço por quadros](../out/diagnostics/alis_20261121_marcha_e_sfx/b23_r3-round/6-round/round-trace.json) mantém os ticks 361 e 497 com 12 padrões em fila. A preparação do renderizador é o próximo ponto de medição da cadência sob essa carga.
+
+A [soltura durante a passagem](../out/diagnostics/alis_20261121_marcha_e_sfx/b23_r3-release-isolated/release.json) estabilizou o pivô assim que o direcional neutro foi consumido. A guarda recebe o corpo de uma vez, com uma descida de 2 px. A mudança de base na parada após compressão ainda pode ser percebida contra o rival.
+
+## Cena 02 · b21 corrige recuo e coesão visual de Alis
+
+O dono confirmou o controle físico na b18 e reprovou o recuo curto, a troca de materiais durante a marcha e a deriva de proporções nos dois golpes do botão 1. Na [b21](../out/candidates/scene02_repertoire_alis_cohesion_b21/rom/master_of_fighters.sms), SHA `6f7c86e65fa1e530d67e912353d33502b955a575bd26721757ff5d06af04ac48`, Alis recua de X111 a X32 em 79 px, ante 48 na b18. A margem X32–X223 deriva da extensão das poses dos dois atores e da separação mínima de 24 px. A reprise após o canto confirmou comandos consumidos e retorno a X120.
+
+Os rasters da guarda fornecem o rosto, as massas do torso e os materiais usados nas marchas. As pernas preservam os apoios desenhados. O golpe curto mantém rosto e proporções e move o escudo da guarda. A espadada registra o rosto no pescoço de cada pose, preserva a ponta ativa e remove resíduos nas duas faces. A [matriz b21](scene02_hayato_alis_qa.md#b21--revisão-dos-pontos-relatados) vincula as 15 poses conferidas no framebuffer, a troca com áudio e as regressões de alcance e guarda. O [teste em execução contínua](../out/diagnostics/alis_20261121_revisao_b18/b21-runtime/continuous/round-continuo.json) registrou 52,42232678200898 e 50,98397512481057 atualizações/s. O piso segue reprovado, e a face esquerda foi conferida na composição empacotada.
+
+O [round completo da b21](../out/diagnostics/alis_20261121_revisao_b18/b21-round-continuous/6-continuous/round-continuo.mp4) chegou ao KO de Hayato com 16 contatos e áudio. A próxima intervenção de cadência tem como controle o pior intervalo de quatro VDP do round por quadros e as janelas de 26,0488767488953 e 35,010753362898036 atualizações/s em tempo de parede. A lista de revisão ainda inclui material dos chutes e do Passo de escudo, além da prova ao vivo da face esquerda.
+
+## Cena 02 · b18 com Alis no controle principal
+
+Após relato de lutadores estáticos na abertura manual, o perfil do Emulicious mostrou a b17 como última ROM e o Deck ligado ao P1, atribuído a Hayato naquela candidata. A [b18](../out/candidates/scene02_repertoire_alis_p1_b18/rom/master_of_fighters.sms), SHA `e738daa7bf80875025cda66ea73d5e55803e4a034836427abc3175bf93fc27aa`, põe Alis à esquerda no P1 e Hayato no P2. Os seletores de boot ativos são mascarados individualmente até soltar, deixando livres os demais comandos. O lançador Linux aceita o caminho da candidata ao abrir o duelo.
+
+A [matriz b18](scene02_hayato_alis_qa.md#b18--alis-no-controle-principal) vincula a ROM à imagem de abertura e ao vídeo contínuo. Alis recuou e avançou pelo P1 virtual e tirou 10 de Hayato com a espadada. Foram verificados 15 bancos e o corredor de 263 bytes. A prova do controle integrado físico e o aceite integral de cadência seguem pendentes. O piloto ainda usa poses estáticas enquanto os jogadores estão em repouso.
+
+## Cena 02 · ciclo de reserva de sprites e primeira troca na b17
+
+A [b17 de seis leituras](../out/candidates/scene02_repertoire_hold6_20261121_b17/rom/master_of_fighters.sms), SHA `1ee09f085f79d983da5595d0fdcad7048608171ae2917c275da8fa753578f900`, ensaiou o custo de reservar padrões no duelo. A reserva de padrões P1 percorre blocos com índices de 8 bits e pula o recálculo da proteção quando todos os pedidos já têm faixa. Build passou com os bancos 02–16 conferidos e 263 bytes de folga da sonda. O [round contínuo com áudio](../out/diagnostics/alis_20261121_b17_continuous/6-continuous/round-continuo.mp4) mostrou os 14 contatos e o KO. As janelas de parede ficaram em 39,01123494727796 e 37,98667176447802 atualizações/s. No round por quadros, a b17 perdeu 208 épocas contra 218 da b14 e voltou a levar quatro quadros VDP no pior intervalo, com zero fins de envio em área ativa.
+
+No [ensaio da espadada](scene02_hayato_alis_qa.md#b17--reserva-de-padrões-de-sprites), acertar em 66 px tirou 10 de vida. Em 67 px, Hayato puniu com o Saque e tirou 16, mas seu sprite permaneceu em guarda no contato. Em 28 px, Hayato bloqueou e acertou o soco curto antes da retomada de Alis. O Saque aproximado #46 manteve a prova no framebuffer posterior à submissão. A revisão independente de arquivo na b14 confirmou a separação visível entre a ponta e o corpo no limite e a falta de gesto corporal de defesa. O aceite continua pendente na b17.
+
+O próximo teste do renderizador deve separar o fundo da preparação #45 do trabalho de antecipar #46. O controle de pior intervalo pede 8 P1 + 4 P0 em t334 e 12 P0 em t468 com os atores ainda em guarda. O ensaio de reserva reduziu a perda no round, e esses dois intervalos continuam sem fechar o prazo. Antes de transportar a otimização para outra candidata, conservar os controles de guarda, alcance, Saque perto/distante e custo da troca de poses. O [inventário de design](repertorio_alis_hayato.md#alis--decisões-vigentes-e-cobertura-de-produção) registra as famílias autorizadas e as ações à espera de decisão. A b17 oferece duelo local desde o boot. Menu de comandos dentro da ROM, transição de cutscene e aceite integral seguem pendentes.
+
+## Cena 02 · fila P0 da punição distante
+
+A b16 de seis leituras, SHA `a3c28e21ac3e78e7c43abb19f56a660bfe01a713e23a1432e14e4adbf183fdfa`, transmitiu P0 de uma camada diretamente do banco. O round chegou ao KO com zero fins em área ativa e 220 épocas perdidas, contra 218 na b14. As duas janelas de parede ficaram em 38,31319758183483 e 37,7519264849066 atualizações/s. A comparação em VDP não mostrou ganho de cadência. A fonte de execução voltou à b14, conservando [ROM e patch experimental da b16](../out/candidates/scene02_repertoire_hold6_20261121_b16/renderer-experiment.patch).
+
+A [leitura dos símbolos da b16](../out/diagnostics/alis_20261121_b16_alis_miss_punish/saque-background-trace.json) mostrou a fila #45 descartando a etapa anterior a cada incremento de X=111 até X=123. No contato t111/VDP206, #46 tinha 4 de 23 células P0 e #0 permanecia apresentado. O último tick ativo acumulou 8 células. #47 substituiu o alvo antes de #46 chegar à tela. O próximo ensaio de vídeo tem de preparar a fase de contato antes de estabilizar o pivô e preservar a apresentação de #45 durante a passada. O [orçamento estático candidato](../out/diagnostics/alis_20261121_b16_alis_miss_punish/saque-p0-residency-budget.json) confirmou 100 padrões P0 residentes por face de #45 e duas páginas dinâmicas de 32. A residência adicional P1 de #45 exige medir a troca com o espaço do chute forte, a composição com o oponente e o prazo de #47.
+
+## Cena 02 · comparação de preparação de P0
+
+A b15 de seis leituras, SHA `40251c63a533f66c42bb9f414ca53d8a93912ff09bb639f01dde73100ac6d420`, usou o caminho de camada única também no preparo do quadro corrente. Preservou todos os números de VDP do round b14, os 14 contatos, o KO e zero envios na área ativa. A cadência funcional continuou reprovada e o Saque distante repetiu a publicação de #0 no tick de dano, com #46 solicitado e P1 residente. [Traço da punição](../out/diagnostics/alis_20261121_b15_alis_miss_punish/6-alis_miss_punish.json) · [Round em execução contínua](../out/diagnostics/alis_20261121_b15_continuous/6-continuous/round-continuo.json). O próximo experimento transmite padrões de uma camada pré-composta diretamente da ROM e lê o estado real da fila P0 por símbolo para localizar o prazo perdido na passada longa.
+
+## Cena 02 · HUD da b14 preparado antes do VBlank
+
+A [b14](../out/candidates/scene02_repertoire_hold6_20261121_b14/rom/master_of_fighters.sms), SHA `e99ce3677559ea58907fbeee9cea1c8c530514f0803446bfd88a383a095a2fe1`, reduziu de dez para zero os envios encerrados na área ativa no roteiro comparável. A lógica manteve os 14 contatos e o KO. O Saque publicou #46 no contato VDP677, com a imagem seguinte no VDP678. A cadência continua reprovada e o pior intervalo permaneceu em quatro quadros VDP. O áudio do round completo foi gravado em uma sessão contínua do mesmo SHA. [Recibos e tempos](scene02_hayato_alis_qa.md#b14--hud-e-round-completo).
+
+## Cena 02 · Saque na b13-r2 e round contínuo
+
+A [b13-r2](../out/candidates/scene02_repertoire_hold6_20261121_b13_r2/rom/master_of_fighters.sms), SHA `7e1b911741b8241a937a7e910a8d0e4cf04288ea195c0e425ea4891520bdf0fb`, preparou as 23 células P0 do Saque em lotes 12+11 antes do contato. No stepping a pose #46 foi submetida no VDP666 e desenhada no VDP667. O round chegou ao KO em duas sessões privadas encerradas, uma com gravação contínua e áudio. O chute fraco de Hayato atrasou uma pose no vídeo contínuo. A cadência de parede ficou em 39,9321286 e 30,5670929 atualizações/s. Na coleta por quadros, o pior intervalo foi de quatro quadros VDP e dez envios com atualização de vida terminaram na área ativa. [Round e evidências](scene02_hayato_alis_qa.md#b13-r2--saque-e-round-completo).
+
+## Cena 02 · primeira troca de Alis na b12
+
+A [b12 de seis leituras](../out/candidates/scene02_repertoire_hold6_20261121_b12/rom/master_of_fighters.sms), SHA `c30ed6cdd673a03148f8ca45218910f7e71facbb79846538e30b3b9cdbae761f`, compilou com os gates prévios, 15 bancos conferidos e 543 bytes de folga no corredor. A caixa da estocada segue a ponta do desenho #18. Em sessões privadas encerradas, o golpe acertou a 66 px e errou a 67 px. Hayato bloqueou sem chip a 28 px e acertou Alis na recuperação. O controle com a direção errada recebeu dano. Toque, limiar e rearme produziram as poses iniciais #20/#17/#17 uma vez cada.
+
+O comparativo independente em 256×192 confirmou mudança de vida e a lâmina no quadro seguinte. O torso ainda fica separado da ponta no acerto de borda. A defesa de Hayato carece de pose distinguível e a primeira marcha livre de Alis pode deixar o desenho anterior na tela. Os cinco casos registraram irregularidade entre ticks e quadros VDP. A [matriz, os números e os PNGs](scene02_hayato_alis_qa.md#b12--primeira-troca-de-alis) documentam o recorte. O [inventário de Alis](repertorio_alis_hayato.md#alis--decisões-vigentes-e-cobertura-de-produção) mantém em aberto as decisões de postura, especiais, magia, Super e agarrão.
+
 ## Cena 02 · auditoria de impacto, sistemas e pipeline
 
 A [auditoria dos pilares V–VIII](curation_candidates/2026-11-21_auditoria_impacto_sistemas_pipeline.md) separa o impacto intencional, o hitstun e os atrasos de publicação, e cruza comandos, recursos, áudio, interface, IA e dados com o consumidor da b11-r2. Antes de expandir, a proposta é provar contato, comando e pose no mesmo trecho e fechar as decisões de GD01/GD02 que o piloto ainda não resolve. A [fila de curadoria](curation_candidates/2026-11-21_auditoria_impacto_sistemas_pipeline.json) registra os casos positivos/negativos e os responsáveis.
@@ -24,6 +275,365 @@ Em pé, toque em 1 é soco fraco, segurar 1 é soco forte, toque em 2 é chute f
 
 O comparativo do framebuffer, dos sprites e das fontes localizou deriva de cabelo, roupa e leitura da katana em Hayato, compressão horizontal na marcha e perda de magenta na marcha de Alis. A pose `#46` do Saque ficou atrasada no stepping e apareceu no vídeo contínuo do mesmo SHA. A [matriz por pose e proposta de curadoria](curation_candidates/2026-11-21_scene02_identidade_por_pose.md) indexa os mosaicos e os controles. Próximo lote de correção por eixo: provar a rampa de Alis em `#38/#42/#43`, revisar a marcha de Hayato com escala uniforme e reproduzir o contato `#45→46→47` com posição publicada e framebuffer na mesma fronteira. O piso de 58 permanece reprovado.
 
+## Cena 02 · b11-r2 em ensaio no Emulicious
+
+A b11-r2 de seis leituras, SHA `f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7`, contém os 15 bancos verificados. Na sessão contínua, os quatro ciclos exibiram todas as poses em 32 px e o soco de Hayato apresentou a pose 8 ao reduzir a vida de Alis a 94. O vídeo de 32,579 s com áudio chegou ao KO e está vinculado ao SHA. As duas janelas contínuas mediram 15,1878595 e 20,5018315 atualizações/s em tempo real, com 40,1135720 e 42,8019596 por segundo nominal do VDP. O piso de 58 permanece reprovado. [Índice e mídias](repertorio_alis_hayato_provas.md#round-contínuo-b11-r2).
+
+## Cena 02 · sincronização do soco e integração de marcha e especiais
+
+- A b09 de seis leituras, SHA `65ccd0810565b346e283f8792b6b7ae86422f0da5d3534e764c141332915a129`, reproduziu o primeiro soco no Emulicious e publicou a pose 8 no mesmo tick da queda de vida de 100 para 94. A amostra de impacto ficou em 55,0805015 atualizações/s nominais. O [recibo](../out/diagnostics/repertoire_20261119/scene02-impact-qa6-b09/6-round/impacto-soco.json) registra um atraso de apresentação e zero términos em área ativa.
+- O proprietário aprovou os dois especiais para ensaio. As fontes de quatro ciclos de marcha e dois especiais foram preparadas a partir dos model sheets preservados. O empacotamento do lote acrescentou 22 poses às 29 existentes, verificou ambas as orientações e produziu 18 bancos para a candidata de 512 KiB. A prova de runtime é separada da decomposição estática. [Decisão](decisions/scene02-first-specials_owner-trial_20261119.json) · [Comandos](scene02-comandos.md) · [Plano e limites estáticos](../out/diagnostics/repertoire_20261119/scene02-actions-plan-v1.json).
+- A b10 de seis leituras, SHA `57198fcbbf09be9a93afb820c7c4ba86de260b2d26ed7840f5b14efbfe209cb0`, executou os oito normais e os dois especiais até o KO. Cada sentido percorreu 32 px. A sonda viu todas as poses de marcha de Alis e duas de quatro em cada marcha de Hayato. O primeiro desvio foi a pose 33 solicitada no quadro VDP 146, com residência incompleta e pose 0 publicada. O ritmo medido no vídeo por quadros foi 39,2886856 atualizações/s nominais, com 345 épocas perdidas e zero envios encerrados na área ativa. O primeiro soco de Hayato e o Saque apresentaram a preparação no tick do dano. [Índice e fronteiras](repertorio_alis_hayato_provas.md#índice-do-round-de-diagnóstico-b10).
+- A captura contínua da b10 excedeu o limite de tempo da automação com a rota de áudio verificada. A sessão fechou. A SAT no quadro inicial tinha 47 sprites e pico de 7 por linha. O round silencioso por quadros, o recibo da tentativa contínua e as duas janelas reprovadas de 41,1040306 e 44,3126170 estão no mesmo índice.
+
+## Curadoria do round b08 · normais, marcha e especial
+
+O [índice dos oito primeiros acertos](repertorio_alis_hayato_provas.md) identifica vida e pose por tick. Em quatro deles a pose apresentada divergiu da pedida. O [parecer](../../../doc/curation/2026-11-19_mof_revisao_b08.md) documenta a correção do gravador, verificada nos traços b05/6, b05/8 e b08/6. O [próximo lote](../../../doc/continuity/20261119-prompt-b08-marcha-normais-especiais.md) cobre a sincronização dos normais, quatro ciclos de caminhada e o primeiro especial de cada lutador. Esta revisão utilizou as ROMs e sessões arquivadas.
+
+## 2026-11-19 · Bancos e cadência da Cena 02
+
+- O motor do repertório usa os bancos 02–10 para as 58 poses e as 464 fases
+  da camada de fundo. O renderizador monta a SAT fora da transferência e
+  prepara padrões em páginas fora de exibição. Os oito normais usam o comando
+  na soltura para o fraco e limiares separados para o forte. Os pilotos da
+  [matriz da Cena 02](scene02_hayato_alis_qa.md) permanecem arquivados.
+- O `makesms` descartou a nona mescla e retornou sucesso quando recebeu nove
+  operações separadas. A receita passou a escrever os nove bancos com uma só
+  operação e a comparar todos os bytes com as fontes. O binário diagnóstico
+  `6658518cfc858998f841d50fbf833c443267b0735791c8b645eed9ac68ef9267`
+  confirmou o boot e registrou 20,788312139702825 e 23,994781416502324 FPS.
+  [Comparação no Emulicious](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-p01/comparison.json).
+- O [traço por etapa](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-p02/6-round/round-trace.json)
+  mostrou dois quadros VDP por tick neutro e perda do prazo ao soltar o
+  primeiro golpe. A revisão reduziu o caminho neutro, a coleta da sonda e a
+  busca do cache. A compilação de 6 leituras verificou os nove bancos no SHA
+  `83cf8e506d54aca42b80183c953b14b52bb17ff43f47736071c3d27edf2e75b9`.
+  [Recibo do build](../out/candidates/scene02_repertoire_hold6_20261119_b02/build_record.json).
+- A revisão b02 registrou janelas de 54,27668136613763 e 58,69225848842861
+  FPS. O trecho neutro acumulou zero escritas após o VBlank, e a sessão
+  encerrou quando o primeiro golpe precisou de mais de três quadros VDP
+  para publicar seu tick. O piso de 58 FPS segue pendente.
+  [Cadência b02](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b02/6/cadence.json)
+  · [Traço b02](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b02/6-round/round-trace.json).
+- O formato b03 compõe sobre o cenário no empacotamento e só mescla em RAM
+  quando duas células P0 se sobrepõem. O empacotador confere, em todas as
+  fases, tanto os pixels autorais como os pixels de fundo descobertos.
+  [Bancos b03](../out/diagnostics/repertoire_20261119/scene02-repertoire-banks-b03/repertoire-pages.json).
+- As ROMs b03 têm 256 KiB e os nove bancos batem byte a byte com o recibo.
+  [6 leituras · fbbef487…](../out/candidates/scene02_repertoire_hold6_20261119_b03/rom/master_of_fighters.sms)
+  · [8 leituras · 4bdc93b6…](../out/candidates/scene02_repertoire_hold8_20261119_b03/rom/master_of_fighters.sms).
+- Em b03, o replay de 6 leituras marcou os oito normais, apresentou os 29
+  IDs de pose da orientação padrão e terminou com Hayato 64 e Alis 0. Os
+  530 intervalos de lógica cobriram 813 quadros VDP. Houve 177 términos
+  de envio na área ativa. As duas janelas neutras tiveram 232 e 293 avanços
+  tanto da ROM como do VDP. Isso identificou limitação adicional de tempo de
+  parede da sessão, que registrou 18,32655807007574 e 23,151949245368023 FPS
+  no limite conservador da sonda. O streaming RGB perdeu a igualdade da
+  contagem, então esta sessão preservou o traço do round e descartou o vídeo.
+  [Traço b03](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b03/6-round/round-trace.json)
+  · [Janelas do VDP](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b03/6/host-vdp-windows.jsonl).
+- A candidata b04 de 6 leituras prepara endereços fora do VBlank, envia BG
+  em bloco contíguo e limita o lote a seis padrões. O SHA
+  `7f91b14ffd22985f0fcc6a8d0bd96efadc870e5fe96d077015c0782adbdbb6d2`
+  passou no corredor de sondas com 709 bytes de folga. Na cena neutra a
+  sonda SMRT registrou 59,043191119039854 e 58,50078254401529 FPS.
+  [ROM b04](../out/candidates/scene02_repertoire_hold6_20261119_b04/rom/master_of_fighters.sms)
+  · [Cadência b04](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b04/6/cadence.json).
+- No round b04, os oito normais acertaram e Alis chegou a zero de vida.
+  Foram 829 capturas de framebuffer, 256×192, com 13,834 s de reprodução NTSC.
+  Em combate foram 38,310077206617 atualizações por segundo nominal, 262
+  intervalos com avanço diferente de um quadro do VDP, 14 fins de envio na
+  área ativa, 85 atrasos de pose e 25 de 29 IDs de pose na apresentação.
+  O gargalo de cadência continua durante a preparação dos padrões P1.
+  [Round b04](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b04/6-round/round-completo.mp4)
+  · [Recibo](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b04/6-round/round-completo.json).
+- O formato b05 guarda por pose as coordenadas SAT e os padrões P1 em
+  trechos contínuos. O cache reutiliza a mesma alocação quando o conjunto
+  de poses permanece estável e envia os padrões por banco em bloco.
+  O round de 6 leituras registrou 710 quadros em 11,849 s, os oito normais,
+  KO de Alis, 44,7310619778669 atualizações por segundo nominal, 25 fins de
+  envio na área ativa e 45 atrasos de pose. A pose 11 de Hayato não apareceu
+  nessa execução. Os quatro golpes fortes iniciaram na sexta leitura
+  efetivamente consumida. As janelas neutras de parede reprovaram com
+  52,602833413233334 e 56,94846967152801 FPS. Em ambas, ROM e VDP avançaram
+  na mesma contagem de quadros.
+  [Round b05](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b05/6-round/round-completo.mp4)
+  · [Recibo](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b05/6-round/round-completo.json).
+- Na candidata b05 de 8 leituras os mesmos quatro fortes começaram na
+  oitava leitura consumida. O replay também confirmou os oito normais e KO.
+  Registrou 730 quadros, 45,147272427906536 atualizações por segundo nominal,
+  25 fins de envio na área ativa e 45 atrasos de pose. A comparação conserva
+  os SHA e a sessão de cada limiar. A aceitação de combate segue pendente.
+  [6 leituras](../out/candidates/scene02_repertoire_hold6_20261119_b05/rom/master_of_fighters.sms)
+  · [8 leituras](../out/candidates/scene02_repertoire_hold8_20261119_b05/rom/master_of_fighters.sms)
+  · [Comparação por comando](../out/diagnostics/repertoire_20261119/scene02-repertoire-b05-hold-comparison.json).
+- A candidata b06 de 6 leituras antecipa a segunda pose enquanto o botão
+  está pressionado, reutiliza as caixas nas mesmas coordenadas e reserva
+  folga de envio para trocas de pose com muita PNT. Passaram as fixtures
+  de regra, comandos, normais e movimento, e o corredor ficou com 687 bytes
+  de folga. A ROM de SHA
+  `6ef1e93a7421cf9b0f8a2a1b0df5106560f968e6fba0610b253d54ce79a6b707`
+  confere com os nove bancos b05.
+  [ROM b06](../out/candidates/scene02_repertoire_hold6_20261119_b06/rom/master_of_fighters.sms)
+  · [Fixtures b06](../out/diagnostics/repertoire_20261119/scene02-repertoire-b06-host-fixtures.txt).
+- O round b06 chegou ao KO e registrou 46,5675278655213 atualizações por
+  segundo nominal. Os términos na área ativa caíram para quatro, três deles
+  com apenas SAT e PNT no lote. O renderizador atrasou 124 apresentações e
+  quatro IDs de pose não foram apresentados. As janelas neutras de parede
+  ficaram em 38,486734727972305 e 52,8106096213658 FPS, com a mesma contagem
+  de quadros na ROM e no VDP. A revisão b05 continua como o par comparável.
+  [Recibo b06](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b06/6-round/round-completo.json).
+- Em b07, a montagem da SAT em Z80 e o reaproveitamento da previsão entre
+  poses estáveis elevaram a cadência do round para 49,2388434174969
+  atualizações por segundo nominal. Houve quatro fins de envio na área
+  ativa e 124 atrasos de apresentação. O round de 645 quadros chegou ao KO.
+  O neutro passou nas duas janelas com 59,71062117279423 e
+  58,75200150161137 FPS. A validação sob carga segue reprovada.
+  [Recibo b07](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b07/6-round/round-completo.json)
+  · [Cadência b07](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b07/6/cadence.json).
+- A candidata b08 envia a SAT com a cópia contínua do SDK e escreve os
+  endereços já preparados da PNT no trecho de submissão. O SHA
+  `47a65c0988a0ac8a235b1c417df4b3eb4746d542ad595c3d3a3cc38df27011d4`
+  confere com os nove bancos b05. O corredor de sondas ficou com 661 bytes
+  de folga. A API de comando e o limiar continuam iguais.
+  [Recibo do build b08](../out/candidates/scene02_repertoire_hold6_20261119_b08/build_record.json).
+- A b08 confirmou os oito normais e KO no Emulicious. O round de 646
+  quadros teve zero fins de envio na área ativa, linha mínima 205 e pico
+  registrado 255. A cadência sob carga foi 49,1626222976556 atualizações
+  por segundo nominal. Houve 167 intervalos diferentes de um quadro VDP,
+  103 atrasos de apresentação e não apareceram os IDs 3, 8, 11 e 21. As
+  janelas neutras de parede foram 53,53515731703253 e 52,005743870395996
+  FPS, com a mesma contagem de quadros na ROM e no VDP. O VBlank do
+  round passou na contagem de derrames. A cadência e a apresentação sob
+  carga continuam reprovadas.
+  [Round b08](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b08/6-round/round-completo.mp4)
+  · [Recibo b08](../out/diagnostics/repertoire_20261119/scene02-repertoire-qa6-b08/6-round/round-completo.json).
+- Para comparação de comandos, o par b05 tem ambas as ROMs, ambos os rounds
+  e os limiares de 6/8 confirmados. O material de recuperação no NTFS está
+  em `C:\Users\Deck\AppData\Local\SMSForge\recovery\master-of-fighters-integrated-20261119`.
+
+## 2026-11-19 · Preparação do renderizador dos oito normais
+
+- Os pilotos de 6 e 8 leituras continuam nos mesmos binários e SHA da
+  [matriz da Cena 02](scene02_hayato_alis_qa.md). A tentativa de medir o
+  controle de seis em tempo real expirou no boot do Emulicious. Ainda não
+  há janela SMRT nova para distinguir o ritmo da ROM do stepping anterior.
+  [Sessão de controle](../out/diagnostics/repertoire_20261119/scene02-control-realtime-6-b01/comparison.json).
+- O caminho experimental `MOF_DUEL_FAST_SAT` arma o hook oficial de quadro
+  para preservar a borda de VBlank até o envio, prepara o pacote SAT somente
+  quando posição ou pose muda e envia apenas o trecho usado. A auditoria
+  de marcadores passou. A [receita de seis](../out/diagnostics/repertoire_20261119/scene02-fast-sat-6-build.json)
+  e a [receita de oito](../out/diagnostics/repertoire_20261119/scene02-fast-sat-8-build.json)
+  são candidatas separadas. A cadência, distribuição VRAM e apresentação
+  continuam sem validação nesse código.
+- A decomposição preserva os pixels das 58 poses por fase e face, incluindo
+  o piloto. O cruzamento no vão de 24 a 129 px projetou pico de oito por linha,
+  57 objetos na SAT, 25 células P0 e até quatro células compartilhadas.
+  No pior envio integral seriam 998 bytes de dados de padrões/PNT/SAT antes
+  de comandos VDP, limpeza da PNT e HUD. O empacotamento em nove bancos
+  refez os bytes das 58 poses e 464 fases P0 na leitura de retorno.
+  [Plano de camadas](../out/diagnostics/repertoire_20261119/scene02-repertoire-layer-plan-b02.json)
+  · [Bancos verificados](../out/diagnostics/repertoire_20261119/scene02-repertoire-banks-b02/repertoire-pages.json).
+- O [trade-off de residência](../out/diagnostics/repertoire_20261119/scene02-repertoire-layer-plan-b03.json)
+  comparou os tetos de P0 de 12 a 25 células para as poses de início.
+  Com até 25 células ficam livres 43 slots de sprite em uma orientação
+  e 41 na outra. Um par posterior pode pedir 57 objetos. A versão final
+  precisa reutilizar parte dos slots de abertura durante a ação ou usar
+  uma alocação mais econômica. Os experimentos preservam as durações do piloto.
+- Permanecem pendentes a residência dos quadros posteriores, mescla das
+  células compartilhadas, cronograma de upload, vínculo com `MOF_DUEL_REPERTOIRE`
+  e round com KO em ROM. A próxima compilação/QA depende de uma vaga
+  serializada no host. As amostras registraram outra suíte durante a
+  tentativa de admissão.
+  [Recibo de admissão](../out/diagnostics/repertoire_20261119/standing-renderer-build-admission.jsonl).
+
+## 2026-11-19 · Emulicious no Windows e calibração das poses em pé
+
+- A distribuição portátil oficial com Java foi instalada no perfil Deck. O
+  comando efetivo para `.sms` aponta para Emulicious. A abertura via shell
+  iniciou o Java incluído com o caminho completo da ROM de seis leituras.
+  [Recibo](../out/diagnostics/repertoire_20261119/windows-emulicious-setup.json)
+  · [Abertura pelo shell](../out/diagnostics/repertoire_20261119/windows-shell-launch.json).
+- A configuração é repetível pelo bootstrap com `install --windows-emulicious`.
+  O pacote oficial foi fixado em SHA-256
+  `0a6737b4c709fe54dd88fb507bdf9d491205f240d68e83593e24f8414e0378b5`.
+- No Debian WSL, o Xvfb recebeu um diretório privado porque o socket do WSLg
+  impediu a alocação de display. A ponte ganhou espera que cobre as etapas
+  de boot e coleta da publicação MFD1 completa. Em b13 o contra após
+  defesa a 33 px entrou no tick 22 com 6 leituras e no 24 com 8. O replay
+  registrou um tick lógico a cada dois quadros contados pela ponte.
+  As duas sessões foram fechadas. Cadência em tempo real, demais casos
+  e vídeo continuam pendentes.
+  [Resultado b13](../out/diagnostics/repertoire_20261119/pilot-comparison-b13/comparison.json).
+- Foram calibradas 18 poses a partir dos model sheets do projeto. A composição
+  inicial excedeu oito sprites por linha em 79 dos 81 pares e chegou a 13.
+  Reservar quatro cores livres em P0 e mover todas as células compatíveis
+  deixa pico teórico de quatro sprites por linha. Para cumprir oito, o par
+  mais caro precisa mover pelo menos 13 objetos nessa contagem. A projeção
+  do plano escolhido chega a 21 células de fundo na formação de 33 px.
+  O patch atual comporta sete. Faltam composição e sobreposição, orçamento
+  de VBlank e QA no emulador.
+  [Procedência](../data/source_art/sprite_studies/scene02_standing_20261119/generated-art-receipt.json)
+  · [Medição provisória](../out/diagnostics/repertoire_20261119/standing-art-b05/staging-report.json).
+
+## 2026-11-19 — Primeira família do repertório em bancada
+
+O dono autorizou produzir os quatro normais em pé por personagem,
+com toque na soltura, sem buffer e sem cancelamento. Autorizou o ensaio
+de guarda alta, abaixada e aérea. Os golpes abaixados/aéreos, especiais,
+Super e agarrão aguardam a avaliação da primeira família.
+[Decisão](decisions/alis-hayato-standing-normals_owner_20261119.json)
+· [Comandos e índice de provas](repertorio_alis_hayato_provas.md).
+
+As duas ROMs de 32 KiB mantiveram os SHA da
+[matriz original](scene02_hayato_alis_qa.md). Tentativas pelo wrapper
+com os dois binários voltaram a falhar em `pactl` ausente no Debian/WSL,
+antes de abrir sessão. O contragolpe nos ticks 22 e 24 continua previsão
+do piloto para verificar no framebuffer e no trace por SHA.
+
+O núcleo C agora recebe fichas por normal em pé e separa o candidato de
+input do comando que a máquina de estados aceita. A bancada cobre 256
+casos de perto, limite, pixel além e guarda, com P1/P2, face e 6/8
+invertidos, usando artefatos sintéticos para os seis novos golpes.
+Passe de toque, carga e acorde estrito/uma leitura inclui soltura
+parcial, tentativa bloqueada e rearmamento. Movimento Q12.4 mede 32/43
+ticks de caminhada para Hayato e 37/37 para Alis no avanço/recuo de
+32 px. Dash, freio, salto e guardas são ensaios independentes do
+renderizador. A guarda abaixada no primeiro tick de chão foi corrigida
+e ganhou regressão.
+
+Próximo elo: qualificar Emulicious e reproduzir a matriz dos dois
+pilotos; produzir as seis sequências laterais em pé que faltam antes
+de ligar os novos IDs ao renderizador. Sem candidata nova, vídeo
+contínuo, timestamps, VBlank ou FPS deste incremento.
+
+## 2026-11-19 — Cena 02, comparação de 6 e 8 leituras com ROMs candidatas
+
+O dono pediu manter as duas durações de pressão para comparação e seleção
+posterior. A [decisão de piloto](decisions/hayato-alis-scene02_owner-comparison_20261119.json)
+registra os parâmetros comuns e preserva o corte v4/v7. A
+[matriz de QA](scene02_hayato_alis_qa.md) identifica os dois binários de
+32 KiB, o SHA de cada um, controles, casos previstos e limite de validação.
+
+GD05 entrou no consumidor com combate pelos dois controles, guarda, recuo,
+vida, contato único por golpe e recuperação. As duas durações passaram
+40 casos de regras nativas com caixas sintéticas e quatro cruzamentos
+simultâneos. MFD1 separa pose de contato, solicitada, residente e apresentada,
+e registra o tick livre e as caixas antes da resolução. Três testes nativos
+confirmaram a serialização/decodificação. O mapa coloca o bloco em `0xC770`.
+
+R03 simultâneo com preparação e estocada de Alis é alcançável nas duas
+variantes. A correção usa uma disposição fixa por pose, com Hayato à frente
+na SAT e partes de Alis no BG, limitando a 8 por linha e 50 na SAT nos
+56 cruzamentos estáticos. São 249 padrões residentes e 7 alternados para
+Alis, com até 7 células de BG dinâmico. A área de jogo compartilha o chão
+da placa diagnóstica e usa HUD de vida dos dois jogadores. Os símbolos
+em 65 arrays foram conferidos byte por byte com cada ROM.
+
+O SDK nativo passou no smoke de 16 KiB com um job. O compilador portátil
+ficou em NTFS após a promoção por rename falhar nos dois volumes.
+Usou-se o `cc1` do arquivo oficial do SDCC e um makefile de ambiente
+privado para assegurar a interpretação POSIX do make. Corrigida a
+normalização de separadores no gate de procedência do wrapper; os
+pre-gates das duas builds passaram. O Debian do WSL lê a raiz registrada,
+mas o inventário atual indica Java/Javac, Xvfb, Bubblewrap, FFmpeg e
+PulseAudio ausentes. Gameplay em ROM, vídeo do par, áudio capturado,
+VBlank e FPS funcional permanecem pendentes, assim como provas da
+reação visual e da qualidade artística em 1× durante a partida.
+
+## 2026-11-19 — Cena 02, preparação do piloto Hayato × Alis
+
+**Estado: contrato de combate pendente.** Hayato é o foco e Alis é a rival
+proposta para a Cena 02. O confronto já tem uma régua de alcance e uma
+direção do proprietário para a estocada forte de Alis no botão 1 segurado.
+A resposta a testar é a estocada após defender ou provocar o erro do corte,
+com tempo e alcance suficientes depois do recuo. O comando do corte curto
+continua sem decisão aplicável à luta. O limiar de 12 leituras é do viewer.
+J.J. permanece controle artístico independente: a amostra aceita usa a
+fonte v6 e 7/4/2/3/6, sem emissão, hit ou defesa. O congelamento do Social
+permanece vigente. [Régua e comando de Alis](duel_reach_reference_v2.md).
+
+### Material conferido neste checkout
+
+| Papel | Arquivo e SHA-256 verificado | Limite do aceite |
+|---|---|---|
+| Identidade de Hayato | [Concept v2](../data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png) `a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95` | Referência visual do personagem. |
+| Atuação e exposição do corte | [Fonte v4](../data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png) `9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d` | Desenhos e tempos v7 `8/1/2/7/2/5`, com trajetória original da lâmina. [Decisão](decisions/hayato-short-cut-timing-only_owner_approval.json). |
+| Régua comum | [Página 1](../data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_01.png) `b48e9e5b894751a3a2dfd332977703de9a456155457f474a94428f16a7c1f8ba`, [página 2](../data/source_art/roster_harmony_review/waku_waku_7/harmony_waku_waku_7_lineup_v1_part_02.png) `602721b493d6a5a964e3055d840f4117425aced9e97df3063637bf669c1ab5ce` | Comparação visual. A régua v2 usa 75 U para ambos; a guarda de Hayato tem 58 px da coroa ao chão. Os 68 px de Alis são um alvo de calibração ainda pendente no sprite lateral. |
+| Identidade de Alis | [Concept v4](../data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png) `b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95` | Referência de identidade visual, figurino e equipamento. O sprite lateral da Rodada 1 ainda precisa de validação de escala e leitura. |
+
+`audit_animation_contract.py --self-check` passou. A [folha de exposição](../out/diagnostics/duel_readiness_20261119/hayato-short-cut-exposure.json)
+confere `hayato_short_cut` no contrato v4 SHA `fc54e2068f71a6c63c8acef0909fa8148aa99dc8e1eb2a016e3eb6445e6542ec`.
+Os intervalos de R01–R06 são `[0,8)`, `[8,9)`, `[9,11)`, `[11,18)`,
+`[18,20)` e `[20,25)`. A janela ativa segue aberta em GD02. A guarda, os
+desenhos, as exposições e os controles históricos continuam disponíveis.
+
+### Composição estática e primeira divergência de hardware
+
+`audit_sprite_line_sim.py --self-check` passou. Foram combinados os metasprites
+existentes das duas faces, no mesmo piso, com 52/60/68 px entre pivôs, sem
+alterar pixels. As distâncias vêm da sonda e servem apenas à amostragem.
+Os headers e registros de conversão foram identificados por SHA na
+[medição estática](../out/diagnostics/duel_readiness_20261119/static-composition.json).
+
+| Par | Combinações com mais de 8 sprites por linha | Pico por linha / SAT | Paleta P1 opaca | Atlas / atual + próxima |
+|---|---:|---:|---:|---:|
+| Hayato × Alis, lâmina de Alis dividida com BG conforme a sonda | 96/168 | 10 / 54 | 15 códigos | 578 / 107 padrões |
+| Hayato × J.J., conversões v5 com equivalência v6 por recibo | 126/252 | 10 / 57 | 16 códigos | 701 / 113 padrões |
+
+Os atlas contam as duas faces e um padrão vazio, após deduplicação em códigos
+SMS. A residência de atual + próxima é uma estimativa para avanço na mesma
+face. Para Hayato × Alis, o máximo de padrões novos numa transição ensaiada
+é 1.728 bytes; a decomposição existente de Alis também reserva 15 padrões
+de BG incluindo seu HUD diagnóstico. Faltam cenário e HUD do duelo, agenda
+de streaming, mapa de VRAM do par e medição de VBlank. Com J.J., a união de
+16 códigos opacos exigiria remapeamento para caber na P1 compartilhada.
+
+Com a rival em guarda, R02 já excede oito na montagem com Hayato à direita.
+R03, nos ticks de exposição 9–10, chega a 10 por linha nas duas faces.
+Testar as [64 fases de Hayato](../out/diagnostics/duel_readiness_20261119/phase-search.json)
+reduziu as violações a 87/168 e conservou o pico. Permitir também outra
+[fase para Alis](../out/diagnostics/duel_readiness_20261119/r03-joint-phase.json)
+reduziu o mínimo de R03 × guarda a 9. Com
+[grades horizontais independentes por faixa de 8 px](../out/diagnostics/duel_readiness_20261119/horizontal-band-packing.json),
+R03 × guarda chegou a 8 por linha e 47 na SAT em ambas as faces, com igualdade
+de pixels verificada. Quatro das 56 composições a 60 px ainda chegam a 9
+no melhor arranjo ensaiado: R03 × preparação e R03 × estocada nas duas faces.
+O ensaio muda a grade por combinação, sem demonstrar layout único por pose,
+prioridade no framebuffer ou alcance dessas combinações pelas regras da luta.
+
+### Retomada e matriz de observação
+
+O primeiro elo sem prova é **input consumido → ação autorizada → contato**.
+Fechar GD01/GD02 para este recorte com o dono: comando do corte, limiar e
+precedência da estocada, regra de guarda, janela e caixas do corte, dano,
+recuo e condição de volta ao controle para ambos. Vincular a pose de guarda,
+de reação ao hit e de resposta de Alis à direção aprovada antes de integrá-las.
+Em GD05, tornar observáveis input consumido, estado/tick lógico, pose
+solicitada, residente e apresentada, caixas, resultado de contato, reação e
+primeiro tick livre de cada ator. Comparar em imagens nativas e em velocidade
+normal a altura anatômica, apoio, materiais, mão e equipamento nas duas faces.
+
+| Caso | Pré-condição e esperado | Observado na ROM do duelo |
+|---|---|---|
+| Acerto perto e no limite | Ambos livres, sem defesa, no ponto interno e no último pixel válido das caixas decididas. A pose ativa aparece, o contato ocorre uma vez e causa dano e reação no tick estabelecido. | Pendente. |
+| Erro a 1 px além | Repetir com diferença de um pixel fora do alcance aprovado. Sem dano ou hitstun; corte recupera e uma resposta executável pode punir. | Pendente. |
+| Defesa e resposta | Repetir a distância de contato com guarda legal. Registrar recuo e primeiro tick livre dos dois; começar a estocada no primeiro comando permitido e verificar alcance após o recuo. | Pendente. |
+| Face/P1/P2 e canto | Repetir o caso crítico invertendo lado e controle, com o defensor junto ao limite da arena. Comparar caixas e consequência espelhadas, clamping, prioridade visual e SAT. | Pendente. |
+
+Os checks deste lote foram leves, no Python nativo do Windows. A amostra do
+host registrou 61% de CPU, 7,01 GiB disponíveis, 1.546 páginas lidas/s e
+zero escritas/s, fila de disco zero, 47,49 GiB livres no Btrfs e 43,41 GiB no
+temporário NTFS, sensor disponível a 52,85 °C e trip de 99,85 °C. O Debian
+estava parado e a toolchain nativa sem SDCC na rota registrada. A QA privada
+requer Linux qualificado; o handoff anterior registra a ausência de `pactl`
+no último uso do Debian. Nenhuma build, ROM candidata, trace, mídia de runtime,
+medição de FPS/VBlank ou sessão para limpar foi criada. Ao retomar, confirmar
+capacidade e toolchain com um job, reservar destino novo e vincular fonte,
+conversão, símbolo, ROM e sessões pela mesma cadeia de SHA. Em execução
+contínua medir ao menos duas janelas NTSC válidas de pelo menos 58 FPS, dispersão
+máxima de 2 e pior frame com duelo, HUD, cenário e áudio ativos.
+
 ## 2026-11-04 — decisão do proprietário: congelar Social e recomeçar o sprite do zero
 
 > **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
@@ -43,6 +653,239 @@ A matriz antiga é uma fotografia do pacote congelado, não um backlog autorizad
 J.J.: fonte v6 e tempos 7/4/2/3/6. Hayato: fonte v4, perfil de tempos v7
 8/1/2/7/2/5, sem deformação de lâmina. Ambos reafirmados no recorte existente.
 Nenhum runtime/ROM/asset foi modificado e nenhuma medição foi refeita.
+
+## Régua de duelo — Alis frente a Hayato
+
+[Prancha v2 e salvaguardas](duel_reach_reference_v2.md). O proprietário
+rejeitou a escala do primeiro estudo porque a projeção do pé avançado
+da Alis foi usada na comparação com a guarda lateral de Hayato.
+A régua agora usa os 75 U de ambos na prancha aprovada do elenco.
+Corpo, lâmina e escudo têm medidas próprias, e os 36 px de alcance da
+versão anterior foram retirados. A categoria é normal forte de espada no
+botão 1 segurado. Próximo passo: conferir corpo e equipamento em vistas
+equivalentes, desenhar o par lateral e medir a estocada por pose. Limiar
+de controle e validação na ROM continuam pendentes.
+
+O proprietário autorizou a rodada 1 com sprites, botão 1 segurado, Hayato
+em guarda e ROM para validação. O [prompt da rodada](alis_strong_thrust_round1_agent_prompt.md)
+define a entrega e a captura no mesmo SHA. O
+[registro candidato de curadoria](curation_candidates/2026-11-15_alis_duel_reach_projection.json)
+guarda o erro da primeira régua, o que foi conferido na revisão e os pontos
+para testar com a implementação. As observações desta rodada serão preenchidas
+a partir do material do agente.
+
+### Rodada 1 — estudos iniciais, ainda sem candidata
+
+Duas tentativas exploratórias de arte estão preservadas com prompts, hashes e
+limitações em [strong_thrust_round1](../data/source_art/sprite_studies/alis/strong_thrust_round1/README.md).
+A segunda removeu a linha de chão, mas não os resíduos de cor; ambas seguem
+reprovadas para integração e sem calibração ou revisão de animação. O caminho
+diagnóstico atual de `src/main.c` dispara pose no toque e não demonstra a
+resolução de contato neste recorte. Não houve mudança no runtime, build, ROM,
+sessão de emulador ou teste de FPS nesta etapa. Permanecem todos pendentes:
+arte nativa, comando segurado e rearme, distâncias/espelho, recursos, vídeo,
+pior frame e FPS funcional §133. Retomar pelo tratamento das fontes e pelos
+gates do pedido, sem promover os estudos como sprite ou prova de jogo.
+
+Retomada: `keyposes_01`, `keyposes_02_shield`, `sequence_01` e
+`sequence_02_shield` foram geradas
+e preservadas no mesmo diretório com prompts e hashes. A edição expôs a pega
+do escudo; a segunda sequência a incorporou, mas apresenta interior marrom
+inconsistente e resíduos de cor. Continuidade de equipamento, escala e recorte
+permanece pendente. Uma VM de outro trabalho estava ativa
+ao medir o host (aprox. 2 GiB RSS; CPU PSI avg10 34,83%, 6,0 GiB disponíveis,
+swap sem atividade na amostra; 40 GiB livres). Pelo contrato de uma carga
+pesada por vez, build e sessão Emulicious foram adiados, sem encerrar a VM.
+Não há ROM nem SHA desta rodada; retomar arte/integração e reavaliar o host
+antes da build e QA. Nenhum resultado de FPS ou pior frame foi medido.
+
+Retomada após o segundo parecer: o visualizador recebeu, sob
+`MOF_ALIS_STRONG_HOLD`, contagem provisória de 12 leituras, disparo único e
+rearme na soltura, com sondas de contagem/latch/disparos. Nenhum manifesto da
+Alis ou fonte nativa foi ligado; o código não foi compilado nem testado em
+ROM e o corredor de probes deve ser auditado. Casos e limites em
+[alis_strong_thrust_round1_qa.md](alis_strong_thrust_round1_qa.md).
+A tentativa de edição localizada voltou a alterar regiões fora do alvo;
+foi preservada com comparação negativa. Criados estudo hipotético do escudo
+e esboços temporais normal/lento, ainda sem avaliação contínua e sem registro
+de pivôs: detalhes e hashes no README da rodada. A VM concorrente permanecia
+ativa; não houve build, emulador ou medição de desempenho desta rodada.
+
+Nova retomada: `C7F9` voltou a ser tempo decorrido da pose e `C7FC` registra
+pressão; `C7FA/FB` continuam latch/contador. A bancada relatada pelo
+coordenador aprovou o ramo anterior nos casos 11/12/13, longo, soltura e
+reentrada; após separar probes ainda faltam compilação SDCC, auditoria do
+corredor e QA da fronteira do último tick da recuperação na ROM. Uma edição
+de alpha por máscara alterou 2.224 pixels e nenhum fora da máscara; a revisão
+artística permanece pendente. Esboço refeito pelo apoio traseiro diminuiu o
+recuo aparente de 27 para 1 px no vídeo. Pranchas 1×/4× com Hayato usam
+escala provisória não calibrada. Métodos, hashes e limites no README da
+rodada. O wrapper falhou `FAIL_AMBIENTE` ao procurar `pulseaudio` após
+`pactl info` retornar conexão recusada; operações leves sem áudio usaram a
+`.venv` existente. VM concorrente continua ativa e a pressão de I/O aumentou;
+build/Emulicious não executados, nenhum SHA de ROM ou FPS novo.
+O self-check e a auditoria estática de `audit_debug_markers.py` passaram
+para o projeto; `audit_probe_corridor.py --self-check` também passou, mas
+nenhum `.map` da candidata foi auditado porque a build ainda não existe.
+
+Quarta revisão: a edição limitada de alpha preserva o exterior, mas a máscara
+binarizada antes/depois é idêntica para limiares 25, 64, 128 e 224. Não há
+melhora demonstrada na saída convertida. O registro pelo apoio traseiro
+melhorou o enquadramento, sem aprovar movimento, e a escala de Alis continua
+provisória. Direcionamento completo em
+[parecer](alis_strong_thrust_round1_coordinator_review.md) e na continuação
+do [prompt](alis_strong_thrust_round1_agent_prompt.md); hipóteses de execução
+e auditoria estão no registro candidato de curadoria. O marco segue ROM com
+SHA e provas, não uma nova folha estática.
+
+### Rodada 1 — integração preparada, ainda sem ROM (2026-11-15)
+
+Foram criados fontes indexados diagnósticos, paleta explícita e um ramo
+`MOF_ALIS_ROUND1` no consumidor. A conversão com compensação de aspecto
+expôs pico de dez sprites/linha; a tentativa de abaixar a lâmina foi a onze
+e permanece preservada. A divisão experimental de fragmentos da lâmina para
+BG produziu 24 manifestos estáticos para quatro poses, três distâncias e
+duas faces: máximo 53 na SAT e oito/linha. Reconstrução dos dez metasprites
+e quatro mapas BG por índices passou, com 246 padrões SAT e 14 BG mais HUD.
+Hayato convertido coincide em RGBA com sua guarda v7 nas duas faces. A
+escala corporal, a arte, a prioridade da lâmina sobre o rival e as escritas
+dinâmicas continuam pendentes; BG e rival se sobrepõem em 25/2/0 pixels
+perto/limite/fora na inspeção estática. `audit_tilemap_bounds` registra
+entradas dinâmicas não provadas. A sequência usada ainda é o estudo
+`sequence_01`, com quatro poses, não a arte final corrigida.
+
+O manifesto candidato é `.mddev/alis_strong_round1_diagnostic_build.json`;
+o header gerado tem SHA-256
+`c93fc4ebcd4a11b86e521758058394796aa76b6e46a9f35520ad346dc0e17a46`.
+[Roteiro de QA](alis_strong_thrust_round1_qa.md) inclui controles, probes,
+limites e casos. Pranchas/vídeo **offline, não framebuffer** em
+`out/diagnostics/alis_strong_thrust_round1/converted_grounded_preview/`;
+receitas e comparativos no README do estudo. O wrapper passou ao apontar
+`XDG_RUNTIME_DIR=/run/user/1000` para o servidor de áudio já existente,
+sem reiniciá-lo. A VM concorrente mudou de PID e continuou ativa (~2 GiB
+RSS); não se compilou nem abriu Emulicious. Não existe SHA de ROM desta
+rodada e nenhum teste de runtime, pior frame, FPS ou qualidade foi aprovado.
+Próximo: com margem e wrapper apto, compilar sem afrouxar gates, corrigir
+eventuais falhas e validar corredor, input, BG/PNT, captura, FPS e pior frame
+no SHA; em paralelo, fechar calibração 68 px e revisão artística temporal.
+
+Proteção local desta fotografia de trabalho: `.runtime/backups/alis-strong-round1-20261115-wip.zip`,
+10.993.754 bytes, SHA-256
+`4250af5ea1209f1632e7daf7755f06cfbe5bbe0f62c78787a173b8757c720888`;
+460 arquivos verificados por SHA e CRC no recibo JSON homônimo. Revisados tamanho,
+escopo e nomes; arquivo acima de 10 MiB, fora do Git, no mesmo disco e sem cópia
+externa. Abrange as fontes e diagnósticos listados no recibo, não o projeto inteiro;
+esta anotação é posterior à fotografia arquivada.
+
+Retomada posterior: a VM anterior deixou de aparecer, mas a amostragem do host
+mostrou pressão de CPU sustentada (PSI `some` avg60 21–28%, CPU frequentemente
+sem folga); build e sessão continuam adiadas por estabilidade. Preparados cinco
+roteiros da ponte para toque, 11/12/13 frames e pressão longa/rearme, sem
+confundir frames VDP com leituras da ROM. Uma tentativa adicional de limpar a
+franja alterou pixels fora da área pedida e não demonstrou melhora; preservada
+no README da rodada. A comparação convertida recebeu marcas dos intervalos
+opacos dos dois pés, em 1×/4×; avanço zero e escala corporal continuam
+provisórios. Nenhum SHA de ROM, vídeo de framebuffer ou FPS foi produzido.
+Fotografia incremental local no mesmo disco:
+`.runtime/backups/alis-strong-round1-20261115-followup.zip`, 726.109 bytes,
+SHA-256 `cd22ba29edc3dfab94da42988120c03b2f3867b52a0bc24a607604b297366182`;
+15 arquivos verificados por SHA e CRC, recibo JSON homônimo. Não substitui a
+fotografia anterior nem cópia externa; esta anotação é posterior ao arquivo.
+
+Retomada seguinte: uma máscara retangular da tentativa gerada preservou os
+pixels externos e, com a paleta de material fixada, removeu um único pixel
+cinza da guarda **convertida**; extensão e Hayato ficaram idênticos. A paleta
+automática havia alterado cores fora da região, por isso foi feito controle
+com paleta fixa antes do comparativo. Pranchas e receitas no README da rodada,
+em `fringe_converted_comparison_01/`. Isso é um ganho local nas chaves
+exploratórias, não uma correção da sequência `sequence_01` ligada ao ramo
+experimental e não aprova escala ou atuação. O host reiniciado manteve pressão
+de CPU sustentada (PSI avg60 entre 23% e 28% nas amostras); build e Emulicious
+não foram executados. Ainda não há SHA de ROM, resultado de input ou FPS.
+Foi preparado também `tools/alis_input_trace.py` para ler as sondas a cada
+frame em sessão privada de SHA informado, inclusive a tentativa de alinhar o
+limiar ao último tick; somente o self-check de offsets passou. O coletor não
+foi executado em emulador, e stepping não mede FPS. Instruções e limitações
+estão no roteiro de QA.
+Fotografia incremental local no mesmo disco:
+`.runtime/backups/alis-strong-round1-20261115-mask-conversion.zip`, 781.302 B,
+SHA-256 `533e5b6313a8117ebb71d2e433506316e724184cbc66649a894cdf5cde5b0ab5`;
+39 arquivos verificados em SHA e CRC, recibo JSON homônimo. Depende das
+fotografias anteriores, não é cópia externa e antecede esta anotação.
+
+Em 2026-11-16, teste do coletor com ponte simulada conferiu ordenação das
+amostras, soltura e preparação para o último tick, sem executar ROM. Estudo
+manual de segmentos em `scale_landmarks_01/` aponta possível disparidade:
+torso da guarda cerca de 18,34 px contra 18,76 da referência, mas segmentos
+da perna cerca de 8,71/10,77 contra 13,47/15,45 px. Marcos são estimados e
+quadril/ombro estão parcialmente ocultos; revisar antes de decidir escala ou
+redesenho. A amostragem do host encontrou CPU PSI sustentada em torno de 20%
+na janela de 60 s, sem VM concorrente; build e QA reais seguem adiadas.
+Em `weapon_landmarks_01/`, marcas manuais de mão/base/ponta da sequência
+sugerem lâmina projetada de 18,0/12,7/14,7/14,3 px nas quatro poses, contra
+27,3 px na referência neutra lateral projetada. Perspectivas diferem e os
+pontos são estimados; é diagnóstico de possível variação de equipamento, não
+comprimento aprovado ou comparação de katana no mesmo ângulo.
+Redesenho `keyposes_redraw_proportions_01.png` e receitas preservadas no README
+da rodada. Após registro de chão, o conversor reprovou extensão com nove
+objetos por linha; a busca geométrica de fases dos dois atores não encontrou
+solução na posição testada. Uma divisão experimental de 12 pixels da ponta
+para BG reduziu o pico a oito para as duas poses estáticas nessa posição;
+outras faces/distâncias, camadas, transições e runtime continuam pendentes.
+O redesenho não tem sequência nem foi integrado à build experimental.
+Na projeção offline `redraw_reach_preview_01/`, o limite provisório por
+contorno na altura Y=109 gera deltas 8/0/−8 px. A parte da ponta transferida
+para BG se sobrepõe ao alvo em 11/2/0 pixels perto/limite/fora: a camada de
+fundo pode ocultá-la. A vista esquerda é espelho offline, não asset validado.
+Incremento da projeção preservado no mesmo disco em
+`.runtime/backups/alis-strong-round1-20261116-reach.zip`, 116.571 B, SHA-256
+`277b936dbf3ca0cd44c79fcae955dec5f02513df277bb686a1e838f457b6f82a`;
+seis arquivos conferidos em SHA e CRC, recibo JSON homônimo. Depende das
+fotografias anteriores, não é backup externo e antecede esta anotação.
+Reprodução do split em diretório novo foi byte a byte idêntica para imagens,
+manifestos e recibo. Incremento local no mesmo disco:
+`.runtime/backups/alis-strong-round1-20261116-split-repro.zip`, 110.998 B,
+SHA-256 `3123d505de938d500b0cd508ac683504f115b5bc3be988762a89aab224ba206c`,
+11 arquivos verificados, recibo JSON homônimo; depende das cópias anteriores.
+Fotografia incremental no mesmo disco
+`.runtime/backups/alis-strong-round1-20261116-redraw.zip`, 3.376.842 B,
+SHA-256 `605e19f331e95be1371ac30765c017de0db57d095ebac9cc924993aae878a9c3`;
+70 arquivos conferidos por SHA e CRC, recibo JSON homônimo. Não é backup externo
+nem pacote completo; esta anotação é posterior à fotografia.
+
+Quinta revisão (2026-11-16) no [parecer de coordenação](alis_strong_thrust_round1_coordinator_review.md).
+Reexecutados simulador, dados das 24 cenas estáticas e coletor com ponte
+simulada. O redesenho melhora expressão, apoio e identidade do escudo, mas
+tem duas chaves e toma 9 sprites/linha na extensão só em SAT. O split
+estático cai a 8 e pode ocultar até 4 px da ponta na linha da estocada
+próxima. O manifesto experimental ainda usa `sequence_01`. Prioridade:
+calibrar corpo neutro, completar a sequência do mesmo desenho e testar
+camada e timing em ROM com fonte identificada. Sem ROM da Alis na revisão.
+O candidato de curadoria registra implementação, coordenação e auditoria.
+
+[Parecer de coordenação da rodada 1](alis_strong_thrust_round1_coordinator_review.md).
+A tarefa do produtor encerrou com a entrega parcial. A pose de extensão é
+aproveitável como referência gestual. Corrigir primeiro as duas chaves de
+guarda e extensão, com escala lateral, apoios e equipamento cotejados com
+Hayato. Depois continuar a mesma rodada até a candidata e as provas. As
+observações e a medição de alfa foram acrescentadas ao registro de curadoria.
+
+Segunda revisão no mesmo parecer: quatro PNGs adicionais inspecionados,
+com delta medido e escopo técnico inalterado. A correção da pega mudou o
+material do escudo e pixels na área da guarda que devia ser preservada.
+Próximo passo: edição localizada e prova de duas chaves comparadas a Hayato,
+esboço temporizado antes do acabamento e input trabalhado de forma
+independente da build. O candidato de curadoria agora registra também as
+lacunas do direcionamento e do método de auditoria.
+
+Terceira revisão no [mesmo parecer](alis_strong_thrust_round1_coordinator_review.md):
+ramo de pressão passou em teste de bancada do C. Sem build da Alis.
+`C7F9` foi reaproveitado para pressão e precisa de prova distinta de
+exposição de pose. O esboço tem 8/7/3/6/12 quadros por ciclo, mas a
+centralização faz ambos os apoios irem para trás na extensão. A edição
+local voltou a alterar regiões protegidas. Próxima ação: trocar o método
+de correção, registrar as chaves e o esboço pelo pivô, preservar ambas
+as observações de input/timing e ligar a candidata Alis/Hayato.
 
 ## 2026-11-03 — reprodução local do viewer da provocação v3
 
@@ -603,6 +1446,20 @@ verificações documentais e confirmação remota ficam no recibo
 Retenção privada local usa o destino de recuperação existente; não é release
 nem backup fora deste host. Relatório histórico Social61v5 ausente permanece
 pendência preexistente da curadoria, sem relatório fabricado neste lote.
+
+## Cena 01 — placa de leitura, sprites aprovados intactos
+
+A cena do par J.J./Social era um campo cinza. A placa P0 acrescenta nomes
+`DR`/`JJ`, dois medidores contínuos, fio dourado e chão. Não redesenha
+personagem, não muda origem, tempo nem bytes de sprite. A primeira placa
+(`3a4a83ea…`) deixava uma linha de backdrop entre a sola de J.J. e o chão;
+a linha de contato passou para Y143. ROM corrigida
+`90ea0f98febf4e047e6ca4637af1c454dd9ac7971e5b0bd00fec058c5ebf2405`,
+32 KiB, sessão `e99a50ec2298424787a94de432ae5e50` fechada, quadro 150
+`9126950e…`. Sola e linha encostam nas duas colunas de apoio. FPS e VBlank
+desta ROM não foram medidos de novo. Não é cenário final, não está em `res/`,
+e não herda o aceite de J.J. Checkpoint:
+`doc/cena01_duel_read_checkpoint_v1.json`.
 
 ## Aceite do proprietário — J.J. fechado neste recorte
 
@@ -2283,3 +3140,33 @@ silhueta do projétil dos efeitos; separar equipamento de identidade de
 referências do jogo-fonte; e repetir a checagem de hashes após qualquer ajuste de
 metadata/linhagem. A revisão aprova apenas a folha conceitual para avaliação do
 dono, não sprites, animação, conversão SMS, ROM ou qualidade final.
+
+
+## 2026-11-04 — montagem de marcos de sprites para revisão do proprietário
+
+Pedido do proprietário: organizar visualmente a primeira prova de Social até a produção pós-J.J.
+Artefato candidato `sprite-production-milestones-review-v01`, no registro central existente.
+Saída: `SMS_projects/master_of_fighters/out/diagnostics/sprite_milestones_20261104/`.
+
+São 28 marcos (MOF-S001 a MOF-S028), sete pranchas gerais, 28 detalhadas,
+PDF de 35 páginas, painel `index.html` com notas e exportação, metodologia e
+índice de 140 arquivos de entrada por SHA. J.J. animado é a referência S014;
+a produção pós-J.J. ocupa S017 a S028. O último marco visual localizado é a
+reprodução técnica de 03/11 da mesma arte da provocação v3.
+
+Verificação: PDF renderizado em 35 páginas, pranchas inspecionadas, filtros e
+formulário do painel exercitados; 236 links locais conferidos antes do ajuste
+final que retirou a memória mutável dos fingerprints; 41 saídas registradas.
+Nenhuma arte de personagem, ROM ou runtime alterados. Sem nova QA de ROM ou
+promoção de arte, FPS ou AAA. O catálogo global permanece bloqueado pelo
+relatório Social61v5. O recorte de ancestralidade também expõe papel duplicado
+preexistente em `dr-social-cps2-light-jab-v05`. Aceites anteriores preservados.
+
+Proteção local: `.runtime/backups/mof-sprite-milestones-20261104.zip`,
+5.438.864 bytes, 41 entradas verificadas; SHA-256
+`92787c0b2731c8945551d64f64e19c1fbceb2eb45c56b77b62673263de5c8b73`.
+Recibo JSON homônimo. Somente saídas da revisão; fontes e vídeos originais
+permanecem com seus owners. Cópia no mesmo disco, não GitHub ou backup externo.
+
+Próximo: proprietário revisar por ID e exportar a checagem. Não modificar
+pixels nem reabrir aceites com base apenas na ordem das versões.
