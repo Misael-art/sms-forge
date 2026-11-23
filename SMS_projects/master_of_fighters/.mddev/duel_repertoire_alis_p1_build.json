@@ -1,0 +1,53 @@
+{
+  "name": "master_of_fighters",
+  "platform": "sega_master_system",
+  "region_target": [
+    "NTSC"
+  ],
+  "toolchain": {
+    "compiler": "sdcc>=4.2",
+    "sdk": "devkitSMS",
+    "libs": [
+      "SMSlib",
+      "PSGlib"
+    ],
+    "defines": {
+      "MOF_DUEL_PILOT": 1,
+      "MOF_DUEL_HOLD": 6,
+      "MOF_DUEL_REPERTOIRE": 1,
+      "MOF_DUEL_FAST_SAT": 1,
+      "MOF_DUEL_SCENE_WALK": 1,
+      "MOF_REPERTOIRE_SPRITE_WALK": 1,
+      "MOF_DUEL_SCENE_SPECIALS": 1,
+      "MOF_DUEL_REPERTOIRE_ASSETS": 1,
+      "MOF_DUEL_REPERTOIRE_PRECOMPOSED": 1,
+      "MOF_DUEL_REPERTOIRE_CONTIGUOUS_SPRITES": 1,
+      "MOF_DUEL_ALIS_P1": 1
+    },
+    "include_dirs": [
+      "out/diagnostics/repertoire_20261119/scene02-actions-bound-v3"
+    ],
+    "makesms_extra": [
+      "-pp",
+      "-mbank",
+      "out/diagnostics/repertoire_20261119/scene02-actions-bound-v3/art-banks-02-16.bin:0:15:2"
+    ]
+  },
+  "skeleton_version": 1,
+  "doc_authority": [
+    "doc/10-memory-bank.md",
+    "doc/11-gdd.md",
+    "doc/13-spec-cenas.md",
+    "doc/15-tdd.md"
+  ],
+  "gates": [
+    "build",
+    "resources",
+    "sprite_scanline",
+    "luma_floor",
+    "provenance",
+    "evidence",
+    "claims"
+  ],
+  "specialization": "fighting"
+}
