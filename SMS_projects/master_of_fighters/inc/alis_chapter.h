@@ -17,6 +17,10 @@ typedef struct {
 
 extern MofChapter chapter;
 extern const MofChapterPresentation *mof_presentation;
+#ifdef MOF_ALIS_MAGIC
+/* One background per opponent; the attack supplies its own fixed-ROM callbacks. */
+void mof_chapter_reaction(uint8_t target,uint8_t duration,void (*prepare)(void),void (*draw)(uint8_t));
+#endif
 void mof_chapter_select(const MofChapterPresentation *presentation);
 void mof_chapter_menu(void);
 void mof_chapter_match(void);

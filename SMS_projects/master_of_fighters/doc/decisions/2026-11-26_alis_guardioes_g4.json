@@ -1,0 +1,310 @@
+{
+  "data": "2026-11-26",
+  "candidata": "G4",
+  "rom": "out/candidates/alis_guardioes_g4/Alis_Guardioes_de_Algol.sms",
+  "rom_sha256": "21c43ff6fdb5f9241e33fb76f0ee6a624316d5078cf03b48cd292a2ed93ea9c0",
+  "bytes_rom": 1048576,
+  "aceite": "reprovado_fps_e_vblank",
+  "alvo_fps": 60,
+  "piso_por_janela": 58,
+  "estado": "candidata em emulador",
+  "orçamento_de_arte": {
+    "planos": [
+      {
+        "plano": "alis",
+        "tiles": 341,
+        "celulas_alternadas": 19,
+        "bytes_ocupados": 16055,
+        "ciclo": []
+      },
+      {
+        "plano": "odin",
+        "tiles": 217,
+        "celulas_alternadas": 17,
+        "bytes_ocupados": 8596,
+        "ciclo": [
+          35,
+          59,
+          63
+        ]
+      },
+      {
+        "plano": "noah",
+        "tiles": 349,
+        "celulas_alternadas": 9,
+        "bytes_ocupados": 12788,
+        "ciclo": [
+          34,
+          15,
+          63
+        ]
+      },
+      {
+        "plano": "laerma",
+        "tiles": 272,
+        "celulas_alternadas": 9,
+        "bytes_ocupados": 10318,
+        "ciclo": []
+      },
+      {
+        "plano": "myau",
+        "tiles": 367,
+        "celulas_alternadas": 137,
+        "bytes_ocupados": 13972,
+        "ciclo": [
+          32,
+          52,
+          63
+        ]
+      },
+      {
+        "plano": "laconiana",
+        "tiles": 138,
+        "celulas_alternadas": 2,
+        "bytes_ocupados": 5996,
+        "ciclo": []
+      },
+      {
+        "plano": "reacao_alis",
+        "tiles": 119,
+        "celulas_alternadas": 0,
+        "bytes_ocupados": 5368,
+        "ciclo": []
+      },
+      {
+        "plano": "reacao_hayato",
+        "tiles": 97,
+        "celulas_alternadas": 0,
+        "bytes_ocupados": 4664,
+        "ciclo": []
+      }
+    ],
+    "corte_tiles": 25,
+    "corte_pico_scanline": 4
+  },
+  "fontes": {
+    "data/source_art/scenes/alis_guardioes/guardioes.png": "bb3d9f11e4f747ecd87a2f63bedaaeed6e92a20e8df96d73b2f7a1f842895110",
+    "data/source_art/scenes/alis_guardioes/magias.png": "0015179364a739e94ce56661c04ca785bcd1f11849b92615501b1f4b4476114a",
+    "data/source_art/scenes/alis_guardioes/lineage.json": "ee545061cea415bd8df24760a12110b82b50ba632a3b0c9b99f55b1e9db54809",
+    "data/source_art/scenes/alis_guardioes/pecas.png": "24556292d05c160c30365424d4162cd5dd05f2f963f2f314a0717d234f468d5e"
+  },
+  "evidencias": {
+    "out/candidates/alis_guardioes_g4/build_record.json": "50c183b9d7d5abd4a9ae10bd44e8b2e5a0668329221a51897a357ff65f845895",
+    "out/diagnostics/alis_guardioes_a/magic.bin": "a020ddc252524da4b9b10b8ff12c8a25d2f9625546737a67cbc06d08486e42f2",
+    "out/diagnostics/alis_guardioes_a/camadas/contrato.json": "860201ef8f7fa3ad5f78dcc37d55663e8fb3a96b57aa8b90fe1bcdf902bf0072",
+    "out/qa/alis_guardioes_g4/som/guardioes_com_som.mp4": "eca1387241cc70817bfb798f59563ed955cd640554c02042148995a5c60dbd89",
+    "out/qa/alis_guardioes_g4/versus2/guardioes.mp4": "1d257360223196b292be06ee8b495cc58f83d09958bf8b3d3cc4e93e4712c0ad",
+    "out/qa/alis_guardioes_g4/versus2/prova_camadas.json": "4944b5bbd8d8c1b4832bdaaf360f43e9f8b1689ef794e7722f4e52d928ae5d73",
+    "out/qa/alis_guardioes_g4/contratos.log": "92630c042872d4d66e639d08ecce38ffa0cdf6faf64349301d8233fa37c62ab2",
+    "out/qa/alis_guardioes_g4/check-measure_runtime_probe.log": "b9802aeabbe65553cd3fb9fd000cd1b348ea8d81bc5c765de12c3a1cc5d53135",
+    "out/qa/alis_guardioes_g4/check-measure_worst_frame.log": "7b9e57ad659086dc3557d354417977e2d7fd708478823e95bc4de98bcdeccd58",
+    "out/qa/alis_guardioes_g4/check-audit_probe_corridor.log": "65a4cc028bcb35a6fc46ead8c58719b28f737f5ad9ece8e8baaefe082e8e3a7e",
+    "out/candidates/alis_guardioes_g4/Camadas_Guardioes_de_Algol.zip": "ba8dc03a8aba322a14a0a98fc6a0d45d6f0b8ee6d7342fddf7eff6dde9853d0b",
+    "out/qa/alis_guardioes_g4/preprocessamento_identico.json": "52b12b57e10013f12d5c62675fedb448db87d4b71098c77f3dc384c0d9336148"
+  },
+  "sessoes": {
+    "versus2": {
+      "id": "55b90f47d66b4978b16f9f0874c23ff4",
+      "entrada": "out/qa/alis_guardioes_g4/versus2/commands.jsonl",
+      "observacoes": "out/qa/alis_guardioes_g4/versus2/observations.json",
+      "sha256": "a34a0a2ea265efa755823dd85fda3bfb30682df44c0931bc358a6a70eea3da04"
+    },
+    "p2-final": {
+      "id": "eeaa4f69db05449fa448457965f165fb",
+      "entrada": "out/qa/alis_guardioes_g4/p2-final/commands.jsonl",
+      "observacoes": "out/qa/alis_guardioes_g4/p2-final/observations.json",
+      "sha256": "20ca506353672d2913452f9730704b9b957fc512c59e9486ac515f41e32c0fb0"
+    },
+    "historia": {
+      "id": "662153eccbd144f4a5c24a8ac6b78fbb",
+      "entrada": "out/qa/alis_guardioes_g4/historia/commands.jsonl",
+      "observacoes": "out/qa/alis_guardioes_g4/historia/observations.json",
+      "sha256": "5e15cad129b6d4e77bc3294ac3d203e20847573dde0142ba1525c88a9754d464"
+    },
+    "budget": {
+      "id": "bdc072a6491a46e2a14e7ce20f067d32",
+      "entrada": "out/qa/alis_guardioes_g4/budget/commands.jsonl",
+      "observacoes": "out/qa/alis_guardioes_g4/budget/observations.json",
+      "sha256": "e7bb8e50b5a7b999a6ca983fad8efc27fa630f0ceefd1f13156e11f035a0e601"
+    },
+    "worst": {
+      "id": "8588402306a04889864dacdc5c35e04c",
+      "entrada": "out/qa/alis_guardioes_g4/worst/commands.jsonl",
+      "observacoes": "out/qa/alis_guardioes_g4/worst/observations.json",
+      "sha256": "9fb3b92241f5bb07e9a9a3d4e95901659e0ab3d4e9d6b153179626cae4c0b6fd"
+    },
+    "spell-budget": {
+      "id": "4ed4b6e624284797b0595b9fe5a8199e",
+      "entrada": "out/qa/alis_guardioes_g4/spell-budget/commands.jsonl",
+      "observacoes": "out/qa/alis_guardioes_g4/spell-budget/observations.json",
+      "sha256": "e7e2047f7969cec87e044225658235f364f6f766e0f2d1a2696c6fd4b3dd1640"
+    },
+    "som": {
+      "id": "a6cc249267084531a5553eb1b35ddac4",
+      "entrada": "out/qa/alis_guardioes_g4/som/commands.jsonl",
+      "observacoes": "out/qa/alis_guardioes_g4/som/observations.json",
+      "sha256": "6bd4c6218549d2c1e8ce14d50168b896bbe58724bedbd1838c964f0e8e889519"
+    },
+    "alcance": {
+      "id": "cfcea630d6124bc2acfbb04abe7f77aa",
+      "entrada": "out/qa/alis_guardioes_g4/alcance/commands.jsonl",
+      "observacoes": "out/qa/alis_guardioes_g4/alcance/observations.json",
+      "sha256": "1afb3705ab1ab63f79de563636ad59f41c796bf804489b55ed24c5676e226122"
+    }
+  },
+  "desempenho": {
+    "historico_G2_guarda_fps": [
+      31.855685351336163,
+      31.353528827766215,
+      32.83629965759371
+    ],
+    "guarda_fps": [
+      36.626440009133646,
+      39.7596288677858,
+      37.25458282496061
+    ],
+    "contato_fps": [
+      37.951070822731126,
+      40.44785179791081,
+      37.951070822731126
+    ],
+    "contato_saidas_vblank": 27,
+    "magias_janelas_fps": [
+      21.47231638654524,
+      47.93819472344985,
+      40.44785179791081,
+      39.449139407838935,
+      39.94849560287487,
+      40.44785179791081,
+      39.449139407838935,
+      21.47231638654524,
+      47.93819472344985,
+      39.449139407838935,
+      40.44785179791081,
+      40.44785179791081,
+      38.949783212803,
+      21.47231638654524,
+      48.93690711352171,
+      39.449139407838935,
+      40.44785179791081,
+      40.44785179791081,
+      38.949783212803,
+      21.47231638654524,
+      48.93690711352171,
+      39.449139407838935,
+      40.44785179791081,
+      39.94849560287487,
+      39.449139407838935,
+      21.47231638654524,
+      48.93690711352171,
+      39.449139407838935,
+      40.44785179791081,
+      39.94849560287487,
+      39.449139407838935,
+      21.971672581581178,
+      44.94205755323423,
+      39.449139407838935,
+      40.44785179791081
+    ],
+    "magias_pior_quadro": {
+      "selado": 1,
+      "vcount_min": 0,
+      "overruns": 104
+    }
+  },
+  "microanimacao": {
+    "rom_sha256": "21c43ff6fdb5f9241e33fb76f0ee6a624316d5078cf03b48cd292a2ed93ea9c0",
+    "session_id": "55b90f47d66b4978b16f9f0874c23ff4",
+    "native_frames": 344,
+    "exact_frame_counts": {
+      "alis": [
+        [
+          51
+        ],
+        [
+          14
+        ]
+      ],
+      "odin": [
+        [
+          5,
+          8,
+          4
+        ],
+        [
+          7,
+          0,
+          4
+        ]
+      ],
+      "noah": [
+        [
+          5,
+          8,
+          5
+        ],
+        [
+          8,
+          4,
+          4
+        ]
+      ],
+      "laerma": [
+        [
+          17
+        ],
+        [
+          14
+        ]
+      ],
+      "myau": [
+        [
+          5,
+          4,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "laconiana": [
+        [
+          12
+        ],
+        [
+          8
+        ]
+      ]
+    },
+    "esperado": "por plano, exposição e fase de CRAM",
+    "posicoes_do_corte": 36,
+    "corte_inicio_fim": [
+      [
+        56,
+        103
+      ],
+      [
+        161,
+        68
+      ]
+    ],
+    "duas_exposicoes": true,
+    "tres_fases": true
+  },
+  "fire_duplo": {
+    "amostras": 121,
+    "saidas_da_tela": 2,
+    "alturas_distintas_por_bola": [
+      18,
+      17
+    ]
+  },
+  "vinculo_dos_bancos": {
+    "primeiro": 39,
+    "total": 20,
+    "bytes_conferidos": 327680,
+    "igualdade_integral_na_ROM": true
+  }
+}

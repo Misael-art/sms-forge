@@ -1,5 +1,11 @@
 # 10-memory-bank — master_of_fighters
 
+## 26/11/2026 · Especiais de Alis e F. Anime modular · G4
+
+[ROM para jogar](../out/candidates/alis_guardioes_g4/Alis_Guardioes_de_Algol.sms), SHA-256 `21c43ff6fdb5f9241e33fb76f0ee6a624316d5078cf03b48cd292a2ed93ea9c0`. Fire de duas intensidades, chamas curvas duplas, Myau alado, Rest, onda da Espada Laconiana, Rising Saber, Chat, reflexão, atordoamento universal e Guardiões de Algol entram pelo capítulo do Espaçoporto. Os modos História e Versus chegaram à arena em sessões privadas. P1 e P2 confirmaram o final pelos controles. A reação é selecionada pelo ID da vítima. O ataque fornece o efeito sobreposto. [Ficha para o elenco](padrao_moveset_especiais.md) · [Curadoria, reprodução e resultados](curadoria_guardioes_de_algol.md) · [Vídeo com áudio](../out/qa/alis_guardioes_g4/som/guardioes_com_som.mp4)
+
+**Estado de aceite.** Candidata testada no emulador, orçamento reprovado. Pior janela com magias dos dois jogadores, 21,472316 FPS. A guarda contra a CPU variou de 36,626440 a 39,759629 FPS. O piso do projeto é 58 em cada janela. A carga de magias selou 104 saídas de VBlank em 3.000 apresentações. O próximo confronto com outro personagem precisa validar o balanceamento e a identidade da reação dele. A próxima integração do motor deve repetir as mesmas entradas e confrontar o custo das composições de fundo, dos dois lutadores e do HUD. [Carga de magias](../out/qa/alis_guardioes_g4/spell-budget/observations.json) · [Vídeo da partida que termina em F. Anime](../out/qa/alis_guardioes_g4/versus2/guardioes.mp4).
+
 ## Camada de elenco, fase 2: capacidades · candidata r2 · 26/11/2026
 
 A ficha de lutador ganhou capacidades: `owned` diz quais golpes ele tem e `vertical`, se pula e se agacha. O motor do espelho deixou de desviar por ID de personagem na leitura de comando, no contato, no andar e na caixa de dano. A validação da ficha cobra só o que o lutador usa. Um lutador sem pulo e com gravidade zero ficava suspenso depois de um knockdown e chegava a voltar ao estado livre no ar; por isso toda ficha exige gravidade, caixa aérea e caixa de dobra. O [TDD](15-tdd.md) descreve o contrato.

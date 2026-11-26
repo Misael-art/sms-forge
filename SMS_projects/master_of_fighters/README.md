@@ -8,6 +8,18 @@
 Jogo de luta autoral em desenvolvimento. O manifesto padrão compila o
 esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 
+## Jogar os especiais de Alis e os Guardiões de Algol
+
+Abra diretamente [Alis — Guardiões de Algol, candidata G4](out/candidates/alis_guardioes_g4/Alis_Guardioes_de_Algol.sms) no **Emulicious (SMSForge)**. A ROM reúne os especiais na História e no Versus do Espaçoporto de Palma. Na opção **Vitórias por duelo → Uma**, o primeiro round já decide o confronto. Um teste rápido do arquivo é pressionar duas vezes para baixo, apertar **1** no segundo toque e soltar. Alis lança Fire.
+
+No teclado, P1 usa as setas, **A** para o botão 1 e **S** para o botão 2. Para iniciar a candidata a partir da raiz do SMSForge, use o caminho explícito.
+
+```sh
+SMS_projects/master_of_fighters/run.sh SMS_projects/master_of_fighters/out/candidates/alis_guardioes_g4/Alis_Guardioes_de_Algol.sms
+```
+
+[Comandos e custos](doc/padrao_moveset_especiais.md) · [Curadoria das peças e verificações](doc/curadoria_guardioes_de_algol.md).
+
 ## Jogar no Espaçoporto de Palma
 
 Abra [Espacoporto_de_Palma.sms](out/candidates/espacoporto_de_palma_e2/Espacoporto_de_Palma.sms). No título, aperte **1**. Escolha **História de Alis** para enfrentar a CPU ou **Versus local** para dois controles. Na História, **1** avança cada fala e **2** pula a introdução. Os dois modos chegam à pista com as naves vermelhas e a torre azul. Esta é a candidata E2, com desempenho abaixo do piso de 58 FPS. [Captura da História](out/qa/alis_20261125/espacoporto_de_palma_e2/story/arena.png) · [Captura do Versus](out/qa/alis_20261125/espacoporto_de_palma_e2/port-versus/pista_oeste.png)

@@ -1,5 +1,11 @@
 # 15-tdd — master_of_fighters
 
+## Especiais e finalização de Alis · 26/11/2026
+
+O perfil de build ativa `MOF_ALIS_MAGIC`. O banco 38 recebe o reconhecimento de gestos, as quatro instâncias potenciais de projétil e o planejamento gráfico. O motor existente recebe direcional e golpes normais pelos pontos de integração do capítulo. A chamada de caixa vulnerável restaura o banco de magia antes de retornar. O estado específico fica em RAM a partir de `C900` e a compilação impõe o limite de 512 bytes. Os controles são espelhados pela orientação atual.
+
+O combate aproveita os padrões 432–447 do anúncio quando a arena está jogável. A prioridade de células preserva a arma de um lutador no encontro entre a arma e um efeito. Antes do VBlank ficam prontos os endereços de restauração, as composições por tile e o pacote de vida crítica. No filme, a troca de banco ocorre em código fixo. Os padrões das duas exposições são carregados juntos com o display apagado. A mudança de exposição atualiza até 20 entradas da tabela de fundo por VBlank. A página da reação depende da identidade do defensor. O corte tem padrões de sprite próprios. [Diário de curadoria, recibos e reprodução](curadoria_guardioes_de_algol.md).
+
 ## Adaptação do espaçoporto ao VDP
 
 Para reproduzir a E2, o preparador `prepare_alis_chapter.py --resume-postures --spaceport` recebe o diretório preservado `out/diagnostics/alis_chapter_v1` e o diretório de saída. O empacotador `pack_alis_scenes.py FIGHTERS PANELS --spaceport` recebe a pasta `fighters` da saída e cria o manifesto `panels/chapter.json` para o wrapper oficial. A paleta retém as cores das duas armas e do HUD. O pré-composto das lâminas usa as mesmas cinco linhas de tiles que a pista. O ajustador de padrões retém as juntas de dilatação e os detalhes do posto do guarda antes de selecionar os demais tiles.

@@ -70,4 +70,7 @@ void mof_duel_audio_tick(const MofDuel *duel, uint8_t hayato_player,
     PSGSFXFrame();
 }
 
+#ifdef MOF_ALIS_MAGIC
+#include "alis_magic_sound.inc"
+#endif
 #endif

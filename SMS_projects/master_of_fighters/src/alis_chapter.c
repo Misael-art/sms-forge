@@ -98,6 +98,10 @@ static void show_page(uint8_t page)
     last_pad=(uint8_t)SMS_getKeysStatus() & 63u;
 }
 
+#ifdef MOF_ALIS_MAGIC
+#include "alis_guardians.inc"
+#endif
+
 static uint8_t menu_edges(void)
 {
     uint8_t pad;
@@ -202,6 +206,11 @@ void mof_chapter_round(void)
 void mof_chapter_arena(void)
 {
     SMS_mapROMBank(mof_presentation->arena_bank);
+#ifdef MOF_ALIS_MAGIC
+    SMS_mapROMBank(MAGIC_PATTERN_BANK);
+    SMS_loadTiles((const void *)MAGIC_BARS_ADDR,279,256);
+    SMS_mapROMBank(mof_presentation->arena_bank);
+#endif
 #ifdef MOF_PORT_SKY
     SMS_loadBGPalette((const void *)MOF_PORT_PALETTE);
 #endif
@@ -284,6 +293,9 @@ void mof_chapter_hud(uint8_t banner)
     }
     for (i=0;i<2;++i) {
         uint8_t charge=chapter.meter[i]>>1;
+#ifdef MOF_ALIS_MAGIC
+        if (chapter.meter[i]==8 && (chapter.subsecond&8)) charge=0;
+#endif
         if (charge!=old_gauge[i]) {
             uint8_t k;
             old_gauge[i]=charge;
@@ -336,6 +348,9 @@ void mof_chapter_update(const MofDuel *duel)
 uint8_t mof_chapter_result(void)
 {
     uint8_t edge;
+#ifdef MOF_ALIS_MAGIC
+    if (mof_magic.finisher) mof_magic_victory();
+#endif
     if (chapter.winner==2 || chapter.wins[chapter.winner]<chapter.target) {
         mof_chapter_theme(mof_presentation->battle_song);
         return MOF_NEXT_ROUND;

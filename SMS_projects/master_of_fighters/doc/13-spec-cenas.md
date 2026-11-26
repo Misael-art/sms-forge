@@ -1,5 +1,9 @@
 # 13-spec-cenas — master_of_fighters
 
+## Guardiões de Algol · 26/11/2026
+
+A F. Anime reúne sete planos por execução. O último seleciona uma reação pela identidade da vítima e sobrepõe o corte independente. A atuação alterna exposições locais em letterbox. Noah e o voo de Myau reservam três entradas próprias de CRAM. [Registro da produção e orçamentos por plano](curadoria_guardioes_de_algol.md).
+
 ## Proposta alternativa · controle de passaportes do Espaçoporto de Palma
 
 A E2 adapta o estudo para o VDP. As duas naves, o guarda e a torre ocupam a mesma faixa móvel para que suas silhuetas permaneçam inteiras. Duas aves cruzam o céu em alturas distintas. O piso tem juntas diagonais próprias no primeiro plano. O enquadramento responde ao ponto médio das lutadoras. Nos dois extremos testados, o cenário deu deslocamento de 5 px nas naves e 11 px nas juntas, com o placar fixo. [Quadro de luta em História](../out/qa/alis_20261125/espacoporto_de_palma_e2/story/arena.png) · [Medida em Versus](../out/qa/alis_20261125/espacoporto_de_palma_e2/port-versus/observations.json)

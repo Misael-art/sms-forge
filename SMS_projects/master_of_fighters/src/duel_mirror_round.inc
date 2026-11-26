@@ -4,6 +4,9 @@
 #if defined(MOF_ALIS_CHAPTER)
 #include "../inc/alis_chapter.h"
 #include "alis_pages.h"
+#ifdef MOF_ALIS_MAGIC
+#include "../inc/alis_magic.h"
+#endif
 #define WORST_FRAME_WINDOW 3000u
 #define MIRROR_HOT inline
 volatile uint8_t __at(0xC7CC) mof_chapter_lines[6];
@@ -278,6 +281,13 @@ static MIRROR_HOT void mirror_frames_for(uint8_t player, MirrorView *view, uint8
         following=MOF_MIRROR_BREATHE_1+((beat+1u)&3u);
     }
 #endif
+#ifdef MOF_ALIS_MAGIC
+    if (chapter.phase==MOF_PLAY && actor->state==MOF_DUEL_READY &&
+        (mof_magic.caster[player].pose || mof_magic.caster[player].dizzy)) {
+        pose=mof_magic.caster[player].dizzy ? MOF_MIRROR_HIT_HEAD : mof_magic.caster[player].pose;
+        following=future=MIRROR_EMPTY;
+    }
+#endif
     view->frame = pose * 2u + face;
     *next = following == MIRROR_EMPTY ? following : following * 2u + face;
     *later = future == MIRROR_EMPTY ? future : future * 2u + face;
@@ -418,6 +428,10 @@ static void mirror_plan_p2(MirrorView *view,uint8_t *next,uint8_t *later)
 #define mirror_plan_p2(v,n,l) mirror_frames_for(1u,v,n,l)
 #endif
 
+#ifdef MOF_ALIS_MAGIC
+#include "alis_magic_presentation.inc"
+#endif
+
 void main(void)
 {
     MirrorView wanted[2];
@@ -451,6 +465,11 @@ new_match:
     mof_chapter_match();
 new_round:
     mof_chapter_round();
+#ifdef MOF_ALIS_MAGIC
+    SMS_mapROMBank(MOF_MAGIC_BANK);
+    mof_magic_reset();
+    magic_last_keys[0]=magic_last_keys[1]=255;
+#endif
 #ifdef MOF_PORT_SKY
     SMS_disableLineInterrupt();
 #endif
@@ -547,9 +566,32 @@ new_round:
            resume from the last step, so a press made during it is kept. */
         n1 = n2 = MOF_DUEL_NO_NORMAL;
         if (!duel.hitstop) {
+#ifdef MOF_ALIS_MAGIC
+            if (!mof_magic.busy && p1==magic_last_keys[0] && p2==magic_last_keys[1] &&
+                duel.fighters[0].face_right==mof_magic.caster[0].face &&
+                duel.fighters[1].face_right==mof_magic.caster[1].face) {
+                magic_wait_gesture(0);
+                magic_wait_gesture(1);
+            } else {
+                magic_last_keys[0]=p1; magic_last_keys[1]=p2;
+                SMS_mapROMBank(MOF_MAGIC_BANK);
+                mof_magic_input(&duel,p1,p2);
+                SMS_mapROMBank(MOF_RULE_BANK);
+                p1=mof_magic.pad[0]; p2=mof_magic.pad[1];
+            }
+            if (mof_magic.locked[0]) mof_duel_commands_reset(&mirror_commands[0],magic_last_keys[0]);
+            else
+#endif
             n1 = mirror_read_p1(p1);
+#ifdef MOF_ALIS_MAGIC
+            if (mof_magic.locked[1]) mof_duel_commands_reset(&mirror_commands[1],magic_last_keys[1]);
+            else
+#endif
             n2 = mirror_read_p2(p2);
         }
+#ifdef MOF_ALIS_MAGIC
+        mof_magic.live_step=!duel.hitstop;
+#endif
         CHAPTER_LINE(0);
 #if defined(MOF_DUEL_MIRROR_FOUNDATION)
         if (n1 >= MOF_DUEL_LOW_NORMALS && n1 != MOF_DUEL_SPECIAL) n1 = MOF_DUEL_NO_NORMAL;
@@ -567,7 +609,20 @@ new_round:
             duel.fighters[0].standing_normal==n1) mof_chapter_spend_super(0u);
         if (n2==MOF_DUEL_SUPER && duel.fighters[1].state==MOF_DUEL_ATTACK &&
             duel.fighters[1].standing_normal==n2) mof_chapter_spend_super(1u);
+#ifdef MOF_ALIS_MAGIC
+        if (mof_magic.busy) {
+            SMS_mapROMBank(MOF_MAGIC_BANK);
+            mof_magic_step(&duel);
+            SMS_mapROMBank(MOF_RULE_BANK);
+        } else if (mof_magic.live_step) {
+            if (mof_magic.caster[0].chat_wait) --mof_magic.caster[0].chat_wait;
+            if (mof_magic.caster[1].chat_wait) --mof_magic.caster[1].chat_wait;
+        }
+#endif
         mof_chapter_update(&duel);
+#ifdef MOF_ALIS_MAGIC
+        if (mof_magic.finisher && chapter.phase==MOF_RESULT) chapter.age=99;
+#endif
         }
 #endif
         mof_cadence_lines[1] = SMS_getVCount();
@@ -586,11 +641,29 @@ new_round:
             mirror_forecast_impact(0u, &next[1], &later[1]);
         mirror_prepare(wanted, next, later);
         CHAPTER_LINE(3);
+#ifdef MOF_ALIS_MAGIC
+        if (mof_magic.busy) {
+            SMS_mapROMBank(MOF_MAGIC_BANK);
+            mof_magic_plan(&duel,16u-((duel.fighters[0].x+duel.fighters[1].x)>>4));
+        } else mof_magic.count=0;
+        if (mof_magic.count || mof_magic.old_count) {
+            SMS_mapROMBank(MOF_MAGIC_BANK);
+            mof_magic_tiles((const uint8_t *)(mirror_bg_dirty ? mirror_stage_cells : mirror_cells[mirror_bg_page]),
+                            mirror_bg_dirty ? mirror_bg_count : mirror_old_bg_count,MOF_BANNER_TILE);
+        }
+#endif
         prepare_hud();
+#ifdef MOF_ALIS_MAGIC
+        magic_prepare_life();
+#endif
         mof_cadence_lines[2] = SMS_getVCount();
         /* VCount is monotonic through D4. A small SAT-only payload
            can still finish in VBlank when its preparation runs late. */
-        deadline = !mirror_bg_dirty && mirror_upload_tiles + mirror_bg_batch <= 2u &&
+        deadline =
+#ifdef MOF_ALIS_MAGIC
+            !mof_magic.count && !mof_magic.old_count &&
+#endif
+            !mirror_bg_dirty && mirror_upload_tiles + mirror_bg_batch <= 2u &&
             !hud_count[0] && !hud_count[1] ? 0xCFu : 0xC4u;
         epoch = wait_to_publish(submit_epoch, deadline);
         mof_missed_epochs += (uint8_t)(epoch - submit_epoch) - 1u;
@@ -599,6 +672,9 @@ new_round:
         mof_runtime_phase = 2u;
         mirror_publish();
         publish_hud();
+#ifdef MOF_ALIS_MAGIC
+        if (mof_magic.count || mof_magic.old_count) mof_magic_publish();
+#endif
 #if defined(MOF_ALIS_CHAPTER)
         banner=chapter.phase==MOF_RESULT ? (chapter.winner==2 ? 6 : chapter.expired ? 5 : 4) : 255;
         mof_chapter_hud(banner);
@@ -626,6 +702,10 @@ new_round:
             if (mof_presented_frame+1u==WORST_FRAME_WINDOW) mof_worst_done=1u;
         }
 #endif
+#ifdef MOF_ALIS_MAGIC
+        if (mof_magic.count) memcpy(mof_magic.old,mof_magic.next,mof_magic.count*sizeof(MofMagicTile));
+        mof_magic.old_count=mof_magic.count;
+#endif
         ++mof_presented_frame;
         mof_runtime_phase = 3u;
         mirror_write_probe(wanted);
@@ -637,6 +717,9 @@ new_round:
         else
 #endif
             mof_duel_audio_tick(&duel, 1u, duel.fighters[0].def->moves);
+#ifdef MOF_ALIS_MAGIC
+        if (mof_magic.audio) mof_magic_sound();
+#endif
         CHAPTER_LINE(5);
     }
 }
