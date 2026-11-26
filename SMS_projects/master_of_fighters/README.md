@@ -8,6 +8,25 @@
 Jogo de luta autoral em desenvolvimento. O manifesto padrão compila o
 esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 
+## Jogar no Espaçoporto de Palma
+
+Abra [Espacoporto_de_Palma.sms](out/candidates/espacoporto_de_palma_e2/Espacoporto_de_Palma.sms). No título, aperte **1**. Escolha **História de Alis** para enfrentar a CPU ou **Versus local** para dois controles. Na História, **1** avança cada fala e **2** pula a introdução. Os dois modos chegam à pista com as naves vermelhas e a torre azul. Esta é a candidata E2, com desempenho abaixo do piso de 58 FPS. [Captura da História](out/qa/alis_20261125/espacoporto_de_palma_e2/story/arena.png) · [Captura do Versus](out/qa/alis_20261125/espacoporto_de_palma_e2/port-versus/pista_oeste.png)
+
+## Jogar o capítulo de Alis em Camineet
+
+A [candidata com as casas e lojas redesenhadas](out/candidates/alis_capitulo_01_c5r/rom/master_of_fighters.sms) inicia no título. Use o direcional e o botão 1 para entrar. Nos diálogos, 1 avança e 2 pula. No menu, Opções ajusta a música e a quantidade de vitórias por duelo. História coloca a segunda Alis sob controle da CPU. Versus local usa as duas portas do Master System.
+
+Na raiz do SMSForge, abra a candidata no Emulicious com o comando abaixo.
+
+```sh
+tools/sms_wrapper/run_host.sh rtk proxy SMS_projects/master_of_fighters/run.sh \
+  SMS_projects/master_of_fighters/out/candidates/alis_capitulo_01_c5r/rom/master_of_fighters.sms
+```
+
+A candidata C5r tem 1 MiB e SHA-256 `2112971df3eb08339e93a2892a43fc38fd144b2df7c4a6134ec13640e20af9ea`. A história, o versus e os dois resultados foram exercitados. O desempenho ainda reprova o aceite de 58 FPS. [Troca de golpes](out/qa/alis_20261125/c5r-story/troca.mp4) · [Tema do título](out/qa/alis_20261125/c5r-story/tema_titulo.wav) · [PSG durante o combate](out/qa/alis_20261125/c5r-story/musica_e_golpes.wav)
+
+P1 usa as setas e as teclas **A** e **S**. O botão 1 usa espada ou escudo, e o 2 usa chutes. Toque e segure produzem golpes diferentes. Para o especial, pressione baixo, depois frente + 1. Para a resposta de escudo, pressione baixo, depois trás + 1. Com a carga completa, pressione baixo, frente, baixo, frente + 1 para o Super. Frente e trás acompanham o lado do adversário. [Comandos dos dois jogadores](doc/scene02-comandos.md#perfil-alis--alis) · [Memória e evidências](doc/10-memory-bank.md)
+
 ## Jogar Alis × Alis
 
 Abra a [candidata b53 do espelho](out/candidates/scene02_alis_mirror_b53/rom/master_of_fighters.sms)

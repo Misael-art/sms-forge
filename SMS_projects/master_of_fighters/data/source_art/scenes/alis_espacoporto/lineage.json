@@ -1,0 +1,61 @@
+{
+  "titulo": "Espaçoporto de Palma · controle de passaportes",
+  "estado": "proposta visual do capítulo de Alis",
+  "data": "2026-11-25",
+  "referencia": {
+    "jogo": "Phantasy Star (Master System)",
+    "origem": "Captura do controle de passaportes enviada pelo proprietário",
+    "arquivo": "codex-clipboard-0bc7f968-92fe-4548-8e6f-346e47e65eac.png",
+    "sha256": "9d5a3c6efeb75a302d238378797dbbacd7408e372662844b6f8980e9d6bb771c",
+    "papel": "Local, duas naves, torre, guarda, contraste do céu e piso da pista",
+    "dialogo": "https://www.pscave.com/pspages/psi/psitalk.html"
+  },
+  "fontes": [
+    {
+      "arquivo": "pista.png",
+      "sha256": "10686413c52d9afc5ea38e91a457112af8899e1d7c8baa2c4484e282f8c694a1",
+      "ferramenta": "ImageGen",
+      "papel": "Ilustração de cenário para recorte e conversão",
+      "prompt": "Generate one finished, lovingly art-directed Sega Master System pixel art background plate for a side-view fighting arena in a fan game's Alis chapter. The supplied screenshot is solely the visual reference for the passport checkpoint at the Palma spaceport from the first Phantasy Star. Reinterpret its silhouettes for a SIDE VIEW. New independently drawn pixels, no UI, no text and no fighters. Aspect 3:2 landscape (the wide painting will be panned inside a 4:3 camera). Actual artwork should read like an authentic 288 x 192 native pixel illustration enlarged with nearest-neighbor; exactly square intentional pixel clusters, limited circa 16-color vintage palette, bold deft manga mechanical contours and rounded chunky fittings, like early Akira Toriyama capsule vehicles, no anti-alias gradients. Art direction: a striking large visibly NOSE-UP scarlet passenger shuttle at left, bulbous rounded raised red prow, saffron nose cap/upper glint, wine-dark underside, turquoise faceted cabin glass, clearly supported on chunky extended landing gear. At far right is the sleek long LOW horizontal scarlet shuttle facing right, and a tall narrow ivory AND cyan striped beacon tower with an oval glass cap behind it. White-armored robot passport officer stands at a small lean checkpoint podium OFF-CENTER LEFT as a background extra on the apron, only about 26 pixels tall in the native image, with a blue handheld passport scanner and a vivid cyan T-shaped visor. Behind these are a restrained two-value blue silhouette of distant Palma hills and low domed airport buildings, with a broad pure uniform deep azure daylight sky at top. Strong dark silhouettes against this sky. Arrange the middle apron and its restrained steel safety rail as genuinely horizontal side-scrolling bands. Keep all ship tires, architecture and officer feet above the 65%-height line. The lowest 35% is the fight floor, level and spacious, one broad band of cool lavender-gray pavement with TWO softly contrasting long inlaid runway stripes and a few wide slab joins; keep the middle low-contrast so the eyes will meet the fighters. Rich generous negative space in the centre, handsome balanced asymmetric composition. No labels, no lettering, no dialog screen, no HUD, no text boxes, no combat poses, no active weapons, no markings that look like words. No birds in this plate: birds will be animated on a separate layer. No frame, no decorative border, no poster design."
+    },
+    {
+      "arquivo": "aves.png",
+      "sha256": "7c1f7d675c41e6e283a1e8d649c8d00ab5271fe7af2960338d1f7d332a557236",
+      "ferramenta": "ImageGen",
+      "papel": "Três poses de voo com fundo transparente. As aves são uma criação para a arena do fã.",
+      "prompt": "Professional Sega Master System environment animation asset: a very small distant Palman coastal tern, shown in three frames of a flight cycle, side profile, flying to the RIGHT in all frames. A single untextured alpha-transparent horizontal sprite strip, very wide landscape 3:1, exactly THREE equally spaced CELLS: left bird wings swept UP in a readable V, middle bird wings extended horizontally, right bird wings swept DOWN. Each entire individual bird must be visible, including beak and wingtips, and centered fully inside its own third of the sheet. Identical body, bearing and scale in all cells. Each pose will be reduced to about 13 by 8 actual game pixels. Wing of medium marine blue, slim near-white belly glint, very dark indigo edge, short pointed bill and a slightly forked swallow-like tail. Small simple silhouettes, attractive large hard-edged pixel clusters and exactly three opaque colors. No gradients or shading noise. Do not draw any background, floor, shadow, clouds, text, labels, guides, or decorative elements. Flight animation sprites only."
+    }
+  ],
+  "composicao": {
+    "receita": "tools/preview_alis_spaceport.py",
+    "base_px": [
+      256,
+      192
+    ],
+    "paralaxe_camera": {
+      "horizonte_e_hangares": 0.25,
+      "patio_e_naves": 0.5,
+      "pista": 1
+    },
+    "animacoes": [
+      "Duas aves desencontradas em três poses",
+      "Pulso duplo da torre",
+      "Pulso do leitor de passaportes",
+      "Respiração das duas Alis"
+    ],
+    "poses": "Bytes de sprites das lutadoras na ROM Camineet C5r, verificados com o repertório local",
+    "rom_de_origem_sha256": "2112971df3eb08339e93a2892a43fc38fd144b2df7c4a6134ec13640e20af9ea",
+    "destino": "out/diagnostics/alis_espacoporto_proposta",
+    "tipo": "Estudo animado composto fora do emulador"
+  },
+  "candidata_jogavel": {
+    "rom": "out/candidates/espacoporto_de_palma_e2/Espacoporto_de_Palma.sms",
+    "sha256": "bed67d64b2950bad2d545580e8c2d6c7b6c16c3bdc4d7d7b06fc59f500e56b01",
+    "receita": ["tools/prepare_alis_chapter.py --spaceport", "tools/pack_alis_scenes.py --spaceport"],
+    "derivados": "out/diagnostics/alis_espacoporto_e2/panels/pages.json",
+    "recibo_build": "out/candidates/espacoporto_de_palma_e2/build_record.json",
+    "modos_em_emulador": ["História de Alis", "Versus local"],
+    "evidencia": "out/qa/alis_20261125/espacoporto_de_palma_e2",
+    "aceite_desempenho": "reprovado"
+  }
+}

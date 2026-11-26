@@ -12,6 +12,12 @@ static const MofDuelBox alis_offense[MOF_DUEL_NORMALS_PER_FIGHTER] = {
     ALIS_BOX(22,-45,31,-31), ALIS_BOX(19,-28,31,-17),
     ALIS_BOX(20,-30,34,-22), ALIS_BOX(18,-16,31,0),
     ALIS_BOX(6,-41,35,-20), {10,-40,32,-16},
+#if defined(MOF_ALIS_CHAPTER)
+    {8,-35,40,-28},
+#if defined(MOF_ALIS_RIPOSTE)
+    {5,-36,27,-29},
+#endif
+#endif
 };
 #undef ALIS_BOX
 
@@ -21,6 +27,12 @@ static const uint8_t alis_ends[MOF_DUEL_NORMALS_PER_FIGHTER][5] = {
     {2,4,11}, {2,5,15}, {2,5,12}, {2,5,15},
     {7,9,23}, {MOF_THROW_REACH_END_TICK, MOF_THROW_BRACE_TICK, MOF_THROW_RELEASE_TICK,
                MOF_THROW_RECOVERY_TICK, MOF_THROW_END_TICK},
+#if defined(MOF_ALIS_CHAPTER)
+    {10,14,33},
+#if defined(MOF_ALIS_RIPOSTE)
+    {2,8,11,24},
+#endif
+#endif
 };
 
 /* Short presses are light. Holds, the special, the throw, the Super and
@@ -49,6 +61,12 @@ static const MofDuelStandingNormal alis_moves[MOF_DUEL_NORMALS_PER_FIGHTER] = {
     ALIS_MOVE(12,7,2,23,13,3u,MOF_HEIGHT_MIDDLE,0,HEAVY|AIR,4,BODY),
     ALIS_MOVE(13,MOF_THROW_RELEASE_TICK,1,MOF_THROW_END_TICK,16,5u,MOF_HEIGHT_THROW,1,
               HEAVY|AIR,4,SHIELD),
+#if defined(MOF_ALIS_CHAPTER)
+    ALIS_MOVE(14,10,4,33,25,3u,MOF_HEIGHT_MIDDLE,1,HEAVY|AIR,4,BODY),
+#if defined(MOF_ALIS_RIPOSTE)
+    ALIS_MOVE(15,8,3,24,15,4u,MOF_HEIGHT_MIDDLE,0,HEAVY|AIR,4,BODY),
+#endif
+#endif
 };
 #undef ALIS_MOVE
 #undef HEAVY

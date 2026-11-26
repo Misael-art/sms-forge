@@ -1,0 +1,395 @@
+#if defined(MOF_ALIS_CHAPTER)
+#include "SMSlib.h"
+#include "PSGlib.h"
+#include "../inc/alis_chapter.h"
+#include "alis_pages.h"
+
+MofChapter chapter;
+const MofChapterPresentation *mof_presentation;
+
+void mof_chapter_select(const MofChapterPresentation *presentation)
+{
+    mof_presentation=presentation;
+}
+static uint8_t last_pad;
+static uint8_t rhythm[2], gesture[2], direction[2], last_face[2];
+static uint8_t old_seconds, old_banner, old_gauge[2], banner_tiles, shutter;
+static uint8_t cpu_keys, cpu_wait, cpu_cycle;
+
+#ifdef MOF_PORT_SKY
+static volatile uint8_t port_apron_scroll, port_runway_scroll;
+static uint8_t flight_clock, flight[2], scanner;
+
+/* Register 10 reloads every 32 visible lines. The weapon tiles are
+   precomposed in screen space, so rows 12 through 19 stay stationary. */
+static void port_raster(void)
+{
+    uint8_t line=SMS_getVCount();
+    if (line < 48u) {
+        INLINE_SMS_setBGScrollX(port_apron_scroll);
+    } else if (line >= 144u && line < 176u) {
+        INLINE_SMS_setBGScrollX(port_runway_scroll);
+    } else if ((line >= 80u && line < 112u) || line >= 176u) {
+        INLINE_SMS_setBGScrollX(0);
+    }
+}
+
+void mof_port_raster_start(void)
+{
+    SMS_setLineInterruptHandler(port_raster);
+    SMS_setLineCounter(31);
+    SMS_enableLineInterrupt();
+}
+
+static void port_bird(uint8_t bird, uint8_t advance)
+{
+    uint8_t phase=flight[bird], column=phase>>2;
+    uint8_t row=3u+bird;
+    uint16_t tile;
+    if (advance) {
+        phase=(phase+1u)&127u;
+        flight[bird]=phase;
+        if (!(phase&3u)) SMS_setTileatXY(column,row,MOF_PORT_SKY);
+        column=phase>>2;
+    }
+    tile=MOF_PORT_SKY+1u+((phase&3u)<<1);
+    SMS_setTileatXY(column,row,tile);
+    SMS_setTileatXY((column+1u)&31u,row,tile+1u);
+}
+#endif
+
+void mof_chapter_theme(uint16_t song)
+{
+    PSGStop();
+    if (chapter.music) {
+        SMS_mapROMBank(mof_presentation->arena_bank);
+        PSGPlay((void *)song);
+    }
+}
+
+void mof_chapter_music(void)
+{
+    if (chapter.music) {
+        SMS_mapROMBank(mof_presentation->arena_bank);
+        PSGFrame();
+    }
+}
+
+/* Each panel is self-contained in a mapper page (palette, patterns, PNT).
+   Its assets can reuse the entire display-off tile area between matches. */
+static void show_page(uint8_t page)
+{
+    const uint8_t *data=(const uint8_t *)0x8000;
+    uint16_t length;
+    SMS_displayOff();
+#ifdef MOF_PORT_SKY
+    SMS_disableLineInterrupt();
+    SMS_setBGScrollX(0);
+    SMS_VDPturnOffFeature(VDPFEATURE_LEFTCOLBLANK);
+#endif
+    SMS_VRAMmemset(0x3f00, 0xd0, 1);
+    SMS_mapROMBank(page);
+    length=*(const uint16_t *)data;
+    SMS_loadBGPalette(data+2);
+    SMS_loadTiles(data+18,0,length);
+    SMS_loadTileMap(0,0,data+18+length,1536);
+    SMS_waitForVBlank();
+    SMS_displayOn();
+    last_pad=(uint8_t)SMS_getKeysStatus() & 63u;
+}
+
+static uint8_t menu_edges(void)
+{
+    uint8_t pad;
+    SMS_waitForVBlank();
+    mof_chapter_music();
+    pad=(uint8_t)SMS_getKeysStatus() & 63u;
+    uint8_t edges=pad & (uint8_t)~last_pad;
+    last_pad=pad;
+    return edges;
+}
+
+static void story_pages(uint8_t from,uint8_t count)
+{
+    uint8_t edge;
+    for (;count;--count,++from) {
+        show_page(from);
+        do { edge=menu_edges(); } while (!(edge & (MOF_DUEL_ONE|MOF_DUEL_TWO)));
+        if (edge & MOF_DUEL_TWO) break;
+    }
+}
+
+static void options(void)
+{
+    uint8_t row=0, edge;
+    show_page(MOF_PAGE_OPTIONS);
+    for (;;) {
+        SMS_waitForVBlank();
+        SMS_setTileatXY(2,8,row ? 0 : 1);
+        SMS_setTileatXY(2,14,row ? 1 : 0);
+        SMS_setTileatXY(5,10,chapter.music ? 2 : 0);
+        SMS_setTileatXY(18,10,chapter.music ? 0 : 2);
+        SMS_setTileatXY(5,16,chapter.target==1 ? 2 : 0);
+        SMS_setTileatXY(18,16,chapter.target==2 ? 2 : 0);
+        do { edge=menu_edges(); } while (!edge);
+        if (edge & MOF_DUEL_TWO) return;
+        if (edge & (MOF_DUEL_UP|MOF_DUEL_DOWN)) row^=1u;
+        else if (edge & (MOF_DUEL_LEFT|MOF_DUEL_RIGHT|MOF_DUEL_ONE)) {
+            if (row) chapter.target=3u-chapter.target;
+            else {
+                chapter.music^=1u;
+                mof_chapter_theme(mof_presentation->opening_song);
+            }
+        }
+    }
+}
+
+void mof_chapter_menu(void)
+{
+    uint8_t selected=0, previous, edge;
+    if (!chapter.target) {
+        chapter.target=2;
+        chapter.music=1;
+        mof_chapter_theme(mof_presentation->opening_song);
+        show_page(MOF_PAGE_TITLE);
+        while (!(menu_edges() & MOF_DUEL_ONE)) {}
+    } else mof_chapter_theme(mof_presentation->opening_song);
+    show_page(MOF_PAGE_MENU);
+    for (;;) {
+        SMS_waitForVBlank();
+        SMS_setTileatXY(3,16+2*selected,1);
+        do { edge=menu_edges(); } while (!edge);
+        previous=selected;
+        if (edge & MOF_DUEL_UP) selected=selected ? selected-1u : 2u;
+        else if (edge & MOF_DUEL_DOWN) selected=selected==2 ? 0 : selected+1u;
+        else if (edge & MOF_DUEL_ONE) {
+            if (selected<2) {
+                chapter.story=!selected;
+                if (chapter.story) story_pages(mof_presentation->intro_first,mof_presentation->intro_count);
+                return;
+            }
+            options();
+            show_page(MOF_PAGE_MENU);
+        }
+        SMS_waitForVBlank();
+        SMS_setTileatXY(3,16+2*previous,0);
+    }
+}
+
+void mof_chapter_match(void)
+{
+    chapter.wins[0]=chapter.wins[1]=chapter.round=0;
+    mof_chapter_theme(mof_presentation->battle_song);
+}
+
+void mof_chapter_round(void)
+{
+    uint8_t i;
+    if (chapter.round<3) ++chapter.round;
+    chapter.phase=MOF_ROUND;
+    chapter.seconds=60;
+    chapter.age=chapter.subsecond=chapter.expired=0;
+    old_seconds=old_banner=old_gauge[0]=old_gauge[1]=255;
+    banner_tiles=16;
+    shutter=0;
+    cpu_keys=cpu_cycle=cpu_wait=0;
+    for (i=0;i<2;++i) {
+        chapter.meter[i]=chapter.idle[i]=0;
+        rhythm[i]=gesture[i]=direction[i]=0;
+    }
+}
+
+void mof_chapter_arena(void)
+{
+    SMS_mapROMBank(mof_presentation->arena_bank);
+#ifdef MOF_PORT_SKY
+    SMS_loadBGPalette((const void *)MOF_PORT_PALETTE);
+#endif
+    SMS_loadTiles((const void *)0x8000,MOF_ARENA_FIRST,MOF_ARENA_BYTES);
+    SMS_loadTileMap(0,0,(const void *)(0x8000u+MOF_ARENA_BYTES),1536);
+#if MOF_ARENA_SPARE_COUNT > 0
+    /* A streamed pose ends before this pattern in each SAT cache slot.
+       The packer checks every pose from both costumes before assigning it. */
+    const uint8_t *tiles=(const uint8_t *)MOF_ARENA_SPARE_ADDR;
+    uint8_t remaining=MOF_ARENA_SPARE_COUNT, first=MOF_ARENA_SPARE_FIRST;
+    while (remaining) {
+        uint8_t n=remaining<MOF_ARENA_SPARE_WIDTH ? remaining : MOF_ARENA_SPARE_WIDTH;
+        SMS_loadTiles(tiles,first,n*32u);
+        tiles+=n*32u;
+        first+=32;
+        remaining-=n;
+    }
+#endif
+#ifdef MOF_PORT_SKY
+    flight[0]=26;
+    flight[1]=94;
+    flight_clock=scanner=0;
+    port_apron_scroll=port_runway_scroll=0;
+    port_bird(0,0);
+    port_bird(1,0);
+    SMS_setBGScrollX(0);
+    SMS_VDPturnOnFeature(VDPFEATURE_LEFTCOLBLANK);
+#endif
+}
+
+/* Called during non-playing phases, or after the measured fight SAT write.
+   Only cells that changed are emitted on a playing frame. */
+void mof_chapter_hud(uint8_t banner)
+{
+    uint8_t i;
+    if (old_banner!=banner) {
+        SMS_mapROMBank(mof_presentation->arena_bank);
+        if (old_banner!=255) {
+            const uint8_t *map=(const uint8_t *)(0x8000u+MOF_ARENA_BYTES);
+            SMS_loadTileMap(12,4,map+2*(4*32+12),16);
+            SMS_loadTileMap(12,5,map+2*(5*32+12),16);
+        }
+        banner_tiles=banner==255 ? 16 : 0;
+        old_banner=banner;
+    }
+    if (banner_tiles<16) {
+        const uint8_t *slice=(const uint8_t *)(MOF_BANNER_DATA+((uint16_t)banner<<9)+((uint16_t)banner_tiles<<5));
+        SMS_mapROMBank(mof_presentation->arena_bank);
+        UNSAFE_SMS_VRAMmemcpy128((MOF_BANNER_TILE+banner_tiles)*32u,slice);
+        banner_tiles+=4;
+        if (banner_tiles==16) {
+            for (i=0;i<16;++i) {
+                if (!(i&7u)) SMS_setNextTileatXY(12,4+(i>>3));
+                SMS_setTile(MOF_BANNER_TILE+i);
+            }
+        }
+    }
+    if (chapter.phase==MOF_PLAY) {
+#ifdef MOF_PORT_SKY
+        uint8_t light=(chapter.subsecond<4 || (chapter.subsecond>=9 && chapter.subsecond<13));
+        uint8_t scan=(chapter.subsecond>=32 && chapter.subsecond<43);
+        if (scanner!=scan) {
+            scanner=scan;
+            SMS_setTileatXY(MOF_PORT_SCAN_X,MOF_PORT_SCAN_Y,MOF_PORT_SCANNER+scan);
+        }
+        if (!(++flight_clock&3u)) port_bird((flight_clock>>2)&1u,1);
+#else
+        uint8_t light=(chapter.subsecond>=17 && chapter.subsecond<29);
+#endif
+        if (shutter!=light) {
+            shutter=light;
+            SMS_setTileatXY(MOF_SIGN_X,MOF_SIGN_Y,MOF_SIGN_TILE+light);
+        }
+    }
+    if (old_seconds!=chapter.seconds) {
+        old_seconds=chapter.seconds;
+        SMS_setNextTileatXY(15,1);
+        SMS_setTile(MOF_DIGIT_TILE + chapter.seconds/10);
+        SMS_setTile(MOF_DIGIT_TILE + chapter.seconds%10);
+    }
+    for (i=0;i<2;++i) {
+        uint8_t charge=chapter.meter[i]>>1;
+        if (charge!=old_gauge[i]) {
+            uint8_t k;
+            old_gauge[i]=charge;
+            SMS_setNextTileatXY(i ? 26 : 2,2);
+            for (k=0;k<4;++k) SMS_setTile(MOF_DIGIT_TILE+(k<charge ? 11 : 10));
+        }
+    }
+}
+
+static void end_round(uint8_t a,uint8_t b)
+{
+    chapter.phase=MOF_RESULT;
+    chapter.winner=a==b ? 2 : (a<b);
+    if (chapter.winner<2) ++chapter.wins[chapter.winner];
+    chapter.age=0;
+    mof_chapter_theme(mof_presentation->result_song);
+    SMS_mapROMBank(MOF_RULE_BANK);
+}
+
+void mof_chapter_update(const MofDuel *duel)
+{
+    uint8_t i;
+#ifdef MOF_PORT_SKY
+    uint8_t center=(uint8_t)((duel->fighters[0].x+duel->fighters[1].x)>>1);
+    port_apron_scroll=16u-(center>>3);
+    port_runway_scroll=32u-(center>>2);
+#endif
+    for (i=0;i<2;++i) {
+        const MofDuelFighter *f=&duel->fighters[i];
+        if (f->state==MOF_DUEL_READY && !f->keys) {
+            if (chapter.idle[i]<254) ++chapter.idle[i];
+            else chapter.idle[i]=150;
+        } else chapter.idle[i]=0;
+        if (f->contact==MOF_DUEL_LANDED || f->contact==MOF_DUEL_GUARDED) {
+            if (chapter.meter[i]<8 && f->standing_normal!=MOF_DUEL_SUPER) ++chapter.meter[i];
+            if (chapter.meter[1-i]<8 && f->contact==MOF_DUEL_LANDED) ++chapter.meter[1-i];
+        }
+    }
+    if (duel->fighters[0].state==MOF_DUEL_KO || duel->fighters[1].state==MOF_DUEL_KO)
+        end_round(duel->fighters[0].life,duel->fighters[1].life);
+    else if (++chapter.subsecond==60) {
+        chapter.subsecond=0;
+        if (!--chapter.seconds) {
+            chapter.expired=1;
+            end_round(duel->fighters[0].life,duel->fighters[1].life);
+        }
+    }
+}
+
+uint8_t mof_chapter_result(void)
+{
+    uint8_t edge;
+    if (chapter.winner==2 || chapter.wins[chapter.winner]<chapter.target) {
+        mof_chapter_theme(mof_presentation->battle_song);
+        return MOF_NEXT_ROUND;
+    }
+    if (chapter.story && !chapter.winner)
+        story_pages(mof_presentation->ending_first,mof_presentation->ending_count);
+    show_page(chapter.story && chapter.winner ? mof_presentation->defeat :
+              mof_presentation->victory[chapter.winner]);
+    do { edge=menu_edges(); } while (!(edge & (MOF_DUEL_ONE|MOF_DUEL_TWO)));
+    return edge & MOF_DUEL_TWO ? MOF_MAIN_MENU : MOF_REMATCH;
+}
+
+uint8_t mof_chapter_cpu(const MofDuel *duel)
+{
+    const MofDuelFighter *f=&duel->fighters[1],*r=&duel->fighters[0];
+    uint8_t front=f->face_right ? MOF_DUEL_RIGHT : MOF_DUEL_LEFT;
+    uint8_t back=f->face_right ? MOF_DUEL_LEFT : MOF_DUEL_RIGHT;
+    int16_t gap=f->x-r->x;
+    if (gap<0) gap=-gap;
+    if (cpu_wait) { --cpu_wait; return cpu_keys; }
+    ++cpu_cycle;
+    cpu_wait=5;
+    if (cpu_keys & (MOF_DUEL_ONE|MOF_DUEL_TWO)) cpu_keys=0;
+    else if (r->state==MOF_DUEL_ATTACK && (cpu_cycle&3))
+        cpu_keys=back | (r->keys & MOF_DUEL_DOWN);
+    else if (gap>24)
+        cpu_keys=front | ((cpu_cycle&7)==0 ? MOF_DUEL_UP : 0);
+    else {
+        cpu_keys=(cpu_cycle&2 ? MOF_DUEL_TWO : MOF_DUEL_ONE) | (cpu_cycle&4 ? MOF_DUEL_DOWN : 0);
+        cpu_wait=(cpu_cycle&1) ? 2 : 7;
+    }
+    return cpu_keys;
+}
+
+void mof_chapter_spend_super(uint8_t player)
+{
+    chapter.meter[player]=rhythm[player]=gesture[player]=direction[player]=0;
+}
+
+/* Two distinct down/forward strokes at the current facing, then a fresh 1.
+   A failed full-meter check falls back through the usual special reader. */
+uint8_t mof_chapter_super_input(uint8_t p,uint8_t keys,uint8_t face,uint8_t free)
+{
+    uint8_t front=face ? MOF_DUEL_RIGHT : MOF_DUEL_LEFT;
+    uint8_t dir=keys & 15u;
+    if (!free || face!=last_face[p] || !rhythm[p]) gesture[p]=0;
+    last_face[p]=face;
+    if (rhythm[p]) --rhythm[p];
+    if (free && dir!=direction[p]) {
+        if (dir==MOF_DUEL_DOWN) { gesture[p]=gesture[p]==2 ? 3 : 1; rhythm[p]=18; }
+        else if (dir==front && (gesture[p]==1 || gesture[p]==3)) ++gesture[p];
+        else if (dir && dir!=(front|MOF_DUEL_DOWN)) gesture[p]=0;
+    }
+    direction[p]=dir;
+    return gesture[p]==4 && dir==front && chapter.meter[p]==8;
+}
+#endif

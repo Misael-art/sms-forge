@@ -1,5 +1,14 @@
 # 12-roteiro — master_of_fighters
 
+## Variante do espaçoporto · candidata E2
+
+Na pista, Myau avisa que o guarda quer ver o passaporte. Alis apresenta o documento e pede que ele fique por perto até o embarque. Myau enxerga outra Alis com o mesmo escudo. A protagonista se põe à frente dele para abordar a rival. Depois da vitória, Alis convida a outra a acompanhá-los, e Myau vê o sinal da torre para a viagem a Paseo. [Primeira fala no emulador](../out/qa/alis_20261125/espacoporto_de_palma_e2/story/dialogo_1.png)
+
+## Capítulo de Alis · roteiro jogável
+
+Na rua das três lojas, Myau vê uma luz junto à casa de Nekise. Alis convida o amigo a lhe dar a pata. A dúvida de Myau sobre o segundo escudo prepara a revelação da rival. Alis pede que fique perto dela e avança. O duelo põe a Alis rosa diante de um eco verde. Se vencer, ela oferece companhia ao eco, Myau percebe a cidade despertando e reaparece a escolha entre revanche e menu. Se perder, Myau continua junto dela e oferece nova tentativa. O versus local pula os diálogos. Os textos de cada quadro e sua seleção de retrato estão em [pack_alis_scenes.py](../tools/pack_alis_scenes.py).
+
+
 ## Cena 10 — demonstração de golpes, direção de 2026-11-01
 
 [Padrão vigente](character_move_showcase_standard_v1.md). Proposta de ritmo:

@@ -1,5 +1,13 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-26 · Impacto, fichas de lutador e capítulo versionados
+
+O impacto por força (`4732170`), a ficha de regras por lutador (`7b4f6f0`) e as capacidades da ficha (`db6d5a0`) estão na branch, junto com o capítulo de Alis versionado logo depois. A candidata atual é a [r2](../../SMS_projects/master_of_fighters/out/candidates/espacoporto_de_palma_elenco_r2/rom/master_of_fighters.sms), SHA-256 `4e4f07197ef1c96c34dca88faba3ae5192d687657bf97ba655a081ba4dea5a4c`. Ela joga como a h1: impacto 4/10, 11/20 e 11/3 aprovado no Emulicious privado e FPS ainda reprovado em 37–40. Os testes de host ficam em `SMS_projects/master_of_fighters/tools/test_duel_*.c`. Próximo: o dono testa o impacto no controle físico. Depois vêm os comandos de especial, Super e contragolpe como dados da ficha, a troca de `MOF_ALIS_*` por capacidades e a fase 3, com pipeline de arte por manifesto e poses do segundo lutador. O cartucho e a paleta de dois lutadores diferentes são decisões do dono. Continua só local o lote restaurado de 19 a 24/11: `luta_mugem_rev2`, revisão b08, Emulicious no Windows, versus do mugen2sms, recibos de `sprite_studies`, repertório e registro de artefatos. A [memória do consumidor](../../SMS_projects/master_of_fighters/doc/10-memory-bank.md) traz as medições.
+
+## 2026-11-25 · Capítulo de Alis em Camineet
+
+A C5r abre no título e percorre vitória, revanche, derrota e retorno ao menu. A direção das casas e das três lojas está no GDD e na especificação de cena. O bloqueio permanece na cadência da dupla e na publicação em VBlank. SHA-256 `2112971df3eb08339e93a2892a43fc38fd144b2df7c4a6134ec13640e20af9ea`. A memória do consumidor reúne a ROM, o filme, o PSG, a revisão e as janelas exatas. [Memória do capítulo](../../SMS_projects/master_of_fighters/doc/10-memory-bank.md) · [Como jogar](../../SMS_projects/master_of_fighters/README.md)
+
 ## 2026-11-22 · Retomar a Puxada com Escudo e o pouso da b53
 
 O [prompt de Alis](20261121-prompt-concluir-alis-espelho.md) parte do

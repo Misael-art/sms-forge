@@ -56,9 +56,9 @@ def convert_pose(cell, box, pivot, scale, colors, output, scale_x=None):
     return floor_adjustment
 
 
-def stage(destination, hayato_sprite_only=False):
+def stage(destination, hayato_sprite_only=False, *, colors=None, heights=None):
     receipt = json.loads((SOURCE / "source-receipt.json").read_bytes())
-    colors = palette("mof_duel_sprite_palette")
+    colors = colors or palette("mof_duel_sprite_palette")
     destination.mkdir(parents=True, exist_ok=False)
     poses = []
     for item in receipt["sheets"]:
@@ -85,7 +85,7 @@ def stage(destination, hayato_sprite_only=False):
                 if not box or box[0] == 0 or box[1] == 0 or box[2] == cell.width or box[3] == cell.height:
                     raise ValueError(f"Empty or clipped cell for {actor}: {direction} {col + 1}")
                 cells.append((direction, col, cell, box, edges[col]))
-        scale = old_guard_height(actor) / max(box[3] - box[1] for _, _, _, box, _ in cells)
+        scale = (heights[actor] if heights else old_guard_height(actor)) / max(box[3] - box[1] for _, _, _, box, _ in cells)
         scale_x = scale
         if actor == "hayato" and hayato_sprite_only:
             # Reserve a complete four-sprite strip without shifting a moving P0 mask.
@@ -107,9 +107,9 @@ def stage(destination, hayato_sprite_only=False):
     (destination / "walk-staging.json").write_text(json.dumps(poses, indent=2) + "\n", encoding="utf-8")
 
 
-def stage_specials(destination):
+def stage_specials(destination, *, colors=None, heights=None):
     receipt = json.loads((SPECIALS / "source-receipt.json").read_bytes())
-    colors = palette("mof_duel_sprite_palette")
+    colors = colors or palette("mof_duel_sprite_palette")
     destination.mkdir(parents=True, exist_ok=False)
     poses = []
     for item in receipt["sheets"]:
@@ -134,7 +134,7 @@ def stage_specials(destination):
             cell = source.copy()
             cell.putalpha(mask)
             cells.append((cell, box, point[0]))
-        scale = old_guard_height(actor) / max(box[3] - box[1] for _, box, _ in cells)
+        scale = (heights[actor] if heights else old_guard_height(actor)) / max(box[3] - box[1] for _, box, _ in cells)
         for index, (cell, box, pivot) in enumerate(cells, 1):
             action = f"{actor}_special"
             output = destination / f"{action}_{index}.png"

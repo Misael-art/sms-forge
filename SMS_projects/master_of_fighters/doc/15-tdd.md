@@ -1,5 +1,22 @@
 # 15-tdd — master_of_fighters
 
+## Adaptação do espaçoporto ao VDP
+
+Para reproduzir a E2, o preparador `prepare_alis_chapter.py --resume-postures --spaceport` recebe o diretório preservado `out/diagnostics/alis_chapter_v1` e o diretório de saída. O empacotador `pack_alis_scenes.py FIGHTERS PANELS --spaceport` recebe a pasta `fighters` da saída e cria o manifesto `panels/chapter.json` para o wrapper oficial. A paleta retém as cores das duas armas e do HUD. O pré-composto das lâminas usa as mesmas cinco linhas de tiles que a pista. O ajustador de padrões retém as juntas de dilatação e os detalhes do posto do guarda antes de selecionar os demais tiles.
+
+A interrupção de linha usa período de 32 linhas. O pátio ocupa a banda 32–95 e o piso próximo ocupa 160–191. O HUD e a área de pré-composição das armas têm rolagem zero. O código habilita a interrupção depois da carga de poses, SAT e mapas. A troca de página e a reinicialização de round desarmam o raster antes das transferências em massa. A torre e o leitor têm pares de tiles próprios. As duas aves usam posições e fases defasadas de um mesmo conjunto de oito padrões residentes na PNT.
+
+## Capítulo de Alis · bancos, entrada e medição
+
+O perfil `MofChapterPresentation` associa páginas de abertura/fecho, resultado por jogadora, derrota, banco da arena, três endereços de música e primeiras poses de escuta e vitória. A máquina de título, opções, leitura do controle, rounds e revanche consome esse perfil. Caixas, movimentos, reações e prioridades de publicação continuam nas tabelas do duelo. O espelho seleciona a CPU somente para P2 em História.
+
+A abertura usa uma página de mapper por quadro. A tela apagada recebe paleta, padrões e mapa antes de voltar no VBlank. As ações de uma página exigem nova borda após a troca. No combate, as armas pré-compõem pixels de P0 nas linhas que o empacotador identifica em `repertoire-pages.json`. O cenário e as duas exposições do vidro ocupam padrões depois da última página de armas. Os anúncios usam 16 padrões consecutivos e carregam quatro por VBlank antes de publicar as duas linhas do letreiro. A restauração lê o retângulo da cópia da arena em ROM. O sinal da portinhola troca uma entrada da PNT nos ticks 17 e 29 de cada segundo lógico.
+
+O banco de regras precisa estar selecionado antes das chamadas de lógica após ligar a música de resultado. O PSG usa duas vozes e deixa os canais 2 e 3 para os efeitos. O segundo byte de cada período leva o marcador de dado `0x40` de PSGlib. A referência musical é a VGM descomprimida de **Title** (PSG), SHA-256 `0506ee3dfb98c69a30b09b0d456560990660998ce32a0827134a0f37abdfd849`. Abertura e combate têm 384 ticks cada, a resolução tem 144. O arranjo traz duas frases da abertura com baixo novo. O combate desenvolve o contorno e a vitória fecha em si bemol.
+
+A sonda de pior frame conserva a menor leitura de VCount e os términos na área ativa durante as primeiras 3.000 publicações desde o boot. Ela sela o par mesmo se o encontro mudar de round. O contador de apresentação segue avançando para o medidor de FPS. Registrar a carga efetivamente jogada e o contexto da janela a cada leitura. O replay entra pelo menu com controle e salva quadros, passos, estado da ROM e encerramento da sessão vinculados ao SHA. O arquivo de compilação identifica os bancos incluídos. Os números obtidos em outra candidata permanecem históricos.
+
+
 ## Cena 02 · propriedade no espelho
 
 O mesmo personagem pode aparecer nos dois índices da luta. MofDuel

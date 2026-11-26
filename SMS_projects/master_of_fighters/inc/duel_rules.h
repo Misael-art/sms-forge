@@ -41,7 +41,18 @@
 #define MOF_DUEL_AIR_NORMALS 8u
 #define MOF_DUEL_SPECIAL 12u
 #define MOF_DUEL_THROW 13u
+#if defined(MOF_ALIS_CHAPTER)
+#define MOF_DUEL_SUPER 14u
+#if defined(MOF_ALIS_RIPOSTE)
+#define MOF_DUEL_RIPOSTE 15u
+#define MOF_DUEL_PARRIED 4u
+#define MOF_DUEL_NORMALS_PER_FIGHTER 16u
+#else
+#define MOF_DUEL_NORMALS_PER_FIGHTER 15u
+#endif
+#else
 #define MOF_DUEL_NORMALS_PER_FIGHTER 14u
+#endif
 #define MOF_THROW_CAPTURE_TICK 8u
 #define MOF_THROW_REACH_END_TICK 10u
 #define MOF_THROW_BRACE_TICK 17u
@@ -117,6 +128,9 @@ typedef struct {
 #if defined(MOF_DUEL_SCENE_MIRROR)
     const MofFighterDef *def;
     uint8_t reaction, thrown, hit_duration;
+#if defined(MOF_ALIS_RIPOSTE)
+    uint8_t riposte_armed;
+#endif
 #endif
 } MofDuelFighter;
 

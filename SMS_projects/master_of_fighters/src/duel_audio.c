@@ -37,6 +37,20 @@ void mof_duel_audio_tick(const MofDuel *duel, uint8_t hayato_player,
 #endif
 
     /* Contact takes precedence over preparation. A miss emits only the swing. */
+#if defined(MOF_ALIS_RIPOSTE)
+    if (alis->contact == MOF_DUEL_PARRIED || hayato->contact == MOF_DUEL_PARRIED)
+        PSGSFXPlay((void *)mof_sfx_guard, SFX_CHANNELS2AND3);
+    else
+#endif
+#if defined(MOF_ALIS_CHAPTER)
+    if ((alis->contact==MOF_DUEL_LANDED && move==MOF_DUEL_SUPER) ||
+        (hayato->contact==MOF_DUEL_LANDED && hayato->standing_normal==MOF_DUEL_SUPER))
+        PSGSFXPlay((void *)mof_sfx_palma, SFX_CHANNELS2AND3);
+    else if ((alis->contact==MOF_DUEL_LANDED && move==MOF_DUEL_SPECIAL) ||
+             (hayato->contact==MOF_DUEL_LANDED && hayato->standing_normal==MOF_DUEL_SPECIAL))
+        PSGSFXPlay((void *)mof_sfx_special, SFX_CHANNELS2AND3);
+    else
+#endif
     if (alis->contact == MOF_DUEL_LANDED && material == MOF_INPUT_SHORT_ONE)
         PSGSFXPlay((void *)mof_sfx_shield_hit, SFX_CHANNELS2AND3);
     else if (alis->contact == MOF_DUEL_LANDED && material == MOF_INPUT_LONG_ONE)

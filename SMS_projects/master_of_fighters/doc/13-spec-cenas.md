@@ -1,5 +1,32 @@
 # 13-spec-cenas — master_of_fighters
 
+## Proposta alternativa · controle de passaportes do Espaçoporto de Palma
+
+A E2 adapta o estudo para o VDP. As duas naves, o guarda e a torre ocupam a mesma faixa móvel para que suas silhuetas permaneçam inteiras. Duas aves cruzam o céu em alturas distintas. O piso tem juntas diagonais próprias no primeiro plano. O enquadramento responde ao ponto médio das lutadoras. Nos dois extremos testados, o cenário deu deslocamento de 5 px nas naves e 11 px nas juntas, com o placar fixo. [Quadro de luta em História](../out/qa/alis_20261125/espacoporto_de_palma_e2/story/arena.png) · [Medida em Versus](../out/qa/alis_20261125/espacoporto_de_palma_e2/port-versus/observations.json)
+
+| Plano | Movimento na prévia |
+|---|---|
+| Horizonte | As colinas e o terminal se deslocam a ¼ do percurso da câmera. Duas aves atravessam o céu em alturas diferentes, alternando asa alta, horizontal e baixa. |
+| Pátio de embarque | A grade, as duas naves, o guarda e a torre percorrem ½ do deslocamento. A torre emite dois pulsos curtos. O leitor acende num ritmo próprio. |
+| Pista de luta | As marcas pintadas acompanham a câmera em escala integral. A Alis rosa e a verde usam poses da C5r na escala original para conferir a leitura contra o fundo. |
+
+A composição usa 256 × 192 pixels. O GIF amplia cada pixel a 2× e percorre a pista em um ciclo de 10,24 segundos. O estudo deixa em aberto a implementação da paralaxe e das animações no VDP e sua medição com os dois lutadores em ação. [Pista limpa](../out/diagnostics/alis_espacoporto_proposta/pista_256x192.png) · [Duelo no tamanho nativo](../out/diagnostics/alis_espacoporto_proposta/duelo_256x192.png) · [Fontes e conversão](../data/source_art/scenes/alis_espacoporto/lineage.json)
+
+## Capítulo 01 · rua das três lojas de Camineet
+
+| Elemento | Desenho e teste a 256×192 |
+|---|---|
+| Título e menu | Título em duas linhas, retrato decidido, comando 1. Menu separado com três entradas. Uma borda vertical percorre exatamente uma opção. Em Opções, testar som e meta de uma ou duas vitórias, sair com 2. |
+| Diálogo | A fala de Myau abre à direita. Alis responde em expressão preocupada e assume o rosto firme diante do eco. Testar 1 por fala, 2 para pular e terminais novos depois de vitória e derrota. |
+| Rua | Três quiosques alinhados, cúpulas azul e âmbar, portinhola circular à direita. A jarra ao lado da casa azul alude ao pote de Lacônia entregue por Nekise. A luz da grade pulsa como um sinal de passagem, homenagem à saída do mapa. O centro fica livre para espada e escudo. |
+| Rounds | ROUND, FIGHT! e K.O. aparecem acima do par. Nomes, energia, tempo e medidor mantêm áreas próprias. A cada ataque, confrontar antecipação, quadro de contato com a arma e primeiro tick jogável. Espelhar os comandos. |
+| Áudio | Melodia em tom 0 e baixo em tom 1. Metal/ruído ocupam 2/3. Ouvir a transição apresentação → duelo → vitória e cada acerto contra o swing no vazio. Capturar diretamente da sessão. |
+
+As três lojas centrais, as casas abobadadas e a saída gradeada vêm do mapa de Camineet em Palma. A direção de arte pedida pelo dono em 25/11 usa como referência de desenho as cápsulas Hoi-Poi de Dragon Ball, de Akira Toriyama. A casa turquesa ganha uma escotilha lateral e junta rebitada. As três lojas têm coberturas curvas vermelhas, marquises e vitrines recuadas. O disco à direita representa a saída da cidade. A jarra perto da casa lembra o presente de Nekise.
+
+A referência para a economia de movimento é o uso de elementos localizados nos palcos de Mai e Terry em Fatal Fury no Game Boy. Em Camineet muda uma entrada da name table com a luz. A área ocupada por pixels de armas em P0 preserva os padrões de fundo usados na pré-composição. Medir transferências na janela que combina as duas lutadoras, armas, luz e HUD. Os limites funcionais continuam em 60 FPS de alvo e 58 em cada janela, com revisão do pior frame e teste de reconhecimento com o nome oculto. [Camineet no original](https://www.smspower.org/Maps/PhantasyStar-SMS?gallerypage=Palma+-+Camineet) · [Casa de Nekise e pote](https://pscave.com/ps1/towns/camineet.shtml)
+
+
 > **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
 > Os sprites e animações atuais do Dr. Social não devem ser continuados,
 > retocados, convertidos, integrados ou promovidos. Retomada futura: novo desenho

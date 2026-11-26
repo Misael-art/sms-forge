@@ -33,13 +33,15 @@ while [ "$ROOT" != "/" ] && [ ! -d "$ROOT/tools/sms_wrapper" ]; do
 done
 [ -d "$ROOT/tools/sms_wrapper" ] || { echo "[FAIL] raiz do SMSForge nao encontrada acima de $DIR"; exit 2; }
 EMU_JSON="$ROOT/tools/emuladores/emulators.json"
-EMU=$(python3 - "$EMU_JSON" <<'EOF'
+EMU=$(python3 - "$EMU_JSON" "$ROOT" <<'EOF'
 import json,sys,shutil
+from pathlib import Path
 try:
     p=json.load(open(sys.argv[1])).get("default_emulator")
 except Exception:
     p=None
-print(p or shutil.which("openmsx") or shutil.which("emulicious") or "")
+bundled = "tools/emuladores/emulicious/Emulicious.jar"
+print(p or (bundled if (Path(sys.argv[2]) / bundled).is_file() else shutil.which("emulicious")) or "")
 EOF
 )
 [ -n "$EMU" ] || { echo "[FAIL_AMBIENTE] nenhum emulador configurado (tools/emuladores/)"; exit 2; }

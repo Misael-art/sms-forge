@@ -1,3 +1,7 @@
+#if defined(MOF_ALIS_CHAPTER) && defined(__SDCC)
+#pragma codeseg SMSBANK_RULES
+#pragma constseg SMSBANK_RULES
+#endif
 #include "../inc/duel_rules.h"
 
 #if defined(MOF_DUEL_PILOT) || defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
@@ -426,6 +430,9 @@ static void consume_input(MofDuel *duel, uint8_t player, uint8_t keys, uint8_t n
         if (normal < MOF_DUEL_NORMALS_PER_FIGHTER) {
             fighter->guarding = 0u;
             fighter->standing_normal = normal;
+#if defined(MOF_ALIS_RIPOSTE)
+            fighter->riposte_armed = 0u;
+#endif
             fighter->spent = 0u;
             enter(duel, fighter, MOF_DUEL_ATTACK);
         }
@@ -543,6 +550,13 @@ static uint8_t contact(const MofDuel *duel, uint8_t attacker)
     if (active->left < hurt->right && active->right > hurt->left &&
         active->top < hurt->bottom && active->bottom > hurt->top) {
 #if defined(MOF_DUEL_SCENE_POSTURES)
+#if defined(MOF_ALIS_RIPOSTE)
+        if (target->state == MOF_DUEL_ATTACK && target->standing_normal == MOF_DUEL_RIPOSTE &&
+            MOVE(duel, source, source->standing_normal)->height == MOF_HEIGHT_MIDDLE) {
+            uint8_t age = (uint8_t)(duel->tick - target->state_since);
+            if (age >= 2u && age < 8u) return MOF_DUEL_PARRIED;
+        }
+#endif
 #if defined(MOF_DUEL_SCENE_MIRROR)
         return mof_duel_guard_blocks(target->guarding,
                    MOVE(duel, source, source->standing_normal)->height,
@@ -668,7 +682,11 @@ static void advance_throw(MofDuel *duel, uint8_t owner)
     reach = (target->x - source->x) * direction;
     if (age == MOF_THROW_CAPTURE_TICK) {
         if (reach < duel->minimum_gap || reach > source->def->throw_reach ||
-            (target->state != MOF_DUEL_READY && target->state != MOF_DUEL_BLOCK) ||
+            (target->state != MOF_DUEL_READY && target->state != MOF_DUEL_BLOCK
+#if defined(MOF_ALIS_RIPOSTE)
+             && !(target->state == MOF_DUEL_ATTACK && target->standing_normal == MOF_DUEL_RIPOSTE)
+#endif
+             ) ||
             motion->motion.mode == MOF_MOTION_AIR || motion->jump_pending) {
             source->contact = MOF_DUEL_MISSED;
             return;
@@ -704,6 +722,12 @@ static void apply_contact(MofDuel *duel, uint8_t attacker, uint8_t result)
     source->contact = result;
     source->spent = 1u;
     if (result == MOF_DUEL_MISSED) return;
+#if defined(MOF_ALIS_RIPOSTE)
+    if (result == MOF_DUEL_PARRIED) {
+        target->riposte_armed = 1u;
+        return;
+    }
+#endif
 #if defined(MOF_DUEL_SCENE_MIRROR)
     if (result == MOF_DUEL_GUARDED) {
         target->reaction = MOF_REACT_GUARD_STAND + target->guarding - 1u;
@@ -902,6 +926,9 @@ static void step_duel(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
             while (age >= normal->pose_ends[phase]) ++phase;
             duel->tested_pose[player] = phase + 1u;
             if (fighter->standing_normal != MOF_DUEL_THROW && !fighter->spent &&
+#if defined(MOF_ALIS_RIPOSTE)
+                (fighter->standing_normal != MOF_DUEL_RIPOSTE || fighter->riposte_armed) &&
+#endif
                 (fighter->standing_normal < MOF_DUEL_AIR_NORMALS ||
                  fighter->standing_normal >= MOF_DUEL_SPECIAL ||
                  duel->body[player].motion.mode == MOF_MOTION_AIR) &&

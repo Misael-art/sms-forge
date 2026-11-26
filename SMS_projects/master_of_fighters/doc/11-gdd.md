@@ -1,5 +1,22 @@
 # 11-gdd — master_of_fighters
 
+## Duas locações candidatas para o capítulo de Alis · 25/11/2026
+
+As duas locações podem ser jogadas em cartuchos candidatos separados. O arquivo [Espacoporto_de_Palma.sms](../out/candidates/espacoporto_de_palma_e2/Espacoporto_de_Palma.sms) usa a pista de embarque na História e no Versus. A C5r usa a rua de Camineet.
+
+A rua das três lojas de Camineet permanece candidata e é a arena da ROM C5r. A segunda proposta leva o duelo ao **Espaçoporto de Palma**, onde o guarda pede o passaporte para a viagem a Paseo. A nave de proa erguida à esquerda, o guarda de armadura branca e a nave baixa diante da torre à direita permitem reconhecer a cena enviada pelo proprietário. As duas Alis se enfrentam no primeiro plano da pista. Duas aves cruzam o céu em tempos diferentes, enquanto o sinal da torre e o leitor do guarda dão movimento ao pátio. O duelo e as aves são criações para o capítulo de fã. A escolha da arena continua aberta. [Diálogos de Phantasy Star](https://www.pscave.com/pspages/psi/psitalk.html) · [Proposta animada](../out/diagnostics/alis_espacoporto_proposta/pista_em_movimento.gif)
+
+## Alis em Camineet · direção de 25/11/2026
+
+Cada lutador leva o jogador a um lugar identificável do seu jogo de origem. O teste artístico consiste em esconder o nome da arena e pedir que quem jogou o original identifique o lugar e aponte os indícios. Para Alis escolhemos a rua das três lojas de Camineet, em Palma. A fileira de quiosques de cobertura vermelha entre moradias em cúpula, a calçada clara e a saída redonda com grades azuis compõem a assinatura do lugar. O palco vira uma elevação lateral. O encontro com a outra Alis pertence à história do fã. [Mapa do jogo de Master System](https://www.smspower.org/Maps/PhantasyStar-SMS?gallerypage=Palma+-+Camineet)
+
+As três lojas centrais, as casas abobadadas e a saída gradeada vêm do mapa de Camineet em Palma. A direção de arte pedida pelo dono em 25/11 usa como referência de desenho as cápsulas Hoi-Poi de Dragon Ball, de Akira Toriyama. A casa turquesa ganha uma escotilha lateral e junta rebitada. As três lojas têm coberturas curvas vermelhas, marquises e vitrines recuadas. O disco à direita representa a saída da cidade. A jarra perto da casa lembra o presente de Nekise.
+
+O título tem desenho próprio, com o corte oblíquo de F e R, o I estreito e o remate aberto de G. A família de texto ganha terminais mais largos para 5×7 e reserva duas linhas acima e abaixo para os acentos. ROUND prepara, FIGHT! entra inclinado em ouro, K.O. trava em letras verticais, VITÓRIA acompanha a reverência. Revisar os quatro anúncios no quadro do jogo a 256×192. Street Fighter Zero e os duelos da SNK orientam antecipação, enquadramento, impacto e retomada do controle. Sonic 2, Aladdin, O Rei Leão e Jurassic Park no Master orientam a exigência de leitura, som e resposta.
+
+No começo, Myau percebe algo perto da casa de Nekise. Alis se abaixa para escutar e se coloca entre o amigo e a aparição. A ociosidade prolongada retoma essa escuta, interrompida pelo primeiro comando. A reverência da vencedora responde à ameaça com alívio. A música parte de **Title**, faixa 1 de Tokuhiko Uwabo na versão PSG. A introdução trabalha a descida pontuada, a resposta e os intervalos longos acima do baixo. O duelo acelera as articulações e a vitória sustenta a tônica. [Gravação PSG e ordem das faixas](https://www.smspower.org/Music/PhantasyStar-SMS-PSG-Playlist)
+
+
 ## Cena 02 · Alis contra Alis
 
 O dono autorizou o duelo local de Alis contra Alis com trajes próprios

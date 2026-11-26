@@ -4,7 +4,11 @@
 #define MIRROR_SLOT_COUNT 4u
 #define MIRROR_BG_BASE 288u
 #define MIRROR_UPLOAD_BUDGET 8u
+#if defined(MOF_ALIS_CHAPTER)
+#define MIRROR_PRELOAD_BUDGET 10u
+#else
 #define MIRROR_PRELOAD_BUDGET 14u
+#endif
 
 typedef struct {
     uint8_t frame, x;
