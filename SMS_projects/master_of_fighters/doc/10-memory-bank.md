@@ -1,5 +1,15 @@
 # 10-memory-bank — master_of_fighters
 
+## Impacto por força na base E2 · candidata h1 · 26/11/2026
+
+A candidata [h1](../out/candidates/espacoporto_de_palma_impacto_h1/rom/master_of_fighters.sms), 1 MiB, SHA-256 `25b8625937efc686c8473c2aa9e67baa05df92758d872e9b0e816cffc1ee390c`, compila a E2 com o congelamento de impacto e a reação por força pedidos pelo dono em 25/11. Toque curto é leve: congela 4 passos e tira o controle por 10 ticks. Normal mantido, especial, Super, contragolpe e Puxada são fortes: congelam 11 passos, tiram o controle por 20 ticks e fazem a defensora tremer 1 px. A defesa recebe o congelamento da força, sem tremor, e mantém 3 ticks de bloqueio. O contrato está no [TDD](15-tdd.md) e no teste `tools/test_duel_impact.c`.
+
+No Emulicious privado, o caso `impact` mediu leve 4/10, forte 11/20 com pivô alternando 147/145 e forte defendido 11/3. O contato apareceu uma vez e cada medidor subiu no máximo uma unidade por troca. Durante o congelamento, a ROM publica um quadro por VBlank: 11 passos levam ~183 ms. O forte tem filmagem do framebuffer. O corredor de sondas passou com 116 bytes de folga. Os sete testes de host passaram. [Impacto](../out/qa/alis_20261125/espacoporto_de_palma_impacto_h1/impact_r5/observations.json) · [Filmagem do forte](../out/qa/alis_20261125/espacoporto_de_palma_impacto_h1/impact_r4/forte_acerto.mp4)
+
+**Desempenho reprovado.** A guarda contra a CPU mediu 37,61236470083433 / 40,03174650307009 / 38,54246999138509 FPS. A carga mista, 37,45 / 40,95 / 39,95 FPS. A janela selada de 3.000 publicações registrou 8 términos em área ativa, com VCount mínimo 0. O primeiro começou em VCount 196 com 7 tiles e SAT. A alta sobre a E2 não indica motor mais rápido: congelamentos baratos entram na média e a reação mais longa muda a carga dos mesmos roteiros. A captura final do `worst` caiu numa tela apagada depois de gravar a janela. [FPS na CPU](../out/evidence/sessions/4a39ed78c4b34cb2b8b93a5d5b0231a4/runtime/fps.json) · [Carga mista e pior quadro](../out/qa/alis_20261125/espacoporto_de_palma_impacto_h1/worst_r2/observations.json)
+
+Próximo: o dono deve experimentar o impacto no controle físico e ajustar 4/10 e 11/20. Seguem pendentes em GD02 o empurrão com atrito, o chip, a trava de defesa por força e a cadência alvo60/piso58. Depois deste lote vem o plano da camada de elenco.
+
 ## Cena 02 · produção de Alis × Alis
 
 O espelho implementa dois controles com traje rosa e verde, doze

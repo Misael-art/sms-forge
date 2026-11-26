@@ -255,6 +255,11 @@ static void mirror_frames_for(uint8_t player, MirrorView *view, uint8_t *next, u
     view->frame = pose * 2u + face;
     *next = following == MIRROR_EMPTY ? following : following * 2u + face;
     *later = future == MIRROR_EMPTY ? future : future * 2u + face;
+    /* A heavy contact shakes the defender by one pixel while the round is
+       frozen. Spilled poses keep X so the shake never rebuilds the PNT. */
+    if (duel.hitstop && duel.hitstop_target == (player | MOF_DUEL_HITSTOP_SHAKE) &&
+        !mirror_frames[view->frame].spill)
+        view->x += duel.hitstop & 1u ? 1u : (uint8_t)-1;
 }
 
 static void mirror_walk(uint8_t player, int16_t previous)
@@ -419,8 +424,13 @@ void main(void)
              (p2 & MOF_DUEL_ONE && !(duel.fighters[1].keys & MOF_DUEL_ONE)))) {
             mirror_reset();
         }
-        n1 = mirror_read(0u, p1);
-        n2 = mirror_read(1u, p2);
+        /* Commands wait out the impact freeze. Their edges and hold ages
+           resume from the last step, so a press made during it is kept. */
+        n1 = n2 = MOF_DUEL_NO_NORMAL;
+        if (!duel.hitstop) {
+            n1 = mirror_read(0u, p1);
+            n2 = mirror_read(1u, p2);
+        }
 #if defined(MOF_DUEL_MIRROR_FOUNDATION)
         if (n1 >= MOF_DUEL_LOW_NORMALS && n1 != MOF_DUEL_SPECIAL) n1 = MOF_DUEL_NO_NORMAL;
         if (n2 >= MOF_DUEL_LOW_NORMALS && n2 != MOF_DUEL_SPECIAL) n2 = MOF_DUEL_NO_NORMAL;

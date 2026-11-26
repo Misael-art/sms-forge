@@ -52,8 +52,28 @@ usam sprites em toda a silhueta para acompanhar X sem reconstruir
 o fundo a cada passo. O quadro do escudo pode preparar suas células
 P0 enquanto a atacante permanece plantada.
 
-O chute aéreo forte aplica 12 ticks de reação e deslocamento de até
-7 px. O leve usa oito ticks e até 4 px. A rasteira mantém a queda.
+O chute aéreo forte desloca até 7 px e os demais acertos até 4 px.
+A rasteira mantém a queda.
+
+**Impacto por força (Cena 02 em espelho e capítulo).** `duel_rules.c`
+classifica o contato pelo normal da atacante. Toque curto é leve. Normal
+mantido, especial, Super, contragolpe e Puxada com Escudo são fortes. O
+leve congela os dois lutadores por 4 passos e aplica 10 ticks de reação.
+O forte congela por 11 passos e aplica 20 ticks. A defesa recebe o mesmo
+congelamento da força e conserva 3 ticks de bloqueio. Durante o
+congelamento, o relógio, as posições, os estados e as teclas consumidas
+ficam parados. O resultado de contato vale somente no passo do impacto,
+de modo que som e medidor não se repetem. O laço do round não lê comandos
+enquanto `duel.hitstop` for diferente de zero. A pressão feita no
+congelamento é tratada como borda nova no primeiro passo livre. Num
+acerto forte, a defensora treme 1 px por publicação, exceto em pose com
+derrame no plano de fundo, para não reconstruir a PNT. As constantes
+`MOF_DUEL_{LIGHT,HEAVY}_{HITSTOP,HITSTUN}` em `duel_rules.h` são a fonte
+dos números. `tools/test_duel_impact.c` cobre o contrato no host e o caso
+`impact` de `replay_alis_chapter.py` o mede na ROM. A rodada só conta
+passos: com a cadência abaixo de 58 FPS, a duração em segundos ainda não
+corresponde ao alvo. Empurrão com atrito, chip e trava de defesa por
+força continuam pendentes em GD02.
 `audit_alis_shove_art.py` mede a escala contra a guarda neutra e
 confere índigo no peitoral e ciano da lâmina fora dessa região nas
 duas faces e nos dois trajes. O roteiro `shield_shove` lê a reação e

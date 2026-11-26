@@ -135,7 +135,20 @@ typedef struct {
 #if defined(MOF_DUEL_SCENE_POSTURES)
     MofAlisMotion alis[2];
 #endif
+#if defined(MOF_DUEL_SCENE_MIRROR)
+    /* Impact freeze: steps left with both fighters held, and the defender
+       of the strongest contact (bit 7 marks a heavy contact that shakes). */
+    uint8_t hitstop, hitstop_target;
+#endif
 } MofDuel;
+
+#if defined(MOF_DUEL_SCENE_MIRROR)
+#define MOF_DUEL_LIGHT_HITSTOP 4u
+#define MOF_DUEL_LIGHT_HITSTUN 10u
+#define MOF_DUEL_HEAVY_HITSTOP 11u
+#define MOF_DUEL_HEAVY_HITSTUN 20u
+#define MOF_DUEL_HITSTOP_SHAKE 0x80u
+#endif
 
 uint8_t mof_duel_init_pair(MofDuel *duel, const MofDuelGeometry geometry[2],
                            uint8_t hold_ticks, uint8_t p1_fighter, uint8_t p2_fighter,

@@ -6,9 +6,6 @@
 #define DUEL_BLOCK_TICKS 3u
 #define DUEL_HIT_TICKS 8u
 #define DUEL_GROUND_Y 144
-#if defined(MOF_DUEL_SCENE_MIRROR)
-#define DUEL_HEAVY_AIR_KICK_TICKS 12u
-#endif
 
 #if defined(MOF_DUEL_SCENE_POSTURES)
 #include "../inc/duel_commands.h"
@@ -253,6 +250,9 @@ uint8_t mof_duel_init_pair(MofDuel *duel, const MofDuelGeometry geometry[2],
         duel->tested_hurt_x[player] = INT16_MIN;
 #endif
     }
+#if defined(MOF_DUEL_SCENE_MIRROR)
+    duel->hitstop = duel->hitstop_target = 0u;
+#endif
     face_opponent(duel);
 #if defined(MOF_DUEL_SCENE_POSTURES)
     for (player = 0u; player < 2u; ++player) {
@@ -587,6 +587,21 @@ static void move_alis_across(MofDuel *duel, uint8_t player)
 #endif
 
 #if defined(MOF_DUEL_SCENE_MIRROR)
+/* Short presses are light. Holds, specials, the Super, the riposte and the
+   throw are heavy. The strongest contact of a step owns the freeze. */
+static uint8_t heavy_impact(uint8_t normal)
+{
+    return normal >= MOF_DUEL_SPECIAL || (normal & 1u);
+}
+
+static void freeze_impact(MofDuel *duel, uint8_t victim, uint8_t heavy, uint8_t shake)
+{
+    uint8_t stop = heavy ? MOF_DUEL_HEAVY_HITSTOP : MOF_DUEL_LIGHT_HITSTOP;
+    if (stop < duel->hitstop) return;
+    duel->hitstop = stop;
+    duel->hitstop_target = victim | (heavy && shake ? MOF_DUEL_HITSTOP_SHAKE : 0u);
+}
+
 static void begin_fall(MofDuel *duel, uint8_t player)
 {
     MofAlisMotion *state = &duel->alis[player];
@@ -643,6 +658,7 @@ static void advance_throw(MofDuel *duel, uint8_t owner)
     source->contact = MOF_DUEL_LANDED;
     target->thrown = 1u;
     enter(duel, target, MOF_DUEL_HIT);
+    freeze_impact(duel, other, 1u, 1u);
 }
 #endif
 
@@ -668,7 +684,10 @@ static void apply_contact(MofDuel *duel, uint8_t attacker, uint8_t result)
             ? MOF_REACT_HEAD : MOF_REACT_BODY;
     }
     target->thrown = 0u;
-    target->hit_duration = DUEL_HIT_TICKS;
+    target->hit_duration = heavy_impact(source->standing_normal) ?
+        MOF_DUEL_HEAVY_HITSTUN : MOF_DUEL_LIGHT_HITSTUN;
+    freeze_impact(duel, 1u - attacker, heavy_impact(source->standing_normal),
+                  result == MOF_DUEL_LANDED);
 #endif
     target->held = target->guarding = 0u;
     if (result == MOF_DUEL_LANDED) {
@@ -688,10 +707,7 @@ static void apply_contact(MofDuel *duel, uint8_t attacker, uint8_t result)
         enter(duel, target, target->life ? MOF_DUEL_HIT : MOF_DUEL_KO);
         push = 4;
 #if defined(MOF_DUEL_SCENE_MIRROR)
-        if (source->standing_normal == MOF_DUEL_AIR_NORMALS + MOF_INPUT_LONG_TWO) {
-            target->hit_duration = DUEL_HEAVY_AIR_KICK_TICKS;
-            push = 7;
-        }
+        if (source->standing_normal == MOF_DUEL_AIR_NORMALS + MOF_INPUT_LONG_TWO) push = 7;
 #endif
     } else {
         enter(duel, target, MOF_DUEL_BLOCK);
@@ -773,6 +789,15 @@ static void step_duel(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
 {
     uint8_t player, p1_contact, p2_contact;
     int16_t p1_x, p2_x, gap;
+#if defined(MOF_DUEL_SCENE_MIRROR)
+    if (duel->hitstop) {
+        /* Hold the clock, poses, positions and buffered keys. A contact
+           result belongs to its own step and cannot repeat its events. */
+        --duel->hitstop;
+        duel->fighters[0].contact = duel->fighters[1].contact = MOF_DUEL_NO_CONTACT;
+        return;
+    }
+#endif
     ++duel->tick;
     face_opponent(duel);
     if (duel->fighters[0].state != MOF_DUEL_READY) expire_state(duel, 0u);

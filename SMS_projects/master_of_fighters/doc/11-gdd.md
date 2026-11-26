@@ -589,7 +589,11 @@ O dono adicionou J.J. à escalação em 2026-10-04 e especificou **Zillion II pa
   contrato de balanceamento, revisado por medição, não por sensação.
 - **hitstop**: congelamento curto em frames na confirmação de hit (parâmetro
   por tipo de golpe na tabela; valor inicial a medir no lote de pilotagem —
-  nada é fechado sem medir o degrau seguinte).
+  nada é fechado sem medir o degrau seguinte). Pedido do dono em 25/11/2026
+  para Alis × Alis: leve com 3–5 quadros de congelamento e ~10 sem controle;
+  forte com 10–14 de congelamento, ~20 sem controle e tremor da defensora.
+  A candidata usa 4/10 e 11/20 ([TDD](15-tdd.md)); o aceite depende do teste
+  em controle físico e da cadência alvo60/piso58.
 - **specials**: meta histórica de 2 especiais por personagem, sujeitos a aceite
   individual. Shinobi tem exceção explícita de três magias na direção de 01/11.
   Rapieira/bumerangue de Social seguem seu contrato; capacidades de Hayato e
