@@ -10,12 +10,12 @@ esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 
 ## Jogar os especiais de Alis e os Guardiões de Algol
 
-Abra diretamente [Alis — Guardiões de Algol, candidata G4](out/candidates/alis_guardioes_g4/Alis_Guardioes_de_Algol.sms) no **Emulicious (SMSForge)**. A ROM reúne os especiais na História e no Versus do Espaçoporto de Palma. Na opção **Vitórias por duelo → Uma**, o primeiro round já decide o confronto. Um teste rápido do arquivo é pressionar duas vezes para baixo, apertar **1** no segundo toque e soltar. Alis lança Fire.
+Abra diretamente [Alis — Guardiões de Algol, candidata G5](out/candidates/alis_guardioes_g5/Alis_Guardioes_de_Algol.sms) no **Emulicious (SMSForge)**. A ROM reúne os especiais na História e no Versus do Espaçoporto de Palma. Na opção **Vitórias por duelo → Uma**, o primeiro round já decide o confronto. Um teste rápido do arquivo é pressionar duas vezes para baixo, apertar **1** no segundo toque e soltar. Alis lança Fire.
 
 No teclado, P1 usa as setas, **A** para o botão 1 e **S** para o botão 2. Para iniciar a candidata a partir da raiz do SMSForge, use o caminho explícito.
 
 ```sh
-SMS_projects/master_of_fighters/run.sh SMS_projects/master_of_fighters/out/candidates/alis_guardioes_g4/Alis_Guardioes_de_Algol.sms
+SMS_projects/master_of_fighters/run.sh SMS_projects/master_of_fighters/out/candidates/alis_guardioes_g5/Alis_Guardioes_de_Algol.sms
 ```
 
 [Comandos e custos](doc/padrao_moveset_especiais.md) · [Curadoria das peças e verificações](doc/curadoria_guardioes_de_algol.md).

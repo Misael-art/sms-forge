@@ -4,7 +4,7 @@
 
 A G5 integra os gestos de Alis às fichas com comandos físicos, aparo e material de som. O motor recebe também os contatos dos projéteis. Os dois Fire fortes acertaram no mesmo passo lógico no Versus. Cada lutadora terminou com 90 PV e duas unidades de Reiki. O contador do cartucho mediu 11 publicações congeladas. História, finalização dos dois lados, revanche e filme com PSG passaram pela ROM de SHA-256 `c202314a04a192936206453359150d416c9f85f80be707851da1906d05e1ca96`. [ROM G5](../out/candidates/alis_guardioes_g5/Alis_Guardioes_de_Algol.sms) · [Troca de golpes](../out/qa/alis_guardioes_g5/trade/intervalo_de_impacto.json) · [Odin e os Guardiões no emulador](../out/qa/alis_guardioes_g5/sound/guardioes_com_som.mp4)
 
-O impacto físico conservou 4/10 passos no leve, 11/20 no forte e 11/3 na defesa. A carga mista mediu 39,9485, 39,9485 e 37,9511 FPS. A fila do VDP terminou na área ativa 27 vezes em 3.000 apresentações mistas e 74 vezes no ensaio de magias. O aceite permanece reprovado. O corredor de sondas conserva 103 bytes de folga. [Impactos](../out/qa/alis_guardioes_g5/impact/observations.json) · [Cinemática e fontes de Odin](curadoria_guardioes_de_algol.md)
+O impacto físico conservou 4/10 passos no leve, 11/20 no forte e 11/3 na defesa. A carga mista mediu 39,9485, 39,9485 e 37,9511 FPS. A fila do VDP terminou na área ativa 27 vezes em 3.000 apresentações mistas e 74 vezes no ensaio de magias. O aceite permanece reprovado. O corredor de sondas conserva 103 bytes de folga. [Impactos](../out/qa/alis_guardioes_g5/impact/observations.json) · [Recibo das dez sessões G5](decisions/2026-11-26_harmonizacao_g5.json) · [Cinemática e fontes de Odin](curadoria_guardioes_de_algol.md)
 
 ## 26/11/2026 · Especiais de Alis e F. Anime modular · G4
 
