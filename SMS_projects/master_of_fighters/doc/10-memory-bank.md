@@ -1,5 +1,11 @@
 # 10-memory-bank — master_of_fighters
 
+## 26/11/2026 · Cadência dos especiais de Alis · G6 em teste
+
+A G6d foi medida no Emulicious NTSC com a ROM de SHA-256 `643d67f72d295dc2eba234a7dd025fa136d9ef4b837c0076cd7fb7c009e1a61c`. O contador de apresentação selou duas cargas de 3.000 quadros, uma mista e outra de magias. As duas terminaram com zero estouros de VBlank. A guarda na História ficou entre 44,828340 e 46,509209 FPS. No Versus, as três janelas mistas ficaram entre 46,440126 e 51,433688 FPS e a pior janela de especiais mediu 35,454290 FPS. A G6d continua abaixo do piso de 58. O recibo conserva cada janela sem arredondamento, os SHAs das ROMs e as sessões das revisões G6 a G6d. [Recibo de cadência](decisions/2026-11-26_cadencia_g6.json)
+
+Na G6 inicial, a CPU recebeu testes de Fire curto e forte, chamas duplas, Myau, Rest, onda, sabre, Chat e espelho pelos comandos do jogador. No Versus houve reflexão, troca simultânea e finalização pelos dois lados. A tontura e o fim cinematográfico contra a CPU ainda exigem confirmação por controle na mesma candidata submetida ao aceite. [Ensaios da G6 no emulador](../out/qa/alis_guardioes_g6)
+
 ## 26/11/2026 · Elenco, impacto comum e Odin · candidata G5
 
 A G5 integra os gestos de Alis às fichas com comandos físicos, aparo e material de som. O motor recebe também os contatos dos projéteis. Os dois Fire fortes acertaram no mesmo passo lógico no Versus. Cada lutadora terminou com 90 PV e duas unidades de Reiki. O contador do cartucho mediu 11 publicações congeladas. História, finalização dos dois lados, revanche e filme com PSG passaram pela ROM de SHA-256 `c202314a04a192936206453359150d416c9f85f80be707851da1906d05e1ca96`. [ROM G5](../out/candidates/alis_guardioes_g5/Alis_Guardioes_de_Algol.sms) · [Troca de golpes](../out/qa/alis_guardioes_g5/trade/intervalo_de_impacto.json) · [Odin e os Guardiões no emulador](../out/qa/alis_guardioes_g5/sound/guardioes_com_som.mp4)

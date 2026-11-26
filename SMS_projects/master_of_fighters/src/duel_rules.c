@@ -7,7 +7,6 @@
 #if defined(MOF_DUEL_PILOT) || defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
 
 #define DUEL_VITALITY 100u
-#define DUEL_BLOCK_TICKS 3u
 #define DUEL_HIT_TICKS 8u
 #define DUEL_GROUND_Y 144
 
@@ -328,7 +327,7 @@ static uint8_t expired(const MofDuel *duel, const MofDuelFighter *fighter, uint1
     (void)duel;
 #endif
     return (fighter->state == MOF_DUEL_ATTACK && age >= duration) ||
-        (fighter->state == MOF_DUEL_BLOCK && age >= DUEL_BLOCK_TICKS) ||
+        (fighter->state == MOF_DUEL_BLOCK && age >= MOF_DUEL_BLOCK_TICKS) ||
         (fighter->state == MOF_DUEL_HIT && age >=
 #if defined(MOF_DUEL_SCENE_MIRROR)
          fighter->hit_duration
@@ -648,6 +647,12 @@ static void freeze_impact(MofDuel *duel, uint8_t victim, uint8_t heavy, uint8_t 
     uint8_t stop = heavy ? MOF_DUEL_HEAVY_HITSTOP : MOF_DUEL_LIGHT_HITSTOP;
     if (stop < duel->hitstop || (stop==duel->hitstop && !shake &&
         (duel->hitstop_target & MOF_DUEL_HITSTOP_SHAKE))) return;
+    if (stop==duel->hitstop && heavy && shake &&
+        (duel->hitstop_target & MOF_DUEL_HITSTOP_SHAKE) &&
+        ((duel->hitstop_target ^ victim) & 1u)) {
+        duel->hitstop_target=MOF_DUEL_HITSTOP_SHAKE|MOF_DUEL_HITSTOP_BOTH;
+        return;
+    }
     duel->hitstop = stop;
     duel->hitstop_target = victim | (heavy && shake ? MOF_DUEL_HITSTOP_SHAKE : 0u);
 }
@@ -674,7 +679,7 @@ static void begin_fall(MofDuel *duel, uint8_t player)
     enter(duel, &duel->fighters[player], MOF_DUEL_FALL);
 }
 
-#if defined(MOF_ALIS_MAGIC)
+#if defined(MOF_DUEL_SCENE_EFFECTS)
 /* A detached effect can trade after its owner was hit. The source's
    standing move and spent flag continue to belong to its physical action. */
 uint8_t mof_duel_effect_contact(MofDuel *duel,uint8_t attacker,uint8_t damage,uint8_t flags)
@@ -1093,8 +1098,17 @@ static uint8_t moves_valid(const MofDuelStandingNormal *moves, uint16_t owned)
    always required; crouch and air guard only for bodies that have them. */
 static uint8_t record_valid(const MofFighterDef *def)
 {
-#ifdef MOF_ALIS_MAGIC
-    if (def->gesture_count && !def->gestures) return 0u;
+#ifdef MOF_DUEL_SCENE_EFFECTS
+    uint8_t i,j;
+    if (def->gesture_count>3u*G_BACK_BACK || (def->gesture_count && !def->gestures)) return 0u;
+    for (i=0;i<def->gesture_count;++i) {
+        const MofCommand *cmd=&def->gestures[i];
+        if (!cmd->move || cmd->move==MOF_DUEL_NO_NORMAL ||
+            !cmd->needs || cmd->needs>G_BACK_BACK || cmd->needs==G_FBF ||
+            !cmd->keys || (cmd->keys & ~(MOF_DUEL_ONE|MOF_DUEL_TWO))) return 0u;
+        for (j=0;j<i;++j)
+            if (def->gestures[j].keys==cmd->keys && def->gestures[j].needs==cmd->needs) return 0u;
+    }
 #endif
     if (!def->moves || !def->owned || !moves_valid(def->moves, def->owned) ||
         !box_valid(&def->stand) || !box_valid(&def->folding) || !box_valid(&def->air) ||

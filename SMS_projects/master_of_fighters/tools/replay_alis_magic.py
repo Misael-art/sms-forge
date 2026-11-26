@@ -56,12 +56,15 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('build',type=Path);parser.add_argument('output',type=Path)
     parser.add_argument('--story',action='store_true')
+    parser.add_argument('--story-move',choices=NAMES[1:],help='Exercise one spell against the real campaign CPU')
     parser.add_argument('--p2-final',action='store_true')
     parser.add_argument('--trade',action='store_true',help='Read both sides of an equal-time projectile exchange')
     parser.add_argument('--range',action='store_true')
     parser.add_argument('--spell-budget',action='store_true')
     parser.add_argument('--sound',action='store_true',help='Capture the confirmed film and its private PSG output continuously')
-    args=parser.parse_args();build=args.build.resolve();out=args.output.resolve()
+    args=parser.parse_args()
+    if args.story_move: args.story=True
+    build=args.build.resolve();out=args.output.resolve()
     record=json.loads((build/'build_record.json').read_text())
     rom=PROJECT/record['rom_path'];assert isolated.sha(rom)==record['rom_sha256']
     symbols=(build/'obj/master_of_fighters.map').read_text()
@@ -114,6 +117,98 @@ def main():
         row=observe(NAMES[id]+'_'+str(len(log['steps'])))
         if row['casts'][p][id]==before:raise ValueError(f'command not consumed: {p}/{NAMES[id]}')
         return row
+    def tick(one=0,two=0):
+        # Stop just after the next complete fighter publication. Natural
+        # hitstop still consumes publications while its logical tick is held.
+        isolated.request(session,'input',one,two,0)
+        stamp=ram(0xc774,1)[0]
+        isolated.request(session,'sample-commit',0xc774,((stamp|1)+1)&255,8)
+
+    def campaign_finish(name):
+        # Both thresholds are earned against the campaign AI. Release the
+        # direction on each wake-up and sample the next committed input.
+        want_final=name=='guardioes'
+        last_pair=None
+        for turn in range(3300):
+            ch=ram(addr,16);m=event();d=state()
+            one,two=d['p1'],d['p2']
+            hp,foe=one['life'],two['life']
+            forward=F if one['facing_right'] else B
+            back=forward^F^B
+            gap=abs(one['pivot'][0]-two['pivot'][0])
+            if m[88+(11 if want_final else 10)]:
+                if want_final:
+                    for _ in range(90):
+                        if event()[83]==1:break
+                        tick()
+                    assert event()[83]==1 and life(1)==0
+                row=observe('historia_'+name,True)
+                if want_final:
+                    wait(450)
+                    observe('historia_final_confirmado',True)
+                else:assert row['dizzy'][1]
+                return
+            assert ch[0] and ch[5]==2 and hp,(name,turn,hp,foe)
+            if (hp,foe)!=last_pair:
+                observe('vida_'+str(turn))
+                last_pair=(hp,foe)
+            if one['state'] or m[0] or m[11]:
+                # A held retreat covers the first actionable frame after a
+                # knockdown; blocking low also protects against the CPU sweep.
+                tick(back|D if one['state'] and hp<=35 else back)
+                continue
+            if want_final and foe>=25:
+                if m[45] or two['pivot'][1]<104 or gap>82:
+                    tick(forward if gap>82 else back)
+                else:
+                    for pad in (D,0,D|ONE):tick(pad)
+                    # A strong Fire is selected after the real six-tick hold.
+                    for _ in range(7):tick(D|ONE)
+                continue
+            if hp>25:
+                # Standing close is sufficient to invite the next hit.
+                tick(forward)
+                continue
+            if ch[9]<8:
+                if m[15]:tick(back)
+                else:
+                    for pad in (back,0,back|TWO):tick(pad)
+                continue
+            if m[32] and want_final:
+                if not m[0]:
+                    for pad in (D,D|forward,forward,D,D|forward,forward|TWO):tick(pad)
+                continue
+            if two['state']==0 and two['pivot'][1]==144:
+                for pad in (forward,back,forward|ONE):tick(pad)
+            else:tick(back|D)
+        raise RuntimeError('Campaign command window timed out: '+name)
+
+    def story_move(name):
+        move=NAMES.index(name)
+        commands={1:('d-d',ONE,3),2:('d-d',ONE,16),3:('dxf',48,4),4:('dzb',TWO,4),
+                  5:('d-d',TWO,4),6:('dxf',ONE,4),7:('fdx',ONE,4),8:('b-b',TWO,4),
+                  9:('dzb',ONE,4),10:('fbf',ONE,4),11:('dxfdxf',TWO,4)}
+        if move in (10,11):return campaign_finish(name)
+        initial=event()[88+move]
+        for attempt in range(650):
+            ch=ram(addr,16);m=event();duel=state()
+            hp=duel['p1']['life'];enemy=duel['p2']['life']
+            assert ch[0] and ch[5]==2,(name,attempt,hp,enemy)
+            if m[88+move]!=initial:
+                row=observe('historia_'+name,True)
+                return row
+            if duel['p1']['state']!=0 or m[0] or m[11]:
+                wait(3)
+                continue
+            choice=move
+            if ch[9] < {3:4,4:4,5:2}.get(move,0):
+                choice=8 if not m[15] else 2
+            if choice==5 and hp==100:
+                wait(4)
+                continue
+            gesture(0,*commands[choice])
+            wait(6)
+        raise RuntimeError('Campaign CPU: no cast of '+name)
     def life(p):return state()['p'+str(p+1)]['life']
     try:
         wait(60);press(ONE);press(1);press(ONE);press(D);press(F);press(TWO)
@@ -126,6 +221,9 @@ def main():
             wait(8)
         ch=list(ram(addr,16));assert ch[5]==2 and ch[2]==1 and bool(ch[0])==args.story,ch
         observe('arena',True)
+        if args.story_move:
+            story_move(args.story_move)
+            return
         if args.story:
             spell(0,1,'d-d',ONE,3,32)
             observe('historia_fire',True);return
@@ -239,8 +337,21 @@ def main():
         spell(1,6,'dxf',ONE)
         spell(0,7,'fdx',ONE,4,98)
         # Put space between the actors for a timed projectile reflection.
-        ctl((B,F,27),(0,0,16))
-        gesture(0,'dxf',ONE);wait(12);gesture(1,'dzb',ONE);wait(84)
+        for _ in range(60):
+            pivots=state()
+            if pivots['p2']['pivot'][0]-pivots['p1']['pivot'][0]>=72:break
+            tick(B,F)
+        wait(10)
+        gesture(0,'dxf',ONE)
+        for _ in range(40):
+            m=event()
+            x=struct.unpack_from('<h',m,38)[0]
+            if m[45] and state()['p2']['pivot'][0]-x<=52:break
+            tick()
+        else:raise RuntimeError('The wave did not reach the reflection setup')
+        for pad in (D,D,D|F,D|F,F|ONE,F|ONE):
+            tick(0,pad)
+        wait(84)
         assert observe('reflexao')['reflections'][1]>0
         # Bring the closest edges back into range for the animal and exchanges.
         ctl((F,B,35),(0,0,24))

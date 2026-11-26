@@ -9,38 +9,46 @@
    data. The size assertion and the production map locate the whole buffer. */
 #ifdef MOF_DUEL_HOST_TEST
 MofMagic mof_magic;
+MofChapterPnt mof_chapter_pnt;
 #else
 static void magic_ram_address(void) __naked {
     __asm
     .globl _mof_magic
     _mof_magic = 0xc900
+    .globl _mof_chapter_pnt
+    _mof_chapter_pnt = 0xca40
     ret
     __endasm;
 }
 #endif
-typedef char MagicRamSize[sizeof(MofMagic)<=512 ? 1 : -1];
+typedef char MagicRamSize[sizeof(MofMagic)<=0x140 ? 1 : -1];
+
+typedef char PntRamSize[sizeof(MofChapterPnt)<=0xc0 ? 1 : -1];
 
 enum { D=1,F=2,B=3,DF=4,DB=5 };
-typedef struct {uint8_t cost,start,end,pose[3];} SpellTiming;
+typedef struct {uint8_t cost,start,end,pose[3],impact_flags;} SpellTiming;
 /* Poses are resolved against the same fighter packet manifest as the renderer. */
 static const SpellTiming timings[SPELL_COUNT]={
-    {0,0,0,{0,0,0}},
-    {0,6,17,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3}},
-    {0,9,23,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3}},
-    {4,12,32,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3}},
-    {4,10,32,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3}},
-    {2,21,32,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3}},
-    {0,7,22,{MOF_MIRROR_PREPARE, MOF_MIRROR_THRUST, MOF_MIRROR_RECOVER}},
-    {0,5,26,{MOF_MIRROR_LOW_1_1, MOF_MIRROR_AIR_1_2, MOF_MIRROR_AIR_1_3}},
-    {0,20,30,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3}},
-    {0,3,23,{MOF_MIRROR_RIPOSTE_1, MOF_MIRROR_RIPOSTE_2, MOF_MIRROR_RIPOSTE_4}},
-    {0,1,13,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3}},
-    {8,4,45,{MOF_MIRROR_PREPARE, MOF_MIRROR_THRUST, MOF_MIRROR_RECOVER}}
+    {0,0,0,{0,0,0},0},
+    {0,6,17,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3},0},
+    {0,9,23,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3},MOF_MOVE_HEAVY},
+    {4,12,32,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3},MOF_MOVE_HEAVY},
+    {4,10,32,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3},MOF_MOVE_HEAVY},
+    {2,21,32,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3},0},
+    {0,7,22,{MOF_MIRROR_PREPARE, MOF_MIRROR_THRUST, MOF_MIRROR_RECOVER},MOF_MOVE_HEAVY},
+    {0,5,26,{MOF_MIRROR_LOW_1_1, MOF_MIRROR_AIR_1_2, MOF_MIRROR_AIR_1_3},MOF_MOVE_HEAVY},
+    {0,20,30,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3},0},
+    {0,3,23,{MOF_MIRROR_RIPOSTE_1, MOF_MIRROR_RIPOSTE_2, MOF_MIRROR_RIPOSTE_4},0},
+    {0,1,13,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3},0},
+    {8,4,45,{MOF_MIRROR_PREPARE, MOF_MIRROR_THRUST, MOF_MIRROR_RECOVER},MOF_EFFECT_FINISH|MOF_MOVE_HEAVY}
 };
 static const int8_t arc[32]={0,3,5,8,10,12,13,14,14,13,12,10,8,5,3,0,
                              -2,-4,-6,-8,-10,-11,-12,-12,-11,-10,-8,-6,-5,-3,-2,-1};
 
-void mof_magic_reset(void) { memset(&mof_magic,0,sizeof(mof_magic)); }
+void mof_magic_reset(void) {
+    memset(&mof_magic,0,sizeof(mof_magic));
+    mof_chapter_pnt.count=0;
+}
 
 static uint8_t direction(uint8_t keys,uint8_t face) {
     uint8_t x=keys&12, y=keys&3;
@@ -76,7 +84,7 @@ static uint8_t command(const MofFighterDef *def,const uint8_t *h,uint8_t buttons
 }
 static uint8_t armed(const MofDuel *d,uint8_t p,uint8_t move) {
     MofCaster *c=&mof_magic.caster[p];
-    if ((!move || move>=SPELL_COUNT) || chapter.meter[p]<timings[move].cost) return 0;
+    if (!move || move>=SPELL_COUNT || chapter.meter[p]<timings[move].cost) return 0;
     if (move==REST) return d->fighters[p].life<100;
     if (move==CHAT) return !c->chat_wait && chapter.meter[p]<8;
     if (move==STUN) return !c->stun_used && d->fighters[p].life<=25 && chapter.meter[p]==8
@@ -96,7 +104,7 @@ static void begin(uint8_t p,uint8_t move) {
     if (move==STUN) c->stun_used=1;
     if (move==CHAT) c->chat_wait=100;
 }
-static void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
+static inline void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
     MofCaster *c=&mof_magic.caster[p];
     const MofDuelFighter *f=&d->fighters[p];
     uint8_t dir=direction(keys,f->face_right),buttons=keys&48,edge=buttons&~c->held_button;
@@ -132,11 +140,11 @@ static void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
         memmove(c->history,c->history+1,5);c->history[5]=dir;c->window=16;
     }
     c->previous=dir;
-    if (edge && dir && c->window) move=command(f->def,c->history,buttons);
+    if (edge && edge==buttons && dir && c->window) move=command(f->def,c->history,buttons);
     if ((move==GUARDIANS || move==STUN) && !armed(d,p,move)) {
         c->window=0;mof_magic.locked[p]=1;mof_magic.pad[p]=0;return;
     }
-    if (armed(d,p,move)) {
+    if (move && armed(d,p,move)) {
         mof_magic.locked[p]=1;mof_magic.pad[p]=0;
         if (move==FIRE_TAP) {c->pending=1;c->window=0;mof_magic.busy=1;}
         else begin(p,move);
@@ -150,7 +158,10 @@ void mof_magic_input(const MofDuel *d,uint8_t one,uint8_t two) {
         for (p=0;p<2;++p) {
             const MofCaster *c=&mof_magic.caster[p];
             if (c->move==STUN && !c->age) {
-                mof_magic.caster[1-p].dizzy=84;
+                MofCaster *victim=&mof_magic.caster[1-p];
+                victim->dizzy=84;
+                victim->pending=0;
+                if (victim->move!=STUN) victim->move=victim->pose=0;
                 mof_magic.pad[1-p]=0;
                 mof_magic.locked[1-p]=1;
             }
@@ -163,8 +174,9 @@ static void charge(uint8_t p) {if (chapter.meter[p]<8) ++chapter.meter[p];}
    spends both projectiles, with one impact on this defender this tick. */
 static void offer(uint8_t p,uint8_t damage,uint8_t move) {
     uint8_t prev=mof_magic.impact_move[p];
-    if (!prev || (prev==FIRE_TAP && move!=FIRE_TAP) ||
-        ((prev==FIRE_TAP)==(move==FIRE_TAP) && damage>mof_magic.impact_damage[p])) {
+    uint8_t force=timings[move].impact_flags;
+    if (!prev || force>timings[prev].impact_flags ||
+        (force==timings[prev].impact_flags && damage>mof_magic.impact_damage[p])) {
         mof_magic.impact_move[p]=move;
         mof_magic.impact_damage[p]=damage;
     }
@@ -173,8 +185,7 @@ static void resolve(MofDuel *d,uint8_t p) {
     uint8_t v=1u-p, move=mof_magic.impact_move[p], result;
     MofCaster *c=&mof_magic.caster[v];
     if (!move) return;
-    result=mof_magic_contact(d,p,mof_magic.impact_damage[p],
-                move==GUARDIANS ? MOF_EFFECT_FINISH : move==FIRE_TAP ? 0 : MOF_MOVE_HEAVY);
+    result=mof_magic_contact(d,p,mof_magic.impact_damage[p],timings[move].impact_flags);
     if (!result) return;
     mof_magic.effect_mask|=(1u<<p);
     c->dizzy=c->move=c->pending=c->pose=0;
@@ -185,7 +196,8 @@ static void resolve(MofDuel *d,uint8_t p) {
         mof_magic.target_fighter=d->fighters[v].fighter;
     }
     /* Prefer the stronger audible contact in a trade. */
-    if (!p || !(mof_magic.effect_mask&1u) || move!=FIRE_TAP)
+    if (!p || !(mof_magic.effect_mask&1u) ||
+        timings[move].impact_flags>timings[mof_magic.impact_move[0]].impact_flags)
         mof_magic.audio=result==MOF_DUEL_GUARDED ? MIRROR : move;
 }
 static void spawn(MofDuel *d,uint8_t p,uint8_t index,uint8_t move) {
@@ -207,7 +219,8 @@ static void flight(MofDuel *d,MofShot *s) {
     uint8_t v=1-s->owner;
     MofDuelFighter *target=&d->fighters[v];
     MofCaster *c=&mof_magic.caster[v];
-    MofDuelBox box;
+    const MofDuelBox *box=&d->tested_hurt[v];
+    int16_t relative_x;
     ++s->age;
     if (s->kind==MYAU && s->age<=9) return;
     if (s->kind==MYAU && s->age<=17) {s->y-=7;return;}
@@ -223,8 +236,11 @@ static void flight(MofDuel *d,MofShot *s) {
         if (distance<86 && s->y<129) s->y+=5;
     }
     if (!target->life || target->state>=MOF_DUEL_FALL) return;
-    mof_magic_hurt(d,v,&box);
-    if (s->x+4<box.left || s->x-4>=box.right || s->y+4<box.top || s->y-4>=box.bottom) return;
+    /* The engine sampled the defender's posture in this live step. Its
+       ground solver can then translate the pivot before projectiles move. */
+    relative_x=s->x+(d->tested_hurt_x[v]-target->x);
+    if (relative_x+4<=box->left || relative_x-4>=box->right ||
+        s->y+4<=box->top || s->y-4>=box->bottom) return;
     if (c->move==MIRROR && c->age>=3 && c->age<=12 && s->kind!=MYAU) {
         s->owner=v;s->dx=-s->dx;s->ttl=64;++mof_magic.reflects[v];mof_magic.audio=MIRROR;
         return;
@@ -232,7 +248,7 @@ static void flight(MofDuel *d,MofShot *s) {
     offer(s->owner,s->damage,s->kind);
     s->ttl=0;
 }
-static void cast(MofDuel *d,uint8_t p) {
+static inline void cast(MofDuel *d,uint8_t p) {
     MofCaster *c=&mof_magic.caster[p];
     MofDuelFighter *f=&d->fighters[p],*r=&d->fighters[1-p];
     uint8_t move=c->move;
@@ -274,50 +290,61 @@ void mof_magic_step(MofDuel *d) {
     mof_magic.effect_mask=0;
     if (!mof_magic.live_step) return;
     mof_magic.impact_move[0]=mof_magic.impact_move[1]=0;
-    for (i=0;i<2;++i) {
-        if (!mof_magic.caster[i].move) mof_magic.caster[i].strain=0;
-        cast(d,i);
-    }
+    if (!mof_magic.caster[0].move) mof_magic.caster[0].strain=0;
+    if (!mof_magic.caster[1].move) mof_magic.caster[1].strain=0;
+    cast(d,0);cast(d,1);
     mof_magic.busy=0;
-    for (i=0;i<4;++i) if (mof_magic.shots[i].ttl) {
-        flight(d,&mof_magic.shots[i]);
-        mof_magic.busy|=mof_magic.shots[i].ttl;
+    MofShot *s=mof_magic.shots;
+    for (i=0;i<4;++i,++s) if (s->ttl) {
+        flight(d,s);
+        mof_magic.busy|=s->ttl;
     }
-    for (i=0;i<2;++i) {
-        resolve(d,i);
-        const MofCaster *c=&mof_magic.caster[i];
-        mof_magic.busy|=c->move|c->dizzy|c->pending;
-    }
+    if (mof_magic.impact_move[0]) resolve(d,0);
+    if (mof_magic.impact_move[1]) resolve(d,1);
+    mof_magic.busy|=mof_magic.caster[0].move|mof_magic.caster[0].dizzy|mof_magic.caster[0].pending|
+                    mof_magic.caster[1].move|mof_magic.caster[1].dizzy|mof_magic.caster[1].pending;
+    /* A physical impact on this step takes the shared PSG voices ahead
+       of a cast cue or reflection that produced no damage of its own. */
+    if (d->hitstop && !mof_magic.effect_mask) mof_magic.audio=0;
 }
 
-static void glyph(uint8_t glyph_id,int16_t x,int16_t y,uint8_t face,uint8_t scroll) {
-    uint8_t wide=(glyph_id>=GL_NUT && glyph_id<=GL_DIVE) ? 2 : 1;
-    uint8_t id=magic_glyph[glyph_id*2+(!face)],xx,yy;
-    int16_t row=(y-(wide*4))>>3;
-    for (yy=0;yy<wide;++yy) {
-        int16_t tile_y=row+yy;
-        int16_t left=x-wide*4;
-        if (tile_y<3 || tile_y>19) continue;
-        if (tile_y>=4 && tile_y<12) left-=(int8_t)scroll;
-        for (xx=0;xx<wide;++xx) {
-            int16_t col=(left>>3)+xx;
-            uint16_t cell;
-            uint8_t base,stamp;
-            MofMagicTile *t;
-            if (col<1 || col>=32 || mof_magic.count>=MAGIC_TILES) continue;
-            cell=tile_y*32+col;base=magic_map[cell];stamp=id+yy*wide+xx;
-            t=&mof_magic.next[mof_magic.count++];
-            t->cell=cell;t->restore=magic_restore[base];t->bank=magic_bank[stamp];
-            t->address=magic_base[stamp]+((uint16_t)base<<5);
-        }
+static inline void glyph_cell(int16_t col,uint8_t row,uint8_t stamp)
+{
+    uint16_t cell;
+    MofMagicTile *t;
+    if (col<1 || col>=32 || mof_magic.count>=MAGIC_TILES) return;
+    cell=((uint16_t)row<<5)+(uint8_t)col;
+    t=&mof_magic.next[mof_magic.count++];
+    t->cell=cell;t->bank=magic_bank[stamp];
+    t->address=magic_base[stamp]+((uint16_t)magic_map[cell]<<5);
+}
+static void glyph(uint8_t glyph_id,int16_t x,int16_t y,uint8_t face,uint8_t scroll)
+{
+    uint8_t wide=glyph_id>=GL_NUT && glyph_id<=GL_DIVE;
+    uint8_t stamp=magic_glyph[glyph_id*2+(!face)];
+    int16_t origin=x-(wide ? 8 : 4);
+    int16_t row=(y-(wide ? 8 : 4))>>3;
+    if (!wide) {
+        if (row<3 || row>19) return;
+        if (row>=4 && row<12) origin-=(int8_t)scroll;
+        glyph_cell(origin>>3,row,stamp);
+        return;
+    }
+    for (uint8_t yy=0;yy<2;++yy,++row,stamp+=2) {
+        int16_t left=origin;
+        if (row<3 || row>19) continue;
+        if (row>=4 && row<12) left-=(int8_t)scroll;
+        left>>=3;
+        glyph_cell(left,row,stamp);
+        glyph_cell(left+1,row,stamp+1);
     }
 }
 void mof_magic_plan(const MofDuel *d,uint8_t scroll) {
     uint8_t i;
     mof_magic.count=0;
     if (chapter.phase!=MOF_PLAY) return;
-    for (i=0;i<4;++i) {
-        MofShot *s=&mof_magic.shots[i];
+    MofShot *s=mof_magic.shots;
+    for (i=0;i<4;++i,++s) {
         uint8_t g;
         if (!s->ttl) continue;
         if (s->kind==MYAU) g=s->age<=9 ? GL_NUT : s->age<=20 ? GL_WING : GL_DIVE;
@@ -326,6 +353,7 @@ void mof_magic_plan(const MofDuel *d,uint8_t scroll) {
     }
     for (i=0;i<2;++i) {
         const MofCaster *c=&mof_magic.caster[i];
+        if (!c->dizzy && c->move!=REST && c->move!=CHAT && c->move!=MIRROR && c->move!=SABER) continue;
         const MofDuelFighter *f=&d->fighters[i];
         int16_t x=f->x,y=144+d->body[i].y_offset;
         if (c->dizzy) glyph(GL_STARS,x+((c->dizzy>>2)&3),y-60,1,scroll);
@@ -335,29 +363,44 @@ void mof_magic_plan(const MofDuel *d,uint8_t scroll) {
     }
 }
 
-static void visible_cell(uint16_t cell,uint16_t tile,const uint8_t *blades,uint8_t length)
+/* Scratch directories are filled only for the cells in these two packets.
+   The high bit marks a blade in front. The low bits name the last glyph. */
+typedef struct { uint8_t old[768],next[768]; } MagicCellOwners;
+#ifdef MOF_DUEL_HOST_TEST
+static MagicCellOwners magic_owners;
+#else
+#define magic_owners (*(MagicCellOwners *)0xd200u)
+#endif
+
+static inline void stage_magic_cell(uint16_t cell,uint16_t tile)
 {
-    uint16_t address=0x7800u|(cell<<1);
-    while (length--) {
-        if (blades[0]==(uint8_t)address && blades[1]==(uint8_t)(address>>8)) return;
-        blades+=3;
-    }
-    mof_magic.writes[mof_magic.write_count].cell=cell;
-    mof_magic.writes[mof_magic.write_count++].tile=tile;
+    MofPntWrite *write=&mof_chapter_pnt.cells[mof_chapter_pnt.count++];
+    write->address=0x7800u|(cell<<1);
+    write->tile=tile;
 }
-void mof_magic_tiles(const uint8_t *blades,uint8_t length,uint16_t first)
+void mof_magic_tiles(const uint8_t *blades,uint8_t length,uint16_t first,uint8_t blades_changed)
 {
+    const MofMagicTile *old,*next;
+    const uint8_t *blade;
     uint8_t i;
-    mof_magic.write_count=0;
-    for (i=0;i<mof_magic.old_count;++i) {
-        const MofMagicTile *old=&mof_magic.old[i];
-        if (i>=mof_magic.count || old->cell!=mof_magic.next[i].cell)
-            visible_cell(old->cell,old->restore,blades,length);
+    /* Only cells in the old or new packet can be read. Clear exactly that
+       union before painting the two top-slot indices; RAM may be uninitialized. */
+    for (i=0,old=mof_magic.old;i<mof_magic.old_count;++i,++old) magic_owners.next[old->cell]=0;
+    for (i=0,next=mof_magic.next;i<mof_magic.count;++i,++next) magic_owners.old[next->cell]=0;
+    for (i=0,old=mof_magic.old;i<mof_magic.old_count;++i,++old) magic_owners.old[old->cell]=i+1;
+    for (i=0,next=mof_magic.next;i<mof_magic.count;++i,++next) magic_owners.next[next->cell]=i+1;
+    for (i=0,blade=blades;i<length;++i,blade+=3) {
+        uint16_t cell=(((uint16_t)blade[1]<<8 | blade[0])-0x7800u)>>1;
+        magic_owners.next[cell]|=0x80;
     }
-    for (i=0;i<mof_magic.count;++i) {
-        const MofMagicTile *t=&mof_magic.next[i],*old=&mof_magic.old[i];
-        mof_magic.upload[i]=i>=mof_magic.old_count || old->bank!=t->bank || old->address!=t->address;
-        visible_cell(t->cell,first+i,blades,length);
+    for (i=0,old=mof_magic.old;i<mof_magic.old_count;++i,++old) {
+        if (!magic_owners.next[old->cell] && magic_owners.old[old->cell]==i+1)
+            stage_magic_cell(old->cell,magic_restore[magic_map[old->cell]]);
+    }
+    for (i=0,next=mof_magic.next,old=mof_magic.old;i<mof_magic.count;++i,++next,++old) {
+        mof_magic.upload[i]=i>=mof_magic.old_count || next->address!=old->address || next->bank!=old->bank;
+        if (magic_owners.next[next->cell]==i+1 && (blades_changed || magic_owners.old[next->cell]!=i+1))
+            stage_magic_cell(next->cell,first+i);
     }
 }
 #endif

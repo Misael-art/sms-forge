@@ -16,6 +16,53 @@ static uint8_t rhythm[2], gesture[2], direction[2], last_face[2];
 static uint8_t old_seconds, old_banner, old_gauge[2], banner_tiles, shutter;
 static uint8_t cpu_keys, cpu_wait, cpu_cycle;
 
+#ifdef MOF_ALIS_MAGIC
+#include "../inc/alis_magic.h"
+#include <stddef.h>
+typedef char PntPacketLayout[offsetof(MofChapterPnt,cells)==1 && sizeof(MofPntWrite)==4 ? 1 : -1];
+
+/* All entries are complete SMS VDP write commands. A spell can produce
+   16 restorations and 16 overlays; the arena adds at most 15 entries. */
+static void chapter_cell(uint8_t x,uint8_t y,uint16_t tile)
+{
+    MofPntWrite *cell=&mof_chapter_pnt.cells[mof_chapter_pnt.count++];
+    cell->address=0x7800u+((uint16_t)y<<6)+(x<<1);
+    cell->tile=tile;
+}
+
+void mof_chapter_flush_pnt(void) __naked
+{
+    __asm
+        ld hl,#_mof_chapter_pnt
+        ld a,(hl)
+        or a
+        ret z
+        ld b,a
+        ld (hl),#0
+        inc hl
+        di
+    mof_chapter_pnt_loop:
+        ld a,(hl)
+        inc hl
+        out (#0xbf),a
+        ld a,(hl)
+        inc hl
+        out (#0xbf),a
+        ld a,(hl)
+        inc hl
+        out (#0xbe),a
+        ld a,(hl)
+        inc hl
+        out (#0xbe),a
+        djnz mof_chapter_pnt_loop
+        ei
+        ret
+    __endasm;
+}
+#else
+#define chapter_cell(x,y,tile) SMS_setTileatXY(x,y,tile)
+#endif
+
 #ifdef MOF_PORT_SKY
 static volatile uint8_t port_apron_scroll, port_runway_scroll;
 static uint8_t flight_clock, flight[2], scanner;
@@ -49,12 +96,12 @@ static void port_bird(uint8_t bird, uint8_t advance)
     if (advance) {
         phase=(phase+1u)&127u;
         flight[bird]=phase;
-        if (!(phase&3u)) SMS_setTileatXY(column,row,MOF_PORT_SKY);
+        if (!(phase&3u)) chapter_cell(column,row,MOF_PORT_SKY);
         column=phase>>2;
     }
     tile=MOF_PORT_SKY+1u+((phase&3u)<<1);
-    SMS_setTileatXY(column,row,tile);
-    SMS_setTileatXY((column+1u)&31u,row,tile+1u);
+    chapter_cell(column,row,tile);
+    chapter_cell((column+1u)&31u,row,tile+1u);
 }
 #endif
 
@@ -234,8 +281,14 @@ void mof_chapter_arena(void)
     flight[1]=94;
     flight_clock=scanner=0;
     port_apron_scroll=port_runway_scroll=0;
+#ifdef MOF_ALIS_MAGIC
+    mof_chapter_pnt.count=0;
+#endif
     port_bird(0,0);
     port_bird(1,0);
+#ifdef MOF_ALIS_MAGIC
+    mof_chapter_flush_pnt();
+#endif
     SMS_setBGScrollX(0);
     SMS_VDPturnOnFeature(VDPFEATURE_LEFTCOLBLANK);
 #endif
@@ -243,7 +296,7 @@ void mof_chapter_arena(void)
 
 /* Called during non-playing phases, or after the measured fight SAT write.
    Only cells that changed are emitted on a playing frame. */
-void mof_chapter_hud(uint8_t banner)
+static void chapter_banner(uint8_t banner)
 {
     uint8_t i;
     if (old_banner!=banner) {
@@ -268,13 +321,18 @@ void mof_chapter_hud(uint8_t banner)
             }
         }
     }
+}
+
+void mof_chapter_stage_hud(void)
+{
+    uint8_t i;
     if (chapter.phase==MOF_PLAY) {
 #ifdef MOF_PORT_SKY
         uint8_t light=(chapter.subsecond<4 || (chapter.subsecond>=9 && chapter.subsecond<13));
         uint8_t scan=(chapter.subsecond>=32 && chapter.subsecond<43);
         if (scanner!=scan) {
             scanner=scan;
-            SMS_setTileatXY(MOF_PORT_SCAN_X,MOF_PORT_SCAN_Y,MOF_PORT_SCANNER+scan);
+            chapter_cell(MOF_PORT_SCAN_X,MOF_PORT_SCAN_Y,MOF_PORT_SCANNER+scan);
         }
         if (!(++flight_clock&3u)) port_bird((flight_clock>>2)&1u,1);
 #else
@@ -282,14 +340,19 @@ void mof_chapter_hud(uint8_t banner)
 #endif
         if (shutter!=light) {
             shutter=light;
-            SMS_setTileatXY(MOF_SIGN_X,MOF_SIGN_Y,MOF_SIGN_TILE+light);
+            chapter_cell(MOF_SIGN_X,MOF_SIGN_Y,MOF_SIGN_TILE+light);
         }
     }
     if (old_seconds!=chapter.seconds) {
         old_seconds=chapter.seconds;
+#ifdef MOF_ALIS_MAGIC
+        chapter_cell(15,1,MOF_DIGIT_TILE+chapter.seconds/10);
+        chapter_cell(16,1,MOF_DIGIT_TILE+chapter.seconds%10);
+#else
         SMS_setNextTileatXY(15,1);
-        SMS_setTile(MOF_DIGIT_TILE + chapter.seconds/10);
-        SMS_setTile(MOF_DIGIT_TILE + chapter.seconds%10);
+        SMS_setTile(MOF_DIGIT_TILE+chapter.seconds/10);
+        SMS_setTile(MOF_DIGIT_TILE+chapter.seconds%10);
+#endif
     }
     for (i=0;i<2;++i) {
         uint8_t charge=chapter.meter[i]>>1;
@@ -299,10 +362,34 @@ void mof_chapter_hud(uint8_t banner)
         if (charge!=old_gauge[i]) {
             uint8_t k;
             old_gauge[i]=charge;
+#ifdef MOF_ALIS_MAGIC
+            for (k=0;k<4;++k)
+                chapter_cell((i ? 26 : 2)+k,2,MOF_DIGIT_TILE+(k<charge ? 11 : 10));
+#else
             SMS_setNextTileatXY(i ? 26 : 2,2);
             for (k=0;k<4;++k) SMS_setTile(MOF_DIGIT_TILE+(k<charge ? 11 : 10));
+#endif
         }
     }
+}
+
+void mof_chapter_publish_hud(uint8_t banner)
+{
+    chapter_banner(banner);
+#ifdef MOF_ALIS_MAGIC
+    mof_chapter_flush_pnt();
+#endif
+}
+
+void mof_chapter_hud(uint8_t banner)
+{
+#ifdef MOF_ALIS_MAGIC
+    mof_chapter_stage_hud();
+    mof_chapter_publish_hud(banner);
+#else
+    chapter_banner(banner);
+    mof_chapter_stage_hud();
+#endif
 }
 
 static void end_round(uint8_t a,uint8_t b)

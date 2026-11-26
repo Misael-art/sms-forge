@@ -4,6 +4,8 @@
 
 A ficha aceita gestos opcionais com a mesma estrutura dos comandos físicos e um espaço independente da máscara de normais. Um gesto resolve uma ação disponível na ficha. O atordoamento é universal. A ponte em ROM fixa lê o impacto no banco 37 e restaura o banco 38. O motor aplica a força do contato, o dano e a reação. O capítulo atribui Reiki a partir desse resultado e o áudio usa os canais de efeitos uma vez no passo. A coleta antes das reações permite que os dois projéteis atinjam no mesmo instante. Uma colisão física já confirmada tem prioridade sobre o projétil do mesmo dono.
 
+A tabela de residência dos dois lutadores ocupa `CB00–D1FF`. Há uma página de chaves por jogador e um diretório comum com quantidade de sprites, composição no cenário, banco e endereço dos padrões. O renderizador preserva os slots da pose exibida até concluir a escrita na SAT. As duas tabelas de ocupação de 768 células das magias usam `D200–D7FF`. Os limites estáticos do capítulo reservam `C900–CA3F` para a magia e `CA40–CAFF` para a fila da name table. A sonda do duelo continua em `C770`. [Medições por ROM e carga](decisions/2026-11-26_cadencia_g6.json)
+
 ## Especiais e finalização de Alis · 26/11/2026
 
 O perfil de build ativa `MOF_ALIS_MAGIC`. O banco 38 recebe o reconhecimento de gestos, as quatro instâncias potenciais de projétil e o planejamento gráfico. O motor existente recebe direcional e golpes normais pelos pontos de integração do capítulo. A chamada de caixa vulnerável restaura o banco de magia antes de retornar. O estado específico fica em RAM a partir de `C900` e a compilação impõe o limite de 512 bytes. Os controles são espelhados pela orientação atual.

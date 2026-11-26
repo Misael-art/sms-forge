@@ -107,7 +107,7 @@ def pack(base,out):
     (out/'magic_art.h').write_text('\n'.join(pose_defs+header)+'\n')
     (out/'magic.bin').write_bytes(banks)
     tc['include_dirs'].append(out.relative_to(PROJECT).as_posix())
-    tc['defines'].update(MOF_ALIS_MAGIC=1,MOF_MAGIC_BANK=magic_bank,MOF_GUARDIANS_PAGE=first)
+    tc['defines'].update(MOF_DUEL_SCENE_EFFECTS=1,MOF_ALIS_MAGIC=1,MOF_MAGIC_BANK=magic_bank,MOF_GUARDIANS_PAGE=first)
     tc['mapper_code_banks']['SMSBANK_MAGIC']=magic_bank
     tc['makesms_extra']+=['-mbank',f'{(out/"magic.bin").relative_to(PROJECT)}:0:{len(banks)//PAGE}:{first}']
     (out/'chapter.json').write_text(json.dumps(manifest,indent=2)+'\n')

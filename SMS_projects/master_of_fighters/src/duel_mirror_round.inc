@@ -39,85 +39,6 @@ static uint8_t mirror_air_pending[2];
 volatile unsigned char __at(0xC7C8) mof_mirror_reaction[2];
 volatile unsigned char __at(0xC7CA) mof_mirror_action[2];
 
-static MIRROR_HOT uint8_t mirror_read(uint8_t player, uint8_t keys)
-{
-    const MofDuelFighter *actor = &duel.fighters[player];
-    const MofDuelBody *state = &duel.body[player];
-    MofDuelCommands *input = &mirror_commands[player];
-    uint8_t posture = (keys & MOF_DUEL_DOWN) ? MOF_INPUT_CROUCHING : MOF_INPUT_STANDING;
-    uint8_t buttons = keys & (MOF_DUEL_ONE | MOF_DUEL_TWO);
-    uint8_t forward = actor->face_right ? MOF_DUEL_RIGHT : MOF_DUEL_LEFT;
-    uint8_t id, queued;
-    uint16_t command;
-#if defined(MOF_ALIS_CHAPTER)
-    uint8_t full=chapter.meter[player]==8u;
-    if (!full && !((keys | input->last_buttons) & (MOF_DUEL_ONE | MOF_DUEL_TWO | MOF_DUEL_DOWN)) &&
-        !mirror_dir_window[player] && !mirror_air_pending[player]) return MOF_DUEL_NO_NORMAL;
-    uint8_t free=actor->state==MOF_DUEL_READY || mof_duel_next_tick_free(&duel,player);
-    uint8_t super_ready=full && mof_chapter_super_input(player,keys,actor->face_right,free);
-#else
-    if (!((keys | input->last_buttons) & (MOF_DUEL_ONE | MOF_DUEL_TWO | MOF_DUEL_DOWN)) &&
-        !mirror_dir_window[player] && !mirror_air_pending[player]) return MOF_DUEL_NO_NORMAL;
-    uint8_t free = mof_duel_next_tick_free(&duel, player);
-
-#endif
-    if ((state->motion.mode == MOF_MOTION_AIR && state->motion.y + state->motion.vy < 0) ||
-        (state->jump_pending && state->transition <= 1u))
-        posture = MOF_INPUT_AIRBORNE;
-    if (posture != mirror_posture[player]) {
-        mof_duel_commands_reset(input, input->last_buttons);
-        mirror_posture[player] = posture;
-    }
-    if (posture != MOF_INPUT_AIRBORNE && free &&
-        (state->jump_pending || ((keys & (MOF_DUEL_UP | MOF_DUEL_DOWN)) == MOF_DUEL_UP &&
-                                  !(actor->keys & MOF_DUEL_UP)))) {
-        /* Preserve a fresh attack through the two floor-compression ticks. */
-        mirror_air_pending[player] |= buttons & (uint8_t)~input->last_buttons;
-        mof_duel_commands_reset(input, keys);
-        mirror_dir_window[player] = 0u;
-        return MOF_DUEL_NO_NORMAL;
-    }
-    queued = mirror_air_pending[player];
-    mirror_air_pending[player] = 0u;
-    if (queued && free && posture == MOF_INPUT_AIRBORNE) {
-        input->consumed &= (uint8_t)~queued;
-        if (queued & MOF_DUEL_ONE) input->hold_age[0] = 1u;
-        if (queued & MOF_DUEL_TWO) input->hold_age[1] = 1u;
-    }
-    if (!free || actor->face_right != mirror_dir_face[player]) {
-        mirror_dir_window[player] = 0u;
-        mirror_dir_face[player] = actor->face_right;
-    }
-    /* Every command needs a fresh button, so most frames skip the search. */
-    if (free && posture == MOF_INPUT_STANDING &&
-        (keys & (uint8_t)~input->last_buttons & (MOF_DUEL_ONE | MOF_DUEL_TWO))) {
-        /* The fighter's record lists its commands in priority order. */
-        id = mof_duel_command(actor, keys, input->last_buttons, mirror_dir_window[player],
-#if defined(MOF_ALIS_CHAPTER)
-                              super_ready);
-#else
-                              0u);
-#endif
-        if (id != MOF_DUEL_NO_NORMAL) {
-            mof_duel_commands_reset(input, keys);
-            mirror_dir_window[player] = 0u;
-            return id;
-        }
-    }
-    if (free && keys == MOF_DUEL_DOWN && posture == MOF_INPUT_CROUCHING)
-        mirror_dir_window[player] = 8u;
-    else if (mirror_dir_window[player])
-        --mirror_dir_window[player];
-    if (!(buttons | input->last_buttons | queued)) return MOF_DUEL_NO_NORMAL;
-    command = mof_duel_commands_read(input,
-        posture == MOF_INPUT_AIRBORNE ? &mirror_air_profile : &mirror_profile,
-        keys, posture, free);
-    if (!command) return MOF_DUEL_NO_NORMAL;
-    for (id = posture * 4u; id < posture * 4u + 4u; ++id)
-        if (command & ((uint16_t)1u << id)) return id;
-    return MOF_DUEL_NO_NORMAL;
-}
-
 static uint8_t mirror_reaction_pose(uint8_t player)
 {
     const MofDuelFighter *actor = &duel.fighters[player];
@@ -158,132 +79,6 @@ static uint8_t mirror_preview_normal(uint8_t player)
         (mirror_posture[player] == MOF_INPUT_AIRBORNE ? MIRROR_AIR_HOLD - 1u : MOF_DUEL_HOLD - 3u))
         ++action;
     return action + mirror_posture[player] * 4u;
-}
-
-static MIRROR_HOT void mirror_frames_for(uint8_t player, MirrorView *view, uint8_t *next, uint8_t *later)
-{
-    const MofDuelFighter *actor = &duel.fighters[player];
-    const MofDuelBody *state = &duel.body[player];
-    uint8_t pose, phase, action, face = actor->face_right;
-    uint8_t following = MIRROR_EMPTY, future = MIRROR_EMPTY;
-    view->x = (uint8_t)actor->x;
-    view->y = state->y_offset;
-    pose = actor->state == MOF_DUEL_READY ? MIRROR_EMPTY : mirror_reaction_pose(player);
-    if (duel.tested_active[player] && actor->contact == MOF_DUEL_LANDED &&
-        actor->state != MOF_DUEL_ATTACK) {
-        /* A trade resolves both hits from the two active poses. Publish
-           those poses for the contact, then show each impact on the next tick. */
-        action = actor->standing_normal;
-        view->x = (uint8_t)duel.tested_hurt_x[player];
-        view->y = (int8_t)(duel.tested_attack[player].top - 144 - actor->def->moves[action].active_boxes->top);
-        following = pose;
-        pose = mirror_action_start[action] + duel.tested_pose[player] - 1u;
-    } else if (actor->state == MOF_DUEL_ATTACK) {
-        action = actor->standing_normal;
-        phase = duel.tested_pose[player];
-        if (action >= MOF_DUEL_AIR_NORMALS && action < MOF_DUEL_SPECIAL &&
-            state->motion.mode != MOF_MOTION_AIR)
-            phase = 3u;
-        pose = mirror_action_start[action] + phase - 1u;
-        if (phase < actor->def->moves[action].pose_count)
-            following = pose + 1u;
-        if (phase + 1u < actor->def->moves[action].pose_count)
-            future = pose + 2u;
-#if defined(MOF_ALIS_RIPOSTE)
-        if (action==MOF_DUEL_RIPOSTE && !actor->riposte_armed && phase==3u)
-            pose=MOF_MIRROR_RIPOSTE_4;
-#endif
-        if (phase == 1u && action >= MOF_DUEL_AIR_NORMALS && action < MOF_DUEL_SPECIAL)
-            pose = mirror_action_start[action & 0xFEu];
-    } else if (pose == MIRROR_EMPTY) {
-        phase = !state->y_offset && !state->transition &&
-            state->motion.mode == MOF_MOTION_IDLE && !actor->guarding
-            ? MOF_ALIS_NO_POSTURE : mof_duel_posture_pose(&duel, player);
-        pose = phase ? MOF_MIRROR_ALIS_CROUCH_TRANSITION + phase - 1u : MOF_MIRROR_IDLE;
-        if (mirror_walk_dir[player] && (phase == MOF_ALIS_NO_POSTURE || phase == MOF_ALIS_STAND_GUARD)) {
-            uint8_t first = mirror_walk_dir[player] == 1u ? MOF_MIRROR_ALIS_WALK_FORWARD_1
-                                                          : MOF_MIRROR_ALIS_WALK_BACK_1;
-            pose = first + (mirror_walk_tick[player] >> 2);
-            following = first + (((mirror_walk_tick[player] >> 2) + 1u) & 3u);
-        } else if (state->jump_pending) {
-            following = MOF_MIRROR_ALIS_JUMP_RISE;
-            future = MOF_MIRROR_AIR_2_1;
-        } else if (state->motion.mode == MOF_MOTION_AIR) {
-            if (phase == MOF_ALIS_JUMP_RISE)
-                following = actor->guarding ? MOF_MIRROR_ALIS_JUMP_GUARD :
-                    state->motion.vx ? MOF_MIRROR_ALIS_JUMP_DIAGONAL : MOF_MIRROR_ALIS_JUMP_APEX;
-            else if (phase == MOF_ALIS_JUMP_DIAGONAL) following = MOF_MIRROR_ALIS_JUMP_APEX;
-            else if (phase == MOF_ALIS_JUMP_FALL) following = MOF_MIRROR_ALIS_CROUCH_TRANSITION;
-            else following = MOF_MIRROR_ALIS_JUMP_FALL;
-            future = MOF_MIRROR_AIR_0_1;
-        }
-        action = mirror_preview_normal(player);
-        if (action != MOF_DUEL_NO_NORMAL) {
-#if defined(MOF_DUEL_MIRROR_FOUNDATION)
-            if (action < MOF_DUEL_LOW_NORMALS)
-#endif
-            {
-                following = mirror_action_start[action];
-                future = following + 1u;
-                if (action >= MOF_DUEL_AIR_NORMALS && state->motion.mode == MOF_MOTION_AIR) {
-                    pose = mirror_action_start[action & 0xFEu];
-                    following = future;
-                    future = mirror_action_start[action ^ 1u] + 1u;
-                }
-            }
-        }
-    } else if (actor->state == MOF_DUEL_CAUGHT) {
-        following = pose + 1u;
-        future = pose == MOF_MIRROR_CAUGHT_3 ? MOF_MIRROR_CAUGHT_5 : pose + 2u;
-    } else if (actor->state == MOF_DUEL_HIT && actor->thrown) {
-        following = pose == MOF_MIRROR_CAUGHT_4 ? MOF_MIRROR_CAUGHT_5 : MOF_MIRROR_FALL;
-        if (pose == MOF_MIRROR_CAUGHT_4) future = MOF_MIRROR_FALL;
-    } else if (actor->state == MOF_DUEL_FALL) {
-        following = MOF_MIRROR_DOWNED;
-    } else if (actor->state == MOF_DUEL_DOWNED) {
-        if (actor->life) {
-            following = MOF_MIRROR_GROUND_RISE;
-            future = MOF_MIRROR_GETUP;
-        }
-    } else if (actor->state == MOF_DUEL_GETUP) {
-        following = pose == MOF_MIRROR_GROUND_RISE ? MOF_MIRROR_GETUP : MOF_MIRROR_IDLE;
-        if (pose == MOF_MIRROR_GROUND_RISE) future = MOF_MIRROR_IDLE;
-    }
-#if defined(MOF_ALIS_CHAPTER)
-    if (chapter.phase==MOF_RESULT && chapter.winner==player) {
-        uint8_t step=chapter.age<24 ? 0 : chapter.age<54 ? 1 : 2;
-        pose=mof_presentation->victory_pose+step;
-        following=step<2 ? pose+1 : MIRROR_EMPTY;
-        future=MIRROR_EMPTY;
-    } else if (chapter.idle[player]>=180 && chapter.idle[player]<228 && pose==MOF_MIRROR_IDLE &&
-               following==MIRROR_EMPTY) {
-        pose=mof_presentation->listen_pose+((chapter.idle[player]-180)>>4);
-        following=pose==mof_presentation->listen_pose+2u ? MOF_MIRROR_IDLE : pose+1;
-    }
-#endif
-#if defined(MOF_ALIS_RIPOSTE)
-    if (chapter.phase==MOF_PLAY && pose==MOF_MIRROR_IDLE && chapter.idle[player]>=12 &&
-        following==MIRROR_EMPTY) {
-        uint8_t beat=(chapter.idle[player]>>4)&3u;
-        pose=MOF_MIRROR_BREATHE_1+beat;
-        following=MOF_MIRROR_BREATHE_1+((beat+1u)&3u);
-    }
-#endif
-#ifdef MOF_ALIS_MAGIC
-    if (chapter.phase==MOF_PLAY && actor->state==MOF_DUEL_READY &&
-        (mof_magic.caster[player].pose || mof_magic.caster[player].dizzy)) {
-        pose=mof_magic.caster[player].dizzy ? MOF_MIRROR_HIT_HEAD : mof_magic.caster[player].pose;
-        following=future=MIRROR_EMPTY;
-    }
-#endif
-    view->frame = pose * 2u + face;
-    *next = following == MIRROR_EMPTY ? following : following * 2u + face;
-    *later = future == MIRROR_EMPTY ? future : future * 2u + face;
-    /* A heavy contact shakes the defender by one pixel while the round is
-       frozen. Spilled poses keep X so the shake never rebuilds the PNT. */
-    if (duel.hitstop && duel.hitstop_target == (player | MOF_DUEL_HITSTOP_SHAKE) &&
-        !mirror_frames[view->frame].spill)
-        view->x += duel.hitstop & 1u ? 1u : (uint8_t)-1;
 }
 
 static MIRROR_HOT void mirror_walk(uint8_t player, int16_t previous)
@@ -343,7 +138,9 @@ static MIRROR_HOT void mirror_write_actor(volatile uint8_t *out, uint8_t player,
 {
     const MofDuelFighter *actor = &duel.fighters[player];
     uint8_t flags = MOF_DUEL_PROBE_HAS_HURT | MOF_DUEL_PROBE_PRESENTED_FACE;
+#ifndef MOF_ALIS_MAGIC
     uint8_t slot = mirror_find_slot(player, want->frame);
+#endif
     if (actor->face_right) flags |= MOF_DUEL_PROBE_FACES_RIGHT;
     if (mirror_display[player].frame & 1u) flags |= MOF_DUEL_PROBE_PRESENTED_RIGHT;
     if (actor->state == MOF_DUEL_READY) flags |= MOF_DUEL_PROBE_CAN_ACT;
@@ -356,8 +153,12 @@ static MIRROR_HOT void mirror_write_actor(volatile uint8_t *out, uint8_t player,
     out[2] = actor->state;
     out[3] = (uint8_t)(duel.tick - actor->state_since);
     out[4] = want->frame >> 1;
+#ifdef MOF_ALIS_MAGIC
+    out[5] = (mirror_index.slots[player][want->frame]&0xfcu)==4u ? want->frame>>1 : MIRROR_EMPTY;
+#else
     out[5] = slot != MIRROR_EMPTY && mirror_cache[player][slot].loaded ==
         mirror_frames[want->frame].count ? out[4] : MIRROR_EMPTY;
+#endif
     out[6] = mirror_display[player].frame >> 1;
     out[7] = actor->contact;
     out[8] = actor->life;
@@ -373,13 +174,13 @@ static MIRROR_HOT void mirror_write_actor(volatile uint8_t *out, uint8_t player,
     mof_mirror_action[player] = actor->standing_normal;
 }
 
-static void mirror_write_probe(const MirrorView wanted[2])
+static void mirror_write_probe(void)
 {
     uint8_t stamp = mof_duel_trace[4] | 1u;
     mof_duel_trace[4] = stamp;
     mof_duel_probe_word(mof_duel_trace + 6u, duel.tick);
-    mirror_write_actor(mof_duel_trace + 8u, 0u, &wanted[0]);
-    mirror_write_actor(mof_duel_trace + 41u, 1u, &wanted[1]);
+    mirror_write_actor(mof_duel_trace + 8u, 0u, &mirror_wanted[0]);
+    mirror_write_actor(mof_duel_trace + 41u, 1u, &mirror_wanted[1]);
     mof_duel_trace[4] = stamp + 1u;
 }
 
@@ -396,34 +197,31 @@ static void mirror_reset(void)
 }
 
 
-#if defined(MOF_ALIS_CHAPTER)
-/* Specialize the two arena ports independently so that the compiler resolves
-   actor offsets without keeping both pose planners live in main's frame. */
-static uint8_t mirror_read_p1(uint8_t keys) { return mirror_read(0u,keys); }
-static uint8_t mirror_read_p2(uint8_t keys) { return mirror_read(1u,keys); }
-static void mirror_plan_p1(MirrorView *view,uint8_t *next,uint8_t *later)
-{
-    mirror_frames_for(0u,view,next,later);
-}
-static void mirror_plan_p2(MirrorView *view,uint8_t *next,uint8_t *later)
-{
-    mirror_frames_for(1u,view,next,later);
-}
-#else
-#define mirror_read_p1(k) mirror_read(0u,k)
-#define mirror_read_p2(k) mirror_read(1u,k)
-#define mirror_plan_p1(v,n,l) mirror_frames_for(0u,v,n,l)
-#define mirror_plan_p2(v,n,l) mirror_frames_for(1u,v,n,l)
-#endif
+/* Instantiate these two hot paths with constant owner offsets. SDCC also
+   emits the unused addressable body of a static inline function. */
+#define MIRROR_PLAYER 0u
+#define MIRROR_READ mirror_read_p1
+#define MIRROR_PLAN mirror_plan_p1
+#include "duel_mirror_port.inc"
+#undef MIRROR_PLAN
+#undef MIRROR_READ
+#undef MIRROR_PLAYER
+#define MIRROR_PLAYER 1u
+#define MIRROR_READ mirror_read_p2
+#define MIRROR_PLAN mirror_plan_p2
+#include "duel_mirror_port.inc"
+#undef MIRROR_PLAN
+#undef MIRROR_READ
+#undef MIRROR_PLAYER
 
 #ifdef MOF_ALIS_MAGIC
 #include "alis_magic_presentation.inc"
+#include "duel_ground.inc"
 #endif
 
 void main(void)
 {
-    MirrorView wanted[2];
-    uint8_t next[2], later[2], n1, n2, submit_epoch, epoch, deadline, line, row, col, p1, p2;
+    uint8_t n1, n2, submit_epoch, epoch, deadline, line, row, col, p1, p2;
     int16_t x1, x2;
     uint16_t pad;
 #if defined(MOF_ALIS_CHAPTER)
@@ -589,7 +387,10 @@ new_round:
         x1 = duel.fighters[0].x;
         x2 = duel.fighters[1].x;
         mof_runtime_phase = 1u;
-        mof_duel_step_normal(&duel, p1, p2, n1, n2);
+#ifdef MOF_ALIS_MAGIC
+        if (n1!=MOF_DUEL_NO_NORMAL || n2!=MOF_DUEL_NO_NORMAL || !ground_step(p1,p2))
+#endif
+            mof_duel_step_normal(&duel, p1, p2, n1, n2);
         CHAPTER_LINE(1);
         mirror_walk(0u, x1);
         mirror_walk(1u, x2);
@@ -615,22 +416,28 @@ new_round:
         }
 #endif
         mof_cadence_lines[1] = SMS_getVCount();
-        mirror_plan_p1(&wanted[0], &next[0], &later[0]);
-        mirror_plan_p2(&wanted[1], &next[1], &later[1]);
+        mirror_plan_p1();
+        mirror_plan_p2();
         CHAPTER_LINE(2);
         /* A defender may already have a jump or retreat pose queued.
            Keep its likely impact in the second lookahead slot. */
         if ((duel.fighters[1].state == MOF_DUEL_ATTACK || (p2 & (MOF_DUEL_ONE | MOF_DUEL_TWO))) &&
-            (next[0] == MIRROR_EMPTY ||
-             (later[0] == MIRROR_EMPTY && !(p1 & (MOF_DUEL_ONE | MOF_DUEL_TWO)))))
-            mirror_forecast_impact(1u, &next[0], &later[0]);
+            (mirror_next[0] == MIRROR_EMPTY ||
+             (mirror_later[0] == MIRROR_EMPTY && !(p1 & (MOF_DUEL_ONE | MOF_DUEL_TWO)))))
+            mirror_forecast_impact(1u, &mirror_next[0], &mirror_later[0]);
         if ((duel.fighters[0].state == MOF_DUEL_ATTACK || (p1 & (MOF_DUEL_ONE | MOF_DUEL_TWO))) &&
-            (next[1] == MIRROR_EMPTY ||
-             (later[1] == MIRROR_EMPTY && !(p2 & (MOF_DUEL_ONE | MOF_DUEL_TWO)))))
-            mirror_forecast_impact(0u, &next[1], &later[1]);
-        mirror_prepare(wanted, next, later);
+            (mirror_next[1] == MIRROR_EMPTY ||
+             (mirror_later[1] == MIRROR_EMPTY && !(p2 & (MOF_DUEL_ONE | MOF_DUEL_TWO)))))
+            mirror_forecast_impact(0u, &mirror_next[1], &mirror_later[1]);
+        mirror_prepare();
         CHAPTER_LINE(3);
 #ifdef MOF_ALIS_MAGIC
+        if (!mof_magic.live_step && chapter.phase==MOF_PLAY && !mirror_bg_dirty) {
+            /* Hitstop freezes both pivots and projectiles. Their existing
+               VRAM cells already contain this exact composite. */
+            mof_magic.count=mof_magic.old_count;
+            memset(mof_magic.upload,0,mof_magic.count);
+        } else {
         if (mof_magic.busy) {
             SMS_mapROMBank(MOF_MAGIC_BANK);
             mof_magic_plan(&duel,16u-((duel.fighters[0].x+duel.fighters[1].x)>>4));
@@ -638,12 +445,15 @@ new_round:
         if (mof_magic.count || mof_magic.old_count) {
             SMS_mapROMBank(MOF_MAGIC_BANK);
             mof_magic_tiles((const uint8_t *)(mirror_bg_dirty ? mirror_stage_cells : mirror_cells[mirror_bg_page]),
-                            mirror_bg_dirty ? mirror_bg_count : mirror_old_bg_count,MOF_BANNER_TILE);
+                            mirror_bg_dirty ? mirror_bg_count : mirror_old_bg_count,MOF_BANNER_TILE,mirror_bg_dirty);
+        }
         }
 #endif
-        prepare_hud();
+        if (duel.fighters[0].life!=current_life[0] || duel.fighters[1].life!=current_life[1]) prepare_hud();
+        else hud_count[0]=hud_count[1]=0;
 #ifdef MOF_ALIS_MAGIC
         magic_prepare_life();
+        mof_chapter_stage_hud();
 #endif
         mof_cadence_lines[2] = SMS_getVCount();
         /* VCount is monotonic through D4. A small SAT-only payload
@@ -654,22 +464,39 @@ new_round:
 #endif
             !mirror_bg_dirty && mirror_upload_tiles + mirror_bg_batch <= 2u &&
             !hud_count[0] && !hud_count[1] ? 0xCFu : 0xC4u;
+#ifdef MOF_ALIS_MAGIC
+        /* Spend the remaining NTSC blank only when its payload is bounded.
+           C0..FF may repeat D5..DA; subtracting from FF covers the later
+           occurrence. Leave the original early deadline for compound swaps. */
+        if (chapter.phase==MOF_PLAY && !mirror_bg_dirty && !mof_magic.count && !mof_magic.old_count &&
+            !hud_count[0] && !hud_count[1] && mof_chapter_pnt.count<=4u) {
+            uint8_t tiles=mirror_upload_tiles+mirror_bg_batch;
+            uint8_t reserve=12u+3u*tiles+2u*mirror_upload_count+mof_chapter_pnt.count;
+            if (mirror_sat_dirty) reserve+=4u+((mirror_sat_y_count+mirror_sat_xt_count+7u)>>3);
+            if ((uint8_t)(255u-reserve)>deadline) deadline=255u-reserve;
+        }
+#endif
         epoch = wait_to_publish(submit_epoch, deadline);
         mof_missed_epochs += (uint8_t)(epoch - submit_epoch) - 1u;
         submit_epoch = epoch;
         mof_vblank_start = SMS_getVCount();
         mof_runtime_phase = 2u;
         mirror_publish();
-        publish_hud();
+        if (hud_count[0] || hud_count[1]) publish_hud();
 #ifdef MOF_ALIS_MAGIC
         if (mof_magic.count || mof_magic.old_count) mof_magic_publish();
 #endif
 #if defined(MOF_ALIS_CHAPTER)
         banner=chapter.phase==MOF_RESULT ? (chapter.winner==2 ? 6 : chapter.expired ? 5 : 4) : 255;
+#ifdef MOF_ALIS_MAGIC
+        mof_chapter_publish_hud(banner);
+#else
         mof_chapter_hud(banner);
+#endif
 #endif
         line = SMS_getVCount();
         mof_cadence_lines[3] = mof_vline = line;
+        mirror_commit();
 #if defined(MOF_ALIS_CHAPTER)
         if (!mof_worst_done) {
 #endif
@@ -697,7 +524,7 @@ new_round:
 #endif
         ++mof_presented_frame;
         mof_runtime_phase = 3u;
-        mirror_write_probe(wanted);
+        mirror_write_probe();
         CHAPTER_LINE(4);
 #if defined(MOF_ALIS_CHAPTER)
         mof_chapter_music();
@@ -706,7 +533,10 @@ new_round:
         if (mof_magic.audio) { mof_magic_sound(); PSGSFXFrame(); }
         else
 #endif
-        if (chapter.phase==MOF_RESULT) PSGSFXFrame();
+        if (chapter.phase==MOF_RESULT ||
+            (!duel.fighters[0].contact && !duel.fighters[1].contact &&
+             duel.fighters[0].state!=MOF_DUEL_ATTACK && duel.fighters[1].state!=MOF_DUEL_ATTACK))
+            PSGSFXFrame();
         else
 #endif
             mof_duel_audio_tick(&duel, 1u, duel.fighters[0].def->moves);

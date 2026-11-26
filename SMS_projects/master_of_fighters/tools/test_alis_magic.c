@@ -7,11 +7,11 @@
 
 MofChapter chapter;
 static MofDuel duel;
+#include "../src/duel_ground.inc"
 static const MofDuelGeometry body[2]={
     {{-10,-52,10,-2},{{0,-45,24,-15},{0,-45,24,-15}}},
     {{-10,-52,10,-2},{{0,-45,24,-15},{0,-45,24,-15}}}
 };
-void mof_magic_hurt(const MofDuel *d,uint8_t p,MofDuelBox *box){mof_duel_hurt_box(d,p,box);}
 
 uint8_t mof_magic_contact(MofDuel *d,uint8_t p,uint8_t damage,uint8_t flags)
 {return mof_duel_effect_contact(d,p,damage,flags);}
@@ -91,10 +91,39 @@ static void trade(uint8_t attacker,uint8_t reverse)
     assert(mof_magic.caster[v].chat_wait==15);
 }
 
+static void overlay_order(void)
+{
+    reset();
+    mof_magic.old_count=mof_magic.count=2;
+    mof_magic.old[0].cell=10;
+    mof_magic.old[1].cell=20;
+    mof_magic.next[0].cell=mof_magic.next[1].cell=20;
+    mof_chapter_pnt.count=0;
+    mof_magic_tiles(NULL,0,432,0);
+    assert(mof_chapter_pnt.count==1 && mof_chapter_pnt.cells[0].address==0x7814);
+    mof_magic.old[0].cell=mof_magic.old[1].cell=20;
+    mof_magic.next[1].cell=21;
+    mof_chapter_pnt.count=0;
+    mof_magic_tiles(NULL,0,432,0);
+    assert(mof_chapter_pnt.count==2);
+    assert(mof_chapter_pnt.cells[0].tile==432 && mof_chapter_pnt.cells[1].tile==433);
+    reset();
+    colliding_shot(0,0,FIRE_HOLD,10);colliding_shot(2,1,FIRE_HOLD,10);
+    tick(0,0);
+    assert(duel.hitstop_target==(MOF_DUEL_HITSTOP_BOTH|MOF_DUEL_HITSTOP_SHAKE));
+}
+
 static void capabilities(void)
 {
     static const MofCommand alternate[]={{REST,MOF_DUEL_TWO,G_BACK_BACK}};
+    static const MofCommand duplicate[]={{REST,MOF_DUEL_TWO,G_QCF},{CHAT,MOF_DUEL_TWO,G_QCF}};
     MofFighterDef other=mof_fighter_alis;
+    const MofFighterDef *pair[MOF_DUEL_FIGHTER_IDS]={&other,&mof_fighter_alis};
+    other.gestures=duplicate;other.gesture_count=2;
+    assert(mof_duel_init_pair(&duel,body,6,MOF_DUEL_HAYATO,MOF_DUEL_ALIS,32,224,16,239,24));
+    assert(!mof_duel_set_roster(&duel,pair));
+    other.gestures=alternate;other.gesture_count=1;
+    assert(mof_duel_set_roster(&duel,pair));
     reset();
     other.gestures=alternate;
     other.gesture_count=1;
@@ -114,12 +143,42 @@ static void capabilities(void)
     duel.fighters[0].life=25;chapter.meter[0]=8;
     input(0,"fbf",16);
     assert(mof_magic.caster[1].dizzy);
+    reset();
+    chapter.meter[0]=8;duel.fighters[0].life=25;
+    mof_magic.caster[1].move=REST;mof_magic.caster[1].age=15;
+    duel.fighters[1].life=70;
+    input(0,"fbf",16);advance(30);
+    assert(!mof_magic.caster[1].move && duel.fighters[1].life==70);
+}
+
+/* Compare every ground-control pair to the full solver, including the
+   pre-walk hurt box retained for projectiles and both arena limits. */
+static void ground_equivalence(void)
+{
+    unsigned one,two,layout;
+    for (layout=0;layout<4;++layout) {
+        reset();
+        duel.fighters[0].x=layout&1 ? duel.right_wall : duel.left_wall;
+        duel.fighters[1].x=layout&1 ? duel.left_wall : duel.right_wall;
+        if (layout&2) duel.fighters[1].x=duel.fighters[0].x+(layout&1 ? -duel.minimum_gap : duel.minimum_gap);
+        for (one=0;one<64;++one) for (two=0;two<64;++two) {
+            MofDuel initial=duel,expected;
+            for (unsigned settle=0;settle<6;++settle)
+                mof_duel_step_normal(&duel,one&2,two&2,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
+            MofDuel start=duel;
+            mof_duel_step_normal(&duel,one,two,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
+            expected=duel;
+            duel=start;
+            if (ground_step(one,two)) assert(memcmp(&duel,&expected,sizeof(duel))==0);
+            duel=initial;
+        }
+    }
 }
 
 int main(void)
 {
     unsigned p;
-    capabilities();
+    ground_equivalence();overlay_order();capabilities();
     for (p=0;p<2;++p) {
         trade(p,0);trade(p,1);
         reset();
@@ -158,6 +217,8 @@ int main(void)
     /* Place a genuinely airborne target above both arcs. The simulation fixture
        preserves its position to measure the maximum reach free of any contact. */
     duel.body[1].motion.mode=MOF_MOTION_AIR;duel.body[1].y_offset=-88;
+    mof_duel_hurt_box(&duel,1,&duel.tested_hurt[1]);
+    duel.tested_hurt_x[1]=duel.fighters[1].x;
     for (int n=0;n<75;++n){mof_magic.live_step=1;mof_magic_step(&duel);}
     assert(mof_magic.full_range==2);
     reset();duel.fighters[0].x=80;duel.fighters[1].x=155;

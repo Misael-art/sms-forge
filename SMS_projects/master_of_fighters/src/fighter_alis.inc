@@ -117,7 +117,9 @@ static const MofFighterDef mof_fighter_alis = {
     MOF_MOVES_ALL, MOF_DUEL_UP | MOF_DUEL_DOWN,
     2u, 8u,        /* the riposte catches a middle hit on ticks 2 to 7 */
     alis_commands,
-#ifdef MOF_ALIS_MAGIC
+#if defined(MOF_ALIS_MAGIC)
     alis_gestures, sizeof(alis_gestures)/sizeof(alis_gestures[0])
+#elif defined(MOF_DUEL_SCENE_EFFECTS)
+    0, 0
 #endif
 };

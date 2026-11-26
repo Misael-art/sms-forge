@@ -14,13 +14,6 @@ static inline void magic_wait_gesture(uint8_t p)
 }
 
 /* Fixed ROM bridge. The caller executes in ROM slots 0/1 during mapper changes. */
-void mof_magic_hurt(const MofDuel *d,uint8_t p,MofDuelBox *box)
-{
-    SMS_mapROMBank(MOF_RULE_BANK);
-    mof_duel_hurt_box(d,p,box);
-    SMS_mapROMBank(MOF_MAGIC_BANK);
-}
-
 uint8_t mof_magic_contact(MofDuel *d,uint8_t p,uint8_t damage,uint8_t flags)
 {
     uint8_t result;
@@ -40,10 +33,7 @@ void mof_magic_publish(void)
             UNSAFE_SMS_loadNTiles((const void *)t->address,MOF_BANNER_TILE+i,1);
         }
     }
-    for (i=0;i<mof_magic.write_count;++i) {
-        SMS_setNextTileatLoc(mof_magic.writes[i].cell);
-        SMS_setTile(mof_magic.writes[i].tile);
-    }
+
 }
 
 /* Reuse the ordinary dirty HUD packet, so flashing a low bar never

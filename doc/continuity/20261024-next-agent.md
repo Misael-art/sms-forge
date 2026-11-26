@@ -1,5 +1,9 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-26 · Especiais de Alis · G6d
+
+O Emulicious registrou zero estouros em 3.000 apresentações mistas e em 3.000 com magias. A menor janela de especiais foi de 35,45428984755144 FPS. A G6d permanece candidata de desenvolvimento. A memória do capítulo contém a identidade da ROM, a matriz História/Versus e o recibo com todas as janelas e sessões. [Memória e medições](../../SMS_projects/master_of_fighters/doc/10-memory-bank.md)
+
 ## 2026-11-26 · Elenco, especiais de Alis e tiro de Odin
 
 O incremento G5 do PR 4 está em `9279381`. A ficha seleciona os gestos por personagem. O motor recebe o contato físico ou mágico e o capítulo concede o Reiki uma vez. Em um acerto simultâneo de Fire forte, o Versus registrou 90 PV e duas unidades de Reiki por lutadora. A Laser Gun de Odin consta no guia oficial da Sega. O ganho de jogabilidade e o limite de 58 FPS estão registrados com o SHA da ROM e as observações do emulador. [Memória do capítulo](../../SMS_projects/master_of_fighters/doc/10-memory-bank.md) · [Curadoria dos Guardiões](../../SMS_projects/master_of_fighters/doc/curadoria_guardioes_de_algol.md)

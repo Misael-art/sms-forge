@@ -2,6 +2,10 @@
 #define MOF_DUEL_RULES_H
 
 #include <stdint.h>
+/* G4 chapter manifests predate the independent effects feature. */
+#if defined(MOF_ALIS_MAGIC) && !defined(MOF_DUEL_SCENE_EFFECTS)
+#define MOF_DUEL_SCENE_EFFECTS 1
+#endif
 #if defined(MOF_DUEL_SCENE_POSTURES)
 #include "duel_motion.h"
 #endif
@@ -20,6 +24,7 @@
 #define MOF_DUEL_READY  0u
 #define MOF_DUEL_ATTACK 1u
 #define MOF_DUEL_BLOCK  2u
+#define MOF_DUEL_BLOCK_TICKS 3u
 #define MOF_DUEL_HIT    3u
 #define MOF_DUEL_KO     4u
 #if defined(MOF_DUEL_SCENE_MIRROR)
@@ -118,6 +123,9 @@ typedef struct {
 typedef struct {
     uint8_t move, keys, needs;  /* move MOF_DUEL_NO_NORMAL ends the list */
 } MofCommand;
+#ifdef MOF_DUEL_SCENE_EFFECTS
+enum MofGesture { G_DOUBLE_QCF=1, G_FBF, G_DP, G_QCF, G_QCB, G_DOWN_DOWN, G_BACK_BACK };
+#endif
 
 /* One fighter's rules record. The rules read only this record, so a new
    fighter adds a record instead of new branches on its id. */
@@ -133,7 +141,7 @@ typedef struct {
     uint8_t vertical;  /* MOF_DUEL_UP if it jumps, MOF_DUEL_DOWN if it crouches */
     uint8_t parry_from, parry_until;  /* ticks of a MOF_MOVE_PARRY move that catch */
     const MofCommand *commands;       /* normal/throw/super priority order */
-#ifdef MOF_ALIS_MAGIC
+#ifdef MOF_DUEL_SCENE_EFFECTS
     const MofCommand *gestures;       /* independent repertoire, outside owned */
     uint8_t gesture_count;
 #endif
@@ -216,6 +224,7 @@ typedef struct {
 #define MOF_DUEL_LIGHT_HITSTUN 10u
 #define MOF_DUEL_HEAVY_HITSTOP 11u
 #define MOF_DUEL_HEAVY_HITSTUN 20u
+#define MOF_DUEL_HITSTOP_BOTH  0x40u
 #define MOF_DUEL_HITSTOP_SHAKE 0x80u
 #endif
 
@@ -245,7 +254,7 @@ uint8_t mof_duel_posture_pose(const MofDuel *duel, uint8_t player);
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
 #if defined(MOF_DUEL_SCENE_MIRROR)
 /* Give each player the record of its fighter id. Call once after init. */
-#ifdef MOF_ALIS_MAGIC
+#ifdef MOF_DUEL_SCENE_EFFECTS
 uint8_t mof_duel_effect_contact(MofDuel *duel,uint8_t attacker,uint8_t damage,uint8_t flags);
 #endif
 uint8_t mof_duel_set_roster(MofDuel *duel,

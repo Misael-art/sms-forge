@@ -26,7 +26,8 @@ typedef struct {
 } MirrorUpload;
 
 static MirrorSlot mirror_cache[2][MIRROR_SLOT_COUNT];
-static MirrorView mirror_display[2], mirror_submit[2];
+static MirrorView mirror_display[2], mirror_submit[2], mirror_wanted[2];
+static uint8_t mirror_next[2], mirror_later[2];
 static uint8_t mirror_live_slot[2], mirror_submit_slot[2];
 static MirrorUpload mirror_uploads[8];
 static uint8_t mirror_upload_count, mirror_upload_tiles, mirror_sat_dirty;
@@ -39,6 +40,38 @@ static uint8_t mirror_bg_page, mirror_bg_loaded, mirror_bg_batch;
 static uint8_t mirror_bg_frame[2], mirror_bg_x[2];
 static uint8_t mirror_bg_active_frame[2], mirror_bg_active_x[2];
 
+#ifdef MOF_ALIS_MAGIC
+/* CB00..D1FF is chapter work RAM. A page per owner maps a frame key
+   to 0..3 while streaming, 4..7 when resident, or FF when absent. */
+typedef struct {
+    uint8_t slots[2][256], counts[256], spills[256], banks[256];
+    uint16_t patterns[256];
+} MirrorIndex;
+#define mirror_index (*(MirrorIndex *)0xcb00u)
+#define FRAME_COUNT(k) (mirror_index.counts[(uint8_t)(k)])
+#define FRAME_SPILL(k) (mirror_index.spills[(uint8_t)(k)])
+#define SLOT_BIT(s) (mirror_slot_bits[(s)])
+static const uint8_t mirror_slot_bits[4]={1u,2u,4u,8u};
+
+static void mirror_index_init(void)
+{
+    uint8_t key;
+    memset(mirror_index.slots,MIRROR_EMPTY,sizeof(mirror_index.slots));
+    mirror_index.spills[MIRROR_EMPTY]=0;
+    for (key=0;key<sizeof(mirror_frames)/sizeof(mirror_frames[0]);++key) {
+        const MofMirrorFrame *frame=&mirror_frames[key];
+        mirror_index.counts[key]=frame->count;
+        mirror_index.spills[key]=frame->spill;
+        mirror_index.banks[key]=frame->bank;
+        mirror_index.patterns[key]=frame->address+17u+2u*frame->count;
+    }
+}
+#else
+#define FRAME_COUNT(k) (mirror_frames[(k)].count)
+#define FRAME_SPILL(k) (mirror_frames[(k)].spill)
+#define SLOT_BIT(s) (1u<<(s))
+#endif
+
 static const uint8_t *mirror_packet(const MofMirrorFrame *frame, uint8_t player)
 {
     SMS_mapROMBank(frame->bank + (player ? MOF_MIRROR_COSTUME_BANKS : 0u));
@@ -50,6 +83,17 @@ static const uint8_t *mirror_packet(const MofMirrorFrame *frame, uint8_t player)
 static uint8_t mirror_find_slot(uint8_t player, uint8_t key) __naked
 {
     player; key;
+#ifdef MOF_ALIS_MAGIC
+    __asm
+        add a,#0xcb
+        ld h,a
+        ld a,(hl)
+        cp #255
+        ret z
+        and #3
+        ret
+    __endasm;
+#else
     __asm
         ld c, l
         inc l
@@ -76,16 +120,24 @@ static uint8_t mirror_find_slot(uint8_t player, uint8_t key) __naked
         sub b
         ret
     __endasm;
+#endif
 }
 
 static uint8_t mirror_warm(uint8_t player, uint8_t key)
 {
+#ifdef MOF_ALIS_MAGIC
+    return key==MIRROR_EMPTY || (mirror_index.slots[player][key]&0xfcu)==4u;
+#else
     uint8_t slot;
     if (key == MIRROR_EMPTY) return 1u;
     slot = mirror_find_slot(player, key);
     return slot != MIRROR_EMPTY && mirror_cache[player][slot].loaded == mirror_frames[key].count;
+#endif
 }
 
+#ifdef MOF_ALIS_MAGIC
+#include "duel_mirror_request.inc"
+#else
 static uint8_t mirror_request(uint8_t player, uint8_t key, uint8_t *pinned, uint8_t room)
 {
     const MofMirrorFrame *frame;
@@ -97,16 +149,16 @@ static uint8_t mirror_request(uint8_t player, uint8_t key, uint8_t *pinned, uint
     if (slot == MIRROR_EMPTY) {
         if (room == mirror_upload_tiles) return MIRROR_EMPTY;
         for (slot = 0u; slot < MIRROR_SLOT_COUNT; ++slot)
-            if (!(*pinned & (1u << slot))) break;
+            if (!(*pinned & (SLOT_BIT(slot)))) break;
         if (slot == MIRROR_SLOT_COUNT) return MIRROR_EMPTY;
         mirror_cache[player][slot].key = key;
         mirror_cache[player][slot].loaded = 0u;
     }
-    *pinned |= 1u << slot;
+    *pinned |= SLOT_BIT(slot);
     frame = &mirror_frames[key];
     cache = &mirror_cache[player][slot];
-    if (cache->loaded == frame->count) return slot;
-    count = frame->count - cache->loaded;
+    if (cache->loaded == FRAME_COUNT(key)) return slot;
+    count = FRAME_COUNT(key) - cache->loaded;
     if (count > room - mirror_upload_tiles) count = room - mirror_upload_tiles;
     if (count) {
         upload = &mirror_uploads[mirror_upload_count++];
@@ -118,8 +170,11 @@ static uint8_t mirror_request(uint8_t player, uint8_t key, uint8_t *pinned, uint
         cache->loaded += count;
         mirror_upload_tiles += count;
     }
-    return cache->loaded == frame->count ? slot : MIRROR_EMPTY;
+    if (cache->loaded != FRAME_COUNT(key)) return MIRROR_EMPTY;
+    return slot;
 }
+
+#endif
 
 static const uint8_t * volatile mirror_xy;
 static uint8_t * volatile mirror_y_out, * volatile mirror_xt_out;
@@ -283,37 +338,41 @@ static void mirror_add_background(const MirrorView *view, uint8_t player)
 
 /* An already armed airborne strike gets its next pose before speculative
    poses. Keep the usual priority when two attacks are active together. */
-static uint8_t mirror_air_priority(const MirrorView wanted[2])
+static uint8_t mirror_air_priority(void)
 {
-    uint8_t a = (wanted[0].frame >> 1) - MOF_MIRROR_AIR_0_1;
-    uint8_t b = (wanted[1].frame >> 1) - MOF_MIRROR_AIR_0_1;
+    uint8_t a = (mirror_wanted[0].frame >> 1) - MOF_MIRROR_AIR_0_1;
+    uint8_t b = (mirror_wanted[1].frame >> 1) - MOF_MIRROR_AIR_0_1;
     if (a < 12u && b >= 12u) return 0u;
     if (b < 12u && a >= 12u) return 1u;
     return MIRROR_EMPTY;
 }
 
-static void mirror_prepare(const MirrorView wanted[2], const uint8_t next[2], const uint8_t later[2])
+#ifdef MOF_ALIS_MAGIC
+#include "duel_mirror_sprite_plan.inc"
+#endif
+
+static void mirror_prepare(void)
 {
     MirrorView background[2];
     uint8_t player, order, pinned[2], slot, has_spill, new_background, actual_change = 0u;
-    uint8_t priority = mirror_air_priority(wanted);
+    uint8_t priority = mirror_air_priority();
     uint8_t first = priority == MIRROR_EMPTY ? duel.tick & 1u : priority;
     uint8_t key[2], x[2];
     mirror_sat_dirty = mirror_bg_dirty = mirror_bg_batch = mirror_upload_count = mirror_upload_tiles = 0u;
     has_spill = mirror_old_bg_count ||
-        mirror_frames[wanted[0].frame].spill || mirror_frames[wanted[1].frame].spill;
-    if (!has_spill && wanted[0].frame == mirror_display[0].frame &&
-        wanted[1].frame == mirror_display[1].frame &&
-        mirror_warm(0u, next[0]) && mirror_warm(1u, next[1]) &&
-        mirror_warm(0u, later[0]) && mirror_warm(1u, later[1]) &&
-        (next[0] == MIRROR_EMPTY || !mirror_frames[next[0]].spill) &&
-        (next[1] == MIRROR_EMPTY || !mirror_frames[next[1]].spill) &&
-        (later[0] == MIRROR_EMPTY || !mirror_frames[later[0]].spill) &&
-        (later[1] == MIRROR_EMPTY || !mirror_frames[later[1]].spill)) {
-        if (wanted[0].x != mirror_display[0].x || wanted[1].x != mirror_display[1].x ||
-            wanted[0].y != mirror_display[0].y || wanted[1].y != mirror_display[1].y) {
-            mirror_submit[0] = wanted[0];
-            mirror_submit[1] = wanted[1];
+        FRAME_SPILL(mirror_wanted[0].frame) || FRAME_SPILL(mirror_wanted[1].frame);
+    if (!has_spill && mirror_wanted[0].frame == mirror_display[0].frame &&
+        mirror_wanted[1].frame == mirror_display[1].frame &&
+        mirror_warm(0u, mirror_next[0]) && mirror_warm(1u, mirror_next[1]) &&
+        mirror_warm(0u, mirror_later[0]) && mirror_warm(1u, mirror_later[1]) &&
+        (mirror_next[0] == MIRROR_EMPTY || !FRAME_SPILL(mirror_next[0])) &&
+        (mirror_next[1] == MIRROR_EMPTY || !FRAME_SPILL(mirror_next[1])) &&
+        (mirror_later[0] == MIRROR_EMPTY || !FRAME_SPILL(mirror_later[0])) &&
+        (mirror_later[1] == MIRROR_EMPTY || !FRAME_SPILL(mirror_later[1]))) {
+        if (mirror_wanted[0].x != mirror_display[0].x || mirror_wanted[1].x != mirror_display[1].x ||
+            mirror_wanted[0].y != mirror_display[0].y || mirror_wanted[1].y != mirror_display[1].y) {
+            mirror_submit[0] = mirror_wanted[0];
+            mirror_submit[1] = mirror_wanted[1];
             mirror_submit_slot[0] = mirror_live_slot[0];
             mirror_submit_slot[1] = mirror_live_slot[1];
             mirror_translate_sat();
@@ -321,24 +380,30 @@ static void mirror_prepare(const MirrorView wanted[2], const uint8_t next[2], co
         }
         return;
     }
+#ifdef MOF_ALIS_MAGIC
+    if (!has_spill && !(FRAME_SPILL(mirror_next[0])|FRAME_SPILL(mirror_next[1])|FRAME_SPILL(mirror_later[0])|FRAME_SPILL(mirror_later[1]))) {
+        mirror_sprite_plan(priority,first);
+        return;
+    }
+#endif
     for (order = 0u; order < 2u; ++order) {
         player = first ^ order;
-        pinned[player] = 1u << mirror_live_slot[player];
-        slot = mirror_find_slot(player, next[player]);
-        if (slot != MIRROR_EMPTY) pinned[player] |= 1u << slot;
-        slot = mirror_find_slot(player, later[player]);
-        if (slot != MIRROR_EMPTY) pinned[player] |= 1u << slot;
-        slot = mirror_request(player, wanted[player].frame, &pinned[player], MIRROR_UPLOAD_BUDGET);
-        mirror_submit[player] = wanted[player];
+        pinned[player] = SLOT_BIT(mirror_live_slot[player]);
+        slot = mirror_find_slot(player, mirror_next[player]);
+        if (slot != MIRROR_EMPTY) pinned[player] |= SLOT_BIT(slot);
+        slot = mirror_find_slot(player, mirror_later[player]);
+        if (slot != MIRROR_EMPTY) pinned[player] |= SLOT_BIT(slot);
+        slot = mirror_request(player, mirror_wanted[player].frame, &pinned[player], MIRROR_UPLOAD_BUDGET);
+        mirror_submit[player] = mirror_wanted[player];
         mirror_submit_slot[player] = slot;
         if (slot != MIRROR_EMPTY && player == priority && duel.tested_pose[player] < 2u &&
-            wanted[player].y &&
-            next[player] != MIRROR_EMPTY && !mirror_frames[next[player]].spill)
-            mirror_request(player, next[player], &pinned[player], MIRROR_UPLOAD_BUDGET);
+            mirror_wanted[player].y &&
+            mirror_next[player] != MIRROR_EMPTY && !FRAME_SPILL(mirror_next[player]))
+            mirror_request(player, mirror_next[player], &pinned[player], MIRROR_UPLOAD_BUDGET);
         if (slot == MIRROR_EMPTY) {
             mirror_submit[player].frame = mirror_display[player].frame;
             mirror_submit_slot[player] = mirror_live_slot[player];
-            if (mirror_submit[player].y && mirror_frames[mirror_submit[player].frame].spill)
+            if (mirror_submit[player].y && FRAME_SPILL(mirror_submit[player].frame))
                 mirror_submit[player] = mirror_display[player];
             ++mof_repertoire_delayed;
         }
@@ -348,13 +413,13 @@ static void mirror_prepare(const MirrorView wanted[2], const uint8_t next[2], co
             mirror_sat_dirty = 1u;
     }
     slot = mirror_sat_dirty ? MIRROR_UPLOAD_BUDGET : MIRROR_PRELOAD_BUDGET;
-    if (has_spill || (next[0] != MIRROR_EMPTY && mirror_frames[next[0]].spill) ||
-                     (next[1] != MIRROR_EMPTY && mirror_frames[next[1]].spill) ||
-                     (later[0] != MIRROR_EMPTY && mirror_frames[later[0]].spill) ||
-                     (later[1] != MIRROR_EMPTY && mirror_frames[later[1]].spill)) {
+    if (has_spill || (mirror_next[0] != MIRROR_EMPTY && FRAME_SPILL(mirror_next[0])) ||
+                     (mirror_next[1] != MIRROR_EMPTY && FRAME_SPILL(mirror_next[1])) ||
+                     (mirror_later[0] != MIRROR_EMPTY && FRAME_SPILL(mirror_later[0])) ||
+                     (mirror_later[1] != MIRROR_EMPTY && FRAME_SPILL(mirror_later[1]))) {
         for (player = 0u; player < 2u; ++player) {
             background[player] = mirror_submit[player];
-            key[player] = mirror_frames[background[player].frame].spill ?
+            key[player] = FRAME_SPILL(background[player].frame) ?
                 background[player].frame : MIRROR_EMPTY;
             x[player] = key[player] == MIRROR_EMPTY ? 0u : background[player].x;
             if (mirror_bg_active_frame[player] != key[player] || mirror_bg_active_x[player] != x[player])
@@ -364,16 +429,16 @@ static void mirror_prepare(const MirrorView wanted[2], const uint8_t next[2], co
             /* Warm the inactive page during the anticipation of a wide
                strike. Keep the current PNT intact until that strike shows. */
             for (player = 0u; player < 2u; ++player) {
-                uint8_t upcoming = wanted[player].frame;
-                if (upcoming == mirror_submit[player].frame || !mirror_frames[upcoming].spill) {
-                    upcoming = next[player];
-                    if (upcoming == MIRROR_EMPTY || !mirror_frames[upcoming].spill)
-                        upcoming = later[player];
-                    if (upcoming == MIRROR_EMPTY || !mirror_frames[upcoming].spill)
+                uint8_t upcoming = mirror_wanted[player].frame;
+                if (upcoming == mirror_submit[player].frame || !FRAME_SPILL(upcoming)) {
+                    upcoming = mirror_next[player];
+                    if (upcoming == MIRROR_EMPTY || !FRAME_SPILL(upcoming))
+                        upcoming = mirror_later[player];
+                    if (upcoming == MIRROR_EMPTY || !FRAME_SPILL(upcoming))
                         continue;
                 }
                 background[player].frame = key[player] = upcoming;
-                background[player].x = x[player] = wanted[player].x;
+                background[player].x = x[player] = mirror_wanted[player].x;
             }
         }
         new_background = 0u;
@@ -418,17 +483,17 @@ static void mirror_prepare(const MirrorView wanted[2], const uint8_t next[2], co
         slot = MIRROR_PRELOAD_BUDGET - mirror_bg_batch;
         for (order = 0u; order < 2u; ++order) {
             player = first ^ order;
-            if (mirror_submit[player].frame != wanted[player].frame)
-                mirror_request(player, wanted[player].frame, &pinned[player], slot);
+            if (mirror_submit[player].frame != mirror_wanted[player].frame)
+                mirror_request(player, mirror_wanted[player].frame, &pinned[player], slot);
         }
     }
     for (order = 0u; order < 2u; ++order) {
         player = first ^ order;
-        mirror_request(player, next[player], &pinned[player], slot);
+        mirror_request(player, mirror_next[player], &pinned[player], slot);
     }
     for (order = 0u; order < 2u; ++order) {
         player = first ^ order;
-        mirror_request(player, later[player], &pinned[player], slot);
+        mirror_request(player, mirror_later[player], &pinned[player], slot);
     }
 }
 
@@ -448,7 +513,6 @@ static void mirror_publish(void)
     if (mirror_bg_batch) {
         UNSAFE_SMS_loadNTiles(mirror_bg_tiles + (uint16_t)mirror_bg_loaded * 32u,
                               bg_base + mirror_bg_loaded, mirror_bg_batch);
-        mirror_bg_loaded += mirror_bg_batch;
     }
     if (mirror_bg_dirty) {
         if (mirror_old_bg_count) {
@@ -463,6 +527,26 @@ static void mirror_publish(void)
             rep_pnt_first = (uint8_t)bg_base;
             rep_send_pnt();
         }
+
+    }
+    if (mirror_sat_dirty) {
+        if (mirror_sat_y_count)
+            UNSAFE_SMS_VRAMmemcpy(DUEL_SAT_Y_ADDRESS + mirror_sat_y_first,
+                                  sat_y + mirror_sat_y_first, mirror_sat_y_count);
+        if (mirror_sat_xt_count)
+            UNSAFE_SMS_VRAMmemcpy(DUEL_SAT_XT_ADDRESS + mirror_sat_xt_first,
+                                  sat_xt + mirror_sat_xt_first, mirror_sat_xt_count);
+
+    }
+}
+
+/* CPU ownership changes only after the PNT and SAT writes finish. The
+   following logical step sees the exact slots that reached the VDP. */
+static void mirror_commit(void)
+{
+    uint8_t i;
+    mirror_bg_loaded += mirror_bg_batch;
+    if (mirror_bg_dirty) {
         mirror_old_bg_count = mirror_bg_count;
         mirror_stage_cells = mirror_cells[mirror_bg_page];
         mirror_bg_page ^= 1u;
@@ -472,12 +556,6 @@ static void mirror_publish(void)
         mirror_bg_active_x[1] = mirror_bg_x[1];
     }
     if (mirror_sat_dirty) {
-        if (mirror_sat_y_count)
-            UNSAFE_SMS_VRAMmemcpy(DUEL_SAT_Y_ADDRESS + mirror_sat_y_first,
-                                  sat_y + mirror_sat_y_first, mirror_sat_y_count);
-        if (mirror_sat_xt_count)
-            UNSAFE_SMS_VRAMmemcpy(DUEL_SAT_XT_ADDRESS + mirror_sat_xt_first,
-                                  sat_xt + mirror_sat_xt_first, mirror_sat_xt_count);
         for (i = 0u; i < 2u; ++i) {
             mirror_display[i] = mirror_submit[i];
             mirror_live_slot[i] = mirror_submit_slot[i];
@@ -488,6 +566,9 @@ static void mirror_publish(void)
 static void mirror_render_boot(void)
 {
     uint8_t player, slot;
+#ifdef MOF_ALIS_MAGIC
+    mirror_index_init();
+#endif
     for (player = 0u; player < 2u; ++player) {
         uint8_t face = duel.fighters[player].face_right;
         uint8_t startup[4] = {face, face ^ 1u, MOF_MIRROR_ALIS_CROUCH_TRANSITION * 2u + face,
@@ -498,6 +579,9 @@ static void mirror_render_boot(void)
             SMS_loadTiles(packet + 17u + frame->count * 2u,
                           player * 128u + slot * 32u, frame->count * 32u);
             mirror_cache[player][slot].key = startup[slot];
+#ifdef MOF_ALIS_MAGIC
+            mirror_index.slots[player][startup[slot]]=4u|slot;
+#endif
             mirror_cache[player][slot].loaded = frame->count;
         }
         mirror_submit[player].frame = face;
@@ -515,4 +599,5 @@ static void mirror_render_boot(void)
     mirror_sat_dirty = 1u;
     mirror_build_sat();
     mirror_publish();
+    mirror_commit();
 }

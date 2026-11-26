@@ -1,0 +1,417 @@
+{
+  "revisao": "G6 inicial",
+  "rom_sha256": "be101cd9dc11827b17731697c2f80f651ef805e1deac76bf33300ec95366b284",
+  "rom": "out/candidates/alis_guardioes_g6/rom/master_of_fighters.sms",
+  "veredito": "reprovada no piso funcional de 58 FPS",
+  "frequencia_ntsc": 59.92274340431231,
+  "fps": {
+    "historia_guarda": [
+      36.32057967524397,
+      39.072478393216365,
+      36.408950817589485
+    ],
+    "versus_misto": [
+      38.45042701776706,
+      39.449139407838935,
+      37.45171462769519
+    ],
+    "versus_magias": [
+      23.469741166688987,
+      48.437550918485776,
+      41.94592038301861,
+      39.449139407838935,
+      41.44656418798267,
+      41.94592038301861,
+      39.449139407838935,
+      41.94592038301861,
+      41.94592038301861,
+      39.449139407838935,
+      23.469741166688987,
+      50.43497569862952,
+      39.449139407838935,
+      41.44656418798267,
+      41.94592038301861,
+      39.449139407838935,
+      41.94592038301861,
+      41.94592038301861,
+      39.449139407838935,
+      23.469741166688987,
+      47.43883852841391,
+      39.449139407838935,
+      41.94592038301861,
+      41.94592038301861,
+      39.449139407838935,
+      41.94592038301861,
+      41.94592038301861,
+      39.449139407838935,
+      23.771005647991657,
+      43.44398896812642,
+      39.449139407838935,
+      41.94592038301861,
+      41.94592038301861,
+      39.449139407838935
+    ]
+  },
+  "vblank": {
+    "publicacoes_por_carga": 3000,
+    "mistos": 0,
+    "magias": 0
+  },
+  "sessoes": {
+    "budget": {
+      "sessao": "bd589634b9e4483da0cd2459cb5afd59",
+      "arquivo": "out/qa/alis_guardioes_g6/budget/observations.json",
+      "sha256": "631ebee67113e30f8cd71395172de979783e11dae590e9f06192eb19fb055580"
+    },
+    "worst": {
+      "sessao": "a0ccf3b2bf20452d849b22691ee88e4f",
+      "arquivo": "out/qa/alis_guardioes_g6/worst/observations.json",
+      "sha256": "be373e9c3c7f4ea67d08d2edbb0f52763741f28a6c07e295bd38e23ac9e7e0b5"
+    },
+    "spell-budget": {
+      "sessao": "fa9e813c639346f38867361d7b00f5df",
+      "arquivo": "out/qa/alis_guardioes_g6/spell-budget/observations.json",
+      "sha256": "58e13a7d8813b310f55160519c90aed54c7547a8f7c107daf26497ff4118c191"
+    },
+    "versus": {
+      "sessao": "acc0efcf1ee24ddcb76845fe7c055ab8",
+      "arquivo": "out/qa/alis_guardioes_g6/versus/observations.json",
+      "sha256": "4af3fda44c209ca86fcacd198eba5936f039685db64d2cb761f571c04af97dc9"
+    },
+    "port-versus": {
+      "sessao": "0b9dcc6a6d744714b067f5a506db7f47",
+      "arquivo": "out/qa/alis_guardioes_g6/port-versus/observations.json",
+      "sha256": "dde8527b88582febbea0270e9911b40349388255f1fa9b164151f391c0fcbe98"
+    },
+    "impact": {
+      "sessao": "5d2dfff10b31400594bdd75c00354acb",
+      "arquivo": "out/qa/alis_guardioes_g6/impact/observations.json",
+      "sha256": "c8b0cc4d4c3e2683f7f9296c05c4ffb26d2d21e96f124596d58f7ae6c5d42fa7"
+    },
+    "trade": {
+      "sessao": "2121027396fd40a783d1a0f65b0d9753",
+      "arquivo": "out/qa/alis_guardioes_g6/trade/observations.json",
+      "sha256": "d5395b7ff01a7cdea37bf0cf422e892fecc616f689d1afecf565ef38ae7753d3"
+    },
+    "range": {
+      "sessao": "e08a8d6c06984fadaac9a607a06383db",
+      "arquivo": "out/qa/alis_guardioes_g6/range/observations.json",
+      "sha256": "164100dfad22b579f15754e65309516acfab6618d77e007556bdbdbfe398605f"
+    },
+    "p2-final": {
+      "sessao": "35931e5e74af4f94b28016960e61ce05",
+      "arquivo": "out/qa/alis_guardioes_g6/p2-final/observations.json",
+      "sha256": "b0cceb641b5313e42363a033dcdf8b3bed860eeec7a0a0ece1f20be99ceb909b"
+    },
+    "magias_reflexao": {
+      "sessao": "055ad9ae41244273bfbb2c1752029d51",
+      "arquivo": "out/qa/alis_guardioes_g6/magias_reflexao/observations.json",
+      "sha256": "f80c92e377c1ad111890f504b2f033f237cd522bbc64e1ca54905e563954ca42"
+    },
+    "sound_reflexao": {
+      "sessao": "f80adaef95c2470c9c590056c66735cb",
+      "arquivo": "out/qa/alis_guardioes_g6/sound_reflexao/observations.json",
+      "sha256": "0ee26c289fa6cb5eb6b5aac96661f95049f7c383550c1983489263f5d4183436"
+    }
+  },
+  "historia": {
+    "fire_curto": {
+      "sessao": "0fdfdac3f7474142889fd41613debee8",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-fire_curto/observations.json",
+      "sha256": "0e78f2289f05bf7190e362394187dade637903eac5f55ac71ba40e12b57010bb",
+      "observado": true
+    },
+    "fire_forte": {
+      "sessao": "74b3c0cfa14a426f8a5b7c78ca9d85a3",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-fire_forte/observations.json",
+      "sha256": "4f14a8090fa81b632653dd02c4343f6e09f7d26af440b8fbbf23b6b52c472aec",
+      "observado": true
+    },
+    "chamas": {
+      "sessao": "500444360bfb4a10940b867e7b4bba9d",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-chamas/observations.json",
+      "sha256": "c6bb94cd10dea9ff4ef4dd99219235ce3d0e0c7df841d783508669141cfd6ecd",
+      "observado": true
+    },
+    "myau": {
+      "sessao": "b9c3389367c547858dd4a9bffebf9719",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-myau/observations.json",
+      "sha256": "dc5afbf7050c670fc19f7a37070372afd262541b537605c83793db17f60a6efe",
+      "observado": true
+    },
+    "rest": {
+      "sessao": "5aa8e5d6e67b46e0972c4e9428975fa2",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-rest/observations.json",
+      "sha256": "a715ac4af925fa7b8bd386b909d951abca6bb57b2667d117442b85e49439daf8",
+      "observado": true
+    },
+    "onda": {
+      "sessao": "e25f87a354614f86b2f0f5972511e54b",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-onda/observations.json",
+      "sha256": "db01bbe82322ea02df197eab25ce29077898d68df2f27837129b8c047e0195c1",
+      "observado": true
+    },
+    "sabre": {
+      "sessao": "90ad0300fad44ccca3658f5bab81b9e3",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-sabre/observations.json",
+      "sha256": "f4cc8ec1831cb6c8383aad605d137733d5ceeb9fa8c1fc06bed5380f55f1b3c6",
+      "observado": true
+    },
+    "chat": {
+      "sessao": "96113637a4e94e9db03f0616d1464965",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-chat/observations.json",
+      "sha256": "5388519b3487c74480e690946a3382d60d676ab39eab5825c3069f96f66ef044",
+      "observado": true
+    },
+    "espelho": {
+      "sessao": "eb9db61579ce4e619de2220cc1e81317",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-espelho/observations.json",
+      "sha256": "398a3c73d08717bdb1407ac428a9d45318ca08f39e2c11a7ceb451f7ad2fe095",
+      "observado": true
+    },
+    "tontura": {
+      "sessao": "ca2823ac138d4f108cef7711bc19b2dd",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-tontura/observations.json",
+      "sha256": "3819611e3df29c21ba3ab4c6279663c263e33570a8d3a17942e583b32e169d6e",
+      "observado": false
+    },
+    "guardioes": {
+      "sessao": "57b1607ed99544af9f86395ed057e271",
+      "arquivo": "out/qa/alis_guardioes_g6/campanha-guardioes/observations.json",
+      "sha256": "d612201b65964da6fe24fa976db33f433592939630c2846766491dabea486f8f",
+      "observado": false
+    }
+  },
+  "entradas_do_build": "out/candidates/alis_guardioes_g6/build_record.json",
+  "reflexao": "A primeira reprodução com espera fixa perdeu a janela do escudo. A repetição sincronizada pela distância observou reflexão, sete planos e PSG no mesmo SHA.",
+  "revisoes_medidas": {
+    "g6b": {
+      "rom_sha256": "c6c34f6fbf19b1f5de011bf61cab6391323ff4c751114f145961233c900f7c99",
+      "rom": "out/candidates/alis_guardioes_g6b/rom/master_of_fighters.sms",
+      "fps": {
+        "guarda_historia": [
+          39.30577340055705,
+          40.14979261830881,
+          39.08050828884169
+        ],
+        "mista_versus": [
+          41.44656418798267,
+          43.943345163162356,
+          41.94592038301861
+        ],
+        "especiais_versus": [
+          28.96265931208428,
+          56.92660623409669,
+          47.43883852841391,
+          51.433688088701395,
+          47.43883852841391,
+          47.43883852841391,
+          51.433688088701395,
+          47.43883852841391,
+          47.43883852841391,
+          51.433688088701395,
+          28.463303117048344,
+          59.42338720927637,
+          51.433688088701395,
+          47.43883852841391,
+          47.43883852841391,
+          51.433688088701395,
+          28.96265931208428,
+          56.92660623409669,
+          51.433688088701395,
+          47.43883852841391,
+          47.43883852841391,
+          51.433688088701395,
+          47.43883852841391,
+          47.43883852841391,
+          51.433688088701395,
+          28.96265931208428,
+          56.92660623409669
+        ]
+      },
+      "menor_janela": 28.463303117048344,
+      "satisfaz_piso_em_todas_as_janelas": false,
+      "vblank": {
+        "publicacoes_por_carga": 3000,
+        "mista": 0,
+        "magias": 0,
+        "vcount_min_mista": 200,
+        "vcount_min_magias": 200
+      },
+      "fontes": {
+        "out/qa/alis_guardioes_g6b/budget/observations.json": {
+          "sha256": "957a79ccf08781a98e4d228aa5e0c66c129fa2c7f1b8e3668d774a9c124e7d0c",
+          "sessao": "01ff055a365e4a45bc5ee69edc7dae6f"
+        },
+        "out/evidence/sessions/01ff055a365e4a45bc5ee69edc7dae6f/runtime/fps.json": {
+          "sha256": "38b933f884404f8df10733a4a7a59a0080b96e9346e04f70d212991202c25adf",
+          "sessao": "01ff055a365e4a45bc5ee69edc7dae6f"
+        },
+        "out/qa/alis_guardioes_g6b/worst/observations.json": {
+          "sha256": "8e7f6304d789289f2f0e37c3482704ed1c98d98b928d11aed34b57fc266eaac2",
+          "sessao": "2ab826c9c5c94da1b75943ee2ede9b56"
+        },
+        "out/qa/alis_guardioes_g6b/spell-budget/observations.json": {
+          "sha256": "9745da58d006b513455b3641d90c949bc7656dc9ef436929d1d41c9181a2583b",
+          "sessao": "629a3bdffd4a42679ac05589349248b8"
+        }
+      }
+    },
+    "g6c": {
+      "rom_sha256": "f074f5463ea25d6023fe668674ec48a741fe4dc236c70f3429067c7afbb777f4",
+      "rom": "out/candidates/alis_guardioes_g6c/rom/master_of_fighters.sms",
+      "fps": {
+        "guarda_historia": [
+          39.80637238720241,
+          40.85092976706758,
+          38.62733591429346
+        ],
+        "mista_versus": [
+          45.441413748270165,
+          43.44398896812642,
+          42.94463277309048
+        ],
+        "especiais_versus": [
+          32.45815267733583,
+          47.43883852841391,
+          47.43883852841391,
+          53.43111286884514,
+          47.43883852841391,
+          47.43883852841391,
+          53.43111286884514,
+          47.43883852841391,
+          47.43883852841391,
+          53.43111286884514,
+          31.958796482299896,
+          54.92918145395295,
+          53.43111286884514,
+          47.43883852841391,
+          47.43883852841391,
+          53.93046906388108,
+          47.43883852841391,
+          47.43883852841391,
+          53.43111286884514,
+          31.459440287263963,
+          54.92918145395295,
+          53.43111286884514,
+          47.43883852841391,
+          47.43883852841391,
+          53.93046906388108,
+          47.43883852841391
+        ]
+      },
+      "menor_janela": 31.459440287263963,
+      "satisfaz_piso_em_todas_as_janelas": false,
+      "vblank": {
+        "publicacoes_por_carga": 3000,
+        "mista": 0,
+        "magias": 0,
+        "vcount_min_mista": 200,
+        "vcount_min_magias": 200
+      },
+      "fontes": {
+        "out/qa/alis_guardioes_g6c/budget/observations.json": {
+          "sha256": "2fbf9ad3bb099501d2a42492abb8d2b8a0755a4a3db07bebc9d3121c73519c22",
+          "sessao": "70a9bff137bd461fbb4c3165e976d090"
+        },
+        "out/evidence/sessions/70a9bff137bd461fbb4c3165e976d090/runtime/fps.json": {
+          "sha256": "6ede63b0a4bd80f430226d93bada4bbaeb95940d2d81c2558d6c28fcec482c23",
+          "sessao": "70a9bff137bd461fbb4c3165e976d090"
+        },
+        "out/qa/alis_guardioes_g6c/worst/observations.json": {
+          "sha256": "a0970701d29e81131fb9365a566e9df428f31b777b69aeaa87d1c158ce12cd93",
+          "sessao": "df11a9cb0d3b45358e329adf2a1aab91"
+        },
+        "out/qa/alis_guardioes_g6c/spell-budget/observations.json": {
+          "sha256": "e0ba1da9e6fba9cbe53317211349b25da0441891c3c9fec668f87aa695a4c0b6",
+          "sessao": "89d937274ff94457954cda4fcc9489e3"
+        }
+      }
+    },
+    "g6d": {
+      "rom_sha256": "643d67f72d295dc2eba234a7dd025fa136d9ef4b837c0076cd7fb7c009e1a61c",
+      "rom": "out/candidates/alis_guardioes_g6d/rom/master_of_fighters.sms",
+      "fps": {
+        "guarda_historia": [
+          46.197357084344155,
+          46.509208251534915,
+          44.82833973081033
+        ],
+        "mista_versus": [
+          51.433688088701395,
+          50.43497569862952,
+          46.44012613834204
+        ],
+        "especiais_versus": [
+          35.45428984755144,
+          49.935619503593585,
+          50.43497569862952,
+          52.931756673809204,
+          49.935619503593585,
+          49.935619503593585,
+          53.43111286884514,
+          48.93690711352171,
+          50.43497569862952,
+          52.931756673809204,
+          35.45428984755144,
+          49.935619503593585,
+          52.931756673809204,
+          50.43497569862952,
+          50.43497569862952,
+          53.43111286884514,
+          49.935619503593585,
+          49.935619503593585,
+          52.931756673809204,
+          35.45428984755144,
+          49.43626330855765,
+          52.931756673809204,
+          49.935619503593585,
+          49.935619503593585,
+          53.43111286884514
+        ]
+      },
+      "menor_janela": 35.45428984755144,
+      "satisfaz_piso_em_todas_as_janelas": false,
+      "vblank": {
+        "publicacoes_por_carga": 3000,
+        "mista": 0,
+        "magias": 0,
+        "vcount_min_mista": 200,
+        "vcount_min_magias": 200
+      },
+      "fontes": {
+        "out/qa/alis_guardioes_g6d/budget/observations.json": {
+          "sha256": "c5511d213a82e6d2844e82bd239f8e80f4a923a8d1bfd7cd245beaf1f6197678",
+          "sessao": "47dc2ce8ed374d9ba5ba1adb9f4b9783"
+        },
+        "out/evidence/sessions/47dc2ce8ed374d9ba5ba1adb9f4b9783/runtime/fps.json": {
+          "sha256": "d9d1f0b0e497ebf8bf2d5b4dd18e83c6124e8efa571210adefd19dbcd49fd7e4",
+          "sessao": "47dc2ce8ed374d9ba5ba1adb9f4b9783"
+        },
+        "out/qa/alis_guardioes_g6d/worst/observations.json": {
+          "sha256": "9cbea5c9c0d5876b391ab21b7da4227f064880274331f879ad6018c97dc8d585",
+          "sessao": "7e6ab57ce1a24e769c57e74af55b1964"
+        },
+        "out/qa/alis_guardioes_g6d/spell-budget/observations.json": {
+          "sha256": "51524e64c33bdd45799a608fcc08fb9f94014547bc90abd888baf85cec596879",
+          "sessao": "43cb5afe38e64a12af33040252ff32b0"
+        }
+      }
+    }
+  },
+  "reproducao_g6d": {
+    "bytes": 1048576,
+    "ferramenta": "SDCC 4.6.0 #16555, devkitSMS",
+    "manifesto": "out/diagnostics/alis_guardioes_g6/chapter.json",
+    "entradas_geradas_sha256": {
+      "out/diagnostics/alis_espacoporto_e2/fighters/duel_mirror_assets.h": "5412123e17a008d977a6e6cc86c67ee9778ecd0ee8fd9f5db9221200bfbc3832",
+      "out/diagnostics/alis_espacoporto_e2/fighters/mirror-banks.bin": "c830bebcadd4d1f4b246338e4662e9460e119c70aaaff7817fd140e6493dc488",
+      "out/diagnostics/alis_espacoporto_e2/panels/alis_pages.h": "7c185c45bbddafe55967e25b3aa7c891b2fde259d35763e98ee864b8911277cd",
+      "out/diagnostics/alis_espacoporto_e2/panels/panels.bin": "b4d762021c4e24210df8066ce4569a3dcae22f4f0c1e26c40141e82823a9ebbf",
+      "out/diagnostics/alis_guardioes_g6/chapter.json": "b082d4db9e8321980440bf2af051f3c635335dca19621d16ca6ba16f75b7d1d9",
+      "out/diagnostics/alis_guardioes_g6/magic.bin": "5af5a13d35fd59ba2a5e5ce891c0fb473a4ad4cd83ef440eb32491962063ed22",
+      "out/diagnostics/alis_guardioes_g6/magic_art.h": "5f6adb84fdf58145f476a8f969ba56c01edf2d1795c95d556825a8c040ea3eea",
+      "out/diagnostics/alis_guardioes_g6/magic_cine.h": "2339af566c6c118b3c513d84b012af6a8a4e5df8a55a718f926411a4e457b1c9"
+    }
+  }
+}
