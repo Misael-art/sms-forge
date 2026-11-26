@@ -67,14 +67,14 @@ Com a pasta de painéis E2 preparada, as entradas para reproduzir a candidata a 
 ```sh
 p=SMS_projects/master_of_fighters
 h=tools/sms_wrapper/run_host.sh
-d="$p/out/diagnostics/alis_guardioes_a"
+d="$p/out/diagnostics/alis_guardioes_g6"
 base="$p/out/diagnostics/alis_espacoporto_e2/panels"
-c="$p/out/candidates/alis_guardioes_g4"
+c="$p/out/candidates/alis_guardioes_g6e_rebuild"
 "$h" rtk proxy python3 "$p/tools/pack_alis_magic.py" "$base" "$d"
 "$h" rtk proxy python3 tools/sms_wrapper/build_inner.py --project "$p" --manifest "$d/chapter.json" --build-dir "$c"
 ```
 
-Para repetir uma observação, forneça um novo diretório de evidência ao `tools/replay_alis_magic.py`, após o diretório de build. O modo padrão prepara o final de P1 pelos controles. `--story` exercita Fire contra a CPU. `--p2-final` exercita o lado oposto. `--range` testa as trajetórias até a borda. `--spell-budget` carrega o quadro com comandos dos dois jogadores. `--sound` grava a saída do próprio emulador pelo monitor privado. O replay preserva as entradas reais e fecha cada sessão.
+Para repetir uma observação, forneça um novo diretório de evidência ao `tools/replay_alis_magic.py`, após o diretório de build. O modo padrão prepara o final de P1 pelos controles. `--story` exercita Fire contra a CPU. `--story-move myau` reproduz o chamado de Myau na campanha. O argumento aceita também os demais especiais, incluindo `tontura` e `guardioes`. `--p2-final` exercita o lado oposto. `--range` testa as trajetórias até a borda. `--spell-budget` carrega o quadro com comandos dos dois jogadores. `--sound` grava a saída do próprio emulador pelo monitor privado. O replay preserva as entradas reais e fecha cada sessão.
 
 A curadoria pode reproduzir também o verificador de exposições. Execute `tools/verify_alis_guardians.py --self-check` e depois o mesmo script com o diretório de empacotamento, o diretório de evidência do replay padrão e a sessão privada correspondente. Ele compara o framebuffer RGB inteiro com as exposições e as rotações possíveis de paleta. No impacto, acompanha a posição da cor do corte sobre a vítima.
 
