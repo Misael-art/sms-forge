@@ -175,10 +175,43 @@ static void ground_equivalence(void)
     }
 }
 
+/* Walk the canonical timeline of every grounded normal into hit, guard
+   and recovery, testing the fast step from each identical snapshot. */
+static void ground_reactions(void)
+{
+    unsigned action, defender, frame, k;
+    const uint8_t controls[]={0,2,4,8,6,10,16,32,18,34,20,40,1};
+    for (action=0;action<MOF_DUEL_AIR_NORMALS;++action) {
+        for (defender=0;defender<2;++defender) {
+            uint8_t low=action>=MOF_DUEL_LOW_NORMALS ? MOF_DUEL_DOWN : 0;
+            uint8_t guard=defender ? MOF_DUEL_RIGHT|low : 0;
+            reset();
+            duel.fighters[1].x=duel.fighters[0].x+24;
+            for (frame=0;frame<5;++frame)
+                mof_duel_step_normal(&duel,low,guard,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
+            mof_duel_step_normal(&duel,low,guard,action,MOF_DUEL_NO_NORMAL);
+            for (frame=0;frame<45;++frame) {
+                MofDuel original=duel;
+                for (k=0;k<sizeof(controls);++k) {
+                    uint8_t one=controls[k],two=controls[(frame+k)%sizeof(controls)];
+                    MofDuel expected;
+                    duel=original;
+                    mof_duel_step_normal(&duel,one,two,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
+                    expected=duel;
+                    duel=original;
+                    if (ground_step(one,two)) assert(!memcmp(&duel,&expected,sizeof(duel)));
+                }
+                duel=original;
+                mof_duel_step_normal(&duel,low,guard,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
+            }
+        }
+    }
+}
+
 int main(void)
 {
     unsigned p;
-    ground_equivalence();overlay_order();capabilities();
+    ground_equivalence();ground_reactions();overlay_order();capabilities();
     for (p=0;p<2;++p) {
         trade(p,0);trade(p,1);
         reset();

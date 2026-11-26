@@ -37,7 +37,7 @@ static void mirror_sprite_plan(uint8_t priority,uint8_t first)
     }
     if (mirror_display[0].frame!=mirror_submit[0].frame || mirror_display[1].frame!=mirror_submit[1].frame) {
         mirror_sat_dirty=1;
-        mirror_build_sat();
+        mirror_build_sat(0u);
     } else if (mirror_display[0].x!=mirror_submit[0].x || mirror_display[0].y!=mirror_submit[0].y ||
                mirror_display[1].x!=mirror_submit[1].x || mirror_display[1].y!=mirror_submit[1].y) {
         mirror_sat_dirty=1;

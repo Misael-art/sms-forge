@@ -73,8 +73,12 @@ static uint8_t MIRROR_READ(uint8_t keys)
         posture == MOF_INPUT_AIRBORNE ? &mirror_air_profile : &mirror_profile,
         keys, posture, free);
     if (!command) return MOF_DUEL_NO_NORMAL;
-    for (id = posture * 4u; id < posture * 4u + 4u; ++id)
-        if (command & ((uint16_t)1u << id)) return id;
+    /* commands_read emits normals only for the requested posture. */
+    id=posture*4u;
+    if (command&0x111u) return id;
+    if (command&0x222u) return id+1u;
+    if (command&0x444u) return id+2u;
+    if (command&0x888u) return id+3u;
     return MOF_DUEL_NO_NORMAL;
 }
 

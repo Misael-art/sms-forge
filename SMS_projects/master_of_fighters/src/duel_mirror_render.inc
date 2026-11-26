@@ -183,57 +183,81 @@ static volatile uint8_t mirror_sat_length, mirror_sat_tile, mirror_sat_x, mirror
 static void mirror_emit_sat(void) __naked
 {
     __asm
-        push ix
         ld hl, (_mirror_xy)
         ld de, (_mirror_xt_out)
-        ld ix, (_mirror_y_out)
         ld a, (_mirror_sat_length)
         ld b, a
-        ld a, (_mirror_sat_tile)
-        ld c, a
-    00980$:
         ld a, (_mirror_sat_x)
-        add a, (hl)
+        ld c, a
+        ld a, (_mirror_sat_tile)
+        .db 0x08                ; EX AF, alternate AF
+    00980$:
+        ld a, (hl)
         inc hl
+        inc hl
+        add a, c
         ld (de), a
         inc de
-        ld a, c
-        inc c
+        .db 0x08                ; EX AF, alternate AF
         ld (de), a
+        inc a
+        .db 0x08                ; EX AF, alternate AF
         inc de
-        ld a, (_mirror_sat_y)
-        add a, (hl)
-        inc hl
-        dec a
-        ld 0 (ix), a
-        inc ix
         djnz 00980$
-        pop ix
+        ld hl, (_mirror_xy)
+        inc hl
+        ld de, (_mirror_y_out)
+        ld a, (_mirror_sat_y)
+        dec a
+        ld c, a
+        ld a, (_mirror_sat_length)
+        ld b, a
+    00981$:
+        ld a, (hl)
+        inc hl
+        inc hl
+        add a, c
+        ld (de), a
+        inc de
+        djnz 00981$
         ret
     __endasm;
 }
 
-static void mirror_build_sat(void)
+static void mirror_build_sat(uint8_t boot)
 {
-    uint8_t player;
+    uint8_t player, first=0u, end=0u, old_total=sat_count;
+    uint8_t old_split=boot ? 0u : FRAME_COUNT(mirror_display[0].frame);
+    mirror_sat_y_first=MIRROR_EMPTY;
     sat_count = 0u;
     for (player = 0u; player < 2u; ++player) {
         const MirrorView *view = &mirror_submit[player];
         const MofMirrorFrame *frame = &mirror_frames[view->frame];
+        first=sat_count;
+        sat_count+=FRAME_COUNT(view->frame);
+        if (!boot && (!player || first==old_split) &&
+            view->frame==mirror_display[player].frame &&
+            view->x==mirror_display[player].x && view->y==mirror_display[player].y &&
+            mirror_submit_slot[player]==mirror_live_slot[player]) continue;
+        if (mirror_sat_y_first==MIRROR_EMPTY) mirror_sat_y_first=first;
+        end=sat_count;
         mirror_xy = mirror_packet(frame, 0u) + 17u;
-        mirror_xt_out = sat_xt + sat_count * 2u;
-        mirror_y_out = sat_y + sat_count;
+        mirror_xt_out = sat_xt + first * 2u;
+        mirror_y_out = sat_y + first;
         mirror_sat_length = frame->count;
         mirror_sat_tile = player * 128u + mirror_submit_slot[player] * 32u;
         mirror_sat_x = view->x;
         mirror_sat_y = (uint8_t)view->y;
         mirror_emit_sat();
-        sat_count += frame->count;
+
     }
-    if (sat_count < 64u) sat_y[sat_count] = 0xD0u;
-    mirror_sat_y_first = mirror_sat_xt_first = 0u;
-    mirror_sat_y_count = sat_count + (sat_count < 64u);
-    mirror_sat_xt_count = sat_count * 2u;
+    mirror_sat_xt_first=mirror_sat_y_first*2u;
+    mirror_sat_y_count= end ? end-mirror_sat_y_first : 0u;
+    mirror_sat_xt_count=mirror_sat_y_count*2u;
+    if (sat_count<64u && (boot || sat_count!=old_total)) {
+        sat_y[sat_count]=0xd0u;
+        mirror_sat_y_count=sat_count+1u-mirror_sat_y_first;
+    }
 }
 
 static uint8_t * volatile mirror_shift_cells;
@@ -298,7 +322,7 @@ static void mirror_add_background(const MirrorView *view, uint8_t player)
 {
     const MofMirrorFrame *frame = &mirror_frames[view->frame];
     const uint8_t *packet, *phase;
-    uint8_t cells, index, i, mask;
+    uint8_t cells, index, i, mask, prior=mirror_bg_count;
     uint16_t cell;
     int16_t column;
     uint8_t *tile;
@@ -314,8 +338,11 @@ static void mirror_add_background(const MirrorView *view, uint8_t player)
             return;
         }
         cell = XYtoADDR(column, phase[1]);
-        for (index = 0u; index < mirror_bg_count; ++index)
+        /* Each packet contains one entry per coordinate. Only a previous
+           actor's cells can already own this coordinate. */
+        for (index = 0u; index < prior; ++index)
             if (mirror_stage_cells[index].address == cell) break;
+        if (index==prior) index=mirror_bg_count;
         if (index >= MOF_MIRROR_SPILL) {
             mof_repertoire_fault = 1u;
             return;
@@ -361,6 +388,32 @@ static void mirror_prepare(void)
     mirror_sat_dirty = mirror_bg_dirty = mirror_bg_batch = mirror_upload_count = mirror_upload_tiles = 0u;
     has_spill = mirror_old_bg_count ||
         FRAME_SPILL(mirror_wanted[0].frame) || FRAME_SPILL(mirror_wanted[1].frame);
+#ifdef MOF_ALIS_MAGIC
+    if (!has_spill && !(FRAME_SPILL(mirror_next[0])|FRAME_SPILL(mirror_next[1])|
+                        FRAME_SPILL(mirror_later[0])|FRAME_SPILL(mirror_later[1]))) {
+        /* A fully resident set needs no scheduling, including a transition
+           to another pose already pinned in this owner's four slots. */
+        uint8_t tag0=mirror_index.slots[0][mirror_wanted[0].frame];
+        uint8_t tag1=mirror_index.slots[1][mirror_wanted[1].frame];
+        if ((tag0&0xfcu)==4u && (tag1&0xfcu)==4u &&
+            mirror_warm(0u,mirror_next[0]) && mirror_warm(1u,mirror_next[1]) &&
+            mirror_warm(0u,mirror_later[0]) && mirror_warm(1u,mirror_later[1])) {
+            uint8_t changed=mirror_wanted[0].frame!=mirror_display[0].frame ||
+                            mirror_wanted[1].frame!=mirror_display[1].frame;
+            if (changed || mirror_wanted[0].x!=mirror_display[0].x || mirror_wanted[1].x!=mirror_display[1].x ||
+                mirror_wanted[0].y!=mirror_display[0].y || mirror_wanted[1].y!=mirror_display[1].y) {
+                mirror_submit[0]=mirror_wanted[0];
+                mirror_submit[1]=mirror_wanted[1];
+                mirror_submit_slot[0]=tag0&3u;
+                mirror_submit_slot[1]=tag1&3u;
+                if (changed) mirror_build_sat(0u);
+                else mirror_translate_sat();
+                mirror_sat_dirty=1u;
+            }
+        } else mirror_sprite_plan(priority,first);
+        return;
+    }
+#else
     if (!has_spill && mirror_wanted[0].frame == mirror_display[0].frame &&
         mirror_wanted[1].frame == mirror_display[1].frame &&
         mirror_warm(0u, mirror_next[0]) && mirror_warm(1u, mirror_next[1]) &&
@@ -378,11 +431,6 @@ static void mirror_prepare(void)
             mirror_translate_sat();
             mirror_sat_dirty = 1u;
         }
-        return;
-    }
-#ifdef MOF_ALIS_MAGIC
-    if (!has_spill && !(FRAME_SPILL(mirror_next[0])|FRAME_SPILL(mirror_next[1])|FRAME_SPILL(mirror_later[0])|FRAME_SPILL(mirror_later[1]))) {
-        mirror_sprite_plan(priority,first);
         return;
     }
 #endif
@@ -474,7 +522,7 @@ static void mirror_prepare(void)
     if (mirror_sat_dirty) {
         if (mirror_display[0].frame == mirror_submit[0].frame &&
             mirror_display[1].frame == mirror_submit[1].frame) mirror_translate_sat();
-        else mirror_build_sat();
+        else mirror_build_sat(0u);
     }
     if (mirror_bg_dirty) return;
     if (!mirror_sat_dirty) {
@@ -597,7 +645,7 @@ static void mirror_render_boot(void)
     mirror_bg_active_frame[0] = mirror_bg_active_frame[1] = MIRROR_EMPTY;
     mirror_bg_active_x[0] = mirror_bg_active_x[1] = 0u;
     mirror_sat_dirty = 1u;
-    mirror_build_sat();
+    mirror_build_sat(1u);
     mirror_publish();
     mirror_commit();
 }

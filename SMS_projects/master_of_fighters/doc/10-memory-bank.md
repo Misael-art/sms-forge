@@ -1,5 +1,9 @@
 # 10-memory-bank — master_of_fighters
 
+## 26/11/2026 · G6e · código da próxima candidata
+
+A G6e prepara a SAT por lutador, mantém os slots residentes nas trocas de pose e reaproveita a célula da magia quando só os pixels do efeito mudam. O teste de regras cobre a recuperação de golpes e a defesa em pé e agachada. A conferência do pacote de arte encontrou 376 poses, 3.008 fases e 1.834 células de fundo com coordenadas distintas dentro de cada fase. A comparação em software de 2.500 transições preservou as entradas da SAT e seu terminador. A ROM e as medições de G6e aguardam o ensaio privado no Emulicious.
+
 ## 26/11/2026 · Cadência dos especiais de Alis · G6 em teste
 
 A G6d foi medida no Emulicious NTSC com a ROM de SHA-256 `643d67f72d295dc2eba234a7dd025fa136d9ef4b837c0076cd7fb7c009e1a61c`. O contador de apresentação selou duas cargas de 3.000 quadros, uma mista e outra de magias. As duas terminaram com zero estouros de VBlank. A guarda na História ficou entre 44,828340 e 46,509209 FPS. No Versus, as três janelas mistas ficaram entre 46,440126 e 51,433688 FPS e a pior janela de especiais mediu 35,454290 FPS. A G6d continua abaixo do piso de 58. O recibo conserva cada janela sem arredondamento, os SHAs das ROMs e as sessões das revisões G6 a G6d. [Recibo de cadência](decisions/2026-11-26_cadencia_g6.json)

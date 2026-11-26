@@ -2,6 +2,7 @@
 #pragma codeseg SMSBANK_MAGIC
 #pragma constseg SMSBANK_MAGIC
 #include <string.h>
+#include <stddef.h>
 #include "../inc/alis_magic.h"
 #include "magic_art.h"
 
@@ -308,15 +309,88 @@ void mof_magic_step(MofDuel *d) {
     if (d->hitstop && !mof_magic.effect_mask) mof_magic.audio=0;
 }
 
+/* The plan contains contiguous five-byte (cell, pattern address, bank)
+   records. Only the wide glyph caller can emit several adjacent records. */
+#ifdef MOF_DUEL_HOST_TEST
+static void append_glyph(uint16_t cell,uint16_t stamp)
+{
+    if (mof_magic.count<MAGIC_TILES) {
+        MofMagicTile *t=&mof_magic.next[mof_magic.count++];
+        t->cell=cell;
+        t->bank=magic_bank[stamp];
+        t->address=magic_base[stamp]+((uint16_t)magic_map[cell]<<5);
+    }
+}
+#else
+typedef char MagicGlyphLayout[sizeof(MofMagicTile)==5 && offsetof(MofMagic,count)==86 &&
+                              offsetof(MofMagic,next)==121 && MAGIC_TILES==16 ? 1 : -1];
+static void append_glyph(uint16_t cell,uint16_t stamp) __naked
+{
+    cell;stamp;
+    __asm
+        ld a,(_mof_magic+86)
+        cp #16
+        ret nc
+        push de                 ; stamp
+        push hl                 ; map cell
+        ld c,a
+        inc a
+        ld (_mof_magic+86),a
+        ld a,c
+        add a,a
+        add a,a
+        add a,c
+        ld e,a
+        ld d,#0
+        ld hl,#(_mof_magic+121)
+        add hl,de
+        pop de
+        ld (hl),e
+        inc hl
+        ld (hl),d
+        inc hl
+        push hl                 ; next address field
+        ld hl,#_magic_map
+        add hl,de
+        ld l,(hl)
+        ld h,#0
+        add hl,hl
+        add hl,hl
+        add hl,hl
+        add hl,hl
+        add hl,hl
+        ex de,hl                ; composited tile offset
+        pop bc
+        pop hl                  ; stamp
+        push hl
+        add hl,hl
+        push de
+        ld de,#_magic_base
+        add hl,de
+        ld e,(hl)
+        inc hl
+        ld d,(hl)
+        pop hl
+        add hl,de
+        ld a,l
+        ld (bc),a
+        inc bc
+        ld a,h
+        ld (bc),a
+        inc bc
+        pop hl
+        ld de,#_magic_bank
+        add hl,de
+        ld a,(hl)
+        ld (bc),a
+        ret
+    __endasm;
+}
+#endif
 static inline void glyph_cell(int16_t col,uint8_t row,uint8_t stamp)
 {
-    uint16_t cell;
-    MofMagicTile *t;
-    if (col<1 || col>=32 || mof_magic.count>=MAGIC_TILES) return;
-    cell=((uint16_t)row<<5)+(uint8_t)col;
-    t=&mof_magic.next[mof_magic.count++];
-    t->cell=cell;t->bank=magic_bank[stamp];
-    t->address=magic_base[stamp]+((uint16_t)magic_map[cell]<<5);
+    if ((uint16_t)(col-1)<31u)
+        append_glyph(((uint16_t)row<<5)+(uint8_t)col,stamp);
 }
 static void glyph(uint8_t glyph_id,int16_t x,int16_t y,uint8_t face,uint8_t scroll)
 {
@@ -383,6 +457,26 @@ void mof_magic_tiles(const uint8_t *blades,uint8_t length,uint16_t first,uint8_t
     const MofMagicTile *old,*next;
     const uint8_t *blade;
     uint8_t i;
+    /* A stable slot continues to own its PNT cell when only the composite
+       pattern changes. This also holds for stacked glyphs in identical order. */
+    if (!blades_changed && mof_magic.count==mof_magic.old_count) {
+        for (i=0,next=mof_magic.next,old=mof_magic.old;i<mof_magic.count;++i,++next,++old) {
+            if (next->cell!=old->cell) break;
+            mof_magic.upload[i]=next->address!=old->address || next->bank!=old->bank;
+        }
+        if (i==mof_magic.count) return;
+    }
+    if (!length && mof_magic.count<=1u && mof_magic.old_count<=1u) {
+        old=mof_magic.old;
+        next=mof_magic.next;
+        if (mof_magic.old_count && (!mof_magic.count || old->cell!=next->cell))
+            stage_magic_cell(old->cell,magic_restore[magic_map[old->cell]]);
+        if (mof_magic.count) {
+            mof_magic.upload[0]=!mof_magic.old_count || next->address!=old->address || next->bank!=old->bank;
+            stage_magic_cell(next->cell,first);
+        }
+        return;
+    }
     /* Only cells in the old or new packet can be read. Clear exactly that
        union before painting the two top-slot indices; RAM may be uninitialized. */
     for (i=0,old=mof_magic.old;i<mof_magic.old_count;++i,++old) magic_owners.next[old->cell]=0;

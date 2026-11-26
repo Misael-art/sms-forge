@@ -3,9 +3,11 @@
 static inline uint8_t ground_settled(uint8_t p, uint8_t keys)
 {
     const MofDuelBody *b=&duel.body[p];
-    return !b->jump_buffer && !b->jump_pending && !b->transition &&
+    return !b->jump_buffer && !b->jump_pending && b->transition!=1u &&
         !(keys&MOF_DUEL_UP) && !b->y_offset &&
-        ((keys&MOF_DUEL_DOWN) ? b->motion.mode==MOF_MOTION_CROUCH : b->motion.mode==MOF_MOTION_IDLE) &&
+        b->motion.mode!=MOF_MOTION_AIR &&
+        (duel.fighters[p].state!=MOF_DUEL_READY ||
+         ((keys&MOF_DUEL_DOWN) ? b->motion.mode==MOF_MOTION_CROUCH : b->motion.mode==MOF_MOTION_IDLE)) &&
         duel.tested_hurt_x[p]!=INT16_MIN && duel.tested_hurt_facing[p]==duel.fighters[p].face_right;
 }
 
@@ -35,6 +37,7 @@ static inline int16_t ground_player(uint8_t p, uint8_t keys,uint8_t phase)
     uint8_t back=f->face_right ? MOF_DUEL_LEFT : MOF_DUEL_RIGHT;
     int16_t x=f->x,delta=x-duel.tested_hurt_x[p];
     duel.body[p].air_step=0;
+    if (duel.body[p].transition) --duel.body[p].transition;
     f->keys=keys;
     f->contact=MOF_DUEL_NO_CONTACT;
     if (!(keys&MOF_DUEL_ONE)) f->latched=f->held=0;
