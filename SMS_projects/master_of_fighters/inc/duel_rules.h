@@ -99,7 +99,11 @@ typedef struct {
     uint8_t neck;         /* px above the pivot where head hits begin */
     uint8_t throw_reach;  /* farthest throw capture, px between pivots */
     uint8_t special_from, special_until, special_step;  /* ticks, px per tick */
+    uint16_t owned;    /* MOF_MOVE_BIT(id) of each move the fighter owns */
+    uint8_t vertical;  /* MOF_DUEL_UP if it jumps, MOF_DUEL_DOWN if it crouches */
 } MofFighterDef;
+#define MOF_MOVE_BIT(id) ((uint16_t)1u << (id))
+#define MOF_MOVES_ALL ((uint16_t)((1ul << MOF_DUEL_NORMALS_PER_FIGHTER) - 1u))
 #endif
 
 typedef struct {

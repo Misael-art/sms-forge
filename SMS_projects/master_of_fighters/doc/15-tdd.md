@@ -96,6 +96,20 @@ espelho; o confronto b32 e as cenas anteriores continuam na tabela
 contragolpe, ainda reconhecidos em `mirror_read`, os tempos da Puxada e a
 altura de travessia do salto.
 
+**Capacidades da ficha.** `owned` marca com `MOF_MOVE_BIT(id)` os golpes
+que o lutador tem, e `vertical` diz se ele pula (`MOF_DUEL_UP`) e se
+agacha (`MOF_DUEL_DOWN`). As regras recusam golpe fora de `owned` e tiram
+das teclas a direção vertical que o corpo não tem; quem não agacha anda
+com baixo pressionado. O espelho não desvia mais por ID de personagem:
+postura, guarda, andar e caixa de dano valem para qualquer ficha.
+`mof_duel_set_roster()` cobra o que o lutador usa: os golpes marcados, as
+caixas em pé, de dobra e aérea e a gravidade, porque toda ficha pode ser
+derrubada e precisa aterrissar; a caixa agachada só se agacha e a de guarda
+aérea só se pula. `tools/test_duel_roster.c` põe uma ficha sintética só de
+pé, sob o ID do Hayato, contra a ficha de produção da Alis. A rodada ainda
+prevê e prepara poses só da Alis, e sua previsão de golpe não consulta
+`owned`.
+
 ## Cena 02 — candidatas comparativas de Hayato × Alis
 
 O candidato ativa `MOF_DUEL_PILOT` e fixa `MOF_DUEL_HOLD` em 6 ou 8.

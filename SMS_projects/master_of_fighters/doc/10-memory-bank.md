@@ -1,5 +1,15 @@
 # 10-memory-bank — master_of_fighters
 
+## Camada de elenco, fase 2: capacidades · candidata r2 · 26/11/2026
+
+A ficha de lutador ganhou capacidades: `owned` diz quais golpes ele tem e `vertical`, se pula e se agacha. O motor do espelho deixou de desviar por ID de personagem na leitura de comando, no contato, no andar e na caixa de dano. A validação da ficha cobra só o que o lutador usa. Um lutador sem pulo e com gravidade zero ficava suspenso depois de um knockdown e chegava a voltar ao estado livre no ar; por isso toda ficha exige gravidade, caixa aérea e caixa de dobra. O [TDD](15-tdd.md) descreve o contrato.
+
+O teste `tools/test_duel_roster.c` põe uma ficha sintética só de pé, sob o ID do Hayato, contra a ficha de produção da Alis. Ele confere pulo e agachamento ausentes, golpe recusado, dano e força lidos da ficha da atacante, avanço do especial por ficha e 30 mil passos aleatórios em que o lutador limitado só sai do chão em queda. Os sete programas de teste do host passaram em dez combinações de flags. A equivalência da Alis contra a h1 repetiu os nove traços idênticos.
+
+A candidata [r2](../out/candidates/espacoporto_de_palma_elenco_r2/rom/master_of_fighters.sms), SHA-256 `4e4f07197ef1c96c34dca88faba3ae5192d687657bf97ba655a081ba4dea5a4c`, repetiu a QA da h1 no Emulicious privado: impacto nos oito critérios com 4/10, 11/20 e 11/3; guarda contra a CPU a 37,565686073188175 / 40,02391077273003 / 38,50037361127023 FPS, reprovada como antes; carga mista 37,45 / 40,95 / 40,45 FPS; os mesmos 8 términos em área ativa. O código fixo cresceu 3 bytes e o banco das regras, 159. O corredor de sondas manteve 112 bytes de folga. [Impacto](../out/qa/alis_20261126/espacoporto_de_palma_elenco_r2/impact/observations.json) · [FPS na CPU](../out/evidence/sessions/0713a5ae40e744acb540de0d13d7fbc6/runtime/fps.json) · [Carga mista e pior quadro](../out/qa/alis_20261126/espacoporto_de_palma_elenco_r2/worst/observations.json)
+
+A ficha de produção do Hayato não entrou. Os números da b32 usam outro pivô nos golpes (no espelho, as caixas da Alis ficam 12 px deslocadas), e ele não tem agachar, pulo, golpes aéreos nem Puxada. Para lutar no espelho ele também precisa de poses empacotadas no formato do renderizador, que é a fase 3. Os comandos como dados e a troca de `MOF_ALIS_CHAPTER`/`MOF_ALIS_RIPOSTE` por capacidades dependem do capítulo, ainda não commitado: o Super e o contragolpe só existem nele.
+
 ## Camada de elenco, fase 1 · candidata r1 · 26/11/2026
 
 As regras do duelo em espelho deixaram de deduzir força, defesa aérea, anti-aéreo, empurrão e som pelo número do golpe. Agora leem uma ficha por lutador, a `MofFighterDef` descrita no [TDD](15-tdd.md). A ficha reúne também o perfil de pulo, as caixas por postura, a linha do pescoço, o alcance da Puxada e o avanço do especial. A ficha da Alis fica em `src/fighter_alis.inc` e o elenco em `src/duel_roster.inc`, indexado pelo ID do lutador. `MofAlisMotion`/`duel.alis[]` passaram a `MofDuelBody`/`duel.body[]`. Nenhum número de jogo mudou.

@@ -65,5 +65,6 @@ static const MofFighterDef mof_fighter_alis = {
     {-11,-53,13,-3}, {-11,-33,11,-2}, {-13,-40,11,-2}, {-12,-46,11,-4}, {-12,-46,11,-15},
     34u,           /* neck: head hits overlap above 34 px */
     32u,           /* throw capture reach */
-    2u, 7u, 2u     /* special advances 2 px per tick on ticks 2 to 6 */
+    2u, 7u, 2u,    /* special advances 2 px per tick on ticks 2 to 6 */
+    MOF_MOVES_ALL, MOF_DUEL_UP | MOF_DUEL_DOWN
 };

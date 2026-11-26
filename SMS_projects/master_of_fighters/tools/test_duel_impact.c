@@ -30,7 +30,7 @@ static const MofDuelStandingNormal moves[MOF_DUEL_NORMALS_PER_FIGHTER] = {
 static const MofFighterDef fighter = {
     moves, {0u, 0u, 0u, 0u, 0u, 0u, 96u, 234u, 24u, 0u, 0u, 0u},
     {-11,-53,13,-3}, {-11,-33,11,-2}, {-13,-40,11,-2}, {-12,-46,11,-4}, {-12,-46,11,-15},
-    34u, 32u, 2u, 7u, 2u
+    34u, 32u, 2u, 7u, 2u, MOF_MOVES_ALL, MOF_DUEL_UP | MOF_DUEL_DOWN
 };
 static const MofFighterDef *const roster[MOF_DUEL_FIGHTER_IDS] = {0, &fighter};
 
