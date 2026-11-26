@@ -330,7 +330,11 @@ void mof_chapter_update(const MofDuel *duel)
             else chapter.idle[i]=150;
         } else chapter.idle[i]=0;
         if (f->contact==MOF_DUEL_LANDED || f->contact==MOF_DUEL_GUARDED) {
-            if (chapter.meter[i]<8 && f->standing_normal!=MOF_DUEL_SUPER) ++chapter.meter[i];
+            if (chapter.meter[i]<8 && (f->standing_normal!=MOF_DUEL_SUPER
+#ifdef MOF_ALIS_MAGIC
+                || (mof_magic.effect_mask & (1u<<i))
+#endif
+                )) ++chapter.meter[i];
             if (chapter.meter[1-i]<8 && f->contact==MOF_DUEL_LANDED) ++chapter.meter[1-i];
         }
     }

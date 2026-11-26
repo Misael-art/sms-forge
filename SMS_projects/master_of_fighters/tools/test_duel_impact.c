@@ -27,10 +27,15 @@ static const MofDuelStandingNormal moves[MOF_DUEL_NORMALS_PER_FIGHTER] = {
     NORMAL(6, L), NORMAL(10, H), NORMAL(5, L), NORMAL(11, H), NORMAL(7, L), NORMAL(12, H),
     NORMAL(13, H), NORMAL(16, H)
 };
+static const MofCommand commands[] = {
+    {MOF_DUEL_THROW, MOF_CMD_FORWARD | MOF_DUEL_ONE | MOF_DUEL_TWO, MOF_CMD_NOW},
+    {MOF_DUEL_SPECIAL, MOF_CMD_FORWARD | MOF_DUEL_ONE, MOF_CMD_AFTER_DOWN},
+    {MOF_DUEL_NO_NORMAL, 0u, 0u}
+};
 static const MofFighterDef fighter = {
     moves, {0u, 0u, 0u, 0u, 0u, 0u, 96u, 234u, 24u, 0u, 0u, 0u},
     {-11,-53,13,-3}, {-11,-33,11,-2}, {-13,-40,11,-2}, {-12,-46,11,-4}, {-12,-46,11,-15},
-    34u, 32u, 2u, 7u, 2u, MOF_MOVES_ALL, MOF_DUEL_UP | MOF_DUEL_DOWN
+    34u, 32u, 2u, 7u, 2u, MOF_MOVES_ALL, MOF_DUEL_UP | MOF_DUEL_DOWN, 0u, 0u, commands
 };
 static const MofFighterDef *const roster[MOF_DUEL_FIGHTER_IDS] = {0, &fighter};
 

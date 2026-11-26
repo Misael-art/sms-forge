@@ -1,5 +1,9 @@
 # 15-tdd — master_of_fighters
 
+## Integração G5 entre o elenco e os especiais
+
+A ficha aceita gestos opcionais com a mesma estrutura dos comandos físicos e um espaço independente da máscara de normais. Um gesto resolve uma ação disponível na ficha. O atordoamento é universal. A ponte em ROM fixa lê o impacto no banco 37 e restaura o banco 38. O motor aplica a força do contato, o dano e a reação. O capítulo atribui Reiki a partir desse resultado e o áudio usa os canais de efeitos uma vez no passo. A coleta antes das reações permite que os dois projéteis atinjam no mesmo instante. Uma colisão física já confirmada tem prioridade sobre o projétil do mesmo dono.
+
 ## Especiais e finalização de Alis · 26/11/2026
 
 O perfil de build ativa `MOF_ALIS_MAGIC`. O banco 38 recebe o reconhecimento de gestos, as quatro instâncias potenciais de projétil e o planejamento gráfico. O motor existente recebe direcional e golpes normais pelos pontos de integração do capítulo. A chamada de caixa vulnerável restaura o banco de magia antes de retornar. O estado específico fica em RAM a partir de `C900` e a compilação impõe o limite de 512 bytes. Os controles são espelhados pela orientação atual.
@@ -115,9 +119,8 @@ vez de deduzir pelo número do golpe. A ficha da Alis fica em
 `MOF_DUEL_*`, e `mof_duel_set_roster()` recusa um par com ficha ausente,
 caixa inválida ou tempos incoerentes. Hayato ainda não tem ficha no
 espelho; o confronto b32 e as cenas anteriores continuam na tabela
-`standing_normals`. Seguem fora da ficha os comandos de especial, Super e
-contragolpe, ainda reconhecidos em `mirror_read`, os tempos da Puxada e a
-altura de travessia do salto.
+`standing_normals`. Seguem fora da ficha os tempos da Puxada e a altura
+de travessia do salto.
 
 **Capacidades da ficha.** `owned` marca com `MOF_MOVE_BIT(id)` os golpes
 que o lutador tem, e `vertical` diz se ele pula (`MOF_DUEL_UP`) e se
@@ -132,6 +135,21 @@ aérea só se pula. `tools/test_duel_roster.c` põe uma ficha sintética só de
 pé, sob o ID do Hayato, contra a ficha de produção da Alis. A rodada ainda
 prevê e prepara poses só da Alis, e sua previsão de golpe não consulta
 `owned`.
+
+**Aparo, comandos e som pela ficha.** O contragolpe é um golpe com
+`MOF_MOVE_PARRY`: pega um acerto médio entre `parry_from` e `parry_until`
+da ficha (2 a 7 na Alis), só golpeia depois de pegar e escapa da Puxada.
+`MOF_DUEL_PARRIED` e `riposte_armed` existem em todo espelho; as regras não
+leem mais `MOF_ALIS_RIPOSTE`, que só indica que a arte do contragolpe está
+no cartucho. `commands` lista os comandos na ordem de prioridade, com teclas
+exatas relativas à frente (`MOF_CMD_FORWARD`/`MOF_CMD_BACK`), botões novos e
+uma condição: `MOF_CMD_NOW`, `MOF_CMD_AFTER_DOWN` (janela do baixo) ou
+`MOF_CMD_GESTURE` (o leitor do gesto de medidor cheio do capítulo). A Alis
+lista Super, Puxada, contragolpe e especial. `mof_duel_command()`, no banco
+das regras, devolve o primeiro comando completo; `mirror_read` só a chama
+quando a lutadora está livre e de pé. O som de especial e de Super vem dos
+materiais `MOF_MATERIAL_SPECIAL` e `MOF_MATERIAL_SUPER`, e os efeitos
+continuam no perfil do capítulo.
 
 ## Cena 02 — candidatas comparativas de Hayato × Alis
 

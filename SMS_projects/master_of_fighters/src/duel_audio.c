@@ -10,6 +10,14 @@ void mof_duel_audio_init(void)
     PSGSilenceChannels();
 }
 
+#if defined(MOF_DUEL_SCENE_MIRROR)
+static uint8_t material_of(const MofDuelFighter *fighter)
+{
+    return fighter->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER
+        ? fighter->def->moves[fighter->standing_normal].material : MOF_MATERIAL_BODY;
+}
+#endif
+
 void mof_duel_audio_tick(const MofDuel *duel, uint8_t hayato_player,
                          const MofDuelStandingNormal *alis_normals)
 {
@@ -28,26 +36,25 @@ void mof_duel_audio_tick(const MofDuel *duel, uint8_t hayato_player,
         move = alis->standing_normal;
     }
     /* The sounding fighter's record names the material of each move. */
-    uint8_t material;
+    uint8_t material = material_of(alis);
     alis_normals = alis->def->moves;
-    material = move < MOF_DUEL_NORMALS_PER_FIGHTER ? alis_normals[move].material
-                                                   : MOF_MATERIAL_BODY;
 #else
     uint8_t material = move;
 #endif
 
     /* Contact takes precedence over preparation. A miss emits only the swing. */
-#if defined(MOF_ALIS_RIPOSTE)
+#if defined(MOF_DUEL_SCENE_MIRROR)
     if (alis->contact == MOF_DUEL_PARRIED || hayato->contact == MOF_DUEL_PARRIED)
         PSGSFXPlay((void *)mof_sfx_guard, SFX_CHANNELS2AND3);
     else
 #endif
 #if defined(MOF_ALIS_CHAPTER)
-    if ((alis->contact==MOF_DUEL_LANDED && move==MOF_DUEL_SUPER) ||
-        (hayato->contact==MOF_DUEL_LANDED && hayato->standing_normal==MOF_DUEL_SUPER))
+    /* The special and Super sounds ship with the chapter build. */
+    if ((alis->contact==MOF_DUEL_LANDED && material==MOF_MATERIAL_SUPER) ||
+        (hayato->contact==MOF_DUEL_LANDED && material_of(hayato)==MOF_MATERIAL_SUPER))
         PSGSFXPlay((void *)mof_sfx_palma, SFX_CHANNELS2AND3);
-    else if ((alis->contact==MOF_DUEL_LANDED && move==MOF_DUEL_SPECIAL) ||
-             (hayato->contact==MOF_DUEL_LANDED && hayato->standing_normal==MOF_DUEL_SPECIAL))
+    else if ((alis->contact==MOF_DUEL_LANDED && material==MOF_MATERIAL_SPECIAL) ||
+             (hayato->contact==MOF_DUEL_LANDED && material_of(hayato)==MOF_MATERIAL_SPECIAL))
         PSGSFXPlay((void *)mof_sfx_special, SFX_CHANNELS2AND3);
     else
 #endif

@@ -4,6 +4,8 @@
 
 O capítulo incorpora Fire em duas intensidades, Fire duplo, Myau alado, Heal/Rest, Chat, Laconian Slash, Rising Saber, Mirror Counter e a finalização Guardiões de Algol. A ficha fixa comandos, custos e respostas para a primeira calibração. [Padrão do elenco e ficha de Alis](padrao_moveset_especiais.md).
 
+Odin usa a Laser Gun no segundo plano dos Guardiões. O equipamento pertence ao guerreiro em *Phantasy Star*. A sequência em equipe, incluindo o mergulho ofensivo de Myau e a confirmação de Alis no duelo, foi criada para este capítulo. [Registro de direção e fontes da Sega](curadoria_guardioes_de_algol.md).
+
 ## Duas locações candidatas para o capítulo de Alis · 25/11/2026
 
 As duas locações podem ser jogadas em cartuchos candidatos separados. O arquivo [Espacoporto_de_Palma.sms](../out/candidates/espacoporto_de_palma_e2/Espacoporto_de_Palma.sms) usa a pista de embarque na História e no Versus. A C5r usa a rua de Camineet.

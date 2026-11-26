@@ -21,6 +21,15 @@ void mof_magic_hurt(const MofDuel *d,uint8_t p,MofDuelBox *box)
     SMS_mapROMBank(MOF_MAGIC_BANK);
 }
 
+uint8_t mof_magic_contact(MofDuel *d,uint8_t p,uint8_t damage,uint8_t flags)
+{
+    uint8_t result;
+    SMS_mapROMBank(MOF_RULE_BANK);
+    result=mof_duel_effect_contact(d,p,damage,flags);
+    SMS_mapROMBank(MOF_MAGIC_BANK);
+    return result;
+}
+
 void mof_magic_publish(void)
 {
     uint8_t i;

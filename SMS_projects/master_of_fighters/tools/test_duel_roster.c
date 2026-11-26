@@ -33,11 +33,15 @@ static const MofDuelStandingNormal stand_moves[MOF_DUEL_NORMALS_PER_FIGHTER] = {
 #define STAND_OWNS (MOF_MOVE_BIT(0) | MOF_MOVE_BIT(1) | MOF_MOVE_BIT(2) | MOF_MOVE_BIT(3) | \
                     MOF_MOVE_BIT(MOF_DUEL_SPECIAL))
 #define NO_BOX {0, 0, 0, 0}
+static const MofCommand stand_commands[] = {
+    {MOF_DUEL_SPECIAL, MOF_CMD_FORWARD | MOF_DUEL_ONE, MOF_CMD_AFTER_DOWN},
+    {MOF_DUEL_NO_NORMAL, 0u, 0u}
+};
 static const MofFighterDef stand_only = {
     /* No jump impulse; gravity still brings a knocked-down body to the floor. */
     stand_moves, {0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 24u, 0u, 0u, 0u},
     {-11,-57,12,-4}, NO_BOX, {-13,-44,12,-2}, {-12,-50,12,-4}, NO_BOX,
-    38u, 0u, 3u, 9u, 2u, STAND_OWNS, 0u
+    38u, 0u, 3u, 9u, 2u, STAND_OWNS, 0u, 0u, 0u, stand_commands
 };
 static const MofFighterDef *const pair_roster[MOF_DUEL_FIGHTER_IDS] = {&stand_only, &mof_fighter_alis};
 
@@ -174,6 +178,33 @@ static void random_play_keeps_capabilities(void)
     assert(attacks > 1000u && hits > 20u);
 }
 
+/* Commands come from the record, in order, relative to facing. */
+static void commands_come_from_the_record(void)
+{
+    static const MofCommand gesture_first[] = {
+        {3u, MOF_CMD_FORWARD | MOF_DUEL_ONE, MOF_CMD_GESTURE},
+        {MOF_DUEL_SPECIAL, MOF_CMD_FORWARD | MOF_DUEL_ONE, MOF_CMD_AFTER_DOWN},
+        {MOF_DUEL_NO_NORMAL, 0u, 0u}
+    };
+    MofFighterDef gesture_record = stand_only;
+    MofDuelFighter alis = {0}, stand = {0};
+    const uint8_t r = MOF_DUEL_RIGHT, l = MOF_DUEL_LEFT, a = MOF_DUEL_ONE, b = MOF_DUEL_TWO;
+    alis.def = &mof_fighter_alis; alis.face_right = 1u;
+    stand.def = &stand_only; stand.face_right = 1u;
+    assert(mof_duel_command(&alis, r | a | b, 0u, 0u, 0u) == MOF_DUEL_THROW);
+    assert(mof_duel_command(&alis, r | a | b, a, 0u, 0u) == NONE);      /* stale button */
+    assert(mof_duel_command(&alis, r | a, 0u, 1u, 0u) == MOF_DUEL_SPECIAL);
+    assert(mof_duel_command(&alis, r | a, 0u, 0u, 0u) == NONE);         /* no down window */
+    assert(mof_duel_command(&alis, l | a, 0u, 1u, 0u) == NONE);         /* back is not forward */
+    alis.face_right = 0u;
+    assert(mof_duel_command(&alis, l | a, 0u, 1u, 0u) == MOF_DUEL_SPECIAL);
+    assert(mof_duel_command(&stand, r | a | b, 0u, 0u, 0u) == NONE);    /* no throw in its list */
+    gesture_record.commands = gesture_first;
+    stand.def = &gesture_record;
+    assert(mof_duel_command(&stand, r | a, 0u, 1u, 1u) == 3u);          /* gesture wins first */
+    assert(mof_duel_command(&stand, r | a, 0u, 1u, 0u) == MOF_DUEL_SPECIAL);
+}
+
 int main(void)
 {
     refuses_missing_or_partial_records();
@@ -182,6 +213,7 @@ int main(void)
     contact_reads_the_attacker_record();
     specials_advance_by_record();
     random_play_keeps_capabilities();
-    puts("roster: two records, own bodies, own moves, own contacts, own specials, random play\n");
+    commands_come_from_the_record();
+    puts("roster: two records, own bodies, own moves, own contacts, own specials, random play, own commands\n");
     return 0;
 }

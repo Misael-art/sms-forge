@@ -1,5 +1,19 @@
 # Guardiões de Algol · caderno de curadoria
 
+## O tiro de Odin · conferência com o primeiro Phantasy Star
+
+**Decisão de direção.** Manter Odin com a Laser Gun no segundo plano. Na ficha de equipamento do primeiro jogo, a própria Sega associa a Laser Gun a タイロン, o guerreiro chamado Odin na versão em inglês. O manual americano registra que ele começa com o Iron Axe, que só ele pode usar a Needle Gun e que a Laser Gun continua útil no fim da aventura. As duas armas contam a mesma história de personagem. [Armas no guia oficial da Sega](https://www.sega.jp/fb/album/07_ps/play.html) · [Manual americano do Master System, seção Weapons](https://www.smstributes.co.uk/images/db/manual_phantasystarusa.pdf)
+
+No roteiro do fan game, Odin ergue a arma, o clarão nasce na boca do cano e o feixe parte dela. Noah responde com Thunder, Myau come a Noz de Laerma e mergulha alado, e Alis fecha com a Espada Laconiana. A montagem dos quatro ataques e o uso ofensivo do mergulho são coreografia de *Master of Fighters*. A pose, a cor do laser e sua cadência são decisões da nossa direção de arte. O clarão, o feixe e a reação do defensor continuam editáveis separadamente.
+
+A ficha de Alis também identifica duas adaptações. A provocação inspirada em Chat recupera Reiki no duelo. O Mirror Counter de Alis homenageia o Mirror Shield, que o manual original descreve como escudo de Odin. Assim a lista de comandos preserva essas propostas com atribuição explícita. [Manual americano, seções Shields e Magic](https://www.smstributes.co.uk/images/db/manual_phantasystarusa.pdf)
+
+## Integração com a camada de elenco
+
+1. Conferi o repasse com os fontes da branch. A R2 tinha a ficha de regras e os tempos de impacto. O checkout já continha também a conversão do aparo, dos comandos físicos e dos materiais de som em dados. A versão G4 ainda aplicava dano e Reiki por um caminho próprio para projéteis.
+2. Na G5, liguei os gestos às fichas e o contato dos projéteis à reação do motor. A coleta por atacante eliminou dano duplicado quando duas chamas ocupavam a mesma caixa no mesmo passo. Dois tiros fortes simultâneos deixaram ambas as lutadoras com 90 PV e duas unidades de Reiki. A amostragem encontrou um registro parcial durante o congelamento. O replay passou a medir o intervalo entre os contadores de apresentação do acerto e da retomada, preservando também cada amostra íntegra. [Troca no emulador G5](../out/qa/alis_guardioes_g5/trade/observations.json)
+3. Medi a G5 antes de mexer no vídeo. Na carga mista, 27 de 3.000 apresentações terminaram fora do VBlank. O primeiro caso registrou oito tiles de upload e 133 bytes da tabela de sprites. Na carga de magias, foram 74 ocorrências. Usei esses dois testes como referência para a revisão seguinte. [Carga mista G5](../out/qa/alis_guardioes_g5/worst/observations.json) · [Magias G5](../out/qa/alis_guardioes_g5/spell-budget/observations.json)
+
 ## Parecer de arte, 26 de novembro de 2026
 
 O proprietário reconheceu o estilo de Phantasy Star na prancha de seis ilustrações. Identificou dois problemas para o jogo de luta. O quadro final reunia atacante, espada e vítima no mesmo desenho, o que obrigaria a ilustrar cada confronto. Os outros planos dependiam de uma troca de telas inteiras para produzir movimento. A prancha original fica identificada como referência de direção. A reação da vítima, o corte e as exposições locais são recursos independentes do cartucho.

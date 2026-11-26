@@ -57,6 +57,7 @@ def main():
     parser.add_argument('build',type=Path);parser.add_argument('output',type=Path)
     parser.add_argument('--story',action='store_true')
     parser.add_argument('--p2-final',action='store_true')
+    parser.add_argument('--trade',action='store_true',help='Read both sides of an equal-time projectile exchange')
     parser.add_argument('--range',action='store_true')
     parser.add_argument('--spell-budget',action='store_true')
     parser.add_argument('--sound',action='store_true',help='Capture the confirmed film and its private PSG output continuously')
@@ -128,6 +129,38 @@ def main():
         if args.story:
             spell(0,1,'d-d',ONE,3,32)
             observe('historia_fire',True);return
+        if args.trade:
+            before=observe('antes_da_troca')
+            ctl((D,D,4),(0,0,4),(D|ONE,D|ONE,16))
+            samples=[]
+            for _ in range(110):
+                wait(1)
+                raw=ram(0xc770,RECORD_BYTES)
+                if raw[4]&1:continue
+                d=decode(raw)
+                m=event()
+                published=int.from_bytes(ram(0xc7f0,2),'little')
+                if samples and samples[-1]['published']==published:continue
+                samples.append(dict(published=published,tick=d['logic_tick'],
+                    life=[d[k]['life'] for k in ('p1','p2')],
+                    contacts=[d[k]['contact'] for k in ('p1','p2')],
+                    hits=list(m[112:114]),meter=list(ram(addr+9,2)),
+                    ages=[m[1],m[20]],shot_ages=[m[44],m[64]]))
+                if samples[-1]['life']==[90,90] and len(samples)>40:break
+            after=observe('depois_da_troca',True)
+            log['troca']=samples
+            save()
+            both=next(r for r in samples if r['contacts']==[1,1])
+            frozen=[r for r in samples if r['tick']==both['tick']]
+            assert after['hits']==[1,1] and after['chapter'][9:11]==[2,2]
+            assert before['chapter'][9:11]==[0,0] and both['life']==[90,90]
+            resumed=next(r for r in samples if r['tick']==both['tick']+1)
+            # A VDP stop may fall inside an odd seqlock record. Bracket the
+            # complete freeze by the ROM's publication counter, even then.
+            assert resumed['published']-both['published']-1==11 and len(frozen)>2
+            assert all(r['contacts']==[0,0] and r['meter']==[2,2]
+                and r['ages']==both['ages'] and r['shot_ages']==both['shot_ages'] for r in frozen[1:])
+            return
         if args.p2_final:
             for p in (0,1):
                 for _ in range(12):

@@ -58,13 +58,13 @@ static const MofDuelStandingNormal alis_moves[MOF_DUEL_NORMALS_PER_FIGHTER] = {
     ALIS_MOVE(9,2,3,15,11,3u,MOF_HEIGHT_OVERHEAD,0,HEAVY|AIR,4,BLADE),
     ALIS_MOVE(10,2,3,12,7,3u,MOF_HEIGHT_OVERHEAD,0,AIR,4,BODY),
     ALIS_MOVE(11,2,3,15,12,3u,MOF_HEIGHT_OVERHEAD,0,HEAVY|AIR,7,BODY),
-    ALIS_MOVE(12,7,2,23,13,3u,MOF_HEIGHT_MIDDLE,0,HEAVY|AIR,4,BODY),
+    ALIS_MOVE(12,7,2,23,13,3u,MOF_HEIGHT_MIDDLE,0,HEAVY|AIR,4,MOF_MATERIAL_SPECIAL),
     ALIS_MOVE(13,MOF_THROW_RELEASE_TICK,1,MOF_THROW_END_TICK,16,5u,MOF_HEIGHT_THROW,1,
               HEAVY|AIR,4,SHIELD),
 #if defined(MOF_ALIS_CHAPTER)
-    ALIS_MOVE(14,10,4,33,25,3u,MOF_HEIGHT_MIDDLE,1,HEAVY|AIR,4,BODY),
+    ALIS_MOVE(14,10,4,33,25,3u,MOF_HEIGHT_MIDDLE,1,HEAVY|AIR,4,MOF_MATERIAL_SUPER),
 #if defined(MOF_ALIS_RIPOSTE)
-    ALIS_MOVE(15,8,3,24,15,4u,MOF_HEIGHT_MIDDLE,0,HEAVY|AIR,4,BODY),
+    ALIS_MOVE(15,8,3,24,15,4u,MOF_HEIGHT_MIDDLE,0,HEAVY|AIR|MOF_MOVE_PARRY,4,BODY),
 #endif
 #endif
 };
@@ -75,6 +75,36 @@ static const MofDuelStandingNormal alis_moves[MOF_DUEL_NORMALS_PER_FIGHTER] = {
 #undef BLADE
 #undef BODY
 
+/* Command priority: Super, Shield Pull, riposte, special. */
+static const MofCommand alis_commands[] = {
+#if defined(MOF_ALIS_CHAPTER)
+    {MOF_DUEL_SUPER, MOF_CMD_FORWARD | MOF_DUEL_ONE, MOF_CMD_GESTURE},
+#endif
+    {MOF_DUEL_THROW, MOF_CMD_FORWARD | MOF_DUEL_ONE | MOF_DUEL_TWO, MOF_CMD_NOW},
+#if defined(MOF_ALIS_RIPOSTE)
+    {MOF_DUEL_RIPOSTE, MOF_CMD_BACK | MOF_DUEL_ONE, MOF_CMD_AFTER_DOWN},
+#endif
+    {MOF_DUEL_SPECIAL, MOF_CMD_FORWARD | MOF_DUEL_ONE, MOF_CMD_AFTER_DOWN},
+    {MOF_DUEL_NO_NORMAL, 0u, 0u}
+};
+
+#ifdef MOF_ALIS_MAGIC
+#include "../inc/alis_magic.h"
+/* Spell actions have their own namespace. The same motion can name a
+   different action in the next fighter's record. STUN is universal. */
+static const MofCommand alis_gestures[] = {
+    {GUARDIANS, MOF_DUEL_TWO, G_DOUBLE_QCF},
+    {SABER, MOF_DUEL_ONE, G_DP},
+    {TWIN_FIRE, MOF_DUEL_ONE | MOF_DUEL_TWO, G_QCF},
+    {SLASH, MOF_DUEL_ONE, G_QCF},
+    {MYAU, MOF_DUEL_TWO, G_QCB},
+    {MIRROR, MOF_DUEL_ONE, G_QCB},
+    {FIRE_TAP, MOF_DUEL_ONE, G_DOWN_DOWN},
+    {REST, MOF_DUEL_TWO, G_DOWN_DOWN},
+    {CHAT, MOF_DUEL_TWO, G_BACK_BACK}
+};
+#endif
+
 static const MofFighterDef mof_fighter_alis = {
     alis_moves,
     /* Jump arc only: walking still goes through the two-body solver. */
@@ -84,5 +114,10 @@ static const MofFighterDef mof_fighter_alis = {
     34u,           /* neck: head hits overlap above 34 px */
     32u,           /* throw capture reach */
     2u, 7u, 2u,    /* special advances 2 px per tick on ticks 2 to 6 */
-    MOF_MOVES_ALL, MOF_DUEL_UP | MOF_DUEL_DOWN
+    MOF_MOVES_ALL, MOF_DUEL_UP | MOF_DUEL_DOWN,
+    2u, 8u,        /* the riposte catches a middle hit on ticks 2 to 7 */
+    alis_commands,
+#ifdef MOF_ALIS_MAGIC
+    alis_gestures, sizeof(alis_gestures)/sizeof(alis_gestures[0])
+#endif
 };

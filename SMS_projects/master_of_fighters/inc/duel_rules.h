@@ -33,6 +33,9 @@
 #define MOF_DUEL_LANDED     1u
 #define MOF_DUEL_GUARDED    2u
 #define MOF_DUEL_MISSED     3u
+#if defined(MOF_DUEL_SCENE_MIRROR)
+#define MOF_DUEL_PARRIED    4u  /* a parry move caught the hit */
+#endif
 
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
 #define MOF_DUEL_NO_NORMAL UINT8_MAX
@@ -45,7 +48,6 @@
 #define MOF_DUEL_SUPER 14u
 #if defined(MOF_ALIS_RIPOSTE)
 #define MOF_DUEL_RIPOSTE 15u
-#define MOF_DUEL_PARRIED 4u
 #define MOF_DUEL_NORMALS_PER_FIGHTER 16u
 #else
 #define MOF_DUEL_NORMALS_PER_FIGHTER 15u
@@ -94,11 +96,28 @@ typedef struct {
 #if defined(MOF_DUEL_SCENE_MIRROR)
 #define MOF_MOVE_HEAVY         0x01u  /* long freeze and hitstun; a landed hit shakes */
 #define MOF_MOVE_AIR_BLOCKABLE 0x02u  /* an airborne guard stops it */
+#define MOF_EFFECT_FINISH      0x80u  /* confirmed cinematic contact */
 #define MOF_MOVE_ANTI_AIR      0x04u  /* from the ground it beats an airborne guard */
+#define MOF_MOVE_PARRY         0x08u  /* catches a middle hit in the record's parry window,
+                                         and strikes only after a catch */
 /* Sound material. Shield and blade equal the button-one command ids. */
 #define MOF_MATERIAL_SHIELD 0u
 #define MOF_MATERIAL_BLADE  1u
 #define MOF_MATERIAL_BODY   2u
+#define MOF_MATERIAL_SPECIAL 3u  /* the fighter's special sound, where the build has one */
+#define MOF_MATERIAL_SUPER   4u  /* the fighter's Super sound, where the build has one */
+
+/* A command the round recognizes before ordinary normals, in list order.
+   keys is exact: MOF_CMD_FORWARD or MOF_CMD_BACK, relative to facing, plus
+   the buttons, which must all be fresh presses. */
+#define MOF_CMD_FORWARD MOF_DUEL_RIGHT
+#define MOF_CMD_BACK    MOF_DUEL_LEFT
+#define MOF_CMD_NOW        0u  /* standing and free */
+#define MOF_CMD_AFTER_DOWN 1u  /* within the down-then-direction window */
+#define MOF_CMD_GESTURE    2u  /* the build's full-meter gesture reader agrees */
+typedef struct {
+    uint8_t move, keys, needs;  /* move MOF_DUEL_NO_NORMAL ends the list */
+} MofCommand;
 
 /* One fighter's rules record. The rules read only this record, so a new
    fighter adds a record instead of new branches on its id. */
@@ -112,6 +131,12 @@ typedef struct {
     uint8_t special_from, special_until, special_step;  /* ticks, px per tick */
     uint16_t owned;    /* MOF_MOVE_BIT(id) of each move the fighter owns */
     uint8_t vertical;  /* MOF_DUEL_UP if it jumps, MOF_DUEL_DOWN if it crouches */
+    uint8_t parry_from, parry_until;  /* ticks of a MOF_MOVE_PARRY move that catch */
+    const MofCommand *commands;       /* normal/throw/super priority order */
+#ifdef MOF_ALIS_MAGIC
+    const MofCommand *gestures;       /* independent repertoire, outside owned */
+    uint8_t gesture_count;
+#endif
 } MofFighterDef;
 #define MOF_MOVE_BIT(id) ((uint16_t)1u << (id))
 #define MOF_MOVES_ALL ((uint16_t)((1ul << MOF_DUEL_NORMALS_PER_FIGHTER) - 1u))
@@ -128,9 +153,7 @@ typedef struct {
 #if defined(MOF_DUEL_SCENE_MIRROR)
     const MofFighterDef *def;
     uint8_t reaction, thrown, hit_duration;
-#if defined(MOF_ALIS_RIPOSTE)
-    uint8_t riposte_armed;
-#endif
+    uint8_t riposte_armed;  /* a parry move caught a hit and may strike */
 #endif
 } MofDuelFighter;
 
@@ -222,8 +245,15 @@ uint8_t mof_duel_posture_pose(const MofDuel *duel, uint8_t player);
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
 #if defined(MOF_DUEL_SCENE_MIRROR)
 /* Give each player the record of its fighter id. Call once after init. */
+#ifdef MOF_ALIS_MAGIC
+uint8_t mof_duel_effect_contact(MofDuel *duel,uint8_t attacker,uint8_t damage,uint8_t flags);
+#endif
 uint8_t mof_duel_set_roster(MofDuel *duel,
     const MofFighterDef *const roster[MOF_DUEL_FIGHTER_IDS]);
+/* The first command of the fighter's record that these keys complete:
+   exact keys, fresh buttons, the down window and the build's gesture. */
+uint8_t mof_duel_command(const MofDuelFighter *fighter, uint8_t keys, uint8_t last_buttons,
+                         uint8_t after_down, uint8_t gesture);
 #else
 uint8_t mof_duel_set_standing_normals(MofDuel *duel,
     const MofDuelStandingNormal normals[2][MOF_DUEL_NORMALS_PER_FIGHTER]);

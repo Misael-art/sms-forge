@@ -53,27 +53,30 @@ static uint8_t decisive(const MofDuel *d,uint8_t p) {
     return d->fighters[p].life && d->fighters[p].life<=25 && chapter.meter[p]==8
         && chapter.wins[p]+1>=chapter.target && d->fighters[1-p].life && d->fighters[1-p].life<25;
 }
-static uint8_t command(MofCaster *c,uint8_t button) {
-    const uint8_t *h=c->history;
-    if (button==32 && h[0]==D && h[1]==DF && h[2]==F && h[3]==D && h[4]==DF && h[5]==F)
-        return GUARDIANS;
-    if (button==16 && h[3]==F && h[4]==B && h[5]==F) return STUN;
-    if (button==16 && h[3]==F && h[4]==D && h[5]==DF) return SABER;
+static uint8_t command(const MofFighterDef *def,const uint8_t *h,uint8_t buttons) {
+    const MofCommand *binding;
+    uint8_t i,gesture;
+    if (h[3]==F && h[4]==B && h[5]==F && buttons==MOF_DUEL_ONE) return STUN;
     if (h[3]==D && h[4]==DF && h[5]==F) {
-        if (button==48) return TWIN_FIRE;
-        if (button==16) return SLASH;
-    }
-    if (h[3]==D && h[4]==DB && h[5]==B) {
-        if (button==32) return MYAU;
-        if (button==16) return MIRROR;
-    }
-    if (h[4]==D && h[5]==D) return button==16 ? FIRE_TAP : button==32 ? REST : 0;
-    if (button==32 && h[4]==B && h[5]==B) return CHAT;
-    return 0;
+        gesture=G_QCF;
+        if (h[0]==D && h[1]==DF && h[2]==F) gesture=G_DOUBLE_QCF;
+    } else if (h[3]==F && h[4]==D && h[5]==DF) gesture=G_DP;
+    else if (h[3]==D && h[4]==DB && h[5]==B) gesture=G_QCB;
+    else if (h[4]==D && h[5]==D) gesture=G_DOWN_DOWN;
+    else if (h[4]==B && h[5]==B) gesture=G_BACK_BACK;
+    else return SPELL_NONE;
+    do {
+        binding=def->gestures;
+        for (i=0;i<def->gesture_count;++i,++binding)
+            if (binding->needs==gesture && binding->keys==buttons) return binding->move;
+        if (gesture!=G_DOUBLE_QCF) break;
+        gesture=G_QCF;
+    } while (1);
+    return SPELL_NONE;
 }
 static uint8_t armed(const MofDuel *d,uint8_t p,uint8_t move) {
     MofCaster *c=&mof_magic.caster[p];
-    if (!move || (d->fighters[p].fighter!=MOF_DUEL_ALIS && move!=STUN) || chapter.meter[p]<timings[move].cost) return 0;
+    if ((!move || move>=SPELL_COUNT) || chapter.meter[p]<timings[move].cost) return 0;
     if (move==REST) return d->fighters[p].life<100;
     if (move==CHAT) return !c->chat_wait && chapter.meter[p]<8;
     if (move==STUN) return !c->stun_used && d->fighters[p].life<=25 && chapter.meter[p]==8
@@ -90,7 +93,7 @@ static void begin(uint8_t p,uint8_t move) {
     mof_magic.busy=1;
     ++mof_magic.events[p][move];
     mof_magic.audio=move;
-    if (move==STUN) {c->stun_used=1;mof_magic.caster[1-p].dizzy=84;}
+    if (move==STUN) c->stun_used=1;
     if (move==CHAT) c->chat_wait=100;
 }
 static void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
@@ -129,7 +132,7 @@ static void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
         memmove(c->history,c->history+1,5);c->history[5]=dir;c->window=16;
     }
     c->previous=dir;
-    if (edge && dir && c->window) move=command(c,buttons);
+    if (edge && dir && c->window) move=command(f->def,c->history,buttons);
     if ((move==GUARDIANS || move==STUN) && !armed(d,p,move)) {
         c->window=0;mof_magic.locked[p]=1;mof_magic.pad[p]=0;return;
     }
@@ -142,29 +145,48 @@ static void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
 void mof_magic_input(const MofDuel *d,uint8_t one,uint8_t two) {
     mof_magic.live_step=!d->hitstop;
     input_player(d,0,one);input_player(d,1,two);
-    if (mof_magic.caster[0].dizzy) {mof_magic.pad[0]=0;mof_magic.locked[0]=1;}
+    if (!d->hitstop) {
+        uint8_t p;
+        for (p=0;p<2;++p) {
+            const MofCaster *c=&mof_magic.caster[p];
+            if (c->move==STUN && !c->age) {
+                mof_magic.caster[1-p].dizzy=84;
+                mof_magic.pad[1-p]=0;
+                mof_magic.locked[1-p]=1;
+            }
+        }
+    }
 }
 static void charge(uint8_t p) {if (chapter.meter[p]<8) ++chapter.meter[p];}
 
-static void impact(MofDuel *d,uint8_t p,uint8_t damage,uint8_t heavy) {
-    uint8_t v=1-p;
-    MofDuelFighter *target=&d->fighters[v];
-    MofCaster *c=&mof_magic.caster[v];
-    uint8_t guarded=target->guarding && !c->dizzy;
-    c->dizzy=c->move=c->pending=c->pose=0;
-    target->state_since=d->tick;target->thrown=0;target->spent=1;
-    if (guarded) {
-        target->state=MOF_DUEL_BLOCK;target->reaction=MOF_REACT_GUARD_STAND+target->guarding-1;
-        ++mof_magic.blocks[p];
-    } else {
-        target->life=target->life>damage ? target->life-damage : 0;
-        target->state=target->life ? MOF_DUEL_HIT : MOF_DUEL_KO;
-        target->hit_duration=heavy ? 20 : 10;target->reaction=MOF_REACT_BODY;
-        ++mof_magic.hits[p];charge(v);
+/* Collect both sides before cancelling poses. A pair of overlapping flames
+   spends both projectiles, with one impact on this defender this tick. */
+static void offer(uint8_t p,uint8_t damage,uint8_t move) {
+    uint8_t prev=mof_magic.impact_move[p];
+    if (!prev || (prev==FIRE_TAP && move!=FIRE_TAP) ||
+        ((prev==FIRE_TAP)==(move==FIRE_TAP) && damage>mof_magic.impact_damage[p])) {
+        mof_magic.impact_move[p]=move;
+        mof_magic.impact_damage[p]=damage;
     }
-    charge(p);d->hitstop=heavy ? 11 : 4;
-    d->hitstop_target=v|(heavy && !guarded ? MOF_DUEL_HITSTOP_SHAKE : 0);
-    mof_magic.audio=guarded ? MIRROR : heavy ? MYAU : FIRE_TAP;
+}
+static void resolve(MofDuel *d,uint8_t p) {
+    uint8_t v=1u-p, move=mof_magic.impact_move[p], result;
+    MofCaster *c=&mof_magic.caster[v];
+    if (!move) return;
+    result=mof_magic_contact(d,p,mof_magic.impact_damage[p],
+                move==GUARDIANS ? MOF_EFFECT_FINISH : move==FIRE_TAP ? 0 : MOF_MOVE_HEAVY);
+    if (!result) return;
+    mof_magic.effect_mask|=(1u<<p);
+    c->dizzy=c->move=c->pending=c->pose=0;
+    if (result==MOF_DUEL_GUARDED) ++mof_magic.blocks[p];
+    else ++mof_magic.hits[p];
+    if (move==GUARDIANS && !d->fighters[v].life) {
+        mof_magic.finisher=p+1;
+        mof_magic.target_fighter=d->fighters[v].fighter;
+    }
+    /* Prefer the stronger audible contact in a trade. */
+    if (!p || !(mof_magic.effect_mask&1u) || move!=FIRE_TAP)
+        mof_magic.audio=result==MOF_DUEL_GUARDED ? MIRROR : move;
 }
 static void spawn(MofDuel *d,uint8_t p,uint8_t index,uint8_t move) {
     MofShot *s=&mof_magic.shots[p*2+index];
@@ -207,7 +229,7 @@ static void flight(MofDuel *d,MofShot *s) {
         s->owner=v;s->dx=-s->dx;s->ttl=64;++mof_magic.reflects[v];mof_magic.audio=MIRROR;
         return;
     }
-    impact(d,s->owner,s->damage,s->kind==MYAU);
+    offer(s->owner,s->damage,s->kind);
     s->ttl=0;
 }
 static void cast(MofDuel *d,uint8_t p) {
@@ -233,17 +255,14 @@ static void cast(MofDuel *d,uint8_t p) {
         gap=r->x-f->x;if (!c->face) gap=-gap;
         if (gap>=0 && gap<=35 && r->life && r->state<MOF_DUEL_FALL &&
             d->body[1-p].y_offset>=d->body[p].y_offset-49 && d->body[1-p].y_offset<=d->body[p].y_offset+28) {
-            impact(d,p,12,1);c->strain=1;
+            offer(p,12,SABER);c->strain=1;
         }
     }
     if (move==GUARDIANS && c->age>=4) {
         gap=r->x-f->x;
         if (gap>=-28 && gap<=28) {
             if (mof_magic.caster[1-p].dizzy && r->life && r->life<25) {
-                mof_magic.finisher=p+1;
-                mof_magic.target_fighter=r->fighter;
-                r->life=0;r->state=MOF_DUEL_KO;r->state_since=d->tick;
-                mof_magic.caster[1-p].dizzy=0;
+                offer(p,r->life,GUARDIANS);
             }
             c->move=c->pose=0;
         } else f->x+=gap>0 ? 6 : -6;
@@ -252,7 +271,9 @@ static void cast(MofDuel *d,uint8_t p) {
 }
 void mof_magic_step(MofDuel *d) {
     uint8_t i;
+    mof_magic.effect_mask=0;
     if (!mof_magic.live_step) return;
+    mof_magic.impact_move[0]=mof_magic.impact_move[1]=0;
     for (i=0;i<2;++i) {
         if (!mof_magic.caster[i].move) mof_magic.caster[i].strain=0;
         cast(d,i);
@@ -263,6 +284,7 @@ void mof_magic_step(MofDuel *d) {
         mof_magic.busy|=mof_magic.shots[i].ttl;
     }
     for (i=0;i<2;++i) {
+        resolve(d,i);
         const MofCaster *c=&mof_magic.caster[i];
         mof_magic.busy|=c->move|c->dizzy|c->pending;
     }

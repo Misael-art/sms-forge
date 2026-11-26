@@ -88,32 +88,20 @@ static MIRROR_HOT uint8_t mirror_read(uint8_t player, uint8_t keys)
         mirror_dir_window[player] = 0u;
         mirror_dir_face[player] = actor->face_right;
     }
-    if (free && posture == MOF_INPUT_STANDING) {
+    /* Every command needs a fresh button, so most frames skip the search. */
+    if (free && posture == MOF_INPUT_STANDING &&
+        (keys & (uint8_t)~input->last_buttons & (MOF_DUEL_ONE | MOF_DUEL_TWO))) {
+        /* The fighter's record lists its commands in priority order. */
+        id = mof_duel_command(actor, keys, input->last_buttons, mirror_dir_window[player],
 #if defined(MOF_ALIS_CHAPTER)
-        if (super_ready && keys==(forward|MOF_DUEL_ONE) && !(input->last_buttons & MOF_DUEL_ONE)) {
-            mof_duel_commands_reset(input, keys);
-            mirror_dir_window[player]=0;
-            return MOF_DUEL_SUPER;
-        }
+                              super_ready);
+#else
+                              0u);
 #endif
-        if (keys == (forward | MOF_DUEL_ONE | MOF_DUEL_TWO) && !input->last_buttons) {
+        if (id != MOF_DUEL_NO_NORMAL) {
             mof_duel_commands_reset(input, keys);
             mirror_dir_window[player] = 0u;
-            return MOF_DUEL_THROW;
-        }
-#if defined(MOF_ALIS_RIPOSTE)
-        if (mirror_dir_window[player] && keys == ((forward ^ (MOF_DUEL_LEFT|MOF_DUEL_RIGHT)) | MOF_DUEL_ONE) &&
-            !(input->last_buttons & MOF_DUEL_ONE)) {
-            mof_duel_commands_reset(input, keys);
-            mirror_dir_window[player]=0;
-            return MOF_DUEL_RIPOSTE;
-        }
-#endif
-        if (mirror_dir_window[player] && keys == (forward | MOF_DUEL_ONE) &&
-            !(input->last_buttons & MOF_DUEL_ONE)) {
-            mof_duel_commands_reset(input, keys);
-            mirror_dir_window[player] = 0u;
-            return MOF_DUEL_SPECIAL;
+            return id;
         }
     }
     if (free && keys == MOF_DUEL_DOWN && posture == MOF_INPUT_CROUCHING)
@@ -590,6 +578,7 @@ new_round:
             n2 = mirror_read_p2(p2);
         }
 #ifdef MOF_ALIS_MAGIC
+        mof_magic.effect_mask=0;
         mof_magic.live_step=!duel.hitstop;
 #endif
         CHAPTER_LINE(0);
@@ -713,13 +702,14 @@ new_round:
 #if defined(MOF_ALIS_CHAPTER)
         mof_chapter_music();
         SMS_mapROMBank(MOF_RULE_BANK);
+#ifdef MOF_ALIS_MAGIC
+        if (mof_magic.audio) { mof_magic_sound(); PSGSFXFrame(); }
+        else
+#endif
         if (chapter.phase==MOF_RESULT) PSGSFXFrame();
         else
 #endif
             mof_duel_audio_tick(&duel, 1u, duel.fighters[0].def->moves);
-#ifdef MOF_ALIS_MAGIC
-        if (mof_magic.audio) mof_magic_sound();
-#endif
         CHAPTER_LINE(5);
     }
 }

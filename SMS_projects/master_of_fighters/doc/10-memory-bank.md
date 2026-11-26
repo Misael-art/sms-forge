@@ -1,5 +1,11 @@
 # 10-memory-bank — master_of_fighters
 
+## 26/11/2026 · Elenco, impacto comum e Odin · candidata G5
+
+A G5 integra os gestos de Alis às fichas com comandos físicos, aparo e material de som. O motor recebe também os contatos dos projéteis. Os dois Fire fortes acertaram no mesmo passo lógico no Versus. Cada lutadora terminou com 90 PV e duas unidades de Reiki. O contador do cartucho mediu 11 publicações congeladas. História, finalização dos dois lados, revanche e filme com PSG passaram pela ROM de SHA-256 `c202314a04a192936206453359150d416c9f85f80be707851da1906d05e1ca96`. [ROM G5](../out/candidates/alis_guardioes_g5/Alis_Guardioes_de_Algol.sms) · [Troca de golpes](../out/qa/alis_guardioes_g5/trade/intervalo_de_impacto.json) · [Odin e os Guardiões no emulador](../out/qa/alis_guardioes_g5/sound/guardioes_com_som.mp4)
+
+O impacto físico conservou 4/10 passos no leve, 11/20 no forte e 11/3 na defesa. A carga mista mediu 39,9485, 39,9485 e 37,9511 FPS. A fila do VDP terminou na área ativa 27 vezes em 3.000 apresentações mistas e 74 vezes no ensaio de magias. O aceite permanece reprovado. O corredor de sondas conserva 103 bytes de folga. [Impactos](../out/qa/alis_guardioes_g5/impact/observations.json) · [Cinemática e fontes de Odin](curadoria_guardioes_de_algol.md)
+
 ## 26/11/2026 · Especiais de Alis e F. Anime modular · G4
 
 [ROM para jogar](../out/candidates/alis_guardioes_g4/Alis_Guardioes_de_Algol.sms), SHA-256 `21c43ff6fdb5f9241e33fb76f0ee6a624316d5078cf03b48cd292a2ed93ea9c0`. Fire de duas intensidades, chamas curvas duplas, Myau alado, Rest, onda da Espada Laconiana, Rising Saber, Chat, reflexão, atordoamento universal e Guardiões de Algol entram pelo capítulo do Espaçoporto. Os modos História e Versus chegaram à arena em sessões privadas. P1 e P2 confirmaram o final pelos controles. A reação é selecionada pelo ID da vítima. O ataque fornece o efeito sobreposto. [Ficha para o elenco](padrao_moveset_especiais.md) · [Curadoria, reprodução e resultados](curadoria_guardioes_de_algol.md) · [Vídeo com áudio](../out/qa/alis_guardioes_g4/som/guardioes_com_som.mp4)

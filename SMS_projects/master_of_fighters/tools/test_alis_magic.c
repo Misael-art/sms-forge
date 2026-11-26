@@ -13,6 +13,9 @@ static const MofDuelGeometry body[2]={
 };
 void mof_magic_hurt(const MofDuel *d,uint8_t p,MofDuelBox *box){mof_duel_hurt_box(d,p,box);}
 
+uint8_t mof_magic_contact(MofDuel *d,uint8_t p,uint8_t damage,uint8_t flags)
+{return mof_duel_effect_contact(d,p,damage,flags);}
+
 static void reset(void)
 {
     memset(&chapter,0,sizeof(chapter));
@@ -51,10 +54,82 @@ static void finisher(unsigned p,unsigned attacker,unsigned rival,unsigned reiki,
     if (eligible) assert(!duel.fighters[v].life && mof_magic.target_fighter==MOF_DUEL_ALIS);
 }
 
+static void colliding_shot(uint8_t slot,uint8_t owner,uint8_t kind,uint8_t damage)
+{
+    MofShot *shot=&mof_magic.shots[slot];
+    shot->owner=owner;
+    shot->kind=kind;
+    shot->ttl=12;
+    shot->x=duel.fighters[1-owner].x;
+    shot->y=111;
+    shot->damage=damage;
+}
+
+/* Two sources for one owner, one for the other. Swap both sides and
+   shot slots. The airborne projectile survives its owner's interruption. */
+static void trade(uint8_t attacker,uint8_t reverse)
+{
+    uint8_t v=1-attacker, first=reverse ? 3 : 0;
+    reset();
+    colliding_shot(first,attacker,FIRE_TAP,6);
+    colliding_shot(1,attacker,FIRE_HOLD,10);
+    colliding_shot(3-first,v,FIRE_TAP,6);
+    mof_magic.caster[v].chat_wait=17;
+    tick(0,0);
+    assert(duel.fighters[attacker].life==94 && duel.fighters[v].life==90);
+    assert(mof_magic.hits[0]==1 && mof_magic.hits[1]==1);
+    assert(duel.hitstop==MOF_DUEL_HEAVY_HITSTOP);
+    assert(duel.hitstop_target==(v|MOF_DUEL_HITSTOP_SHAKE));
+    assert(duel.fighters[attacker].hit_duration==MOF_DUEL_LIGHT_HITSTUN);
+    assert(duel.fighters[v].hit_duration==MOF_DUEL_HEAVY_HITSTUN);
+    for (uint8_t age=MOF_DUEL_HEAVY_HITSTOP;age;--age) {
+        tick(0,0);
+        assert(duel.hitstop==age-1 && !duel.fighters[0].contact && !duel.fighters[1].contact);
+        assert(mof_magic.caster[v].chat_wait==16 && !mof_magic.effect_mask);
+    }
+    tick(0,0);
+    assert(mof_magic.caster[v].chat_wait==15);
+}
+
+static void capabilities(void)
+{
+    static const MofCommand alternate[]={{REST,MOF_DUEL_TWO,G_BACK_BACK}};
+    MofFighterDef other=mof_fighter_alis;
+    reset();
+    other.gestures=alternate;
+    other.gesture_count=1;
+    duel.fighters[0].def=&other;
+    duel.fighters[0].life=80;
+    chapter.meter[0]=2;
+    input(0,"d-d",16);advance(25);
+    assert(!mof_magic.events[0][FIRE_TAP]);
+    input(0,"b-b",32);advance(29);
+    assert(duel.fighters[0].life==86 && chapter.meter[0]==0);
+    reset();
+    duel.fighters[0].fighter=MOF_DUEL_HAYATO;
+    input(0,"d-d",16);advance(8);
+    assert(mof_magic.events[0][FIRE_TAP]);
+    reset();
+    duel.fighters[0].def=&other;
+    duel.fighters[0].life=25;chapter.meter[0]=8;
+    input(0,"fbf",16);
+    assert(mof_magic.caster[1].dizzy);
+}
+
 int main(void)
 {
     unsigned p;
+    capabilities();
     for (p=0;p<2;++p) {
+        trade(p,0);trade(p,1);
+        reset();
+        duel.fighters[p].contact=MOF_DUEL_LANDED;
+        assert(!mof_magic_contact(&duel,p,10,MOF_MOVE_HEAVY));
+        assert(duel.fighters[1-p].life==100);
+        reset();
+        duel.fighters[1-p].guarding=MOF_GUARD_STANDING;
+        assert(mof_magic_contact(&duel,p,10,MOF_MOVE_HEAVY)==MOF_DUEL_GUARDED);
+        assert(duel.hitstop_target==1-p && duel.fighters[1-p].life==100);
         finisher(p,25,24,8,1,84,1);
         finisher(p,26,24,8,1,84,0);
         finisher(p,25,25,8,1,84,0);
