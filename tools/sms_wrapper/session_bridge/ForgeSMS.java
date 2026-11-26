@@ -32,8 +32,27 @@ public final class ForgeSMS {
     static DisplayWindow display;
     static volatile boolean closed;
     static volatile boolean audioEnabled;
-    static boolean realtimeRecording;
+    static boolean realtimeRecording, steppedRecording;
     static long recordingStartNanos, recordingStartFrame;
+    static Path steppedRecordingDir;
+    static long steppedRecordedFrames;
+    static volatile byte[] replayInputs;
+    static ByteBuffer replayCommits;
+    static Path replayCommitsPath;
+    static int replayProbeAddress, replayProbeSize;
+
+    static final class ReplayFrameOutput extends BufferedOutputStream {
+        ReplayFrameOutput(OutputStream destination) { super(destination, 1024 * 1024); }
+
+        @Override public void write(int value) throws IOException {
+            // DisplayWindow writes RGB24 bytes on the sole emulator runner.
+            // The controller stops that runner before it closes the stream.
+            byte[] buffer = buf;
+            if (buffer == null || count == buffer.length) super.write(value);
+            else buffer[count++] = (byte)value;
+        }
+    }
+
     static void prepareSilentAudio() throws Exception {
         // -muted prevents every ROM sample from reaching the host during boot.
         // Prime the already-open line with zeros so host routing can see it.
@@ -100,7 +119,49 @@ public final class ForgeSMS {
         Pad(int port, Provider provider) { super(port, provider); this.port = port; }
         public void frameFinished() {
             super.frameFinished();
-            if (port == 0) frames++;
+            if (port == 0) {
+                long relativeFrame = ++frames - recordingStartFrame;
+                byte[] inputs = replayInputs;
+                if (inputs != null) {
+                    int next = (int)relativeFrame * 2;
+                    if (next <= inputs.length) {
+                        replayCommits.putLong(System.nanoTime());
+                        for (int i=0; i<replayProbeSize; i++)
+                            replayCommits.put((byte)system.peekByte(replayProbeAddress+i));
+                    }
+                    p1 = next < inputs.length ? inputs[next] : 0;
+                    p2 = next < inputs.length ? inputs[next+1] : 0;
+                }
+            }
+        }
+    }
+
+    static void loadReplay(String name, int address, int length) throws IOException {
+        if (address < 0xC000 || address >= 0xE000 || length < 1 || length > 256 || address+length > 0xE000)
+            throw new IOException("replay probe range");
+        Path path = root.resolve("evidence").resolve(name + ".inputs");
+        long size = Files.size(path);
+        if (size < 120 || size > 3600 || size % 2 != 0) throw new IOException("replay input length");
+        byte[] inputs = Files.readAllBytes(path);
+        if (inputs.length != size) throw new IOException("replay changed while reading");
+        for (byte value : inputs) if (value < 0 || value > 63) throw new IOException("replay input mask");
+        replayCommits = ByteBuffer.allocate(inputs.length / 2 * (Long.BYTES + length));
+        replayProbeAddress = address;
+        replayProbeSize = length;
+        replayCommitsPath = root.resolve("evidence").resolve(name + ".commits");
+        p1 = inputs[0]; p2 = inputs[1]; console = 0;
+        replayInputs = inputs;
+    }
+
+    static void stopReplay() throws IOException {
+        if (replayInputs == null) return;
+        replayInputs = null;
+        p1 = p2 = console = 0;
+        try (OutputStream stream = Files.newOutputStream(replayCommitsPath, StandardOpenOption.CREATE_NEW)) {
+            stream.write(replayCommits.array(), 0, replayCommits.position());
+        } finally {
+            replayCommits = null;
+            replayCommitsPath = null;
         }
     }
     static Object field(String name) throws Exception {
@@ -123,9 +184,19 @@ public final class ForgeSMS {
         long budget = (long)system.getCyclesPerFrame() * (count + 2);
         while (frames < target) {
             if ((budget -= 64) < 0) throw new IOException("VDP frame counter stalled");
-            system.execute(64);
+            execute(64);
         }
         display.repaint();
+    }
+    static void execute(int cycles) throws IOException {
+        long before = frames;
+        system.execute(cycles);
+        if (!steppedRecording || frames == before) return;
+        if (frames != before + 1) throw new IOException("step passed more than one VDP frame");
+        File image = steppedRecordingDir.resolve(String.format("%06d.png", steppedRecordedFrames)).toFile();
+        display.writeScreenToFile(image, true);
+        if (!image.isFile() || image.length() == 0) throw new IOException("missing framebuffer at VDP edge");
+        ++steppedRecordedFrames;
     }
     static String status() {
         return "\"pid\":" + ProcessHandle.current().pid() + ",\"frame\":" + frames
@@ -152,6 +223,8 @@ public final class ForgeSMS {
         if (realtimeRecording && !a[3].equals("status") &&
                 !a[3].equals("record-stop") && !a[3].equals("close"))
             throw new IOException("realtime capture active; stop before pausing or stepping");
+        if (steppedRecording && (a[3].equals("run") || a[3].equals("record-start")))
+            throw new IOException("stepped capture active; stop before free run");
         switch (a[3]) {
         case "status": if (a.length != 4) throw new IOException("arity"); break;
         case "pause": pause(); break;
@@ -165,6 +238,28 @@ public final class ForgeSMS {
             p1=n1; p2=n2; console=nc;
             extra=",\"received\":true,\"applied\":true"; break;
         case "step": if(a.length != 5) throw new IOException("arity"); step(Integer.parseInt(a[4])); break;
+        case "sample-commit":
+            if(a.length != 6 && a.length != 7) throw new IOException("arity");
+            int sampleAddress = Integer.parseInt(a[4]);
+            int sampleStamp = mask(a[5], 255);
+            int maxVdpFrames = a.length == 7 ? mask(a[6], 8) : 3;
+            if(sampleAddress < 0xC000 || sampleAddress >= 0xE000 || sampleStamp % 2 != 0)
+                throw new IOException("sample address or commit stamp");
+            if(maxVdpFrames == 0) throw new IOException("zero sampling budget");
+            pause();
+            long sampleFrame = frames;
+            int sampleCycles = 0;
+            long sampleBudget = (long)system.getCyclesPerFrame() * maxVdpFrames;
+            while((system.peekByte(sampleAddress) & 255) != sampleStamp) {
+                if(sampleCycles >= sampleBudget || frames - sampleFrame > maxVdpFrames)
+                    throw new IOException("MFD1 commit missing, expected " + sampleStamp
+                        + " observed " + (system.peekByte(sampleAddress) & 255)
+                        + " after " + (frames - sampleFrame) + " VDP frames");
+                execute(4);
+                sampleCycles += 4;
+            }
+            extra=",\"cycles_advanced\":" + sampleCycles + ",\"start_frame\":" + sampleFrame;
+            break;
         case "sequence":
             if(a.length != 5) throw new IOException("arity");
             String[] steps=a[4].split(",");
@@ -195,6 +290,20 @@ public final class ForgeSMS {
             StringBuilder b=new StringBuilder(",\"ram\":[");
             for(int i=0;i<len;i++) { if(i>0)b.append(','); b.append(system.peekByte(addr+i)); }
             extra=b.append(']').toString(); break;
+        case "read-vram":
+            if(a.length != 6) throw new IOException("arity");
+            pause();
+            int vramAddress = Integer.parseInt(a[4]), vramLength = Integer.parseInt(a[5]);
+            if(vramAddress < 0 || vramAddress >= 0x4000 || vramLength < 1 || vramLength > 0x2000
+                    || vramAddress + vramLength > 0x4000) throw new IOException("VRAM range");
+            int[] vram = system.getVRAM();
+            StringBuilder vdp = new StringBuilder(",\"sat_address\":").append(system.getSpriteAttributeTableAddress())
+                    .append(",\"vram\":[");
+            for(int i=0;i<vramLength;i++) {
+                if(i>0) vdp.append(',');
+                vdp.append(vram[vramAddress+i]&255);
+            }
+            extra=vdp.append(']').toString(); break;
         case "sram":
             pause();int[] ram=system.getSRAM();
             if(ram==null || ram.length<2)throw new IOException("SRAM absent");
@@ -220,38 +329,68 @@ public final class ForgeSMS {
                 }
             } finally {p1=p2=console=0;}
             extra=",\"first_frame\":"+first+",\"recorded_frames\":"+count;break;
+        case "record-steps-start":
+            if(a.length!=5 || !a[4].matches("[A-Za-z0-9_-]{1,64}") || steppedRecording)
+                throw new IOException("stepped recording name or state");
+            pause();
+            steppedRecordingDir=Files.createDirectory(root.resolve("evidence").resolve(a[4]));
+            steppedRecordedFrames=0;
+            recordingStartFrame=frames;
+            recordingStartNanos=System.nanoTime();
+            steppedRecording=true;
+            extra=",\"first_frame\":"+recordingStartFrame;break;
+        case "record-steps-stop":
+            if(a.length!=4 || !steppedRecording) throw new IOException("no stepped recording active");
+            pause();
+            steppedRecording=false;
+            extra=",\"first_frame\":"+recordingStartFrame+
+                  ",\"recorded_frames\":"+steppedRecordedFrames+
+                  ",\"capture_elapsed_ns\":"+(System.nanoTime()-recordingStartNanos);break;
         case "record-start":
-            if(a.length!=5 || !a[4].matches("[A-Za-z0-9_-]{1,64}"))
-                throw new IOException("realtime recording name");
+            if((a.length!=5 && a.length!=8) || !a[4].matches("[A-Za-z0-9_-]{1,64}") || steppedRecording
+                || (a.length==8 && !a[5].equals("vdp-replay")))
+                throw new IOException("recording name or state");
             pause();
             // Native DisplayWindow callback writes cropped RGB24 before any
             // compositor/scale. Buffered output avoids one syscall per byte.
-            OutputStream stream = new BufferedOutputStream(Files.newOutputStream(
-                root.resolve("evidence").resolve(a[4]+".rgb"),
-                StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE), 1024*1024);
+            OutputStream destination = Files.newOutputStream(root.resolve("evidence").resolve(a[4]+".rgb"),
+                StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
+            OutputStream stream = a.length==8 ? new ReplayFrameOutput(destination) :
+                new BufferedOutputStream(destination, 1024*1024);
             display.setScreenRecorderStream(stream,true);
             recordingStartFrame=frames;
             recordingStartNanos=System.nanoTime();
             realtimeRecording=true;
-            try { start.invoke(null); }
+            try {
+                if(a.length==8) loadReplay(a[4], Integer.parseInt(a[6]), Integer.parseInt(a[7]));
+                start.invoke(null);
+            }
             catch(Exception failure) {
                 display.setScreenRecorderStream(null,true);
                 realtimeRecording=false;
+                stopReplay();
                 throw failure;
             }
             extra=",\"first_frame\":"+recordingStartFrame;break;
         case "record-stop":
-            if(a.length!=4 || !realtimeRecording) throw new IOException("no realtime recording active");
+            if(a.length!=4 || !realtimeRecording)
+                throw new IOException("no matching recording active");
             pause();
             long elapsedNanos=System.nanoTime()-recordingStartNanos;
             display.setScreenRecorderStream(null,true);
             realtimeRecording=false;
+            stopReplay();
             extra=",\"first_frame\":"+recordingStartFrame+
                   ",\"recorded_frames\":"+display.getRecordedScreens()+
                   ",\"capture_elapsed_ns\":"+elapsedNanos;break;
         case "close":
             pause();
-            if(realtimeRecording) { display.setScreenRecorderStream(null,true); realtimeRecording=false; }
+            if(realtimeRecording) {
+                display.setScreenRecorderStream(null,true);
+                realtimeRecording=false;
+                stopReplay();
+            }
+            steppedRecording=false;
             p1=p2=console=0; closed=true; break;
         default: throw new IOException("unknown command");
         }
@@ -306,7 +445,13 @@ public final class ForgeSMS {
                     String response;
                     try { response=command(line); }
                     catch(Exception e) {
-                        if(line.startsWith(session+" "+token+" ")){pause();p1=p2=console=0;}
+                        if(line.startsWith(session+" "+token+" ")){
+                            pause();p1=p2=console=0;
+                            String[] fields = line.split(" ", 5);
+                            String operation = fields.length > 3 ? fields[3].trim() : "";
+                            if(operation.equals("sample-commit") || operation.equals("capture"))
+                                System.err.println(operation + ": " + e);
+                        }
                         response="{\"ok\":false,\"error\":\"command rejected\"}";
                     }
                     client.configureBlocking(true);

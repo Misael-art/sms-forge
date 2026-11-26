@@ -78,7 +78,7 @@ def build_bridge(ecj=None):
         if classes.exists(): shutil.rmtree(classes)
         classes.mkdir()
         compiler = shutil.which("javac")
-        if compiler:
+        if compiler and not ecj:
             command = [compiler, "--release", "17"]
         elif ecj:
             # Some distro runtimes omit release metadata. The private view
@@ -125,7 +125,8 @@ def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
         if not shutil.which(binary): raise RuntimeError(f"{binary} required; no desktop fallback")
     runtime = WORKSPACE / "out/session_bridge/runtime"
     xvfb = xvfb or shutil.which("Xvfb") or (str(runtime / "xvfb/usr/bin/Xvfb") if (runtime / "xvfb/usr/bin/Xvfb").is_file() else None)
-    ecj = ecj or (str(runtime / "ecj.jar") if (runtime / "ecj.jar").is_file() else None)
+    if ecj is None and not shutil.which("javac") and (runtime / "ecj.jar").is_file():
+        ecj = runtime / "ecj.jar"
     if not xvfb or not Path(xvfb).is_file(): raise RuntimeError("Xvfb required; no desktop fallback")
     bridge = build_bridge(ecj)
     if ttl < 10 or ttl > 7200: raise ValueError("session TTL must be 10..7200 seconds")
@@ -169,7 +170,10 @@ def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
         supervisor = subprocess.Popen([sys.executable, str(HERE / "isolated.py"), "_supervise", str(root)],
                          stdout=log, stderr=log, start_new_session=True, close_fds=True)
     _OWNED_SUPERVISORS[sid] = supervisor
-    deadline = time.monotonic() + 45
+    # The supervisor can spend 10s on Xvfb, 50s on Java readiness and
+    # 8s on verified audio routing, in sequence. Leave time for main
+    # process scheduling and receipt publication after those phases.
+    deadline = time.monotonic() + 80
     while time.monotonic() < deadline:
         current = json.loads((root / "session.json").read_text())
         if current["state"] == "input_verified":
@@ -177,7 +181,12 @@ def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
         if current["state"] in ("failed", "closed"):
             raise RuntimeError(f"isolated boot failed; see {root}/supervisor.log and emulator.log")
         time.sleep(0.05)
-    raise RuntimeError(f"isolated boot timeout; see {root}; supervisor TTL will clean up owned processes")
+    supervisor.terminate()
+    try:
+        supervisor.wait(timeout=10)
+    except subprocess.TimeoutExpired:
+        raise RuntimeError(f"isolated boot and cleanup timed out; see {root}") from None
+    raise RuntimeError(f"isolated boot timeout; owned supervisor exited; see {root}")
 
 def route_audio(meta, timeout=8.0):
     """Move ONLY the sink-input owned by this session's exact PID into its private sink.
@@ -239,6 +248,9 @@ def supervise(root):
     root, meta = load(root)
     children = []
     meta["supervisor"] = process_record(os.getpid()); atomic(root / "session.json", meta)
+    def terminate(_signum, _frame):
+        raise RuntimeError("owner stopped the private supervisor")
+    signal.signal(signal.SIGTERM, terminate)
     try:
         readfd, writefd = os.pipe()
         with open(root / "xvfb.log", "w") as log:
@@ -276,24 +288,31 @@ def supervise(root):
         env = os.environ.copy()
         for key in ("DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY", "DBUS_SESSION_BUS_ADDRESS", "JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS"):
             env.pop(key, None)
-        env.update(DISPLAY=display, XAUTHORITY=str(root / "Xauthority"),
+        env.update(DISPLAY=display, XAUTHORITY=str(root / "Xauthority"), NO_AT_BRIDGE="1",
                    XDG_CONFIG_HOME=str(root / "config"), XDG_DATA_HOME=str(root / "data"),
                    XDG_CACHE_HOME=str(root / "cache"))
         if sink_module: env.update(PULSE_SINK=sink)  # advisory only: this host's audio policy reroutes explicit sinks
         # Private /dev hides /dev/input, /dev/uinput and /dev/snd. Private /tmp
         # exposes only this X socket. The workspace and user's home are read-only.
+        heap_mib = os.environ.get("SMSFORGE_EMULICIOUS_HEAP_MIB")
+        java_args = []
+        if heap_mib is not None:
+            if not heap_mib.isdecimal() or not 128 <= int(heap_mib) <= 1024:
+                raise ValueError("private emulator heap must be 128..1024 MiB")
+            java_args.append(f"-Xmx{int(heap_mib)}m")
+            meta["emulator_heap_mib"] = int(heap_mib)
         command = ["bwrap", "--die-with-parent", "--ro-bind", "/", "/", "--dev", "/dev", "--proc", "/proc",
                    "--tmpfs", "/tmp", "--dir", "/tmp/.X11-unix",
                    "--ro-bind", f"/tmp/.X11-unix/X{number}", f"/tmp/.X11-unix/X{number}",
                    "--bind", str(root), str(root), "--chdir", str(root / "emulator"),
-                   "java", "-Duser.home=" + str(root), "-Dsmsforge.root=" + str(root),
+                   "java", *java_args, "-Duser.home=" + str(root), "-Dsmsforge.root=" + str(root),
                    "-Dsmsforge.session=" + meta["session_id"], "-cp", "bridge.jar:Emulicious.jar",
                    "smsforge.ForgeSMS", "-nojoy", "-muted", "-scale", "1", "rom.sms"]
         with open(root / "emulator.log", "w") as log:
             emulator = subprocess.Popen(command, stdout=log, stderr=log, env=env)
         children.append(emulator)
         meta["sandbox"] = process_record(emulator.pid); atomic(root / "session.json", meta)
-        deadline = time.monotonic() + 35
+        deadline = time.monotonic() + 50
         while not (root / "ready.json").exists():
             if emulator.poll() is not None: raise RuntimeError("emulator exited before virtual input ready")
             if time.monotonic() > deadline: raise RuntimeError("bridge readiness timeout")
@@ -341,7 +360,7 @@ def request(session, operation, *args):
             raise RuntimeError("private ROM changed")
         if operation == "audio-enable" and (not meta.get("audio_route") or not verify_audio_route(meta)):
             raise RuntimeError("audio activation requires verified private PID route")
-        if operation in ("run", "step", "sequence", "video", "record-start") and meta.get("audio_route") and not verify_audio_route(meta):
+        if operation in ("run", "step", "sample-commit", "sequence", "video", "record-start", "record-steps-start") and meta.get("audio_route") and not verify_audio_route(meta):
             raise RuntimeError("private audio route changed; refusing emulator advancement")
         sequence_file = root / "sequence"
         seq = (int(sequence_file.read_text()) if sequence_file.exists() else 0) + 1
@@ -357,7 +376,7 @@ def request(session, operation, *args):
                 response += chunk
         result = json.loads(response)
         if not result.get("ok") or result.get("session_id") != meta["session_id"] or result.get("seq") != seq:
-            raise RuntimeError("bridge rejected command or identity mismatch")
+            raise RuntimeError(f"bridge rejected {operation} or identity mismatch")
         if result["pid"] != meta["emulator_process"]["pid"]: raise RuntimeError("wrong emulator PID")
         with open(root / "commands.jsonl", "a") as journal:
             journal.write(json.dumps({"operation": operation, "args": args, "ack": result, "at": time.time()}) + "\n")
