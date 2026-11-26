@@ -349,6 +349,39 @@ def run_build_stage(stage, cmd, project, timings, logs):
     return result
 
 
+def mapper_code_banks(config):
+    """Map named Z80 code areas into the cartridge slot at 0x8000."""
+    banks = config.get("mapper_code_banks", {})
+    if not isinstance(banks, dict):
+        raise ValueError("mapper_code_banks deve ser um objeto")
+    reserved = set()
+    extra = config.get("makesms_extra", [])
+    for index, option in enumerate(extra):
+        if option == "-mbank" and banks:
+            spec = extra[index + 1].rsplit(":", 3)
+            count, first = map(int, spec[-2:])
+            reserved.update(range(first, first + count))
+    for name, bank in banks.items():
+        if not re.fullmatch(r"SMSBANK_[A-Z0-9_]+", name) or type(bank) is not int or not 2 <= bank <= 63:
+            raise ValueError("area ou banco de codigo invalido")
+        if bank in reserved:
+            raise ValueError(f"banco {bank} tem dois owners")
+        reserved.add(bank)
+    return banks
+
+
+def verify_code_bank_map(path, banks):
+    if not banks:
+        return
+    with open(path, encoding="ascii", errors="replace") as handle:
+        layout = handle.read()
+    for name, bank in banks.items():
+        expected = (bank << 16) | 0x8000
+        area = re.search(rf"^_{name}\s+([0-9A-F]+)\s+([0-9A-F]+)\s+=", layout, re.M)
+        if not area or int(area[1], 16) != expected or not 0 < int(area[2], 16) <= 16384:
+            raise ValueError(f"area {name} nao cabe no banco {bank}")
+
+
 def candidate_inputs(project, manifest, tc, srcs, manifest_path=None):
     """Hash actual SDCC includes, linked libraries and explicit mapper banks.
 
@@ -624,8 +657,13 @@ def main():
 
     ihx = os.path.relpath(os.path.join(obj_dir, name + ".ihx"), project)
     link_extra = list(manifest.get("toolchain", {}).get("link_extra") or [])
+    try:
+        banks = mapper_code_banks(manifest.get("toolchain", {}))
+    except (ValueError, IndexError, TypeError) as e:
+        return fail("bancos de codigo: " + str(e), 1)
+    bank_args = [f"-Wl-b_{area}=0x{bank:02x}8000" for area, bank in banks.items()]
     link_cmd = ([tc["sdcc"], "-o", ihx, "-mz80", "--no-std-crt0", "--data-loc", "0xC000"]
-                + link_extra +
+                + link_extra + bank_args +
                 [tc["crt0_sms.rel"]] +
                 objs +
                 [tc["SMSlib.lib"], tc["PSGlib.lib"]])
@@ -634,6 +672,10 @@ def main():
     if r.returncode != 0 or not os.path.exists(os.path.join(project, ihx)):
         return fail(f"link falhou (log: {log_path})", 1)
 
+    try:
+        verify_code_bank_map(os.path.join(obj_dir, name + ".map"), banks)
+    except (OSError, ValueError) as e:
+        return fail("mapa do cartucho: " + str(e), 1)
     rom_dir = os.path.join(build_dir, "rom")
     os.makedirs(rom_dir, exist_ok=True)
     rom = os.path.join(rom_dir, name + ".sms")
