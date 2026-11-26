@@ -267,7 +267,7 @@ static uint8_t read_normal(uint8_t player, uint8_t keys)
 #if defined(MOF_DUEL_SCENE_SPECIALS)
 #if defined(MOF_DUEL_SCENE_POSTURES)
     if (player != hayato_player &&
-        (duel.alis[1u - hayato_player].motion.mode == MOF_MOTION_AIR || duel.alis[1u - hayato_player].jump_pending))
+        (duel.body[1u - hayato_player].motion.mode == MOF_MOTION_AIR || duel.body[1u - hayato_player].jump_pending))
         special_window[player] = 0u;
     else
 #endif
@@ -319,7 +319,7 @@ static void update_walk(uint8_t player, int16_t previous_x)
     if (fighter->state != MOF_DUEL_READY || fighter->x == previous_x
 #if defined(MOF_DUEL_SCENE_POSTURES)
         || (player != hayato_player &&
-            (duel.alis[1u - hayato_player].motion.mode == MOF_MOTION_AIR || duel.alis[1u - hayato_player].air_step))
+            (duel.body[1u - hayato_player].motion.mode == MOF_MOTION_AIR || duel.body[1u - hayato_player].air_step))
 #endif
     ) {
         walk_cycle[player] = 0u;
@@ -341,13 +341,13 @@ static uint8_t alis_posture_frame(uint8_t local)
 
 static void alis_posture_forecast(uint8_t *next, uint8_t *later)
 {
-    const MofDuelMotion *motion = &duel.alis[1u - hayato_player].motion;
+    const MofDuelMotion *motion = &duel.body[1u - hayato_player].motion;
     *next = *later = REP_NO_FRAME;
-    if (duel.alis[1u - hayato_player].jump_pending) {
+    if (duel.body[1u - hayato_player].jump_pending) {
         *next = alis_posture_frame(MOF_ALIS_JUMP_RISE);
         if (duel.fighters[1u - hayato_player].guarding != MOF_GUARD_OPEN) {
             *later = alis_posture_frame(MOF_ALIS_JUMP_GUARD);
-        } else if (duel.alis[1u - hayato_player].jump_pending & (MOF_DUEL_LEFT | MOF_DUEL_RIGHT)) {
+        } else if (duel.body[1u - hayato_player].jump_pending & (MOF_DUEL_LEFT | MOF_DUEL_RIGHT)) {
             *later = alis_posture_frame(MOF_ALIS_JUMP_DIAGONAL);
         }
     } else if (motion->mode == MOF_MOTION_AIR) {
@@ -460,10 +460,10 @@ static void repertoire_views(RepertoireView *wanted, RepertoireView *forecast,
     const MofDuelFighter *fighter;
     const MofDuelStandingNormal *normal;
 #if defined(MOF_DUEL_SCENE_POSTURES)
-    wanted->alis_y = duel.alis[1u - hayato_player].y_offset;
+    wanted->alis_y = duel.body[1u - hayato_player].y_offset;
     /* Held attack buttons cannot start standing normals during a jump.
        Keep the sprite-only forecast when Hayato is free of attack input. */
-    if (wanted->alis_y || duel.alis[1u - hayato_player].jump_pending)
+    if (wanted->alis_y || duel.body[1u - hayato_player].jump_pending)
         buttons = duel.fighters[hayato_player].keys;
 #endif
 #if defined(MOF_REPERTOIRE_SPRITE_WALK)
@@ -774,7 +774,7 @@ static void publish_probe_actor(volatile uint8_t *out, const MofDuelFighter *fig
     out[10] = (uint8_t)fighter->x;
     out[11] = 0u;
 #if defined(MOF_DUEL_SCENE_POSTURES)
-    out[12] = fighter->fighter == MOF_DUEL_ALIS ? 144u + duel.alis[1u - hayato_player].y_offset : 144u;
+    out[12] = fighter->fighter == MOF_DUEL_ALIS ? 144u + duel.body[1u - hayato_player].y_offset : 144u;
 #else
     out[12] = 144u;
 #endif
@@ -972,7 +972,7 @@ void main(void)
 #endif
 #if defined(MOF_DUEL_REPERTOIRE)
 #if defined(MOF_DUEL_SCENE_POSTURES)
-        alis_posture_view = mof_duel_alis_posture_pose(&duel, 1u - hayato_player);
+        alis_posture_view = mof_duel_posture_pose(&duel, 1u - hayato_player);
         if (alis_posture_view == MOF_ALIS_STAND_GUARD &&
             duel.fighters[1u - hayato_player].state == MOF_DUEL_READY &&
             walk_cycle[1u - hayato_player])

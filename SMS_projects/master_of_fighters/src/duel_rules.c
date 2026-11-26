@@ -7,6 +7,16 @@
 #define DUEL_HIT_TICKS 8u
 #define DUEL_GROUND_Y 144
 
+/* Mirror fighters read moves from their own record; earlier scenes share
+   one table indexed by fighter id. */
+#if defined(MOF_DUEL_SCENE_MIRROR)
+#define HAS_MOVES(d, f) ((void)(d), (f)->def != 0)
+#define MOVE(d, f, id) (&(f)->def->moves[id])
+#elif defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
+#define HAS_MOVES(d, f) ((d)->standing_normals != 0)
+#define MOVE(d, f, id) (&(d)->standing_normals[(f)->fighter][id])
+#endif
+
 #if defined(MOF_DUEL_SCENE_POSTURES)
 #include "../inc/duel_commands.h"
 
@@ -17,7 +27,11 @@
 #define ALIS_JUMP_GRAVITY 24
 #endif
 
-/* The fixed-point arc and diagonal momentum use the shared motion module. */
+/* The fixed-point arc and diagonal momentum use the shared motion module.
+   Mirror fighters carry their own profile in their roster record. */
+#if defined(MOF_DUEL_SCENE_MIRROR)
+#define MOTION_PROFILE(fighter) (&(fighter)->def->motion)
+#else
 static const MofDuelMotionProfile alis_profile = {
 #if defined(MOF_DUEL_SCENE_CROSSOVER)
     0u, 0u, 0u, 0u, 0u, 0u, 96u, ALIS_JUMP_VELOCITY, ALIS_JUMP_GRAVITY, 0u, 0u, 0u
@@ -25,6 +39,8 @@ static const MofDuelMotionProfile alis_profile = {
     0u, 0u, 0u, 0u, 0u, 0u, 32u, 56u, 4u, 0u, 0u, 0u
 #endif
 };
+#define MOTION_PROFILE(fighter) (&alis_profile)
+#endif
 
 #if !defined(MOF_DUEL_SCENE_MIRROR)
 static uint8_t alis_player(const MofDuel *duel)
@@ -36,7 +52,7 @@ static uint8_t alis_player(const MofDuel *duel)
 #if !defined(MOF_DUEL_SCENE_MIRROR) || defined(MOF_DUEL_HOST_TEST)
 uint8_t mof_duel_alis_standing_input(const MofDuel *duel, uint8_t player, uint8_t keys)
 {
-    const MofAlisMotion *state = &duel->alis[player];
+    const MofDuelBody *state = &duel->body[player];
     return !(keys & (MOF_DUEL_UP | MOF_DUEL_DOWN)) && !state->jump_pending &&
            state->motion.mode != MOF_MOTION_AIR;
 }
@@ -48,10 +64,10 @@ uint8_t mof_duel_alis_air_guard(const MofDuel *duel, uint8_t player)
 }
 #endif
 
-uint8_t mof_duel_alis_posture_pose(const MofDuel *duel, uint8_t player)
+uint8_t mof_duel_posture_pose(const MofDuel *duel, uint8_t player)
 {
     const MofDuelFighter *alis = &duel->fighters[player];
-    const MofAlisMotion *state = &duel->alis[player];
+    const MofDuelBody *state = &duel->body[player];
     const MofDuelMotion *motion = &state->motion;
     uint8_t blocked = alis->state == MOF_DUEL_BLOCK;
     if (motion->mode == MOF_MOTION_AIR) {
@@ -72,10 +88,10 @@ uint8_t mof_duel_alis_posture_pose(const MofDuel *duel, uint8_t player)
     return state->transition ? MOF_ALIS_CROUCH_TRANSITION : MOF_ALIS_NO_POSTURE;
 }
 
-static void alis_motion_step(MofDuel *duel, uint8_t player, uint8_t keys)
+static void body_step(MofDuel *duel, uint8_t player, uint8_t keys)
 {
     const MofDuelFighter *alis = &duel->fighters[player];
-    MofAlisMotion *state = &duel->alis[player];
+    MofDuelBody *state = &duel->body[player];
     MofDuelMotion *motion = &state->motion;
     uint8_t prior = motion->mode, event, launch = 0u;
     int8_t prior_offset = state->y_offset;
@@ -126,7 +142,7 @@ static void alis_motion_step(MofDuel *duel, uint8_t player, uint8_t keys)
     /* Ground walking still goes through the existing two-body solver. */
     if (prior != MOF_MOTION_AIR && !(keys & (MOF_DUEL_UP | MOF_DUEL_DOWN)))
         keys &= (uint8_t)~(MOF_DUEL_LEFT | MOF_DUEL_RIGHT);
-    event = mof_duel_motion_read(motion, &alis_profile, keys, alis->face_right, free,
+    event = mof_duel_motion_read(motion, MOTION_PROFILE(alis), keys, alis->face_right, free,
                                  duel->left_wall * MOF_MOTION_UNIT, duel->right_wall * MOF_MOTION_UNIT);
     if (motion->mode == MOF_MOTION_AIR || (event & MOF_MOTION_LANDED))
         state->air_step = (int8_t)((motion->x >> 4) - alis->x);
@@ -224,7 +240,7 @@ uint8_t mof_duel_init_pair(MofDuel *duel, const MofDuelGeometry geometry[2],
     duel->minimum_gap = minimum_gap;
     duel->hold_ticks = hold_ticks;
     duel->geometry = geometry;
-#if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
+#if (defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)) && !defined(MOF_DUEL_SCENE_MIRROR)
     duel->standing_normals = 0;
 #endif
     for (player = 0u; player < 2u; ++player) {
@@ -238,6 +254,7 @@ uint8_t mof_duel_init_pair(MofDuel *duel, const MofDuelGeometry geometry[2],
         fighter->keys = fighter->held = fighter->latched = 0u;
         fighter->spent = fighter->contact = fighter->guarding = 0u;
 #if defined(MOF_DUEL_SCENE_MIRROR)
+        fighter->def = 0;
         fighter->reaction = MOF_REACT_BODY;
         fighter->thrown = 0u;
         fighter->hit_duration = DUEL_HIT_TICKS;
@@ -256,7 +273,7 @@ uint8_t mof_duel_init_pair(MofDuel *duel, const MofDuelGeometry geometry[2],
     face_opponent(duel);
 #if defined(MOF_DUEL_SCENE_POSTURES)
     for (player = 0u; player < 2u; ++player) {
-        MofAlisMotion *state = &duel->alis[player];
+        MofDuelBody *state = &duel->body[player];
         mof_duel_motion_reset(&state->motion, duel->fighters[player].x * MOF_MOTION_UNIT,
                               duel->fighters[player].face_right);
         state->y_offset = state->air_step = 0;
@@ -298,8 +315,8 @@ static uint8_t expired(const MofDuel *duel, const MofDuelFighter *fighter, uint1
 {
     uint8_t duration = attack_length[fighter->fighter];
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
-    if (duel->standing_normals && fighter->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER)
-        duration = duel->standing_normals[fighter->fighter][fighter->standing_normal].duration;
+    if (HAS_MOVES(duel, fighter) && fighter->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER)
+        duration = MOVE(duel, fighter, fighter->standing_normal)->duration;
 #else
     (void)duel;
 #endif
@@ -318,7 +335,7 @@ static uint8_t expired(const MofDuel *duel, const MofDuelFighter *fighter, uint1
 static uint8_t aerial_attack_lands(const MofDuel *duel, uint8_t player)
 {
     const MofDuelFighter *fighter = &duel->fighters[player];
-    const MofDuelMotion *motion = &duel->alis[player].motion;
+    const MofDuelMotion *motion = &duel->body[player].motion;
     return fighter->state == MOF_DUEL_ATTACK &&
         fighter->standing_normal >= MOF_DUEL_AIR_NORMALS &&
         fighter->standing_normal < MOF_DUEL_SPECIAL &&
@@ -342,7 +359,7 @@ static void expire_state(MofDuel *duel, uint8_t player)
             int16_t step = age < 6u ? 2 : 1;
             fighter->x = clamp_x(duel, fighter->x + (fighter->face_right ? -step : step));
         }
-    } else if (fighter->state == MOF_DUEL_FALL && !duel->alis[player].y_offset &&
+    } else if (fighter->state == MOF_DUEL_FALL && !duel->body[player].y_offset &&
                (!fighter->thrown || age >= 5u)) {
         enter(duel, fighter, MOF_DUEL_DOWNED);
     } else if (fighter->state == MOF_DUEL_DOWNED && age >= 18u) {
@@ -373,7 +390,7 @@ static void consume_input(MofDuel *duel, uint8_t player, uint8_t keys, uint8_t n
         return;
     }
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
-    if (duel->standing_normals) {
+    if (HAS_MOVES(duel, fighter)) {
 #if defined(MOF_DUEL_SCENE_POSTURES)
 #if defined(MOF_DUEL_SCENE_MIRROR)
         if (duel->fighters[1u - player].state == MOF_DUEL_KO) return;
@@ -381,8 +398,8 @@ static void consume_input(MofDuel *duel, uint8_t player, uint8_t keys, uint8_t n
 #endif
         if (fighter->fighter == MOF_DUEL_ALIS) {
 #if defined(MOF_DUEL_SCENE_MIRROR)
-            uint8_t posture = mof_duel_motion_posture(&duel->alis[player].motion);
-            if (duel->alis[player].jump_pending ||
+            uint8_t posture = mof_duel_motion_posture(&duel->body[player].motion);
+            if (duel->body[player].jump_pending ||
                 (normal < MOF_DUEL_SPECIAL && normal >> 2 != posture) ||
                 (normal >= MOF_DUEL_SPECIAL && posture != MOF_INPUT_STANDING) ||
                 !duel->fighters[1u - player].life)
@@ -394,7 +411,7 @@ static void consume_input(MofDuel *duel, uint8_t player, uint8_t keys, uint8_t n
                 normal = MOF_DUEL_NO_NORMAL;
             if (direction == back)
                 fighter->guarding = mof_duel_guard(keys, fighter->face_right,
-                                                  mof_duel_motion_posture(&duel->alis[player].motion), 1u);
+                                                  mof_duel_motion_posture(&duel->body[player].motion), 1u);
 #endif
         } else
 #endif
@@ -428,9 +445,8 @@ static uint8_t active_bounds(const MofDuel *duel, const MofDuelFighter *fighter,
                              const MofDuelBox **boxes, uint8_t *first)
 {
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
-    if (duel->standing_normals && fighter->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER) {
-        const MofDuelStandingNormal *normal =
-            &duel->standing_normals[fighter->fighter][fighter->standing_normal];
+    if (HAS_MOVES(duel, fighter) && fighter->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER) {
+        const MofDuelStandingNormal *normal = MOVE(duel, fighter, fighter->standing_normal);
         *boxes = normal->active_boxes;
         *first = normal->first_active;
         return normal->active_ticks;
@@ -458,8 +474,8 @@ uint8_t mof_duel_attack_box(const MofDuel *duel, uint8_t player, MofDuelBox *box
 #if defined(MOF_DUEL_SCENE_MIRROR)
     /* Each compact mirror normal shares its declared box over its active hold. */
     world_box(fighter, boxes, box);
-    box->top += duel->alis[player].y_offset;
-    box->bottom += duel->alis[player].y_offset;
+    box->top += duel->body[player].y_offset;
+    box->bottom += duel->body[player].y_offset;
 #else
     world_box(fighter, &boxes[age-first], box);
 #endif
@@ -470,33 +486,41 @@ uint8_t mof_duel_attack_box(const MofDuel *duel, uint8_t player, MofDuelBox *box
 void mof_duel_hurt_box(const MofDuel *duel, uint8_t player, MofDuelBox *box)
 {
     const MofDuelFighter *fighter = &duel->fighters[player];
+#if defined(MOF_DUEL_SCENE_MIRROR)
+    const MofFighterDef *def = fighter->def;
+    const MofDuelBody *body = &duel->body[player];
+    if (body->motion.mode == MOF_MOTION_AIR) {
+        world_box(fighter, fighter->guarding == MOF_GUARD_AIRBORNE ||
+                  fighter->state == MOF_DUEL_BLOCK ? &def->air_braced : &def->air, box);
+        box->top += body->y_offset;
+        box->bottom += body->y_offset;
+    } else if (body->motion.mode == MOF_MOTION_CROUCH || body->transition) {
+        world_box(fighter, body->transition ? &def->folding : &def->crouch, box);
+    } else {
+        world_box(fighter, &def->stand, box);
+    }
+#else
 #if defined(MOF_DUEL_SCENE_POSTURES)
     if (fighter->fighter == MOF_DUEL_ALIS) {
-#if defined(MOF_DUEL_SCENE_MIRROR)
-        static const MofDuelBox crouch = {-11,-33,11,-2};
-        static const MofDuelBox folding = {-13,-40,11,-2};
-        static const MofDuelBox air = {-12,-46,11,-4};
-        static const MofDuelBox air_braced = {-12,-46,11,-15};
-#else
         static const MofDuelBox crouch = {1,-33,23,-2};
         static const MofDuelBox folding = {-3,-40,23,-2};
         static const MofDuelBox air = {0,-46,23,-4};
         static const MofDuelBox air_braced = {0,-46,23,-15};
-#endif
-        if (duel->alis[player].motion.mode == MOF_MOTION_AIR) {
+        if (duel->body[player].motion.mode == MOF_MOTION_AIR) {
             world_box(fighter, fighter->guarding == MOF_GUARD_AIRBORNE ||
                       fighter->state == MOF_DUEL_BLOCK ? &air_braced : &air, box);
-            box->top += duel->alis[player].y_offset;
-            box->bottom += duel->alis[player].y_offset;
+            box->top += duel->body[player].y_offset;
+            box->bottom += duel->body[player].y_offset;
             return;
         }
-        if (duel->alis[player].motion.mode == MOF_MOTION_CROUCH || duel->alis[player].transition) {
-            world_box(fighter, duel->alis[player].transition ? &folding : &crouch, box);
+        if (duel->body[player].motion.mode == MOF_MOTION_CROUCH || duel->body[player].transition) {
+            world_box(fighter, duel->body[player].transition ? &folding : &crouch, box);
             return;
         }
     }
 #endif
     world_box(fighter, &duel->geometry[fighter->fighter].hurt, box);
+#endif
 }
 
 static uint8_t contact(const MofDuel *duel, uint8_t attacker)
@@ -517,10 +541,11 @@ static uint8_t contact(const MofDuel *duel, uint8_t attacker)
         if (target->fighter == MOF_DUEL_ALIS)
 #if defined(MOF_DUEL_SCENE_MIRROR)
             return mof_duel_guard_blocks(target->guarding,
-                       duel->standing_normals[MOF_DUEL_ALIS][source->standing_normal].height,
-                       source->standing_normal < MOF_INPUT_SHORT_TWO ||
-                       source->standing_normal >= MOF_DUEL_AIR_NORMALS,
-                       source->standing_normal == MOF_DUEL_LOW_NORMALS + MOF_INPUT_LONG_ONE)
+                       MOVE(duel, source, source->standing_normal)->height,
+                       (MOVE(duel, source, source->standing_normal)->flags &
+                        MOF_MOVE_AIR_BLOCKABLE) != 0u,
+                       (MOVE(duel, source, source->standing_normal)->flags &
+                        MOF_MOVE_ANTI_AIR) != 0u)
 #else
             return mof_duel_guard_blocks(target->guarding, MOF_HEIGHT_MIDDLE,
                         source->standing_normal <= MOF_INPUT_LONG_ONE, 0u)
@@ -549,16 +574,16 @@ static void move_alis_across(MofDuel *duel, uint8_t player)
 {
     MofDuelFighter *alis = &duel->fighters[player];
     const MofDuelFighter *rival = &duel->fighters[1u - player];
-    const MofDuelMotion *motion = &duel->alis[player].motion;
+    const MofDuelMotion *motion = &duel->body[player].motion;
     int16_t left = rival->x - duel->minimum_gap, right = rival->x + duel->minimum_gap;
-    int16_t next = clamp_x(duel, alis->x + duel->alis[player].air_step);
+    int16_t next = clamp_x(duel, alis->x + duel->body[player].air_step);
     uint8_t on_left;
 #if defined(MOF_DUEL_SCENE_MIRROR)
-    const MofDuelMotion *other = &duel->alis[1u - player].motion;
+    const MofDuelMotion *other = &duel->body[1u - player].motion;
     int16_t height_delta = motion->y - other->y;
     int16_t speed_delta = motion->vy - other->vy;
     int16_t projected_gravity = other->mode == MOF_MOTION_AIR ? 0 :
-                       ALIS_JUMP_GRAVITY * (ALIS_CROSS_TICKS * (ALIS_CROSS_TICKS - 1) / 2);
+        (int16_t)alis->def->motion.gravity * (ALIS_CROSS_TICKS * (ALIS_CROSS_TICKS - 1) / 2);
 #else
     int16_t height_delta = motion->y, speed_delta = motion->vy;
     const int16_t projected_gravity = ALIS_JUMP_GRAVITY * (ALIS_CROSS_TICKS * (ALIS_CROSS_TICKS - 1) / 2);
@@ -587,11 +612,11 @@ static void move_alis_across(MofDuel *duel, uint8_t player)
 #endif
 
 #if defined(MOF_DUEL_SCENE_MIRROR)
-/* Short presses are light. Holds, specials, the Super, the riposte and the
-   throw are heavy. The strongest contact of a step owns the freeze. */
-static uint8_t heavy_impact(uint8_t normal)
+/* The attacker's move record says whether a contact is heavy. The
+   strongest contact of a step owns the freeze. */
+static uint8_t heavy_impact(const MofDuelFighter *source)
 {
-    return normal >= MOF_DUEL_SPECIAL || (normal & 1u);
+    return (source->def->moves[source->standing_normal].flags & MOF_MOVE_HEAVY) != 0u;
 }
 
 static void freeze_impact(MofDuel *duel, uint8_t victim, uint8_t heavy, uint8_t shake)
@@ -604,7 +629,7 @@ static void freeze_impact(MofDuel *duel, uint8_t victim, uint8_t heavy, uint8_t 
 
 static void begin_fall(MofDuel *duel, uint8_t player)
 {
-    MofAlisMotion *state = &duel->alis[player];
+    MofDuelBody *state = &duel->body[player];
     if (!state->y_offset) {
         state->motion.y = -4 * MOF_MOTION_UNIT;
         state->y_offset = -4;
@@ -623,7 +648,7 @@ static void advance_throw(MofDuel *duel, uint8_t owner)
     uint8_t other = 1u - owner;
     MofDuelFighter *source = &duel->fighters[owner];
     MofDuelFighter *target = &duel->fighters[other];
-    MofAlisMotion *motion = &duel->alis[other];
+    MofDuelBody *motion = &duel->body[other];
     uint8_t age, amount;
     int16_t reach, direction;
     if (source->state != MOF_DUEL_ATTACK || source->standing_normal != MOF_DUEL_THROW) {
@@ -634,7 +659,7 @@ static void advance_throw(MofDuel *duel, uint8_t owner)
     direction = source->face_right ? 1 : -1;
     reach = (target->x - source->x) * direction;
     if (age == MOF_THROW_CAPTURE_TICK) {
-        if (reach < duel->minimum_gap || reach > 32 ||
+        if (reach < duel->minimum_gap || reach > source->def->throw_reach ||
             (target->state != MOF_DUEL_READY && target->state != MOF_DUEL_BLOCK) ||
             motion->motion.mode == MOF_MOTION_AIR || motion->jump_pending) {
             source->contact = MOF_DUEL_MISSED;
@@ -653,7 +678,7 @@ static void advance_throw(MofDuel *duel, uint8_t owner)
             target->x -= direction * (reach - duel->minimum_gap >= 2 ? 2 : 1);
         return;
     }
-    amount = duel->standing_normals[MOF_DUEL_ALIS][MOF_DUEL_THROW].damage;
+    amount = source->def->moves[MOF_DUEL_THROW].damage;
     target->life = target->life > amount ? (uint8_t)(target->life - amount) : 0u;
     source->contact = MOF_DUEL_LANDED;
     target->thrown = 1u;
@@ -674,40 +699,42 @@ static void apply_contact(MofDuel *duel, uint8_t attacker, uint8_t result)
 #if defined(MOF_DUEL_SCENE_MIRROR)
     if (result == MOF_DUEL_GUARDED) {
         target->reaction = MOF_REACT_GUARD_STAND + target->guarding - 1u;
-    } else if (duel->alis[1u - attacker].motion.mode == MOF_MOTION_CROUCH) {
+    } else if (duel->body[1u - attacker].motion.mode == MOF_MOTION_CROUCH) {
         target->reaction = MOF_REACT_LOW;
     } else {
         /* A contact spanning both regions is a head hit if its overlap
            reaches above the neck line of the current vertical pivot. */
         target->reaction = duel->tested_attack[attacker].top <
-            DUEL_GROUND_Y + duel->alis[1u - attacker].y_offset - 34
+            DUEL_GROUND_Y + duel->body[1u - attacker].y_offset - target->def->neck
             ? MOF_REACT_HEAD : MOF_REACT_BODY;
     }
     target->thrown = 0u;
-    target->hit_duration = heavy_impact(source->standing_normal) ?
-        MOF_DUEL_HEAVY_HITSTUN : MOF_DUEL_LIGHT_HITSTUN;
-    freeze_impact(duel, 1u - attacker, heavy_impact(source->standing_normal),
-                  result == MOF_DUEL_LANDED);
+    {
+        uint8_t heavy = heavy_impact(source);
+        target->hit_duration = heavy ? MOF_DUEL_HEAVY_HITSTUN : MOF_DUEL_LIGHT_HITSTUN;
+        freeze_impact(duel, 1u - attacker, heavy, result == MOF_DUEL_LANDED);
+    }
 #endif
     target->held = target->guarding = 0u;
     if (result == MOF_DUEL_LANDED) {
         uint8_t amount = damage[source->fighter];
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
-        if (duel->standing_normals && source->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER)
-            amount = duel->standing_normals[source->fighter][source->standing_normal].damage;
+        if (HAS_MOVES(duel, source) && source->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER)
+            amount = MOVE(duel, source, source->standing_normal)->damage;
 #endif
         target->life = target->life > amount ? (uint8_t)(target->life - amount) : 0u;
 #if defined(MOF_DUEL_SCENE_MIRROR)
-        if (!target->life || (duel->standing_normals &&
+        if (!target->life || (HAS_MOVES(duel, source) &&
             source->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER &&
-            duel->standing_normals[source->fighter][source->standing_normal].knockdown))
+            MOVE(duel, source, source->standing_normal)->knockdown))
             begin_fall(duel, 1u - attacker);
         else
 #endif
         enter(duel, target, target->life ? MOF_DUEL_HIT : MOF_DUEL_KO);
-        push = 4;
 #if defined(MOF_DUEL_SCENE_MIRROR)
-        if (source->standing_normal == MOF_DUEL_AIR_NORMALS + MOF_INPUT_LONG_TWO) push = 7;
+        push = MOVE(duel, source, source->standing_normal)->push;
+#else
+        push = 4;
 #endif
     } else {
         enter(duel, target, MOF_DUEL_BLOCK);
@@ -727,12 +754,12 @@ static int16_t movement(const MofDuel *duel, uint8_t player)
 #if defined(MOF_DUEL_SCENE_POSTURES)
     if (fighter->fighter == MOF_DUEL_ALIS) {
 #if defined(MOF_DUEL_SCENE_CROSSOVER)
-        if (duel->alis[player].motion.mode == MOF_MOTION_AIR || duel->alis[player].air_step) return 0;
+        if (duel->body[player].motion.mode == MOF_MOTION_AIR || duel->body[player].air_step) return 0;
 #else
-        if (duel->alis[player].motion.mode == MOF_MOTION_AIR || duel->alis[player].air_step)
-            return duel->alis[player].air_step;
+        if (duel->body[player].motion.mode == MOF_MOTION_AIR || duel->body[player].air_step)
+            return duel->body[player].air_step;
 #endif
-        if (duel->alis[player].motion.mode == MOF_MOTION_CROUCH || duel->alis[player].jump_pending ||
+        if (duel->body[player].motion.mode == MOF_MOTION_CROUCH || duel->body[player].jump_pending ||
             (fighter->keys & MOF_DUEL_DOWN)) return 0;
     }
 #else
@@ -753,8 +780,13 @@ static uint8_t special_advance(const MofDuel *duel, const MofDuelFighter *fighte
     if (fighter->state != MOF_DUEL_ATTACK || fighter->standing_normal != MOF_DUEL_SPECIAL)
         return 0u;
     age = mof_duel_age(duel, fighter);
+#if defined(MOF_DUEL_SCENE_MIRROR)
+    return age >= fighter->def->special_from && age < fighter->def->special_until
+        ? fighter->def->special_step : 0u;
+#else
     if (fighter->fighter == MOF_DUEL_HAYATO) return age >= 3u && age < 9u ? 2u : 0u;
     return age >= 2u && age < 7u ? 2u : 0u;
+#endif
 }
 
 static void advance_specials(MofDuel *duel)
@@ -804,18 +836,18 @@ static void step_duel(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
     if (duel->fighters[1].state != MOF_DUEL_READY) expire_state(duel, 1u);
 #if defined(MOF_DUEL_SCENE_POSTURES)
 #if defined(MOF_DUEL_SCENE_MIRROR)
-    alis_motion_step(duel, 0u, p1_keys);
-    alis_motion_step(duel, 1u, p2_keys);
-    if (duel->alis[0].air_step || duel->alis[1].air_step) {
-        if (duel->alis[0].air_step) move_alis_across(duel, 0u);
-        if (duel->alis[1].air_step) move_alis_across(duel, 1u);
+    body_step(duel, 0u, p1_keys);
+    body_step(duel, 1u, p2_keys);
+    if (duel->body[0].air_step || duel->body[1].air_step) {
+        if (duel->body[0].air_step) move_alis_across(duel, 0u);
+        if (duel->body[1].air_step) move_alis_across(duel, 1u);
         face_opponent(duel);
     }
 #else
     player = alis_player(duel);
-    alis_motion_step(duel, player, player ? p2_keys : p1_keys);
+    body_step(duel, player, player ? p2_keys : p1_keys);
 #if defined(MOF_DUEL_SCENE_CROSSOVER)
-    if (duel->alis[player].air_step) {
+    if (duel->body[player].air_step) {
         move_alis_across(duel, player);
         face_opponent(duel);
     }
@@ -846,15 +878,14 @@ static void step_duel(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
         if (fighter->state == MOF_DUEL_ATTACK) {
 #if defined(MOF_DUEL_SCENE_MIRROR)
 #if defined(MOF_DUEL_HOST_TEST)
-            if (!duel->standing_normals || fighter->standing_normal >= MOF_DUEL_NORMALS_PER_FIGHTER) {
+            if (!HAS_MOVES(duel, fighter) || fighter->standing_normal >= MOF_DUEL_NORMALS_PER_FIGHTER) {
                 duel->tested_pose[player] = mof_duel_action_pose(duel, player);
                 duel->tested_active[player] = mof_duel_attack_box(duel, player,
                                                                  &duel->tested_attack[player]);
             } else
 #endif
             {
-            const MofDuelStandingNormal *normal =
-                &duel->standing_normals[MOF_DUEL_ALIS][fighter->standing_normal];
+            const MofDuelStandingNormal *normal = MOVE(duel, fighter, fighter->standing_normal);
             uint8_t age = (uint8_t)(duel->tick - fighter->state_since);
             uint8_t phase = 0u;
             while (age >= normal->pose_ends[phase]) ++phase;
@@ -862,10 +893,10 @@ static void step_duel(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
             if (fighter->standing_normal != MOF_DUEL_THROW && !fighter->spent &&
                 (fighter->standing_normal < MOF_DUEL_AIR_NORMALS ||
                  fighter->standing_normal >= MOF_DUEL_SPECIAL ||
-                 duel->alis[player].motion.mode == MOF_MOTION_AIR) &&
+                 duel->body[player].motion.mode == MOF_MOTION_AIR) &&
                 (uint8_t)(age - normal->first_active) < normal->active_ticks) {
                 MofDuelBox *box = &duel->tested_attack[player];
-                int8_t offset = duel->alis[player].y_offset;
+                int8_t offset = duel->body[player].y_offset;
                 world_box(fighter, normal->active_boxes, box);
                 box->top += offset;
                 box->bottom += offset;
@@ -882,13 +913,13 @@ static void step_duel(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
         if (duel->tested_hurt_x[player] != fighter->x ||
             duel->tested_hurt_facing[player] != fighter->face_right
 #if defined(MOF_DUEL_SCENE_POSTURES)
-            || (fighter->fighter == MOF_DUEL_ALIS && duel->alis[player].motion.mode == MOF_MOTION_AIR)
+            || (fighter->fighter == MOF_DUEL_ALIS && duel->body[player].motion.mode == MOF_MOTION_AIR)
 #endif
         ) {
 #if defined(MOF_DUEL_SCENE_MIRROR)
             if (duel->tested_hurt_x[player] != INT16_MIN &&
                 duel->tested_hurt_facing[player] == fighter->face_right &&
-                duel->alis[player].motion.mode != MOF_MOTION_AIR) {
+                duel->body[player].motion.mode != MOF_MOTION_AIR) {
                 int16_t delta = fighter->x - duel->tested_hurt_x[player];
                 duel->tested_hurt[player].left += delta;
                 duel->tested_hurt[player].right += delta;
@@ -908,14 +939,14 @@ static void step_duel(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
     if (p2_contact) apply_contact(duel, 1u, p2_contact);
     if (!((p1_keys | p2_keys) & (MOF_DUEL_LEFT | MOF_DUEL_RIGHT))
 #if defined(MOF_DUEL_SCENE_POSTURES) && !defined(MOF_DUEL_SCENE_CROSSOVER)
-        && !duel->alis[alis_player(duel)].air_step
+        && !duel->body[alis_player(duel)].air_step
 #endif
     ) return;
 #if defined(MOF_DUEL_SCENE_CROSSOVER) && !defined(MOF_DUEL_SCENE_MIRROR)
     player = alis_player(duel);
     /* The air solver already moved Alis. The ground solver only has a job
        here if Hayato actually pressed a horizontal direction. */
-    if ((duel->alis[player].motion.mode == MOF_MOTION_AIR || duel->alis[player].air_step) &&
+    if ((duel->body[player].motion.mode == MOF_MOTION_AIR || duel->body[player].air_step) &&
         !((duel->fighters[0].fighter == MOF_DUEL_ALIS ? p2_keys : p1_keys) &
           (MOF_DUEL_LEFT | MOF_DUEL_RIGHT))) return;
 #endif
@@ -948,9 +979,8 @@ uint8_t mof_duel_action_pose(const MofDuel *duel, uint8_t player)
     ends = fighter->fighter == MOF_DUEL_HAYATO ? hayato_pose_end : alis_pose_end;
     count = fighter->fighter == MOF_DUEL_HAYATO ? 6u : 3u;
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
-    if (duel->standing_normals && fighter->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER) {
-        const MofDuelStandingNormal *normal =
-            &duel->standing_normals[fighter->fighter][fighter->standing_normal];
+    if (HAS_MOVES(duel, fighter) && fighter->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER) {
+        const MofDuelStandingNormal *normal = MOVE(duel, fighter, fighter->standing_normal);
         ends = normal->pose_ends;
         count = normal->pose_count;
     }
@@ -963,39 +993,65 @@ uint8_t mof_duel_action_pose(const MofDuel *duel, uint8_t player)
 #endif
 
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
+static uint8_t moves_valid(const MofDuelStandingNormal *moves)
+{
+    uint8_t id, frame;
+    for (id = 0u; id < MOF_DUEL_NORMALS_PER_FIGHTER; ++id) {
+        const MofDuelStandingNormal *normal = &moves[id];
+        if (!normal->pose_ends || !normal->pose_count || !normal->active_boxes ||
+            !normal->active_ticks || !normal->damage ||
+            (uint16_t)normal->first_active + normal->active_ticks > normal->duration ||
+            normal->pose_ends[normal->pose_count - 1u] != normal->duration) {
+            return 0u;
+        }
+#if defined(MOF_DUEL_SCENE_MIRROR)
+        if (!box_valid(normal->active_boxes) || !normal->push) return 0u;
+#else
+        for (frame = 0u; frame < normal->active_ticks; ++frame) {
+            if (!box_valid(&normal->active_boxes[frame])) return 0u;
+        }
+#endif
+        if (!normal->pose_ends[0]) return 0u;
+        for (frame = 1u; frame < normal->pose_count; ++frame) {
+            if (normal->pose_ends[frame] <= normal->pose_ends[frame - 1u]) return 0u;
+        }
+    }
+    return 1u;
+}
+
+#if defined(MOF_DUEL_SCENE_MIRROR)
+uint8_t mof_duel_set_roster(MofDuel *duel,
+    const MofFighterDef *const roster[MOF_DUEL_FIGHTER_IDS])
+{
+    uint8_t player;
+    if (!roster || duel->fighters[0].def || duel->tick != UINT16_MAX) return 0u;
+    for (player = 0u; player < 2u; ++player) {
+        const MofFighterDef *def = roster[duel->fighters[player].fighter];
+        if (!def || !def->moves || !moves_valid(def->moves) ||
+            !box_valid(&def->stand) || !box_valid(&def->crouch) ||
+            !box_valid(&def->folding) || !box_valid(&def->air) ||
+            !box_valid(&def->air_braced) || !def->motion.gravity ||
+            def->special_from >= def->special_until) {
+            return 0u;
+        }
+    }
+    for (player = 0u; player < 2u; ++player)
+        duel->fighters[player].def = roster[duel->fighters[player].fighter];
+    return 1u;
+}
+#else
 uint8_t mof_duel_set_standing_normals(MofDuel *duel,
     const MofDuelStandingNormal normals[2][MOF_DUEL_NORMALS_PER_FIGHTER])
 {
-    uint8_t fighter, id, frame;
+    uint8_t fighter;
     if (!normals || duel->standing_normals || duel->tick != UINT16_MAX) return 0u;
     for (fighter = 0u; fighter < 2u; ++fighter) {
-#if defined(MOF_DUEL_SCENE_MIRROR)
-        if (fighter != MOF_DUEL_ALIS) continue;
-#endif
-        for (id = 0u; id < MOF_DUEL_NORMALS_PER_FIGHTER; ++id) {
-            const MofDuelStandingNormal *normal = &normals[fighter][id];
-            if (!normal->pose_ends || !normal->pose_count || !normal->active_boxes ||
-                !normal->active_ticks || !normal->damage ||
-                (uint16_t)normal->first_active + normal->active_ticks > normal->duration ||
-                normal->pose_ends[normal->pose_count - 1u] != normal->duration) {
-                return 0u;
-            }
-#if defined(MOF_DUEL_SCENE_MIRROR)
-            if (!box_valid(normal->active_boxes)) return 0u;
-#else
-            for (frame = 0u; frame < normal->active_ticks; ++frame) {
-                if (!box_valid(&normal->active_boxes[frame])) return 0u;
-            }
-#endif
-            if (!normal->pose_ends[0]) return 0u;
-            for (frame = 1u; frame < normal->pose_count; ++frame) {
-                if (normal->pose_ends[frame] <= normal->pose_ends[frame - 1u]) return 0u;
-            }
-        }
+        if (!moves_valid(normals[fighter])) return 0u;
     }
     duel->standing_normals = normals;
     return 1u;
 }
+#endif
 
 uint8_t mof_duel_next_tick_free(const MofDuel *duel, uint8_t player)
 {

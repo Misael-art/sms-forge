@@ -1,5 +1,17 @@
 # 10-memory-bank — master_of_fighters
 
+## Camada de elenco, fase 1 · candidata r1 · 26/11/2026
+
+As regras do duelo em espelho deixaram de deduzir força, defesa aérea, anti-aéreo, empurrão e som pelo número do golpe. Agora leem uma ficha por lutador, a `MofFighterDef` descrita no [TDD](15-tdd.md). A ficha reúne também o perfil de pulo, as caixas por postura, a linha do pescoço, o alcance da Puxada e o avanço do especial. A ficha da Alis fica em `src/fighter_alis.inc` e o elenco em `src/duel_roster.inc`, indexado pelo ID do lutador. `MofAlisMotion`/`duel.alis[]` passaram a `MofDuelBody`/`duel.body[]`. Nenhum número de jogo mudou.
+
+Um harness de migração no host rodou as regras antigas com a tabela da h1 e as novas com a ficha real. Cobriu as configurações espelho, capítulo e contragolpe, com três sementes cada e 40 mil passos aleatórios por traço, incluindo acerto, defesa, Puxada, queda, KO, congelamento e aparo. Os nove traços ficaram idênticos byte a byte. Os seis programas de teste do host passaram em nove combinações de flags, e `tools/test_duel_impact.c` passou a montar a ficha.
+
+A candidata [r1](../out/candidates/espacoporto_de_palma_elenco_r1/rom/master_of_fighters.sms), 1 MiB, SHA-256 `dd8478e63097319eb81a5cd91dc611059d28c65b4a9a0a52ec1d36c335ed70ab`, compila a mesma base E2 da h1. No Emulicious privado, o caso `impact` passou nos oito critérios com os valores da h1: leve 4/10, forte 11/20 com tremor e forte defendido 11/3. Só a fase do contato mudou um tick, porque a entrada chega por quadro de vídeo. O código fixo cresceu 165 bytes, restando cerca de 2,8 KB, e o banco das regras cresceu 215 bytes. O corredor de sondas passou com 112 bytes de folga. [Impacto](../out/qa/alis_20261126/espacoporto_de_palma_elenco_r1/impact/observations.json)
+
+**Desempenho reprovado, sem regressão.** A guarda contra a CPU mediu 37,61199191211526 / 40,036518298362125 / 38,550061297239054 FPS. A carga mista, 37,45 / 40,95 / 40,45 FPS. A janela selada registrou os mesmos 8 términos em área ativa da h1, com o mesmo primeiro estouro. [FPS na CPU](../out/evidence/sessions/4ca0bfb605a6411d8dd6be70cf372d2a/runtime/fps.json) · [Carga mista e pior quadro](../out/qa/alis_20261126/espacoporto_de_palma_elenco_r1/worst/observations.json)
+
+Próximo: a fase 2 traz a ficha de Hayato a partir da b32, troca as flags com nome de personagem por capacidades da ficha e leva os comandos de especial, Super e contragolpe para dados. Antes da fase 3, o dono decide o tamanho do cartucho e a divisão da paleta entre dois lutadores diferentes.
+
 ## Impacto por força na base E2 · candidata h1 · 26/11/2026
 
 A candidata [h1](../out/candidates/espacoporto_de_palma_impacto_h1/rom/master_of_fighters.sms), 1 MiB, SHA-256 `25b8625937efc686c8473c2aa9e67baa05df92758d872e9b0e816cffc1ee390c`, compila a E2 com o congelamento de impacto e a reação por força pedidos pelo dono em 25/11. Toque curto é leve: congela 4 passos e tira o controle por 10 ticks. Normal mantido, especial, Super, contragolpe e Puxada são fortes: congelam 11 passos, tiram o controle por 20 ticks e fazem a defensora tremer 1 px. A defesa recebe o congelamento da força, sem tremor, e mantém 3 ticks de bloqueio. O contrato está no [TDD](15-tdd.md) e no teste `tools/test_duel_impact.c`.

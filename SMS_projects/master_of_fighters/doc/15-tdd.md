@@ -56,7 +56,7 @@ O chute aéreo forte desloca até 7 px e os demais acertos até 4 px.
 A rasteira mantém a queda.
 
 **Impacto por força (Cena 02 em espelho e capítulo).** `duel_rules.c`
-classifica o contato pelo normal da atacante. Toque curto é leve. Normal
+classifica o contato pela ficha do golpe da atacante (`MOF_MOVE_HEAVY`). Toque curto é leve. Normal
 mantido, especial, Super, contragolpe e Puxada com Escudo são fortes. O
 leve congela os dois lutadores por 4 passos e aplica 10 ticks de reação.
 O forte congela por 11 passos e aplica 20 ticks. A defesa recebe o mesmo
@@ -78,6 +78,23 @@ força continuam pendentes em GD02.
 confere índigo no peitoral e ciano da lâmina fora dessa região nas
 duas faces e nos dois trajes. O roteiro `shield_shove` lê a reação e
 confronta a arte com o framebuffer do mesmo binário.
+
+**Ficha de regras por lutador (espelho e capítulo).** Cada lutador tem um
+registro `MofFighterDef` em `inc/duel_rules.h`: golpes, perfil de pulo,
+caixas de dano por postura (em pé, agachado, dobrando, no ar e no ar em
+guarda), linha do pescoço, alcance de captura da Puxada e avanço do
+especial. Cada golpe traz como campos a força (`MOF_MOVE_HEAVY`), a defesa
+pela guarda aérea (`MOF_MOVE_AIR_BLOCKABLE`), a vitória sobre a guarda aérea
+a partir do chão (`MOF_MOVE_ANTI_AIR`), o empurrão e o material do som.
+As regras, a previsão de impacto da rodada e o áudio leem esses campos em
+vez de deduzir pelo número do golpe. A ficha da Alis fica em
+`src/fighter_alis.inc`. `src/duel_roster.inc` indexa as fichas pelo ID
+`MOF_DUEL_*`, e `mof_duel_set_roster()` recusa um par com ficha ausente,
+caixa inválida ou tempos incoerentes. Hayato ainda não tem ficha no
+espelho; o confronto b32 e as cenas anteriores continuam na tabela
+`standing_normals`. Seguem fora da ficha os comandos de especial, Super e
+contragolpe, ainda reconhecidos em `mirror_read`, os tempos da Puxada e a
+altura de travessia do salto.
 
 ## Cena 02 — candidatas comparativas de Hayato × Alis
 

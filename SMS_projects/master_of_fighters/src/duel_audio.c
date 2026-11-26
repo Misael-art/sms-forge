@@ -27,8 +27,11 @@ void mof_duel_audio_tick(const MofDuel *duel, uint8_t hayato_player,
         hayato = &duel->fighters[1u - hayato_player];
         move = alis->standing_normal;
     }
-    uint8_t material = move == MOF_DUEL_THROW ? MOF_INPUT_SHORT_ONE :
-        move < MOF_DUEL_SPECIAL ? move & 3u : 0xFFu;
+    /* The sounding fighter's record names the material of each move. */
+    uint8_t material;
+    alis_normals = alis->def->moves;
+    material = move < MOF_DUEL_NORMALS_PER_FIGHTER ? alis_normals[move].material
+                                                   : MOF_MATERIAL_BODY;
 #else
     uint8_t material = move;
 #endif

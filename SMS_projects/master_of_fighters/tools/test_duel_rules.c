@@ -130,20 +130,20 @@ static void mixed_jump_input(void)
             if (trial == 2u && i >= 14u) keys = sword;
             if (trial == 3u && i >= 3u) keys = sword | MOF_DUEL_DOWN;
             step(&duel, 0u, keys);
-            airborne = duel.alis[0].motion.mode == MOF_MOTION_AIR;
+            airborne = duel.body[0].motion.mode == MOF_MOTION_AIR;
             if (airborne && !was_airborne) {
                 ++takeoffs;
                 assert(duel.tick == duel.fighters[0].free_since + 2u);
-                assert(duel.alis[0].motion.vx == -96);
+                assert(duel.body[0].motion.vx == -96);
             }
-            if (-duel.alis[0].y_offset > peak) peak = (uint8_t)-duel.alis[0].y_offset;
+            if (-duel.body[0].y_offset > peak) peak = (uint8_t)-duel.body[0].y_offset;
             was_airborne = airborne;
         }
         assert(takeoffs == (trial == 0u || trial == 2u));
         assert(peak == (takeoffs ? 78u : 0u) && !was_airborne);
         step(&duel, 0u, 0u);
         for (i = 0u; i < 3u; ++i) step(&duel, 0u, MOF_DUEL_UP);
-        assert(duel.alis[0].y_offset == -14 && duel.alis[0].motion.vx == 0);
+        assert(duel.body[0].y_offset == -14 && duel.body[0].motion.vx == 0);
     }
     puts("PASS held, expired, buffered-release and cancelled jump edges during sword recovery");
 }

@@ -17,18 +17,28 @@ static const MofDuelGeometry geometry[2] = {
 static const MofDuelBox reach = {0,-40,30,-20};
 static const uint8_t ends[] = {4u, 6u, 14u};
 
-#define NORMAL(dmg) {&reach, ends, 4u, 2u, 14u, dmg, 3u, MOF_HEIGHT_MIDDLE, 0u}
-static const MofDuelStandingNormal normals[2][MOF_DUEL_NORMALS_PER_FIGHTER] = {
-    {{0}},
-    {NORMAL(6), NORMAL(10), NORMAL(8), NORMAL(12), NORMAL(5), NORMAL(11), NORMAL(6),
-     NORMAL(10), NORMAL(5), NORMAL(11), NORMAL(7), NORMAL(12), NORMAL(13), NORMAL(16)}
+/* Holds, the special and the throw are heavy, as in the production record. */
+#define NORMAL(dmg, flags) {&reach, ends, 4u, 2u, 14u, dmg, 3u, MOF_HEIGHT_MIDDLE, 0u, flags, 4u, \
+                            MOF_MATERIAL_BODY}
+#define L 0u
+#define H MOF_MOVE_HEAVY
+static const MofDuelStandingNormal moves[MOF_DUEL_NORMALS_PER_FIGHTER] = {
+    NORMAL(6, L), NORMAL(10, H), NORMAL(8, L), NORMAL(12, H), NORMAL(5, L), NORMAL(11, H),
+    NORMAL(6, L), NORMAL(10, H), NORMAL(5, L), NORMAL(11, H), NORMAL(7, L), NORMAL(12, H),
+    NORMAL(13, H), NORMAL(16, H)
 };
+static const MofFighterDef fighter = {
+    moves, {0u, 0u, 0u, 0u, 0u, 0u, 96u, 234u, 24u, 0u, 0u, 0u},
+    {-11,-53,13,-3}, {-11,-33,11,-2}, {-13,-40,11,-2}, {-12,-46,11,-4}, {-12,-46,11,-15},
+    34u, 32u, 2u, 7u, 2u
+};
+static const MofFighterDef *const roster[MOF_DUEL_FIGHTER_IDS] = {0, &fighter};
 
 static void start(MofDuel *duel)
 {
     assert(mof_duel_init_pair(duel, geometry, 6u, MOF_DUEL_ALIS, MOF_DUEL_ALIS,
                               100, 124, 16, 239, 24));
-    assert(mof_duel_set_standing_normals(duel, normals));
+    assert(mof_duel_set_roster(duel, roster));
     assert(duel->hitstop == 0u);
 }
 

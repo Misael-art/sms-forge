@@ -15,6 +15,7 @@
 
 #define MOF_DUEL_HAYATO 0u
 #define MOF_DUEL_ALIS   1u
+#define MOF_DUEL_FIGHTER_IDS 2u
 
 #define MOF_DUEL_READY  0u
 #define MOF_DUEL_ATTACK 1u
@@ -73,8 +74,32 @@ typedef struct {
     uint8_t first_active, active_ticks, duration, damage, pose_count;
 #if defined(MOF_DUEL_SCENE_MIRROR)
     uint8_t height, knockdown;
+    /* Read by the rules instead of inferring them from the move id. */
+    uint8_t flags, push, material;
 #endif
 } MofDuelStandingNormal;
+#endif
+
+#if defined(MOF_DUEL_SCENE_MIRROR)
+#define MOF_MOVE_HEAVY         0x01u  /* long freeze and hitstun; a landed hit shakes */
+#define MOF_MOVE_AIR_BLOCKABLE 0x02u  /* an airborne guard stops it */
+#define MOF_MOVE_ANTI_AIR      0x04u  /* from the ground it beats an airborne guard */
+/* Sound material. Shield and blade equal the button-one command ids. */
+#define MOF_MATERIAL_SHIELD 0u
+#define MOF_MATERIAL_BLADE  1u
+#define MOF_MATERIAL_BODY   2u
+
+/* One fighter's rules record. The rules read only this record, so a new
+   fighter adds a record instead of new branches on its id. */
+typedef struct {
+    const MofDuelStandingNormal *moves;  /* MOF_DUEL_NORMALS_PER_FIGHTER entries */
+    MofDuelMotionProfile motion;
+    /* Hurt boxes by posture. Folding covers crouch and landing transitions. */
+    MofDuelBox stand, crouch, folding, air, air_braced;
+    uint8_t neck;         /* px above the pivot where head hits begin */
+    uint8_t throw_reach;  /* farthest throw capture, px between pivots */
+    uint8_t special_from, special_until, special_step;  /* ticks, px per tick */
+} MofFighterDef;
 #endif
 
 typedef struct {
@@ -86,6 +111,7 @@ typedef struct {
     uint8_t standing_normal;
 #endif
 #if defined(MOF_DUEL_SCENE_MIRROR)
+    const MofFighterDef *def;
     uint8_t reaction, thrown, hit_duration;
 #endif
 } MofDuelFighter;
@@ -109,7 +135,7 @@ typedef struct {
     MofDuelMotion motion;
     int8_t y_offset, air_step;
     uint8_t air_age, transition, jump_pending, jump_buffer, jump_grace;
-} MofAlisMotion;
+} MofDuelBody;
 #endif
 
 #if defined(MOF_DUEL_SCENE_MIRROR)
@@ -128,12 +154,14 @@ typedef struct {
     MofDuelBox tested_attack[2], tested_hurt[2];
     uint8_t tested_active[2], tested_pose[2];
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
+#if !defined(MOF_DUEL_SCENE_MIRROR)
     const MofDuelStandingNormal (*standing_normals)[MOF_DUEL_NORMALS_PER_FIGHTER];
+#endif
     int16_t tested_hurt_x[2];
     uint8_t tested_hurt_facing[2];
 #endif
 #if defined(MOF_DUEL_SCENE_POSTURES)
-    MofAlisMotion alis[2];
+    MofDuelBody body[2];
 #endif
 #if defined(MOF_DUEL_SCENE_MIRROR)
     /* Impact freeze: steps left with both fighters held, and the defender
@@ -170,12 +198,18 @@ uint8_t mof_duel_alis_standing_input(const MofDuel *duel, uint8_t player, uint8_
 uint16_t mof_duel_age(const MofDuel *duel, const MofDuelFighter *fighter);
 void mof_duel_hurt_box(const MofDuel *duel, uint8_t player, MofDuelBox *box);
 #if defined(MOF_DUEL_SCENE_POSTURES)
-uint8_t mof_duel_alis_posture_pose(const MofDuel *duel, uint8_t player);
+uint8_t mof_duel_posture_pose(const MofDuel *duel, uint8_t player);
 #endif
 
 #if defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
+#if defined(MOF_DUEL_SCENE_MIRROR)
+/* Give each player the record of its fighter id. Call once after init. */
+uint8_t mof_duel_set_roster(MofDuel *duel,
+    const MofFighterDef *const roster[MOF_DUEL_FIGHTER_IDS]);
+#else
 uint8_t mof_duel_set_standing_normals(MofDuel *duel,
     const MofDuelStandingNormal normals[2][MOF_DUEL_NORMALS_PER_FIGHTER]);
+#endif
 uint8_t mof_duel_next_tick_free(const MofDuel *duel, uint8_t player);
 void mof_duel_step_normal(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
                           uint8_t p1_normal, uint8_t p2_normal);

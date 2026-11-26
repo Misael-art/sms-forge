@@ -17,21 +17,21 @@ static void run_jump(int16_t start, int16_t rival, uint8_t direction, int expect
     assert(mof_duel_init(&duel, geometry, 6, MOF_DUEL_ALIS, start, rival, 32, 223, 24));
     for (tick = 0; tick < 35; ++tick) {
         mof_duel_step(&duel, MOF_DUEL_UP | direction, 0);
-        if (duel.alis[0].y_offset < 0) {
+        if (duel.body[0].y_offset < 0) {
             ++airborne;
             if (airborne <= 3) {
                 static const int8_t impulse[] = {-14, -13, -12};
-                assert(duel.alis[0].y_offset - previous == impulse[airborne - 1]);
+                assert(duel.body[0].y_offset - previous == impulse[airborne - 1]);
             }
-            if (duel.alis[0].y_offset < apex) apex = duel.alis[0].y_offset;
+            if (duel.body[0].y_offset < apex) apex = duel.body[0].y_offset;
         }
-        if (duel.alis[0].y_offset > -65)
+        if (duel.body[0].y_offset > -65)
             assert(duel.fighters[0].x <= rival - 24 || duel.fighters[0].x >= rival + 24);
         if (duel.fighters[0].face_right != start_right) turned = 1;
         assert(duel.fighters[0].x >= 32 && duel.fighters[0].x <= 223);
-        previous = duel.alis[0].y_offset;
+        previous = duel.body[0].y_offset;
     }
-    assert(apex == -78 && airborne == 20 && duel.alis[0].y_offset == 0);
+    assert(apex == -78 && airborne == 20 && duel.body[0].y_offset == 0);
     assert(turned == expected_cross);
     if (!direction) assert(duel.fighters[0].x == start);
     if (expected_cross) {
