@@ -1,5 +1,13 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Horizonte do Espaçoporto de Palma
+
+A [candidata da pista](../out/candidates/alis_palma_horizonte_r3/rom/master_of_fighters.sms) usa o guarda adulto de viseira pequena, três grupos de nuvens e duas cristas atrás dos hangares. A revisão do encaixe dos tiles preservou 263 dos 286 pixels da crista distante no recorte central da prancha. A moldura do Versus percorreu as 21 posições previstas no framebuffer com os retratos de pré-luta, o manto verde de P2 e *Battle* em FM. [Comparação do guarda](../out/qa/alis_palma_horizonte_r3/cenario/guardas.png) · [Vídeo da pista](../out/qa/alis_palma_horizonte_r3/cenario/nuvens.mp4)
+
+No Emulicious NTSC, com os controles em repouso, as nuvens deslocaram-se 16 pixels em 128 quadros, em passos regulares de um pixel a cada oito. Na travessia entre as duas posições medidas, o pátio moveu-se 12 pixels e o piso 24. A faixa da crista coincidiu pixel a pixel com os padrões da ROM nas quatro observações. Na História, Fire curto acertou a CPU. No Versus, os dois controles acionaram Fire, as duas chamas e Chat. As cargas mista e de especiais selaram 3.000 apresentações cada, com zero estouros de VBlank. As menores janelas foram de 38,81706982789073 FPS em guarda na História, 45,441413748270165 FPS na carga mista e 33,456865067407705 FPS nos especiais. O piso de 58 FPS continua reprovado. O próximo diagnóstico de cadência deve reproduzir a janela mais lenta dos especiais com as mesmas entradas e medir o tempo da lógica e da apresentação separadamente.
+
+Arte e código em `b24be96`. SHA-256 da ROM `84ca34b7475a54bce7e114140f427813fea05eda950c64d1ac335f82a647f8ea`. O [recibo](decisions/2026-11-27_palma_horizonte.json) identifica as seis sessões encerradas, a receita, as janelas sem arredondamento e a cópia dos insumos usados da árvore compartilhada.
+
 ## 27/11/2026 · Revisão da ficha de Alis e contagem de combo
 
 A [ficha de construção](ficha_tecnica_alis_g6e_v1.docx) revê 15 poses e três planos do final. Nas marchas #01–08 e no Passo de Escudo #54–56, a revisão separa a saia rosa, as meias brancas e as botas e recupera o contorno das pernas. A altura visível passou de 48 para 51 px em #42, de 47 para 50 em #44, de 46 para 49 em #47 e de 43 para 40 em #66. O pé permanece registrado em Y143. Os planos de Alis e do corte laconiano usam o concept v4. Odin segue o retrato da Sega. As regras e os tempos da ficha continuam vinculados à G6e. [Atlas e medidas](../data/source_art/sprite_studies/alis_revisao_ficha/revisao.json) · [Planos e referências](../data/source_art/scenes/alis_guardioes/lineage.json)

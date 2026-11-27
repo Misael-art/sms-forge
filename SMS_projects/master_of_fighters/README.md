@@ -8,6 +8,12 @@
 Jogo de luta autoral em desenvolvimento. O manifesto padrão compila o
 esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 
+## Jogar na pista com o novo horizonte de Palma
+
+Abra [a ROM do Espaçoporto com o guarda e as nuvens](out/candidates/alis_palma_horizonte_r3/rom/master_of_fighters.sms). No título, pressione **1** e escolha **História de Alis** ou **Versus local**. Na pista, deixe os controles em repouso para ver o vento nas nuvens. Caminhe com os dois lutadores para o mesmo lado para ver o deslocamento relativo do céu, das naves e do piso.
+
+A pista foi conferida no Emulicious. As duas cargas de 3.000 apresentações encerraram com zero estouros de VBlank. A janela mais lenta dos especiais ficou em 33,46 FPS, abaixo do piso de 58. [Ver a pista em movimento](out/qa/alis_palma_horizonte_r3/cenario/nuvens.mp4) · [Medições da ROM](doc/decisions/2026-11-27_palma_horizonte.json)
+
 ## Jogar a apresentação Alis × Alis no Espaçoporto de Palma
 
 Abra [a ROM do Versus com câmera e áudio FM](out/candidates/alis_versus_barlow_fm/rom/master_of_fighters.sms). Na abertura, o botão **1** entra no menu. Escolha **Versus local** para ver a apresentação antes da luta. **1** também permite avançá-la. Com Alis como P2 e a música ligada, toca *Battle*, do primeiro *Phantasy Star*. No Emulicious, habilite a unidade FM em **Options → Emulation → Master System** para ouvir o arranjo do YM2413. O hardware PSG toca a versão do mesmo tema para esse chip.
