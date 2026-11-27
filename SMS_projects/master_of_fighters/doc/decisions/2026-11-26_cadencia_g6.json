@@ -397,6 +397,94 @@
           "sessao": "43cb5afe38e64a12af33040252ff32b0"
         }
       }
+    },
+    "g6e": {
+      "rom_sha256": "e3a98e8c1280545313a10998a958f9909fa693789670283f6aa13f2e1649b00f",
+      "rom": "out/candidates/alis_guardioes_g6e/rom/master_of_fighters.sms",
+      "fps": {
+        "guarda_historia": [
+          48.5104489262283,
+          48.43740920382181,
+          43.82115268279039
+        ],
+        "mista_versus": [
+          51.433688088701395,
+          50.43497569862952,
+          48.93690711352171
+        ],
+        "especiais_versus": [
+          35.45428984755144,
+          49.935619503593585,
+          50.43497569862952,
+          55.927893844024815,
+          49.935619503593585,
+          50.93433189366546,
+          54.42982525891701,
+          50.43497569862952,
+          50.43497569862952,
+          55.428537648988886,
+          35.95364604258738,
+          50.93433189366546,
+          54.42982525891701,
+          50.43497569862952,
+          50.43497569862952,
+          55.428537648988886,
+          50.43497569862952,
+          50.43497569862952,
+          54.92918145395295,
+          35.45428984755144,
+          50.43497569862952,
+          56.42725003906075,
+          50.43497569862952,
+          50.43497569862952
+        ]
+      },
+      "menor_janela": 35.45428984755144,
+      "satisfaz_piso_em_todas_as_janelas": false,
+      "vblank": {
+        "publicacoes_por_carga": 3000,
+        "mista": 0,
+        "magias": 0,
+        "vcount_min_mista": 200,
+        "vcount_min_magias": 200
+      },
+      "fontes": {
+        "out/qa/alis_guardioes_g6e/budget/observations.json": {
+          "sha256": "7a354be80d22fd08287e013265df4400aa9f823ca9c596d6681a2d73d5e0b23b",
+          "sessao": "932ca6b8158f408cbfd2e368f6391329"
+        },
+        "out/evidence/sessions/932ca6b8158f408cbfd2e368f6391329/runtime/fps.json": {
+          "sha256": "daaab9e50582f6ccb2870aa4d6d93c31c4bd09e344f438e536e9a19a06a38c4d",
+          "sessao": "932ca6b8158f408cbfd2e368f6391329"
+        },
+        "out/qa/alis_guardioes_g6e/worst/observations.json": {
+          "sha256": "ca490b3d993a1a5902abd8d69a21ba3d8fe9829d2d514c55c7b8060d4ca2444f",
+          "sessao": "ec946672109d43c89d6d651f4417215d"
+        },
+        "out/qa/alis_guardioes_g6e/spell-budget/observations.json": {
+          "sha256": "8ece1536d1a657266c93afd40c708986cd4a09e10ea3f2b3e814073ffedf50c7",
+          "sessao": "79e302dd692d4226bf8f674b265b3b5c"
+        },
+        "out/qa/alis_guardioes_g6e/port-versus/observations.json": {
+          "sha256": "a587a84107cad725118c8d95e18d9aab1e821c4576ea4fb6020ed5c46a65b8b0",
+          "sessao": "783cc639c6e9497da9d94dcde58f924b"
+        }
+      },
+      "pixels_dupla_na_arena": {
+        "pixels": 1678,
+        "divergentes": 0
+      },
+      "cobertura_no_sha": {
+        "historia": [
+          "guarda contra a CPU"
+        ],
+        "versus": [
+          "dupla na pista",
+          "carga mista",
+          "Fire curto, chamas duplas e Chat dos dois lados"
+        ]
+      },
+      "bateria_interrompida": "O host reiniciou durante o ensaio de impactos. A sessão incompleta foi excluída das verificações aprovadas."
     }
   },
   "reproducao_g6d": {

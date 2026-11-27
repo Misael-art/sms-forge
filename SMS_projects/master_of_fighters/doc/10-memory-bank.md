@@ -1,8 +1,10 @@
 # 10-memory-bank — master_of_fighters
 
-## 26/11/2026 · G6e · código da próxima candidata
+## 26/11/2026 · G6e · ROM do Espaçoporto de Palma
 
-A G6e prepara a SAT por lutador, mantém os slots residentes nas trocas de pose e reaproveita a célula da magia quando só os pixels do efeito mudam. O teste de regras cobre a recuperação de golpes e a defesa em pé e agachada. A conferência do pacote de arte encontrou 376 poses, 3.008 fases e 1.834 células de fundo com coordenadas distintas dentro de cada fase. A comparação em software de 2.500 transições preservou as entradas da SAT e seu terminador. A ROM e as medições de G6e aguardam o ensaio privado no Emulicious.
+A G6e prepara a SAT por lutador, mantém os slots residentes nas trocas de pose e reaproveita a célula da magia quando só os pixels do efeito mudam. O teste de regras cobre a recuperação de golpes e a defesa em pé e agachada. A conferência do pacote de arte encontrou 376 poses, 3.008 fases e 1.834 células de fundo com coordenadas distintas dentro de cada fase. A comparação em software de 2.500 transições preservou as entradas da SAT e seu terminador. O Emulicious mostrou os dois lutadores na pista. Os 1.678 pixels verificados coincidiram com a arte do cartucho. [ROM G6e](../out/candidates/alis_guardioes_g6e/rom/master_of_fighters.sms)
+
+O SHA-256 da G6e é `e3a98e8c1280545313a10998a958f9909fa693789670283f6aa13f2e1649b00f`. A guarda contra a CPU na História mediu 48,510449, 48,437409 e 43,821153 FPS. As três janelas mistas do Versus mediram 51,433688, 50,434976 e 48,936907 FPS. Com especiais simultâneos, as 24 janelas variaram de 35,454290 a 56,427250 FPS. As duas cargas selaram 3.000 apresentações com zero estouros de VBlank. O piso de 58 FPS segue reprovado. O ensaio do Versus confirmou Fire curto, chamas duplas e Chat nos dois controles. A reinicialização do host interrompeu o ensaio de impacto antes do veredito. [Recibo e medições sem arredondamento](decisions/2026-11-26_cadencia_g6.json)
 
 ## 26/11/2026 · Cadência dos especiais de Alis · G6 em teste
 
