@@ -124,11 +124,25 @@ def main():
         stamp=ram(0xc774,1)[0]
         isolated.request(session,'sample-commit',0xc774,((stamp|1)+1)&255,8)
 
+    def capture_film(prefix):
+        seen=set()
+        for _ in range(160):
+            wait(5);scene=event()[84]
+            if scene and scene not in seen:
+                # The first completed scan after display-on can still be blank.
+                wait(2)
+                if event()[84]==scene:
+                    observe(prefix+str(scene),True)
+                    seen.add(scene)
+            if 7 in seen and not scene:break
+        return seen
+
     def campaign_finish(name):
         # Both thresholds are earned against the campaign AI. Release the
         # direction on each wake-up and sample the next committed input.
         want_final=name=='guardioes'
         last_pair=None
+        saw_stun=False
         for turn in range(3300):
             ch=ram(addr,16);m=event();d=state()
             one,two=d['p1'],d['p2']
@@ -136,16 +150,26 @@ def main():
             forward=F if one['facing_right'] else B
             back=forward^F^B
             gap=abs(one['pivot'][0]-two['pivot'][0])
+            if want_final and not saw_stun and m[98] and m[32]:
+                observe('historia_tontura',True)
+                saw_stun=True
             if m[88+(11 if want_final else 10)]:
                 if want_final:
+                    # The regular fighter record stops publishing during the film.
+                    # Advance the VDP itself across the cut from the duel.
                     for _ in range(90):
-                        if event()[83]==1:break
-                        tick()
+                        if event()[83]==1 and life(1)==0:break
+                        wait(2)
                     assert event()[83]==1 and life(1)==0
                 row=observe('historia_'+name,True)
                 if want_final:
-                    wait(450)
-                    observe('historia_final_confirmado',True)
+                    seen=capture_film('historia_plano_')
+                    # Scene 7 gives way to a display-off upload of the epilogue.
+                    wait(48)
+                    observe('historia_epilogo',True)
+                    press(TWO,64)
+                    result=observe('historia_final_confirmado',True)
+                    assert seen==set(range(1,8)) and result['chapter'][3:5]==[1,0]
                 else:assert row['dizzy'][1]
                 return
             assert ch[0] and ch[5]==2 and hp,(name,turn,hp,foe)
@@ -157,7 +181,7 @@ def main():
                 # knockdown; blocking low also protects against the CPU sweep.
                 tick(back|D if one['state'] and hp<=35 else back)
                 continue
-            if want_final and foe>=25:
+            if foe>=25:
                 if m[45] or two['pivot'][1]<104 or gap>82:
                     tick(forward if gap>82 else back)
                 else:
@@ -175,8 +199,8 @@ def main():
                     for pad in (back,0,back|TWO):tick(pad)
                 continue
             if m[32] and want_final:
-                if not m[0]:
-                    for pad in (D,D|forward,forward,D,D|forward,forward|TWO):tick(pad)
+                gesture(0,'dxfdxf',TWO)
+                wait(5)
                 continue
             if two['state']==0 and two['pivot'][1]==144:
                 for pad in (forward,back,forward|ONE):tick(pad)
@@ -401,16 +425,7 @@ def main():
             return
         isolated.request(session,'record-steps-start','guardioes')
         gesture(0,'dxfdxf',TWO)
-        seen=set()
-        for _ in range(160):
-            wait(5);scene=event()[84]
-            if scene and scene not in seen:
-                # Scene ID changes at display-on; the preceding blank can
-                # still be the latest completed scan. Wait for this exposure.
-                wait(2)
-                if event()[84]==scene:
-                    observe(f'plano_{scene}',True);seen.add(scene)
-            if 7 in seen and not scene:break
+        seen=capture_film('plano_')
         movie=isolated.request(session,'record-steps-stop')
         log['movie']=movie
         subprocess.run(['ffmpeg','-v','error','-threads','1','-framerate','60','-i',

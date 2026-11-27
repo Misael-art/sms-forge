@@ -468,6 +468,62 @@
         "out/qa/alis_guardioes_g6e/port-versus/observations.json": {
           "sha256": "a587a84107cad725118c8d95e18d9aab1e821c4576ea4fb6020ed5c46a65b8b0",
           "sessao": "783cc639c6e9497da9d94dcde58f924b"
+        },
+        "out/qa/alis_guardioes_g6e/historia-fire_curto/observations.json": {
+          "sha256": "6eef268c7fe2a742edf0d01e212a446fafd6730e7b51929667827335ba44b862",
+          "sessao": "9f936b82bfbd43a29180facc5807d51e"
+        },
+        "out/qa/alis_guardioes_g6e/historia-fire_forte/observations.json": {
+          "sha256": "3670731bd5edf736c8dfe10ca0eb8c44d5b55b74fb6fb6d285626f13e5b21fb2",
+          "sessao": "816b07c059df4a959049e2743ed4fff7"
+        },
+        "out/qa/alis_guardioes_g6e/historia-chamas/observations.json": {
+          "sha256": "2d8cf768478ce6ef4972b5f7ed35352278ba232ccac53f718194c1bfcb6f5e78",
+          "sessao": "cef25124cad243ac8a5b5881bd985d03"
+        },
+        "out/qa/alis_guardioes_g6e/historia-myau/observations.json": {
+          "sha256": "aa1f6c10e83b0435a78745f3f93cd3623286bc69ba3d204448bcff7aa937a9f3",
+          "sessao": "a68251938ecb47c3a786b4d15e1cc0e5"
+        },
+        "out/qa/alis_guardioes_g6e/historia-rest/observations.json": {
+          "sha256": "4d85a8da025c8229253c2865ab454935a5c94f05d7c27d3e7a0f4f4a4d4a7fda",
+          "sessao": "5fa1e770cfa64f4788a40a729ad32cee"
+        },
+        "out/qa/alis_guardioes_g6e/historia-onda/observations.json": {
+          "sha256": "c1dde1b8c48ee232b1727af4a5d12fd65bb8a9268d9ff2244f157cc1d244b45e",
+          "sessao": "72fa4eb9b9b343c88d71c603ce0b39c3"
+        },
+        "out/qa/alis_guardioes_g6e/historia-sabre/observations.json": {
+          "sha256": "73e0b63ae7aa842c88d6d7c896695b0a9a0f7f246bebddc2f384a1fc054bc4aa",
+          "sessao": "04616b0b03a14dc5bc0380ac4e602a99"
+        },
+        "out/qa/alis_guardioes_g6e/historia-chat/observations.json": {
+          "sha256": "bcf6069a77c08b939c543fb804e7f09ef7d2817fa613dc32469337a16900d610",
+          "sessao": "51fcec5d495543a3ab7e9ec7559a5178"
+        },
+        "out/qa/alis_guardioes_g6e/historia-espelho/observations.json": {
+          "sha256": "5144006e42178160ac40d78b69678d5970dd17acd6647170f08e015dcb6faf63",
+          "sessao": "83d68766e5f149d0b8db09b342daabc4"
+        },
+        "out/qa/alis_guardioes_g6e/historia-final-controle/observations.json": {
+          "sha256": "22e70d3a4cc5972597207a37f480da4ec330f07be11ce33dcd356e778af9952f",
+          "sessao": "56e2f2da070d456190f5827dd796a009"
+        },
+        "out/qa/alis_guardioes_g6e/versus-trade/observations.json": {
+          "sha256": "7d8e8ce8ed18622fdeb794b094e4721c1919d4bc9d2eeaf7db3998eef2767bec",
+          "sessao": "62a2eb29e3654016bbb7bbe5286bcbb6"
+        },
+        "out/qa/alis_guardioes_g6e/versus-range/observations.json": {
+          "sha256": "e1a6b42da380dde0518b5e442f204f61467a38baa421fc4e5e83288c8995482b",
+          "sessao": "b8e7b0ec512649b0b624db6786d580fe"
+        },
+        "out/qa/alis_guardioes_g6e/versus-magias/observations.json": {
+          "sha256": "296314fe486c4b574a889dcb4d1ba538cb2450e78e7b82fb763c6e37c036d633",
+          "sessao": "5ee3435faa5a4a2abc8097d5a91650f7"
+        },
+        "out/qa/alis_guardioes_g6e/versus-p2-final/observations.json": {
+          "sha256": "e16481a4f4e371bb2e28fe0b8e955eea728f52c605ae3febbb99ded632c8f723",
+          "sessao": "8c3fcf09d233416dbdca49b5342239b1"
         }
       },
       "pixels_dupla_na_arena": {
@@ -482,9 +538,99 @@
           "dupla na pista",
           "carga mista",
           "Fire curto, chamas duplas e Chat dos dois lados"
+        ],
+        "comandos_historia_contra_cpu": [
+          "Fire curto",
+          "Fire forte",
+          "chamas duplas",
+          "Myau",
+          "Rest",
+          "Laconian Slash",
+          "Rising Saber",
+          "Chat",
+          "Mirror Counter",
+          "Tontura",
+          "Guardiões de Algol"
+        ],
+        "ensaios_adicionais_versus": [
+          "Fire forte simultâneo e 11 publicações de hitstop",
+          "duas chamas em curvas distintas até a borda oposta",
+          "reflexão, vitória de P1 com os sete planos dos Guardiões e revanche",
+          "atordoamento e vitória de P2 com Guardiões de Algol"
+        ],
+        "tentativas_sem_confirmacao_no_proprio_ensaio": [
+          "historia-tontura",
+          "historia-guardioes",
+          "historia-final-controle/tela_apos_o_plano_7"
         ]
       },
-      "bateria_interrompida": "O host reiniciou durante o ensaio de impactos. A sessão incompleta foi excluída das verificações aprovadas."
+      "bateria_interrompida": "O host reiniciou durante o ensaio de impactos. A sessão incompleta foi excluída das verificações aprovadas.",
+      "finalizacao_historia": {
+        "sessao": "56e2f2da070d456190f5827dd796a009",
+        "vida_no_atordoamento": [
+          16,
+          16
+        ],
+        "reiki_no_atordoamento": 8,
+        "tontura_do_alvo": 81,
+        "vida_apos_o_corte": [
+          16,
+          0
+        ],
+        "vitorias": [
+          1,
+          0
+        ],
+        "planos": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "video_versus": {
+        "arquivo": "out/qa/alis_guardioes_g6e/versus-magias/guardioes.mp4",
+        "sha256": "17b49590eb7681f958180c5721813772de7682da8e5e7a2857ba66d9dff02cbf",
+        "modo": "passo a passo por controle",
+        "quadros": 348,
+        "canvas": [
+          256,
+          192
+        ],
+        "audio": false
+      },
+      "compilacao": {
+        "registro": "out/candidates/alis_guardioes_g6e/build_record.json",
+        "sha256_registro": "f6ef5eddac59ffc033e527afe16547b1babc7f48baeae905babdc20d3db3dbc5",
+        "observacao_fontes": "O recibo de compilação inclui um LF adicional no final de src/duel_pnt_stream.inc em relação ao arquivo no Git. O conteúdo das instruções é idêntico.",
+        "sha256_arquivo_com_lf_adicional": "b4591642a3f42e0189e4ab37061519051c8c2d189de2898df140cacc493eed69"
+      },
+      "condicoes_dos_replays": {
+        "modo": "Passo a passo no Emulicious, sem leitura de FPS de relógio de parede.",
+        "sessoes_simultaneas": 1,
+        "cpu_quota_pct": 35,
+        "memory_high_mib": 480,
+        "heap_java_mib": 192,
+        "telemetria": [
+          {
+            "arquivo": "out/qa/alis_guardioes_g6e/host-controles.jsonl",
+            "pico_celsius": 86.0,
+            "min_mem_disponivel_kib": 8125948,
+            "amostras": 108,
+            "amostras_com_sessao_pausada": 2
+          },
+          {
+            "arquivo": "out/qa/alis_guardioes_g6e/host-final.jsonl",
+            "pico_celsius": 59.0,
+            "min_mem_disponivel_kib": 8611212,
+            "amostras": 16,
+            "amostras_com_sessao_pausada": 0
+          }
+        ]
+      }
     }
   },
   "reproducao_g6d": {
