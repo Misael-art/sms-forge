@@ -1,0 +1,475 @@
+{
+  "tipo": "Revisão documental solicitada antes de alterar a ROM. As propostas de hiperpausa, feedback e quarto hit exigem aprovação.",
+  "rom": "out/candidates/alis_ficha_r5/rom/master_of_fighters.sms",
+  "sha256": "7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b",
+  "codigo_conferido_em": "bdb3440",
+  "fontes_sha256": {
+    "src/alis_magic.c": "5b8288f062fb84aa0af1704691e26fe4f437b8e1d9ac3d8154dee4d3e052c6bc",
+    "src/alis_magic_sound.inc": "d8d42dba7999cb035645a77224429589471ee926745b914e426ef0aa5379d703",
+    "src/duel_mirror_round.inc": "9c1454acd210ed757a1882bea38a1c2fb5a3448e95f9797609b183a017aefac4",
+    "src/duel_rules.c": "62ea38a1f5d551cb41e796c473f05b2f39d1a5d3ce3c41904b3543fb9538c57a",
+    "src/alis_chapter.c": "6318fa450a0e7fd6047f42be9fbee31da67b17d9e0d13ac529f08ac421be91c9",
+    "src/alis_guardians.inc": "418eebfcb0d62d518ea8b2687adf27f83bfeea056b9e3e3c0b1821bb5496701b",
+    "src/fighter_alis.inc": "c95ad1a21b09f5683fb157ff2cca9e0b6741a2fd435b8507eb56da663c80dd64"
+  },
+  "arquivo_de_controle": "out/candidates/alis_ficha_r5/build_record.json",
+  "ficha_sha256": "5eb4c231e38ce8f58a9d8882b8aaf86194afb1824f6d6560d5aa289a04e441f7",
+  "paleta": {
+    "conceito": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+    "model_sheet_sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+    "cores_do_concept_SMS": [
+      1,
+      6,
+      11,
+      15,
+      37,
+      39,
+      42,
+      43,
+      47,
+      52,
+      59,
+      60,
+      63
+    ],
+    "cores_observadas_P1": [
+      0,
+      1,
+      6,
+      11,
+      16,
+      19,
+      21,
+      22,
+      27,
+      35,
+      42,
+      56,
+      63
+    ],
+    "regra_do_P2": {
+      "19": 24,
+      "35": 44
+    },
+    "pacotes_comparados_com_a_ROM": 376,
+    "poses_P1": 94,
+    "variantes_P2_com_desvio_do_remapeamento": 0,
+    "metodo": "Por pose, lado e traje, confronto dos padrões SAT, coordenadas e fases P0 com os pacotes do cartucho. Paletas de sprite e fundo conferidas nos endereços da ROM. Reconstrução P0+SAT e comparação visual do traje da Alis à direita com o concept. Contagens incluem todos os pixels opacos e não são máscaras de tecido.",
+    "galeria": {
+      "path": "out/qa/alis_ficha_r5/paleta-94-poses.png",
+      "sha256": "8155d7d7319ba0dc1b363f471a5b516b64c4857f6dfa5336faeeb20d5570a53c",
+      "copia_na_ficha_de_revisao": "doc/decisions/2026-11-27_alis_paleta_94_poses.png"
+    },
+    "comparacao": {
+      "path": "out/qa/alis_ficha_r5/comparacao-paleta-concept.png",
+      "sha256": "37922575acd80dfad2056bfb89c5618962cef7e9f2a4894960cc118a3ec116de"
+    },
+    "vermelho19_rosa35_por_pose": {
+      "0": [
+        18,
+        39
+      ],
+      "1": [
+        25,
+        42
+      ],
+      "2": [
+        25,
+        42
+      ],
+      "3": [
+        25,
+        42
+      ],
+      "4": [
+        24,
+        41
+      ],
+      "5": [
+        25,
+        42
+      ],
+      "6": [
+        26,
+        41
+      ],
+      "7": [
+        25,
+        42
+      ],
+      "8": [
+        25,
+        42
+      ],
+      "9": [
+        51,
+        13
+      ],
+      "10": [
+        29,
+        14
+      ],
+      "11": [
+        65,
+        29
+      ],
+      "12": [
+        52,
+        47
+      ],
+      "13": [
+        42,
+        17
+      ],
+      "14": [
+        38,
+        12
+      ],
+      "15": [
+        35,
+        6
+      ],
+      "16": [
+        41,
+        13
+      ],
+      "17": [
+        40,
+        33
+      ],
+      "18": [
+        17,
+        34
+      ],
+      "19": [
+        18,
+        39
+      ],
+      "20": [
+        18,
+        39
+      ],
+      "21": [
+        20,
+        40
+      ],
+      "22": [
+        17,
+        38
+      ],
+      "23": [
+        20,
+        36
+      ],
+      "24": [
+        15,
+        19
+      ],
+      "25": [
+        6,
+        24
+      ],
+      "26": [
+        15,
+        19
+      ],
+      "27": [
+        1,
+        30
+      ],
+      "28": [
+        0,
+        34
+      ],
+      "29": [
+        0,
+        31
+      ],
+      "30": [
+        37,
+        0
+      ],
+      "31": [
+        41,
+        2
+      ],
+      "32": [
+        43,
+        2
+      ],
+      "33": [
+        33,
+        2
+      ],
+      "34": [
+        61,
+        0
+      ],
+      "35": [
+        38,
+        0
+      ],
+      "36": [
+        38,
+        0
+      ],
+      "37": [
+        51,
+        0
+      ],
+      "38": [
+        38,
+        1
+      ],
+      "39": [
+        35,
+        0
+      ],
+      "40": [
+        39,
+        0
+      ],
+      "41": [
+        46,
+        0
+      ],
+      "42": [
+        21,
+        53
+      ],
+      "43": [
+        64,
+        0
+      ],
+      "44": [
+        7,
+        57
+      ],
+      "45": [
+        4,
+        44
+      ],
+      "46": [
+        54,
+        6
+      ],
+      "47": [
+        14,
+        47
+      ],
+      "48": [
+        12,
+        45
+      ],
+      "49": [
+        10,
+        38
+      ],
+      "50": [
+        15,
+        41
+      ],
+      "51": [
+        13,
+        31
+      ],
+      "52": [
+        13,
+        49
+      ],
+      "53": [
+        15,
+        66
+      ],
+      "54": [
+        24,
+        92
+      ],
+      "55": [
+        34,
+        100
+      ],
+      "56": [
+        26,
+        109
+      ],
+      "57": [
+        24,
+        62
+      ],
+      "58": [
+        17,
+        50
+      ],
+      "59": [
+        14,
+        57
+      ],
+      "60": [
+        22,
+        53
+      ],
+      "61": [
+        8,
+        51
+      ],
+      "62": [
+        86,
+        0
+      ],
+      "63": [
+        56,
+        4
+      ],
+      "64": [
+        88,
+        3
+      ],
+      "65": [
+        114,
+        0
+      ],
+      "66": [
+        17,
+        74
+      ],
+      "67": [
+        87,
+        1
+      ],
+      "68": [
+        39,
+        0
+      ],
+      "69": [
+        58,
+        5
+      ],
+      "70": [
+        65,
+        3
+      ],
+      "71": [
+        4,
+        49
+      ],
+      "72": [
+        3,
+        42
+      ],
+      "73": [
+        1,
+        37
+      ],
+      "74": [
+        6,
+        38
+      ],
+      "75": [
+        1,
+        38
+      ],
+      "76": [
+        46,
+        0
+      ],
+      "77": [
+        28,
+        61
+      ],
+      "78": [
+        23,
+        61
+      ],
+      "79": [
+        24,
+        58
+      ],
+      "80": [
+        13,
+        75
+      ],
+      "81": [
+        23,
+        54
+      ],
+      "82": [
+        9,
+        72
+      ],
+      "83": [
+        19,
+        65
+      ],
+      "84": [
+        18,
+        77
+      ],
+      "85": [
+        8,
+        63
+      ],
+      "86": [
+        4,
+        60
+      ],
+      "87": [
+        10,
+        69
+      ],
+      "88": [
+        15,
+        68
+      ],
+      "89": [
+        7,
+        67
+      ],
+      "90": [
+        13,
+        88
+      ],
+      "91": [
+        13,
+        81
+      ],
+      "92": [
+        10,
+        61
+      ],
+      "93": [
+        5,
+        75
+      ]
+    }
+  },
+  "emulador": {
+    "sessao": "4c37342aea234c4d98da85ac90782c42",
+    "arquivo": "out/qa/alis_ficha_r5/guardioes-confirmado/observations.json",
+    "P1": {
+      "arena": {
+        "HP": 100,
+        "MP": 0,
+        "VBlank": 535
+      },
+      "chat_1": {
+        "HP": 100,
+        "MP": 1,
+        "VBlank": 704
+      },
+      "fire_forte_3": {
+        "HP": 90,
+        "MP": 3,
+        "VBlank": 894
+      },
+      "rest_4": {
+        "HP": 96,
+        "MP": 1,
+        "VBlank": 984
+      }
+    }
+  },
+  "evidencia_do_combo": "doc/decisions/2026-11-27_alis_combos_revisao.json",
+  "verificacao_da_hiperpausa": "O caminho de entrada e cast da R5 cobra o recurso, sinaliza som e avança até o tick de lançamento. Não implementa um estado global de pausa por ativação com tom da arena e foco de energia. A rotação de cores dos Guardiões ocorre após o acerto decisivo.",
+  "limites": "A auditoria das 94 poses usa os dados do cartucho. A medição de Rest/Chat usa uma sessão já existente da R5. O combo de 2 pertence à candidata anterior com contador. Não há prova exaustiva de ausência de infinitos, teste de jogabilidade de uma hiperpausa ou de números flutuantes nesta revisão."
+}

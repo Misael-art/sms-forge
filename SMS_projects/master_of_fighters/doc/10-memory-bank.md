@@ -1,5 +1,9 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Command List de Alis em revisão
+
+A [ficha ilustrada](ficha_tecnica_alis_g6e_v1.docx) traz a proposta de hiperpausa, retorno de HP e MP e saída protegida de combo na página 22. A página 23 compara o model sheet v4 com os sprites da R5. A conferência dos 376 pacotes identificou perda do rosa vivo nas séries 30–41, 43 e 46, e em reações que contrastam com a pose 66. No Versus gravado, Rest levou Alis de 90 a 96 HP e Chat de 0 a 1 MP. O teto de quatro hits é uma proposta para ensaio. A ROM de referência conserva o SHA-256 `7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b` durante a revisão pelo dono. [Command List](padrao_moveset_especiais.md#command-list-de-alis--revisão-para-decisão) · [Contagens e fontes da R5](decisions/2026-11-27_command_list_alis_r5.json)
+
 ## 27/11/2026 · Alis e a tiara de Lutz na ROM da ficha
 
 A [ROM R5 da ficha](../out/candidates/alis_ficha_r5/rom/master_of_fighters.sms) tem SHA-256 `7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b`. No Versus do Espaçoporto, as poses aéreas 42, 44 e 47 medem 56, 55 e 55 pixels, com os tons de pele revistos no rosto. A pose 66 recuperou a paleta do traje e manteve 40 pixels de altura. A tiara mudou 59 pixels na testa de Lutz em cada exposição e fase do relâmpago. A [ficha atualizada](ficha_tecnica_alis_g6e_v1.docx) traz o corte, a reação de Alis e a de Hayato separados na página 19. [Recortes da ROM](../out/qa/alis_ficha_r5/revisao-visual.png)

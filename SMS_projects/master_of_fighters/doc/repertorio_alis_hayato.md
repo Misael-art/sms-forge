@@ -195,6 +195,8 @@ Estas seis ações de assinatura e os dois agarrões completam a **proposta** de
 
 ## Contagem de combo e afastamento
 
+A proposta de proteção após o quarto hit e o teste de repetição nos cantos estão na [Command List de Alis](padrao_moveset_especiais.md#hits-e-proteção-contra-sequências-infinitas). A ficha registra a regra atual da R5 e o ensaio de balanceamento a decidir.
+
 No capítulo de Alis, cada perda de vida confirmada conta um hit para o dono do golpe. O segundo acerto seguido faz o total aparecer ao lado do Reiki desse jogador. A sequência dura até a vítima poder agir ou bloquear. O congelamento de impacto preserva o total. Um projétil refletido pertence a quem o devolveu. Duas chamas sobrepostas no mesmo passo seguem a decisão de contato do motor e podem produzir um único hit. A captura do agarrão, a tontura, o aparo e os planos do final não tiram vida por si.
 
 ### Afastamento da G6e e proposta para teste
