@@ -1,6 +1,7 @@
 # 08-bible-artistica — __PROJECT_NAME__
 
-> Direção estética VINCULANTE. Adjetivo de direção precisa de piso numérico (§36).
+> Direção estética do projeto (§§15 e 135). Descreva o efeito que a direção
+> vai rever na cena e as medidas que permitem repetir o ensaio.
 
 ## Direção do primeiro trecho jogável
 Preencher com a identidade e a experiência escolhidas no GDD. O padrão de

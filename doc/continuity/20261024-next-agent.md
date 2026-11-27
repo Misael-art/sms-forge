@@ -1,5 +1,15 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-27 · Direção artística contemporânea e revisão do agente
+
+O commit `2cf0e3b` liga a direção do GDD à bíblia, ao storyboard, à revisão de materiais e ao teste da cena jogada. Ao retomar uma cena, escolha primeiro o que o jogador precisa reconhecer e fazer no quadro mais disputado. Em projetos já existentes, consulte a fonte central e a decisão vigente do dono. O [parecer do capítulo de Alis](../curation/2026-11-27_mof_capitulo_alis.json) registra a calibração em dois jogos e o que é específico de Palma.
+
+No Jupiter, passaram 149/149 casos da fábrica, 76/76 verificações de medidores, a sincronia documental e a captura de lições. A suíte rodou com um job pelo Fôlego, reserva de 768 MiB para a carga e 192 MiB para saídas. O probe opcional de jogo ficou fora desse ensaio de curadoria. Nos arquivos da candidata, os hashes do cartucho, do recibo e dos vídeos conferiram. Nove capturas de 100 a 20 PV conservaram as margens e a emenda do céu.
+
+A última candidata integrada de Palma V3 continua em `3fd981a`, ROM `bf291500…`. Nos especiais do Versus, o recibo registra 24,468 FPS na pior janela e 140 estouros em 3.000 apresentações. O próximo trabalho do jogo é localizar as escritas tardias durante os especiais e repetir a mesma entrada na ROM corrigida. [Memória e evidência do jogo](../../SMS_projects/master_of_fighters/doc/10-memory-bank.md)
+
+A branch de continuidade é `codex/host-bootstrap-continuity-20261024`, vinculada ao [PR #4](https://github.com/Misael-art/sms-forge/pull/4). Na conferência anterior à publicação, a ponta remota era `c6bfe6d`. O pacote incremental em `.runtime/backups/` tem por base esse commit público e inclui as mudanças locais anteriores, discriminadas em inventário, e o cartucho de recuperação. Conferir o SHA remoto ao retomar.
+
 ## 2026-11-26 · Especiais de Alis · G6d
 
 O Emulicious registrou zero estouros em 3.000 apresentações mistas e em 3.000 com magias. A menor janela de especiais foi de 35,45428984755144 FPS. A G6d permanece candidata de desenvolvimento. A memória do capítulo contém a identidade da ROM, a matriz História/Versus e o recibo com todas as janelas e sessões. [Memória e medições](../../SMS_projects/master_of_fighters/doc/10-memory-bank.md)
