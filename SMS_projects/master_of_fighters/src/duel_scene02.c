@@ -657,6 +657,9 @@ static void publish_patch(const uint8_t *patch, uint8_t origin_col)
 
 static uint8_t hud_first[2], hud_count[2], hud_tiles[2][HUD_SEGMENTS];
 
+#ifdef MOF_ALIS_FEEDBACK
+typedef char FeedbackTilesAfterStage[sizeof(mof_duel_bg_stage) <= (268u-HUD_EMPTY_TILE)*32u ? 1 : -1];
+#endif
 typedef char HudTilesAfterStage[
     (sizeof(mof_duel_bg_stage) <= (HUD_PARTIAL_BASE - HUD_EMPTY_TILE) * 32u) ? 1 : -1];
 

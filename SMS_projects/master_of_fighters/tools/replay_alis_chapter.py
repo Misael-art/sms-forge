@@ -17,11 +17,13 @@ from duel_probe import decode, RECORD_BYTES
 from replay_duel_round import snapshot_sat
 
 
+FEEDBACK_CASES=('gain-mp','gain-hp','pause-double','pause-myau','pause-palma','corner-right','corner-left')
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('candidate', type=Path, help='build directory with the ROM, record and map')
     parser.add_argument('out',type=Path)
-    parser.add_argument('--case',choices=('story','versus','budget','worst','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art'),
+    parser.add_argument('--case',choices=('story','versus','budget','worst','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art')+FEEDBACK_CASES,
                         default='story')
     parser.add_argument('--fm',action='store_const',const=True,default=None,
                         help='Enable the FM unit in this private Emulicious session')
@@ -99,7 +101,14 @@ def main():
                 observe('dialogo_'+str(i+1))
                 press(16,28 if i==3 else 20)
         else:
-            if args.case in ('versus','worst','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art'): press(2)
+            if args.case in ('gain-hp','gain-mp'):
+                # Isolate the recovery cue using the ordinary Options screen.
+                press(1)
+                press(16)
+                press(8)
+                press(32)
+                press(1)  # Options -> Versus
+            elif args.case in ('versus','worst','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art')+FEEDBACK_CASES: press(2)
             press(16)
             if args.case=='budget': press(32,28)
         observe('apresentacao')
@@ -115,7 +124,10 @@ def main():
         if state()[5]!=2:
             raise RuntimeError(f'Fight failed to reach gameplay: {state()}')
         arena_frame=observe('arena')
-        if args.case in ('walk-art','shield-art','air-guard-art'):
+        if args.case in FEEDBACK_CASES:
+            from replay_alis_feedback import exercise
+            exercise(args.case,session,out,controls,ram,addr,log,save)
+        elif args.case in ('walk-art','shield-art','air-guard-art'):
             from replay_alis_sheet import exercise
             roster=next((PROJECT/k for k in record['input_sha256'] if k.endswith('/duel_mirror_assets.h')),None)
             exercise(args.case,session,out,controls,ram,log,save,roster)

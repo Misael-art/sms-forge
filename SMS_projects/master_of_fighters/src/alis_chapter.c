@@ -3,8 +3,14 @@
 #include "PSGlib.h"
 #include "../inc/alis_chapter.h"
 #include "alis_pages.h"
+#ifdef MOF_ALIS_FEEDBACK
+#include "../inc/alis_feedback.h"
+#include "matchup.h"
+#include <string.h>
+#endif
 
 MofChapter chapter;
+extern uint8_t mof_cpu[3];
 const MofChapterPresentation *mof_presentation;
 
 void mof_chapter_select(const MofChapterPresentation *presentation)
@@ -31,7 +37,6 @@ static uint8_t last_pad;
 static uint8_t rhythm[2], gesture[2], direction[2], last_face[2];
 static uint8_t old_banner, old_gauge[2], banner_tiles;
 static uint8_t displayed_combo[2];
-static uint8_t cpu_keys, cpu_wait, cpu_cycle;
 
 #ifdef MOF_ALIS_MAGIC
 #include "../inc/alis_magic.h"
@@ -345,7 +350,7 @@ void mof_chapter_round(void)
     chapter.age=chapter.subsecond=chapter.expired=0;
     old_banner=old_gauge[0]=old_gauge[1]=255;
     banner_tiles=16;
-    cpu_keys=cpu_cycle=cpu_wait=0;
+    mof_cpu[0]=mof_cpu[1]=mof_cpu[2]=0;
     for (i=0;i<2;++i) {
         chapter.meter[i]=chapter.idle[i]=0;
         chapter.combo[i]=displayed_combo[i]=0;
@@ -375,6 +380,10 @@ void mof_chapter_arena(void)
 #endif
 #ifdef MOF_PORT_SKY
     SMS_loadBGPalette((const void *)MOF_PORT_PALETTE);
+#ifdef MOF_ALIS_FEEDBACK
+    memset(&mof_feedback,0,sizeof(mof_feedback));
+    memcpy(mof_feedback.palette,(const void *)MOF_PORT_PALETTE,16);
+#endif
 #endif
     SMS_loadTiles((const void *)0x8000,MOF_ARENA_FIRST,MOF_ARENA_BYTES);
     SMS_loadTileMap(0,0,(const void *)(0x8000u+MOF_ARENA_BYTES),1536);
@@ -406,7 +415,36 @@ void mof_chapter_arena(void)
     SMS_setBGScrollX(0);
     SMS_VDPturnOnFeature(VDPFEATURE_LEFTCOLBLANK);
 #endif
+#ifdef MOF_ALIS_FEEDBACK
+#ifndef MOF_PORT_SKY
+    memset(&mof_feedback,0,sizeof(mof_feedback));
+    extern const unsigned char mof_duel_bg_palette[];
+    memcpy(mof_feedback.palette,mof_duel_bg_palette,16);
+#endif
+    SMS_mapROMBank(MOF_PAN_BANK);
+    mof_feedback_init();
+#endif
 }
+
+#ifdef MOF_ALIS_FEEDBACK
+void mof_feedback_present(const MofDuel *duel)
+{
+    SMS_mapROMBank(MOF_PAN_BANK);
+    mof_feedback_frame(duel);
+}
+/* Return to the camera bank before returning to its presentation loop. */
+void mof_feedback_audio(void)
+{
+    mof_chapter_music();
+    PSGSFXFrame();
+    SMS_mapROMBank(MOF_PAN_BANK);
+}
+void mof_feedback_pause(const MofDuel *duel)
+{
+    SMS_mapROMBank(MOF_PAN_BANK);
+    mof_feedback_wait(duel);
+}
+#endif
 
 /* Called during non-playing phases, or after the measured fight SAT write.
    Only cells that changed are emitted on a playing frame. */
@@ -441,7 +479,11 @@ void mof_chapter_stage_hud(void)
 {
     uint8_t i;
     for (i=0;i<2;++i) {
+#ifdef MOF_ALIS_FEEDBACK
+        uint8_t charge=chapter.meter[i];
+#else
         uint8_t charge=chapter.meter[i]>>1;
+#endif
 #ifdef MOF_ALIS_MAGIC
         if (chapter.meter[i]==8 && (chapter.subsecond&8)) charge=0;
 #endif
@@ -450,7 +492,11 @@ void mof_chapter_stage_hud(void)
             old_gauge[i]=charge;
 #ifdef MOF_ALIS_MAGIC
             for (k=0;k<4;++k)
+#ifdef MOF_ALIS_FEEDBACK
+                chapter_cell((i ? 26 : 2)+k,2,charge==2*k+1 ? 287 : MOF_DIGIT_TILE+(2*k<charge ? 11 : 10));
+#else
                 chapter_cell((i ? 26 : 2)+k,2,MOF_DIGIT_TILE+(k<charge ? 11 : 10));
+#endif
 #else
             SMS_setNextTileatXY(i ? 26 : 2,2);
             for (k=0;k<4;++k) SMS_setTile(MOF_DIGIT_TILE+(k<charge ? 11 : 10));
@@ -556,30 +602,12 @@ uint8_t mof_chapter_result(void)
     return edge & MOF_DUEL_TWO ? MOF_MAIN_MENU : MOF_REMATCH;
 }
 
-uint8_t mof_chapter_cpu(const MofDuel *duel)
-{
-    const MofDuelFighter *f=&duel->fighters[1],*r=&duel->fighters[0];
-    uint8_t front=f->face_right ? MOF_DUEL_RIGHT : MOF_DUEL_LEFT;
-    uint8_t back=f->face_right ? MOF_DUEL_LEFT : MOF_DUEL_RIGHT;
-    int16_t gap=f->x-r->x;
-    if (gap<0) gap=-gap;
-    if (cpu_wait) { --cpu_wait; return cpu_keys; }
-    ++cpu_cycle;
-    cpu_wait=5;
-    if (cpu_keys & (MOF_DUEL_ONE|MOF_DUEL_TWO)) cpu_keys=0;
-    else if (r->state==MOF_DUEL_ATTACK && (cpu_cycle&3))
-        cpu_keys=back | (r->keys & MOF_DUEL_DOWN);
-    else if (gap>24)
-        cpu_keys=front | ((cpu_cycle&7)==0 ? MOF_DUEL_UP : 0);
-    else {
-        cpu_keys=(cpu_cycle&2 ? MOF_DUEL_TWO : MOF_DUEL_ONE) | (cpu_cycle&4 ? MOF_DUEL_DOWN : 0);
-        cpu_wait=(cpu_cycle&1) ? 2 : 7;
-    }
-    return cpu_keys;
-}
-
 void mof_chapter_spend_super(uint8_t player)
 {
+#ifdef MOF_ALIS_FEEDBACK
+    if (mof_feedback.duration<10) mof_feedback.duration=10;
+    mof_feedback.participants|=1u<<player;
+#endif
     chapter.meter[player]=rhythm[player]=gesture[player]=direction[player]=0;
 }
 

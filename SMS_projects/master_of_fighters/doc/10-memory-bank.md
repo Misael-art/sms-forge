@@ -1,5 +1,12 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Ficha e ROM de teste R6b de Alis
+
+Na [ROM R6b do Espaçoporto](../out/candidates/alis_ficha_r6b/rom/master_of_fighters.sms), a sequência forte → curto fez dois hits nos dois cantos. A vítima recuperou o controle no tick 303 e bloqueou o ataque seguinte no 308, com 84 HP. Fire duplo e Myau tiveram oito apresentações de concentração, Palma dez e os Guardiões doze. O foco acompanha a mão da pose realmente apresentada. Rest sinalizou +6 HP e Chat +1 MP com sons distintos e texto que subiu oito pixels. A ficha usa a mesma paleta do cartucho e incorpora os 23 retoques por material. A auditoria cobriu 376 variantes e 139 aparições nas ilustrações. SHA-256 da ROM `47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399`.
+
+As três janelas mistas mediram 49,436263, 48,437551 e 47,938195 FPS, abaixo do piso de 58. A janela selada de 3.000 apresentações teve zero estouros de VBlank. A rota física forte → curto → tentativa de curto tem saída medida no espelho. A cobertura geral de infinitos continua em aberto. [Ficha ilustrada](ficha_tecnica_alis_g6e_v1.docx) · [Recibo e sessões](decisions/2026-11-27_alis_r6_paleta_hiperpausa_canto.json) · [Dossiê para o curador](curation_candidates/2026-11-27_alis_ficha_comando_cor_e_combo.md)
+
+
 ## 27/11/2026 · Trajes de Alis e iluminação da pista
 
 A [candidata de Palma](../out/candidates/palma_luzes_r2/rom/master_of_fighters.sms) tem SHA-256 `5be7bc6a8706acddaed144f4fd831fddebcc65787c603e043e76f74fce6fd615`. P1 usa sombra e luz rosa da ficha v4 e P2 usa os dois verdes. A passagem 42 → 43 → 44 passou de 53 → 0 → 57 para 53 → 52 → 57 pixels em rosa claro. A comparação conferiu a geometria e os materiais das 94 poses, em 376 pacotes do cartucho. O Emulicious mostrou as duas sequências de soco aéreo e a defesa baixa dos dois controles. [Prancha](decisions/2026-11-27_alis_trajes_comparacao.png) · [Vídeo dos golpes](../out/qa/palma_luzes_r2/materiais/air-guard-art.mp4)

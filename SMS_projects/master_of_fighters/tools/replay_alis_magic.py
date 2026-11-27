@@ -143,9 +143,33 @@ def main():
         isolated.request(session,'record-steps-start','guardioes')
         try:
             gesture(player,'dxfdxf',TWO)
+            if '-DMOF_ALIS_FEEDBACK=1' in record['compiler_defines']:
+                samples=[]
+                for _ in range(35):
+                    left,duration,owners,presented=ram(0xc800,4)
+                    samples.append(dict(vdp=isolated.request(session,'status')['frame'],left=left,
+                        duration=duration,owners=owners,presented=presented,
+                        tick=int.from_bytes(ram(0xc776,2),'little'),clock=list(ram(addr+7,2))))
+                    if left and presented and not (out/'hiperpausa.png').exists():
+                        focus_actor=state()['p'+str(player+1)]
+                        result=isolated.capture(session,'hiperpausa.png')
+                        shutil.copyfile(result['path'],out/'hiperpausa.png')
+                    if not duration and presented==12:break
+                    wait(1)
+                active=[s for s in samples if s['duration']==12 and s['owners']==1<<player and s['presented']]
+                log['guardians_pause']=samples
+                save()
+                assert active and len({s['tick'] for s in active})==1
+                assert len({tuple(s['clock']) for s in active})==1
+                assert samples[-1]['duration']==0 and samples[-1]['presented']==12
             seen=capture_film('plano_')
         finally:
             log['movie']=isolated.request(session,'record-steps-stop')
+        if '-DMOF_ALIS_FEEDBACK=1' in record['compiler_defines']:
+            from replay_alis_feedback import focus_in_scanout
+            origin=log['movie']['first_frame']+1
+            native_frames=range(samples[0]['vdp']-origin,samples[-1]['vdp']-origin+1)
+            log['foco']=focus_in_scanout(session/'evidence/guardioes',out,focus_actor,native_frames)
         log['finisher_player']=player+1
         log['seen']=sorted(seen)
         save()

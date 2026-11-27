@@ -1,3 +1,6 @@
+#ifdef MOF_ALIS_FEEDBACK
+#include "../inc/alis_feedback.h"
+#endif
 /* Scene 02 two-controller profile. Motion, hit resolution, HUD and bank
    packets stay in the shared duel modules. */
 
@@ -495,6 +498,9 @@ new_round:
         mof_chapter_hud(banner);
 #endif
 #endif
+#ifdef MOF_ALIS_FEEDBACK
+        if (mof_feedback.label[0] || mof_feedback.label[1]) mof_feedback_present(&duel);
+#endif
         line = SMS_getVCount();
         mof_cadence_lines[3] = mof_vline = line;
         mirror_commit();
@@ -542,5 +548,13 @@ new_round:
 #endif
             mof_duel_audio_tick(&duel, 1u, duel.fighters[0].def->moves);
         CHAPTER_LINE(5);
+#ifdef MOF_ALIS_FEEDBACK
+        if (mof_feedback.duration) {
+            mof_feedback.shown[0]=mirror_display[0].frame;
+            mof_feedback.shown[1]=mirror_display[1].frame;
+            mof_feedback_pause(&duel);
+            submit_epoch=vblank_epoch;
+        }
+#endif
     }
 }

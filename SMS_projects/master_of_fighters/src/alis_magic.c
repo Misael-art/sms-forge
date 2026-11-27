@@ -4,6 +4,9 @@
 #include <string.h>
 #include <stddef.h>
 #include "../inc/alis_magic.h"
+#ifdef MOF_ALIS_FEEDBACK
+#include "../inc/alis_feedback.h"
+#endif
 #include "magic_art.h"
 
 /* These assembler absolute symbols reserve no bytes of ROM or initialized
@@ -108,7 +111,16 @@ static void begin(uint8_t p,uint8_t move) {
     chapter.meter[p]-=timings[move].cost;
     mof_magic.busy=1;
     ++mof_magic.events[p][move];
+#ifdef MOF_ALIS_FEEDBACK
+    if (move!=REST && move!=CHAT) mof_magic.audio=move;
+    if (move==TWIN_FIRE || move==MYAU || move==GUARDIANS) {
+        uint8_t duration=move==GUARDIANS ? 12 : 8;
+        if (mof_feedback.duration<duration) mof_feedback.duration=duration;
+        mof_feedback.participants|=1u<<p;
+    }
+#else
     mof_magic.audio=move;
+#endif
     if (move==STUN) c->stun_used=1;
     if (move==CHAT) c->chat_wait=100;
 }
@@ -268,8 +280,25 @@ static inline void cast(MofDuel *d,uint8_t p) {
     ++c->age;
     c->pose=timings[move].pose[c->age<timings[move].start ? 0 : c->age<timings[move].start+6 ? 1 : 2];
     if (c->age==timings[move].start) {
-        if (move==REST) f->life=f->life>94 ? 100 : f->life+6;
-        else if (move==CHAT) charge(p);
+        if (move==REST || move==CHAT) {
+            uint8_t gain;
+            if(move==REST) {
+                gain=f->life>94 ? 100-f->life : 6;
+                f->life+=gain;
+            } else {
+                gain=chapter.meter[p]<8;
+                charge(p);
+            }
+#ifdef MOF_ALIS_FEEDBACK
+            if(gain) {
+                mof_feedback.amount[p]=gain;
+                mof_feedback.label[p]=move==REST ? MOF_GAIN_HP : MOF_GAIN_MP;
+                mof_feedback.age[p]=16;
+                ++mof_feedback.last_gain[p];
+                mof_magic.audio=move==REST ? MOF_SFX_HP : MOF_SFX_MP;
+            }
+#endif
+        }
         else if (move==FIRE_TAP || move==FIRE_HOLD || move==SLASH || move==TWIN_FIRE || move==MYAU) {
             spawn(d,p,0,move);
             if (move==TWIN_FIRE) spawn(d,p,1,move);

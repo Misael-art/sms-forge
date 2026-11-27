@@ -221,7 +221,7 @@ def versus_page(out, horizon=False, version=None, model_palette=False):
     return page.ljust(PAGE-16,b"\xff") + bytes(alternate), strips, offsets
 
 
-def pack(base, archive_dir, out):
+def pack(base, archive_dir, out, feedback=False):
     out.mkdir(parents=True, exist_ok=True)
     manifest = json.loads((base/"chapter.json").read_text())
     tc = manifest["toolchain"]
@@ -244,6 +244,8 @@ def pack(base, archive_dir, out):
                  "MOF_BATTLE_PSG":0x8000+len(fm)}
     (out/"matchup.h").write_text("".join(f"#define {key} {value}u\n" for key,value in constants.items()))
     tc["defines"]["MOF_ALIS_MATCHUP"]=1
+    if feedback:
+        tc["defines"]["MOF_ALIS_FEEDBACK"]=1
     rel = out.relative_to(PROJECT).as_posix()
     tc["include_dirs"].append(rel)
     tc["makesms_extra"] += ["-mbank", f"{rel}/matchup.bin:0:2:{bank}"]
@@ -261,5 +263,6 @@ if __name__ == "__main__":
     cli=argparse.ArgumentParser(description=__doc__)
     for name in ("base","archive_dir","out"):
         cli.add_argument(name,type=Path)
+    cli.add_argument("--feedback",action="store_true",help="Enable activation pause and recovery displays")
     args=cli.parse_args()
-    pack(args.base.resolve(),args.archive_dir.resolve(),args.out.resolve())
+    pack(args.base.resolve(),args.archive_dir.resolve(),args.out.resolve(),args.feedback)
