@@ -21,7 +21,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('candidate', type=Path, help='build directory with the ROM, record and map')
     parser.add_argument('out',type=Path)
-    parser.add_argument('--case',choices=('story','versus','budget','worst','acting','port-versus','impact','combo'),
+    parser.add_argument('--case',choices=('story','versus','budget','worst','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art'),
                         default='story')
     parser.add_argument('--fm',action='store_const',const=True,default=None,
                         help='Enable the FM unit in this private Emulicious session')
@@ -99,7 +99,7 @@ def main():
                 observe('dialogo_'+str(i+1))
                 press(16,28 if i==3 else 20)
         else:
-            if args.case in ('versus','worst','acting','port-versus','impact','combo'): press(2)
+            if args.case in ('versus','worst','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art'): press(2)
             press(16)
             if args.case=='budget': press(32,28)
         observe('apresentacao')
@@ -115,7 +115,10 @@ def main():
         if state()[5]!=2:
             raise RuntimeError(f'Fight failed to reach gameplay: {state()}')
         arena_frame=observe('arena')
-        if args.case=='combo':
+        if args.case in ('walk-art','shield-art','air-guard-art'):
+            from replay_alis_sheet import exercise
+            exercise(args.case,session,out,controls,ram,log,save)
+        elif args.case=='combo':
             # Drive both fighters through their controller ports and inspect
             # the published duel state and visible HUD cells.
             def until(keys, predicate, limit):

@@ -70,6 +70,17 @@ uint8_t mof_duel_alis_air_guard(const MofDuel *duel, uint8_t player)
 }
 #endif
 
+#if defined(MOF_DUEL_SCENE_MIRROR)
+uint8_t mof_duel_walk_direction(const MofDuel *duel, uint8_t player, int16_t previous_x)
+{
+    const MofDuelFighter *actor = &duel->fighters[player];
+    if (actor->state != MOF_DUEL_READY || actor->x == previous_x ||
+        duel->body[player].y_offset || duel->body[player].air_step)
+        return 0u;
+    return ((actor->x > previous_x) == actor->face_right) ? 1u : 2u;
+}
+#endif
+
 uint8_t mof_duel_posture_pose(const MofDuel *duel, uint8_t player)
 {
     const MofDuelFighter *alis = &duel->fighters[player];

@@ -243,7 +243,40 @@ def fit_cel(drawing, palette, backdrop, costume, right, airborne):
                 background_pixels=[[x, y, color] for (x, y), color in spill.items()])
 
 
-def build(control, source, out, foundation=False, *, extra_drawings=None, stage_header=STAGE):
+def sheet_drawings(folder):
+    """Read native, pelvis-registered cels from the character construction sheet."""
+    spec = json.loads((folder / "revisao.json").read_text())
+    path = folder / spec["arquivo"]
+    if digest(path) != spec["sha256"]:
+        raise ValueError("Character sheet differs from its art receipt")
+    width, height = spec["celula_px"]
+    pivot_x, pivot_y = spec["pivo_do_chao_na_celula"]
+    ids = spec["ids"]
+    if len(ids) != len(set(ids)) or any(i not in range(len(POSES)) for i in ids):
+        raise ValueError("Invalid pose list in character sheet")
+    drawings = {}
+    with Image.open(path) as sheet:
+        sheet = sheet.convert("RGBA")
+        if sheet.size != (len(ids) * width, height):
+            raise ValueError("Character sheet dimensions do not match the cel grid")
+        for column, index in enumerate(ids):
+            cell = read_cell(sheet, len(ids), 1, column)
+            drawing = {}
+            for offset, (r, g, b, alpha) in enumerate(cell.getdata()):
+                if not alpha:
+                    continue
+                if alpha != 255 or r % 85 or g % 85 or b % 85:
+                    raise ValueError(f"Non-native ink in {POSES[index]}")
+                x = PELVIS_X + offset % width - pivot_x
+                y = 144 + offset // width - pivot_y
+                drawing[x, y] = (r // 85) | ((g // 85) << 2) | ((b // 85) << 4)
+            if not drawing:
+                raise ValueError(f"Empty pose {POSES[index]}")
+            drawings[POSES[index]] = drawing
+    return drawings
+
+
+def build(control, source, out, foundation=False, *, extra_drawings=None, stage_header=STAGE, review_sheet=None):
     plan = json.loads(control.read_bytes())
     old_palette = plan["sprite_palette"]
     palette = [code for code in old_palette if code not in NEUTRAL_COLORS] + list(SECOND_COSTUME.values())
@@ -253,6 +286,8 @@ def build(control, source, out, foundation=False, *, extra_drawings=None, stage_
     pose_order = POSES + tuple(extra_drawings or ())
     if extra_drawings:
         art.update(extra_drawings)
+    if review_sheet is not None:
+        art.update(sheet_drawings(review_sheet))
     base = {(row["pose"], row["direction"] == "right"): row for row in plan["frames"]
             if row["actor"] == "alis" and row["pose"] not in art}
     if not foundation and set(POSES) - set(art) - {name for name, _ in base}:
@@ -322,6 +357,9 @@ def build(control, source, out, foundation=False, *, extra_drawings=None, stage_
         packed.extend(path.read_bytes())
         bank_rows.append(dict(bank=number, file=path.name, sha256=digest(path)))
     source_hashes = {p.name: digest(p) for p in source.glob("*.png")}
+    if review_sheet is not None:
+        for file in ("revisao.json", "poses.png"):
+            source_hashes[f"../{review_sheet.name}/{file}"] = digest(review_sheet / file)
     if not foundation:
         source_hashes[f"../{POSTURE_SHEET.parent.name}/{POSTURE_SHEET.name}"] = digest(POSTURE_SHEET)
     (out / "repertoire-pages.json").write_text(json.dumps(dict(

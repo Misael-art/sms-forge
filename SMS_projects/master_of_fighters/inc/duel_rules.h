@@ -224,6 +224,8 @@ typedef struct {
 
 #if defined(MOF_DUEL_SCENE_MIRROR)
 #define MOF_DUEL_LIGHT_HITSTOP 4u
+/* Ground movement relative to facing: 0 stopped, 1 forward, 2 backward. */
+uint8_t mof_duel_walk_direction(const MofDuel *duel, uint8_t player, int16_t previous_x);
 #define MOF_DUEL_LIGHT_HITSTUN 10u
 #define MOF_DUEL_HEAVY_HITSTOP 11u
 #define MOF_DUEL_HEAVY_HITSTUN 20u

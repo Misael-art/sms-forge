@@ -171,6 +171,10 @@ static void show_page(uint8_t page)
     SMS_mapROMBank(page);
     length=*(const uint16_t *)data;
     SMS_loadBGPalette(data+2);
+#ifdef MOF_ALIS_MAGIC
+    /* The Lutz brow tiles use a stationary gold palette during lightning. */
+    if (page==MOF_GUARDIANS_PAGE+2u) SMS_loadSpritePalette((const uint8_t *)0xbff0);
+#endif
 #ifdef MOF_ALIS_MATCHUP
     if (page==MOF_VERSUS_PAGE) SMS_loadSpritePalette((const uint8_t *)0xbff0);
 #endif

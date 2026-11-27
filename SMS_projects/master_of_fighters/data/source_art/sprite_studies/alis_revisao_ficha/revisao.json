@@ -2,7 +2,7 @@
   "finalidade": "Revisão visual da ficha; a ROM histórica G6e continua sendo a referência de regras.",
   "rom_de_origem_sha256": "e3a98e8c1280545313a10998a958f9909fa693789670283f6aa13f2e1649b00f",
   "arquivo": "poses.png",
-  "sha256": "cd601a801cfe6c6a549257cc0f31a78f8d3c4603750cffb76ea28c54ebcc1349",
+  "sha256": "68d259f9ae5f4885bdab57e3934322f979af49c2c1e5365f2cdb152befb0148b",
   "ids": [
     1,
     2,
@@ -167,12 +167,12 @@
         143
       ],
       "depois": [
-        -15,
-        93,
-        10,
+        -18,
+        88,
+        12,
         143
       ],
-      "pixels_alterados": 486
+      "pixels_alterados": 772
     },
     {
       "pose": 44,
@@ -183,12 +183,12 @@
         143
       ],
       "depois": [
-        -15,
-        94,
-        10,
+        -18,
+        89,
+        12,
         143
       ],
-      "pixels_alterados": 499
+      "pixels_alterados": 813
     },
     {
       "pose": 47,
@@ -199,12 +199,12 @@
         143
       ],
       "depois": [
-        -15,
-        95,
-        17,
+        -18,
+        89,
+        20,
         143
       ],
-      "pixels_alterados": 494
+      "pixels_alterados": 758
     },
     {
       "pose": 54,
@@ -268,7 +268,77 @@
         14,
         143
       ],
-      "pixels_alterados": 672
+      "pixels_alterados": 721
     }
-  ]
+  ],
+  "revisao_de_escala_e_material": {
+    "atlas_anterior": "cd601a801cfe6c6a549257cc0f31a78f8d3c4603750cffb76ea28c54ebcc1349",
+    "medidas_celula": [
+      {
+        "pose": 42,
+        "bbox_anterior": [
+          27,
+          13,
+          53,
+          64
+        ],
+        "bbox_atual": [
+          24,
+          8,
+          55,
+          64
+        ],
+        "pixels_alterados": 749
+      },
+      {
+        "pose": 44,
+        "bbox_anterior": [
+          27,
+          14,
+          53,
+          64
+        ],
+        "bbox_atual": [
+          24,
+          9,
+          55,
+          64
+        ],
+        "pixels_alterados": 767
+      },
+      {
+        "pose": 47,
+        "bbox_anterior": [
+          27,
+          15,
+          60,
+          64
+        ],
+        "bbox_atual": [
+          24,
+          9,
+          63,
+          64
+        ],
+        "pixels_alterados": 743
+      },
+      {
+        "pose": 66,
+        "bbox_anterior": [
+          26,
+          24,
+          57,
+          64
+        ],
+        "bbox_atual": [
+          26,
+          24,
+          57,
+          64
+        ],
+        "pixels_alterados": 119
+      }
+    ],
+    "materiais": "Rosto e pescoço em tons de pele. Na pose 66, cabelo, ombreira, tecido e escudo usam os tons do traje de Alis."
+  }
 }

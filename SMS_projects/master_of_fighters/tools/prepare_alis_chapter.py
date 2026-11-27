@@ -101,7 +101,7 @@ def pack_fighters(control, backdrop, output, spaceport=False):
     street=output.parent/('spaceport-runway.h' if spaceport else 'camineet-street.h')
     street.write_text(array('mof_duel_bg_stage',patterns)+'\n'+array('mof_duel_bg_rows',rows),encoding='ascii')
     build(control, SOURCE, output, extra_drawings=stage_acting(plan['sprite_palette']),
-          stage_header=street)
+          stage_header=street, review_sheet=SOURCE.parent / "alis_revisao_ficha")
 
 
 def prepare(base, out, spaceport=False):

@@ -120,6 +120,17 @@ static void MIRROR_PLAN(void)
             following = pose + 1u;
         if (phase + 1u < actor->def->moves[action].pose_count)
             future = pose + 2u;
+#if defined(MOF_ALIS_CHAPTER)
+        /* The shield strike can outpace the tile stream on a miss. Finish
+           presenting its active cel during recovery before requesting the
+           last cel. Hit tests, recovery time and interrupts use duel state. */
+        if (action == MOF_DUEL_SPECIAL && phase == 3u &&
+            (view->frame >> 1) == MOF_MIRROR_ALIS_SPECIAL_2 &&
+            (mirror_display[MIRROR_PLAYER].frame >> 1) != MOF_MIRROR_ALIS_SPECIAL_2) {
+            pose = MOF_MIRROR_ALIS_SPECIAL_2;
+            following = MOF_MIRROR_ALIS_SPECIAL_3;
+        }
+#endif
 #if defined(MOF_ALIS_RIPOSTE)
         if (action==MOF_DUEL_RIPOSTE && !actor->riposte_armed && phase==3u)
             pose=MOF_MIRROR_RIPOSTE_4;

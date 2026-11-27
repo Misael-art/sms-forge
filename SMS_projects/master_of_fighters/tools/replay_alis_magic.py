@@ -139,6 +139,21 @@ def main():
             if 7 in seen and not scene:break
         return seen
 
+    def record_final(player):
+        isolated.request(session,'record-steps-start','guardioes')
+        try:
+            gesture(player,'dxfdxf',TWO)
+            seen=capture_film('plano_')
+        finally:
+            log['movie']=isolated.request(session,'record-steps-stop')
+        log['finisher_player']=player+1
+        log['seen']=sorted(seen)
+        save()
+        subprocess.run(['ffmpeg','-v','error','-threads','1','-framerate','60','-i',
+                        str(session/'evidence/guardioes/%06d.png'),'-c:v','libx264','-threads','1',
+                        '-pix_fmt','yuv420p',str(out/'guardioes.mp4')],check=True)
+        return seen
+
     def campaign_finish(name):
         # Both thresholds are earned against the campaign AI. Release the
         # direction on each wake-up and sample the next committed input.
@@ -296,9 +311,8 @@ def main():
             gesture(1,'fbf',ONE);wait(28)
             r=observe('p1_tonta',True);assert r['dizzy'][0]>0
             before=state()['p2']['pivot'][0]
-            gesture(1,'dxfdxf',TWO);wait(123)
-            assert event()[83]==2
-            r=observe('final_p2',True)
+            assert record_final(1)==set(range(1,8))
+            r=observe('final_p2')
             assert r['chapter'][3:5]==[0,1] and r['duel']['p1']['life']==0 and r['duel']['p2']['pivot'][0]<before
             wait(420)
             observe('vitoria_p2',True);return
@@ -425,19 +439,14 @@ def main():
             log['audiovisual']=record_cinema(session,out)
             observe('vitoria_com_som',True)
             return
-        isolated.request(session,'record-steps-start','guardioes')
-        gesture(0,'dxfdxf',TWO)
-        seen=capture_film('plano_')
-        movie=isolated.request(session,'record-steps-stop')
-        log['movie']=movie
-        subprocess.run(['ffmpeg','-v','error','-threads','1','-framerate','60','-i',
-                        str(session/'evidence/guardioes/%06d.png'),'-c:v','libx264','-threads','1',
-                        '-pix_fmt','yuv420p',str(out/'guardioes.mp4')],check=True)
-        log['seen']=sorted(seen)
+        seen=record_final(0)
         wait(24)
         r=observe('vitoria',True)
         assert seen==set(range(1,8)) and r['chapter'][3:5]==[1,0] and r['duel']['p2']['life']==0
         press(ONE,148)
+        for _ in range(45):
+            if ram(addr,16)[5]==2 and ram(0xc770,4)==b'MFD1' and life(1)==100:break
+            wait(4)
         r=observe('revanche',True);assert r['chapter'][5]==2 and r['duel']['p2']['life']==100
     finally:
         isolated.close_session(session);log['closed']=isolated.load(session)[1]['state']

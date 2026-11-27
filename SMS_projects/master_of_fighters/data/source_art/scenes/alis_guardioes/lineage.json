@@ -108,5 +108,23 @@
       }
     ],
     "origem_gerada": "revisao_ficha/estudo.png"
+  },
+  "tiara_lutz": {
+    "arquivo": "revisao_ficha/tiara_lutz.png",
+    "sha256": "3ad318b24680fc9402b6425d2fe0d56b5c8ea008c4edd56c6bed0c143e54c17e",
+    "origem": "ImageGen integrado. Acessório criado separadamente e aplicado sobre a testa do plano de Lutz (Noah).",
+    "referencia": "https://www.sega.jp/fb/album/07_ps/character.html",
+    "retrato": "https://www.sega.jp/fb/album/img/07_ps/chara_04.gif",
+    "retrato_sha256": "593743456e23cf10a29c08859d00cf7ad89d0c4e343f536622da35019dad449a",
+    "uso_da_referencia": "Identificação da tiara de Lutz. A ilustração da Sega é referência visual e não fornece pixels à ROM.",
+    "posicao_na_tela": [
+      74,
+      54
+    ],
+    "tamanho": [
+      22,
+      8
+    ],
+    "prompt": "Asset for precise compositing in an existing Sega Master System cutscene. The first reference is the existing frame and defines the right-facing three-quarter/profile angle and pixel-art linework. The second is the official Lutz portrait and defines his small gold tiara with central engraved raised leaf and dark inset. Produce just the isolated tiara, transparent everywhere else, as a small horizontal gold brow band in the exact side perspective of the figure facing right in the first image. A thin slightly ascending band from left visible temple rising to the brow at right, gently tapering at the left and ornament above the right three-quarter point. Restrained dark outline, warm ochre shadow, light gold high edge in hand-plotted compact pixel art. Tiny diadem sitting against forehead, not a tall crown. Target legibility within 20×8 native pixels. No head, no skin or hair, no clothing, no face, no background, no labels, no shadow, no white halo. Center a single accessory, enlarging with nearest neighbor for presentation. It will be registered as an alpha layer so the original scene stays pixel-identical outside the forehead."
   }
 }

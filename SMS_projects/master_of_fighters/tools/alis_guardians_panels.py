@@ -1,5 +1,6 @@
 """Separate authored exposures and generate tile-map deltas and dedicated CRAM tracks."""
 import json
+import hashlib
 import struct
 from pathlib import Path
 from PIL import Image, ImageChops, ImageDraw
@@ -38,14 +39,27 @@ def make_layers(art,dest):
     dest.mkdir(parents=True,exist_ok=True)
     sheet=Image.open(art/'guardioes.png').convert('RGB')
     atlas=Image.open(art/'pecas.png').convert('RGBA')
+    receipt=json.loads((art/'lineage.json').read_text())['revisao_visual_da_ficha']
+    panel_hashes={row['arquivo']:row['sha256'] for row in receipt['arquivos']}
     # Use reference-image crop boundaries measured from the six original ink cells.
     panels=[]
     for n in range(6):
-        col,row=n%2,n//2
-        im=sheet.crop((col*sheet.width//2+2,row*sheet.height//3+2,
-                       (col+1)*sheet.width//2-2,(row+1)*sheet.height//3-2))
-        codes=native(im,SIZE,list(range(64)))
-        panels.append(palette_view(codes,list(range(64))).convert('RGB'))
+        if n in (0,1,5):
+            # The sheet supplies an individual actor on a 256x192 proof
+            # canvas. Only the original 224x112 viewport goes into the bank.
+            path=art/'revisao_ficha'/(NAMES[n]+'.png')
+            if hashlib.sha256(path.read_bytes()).hexdigest()!=panel_hashes[path.relative_to(art).as_posix()]:
+                raise ValueError(f'Artwork differs from cinematic receipt: {path}')
+            with Image.open(path) as frame:
+                if frame.size!=(256,192):
+                    raise ValueError(f'Unexpected cinematic canvas: {path}')
+                panels.append(frame.convert('RGB').crop((16,40,240,152)))
+        else:
+            col,row=n%2,n//2
+            im=sheet.crop((col*sheet.width//2+2,row*sheet.height//3+2,
+                           (col+1)*sheet.width//2-2,(row+1)*sheet.height//3-2))
+            codes=native(im,SIZE,list(range(64)))
+            panels.append(palette_view(codes,list(range(64))).convert('RGB'))
     parts={k:atlas_piece(atlas,b) for k,b in {
         'reacao_alis':(0,0,508,550),'reacao_hayato':(545,0,1006,550),
         'corte':(1032,0,1536,544),'asas':(18,654,575,964),
@@ -58,7 +72,7 @@ def make_layers(art,dest):
         variants=[base.copy(),base.copy()]
         if n in (0,2,3):
             # Mouth, separate hair tips or the Laerma fruit: vary only the cutouts.
-            regions=(((124,56,137,68), (85,4,106,12),(23,12,47,24)) if n==0 else
+            regions=(((111,51,118,58), (11,11,26,16),(4,35,17,40)) if n==0 else
                      ((70,37,77,45),(9,53,27,62)) if n==2 else ((84,65,101,77),(102,57,113,64)))
             for j,b in enumerate(regions):
                 chip=base.crop(b)
@@ -72,14 +86,17 @@ def make_layers(art,dest):
                                       chip.resize((chip.width,max(2,chip.height-2)),NEAR),(b[0],b[1]+1))
             if n==0:
                 glint=parts['brilho'].resize((9,9),NEAR)
-                for i,xy in enumerate(((164,15),(151,35))): stamp(variants[i],glint,xy)
+                stamp(variants[1],glint,(165,19))
         elif n==1:
-            # Extract the beam as its own ink layer; both muzzle exposures originate at the barrel.
-            base.paste(NAVY,(171,4,224,74))
+            # Keep exposure zero faithful to the approved gun and laser.
+            # Change only the light beyond the muzzle for exposure one.
+            beam_box=(166,0,224,72)
+            beam=piece(base,beam_box,NAVY)
+            base=base.copy()
+            base.paste(NAVY,beam_box)
             variants=[base.copy(),base.copy()]
-            for i in range(2):
-                beam=parts['clarão'].resize(((44,16),(57,27))[i],NEAR)
-                stamp(variants[i],beam,(168,38-beam.height//2))
+            stamp(variants[0],beam,(166,0))
+            stamp(variants[1],beam.resize((48,50),NEAR),(166,12))
         elif n==4:
             # Separate white flight feathers from the gold torso by material and position.
             wing=Image.new('RGBA',SIZE)
@@ -108,22 +125,9 @@ def make_layers(art,dest):
             body.putalpha(ImageChops.darker(body.getchannel('A'),silhouette))
             stamp(variants[1],body,(0,0))
         elif n==5:
-            # Polygon excludes the rival and the diagonal slash entirely.
-            mask=Image.new('L',SIZE)
-            ImageDraw.Draw(mask).polygon([(0,21),(71,20),(84,29),(104,31),(109,29),(117,32),
-                                        (112,45),(106,48),(93,62),(82,68),(75,111),(0,111)],fill=255)
-            solo=Image.new('RGB',SIZE,NAVY);solo.paste(base,(0,0),mask)
-            # Recover the Laconian blade from Alis's own close-up. Its guard
-            # remains in the solo pose; the travelling slash is its own SAT track.
-            blade=piece(panels[0],(153,0,207,51),NAVY)
-            alpha=blade.getchannel('A')
-            alpha.putdata([a if b>=170 and b>=r and g>=85 else 0 for (r,g,b,_),a in zip(blade.getdata(),alpha.getdata())])
-            blade.putalpha(alpha)
-            stamp(solo,blade.resize((37,34),NEAR),(109,1))
-            base=solo
-            variants=[base.copy(),base.copy()]
-            for i,xy in enumerate(((111,29),(119,23))):
-                stamp(variants[i],parts['brilho'].resize((8,8),NEAR),xy)
+            # The Laconian drawing is already the solo attacker. The target
+            # page and travelling SAT cut are selected later by the runtime.
+            stamp(variants[1],parts['brilho'].resize((8,8),NEAR),(138,3))
         else:
             actor=parts[NAMES[n]].copy()
             actor.thumbnail((134,110),NEAR)
@@ -162,9 +166,9 @@ def palette_frames(n,variants):
             x,y=k%224,k//224
             r,g,b=rgb(c)
             zone=((n==2 and x>88 and (y < 44 or x>170)) or
-                  (n==4 and (y>72 or (x>176 and y<14))) or (n==1 and x>=171))
+                  (n==4 and (y>72 or (x>176 and y<14))) or (n==1 and x>=160))
             if zone and c not in (0,16) and ((n==2 and (r>=170 or b>=170)) or
-                        (n==4 and b>=170 and g>=85) or (n==1 and r>=170)):
+                        (n==4 and b>=170 and g>=85) or (n==1 and c in cycle)):
                 mask[k]=1
             else:hist[c]=hist.get(c,0)+1
         masks.append(mask)
@@ -183,6 +187,34 @@ def palette_frames(n,variants):
         frames.append(full)
     return colors,cycle,frames
 
+def add_lutz_tiara(art, frames, colors):
+    # Only the forehead tiles select palette 1. Its gold stays fixed while
+    # the lightning cycles slots 13..15 of palette 0 on the same scanlines.
+    spec=json.loads((art/'lineage.json').read_text())['tiara_lutz']
+    path=art/spec['arquivo']
+    if hashlib.sha256(path.read_bytes()).hexdigest()!=spec['sha256']:
+        raise ValueError('Lutz tiara differs from its receipt')
+    with Image.open(path) as source:
+        jewel=source.convert('RGBA')
+    alpha=jewel.getchannel('A').point(lambda a:255 if a>=170 else 0)
+    jewel.putalpha(alpha)
+    jewel=jewel.crop(alpha.getbbox()).resize(tuple(spec['tamanho']),NEAR)
+    x,y=spec['posicao_na_tela']
+    palette=colors[:13]+[6,11,15]
+    metal=[0,13,14,15,2,7]
+    ink=native(jewel,jewel.size,[palette[i] for i in metal])
+    ink=ink.point(metal+[0]*(256-len(metal)))
+    touched={((x+i)//8,(y+j)//8) for i in range(jewel.width) for j in range(jewel.height)
+             if jewel.getpixel((i,j))[3]}
+    for frame in frames:
+        for tx,ty in touched:
+            bounds=(tx*8,ty*8,tx*8+8,ty*8+8)
+            tile=frame.crop(bounds)
+            if tile.getextrema()[1]>=13:raise ValueError('Tiara overlaps the CRAM effect')
+            frame.paste(tile.point(lambda c:c+16),bounds)
+        frame.paste(ink.point(lambda c:c+16),(x,y),jewel.getchannel('A'))
+    return colors+palette
+
 def encode_pair(frames,colors):
     tiles={bytes(32):0}
     maps=[]
@@ -190,8 +222,13 @@ def encode_pair(frames,colors):
         ids=[]
         for y in range(0,192,8):
             for x in range(0,256,8):
-                raw=planar(list(im.crop((x,y,x+8,y+8)).getdata()))
-                ids.append(tiles.setdefault(raw,len(tiles)))
+                values=list(im.crop((x,y,x+8,y+8)).getdata())
+                second=values[0]>=16
+                if second:
+                    if min(values)<16:raise ValueError('Mixed palettes within a VDP tile')
+                    values=[c-16 for c in values]
+                raw=planar(values)
+                ids.append(tiles.setdefault(raw,len(tiles)) | (0x0800 if second else 0))
         maps.append(ids)
     if len(tiles)>448: raise ValueError(f'PNT overlap: {len(tiles)}')
     changes=[k for k,(a,b) in enumerate(zip(*maps)) if a!=b]
@@ -207,7 +244,7 @@ def encode_pair(frames,colors):
             table.extend(struct.pack('<HB',run[0],len(run)))
             table.extend(struct.pack('<'+'H'*len(run),*(ids[c] for c in run)))
         tables.append(bytes(table)+b'\0\0\0')
-    base=struct.pack('<H',len(tiles)*32)+bytes(colors)+b''.join(tiles)+struct.pack('<768H',*maps[0])
+    base=struct.pack('<H',len(tiles)*32)+bytes(colors[:16])+b''.join(tiles)+struct.pack('<768H',*maps[0])
     return base,tables,len(tiles),len(changes)
 
 def export_cycle_layers(folder,stats):
@@ -218,7 +255,7 @@ def export_cycle_layers(folder,stats):
         for pose in range(2):
             with Image.open(dest/f'sms-{pose}.png') as im:
                 colors=im.convert('RGB')
-                alpha=Image.frombytes('L',im.size,bytes(255 if v>=13 else 0 for v in im.tobytes()))
+                alpha=Image.frombytes('L',im.size,bytes(255 if 13<=v<16 else 0 for v in im.tobytes()))
                 effect=colors.copy().convert('RGBA');effect.putalpha(alpha)
                 plate=colors.copy();plate.paste(NAVY,(0,0,*im.size),alpha)
                 plate.save(dest/f'sem-efeito-{pose}.png')
@@ -231,6 +268,8 @@ def pack_scenes(art,out,voice):
     pages=bytearray();meta=[];stats=[]
     for n,pair in enumerate(scenes):
         colors,cycle,frames=palette_frames(n,pair)
+        if NAMES[n]=='noah':
+            colors=add_lutz_tiara(art,frames,colors)
         raw,tables,tiles,changed=encode_pair(frames,colors)
         row=[]
         for t in tables:
@@ -238,10 +277,11 @@ def pack_scenes(art,out,voice):
         row+=cycle or [0,0,0]
         if n==0:
             voice_addr=0x8000+len(raw);raw+=voice
-        if len(raw)>16384:raise ValueError(f'{NAMES[n]} bank {len(raw)}')
-        pages.extend(raw.ljust(16384,b'\xff'));meta.append(row)
+        tail=bytes(colors[16:])
+        if len(raw)+len(tail)>16384:raise ValueError(f'{NAMES[n]} bank {len(raw)}')
+        pages.extend(raw.ljust(16384-len(tail),b'\xff')+tail);meta.append(row)
         for i,frame in enumerate(frames):palette_view(frame,colors).save(out/'camadas'/NAMES[n]/f'sms-{i}.png')
-        stats.append(dict(plano=NAMES[n],tiles=tiles,celulas_alternadas=changed,bytes_ocupados=len(raw),ciclo=cycle))
+        stats.append(dict(plano=NAMES[n],tiles=tiles,celulas_alternadas=changed,bytes_ocupados=len(raw)+len(tail),ciclo=cycle))
     # Diagonal of 64x64 reduced to non-empty 8x8 SAT cells. Orientations are in pixels.
     ink=slash.resize((64,64),NEAR)
     raster=native(ink,(64,64),[0,35,59,63])

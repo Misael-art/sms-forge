@@ -1,5 +1,13 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Alis e a tiara de Lutz na ROM da ficha
+
+A [ROM R5 da ficha](../out/candidates/alis_ficha_r5/rom/master_of_fighters.sms) tem SHA-256 `7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b`. No Versus do Espaçoporto, as poses aéreas 42, 44 e 47 medem 56, 55 e 55 pixels, com os tons de pele revistos no rosto. A pose 66 recuperou a paleta do traje e manteve 40 pixels de altura. A tiara mudou 59 pixels na testa de Lutz em cada exposição e fase do relâmpago. A [ficha atualizada](ficha_tecnica_alis_g6e_v1.docx) traz o corte, a reação de Alis e a de Hayato separados na página 19. [Recortes da ROM](../out/qa/alis_ficha_r5/revisao-visual.png)
+
+No Emulicious NTSC, os dois trajes exibiram as oito poses da caminhada, as três poses aéreas e a defesa baixa no impacto. O Passo de Escudo mostrou 54 → 55 → 56 ao errar e tirou 13 PV por contato de cada controle. Nos Guardiões, os dois atacantes chegaram aos sete planos. O último exibiu a vítima do duelo com 40 posições distintas do corte sobre ela. Alis × Alis foi o confronto filmado. [Caminhada](../out/qa/alis_ficha_r5/caminhada/walk-art.mp4) · [Passo de Escudo](../out/qa/alis_ficha_r5/passo-final/shield-art.mp4) · [Golpes no ar e defesa](../out/qa/alis_ficha_r5/guarda-r2/air-guard-art.mp4) · [Guardiões](../out/qa/alis_ficha_r5/guardioes-confirmado/guardioes.mp4)
+
+A carga mista registrou 48,936907, 48,437551 e 46,939482 FPS. O piso é 58 por janela. A sonda do pior quadro registrou zero estouros de VBlank. O aceite de desempenho permanece reprovado. Esta candidata usa a arena do Espaçoporto da ficha. O estudo do horizonte de Palma tem registro próprio. [Recibo do cartucho, sessões e limites](decisions/2026-11-27_alis_artes_na_rom.json)
+
 ## 27/11/2026 · Horizonte do Espaçoporto de Palma
 
 A [candidata da pista](../out/candidates/alis_palma_horizonte_r3/rom/master_of_fighters.sms) usa o guarda adulto de viseira pequena, três grupos de nuvens e duas cristas atrás dos hangares. A revisão do encaixe dos tiles preservou 263 dos 286 pixels da crista distante no recorte central da prancha. A moldura do Versus percorreu as 21 posições previstas no framebuffer com os retratos de pré-luta, o manto verde de P2 e *Battle* em FM. [Comparação do guarda](../out/qa/alis_palma_horizonte_r3/cenario/guardas.png) · [Vídeo da pista](../out/qa/alis_palma_horizonte_r3/cenario/nuvens.mp4)

@@ -81,18 +81,15 @@ static uint8_t mirror_preview_normal(uint8_t player)
     return action + mirror_posture[player] * 4u;
 }
 
-static MIRROR_HOT void mirror_walk(uint8_t player, int16_t previous)
+static void mirror_walk(uint8_t player, int16_t previous)
 {
-    const MofDuelFighter *actor = &duel.fighters[player];
-    uint8_t direction;
-    if (actor->state != MOF_DUEL_READY || actor->x == previous || duel.body[player].y_offset ||
-        duel.body[player].air_step) {
-        mirror_walk_dir[player] = 0u;
-        return;
-    }
-    direction = ((actor->x > previous) == actor->face_right) ? 1u : 2u;
-    mirror_walk_tick[player] = mirror_walk_dir[player] == direction ?
-        (mirror_walk_tick[player] + 1u) & 15u : 0u;
+    uint8_t direction = mof_duel_walk_direction(&duel, player, previous);
+    if (!direction || mirror_walk_dir[player] != direction) mirror_walk_tick[player] = 0u;
+    /* Two cold walk cycles can take more than four ticks to stream.
+       Keep the last tick of this cel until it has reached the display. */
+    else if ((mirror_walk_tick[player] & 3u) != 3u ||
+             mirror_display[player].frame == mirror_wanted[player].frame)
+        mirror_walk_tick[player] = (mirror_walk_tick[player] + 1u) & 15u;
     mirror_walk_dir[player] = direction;
 }
 
