@@ -23,6 +23,8 @@ def main():
     parser.add_argument('out',type=Path)
     parser.add_argument('--case',choices=('story','versus','budget','worst','acting','port-versus','impact'),
                         default='story')
+    parser.add_argument('--fm',action='store_const',const=True,default=None,
+                        help='Enable the FM unit in this private Emulicious session')
     args=parser.parse_args()
     build=args.candidate.resolve()
     record=json.loads((build/'build_record.json').read_text())
@@ -36,7 +38,7 @@ def main():
     # The bridge accepts an absolute session directory. Keep videos, scratch
     # images and X credentials on the project disk, with the protocol's 0700.
     isolated.DEFAULT_ROOT=PROJECT.parents[1]/'.runtime/qa'
-    session=isolated.start(rom)
+    session=isolated.start(rom,sms_fm=args.fm)
     log={'session_id':session.name,'rom_sha256':record['rom_sha256'],'case':args.case,'steps':[]}
     def save():
         isolated.atomic(out/'observations.json',log)
@@ -101,6 +103,8 @@ def main():
             press(16)
             if args.case=='budget': press(32,28)
         observe('apresentacao')
+        if args.case not in ('story','budget') and '-DMOF_ALIS_MATCHUP=1' in record['compiler_defines']:
+            press(16,4)  # capture the visible card before the arena load blanks the display
         for _ in range(40):
             phase=state()[5]
             if phase==1 and state()[6]>=5 and not any(row['id']=='fight' for row in log['steps']):

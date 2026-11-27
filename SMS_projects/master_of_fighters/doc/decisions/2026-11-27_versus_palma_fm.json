@@ -1,0 +1,306 @@
+{
+  "candidata": "alis_versus_barlow_fm",
+  "rom": "out/candidates/alis_versus_barlow_fm/rom/master_of_fighters.sms",
+  "rom_sha256": "1ada003a3cc1d6e2ac7f0501044bf3e1402eb97cd2a5a6a11b056820433dfcd0",
+  "bytes": 1048576,
+  "compilacao": "out/candidates/alis_versus_barlow_fm/build_record.json",
+  "fontes": {
+    "title": "Battle",
+    "composer": "Tokuhiko Uwabo",
+    "game": "Phantasy Star",
+    "recording": "Valley Bell (SMS Power!)",
+    "FM": {
+      "source_sha256": "61528cb9a677cad75ecfc050f58951e505dfdafd4eed7663f18c9ac83065671d",
+      "frames": 1538,
+      "loop_frame": 2,
+      "bytes": 7132,
+      "writes": 2410
+    },
+    "PSG": {
+      "source_sha256": "5c106cc7a58ec22e6089e29241cbfcf0fee2d692267b789e7f47a61667c07763",
+      "frames": 1536,
+      "loop_frame": 0,
+      "bytes": 5092,
+      "writes": 3780
+    },
+    "camera_x": [
+      80,
+      76,
+      72,
+      68,
+      64,
+      60,
+      56,
+      52,
+      48,
+      44,
+      40,
+      36,
+      32,
+      28,
+      24,
+      20,
+      16,
+      12,
+      8,
+      4,
+      0
+    ],
+    "window": [
+      16,
+      94,
+      144,
+      72
+    ],
+    "name_font": {
+      "family": "Barlow SemiBold",
+      "sha256": "86577cb32f8abe3673db53ca0f4221e6856751a4f6730c867e00f720f8bb1fc5"
+    },
+    "pattern_count": 434,
+    "portraits": "2e6f47f25869876eb16c9e9b11ccbf19638251167878b9c7c43c341bd651ed7b",
+    "stage": "10686413c52d9afc5ea38e91a457112af8899e1d7c8baa2c4484e282f8c694a1"
+  },
+  "partitura": {
+    "FM": {
+      "frames_compared": 3080,
+      "loop_frames": 1536,
+      "register_events_compared": 4804,
+      "source_sha256": "61528cb9a677cad75ecfc050f58951e505dfdafd4eed7663f18c9ac83065671d",
+      "melodic_channels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "rhythm_mode": true
+    },
+    "PSG": {
+      "frames_compared": 3078,
+      "loop_frames": 1536,
+      "register_events_compared": 7568,
+      "source_sha256": "5c106cc7a58ec22e6089e29241cbfcf0fee2d692267b789e7f47a61667c07763"
+    }
+  },
+  "sessoes": {
+    "fm": {
+      "id": "e86486260e674203945dcbc2a4421594",
+      "arquivo": "out/qa/alis_versus_barlow_fm/fm/observations.json",
+      "sha256": "583c9807d69bc05f28928d962fa81252a1987ae53ae58aef631fb014c6c65c8b",
+      "encerrada": true,
+      "chip_na_arena": 2
+    },
+    "psg": {
+      "id": "a7fe1bb4851a4661bcc9929744bcf11b",
+      "arquivo": "out/qa/alis_versus_barlow_fm/psg/observations.json",
+      "sha256": "b9494790d3bf6065ab06d1828e1182cbddb8ffcd5ada09227e3b50b21261864c",
+      "encerrada": true,
+      "chip_na_arena": 1
+    },
+    "mute": {
+      "id": "5ed04b4ca587491bbf17707d6d4d763a",
+      "arquivo": "out/qa/alis_versus_barlow_fm/mute/observations.json",
+      "sha256": "2f30dd35ed34d19527f273a5d4eb2a1bb0ed9539865ee4bdb91909c74ed7ce23",
+      "encerrada": true,
+      "chip_na_arena": 0
+    },
+    "story": {
+      "id": "c71a1df31adc47ccb3abe6b4c71232e2",
+      "arquivo": "out/qa/alis_versus_barlow_fm/story/observations.json",
+      "sha256": "42f59a26b259a73a09053aef0a335fa9f270d345fd59f65ed1ea06546d4ea863",
+      "encerrada": true,
+      "chip_na_arena": 2
+    },
+    "worst-r2": {
+      "id": "91e523f5b59b4829bb56c7c2c211a113",
+      "arquivo": "out/qa/alis_versus_barlow_fm/worst-r2/observations.json",
+      "sha256": "b7da7968483f1ba2a85f1380a84815add8b8d9712517f83d60f245840b6212c4",
+      "encerrada": true
+    },
+    "budget": {
+      "id": "be4c8372dee54c959b0ccaa4351fd137",
+      "arquivo": "out/qa/alis_versus_barlow_fm/budget/observations.json",
+      "sha256": "996fa13e5334bd793551dd7178e34753a3ba5d4712e9cae42700086bcdf1652c",
+      "encerrada": true
+    },
+    "spell-budget": {
+      "id": "3ba984a3338d4ec4b24fa91775f96fce",
+      "arquivo": "out/qa/alis_versus_barlow_fm/spell-budget/observations.json",
+      "sha256": "9ab241630352bbddff49cd975fdb504166fe1a522ed580040d5d012d269947ea",
+      "encerrada": true
+    },
+    "fire-historia": {
+      "id": "f8d0cfe6c480469aa4864ea6beab73e6",
+      "arquivo": "out/qa/alis_versus_barlow_fm/fire-historia/observations.json",
+      "sha256": "064542ca441dbef6ebd4ba8bc72dd23e3f416cd467abb270627bd81b55ec6230",
+      "encerrada": true
+    }
+  },
+  "artefatos": {
+    "out/qa/alis_versus_barlow_fm/fm/versus.png": "5dadcc4524ad0c7724cb5149852e7c51cfc781aec25c71b1f142bbdfc3a283c6",
+    "out/qa/alis_versus_barlow_fm/fm/versus.gif": "3122ffdfbfb6f5f2b8967f95793ef966db3e684ed144bee04a847437f6afb92b",
+    "out/qa/alis_versus_barlow_fm/fm/battle.wav": "3579a74bbe339c259f134a65bd924dc0ad4b894e4a8144a77c4de2bf1df1a982",
+    "out/qa/alis_versus_barlow_fm/fm/battle_loop.wav": "1b64646cfc0a4f8c9f6fecce598ad163cc257dde89376b204681334ffd3bb30e",
+    "out/qa/alis_versus_barlow_fm/psg/battle.wav": "778d3d78b7384e7a925af60a08324b0e668fcf4be4dd3a9feca320adae766d1a"
+  },
+  "corredor_de_sondas": {
+    "verdicto": "pass",
+    "folga_bytes": 65,
+    "corredor": "0xC770..0xC7F1"
+  },
+  "limite_rom_fixa": {
+    "fim_exclusivo": "0x7fe9",
+    "inicio_do_cabecalho": "0x7ff0",
+    "bytes_livres": 7
+  },
+  "validacao": "Emulicious NTSC privado. A comparação artística usa o framebuffer da ROM. As janelas de jogo usam publicações da ROM e entrada nos controles.",
+  "camera": {
+    "posicoes_conferidas": 21,
+    "comparacao": "Framebuffer 256 × 192, pixel a pixel, nas 21 posições anteriores ao combate.",
+    "indices_de_vcount": [
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237,
+      237
+    ],
+    "estouros": 0,
+    "passo_em_pixels": 4
+  },
+  "nomes_e_traje": {
+    "name_ink_pixels": [
+      59,
+      20
+    ],
+    "costume_pixels_compared": 157
+  },
+  "cursor_fm_no_loop": [
+    36824,
+    37518,
+    38502,
+    39230,
+    33236,
+    34116,
+    35182,
+    35984,
+    36880,
+    37688
+  ],
+  "carga_mista": {
+    "janelas": [
+      {
+        "vdp": 120,
+        "publications": 99,
+        "nominal_hz": 59.92274340431231,
+        "fps": 49.43626330855765,
+        "active": true
+      },
+      {
+        "vdp": 120,
+        "publications": 99,
+        "nominal_hz": 59.92274340431231,
+        "fps": 49.43626330855765,
+        "active": true
+      },
+      {
+        "vdp": 120,
+        "publications": 95,
+        "nominal_hz": 59.92274340431231,
+        "fps": 47.43883852841391,
+        "active": true
+      }
+    ],
+    "estouros": 0,
+    "vcount_min": 200,
+    "selado": 1
+  },
+  "guarda_historia": {
+    "janelas_fps": [
+      44.46392465117092,
+      44.6436749519106,
+      43.947579434708096
+    ],
+    "arquivo": "out/evidence/sessions/be4c8372dee54c959b0ccaa4351fd137/runtime/fps.json",
+    "sha256": "0ba78cd5ab2df61de3a8c358d2d046c097cb6a15e8d0474befa972c325409329"
+  },
+  "magias_no_versus": {
+    "pior_quadro": {
+      "selado": 1,
+      "vcount_min": 200,
+      "overruns": 0
+    },
+    "janelas_validas": [
+      34.95493365251551,
+      49.43626330855765,
+      49.43626330855765,
+      53.43111286884514,
+      49.43626330855765,
+      49.43626330855765,
+      53.43111286884514,
+      49.43626330855765,
+      49.43626330855765,
+      52.931756673809204,
+      34.95493365251551,
+      49.43626330855765,
+      53.43111286884514,
+      48.93690711352171,
+      49.43626330855765,
+      53.93046906388108,
+      48.93690711352171,
+      49.43626330855765,
+      53.93046906388108,
+      34.45557745747957,
+      49.43626330855765,
+      52.931756673809204,
+      48.93690711352171,
+      49.43626330855765,
+      53.93046906388108,
+      49.43626330855765
+    ]
+  },
+  "audio": {
+    "fm/battle": {
+      "segundos": 6.687,
+      "pico_pcm": 9359,
+      "janelas_ativas_percentual": 99.8502994011976
+    },
+    "fm/battle_loop": {
+      "segundos": 4.458,
+      "pico_pcm": 10792,
+      "janelas_ativas_percentual": 90.56179775280899
+    },
+    "psg/battle": {
+      "segundos": 6.687,
+      "pico_pcm": 4962,
+      "janelas_ativas_percentual": 99.8502994011976
+    }
+  },
+  "menor_janela_fps": 34.45557745747957,
+  "piso_58_em_todas_as_janelas": false,
+  "fontes_concomitantes_do_motor": {
+    "arquivo_local": "out/qa/alis_versus_barlow_fm/fontes-integradas.zip",
+    "sha256": "d62921febb873afa2c7bd21b2870a65530c214cf58d7ea40414fe7c1c03212cf",
+    "arquivos": {
+      "inc/alis_chapter.h": "14869e02793a2bc35a8091f818a8a747d68698cf78124ca75b0984d019b70094",
+      "inc/duel_rules.h": "6531f648fcdbbad47ec642d3a89ff79959def6331666e8c1622ff0030f726b6b",
+      "src/alis_chapter.c": "8fdacfd141c0bb97eaf949fcaf5d0f87e7335eaa6605d5253d3a2eddc2468436",
+      "src/duel_pnt_stream.inc": "b4591642a3f42e0189e4ab37061519051c8c2d189de2898df140cacc493eed69",
+      "src/duel_rules.c": "17f4ca32f2a02e17abf42d59382fb13fde8a246c69e54082d94e955b3e8e77af"
+    },
+    "escopo": "Fotografia das entradas locais do motor usadas para compilar a ROM enquanto o trabalho de combos prosseguia."
+  }
+}

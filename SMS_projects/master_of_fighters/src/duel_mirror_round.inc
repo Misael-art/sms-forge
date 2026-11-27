@@ -244,6 +244,10 @@ void main(void)
     mof_min_vline = 255u;
     mof_vblank_overrun = mof_presented_frame = mof_worst_done = 0u;
     mof_chapter_select(&alis_presentation);
+#ifdef MOF_ALIS_MATCHUP
+    mof_chapter_pair(mirror_initial_duel.fighters[0].fighter,mirror_initial_duel.fighters[1].fighter);
+    SMS_setFrameInterruptHandler(count_vblank);
+#endif
     mof_duel_audio_init();
 title:
     mof_chapter_menu();

@@ -1,5 +1,11 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Apresentação Alis × Alis e Battle em FM
+
+A [candidata do Espaçoporto](../out/candidates/alis_versus_barlow_fm/rom/master_of_fighters.sms) usa Barlow SemiBold como padrão dos nomes no Versus. P1 e P2 usam o retrato de pré-luta voltado para o centro, com o traje de P2 na segunda paleta do combate. Em oito sessões privadas concluídas, o Emulicious exibiu os nomes com 59 × 20 pixels de tinta e reproduziu as 21 posições da pista dentro da moldura. As 20 atualizações do mapa terminaram com VCount 237. [Câmera capturada na ROM](../out/qa/alis_versus_barlow_fm/fm/versus.gif)
+
+*Battle* tocou no YM2413 na História e no Versus contra Alis. O ensaio acompanhou a volta musical, a execução no PSG e a opção de música desligada. Fire na História reduziu a vida da CPU de 100 para 94. Com áudio FM, a carga mista e a de especiais encerraram as janelas de 3.000 apresentações com zero estouros de VBlank. A pior janela de especiais mediu 34,455577 FPS. O piso de 58 FPS continua reprovado. SHA-256 da ROM `1ada003a3cc1d6e2ac7f0501044bf3e1402eb97cd2a5a6a11b056820433dfcd0`. [Áudio FM da luta](../out/qa/alis_versus_barlow_fm/fm/battle.wav) · [Medições e sessões](decisions/2026-11-27_versus_palma_fm.json)
+
 ## 26/11/2026 · Ficha técnica de construção do elenco
 
 O [modelo de personagem](ficha_tecnica_personagem_modelo_v1.docx) acompanha o registro de repertório. A [edição preenchida de Alis](ficha_tecnica_alis_g6e_v1.docx) usa os controles e os tempos do capítulo G6e, ilustra poses e efeitos e distingue regras de contato, hipóteses de combo e observações no emulador. Trata-se de documentação de construção; a cadência e o aceite do combate seguem no registro da candidata.

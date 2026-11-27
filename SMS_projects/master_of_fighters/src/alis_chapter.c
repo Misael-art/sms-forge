@@ -105,9 +105,26 @@ static void port_bird(uint8_t bird, uint8_t advance)
 }
 #endif
 
+#ifdef MOF_ALIS_MATCHUP
+#include "alis_battle_music.inc"
+static uint8_t versus_pair;
+void mof_chapter_pair(uint8_t p1,uint8_t p2)
+{
+    battle_p2=p2;
+    versus_pair=(p1==MOF_DUEL_ALIS && p2==MOF_DUEL_ALIS);
+}
+#endif
+
 void mof_chapter_theme(uint16_t song)
 {
     PSGStop();
+#ifdef MOF_ALIS_MATCHUP
+    battle_stop();
+    if (chapter.music && battle_p2==MOF_DUEL_ALIS && song==mof_presentation->battle_song) {
+        battle_start();
+        return;
+    }
+#endif
     if (chapter.music) {
         SMS_mapROMBank(mof_presentation->arena_bank);
         PSGPlay((void *)song);
@@ -116,6 +133,9 @@ void mof_chapter_theme(uint16_t song)
 
 void mof_chapter_music(void)
 {
+#ifdef MOF_ALIS_MATCHUP
+    if (mof_battle_backend) { battle_music_frame(); return; }
+#endif
     if (chapter.music) {
         SMS_mapROMBank(mof_presentation->arena_bank);
         PSGFrame();
@@ -138,6 +158,9 @@ static void show_page(uint8_t page)
     SMS_mapROMBank(page);
     length=*(const uint16_t *)data;
     SMS_loadBGPalette(data+2);
+#ifdef MOF_ALIS_MATCHUP
+    if (page==MOF_VERSUS_PAGE) SMS_loadSpritePalette((const uint8_t *)0xbff0);
+#endif
     SMS_loadTiles(data+18,0,length);
     SMS_loadTileMap(0,0,data+18+length,1536);
     SMS_waitForVBlank();
@@ -149,16 +172,37 @@ static void show_page(uint8_t page)
 #include "alis_guardians.inc"
 #endif
 
-static uint8_t menu_edges(void)
+static uint8_t menu_pressed(void)
 {
-    uint8_t pad;
-    SMS_waitForVBlank();
-    mof_chapter_music();
-    pad=(uint8_t)SMS_getKeysStatus() & 63u;
+    uint8_t pad=(uint8_t)SMS_getKeysStatus() & 63u;
     uint8_t edges=pad & (uint8_t)~last_pad;
     last_pad=pad;
     return edges;
 }
+
+static uint8_t menu_edges(void)
+{
+    SMS_waitForVBlank();
+    mof_chapter_music();
+    return menu_pressed();
+}
+
+#ifdef MOF_ALIS_MATCHUP
+/* Called from the camera bank. The legacy opening song selects the stage bank. */
+uint8_t mof_matchup_keys(void)
+{
+    mof_chapter_music();
+    SMS_mapROMBank(MOF_PAN_BANK);
+    return menu_pressed();
+}
+
+static void show_matchup(uint8_t timed)
+{
+    show_page(MOF_VERSUS_PAGE);
+    SMS_mapROMBank(MOF_PAN_BANK);
+    mof_matchup_pan(timed);
+}
+#endif
 
 static void story_pages(uint8_t from,uint8_t count)
 {
@@ -170,67 +214,70 @@ static void story_pages(uint8_t from,uint8_t count)
     }
 }
 
-static void options(void)
+static void chapter_title(void)
 {
-    uint8_t row=0, edge;
-    show_page(MOF_PAGE_OPTIONS);
-    for (;;) {
-        SMS_waitForVBlank();
-        SMS_setTileatXY(2,8,row ? 0 : 1);
-        SMS_setTileatXY(2,14,row ? 1 : 0);
-        SMS_setTileatXY(5,10,chapter.music ? 2 : 0);
-        SMS_setTileatXY(18,10,chapter.music ? 0 : 2);
-        SMS_setTileatXY(5,16,chapter.target==1 ? 2 : 0);
-        SMS_setTileatXY(18,16,chapter.target==2 ? 2 : 0);
-        do { edge=menu_edges(); } while (!edge);
-        if (edge & MOF_DUEL_TWO) return;
-        if (edge & (MOF_DUEL_UP|MOF_DUEL_DOWN)) row^=1u;
-        else if (edge & (MOF_DUEL_LEFT|MOF_DUEL_RIGHT|MOF_DUEL_ONE)) {
-            if (row) chapter.target=3u-chapter.target;
-            else {
-                chapter.music^=1u;
-                mof_chapter_theme(mof_presentation->opening_song);
-            }
-        }
-    }
+#ifdef MOF_ALIS_MATCHUP
+    if (versus_pair) { show_matchup(0); return; }
+#endif
+    show_page(MOF_PAGE_TITLE);
+    while (!(menu_edges() & MOF_DUEL_ONE)) {}
+}
+
+#ifdef MOF_ALIS_MATCHUP
+/* Menu code runs from the slot used by page data and songs. Re-select its
+   bank in fixed ROM before returning from each operation that changes slots. */
+void menu_page(uint8_t page)
+{
+    show_page(page);
+    SMS_mapROMBank(MOF_PAN_BANK);
+}
+
+uint8_t menu_input(void)
+{
+    SMS_waitForVBlank();
+    return mof_matchup_keys();
+}
+
+void menu_title(void)
+{
+    chapter_title();
+    SMS_mapROMBank(MOF_PAN_BANK);
+}
+
+void menu_opening(void)
+{
+    mof_chapter_theme(mof_presentation->opening_song);
+    SMS_mapROMBank(MOF_PAN_BANK);
+}
+
+void menu_intro(void)
+{
+    story_pages(mof_presentation->intro_first,mof_presentation->intro_count);
+    SMS_mapROMBank(MOF_PAN_BANK);
 }
 
 void mof_chapter_menu(void)
 {
-    uint8_t selected=0, previous, edge;
-    if (!chapter.target) {
-        chapter.target=2;
-        chapter.music=1;
-        mof_chapter_theme(mof_presentation->opening_song);
-        show_page(MOF_PAGE_TITLE);
-        while (!(menu_edges() & MOF_DUEL_ONE)) {}
-    } else mof_chapter_theme(mof_presentation->opening_song);
-    show_page(MOF_PAGE_MENU);
-    for (;;) {
-        SMS_waitForVBlank();
-        SMS_setTileatXY(3,16+2*selected,1);
-        do { edge=menu_edges(); } while (!edge);
-        previous=selected;
-        if (edge & MOF_DUEL_UP) selected=selected ? selected-1u : 2u;
-        else if (edge & MOF_DUEL_DOWN) selected=selected==2 ? 0 : selected+1u;
-        else if (edge & MOF_DUEL_ONE) {
-            if (selected<2) {
-                chapter.story=!selected;
-                if (chapter.story) story_pages(mof_presentation->intro_first,mof_presentation->intro_count);
-                return;
-            }
-            options();
-            show_page(MOF_PAGE_MENU);
-        }
-        SMS_waitForVBlank();
-        SMS_setTileatXY(3,16+2*previous,0);
-    }
+    SMS_mapROMBank(MOF_PAN_BANK);
+    mof_banked_menu();
 }
+#else
+#define MENU_ENTRY mof_chapter_menu
+#define menu_page show_page
+#define menu_input menu_edges
+#define menu_title chapter_title
+#define menu_opening() mof_chapter_theme(mof_presentation->opening_song)
+#define menu_intro() story_pages(mof_presentation->intro_first,mof_presentation->intro_count)
+#include "alis_chapter_menu.inc"
+#endif
 
 void mof_chapter_match(void)
 {
     chapter.wins[0]=chapter.wins[1]=chapter.round=0;
     mof_chapter_theme(mof_presentation->battle_song);
+#ifdef MOF_ALIS_MATCHUP
+    if (!chapter.story && versus_pair) show_matchup(1);
+#endif
 }
 
 void mof_chapter_round(void)

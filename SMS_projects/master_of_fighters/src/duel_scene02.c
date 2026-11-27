@@ -83,7 +83,11 @@ static uint8_t sat_y_dirty;
 #if !defined(MOF_DUEL_REPERTOIRE)
 static uint8_t last_h_x, last_a_x, last_h_pose, last_a_pose;
 #endif
+#ifdef MOF_ALIS_MATCHUP
+volatile uint8_t vblank_epoch;
+#else
 static volatile uint8_t vblank_epoch;
+#endif
 volatile unsigned char __at(0xC7D4) mof_cadence_lines[4];
 
 static void count_vblank(void)

@@ -1,5 +1,9 @@
 # 13-spec-cenas — master_of_fighters
 
+## Apresentação do confronto de Alis
+
+O cartão usa o fundo de 256 × 192 e as fontes do jogo. O mesmo retrato de pré-luta ocupa (16, 6) em P1 e (160, 86) em P2, espelhado horizontalmente em P2. O recorte da pista ocupa 144 × 72 pixels a partir de (16, 94). A câmera percorre as posições 80 a 0 do panorama em passos de 4 pixels. Cada exposição usa os padrões já residentes, com troca de 18 × 10 entradas de mapa durante o VBlank. P1 e P2 usam Barlow SemiBold, com 59 × 20 pixels de tinta para o nome ALIS. O nome de P2 termina em x=235, acima do retrato. A segunda subpaleta troca o tecido para os verdes 24 e 44 do combate. Os dois nomes, os retratos, o X e a identificação do estágio permanecem fixos. No Versus a apresentação avança automaticamente ou pelo botão 1. A faixa do adversário continua do cartão à luta.
+
 ## Guardiões de Algol · 26/11/2026
 
 A F. Anime reúne sete planos por execução. O último seleciona uma reação pela identidade da vítima e sobrepõe o corte independente. A atuação alterna exposições locais em letterbox. Noah e o voo de Myau reservam três entradas próprias de CRAM. [Registro da produção e orçamentos por plano](curadoria_guardioes_de_algol.md).

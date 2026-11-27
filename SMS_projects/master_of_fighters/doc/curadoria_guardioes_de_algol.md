@@ -91,6 +91,23 @@ cc -std=c99 -fpack-struct=1 -O1 -DMOF_DUEL_HOST_TEST -DMOF_ALIS_MAGIC -DMOF_ALIS
 "$c/test_alis_magic"
 ```
 
+## Reprodução da apresentação e de Battle em FM
+
+O cartucho de Versus com FM usa as entradas da G6e. Para recompilar, guarde os pacotes de registros VGM do próprio catálogo em `.runtime/downloads/PhantasyStar-SMS-FM.zip` e `.runtime/downloads/PhantasyStar-SMS-PSG.zip`. Na raiz do projeto, estes comandos reaproveitam os bancos do capítulo e conferem o SHA das duas partituras antes da conversão. [Pacote FM](https://www.smspower.org/uploads/Music/PhantasyStar-SMS-FM.zip) · [Pacote PSG](https://www.smspower.org/uploads/Music/PhantasyStar-SMS-PSG.zip)
+
+```sh
+p=SMS_projects/master_of_fighters
+h=tools/sms_wrapper/run_host.sh
+d="$p/out/diagnostics/alis_versus_barlow_fm"
+b="$p/out/candidates/alis_versus_barlow_fm_rebuild"
+"$h" rtk proxy python3 "$p/tools/pack_alis_matchup.py" "$p/out/diagnostics/alis_guardioes_g6" .runtime/downloads "$d"
+"$h" rtk proxy python3 tools/sms_wrapper/build_inner.py --project "$p" --manifest "$d/chapter.json" --build-dir "$b"
+```
+
+O gerador usa Barlow SemiBold em todos os nomes do cartão, com uma única medida para o par. A fonte de Jeremy Tribby e demais autores do Barlow acompanha a receita sob a SIL Open Font License 1.1. [Origem da fonte](https://github.com/google/fonts/tree/main/ofl/barlow) · [Licença da cópia usada](../data/source_art/type/barlow/OFL.txt)
+
+O banco 59 contém o cartão e os 434 padrões das 21 posições de câmera. O banco 61 contém o código da câmera e os 20 recortes de mapa. Os nomes usam Barlow SemiBold com a mesma altura nos dois lados. A Alis à direita recebe a segunda paleta do elenco no tecido do traje, com os valores SMS 24 e 44. As demais cores do retrato seguem a arte de pré-luta. O banco 60 contém *Battle* nas duas instrumentações. A partitura FM conserva quatro canais melódicos, o modo de percussão, os instrumentos, os volumes e a volta de 1.536 quadros do original. O player lê o relógio de VBlank e envia os registros fora da publicação de vídeo. No Master System japonês, o controle de áudio permite ouvir também os efeitos PSG. Sem módulo FM, a ROM seleciona a partitura PSG do mesmo tema. No Emulicious, a opção do chip fica em **Options → Emulation → Master System**. [YM2413 Application Manual](https://www.smspower.org/maxim/Documents/YM2413ApplicationManual) · [Suporte FM no Emulicious](https://emulicious.net/a-major-update-of-emulicious-has-been-released/)
+
 ## Resultado da candidata G4 no Emulicious
 
 O cartucho de 1 MiB tem SHA-256 `21c43ff6fdb5f9241e33fb76f0ee6a624316d5078cf03b48cd292a2ed93ea9c0`. No Versus, P1 iniciou o final com 16 PV e 8 Reiki contra uma P2 tonta com 20 PV. O corte consumiu a barra, os sete planos apareceram, a vitória foi atribuída a P1 e a revanche repôs 100 PV em cada lado. Em outra partida, P2 iniciou o golpe pelo lado direito com 20 PV e venceu com o comando espelhado. Na História, o jogo aceitou Fire durante o combate com a CPU. [Versus](../out/qa/alis_guardioes_g4/versus2/observations.json) · [Final de P2](../out/qa/alis_guardioes_g4/p2-final/observations.json) · [História](../out/qa/alis_guardioes_g4/historia/observations.json)

@@ -8,6 +8,16 @@
 Jogo de luta autoral em desenvolvimento. O manifesto padrão compila o
 esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 
+## Jogar a apresentação Alis × Alis no Espaçoporto de Palma
+
+Abra [a ROM do Versus com câmera e áudio FM](out/candidates/alis_versus_barlow_fm/rom/master_of_fighters.sms). Na abertura, o botão **1** entra no menu. Escolha **Versus local** para ver a apresentação antes da luta. **1** também permite avançá-la. Com Alis como P2 e a música ligada, toca *Battle*, do primeiro *Phantasy Star*. No Emulicious, habilite a unidade FM em **Options → Emulation → Master System** para ouvir o arranjo do YM2413. O hardware PSG toca a versão do mesmo tema para esse chip.
+
+```sh
+SMS_projects/master_of_fighters/run.sh SMS_projects/master_of_fighters/out/candidates/alis_versus_barlow_fm/rom/master_of_fighters.sms
+```
+
+A câmera, as duas paletas e o áudio foram conferidos no Emulicious. A menor janela de especiais foi de 34,455577 FPS, abaixo do piso de 58. [Ver o cartão em movimento](out/qa/alis_versus_barlow_fm/fm/versus.gif) · [Ouvir Battle em FM](out/qa/alis_versus_barlow_fm/fm/battle.wav) · [Medições da candidata](doc/decisions/2026-11-27_versus_palma_fm.json)
+
 ## Jogar os especiais de Alis e os Guardiões de Algol
 
 Abra diretamente [Alis — Guardiões de Algol, candidata G6e](out/candidates/alis_guardioes_g6e/rom/master_of_fighters.sms) no **Emulicious (SMSForge)**. A ROM reúne os especiais na História e no Versus do Espaçoporto de Palma. Na opção **Vitórias por duelo → Uma**, o primeiro round já decide o confronto. Um teste rápido do arquivo é pressionar duas vezes para baixo, apertar **1** no segundo toque e soltar. Alis lança Fire.

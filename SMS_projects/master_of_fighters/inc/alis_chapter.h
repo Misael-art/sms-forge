@@ -22,6 +22,17 @@ extern const MofChapterPresentation *mof_presentation;
 void mof_chapter_reaction(uint8_t target,uint8_t duration,void (*prepare)(void),void (*draw)(uint8_t));
 #endif
 void mof_chapter_select(const MofChapterPresentation *presentation);
+#ifdef MOF_ALIS_MATCHUP
+void menu_page(uint8_t page);
+uint8_t menu_input(void);
+void menu_title(void);
+void menu_opening(void);
+void menu_intro(void);
+void mof_banked_menu(void);
+uint8_t mof_matchup_keys(void);
+void mof_matchup_pan(uint8_t timed);
+void mof_chapter_pair(uint8_t p1,uint8_t p2);
+#endif
 void mof_chapter_menu(void);
 void mof_chapter_match(void);
 void mof_chapter_round(void);

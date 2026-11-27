@@ -62,6 +62,8 @@ def main():
     parser.add_argument('--range',action='store_true')
     parser.add_argument('--spell-budget',action='store_true')
     parser.add_argument('--sound',action='store_true',help='Capture the confirmed film and its private PSG output continuously')
+    parser.add_argument('--fm',action='store_const',const=True,default=None,
+                        help='Enable the FM unit in this private Emulicious session')
     args=parser.parse_args()
     if args.story_move: args.story=True
     build=args.build.resolve();out=args.output.resolve()
@@ -72,7 +74,7 @@ def main():
     assert int(re.search(r'^\s*([0-9A-F]{8})\s+_mof_magic\s',symbols,re.M)[1],16)==0xc900
     out.mkdir(parents=True,exist_ok=False)
     isolated.DEFAULT_ROOT=PROJECT.parents[1]/'.runtime/qa'
-    session=isolated.start(rom)
+    session=isolated.start(rom,sms_fm=args.fm)
     log=dict(session_id=session.name,rom_sha256=record['rom_sha256'],steps=[])
     def save():isolated.atomic(out/'observations.json',log)
     def ctl(*pairs):

@@ -118,7 +118,9 @@ def load(session):
         raise RuntimeError("session path identity mismatch")
     return root, meta
 
-def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
+def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True, *, sms_fm=None):
+    if sms_fm is not None and type(sms_fm) is not bool:
+        raise ValueError("sms_fm must be a boolean or None")
     rom = Path(rom).resolve()
     if not rom.is_file() or rom.suffix.lower() != ".sms": raise ValueError("existing .sms ROM required")
     for binary in ("java", "bwrap"):
@@ -153,7 +155,8 @@ def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
     config.write_text("Update=0\nAudioSync=false\nScale=1\nFrameskip=0\nDisableFrameBlending=true\n"
                       "DisableHardwareAcceleration=true\nOpenMostRecentOnStartup=false\n"
                       "SMSInputDeviceA=1\nSMSInputDeviceB=1\nScreenshotCropBorders=true\n"
-                      "SMSGamepadAKeyboard=false\nSMSGamepadBKeyboard=false\nKeyboardRequireWindowFocus=true\n")
+                      "SMSGamepadAKeyboard=false\nSMSGamepadBKeyboard=false\nKeyboardRequireWindowFocus=true\n"
+                      + ("" if sms_fm is None else f"SMSFM={str(sms_fm).lower()}\n"))
     (root / "token").write_text(secrets.token_hex(32) + "\n"); (root / "token").chmod(0o600)
     auth_file(root / "Xauthority")
     meta = {"schema": 1, "session_id": sid, "root": str(root), "state": "created",

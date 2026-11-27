@@ -1,5 +1,30 @@
 """Original five-column capitals for the cartridge, including Portuguese accents."""
 import unicodedata
+from pathlib import Path
+
+from PIL import Image, ImageDraw, ImageFont
+
+FIGHTER_NAME_FONT = Path(__file__).resolve().parents[1] / "data/source_art/type/barlow/Barlow-SemiBold.ttf"
+
+
+def fighter_nameplates(names, max_width, max_height=21):
+    """Use one proportional face and size for every fighter in the matchup."""
+    for size in range(29, 11, -1):
+        font = ImageFont.truetype(str(FIGHTER_NAME_FONT), size, layout_engine=ImageFont.Layout.BASIC)
+        boxes = [font.getbbox(name, anchor="ls") for name in names]
+        top = min(box[1] for box in boxes)
+        bottom = max(box[3] for box in boxes)
+        if bottom-top <= max_height and all(right-left <= max_width for left, _, right, _ in boxes):
+            break
+    else:
+        raise ValueError(f"Fighter names exceed the available width: {names}")
+    names_in_ink = []
+    for name, (left, _, right, _) in zip(names, boxes):
+        mask = Image.new("L", (right-left, bottom-top))
+        ImageDraw.Draw(mask).text((-left,-top), name, font=font, fill=255, anchor="ls")
+        # Navy background with two edge tones from the existing SMS palette.
+        names_in_ink.append(mask.point(lambda v: 0 if v < 42 else 13 if v < 116 else 14 if v < 189 else 8))
+    return names_in_ink
 
 # Seven rows per glyph. In display lettering the broad edge catches a second ink.
 ROWS = {
@@ -50,6 +75,7 @@ def lettering(canvas, text, x, y, ink, scale=1, shade=None, tracking=1):
 # A pen lifts between contours at '/'. Narrow I, wide M and clipped O are
 # optical choices that also survive the single-row round caption.
 STROKES = {
+    'X': ('0,0 10,14/10,0 0,14',11),
     'A': ('0,14 2,3 5,0 8,0 9,14/2,8 8,8', 10),
     'B': ('1,14 1,0 7,0 9,2 9,4 6,7 1,7/6,7 9,9 9,11 6,14 1,14',10),
     'C': ('9,1 7,0 3,0 0,3 0,11 3,14 8,14',10),
