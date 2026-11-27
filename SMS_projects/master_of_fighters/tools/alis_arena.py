@@ -122,6 +122,34 @@ def saturn_runway(plate,palette):
     return runway
 
 
+def clear_apron_seam(pool, tile_ids, mapping, sky):
+    """Clear scanline 48 in the displayed tiles without changing shared hull tiles."""
+    slots = {tile: i for i, tile in enumerate(tile_ids)}
+    patches = {}
+    for pos in range(6*32, 7*32):
+        entry = mapping[pos]
+        tile = entry & 511
+        if tile not in slots:  # The tower beacon uses its own two exposures.
+            continue
+        raw = pool[slots[tile]]
+        first = 56 if entry & 0x400 else 0
+        clean = raw[:first] + bytes([sky])*8 + raw[first+8:]
+        if clean != raw:
+            patches[pos] = clean
+
+    occupied = {entry & 511 for pos,entry in enumerate(mapping) if pos not in patches}
+    resident = {pool[slots[t]]: t for t in tile_ids if t in occupied}
+    free = [t for t in tile_ids if t not in occupied]
+    for pos,raw in patches.items():
+        if raw not in resident:
+            if not free:
+                raise ValueError('No resident tile for the apron boundary')
+            tile = free.pop()
+            pool[slots[tile]] = raw
+            resident[raw] = tile
+        mapping[pos] = (mapping[pos] & ~511) | resident[raw]
+
+
 def arena(fighters, art, native, spaceport=False, horizon=False, saturn=False):
     import json
     from stage_alis_postures import rgb
@@ -322,13 +350,25 @@ def arena(fighters, art, native, spaceport=False, horizon=False, saturn=False):
         entries = {raw:vram_ids[i] for raw,i in index.items()}
     mapping=[(foreground if saturn and y>=18 else entries)[visible[x,y]] if (x,y) in visible else 256+rows[y]
              for y in range(24) for x in range(32)]
-    patterns=bytearray(b''.join(planar(list(p)) for p in pool[:capacity]))
     light_tiles = []
     for x,y,pair in lights:
-        tile = start+len(patterns)//32
+        tile = start+min(capacity,len(pool))+2*len(light_tiles)
         light_tiles.append(tile)
-        patterns.extend(pair)
         mapping[y*32+x] = tile
+    if saturn:
+        # The first bird pattern is a resident square of clear sky.
+        # Reuse it behind the scenery to free one slot for the split.
+        clear=entries[bytes([sky]*64)] & 511
+        sky_tile=start+capacity+2*len(lights)
+        mapping=[sky_tile if (entry & 511)==clear else entry for entry in mapping]
+        # The life meters cover columns 2..11 and 20..29; keep the clock
+        # in 15..16 and fill only the outer and inner gutters with sky.
+        for x in (*range(2),*range(12,15),*range(17,20),30,31):
+            mapping[32+x]=sky_tile
+        clear_apron_seam(pool,vram_ids,mapping,sky)
+    patterns=bytearray(b''.join(planar(list(p)) for p in pool[:capacity]))
+    for _,_,pair in lights:
+        patterns.extend(pair)
     motion_tile = start+len(patterns)//32
     patterns.extend(motion)
     sx,sy,_ = lights[0]
