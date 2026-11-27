@@ -36,6 +36,14 @@ Nas recuperações, conferir o valor lógico levou a uma segunda prova visual. O
 
 A compilação inicial excedeu o banco fixo. O laço da hiperpausa foi para o banco de apresentação. O áudio retorna ao banco correto antes de prosseguir. Contar os quatro desenhos de energia exigiu também medir o tempo do cenário escurecido no framebuffer. Na carga mista, a janela selada de 3.000 apresentações registrou zero estouros de VBlank, mas a pior janela de cadência foi 47,938195 FPS. Esses resultados medem propriedades diferentes. [Tempos, sessões e mídia da candidata](../decisions/2026-11-27_alis_r6_paleta_hiperpausa_canto.json)
 
+## Leitura dos especiais em vídeo
+
+A demonstração da R6b reúne 16 cenas em oito capítulos. Os quadros do Emulicious mostram o percurso completo, do comando até o acerto, a guarda ou a recuperação. O painel identifica a fase do golpe. A ampliação de Fireball e Myau acompanha o efeito desenhado na tela. O recibo liga cada cena à ROM e à sessão, inclui as posições amostradas e indica a velocidade da edição. [Vídeo e capítulos](../../out/qa/alis_gameplay_r6b/indice.md)
+
+O Fire curto tirou 6 HP a 38 px de distância inicial. O médio tirou 10 HP a 66 px. A guarda preservou os 84 HP que restavam no terceiro ensaio. Myau gastou 4 MP ao ativar, comeu a noz, ganhou asas e mergulhou. Tirou 18 HP no acerto e preservou a vida da rival na guarda. O contato restituiu 1 MP a Alis em ambos os ensaios. No Fire duplo, uma das duas chamas atingiu a rival por 7 HP na tomada de acerto.
+
+A revisão de deslocamento encontrou duas diferenças entre a descrição e a apresentação. Em Palma, a estocada tirou 25 HP, com o pivô de Alis fixo em X120 e a rival a até 5 px para trás durante a reação, antes de cair. Em Rising Saber, o dano foi publicado com Alis no chão no tick 252. A subida ficou visível no tick 253, 13 quadros VDP depois do HP publicado. Para o próximo personagem, a prova deve inspecionar a correspondência entre a pose exibida, o instante do contato e quem realmente se desloca. [Trajeto e contato de Palma](../../out/qa/alis_gameplay_r6b/palma/trace.json) · [Laconian Slash e Rising Saber](../../out/qa/alis_gameplay_r6b/espada/trace.json)
+
 ## Fontes do projeto
 
 - [Repertório, afastamento e tempos](../repertorio_alis_hayato.md) · [Provas por confronto](../repertorio_alis_hayato_provas.md) · [Comandos da cena](../scene02-comandos.md)
