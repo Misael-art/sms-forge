@@ -1,5 +1,11 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Seletor de pistas no Versus
+
+A [ROM com o seletor de Palma](../out/candidates/palma_tres_elenco/rom/master_of_fighters.sms) tem SHA-256 `50bc2ba6e55ec9f3517ce36a3ac518eb3a5f49b200dcdbc942a1022dc0f4d685`. No Versus, cima e baixo de P1 percorrem V1, V2 e V3 e o botão 1 confirma. A História conserva a V2. A V2 está [preservada com seu hash e cópia local de recuperação](../data/source_art/scenes/alis_espacoporto/versoes.json). A V3 apresenta o terminal ao anoitecer com as naves em perspectiva, o guarda de passaportes e reflexos na pista. Os bancos de Alis e dos Guardiões correspondem aos da ficha R5.
+
+O Emulicious mostrou os três cartões e as três arenas. A região de controle teve 2.664/2.664 pixels correspondentes em cada luta. Na V3, as nuvens percorreram 12 pixels em 96 quadros do VDP. As menores janelas mediram 43.02 FPS na História, 46.44 na carga mista e 30.46 nos especiais. Os estouros de VBlank nas duas cargas foram 0 e 0. O aceite de 58 FPS continua reprovado. [Medições por janela, sessões e receita](decisions/2026-11-27_palma_tres_versoes.json) · [Vídeo nativo da V3](../out/qa/palma_tres_elenco/v3/terminal.mp4)
+
 ## 27/11/2026 · Command List de Alis em revisão
 
 A [ficha ilustrada](ficha_tecnica_alis_g6e_v1.docx) traz a proposta de hiperpausa, retorno de HP e MP e saída protegida de combo na página 22. A página 23 compara o model sheet v4 com os sprites da R5. A conferência dos 376 pacotes identificou perda do rosa vivo nas séries 30–41, 43 e 46, e em reações que contrastam com a pose 66. No Versus gravado, Rest levou Alis de 90 a 96 HP e Chat de 0 a 1 MP. O teto de quatro hits é uma proposta para ensaio. A ROM de referência conserva o SHA-256 `7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b` durante a revisão pelo dono. [Command List](padrao_moveset_especiais.md#command-list-de-alis--revisão-para-decisão) · [Contagens e fontes da R5](decisions/2026-11-27_command_list_alis_r5.json)

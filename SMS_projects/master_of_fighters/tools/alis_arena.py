@@ -68,7 +68,61 @@ def score(melody,bass,pulse):
     return song
 
 
-def arena(fighters, art, native, spaceport=False, horizon=False):
+def saturn_runway(plate,palette):
+    """Translate painted runway reflections to a short, material-specific ramp."""
+    from PIL import ImageFilter
+    pavement=palette.index(37)
+    def motif(bounds,size,material):
+        # Rectangles are on the 600x400 model-sheet grid of the same painting.
+        sample=plate.convert('RGB').crop(tuple(round(i*plate.width/600) for i in bounds))
+        if material=="joint":
+            sample=sample.filter(ImageFilter.MinFilter(3))
+        sample=sample.resize(size,Image.Resampling.BOX)
+        pixels=[]
+        for r,g,b in sample.getdata():
+            if material=="joint":
+                code=16 if max(r,g)<38 and b<125 else 37
+            elif material=="hull":
+                code=22 if r>g+85 else 37
+            elif material=="glass":
+                code=60 if g>180 else (53 if g>r+64 else 37)
+            elif r>=160 and r>b+40:
+                code=63 if g>=220 else (11 if g>=152 else 6)
+            elif r>=110 and r>g+27 and r>b+10:
+                code=22
+            elif b<82 and max(r,g)<37:
+                code=16
+            else:
+                code=37
+            pixels.append(palette.index(code))
+        tile=Image.new('L',size)
+        tile.putdata(pixels)
+        return tile
+    # Reuse the painted expansion joint and two actual runway fixtures.
+    # Align motifs on the 8px grid so every reflected rail retains its course.
+    joint=motif((424,355,440,366),(8,8),"joint")
+    far=motif((533,286,561,314),(8,8),"lamp")
+    near=motif((457,317,505,365),(16,16),"lamp")
+    runway=Image.new('L',(256,48),pavement)
+    for bounds,position,size,material in (
+            ((110,294,159,391),(48,0),(16,48),"hull"),
+            ((246,287,278,359),(104,0),(8,32),"glass"),
+            ((355,276,383,338),(168,0),(8,24),"glass")):
+        runway.paste(motif(bounds,size,material),position)
+    mask=joint.point(lambda c: 0 if c==pavement else 255)
+    for y in range(0,48,8):
+        for intercept in (136,240):
+            x=intercept-y
+            runway.paste(joint,(x,y),mask)
+            runway.paste(joint.transpose(Image.Transpose.FLIP_LEFT_RIGHT),(248-x,y),
+                         mask.transpose(Image.Transpose.FLIP_LEFT_RIGHT))
+    for x,y,lamp in ((232,0,far),(201,24,near)):
+        runway.paste(lamp,(x,y))
+        runway.paste(lamp.transpose(Image.Transpose.FLIP_LEFT_RIGHT),(256-x-lamp.width,y))
+    return runway
+
+
+def arena(fighters, art, native, spaceport=False, horizon=False, saturn=False):
     import json
     from stage_alis_postures import rgb
     page=json.loads((fighters/'repertoire-pages.json').read_bytes())
@@ -84,6 +138,10 @@ def arena(fighters, art, native, spaceport=False, horizon=False):
         if used.intersection(substitutions):
             raise ValueError('Spaceport palette would recolor a weapon')
         palette = [substitutions.get(c, c) for c in palette]
+    if saturn:
+        # Ambient indigo on the pavement also tints the reflected steel of the
+        # precomposed blades. Their index registration stays identical.
+        palette[palette.index(42)] = 37
     rows=c_values(header,'mof_duel_bg_rows')
     # Packed weapons contain precomposed backdrop pixels. Leave every reachable
     # row at its canonical pattern; they can be placed at any horizontal phase.
@@ -95,11 +153,28 @@ def arena(fighters, art, native, spaceport=False, horizon=False):
     dark,white,gold=map(palette.index,(16,63,11))
     source=Image.new('L',(256,192),dark)
     if spaceport:
-        sky = palette.index(52)
+        sky = palette.index(16 if saturn else 52)
         source.paste(sky, (0,24,256,96))
-        with Image.open(art/('palma_horizonte.png' if horizon else 'pista.png')) as plate:
+        plate_name = 'palma_saturn_v3.png' if saturn else ('palma_horizonte.png' if horizon else 'pista.png')
+        with Image.open(art/plate_name) as plate:
             original = native(plate, (256,192), palette)
-            if horizon:
+            if saturn: deck=saturn_runway(plate,palette)
+            if saturn:
+                for bounds, size, position in (
+                        ((48,8,905,143),(128,8),(8,32)),
+                        ((904,80,1536,185),(96,8),(152,40)),
+                        ((0,195,1536,539),(248,22),(8,48)),
+                        ((0,539,1536,748),(248,26),(8,70))):
+                    filtered=plate.crop(bounds).resize(size,Image.Resampling.BOX)
+                    source.paste(native(filtered,size,palette),position)
+                # The central concourse repeats a single architectural bay.
+                # Use a whole bay from the painting to preserve the mullions.
+                bay=source.crop((144,72,168,96))
+                for x in (168,192):
+                    source.paste(bay,(x,72))
+                officer=plate.crop((586,584,655,748)).resize((11,25),Image.Resampling.BOX)
+                source.paste(native(officer,officer.size,palette),(104,71))
+            elif horizon:
                 # Separate authored bands at areas of clear sky. Leave rows 4–5
                 # for clouds; both birds follow the clear band above them.
                 # Each authored cloud occupies one tile row, with clean sky on
@@ -115,8 +190,8 @@ def arena(fighters, art, native, spaceport=False, horizon=False):
                 apron = original.crop((0,35,256,119)).resize((248,56), Image.Resampling.NEAREST)
                 source.paste(apron, (8,40))
         paving = original.crop((0,132,256,192)).resize((256,48), Image.Resampling.NEAREST)
-        source.paste(paving, (0,144))
-        source.paste(original.crop((0,120,256,128)), (0,96))
+        source.paste(deck if saturn else paving, (0,144))
+        source.paste(original.crop((0,138 if saturn else 120,256,146 if saturn else 128)), (0,96))
     else:
         with Image.open(art/'camineet_capsulas.png') as plate:
             # Move the eye line into town. The original panorama has tall sky for
@@ -154,7 +229,10 @@ def arena(fighters, art, native, spaceport=False, horizon=False):
             raise ValueError('Missing animated glass in the stage art')
         return x,y,planar(steady)+planar(bright)
     glass_colors = {glass, palette.index(60)} if spaceport else {glass}
-    if spaceport:
+    if saturn:
+        lights = [light_cell(range(24,27),range(6,8),glass_colors),
+                  light_cell(range(13,16),range(10,12),glass_colors)]
+    elif spaceport:
         lights = [light_cell(range(24,27), range(6,8) if horizon else range(5,7), glass_colors),
                   light_cell(range(13,15), range(9,11) if horizon else range(10,12), glass_colors)]
     else:
@@ -197,7 +275,14 @@ def arena(fighters, art, native, spaceport=False, horizon=False):
         near = (tile_at(x,y) for y in range(18,24) for x in range(32))
         officer = (tile_at(x,y) for y in range(8 if horizon else 9,12) for x in range(12,15))
         pool = list(dict.fromkeys([*pool, *near, *officer]))
-        if horizon:
+        if saturn:
+            # Give the three-quarter hull, the tower, the officer and the
+            # diagonal runway lights independent representatives in the fit.
+            fixed = [(x,y) for x in (13,14) for y in (9,10,11)]
+            fixed += [(x,6) for x in (25,26)] + [(x,10) for x in (2,3,4)]
+            pool = list(dict.fromkeys([tile_at(0,2), *(tile_at(x,0) for x in (*range(2,5),*range(27,31))),
+                                       *(tile_at(x,y) for x,y in fixed)]))
+        elif horizon:
             clouds = (tile_at(x,y) for y in (4,5) for x in range(32))
             tower_cap = (tile_at(x,6) for x in range(24,27))
             landing_gear = (tile_at(x,y) for x in (4,8,24,30) for y in (10,11))
@@ -211,7 +296,21 @@ def arena(fighters, art, native, spaceport=False, horizon=False):
         # Three sets of 32-byte spell composites must fit a 16 KiB bank.
         # Reserve the HUD rows and both beacons before spending orientation IDs.
         view_limit = 16384//(3*32) - len(protected) - len(lights)
-        pool,entries = fit_apron(counts,pool,vram_ids,colors,sky,palette.index(53),view_limit)
+        if saturn:
+            # A reflected runway light must never borrow a hangar or a wing
+            # motif. Give near and far materials their own resident patterns.
+            upper=Counter(t for (x,y),t in visible.items() if y<18)
+            front=Counter(t for (x,y),t in visible.items() if y>=18)
+            # The mirrored joints and lights all remain lossless. Spend every
+            # other slot on the silhouette and the glass structure above it.
+            deck_tiles=list(front)
+            split=len(vram_ids)-len(deck_tiles)
+            pool,entries=fit_apron(upper,pool,vram_ids[:split],colors,sky,palette.index(53),view_limit-len(deck_tiles))
+            assert len(pool)==split
+            foreground=dict(zip(deck_tiles,vram_ids[split:]))
+            pool+=deck_tiles
+        else:
+            pool,entries=fit_apron(counts,pool,vram_ids,colors,sky,palette.index(53),view_limit)
     else:
         best={t:min(distance(t,k) for k in pool) for t in counts}
         while len(pool)<len(vram_ids):
@@ -221,7 +320,7 @@ def arena(fighters, art, native, spaceport=False, horizon=False):
             for k in best: best[k]=min(best[k],distance(k,t))
         index={t:min(range(len(pool)),key=lambda i:distance(t,pool[i])) for t in counts}
         entries = {raw:vram_ids[i] for raw,i in index.items()}
-    mapping=[entries[visible[x,y]] if (x,y) in visible else 256+rows[y]
+    mapping=[(foreground if saturn and y>=18 else entries)[visible[x,y]] if (x,y) in visible else 256+rows[y]
              for y in range(24) for x in range(32)]
     patterns=bytearray(b''.join(planar(list(p)) for p in pool[:capacity]))
     light_tiles = []

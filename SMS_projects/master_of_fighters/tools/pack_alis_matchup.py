@@ -103,18 +103,23 @@ def score(folder, chip):
                                "writes": (sum(map(len, frames)) + len(prefix) + len(tail)) // (2 if chip == "FM" else 1)}
 
 
-def versus_page(out, horizon=False):
+def versus_page(out, horizon=False, version=None):
     colors = PALETTE.copy()
     colors[7], colors[9] = 52, 32
     alternate = colors.copy()
     alternate[3], alternate[11] = SECOND_COSTUME[19], SECOND_COSTUME[35]
     card = Image.new("L", (256, 192))
     plate_name = "palma_horizonte.png" if horizon else "pista.png"
+    if version == 3:
+        plate_name = "palma_saturn_v3.png"
     with Image.open(PORT_ART / plate_name) as source:
         bounds = (0, source.height*32//192, source.width, source.height*123//192)
         if horizon:
             bounds = (0,195,1536,640)
             clouds = native(source.crop((0,34,1536,132)), (224,10), colors)
+        if version == 3:
+            bounds = (0,185,1536,765)
+            clouds = native(source.crop((75,6,1536,178)), (224,10), colors)
         panorama = native(source.crop(bounds), (224,72), colors)
     with Image.open(ART / "portraits.png") as sheet:
         w, h = sheet.size
@@ -144,6 +149,9 @@ def versus_page(out, horizon=False):
     card.paste(second, (p2_left,64))
     lettering(card, "ESTÁGIO 01", 16, 171, GOLD)
     lettering(card, "ESPAÇOPORTO DE PALMA", 16, 182, WHITE)
+    if version is not None:
+        lettering(card, f"V{version}  CIMA/BAIXO", 145,171,GOLD)
+        lettering(card, "1 SEGUE", 195,182,WHITE)
     draw = ImageDraw.Draw(card)
     draw.line((16,84,159,84), fill=13)
     draw.line((16,84,35,84), fill=GOLD)
@@ -185,7 +193,7 @@ def versus_page(out, horizon=False):
             cloud_x = left//8*4
             frame.paste(clouds.crop((cloud_x,0,cloud_x+144,10)), (16,94))
         frames.append(frame)
-    if horizon:
+    if horizon or version is not None:
         from palma_panorama import fit_window
         fit_window(card, frames, offsets, colors)
     for index,frame in enumerate(frames):

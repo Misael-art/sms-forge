@@ -32,6 +32,10 @@ void menu_intro(void);
 void mof_banked_menu(void);
 uint8_t mof_matchup_keys(void);
 void mof_matchup_pan(uint8_t timed);
+#ifdef MOF_PALMA_VERSIONS
+extern uint8_t mof_stage_choice;
+void mof_camera_strip(uint8_t bank,const uint8_t *strip);
+#endif
 void mof_chapter_pair(uint8_t p1,uint8_t p2);
 #endif
 void mof_chapter_menu(void);

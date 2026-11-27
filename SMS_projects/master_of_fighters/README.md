@@ -8,6 +8,18 @@
 Jogo de luta autoral em desenvolvimento. O manifesto padrão compila o
 esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 
+## Escolher a versão do Espaçoporto no Versus
+
+Abra [a ROM com as três pistas](out/candidates/palma_tres_elenco/rom/master_of_fighters.sms). Pressione **1** na abertura, entre em **Versus local** e use **↑** ou **↓** no controle de P1. A moldura mostra a pista escolhida. A seleção dá a volta e segurar a direção conta como um toque. Depois de mudar de versão, pressione **1** para começar a luta.
+
+| Versão | O que aparece na pista |
+| --- | --- |
+| V1 · Original | O primeiro posto de passaportes, com as naves vermelhas em pleno dia. |
+| V2 · Horizonte | O guarda esguio e as nuvens sobre as serras de Palma. Esta é a pista da História. |
+| V3 · Terminal ao anoitecer | A nave em primeiro plano, os hangares envidraçados e as luzes âmbar da pista em perspectiva. É a seleção inicial do Versus. |
+
+A [ROM anterior da V2](out/candidates/alis_palma_horizonte_r3/rom/master_of_fighters.sms) também continua disponível. [Registro das versões](data/source_art/scenes/alis_espacoporto/versoes.json) · [Medições e sessões da ROM com seletor](doc/decisions/2026-11-27_palma_tres_versoes.json)
+
 ## Jogar na pista com o novo horizonte de Palma
 
 Abra [a ROM do Espaçoporto com o guarda e as nuvens](out/candidates/alis_palma_horizonte_r3/rom/master_of_fighters.sms). No título, pressione **1** e escolha **História de Alis** ou **Versus local**. Na pista, deixe os controles em repouso para ver o vento nas nuvens. Caminhe com os dois lutadores para o mesmo lado para ver o deslocamento relativo do céu, das naves e do piso.

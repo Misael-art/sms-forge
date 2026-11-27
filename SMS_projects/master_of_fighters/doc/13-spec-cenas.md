@@ -1,5 +1,11 @@
 # 13-spec-cenas — master_of_fighters
 
+## Versões da pista no Versus
+
+V1, V2 e V3 ocupam bancos de cenário distintos. O cartão de cada versão usa o retrato de confronto de cada lado, a paleta verde de P2 e 21 posições para a câmera. Ao entrar no round, a seleção define o mapa da pista, os motivos que recompõem o fundo sob os especiais, as coordenadas da torre e do leitor de passaportes e a rotina de rolagem. A História usa o mapa da V2.
+
+A V3 foi desenhada com o terminal em perspectiva oblíqua e a nave esquerda próxima da câmera. A conversão para 256 × 192 dispõe de 123 padrões residentes de cenário, de 8 × 8 pixels, além dos reservados para animações, letras e combate. São 75 na região alta e 48 nas caudas livres dos oito slots de lutadores. A V3 reaproveita módulos da fachada e a junta e as duas luminárias recortadas da pintura. O céu, os terminais e a pista têm faixas de rolagem próprias. O guarda e o leitor ficam junto ao terminal. [Prancha de origem e registro das versões](../data/source_art/scenes/alis_espacoporto/versoes.json)
+
 ## Pista, nuvens e guarda do posto de passaportes
 
 Na revisão do horizonte, o HUD ocupa as linhas 0–23. As duas aves compartilham o céu limpo das linhas 24–31 com 17 colunas de separação. Entre 32 e 47, as nuvens derivam um pixel a cada oito quadros do VDP, somado à metade do deslocamento do pátio. A faixa 48–95 contém as naves, as montanhas, a torre e o guarda. A pista próxima começa na linha 160. As mudanças de rolagem usam o registrador horizontal do VDP. As escarpas compartilham a rolagem das naves. A crista distante usa o azul-violeta 53, um degrau de vermelho acima do céu 52 na CRAM. Os contornos das três nuvens, do guarda e das juntas da pista têm padrões reservados. O conversor aproveita o espelhamento horizontal e vertical do VDP nos demais motivos e compõe os projéteis sobre cada orientação efetivamente usada.

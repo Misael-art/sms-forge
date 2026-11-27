@@ -19,6 +19,10 @@ NEAR = Image.Resampling.NEAREST
 def stage_patterns(folder, fighters):
     defs = {k:int(v) for k,v in re.findall(r'#define MOF_(\w+) (\d+)u', (folder/'alis_pages.h').read_text())}
     data = (folder/'panels.bin').read_bytes()[-PAGE:]
+    return decode_stage(data,defs,fighters)
+
+
+def decode_stage(data,defs,fighters):
     vram = bytearray(448*32)
     base = bytes(c_values((fighters/'duel_mirror_assets.h').read_text(),'mof_duel_bg_stage'))
     vram[8192:8192+len(base)] = base
@@ -44,6 +48,27 @@ def stage_patterns(folder, fighters):
     return ids, [ids.index(t) for t in tilemap], [oriented(t) for t in ids], list(data[pal:pal+16])
 
 
+def glyph_stamps(palette):
+    glyphs=Image.open(ART/'magias.png').convert('RGBA')
+    for i in range(9):
+        x,y=i%3,i//3
+        cel=glyphs.crop((x*glyphs.width//3,y*glyphs.height//3,(x+1)*glyphs.width//3,(y+1)*glyphs.height//3))
+        alpha=cel.getchannel('A').point(lambda a:255 if a>=170 else 0)
+        cel.putalpha(alpha);cel=cel.crop(alpha.getbbox())
+        side=16 if i in (3,4,5) else 8
+        cel.thumbnail((side,side),Image.Resampling.LANCZOS)
+        full=Image.new('RGBA',(side,side));full.paste(cel,((side-cel.width)//2,(side-cel.height)//2))
+        for flip in (False,True):
+            oriented=full.transpose(Image.Transpose.FLIP_LEFT_RIGHT) if flip else full
+            ink=native(oriented,oriented.size,palette)
+            for yy in range(0,side,8):
+                for xx in range(0,side,8):
+                    bounds=xx,yy,xx+8,yy+8
+                    alpha=oriented.getchannel('A').crop(bounds).tobytes()
+                    color=ink.crop(bounds).tobytes()
+                    yield i, flip, yy//8, alpha, color
+
+
 def pack(base,out):
     out.mkdir(parents=True,exist_ok=True)
     manifest=json.loads((base/'chapter.json').read_text())
@@ -66,33 +91,20 @@ def pack(base,out):
     cine+='\n'+array('magic_cut_xy',cut_xy)
     header=[array('magic_map',map_index),
             'static const unsigned int magic_restore[] = {'+','.join(map(str,ids))+'};']
-    glyphs=Image.open(ART/'magias.png').convert('RGBA')
     locations=[]
     sprite_ids=[]
     offset=PAGE
-    for i in range(9):
-        x,y=i%3,i//3
-        cel=glyphs.crop((x*glyphs.width//3,y*glyphs.height//3,(x+1)*glyphs.width//3,(y+1)*glyphs.height//3))
-        alpha=cel.getchannel('A').point(lambda a:255 if a>=170 else 0)
-        cel.putalpha(alpha);cel=cel.crop(alpha.getbbox())
-        side=16 if i in (3,4,5) else 8
-        cel.thumbnail((side,side),Image.Resampling.LANCZOS)
-        full=Image.new('RGBA',(side,side));full.paste(cel,((side-cel.width)//2,(side-cel.height)//2))
-        for flip in (False,True):
+    last=None
+    for glyph,flip,_,alpha,color in glyph_stamps(palette):
+        if (glyph,flip)!=last:
             sprite_ids.append(len(locations))
-            oriented=full.transpose(Image.Transpose.FLIP_LEFT_RIGHT) if flip else full
-            ink=native(oriented,oriented.size,palette)
-            for yy in range(0,side,8):
-                for xx in range(0,side,8):
-                    bounds=xx,yy,xx+8,yy+8
-                    alpha=oriented.getchannel('A').crop(bounds).tobytes()
-                    color=ink.crop(bounds).tobytes()
-                    strip=b''.join(planar([c if a>=100 else b for c,a,b in zip(color,alpha,tile)]) for tile in backgrounds)
-                    if offset+len(strip)>PAGE:
-                        banks.extend(b'\xff'*(-len(banks)%PAGE))
-                        offset=0
-                    locations.append((first+len(banks)//PAGE,0x8000+offset))
-                    banks.extend(strip);offset+=len(strip)
+            last=(glyph,flip)
+        strip=b''.join(planar([c if a>=100 else b for c,a,b in zip(color,alpha,tile)]) for tile in backgrounds)
+        if offset+len(strip)>PAGE:
+            banks.extend(b'\xff'*(-len(banks)%PAGE))
+            offset=0
+        locations.append((first+len(banks)//PAGE,0x8000+offset))
+        banks.extend(strip);offset+=len(strip)
     banks.extend(b'\xff'*(-len(banks)%PAGE))
     if first+len(banks)//PAGE>64: raise ValueError('Spell art exceeds the cartridge')
     header.extend([array('magic_glyph',sprite_ids),array('magic_bank',[b for b,_ in locations]),

@@ -1,0 +1,350 @@
+{
+  "comparacao_framebuffer": {
+    "arquivo": "out/qa/palma_tres_elenco/tres_versoes.png",
+    "sha256": "747be8201db6f955308cdb7fd0b18a19f9c276b3292751285a6022d876df5719"
+  },
+  "rom": "out/candidates/palma_tres_elenco/rom/master_of_fighters.sms",
+  "sha256": "50bc2ba6e55ec9f3517ce36a3ac518eb3a5f49b200dcdbc942a1022dc0f4d685",
+  "bytes": 1048576,
+  "emulador": "Emulicious NTSC, controles privados de P1/P2, FM habilitado",
+  "rom_v2_preservada": {
+    "versao": 2,
+    "nome": "horizonte",
+    "arte": "palma_horizonte.png",
+    "arte_sha256": "021b061320fb635e64efb99682a3e3f52f774e738c58b8c2eb57d0d9ed972e7e",
+    "rom_preservada": "out/candidates/alis_palma_horizonte_r3/rom/master_of_fighters.sms",
+    "rom_sha256": "84ca34b7475a54bce7e114140f427813fea05eda950c64d1ac335f82a647f8ea",
+    "copia_verificada_raiz_fabrica": ".runtime/backups/mof-palma-v2-84ca34b7475a.zip",
+    "copia_sha256": "e5ef1d3e3503a17e47b0aeb2f549fbf5824b4804ce4909e46ec50a9452e5aca4"
+  },
+  "arte_e_direcao": "data/source_art/scenes/alis_espacoporto/versoes.json",
+  "cenarios": [
+    {
+      "versao": 1,
+      "banco": 47,
+      "sha_arena_com_padding": "04a4f166b10232f4ab2643e4fff91d21fefa36bab55c8d5c7383a9b719ea9da0",
+      "bytes_da_arena": 10553
+    },
+    {
+      "versao": 2,
+      "banco": 36,
+      "sha_arena_com_padding": "5f0e31fcb7e50626c1f03bd82275a73f054543462e4d2ea6304530d7b9092f3c",
+      "bytes_da_arena": 10553
+    },
+    {
+      "versao": 3,
+      "banco": 48,
+      "sha_arena_com_padding": "af0904e543bcf4d23d2698d043418aa4cb4287c31214a0de76240819a545339e",
+      "bytes_da_arena": 10553
+    }
+  ],
+  "elenco": {
+    "origem": "out/candidates/alis_ficha_r5/rom/master_of_fighters.sms",
+    "sha256": "7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b",
+    "bancos_identicos_a_origem": [
+      "2–23 lutadores",
+      "39–46 Guardiões e reações"
+    ]
+  },
+  "conversao": {
+    "arena_banks": [
+      47,
+      36,
+      48
+    ],
+    "cards": [
+      49,
+      50,
+      51
+    ],
+    "camera": [
+      [
+        35,
+        39186
+      ],
+      [
+        33,
+        40274
+      ],
+      [
+        34,
+        40306
+      ]
+    ],
+    "stamp_streams": 98,
+    "remaining_tail_bytes": 37238,
+    "stage_sha256": [
+      "04a4f166b10232f4ab2643e4fff91d21fefa36bab55c8d5c7383a9b719ea9da0",
+      "5f0e31fcb7e50626c1f03bd82275a73f054543462e4d2ea6304530d7b9092f3c",
+      "af0904e543bcf4d23d2698d043418aa4cb4287c31214a0de76240819a545339e"
+    ]
+  },
+  "composicoes_de_magia_verificadas_por_versao": [
+    2048,
+    2090,
+    2368
+  ],
+  "decisoes": [
+    "V1 indexada pela primeira pista. V2 indexada pela revisão anteriormente chamada horizonte R3. O seletor usa a numeração de arte pedida pelo proprietário.",
+    "V3 usa a pintura do terminal ao anoitecer. Na primeira conversão os reflexos do piso tomavam emprestados tiles da fachada. A conversão seguinte separou os materiais. A candidata integrada conserva as juntas, luminárias e reflexos extraídos da pintura em módulos próprios.",
+    "Os três mapas, os três cartões e os compostos de cada especial cabem no cartucho de 64 bancos. Cada motivo de projétil usa as linhas alcançáveis de sua trajetória e conserva a orientação dos tiles de fundo.",
+    "A seleção é cíclica por borda do direcional de P1. O botão 1 confirma. Depois de tocar numa direção a tela espera pelo jogador. O Versus começa na V3 e a História usa a V2."
+  ],
+  "receita": {
+    "empacotador": "tools/pack_palma_versions.py",
+    "argumentos": [
+      "out/diagnostics/alis_palma_horizonte_r3/matchup",
+      "out/diagnostics/alis_ficha_r4/matchup",
+      "../../.runtime/downloads",
+      "out/diagnostics/palma_tres_elenco"
+    ],
+    "compilador": "SDCC : mcs51/z80/z180/r2k/r2ka/r3ka/r4k/r5k/r6k/sm83/tlcs90/ez80/z80n/r800/ds390/pic16/pic14/TININative/ds400/hc08/s08/stm8/pdk13/pdk14/pdk15/mos6502/mos65c02/f8/f8l 4.6.0 #16555 (Linux)\npublished under GNU General Public License (GPL)",
+    "compilacao": "out/candidates/palma_tres_elenco/build_record.json",
+    "manifesto": "out/diagnostics/palma_tres_elenco/chapter.json",
+    "copia_insumos": "out/qa/palma_tres_elenco/fontes-integradas.zip",
+    "sha256_insumos": "e21912816e31d1beb24fb84768fdf2570d649465b7f339db1df9f9177b5126d7"
+  },
+  "host": {
+    "lancador": "Fôlego, 1 job. Reserva 760 MiB de RAM e 170 MiB de disco. CPUQuota 70%.",
+    "telemetria": "out/qa/alis_palma_horizonte/palma-tres-elenco-host.jsonl",
+    "pico_termico_C": 61.0,
+    "minimo_mem_disponivel_KiB": 8401220,
+    "pausas_termicas": 0
+  },
+  "sessoes": {
+    "v1": {
+      "id": "72e52cc7486b41d8ad73ec2c82ab40de",
+      "encerrada": "closed",
+      "evidencia": "out/qa/palma_tres_elenco/v1/observations.json"
+    },
+    "v2": {
+      "id": "3aec4a2399d34013a5d164eabbdf00d2",
+      "encerrada": "closed",
+      "evidencia": "out/qa/palma_tres_elenco/v2/observations.json"
+    },
+    "v3": {
+      "id": "82b4d5f0384a40c08c383800a5b1b33d",
+      "encerrada": "closed",
+      "evidencia": "out/qa/palma_tres_elenco/v3/observations.json"
+    },
+    "historia": {
+      "id": "6ab79de9c5f9468db714d2098014d89a",
+      "encerrada": "closed",
+      "evidencia": "out/qa/palma_tres_elenco/historia/observations.json"
+    },
+    "misto": {
+      "id": "74fae3f396a44ddf9ab9bbc65c447afb",
+      "encerrada": "closed",
+      "evidencia": "out/qa/palma_tres_elenco/misto/observations.json"
+    },
+    "fps": {
+      "id": "d00ed8400cbd415b97f51d9b5d356d87",
+      "encerrada": "closed",
+      "evidencia": "out/qa/palma_tres_elenco/fps/observations.json"
+    },
+    "magias": {
+      "id": "543edda3f743443b8949ac4d1186366e",
+      "encerrada": "closed",
+      "evidencia": "out/qa/palma_tres_elenco/magias/observations.json"
+    }
+  },
+  "versoes_no_emulador": {
+    "v1": {
+      "choices": [
+        {
+          "name": "abertura",
+          "version": 3,
+          "pan": 20,
+          "sha256": "f77334a0867f619db68dfd2da10b8426f3f446b0c2d207a4bcb4285519e20fc8"
+        },
+        {
+          "name": "entrada",
+          "version": 3,
+          "pan": 0,
+          "sha256": "13afd04ff8f28f37a33d2660932008464522e65293cdb0821a15fa949c9dc451"
+        },
+        {
+          "name": "toque",
+          "version": 1,
+          "pan": 20,
+          "sha256": "adc2acbbeb717df72dd147a89085a3cb9c46ed017461cb91af529e5d70403bbf"
+        },
+        {
+          "name": "baixo_2",
+          "version": 2,
+          "pan": 0,
+          "sha256": "286d04720e57a91384bb81466366030aad5b5f582af982dc452b7c428c45a4df"
+        },
+        {
+          "name": "baixo_3",
+          "version": 3,
+          "pan": 0,
+          "sha256": "13afd04ff8f28f37a33d2660932008464522e65293cdb0821a15fa949c9dc451"
+        },
+        {
+          "name": "baixo_1",
+          "version": 1,
+          "pan": 0,
+          "sha256": "34e74b885308f064f5a212018caa620e8bd8d34a397c55cbe2cfafddb5434c48"
+        }
+      ],
+      "stage_match_pixels": 2664,
+      "stage_pixels": 2664
+    },
+    "v2": {
+      "choices": [
+        {
+          "name": "abertura",
+          "version": 3,
+          "pan": 20,
+          "sha256": "f77334a0867f619db68dfd2da10b8426f3f446b0c2d207a4bcb4285519e20fc8"
+        },
+        {
+          "name": "entrada",
+          "version": 3,
+          "pan": 0,
+          "sha256": "13afd04ff8f28f37a33d2660932008464522e65293cdb0821a15fa949c9dc451"
+        },
+        {
+          "name": "toque",
+          "version": 2,
+          "pan": 20,
+          "sha256": "67acba4f7fc96ff5ead727b026f8e856d0a8333ca1ac5bb607a196992f3acfdb"
+        },
+        {
+          "name": "cima_1",
+          "version": 1,
+          "pan": 0,
+          "sha256": "34e74b885308f064f5a212018caa620e8bd8d34a397c55cbe2cfafddb5434c48"
+        },
+        {
+          "name": "cima_3",
+          "version": 3,
+          "pan": 0,
+          "sha256": "13afd04ff8f28f37a33d2660932008464522e65293cdb0821a15fa949c9dc451"
+        },
+        {
+          "name": "cima_2",
+          "version": 2,
+          "pan": 0,
+          "sha256": "286d04720e57a91384bb81466366030aad5b5f582af982dc452b7c428c45a4df"
+        }
+      ],
+      "stage_match_pixels": 2664,
+      "stage_pixels": 2664
+    },
+    "v3": {
+      "choices": [
+        {
+          "name": "abertura",
+          "version": 3,
+          "pan": 20,
+          "sha256": "f77334a0867f619db68dfd2da10b8426f3f446b0c2d207a4bcb4285519e20fc8"
+        },
+        {
+          "name": "entrada",
+          "version": 3,
+          "pan": 0,
+          "sha256": "13afd04ff8f28f37a33d2660932008464522e65293cdb0821a15fa949c9dc451"
+        },
+        {
+          "name": "toque",
+          "version": 1,
+          "pan": 20,
+          "sha256": "adc2acbbeb717df72dd147a89085a3cb9c46ed017461cb91af529e5d70403bbf"
+        },
+        {
+          "name": "volta",
+          "version": 3,
+          "pan": 20,
+          "sha256": "f77334a0867f619db68dfd2da10b8426f3f446b0c2d207a4bcb4285519e20fc8"
+        }
+      ],
+      "stage_match_pixels": 2664,
+      "stage_pixels": 2664,
+      "cloud_px_per_96_vdp": 12
+    }
+  },
+  "audio_fm": {
+    "arquivo": "out/qa/palma_tres_elenco/v3/battle.wav",
+    "sha256": "cb4ff62f1c8cf97b8f791edc918311b8773e04eb0f1b30e02cb041959487f879"
+  },
+  "historia_fire": {
+    "rotulo": "historia_fire",
+    "hits": [
+      1,
+      0
+    ],
+    "pixels_do_fundo_v2": 1944,
+    "pixels_examinados": 1944,
+    "regiao": "Y58–75, X40–95 e X136–187. A CPU está no ar sobre a parcela central."
+  },
+  "vblank": {
+    "misto": {
+      "verdicto": "pass",
+      "vline_min": 200,
+      "vovf_delta": 0,
+      "amostras": 1,
+      "vline_kind": "sealed_min",
+      "frames_medidos": 3000,
+      "frames_rom_final": 3078,
+      "janela_s_min": 50.0,
+      "janela_selada": true,
+      "schema": "smsforge.worst_frame/v2",
+      "sealed_field": "vline_min"
+    },
+    "especiais": {
+      "selado": 1,
+      "vcount_min": 200,
+      "overruns": 0
+    }
+  },
+  "fps_ntsc_por_janela": {
+    "historia_guarda": [
+      43.018373242732956,
+      44.81266583948476,
+      43.355732343755854
+    ],
+    "versus_carga_mista": [
+      47.43883852841391,
+      46.939482333377974,
+      46.44012613834204
+    ],
+    "versus_especiais": [
+      30.46072789719209,
+      58.4246748192045,
+      48.93690711352171,
+      52.43240047877327,
+      48.93690711352171,
+      48.93690711352171,
+      53.43111286884514,
+      48.93690711352171,
+      48.93690711352171,
+      52.43240047877327,
+      31.459440287263963,
+      56.92660623409669,
+      52.931756673809204,
+      48.437550918485776,
+      48.93690711352171,
+      53.43111286884514,
+      48.93690711352171,
+      48.93690711352171,
+      52.931756673809204,
+      31.459440287263963,
+      56.92660623409669,
+      52.931756673809204,
+      48.93690711352171,
+      48.93690711352171,
+      52.931756673809204,
+      48.93690711352171
+    ]
+  },
+  "minimos": {
+    "historia_guarda": 43.018373242732956,
+    "versus_carga_mista": 46.44012613834204,
+    "versus_especiais": 30.46072789719209
+  },
+  "piso_fps": 58,
+  "atingiu_piso_por_janela": false,
+  "arte_v3": "candidata à avaliação do proprietário"
+}

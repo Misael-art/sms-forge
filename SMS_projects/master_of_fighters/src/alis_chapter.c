@@ -11,6 +11,17 @@ void mof_chapter_select(const MofChapterPresentation *presentation)
 {
     mof_presentation=presentation;
 }
+#ifdef MOF_PALMA_VERSIONS
+#include "matchup.h"
+uint8_t mof_stage_choice;
+static uint8_t active_arena, signal_x,signal_y,reader_x,reader_y;
+static const uint8_t arena_banks[]=STAGE_ARENA_BANKS;
+static const uint8_t signal_cols[]=STAGE_SIGN_X, signal_rows[]=STAGE_SIGN_Y;
+static const uint8_t reader_cols[]=STAGE_PORT_SCAN_X, reader_rows[]=STAGE_PORT_SCAN_Y;
+#define ARENA_BANK active_arena
+#else
+#define ARENA_BANK mof_presentation->arena_bank
+#endif
 static uint8_t last_pad;
 static uint8_t rhythm[2], gesture[2], direction[2], last_face[2];
 static uint8_t old_seconds, old_banner, old_gauge[2], banner_tiles, shutter;
@@ -71,8 +82,9 @@ static uint8_t flight_clock, flight[2], scanner;
 /* Weapon tiles are precomposed in screen space. Rows 12–19 stay fixed. */
 #ifdef MOF_PORT_CLOUDS
 #include "palma_cloud_raster.inc"
-#else
-static void port_raster(void)
+#endif
+#if !defined(MOF_PORT_CLOUDS) || defined(MOF_PALMA_VERSIONS)
+static void port_classic_raster(void)
 {
     uint8_t line=SMS_getVCount();
     if (line < 48u) {
@@ -88,10 +100,19 @@ static void port_raster(void)
 
 void mof_port_raster_start(void)
 {
-    SMS_setLineInterruptHandler(port_raster);
 #ifdef MOF_PORT_CLOUDS
-    SMS_setLineCounter(15);
+#ifdef MOF_PALMA_VERSIONS
+    if (active_arena==STAGE_CLASSIC_BANK) {
+        SMS_setLineInterruptHandler(port_classic_raster);
+        SMS_setLineCounter(31);
+    } else
+#endif
+    {
+        SMS_setLineInterruptHandler(port_raster);
+        SMS_setLineCounter(15);
+    }
 #else
+    SMS_setLineInterruptHandler(port_classic_raster);
     SMS_setLineCounter(31);
 #endif
     SMS_enableLineInterrupt();
@@ -100,7 +121,9 @@ void mof_port_raster_start(void)
 static void port_bird(uint8_t bird, uint8_t advance)
 {
     uint8_t phase=flight[bird], column=phase>>2;
-#ifdef MOF_PORT_CLOUDS
+#if defined(MOF_PALMA_VERSIONS)
+    uint8_t row=active_arena==STAGE_CLASSIC_BANK ? 3u+bird : 3u;
+#elif defined(MOF_PORT_CLOUDS)
     const uint8_t row=3; /* Both birds circle in clear sky, 17 columns apart. */
 #else
     uint8_t row=3u+bird;
@@ -176,7 +199,12 @@ static void show_page(uint8_t page)
     if (page==MOF_GUARDIANS_PAGE+2u) SMS_loadSpritePalette((const uint8_t *)0xbff0);
 #endif
 #ifdef MOF_ALIS_MATCHUP
-    if (page==MOF_VERSUS_PAGE) SMS_loadSpritePalette((const uint8_t *)0xbff0);
+#ifdef MOF_PALMA_VERSIONS
+    if (page>=MOF_VERSUS_PAGE && page<MOF_VERSUS_PAGE+3)
+#else
+    if (page==MOF_VERSUS_PAGE)
+#endif
+        SMS_loadSpritePalette((const uint8_t *)0xbff0);
 #endif
     SMS_loadTiles(data+18,0,length);
     SMS_loadTileMap(0,0,data+18+length,1536);
@@ -215,7 +243,9 @@ uint8_t mof_matchup_keys(void)
 
 static void show_matchup(uint8_t timed)
 {
+#ifndef MOF_PALMA_VERSIONS
     show_page(MOF_VERSUS_PAGE);
+#endif
     SMS_mapROMBank(MOF_PAN_BANK);
     mof_matchup_pan(timed);
 }
@@ -243,6 +273,14 @@ static void chapter_title(void)
 #ifdef MOF_ALIS_MATCHUP
 /* Menu code runs from the slot used by page data and songs. Re-select its
    bank in fixed ROM before returning from each operation that changes slots. */
+#ifdef MOF_PALMA_VERSIONS
+void mof_camera_strip(uint8_t bank,const uint8_t *strip)
+{
+    SMS_mapROMBank(bank);
+    SMS_loadTileMapArea(2,11,strip,18,10);
+    SMS_mapROMBank(MOF_PAN_BANK);
+}
+#endif
 void menu_page(uint8_t page)
 {
     show_page(page);
@@ -275,6 +313,9 @@ void menu_intro(void)
 
 void mof_chapter_menu(void)
 {
+#ifdef MOF_PALMA_VERSIONS
+    if (!chapter.target) mof_stage_choice=2;
+#endif
     SMS_mapROMBank(MOF_PAN_BANK);
     mof_banked_menu();
 }
@@ -317,11 +358,17 @@ void mof_chapter_round(void)
 
 void mof_chapter_arena(void)
 {
-    SMS_mapROMBank(mof_presentation->arena_bank);
+#ifdef MOF_PALMA_VERSIONS
+    uint8_t version=chapter.story ? 1 : mof_stage_choice;
+    active_arena=arena_banks[version];
+    signal_x=signal_cols[version];signal_y=signal_rows[version];
+    reader_x=reader_cols[version];reader_y=reader_rows[version];
+#endif
+    SMS_mapROMBank(ARENA_BANK);
 #ifdef MOF_ALIS_MAGIC
     SMS_mapROMBank(MAGIC_PATTERN_BANK);
     SMS_loadTiles((const void *)MAGIC_BARS_ADDR,279,256);
-    SMS_mapROMBank(mof_presentation->arena_bank);
+    SMS_mapROMBank(ARENA_BANK);
 #endif
 #ifdef MOF_PORT_SKY
     SMS_loadBGPalette((const void *)MOF_PORT_PALETTE);
@@ -368,7 +415,7 @@ static void chapter_banner(uint8_t banner)
 {
     uint8_t i;
     if (old_banner!=banner) {
-        SMS_mapROMBank(mof_presentation->arena_bank);
+        SMS_mapROMBank(ARENA_BANK);
         if (old_banner!=255) {
             const uint8_t *map=(const uint8_t *)(0x8000u+MOF_ARENA_BYTES);
             SMS_loadTileMap(12,4,map+2*(4*32+12),16);
@@ -379,7 +426,7 @@ static void chapter_banner(uint8_t banner)
     }
     if (banner_tiles<16) {
         const uint8_t *slice=(const uint8_t *)(MOF_BANNER_DATA+((uint16_t)banner<<9)+((uint16_t)banner_tiles<<5));
-        SMS_mapROMBank(mof_presentation->arena_bank);
+        SMS_mapROMBank(ARENA_BANK);
         UNSAFE_SMS_VRAMmemcpy128((MOF_BANNER_TILE+banner_tiles)*32u,slice);
         banner_tiles+=4;
         if (banner_tiles==16) {
@@ -400,7 +447,11 @@ void mof_chapter_stage_hud(void)
         uint8_t scan=(chapter.subsecond>=32 && chapter.subsecond<43);
         if (scanner!=scan) {
             scanner=scan;
+#ifdef MOF_PALMA_VERSIONS
+            chapter_cell(reader_x,reader_y,MOF_PORT_SCANNER+scan);
+#else
             chapter_cell(MOF_PORT_SCAN_X,MOF_PORT_SCAN_Y,MOF_PORT_SCANNER+scan);
+#endif
         }
         if (!(++flight_clock&3u)) port_bird((flight_clock>>2)&1u,1);
 #else
@@ -408,7 +459,11 @@ void mof_chapter_stage_hud(void)
 #endif
         if (shutter!=light) {
             shutter=light;
+#ifdef MOF_PALMA_VERSIONS
+            chapter_cell(signal_x,signal_y,MOF_SIGN_TILE+light);
+#else
             chapter_cell(MOF_SIGN_X,MOF_SIGN_Y,MOF_SIGN_TILE+light);
+#endif
         }
     }
     if (old_seconds!=chapter.seconds) {

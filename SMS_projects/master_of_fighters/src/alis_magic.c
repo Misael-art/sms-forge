@@ -49,6 +49,13 @@ static const int8_t arc[32]={0,3,5,8,10,12,13,14,14,13,12,10,8,5,3,0,
 void mof_magic_reset(void) {
     memset(&mof_magic,0,sizeof(mof_magic));
     mof_chapter_pnt.count=0;
+#ifdef MOF_PALMA_VERSIONS
+    uint8_t version=chapter.story ? 1 : mof_stage_choice;
+    magic_map=magic_map_versions[version];
+    magic_restore=magic_restore_versions[version];
+    magic_base=magic_base_versions[version];
+    magic_bank=magic_bank_versions[version];
+#endif
 }
 
 static uint8_t direction(uint8_t keys,uint8_t face) {
@@ -350,7 +357,11 @@ static void append_glyph(uint16_t cell,uint16_t stamp) __naked
         ld (hl),d
         inc hl
         push hl                 ; next address field
+#ifdef MOF_PALMA_VERSIONS
+        ld hl,(_magic_map)
+#else
         ld hl,#_magic_map
+#endif
         add hl,de
         ld l,(hl)
         ld h,#0
@@ -365,7 +376,11 @@ static void append_glyph(uint16_t cell,uint16_t stamp) __naked
         push hl
         add hl,hl
         push de
+#ifdef MOF_PALMA_VERSIONS
+        ld de,(_magic_base)
+#else
         ld de,#_magic_base
+#endif
         add hl,de
         ld e,(hl)
         inc hl
@@ -379,7 +394,11 @@ static void append_glyph(uint16_t cell,uint16_t stamp) __naked
         ld (bc),a
         inc bc
         pop hl
+#ifdef MOF_PALMA_VERSIONS
+        ld de,(_magic_bank)
+#else
         ld de,#_magic_bank
+#endif
         add hl,de
         ld a,(hl)
         ld (bc),a
