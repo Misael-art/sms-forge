@@ -1,5 +1,9 @@
 # 11-gdd — master_of_fighters
 
+## Revisão de combate R8
+
+Myau empurra por fase e derruba no mergulho. O Laconian Slash passa a ser um corte antiaéreo ancorado na Alis, com risco de punição na guarda. A Palma encadeia estocada, corte descendente no chão e salto dourado que carrega o alvo. Os Guardiões devolvem o adversário em queda à arena antes do resultado. A revisão também define a resposta por força, defesa e chip, recuperação de quedas, prioridade de comandos e os três arcos de salto. [Tempos, comandos e critérios](command-list-alis-combate-r8.md)
+
 ## Coreografia dos especiais de Alis
 
 Fire lança uma chama com volume. Laconian Slash forma uma onda vertical com a passagem da espada. Myau aparece pequeno durante a concentração, come a noz, avança, cresce com o salto e mergulha alado. Cada forma dá um contato próprio e aumenta o prêmio. O mergulho termina no pouso. A estocada forte confirmada abre uma janela para chamar Myau durante a recuperação. Rising Saber forte sobe em arco para a frente em dois contatos, com queda no segundo acerto limpo. Passo de Escudo afasta a rival e marca o choque com uma centelha. Palma encadeia a estocada, a subida de dois contatos e a subida dourada que derruba. Estrelas assinalam a tontura. A boca de Alis alterna duas exposições durante sua fala nos Guardiões. Rest e Chat sinalizam ganho com motivos PSG distintos. [Comandos e calibração](padrao_moveset_especiais.md#revisão-r7b-dos-especiais-após-o-vídeo-da-r6b)

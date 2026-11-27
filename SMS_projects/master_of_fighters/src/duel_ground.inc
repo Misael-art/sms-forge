@@ -1,5 +1,7 @@
 /* Settled ground state of the arena duel. Transitions, crossings, normals
    and stale collision geometry fall through to the complete rules step. */
+#include "../inc/duel_combat.h"
+
 static inline uint8_t ground_settled(uint8_t p, uint8_t keys)
 {
     const MofDuelBody *b=&duel.body[p];
@@ -21,7 +23,13 @@ static uint8_t ground_phase(const MofDuelFighter *f)
     if (f->state==MOF_DUEL_READY) return 0;
     elapsed=duel.tick+1u-f->state_since;
     if (f->state==MOF_DUEL_HIT && !f->thrown && elapsed<f->hit_duration) return 0;
-    if (f->state==MOF_DUEL_BLOCK && elapsed<MOF_DUEL_BLOCK_TICKS) return 0;
+    if (f->state==MOF_DUEL_BLOCK && elapsed<
+#ifdef MOF_ALIS_COMBAT
+        f->hit_duration
+#else
+        MOF_DUEL_BLOCK_TICKS
+#endif
+       ) return 0;
     if (f->state!=MOF_DUEL_ATTACK || f->standing_normal>=MOF_DUEL_AIR_NORMALS) return 255;
     move=&f->def->moves[f->standing_normal];
     if (elapsed>=move->duration || (!f->spent &&
@@ -61,6 +69,13 @@ static uint8_t ground_step(uint8_t a,uint8_t b)
     int16_t x,y,gap;
     uint8_t phase_a,phase_b;
     uint8_t right=duel.fighters[0].face_right;
+#ifdef MOF_ALIS_COMBAT
+    if (mof_combat.slide[0] || mof_combat.slide[1] ||
+        mof_combat.command_age[0] || mof_combat.command_age[1] ||
+        mof_combat.guard_window[0] || mof_combat.guard_window[1] ||
+        ((a^duel.fighters[0].keys)&(MOF_DUEL_LEFT|MOF_DUEL_RIGHT)) ||
+        ((b^duel.fighters[1].keys)&(MOF_DUEL_LEFT|MOF_DUEL_RIGHT))) return 0;
+#endif
     a &= duel.fighters[0].def->vertical | (uint8_t)~(MOF_DUEL_UP|MOF_DUEL_DOWN);
     b &= duel.fighters[1].def->vertical | (uint8_t)~(MOF_DUEL_UP|MOF_DUEL_DOWN);
     if (duel.hitstop || !ground_settled(0,a) || !ground_settled(1,b) ||
@@ -70,6 +85,9 @@ static uint8_t ground_step(uint8_t a,uint8_t b)
     phase_a=ground_phase(&duel.fighters[0]);phase_b=ground_phase(&duel.fighters[1]);
     if (phase_a==255 || phase_b==255) return 0;
     ++duel.tick;
+#ifdef MOF_ALIS_COMBAT
+    mof_combat.spark[0]=mof_combat.spark[1]=0;
+#endif
     x=ground_player(0,a,phase_a);
     y=ground_player(1,b,phase_b);
     gap=right ? y-x : x-y;

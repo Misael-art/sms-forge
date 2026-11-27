@@ -1,4 +1,9 @@
 #include "../inc/alis_magic.h"
+#include "../inc/duel_combat.h"
+#ifdef MOF_ALIS_COMBAT
+static const uint8_t magic_landing_cue[]={0xce,0x76,0xd3,0xe7,0xf4,0x38,0xc2,0x7b,0xd6,0xf8,0x39,
+                                         0xdb,0xfc,0x38,0xdf,0xff,0};
+#endif
 #ifdef MOF_ALIS_CHOREOGRAPHY
 /* Original PSG recovery cues. HP is a rising arpeggio with a soft tail.
    MP answers its first note an octave above, then fades. */
@@ -26,6 +31,10 @@ void mof_magic_sound(void)
 #ifdef MOF_ALIS_FEEDBACK
     if (event==MOF_SFX_HP) cue=magic_rest_cue;
     else if (event==MOF_SFX_MP) cue=magic_mp_cue;
+    else
+#endif
+#ifdef MOF_ALIS_COMBAT
+    if (event==MOF_SFX_LANDING) cue=magic_landing_cue;
     else
 #endif
     if (event==REST || event==CHAT || event==STUN) cue=magic_rest_cue;

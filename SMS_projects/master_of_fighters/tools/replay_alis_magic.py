@@ -76,6 +76,7 @@ def main():
     isolated.DEFAULT_ROOT=PROJECT.parents[1]/'.runtime/qa'
     session=isolated.start(rom,sms_fm=args.fm)
     log=dict(session_id=session.name,rom_sha256=record['rom_sha256'],steps=[])
+    arena_return='-DMOF_ALIS_COMBAT=1' in record['compiler_defines']
     def save():isolated.atomic(out/'observations.json',log)
     def ctl(*pairs):
         return isolated.sequence(session,[dict(p1=a,p2=b,frames=n) for a,b,n in pairs])
@@ -163,6 +164,29 @@ def main():
                 assert len({tuple(s['clock']) for s in active})==1
                 assert samples[-1]['duration']==0 and samples[-1]['presented']==12
             seen=capture_film('plano_')
+            if arena_return:
+                target='p'+str(2-player)
+                returned=[]
+                for _ in range(105):
+                    wait(1)
+                    raw=ram(0xc770,RECORD_BYTES)
+                    if raw[:4]!=b'MFD1' or raw[4]&1:
+                        continue
+                    d=decode(raw)
+                    phase=ram(addr+5,1)[0]
+                    actor=d[target]
+                    returned.append(dict(phase=phase,state=actor['state'],pivot=actor['pivot'],
+                                         vdp=isolated.request(session,'status')['frame']))
+                    if phase==4 and actor['state']==5 and not (out/'retorno_arena.png').exists():
+                        observe('retorno_arena',True)
+                    if phase==3 and actor['state']==4:
+                        break
+                log['arena_return']=returned
+                airborne=[row for row in returned if row['phase']==4 and row['state']==5]
+                grounded=[row for row in returned if row['phase']==4 and row['state']==6]
+                assert airborne and grounded and returned[-1]['phase']==3
+                assert grounded[0]['pivot'][1]>airborne[0]['pivot'][1]
+                assert grounded[0]['pivot'][0]!=airborne[0]['pivot'][0]
         finally:
             log['movie']=isolated.request(session,'record-steps-stop')
         if '-DMOF_ALIS_FEEDBACK=1' in record['compiler_defines']:

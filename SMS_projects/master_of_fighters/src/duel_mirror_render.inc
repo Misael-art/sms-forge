@@ -621,6 +621,10 @@ static void mirror_render_boot(void)
         uint8_t face = duel.fighters[player].face_right;
         uint8_t startup[4] = {face, face ^ 1u, MOF_MIRROR_ALIS_CROUCH_TRANSITION * 2u + face,
                               MOF_MIRROR_HIT_HEAD * 2u + face};
+#ifdef MOF_ALIS_COMBAT
+        if (mof_combat.cutscene_return && duel.fighters[player].state==MOF_DUEL_FALL)
+            startup[0]=MOF_MIRROR_FALL*2u+face;
+#endif
         for (slot = 0u; slot < MIRROR_SLOT_COUNT; ++slot) {
             const MofMirrorFrame *frame = &mirror_frames[startup[slot]];
             const uint8_t *packet = mirror_packet(frame, player);
@@ -632,9 +636,9 @@ static void mirror_render_boot(void)
 #endif
             mirror_cache[player][slot].loaded = frame->count;
         }
-        mirror_submit[player].frame = face;
+        mirror_submit[player].frame = startup[0];
         mirror_submit[player].x = (uint8_t)duel.fighters[player].x;
-        mirror_submit[player].y = 0;
+        mirror_submit[player].y = duel.body[player].y_offset;
         mirror_submit_slot[player] = 0u;
     }
     mirror_old_bg_count = mirror_bg_count = mirror_bg_dirty = mirror_upload_count = 0u;

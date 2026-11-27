@@ -303,6 +303,7 @@ def main():
                     contact_flag_seen=bool(contact['p1']['contact']),contact_tick=contact['tick'],
                     defender_state=contact['p2']['state'],damage=published[hit-1]['p2']['life']-contact['p2']['life'],
                     frozen_publications=frozen,stun_ticks=free['tick']-contact['tick'],
+                    recoil_px=abs(free['p2']['pivot'][0]-contact['p2']['pivot'][0]),
                     frozen_pivot_x=xs,repeated_contact=sum(1 for row in published[hit+1:hit+frozen+1] if row['p1']['contact']),
                     meter_before=meter_before,meter_after=state()[9:11],skipped_partial=skipped,
                     publications=published)
@@ -322,10 +323,12 @@ def main():
             light=exchange('leve_acerto',[(16,3)],0)
             heavy=exchange('forte_acerto',[(16,16)],0,video=True)
             guard=exchange('forte_defendido',[(16,16)],8)
+            revised_combat='-DMOF_ALIS_COMBAT=1' in record['compiler_defines']
             checks={
                 'leve': light['contact']==1 and light['frozen_publications']==4 and light['stun_ticks']==10,
                 'forte': heavy['contact']==1 and heavy['frozen_publications']==11 and heavy['stun_ticks']==20,
-                'defesa': guard['contact']==2 and guard['frozen_publications']==11 and guard['stun_ticks']==3,
+                'defesa': guard['contact']==2 and guard['frozen_publications']==11 and
+                          guard['stun_ticks']==(9 if revised_combat else 3) and guard['damage']==0,
                 'tremor_forte': len(set(heavy['frozen_pivot_x']))>=2,
                 'sem_tremor_leve': len(set(light['frozen_pivot_x']))==1,
                 'sem_tremor_defesa': len(set(guard['frozen_pivot_x']))==1,
@@ -333,6 +336,8 @@ def main():
                 'medidor_unico': all(r['meter_after'][0]-r['meter_before'][0]<=1 and r['meter_after'][1]-r['meter_before'][1]<=1
                                      for r in (light,heavy,guard)),
             }
+            if revised_combat:
+                checks['recuo_por_forca']=heavy['recoil_px']>light['recoil_px']>0
             log['impact_checks']=checks
             save()
             if not all(checks.values()): raise RuntimeError(f'Impact checks failed: {checks}')

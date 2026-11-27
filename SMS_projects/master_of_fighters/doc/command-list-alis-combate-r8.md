@@ -1,0 +1,38 @@
+# Alis Landale · Command List e contrato de combate R8
+
+Este adendo especifica as alterações desde a R7b do capítulo. A contagem usa quadros de lógica a 60 Hz. Hiperpausa e hitstop suspendem o relógio da ação. Os tempos e as distâncias abaixo são os valores especificados para a candidata. Meça o resultado apresentado em emulador antes de aprovar a revisão. [Ficha técnica](ficha_tecnica_alis_g6e_v1.docx) · [Command List e metodologia](padrao_moveset_especiais.md)
+
+## Sequências revisadas
+
+| Golpe | Comando | Ordem de animação | Acerto limpo | Guarda e saída |
+| --- | --- | --- | --- | --- |
+| Investida de Myau | ↓↙← + 2, com 4 MP | Pequeno com a noz na hiperpausa. Corrida ao voltar o relógio. Salto e crescimento intermediário. Mergulho alado e pouso. | Pequeno 4 HP, transição 6 HP e mergulho 10 HP. Cada fase registra até um hit e inicia recuo. O mergulho derruba e encerra a sequência. Referências R7b de 3, 2 e 1 hits a 24, 60 e 90 px, e pouso sem acerto a 134 px. Confirmar as distâncias novamente com a física ligada. | Bloqueio por fase, com recuo e chip quantizado. Apenas a fase que acerta pode mover o oponente. O cancelamento do corte forte confirmado entra uma vez por golpe. |
+| Laconian Slash | ↓↘→ + 1 | Base baixa, perna de trás estendida e joelho da frente flexionado. Rotação com escudo em contrapeso. A lâmina corta de baixo para cima e produz meia-lua azul, ciano e branca à frente. | Primeiro contato entre f8 e f12. Até 48 px em altura média e até 32 px no trecho alto do arco. Um hit de 17 HP, 11 f de impacto e queda comum para trás. Funciona no solo e intercepta o salto na frente da Alis. | 2 HP de chip fora da guarda precisa, recuo e 9 f de blockstun. Alis fica comprometida até f34. Conferir punição à queima-roupa e defesa agachada. |
+| Investida de Palma | ↓→↓→ + 1, com 8 MP | Preserva a primeira investida. Volta à guarda, arma a espada acima da cabeça e corta de cima para baixo no chão aos 19 f depois do primeiro contato. Volta à guarda. Aos 36 f dispara para frente e para cima com arco dourado. | 5 → 7 → 15 HP, total de 27 HP. O golpe dourado acerta aos 38 f e leva o alvo durante a subida até f47. A partir daí o alvo cai para trás e Alis termina o arco recuando até o chão. O alvo é solto na altura que atingiu. | Primeiro contato defendido ou errado encerra a progressão. O golpe vertical precisa confirmar para liberar o salto. Se o dourado for defendido ou errar, o defensor fica livre do arrasto. |
+| Guardiões de Algol | Rota decisiva com 8 MP e alvo atordoado, conforme a Command List | Mantém seis planos dos aliados e um plano de reação escolhido pelo lutador adversário. Volta à arena carregando o oponente real em queda, cerca de 29 px acima do chão. | O adversário cai para trás com deslocamento até tocar o chão. O resultado da rodada entra depois da aterrissagem e usa o mesmo placar. | Falha de confirmação preserva a regra de entrada da cinemática. O oponente da arena usa seus próprios sprites de queda e deitado. |
+
+A referência de meia-lua orienta a função antiaérea, a transferência de peso e a leitura do arco. A arte, a paleta e os quadros pertencem à Alis deste projeto. [Conceptual Model Sheet v4](../data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png) · [Prancha fonte dos quatro cortes](../data/source_art/scenes/alis_cortes_r8/cortes.png)
+
+## Regras compartilhadas por Alis e Hayato
+
+| Regra | Contrato |
+| --- | --- |
+| Impacto fraco | 4 f de hitstop e 10 f de hitstun, faísca curta, som curto e empurrão inicial leve. Mantém distância para encadeamento. |
+| Impacto forte | 11 f de hitstop e 20 f de hitstun, faísca maior, tremor do defensor, som de impacto e recuo por atrito. Passo de Escudo recebe o recuo próprio de uma colisão de maior peso. |
+| Queda comum | Arco por impulso e gravidade, deriva para trás e um pequeno quique de cerca de 4–6 f. Após o quique, 28 f no chão antes de levantar. Nova entrada junto ao pouso pode acionar ukemi se houver vida. Os estados de queda, chão e levantar impedem contato comum. |
+| Queda abrupta | Agarrão pesado, rasteiras marcadas ou finalizador forte derrubam sem quique ou ukemi. Tremor vertical, efeito no piso e baque grave sincronizados com o impacto. Duração no chão de 38 f. Rachadura transitória é um recurso opcional para impactos extremos. |
+| Guarda | Trás em pé protege de médios e overheads. Baixo-trás protege de médios, baixos e projéteis horizontais. Antiaéreos marcados vencem guarda aérea. Blockstun leve 5 f e forte 9 f, com recuo. |
+| Chip e quebra | Normais defendidos tiram 0 HP. Quatro normais fortes bloqueados dentro de uma mesma pressão provocam quebra e deixam 20 f de vulnerabilidade. Especiais aplicam chip aproximado de 12,5%, arredondado em HP inteiros, e podem finalizar. Guarda precisa na janela de 2 f protege do chip. |
+| Contagem e defesa no canto | O HUD conta acertos limpos. Guarda, escape ou fim da sequência quebram o elo. A partir do quinto acerto de uma cadeia, um golpe físico comum deixa 8 f de hitstun. A partir do oitavo, um novo contato físico derruba e libera a recuperação. O canto absorve recuo sem empurrar o alvo para fora da arena. Testar com guarda ou resposta programada no primeiro frame legal. |
+| Buffer | Guarda um normal reconhecido por 4 quadros de lógica durante a recuperação. Captura botão novo durante hitstop. Não repete o comando consumido. Movimento e defesa mantêm prioridade de postura e estado. |
+| Tolerância e prioridade | Aceitar baixo → frente ou baixo → trás sem diagonal intermediária para gestos de um quarto de círculo e a sequência baixo-frente, frente, baixo-frente para Rising Saber. Magia e Super confirmados precedem comandos de agarrão e normais, e força precede os ataques leves na mesma amostra. Colisões físicas simultâneas resolvem o trade a partir do mesmo par de caixas. O repertório atual não usa um estado separado de clash. |
+| SOCD | Esquerda + direita e cima + baixo dão neutro antes da leitura de defesa, movimento e golpes. |
+| Salto | Três quadros de compressão no chão com imunidade a agarrão, vulnerabilidade a golpes e custo normal de recuperação. Arco sob gravidade. Soltar cima antes da saída gera hop. Baixo seguido de cima dentro da janela de carga dá salto mais longo; com direção escolhida no comando, há mais velocidade horizontal. |
+
+## Revisão de arte para produção
+
+Compare o Model Sheet v4 antes de desenhar ou importar. Confirme tiara dourada, rosto sem cinza, peitoral índigo, ombreiras cinza com borda dourada, saia assimétrica de dois rosas, meia branca contínua com contorno escuro, joelheiras e escudo em cunhas. Normalize a altura anatômica pelo quadril, cabeça e solas sem usar a espada como referência. Revise as quatro poses na saída CRAM nos dois lados e nas duas paletas. Faça a leitura a 1× e por vizinho mais próximo. Confira recorte, vazamento e estabilidade do pivô também no movimento publicado. [Fluxo de curadoria](curadoria_capitulo_alis.md) · [Receita e procedência](../data/source_art/scenes/alis_cortes_r8/source-receipt.json) · [Comparação na paleta nativa](decisions/2026-11-27_alis_cortes_r8.png)
+
+## Aceite da candidata
+
+Execute uma única sessão privada por vez e só após verificação de carga, PSI, memória, swap, I/O, espaço e temperatura. Preserve o SHA da ROM e as entradas em quadros VDP. Registre acerto, guarda, erro por alcance ou altura, armação, quadro de impacto, deslocamento, chão e primeiro quadro de recuperação conforme a sequência. Meça a cadência da lógica e da apresentação a 60 Hz, piso de 58 FPS por janela, e o pior quadro dentro do VBlank. O estado do lote e o caminho da evidência ficam no memory bank. [Memory bank](10-memory-bank.md)

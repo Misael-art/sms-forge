@@ -103,6 +103,11 @@ typedef struct {
 #define MOF_MOVE_AIR_BLOCKABLE 0x02u  /* an airborne guard stops it */
 #define MOF_EFFECT_FINISH      0x80u  /* confirmed cinematic contact */
 #define MOF_EFFECT_FALL        0x40u  /* knock down a surviving target on a landed effect */
+#ifdef MOF_ALIS_COMBAT
+#define MOF_EFFECT_CHIP        0x20u
+#define MOF_EFFECT_HARD        0x10u
+#define MOF_EFFECT_SHOVE       0x08u  /* use the medium push even on a light contact */
+#endif
 #define MOF_MOVE_ANTI_AIR      0x04u  /* from the ground it beats an airborne guard */
 #define MOF_MOVE_PARRY         0x08u  /* catches a middle hit in the record's parry window,
                                          and strikes only after a catch */

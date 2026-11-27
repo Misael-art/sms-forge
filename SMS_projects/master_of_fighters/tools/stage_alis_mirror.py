@@ -305,7 +305,8 @@ def sheet_drawings(folder):
     return drawings
 
 
-def build(control, source, out, foundation=False, *, extra_drawings=None, stage_header=STAGE, review_sheet=None, model_palette=False):
+def build(control, source, out, foundation=False, *, extra_drawings=None, stage_header=STAGE,
+          review_sheet=None, model_palette=False, extra_sources=()):
     plan = json.loads(control.read_bytes())
     old_palette = plan["sprite_palette"]
     palette = [code for code in old_palette if code not in NEUTRAL_COLORS] + list(SECOND_COSTUME.values())
@@ -392,6 +393,7 @@ def build(control, source, out, foundation=False, *, extra_drawings=None, stage_
         packed.extend(path.read_bytes())
         bank_rows.append(dict(bank=number, file=path.name, sha256=digest(path)))
     source_hashes = {p.name: digest(p) for p in source.glob("*.png")}
+    source_hashes.update({path.relative_to(PROJECT).as_posix(): digest(path) for path in extra_sources})
     if review_sheet is not None:
         for file in ("revisao.json", "poses.png"):
             source_hashes[f"../{review_sheet.name}/{file}"] = digest(review_sheet / file)

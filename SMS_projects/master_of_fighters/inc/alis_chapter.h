@@ -2,7 +2,7 @@
 #define MOF_ALIS_CHAPTER_H
 #include "duel_rules.h"
 
-enum { MOF_ROUND, MOF_FIGHT_CALL, MOF_PLAY, MOF_RESULT };
+enum { MOF_ROUND, MOF_FIGHT_CALL, MOF_PLAY, MOF_RESULT, MOF_CINEMA_FALL };
 enum { MOF_CONTINUE, MOF_NEXT_ROUND, MOF_REMATCH, MOF_MAIN_MENU };
 typedef struct {
     uint8_t story, music, target, wins[2], phase, age, seconds, subsecond;

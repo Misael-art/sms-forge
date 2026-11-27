@@ -71,10 +71,18 @@ static uint8_t MIRROR_READ(uint8_t keys)
     if (!(buttons | input->last_buttons | queued)) return MOF_DUEL_NO_NORMAL;
     command = mof_duel_commands_read(input,
         posture == MOF_INPUT_AIRBORNE ? &mirror_air_profile : &mirror_profile,
+#ifdef MOF_ALIS_COMBAT
+        keys, posture, free || actor->state<=MOF_DUEL_HIT || actor->state==MOF_DUEL_GETUP);
+#else
         keys, posture, free);
+#endif
     if (!command) return MOF_DUEL_NO_NORMAL;
     /* commands_read emits normals only for the requested posture. */
     id=posture*4u;
+#ifdef MOF_ALIS_COMBAT
+    if (command&0x888u) return id+3u;
+    if (command&0x222u) return id+1u;
+#endif
     if (command&0x111u) return id;
     if (command&0x222u) return id+1u;
     if (command&0x444u) return id+2u;
@@ -92,6 +100,9 @@ static void MIRROR_PLAN(void)
     uint8_t following = MIRROR_EMPTY, future = MIRROR_EMPTY;
     view->x = (uint8_t)actor->x;
     view->y = state->y_offset;
+#ifdef MOF_ALIS_COMBAT
+    if ((mof_combat.landing[0]|mof_combat.landing[1])&1u) view->y-=2;
+#endif
 #ifdef MOF_ALIS_MAGIC
 #ifdef MOF_ALIS_CHOREOGRAPHY
     if (chapter.phase==MOF_PLAY && (mof_magic.caster[MIRROR_PLAYER].pose ||

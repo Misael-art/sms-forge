@@ -13,6 +13,7 @@ from stage_alis_postures import rgb, stage as stage_postures
 from stage_scene02_walk import stage as stage_walk, stage_specials
 
 ART = PROJECT / 'data/source_art/scenes/alis_palma'
+CUTS = ART.parent / 'alis_cortes_r8/cortes.png'
 BASE_SHA = '297a9b7c9c5002f2019cbd6b2fb77ce0a9886a20856c8645dfd7cfb645d33613'
 
 
@@ -68,7 +69,26 @@ def stage_acting(sprite):
     return result
 
 
-def pack_fighters(control, backdrop, output, spaceport=False, model_palette=False):
+def stage_cuts(sprite):
+    palette = [c for c in sprite if c not in NEUTRAL_COLORS] + list(SECOND_COSTUME.values())
+    result = {}
+    with Image.open(CUTS) as sheet:
+        for name, box, pelvis in (
+            ('slash_low', (0, 0, 627, 627), 309),
+            ('slash_rise', (627, 0, 1254, 627), 878),
+            ('chop_ready', (0, 627, 627, 1254), 330),
+            ('chop_down', (627, 627, 1254, 1254), 872),
+        ):
+            cel = sheet.crop(box)
+            bounds = cel.getchannel('A').point(lambda a: 255 if a >= 224 else 0).getbbox()
+            divisor = 7.8
+            result[name] = import_cel(cel, divisor, 144, palette,
+                12 - round((pelvis - box[0] - bounds[0]) / divisor), 0,
+                concept_materials=True, alpha_floor=224)
+    return result
+
+
+def pack_fighters(control, backdrop, output, spaceport=False, model_palette=False, combat=False):
     plan=json.loads(control.read_bytes())
     from pack_alis_scenes import native
     # The spill packet contains backdrop pixels around each sword. Sample a
@@ -100,8 +120,12 @@ def pack_fighters(control, backdrop, output, spaceport=False, model_palette=Fals
     output.parent.mkdir(parents=True,exist_ok=True)
     street=output.parent/('spaceport-runway.h' if spaceport else 'camineet-street.h')
     street.write_text(array('mof_duel_bg_stage',patterns)+'\n'+array('mof_duel_bg_rows',rows),encoding='ascii')
-    build(control, SOURCE, output, extra_drawings=stage_acting(plan['sprite_palette']),
-          stage_header=street, review_sheet=SOURCE.parent / "alis_revisao_ficha", model_palette=model_palette)
+    drawings = stage_acting(plan['sprite_palette'])
+    if combat:
+        drawings.update(stage_cuts(plan['sprite_palette']))
+    build(control, SOURCE, output, extra_drawings=drawings,
+          stage_header=street, review_sheet=SOURCE.parent / "alis_revisao_ficha", model_palette=model_palette,
+          extra_sources=(CUTS, CUTS.with_name('source-receipt.json')) if combat else ())
 
 
 def prepare(base, out, spaceport=False, model_palette=False):
@@ -134,6 +158,7 @@ if __name__ == '__main__':
                         help='Reuse the preserved pre-mirror pose plan and backdrop in BASE')
     parser.add_argument('--spaceport', action='store_true', help='Composite ground weapon pixels on the Palma runway')
     parser.add_argument('--model-palette',action='store_true',help='Use the Alis v4 cloth and armor swatches')
+    parser.add_argument('--combat',action='store_true',help='Append the R8 grounded cuts to the preserved staging')
     args = parser.parse_args()
     base,out=args.base.resolve(),args.out.resolve()
     if args.resume_postures:
@@ -142,6 +167,8 @@ if __name__ == '__main__':
         if (digest(control)!='f729663f7f9725263a757a25d1d363bdb51612a600818c5eda4c242d2382fe73'
                 or digest(backdrop)!='3a408688d7765adc1fd82f1f43098a3e8fa14ad7b64de6ff060b66dd1c6c4723'):
             raise ValueError('The recovered chapter staging does not match the preserved B inputs')
-        pack_fighters(control,backdrop,out/'fighters',args.spaceport,args.model_palette)
+        pack_fighters(control,backdrop,out/'fighters',args.spaceport,args.model_palette,args.combat)
     else:
+        if args.combat:
+            parser.error('--combat requires --resume-postures')
         prepare(base,out,args.spaceport,args.model_palette)

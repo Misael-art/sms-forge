@@ -10,6 +10,10 @@ enum MofGlyph { GL_FIRE, GL_WAVE, GL_SABER, GL_NUT, GL_WING, GL_DIVE, GL_REST, G
 #define GL_GOLD_ARC 9u
 #define GL_SHIELD_SPARK 10u
 #endif
+#ifdef MOF_ALIS_COMBAT
+#define GL_DUST 11u
+#define GL_LACONIAN 12u
+#endif
 typedef struct {
     uint8_t move, age, face, previous, history[6], window, pending, held_button;
     uint8_t dizzy, stun_used, chat_wait, strain, strain_window, pose;

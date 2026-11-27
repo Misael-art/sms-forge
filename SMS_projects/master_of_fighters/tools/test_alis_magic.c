@@ -19,6 +19,9 @@ uint8_t mof_magic_contact(MofDuel *d,uint8_t p,uint8_t damage,uint8_t flags)
 static void reset(void)
 {
     memset(&chapter,0,sizeof(chapter));
+#ifdef MOF_ALIS_COMBAT
+    memset(&mof_combat,0,sizeof(mof_combat));
+#endif
     chapter.target=2;chapter.phase=MOF_PLAY;
     assert(mof_duel_init_pair(&duel,body,6,MOF_DUEL_ALIS,MOF_DUEL_ALIS,32,224,16,239,24));
     assert(mof_duel_set_roster(&duel,mof_roster));
@@ -189,7 +192,12 @@ static void choreography(void)
         if (duel.fighters[1].combo_received>max_hits) max_hits=duel.fighters[1].combo_received;
         if (duel.fighters[1].state==MOF_DUEL_FALL) seen_fall=1;
     }
-    assert(duel.fighters[1].life==73 && max_hits==4 && seen_fall);
+    assert(duel.fighters[1].life==73 && seen_fall);
+#ifdef MOF_ALIS_COMBAT
+    assert(max_hits==3);
+#else
+    assert(max_hits==4);
+#endif
     assert(!mof_magic.palma[0] && duel.body[0].y_offset==0);
 
     reset();
@@ -199,6 +207,106 @@ static void choreography(void)
     mof_duel_step_normal(&duel,0,MOF_DUEL_RIGHT,MOF_DUEL_SUPER,MOF_DUEL_NO_NORMAL);
     for (uint8_t n=0;n<90;++n) tick(0,MOF_DUEL_RIGHT);
     assert(duel.fighters[1].life==100 && !mof_magic.palma[0] && !mof_magic.hits[0]);
+}
+#endif
+
+#ifdef MOF_ALIS_COMBAT
+static void revised_combat(void)
+{
+    static const uint8_t ranges[]={24,60,90,134};
+    static const uint8_t hp[]={80,84,90,100};
+    for (uint8_t i=0;i<4;++i) {
+        uint8_t fallen=0;
+        reset();
+        duel.fighters[0].x=100;
+        duel.fighters[1].x=100+ranges[i];
+        chapter.meter[0]=4;
+        input(0,"dzb",MOF_DUEL_TWO);
+        for (uint8_t n=0;n<135;++n) {
+            tick(0,0);
+            fallen|=duel.fighters[1].state==MOF_DUEL_FALL;
+        }
+        assert(duel.fighters[1].life==hp[i] && mof_magic.hits[0]==3u-i);
+        assert(fallen==(i!=3u) && !mof_magic.shots[0].ttl);
+        assert(i==3u || duel.fighters[1].x>100+ranges[i]);
+    }
+    for (uint8_t guard=0;guard<=2;++guard) {
+        reset();
+        duel.fighters[0].x=100;
+        duel.fighters[1].x=126;
+        input(0,"dxf",MOF_DUEL_ONE);
+        for (uint8_t n=0;n<12;++n)
+            tick(0,guard==1u ? MOF_DUEL_RIGHT|MOF_DUEL_DOWN :
+                guard==2u && n<4u ? MOF_DUEL_UP : 0u);
+        assert(duel.fighters[1].life==(guard==1u ? 98u : 83u));
+        assert(duel.fighters[1].state==(guard==1u ? MOF_DUEL_BLOCK : MOF_DUEL_FALL));
+    }
+}
+
+static void revised_movement(void)
+{
+    uint8_t apex[3]={0,0,0};
+    for (uint8_t type=0;type<3;++type) {
+        uint8_t prepare=0;
+        reset();
+        if (type==2u) for (uint8_t n=0;n<3;++n) tick(MOF_DUEL_DOWN,0);
+        for (uint8_t n=0;n<70;++n) {
+            uint8_t height;
+            tick(n<(type ? 10u : 1u) ? MOF_DUEL_UP : 0u,0);
+            height=(uint8_t)-duel.body[0].y_offset;
+            if (duel.body[0].jump_pending && !height) ++prepare;
+            if (height>apex[type]) apex[type]=height;
+        }
+        assert(prepare==3u && duel.body[0].y_offset==0u);
+    }
+    assert(apex[0]>0u && apex[0]<apex[1] && apex[1]<apex[2]);
+    for (uint8_t type=0;type<3;++type) {
+        uint8_t bounce=0,grounded=0,roll=0;
+        reset();
+        duel.fighters[0].x=100;
+        duel.fighters[1].x=126;
+        assert(mof_magic_contact(&duel,0,12,MOF_MOVE_HEAVY|MOF_EFFECT_FALL|
+               (type==2u ? MOF_EFFECT_HARD : 0u))==MOF_DUEL_LANDED);
+        for (uint8_t n=0;n<125;++n) {
+            const MofDuelMotion *motion=&duel.body[1].motion;
+            uint8_t key=type==1u && motion->vy>0 && motion->y+2*motion->vy>=0 ? MOF_DUEL_RIGHT : 0;
+            tick(0,key);
+            bounce+=duel.fighters[1].state==MOF_DUEL_FALL && mof_combat.fall[1]==MOF_COMBAT_BOUNCE;
+            grounded+=duel.fighters[1].state==MOF_DUEL_DOWNED;
+            roll|=mof_combat.fall[1]==MOF_COMBAT_ROLL;
+        }
+        if (!type) assert(bounce>=4u && bounce<=6u && grounded==28u && !roll);
+        else if (type==1u) assert(!grounded && roll);
+        else assert(!bounce && grounded==38u && !roll);
+    }
+}
+
+static void revised_defense(void)
+{
+    for (uint8_t wait=3u;wait<=7u;wait+=4u) {
+        reset();
+        duel.fighters[0].state=MOF_DUEL_HIT;
+        duel.fighters[0].state_since=duel.tick;
+        duel.fighters[0].hit_duration=wait;
+        mof_duel_step_normal(&duel,0,0,0,MOF_DUEL_NO_NORMAL);
+        advance(wait-1u);
+        assert(duel.fighters[0].state==(wait==3u ? MOF_DUEL_ATTACK : MOF_DUEL_READY));
+        assert(!mof_combat.command_age[0]);
+    }
+    reset();
+    duel.fighters[0].x=duel.right_wall-24u;
+    duel.fighters[1].x=duel.right_wall;
+    for (uint8_t i=0;i<4;++i) {
+        uint8_t contact=0;
+        mof_duel_step_normal(&duel,0,MOF_DUEL_RIGHT,1u,MOF_DUEL_NO_NORMAL);
+        for (uint8_t n=0;n<12 && !contact;++n) {
+            tick(0,MOF_DUEL_RIGHT);
+            contact=duel.fighters[0].contact;
+        }
+        assert(contact==MOF_DUEL_GUARDED && duel.fighters[1].life==100u);
+        assert(duel.fighters[1].state==(i<3u ? MOF_DUEL_BLOCK : MOF_DUEL_HIT));
+        for (uint8_t n=0;n<35;++n) tick(0,MOF_DUEL_RIGHT);
+    }
 }
 #endif
 
@@ -274,14 +382,26 @@ static void ground_equivalence(void)
         if (layout&2) duel.fighters[1].x=duel.fighters[0].x+(layout&1 ? -duel.minimum_gap : duel.minimum_gap);
         for (one=0;one<64;++one) for (two=0;two<64;++two) {
             MofDuel initial=duel,expected;
+#ifdef MOF_ALIS_COMBAT
+            MofCombat combat_initial=mof_combat;
+#endif
             for (unsigned settle=0;settle<6;++settle)
                 mof_duel_step_normal(&duel,one&2,two&2,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
             MofDuel start=duel;
+#ifdef MOF_ALIS_COMBAT
+            MofCombat combat_start=mof_combat;
+#endif
             mof_duel_step_normal(&duel,one,two,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
             expected=duel;
             duel=start;
+#ifdef MOF_ALIS_COMBAT
+            mof_combat=combat_start;
+#endif
             if (ground_step(one,two)) assert(memcmp(&duel,&expected,sizeof(duel))==0);
             duel=initial;
+#ifdef MOF_ALIS_COMBAT
+            mof_combat=combat_initial;
+#endif
         }
     }
 }
@@ -303,16 +423,28 @@ static void ground_reactions(void)
             mof_duel_step_normal(&duel,low,guard,action,MOF_DUEL_NO_NORMAL);
             for (frame=0;frame<45;++frame) {
                 MofDuel original=duel;
+#ifdef MOF_ALIS_COMBAT
+                MofCombat combat_original=mof_combat;
+#endif
                 for (k=0;k<sizeof(controls);++k) {
                     uint8_t one=controls[k],two=controls[(frame+k)%sizeof(controls)];
                     MofDuel expected;
                     duel=original;
+#ifdef MOF_ALIS_COMBAT
+                    mof_combat=combat_original;
+#endif
                     mof_duel_step_normal(&duel,one,two,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
                     expected=duel;
                     duel=original;
+#ifdef MOF_ALIS_COMBAT
+                    mof_combat=combat_original;
+#endif
                     if (ground_step(one,two)) assert(!memcmp(&duel,&expected,sizeof(duel)));
                 }
                 duel=original;
+#ifdef MOF_ALIS_COMBAT
+                mof_combat=combat_original;
+#endif
                 mof_duel_step_normal(&duel,low,guard,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
             }
         }
@@ -321,6 +453,11 @@ static void ground_reactions(void)
 
 int main(void)
 {
+#ifdef MOF_ALIS_COMBAT
+    revised_combat();
+    revised_movement();
+    revised_defense();
+#endif
     combo_contacts();
     unsigned p;
     ground_equivalence();ground_reactions();overlay_order();capabilities();
@@ -367,7 +504,13 @@ int main(void)
     for (int n=0;n<75;++n){mof_magic.live_step=1;mof_magic_step(&duel);}
     assert(mof_magic.full_range==2);
     reset();duel.fighters[0].x=80;duel.fighters[1].x=155;
+#ifdef MOF_ALIS_COMBAT
+    input(0,"d-d",16);
+    for (uint8_t n=0;n<8;++n) tick(16,0);
+    advance(7);input(1,"dzb",16);advance(65);
+#else
     input(0,"dxf",16);advance(13);input(1,"dzb",16);advance(65);
+#endif
     assert(mof_magic.reflects[1]==1 && mof_magic.hits[1]==1 && duel.fighters[0].life==90);
     reset();chapter.meter[0]=4;duel.fighters[1].x=67;
     input(0,"dzb",32);advance(20);assert(mof_magic.shots[0].age>9);

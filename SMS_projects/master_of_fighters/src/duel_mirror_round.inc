@@ -6,6 +6,7 @@
 
 #if defined(MOF_ALIS_CHAPTER)
 #include "../inc/alis_chapter.h"
+#include "../inc/duel_combat.h"
 #include "alis_pages.h"
 #ifdef MOF_ALIS_MAGIC
 #include "../inc/alis_magic.h"
@@ -219,6 +220,43 @@ static void mirror_reset(void)
 #include "duel_ground.inc"
 #endif
 
+#ifdef MOF_ALIS_COMBAT
+void mof_combat_step_body(MofDuel *d,uint8_t player,uint8_t keys)
+{
+    SMS_mapROMBank(MOF_COMBAT_BANK);
+    mof_combat_body(d,player,keys);
+    SMS_mapROMBank(MOF_RULE_BANK);
+}
+
+static uint8_t clean_directions(uint8_t keys)
+{
+    if ((keys&12u)==12u) keys&=(uint8_t)~12u;
+    if ((keys&3u)==3u) keys&=(uint8_t)~3u;
+    return keys;
+}
+
+static void guardians_arena(void)
+{
+    uint8_t loser=1u-chapter.winner, direction=duel.fighters[loser].face_right;
+    MofDuelBody *body=&duel.body[loser];
+    mof_magic_victory();
+    duel.fighters[loser].state=MOF_DUEL_FALL;
+    duel.fighters[loser].state_since=duel.tick;
+    body->y_offset=-29;
+    body->motion.y=-29*MOF_MOTION_UNIT;
+    body->motion.vy=18;
+    body->motion.vx=direction ? -40 : 40;
+    body->motion.mode=MOF_MOTION_AIR;
+    duel.tested_hurt_x[loser]=INT16_MIN;
+    duel.hitstop=0;
+    mof_combat.cutscene_return=1;
+    mof_combat.fall[loser]=MOF_COMBAT_HARD;
+    mof_magic.count=mof_magic.old_count=mof_magic.busy=0;
+    chapter.phase=MOF_CINEMA_FALL;
+    SMS_displayOff();
+}
+#endif
+
 void main(void)
 {
     uint8_t n1, n2, submit_epoch, epoch, deadline, line, row, col, p1, p2;
@@ -255,6 +293,9 @@ new_match:
     mof_chapter_match();
 new_round:
     mof_chapter_round();
+#ifdef MOF_ALIS_COMBAT
+    memset(&mof_combat,0,sizeof(mof_combat));
+#endif
 #ifdef MOF_ALIS_MAGIC
     SMS_mapROMBank(MOF_MAGIC_BANK);
     mof_magic_reset();
@@ -266,6 +307,11 @@ new_round:
     SMS_displayOff();
 #endif
     mirror_reset();
+#ifdef MOF_ALIS_COMBAT
+restore_arena:
+    SMS_setBGScrollY(0);
+    mof_combat.scroll_y=0;
+#endif
     SMS_loadSpritePalette(mof_duel_sprite_palette);
     SMS_loadBGPalette(mof_duel_bg_palette);
     SMS_loadTiles(mof_duel_bg_stage, 256u, sizeof(mof_duel_bg_stage));
@@ -296,7 +342,7 @@ new_round:
 #endif
     mof_missed_epochs = mof_repertoire_delayed = mof_repertoire_fault = 0u;
 #if defined(MOF_ALIS_CHAPTER)
-    mof_chapter_hud(chapter.round-1u);
+    mof_chapter_hud(chapter.phase==MOF_CINEMA_FALL ? 255u : chapter.round-1u);
     held[0]=held[1]=0;
 #else
     mof_duel_audio_init();
@@ -315,6 +361,10 @@ new_round:
         pad = SMS_getKeysStatus();
         p1 = pad & 63u;
         p2 = (pad >> 6u) & 63u;
+#ifdef MOF_ALIS_COMBAT
+        p1=clean_directions(p1);
+        p2=clean_directions(p2);
+#endif
 #if defined(MOF_ALIS_CHAPTER)
         if (chapter.phase==MOF_ROUND || chapter.phase==MOF_FIGHT_CALL) {
             SMS_waitForVBlank();
@@ -334,6 +384,12 @@ new_round:
         }
         SMS_mapROMBank(MOF_RULE_BANK);
         if (chapter.phase==MOF_RESULT) {
+#ifdef MOF_ALIS_COMBAT
+            if (mof_magic.finisher && chapter.winner<2u) {
+                guardians_arena();
+                goto restore_arena;
+            }
+#endif
             if (++chapter.age>=100u) {
                 PSGSFXStop();
                 transition=mof_chapter_result();
@@ -342,6 +398,25 @@ new_round:
                 goto title;
             }
         } else {
+#ifdef MOF_ALIS_COMBAT
+            if (chapter.phase==MOF_CINEMA_FALL) {
+                p1=p2=0;
+                mof_duel_step_normal(&duel,0,0,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
+                if (duel.fighters[1u-chapter.winner].state==MOF_DUEL_KO) {
+                    chapter.phase=MOF_RESULT;
+                    chapter.age=mof_combat.cutscene_return=0;
+                }
+                goto plan_frame;
+            }
+            if (duel.hitstop) {
+                mof_combat.frozen_buttons[0]|=p1&~duel.fighters[0].keys&48u;
+                mof_combat.frozen_buttons[1]|=p2&~duel.fighters[1].keys&48u;
+            } else {
+                p1|=mof_combat.frozen_buttons[0];
+                p2|=mof_combat.frozen_buttons[1];
+                mof_combat.frozen_buttons[0]=mof_combat.frozen_buttons[1]=0;
+            }
+#endif
             held[0]&=p1; held[1]&=p2;
             p1 &= (uint8_t)~held[0]; p2 &= (uint8_t)~held[1];
             if (chapter.story) p2=mof_chapter_cpu(&duel);
@@ -364,7 +439,11 @@ new_round:
                 magic_wait_gesture(1);
             } else {
                 magic_last_keys[0]=p1; magic_last_keys[1]=p2;
+#ifdef MOF_ALIS_COMBAT
+                SMS_mapROMBank(MOF_COMBAT_BANK);
+#else
                 SMS_mapROMBank(MOF_MAGIC_BANK);
+#endif
                 mof_magic_input(&duel,p1,p2);
                 SMS_mapROMBank(MOF_RULE_BANK);
                 p1=mof_magic.pad[0]; p2=mof_magic.pad[1];
@@ -419,6 +498,9 @@ new_round:
 #endif
         }
 #endif
+#ifdef MOF_ALIS_COMBAT
+plan_frame:
+#endif
         mof_cadence_lines[1] = SMS_getVCount();
         mirror_plan_p1();
         mirror_plan_p2();
@@ -442,7 +524,12 @@ new_round:
             mof_magic.count=mof_magic.old_count;
             memset(mof_magic.upload,0,mof_magic.count);
         } else {
-        if (mof_magic.busy) {
+        if (mof_magic.busy
+#ifdef MOF_ALIS_COMBAT
+            || (duel.hitstop && (mof_combat.spark[0] || mof_combat.spark[1])) ||
+            mof_combat.landing[0] || mof_combat.landing[1]
+#endif
+           ) {
             SMS_mapROMBank(MOF_MAGIC_BANK);
             mof_magic_plan(&duel,16u-((duel.fighters[0].x+duel.fighters[1].x)>>4));
         } else mof_magic.count=0;
@@ -485,6 +572,16 @@ new_round:
         submit_epoch = epoch;
         mof_vblank_start = SMS_getVCount();
         mof_runtime_phase = 2u;
+#ifdef MOF_ALIS_COMBAT
+        line=(mof_combat.landing[0]|mof_combat.landing[1])&1u;
+        if (line!=mof_combat.scroll_y) {
+            if (line) SMS_setBGScrollY(2);
+            else SMS_setBGScrollY(0);
+            mof_combat.scroll_y=line;
+        }
+        if (mof_combat.landing[0]==8u || mof_combat.landing[1]==8u)
+            mof_magic.audio=MOF_SFX_LANDING;
+#endif
         mirror_publish();
         if (hud_count[0] || hud_count[1]) publish_hud();
 #ifdef MOF_ALIS_MAGIC

@@ -58,10 +58,10 @@ def choreographed_effect(index):
             (27, [(7,7),(10,7),(10,5),(13,6),(14,8),(12,10),(8,10),(10,8)]),
             (63, [(10,7),(12,6),(14,8),(12,9),(10,9),(11,8)]),
         )
-    elif index in (1, 9):
-        size = (16, 24)
-        height = size[1] - 1
-        edge, light = (32, 60) if index == 1 else (11, 27)
+    elif index in (1, 9, 12):
+        size = (24, 32) if index == 12 else (16, 24)
+        height = 23
+        edge, light = (11, 27) if index == 9 else (32, 60)
         shapes = (
             (edge, [(2,0),(10,3),(14,8),(15,height//2),(13,height-5),(8,height-2),(1,height),
                     (6,height-5),(10,height//2),(10,7),(6,3)]),
@@ -76,18 +76,24 @@ def choreographed_effect(index):
         if index == 7:
             shapes += ((11, [(12,0),(13,2),(15,2),(13,4),(12,6),(11,4),(9,3),(11,2)]),
                        (63, [(12,2),(13,3),(12,4),(11,3)]))
+    elif index == 11:
+        size = (16, 8)
+        shapes = ((21, [(0,7),(1,5),(4,4),(5,1),(8,3),(10,2),(11,4),(15,5),(15,7)]),
+                  (42, [(2,6),(4,5),(6,2),(8,4),(11,4),(14,6),(10,5),(7,6)]))
     else:
         return None
     image = Image.new('RGBA', size)
     art = ImageDraw.Draw(image)
     for color, points in shapes:
+        if index == 12:
+            points=[(round(x*23/15),round(y*31/23)) for x,y in points]
         art.polygon(points, fill=(*rgb(color),255))
     return image
 
 
-def glyph_stamps(palette, choreography=False):
+def glyph_stamps(palette, choreography=False, combat=False):
     glyphs=Image.open(ART/'magias.png').convert('RGBA')
-    for i in range(11 if choreography else 9):
+    for i in range(13 if combat else 11 if choreography else 9):
         full=choreographed_effect(i) if choreography else None
         if full is None:
             x,y=i%3,i//3
@@ -108,7 +114,7 @@ def glyph_stamps(palette, choreography=False):
                     yield i, flip, yy//8, alpha, color
 
 
-def pack(base,out,choreography=False):
+def pack(base,out,choreography=False,combat=False):
     out.mkdir(parents=True,exist_ok=True)
     manifest=json.loads((base/'chapter.json').read_text())
     tc=manifest['toolchain']
@@ -117,7 +123,8 @@ def pack(base,out,choreography=False):
     if choreography:
         # The revised effects fit within rows 3..17. Omit the other arena
         # patterns from every pre-composited effect, including unused HUD tiles.
-        used=list(dict.fromkeys(map_index[3*32:18*32]))
+        first_row=8 if combat else 3
+        used=list(dict.fromkeys(map_index[first_row*32:18*32]))
         index={old:new for new,old in enumerate(used)}
         ids=[ids[i] for i in used];backgrounds=[backgrounds[i] for i in used]
         map_index=[index.get(i,0) for i in map_index]
@@ -144,7 +151,7 @@ def pack(base,out,choreography=False):
     strips={}
     if choreography:
         banks.extend(b'\xff'*(-len(banks)%PAGE))
-    for glyph,flip,_,alpha,color in glyph_stamps(palette,choreography):
+    for glyph,flip,_,alpha,color in glyph_stamps(palette,choreography,combat):
         if (glyph,flip)!=last:
             sprite_ids.append(len(locations))
             last=(glyph,flip)
@@ -187,6 +194,8 @@ def pack(base,out,choreography=False):
     tc['defines'].update(MOF_DUEL_SCENE_EFFECTS=1,MOF_ALIS_MAGIC=1,MOF_MAGIC_BANK=magic_bank,MOF_GUARDIANS_PAGE=first)
     if choreography:
         tc['defines']['MOF_ALIS_CHOREOGRAPHY']=1
+    if combat:
+        tc['defines']['MOF_ALIS_COMBAT']=1
     tc['mapper_code_banks']['SMSBANK_MAGIC']=magic_bank
     tc['makesms_extra']+=['-mbank',f'{(out/"magic.bin").relative_to(PROJECT)}:0:{len(banks)//PAGE}:{first}']
     (out/'chapter.json').write_text(json.dumps(manifest,indent=2)+'\n')
@@ -197,4 +206,8 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('panels',type=Path);parser.add_argument('out',type=Path)
     parser.add_argument('--choreography',action='store_true')
-    args=parser.parse_args();pack(args.panels.resolve(),args.out.resolve(),args.choreography)
+    parser.add_argument('--combat',action='store_true')
+    args=parser.parse_args()
+    if args.combat and not args.choreography:
+        parser.error('--combat requires --choreography')
+    pack(args.panels.resolve(),args.out.resolve(),args.choreography,args.combat)

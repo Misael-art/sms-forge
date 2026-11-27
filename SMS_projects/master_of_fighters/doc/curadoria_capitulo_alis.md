@@ -86,3 +86,13 @@ Para reproduzir o trabalho entre agentes, conferir a árvore compartilhada, o do
 A primeira candidata a regra é a comparação por material, ação, orientação e traje **depois** do empacotamento. A segunda é a prova de cena dinâmica, com região móvel, região estável, câmera e lutadores em cena. A terceira é a prova do fluxo público que liga o menu à ROM e à arena escolhida. Os três casos podem ser reproduzidos neste consumidor e em um segundo personagem ou cenário antes da decisão sobre o framework. A aferição artística final cabe a quem vê o desenho em movimento. [Entrada na fila de curadoria](../../../doc/curation/2026-11-27_mof_capitulo_alis.json) · [Medições da revisão de luz e paleta](decisions/2026-11-27_palma_luzes_paleta.json)
 
 O caso R6b amplia este caderno com a leitura do controle, o retorno do salto, a identificação de cada pose jogada, as camadas dos Guardiões, a hiperpausa, o ganho de HP/MP e a saída do combo nos dois cantos. O registro reúne as observações do dono, as falhas de verificações anteriores e os ensaios reproduzíveis para o próximo personagem. [Dossiê da ficha e do combate](curation_candidates/2026-11-27_alis_ficha_comando_cor_e_combo.md)
+
+## Revisão R8 dos cortes e do combate
+
+Na primeira prancha dos cortes, o escudo perdeu a divisão em cunhas, as meias ficaram interrompidas e as ombreiras e a tiara desapareceram em alguns quadros. A segunda prancha adotou o Conceptual Model Sheet v4 como referência de identidade. A referência de movimento serviu para a posição dos pés, o arco da espada e a função antiaérea.
+
+Antes de importar uma ação nova, confira cada material na fonte e na saída CRAM. Registre cabeça, quadril e solas em relação à guarda. Uma silhueta coerente com o golpe pode perder a identidade no recorte ou na quantização. Faça um segundo confronto na ROM publicada, nas duas orientações. A redução para 7,8 pixels de fonte por pixel do console trouxe a maior pose de volta à faixa do elenco e reduziu o máximo empacotado de 32 para 30 sprites por ator.
+
+Os testes de regras precisam observar separadamente o frame de contato, a duração em hitstop, o primeiro pixel de recuo, a aterrissagem e a primeira resposta legal. Asserções de acertos acumulados podem passar com um arrasto ausente ou um golpe defendido liberando a fase seguinte. A computação de hitstun também precisa sobreviver ao caminho rápido do chão. Compare as regras completas e esse caminho a partir do mesmo estado.
+
+[Command List R8](command-list-alis-combate-r8.md) · [Conceptual Model Sheet v4](../data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png) · [Conversão dos quatro cortes](decisions/2026-11-27_alis_cortes_r8.png)

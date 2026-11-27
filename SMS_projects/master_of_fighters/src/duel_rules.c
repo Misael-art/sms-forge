@@ -3,6 +3,7 @@
 #pragma constseg SMSBANK_RULES
 #endif
 #include "../inc/duel_rules.h"
+#include "../inc/duel_combat.h"
 #ifdef MOF_ALIS_CHOREOGRAPHY
 #include "../inc/alis_magic.h"
 #endif
@@ -84,30 +85,21 @@ uint8_t mof_duel_walk_direction(const MofDuel *duel, uint8_t player, int16_t pre
 }
 #endif
 
-uint8_t mof_duel_posture_pose(const MofDuel *duel, uint8_t player)
-{
-    const MofDuelFighter *alis = &duel->fighters[player];
-    const MofDuelBody *state = &duel->body[player];
-    const MofDuelMotion *motion = &state->motion;
-    uint8_t blocked = alis->state == MOF_DUEL_BLOCK;
-    if (motion->mode == MOF_MOTION_AIR) {
-        if (state->air_age <= MOF_ALIS_RISE_TICKS) return MOF_ALIS_JUMP_RISE;
-        if ((blocked || alis->guarding == MOF_GUARD_AIRBORNE) &&
-            motion->vy < MOF_ALIS_GUARD_UNFOLD_SPEED) return MOF_ALIS_JUMP_GUARD;
-        if (motion->vy >= 24) return MOF_ALIS_JUMP_FALL;
-        if (motion->vx && motion->vy < -12) return MOF_ALIS_JUMP_DIAGONAL;
-        return MOF_ALIS_JUMP_APEX;
-    }
-    if (alis->state == MOF_DUEL_KO || alis->state == MOF_DUEL_ATTACK) return MOF_ALIS_NO_POSTURE;
-    if (state->jump_pending) return MOF_ALIS_CROUCH_TRANSITION;
-    if (motion->mode == MOF_MOTION_CROUCH) {
-        if (blocked || alis->guarding == MOF_GUARD_CROUCHING) return MOF_ALIS_CROUCH_GUARD;
-        return state->transition ? MOF_ALIS_CROUCH_TRANSITION : MOF_ALIS_CROUCH;
-    }
-    if (blocked || alis->guarding == MOF_GUARD_STANDING) return MOF_ALIS_STAND_GUARD;
-    return state->transition ? MOF_ALIS_CROUCH_TRANSITION : MOF_ALIS_NO_POSTURE;
-}
+#ifndef MOF_ALIS_COMBAT
+#include "duel_posture_view.inc"
+#endif
 
+#ifdef MOF_ALIS_COMBAT
+static void body_step(MofDuel *duel, uint8_t player, uint8_t keys)
+{
+    MofDuelBody *body=&duel->body[player];
+    body->air_step=0;
+    if (duel->fighters[player].state>=MOF_DUEL_DOWNED ||
+        (body->motion.mode==MOF_MOTION_IDLE && !(keys&(MOF_DUEL_UP|MOF_DUEL_DOWN)) &&
+         !body->jump_pending && !body->jump_buffer && !body->transition)) return;
+    mof_combat_step_body(duel,player,keys);
+}
+#else
 static void body_step(MofDuel *duel, uint8_t player, uint8_t keys)
 {
     const MofDuelFighter *alis = &duel->fighters[player];
@@ -178,6 +170,7 @@ static void body_step(MofDuel *duel, uint8_t player, uint8_t keys)
     if (prior_offset != state->y_offset || prior != motion->mode)
         duel->tested_hurt_x[player] = INT16_MIN;
 }
+#endif
 #endif
 
 static const uint8_t first_active[2] = {9u, 5u};
@@ -347,6 +340,21 @@ static int16_t clamp_x(const MofDuel *duel, int16_t x)
     return x;
 }
 
+#ifdef MOF_ALIS_COMBAT
+static void slide_step(MofDuel *duel,uint8_t p)
+{
+    int8_t speed=mof_combat.slide[p];
+    if (!speed) return;
+    duel->fighters[p].x=clamp_x(duel,duel->fighters[p].x+speed);
+    mof_combat.slide[p]=speed+(speed>0 ? -1 : 1);
+}
+
+static void start_slide(MofDuel *duel,uint8_t p,uint8_t speed)
+{
+    mof_combat.slide[p]=duel->fighters[p].face_right ? -speed : speed;
+}
+#endif
+
 static uint8_t expired(const MofDuel *duel, const MofDuelFighter *fighter, uint16_t age)
 {
     uint8_t duration = attack_length[fighter->fighter];
@@ -357,7 +365,13 @@ static uint8_t expired(const MofDuel *duel, const MofDuelFighter *fighter, uint1
     (void)duel;
 #endif
     return (fighter->state == MOF_DUEL_ATTACK && age >= duration) ||
-        (fighter->state == MOF_DUEL_BLOCK && age >= MOF_DUEL_BLOCK_TICKS) ||
+        (fighter->state == MOF_DUEL_BLOCK && age >=
+#ifdef MOF_ALIS_COMBAT
+         fighter->hit_duration
+#else
+         MOF_DUEL_BLOCK_TICKS
+#endif
+         ) ||
         (fighter->state == MOF_DUEL_HIT && age >=
 #if defined(MOF_DUEL_SCENE_MIRROR)
          fighter->hit_duration
@@ -390,6 +404,9 @@ static void expire_state(MofDuel *duel, uint8_t player)
     } else if (fighter->state == MOF_DUEL_HIT && fighter->thrown) {
         if (age >= MOF_THROW_STAGGER_TICKS) {
             enter(duel, fighter, MOF_DUEL_FALL);
+#ifdef MOF_ALIS_COMBAT
+            mof_combat.fall[player]=MOF_COMBAT_HARD;
+#endif
         } else {
             /* Two grounded recovery steps. A wall can absorb the displacement. */
             int16_t step = age < 6u ? 2 : 1;
@@ -397,8 +414,32 @@ static void expire_state(MofDuel *duel, uint8_t player)
         }
     } else if (fighter->state == MOF_DUEL_FALL && !duel->body[player].y_offset &&
                (!fighter->thrown || age >= 5u)) {
+#ifdef MOF_ALIS_COMBAT
+        MofDuelBody *body=&duel->body[player];
+        if (!mof_combat.fall[player]) {
+            body->motion.mode=MOF_MOTION_AIR;
+            body->motion.y=-24;
+            body->motion.vy=-14;
+            body->y_offset=-1;
+            mof_combat.fall[player]=MOF_COMBAT_BOUNCE;
+            return;
+        }
+        if (mof_combat.fall[player]==MOF_COMBAT_ROLL && fighter->life) {
+            enter(duel,fighter,MOF_DUEL_GETUP);
+            start_slide(duel,player,4);
+            return;
+        }
+        if (mof_combat.fall[player]==MOF_COMBAT_HARD) mof_combat.landing[player]=8;
+#endif
         enter(duel, fighter, MOF_DUEL_DOWNED);
-    } else if (fighter->state == MOF_DUEL_DOWNED && age >= 18u) {
+    } else if (fighter->state == MOF_DUEL_DOWNED && age >=
+#ifdef MOF_ALIS_COMBAT
+               (mof_combat.cutscene_return ? 6u :
+                mof_combat.fall[player]==MOF_COMBAT_HARD ? 38u : 28u)
+#else
+               18u
+#endif
+               ) {
         enter(duel, fighter, fighter->life ? MOF_DUEL_GETUP : MOF_DUEL_KO);
     } else if (fighter->state == MOF_DUEL_GETUP && age >= 7u) {
         fighter->thrown = 0u;
@@ -418,6 +459,15 @@ static void consume_input(MofDuel *duel, uint8_t player, uint8_t keys, uint8_t n
     fighter->keys = keys & 0x3Fu;
     fighter->contact = MOF_DUEL_NO_CONTACT;
     fighter->guarding = 0u;
+#ifdef MOF_ALIS_COMBAT
+    if (normal!=MOF_DUEL_NO_NORMAL && fighter->state<MOF_DUEL_FALL) {
+        mof_combat.command[player]=normal;
+        mof_combat.command_age[player]=MOF_COMBAT_BUFFER;
+    } else if (mof_combat.command_age[player]) {
+        normal=mof_combat.command[player];
+        --mof_combat.command_age[player];
+    }
+#endif
     if (!(keys & MOF_DUEL_ONE)) {
         fighter->held = fighter->latched = 0u;
     }
@@ -457,6 +507,9 @@ static void consume_input(MofDuel *duel, uint8_t player, uint8_t keys, uint8_t n
             fighter->guarding = direction == back;
         }
         if (normal < MOF_DUEL_NORMALS_PER_FIGHTER) {
+#ifdef MOF_ALIS_COMBAT
+            mof_combat.command_age[player]=0;
+#endif
             fighter->guarding = 0u;
             fighter->standing_normal = normal;
 #if defined(MOF_DUEL_SCENE_MIRROR)
@@ -692,6 +745,10 @@ static void impact_timing(MofDuel *duel,uint8_t victim,uint8_t heavy,uint8_t lan
     MofDuelFighter *target=&duel->fighters[victim];
     target->thrown=0;
     target->hit_duration=heavy ? MOF_DUEL_HEAVY_HITSTUN : MOF_DUEL_LIGHT_HITSTUN;
+#ifdef MOF_ALIS_COMBAT
+    if (!landed) target->hit_duration=heavy ? 9u : 5u;
+    mof_combat.spark[victim]=landed ? (heavy ? 2u : 1u) : 0u;
+#endif
     freeze_impact(duel,victim,heavy,landed);
 }
 
@@ -706,6 +763,12 @@ static void begin_fall(MofDuel *duel, uint8_t player)
     state->motion.vx = 0;
     state->motion.mode = MOF_MOTION_AIR;
     state->transition = state->jump_buffer = state->jump_pending = 0u;
+#ifdef MOF_ALIS_COMBAT
+    mof_combat.fall[player]=0;
+    mof_combat.command_age[player]=0;
+    state->motion.vy=-48;
+    state->motion.vx=duel->fighters[player].face_right ? -24 : 24;
+#endif
     enter(duel, &duel->fighters[player], MOF_DUEL_FALL);
 }
 
@@ -725,17 +788,31 @@ uint8_t mof_duel_effect_contact(MofDuel *duel,uint8_t attacker,uint8_t damage,ui
         (target->keys&(MOF_DUEL_LEFT|MOF_DUEL_RIGHT))==(target->face_right ? MOF_DUEL_LEFT : MOF_DUEL_RIGHT))
         guard=target->reaction-MOF_REACT_GUARD_STAND+1u;
 #endif
+#ifdef MOF_ALIS_COMBAT
+    guard=mof_duel_guard_blocks(guard,MOF_HEIGHT_MIDDLE,1,flags&MOF_MOVE_ANTI_AIR) ? guard : 0;
+    if (guard && (flags&MOF_EFFECT_CHIP) && !mof_combat.guard_window[victim]) {
+        uint8_t chip=(damage+4u)>>3;
+        target->life=target->life>chip ? target->life-chip : 0;
+        if (!target->life) begin_fall(duel,victim);
+    }
+    start_slide(duel,victim,flags&MOF_EFFECT_FINISH ? 0 :
+        (!guard && (flags&MOF_EFFECT_FALL)) ? 4 :
+        (flags&(MOF_EFFECT_SHOVE|MOF_MOVE_HEAVY)) ? 2 : 1);
+#endif
     impact_timing(duel,victim,flags&(MOF_EFFECT_FINISH|MOF_MOVE_HEAVY),!guard);
     target->held=target->guarding=0;
     if (guard) {
         target->reaction=MOF_REACT_GUARD_STAND+guard-1u;
-        enter(duel,target,MOF_DUEL_BLOCK);
+        if (target->life) enter(duel,target,MOF_DUEL_BLOCK);
         return source->contact=MOF_DUEL_GUARDED;
     }
     target->reaction=MOF_REACT_BODY;
     deal_damage(target, damage);
     if ((!target->life && !(flags&MOF_EFFECT_FINISH)) || (flags&MOF_EFFECT_FALL)) begin_fall(duel,victim);
     else enter(duel,target,target->life ? MOF_DUEL_HIT : MOF_DUEL_KO);
+#ifdef MOF_ALIS_COMBAT
+    if ((flags&MOF_EFFECT_HARD) && target->state==MOF_DUEL_FALL) mof_combat.fall[victim]=MOF_COMBAT_HARD;
+#endif
     return source->contact=MOF_DUEL_LANDED;
 }
 
@@ -827,13 +904,21 @@ static void apply_contact(MofDuel *duel, uint8_t attacker, uint8_t result)
 #endif
         deal_damage(target, amount);
 #if defined(MOF_DUEL_SCENE_MIRROR)
-        if (!target->life || (HAS_MOVES(duel, source) &&
+        if (!target->life ||
+#ifdef MOF_ALIS_COMBAT
+            target->combo_received>=8u ||
+#endif
+            (HAS_MOVES(duel, source) &&
             source->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER &&
             MOVE(duel, source, source->standing_normal)->knockdown))
             begin_fall(duel, 1u - attacker);
         else
 #endif
         enter(duel, target, target->life ? MOF_DUEL_HIT : MOF_DUEL_KO);
+#ifdef MOF_ALIS_COMBAT
+        if (target->combo_received>=5u && target->state==MOF_DUEL_HIT)
+            target->hit_duration=8u;
+#endif
 #if defined(MOF_DUEL_SCENE_MIRROR)
         push = MOVE(duel, source, source->standing_normal)->push;
 #else
@@ -843,7 +928,25 @@ static void apply_contact(MofDuel *duel, uint8_t attacker, uint8_t result)
         enter(duel, target, MOF_DUEL_BLOCK);
         push = 3;
     }
+#ifdef MOF_ALIS_COMBAT
+    if (result==MOF_DUEL_GUARDED && heavy_impact(source) &&
+        source->standing_normal<MOF_DUEL_SPECIAL) {
+        uint8_t p=1u-attacker;
+        if (++mof_combat.guard_load[p]>=MOF_COMBAT_GUARD_LIMIT) {
+            mof_combat.guard_load[p]=0;
+            target->hit_duration=20;
+            target->reaction=MOF_REACT_BODY;
+            mof_combat.spark[p]=2;
+            enter(duel,target,MOF_DUEL_HIT);
+            target->combo_received=0;
+        }
+    }
+    if (target->state==MOF_DUEL_FALL && MOVE(duel,source,source->standing_normal)->knockdown)
+        mof_combat.fall[1u-attacker]=MOF_COMBAT_HARD;
+    start_slide(duel,1u-attacker,push>=8 ? 5 : heavy_impact(source) ? 3 : 1);
+#else
     target->x = clamp_x(duel, target->x + (source->face_right ? push : -push));
+#endif
 #ifdef MOF_ALIS_CHOREOGRAPHY
     if (result==MOF_DUEL_LANDED) {
         if (source->standing_normal==1u) {
@@ -945,6 +1048,26 @@ static void step_duel(MofDuel *duel, uint8_t p1_keys, uint8_t p2_keys,
     p2_keys &= (uint8_t)(duel->fighters[1].def->vertical | ~(MOF_DUEL_UP | MOF_DUEL_DOWN));
 #endif
     ++duel->tick;
+#ifdef MOF_ALIS_COMBAT
+    mof_combat.spark[0]=mof_combat.spark[1]=0;
+    for (player=0;player<2;++player) {
+        MofDuelFighter *f=&duel->fighters[player];
+        MofDuelBody *body=&duel->body[player];
+        uint8_t keys=player ? p2_keys : p1_keys;
+        uint8_t fresh=keys&~f->keys;
+        uint8_t back=f->face_right ? MOF_DUEL_LEFT : MOF_DUEL_RIGHT;
+        if (fresh&back) mof_combat.guard_window[player]=2u;
+        else if (mof_combat.guard_window[player]) --mof_combat.guard_window[player];
+        if (mof_combat.guard_load[player] && f->state==MOF_DUEL_READY &&
+            mof_duel_age(duel,f)>90u) mof_combat.guard_load[player]=0;
+        if (f->state==MOF_DUEL_FALL && body->motion.vy>0 &&
+            body->motion.y+2*body->motion.vy>=0 && fresh &&
+            mof_combat.fall[player]!=MOF_COMBAT_HARD)
+            mof_combat.fall[player]=MOF_COMBAT_ROLL;
+        if (mof_combat.landing[player]) --mof_combat.landing[player];
+        if (mof_combat.slide[player]) slide_step(duel,player);
+    }
+#endif
     face_opponent(duel);
     if (duel->fighters[0].state != MOF_DUEL_READY) expire_state(duel, 0u);
     if (duel->fighters[1].state != MOF_DUEL_READY) expire_state(duel, 1u);

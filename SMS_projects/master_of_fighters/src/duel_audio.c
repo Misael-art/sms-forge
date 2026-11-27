@@ -5,6 +5,12 @@
 #include "../inc/duel_commands.h"
 #include "../inc/duel_sfx.h"
 
+#ifdef MOF_ALIS_COMBAT
+/* A close body impact starts at a lower pitch than the light body cue. */
+static const uint8_t mof_sfx_body_heavy[]={0xc8,0x71,0xd4,0xe7,0xf5,0x38,
+    0xc1,0x75,0xd6,0xf8,0x39,0xd9,0xfc,0x38,0xdf,0xff,0};
+#endif
+
 void mof_duel_audio_init(void)
 {
     PSGSilenceChannels();
@@ -63,7 +69,12 @@ void mof_duel_audio_tick(const MofDuel *duel, uint8_t hayato_player,
     else if (alis->contact == MOF_DUEL_LANDED && material == MOF_INPUT_LONG_ONE)
         PSGSFXPlay((void *)mof_sfx_blade_hit, SFX_CHANNELS2AND3);
     else if (alis->contact == MOF_DUEL_LANDED || hayato->contact == MOF_DUEL_LANDED)
+#ifdef MOF_ALIS_COMBAT
+        PSGSFXPlay((void *)(duel->hitstop_target&MOF_DUEL_HITSTOP_SHAKE ?
+                   mof_sfx_body_heavy : mof_sfx_body_hit),SFX_CHANNELS2AND3);
+#else
         PSGSFXPlay((void *)mof_sfx_body_hit, SFX_CHANNELS2AND3);
+#endif
     else if (alis->contact == MOF_DUEL_GUARDED || hayato->contact == MOF_DUEL_GUARDED)
         PSGSFXPlay((void *)mof_sfx_guard, SFX_CHANNELS2AND3);
     else if (alis->state == MOF_DUEL_ATTACK && material <= MOF_INPUT_LONG_ONE &&

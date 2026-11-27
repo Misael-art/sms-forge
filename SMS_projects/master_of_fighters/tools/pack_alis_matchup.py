@@ -239,6 +239,11 @@ def pack(base, archive_dir, out, feedback=False):
     (out/"matchup_pan.h").write_text("static const uint8_t mof_pan_strips[] = {\n"
                                      + ",\n".join(rows) + "\n};\n")
     tc["mapper_code_banks"]["SMSBANK_CAMERA"] = bank+2
+    if tc["defines"].get("MOF_ALIS_COMBAT"):
+        if bank+3 >= 64:
+            raise ValueError("Combat code needs one cartridge bank after the camera")
+        tc["mapper_code_banks"]["SMSBANK_COMBAT"] = bank+3
+        tc["defines"]["MOF_COMBAT_BANK"] = bank+3
     constants = {"MOF_VERSUS_PAGE":bank, "MOF_PAN_BANK":bank+2, "MOF_PAN_STEPS":len(offsets)-1,
                  "MOF_BATTLE_BANK":bank+1, "MOF_BATTLE_LOOP":0x8000+loop_offset,
                  "MOF_BATTLE_PSG":0x8000+len(fm)}

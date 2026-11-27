@@ -2,6 +2,7 @@
 
 #include "SMSlib.h"
 #include "../inc/duel_rules.h"
+#include "../inc/duel_combat.h"
 #include "../inc/duel_probe.h"
 #if defined(MOF_DUEL_REPERTOIRE)
 #if !defined(MOF_DUEL_FAST_SAT)
