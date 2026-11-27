@@ -524,6 +524,10 @@
         "out/qa/alis_guardioes_g6e/versus-p2-final/observations.json": {
           "sha256": "e16481a4f4e371bb2e28fe0b8e955eea728f52c605ae3febbb99ded632c8f723",
           "sessao": "8c3fcf09d233416dbdca49b5342239b1"
+        },
+        "out/qa/alis_guardioes_g6e/historia-epilogo/observations.json": {
+          "sha256": "b5bf468497589e08d00107239f63bb94deb937f159b5679f5388dbdf091da849",
+          "sessao": "6a6091d15ef24a959dd16af8355f0d80"
         }
       },
       "pixels_dupla_na_arena": {
@@ -566,7 +570,7 @@
       },
       "bateria_interrompida": "O host reiniciou durante o ensaio de impactos. A sessão incompleta foi excluída das verificações aprovadas.",
       "finalizacao_historia": {
-        "sessao": "56e2f2da070d456190f5827dd796a009",
+        "sessao": "6a6091d15ef24a959dd16af8355f0d80",
         "vida_no_atordoamento": [
           16,
           16
@@ -589,7 +593,9 @@
           5,
           6,
           7
-        ]
+        ],
+        "epilogo_e_resultado": true,
+        "pixels_diferentes_da_tela_de_vitoria_p1_do_versus": 0
       },
       "video_versus": {
         "arquivo": "out/qa/alis_guardioes_g6e/versus-magias/guardioes.mp4",
@@ -626,6 +632,13 @@
             "arquivo": "out/qa/alis_guardioes_g6e/host-final.jsonl",
             "pico_celsius": 59.0,
             "min_mem_disponivel_kib": 8611212,
+            "amostras": 16,
+            "amostras_com_sessao_pausada": 0
+          },
+          {
+            "arquivo": "out/qa/alis_guardioes_g6e/host-epilogo.jsonl",
+            "pico_celsius": 61.0,
+            "min_mem_disponivel_kib": 8626408,
             "amostras": 16,
             "amostras_com_sessao_pausada": 0
           }
