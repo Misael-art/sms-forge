@@ -95,4 +95,8 @@ Antes de importar uma ação nova, confira cada material na fonte e na saída CR
 
 Os testes de regras precisam observar separadamente o frame de contato, a duração em hitstop, o primeiro pixel de recuo, a aterrissagem e a primeira resposta legal. Asserções de acertos acumulados podem passar com um arrasto ausente ou um golpe defendido liberando a fase seguinte. A computação de hitstun também precisa sobreviver ao caminho rápido do chão. Compare as regras completas e esse caminho a partir do mesmo estado.
 
+A revisão da ficha R8 encontrou uma segunda via de exibição no Word. As figuras antigas carregavam um SVG além do PNG. A troca do PNG passou na inspeção do arquivo, mas o exportador ainda escolhia o SVG antigo. Ao substituir uma figura, confira as referências de imagem do Word e valide a página renderizada. O caso de regressão compara as novas poses #94–#97, a chama de 16 × 16 e as três formas de Myau com os desenhos da candidata.
+
+O replay R8 confirmou que o adversário dos Guardiões voltou à arena, recuou e caiu antes do resultado. A mesma ROM ficou abaixo de 58 FPS nas três janelas mistas e teve zero estouros em 3.000 apresentações seladas. Guarde o resultado de cada critério e o SHA de ambas as sessões. [Retorno à arena](../out/qa/alis_combate_r8/guardioes/observations.json) · [Cadência e VBlank](../out/qa/alis_combate_r8/worst/observations.json)
+
 [Command List R8](command-list-alis-combate-r8.md) · [Conceptual Model Sheet v4](../data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png) · [Conversão dos quatro cortes](decisions/2026-11-27_alis_cortes_r8.png)

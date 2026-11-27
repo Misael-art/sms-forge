@@ -74,4 +74,10 @@ Execute uma sessão privada do Emulicious por vez após a liberação do host. P
 | Guardiões de Algol | Uma gravação contínua dos sete planos até o resultado. No retorno à arena, acompanhar o mesmo adversário em queda, comparar a direção do recuo e registrar o primeiro quadro no chão antes do resultado. |
 | Cadência | Três janelas NTSC com controles e combate ativos, avanço da lógica, taxa das apresentações da ROM e pior quadro de VBlank. A sonda SMRT também mede três janelas contínuas em guarda. O alvo é 60 FPS e o piso é 58 FPS em cada janela, sem arredondamento. A gravação quadro a quadro prova a ordem da ação. A taxa vem da sonda da ROM. |
 
-[Estado da compilação e da validação](10-memory-bank.md)
+### Resultados no Emulicious
+
+A R8 tem SHA-256 `c81a9497c420ee5458201d81cac03cfb26fd6a3cc1b1a6b1fb6561c253c70ab0`. A prova dos Guardiões passou nos cinco critérios de retorno à arena. O adversário recuou 15 px desde a primeira amostra visível, tocou o chão no quadro VDP 2653 e entrou no estado deitado no 2655. A tela de resultado apareceu no 2661. Do retorno à queda, a amostra curta registrou 6 apresentações em 12 quadros VDP (29,961371702156155 FPS). [Vídeo dos Guardiões](../out/qa/alis_combate_r8/guardioes/guardioes.mp4) · [Recibo dos Guardiões](../out/qa/alis_combate_r8/guardioes/observations.json)
+
+O combate misto registrou 36,95235843265925, 39,449139407838935 e 43,943345163162356 FPS. As três janelas ficaram abaixo do piso de 58 FPS. A janela selada de 3.000 apresentações registrou zero estouros de VBlank. [Medição por janela](../out/qa/alis_combate_r8/worst/observations.json) · [Estado da compilação e da validação](10-memory-bank.md)
+
+Em guarda baixa contínua, as três janelas em tempo real mediram entre 58,28580742200693 e 59,32853298546355 FPS. [Sonda SMRT](../out/qa/alis_combate_r8/cadencia-tempo-real/fps.json)
