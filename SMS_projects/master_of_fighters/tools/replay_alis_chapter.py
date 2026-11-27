@@ -12,6 +12,7 @@ WRAPPER = PROJECT.parents[1] / 'tools/sms_wrapper'
 sys.path.insert(0, str(WRAPPER))
 from session_bridge import isolated
 from capture_audio import capture_session
+from measure_runtime_probe import target_fps_verdict
 from measure_worst_frame import analyze_snapshot
 from duel_probe import decode, RECORD_BYTES
 from replay_duel_round import snapshot_sat
@@ -23,7 +24,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('candidate', type=Path, help='build directory with the ROM, record and map')
     parser.add_argument('out',type=Path)
-    parser.add_argument('--case',choices=('story','versus','budget','worst','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art')+FEEDBACK_CASES,
+    parser.add_argument('--case',choices=('story','versus','budget','worst','cadence-realtime','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art')+FEEDBACK_CASES,
                         default='story')
     parser.add_argument('--fm',action='store_const',const=True,default=None,
                         help='Enable the FM unit in this private Emulicious session')
@@ -108,7 +109,7 @@ def main():
                 press(8)
                 press(32)
                 press(1)  # Options -> Versus
-            elif args.case in ('versus','worst','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art')+FEEDBACK_CASES: press(2)
+            elif args.case in ('versus','worst','cadence-realtime','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art')+FEEDBACK_CASES: press(2)
             press(16)
             if args.case=='budget': press(32,28)
         observe('apresentacao')
@@ -341,15 +342,22 @@ def main():
             log['impact_checks']=checks
             save()
             if not all(checks.values()): raise RuntimeError(f'Impact checks failed: {checks}')
-        elif args.case=='budget':
-            isolated.request(session,'input',6,0,0)
+        elif args.case in ('budget','cadence-realtime'):
+            isolated.request(session,'input',6,10 if args.case=='cadence-realtime' else 0,0)
             observe('guarda_inicio',False)
             cmd=[sys.executable,str(WRAPPER/'measure_runtime_probe.py'),'--session',str(session),
                  '--rom',str(rom),'--project',str(PROJECT),'--seconds','4','--janelas','3','--out','fps']
             log['fps_exit']=subprocess.run(cmd).returncode
+            if args.case=='cadence-realtime':
+                receipt=PROJECT/'out/evidence/sessions'/session.name/'runtime/fps.json'
+                if receipt.is_file():
+                    shutil.copy2(receipt,out/'fps.json')
             observe('guarda_fim',False)
             isolated.request(session,'input',0,0,0)
+            if args.case=='cadence-realtime' and log['fps_exit']:
+                raise RuntimeError('Realtime cadence did not pass')
         elif args.case=='worst':
+            revised_combat='-DMOF_ALIS_COMBAT=1' in record['compiler_defines']
             # Start at contact, then exercise both complete render paths at range.
             controls((24,4,9),(0,0,19),(6,2,5),(0,20,7),(0,0,14))
             observe('contato')
@@ -364,9 +372,16 @@ def main():
                 elapsed=after['vdp_frame']-before['vdp_frame']
                 if elapsed!=120: raise RuntimeError('VDP timeline mismatch')
                 delta=(after['published_frames']-before['published_frames'])&65535
-                log.setdefault('mixed_fps',[]).append(dict(vdp=elapsed,publications=delta,
+                window=dict(vdp=elapsed,publications=delta,
                     nominal_hz=ack['nominal_hz'],fps=ack['nominal_hz']*delta/elapsed,
-                    active=before['chapter'][5]==after['chapter'][5]==2))
+                    active=before['chapter'][5]==after['chapter'][5]==2)
+                if revised_combat and 'duel' in before and 'duel' in after:
+                    first,last=before['duel'],after['duel']
+                    window['logic_ticks']=(last['logic_tick']-first['logic_tick'])&65535
+                    window['fighter_state_changed']=any(
+                        first[p][key]!=last[p][key]
+                        for p in ('p1','p2') for key in ('state','pivot','life','keys_consumed'))
+                log.setdefault('mixed_fps',[]).append(window)
                 save()
             controls((4,8,42))
             mixed=[(1,1,4),(16,32,8),(0,0,24),(2,2,4),(24,20,8),
@@ -388,8 +403,18 @@ def main():
             log['worst_window']['judgment']=analyze_snapshot(
                 counters[0],int.from_bytes(counters[25:27],'little'),counters[28],
                 int.from_bytes(counters[30:32],'little'))
+            if revised_combat:
+                windows=log['mixed_fps']
+                region='NTSC' if all(59<=row['nominal_hz']<=61 for row in windows) else 'non-NTSC'
+                log['mixed_fps_verdict']=target_fps_verdict([row['fps'] for row in windows],region)
+                log['mixed_fps_coverage']=all(
+                    row['active'] and row.get('logic_ticks',0)>0 and row.get('fighter_state_changed',False)
+                    for row in windows)
             save()
             if counters[28]!=1: raise RuntimeError('The 3,000-frame window did not seal')
+            if revised_combat and (not log['mixed_fps_verdict']['passed'] or
+                                   not log['mixed_fps_coverage'] or log['worst_window']['overruns']):
+                raise RuntimeError(f"Cadence failed for windows {[row['fps'] for row in windows]}")
         elif args.case=='acting':
             reached=set()
             for _ in range(300):

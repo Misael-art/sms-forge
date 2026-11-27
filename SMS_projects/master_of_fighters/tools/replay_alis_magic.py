@@ -141,6 +141,9 @@ def main():
         return seen
 
     def record_final(player):
+        target='p'+str(2-player)
+        ground_y=state()[target]['pivot'][1]
+        return_checks=None
         isolated.request(session,'record-steps-start','guardioes')
         try:
             gesture(player,'dxfdxf',TWO)
@@ -165,7 +168,6 @@ def main():
                 assert samples[-1]['duration']==0 and samples[-1]['presented']==12
             seen=capture_film('plano_')
             if arena_return:
-                target='p'+str(2-player)
                 returned=[]
                 for _ in range(105):
                     wait(1)
@@ -176,30 +178,48 @@ def main():
                     phase=ram(addr+5,1)[0]
                     actor=d[target]
                     returned.append(dict(phase=phase,state=actor['state'],pivot=actor['pivot'],
+                                         fighter=actor['fighter'], facing_right=actor['facing_right'],
+                                         wins=list(ram(addr+3,2)),
                                          vdp=isolated.request(session,'status')['frame']))
                     if phase==4 and actor['state']==5 and not (out/'retorno_arena.png').exists():
                         observe('retorno_arena',True)
+                    if phase==4 and actor['state']==6 and not (out/'chao_arena.png').exists():
+                        observe('chao_arena',True)
                     if phase==3 and actor['state']==4:
                         break
                 log['arena_return']=returned
-                airborne=[row for row in returned if row['phase']==4 and row['state']==5]
-                grounded=[row for row in returned if row['phase']==4 and row['state']==6]
-                assert airborne and grounded and returned[-1]['phase']==3
-                assert grounded[0]['pivot'][1]>airborne[0]['pivot'][1]
-                assert grounded[0]['pivot'][0]!=airborne[0]['pivot'][0]
+                airborne=next((row for row in returned if row['phase']==4 and row['state']==5),None)
+                grounded=next((row for row in returned if row['phase']==4 and row['state']==6),None)
+                result=next((row for row in returned if row['phase']==3 and row['state']==4),None)
+                return_checks={
+                    'falls_from_air':bool(airborne and airborne['pivot'][1]<ground_y),
+                    'lands_at_ground':any(row['phase']==4 and row['state']==6 and
+                        row['pivot'][1]==ground_y for row in returned),
+                    'moves_away':bool(airborne and grounded and
+                        (grounded['pivot'][0]-airborne['pivot'][0])*
+                        (-1 if airborne['facing_right'] else 1)>0),
+                    'fall_ground_result_in_order':bool(airborne and grounded and result and
+                        airborne['vdp']<grounded['vdp']<result['vdp']),
+                    'same_fighter_and_score':bool(airborne and grounded and result and
+                        airborne['fighter']==grounded['fighter']==result['fighter'] and
+                        airborne['wins']==grounded['wins']==result['wins']),
+                }
+                log['arena_return_checks']=return_checks
         finally:
             log['movie']=isolated.request(session,'record-steps-stop')
-        if '-DMOF_ALIS_FEEDBACK=1' in record['compiler_defines']:
-            from replay_alis_feedback import focus_in_scanout
-            origin=log['movie']['first_frame']+1
-            native_frames=range(samples[0]['vdp']-origin,samples[-1]['vdp']-origin+1)
-            log['foco']=focus_in_scanout(session/'evidence/guardioes',out,focus_actor,native_frames)
         log['finisher_player']=player+1
         log['seen']=sorted(seen)
         save()
         subprocess.run(['ffmpeg','-v','error','-threads','1','-framerate','60','-i',
                         str(session/'evidence/guardioes/%06d.png'),'-c:v','libx264','-threads','1',
                         '-pix_fmt','yuv420p',str(out/'guardioes.mp4')],check=True)
+        if '-DMOF_ALIS_FEEDBACK=1' in record['compiler_defines']:
+            from replay_alis_feedback import focus_in_scanout
+            origin=log['movie']['first_frame']+1
+            native_frames=range(samples[0]['vdp']-origin,samples[-1]['vdp']-origin+1)
+            log['foco']=focus_in_scanout(session/'evidence/guardioes',out,focus_actor,native_frames)
+        if return_checks is not None and not all(return_checks.values()):
+            raise RuntimeError(f'Guardioes arena return failed: {return_checks}')
         return seen
 
     def campaign_finish(name):
@@ -355,7 +375,7 @@ def main():
                     spell(p,2,'d-d',ONE,16)
                 assert 0<life(1-p)<25
             assert ram(addr,16)[10]==8
-            ctl((B,F,45),(0,0,14))
+            ctl((0 if arena_return else B,F,45),(0,0,14))
             gesture(1,'fbf',ONE);wait(28)
             r=observe('p1_tonta',True);assert r['dizzy'][0]>0
             before=state()['p2']['pivot'][0]

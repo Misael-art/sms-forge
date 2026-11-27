@@ -8,6 +8,8 @@ O atlas tem 98 poses e 24 bancos de lutadores. As quatro poses novas foram empac
 
 O primeiro link reprovou o tamanho dos bancos. A terceira tentativa moveu a interpretação dos comandos mágicos para o banco Combat. Os objetos da magia e das regras passaram a caber. O Fôlego pausou a compilação do duelo principal quando a memória disponível caiu abaixo da reserva. A candidata R8 ainda aguarda mapa final, SHA da ROM, replay no Emulicious e medição de 58 FPS por janela. O roteiro serial está registrado em `.runtime/tmp/alis_r8/handoff.md`. A R7b segue como referência jogável anterior.
 
+A ficha atual reúne movimento, normais, especiais e os critérios por sequência. O replay dos Guardiões registra adversário, posição, direção e placar da volta à arena até o chão e o resultado. O ensaio de cadência conserva as três janelas e aplica o piso a cada taxa. O mesmo processo de compilação continua suspenso pelo monitor. O último levantamento manteve a memória disponível abaixo da reserva de 4 GiB. [Ficha de jogabilidade](command-list-alis-combate-r8.md)
+
 ## 27/11/2026 · Revisão dos especiais de Alis R7b
 
 A candidata do Espaçoporto clássico tem SHA-256 `4586a3ba6ad8fc24b3512766829e64e175672d64903fee8828e3e430ec1eeb15` e 1 MiB. Fire ganhou uma chama de 16 × 16 e Laconian Slash ganhou uma onda vertical de 16 × 24. O pacote verificou 7.416 combinações de desenho com fundo, incluindo 306 travessias entre bancos. [ROM de teste](../out/candidates/alis_especiais_r7b/rom/master_of_fighters.sms) · [Cenas e sons](../out/qa/alis_especiais_r7b/indice.md)

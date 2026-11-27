@@ -19,7 +19,9 @@ A ficha usa ticks de lógica, separados dos quadros do VDP. Os valores abaixo s�
 
 ## Ficha de Alis Landale
 
-A [Command List R8](command-list-alis-combate-r8.md) traz a coreografia e as respostas vigentes para a nova candidata. As calibrações anteriores continuam registradas abaixo para comparação.
+Consulte a ficha da R8 para movimento, comandos, efeitos e critérios de gravação no Emulicious. As tabelas a seguir registram as calibrações anteriores. [Command List R8](command-list-alis-combate-r8.md)
+
+### Primeira calibração do capítulo
 
 A seta → significa frente. Para ↓↓ e ←←, solte o direcional entre os toques. Para 1+2, pressione os dois juntos. A janela entre mudanças de direção é de 16 ticks. O jogo de origem dá a Alis Fire, Heal e Chat. A transformação de Myau pertence à história de Phantasy Star. O efeito em combate, a cura em pontos e os comandos abaixo pertencem a Master of Fighters. [Manual de Phantasy Star](https://www.smstributes.co.uk/images/db/manual_phantasystarusa.pdf).
 
