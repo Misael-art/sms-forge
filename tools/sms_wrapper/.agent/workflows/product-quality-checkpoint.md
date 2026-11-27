@@ -76,6 +76,22 @@ ampliar o elenco, o slice de produção fecha essa relação com um ciclo comple
 
 ## Revisão e decisão de crescimento
 
+Volte à cena e à ação escolhidas na bíblia. Registre a entrada, o intervalo
+no vídeo nativo e a menor janela funcional da mesma ROM. Em Palma V3, os
+40 px de deriva das nuvens em 320 quadros e as margens estáveis durante o
+dano responderam a duas perguntas visuais. No mesmo cartucho, os especiais
+ficaram abaixo do piso funcional. Vincule cada conclusão à sua medida.
+Quando uma ação falha, anote onde a divergência aparece primeiro (fonte,
+conversão, pose publicada ou composição), quem responde por essa etapa e
+qual repetição do mesmo caso distinguirá a correção. Preserve a candidata
+anterior, a receita, o hash e o parecer no registro existente.
+
+Se houver apresentação antes da partida, entre pelo título e percorra as
+escolhas pelos controles. Confira a função do retrato, a legibilidade do nome
+e a continuidade de traje, pista e música ao entrar no jogo. Na ficha e no
+cartucho, confira a mesma versão do comando, o momento de resposta e o
+retorno ao controle. Registre quais modos e lados foram exercitados.
+
 Em um duelo, use o [ensaio de uma troca completa](playable-fighter.md#ensaio-de-uma-troca-completa)
 para escolher o primeiro elo que precisa de correção. Exemplo de HUD:
 compare a vida antes/depois do dano mínimo e o que o jogador vê a 1×.

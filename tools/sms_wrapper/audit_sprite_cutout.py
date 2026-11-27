@@ -9,10 +9,11 @@ Usage: audit_sprite_cutout.py --image sheet.png --contract asset_contract.json
        audit_sprite_cutout.py --self-check
 """
 import argparse
-from collections import Counter
+from collections import Counter, defaultdict
 import json
 import os
 import sys
+import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from png_io import read_indexed_png, write_indexed_png, PngError
@@ -55,6 +56,29 @@ def _components(mask, width, height, connectivity):
     return sizes
 
 
+def _material_samples(rows, frame_count, size, colors):
+    """Index authored landmarks by frame. Coordinates are local to the region."""
+    if not isinstance(rows, list):
+        raise ValueError("samples deve ser uma lista")
+    samples = defaultdict(dict)
+    for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError("amostra de material deve ser um objeto")
+        frame, point = row.get("frame"), row.get("at_px")
+        if type(frame) is not int or not 0 <= frame < frame_count:
+            raise ValueError("frame da amostra fora da folha")
+        if (not isinstance(point, list) or len(point) != 2 or
+                not all(type(n) is int and 0 <= n < limit for n, limit in zip(point, size))):
+            raise ValueError("at_px da amostra fora da região")
+        rgb = _hex_rgb(row.get("rgb"))
+        if rgb not in colors:
+            raise ValueError("RGB da amostra fora de allowed_rgb")
+        if tuple(point) in samples[frame]:
+            raise ValueError("posição de amostra duplicada no quadro")
+        samples[frame][tuple(point)] = rgb
+    return samples
+
+
 def check_image(image_path, contract):
     errors = []
     try:
@@ -78,6 +102,8 @@ def check_image(image_path, contract):
         return errors
 
     transparent = set(image["trns"])
+    if image["partial_alpha"]:
+        errors.append("folha de sprite requer alpha binário")
     transparent_index = (contract.get("palette") or {}).get("transparent_index", 0)
     if transparent_index not in transparent:
         errors.append(f"índice transparente {transparent_index} ausente em tRNS")
@@ -124,7 +150,8 @@ def check_image(image_path, contract):
                 required[rgb] = count
             if sum(required.values()) > size[0] * size[1]:
                 raise ValueError("mínimos por RGB excedem a área da região")
-            parsed_regions.append((region["name"], offset, size, colors, required))
+            samples = _material_samples(region.get("samples", []), cols * rows, size, colors)
+            parsed_regions.append((region["name"], offset, size, colors, required, samples))
         except (KeyError, TypeError, ValueError) as exc:
             errors.append(f"pixel_cleanup_regions inválida: {exc}")
 
@@ -144,11 +171,16 @@ def check_image(image_path, contract):
                 for component_size in _components(mask, fw, fh, connectivity):
                     if component_size < minimum:
                         errors.append(f"frame {cell:02d}: componente opaco de {component_size}px < {minimum}px")
-            for name, (ox, oy), (rw, rh), allowed, required in parsed_regions:
+            for name, (ox, oy), (rw, rh), allowed, required, samples in parsed_regions:
                 rx0, ry0 = ox, top + oy
                 if rx0 < 0 or ry0 < 0 or rx0 + rw > fw or ry0 + rh > fh:
                     errors.append(f"frame {cell:02d} região {name}: fora do canvas")
                     continue
+                for (sx, sy), expected in samples.get(cell, {}).items():
+                    index = pixels[y0 + ry0 + sy][x0 + rx0 + sx]
+                    if index in transparent or index >= len(palette) or tuple(palette[index]) != expected:
+                        errors.append(f"frame {cell:02d} região {name}: amostra ({sx},{sy}) "
+                                      f"esperava pixel opaco #{bytes(expected).hex().upper()}")
                 counts = Counter()
                 for ry in range(ry0, ry0 + rh):
                     for rx in range(rx0, rx0 + rw):
@@ -173,14 +205,19 @@ def check_image(image_path, contract):
 
 
 def self_check():
+    with tempfile.TemporaryDirectory(prefix="sms-cutout-") as directory:
+        return _self_check_files(directory)
+
+
+def _self_check_files(directory):
     palette = [(0, 0, 0), (0, 0, 85), (170, 85, 85)]
     rows = [bytearray(16) for _ in range(16)]
     for y in range(2, 6):
         for x in range(5, 9):
             rows[y][x] = 1
-    good_path = "/tmp/audit_sprite_cutout_good.png"
-    bad_region_path = "/tmp/audit_sprite_cutout_bad_region.png"
-    bad_island_path = "/tmp/audit_sprite_cutout_bad_island.png"
+    good_path = os.path.join(directory, "good.png")
+    bad_region_path = os.path.join(directory, "bad_region.png")
+    bad_island_path = os.path.join(directory, "bad_island.png")
     write_indexed_png(good_path, 16, 16, palette, [bytes(r) for r in rows], trns=(0,))
     bad_rows = [bytearray(r) for r in rows]
     bad_rows[2][4] = 2
@@ -208,6 +245,13 @@ def self_check():
     region["minimum_pixels_by_rgb"]["#000055"] = 17
     assert any("16 pixels opacos" in error for error in check_image(good_path, contract))
     del region["minimum_pixels_by_rgb"]
+    region["samples"] = [{"frame": 0, "at_px": [5, 0], "rgb": "#000055"}]
+    assert not check_image(good_path, contract)
+    region["samples"][0]["at_px"] = [4, 0]
+    assert any("esperava pixel opaco" in error for error in check_image(good_path, contract))
+    region["samples"][0]["frame"] = 1
+    assert any("fora da folha" in error for error in check_image(good_path, contract))
+    del region["samples"]
     bad_region = check_image(bad_region_path, contract)
     bad_island = check_image(bad_island_path, contract)
     assert not good, f"self-check: folha limpa reprovada: {good}"

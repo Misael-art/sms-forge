@@ -3,8 +3,9 @@
   "description": "Jornada canonica de cena visual: roteiro -> storyboard pixel -> coreografia -> MEDICAO -> orcamento -> contrato -> model sheet -> assets -> runtime -> evidencia.",
   "steps": [
     {"id": "S0_scope", "kind": "human", "label": "Escopo e spec",
-     "inputs": ["doc/11-gdd.md", "doc/12-roteiro.md", "doc/13-spec-cenas.md"],
-     "outputs": ["briefing da cena aceito"]},
+     "inputs": ["doc/11-gdd.md", "doc/08-bible-artistica.md", "doc/12-roteiro.md", "doc/13-spec-cenas.md"],
+     "skill_path": "skills/sms-visual-excellence.md",
+     "outputs": ["briefing da cena aceito com foco, sinais de identidade e ação a ler na ROM"]},
     {"id": "S1_storyboard", "kind": "agent", "label": "Storyboard planta-baixa em pixel",
      "skill_path": "skills/sms-vdp-tiles.md",
      "gate": null,
@@ -31,7 +32,8 @@
      "gate": {"tool": "build_inner.py"}},
     {"id": "S8_evidence", "kind": "agent", "label": "Evidencia em emulador",
      "gate": {"tool": "capture_evidence.py"},
-     "outputs": ["emulator_evidence_v1"]},
+     "workflow": "workflows/product-quality-checkpoint.md",
+     "outputs": ["emulator_evidence_v1", "intervalo da cena em movimento quando o briefing depende de ação, câmera ou luz"]},
     {"id": "S9_visual_delivery", "kind": "agent",
      "label": "Epoca visual + vinculo asset-ROM (boot != qualidade)",
      "gates": [

@@ -16,7 +16,7 @@
         "minItems": 3, "maxItems": 3
       },
       "maxItems": 16,
-      "description": "codigos 6-bit; entrada [0,0,0] = indice 0 transparente"
+      "description": "Códigos 6-bit em ordem de índice. Índice 0 visível no BG e transparente nos sprites. Preto pode ocupar um índice opaco."
     }
   }
 }

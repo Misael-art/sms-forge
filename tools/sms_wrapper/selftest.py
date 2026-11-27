@@ -23,7 +23,7 @@ def run(args, expect_code, label):
     return ok
 
 BOOTSTRAP_REQUIRED = (
-    ".mddev/project.json", "doc/00-diretrizes-agente.md", "doc/10-memory-bank.md",
+    ".mddev/project.json", "doc/00-diretrizes-agente.md", "doc/08-bible-artistica.md", "doc/10-memory-bank.md",
     "doc/11-gdd.md", "doc/12-roteiro.md", "doc/13-spec-cenas.md",
     "doc/15-tdd.md", "doc/artifact_registry.json", "src/main.c", "build.sh",
 )
@@ -142,6 +142,31 @@ def _art_review_manifest(root, asset_kind="concept", required_axes=None):
         json.dump(manifest, stream)
     return path
 
+def _material_landmark_cases(tmp):
+    from pathlib import Path
+    from png_io import write_indexed_png
+    # Same palette and histogram for every cel. Only the middle cel loses its
+    # authored highlight position. Its visible bbox also starts one pixel lower.
+    region = {"name": "tecido", "anchor": "visible_bbox_top", "offset_px": [2, 0],
+              "size_px": [2, 1], "allowed_rgb": ["#AA0055", "#FF55AA"],
+              "minimum_pixels_by_rgb": {"#AA0055": 1, "#FF55AA": 1},
+              "samples": [{"frame": 1, "at_px": [1, 0], "rgb": "#FF55AA"}]}
+    contract = {"sheet": {"columns": 3, "rows": 1, "sheet_px": [24, 8], "frame_px": [8, 8]},
+                "pixel_cleanup_profile": {"minimum_opaque_component_px": 2, "regions": [region]}}
+    path = Path(tmp) / "tecido.json"
+    path.write_text(json.dumps(contract), encoding="utf-8")
+    image = Path(tmp) / "poses.png"
+    command = [os.path.join(HERE, "audit_sprite_cutout.py"), "--contract", str(path), "--image", str(image)]
+    pixels = [bytearray(24) for _ in range(8)]
+    pixels[2][2:4] = pixels[2][18:20] = pixels[3][10:12] = bytes((1, 2))
+    palette = [(0, 0, 0), (170, 0, 85), (255, 85, 170)]
+    write_indexed_png(image, 24, 8, palette, pixels, trns=(0,))
+    good = run(command, 0, "tecido: luz na posição contratada no quadro intermediário")
+    pixels[3][10:12] = bytes((2, 1))
+    write_indexed_png(image, 24, 8, palette, pixels, trns=(0,))
+    return [good, run(command, 1, "tecido: troca de sombra e luz com histograma idêntico")]
+
+
 def main():
     import gen_fixtures
     results = []
@@ -211,6 +236,7 @@ def main():
                            f"selfcheck:{g}"))
     print("== Fase 2: fixtures geradas ==")
     tmp = tempfile.mkdtemp(prefix="smsforge_selftest_")
+    results.extend(_material_landmark_cases(tmp))
     results.append(run([os.path.join(HERE, "audit_sprite_cutout.py"), "--self-check"],
                        0, "recorte: região com e sem o mínimo de pixels da cor do material"))
     from audit_duel_contacts import fixture as contact_fixture
@@ -431,7 +457,8 @@ def main():
         ([R, fx["valid_bg"]], 0, "bg valido aprovado"),
         ([R, fx["bad_grid"]], 1, "gate reprovou grid fora de 8x8"),
         ([R, fx["bad_color"]], 1, "gate reprovou cor fora dos codigos 6-bit"),
-        ([R, fx["opaque_idx0"]], 1, "gate reprovou indice 0 opaco"),
+        ([R, "--kind", "bg", fx["opaque_idx0"]], 0, "BG com índice zero opaco aprovado"),
+        ([R, "--kind", "sheet", fx["opaque_idx0"]], 1, "folha de sprites com índice zero opaco reprovada"),
         ([R, "--kind", "sprite", fx["valid_sprite"]], 0, "sprite 16x16 aprovado"),
         ([R, "--kind", "sprite", fx["bad_sprite"]], 1, "gate reprovou sprite 12x12"),
         ([S, fx["scene_ok"]], 0, "cena com 10 sprites dispersos aprovada"),

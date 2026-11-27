@@ -1,5 +1,5 @@
 {
-  "estado": "proposta para revisão do curador",
+  "estado": "Curadoria aplicada ao método de produção. Desempenho da ROM integrada reprovado.",
   "consumidor": "SMS_projects/master_of_fighters",
   "caderno": "SMS_projects/master_of_fighters/doc/curadoria_capitulo_alis.md",
   "recibo": "SMS_projects/master_of_fighters/doc/decisions/2026-11-27_palma_luzes_paleta.json",
@@ -49,5 +49,29 @@
       "ensaio": "Rota FM/PSG, audição, loop e mute. Apresentações funcionais, cada janela NTSC, pior quadro, ROM/SHA, insumos, sessão privada, fechamento e remoto confirmado."
     }
   ],
-  "decisao_reservada_ao_curador": "Confrontar as premissas com os gates existentes, reproduzir em segundo consumidor e decidir quais verificações pertencem ao agente canônico."
+  "parecer": {
+    "direcao_do_dono": "Buscar acabamento contemporâneo no hardware real. Referências históricas têm papel declarado. A linguagem visual é escolhida pelo projeto no GDD e na bíblia.",
+    "origem_do_desvio": "SMS_GLOBAL §15, a persona de pixel art e o modelo da bíblia prescreviam Dark Deco antes da escolha artística. A skill copiava a escala de um confronto para sessões futuras. A exportação exigia transparência de sprite também no fundo.",
+    "alcance": [
+      "Direção, cena e revisão passam pela bíblia, storyboard nativo, foco, sinal de identidade, ação concorrente e repetição do mesmo caso no framebuffer.",
+      "Para folhas indexadas com desenho definido, audit_sprite_cutout.py aceita amostras espaciais opcionais por região e quadro. Uma máscara completa do atlas e o confronto com o pacote continuam próprios do consumidor.",
+      "Em pré-luta, usar retrato da função correta, nome legível e traje que chegará à arena. Em cenário animado, testar movimento previsto, referência estável, emendas e HUD durante o dano. Em cena estática, exercitar a seleção ou outra mudança prevista no GDD.",
+      "No código, declarar o dono do evento e da apresentação. No duelo, ficha do defensor seleciona reação, atacante seleciona sobreposição. Em áudio e desempenho, ouvir as rotas que o projeto oferece e medir a apresentação completa, inclusive a pior simultaneidade."
+    ],
+    "mantido_no_consumidor": "Códigos de tinta, atlas de 94 poses, bandas da pista, ritmos das balizas, quantidade de botões/poses do golpe, bancos e rotas FM/PSG de Palma. O auditor do atlas e o replay da pista continuam específicos do jogo.",
+    "licoes_reaplicadas": ["L001", "L103", "L104", "L107", "L124", "L138"],
+    "doutrina": "SMS_GLOBAL §§15, 89, 133 e 135",
+    "calibracao_de_material": {
+      "fonte": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/alis_revisao_ficha/revisao.json",
+      "pacotes": "out/diagnostics/{alis_ficha_r4,alis_ficha_r6}/fighters/repertoire-pages.json do consumidor",
+      "sha256_anterior": "ee07cb2cfd72dfc2e69ca6f172a8106bc0903adf4742ca1ef63b4e1a60aafde9",
+      "sha256_revisto": "195092c09d6de49392930fc6dea6b44b912bf1f86e4d9c49594bde3017dd4f5f",
+      "procedimento": "Com raster() do consumidor, compor BG e sprites de P1 voltada à direita nas poses 42, 43 e 44. Para comparar o realce entre revisões, mapear o tecido anterior 19/35 para 39/59. Alinhar cada pose pelo topo opaco em célula 96×64 e colocar o pivô horizontal em x=48. A ficha seleciona o primeiro pixel claro da pose 43 em ordem de linha, x=16 relativo ao pivô e y=95 no palco. Na região de célula inteira, amostra frame=1, at_px=[64,4], rgb=#FFAAFF.",
+      "resultado": "O gate reprovou a amostra da pose 43 anterior e aceitou a revista. Contagens de realce nos três desenhos: 53/0/57 e 53/52/57. verify_rom() do consumidor conferiu os 376 pacotes de cada revisão contra os cartuchos arquivados, R5 7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b e V3 R6b bf29150027253fcf9a8b94afaec9c585684acb5405522991f1345e2f73da5c4f.",
+      "segundo_consumidor": "Kage Matsuri, res/sprites/kage_walk1_u.png, SHA-256 a5fa763c4e75a54364d605b5af3bb1def4d45242db2c8bb00c29a1417e4a9de7. A amostra #550055 em (10,0) passou. Numa cópia temporária, trocar esse pixel com (4,1) conservou o histograma e reprovou a amostra. res/bg/stage.png passou no perfil bg. Este ensaio usa PNGs, sem inferência sobre a ROM de Kage."
+    },
+    "calibracao_do_fundo": "O gate aceita as 16 entradas opacas no perfil bg e exige transparência exclusiva em 0 nos sprites e folhas. O leitor PNG interpreta tRNS por índice. No comparativo com 3fd981a, os 149 PNGs versionados em res/ conservaram o veredito positivo. Os casos de regressão cobrem índice acima de 15, zero opaco em sprite e alpha parcial ou na entrada errada.",
+    "recibo_da_rom_integrada": "SMS_projects/master_of_fighters/doc/decisions/2026-11-27_palma_v3_r6b.json",
+    "limite_da_evidencia": "Candidata bf29150027253fcf9a8b94afaec9c585684acb5405522991f1345e2f73da5c4f. O recibo registra 40 px de deriva em 320 quadros e preservação das margens. Nos especiais a menor janela foi 24.468453556760856 FPS, com 140 estouros no selo de 3.000 apresentações. A curadoria reutiliza essa evidência e mantém reprovado o aceite de 58 FPS."
+  }
 }

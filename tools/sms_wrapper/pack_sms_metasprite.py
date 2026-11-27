@@ -90,7 +90,7 @@ def pack_poses(pose_specs: list[tuple[str, Path]], tile_base: int = 0,
             raise ValueError(f"{path}: canvas {width}x{height} não está alinhado a 8x8")
         if width > 128 or height > 128:
             raise ValueError(f"{path}: offsets do metasprite excedem signed char (máx. 128x128)")
-        if 0 not in image["trns"] or image["trns"] - {0}:
+        if image["trns"] != {0} or image["partial_alpha"]:
             raise ValueError(f"{path}: índice 0 deve ser a única transparência")
         used = {index for row in image["pixels"] for index in row}
         if 0 not in used or max(used, default=0) > 15:

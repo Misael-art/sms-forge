@@ -31,6 +31,7 @@ EOF
 REQUIRED=(
   ".mddev/project.json"
   "doc/00-diretrizes-agente.md"
+  "doc/08-bible-artistica.md"
   "doc/10-memory-bank.md"
   "doc/11-gdd.md"
   "doc/12-roteiro.md"

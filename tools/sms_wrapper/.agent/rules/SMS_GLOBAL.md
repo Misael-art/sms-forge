@@ -156,8 +156,12 @@ Mapa conceitual SGDK→SMSlib (NÃO é 1:1):
 | XGM2 | PSGlib (+ PSG samples) |
 Função que não estiver no header não existe.
 
-## 15. Estética doutrinária
-Dark Deco adaptado: contraste alto, luz escassa, silhueta legível a 256×192.
+## 15. Direção artística do projeto
+A fábrica persegue acabamento contemporâneo (direção do dono em 2026).
+O GDD e a bíblia artística escolhem a linguagem de cada jogo. O ano do console
+identifica o hardware. Jogos históricos podem definir a identidade de uma
+adaptação, a escala de uma figura ou uma técnica específica. O briefing
+explicita esse papel e o que o jogador deve reconhecer, ler e sentir hoje.
 Pixel art autoral obrigatória. Proveniência por asset (`audit_provenance.py`);
 pixel nascido de código como personagem/inimigo/boss/cenário final é bloqueado.
 
@@ -2820,3 +2824,16 @@ escopo dependem da revisão do GDD e da execução prevista em
 `first-playable-slice.md` e `product-quality-checkpoint.md`.
 Um duelo acrescenta `playable-fighter.md`; o perfil MFD1 é próprio dos
 consumidores compatíveis. Aplicação de §§8/16/42/133 aos projetos nascentes.
+
+## 135. Da intenção visual à cena jogada
+
+No storyboard, fixe o foco da ação, os sinais de identidade e o momento mais
+difícil de ler. Escolha como traduzi-los para a escala nativa. Reserve padrões,
+cores e tempo de publicação para esses sinais antes de distribuir o restante.
+Compare fonte, conversão e framebuffer do mesmo trecho, incluindo os quadros
+intermediários. Use `audit_validate_resources.py --kind bg` para os índices
+visíveis do fundo e `--kind sprite` ou `--kind sheet` para a transparência
+exclusiva no índice zero dos sprites. Em regiões com desenho já definido, `audit_sprite_cutout.py`
+confere cores e amostras por posição e quadro (§89). A direção julga se o
+jogador reconhece a ação em movimento e se o cenário ajuda a lê-la.
+O checkpoint de produto reúne essa revisão e o orçamento medido (§133).

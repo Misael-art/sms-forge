@@ -5,6 +5,22 @@ Aplica L013/L037/L061/L082/L089/L097/L131/L134/L135 e SMS_GLOBAL
 §§97–100/103/122/125–126. Qualquer técnica permanece candidata até custo e
 comportamento pagos na ROM alvo.
 
+## Alterar uma mecânica sem desalinhar a apresentação
+
+No TDD, identifique quem reconhece a entrada, quem aplica a consequência e
+quem publica o quadro. No duelo de Alis, contato físico e projétil passam pelo
+mesmo resolvedor de dano. A ficha do defensor fornece a reação e a ficha do
+atacante fornece o efeito sobreposto. Essa separação permite trocar um
+lutador sem redesenhar a vítima dentro de cada ataque. Exercite também erro,
+defesa e simultaneidade. Em outros gêneros, escolha o evento equivalente do
+loop e confira se uma única ação produz exatamente a consequência prevista.
+
+Antes de mover trabalho para outra etapa, identifique no mesmo roteiro o
+tick lógico, a pose publicada e o primeiro controle livre. Compare cache
+frio e residente, quadro misto e pior efeito simultâneo. Prepare dados
+reutilizáveis fora do VBlank e meça a publicação no cartucho com HUD e áudio.
+Zero estouros na janela selada e cadência funcional são resultados distintos.
+
 ## Scroll: assimetria dos eixos (SMS_GLOBAL §122, L131)
 
 - Reg9 (scroll Y) é lido **uma vez por frame**: não existe raster vertical por

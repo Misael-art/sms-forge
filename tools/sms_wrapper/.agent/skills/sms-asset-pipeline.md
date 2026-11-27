@@ -13,7 +13,7 @@ rascunho/<original> (com sha256 registrado)
   → contrato de asset (asset_contract_v1)
   → model sheet (personagem/inimigo/cenário)
   → prova técnica de pose/conversão aprovada
-  → PNG indexado 8-bit sem perda, grid 8×8, índice 0 transparente, ≤15 úteis
+  → PNG indexado 8-bit sem perda, grid 8×8, perfil bg/sprite/sheet conforme o uso
   → gates: validate_resources + luma_floor + provenance
   → conversor adequado ao tipo: png_to_sms_tiles (tile) ou
     pack_sms_metasprite (pose composta, geometria explícita)

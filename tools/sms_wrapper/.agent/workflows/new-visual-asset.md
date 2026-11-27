@@ -105,7 +105,9 @@ herança de uma etapa anterior.
    `sms-asset-to-rom.md` (L121). Um passe estático não aprova movimento,
    gameplay, FPS, áudio, integração de produção ou budgets da cena.
 6. Após prova técnica e aprovação dos gates humanos/hardware, exportar PNG
-   indexado 8-bit para `res/` (índice 0 transparente, ≤15 úteis).
+   indexado 8-bit para `res/`. No BG o índice 0 desenha a cor da tabela
+   selecionada pelo tile. Em sprites/folhas o índice 0 é transparente e
+   os demais são opacos. Escolha o `--kind` correspondente no gate.
 7. Rodar gates:
    - `audit_validate_resources.py`
    - `audit_luma_floor.py`

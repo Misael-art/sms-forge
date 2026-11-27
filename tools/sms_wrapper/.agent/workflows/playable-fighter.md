@@ -105,10 +105,11 @@ o evento de emissão e a atividade do projétil têm cronologias distintas.
   corpo por si só deixa a vida e o contato do pulso em aberto.
 - **Alis:** o roteiro da estocada registra 24 composições estáticas, máximo
   de 53 objetos totais e oito por linha. O seletor indica interseção geométrica.
-  O próximo tipo de prova seria a ligação entre ponta apresentada, janela
-  lógica, prioridade do BG e reação do rival em perto/limite/fora, nas duas
-  faces. O diagnóstico existente ainda não resolve bloqueio ou dano. O
-  limiar provisório de input pertence ao experimento.
+  A b12 exercitou acerto a 66 px, erro a 67 px e punição após guarda.
+  Para escolher o reteste, consulte o confronto e o SHA da candidata na
+  [memória do duelo](../../../../SMS_projects/master_of_fighters/doc/10-memory-bank.md).
+  Vincule ponta apresentada, contato, bloqueio e retomada ao alcance e ao
+  comando definidos para essa revisão.
 - **Dr. Social:** a decisão de congelamento preserva o concept e a referência
   de tamanho. O estado impede usar sprites in-game históricos como matéria
   de produção. Consultar o registro vigente antes de qualquer tarefa futura.

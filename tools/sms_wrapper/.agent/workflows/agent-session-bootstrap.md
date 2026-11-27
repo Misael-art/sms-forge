@@ -22,6 +22,7 @@ O alvo vem do manifesto/GDD: SDCC + devkitSMS, sem fallback para outra engine.
 
 | Decisão | Entrada canônica |
 |---|---|
+| Direção visual de projeto novo ou cena retomada | [Direção visual](../skills/sms-visual-excellence.md) → [storyboard e orçamento da cena](new-scene.md) |
 | Loop, fases, encontros e dificuldade | `skills/game-design-core-loop.md` → `first-playable-slice.md` |
 | Arte nova ou revisão | `original-artwork.md` / `art-review.md` → `skills/sms-asset-to-rom.md` |
 | CPU, streaming, SAT e VRAM | `skills/sms-runtime-optimization.md` + `skills/sms-vram-vblank-budget.md` |

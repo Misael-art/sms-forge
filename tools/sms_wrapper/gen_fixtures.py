@@ -36,7 +36,7 @@ def generate(outdir):
     f["bad_color"] = p
     # indice 0 opaco
     p = os.path.join(outdir, "opaque_idx0_bg.png")
-    write_indexed_png(p, 32, 32, PALETTE16, _px(32, 32, lambda x, y: 1), trns=())
+    write_indexed_png(p, 32, 32, PALETTE16, _px(32, 32, lambda x, y: x % 16), trns=())
     f["opaque_idx0"] = p
     # sprites
     p = os.path.join(outdir, "valid_sprite16.png")

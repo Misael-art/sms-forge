@@ -7,6 +7,17 @@ derivar locomoção, assinatura corporal e contrajogo do sheet e do GDD.
 O [fluxo do par em combate](../workflows/playable-fighter.md) acompanha a
 mesma ação até a reação observada do adversário.
 
+Na revisão de cor, alinhe os quadros vizinhos pelo pivô da ação e assista à
+transição a 1×. Em Alis o realce da saia sumia entre dois quadros corretos.
+Escolha pontos de luz e sombra na fonte revista e acompanhe-os nas poses em
+que o tecido fica exposto. Registre a oclusão quando ela explica a mudança.
+Para a folha indexada, `regions[].samples` no perfil de
+`audit_sprite_cutout.py` fixa quadro (base zero, ordem de leitura), posição
+na região e cor, por exemplo `{"frame":1,"at_px":[3,2],"rgb":"#FF55AA"}`.
+Confira o lado, traje e pose realmente apresentados, sobretudo se a arte se
+divide entre BG e SAT. O perfil verifica os pontos declarados. Máscara
+completa e cadência pedem comparação do pacote e vídeo da ROM.
+
 ## Atuação antes do acabamento
 
 Intenção do golpe → estudo curto de referências autorizadas → coreografia

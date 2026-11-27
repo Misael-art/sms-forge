@@ -15,8 +15,10 @@ Ferramenta: `prepare_sms_pixel_art.py`.
 
 ## O que sai
 
-PNG indexado, grid 8×8, índice 0 transparente, ≤15 úteis, RGB no
-contrato canal×85. Ainda **não** é personagem/palco final: é tradução.
+O conversor produz PNG indexado no grid 8×8, com índice 0 transparente,
+até 15 cores úteis e canais múltiplos de 85. É um estudo de tradução.
+Ao preparar um cenário, o empacotador precisa atribuir uma cor visível ao
+índice 0 e preservar os 16 índices da tabela se a composição os utilizar.
 Gates: `audit_validate_resources.py`, `audit_luma_floor.py`,
 `audit_provenance.py`. Entrega visual: `sms-visual-excellence.md`.
 

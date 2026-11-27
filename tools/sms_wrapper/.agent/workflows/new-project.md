@@ -7,6 +7,9 @@ tools/sms_wrapper/new_project.sh <slug>
 2. Preencher `doc/11-gdd.md` com o loop de jogo, controles, modos/telas,
    condição de resultado e exclusões explícitas — humano aprova o escopo.
    Não presumir fase, cenário ou modo que não esteja no GDD.
+   Na bíblia artística do projeto (`doc/08-bible-artistica.md`), escolher a
+   linguagem e preencher as decisões do primeiro trecho. A
+   [direção visual](../skills/sms-visual-excellence.md) orienta a tradução para o VDP.
 3. Escrever os beats e preencher **Casos do primeiro trecho jogável** no
    roteiro. Vincular as ações escolhidas ao resultado, ao caso negativo e à
    retomada. Justificar o que fica fora ou para depois pelo GDD. Na raiz:
