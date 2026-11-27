@@ -35,7 +35,7 @@ def palette_view(frame,colors):
     im.putpalette(bytes(v for c in colors for v in rgb(c)).ljust(768,b'\0'))
     return im
 
-def make_layers(art,dest):
+def make_layers(art,dest,repair_mouth=False):
     dest.mkdir(parents=True,exist_ok=True)
     sheet=Image.open(art/'guardioes.png').convert('RGB')
     atlas=Image.open(art/'pecas.png').convert('RGBA')
@@ -77,7 +77,19 @@ def make_layers(art,dest):
             for j,b in enumerate(regions):
                 chip=base.crop(b)
                 chip.save(folder/f'detalhe-{j}.png')
-                if n in (0,2) and j==0:
+                if n==0 and j==0 and repair_mouth:
+                    # Repaint only the inside of the open lips. The borrowed
+                    # rectangular skin patch used to cross the face contour.
+                    closed=ImageDraw.Draw(variants[1])
+                    skin=base.getpixel((107,52))
+                    for y,left,right in ((51,114,116),(52,114,118),(53,112,117),
+                                         (54,112,116),(55,111,116),(56,111,115),
+                                         (57,111,114),(58,112,114),(59,113,113)):
+                        closed.line((left,y,right,y),fill=skin)
+                    closed.line([(113,53),(116,53),(117,52),(119,52)],
+                                fill=base.getpixel((114,52)))
+                    closed.point((115,54),fill=base.getpixel((112,58)))
+                elif n in (0,2) and j==0:
                     fill=chip.getpixel((chip.width-1,chip.height-1))
                     ImageDraw.Draw(variants[1]).rectangle((b[0],b[1],b[2]-1,b[3]-1),fill=fill)
                     variants[1].paste(chip.resize((chip.width,max(2,chip.height//2)),NEAR),(b[0],b[1]+1))
@@ -263,8 +275,8 @@ def export_cycle_layers(folder,stats):
                 stamp(plate,effect,(0,0))
                 assert not ImageChops.difference(plate,colors).getbbox()
 
-def pack_scenes(art,out,voice):
-    scenes,slash=make_layers(art,out/'camadas')
+def pack_scenes(art,out,voice,repair_mouth=False):
+    scenes,slash=make_layers(art,out/'camadas',repair_mouth)
     pages=bytearray();meta=[];stats=[]
     for n,pair in enumerate(scenes):
         colors,cycle,frames=palette_frames(n,pair)

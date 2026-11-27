@@ -10,6 +10,13 @@ typedef struct {
     uint8_t combo[2];  /* hits by controller, for the HUD */
 } MofChapter;
 typedef struct {
+    uint8_t rhythm, gesture, direction, last_face;
+} MofSuperInputState;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+extern MofSuperInputState mof_super_inputs[2];
+uint8_t mof_choreo_super_input(uint8_t player,uint8_t keys,uint8_t face,uint8_t free);
+#endif
+typedef struct {
     uint8_t intro_first, intro_count, ending_first, ending_count;
     uint8_t victory[2], defeat, arena_bank;
     uint16_t opening_song, battle_song, result_song;

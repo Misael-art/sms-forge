@@ -1,5 +1,13 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Revisão dos especiais de Alis R7b
+
+A candidata do Espaçoporto clássico tem SHA-256 `4586a3ba6ad8fc24b3512766829e64e175672d64903fee8828e3e430ec1eeb15` e 1 MiB. Fire ganhou uma chama de 16 × 16 e Laconian Slash ganhou uma onda vertical de 16 × 24. O pacote verificou 7.416 combinações de desenho com fundo, incluindo 306 travessias entre bancos. [ROM de teste](../out/candidates/alis_especiais_r7b/rom/master_of_fighters.sms) · [Cenas e sons](../out/qa/alis_especiais_r7b/indice.md)
+
+No Emulicious, Myau fez 3, 2 e 1 acertos com separação inicial de 24, 60 e 90 px, respectivamente. A rival manteve a vida na guarda e a 134 px. Estocada forte → Myau mostrou 4 hits e dano de 10 + 4 + 6 + 10 HP na cadeia. A regra atual de ganho por contato repôs os 4 MP gastos nesse ensaio. Rising Saber forte causou 5 + 10 HP e derrubou no segundo contato. A rival bloqueou os dois contatos no canto e conservou 100 HP. Passo de Escudo mostrou a centelha e 10 px de recuo. Palma fez 5 + 4 + 6 + 12 HP, atingiu 4 hits e derrubou ao fim do arco dourado. [Recibo das sessões](../out/qa/alis_especiais_r7b/recibo.json)
+
+O rival atordoado recebeu duas estrelas. O plano da fala de Alis alternou 51 quadros de boca aberta com 14 de boca fechada. Rest passou de 90 a 96 HP. Chat passou de 0 a 1 MP. Ambos tiveram gravações PSG separadas. A cadência mista mediu 48,936907, 48,437551 e 46,440126 FPS. As 3.000 apresentações seladas tiveram zero estouro de VBlank. O aceite de 58 FPS permanece pendente. [Medição de cadência](../out/qa/alis_especiais_r7b/worst/observations.json)
+
 ## 27/11/2026 · Espaçoporto V3 com o elenco e as mecânicas da R6b
 
 A [ROM integrada](../out/candidates/palma_v3_r6b/rom/master_of_fighters.sms) tem SHA-256 `bf29150027253fcf9a8b94afaec9c585684acb5405522991f1345e2f73da5c4f`. O Versus abre na V3. A História usa a V2. Os bancos do elenco e dos Guardiões coincidem byte a byte com a R6b. O Emulicious mostrou os oito quadros de concentração de Fire duplo e a defesa no primeiro tick após a pausa.

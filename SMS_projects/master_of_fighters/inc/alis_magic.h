@@ -6,6 +6,10 @@
 enum MofSpell { SPELL_NONE, FIRE_TAP, FIRE_HOLD, TWIN_FIRE, MYAU, REST, SLASH,
                 SABER, CHAT, MIRROR, STUN, GUARDIANS, SPELL_COUNT };
 enum MofGlyph { GL_FIRE, GL_WAVE, GL_SABER, GL_NUT, GL_WING, GL_DIVE, GL_REST, GL_STARS, GL_MIRROR };
+#ifdef MOF_ALIS_CHOREOGRAPHY
+#define GL_GOLD_ARC 9u
+#define GL_SHIELD_SPARK 10u
+#endif
 typedef struct {
     uint8_t move, age, face, previous, history[6], window, pending, held_button;
     uint8_t dizzy, stun_used, chat_wait, strain, strain_window, pose;
@@ -25,6 +29,9 @@ typedef struct {
     MofMagicTile next[MAGIC_TILES], old[MAGIC_TILES];
     uint8_t target_fighter, busy, upload[MAGIC_TILES];
     uint8_t impact_move[2], impact_damage[2], effect_mask;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    uint8_t impact_flags[2], palma[2], myau_cancel[2];
+#endif
 } MofMagic;
 /* Cartridge-private work RAM C900..CAFF. Stack descends from DFF0.
    The symbol is absolute in the linker map, outside the C770..C7F1 probes. */
@@ -44,4 +51,12 @@ void mof_magic_tiles(const uint8_t *blades,uint8_t length,uint16_t first,uint8_t
 void mof_magic_publish(void);
 void mof_magic_sound(void);
 void mof_magic_victory(void);
+#ifdef MOF_ALIS_CHOREOGRAPHY
+void mof_choreo_advance(MofDuel *duel);
+#ifdef MOF_DUEL_HOST_TEST
+#define mof_choreo_step mof_choreo_advance
+#else
+void mof_choreo_step(MofDuel *duel);
+#endif
+#endif
 #endif

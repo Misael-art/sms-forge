@@ -118,6 +118,90 @@ static void combo_contacts(void)
     }
 }
 
+#ifdef MOF_ALIS_CHOREOGRAPHY
+static void choreography(void)
+{
+    uint8_t seen_fall=0,max_hits=0,second=0;
+    reset();
+    chapter.meter[0]=4;
+    duel.fighters[0].x=100;
+    duel.fighters[1].x=160;
+    input(0,"dzb",MOF_DUEL_TWO);
+    advance(145);
+    assert(duel.fighters[1].life==84 && mof_magic.hits[0]==2);
+
+    reset();
+    chapter.meter[0]=4;
+    duel.fighters[0].x=65;
+    duel.fighters[1].x=199;
+    input(0,"dzb",MOF_DUEL_TWO);
+    advance(110);
+    assert(duel.fighters[1].life==100 && !mof_magic.shots[0].ttl);
+
+    reset();
+    chapter.meter[0]=4;
+    duel.fighters[0].x=100;
+    duel.fighters[1].x=124;
+    mof_duel_step_normal(&duel,0,0,1u,MOF_DUEL_NO_NORMAL);
+    for (uint8_t n=0;n<20 && duel.fighters[1].life==100;++n) tick(0,0);
+    assert(duel.fighters[1].life==90 && mof_magic.myau_cancel[0]==1);
+    advance(duel.hitstop);
+    input(0,"dzb",MOF_DUEL_TWO);
+    for (uint8_t n=0;n<120;++n) {
+        tick(0,0);
+        if (duel.fighters[1].combo_received>max_hits) max_hits=duel.fighters[1].combo_received;
+    }
+    assert(duel.fighters[1].life==70 && max_hits==4);
+    max_hits=0;
+
+    reset();
+    chapter.meter[0]=4;
+    duel.fighters[0].x=duel.right_wall-24;
+    duel.fighters[1].x=duel.right_wall;
+    mof_duel_step_normal(&duel,0,MOF_DUEL_RIGHT,1u,MOF_DUEL_NO_NORMAL);
+    for (uint8_t n=0;n<20 && duel.fighters[1].state!=MOF_DUEL_BLOCK;++n) tick(0,MOF_DUEL_RIGHT);
+    assert(duel.fighters[1].state==MOF_DUEL_BLOCK && !mof_magic.myau_cancel[0]);
+    while (duel.hitstop) tick(0,MOF_DUEL_RIGHT);
+    input(0,"dzb",MOF_DUEL_TWO);
+    assert(!mof_magic.events[0][MYAU] && chapter.meter[0]==4);
+
+    reset();
+    duel.fighters[0].x=100;
+    duel.fighters[1].x=130;
+    input(0,"fdx",MOF_DUEL_ONE);
+    for (uint8_t n=0;n<16;++n) tick(MOF_DUEL_ONE|MOF_DUEL_RIGHT|MOF_DUEL_DOWN,0);
+    for (uint8_t n=0;n<90;++n) {
+        tick(0,0);
+        if (duel.fighters[1].life==95 && duel.body[0].y_offset<0) second=1;
+        if (duel.fighters[1].state==MOF_DUEL_FALL) seen_fall=1;
+    }
+    assert(duel.fighters[0].x>100 && duel.fighters[1].life==85);
+    assert(seen_fall && second && mof_magic.hits[0]==2);
+
+    reset();
+    duel.fighters[0].x=100;
+    duel.fighters[1].x=124;
+    mof_magic.palma[0]=255;  /* arm at the same point as the round's super spend */
+    mof_duel_step_normal(&duel,0,0,MOF_DUEL_SUPER,MOF_DUEL_NO_NORMAL);
+    seen_fall=0;
+    for (uint8_t n=0;n<150;++n) {
+        tick(0,0);
+        if (duel.fighters[1].combo_received>max_hits) max_hits=duel.fighters[1].combo_received;
+        if (duel.fighters[1].state==MOF_DUEL_FALL) seen_fall=1;
+    }
+    assert(duel.fighters[1].life==73 && max_hits==4 && seen_fall);
+    assert(!mof_magic.palma[0] && duel.body[0].y_offset==0);
+
+    reset();
+    duel.fighters[0].x=duel.right_wall-24;
+    duel.fighters[1].x=duel.right_wall;
+    mof_magic.palma[0]=255;
+    mof_duel_step_normal(&duel,0,MOF_DUEL_RIGHT,MOF_DUEL_SUPER,MOF_DUEL_NO_NORMAL);
+    for (uint8_t n=0;n<90;++n) tick(0,MOF_DUEL_RIGHT);
+    assert(duel.fighters[1].life==100 && !mof_magic.palma[0] && !mof_magic.hits[0]);
+}
+#endif
+
 static void overlay_order(void)
 {
     reset();
@@ -287,7 +371,13 @@ int main(void)
     assert(mof_magic.reflects[1]==1 && mof_magic.hits[1]==1 && duel.fighters[0].life==90);
     reset();chapter.meter[0]=4;duel.fighters[1].x=67;
     input(0,"dzb",32);advance(20);assert(mof_magic.shots[0].age>9);
-    advance(45);assert(mof_magic.hits[0]==1 && duel.fighters[1].life==82);
+    advance(85);
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    assert(mof_magic.hits[0]==3 && duel.fighters[1].life==80);
+    choreography();
+#else
+    assert(mof_magic.hits[0]==1 && duel.fighters[1].life==82);
+#endif
     puts("thresholds, both facings, full-range curves, heal interruption, Chat cooldown, reflection and Myau passed");
     return 0;
 }

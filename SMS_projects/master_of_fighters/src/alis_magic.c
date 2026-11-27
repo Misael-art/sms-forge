@@ -39,7 +39,11 @@ static const SpellTiming timings[SPELL_COUNT]={
     {4,12,32,{MOF_MIRROR_PALMA_1, MOF_MIRROR_PALMA_2, MOF_MIRROR_PALMA_3},MOF_MOVE_HEAVY},
     {4,10,32,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3},MOF_MOVE_HEAVY},
     {2,21,32,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3},0},
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    {0,7,22,{MOF_MIRROR_LOW_1_1, MOF_MIRROR_LOW_1_2, MOF_MIRROR_RECOVER},MOF_MOVE_HEAVY},
+#else
     {0,7,22,{MOF_MIRROR_PREPARE, MOF_MIRROR_THRUST, MOF_MIRROR_RECOVER},MOF_MOVE_HEAVY},
+#endif
     {0,5,26,{MOF_MIRROR_LOW_1_1, MOF_MIRROR_AIR_1_2, MOF_MIRROR_AIR_1_3},MOF_MOVE_HEAVY},
     {0,20,30,{MOF_MIRROR_LISTEN_1, MOF_MIRROR_LISTEN_2, MOF_MIRROR_LISTEN_3},0},
     {0,3,23,{MOF_MIRROR_RIPOSTE_1, MOF_MIRROR_RIPOSTE_2, MOF_MIRROR_RIPOSTE_4},0},
@@ -108,6 +112,9 @@ static uint8_t armed(const MofDuel *d,uint8_t p,uint8_t move) {
 static void begin(uint8_t p,uint8_t move) {
     MofCaster *c=&mof_magic.caster[p];
     c->strain=0;c->age=0;c->move=move;c->window=0;c->pending=0;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    c->strain_window=0;
+#endif
     chapter.meter[p]-=timings[move].cost;
     mof_magic.busy=1;
     ++mof_magic.events[p][move];
@@ -129,12 +136,23 @@ static inline void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
     const MofDuelFighter *f=&d->fighters[p];
     uint8_t dir=direction(keys,f->face_right),buttons=keys&48,edge=buttons&~c->held_button;
     uint8_t move=0;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    uint8_t cancel=0;
+#endif
     mof_magic.pad[p]=keys;mof_magic.locked[p]=0;
     if (d->hitstop) return;
     c->held_button=buttons;
     if (c->face!=f->face_right) {c->window=c->pending=0;c->previous=0;}
     c->face=f->face_right;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    if (f->state==MOF_DUEL_ATTACK && f->standing_normal==1u) {
+        cancel=mof_magic.myau_cancel[p];
+        if (cancel==1 && d->fighters[1-p].state!=MOF_DUEL_HIT) cancel=0;
+    } else mof_magic.myau_cancel[p]=0;
+    if (f->state!=MOF_DUEL_READY && !cancel) {
+#else
     if (f->state!=MOF_DUEL_READY) {
+#endif
         c->window=c->pending=c->move=c->pose=c->dizzy=0;
         c->previous=dir;
         return;
@@ -142,11 +160,23 @@ static inline void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
     if (c->dizzy || c->move) {
         mof_magic.locked[p]=1;
         mof_magic.pad[p]=(c->move==SABER && c->age==3) ? MOF_DUEL_UP : 0;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        if (c->move==SABER && c->strain_window) mof_magic.pad[p]=0;
+#endif
         c->previous=dir;
         return;
     }
     if (d->body[p].y_offset || d->body[p].jump_pending) {c->pending=c->window=0;return;}
     if (c->pending) {
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        if (c->pending>=128) {
+            if (!(buttons&16) || ++c->pending>=134) {
+                begin(p,SABER);
+                c->strain_window=(buttons&16)!=0;
+            }
+            mof_magic.pad[p]=0;mof_magic.locked[p]=1;return;
+        }
+#endif
         if (!(buttons&16) || ++c->pending>=6) {
             move=(buttons&16) ? FIRE_HOLD : FIRE_TAP;
             if (armed(d,p,move)) begin(p,move);
@@ -161,12 +191,22 @@ static inline void input_player(const MofDuel *d,uint8_t p,uint8_t keys) {
     }
     c->previous=dir;
     if (edge && edge==buttons && dir && c->window) move=command(f->def,c->history,buttons);
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    if (cancel && move!=MYAU) return;
+#endif
     if ((move==GUARDIANS || move==STUN) && !armed(d,p,move)) {
         c->window=0;mof_magic.locked[p]=1;mof_magic.pad[p]=0;return;
     }
     if (move && armed(d,p,move)) {
         mof_magic.locked[p]=1;mof_magic.pad[p]=0;
         if (move==FIRE_TAP) {c->pending=1;c->window=0;mof_magic.busy=1;}
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        else if (move==SABER) {c->pending=129;c->window=0;mof_magic.busy=1;}
+        else if (move==MYAU && cancel) {
+            mof_magic.myau_cancel[p]=2;
+            begin(p,move);
+        }
+#endif
         else begin(p,move);
     }
 }
@@ -192,6 +232,17 @@ static void charge(uint8_t p) {if (chapter.meter[p]<8) ++chapter.meter[p];}
 
 /* Collect both sides before cancelling poses. A pair of overlapping flames
    spends both projectiles, with one impact on this defender this tick. */
+#ifdef MOF_ALIS_CHOREOGRAPHY
+static void offer_effect(uint8_t p,uint8_t damage,uint8_t move,uint8_t flags) {
+    if (!mof_magic.impact_move[p] || flags>mof_magic.impact_flags[p] ||
+        (flags==mof_magic.impact_flags[p] && damage>mof_magic.impact_damage[p])) {
+        mof_magic.impact_move[p]=move;
+        mof_magic.impact_damage[p]=damage;
+        mof_magic.impact_flags[p]=flags;
+    }
+}
+#define offer(p,damage,move) offer_effect(p,damage,move,timings[move].impact_flags)
+#else
 static void offer(uint8_t p,uint8_t damage,uint8_t move) {
     uint8_t prev=mof_magic.impact_move[p];
     uint8_t force=timings[move].impact_flags;
@@ -201,11 +252,16 @@ static void offer(uint8_t p,uint8_t damage,uint8_t move) {
         mof_magic.impact_damage[p]=damage;
     }
 }
+#endif
 static void resolve(MofDuel *d,uint8_t p) {
     uint8_t v=1u-p, move=mof_magic.impact_move[p], result;
     MofCaster *c=&mof_magic.caster[v];
     if (!move) return;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    result=mof_magic_contact(d,p,mof_magic.impact_damage[p],mof_magic.impact_flags[p]);
+#else
     result=mof_magic_contact(d,p,mof_magic.impact_damage[p],timings[move].impact_flags);
+#endif
     if (!result) return;
     mof_magic.effect_mask|=(1u<<p);
     c->dizzy=c->move=c->pending=c->pose=0;
@@ -234,33 +290,81 @@ static void spawn(MofDuel *d,uint8_t p,uint8_t index,uint8_t move) {
     s->y=move==MYAU ? 137 : 111;
     s->ttl=move==FIRE_TAP ? 12 : move==FIRE_HOLD ? 25 : move==SLASH ? 20 : 70;
     s->damage=move==MYAU ? 18 : move==TWIN_FIRE ? 7 : move==FIRE_TAP ? 6 : 10;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    if (move==MYAU) s->phase=0;
+#endif
 }
+#ifdef MOF_ALIS_CHOREOGRAPHY
+static void myau_flight(MofDuel *d,MofShot *s) {
+    uint8_t target=1u-s->owner,stage,bit,reach;
+    const MofDuelFighter *f=&d->fighters[target];
+    const MofDuelBox *box=&d->tested_hurt[target];
+    int16_t dx,center,limit;
+#ifdef MOF_ALIS_FEEDBACK
+    if (mof_feedback.duration && !s->age) return;
+#endif
+    if (!--s->ttl) return;
+    ++s->age;
+    stage=s->age<=11 ? 0 : s->age<=20 ? 1 : 2;
+    dx=s->dx;
+    if (stage==1) { dx=dx>0 ? 3 : -3;s->y-=6; }
+    if (stage==2) {
+        if (s->y>=132) {s->ttl=0;return;}
+        dx=dx>0 ? 5 : -5;
+        s->y+=5;
+    }
+    limit=f->x-(dx>0 ? 9 : -9);
+    if ((dx>0 && s->x<limit) || (dx<0 && s->x>limit)) {
+        s->x+=dx;
+        if ((dx>0 && s->x>limit) || (dx<0 && s->x<limit)) s->x=limit;
+    }
+    bit=1u<<stage;
+    if (s->phase&bit || !f->life || f->state>=MOF_DUEL_FALL) return;
+    reach=stage==2 ? 10 : 6;
+    center=s->x+d->tested_hurt_x[target]-f->x;
+    if (center+reach<=box->left || center-reach>=box->right ||
+        s->y+reach<=box->top || s->y-reach>=box->bottom) return;
+    s->phase|=bit;
+    offer_effect(s->owner,stage==0 ? 4 : stage==1 ? 6 : 10,MYAU,
+                 stage==0 ? 0 : MOF_MOVE_HEAVY);
+}
+#endif
 static void flight(MofDuel *d,MofShot *s) {
     uint8_t v=1-s->owner;
     MofDuelFighter *target=&d->fighters[v];
     MofCaster *c=&mof_magic.caster[v];
     const MofDuelBox *box=&d->tested_hurt[v];
     int16_t relative_x;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    uint8_t h=s->kind==SLASH ? 12 : 6;
+    if (s->kind==MYAU) {myau_flight(d,s);return;}
+#else
+    uint8_t h=4;
+#endif
     ++s->age;
+#ifndef MOF_ALIS_CHOREOGRAPHY
     if (s->kind==MYAU && s->age<=9) return;
     if (s->kind==MYAU && s->age<=17) {s->y-=7;return;}
+#endif
     s->x+=s->dx;
     if (s->x<0 || s->x>255 || !--s->ttl) {
         if (s->kind==TWIN_FIRE && (s->x<0 || s->x>255)) ++mof_magic.full_range;
         s->ttl=0;return;
     }
     if (s->kind==TWIN_FIRE) s->y=109+arc[(s->phase+s->age)&31];
+#ifndef MOF_ALIS_CHOREOGRAPHY
     else if (s->kind==MYAU) {
         int16_t distance=target->x-s->x;
         if (distance<0) distance=-distance;
         if (distance<86 && s->y<129) s->y+=5;
     }
+#endif
     if (!target->life || target->state>=MOF_DUEL_FALL) return;
     /* The engine sampled the defender's posture in this live step. Its
        ground solver can then translate the pivot before projectiles move. */
     relative_x=s->x+(d->tested_hurt_x[v]-target->x);
     if (relative_x+4<=box->left || relative_x-4>=box->right ||
-        s->y+4<=box->top || s->y-4>=box->bottom) return;
+        s->y+h<=box->top || s->y-h>=box->bottom) return;
     if (c->move==MIRROR && c->age>=3 && c->age<=12 && s->kind!=MYAU) {
         s->owner=v;s->dx=-s->dx;s->ttl=64;++mof_magic.reflects[v];mof_magic.audio=MIRROR;
         return;
@@ -276,9 +380,16 @@ static inline void cast(MofDuel *d,uint8_t p) {
     if (c->chat_wait) --c->chat_wait;
     if (c->dizzy) --c->dizzy;
     if (!move) {c->pose=0;return;}
-    if (f->state!=MOF_DUEL_READY) {c->move=c->pose=0;return;}
+    if (f->state!=MOF_DUEL_READY
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        && !(move==MYAU && mof_magic.myau_cancel[p]==2 && f->state==MOF_DUEL_ATTACK)
+#endif
+        ) {c->move=c->pose=0;return;}
     ++c->age;
     c->pose=timings[move].pose[c->age<timings[move].start ? 0 : c->age<timings[move].start+6 ? 1 : 2];
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    if (move==MYAU && c->age==1) spawn(d,p,0,move);
+#endif
     if (c->age==timings[move].start) {
         if (move==REST || move==CHAT) {
             uint8_t gain;
@@ -299,12 +410,20 @@ static inline void cast(MofDuel *d,uint8_t p) {
             }
 #endif
         }
-        else if (move==FIRE_TAP || move==FIRE_HOLD || move==SLASH || move==TWIN_FIRE || move==MYAU) {
+        else if (move==FIRE_TAP || move==FIRE_HOLD || move==SLASH || move==TWIN_FIRE
+#ifndef MOF_ALIS_CHOREOGRAPHY
+                 || move==MYAU
+#endif
+                 ) {
             spawn(d,p,0,move);
             if (move==TWIN_FIRE) spawn(d,p,1,move);
         }
     }
-    if (move==SABER && c->age>=5 && c->age<=12 && !c->strain) {
+    if (move==SABER && c->age>=5 && c->age<=12 && !c->strain
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        && !c->strain_window
+#endif
+        ) {
         gap=r->x-f->x;if (!c->face) gap=-gap;
         if (gap>=0 && gap<=35 && r->life && r->state<MOF_DUEL_FALL &&
             d->body[1-p].y_offset>=d->body[p].y_offset-49 && d->body[1-p].y_offset<=d->body[p].y_offset+28) {
@@ -330,6 +449,12 @@ void mof_magic_step(MofDuel *d) {
     if (!mof_magic.caster[0].move) mof_magic.caster[0].strain=0;
     if (!mof_magic.caster[1].move) mof_magic.caster[1].strain=0;
     cast(d,0);cast(d,1);
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    if (mof_magic.palma[0] || mof_magic.palma[1] ||
+        (mof_magic.caster[0].move==SABER && mof_magic.caster[0].strain_window) ||
+        (mof_magic.caster[1].move==SABER && mof_magic.caster[1].strain_window))
+        mof_choreo_step(d);
+#endif
     mof_magic.busy=0;
     MofShot *s=mof_magic.shots;
     for (i=0;i<4;++i,++s) if (s->ttl) {
@@ -340,6 +465,13 @@ void mof_magic_step(MofDuel *d) {
     if (mof_magic.impact_move[1]) resolve(d,1);
     mof_magic.busy|=mof_magic.caster[0].move|mof_magic.caster[0].dizzy|mof_magic.caster[0].pending|
                     mof_magic.caster[1].move|mof_magic.caster[1].dizzy|mof_magic.caster[1].pending;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    mof_magic.busy|=mof_magic.palma[0]|mof_magic.palma[1];
+    mof_magic.busy|=mof_magic.myau_cancel[0]|mof_magic.myau_cancel[1];
+    if ((d->fighters[0].standing_normal==MOF_DUEL_SPECIAL && d->fighters[0].contact==MOF_DUEL_LANDED) ||
+        (d->fighters[1].standing_normal==MOF_DUEL_SPECIAL && d->fighters[1].contact==MOF_DUEL_LANDED))
+        mof_magic.busy=1;
+#endif
     /* A physical impact on this step takes the shared PSG voices ahead
        of a cast cue or reflection that produced no damage of its own. */
     if (d->hitstop && !mof_magic.effect_mask) mof_magic.audio=0;
@@ -355,6 +487,9 @@ static void append_glyph(uint16_t cell,uint16_t stamp)
         t->cell=cell;
         t->bank=magic_bank[stamp];
         t->address=magic_base[stamp]+((uint16_t)magic_map[cell]<<5);
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        if (t->address>=0xc000u) {t->address-=0x4000u;++t->bank;}
+#endif
     }
 }
 #else
@@ -416,6 +551,10 @@ static void append_glyph(uint16_t cell,uint16_t stamp) __naked
         ld d,(hl)
         pop hl
         add hl,de
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        bit 6,h                 ; linear strip entered the next mapper bank
+        res 6,h
+#endif
         ld a,l
         ld (bc),a
         inc bc
@@ -430,6 +569,11 @@ static void append_glyph(uint16_t cell,uint16_t stamp) __naked
 #endif
         add hl,de
         ld a,(hl)
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        jr z,00001$
+        inc a
+00001$:
+#endif
         ld (bc),a
         ret
     __endasm;
@@ -442,6 +586,20 @@ static inline void glyph_cell(int16_t col,uint8_t row,uint8_t stamp)
 }
 static void glyph(uint8_t glyph_id,int16_t x,int16_t y,uint8_t face,uint8_t scroll)
 {
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    static const uint8_t columns[]={2,2,1,2,2,3,1,2,1,2,1};
+    static const uint8_t rows[]={2,3,1,2,2,2,1,1,1,3,1};
+    uint8_t w=columns[glyph_id], stamp=magic_glyph[glyph_id*2+(!face)];
+    int16_t origin=x-4*w;
+    int16_t row=(y-4*rows[glyph_id])>>3;
+    for (uint8_t yy=0;yy<rows[glyph_id];++yy,++row,stamp+=w) {
+        int16_t left=origin;
+        if (row<3 || row>17) continue;
+        if (row>=4 && row<12) left-=(int8_t)scroll;
+        left>>=3;
+        for (uint8_t xx=0;xx<w;++xx) glyph_cell(left+xx,row,stamp+xx);
+    }
+#else
     uint8_t wide=glyph_id>=GL_NUT && glyph_id<=GL_DIVE;
     uint8_t stamp=magic_glyph[glyph_id*2+(!face)];
     int16_t origin=x-(wide ? 8 : 4);
@@ -460,6 +618,7 @@ static void glyph(uint8_t glyph_id,int16_t x,int16_t y,uint8_t face,uint8_t scro
         glyph_cell(left,row,stamp);
         glyph_cell(left+1,row,stamp+1);
     }
+#endif
 }
 void mof_magic_plan(const MofDuel *d,uint8_t scroll) {
     uint8_t i;
@@ -469,19 +628,40 @@ void mof_magic_plan(const MofDuel *d,uint8_t scroll) {
     for (i=0;i<4;++i,++s) {
         uint8_t g;
         if (!s->ttl) continue;
-        if (s->kind==MYAU) g=s->age<=9 ? GL_NUT : s->age<=20 ? GL_WING : GL_DIVE;
+        if (s->kind==MYAU) g=s->age<=
+#ifdef MOF_ALIS_CHOREOGRAPHY
+            11
+#else
+            9
+#endif
+            ? GL_NUT : s->age<=20 ? GL_WING : GL_DIVE;
         else g=s->kind==SLASH ? GL_WAVE : GL_FIRE;
         glyph(g,s->x,s->y,s->dx>0,scroll);
     }
     for (i=0;i<2;++i) {
         const MofCaster *c=&mof_magic.caster[i];
-        if (!c->dizzy && c->move!=REST && c->move!=CHAT && c->move!=MIRROR && c->move!=SABER) continue;
         const MofDuelFighter *f=&d->fighters[i];
         int16_t x=f->x,y=144+d->body[i].y_offset;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+        if (f->standing_normal==MOF_DUEL_SPECIAL && f->contact==MOF_DUEL_LANDED) {
+            const MofDuelFighter *target=&d->fighters[1-i];
+            glyph(GL_SHIELD_SPARK,target->x-(f->face_right ? 15 : -15),y-34,f->face_right,scroll);
+        }
+        if (mof_magic.palma[i] && mof_magic.palma[i]!=255)
+            glyph(mof_magic.palma[i]>=13 ? GL_GOLD_ARC : GL_WAVE,x+(f->face_right ? 23 : -23),
+                  y-32,f->face_right,scroll);
+#endif
         if (c->dizzy) glyph(GL_STARS,x+((c->dizzy>>2)&3),y-60,1,scroll);
         if (c->move==REST || c->move==CHAT) glyph(GL_REST,x,y-50,1,scroll);
         else if (c->move==MIRROR) glyph(GL_MIRROR,x+(c->face ? 12 : -12),y-32,c->face,scroll);
-        else if (c->move==SABER) glyph(GL_SABER,x+(c->face ? 19 : -19),y-52,c->face,scroll);
+        else if (c->move==SABER) {
+#ifdef MOF_ALIS_CHOREOGRAPHY
+            if (c->strain_window && c->age>=5 && c->age<=14)
+                glyph(GL_WAVE,x+(c->face ? 22 : -22),y-31,c->face,scroll);
+            else
+#endif
+                glyph(GL_SABER,x+(c->face ? 19 : -19),y-52,c->face,scroll);
+        }
     }
 }
 

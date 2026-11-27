@@ -6,7 +6,7 @@ import struct
 import subprocess
 from alis_guardians_panels import pack_scenes
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageDraw
 from make_duel_scene02_assets import PROJECT, array, c_values, digest, pixels, planar
 from pack_alis_scenes import native, encode
 from stage_alis_postures import rgb
@@ -48,33 +48,79 @@ def decode_stage(data,defs,fighters):
     return ids, [ids.index(t) for t in tilemap], [oriented(t) for t in ids], list(data[pal:pal+16])
 
 
-def glyph_stamps(palette):
+def choreographed_effect(index):
+    """Original effects drawn on the target pixel grid in the arena's colors."""
+    if index == 0:
+        size = (16, 16)
+        shapes = (
+            (3, [(0,3),(7,6),(4,1),(10,4),(14,5),(15,8),(13,11),(8,13),(2,15),(5,10),(0,11),(4,8)]),
+            (11, [(3,5),(8,7),(8,3),(13,5),(15,8),(12,11),(6,12),(8,9),(2,10),(6,8)]),
+            (27, [(7,7),(10,7),(10,5),(13,6),(14,8),(12,10),(8,10),(10,8)]),
+            (63, [(10,7),(12,6),(14,8),(12,9),(10,9),(11,8)]),
+        )
+    elif index in (1, 9):
+        size = (16, 24)
+        height = size[1] - 1
+        edge, light = (32, 60) if index == 1 else (11, 27)
+        shapes = (
+            (edge, [(2,0),(10,3),(14,8),(15,height//2),(13,height-5),(8,height-2),(1,height),
+                    (6,height-5),(10,height//2),(10,7),(6,3)]),
+            (light, [(5,1),(11,4),(13,8),(14,height//2),(12,height-5),(6,height-2),
+                     (9,height-6),(11,height//2),(11,7)]),
+            (63, [(9,3),(12,6),(13,height//2),(11,height-6),(10,height-5),(12,height//2),(11,6)]),
+        )
+    elif index in (7, 10):
+        size = (16, 8) if index == 7 else (8, 8)
+        shapes = ((27, [(3,0),(4,2),(7,3),(4,4),(3,7),(2,4),(0,3),(2,2)]),
+                  (63, [(3,2),(4,3),(3,4),(2,3)]))
+        if index == 7:
+            shapes += ((11, [(12,0),(13,2),(15,2),(13,4),(12,6),(11,4),(9,3),(11,2)]),
+                       (63, [(12,2),(13,3),(12,4),(11,3)]))
+    else:
+        return None
+    image = Image.new('RGBA', size)
+    art = ImageDraw.Draw(image)
+    for color, points in shapes:
+        art.polygon(points, fill=(*rgb(color),255))
+    return image
+
+
+def glyph_stamps(palette, choreography=False):
     glyphs=Image.open(ART/'magias.png').convert('RGBA')
-    for i in range(9):
-        x,y=i%3,i//3
-        cel=glyphs.crop((x*glyphs.width//3,y*glyphs.height//3,(x+1)*glyphs.width//3,(y+1)*glyphs.height//3))
-        alpha=cel.getchannel('A').point(lambda a:255 if a>=170 else 0)
-        cel.putalpha(alpha);cel=cel.crop(alpha.getbbox())
-        side=16 if i in (3,4,5) else 8
-        cel.thumbnail((side,side),Image.Resampling.LANCZOS)
-        full=Image.new('RGBA',(side,side));full.paste(cel,((side-cel.width)//2,(side-cel.height)//2))
+    for i in range(11 if choreography else 9):
+        full=choreographed_effect(i) if choreography else None
+        if full is None:
+            x,y=i%3,i//3
+            cel=glyphs.crop((x*glyphs.width//3,y*glyphs.height//3,(x+1)*glyphs.width//3,(y+1)*glyphs.height//3))
+            alpha=cel.getchannel('A').point(lambda a:255 if a>=170 else 0)
+            cel.putalpha(alpha);cel=cel.crop(alpha.getbbox())
+            size=(24,16) if choreography and i==5 else (16,16) if i in (3,4,5) else (8,8)
+            cel.thumbnail(size,Image.Resampling.LANCZOS)
+            full=Image.new('RGBA',size);full.paste(cel,((full.width-cel.width)//2,(full.height-cel.height)//2))
         for flip in (False,True):
             oriented=full.transpose(Image.Transpose.FLIP_LEFT_RIGHT) if flip else full
             ink=native(oriented,oriented.size,palette)
-            for yy in range(0,side,8):
-                for xx in range(0,side,8):
+            for yy in range(0,full.height,8):
+                for xx in range(0,full.width,8):
                     bounds=xx,yy,xx+8,yy+8
                     alpha=oriented.getchannel('A').crop(bounds).tobytes()
                     color=ink.crop(bounds).tobytes()
                     yield i, flip, yy//8, alpha, color
 
 
-def pack(base,out):
+def pack(base,out,choreography=False):
     out.mkdir(parents=True,exist_ok=True)
     manifest=json.loads((base/'chapter.json').read_text())
     tc=manifest['toolchain']
     fighters=PROJECT/tc['include_dirs'][0]
     ids,map_index,backgrounds,palette=stage_patterns(base,fighters)
+    if choreography:
+        # The revised effects fit within rows 3..17. Omit the other arena
+        # patterns from every pre-composited effect, including unused HUD tiles.
+        used=list(dict.fromkeys(map_index[3*32:18*32]))
+        index={old:new for new,old in enumerate(used)}
+        ids=[ids[i] for i in used];backgrounds=[backgrounds[i] for i in used]
+        map_index=[index.get(i,0) for i in map_index]
     magic_bank=tc['defines']['MOF_RULE_BANK']+1
     first=magic_bank+1
     voice=out/'algol.wav'
@@ -85,7 +131,7 @@ def pack(base,out):
     active=[i for i,v in enumerate(samples) if abs(v)>peak//100]
     levels=[10**(-n/10) for n in range(15)]+[0]
     voice_pcm=bytes(0x90|min(range(16),key=lambda n:abs(levels[n]-(0.5+v/(2*peak)))) for v in samples[active[0]:active[-1]+1])
-    banks,meta,voice_address,cut_tiles,cut_xy=pack_scenes(ART,out,voice_pcm)
+    banks,meta,voice_address,cut_tiles,cut_xy=pack_scenes(ART,out,voice_pcm,repair_mouth=choreography)
     cine='static const unsigned int magic_patch[][2] = {'+','.join('{%d,%d}'%tuple(r[:2]) for r in meta)+'};'
     cine+='\n'+array('magic_cycle',[v for row in meta for v in row[2:]])
     cine+='\n'+array('magic_cut_xy',cut_xy)
@@ -95,15 +141,24 @@ def pack(base,out):
     sprite_ids=[]
     offset=PAGE
     last=None
-    for glyph,flip,_,alpha,color in glyph_stamps(palette):
+    strips={}
+    if choreography:
+        banks.extend(b'\xff'*(-len(banks)%PAGE))
+    for glyph,flip,_,alpha,color in glyph_stamps(palette,choreography):
         if (glyph,flip)!=last:
             sprite_ids.append(len(locations))
             last=(glyph,flip)
         strip=b''.join(planar([c if a>=100 else b for c,a,b in zip(color,alpha,tile)]) for tile in backgrounds)
-        if offset+len(strip)>PAGE:
+        if choreography and strip in strips:
+            locations.append(strips[strip])
+            continue
+        if choreography:
+            bank,offset=divmod(len(banks),PAGE)
+        elif offset+len(strip)>PAGE:
             banks.extend(b'\xff'*(-len(banks)%PAGE))
             offset=0
-        locations.append((first+len(banks)//PAGE,0x8000+offset))
+        locations.append((first+(bank if choreography else len(banks)//PAGE),0x8000+offset))
+        strips[strip]=locations[-1]
         banks.extend(strip);offset+=len(strip)
     banks.extend(b'\xff'*(-len(banks)%PAGE))
     if first+len(banks)//PAGE>64: raise ValueError('Spell art exceeds the cartridge')
@@ -124,10 +179,14 @@ def pack(base,out):
     # Bind spell acting to the named poses of this fighter build. Avoid
     # linking a second copy of the renderer's large packet tables.
     pose_defs=re.findall(r'^#define MOF_MIRROR_\w+ \d+u$',(fighters/'duel_mirror_assets.h').read_text(),re.M)
+    if choreography:
+        (out/'magic_poses.h').write_text('\n'.join(pose_defs)+'\n')
     (out/'magic_art.h').write_text('\n'.join(pose_defs+header)+'\n')
     (out/'magic.bin').write_bytes(banks)
     tc['include_dirs'].append(out.relative_to(PROJECT).as_posix())
     tc['defines'].update(MOF_DUEL_SCENE_EFFECTS=1,MOF_ALIS_MAGIC=1,MOF_MAGIC_BANK=magic_bank,MOF_GUARDIANS_PAGE=first)
+    if choreography:
+        tc['defines']['MOF_ALIS_CHOREOGRAPHY']=1
     tc['mapper_code_banks']['SMSBANK_MAGIC']=magic_bank
     tc['makesms_extra']+=['-mbank',f'{(out/"magic.bin").relative_to(PROJECT)}:0:{len(banks)//PAGE}:{first}']
     (out/'chapter.json').write_text(json.dumps(manifest,indent=2)+'\n')
@@ -137,4 +196,5 @@ def pack(base,out):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('panels',type=Path);parser.add_argument('out',type=Path)
-    args=parser.parse_args();pack(args.panels.resolve(),args.out.resolve())
+    parser.add_argument('--choreography',action='store_true')
+    args=parser.parse_args();pack(args.panels.resolve(),args.out.resolve(),args.choreography)

@@ -102,6 +102,7 @@ typedef struct {
 #define MOF_MOVE_HEAVY         0x01u  /* long freeze and hitstun; a landed hit shakes */
 #define MOF_MOVE_AIR_BLOCKABLE 0x02u  /* an airborne guard stops it */
 #define MOF_EFFECT_FINISH      0x80u  /* confirmed cinematic contact */
+#define MOF_EFFECT_FALL        0x40u  /* knock down a surviving target on a landed effect */
 #define MOF_MOVE_ANTI_AIR      0x04u  /* from the ground it beats an airborne guard */
 #define MOF_MOVE_PARRY         0x08u  /* catches a middle hit in the record's parry window,
                                          and strikes only after a catch */

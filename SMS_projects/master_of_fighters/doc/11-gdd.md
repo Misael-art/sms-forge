@@ -1,5 +1,9 @@
 # 11-gdd — master_of_fighters
 
+## Coreografia dos especiais de Alis
+
+Fire lança uma chama com volume. Laconian Slash forma uma onda vertical com a passagem da espada. Myau aparece pequeno durante a concentração, come a noz, avança, cresce com o salto e mergulha alado. Cada forma dá um contato próprio e aumenta o prêmio. O mergulho termina no pouso. A estocada forte confirmada abre uma janela para chamar Myau durante a recuperação. Rising Saber forte sobe em arco para a frente em dois contatos, com queda no segundo acerto limpo. Passo de Escudo afasta a rival e marca o choque com uma centelha. Palma encadeia a estocada, a subida de dois contatos e a subida dourada que derruba. Estrelas assinalam a tontura. A boca de Alis alterna duas exposições durante sua fala nos Guardiões. Rest e Chat sinalizam ganho com motivos PSG distintos. [Comandos e calibração](padrao_moveset_especiais.md#revisão-r7b-dos-especiais-após-o-vídeo-da-r6b)
+
 ## Iluminação da V3 e materiais de Alis
 
 Sob a nave da esquerda, a luz âmbar tremula e produz uma resposta ligeiramente atrasada no reflexo do piso. Entre as balizas de pista há luzes firmes e variações de amplitude e cadência diferentes. O olho deve continuar acompanhando a luta. Para o tecido de Alis em P1, as cores físicas 39 e 59 retomam o model sheet v4. O índigo usa 37 e o segundo traje usa 24 e 44. Conferir o acerto entre quadros consecutivos da mesma ação. [Caderno para curadoria](curadoria_capitulo_alis.md)

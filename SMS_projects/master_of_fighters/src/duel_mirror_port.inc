@@ -93,8 +93,13 @@ static void MIRROR_PLAN(void)
     view->x = (uint8_t)actor->x;
     view->y = state->y_offset;
 #ifdef MOF_ALIS_MAGIC
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    if (chapter.phase==MOF_PLAY && (mof_magic.caster[MIRROR_PLAYER].pose ||
+        (actor->state==MOF_DUEL_READY && mof_magic.caster[MIRROR_PLAYER].dizzy))) {
+#else
     if (chapter.phase==MOF_PLAY && actor->state==MOF_DUEL_READY &&
         (mof_magic.caster[MIRROR_PLAYER].pose || mof_magic.caster[MIRROR_PLAYER].dizzy)) {
+#endif
         pose=mof_magic.caster[MIRROR_PLAYER].dizzy ? MOF_MIRROR_HIT_HEAD : mof_magic.caster[MIRROR_PLAYER].pose;
         goto encode_pose;
     }

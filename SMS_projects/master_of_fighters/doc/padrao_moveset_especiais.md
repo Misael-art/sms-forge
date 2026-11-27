@@ -38,6 +38,22 @@ A seta → significa frente. Para ↓↓ e ←←, solte o direcional entre os t
 A cena confirmada começa no olhar de Alis. Odin dispara a Laser Gun, Noah responde com Thunder, Myau come a Noz de Laerma e mergulha alado. O corte crítico da Espada Laconiana fecha o duelo. A direção usa quadros ilustrados em letterbox, mudanças localizadas de paleta, deslocamento horizontal de impacto e som PSG. O medidor e a vida crítica pulsam durante a luta. [Referência F. Anime indicada pelo proprietário](https://www.youtube.com/watch?v=HhgmTaUsqG8).
 
 
+## Revisão R7b dos especiais após o vídeo da R6b
+
+| Ação | Construção da candidata e parâmetros iniciais |
+|---|---|
+| Fire e Fire duplo | Projetar uma chama de 16 × 16 px com cauda, núcleo claro e contorno quente. Preservar toque e pressão longa, dano e custo da R6b. O Fire duplo continua com dois contatos possíveis. |
+| Myau e a Noz de Laerma | Mostrar Myau pequeno ao lado de Alis durante a hiperpausa, já com a noz. Encerrada a pausa, ele avança, passa à forma intermediária na subida e termina maior e alado no mergulho. Cada etapa concede até um contato por ativação, com proposta inicial de 4, 6 e 10 HP. De longe, apenas as etapas que alcançam a rival podem acertar. O pouso encerra o ataque e limita o alcance. A estocada forte libera o comando de Myau durante a recuperação se o hit foi confirmado e a rival ainda está em reação. A guarda mantém a defesa contra a abertura. Mostrar o contador do primeiro contato até o fim da cadeia. |
+| Laconian Slash | Cortar de baixo para cima e soltar uma onda vertical de 16 × 24 px. A lâmina e a onda têm origens visuais compatíveis. Manter o dano e testar o bloqueio e a reflexão. |
+| Rising Saber forte | Segurar 1 após →↓↘. Alis sobe e avança em curva. O primeiro contato tira 5 HP e o segundo tira 10 HP e derruba no acerto limpo. O toque curto conserva a subida simples de um contato. |
+| Passo de Escudo | Empurrar até 10 px no acerto, limitado pela parede. A centelha marca o ponto de choque e a guarda conserva a distância menor de recuo. |
+| Investida de Palma | Preservar a estocada atual como abertura de 5 HP. Confirmado o acerto, dois contatos da primeira subida tiram 4 e 6 HP. Um arco dourado maior fecha por 12 HP e derruba. Abertura defendida ou no vazio encerra a sequência. |
+| Atordoar | Estrelas acima da cabeça duram até acabar ou interromper o atordoamento. |
+| Guardiões de Algol | Animar as duas exposições da boca no primeiro plano. Manter a linha de contorno, a expressão e a nitidez na troca. |
+| Rest e Chat | Dar a HP um arpejo curto ascendente e a MP uma resposta em oitava. Ambos são sinais originais para PSG. Devem coincidir com o ganho efetivo e continuar distintos com a música. |
+
+Os danos novos são parâmetros iniciais de equilíbrio. Cada hit exige contato real e uma janela própria. A R7b confirmou 30 HP em 4 hits na rota estocada forte → Myau. A regra de ganho por contato repôs os 4 MP gastos nesse ensaio. A revisão de equilíbrio deve considerar o custo líquido por rota e a resposta disponível entre sequências. [Cenas e resultados da R7b](../out/qa/alis_especiais_r7b/indice.md)
+
 ## Command List jogável da R6b
 
 | Ação aceita | Tempo e efeito na candidata do Espaçoporto |

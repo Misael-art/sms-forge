@@ -44,6 +44,12 @@ O Fire curto tirou 6 HP a 38 px de distância inicial. O médio tirou 10 HP a 66
 
 A revisão de deslocamento encontrou duas diferenças entre a descrição e a apresentação. Em Palma, a estocada tirou 25 HP, com o pivô de Alis fixo em X120 e a rival a até 5 px para trás durante a reação, antes de cair. Em Rising Saber, o dano foi publicado com Alis no chão no tick 252. A subida ficou visível no tick 253, 13 quadros VDP depois do HP publicado. Para o próximo personagem, a prova deve inspecionar a correspondência entre a pose exibida, o instante do contato e quem realmente se desloca. [Trajeto e contato de Palma](../../out/qa/alis_gameplay_r6b/palma/trace.json) · [Laconian Slash e Rising Saber](../../out/qa/alis_gameplay_r6b/espada/trace.json)
 
+## Revisão R7b após a demonstração dos especiais
+
+A captura da R7 revelou que Myau ainda se deslocava junto ao chão após descer. A R7b limita o percurso à aterrissagem. Confirmar o arco durante o salto, cada mudança de forma, o pouso no erro e a diferença de acertos conforme a distância inicial. A 134 px, a candidata completou o voo e preservou a vida da rival. A ligação com estocada forte exige acerto e continua contando durante o salto. O ensaio fez 30 HP em quatro hits e repôs o MP consumido pela regra comum de ganho por contato. O próximo exame de equilíbrio deve registrar o custo líquido e a resposta entre cadeias. [Cenas e recibos da R7b](../../out/qa/alis_especiais_r7b/indice.md)
+
+Fire, a meia-lua vertical, o mergulho alado e o arco dourado exigem mais células que os efeitos anteriores. O cartucho precompõe as regiões do fundo atravessadas pelo efeito e guarda cada faixa linearmente. A prova compara cada faixa recalculada, inclusive quando atravessa a fronteira do banco. A bancada verifica cada contato antes da gravação. O Emulicious comprova em seguida o quadro apresentado, a resposta à defesa e o resultado do golpe. A ausência de estouro em 3.000 apresentações mede a janela de VBlank. As janelas de jogo ficaram entre 46,440126 e 48,936907 FPS e seguem abaixo do piso de 58. [Medição funcional e VBlank](../../out/qa/alis_especiais_r7b/worst/observations.json)
+
 ## Fontes do projeto
 
 - [Repertório, afastamento e tempos](../repertorio_alis_hayato.md) · [Provas por confronto](../repertorio_alis_hayato_provas.md) · [Comandos da cena](../scene02-comandos.md)

@@ -34,7 +34,10 @@ static const uint8_t reader_cols[]=STAGE_PORT_SCAN_X, reader_rows[]=STAGE_PORT_S
 #define ARENA_BANK mof_presentation->arena_bank
 #endif
 static uint8_t last_pad;
-static uint8_t rhythm[2], gesture[2], direction[2], last_face[2];
+#ifndef MOF_ALIS_CHOREOGRAPHY
+static
+#endif
+MofSuperInputState mof_super_inputs[2];
 static uint8_t old_banner, old_gauge[2], banner_tiles;
 static uint8_t displayed_combo[2];
 
@@ -354,7 +357,7 @@ void mof_chapter_round(void)
     for (i=0;i<2;++i) {
         chapter.meter[i]=chapter.idle[i]=0;
         chapter.combo[i]=displayed_combo[i]=0;
-        rhythm[i]=gesture[i]=direction[i]=0;
+        mof_super_inputs[i].rhythm=mof_super_inputs[i].gesture=mof_super_inputs[i].direction=0;
     }
 }
 
@@ -567,7 +570,11 @@ void mof_chapter_update(const MofDuel *duel)
         if (f->contact==MOF_DUEL_LANDED || f->contact==MOF_DUEL_GUARDED) {
             if (chapter.meter[i]<8 && (f->standing_normal!=MOF_DUEL_SUPER
 #ifdef MOF_ALIS_MAGIC
-                || (mof_magic.effect_mask & (1u<<i))
+                || ((mof_magic.effect_mask & (1u<<i))
+#ifdef MOF_ALIS_CHOREOGRAPHY
+                    && !mof_magic.palma[i]
+#endif
+                   )
 #endif
                 )) ++chapter.meter[i];
             if (chapter.meter[1-i]<8 && f->contact==MOF_DUEL_LANDED) ++chapter.meter[1-i];
@@ -602,30 +609,41 @@ uint8_t mof_chapter_result(void)
     return edge & MOF_DUEL_TWO ? MOF_MAIN_MENU : MOF_REMATCH;
 }
 
+#ifdef MOF_ALIS_CHOREOGRAPHY
+void mof_choreo_step(MofDuel *duel)
+{
+    SMS_mapROMBank(MOF_PAN_BANK);
+    mof_choreo_advance(duel);
+    SMS_mapROMBank(MOF_MAGIC_BANK);
+}
+#endif
+
 void mof_chapter_spend_super(uint8_t player)
 {
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    mof_magic.palma[player]=255;
+    mof_magic.busy=1;
+#endif
 #ifdef MOF_ALIS_FEEDBACK
     if (mof_feedback.duration<10) mof_feedback.duration=10;
     mof_feedback.participants|=1u<<player;
 #endif
-    chapter.meter[player]=rhythm[player]=gesture[player]=direction[player]=0;
+    MofSuperInputState *state=&mof_super_inputs[player];
+    chapter.meter[player]=state->rhythm=state->gesture=state->direction=0;
 }
 
-/* Two distinct down/forward strokes at the current facing, then a fresh 1.
-   A failed full-meter check falls back through the usual special reader. */
-uint8_t mof_chapter_super_input(uint8_t p,uint8_t keys,uint8_t face,uint8_t free)
+#ifdef MOF_ALIS_CHOREOGRAPHY
+uint8_t mof_chapter_super_input(uint8_t player,uint8_t keys,uint8_t face,uint8_t free)
 {
-    uint8_t front=face ? MOF_DUEL_RIGHT : MOF_DUEL_LEFT;
-    uint8_t dir=keys & 15u;
-    if (!free || face!=last_face[p] || !rhythm[p]) gesture[p]=0;
-    last_face[p]=face;
-    if (rhythm[p]) --rhythm[p];
-    if (free && dir!=direction[p]) {
-        if (dir==MOF_DUEL_DOWN) { gesture[p]=gesture[p]==2 ? 3 : 1; rhythm[p]=18; }
-        else if (dir==front && (gesture[p]==1 || gesture[p]==3)) ++gesture[p];
-        else if (dir && dir!=(front|MOF_DUEL_DOWN)) gesture[p]=0;
-    }
-    direction[p]=dir;
-    return gesture[p]==4 && dir==front && chapter.meter[p]==8;
+    uint8_t ready;
+    SMS_mapROMBank(MOF_PAN_BANK);
+    ready=mof_choreo_super_input(player,keys,face,free);
+    SMS_mapROMBank(MOF_RULE_BANK);
+    return ready;
 }
+#else
+#define MOF_SUPER_INPUT mof_chapter_super_input
+#include "alis_super_input.inc"
+#undef MOF_SUPER_INPUT
+#endif
 #endif

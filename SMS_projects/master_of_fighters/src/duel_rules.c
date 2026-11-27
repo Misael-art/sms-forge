@@ -3,6 +3,9 @@
 #pragma constseg SMSBANK_RULES
 #endif
 #include "../inc/duel_rules.h"
+#ifdef MOF_ALIS_CHOREOGRAPHY
+#include "../inc/alis_magic.h"
+#endif
 
 #if defined(MOF_DUEL_PILOT) || defined(MOF_DUEL_REPERTOIRE) || defined(MOF_DUEL_HOST_TEST)
 
@@ -717,6 +720,11 @@ uint8_t mof_duel_effect_contact(MofDuel *duel,uint8_t attacker,uint8_t damage,ui
     if (!target->life || target->state>=MOF_DUEL_FALL ||
         source->contact==MOF_DUEL_LANDED || source->contact==MOF_DUEL_GUARDED ||
         source->contact==MOF_DUEL_PARRIED) return MOF_DUEL_NO_CONTACT;
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    if (!guard && target->state==MOF_DUEL_BLOCK &&
+        (target->keys&(MOF_DUEL_LEFT|MOF_DUEL_RIGHT))==(target->face_right ? MOF_DUEL_LEFT : MOF_DUEL_RIGHT))
+        guard=target->reaction-MOF_REACT_GUARD_STAND+1u;
+#endif
     impact_timing(duel,victim,flags&(MOF_EFFECT_FINISH|MOF_MOVE_HEAVY),!guard);
     target->held=target->guarding=0;
     if (guard) {
@@ -726,7 +734,7 @@ uint8_t mof_duel_effect_contact(MofDuel *duel,uint8_t attacker,uint8_t damage,ui
     }
     target->reaction=MOF_REACT_BODY;
     deal_damage(target, damage);
-    if (!target->life && !(flags&MOF_EFFECT_FINISH)) begin_fall(duel,victim);
+    if ((!target->life && !(flags&MOF_EFFECT_FINISH)) || (flags&MOF_EFFECT_FALL)) begin_fall(duel,victim);
     else enter(duel,target,target->life ? MOF_DUEL_HIT : MOF_DUEL_KO);
     return source->contact=MOF_DUEL_LANDED;
 }
@@ -836,6 +844,14 @@ static void apply_contact(MofDuel *duel, uint8_t attacker, uint8_t result)
         push = 3;
     }
     target->x = clamp_x(duel, target->x + (source->face_right ? push : -push));
+#ifdef MOF_ALIS_CHOREOGRAPHY
+    if (result==MOF_DUEL_LANDED) {
+        if (source->standing_normal==1u) {
+            mof_magic.myau_cancel[attacker]=1;
+            mof_magic.busy=1;
+        } else if (source->standing_normal==MOF_DUEL_SPECIAL) mof_magic.busy=1;
+    }
+#endif
 }
 
 static int16_t movement(const MofDuel *duel, uint8_t player)
