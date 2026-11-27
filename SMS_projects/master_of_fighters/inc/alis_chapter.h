@@ -34,6 +34,13 @@ uint8_t mof_matchup_keys(void);
 void mof_matchup_pan(uint8_t timed);
 #ifdef MOF_PALMA_VERSIONS
 extern uint8_t mof_stage_choice;
+#ifdef MOF_PALMA_LIGHTS
+typedef struct { uint8_t bank,signal_x,signal_y,reader_x,reader_y; } MofPortScene;
+extern MofPortScene mof_port_scene;
+void mof_port_bind(void);
+void mof_port_environment(uint8_t reset);
+void chapter_cell(uint8_t x,uint8_t y,uint16_t tile);
+#endif
 void mof_camera_strip(uint8_t bank,const uint8_t *strip);
 #endif
 void mof_chapter_pair(uint8_t p1,uint8_t p2);

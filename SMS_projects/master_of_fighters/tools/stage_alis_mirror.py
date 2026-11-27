@@ -35,6 +35,9 @@ POSTURE_SHEET = SOURCE.parent / "scene02_alis_postures_20261121/pose-study.png"
 NEUTRAL_COLORS = {3: 6, 7: 11}
 SECOND_COSTUME = {19: 24, 35: 44}
 FABRIC_RAMP = (19, 35)
+# Keep packet indices stable between the two native costumes. On the v4
+# sheet these swatches are indigo armor, pink fabric and its pale highlight.
+MODEL_SWATCHES = {16: 37, 19: 39, 35: 59}
 PELVIS_X = 12
 # Inclusive native regions, relative to the right-facing pelvis and ground
 # canvas. Only neutral shades inside the named material are retouched.
@@ -77,7 +80,7 @@ def read_cell(image, columns, rows, index):
 
 
 def import_cel(image, divisor, slot, palette, x_origin=0, minimum_y=0,
-               maximum_width=None, sample_bottom_trim=0, concept_materials=False, alpha_floor=192):
+               maximum_width=None, sample_bottom_trim=0, concept_materials=False, alpha_floor=192, fabric_midpoint=None):
     mask = image.getchannel("A").point(lambda alpha: 255 if alpha >= alpha_floor else 0)
     bounds = mask.getbbox()
     if bounds is None:
@@ -119,6 +122,10 @@ def import_cel(image, divisor, slot, palette, x_origin=0, minimum_y=0,
                 choices = (22, 27)
         code = min(choices, key=lambda candidate: sum(
             (left - right) ** 2 for left, right in zip((red, green, blue), colors[candidate])))
+        if fabric_midpoint is not None and code in FABRIC_RAMP:
+            # These source sheets have different exposures. Recover the light
+            # already painted into the detected fabric, before mapping to CRAM.
+            code = FABRIC_RAMP[int(red + green >= fabric_midpoint)]
         if code in (42, 63) and ink.getpixel((x, y)) >= 82 and any(
             p not in opaque for p in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1))
         ):
@@ -127,7 +134,7 @@ def import_cel(image, divisor, slot, palette, x_origin=0, minimum_y=0,
     return connected_pixels(drawing)
 
 
-def new_drawings(source, palette, posture_palette):
+def new_drawings(source, palette, posture_palette, model_palette=False):
     plan = [
         ("low.png", 3, 4, sum(LOW, ()), 6.5, 144, 0, (-2, -4, -2, -2, -7, -2, -2, -7, -2, -2, -9, -2)),
         ("reactions.png", 3, 3, (*REACTIONS[:7], "ground_rise", "getup"),
@@ -143,7 +150,8 @@ def new_drawings(source, palette, posture_palette):
             scale = 6.25 if pose == "fall" else divisor
             trim = 0.4 if pose == "ground_rise" else 0
             results[pose] = import_cel(cel, scale, slot, palette, x_origin, minimum_y,
-                                       maximum_width=width, sample_bottom_trim=trim)
+                                       maximum_width=width, sample_bottom_trim=trim,
+                                       fabric_midpoint=(239 if name=="low.png" else 260) if model_palette else None)
     # Two whole-body tracks registered against the 52 px idle. The cut
     # boundaries follow the authored gaps rather than the provisional grid.
     with Image.open(source / "shield-grip-concept.png") as file:
@@ -188,10 +196,11 @@ def new_drawings(source, palette, posture_palette):
     with Image.open(source / "air-grips-b48.png") as file:
         contact = file.convert("RGBA")
     for index, (pose, origin, scale) in enumerate((("air_0_2", -2, 15.7), ("air_1_2", 4, 16.0))):
-        results[pose] = import_cel(read_cell(contact, 2, 1, index), scale, 144, palette, origin)
+        results[pose] = import_cel(read_cell(contact, 2, 1, index), scale, 144, palette, origin,
+                                       fabric_midpoint=205 if model_palette else None)
     with Image.open(source / "floor-material-b48.png") as file:
         cel = ImageOps.mirror(read_cell(file.convert("RGBA"), 1, 2, 0))
-        results["downed"] = import_cel(cel, 26, 144, palette, -25)
+        results["downed"] = import_cel(cel, 26, 144, palette, -25, fabric_midpoint=259 if model_palette else None)
     return results
 
 
@@ -243,6 +252,26 @@ def fit_cel(drawing, palette, backdrop, costume, right, airborne):
                 background_pixels=[[x, y, color] for (x, y), color in spill.items()])
 
 
+def keep_dark_outline(row, palette):
+    """Navy armor goes violet in v4. Keep exposed navy ink as opaque black."""
+    navy, black = palette.index(16), palette.index(0, 1)
+    occupied = {(x,y) for x,y,_ in row["background_pixels"]}
+    tiles = []
+    for left,top,encoded in row["sprite_cells"]:
+        ink = pixels(bytes.fromhex(encoded))
+        tiles.append((left,top,ink))
+        occupied.update((left+i%8,top+i//8) for i,c in enumerate(ink) if c)
+    result = []
+    for left,top,ink in tiles:
+        for i,c in enumerate(ink):
+            if c==navy:
+                x,y=left+i%8,top+i//8
+                if any(pt not in occupied for pt in ((x-1,y),(x+1,y),(x,y-1),(x,y+1))):
+                    ink[i]=black
+        result.append([left,top,planar(ink).hex()])
+    return dict(row,sprite_cells=result)
+
+
 def sheet_drawings(folder):
     """Read native, pelvis-registered cels from the character construction sheet."""
     spec = json.loads((folder / "revisao.json").read_text())
@@ -276,13 +305,13 @@ def sheet_drawings(folder):
     return drawings
 
 
-def build(control, source, out, foundation=False, *, extra_drawings=None, stage_header=STAGE, review_sheet=None):
+def build(control, source, out, foundation=False, *, extra_drawings=None, stage_header=STAGE, review_sheet=None, model_palette=False):
     plan = json.loads(control.read_bytes())
     old_palette = plan["sprite_palette"]
     palette = [code for code in old_palette if code not in NEUTRAL_COLORS] + list(SECOND_COSTUME.values())
     backdrop = plan["background_palette"]
     assert len(palette) == 16 and len(set(palette[1:])) == 15
-    art = {} if foundation else new_drawings(source, palette, old_palette)
+    art = {} if foundation else new_drawings(source, palette, old_palette, model_palette)
     pose_order = POSES + tuple(extra_drawings or ())
     if extra_drawings:
         art.update(extra_drawings)
@@ -327,6 +356,8 @@ def build(control, source, out, foundation=False, *, extra_drawings=None, stage_
                     row = fit_cel(art[name], palette, backdrop, player, right, airborne)
                     if row is None:
                         raise ValueError(f"{name}/{right}/P{player + 1} exceeds four sprites per line")
+                if model_palette:
+                    row = keep_dark_outline(row,palette)
                 packet = frame_packet(row, backdrop, background, contiguous_sprites=True)
                 verify_packet(packet, row, backdrop, background, contiguous_sprites=True)
                 bank, address = place(packet)
@@ -344,6 +375,10 @@ def build(control, source, out, foundation=False, *, extra_drawings=None, stage_
                                   count=count, spill_tiles=spill, **row))
     if len(pages) != 2 * costume_stride or len(pages) > 30:
         raise ValueError("Mirror costume banks do not fit two equal regions in 512 KiB")
+    if model_palette:
+        if any(c in FABRIC_RAMP for row in poses for _,_,c in row["background_pixels"]):
+            raise ValueError("Fabric escaped the sprite palette into a weapon tile")
+        palette = [MODEL_SWATCHES.get(c,c) for c in palette]
     max_count, max_spill = (max(x[i] for x in sizes) for i in (0, 1))
     margin = max(32, *(max(-x, x + 7) for row in poses for x, _, _ in row["sprite_cells"]),
                  *(abs(x) for row in poses for x, _, _ in row["background_pixels"]))

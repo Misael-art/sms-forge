@@ -1,4 +1,5 @@
 """Drive the revised sheet poses and compare the native Emulicious scanout to the art."""
+import json
 import shutil
 import subprocess
 from itertools import groupby
@@ -31,10 +32,39 @@ def proof_images():
     return images
 
 
-def exercise(case, session, out, controls, ram, log, save):
+def palette_proofs(header,wanted):
+    from revise_scene02_alis import raster
+    if header is None:
+        return None
+    plan=json.loads((header.parent/'repertoire-pages.json').read_text())
+    if 39 not in plan['palette'] or 59 not in plan['palette']:
+        return None
+    names=list(dict.fromkeys(f['name'] for f in plan['frames']))
+    images={}
+    for f in plan['frames']:
+        n=names.index(f['name'])
+        if n not in wanted: continue
+        points=raster(f,plan['palette'])
+        xs,ys=zip(*points)
+        left,top=min(xs),min(ys)
+        image=Image.new('RGB',(max(xs)-left+1,max(ys)-top+1))
+        mask=Image.new('L',image.size)
+        for (x,y),c in points.items():
+            image.putpixel((x-left,y-top),rgb(c));mask.putpixel((x-left,y-top),255)
+        images[n,f['player'],f['right']]=(left,top-144,image,mask)
+    return images
+
+
+def exercise(case, session, out, controls, ram, log, save, roster=None):
     walk = case == 'walk-art'
     airborne = case == 'air-guard-art'
     wanted = {42,44,47,66} if airborne else set(range(1,9) if walk else range(54,57))
+    # Both punches anticipate with 42 until the button duration is known
+    # (mirror_action_start[action & 0xFE]). Cel 45 is packed separately.
+    material_poses={42,43,44,46,47,66} if airborne else wanted
+    native_ink=palette_proofs(roster,material_poses)
+    if native_ink: wanted=material_poses
+    presented = [[], []]
     shots = []
     misses = {}
     trace = []
@@ -69,7 +99,10 @@ def exercise(case, session, out, controls, ram, log, save):
                     damage_events.append(dict(player=player+1,frame=frame,action=action[player],
                                               pose=actor['pose_requested'],contact=actor['contact'],
                                               damage=trace[-2][target_hp]-trace[-1][target_hp]))
-                if actor['pose_presented'] in wanted:
+                pose=actor['pose_presented']
+                if not presented[player] or presented[player][-1]!=pose:
+                    presented[player].append(pose)
+                if pose in wanted:
                     shots.append((frame, player, actor['pose_presented'], actor['presented_facing_right'], *actor['pivot']))
 
     start = isolated.request(session,'record-steps-start',case)
@@ -125,6 +158,7 @@ def exercise(case, session, out, controls, ram, log, save):
     log['movie'] = {'first_frame':start['first_frame'], 'frames':count}
     log['native_trace'] = trace
     log['pose_samples'] = shots
+    if airborne and native_ink: log['ordem_de_apresentacao']=presented
     log['shield_contact_players'] = sorted(contacts)
     if misses:
         log['shield_whiff_poses'] = misses
@@ -132,7 +166,7 @@ def exercise(case, session, out, controls, ram, log, save):
     save()
     subprocess.run(['ffmpeg','-v','error','-threads','1','-framerate','60','-i',str(frames/'%06d.png'),
                     '-c:v','libx264','-threads','1','-pix_fmt','yuv420p', str(out/(case+'.mp4'))], check=True)
-    art = proof_images()
+    art = native_ink or proof_images()
     seen = set()
     results = log['matches'] = []
     for frame, player, pose, right, px, py in shots:
@@ -159,6 +193,11 @@ def exercise(case, session, out, controls, ram, log, save):
     missing = {(pose,p) for pose in wanted for p in (0,1)} - seen
     if missing:
         raise ValueError(f'Sheet cels missing from native scanout: {sorted(missing)}')
+    if airborne and native_ink:
+        for seq in presented:
+            for expected in ([42,43,44],[42,46,47]):
+                if not any(seq[i:i+3]==expected for i in range(len(seq)-2)):
+                    raise ValueError(f'Aerial material sequence absent: {expected}, {seq}')
     if walk:
         for player in (0,1):
             sequence = [pose for pose,_ in groupby(s[2] for s in shots if s[1]==player)]

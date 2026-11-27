@@ -6,6 +6,34 @@
 #include "matchup.h"
 #include "matchup_pan.h"
 
+#ifdef MOF_PALMA_LIGHTS
+#include "../inc/alis_magic.h"
+#include "alis_pages.h"
+#include "palma_lights.h"
+static const MofPortScene port_scenes[]=STAGE_PORTS;
+static uint8_t light_phase;
+
+void mof_port_bind(void)
+{
+    mof_port_scene=port_scenes[chapter.story ? 1 : mof_stage_choice];
+    light_phase=0;
+}
+
+void mof_port_lighting(void)
+{
+    const MofPntWrite *event=&runway_light[light_phase];
+    if (event->address) {
+        if (mof_chapter_pnt.count>=sizeof(mof_chapter_pnt.cells)/sizeof(MofPntWrite)) return;
+        mof_chapter_pnt.cells[mof_chapter_pnt.count++]=*event;
+    }
+    light_phase=(light_phase+1u)&63u;
+}
+#define active_arena mof_port_scene.bank
+#define PORT_ENV_ENTRY void mof_port_environment
+#include "palma_environment.inc"
+
+#endif
+
 volatile uint8_t mof_pan_index, mof_pan_end_line, mof_pan_spills;
 
 void mof_matchup_pan(uint8_t timed)

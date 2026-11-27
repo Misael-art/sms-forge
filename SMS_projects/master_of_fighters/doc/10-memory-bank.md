@@ -1,5 +1,13 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Trajes de Alis e iluminação da pista
+
+A [candidata de Palma](../out/candidates/palma_luzes_r2/rom/master_of_fighters.sms) tem SHA-256 `5be7bc6a8706acddaed144f4fd831fddebcc65787c603e043e76f74fce6fd615`. P1 usa sombra e luz rosa da ficha v4 e P2 usa os dois verdes. A passagem 42 → 43 → 44 passou de 53 → 0 → 57 para 53 → 52 → 57 pixels em rosa claro. A comparação conferiu a geometria e os materiais das 94 poses, em 376 pacotes do cartucho. O Emulicious mostrou as duas sequências de soco aéreo e a defesa baixa dos dois controles. [Prancha](decisions/2026-11-27_alis_trajes_comparacao.png) · [Vídeo dos golpes](../out/qa/palma_luzes_r2/materiais/air-guard-art.mp4)
+
+No Versus, a V3 ganhou oscilações independentes. Em 320 quadros nativos, o foco sob a nave teve 33 mudanças, o piso teve 26, a baliza próxima teve 28 e a distante teve 6. As cinco células de controle ficaram estáveis. A História segue na V2, que conserva a pintura e o arquivo anterior. [Iluminação da V3](../out/qa/palma_luzes_r2/v3/terminal.mp4)
+
+As menores janelas NTSC foram 42,76 FPS na guarda da História, 45,44 FPS na carga mista e 30,46 FPS nos especiais do Versus. Os estouros selados em 3.000 apresentações foram 0 no misto e 0 nos especiais. Aceite de desempenho reprovado pelo piso de 58 FPS. O [recibo da candidata](decisions/2026-11-27_palma_luzes_paleta.json) traz os insumos, as sessões e as medições sem arredondamento. O [caderno do capítulo](curadoria_capitulo_alis.md) remete à fila de avaliação do agente canônico. O [pacote local de recuperação](../../../.runtime/backups/mof-palma-luzes-5be7bc6a8706.zip) guarda a ROM e os insumos efetivos da árvore compartilhada, incluindo o atlas R6. SHA-256 do pacote `153f7cca44845046010364687ca1c62ab88d2e07d652d6c819de555a1e753b44`.
+
 ## 27/11/2026 · Seletor de pistas no Versus
 
 A [ROM com o seletor de Palma](../out/candidates/palma_tres_elenco/rom/master_of_fighters.sms) tem SHA-256 `50bc2ba6e55ec9f3517ce36a3ac518eb3a5f49b200dcdbc942a1022dc0f4d685`. No Versus, cima e baixo de P1 percorrem V1, V2 e V3 e o botão 1 confirma. A História conserva a V2. A V2 está [preservada com seu hash e cópia local de recuperação](../data/source_art/scenes/alis_espacoporto/versoes.json). A V3 apresenta o terminal ao anoitecer com as naves em perspectiva, o guarda de passaportes e reflexos na pista. Os bancos de Alis e dos Guardiões correspondem aos da ficha R5.

@@ -68,7 +68,7 @@ def stage_acting(sprite):
     return result
 
 
-def pack_fighters(control, backdrop, output, spaceport=False):
+def pack_fighters(control, backdrop, output, spaceport=False, model_palette=False):
     plan=json.loads(control.read_bytes())
     from pack_alis_scenes import native
     # The spill packet contains backdrop pixels around each sword. Sample a
@@ -101,10 +101,10 @@ def pack_fighters(control, backdrop, output, spaceport=False):
     street=output.parent/('spaceport-runway.h' if spaceport else 'camineet-street.h')
     street.write_text(array('mof_duel_bg_stage',patterns)+'\n'+array('mof_duel_bg_rows',rows),encoding='ascii')
     build(control, SOURCE, output, extra_drawings=stage_acting(plan['sprite_palette']),
-          stage_header=street, review_sheet=SOURCE.parent / "alis_revisao_ficha")
+          stage_header=street, review_sheet=SOURCE.parent / "alis_revisao_ficha", model_palette=model_palette)
 
 
-def prepare(base, out, spaceport=False):
+def prepare(base, out, spaceport=False, model_palette=False):
     if digest(base) != BASE_SHA:
         raise ValueError('Expected the preserved B08 scene02-repertoire-layer-plan-b03.json')
     plan = json.loads(base.read_bytes())
@@ -123,7 +123,7 @@ def prepare(base, out, spaceport=False):
         raise ValueError('The authored action plan failed composition')
     revise(out / 'actions.json', out / 'revised.json')
     stage_postures(POSTURE_SHEET, out / 'revised.json', out / 'postures')
-    pack_fighters(out / 'postures/postures-plan.json', out / 'backdrop.h', out / 'fighters', spaceport)
+    pack_fighters(out / 'postures/postures-plan.json', out / 'backdrop.h', out / 'fighters', spaceport, model_palette)
 
 
 if __name__ == '__main__':
@@ -133,6 +133,7 @@ if __name__ == '__main__':
     parser.add_argument('--resume-postures',action='store_true',
                         help='Reuse the preserved pre-mirror pose plan and backdrop in BASE')
     parser.add_argument('--spaceport', action='store_true', help='Composite ground weapon pixels on the Palma runway')
+    parser.add_argument('--model-palette',action='store_true',help='Use the Alis v4 cloth and armor swatches')
     args = parser.parse_args()
     base,out=args.base.resolve(),args.out.resolve()
     if args.resume_postures:
@@ -141,6 +142,6 @@ if __name__ == '__main__':
         if (digest(control)!='f729663f7f9725263a757a25d1d363bdb51612a600818c5eda4c242d2382fe73'
                 or digest(backdrop)!='3a408688d7765adc1fd82f1f43098a3e8fa14ad7b64de6ff060b66dd1c6c4723'):
             raise ValueError('The recovered chapter staging does not match the preserved B inputs')
-        pack_fighters(control,backdrop,out/'fighters',args.spaceport)
+        pack_fighters(control,backdrop,out/'fighters',args.spaceport,args.model_palette)
     else:
-        prepare(base,out,args.spaceport)
+        prepare(base,out,args.spaceport,args.model_palette)

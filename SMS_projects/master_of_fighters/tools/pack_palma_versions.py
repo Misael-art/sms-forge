@@ -11,6 +11,7 @@ from make_duel_scene02_assets import PROJECT, array, planar
 from pack_alis_magic import decode_stage, glyph_stamps
 from pack_alis_matchup import PAGE, score, versus_page
 from pack_alis_scenes import PORT_ART, native
+from palma_lighting import program
 
 ARENA_BANKS = (47, 36, 48)
 
@@ -86,7 +87,7 @@ def words(name,values):
     return 'static const uint16_t '+name+'[] = {'+','.join(map(str,values))+'};'
 
 
-def pack(base,cast,archives,out):
+def pack(base,cast,archives,out,fighter_override=None):
     out.mkdir(parents=True,exist_ok=True)
     chapter=json.loads((base/'chapter.json').read_text())
     tc=chapter['toolchain']
@@ -95,7 +96,14 @@ def pack(base,cast,archives,out):
     fighters,_,magic,_=[PROJECT/v for v in cast_tc['include_dirs']]
     if cast_tc['defines']['MOF_GUARDIANS_PAGE']!=tc['defines']['MOF_GUARDIANS_PAGE']:
         raise ValueError('Guardian banks differ between chapter and roster')
-    tc['include_dirs'][0]=cast_tc['include_dirs'][0]
+    fighters=fighter_override or fighters
+    fighter_path=fighters.relative_to(PROJECT).as_posix()
+    tc['include_dirs'][0]=fighter_path
+    fighter_manifest=fighters/'mirror_build.json'
+    fighter_banks=json.loads(fighter_manifest.read_text())['toolchain']['makesms_extra']
+    if not fighter_banks[2].endswith(':0:22:2'):
+        raise ValueError('Palma requires the 22-bank Alis roster')
+    model=39 in json.loads((fighters/'repertoire-pages.json').read_text())['palette']
     original=(pan/'panels.bin').read_bytes()
     limits=definitions(pan/'alis_pages.h')
     assert limits['ARENA_BANK']==36 and tc['defines']['MOF_GUARDIANS_PAGE']==39
@@ -130,7 +138,11 @@ def pack(base,cast,archives,out):
             if cfg[name]!=limits[name]:raise ValueError(f'V{index+1} layout mismatch: {name}')
         (folder/'panels.bin').write_bytes(data.ljust(PAGE,b'\xff'))
         (folder/'alis_pages.h').write_text(''.join(f'#define MOF_{k} {v}u\n' for k,v in cfg.items()))
-        page,pan_strip,_=versus_page(folder,horizon=index!=0,version=index+1)
+        if index==2:
+            lights=program(data,cfg,fighters)
+            (out/'palma_lights.h').write_text('static const MofPntWrite runway_light[64] = {\n' +
+                ''.join(f'    {{0x{address:04x},0x{word:04x}}},\n' for address,word in lights)+'};\n')
+        page,pan_strip,_=versus_page(folder,horizon=index!=0,version=index+1,model_palette=model)
         banks[49+index][:]=page
         cells,restore,spells,offsets=spell_art(data,cfg,fighters)
         if glyph_index is not None and offsets!=glyph_index:
@@ -159,7 +171,9 @@ def pack(base,cast,archives,out):
     meta={k:[v[-1][k] for v in versions] for k in ('SIGN_X','SIGN_Y','PORT_SCAN_X','PORT_SCAN_Y')}
     constants={'MOF_VERSUS_PAGE':49,'MOF_PAN_BANK':63,'MOF_PAN_STEPS':20,'MOF_BATTLE_BANK':52,
                'MOF_BATTLE_LOOP':0x8000+loop,'MOF_BATTLE_PSG':0x8000+len(fm)}
-    (out/'matchup.h').write_text(''.join(f'#define {k} {v}u\n' for k,v in constants.items())+
+    stage_rows=[(bank,*(v[-1][k] for k in meta)) for bank,v in zip(ARENA_BANKS,versions)]
+    stages='{'+','.join('{'+','.join(map(str,row))+'}' for row in stage_rows)+'}'
+    (out/'matchup.h').write_text('#define STAGE_PORTS '+stages+'\n#define STAGE_LIGHT_BANK '+str(ARENA_BANKS[2])+'u\n'+''.join(f'#define {k} {v}u\n' for k,v in constants.items())+
         '#define STAGE_CLASSIC_BANK '+str(ARENA_BANKS[0])+'u\n'+
         '#define STAGE_ARENA_BANKS {'+','.join(map(str,ARENA_BANKS))+'}\n'+
         ''.join('#define STAGE_'+k+' {'+','.join(map(str,vals))+'}\n' for k,vals in meta.items()))
@@ -167,7 +181,8 @@ def pack(base,cast,archives,out):
     tc['include_dirs']=tc['include_dirs'][:2]+[rel]
     tc['mapper_code_banks']['SMSBANK_CAMERA']=63
     tc['defines']['MOF_PALMA_VERSIONS']=1
-    tc['makesms_extra']=cast_tc['makesms_extra'][:3]
+    tc['makesms_extra']=['-pp','-mbank',fighter_path+'/mirror-banks.bin:0:22:2']
+    tc['defines']['MOF_PALMA_LIGHTS']=1
     for start,stop in ((24,37),(39,63)):
         name=f'palma-{start}.bin'
         (out/name).write_bytes(b''.join(banks[i] for i in range(start,stop)))
@@ -182,5 +197,6 @@ def pack(base,cast,archives,out):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     for arg in ('base','cast','archives','out'):parser.add_argument(arg,type=Path)
+    parser.add_argument('--fighters',type=Path,help='Prepared Alis costume and pose banks')
     args=parser.parse_args()
-    pack(args.base.resolve(),args.cast.resolve(),args.archives.resolve(),args.out.resolve())
+    pack(args.base.resolve(),args.cast.resolve(),args.archives.resolve(),args.out.resolve(),args.fighters.resolve() if args.fighters else None)

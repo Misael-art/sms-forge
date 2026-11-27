@@ -117,7 +117,8 @@ def main():
         arena_frame=observe('arena')
         if args.case in ('walk-art','shield-art','air-guard-art'):
             from replay_alis_sheet import exercise
-            exercise(args.case,session,out,controls,ram,log,save)
+            roster=next((PROJECT/k for k in record['input_sha256'] if k.endswith('/duel_mirror_assets.h')),None)
+            exercise(args.case,session,out,controls,ram,log,save,roster)
         elif args.case=='combo':
             # Drive both fighters through their controller ports and inspect
             # the published duel state and visible HUD cells.

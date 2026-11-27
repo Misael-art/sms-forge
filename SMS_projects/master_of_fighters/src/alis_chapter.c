@@ -14,17 +14,22 @@ void mof_chapter_select(const MofChapterPresentation *presentation)
 #ifdef MOF_PALMA_VERSIONS
 #include "matchup.h"
 uint8_t mof_stage_choice;
+#ifdef MOF_PALMA_LIGHTS
+MofPortScene mof_port_scene;
+#define active_arena mof_port_scene.bank
+#else
 static uint8_t active_arena, signal_x,signal_y,reader_x,reader_y;
 static const uint8_t arena_banks[]=STAGE_ARENA_BANKS;
 static const uint8_t signal_cols[]=STAGE_SIGN_X, signal_rows[]=STAGE_SIGN_Y;
 static const uint8_t reader_cols[]=STAGE_PORT_SCAN_X, reader_rows[]=STAGE_PORT_SCAN_Y;
+#endif
 #define ARENA_BANK active_arena
 #else
 #define ARENA_BANK mof_presentation->arena_bank
 #endif
 static uint8_t last_pad;
 static uint8_t rhythm[2], gesture[2], direction[2], last_face[2];
-static uint8_t old_seconds, old_banner, old_gauge[2], banner_tiles, shutter;
+static uint8_t old_banner, old_gauge[2], banner_tiles;
 static uint8_t displayed_combo[2];
 static uint8_t cpu_keys, cpu_wait, cpu_cycle;
 
@@ -35,7 +40,7 @@ typedef char PntPacketLayout[offsetof(MofChapterPnt,cells)==1 && sizeof(MofPntWr
 
 /* All entries are complete SMS VDP write commands. A spell can produce
    16 restorations and 16 overlays; the arena adds at most 15 entries. */
-static void chapter_cell(uint8_t x,uint8_t y,uint16_t tile)
+void chapter_cell(uint8_t x,uint8_t y,uint16_t tile)
 {
     MofPntWrite *cell=&mof_chapter_pnt.cells[mof_chapter_pnt.count++];
     cell->address=0x7800u+((uint16_t)y<<6)+(x<<1);
@@ -77,7 +82,7 @@ void mof_chapter_flush_pnt(void) __naked
 
 #ifdef MOF_PORT_SKY
 static volatile uint8_t port_apron_scroll, port_runway_scroll;
-static uint8_t flight_clock, flight[2], scanner;
+
 
 /* Weapon tiles are precomposed in screen space. Rows 12–19 stay fixed. */
 #ifdef MOF_PORT_CLOUDS
@@ -118,27 +123,7 @@ void mof_port_raster_start(void)
     SMS_enableLineInterrupt();
 }
 
-static void port_bird(uint8_t bird, uint8_t advance)
-{
-    uint8_t phase=flight[bird], column=phase>>2;
-#if defined(MOF_PALMA_VERSIONS)
-    uint8_t row=active_arena==STAGE_CLASSIC_BANK ? 3u+bird : 3u;
-#elif defined(MOF_PORT_CLOUDS)
-    const uint8_t row=3; /* Both birds circle in clear sky, 17 columns apart. */
-#else
-    uint8_t row=3u+bird;
-#endif
-    uint16_t tile;
-    if (advance) {
-        phase=(phase+1u)&127u;
-        flight[bird]=phase;
-        if (!(phase&3u)) chapter_cell(column,row,MOF_PORT_SKY);
-        column=phase>>2;
-    }
-    tile=MOF_PORT_SKY+1u+((phase&3u)<<1);
-    chapter_cell(column,row,tile);
-    chapter_cell((column+1u)&31u,row,tile+1u);
-}
+
 #endif
 
 #ifdef MOF_ALIS_MATCHUP
@@ -338,6 +323,19 @@ void mof_chapter_match(void)
 #endif
 }
 
+#ifdef MOF_PALMA_LIGHTS
+static void stage_environment(uint8_t reset)
+{
+    SMS_saveROMBank();
+    SMS_mapROMBank(MOF_PAN_BANK);
+    mof_port_environment(reset);
+    SMS_restoreROMBank();
+}
+#else
+#define PORT_ENV_ENTRY static void stage_environment
+#include "palma_environment.inc"
+#endif
+
 void mof_chapter_round(void)
 {
     uint8_t i;
@@ -345,9 +343,8 @@ void mof_chapter_round(void)
     chapter.phase=MOF_ROUND;
     chapter.seconds=60;
     chapter.age=chapter.subsecond=chapter.expired=0;
-    old_seconds=old_banner=old_gauge[0]=old_gauge[1]=255;
+    old_banner=old_gauge[0]=old_gauge[1]=255;
     banner_tiles=16;
-    shutter=0;
     cpu_keys=cpu_cycle=cpu_wait=0;
     for (i=0;i<2;++i) {
         chapter.meter[i]=chapter.idle[i]=0;
@@ -358,11 +355,17 @@ void mof_chapter_round(void)
 
 void mof_chapter_arena(void)
 {
-#ifdef MOF_PALMA_VERSIONS
+#if defined(MOF_PALMA_LIGHTS)
+    SMS_mapROMBank(MOF_PAN_BANK);
+    mof_port_bind();
+#elif defined(MOF_PALMA_VERSIONS)
     uint8_t version=chapter.story ? 1 : mof_stage_choice;
     active_arena=arena_banks[version];
     signal_x=signal_cols[version];signal_y=signal_rows[version];
     reader_x=reader_cols[version];reader_y=reader_rows[version];
+#endif
+#ifndef MOF_PORT_SKY
+    stage_environment(1);
 #endif
     SMS_mapROMBank(ARENA_BANK);
 #ifdef MOF_ALIS_MAGIC
@@ -392,15 +395,11 @@ void mof_chapter_arena(void)
 #ifdef MOF_PORT_CLOUDS
     port_cloud_phase=0;
 #endif
-    flight[0]=26;
-    flight[1]=94;
-    flight_clock=scanner=0;
     port_apron_scroll=port_runway_scroll=0;
 #ifdef MOF_ALIS_MAGIC
     mof_chapter_pnt.count=0;
 #endif
-    port_bird(0,0);
-    port_bird(1,0);
+    stage_environment(1);
 #ifdef MOF_ALIS_MAGIC
     mof_chapter_flush_pnt();
 #endif
@@ -441,42 +440,6 @@ static void chapter_banner(uint8_t banner)
 void mof_chapter_stage_hud(void)
 {
     uint8_t i;
-    if (chapter.phase==MOF_PLAY) {
-#ifdef MOF_PORT_SKY
-        uint8_t light=(chapter.subsecond<4 || (chapter.subsecond>=9 && chapter.subsecond<13));
-        uint8_t scan=(chapter.subsecond>=32 && chapter.subsecond<43);
-        if (scanner!=scan) {
-            scanner=scan;
-#ifdef MOF_PALMA_VERSIONS
-            chapter_cell(reader_x,reader_y,MOF_PORT_SCANNER+scan);
-#else
-            chapter_cell(MOF_PORT_SCAN_X,MOF_PORT_SCAN_Y,MOF_PORT_SCANNER+scan);
-#endif
-        }
-        if (!(++flight_clock&3u)) port_bird((flight_clock>>2)&1u,1);
-#else
-        uint8_t light=(chapter.subsecond>=17 && chapter.subsecond<29);
-#endif
-        if (shutter!=light) {
-            shutter=light;
-#ifdef MOF_PALMA_VERSIONS
-            chapter_cell(signal_x,signal_y,MOF_SIGN_TILE+light);
-#else
-            chapter_cell(MOF_SIGN_X,MOF_SIGN_Y,MOF_SIGN_TILE+light);
-#endif
-        }
-    }
-    if (old_seconds!=chapter.seconds) {
-        old_seconds=chapter.seconds;
-#ifdef MOF_ALIS_MAGIC
-        chapter_cell(15,1,MOF_DIGIT_TILE+chapter.seconds/10);
-        chapter_cell(16,1,MOF_DIGIT_TILE+chapter.seconds%10);
-#else
-        SMS_setNextTileatXY(15,1);
-        SMS_setTile(MOF_DIGIT_TILE+chapter.seconds/10);
-        SMS_setTile(MOF_DIGIT_TILE+chapter.seconds%10);
-#endif
-    }
     for (i=0;i<2;++i) {
         uint8_t charge=chapter.meter[i]>>1;
 #ifdef MOF_ALIS_MAGIC
@@ -494,6 +457,7 @@ void mof_chapter_stage_hud(void)
 #endif
         }
     }
+    stage_environment(0);
     /* Append after the scene and both gauges. If this frame filled the PNT
        queue, keep the old display value and retry on the next presentation. */
     for (i=0;i<2;++i) {

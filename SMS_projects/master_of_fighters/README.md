@@ -10,13 +10,15 @@ esqueleto. Os manifestos de viewer são diagnósticos de arte e animação.
 
 ## Escolher a versão do Espaçoporto no Versus
 
-Abra [a ROM com as três pistas](out/candidates/palma_tres_elenco/rom/master_of_fighters.sms). Pressione **1** na abertura, entre em **Versus local** e use **↑** ou **↓** no controle de P1. A moldura mostra a pista escolhida. A seleção dá a volta e segurar a direção conta como um toque. Depois de mudar de versão, pressione **1** para começar a luta.
+Abra [a candidata com os trajes de Alis e a iluminação da V3](out/candidates/palma_luzes_r2/rom/master_of_fighters.sms). Pressione **1** na abertura, entre em **Versus local** e use **↑** ou **↓** no controle de P1. A moldura mostra a pista escolhida. A seleção dá a volta e segurar a direção conta como um toque. Depois de mudar de versão, pressione **1** para começar a luta.
 
 | Versão | O que aparece na pista |
 | --- | --- |
 | V1 · Original | O primeiro posto de passaportes, com as naves vermelhas em pleno dia. |
 | V2 · Horizonte | O guarda esguio e as nuvens sobre as serras de Palma. Esta é a pista da História. |
 | V3 · Terminal ao anoitecer | A nave em primeiro plano, os hangares envidraçados e as luzes âmbar da pista em perspectiva. É a seleção inicial do Versus. |
+
+No Terminal, observe a luz sob o trem de pouso da nave à esquerda e as balizas à beira da pista. P1 veste rosa e P2 verde. [Ver o trecho nativo do Versus](out/qa/palma_luzes_r2/v3/terminal.mp4) · [Comparar os trajes](doc/decisions/2026-11-27_alis_trajes_comparacao.png) · [Ler o caderno de curadoria do capítulo](doc/curadoria_capitulo_alis.md)
 
 A [ROM anterior da V2](out/candidates/alis_palma_horizonte_r3/rom/master_of_fighters.sms) também continua disponível. [Registro das versões](data/source_art/scenes/alis_espacoporto/versoes.json) · [Medições e sessões da ROM com seletor](doc/decisions/2026-11-27_palma_tres_versoes.json)
 

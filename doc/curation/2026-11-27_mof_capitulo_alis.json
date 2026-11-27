@@ -1,0 +1,53 @@
+{
+  "estado": "proposta para revisão do curador",
+  "consumidor": "SMS_projects/master_of_fighters",
+  "caderno": "SMS_projects/master_of_fighters/doc/curadoria_capitulo_alis.md",
+  "recibo": "SMS_projects/master_of_fighters/doc/decisions/2026-11-27_palma_luzes_paleta.json",
+  "candidatas": [
+    {
+      "assunto": "Cor e coerência de movimento",
+      "lacuna": "O model sheet e duas poses corretas deixaram passar a perda de realce entre quadros adjacentes de uma ação.",
+      "caso_negativo": "R5, poses aéreas 42–44, 53/0/57 pixels em rosa claro.",
+      "ensaio": "Comparar materiais no desenho, tiles das 94 poses nos dois lados/trajes e recortes da ROM em movimento. Manter silhueta, pivô, oclusão e geometria SAT.",
+      "controles_negativos": [
+        "R5 perde todos os pixels do tom claro na pose 43.",
+        "Trocar dois pixels entre luz e sombra deve reprovar mesmo se o histograma não mudar.",
+        "Uma alteração de pele ou a remoção de um pixel da silhueta também deve reprovar."
+      ],
+      "ferramenta_no_consumidor": "SMS_projects/master_of_fighters/tools/audit_alis_model_palette.py",
+      "prova_visual_versionada": "SMS_projects/master_of_fighters/doc/decisions/2026-11-27_alis_trajes_comparacao.png"
+    },
+    {
+      "assunto": "Direção de arte e reconhecimento",
+      "lacuna": "Reconhecer o nome do cenário ou a paleta total não verificava a identidade do lugar e do guarda.",
+      "ensaio": "Nome oculto, original identificado, proporção do figurante e sinais geográficos legíveis com dois lutadores no enquadramento."
+    },
+    {
+      "assunto": "Cenário dinâmico e iluminação",
+      "lacuna": "Captura única omitia nuvens congeladas, movimento conjunto, luzes sincronizadas e motivos compartilhados.",
+      "ensaio": "Marcar planos, cadência e amplitude em pixels e cores, usar áreas de controle estáveis e observar parada, deslocamento e retorno. Exercitar especiais e pior VBlank no mesmo cartucho.",
+      "controles_negativos": [
+        "Zero mudanças numa baliza ativa.",
+        "Ritmo idêntico em todas as balizas.",
+        "Mudança de cor em célula declarada estável."
+      ],
+      "ferramenta_no_consumidor": "SMS_projects/master_of_fighters/tools/replay_palma_versions.py"
+    },
+    {
+      "assunto": "Pré-luta e controle",
+      "lacuna": "Retrato de derrota no lugar da pré-luta, P2 com tecido incorreto, nomes irregulares e risco de abrir a ROM antiga.",
+      "ensaio": "Caminho desde o título, retratos por função, fontes na resolução alvo, retenção por toque, volta nas três escolhas, mesma arte no cartão e na arena."
+    },
+    {
+      "assunto": "Gameplay extensível e cena modular",
+      "lacuna": "Vítima acoplada à ilustração e contato duplicado de projéteis impediam a expansão.",
+      "ensaio": "Ficha por função/custo/comando, evento único de contato, reação por defensor e sobreposição por atacante. Testar limites de PV/Reiki, defesa, erro, P2 e troca de oponente."
+    },
+    {
+      "assunto": "Música, performance e continuidade",
+      "lacuna": "Boot, sinal de áudio, ISR e zero estouros isolados permitiam interpretações acima da evidência.",
+      "ensaio": "Rota FM/PSG, audição, loop e mute. Apresentações funcionais, cada janela NTSC, pior quadro, ROM/SHA, insumos, sessão privada, fechamento e remoto confirmado."
+    }
+  ],
+  "decisao_reservada_ao_curador": "Confrontar as premissas com os gates existentes, reproduzir em segundo consumidor e decidir quais verificações pertencem ao agente canônico."
+}

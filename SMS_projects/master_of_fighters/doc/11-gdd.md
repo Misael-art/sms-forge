@@ -1,5 +1,9 @@
 # 11-gdd — master_of_fighters
 
+## Iluminação da V3 e materiais de Alis
+
+Sob a nave da esquerda, a luz âmbar tremula e produz uma resposta ligeiramente atrasada no reflexo do piso. Entre as balizas de pista há luzes firmes e variações de amplitude e cadência diferentes. O olho deve continuar acompanhando a luta. Para o tecido de Alis em P1, as cores físicas 39 e 59 retomam o model sheet v4. O índigo usa 37 e o segundo traje usa 24 e 44. Conferir o acerto entre quadros consecutivos da mesma ação. [Caderno para curadoria](curadoria_capitulo_alis.md)
+
 ## Três versões do Espaçoporto
 
 No cartão de confronto, cima e baixo do controle 1 percorrem ciclicamente V1 (posto original), V2 (horizonte de Palma) e V3 (terminal ao anoitecer). O botão 1 confirma. Ao tocar no direcional, o cartão espera pela confirmação. A História conserva a V2. A escolha inicial do Versus é a V3, com luz âmbar, perspectiva oblíqua e reflexos frios na pista. [Registro das três artes e da ROM V2 preservada](../data/source_art/scenes/alis_espacoporto/versoes.json)

@@ -103,9 +103,11 @@ def score(folder, chip):
                                "writes": (sum(map(len, frames)) + len(prefix) + len(tail)) // (2 if chip == "FM" else 1)}
 
 
-def versus_page(out, horizon=False, version=None):
+def versus_page(out, horizon=False, version=None, model_palette=False):
     colors = PALETTE.copy()
     colors[7], colors[9] = 52, 32
+    if model_palette:
+        colors[3],colors[11]=39,59
     alternate = colors.copy()
     alternate[3], alternate[11] = SECOND_COSTUME[19], SECOND_COSTUME[35]
     card = Image.new("L", (256, 192))
@@ -127,9 +129,11 @@ def versus_page(out, horizon=False, version=None):
             face = FIGHTERS[fighter]["versus_face"]
             source = sheet.crop((face*w//3, 0, (face+1)*w//3, h)).convert("RGB")
             portrait = native(source, (80, 80), colors)
-            if side == 0:
-                card.paste(portrait, (16, 6))
-            else:
+            if model_palette:
+                neutral=colors.copy()
+                neutral[3],neutral[11]=neutral[2],neutral[2]
+                portrait=native(source,(80,80),neutral)
+            if side or model_palette:
                 # Only the cloth uses the second costume ramp. Keep metal, hair and skin.
                 sample = source.resize(portrait.size, Image.Resampling.NEAREST)
                 for y in range(60, 80):
@@ -137,7 +141,10 @@ def versus_page(out, horizon=False, version=None):
                         red, green, blue = sample.getpixel((x,y))
                         if red >= 100 and red - green >= 24 and blue - green >= 12 and red >= blue:
                             portrait.putpixel((x,y), 11 if red >= 192 else 3)
+            if side:
                 card.paste(ImageOps.mirror(portrait), (160, 86))
+            else:
+                card.paste(portrait, (16, 6))
 
     p1, p2 = [FIGHTERS[fighter]["name"] for fighter in PAIR]
     first, second = fighter_nameplates((p1,p2), max_width=128)
