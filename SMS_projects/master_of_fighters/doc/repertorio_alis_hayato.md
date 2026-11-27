@@ -193,9 +193,27 @@ Estas seis ações de assinatura e os dois agarrões completam a **proposta** de
 | Provocação contextual | Depois de defender um golpe forte, recompõe a lâmina com um gesto contido de respeito. | Depois de bloquear com o escudo, baixa-o por um instante e aponta a espada para o espaço que acabou de defender. | O jogador ainda precisa pedir a provocação. Proposta de seleção determinística: se a última interação foi bloqueio próprio de forte no round, usar a variante uma vez, consumir a marca e limpar no próximo contato ou reset. Mesma duração e vulnerabilidade da base. |
 | Vitória e derrota | Hayato recolhe a katana após o fim da ameaça; derrotado, perde a base e interrompe o gesto. | Alis abaixa a espada, mantém o escudo próximo e recupera o fôlego; derrotada, cede o apoio. | Encerramento após resultado único. Registrar destino distinto para KO e tempo conforme GDD. A chamada manual da provocação fica restrita ao round ativo. |
 
+## Contagem de combo e afastamento
+
+No capítulo de Alis, cada perda de vida confirmada conta um hit para o dono do golpe. O segundo acerto seguido faz o total aparecer ao lado do Reiki desse jogador. A sequência dura até a vítima poder agir ou bloquear. O congelamento de impacto preserva o total. Um projétil refletido pertence a quem o devolveu. Duas chamas sobrepostas no mesmo passo seguem a decisão de contato do motor e podem produzir um único hit. A captura do agarrão, a tontura, o aparo e os planos do final não tiram vida por si.
+
+### Afastamento da G6e e proposta para teste
+
+As distâncias abaixo são máximos por contato, em pixels do jogo. A parede limita o deslocamento da vítima. Os valores da coluna de ensaio são propostas de balanceamento.
+
+| Família | Acerto e defesa atuais | Acerto e defesa propostos para ensaio |
+|---|---|---|
+| Socos e chutes leves | 4 / 3 | 3 / 2, para manter a sequência curta ao alcance |
+| Estocada forte em pé | 4 / 3 | 4 / 3, como controle da ligação com o soco curto |
+| Chute de avanço e pancada do Passo de Escudo | 4 / 3 | 6 / 4, para abrir espaço depois de um impacto pesado |
+| Chute em mergulho | 7 / 3 | 7 / 4, preservando o recuo característico no acerto |
+| Golpes que derrubam, agarrão e magias | Rasteira e Palma usam 4 / 3. O agarrão puxa e depois impõe passos. Efeitos mágicos comuns não aplicam impulso próprio. | Conservar as trajetórias até medir pouso, retomada e distância do primeiro ataque seguinte. |
+
+Na estocada forte seguida do soco curto, dois pivôs inicialmente a 24 px ficam a 28 px após o primeiro acerto no centro da arena. O soco alcança X = 18 (limite excluído) e a caixa em pé começa a 11 px à esquerda do pivô rival. Resta 1 px de interseção. A 29 px as bordas só se tocam; a 30 px o segundo golpe erra. Um aumento uniforme do recuo forte de 4 para 6 px eliminaria essa ligação nessa posição. No canto a parede pode absorver parte do recuo. Comparar os dois lados, o centro e o canto antes de adotar novos valores.
+
 ## Ficha que acompanha cada ação até a ROM
 
-Para construir um lutador do elenco, duplique o [modelo oficial editável](ficha_tecnica_personagem_modelo_v1.docx). A [ficha ilustrada de Alis na G6e](ficha_tecnica_alis_g6e_v1.docx) aplica o modelo aos 16 golpes físicos e às 11 ações de magia, suporte e finalização do capítulo. Cada sequência identifica poses, exposição e resultado de contato. Os dados desta edição pertencem à ROM identificada na ficha.
+Para construir um lutador do elenco, duplique o [modelo oficial editável](ficha_tecnica_personagem_modelo_v1.docx). A [ficha ilustrada de Alis na G6e](ficha_tecnica_alis_g6e_v1.docx) aplica o modelo aos 16 golpes físicos e às 11 ações de magia, suporte e finalização do capítulo. Cada sequência identifica poses, exposição e resultado de contato. Os tempos e efeitos pertencem à G6e. A revisão de 27/11 identifica no documento as 15 poses e os três planos de construção revistos. Para conferir outro personagem, alinhe os pés ao pivô, compare alturas dentro da mesma postura e confira o limite entre saia, meias, botas e escudo na paleta final, quadro a quadro.
 
 Dar a cada ação um ID estável no contrato individual e referenciá-lo na lista de comandos e na [Cena 10](character_move_showcase_standard_v1.md). Para cada linha registrar:
 

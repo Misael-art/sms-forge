@@ -1,0 +1,144 @@
+{
+  "rom_sha256": "ddf45e855451b4717aaf20246e8322f850315f08b890d7c66be9b0e780ed61ae",
+  "estatuto": "Candidata de desenvolvimento. O novo contador usa os golpes e a arte da G6e.",
+  "bancada": "Contatos de projétil dos dois lados, trocas, hitstop, bloqueio, recuperação e reset de round.",
+  "versus": {
+    "sessao": "725bf935e56b4855b89b0e1e61106b6f",
+    "encerramento": "closed",
+    "confronto": "Alis × Alis, via controles de P1 e P2 na arena",
+    "passos": [
+      {
+        "jogador": "p1",
+        "contatos_tick": [
+          26,
+          44
+        ],
+        "pv_vitima": [
+          100,
+          90,
+          84
+        ],
+        "contador": [
+          2,
+          0
+        ],
+        "tiles_visiveis": [
+          430,
+          422
+        ],
+        "captura": "out/qa/alis_combo_hits_v1/contagem-b/p1_dois_hits.png"
+      },
+      {
+        "jogador": "p2",
+        "contatos_tick": [
+          79,
+          97
+        ],
+        "pv_vitima": [
+          100,
+          90,
+          84
+        ],
+        "contador": [
+          0,
+          2
+        ],
+        "tiles_visiveis": [
+          430,
+          422
+        ],
+        "captura": "out/qa/alis_combo_hits_v1/contagem-b/p2_dois_hits.png"
+      }
+    ]
+  },
+  "controle_tardio": {
+    "sessao": "556a99c8aab540db92b052601a16a545",
+    "encerramento": "closed",
+    "atacante": "P1",
+    "primeiro_hit_tick": 26,
+    "primeira_resposta_defensora_tick": 46,
+    "segundo_hit_tick": 47,
+    "contador": [
+      1,
+      0
+    ],
+    "evidencia": "out/qa/alis_combo_hits_v1/contagem/commands.jsonl"
+  },
+  "afastamento": "Proposta no repertório, valores da ROM conservados.",
+  "cadencia": {
+    "fonte": "out/qa/alis_combo_hits_v1/cadencia/observations.json",
+    "sessao": "eedbab24ed5448c99396546a7595a00a",
+    "encerramento": "closed",
+    "janelas": [
+      {
+        "vdp": 120,
+        "publications": 101,
+        "nominal_hz": 59.92274340431231,
+        "fps": 50.43497569862952,
+        "active": true
+      },
+      {
+        "vdp": 120,
+        "publications": 97,
+        "nominal_hz": 59.92274340431231,
+        "fps": 48.437550918485776,
+        "active": true
+      },
+      {
+        "vdp": 120,
+        "publications": 98,
+        "nominal_hz": 59.92274340431231,
+        "fps": 48.93690711352171,
+        "active": true
+      }
+    ],
+    "pior_quadro": {
+      "done": 1,
+      "min_vcount": 200,
+      "overruns": 0,
+      "frames": 3009,
+      "session_id": "eedbab24ed5448c99396546a7595a00a",
+      "rom_sha256": "ddf45e855451b4717aaf20246e8322f850315f08b890d7c66be9b0e780ed61ae",
+      "first_overrun": {
+        "start_upload_bg_sat": [
+          25,
+          155,
+          62,
+          249
+        ],
+        "end_pnt": [
+          250,
+          12
+        ]
+      },
+      "judgment": {
+        "verdicto": "pass",
+        "vline_min": 200,
+        "vovf_delta": 0,
+        "amostras": 1,
+        "vline_kind": "sealed_min",
+        "frames_medidos": 3000,
+        "frames_rom_final": 3009,
+        "janela_s_min": 50.0,
+        "janela_selada": true,
+        "schema": "smsforge.worst_frame/v2",
+        "sealed_field": "vline_min"
+      }
+    },
+    "piso_fps": 58,
+    "aceite": false
+  },
+  "ficha": {
+    "documento": "doc/ficha_tecnica_alis_g6e_v1.docx",
+    "comparacao": "out/qa/alis_combo_hits_v1/ficha/antes-depois.png",
+    "atlas": "data/source_art/sprite_studies/alis_revisao_ficha/revisao.json",
+    "cinematica": "data/source_art/scenes/alis_guardioes/lineage.json",
+    "integridade": "out/qa/alis_combo_hits_v1/ficha/integridade.json",
+    "paginas_pendentes_revisadas": [
+      14,
+      18,
+      19,
+      21
+    ]
+  }
+}

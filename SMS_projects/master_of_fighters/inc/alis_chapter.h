@@ -7,6 +7,7 @@ enum { MOF_CONTINUE, MOF_NEXT_ROUND, MOF_REMATCH, MOF_MAIN_MENU };
 typedef struct {
     uint8_t story, music, target, wins[2], phase, age, seconds, subsecond;
     uint8_t meter[2], idle[2], winner, expired, round;
+    uint8_t combo[2];  /* hits by controller, for the HUD */
 } MofChapter;
 typedef struct {
     uint8_t intro_first, intro_count, ending_first, ending_count;

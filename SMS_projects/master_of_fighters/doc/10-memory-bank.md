@@ -1,5 +1,11 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Revisão da ficha de Alis e contagem de combo
+
+A [ficha de construção](ficha_tecnica_alis_g6e_v1.docx) revê 15 poses e três planos do final. Nas marchas #01–08 e no Passo de Escudo #54–56, a revisão separa a saia rosa, as meias brancas e as botas e recupera o contorno das pernas. A altura visível passou de 48 para 51 px em #42, de 47 para 50 em #44, de 46 para 49 em #47 e de 43 para 40 em #66. O pé permanece registrado em Y143. Os planos de Alis e do corte laconiano usam o concept v4. Odin segue o retrato da Sega. As regras e os tempos da ficha continuam vinculados à G6e. [Atlas e medidas](../data/source_art/sprite_studies/alis_revisao_ficha/revisao.json) · [Planos e referências](../data/source_art/scenes/alis_guardioes/lineage.json)
+
+O contador da [ROM de ensaio](../out/candidates/alis_combo_hits_v1/rom/master_of_fighters.sms) apareceu nos dois lados no Emulicious. A estocada forte e o soco curto tiraram 10 e 6 PV em sequência. O painel de cada atacante mostrou 2 e voltou ao fundo ao terminar a reação. Com a segunda entrada atrasada, a vítima recuperou o controle no tick 46 e o segundo contato no 47 iniciou nova contagem. A tabela de afastamento no repertório continua em discussão. O segmento fixo de código termina em 0x7F9C (exclusivo), com 100 bytes até 0x8000. As três janelas mistas registraram 50,434976, 48,437551, 48,936907 FPS, abaixo do piso de 58. A janela selada de 3.000 apresentações registrou 0 estouros de VBlank. [Medições do combo](decisions/2026-11-27_alis_combos_revisao.json)
+
 ## 27/11/2026 · Apresentação Alis × Alis e Battle em FM
 
 A [candidata do Espaçoporto](../out/candidates/alis_versus_barlow_fm/rom/master_of_fighters.sms) usa Barlow SemiBold como padrão dos nomes no Versus. P1 e P2 usam o retrato de pré-luta voltado para o centro, com o traje de P2 na segunda paleta do combate. Em oito sessões privadas concluídas, o Emulicious exibiu os nomes com 59 × 20 pixels de tinta e reproduziu as 21 posições da pista dentro da moldura. As 20 atualizações do mapa terminaram com VCount 237. [Câmera capturada na ROM](../out/qa/alis_versus_barlow_fm/fm/versus.gif)

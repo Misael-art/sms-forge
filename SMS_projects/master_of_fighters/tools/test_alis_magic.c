@@ -91,6 +91,33 @@ static void trade(uint8_t attacker,uint8_t reverse)
     assert(mof_magic.caster[v].chat_wait==15);
 }
 
+static void combo_contacts(void)
+{
+    for (uint8_t owner=0;owner<2;++owner) {
+        uint8_t v=1u-owner;
+        reset();
+        /* Overlapping projectiles give one accepted hit, even in a trade. */
+        colliding_shot(0,owner,FIRE_TAP,6);
+        colliding_shot(1,owner,FIRE_TAP,6);
+        colliding_shot(2,v,FIRE_TAP,6);
+        tick(0,0);
+        assert(duel.fighters[v].combo_received==1 && duel.fighters[owner].combo_received==1);
+        advance(MOF_DUEL_LIGHT_HITSTOP);
+        colliding_shot(0,owner,FIRE_HOLD,10);
+        tick(0,0);
+        assert(duel.fighters[v].life==84 && duel.fighters[v].combo_received==2);
+        advance(MOF_DUEL_HEAVY_HITSTOP);
+        assert(duel.fighters[v].combo_received==2);
+        advance(MOF_DUEL_HEAVY_HITSTUN);
+        assert(!duel.fighters[v].combo_received && duel.fighters[v].state==MOF_DUEL_READY);
+        colliding_shot(0,owner,FIRE_TAP,6);
+        tick(owner ? MOF_DUEL_LEFT : 0, owner ? 0 : MOF_DUEL_RIGHT);
+        assert(duel.fighters[v].state==MOF_DUEL_BLOCK && !duel.fighters[v].combo_received);
+        reset();
+        assert(!duel.fighters[0].combo_received && !duel.fighters[1].combo_received);
+    }
+}
+
 static void overlay_order(void)
 {
     reset();
@@ -210,6 +237,7 @@ static void ground_reactions(void)
 
 int main(void)
 {
+    combo_contacts();
     unsigned p;
     ground_equivalence();ground_reactions();overlay_order();capabilities();
     for (p=0;p<2;++p) {

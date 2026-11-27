@@ -21,7 +21,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('candidate', type=Path, help='build directory with the ROM, record and map')
     parser.add_argument('out',type=Path)
-    parser.add_argument('--case',choices=('story','versus','budget','worst','acting','port-versus','impact'),
+    parser.add_argument('--case',choices=('story','versus','budget','worst','acting','port-versus','impact','combo'),
                         default='story')
     parser.add_argument('--fm',action='store_const',const=True,default=None,
                         help='Enable the FM unit in this private Emulicious session')
@@ -99,7 +99,7 @@ def main():
                 observe('dialogo_'+str(i+1))
                 press(16,28 if i==3 else 20)
         else:
-            if args.case in ('versus','worst','acting','port-versus','impact'): press(2)
+            if args.case in ('versus','worst','acting','port-versus','impact','combo'): press(2)
             press(16)
             if args.case=='budget': press(32,28)
         observe('apresentacao')
@@ -115,7 +115,54 @@ def main():
         if state()[5]!=2:
             raise RuntimeError(f'Fight failed to reach gameplay: {state()}')
         arena_frame=observe('arena')
-        if args.case=='port-versus':
+        if args.case=='combo':
+            # Drive both fighters through their controller ports and inspect
+            # the published duel state and visible HUD cells.
+            def until(keys, predicate, limit):
+                duel_state=None
+                for _ in range(limit):
+                    controls((*keys,1))
+                    raw=ram(0xc770,RECORD_BYTES)
+                    if raw[:4]==b'MFD1' and not raw[4]&1:
+                        duel_state=decode(raw)
+                        if predicate(duel_state):
+                            return duel_state
+                log['failed_input']={'keys':keys,'last_probe':duel_state,'hits':list(ram(addr+16,2))}
+                save()
+                raise AssertionError(('combo timeline',keys,duel_state))
+            digit_header=next(k for k in record['input_sha256'] if k.endswith('/alis_pages.h'))
+            digits=int(re.search(r'#define MOF_DIGIT_TILE (\d+)u',(PROJECT/digit_header).read_text())[1])
+            for side in range(2):
+                name='p'+str(side+1)
+                rival='p'+str(2-side)
+                def pad(key):
+                    return (0,key) if side else (key,0)
+                def hud():
+                    column=23 if side else 7
+                    values=isolated.request(session,'read-vram',0x3800+2*(64+column),4)['vram']
+                    return [values[j]|(values[j+1]<<8) for j in (0,2)]
+                at_range=until(pad(4 if side else 8),
+                      lambda s: abs(s[name]['pivot'][0]-s[rival]['pivot'][0])==24,180)
+                controls((0,0,3))
+                until(pad(16),lambda s:s[name]['state']==1,30)
+                first=until((0,0),lambda s:s[rival]['state']==3,30)
+                assert first[rival]['life']==at_range[rival]['life']-10
+                assert ram(addr+16+side,1)[0]==1
+                # The port is sampled ahead of probe publication. A two-frame
+                # tap here arrives on the transition to READY in the cartridge.
+                until((0,0),lambda s:s[name]['state']==1 and s[name]['action_tick']==16,80)
+                controls((*pad(16),2))
+                second=until((0,0),lambda s:s[rival]['life']==first[rival]['life']-6,40)
+                assert second[rival]['free_since']==first[rival]['free_since']
+                until((0,0),lambda s:hud()==[digits+10,digits+2],8)
+                row=observe(name+'_dois_hits');row['combo']=list(ram(addr+16,2))
+                row['hud_tiles']=hud();row['first_hit']=first;row['second_hit']=second
+                assert row['combo'][side]==2 and row['combo'][1-side]==0
+                until((0,0),lambda s:s[rival]['can_act'] and not ram(addr+16+side,1)[0],60)
+                until((0,0),lambda s:hud()==[digits+10,digits+10],8)
+                observe(name+'_livre',False)
+            save()
+        elif args.case=='port-versus':
             if state()[0]:
                 raise RuntimeError('Versus sequence entered the story mode')
             from PIL import Image, ImageChops

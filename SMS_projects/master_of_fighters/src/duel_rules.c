@@ -260,6 +260,9 @@ uint8_t mof_duel_init_pair(MofDuel *duel, const MofDuelGeometry geometry[2],
         fighter->keys = fighter->held = fighter->latched = 0u;
         fighter->spent = fighter->contact = fighter->guarding = 0u;
 #if defined(MOF_DUEL_SCENE_MIRROR)
+#ifdef MOF_ALIS_CHAPTER
+        fighter->combo_received = 0;
+#endif
         fighter->def = 0;
         fighter->reaction = MOF_REACT_BODY;
         fighter->thrown = 0u;
@@ -303,11 +306,24 @@ uint8_t mof_duel_init(MofDuel *duel, const MofDuelGeometry geometry[2],
 
 static void enter(MofDuel *duel, MofDuelFighter *fighter, uint8_t state)
 {
+#ifdef MOF_ALIS_CHAPTER
+    if (state == MOF_DUEL_READY || state == MOF_DUEL_BLOCK)
+        fighter->combo_received = 0;
+#endif
     fighter->state = state;
     fighter->state_since = duel->tick;
     if (state == MOF_DUEL_READY) {
         fighter->free_since = duel->tick;
     }
+}
+
+static void deal_damage(MofDuelFighter *target, uint8_t amount)
+{
+#ifdef MOF_ALIS_CHAPTER
+    if (target->life && amount && target->combo_received < 99u)
+        ++target->combo_received;
+#endif
+    target->life = target->life > amount ? (uint8_t)(target->life - amount) : 0u;
 }
 
 static int16_t clamp_x(const MofDuel *duel, int16_t x)
@@ -698,7 +714,7 @@ uint8_t mof_duel_effect_contact(MofDuel *duel,uint8_t attacker,uint8_t damage,ui
         return source->contact=MOF_DUEL_GUARDED;
     }
     target->reaction=MOF_REACT_BODY;
-    target->life=target->life>damage ? target->life-damage : 0;
+    deal_damage(target, damage);
     if (!target->life && !(flags&MOF_EFFECT_FINISH)) begin_fall(duel,victim);
     else enter(duel,target,target->life ? MOF_DUEL_HIT : MOF_DUEL_KO);
     return source->contact=MOF_DUEL_LANDED;
@@ -746,7 +762,7 @@ static void advance_throw(MofDuel *duel, uint8_t owner)
         return;
     }
     amount = source->def->moves[MOF_DUEL_THROW].damage;
-    target->life = target->life > amount ? (uint8_t)(target->life - amount) : 0u;
+    deal_damage(target, amount);
     source->contact = MOF_DUEL_LANDED;
     target->thrown = 1u;
     enter(duel, target, MOF_DUEL_HIT);
@@ -790,7 +806,7 @@ static void apply_contact(MofDuel *duel, uint8_t attacker, uint8_t result)
         if (HAS_MOVES(duel, source) && source->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER)
             amount = MOVE(duel, source, source->standing_normal)->damage;
 #endif
-        target->life = target->life > amount ? (uint8_t)(target->life - amount) : 0u;
+        deal_damage(target, amount);
 #if defined(MOF_DUEL_SCENE_MIRROR)
         if (!target->life || (HAS_MOVES(duel, source) &&
             source->standing_normal < MOF_DUEL_NORMALS_PER_FIGHTER &&

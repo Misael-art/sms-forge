@@ -161,6 +161,9 @@ typedef struct {
 #if defined(MOF_DUEL_SCENE_MIRROR)
     const MofFighterDef *def;
     uint8_t reaction, thrown, hit_duration;
+#ifdef MOF_ALIS_CHAPTER
+    uint8_t combo_received;  /* damaging contacts since this defender last regained control */
+#endif
     uint8_t riposte_armed;  /* a parry move caught a hit and may strike */
 #endif
 } MofDuelFighter;

@@ -30,5 +30,83 @@
     "bytes_de_volume_psg": 3391,
     "sha256_bytes_psg": "e19b7c5fd97a564472657fee07578d5324b348bf08bb78c5f598d8f3f772eda9",
     "efeitos": "Gestos, cura e voo em PSGlib. Composição original e cues do próprio capítulo."
+  },
+  "revisao_visual_da_ficha": {
+    "estado": "Três planos de construção. Tempos e vídeo da ROM G6e referem-se à montagem histórica.",
+    "origem": "ImageGen, edição da folha guardioes.png. Recorte individual, encaixe sem esticar em 224 × 112 e quantização na paleta SMS por plano. No corte laconiano a vítima tem plano próprio.",
+    "origem_gerada_sha256": "47bf5b0192ff50202fc6a8cb05e757005b749a156fd038a38dc681973ffa3eaa",
+    "concept_alis": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+    "concept_sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+    "odin": "https://www.sega.jp/fb/album/07_ps/character.html",
+    "equipamento": "https://www.sega.jp/fb/album/07_ps/play.html",
+    "arquivos": [
+      {
+        "arquivo": "revisao_ficha/alis.png",
+        "sha256": "ef5507afb1710384834e6a6dc6c905a9a340c8fee912d3ec3053965baf7462f9",
+        "paleta_sms": [
+          16,
+          0,
+          1,
+          6,
+          11,
+          15,
+          19,
+          35,
+          37,
+          42,
+          43,
+          47,
+          63,
+          57,
+          60,
+          32
+        ]
+      },
+      {
+        "arquivo": "revisao_ficha/odin.png",
+        "sha256": "db66883d17fe0395426c80db13e50c0ff73437f9496f9171bcd07cb0156bfb5e",
+        "paleta_sms": [
+          16,
+          0,
+          1,
+          6,
+          11,
+          15,
+          42,
+          21,
+          22,
+          27,
+          43,
+          47,
+          63,
+          35,
+          59,
+          37
+        ]
+      },
+      {
+        "arquivo": "revisao_ficha/laconiana.png",
+        "sha256": "40764b23cbaca71f26a74f41ef31606e1a9c6cab1d484bc7ea75aacd4a11c877",
+        "paleta_sms": [
+          16,
+          0,
+          1,
+          6,
+          11,
+          15,
+          19,
+          35,
+          37,
+          42,
+          43,
+          47,
+          63,
+          57,
+          60,
+          32
+        ]
+      }
+    ],
+    "origem_gerada": "revisao_ficha/estudo.png"
   }
 }

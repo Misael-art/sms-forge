@@ -14,6 +14,7 @@ void mof_chapter_select(const MofChapterPresentation *presentation)
 static uint8_t last_pad;
 static uint8_t rhythm[2], gesture[2], direction[2], last_face[2];
 static uint8_t old_seconds, old_banner, old_gauge[2], banner_tiles, shutter;
+static uint8_t displayed_combo[2];
 static uint8_t cpu_keys, cpu_wait, cpu_cycle;
 
 #ifdef MOF_ALIS_MAGIC
@@ -293,6 +294,7 @@ void mof_chapter_round(void)
     cpu_keys=cpu_cycle=cpu_wait=0;
     for (i=0;i<2;++i) {
         chapter.meter[i]=chapter.idle[i]=0;
+        chapter.combo[i]=displayed_combo[i]=0;
         rhythm[i]=gesture[i]=direction[i]=0;
     }
 }
@@ -418,6 +420,20 @@ void mof_chapter_stage_hud(void)
 #endif
         }
     }
+    /* Append after the scene and both gauges. If this frame filled the PNT
+       queue, keep the old display value and retry on the next presentation. */
+    for (i=0;i<2;++i) {
+        uint8_t hits=chapter.combo[i], x=i ? 23u : 7u;
+        if (hits<2u) hits=0;
+        if (displayed_combo[i]==hits) continue;
+#ifdef MOF_ALIS_MAGIC
+        if (mof_chapter_pnt.count > sizeof(mof_chapter_pnt.cells)/sizeof(mof_chapter_pnt.cells[0])-2u)
+            break;
+#endif
+        chapter_cell(x,2,MOF_DIGIT_TILE+(hits>=10u ? hits/10u : 10u));
+        chapter_cell(x+1u,2,MOF_DIGIT_TILE+(hits ? hits%10u : 10u));
+        displayed_combo[i]=hits;
+    }
 }
 
 void mof_chapter_publish_hud(uint8_t banner)
@@ -459,6 +475,7 @@ void mof_chapter_update(const MofDuel *duel)
 #endif
     for (i=0;i<2;++i) {
         const MofDuelFighter *f=&duel->fighters[i];
+        chapter.combo[i]=duel->fighters[1u-i].combo_received;
         if (f->state==MOF_DUEL_READY && !f->keys) {
             if (chapter.idle[i]<254) ++chapter.idle[i];
             else chapter.idle[i]=150;
