@@ -68,8 +68,10 @@ void mof_chapter_flush_pnt(void) __naked
 static volatile uint8_t port_apron_scroll, port_runway_scroll;
 static uint8_t flight_clock, flight[2], scanner;
 
-/* Register 10 reloads every 32 visible lines. The weapon tiles are
-   precomposed in screen space, so rows 12 through 19 stay stationary. */
+/* Weapon tiles are precomposed in screen space. Rows 12–19 stay fixed. */
+#ifdef MOF_PORT_CLOUDS
+#include "palma_cloud_raster.inc"
+#else
 static void port_raster(void)
 {
     uint8_t line=SMS_getVCount();
@@ -82,17 +84,27 @@ static void port_raster(void)
     }
 }
 
+#endif
+
 void mof_port_raster_start(void)
 {
     SMS_setLineInterruptHandler(port_raster);
+#ifdef MOF_PORT_CLOUDS
+    SMS_setLineCounter(15);
+#else
     SMS_setLineCounter(31);
+#endif
     SMS_enableLineInterrupt();
 }
 
 static void port_bird(uint8_t bird, uint8_t advance)
 {
     uint8_t phase=flight[bird], column=phase>>2;
+#ifdef MOF_PORT_CLOUDS
+    const uint8_t row=3; /* Both birds circle in clear sky, 17 columns apart. */
+#else
     uint8_t row=3u+bird;
+#endif
     uint16_t tile;
     if (advance) {
         phase=(phase+1u)&127u;
@@ -326,6 +338,9 @@ void mof_chapter_arena(void)
     }
 #endif
 #ifdef MOF_PORT_SKY
+#ifdef MOF_PORT_CLOUDS
+    port_cloud_phase=0;
+#endif
     flight[0]=26;
     flight[1]=94;
     flight_clock=scanner=0;

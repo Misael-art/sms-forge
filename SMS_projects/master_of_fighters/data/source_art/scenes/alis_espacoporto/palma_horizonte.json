@@ -1,0 +1,44 @@
+{
+  "arquivo": "palma_horizonte.png",
+  "sha256": "021b061320fb635e64efb99682a3e3f52f774e738c58b8c2eb57d0d9ed972e7e",
+  "data": "2026-11-27",
+  "ferramenta": "ImageGen",
+  "dimensoes": [
+    1536,
+    1024
+  ],
+  "referencias": [
+    {
+      "arquivo": "pista.png",
+      "sha256": "10686413c52d9afc5ea38e91a457112af8899e1d7c8baa2c4484e282f8c694a1",
+      "papel": "Base autoral da posição das naves, torre, posto e pista do Espaçoporto. Origem da cena de Phantasy Star registrada em lineage.json."
+    },
+    {
+      "arquivo": "codex-clipboard-24430eb9-af44-4d09-b721-596ef1ca6ea4.png",
+      "sha256": "6ad0e05f31f901a831153485305d103b30df0b28171ec9b6cfbe2949e1a08635",
+      "jogo": "Sonic the Hedgehog (Master System)",
+      "origem": "Captura fornecida pelo proprietário",
+      "papel": "Silhuetas distantes e profundidade por planos de azuis próximos."
+    },
+    {
+      "arquivo": "codex-clipboard-c758e794-22b4-45e5-8ede-fc01815d0a99.png",
+      "sha256": "96c284cd2426b7999116d1ada862f79b79c518dab9ca6c58e56a3bc00fb70fb7",
+      "jogo": "Astérix (Master System)",
+      "origem": "Captura fornecida pelo proprietário",
+      "papel": "Agrupamento das sombras e desenho do relevo com poucos tons."
+    }
+  ],
+  "direcao": "Revisão da prancha do posto de passaportes. Redesenhar o guarda branco de perfil com capacete pequeno, antebraços e pernas longos. Preservar as duas naves vermelhas, o leitor e a torre. Desenhar duas silhuetas de escarpas palmanas atrás dos hangares, com cristas escalonadas e poucos planos de luz. Concentrar três grupos de nuvens chapadas no alto, separados por céu limpo para a rolagem horizontal.",
+  "conversao": [
+    "tools/alis_arena.py",
+    "tools/pack_alis_scenes.py",
+    "tools/pack_alis_matchup.py",
+    "tools/palma_panorama.py",
+    "tools/pack_alis_magic.py"
+  ],
+  "tratamento_no_sms": [
+    "Três grupos da prancha com 104, 64 e 32 px de largura na arena. O perfil de cada nuvem ocupa uma fileira completa de tiles, com fundo livre nas bordas para o wrap.",
+    "Céu 52, crista distante 53 e escarpa próxima 32. Contornos do guarda e do leitor reservados antes do ajuste dos motivos.",
+    "Reuso dos flips nativos no mapa da pista. Projéteis recebem composições na orientação desenhada. A moldura do Versus usa ambas as subpaletas e seus próprios padrões residentes."
+  ]
+}

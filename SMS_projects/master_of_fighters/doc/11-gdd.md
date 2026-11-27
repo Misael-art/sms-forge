@@ -1,5 +1,9 @@
 # 11-gdd — master_of_fighters
 
+## Horizonte do Espaçoporto de Palma
+
+O guarda de passaportes tem proporções adultas, com viseira pequena, braços compridos e o leitor afastado do peito. Atrás dos hangares, as cristas de Palma se distinguem pela cor e pelo contorno. O céu deriva mesmo com as lutadoras paradas. Ao caminhar, a pista próxima percorre mais tela do que as naves, e as nuvens respondem ainda menos à câmera. [Arte e referências visuais](../data/source_art/scenes/alis_espacoporto/palma_horizonte.json)
+
 ## Confronto no Espaçoporto e tema de Alis
 
 P1 olha para a direita no alto, com o nome à esquerda. P2 olha para a esquerda embaixo, com o nome alinhado à direita e o identificador P2 logo acima. Um X pequeno marca o centro entre os nomes. Barlow SemiBold é a fonte padrão dos nomes do elenco. Os dois nomes têm o mesmo corpo de letra. O bloco de P2 fica acima de seu retrato. No espelho de Alis, os dois lados usam o mesmo retrato de pré-luta, com o tecido do traje rosa em P1 e verde em P2. O rodapé identifica o estágio 01, Espaçoporto de Palma. A câmera percorre a pista da direita para a esquerda dentro da moldura. O botão 1 avança a apresentação do Versus, que também segue sozinha. Quando a adversária é Alis, a faixa de combate é *Battle*, do primeiro *Phantasy Star*. A opção de música vale para a apresentação e a luta. [Faixa FM e identificação do compositor](https://www.smspower.org/Music/PhantasyStar-SMS-FM-Playlist)

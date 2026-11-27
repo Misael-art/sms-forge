@@ -132,11 +132,13 @@ def encode(im, colors=PALETTE):
     return struct.pack('<H',len(tiles)*32)+bytes(colors)+b''.join(tiles)+tilemap
 
 
-def pack(fighters, out, spaceport=False):
+def pack(fighters, out, spaceport=False, horizon=False):
     out.mkdir(parents=True,exist_ok=True)
     manifest=json.loads((fighters/'mirror_build.json').read_bytes())
     tc=manifest['toolchain']
-    backdrop = PORT_ART/'pista.png' if spaceport else ART/'camineet_capsulas.png'
+    backdrop = ART/'camineet_capsulas.png'
+    if spaceport:
+        backdrop = PORT_ART/('palma_horizonte.png' if horizon else 'pista.png')
     colors = PALETTE.copy()
     if spaceport:
         colors[7], colors[9] = 52, 32
@@ -156,7 +158,7 @@ def pack(fighters, out, spaceport=False):
         im.putpalette(bytes(c for code in page_colors for c in rgb(code)).ljust(768,b'\0'))
         im.save(out/(name+'.png'))
         records[name]={'bank': bank, 'tiles': int.from_bytes(data[:2],'little')//32}
-    stage, limits=arena(fighters, PORT_ART if spaceport else ART, native, spaceport)
+    stage, limits=arena(fighters, PORT_ART if spaceport else ART, native, spaceport, horizon)
     declarations.append(f'#define MOF_ARENA_BANK {first+len(pages)}u')
     declarations.extend(f'#define MOF_{k} {v}u' for k,v in limits.items())
     banks.extend(stage.ljust(16384,b'\xff'))
@@ -186,5 +188,6 @@ if __name__=='__main__':
     parser.add_argument('fighters',type=Path)
     parser.add_argument('out',type=Path)
     parser.add_argument('--spaceport', action='store_true', help='Palma passport checkpoint in both game modes')
+    parser.add_argument('--horizon', action='store_true', help='Palma with the cloud band and revised passport officer')
     args=parser.parse_args()
-    pack(args.fighters.resolve(),args.out.resolve(),args.spaceport)
+    pack(args.fighters.resolve(),args.out.resolve(),args.spaceport or args.horizon,args.horizon)

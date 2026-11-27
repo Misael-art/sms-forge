@@ -68,7 +68,7 @@ def score(melody,bass,pulse):
     return song
 
 
-def arena(fighters, art, native, spaceport=False):
+def arena(fighters, art, native, spaceport=False, horizon=False):
     import json
     from stage_alis_postures import rgb
     page=json.loads((fighters/'repertoire-pages.json').read_bytes())
@@ -79,6 +79,8 @@ def arena(fighters, art, native, spaceport=False):
         # their original CRAM indices. Only repurpose scenery-only colors.
         used = {color for frame in page['frames'] for _, _, color in frame['background_pixels']}
         substitutions = {7: 52, 10: 32, 20: 60}
+        if horizon:
+            substitutions[8] = 53  # Periwinkle is one CRAM red step above the blue sky.
         if used.intersection(substitutions):
             raise ValueError('Spaceport palette would recolor a weapon')
         palette = [substitutions.get(c, c) for c in palette]
@@ -93,14 +95,25 @@ def arena(fighters, art, native, spaceport=False):
     dark,white,gold=map(palette.index,(16,63,11))
     source=Image.new('L',(256,192),dark)
     if spaceport:
-        with Image.open(art/'pista.png') as plate:
-            original = native(plate, (256,192), palette)
         sky = palette.index(52)
         source.paste(sky, (0,24,256,96))
-        # Keep both entire ships in the same raster band. Sky and pavement
-        # at the band boundaries avoid cutting a feature into two speeds.
-        apron = original.crop((0,35,256,119)).resize((248,56), Image.Resampling.NEAREST)
-        source.paste(apron, (8,40))
+        with Image.open(art/('palma_horizonte.png' if horizon else 'pista.png')) as plate:
+            original = native(plate, (256,192), palette)
+            if horizon:
+                # Separate authored bands at areas of clear sky. Leave rows 4–5
+                # for clouds; both birds follow the clear band above them.
+                # Each authored cloud occupies one tile row, with clean sky on
+                # either side. Tiles stay resident as the raster wraps at X=256.
+                for bounds, width, position in (
+                        ((68,40,812,116),104,(8,40)),
+                        ((826,55,1234,124),64,(136,32)),
+                        ((1266,57,1466,111),32,(216,40))):
+                    source.paste(native(plate.crop(bounds), (width,8), palette),position)
+                source.paste(native(plate.crop((0,190,1536,389)), (248,14), palette),(8,48))
+                source.paste(native(plate.crop((0,389,1536,634)), (248,34), palette),(8,62))
+            else:
+                apron = original.crop((0,35,256,119)).resize((248,56), Image.Resampling.NEAREST)
+                source.paste(apron, (8,40))
         paving = original.crop((0,132,256,192)).resize((256,48), Image.Resampling.NEAREST)
         source.paste(paving, (0,144))
         source.paste(original.crop((0,120,256,128)), (0,96))
@@ -142,8 +155,8 @@ def arena(fighters, art, native, spaceport=False):
         return x,y,planar(steady)+planar(bright)
     glass_colors = {glass, palette.index(60)} if spaceport else {glass}
     if spaceport:
-        lights = [light_cell(range(24,27), range(5,7), glass_colors),
-                  light_cell(range(13,15), range(10,12), glass_colors)]
+        lights = [light_cell(range(24,27), range(6,8) if horizon else range(5,7), glass_colors),
+                  light_cell(range(13,15), range(9,11) if horizon else range(10,12), glass_colors)]
     else:
         lights = [light_cell(range(28,31), range(9,12), glass_colors)]
     motion = bytearray()
@@ -182,18 +195,33 @@ def arena(fighters, art, native, spaceport=False):
         # One-pixel expansion joints are the near-plane motion cue. Their
         # low area would otherwise lose to the parked ships in tile fitting.
         near = (tile_at(x,y) for y in range(18,24) for x in range(32))
-        officer = (tile_at(x,y) for y in range(9,12) for x in range(12,15))
+        officer = (tile_at(x,y) for y in range(8 if horizon else 9,12) for x in range(12,15))
         pool = list(dict.fromkeys([*pool, *near, *officer]))
+        if horizon:
+            clouds = (tile_at(x,y) for y in (4,5) for x in range(32))
+            tower_cap = (tile_at(x,6) for x in range(24,27))
+            landing_gear = (tile_at(x,y) for x in (4,8,24,30) for y in (10,11))
+            hangars = (tile_at(x,y) for x in (17,18,21,22) for y in (9,10))
+            pool = list(dict.fromkeys([*pool, *clouds, *tower_cap, *landing_gear,
+                                       *hangars, tile_at(10,9), tile_at(31,9)]))
         if len(pool)>len(vram_ids):
             raise ValueError('Runway and checkpoint exceed the scenery allocation')
-    best={t:min(distance(t,k) for k in pool) for t in counts}
-    while len(pool)<len(vram_ids):
-        t=max(best,key=lambda k:best[k]*counts[k]**0.5)
-        if not best[t]: break
-        pool.append(t)
-        for k in best: best[k]=min(best[k],distance(k,t))
-    index={t:min(range(len(pool)),key=lambda i:distance(t,pool[i])) for t in counts}
-    mapping=[vram_ids[index[visible[x,y]]] if (x,y) in visible else 256+rows[y]
+    if horizon:
+        from palma_panorama import fit_apron
+        # Three sets of 32-byte spell composites must fit a 16 KiB bank.
+        # Reserve the HUD rows and both beacons before spending orientation IDs.
+        view_limit = 16384//(3*32) - len(protected) - len(lights)
+        pool,entries = fit_apron(counts,pool,vram_ids,colors,sky,palette.index(53),view_limit)
+    else:
+        best={t:min(distance(t,k) for k in pool) for t in counts}
+        while len(pool)<len(vram_ids):
+            t=max(best,key=lambda k:best[k]*counts[k]**0.5)
+            if not best[t]: break
+            pool.append(t)
+            for k in best: best[k]=min(best[k],distance(k,t))
+        index={t:min(range(len(pool)),key=lambda i:distance(t,pool[i])) for t in counts}
+        entries = {raw:vram_ids[i] for raw,i in index.items()}
+    mapping=[entries[visible[x,y]] if (x,y) in visible else 256+rows[y]
              for y in range(24) for x in range(32)]
     patterns=bytearray(b''.join(planar(list(p)) for p in pool[:capacity]))
     light_tiles = []
@@ -224,6 +252,8 @@ def arena(fighters, art, native, spaceport=False):
         defs.update(PORT_SKY=motion_tile, PORT_SCANNER=light_tiles[1],
                     PORT_SCAN_X=lights[1][0], PORT_SCAN_Y=lights[1][1],
                     PORT_PALETTE=0x8000+len(blob))
+        if horizon:
+            defs['PORT_CLOUDS'] = 1
         blob.extend(palette)
         defs['BANNER_DATA']=0x8000+len(blob)
     # The stage name table is restored from its ROM copy under each announcement.

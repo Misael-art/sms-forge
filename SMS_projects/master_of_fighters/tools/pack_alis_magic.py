@@ -33,7 +33,15 @@ def stage_patterns(folder, fighters):
     tilemap = struct.unpack_from('<768H',data,size)
     ids = list(dict.fromkeys(tilemap))
     pal = defs['PORT_PALETTE']-0x8000
-    return ids, [ids.index(t) for t in tilemap], [bytes(pixels(vram[t*32:t*32+32])) for t in ids], list(data[pal:pal+16])
+    def oriented(entry):
+        address = (entry & 0x1ff)*32
+        tile = Image.frombytes('L',(8,8),bytes(pixels(vram[address:address+32])))
+        if entry & 0x200:
+            tile = tile.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+        if entry & 0x400:
+            tile = tile.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+        return tile.tobytes()
+    return ids, [ids.index(t) for t in tilemap], [oriented(t) for t in ids], list(data[pal:pal+16])
 
 
 def pack(base,out):
