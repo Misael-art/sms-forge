@@ -1,5 +1,9 @@
 # 10-memory-bank — master_of_fighters
 
+## 26/11/2026 · Ficha técnica de construção do elenco
+
+O [modelo de personagem](ficha_tecnica_personagem_modelo_v1.docx) acompanha o registro de repertório. A [edição preenchida de Alis](ficha_tecnica_alis_g6e_v1.docx) usa os controles e os tempos do capítulo G6e, ilustra poses e efeitos e distingue regras de contato, hipóteses de combo e observações no emulador. Trata-se de documentação de construção; a cadência e o aceite do combate seguem no registro da candidata.
+
 ## 26/11/2026 · G6e · ROM do Espaçoporto de Palma
 
 A G6e prepara a SAT por lutador, mantém os slots residentes nas trocas de pose e reaproveita a célula da magia quando só os pixels do efeito mudam. O teste de regras cobre a recuperação de golpes e a defesa em pé e agachada. A conferência do pacote de arte encontrou 376 poses, 3.008 fases e 1.834 células de fundo com coordenadas distintas dentro de cada fase. A comparação em software de 2.500 transições preservou as entradas da SAT e seu terminador. O Emulicious mostrou os dois lutadores na pista. Os 1.678 pixels verificados coincidiram com a arte do cartucho. [ROM G6e](../out/candidates/alis_guardioes_g6e/rom/master_of_fighters.sms)

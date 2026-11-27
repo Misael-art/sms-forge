@@ -195,6 +195,8 @@ Estas seis ações de assinatura e os dois agarrões completam a **proposta** de
 
 ## Ficha que acompanha cada ação até a ROM
 
+Para construir um lutador do elenco, duplique o [modelo oficial editável](ficha_tecnica_personagem_modelo_v1.docx). A [ficha ilustrada de Alis na G6e](ficha_tecnica_alis_g6e_v1.docx) aplica o modelo aos 16 golpes físicos e às 11 ações de magia, suporte e finalização do capítulo. Cada sequência identifica poses, exposição e resultado de contato. Os dados desta edição pertencem à ROM identificada na ficha.
+
 Dar a cada ação um ID estável no contrato individual e referenciá-lo na lista de comandos e na [Cena 10](character_move_showcase_standard_v1.md). Para cada linha registrar:
 
 1. **Design** — personagem, nome exibido, origem da proposta, decisão do dono, função, comando nas duas faces, postura, recurso, precedência e situações proibidas. Ações rejeitadas/substituídas conservam a decisão e o motivo.
