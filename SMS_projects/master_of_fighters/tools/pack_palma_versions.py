@@ -180,6 +180,8 @@ def pack(base,cast,archives,out,fighter_override=None):
     rel=out.relative_to(PROJECT).as_posix()
     tc['include_dirs']=tc['include_dirs'][:2]+[rel]
     tc['mapper_code_banks']['SMSBANK_CAMERA']=63
+    if cast_tc['defines'].get('MOF_ALIS_FEEDBACK'):
+        tc['defines']['MOF_ALIS_FEEDBACK']=1
     tc['defines']['MOF_PALMA_VERSIONS']=1
     tc['makesms_extra']=['-pp','-mbank',fighter_path+'/mirror-banks.bin:0:22:2']
     tc['defines']['MOF_PALMA_LIGHTS']=1

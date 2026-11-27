@@ -1,5 +1,13 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · Espaçoporto V3 com o elenco e as mecânicas da R6b
+
+A [ROM integrada](../out/candidates/palma_v3_r6b/rom/master_of_fighters.sms) tem SHA-256 `bf29150027253fcf9a8b94afaec9c585684acb5405522991f1345e2f73da5c4f`. O Versus abre na V3. A História usa a V2. Os bancos do elenco e dos Guardiões coincidem byte a byte com a R6b. O Emulicious mostrou os oito quadros de concentração de Fire duplo e a defesa no primeiro tick após a pausa.
+
+Na V3 as nuvens percorreram 40 pixels em 320 quadros. A linha acima da torre conservou o azul do céu e as duas linhas seguintes acompanharam a pista. P1 e P2 perderam 10 PV em cada uma das oito trocas. Os 576 pixels visíveis das quatro margens conservaram a cor do céu até 20 PV, inclusive nos quadros do pisca crítico. [Paralaxe](../out/qa/palma_v3_r6b/v3/terminal.mp4) · [Barras durante o dano](../out/qa/palma_v3_r6b/v3/dano.mp4)
+
+O piso de 58 FPS segue reprovado. As menores janelas foram 42,76 FPS na História, 46,44 FPS no combate misto e 24,47 FPS nos especiais do Versus. Em 3.000 apresentações por ensaio, a carga mista registrou zero estouros de VBlank e os especiais registraram 140. O próximo diagnóstico de desempenho deve localizar as escritas tardias durante os especiais com a hiperpausa integrada. [Medições por janela, sessões e cópia de recuperação](decisions/2026-11-27_palma_v3_r6b.json)
+
 ## 27/11/2026 · Ficha e ROM de teste R6b de Alis
 
 Na [ROM R6b do Espaçoporto](../out/candidates/alis_ficha_r6b/rom/master_of_fighters.sms), a sequência forte → curto fez dois hits nos dois cantos. A vítima recuperou o controle no tick 303 e bloqueou o ataque seguinte no 308, com 84 HP. Fire duplo e Myau tiveram oito apresentações de concentração, Palma dez e os Guardiões doze. O foco acompanha a mão da pose realmente apresentada. Rest sinalizou +6 HP e Chat +1 MP com sons distintos e texto que subiu oito pixels. A ficha usa a mesma paleta do cartucho e incorpora os 23 retoques por material. A auditoria cobriu 376 variantes e 139 aparições nas ilustrações. SHA-256 da ROM `47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399`.

@@ -1,0 +1,536 @@
+{
+  "estado": "Candidata integrada de teste. Correções visuais verificadas. Desempenho reprovado.",
+  "rom": {
+    "arquivo": "out/candidates/palma_v3_r6b/rom/master_of_fighters.sms",
+    "sha256": "bf29150027253fcf9a8b94afaec9c585684acb5405522991f1345e2f73da5c4f"
+  },
+  "bytes": 1048576,
+  "compilacao": {
+    "arquivo": "out/candidates/palma_v3_r6b/build_record.json",
+    "sha256": "29464d7d0530675dc0509d0ef068a7e4d6afdbd457a1bb1127ab7a98e8f22f8d"
+  },
+  "integracao": {
+    "ajuste_visual": "ba60507",
+    "elenco_e_mecanicas": "32ee7fc",
+    "referencia_R6b": {
+      "arquivo": "out/candidates/alis_ficha_r6b/rom/master_of_fighters.sms",
+      "sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399"
+    },
+    "bancos_identicos_R6b": [
+      [
+        2,
+        23
+      ],
+      [
+        39,
+        46
+      ]
+    ],
+    "flags": [
+      "MOF_ALIS_FEEDBACK",
+      "MOF_PALMA_LIGHTS",
+      "MOF_PALMA_VERSIONS"
+    ],
+    "arena_V3": {
+      "banco": 48,
+      "bytes": 10553,
+      "sha256": "a3d1a1836883c02163c14ac36043e9b67729fd2e9419b1dbf11f77bb378c369c"
+    },
+    "variantes_de_Alis_conferidas": 376
+  },
+  "procedimento": [
+    "Empacotar as versões com a pista-base alis_palma_horizonte_r3/matchup e o elenco alis_ficha_r6/matchup. Compilar pelo build_inner com o chapter.json resultante.",
+    "No Versus alternar V3 → V1 → V3, confirmar a V3 e gravar o framebuffer nativo com os comandos dos dois controles.",
+    "Na linha 48 conferir todos os pixels visíveis, e nas linhas 49 e 50 comparar com o deslocamento da pista ao longo de 320 quadros.",
+    "Gravar oito trocas de golpes até os dois controles chegarem a 20 PV. Conferir as quatro margens em cada quadro, o preenchimento a cada impacto e o pisca na faixa crítica."
+  ],
+  "emulador": "Emulicious SMS NTSC, sessões privadas, FM habilitado",
+  "ceu_RGB": [
+    0,
+    0,
+    85
+  ],
+  "nuvens": {
+    "vdp": 320,
+    "pixels": 40
+  },
+  "dano": {
+    "amostras": [
+      {
+        "vida": [
+          100,
+          100
+        ],
+        "luz_na_barra": [
+          80,
+          80
+        ]
+      },
+      {
+        "vida": [
+          90,
+          90
+        ],
+        "luz_na_barra": [
+          72,
+          72
+        ]
+      },
+      {
+        "vida": [
+          80,
+          80
+        ],
+        "luz_na_barra": [
+          64,
+          64
+        ]
+      },
+      {
+        "vida": [
+          70,
+          70
+        ],
+        "luz_na_barra": [
+          56,
+          56
+        ]
+      },
+      {
+        "vida": [
+          60,
+          60
+        ],
+        "luz_na_barra": [
+          48,
+          48
+        ]
+      },
+      {
+        "vida": [
+          50,
+          50
+        ],
+        "luz_na_barra": [
+          40,
+          40
+        ]
+      },
+      {
+        "vida": [
+          40,
+          40
+        ],
+        "luz_na_barra": [
+          32,
+          32
+        ]
+      },
+      {
+        "vida": [
+          30,
+          30
+        ],
+        "luz_na_barra": [
+          24,
+          24
+        ]
+      },
+      {
+        "vida": [
+          20,
+          20
+        ],
+        "luz_na_barra": [
+          16,
+          16
+        ]
+      }
+    ],
+    "quadros": 920,
+    "pixels_visiveis_das_margens": 576,
+    "cores_no_pisca_critico": [
+      [
+        [
+          85,
+          85,
+          255
+        ],
+        [
+          255,
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          85,
+          85,
+          255
+        ],
+        [
+          255,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  "video_paralaxe": {
+    "arquivo": "out/qa/palma_v3_r6b/v3/terminal.mp4",
+    "sha256": "2918c6f1ef236a3ca636a7d7f7290012e9aebd4273220dc02b5470778d357888"
+  },
+  "video_dano": {
+    "arquivo": "out/qa/palma_v3_r6b/v3/dano.mp4",
+    "sha256": "ad4319b41175d6f690cb6184f1903b993d32f786ae928aff4d902ce04e02a444"
+  },
+  "sessoes": {
+    "v3": {
+      "id": "c597489440a74119be08b20f8c159377",
+      "estado": "closed",
+      "evidencia": {
+        "arquivo": "out/qa/palma_v3_r6b/v3/observations.json",
+        "sha256": "8ef06fee79531a49da8fd68e8c81eea02f6fb72b8a29c37d2d196b5b18d328e6"
+      }
+    },
+    "dano": {
+      "id": "4b6ba81144da45df88081264c80e82e9",
+      "estado": "closed",
+      "evidencia": {
+        "arquivo": "out/qa/palma_v3_r6b/dano/observations.json",
+        "sha256": "4bb62f57b91dfe704a6ecbf5b232f4aba2b08f91b0db49cb57d9b5f86fb5a104"
+      }
+    },
+    "pausa": {
+      "id": "20e559be043446309924624de4eaeb4a",
+      "estado": "closed",
+      "evidencia": {
+        "arquivo": "out/qa/palma_v3_r6b/pausa/observations.json",
+        "sha256": "b7283dd6486027f77f322fac01f188149f3352f7c0d1446ca912a98df2a39c57"
+      }
+    },
+    "misto": {
+      "id": "acccc1875dbb45c28c898fee79c90dfc",
+      "estado": "closed",
+      "evidencia": {
+        "arquivo": "out/qa/palma_v3_r6b/misto/observations.json",
+        "sha256": "685f82c2436351f9dd5954c1da8aaf3ab3f32f8116c6db7a405b6c86af6ced40"
+      }
+    },
+    "fps": {
+      "id": "ad0cfb50a4ac41bcb16d9c0ce9959b63",
+      "estado": "closed",
+      "evidencia": {
+        "arquivo": "out/qa/palma_v3_r6b/fps/observations.json",
+        "sha256": "78f438976d4ef790e07608c41a8c86aa6071417b5cd4c244e2992a660cf5e35c"
+      }
+    },
+    "magias": {
+      "id": "abe48259527f45cd82e6e9114ba66a63",
+      "estado": "closed",
+      "evidencia": {
+        "arquivo": "out/qa/palma_v3_r6b/magias/observations.json",
+        "sha256": "62df26a95f9049b40b2af75818925fb3136c374a3afe304bc79860ccd30a4ab9"
+      }
+    }
+  },
+  "hiperpausa_fire_duplo": {
+    "duration": 8,
+    "sampled_phases": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "frozen_tick": 703,
+    "darker_pixels_in_floor": 4408,
+    "foco": {
+      "pose": 10,
+      "hand": [
+        95,
+        130
+      ],
+      "tile_origin": [
+        88,
+        128
+      ],
+      "native_frames": [
+        19,
+        20
+      ]
+    },
+    "native_tinted_frames": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "audio": {
+    "arquivo": "out/qa/palma_v3_r6b/v3/battle.audio.json",
+    "sha256": "5b226005edc818a26b86d5d1f7e39a6e1c6d752f787aa1837d6d3f3d14b0b7bc"
+  },
+  "desempenho": {
+    "piso_FPS": 58,
+    "historia": [
+      42.76185080034232,
+      44.721699965546115,
+      43.256243009730575
+    ],
+    "recibo_historia": {
+      "arquivo": "out/evidence/sessions/ad0cfb50a4ac41bcb16d9c0ce9959b63/runtime/fps.json",
+      "sha256": "75dc044aadbf32f6adf3cd886a665cb342dc4dcc1515676e0dc57756f7018d69"
+    },
+    "carga_mista": [
+      {
+        "vdp": 120,
+        "publications": 95,
+        "nominal_hz": 59.92274340431231,
+        "fps": 47.43883852841391,
+        "active": true
+      },
+      {
+        "vdp": 120,
+        "publications": 95,
+        "nominal_hz": 59.92274340431231,
+        "fps": 47.43883852841391,
+        "active": true
+      },
+      {
+        "vdp": 120,
+        "publications": 93,
+        "nominal_hz": 59.92274340431231,
+        "fps": 46.44012613834204,
+        "active": true
+      }
+    ],
+    "pior_quadro_misto": {
+      "verdicto": "pass",
+      "vline_min": 200,
+      "vovf_delta": 0,
+      "amostras": 1,
+      "vline_kind": "sealed_min",
+      "frames_medidos": 3000,
+      "frames_rom_final": 3037,
+      "janela_s_min": 50.0,
+      "janela_selada": true,
+      "schema": "smsforge.worst_frame/v2",
+      "sealed_field": "vline_min"
+    },
+    "janelas_especiais": [
+      {
+        "fps": 24.967809751796793,
+        "publicados": 50,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 55.428537648988886,
+        "publicados": 111,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 45.9407699433061,
+        "publicados": 92,
+        "vdp": 120,
+        "derramamentos": 16,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 45.9407699433061,
+        "publicados": 92,
+        "vdp": 120,
+        "derramamentos": 16,
+        "ativo": true
+      },
+      {
+        "fps": 24.967809751796793,
+        "publicados": 50,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 53.93046906388108,
+        "publicados": 108,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 46.44012613834204,
+        "publicados": 93,
+        "vdp": 120,
+        "derramamentos": 16,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 46.44012613834204,
+        "publicados": 93,
+        "vdp": 120,
+        "derramamentos": 16,
+        "ativo": true
+      },
+      {
+        "fps": 24.468453556760856,
+        "publicados": 49,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 54.42982525891701,
+        "publicados": 109,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 46.44012613834204,
+        "publicados": 93,
+        "vdp": 120,
+        "derramamentos": 16,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 46.44012613834204,
+        "publicados": 93,
+        "vdp": 120,
+        "derramamentos": 16,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 46.44012613834204,
+        "publicados": 93,
+        "vdp": 120,
+        "derramamentos": 16,
+        "ativo": true
+      },
+      {
+        "fps": 24.761464216657977,
+        "publicados": 50,
+        "vdp": 121,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 54.42982525891701,
+        "publicados": 109,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 46.44012613834204,
+        "publicados": 93,
+        "vdp": 120,
+        "derramamentos": 16,
+        "ativo": true
+      },
+      {
+        "fps": 48.437550918485776,
+        "publicados": 97,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 46.44012613834204,
+        "publicados": 93,
+        "vdp": 120,
+        "derramamentos": 12,
+        "ativo": true
+      }
+    ],
+    "pior_quadro_especiais": {
+      "selado": 1,
+      "vcount_min": 36,
+      "overruns": 140
+    },
+    "aceite": false
+  },
+  "recuperacao": {
+    "arquivo_na_raiz_SMSForge": ".runtime/backups/mof-palma-v3-r6b-bf2915002725.zip",
+    "sha256": "f79fbcd163d934c1e984f187c719a711fab9c1ee2d9bc48bf8318d9462b1e696"
+  }
+}

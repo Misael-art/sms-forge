@@ -56,6 +56,17 @@ def self_check():
     moved[58,40]=255
     assert stage_coverage(moved,source,7)==(2663,total)
     assert stage_coverage(moved,source,4)[0]<.98*total
+    sky=(0,0,85)
+    screen=np.full((192,256,3),sky,dtype=np.uint8)
+    check_apron_frame(screen,sky)
+    for x,y in ((15,8),(96,10),(136,13),(250,15),(200,48)):
+        screen[y,x]=0
+        try:
+            check_apron_frame(screen,sky)
+        except AssertionError:
+            screen[y,x]=sky
+        else:
+            raise AssertionError(('Marca indevida aceita',x,y))
     left='luz sob o trem de pouso'
     far='baliza distante direita'
     fast=[0,2,0,1,0,2,0]
@@ -135,7 +146,82 @@ def check_lighting(frames,expected,initial):
     return dict(frames=len(next(iter(history.values()))),grupos=stats,celulas_estaveis=STEADY,deslocamento_pista=floor_dx)
 
 
-def verify(build, assets, out, version, capture_battle=False,lighting=False):
+def check_apron_frame(frame, sky):
+    # X0..7 are hidden by the VDP left-column mask. Every other gutter
+    # pixel belongs to the stage, as does the entire visible IRQ seam.
+    for left,right in ((8,16),(96,120),(136,160),(240,256)):
+        assert np.all(frame[8:16,left:right]==sky),('life gutter',left,right)
+    assert np.all(frame[48,8:]==sky),'Aircraft ink in the scrolling sky'
+
+
+def exercise_damage(session, out, shot, sky):
+    from duel_probe import RECORD_BYTES, decode
+    def advance(p1,p2,count):
+        isolated.sequence(session,[dict(p1=p1,p2=p2,frames=count)])
+    def actors():
+        for _ in range(8):
+            raw=bytes(isolated.request(session,'read',0xc770,RECORD_BYTES)['ram'])
+            if not raw[4]&1:
+                duel=decode(raw)
+                return duel['p1'],duel['p2']
+            advance(0,0,1)
+        raise RuntimeError('No coherent combat publication')
+    def capture(hp):
+        path=shot(f'vida-{hp[0]}-{hp[1]}')
+        with Image.open(path) as picture:
+            frame=np.asarray(picture.convert('RGB'))
+        check_apron_frame(frame,sky)
+        # The track is black where depleted. Measure visible fill separately.
+        return [int(np.any(frame[11,x:x+80]!=0,axis=1).sum()) for x in (16,160)]
+    a,b=actors()
+    gap=b['pivot'][0]-a['pivot'][0]
+    hp=[a['life'],b['life']]
+    assert hp==[100,100]
+    samples=[dict(vida=hp,luz_na_barra=capture(hp))]
+    isolated.request(session,'record-steps-start','dano')
+    try:
+        for _ in range(10):
+            a,b=actors()
+            for _ in range(30):
+                if b['pivot'][0]-a['pivot'][0]<=gap: break
+                advance(8,4,3)
+                a,b=actors()
+            advance(0,0,5)
+            advance(2,2,4)
+            advance(0,0,4)
+            advance(18,18,16)
+            advance(0,0,80)
+            a,b=actors()
+            new=[a['life'],b['life']]
+            assert 0<new[0]<hp[0] and 0<new[1]<hp[1],(hp,new)
+            hp=new
+            samples.append(dict(vida=hp,luz_na_barra=capture(hp)))
+            if max(hp)<=25: break
+        assert max(hp)<=25
+        advance(0,0,48)
+    finally:
+        movie=isolated.request(session,'record-steps-stop')
+    assert all(end<start for start,end in zip(samples[0]['luz_na_barra'],samples[-1]['luz_na_barra']))
+    files=sorted((session/'evidence/dano').glob('*.png'))
+    assert len(files)==movie['recorded_frames'] and len(files)>48
+    critical_colors=[set(),set()]
+    for i,path in enumerate(files):
+        with Image.open(path) as picture:
+            frame=np.asarray(picture.convert('RGB'))
+        check_apron_frame(frame,sky)
+        if i>=len(files)-48:
+            for side,x in enumerate((16,160)):
+                critical_colors[side].add(tuple(int(v) for v in frame[11,x]))
+    assert all(len(colors)>=2 for colors in critical_colors),critical_colors
+    import subprocess
+    subprocess.run(['ffmpeg','-v','error','-threads','1','-framerate','60','-i',
+        str(session/'evidence/dano/%06d.png'),'-c:v','libx264','-threads','1','-crf','0',
+        '-pix_fmt','yuv444p',str(out/'dano.mp4')],check=True)
+    return dict(amostras=samples,quadros=len(files),pixels_visiveis_das_margens=576,
+                cores_no_pisca_critico=[sorted(colors) for colors in critical_colors])
+
+
+def verify(build, assets, out, version, capture_battle=False,lighting=False,apron=False):
     receipt=json.loads((build/'build_record.json').read_text())
     rom=PROJECT/receipt['rom_path']
     assert isolated.sha(rom)==receipt['rom_sha256']
@@ -217,6 +303,17 @@ def verify(build, assets, out, version, capture_battle=False,lighting=False):
                 log['cloud_px_per_96_vdp']=12
             if lighting:
                 log['iluminacao']=check_lighting(session/'evidence/terminal',expected,actual)
+        if apron:
+            assert version==3 and lighting
+            sky=expected[31,0]
+            assert tuple(sky)==(0,0,85)
+            fixed=np.roll(expected,dx,axis=1)[49:51,8:]
+            for path in sorted((session/'evidence/terminal').glob('*.png')):
+                with Image.open(path) as picture:
+                    frame=np.asarray(picture.convert('RGB'))
+                check_apron_frame(frame,sky)
+                assert np.array_equal(frame[49:51,8:],fixed),'Apron shifted with clouds'
+            log['dano']=exercise_damage(session,out,shot,sky)
         if capture_battle:
             assert capture_session(session,5,'battle')==0
             for name in ('battle.wav','battle.audio.json'):
@@ -236,6 +333,7 @@ if __name__=='__main__':
     cli=argparse.ArgumentParser(description=__doc__)
     cli.add_argument('--self-check',action='store_true')
     cli.add_argument('--lighting',action='store_true',help='Track each runway exposure over 320 native frames')
+    cli.add_argument('--apron',action='store_true',help='Verify the V3 raster seam and both health bar gutters under damage')
     cli.add_argument('--audio',action='store_true',help='Capture Battle on the private FM session')
     for arg in ('build','assets','out'):
         cli.add_argument(arg,type=Path,nargs='?')
@@ -244,6 +342,6 @@ if __name__=='__main__':
     if args.self_check:
         self_check()
     elif all((args.build,args.assets,args.out,args.version)):
-        verify(args.build,args.assets,args.out,args.version,args.audio,args.lighting)
+        verify(args.build,args.assets,args.out,args.version,args.audio,args.lighting,args.apron)
     else:
         cli.error('Informe build, assets, out e versão.')
