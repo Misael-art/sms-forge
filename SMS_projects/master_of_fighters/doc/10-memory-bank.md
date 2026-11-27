@@ -1,5 +1,13 @@
 # 10-memory-bank — master_of_fighters
 
+## 27/11/2026 · R8 de Alis em compilação
+
+O commit `c76dcc3` guarda os quatro cortes conferidos com o Conceptual Model Sheet v4 e a revisão de Myau, Laconian Slash, Palma e retorno dos Guardiões. O capítulo compartilha com o elenco os perfis de recuo, impactos, quedas, guarda e resposta ao controle. A bancada C da R8 e a regressão da R7b passaram. Myau marcou 3, 2, 1 e 0 acertos a 24, 60, 90 e 134 px. O Slash marcou 17 HP no chão e no ar, 2 HP na guarda. Palma marcou 5 + 7 + 15 HP e soltou o alvo durante o arco. A bancada confirmou também os três saltos, o quique de queda comum, a recuperação rápida, a queda abrupta, a quebra de guarda e a duração do buffer.
+
+O atlas tem 98 poses e 24 bancos de lutadores. As quatro poses novas foram empacotadas para os dois lados e os dois trajes. O empacotador registra até 30 sprites por ator e até quatro por linha por ator. Foram conferidas 5.800 mesclas de efeito e fundo e 260 travessias de banco. [Command List](command-list-alis-combate-r8.md) · [Poses convertidas](decisions/2026-11-27_alis_cortes_r8.png) · [Caderno de curadoria](curadoria_capitulo_alis.md)
+
+O primeiro link reprovou o tamanho dos bancos. A terceira tentativa moveu a interpretação dos comandos mágicos para o banco Combat. Os objetos da magia e das regras passaram a caber. O Fôlego pausou a compilação do duelo principal quando a memória disponível caiu abaixo da reserva. A candidata R8 ainda aguarda mapa final, SHA da ROM, replay no Emulicious e medição de 58 FPS por janela. O roteiro serial está registrado em `.runtime/tmp/alis_r8/handoff.md`. A R7b segue como referência jogável anterior.
+
 ## 27/11/2026 · Revisão dos especiais de Alis R7b
 
 A candidata do Espaçoporto clássico tem SHA-256 `4586a3ba6ad8fc24b3512766829e64e175672d64903fee8828e3e430ec1eeb15` e 1 MiB. Fire ganhou uma chama de 16 × 16 e Laconian Slash ganhou uma onda vertical de 16 × 24. O pacote verificou 7.416 combinações de desenho com fundo, incluindo 306 travessias entre bancos. [ROM de teste](../out/candidates/alis_especiais_r7b/rom/master_of_fighters.sms) · [Cenas e sons](../out/qa/alis_especiais_r7b/indice.md)
