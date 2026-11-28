@@ -39,6 +39,9 @@ static uint8_t mirror_bg_count, mirror_old_bg_count, mirror_bg_dirty;
 static uint8_t mirror_bg_page, mirror_bg_loaded, mirror_bg_batch;
 static uint8_t mirror_bg_frame[2], mirror_bg_x[2];
 static uint8_t mirror_bg_active_frame[2], mirror_bg_active_x[2];
+#ifdef MOF_ALIS_COMBAT
+static uint8_t guardians_landing_x;
+#endif
 
 #ifdef MOF_ALIS_MAGIC
 /* CB00..D1FF is chapter work RAM. A page per owner maps a frame key
@@ -622,8 +625,10 @@ static void mirror_render_boot(void)
         uint8_t startup[4] = {face, face ^ 1u, MOF_MIRROR_ALIS_CROUCH_TRANSITION * 2u + face,
                               MOF_MIRROR_HIT_HEAD * 2u + face};
 #ifdef MOF_ALIS_COMBAT
-        if (mof_combat.cutscene_return && duel.fighters[player].state==MOF_DUEL_FALL)
+        if (mof_combat.cutscene_return && duel.fighters[player].state==MOF_DUEL_FALL) {
             startup[0]=MOF_MIRROR_FALL*2u+face;
+            startup[1]=MOF_MIRROR_DOWNED*2u+face;
+        }
 #endif
         for (slot = 0u; slot < MIRROR_SLOT_COUNT; ++slot) {
             const MofMirrorFrame *frame = &mirror_frames[startup[slot]];
@@ -648,6 +653,21 @@ static void mirror_render_boot(void)
     mirror_bg_x[0] = mirror_bg_x[1] = 0u;
     mirror_bg_active_frame[0] = mirror_bg_active_frame[1] = MIRROR_EMPTY;
     mirror_bg_active_x[0] = mirror_bg_active_x[1] = 0u;
+#ifdef MOF_ALIS_COMBAT
+    if (mof_combat.cutscene_return) {
+        /* The display is still off. Keep the landing art in the inactive
+           page so the moving FALL pose needs only its SAT update. */
+        uint8_t victim=duel.fighters[0].state==MOF_DUEL_FALL ? 0u : 1u;
+        MirrorView landing=mirror_submit[victim];
+        landing.frame=MOF_MIRROR_DOWNED*2u+duel.fighters[victim].face_right;
+        landing.x=guardians_landing_x;
+        landing.y=0;
+        mirror_bg_frame[victim]=landing.frame;
+        mirror_bg_x[victim]=landing.x;
+        mirror_add_background(&landing,victim);
+        mirror_bg_batch=mirror_bg_count;
+    }
+#endif
     mirror_sat_dirty = 1u;
     mirror_build_sat(1u);
     mirror_publish();

@@ -247,6 +247,8 @@ static void guardians_arena(void)
     body->motion.vy=18;
     body->motion.vx=direction ? -40 : 40;
     body->motion.mode=MOF_MOTION_AIR;
+    SMS_mapROMBank(MOF_COMBAT_BANK);
+    guardians_landing_x=mof_combat_landing_x(&duel,loser);
     duel.tested_hurt_x[loser]=INT16_MIN;
     duel.hitstop=0;
     mof_combat.cutscene_return=1;
@@ -558,12 +560,20 @@ plan_frame:
 #ifdef MOF_ALIS_MAGIC
         /* Spend the remaining NTSC blank only when its payload is bounded.
            C0..FF may repeat D5..DA; subtracting from FF covers the later
-           occurrence. Leave the original early deadline for compound swaps. */
-        if (chapter.phase==MOF_PLAY && !mirror_bg_dirty && !mof_magic.count && !mof_magic.old_count &&
+           occurrence. The cinematic can commit its already loaded landing
+           page by charging its tilemap entries to the transfer. */
+        if (((chapter.phase==MOF_PLAY && !mirror_bg_dirty)
+#ifdef MOF_ALIS_COMBAT
+             || (chapter.phase==MOF_CINEMA_FALL && !mirror_bg_batch && !mirror_upload_tiles)
+#endif
+            ) && !mof_magic.count && !mof_magic.old_count &&
             !hud_count[0] && !hud_count[1] && mof_chapter_pnt.count<=4u) {
             uint8_t tiles=mirror_upload_tiles+mirror_bg_batch;
             uint8_t reserve=12u+3u*tiles+2u*mirror_upload_count+mof_chapter_pnt.count;
             if (mirror_sat_dirty) reserve+=4u+((mirror_sat_y_count+mirror_sat_xt_count+7u)>>3);
+#ifdef MOF_ALIS_COMBAT
+            if (mirror_bg_dirty) reserve+=4u+mirror_old_bg_count+mirror_bg_count;
+#endif
             if ((uint8_t)(255u-reserve)>deadline) deadline=255u-reserve;
         }
 #endif

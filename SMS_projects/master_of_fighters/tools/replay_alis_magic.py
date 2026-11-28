@@ -58,6 +58,8 @@ def main():
     parser.add_argument('--story',action='store_true')
     parser.add_argument('--story-move',choices=NAMES[1:],help='Exercise one spell against the real campaign CPU')
     parser.add_argument('--p2-final',action='store_true')
+    parser.add_argument('--require-arena-cadence', action='store_true',
+                        help='Require at least 58 FPS during the P2 finish return and landing')
     parser.add_argument('--trade',action='store_true',help='Read both sides of an equal-time projectile exchange')
     parser.add_argument('--range',action='store_true')
     parser.add_argument('--spell-budget',action='store_true')
@@ -65,6 +67,8 @@ def main():
     parser.add_argument('--fm',action='store_const',const=True,default=None,
                         help='Enable the FM unit in this private Emulicious session')
     args=parser.parse_args()
+    if args.require_arena_cadence and not args.p2_final:
+        parser.error('--require-arena-cadence requires --p2-final')
     if args.story_move: args.story=True
     build=args.build.resolve();out=args.output.resolve()
     record=json.loads((build/'build_record.json').read_text())
@@ -177,10 +181,19 @@ def main():
                     d=decode(raw)
                     phase=ram(addr+5,1)[0]
                     actor=d[target]
+                    timing=ram(0xc7c4,46)
+                    status=isolated.request(session,'status')
                     returned.append(dict(phase=phase,state=actor['state'],pivot=actor['pivot'],
                                          fighter=actor['fighter'], facing_right=actor['facing_right'],
                                          wins=list(ram(addr+3,2)),
-                                         vdp=isolated.request(session,'status')['frame']))
+                                         vdp=status['frame'],nominal_hz=status['nominal_hz'],
+                                         logic_tick=d['logic_tick'],payload=list(timing[:4]),
+                                         chapter_lines=list(timing[8:14]),cadence_lines=list(timing[16:20]),
+                                         vblank_start=timing[23],
+                                         late_poses=int.from_bytes(timing[20:22],'little'),
+                                         missed_vblanks=int.from_bytes(timing[26:28],'little'),
+                                         overflows=int.from_bytes(timing[39:41],'little'),
+                                         publications=int.from_bytes(timing[44:46],'little')))
                     if phase==4 and actor['state']==5 and not (out/'retorno_arena.png').exists():
                         observe('retorno_arena',True)
                     if phase==4 and actor['state']==6 and not (out/'chao_arena.png').exists():
@@ -205,6 +218,20 @@ def main():
                         airborne['wins']==grounded['wins']==result['wins']),
                 }
                 log['arena_return_checks']=return_checks
+                if all(return_checks.values()):
+                    windows=[]
+                    for phase,start,end in [('fall',airborne,grounded),('landing',grounded,result)]:
+                        elapsed=end['vdp']-start['vdp']
+                        published=(end['publications']-start['publications'])&65535
+                        logic=(end['logic_tick']-start['logic_tick'])&65535
+                        missed=(end['missed_vblanks']-start['missed_vblanks'])&65535
+                        overflows=(end['overflows']-start['overflows'])&65535
+                        windows.append(dict(phase=phase,vdp=elapsed,publications=published,logic_ticks=logic,
+                                            missed_vblanks=missed,vblank_overflows=overflows,
+                                            fps=end['nominal_hz']*published/elapsed))
+                    log['arena_cadence']={'windows':windows,'floor_fps':58,
+                        'passed':all(w['fps']>=58 and w['logic_ticks'] and not w['vblank_overflows']
+                                     for w in windows)}
         finally:
             log['movie']=isolated.request(session,'record-steps-stop')
         log['finisher_player']=player+1
@@ -220,6 +247,8 @@ def main():
             log['foco']=focus_in_scanout(session/'evidence/guardioes',out,focus_actor,native_frames)
         if return_checks is not None and not all(return_checks.values()):
             raise RuntimeError(f'Guardioes arena return failed: {return_checks}')
+        if args.require_arena_cadence and not log.get('arena_cadence',{}).get('passed'):
+            raise RuntimeError(f'Guardioes arena cadence failed: {log.get("arena_cadence")}')
         return seen
 
     def campaign_finish(name):

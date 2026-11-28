@@ -22,6 +22,23 @@ static uint8_t horizontal(uint8_t keys)
 
 #include "duel_motion_step.inc"
 
+uint8_t mof_combat_landing_x(const MofDuel *duel,uint8_t player)
+{
+    const MofDuelFighter *fighter=&duel->fighters[player];
+    MofDuelMotion motion=duel->body[player].motion;
+    int16_t left=duel->left_wall*MOF_MOTION_UNIT;
+    int16_t right=duel->right_wall*MOF_MOTION_UNIT;
+    int16_t x=fighter->x;
+    uint8_t event;
+    do {
+        /* The arena starts each motion step at the last whole-pixel pivot. */
+        motion.x=x*MOF_MOTION_UNIT;
+        event=mof_duel_motion_read(&motion,&fighter->def->motion,0,fighter->face_right,0,left,right);
+        x=motion.x>>4;
+    } while (!(event&MOF_MOTION_LANDED));
+    return (uint8_t)x;
+}
+
 void mof_combat_body(MofDuel *duel, uint8_t player, uint8_t keys)
 {
     const MofDuelFighter *alis = &duel->fighters[player];

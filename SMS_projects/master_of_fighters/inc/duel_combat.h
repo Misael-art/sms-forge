@@ -32,5 +32,6 @@ extern MofCombat mof_combat;
 
 void mof_combat_step_body(MofDuel *duel,uint8_t player,uint8_t keys);
 void mof_combat_body(MofDuel *duel,uint8_t player,uint8_t keys);
+uint8_t mof_combat_landing_x(const MofDuel *duel,uint8_t player);
 #endif
 #endif

@@ -197,6 +197,10 @@ static void MIRROR_PLAN(void)
         following = pose == MOF_MIRROR_CAUGHT_4 ? MOF_MIRROR_CAUGHT_5 : MOF_MIRROR_FALL;
         if (pose == MOF_MIRROR_CAUGHT_4) future = MOF_MIRROR_FALL;
     } else if (actor->state == MOF_DUEL_FALL) {
+#ifdef MOF_ALIS_COMBAT
+        /* The cinematic landing is already staged at the projected pivot. */
+        if (!mof_combat.cutscene_return)
+#endif
         following = MOF_MIRROR_DOWNED;
     } else if (actor->state == MOF_DUEL_DOWNED) {
         if (actor->life) {

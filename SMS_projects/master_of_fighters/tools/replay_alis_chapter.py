@@ -24,11 +24,19 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('candidate', type=Path, help='build directory with the ROM, record and map')
     parser.add_argument('out',type=Path)
+    parser.add_argument('--cadence-trace',action='store_true',
+                        help='Sample the published-frame probes on each VDP frame of the mixed windows')
+    parser.add_argument('--start-logic-tick',type=int,
+                        help='Start the mixed comparison at the specified neutral round tick')
     parser.add_argument('--case',choices=('story','versus','budget','worst','cadence-realtime','acting','port-versus','impact','combo','walk-art','shield-art','air-guard-art')+FEEDBACK_CASES,
                         default='story')
     parser.add_argument('--fm',action='store_const',const=True,default=None,
                         help='Enable the FM unit in this private Emulicious session')
     args=parser.parse_args()
+    if args.cadence_trace and args.case!='worst':
+        parser.error('--cadence-trace requires --case worst')
+    if args.start_logic_tick is not None and (args.case!='worst' or args.start_logic_tick<1):
+        parser.error('--start-logic-tick requires --case worst and a positive tick')
     build=args.candidate.resolve()
     record=json.loads((build/'build_record.json').read_text())
     rom=PROJECT/record['rom_path']
@@ -124,6 +132,14 @@ def main():
             controls((0,0,4))
         if state()[5]!=2:
             raise RuntimeError(f'Fight failed to reach gameplay: {state()}')
+        if args.start_logic_tick is not None:
+            for _ in range(90):
+                tick=decode(ram(0xc770,RECORD_BYTES))['logic_tick']
+                if tick>=args.start_logic_tick:
+                    break
+                controls((0,0,1))
+            if tick!=args.start_logic_tick:
+                raise RuntimeError(f'Mixed baseline at tick {tick}, expected {args.start_logic_tick}')
         arena_frame=observe('arena')
         if args.case in FEEDBACK_CASES:
             from replay_alis_feedback import exercise
@@ -367,7 +383,20 @@ def main():
             assert sum(row[2] for row in mixed_contact)==120
             for i in range(3):
                 before=observe(f'carga_inicio_{i+1}',False)
-                ack=controls(*mixed_contact)
+                if args.cadence_trace:
+                    trace=[]
+                    for p1,p2,frames in mixed_contact:
+                        for _ in range(frames):
+                            ack=controls((p1,p2,1))
+                            sample=ram(0xc7c0,50)
+                            trace.append(dict(vdp=ack['frame'],p1=p1,p2=p2,
+                                chapter_lines=list(sample[12:18]),cadence_lines=list(sample[20:24]),
+                                publications=int.from_bytes(sample[48:50],'little'),
+                                missed_vblanks=int.from_bytes(sample[30:32],'little'),
+                                vblank_start=sample[27],payload=list(sample[4:8]),stage=sample[45]))
+                    log.setdefault('mixed_frame_trace',[]).append(trace)
+                else:
+                    ack=controls(*mixed_contact)
                 after=observe(f'carga_fim_{i+1}')
                 elapsed=after['vdp_frame']-before['vdp_frame']
                 if elapsed!=120: raise RuntimeError('VDP timeline mismatch')

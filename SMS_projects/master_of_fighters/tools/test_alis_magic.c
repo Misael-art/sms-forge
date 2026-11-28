@@ -451,12 +451,40 @@ static void ground_reactions(void)
     }
 }
 
+#ifdef MOF_ALIS_COMBAT
+static void guardians_landing_projection(void)
+{
+    for (uint8_t player=0;player<2;++player) {
+        for (uint8_t at_wall=0;at_wall<2;++at_wall) {
+            reset();
+            MofDuelFighter *falling=&duel.fighters[player];
+            MofDuelBody *body=&duel.body[player];
+            if (at_wall) falling->x=falling->face_right ? duel.left_wall : duel.right_wall;
+            falling->life=0;
+            falling->state=MOF_DUEL_FALL;
+            body->y_offset=-29;
+            body->motion.y=-29*MOF_MOTION_UNIT;
+            body->motion.vy=18;
+            body->motion.vx=falling->face_right ? -40 : 40;
+            body->motion.mode=MOF_MOTION_AIR;
+            mof_combat.cutscene_return=1;
+            mof_combat.fall[player]=MOF_COMBAT_HARD;
+            const uint8_t predicted=mof_combat_landing_x(&duel,player);
+            for (uint8_t tick=0;tick<30 && falling->state==MOF_DUEL_FALL;++tick)
+                mof_duel_step_normal(&duel,0,0,MOF_DUEL_NO_NORMAL,MOF_DUEL_NO_NORMAL);
+            assert(falling->state==MOF_DUEL_DOWNED && falling->x==predicted);
+        }
+    }
+}
+#endif
+
 int main(void)
 {
 #ifdef MOF_ALIS_COMBAT
     revised_combat();
     revised_movement();
     revised_defense();
+    guardians_landing_projection();
 #endif
     combo_contacts();
     unsigned p;
