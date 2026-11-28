@@ -1,5 +1,13 @@
 # Próximo agente — retomar o motor SMS sem o host anterior
 
+## 2026-11-27 · Ficha ilustrada e cadência do capítulo de Alis
+
+A rodada partiu do commit `a96dca6`. A [lição L141](../curation/2026-11-27_l141_ficha_ilustrada.json) liga a ficha Word de cada personagem ao PDF da mesma edição e às ilustrações efetivamente exibidas. Para alterar uma pose ou regra de golpe, siga o [procedimento de publicação](../game-design/ficha-tecnica-de-personagem.md). O contrato de calibração identifica a R8.
+
+No Jupiter, passaram os 151 casos da fábrica, os 77 autotestes de instrumentos, a sincronia documental e a captura de lições. O Fôlego serializou a bateria e a exportação com estimativas de 850 MiB de RAM e 220 MiB de disco por carga. O novo auditor conferiu 23 páginas e oito figuras declaradas. O PDF R6b, o SVG da R6b reativado sobre a figura 26 da R8 e o controle com texto igual e imagem diferente reprovaram. O probe opcional da ROM ficou fora desta rodada documental.
+
+A [memória do capítulo](../../SMS_projects/master_of_fighters/doc/10-memory-bank.md) distingue o resultado da queda na R9d (`960376648049…`, seis publicações em seis quadros em cada fase) e a reprovação no duelo misto (pior janela 36,95235843265925 FPS). Ao retomar a luta, medir as etapas anteriores à publicação e repetir as janelas mistas no SHA corrigido. Ao retomar a publicação da fábrica, conferir a ponta da branch do [PR #4](https://github.com/Misael-art/sms-forge/pull/4). O último SHA remoto verificado na abertura desta rodada foi `c6bfe6d`. O pacote privado desta rodada fica em `.runtime/backups/smsforge-fichas-20261127.zip`.
+
 ## 2026-11-27 · Direção artística contemporânea e revisão do agente
 
 O commit `2cf0e3b` liga a direção do GDD à bíblia, ao storyboard, à revisão de materiais e ao teste da cena jogada. Ao retomar uma cena, escolha primeiro o que o jogador precisa reconhecer e fazer no quadro mais disputado. Em projetos já existentes, consulte a fonte central e a decisão vigente do dono. O [parecer do capítulo de Alis](../curation/2026-11-27_mof_capitulo_alis.json) registra a calibração em dois jogos e o que é específico de Palma.

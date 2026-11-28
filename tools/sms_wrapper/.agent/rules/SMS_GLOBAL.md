@@ -2837,3 +2837,16 @@ exclusiva no índice zero dos sprites. Em regiões com desenho já definido, `au
 confere cores e amostras por posição e quadro (§89). A direção julga se o
 jogador reconhece a ação em movimento e se o cenário ajuda a lê-la.
 O checkpoint de produto reúne essa revisão e o orçamento medido (§133).
+
+## 136. Ficha ilustrada do personagem e sua edição publicada (L141)
+
+Cada personagem em produção tem uma ficha Word editável e seu PDF exportado.
+Ao mudar o contrato de arte ou de jogo, atualize a mesma edição nas duas vias.
+No corpo do Word, confira cada figura editada e suas representações ativas
+contra a arte revisada. Uma substituição do PNG pode deixar o leitor mostrando
+o SVG anterior. `audit_character_sheet.py` confere os vínculos nomeados e
+compara texto e páginas rasterizadas do PDF publicado com uma exportação nova
+do Word identificado por SHA. Abra as duas vias e registre a revisão de
+legendas, poses e paginação. O procedimento e o contrato de exemplo estão em
+`doc/game-design/ficha-tecnica-de-personagem.md`. Resultados de jogo na ficha
+permanecem vinculados à ROM e ao caso exercitado (§133).

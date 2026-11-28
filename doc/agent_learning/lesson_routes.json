@@ -1,10 +1,10 @@
 {
  "schema": "sms_lesson_routes_v1",
  "status": "canonical_application_routes",
- "lesson_count": 124,
+ "lesson_count": 125,
  "source_coverage_sha256": "f086039f2d42542470ad5747b1693767e8dcd0ffedfab0e737f8b66d0b528755",
  "registry_source": "doc/curation/id_registry.json",
- "registry_issued_through": "L140",
+ "registry_issued_through": "L141",
  "excluded_holes": [
   "L012",
   "L020",
@@ -1200,7 +1200,7 @@
    "application_entrypoints": [
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "5b93751544864345438dc5e2ea25e71dafb20e47fad60de7c5d5cc3263d4576a",
+     "sha256": "a63c66c58346b18c77996a662c101bf553afa538bb84a1a9e675e1a64f2cc692",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
@@ -1377,7 +1377,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "5b93751544864345438dc5e2ea25e71dafb20e47fad60de7c5d5cc3263d4576a",
+     "sha256": "a63c66c58346b18c77996a662c101bf553afa538bb84a1a9e675e1a64f2cc692",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
@@ -2973,7 +2973,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "5b93751544864345438dc5e2ea25e71dafb20e47fad60de7c5d5cc3263d4576a",
+     "sha256": "a63c66c58346b18c77996a662c101bf553afa538bb84a1a9e675e1a64f2cc692",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
@@ -3016,7 +3016,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "5b93751544864345438dc5e2ea25e71dafb20e47fad60de7c5d5cc3263d4576a",
+     "sha256": "a63c66c58346b18c77996a662c101bf553afa538bb84a1a9e675e1a64f2cc692",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
@@ -3059,7 +3059,7 @@
     },
     {
      "path": "tools/sms_wrapper/.agent/workflows/new-visual-asset.md",
-     "sha256": "5b93751544864345438dc5e2ea25e71dafb20e47fad60de7c5d5cc3263d4576a",
+     "sha256": "a63c66c58346b18c77996a662c101bf553afa538bb84a1a9e675e1a64f2cc692",
      "coverage": "existing_application_entrypoint",
      "selection_basis": "Content reviewed: 2026-10-29 scoped artistic method, body choreography, temporal observation and historical-example limits; no runtime/art approval."
     }
@@ -4936,6 +4936,35 @@
      "ambiguous": false
     }
    ]
+  },
+  {
+   "lesson_id": "L141",
+   "sources": [
+    "doc/curation/2026-11-27_l141_ficha_ilustrada.json"
+   ],
+   "rule_section": "SMS_GLOBAL §136",
+   "current_rule_status": "fechada_com_ferramenta",
+   "application_entrypoints": [
+    {
+     "path": "tools/sms_wrapper/.agent/workflows/playable-fighter.md",
+     "sha256": "62f15b92ceb3ed6cfedb039b5123a3bacd1d8d376c815c60b6f7a46cbf6cb960",
+     "coverage": "existing_application_entrypoint",
+     "selection_basis": "Encaminha a revisão de arte e de golpe ao aceite da edição ilustrada."
+    }
+   ],
+   "application_gap": null,
+   "historical_or_refuted": null,
+   "scope_or_open_limit": "Edição documental. Legibilidade e arte precisam de revisão. A ficha não mede runtime.",
+   "measuring_tools": [
+    {
+     "reference": "audit_character_sheet.py",
+     "matches": [
+      "audit_character_sheet.py"
+     ],
+     "exists": true,
+     "ambiguous": false
+    }
+   ]
   }
  ],
  "limits": [
@@ -4947,7 +4976,7 @@
   "Domain labels are heuristic; many runtime lessons concern tooling, methods and art evidence.",
   "Entry-point selection is manually reviewed at domain level; route existence is not runtime execution, learner comprehension or full behavioral coverage.",
   "Three application gaps deliberately remain empty until the coordinator teaches their missing application in canonical skills.",
-  "source_coverage_sha256 is the preserved historical coverage snapshot; L139–L140 were bound separately in this update."
+  "source_coverage_sha256 is the preserved historical coverage snapshot; L139–L141 were bound separately in this update."
  ],
  "application_records": [
   {

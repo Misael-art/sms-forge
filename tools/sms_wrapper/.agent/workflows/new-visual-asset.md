@@ -12,6 +12,8 @@ ciclo, compor e revisar o concept/model sheet e guardar fonte, prompt,
 metadados, lineage e validação em `data/source_art/`. Não gerar em massa todo o
 catálogo por padrão. Este workflow cobre a conversão e integração posterior.
 
+Para um personagem em produção, localize sua ficha editável e a edição em PDF. Quando a revisão mudar o contrato visual, sincronize as duas vias e confira as ilustrações afetadas conforme §136 e `doc/game-design/ficha-tecnica-de-personagem.md`.
+
 Orquestre as transições conforme `workflows/artwork-to-rom-lifecycle.md`:
 cada saída preserva papel, versão/hash e aprovação própria; não promova por
 herança de uma etapa anterior.

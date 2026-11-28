@@ -21,6 +21,8 @@ envolvidos. Explore redistribuição de formas, composição ou residência na m
 escala. Se uma alternativa mudar a arma, alcance, anatomia ou papel prometidos,
 volte ao contrato correspondente.
 
+Use a ficha ilustrada para dirigir a atuação. Coloque a pose ao lado da intenção e da exposição de cada fase. Na revisão de um golpe, confira se a imagem que o leitor vê mostra o gesto e o efeito do atlas vigente. Publique a edição pelo procedimento de `doc/game-design/ficha-tecnica-de-personagem.md` (§136).
+
 ## Do concept ao sprite que aguenta movimento
 
 Quando a personagem parece encolher, compare a guarda, o ataque em voo,

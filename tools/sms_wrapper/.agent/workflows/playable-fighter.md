@@ -14,6 +14,8 @@ Classifique material congelado, rejeitado, experimental ou aceito no seu
 recorte. Escolha o primeiro elo sem prova na ação pedida. Para um personagem
 novo, comece no brief. Para um retomado, use o último controle aceito.
 
+Abra a ficha editável do lutador ao definir a primeira ação. Na revisão que alterar materiais, poses, timing, caixas ou consequências, atualize a ficha e exporte o PDF do mesmo Word. Antes do handoff, confira o par e as ilustrações pela §136 e por `doc/game-design/ficha-tecnica-de-personagem.md`. Indique qual versão do jogo sustenta cada resultado.
+
 Preencha este bloco **no contrato, registro ou handoff que já é dono da
 informação**, por referência quando o dado já existir:
 
@@ -211,6 +213,8 @@ atacante com o quadro da vítima já no chão. Em poses móveis compostas
 por sprites e fundo, registre o custo de reposicionar o fundo a cada passo.
 Com cadência baixa e envio nulo em parte dos intervalos atrasados, meça
 lógica e preparação antes de atribuir a perda ao VBlank.
+
+Para uma transição de queda, meça em separado a primeira pose no ar até o chão e o chão até a retomada ou resultado. Conte publicações por quadro VDP e confira trajetória, ponto de pouso e tempo no chão. Repita a luta com entrada mista no mesmo SHA. Na R9d de Alis, as duas fases publicaram seis vezes em seis quadros, enquanto o duelo misto continuou abaixo de 58 FPS com zero estouros em 3.000 apresentações. Nessa condição, localize o atraso entre leitura de entrada, lógica, preparação e início da publicação. [Memória e recibos de Alis](../../../../SMS_projects/master_of_fighters/doc/10-memory-bank.md)
 
 O [estudo b39–b49](../../../../doc/curation/2026-11-21_alis_espelho_revisao.json)
 mostra como reproduzir os contrastes. Uma relincagem de arte permite rever

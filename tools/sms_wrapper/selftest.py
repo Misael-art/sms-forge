@@ -237,6 +237,12 @@ def main():
     print("== Fase 2: fixtures geradas ==")
     tmp = tempfile.mkdtemp(prefix="smsforge_selftest_")
     results.extend(_material_landmark_cases(tmp))
+    sheet_test = os.path.join(HERE, "tests", "test_character_sheet.py")
+    results.append(run([sheet_test, "Sheet.test_matching_export", "Sheet.test_active_images"],
+                       0, "ficha: PDF da edição e imagens ativas conferem"))
+    results.append(run([sheet_test, "Sheet.test_stale_svg", "Sheet.test_old_edition",
+                        "Sheet.test_same_text_wrong_illustration", "Sheet.test_missing_figure"],
+                       0, "ficha: rejeita revisão, desenho ou ilustração desatualizados"))
     results.append(run([os.path.join(HERE, "audit_sprite_cutout.py"), "--self-check"],
                        0, "recorte: região com e sem o mínimo de pixels da cor do material"))
     from audit_duel_contacts import fixture as contact_fixture
